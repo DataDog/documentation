@@ -1,23 +1,23 @@
 ---
-title: Getting Started with APM Tracing
 aliases:
-    - /getting_started/tracing/distributed-tracing
+- /ja/getting_started/tracing/distributed-tracing
 further_reading:
-    - link: /tracing/
-      tag: Documentation
-      text: Learn more about APM features
-    - link: /tracing/metrics/runtime_metrics/
-      tag: Documentation
-      text: Enable runtime metrics
-    - link: "/tracing/guide/#enabling-tracing-tutorials"
-      tag: ガイド
-      text: Tutorials for various ways to enable tracing
-    - link: "https://learn.datadoghq.com/courses/intro-to-apm"
-      tag: ラーニングセンター
-      text: Application Performance Monitoring の紹介
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session to boost your APM understanding
+- link: /tracing/
+  tag: Documentation
+  text: Learn more about APM features
+- link: /tracing/metrics/runtime_metrics/
+  tag: Documentation
+  text: Enable runtime metrics
+- link: /tracing/guide/#enabling-tracing-tutorials
+  tag: ガイド
+  text: Tutorials for various ways to enable tracing
+- link: https://learn.datadoghq.com/courses/intro-to-apm
+  tag: ラーニングセンター
+  text: Application Performance Monitoring の紹介
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to boost your APM understanding
+title: Getting Started with APM Tracing
 ---
 
 ## 概要
@@ -218,6 +218,6 @@ To add custom instrumentation:
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
 [3]: https://app.datadoghq.com/services
 [4]: https://app.datadoghq.com/apm/traces
-[5]: /tracing/glossary/#instrumentation
-[6]: /tracing/trace_collection/custom_instrumentation/
-[7]: /getting_started/site/
+[5]: /ja/tracing/glossary/#instrumentation
+[6]: /ja/tracing/trace_collection/custom_instrumentation/
+[7]: /ja/getting_started/site/

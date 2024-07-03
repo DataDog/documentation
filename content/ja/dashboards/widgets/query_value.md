@@ -1,13 +1,13 @@
 ---
-title: Query Value Widget
-widget_type: query_value
-description: "Display an aggregated value for a given metric query"
 aliases:
-- /graphing/widgets/query_value/
+- /ja/graphing/widgets/query_value/
+description: Display an aggregated value for a given metric query
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Query Value Widget
+widget_type: query_value
 ---
 
 クエリ値は、1 つのメトリクス、APM、またはログクエリの現在の値を表示します。値は条件付き書式 (緑/黄/赤色の背景など) を使用して表示され、値が期待される範囲内にあるかどうかを示します。これに、オプションで時系列データの背景を追加することができます。クエリ値によって表示される値は、必ずしもある瞬間の測定値を必要としません。
@@ -62,9 +62,9 @@ Customize the background of your Query Value widget with conditional rules. You 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/querying/#overview
-[2]: /tracing/trace_explorer/query_syntax/#search-bar
-[3]: /logs/search_syntax/
-[4]: /dashboards/guide/context-links/
-[5]: /api/latest/dashboards/
-[6]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/querying/#overview
+[2]: /ja/tracing/trace_explorer/query_syntax/#search-bar
+[3]: /ja/logs/search_syntax/
+[4]: /ja/dashboards/guide/context-links/
+[5]: /ja/api/latest/dashboards/
+[6]: /ja/dashboards/graphing_json/widget_json/

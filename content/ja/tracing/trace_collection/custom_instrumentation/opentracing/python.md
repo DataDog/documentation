@@ -1,14 +1,14 @@
 ---
-title: Python OpenTracing instrumentation
-kind: documentation
 aliases:
-- /tracing/setup_overview/open_standards/python
-- /tracing/trace_collection/open_standards/python
-- /tracing/trace_collection/opentracing/python/
-description: 'OpenTracing instrumentation for Python'
+- /ja/tracing/setup_overview/open_standards/python
+- /ja/tracing/trace_collection/open_standards/python
+- /ja/tracing/trace_collection/opentracing/python/
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 10
+description: OpenTracing instrumentation for Python
+kind: documentation
+title: Python OpenTracing instrumentation
+type: multi-code-lang
 ---
 
 <div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/python/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>

@@ -1,6 +1,4 @@
 ---
-title: Upgrade RUM Mobile SDKs
-kind: guide
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
@@ -8,9 +6,10 @@ further_reading:
 - link: /real_user_monitoring/guide/mobile-sdk-deprecation-policy
   tag: Documentation
   text: Deprecation Policy for Datadog Mobile SDKs
+title: Upgrade RUM Mobile SDKs
 ---
 
-## Overview
+## 概要
 
 Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
@@ -24,7 +23,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
-[1]: /real_user_monitoring/session_replay/mobile/
+[1]: /ja/real_user_monitoring/session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -35,7 +34,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
-[1]: /real_user_monitoring/session_replay/mobile/
+[1]: /ja/real_user_monitoring/session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -49,7 +48,7 @@ The migration from v1 to v2 comes with improved performance and additional featu
 
 {{% /tab %}}
 {{< /tabs >}}
-### Modules
+### モジュール
 {{< tabs >}}
 {{% tab "Android" %}}
 
@@ -354,7 +353,7 @@ Make sure that you've updated your version of Kotlin to at least 1.8 in your `bu
 
 {{< /tabs >}}
 
-### SDK initialization
+### SDK の初期化
 {{< tabs >}}
 {{% tab "Android" %}}
 With the extraction of different products into independent modules, the SDK configuration is organized by module.
@@ -559,11 +558,11 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 | `com.datadog.android.ktx.rum#java.io.InputStream.asRumResource`                           | `com.datadog.android.rum.resource#java.io.InputStream.asRumResource`                        | `dd-sdk-android-rum`              |
 | `com.datadog.android.ktx.tracing#okhttp3.Request.Builder.parentSpan`                      | `com.datadog.android.okhttp.trace#okhttp3.Request.Builder.parentSpan`                       | `dd-sdk-android-okhttp`           |
 
-### Session Replay
+### セッション リプレイ
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][4].
 
-[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+[4]: /ja/real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -724,7 +723,7 @@ API changes:
 |`Datadog.Configuration.Builder.set(mobileVitalsFrequency:)`|`RUM.Configuration.vitalsUpdateFrequency`|
 |`Datadog.Configuration.Builder.set(sampleTelemetry:)`|`RUM.Configuration.telemetrySampleRate`|
 
-### Crash Reporting
+### クラッシュレポート
 
 To enable Crash Reporting, make sure to enable RUM and Logs to report to those products respectively.
 
@@ -754,11 +753,11 @@ WebViewTracking.enable(webView: webView)
 |---|---|
 |`WKUserContentController.startTrackingDatadogEvents`|`WebViewTracking.enable(webView:)`|
 
-### Session Replay
+### セッション リプレイ
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
 
-[5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+[5]: /ja/real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -784,10 +783,10 @@ The following structures have been renamed:
 
 The following properties have changed:
 
-| 1.x | 2.x | Notes |
+| 1.x | 2.x | 注 |
 |-------|-------|-------|
-| `DdSdkConfiguration.trackingConsent`| Removed | Part of `Datadog.initialize` | |
-| `DdSdkConfiguration.customEndpoint` | Removed | Now configured per-feature | |
+| `DdSdkConfiguration.trackingConsent`| 削除 | Part of `Datadog.initialize` | |
+| `DdSdkConfiguration.customEndpoint` | 削除 | Now configured per-feature | |
 | `DdSdkConfiguration.serviceName` | `DatadogConfiguration.service` | |
 | `DdSdkConfiguration.logEventMapper` | `DatadogLoggingConfiguration.eventMapper` | |
 | `DdSdkConfiguration.customLogsEndpoint` | `DatadogLoggingConfiguration.customEndpoint` | |
@@ -795,9 +794,9 @@ The following properties have changed:
 
 In addition, the following APIs have changed:
 
-| 1.x | 2.x | Notes |
+| 1.x | 2.x | 注 |
 |-------|-------|-------|
-| `Verbosity` | Removed | See `CoreLoggerLevel` or `LogLevel` |
+| `Verbosity` | 削除 | See `CoreLoggerLevel` or `LogLevel` |
 | `DdLogs DatadogSdk.logs` | `DatadogLogging DatadogSdk.logs` | Type changed |
 | `DdRum DatadogSdk.rum` | `DatadogRum DatadogSdk.rum` | Type changed
 | `Verbosity DatadogSdk.sdkVerbosity` | `CoreLoggerLevel DatadogSdk.sdkVerbosity` |
@@ -824,7 +823,7 @@ As with v1, Datadog Logging can be enabled by setting the `DatadogConfiguration.
 
 The following APIs have changed:
 
-| 1.x | 2.x | Notes |
+| 1.x | 2.x | 注 |
 |-------|-------|-------|
 | `LoggingConfiguration` | `DatadogLoggingConfiguration` | Renamed most members are now on `DatadogLoggerConfiguration` |
 | `LoggingConfiguration.sendNetworkInfo` | `DatadogLoggerConfiguration.networkInfoEnabled` | |
@@ -840,7 +839,7 @@ The following APIs have changed:
 
 The following APIs have changed:
 
-| 1.x | 2.x | Notes |
+| 1.x | 2.x | 注 |
 |-------|-------|-------|
 | `RumConfiguration` | `DatadogRumConfiguration` | Type renamed |
 | `RumConfiguration.vitalsUpdateFrequency` | `DatadogRumConfiguration.vitalsUpdateFrequency` | Set to `null` to disable vitals updates |
@@ -866,6 +865,6 @@ Additionally, event mappers no longer allow you to modify their view names. To r
 {{< /tabs >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

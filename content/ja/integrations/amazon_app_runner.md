@@ -1,26 +1,26 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - configuration & deployment
 - log collection
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS App Runner metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_app_runner/"
-"draft": false
-"git_integration_title": "amazon_app_runner"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS App Runner"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_app_runner"
-"public_title": "Datadog-AWS App Runner Integration"
-"short_description": "Track key AWS App Runner metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS App Runner metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
+draft: false
+git_integration_title: amazon_app_runner
+has_logo: true
+integration_id: ''
+integration_title: AWS App Runner
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_app_runner
+public_title: Datadog-AWS App Runner Integration
+short_description: Track key AWS App Runner metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -79,14 +79,13 @@ The AWS App Runner integration does not include any service checks.
 
 Need help? Contact [Datadog support][10].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-app-runner
-[4]: https://docs.datadoghq.com/logs/guide/forwarder/
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/event/stream
 [7]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-partners.html#eb-api-destination-datadog
 [8]: https://docs.aws.amazon.com/apprunner/latest/dg/monitor-ev.html
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_app_runner/amazon_app_runner_metadata.csv
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

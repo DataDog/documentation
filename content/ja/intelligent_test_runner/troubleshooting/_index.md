@@ -1,10 +1,10 @@
 ---
-title: Intelligent Test Runner Troubleshooting
-kind: documentation
 further_reading:
 - link: /intelligent_test_runner
   tag: Documentation
   text: Learn about the Intelligent Test Runner
+kind: documentation
+title: Intelligent Test Runner Troubleshooting
 ---
 
 {{< site-region region="gov" >}}
@@ -55,8 +55,8 @@ Intelligent Test Runner は、コードカバレッジに基づいてテスト�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /continuous_integration/intelligent_test_runner/
+[1]: /ja/help/
+[2]: /ja/continuous_integration/intelligent_test_runner/
 [3]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [4]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [5]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request

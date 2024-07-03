@@ -1,12 +1,12 @@
 ---
-title: Automate the Remediation of Detected Threats with Webhooks
+aliases:
+- /ja/security_platform/guide/automate-the-remediation-of-detected-threats/
+- /ja/security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 further_reading:
 - link: /security/cloud_siem/investigate_security_signals
   tag: Documentation
   text: Start investigating signals in the Signals Explorer
-aliases:
-  - /security_platform/guide/automate-the-remediation-of-detected-threats/
-  - /security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/
+title: Automate the Remediation of Detected Threats with Webhooks
 ---
 
 ## 概要
@@ -88,10 +88,10 @@ Datadog はセキュリティシグナルを生成し、違反行為だけでな
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/
+[1]: /ja/security/cloud_siem/
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[3]: /security/detection_rules/
+[3]: /ja/security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /security/cloud_siem/log_detection_rules/?tab=threshold#new-value
+[5]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#new-value
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

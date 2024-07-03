@@ -1,16 +1,16 @@
 ---
-title: スケジュールされたレポート
-disable_toc: false
 aliases:
-    - /dashboards/reporting/
-    - /dashboards/scheduled_reports/
+- /ja/dashboards/reporting/
+- /ja/dashboards/scheduled_reports/
+disable_toc: false
 further_reading:
-  - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
-    tag: ブログ
-    text: Datadog のダッシュボードを誰とでも安全に共有する
-  - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
-    tag: ブログ
-    text: 関連するテンプレート変数を使用してダッシュボードを調整
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
+  tag: ブログ
+  text: Datadog のダッシュボードを誰とでも安全に共有する
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: ブログ
+  text: 関連するテンプレート変数を使用してダッシュボードを調整
+title: スケジュールされたレポート
 ---
 
 {{< site-region region="gov" >}}
@@ -83,11 +83,10 @@ The following widget types are **not** supported and will be shown as empty in t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#get-started
-[2]: /account_management/rbac/permissions/
-[3]: /account_management/org_settings/#public-sharing
-[4]: /dashboards/widgets/iframe/
-[5]: /dashboards/widgets/image/
-[6]: /dashboards/widgets/hostmap/
-[7]: /dashboards/widgets/run_workflow/
-
+[1]: /ja/dashboards/#get-started
+[2]: /ja/account_management/rbac/permissions/
+[3]: /ja/account_management/org_settings/#public-sharing
+[4]: /ja/dashboards/widgets/iframe/
+[5]: /ja/dashboards/widgets/image/
+[6]: /ja/dashboards/widgets/hostmap/
+[7]: /ja/dashboards/widgets/run_workflow/

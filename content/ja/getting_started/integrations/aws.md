@@ -1,33 +1,33 @@
 ---
-title: Getting Started with AWS
 further_reading:
-    - link: "https://www.datadoghq.com/blog/aws-monitoring/"
-      tag: Blog
-      text: Key metrics for AWS monitoring
-    - link: "https://www.datadoghq.com/blog/aws-1-click-integration/"
-      tag: Blog
-      text: Introducing our AWS 1-click integration
-    - link: "https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/"
-      tag: Blog
-      text: Deploying and configuring Datadog with CloudFormation
-    - link: "https://www.datadoghq.com/blog/monitoring-as-code-with-datadog-and-cloudformation/"
-      tag: Blog
-      text: Implement monitoring as code with Datadog and CloudFormation Registry
-    - link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
-      tag: Blog
-      text: Monitor your entire serverless stack in the Serverless view
-    - link: "https://www.datadoghq.com/blog/monitor-aws-fargate/"
-      tag: Blog
-      text: Monitor ECS applications on AWS Fargate with Datadog
-    - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
-      tag: Blog
-      text: Monitor Amazon ECS Anywhere with Datadog
-    - link: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation
-      tag: Documentation
-      text: AWS CloudWatch Metric Streams with Amazon Data Firehose
-    - link: "https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/"
-      tag: Blog
-      text: Monitor your Graviton3-powered EC2 instances with Datadog
+- link: https://www.datadoghq.com/blog/aws-monitoring/
+  tag: Blog
+  text: Key metrics for AWS monitoring
+- link: https://www.datadoghq.com/blog/aws-1-click-integration/
+  tag: Blog
+  text: Introducing our AWS 1-click integration
+- link: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/
+  tag: Blog
+  text: Deploying and configuring Datadog with CloudFormation
+- link: https://www.datadoghq.com/blog/monitoring-as-code-with-datadog-and-cloudformation/
+  tag: Blog
+  text: Implement monitoring as code with Datadog and CloudFormation Registry
+- link: https://www.datadoghq.com/blog/datadog-serverless-view/
+  tag: Blog
+  text: Monitor your entire serverless stack in the Serverless view
+- link: https://www.datadoghq.com/blog/monitor-aws-fargate/
+  tag: Blog
+  text: Monitor ECS applications on AWS Fargate with Datadog
+- link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
+  tag: Blog
+  text: Monitor Amazon ECS Anywhere with Datadog
+- link: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation
+  tag: Documentation
+  text: AWS CloudWatch Metric Streams with Amazon Data Firehose
+- link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
+  tag: Blog
+  text: Monitor your Graviton3-powered EC2 instances with Datadog
+title: Getting Started with AWS
 ---
 
 ## 概要
@@ -218,63 +218,61 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/guide/forwarder/
-[2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
-[3]: /api/latest/aws-integration/#create-an-aws-integration
+[1]: /ja/logs/guide/forwarder/
+[2]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/
+[3]: /ja/api/latest/aws-integration/#create-an-aws-integration
 [4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
-[6]: /integrations/guide/amazon_cloudformation/
+[6]: /ja/integrations/guide/amazon_cloudformation/
 [7]: https://aws.amazon.com/getting-started/?nc1=f_cc
 [8]: https://app.datadoghq.com/integrations/amazon-web-services
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[11]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[10]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [12]: https://app.datadoghq.com/dash/integration/7/aws-overview
-[13]: /integrations/#cat-aws
-[14]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
+[13]: /ja/integrations/#cat-aws
+[14]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
 [15]: https://app.datadoghq.com/logs
-[16]: /getting_started/agent/
+[16]: /ja/getting_started/agent/
 [17]: https://app.datadoghq.com/account/settings/agent/latest
 [18]: https://app.datadoghq.com/infrastructure
-[19]: /integrations/system/
-[20]: /integrations/ntp/
-[21]: /integrations/
-[22]: /developers/dogstatsd/?tab=hostagent
-[23]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[19]: /ja/integrations/system/
+[20]: /ja/integrations/ntp/
+[21]: /ja/integrations/
+[22]: /ja/developers/dogstatsd/?tab=hostagent
+[23]: /ja/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [24]: https://aws.amazon.com/fargate/
-[25]: /agent/amazon_ecs/?tab=awscli
-[26]: /agent/docker/?tab=standard
-[27]: /agent/amazon_ecs/data_collected/
-[28]: /integrations/ecs_fargate/?tab=fluentbitandfirelens
-[29]: /agent/kubernetes/distributions/?tab=helm#EKS
-[30]: /agent/kubernetes/?tab=helm
-[31]: /integrations/eks_fargate/#setup
-[32]: /integrations/eks_anywhere/
-[33]: /api/latest/using-the-api/
-[34]: /integrations/guide/amazon_cloudformation/#resources-available
+[25]: /ja/agent/amazon_ecs/?tab=awscli
+[26]: /ja/agent/docker/?tab=standard
+[27]: /ja/agent/amazon_ecs/data_collected/
+[28]: /ja/integrations/ecs_fargate/?tab=fluentbitandfirelens
+[29]: /ja/agent/kubernetes/distributions/?tab=helm#EKS
+[30]: /ja/agent/kubernetes/?tab=helm
+[31]: /ja/integrations/eks_fargate/#setup
+[32]: /ja/integrations/eks_anywhere/
+[33]: /ja/api/latest/using-the-api/
+[34]: /ja/integrations/guide/amazon_cloudformation/#resources-available
 [35]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
-[36]: /dashboards/#overview
-[37]: /dashboards/functions/
-[38]: /dashboards/correlations/
-[39]: /monitors/types
-[40]: /monitors/notify/
-[41]: /integrations/#cat-notification
-[42]: /serverless
-[43]: /serverless/libraries_integrations
-[44]: /serverless/distributed_tracing
-[45]: /serverless/aws_lambda/troubleshooting/
-[46]: /integrations/amazon_xray/
-[47]: /tracing/trace_collection/
-[48]: /tracing/
-[49]: /watchdog/
-[50]: /getting_started/cloud_siem/
-[51]: /security/default_rules/#cat-log-detection
-[52]: /security/cloud_siem/investigate_security_signals
-[53]: /security/notifications/rules/
-[54]: /security/cloud_security_management/setup/
-[55]: /security/default_rules/#cat-posture-management-cloud
-[56]: /security/default_rules/#cat-posture-management-infra
-[57]: /integrations/guide/aws-integration-troubleshooting/
-[58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
-
-
+[36]: /ja/dashboards/#overview
+[37]: /ja/dashboards/functions/
+[38]: /ja/dashboards/correlations/
+[39]: /ja/monitors/types
+[40]: /ja/monitors/notify/
+[41]: /ja/integrations/#cat-notification
+[42]: /ja/serverless
+[43]: /ja/serverless/libraries_integrations
+[44]: /ja/serverless/distributed_tracing
+[45]: /ja/serverless/aws_lambda/troubleshooting/
+[46]: /ja/integrations/amazon_xray/
+[47]: /ja/tracing/trace_collection/
+[48]: /ja/tracing/
+[49]: /ja/watchdog/
+[50]: /ja/getting_started/cloud_siem/
+[51]: /ja/security/default_rules/#cat-log-detection
+[52]: /ja/security/cloud_siem/investigate_security_signals
+[53]: /ja/security/notifications/rules/
+[54]: /ja/security/cloud_security_management/setup/
+[55]: /ja/security/default_rules/#cat-posture-management-cloud
+[56]: /ja/security/default_rules/#cat-posture-management-infra
+[57]: /ja/integrations/guide/aws-integration-troubleshooting/
+[58]: /ja/integrations/ecs_fargate/?tab=webui#installation-for-aws-batch

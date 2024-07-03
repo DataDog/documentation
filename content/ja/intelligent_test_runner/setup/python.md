@@ -1,19 +1,19 @@
 ---
-title: Intelligent Test Runner for Python
-kind: documentation
-code_lang: python
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
-  - /continuous_integration/intelligent_test_runner/python/
-  - /continuous_integration/intelligent_test_runner/setup/python/
+- /ja/continuous_integration/intelligent_test_runner/python/
+- /ja/continuous_integration/intelligent_test_runner/setup/python/
+code_lang: python
+code_lang_weight: 30
 further_reading:
-    - link: /continuous_integration/tests
-      tag: Documentation
-      text: Explore Test Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- link: /continuous_integration/tests
+  tag: Documentation
+  text: Explore Test Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+kind: documentation
+title: Intelligent Test Runner for Python
+type: multi-code-lang
 ---
 
 ## Compatibility
@@ -219,5 +219,5 @@ Some race conditions may cause exceptions when using `pytest` plugins such as `p
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/python
+[1]: /ja/continuous_integration/tests/python
 [2]: https://pypi.org/project/coverage/

@@ -1,5 +1,4 @@
 ---
-title: Continuous Testing Settings
 further_reading:
 - link: /continuous_testing/cicd_integrations
   tag: Documentation
@@ -16,9 +15,10 @@ further_reading:
 - link: /synthetics/guide/explore-rum-through-synthetics/
   tag: Documentation
   text: Explore RUM & Session Replay in Synthetics
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: 外部サイト
   text: Create and manage tests with Terraform
+title: Continuous Testing Settings
 ---
 {{< jqmath-vanilla >}}
 
@@ -73,7 +73,7 @@ Continuous Testing の並列化をカスタマイズするには、`billing_edit
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/settings/
-[2]: /account_management/rbac/permissions/#billing-and-usage
-[3]: /synthetics/metrics/#continuous-testing
-[4]: /continuous_testing/cicd_integrations
+[1]: /ja/synthetics/settings/
+[2]: /ja/account_management/rbac/permissions/#billing-and-usage
+[3]: /ja/synthetics/metrics/#continuous-testing
+[4]: /ja/continuous_testing/cicd_integrations

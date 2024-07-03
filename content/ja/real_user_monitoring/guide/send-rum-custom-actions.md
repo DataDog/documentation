@@ -1,27 +1,26 @@
 ---
-title: Send RUM Custom Actions
-kind: guide
-beta: true
-private: true
-description: Learn how to send custom actions to extend your collection of user interactions.
 aliases:
-- /real_user_monitoring/guide/send-custom-user-actions/
+- /ja/real_user_monitoring/guide/send-custom-user-actions/
+beta: true
+description: Learn how to send custom actions to extend your collection of user interactions.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualize your RUM data in the RUM Explorer
+private: true
+title: Send RUM Custom Actions
 ---
-## Overview
+## 概要
 
-Real User Monitoring [automatically collects actions][1] on your web application. You can collect additional events and timings such as form completions and business transactions.
+リアルユーザーモニタリングは、Web アプリケーション上の[アクションを自動的に収集][1]します。フォームの記入完了やビジネストランザクションなど、追加のイベントやタイミングを収集することができます。
 
-Custom RUM actions allow you to monitor interesting events with all the relevant context attached. For example, the Datadog Browser SDK can collect a user's checkout information (such as the number of items within the cart, the list of items, and how much value the cart items are worth) when they click the checkout button on an e-commerce website.
+カスタム RUM アクションを使用すると、関連するすべてのコンテキストをアタッチして興味深いイベントを監視することができます。例えば、Datadog ブラウザ SDK は、ユーザーが e コマースサイトでチェックアウトボタンをクリックすると、ユーザーのチェックアウト情報 (カート内のアイテム数、アイテムのリスト、カートアイテムの価値など) を収集することが可能です。
 
-## Instrument your code
+## コードのインスツルメンテーション
 
-Create a RUM action using the `addAction` API. Give your action a name and attach context attributes in the form of a JavaScript object.
+`addAction` API を使用して RUM アクションを作成します。アクションに名前を付け、JavaScript オブジェクトの形でコンテキスト属性をアタッチします。
 
-The following example creates a `checkout` action with details about the user cart when the user clicks on the checkout button.
+次の例では、ユーザーがチェックアウトボタンをクリックすると、ユーザーカートの詳細を表示する `checkout` アクションを作成します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -31,8 +30,8 @@ import { datadogRum } from '@datadog/browser-rum';
 
 function onCheckoutButtonClick(cart) {
     datadogRum.addAction('checkout', {
-        'value': cart.value, // for example, 42.12
-        'items': cart.items, // for example, ['tomato', 'strawberries']
+        'value': cart.value, // 例: 42.12
+        'items': cart.items, // 例: ['tomato', 'strawberries']
     })
 }
 ```
@@ -40,14 +39,14 @@ function onCheckoutButtonClick(cart) {
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-Ensure that you wrap the API call with the `onReady` callback:
+API コールを `onReady` コールバックでラップしていることを確認します。
 
 ```javascript
 function onCheckoutButtonClick(cart) {
     window.DD_RUM.onReady(function() {
         window.DD_RUM.addAction('checkout', {
-            'value': cart.value, // for example, 42.12
-            'items': cart.items, // for example, ['tomato', 'strawberries']
+            'value': cart.value, // 例: 42.12
+            'items': cart.items, // 例: ['tomato', 'strawberries']
         })
     })
 }
@@ -56,15 +55,15 @@ function onCheckoutButtonClick(cart) {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-Ensure that you check for `window.DD_RUM` before the API call:
+API コールの前に `window.DD_RUM` をチェックすることを確認します。
 
 ```javascript
 window.DD_RUM && window.DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 
 function onCheckoutButtonClick(cart) {
     window.DD_RUM && window.DD_RUM.addAction('checkout', {
-        'value': cart.value, // for example, 42.12
-        'items': cart.items, // for example, ['tomato', 'strawberries']
+        'value': cart.value, // 例: 42.12
+        'items': cart.items, // 例: ['tomato', 'strawberries']
     })
 }
 ```
@@ -72,34 +71,34 @@ function onCheckoutButtonClick(cart) {
 {{% /tab %}}
 {{< /tabs >}}
 
-All RUM context such as current page view information, geoIP data, and browser information, is automatically attached along with extra attributes provided with the [Global Context API][2].
+現在のページビュー情報、geoIP データ、ブラウザ情報などのすべての RUM コンテキストは、[Global Context API][2]で提供される追加属性とともに自動的にアタッチされます。
 
-## Create facets and measures on attributes
+## 属性にファセットとメジャーを作成する
 
-After deploying the code that creates your custom actions, they appear in the **Actions** tab of the [RUM Explorer][3].
+カスタムアクションを作成するコードをデプロイすると、[RUM エクスプローラー][3]の **Actions** タブに表示されます。
 
-To filter on your custom actions, use the `Action Target Name` attribute: `@action.target.name:<ACTION_NAME>`.
+カスタムアクションにフィルターをかけるには、`Action Target Name` 属性を使用します: `@action.target.name:<ACTION_NAME>`
 
-The example below uses the following filter: `@action.target.name:checkout`.
+以下の例では、`@action.target.name:checkout`というフィルターを使用しています。
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Create a facet for custom RUM actions" video=true style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="カスタム RUM アクションのファセットを作成する" video=true style="width:100%;">}}
 
-After clicking on an action, a side panel with metadata appears. You can find your action attributes in the **Custom Attributes** section and create facets or measures for these attributes by clicking on them.
+アクションをクリックすると、メタデータを含むサイドパネルが表示されます。**Custom Attributes** セクションでアクション属性を見つけ、クリックすることでこれらの属性のファセットまたはメジャーを作成できます。
 
-Use facets for distinctive values (IDs) and measures for quantitative values such as timings and latency. For example, create a facet for the cart items and a measure for the cart value.
+特徴的な値 (ID) にはファセットを、タイミングやレイテンシーなどの定量的な値にはメジャーを使用します。例えば、カートアイテム用のファセットと、カート値用のメジャーを作成します。
 
-## Use attributes in the RUM Explorer
+## RUM エクスプローラーで属性を使用する
 
-You can use action attributes along with facets and measures in the [RUM Explorer][3] to build dashboard widgets, monitors, and advanced queries.
+[RUM エクスプローラー][3]でファセットやメジャーとともにアクション属性を使用して、ダッシュボードウィジェット、モニター、高度なクエリを構築できます。
 
-The following example displays the average cart value per country in the last two days. Click the **Export** button to export the search query into a dashboard widget or monitor.
+次の例では、過去 2 日間の国ごとの平均カート価額が表示されます。検索クエリをダッシュボードウィジェットまたはモニターにエクスポートするには、**Export** ボタンをクリックします。
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="Use RUM actions in the RUM Explorer" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="RUM エクスプローラーで RUM アクションを使用する" style="width:100%;">}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/?tab=useraction#action-attributes
-[2]: /real_user_monitoring/browser/advanced_configuration/#replace-global-context
-[3]: /real_user_monitoring/explorer
+[1]: /ja/real_user_monitoring/browser/data_collected/?tab=useraction#action-attributes
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/#replace-global-context
+[3]: /ja/real_user_monitoring/explorer

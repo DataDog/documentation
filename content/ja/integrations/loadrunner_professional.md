@@ -1,16 +1,16 @@
 ---
-"app_id": "loadrunner-professional"
-"app_uuid": "e6b5ab52-139d-4dde-a4ad-94fedeac7f29"
-"assets":
-  "dashboards":
-    "loadrunner_professional_overview": assets/dashboards/loadrunner_professional_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: loadrunner-professional
+app_uuid: e6b5ab52-139d-4dde-a4ad-94fedeac7f29
+assets:
+  dashboards:
+    loadrunner_professional_overview: assets/dashboards/loadrunner_professional_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - loadrunner.vusers.running
       - loadrunner.vusers.ready
       - loadrunner.vusers.finished
@@ -20,68 +20,70 @@
       - loadrunner.transaction.passed
       - loadrunner.transaction.failed
       - loadrunner.transaction.stopped
-      "metadata_path": metadata.csv
-      "prefix": loadrunner.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "8492858"
-    "source_type_name": LoadRunner Professional
-  "logs":
-    "source": loadrunner
-"author":
-  "homepage": "https://www.microfocus.com/en-us/products/loadrunner-professional/overview"
-  "name": OpenText
-  "sales_email": dmcleish@opentext.com
-  "support_email": MFI-Supportline@opentext.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: loadrunner.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 8492858
+    source_type_name: LoadRunner Professional
+  logs:
+    source: loadrunner
+author:
+  homepage: https://www.microfocus.com/en-us/products/loadrunner-professional/overview
+  name: OpenText
+  sales_email: dmcleish@opentext.com
+  support_email: MFI-Supportline@opentext.com
+categories:
 - testing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/loadrunner_professional/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "loadrunner_professional"
-"integration_id": "loadrunner-professional"
-"integration_title": "LoadRunner Professional"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "loadrunner_professional"
-"public_title": "LoadRunner Professional"
-"short_description": "Send LoadRunner Professional metrics and information about scenario runs to Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/loadrunner_professional/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: loadrunner_professional
+integration_id: loadrunner-professional
+integration_title: LoadRunner Professional
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: loadrunner_professional
+public_title: LoadRunner Professional
+short_description: Send LoadRunner Professional metrics and information about scenario
+  runs to Datadog
+supported_os:
 - windows
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Windows"
-  - "Supported OS::Linux"
-  - "Category::Testing"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Send LoadRunner Professional metrics and information about scenario runs to Datadog
-  "media":
-  - "caption": Controller Design Tab
-    "image_url": images/controller_design.png
-    "media_type": image
-  - "caption": Controller Run Tab
-    "image_url": images/controller_run.png
-    "media_type": image
-  - "caption": Analysis Summary Report
-    "image_url": images/analysis_summary.png
-    "media_type": image
-  - "caption": Vugen New Script
-    "image_url": images/vugen_new.png
-    "media_type": image
-  - "caption": Datadog Configuration Window
-    "image_url": images/datadog_configuration_window.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": LoadRunner Professional
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Supported OS::Linux
+  - Category::Testing
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Send LoadRunner Professional metrics and information about scenario
+    runs to Datadog
+  media:
+  - caption: Controller Design Tab
+    image_url: images/controller_design.png
+    media_type: image
+  - caption: Controller Run Tab
+    image_url: images/controller_run.png
+    media_type: image
+  - caption: Analysis Summary Report
+    image_url: images/analysis_summary.png
+    media_type: image
+  - caption: Vugen New Script
+    image_url: images/vugen_new.png
+    media_type: image
+  - caption: Datadog Configuration Window
+    image_url: images/datadog_configuration_window.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: LoadRunner Professional
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -136,10 +138,9 @@ LoadRunner Professional does not include any events.
 Need help? See [LoadRunner Professional docs][5] or contact [Datadog support][6].
 
 
-[1]: https://docs.datadoghq.com/getting_started/site/
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token
+[1]: https://docs.datadoghq.com/ja/getting_started/site/
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/loadrunner_professional/images/datadog_configuration_window.png
 [4]: https://github.com/DataDog/integrations-extras/blob/master/loadrunner_professional/metadata.csv
 [5]: https://admhelp.microfocus.com/lr
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

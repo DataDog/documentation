@@ -1,13 +1,13 @@
 ---
-title: Request Flow Map
-kind: documentation
-description: "Trace Search and Analytics"
 aliases:
- - /tracing/trace_search_and_analytics/request_flow_map
+- /ja/tracing/trace_search_and_analytics/request_flow_map
+description: Trace Search and Analytics
 further_reading:
-    - link: "https://www.datadoghq.com/blog/apm-request-flow-map-datadog"
-      tag: Blog
-      text: Learn more about Request Flow Maps
+- link: https://www.datadoghq.com/blog/apm-request-flow-map-datadog
+  tag: Blog
+  text: Learn more about Request Flow Maps
+kind: documentation
+title: Request Flow Map
 ---
 
 {{< img src="tracing/live_search_and_analytics/request_flow_map/Overview.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Request Flow Map" >}}
@@ -48,11 +48,11 @@ Use the request flow map to investigate your application's behavior:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/services/services_map/
-[2]: /tracing/trace_explorer/
-[3]: /tracing/trace_pipeline/ingestion_controls
-[4]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
+[1]: /ja/tracing/services/services_map/
+[2]: /ja/tracing/trace_explorer/
+[3]: /ja/tracing/trace_pipeline/ingestion_controls
+[4]: /ja/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [5]: https://app.datadoghq.com/apm/flow-map
-[6]: /tracing/glossary/#resources
-[7]: /tracing/services/deployment_tracking/#shadow-deploys
-[9]: /tracing/services/deployment_tracking/
+[6]: /ja/tracing/glossary/#resources
+[7]: /ja/tracing/services/deployment_tracking/#shadow-deploys
+[9]: /ja/tracing/services/deployment_tracking/

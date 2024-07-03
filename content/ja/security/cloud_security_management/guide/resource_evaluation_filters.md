@@ -1,12 +1,12 @@
 ---
-title: Use Filters to Exclude Resources from Evaluation
 further_reading:
-  - link: /security/cloud_security_management/guide
-    tag: Documentation
-    text: Cloud Security Management Guides
-  - link: /security/cloud_security_management/setup
-    tag: Documentation
-    text: Setting Up Cloud Security Management
+- link: /security/cloud_security_management/guide
+  tag: Documentation
+  text: Cloud Security Management Guides
+- link: /security/cloud_security_management/setup
+  tag: Documentation
+  text: Setting Up Cloud Security Management
+title: Use Filters to Exclude Resources from Evaluation
 ---
 
 You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security Management (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.

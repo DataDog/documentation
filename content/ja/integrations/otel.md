@@ -1,69 +1,69 @@
 ---
-"app_id": "otel"
-"app_uuid": "ca08ac68-f4a4-4d84-9c21-8f645733d62c"
-"assets":
-  "dashboards":
-    "OpenTelemetry Collector Metrics Dashboard": assets/dashboards/otel_collector_metrics_dashboard.json
-    "OpenTelemetry Dashboard": assets/dashboards/otel_host_metrics_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: otel
+app_uuid: ca08ac68-f4a4-4d84-9c21-8f645733d62c
+assets:
+  dashboards:
+    OpenTelemetry Collector Metrics Dashboard: assets/dashboards/otel_collector_metrics_dashboard.json
+    OpenTelemetry Dashboard: assets/dashboards/otel_host_metrics_dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - otel.datadog_exporter.metrics.running
       - otel.datadog_exporter.traces.running
-      "metadata_path": metadata.csv
-      "prefix": otel.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "312"
-    "source_type_name": OTel
-  "monitors":
-    "OpenTelemetry Refused Spans": assets/monitors/otel_refused_spans.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: otel.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 312
+    source_type_name: OTel
+  monitors:
+    OpenTelemetry Refused Spans: assets/monitors/otel_refused_spans.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - developer tools
 - network
 - os & system
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/otel/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "otel"
-"integration_id": "otel"
-"integration_title": "OpenTelemetry"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "otel"
-"public_title": "OpenTelemetry"
-"short_description": "Get telemetry data from the OpenTelemetry Collector"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/otel/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: otel
+integration_id: otel
+integration_title: OpenTelemetry
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: otel
+public_title: OpenTelemetry
+short_description: Get telemetry data from the OpenTelemetry Collector
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::Network"
-  - "Category::OS & System"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Get telemetry data from the OpenTelemetry Collector
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": OpenTelemetry
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::Network
+  - Category::OS & System
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Get telemetry data from the OpenTelemetry Collector
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenTelemetry
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -162,12 +162,11 @@ OpenTelemetry コレクターには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
-[1]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
-[2]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
+[1]: https://docs.datadoghq.com/ja/tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
+[2]: https://docs.datadoghq.com/ja/tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
 [3]: https://opentelemetry.io/docs/collector/getting-started/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: https://docs.datadoghq.com/metrics/otlp/
+[5]: https://docs.datadoghq.com/ja/metrics/otlp/
 [6]: https://github.com/DataDog/integrations-core/blob/master/otel/metadata.csv
 [7]: https://github.com/open-telemetry/opentelemetry-collector/tree/master/receiver/
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

@@ -1,60 +1,60 @@
 ---
-"app_id": "traefik"
-"app_uuid": "3e412d36-f638-4cb0-9068-294aac7a84e2"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": traefik.total_status_code_count
-      "metadata_path": metadata.csv
-      "prefix": traefik.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10047"
-    "source_type_name": Traefik
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": help@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: traefik
+app_uuid: 3e412d36-f638-4cb0-9068-294aac7a84e2
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: traefik.total_status_code_count
+      metadata_path: metadata.csv
+      prefix: traefik.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10047
+    source_type_name: Traefik
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "traefik"
-"integration_id": "traefik"
-"integration_title": "Traefik"
-"integration_version": "1.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "traefik"
-"public_title": "Traefik"
-"short_description": "collects traefik metrics"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: traefik
+integration_id: traefik
+integration_title: Traefik
+integration_version: 1.1.0
+is_public: true
+manifest_version: 2.0.0
+name: traefik
+public_title: Traefik
+short_description: collects traefik metrics
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": collects traefik metrics
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Traefik
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: collects traefik metrics
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Traefik
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -139,9 +139,9 @@ By default, [Traefik logs][5] are sent to stdout. This should not be changed for
 [4]: https://doc.traefik.io/traefik/observability/metrics/overview/
 [5]: https://doc.traefik.io/traefik/observability/logs/#filepath
 [6]: https://doc.traefik.io/traefik/observability/logs/#format
-[7]: https://docs.datadoghq.com/agent/faq/agent-configuration-files/#agent-configuration-directory
-[8]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
-[9]: https://docs.datadoghq.com/getting_started/tracing/#enable-apm
+[7]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
+[8]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/getting_started/tracing/#enable-apm
 [10]: https://doc.traefik.io/traefik/observability/tracing/datadog/
 [11]: https://doc.traefik.io/traefik/observability/tracing/overview/
 {{% /tab %}}
@@ -223,12 +223,12 @@ By default, [Traefik logs][6] are sent to stdout. This should not be changed for
 
 [1]: https://doc.traefik.io/traefik/v1.7/
 [2]: https://github.com/DataDog/integrations-extras/blob/master/traefik/metadata.csv
-[3]: https://docs.datadoghq.com/agent/faq/agent-configuration-files/#agent-configuration-directory
-[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/traefik/datadog_checks/traefik/data/conf.yaml.example
 [6]: https://doc.traefik.io/traefik/v1.7/configuration/logs/#traefik-logs
 [7]: https://doc.traefik.io/traefik/v1.7/configuration/logs/#clf-common-log-format
-[8]: https://docs.datadoghq.com/getting_started/tracing/#enable-apm
+[8]: https://docs.datadoghq.com/ja/getting_started/tracing/#enable-apm
 [9]: https://doc.traefik.io/traefik/v1.7/configuration/tracing/#datadog
 {{% /tab %}}
 {{< /tabs >}}
@@ -268,9 +268,9 @@ Need help? Contact [Datadog support][8].
 
 [1]: https://traefik.io
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [6]: https://doc.traefik.io/traefik/observability/metrics/overview/
-[7]: https://docs.datadoghq.com/integrations/traefik/#metrics
-[8]: https://docs.datadoghq.com/help
+[7]: https://docs.datadoghq.com/ja/integrations/traefik/#metrics
+[8]: https://docs.datadoghq.com/ja/help

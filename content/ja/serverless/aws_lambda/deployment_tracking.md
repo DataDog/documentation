@@ -1,15 +1,15 @@
 ---
-title: Deployment Tracking for AWS Lambda Serverless Applications
-kind: documentation
-further_reading:
-    - link: /serverless/distributed_tracing
-      tag: Documentation
-      text: Distributed Tracing for Serverless
-    - link: /serverless/serverless_tagging
-      tag: Documentation
-      text: Serverless Tagging
 aliases:
-  - /serverless/deployment_tracking
+- /ja/serverless/deployment_tracking
+further_reading:
+- link: /serverless/distributed_tracing
+  tag: Documentation
+  text: Distributed Tracing for Serverless
+- link: /serverless/serverless_tagging
+  tag: Documentation
+  text: Serverless Tagging
+kind: documentation
+title: Deployment Tracking for AWS Lambda Serverless Applications
 ---
 
 Deployment tracking helps you to understand when a new version of code or a configuration change causes a spike in errors, degraded performance, or when your cloud environment drifts from its expected state.
@@ -37,4 +37,4 @@ If you have already added the permission, but you still don't see events for any
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/functions
-[2]: /integrations/amazon_web_services/#setup
+[2]: /ja/integrations/amazon_web_services/#setup

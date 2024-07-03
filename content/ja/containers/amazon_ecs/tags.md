@@ -1,7 +1,6 @@
 ---
-title: Amazon ECS タグ抽出
 aliases:
-  - /agent/amazon_ecs/tags
+- /ja/agent/amazon_ecs/tags
 further_reading:
 - link: /getting_started/tagging/
   tag: ドキュメント
@@ -12,6 +11,7 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
   text: データ収集をコンテナのサブセットのみに制限
+title: Amazon ECS タグ抽出
 ---
 
 ## 概要
@@ -71,8 +71,8 @@ As a best practice in containerized environments, Datadog recommends using unifi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
-[2]: /getting_started/tagging/unified_service_tagging/?tab=ecs#containerized-environment
+[1]: /ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
+[2]: /ja/getting_started/tagging/unified_service_tagging/?tab=ecs#containerized-environment
 [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_instances.html
 [4]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [5]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json

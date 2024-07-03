@@ -1,19 +1,19 @@
 ---
-title: .NET Framework Compatibility Requirements
-description: 'Compatibility Requirements for the .NET Tracer'
 aliases:
-  - /tracing/compatibility_requirements/dotnet-framework
-  - /tracing/setup_overview/compatibility_requirements/dotnet-framework
+- /ja/tracing/compatibility_requirements/dotnet-framework
+- /ja/tracing/setup_overview/compatibility_requirements/dotnet-framework
 code_lang: dotnet-framework
-type: multi-code-lang
 code_lang_weight: 80
+description: Compatibility Requirements for the .NET Tracer
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/dotnet-framework
-      tag: Documentation
-      text: Instrument Your Application
-    - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-      tag: ソースコード
-      text: Examples of Custom Instrumentation
+- link: tracing/trace_collection/dd_libraries/dotnet-framework
+  tag: Documentation
+  text: Instrument Your Application
+- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
+  tag: ソースコード
+  text: Examples of Custom Instrumentation
+title: .NET Framework Compatibility Requirements
+type: multi-code-lang
 ---
 
 
@@ -147,13 +147,13 @@ Datadog APM for .NET Framework は、[セマンティックバージョニング
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: /tracing/compatibility_requirements/dotnet-core/
+[2]: /ja/tracing/compatibility_requirements/dotnet-core/
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.31.2
 [4]: https://docs.microsoft.com/en-us/lifecycle/products/microsoft-net-framework
 [5]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[6]: /help/
-[7]: /agent/basic_agent_usage/?tab=agentv6v7
-[8]: /agent/basic_agent_usage/?tab=agentv5
+[6]: /ja/help/
+[7]: /ja/agent/basic_agent_usage/?tab=agentv6v7
+[8]: /ja/agent/basic_agent_usage/?tab=agentv5
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
 [11]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing

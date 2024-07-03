@@ -1,19 +1,19 @@
 ---
-title: SLO Widget
-widget_type: slo
-description: "Track your SLOs"
 aliases:
- - /monitors/monitor_uptime_widget/
- - /monitors/slo_widget/
- - /graphing/widgets/slo/
- - /dashboards/faq/how-can-i-graph-host-uptime-percentage/
+- /ja/monitors/monitor_uptime_widget/
+- /ja/monitors/slo_widget/
+- /ja/graphing/widgets/slo/
+- /ja/dashboards/faq/how-can-i-graph-host-uptime-percentage/
+description: Track your SLOs
 further_reading:
-- link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
+- link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
   tag: Blog
   text: Track the status of all your SLOs in Datadog
 - link: /dashboards/guide/slo_graph_query
   tag: Documentation
   text: Scope metric-based SLO queries
+title: SLO Widget
+widget_type: slo
 ---
 
 SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service. The SLO widget visualizes the status, budget, and remaining error budget of the existing SLOs. It displays all underlying groups of the SLO and lets you sort the groups by any of the time windows in the widget. Use this widget to build out meaningful dashboards with the most critical SLO information:
@@ -82,7 +82,7 @@ When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/
-[2]: /dashboards/template_variables/
-[3]: /api/latest/dashboards/
-[4]: /dashboards/graphing_json/widget_json/
+[1]: /ja/service_management/service_level_objectives/
+[2]: /ja/dashboards/template_variables/
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

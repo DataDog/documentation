@@ -1,51 +1,51 @@
 ---
-"app_id": "sentry"
-"app_uuid": "c5e6ea68-6042-405f-abda-1e4fced494ee"
-"assets":
-  "integration":
-    "auto_install": true
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "56"
-    "source_type_name": "Sentry"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "collaboration"
-- "issue tracking"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sentry"
-"integration_id": "sentry"
-"integration_title": "Sentry"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "sentry"
-"public_title": "Sentry"
-"short_description": "See Sentry exceptions in your Datadog event stream."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Collaboration"
-  - "Category::Issue Tracking"
-  "configuration": "README.md#Setup"
-  "description": "See Sentry exceptions in your Datadog event stream."
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/"
-  "support": "README.md#Troubleshooting"
-  "title": "Sentry"
+app_id: sentry
+app_uuid: c5e6ea68-6042-405f-abda-1e4fced494ee
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 56
+    source_type_name: Sentry
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- collaboration
+- issue tracking
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: sentry
+integration_id: sentry
+integration_title: Sentry
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: sentry
+public_title: Sentry
+short_description: See Sentry exceptions in your Datadog event stream.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Collaboration
+  - Category::Issue Tracking
+  configuration: README.md#Setup
+  description: See Sentry exceptions in your Datadog event stream.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/
+  support: README.md#Troubleshooting
+  title: Sentry
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -97,4 +97,3 @@ Datadog から Sentry のエラーが消えている場合、Sentry Webhook が�
 
 [1]: https://docs.sentry.io/platforms/java/enriching-events/tags/
 [2]: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/
-

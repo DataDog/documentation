@@ -1,7 +1,6 @@
 ---
-title: NetFlow Monitor
 further_reading:
-- link: "/network_monitoring/devices/netflow/#visualization"
+- link: /network_monitoring/devices/netflow/#visualization
   tag: ドキュメント
   text: Learn more about NetFlow Monitoring
 - link: /monitors/notify/
@@ -13,6 +12,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
+title: NetFlow Monitor
 ---
 
 {{< callout btn_hidden="true" header="Join the Beta!">}}
@@ -63,10 +63,10 @@ For more information about events you can create NetFlow monitors on, see the [N
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/devices/
-[2]: /network_monitoring/devices/netflow/
+[1]: /ja/network_monitoring/devices/
+[2]: /ja/network_monitoring/devices/netflow/
 [3]: https://app.datadoghq.com/monitors/create/netflow
-[4]: /network_monitoring/devices/netflow/#visualization
-[5]: /dashboards/functions/
-[6]: /monitors/configuration/
-[7]: /monitors/notify/
+[4]: /ja/network_monitoring/devices/netflow/#visualization
+[5]: /ja/dashboards/functions/
+[6]: /ja/monitors/configuration/
+[7]: /ja/monitors/notify/

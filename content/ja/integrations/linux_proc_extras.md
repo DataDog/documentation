@@ -1,53 +1,53 @@
 ---
-"app_id": "system"
-"app_uuid": "17477b56-4487-4b00-8820-70c6f64ae3c6"
-"assets":
-  "integration":
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "system.inodes.total"
-      "metadata_path": "metadata.csv"
-      "prefix": "system."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_name": "Linux proc extras"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "os & system"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "linux_proc_extras"
-"integration_id": "システム"
-"integration_title": "Linux Proc Extras"
-"integration_version": "2.5.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "linux_proc_extras"
-"public_title": "Linux Proc Extras"
-"short_description": "Visualize and monitor linux_proc_extras states."
-"supported_os":
-- "linux"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Category::OS & System"
-  "configuration": "README.md#Setup"
-  "description": "Visualize and monitor linux_proc_extras states."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Linux Proc Extras"
+app_id: system
+app_uuid: 17477b56-4487-4b00-8820-70c6f64ae3c6
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.inodes.total
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Linux proc extras
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- os & system
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: linux_proc_extras
+integration_id: システム
+integration_title: Linux Proc Extras
+integration_version: 2.5.0
+is_public: true
+manifest_version: 2.0.0
+name: linux_proc_extras
+public_title: Linux Proc Extras
+short_description: Visualize and monitor linux_proc_extras states.
+supported_os:
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Visualize and monitor linux_proc_extras states.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Linux Proc Extras
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -95,10 +95,9 @@ The Linux Proc Extras check does not include any service checks.
 Need help? Contact [Datadog support][7].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/datadog_checks/linux_proc_extras/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/metadata.csv
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

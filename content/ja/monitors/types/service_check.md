@@ -1,10 +1,9 @@
 ---
-title: Service Check Monitor
-description: "Monitor status of arbitrary service checks."
-aliases :
-    - /monitors/monitor_types/custom_check
-    - /monitors/create/types/custom_check/
-    - /monitors/types/custom_check/
+aliases:
+- /ja/monitors/monitor_types/custom_check
+- /ja/monitors/create/types/custom_check/
+- /ja/monitors/types/custom_check/
+description: Monitor status of arbitrary service checks.
 further_reading:
 - link: /monitors/notify/
   tag: Documentation
@@ -15,6 +14,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Consult your monitor status
+title: Service Check Monitor
 ---
 
 ## 概要
@@ -60,7 +60,7 @@ Datadog で[サービスチェックモニター][6]を作成するには、メ�
     *  何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。たとえば、問題修正を確実にするには、`4` 回の `OK` ステータスでモニターを解決します。
 
 
-[1]: /monitors/manage/status
+[1]: /ja/monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
@@ -93,14 +93,14 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/
-[2]: /developers/custom_checks/write_agent_check/
-[3]: /developers/dogstatsd/
-[4]: /api/v1/service-checks/
-[5]: /developers/service_checks/#overview
+[1]: /ja/integrations/
+[2]: /ja/developers/custom_checks/write_agent_check/
+[3]: /ja/developers/dogstatsd/
+[4]: /ja/api/v1/service-checks/
+[5]: /ja/developers/service_checks/#overview
 [6]: https://app.datadoghq.com/monitors/create/custom
-[7]: /monitors/configuration/#advanced-alert-conditions
-[8]: /monitors/configuration/#no-data
-[9]: /monitors/configuration/#auto-resolve
-[10]: /monitors/configuration/#new-group-delay
-[11]: /monitors/notify/
+[7]: /ja/monitors/configuration/#advanced-alert-conditions
+[8]: /ja/monitors/configuration/#no-data
+[9]: /ja/monitors/configuration/#auto-resolve
+[10]: /ja/monitors/configuration/#new-group-delay
+[11]: /ja/monitors/notify/

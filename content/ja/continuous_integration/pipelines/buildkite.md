@@ -1,17 +1,17 @@
 ---
-title: Set up Tracing on a Buildkite Pipeline
 aliases:
-  - /continuous_integration/setup_pipelines/buildkite
+- /ja/continuous_integration/setup_pipelines/buildkite
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
-    - link: /continuous_integration/pipelines/custom_tags_and_measures/
-      tag: Documentation
-      text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines/custom_tags_and_measures/
+  tag: Documentation
+  text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
+title: Set up Tracing on a Buildkite Pipeline
 ---
 
 {{< site-region region="gov" >}}
@@ -127,12 +127,12 @@ For this feature to work, install the [Datadog Agent][7] in the hosts running th
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: /continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
-[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[7]: /agent/
-[8]: /continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs
-[9]: /glossary/#partial-retry
-[10]: /glossary/#custom-tag
-[11]: /glossary/#custom-measure
-[12]: /glossary/#manual-step
-[13]: /glossary/#queue-time
+[5]: /ja/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
+[6]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[7]: /ja/agent/
+[8]: /ja/continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs
+[9]: /ja/glossary/#partial-retry
+[10]: /ja/glossary/#custom-tag
+[11]: /ja/glossary/#custom-measure
+[12]: /ja/glossary/#manual-step
+[13]: /ja/glossary/#queue-time

@@ -1,29 +1,29 @@
 ---
-title: Network Monitoring
-disable_sidebar: true
-description: Explore Datadog Network Monitoring Products
-further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Network%20Monitoring"
-    tag: Release Notes
-    text: Check out the latest Datadog Network Monitoring releases! (App login required).
-  - link: "https://dtdg.co/fe"
-    tag: Foundation Enablement
-    text: Join an interactive session to better monitor your network performance
-  - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-    tag: Blog
-    text: Introducing Datadog Network Performance Monitoring
-  - link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
-    tag: Blog
-    text: Monitor DNS with Datadog
-  - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
-    tag: Blog
-    text: Monitor datacenters and network devices with Datadog
-  - link: "https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/"
-    tag: Blog
-    text: Monitor Cilium-managed infrastructure with Datadog
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+description: Explore Datadog Network Monitoring Products
+disable_sidebar: true
+further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Network%20Monitoring
+  tag: Release Notes
+  text: Check out the latest Datadog Network Monitoring releases! (App login required).
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to better monitor your network performance
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Introducing Datadog Network Performance Monitoring
+- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
+  tag: Blog
+  text: Monitor DNS with Datadog
+- link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+  tag: Blog
+  text: Monitor datacenters and network devices with Datadog
+- link: https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/
+  tag: Blog
+  text: Monitor Cilium-managed infrastructure with Datadog
+title: Network Monitoring
 ---
 
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}

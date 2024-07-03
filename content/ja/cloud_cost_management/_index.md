@@ -1,32 +1,42 @@
 ---
-title: Cloud Cost Management
 aliases:
-  - /infrastructure/cloud_cost_management
-  - /integrations/cloudability
-further_reading:
-  - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
-    tag: Blog
-    text: Gain visibility and control of your cloud spend with Datadog Cloud Cost Management
-  - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
-    tag: ブログ
-    text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
-  - link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
-    tag: ブログ
-    text: Empower engineers to take ownership of Google Cloud costs with Datadog
-  - link: /monitors/types/cloud_cost/
-    tag: Documentation
-    text: Create a Cloud Cost monitor
-  - link: /cloud_cost_management/tag_pipelines/
-    tag: ドキュメント
-    text: Learn about Tag Pipelines
-  - link: /cloud_cost_management/tag_pipelines
-    tag: ドキュメント
-    text: Standardize tags across Cloud Cost Management with Tag Pipelines
+- /ja/infrastructure/cloud_cost_management
+- /ja/integrations/cloudability
 cascade:
-    algolia:
-      subcategory: Cloud Cost Management
-      rank: 70
-      tags: [cloud cost, cloud integrations, クラウド コスト マネジメント, cloud cost aws, cloud cost azure, cloud cost google cloud, cloud cost gcp, data collected aws, data collected azure, data collected google cloud]
+  algolia:
+    rank: 70
+    subcategory: Cloud Cost Management
+    tags:
+    - cloud cost
+    - cloud integrations
+    - クラウド コスト マネジメント
+    - cloud cost aws
+    - cloud cost azure
+    - cloud cost google cloud
+    - cloud cost gcp
+    - data collected aws
+    - data collected azure
+    - data collected google cloud
+further_reading:
+- link: https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/
+  tag: Blog
+  text: Gain visibility and control of your cloud spend with Datadog Cloud Cost Management
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: ブログ
+  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
+- link: https://www.datadoghq.com/blog/google-cloud-cost-management/
+  tag: ブログ
+  text: Empower engineers to take ownership of Google Cloud costs with Datadog
+- link: /monitors/types/cloud_cost/
+  tag: Documentation
+  text: Create a Cloud Cost monitor
+- link: /cloud_cost_management/tag_pipelines/
+  tag: ドキュメント
+  text: Learn about Tag Pipelines
+- link: /cloud_cost_management/tag_pipelines
+  tag: ドキュメント
+  text: Standardize tags across Cloud Cost Management with Tag Pipelines
+title: Cloud Cost Management
 ---
 
 {{< site-region region="gov" >}}
@@ -252,7 +262,7 @@ Use [Container Cost Allocation metrics][4] to discover costs associated with clu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/analytics
-[2]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
-[3]: /monitors/types/cloud_cost/
-[4]: /cloud_cost_management/container_cost_allocation
-[5]: /cloud_cost_management/tag_pipelines
+[2]: /ja/api/latest/metrics/#query-timeseries-data-across-multiple-products
+[3]: /ja/monitors/types/cloud_cost/
+[4]: /ja/cloud_cost_management/container_cost_allocation
+[5]: /ja/cloud_cost_management/tag_pipelines

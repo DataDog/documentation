@@ -1,14 +1,11 @@
 ---
-title: RUM React Native Data Collected
-kind: documentation
-description: Learn about the data collected by React Native Monitoring.
-code_lang: reactnative
-type: multi-code-lang
-code_lang_weight: 40
 aliases:
-- /real_user_monitoring/reactnative/data_collected/
+- /ja/real_user_monitoring/reactnative/data_collected/
+code_lang: reactnative
+code_lang_weight: 40
+description: Learn about the data collected by React Native Monitoring.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-reactnative"
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: ソースコード
   text: Source code for dd-sdk-reactnative
 - link: real_user_monitoring/explorer/
@@ -17,7 +14,9 @@ further_reading:
 - link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
   tag: Documentation
   text: Monitor hybrid React Native applications
-
+kind: documentation
+title: RUM React Native Data Collected
+type: multi-code-lang
 ---
 ## Overview
 
@@ -32,5 +31,5 @@ Most React Native Monitoring data is collected by native Datadog iOS and Android
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
-[2]: /real_user_monitoring/android/data_collected/#event-specific-metrics-and-attributes
+[1]: /ja/real_user_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
+[2]: /ja/real_user_monitoring/android/data_collected/#event-specific-metrics-and-attributes

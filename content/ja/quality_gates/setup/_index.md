@@ -1,10 +1,10 @@
 ---
-title: Set up Quality Gate Rules
 description: Learn how to set up Quality Gate rules in Datadog.
 further_reading:
 - link: /quality_gates
   tag: Documentation
   text: Learn about Quality Gates
+title: Set up Quality Gate Rules
 ---
 
 {{< site-region region="gov" >}}
@@ -134,16 +134,16 @@ For more information, see the [RBAC Permissions documentation][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/permissions
+[1]: /ja/account_management/rbac/permissions
 [2]: https://app.datadoghq.com/ci/quality-gates
-[3]: /account_management/audit_trail/events/#ci-visibility-events
+[3]: /ja/account_management/audit_trail/events/#ci-visibility-events
 [4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/blob/master/README.md
-[8]: /continuous_integration/guides/flaky_test_management/
+[8]: /ja/continuous_integration/guides/flaky_test_management/
 [9]: https://docs.github.com/en/rest/checks
 [10]: https://app.datadoghq.com/integrations/github
-[11]: https://docs.datadoghq.com/integrations/github/
-[12]: /getting_started/site/
-[13]: /quality_gates/guide/understanding_rule_scopes
+[11]: https://docs.datadoghq.com/ja/integrations/github/
+[12]: /ja/getting_started/site/
+[13]: /ja/quality_gates/guide/understanding_rule_scopes

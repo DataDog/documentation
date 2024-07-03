@@ -1,5 +1,5 @@
 ---
-title: "Components: Common"
+title: 'Components: Common'
 ---
 
 {{< whatsnext desc="Common:" >}}

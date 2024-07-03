@@ -1,17 +1,17 @@
 ---
-title: PHP Compatibility Requirements
-kind: documentation
-description: 'Compatibility Requirements for the PHP tracer'
 aliases:
-  - /tracing/compatibility_requirements/php
-  - /tracing/setup_overview/compatibility_requirements/php
+- /ja/tracing/compatibility_requirements/php
+- /ja/tracing/setup_overview/compatibility_requirements/php
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 50
+description: Compatibility Requirements for the PHP tracer
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/php
-      tag: Documentation
-      text: Instrument Your Application
+- link: tracing/trace_collection/dd_libraries/php
+  tag: Documentation
+  text: Instrument Your Application
+kind: documentation
+title: PHP Compatibility Requirements
+type: multi-code-lang
 ---
 <div class="alert alert-info">This documentation is for the PHP tracer v1.x. If you are looking for the PHP tracer v0.x documentation, see the legacy <a href="/tracing/trace_collection/compatibility/php_v0/">PHP Compatibility Requirements
 </a> documentation.</div>
@@ -188,11 +188,11 @@ Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcnt
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: https://www.datadoghq.com/support/
-[3]: /help
+[3]: /ja/help
 [4]: https://pecl.php.net/package/mongo
-[5]: /tracing/troubleshooting/php_5_deep_call_stacks
+[5]: /ja/tracing/troubleshooting/php_5_deep_call_stacks
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
-[9]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
+[9]: /ja/tracing/trace_collection/library_config/php/#environment-variable-configuration
 [10]: https://github.com/php-amqplib/php-amqplib

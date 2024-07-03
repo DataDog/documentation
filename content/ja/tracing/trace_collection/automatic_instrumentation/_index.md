@@ -1,12 +1,13 @@
 ---
-title: Automatic Instrumentation
-kind: documentation
 algolia:
-  tags: [apm automatic instrumentation]
+  tags:
+  - apm automatic instrumentation
 further_reading:
-    - link: /tracing/glossary/
-      tag: Documentation
-      text: APM Terms and Concepts
+- link: /tracing/glossary/
+  tag: Documentation
+  text: APM Terms and Concepts
+kind: documentation
+title: Automatic Instrumentation
 ---
 
 ## Overview
@@ -32,7 +33,7 @@ If you install or update a Datadog Agent with the **Enable APM Instrumentation (
 
 To get started, read the [Single Step Instrumentation][1] documentation.
 
-[1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+[1]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm
 
 {{% /tab %}}
 
@@ -96,15 +97,15 @@ Set up your application to send traces using one of the following official Datad
 
 To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
-[8]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[9]: /tracing/serverless_functions/
-[10]: /agent/basic_agent_usage/heroku/#installation
-[11]: /integrations/cloud_foundry/#trace-collection
-[12]: /integrations/amazon_elasticbeanstalk/
-[13]: /infrastructure/serverless/azure_app_services/#overview
-[14]: /integrations/
-[15]: /help/
+[1]: /ja/developers/community/libraries/#apm-tracing-client-libraries
+[8]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[9]: /ja/tracing/serverless_functions/
+[10]: /ja/agent/basic_agent_usage/heroku/#installation
+[11]: /ja/integrations/cloud_foundry/#trace-collection
+[12]: /ja/integrations/amazon_elasticbeanstalk/
+[13]: /ja/infrastructure/serverless/azure_app_services/#overview
+[14]: /ja/integrations/
+[15]: /ja/help/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -113,11 +114,9 @@ To instrument an application written in a language that does not have official l
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[2]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
-[3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
-[4]: /tracing/trace_collection/custom_instrumentation/opentracing/
-[5]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[7]: /tracing/trace_collection/custom_instrumentation/
-
-
+[2]: /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/
+[3]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation
+[4]: /ja/tracing/trace_collection/custom_instrumentation/opentracing/
+[5]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[7]: /ja/tracing/trace_collection/custom_instrumentation/

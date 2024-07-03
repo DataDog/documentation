@@ -1,29 +1,29 @@
 ---
-"categories":
-- "azure"
-- "cloud"
-- "configuration & deployment"
-- "os & system"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Azure VM のリソース使用状況、ネットワーク統計などを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/azure_vm/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/"
-  "tag": "ブログ"
-  "text": "Datadog で Conviva を監視する"
-"git_integration_title": "azure_vm"
-"has_logo": true
-"integration_id": "azure-vm"
-"integration_title": "Microsoft Azure VM"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_vm"
-"public_title": "Datadog-Microsoft Azure VM Integration"
-"short_description": "Track Azure VM resource usage, network statistics, and more."
-"version": "1.0"
+categories:
+- azure
+- cloud
+- configuration & deployment
+- os & system
+custom_kind: インテグレーション
+dependencies: []
+description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
+doc_link: https://docs.datadoghq.com/integrations/azure_vm/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/
+  tag: ブログ
+  text: Datadog で Conviva を監視する
+git_integration_title: azure_vm
+has_logo: true
+integration_id: azure-vm
+integration_title: Microsoft Azure VM
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_vm
+public_title: Datadog-Microsoft Azure VM Integration
+short_description: Track Azure VM resource usage, network statistics, and more.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -87,14 +87,13 @@ Need help? Contact [Datadog support][6].
 - [Monitor Azure VMs using Datadog][9]
 - [Strategize your Azure migration for SQL workloads with Datadog][10]
 
-[1]: https://docs.datadoghq.com/integrations/azure/
-[2]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/#enable-diagnostics
 [3]: https://docs.microsoft.com/en-us/rest/api/resourcehealth/
 [4]: https://app.datadoghq.com/monitors/downtimes
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm/azure_vm_metadata.csv
-[6]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
 [8]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
 [9]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog
 [10]: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
-

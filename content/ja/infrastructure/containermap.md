@@ -1,9 +1,7 @@
 ---
-title: Container Map
-kind: documentation
 aliases:
-  - /graphing/infrastructure/containermap/
-  - /guides/hostmap
+- /ja/graphing/infrastructure/containermap/
+- /ja/guides/hostmap
 further_reading:
 - link: /infrastructure/livecontainers/
   tag: ドキュメント
@@ -11,6 +9,8 @@ further_reading:
 - link: /infrastructure/process/
   tag: ドキュメント
   text: Understand what is going on at any level of your system
+kind: documentation
+title: Container Map
 ---
 
 ## Overview
@@ -29,8 +29,8 @@ After deploying the [Agent][4], no other configuration is necessary. For collect
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/hostmap/
+[1]: /ja/infrastructure/hostmap/
 [2]: https://app.datadoghq.com/infrastructure/map?node_type=container
-[3]: /agent/kubernetes/integrations/
-[4]: /agent/
-[5]: /agent/docker/
+[3]: /ja/agent/kubernetes/integrations/
+[4]: /ja/agent/
+[5]: /ja/agent/docker/

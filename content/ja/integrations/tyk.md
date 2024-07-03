@@ -1,65 +1,67 @@
 ---
-"app_id": "tyk"
-"app_uuid": "caca4c4f-104b-4d28-a051-f09bc58a0a32"
-"assets":
-  "dashboards":
-    "Tyk Analytics Canvas": assets/dashboards/tyk_analytics_canvas.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: tyk
+app_uuid: caca4c4f-104b-4d28-a051-f09bc58a0a32
+assets:
+  dashboards:
+    Tyk Analytics Canvas: assets/dashboards/tyk_analytics_canvas.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - tyk.request_time.95percentile
       - tyk.request_time.count
       - tyk.request_time.avg
       - tyk.request_time.max
       - tyk.request_time.median
-      "metadata_path": metadata.csv
-      "prefix": tyk.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10233"
-    "source_type_name": Tyk
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Tyk
-  "sales_email": yaara@tyk.io
-  "support_email": yaara@tyk.io
-"categories":
+      metadata_path: metadata.csv
+      prefix: tyk.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10233
+    source_type_name: Tyk
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Tyk
+  sales_email: yaara@tyk.io
+  support_email: yaara@tyk.io
+categories:
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "tyk"
-"integration_id": "tyk"
-"integration_title": "Tyk"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "tyk"
-"public_title": "Tyk"
-"short_description": "Track requests with time statistics sliced by resp-code, api, path, oauth etc."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: tyk
+integration_id: tyk
+integration_title: Tyk
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: tyk
+public_title: Tyk
+short_description: Track requests with time statistics sliced by resp-code, api, path,
+  oauth etc.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Metrics"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Track requests with time statistics sliced by resp-code, api, path, oauth etc.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Tyk
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Metrics
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Track requests with time statistics sliced by resp-code, api, path,
+    oauth etc.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Tyk
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -200,23 +202,22 @@ Need help? Contact [Datadog support][22].
 [1]: https://tyk.io/
 [2]: https://github.com/TykTechnologies/tyk
 [3]: https://tyk.io/docs/tyk-pump/
-[4]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent#pagetitle
-[5]: https://docs.datadoghq.com/agent/docker/?tab=standard#dogstatsd-custom-metrics
+[4]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=hostagent#pagetitle
+[5]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard#dogstatsd-custom-metrics
 [6]: https://tyk.io/docs/tyk-self-managed/install/
 [7]: https://tyk.io/docs/apim/open-source/installation/
 [8]: https://app.datadoghq.com/account/settings/agent/latest
-[9]: https://docs.datadoghq.com/agent/
-[10]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: https://docs.datadoghq.com/ja/agent/
+[10]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [12]: https://github.com/TykTechnologies/tyk-pump#dogstatsd
 [13]: https://github.com/TykTechnologies/tyk-demo/blob/master/deployments/analytics-datadog/volumes/tyk-pump/pump-datadog.conf
 [14]: https://github.com/TykTechnologies/tyk-demo/tree/master/deployments/analytics-datadog
-[15]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent#setup
+[15]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=hostagent#setup
 [16]: https://app.datadoghq.com/organization-settings/api-keys
-[17]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent#how-it-works
-[18]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[17]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=hostagent#how-it-works
+[18]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [19]: https://github.com/DataDog/integrations-extras/blob/master/tyk/assets/dashboards/tyk_analytics_canvas.json
 [20]: https://github.com/DataDog/integrations-extras/blob/master/tyk/metadata.csv
 [21]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/tyk/images/datadog-tyk-analytics-dashboard.jpg
-[22]: https://docs.datadoghq.com/help/
-
+[22]: https://docs.datadoghq.com/ja/help/

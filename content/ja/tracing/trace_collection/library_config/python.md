@@ -1,25 +1,25 @@
 ---
-title: Configuring the Python Tracing Library
-kind: documentation
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: "https://github.com/DataDog/dd-trace-py"
-      tag: ソースコード
-      text: Source code
-    - link: "https://ddtrace.readthedocs.io/en/stable/"
-      tag: 外部サイト
-      text: API Docs
-    - link: /tracing/trace_collection/trace_context_propagation/python/
-      tag: Documentation
-      text: Propagating trace context
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources and traces
-    - link: tracing/
-      tag: ドキュメント
-      text: Advanced Usage
+- link: https://github.com/DataDog/dd-trace-py
+  tag: ソースコード
+  text: Source code
+- link: https://ddtrace.readthedocs.io/en/stable/
+  tag: 外部サイト
+  text: API Docs
+- link: /tracing/trace_collection/trace_context_propagation/python/
+  tag: Documentation
+  text: Propagating trace context
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources and traces
+- link: tracing/
+  tag: ドキュメント
+  text: Advanced Usage
+kind: documentation
+title: Configuring the Python Tracing Library
+type: multi-code-lang
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -116,10 +116,10 @@ Enable [connecting logs and trace injection][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
-[3]: /tracing/guide/setting_primary_tags_to_scope/
+[3]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[5]: /tracing/trace_pipeline/ingestion_mechanisms/
-[6]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[13]: /agent/configuration/network/#configure-ports
+[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/python/
+[13]: /ja/agent/configuration/network/#configure-ports

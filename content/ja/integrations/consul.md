@@ -1,81 +1,81 @@
 ---
-"app_id": "consul"
-"app_uuid": "d0b52e9d-6594-4ff5-9b66-800943f75756"
-"assets":
-  "dashboards":
-    "consul": "assets/dashboards/consul_overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": "consul.peers"
-      "metadata_path": "metadata.csv"
-      "prefix": "consul."
-    "process_signatures":
-    - "consul agent"
-    - "consul_agent"
-    - "consul-agent"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "122"
-    "source_type_name": "Consul"
-  "monitors":
-    "consul": "assets/monitors/consul_status.json"
-  "saved_views":
-    "consul_errors": "assets/saved_views/consul_errors.json"
-    "consul_overview": "assets/saved_views/consul_overview.json"
-    "consul_processes": "assets/saved_views/consul_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "configuration & deployment"
-- "containers"
-- "log collection"
-- "network"
-- "notifications"
-- "orchestration"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/consul/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "consul"
-"integration_id": "consul"
-"integration_title": "Consul"
-"integration_version": "2.6.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "consul"
-"public_title": "Consul"
-"short_description": "Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::構成 & デプロイ"
-  - "Category::コンテナ"
-  - "Category::ログの収集"
-  - "Category::ネットワーク"
-  - "Category::Notifications"
-  - "Category::オーケストレーション"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Consul"
+app_id: consul
+app_uuid: d0b52e9d-6594-4ff5-9b66-800943f75756
+assets:
+  dashboards:
+    consul: assets/dashboards/consul_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: consul.peers
+      metadata_path: metadata.csv
+      prefix: consul.
+    process_signatures:
+    - consul agent
+    - consul_agent
+    - consul-agent
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 122
+    source_type_name: Consul
+  monitors:
+    consul: assets/monitors/consul_status.json
+  saved_views:
+    consul_errors: assets/saved_views/consul_errors.json
+    consul_overview: assets/saved_views/consul_overview.json
+    consul_processes: assets/saved_views/consul_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- configuration & deployment
+- containers
+- log collection
+- network
+- notifications
+- orchestration
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/consul/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: consul
+integration_id: consul
+integration_title: Consul
+integration_version: 2.6.1
+is_public: true
+manifest_version: 2.0.0
+name: consul
+public_title: Consul
+short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::構成 & デプロイ
+  - Category::コンテナ
+  - Category::ログの収集
+  - Category::ネットワーク
+  - Category::Notifications
+  - Category::オーケストレーション
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Consul
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -236,12 +236,12 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
-[5]: https://docs.datadoghq.com/developers/dogstatsd/
-[6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
+[5]: https://docs.datadoghq.com/ja/developers/dogstatsd/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -268,8 +268,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | `<LOG_CONFIG>` | `{"source": "consul", "service": "<サービス名>"}` |
 
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -336,11 +336,11 @@ Datadog Agent は、Consul クラスターが新しいリーダーを選出す�
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://www.consul.io/docs/agent/telemetry.html
 [5]: https://www.consul.io/docs/internals/coordinates.html
-[6]: https://docs.datadoghq.com/help/
-[7]: https://docs.datadoghq.com/integrations/guide/hcp-consul
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/integrations/guide/hcp-consul
 [8]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
 [9]: https://engineering.datadoghq.com/consul-at-datadog
 [10]: https://www.datadoghq.com/blog/consul-metrics/

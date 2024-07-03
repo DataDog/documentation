@@ -1,7 +1,8 @@
 ---
-description: Learn about the various assets that need to be included when preparing a Datadog integration.
+description: Learn about the various assets that need to be included when preparing
+  a Datadog integration.
 further_reading:
-- link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md"
+- link: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
   tag: ソースコード
   text: Contributing Guidelines for the Documentation Site
 - link: /developers/integrations/
@@ -134,12 +135,12 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 [1]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#code-substitution
 [2]: https://en.wikipedia.org/wiki/YAML
 [3]: http://yaml-online-parser.appspot.com/
-[4]: https://docs.datadoghq.com/integrations/
+[4]: https://docs.datadoghq.com/ja/integrations/
 [5]: https://www.uuidgenerator.net
-[6]: https://docs.datadoghq.com/metrics/types/#metric-types
-[7]: https://docs.datadoghq.com/metrics/units/#unit-list
-[8]: https://docs.datadoghq.com/getting_started/tagging/
+[6]: https://docs.datadoghq.com/ja/metrics/types/#metric-types
+[7]: https://docs.datadoghq.com/ja/metrics/units/#unit-list
+[8]: https://docs.datadoghq.com/ja/getting_started/tagging/
 [9]: https://app.datadoghq.com/marketplace/
-[10]: https://docs.datadoghq.com/developers/datadog_apps/
-[11]: https://docs.datadoghq.com/developers/integrations/marketplace_offering
+[10]: https://docs.datadoghq.com/ja/developers/datadog_apps/
+[11]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering
 [12]: https://app.datadoghq.com/integrations

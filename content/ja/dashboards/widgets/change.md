@@ -1,9 +1,7 @@
 ---
-title: Change Widget
-widget_type: change
-description: "Graph the change in a value over a chosen time period."
 aliases:
-- /graphing/widgets/change/
+- /ja/graphing/widgets/change/
+description: Graph the change in a value over a chosen time period.
 further_reading:
 - link: /monitors/types/metric/?tab=change
   tag: Documentation
@@ -17,6 +15,8 @@ further_reading:
 - link: /dashboards/graphing_json/request_json/
   tag: Documentation
   text: Request JSON schema
+title: Change Widget
+widget_type: change
 ---
 
 変化グラフは、特定の時間内におけるメトリクスの変動を示します。これは、N 分前の値と現在の値との絶対変化量または相対変化量 (%) を指定のしきい値と比較します。比較されるデータポイントは単一のポイントではなく、メトリクスの定義セクションのパラメーターを使用して計算される値です。詳細については、[メトリクスモニター][6]ドキュメント、および[変化アラートモニターガイド][7]を参照してください。
@@ -61,8 +61,8 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/context-links/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
-[6]: /monitors/types/metric/?tab=change
-[7]: /monitors/types/change-alert/
+[1]: /ja/dashboards/guide/context-links/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/
+[6]: /ja/monitors/types/metric/?tab=change
+[7]: /ja/monitors/types/change-alert/

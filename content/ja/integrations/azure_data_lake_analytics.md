@@ -1,26 +1,26 @@
 ---
-"aliases":
-- /integrations/azure_datalakeanalytics
-"categories":
+aliases:
+- /ja/integrations/azure_datalakeanalytics
+categories:
 - azure
 - cloud
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Data Lake Analytics metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_data_lake_analytics/"
-"draft": false
-"git_integration_title": "azure_data_lake_analytics"
-"has_logo": true
-"integration_id": "azure-datalakeanalytics"
-"integration_title": "Microsoft Azure Data Lake Analytics"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_data_lake_analytics"
-"public_title": "Datadog-Microsoft Azure Data Lake Analytics Integration"
-"short_description": "Track key Azure Data Lake Analytics metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Data Lake Analytics metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
+draft: false
+git_integration_title: azure_data_lake_analytics
+has_logo: true
+integration_id: azure-datalakeanalytics
+integration_title: Microsoft Azure Data Lake Analytics
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_data_lake_analytics
+public_title: Datadog-Microsoft Azure Data Lake Analytics Integration
+short_description: Track key Azure Data Lake Analytics metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -54,7 +54,6 @@ The Azure Data Lake Analytics integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_lake_analytics/azure_data_lake_analytics_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

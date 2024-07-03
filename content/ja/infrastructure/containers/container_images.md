@@ -1,19 +1,20 @@
 ---
-title: Container Images View
-kind: documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
+- link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: Blog
-  text: Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring
+  text: Enhance your troubleshooting workflow with Container Images in Datadog Container
+    Monitoring
 - link: /security/cloud_security_management/vulnerabilities
   tag: Documentation
   text: Cloud Security Management Vulnerabilities
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: /security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers
   tag: Documentation
   text: Setting up container image vulnerabilities
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities/
   tag: Documentation
   text: Troubleshooting Cloud Security Management Vulnerabilities
+kind: documentation
+title: Container Images View
 ---
 
 ## Overview
@@ -83,7 +84,7 @@ To enable container image collection on your [ECS EC2 instances][1], add the fol
 }
 ```
 
-[1]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli#setup
+[1]: https://docs.datadoghq.com/ja/containers/amazon_ecs/?tab=awscli#setup
 
 {{% /tab %}}
 
@@ -96,7 +97,7 @@ container_image:
   enabled: true
 ```
 
-[1]: /containers/amazon_ecs/?tab=awscli#setup
+[1]: /ja/containers/amazon_ecs/?tab=awscli#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -181,7 +182,7 @@ If the Agent fails to extract the SBOM from the container image, increase the Ag
     ...
 }
 ```
-[1]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli#setup
+[1]: https://docs.datadoghq.com/ja/containers/amazon_ecs/?tab=awscli#setup
 
 {{% /tab %}}
 
@@ -196,7 +197,7 @@ sbom:
     enabled: true
 ```
 
-[1]: /containers/amazon_ecs/?tab=awscli#setup
+[1]: /ja/containers/amazon_ecs/?tab=awscli#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -223,11 +224,11 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/container-images
-[2]: /security/cloud_security_management
-[3]: /infrastructure/containers/?tab=docker#setup
-[4]: /integrations/amazon_web_services/
+[2]: /ja/security/cloud_security_management
+[3]: /ja/infrastructure/containers/?tab=docker#setup
+[4]: /ja/integrations/amazon_web_services/
 [5]: https://www.cisa.gov/sbom
-[6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
-[8]: /security/cloud_security_management/vulnerabilities
+[6]: /ja/containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
+[8]: /ja/security/cloud_security_management/vulnerabilities
 [9]: https://app.datadoghq.com/container-images/image-trends
 [10]: https://www.datadoghq.com/pricing/?product=cloud-security-management#products

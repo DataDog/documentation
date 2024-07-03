@@ -1,59 +1,61 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-custom-integration-development"
-"app_uuid": "56b41d1f-1d40-460e-a5ca-167ab4c9432e"
-"assets": {}
-"author":
-  "contact_link": "https://meetings.hubspot.com/ewilliams/rapdev-marketplace"
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-custom-integration-development
+app_uuid: 56b41d1f-1d40-460e-a5ca-167ab4c9432e
+assets: {}
+author:
+  contact_link: https://meetings.hubspot.com/ewilliams/rapdev-marketplace
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_custom_integration"
-"integration_id": "rapdev-custom-integration-development"
-"integration_title": "RapDev Custom  Development"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rapdev_custom_integration"
-"pricing":
-- "includes_assets": true
-  "private_offer_only": true
-  "product_id": rd-custom-integration-development
-  "short_description": Private offer placeholder
-  "unit_price": !!null "null"
-"public_title": "RapDev Custom Integration Development"
-"short_description": "Don't see it? We'll build it! Reach out to RapDev for custom integrations and development services."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_custom_integration
+integration_id: rapdev-custom-integration-development
+integration_title: RapDev Custom  Development
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rapdev_custom_integration
+pricing:
+- includes_assets: true
+  private_offer_only: true
+  product_id: rd-custom-integration-development
+  short_description: Private offer placeholder
+  unit_price: null
+public_title: RapDev Custom Integration Development
+short_description: Don't see it? We'll build it! Reach out to RapDev for custom integrations
+  and development services.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Offering::Professional Service"
-  "configuration": "README.md#Setup"
-  "description": Don't see it? We'll build it! Reach out to RapDev for custom integrations and development services.
-  "media":
-  - "caption": RapDev Custom Integration Development
-    "image_url": images/rapdev-custom-integration-development.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": RapDev Custom Integration Development
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Offering::Professional Service
+  configuration: README.md#Setup
+  description: Don't see it? We'll build it! Reach out to RapDev for custom integrations
+    and development services.
+  media:
+  - caption: RapDev Custom Integration Development
+    image_url: images/rapdev-custom-integration-development.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RapDev Custom Integration Development
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

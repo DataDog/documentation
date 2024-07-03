@@ -1,50 +1,50 @@
 ---
-"app_id": "rum-roku"
-"app_uuid": "0ab4b7a1-f017-4b3c-ab0f-eab5d476f132"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-roku
+app_uuid: 0ab4b7a1-f017-4b3c-ab0f-eab5d476f132
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - モニター
 - network
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_roku/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_roku"
-"integration_id": "rum-roku"
-"integration_title": "Roku"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_roku"
-"public_title": "Roku"
-"short_description": "Monitor Roku channels and generate metrics using Datadog RUM"
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Metrics"
-  - "Category::Network"
-  - "Category::Tracing"
-  "configuration": "README.md#Setup"
-  "description": Monitor Roku channels and generate metrics using Datadog RUM
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": documentation
-    "url": "https://docs.datadoghq.com/real_user_monitoring/roku/"
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/monitor-roku-with-rum/"
-  "support": "README.md#Support"
-  "title": Roku
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_roku/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_roku
+integration_id: rum-roku
+integration_title: Roku
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_roku
+public_title: Roku
+short_description: Monitor Roku channels and generate metrics using Datadog RUM
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Metrics
+  - Category::Network
+  - Category::Tracing
+  configuration: README.md#Setup
+  description: Monitor Roku channels and generate metrics using Datadog RUM
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/roku/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-roku-with-rum/
+  support: README.md#Support
+  title: Roku
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -105,11 +105,10 @@ The Roku integration does not include any service checks.
 - [Monitor your Roku channels with Datadog RUM][8] blog post
 
 [1]: https://app.datadoghq.com/integrations/rum-roku
-[2]: https://docs.datadoghq.com/real_user_monitoring/roku/
-[3]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=rokurum#setup-rum
-[4]: https://docs.datadoghq.com/logs/log_collection/roku/
-[5]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[6]: https://docs.datadoghq.com/real_user_monitoring/roku/data_collected/
-[7]: https://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/roku/
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=rokurum#setup-rum
+[4]: https://docs.datadoghq.com/ja/logs/log_collection/roku/
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/roku/data_collected/
+[7]: https://docs.datadoghq.com/ja/help/
 [8]: https://www.datadoghq.com/blog/monitor-roku-with-rum/
-

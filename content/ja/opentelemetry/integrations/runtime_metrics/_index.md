@@ -1,7 +1,7 @@
 ---
-title: OpenTelemetry Runtime Metrics
 aliases:
-- /opentelemetry/runtime_metrics/
+- /ja/opentelemetry/runtime_metrics/
+title: OpenTelemetry Runtime Metrics
 type: multi-code-lang
 ---
 
@@ -39,6 +39,6 @@ After setup is complete, see your runtime metrics in the a service's details pag
 
 {{< img src="opentelemetry/otel_runtime_metrics_service_page.png" alt="Service page showing OpenTelemetry runtime metrics on the JVM Metrics tab" style="width:100%;" >}}
 
-[1]: /opentelemetry/guide/metrics_mapping/
-[5]: /tracing/metrics/runtime_metrics/
+[1]: /ja/opentelemetry/guide/metrics_mapping/
+[5]: /ja/tracing/metrics/runtime_metrics/
 [7]: https://app.datadoghq.com/dash/integration/256/jvm-metrics

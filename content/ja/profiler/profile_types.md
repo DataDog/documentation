@@ -1,15 +1,15 @@
 ---
-title: Profile Types
 further_reading:
-    - link: profiler/enabling
-      tag: Documentation
-      text: Enable continuous profiler for your application
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
-      tag: ブログ
-      text: Introducing always-on production profiling in Datadog
+- link: profiler/enabling
+  tag: Documentation
+  text: Enable continuous profiler for your application
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
+  tag: ブログ
+  text: Introducing always-on production profiling in Datadog
+title: Profile Types
 ---
 
 
@@ -60,7 +60,7 @@ Lock
 Socket I/O
 : 各メソッドがソケット I/O の読み取りと書き込みに費やした時間。
 
-[1]: /profiler/enabling/java/#requirements
+[1]: /ja/profiler/enabling/java/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -108,7 +108,7 @@ Thrown Exceptions
 _必要なもの: Python 3.7+、POSIX プラットフォーム_
 
 
-[1]: /profiler/enabling/python/#requirements
+[1]: /ja/profiler/enabling/python/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -145,8 +145,8 @@ Goroutines
 
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
-[3]: /profiler/enabling/go#requirements
-[4]: /profiler/guide/solve-memory-leaks
+[3]: /ja/profiler/enabling/go#requirements
+[4]: /ja/profiler/guide/solve-memory-leaks
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -170,7 +170,7 @@ Heap Live Size (alpha, v1.21.1+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Ruby 2.7+_ and [manual enablement][2]
 
-[1]: /profiler/enabling/ruby/#requirements
+[1]: /ja/profiler/enabling/ruby/#requirements
 [2]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.19.0#:~:text=You%20can%20enable%20these%20features%3A
 [3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.21.0
 {{< /programming-lang >}}
@@ -187,7 +187,7 @@ Wall Time
 Heap Live Size
 : 各関数によって割り当てられたヒープメモリのうち、まだガベージコレクションとして処理されていないメモリの量。これは、サービスの全体的なメモリ使用量を調査し、潜在的なメモリリークを特定する際に役立ちます。
 
-[1]: /profiler/enabling/nodejs/#requirements
+[1]: /ja/profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -214,7 +214,7 @@ Live Heap (ベータ版、v2.22+)
 : 割り当てられたオブジェクトのサブセット (クラス名付き) で、メモリ内に残っているもの。<br />
 _必要なもの: .NET 7+_
 
-[1]: /profiler/enabling/dotnet/#requirements
+[1]: /ja/profiler/enabling/dotnet/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -237,7 +237,7 @@ _注: PHP `8.0.0`-`8.1.20` および `8.2.0`-`8.2.7` で JIT が有効になっ�
 Thrown Exceptions (v0.92+)
 : 各メソッドによって発生したキャッチされたまたはされなかった例外の数、およびその種類。
 
-[1]: /profiler/enabling/php/#requirements
+[1]: /ja/profiler/enabling/php/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="ddprof" >}}
 
@@ -252,7 +252,7 @@ Allocations
 Allocated memory
 : プロファイリング期間中 (デフォルト: 59 秒) に各関数が割り当てたヒープメモリの量 (その後に解放された割り当て分も含む)。スタックの割り当ては追跡されません。
 
-[1]: /profiler/enabling/ddprof/
+[1]: /ja/profiler/enabling/ddprof/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -260,4 +260,3 @@ Allocated memory
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-

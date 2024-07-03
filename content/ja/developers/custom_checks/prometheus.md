@@ -1,5 +1,7 @@
 ---
-title: Custom OpenMetrics Check
+aliases:
+- /ja/developers/openmetrics/
+- /ja/developers/prometheus/
 further_reading:
 - link: /agent/kubernetes/prometheus
   tag: Documentation
@@ -10,9 +12,7 @@ further_reading:
 - link: /developers/integrations/
   tag: Documentation
   text: Introduction to Agent-based Integrations
-aliases:
-  - /developers/openmetrics/
-  - /developers/prometheus/
+title: Custom OpenMetrics Check
 ---
 
 ## 概要
@@ -268,13 +268,13 @@ Openmetrics で利用できるすべてのコンフィギュレーションオ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /agent/kubernetes/prometheus/
+[2]: /ja/agent/kubernetes/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2
 [4]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/kong/datadog_checks/kong/check.py#L22-L45
-[5]: /developers/integrations/
+[5]: /ja/developers/integrations/
 [6]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py
 [7]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L65-L104
 [8]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py#L86-L87
-[9]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: https://datadoghq.dev/integrations-core/base/openmetrics/
 [11]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example

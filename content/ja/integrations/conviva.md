@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Monitor Conviva Quality Insights metrics for video streaming platforms."
-"doc_link": "https://docs.datadoghq.com/integrations/conviva/"
-"draft": false
-"git_integration_title": "conviva"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Conviva"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "conviva"
-"public_title": "Datadog-Conviva Integration"
-"short_description": "Collects Conviva Quality Metriclens metrics."
-"team": "web-integrations"
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Monitor Conviva Quality Insights metrics for video streaming platforms.
+doc_link: https://docs.datadoghq.com/integrations/conviva/
+draft: false
+git_integration_title: conviva
+has_logo: true
+integration_id: ''
+integration_title: Conviva
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: conviva
+public_title: Datadog-Conviva Integration
+short_description: Collects Conviva Quality Metriclens metrics.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -74,7 +74,6 @@ Additional helpful documentation, links, and articles:
 
 [1]: https://app.datadoghq.com/integrations/conviva
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/conviva/conviva_metadata.csv
-[3]: https://docs.datadoghq.com/events/
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/events/
+[4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/
-

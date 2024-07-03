@@ -1,24 +1,26 @@
 ---
-"categories":
+categories:
 - cloud
 - incidents
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "This integration allows you to create Salesforce Incidents from triggered alerts in Datadog, and update existing incidents with new information as it arises."
-"doc_link": "https://docs.datadoghq.com/integrations/salesforce_incidents/"
-"draft": false
-"git_integration_title": "salesforce_incidents"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Salesforce Incidents"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "salesforce_incidents"
-"public_title": "Datadog-Salesforce Incidents Integration"
-"short_description": "Create and manage Salesforce Service Cloud Incidents from Datadog alerts."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: This integration allows you to create Salesforce Incidents from triggered
+  alerts in Datadog, and update existing incidents with new information as it arises.
+doc_link: https://docs.datadoghq.com/integrations/salesforce_incidents/
+draft: false
+git_integration_title: salesforce_incidents
+has_logo: true
+integration_id: ''
+integration_title: Salesforce Incidents
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: salesforce_incidents
+public_title: Datadog-Salesforce Incidents Integration
+short_description: Create and manage Salesforce Service Cloud Incidents from Datadog
+  alerts.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -93,7 +95,6 @@ The Salesforce Incidents integration does not include any service checks.
 Need help? Contact [Datadog support][4].
 
 [1]: https://app.datadoghq.com/integrations/salesforce-incidents
-[2]: https://docs.datadoghq.com/api/latest/ip-ranges/
+[2]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
 [3]: https://appexchange.salesforce.com/
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

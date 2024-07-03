@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - cloud
 - aws
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS Backup metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_backup/"
-"draft": false
-"git_integration_title": "amazon_backup"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Backup"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_backup"
-"public_title": "Datadog-AWS Backup Integration"
-"short_description": "Track key AWS Backup metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS Backup metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_backup/
+draft: false
+git_integration_title: amazon_backup
+has_logo: true
+integration_id: ''
+integration_title: AWS Backup
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_backup
+public_title: Datadog-AWS Backup Integration
+short_description: Track key AWS Backup metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -58,9 +58,8 @@ The AWS Backup integration does not include any service checks.
 
 Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-backup
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_backup/amazon_backup_metadata.csv
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

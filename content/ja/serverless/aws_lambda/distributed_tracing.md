@@ -1,32 +1,32 @@
 ---
-title: Distributed Tracing with AWS Lambda Serverless Applications
-kind: documentation
 aliases:
-  - /tracing/serverless_functions
-  - /tracing/setup_overview/serverless_functions/
-  - /serverless/troubleshooting/serverless_apm_metrics/
-  - /serverless/distributed_tracing/serverless_trace_merging
-  - /serverless/distributed_tracing/serverless_trace_propagation
-  - /serverless/distributed_tracing
+- /ja/tracing/serverless_functions
+- /ja/tracing/setup_overview/serverless_functions/
+- /ja/serverless/troubleshooting/serverless_apm_metrics/
+- /ja/serverless/distributed_tracing/serverless_trace_merging
+- /ja/serverless/distributed_tracing/serverless_trace_propagation
+- /ja/serverless/distributed_tracing
 further_reading:
 - link: /tracing/
   tag: Documentation
   text: Explore Datadog APM
-- link: "/tracing/trace_search_and_analytics/#live-search-for-15-minutes"
+- link: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
   tag: Documentation
   text: Live Search
-- link: "https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/"
+- link: https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/
   tag: Blog
   text: Real-time distributed tracing for Go and Java Lambda Functions
-- link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
+- link: https://www.datadoghq.com/blog/datadog-serverless-view/
   tag: Blog
   text: Monitor your serverless stack in the Serverless view
-- link: "https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/"
+- link: https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/
   tag: Blog
   text: Datadog Serverless Monitoring for AWS fully managed services
-- link: "https://www.datadoghq.com/blog/dotnet-lambda-functions-distributed-tracing/"
+- link: https://www.datadoghq.com/blog/dotnet-lambda-functions-distributed-tracing/
   tag: Blog
   text: Real-time distributed tracing for .NET Lambda functions
+kind: documentation
+title: Distributed Tracing with AWS Lambda Serverless Applications
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions" style="width:100%;">}}
@@ -332,30 +332,30 @@ If you are already tracing your serverless application with X-Ray and want to co
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/distributed_tracing#distributed-tracing-with-datadog-apm
-[2]: /integrations/amazon_xray/#overview
-[3]: /tracing/trace_collection/compatibility/python
-[4]: /tracing/trace_collection/compatibility/nodejs
-[5]: /serverless/installation/
-[6]: /serverless/distributed_tracing/#trace-merging
-[7]: https://docs.datadoghq.com/help/
-[8]: /tracing/trace_collection/compatibility/ruby
-[9]: /tracing/trace_collection/compatibility/go
-[10]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[11]: /tracing/trace_collection/compatibility/java
+[1]: /ja/serverless/distributed_tracing#distributed-tracing-with-datadog-apm
+[2]: /ja/integrations/amazon_xray/#overview
+[3]: /ja/tracing/trace_collection/compatibility/python
+[4]: /ja/tracing/trace_collection/compatibility/nodejs
+[5]: /ja/serverless/installation/
+[6]: /ja/serverless/distributed_tracing/#trace-merging
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: /ja/tracing/trace_collection/compatibility/ruby
+[9]: /ja/tracing/trace_collection/compatibility/go
+[10]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
+[11]: /ja/tracing/trace_collection/compatibility/java
 [12]: https://datadoghq.slack.com/archives/CFDPB83M4
 [13]: https://chat.datadoghq.com/
-[14]: /tracing/trace_collection/compatibility/dotnet-core
-[15]: /serverless/azure_app_services
-[16]: /tracing/trace_collection/
-[17]: /serverless/distributed_tracing/
+[14]: /ja/tracing/trace_collection/compatibility/dotnet-core
+[15]: /ja/serverless/azure_app_services
+[16]: /ja/tracing/trace_collection/
+[17]: /ja/serverless/distributed_tracing/
 [18]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
 [19]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[20]: /tracing/send_traces/
-[21]: /serverless/installation
-[22]: /serverless/distributed_tracing
-[23]: /serverless/datadog_lambda_library
-[24]: /serverless/distributed_tracing#runtime-recommendations
-[25]: /tracing/trace_collection/custom_instrumentation/
-[26]: /serverless/guide/handler_wrapper/
-[27]: /profiler/
+[20]: /ja/tracing/send_traces/
+[21]: /ja/serverless/installation
+[22]: /ja/serverless/distributed_tracing
+[23]: /ja/serverless/datadog_lambda_library
+[24]: /ja/serverless/distributed_tracing#runtime-recommendations
+[25]: /ja/tracing/trace_collection/custom_instrumentation/
+[26]: /ja/serverless/guide/handler_wrapper/
+[27]: /ja/profiler/

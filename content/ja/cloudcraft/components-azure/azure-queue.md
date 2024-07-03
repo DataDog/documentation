@@ -1,5 +1,5 @@
 ---
-title: "Azure Queue Component"
+title: Azure Queue Component
 ---
 
 ## 概要

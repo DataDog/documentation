@@ -1,5 +1,7 @@
 ---
-title: Advanced Log Collection Configurations
+algolia:
+  tags:
+  - advanced log filter
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: /logs/guide/how-to-set-up-only-logs/
@@ -20,11 +22,10 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits*
-- link: "/glossary/#tail"
+- link: /glossary/#tail
   tag: Glossary
   text: Glossary entry for "tail"
-algolia:
-  tags: [advanced log filter]
+title: Advanced Log Collection Configurations
 ---
 
 After you set up [log collection][1], you can customize your collection configuration:
@@ -710,9 +711,9 @@ Datadog Agent によって収集されるすべてのログが、グローバル
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: /agent/logs/
+[1]: /ja/agent/logs/
 [2]: https://golang.org/pkg/regexp/syntax/
 [3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-[4]: /agent/faq/commonly-used-log-processing-rules
-[5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[6]: /agent/configuration/agent-commands/#agent-information
+[4]: /ja/agent/faq/commonly-used-log-processing-rules
+[5]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[6]: /ja/agent/configuration/agent-commands/#agent-information

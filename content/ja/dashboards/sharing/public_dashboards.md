@@ -1,11 +1,10 @@
 ---
-title: 公開ダッシュボード
 aliases:
-    - /graphing/faq/is-there-a-way-to-share-graphs
-    - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
-    - /graphing/dashboards/shared_graph/
+- /ja/graphing/faq/is-there-a-way-to-share-graphs
+- /ja/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
+- /ja/graphing/dashboards/shared_graph/
 further_reading:
-- link: "https://www.datadoghq.com/blog/dashboard-sharing/"
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
   tag: ブログ
   text: ダッシュボードを組織外の人と安全に共有する
 - link: /dashboards/
@@ -17,6 +16,7 @@ further_reading:
 - link: /dashboards/widgets/
   tag: ドキュメント
   text: ダッシュボードのウィジェットについて
+title: 公開ダッシュボード
 ---
 
 ## 概要
@@ -72,6 +72,6 @@ If a user is removed from the dashboard share list, access is removed.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#refresh-rate
-[2]: /dashboards/widgets/#global-time-selector
+[1]: /ja/dashboards/#refresh-rate
+[2]: /ja/dashboards/widgets/#global-time-selector
 [3]: https://app.datadoghq.com/dashboard/lists

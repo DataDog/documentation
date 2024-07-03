@@ -1,29 +1,30 @@
 ---
-title: Adobe Experience Manager
-name: adobe_experience_manager
-custom_kind: インテグレーション
-description: 'Collect Adobe Experience Manager logs to track errors, request response time, and track badly performing web pages.'
-short_description: 'Collect logs to track errors, request response time, etc.'
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md"]
-categories:
-    - log collection
-doc_link: /integrations/adobe_experience_manager/
 aliases:
-    - /logs/log_collection/adobe_experience_manager
+- /ja/logs/log_collection/adobe_experience_manager
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md
+description: Collect Adobe Experience Manager logs to track errors, request response
+  time, and track badly performing web pages.
+doc_link: /integrations/adobe_experience_manager/
+further_reading:
+- link: logs/
+  tag: Documentation
+  text: Log Management
 has_logo: true
+integration_id: adobe
 integration_title: Adobe Experience Manager
 is_public: true
+name: adobe_experience_manager
 public_title: Datadog-Adobe Experience Manager
+short_description: Collect logs to track errors, request response time, etc.
 supported_os:
-    - linux
-    - mac_os
-    - windows
-further_reading:
-    - link: logs/
-      tag: Documentation
-      text: Log Management
-integration_id: "adobe"
+- linux
+- mac_os
+- windows
+title: Adobe Experience Manager
 ---
 
 {{< site-region region="us3,ap1" >}}
@@ -73,6 +74,6 @@ Need help? Contact [Datadog support][4].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: /help/
+[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[4]: /ja/help/

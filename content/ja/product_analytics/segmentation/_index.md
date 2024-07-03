@@ -1,11 +1,11 @@
 ---
-title: Segmentation
-kind: documentation
 description: Analyze and understand specific groups or segments of your user base.
 further_reading:
 - link: /product_analytics/
   tag: ドキュメント
   text: 製品分析
+kind: documentation
+title: Segmentation
 ---
 
 ## 概要
@@ -60,4 +60,4 @@ You can filter the data in the Analytics Explorer to reflect a selected set of u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/segments
-[2]: /integrations/guide/reference-tables/?tab=manualupload#validation-rules
+[2]: /ja/integrations/guide/reference-tables/?tab=manualupload#validation-rules

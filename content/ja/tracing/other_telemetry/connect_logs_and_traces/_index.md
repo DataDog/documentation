@@ -1,13 +1,14 @@
 ---
-title: Correlate Logs and Traces
-kind: documentation
-type: multi-code-lang
-description: 'Connect your logs and traces to correlate them in Datadog.'
-aliases:
-    - /tracing/advanced/connect_logs_and_traces/
-    - /tracing/connect_logs_and_traces/
 algolia:
-  tags: [logs and traces]
+  tags:
+  - logs and traces
+aliases:
+- /ja/tracing/advanced/connect_logs_and_traces/
+- /ja/tracing/connect_logs_and_traces/
+description: Connect your logs and traces to correlate them in Datadog.
+kind: documentation
+title: Correlate Logs and Traces
+type: multi-code-lang
 ---
 
 {{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="Logs in Traces" style="width:100%;">}}
@@ -22,6 +23,6 @@ It is recommended to configure your application's tracer with `DD_ENV`, `DD_SERV
 
 {{< partial name="apm/apm-connect-logs-and-traces.html" >}}
 
-[1]: /tracing/glossary/#trace
-[2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/logs/#enabling-log-collection-from-integrations
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/getting_started/tagging/unified_service_tagging
+[3]: /ja/agent/logs/#enabling-log-collection-from-integrations

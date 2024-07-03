@@ -1,58 +1,60 @@
 ---
-"app_id": "amazon-sqs"
-"app_uuid": "3a036cf4-b953-441a-ad13-a99f2b8a684e"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "aws.sqs.sent_message_size"
-      "metadata_path": "metadata.csv"
-      "prefix": "aws.sqs."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "102"
-    "source_type_name": "Amazon SQS"
-  "monitors":
-    "sqs_message_processing_time": "assets/monitors/sqs_message_processing_time.json"
-    "sqs_message_queue_anomaly": "assets/monitors/sqs_message_queue_anomaly.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "metrics"
-- "cloud"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "amazon_sqs"
-"integration_id": "amazon-sqs"
-"integration_title": "Amazon SQS"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "amazon_sqs"
-"public_title": "Amazon SQS"
-"short_description": "Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": "Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Amazon SQS"
+app_id: amazon-sqs
+app_uuid: 3a036cf4-b953-441a-ad13-a99f2b8a684e
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.sqs.sent_message_size
+      metadata_path: metadata.csv
+      prefix: aws.sqs.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 102
+    source_type_name: Amazon SQS
+  monitors:
+    sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json
+    sqs_message_queue_anomaly: assets/monitors/sqs_message_queue_anomaly.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- metrics
+- cloud
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: amazon_sqs
+integration_id: amazon-sqs
+integration_title: Amazon SQS
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: amazon_sqs
+public_title: Amazon SQS
+short_description: Amazon Simple Queue Service (SQS) is a fast, reliable, scalable,
+  fully managed message queuing service.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully
+    managed message queuing service.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon SQS
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -127,16 +129,15 @@ The Amazon SQS integration provides ready-to-use monitoring capabilities to moni
 
 Need help? Contact [Datadog support][12].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-sqs
 [6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [8]: https://app.datadoghq.com/logs
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
 [10]: https://app.datadoghq.com/dash/integration/6/aws-sqs
 [11]: https://app.datadoghq.com/monitors/recommended
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

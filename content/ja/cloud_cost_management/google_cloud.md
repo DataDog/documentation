@@ -1,5 +1,4 @@
 ---
-title: Google Cloud
 disable_toc: false
 further_reading:
 - link: /cloud_cost_management/
@@ -11,6 +10,7 @@ further_reading:
 - link: /cloud_cost_management/azure
   tag: Documentation
   text: Gain insights into your Azure bill
+title: Google Cloud
 ---
 
 {{< site-region region="gov" >}}
@@ -190,8 +190,8 @@ The following out-of-the-box tags are available:
 [9]: https://cloud.google.com/bigquery/docs/exporting-data#data-locations
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
-[12]: /integrations/google_cloud_platform/
-[13]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
-[14]: /cloud_cost_management/container_cost_allocation/
-[15]: /cloud_cost_management/google_cloud/#create-or-select-a-google-cloud-storage-bucket
+[12]: /ja/integrations/google_cloud_platform/
+[13]: /ja/cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
+[14]: /ja/cloud_cost_management/container_cost_allocation/
+[15]: /ja/cloud_cost_management/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage

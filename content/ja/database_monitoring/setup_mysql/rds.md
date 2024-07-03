@@ -1,11 +1,11 @@
 ---
-title: Setting Up Database Monitoring for Amazon RDS managed MySQL
-description: Install and configure Database Monitoring for MySQL managed on Amazon RDS.
+description: Install and configure Database Monitoring for MySQL managed on Amazon
+  RDS.
 further_reading:
 - link: /integrations/mysql/
   tag: Documentation
   text: Basic MySQL Integration
-
+title: Setting Up Database Monitoring for Amazon RDS managed MySQL
 ---
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
@@ -189,9 +189,9 @@ instances:
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
 
-[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -236,9 +236,9 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][2]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][3]でパスワードを環境変数として渡す方法をご確認ください。
 
 
-[1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/configuration/secrets-management
-[3]: /agent/faq/template_variables/
+[1]: /ja/agent/docker/integrations/?tab=docker
+[2]: /ja/agent/configuration/secrets-management
+[3]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -279,8 +279,8 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### マウントされたファイルで構成する
 
@@ -335,10 +335,10 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
+[1]: /ja/agent/cluster_agent
+[2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/configuration/secrets-management
+[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -361,13 +361,13 @@ DBM でデータベースのテレメトリーとともに CPU などの AWS か
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /database_monitoring/data_collected/#sensitive-information
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
+[2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest
-[6]: /agent/configuration/agent-commands/#agent-status-and-information
+[6]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
-[8]: /integrations/amazon_rds
-[9]: /database_monitoring/troubleshooting/?tab=mysql
+[8]: /ja/integrations/amazon_rds
+[9]: /ja/database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services

@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - cloud
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Salesforce Marketing Cloud"
-"doc_link": "https://docs.datadoghq.com/integrations/salesforce_marketing_cloud/"
-"draft": false
-"git_integration_title": "salesforce_marketing_cloud"
-"has_logo": false
-"integration_id": ""
-"integration_title": "Salesforce Marketing Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "salesforce_marketing_cloud"
-"public_title": "Salesforce Marketing Cloud"
-"short_description": "Collects logs from Salesforce Marketing Cloud."
-"team": "web-integrations"
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Salesforce Marketing Cloud
+doc_link: https://docs.datadoghq.com/integrations/salesforce_marketing_cloud/
+draft: false
+git_integration_title: salesforce_marketing_cloud
+has_logo: false
+integration_id: ''
+integration_title: Salesforce Marketing Cloud
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: salesforce_marketing_cloud
+public_title: Salesforce Marketing Cloud
+short_description: Collects logs from Salesforce Marketing Cloud.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -79,6 +79,5 @@ The Salesforce Marketing Cloud integration does not include any service checks.
 
 Need help? Contact [Datadog support][2].
 
-[1]: https://docs.datadoghq.com/logs/
-[2]: https://docs.datadoghq.com/help/
-
+[1]: https://docs.datadoghq.com/ja/logs/
+[2]: https://docs.datadoghq.com/ja/help/

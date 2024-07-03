@@ -1,13 +1,13 @@
 ---
-title: Monitor Authentication Logs for Security Threats
 aliases:
-  - /security_monitoring/guide/monitor-authentication-logs-for-security-threats/
-  - /security_platform/guide/monitor-authentication-logs-for-security-threats/
-  - /security/guide/monitor-authentication-logs-for-security-threats/
+- /ja/security_monitoring/guide/monitor-authentication-logs-for-security-threats/
+- /ja/security_platform/guide/monitor-authentication-logs-for-security-threats/
+- /ja/security/guide/monitor-authentication-logs-for-security-threats/
 further_reading:
-- link: "https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/"
+- link: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
   tag: Blog
   text: Learn more about monitoring authentication logs
+title: Monitor Authentication Logs for Security Threats
 ---
 
 ## 概要
@@ -104,23 +104,23 @@ Datadog では、[すべてのログ][18]を取り込み分析し、環境全体
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_siem/
-[2]: /logs/log_collection/?tab=application#application-log-collection
-[3]: /logs/log_configuration/processors/#grok-parser
+[1]: /ja/cloud_siem/
+[2]: /ja/logs/log_collection/?tab=application#application-log-collection
+[3]: /ja/logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
-[5]: /logs/log_configuration/attributes_naming_convention
-[6]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
-[7]: /logs/log_configuration/attributes_naming_convention/#events
-[8]: /logs/log_configuration/attributes_naming_convention/#web-access
+[5]: /ja/logs/log_configuration/attributes_naming_convention
+[6]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[7]: /ja/logs/log_configuration/attributes_naming_convention/#events
+[8]: /ja/logs/log_configuration/attributes_naming_convention/#web-access
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=credential%20stuffing%20attack&sort=rule
-[12]: /cloud_siem/default_rules/
-[13]: /cloud_siem/explorer
+[12]: /ja/cloud_siem/default_rules/
+[13]: /ja/cloud_siem/explorer
 [14]: https://app.datadoghq.com/notebook/credentialstuffingrunbook
-[15]: /notebooks/#commenting
+[15]: /ja/notebooks/#commenting
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation
 [17]: https://app.datadoghq.com/screen/integration/security-monitoring-user-investigation
 [18]: https://www.datadoghq.com/blog/logging-without-limits/
-[19]: /logs/log_configuration/indexes/#exclusion-filters
+[19]: /ja/logs/log_configuration/indexes/#exclusion-filters
 [20]: https://www.datadoghq.com/blog/efficient-log-rehydration-with-datadog/

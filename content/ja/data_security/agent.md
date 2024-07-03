@@ -1,12 +1,12 @@
 ---
-title: Agent Data Security
-description: "Datadog Agent Security measures"
 aliases:
-    - /agent/security/
+- /ja/agent/security/
+description: Datadog Agent Security measures
 further_reading:
 - link: /data_security/
   tag: Documentation
   text: Review the main categories of data submitted to Datadog
+title: Agent Data Security
 ---
 
 <div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
@@ -18,10 +18,12 @@ further_reading:
 Agent の公式リポジトリおよびバイナリパッケージは署名されています。次の公開鍵のいずれかに対して署名を確認して、ディストリビューションチャンネルを確認します。
 
 - Linux DEB パッケージとリポジトリメタデータ:
+  - [D18886567EABAD8B2D2526900D826EB906462314][22]
   - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
 - Linux RPM パッケージとリポジトリメタデータ:
+  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][21]
   - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
@@ -90,23 +92,25 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /api/
+[1]: /ja/agent/
+[2]: /ja/api/
 [3]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
 [4]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 [5]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-[7]: /agent/faq/network/
-[8]: /agent/configuration/proxy/
-[9]: /agent/troubleshooting/
+[7]: /ja/agent/faq/network/
+[8]: /ja/agent/configuration/proxy/
+[9]: /ja/agent/troubleshooting/
 [10]: https://coreos.com/clair
 [11]: https://snyk.io
 [12]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides
 [13]: https://access.redhat.com/containers
 [14]: mailto:security@datadoghq.com
 [15]: https://www.datadoghq.com/8869756E.asc.txt
-[16]: /agent/faq/windows-agent-ddagent-user/
+[16]: /ja/agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[18]: /agent/configuration/secrets-management/
+[18]: /ja/agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[21]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+[22]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public

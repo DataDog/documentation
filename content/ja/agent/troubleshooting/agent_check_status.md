@@ -1,5 +1,4 @@
 ---
-title: Agent Check Status
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: ドキュメント
@@ -7,6 +6,7 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: ドキュメント
   text: Send an Agent Flare
+title: Agent Check Status
 ---
 
 特定の Agent チェックで問題が発生している場合は、OS で次のコマンドを使用してトラブルシューティング情報を取得してください。
@@ -142,6 +142,6 @@ sudo journalctl -u dd-agent.service
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/
-[2]: /agent/troubleshooting/send_a_flare/
+[1]: /ja/integrations/
+[2]: /ja/agent/troubleshooting/send_a_flare/
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

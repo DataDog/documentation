@@ -1,11 +1,12 @@
 ---
-title: Correlate Database Monitoring and Traces
 aliases:
-- /database_monitoring/guide/connect_dbm_and_apm/
+- /ja/database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
-  - link: "https://www.datadoghq.com/blog/link-dbm-and-apm/"
-    tag: Blog
-    text: Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance
+- link: https://www.datadoghq.com/blog/link-dbm-and-apm/
+  tag: Blog
+  text: Seamlessly correlate DBM and APM telemetry to understand end-to-end query
+    performance
+title: Correlate Database Monitoring and Traces
 ---
 
 このガイドは、[データベースモニタリング][1]を構成し、[APM][2] を使用していることを前提にしています。APM と DBM を接続すると、APM のトレース識別子が DBM のデータ収集に挿入され、これら 2 つのデータソースを相関させることができます。これにより、APM 製品ではデータベース情報を、DBM 製品では APM データを表示する製品機能が実現します。
@@ -187,8 +188,8 @@ public class Application {
 
 **注**: プリペアドステートメントは `full` モードではサポートされていません。プリペアドステートメントを使用するすべての JDBC API 呼び出しは自動的に `service` モードにダウングレードされます。ほとんどの Java SQL ライブラリはデフォルトでプリペアドステートメントを使用するため、**ほとんどの** Java アプリケーションは `service` モードしか使用できません。
 
-[1]: /tracing/trace_collection/dd_libraries/java/
-[2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
+[1]: /ja/tracing/trace_collection/dd_libraries/java/
+[2]: /ja/tracing/trace_collection/compatibility/java/#data-store-compatibility
 
 {{% /tab %}}
 
@@ -235,8 +236,8 @@ client.query("SELECT 1;")
 ```
 
 [1]: https://github.com/dataDog/dd-trace-rb
-[2]: /tracing/trace_collection/dd_libraries/ruby/#mysql2
-[3]: /tracing/trace_collection/dd_libraries/ruby/#postgres
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby/#mysql2
+[3]: /ja/tracing/trace_collection/dd_libraries/ruby/#postgres
 
 {{% /tab %}}
 
@@ -295,8 +296,8 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
    - Postgres および MySQL の場合: `DD_DBM_PROPAGATION_MODE=full`
    - SQL Server の場合: `DD_DBM_PROPAGATION_MODE=service`
 
-[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
-[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
 
 {{% /tab %}}
 
@@ -313,7 +314,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
    - `DD_DBM_PROPAGATION_MODE=full`
 
-[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/php?tab=containers
 
 {{% /tab %}}
 
@@ -416,8 +417,8 @@ On the APM page for a given service, view the direct downstream database depende
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/#getting-started
-[2]: /tracing/
+[1]: /ja/database_monitoring/#getting-started
+[2]: /ja/tracing/
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx

@@ -1,24 +1,25 @@
 ---
-title: Infrastructure
-kind: documentation
 aliases:
-  - /graphing/infrastructure/
-further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring"
-    tag: Release Notes
-    text: Check out the latest Datadog Infrastructure Monitoring releases! (App login required).
-  - link: "https://dtdg.co/fe"
-    tag: Foundation Enablement
-    text: Join an interactive session to power up your Infrastructure monitoring
+- /ja/graphing/infrastructure/
 cascade:
 - _target:
     path: /infrastructure/resource_catalog/aws_iam_user.md
   aliases:
-    - /security/cspm/custom_rules/aws_iam_user/
+  - /security/cspm/custom_rules/aws_iam_user/
 - _target:
     path: /infrastructure/**/*
   algolia:
     rank: 70
+further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring
+  tag: Release Notes
+  text: Check out the latest Datadog Infrastructure Monitoring releases! (App login
+    required).
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to power up your Infrastructure monitoring
+kind: documentation
+title: Infrastructure
 ---
 
 {{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}

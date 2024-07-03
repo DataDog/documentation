@@ -1,76 +1,76 @@
 ---
-"app_id": "wayfinder"
-"app_uuid": "a68bad83-ba55-4350-a913-2f98bb667bad"
-"assets":
-  "dashboards":
-    "Wayfinder": assets/dashboards/wayfinder_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": wayfinder.workqueue.depth
-      "metadata_path": metadata.csv
-      "prefix": wayfinder.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10370"
-    "source_type_name": wayfinder
-  "logs": {}
-"author":
-  "homepage": "https://www.appvia.io/product/"
-  "name": Appvia
-  "sales_email": info@appvia.io
-  "support_email": support@appvia.io
-"categories":
+app_id: wayfinder
+app_uuid: a68bad83-ba55-4350-a913-2f98bb667bad
+assets:
+  dashboards:
+    Wayfinder: assets/dashboards/wayfinder_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: wayfinder.workqueue.depth
+      metadata_path: metadata.csv
+      prefix: wayfinder.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10370
+    source_type_name: wayfinder
+  logs: {}
+author:
+  homepage: https://www.appvia.io/product/
+  name: Appvia
+  sales_email: info@appvia.io
+  support_email: support@appvia.io
+categories:
 - containers
 - developer tools
 - kubernetes
 - モニター
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/wayfinder/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "wayfinder"
-"integration_id": "wayfinder"
-"integration_title": "Wayfinder"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "wayfinder"
-"public_title": "Wayfinder"
-"short_description": "Send Wayfinder metrics to Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/wayfinder/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: wayfinder
+integration_id: wayfinder
+integration_title: Wayfinder
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: wayfinder
+public_title: Wayfinder
+short_description: Send Wayfinder metrics to Datadog
+supported_os:
 - linux
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Developer Tools"
-  - "Category::Kubernetes"
-  - "Category::Metrics"
-  - "Category::Orchestration"
-  - "Submitted Data Type::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Send Wayfinder metrics to Datadog
-  "media":
-  - "caption": Wayfinder Sample Datadog Dashboard
-    "image_url": images/wayfinder-datadog-dash.png
-    "media_type": image
-  - "caption": Wayfinder UI
-    "image_url": images/wayfinder-ui.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Wayfinder
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Developer Tools
+  - Category::Kubernetes
+  - Category::Metrics
+  - Category::Orchestration
+  - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Send Wayfinder metrics to Datadog
+  media:
+  - caption: Wayfinder Sample Datadog Dashboard
+    image_url: images/wayfinder-datadog-dash.png
+    media_type: image
+  - caption: Wayfinder UI
+    image_url: images/wayfinder-ui.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Wayfinder
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -199,14 +199,13 @@ Need help? Contact [Datadog support][2].
 [4]:
     https://github.com/DataDog/integrations-extras/blob/master/wayfinder/datadog_checks/wayfinder/data/conf.yaml.example
 [5]:
-    https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+    https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]:
-    https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+    https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]:
     https://github.com/DataDog/integrations-extras/blob/master/wayfinder/metadata.csv
 [8]:
     https://github.com/DataDog/integrations-extras/blob/master/wayfinder/assets/service_checks.json
 
 [1]: https://www.appvia.io/product/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/

@@ -1,25 +1,25 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS Elemental MediaStore metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_mediastore/"
-"draft": false
-"git_integration_title": "amazon_mediastore"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Elemental MediaStore"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_mediastore"
-"public_title": "Datadog-AWS Elemental MediaStore Integration"
-"short_description": "Track key AWS Elemental MediaStore metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS Elemental MediaStore metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_mediastore/
+draft: false
+git_integration_title: amazon_mediastore
+has_logo: true
+integration_id: ''
+integration_title: AWS Elemental MediaStore
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_mediastore
+public_title: Datadog-AWS Elemental MediaStore Integration
+short_description: Track key AWS Elemental MediaStore metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -59,9 +59,8 @@ The AWS Elemental MediaStore integration does not include any service checks.
 
 Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-mediastore
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediastore/amazon_mediastore_metadata.csv
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

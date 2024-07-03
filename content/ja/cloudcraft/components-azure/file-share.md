@@ -1,5 +1,5 @@
 ---
-title: "File share Component"
+title: File share Component
 ---
 
 ## 概要

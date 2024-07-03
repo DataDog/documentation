@@ -1,74 +1,74 @@
 ---
-"app_id": "karpenter"
-"app_uuid": "1a063da6-9cd9-4302-a5de-e76d576f2637"
-"assets":
-  "dashboards":
-    "Karpenter Overview": assets/dashboards/karpenter_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": karpenter.go_goroutines
-      "metadata_path": metadata.csv
-      "prefix": karpenter.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10437"
-    "source_type_name": Karpenter
-  "monitors":
-    "pod states": assets/monitors/pod_state.json
-  "saved_views":
-    "Karpenter Error Logs": assets/saved_views/karpenter_error_logs.json
-    "Karpenter Overview": assets/saved_views/karpenter_overview.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: karpenter
+app_uuid: 1a063da6-9cd9-4302-a5de-e76d576f2637
+assets:
+  dashboards:
+    Karpenter Overview: assets/dashboards/karpenter_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: karpenter.go_goroutines
+      metadata_path: metadata.csv
+      prefix: karpenter.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10437
+    source_type_name: Karpenter
+  monitors:
+    pod states: assets/monitors/pod_state.json
+  saved_views:
+    Karpenter Error Logs: assets/saved_views/karpenter_error_logs.json
+    Karpenter Overview: assets/saved_views/karpenter_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - モニター
 - kubernetes
 - log collection
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/karpenter/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "karpenter"
-"integration_id": "karpenter"
-"integration_title": "Karpenter"
-"integration_version": "1.4.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "karpenter"
-"public_title": "Karpenter"
-"short_description": "Monitor the health and performance of Karpenter"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/karpenter/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: karpenter
+integration_id: karpenter
+integration_title: Karpenter
+integration_version: 1.4.0
+is_public: true
+manifest_version: 2.0.0
+name: karpenter
+public_title: Karpenter
+short_description: Monitor the health and performance of Karpenter
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Metrics"
-  - "Category::Kubernetes"
-  - "Category::Log Collection"
-  - "Category::Provisioning"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of Karpenter
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Karpenter
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Metrics
+  - Category::Kubernetes
+  - Category::Log Collection
+  - Category::Provisioning
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor the health and performance of Karpenter
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Karpenter
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -167,14 +167,13 @@ The Karpenter integration does not include any events.
 
 [1]: https://karpenter.sh/
 [2]: https://karpenter.sh/docs/reference/metrics/
-[3]: https://docs.datadoghq.com/containers/kubernetes/integrations/
+[3]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: https://docs.datadoghq.com/integrations/openmetrics/
+[5]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [6]: https://github.com/DataDog/integrations-core/blob/master/karpenter/datadog_checks/karpenter/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[8]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/karpenter/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/karpenter/assets/service_checks.json
-[11]: https://docs.datadoghq.com/help/
+[11]: https://docs.datadoghq.com/ja/help/
 [12]: https://www.datadoghq.com/blog/container-native-integrations/#autoscaling-and-resource-utilization-with-karpenter
-

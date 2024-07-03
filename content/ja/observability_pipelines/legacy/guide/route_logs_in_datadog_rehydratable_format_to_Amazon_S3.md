@@ -1,18 +1,18 @@
 ---
-title: (LEGACY) Route Logs in Datadog-Rehydratable Format to Amazon S3
-disable_toc: false
 aliases:
-  - /observability_pipelines/guide/route_logs_in_datadog_rehydratable_format_to_Amazon_S3/
+- /ja/observability_pipelines/guide/route_logs_in_datadog_rehydratable_format_to_Amazon_S3/
+disable_toc: false
 further_reading:
-  - link: /observability_pipelines/legacy/working_with_data/
-    tag: Documentation
-    text: Working with data in Observability Pipelines
-  - link: /logs/log_configuration/archives/
-    tag: Documentation
-    text: Learn more about Log Archives
-  - link: /logs/log_configuration/rehydrating/
-    tag: Documentation
-    text: Learn more about rehydrating log archives
+- link: /observability_pipelines/legacy/working_with_data/
+  tag: Documentation
+  text: Working with data in Observability Pipelines
+- link: /logs/log_configuration/archives/
+  tag: Documentation
+  text: Learn more about Log Archives
+- link: /logs/log_configuration/rehydrating/
+  tag: Documentation
+  text: Learn more about rehydrating log archives
+title: (LEGACY) Route Logs in Datadog-Rehydratable Format to Amazon S3
 ---
 
 <div class="alert alert-warning">The Observability Pipelines Datadog Archives destination is in beta.</div>
@@ -289,13 +289,13 @@ See [Rehydrating from Archives][10] for instructions on how to rehydrate your ar
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/archives/
+[1]: /ja/logs/log_configuration/archives/
 [2]: https://s3.console.aws.amazon.com/s3/home
 [3]: https://console.aws.amazon.com/iam/
 [4]: https://app.datadoghq.com/logs/pipelines/log-forwarding
-[5]: /logs/log_configuration/archives/#advanced-settings
-[6]: /logs/log_configuration/archives
-[7]: /observability_pipelines/legacy/setup/datadog_with_archiving#install-the-observability-pipelines-worker
+[5]: /ja/logs/log_configuration/archives/#advanced-settings
+[6]: /ja/logs/log_configuration/archives
+[7]: /ja/observability_pipelines/legacy/setup/datadog_with_archiving#install-the-observability-pipelines-worker
 [8]: https://app.datadoghq.com/observability-pipelines/
-[9]: /observability_pipelines/legacy/reference/sinks/#datadogarchivessink
-[10]: /logs/log_configuration/rehydrating/
+[9]: /ja/observability_pipelines/legacy/reference/sinks/#datadogarchivessink
+[10]: /ja/logs/log_configuration/rehydrating/

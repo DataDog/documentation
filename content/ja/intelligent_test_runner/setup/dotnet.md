@@ -1,18 +1,18 @@
 ---
-title: Intelligent Test Runner for .NET
-code_lang: dotnet
-type: multi-code-lang
-code_lang_weight: 0
 aliases:
-  - /continuous_integration/intelligent_test_runner/dotnet/
-  - /continuous_integration/intelligent_test_runner/setup/dotnet/
+- /ja/continuous_integration/intelligent_test_runner/dotnet/
+- /ja/continuous_integration/intelligent_test_runner/setup/dotnet/
+code_lang: dotnet
+code_lang_weight: 0
 further_reading:
-    - link: /continuous_integration/tests
-      tag: Documentation
-      text: Explore Test Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- link: /continuous_integration/tests
+  tag: Documentation
+  text: Explore Test Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+title: Intelligent Test Runner for .NET
+type: multi-code-lang
 ---
 
 ## 互換性
@@ -182,6 +182,6 @@ public class MyTestSuite
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/dotnet
+[1]: /ja/continuous_integration/tests/dotnet
 [2]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
 [3]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options

@@ -1,26 +1,27 @@
 ---
-title: Notification Rules
-description: "Create notification rules to automatically notify your team and integrations when security detection rules trigger."
 aliases:
-  - /security_platform/notification_profiles/
-  - /security_platform/notification_rules/
-  - /security_platform/notifications/rules/
-  - /security/notification_profiles/
-  - /security/notification_rules/
+- /ja/security_platform/notification_profiles/
+- /ja/security_platform/notification_rules/
+- /ja/security_platform/notifications/rules/
+- /ja/security/notification_profiles/
+- /ja/security/notification_rules/
+description: Create notification rules to automatically notify your team and integrations
+  when security detection rules trigger.
 further_reading:
 - link: /security/detection_rules/
   tag: Documentation
   text: Explore security detection rules
 products:
-- name: Cloud SIEM
+- icon: siem
+  name: Cloud SIEM
   url: /security/cloud_siem/
-  icon: siem
-- name: Cloud Security Management
+- icon: cloud-security-management
+  name: Cloud Security Management
   url: /security/cloud_security_management/
-  icon: cloud-security-management
-- name: Application Security Management
+- icon: app-sec
+  name: Application Security Management
   url: /security/application_security/
-  icon: app-sec
+title: Notification Rules
 ---
 
 {{< product-availability >}}
@@ -73,4 +74,4 @@ To delete a notification rule, click the vertical three-dot menu on the notifica
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/notification-rules
-[2]: /security/notifications/#notification-channels
+[2]: /ja/security/notifications/#notification-channels

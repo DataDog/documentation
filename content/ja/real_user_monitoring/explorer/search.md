@@ -1,6 +1,4 @@
 ---
-title: Search RUM Events
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/group/
   tag: Documentation
@@ -8,6 +6,8 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: Apply visualizations on your events
+kind: documentation
+title: Search RUM Events
 ---
 
 ## Overview
@@ -91,12 +91,12 @@ For example, if your facet name is **url** and you want to filter on the **url**
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/android/data_collected/
-[3]: /real_user_monitoring/ios/data_collected/
-[4]: /real_user_monitoring/reactnative/
-[5]: /real_user_monitoring/explorer/search_syntax/
-[6]: /dashboards/guide/custom_time_frames
-[7]: /real_user_monitoring/explorer/events/
-[8]: /real_user_monitoring/explorer/visualize#timeseries
-[9]: /real_user_monitoring/explorer/
+[1]: /ja/real_user_monitoring/browser/data_collected/
+[2]: /ja/real_user_monitoring/android/data_collected/
+[3]: /ja/real_user_monitoring/ios/data_collected/
+[4]: /ja/real_user_monitoring/reactnative/
+[5]: /ja/real_user_monitoring/explorer/search_syntax/
+[6]: /ja/dashboards/guide/custom_time_frames
+[7]: /ja/real_user_monitoring/explorer/events/
+[8]: /ja/real_user_monitoring/explorer/visualize#timeseries
+[9]: /ja/real_user_monitoring/explorer/

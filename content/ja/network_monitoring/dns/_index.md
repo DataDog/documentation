@@ -1,22 +1,22 @@
 ---
-title: DNS Monitoring
-description: Diagnose and debug DNS server issues
 aliases:
-    - /network_performance_monitoring/network_table
-    - /network_performance_monitoring/dns_monitoring
+- /ja/network_performance_monitoring/network_table
+- /ja/network_performance_monitoring/dns_monitoring
+description: Diagnose and debug DNS server issues
 further_reading:
-    - link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
-      tag: Blog
-      text: Monitor DNS with Datadog
-    - link: "https://www.datadoghq.com/blog/monitor-coredns-with-datadog/"
-      tag: Blog
-      text: Monitor CoreDNS with Datadog
-    - link: /network_monitoring/performance/network_analytics
-      tag: Documentation
-      text: Explore network data between each source and destination.
-    - link: "https://www.datadoghq.com/blog/dns-resolution-datadog/"
-      tag: Blog
-      text: Use DNS resolution to monitor cloud and external endpoints
+- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
+  tag: Blog
+  text: Monitor DNS with Datadog
+- link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
+  tag: Blog
+  text: Monitor CoreDNS with Datadog
+- link: /network_monitoring/performance/network_analytics
+  tag: Documentation
+  text: Explore network data between each source and destination.
+- link: https://www.datadoghq.com/blog/dns-resolution-datadog/
+  tag: Blog
+  text: Use DNS resolution to monitor cloud and external endpoints
+title: DNS Monitoring
 ---
 
 {{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="Datadog の DNS モニタリングページ" >}}
@@ -110,7 +110,7 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/performance/
-[2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
-[3]: /network_monitoring/performance/network_analytics#table
-[4]: /network_monitoring/performance/network_analytics/#recommended-queries
+[1]: /ja/network_monitoring/performance/
+[2]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2
+[3]: /ja/network_monitoring/performance/network_analytics#table
+[4]: /ja/network_monitoring/performance/network_analytics/#recommended-queries

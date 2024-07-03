@@ -1,82 +1,82 @@
 ---
-"app_id": "argocd"
-"app_uuid": "49ad19d0-1452-4275-b0fe-cbda3821807d"
-"assets":
-  "dashboards":
-    "Argo CD Overview": assets/dashboards/argo_cd_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: argocd
+app_uuid: 49ad19d0-1452-4275-b0fe-cbda3821807d
+assets:
+  dashboards:
+    Argo CD Overview: assets/dashboards/argo_cd_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
       - argocd.api_server.go.goroutines
       - argocd.app_controller.go.goroutines
       - argocd.appset_controller.go.goroutines
       - argocd.repo_server.go.goroutines
       - argocd.notifications_controller.go.goroutines
-      "metadata_path": metadata.csv
-      "prefix": argocd.
-    "process_signatures":
+      metadata_path: metadata.csv
+      prefix: argocd.
+    process_signatures:
     - argocd-application-controller
     - argocd-applicationset-controller
     - argocd-repo-server
     - argocd-server
     - argocd-notifications-controller
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10314"
-    "source_type_name": ArgoCD
-  "monitors":
-    "Sync Status": assets/monitors/application_sync_status.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10314
+    source_type_name: ArgoCD
+  monitors:
+    Sync Status: assets/monitors/application_sync_status.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - developer tools
 - log collection
 - kubernetes
 - configuration & deployment
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/argocd/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "argocd"
-"integration_id": "argocd"
-"integration_title": "Argo CD"
-"integration_version": "2.4.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "argocd"
-"public_title": "Argo CD"
-"short_description": "Monitor the health and performance of Argo CD"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/argocd/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: argocd
+integration_id: argocd
+integration_title: Argo CD
+integration_version: 2.4.1
+is_public: true
+manifest_version: 2.0.0
+name: argocd
+public_title: Argo CD
+short_description: Monitor the health and performance of Argo CD
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Kubernetes"
-  - "Category::Configuration & Deployment"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of Argo CD
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Argo CD
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Kubernetes
+  - Category::Configuration & Deployment
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor the health and performance of Argo CD
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Argo CD
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -267,17 +267,16 @@ Argo CD インテグレーションには、イベントは含まれません。
 
 [1]: https://argo-cd.readthedocs.io/en/stable/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/integrations/openmetrics/
+[3]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [4]: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
-[5]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=kubernetesadv2
+[5]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/?tab=kubernetesadv2
 [6]: https://github.com/DataDog/integrations-core/blob/master/argocd/datadog_checks/argocd/data/conf.yaml.example
 [7]: https://argo-cd.readthedocs.io/en/stable/operator-manual/metrics/#exposing-application-labels-as-prometheus-metrics
 [8]: https://github.com/DataDog/integrations-core/blob/master/argocd/datadog_checks/argocd/data/conf.yaml.example#L45-L72
 [9]: https://github.com/DataDog/integrations-core/blob/7.45.x/argocd/datadog_checks/argocd/data/conf.yaml.example#L164-L166
-[10]: https://docs.datadoghq.com/agent/kubernetes/log/
-[11]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[12]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[11]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [13]: https://github.com/DataDog/integrations-core/blob/master/argocd/metadata.csv
 [14]: https://github.com/DataDog/integrations-core/blob/master/argocd/assets/service_checks.json
-[15]: https://docs.datadoghq.com/help/
-
+[15]: https://docs.datadoghq.com/ja/help/

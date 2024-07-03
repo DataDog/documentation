@@ -1,7 +1,6 @@
 ---
-title: Okta SAML IdP
 aliases:
-  - /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
+- /ja/account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configuring Teams & Organizations with Multiple Accounts
+title: Okta SAML IdP
 ---
 
 ## セットアップ
@@ -70,6 +70,6 @@ Okta でアプリケーションの構成が完了する前に `IDP.XML` ファ�
 
 [1]: https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm?cshid=ext_Apps_App_Integration_Wizard-saml
 [3]: https://app.datadoghq.com/saml/saml_setup
-[4]: /account_management/saml/mapping
-[5]: /account_management/saml/
+[4]: /ja/account_management/saml/mapping
+[5]: /ja/account_management/saml/
 [6]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App

@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Diagnostic Extension metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_diagnostic_extension/"
-"draft": false
-"git_integration_title": "azure_diagnostic_extension"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Azure Diagnostic Extension"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_diagnostic_extension"
-"public_title": "Datadog-Azure Diagnostic Extension Integration"
-"short_description": "Track key Azure Diagnostic Extension metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Diagnostic Extension metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_diagnostic_extension/
+draft: false
+git_integration_title: azure_diagnostic_extension
+has_logo: true
+integration_id: ''
+integration_title: Azure Diagnostic Extension
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_diagnostic_extension
+public_title: Datadog-Azure Diagnostic Extension Integration
+short_description: Track key Azure Diagnostic Extension metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -61,10 +61,9 @@ The Azure Diagnostic Extension integration does not include any service checks.
 Need help? Contact [Datadog support][7].
 
 [1]: https://www.datadoghq.com/blog/dont-fear-the-agent/
-[2]: https://docs.datadoghq.com/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
-[3]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/#agent-installation
-[4]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
-[5]: https://docs.datadoghq.com/integrations/azure/
+[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
+[3]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/#agent-installation
+[4]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
+[5]: https://docs.datadoghq.com/ja/integrations/azure/
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_diagnostic_extension/azure_analysis_services_metadata.csv
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

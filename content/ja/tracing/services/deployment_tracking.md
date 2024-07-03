@@ -1,17 +1,17 @@
 ---
-title: Deployment  Tracking
-kind: documentation
-description: 'Use Datadog to track your deployments through version tags'
 aliases:
-    - /tracing/version_tracking
-    - /tracing/deployment_tracking/
+- /ja/tracing/version_tracking
+- /ja/tracing/deployment_tracking/
+description: Use Datadog to track your deployments through version tags
 further_reading:
-    - link: getting_started/tagging/unified_service_tagging/
-      tag: Documentation
-      text: Learn about Unified Service Tagging and reserved tags
-    - link: tracing/app_analytics
-      tag: Documentation
-      text: Use version as a dimension in your App Analytics queries
+- link: getting_started/tagging/unified_service_tagging/
+  tag: Documentation
+  text: Learn about Unified Service Tagging and reserved tags
+- link: tracing/app_analytics
+  tag: Documentation
+  text: Use version as a dimension in your App Analytics queries
+kind: documentation
+title: Deployment  Tracking
 ---
 ## The version tag
 
@@ -232,9 +232,9 @@ Max time between deployments:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /getting_started/tagging/unified_service_tagging/
-[2]: /metrics/types/?tab=distribution#metric-types
-[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[4]: /watchdog/faulty_deployment_detection/
-[5]: /profiler/enabling/
-[6]: /profiler/compare_profiles
+[1]: /ja/getting_started/tagging/unified_service_tagging/
+[2]: /ja/metrics/types/?tab=distribution#metric-types
+[3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[4]: /ja/watchdog/faulty_deployment_detection/
+[5]: /ja/profiler/enabling/
+[6]: /ja/profiler/compare_profiles

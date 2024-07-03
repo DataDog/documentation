@@ -1,60 +1,60 @@
 ---
-"app_id": "consul-connect"
-"app_uuid": "580ac585-9e97-4b4f-ba56-34dba5050e06"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10174"
-    "source_type_name": Consul Connect
-  "logs":
-    "source": envoy
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: consul-connect
+app_uuid: 580ac585-9e97-4b4f-ba56-34dba5050e06
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10174
+    source_type_name: Consul Connect
+  logs:
+    source: envoy
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - network
 - log collection
 - containers
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "consul_connect"
-"integration_id": "consul-connect"
-"integration_title": "Consul Connect"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "consul_connect"
-"public_title": "Consul Connect"
-"short_description": "Monitor Consul Connect Envoy sidecar proxies."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: consul_connect
+integration_id: consul-connect
+integration_title: Consul Connect
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: consul_connect
+public_title: Consul Connect
+short_description: Monitor Consul Connect Envoy sidecar proxies.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Network"
-  - "Category::Log Collection"
-  - "Category::Containers"
-  "configuration": "README.md#Setup"
-  "description": Monitor Consul Connect Envoy sidecar proxies.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Consul Connect
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Log Collection
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Monitor Consul Connect Envoy sidecar proxies.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Consul Connect
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -90,8 +90,8 @@ To configure this check for an Agent running on a host:
 Follow the [Envoy host][3] instructions to configure log collection.  
 
 [1]: https://www.consul.io/commands/connect/envoy#admin-bind
-[2]: https://docs.datadoghq.com/integrations/envoy/?tab=host#metric-collection
-[3]: https://docs.datadoghq.com/integrations/envoy/?tab=host#log-collection
+[2]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#metric-collection
+[3]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#log-collection
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -109,10 +109,10 @@ Follow the [Envoy containerized instructions][1] to configure your Datadog Agent
 
 Follow the [Envoy containerized instructions][4] to configure log collection.
 
-[1]: https://docs.datadoghq.com/integrations/envoy/?tab=containerized#containerized
+[1]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#containerized
 [2]: https://www.consul.io/docs/connect/proxies/envoy#envoy_stats_bind_addr
-[3]: https://docs.datadoghq.com/integrations/envoy/?tab=containerized#metric-collection
-[4]: https://docs.datadoghq.com/integrations/envoy/?tab=containerized#log-collection
+[3]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#metric-collection
+[4]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#log-collection
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -140,10 +140,10 @@ Need help? Contact [Datadog support][8].
 
 
 [1]: https://www.consul.io/docs/connect#connect
-[2]: https://docs.datadoghq.com/integrations/envoy/
+[2]: https://docs.datadoghq.com/ja/integrations/envoy/
 [3]: https://www.consul.io/docs/connect/proxies/envoy#envoy-integration
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?#agent-status-and-information
-[6]: https://docs.datadoghq.com/integrations/envoy/?tab=host#metrics
-[7]: https://docs.datadoghq.com/integrations/envoy/?tab=host#service-checks
-[8]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#metrics
+[7]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#service-checks
+[8]: https://docs.datadoghq.com/ja/help/

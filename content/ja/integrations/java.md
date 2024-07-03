@@ -1,44 +1,45 @@
 ---
-"categories":
-- "languages"
-- "network"
-- "oracle"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。"
-"doc_link": "https://docs.datadoghq.com/integrations/java/"
-"draft": false
-"further_reading":
-- "link": "https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect"
-  "tag": "よくあるご質問"
-  "text": "JMX インテグレーションに一致する Bean がありますが、データが収集できません。"
-- "link": "https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/"
-  "tag": "よくあるご質問"
-  "text": "jConsole で JMX データを表示し、jmx.yaml でデータの収集をセットアップする"
-- "link": "https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/"
-  "tag": "よくあるご質問"
-  "text": "jmx.yaml error: Include Section"
-- "link": "https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/"
-  "tag": "よくあるご質問"
-  "text": "複合型の JMX 属性を収集する"
-- "link": "https://docs.datadoghq.com/integrations/guide/running-jmx-commands-in-windows/"
-  "tag": "ガイド"
-  "text": "Windows で JMX コマンドを実行する"
-- "link": "https://docs.datadoghq.com/integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/"
-  "tag": "ガイド"
-  "text": "Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する"
-"git_integration_title": "java"
-"has_logo": true
-"integration_id": "java"
-"integration_title": "JMX"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "java"
-"public_title": "Datadog-JMX Integration"
-"short_description": "Collect custom metrics from your applications using the Yammer Metrics library."
-"version": "1.0"
+categories:
+- languages
+- network
+- oracle
+- tracing
+custom_kind: インテグレーション
+dependencies: []
+description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。
+doc_link: https://docs.datadoghq.com/integrations/java/
+draft: false
+further_reading:
+- link: https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect
+  tag: よくあるご質問
+  text: JMX インテグレーションに一致する Bean がありますが、データが収集できません。
+- link: https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
+  tag: よくあるご質問
+  text: jConsole で JMX データを表示し、jmx.yaml でデータの収集をセットアップする
+- link: https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/
+  tag: よくあるご質問
+  text: 'jmx.yaml error: Include Section'
+- link: https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/
+  tag: よくあるご質問
+  text: 複合型の JMX 属性を収集する
+- link: https://docs.datadoghq.com/integrations/guide/running-jmx-commands-in-windows/
+  tag: ガイド
+  text: Windows で JMX コマンドを実行する
+- link: https://docs.datadoghq.com/integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/
+  tag: ガイド
+  text: Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する
+git_integration_title: java
+has_logo: true
+integration_id: java
+integration_title: JMX
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: java
+public_title: Datadog-JMX Integration
+short_description: Collect custom metrics from your applications using the Yammer
+  Metrics library.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -96,10 +97,10 @@ If running the Agent as a binary on a host, configure your JMX check as any [oth
 **Note**: To run more than one JMX check, create configuration files with the format `jmx_<INDEX>.d/conf.yaml`, for example:`jmx_1.d/conf.yaml`, `jmx_2.d/conf.yaml`, etc. Each folder should be stored in the `conf.d` directory. with the `is_jmx` option set to `true` in the configuration file.
 
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/init_config/jmx.yaml
 [3]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/instances/jmx.yaml
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -126,7 +127,7 @@ To run a JMX Check against one of your container:
 [4]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [5]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [6]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/docker/integrations/?tab=file#configuration
+[7]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=file#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -308,19 +309,18 @@ Consult the list of [JMX troubleshooting commands and FAQs][16].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
-[2]: https://docs.datadoghq.com/developers/dogstatsd
-[3]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/
+[2]: https://docs.datadoghq.com/ja/developers/dogstatsd
+[3]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [4]: https://docs.oracle.com/en/java/javase/14/management/monitoring-and-management-using-jmx-technology.html
-[5]: https://docs.datadoghq.com/getting_started/integrations/#setting-up-an-integration
-[6]: https://docs.datadoghq.com/containers/guide/autodiscovery-with-jmx/?tab=operator
-[7]: https://docs.datadoghq.com/tracing/setup_overview/setup/java/#ddjmxfetchconfigdir-and-ddjmxfetchconfig
+[5]: https://docs.datadoghq.com/ja/getting_started/integrations/#setting-up-an-integration
+[6]: https://docs.datadoghq.com/ja/containers/guide/autodiscovery-with-jmx/?tab=operator
+[7]: https://docs.datadoghq.com/ja/tracing/setup_overview/setup/java/#ddjmxfetchconfigdir-and-ddjmxfetchconfig
 [8]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://docs.datadoghq.com/metrics/explorer/
-[11]: https://docs.datadoghq.com/logs/log_collection/java/
-[12]: https://docs.datadoghq.com/tracing/send_traces/
-[13]: https://docs.datadoghq.com/tracing/setup/java/
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/metrics/explorer/
+[11]: https://docs.datadoghq.com/ja/logs/log_collection/java/
+[12]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[13]: https://docs.datadoghq.com/ja/tracing/setup/java/
 [14]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
 [15]: https://github.com/DataDog/dogweb/blob/prod/integration/java/service_checks.json
-[16]: https://docs.datadoghq.com/integrations/faq/troubleshooting-jmx-integrations/
-
+[16]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-jmx-integrations/

@@ -1,5 +1,5 @@
 ---
-title: "Direct Connect Connection Component"
+title: Direct Connect Connection Component
 ---
 ## 概要
 
@@ -74,5 +74,5 @@ Direct Connect 接続コンポーネントを使用して、内部ネットワ�
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-[3]: /cloudcraft/faq/scan-error-aws-china-region/
+[3]: /ja/cloudcraft/faq/scan-error-aws-china-region/
 [4]: https://aws.amazon.com/directconnect/locations/

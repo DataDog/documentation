@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for Oracle Autonomous Database
 description: Install and configure Database Monitoring for Oracle Autonomous Database
 further_reading:
 - link: /integrations/oracle/
   tag: Documentation
   text: Basic Oracle Integration
-
+title: Setting Up Database Monitoring for Oracle Autonomous Database
 ---
 
 {{% dbm-oracle-definition %}}
@@ -146,17 +145,17 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
-[1]: /database_monitoring/agent_integration_overhead/?tab=oracle
-[2]: /database_monitoring/data_collected/#sensitive-information
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[5]: /agent/configuration/agent-commands/#agent-status-and-information
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=oracle
+[2]: /ja/database_monitoring/data_collected/#sensitive-information
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://app.datadoghq.com/integrations/oracle
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
-[12]: /database_monitoring/architecture/
+[12]: /ja/database_monitoring/architecture/
 
 ## 参考資料
 

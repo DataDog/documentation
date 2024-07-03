@@ -1,8 +1,6 @@
 ---
-title: RUM Browser Monitoring Setup
-kind: ドキュメント
 aliases:
-  - /real_user_monitoring/setup
+- /ja/real_user_monitoring/setup
 further_reading:
 - link: /real_user_monitoring/explorer/
   tag: ドキュメント
@@ -10,6 +8,7 @@ further_reading:
 - link: /logs/log_collection/javascript/
   tag: ドキュメント
   text: Datadog Browser SDK for Logs について
+title: RUM Browser Monitoring Setup
 ---
 
 The RUM Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][1] table.
@@ -58,7 +57,7 @@ CDN 同期
 [`@datadog/browser-rum`][14]を `package.json` ファイルに追加したら、次のコマンドを実行して初期化します。
 
 <details open>
-  <summary>最新バージョン</summary>
+  <summary>Latest version</summary>
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -66,8 +65,8 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  // `site` は組織の Datadog サイトパラメーターを指します
-  // https://docs.datadoghq.com/getting_started/site/ を参照してください
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
   site: '<DATADOG_SITE>',
   //  service: 'my-web-application',
   //  env: 'production',
@@ -77,6 +76,7 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
+  enablePrivacyForActionName: true,
 });
 ```
 
@@ -189,7 +189,7 @@ datadogRum.startSessionReplayRecording();
 生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグに追加します。**{{<region-param key="dd_site_name">}}** サイトの場合:
 
 <details open>
-  <summary>最新バージョン</summary>
+  <summary>Latest version</summary>
 
 {{< site-region region="us" >}}
 ```html
@@ -203,8 +203,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -214,6 +214,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -231,8 +232,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -242,6 +243,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -259,8 +261,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -270,6 +272,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -287,8 +290,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -298,6 +301,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -315,8 +319,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -326,6 +330,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -343,8 +348,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -354,6 +359,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -1067,7 +1073,7 @@ datadogRum.startSessionReplayRecording();
 生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグ（他のスクリプトタグの前にあるタグ）に追加します。同期型のスクリプトタグをより高い位置に含めると、Datadog RUM ですべてのパフォーマンスデータとエラーを収集できます。**{{<region-param key="dd_site_name">}}** サイトの場合:
 
 <details open>
-  <summary>最新バージョン</summary>
+  <summary>Latest version</summary>
 
 {{< site-region region="us" >}}
 ```html
@@ -1077,8 +1083,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1088,6 +1094,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1100,8 +1107,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1111,6 +1118,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1123,8 +1131,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1134,6 +1142,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1146,8 +1155,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1157,6 +1166,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1169,8 +1179,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1180,6 +1190,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1192,8 +1203,8 @@ datadogRum.startSessionReplayRecording();
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      // `site` は組織の Datadog サイトパラメーターを指します
-      // https://docs.datadoghq.com/getting_started/site/ を参照してください
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1203,6 +1214,7 @@ datadogRum.startSessionReplayRecording();
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -2088,30 +2100,30 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[2]: /data_security/real_user_monitoring/#shared-responsibility
+[2]: /ja/data_security/real_user_monitoring/#shared-responsibility
 [3]: https://app.datadoghq.com/rum/list
-[4]: /real_user_monitoring/data_collected/
-[5]: /getting_started/tagging/using_tags
+[4]: /ja/real_user_monitoring/data_collected/
+[5]: /ja/getting_started/tagging/using_tags
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[7]: /real_user_monitoring/guide/sampling-browser-plans/
-[8]: /real_user_monitoring/session_replay/browser/
-[9]: /real_user_monitoring/session_replay/browser/privacy_options
-[10]: /real_user_monitoring/platform/dashboards/
-[11]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
-[13]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[7]: /ja/real_user_monitoring/guide/sampling-browser-plans/
+[8]: /ja/real_user_monitoring/session_replay/browser/
+[9]: /ja/real_user_monitoring/session_replay/browser/privacy_options
+[10]: /ja/real_user_monitoring/platform/dashboards/
+[11]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[12]: /ja/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
+[13]: /ja/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [14]: https://www.npmjs.com/package/@datadog/browser-rum
-[15]: /account_management/api-app-keys/#client-tokens
-[16]: /getting_started/site/
-[17]: /getting_started/tagging/#define-tags
-[18]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
-[19]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[20]: /real_user_monitoring/browser/tracking_user_actions
-[21]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
-[22]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[23]: /real_user_monitoring/session_replay/browser/#usage
-[24]: /real_user_monitoring/guide/proxy-rum-data/
-[25]: /real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
+[15]: /ja/account_management/api-app-keys/#client-tokens
+[16]: /ja/getting_started/site/
+[17]: /ja/getting_started/tagging/#define-tags
+[18]: /ja/real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
+[19]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[20]: /ja/real_user_monitoring/browser/tracking_user_actions
+[21]: /ja/real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
+[22]: /ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[23]: /ja/real_user_monitoring/session_replay/browser/#usage
+[24]: /ja/real_user_monitoring/guide/proxy-rum-data/
+[25]: /ja/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [26]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[27]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
+[27]: /ja/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [28]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/

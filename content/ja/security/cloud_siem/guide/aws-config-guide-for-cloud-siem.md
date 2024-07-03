@@ -1,7 +1,9 @@
 ---
-title: AWS Configuration Guide for Cloud SIEM
+aliases:
+- /ja/security_platform/guide/aws-config-guide-for-cloud-siem
+- /ja/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem
 further_reading:
-- link: "/security/default_rules/#cat-cloud-siem-log-detection"
+- link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentation
   text: Explore Cloud SIEM default detection rules
 - link: /security/cloud_siem/investigate_security_signals
@@ -19,9 +21,7 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: See how to explore your logs
-aliases:
-  - /security_platform/guide/aws-config-guide-for-cloud-siem
-  - /security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem
+title: AWS Configuration Guide for Cloud SIEM
 ---
 
 ## 概要
@@ -93,17 +93,17 @@ Cloud SIEM は処理されたすべてのログに検出ルールを適用する
 
 [1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Log%20Detection%22
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/getting_started/integrations/aws/
-[4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#manual
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/aws/
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#manual
 [5]: https://console.aws.amazon.com/cloudtrail/home
 [6]: https://console.aws.amazon.com/lambda/home
 [7]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
-[8]: https://docs.datadoghq.com/logs/explorer/
+[8]: https://docs.datadoghq.com/ja/logs/explorer/
 [9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
-[10]: /security/cloud_siem/investigate_security_signals
+[10]: /ja/security/cloud_siem/investigate_security_signals
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
-[12]: https://docs.datadoghq.com/security/default_rules/#cat-cloud-siem
-[13]: https://docs.datadoghq.com/security/detection_rules/
+[12]: https://docs.datadoghq.com/ja/security/default_rules/#cat-cloud-siem
+[13]: https://docs.datadoghq.com/ja/security/detection_rules/
 [14]: https://app.datadoghq.com/security/configuration?detect-threats=apache&secure-cloud-environment=amazon-web-services&secure-hosts-and-containers=kubernetes&selected-products=security_monitoring
-[15]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
-[16]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
+[15]: https://docs.datadoghq.com/ja/integrations/kubernetes_audit_logs/
+[16]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service

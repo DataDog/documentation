@@ -1,100 +1,100 @@
 ---
-"aliases":
-- "/guides/azure/"
-- "/integrations/azure_storage/"
-"categories":
-- "azure"
-- "cloud"
-- "iot"
-- "log collection"
-- "network"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "インスタンスや多数の Azure サービスからメトリクスを収集"
-"doc_link": "https://docs.datadoghq.com/integrations/azure/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/"
-  "tag": "ブログ"
-  "text": "Datadog サーバーレスビューで Azure App Service を見通す"
-- "link": "https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/"
-  "tag": "ブログ"
-  "text": "Microsoft Azure VM の監視方法"
-- "link": "https://www.datadoghq.com/blog/monitor-azure-arm-vms-datadog/"
-  "tag": "ブログ"
-  "text": "Ampere Altra Arm ベースの CPU を搭載した Microsoft Azure VM を Datadog で監視する？"
-- "link": "https://www.datadoghq.com/blog/monitoring-azure-platform-logs/"
-  "tag": "ブログ"
-  "text": "Microsoft Azure プラットフォームログをモニタリングするためのベストプラクティス"
-- "link": "https://www.datadoghq.com/blog/azure-service-health-monitoring-datadog/"
-  "tag": "ブログ"
-  "text": "Azure Service の健全性イベントを Datadog で監視"
-- "link": "https://www.datadoghq.com/blog/azure-container-apps/"
-  "tag": "ブログ"
-  "text": "Datadog で Azure コンテナアプリを監視する"
-- "link": "https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/"
-  "tag": "ブログ"
-  "text": "Datadog CI Visibility で Azure Pipelines を監視する"
-- "link": "https://www.datadoghq.com/blog/azure-government-monitoring-datadog/"
-  "tag": "ブログ"
-  "text": "Datadog で Azure Government を監視する"
-- "link": "https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/"
-  "tag": "ブログ"
-  "text": "Datadog でエンタープライズ規模の Azure 環境の監視を数分で可能にします"
-- "link": "https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/"
-  "tag": "Documentation"
-  "text": "Azure Integration Architecture and Configuration"
-- "link": "https://docs.datadoghq.com/integrations/guide/azure-portal/"
-  "tag": "Documentation"
-  "text": "Azure ポータルの Datadog"
-- "link": "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
-  "tag": "Documentation"
-  "text": "クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？"
-- "link": "https://www.datadoghq.com/blog/monitor-azure-openai-with-datadog/"
-  "tag": "ブログ"
-  "text": "Monitor Azure OpenAI with Datadog"
-- "link": "https://www.datadoghq.com/blog/datadog-aks-cluster-extension/"
-  "tag": "ブログ"
-  "text": "Datadog AKS クラスター拡張機能で Azure コンテナ監視を効率化する"
-- "link": "https://www.datadoghq.com/blog/azure-integration-configuration/"
-  "tag": "ブログ"
-  "text": "すべての Azure インテグレーションの可観測性構成を 1 か所で微調整できます"
-"git_integration_title": "azure"
-"has_logo": true
-"integration_id": "azure"
-"integration_title": "Microsoft Azure"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"monitors":
-  "[Azure App Gateway] Backend Hosts": "assets/monitors/app_gateway_backend_hosts.json"
-  "[Azure App Gateway] CPU Utilization": "assets/monitors/app_gateway_cpu_utilization.json"
-  "[Azure App Gateway] Failed Requests": "assets/monitors/app_gateway_failed_requests.json"
-  "[Azure App Gateway] Response HTTP Status Anomaly": "assets/monitors/app_gateway_http_status_anomalies.json"
-  "[Azure App Service] App Service Errors": "assets/monitors/app_service_app_service_errors.json"
-  "[Azure App Service] App Service Plan CPU Utilization": "assets/monitors/app_service_cpu.json"
-  "[Azure App Service] App Service Plan Memory Utilization": "assets/monitors/app_service_memory.json"
-  "[Azure App Service] Connections": "assets/monitors/app_service_connections.json"
-  "[Azure App Service] Function App Errors": "assets/monitors/app_service_function_app_errors.json"
-  "[Azure App Service] Requests": "assets/monitors/app_service_requests.json"
-  "[Azure App Service] Response Time": "assets/monitors/app_service_response_times.json"
-  "[Azure SQL Database] CPU Utilization": "assets/monitors/sql_db_cpu_percent.json"
-  "[Azure SQL Database] DTU Consumption": "assets/monitors/sql_db_dtu_consumption_percent.json"
-  "[Azure SQL Database] Deadlock Anomalies": "assets/monitors/sql_db_deadlock_anomalies.json"
-  "[Azure SQL Database] Failed Connections": "assets/monitors/sql_db_connections_failed.json"
-  "[Azure SQL Database] Georeplication Link Status ": "assets/monitors/sql_db_replication_links.json"
-  "[Azure SQL Database] Storage Utilization": "assets/monitors/sql_db_storage_percent.json"
-  "[Azure VM] CPU Utilization Monitor": "assets/monitors/vm_cpu_utilization.json"
-  "[Azure VM] Resource Health Status Monitor": "assets/monitors/vm_resource_health_status.json"
-  "[Azure] API Rate Limit": "assets/monitors/rate_limits.json"
-  "[Azure] Integration Errors": "assets/monitors/integration_errors.json"
-  "[Azure] Resource Quotas": "assets/monitors/resource_quotas.json"
-  "[Azure] Service Health Events": "assets/monitors/service_health_events.json"
-"name": "azure"
-"public_title": "Datadog-Microsoft Azure Integration"
-"short_description": "Collect metrics from instances and many, many Azure services."
-"version": "1.0"
+aliases:
+- /ja/guides/azure/
+- /ja/integrations/azure_storage/
+categories:
+- azure
+- cloud
+- iot
+- log collection
+- network
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: インスタンスや多数の Azure サービスからメトリクスを収集
+doc_link: https://docs.datadoghq.com/integrations/azure/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
+  tag: ブログ
+  text: Datadog サーバーレスビューで Azure App Service を見通す
+- link: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/
+  tag: ブログ
+  text: Microsoft Azure VM の監視方法
+- link: https://www.datadoghq.com/blog/monitor-azure-arm-vms-datadog/
+  tag: ブログ
+  text: Ampere Altra Arm ベースの CPU を搭載した Microsoft Azure VM を Datadog で監視する？
+- link: https://www.datadoghq.com/blog/monitoring-azure-platform-logs/
+  tag: ブログ
+  text: Microsoft Azure プラットフォームログをモニタリングするためのベストプラクティス
+- link: https://www.datadoghq.com/blog/azure-service-health-monitoring-datadog/
+  tag: ブログ
+  text: Azure Service の健全性イベントを Datadog で監視
+- link: https://www.datadoghq.com/blog/azure-container-apps/
+  tag: ブログ
+  text: Datadog で Azure コンテナアプリを監視する
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で Azure Pipelines を監視する
+- link: https://www.datadoghq.com/blog/azure-government-monitoring-datadog/
+  tag: ブログ
+  text: Datadog で Azure Government を監視する
+- link: https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/
+  tag: ブログ
+  text: Datadog でエンタープライズ規模の Azure 環境の監視を数分で可能にします
+- link: https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/
+  tag: Documentation
+  text: Azure Integration Architecture and Configuration
+- link: https://docs.datadoghq.com/integrations/guide/azure-portal/
+  tag: Documentation
+  text: Azure ポータルの Datadog
+- link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: Documentation
+  text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
+- link: https://www.datadoghq.com/blog/monitor-azure-openai-with-datadog/
+  tag: ブログ
+  text: Monitor Azure OpenAI with Datadog
+- link: https://www.datadoghq.com/blog/datadog-aks-cluster-extension/
+  tag: ブログ
+  text: Datadog AKS クラスター拡張機能で Azure コンテナ監視を効率化する
+- link: https://www.datadoghq.com/blog/azure-integration-configuration/
+  tag: ブログ
+  text: すべての Azure インテグレーションの可観測性構成を 1 か所で微調整できます
+git_integration_title: azure
+has_logo: true
+integration_id: azure
+integration_title: Microsoft Azure
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+monitors:
+  '[Azure App Gateway] Backend Hosts': assets/monitors/app_gateway_backend_hosts.json
+  '[Azure App Gateway] CPU Utilization': assets/monitors/app_gateway_cpu_utilization.json
+  '[Azure App Gateway] Failed Requests': assets/monitors/app_gateway_failed_requests.json
+  '[Azure App Gateway] Response HTTP Status Anomaly': assets/monitors/app_gateway_http_status_anomalies.json
+  '[Azure App Service] App Service Errors': assets/monitors/app_service_app_service_errors.json
+  '[Azure App Service] App Service Plan CPU Utilization': assets/monitors/app_service_cpu.json
+  '[Azure App Service] App Service Plan Memory Utilization': assets/monitors/app_service_memory.json
+  '[Azure App Service] Connections': assets/monitors/app_service_connections.json
+  '[Azure App Service] Function App Errors': assets/monitors/app_service_function_app_errors.json
+  '[Azure App Service] Requests': assets/monitors/app_service_requests.json
+  '[Azure App Service] Response Time': assets/monitors/app_service_response_times.json
+  '[Azure SQL Database] CPU Utilization': assets/monitors/sql_db_cpu_percent.json
+  '[Azure SQL Database] DTU Consumption': assets/monitors/sql_db_dtu_consumption_percent.json
+  '[Azure SQL Database] Deadlock Anomalies': assets/monitors/sql_db_deadlock_anomalies.json
+  '[Azure SQL Database] Failed Connections': assets/monitors/sql_db_connections_failed.json
+  '[Azure SQL Database] Georeplication Link Status ': assets/monitors/sql_db_replication_links.json
+  '[Azure SQL Database] Storage Utilization': assets/monitors/sql_db_storage_percent.json
+  '[Azure VM] CPU Utilization Monitor': assets/monitors/vm_cpu_utilization.json
+  '[Azure VM] Resource Health Status Monitor': assets/monitors/vm_resource_health_status.json
+  '[Azure] API Rate Limit': assets/monitors/rate_limits.json
+  '[Azure] Integration Errors': assets/monitors/integration_errors.json
+  '[Azure] Resource Quotas': assets/monitors/resource_quotas.json
+  '[Azure] Service Health Events': assets/monitors/service_health_events.json
+name: azure
+public_title: Datadog-Microsoft Azure Integration
+short_description: Collect metrics from instances and many, many Azure services.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -232,62 +232,61 @@ Still need help? Contact [Datadog support][59].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/legal/restricted-service-locations/
-[2]: https://docs.datadoghq.com/integrations/azure_analysis_services/
-[3]: https://docs.datadoghq.com/integrations/azure_api_management/
-[4]: https://docs.datadoghq.com/integrations/azure_app_services/
-[5]: https://docs.datadoghq.com/integrations/azure_app_service_environment/
-[6]: https://docs.datadoghq.com/integrations/azure_app_service_plan/
-[7]: https://docs.datadoghq.com/integrations/azure_application_gateway/
-[8]: https://docs.datadoghq.com/integrations/azure_automation/
-[9]: https://docs.datadoghq.com/integrations/azure_batch/
-[10]: https://docs.datadoghq.com/integrations/azure_cognitive_services/
-[11]: https://docs.datadoghq.com/integrations/azure_container_instances/
-[12]: https://docs.datadoghq.com/integrations/azure_container_service/
-[13]: https://docs.datadoghq.com/integrations/azure_cosmosdb/
-[14]: https://docs.datadoghq.com/integrations/azure_customer_insights/
-[15]: https://docs.datadoghq.com/integrations/azure_data_explorer/
-[16]: https://docs.datadoghq.com/integrations/azure_data_factory/
-[17]: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
-[18]: https://docs.datadoghq.com/integrations/azure_data_lake_store/
-[19]: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/
-[20]: https://docs.datadoghq.com/integrations/azure_event_grid/
-[21]: https://docs.datadoghq.com/integrations/azure_event_hub/
-[22]: https://docs.datadoghq.com/integrations/azure_express_route/
-[23]: https://docs.datadoghq.com/integrations/azure_firewall/
-[24]: https://docs.datadoghq.com/integrations/azure_functions/
-[25]: https://docs.datadoghq.com/integrations/azure_hd_insight/
-[26]: https://docs.datadoghq.com/integrations/azure_iot_hub/
-[27]: https://docs.datadoghq.com/integrations/azure_key_vault/
-[28]: https://docs.datadoghq.com/integrations/azure_load_balancer/
-[29]: https://docs.datadoghq.com/integrations/azure_logic_app/
-[30]: https://docs.datadoghq.com/integrations/azure_machine_learning_services/
-[31]: https://docs.datadoghq.com/integrations/azure_network_interface/
-[32]: https://docs.datadoghq.com/integrations/azure_notification_hubs/
-[33]: https://docs.datadoghq.com/integrations/azure_public_ip_address/
-[34]: https://docs.datadoghq.com/integrations/azure_recovery_service_vault/
-[35]: https://docs.datadoghq.com/integrations/azure_redis_cache/
-[36]: https://docs.datadoghq.com/integrations/azure_relay/
-[37]: https://docs.datadoghq.com/integrations/azure_search/
-[38]: https://docs.datadoghq.com/integrations/azure_blob_storage/
-[39]: https://docs.datadoghq.com/integrations/azure_file_storage/
-[40]: https://docs.datadoghq.com/integrations/azure_queue_storage/
-[41]: https://docs.datadoghq.com/integrations/azure_table_storage/
-[42]: https://docs.datadoghq.com/integrations/azure_stream_analytics/
-[43]: https://docs.datadoghq.com/integrations/azure_sql_database/
-[44]: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/
-[45]: https://docs.datadoghq.com/integrations/azure_synapse/
-[46]: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
-[47]: https://docs.datadoghq.com/integrations/azure_vm/
-[48]: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
-[49]: https://docs.datadoghq.com/integrations/azure_virtual_networks/
-[50]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/
-[51]: https://docs.datadoghq.com/integrations/guide/azure-native-programmatic-management/
-[52]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/
-[53]: https://docs.datadoghq.com/integrations/guide/azure-native-manual-setup/
-[54]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/
-[55]: https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/
+[2]: https://docs.datadoghq.com/ja/integrations/azure_analysis_services/
+[3]: https://docs.datadoghq.com/ja/integrations/azure_api_management/
+[4]: https://docs.datadoghq.com/ja/integrations/azure_app_services/
+[5]: https://docs.datadoghq.com/ja/integrations/azure_app_service_environment/
+[6]: https://docs.datadoghq.com/ja/integrations/azure_app_service_plan/
+[7]: https://docs.datadoghq.com/ja/integrations/azure_application_gateway/
+[8]: https://docs.datadoghq.com/ja/integrations/azure_automation/
+[9]: https://docs.datadoghq.com/ja/integrations/azure_batch/
+[10]: https://docs.datadoghq.com/ja/integrations/azure_cognitive_services/
+[11]: https://docs.datadoghq.com/ja/integrations/azure_container_instances/
+[12]: https://docs.datadoghq.com/ja/integrations/azure_container_service/
+[13]: https://docs.datadoghq.com/ja/integrations/azure_cosmosdb/
+[14]: https://docs.datadoghq.com/ja/integrations/azure_customer_insights/
+[15]: https://docs.datadoghq.com/ja/integrations/azure_data_explorer/
+[16]: https://docs.datadoghq.com/ja/integrations/azure_data_factory/
+[17]: https://docs.datadoghq.com/ja/integrations/azure_data_lake_analytics/
+[18]: https://docs.datadoghq.com/ja/integrations/azure_data_lake_store/
+[19]: https://docs.datadoghq.com/ja/integrations/azure_db_for_mariadb/
+[20]: https://docs.datadoghq.com/ja/integrations/azure_event_grid/
+[21]: https://docs.datadoghq.com/ja/integrations/azure_event_hub/
+[22]: https://docs.datadoghq.com/ja/integrations/azure_express_route/
+[23]: https://docs.datadoghq.com/ja/integrations/azure_firewall/
+[24]: https://docs.datadoghq.com/ja/integrations/azure_functions/
+[25]: https://docs.datadoghq.com/ja/integrations/azure_hd_insight/
+[26]: https://docs.datadoghq.com/ja/integrations/azure_iot_hub/
+[27]: https://docs.datadoghq.com/ja/integrations/azure_key_vault/
+[28]: https://docs.datadoghq.com/ja/integrations/azure_load_balancer/
+[29]: https://docs.datadoghq.com/ja/integrations/azure_logic_app/
+[30]: https://docs.datadoghq.com/ja/integrations/azure_machine_learning_services/
+[31]: https://docs.datadoghq.com/ja/integrations/azure_network_interface/
+[32]: https://docs.datadoghq.com/ja/integrations/azure_notification_hubs/
+[33]: https://docs.datadoghq.com/ja/integrations/azure_public_ip_address/
+[34]: https://docs.datadoghq.com/ja/integrations/azure_recovery_service_vault/
+[35]: https://docs.datadoghq.com/ja/integrations/azure_redis_cache/
+[36]: https://docs.datadoghq.com/ja/integrations/azure_relay/
+[37]: https://docs.datadoghq.com/ja/integrations/azure_search/
+[38]: https://docs.datadoghq.com/ja/integrations/azure_blob_storage/
+[39]: https://docs.datadoghq.com/ja/integrations/azure_file_storage/
+[40]: https://docs.datadoghq.com/ja/integrations/azure_queue_storage/
+[41]: https://docs.datadoghq.com/ja/integrations/azure_table_storage/
+[42]: https://docs.datadoghq.com/ja/integrations/azure_stream_analytics/
+[43]: https://docs.datadoghq.com/ja/integrations/azure_sql_database/
+[44]: https://docs.datadoghq.com/ja/integrations/azure_sql_elastic_pool/
+[45]: https://docs.datadoghq.com/ja/integrations/azure_synapse/
+[46]: https://docs.datadoghq.com/ja/integrations/azure_usage_and_quotas/
+[47]: https://docs.datadoghq.com/ja/integrations/azure_vm/
+[48]: https://docs.datadoghq.com/ja/integrations/azure_vm_scale_set/
+[49]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
+[50]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/
+[51]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-programmatic-management/
+[52]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/
+[53]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/
+[54]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/
+[55]: https://docs.datadoghq.com/ja/logs/guide/azure-native-logging-guide/
 [56]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
 [57]: https://app.datadoghq.com/event/explorer
-[58]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/
-[59]: https://docs.datadoghq.com/help/
-
+[58]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/
+[59]: https://docs.datadoghq.com/ja/help/

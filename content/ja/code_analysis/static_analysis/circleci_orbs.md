@@ -1,9 +1,9 @@
 ---
 aliases:
-- /continuous_integration/static_analysis/circleci_orbs
-- /static_analysis/circleci_orbs
+- /ja/continuous_integration/static_analysis/circleci_orbs
+- /ja/static_analysis/circleci_orbs
 dependencies:
-- "https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"
+- https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md
 description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
 title: Static Analysis and CircleCI Orbs
 ---
@@ -89,7 +89,7 @@ Set the following environment variables in the [CircleCI Project Settings page][
 
 - [Learn about Code Analysis][1]
 
-[1]: https://docs.datadoghq.com/code_analysis/static_analysis
+[1]: https://docs.datadoghq.com/ja/code_analysis/static_analysis
 [2]: https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project
-[3]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
+[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#application-keys

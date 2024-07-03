@@ -1,29 +1,30 @@
 ---
-"categories":
-- "Source Control"
-- "Collaboration"
-- "issue tracking"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。"
-"doc_link": "https://docs.datadoghq.com/integrations/bitbucket/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/"
-  "tag": "ブログ"
-  "text": "Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法"
-"git_integration_title": "bitbucket"
-"has_logo": true
-"integration_id": "bitbucket"
-"integration_title": "Bitbucket"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "bitbucket"
-"public_title": "Datadog-Bitbucket Integration"
-"short_description": "See which commits and pull requests affect performance across your services."
-"team": "web-integrations"
-"version": "1.0"
+categories:
+- Source Control
+- Collaboration
+- issue tracking
+custom_kind: インテグレーション
+dependencies: []
+description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
+doc_link: https://docs.datadoghq.com/integrations/bitbucket/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
+  tag: ブログ
+  text: 'Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法'
+git_integration_title: bitbucket
+has_logo: true
+integration_id: bitbucket
+integration_title: Bitbucket
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: bitbucket
+public_title: Datadog-Bitbucket Integration
+short_description: See which commits and pull requests affect performance across your
+  services.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -102,5 +103,4 @@ Need help? Contact [Datadog support][4].
 [1]: https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html
 [2]: https://support.atlassian.com/organization-administration/docs/ip-addresses-and-domains-for-atlassian-cloud-products/
 [3]: https://app.datadoghq.com/integrations/bitbucket
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

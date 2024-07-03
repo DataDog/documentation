@@ -1,49 +1,48 @@
 ---
-title: Using Session Replay As A Key Tool In Post-Mortems
-kind: guide
 further_reading:
-- link: "https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/"
+- link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
   tag: blog
   text: Detect user pain points with Datadog Frustration Signals
-- link: "https://docs.datadoghq.com/notebooks/"
+- link: https://docs.datadoghq.com/notebooks/
   tag: documentation
   text: Notebooks
+title: Using Session Replay As A Key Tool In Post-Mortems
 ---
 
-## Overview
+## 概要
 
-Session Replay bridges the gap between user analysis and visually reproducing errors. This guide walks through an example of how developers can leverage Session Replay as a visual aid on documenting post-mortems.
+セッションリプレイは、ユーザー分析とエラーの視覚的な再現の間のギャップを埋めるものです。このガイドでは、デベロッパーがポストモーテムをドキュメント化する際に、視覚的な補助としてセッションリプレイを活用する方法を例として説明します。
 
-## Use RUM to identify how widespread a user issue is
+## RUM を使って、ユーザーの問題がどの程度広がっているかを確認する
 
-In this example, we noticed that a lot of users were complaining about getting an issue upon clicking the **Checkout** button. After investigating the [RUM frustration signals dashboard][1], we confirmed in the RUM Explorer that there were nearly 3,000 instances of this error type occurring in just one week:
+この例では、多くのユーザーが **Checkout** ボタンをクリックしたときに問題が発生したと訴えていることに気づきました。[RUM フラストレーションシグナルダッシュボード][1]を調査した結果、このエラータイプがわずか 1 週間で 3,000 件近く発生していることが RUM エクスプローラーで確認されました。
 
-{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/identify-widespread-user-issue-1.png" alt="Use RUM to identify how many instances of an error type occurred in a week" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/identify-widespread-user-issue-1.png" alt="RUM を使用して、あるエラータイプのインスタンスが 1 週間に何回発生したかを特定する" style="width:100%;">}}
 
-## Watch the user issue in a Session Replay
-After clicking into a session from the above query, we can watch a Session Replay to see this error occur live, and observe what users did before and after:
+## セッションリプレイでユーザーの問題を見る
+上記のクエリからセッションをクリックした後、セッションリプレイを見ることで、このエラーの発生をライブで確認し、その前後でユーザーが何をしたかを観察することができます。
 
-{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/watch-user-issue.png" alt="Review the user's experience the issue in a Session Replay" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/watch-user-issue.png" alt="セッションリプレイでユーザーの問題体験を確認する" style="width:100%;">}}
 
-## Share to a Notebook
-To ensure other team members investigating this issue can see this context, we can share this particular Session Replay to a notebook via the share button:
+## ノートブックへの共有
+この問題を調査している他のチームメンバーがこのコンテキストを見ることができるように、共有ボタンを使ってこの特定のセッションリプレイをノートブックに共有することができます。
 
-{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/share-to-notebook.png" alt="Share the Session Replay video by saving it to a post-mortem notebook" style="width:60%;">}}
+{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/share-to-notebook.png" alt="セッションリプレイのビデオをポストモーテムノートブックに保存して共有する" style="width:60%;">}}
 
-By sending the Session Replay to a notebook, we can add commentary, analyze other telemetry data from this incident, and document our post-mortem.
+セッションリプレイをノートブックに送信することで、解説を加えたり、このインシデントの他のテレメトリーデータを分析したり、ポストモーテムをドキュメント化したりすることができます。
 
-**Note**: A template for post-mortem notebooks is available [here][2].
+**注**: ポストモーテムノートブックのテンプレートが[こちら][2]にあります。
 
-## Documenting the post-mortem
-After sharing the replay to a notebook, we can begin documenting the investigation.
+## ポストモーテムのドキュメント化
+リプレイをノートブックに共有した後、調査のドキュメントを作成することができます。
 
-{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/document-the-post-mortem.png" alt="In Notebooks, add context about behavior in the replay, include appropriate graphs, or tag stakeholders in a comment" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/document-the-post-mortem.png" alt="ノートブックでは、リプレイの動作に関するコンテキストを追加したり、適切なグラフを含めたり、コメントで関係者をタグ付けしたりします" style="width:100%;">}}
 
-We can add context about behavior in the replay, and bring in appropriate graphs to best represent the issue, such as the total number of users affected.
+リプレイの動作に関するコンテキストを追加し、影響を受けたユーザーの総数など、問題を最適に表現するために適切なグラフをもたらすことができます。
 
-In addition, by adding a comment in Notebooks, we can tag stakeholders who should take a look. In this case, we've tagged the product manager responsible for this feature to confirm a fix has been added to the backlog.
+また、ノートブックにコメントを追加することで、見るべき関係者をタグ付けすることができます。このケースでは、この機能を担当するプロダクトマネージャーをタグ付けし、バックログに修正が追加されたことを確認しています。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

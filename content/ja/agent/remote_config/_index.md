@@ -1,26 +1,28 @@
 ---
-title: Remote Configuration
+algolia:
+  tags:
+  - remote config
+  - remote configuration
 aliases:
-- /agent/guide/how_rc_works
-- /agent/guide/how_remote_config_works
+- /ja/agent/guide/how_rc_works
+- /ja/agent/guide/how_remote_config_works
 further_reading:
-- link: "/security/application_security/how-appsec-works/#built-in-protection"
+- link: /security/application_security/how-appsec-works/#built-in-protection
   tag: Documentation
   text: How Application Security Monitoring Works
-- link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
+- link: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
   tag: Documentation
   text: Dynamic Instrumentation
 - link: /security/threats/setup
   tag: Documentation
   text: Setting Up CSM Threats
-- link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
   text: Using Datadog Audit Trail
-- link: "https://www.datadoghq.com/blog/remote-configuration-for-datadog/"
+- link: https://www.datadoghq.com/blog/remote-configuration-for-datadog/
   tag: Blog
   text: Apply real-time updates to Datadog components with Remote Configuration
-algolia:
-  tags: [remote config, remote configuration]
+title: Remote Configuration
 ---
 
 {{< site-region region="gov" >}}
@@ -256,7 +258,7 @@ remote_configuration:
   enabled: false
 ```
 
-[101]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[101]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "環境変数" %}}
 Datadog Agent マニフェストに以下を追加します。
@@ -284,29 +286,29 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/site/
-[3]: /security/threats/setup
-[4]: /observability_pipelines/#observability-pipelines-worker
-[5]: /account_management/rbac/permissions#api-and-application-keys
-[6]: /security/application_security/enabling/compatibility/
-[7]: /account_management/rbac/permissions#access-management
+[1]: /ja/getting_started/site/
+[3]: /ja/security/threats/setup
+[4]: /ja/observability_pipelines/#observability-pipelines-worker
+[5]: /ja/account_management/rbac/permissions#api-and-application-keys
+[6]: /ja/security/application_security/enabling/compatibility/
+[7]: /ja/account_management/rbac/permissions#access-management
 [8]: https://app.datadoghq.com/organization-settings/remote-config
-[9]: /security/default_rules/#cat-workload-security
-[10]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
-[11]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
-[12]: /security/application_security/how-appsec-works/#built-in-protection
-[13]: /account_management/audit_trail
-[14]: /monitors/
-[15]: /help/
-[16]: /agent/remote_config/?tab=configurationyamlfile#setup
-[17]: /agent/configuration/network
-[18]: /agent/configuration/proxy/
-[19]: /tracing/service_catalog/
-[20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
-[21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[22]: /tracing/trace_collection/runtime_config/
-[23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
+[9]: /ja/security/default_rules/#cat-workload-security
+[10]: /ja/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
+[11]: /ja/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+[12]: /ja/security/application_security/how-appsec-works/#built-in-protection
+[13]: /ja/account_management/audit_trail
+[14]: /ja/monitors/
+[15]: /ja/help/
+[16]: /ja/agent/remote_config/?tab=configurationyamlfile#setup
+[17]: /ja/agent/configuration/network
+[18]: /ja/agent/configuration/proxy/
+[19]: /ja/tracing/service_catalog/
+[20]: /ja/dynamic_instrumentation/?tab=configurationyaml#prerequisites
+[21]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[22]: /ja/tracing/trace_collection/runtime_config/
+[23]: /ja/agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
 [24]: https://app.datadoghq.com/organization-settings/api-keys
-[25]: /agent/guide/
+[25]: /ja/agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
-[27]: /agent/fleet_automation/#send-a-remote-flare
+[27]: /ja/agent/fleet_automation/#send-a-remote-flare

@@ -1,8 +1,13 @@
 ---
-title: AWS Fargate Configuration Guide for Datadog Security
-disable_toc: false
 aliases:
-  - /security/cloud_security_management/setup/fargate
+- /ja/security/cloud_security_management/setup/fargate
+disable_toc: false
+further_reading:
+- link: https://www.datadoghq.com/blog/threat-detection-fargate/
+  tag: ブログ
+  text: Get real-time threat detection for AWS Fargate ECS and EKS environments with
+    Datadog CSM
+title: AWS Fargate Configuration Guide for Datadog Security
 ---
 
 This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
@@ -235,9 +240,9 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 {{< /code-block >}}
 
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[6]: /ja/integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
-[8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[8]: /ja/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 
 {{% /tab %}}
 
@@ -321,7 +326,7 @@ spec:
      shareProcessNamespace: true
 ```
 
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[6]: /ja/integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -396,24 +401,28 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 
 {{% cloud-siem-aws-cloudtrail-send-logs %}}
 
-[1]: /integrations/ecs_fargate/
-[2]: /integrations/eks_fargate/
-[3]: /security/cloud_security_management/
-[4]: /security/application_security/
-[5]: /security/cloud_siem/
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/integrations/ecs_fargate/
+[2]: /ja/integrations/eks_fargate/
+[3]: /ja/security/cloud_security_management/
+[4]: /ja/security/application_security/
+[5]: /ja/security/cloud_siem/
+[6]: /ja/integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
-[8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[8]: /ja/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
-[10]: /security/application_security/enabling/tracing_libraries/threat_detection/java?tab=awsfargate
-[11]: /security/application_security/enabling/tracing_libraries/threat_detection/go/?tab=amazonecs
-[12]: /security/application_security/enabling/tracing_libraries/threat_detection/dotnet?tab=awsfargate
-[13]: /security/application_security/enabling/tracing_libraries/threat_detection/ruby?tab=awsfargate
-[14]: /security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
-[15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
-[16]: /security/application_security/enabling/compatibility/
-[17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /security/application_security/enabling/tracing_libraries/code_security/java/
-[19]: /security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
-[20]: /security/application_security/enabling/tracing_libraries/code_security/nodejs
+[10]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/java?tab=awsfargate
+[11]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/go/?tab=amazonecs
+[12]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/dotnet?tab=awsfargate
+[13]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/ruby?tab=awsfargate
+[14]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
+[15]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
+[16]: /ja/security/application_security/enabling/compatibility/
+[17]: /ja/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[18]: /ja/security/application_security/enabling/tracing_libraries/code_security/java/
+[19]: /ja/security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
+[20]: /ja/security/application_security/enabling/tracing_libraries/code_security/nodejs
 [21]: https://app.datadoghq.com/security/configuration/siem/setup

@@ -1,14 +1,13 @@
 ---
-title: ブラウザセッションリプレイ
 description: セッションリプレイでユーザーの Web 閲覧体験をキャプチャし、視覚化する方法について説明します。
 further_reading:
-- link: "https://www.datadoghq.com/blog/session-replay-datadog/"
+- link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: ブログ
   text: Datadog Session Replay を使用してユーザージャーニーをリアルタイムで表示
-- link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
+- link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: ブログ
   text: ファネル分析により、主要なユーザーフローを理解し、最適化する
-- link: "https://www.datadoghq.com/blog/zendesk-session-replay-integration/"
+- link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
   tag: ブログ
   text: Zendesk と Datadog セッションリプレイでユーザーが直面する問題を視覚的に再生する
 - link: /product_analytics/analytics_explorer
@@ -17,6 +16,7 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: ドキュメント
   text: Datadog で CSP 違反の検出と集計を行う
+title: ブラウザセッションリプレイ
 ---
 
 
@@ -98,9 +98,9 @@ To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops col
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /real_user_monitoring/browser/
-[5]: /real_user_monitoring/session_replay/mobile/
+[4]: /ja/real_user_monitoring/browser/
+[5]: /ja/real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[7]: https://docs.datadoghq.com/account_management/audit_trail/
-[8]: https://docs.datadoghq.com/notebooks/
+[7]: https://docs.datadoghq.com/ja/account_management/audit_trail/
+[8]: https://docs.datadoghq.com/ja/notebooks/
 [9]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history

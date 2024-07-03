@@ -1,22 +1,22 @@
 ---
-"categories":
-- "cloud"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡"
-"doc_link": "https://docs.datadoghq.com/integrations/lightbendrp/"
-"draft": false
-"git_integration_title": "lightbendrp"
-"has_logo": true
-"integration_id": "lightbendrp"
-"integration_title": "Lightbend"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "lightbendrp"
-"public_title": "Datadog-Lightbend Integration"
-"short_description": "Track actors and dispatcher events for Akka-based applications"
-"version": "1.0"
+categories:
+- cloud
+custom_kind: インテグレーション
+dependencies: []
+description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
+doc_link: https://docs.datadoghq.com/integrations/lightbendrp/
+draft: false
+git_integration_title: lightbendrp
+has_logo: true
+integration_id: lightbendrp
+integration_title: Lightbend
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: lightbendrp
+public_title: Datadog-Lightbend Integration
+short_description: Track actors and dispatcher events for Akka-based applications
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -89,5 +89,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://developer.lightbend.com/docs/monitoring/2.3.x/plugins/datadog/datadog.html
 [4]: https://developer.lightbend.com/docs/monitoring/2.3.x/home.html
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/lightbendrp/lightbendrp_metadata.csv
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

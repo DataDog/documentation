@@ -1,69 +1,69 @@
 ---
-"app_id": "solr"
-"app_uuid": "3733c24e-8466-4f3b-8411-59ef85c28302"
-"assets":
-  "dashboards":
-    "solr": "assets/dashboards/solr_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "solr.searcher.numdocs"
-      "metadata_path": "metadata.csv"
-      "prefix": "solr."
-    "process_signatures":
-    - "solr start"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "42"
-    "source_type_name": "Solr"
-  "saved_views":
-    "solr_processes": "assets/saved_views/solr_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/solr/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "solr"
-"integration_id": "solr"
-"integration_title": "Solr"
-"integration_version": "1.13.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "solr"
-"public_title": "Solr"
-"short_description": "リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::キャッシュ"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Solr"
+app_id: solr
+app_uuid: 3733c24e-8466-4f3b-8411-59ef85c28302
+assets:
+  dashboards:
+    solr: assets/dashboards/solr_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: solr.searcher.numdocs
+      metadata_path: metadata.csv
+      prefix: solr.
+    process_signatures:
+    - solr start
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 42
+    source_type_name: Solr
+  saved_views:
+    solr_processes: assets/saved_views/solr_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/solr/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: solr
+integration_id: solr
+integration_title: Solr
+integration_version: 1.13.0
+is_public: true
+manifest_version: 2.0.0
+name: solr
+public_title: Solr
+short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::キャッシュ
+  - Category::Data Stores
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Solr
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -197,9 +197,9 @@ mydomain:attr0=val0,attr1=val1
       bean: second_bean_name
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -242,13 +242,13 @@ mydomain:attr0=val0,attr1=val1
 
 Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7]を参照してください。
 
-[1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://lucene.apache.org/solr/guide/configuring-logging.html#permanent-logging-settings
 [3]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
-[4]: https://docs.datadoghq.com/logs/processing/#integration-pipelines
+[4]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
 [5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/docker/log/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/docker/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -316,5 +316,5 @@ attribute:
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/solr/images/solrgraph.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/integrations/java/
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/integrations/java/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

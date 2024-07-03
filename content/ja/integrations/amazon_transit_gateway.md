@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - network
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS Transit Gateway metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_transit_gateway/"
-"draft": false
-"git_integration_title": "amazon_transit_gateway"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Transit Gateway"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_transit_gateway"
-"public_title": "Datadog-AWS Transit Gateway Integration"
-"short_description": "Track key AWS Transit Gateway metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS Transit Gateway metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_transit_gateway/
+draft: false
+git_integration_title: amazon_transit_gateway
+has_logo: true
+integration_id: ''
+integration_title: AWS Transit Gateway
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_transit_gateway
+public_title: Datadog-AWS Transit Gateway Integration
+short_description: Track key AWS Transit Gateway metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -94,13 +94,12 @@ The AWS Transit Gateway integration does not include any service checks.
 
 Need help? Contact [Datadog support][9].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://app.datadoghq.com/integrations/amazon-transit-gateway
-[5]: https://docs.datadoghq.com/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/logs/explorer/
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ja/logs/explorer/
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_transit_gateway/amazon_transit_gateway_metadata.csv
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

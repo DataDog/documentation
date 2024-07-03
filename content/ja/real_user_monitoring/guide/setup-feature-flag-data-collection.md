@@ -1,10 +1,9 @@
 ---
-title: Getting Started with Feature Flag Data in RUM
-kind: guide
-beta: true
-description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
 aliases:
-- /real_user_monitoring/guide/getting-started-feature-flags/
+- /ja/real_user_monitoring/guide/getting-started-feature-flags/
+beta: true
+description: Learn how to set up RUM to capture feature flag data and analyze the
+  performance in Datadog
 further_reading:
 - link: /real_user_monitoring/feature_flag_tracking
   tag: Documentation
@@ -12,21 +11,22 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualize your RUM data in the RUM Explorer
+title: Getting Started with Feature Flag Data in RUM
 ---
 
-## Overview
-Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
+## 概要
+機能フラグデータにより、どのユーザーに特定の機能が表示されているか、導入した変更がユーザー体験に影響を与えているか、パフォーマンスに悪影響を与えているかを判断できるため、ユーザー体験やパフォーマンス監視の可視性が高まります。
 
-By enriching your RUM data with feature flag data, you can be confident that your feature successfully launches without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
+RUM データを機能フラグデータでリッチ化することにより、意図せずにバグやパフォーマンスの低下を引き起こすことなく、その機能が正常に起動することを確信することができます。この追加的な洞察により、機能のリリースとパフォーマンスを関連付け、問題を特定のリリースにピンポイントで特定し、より迅速にトラブルシューティングを行うことができます。
 
-## Setup
+## セットアップ
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
-Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
+機能フラグの追跡は、RUM ブラウザ SDK で利用可能です。開始するには、[RUM ブラウザモニタリング][1]をセットアップします。ブラウザ RUM SDK バージョン >= 4.25.0 が必要です。
 
-To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
 
 <details open>
   <summary>npm</summary>
@@ -34,7 +34,7 @@ To start collecting feature flag data, initialize the RUM SDK and configure the 
 ```javascript
   import { datadogRum } from '@datadog/browser-rum';
 
-  // Initialize Datadog Browser SDK
+  // Datadog ブラウザ SDK を初期化します
   datadogRum.init({
     ...
     enableExperimentalFeatures: ["feature_flags"],
@@ -72,39 +72,39 @@ window.DD_RUM &&
 </details>
 <br/>
 
-[1]: /real_user_monitoring/browser#setup
+[1]: /ja/real_user_monitoring/browser#setup
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+機能フラグの追跡は、RUM iOS SDK で利用可能です。開始するには、[RUM iOS モニタリング][1]をセットアップします。iOS RUM SDK バージョン 1.16.0 以上が必要です。
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
+機能フラグの追跡は、RUM Android SDK で利用可能です。開始するには、[RUM Android モニタリング][1]をセットアップします。Android RUM SDK バージョン 1.18.0 以上が必要です。
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
+機能フラグの追跡は、Flutter アプリケーションで利用可能です。開始するには、[RUM Flutter モニタリング][1]をセットアップします。Flutter プラグインバージョン 1.3.2 以上が必要です。
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
+機能フラグ追跡は、React Native アプリケーションで利用可能です。まずは、[RUM React Native モニタリング][1]をセットアップしてください。React Native RUM SDK のバージョン >= 1.7.0 が必要です。
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/
 {{% /tab %}}
 {{< /tabs >}}
 
-## Integrations
+## インテグレーション
 
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、または Datadog のインテグレーションパートナーのいずれかを使用して開始することができます。
 
-Datadog supports integrations with:
+Datadog は、以下とのインテグレーションをサポートしています。
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
 
@@ -113,11 +113,11 @@ Datadog supports integrations with:
 ### Amplitude integration
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
 Initialize Amplitude's SDK and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
-For more information about initializing Amplitude's SDK, see Amplitude's [JavaScript SDK documentation][1].
+Amplitude の SDK の初期化については、[Amplitude の JavaScript SDK ドキュメント][1]を参照してください。
 
 ```javascript
   const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
@@ -169,7 +169,7 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
 ```kotlin
   internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
     override fun track(exposure: Exposure) {
-        // Send the feature flag when Amplitude reports the exposure
+        // Amplitude で露出が報告された際に機能フラグを送信します
         GlobalRumMonitor.get().addFeatureFlagEvaluation(
             exposure.flagKey,
             exposure.variant.orEmpty()
@@ -177,7 +177,7 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
     }
   }
 
-  // In initialization:
+  // 初期化時:
   val config = ExperimentConfig.Builder()
       .exposureTrackingProvider(DatadogExposureTrackingProvider())
       .build()
@@ -198,7 +198,7 @@ Amplitude does not support this integration. Create a ticket with Amplitude to r
 ### ConfigCat integration
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
 When initializing the ConfigCat Javascript SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
 
@@ -849,8 +849,8 @@ datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup
+[1]: /ja/real_user_monitoring/browser/setup
 [2]: https://app.datadoghq.com/rum/explorer
-[3]: /dashboards/
-[4]: /monitors/#create-monitors
-[5]: /real_user_monitoring/feature_flag_tracking
+[3]: /ja/dashboards/
+[4]: /ja/monitors/#create-monitors
+[5]: /ja/real_user_monitoring/feature_flag_tracking

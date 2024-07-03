@@ -43,7 +43,7 @@ Cloudcraft で SSO を使用するための一般的な情報については、[
 10. **SAML Single Sign-On is enabled** オプションを切り替えます。
 11.  ユーザーにアイデンティティプロバイダー経由でのみ Cloudcraft にアクセスさせたい場合は、**Strict mode** オプションを有効にします。
 
-[1]: /cloudcraft/account-management/enable-sso-with-azure-ad/
-[2]: /cloudcraft/account-management/enable-sso-with-okta/
-[3]: /cloudcraft/account-management/enable-sso/
+[1]: /ja/cloudcraft/account-management/enable-sso-with-azure-ad/
+[2]: /ja/cloudcraft/account-management/enable-sso-with-okta/
+[3]: /ja/cloudcraft/account-management/enable-sso/
 [4]: https://app.cloudcraft.co/support

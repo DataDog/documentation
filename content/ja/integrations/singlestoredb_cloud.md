@@ -1,66 +1,66 @@
 ---
-"app_id": "singlestoredb-cloud"
-"app_uuid": "c7638089-0864-4ddc-bd32-b731c58fe567"
-"assets":
-  "dashboards":
-    "singlestoredb_cloud_overview": assets/dashboards/singlestoredb_cloud_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": singlestoredb_cloud.cpu_resource_limits
-      "metadata_path": metadata.csv
-      "prefix": singlestoredb_cloud.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10373"
-    "source_type_name": SinglestoreDB Cloud
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://www.singlestore.com"
-  "name": Singlestore
-  "sales_email": info@singlestore.com
-  "support_email": support@singlestore.com
-"categories":
+app_id: singlestoredb-cloud
+app_uuid: c7638089-0864-4ddc-bd32-b731c58fe567
+assets:
+  dashboards:
+    singlestoredb_cloud_overview: assets/dashboards/singlestoredb_cloud_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: singlestoredb_cloud.cpu_resource_limits
+      metadata_path: metadata.csv
+      prefix: singlestoredb_cloud.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10373
+    source_type_name: SinglestoreDB Cloud
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://www.singlestore.com
+  name: Singlestore
+  sales_email: info@singlestore.com
+  support_email: support@singlestore.com
+categories:
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "singlestoredb_cloud"
-"integration_id": "singlestoredb-cloud"
-"integration_title": "SingleStoreDB Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "singlestoredb_cloud"
-"public_title": "SingleStoreDB Cloud"
-"short_description": "Send your SinglestoreDB Cloud metrics to Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: singlestoredb_cloud
+integration_id: singlestoredb-cloud
+integration_title: SingleStoreDB Cloud
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: singlestoredb_cloud
+public_title: SingleStoreDB Cloud
+short_description: Send your SinglestoreDB Cloud metrics to Datadog
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Send your SinglestoreDB Cloud metrics to Datadog
-  "media":
-  - "caption": SinglestoreDB Cloud - Dashboard
-    "image_url": images/singlestoredb-cloud-dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SingleStoreDB Cloud
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Send your SinglestoreDB Cloud metrics to Datadog
+  media:
+  - caption: SinglestoreDB Cloud - Dashboard
+    image_url: images/singlestoredb-cloud-dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SingleStoreDB Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -130,5 +130,4 @@ Need help? Contact [Datadog support][4].
 [1]: https://portal.singlestore.com
 [2]: https://app.datadoghq.com/integrations/singlestoredb-cloud
 [3]: https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/metadata.csv
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

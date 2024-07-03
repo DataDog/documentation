@@ -1,7 +1,6 @@
 ---
-title: Amazon ECS Data Collection
 aliases:
-  - /agent/amazon_ecs/data_collected
+- /ja/agent/amazon_ecs/data_collected
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: Documentation
@@ -9,9 +8,10 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: Documentation
   text: Collect your application traces
-- link: "/agent/amazon_ecs/data_collected/#metrics"
+- link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentation
   text: Collect ECS metrics
+title: Amazon ECS Data Collection
 ---
 
 ## データ収集
@@ -40,5 +40,5 @@ Metrics prefixed with `ecs.containerinsights.*` can be collected by enabling **c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/agent/docker/data_collected/#metrics
-[2]: https://docs.datadoghq.com/help/
+[1]: https://docs.datadoghq.com/ja/agent/docker/data_collected/#metrics
+[2]: https://docs.datadoghq.com/ja/help/

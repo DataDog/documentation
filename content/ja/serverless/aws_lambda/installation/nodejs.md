@@ -1,23 +1,23 @@
 ---
-title: Instrumenting Node.js Serverless Applications
-kind: documentation
-further_reading:
-    - link: /serverless/configuration
-      tag: Documentation
-      text: Configure Serverless Monitoring
-    - link: /serverless/guide/serverless_tracing_and_bundlers/
-      tag: Documentation
-      text: Node.js Lambda Tracing and Bundlers Compatibility
-    - link: /serverless/guide/troubleshoot_serverless_monitoring
-      tag: Documentation
-      text: Troubleshoot Serverless Monitoring
-    - link: serverless/custom_metrics/
-      tag: Documentation
-      text: Submitting Custom Metrics from Serverless Applications
 aliases:
-    - /serverless/datadog_lambda_library/nodejs/
-    - /serverless/guide/nodejs/
-    - /serverless/installation/nodejs
+- /ja/serverless/datadog_lambda_library/nodejs/
+- /ja/serverless/guide/nodejs/
+- /ja/serverless/installation/nodejs
+further_reading:
+- link: /serverless/configuration
+  tag: Documentation
+  text: Configure Serverless Monitoring
+- link: /serverless/guide/serverless_tracing_and_bundlers/
+  tag: Documentation
+  text: Node.js Lambda Tracing and Bundlers Compatibility
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: Documentation
+  text: Troubleshoot Serverless Monitoring
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: Submitting Custom Metrics from Serverless Applications
+kind: documentation
+title: Instrumenting Node.js Serverless Applications
 ---
 
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
@@ -91,7 +91,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -122,8 +122,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     For more information and additional settings, see the [plugin documentation][1].
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -166,8 +166,8 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
     More information and additional parameters can be found in the [macro documentation][1].
 
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -253,7 +253,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Terraform" %}}
@@ -310,7 +310,7 @@ module "lambda-datadog" {
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
 [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
 [3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
-[4]: /getting_started/site/
+[4]: /ja/getting_started/site/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -373,7 +373,7 @@ module "lambda-datadog" {
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
@@ -438,9 +438,8 @@ exports.handler = async (event) => {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/functions
-[2]: /serverless/guide/troubleshoot_serverless_monitoring/
-[3]: /serverless/configuration/
-[4]: /serverless/custom_metrics?tab=nodejs
-[5]: /tracing/custom_instrumentation/nodejs/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
-
+[2]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[3]: /ja/serverless/configuration/
+[4]: /ja/serverless/custom_metrics?tab=nodejs
+[5]: /ja/tracing/custom_instrumentation/nodejs/
+[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

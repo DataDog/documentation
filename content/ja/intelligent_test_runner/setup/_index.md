@@ -1,8 +1,8 @@
 ---
-title: Configure the Intelligent Test Runner
-kind: documentation
 aliases:
-- /continuous_integration/intelligent_test_runner/setup/
+- /ja/continuous_integration/intelligent_test_runner/setup/
+kind: documentation
+title: Configure the Intelligent Test Runner
 type: multi-code-lang
 ---
 
@@ -12,4 +12,4 @@ For information about configuration options for [Intelligent Test Runner][1], ch
 
 <br>
 
-[1]: /continuous_integration/intelligent_test_runner
+[1]: /ja/continuous_integration/intelligent_test_runner

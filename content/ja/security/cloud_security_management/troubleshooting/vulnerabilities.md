@@ -1,17 +1,18 @@
 ---
-title: Troubleshooting Cloud Security Management Vulnerabilities
 aliases:
-  - /security/vulnerabilities/troubleshooting/
+- /ja/security/vulnerabilities/troubleshooting/
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: /security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers
   tag: Documentation
   text: Setting up container image vulnerabilities
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
+- link: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts
   tag: Documentation
   text: Setting up host vulnerabilities
-- link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
+- link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: Blog
-  text: Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring
+  text: Enhance your troubleshooting workflow with Container Images in Datadog Container
+    Monitoring
+title: Troubleshooting Cloud Security Management Vulnerabilities
 ---
 
 ## 概要
@@ -59,7 +60,7 @@ The workaround for this issue is to set the configuration option `discard_unpack
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
+[1]: /ja/help/
+[2]: /ja/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary

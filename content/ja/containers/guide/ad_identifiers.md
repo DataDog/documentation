@@ -1,8 +1,7 @@
 ---
-title: Autodiscovery Container Identifiers
 aliases:
- - /agent/autodiscovery/ad_identifiers
- - /agent/guide/ad_identifiers
+- /ja/agent/autodiscovery/ad_identifiers
+- /ja/agent/guide/ad_identifiers
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Manage which Container to include in the Agent Autodiscovery
+title: Autodiscovery Container Identifiers
 ---
 
 Autodiscovery container identifiers, or `ad_identifiers`, allow you to apply an Autodiscovery configuration file template to a given container, either by using the container image name, or by using a custom Autodiscovery container identifier.
@@ -108,4 +108,4 @@ Replace `<CONTAINER_IDENTIFIER>` with the container name within the pod.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/getting_started/tagging/unified_service_tagging

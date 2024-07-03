@@ -1,11 +1,11 @@
 ---
-title: security posture score
-synonyms:
-  - posture score
-  - compliance score
 core_product:
-  - security
-  - csm
+- security
+- csm
+synonyms:
+- posture score
+- compliance score
+title: security posture score
 ---
 
 {{< jqmath-vanilla >}}
@@ -25,6 +25,6 @@ If there are no misconfigurations for a given severity, the severity is not incl
 
 You can improve your score by remediating misconfigurations, either by fixing the underlying issues or by muting the misconfiguration for the impacted resource. The posture score is updated every hour.
 
-[1]: /security/default_rules/#cat-posture-management-cloud
-[2]: /security/default_rules/#cat-posture-management-infra
-[3]: /security/cloud_security_management/misconfigurations/
+[1]: /ja/security/default_rules/#cat-posture-management-cloud
+[2]: /ja/security/default_rules/#cat-posture-management-infra
+[3]: /ja/security/cloud_security_management/misconfigurations/

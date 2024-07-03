@@ -1,69 +1,69 @@
 ---
-"app_id": "mendix"
-"app_uuid": "4119b134-c828-4e14-95b5-585bb13d314a"
-"assets":
-  "dashboards":
-    "Mendix Application Overview": assets/dashboards/MendixApplicationOverview.json
-  "integration":
-    "auto_install": true
-    "metrics":
-      "check": mx.database.diskstorage_size
-      "metadata_path": metadata.csv
-      "prefix": mx.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10344"
-    "source_type_name": Mendix
-"author":
-  "homepage": "https://mendix.com/"
-  "name": Mendix
-  "sales_email": mxsupport@mendix.com
-  "support_email": mxsupport@mendix.com
-"categories":
+app_id: mendix
+app_uuid: 4119b134-c828-4e14-95b5-585bb13d314a
+assets:
+  dashboards:
+    Mendix Application Overview: assets/dashboards/MendixApplicationOverview.json
+  integration:
+    auto_install: true
+    metrics:
+      check: mx.database.diskstorage_size
+      metadata_path: metadata.csv
+      prefix: mx.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10344
+    source_type_name: Mendix
+author:
+  homepage: https://mendix.com/
+  name: Mendix
+  sales_email: mxsupport@mendix.com
+  support_email: mxsupport@mendix.com
+categories:
 - cloud
 - automation
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/mendix/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mendix"
-"integration_id": "mendix"
-"integration_title": "Mendix"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mendix"
-"public_title": "Mendix"
-"short_description": "Monitor Mendix environment metrics"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/mendix/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: mendix
+integration_id: mendix
+integration_title: Mendix
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: mendix
+public_title: Mendix
+short_description: Monitor Mendix environment metrics
+supported_os:
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Windows"
-  - "Category::Cloud"
-  - "Category::Automation"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Monitor Mendix environment metrics
-  "media":
-  - "caption": Page Editor
-    "image_url": images/page-editor.png
-    "media_type": image
-  - "caption": Domain model with Data Hub
-    "image_url": images/domain-model-with-data-hub.png
-    "media_type": image
-  - "caption": Cloud developer portal view of resource packs
-    "image_url": images/cloud_resource_pack_overview.png
-    "media_type": image
-  - "caption": Mendix Application Overview dashboard
-    "image_url": images/mendix_dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Mendix
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Automation
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Monitor Mendix environment metrics
+  media:
+  - caption: Page Editor
+    image_url: images/page-editor.png
+    media_type: image
+  - caption: Domain model with Data Hub
+    image_url: images/domain-model-with-data-hub.png
+    media_type: image
+  - caption: Cloud developer portal view of resource packs
+    image_url: images/cloud_resource_pack_overview.png
+    media_type: image
+  - caption: Mendix Application Overview dashboard
+    image_url: images/mendix_dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Mendix
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -109,4 +109,3 @@ Need help? Contact [Mendix support][6].
 [4]: https://docs.mendix.com/developerportal/operate/datadog-metrics/#2-setting-up-datadog-for-your-mendix-app
 [5]: https://docs.mendix.com/developerportal/operate/monitoring-with-apm/#environment
 [6]: https://support.mendix.com/hc/en-us
-

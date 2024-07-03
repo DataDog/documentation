@@ -1,7 +1,6 @@
 ---
-title: Trace Metrics
 aliases:
-- /opentelemetry/collector_exporter/trace_metrics/
+- /ja/opentelemetry/collector_exporter/trace_metrics/
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /opentelemetry/guide/service_entry_spans_mapping/
   tag: Documentation
   text: Mapping OpenTelemetry Semantic Conventions to Service-entry Spans
+title: Trace Metrics
 ---
 
 <div class="alert alert-info">
@@ -68,5 +68,5 @@ For a full working example configuration with the Datadog exporter, see [`trace-
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
-[2]: /tracing/metrics/metrics_namespace/
+[2]: /ja/tracing/metrics/metrics_namespace/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml

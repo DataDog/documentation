@@ -1,8 +1,6 @@
 ---
-title: Table Widget
-widget_type: "query_table"
 aliases:
-- /graphing/widgets/table/
+- /ja/graphing/widgets/table/
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
@@ -10,6 +8,8 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: Learn how to build a graphing query
+title: Table Widget
+widget_type: query_table
 ---
 
 ## 概要
@@ -64,14 +64,14 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/querying/#configuring-a-graph
-[2]: /logs/search_syntax/
-[3]: /tracing/trace_explorer/query_syntax/
-[4]: /real_user_monitoring/explorer/search_syntax
-[5]: /profiler/profile_visualizations
-[6]: /security_monitoring/explorer/
-[7]: /dashboards/guide/apm-stats-graph
-[8]: /api/latest/dashboards/
-[9]: /dashboards/graphing_json/widget_json/
-[10]: /dashboards/guide/context-links/
-[11]: /dashboards/querying/#advanced-graphing
+[1]: /ja/dashboards/querying/#configuring-a-graph
+[2]: /ja/logs/search_syntax/
+[3]: /ja/tracing/trace_explorer/query_syntax/
+[4]: /ja/real_user_monitoring/explorer/search_syntax
+[5]: /ja/profiler/profile_visualizations
+[6]: /ja/security_monitoring/explorer/
+[7]: /ja/dashboards/guide/apm-stats-graph
+[8]: /ja/api/latest/dashboards/
+[9]: /ja/dashboards/graphing_json/widget_json/
+[10]: /ja/dashboards/guide/context-links/
+[11]: /ja/dashboards/querying/#advanced-graphing

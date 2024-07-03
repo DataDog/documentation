@@ -1,57 +1,57 @@
 ---
-"app_id": "zoom-activity-logs"
-"app_uuid": "2297e963-5129-4711-bf04-767d5c929f5e"
-"assets":
-  "dashboards":
-    "zoom-activity-logs": assets/dashboards/zoom_activity_logs_overview.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10394"
-    "source_type_name": Zoom Activity Logs
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: zoom-activity-logs
+app_uuid: 2297e963-5129-4711-bf04-767d5c929f5e
+assets:
+  dashboards:
+    zoom-activity-logs: assets/dashboards/zoom_activity_logs_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10394
+    source_type_name: Zoom Activity Logs
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "zoom_activity_logs"
-"integration_id": "zoom-activity-logs"
-"integration_title": "Zoom Activity Logs"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "zoom_activity_logs"
-"public_title": "Zoom Activity Logs"
-"short_description": "Consume Operation and Activity Logs from Zoom"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: zoom_activity_logs
+integration_id: zoom-activity-logs
+integration_title: Zoom Activity Logs
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: zoom_activity_logs
+public_title: Zoom Activity Logs
+short_description: Consume Operation and Activity Logs from Zoom
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Submitted Data Type::Logs"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Consume Operation and Activity Logs from Zoom
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Zoom Activity Logs
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Consume Operation and Activity Logs from Zoom
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Zoom Activity Logs
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -129,6 +129,5 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods/#operation/reportSignInSignOutActivities
 [2]: https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods/#operation/reportOperationLogs
-[3]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/help/
 [4]: https://developers.zoom.us/docs/integrations/oauth-scopes-granular/#reports
-

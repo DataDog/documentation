@@ -1,11 +1,10 @@
 ---
-title: Powerpack Widget
 disable_toc: false
 further_reading:
 - link: /dashboards/guide/powerpacks-best-practices/
   tag: Guide
   text: Scale Graphing Expertise with Powerpacks
-- link: "https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/"
+- link: https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/
   tag: Blog
   text: Save dashboard widgets in reusable groups with Powerpacks
 - link: /dashboards/widgets/group/
@@ -14,6 +13,7 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Powerpack Widget
 ---
 
 ## 概要
@@ -99,6 +99,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/powerpacks-best-practices/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/guide/powerpacks-best-practices/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

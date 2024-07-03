@@ -1,22 +1,22 @@
 ---
-title: Getting Started with Logs
-kind: documentation
 further_reading:
-    - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
-      tag: Learning Center
-      text: Introduction to Log Management
-    - link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
-      tag: Learning Center
-      text: Going Deeper with Logs Processing
-    - link: /logs/log_collection/
-      tag: Documentation
-      text: Log Collection & Integrations
-    - link: /getting_started/tagging/unified_service_tagging
-      tag: Documentation
-      text: Learn how to configure unified service tagging
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session to optimize your Log Management
+- link: https://learn.datadoghq.com/courses/intro-to-log-management
+  tag: Learning Center
+  text: Introduction to Log Management
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
+  tag: Learning Center
+  text: Going Deeper with Logs Processing
+- link: /logs/log_collection/
+  tag: Documentation
+  text: Log Collection & Integrations
+- link: /getting_started/tagging/unified_service_tagging
+  tag: Documentation
+  text: Learn how to configure unified service tagging
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to optimize your Log Management
+kind: documentation
+title: Getting Started with Logs
 ---
 
 ## Overview
@@ -133,26 +133,26 @@ Once a logging source is configured, and your logs are available in the Log Expl
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://www.datadoghq.com
-[2]: /tracing/other_telemetry/connect_logs_and_traces/
-[3]: /logs/guide/correlate-logs-with-metrics/
-[4]: /security/cloud_siem/
-[5]: /getting_started/integrations/
-[6]: /agent/
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[3]: /ja/logs/guide/correlate-logs-with-metrics/
+[4]: /ja/security/cloud_siem/
+[5]: /ja/getting_started/integrations/
+[6]: /ja/agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
 [8]: https://app.datadoghq.com/logs/onboarding/server
-[9]: /agent/logs/?tab=tailfiles#custom-log-collection
-[10]: /agent/docker/log/?tab=containerinstallation
-[11]: /agent/kubernetes/log/?tab=daemonset
+[9]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[10]: /ja/agent/docker/log/?tab=containerinstallation
+[11]: /ja/agent/kubernetes/log/?tab=daemonset
 [12]: https://app.datadoghq.com/logs/onboarding/container
 [13]: https://app.datadoghq.com/logs/onboarding/cloud
 [14]: https://app.datadoghq.com/logs/onboarding/client
 [15]: https://app.datadoghq.com/logs/onboarding/other
-[16]: /logs/explorer/
-[17]: /logs/explorer/#patterns
-[18]: /logs/log_configuration/attributes_naming_convention/
-[19]: /logs/log_configuration/pipelines/
-[20]: /logs/log_configuration/processors/
-[21]: /logs/log_configuration/
-[22]: /logs/guide/best-practices-for-log-management/
-[23]: /logs/guide/getting-started-lwl/
-[24]: /logs/guide/logs-rbac/
+[16]: /ja/logs/explorer/
+[17]: /ja/logs/explorer/#patterns
+[18]: /ja/logs/log_configuration/attributes_naming_convention/
+[19]: /ja/logs/log_configuration/pipelines/
+[20]: /ja/logs/log_configuration/processors/
+[21]: /ja/logs/log_configuration/
+[22]: /ja/logs/guide/best-practices-for-log-management/
+[23]: /ja/logs/guide/getting-started-lwl/
+[24]: /ja/logs/guide/logs-rbac/

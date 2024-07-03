@@ -1,69 +1,69 @@
 ---
-"app_id": "census"
-"app_uuid": "7f4f3919-5b0a-4b4b-93e5-7f0c035f3887"
-"assets":
-  "dashboards":
-    "Census Overview": assets/dashboards/census_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
+app_id: census
+app_uuid: 7f4f3919-5b0a-4b4b-93e5-7f0c035f3887
+assets:
+  dashboards:
+    Census Overview: assets/dashboards/census_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check:
       - census.syncs.rows_processed
       - census.syncs.sync_completed
-      "metadata_path": metadata.csv
-      "prefix": census
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10336"
-    "source_type_name": Census
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://www.getcensus.com/"
-  "name": Census
-  "sales_email": sales@getcensus.com
-  "support_email": support@getcensus.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: census
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10336
+    source_type_name: Census
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://www.getcensus.com/
+  name: Census
+  sales_email: sales@getcensus.com
+  support_email: support@getcensus.com
+categories:
 - automation
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/census/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "census"
-"integration_id": "census"
-"integration_title": "Census"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "census"
-"public_title": "Census"
-"short_description": "Send your Census sync metrics and events to Datadog."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/census/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: census
+integration_id: census
+integration_title: Census
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: census
+public_title: Census
+short_description: Send your Census sync metrics and events to Datadog.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Offering::Integration"
-  - "Submitted Data Type::Events"
-  - "Submitted Data Type::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Send your Census sync metrics and events to Datadog.
-  "media":
-  - "caption": Census Syncs Overview - Dashboard
-    "image_url": images/census_dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Census
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Offering::Integration
+  - Submitted Data Type::Events
+  - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Send your Census sync metrics and events to Datadog.
+  media:
+  - caption: Census Syncs Overview - Dashboard
+    image_url: images/census_dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Census
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -112,5 +112,4 @@ Need help? Contact [Datadog support][4].
 [1]: https://www.getcensus.com/
 [2]: https://app.getcensus.com/
 [3]: https://github.com/DataDog/integrations-extras/blob/master/census/metadata.csv
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

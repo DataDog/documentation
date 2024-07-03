@@ -1,5 +1,5 @@
 ---
-title: "VPC Component"
+title: VPC Component
 ---
 ## 概要
 

@@ -1,65 +1,65 @@
 ---
-"app_id": "clickhouse"
-"app_uuid": "668f43c1-bdd8-4686-bb92-d40f0c48fda9"
-"assets":
-  "dashboards":
-    "ClickHouse Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": clickhouse.query.active
-      "metadata_path": metadata.csv
-      "prefix": clickhouse.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10078"
-    "source_type_name": ClickHouse
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: clickhouse
+app_uuid: 668f43c1-bdd8-4686-bb92-d40f0c48fda9
+assets:
+  dashboards:
+    ClickHouse Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: clickhouse.query.active
+      metadata_path: metadata.csv
+      prefix: clickhouse.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10078
+    source_type_name: ClickHouse
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - caching
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "clickhouse"
-"integration_id": "clickhouse"
-"integration_title": "ClickHouse"
-"integration_version": "3.5.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "clickhouse"
-"public_title": "ClickHouse"
-"short_description": "Monitor the health and performance of your ClickHouse clusters."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: clickhouse
+integration_id: clickhouse
+integration_title: ClickHouse
+integration_version: 3.5.0
+is_public: true
+manifest_version: 2.0.0
+name: clickhouse
+public_title: ClickHouse
+short_description: Monitor the health and performance of your ClickHouse clusters.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of your ClickHouse clusters.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": ClickHouse
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Data Stores
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor the health and performance of your ClickHouse clusters.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ClickHouse
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -115,7 +115,7 @@ ClickHouse チェックは [Datadog Agent][3] パッケージに含まれてい�
 3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/clickhouse/datadog_checks/clickhouse/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -139,8 +139,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "clickhouse", "service": "<サービス名>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -169,7 +169,7 @@ ClickHouse チェックにはイベントは含まれません。
 
 
 [1]: https://clickhouse.yandex
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/

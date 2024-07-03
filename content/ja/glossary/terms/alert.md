@@ -1,6 +1,6 @@
 ---
-title: alert
 core_product:
-  - alerts
+- alerts
+title: alert
 ---
-Datadog monitors generate alerts, indicating that a set condition has been reached. 
+Datadog monitors generate alerts, indicating that a set condition has been reached.

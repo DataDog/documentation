@@ -1,25 +1,26 @@
 ---
-title: Change Overlays
-description: Overlay your change events on graphs to correlate performance anomalies with changes in your application
+description: Overlay your change events on graphs to correlate performance anomalies
+  with changes in your application
 further_reading:
 - link: /tracing/services/deployment_tracking/
   tag: Documentation
   text: Getting started with APM Deployment Tracking
-- link: "https://www.datadoghq.com/blog/datadog-deployment-tracking/"
+- link: https://www.datadoghq.com/blog/datadog-deployment-tracking/
   tag: Blog
   text: Monitor code deployments with Deployment Tracking in Datadog APM
-- link: "https://www.datadoghq.com/blog/faulty-deployment-detection/"
+- link: https://www.datadoghq.com/blog/faulty-deployment-detection/
   tag: Blog
   text: Release code confidently with Automatic Faulty Deployment Detection
 - link: /real_user_monitoring/guide/setup-rum-deployment-tracking/?tab=npm
   tag: Documentation
   text: Getting started with RUM Deployment Tracking
-- link: "https://www.datadoghq.com/blog/datadog-rum-deployment-tracking/"
+- link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking/
   tag: Blog
   text: Troubleshoot faulty frontend deployments with Deployment Tracking in RUM
-- link: "https://www.datadoghq.com/blog/change-overlays/"
+- link: https://www.datadoghq.com/blog/change-overlays/
   tag: Blog
   text: Quickly spot and revert faulty deployments with Change Overlays
+title: Change Overlays
 ---
 <div class="alert alert-warning">
     変更オーバーレイはベータ版です。
@@ -75,18 +76,18 @@ APM デプロイでは `env` を指定する必要があります。ダッシュ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/services/deployment_tracking/
-[2]: /watchdog/faulty_deployment_detection/
-[3]: /dashboards/widgets/
+[1]: /ja/tracing/services/deployment_tracking/
+[2]: /ja/watchdog/faulty_deployment_detection/
+[3]: /ja/dashboards/widgets/
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: https://app.datadoghq.com/notebook/list
 [6]: https://app.datadoghq.com/metric/summary
-[7]: /metrics/advanced-filtering/
-[8]: /getting_started/tagging/
-[9]: /metrics/#time-aggregation
-[10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
-[11]: /dashboards/functions/rollup/
-[12]: /dashboards/functions/#apply-functions-optional
-[13]: /metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /logs/explorer/search_syntax/
-[15]: /dashboards/widgets/timeseries/#event-overlay
+[7]: /ja/metrics/advanced-filtering/
+[8]: /ja/getting_started/tagging/
+[9]: /ja/metrics/#time-aggregation
+[10]: /ja/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[11]: /ja/dashboards/functions/rollup/
+[12]: /ja/dashboards/functions/#apply-functions-optional
+[13]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
+[14]: /ja/logs/explorer/search_syntax/
+[15]: /ja/dashboards/widgets/timeseries/#event-overlay

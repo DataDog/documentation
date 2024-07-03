@@ -1,17 +1,17 @@
 ---
-title: Cluster Agent for Kubernetes
 aliases:
-- /agent/kubernetes/cluster/
-- /agent/cluster_agent/
-- /containers/cluster_agent/event_collection
-- /containers/cluster_agent/metadata_provider
+- /ja/agent/kubernetes/cluster/
+- /ja/agent/cluster_agent/
+- /ja/containers/cluster_agent/event_collection
+- /ja/containers/cluster_agent/metadata_provider
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
   text: Introducing the Datadog Cluster Agent
-- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: Blog
   text: Autoscale your Kubernetes workloads with any Datadog metric
+title: Cluster Agent for Kubernetes
 ---
 
 ## 概要
@@ -59,6 +59,6 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/guide/cluster_agent_autoscaling_metrics
+[1]: /ja/containers/guide/cluster_agent_autoscaling_metrics
 [2]: https://hub.docker.com/r/datadog/cluster-agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent

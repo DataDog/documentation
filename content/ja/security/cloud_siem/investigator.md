@@ -1,11 +1,10 @@
 ---
-title: Investigator
 aliases:
-  - /security_platform/cloud_siem/cloud_security_investigator/
-  - /security_platform/cloud_siem/cloud_siem_investigator/
-  - /security_platform/cloud_siem/investigator/
-  - /security/cloud_siem/cloud_security_investigator/
-  - /security/cloud_siem/cloud_siem_investigator/
+- /ja/security_platform/cloud_siem/cloud_security_investigator/
+- /ja/security_platform/cloud_siem/cloud_siem_investigator/
+- /ja/security_platform/cloud_siem/investigator/
+- /ja/security/cloud_siem/cloud_security_investigator/
+- /ja/security/cloud_siem/cloud_siem_investigator/
 further_reading:
 - link: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
   tag: Documentation
@@ -13,9 +12,10 @@ further_reading:
 - link: /cloud_siem/explorer/
   tag: Documentation
   text: Learn about the Security Signals Explorer
-- link: "https://www.datadoghq.com/blog/visualize-cloud-activity-datadog-cloud-siem-investigator/"
+- link: https://www.datadoghq.com/blog/visualize-cloud-activity-datadog-cloud-siem-investigator/
   tag: Blog
   text: Visualize activity in your cloud environment with Datadog Cloud SIEM Investigator
+title: Investigator
 ---
 
 ## 概要
@@ -82,5 +82,3 @@ Cloud SIEM Investigator は、影響を受けるエンティティから別の�
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-

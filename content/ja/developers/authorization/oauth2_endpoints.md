@@ -1,10 +1,10 @@
 ---
-title: OAuth2 Authorization Endpoints Reference
 description: Learn how to use the OAuth2 authorization endpoints.
 further_reading:
 - link: /developers/authorization/
   tag: Documentation
   text: Learn about OAuth2 Authorization
+title: OAuth2 Authorization Endpoints Reference
 ---
 
 ## 概要
@@ -61,7 +61,7 @@ If a user successfully grants the access request, your application [obtains an a
 アプリケーションは、この認可リクエストを行う必要はありません。このステップは、前のユーザー認可リクエストに対する応答であり、ユーザーがアプリケーションの認可に成功すると、Datadog によって自動的にリクエストされます。
 
 
-[1]: https://docs.datadoghq.com/getting_started/site/
+[1]: https://docs.datadoghq.com/ja/getting_started/site/
 [2]: https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1
 [3]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.1
 {{% /tab %}}

@@ -1,5 +1,5 @@
 ---
-title: "VPN gateway Component"
+title: VPN gateway Component
 ---
 
 ## 概要

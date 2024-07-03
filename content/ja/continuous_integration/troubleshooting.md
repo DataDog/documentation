@@ -1,15 +1,15 @@
 ---
-title: CI Visibility Troubleshooting
 further_reading:
-  - link: /continuous_integration/tests
-    tag: Documentation
-    text: Learn how to monitor your CI tests
-  - link: /continuous_integration/pipelines
-    tag: Documentation
-    text: Learn how to monitor your CI pipelines
-  - link: /continuous_integration/intelligent_test_runner
-    tag: Documentation
-    text: Learn about the Intelligent Test Runner
+- link: /continuous_integration/tests
+  tag: Documentation
+  text: Learn how to monitor your CI tests
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Learn how to monitor your CI pipelines
+- link: /continuous_integration/intelligent_test_runner
+  tag: Documentation
+  text: Learn about the Intelligent Test Runner
+title: CI Visibility Troubleshooting
 ---
 
 {{< site-region region="gov" >}}
@@ -53,17 +53,17 @@ A pipeline execution can maintain `Running` status for a maximum of three days. 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.jenkins.io/doc/book/system-administration/viewing-logs/
-[2]: /help/
-[3]: /continuous_integration/tests/
+[2]: /ja/help/
+[3]: /ja/continuous_integration/tests/
 [4]: https://app.datadoghq.com/ci/test-runs
 [5]: https://app.datadoghq.com/ci/test-services
-[6]: /tracing/troubleshooting/tracer_debug_logs
-[7]: /continuous_integration/tests/containers/
-[8]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
+[6]: /ja/tracing/troubleshooting/tracer_debug_logs
+[7]: /ja/continuous_integration/tests/containers/
+[8]: /ja/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [9]: https://app.datadoghq.com/ci/settings/repository
-[10]: /continuous_integration/intelligent_test_runner/
+[10]: /ja/continuous_integration/intelligent_test_runner/
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
-[13]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
-[14]: /continuous_integration/tests/#supported-features
-[15]: /continuous_integration/pipelines/#supported-features
+[13]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
+[14]: /ja/continuous_integration/tests/#supported-features
+[15]: /ja/continuous_integration/pipelines/#supported-features

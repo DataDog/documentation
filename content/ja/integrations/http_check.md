@@ -1,57 +1,59 @@
 ---
-"app_id": "network"
-"app_uuid": "3773283a-494f-497a-98cc-804520634a7a"
-"assets":
-  "integration":
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "network.http.response_time"
-      "metadata_path": "metadata.csv"
-      "prefix": "network."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_name": "HTTP"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/http_check/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "http_check"
-"integration_id": "ネットワーク"
-"integration_title": "HTTP チェック"
-"integration_version": "9.6.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "http_check"
-"public_title": "HTTP Check"
-"short_description": "Monitor any HTTP service for bad responses, soon-to-expire SSL certs, and more."
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Network"
-  "configuration": "README.md#Setup"
-  "description": "Monitor any HTTP service for bad responses, soon-to-expire SSL certs, and more."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "HTTP Check"
+app_id: network
+app_uuid: 3773283a-494f-497a-98cc-804520634a7a
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: network.http.response_time
+      metadata_path: metadata.csv
+      prefix: network.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: HTTP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/http_check/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: http_check
+integration_id: ネットワーク
+integration_title: HTTP チェック
+integration_version: 9.6.0
+is_public: true
+manifest_version: 2.0.0
+name: http_check
+public_title: HTTP Check
+short_description: Monitor any HTTP service for bad responses, soon-to-expire SSL
+  certs, and more.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  configuration: README.md#Setup
+  description: Monitor any HTTP service for bad responses, soon-to-expire SSL certs,
+    and more.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HTTP Check
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -143,15 +145,14 @@ To disable `http.ssl_cert`, set `check_certificate_expiration` to false.
 Need help? Contact [Datadog support][12].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/developers/write_agent_check/#collection-interval
-[5]: https://docs.datadoghq.com/getting_started/tagging/
+[4]: https://docs.datadoghq.com/ja/developers/write_agent_check/#collection-interval
+[5]: https://docs.datadoghq.com/ja/getting_started/tagging/
 [6]: https://www.datadoghq.com/blog/the-power-of-tagged-metrics
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/http_check/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/http_check/assets/service_checks.json
-[11]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
-[12]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
+[12]: https://docs.datadoghq.com/ja/help/

@@ -1,14 +1,14 @@
 ---
-title: Writing a Custom Agent Check
-kind: documentation
 aliases:
-    - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
-    - /agent/faq/agent-5-custom-agent-check/
-    - /developers/write_agent_check/
+- /ja/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
+- /ja/agent/faq/agent-5-custom-agent-check/
+- /ja/developers/write_agent_check/
 further_reading:
 - link: /developers/
   tag: Documentation
   text: Developing on Datadog
+kind: documentation
+title: Writing a Custom Agent Check
 ---
 
 ## Overview
@@ -173,8 +173,8 @@ class HelloCheck(AgentCheck):
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/configuration/agent-configuration-files#agent-configuration-directory
-[3]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[2]: /ja/agent/configuration/agent-configuration-files#agent-configuration-directory
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: https://app.datadoghq.com/metric/summary
 [5]: https://github.com/DataDog/integrations-core/blob/9414403b361e583e8f1ebcdee2f006c384c61045/datadog_checks_base/datadog_checks/base/utils/subprocess_output.py#L22
-[6]: /dashboards/
+[6]: /ja/dashboards/

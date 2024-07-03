@@ -1,5 +1,4 @@
 ---
-title: ASM Terms and Concepts
 disable_toc: false
 further_reading:
 - link: /security/application_security/how-appsec-works
@@ -11,9 +10,10 @@ further_reading:
 - link: /security/application_security/software_composition_analysis/
   tag: Documentation
   text: Software Composition Analysis
-- link: "https://www.datadoghq.com/blog/datadog-threat-intelligence/"
+- link: https://www.datadoghq.com/blog/datadog-threat-intelligence/
   tag: Blog
   text: Accelerate security investigations with Datadog Threat Intelligence
+title: ASM Terms and Concepts
 ---
 
 {{< site-region region="gov" >}}
@@ -138,12 +138,12 @@ Local File Inclusion (LFI)
 [5]: https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
 [6]: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
-[8]: /agent/remote_config/
-[10]: /security/detection_rules/
+[8]: /ja/agent/remote_config/
+[10]: /ja/security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
-[12]: /security/application_security/threats/inapp_waf_rules
+[12]: /ja/security/application_security/threats/inapp_waf_rules
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
-[14]: /security/application_security/threats/add-user-info/
-[15]: /security/application_security/threats/trace_qualification/
-[16]: /security/application_security/threats/threat-intelligence/
-[17]: /security/application_security/threats/attacker-explorer/
+[14]: /ja/security/application_security/threats/add-user-info/
+[15]: /ja/security/application_security/threats/trace_qualification/
+[16]: /ja/security/application_security/threats/threat-intelligence/
+[17]: /ja/security/application_security/threats/attacker-explorer/

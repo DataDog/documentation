@@ -1,26 +1,26 @@
 ---
-"aliases":
-- "/integrations/awskinesis/"
-"categories":
-- "aws"
-- "cloud"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Amazon Kinesis のキーメトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_kinesis/"
-"draft": false
-"git_integration_title": "amazon_kinesis"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Kinesis"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_kinesis"
-"public_title": "Datadog-Amazon Kinesis Integration"
-"short_description": "Track key Amazon Kinesis metrics."
-"version": "1.0"
+aliases:
+- /ja/integrations/awskinesis/
+categories:
+- aws
+- cloud
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: Amazon Kinesis のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis/
+draft: false
+git_integration_title: amazon_kinesis
+has_logo: true
+integration_id: ''
+integration_title: Amazon Kinesis
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_kinesis
+public_title: Datadog-Amazon Kinesis Integration
+short_description: Track key Amazon Kinesis metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -88,16 +88,15 @@ The Amazon Kinesis integration does not include any service checks.
 
 Need help? Contact [Datadog support][12].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html
 [5]: https://app.datadoghq.com/integrations/amazon-kinesis
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=amazondatafirehosedeliverystream
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=cloudformationtemplate
-[8]: https://docs.datadoghq.com/logs/guide/forwarder/
-[9]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[10]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=amazondatafirehosedeliverystream
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=cloudformationtemplate
+[8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[10]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis/amazon_kinesis_metadata.csv
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

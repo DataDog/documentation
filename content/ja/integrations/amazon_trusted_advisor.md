@@ -1,30 +1,30 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - cost management
 - log collection
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS Trusted Advisor metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_trusted_advisor/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-aws-trusted-advisor/"
-  "tag": Blog
-  "text": Monitor your AWS Trusted Advisor Service Limit Checks with Datadog
-"git_integration_title": "amazon_trusted_advisor"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Trusted Advisor"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_trusted_advisor"
-"public_title": "Datadog-AWS Trusted Advisor Integration"
-"short_description": "Track key AWS Trusted Advisor metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS Trusted Advisor metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-aws-trusted-advisor/
+  tag: Blog
+  text: Monitor your AWS Trusted Advisor Service Limit Checks with Datadog
+git_integration_title: amazon_trusted_advisor
+has_logo: true
+integration_id: ''
+integration_title: AWS Trusted Advisor
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_trusted_advisor
+public_title: Datadog-AWS Trusted Advisor Integration
+short_description: Track key AWS Trusted Advisor metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -98,14 +98,13 @@ Need help? Contact [Datadog support][10].
 
 
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssupport.html
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-trusted-advisor
-[5]: https://docs.datadoghq.com/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_trusted_advisor/amazon_trusted_advisor_metadata.csv
 [9]: https://aws.amazon.com/premiumsupport/trustedadvisor
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

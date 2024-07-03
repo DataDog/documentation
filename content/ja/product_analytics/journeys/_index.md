@@ -1,10 +1,11 @@
 ---
-title: Journeys
-description: Journeys help you understand the path your users follow as they discover your product, service, or brand.
+description: Journeys help you understand the path your users follow as they discover
+  your product, service, or brand.
 further_reading:
 - link: /product_analytics/
   tag: ドキュメント
   text: 製品分析
+title: Journeys
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -36,6 +37,6 @@ You can view [conversion rates][3] over time by showing the conversion rate valu
 ## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/journeys/funnel_analysis
-[2]: /product_analytics/journeys/sankey
+[1]: /ja/product_analytics/journeys/funnel_analysis
+[2]: /ja/product_analytics/journeys/sankey
 [3]: https://app.datadoghq.com/product-analytics/user-journey/conversion?

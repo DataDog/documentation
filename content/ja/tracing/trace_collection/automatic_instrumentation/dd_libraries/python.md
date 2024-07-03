@@ -1,29 +1,29 @@
 ---
-title: Tracing Python Applications
-code_lang: python
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
-    - /tracing/python/
-    - /tracing/languages/python/
-    - /agent/apm/python/
-    - /tracing/setup/python
-    - /tracing/setup_overview/python
-    - /tracing/setup_overview/setup/python
-    - /tracing/trace_collection/dd_libraries/python/
+- /ja/tracing/python/
+- /ja/tracing/languages/python/
+- /ja/agent/apm/python/
+- /ja/tracing/setup/python
+- /ja/tracing/setup_overview/python
+- /ja/tracing/setup_overview/setup/python
+- /ja/tracing/trace_collection/dd_libraries/python/
+code_lang: python
+code_lang_weight: 10
 further_reading:
-    - link: "https://github.com/DataDog/dd-trace-py"
-      tag: ソースコード
-      text: Source code
-    - link: "https://ddtrace.readthedocs.io/en/stable/"
-      tag: 外部サイト
-      text: API Docs
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: tracing/
-      tag: ドキュメント
-      text: Advanced Usage
+- link: https://github.com/DataDog/dd-trace-py
+  tag: ソースコード
+  text: Source code
+- link: https://ddtrace.readthedocs.io/en/stable/
+  tag: 外部サイト
+  text: API Docs
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: tracing/
+  tag: ドキュメント
+  text: Advanced Usage
+title: Tracing Python Applications
+type: multi-code-lang
 ---
 ## 互換性要件
 Datadog の Python バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
@@ -104,10 +104,10 @@ ddtrace v1 にアップグレードする場合は、ライブラリドキュメ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/python
+[1]: /ja/tracing/compatibility_requirements/python
 [2]: https://app.datadoghq.com/apm/service-setup
-[3]: /tracing/trace_collection/library_config/python/
+[3]: /ja/tracing/trace_collection/library_config/python/
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
-[11]: /tracing/trace_collection/library_injection_local/
-[13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[11]: /ja/tracing/trace_collection/library_injection_local/
+[13]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

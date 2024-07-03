@@ -1,9 +1,9 @@
 ---
-title: (LEGACY) Best Practices for OPW Aggregator Architecture
 aliases:
-  - /observability_pipelines/production_deployment_overview/aggregator_architecture
-  - /observability_pipelines/aggregator_architecture/
-  - /observability_pipelines/architecture/
+- /ja/observability_pipelines/production_deployment_overview/aggregator_architecture
+- /ja/observability_pipelines/aggregator_architecture/
+- /ja/observability_pipelines/architecture/
+title: (LEGACY) Best Practices for OPW Aggregator Architecture
 ---
 
 {{< site-region region="gov" >}}
@@ -33,9 +33,9 @@ This guide is for large-scale production-level deployments.
 - 観測可能性パイプラインワーカーを[災害復旧][7]の一環として活用する。
 - 複数のアグリゲーター、パブリッシュサブスクライブシステム、およびグローバル集計をデプロイするための、その他の[高度な構成][8]。
 
-[3]: /observability_pipelines/legacy/architecture/optimize
-[4]: /observability_pipelines/legacy/architecture/capacity_planning_scaling
-[5]: /observability_pipelines/legacy/architecture/networking
-[6]: /observability_pipelines/legacy/architecture/preventing_data_loss
-[7]: /observability_pipelines/legacy/architecture/availability_disaster_recovery
-[8]: /observability_pipelines/legacy/architecture/advanced_configurations
+[3]: /ja/observability_pipelines/legacy/architecture/optimize
+[4]: /ja/observability_pipelines/legacy/architecture/capacity_planning_scaling
+[5]: /ja/observability_pipelines/legacy/architecture/networking
+[6]: /ja/observability_pipelines/legacy/architecture/preventing_data_loss
+[7]: /ja/observability_pipelines/legacy/architecture/availability_disaster_recovery
+[8]: /ja/observability_pipelines/legacy/architecture/advanced_configurations

@@ -1,18 +1,18 @@
 ---
-title: RUM Roku Data Collected
-kind: documentation
-code_lang: roku
-type: multi-code-lang
-code_lang_weight: 50
 aliases:
-- /real_user_monitoring/roku/data_collected/
+- /ja/real_user_monitoring/roku/data_collected/
+code_lang: roku
+code_lang_weight: 50
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-roku"
+- link: https://github.com/DataDog/dd-sdk-roku
   tag: ソースコード
   text: dd-sdk-roku のソースコード
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+kind: documentation
+title: RUM Roku Data Collected
+type: multi-code-lang
 ---
 
 {{< site-region region="gov" >}}
@@ -233,9 +233,9 @@ Before data is uploaded to Datadog, it is stored in cleartext in your channel's 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
-[4]: /getting_started/tagging/unified_service_tagging/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#identifying-your-users
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
+[4]: /ja/getting_started/tagging/unified_service_tagging/
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#identifying-your-users
 [6]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs
-[8]: /data_security/real_user_monitoring/#ip-address
-[9]: /data_security/real_user_monitoring/#geolocation
+[8]: /ja/data_security/real_user_monitoring/#ip-address
+[9]: /ja/data_security/real_user_monitoring/#geolocation

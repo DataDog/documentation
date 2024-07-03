@@ -1,14 +1,14 @@
 ---
-title: Domain Allowlist API
-private: true
-is_beta: true
 further_reading:
-- link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
+- link: https://app.datadoghq.com/organization-settings/domain-allowlist
   tag: In the app
   text: Domain Allowlist
 - link: /account_management/org_settings/domain_allowlist
   tag: ドキュメント
   text: Domain Allowlist UI
+is_beta: true
+private: true
+title: Domain Allowlist API
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
@@ -219,4 +219,4 @@ Too many requests
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/org_settings/domain_allowlist
+[1]: /ja/account_management/org_settings/domain_allowlist

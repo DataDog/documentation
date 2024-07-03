@@ -1,10 +1,10 @@
 ---
-title: Assigning Owners to APIs
-is_beta: true
 further_reading:
 - link: /tracing/service_catalog/
   tag: Documentation
   text: Datadog Service Catalog
+is_beta: true
+title: Assigning Owners to APIs
 ---
 
 <!-- image TKTK -->
@@ -45,5 +45,5 @@ x-datadog:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api_catalog/add_entries/
-[2]: /api_catalog/add_entries/#import-openapiswagger-file
+[1]: /ja/api_catalog/add_entries/
+[2]: /ja/api_catalog/add_entries/#import-openapiswagger-file

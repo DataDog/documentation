@@ -1,9 +1,9 @@
 ---
-title: Enable Data Jobs Monitoring for Spark on Amazon EMR
 further_reading:
-    - link: /data_jobs
-      tag: Documentation
-      text: Data Jobs Monitoring
+- link: /data_jobs
+  tag: Documentation
+  text: Data Jobs Monitoring
+title: Enable Data Jobs Monitoring for Spark on Amazon EMR
 ---
 
 [Data Jobs Monitoring][9] は、Amazon EMR 上の Apache Spark アプリケーションのパフォーマンスと信頼性を視覚化します。
@@ -123,7 +123,7 @@ Datadog で [Data Jobs Monitoring][8] ページを表示すると、すべての
 [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
 [4]: https://console.aws.amazon.com/emr
 [5]: https://console.aws.amazon.com/iam/
-[7]: /getting_started/site/
+[7]: /ja/getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
-[9]: /data_jobs
+[9]: /ja/data_jobs
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-660-release.html

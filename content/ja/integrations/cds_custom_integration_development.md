@@ -1,59 +1,61 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "cds-custom-integration-development"
-"app_uuid": "b5e0db92-6931-4522-8333-8c1ec5e6df66"
-"assets": {}
-"author":
-  "contact_link": "https://www.crestdata.ai/contact-us/"
-  "homepage": "https://www.crestdata.ai"
-  "name": Crest Data
-  "sales_email": datadog-sales@crestdata.ai
-  "support_email": datadog.integrations@crestdata.ai
-  "vendor_id": crest-data-systems
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: cds-custom-integration-development
+app_uuid: b5e0db92-6931-4522-8333-8c1ec5e6df66
+assets: {}
+author:
+  contact_link: https://www.crestdata.ai/contact-us/
+  homepage: https://www.crestdata.ai
+  name: Crest Data
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
+  vendor_id: crest-data-systems
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cds_custom_integration_development"
-"integration_id": "cds-custom-integration-development"
-"integration_title": "Custom  Development for Datadog"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cds_custom_integration_development"
-"pricing":
-- "includes_assets": true
-  "private_offer_only": true
-  "product_id": custom-integration-development
-  "short_description": Private offer placeholder
-  "unit_price": !!null "null"
-"public_title": "Custom Integration Development for Datadog"
-"short_description": "Use Crest Data's Custom Integration for comprehensive monitoring and analytics on all platforms."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: cds_custom_integration_development
+integration_id: cds-custom-integration-development
+integration_title: Custom  Development for Datadog
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: cds_custom_integration_development
+pricing:
+- includes_assets: true
+  private_offer_only: true
+  product_id: custom-integration-development
+  short_description: Private offer placeholder
+  unit_price: null
+public_title: Custom Integration Development for Datadog
+short_description: Use Crest Data's Custom Integration for comprehensive monitoring
+  and analytics on all platforms.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Offering::Professional Service"
-  "configuration": "README.md#Setup"
-  "description": Use Crest Data's Custom Integration for comprehensive monitoring and analytics on all platforms.
-  "media":
-  - "caption": Crest Service Overview
-    "image_url": images/dd-pts-op2.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Custom Integration Development for Datadog
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Offering::Professional Service
+  configuration: README.md#Setup
+  description: Use Crest Data's Custom Integration for comprehensive monitoring and
+    analytics on all platforms.
+  media:
+  - caption: Crest Service Overview
+    image_url: images/dd-pts-op2.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Custom Integration Development for Datadog
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

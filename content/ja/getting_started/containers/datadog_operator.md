@@ -1,15 +1,15 @@
 ---
-title: Getting Started with the Datadog Operator
 further_reading:
-  - link: /containers/datadog_operator
-    tag: documentation
-    text: Datadog Operator
-  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md"
-    tag: ソースコード
-    text: "Datadog Operator: Advanced Installation"
-  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md"
-    tag: ソースコード
-    text: "Datadog Operator: Configuration"
+- link: /containers/datadog_operator
+  tag: documentation
+  text: Datadog Operator
+- link: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
+  tag: ソースコード
+  text: 'Datadog Operator: Advanced Installation'
+- link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+  tag: ソースコード
+  text: 'Datadog Operator: Configuration'
+title: Getting Started with the Datadog Operator
 ---
 
 [Datadog Operator][1] は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][2] です。このガイドでは、Datadog Agent をデプロイするために Operator を使用する方法について説明します。
@@ -121,10 +121,10 @@ helm delete my-datadog-operator
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/datadog_operator
+[1]: /ja/containers/datadog_operator
 [2]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
-[7]: https://docs.datadoghq.com/data_security/agent/#running-as-an-unprivileged-user
+[7]: https://docs.datadoghq.com/ja/data_security/agent/#running-as-an-unprivileged-user

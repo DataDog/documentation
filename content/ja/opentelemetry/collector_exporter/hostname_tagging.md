@@ -1,9 +1,9 @@
 ---
-title: Hostname and Tagging
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
   text: Setting Up the OpenTelemetry Collector
+title: Hostname and Tagging
 ---
 
 {{< img src="opentelemetry/collector_exporter/hostname_tagging.png" alt="Hostname information collected from OpenTelemetry" style="width:100%;" >}}

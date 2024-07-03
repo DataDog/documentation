@@ -1,22 +1,22 @@
 ---
 categories:
-    - cloud
-    - aws
-    - log collection
-    - security
+- cloud
+- aws
+- log collection
+- security
+custom_kind: integration
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
 description: Gather your Amazon GuardDuty logs.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
-dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md']
+integration_id: amazon-guardduty
 integration_title: Amazon GuardDuty
 is_public: true
-custom_kind: integration
 name: amazon_guardduty
 public_title: Datadog-Amazon GuardDuty Integration
 short_description: Gather your Amazon GuardDuty logs.
 version: '1.0'
-integration_id: "amazon-guardduty"
 ---
 
 ## Overview
@@ -49,6 +49,6 @@ Datadog integrates with Amazon GuardDuty through a Lambda function that ships Gu
 
 4. See any new GuardDuty Findings in the [Datadog Log Explorer][3].
 
-[1]: /logs/guide/forwarder/
+[1]: /ja/logs/guide/forwarder/
 [2]: https://console.aws.amazon.com/events/home
 [3]: https://app.datadoghq.com/logs

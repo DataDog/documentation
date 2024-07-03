@@ -1,69 +1,69 @@
 ---
-"app_id": "weaviate"
-"app_uuid": "3bb2d803-0608-4da3-8987-e6f7feb4e481"
-"assets":
-  "dashboards":
-    "Weaviate Overview Dashboard": assets/dashboards/overview_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": weaviate.go.goroutines
-      "metadata_path": metadata.csv
-      "prefix": weaviate.
-    "process_signatures":
+app_id: weaviate
+app_uuid: 3bb2d803-0608-4da3-8987-e6f7feb4e481
+assets:
+  dashboards:
+    Weaviate Overview Dashboard: assets/dashboards/overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: weaviate.go.goroutines
+      metadata_path: metadata.csv
+      prefix: weaviate.
+    process_signatures:
     - weaviate
     - /bin/weaviate
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10371"
-    "source_type_name": Weaviate
-  "monitors":
-    "node_status": assets/monitors/node_status.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10371
+    source_type_name: Weaviate
+  monitors:
+    node_status: assets/monitors/node_status.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - ai/ml
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/weaviate/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "weaviate"
-"integration_id": "weaviate"
-"integration_title": "Weaviate"
-"integration_version": "2.3.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "weaviate"
-"public_title": "Weaviate"
-"short_description": "Open-source vector database for building AI-powered applications."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/weaviate/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: weaviate
+integration_id: weaviate
+integration_title: Weaviate
+integration_version: 2.3.2
+is_public: true
+manifest_version: 2.0.0
+name: weaviate
+public_title: Weaviate
+short_description: Open-source vector database for building AI-powered applications.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AI/ML"
-  - "Category::Data Stores"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Open-source vector database for building AI-powered applications.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Weaviate
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AI/ML
+  - Category::Data Stores
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Open-source vector database for building AI-powered applications.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Weaviate
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -179,15 +179,14 @@ Additional helpful documentation, links, and articles:
 [2]: https://weaviate.io/developers/weaviate
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://www.datadoghq.com/blog/ai-integrations/
-[5]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [6]: https://weaviate.io/developers/weaviate/configuration/monitoring
 [7]: https://weaviate.io/developers/weaviate/api/rest
-[8]: https://docs.datadoghq.com/integrations/openmetrics/
+[8]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [9]: https://github.com/DataDog/integrations-core/blob/master/weaviate/datadog_checks/weaviate/data/conf.yaml.example
 [10]: https://github.com/DataDog/integrations-core/blob/7.46.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L544-L546
 [11]: https://github.com/weaviate/weaviate-helm/blob/576f613bad3f8e25015c61a7143800123ab378d3/weaviate/values.yaml#L1196
-[12]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [13]: https://github.com/DataDog/integrations-core/blob/master/weaviate/metadata.csv
 [14]: https://github.com/DataDog/integrations-core/blob/master/weaviate/assets/service_checks.json
-[15]: https://docs.datadoghq.com/help/
-
+[15]: https://docs.datadoghq.com/ja/help/

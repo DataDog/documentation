@@ -1,13 +1,13 @@
 ---
-title: Investigate Security Signals
 disable_toc: false
 further_reading:
-  - link: /cloud_siem/detection_rules/
-    tag: Documentation
-    text: Learn about the conditional logic of detection rules
-  - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
-    tag: Blog
-    text: Monitor 1Password with Datadog Cloud SIEM
+- link: /cloud_siem/detection_rules/
+  tag: Documentation
+  text: Learn about the conditional logic of detection rules
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
+  tag: Blog
+  text: Monitor 1Password with Datadog Cloud SIEM
+title: Investigate Security Signals
 ---
 
 ## 概要
@@ -126,13 +126,13 @@ You can also launch this query directly from the signal panel:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/rules/
-[2]: /account_management/audit_trail/events/#cloud-security-platform-events
-[3]: /account_management/rbac/
-[4]: /logs/explorer/saved_views/
+[1]: /ja/security/notifications/rules/
+[2]: /ja/account_management/audit_trail/events/#cloud-security-platform-events
+[3]: /ja/account_management/rbac/
+[4]: /ja/logs/explorer/saved_views/
 [5]: https://app.datadoghq.com/security/home
-[6]: /service_management/case_management/
-[7]: /service_management/incident_management/
-[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
-[9]: /security/cloud_security_management/workflows/
-[10]: /security/threat_intelligence
+[6]: /ja/service_management/case_management/
+[7]: /ja/service_management/incident_management/
+[8]: /ja/service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[9]: /ja/security/cloud_security_management/workflows/
+[10]: /ja/security/threat_intelligence

@@ -1,114 +1,114 @@
 ---
-"algolia":
-  "subcategory": Marketplace インテグレーション
-"app_id": "itunified-ug-dbxplorer"
-"app_uuid": "1349589a-6fc1-4ddd-99c7-7b23ba82903a"
-"assets":
-  "dashboards":
-    "dbXplorer - ASH Monitor": assets/dashboards/itunified_ug_dbxplorer_ash_monitor.json
-    "dbXplorer - DB Performance Health": assets/dashboards/itunified_ug_dbxplorer_db_health_performance.json
-    "dbXplorer - Oracle LMS": assets/dashboards/itunified_ug_dbxplorer_oracle_lms.json
-    "dbXplorer - Space Monitoring": assets/dashboards/itunified_ug_dbxplorer_space_monitoring.json
-    "dbXplorer - Status Summary": assets/dashboards/itunified_ug_dbxplorer_status_summary.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": dbxplorer.oracle.database.availability.status
-      "metadata_path": metadata.csv
-      "prefix": dbxplorer.oracle
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "14507249"
-    "source_type_name": itunified_ug_dbxplorer
-  "monitors":
-    "dbXplorer ASH Monitoring - Anomaly Detected for sql_id (1w Bounds Window)": assets/monitors/dbxplorer_ash_sql_id_1w.json
-    "dbXplorer ASH Monitoring - Anomaly Detected for sql_id (4h Bounds Window)": assets/monitors/dbxplorer_ash_sql_id_4h.json
-    "dbXplorer ASH Monitoring - SQL_ID Anomaly CPU TIME": assets/monitors/dbxplorer_ash_sql_id_cpu_time.json
-    "dbXplorer ASH Monitoring - SQL_ID Anomaly ELAPSED TIME": assets/monitors/dbxplorer_ash_sql_id_elapsed_time.json
-    "dbXplorer Database Health - Anomaly detection Load": assets/monitors/dbxplorer_db_health_anomaly_load.json
-    "dbXplorer Database Health - Anomaly detection Wait Events": assets/monitors/dbxplorer_db_health_anomaly_wait_events.json
-    "dbXplorer Database Health - Availability": assets/monitors/dbxplorer_db_health_availability.json
-    "dbXplorer Space - Predictive ASM Diskgroup Usage Alert (Free Percent)": assets/monitors/dbxplorer_space_prdictive_diskgroup_usage.json
-    "dbXplorer Space - Predictive Recovery Area Usage Alert": assets/monitors/dbxplorer_space_predictive_recovery_area.json
-    "dbXplorer Space - Predictive Tablespace Usage Alert (contents:permanent)": assets/monitors/dbxplorer_space_predictive_tablespace_permanent.json
-    "dbXplorer Space - Predictive Tablespace Usage Alert (contents:temporary)": assets/monitors/dbxplorer_space_predictive_tablespace_temp.json
-    "dbXplorer Space - Predictive Tablespace Usage Alert (contents:undo)": assets/monitors/dbxplorer_space_predictive_tablespace_undo.json
-"author":
-  "homepage": "https://www.itunified.de"
-  "name": ITUNIFIED UG
-  "sales_email": support.datadog@itunified.de
-  "support_email": support.datadog@itunified.de
-  "vendor_id": itunified
-"categories":
+algolia:
+  subcategory: Marketplace インテグレーション
+app_id: itunified-ug-dbxplorer
+app_uuid: 1349589a-6fc1-4ddd-99c7-7b23ba82903a
+assets:
+  dashboards:
+    dbXplorer - ASH Monitor: assets/dashboards/itunified_ug_dbxplorer_ash_monitor.json
+    dbXplorer - DB Performance Health: assets/dashboards/itunified_ug_dbxplorer_db_health_performance.json
+    dbXplorer - Oracle LMS: assets/dashboards/itunified_ug_dbxplorer_oracle_lms.json
+    dbXplorer - Space Monitoring: assets/dashboards/itunified_ug_dbxplorer_space_monitoring.json
+    dbXplorer - Status Summary: assets/dashboards/itunified_ug_dbxplorer_status_summary.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: dbxplorer.oracle.database.availability.status
+      metadata_path: metadata.csv
+      prefix: dbxplorer.oracle
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 14507249
+    source_type_name: itunified_ug_dbxplorer
+  monitors:
+    dbXplorer ASH Monitoring - Anomaly Detected for sql_id (1w Bounds Window): assets/monitors/dbxplorer_ash_sql_id_1w.json
+    dbXplorer ASH Monitoring - Anomaly Detected for sql_id (4h Bounds Window): assets/monitors/dbxplorer_ash_sql_id_4h.json
+    dbXplorer ASH Monitoring - SQL_ID Anomaly CPU TIME: assets/monitors/dbxplorer_ash_sql_id_cpu_time.json
+    dbXplorer ASH Monitoring - SQL_ID Anomaly ELAPSED TIME: assets/monitors/dbxplorer_ash_sql_id_elapsed_time.json
+    dbXplorer Database Health - Anomaly detection Load: assets/monitors/dbxplorer_db_health_anomaly_load.json
+    dbXplorer Database Health - Anomaly detection Wait Events: assets/monitors/dbxplorer_db_health_anomaly_wait_events.json
+    dbXplorer Database Health - Availability: assets/monitors/dbxplorer_db_health_availability.json
+    dbXplorer Space - Predictive ASM Diskgroup Usage Alert (Free Percent): assets/monitors/dbxplorer_space_prdictive_diskgroup_usage.json
+    dbXplorer Space - Predictive Recovery Area Usage Alert: assets/monitors/dbxplorer_space_predictive_recovery_area.json
+    dbXplorer Space - Predictive Tablespace Usage Alert (contents:permanent): assets/monitors/dbxplorer_space_predictive_tablespace_permanent.json
+    dbXplorer Space - Predictive Tablespace Usage Alert (contents:temporary): assets/monitors/dbxplorer_space_predictive_tablespace_temp.json
+    dbXplorer Space - Predictive Tablespace Usage Alert (contents:undo): assets/monitors/dbxplorer_space_predictive_tablespace_undo.json
+author:
+  homepage: https://www.itunified.de
+  name: ITUNIFIED UG
+  sales_email: support.datadog@itunified.de
+  support_email: support.datadog@itunified.de
+  vendor_id: itunified
+categories:
 - marketplace
 - クラウド
 - oracle
 - data stores
 - モニター
 - alerting
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "itunified_ug_dbxplorer"
-"integration_id": "itunified-ug-dbxplorer"
-"integration_title": "dbXplorer for Oracle DBMS"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "itunified_ug_dbxplorer"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.itunified_ug.itunified_ug_dbxplorer.dbxplorer.oracle.database.integration.status
-  "product_id": itunified-ug-dbxplorer
-  "short_description": Monitors your Oracle Clusters, DB's and filesystems.
-  "tag": db_unique_name
-  "unit_label": Unique DB Name
-  "unit_price": !!float "50.0"
-"public_title": "dbXplorer for Oracle DBMS"
-"short_description": "Monitor and analyze Oracle database health and performance"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: itunified_ug_dbxplorer
+integration_id: itunified-ug-dbxplorer
+integration_title: dbXplorer for Oracle DBMS
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: itunified_ug_dbxplorer
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.itunified_ug.itunified_ug_dbxplorer.dbxplorer.oracle.database.integration.status
+  product_id: itunified-ug-dbxplorer
+  short_description: Monitors your Oracle Clusters, DB's and filesystems.
+  tag: db_unique_name
+  unit_label: Unique DB Name
+  unit_price: 50.0
+public_title: dbXplorer for Oracle DBMS
+short_description: Monitor and analyze Oracle database health and performance
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Offering::Integration"
-  - "Category::Marketplace"
-  - "Category::Cloud"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Category::Oracle"
-  - "Category::Data Stores"
-  - "Category::Metrics"
-  - "Category::Alerting"
-  "configuration": "README.md#Setup"
-  "description": Monitor and analyze Oracle database health and performance
-  "media":
-  - "caption": dbXplorer - ASH Monitoring
-    "image_url": images/1.png
-    "media_type": image
-  - "caption": dbXplorer - ASH Monitoring sql_id related logs view
-    "image_url": images/2.png
-    "media_type": image
-  - "caption": dbXplorer - DB Performance Health
-    "image_url": images/3.png
-    "media_type": image
-  - "caption": dbXplorer - Space Monitoring
-    "image_url": images/4.png
-    "media_type": image
-  - "caption": dbXplorer - Status Summary
-    "image_url": images/5.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": dbXplorer for Oracle DBMS
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Offering::Integration
+  - Category::Marketplace
+  - Category::Cloud
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Category::Oracle
+  - Category::Data Stores
+  - Category::Metrics
+  - Category::Alerting
+  configuration: README.md#Setup
+  description: Monitor and analyze Oracle database health and performance
+  media:
+  - caption: dbXplorer - ASH Monitoring
+    image_url: images/1.png
+    media_type: image
+  - caption: dbXplorer - ASH Monitoring sql_id related logs view
+    image_url: images/2.png
+    media_type: image
+  - caption: dbXplorer - DB Performance Health
+    image_url: images/3.png
+    media_type: image
+  - caption: dbXplorer - Space Monitoring
+    image_url: images/4.png
+    media_type: image
+  - caption: dbXplorer - Status Summary
+    image_url: images/5.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: dbXplorer for Oracle DBMS
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

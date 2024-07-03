@@ -1,13 +1,13 @@
 ---
-title: NPM AWS Supported Services
-npm_provider: aws
 further_reading:
-  - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-    tag: Blog
-    text: Network Performance Monitoring
-  - link: /network_monitoring/devices
-    tag: Documentation
-    text: Network Device Monitoring
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Network Performance Monitoring
+- link: /network_monitoring/devices
+  tag: Documentation
+  text: Network Device Monitoring
+npm_provider: aws
+title: NPM AWS Supported Services
 ---
 
 Datadog ネットワークパフォーマンスモニタリング (NPM) は自動的に S3、RDS、Kinesis、ELB、Elasticache および次に記載するその他の AWS サービスを検知します:

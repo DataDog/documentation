@@ -1,6 +1,4 @@
 ---
-title: "Service Checks Submission: DogStatsD"
-kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 further_reading:
 - link: /developers/dogstatsd/
@@ -9,6 +7,8 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentation
   text: Official and Community created API and DogStatsD client libraries
+kind: documentation
+title: 'Service Checks Submission: DogStatsD'
 ---
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for service checks with code examples.
@@ -168,5 +168,5 @@ After a service check is reported, use it to trigger a [service check monitor][2
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/
-[2]: /monitors/types/service_check/
+[1]: /ja/developers/dogstatsd/
+[2]: /ja/monitors/types/service_check/

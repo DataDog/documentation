@@ -1,25 +1,25 @@
 ---
-"categories":
-- "azure"
-- "cloud"
-- "configuration & deployment"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/azure_vm_scale_set/"
-"draft": false
-"git_integration_title": "azure_vm_scale_set"
-"has_logo": true
-"integration_id": "azure-vm-scale-set"
-"integration_title": "Microsoft Azure VM Scale Set"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_vm_scale_set"
-"public_title": "Datadog-Microsoft Azure VM Scale Set Integration"
-"short_description": "Track by-set bytes in/out, disk ops, CPU usage, more."
-"version": "1.0"
+categories:
+- azure
+- cloud
+- configuration & deployment
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: 受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
+draft: false
+git_integration_title: azure_vm_scale_set
+has_logo: true
+integration_id: azure-vm-scale-set
+integration_title: Microsoft Azure VM Scale Set
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_vm_scale_set
+public_title: Datadog-Microsoft Azure VM Scale Set Integration
+short_description: Track by-set bytes in/out, disk ops, CPU usage, more.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -81,11 +81,10 @@ The Azure Virtual machine scale sets integration does not include any service ch
 
 Need help? Contact [Datadog support][7].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
-[2]: https://docs.datadoghq.com/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
-[3]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/#agent-installation
-[4]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
-[5]: https://docs.datadoghq.com/integrations/win32_event_log/#log-collection
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
+[3]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/#agent-installation
+[4]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
+[5]: https://docs.datadoghq.com/ja/integrations/win32_event_log/#log-collection
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm_scale_set/azure_vm_scale_set_metadata.csv
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

@@ -1,5 +1,5 @@
 ---
-title: "VPN Gateway Component"
+title: VPN Gateway Component
 ---
 ## 概要
 
@@ -60,4 +60,4 @@ VPN Gatewayコンポーネントを使用して、Amazon Web Services アーキ�
 VPN Gateway コンポーネントは、[VPC][2] にのみ追加できます。
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
+[2]: /ja/cloudcraft/components-aws/vpc/

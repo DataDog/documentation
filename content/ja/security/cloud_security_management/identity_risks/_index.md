@@ -1,7 +1,6 @@
 ---
-title: Cloud Security Management Identity Risks
 aliases:
-  - /security/identity_risks/
+- /ja/security/identity_risks/
 further_reading:
 - link: /security/cloud_security_management/
   tag: Documentation
@@ -9,7 +8,7 @@ further_reading:
 - link: /security/cloud_security_management/setup
   tag: Documentation
   text: Setting Up Cloud Security Management
-- link: "https://www.datadoghq.com/blog/datadog-ciem/"
+- link: https://www.datadoghq.com/blog/datadog-ciem/
   tag: Blog
   text: Find and remediate identity risks with Datadog CIEM
 - link: /integrations/jira/
@@ -18,6 +17,11 @@ further_reading:
 - link: /service_management/workflows/
   tag: Documentation
   text: Learn more about Workflow Automation
+- link: https://www.datadoghq.com/blog/datadog-ciem-aws-iam-access-analyzer/
+  tag: ブログ
+  text: Identify and remediate permission gaps in AWS with Datadog CIEM and AWS IAM
+    Access Analyzer
+title: Cloud Security Management Identity Risks
 ---
 
 Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
@@ -67,7 +71,7 @@ The following video provides an overview of how to enable and use CSM Identity R
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/identities
-[2]: /security/cloud_security_management/guide/jira
-[3]: /security/cloud_security_management/workflows
-[4]: /security/cloud_security_management/identity_risks/#:~:text=Click%20View%20Suggested%20Policy%20to%20view%20a%20suggested%20downsized%20policy%20based%20on%20the%20actual%20usage.
+[2]: /ja/security/cloud_security_management/guide/jira
+[3]: /ja/security/cloud_security_management/workflows
+[4]: /ja/security/cloud_security_management/identity_risks/#:~:text=Click%20View%20Suggested%20Policy%20to%20view%20a%20suggested%20downsized%20policy%20based%20on%20the%20actual%20usage.
 [5]: https://aws.amazon.com/iam/access-analyzer/

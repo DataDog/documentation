@@ -1,10 +1,10 @@
 ---
-title: Getting Started with Terraform
-kind: documentation
 further_reading:
-    - link: "https://www.datadoghq.com/blog/managing-datadog-with-terraform/"
-      tag: Blog
-      text: Managing Datadog with Terraform
+- link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
+  tag: Blog
+  text: Managing Datadog with Terraform
+kind: documentation
+title: Getting Started with Terraform
 ---
 
 ## Overview
@@ -58,28 +58,28 @@ Follow the [Terraform Datadog Provider][28] tutorial for a detailed walk-through
 
 [1]: https://learn.hashicorp.com/tutorials/terraform/install-cli
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[3]: /integrations/terraform/#configuration
+[3]: /ja/integrations/terraform/#configuration
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor_json
-[6]: /integrations/terraform/#create-a-monitor
-[7]: /monitors/types/process/
-[8]: /monitors/
+[6]: /ja/integrations/terraform/#create-a-monitor
+[7]: /ja/monitors/types/process/
+[8]: /ja/monitors/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_gcp_sts
-[12]: /integrations/amazon_web_services/
-[13]: /integrations/azure/
-[14]: /integrations/google_cloud_platform/
+[12]: /ja/integrations/amazon_web_services/
+[13]: /ja/integrations/azure/
+[14]: /ja/integrations/google_cloud_platform/
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard
 [16]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard_json
-[17]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[18]: /dashboards/
-[19]: /account_management/guide/manage-datadog-with-terraform/
-[20]: /logs/guide/manage_logs_and_metrics_with_terraform/
-[21]: /synthetics/guide/create-api-test-with-the-api/#terraform
-[22]: /synthetics/guide/manage-browser-tests-through-the-api/#manage-your-browser-tests-with-terraform
-[27]: /integrations/guide/aws-terraform-setup
+[17]: /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[18]: /ja/dashboards/
+[19]: /ja/account_management/guide/manage-datadog-with-terraform/
+[20]: /ja/logs/guide/manage_logs_and_metrics_with_terraform/
+[21]: /ja/synthetics/guide/create-api-test-with-the-api/#terraform
+[22]: /ja/synthetics/guide/manage-browser-tests-through-the-api/#manage-your-browser-tests-with-terraform
+[27]: /ja/integrations/guide/aws-terraform-setup
 [28]: https://developer.hashicorp.com/terraform/tutorials/use-case/datadog-provider
-[29]: /integrations/webhooks/
+[29]: /ja/integrations/webhooks/
 [30]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/webhook
-[31]: /synthetics/
+[31]: /ja/synthetics/

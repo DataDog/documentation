@@ -1,5 +1,4 @@
 ---
-title: Saved Views
 further_reading:
 - link: /continuous_integration/explorer/search_syntax/
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /continuous_integration/explorer
   tag: ドキュメント
   text: CI Visibility Explorer について
+title: Saved Views
 ---
 
 ## 概要
@@ -61,5 +61,5 @@ Click **Save** to create a custom saved view from the current content in the CI 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-runs
-[2]: /continuous_integration/explorer/
+[2]: /ja/continuous_integration/explorer/
 [3]: https://app.datadoghq.com/ci/pipeline-executions

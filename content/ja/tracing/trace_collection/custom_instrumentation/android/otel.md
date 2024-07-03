@@ -1,14 +1,15 @@
 ---
-title: Android and Android TV Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your Android and Android TV application with OpenTelemetry API, to send traces to Datadog.'
+description: Instrument your Android and Android TV application with OpenTelemetry
+  API, to send traces to Datadog.
 further_reading:
-    - link: tracing/glossary/
-      tag: ドキュメント
-      text: サービス、リソース、トレースの詳細
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: ドキュメント
-      text: OpenTelemetry API と Datadog でインスツルメントされたトレースの相互運用性
+- link: tracing/glossary/
+  tag: ドキュメント
+  text: サービス、リソース、トレースの詳細
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: ドキュメント
+  text: OpenTelemetry API と Datadog でインスツルメントされたトレースの相互運用性
+kind: documentation
+title: Android and Android TV Custom Instrumentation using OpenTelemetry API
 ---
 
 {{% otel-custom-instrumentation-lang %}}
@@ -524,18 +525,18 @@ final Request:request = new Request.Builder()
 [1]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace
 [2]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace-otel
 [3]: https://app.datadoghq.com/rum/application/create
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /account_management/api-app-keys/#api-keys
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[4]: /ja/account_management/api-app-keys/#client-tokens
+[5]: /ja/account_management/api-app-keys/#api-keys
+[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
 [8]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#attributes
 [10]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
 [11]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [12]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[13]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
-[14]: /account_management/api-app-keys/#client-tokens
-[15]: /account_management/api-app-keys/#api-keys
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
-[17]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[13]: /ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[14]: /ja/account_management/api-app-keys/#client-tokens
+[15]: /ja/account_management/api-app-keys/#api-keys
+[16]: /ja/real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
+[17]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
 [18]: https://opentelemetry.io/docs/concepts/signals/traces/

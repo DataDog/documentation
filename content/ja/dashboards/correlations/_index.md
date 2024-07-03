@@ -1,7 +1,6 @@
 ---
-title: Metric Correlations
 aliases:
-    - /graphing/correlations/
+- /ja/graphing/correlations/
 further_reading:
 - link: /dashboards/
   tag: Documentation
@@ -15,6 +14,7 @@ further_reading:
 - link: /watchdog/
   tag: Documentation
   text: Watchdog
+title: Metric Correlations
 ---
 
 ## 概要

@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Deployment Design and Principles
 aliases:
-  - /observability_pipelines/production_deployment_overview/
+- /ja/observability_pipelines/production_deployment_overview/
+title: (LEGACY) Deployment Design and Principles
 ---
 
 {{< site-region region="gov" >}}
@@ -142,9 +142,9 @@ You can use Observability Pipelines Worker to process data[*](#support). However
 - `level` `info` 以下のログをサンプリングして、その量を減らすことを検討する
 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
-[2]: /observability_pipelines/legacy/reference/sources/
-[4]: /network_monitoring/performance/
-[5]: /observability_pipelines/legacy/architecture/
+[2]: /ja/observability_pipelines/legacy/reference/sources/
+[4]: /ja/network_monitoring/performance/
+[5]: /ja/observability_pipelines/legacy/architecture/
 
 ---
 

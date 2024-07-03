@@ -1,60 +1,60 @@
 ---
-"app_id": "appkeeper"
-"app_uuid": "fc54f5f2-0ce1-4d4e-b1e0-191eece029d3"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": AppKeeper.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10130"
-    "source_type_name": AppKeeper
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": SIOS AppKeeper
-  "sales_email": rd-pd-1@sios.com
-  "support_email": rd-pd-1@sios.com
-"categories":
+app_id: appkeeper
+app_uuid: fc54f5f2-0ce1-4d4e-b1e0-191eece029d3
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: AppKeeper.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10130
+    source_type_name: AppKeeper
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: SIOS AppKeeper
+  sales_email: rd-pd-1@sios.com
+  support_email: rd-pd-1@sios.com
+categories:
 - aws
 - cloud
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "appkeeper"
-"integration_id": "appkeeper"
-"integration_title": "AppKeeper"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "appkeeper"
-"public_title": "AppKeeper"
-"short_description": "Appkeeper restarts service based on alerts from Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: appkeeper
+integration_id: appkeeper
+integration_title: AppKeeper
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: appkeeper
+public_title: AppKeeper
+short_description: Appkeeper restarts service based on alerts from Datadog
+supported_os:
 - linux
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AWS"
-  - "Category::Cloud"
-  - "Category::Notifications"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": Appkeeper restarts service based on alerts from Datadog
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": AppKeeper
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Cloud
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Appkeeper restarts service based on alerts from Datadog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: AppKeeper
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -121,5 +121,4 @@ Need help? Contact [Datadog support][9].
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/history.jpg
 [7]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
 [8]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

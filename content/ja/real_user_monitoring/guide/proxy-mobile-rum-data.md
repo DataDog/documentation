@@ -1,32 +1,31 @@
 ---
-title: Proxy Your Mobile RUM Data
-kind: guide
 aliases:
-  - /real_user_monitoring/faq/proxy_mobile_rum_data/
+- /ja/real_user_monitoring/faq/proxy_mobile_rum_data/
 further_reading:
-  - link: /real_user_monitoring/
-    tag: Documentation
-    text: Learn about Real User Monitoring
+- link: /real_user_monitoring/
+  tag: Documentation
+  text: Learn about Real User Monitoring
+title: Proxy Your Mobile RUM Data
 ---
 
-## Overview
+## 概要
 
-The RUM Mobile SDKs can be configured to send requests through a proxy.
+RUM モバイル SDK は、プロキシを介してリクエストを送信するように構成できます。
 
-Proxies use [OkHttpClient Proxy and Authenticator][2] on Android and [URLSessionConfiguration.connectionProxyDictionary][3] on iOS.
+プロキシは、Android では [OkHttpClient Proxy and Authenticator][2] を、iOS では [URLSessionConfiguration.connectionProxyDictionary][3] を使用します。
 
-## HTTP/HTTPS proxy
+## HTTP/HTTPS プロキシ
 
 ### Prerequisite proxy setup
 
-To successfully forward a request to Datadog, your proxy must support [HTTP CONNECT][1] requests.
+リクエストを Datadog に正常に転送するには、プロキシが [HTTP CONNECT][1] をサポートしている必要があります。
 
 ### Recommended SDK setup
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-When initializing the Android SDK, specify the following proxy configuration:
+Android SDK の初期化時に、以下のプロキシ構成を指定します。
 
 ```kotlin
 val configBuilder = Configuration.Builder(
@@ -40,14 +39,14 @@ val authenticator = ProxyAuthenticator("<proxy user>", "<proxy password>")
 configBuilder.setProxy(proxy, authenticator)
 ```
 
-For more information, see the [OkHttpClient Proxy and Authenticator][2] documentation.
+詳細については、[OkHttpClient の Proxy と Authenticator][2]のドキュメントを参照してください。
 
 [2]: https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-When initializing the iOS SDK, specify the following proxy configuration:
+iOS SDK の初期化時に、以下のプロキシ構成を指定します。
 
 #### Swift
 ```swift

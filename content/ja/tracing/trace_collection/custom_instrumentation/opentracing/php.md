@@ -1,14 +1,14 @@
 ---
-title: PHP OpenTracing Instrumentation
-kind: documentation
 aliases:
-- /tracing/setup_overview/open_standards/php
-- /tracing/trace_collection/open_standards/php
-- /tracing/trace_collection/opentracing/php
-description: 'OpenTracing instrumentation for PHP'
+- /ja/tracing/setup_overview/open_standards/php
+- /ja/tracing/trace_collection/open_standards/php
+- /ja/tracing/trace_collection/opentracing/php
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 50
+description: OpenTracing instrumentation for PHP
+kind: documentation
+title: PHP OpenTracing Instrumentation
+type: multi-code-lang
 ---
 
 The PHP tracer supports OpenTracing through the [**opentracing/opentracing** library][1] which is installed with Composer:
@@ -41,4 +41,4 @@ $scope->close();
 
 
 [1]: https://github.com/opentracing/opentracing-php
-[2]: /tracing/setup/php/#automatic-instrumentation
+[2]: /ja/tracing/setup/php/#automatic-instrumentation

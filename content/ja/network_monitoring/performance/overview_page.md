@@ -1,10 +1,10 @@
 ---
-title: Overview Page
 description: The Network Performance Monitoring Overview Page in the Datadog UI.
 further_reading:
-    - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-      tag: Blog
-      text: Network Performance Monitoring
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Network Performance Monitoring
+title: Overview Page
 ---
 
 ## 概要
@@ -45,6 +45,6 @@ The [NPM overview page][3] provides a high-level overview of your network, from 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /dashboards/widgets/timeseries/
-[2]: /dashboards/widgets/top_list/
+[1]: /ja/dashboards/widgets/timeseries/
+[2]: /ja/dashboards/widgets/top_list/
 [3]: https://app.datadoghq.com/network/overview

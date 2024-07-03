@@ -1,16 +1,16 @@
 ---
-title: Enable Dynamic Instrumentation for .NET
 aliases:
-    - /tracing/dynamic_instrumentation/enabling/dotnet/
-is_beta: false
-private: false
+- /ja/tracing/dynamic_instrumentation/enabling/dotnet/
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: agent
-      tag: Documentation
-      text: Getting Started with Datadog Agent
+- link: agent
+  tag: Documentation
+  text: Getting Started with Datadog Agent
+is_beta: false
+private: false
+title: Enable Dynamic Instrumentation for .NET
+type: multi-code-lang
 ---
 
 ダイナミックインスツルメンテーションは、Datadog のトレーシングライブラリをサポートする機能です。すでに [APM を使用してアプリケーションのトレースを収集][1]している場合は、Agent とトレーシングライブラリが必要なバージョンであることを確認し、ステップ 4 のダイナミックインスツルメンテーションの有効化に直接進みます。
@@ -46,9 +46,9 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
-[2]: /tracing/trace_collection/dd_libraries/dotnet-framework/
-[3]: /tracing/trace_collection/dd_libraries/dotnet-core/
+[1]: /ja/tracing/trace_collection/
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/
+[3]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/
 [4]: https://app.datadoghq.com/dynamic-instrumentation
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /dynamic_instrumentation/
+[5]: /ja/getting_started/tagging/unified_service_tagging
+[6]: /ja/dynamic_instrumentation/

@@ -1,22 +1,22 @@
 ---
-title: Agent Transport for Logs
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
-- link: "agent/logs/advanced_log_collection/#filter-logs"
+- link: agent/logs/advanced_log_collection/#filter-logs
   tag: Documentation
   text: Filter logs sent to Datadog
-- link: "agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs"
+- link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
   tag: Documentation
   text: Scrub sensitive data from your logs
-- link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
+- link: agent/logs/advanced_log_collection/#multi-line-aggregation
   tag: Documentation
   text: Multi-line log aggregation
-- link: "agent/logs/advanced_log_collection/#tail-directories-using-wildcards"
+- link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
   tag: Documentation
   text: Tail directories by using wildcards
-- link: "agent/logs/advanced_log_collection/#global-processing-rules"
+- link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: Documentation
   text: Global processing rules
+title: Agent Transport for Logs
 ---
 
 
@@ -103,9 +103,9 @@ logs_config:
 
 ログを HTTPS 経由で送信する場合は、他のデータタイプと同じ[プロキシ設定セット][3]を使用して、ログを Web プロキシ経由で送信します。
 
-[1]: /agent/configuration/agent-configuration-files/
-[2]: /agent/basic_agent_usage/#agent-overhead
-[3]: /agent/configuration/proxy/
+[1]: /ja/agent/configuration/agent-configuration-files/
+[2]: /ja/agent/basic_agent_usage/#agent-overhead
+[3]: /ja/agent/configuration/proxy/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -123,12 +123,12 @@ logs_config:
 
 デフォルトでは、Datadog Agent は TLS で暗号化された TCP を介して、ログを Datadog に送信します。これを実施するには、外部へ送信できる通信 (Datadog US サイトではポート `10516`、Datadog EU サイトではポート `443`) が必要です 。
 
-[1]: /agent/configuration/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **注**:  SOCKS5 プロキシは 圧縮 HTTPS でまだサポートされていないため、[SOCKS5 プロキシ][2]サーバーのセットアップでは TCP 転送が実行されます。
 
 
-[1]: /agent/configuration/agent-commands/?tab=agentv6v7#service-status
-[2]: /agent/logs/proxy/?tab=socks5
+[1]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#service-status
+[2]: /ja/agent/logs/proxy/?tab=socks5

@@ -1,27 +1,27 @@
 ---
-title: RUM iOS and tvOS Monitoring Supported Versions
-kind: ドキュメント
 beta: true
-description: "List of supported operating systems and platforms for the RUM iOS SDK."
 code_lang: ios
-type: multi-code-lang
 code_lang_weight: 20
+description: List of supported operating systems and platforms for the RUM iOS SDK.
 further_reading:
- - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
-   tag: ドキュメント
-   text: RUM iOS の高度なコンフィギュレーション
- - link: "https://github.com/DataDog/dd-sdk-ios"
-   tag: ソースコード
-   text: dd-sdk-ios のソースコード
- - link: /real_user_monitoring
-   tag: ドキュメント
-   text: RUM データの確認方法
- - link: /real_user_monitoring/error_tracking/ios/
-   tag: ドキュメント
-   text: iOS のエラーの追跡方法について
- - link: /real_user_monitoring/ios/swiftui/
-   tag: ドキュメント
-   text: SwiftUI アプリケーションのインスツルメンテーションについて
+- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+  tag: ドキュメント
+  text: RUM iOS の高度なコンフィギュレーション
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: ソースコード
+  text: dd-sdk-ios のソースコード
+- link: /real_user_monitoring
+  tag: ドキュメント
+  text: RUM データの確認方法
+- link: /real_user_monitoring/error_tracking/ios/
+  tag: ドキュメント
+  text: iOS のエラーの追跡方法について
+- link: /real_user_monitoring/ios/swiftui/
+  tag: ドキュメント
+  text: SwiftUI アプリケーションのインスツルメンテーションについて
+kind: ドキュメント
+title: RUM iOS and tvOS Monitoring Supported Versions
+type: multi-code-lang
 ---
 
 
@@ -90,8 +90,8 @@ The Datadog RUM SDK depends on the following third-party library:
 [1]: https://github.com/microsoft/plcrashreporter/issues/288
 [2]: https://developer.apple.com/xcode/
 [3]: https://developer.apple.com/news/?id=jd9wcyov
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods#declare-the-sdk-as-a-dependency
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=carthage#declare-the-sdk-as-a-dependency
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods#declare-the-sdk-as-a-dependency
+[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=carthage#declare-the-sdk-as-a-dependency
 [7]: https://github.com/DataDog/dd-sdk-ios/tree/develop/DatadogExtensions/Alamofire
 [8]: https://github.com/microsoft/plcrashreporter

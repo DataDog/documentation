@@ -43,13 +43,13 @@ APM および分散型トレーシングの請求の仕組みについては、[
 インデックス化スパンの数を減らすには、保持フィルターの構成を確認してください。保持フィルターについては、[トレース保持][11]のドキュメントで詳しく説明しています。
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /account_management/billing/apm_distributed_tracing/
+[2]: /ja/account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
-[5]: /monitors/types/apm/?tab=traceanalytics#monitor-creation
+[5]: /ja/monitors/types/apm/?tab=traceanalytics#monitor-creation
 [6]: https://app.datadoghq.com/apm/traces?viz=timeseries
-[7]: /tracing/guide/trace_ingestion_volume_control/
+[7]: /ja/tracing/guide/trace_ingestion_volume_control/
 [8]: https://app.datadoghq.com/monitors/create/metric
-[9]: /monitors/configuration/?tab=thresholdalert#cumulative-time-windows
-[10]: /tracing/trace_pipeline/ingestion_mechanisms/
-[11]: /tracing/trace_pipeline/trace_retention/
+[9]: /ja/monitors/configuration/?tab=thresholdalert#cumulative-time-windows
+[10]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[11]: /ja/tracing/trace_pipeline/trace_retention/

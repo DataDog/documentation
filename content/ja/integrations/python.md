@@ -1,31 +1,32 @@
 ---
-"categories":
-- "languages"
-- "log collection"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Collect metrics, traces, logs, and profile data from your Python applications."
-"doc_link": "https://docs.datadoghq.com/integrations/python/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/tracing-async-python-code/"
-  "tag": "ブログ"
-  "text": "Datadog APM による非同期 Python のトレーシング"
-- "link": "https://www.datadoghq.com/blog/python-logging-best-practices/"
-  "tag": "ブログ"
-  "text": "Python ログの収集、カスタマイズ、一元化方法"
-"git_integration_title": "python"
-"has_logo": true
-"integration_id": "python"
-"integration_title": "Python"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "python"
-"public_title": "Datadog-Python Integration"
-"short_description": "Collect metrics, traces, logs, and profile data from your Python applications."
-"version": "1.0"
+categories:
+- languages
+- log collection
+- tracing
+custom_kind: インテグレーション
+dependencies: []
+description: Collect metrics, traces, logs, and profile data from your Python applications.
+doc_link: https://docs.datadoghq.com/integrations/python/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/tracing-async-python-code/
+  tag: ブログ
+  text: Datadog APM による非同期 Python のトレーシング
+- link: https://www.datadoghq.com/blog/python-logging-best-practices/
+  tag: ブログ
+  text: Python ログの収集、カスタマイズ、一元化方法
+git_integration_title: python
+has_logo: true
+integration_id: python
+integration_title: Python
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: python
+public_title: Datadog-Python Integration
+short_description: Collect metrics, traces, logs, and profile data from your Python
+  applications.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -61,9 +62,8 @@ Need help? Contact [Datadog support][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/developers/dogstatsd/?tab=python
-[2]: https://docs.datadoghq.com/tracing/setup/python/
-[3]: https://docs.datadoghq.com/logs/log_collection/python/
-[4]: https://docs.datadoghq.com/profiler/enabling/python/
-[5]: https://docs.datadoghq.com/help/
-
+[1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=python
+[2]: https://docs.datadoghq.com/ja/tracing/setup/python/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/python/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/python/
+[5]: https://docs.datadoghq.com/ja/help/

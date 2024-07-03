@@ -25,11 +25,11 @@ Use the different principals to control access patterns in your organization and
 
 `user_access_manage` 権限を持つユーザーは、チーム、ロール、ユーザーまたはサービスアカウントに基づく制限をサポートする個々のリソースへのアクセスを昇格させることができます。ロールベースのアクセス制限のみを持つリソースはサポートされていません。アクセス権を得るには、粒度の高いアクセス制御モーダルで **Elevate Access** ボタンをクリックします。
 
-[1]: /account_management/teams/
-[2]: /dashboards/configure/#permissions
-[3]: /monitors/notify/#permissions
-[4]: /notebooks/#limit-edit-access
-[5]: /security/detection_rules/#limit-edit-access
-[6]: /service_management/service_level_objectives/#permissions
-[7]: /synthetics/browser_tests/#permissions
-[8]: /dashboards/widgets/powerpack/#powerpack-permissions
+[1]: /ja/account_management/teams/
+[2]: /ja/dashboards/configure/#permissions
+[3]: /ja/monitors/notify/#permissions
+[4]: /ja/notebooks/#limit-edit-access
+[5]: /ja/security/detection_rules/#limit-edit-access
+[6]: /ja/service_management/service_level_objectives/#permissions
+[7]: /ja/synthetics/browser_tests/#permissions
+[8]: /ja/dashboards/widgets/powerpack/#powerpack-permissions

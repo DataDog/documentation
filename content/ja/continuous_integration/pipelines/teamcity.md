@@ -1,14 +1,14 @@
 ---
-title: Set up Tracing on a TeamCity Pipeline
 aliases:
-  - /continuous_integration/setup_pipelines/teamcity
+- /ja/continuous_integration/setup_pipelines/teamcity
 further_reading:
-  - link: /continuous_integration/pipelines
-    tag: Documentation
-    text: Explore Pipeline Execution Results and Performance
-  - link: /continuous_integration/troubleshooting/
-    tag: Documentation
-    text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+title: Set up Tracing on a TeamCity Pipeline
 ---
 
 {{< site-region region="gov" >}}
@@ -105,8 +105,8 @@ Datadog CI Integration プラグインによって生成されたすべてのロ
 [9]: https://www.jetbrains.com/help/teamcity/project.html#Project+Hierarchy
 [10]: https://www.jetbrains.com/help/teamcity/project.html#Root+Project
 [11]: https://www.jetbrains.com/help/teamcity/vcs-root.html
-[12]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
+[12]: https://docs.datadoghq.com/ja/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
 [13]: https://www.jetbrains.com/help/teamcity/configuring-vcs-triggers.html#Trigger+build+on+changes+in+snapshot+dependencies
-[14]: /glossary/#partial-retry
-[15]: /glossary/#queue-time
-[16]: /glossary/#pipeline-failure
+[14]: /ja/glossary/#partial-retry
+[15]: /ja/glossary/#queue-time
+[16]: /ja/glossary/#pipeline-failure

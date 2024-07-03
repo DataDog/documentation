@@ -1,18 +1,19 @@
 ---
-title: Code Security
 further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: How Application Security Management Works
-- link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
+- link: https://www.datadoghq.com/blog/iast-datadog-code-security/
   tag: ブログ
   text: Enhance application security in production with Datadog Code Security
-- link: "https://www.datadoghq.com/blog/application-code-vulnerability-detection/"
+- link: https://www.datadoghq.com/blog/application-code-vulnerability-detection/
   tag: ブログ
   text: Find vulnerabilities in your code with Datadog Code Security
-- link: "https://www.datadoghq.com/blog/code-security-owasp-benchmark/"
+- link: https://www.datadoghq.com/blog/code-security-owasp-benchmark/
   tag: ブログ
-  text: Datadog Code Security achieves 100 percent accuracy in OWASP Benchmark by using an IAST approach
+  text: Datadog Code Security achieves 100 percent accuracy in OWASP Benchmark by
+    using an IAST approach
+title: Code Security
 ---
 
 ## 概要
@@ -122,13 +123,13 @@ If you need additional help, contact [Datadog support][11].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/appsec/vm/code
-[2]: /security/application_security/enabling/tracing_libraries/code_security/java/
-[3]: /integrations/jira/
-[4]: /account_management/rbac/permissions/#integrations
-[5]: /security/application_security/enabling/compatibility/
+[2]: /ja/security/application_security/enabling/tracing_libraries/code_security/java/
+[3]: /ja/integrations/jira/
+[4]: /ja/account_management/rbac/permissions/#integrations
+[5]: /ja/security/application_security/enabling/compatibility/
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
-[7]: /integrations/github/
-[8]: /security/application_security/enabling/single_step/code_security/?tab=linuxhostorvm
-[9]: /security/application_security/enabling/tracing_libraries/code_security/
+[7]: /ja/integrations/github/
+[8]: /ja/security/application_security/enabling/single_step/code_security/?tab=linuxhostorvm
+[9]: /ja/security/application_security/enabling/tracing_libraries/code_security/
 [10]: https://app.datadoghq.com/security/configuration/asm/setup
 [11]: https://www.datadoghq.com/support/

@@ -1,7 +1,8 @@
 ---
-title: Data intake
-description: "How data can be fed into Datadog and which prerequisites need to be met in your or your clients' environments."
+description: How data can be fed into Datadog and which prerequisites need to be met
+  in your or your clients' environments.
 private: true
+title: Data intake
 ---
 
 下地ができたので、いよいよ Datadog にデータを取り込みます。
@@ -166,39 +167,39 @@ Datadog のデプロイには構成管理ツールを使用することが望ま
 Datadog にデータが流れ込んだら、次はクライアントに[価値を提供する][36]ことに集中する時です。
 
 
-[1]: /getting_started/integrations/
+[1]: /ja/getting_started/integrations/
 [2]: https://www.datadoghq.com/pdf/monitoring-in-the-cloud-ebook.pdf
 [3]: https://www.datadoghq.com/solutions/aws/
 [4]: https://www.datadoghq.com/solutions/gcp/
 [5]: https://www.datadoghq.com/solutions/azure/
-[6]: /integrations/
-[7]: /agent/
-[8]: /getting_started/agent/
-[9]: /getting_started/logs
-[10]: /api/latest/metrics
-[11]: /api/latest/events
-[12]: /api/latest/tracing/
-[13]: /developers/custom_checks/
-[14]: /service_management/events/guides/dogstatsd/
-[15]: /metrics/custom_metrics/
-[16]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
-[17]: /api/latest/
-[18]: /getting_started/tagging/
+[6]: /ja/integrations/
+[7]: /ja/agent/
+[8]: /ja/getting_started/agent/
+[9]: /ja/getting_started/logs
+[10]: /ja/api/latest/metrics
+[11]: /ja/api/latest/events
+[12]: /ja/api/latest/tracing/
+[13]: /ja/developers/custom_checks/
+[14]: /ja/service_management/events/guides/dogstatsd/
+[15]: /ja/metrics/custom_metrics/
+[16]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
+[17]: /ja/api/latest/
+[18]: /ja/getting_started/tagging/
 [19]: https://www.datadoghq.com/blog/tagging-best-practices/
 [20]: https://learn.datadoghq.com/courses/tagging-best-practices
-[21]: /getting_started/tagging/unified_service_tagging?tab=kubernetes
-[22]: /agent/kubernetes/tag/
+[21]: /ja/getting_started/tagging/unified_service_tagging?tab=kubernetes
+[22]: /ja/agent/kubernetes/tag/
 [23]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[24]: /serverless/serverless_tagging/?tab=serverlessframework#overview
-[25]: /infrastructure/livecontainers
-[26]: /agent/configuration/network/
-[27]: /agent/configuration/proxy/
+[24]: /ja/serverless/serverless_tagging/?tab=serverlessframework#overview
+[25]: /ja/infrastructure/livecontainers
+[26]: /ja/agent/configuration/network/
+[27]: /ja/agent/configuration/proxy/
 [28]: https://www.datadoghq.com/blog/deploying-datadog-with-chef-roles/
 [29]: https://www.datadoghq.com/blog/monitor-puppet-datadog/
 [30]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/
 [31]: https://www.youtube.com/watch?v=EYoqwiXFrlQ
 [32]: https://github.com/DataDog/datadog-agent/releases
-[33]: /data_security/agent/#agent-distribution
+[33]: /ja/data_security/agent/#agent-distribution
 [34]: https://www.datadoghq.com/blog/monitor-chef-with-datadog/
 [35]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring/
-[36]: /partners/delivering-value/
+[36]: /ja/partners/delivering-value/

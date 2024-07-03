@@ -1,18 +1,21 @@
 ---
-title: Error Tracking for Web and Mobile Applications
-kind: documentation
-description: Learn how to search and manage errors collected from your web and mobile applications.
+algolia:
+  tags:
+  - error tracking
+description: Learn how to search and manage errors collected from your web and mobile
+  applications.
 further_reading:
-- link: "https://www.datadoghq.com/blog/error-tracking/"
+- link: https://www.datadoghq.com/blog/error-tracking/
   tag: Blog
   text: Make sense of application issues with Datadog Error Tracking
-- link: "https://www.datadoghq.com/blog/ios-crash-reporting-datadog"
+- link: https://www.datadoghq.com/blog/ios-crash-reporting-datadog
   tag: Blog
   text: Debug iOS crashes efficiently with Datadog RUM
-- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
+- link: https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/
   tag: Blog
-  text: How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues
-- link: "https://www.datadoghq.com/blog/error-tracking-logs/"
+  text: How Datadog's Technical Solutions team uses RUM, Session Replay, and Error
+    Tracking to resolve customer issues
+- link: https://www.datadoghq.com/blog/error-tracking-logs/
   tag: Blog
   text: Track and triage errors in your logs with Datadog Error Tracking
 - link: /real_user_monitoring/error_tracking/explorer
@@ -21,8 +24,8 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: Documentation
   text: Create an Error Tracking monitor
-algolia:
-  tags: [error tracking]
+kind: documentation
+title: Error Tracking for Web and Mobile Applications
 ---
 
 ## Overview
@@ -52,5 +55,5 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
-[2]: /real_user_monitoring/
-[3]: /error_tracking/explorer
+[2]: /ja/real_user_monitoring/
+[3]: /ja/error_tracking/explorer

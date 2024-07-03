@@ -1,17 +1,17 @@
 ---
-title: Set up Tracing on an Azure Pipeline
 aliases:
-  - /continuous_integration/setup_pipelines/azure
+- /ja/continuous_integration/setup_pipelines/azure
 further_reading:
-    - link: "https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/"
-      tag: Blog
-      text: Monitor Azure Pipelines with Datadog CI Visibility
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
-    - link: /continuous_integration/pipelines/custom_tags_and_measures/
-      tag: Documentation
-      text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: Blog
+  text: Monitor Azure Pipelines with Datadog CI Visibility
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines/custom_tags_and_measures/
+  tag: Documentation
+  text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
+title: Set up Tracing on an Azure Pipeline
 ---
 
 <div class="alert alert-warning">
@@ -125,11 +125,11 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[6]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
-[10]: /glossary/#custom-tag
-[11]: /glossary/#custom-measure
+[10]: /ja/glossary/#custom-tag
+[11]: /ja/glossary/#custom-measure
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
 [14]: https://app.datadoghq.com/integrations/azure

@@ -1,20 +1,20 @@
 ---
-title: Initialize Your Native SDK Before React Native Starts
-kind: guide
+algolia:
+  tags:
+  - bots
 description: Learn how to initialize your native SDK before React Native starts
 further_reading:
 - link: real_user_monitoring/reactnative/
   tag: Documentation
   text: Learn about React Native monitoring
-algolia:
-  tags: [bots]
+title: Initialize Your Native SDK Before React Native Starts
 ---
 
-## Overview
+## 概要
 
 By default, the React Native SDK initializes the native SDK when calling `DdSdkReactNative.initialize(config)` on the JS layer, or using the `DatadogProvider`. As a result, the SDK does not capture native crashes that occur prior to the initialization being called on the JS layer. Starting from v2.3.0, you can initialize your native SDK in order for Datadog to capture any crashes before the React Native layer starts.
 
-## Configuration
+## 構成
 
 To initialize your native SDK before React Native has started:
 
@@ -111,6 +111,6 @@ Depending on your OS, the configuration file may be in a different location:
 - In **iOS**, the configuration file gets added to the top of the project resources directory, no matter where it is located.
 - In **React Native**, you can specify any path for the file using the `require` pattern.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

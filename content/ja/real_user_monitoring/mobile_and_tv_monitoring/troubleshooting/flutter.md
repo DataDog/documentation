@@ -1,20 +1,19 @@
 ---
-title: Troubleshooting Flutter SDK issues
-kind: documentation
-description: Learn how to troubleshoot issues with Flutter Monitoring.
 aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+- /ja/real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: flutter
-type: multi-code-lang
 code_lang_weight: 30
+description: Learn how to troubleshoot issues with Flutter Monitoring.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-flutter"
+- link: https://github.com/DataDog/dd-sdk-flutter
   tag: ソースコード
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/flutter/
   tag: Documentation
   text: Learn about Flutter Monitoring
-
+kind: documentation
+title: Troubleshooting Flutter SDK issues
+type: multi-code-lang
 ---
 
 ## 概要
@@ -106,7 +105,7 @@ final configuration = DdSdkConfiguration(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /ja/help
 [2]: https://github.com/flutter/flutter/wiki/Developing-with-Flutter-on-Apple-Silicon
 [3]: https://pub.dev/packages/datadog_tracking_http_client
 [4]: https://pub.dev/packages/http

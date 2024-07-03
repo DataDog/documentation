@@ -1,6 +1,10 @@
 ---
-title: Unified Service Tagging
-kind: documentation
+algolia:
+  tags:
+  - unified service tags
+  - unified
+  - unified service
+  - service tags
 further_reading:
 - link: /getting_started/tagging/using_tags
   tag: Documentation
@@ -8,11 +12,11 @@ further_reading:
 - link: /tracing/version_tracking
   tag: Documentation
   text: Use Version tags within Datadog APM to monitor deployments
-- link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
+- link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
   tag: Blog
   text: Learn more about Autodiscovery
-algolia:
-  tags: [unified service tags,unified,unified service,service tags]
+kind: documentation
+title: Unified Service Tagging
 ---
 
 ## Overview
@@ -187,12 +191,12 @@ containers:
 ```
 
 
-[1]: /agent/cluster_agent/admission_controller/
+[1]: /ja/agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[3]: /agent/kubernetes/data_collected/#kube-state-metrics
+[3]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
-[5]: /tracing/send_traces/
-[6]: /integrations/statsd/
+[5]: /ja/tracing/send_traces/
+[6]: /ja/integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -311,15 +315,15 @@ To form a single point of configuration for all telemetry emitted directly from 
 
       **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
-[1]: /tracing/setup/
-[2]: /developers/dogstatsd/
+[1]: /ja/tracing/setup/
+[2]: /ja/developers/dogstatsd/
    {{% /tab %}}
 
    {{% tab "Logs" %}}
 
    If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
-[1]: /tracing/other_telemetry/connect_logs_and_traces/
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}
 
 {{% tab "RUM とセッションリプレイ" %}}
@@ -329,8 +333,8 @@ To form a single point of configuration for all telemetry emitted directly from 
 [RUM アプリケーションの作成][2]の際に、`env` と `service` の名前を確認します。
 
 
-[1]: /real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /real_user_monitoring/browser/setup
+[1]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /ja/real_user_monitoring/browser/setup
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
@@ -339,7 +343,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 ワイルドカードとして `*` を使用することができます。例えば、`https://*.datadoghq.com` のように指定します。
 
-[1]: /synthetics/apm/
+[1]: /ja/synthetics/apm/
 [2]: https://app.datadoghq.com/synthetics/settings/integrations
    {{% /tab %}}
 
@@ -351,7 +355,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 **注**: .NET および PHP 用の Datadog DogStatsD クライアントは、この機能をサポートしていません。
 
-[1]: /metrics/
+[1]: /ja/metrics/
    {{% /tab %}}
 
 {{% tab "システムメトリクス" %}}
@@ -397,8 +401,8 @@ instances:
 
 **注**: Agent のメインコンフィギュレーションファイルで既に `service` タグをグローバルに設定している場合は、プロセスのメトリクスが 2 つのサービスにタグ付けされます。これによってメトリクスの解釈に相違が生じることがあるため、`service` タグはプロセスチェックのコンフィギュレーションのみで構成することをお勧めします。
 
-[1]: /agent/configuration/agent-configuration-files
-[2]: /integrations/process
+[1]: /ja/agent/configuration/agent-configuration-files
+[2]: /ja/integrations/process
     {{% /tab %}}
     {{< /tabs >}}
 
@@ -409,18 +413,18 @@ AWS Lambda 関数については、[タグを使った Lambda のテレメトリ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/
-[2]: /agent/docker/integrations/?tab=docker
-[3]: /getting_started/agent
-[4]: /tracing/setup
-[5]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[6]: /getting_started/agent/autodiscovery
-[7]: /agent/docker/?tab=standard#optional-collection-agents
-[8]: /getting_started/tracing/
-[9]: /getting_started/logs/
-[10]: /real_user_monitoring/platform/connect_rum_and_traces/
-[11]: /getting_started/synthetics/
-[12]: /integrations/statsd/
+[1]: /ja/getting_started/tagging/
+[2]: /ja/agent/docker/integrations/?tab=docker
+[3]: /ja/getting_started/agent
+[4]: /ja/tracing/setup
+[5]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[6]: /ja/getting_started/agent/autodiscovery
+[7]: /ja/agent/docker/?tab=standard#optional-collection-agents
+[8]: /ja/getting_started/tracing/
+[9]: /ja/getting_started/logs/
+[10]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
+[11]: /ja/getting_started/synthetics/
+[12]: /ja/integrations/statsd/
 [13]: https://www.chef.io/
 [14]: https://www.ansible.com/
-[15]: /serverless/configuration/#connect-telemetry-using-tags
+[15]: /ja/serverless/configuration/#connect-telemetry-using-tags

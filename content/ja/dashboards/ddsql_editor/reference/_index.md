@@ -24,5 +24,5 @@ SQL is broken into five different categories of statements. The table below indi
 | DCL (Data Control Language)        | `GRANT`, `REVOKE`   | サポート対象外       |
 | TCL (Transaction Control Language) | `BEGIN`, `END`, `ROLLBACK`  | サポート対象外     |
 
-[1]: /dashboards/ddsql_editor/reference/tags
+[1]: /ja/dashboards/ddsql_editor/reference/tags
 [2]: https://app.datadoghq.com/ddsql/editor

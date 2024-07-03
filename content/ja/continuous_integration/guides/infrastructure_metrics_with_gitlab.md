@@ -1,13 +1,14 @@
 ---
-title: Correlate Infrastructure Metrics with GitLab Jobs in Datadog
-description: Learn how to correlate infrastructure metrics with your GitLab Autoscale job executions.
+description: Learn how to correlate infrastructure metrics with your GitLab Autoscale
+  job executions.
 further_reading:
-  - link: /continuous_integration/pipelines/gitlab
-    tag: Documentation
-    text: Set up CI Visibility on a GitLab pipeline
-  - link: "/continuous_integration/search/#pipeline-details-and-executions"
-    tag: Documentation
-    text: Learn how to search and manage your pipeline executions
+- link: /continuous_integration/pipelines/gitlab
+  tag: Documentation
+  text: Set up CI Visibility on a GitLab pipeline
+- link: /continuous_integration/search/#pipeline-details-and-executions
+  tag: Documentation
+  text: Learn how to search and manage your pipeline executions
+title: Correlate Infrastructure Metrics with GitLab Jobs in Datadog
 ---
 
 ## 概要
@@ -46,12 +47,12 @@ After you have completed these steps, your GitLab jobs should be correlated with
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/pipelines/gitlab
+[1]: /ja/continuous_integration/pipelines/gitlab
 [2]: https://docs.gitlab.com/runner/executors/instance.html
 [3]: https://docs.gitlab.com/runner/executors/docker_autoscaler.html
 [4]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html
-[5]: /agent/
+[5]: /ja/agent/
 [6]: https://app.datadoghq.com/infrastructure
 [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 [8]: https://app.datadoghq.com/ci/pipeline-executions
-[9]: /continuous_integration/explorer/?tab=pipelineexecutions
+[9]: /ja/continuous_integration/explorer/?tab=pipelineexecutions

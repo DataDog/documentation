@@ -1,8 +1,5 @@
 ---
-title: セットアップ
-kind: documentation
-description: Setting up Network Path 
-is_beta: true
+description: Setting up Network Path
 further_reading:
 - link: /network_monitoring/network_path/list_view
   tag: ドキュメント
@@ -10,6 +7,9 @@ further_reading:
 - link: /network_monitoring/network_path/path_view
   tag: ドキュメント
   text: Learn more about the Path View in Network Path
+is_beta: true
+kind: documentation
+title: セットアップ
 ---
 
 {{< site-region region="gov" >}}
@@ -72,4 +72,4 @@ Agent version `7.55` or higher is required.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/performance/setup/
+[1]: /ja/network_monitoring/performance/setup/

@@ -1,11 +1,9 @@
 ---
-title: Configuring Deployment Event Submission for DORA Metrics
-kind: ドキュメント
-description: Learn how to send deployment events for DORA Metrics by using the API or CLI.
 aliases:
-- /continuous_integration/dora_metrics/setup/deployments
-- /dora_metrics/setup/deployments
-is_beta: true
+- /ja/continuous_integration/dora_metrics/setup/deployments
+- /ja/dora_metrics/setup/deployments
+description: Learn how to send deployment events for DORA Metrics by using the API
+  or CLI.
 further_reading:
 - link: /dora_metrics/deployments
   tag: ドキュメント
@@ -16,15 +14,18 @@ further_reading:
 - link: /tracing/service_catalog
   tag: ドキュメント
   text: サービスカタログについて
-- link: "https://github.com/DataDog/datadog-ci"
+- link: https://github.com/DataDog/datadog-ci
   tag: ソースコード
   text: datadog-ci CLI ツールについて
 - link: /continuous_delivery/deployments
   tag: ドキュメント
   text: Deployment Visibility について
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: リリースノート
   text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
+is_beta: true
+kind: ドキュメント
+title: Configuring Deployment Event Submission for DORA Metrics
 ---
 
 {{< site-region region="gov" >}}
@@ -74,7 +75,7 @@ For the following example, replace `<DD_SITE>` in the URL with {{< region-param 
 EOF
 ```
 
-[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[1]: /ja/api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
@@ -112,10 +113,10 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[1]: /ja/api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /tracing/service_catalog
-[4]: /tracing/service_catalog/setup
-[5]: /tracing/service_catalog/adding_metadata
+[3]: /ja/tracing/service_catalog
+[4]: /ja/tracing/service_catalog/setup
+[5]: /ja/tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
 [7]: https://app.datadoghq.com/ci/dora

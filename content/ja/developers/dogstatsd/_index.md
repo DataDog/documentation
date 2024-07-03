@@ -1,26 +1,26 @@
 ---
-title: DogStatsD
-kind: documentation
-description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
-    - /guides/dogstatsd/
-    - /guides/DogStatsD/
-    - /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
-    - /integrations/faq/dogstatsd-and-docker
-    - /agent/kubernetes/dogstatsd
+- /ja/guides/dogstatsd/
+- /ja/guides/DogStatsD/
+- /ja/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
+- /ja/integrations/faq/dogstatsd-and-docker
+- /ja/agent/kubernetes/dogstatsd
+description: Overview of the features of DogStatsD, including data types and tagging.
 further_reading:
-    - link: 'integrations/node'
-      tag: 'Documentation'
-      text: 'Enable DogStatsD for NodeJS through the NodeJS integration'
-    - link: 'developers/dogstatsd'
-      tag: 'Documentation'
-      text: 'Introduction to DogStatsD'
-    - link: 'developers/libraries'
-      tag: 'Documentation'
-      text: 'Official and Community created API and DogStatsD client libraries'
-    - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
-      tag: "Blog"
-      text: "Monitor your Linux web apps on Azure App Service with Datadog"
+- link: integrations/node
+  tag: Documentation
+  text: Enable DogStatsD for NodeJS through the NodeJS integration
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Introduction to DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Official and Community created API and DogStatsD client libraries
+- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
+  tag: Blog
+  text: Monitor your Linux web apps on Azure App Service with Datadog
+kind: documentation
+title: DogStatsD
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
@@ -81,9 +81,9 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 2. [Restart your Agent][3].
 
 
-[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[2]: /developers/dogstatsd/unix_socket/
-[3]: /agent/configuration/agent-commands/
+[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[2]: /ja/developers/dogstatsd/unix_socket/
+[3]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Container Agent" %}}
 
@@ -111,8 +111,8 @@ Origin detection in non-Kubernetes environments is based on an extension of the 
 
 **Note**: Origin detection is not supported for Fargate environments.
 
-[1]: /developers/dogstatsd/unix_socket/
-[2]: /developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
+[1]: /ja/developers/dogstatsd/unix_socket/
+[2]: /ja/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
@@ -201,13 +201,13 @@ To set [tag cardinality][6] for the metrics collected using origin detection, se
 
 **Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][7].
 
-[1]: /developers/dogstatsd/unix_socket/
+[1]: /ja/developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: /developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
-[6]: /getting_started/tagging/assigning_tags/#environment-variables
-[7]: /metrics/custom_metrics/
+[4]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /ja/developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
+[6]: /ja/getting_started/tagging/assigning_tags/#environment-variables
+[7]: /ja/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -244,7 +244,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 
      With this, any pod running your application is able to send DogStatsD metrics through port `8125` on `$DD_AGENT_HOST`.
 
-[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[1]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -584,11 +584,11 @@ If you're interested in learning more about the datagram format used by DogStats
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/etsy/statsd
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
-[5]: /metrics/custom_metrics/
-[6]: /service_management/events/guides/dogstatsd/
-[7]: /developers/service_checks/dogstatsd_service_checks_submission/
-[8]: /getting_started/tagging/unified_service_tagging
-[9]: /developers/dogstatsd/datagram_shell/
+[5]: /ja/metrics/custom_metrics/
+[6]: /ja/service_management/events/guides/dogstatsd/
+[7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
+[8]: /ja/getting_started/tagging/unified_service_tagging
+[9]: /ja/developers/dogstatsd/datagram_shell/

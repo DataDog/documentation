@@ -1,30 +1,30 @@
 ---
-"categories":
-- "cloud"
-- "compliance"
-- "cost management"
-- "security"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "CloudHealth が Datadog からインスタンスごとのメトリクスを取得できるように支援。"
-"doc_link": "https://docs.datadoghq.com/integrations/cloudhealth/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-cloudhealth-assets-datadog/"
-  "tag": "ブログ"
-  "text": "CloudHealth + Datadog: クラウドアセットを効果的に管理"
-"git_integration_title": "cloudhealth"
-"has_logo": true
-"integration_id": "cloudhealth"
-"integration_title": "Cloudhealth"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "cloudhealth"
-"public_title": "Datadog-Cloudhealth Integration"
-"short_description": "Help CloudHealth help you: give it per-instance metrics from Datadog."
-"team": "web-integrations"
-"version": "1.0"
+categories:
+- cloud
+- compliance
+- cost management
+- security
+custom_kind: インテグレーション
+dependencies: []
+description: CloudHealth が Datadog からインスタンスごとのメトリクスを取得できるように支援。
+doc_link: https://docs.datadoghq.com/integrations/cloudhealth/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-cloudhealth-assets-datadog/
+  tag: ブログ
+  text: 'CloudHealth + Datadog: クラウドアセットを効果的に管理'
+git_integration_title: cloudhealth
+has_logo: true
+integration_id: cloudhealth
+integration_title: Cloudhealth
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: cloudhealth
+public_title: Datadog-Cloudhealth Integration
+short_description: 'Help CloudHealth help you: give it per-instance metrics from Datadog.'
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -76,5 +76,4 @@ Need help? Contact [Datadog support][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.cloudhealthtech.com
-[2]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/help/

@@ -1,6 +1,6 @@
 ---
-title: Log Volume Control for Splunk Heavy and Universal Forwarders (TCP)
 disable_toc: false
+title: Log Volume Control for Splunk Heavy and Universal Forwarders (TCP)
 ---
 
 ## 概要

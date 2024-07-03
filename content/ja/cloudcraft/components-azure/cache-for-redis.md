@@ -1,5 +1,5 @@
 ---
-title: "Cache for Redis Component"
+title: Cache for Redis Component
 ---
 
 ## 概要

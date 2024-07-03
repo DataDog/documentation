@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for self hosted MySQL
 description: Install and configure Database Monitoring for self-hosted MySQL.
 further_reading:
 - link: /integrations/mysql/
   tag: Documentation
   text: Basic MySQL Integration
-
+title: Setting Up Database Monitoring for self hosted MySQL
 ---
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
@@ -287,15 +286,15 @@ Agent によってデータベースから収集されたテレメトリーに�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /database_monitoring/data_collected/#sensitive-information
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
+[2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://app.datadoghq.com/account/settings/agent/latest
-[7]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[7]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/configuration/agent-commands/#agent-status-and-information
+[9]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-[12]: /database_monitoring/troubleshooting/?tab=mysql
+[12]: /ja/database_monitoring/troubleshooting/?tab=mysql

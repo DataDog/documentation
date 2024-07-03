@@ -1,22 +1,23 @@
 ---
-"categories":
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog イベントストリームから Opsmatic アラートを参照および認識。"
-"doc_link": "https://docs.datadoghq.com/integrations/opsmatic/"
-"draft": false
-"git_integration_title": "opsmatic"
-"has_logo": true
-"integration_id": "opsmatic"
-"integration_title": "Opsmatic"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "opsmatic"
-"public_title": "Datadog-Opsmatic Integration"
-"short_description": "See Opsmatic alerts and acknowledge them from your Datadog event stream."
-"version": "1.0"
+categories:
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
+doc_link: https://docs.datadoghq.com/integrations/opsmatic/
+draft: false
+git_integration_title: opsmatic
+has_logo: true
+integration_id: opsmatic
+integration_title: Opsmatic
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: opsmatic
+public_title: Datadog-Opsmatic Integration
+short_description: See Opsmatic alerts and acknowledge them from your Datadog event
+  stream.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -61,5 +62,4 @@ The Opsmatic integration does not include any service checks.
 Need help? Contact [Datadog support][2].
 
 [1]: https://opsmatic.com/app/docs/datadog-integration
-[2]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/help/

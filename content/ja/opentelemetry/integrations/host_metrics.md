@@ -1,11 +1,11 @@
 ---
-title: Host Metrics
 aliases:
-- /opentelemetry/collector_exporter/host_metrics/
+- /ja/opentelemetry/collector_exporter/host_metrics/
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
   text: Setting Up the OpenTelemetry Collector
+title: Host Metrics
 ---
 
 ## Overview
@@ -146,5 +146,5 @@ Value: 1153183744
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
-[2]: /opentelemetry/guide/metrics_mapping/#host-metrics
+[2]: /ja/opentelemetry/guide/metrics_mapping/#host-metrics
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml

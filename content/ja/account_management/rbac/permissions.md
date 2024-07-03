@@ -1,19 +1,19 @@
 ---
-title: Datadog Role Permissions
+algolia:
+  category: Documentation
+  rank: 80
+  subcategory: Datadog Role Permissions
 aliases:
-  - /account_management/faq/managing-global-role-permissions
+- /ja/account_management/faq/managing-global-role-permissions
 disable_toc: true
 further_reading:
-    - link: /account_management/rbac/
-      tag: Documentation
-      text: Learn how to create, update and delete a Role
-    - link: "/api/v2/roles/#list-permissions"
-      tag: Documentation
-      text: Manage your permissions with the Permission API
-algolia:
-    rank: 80
-    category: Documentation
-    subcategory: Datadog Role Permissions
+- link: /account_management/rbac/
+  tag: Documentation
+  text: Learn how to create, update and delete a Role
+- link: /api/v2/roles/#list-permissions
+  tag: Documentation
+  text: Manage your permissions with the Permission API
+title: Datadog Role Permissions
 ---
 
 ## 概要
@@ -51,6 +51,6 @@ Each out-of-the-box role inherits all of the permissions from the less powerful 
 <br>
 *Log Rehydration は Datadog, Inc. の商標です
 
-[1]: /account_management/rbac/granular_access
-[2]: /account_management/users/#edit-a-user-s-roles
-[3]: /api/latest/roles/#list-permissions
+[1]: /ja/account_management/rbac/granular_access
+[2]: /ja/account_management/users/#edit-a-user-s-roles
+[3]: /ja/api/latest/roles/#list-permissions

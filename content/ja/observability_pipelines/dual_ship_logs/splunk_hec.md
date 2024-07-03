@@ -1,6 +1,6 @@
 ---
-title: Dual Ship Logs for the Splunk HTTP Event Collector (HEC)
 disable_toc: false
+title: Dual Ship Logs for the Splunk HTTP Event Collector (HEC)
 ---
 
 ## 概要
@@ -162,5 +162,5 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/log_source_configuration/splunk_hec %}}
 
-[1]: /dual_ship_logs/splunk_tcp/
+[1]: /ja/dual_ship_logs/splunk_tcp/
 [2]: https://app.datadoghq.com/observability-pipelines

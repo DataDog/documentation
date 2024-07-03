@@ -1,71 +1,71 @@
 ---
-"app_id": "singlestore"
-"app_uuid": "5e8c3b5f-278f-4423-90d9-969c06a478eb"
-"assets":
-  "dashboards":
-    "Singlestore Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": singlestore.bytes_received
-      "metadata_path": metadata.csv
-      "prefix": singlestore.
-    "process_signatures":
+app_id: singlestore
+app_uuid: 5e8c3b5f-278f-4423-90d9-969c06a478eb
+assets:
+  dashboards:
+    Singlestore Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: singlestore.bytes_received
+      metadata_path: metadata.csv
+      prefix: singlestore.
+    process_signatures:
     - memsqld
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10215"
-    "source_type_name": SingleStore
-  "monitors":
-    "[SingleStore] License expiration": assets/monitors/license_expiration.json
-    "[SingleStore] Read failures rate": assets/monitors/read_failures.json
-    "[SingleStore] Write failures rate": assets/monitors/write_failures.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10215
+    source_type_name: SingleStore
+  monitors:
+    '[SingleStore] License expiration': assets/monitors/license_expiration.json
+    '[SingleStore] Read failures rate': assets/monitors/read_failures.json
+    '[SingleStore] Write failures rate': assets/monitors/write_failures.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "singlestore"
-"integration_id": "singlestore"
-"integration_title": "SingleStore"
-"integration_version": "2.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "singlestore"
-"public_title": "SingleStore"
-"short_description": "Collect SingleStore metrics from leaves and aggregators."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: singlestore
+integration_id: singlestore
+integration_title: SingleStore
+integration_version: 2.2.1
+is_public: true
+manifest_version: 2.0.0
+name: singlestore
+public_title: SingleStore
+short_description: Collect SingleStore metrics from leaves and aggregators.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Collect SingleStore metrics from leaves and aggregators.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SingleStore
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Collect SingleStore metrics from leaves and aggregators.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SingleStore
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -180,13 +180,12 @@ SingleStore インテグレーションには、イベントは含まれませ�
 
 
 [1]: https://www.singlestore.com/
-[2]: https://docs.datadoghq.com/getting_started/agent/autodiscovery#integration-templates
+[2]: https://docs.datadoghq.com/ja/getting_started/agent/autodiscovery#integration-templates
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/singlestore/datadog_checks/singlestore/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/singlestore/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/singlestore/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

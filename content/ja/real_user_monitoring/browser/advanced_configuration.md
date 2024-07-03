@@ -1,14 +1,12 @@
 ---
-title: Advanced Configuration
-kind: documentation
 aliases:
-  - /real_user_monitoring/installation/advanced_configuration/
-  - /real_user_monitoring/browser/modifying_data_and_context/
+- /ja/real_user_monitoring/installation/advanced_configuration/
+- /ja/real_user_monitoring/browser/modifying_data_and_context/
 further_reading:
 - link: /real_user_monitoring/browser/tracking_user_actions
   tag: Documentation
   text: Tracking User Actions
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
   text: Real User Monitoring
 - link: /real_user_monitoring/browser/data_collected/
@@ -23,6 +21,8 @@ further_reading:
 - link: /logs/log_configuration/attributes_naming_convention
   tag: Documentation
   text: Datadog standard attributes
+kind: documentation
+title: Advanced Configuration
 ---
 
 ## Overview
@@ -1017,10 +1017,10 @@ However, this feature comes with some **limitations**:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/browser/monitoring_page_performance/
+[1]: /ja/real_user_monitoring/browser/data_collected/
+[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/browser/setup
+[4]: /ja/real_user_monitoring/browser/setup
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -1030,9 +1030,9 @@ However, this feature comes with some **limitations**:
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
 [12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[14]: /real_user_monitoring/guide/enrich-and-control-rum-data
+[14]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[16]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
-[18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
+[18]: /ja/data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage

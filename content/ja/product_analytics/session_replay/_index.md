@@ -1,22 +1,22 @@
 ---
-title: セッション リプレイ
-kind: documentation
-description: セッションリプレイでユーザーの Web 閲覧またはモバイルアプリの体験をキャプチャし、視覚的に再生する方法について説明します。
 aliases:
-- /real_user_monitoring/guide/session-replay-getting-started/
+- /ja/real_user_monitoring/guide/session-replay-getting-started/
+description: セッションリプレイでユーザーの Web 閲覧またはモバイルアプリの体験をキャプチャし、視覚的に再生する方法について説明します。
 further_reading:
-- link: "https://www.datadoghq.com/blog/session-replay-datadog/"
+- link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: ブログ
   text: Datadog Session Replay を使用してユーザージャーニーをリアルタイムで表示
-- link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
+- link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: ブログ
   text: ファネル分析により、主要なユーザーフローを理解し、最適化する
-- link: "https://www.datadoghq.com/blog/zendesk-session-replay-integration/"
+- link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
   tag: ブログ
   text: Zendesk と Datadog セッションリプレイでユーザーが直面する問題を視覚的に再生する
 - link: /integrations/content_security_policy_logs
   tag: ドキュメント
   text: Datadog で CSP 違反の検出と集計を行う
+kind: documentation
+title: セッション リプレイ
 ---
 
 
@@ -58,9 +58,9 @@ RUM ブラウザ SDK は[オープンソース][1]であり、オープンソー
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
-[3]: /real_user_monitoring/session_replay/browser/
-[4]: /real_user_monitoring/session_replay/mobile/
-[5]: https://docs.datadoghq.com/notebooks/
-[6]: https://docs.datadoghq.com/account_management/audit_trail/
+[3]: /ja/real_user_monitoring/session_replay/browser/
+[4]: /ja/real_user_monitoring/session_replay/mobile/
+[5]: https://docs.datadoghq.com/ja/notebooks/
+[6]: https://docs.datadoghq.com/ja/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
-[8]: /real_user_monitoring/session_replay/playlists
+[8]: /ja/real_user_monitoring/session_replay/playlists

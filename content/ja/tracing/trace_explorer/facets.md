@@ -1,10 +1,10 @@
 ---
-title: Span Facets
-description: 'Trace Facets and Facet Panel'
+description: Trace Facets and Facet Panel
 further_reading:
 - link: tracing/trace_explorer/
   tag: Documentation
   text: Learn about the Trace Explorer
+title: Span Facets
 ---
 
 ## 概要
@@ -23,9 +23,9 @@ further_reading:
 
 [ファセットの作成](#creating-facets)は、[スパンの検索][1]、[スパンからのメトリクス生成][2]、[保持フィルターによるスパンのインデックス化][3]には**必要ではありません**。これらのコンテキストにおいて、オートコンプリート機能は既存のファセットを使用しますが、受信したスパンに一致する任意の入力値も適用されます。
 
-[1]: /tracing/trace_explorer/search
-[2]: /tracing/trace_pipeline/generate_metrics
-[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[1]: /ja/tracing/trace_explorer/search
+[2]: /ja/tracing/trace_pipeline/generate_metrics
+[3]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
 
 {{< /site-region >}}
 
@@ -123,9 +123,9 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_explorer/query_syntax/
-[2]: /tracing/trace_explorer/group/
-[3]: /monitors/types/apm/?tab=analytics
-[4]: /dashboards/widgets/
-[5]: /notebooks/
-[6]: /tracing/trace_explorer/
+[1]: /ja/tracing/trace_explorer/query_syntax/
+[2]: /ja/tracing/trace_explorer/group/
+[3]: /ja/monitors/types/apm/?tab=analytics
+[4]: /ja/dashboards/widgets/
+[5]: /ja/notebooks/
+[6]: /ja/tracing/trace_explorer/

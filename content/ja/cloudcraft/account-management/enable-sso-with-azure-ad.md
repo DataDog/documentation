@@ -51,8 +51,8 @@ Next, configure the SAML integration using the details provided by Cloudcraft.
 
 **Note**: To grant access to users in your organization, see [the Azure AD documentation][4].
 
-[1]: /cloudcraft/account-management/enable-sso-with-okta/
-[2]: /cloudcraft/account-management/enable-sso-with-generic-idp/
-[3]: /cloudcraft/account-management/enable-sso/
+[1]: /ja/cloudcraft/account-management/enable-sso-with-okta/
+[2]: /ja/cloudcraft/account-management/enable-sso-with-generic-idp/
+[3]: /ja/cloudcraft/account-management/enable-sso/
 [4]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal
 [5]: https://app.cloudcraft.co/support

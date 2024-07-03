@@ -1,9 +1,9 @@
 ---
-title: Visualize
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Search for your events
+title: Visualize
 ---
 
 ## 概要
@@ -102,11 +102,11 @@ For all visualizations, select a section of the graph or click on the graph to e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/explorer/events/
-[3]: /logs/explorer/facets/
-[4]: /real_user_monitoring/explorer/saved_views/
-[5]: /real_user_monitoring/explorer/search#setup-facets-and-measures
-[6]: /notebooks
-[7]: /real_user_monitoring/explorer/export/
-[8]: /dashboards/widgets/list/
+[1]: /ja/real_user_monitoring/explorer/
+[2]: /ja/real_user_monitoring/explorer/events/
+[3]: /ja/logs/explorer/facets/
+[4]: /ja/real_user_monitoring/explorer/saved_views/
+[5]: /ja/real_user_monitoring/explorer/search#setup-facets-and-measures
+[6]: /ja/notebooks
+[7]: /ja/real_user_monitoring/explorer/export/
+[8]: /ja/dashboards/widgets/list/

@@ -1,20 +1,19 @@
 ---
-title: RUM Flutter Data Collected
-kind: documentation
-description: Learn about the data collected by Flutter Monitoring.
-code_lang: flutter
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
-- /real_user_monitoring/flutter/data_collected/
+- /ja/real_user_monitoring/flutter/data_collected/
+code_lang: flutter
+code_lang_weight: 30
+description: Learn about the data collected by Flutter Monitoring.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-flutter"
+- link: https://github.com/DataDog/dd-sdk-flutter
   tag: ソースコード
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-
+kind: documentation
+title: RUM Flutter Data Collected
+type: multi-code-lang
 ---
 ## Overview
 
@@ -29,5 +28,5 @@ Most Flutter Monitoring data is collected by native Datadog iOS and Android SDKs
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
-[2]: /real_user_monitoring/android/data_collected/#event-specific-metrics-and-attributes
+[1]: /ja/real_user_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
+[2]: /ja/real_user_monitoring/android/data_collected/#event-specific-metrics-and-attributes

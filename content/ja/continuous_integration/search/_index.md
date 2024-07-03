@@ -1,12 +1,12 @@
 ---
-title: Search and Manage CI Pipelines 
-description: Learn how to search for your CI pipelines.
 aliases:
-- /continuous_integration/explorer/search/
+- /ja/continuous_integration/explorer/search/
+description: Learn how to search for your CI pipelines.
 further_reading:
 - link: /continuous_integration/explorer
   tag: Documentation
   text: Search and filter pipeline executions
+title: Search and Manage CI Pipelines
 ---
 
 {{< site-region region="gov" >}}
@@ -92,8 +92,8 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[3]: /continuous_integration/pipelines/github/#enable-log-collection
-[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
-[5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
-[6]: /account_management/teams/ 
-[7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[3]: /ja/continuous_integration/pipelines/github/#enable-log-collection
+[4]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[5]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
+[6]: /ja/account_management/teams/ 
+[7]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux

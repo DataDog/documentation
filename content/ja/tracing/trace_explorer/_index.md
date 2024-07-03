@@ -1,14 +1,14 @@
 ---
-title: Trace Explorer
 aliases:
-    - /tracing/tracing_without_limits/
-    - /tracing/livesearch/
-    - /tracing/trace_search_and_analytics/
-description: "Trace Explorer"
+- /ja/tracing/tracing_without_limits/
+- /ja/tracing/livesearch/
+- /ja/tracing/trace_search_and_analytics/
+description: Trace Explorer
 further_reading:
 - link: tracing/trace_explorer/search
   tag: Documentation
   text: Search Spans
+title: Trace Explorer
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースエクスプローラー" >}}
@@ -132,10 +132,10 @@ From the timeseries view, export your query to a [dashboard][1], [monitor][2], o
 
 **Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards, notebooks, and from trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 
-[1]: /dashboards/widgets/timeseries/
-[2]: /monitors/types/apm/?tab=analytics
-[3]: /notebooks
-[4]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
+[1]: /ja/dashboards/widgets/timeseries/
+[2]: /ja/monitors/types/apm/?tab=analytics
+[3]: /ja/notebooks
+[4]: /ja/tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -149,14 +149,14 @@ From the timeseries view, export your query to a [dashboard][1], [monitor][2], o
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/traces
-[2]: /tracing/trace_pipeline/ingestion_controls
-[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[4]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
-[5]: /tracing/glossary/#indexed-span
-[6]: /tracing/trace_pipeline/
-[7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
-[9]: /account_management/billing/apm_distributed_tracing/
-[10]: /glossary/#service-entry-span
-[11]: /glossary/#trace-root-span
+[2]: /ja/tracing/trace_pipeline/ingestion_controls
+[3]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /ja/tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
+[5]: /ja/tracing/glossary/#indexed-span
+[6]: /ja/tracing/trace_pipeline/
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[9]: /ja/account_management/billing/apm_distributed_tracing/
+[10]: /ja/glossary/#service-entry-span
+[11]: /ja/glossary/#trace-root-span
 [12]: https://app.datadoghq.com/apm/traces/retention-filters

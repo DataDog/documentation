@@ -1,5 +1,5 @@
 ---
-title: "WAF Component"
+title: WAF Component
 ---
 ## 概要
 
@@ -65,4 +65,4 @@ WAF コンポーネントを使用して、Amazon Web Services アーキテク�
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-[3]: /cloudcraft/faq/scan-error-aws-china-region/
+[3]: /ja/cloudcraft/faq/scan-error-aws-china-region/

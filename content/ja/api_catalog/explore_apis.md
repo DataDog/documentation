@@ -1,14 +1,14 @@
 ---
-title: Exploring APIs
-is_beta: true
+aliases:
+- /ja/tracing/api_catalog/explore_and_catalog_apis/
+- /ja/api_catalog/explore_and_catalog_apis/
+- /ja/tracing/api_catalog/explore_apis/
 further_reading:
 - link: /tracing/service_catalog/
   tag: Documentation
   text: Datadog Service Catalog
-aliases:
-    - /tracing/api_catalog/explore_and_catalog_apis/
-    - /api_catalog/explore_and_catalog_apis/
-    - /tracing/api_catalog/explore_apis/
+is_beta: true
+title: Exploring APIs
 ---
 
 {{< img src="tracing/api_catalog/api-catalog-explorer.png" alt="API Catalog Explorer view" style="width:100%;" >}}
@@ -50,4 +50,4 @@ The graphs on the details page are initially scoped to the same settings as the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/catalog
-[2]: /tracing/service_catalog/
+[2]: /ja/tracing/service_catalog/

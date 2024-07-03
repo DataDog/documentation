@@ -1,11 +1,11 @@
 ---
-title: Mapping OpenTelemetry Semantic Conventions to Service-entry Spans
 aliases:
-- /opentelemetry/guide/service_entry_spans_mapping/
+- /ja/opentelemetry/guide/service_entry_spans_mapping/
 further_reading:
 - link: /opentelemetry/integrations/trace_metrics
   tag: Documentation
   text: OpenTelemetry Trace Metrics
+title: Mapping OpenTelemetry Semantic Conventions to Service-entry Spans
 ---
 
 &lt;div class="alert alert-info"&gt; この機能はベータ版です。フィードバックがあれば、&lt;a href="/help/"&gt;Datadog サポート&lt;/a&gt;までご連絡ください。 &lt;/div&gt;
@@ -63,8 +63,8 @@ If you have existing monitors based on trace metrics, you can update them after 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/glossary/#service-entry-span
-[2]: https://docs.datadoghq.com/opentelemetry/integrations/trace_metrics/
-[3]: https://docs.datadoghq.com/tracing/trace_explorer
+[1]: https://docs.datadoghq.com/ja/glossary/#service-entry-span
+[2]: https://docs.datadoghq.com/ja/opentelemetry/integrations/trace_metrics/
+[3]: https://docs.datadoghq.com/ja/tracing/trace_explorer
 [4]: https://opentelemetry.io/docs/specs/otel/trace/api/#spankind
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md

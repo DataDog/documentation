@@ -1,22 +1,23 @@
 ---
-title: Node.js Runtime Metrics
-kind: documentation
-description: "Gain additional insights into your Node.js application's performance with the runtime metrics associated to your traces."
 aliases:
-- /tracing/runtime_metrics/nodejs
+- /ja/tracing/runtime_metrics/nodejs
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 40
+description: Gain additional insights into your Node.js application's performance
+  with the runtime metrics associated to your traces.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+kind: documentation
+title: Node.js Runtime Metrics
+type: multi-code-lang
 ---
 
 <div class="alert alert-warning">
@@ -74,9 +75,9 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#setup
-[3]: /agent/docker/#dogstatsd-custom-metrics
-[4]: /developers/dogstatsd/?tab=kubernetes#agent
-[5]: /agent/amazon_ecs/#create-an-ecs-task
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#setup
+[3]: /ja/agent/docker/#dogstatsd-custom-metrics
+[4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
+[5]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30269/node-runtime-metrics
-[7]: /developers/dogstatsd/unix_socket/
+[7]: /ja/developers/dogstatsd/unix_socket/

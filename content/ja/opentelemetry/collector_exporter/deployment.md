@@ -1,12 +1,12 @@
 ---
-title: Deployment
 further_reading:
 - link: /opentelemetry/collector_exporter/configuration/
   tag: Documentation
   text: Configuring the OpenTelemetry Collector
-- link: "https://opentelemetry.io/docs/collector/deployment/"
+- link: https://opentelemetry.io/docs/collector/deployment/
   tag: 外部サイト
   text: OpenTelemetry Collector Deployment
+title: Deployment
 ---
 
 ## Downloading the collector
@@ -278,8 +278,8 @@ OpenTelemetry Collector の標準 Kubernetes 構成の 1 つを使用して Oper
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-operator#readme
-[2]: /opentelemetry/collector_exporter/?tab=kubernetesdaemonset#running-the-collector
-[3]: /opentelemetry/collector_exporter/?tab=kubernetesgateway#running-the-collector
+[2]: /ja/opentelemetry/collector_exporter/?tab=kubernetesdaemonset#running-the-collector
+[3]: /ja/opentelemetry/collector_exporter/?tab=kubernetesgateway#running-the-collector
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -303,15 +303,15 @@ OpenTelemetry コレクターには、[2 つの主要なデプロイメント方
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[2]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [3]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/
-[18]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
+[18]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
 [19]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
 [20]: https://opentelemetry.io/docs/collector/deployment/
 [21]: https://app.datadoghq.com/integrations/otel
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
-[25]: /opentelemetry/schema_semantics/hostname/
+[25]: /ja/opentelemetry/schema_semantics/hostname/

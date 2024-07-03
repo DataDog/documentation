@@ -1,11 +1,11 @@
 ---
-title: Compatible semantic tags
 aliases:
-- /dashboards/guide/semantic_colors
+- /ja/dashboards/guide/semantic_colors
 further_reading:
-- link: "/dashboards/guide/widget_colors/#categorical-palettes"
+- link: /dashboards/guide/widget_colors/#categorical-palettes
   tag: Documentation
   text: Selecting the right colors for your graphs
+title: Compatible semantic tags
 ---
 
 ## 概要

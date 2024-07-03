@@ -1,57 +1,57 @@
 ---
-"app_id": "cacti"
-"app_uuid": "b18f92f2-2aa5-435e-b04e-84ce3538fa2d"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "cacti.rrd.count"
-      "metadata_path": "metadata.csv"
-      "prefix": "cacti."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "25"
-    "source_type_name": "Cacti"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "developer tools"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cacti/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cacti"
-"integration_id": "cacti"
-"integration_title": "Cacti"
-"integration_version": "2.1.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cacti"
-"public_title": "Cacti"
-"short_description": "Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。"
-"supported_os":
-- "linux"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": "Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Cacti"
+app_id: cacti
+app_uuid: b18f92f2-2aa5-435e-b04e-84ce3538fa2d
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cacti.rrd.count
+      metadata_path: metadata.csv
+      prefix: cacti.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 25
+    source_type_name: Cacti
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- developer tools
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cacti
+integration_id: cacti
+integration_title: Cacti
+integration_version: 2.1.1
+is_public: true
+manifest_version: 2.0.0
+name: cacti
+public_title: Cacti
+short_description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
+supported_os:
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::ログの収集
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cacti
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -221,10 +221,9 @@ Cacti チェックには、サービスのチェック機能は含まれませ�
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/cacti/metadata.csv
 [6]: https://github.com/pbanaszkiewicz/python-rrdtool
 [7]: https://github.com/commx/python-rrdtool/issues/25
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

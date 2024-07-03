@@ -1,26 +1,26 @@
 ---
-"aliases":
-- "/integrations/awsfirehose/"
-"categories":
-- "aws"
-- "cloud"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Amazon Data Firehose のキーメトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_firehose/"
-"draft": false
-"git_integration_title": "amazon_firehose"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Data Firehose"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_firehose"
-"public_title": "Datadog-Amazon Data Firehose Integration"
-"short_description": "Track key Amazon Data Firehose metrics."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsfirehose/
+categories:
+- aws
+- cloud
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: Amazon Data Firehose のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_firehose/
+draft: false
+git_integration_title: amazon_firehose
+has_logo: true
+integration_id: ''
+integration_title: Amazon Data Firehose
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_firehose
+public_title: Datadog-Amazon Data Firehose Integration
+short_description: Track key Amazon Data Firehose metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -80,12 +80,11 @@ The Amazon Data Firehose integration does not include any service checks.
 Need help? Contact [Datadog support][9].
 
 [1]: https://aws.amazon.com/about-aws/whats-new/2024/02/amazon-data-firehose-formerly-kinesis-data-firehose/
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-firehose
-[5]: https://docs.datadoghq.com/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_firehose/amazon_firehose_metadata.csv
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

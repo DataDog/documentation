@@ -1,7 +1,6 @@
 ---
-title: Microsoft Active Directory Federation Services SAML IdP
 aliases:
-  - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
+- /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configuring Teams & Organizations with Multiple Accounts
+title: Microsoft Active Directory Federation Services SAML IdP
 ---
 
 Datadog の SSO 用 SAML インテグレーションは、オーガニゼーションを外部のユーザー管理システムにリンクして、一元的なシステムで資格情報を維持および管理するための手段を提供します。このドキュメントは、Datadog 目線でシングルサインオンの概要を説明したメインの「[SAML を使用したシングルサインオン][1]」ドキュメントのアドオンとして使用してください。
@@ -27,8 +27,8 @@ SAML に関連する Datadog のアプリ内エラーに関する質問は、[Da
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/saml/
+[1]: /ja/account_management/saml/
 [2]: https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-saml2-settings
 [3]: https://app.datadoghq.com/saml/saml_setup
-[4]: /help/
+[4]: /ja/help/
 [5]: https://powerapps.microsoft.com/en-us/support/

@@ -1,26 +1,26 @@
 ---
-title: PHP Custom Instrumentation using Datadog API
 aliases:
-    - /tracing/manual_instrumentation/php
-    - /tracing/opentracing/php
-    - /tracing/custom_instrumentation/php
-    - /tracing/setup_overview/custom_instrumentation/php
-    - /tracing/trace_collection/custom_instrumentation/php
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/php
-description: 'Manually instrument your PHP application to send custom traces to Datadog.'
+- /ja/tracing/manual_instrumentation/php
+- /ja/tracing/opentracing/php
+- /ja/tracing/custom_instrumentation/php
+- /ja/tracing/setup_overview/custom_instrumentation/php
+- /ja/tracing/trace_collection/custom_instrumentation/php
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/php
 code_lang: dd-api
 code_lang_weight: 1
-type: multi-code-lang
+description: Manually instrument your PHP application to send custom traces to Datadog.
 further_reading:
-    - link: tracing/guide/instrument_custom_method
-      tag: Guide
-      text: Instrument a custom method to get deep visibility into your business logic
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/guide/instrument_custom_method
+  tag: Guide
+  text: Instrument a custom method to get deep visibility into your business logic
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+title: PHP Custom Instrumentation using Datadog API
+type: multi-code-lang
 ---
 
 <div class="alert alert-info">
@@ -375,7 +375,7 @@ Set the `DD_TAGS` environment variable (version 0.47.0+) to automatically apply 
 DD_TAGS=key1:value1,<TAG_KEY>:<TAG_VALUE>
 ```
 
-[1]: /tracing/setup/php/#environment-variable-configuration
+[1]: /ja/tracing/setup/php/#environment-variable-configuration
 {{% /tab %}}
 {{% tab "Errors" %}}
 
@@ -770,13 +770,13 @@ resources.ddtrace = true
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#spans
-[2]: /tracing/glossary/#span-tags
-[3]: /tracing/security
-[4]: /tracing/guide/send_traces_to_agent_by_api/
+[1]: /ja/tracing/glossary/#spans
+[2]: /ja/tracing/glossary/#span-tags
+[3]: /ja/tracing/security
+[4]: /ja/tracing/guide/send_traces_to_agent_by_api/
 [5]: https://www.php.net/func_get_args
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[8]: /tracing/trace_collection/opentracing/php#opentracing
-[9]: /tracing/trace_collection/trace_context_propagation/php
-[10]: /tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information
+[8]: /ja/tracing/trace_collection/opentracing/php#opentracing
+[9]: /ja/tracing/trace_collection/trace_context_propagation/php
+[10]: /ja/tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information

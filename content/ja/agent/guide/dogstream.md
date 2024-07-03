@@ -1,8 +1,8 @@
 ---
-title: Dogstream
-private: true
 aliases:
-  - /agent/faq/dogstream
+- /ja/agent/faq/dogstream
+private: true
+title: Dogstream
 ---
 
 <div class="alert alert-danger">
@@ -244,13 +244,13 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 カスタムログパーサー関数では対応できないエラーが発生していると思われる場合は、いつでも[サポートにお問い合わせください][10]。ただし、お問い合わせいただく前に、Agent のログレベルを "DEBUG" に設定して Agent を数分間実行します。新しいログがファイルに追加されることを確認し、Agent から [flare コマンドを実行][11]してください。これにより、サポートチームが問題を効果的にトラブルシューティングするために必要な情報を得られるようになります。
 
 [1]: https://app.datadoghq.com/infrastructure#tags
-[2]: /api/v1/tags/
+[2]: /ja/api/v1/tags/
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
-[4]: /events/
+[4]: /ja/events/
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /agent/configuration/agent-log-files/
+[6]: /ja/agent/configuration/agent-log-files/
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /agent/configuration/agent-commands/
+[8]: /ja/agent/configuration/agent-commands/
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
-[10]: /help/
-[11]: /agent/troubleshooting/send_a_flare/
+[10]: /ja/help/
+[11]: /ja/agent/troubleshooting/send_a_flare/

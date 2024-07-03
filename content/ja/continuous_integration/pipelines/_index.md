@@ -1,20 +1,23 @@
 ---
-title: CI Pipeline Visibility in Datadog
 aliases:
-  - /continuous_integration/pipelines_setup/
-  - /continuous_integration/explore_pipelines/
-  - /continuous_integration/setup_pipelines/
-further_reading:
-    - link: /monitors/types/ci/
-      tag: Documentation
-      text: Creating CI Pipeline Monitors
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- /ja/continuous_integration/pipelines_setup/
+- /ja/continuous_integration/explore_pipelines/
+- /ja/continuous_integration/setup_pipelines/
 cascade:
-    algolia:
-        rank: 70
-        tags: [ci pipeline, ci pipelines, supported features]
+  algolia:
+    rank: 70
+    tags:
+    - ci pipeline
+    - ci pipelines
+    - supported features
+further_reading:
+- link: /monitors/types/ci/
+  tag: Documentation
+  text: Creating CI Pipeline Monitors
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+title: CI Pipeline Visibility in Datadog
 ---
 
 {{< site-region region="gov" >}}
@@ -169,11 +172,11 @@ You can export your search query to a [CI Pipeline monitor][12] on the [**Execut
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[2]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
 [6]: https://app.datadoghq.com/ci/pipeline-executions
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/notebook/list
-[10]: /dashboards
-[11]: /notebooks
-[12]: /monitors/types/ci
+[10]: /ja/dashboards
+[11]: /ja/notebooks
+[12]: /ja/monitors/types/ci
 [13]: https://app.datadoghq.com/ci/test-runs

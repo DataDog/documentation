@@ -1,25 +1,26 @@
 ---
-title: .NET Runtime Metrics
-kind: documentation
-description: "Gain additional insights into your .NET application's performance with the runtime metrics associated to your traces."
-code_lang: dotnet
-type: multi-code-lang
-code_lang_weight: 50
 aliases:
-- /tracing/runtime_metrics/dotnet
+- /ja/tracing/runtime_metrics/dotnet
+code_lang: dotnet
+code_lang_weight: 50
+description: Gain additional insights into your .NET application's performance with
+  the runtime metrics associated to your traces.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: "https://www.datadoghq.com/blog/dotnet-runtime-metrics/"
-      tag: Blog
-      text: Monitor .NET runtime metrics with Datadog
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
+  tag: Blog
+  text: Monitor .NET runtime metrics with Datadog
+kind: documentation
+title: .NET Runtime Metrics
+type: multi-code-lang
 ---
 
 ## Runtime metrics compatibility
@@ -71,9 +72,9 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /developers/dogstatsd/#setup
-[3]: /agent/docker/#dogstatsd-custom-metrics
-[4]: /developers/dogstatsd/?tab=kubernetes#agent
-[5]: /agent/amazon_ecs/#create-an-ecs-task
+[2]: /ja/developers/dogstatsd/#setup
+[3]: /ja/agent/docker/#dogstatsd-custom-metrics
+[4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
+[5]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30412/net-runtime-metrics
-[7]: /developers/dogstatsd/unix_socket/
+[7]: /ja/developers/dogstatsd/unix_socket/

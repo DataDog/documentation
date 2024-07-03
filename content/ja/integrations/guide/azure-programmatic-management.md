@@ -1,39 +1,38 @@
 ---
-title: Azure Integration Programmatic Management Guide
-kind: guide
-description: "Steps for programmatically managing the Azure integration with Datadog"
+description: Steps for programmatically managing the Azure integration with Datadog
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/azure/"
+- link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentation
   text: Azure Integration
+title: Azure Integration Programmatic Management Guide
 ---
 
-## Overview
+## 概要
 
  This guide demonstrates how to programmatically manage the Azure integration with Datadog, as well as other Azure resources such as the Datadog Agent VM extension. This enables you to manage observability across multiple accounts at once.
 
-**All sites**: All [Datadog sites][3] can use the steps on this page to complete the App Registration credential process for Azure metric collection and the Event Hub setup for sending Azure Platform Logs.
+**All sites**: すべての [Datadog サイト][3]は、このページのステップを使用して、Azure メトリクス収集のための App Registration の認証プロセスと、Azure プラットフォームログを送信するための Event Hub のセットアップを完了することができます。
 
-**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][14] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding. See the [Managing the Azure Native Integration guide][1] for more information.
+**US3**: 組織が Datadog US3 サイトにある場合、Azure Native インテグレーションを使用して、Azure 環境の管理とデータ収集を効率化することができます。Datadog では、可能な限りこの方法を使用することを推奨しています。セットアップには、[Azure 内の Datadog リソース][14]を作成して、Azure サブスクリプションを Datadog 組織にリンクします。これは、メトリクス収集のためのアプリ登録の認証プロセスとログ転送のための Event Hub のセットアップを置き換えるものです。詳細は、[Azure Native Integration の管理ガイド][1]を参照してください。
 
 ## Datadog Azure integration
 
-The standard Azure integration uses an app registration credential process for implementing metric collection, and an Azure Event Hub setup for sending Azure Platform Logs. Create the app registration in Azure before integrating Datadog with your Azure environment, and configure it with the **Monitoring Reader** permission for Datadog to monitor the provided scope (subscriptions or management groups). If you don't already have an app registration created, see [Integrating through the Azure Portal][6] or [Integrating through the Azure CLI][4] for setup instructions.
+標準の Azure インテグレーションでは、メトリクス収集を実装するためのアプリ登録の認証プロセスと、Azure プラットフォームログを送信するための Azure Event Hub のセットアップを使用します。Datadog を Azure 環境とインテグレーションする前に、Azure でアプリ登録を作成し、Datadog が提供されたスコープ (サブスクリプションまたは管理グループ) を監視するための **Monitoring Reader** 権限で構成します。アプリ登録がまだ作成されていない場合は、[Azure Portal 経由でのインテグレーション][6]または [Azure CLI 経由でのインテグレーション][4]でセットアップ手順を参照してください。
 
-**Note**: You can assign read permissions at the management group level when creating the app registration in Azure, to monitor multiple subscriptions and have new subscriptions in the management group automatically monitored.
+**注**: Azure でアプリ登録を作成するときに、管理グループレベルで読み取り権限を割り当てることで、複数のサブスクリプションを監視し、管理グループ内の新しいサブスクリプションを自動的に監視することができます。
 
 ### Terraform
 
-Follow these steps to deploy the integration through [Terraform][13].
+以下の手順に従って、[Terraform][13] を使ってインテグレーションをデプロイします。
 
-1. Configure the [Datadog Terraform provider][15] to interact with the Datadog API through a Terraform configuration.
+1. [Datadog Terraform プロバイダー][15]を構成し、Terraform の構成で Datadog API と対話するように設定します。
 
-2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
-    * `tenant_name`: Your Azure Active Directory ID.
+2. 以下の例を基本テンプレートとして、Terraform のコンフィギュレーションファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
+    * `tenant_name`: Azure Active Directory ID。
     * `client_id`: Your Azure application (client) ID.
-    * `client_secret`: Your Azure web application secret key.
+    * `client_secret`: Azure Web アプリケーション秘密キー。
 
-   See the [Datadog Azure integration resource][17] page in the Terraform registry for further example usage and the full list of optional parameters, as well as additional Datadog resources.
+   さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、Terraform レジストリの [Datadog Azure インテグレーションリソース][17]ページを参照してください。
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -45,41 +44,41 @@ resource "datadog_integration_azure" "sandbox" {
 
 {{< /code-block >}}
 
-3. Run `terraform apply`. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box Azure overview dashboard to see metrics sent by your Azure resources.
+3. `terraform apply` を実行します。データが収集され始めるまで最大 10 分間待ち、すぐに使える Azure 概要ダッシュボードを表示して、Azure リソースから送信されたメトリクスを確認します。
 
-#### Managing multiple subscriptions or tenants
+#### 複数のサブスクリプションまたはテナントの管理
 
-You can use multiple provider blocks with aliases to manage Terraform resources across multiple subscriptions or tenants. Read [Provider Configuration][9] for more information.
+複数のサブスクリプションまたはテナントにまたがって Terraform リソースを管理するために、エイリアスを持つ複数の provider ブロックを使用できます。詳しくは [Provider Configuration][9] をお読みください。
 
-### Monitor the integration status
+### インテグレーションステータスの監視
 
-Once the integration is configured, Datadog begins running a continuous series of calls to Azure APIs to collect critical monitoring data from your Azure environment. Sometimes these calls return errors (for example, if the provided credentials have expired). These errors can inhibit or block Datadog's ability to collect monitoring data.
+インテグレーションが構成されると、Datadog は Azure API への連続した一連のコールを実行し始め、Azure 環境から重要な監視データを収集します。これらのコールは、時々エラーを返します (例えば、提供された資格情報が期限切れの場合など)。これらのエラーは、Datadog が監視データを収集する能力を阻害またはブロックする可能性があります。
 
-When critical errors are encountered, the Azure integration generates events in the Datadog Events Explorer, and republishes them every five minutes. You can configure an Event Monitor to trigger when these events are detected and notify the appropriate team.
+重大なエラーが発生すると、Azure インテグレーションは Datadog イベントエクスプローラーにイベントを生成し、5 分ごとに再パブリッシュします。これらのイベントが検出されたときにトリガーし、適切なチームに通知するイベントモニターを構成することができます。
 
-Datadog provides a recommended monitor you can use as a template to get started. To use the recommended monitor:
+Datadog は、始めるためのテンプレートとして使用できる推奨モニターを提供します。推奨モニターを使用するには、
 
-1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][19] tab.
-2. Select the recommended monitor titled `[Azure] Integration Errors`.
-3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
-4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
-5. [Configure notifications][20] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
+1. Datadog で、**Monitors** -> **New Monitor** と進み、[Recommended Monitors][19] タブを選択します。
+2. `[Azure] Integration Errors` というタイトルの推奨モニターを選択します。
+3. 検索クエリまたはアラート条件に必要な修正を加えます。デフォルトでは、モニターは新しいエラーが検出されるたびにトリガーされ、過去 15 分間エラーが検出されなかったときに解決されます。
+4. 必要に応じて、通知メッセージと再通知メッセージを更新します。イベント自体には、イベントに関する適切な情報が含まれており、自動的に通知に含まれることに注意してください。これには、範囲、エラー応答、修復のための一般的な手順に関する詳細な情報が含まれます。
+5. Azure のデータ収集に影響を与える問題についてチームにアラートが届くように、好みのチャンネル (メール、Slack、PagerDuty など) を通じて[通知の構成][20]を行います。
 
 #### Sending logs
 
-See the [Azure Logging guide][18] to set up log forwarding from your Azure environment to Datadog.
+Azure 環境から Datadog へのログ転送を設定するには、[Azure ログガイド][18]を参照してください。
 
-## Datadog Azure VM Extension
+## Datadog Azure VM 拡張機能
 
 ### Terraform
 
-You can use Terraform to create and manage the Datadog Agent extension. Follow these steps to install and configure the Agent on a single machine, and then upload a zipped configuration file to blob storage to be referenced in your VM Extension Terraform block.
+Terraform を使用して、Datadog Agent 拡張機能を作成および管理することができます。以下の手順で Agent を 1 台のマシンにインストールして構成し、zip 圧縮したコンフィギュレーションファイルを blob storage にアップロードして、Terraform の VM Extension ブロックで参照します。
 
-1. [Install the Agent][11].
-2. Apply any desired [Agent configurations][12].
-3. For Windows Server 2008, Vista, and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
-4. Upload the file to blob storage.
-5. Reference the blob storage URL in the Terraform block to create the VM extension:
+1. [Agent をインストールします][11]。
+2. 任意の [Agent 構成][12]を適用します。
+3. Windows Server 2008、Vista、およびそれ以降では、`%ProgramData%\Datadog` フォルダを zip ファイルとして保存します。Linux の場合は、`/etc/datadog-agent` フォルダを zip ファイルとして保存します。
+4. blob storage にファイルをアップロードします。
+5. Terraform ブロック内で blob storage の URL を参照し、VM 拡張機能を作成します。
 
 {{< tabs >}}
 {{% tab "Windows" %}}
@@ -126,25 +125,25 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [Virtual Machine Extension resource][10] in the Terraform registry for more information about the available arguments.
+利用可能な引数の詳細については、Terraform レジストリの [Virtual Machine Extension リソース][10]を参照してください。
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/integrations/guide/azure-portal/
+[1]: https://docs.datadoghq.com/ja/integrations/guide/azure-portal/
 [2]: https://learn.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
-[3]: /getting_started/site/
-[4]: /integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-cli
-[5]: /integrations/azure/
-[6]: /integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-portal
+[3]: /ja/getting_started/site/
+[4]: /ja/integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-cli
+[5]: /ja/integrations/azure/
+[6]: /ja/integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-portal
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
 [11]: https://app.datadoghq.com/account/settings/agent/latest
-[12]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[12]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 [13]: https://www.terraform.io
 [14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
-[18]: /logs/guide/azure-logging-guide
+[18]: /ja/logs/guide/azure-logging-guide
 [19]: https://app.datadoghq.com/monitors/recommended
-[20]: /monitors/notify/#configure-notifications-and-automations
+[20]: /ja/monitors/notify/#configure-notifications-and-automations

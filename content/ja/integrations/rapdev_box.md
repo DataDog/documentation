@@ -1,101 +1,101 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-box"
-"app_uuid": "3de78642-7136-41a8-9df9-48d65ed46251"
-"assets":
-  "dashboards":
-    "RapDev Box Overview": assets/dashboards/rapdev_box_overview.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": rapdev.box.users.count
-      "metadata_path": metadata.csv
-      "prefix": rapdev.box.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10278"
-    "source_type_name": RapDev Box
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-box
+app_uuid: 3de78642-7136-41a8-9df9-48d65ed46251
+assets:
+  dashboards:
+    RapDev Box Overview: assets/dashboards/rapdev_box_overview.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rapdev.box.users.count
+      metadata_path: metadata.csv
+      prefix: rapdev.box.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10278
+    source_type_name: RapDev Box
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - cloud
 - log collection
 - marketplace
 - metrics
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_box"
-"integration_id": "rapdev-box"
-"integration_title": "Box"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rapdev_box"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.rapdev.box
-  "product_id": box
-  "short_description": Unit price per user
-  "tag": user_login
-  "unit_label": Box Registered Users
-  "unit_price": !!int "1"
-"public_title": "Box"
-"short_description": "Monitor your Box Enterprise Users and Storage"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_box
+integration_id: rapdev-box
+integration_title: Box
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_box
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.box
+  product_id: box
+  short_description: Unit price per user
+  tag: user_login
+  unit_label: Box Registered Users
+  unit_price: 1
+public_title: Box
+short_description: Monitor your Box Enterprise Users and Storage
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  - "Category::Marketplace"
-  - "Category::Metrics"
-  - "Category::Notifications"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor your Box Enterprise Users and Storage
-  "media":
-  - "caption": Box Integration Overview Dashboard - Overview
-    "image_url": images/dashboard_overview_1_4.jpg
-    "media_type": image
-  - "caption": Box Integration Overview Dashboard - Users
-    "image_url": images/dashboard_overview_2_4.jpg
-    "media_type": image
-  - "caption": Box Integration Overview Dashboard - Storage
-    "image_url": images/dashboard_overview_3_4.jpg
-    "media_type": image
-  - "caption": Box Integration Overview Dashboard - Logs
-    "image_url": images/dashboard_overview_4_4.jpg
-    "media_type": image
-  - "caption": Example of the Box UI
-    "image_url": images/box_ui_16_9.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Box
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Log Collection
+  - Category::Marketplace
+  - Category::Metrics
+  - Category::Notifications
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor your Box Enterprise Users and Storage
+  media:
+  - caption: Box Integration Overview Dashboard - Overview
+    image_url: images/dashboard_overview_1_4.jpg
+    media_type: image
+  - caption: Box Integration Overview Dashboard - Users
+    image_url: images/dashboard_overview_2_4.jpg
+    media_type: image
+  - caption: Box Integration Overview Dashboard - Storage
+    image_url: images/dashboard_overview_3_4.jpg
+    media_type: image
+  - caption: Box Integration Overview Dashboard - Logs
+    image_url: images/dashboard_overview_4_4.jpg
+    media_type: image
+  - caption: Example of the Box UI
+    image_url: images/box_ui_16_9.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Box
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

@@ -1,14 +1,13 @@
 ---
-dependencies:
-- "https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/error_tracking.md"
-description: Learn how to track Flutter errors with Error Tracking.
 aliases:
-- /real_user_monitoring/error_tracking/flutter
-type: multi-code-lang
+- /ja/real_user_monitoring/error_tracking/flutter
 code_lang: flutter
 code_lang_weight: 50
+dependencies:
+- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/error_tracking.md
+description: Learn how to track Flutter errors with Error Tracking.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-flutter"
+- link: https://github.com/DataDog/dd-sdk-flutter
   tag: ソースコード
   text: dd-sdk-flutter Source code
 - link: real_user_monitoring/error_tracking/
@@ -16,6 +15,7 @@ further_reading:
   text: Learn about Error Tracking
 kind: documentation
 title: Flutter Crash Reporting and Error Tracking
+type: multi-code-lang
 ---
 ## Overview
 
@@ -157,7 +157,7 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter#setup
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html

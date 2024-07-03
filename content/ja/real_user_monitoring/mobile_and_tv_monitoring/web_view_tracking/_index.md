@@ -1,18 +1,18 @@
 ---
-title: Web View Tracking
-kind: documentation
 aliases:
-  - /real_user_monitoring/android/web_view_tracking
-  - /real_user_monitoring/ios/web_view_tracking
-  - /real_user_monitoring/flutter/web_view_tracking
-  - /real_user_monitoring/reactnative/web_view_tracking
+- /ja/real_user_monitoring/android/web_view_tracking
+- /ja/real_user_monitoring/ios/web_view_tracking
+- /ja/real_user_monitoring/flutter/web_view_tracking
+- /ja/real_user_monitoring/reactnative/web_view_tracking
 further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-android"
-    tag: ソースコード
-    text: Source code for dd-sdk-android
-  - link: /real_user_monitoring
-    tag: Documentation
-    text: Explore Datadog RUM
+- link: https://github.com/DataDog/dd-sdk-android
+  tag: ソースコード
+  text: Source code for dd-sdk-android
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Explore Datadog RUM
+kind: documentation
+title: Web View Tracking
 ---
 
 ## Overview
@@ -103,9 +103,9 @@ DatadogWebViewTracking.xcframework
 `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
-[2]: /real_user_monitoring/android/?tab=kotlin#setup
+[2]: /ja/real_user_monitoring/android/?tab=kotlin#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
-[4]: /logs/log_collection/android/?tab=kotlin#setup
+[4]: /ja/logs/log_collection/android/?tab=kotlin#setup
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -210,7 +210,7 @@ See [RUM & Session Replay Billing][4] for details on how webviews in mobile appl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#npm
-[2]: /real_user_monitoring/ios/
-[3]: https://docs.datadoghq.com/logs/log_collection/ios
-[4]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[1]: /ja/real_user_monitoring/browser/setup/#npm
+[2]: /ja/real_user_monitoring/ios/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/ios
+[4]: /ja/account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

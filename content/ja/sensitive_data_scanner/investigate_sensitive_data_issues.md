@@ -1,13 +1,14 @@
 ---
-title: Investigate Sensitive Data Issues
-kind: documentation
 further_reading:
-    - link: /sensitive_data_scanner/
-      tag: Documentation
-      text: Set up Sensitive Data Scanner
-    - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
-      tag: Blog
-      text: Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner
+- link: /sensitive_data_scanner/
+  tag: Documentation
+  text: Set up Sensitive Data Scanner
+- link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
+  tag: Blog
+  text: Discover, triage, and remediate sensitive data issues at scale with Sensitive
+    Data Scanner
+kind: documentation
+title: Investigate Sensitive Data Issues
 ---
 
 ## Overview
@@ -57,6 +58,6 @@ Additionally, you can also:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
-[2]: /service_management/case_management/
-[3]: /service_management/incident_management/
-[4]: /account_management/audit_trail
+[2]: /ja/service_management/case_management/
+[3]: /ja/service_management/incident_management/
+[4]: /ja/account_management/audit_trail

@@ -1,5 +1,5 @@
 ---
-title: "ECS Cluster Component"
+title: ECS Cluster Component
 ---
 ## 概要
 
@@ -73,8 +73,8 @@ The following is an example JSON object of a ECS cluster component:
 - **link: 文字列、uri**: コンポーネントを別の図や外部の Web サイトにリンクする URI。`blueprint://` または `https://` の 2 つの形式のどちらかを指定します。
 - **locked: ブール値**: Web インターフェイスを通してコンポーネントの位置の変更を許可するかどうか。デフォルトは `false` です。
 
-[1]: /cloudcraft/components-aws/vpc/
-[2]: /cloudcraft/components-aws/subnet/
+[1]: /ja/cloudcraft/components-aws/vpc/
+[2]: /ja/cloudcraft/components-aws/subnet/
 [3]: https://developers.cloudcraft.co/
 [4]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-[5]: /cloudcraft/faq/scan-error-aws-china-region/
+[5]: /ja/cloudcraft/faq/scan-error-aws-china-region/

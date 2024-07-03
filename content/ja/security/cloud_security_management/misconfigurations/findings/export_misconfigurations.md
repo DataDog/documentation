@@ -1,8 +1,6 @@
 ---
-title: Export Misconfigurations
-kind: documentation
 aliases:
-  - /security/misconfigurations/findings/export_misconfigurations
+- /ja/security/misconfigurations/findings/export_misconfigurations
 further_reading:
 - link: security/default_rules
   tag: Documentation
@@ -10,6 +8,8 @@ further_reading:
 - link: security/cspm/frameworks_and_benchmarks
   tag: Documentation
   text: Learn about frameworks and industry benchmarks
+kind: documentation
+title: Export Misconfigurations
 ---
 
 To export the list of misconfigurations from the [Misconfigurations Explorer][1] as a CSV, click **Download as CSV** on the Misconfigurations Explorer, select the maximum number of misconfigurations to export, and then click **Download as CSV**. You can export up to a maximum of 50,000 misconfigurations.

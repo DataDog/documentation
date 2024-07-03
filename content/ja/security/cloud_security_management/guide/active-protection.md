@@ -1,9 +1,9 @@
 ---
-title: Proactively block crypto mining threats with Active Protection
 further_reading:
 - link: security/threats/workload_security_rules
   tag: Documentation
   text: CSM Threats Detection Rules
+title: Proactively block crypto mining threats with Active Protection
 ---
 
 <div class="alert alert-info">CSM Threats Active Protection is in beta.</div>
@@ -135,4 +135,4 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule
-[4]: /security/threats/workload_security_rules
+[4]: /ja/security/threats/workload_security_rules

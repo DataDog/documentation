@@ -1,83 +1,85 @@
 ---
-"app_id": "openai"
-"app_uuid": "46e76528-8e93-4a7c-9299-387ce0a905c6"
-"assets":
-  "dashboards":
-    "OpenAI Overview Dashboard": assets/dashboards/overview_dashboard.json
-    "OpenAI Usage Overview": assets/dashboards/usage_overview_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: openai
+app_uuid: 46e76528-8e93-4a7c-9299-387ce0a905c6
+assets:
+  dashboards:
+    OpenAI Overview Dashboard: assets/dashboards/overview_dashboard.json
+    OpenAI Usage Overview: assets/dashboards/usage_overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - openai.request.duration
       - openai.api.usage.n_requests
-      "metadata_path": metadata.csv
-      "prefix": openai.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10348"
-    "source_type_name": OpenAI
-  "monitors":
-    "Abnormally High Token Usage": assets/monitors/api_token_usage.json
-    "Request Limits": assets/monitors/request_limits.json
-    "Token per min Limits": assets/monitors/tokens_limits.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: openai.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10348
+    source_type_name: OpenAI
+  monitors:
+    Abnormally High Token Usage: assets/monitors/api_token_usage.json
+    Request Limits: assets/monitors/request_limits.json
+    Token per min Limits: assets/monitors/tokens_limits.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - ai/ml
 - モニター
 - cost management
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/openai/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "openai"
-"integration_id": "openai"
-"integration_title": "OpenAI"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "openai"
-"public_title": "OpenAI"
-"short_description": "Optimize OpenAI usage: cost estimates, prompt sampling and performance metrics."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/openai/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: openai
+integration_id: openai
+integration_title: OpenAI
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: openai
+public_title: OpenAI
+short_description: 'Optimize OpenAI usage: cost estimates, prompt sampling and performance
+  metrics.'
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AI/ML"
-  - "Category::Metrics"
-  - "Category::Cost Management"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Submitted Data Type::Traces"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Optimize OpenAI usage: cost estimates, prompt sampling and performance metrics."
-  "media":
-  - "caption": OpenAI Dashboard Usage Trends
-    "image_url": images/openai_dash_usage_trends.png
-    "media_type": image
-  - "caption": OpenAI Dashboard Samples
-    "image_url": images/openai_dash_samples.png
-    "media_type": image
-  - "caption": OpenAI Dashboard Tokens and Cost
-    "image_url": images/openai_dash_tokens_cost.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": OpenAI
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AI/ML
+  - Category::Metrics
+  - Category::Cost Management
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Submitted Data Type::Traces
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: 'Optimize OpenAI usage: cost estimates, prompt sampling and performance
+    metrics.'
+  media:
+  - caption: OpenAI Dashboard Usage Trends
+    image_url: images/openai_dash_usage_trends.png
+    media_type: image
+  - caption: OpenAI Dashboard Samples
+    image_url: images/openai_dash_samples.png
+    media_type: image
+  - caption: OpenAI Dashboard Tokens and Cost
+    image_url: images/openai_dash_tokens_cost.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenAI
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -199,7 +201,7 @@ DEBUG:ddtrace.contrib.openai._logging.py:sent 2 logs to 'http-intake.logs.datado
 [1]: https://platform.openai.com/
 [2]: https://app.datadoghq.com/integrations/openai
 [3]: https://app.datadoghq.com/cost
-[4]: https://docs.datadoghq.com/cloud_cost_management/saas_costs/?tab=openai#data-collected
+[4]: https://docs.datadoghq.com/ja/cloud_cost_management/saas_costs/?tab=openai#data-collected
 [5]: https://ddtrace.readthedocs.io/en/stable/installation_quickstart.html
 [6]: https://ddtrace.readthedocs.io/en/stable/integrations.html#openai
 {{% /tab %}}
@@ -318,7 +320,7 @@ OpenAI インテグレーションには、サービスのチェック機能は�
 
 
 [1]: https://openai.com/
-[2]: https://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/ja/help/
 [3]: https://www.datadoghq.com/blog/monitor-openai-with-datadog/
 [4]: https://www.datadoghq.com/blog/monitor-azure-openai-with-datadog/
 [5]: https://app.datadoghq.com/monitors/recommended?q=integration%3AOpenAI&only_installed=false&p=1

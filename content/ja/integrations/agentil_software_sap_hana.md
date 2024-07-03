@@ -1,93 +1,94 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "agentil-software-sap-hana"
-"app_uuid": "75784ba6-6a1a-4059-849e-c4cbdb56f258"
-"assets":
-  "dashboards":
-    "SAP HANA services overview": assets/dashboards/agentil_software_sap_hana_services_overview.json
-    "SAP HANA systems overview": assets/dashboards/agentil_software_sap_hana_overview.json
-    "SAP HANA tables overview": assets/dashboards/agentil_software_sap_hana_tables_overview.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": datadog.marketplace.agentil_software.sap_hana.system
-      "metadata_path": metadata.csv
-      "prefix": agentil_software.hana
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10388"
-    "source_type_name": AGENTIL Software SAP HANA
-"author":
-  "homepage": "https://www.agentil-software.com"
-  "name": Agentil Software
-  "sales_email": sales@agentil-software.com
-  "support_email": support@agentil-software.com
-  "vendor_id": agentil-software
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: agentil-software-sap-hana
+app_uuid: 75784ba6-6a1a-4059-849e-c4cbdb56f258
+assets:
+  dashboards:
+    SAP HANA services overview: assets/dashboards/agentil_software_sap_hana_services_overview.json
+    SAP HANA systems overview: assets/dashboards/agentil_software_sap_hana_overview.json
+    SAP HANA tables overview: assets/dashboards/agentil_software_sap_hana_tables_overview.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: datadog.marketplace.agentil_software.sap_hana.system
+      metadata_path: metadata.csv
+      prefix: agentil_software.hana
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10388
+    source_type_name: AGENTIL Software SAP HANA
+author:
+  homepage: https://www.agentil-software.com
+  name: Agentil Software
+  sales_email: sales@agentil-software.com
+  support_email: support@agentil-software.com
+  vendor_id: agentil-software
+categories:
 - marketplace
 - sap
 - data stores
 - event management
 - モニター
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "agentil_software_sap_hana"
-"integration_id": "agentil-software-sap-hana"
-"integration_title": "SAP HANA"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "agentil_software_sap_hana"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.agentil_software.sap_hana.system
-  "product_id": sap-hana
-  "short_description": Count one license unit per monitored SAP HANA system (identified by SID)
-  "tag": uri
-  "unit_label": SAP system ID (SID)
-  "unit_price": !!int "190"
-"public_title": "SAP HANA"
-"short_description": "Monitor SAP HANA databases centrally from a single collector"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: agentil_software_sap_hana
+integration_id: agentil-software-sap-hana
+integration_title: SAP HANA
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: agentil_software_sap_hana
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.agentil_software.sap_hana.system
+  product_id: sap-hana
+  short_description: Count one license unit per monitored SAP HANA system (identified
+    by SID)
+  tag: uri
+  unit_label: SAP system ID (SID)
+  unit_price: 190
+public_title: SAP HANA
+short_description: Monitor SAP HANA databases centrally from a single collector
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Marketplace"
-  - "Category::SAP"
-  - "Offering::Integration"
-  - "Category::Data Stores"
-  - "Supported OS::Linux"
-  - "Category::Event Management"
-  - "Category::Metrics"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Submitted Data Type::Events"
-  "configuration": "README.md#Setup"
-  "description": Monitor SAP HANA databases centrally from a single collector
-  "media":
-  - "caption": SAP HANA database overview
-    "image_url": images/dashboard_db_overview.png
-    "media_type": image
-  - "caption": SAP HANA tables overview
-    "image_url": images/hana_tables_overview.png
-    "media_type": image
-  - "caption": SAP HANA services overview
-    "image_url": images/hana_services_overview.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SAP HANA
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Marketplace
+  - Category::SAP
+  - Offering::Integration
+  - Category::Data Stores
+  - Supported OS::Linux
+  - Category::Event Management
+  - Category::Metrics
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Submitted Data Type::Events
+  configuration: README.md#Setup
+  description: Monitor SAP HANA databases centrally from a single collector
+  media:
+  - caption: SAP HANA database overview
+    image_url: images/dashboard_db_overview.png
+    media_type: image
+  - caption: SAP HANA tables overview
+    image_url: images/hana_tables_overview.png
+    media_type: image
+  - caption: SAP HANA services overview
+    image_url: images/hana_services_overview.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SAP HANA
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

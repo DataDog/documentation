@@ -1,26 +1,26 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - configuration & deployment
 - log collection
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS Certificate Manager metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_certificate_manager/"
-"draft": false
-"git_integration_title": "amazon_certificate_manager"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Certificate Manager"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_certificate_manager"
-"public_title": "Datadog-AWS Certificate Manager Integration"
-"short_description": "Track key AWS Certificate Manager metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS Certificate Manager metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_certificate_manager/
+draft: false
+git_integration_title: amazon_certificate_manager
+has_logo: true
+integration_id: ''
+integration_title: AWS Certificate Manager
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_certificate_manager
+public_title: Datadog-AWS Certificate Manager Integration
+short_description: Track key AWS Certificate Manager metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -59,9 +59,8 @@ The AWS Certificate Manager integration does not include any service checks.
 
 Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-certificate-manager
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_certificate_manager/amazon_certificate_manager_metadata.csv
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

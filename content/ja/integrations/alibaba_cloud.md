@@ -1,26 +1,26 @@
 ---
-"categories":
+categories:
 - cloud
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Integrate your Alibaba Cloud services with Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/alibaba_cloud/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/"
-  "tag": Blog
-  "text": Monitor Alibaba Cloud with Datadog
-"git_integration_title": "alibaba_cloud"
-"has_logo": true
-"integration_id": "alibaba-cloud"
-"integration_title": "Alibaba Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "alibaba_cloud"
-"public_title": "Datadog-Alibaba Cloud Integration"
-"short_description": "Integrate your Alibaba Cloud services with Datadog."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Integrate your Alibaba Cloud services with Datadog.
+doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/
+  tag: Blog
+  text: Monitor Alibaba Cloud with Datadog
+git_integration_title: alibaba_cloud
+has_logo: true
+integration_id: alibaba-cloud
+integration_title: Alibaba Cloud
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: alibaba_cloud
+public_title: Datadog-Alibaba Cloud Integration
+short_description: Integrate your Alibaba Cloud services with Datadog.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -121,5 +121,4 @@ Need help? Contact [Datadog support][8].
 [5]: https://www.alibabacloud.com/help/doc-detail/26232.htm
 [6]: https://www.alibabacloud.com/help/doc-detail/27582.htm
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/alibaba_cloud/alibaba_cloud_metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

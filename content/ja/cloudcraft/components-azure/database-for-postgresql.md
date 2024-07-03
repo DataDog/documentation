@@ -1,5 +1,5 @@
 ---
-title: "Database for PostgreSQL Component"
+title: Database for PostgreSQL Component
 ---
 
 ## 概要

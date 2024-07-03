@@ -80,5 +80,5 @@ title: Connect your Azure Account with Cloudcraft
 
 アカウントを削除するには、削除したいアカウントの右側にあるゴミ箱アイコンをクリックし、**Remove** をクリックします。
 
-[1]: /cloudcraft/account-management/roles-and-permissions/
+[1]: /ja/cloudcraft/account-management/roles-and-permissions/
 [2]: https://www.cloudcraft.co/pricing

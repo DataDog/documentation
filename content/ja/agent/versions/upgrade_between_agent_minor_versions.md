@@ -1,8 +1,8 @@
 ---
-title: Upgrade Between Datadog Agent Minor Versions
 aliases:
-  - /agent/faq/upgrade-between-agent-minor-versions
-  - /agent/guide/upgrade-between-agent-minor-versions
+- /ja/agent/faq/upgrade-between-agent-minor-versions
+- /ja/agent/guide/upgrade-between-agent-minor-versions
+title: Upgrade Between Datadog Agent Minor Versions
 ---
 
 ## Agent 6 と 7 のマイナーバージョン間のアップグレード

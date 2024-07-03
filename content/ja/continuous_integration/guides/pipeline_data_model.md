@@ -1,10 +1,11 @@
 ---
-title: Pipeline Data Model And Execution Types 
-description: Learn how Pipelines are modeled and what execution types are supported by CI Visibility.
+description: Learn how Pipelines are modeled and what execution types are supported
+  by CI Visibility.
 further_reading:
-  - link: /continuous_integration/pipelines
-    tag: Documentation
-    text: Learn about Pipeline Visibility
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Learn about Pipeline Visibility
+title: Pipeline Data Model And Execution Types
 ---
 
 {{< site-region region="gov" >}}
@@ -106,7 +107,7 @@ Providing Git information of the commit that triggered the pipeline execution is
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#trace
-[2]: /continuous_integration/pipelines/#setup
-[3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/continuous_integration/pipelines/#setup
+[3]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
 [4]: https://app.datadoghq.com/ci/commits

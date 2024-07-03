@@ -1,60 +1,60 @@
 ---
-"app_id": "unbound"
-"app_uuid": "33cd72ba-822b-4a74-92eb-f1240ea71975"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": unbound.time.up
-      "metadata_path": metadata.csv
-      "prefix": unbound.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10165"
-    "source_type_name": Unbound
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": david.byron@avast.com
-  "support_email": david.byron@avast.com
-"categories":
+app_id: unbound
+app_uuid: 33cd72ba-822b-4a74-92eb-f1240ea71975
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: unbound.time.up
+      metadata_path: metadata.csv
+      prefix: unbound.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10165
+    source_type_name: Unbound
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: david.byron@avast.com
+  support_email: david.byron@avast.com
+categories:
 - caching
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "unbound"
-"integration_id": "unbound"
-"integration_title": "Unbound"
-"integration_version": "1.0.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "unbound"
-"public_title": "Unbound"
-"short_description": "A datadog integration to collect unbound metrics"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: unbound
+integration_id: unbound
+integration_title: Unbound
+integration_version: 1.0.1
+is_public: true
+manifest_version: 2.0.0
+name: unbound
+public_title: Unbound
+short_description: A datadog integration to collect unbound metrics
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": A datadog integration to collect unbound metrics
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Unbound
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: A datadog integration to collect unbound metrics
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Unbound
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -117,12 +117,11 @@ Need help? Contact [Datadog support][10].
 
 [1]: https://nlnetlabs.nl/documentation/unbound/unbound-control/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/unbound/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/unbound/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

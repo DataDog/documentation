@@ -1,67 +1,67 @@
 ---
-"app_id": "cloudflare"
-"app_uuid": "e48a0b64-d3ad-436f-95d3-e0c81e6d51d1"
-"assets":
-  "dashboards":
-    "Cloudflare-Overview": assets/dashboards/cloudflare_overview.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cloudflare.requests.all
-      "metadata_path": metadata.csv
-      "prefix": cloudflare
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "215"
-    "source_type_name": Cloudflare
-  "monitors":
-    "[Cloudflare] Abnormal bandwidth being sent for zone": assets/monitors/bandwidth.json
-    "[Cloudflare] Error Rate is higher than normal in zone": assets/monitors/error_rate.json
-    "[Cloudflare] Error count is unusually high for worker script": assets/monitors/worker_error.json
-    "[Cloudflare] High number of detected threats for zone": assets/monitors/threats.json
-    "[Cloudflare] Hit Ratio is abnormally low for zone": assets/monitors/hit_ratio.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: cloudflare
+app_uuid: e48a0b64-d3ad-436f-95d3-e0c81e6d51d1
+assets:
+  dashboards:
+    Cloudflare-Overview: assets/dashboards/cloudflare_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: cloudflare.requests.all
+      metadata_path: metadata.csv
+      prefix: cloudflare
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 215
+    source_type_name: Cloudflare
+  monitors:
+    '[Cloudflare] Abnormal bandwidth being sent for zone': assets/monitors/bandwidth.json
+    '[Cloudflare] Error Rate is higher than normal in zone': assets/monitors/error_rate.json
+    '[Cloudflare] Error count is unusually high for worker script': assets/monitors/worker_error.json
+    '[Cloudflare] High number of detected threats for zone': assets/monitors/threats.json
+    '[Cloudflare] Hit Ratio is abnormally low for zone': assets/monitors/hit_ratio.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - モニター
 - log collection
 - caching
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cloudflare"
-"integration_id": "cloudflare"
-"integration_title": "Cloudflare"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cloudflare"
-"public_title": "Cloudflare"
-"short_description": "Track your Cloudflare Web traffic and DNS metrics."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Log Collection"
-  - "Category::Caching"
-  - "Category::Security"
-  "configuration": "README.md#Setup"
-  "description": Track your Cloudflare Web traffic and DNS metrics.
-  "media":
-  - "caption": Cloudflare Overview Dashboard
-    "image_url": images/overview-dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cloudflare
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: cloudflare
+integration_id: cloudflare
+integration_title: Cloudflare
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: cloudflare
+public_title: Cloudflare
+short_description: Track your Cloudflare Web traffic and DNS metrics.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Log Collection
+  - Category::Caching
+  - Category::Security
+  configuration: README.md#Setup
+  description: Track your Cloudflare Web traffic and DNS metrics.
+  media:
+  - caption: Cloudflare Overview Dashboard
+    image_url: images/overview-dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cloudflare
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -245,14 +245,13 @@ The Cloudflare integration does not include any service checks.
 Need help? Contact [Datadog support][11].
 
 [1]: https://api.cloudflare.com/#zone-analytics-dashboard
-[2]: https://docs.datadoghq.com/security/cloud_siem/
+[2]: https://docs.datadoghq.com/ja/security/cloud_siem/
 [3]: https://www.datadoghq.com/free-datadog-trial/
-[4]: /account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#api-keys
 [5]: https://developers.cloudflare.com/logs/about
 [6]: https://app.datadoghq.com/account/settings#integrations/cloudflare
 [7]: https://app.datadoghq.com/logs/pipelines
 [8]: https://developers.cloudflare.com/logs/log-fields
 [9]: https://developers.cloudflare.com/logs/logpush/logpush-configuration-api/understanding-logpush-api#options
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

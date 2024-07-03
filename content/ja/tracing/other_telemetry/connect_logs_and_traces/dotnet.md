@@ -1,24 +1,24 @@
 ---
-title: Correlating .NET Logs and Traces
-description: 'Connect your .NET logs and traces to correlate them in Datadog.'
 aliases:
-  - /tracing/connect_logs_and_traces/dotnet
+- /ja/tracing/connect_logs_and_traces/dotnet
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 60
+description: Connect your .NET logs and traces to correlate them in Datadog.
 further_reading:
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: "https://www.datadoghq.com/blog/request-log-correlation/"
-      tag: Blog
-      text: Correlate request logs with traces automatically
-    - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-      tag: Guide
-      text: Ease troubleshooting with cross product correlation.
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Correlate request logs with traces automatically
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Ease troubleshooting with cross product correlation.
+title: Correlating .NET Logs and Traces
+type: multi-code-lang
 ---
 
 トレースとスパンの ID がアプリケーションログに挿入されるようロギングライブラリおよび .NET トレーシングのコンフィギュレーションを設定し、ログデータと相関したアプリケーションのパフォーマンスモニタリングデータを取得することができます。
@@ -62,7 +62,7 @@ further_reading:
 
 2. [.NET Tracer のインストール手順][1]に従って、アプリの自動インスツルメンテーショントレーシングを有効にします。
 
-[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core/
 {{% /tab %}}
 {{% tab "log4net" %}}
 
@@ -106,7 +106,7 @@ further_reading:
 その他の例については、GitHub の [log4net トレース ID 自動挿入プロジェクト][2]を参照してください。
 
 
-[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core/
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
 {{% /tab %}}
 {{% tab "NLog" %}}
@@ -162,7 +162,7 @@ NLog バージョン 4.5 の場合
 その他の例については、GitHub で [NLog 4.0][2]、[NLog 4.5][3]、[NLog 4.6][4] を使用したトレース ID 自動挿入プロジェクトを参照してください。
 
 
-[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core/
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
 [3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
 [4]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
@@ -198,7 +198,7 @@ Host.CreateDefaultBuilder(args)
 その他の例については、GitHub の [Microsoft.Extensions.Logging トレース ID 自動挿入プロジェクト][5]を参照してください。
 
 
-[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core/
 [2]: https://docs.microsoft.com/aspnet/core/fundamentals/logging/#log-scopes-1
 [3]: https://github.com/serilog/serilog-extensions-hosting
 [4]: https://github.com/serilog/serilog-extensions-logging
@@ -348,18 +348,18 @@ BeginScope を使用して、以下のログプロバイダーの構造化され
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: http://serilog.net
 [3]: https://logging.apache.org/log4net
 [4]: http://nlog-project.org
 [5]: https://docs.microsoft.com/en-us/dotnet/core/extensions/logging
-[6]: /tracing/trace_collection/library_config/dotnet-core/#configuring-the-net-tracer
-[7]: /logs/log_collection/csharp/
-[8]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-[9]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
-[10]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[6]: /ja/tracing/trace_collection/library_config/dotnet-core/#configuring-the-net-tracer
+[7]: /ja/logs/log_collection/csharp/
+[8]: /ja/logs/log_configuration/processors/?tab=ui#trace-remapper
+[9]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
+[10]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/
 [12]: https://nblumhardt.com/2016/11/ilogger-beginscope/
 [13]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging
 [14]: https://github.com/huorswords/Microsoft.Extensions.Logging.Log4Net.AspNetCore#using-beginscope
-[15]: /logs/log_collection/csharp/#configure-your-datadog-agent
+[15]: /ja/logs/log_collection/csharp/#configure-your-datadog-agent

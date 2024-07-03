@@ -1,7 +1,7 @@
 ---
-title: Delivering value
-description: "Recommended steps after you have data flowing into Datadog."
+description: Recommended steps after you have data flowing into Datadog.
 private: true
+title: Delivering value
 ---
 
 データの取り込みを設定した後、さらにいくつかのステップを踏むことで、クライアントにとっての価値を最大化することができます。ここでは、注目すべき主要な領域をいくつか紹介します。
@@ -142,54 +142,54 @@ Watchdog が新たな不正を検出したときに通知を受け取ること�
 
 複数組織のアカウント設定において、Datadog プラットフォームの個々のクライアントおよび集計使用量を監視する方法を、[請求と使用量報告][51]でご確認ください。
 
-[1]: /monitors
+[1]: /ja/monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
 [3]: https://learn.datadoghq.com/courses/introduction-to-observability
-[4]: /monitors/types/anomaly/
-[5]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[6]: /monitors/types/metric/?tab=change
-[7]: /monitors/types/forecasts/?tab=linear
-[8]: /monitors/types/outlier/?tab=dbscan
-[9]: /monitors/types/composite/
-[10]: /api/latest/monitors/
+[4]: /ja/monitors/types/anomaly/
+[5]: /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics/
+[6]: /ja/monitors/types/metric/?tab=change
+[7]: /ja/monitors/types/forecasts/?tab=linear
+[8]: /ja/monitors/types/outlier/?tab=dbscan
+[9]: /ja/monitors/types/composite/
+[10]: /ja/api/latest/monitors/
 [11]: https://www.youtube.com/watch?v=Ell_kU4gEGI
 [12]: https://learn.hashicorp.com/tutorials/terraform/datadog-provider
 [13]: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
 [14]: https://www.datadoghq.com/blog/datadog-recommended-monitors/
-[15]: /monitors/manage/
-[16]: /monitors/
+[15]: /ja/monitors/manage/
+[16]: /ja/monitors/
 [17]: https://www.youtube.com/watch?v=Ma5pr-u9bjk
-[18]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect/
-[19]: /monitors/downtimes/
+[18]: /ja/monitors/guide/why-did-my-monitor-settings-change-not-take-effect/
+[19]: /ja/monitors/downtimes/
 [20]: https://www.datadoghq.com/blog/mute-datadog-alerts-planned-downtime/
 [21]: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
-[22]: /api/latest/downtimes/
-[23]: /monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/
-[24]: /integrations/slack/?tab=slackapplication
-[25]: /integrations/pagerduty/
-[26]: /integrations/flowdock/
-[27]: /integrations/servicenow/
-[28]: /integrations/google_hangouts_chat/
-[29]: /integrations/microsoft_teams/
-[30]: /integrations/webhooks/
-[31]: /monitors/notify/
+[22]: /ja/api/latest/downtimes/
+[23]: /ja/monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/
+[24]: /ja/integrations/slack/?tab=slackapplication
+[25]: /ja/integrations/pagerduty/
+[26]: /ja/integrations/flowdock/
+[27]: /ja/integrations/servicenow/
+[28]: /ja/integrations/google_hangouts_chat/
+[29]: /ja/integrations/microsoft_teams/
+[30]: /ja/integrations/webhooks/
+[31]: /ja/monitors/notify/
 [32]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/
 [33]: https://www.datadoghq.com/blog/monitoring-101-collecting-data/
-[34]: /dashboards/widgets/timeseries/
-[35]: /dashboards/widgets/free_text/
+[34]: /ja/dashboards/widgets/timeseries/
+[35]: /ja/dashboards/widgets/free_text/
 [36]: https://learn.datadoghq.com/courses/building-better-dashboards
-[37]: /notebooks/
+[37]: /ja/notebooks/
 [38]: https://www.datadoghq.com/blog/network-device-monitoring/
 [39]: https://www.datadoghq.com/blog/template-variable-associated-values/
-[40]: /api/latest/dashboards/
+[40]: /ja/api/latest/dashboards/
 [41]: https://www.hashicorp.com/resources/configure-observability-as-code-with-terraform-and-datadog
-[42]: /dashboards/sharing/
-[43]: /api/latest/embeddable-graphs/
-[44]: /dashboards/guide/embeddable-graphs-with-template-variables/
+[42]: /ja/dashboards/sharing/
+[43]: /ja/api/latest/embeddable-graphs/
+[44]: /ja/dashboards/guide/embeddable-graphs-with-template-variables/
 [45]: https://www.datadoghq.com/blog/establishing-service-level-objectives/
-[46]: /service_management/service_level_objectives/guide/slo-checklist
+[46]: /ja/service_management/service_level_objectives/guide/slo-checklist
 [47]: https://www.datadoghq.com/blog/define-and-manage-slos/
 [48]: https://www.datadoghq.com/blog/slo-monitoring-tracking/
-[49]: /api/latest/service-level-objectives/
-[50]: /monitors/types/watchdog/
-[51]: /partners/billing-and-usage-reporting/
+[49]: /ja/api/latest/service-level-objectives/
+[50]: /ja/monitors/types/watchdog/
+[51]: /ja/partners/billing-and-usage-reporting/

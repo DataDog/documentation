@@ -1,21 +1,21 @@
 ---
-title: Getting Started
-kind: documentation
-disable_sidebar: true
 aliases:
-    - /overview
-    - /getting_started/faq/
-further_reading:
-    - link: 'https://learn.datadoghq.com/'
-      tag: 'Learning Center'
-      text: 'Take a course to get started with Datadog'
-    - link: 'https://datadoghq.com/blog/'
-      tag: 'Blog'
-      text: 'Learn about new Datadog products and features, integrations, and more'
+- /ja/overview
+- /ja/getting_started/faq/
 cascade:
-    algolia:
-        rank: 50
-        category: Getting Started
+  algolia:
+    category: Getting Started
+    rank: 50
+disable_sidebar: true
+further_reading:
+- link: https://learn.datadoghq.com/
+  tag: Learning Center
+  text: Take a course to get started with Datadog
+- link: https://datadoghq.com/blog/
+  tag: Blog
+  text: Learn about new Datadog products and features, integrations, and more
+kind: documentation
+title: Getting Started
 ---
 
 ## What is Datadog?
@@ -127,7 +127,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/integrations/
-[2]: /integrations/amazon_web_services/
+[1]: /ja/getting_started/integrations/
+[2]: /ja/integrations/amazon_web_services/
 [3]: https://learn.datadoghq.com/collections/getting-started
 [4]: https://learn.datadoghq.com/courses/course-quickstart

@@ -1,12 +1,12 @@
 ---
-title: Cloudcraft
 further_reading:
-    - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
-      tag: blog
-      text: Plan new architectures and track your cloud footprint with Cloudcraft by Datadog
-    - link: /cloudcraft/getting-started/
-      tag: documentation
-      text: Getting started with Cloudcraft
+- link: https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/
+  tag: blog
+  text: Plan new architectures and track your cloud footprint with Cloudcraft by Datadog
+- link: /cloudcraft/getting-started/
+  tag: documentation
+  text: Getting started with Cloudcraft
+title: Cloudcraft
 ---
 
 ## 概要

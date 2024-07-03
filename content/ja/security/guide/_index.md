@@ -1,7 +1,7 @@
 ---
-title: セキュリティガイド
-private: true
 disable_toc: true
+private: true
+title: セキュリティガイド
 ---
 
 {{< whatsnext desc="General Guides:" >}}

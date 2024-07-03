@@ -1,22 +1,22 @@
 ---
-title: Getting Started with Session Replay
-kind: documentation
 further_reading:
-    - link: /real_user_monitoring/session_replay/browser
-      tag: Documentation
-      text: Session Replay
-    - link: /real_user_monitoring/session_replay/mobile/
-      tag: Documentation
-      text: Mobile Session Replay
-    - link: "https://www.datadoghq.com/knowledge-center/session-replay/"
-      tag: Learning Center
-      text: Session Replay Overview
-    - link: "https://www.datadoghq.com/blog/session-replay-datadog/"
-      tag: Blog
-      text: Use Datadog Session Replay to view real-time user journeys
-    - link: /real_user_monitoring/browser/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting
+- link: /real_user_monitoring/session_replay/browser
+  tag: Documentation
+  text: Session Replay
+- link: /real_user_monitoring/session_replay/mobile/
+  tag: Documentation
+  text: Mobile Session Replay
+- link: https://www.datadoghq.com/knowledge-center/session-replay/
+  tag: Learning Center
+  text: Session Replay Overview
+- link: https://www.datadoghq.com/blog/session-replay-datadog/
+  tag: Blog
+  text: Use Datadog Session Replay to view real-time user journeys
+- link: /real_user_monitoring/browser/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting
+kind: documentation
+title: Getting Started with Session Replay
 ---
 
 {{< img src="/getting_started/session_replay/preview.mp4" alt="Preview of Session Replay" style="width:100%" video=true >}}
@@ -131,14 +131,14 @@ You can share the replay with your team by selecting the **Share** dropdown at t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/?_gl=1*2g30ya*_gcl_au*OTEwMTA2MjI5LjE2OTIxMDc1MzA.*_ga_KN80RDFSQK*MTY5NDAwODQ4OS40OC4xLjE2OTQwMDg2MzcuMC4wLjA.
-[2]: /real_user_monitoring/#get-started
-[3]: /real_user_monitoring/session_replay/mobile/
+[2]: /ja/real_user_monitoring/#get-started
+[3]: /ja/real_user_monitoring/session_replay/mobile/
 [4]: https://app.datadoghq.com/rum/sessions
-[5]: /real_user_monitoring/explorer/search/#facets
-[6]: /real_user_monitoring/explorer/saved_views/
-[7]: /real_user_monitoring/browser/setup
-[8]: /real_user_monitoring/session_replay/browser/developer_tools
-[9]: /real_user_monitoring/connect_rum_and_traces
-[10]: /real_user_monitoring/error_tracking/
-[11]: /synthetics/guide/rum-to-synthetics/
-[12]: /synthetics/browser_tests/
+[5]: /ja/real_user_monitoring/explorer/search/#facets
+[6]: /ja/real_user_monitoring/explorer/saved_views/
+[7]: /ja/real_user_monitoring/browser/setup
+[8]: /ja/real_user_monitoring/session_replay/browser/developer_tools
+[9]: /ja/real_user_monitoring/connect_rum_and_traces
+[10]: /ja/real_user_monitoring/error_tracking/
+[11]: /ja/synthetics/guide/rum-to-synthetics/
+[12]: /ja/synthetics/browser_tests/

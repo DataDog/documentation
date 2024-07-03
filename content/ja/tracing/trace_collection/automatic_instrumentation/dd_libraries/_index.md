@@ -1,11 +1,11 @@
 ---
+aliases:
+- /ja/tracing/languages
+- /ja/tracing/setup_overview/setup/undefined
+- /ja/tracing/setup_overview/setup/
+- /ja/tracing/trace_collection/dd_libraries/
 title: Add the Datadog Tracing Library
 type: multi-code-lang
-aliases:
-    - /tracing/languages
-    - /tracing/setup_overview/setup/undefined
-    - /tracing/setup_overview/setup/
-    - /tracing/trace_collection/dd_libraries/
 ---
 
 次の公式 Datadog トレースライブラリのいずれかを使用して[トレース][1]を送信するようにアプリケーションを構成します。
@@ -18,5 +18,5 @@ aliases:
 
 
 
-[1]: /tracing/glossary/#trace
-[2]: /developers/community/libraries/#apm-tracing-client-libraries
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/developers/community/libraries/#apm-tracing-client-libraries

@@ -29,5 +29,5 @@ If you do not see the **Cancel subscription** option, you may have bought your s
 <div class="alert alert-danger">Canceling a subscription does not remove your data from Cloudcraft's servers. Instead, it changes your account to the free plan. If you wish to delete your account and all data from Cloudcraft's servers, <a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">contact the Cloudcraft support team</a>.
 </div>
 
-[1]: /cloudcraft/getting-started/using-bits-menu/
+[1]: /ja/cloudcraft/getting-started/using-bits-menu/
 [2]: https://docs.aws.amazon.com/marketplace/latest/buyerguide/cancel-subscription.html

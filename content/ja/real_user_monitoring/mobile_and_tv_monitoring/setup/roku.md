@@ -1,23 +1,23 @@
 ---
-title: RUM Roku Channel Monitoring Setup
 aliases:
-    - /real_user_monitoring/roku/
+- /ja/real_user_monitoring/roku/
 code_lang: roku
-type: multi-code-lang
 code_lang_weight: 60
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
   tag: Documentation
   text: RUM Roku Advanced Configuration
-- link: "https://github.com/DataDog/dd-sdk-roku"
+- link: https://github.com/DataDog/dd-sdk-roku
   tag: ソースコード
   text: dd-sdk-roku のソースコード
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
-- link: "https://www.datadoghq.com/blog/monitor-roku-with-rum/"
+- link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
   tag: Blog
   text: Monitor your Roku channels with Datadog RUM
+title: RUM Roku Channel Monitoring Setup
+type: multi-code-lang
 ---
 
 {{< site-region region="gov" >}}
@@ -224,10 +224,10 @@ RUM Actions は、ユーザーがチャンネルと行うインタラクショ�
 [1]: https://github.com/rokucommunity/ropm
 [2]: https://github.com/DataDog/dd-sdk-roku
 [3]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
-[5]: /account_management/api-app-keys/#api-keys
-[6]: /account_management/api-app-keys/#client-tokens
-[7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
-[10]: 
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+[5]: /ja/account_management/api-app-keys/#api-keys
+[6]: /ja/account_management/api-app-keys/#client-tokens
+[7]: /ja/getting_started/tagging/using_tags/#rum--session-replay
+[8]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
+[9]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
+[10]:

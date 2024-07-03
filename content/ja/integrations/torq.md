@@ -1,66 +1,66 @@
 ---
-"app_id": "torq"
-"app_uuid": "56e675d8-a461-46ec-93e9-9e8618d21354"
-"assets":
-  "dashboards":
-    "Torq": assets/dashboards/torq_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": torq.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10231"
-    "source_type_name": Torq
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Torq
-  "sales_email": support@torq.io
-  "support_email": support@torq.io
-"categories":
+app_id: torq
+app_uuid: 56e675d8-a461-46ec-93e9-9e8618d21354
+assets:
+  dashboards:
+    Torq: assets/dashboards/torq_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: torq.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10231
+    source_type_name: Torq
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Torq
+  sales_email: support@torq.io
+  support_email: support@torq.io
+categories:
 - automation
 - notifications
 - orchestration
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/torq/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "torq"
-"integration_id": "torq"
-"integration_title": "Torq"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "torq"
-"public_title": "Torq"
-"short_description": "No-code automation for security and operations teams"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/torq/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: torq
+integration_id: torq
+integration_title: Torq
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: torq
+public_title: Torq
+short_description: No-code automation for security and operations teams
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Notifications"
-  - "Category::Orchestration"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": No-code automation for security and operations teams
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Torq
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Notifications
+  - Category::Orchestration
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: No-code automation for security and operations teams
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Torq
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -191,10 +191,9 @@ Need help? Contact [Datadog support][10].
 [2]: https://torq.io/get-started/
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_search.png
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_webhook_config.png
-[5]: https://docs.datadoghq.com/monitors/manage_monitor/
-[6]: https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token
+[5]: https://docs.datadoghq.com/ja/monitors/manage_monitor/
+[6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_api_key_2.png
-[8]: https://docs.datadoghq.com/account_management/api-app-keys/#add-application-keys
+[8]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-application-keys
 [9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/torq/images/datadog_app_key_2.png
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

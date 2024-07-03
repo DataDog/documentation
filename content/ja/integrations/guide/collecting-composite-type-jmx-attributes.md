@@ -1,8 +1,7 @@
 ---
-title: Collecting Composite type JMX attributes
-kind: guide
 aliases:
-  - /integrations/faq/collecting-composite-type-jmx-attributes/
+- /ja/integrations/faq/collecting-composite-type-jmx-attributes/
+title: Collecting Composite type JMX attributes
 ---
 
 ## JMXFetch
@@ -19,19 +18,19 @@ Agent では、以下の統合のための yaml ファイルがすべて JMXFetc
 
 JMXFetchが収集できるJMX属性には2種類あります（simpleとcomposite）。
 
-### Simple attributes
+### Simple 属性
 
-These are `integer`, `float`, `double`, `long`, `boolean` etc ...
+これらは、`integer`、`float`、`double`、`long`、`boolean` などです。
 
-**Note**: Boolean values of true result in 1 and false in 0. [Check the list of supported types][6]
+**注**: ブール値の true は 1、false は 0 になります。[対応するタイプの一覧をご覧ください][6]
 
-You can use the `list` commands in order to get an idea of what your current JMX integration is collecting. Here is a snippet of that output showing a Simple attribute:
+現在の JMX インテグレーションが何を収集しているのかを知るために、`list` コマンドを使用することができます。以下は、Simple 属性を示す出力のスニペットです。
 
 ```text
 Matching: x/350. Bean name: java.lang - Attribute name: attribute_1 - Attribute type: java.lang.Integer
 ```
 
-That would give you the following configuration:
+そうすると、次のような構成になります。
 
 ```yaml
 - include:
@@ -42,19 +41,19 @@ That would give you the following configuration:
          alias: java.lang.Integer
 ```
 
-JMXFetch extracts the attribute value directly and use it as the metric value. See [the JMX documentation][3] to learn how to collect it.
+JMXFetch は属性値を直接抽出し、メトリクス値として使用します。収集方法については、[JMX ドキュメント][3]を参照してください。
 
-### Composite attributes
+### Composite 属性
 
-These can be seen as an array, a hashmap, or an object composed of 'simple' attributes.
+これらは、配列、ハッシュマップ、あるいは 'simple' 属性で構成されるオブジェクトと見なすことができます。
 
 ```text
 Matching: x/350. Bean name: java.lang - Attribute name: HeapMemoryUsage - Attribute type: javax.management.openmbean.CompositeData
 ```
 
-In this case, you need to add more details to JMXFetch on how to use this 'composite' attribute to create a numerical value for a metric.
+この場合、JMXFetch に、この 'composite' 属性を使用して、どのようにメトリクスの数値を作成するかについて、詳細を追加する必要があります。
 
-To do this, use a `.` to specify the component:
+そのためには、`.` を使用してコンポーネントを指定します。
 
 ```yaml
 - include:
@@ -71,22 +70,22 @@ To do this, use a `.` to specify the component:
       # (...)
 ```
 
-### How can I get to see the next level of these composite attributes?
+### これらの composite 属性の次のレベルを見るにはどうしたらいいのでしょうか？
 
-The best way to achieve this would be using JMXterm (see below).
+これを実現するには、JMXterm (後述) を使用するのが最適でしょう。
 
 ```text
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:<PORT> -u <USER> -p <PASSWORD>
 ```
 
-Note, for all versions of **Agent v5.32.8 or greater**, the `jmxterm` JAR is not shipped with the Agent. To download and use `jmxterm`, see the [upstream project][7].
+なお、**Agent v5.32.8 以降** のすべてのバージョンでは、`jmxterm` JAR は Agent に同梱されていません。`jmxterm` をダウンロードして使用するには、[上流プロジェクト][7]を参照してください。
 
-Then use the get command to pull up a specific metric.
+次に、get コマンドで特定のメトリクスを引き出します。
 
-[1]: /integrations/activemq/
-[2]: /integrations/cassandra/
-[3]: /integrations/java/
-[4]: /integrations/solr/
-[5]: /integrations/tomcat/
+[1]: /ja/integrations/activemq/
+[2]: /ja/integrations/cassandra/
+[3]: /ja/integrations/java/
+[4]: /ja/integrations/solr/
+[5]: /ja/integrations/tomcat/
 [6]: https://github.com/DataDog/jmxfetch/blob/master/src/main/java/org/datadog/jmxfetch/Instance.java#L23-L27
 [7]: https://github.com/jiaqi/jmxterm

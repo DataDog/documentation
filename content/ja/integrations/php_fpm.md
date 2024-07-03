@@ -1,73 +1,73 @@
 ---
-"app_id": "php-fpm"
-"app_uuid": "34faabdb-8545-4a45-a8bd-be0f979e99e7"
-"assets":
-  "dashboards":
-    "php-fpm": "assets/dashboards/php-fpm_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "php_fpm.processes.total"
-      "metadata_path": "metadata.csv"
-      "prefix": "php_fpm."
-    "process_signatures":
-    - "php-fpm"
-    - "php-fpm:"
-    - "php7.0-fpm"
-    - "php7.0-fpm start"
-    - "service php-fpm"
-    - "php7.0-fpm restart"
-    - "restart php-fpm"
-    - "systemctl restart php-fpm.service"
-    - "php7.0-fpm.service"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "117"
-    "source_type_name": "PHP-FPM"
-  "saved_views":
-    "php-fpm_processes": "assets/saved_views/php-fpm_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "metrics"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "php_fpm"
-"integration_id": "php-fpm"
-"integration_title": "PHP FPM"
-"integration_version": "3.3.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "php_fpm"
-"public_title": "PHP FPM"
-"short_description": "Monitor process states, slow requests, and accepted requests."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Metrics"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Monitor process states, slow requests, and accepted requests."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "PHP FPM"
+app_id: php-fpm
+app_uuid: 34faabdb-8545-4a45-a8bd-be0f979e99e7
+assets:
+  dashboards:
+    php-fpm: assets/dashboards/php-fpm_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: php_fpm.processes.total
+      metadata_path: metadata.csv
+      prefix: php_fpm.
+    process_signatures:
+    - php-fpm
+    - 'php-fpm:'
+    - php7.0-fpm
+    - php7.0-fpm start
+    - service php-fpm
+    - php7.0-fpm restart
+    - restart php-fpm
+    - systemctl restart php-fpm.service
+    - php7.0-fpm.service
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 117
+    source_type_name: PHP-FPM
+  saved_views:
+    php-fpm_processes: assets/saved_views/php-fpm_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- metrics
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: php_fpm
+integration_id: php-fpm
+integration_title: PHP FPM
+integration_version: 3.3.1
+is_public: true
+manifest_version: 2.0.0
+name: php_fpm
+public_title: PHP FPM
+short_description: Monitor process states, slow requests, and accepted requests.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Metrics
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor process states, slow requests, and accepted requests.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PHP FPM
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -138,9 +138,9 @@ To configure this check for an Agent running on a host:
 
 2. [Restart the Agent][3].
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -195,7 +195,7 @@ If your PHP-FPM installation uses unix sockets, you have to use the below syntax
 
 **Note**: With Autodiscovery, if the Agent runs in a separate container/task/pod, it doesn't have access to the Unix sockets file of your FPM pool. It order to address this, run the Agent as a sidecar.
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -225,5 +225,5 @@ Need help? Contact [Datadog support][4].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/php_fpm/images/phpfpmoverview.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

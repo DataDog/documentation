@@ -1,6 +1,4 @@
 ---
-title: Getting Started with Cloud Security Management
-kind: documentation
 further_reading:
 - link: /security/cloud_security_management/
   tag: Documentation
@@ -8,24 +6,26 @@ further_reading:
 - link: /infrastructure/resource_catalog/schema/
   tag: Documentation
   text: Cloud Resources Schema Reference
-- link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
+- link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
   tag: Blog
   text: Automate end-to-end processes with Datadog Workflows
-- link: "https://www.datadoghq.com/blog/csm-at-datadog/"
+- link: https://www.datadoghq.com/blog/csm-at-datadog/
   tag: Blog
   text: How we use Datadog CSM to improve security posture in our cloud infrastructure
-- link: "https://www.datadoghq.com/blog/detecting-leaked-credentials/"
+- link: https://www.datadoghq.com/blog/detecting-leaked-credentials/
   tag: Blog
   text: How we detect and notify users about leaked Datadog credentials
-- link: "https://www.datadoghq.com/blog/security-posture-csm/"
+- link: https://www.datadoghq.com/blog/security-posture-csm/
   tag: Blog
   text: Report on changes to your security posture with Cloud Security Management
-- link: "https://dtdg.co/fe"
+- link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Join an interactive session to elevate your security and threat detection
-- link: "https://securitylabs.datadoghq.com/"
+- link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Security research, reports, tips, and videos from Datadog
+kind: documentation
+title: Getting Started with Cloud Security Management
 ---
 
 ## Overview
@@ -64,25 +64,25 @@ This guide walks you through best practices for getting your team up and running
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/
-[2]: /security/cloud_security_management/misconfigurations/
-[3]: /security/threats/
+[1]: /ja/security/cloud_security_management/
+[2]: /ja/security/cloud_security_management/misconfigurations/
+[3]: /ja/security/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: /security/cloud_security_management/setup
+[5]: /ja/security/cloud_security_management/setup
 [13]: https://app.datadoghq.com/security/csm
-[14]: /security/default_rules/#cat-cloud-security-management
-[15]: /security/cloud_security_management/misconfigurations/signals_explorer/
-[16]: /security/cloud_security_management/misconfigurations/findings/
+[14]: /ja/security/default_rules/#cat-cloud-security-management
+[15]: /ja/security/cloud_security_management/misconfigurations/signals_explorer/
+[16]: /ja/security/cloud_security_management/misconfigurations/findings/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
-[18]: /security/cloud_security_management/guide/tuning-rules/
-[19]: /security/cloud_security_management/misconfigurations/custom_rules
-[20]: /security/threats/agent_expressions
-[21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
-[22]: /dashboards/#overview
+[18]: /ja/security/cloud_security_management/guide/tuning-rules/
+[19]: /ja/security/cloud_security_management/misconfigurations/custom_rules
+[20]: /ja/security/threats/agent_expressions
+[21]: /ja/security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
+[22]: /ja/dashboards/#overview
 [25]: https://app.datadoghq.com/containers/images
-[26]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
-[27]: /integrations/amazon_cloudtrail/#send-logs-to-datadog
-[28]: /security/cloud_security_management/identity_risks/
+[26]: /ja/integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
+[27]: /ja/integrations/amazon_cloudtrail/#send-logs-to-datadog
+[28]: /ja/security/cloud_security_management/identity_risks/
 [29]: https://app.datadoghq.com/security/identities
 [30]: https://app.datadoghq.com/security/infra-vulnerability
 [31]: https://app.datadoghq.com/security/configuration/reports

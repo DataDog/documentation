@@ -1,31 +1,31 @@
 ---
-"aliases":
-- "/integrations/awsml/"
-"categories":
-- "cloud"
-- "aws"
-- "log collection"
-- "ai/ml"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "AWS Machine Learning の予測カウントおよび失敗数を追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_machine_learning/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/"
-  "tag": "ブログ"
-  "text": "本番環境で ML モデルを監視するためのベストプラクティス"
-"git_integration_title": "amazon_machine_learning"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Machine Learning"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_machine_learning"
-"public_title": "Datadog-Amazon Machine Learning Integration"
-"short_description": "Track prediction counts and failures from AWS Machine Learning."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsml/
+categories:
+- cloud
+- aws
+- log collection
+- ai/ml
+custom_kind: インテグレーション
+dependencies: []
+description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_machine_learning/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/
+  tag: ブログ
+  text: 本番環境で ML モデルを監視するためのベストプラクティス
+git_integration_title: amazon_machine_learning
+has_logo: true
+integration_id: ''
+integration_title: Amazon Machine Learning
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_machine_learning
+public_title: Datadog-Amazon Machine Learning Integration
+short_description: Track prediction counts and failures from AWS Machine Learning.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -85,12 +85,11 @@ Need help? Contact [Datadog support][8].
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-machine-learning
-[4]: https://docs.datadoghq.com/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_machine_learning/amazon_machine_learning_metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

@@ -1,8 +1,17 @@
 ---
-title: Getting Started with Test Visibility
-kind: documentation
+algolia:
+  tags:
+  - test visibility
+  - ci test
+  - ci tests
+  - flaky test
+  - flaky tests
+  - test run
+  - test runs
+  - test span
+  - test spans
 further_reading:
-- link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
+- link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
   tag: Blog
   text: Troubleshoot end-to-end tests with CI Test Visibility and RUM
 - link: /tests/
@@ -14,8 +23,8 @@ further_reading:
 - link: /tests/developer_workflows
   tag: Documentation
   text: Learn about enhancing developer workflows in Datadog
-algolia:
-  tags: [test visibility, ci test, ci tests, flaky test, flaky tests, test run, test runs, test span, test spans]
+kind: documentation
+title: Getting Started with Test Visibility
 ---
 
 ## Overview
@@ -164,18 +173,18 @@ For more information, see the [CI Monitor documentation][13].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/
-[2]: /intelligent_test_runner/
-[3]: /tests/#supported-features
-[4]: /dashboards/
+[1]: /ja/tests/
+[2]: /ja/intelligent_test_runner/
+[3]: /ja/tests/#supported-features
+[4]: /ja/dashboards/
 [5]: https://app.datadoghq.com/dash/integration/30897/ci-visibility---tests-dashboard
-[6]: /glossary/?product=ci-cd#flaky-test
+[6]: /ja/glossary/?product=ci-cd#flaky-test
 [7]: https://app.datadoghq.com/ci/test-services
-[8]: /tests/guides/flaky_test_management
+[8]: /ja/tests/guides/flaky_test_management
 [8]: https://app.datadoghq.com/ci/test-runs
-[9]: /continuous_integration/explorer/facets/?tab=testruns
-[10]: /api/latest/ci-visibility-tests/
-[11]: /tests/guides/add_custom_measures/
+[9]: /ja/continuous_integration/explorer/facets/?tab=testruns
+[10]: /ja/api/latest/ci-visibility-tests/
+[11]: /ja/tests/guides/add_custom_measures/
 [12]: https://app.datadoghq.com/monitors/create
-[13]: /monitors/types/ci/?tab=tests#track-new-flaky-tests
-[14]: /tests/developer_workflows
+[13]: /ja/monitors/types/ci/?tab=tests#track-new-flaky-tests
+[14]: /ja/tests/developer_workflows

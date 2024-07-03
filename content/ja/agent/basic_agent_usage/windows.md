@@ -1,27 +1,29 @@
 ---
-title: Basic Agent Usage for Windows
-description: "Windows プラットフォーム上の Datadog Agent の基本機能"
-platform: Windows
-aliases:
-    - /guides/basic_agent_usage/windows/
-further_reading:
-- link: "/logs/"
-  tag: "Documentation"
-  text: "ログの収集"
-- link: "/infrastructure/process/"
-  tag: "Documentation"
-  text: "プロセスの収集"
-- link: "/tracing/"
-  tag: "Documentation"
-  text: "トレースの収集"
-- link: "/agent/basic_agent_usage/#agent-architecture"
-  tag: "Documentation"
-  text: "Agent のアーキテクチャを詳しく見る"
-- link: "/agent/configuration/network#configure-ports"
-  tag: "Documentation"
-  text: "インバウンドポートの構成"
 algolia:
-  tags: ['uninstall', 'uninstalling']
+  tags:
+  - uninstall
+  - uninstalling
+aliases:
+- /ja/guides/basic_agent_usage/windows/
+description: Windows プラットフォーム上の Datadog Agent の基本機能
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/configuration/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
+platform: Windows
+title: Basic Agent Usage for Windows
 ---
 
 ## セットアップ
@@ -115,9 +117,9 @@ Windows に Agent をインストールする際、以下の各構成オプシ�
 
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /agent/configuration/proxy/
-[3]: /agent/faq/windows-agent-ddagent-user/
-[4]: /network_monitoring/performance
+[2]: /ja/agent/configuration/proxy/
+[3]: /ja/agent/faq/windows-agent-ddagent-user/
+[4]: /ja/network_monitoring/performance
 {{% /tab %}}
 {{% tab "アップグレード" %}}
 
@@ -125,7 +127,7 @@ Agent 7 は Python 3 のみをサポートします。アップグレードす�
 
 < 5.12.0 の Datadog Agent バージョンからアップグレードする場合は、最初に [EXE インストーラー][2]を使用して Agent 5 のより新しいバージョン（>= 5.12.0 だが < 6.0.0）にアップグレードしてから、 Datadog Agent バージョン >= 6 にアップグレードします。
 
-[1]: /agent/guide/python-3/
+[1]: /ja/agent/guide/python-3/
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
 {{% /tab %}}
 {{< /tabs >}}
@@ -347,7 +349,7 @@ Agent のログは `C:\ProgramData\Datadog\logs\agent.log` にあります。
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
-[1]: /help/
+[1]: /ja/help/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -357,7 +359,7 @@ Windows Server 2008/Vista 以降のシステムでは、Agent のログは `C:\P
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
-[1]: /help/
+[1]: /ja/help/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -494,13 +496,13 @@ process_config:
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[2]: /agent/supported_platforms/?tab=windows
-[3]: /agent/faq/windows-agent-ddagent-user/
-[4]: /agent/guide/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: /agent/guide/windows-agent-ddagent-user/#installation-with-group-policy
-[6]: /agent/guide/datadog-agent-manager-windows/
-[7]: /integrations/wmi_check/
+[2]: /ja/agent/supported_platforms/?tab=windows
+[3]: /ja/agent/faq/windows-agent-ddagent-user/
+[4]: /ja/agent/guide/windows-agent-ddagent-user/#installation-in-a-domain-environment
+[5]: /ja/agent/guide/windows-agent-ddagent-user/#installation-with-group-policy
+[6]: /ja/agent/guide/datadog-agent-manager-windows/
+[7]: /ja/integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
-[9]: /infrastructure/process/?tab=linuxwindows#installation
-[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/configuration/agent-commands/#restart-the-agent
+[9]: /ja/infrastructure/process/?tab=linuxwindows#installation
+[10]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /ja/agent/configuration/agent-commands/#restart-the-agent

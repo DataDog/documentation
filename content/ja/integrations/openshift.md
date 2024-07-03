@@ -1,66 +1,66 @@
 ---
-"app_id": "openshift"
-"app_uuid": "e92e309f-7bdc-4ff4-91d4-975497526325"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: openshift
+app_uuid: e92e309f-7bdc-4ff4-91d4-975497526325
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - openshift.clusterquota.cpu.requests.used
       - openshift.clusterquota.cpu.used
-      "metadata_path": metadata.csv
-      "prefix": openshift.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10024"
-    "source_type_name": OpenShift
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: openshift.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10024
+    source_type_name: OpenShift
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - containers
 - kubernetes
 - log collection
 - network
 - orchestration
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/openshift/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "openshift"
-"integration_id": "openshift"
-"integration_title": "OpenShift"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "openshift"
-"public_title": "OpenShift"
-"short_description": "The Kubernetes platform for big ideas"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/openshift/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: openshift
+integration_id: openshift
+integration_title: OpenShift
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: openshift
+public_title: OpenShift
+short_description: The Kubernetes platform for big ideas
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Kubernetes"
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Category::Orchestration"
-  - "Category::Provisioning"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": The Kubernetes platform for big ideas
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": OpenShift
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Log Collection
+  - Category::Network
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: The Kubernetes platform for big ideas
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenShift
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -210,13 +210,13 @@ Need help? Contact [Datadog support][11].
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/kubernetes_apiserver.d/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/kubernetes/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/
 [3]: https://github.com/DataDog/datadog-operator/
 [4]: https://docs.openshift.com/container-platform/4.10/operators/understanding/olm-understanding-operatorhub.html
-[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset
-[6]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/
-[7]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
 [8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/agent-kubelet-only.yaml
 [9]: https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml
-[11]: https://docs.datadoghq.com/help/
+[11]: https://docs.datadoghq.com/ja/help/

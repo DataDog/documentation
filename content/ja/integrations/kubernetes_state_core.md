@@ -1,59 +1,61 @@
 ---
-"app_id": "kubernetes-state-core"
-"app_uuid": "6fbcfd6b-369d-4e69-8974-87b3fb5d4715"
-"assets":
-  "integration":
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": kubernetes_state.container.running
-      "metadata_path": metadata.csv
-      "prefix": kubernetes_state.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_name": Kubernetes State Core
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: kubernetes-state-core
+app_uuid: 6fbcfd6b-369d-4e69-8974-87b3fb5d4715
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kubernetes_state.container.running
+      metadata_path: metadata.csv
+      prefix: kubernetes_state.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kubernetes State Core
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - containers
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/kubernetes_state_core/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kubernetes_state_core"
-"integration_id": "kubernetes-state-core"
-"integration_title": "Kubernetes State Core"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "kubernetes_state_core"
-"public_title": "Kubernetes State Core"
-"short_description": "Capture Pod scheduling events, track the status of your Kubelets, and more."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/kubernetes_state_core/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: kubernetes_state_core
+integration_id: kubernetes-state-core
+integration_title: Kubernetes State Core
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: kubernetes_state_core
+public_title: Kubernetes State Core
+short_description: Capture Pod scheduling events, track the status of your Kubelets,
+  and more.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": Capture Pod scheduling events, track the status of your Kubelets, and more.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Kubernetes State Core
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Capture Pod scheduling events, track the status of your Kubelets, and
+    more.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubernetes State Core
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -363,8 +365,8 @@ Need help? Contact [Datadog support][5].
 
 
 [1]: https://kubernetes.io/blog/2021/04/13/kube-state-metrics-v-2-0/
-[2]: /agent/cluster_agent/
-[3]: /getting_started/tagging/unified_service_tagging/#configuration
-[4]: /agent/guide/agent-commands/#agent-status-and-information
-[5]: /help/
+[2]: /ja/agent/cluster_agent/
+[3]: /ja/getting_started/tagging/unified_service_tagging/#configuration
+[4]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: /ja/help/
 [6]: https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/

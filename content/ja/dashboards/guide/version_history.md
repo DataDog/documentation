@@ -1,5 +1,4 @@
 ---
-title: Version History for Dashboards
 disable_toc: false
 further_reading:
 - link: /dashboards/
@@ -8,9 +7,10 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: documentation
   text: Audit Trail Overview
-- link: "https://www.datadoghq.com/blog/dashboards-notebooks-version-history/"
+- link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
   tag: blog
   text: Track changes to Datadog dashboards and notebooks with version history
+title: Version History for Dashboards
 ---
 
 ## 概要
@@ -57,7 +57,7 @@ Version History サイドパネルから任意のバージョンをクリック�
 | 監査証跡が**有効**な場合  | 90 日 |
 
 
-[1]: /account_management/audit_trail/
+[1]: /ja/account_management/audit_trail/
 
 ## 参考資料
 

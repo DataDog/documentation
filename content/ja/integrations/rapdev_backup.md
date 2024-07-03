@@ -1,71 +1,71 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-backup"
-"app_uuid": "f0a2c15e-9c53-4645-aedc-5a28af130308"
-"assets":
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": rapdev.backup
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10194"
-    "source_type_name": RapDev Backup
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-backup
+app_uuid: f0a2c15e-9c53-4645-aedc-5a28af130308
+assets:
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: rapdev.backup
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10194
+    source_type_name: RapDev Backup
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_backup"
-"integration_id": "rapdev-backup"
-"integration_title": "Backup Automator"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rapdev_backup"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": backup
-  "short_description": Flat fee for integration
-  "unit_price": !!int "500"
-"public_title": "Backup Automator"
-"short_description": "Backup your Datadog dashboards, synthetics, monitors, and notebooks"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_backup
+integration_id: rapdev-backup
+integration_title: Backup Automator
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_backup
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: backup
+  short_description: Flat fee for integration
+  unit_price: 500
+public_title: Backup Automator
+short_description: Backup your Datadog dashboards, synthetics, monitors, and notebooks
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Marketplace"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Backup your Datadog dashboards, synthetics, monitors, and notebooks
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Backup Automator
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Marketplace
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Backup your Datadog dashboards, synthetics, monitors, and notebooks
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Backup Automator
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -104,12 +104,12 @@ Made with ❤️ in Boston
 
 *This isn't the integration you're looking for? Missing a critical feature for your organization? Drop RapDev a [note](mailto:support@rapdev.io), and we'll build it!!*
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-[4]: https://docs.datadoghq.com/account_management/api-app-keys/
+[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_permissions-to-switch.html
-[6]: https://docs.datadoghq.com/agent/guide/agent-v6-python-3/?tab=hostagent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=hostagent
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [8]: https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys
 [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html

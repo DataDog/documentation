@@ -1,12 +1,9 @@
 ---
-title: Correlating Python Logs and Traces
-kind: documentation
-description: "Connect your Python logs and traces to correlate them in Datadog."
-code_lang: python
-type: multi-code-lang
-code_lang_weight: 20
 aliases:
-  - /tracing/connect_logs_and_traces/python
+- /ja/tracing/connect_logs_and_traces/python
+code_lang: python
+code_lang_weight: 20
+description: Connect your Python logs and traces to correlate them in Datadog.
 further_reading:
 - link: /tracing/manual_instrumentation/
   tag: Documentation
@@ -17,12 +14,15 @@ further_reading:
 - link: /tracing/glossary/
   tag: Documentation
   text: Explore your services, resources, and traces
-- link: "https://www.datadoghq.com/blog/request-log-correlation/"
+- link: https://www.datadoghq.com/blog/request-log-correlation/
   tag: Blog
   text: Correlate request logs with traces automatically
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Guide
   text: Ease troubleshooting with cross product correlation.
+kind: documentation
+title: Correlating Python Logs and Traces
+type: multi-code-lang
 ---
 
 ## Injection
@@ -139,9 +139,9 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#trace
-[2]: /logs/log_collection/python/#configure-the-datadog-agent
-[3]: /logs/log_configuration/processors/#trace-remapper
-[4]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
-[5]: /tracing/trace_collection/library_injection_local/
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/logs/log_collection/python/#configure-the-datadog-agent
+[3]: /ja/logs/log_configuration/processors/#trace-remapper
+[4]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[5]: /ja/tracing/trace_collection/library_injection_local/
 [6]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection

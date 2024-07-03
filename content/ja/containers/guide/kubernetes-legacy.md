@@ -1,9 +1,8 @@
 ---
-title: Legacy Kubernetes versions
 aliases:
-    - /agent/kubernetes/legacy
-    - /agent/faq/kubernetes-legacy
-    - /agent/guide/kubernetes-legacy
+- /ja/agent/kubernetes/legacy
+- /ja/agent/faq/kubernetes-legacy
+- /ja/agent/guide/kubernetes-legacy
 further_reading:
 - link: /agent/kubernetes/daemonset_setup/
   tag: documentation
@@ -14,6 +13,7 @@ further_reading:
 - link: /agent/kubernetes/metrics/
   tag: documentation
   text: Kubernetes Metrics
+title: Legacy Kubernetes versions
 ---
 
 デフォルトの構成は Kubernetes 1.7.6 以降を対象にしています。これは、Agent がこのバージョンから導入された機能とエンドポイントに依存しているためです。古いバージョンの方がインストール手順が多くなっています。

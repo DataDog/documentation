@@ -1,89 +1,91 @@
 ---
-"algolia":
-  "subcategory": Marketplace インテグレーション
-"app_id": "bordant-technologies-camunda"
-"app_uuid": "a8413249-3027-48ad-b5bd-2ac72edd7ded"
-"assets":
-  "dashboards":
-    "Camunda 8 - Overview": assets/dashboards/camunda_8_overview.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": camunda8.broker.zeebe.health
-      "metadata_path": metadata.csv
-      "prefix": camunda8.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "11136032"
-    "source_type_name": Camunda 8
-"author":
-  "homepage": "https://www.bordant.com"
-  "name": Bordant Technologies
-  "sales_email": contact@bordant.com
-  "support_email": support@bordant.com
-  "vendor_id": bordant-technologies
-"categories":
+algolia:
+  subcategory: Marketplace インテグレーション
+app_id: bordant-technologies-camunda
+app_uuid: a8413249-3027-48ad-b5bd-2ac72edd7ded
+assets:
+  dashboards:
+    Camunda 8 - Overview: assets/dashboards/camunda_8_overview.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: camunda8.broker.zeebe.health
+      metadata_path: metadata.csv
+      prefix: camunda8.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 11136032
+    source_type_name: Camunda 8
+author:
+  homepage: https://www.bordant.com
+  name: Bordant Technologies
+  sales_email: contact@bordant.com
+  support_email: support@bordant.com
+  vendor_id: bordant-technologies
+categories:
 - marketplace
 - モニター
 - オーケストレーション
 - kubernetes
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "bordant_technologies_camunda"
-"integration_id": "bordant-technologies-camunda"
-"integration_title": "Camunda 8"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "bordant_technologies_camunda"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": camunda8
-  "short_description": Monthly flat fee for Camunda 8 integration
-  "unit_price": !!int "600"
-"public_title": "Camunda 8"
-"short_description": "Monitor your Camunda 8 workflow engine's health and performance."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: bordant_technologies_camunda
+integration_id: bordant-technologies-camunda
+integration_title: Camunda 8
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: bordant_technologies_camunda
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: camunda8
+  short_description: Monthly flat fee for Camunda 8 integration
+  unit_price: 600
+public_title: Camunda 8
+short_description: Monitor your Camunda 8 workflow engine's health and performance.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Marketplace"
-  - "Category::Metrics"
-  - "Category::Orchestration"
-  - "Offering::Integration"
-  - "Category::Kubernetes"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Monitor your Camunda 8 workflow engine's health and performance.
-  "media":
-  - "caption": Monitor your process engine's general health with the Camunda 8 dashboard.
-    "image_url": images/Camunda_8-Overview_1.png
-    "media_type": image
-  - "caption": The dashboard allows to individually monitor various components of your Camunda 8 workflow engine.
-    "image_url": images/Camunda_8-Overview_2.png
-    "media_type": image
-  - "caption": Metrics displayed in the dashboard include performance metrics, execution statistics, resource usage, and engine throughput.
-    "image_url": images/Camunda_8-Overview_3.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Camunda 8
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::Metrics
+  - Category::Orchestration
+  - Offering::Integration
+  - Category::Kubernetes
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Monitor your Camunda 8 workflow engine's health and performance.
+  media:
+  - caption: Monitor your process engine's general health with the Camunda 8 dashboard.
+    image_url: images/Camunda_8-Overview_1.png
+    media_type: image
+  - caption: The dashboard allows to individually monitor various components of your
+      Camunda 8 workflow engine.
+    image_url: images/Camunda_8-Overview_2.png
+    media_type: image
+  - caption: Metrics displayed in the dashboard include performance metrics, execution
+      statistics, resource usage, and engine throughput.
+    image_url: images/Camunda_8-Overview_3.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Camunda 8
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -118,9 +120,9 @@ For support or feature requests, reach out to Bordant Technologies through the f
 
 [1]: https://docs.camunda.io/docs/self-managed/platform-deployment/overview/
 [2]: mailto:support@bordant.com
-[3]: https://docs.datadoghq.com/agent/
-[4]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[5]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=kubernetesadv2
+[3]: https://docs.datadoghq.com/ja/agent/
+[4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[5]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/?tab=kubernetesadv2
 
 
 ---

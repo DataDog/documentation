@@ -1,16 +1,16 @@
 ---
-title: DogStatsD over Unix Domain Socket
-kind: documentation
-description: 'Usage documentation for DogStatsD over Unix Domain Sockets'
 aliases:
-    - /developers/metrics/unix_socket/
+- /ja/developers/metrics/unix_socket/
+description: Usage documentation for DogStatsD over Unix Domain Sockets
 further_reading:
-    - link: developers/dogstatsd
-      tag: Documentation
-      text: Introduction to DogStatsD
-    - link: developers/libraries
-      tag: Documentation
-      text: Official and Community created API and DogStatsD client libraries
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Introduction to DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Official and Community created API and DogStatsD client libraries
+kind: documentation
+title: DogStatsD over Unix Domain Socket
 ---
 
 Starting with version 6.0, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport.
@@ -61,8 +61,8 @@ To enable the Agent DogStatsD UDS:
 1. [Restart your Agent][2].
 
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/configuration/agent-commands/
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -195,9 +195,9 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 3. [Restart your Agent][3].
 
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[2]: /getting_started/tagging/assigning_tags/#environment-variables
-[3]: /agent/configuration/agent-commands/
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /ja/getting_started/tagging/assigning_tags/#environment-variables
+[3]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -208,7 +208,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 When running inside a container, DogStatsD needs to run in the host's PID namespace for origin detection to work reliably. Enable this in Docker with the `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the AWS documentation on [PID mode][2].
 
 
-[1]: /getting_started/tagging/assigning_tags/#environment-variables
+[1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -242,7 +242,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
           value: 'low'
     ```
 
-[1]: /getting_started/tagging/assigning_tags/#environment-variables
+[1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 {{% /tab %}}
 {{% tab "EKS Fargate" %}}
 
@@ -275,7 +275,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
           value: 'low'
     ```
 
-[1]: /getting_started/tagging/assigning_tags/#environment-variables
+[1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -310,8 +310,8 @@ For guidelines on creating additional implementation options, see the [datadog-a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[2]: /metrics/custom_metrics/
+[1]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

@@ -1,12 +1,13 @@
 ---
-title: OpenTracing Instrumentation Setup
-kind: documentation
-type: multi-code-lang
-aliases:
-- /tracing/trace_collection/open_standards/
-- /tracing/trace_collection/opentracing/
 algolia:
-  tags: [opentracing]
+  tags:
+  - opentracing
+aliases:
+- /ja/tracing/trace_collection/open_standards/
+- /ja/tracing/trace_collection/opentracing/
+kind: documentation
+title: OpenTracing Instrumentation Setup
+type: multi-code-lang
 ---
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
@@ -25,6 +26,6 @@ Read more for your language:
 
 <br>
 
-[1]: /tracing/trace_collection/otel_instrumentation/
-[2]: /tracing/trace_collection/custom_instrumentation/
+[1]: /ja/tracing/trace_collection/otel_instrumentation/
+[2]: /ja/tracing/trace_collection/custom_instrumentation/
 [3]: https://opentracing.io/docs/

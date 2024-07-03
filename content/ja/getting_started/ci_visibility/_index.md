@@ -1,10 +1,14 @@
 ---
-title: Getting Started with CI Visibility
+algolia:
+  tags:
+  - pipeline visibility
+  - pipelines
+  - ci pipeline
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
   text: Monitor all your CI pipelines with Datadog
-- link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
+- link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
   tag: Blog
   text: Best practices for CI/CD monitoring
 - link: /continuous_integration/pipelines
@@ -13,8 +17,7 @@ further_reading:
 - link: /monitors/types/ci
   tag: Documentation
   text: Learn about CI Pipeline Monitors
-algolia:
-  tags: [pipeline visibility, pipelines, ci pipeline]
+title: Getting Started with CI Visibility
 ---
 
 ## 概要
@@ -143,18 +146,18 @@ Test Visibility を設定した後、パイプライン実行のサイドパネ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/settings
-[2]: /continuous_integration/pipelines/custom_commands/
-[3]: /continuous_integration/pipelines/custom_tags_and_measures/
-[4]: /continuous_integration/pipelines/?tab=githubactions#terminology
-[5]: /dashboards/
+[2]: /ja/continuous_integration/pipelines/custom_commands/
+[3]: /ja/continuous_integration/pipelines/custom_tags_and_measures/
+[4]: /ja/continuous_integration/pipelines/?tab=githubactions#terminology
+[5]: /ja/dashboards/
 [6]: https://app.datadoghq.com/dash/integration/30516/ci-visibility---pipelines-dashboard
 [7]: https://app.datadoghq.com/ci/pipelines
-[8]: /continuous_integration/search/
-[9]: /continuous_integration/explorer
-[10]: /tests/guides/flaky_test_management/
-[11]: /continuous_integration/pipelines/?tab=githubactions#supported-features
-[12]: /continuous_integration/guides/infrastructure_metrics_with_gitlab/
-[13]: /continuous_integration/guides/pipeline_data_model/
-[14]: /monitors/types/ci/?tab=pipelines
+[8]: /ja/continuous_integration/search/
+[9]: /ja/continuous_integration/explorer
+[10]: /ja/tests/guides/flaky_test_management/
+[11]: /ja/continuous_integration/pipelines/?tab=githubactions#supported-features
+[12]: /ja/continuous_integration/guides/infrastructure_metrics_with_gitlab/
+[13]: /ja/continuous_integration/guides/pipeline_data_model/
+[14]: /ja/monitors/types/ci/?tab=pipelines
 [15]: https://app.datadoghq.com/monitors/create
-[16]: /api/latest/ci-visibility-pipelines/
+[16]: /ja/api/latest/ci-visibility-pipelines/

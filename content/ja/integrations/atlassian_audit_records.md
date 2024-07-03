@@ -1,58 +1,58 @@
 ---
-"app_id": "atlassian-audit-records"
-"app_uuid": "05aefffe-837f-414d-a550-b43ed99d24c2"
-"assets":
-  "dashboards":
-    "confluence-audit-records": assets/dashboards/confluence_audit_records_overview.json
-    "jira-audit-records": assets/dashboards/jira_audit_records_overview.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10390"
-    "source_type_name": Atlassian Audit Records
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: atlassian-audit-records
+app_uuid: 05aefffe-837f-414d-a550-b43ed99d24c2
+assets:
+  dashboards:
+    confluence-audit-records: assets/dashboards/confluence_audit_records_overview.json
+    jira-audit-records: assets/dashboards/jira_audit_records_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10390
+    source_type_name: Atlassian Audit Records
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "atlassian_audit_records"
-"integration_id": "atlassian-audit-records"
-"integration_title": "Atlassian Audit Records"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "atlassian_audit_records"
-"public_title": "Atlassian Audit Records"
-"short_description": "Jira & Confluence Audit Records"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: atlassian_audit_records
+integration_id: atlassian-audit-records
+integration_title: Atlassian Audit Records
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: atlassian_audit_records
+public_title: Atlassian Audit Records
+short_description: Jira & Confluence Audit Records
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Submitted Data Type::Logs"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Jira & Confluence Audit Records
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Atlassian Audit Records
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Jira & Confluence Audit Records
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Atlassian Audit Records
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -150,5 +150,4 @@ Need help?
 [3]: https://www.datadoghq.com/product/cloud-siem/
 [4]: https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/#known-issues
 [5]: https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/#is-cors-whitelisting-supported-
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

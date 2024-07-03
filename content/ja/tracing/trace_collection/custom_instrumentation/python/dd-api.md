@@ -1,23 +1,24 @@
 ---
-title: Python Custom Instrumentation using Datadog API
 aliases:
-    - /tracing/opentracing/python
-    - /tracing/manual_instrumentation/python
-    - /tracing/custom_instrumentation/python
-    - /tracing/setup_overview/custom_instrumentation/python
-    - /tracing/trace_collection/custom_instrumentation/python
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/python
-description: 'Manually instrument your Python application to send custom traces to Datadog.'
+- /ja/tracing/opentracing/python
+- /ja/tracing/manual_instrumentation/python
+- /ja/tracing/custom_instrumentation/python
+- /ja/tracing/setup_overview/custom_instrumentation/python
+- /ja/tracing/trace_collection/custom_instrumentation/python
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/python
 code_lang: dd-api
-type: multi-code-lang
 code_lang_weight: 1
+description: Manually instrument your Python application to send custom traces to
+  Datadog.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+title: Python Custom Instrumentation using Datadog API
+type: multi-code-lang
 ---
 
 If you have not read the setup instructions for automatic instrumentation, start with the [Python Setup Instructions][6]
@@ -117,7 +118,7 @@ def make_sandwich_request(request):
 
 
 
-[1]: /tracing/glossary/#spans
+[1]: /ja/tracing/glossary/#spans
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
 [3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}
@@ -245,8 +246,8 @@ except TypeError as e:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/python
-[2]: /tracing/trace_collection/trace_context_propagation/python/
-[4]: /tracing/security
-[5]: /tracing/guide/ignoring_apm_resources/
-[6]: /tracing/setup/python/
+[1]: /ja/tracing/compatibility_requirements/python
+[2]: /ja/tracing/trace_collection/trace_context_propagation/python/
+[4]: /ja/tracing/security
+[5]: /ja/tracing/guide/ignoring_apm_resources/
+[6]: /ja/tracing/setup/python/

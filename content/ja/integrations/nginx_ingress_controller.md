@@ -1,74 +1,76 @@
 ---
-"app_id": "nginx-ingress-controller"
-"app_uuid": "f84e3ebf-848b-4894-a5b0-9abbd21d4189"
-"assets":
-  "dashboards":
-    "nginx_ingress_controller": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": nginx_ingress.nginx.process.count
-      "metadata_path": metadata.csv
-      "prefix": nginx_ingress.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10050"
-    "source_type_name": nginx-ingress-controller
-  "saved_views":
-    "4xx_errors": assets/saved_views/4xx_errors.json
-    "5xx_errors": assets/saved_views/5xx_errors.json
-    "bot_errors": assets/saved_views/bot_errors.json
-    "status_code_overview": assets/saved_views/status_code_overview.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: nginx-ingress-controller
+app_uuid: f84e3ebf-848b-4894-a5b0-9abbd21d4189
+assets:
+  dashboards:
+    nginx_ingress_controller: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: nginx_ingress.nginx.process.count
+      metadata_path: metadata.csv
+      prefix: nginx_ingress.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10050
+    source_type_name: nginx-ingress-controller
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    status_code_overview: assets/saved_views/status_code_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - containers
 - kubernetes
 - log collection
 - network
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "nginx_ingress_controller"
-"integration_id": "nginx-ingress-controller"
-"integration_title": "nginx-ingress-controller"
-"integration_version": "2.6.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "nginx_ingress_controller"
-"public_title": "nginx-ingress-controller"
-"short_description": "Monitor metrics about the NGINX ingress controller and the embedded NGINX."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: nginx_ingress_controller
+integration_id: nginx-ingress-controller
+integration_title: nginx-ingress-controller
+integration_version: 2.6.1
+is_public: true
+manifest_version: 2.0.0
+name: nginx_ingress_controller
+public_title: nginx-ingress-controller
+short_description: Monitor metrics about the NGINX ingress controller and the embedded
+  NGINX.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Kubernetes"
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor metrics about the NGINX ingress controller and the embedded NGINX.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": nginx-ingress-controller
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Log Collection
+  - Category::Network
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor metrics about the NGINX ingress controller and the embedded
+    NGINX.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: nginx-ingress-controller
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -95,7 +97,7 @@
 Agent がホストで実行されている場合は、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nginx_ingress_controller.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nginx_ingress_controller.d/conf.yaml][1] を参照してください。次に、[Agent を再起動][2]します。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -103,7 +105,7 @@ Agent がホストで実行されている場合は、Agent のコンフィギ�
 
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -175,10 +177,10 @@ NGINX Ingress Controller には、サービスのチェック機能は含まれ�
 
 
 [1]: https://kubernetes.github.io/ingress-nginx
-[2]: https://docs.datadoghq.com/agent/kubernetes/prometheus/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/prometheus/
 [3]: https://github.com/nginxinc/nginx-prometheus-exporter#exported-metrics
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/

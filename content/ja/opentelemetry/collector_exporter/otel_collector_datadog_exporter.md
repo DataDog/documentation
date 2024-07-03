@@ -1,22 +1,23 @@
 ---
-title: OpenTelemetry Collector Datadog Exporter
 aliases:
-- /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
-- /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
-description: 'Send OpenTelemetry data to the OpenTelemetry collector and Datadog exporter'
+- /ja/tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
+- /ja/tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
+description: Send OpenTelemetry data to the OpenTelemetry collector and Datadog exporter
 further_reading:
-- link: "https://opentelemetry.io/docs/collector/"
+- link: https://opentelemetry.io/docs/collector/
   tag: 外部サイト
   text: Collector documentation
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: Blog
-  text: Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter
-- link: "https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/"
+  text: Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using
+    Datadog Exporter
+- link: https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/
   tag: Blog
   text: Use HiveMQ and OpenTelemetry to monitor IoT applications in Datadog
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: Documentation
   text: OTLP Metrics Types
+title: OpenTelemetry Collector Datadog Exporter
 ---
 
 OpenTelemetry Collector は、あらゆるベンダーに対応するエージェントプロセスで、さまざまなプロセスにより送信されたテレメトリデータを収集、エクスポートします。OpenTelemetry Collector 用の [Datadog エクスポーター][1]では、OpenTelemetry SDK から Datadog にトレース、メトリクス、ログデータを転送することができます (Datadog Agent は不要です)。すべての対応言語で動作するほか、[これらの OpenTelemetry トレースデータをアプリケーションログに接続する][2]ことができます。
@@ -578,8 +579,8 @@ OpenTelemetry Operator を使用するには
    ```
 
 [1]: https://github.com/open-telemetry/opentelemetry-operator#readme
-[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesdaemonset#4-run-the-collector
-[3]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesgateway#4-run-the-collector
+[2]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesdaemonset#4-run-the-collector
+[3]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesgateway#4-run-the-collector
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -652,23 +653,23 @@ Datadog provides out-of-the-box dashboards that you can copy and customize. To u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[2]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [3]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
 [4]: https://opentelemetry.io/docs/collector/configuration/
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
-[6]: https://docs.datadoghq.com/api/latest/logs/
-[7]: https://docs.datadoghq.com/api/latest/metrics/#submit-metrics
+[6]: https://docs.datadoghq.com/ja/api/latest/logs/
+[7]: https://docs.datadoghq.com/ja/api/latest/metrics/#submit-metrics
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
 [9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
-[10]: /getting_started/tagging/unified_service_tagging/
+[10]: /ja/getting_started/tagging/unified_service_tagging/
 [11]: https://opentelemetry.io/docs/instrumentation/
-[12]: /logs/log_collection/?tab=host
-[13]: /logs/log_configuration/parsing/
+[12]: /ja/logs/log_collection/?tab=host
+[13]: /ja/logs/log_configuration/parsing/
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs/operators
 [15]: https://opentelemetry.io/docs/reference/specification/logs/data-model/
 [16]: https://opentelemetry.io/docs/collector/deployment/#agent
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
-[18]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
+[18]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
 [19]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
 [20]: https://opentelemetry.io/docs/collector/deployment/
 [21]: https://app.datadoghq.com/integrations/otel
@@ -676,6 +677,6 @@ Datadog provides out-of-the-box dashboards that you can copy and customize. To u
 [23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
 [25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
-[26]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=service#service-attribute
-[27]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
-[28]: /opentelemetry/schema_semantics/hostname/
+[26]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/?tab=service#service-attribute
+[27]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#service-remapper
+[28]: /ja/opentelemetry/schema_semantics/hostname/

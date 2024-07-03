@@ -1,26 +1,28 @@
 ---
-title: Basic Agent Usage for SUSE
-platform: SUSE
-aliases:
-    - /guides/basic_agent_usage/suse/
-further_reading:
-- link: "/logs/"
-  tag: "Documentation"
-  text: "ログの収集"
-- link: "/infrastructure/process/"
-  tag: "Documentation"
-  text: "プロセスの収集"
-- link: "/tracing/"
-  tag: "Documentation"
-  text: "トレースの収集"
-- link: "/agent/basic_agent_usage/#agent-architecture"
-  tag: "Documentation"
-  text: "Agent のアーキテクチャを詳しく見る"
-- link: "/agent/configuration/network#configure-ports"
-  tag: "Documentation"
-  text: "インバウンドポートの構成"
 algolia:
-  tags: ['uninstall', 'uninstalling']
+  tags:
+  - uninstall
+  - uninstalling
+aliases:
+- /ja/guides/basic_agent_usage/suse/
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/configuration/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
+platform: SUSE
+title: Basic Agent Usage for SUSE
 ---
 
 ## 概要
@@ -100,7 +102,7 @@ Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /integrations/
+[1]: /ja/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -112,7 +114,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /integrations/
+[1]: /ja/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -180,6 +182,6 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=suse
-[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /agent/troubleshooting/
-[4]: /developers/guide/custom-python-package/
+[2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
+[3]: /ja/agent/troubleshooting/
+[4]: /ja/developers/guide/custom-python-package/

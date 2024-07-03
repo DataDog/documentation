@@ -1,26 +1,26 @@
 ---
-title: Enabling ASM for Go
-kind: documentation
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 20
 aliases:
-  - /security_platform/application_security/getting_started/go
-  - /security/application_security/getting_started/go
-  - /security/application_security/enabling/go
+- /ja/security_platform/application_security/getting_started/go
+- /ja/security/application_security/getting_started/go
+- /ja/security/application_security/enabling/go
+code_lang: go
+code_lang_weight: 20
 further_reading:
-    - link: /security/application_security/add-user-info/
-      tag: Documentation
-      text: Adding user information to traces
-    - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
-      tag: ソースコード
-      text: Go Datadog library source code
-    - link: /security/default_rules/?category=cat-application-security
-      tag: Documentation
-      text: OOTB Application Security Management Rules
-    - link: /security/application_security/troubleshooting
-      tag: Documentation
-      text: Troubleshooting Application Security Management
+- link: /security/application_security/add-user-info/
+  tag: Documentation
+  text: Adding user information to traces
+- link: https://github.com/DataDog/dd-trace-go/tree/v1
+  tag: ソースコード
+  text: Go Datadog library source code
+- link: /security/default_rules/?category=cat-application-security
+  tag: Documentation
+  text: OOTB Application Security Management Rules
+- link: /security/application_security/troubleshooting
+  tag: Documentation
+  text: Troubleshooting Application Security Management
+kind: documentation
+title: Enabling ASM for Go
+type: multi-code-lang
 ---
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
@@ -120,5 +120,5 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/compatibility/go/#web-framework-compatibility
-[2]: /security/application_security/enabling/compatibility/go
+[1]: /ja/security/application_security/enabling/compatibility/go/#web-framework-compatibility
+[2]: /ja/security/application_security/enabling/compatibility/go

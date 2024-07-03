@@ -1,25 +1,25 @@
 ---
-"categories":
-- "cloud"
-- "data stores"
-- "caching"
-- "azure"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Azure SQL Database の主要メトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/azure_sql_database/"
-"draft": false
-"git_integration_title": "azure_sql_database"
-"has_logo": true
-"integration_id": "azure-sql-database"
-"integration_title": "Microsoft Azure SQL Database"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_sql_database"
-"public_title": "Datadog-Microsoft Azure SQL Database Integration"
-"short_description": "Track key Azure SQL Database metrics."
-"version": "1.0"
+categories:
+- cloud
+- data stores
+- caching
+- azure
+custom_kind: インテグレーション
+dependencies: []
+description: Azure SQL Database の主要メトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/azure_sql_database/
+draft: false
+git_integration_title: azure_sql_database
+has_logo: true
+integration_id: azure-sql-database
+integration_title: Microsoft Azure SQL Database
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_sql_database
+public_title: Datadog-Microsoft Azure SQL Database Integration
+short_description: Track key Azure SQL Database metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -56,7 +56,6 @@ The Azure SQL Database integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_sql_database/azure_sql_database_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

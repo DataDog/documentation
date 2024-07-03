@@ -1,16 +1,17 @@
 ---
-title: iOS and tvOS Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your iOS and tvOS application with OpenTelemetry API to send traces to Datadog.'
 aliases:
-- /tracing/trace_collection/otel_instrumentation/ios/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/ios
+- /ja/tracing/trace_collection/otel_instrumentation/ios/
+- /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/ios
+description: Instrument your iOS and tvOS application with OpenTelemetry API to send
+  traces to Datadog.
 further_reading:
-    - link: tracing/glossary/
-      tag: ドキュメント
-      text: サービス、リソース、トレースの詳細
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: ドキュメント
-      text: OpenTelemetry API と Datadog でインスツルメントされたトレースの相互運用性
+- link: tracing/glossary/
+  tag: ドキュメント
+  text: サービス、リソース、トレースの詳細
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: ドキュメント
+  text: OpenTelemetry API と Datadog でインスツルメントされたトレースの相互運用性
+title: iOS and tvOS Custom Instrumentation using OpenTelemetry API
 ---
 
 {{% otel-custom-instrumentation-lang %}}
@@ -318,9 +319,9 @@ spanWithLinks.end()
 [3]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [5]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
-[9]: /account_management/api-app-keys/#client-tokens
-[10]: /account_management/api-app-keys/#api-keys
-[11]: /account_management/api-app-keys/#client-tokens
+[6]: /ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[9]: /ja/account_management/api-app-keys/#client-tokens
+[10]: /ja/account_management/api-app-keys/#api-keys
+[11]: /ja/account_management/api-app-keys/#client-tokens
 [12]: https://support.apple.com/en-gb/guide/security/sec15bfe098e/web
 [13]: https://opentelemetry.io/docs/concepts/signals/traces/

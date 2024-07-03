@@ -1,7 +1,6 @@
 ---
-title: Getting Integrations Working
 aliases:
-    - /integrations/faq/issues-getting-integrations-working
+- /ja/integrations/faq/issues-getting-integrations-working
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: ドキュメント
@@ -12,6 +11,7 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: ドキュメント
   text: Get the status of an Agent check
+title: Getting Integrations Working
 ---
 
 Datadog インテグレーションは、YAML コンフィギュレーションファイルを使用して Datadog Agent から構成されます。オペレーティングシステムの構成ディレクトリへのパスは、[Agent コンフィギュレーションファイル][1]のドキュメントを参照してください。
@@ -36,11 +36,11 @@ Datadog インテグレーションは、YAML コンフィギュレーション�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/configuration/agent-commands/#agent-information
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /ja/agent/configuration/agent-commands/#agent-information
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: /agent/configuration/agent-log-files/
-[5]: /help/
-[6]: /integrations/
+[4]: /ja/agent/configuration/agent-log-files/
+[5]: /ja/help/
+[6]: /ja/integrations/
 [7]: https://codebeautify.org/yaml-parser-online
-[8]: /agent/configuration/agent-commands/#start-stop-restart-the-agent
+[8]: /ja/agent/configuration/agent-commands/#start-stop-restart-the-agent

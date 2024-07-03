@@ -1,19 +1,20 @@
 ---
-title: Propagating the Trace Context
-kind: documentation
-type: multi-code-lang
-description: 'Extract and inject Datadog, B3, and W3C Trace Context headers to propagate the context of a distributed trace.'
-aliases:
+aliases: null
+description: Extract and inject Datadog, B3, and W3C Trace Context headers to propagate
+  the context of a distributed trace.
 further_reading:
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Understand APM terminology
-    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
-      tag: Blog
-      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: tracing/glossary/
+  tag: Documentation
+  text: Understand APM terminology
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: Blog
+  text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Propagating the Trace Context
+type: multi-code-lang
 ---
 
 W3C Trace Context propagation is available for all supported languages. The default trace propagation style for all languages is `datadog,tracecontext`. Envoy and nginx proxies use the default of `tracecontext,datadog`.
@@ -29,4 +30,4 @@ For more information about each language's configuration options for trace conte
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/otel_tracing/
+[1]: /ja/opentelemetry/otel_tracing/

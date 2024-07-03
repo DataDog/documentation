@@ -1,59 +1,59 @@
 ---
-"app_id": "mapr"
-"app_uuid": "96cb179f-2a53-424b-95ce-302610f155eb"
-"assets":
-  "dashboards":
-    "MapR - Overview": assets/dashboards/mapr_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": mapr.metrics.submitted
-      "metadata_path": metadata.csv
-      "prefix": mapr.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10073"
-    "source_type_name": MapR
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: mapr
+app_uuid: 96cb179f-2a53-424b-95ce-302610f155eb
+assets:
+  dashboards:
+    MapR - Overview: assets/dashboards/mapr_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: mapr.metrics.submitted
+      metadata_path: metadata.csv
+      prefix: mapr.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10073
+    source_type_name: MapR
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/mapr/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mapr"
-"integration_id": "mapr"
-"integration_title": "MapR"
-"integration_version": "1.11.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mapr"
-"public_title": "MapR"
-"short_description": "Collect the monitoring metrics made available by MapR."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: mapr
+integration_id: mapr
+integration_title: MapR
+integration_version: 1.11.0
+is_public: true
+manifest_version: 2.0.0
+name: mapr
+public_title: MapR
+short_description: Collect the monitoring metrics made available by MapR.
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": Collect the monitoring metrics made available by MapR.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": MapR
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Category::Log Collection
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Collect the monitoring metrics made available by MapR.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MapR
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -179,10 +179,9 @@ MapR チェックには、イベントは含まれません。
 [6]: https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html
 [7]: https://github.com/confluentinc/librdkafka#installing-prebuilt-packages
 [8]: https://github.com/DataDog/integrations-core/blob/master/mapr/datadog_checks/mapr/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://www.rubydoc.info/gems/fluent-plugin-datadog
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/mapr/metadata.csv
 [13]: https://github.com/DataDog/integrations-core/blob/master/mapr/assets/service_checks.json
-[14]: https://docs.datadoghq.com/help/
-
+[14]: https://docs.datadoghq.com/ja/help/

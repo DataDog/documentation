@@ -1,28 +1,28 @@
 ---
-"aliases":
-- "/integrations/awscloudfront/"
-"categories":
-- "aws"
-- "caching"
-- "cloud"
-- "log collection"
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_cloudfront/"
-"draft": false
-"git_integration_title": "amazon_cloudfront"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon CloudFront"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_cloudfront"
-"public_title": "Datadog-Amazon CloudFront Integration"
-"short_description": "Track error rates, request counts, and bytes downloaded and uploaded."
-"version": "1.0"
+aliases:
+- /ja/integrations/awscloudfront/
+categories:
+- aws
+- caching
+- cloud
+- log collection
+- network
+custom_kind: インテグレーション
+dependencies: []
+description: エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_cloudfront/
+draft: false
+git_integration_title: amazon_cloudfront
+has_logo: true
+integration_id: ''
+integration_title: Amazon CloudFront
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_cloudfront
+public_title: Datadog-Amazon CloudFront Integration
+short_description: Track error rates, request counts, and bytes downloaded and uploaded.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -72,9 +72,9 @@ Go to the [Log Explorer][2] to start exploring your logs.
 
 For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][3].
 
-[1]: https://docs.datadoghq.com/logs/guide/forwarder/
+[1]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [2]: https://app.datadoghq.com/logs
-[3]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[3]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 {{% /tab %}}
 {{% tab "Real-Time Logs" %}}
 
@@ -102,9 +102,9 @@ You can also configure a consumer, such as Amazon Data Firehose, to send real-ti
 
 
 [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
-[2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#grok-parser
-[3]: https://docs.datadoghq.com/integrations/amazon_kinesis/
-[4]: https://docs.datadoghq.com/serverless/forwarder/
+[2]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#grok-parser
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/
+[4]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -128,10 +128,9 @@ The Amazon CloudFront integration does not include any service checks.
 
 Need help? Contact [Datadog support][6].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-cloudfront
 [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cloudfront/amazon_cloudfront_metadata.csv
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

@@ -1,7 +1,7 @@
 ---
-title: Attack Summary
 aliases:
-  - /security/application_security/threats/threat-overview
+- /ja/security/application_security/threats/threat-overview
+title: Attack Summary
 ---
 
 {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the ASM Attack Summary page"  >}}

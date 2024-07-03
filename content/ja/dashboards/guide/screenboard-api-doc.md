@@ -1,8 +1,8 @@
 ---
-title: Screenboard API
 aliases:
-  - /graphing/faq/screenboard-api-doc
-  - /graphing/guide/screenboard-api-doc
+- /ja/graphing/faq/screenboard-api-doc
+- /ja/graphing/guide/screenboard-api-doc
+title: Screenboard API
 ---
 
 <div class="alert alert-danger">

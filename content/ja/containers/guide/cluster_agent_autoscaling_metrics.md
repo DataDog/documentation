@@ -1,14 +1,13 @@
 ---
-title: Autoscaling with Cluster Agent Custom & External Metrics
 aliases:
-- /agent/guide/cluster-agent-custom-metrics-server
-- /agent/cluster_agent/external_metrics
-- /containers/cluster_agent/external_metrics
+- /ja/agent/guide/cluster-agent-custom-metrics-server
+- /ja/agent/cluster_agent/external_metrics
+- /ja/containers/cluster_agent/external_metrics
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
   text: Introducing the Datadog Cluster Agent
-- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: Blog
   text: Autoscale your Kubernetes workloads with any Datadog metric
 - link: /agent/cluster_agent/clusterchecks/
@@ -20,6 +19,7 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentation
   text: Troubleshooting the Datadog Cluster Agent
+title: Autoscaling with Cluster Agent Custom & External Metrics
 ---
 
 ## 概要
@@ -86,7 +86,7 @@ Operator により必要な RBAC コンフィギュレーションが自動的�
         enabled: true
   ```
 
-[1]: /agent/guide/operator-advanced
+[1]: /ja/agent/guide/operator-advanced
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -152,7 +152,7 @@ Datadog Cluster Agent が稼働したらいくつかの追加 RBAC ポリシー�
     kubectl apply -f rbac-hpa.yaml
     ```
 
-[1]: /agent/cluster_agent/setup/?tab=daemonset
+[1]: /ja/agent/cluster_agent/setup/?tab=daemonset
 [2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
 {{% /tab %}}
 {{< /tabs >}}
@@ -512,9 +512,9 @@ status:
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
 [2]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: /account_management/api-app-keys/
-[5]: /agent/configuration/dual-shipping/?tab=helm#cluster-agent-metrics-provider
+[4]: /ja/account_management/api-app-keys/
+[5]: /ja/agent/configuration/dual-shipping/?tab=helm#cluster-agent-metrics-provider
 [6]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions
 [7]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
-[9]: /integrations/guide/cloud-metric-delay
+[9]: /ja/integrations/guide/cloud-metric-delay

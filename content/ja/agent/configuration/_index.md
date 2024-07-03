@@ -1,12 +1,12 @@
 ---
-title: Agent Configuration
-disable_toc: false
 aliases:
-- /agent/config
+- /ja/agent/config
+disable_toc: false
 further_reading:
 - link: /agent/guide/
   tag: Documentation
   text: Agent guides
+title: Agent Configuration
 ---
 
 This section covers information on configuring your Datadog Agents. For information on remotely configuring Datadog components, see [Remote Configuration][1]. For container installations, see [Container Monitoring][2]. For information on configuring Datadog integrations, see [Integrations][3].
@@ -27,6 +27,6 @@ This section covers information on configuring your Datadog Agents. For informat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
-[2]: /containers/
-[3]: /integrations/
+[1]: /ja/agent/remote_config/
+[2]: /ja/containers/
+[3]: /ja/integrations/

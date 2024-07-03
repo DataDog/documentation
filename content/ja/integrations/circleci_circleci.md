@@ -1,16 +1,16 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "circleci-circleci"
-"app_uuid": "3c51a71d-330c-4fd3-ae55-9146c20a3b65"
-"assets": {}
-"author":
-  "homepage": "https://circleci.com/"
-  "name": CircleCI
-  "sales_email": partners@circleci.com
-  "support_email": support@circleci.com
-  "vendor_id": circleci
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: circleci-circleci
+app_uuid: 3c51a71d-330c-4fd3-ae55-9146c20a3b65
+assets: {}
+author:
+  homepage: https://circleci.com/
+  name: CircleCI
+  sales_email: partners@circleci.com
+  support_email: support@circleci.com
+  vendor_id: circleci
+categories:
 - automation
 - cloud
 - configuration & deployment
@@ -20,74 +20,77 @@
 - provisioning
 - source control
 - testing
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "circleci_circleci"
-"integration_id": "circleci-circleci"
-"integration_title": "CircleCI"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "circleci_circleci"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": circleci-license
-  "short_description": Access to GPU resource classes, a dedicated account team, access to 24/7 support, customizable annual billing, audit logging, and bulk data export
-  "unit_price": !!int "2000"
-"public_title": "CircleCI"
-"short_description": "Use CircleCI to build, test, and deploy your code"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: circleci_circleci
+integration_id: circleci-circleci
+integration_title: CircleCI
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: circleci_circleci
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: circleci-license
+  short_description: Access to GPU resource classes, a dedicated account team, access
+    to 24/7 support, customizable annual billing, audit logging, and bulk data export
+  unit_price: 2000
+public_title: CircleCI
+short_description: Use CircleCI to build, test, and deploy your code
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Cloud"
-  - "Category::Configuration & Deployment"
-  - "Category::Developer Tools"
-  - "Category::Marketplace"
-  - "Category::Orchestration"
-  - "Category::Provisioning"
-  - "Category::Source Control"
-  - "Category::Testing"
-  - "Offering::Software License"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Use CircleCI to build, test, and deploy your code
-  "media":
-  - "caption": CircleCI pipeline dashboard shows all recent builds in one place. Apply filters to quickly find what you're looking for faster.
-    "image_url": images/img_1.jpg
-    "media_type": image
-  - "caption": Monitor your build progress and quickly locate issues in our end-to-end pipeline view.
-    "image_url": images/img_2.png
-    "media_type": image
-  - "caption": Debug via SSH for faster resolution of build and test issues.
-    "image_url": images/img_3.jpg
-    "media_type": image
-  - "caption": The best tool for every job - CircleCI
-    "image_url": images/video_thumbnail.jpg
-    "media_type": video
-    "vimeo_id": !!int "731430543"
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/run-synthetic-tests-in-circeci-pipelines-with-datadog/"
-  - "resource_type": documentation
-    "url": "https://circleci.com/docs"
-  "support": "README.md#Support"
-  "title": CircleCI
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
+  - Category::Marketplace
+  - Category::Orchestration
+  - Category::Provisioning
+  - Category::Source Control
+  - Category::Testing
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Use CircleCI to build, test, and deploy your code
+  media:
+  - caption: CircleCI pipeline dashboard shows all recent builds in one place. Apply
+      filters to quickly find what you're looking for faster.
+    image_url: images/img_1.jpg
+    media_type: image
+  - caption: Monitor your build progress and quickly locate issues in our end-to-end
+      pipeline view.
+    image_url: images/img_2.png
+    media_type: image
+  - caption: Debug via SSH for faster resolution of build and test issues.
+    image_url: images/img_3.jpg
+    media_type: image
+  - caption: The best tool for every job - CircleCI
+    image_url: images/video_thumbnail.jpg
+    media_type: video
+    vimeo_id: 731430543
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/run-synthetic-tests-in-circeci-pipelines-with-datadog/
+  - resource_type: documentation
+    url: https://circleci.com/docs
+  support: README.md#Support
+  title: CircleCI
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

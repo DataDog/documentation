@@ -1,11 +1,12 @@
 ---
-title: Cloud Cost Recommendations
-private: true
-description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
+description: Learn how to reduce the spending of your organization's cloud resources
+  with Cost Recommendations.
 further_reading:
 - link: /cloud_cost_management/
   tag: Documentation
   text: Learn about Cloud Cost Management
+private: true
+title: Cloud Cost Recommendations
 ---
 
 {{< site-region region="gov" >}}
@@ -126,8 +127,8 @@ EC2 インスタンスのダウンサイジング
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/recommendations
-[2]: /cloud_cost_management/aws/#setup
-[3]: /integrations/amazon_web_services/#resource-collection
+[2]: /ja/cloud_cost_management/aws/#setup
+[3]: /ja/integrations/amazon_web_services/#resource-collection
 [4]: https://app.datadoghq.com/integrations/aws
-[5]: /agent/
-[6]: /integrations/amazon_s3_storage_lens/
+[5]: /ja/agent/
+[6]: /ja/integrations/amazon_s3_storage_lens/

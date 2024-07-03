@@ -1,74 +1,74 @@
 ---
-"app_id": "teamcity"
-"app_uuid": "8dd65d36-9cb4-4295-bb0c-68d67c0cdd4b"
-"assets":
-  "dashboards":
-    "TeamCity Overview": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
-      - "teamcity.builds"
-      - "teamcity.build_duration"
-      "metadata_path": "metadata.csv"
-      "prefix": "teamcity."
-    "process_signatures":
-    - "teamcity-server.sh"
-    - "teamcity-server"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "109"
-    "source_type_name": "Teamcity"
-  "monitors":
-    "Build Status": "assets/monitors/build_status.json"
-  "saved_views":
-    "teamcity_processes": "assets/saved_views/teamcity_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "configuration & deployment"
-- "log collection"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "teamcity"
-"integration_id": "teamcity"
-"integration_title": "TeamCity"
-"integration_version": "4.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "teamcity"
-"public_title": "TeamCity"
-"short_description": "ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::構成 & デプロイ"
-  - "Category::ログの収集"
-  - "Category::Notifications"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "TeamCity"
+app_id: teamcity
+app_uuid: 8dd65d36-9cb4-4295-bb0c-68d67c0cdd4b
+assets:
+  dashboards:
+    TeamCity Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - teamcity.builds
+      - teamcity.build_duration
+      metadata_path: metadata.csv
+      prefix: teamcity.
+    process_signatures:
+    - teamcity-server.sh
+    - teamcity-server
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 109
+    source_type_name: Teamcity
+  monitors:
+    Build Status: assets/monitors/build_status.json
+  saved_views:
+    teamcity_processes: assets/saved_views/teamcity_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- configuration & deployment
+- log collection
+- notifications
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: teamcity
+integration_id: teamcity
+integration_title: TeamCity
+integration_version: 4.2.1
+is_public: true
+manifest_version: 2.0.0
+name: teamcity
+public_title: TeamCity
+short_description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::構成 & デプロイ
+  - Category::ログの収集
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TeamCity
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -244,13 +244,13 @@ instances:
 
 5. [Agent を再起動します][5]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/teamcity/datadog_checks/teamcity/data/conf.yaml.example
 [3]: https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md
 [4]: https://www.jetbrains.com/help/teamcity/server-startup-properties.html#TeamCity+Internal+Properties
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://www.jetbrains.com/help/teamcity/teamcity-server-logs.html
-[7]: https://docs.datadoghq.com/logs/log_configuration/pipelines/#integration-pipelines
+[7]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/#integration-pipelines
 [8]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
@@ -273,8 +273,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "teamcity"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -315,7 +315,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [8]: https://www.jetbrains.com/help/teamcity/creating-and-managing-users.html#Assigning+Roles+to+Users
 [9]: https://raw.githubusercontent.com/DataDog/integrations-core/master/teamcity/images/guest_user_settings.jpg
 [10]: https://raw.githubusercontent.com/DataDog/integrations-core/master/teamcity/images/assign_role.jpg
-[11]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
-[12]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://docs.datadoghq.com/help/
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://docs.datadoghq.com/ja/help/
 [14]: https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog

@@ -1,13 +1,11 @@
 ---
-title: Getting Started with Monitors
-kind: documentation
 aliases:
-  - /getting_started/application/monitors
+- /ja/getting_started/application/monitors
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
+- link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: Blog
-  text: "Monitoring 101: Alerting on what matters"
-- link: "https://learn.datadoghq.com/courses/introduction-to-observability"
+  text: 'Monitoring 101: Alerting on what matters'
+- link: https://learn.datadoghq.com/courses/introduction-to-observability
   tag: Learning Center
   text: Introduction to Observability
 - link: /monitors/types/metric/
@@ -16,9 +14,11 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Monitor Notifications
-- link: "https://dtdg.co/fe"
+- link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Join an interactive session on creating effective monitors
+kind: documentation
+title: Getting Started with Monitors
 ---
 
 ## Overview
@@ -131,19 +131,19 @@ For more information about roles, see [Role Based Access Control][10].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/types/metric/
-[2]: /getting_started/agent/
+[1]: /ja/monitors/types/metric/
+[2]: /ja/getting_started/agent/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
-[6]: /integrations/disk/
-[7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
-[8]: /monitors/notify/variables/
-[9]: /monitors/configuration/?tab=thresholdalert#alert-grouping
-[10]: /account_management/rbac/
-[11]: /service_management/mobile/
+[6]: /ja/integrations/disk/
+[7]: /ja/monitors/types/metric/?tab=threshold#set-alert-conditions
+[8]: /ja/monitors/notify/variables/
+[9]: /ja/monitors/configuration/?tab=thresholdalert#alert-grouping
+[10]: /ja/account_management/rbac/
+[11]: /ja/service_management/mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
-[14]: /service_management/workflows/
-[15]: /service_management/case_management/
-[16]: /account_management/teams/
+[14]: /ja/service_management/workflows/
+[15]: /ja/service_management/case_management/
+[16]: /ja/account_management/teams/

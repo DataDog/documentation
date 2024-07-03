@@ -1,7 +1,7 @@
 ---
-title: Datadog-Heroku Buildpack troubleshooting
 aliases:
-  - /agent/faq/heroku-troubleshooting/
+- /ja/agent/faq/heroku-troubleshooting/
+title: Datadog-Heroku Buildpack troubleshooting
 ---
 
 Heroku のデバッグを開始するには、[Agent ドキュメント][1]に記載されている情報/デバッグコマンドを使用して、`agent-wrapper` コマンドを使用します。
@@ -45,4 +45,4 @@ heroku ps:copy /app/.apt/var/log/datadog/datadog-apm.log --dyno=<YOUR DYNO NAME>
 agent-wrapper flare
 ```
 
-[1]: /agent/configuration/agent-commands/#agent-status-and-information
+[1]: /ja/agent/configuration/agent-commands/#agent-status-and-information

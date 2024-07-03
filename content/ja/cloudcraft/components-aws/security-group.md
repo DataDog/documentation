@@ -1,5 +1,5 @@
 ---
-title: "Security Group Component"
+title: Security Group Component
 ---
 ## 概要
 

@@ -1,52 +1,53 @@
 ---
-"app_id": "new-relic"
-"app_uuid": "82c7d333-a23e-44f9-a6c5-cd22fb541022"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
-      - "new_relic.application_summary.apdex_score"
-      - "new_relic.apdex.score"
-      "metadata_path": "metadata.csv"
-      "prefix": "new_relic."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "54"
-    "source_type_name": "New Relic"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "new_relic"
-"integration_id": "new-relic"
-"integration_title": "New Relic"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "new_relic"
-"public_title": "New Relic"
-"short_description": "New Relic is an application monitoring service for web and mobile applications."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Notifications"
-  "configuration": "README.md#Setup"
-  "description": "New Relic is an application monitoring service for web and mobile applications."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "New Relic"
+app_id: new-relic
+app_uuid: 82c7d333-a23e-44f9-a6c5-cd22fb541022
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - new_relic.application_summary.apdex_score
+      - new_relic.apdex.score
+      metadata_path: metadata.csv
+      prefix: new_relic.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 54
+    source_type_name: New Relic
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: new_relic
+integration_id: new-relic
+integration_title: New Relic
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: new_relic
+public_title: New Relic
+short_description: New Relic is an application monitoring service for web and mobile
+  applications.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: New Relic is an application monitoring service for web and mobile applications.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: New Relic
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -112,5 +113,4 @@ After your modifications are complete, select **Update Channel** to save your ch
 
 Need help? Contact [Datadog support][1].
 
-[1]: https://docs.datadoghq.com/help/
-
+[1]: https://docs.datadoghq.com/ja/help/

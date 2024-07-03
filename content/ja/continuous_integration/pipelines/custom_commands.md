@@ -1,11 +1,11 @@
 ---
-title: Adding Custom Commands to Pipeline Traces
 aliases:
-  - /continuous_integration/setup_pipelines/custom_commands
+- /ja/continuous_integration/setup_pipelines/custom_commands
 further_reading:
-  - link: /continuous_integration/pipelines/custom_commands/
-    tag: Documentation
-    text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines/custom_commands/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+title: Adding Custom Commands to Pipeline Traces
 ---
 
 {{< site-region region="gov" >}}

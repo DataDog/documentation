@@ -1,7 +1,7 @@
 ---
-title: Exclusion
 aliases:
-    - /graphing/functions/exclusion/
+- /ja/graphing/functions/exclusion/
+title: Exclusion
 ---
 
 ## null を除外

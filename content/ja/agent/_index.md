@@ -1,36 +1,38 @@
 ---
-title: Agent
-description: Agent をインストールして、データ収集のために構成する
-further_reading:
-- link: "/logs/"
-  tag: "Documentation"
-  text: "ログの収集"
-- link: "/infrastructure/process/"
-  tag: "Documentation"
-  text: "プロセスの収集"
-- link: "/tracing/"
-  tag: "Documentation"
-  text: "トレースの収集"
-- link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
-  tag: "Documentation"
-  text: "クラウドインスタンスに Agent をインストールするのはなぜですか？"
-- link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
-  tag: "ブログ"
-  text: "Agent は難しくない"
 aliases:
-  - /agent/faq/agent-check-directory-structure
-  - /agent/faq/install-core-extra
-  - /logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
-  - /agent/faq/the-datadog-agent-for-logs-or-traces-only
+- /ja/agent/faq/agent-check-directory-structure
+- /ja/agent/faq/install-core-extra
+- /ja/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
+- /ja/agent/faq/the-datadog-agent-for-logs-or-traces-only
 cascade:
 - _target:
     path: /agent/basic_agent_usage/chef.md
-  tags: ['uninstall']
+  tags:
+  - uninstall
 - _target:
     path: /infrastructure/**/*
   algolia:
-    tags: ['agent']
     rank: 80
+    tags:
+    - agent
+description: Agent をインストールして、データ収集のために構成する
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: Documentation
+  text: クラウドインスタンスに Agent をインストールするのはなぜですか？
+- link: https://www.datadoghq.com/blog/dont-fear-the-agent/
+  tag: ブログ
+  text: Agent は難しくない
+title: Agent
 ---
 
 <div class="alert alert-info">

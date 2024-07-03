@@ -1,60 +1,60 @@
 ---
-"app_id": "ping"
-"app_uuid": "841c9313-628f-4861-ad0b-2d12c37ee571"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": network.ping.response_time
-      "metadata_path": metadata.csv
-      "prefix": network.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10200"
-    "source_type_name": Ping
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": jim.stanton@datadoghq.com
-  "support_email": jim.stanton@datadoghq.com
-"categories":
+app_id: ping
+app_uuid: 841c9313-628f-4861-ad0b-2d12c37ee571
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: network.ping.response_time
+      metadata_path: metadata.csv
+      prefix: network.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10200
+    source_type_name: Ping
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: jim.stanton@datadoghq.com
+  support_email: jim.stanton@datadoghq.com
+categories:
 - developer tools
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/ping/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ping"
-"integration_id": "ping"
-"integration_title": "Ping"
-"integration_version": "1.0.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ping"
-"public_title": "Ping"
-"short_description": "Monitor connectivity to remote hosts."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ping
+integration_id: ping
+integration_title: Ping
+integration_version: 1.0.2
+is_public: true
+manifest_version: 2.0.0
+name: ping
+public_title: Ping
+short_description: Monitor connectivity to remote hosts.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor connectivity to remote hosts.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Ping
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor connectivity to remote hosts.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Ping
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -145,12 +145,11 @@ Need help? Contact [Datadog support][10].
 
 [1]: https://en.wikipedia.org/wiki/Ping_%28networking_utility%29
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [8]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/ping/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

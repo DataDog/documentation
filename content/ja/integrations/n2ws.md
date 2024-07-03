@@ -1,64 +1,65 @@
 ---
-"app_id": "n2ws"
-"app_uuid": "6c0176c4-b878-43e0-a5a8-d280b0fa123e"
-"assets":
-  "dashboards":
-    "N2WSBackup&Recovery-EntitiesSpecificDashboard": assets/dashboards/N2WSBackup&Recovery-EntityTypesDetails.json
-    "N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0": assets/dashboards/N2WSBackup&Recoveryv4.1-EntityTypesDetails.json
-    "N2WSBackup&Recovery-GraphicalVersion": assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(ColumnGraphs).json
-    "N2WSBackup&Recovery-GraphicalVersion-Areas": assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(AreasGraphs).json
-    "N2WSBackup&Recovery-GraphicalVersionV4.0": assets/dashboards/N2WSBackup&Recoveryv4.1-BackupSuccessRates(ColumnGraphs).json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cpm_metric.dashboard_activity.backup_success_num
-      "metadata_path": metadata.csv
-      "prefix": cpm_metric.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10129"
-    "source_type_name": N2WS Backup & Recovery
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": N2WS
-  "sales_email": eliad.eini@n2ws.com
-  "support_email": eliad.eini@n2ws.com
-"categories":
+app_id: n2ws
+app_uuid: 6c0176c4-b878-43e0-a5a8-d280b0fa123e
+assets:
+  dashboards:
+    N2WSBackup&Recovery-EntitiesSpecificDashboard: assets/dashboards/N2WSBackup&Recovery-EntityTypesDetails.json
+    N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-EntityTypesDetails.json
+    N2WSBackup&Recovery-GraphicalVersion: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(ColumnGraphs).json
+    N2WSBackup&Recovery-GraphicalVersion-Areas: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(AreasGraphs).json
+    N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-BackupSuccessRates(ColumnGraphs).json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: cpm_metric.dashboard_activity.backup_success_num
+      metadata_path: metadata.csv
+      prefix: cpm_metric.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10129
+    source_type_name: N2WS Backup & Recovery
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: N2WS
+  sales_email: eliad.eini@n2ws.com
+  support_email: eliad.eini@n2ws.com
+categories:
 - cloud
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "n2ws"
-"integration_id": "n2ws"
-"integration_title": "N2WS"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "n2ws"
-"public_title": "N2WS"
-"short_description": "View summary data from all the connected N2WS Backup & Recovery hosts"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: n2ws
+integration_id: n2ws
+integration_title: N2WS
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: n2ws
+public_title: N2WS
+short_description: View summary data from all the connected N2WS Backup & Recovery
+  hosts
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Cloud"
-  "configuration": "README.md#Setup"
-  "description": View summary data from all the connected N2WS Backup & Recovery hosts
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": N2WS
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  configuration: README.md#Setup
+  description: View summary data from all the connected N2WS Backup & Recovery hosts
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: N2WS
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -147,5 +148,4 @@ The N2WS Backup & Recovery integration does not include any service checks.
 [5]: https://github.com/DataDog/integrations-extras/blob/master/n2ws/metadata.csv
 [6]: https://n2ws.com/support/documentation
 [7]: https://n2ws.com/support
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

@@ -1,51 +1,51 @@
 ---
-"app_id": "wmi"
-"app_uuid": "ddd1578f-d511-4d57-b5dd-33c0ea7c391e"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "115"
-    "source_type_name": "WMI"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "os & system"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "wmi_check"
-"integration_id": "wmi"
-"integration_title": "WMI Check (legacy)"
-"integration_version": "1.18.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "wmi_check"
-"public_title": "WMI Check (legacy)"
-"short_description": "Collect and graph any WMI metrics."
-"supported_os":
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::OS & System"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": "Collect and graph any WMI metrics."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "WMI Check (legacy)"
+app_id: wmi
+app_uuid: ddd1578f-d511-4d57-b5dd-33c0ea7c391e
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 115
+    source_type_name: WMI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- os & system
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: wmi_check
+integration_id: wmi
+integration_title: WMI Check (legacy)
+integration_version: 1.18.0
+is_public: true
+manifest_version: 2.0.0
+name: wmi_check
+public_title: WMI Check (legacy)
+short_description: Collect and graph any WMI metrics.
+supported_os:
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::OS & System
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Collect and graph any WMI metrics.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: WMI Check (legacy)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -245,16 +245,15 @@ The WMI check does not include any service checks.
 Need help? Contact [Datadog support][13].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/wmi_check/images/wmimetric.png
-[2]: https://docs.datadoghq.com/integrations/windows_performance_counters/
+[2]: https://docs.datadoghq.com/ja/integrations/windows_performance_counters/
 [3]: https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.performancecounter
 [4]: https://github.com/vinaypamnani/wmie2/releases
 [5]: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-wmiobject
-[6]: https://docs.datadoghq.com/integrations/guide/retrieving-wmi-metrics/
+[6]: https://docs.datadoghq.com/ja/integrations/guide/retrieving-wmi-metrics/
 [7]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx
 [8]: https://technet.microsoft.com/en-us/library/Hh921475.aspx
 [9]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://docs.datadoghq.com/developers/metrics/custom_metrics/
-[12]: https://docs.datadoghq.com/account_management/billing/custom_metrics/
-[13]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[12]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
+[13]: https://docs.datadoghq.com/ja/help/

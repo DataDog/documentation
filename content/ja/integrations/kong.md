@@ -1,71 +1,71 @@
 ---
-"app_id": "kong"
-"app_uuid": "41e7a8cb-07b6-46cc-a087-53e87736b5c7"
-"assets":
-  "dashboards":
-    "Kong API": "assets/dashboards/kong_api.json"
-    "Kong Overview": "assets/dashboards/kong_overview.json"
-    "Kong Overview OpenMetrics": "assets/dashboards/kong_overview_openmetrics.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "kong.total_requests"
-      "metadata_path": "metadata.csv"
-      "prefix": "kong."
-    "process_signatures":
-    - "kong start"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "141"
-    "source_type_name": "Kong"
-  "saved_views":
-    "4xx_errors": "assets/saved_views/4xx_errors.json"
-    "5xx_errors": "assets/saved_views/5xx_errors.json"
-    "bot_errors": "assets/saved_views/bot_errors.json"
-    "kong_processes": "assets/saved_views/kong_processes.json"
-    "status_code_overview": "assets/saved_views/status_code_overview.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/kong/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kong"
-"integration_id": "kong"
-"integration_title": "Kong"
-"integration_version": "3.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "kong"
-"public_title": "Kong"
-"short_description": "合計リクエスト数、応答コード数、クライアント接続数などを追跡"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "合計リクエスト数、応答コード数、クライアント接続数などを追跡"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Kong"
+app_id: kong
+app_uuid: 41e7a8cb-07b6-46cc-a087-53e87736b5c7
+assets:
+  dashboards:
+    Kong API: assets/dashboards/kong_api.json
+    Kong Overview: assets/dashboards/kong_overview.json
+    Kong Overview OpenMetrics: assets/dashboards/kong_overview_openmetrics.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kong.total_requests
+      metadata_path: metadata.csv
+      prefix: kong.
+    process_signatures:
+    - kong start
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 141
+    source_type_name: Kong
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    kong_processes: assets/saved_views/kong_processes.json
+    status_code_overview: assets/saved_views/status_code_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/kong/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: kong
+integration_id: kong
+integration_title: Kong
+integration_version: 3.2.1
+is_public: true
+manifest_version: 2.0.0
+name: kong
+public_title: Kong
+short_description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kong
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -144,10 +144,10 @@ Kong アクセスログは NGINX によって生成されます。したがっ�
 3. [Agent を再起動します][4]。
 
 [1]: https://docs.konghq.com/hub/kong-inc/prometheus/
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/kong/datadog_checks/kong/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/integrations/openmetrics/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [6]: https://github.com/DataDog/integrations-core/blob/7.27.x/kong/datadog_checks/kong/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
@@ -176,8 +176,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | `<LOG_CONFIG>` | `{"source": "kong", "service": "<サービス名>"}` |
 
 [1]: https://docs.konghq.com/hub/kong-inc/prometheus/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -209,8 +209,8 @@ Kong チェックには、イベントは含まれません。
 
 
 [1]: https://docs.konghq.com/hub/kong-inc/datadog/
-[2]: https://docs.datadoghq.com/developers/dogstatsd/
+[2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://www.datadoghq.com/blog/monitor-kong-datadog
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/

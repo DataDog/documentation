@@ -1,14 +1,14 @@
 ---
-title: Amazon ECS Log Collection
 aliases:
-  - /agent/amazon_ecs/logs
+- /ja/agent/amazon_ecs/logs
 further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: Documentation
   text: Collect your application traces
-- link: "/agent/amazon_ecs/data_collected/#metrics"
+- link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentation
   text: Collect ECS metrics
+title: Amazon ECS Log Collection
 ---
 
 ## 概要
@@ -259,16 +259,16 @@ ECS によるボリューム管理の詳細については、[AWS Bind マウン
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: /ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [2]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[3]: /agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
-[5]: /agent/logs/advanced_log_collection?tab=docker
+[3]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[4]: /ja/getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
+[5]: /ja/agent/logs/advanced_log_collection?tab=docker
 [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bind-mounts.html
-[7]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
-[8]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
+[7]: /ja/containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
+[8]: /ja/containers/amazon_ecs/?tab=awscli#registering-the-task-definition
 [9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-[10]: /integrations/amazon_web_services/?tab=allpermissions#log-collection
-[11]: /containers/amazon_ecs/?tab=awscli#setup
-[12]: /containers/docker/log/?tab=dockerfile#log-integrations
-[13]: /integrations/ecs_fargate/?tab=webui#log-collection
+[10]: /ja/integrations/amazon_web_services/?tab=allpermissions#log-collection
+[11]: /ja/containers/amazon_ecs/?tab=awscli#setup
+[12]: /ja/containers/docker/log/?tab=dockerfile#log-integrations
+[13]: /ja/integrations/ecs_fargate/?tab=webui#log-collection

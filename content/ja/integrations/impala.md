@@ -1,68 +1,68 @@
 ---
-"app_id": "impala"
-"app_uuid": "faf33df8-b1e0-4529-a281-7e176b2365ec"
-"assets":
-  "dashboards":
-    "Impala - Catalog - Overview": assets/dashboards/impala_catalog_overview.json
-    "Impala - Daemon - Overview": assets/dashboards/impala_daemon_overview.json
-    "Impala - Overview": assets/dashboards/impala_overview.json
-    "Impala - Statestore - Overview": assets/dashboards/impala_statestore_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": impala.daemon.jvm.gc.count
-      "metadata_path": metadata.csv
-      "prefix": impala.
-    "process_signatures":
+app_id: impala
+app_uuid: faf33df8-b1e0-4529-a281-7e176b2365ec
+assets:
+  dashboards:
+    Impala - Catalog - Overview: assets/dashboards/impala_catalog_overview.json
+    Impala - Daemon - Overview: assets/dashboards/impala_daemon_overview.json
+    Impala - Overview: assets/dashboards/impala_overview.json
+    Impala - Statestore - Overview: assets/dashboards/impala_statestore_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: impala.daemon.jvm.gc.count
+      metadata_path: metadata.csv
+      prefix: impala.
+    process_signatures:
     - impalad
     - catalogd
     - statestored
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10301"
-    "source_type_name": Impala
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10301
+    source_type_name: Impala
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/impala/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "impala"
-"integration_id": "impala"
-"integration_title": "Impala"
-"integration_version": "2.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "impala"
-"public_title": "Impala"
-"short_description": "Monitor the health and performance of Apache Impala."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/impala/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: impala
+integration_id: impala
+integration_title: Impala
+integration_version: 2.2.1
+is_public: true
+manifest_version: 2.0.0
+name: impala
+public_title: Impala
+short_description: Monitor the health and performance of Apache Impala.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of Apache Impala.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Impala
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Monitor the health and performance of Apache Impala.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Impala
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -206,13 +206,12 @@ Impala インテグレーションは、Impala のサービスからログを収
 
 
 [1]: https://impala.apache.org
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/impala/datadog_checks/impala/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/impala/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/impala/assets/service_checks.json
 [9]: https://github.com/DataDog/integrations-core/blob/master/impala/datadog_checks/impala/data/conf.yaml.example#L632-L755
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

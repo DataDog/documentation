@@ -1,17 +1,17 @@
 ---
 categories:
-    - log collection
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md
 description: Gather your logs from your Stunnel proxy and send them to Datadog.
 has_logo: true
+integration_id: stunnel
 integration_title: Stunnel
 is_public: true
-custom_kind: インテグレーション
 name: Stunnel
 public_title: Datadog-Stunnel Integration
 short_description: Gather your logs from your Stunnel proxy and send them to Datadog.
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md"]
-integration_id: "stunnel"
 ---
 
 ## Overview
@@ -60,6 +60,6 @@ _Available for Agent versions >v6.0_
 [Run the Agent's `status` subcommand][4] and look for `stunnel` under the Checks section.
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
-[4]: /agent/guide/agent-commands/#agent-status-and-information
+[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[4]: /ja/agent/guide/agent-commands/#agent-status-and-information

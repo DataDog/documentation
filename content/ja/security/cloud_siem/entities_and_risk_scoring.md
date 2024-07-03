@@ -1,9 +1,10 @@
 ---
-title: Risk Based Entity Insights for AWS
 further_reading:
-    - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
-      tag: ブログ
-      text: Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and AWS Entity Analytics
+- link: https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/
+  tag: ブログ
+  text: Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and
+    AWS Entity Analytics
+title: Risk Based Entity Insights for AWS
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/risk-based-entity-insights" header="Join the Beta!">}}
@@ -62,7 +63,7 @@ The risk score is calculated from the characteristics of the entity's associated
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[2]: https://docs.datadoghq.com/security/cloud_security_management/setup
+[1]: /ja/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[2]: https://docs.datadoghq.com/ja/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
 [4]: https://app.datadoghq.com/security/entities

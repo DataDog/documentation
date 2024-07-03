@@ -1,21 +1,21 @@
 ---
-title: Network Performance Monitoring Setup
-description: Collect your Network Data with the Agent.
 aliases:
-    - /network_performance_monitoring/installation/
+- /ja/network_performance_monitoring/installation/
+description: Collect your Network Data with the Agent.
 further_reading:
-    - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-      tag: Blog
-      text: Network Performance Monitoring
-    - link: "https://www.datadoghq.com/blog/monitor-containers-with-npm/"
-      tag: Blog
-      text: Datadog NPM with containers and service-meshed networks
-    - link: /network_monitoring/devices
-      tag: Documentation
-      text: Network Device Monitoring
-    - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
-      tag: Blog
-      text: Datadog NPM now supports Consul networking
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Network Performance Monitoring
+- link: https://www.datadoghq.com/blog/monitor-containers-with-npm/
+  tag: Blog
+  text: Datadog NPM with containers and service-meshed networks
+- link: /network_monitoring/devices
+  tag: Documentation
+  text: Network Device Monitoring
+- link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
+  tag: Blog
+  text: Datadog NPM now supports Consul networking
+title: Network Performance Monitoring Setup
 ---
 
 Datadog の ネットワークパフォーマンスモニタリング (NPM) は Datadog 内のサービス、コンテナ、アベイラビリティゾーン、およびその他あらゆるタグ間のネットワークトラフィックを可視化することができます。これは次のような場合に役立ちます。
@@ -171,8 +171,8 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
 お使いのディストリビューション内にこれらのユーティリティが存在しない場合は、現在のディストリビューションで利用可能なユーティリティを使って同じ手順を実行してください。
 
 
-[1]: /infrastructure/process/?tab=linuxwindows#installation
-[2]: /agent/configuration/agent-commands/#restart-the-agent
+[1]: /ja/infrastructure/process/?tab=linuxwindows#installation
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -204,8 +204,8 @@ Windows ホストのネットワークパフォーマンスモニタリングを
 **注**: ネットワークパフォーマンスモニタリングは、Windows ホストのみを監視し、Windows コンテナは監視しません。
 
 
-[1]: /agent/basic_agent_usage/windows/?tab=commandline
-[2]: /agent/configuration/agent-commands/#restart-the-agent
+[1]: /ja/agent/basic_agent_usage/windows/?tab=commandline
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -359,7 +359,7 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /agent/kubernetes/
+[4]: /ja/agent/kubernetes/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -445,7 +445,7 @@ services:
 To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
 
 
-[1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
+[1]: /ja/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -474,9 +474,9 @@ network_config:   # use system_probe_config for Agent versions older than 7.24.1
 
 ```
 
-[101]: /integrations/azure
-[102]: /integrations/amazon_web_services/#resource-collection
-[103]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+[101]: /ja/integrations/azure
+[102]: /ja/integrations/amazon_web_services/#resource-collection
+[103]: /ja/network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
@@ -484,14 +484,14 @@ network_config:   # use system_probe_config for Agent versions older than 7.24.1
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/network_monitoring/dns/#setup
+[2]: https://docs.datadoghq.com/ja/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[4]: /network_monitoring/dns/
-[5]: https://docs.datadoghq.com/agent/docker/
-[6]: https://docs.datadoghq.com/agent/kubernetes/
-[7]: https://docs.datadoghq.com/agent/amazon_ecs
-[8]: https://docs.datadoghq.com/integrations/istio/
-[9]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
+[4]: /ja/network_monitoring/dns/
+[5]: https://docs.datadoghq.com/ja/agent/docker/
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/
+[7]: https://docs.datadoghq.com/ja/agent/amazon_ecs
+[8]: https://docs.datadoghq.com/ja/integrations/istio/
+[9]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
 [10]: https://www.datadoghq.com/blog/istio-datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [12]: https://github.com/DataDog/chef-datadog

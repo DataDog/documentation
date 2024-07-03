@@ -1,6 +1,5 @@
 ---
 title: Configuring the Oracle Integration on Agent 7.50.1+
-kind: guide
 ---
 
 The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.0`, and can be configured for Agent `7.50.1` and above. This guide describes how to properly configure the new Oracle check.
@@ -21,14 +20,14 @@ The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.
 
 The configuration in the subdirectory `oracle.d` remains the same.
 
-**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
+Oracle Real Application Cluster (RAC) を使用する場合は、RAC ノードごとに Agent を構成する必要があります。Agent は `V$` ビューに問い合わせることで、各ノードから個別に情報を収集します。さらに、インターコネクトトラフィックの発生を避けるために、`GV$` ビューにはクエリしません。
 
 The new Oracle check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for your hosting type prior to upgrading the Agent:
 
 {{< tabs >}}
-{{% tab "Multi-tenant" %}}
+{{% tab "マルチテナント" %}}
 
-Log on as `sysdba`, and grant the following permissions:
+`sysdba` としてログオンし、以下の権限を付与します。
 
 ```SQL
 grant create session to c##datadog ;
@@ -201,7 +200,7 @@ The new Oracle check can be activated as of the Agent release `7.50.1`.
 
 The configuration subdirectory for the Agent releases between `7.50.1` and `7.52.1` is `oracle-dbm.d`.
 
-**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
+Oracle Real Application Cluster (RAC) を使用する場合は、RAC ノードごとに Agent を構成する必要があります。Agent は `V$` ビューに問い合わせることで、各ノードから個別に情報を収集します。さらに、インターコネクトトラフィックの発生を避けるために、`GV$` ビューにはクエリしません。
 
 1. Copy the configuration file from the subdirectory `oracle.d` to `oracle-dbm.d`, for example:
 
@@ -221,9 +220,8 @@ mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 
 4. Grant privileges to the Datadog database account for your hosting type, as described in the [configuration steps for Agent v7.53.0+](#agent-v7530).
 
-5. Restart the Agent.
+5. Agent を再起動します。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
 [2]: https://github.com/DataDog/datadog-agent/releases
-[3]: https://docs.datadoghq.com/integrations/oracle
-
+[3]: https://docs.datadoghq.com/ja/integrations/oracle

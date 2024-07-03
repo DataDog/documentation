@@ -1,10 +1,10 @@
 ---
-title: Group RUM Events
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Search for your events
+kind: documentation
+title: Group RUM Events
 ---
 
 ## Overview
@@ -39,7 +39,7 @@ The **Group into fields** aggregation supports one dimension for the [Top list][
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/visualize#top-list
-[2]: /real_user_monitoring/explorer/visualize#timeseries
-[3]: /real_user_monitoring/explorer/visualize#lists
-[4]: /real_user_monitoring/explorer/visualize#nested-tables
+[1]: /ja/real_user_monitoring/explorer/visualize#top-list
+[2]: /ja/real_user_monitoring/explorer/visualize#timeseries
+[3]: /ja/real_user_monitoring/explorer/visualize#lists
+[4]: /ja/real_user_monitoring/explorer/visualize#nested-tables

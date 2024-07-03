@@ -1,54 +1,54 @@
 ---
-"app_id": "winkmem"
-"app_uuid": "70d34855-e504-4716-be0a-cc9d7d82e5ab"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": winkmem.paged_pool_bytes
-      "metadata_path": metadata.csv
-      "prefix": winkmem.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10254"
-    "source_type_name": Windows Kernel Memory
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: winkmem
+app_uuid: 70d34855-e504-4716-be0a-cc9d7d82e5ab
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: winkmem.paged_pool_bytes
+      metadata_path: metadata.csv
+      prefix: winkmem.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10254
+    source_type_name: Windows Kernel Memory
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - os & system
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/winkmem/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "winkmem"
-"integration_id": "winkmem"
-"integration_title": "Windows Kernel Memory"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "winkmem"
-"public_title": "Windows Kernel Memory"
-"short_description": "Monitor your Windows kernel memory allocation."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/winkmem/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: winkmem
+integration_id: winkmem
+integration_title: Windows Kernel Memory
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: winkmem
+public_title: Windows Kernel Memory
+short_description: Monitor your Windows kernel memory allocation.
+supported_os:
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Windows"
-  - "Category::OS & System"
-  "configuration": "README.md#Setup"
-  "description": Monitor your Windows kernel memory allocation.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Windows Kernel Memory
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Monitor your Windows kernel memory allocation.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Windows Kernel Memory
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -95,9 +95,8 @@ The Windows Kernel Memory integration does not include any service checks.
 Need help? Contact [Datadog support][6].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/winkmem.d/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://github.com/DataDog/integrations-core/blob/master/winkmem/metadata.csv
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

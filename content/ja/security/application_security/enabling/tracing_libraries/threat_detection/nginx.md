@@ -1,23 +1,23 @@
 ---
-title: Enabling ASM for Nginx
-kind: ドキュメント
-code_lang: nginx
-type: multi-code-lang
-code_lang_weight: 50
 aliases:
-  - /security_platform/application_security/getting_started/nginx
-  - /security/application_security/getting_started/nginx
-  - /security/application_security/enabling/nginx
+- /ja/security_platform/application_security/getting_started/nginx
+- /ja/security/application_security/getting_started/nginx
+- /ja/security/application_security/enabling/nginx
+code_lang: nginx
+code_lang_weight: 50
 further_reading:
-    - link: "https://github.com/DataDog/nginx-datadog/"
-      tag: ソースコード
-      text: nginx integration's source code
-    - link: /security/default_rules/?category=cat-application-security
-      tag: ドキュメント
-      text: すぐに使える Application Security Management ルール
-    - link: /security/application_security/troubleshooting
-      tag: ドキュメント
-      text: Application Security Management のトラブルシューティング
+- link: https://github.com/DataDog/nginx-datadog/
+  tag: ソースコード
+  text: nginx integration's source code
+- link: /security/default_rules/?category=cat-application-security
+  tag: ドキュメント
+  text: すぐに使える Application Security Management ルール
+- link: /security/application_security/troubleshooting
+  tag: ドキュメント
+  text: Application Security Management のトラブルシューティング
+kind: ドキュメント
+title: Enabling ASM for Nginx
+type: multi-code-lang
 ---
 
 The Datadog nginx tracing module has experimental support for threat detection and blocking.

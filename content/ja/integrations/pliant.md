@@ -1,66 +1,66 @@
 ---
-"app_id": "pliant"
-"app_uuid": "28fb0874-e3be-4171-819d-142f1c9dd3cc"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": pliant.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10102"
-    "source_type_name": Pliant
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Pliant
-  "sales_email": hello@pliant.io
-  "support_email": hello@pliant.io
-"categories":
+app_id: pliant
+app_uuid: 28fb0874-e3be-4171-819d-142f1c9dd3cc
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: pliant.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10102
+    source_type_name: Pliant
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Pliant
+  sales_email: hello@pliant.io
+  support_email: hello@pliant.io
+categories:
 - automation
 - compliance
 - notifications
 - orchestration
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "pliant"
-"integration_id": "pliant"
-"integration_title": "Pliant"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "pliant"
-"public_title": "Pliant"
-"short_description": "IT Process Automation with Pliant.io"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: pliant
+integration_id: pliant
+integration_title: Pliant
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: pliant
+public_title: Pliant
+short_description: IT Process Automation with Pliant.io
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Compliance"
-  - "Category::Notifications"
-  - "Category::Orchestration"
-  - "Category::Provisioning"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": IT Process Automation with Pliant.io
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Pliant
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Compliance
+  - Category::Notifications
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: IT Process Automation with Pliant.io
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pliant
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -193,5 +193,4 @@ Need help? Contact [Datadog support][13].
 [10]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/pliant/images/webhook_Search.png
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/pliant/images/webhooksConfig3.png
 [12]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/pliant/images/webhookForm.png
-[13]: https://docs.datadoghq.com/help/
-
+[13]: https://docs.datadoghq.com/ja/help/

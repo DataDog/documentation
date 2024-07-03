@@ -1,16 +1,15 @@
 ---
-title: Upgrade the RUM Browser SDK
-kind: guide
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualize your RUM data in the Explorer
-- link: "https://www.datadoghq.com/blog/session-replay-datadog/"
+- link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: Blog
   text: Use Datadog Session Replay to view real-time user journeys
+title: Upgrade the RUM Browser SDK
 ---
 
-## Overview
+## 概要
 
 Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][26] for details on its features and capabilities.
 
@@ -25,7 +24,7 @@ V5 introduces the following changes and more:
 
 Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
 
-### General
+### 一般
 
 #### SDK initialization parameters
 
@@ -33,7 +32,7 @@ Take notice of the below breaking changes as you upgrade your SDK. Changes are g
 
 | Deprecated parameter name (v4 or earlier) | New parameter name (v5) |
 |-------------------------------------------|-------------------------|
-| proxyUrl | proxy |
+| proxyUrl | プロキシ |
 | sampleRate | sessionSampleRate |
 | allowedTracingOrigins | allowedTracingUrls |
 | tracingSampleRate | traceSampleRate |
@@ -64,7 +63,7 @@ V5 sends data to different intake domains than previous versions.
 
 **Action to take**: Update any [Content Security Policy (CSP)][18] `connect-src` entries to use the new domain.
 
-| Datadog site | Domain |
+| Datadog サイト | Domain |
 |--------------|--------|
 | US1 | `connect-src https://browser-intake-datadoghq.com` |
 | US3 | `connect-src https://browser-intake-us3-datadoghq.com` |
@@ -97,9 +96,9 @@ The implementation has not changed. If no value is returned, the event is not di
 
 **Action to take**: Ensure that `beforeSend` returns `true` to keep the event and `false` to discard it. This resolves related TypeScript compilation errors.
 
-### Session Replay
+### セッション リプレイ
 
-#### Session Replay masking
+#### セッションリプレイマスキング
 
 The default Session Replay masking setting `defaultPrivacyLevel` has been changed from `mask-user-input` to `mask`. This hides all data in Session Replay recordings by default, making recordings less sensitive to view. For more information, see [Session Replay Browser Privacy Options][20].
 
@@ -111,7 +110,7 @@ Sessions that are sampled for Session Replay using [`sessionReplaySampleRate`][2
 **Action to take**: If you want to continue using the old recording behavior and customize when your recording starts, set `startSessionReplayRecordingManually` to `true`.
 
 #### Only pay for Session Replay when the session captures a recording
-In previous SDK versions, sessions are determined to be Session Replay sessions through the sampling mechanism. In v5, sessions are only counted as Session Replay sessions if a recording is captured during the session. This makes it easier to track your Session Replay usage.
+以前のバージョンの SDK では、セッションはサンプリングメカニズムによってセッションリプレイセッションと判断されています。v5 では、セッション中に記録がキャプチャされた場合のみ、セッションはセッションリプレイセッションとしてカウントされます。これにより、セッションリプレイの使用量を追跡しやすくなりました。
 
 **No action needed**: This behavior automatically takes effect in v5.
 
@@ -126,7 +125,7 @@ In v5, the default `sessionReplaySampleRate` is 0 instead of 100. If you don't i
 
 To promote the support and usage of OpenTelemetry, the default propagator types have been changed to include `tracecontext` in addition to `datadog`.
 
-**Action to take**: If you are not already specifying the desired propagator on the `allowedTracingUrls` initialization parameter, configure your server Access-Control-Allow-Headers to also accept the `traceparent` header. For more information, see [connect RUM and Traces][25].
+**取るべきアクション**: まだ `allowedTracingUrls` の初期化パラメーターで希望するプロパゲータを指定していない場合は、サーバーの Access-Control-Allow-Headers を構成して `traceparent` ヘッダーも受け付けるようにしてください。詳細は [RUM とトレースの接続][25]を参照してください。
 
 ### Session plan field
 
@@ -204,37 +203,37 @@ When the SDK collects runtime errors or network, report, or console logs, it doe
 
 **Action to take**: If you relied on the main logger context to add context to non-logger logs, use global context instead.
 
-## From v3 to v4
+## v3〜v4
 
-Several breaking changes were made to the RUM and Logs Browser SDK with the v4 version.
+v4 では、RUM と Logs Browser SDK にいくつかの重大な変更が加えられました。
 
-### Changes
+### 変更
 
-#### Intake URLs
+#### 取込先 URL
 
-The URLs for where the RUM Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][1].
+RUM Browser SDK のデータ送信先 URL が変更になりました。[コンテンツセキュリティポリシーが最新である][1]ことを確認してください。
 
-#### Minimal Typescript version support
+#### 最小限の Typescript のバージョンサポート
 
-The RUM Browser SDK v4 is not compatible with TypeScript earlier than v3.8.2. If you use TypeScript, ensure that the version is at least v3.8.2.
+RUM Browser SDK v4 は、v3.8.2 より前の TypeScript と互換性がありません。TypeScript を使用する場合は、バージョンが v3.8.2 以上であることを確認してください。
 
-#### Tags syntax
+#### タグの構文
 
-The `version`, `env`, and `service` initialization parameters are sent as tags to Datadog. The RUM Browser SDK slightly sanitizes them to ensure that they don't generate multiple tags, and prints a warning if those values don't meet the tag requirements syntax.
+`version`、`env`、`service`の初期化パラメーターは、Datadog にタグとして送信されます。RUM Browser SDK は、複数のタグが生成されないように、それらをわずかにサニタイズし、それらの値がタグの要件構文に適合しない場合は警告を表示します。
 
-#### Stricter initialization parameters typing
+#### 初期化パラメーターの型の厳格化
 
-TypeScript types representing initialization parameters are stricter and may reject previously accepted unsupported parameters. If you get type-checking errors, ensure you are providing supported initialization parameters.
+TypeScript の初期化パラメーターを表す型はより厳しくなっており、以前受け取ったサポートされていないパラメーターは拒否されることがあります。もし型チェックのエラーが発生した場合は、サポートされている初期化パラメーターを指定していることを確認してください。
 
-#### Privacy options precedence
+#### プライバシーオプションの優先順位
 
-When multiple privacy options are specified on the same element, Datadog applies the most restrictive option to avoid unexpectedly leaking sensitive data. For example, if both `dd-privacy-allow` and `dd-privacy-hidden` classes are specified on the same element, it is hidden instead of allowed.
+複数のプライバシーオプションが同じ要素に指定されている場合、Datadog は最も制限の厳しいオプションを適用し、機密データの予期せぬ漏えいを回避します。例えば、同じ要素に `dd-privacy-allow` と `dd-privacy-hidden` の両方のクラスが指定されている場合、allow の代わりに hidden が適用されます。
 
-#### Action names computation
+#### アクション名計算
 
-When computing action names, the RUM Browser SDK removes text of child elements with the `data-dd-action-name` attribute from inner text.
+RUM Browser SDK は、アクション名を計算する際に、`data-dd-action-name` 属性を持つ子要素のテキストを内側のテキストから削除しています。
 
-For example, for the following `container` element, where previously the computed action name would be `Container sensitive data`, in v4, the computed action name is `Container`:
+例えば、次の `container` 要素の場合、以前は計算されるアクション名は `Container sensitive data` でしたが、v4 では計算されるアクション名は `Container` になります。
 ```html
 <div id="container">
   Container
@@ -242,35 +241,35 @@ For example, for the following `container` element, where previously the compute
 </div>
 ```
 
-### Removals
+### 削除
 
-#### XHR `_datadog_xhr` field
+#### XHR `_datadog_xhr` フィールド
 
-The RUM Browser SDK previously used a `_datadog_xhr` property on `XMLHttpRequest` objects representing its internal state. This property has been removed without replacement as it wasn't intended to be used externally.
+RUM Browser SDK は、以前は `XMLHttpRequest` オブジェクトの内部状態を表す `_datadog_xhr` プロパティを使用していました。このプロパティは、外部で使用されることを想定していなかったため、代替することなく削除されました。
 
-#### `proxyHost` initialization parameter
+#### `proxyHost` 初期化パラメーター
 
-The `proxyHost` initialization parameter has been removed. Use the `proxyUrl` initialization parameter instead.
+初期化パラメーター `proxyHost` は削除されました。代わりに初期化パラメーター `proxyUrl` を使用してください。
 
-#### Privacy options support
+#### プライバシーオプション対応
 
 The privacy options `input-ignored` and `input-masked` are no longer valid. Instead, use the `mask-user-input` privacy option.
 
-Specifically, replace:
+具体的には、以下のように置き換えてください。
 
-* `dd-privacy-input-ignored` and `dd-privacy-input-masked` class names with `dd-privacy-mask-user-input`
-* `dd-privacy="input-masked"` and `dd-privacy="input-ignored"` attribute values with `dd-privacy="mask-user-input"`
+* `dd-privacy-input-ignored` および `dd-privacy-input-masked` クラス名を `dd-privacy-mask-user-input` に置き換えます。
+* `dd-privacy="input-masked"` および `dd-privacy="input-ignored"` 属性値を `dd-privacy="mask-user-input"` に置き換えます。
 
-## From v2 to v3
+## v2〜v3
 
-The Browser SDK v3 introduces [Session Replay][2]. With this major version update, several breaking changes were made to the RUM and Logs Browser SDKs.
+Browser SDK v3 に [Session Replay][2] が新登場。この大きなバージョンアップデートにより、RUM および Logs Browser SDK が大きく変わります。
 
-### Changes
-#### RUM errors
+### 変更
+#### RUM エラー
 
-The RUM Browser SDK no longer issues [RUM errors][3] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][4], which contain the status code attribute.
+RUM Browser SDK では、失敗した XHR および Fetch 呼び出しに対する [RUM エラー][3]が作成されなくなります。このような失敗したネットワークリクエストは、依然として [RUM リソース][4]として収集され、ステータスコード属性を含みます。
 
-To continue seeing the failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][5], checking the `status_code` property, and manually sending an error with the [addError API][6].
+引き続き、失敗したネットワークリクエストを RUM エラーとして表示するには、Datadog では [beforeSend API][5] を使用したリソースの傍受、`status_code` プロパティのチェック、そして [addError API][6] を使用したエラーの手動送信をおすすめします。
 
 ```javascript
 beforeSend: (event) => {
@@ -280,60 +279,60 @@ beforeSend: (event) => {
 }
 ```
 
-#### RUM error source attribute
+#### RUM エラーソース属性
 
-The RUM Browser SDK no longer lets you specify the source of an error collected with the [addError API][6]. All errors collected with this API have their source attribute set to `custom`. The [addError API][6] accepts a context object as its second parameter, which should be used to pass extra context about the error.
+RUM Browser SDK では、[addError API][6] で収集されたエラーのソースの特定ができなくなります。この API で収集されたすべてのエラーは、ソース属性が `custom` に設定されます。[addError API][6] は、コンテキストオブジェクトをその 2 番目のパラメーターとして受容し、エラーに関する追加コンテキストを渡すために使用されます。
 
-### Removals
+### 削除
 #### RUM API
 
-| Old API       | New API   |
+| 旧 API       | 新 API   |
 | ------------- | --------- |
 | addUserAction | addAction |
 
-#### Initialization options
+#### 初期化オプション
 
-| Old options        | New options |
+| 旧オプション        | 新オプション |
 | ------------------ | ----------- |
 | publicApiKey       | clientToken |
 | datacenter         | site        |
-| resourceSampleRate | NONE        |
+| resourceSampleRate | なし        |
 
-#### TypeScript types
+#### TypeScript タイプ
 
-| Old types                    | New types                    |
+| 旧タイプ                    | 新タイプ                    |
 | ---------------------------- | ---------------------------- |
 | RumUserConfiguration         | RumInitConfiguration         |
 | RumRecorderUserConfiguration | RumRecorderInitConfiguration |
 | LogsUserConfiguration        | LogsInitConfiguration        |
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/faq/content_security_policy
-[2]: /real_user_monitoring/session_replay
-[3]: /real_user_monitoring/browser/collecting_browser_errors/
-[4]: /real_user_monitoring/browser/monitoring_resource_performance/
-[5]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
-[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property
-[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#read-global-context
-[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#replace-global-context
-[12]: /api/latest/rum/
-[13]: /api/latest/rum/
-[14]: /api/latest/rum/
-[15]: /api/latest/rum/
-[16]: /api/latest/rum/
-[17]: /api/latest/rum/
-[18]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
+[1]: /ja/real_user_monitoring/faq/content_security_policy
+[2]: /ja/real_user_monitoring/session_replay
+[3]: /ja/real_user_monitoring/browser/collecting_browser_errors/
+[4]: /ja/real_user_monitoring/browser/monitoring_resource_performance/
+[5]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[6]: /ja/real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
+[7]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
+[8]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
+[9]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property
+[10]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#read-global-context
+[11]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#replace-global-context
+[12]: /ja/api/latest/rum/
+[13]: /ja/api/latest/rum/
+[14]: /ja/api/latest/rum/
+[15]: /ja/api/latest/rum/
+[16]: /ja/api/latest/rum/
+[17]: /ja/api/latest/rum/
+[18]: /ja/integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[20]: /real_user_monitoring/session_replay/browser/privacy_options/#configuration
-[21]: /real_user_monitoring/guide/sampling-browser-plans/#setup
-[22]: /real_user_monitoring/session_replay/browser/#usage
-[23]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[24]: /help/
-[26]: /real_user_monitoring/browser/
-[25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support
+[20]: /ja/real_user_monitoring/session_replay/browser/privacy_options/#configuration
+[21]: /ja/real_user_monitoring/guide/sampling-browser-plans/#setup
+[22]: /ja/real_user_monitoring/session_replay/browser/#usage
+[23]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[24]: /ja/help/
+[26]: /ja/real_user_monitoring/browser/
+[25]: /ja/real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support

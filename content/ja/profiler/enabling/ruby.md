@@ -1,23 +1,23 @@
 ---
-title: Enabling the Ruby Profiler
+aliases:
+- /ja/tracing/profiler/enabling/ruby/
 code_lang: ruby
-type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profile_visualizations
-      tag: Documentation
-      text: Learn more about available profile visualizations
-    - link: profiler/profiler_troubleshooting/ruby
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
-    - link: "https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/"
-      tag: Blog
-      text: Analyze Ruby code performance with Datadog Continuous Profiler
-aliases:
-  - /tracing/profiler/enabling/ruby/
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profile_visualizations
+  tag: Documentation
+  text: Learn more about available profile visualizations
+- link: profiler/profiler_troubleshooting/ruby
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+- link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
+  tag: Blog
+  text: Analyze Ruby code performance with Datadog Continuous Profiler
+title: Enabling the Ruby Profiler
+type: multi-code-lang
 ---
 
 プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
@@ -120,12 +120,12 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
+[1]: /ja/tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[4]: /integrations/guide/source-code-integration/?tab=ruby
+[4]: /ja/integrations/guide/source-code-integration/?tab=ruby
 [5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/profiler/
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
-[14]: /profiler/enabling/supported_versions/
+[6]: /ja/getting_started/profiler/
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/

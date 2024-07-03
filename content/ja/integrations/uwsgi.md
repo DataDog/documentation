@@ -1,24 +1,27 @@
 ---
-title: uWSGI
-name: uwsgi
-custom_kind: インテグレーション
-description: 'Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.'
-short_description: 'Collect logs to track requests per second, bytes served, request status, and more.'
 categories:
-  - log collection
-  - web
+- log collection
+- web
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md
+description: Collect uWSGI logs in order to track requests per second, bytes served,
+  request status, and more.
 doc_link: /integrations/uwsgi/
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md"]
+git_integration_title: uwsgi
 has_logo: true
+integration_id: uwsgi
 integration_title: uWSGI
 is_public: true
+name: uwsgi
 public_title: Integration Datadog-uWSGI
-git_integration_title: uwsgi
+short_description: Collect logs to track requests per second, bytes served, request
+  status, and more.
 supported_os:
 - linux
 - mac_os
 - windows
-integration_id: "uwsgi"
+title: uWSGI
 ---
 
 ## Overview
@@ -71,7 +74,7 @@ Need help? Contact [Datadog Support][6].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://uwsgi-docs.readthedocs.io/en/latest/Logging.html#logging-to-files
-[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[3]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#uwsgi-default-logging
 [5]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#apache-style-combined-request-logging
-[6]: /help/
+[6]: /ja/help/

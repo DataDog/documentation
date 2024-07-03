@@ -1,76 +1,76 @@
 ---
-"app_id": "upstash"
-"app_uuid": "fe1f17e3-11a4-4e44-b819-8781ebcc86f8"
-"assets":
-  "dashboards":
-    "Upstash-Kafka-Overview": assets/dashboards/upstash_kafka_overview.json
-    "Upstash-Overview": assets/dashboards/upstash_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: upstash
+app_uuid: fe1f17e3-11a4-4e44-b819-8781ebcc86f8
+assets:
+  dashboards:
+    Upstash-Kafka-Overview: assets/dashboards/upstash_kafka_overview.json
+    Upstash-Overview: assets/dashboards/upstash_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - upstash.metadata.metric_publish
-      "metadata_path": metadata.csv
-      "prefix": upstash.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10412"
-    "source_type_name": Upstash
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://upstash.com"
-  "name": Upstash
-  "sales_email": sales@upstash.com
-  "support_email": support@upstash.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: upstash.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10412
+    source_type_name: Upstash
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://upstash.com
+  name: Upstash
+  sales_email: sales@upstash.com
+  support_email: support@upstash.com
+categories:
 - cloud
 - ai/ml
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/upstash/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "upstash"
-"integration_id": "upstash"
-"integration_title": "Upstash"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "upstash"
-"public_title": "Upstash"
-"short_description": "Visualize metrics for databases and kafka clusters from Upstash"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/upstash/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: upstash
+integration_id: upstash
+integration_title: Upstash
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: upstash
+public_title: Upstash
+short_description: Visualize metrics for databases and kafka clusters from Upstash
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Integration"
-  - "Category::Cloud"
-  - "Category::AI/ML"
-  - "Category::Data Stores"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Visualize metrics for databases and kafka clusters from Upstash
-  "media":
-  - "caption": Upstash Database Metrics
-    "image_url": images/upstash-dashboard.png
-    "media_type": image
-  - "caption": Upstash Kafka Metrics
-    "image_url": images/upstash-kafka-overview-dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Upstash
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  - Category::Cloud
+  - Category::AI/ML
+  - Category::Data Stores
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Visualize metrics for databases and kafka clusters from Upstash
+  media:
+  - caption: Upstash Database Metrics
+    image_url: images/upstash-dashboard.png
+    media_type: image
+  - caption: Upstash Kafka Metrics
+    image_url: images/upstash-kafka-overview-dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Upstash
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -130,4 +130,3 @@ Need help? Contact [Upstash support][6].
 [4]: https://app.datadoghq.com/organization-settings/api-keys?filter=Upstash
 [5]: https://github.com/DataDog/integrations-extras/blob/master/upstash/metadata.csv
 [6]: mailto:support@upstash.com
-

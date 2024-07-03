@@ -1,7 +1,4 @@
 ---
-title: Custom Costs
-is_beta: true
-private: true
 disable_toc: false
 further_reading:
 - link: /cloud_cost_management/
@@ -16,6 +13,9 @@ further_reading:
 - link: /cloud_cost_management/google_cloud
   tag: Documentation
   text: Gain insights into your Google Cloud bill
+is_beta: true
+private: true
+title: Custom Costs
 ---
 
 {{< site-region region="gov" >}}
@@ -298,13 +298,13 @@ Cost data appears after 24 hours.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/cloud_cost_management
+[1]: https://docs.datadoghq.com/ja/cloud_cost_management
 [2]: https://focus.finops.org/#specification
 [3]: https://app.datadoghq.com/cost/settings/cost-files
 [4]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
 [5]: https://en.wiktionary.org/wiki/Pascal_case
 [6]: https://app.datadoghq.com/cost/analytics
 [7]: https://app.datadoghq.com/cost/tags?cloud=custom
-[8]: /dashboards
-[9]: /notebooks
-[10]: /monitors/types/cloud_cost/
+[8]: /ja/dashboards
+[9]: /ja/notebooks
+[10]: /ja/monitors/types/cloud_cost/

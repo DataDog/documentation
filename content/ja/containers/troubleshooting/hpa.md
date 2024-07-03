@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting Custom Metrics Server and HPA
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
   text: Introducing the Datadog Cluster Agent
 - link: /containers/guide/cluster_agent_autoscaling_metrics
   tag: Documentation
   text: Autoscale your Kubernetes workloads with any Datadog metric
+title: Troubleshooting Custom Metrics Server and HPA
 ---
 
 ## Cluster Agent のステータスと flare
@@ -122,5 +122,5 @@ As the value of `7` was divided by the replicas `2` to give that `3.5` average. 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/guide/cluster_agent_autoscaling_metrics
-[2]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm#value-vs-averagevalue-for-the-target-metric
+[1]: /ja/containers/guide/cluster_agent_autoscaling_metrics
+[2]: /ja/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm#value-vs-averagevalue-for-the-target-metric

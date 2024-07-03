@@ -1,6 +1,6 @@
 ---
-title: Sensitive Data Redaction for Splunk Heavy and Universal Forwarders (TCP)
 disable_toc: false
+title: Sensitive Data Redaction for Splunk Heavy and Universal Forwarders (TCP)
 ---
 
 ## 概要

@@ -1,60 +1,60 @@
 ---
-"app_id": "apollo"
-"app_uuid": "b39f1239-b97f-4b3b-ab5a-7a888915eedd"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: apollo
+app_uuid: b39f1239-b97f-4b3b-ab5a-7a888915eedd
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - apollo.operations.count
       - apollo.engine.operations.count
-      "metadata_path": metadata.csv
-      "prefix": apollo.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10014"
-    "source_type_name": Apollo Engine
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Apollo
-  "sales_email": sachin@apollographql.com
-  "support_email": sachin@apollographql.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: apollo.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10014
+    source_type_name: Apollo Engine
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Apollo
+  sales_email: sachin@apollographql.com
+  support_email: sachin@apollographql.com
+categories:
 - caching
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "apollo"
-"integration_id": "apollo"
-"integration_title": "Apollo"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "apollo"
-"public_title": "Apollo"
-"short_description": "Monitor the performance of your GraphQL infrastructure"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: apollo
+integration_id: apollo
+integration_title: Apollo
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: apollo
+public_title: Apollo
+short_description: Monitor the performance of your GraphQL infrastructure
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor the performance of your GraphQL infrastructure
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Apollo
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor the performance of your GraphQL infrastructure
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Apollo
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -141,5 +141,4 @@ Need help? Contact [Datadog Support][9].
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png
 [7]: https://www.apollographql.com/docs/studio/datadog-integration/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/apollo/metadata.csv
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

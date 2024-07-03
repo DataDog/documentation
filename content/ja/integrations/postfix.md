@@ -1,64 +1,64 @@
 ---
-"app_id": "postfix"
-"app_uuid": "76293d0a-1cde-4f25-ae72-c3e6ef352273"
-"assets":
-  "dashboards":
-    "postfix": "assets/dashboards/postfix_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "postfix.queue.size"
-      "metadata_path": "metadata.csv"
-      "prefix": "postfix."
-    "process_signatures":
-    - "postfix start"
-    - "sendmail -bd"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "66"
-    "source_type_name": "Postfix"
-  "saved_views":
-    "postfix_processes": "assets/saved_views/postfix_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/postfix/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "postfix"
-"integration_id": "postfix"
-"integration_title": "Postfix"
-"integration_version": "1.14.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "postfix"
-"public_title": "Postfix"
-"short_description": "すべての Postfix キューのサイズを監視する。"
-"supported_os":
-- "linux"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "すべての Postfix キューのサイズを監視する。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Postfix"
+app_id: postfix
+app_uuid: 76293d0a-1cde-4f25-ae72-c3e6ef352273
+assets:
+  dashboards:
+    postfix: assets/dashboards/postfix_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: postfix.queue.size
+      metadata_path: metadata.csv
+      prefix: postfix.
+    process_signatures:
+    - postfix start
+    - sendmail -bd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 66
+    source_type_name: Postfix
+  saved_views:
+    postfix_processes: assets/saved_views/postfix_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: postfix
+integration_id: postfix
+integration_title: Postfix
+integration_version: 1.14.0
+is_public: true
+manifest_version: 2.0.0
+name: postfix
+public_title: Postfix
+short_description: すべての Postfix キューのサイズを監視する。
+supported_os:
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: すべての Postfix キューのサイズを監視する。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Postfix
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -245,12 +245,11 @@ Postfix チェックには、サービスのチェック機能は含まれませ
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postfix/images/postfixgraph.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/postfix/datadog_checks/postfix/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: http://www.postfix.org/postqueue.1.html
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/postfix/metadata.csv
-[9]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/help/
 [10]: https://www.datadoghq.com/blog/monitor-postfix-queues
-

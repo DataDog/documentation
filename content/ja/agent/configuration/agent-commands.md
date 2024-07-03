@@ -1,16 +1,17 @@
 ---
-title: Agent Commands
+algolia:
+  tags:
+  - agent status command
 aliases:
-    - /agent/faq/agent-status-and-information
-    - /agent/faq/start-stop-restart-the-datadog-agent
-    - /agent/faq/agent-commands
-    - /agent/guide/agent-commands
+- /ja/agent/faq/agent-status-and-information
+- /ja/agent/faq/start-stop-restart-the-datadog-agent
+- /ja/agent/faq/agent-commands
+- /ja/agent/guide/agent-commands
 further_reading:
 - link: /agent/troubleshooting/
   tag: Documentation
   text: Agent Troubleshooting
-algolia:
-  tags: [agent status command]
+title: Agent Commands
 ---
 
 <div class="alert alert-warning">
@@ -36,9 +37,9 @@ Datadog Agent を起動するためのコマンドを以下に示します。
 | ソース     | `sudo service datadog-agent start`                                 |
 | Windows    | [Windows Agent ドキュメントを参照してください][3]。                          |
 
-[1]: /agent/
-[2]: /agent/docker/
-[3]: /agent/basic_agent_usage/windows/
+[1]: /ja/agent/
+[2]: /ja/agent/docker/
+[3]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -51,7 +52,7 @@ Datadog Agent を起動するためのコマンドを以下に示します。
 | Windows  | [Windows Agent ドキュメントを参照してください][2]。 |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows/
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -72,8 +73,8 @@ Datadog Agent を停止するためのコマンドを以下に示します。
 | ソース     | `sudo service datadog-agent stop`                                                |
 | Windows    | [Windows Agent ドキュメントを参照してください][2]。                                        |
 
-[1]: /agent/
-[2]: /agent/basic_agent_usage/windows/
+[1]: /ja/agent/
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -86,7 +87,7 @@ Datadog Agent を停止するためのコマンドを以下に示します。
 | Windows  | [Windows Agent ドキュメントを参照してください][2]。 |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows/
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -106,9 +107,9 @@ Datadog Agent を再起動するためのコマンドを以下に示します。
 | ソース     | サポートされないプラットフォーム                                                           |
 | Windows    | [Windows Agent ドキュメントを参照してください][3]。                                        |
 
-[1]: /agent/
-[2]: /agent/docker/?tab=standard#setup
-[3]: /agent/basic_agent_usage/windows/
+[1]: /ja/agent/
+[2]: /ja/agent/docker/?tab=standard#setup
+[3]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -121,7 +122,7 @@ Datadog Agent を再起動するためのコマンドを以下に示します。
 | Windows  | [Windows Agent ドキュメントを参照してください][2]。 |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows/
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -145,8 +146,8 @@ Datadog Agent のステータスを表示するためのコマンドを以下に
 | Windows         | [Windows Agent ドキュメントを参照してください][2]。                                     |
 
 
-[1]: /agent/
-[2]: /agent/basic_agent_usage/windows/
+[1]: /ja/agent/
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -159,7 +160,7 @@ Datadog Agent のステータスを表示するためのコマンドを以下に
 | ソース          | `sudo ~/.datadog-agent/bin/agent status`                                 |
 | Windows         | [Windows Agent ドキュメントを参照してください][1]。                                |
 
-[1]: /agent/basic_agent_usage/windows/#status-and-information
+[1]: /ja/agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
 
@@ -201,8 +202,8 @@ Running Checks
     Average Execution Time : 0ms
 ```
 
-[1]: /agent/basic_agent_usage/#gui
-[2]: /agent/basic_agent_usage/windows/#status-and-information
+[1]: /ja/agent/basic_agent_usage/#gui
+[2]: /ja/agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -226,7 +227,7 @@ Checks
    - Collected 15 metrics, 0 events & 1 service check
 ```
 
-[1]: /agent/basic_agent_usage/windows/#status-and-information
+[1]: /ja/agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
 
@@ -276,8 +277,8 @@ Agent v6 のコマンドラインインターフェイスは、サブコマン�
 | `stopservice`     | サービスコントロールマネージャー内で Agent を停止します。Windows のみです。            |
 | `version`         | バージョン情報を出力します。                                                         |
 
-[1]: /agent/troubleshooting/config/
-[2]: /agent/troubleshooting/send_a_flare/
+[1]: /ja/agent/troubleshooting/config/
+[2]: /ja/agent/troubleshooting/send_a_flare/
 {{% /tab %}}
 {{< /tabs >}}
 

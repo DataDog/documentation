@@ -1,6 +1,6 @@
 ---
-title: interactive application security testing (IAST)
 core_product:
-  - security
+- security
+title: interactive application security testing (IAST)
 ---
 IAST is a security testing methodology that combines static and dynamic testing.

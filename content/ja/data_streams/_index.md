@@ -1,27 +1,29 @@
 ---
-title: Data Streams Monitoring
-further_reading:
-    - link: /integrations/kafka/
-      tag: Documentation
-      text: Kafka Integration
-    - link: /integrations/amazon_sqs/
-      tag: Documentation
-      text: Amazon SQS Integration
-    - link: /tracing/service_catalog/
-      tag: Documentation
-      text: Service Catalog
-    - link: "https://www.datadoghq.com/blog/data-streams-monitoring/"
-      tag: Blog
-      text: Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring
-    - link: "https://www.datadoghq.com/blog/data-streams-monitoring-apm-integration/"
-      tag: Blog
-      text: Troubleshoot streaming data pipelines directly from APM with Datadog Data Streams Monitoring
-    - link: "https://www.datadoghq.com/blog/data-streams-monitoring-sqs/"
-      tag: Blog
-      text: Monitor SQS with Data Streams Monitoring
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+further_reading:
+- link: /integrations/kafka/
+  tag: Documentation
+  text: Kafka Integration
+- link: /integrations/amazon_sqs/
+  tag: Documentation
+  text: Amazon SQS Integration
+- link: /tracing/service_catalog/
+  tag: Documentation
+  text: Service Catalog
+- link: https://www.datadoghq.com/blog/data-streams-monitoring/
+  tag: Blog
+  text: Track and improve the performance of streaming data pipelines with Datadog
+    Data Streams Monitoring
+- link: https://www.datadoghq.com/blog/data-streams-monitoring-apm-integration/
+  tag: Blog
+  text: Troubleshoot streaming data pipelines directly from APM with Datadog Data
+    Streams Monitoring
+- link: https://www.datadoghq.com/blog/data-streams-monitoring-sqs/
+  tag: Blog
+  text: Monitor SQS with Data Streams Monitoring
+title: Data Streams Monitoring
 ---
 
 
@@ -99,10 +101,10 @@ Datadog は、[統合サービスタグ付け][3]を通して、サービスを�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /data_streams/go#manual-instrumentation
-[2]: /tracing/service_catalog/
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /integrations/kafka/
-[5]: /integrations/amazon_sqs/
-[6]: /tracing/trace_collection/runtime_config/
+[1]: /ja/data_streams/go#manual-instrumentation
+[2]: /ja/tracing/service_catalog/
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: /ja/integrations/kafka/
+[5]: /ja/integrations/amazon_sqs/
+[6]: /ja/tracing/trace_collection/runtime_config/
 [7]: https://app.datadoghq.com/data-streams/measure

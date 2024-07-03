@@ -1,7 +1,6 @@
 ---
-title: Docker Prometheus and OpenMetrics metrics collection
 aliases:
-- /agent/docker/prometheus
+- /ja/agent/docker/prometheus
 further_reading:
 - link: /agent/docker/log/
   tag: Documentation
@@ -18,6 +17,7 @@ further_reading:
 - link: /agent/docker/tag/
   tag: Documentation
   text: Assign tags to all data emitted by a container
+title: Docker Prometheus and OpenMetrics metrics collection
 ---
 
 Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを併用して、コンテナ内で実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。
@@ -261,12 +261,12 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/openmetrics/
-[2]: /integrations/prometheus/
+[1]: /ja/integrations/openmetrics/
+[2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
-[6]: https://docs.datadoghq.com/agent/guide/template_variables/
+[5]: /ja/developers/custom_checks/prometheus/
+[6]: https://docs.datadoghq.com/ja/agent/guide/template_variables/
 [7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [8]: https://app.datadoghq.com/metric/summary
 [9]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

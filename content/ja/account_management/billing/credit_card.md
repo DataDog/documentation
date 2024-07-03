@@ -30,4 +30,4 @@ Datadog からクレジットカードを削除する場合は、まず**無料*
 
 [1]: https://app.datadoghq.com/account/billing
 [2]: mailto:success@datadoghq.com
-[3]: /help/
+[3]: /ja/help/

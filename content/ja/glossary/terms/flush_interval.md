@@ -1,10 +1,10 @@
 ---
-title: flush interval
 core_product:
-  - datadog agent
-  - モニター
+- datadog agent
+- モニター
 related_terms:
-  - variance
+- variance
+title: flush interval
 ---
 The Datadog Agent doesn’t make a separate request to Datadog’s servers for every single data point you send. 
 

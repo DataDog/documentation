@@ -1,7 +1,7 @@
 ---
-title: LLM Observability クイックスタート
 aliases:
-    - /tracing/llm_observability/quickstart
+- /ja/tracing/llm_observability/quickstart
+title: LLM Observability クイックスタート
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
@@ -77,14 +77,14 @@ LLM 呼び出しのトレースは、Datadog の LLM Observability の [Traces �
 もしアプリケーションがより精巧なプロンプトや、LLM を含む複雑なチェーンやワークフローで構成されている場合は、[インスツルメンテーションガイド][11]や [SDK ドキュメント][1]を使ってトレースすることができます。
 
 
-[1]: /llm_observability/sdk/
+[1]: /ja/llm_observability/sdk/
 [3]: https://app.datadoghq.com/llm/traces
 [4]: https://platform.openai.com/docs/quickstart/account-setup
 [5]: https://platform.openai.com/docs/quickstart/step-1-setting-up-python
 [6]: https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key
-[7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[8]: /llm_observability/api
-[9]: /llm_observability/sdk/#command-line-setup
-[10]: /llm_observability/auto_instrumentation
-[11]: /llm_observability/trace_an_llm_application
+[7]: /ja/account_management/api-app-keys/#add-an-api-key-or-client-token
+[8]: /ja/llm_observability/api
+[9]: /ja/llm_observability/sdk/#command-line-setup
+[10]: /ja/llm_observability/auto_instrumentation
+[11]: /ja/llm_observability/trace_an_llm_application
 [12]: https://github.com/DataDog/llm-observability

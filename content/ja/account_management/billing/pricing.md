@@ -1,9 +1,9 @@
 ---
-title: Pricing
 further_reading:
-- link: "https://www.datadoghq.com/pricing"
+- link: https://www.datadoghq.com/pricing
   tag: Pricing
   text: Datadog Pricing
+title: Pricing
 ---
 
 Datadog では、ニーズに合わせてさまざまな料金プランをご用意しています。詳細については[料金][1]ページをご確認ください。注文書に特に記載のない限り、Datadog の料金は、カレンダー月ごとの製品の使用状況に基づいて計算されます。最も一般的な価格単位を以下に記載しました。
@@ -89,11 +89,11 @@ Indexed Span のボリュームと Ingested Span のボリュームの両方に�
 アカウントの 1 時間ごとの料金または請求については、[セールス][8]または[カスタマーサクセス][9]マネージャーにお問い合わせください。
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /metrics/custom_metrics/
-[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[4]: /tracing/trace_pipeline/ingestion_controls/
-[5]: /tracing/trace_pipeline/trace_retention/
-[6]: /database_monitoring/data_collected/#normalized-queries
-[7]: /help/
+[2]: /ja/metrics/custom_metrics/
+[3]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /ja/tracing/trace_pipeline/ingestion_controls/
+[5]: /ja/tracing/trace_pipeline/trace_retention/
+[6]: /ja/database_monitoring/data_collected/#normalized-queries
+[7]: /ja/help/
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com

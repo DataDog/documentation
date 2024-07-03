@@ -1,19 +1,16 @@
 ---
-title: Tracing C++ Applications
-kind: documentation
 aliases:
-- /tracing/cpp/
-- /tracing/languages/cpp/
-- /agent/apm/cpp/
-- /tracing/setup/cpp
-- /tracing/setup_overview/cpp
-- /tracing/setup_overview/setup/cpp
-- /tracing/trace_collection/dd_libraries/cpp
+- /ja/tracing/cpp/
+- /ja/tracing/languages/cpp/
+- /ja/agent/apm/cpp/
+- /ja/tracing/setup/cpp
+- /ja/tracing/setup_overview/cpp
+- /ja/tracing/setup_overview/setup/cpp
+- /ja/tracing/trace_collection/dd_libraries/cpp
 code_lang: cpp
-type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-cpp"
+- link: https://github.com/DataDog/dd-trace-cpp
   tag: ソースコード
   text: Source code
 - link: /tracing/glossary/
@@ -22,6 +19,9 @@ further_reading:
 - link: /tracing/
   tag: ドキュメント
   text: Advanced Usage
+kind: documentation
+title: Tracing C++ Applications
+type: multi-code-lang
 ---
 
 <div class="alert alert-warning">
@@ -199,9 +199,9 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/proxy_setup/?tab=envoy
-[2]: /tracing/trace_collection/proxy_setup/?tab=nginx
-[3]: /tracing/trace_collection/compatibility/cpp/
+[1]: /ja/tracing/trace_collection/proxy_setup/?tab=envoy
+[2]: /ja/tracing/trace_collection/proxy_setup/?tab=nginx
+[3]: /ja/tracing/trace_collection/compatibility/cpp/
 [4]: https://app.datadoghq.com/apm/service-setup
-[5]: /tracing/trace_collection/library_config/cpp/
-[6]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[5]: /ja/tracing/trace_collection/library_config/cpp/
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

@@ -1,25 +1,25 @@
 ---
-title: Developers
-kind: documentation
-description: Learn how to develop an integration on Datadog.
 aliases:
-- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
-further_reading:
-- link: "/api/latest/"
-  tag: "Documentation"
-  text: "Learn about the Datadog API"
-- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
-  tag: "Best Practices"
-  text: "Create great integration dashboards"
-- link: "https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/"
-  tag: "Blog"
-  text: "DRUIDS, the design system that powers Datadog"
-- link: "https://www.datadoghq.com/blog/introducing-open-source-hub/"
-  tag: "Blog"
-  text: "Introducing the Datadog Open Source Hub"
+- /ja/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+description: Learn how to develop an integration on Datadog.
+further_reading:
+- link: /api/latest/
+  tag: Documentation
+  text: Learn about the Datadog API
+- link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
+  tag: Best Practices
+  text: Create great integration dashboards
+- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
+  tag: Blog
+  text: DRUIDS, the design system that powers Datadog
+- link: https://www.datadoghq.com/blog/introducing-open-source-hub/
+  tag: Blog
+  text: Introducing the Datadog Open Source Hub
+kind: documentation
+title: Developers
 ---
 
 ## Overview
@@ -121,16 +121,16 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /ja/help/
 [2]: https://www.datadoghq.com/partner/
-[3]: /developers/dogstatsd/
-[4]: /developers/custom_checks/write_agent_check/
-[5]: /developers/custom_checks/prometheus/
-[6]: /developers/integrations/
+[3]: /ja/developers/dogstatsd/
+[4]: /ja/developers/custom_checks/write_agent_check/
+[5]: /ja/developers/custom_checks/prometheus/
+[6]: /ja/developers/integrations/
 [7]: https://github.com/DataDog/integrations-extras
 [8]: https://www.datadoghq.com/pricing/
 [9]: https://github.com/DataDog/integrations-core
-[10]: /developers/integrations/marketplace_offering
-[11]: /developers/custom_checks/
-[12]: /developers/service_checks/
-[13]: /developers/integrations/agent_integration
+[10]: /ja/developers/integrations/marketplace_offering
+[11]: /ja/developers/custom_checks/
+[12]: /ja/developers/service_checks/
+[13]: /ja/developers/integrations/agent_integration

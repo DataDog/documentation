@@ -1,6 +1,4 @@
 ---
-title: Export Product Analytics Events and Graphs
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
@@ -14,6 +12,8 @@ further_reading:
 - link: /monitors
   tag: ドキュメント
   text: モニターについて
+kind: documentation
+title: Export Product Analytics Events and Graphs
 ---
 
 ## 概要

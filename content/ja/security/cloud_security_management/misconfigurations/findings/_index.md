@@ -1,11 +1,9 @@
 ---
-title: Explore Misconfigurations
-kind: documentation
 aliases:
-  - /security_platform/findings
-  - /security_platform/cspm/findings
-  - /security/cspm/findings
-  - /security/misconfigurations/findings
+- /ja/security_platform/findings
+- /ja/security_platform/cspm/findings
+- /ja/security/cspm/findings
+- /ja/security/misconfigurations/findings
 further_reading:
 - link: security/default_rules
   tag: Documentation
@@ -13,6 +11,8 @@ further_reading:
 - link: security/cspm/frameworks_and_benchmarks
   tag: Documentation
   text: Learn about frameworks and industry benchmarks
+kind: documentation
+title: Explore Misconfigurations
 ---
 
 The Cloud Security Management Misconfigurations (CSM Misconfigurations) [Explorer][1] allows you to:
@@ -48,6 +48,6 @@ Group by **Resources** on the Security Findings Explorer and select a resource t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
-[2]: /security/cloud_siem/
-[3]: /security/threats/
-[4]: /security/default_rules/cis-aws-1.5.0-2.1.5/
+[2]: /ja/security/cloud_siem/
+[3]: /ja/security/threats/
+[4]: /ja/security/default_rules/cis-aws-1.5.0-2.1.5/

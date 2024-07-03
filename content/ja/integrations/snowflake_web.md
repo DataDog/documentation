@@ -1,82 +1,84 @@
 ---
-"app_id": "snowflake-web"
-"app_uuid": "49ad5ddd-6cc2-4aa0-bd81-3a5c7186657f"
-"assets":
-  "dashboards":
-    "Snowflake-Event-Tables-Overview": assets/dashboards/Snowflake-Event-Tables-Overview_dashboard.json
-    "Snowflake-Overview-API-Based": assets/dashboards/Snowflake-Overview_dashboard.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: snowflake-web
+app_uuid: 49ad5ddd-6cc2-4aa0-bd81-3a5c7186657f
+assets:
+  dashboards:
+    Snowflake-Event-Tables-Overview: assets/dashboards/Snowflake-Event-Tables-Overview_dashboard.json
+    Snowflake-Overview: assets/dashboards/Snowflake-Overview_dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
       - snowflake.organization.balance.free_usage
       - snowflake.logins.fail.count
-      "metadata_path": metadata.csv
-      "prefix": snowflake.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10436"
-    "source_type_name": Snowflake Web
-  "monitors":
-    "[Snowflake] High Error Log Count on Event Tables": assets/monitors/high_volume_event_table_logs_errors.json
-    "[Snowflake] High Volume of Queries are Failing": assets/monitors/high_volume_queries_failing.json
-    "[Snowflake] Increased Failed Login Attempts": assets/monitors/increased_failed_login_attempts.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com (日本語対応)
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: snowflake.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10436
+    source_type_name: Snowflake Web
+  monitors:
+    '[Snowflake] High Error Log Count on Event Tables': assets/monitors/high_volume_event_table_logs_errors.json
+    '[Snowflake] High Volume of Queries are Failing': assets/monitors/high_volume_queries_failing.json
+    '[Snowflake] Increased Failed Login Attempts': assets/monitors/increased_failed_login_attempts.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
+categories:
 - ai/ml
 - コスト管理
 - data stores
 - モニター
 - ログの収集
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "snowflake_web"
-"integration_id": "snowflake-web"
-"integration_title": "Snowflake - API Based"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "snowflake_web"
-"public_title": "Snowflake - API Based"
-"short_description": "Identify long running and unsuccessful queries, reduce costs, find security threats, and monitor Snowpark workloads."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AI/ML"
-  - "Category::Cost Management"
-  - "Category::Data Stores"
-  - "Category::Metrics"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Identify long running and unsuccessful queries, reduce costs, find security threats, and monitor Snowpark workloads.
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/snowflake-monitoring-datadog/"
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/snowflake-snowpark-monitoring-datadog/"
-  "support": "README.md#Support"
-  "title": Snowflake - API Based
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: snowflake_web
+integration_id: snowflake-web
+integration_title: Snowflake
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: snowflake_web
+public_title: Snowflake
+short_description: Identify long running and unsuccessful queries, reduce costs, find
+  security threats, and monitor Snowpark workloads.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AI/ML
+  - Category::Cost Management
+  - Category::Data Stores
+  - Category::Metrics
+  - Category::Log Collection
+  - Category::Security
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Identify long running and unsuccessful queries, reduce costs, find
+    security threats, and monitor Snowpark workloads.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/snowflake-monitoring-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/snowflake-snowpark-monitoring-datadog/
+  support: README.md#Support
+  title: Snowflake
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-<div class="alert alert-info">API ベースの Snowflake インテグレーションは、Datadog Agent ベースの Snowflake インテグレーションを置き換え、追加機能を提供します。API ベースの Snowflake インテグレーションをセットアップした後、Snowflake への API 呼び出し量を減らすために、Agent ベースの Snowflake インテグレーションをアンインストールすることをお勧めします。</div>
+<div class="alert alert-info">The new Snowflake integration replaces the Datadog Agent-based Snowflake integration, and offers additional functionality. After setting up the new Snowflake integration, it is recommended to uninstall the Agent-based Snowflake integration to reduce API call volume to Snowflake.</div>
 
 Snowflake のインフラストラクチャーやデータ取得を効果的に監視・最適化することは難しい場合があります。問題が発生すると、リソースの非効率的な利用、コストの増加、カスタマーエクスペリエンスの低下につながる可能性があります。
 
@@ -115,11 +117,28 @@ Snowflake データをパースした後、Datadog は[すぐに使える概要�
 
 以下の表は、収集されるログの種類と含まれる Snowflake テーブルを示しています。
 
-| **型**          | **説明** | **含まれる Snowflake テーブル**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|-------------------|---|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **クエリ履歴** | クエリ実行の履歴。<br>クエリ履歴ログをアクセス履歴ログで補完することで、データがクエリを通じてどのように使用され、その系譜をより深く知ることができます。  | <a href="https://docs.snowflake.com/en/sql-reference/account-usage/query_history">SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY</a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| **Security**      | Utilize these logs with <a href="https://app.datadoghq.com/security/home">Cloud SIEM</a> to better detect and respond to security threats in your environment. | <a href="https://docs.snowflake.com/en/sql-reference/account-usage/login_history">SNOWFLAKE.ACCOUNT_USAGE.LOGIN_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/sessions">SNOWFLAKE.ACCOUNT_USAGE.SESSIONS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/grants_to_users">SNOWFLAKE.ACCOUNT_USAGE.GRANTS_TO_USERS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/data_transfer_history">SNOWFLAKE.ACCOUNT_USAGE.DATA_TRANSFER_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/stages">SNOWFLAKE.ACCOUNT_USAGE.STAGES</a> |
-| **イベントテーブル**   | 関数やプロシージャによって生成されたメッセージおよびイベントデータ。<br>追加の GRANT 特権が必要です。 | カスタム<a href="https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-columns">イベントテーブル</a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
+<table>
+  <tr>
+    <td style="width:10%;"><strong>Type</strong></td>
+    <td><strong>Description</strong></td>
+    <td><strong>Tables required</strong></td>
+  </tr>
+  <tr>
+    <td style="width:10%;">Query history</td>
+    <td>History of query executions. Query history logs can be enriched with access history logs to provide more insight into how data is used through queries and its lineage.</td>
+    <td><a href="https://docs.snowflake.com/en/sql-reference/account-usage/query_history">SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY</a></td>
+  </tr>
+  <tr>
+    <td style="width:10%;">Security</td>
+    <td>Utilize these logs with <a href="https://app.datadoghq.com/security/home">Cloud SIEM</a> to better detect and respond to security threats in your environment.</td>
+    <td> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/login_history">SNOWFLAKE.ACCOUNT_USAGE.LOGIN_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/sessions">SNOWFLAKE.ACCOUNT_USAGE.SESSIONS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/grants_to_users">SNOWFLAKE.ACCOUNT_USAGE.GRANTS_TO_USERS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/data_transfer_history">SNOWFLAKE.ACCOUNT_USAGE.DATA_TRANSFER_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/stages">SNOWFLAKE.ACCOUNT_USAGE.STAGES</a></td>
+  </tr>
+  <tr>
+    <td style="width:10%;">Event table</td>
+    <td>Message and event data generated by your functions and procedures. Requires additional GRANT privileges.</td>
+    <td>Your custom <a href="https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-columns">event table</a></td>
+  </tr>
+</table>
 
 ##### Cloud Cost Management
 
@@ -222,7 +241,7 @@ Snowflake Web インテグレーションには、サービスのチェック機
 
 ## Agent チェック: Snowflake
 
-<div class="alert alert-danger">Snowflake Agent のチェックはサポートされなくなりました。追加機能と Snowflake への API 呼び出し量の削減のために、API ベースのインテグレーションへの切り替えをお勧めします。</div>
+<div class="alert alert-danger">The Snowflake Agent check is no longer supported, it is recommended to switch to the new Snowflake integration for additional functionality and reduced API call volume to Snowflake.</div>
 
 ## Agent: 概要
 
@@ -525,19 +544,18 @@ Snowflake には、イベントは含まれません。
 [7]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
 [8]: https://github.com/DataDog/integrations-internal-core/blob/main/snowflake_web/metadata.csv
 [9]: https://github.com/DataDog/integrations-internal-core/blob/main/snowflake_web/assets/logs/snowflake.yaml
-[10]: https://docs.datadoghq.com/help
+[10]: https://docs.datadoghq.com/ja/help
 [11]: https://www.snowflake.com/
 [12]: https://app.datadoghq.com/account/settings/agent/latest
-[13]: https://docs.datadoghq.com/agent/guide/agent-v6-python-3/?tab=hostagent
+[13]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=hostagent
 [14]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
 [15]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example
-[16]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[16]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [17]: https://docs.snowflake.com/en/user-guide/python-connector-example.html#using-a-proxy-server
 [18]: https://github.com/snowflakedb/snowflake-connector-python/blob/d6df58f1c338b255393571a08a1f9f3a71d8f7b6/src/snowflake/connector/proxy.py#L40-L41
 [19]: https://docs.snowflake.com/en/user-guide/private-snowflake-service.html
 [20]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink.html
 [21]: https://docs.snowflake.com/en/sql-reference/account-usage/query_history.html
-[22]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[22]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [23]: https://www.datadoghq.com/blog/snowflake-monitoring-datadog/
 [24]: https://www.datadoghq.com/blog/snowflake-snowpark-monitoring-datadog/
-

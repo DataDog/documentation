@@ -94,10 +94,10 @@ IP 許可リストを API で管理するには、[IP 許可リスト API ドキ
 Terraform で IP 許可リストを管理するには、[`ip_allowlist` リソース][7]をご覧ください。
 
 
-[1]: /api/latest/
-[2]: /api/latest/authentication/#validate-api-key
-[3]: /dashboards/sharing/
-[4]: /account_management/audit_trail/
+[1]: /ja/api/latest/
+[2]: /ja/api/latest/authentication/#validate-api-key
+[3]: /ja/dashboards/sharing/
+[4]: /ja/account_management/audit_trail/
 [5]: https://app.datadoghq.com/organization-settings/ip-allowlist
-[6]: /api/latest/ip-allowlist/
+[6]: /ja/api/latest/ip-allowlist/
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist

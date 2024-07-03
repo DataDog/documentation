@@ -1,9 +1,7 @@
 ---
-title: Distribution Widget
-widget_type: distribution
-description: "Graph a metric distribution aggregated across one or several tags."
 aliases:
-- /graphing/widgets/distribution/
+- /ja/graphing/widgets/distribution/
+description: Graph a metric distribution aggregated across one or several tags.
 further_reading:
 - link: /metrics/distributions/
   tag: Documentation
@@ -20,6 +18,8 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: Querying
+title: Distribution Widget
+widget_type: distribution
 ---
 
 分布を可視化することで、1 つまたは複数のタグ (*hosts* など) に対して集計されたメトリクスを表示します。[ヒートマップ][1]と異なり、分布グラフの x 軸は時間ではなく数量を表します。
@@ -73,7 +73,7 @@ APM リクエスト分布で、X 軸にパーセンタイルマーカーを追�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/heatmap/
-[2]: /dashboards/widgets/#full-screen
-[3]: /api/latest/dashboards/
-[4]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/widgets/heatmap/
+[2]: /ja/dashboards/widgets/#full-screen
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

@@ -1,7 +1,6 @@
 ---
-title: Interoperability of OpenTelemetry API and Datadog instrumented traces
 aliases:
-  - /opentelemetry/guide/otel_api_tracing_interoperability/
+- /ja/opentelemetry/guide/otel_api_tracing_interoperability/
 further_reading:
 - link: /tracing/trace_collection/otel_instrumentation/
   tag: Documentation
@@ -9,7 +8,7 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/
   tag: Documentation
   text: Trace Context Propagation in Datadog
-
+title: Interoperability of OpenTelemetry API and Datadog instrumented traces
 ---
 
 ## Custom instrumentation with the OpenTelemetry API
@@ -45,11 +44,11 @@ Following the [W3C Trace Context recommendations][9], Datadog 128-bit trace IDs 
 
 
 [1]: https://opentelemetry.io/docs/specs/otel/trace/api/
-[2]: /tracing/trace_collection/otel_instrumentation/
-[3]: /profiler/
-[4]: /data_streams/
-[5]: /security/application_security/
-[6]: /infrastructure/process
-[7]: /tracing/trace_collection/dd_libraries/
-[8]: /tracing/trace_collection/trace_context_propagation/
+[2]: /ja/tracing/trace_collection/otel_instrumentation/
+[3]: /ja/profiler/
+[4]: /ja/data_streams/
+[5]: /ja/security/application_security/
+[6]: /ja/infrastructure/process
+[7]: /ja/tracing/trace_collection/dd_libraries/
+[8]: /ja/tracing/trace_collection/trace_context_propagation/
 [9]: https://www.w3.org/TR/trace-context/#handling-trace-id-for-compliant-platforms-with-shorter-internal-identifiers

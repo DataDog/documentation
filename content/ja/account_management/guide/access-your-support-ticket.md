@@ -1,8 +1,8 @@
 ---
-title: Access Your Support Ticket
 aliases:
-  - /developers/faq/access-your-support-ticket
-  - /account_management/faq/access-your-support-ticket
+- /ja/developers/faq/access-your-support-ticket
+- /ja/account_management/faq/access-your-support-ticket
+title: Access Your Support Ticket
 ---
 
 ## サポートチケットの作成

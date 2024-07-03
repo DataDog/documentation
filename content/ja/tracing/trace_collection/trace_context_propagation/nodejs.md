@@ -1,16 +1,16 @@
 ---
-title: Propagating Node.js Trace Context
-kind: documentation
 code_lang: nodejs
 code_lang_weight: 40
-type: multi-code-lang
 further_reading:
-    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
-      tag: Blog
-      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: Blog
+  text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Propagating Node.js Trace Context
+type: multi-code-lang
 ---
 
 The Datadog APM Tracer supports [B3][5] and [W3C Trace Context][6] header extraction and injection for distributed tracing.
@@ -32,6 +32,6 @@ For more information about the context propagation settings, read [Node.js Traci
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/library_config/nodejs/#headers-extraction-and-injection
+[1]: /ja/tracing/trace_collection/library_config/nodejs/#headers-extraction-and-injection
 [5]: https://github.com/openzipkin/b3-propagation
 [6]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

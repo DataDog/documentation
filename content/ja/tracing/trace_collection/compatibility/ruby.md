@@ -1,11 +1,11 @@
 ---
 aliases:
-- /tracing/compatibility_requirements/ruby
-- /tracing/setup_overview/compatibility_requirements/ruby
+- /ja/tracing/compatibility_requirements/ruby
+- /ja/tracing/setup_overview/compatibility_requirements/ruby
 code_lang: ruby
 code_lang_weight: 20
 dependencies:
-- "https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"
+- https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md
 further_reading:
 - link: tracing/trace_collection/dd_libraries/ruby
   tag: Documentation
@@ -179,106 +179,106 @@ new release of 1.21.0 (or 1.20.1). Those bugfixes will not be backported as patc
 
 [1]: https://github.com/DataDog/dd-trace-rb
 
-[2]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#action-cable
+[2]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#action-cable
 
-[3]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#action-mailer
+[3]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#action-mailer
 
-[4]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#action-pack
+[4]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#action-pack
 
-[5]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#action-view
+[5]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#action-view
 
-[6]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#active-job
+[6]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#active-job
 
-[7]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#active-model-serializers
+[7]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#active-model-serializers
 
-[8]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#active-record
+[8]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#active-record
 
-[9]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#active-support
+[9]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#active-support
 
-[10]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#aws
+[10]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#aws
 
-[11]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#concurrent-ruby
+[11]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#concurrent-ruby
 
-[12]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#dalli
+[12]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#dalli
 
-[13]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#delayedjob
+[13]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#delayedjob
 
-[14]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#elasticsearch
+[14]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#elasticsearch
 
-[15]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#ethon
+[15]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#ethon
 
-[16]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#excon
+[16]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#excon
 
-[17]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#faraday
+[17]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#faraday
 
-[18]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#grape
+[18]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#grape
 
-[19]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#graphql
+[19]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#graphql
 
-[20]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#grpc
+[20]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#grpc
 
-[21]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#hanami
+[21]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#hanami
 
-[22]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#httprb
+[22]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#httprb
 
-[23]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#httpclient
+[23]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#httpclient
 
-[24]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#httpx
+[24]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#httpx
 
-[25]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#kafka
+[25]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#kafka
 
-[26]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#mongodb
+[26]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#mongodb
 
-[27]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#mysql2
+[27]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#mysql2
 
-[28]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#nethttp
+[28]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#nethttp
 
-[29]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#opensearch
+[29]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#opensearch
 
-[30]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#postgres
+[30]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#postgres
 
-[31]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#presto
+[31]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#presto
 
-[33]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#que
+[33]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#que
 
-[34]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#racecar
+[34]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#racecar
 
-[35]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#rack
+[35]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#rack
 
-[36]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#rails
+[36]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#rails
 
-[37]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#rake
+[37]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#rake
 
-[38]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#redis
+[38]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#redis
 
-[39]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#resque
+[39]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#resque
 
-[40]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#rest-client
+[40]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#rest-client
 
-[41]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#roda
+[41]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#roda
 
-[42]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#sequel
+[42]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#sequel
 
-[43]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#shoryuken
+[43]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#shoryuken
 
-[44]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#sidekiq
+[44]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#sidekiq
 
-[45]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#sinatra
+[45]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#sinatra
 
-[46]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#sneakers
+[46]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#sneakers
 
-[47]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#stripe
+[47]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#stripe
 
-[48]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#sucker-punch
+[48]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#sucker-punch
 
 [49]: https://www.datadoghq.com/support
 
 [50]: https://semver.org
 
-[51]: https://docs.datadoghq.com/tracing/setup_overview/setup/ruby
+[51]: https://docs.datadoghq.com/ja/tracing/setup_overview/setup/ruby
 
 [52]: https://github.com/DataDog/dd-trace-rb
 
-[53]: https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv6v7
+[53]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/?tab=agentv6v7
 
-[54]: https://docs.datadoghq.com/agent/basic_agent_usage/?tab=agentv5
+[54]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/?tab=agentv5

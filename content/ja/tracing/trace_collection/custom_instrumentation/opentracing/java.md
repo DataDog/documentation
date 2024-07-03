@@ -1,15 +1,14 @@
 ---
-title: Java OpenTracing Instrumentation
-kind: documentation
 aliases:
-- /tracing/setup_overview/open_standards/java
-- /tracing/trace_collection/open_standards/java
-- /tracing/trace_collection/opentracing/java/
-description: 'OpenTracing instrumentation for Java'
+- /ja/tracing/setup_overview/open_standards/java
+- /ja/tracing/trace_collection/open_standards/java
+- /ja/tracing/trace_collection/opentracing/java/
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 0
-
+description: OpenTracing instrumentation for Java
+kind: documentation
+title: Java OpenTracing Instrumentation
+type: multi-code-lang
 ---
 
 <div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/java/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>

@@ -1,9 +1,9 @@
 ---
-title: Kubernetes Data Security
 further_reading:
 - link: /data_security/
   tag: Documentation
   text: Review the main categories of data submitted to Datadog
+title: Kubernetes Data Security
 ---
 
 <div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
@@ -57,6 +57,6 @@ Datadog Agent のデフォルト構成は、標準的な kubelet やコンテナ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/unix_socket/?tab=host 
-[2]: /containers/kubernetes/apm/ 
+[1]: /ja/developers/dogstatsd/unix_socket/?tab=host 
+[2]: /ja/containers/kubernetes/apm/ 
 [3]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted

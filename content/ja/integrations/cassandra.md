@@ -1,73 +1,73 @@
 ---
-"app_id": "cassandra"
-"app_uuid": "a930364f-ac97-4483-92d6-5a982da7b1c0"
-"assets":
-  "dashboards":
-    "cassandra-overview": "assets/dashboards/cassandra_overview.json"
-    "cassandra-overview-screenboard": "assets/dashboards/cassandra_overview_screenboard.json"
-    "cassandra-read": "assets/dashboards/cassandra_read.json"
-    "cassandra-sstables": "assets/dashboards/cassandra_sstable.json"
-    "cassandra-write": "assets/dashboards/cassandra_write.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "cassandra.load.count"
-      "metadata_path": "metadata.csv"
-      "prefix": "cassandra."
-    "process_signatures":
-    - "java org.apache.cassandra.service.CassandraDaemon"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "33"
-    "source_type_name": "Cassandra"
-  "saved_views":
-    "cassandra_processes": "assets/saved_views/cassandra_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cassandra"
-"integration_id": "cassandra"
-"integration_title": "Cassandra"
-"integration_version": "1.18.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cassandra"
-"public_title": "Cassandra"
-"short_description": "クラスターのパフォーマンス、容量、全体的な健全性などを追跡"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::キャッシュ"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "クラスターのパフォーマンス、容量、全体的な健全性などを追跡"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Cassandra"
+app_id: cassandra
+app_uuid: a930364f-ac97-4483-92d6-5a982da7b1c0
+assets:
+  dashboards:
+    cassandra-overview: assets/dashboards/cassandra_overview.json
+    cassandra-overview-screenboard: assets/dashboards/cassandra_overview_screenboard.json
+    cassandra-read: assets/dashboards/cassandra_read.json
+    cassandra-sstables: assets/dashboards/cassandra_sstable.json
+    cassandra-write: assets/dashboards/cassandra_write.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cassandra.load.count
+      metadata_path: metadata.csv
+      prefix: cassandra.
+    process_signatures:
+    - java org.apache.cassandra.service.CassandraDaemon
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 33
+    source_type_name: Cassandra
+  saved_views:
+    cassandra_processes: assets/saved_views/cassandra_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cassandra
+integration_id: cassandra
+integration_title: Cassandra
+integration_version: 1.18.0
+is_public: true
+manifest_version: 2.0.0
+name: cassandra
+public_title: Cassandra
+short_description: クラスターのパフォーマンス、容量、全体的な健全性などを追跡
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::キャッシュ
+  - Category::Data Stores
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: クラスターのパフォーマンス、容量、全体的な健全性などを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cassandra
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -248,20 +248,20 @@ Cassandra_nodetool チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra/images/cassandra_dashboard_2.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/integrations/java/
-[5]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/integrations/java/
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/containers/kubernetes/log/
-[9]: https://docs.datadoghq.com/containers/docker/log/
-[10]: https://docs.datadoghq.com/agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/containers/kubernetes/log/
+[9]: https://docs.datadoghq.com/ja/containers/docker/log/
+[10]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
 [11]: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
 [12]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
 [13]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
 [14]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra_nodetool/images/cassandra_dashboard_2.png
 [15]: https://github.com/DataDog/integrations-core/tree/master/cassandra
-[16]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[16]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [17]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example
 [18]: https://github.com/DataDog/integrations-core/tree/master/cassandra#log-collection
 [19]: https://github.com/prometheus/jmx_exporter

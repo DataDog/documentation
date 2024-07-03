@@ -1,12 +1,12 @@
 ---
-title: Configuring An APM Stats Graph
-disable_toc: false
 aliases:
-- "/dashboards/querying/#configuring-an-apm-stats-graph"
+- /ja/dashboards/querying/#configuring-an-apm-stats-graph
+disable_toc: false
 further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: Learn how to query graphs
+title: Configuring An APM Stats Graph
 ---
 
 ## 概要
@@ -30,4 +30,4 @@ APM 統計データを使用してグラフを構成するには、次の手順�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/
+[1]: /ja/dashboards/widgets/

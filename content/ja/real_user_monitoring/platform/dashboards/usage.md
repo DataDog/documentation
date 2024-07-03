@@ -1,15 +1,15 @@
 ---
-title: RUM Usage Dashboard
-kind: documentation
 aliases:
-  - /real_user_monitoring/dashboards/frustration_signals_dashboard
-  - /real_user_monitoring/dashboards/user_sessions_dashboard
-  - /real_user_monitoring/platform/dashboards/frustration_signals_dashboard
-  - /real_user_monitoring/platform/dashboards/user_sessions_dashboard
+- /ja/real_user_monitoring/dashboards/frustration_signals_dashboard
+- /ja/real_user_monitoring/dashboards/user_sessions_dashboard
+- /ja/real_user_monitoring/platform/dashboards/frustration_signals_dashboard
+- /ja/real_user_monitoring/platform/dashboards/user_sessions_dashboard
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Learn about the RUM Explorer
+kind: documentation
+title: RUM Usage Dashboard
 ---
 
 ## Web usage
@@ -82,9 +82,9 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/data_collected/
-[2]: /real_user_monitoring/ios/data_collected/
-[3]: /real_user_monitoring/android/data_collected/
-[4]: /real_user_monitoring/reactnative/data_collected/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
-[6]: /data_security/real_user_monitoring/
+[1]: /ja/real_user_monitoring/data_collected/
+[2]: /ja/real_user_monitoring/ios/data_collected/
+[3]: /ja/real_user_monitoring/android/data_collected/
+[4]: /ja/real_user_monitoring/reactnative/data_collected/
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[6]: /ja/data_security/real_user_monitoring/

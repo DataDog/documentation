@@ -1,7 +1,8 @@
 ---
-title: Integration Management
 algolia:
-  tags: [integration management]
+  tags:
+  - integration management
+title: Integration Management
 ---
 
 ## 概要

@@ -1,67 +1,67 @@
 ---
-"app_id": "hasura-cloud"
-"app_uuid": "d7eb9597-f00b-48dc-9100-7afda5fe4bce"
-"assets":
-  "dashboards":
-    "Hasura Cloud Datadog Integration Dashboard": assets/dashboards/hasura_cloud.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: hasura-cloud
+app_uuid: d7eb9597-f00b-48dc-9100-7afda5fe4bce
+assets:
+  dashboards:
+    Hasura Cloud Datadog Integration Dashboard: assets/dashboards/hasura_cloud.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - hasura_cloud.requests_per_minute
       - hasura_cloud.average_execution_time
       - hasura_cloud.success_rate
-      "metadata_path": metadata.csv
-      "prefix": hasura_cloud.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10175"
-    "source_type_name": Hasura Cloud
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Hasura
-  "sales_email": support@hasura.io
-  "support_email": support@hasura.io
-"categories":
+      metadata_path: metadata.csv
+      prefix: hasura_cloud.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10175
+    source_type_name: Hasura Cloud
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Hasura
+  sales_email: support@hasura.io
+  support_email: support@hasura.io
+categories:
 - cloud
 - log collection
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "hasura_cloud"
-"integration_id": "hasura-cloud"
-"integration_title": "Hasura Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "hasura_cloud"
-"public_title": "Hasura Cloud"
-"short_description": "Monitor your Hasura Cloud Project"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: hasura_cloud
+integration_id: hasura-cloud
+integration_title: Hasura Cloud
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: hasura_cloud
+public_title: Hasura Cloud
+short_description: Monitor your Hasura Cloud Project
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  - "Category::Tracing"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor your Hasura Cloud Project
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Hasura Cloud
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Log Collection
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor your Hasura Cloud Project
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hasura Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -113,6 +113,5 @@ Need help? Contact [Datadog support][5].
 [1]: https://hasura.io/cloud/
 [2]: https://hasura.io/docs/latest/observability/integrations/datadog/
 [3]: http://app.datadoghq.com/logs
-[4]: https://docs.datadoghq.com/logs/explorer/facets/#create-facets
-[5]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/logs/explorer/facets/#create-facets
+[5]: https://docs.datadoghq.com/ja/help/

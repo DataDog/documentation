@@ -1,7 +1,6 @@
 ---
 dependencies:
-- "https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests/blob/main/README.md"
-kind: documentation
+- https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests/blob/main/README.md
 title: Continuous Testing and Bitrise
 ---
 ![GitHub Release](https://img.shields.io/github/v/release/DataDog/synthetics-test-automation-bitrise-step-run-tests)
@@ -168,21 +167,21 @@ For reference, this is an example of a complete configuration:
 - [Best practices for continuous testing with Datadog][18]
 
 [1]: https://bitrise.io/integrations/steps/datadog-mobile-app-run-tests
-[2]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#run-tests
+[2]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#run-tests
 [3]: https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps/adding-steps-to-a-workflow.html
 [4]: https://devcenter.bitrise.io/en/builds/secrets.html#setting-a-secret
 [5]: https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps/step-inputs.html
 [6]: https://github.com/bitrise-io/bitrise
-[7]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[7]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [8]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
-[9]: https://docs.datadoghq.com/account_management/api-app-keys/
-[10]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[9]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[10]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
 [11]: https://bitrise.io/integrations/steps/datadog-mobile-app-upload
-[12]: https://docs.datadoghq.com/synthetics/search/#search
-[13]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration
-[14]: https://docs.datadoghq.com/continuous_testing/environments/multiple_env
-[15]: https://docs.datadoghq.com/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
-[16]: https://docs.datadoghq.com/getting_started/site/
-[17]: https://docs.datadoghq.com/getting_started/continuous_testing/
+[12]: https://docs.datadoghq.com/ja/synthetics/search/#search
+[13]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration
+[14]: https://docs.datadoghq.com/ja/continuous_testing/environments/multiple_env
+[15]: https://docs.datadoghq.com/ja/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
+[16]: https://docs.datadoghq.com/ja/getting_started/site/
+[17]: https://docs.datadoghq.com/ja/getting_started/continuous_testing/
 [18]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
-[19]: https://docs.datadoghq.com/synthetics/mobile_app_testing/
+[19]: https://docs.datadoghq.com/ja/synthetics/mobile_app_testing/

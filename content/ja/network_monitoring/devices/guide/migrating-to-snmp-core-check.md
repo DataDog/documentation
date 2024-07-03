@@ -1,9 +1,9 @@
 ---
-title: Migrating to the SNMP Core Check (in Go) from the Python-based Check
 further_reading:
 - link: network_monitoring/devices/setup
   tag: Documentation
   text: Learn more about NDM Setup
+title: Migrating to the SNMP Core Check (in Go) from the Python-based Check
 ---
 
 ## 概要

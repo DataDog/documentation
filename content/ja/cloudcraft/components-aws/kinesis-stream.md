@@ -1,5 +1,5 @@
 ---
-title: "Kinesis Stream Component"
+title: Kinesis Stream Component
 ---
 ## 概要
 

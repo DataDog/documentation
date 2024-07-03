@@ -1,15 +1,15 @@
 ---
-title: Getting Started with the Agent
 further_reading:
-    - link: /agent/basic_agent_usage/
-      tag: Documentation
-      text: Basic Agent Usage
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session to power up your Infrastructure monitoring
-    - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-      tag: FAQ
-      text: Why should I install the Datadog Agent on my cloud instances?
+- link: /agent/basic_agent_usage/
+  tag: Documentation
+  text: Basic Agent Usage
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to power up your Infrastructure monitoring
+- link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: FAQ
+  text: Why should I install the Datadog Agent on my cloud instances?
+title: Getting Started with the Agent
 ---
 
 このガイドでは、Agent の紹介と、Agent を使用して Datadog プラットフォームにシステムレベルのメトリクスを送信する方法について説明します。また、Ubuntu 上での Agent のインストール例についても説明します。以下の内容をカバーしています。
@@ -278,40 +278,40 @@ Agent のトラブルシューティングに関するヘルプ
 {{< /whatsnext >}}
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /agent/basic_agent_usage/?tab=agentv6v7#agent-overhead
-[3]: /integrations/agent_metrics/
-[4]: /integrations/system/#metrics
-[5]: /integrations/disk/#metrics
-[6]: /integrations/network/#metrics
-[7]: /integrations/ntp/#metrics
-[8]: /agent/docker/data_collected/#metrics
-[9]: /getting_started/integrations/
-[10]: /agent/guide/environment-variables/#overview
-[11]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[12]: /agent/docker/?tab=standard
-[13]: /agent/kubernetes/installation?tab=operator
-[14]: /getting_started/agent/#checks
+[2]: /ja/agent/basic_agent_usage/?tab=agentv6v7#agent-overhead
+[3]: /ja/integrations/agent_metrics/
+[4]: /ja/integrations/system/#metrics
+[5]: /ja/integrations/disk/#metrics
+[6]: /ja/integrations/network/#metrics
+[7]: /ja/integrations/ntp/#metrics
+[8]: /ja/agent/docker/data_collected/#metrics
+[9]: /ja/getting_started/integrations/
+[10]: /ja/agent/guide/environment-variables/#overview
+[11]: /ja/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[12]: /ja/agent/docker/?tab=standard
+[13]: /ja/agent/kubernetes/installation?tab=operator
+[14]: /ja/getting_started/agent/#checks
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
-[17]: /agent/basic_agent_usage/?tab=agentv6v7
+[17]: /ja/agent/basic_agent_usage/?tab=agentv6v7
 [18]: https://app.datadoghq.com/account/settings/agent/latest
-[19]: /agent/configuration/agent-commands/#agent-status-and-information
+[19]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [20]: https://app.datadoghq.com/event/explorer
-[21]: /developers/service_checks/#visualize-your-service-check-in-datadog
+[21]: /ja/developers/service_checks/#visualize-your-service-check-in-datadog
 [22]: https://app.datadoghq.com/metric/summary
 [23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[24]: /getting_started/tagging/
-[25]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[26]: /agent/configuration/agent-commands/#restart-the-agent
-[27]: /logs/
-[28]: /tracing/
-[29]: /infrastructure/process/?tab=linuxwindows#introduction
-[30]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host
-[31]: /agent/logs/advanced_log_collection/
-[32]: /developers/dogstatsd/?tab=hostagent
-[33]: /agent/configuration/agent-commands/
-[34]: /agent/configuration/agent-commands/#start-the-agent
-[35]: /agent/configuration/agent-commands/#stop-the-agent
-[36]: /agent/troubleshooting/
-[37]: /agent/configuration/agent-log-files/
-[38]: /help/
+[24]: /ja/getting_started/tagging/
+[25]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[26]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[27]: /ja/logs/
+[28]: /ja/tracing/
+[29]: /ja/infrastructure/process/?tab=linuxwindows#introduction
+[30]: /ja/opentelemetry/otlp_ingest_in_the_agent/?tab=host
+[31]: /ja/agent/logs/advanced_log_collection/
+[32]: /ja/developers/dogstatsd/?tab=hostagent
+[33]: /ja/agent/configuration/agent-commands/
+[34]: /ja/agent/configuration/agent-commands/#start-the-agent
+[35]: /ja/agent/configuration/agent-commands/#stop-the-agent
+[36]: /ja/agent/troubleshooting/
+[37]: /ja/agent/configuration/agent-log-files/
+[38]: /ja/help/

@@ -1,51 +1,53 @@
 ---
-"app_id": "rum-react-native"
-"app_uuid": "61207de8-cc1e-4915-a18a-7fb25093d85c"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-react-native
+app_uuid: 61207de8-cc1e-4915-a18a-7fb25093d85c
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - モニター
 - mobile
 - network
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_react_native"
-"integration_id": "rum-react-native"
-"integration_title": "React Native"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_react_native"
-"public_title": "React Native"
-"short_description": "Monitor React Native applications and generate metrics using Datadog RUM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_react_native
+integration_id: rum-react-native
+integration_title: React Native
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_react_native
+public_title: React Native
+short_description: Monitor React Native applications and generate metrics using Datadog
+  RUM
+supported_os:
 - android
 - ios
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Metrics"
-  - "Category::Mobile"
-  - "Category::Network"
-  - "Category::Tracing"
-  - "Supported OS::Android"
-  - "Supported OS::iOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor React Native applications and generate metrics using Datadog RUM
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": React Native
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Metrics
+  - Category::Mobile
+  - Category::Network
+  - Category::Tracing
+  - Supported OS::Android
+  - Supported OS::iOS
+  configuration: README.md#Setup
+  description: Monitor React Native applications and generate metrics using Datadog
+    RUM
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: React Native
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -110,9 +112,8 @@ Additional helpful documentation, links, and articles:
 - [React Native Monitoring][5]
 
 [1]: https://app.datadoghq.com/integrations/rum-react-native
-[2]: https://docs.datadoghq.com/real_user_monitoring/reactnative/#setup
-[3]: https://docs.datadoghq.com/real_user_monitoring/reactnative/#manual-instrumentation
-[4]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[5]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
-[6]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/#setup
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/#manual-instrumentation
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/
+[6]: https://docs.datadoghq.com/ja/help/

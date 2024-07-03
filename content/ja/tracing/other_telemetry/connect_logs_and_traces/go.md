@@ -1,25 +1,25 @@
 ---
-title: Correlating Go Logs and Traces
-kind: documentation
-description: 'Connect your Go logs and traces to correlate them in Datadog.'
 aliases:
-  - /tracing/connect_logs_and_traces/go
+- /ja/tracing/connect_logs_and_traces/go
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 30
+description: Connect your Go logs and traces to correlate them in Datadog.
 further_reading:
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: "https://www.datadoghq.com/blog/request-log-correlation/"
-      tag: Blog
-      text: Correlate request logs with traces automatically
-    - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-      tag: Guide
-      text: Ease troubleshooting with cross product correlation.
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Correlate request logs with traces automatically
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Ease troubleshooting with cross product correlation.
+kind: documentation
+title: Correlating Go Logs and Traces
+type: multi-code-lang
 ---
 
 ## Manual injection
@@ -85,5 +85,5 @@ This automatically injects the trace id to your logs when you log with the conte
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/go/#configure-your-logger
-[2]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[1]: /ja/logs/log_collection/go/#configure-your-logger
+[2]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

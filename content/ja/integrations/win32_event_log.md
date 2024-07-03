@@ -1,57 +1,57 @@
 ---
-"app_id": "event-viewer"
-"app_uuid": "8a0f4809-8470-4f7c-a7e8-350ba64123aa"
-"assets":
-  "dashboards":
-    "windows_event_log_overview": "assets/dashboards/windows_event_log_overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "47"
-    "source_type_name": "Event Viewer"
-  "logs":
-    "source": "windows.events"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "os & system"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "win32_event_log"
-"integration_id": "event-viewer"
-"integration_title": "Windows Event Log"
-"integration_version": "3.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "win32_event_log"
-"public_title": "Windows Event Log"
-"short_description": "Windows のイベントを Datadog イベントストリームへ送信。"
-"supported_os":
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Windows"
-  - "Category::OS とシステム"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "Windows のイベントを Datadog イベントストリームへ送信。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Windows Event Log"
+app_id: event-viewer
+app_uuid: 8a0f4809-8470-4f7c-a7e8-350ba64123aa
+assets:
+  dashboards:
+    windows_event_log_overview: assets/dashboards/windows_event_log_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 47
+    source_type_name: Event Viewer
+  logs:
+    source: windows.events
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- os & system
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: win32_event_log
+integration_id: event-viewer
+integration_title: Windows Event Log
+integration_version: 3.3.0
+is_public: true
+manifest_version: 2.0.0
+name: win32_event_log
+public_title: Windows Event Log
+short_description: Windows のイベントを Datadog イベントストリームへ送信。
+supported_os:
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::OS とシステム
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Windows のイベントを Datadog イベントストリームへ送信。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Windows Event Log
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -154,8 +154,8 @@ logs:
 
 対応する `source` パラメーターに `windows.events` を設定すると、[インテグレーション自動処理パイプライン][2]の恩恵を受けることができます。
 
-[1]: https://docs.datadoghq.com/agent/logs/#activate-log-collection
-[2]: https://docs.datadoghq.com/logs/processing/pipelines/#integration-pipelines
+[1]: https://docs.datadoghq.com/ja/agent/logs/#activate-log-collection
+[2]: https://docs.datadoghq.com/ja/logs/processing/pipelines/#integration-pipelines
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -221,7 +221,7 @@ Windows Event Log を Datadog イベントとして収集するには、`win32_e
 
   詳しくは、[イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する][1]を参照してください。
 
-[1]: https://docs.datadoghq.com/integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class/
+[1]: https://docs.datadoghq.com/ja/integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -369,8 +369,8 @@ logs:
 [1]: https://learn.microsoft.com/en-us/windows/win32/wes/consuming-events
 [2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/filter-event-viewer.png
 [3]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/xml-query-event-viewer.png
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/
-[5]: https://docs.datadoghq.com/agent/logs/advanced_log_collection/?tab=configurationfile#filter-logs
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/
+[5]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile#filter-logs
 [6]: https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-systempropertiestype-complextype
 {{% /tab %}}
 {{% tab "Events" %}}
@@ -512,7 +512,7 @@ Logs Agent
       Status: OK
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -532,7 +532,7 @@ Checks
       - Collected 0 metrics, 2 events & 1 service check
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -615,20 +615,20 @@ Need help? Contact [Datadog support][14] with an [Agent Flare][15].
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[3]: https://docs.datadoghq.com/service_management/events/
-[4]: https://docs.datadoghq.com/logs/
-[5]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/service_management/events/
+[4]: https://docs.datadoghq.com/ja/logs/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example
 [7]: https://app.datadoghq.com/integrations?integrationId=event-viewer
 [8]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/windows-defender-operational-event-log-properties.png
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/security/cloud_siem/
-[11]: https://docs.datadoghq.com/agent/logs/#activate-log-collection
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/security/cloud_siem/
+[11]: https://docs.datadoghq.com/ja/agent/logs/#activate-log-collection
 [12]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/win32_event_log.d/profiles/dd_security_events_low.yaml.example
 [13]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/win32_event_log.d/profiles/dd_security_events_high.yaml.example
-[14]: https://docs.datadoghq.com/help/
-[15]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare/?tab=agentv6v7
-[16]: https://docs.datadoghq.com/agent/logs/advanced_log_collection/?tab=configurationfile
+[14]: https://docs.datadoghq.com/ja/help/
+[15]: https://docs.datadoghq.com/ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[16]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile
 [17]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
 [18]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
 [19]: https://www.datadoghq.com/blog/windows-server-monitoring

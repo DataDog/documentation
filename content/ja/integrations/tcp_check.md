@@ -1,57 +1,57 @@
 ---
-"app_id": "system"
-"app_uuid": "a675760c-00f7-4bf3-bd0e-c7edfb0e7e82"
-"assets":
-  "integration":
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "network.tcp.can_connect"
-      "metadata_path": "metadata.csv"
-      "prefix": "network."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_name": "TCP"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "tcp_check"
-"integration_id": "システム"
-"integration_title": "TCP チェック"
-"integration_version": "4.8.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "tcp_check"
-"public_title": "TCP Check"
-"short_description": "Monitor TCP connectivity to remote hosts."
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Network"
-  "configuration": "README.md#Setup"
-  "description": "Monitor TCP connectivity to remote hosts."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "TCP Check"
+app_id: system
+app_uuid: a675760c-00f7-4bf3-bd0e-c7edfb0e7e82
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: network.tcp.can_connect
+      metadata_path: metadata.csv
+      prefix: network.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TCP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: tcp_check
+integration_id: システム
+integration_title: TCP チェック
+integration_version: 4.8.0
+is_public: true
+manifest_version: 2.0.0
+name: tcp_check
+public_title: TCP Check
+short_description: Monitor TCP connectivity to remote hosts.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  configuration: README.md#Setup
+  description: Monitor TCP connectivity to remote hosts.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TCP Check
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -103,9 +103,9 @@ Configuration Options:
 
 [Restart the Agent][3] to start sending TCP service checks and response times to Datadog.
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/datadog_checks/tcp_check/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -119,7 +119,7 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 | `<INIT_CONFIG>`      | blank or `{}`                                                                 |
 | `<INSTANCE_CONFIG>`  | `{"name": "<TCP_CHECK_INSTANCE_NAME>", "host":"%%host%%", "port":"%%port%%"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -150,6 +150,6 @@ Need help? Contact [Datadog support][5].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
-[5]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
+[5]: https://docs.datadoghq.com/ja/help/

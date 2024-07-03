@@ -1,8 +1,10 @@
 ---
-title: Agent Proxy Configuration
+algolia:
+  tags:
+  - agent proxy
 aliases:
-- /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
-- /agent/proxy
+- /ja/account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
+- /ja/agent/proxy
 further_reading:
 - link: /logs/
   tag: Documentation
@@ -16,8 +18,7 @@ further_reading:
 - link: /agent/configuration/agent-fips-proxy
   tag: Documentation
   text: Datadog FIPS Compliance
-algolia:
-  tags: [agent proxy]
+title: Agent Proxy Configuration
 ---
 
 ## 概要
@@ -1291,12 +1292,12 @@ When sending logs over TCP, see [TCP Proxy for Logs][9].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/configuration/agent-fips-proxy
-[2]: /agent/configuration/agent-commands/
+[1]: /ja/agent/configuration/agent-fips-proxy
+[2]: /ja/agent/configuration/agent-commands/
 [3]: http://www.squid-cache.org/
 [4]: https://app.datadoghq.com/infrastructure
 [5]: http://haproxy.1wt.eu
 [6]: https://www.haproxy.com/blog/haproxy-ssl-termination/
-[7]: /getting_started/site/
+[7]: /ja/getting_started/site/
 [8]: https://www.nginx.com
-[9]: /agent/logs/proxy
+[9]: /ja/agent/logs/proxy

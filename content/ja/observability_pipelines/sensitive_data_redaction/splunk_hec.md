@@ -1,6 +1,6 @@
 ---
-title: Sensitive Data Redaction for the Splunk HTTP Event Collector (HEC)
 disable_toc: false
+title: Sensitive Data Redaction for the Splunk HTTP Event Collector (HEC)
 ---
 
 ## 概要

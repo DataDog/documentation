@@ -1,74 +1,74 @@
 ---
-"app_id": "varnish"
-"app_uuid": "e342e5eb-71ce-4c5b-a9c9-2c33691e858f"
-"assets":
-  "dashboards":
-    "varnish": "assets/dashboards/varnish_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "varnish.n_backend"
-      "metadata_path": "metadata.csv"
-      "prefix": "varnish."
-    "process_signatures":
-    - "service varnish start"
-    - "varnishd"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "29"
-    "source_type_name": "Varnish"
-  "saved_views":
-    "4xx_errors": "assets/saved_views/4xx_errors.json"
-    "5xx_errors": "assets/saved_views/5xx_errors.json"
-    "bot_errors": "assets/saved_views/bot_errors.json"
-    "status_code_overview": "assets/saved_views/status_code_overview.json"
-    "varnish_processes": "assets/saved_views/varnish_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "log collection"
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/varnish/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "varnish"
-"integration_id": "varnish"
-"integration_title": "Varnish"
-"integration_version": "2.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "varnish"
-"public_title": "Varnish"
-"short_description": "クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::キャッシュ"
-  - "Category::ログの収集"
-  - "Category::ネットワーク"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Varnish"
+app_id: varnish
+app_uuid: e342e5eb-71ce-4c5b-a9c9-2c33691e858f
+assets:
+  dashboards:
+    varnish: assets/dashboards/varnish_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: varnish.n_backend
+      metadata_path: metadata.csv
+      prefix: varnish.
+    process_signatures:
+    - service varnish start
+    - varnishd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 29
+    source_type_name: Varnish
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    status_code_overview: assets/saved_views/status_code_overview.json
+    varnish_processes: assets/saved_views/varnish_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- log collection
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: varnish
+integration_id: varnish
+integration_title: Varnish
+integration_version: 2.1.0
+is_public: true
+manifest_version: 2.0.0
+name: varnish
+public_title: Varnish
+short_description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::キャッシュ
+  - Category::ログの収集
+  - Category::ネットワーク
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Varnish
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -198,14 +198,13 @@ Varnish チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/varnish/images/varnish.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/varnish/datadog_checks/varnish/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/varnish/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/varnish/assets/service_checks.json
-[9]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/help/
 [10]: https://www.datadoghq.com/blog/top-varnish-performance-metrics
 [11]: https://www.datadoghq.com/blog/how-to-collect-varnish-metrics
 [12]: https://www.datadoghq.com/blog/monitor-varnish-using-datadog
-

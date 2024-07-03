@@ -1,17 +1,17 @@
 ---
-title: Investigate Slow Traces or Endpoints
-further_reading:
-    - link: tracing
-      tag: Documentation
-      text: APM Distributed Tracing
-    - link: /profiler/enabling
-      tag: Documentation
-      text: Enable Continuous Profiler for Your Application
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
 aliases:
-  - /tracing/profiler/connect_traces_and_profiles/
+- /ja/tracing/profiler/connect_traces_and_profiles/
+further_reading:
+- link: tracing
+  tag: Documentation
+  text: APM Distributed Tracing
+- link: /profiler/enabling
+  tag: Documentation
+  text: Enable Continuous Profiler for Your Application
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+title: Investigate Slow Traces or Endpoints
 ---
 
 本番環境においてアプリケーションのパフォーマンスに問題がある場合、分散型トレーシングとプロファイリングによるコードスタックトレースのベンチマークを統合することで、パフォーマンスのボトルネックを特定する強力な方法となります。APM 分散型トレーシングと Continuous Profiler の両方が有効になっているアプリケーションプロセスは、自動的にリンクされます。
@@ -46,7 +46,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 Java Flight Recorder (JFR) の代わりに <a href="/profiler/enabling/java/?tab=datadog#requirements">Datadog プロファイラーを使用する</a>ことを強くお勧めします。
 </div>
 
-[1]: /profiler/enabling/java
+[1]: /ja/profiler/enabling/java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -54,7 +54,7 @@ Java Flight Recorder (JFR) の代わりに <a href="/profiler/enabling/java/?tab
 
 `dd-trace-py` バージョン 0.44.0+ が必要です。
 
-[1]: /profiler/enabling/python
+[1]: /ja/profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -65,7 +65,7 @@ The new [timeline feature](#span-execution-timeline-view) is enabled by default 
 To additionally enable showing [GC in timeline](#span-execution-timeline-view):
 - set `DD_PROFILING_FORCE_ENABLE_GC=true`
 
-[1]: /profiler/enabling/ruby
+[1]: /ja/profiler/enabling/ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -75,7 +75,7 @@ Linux と macOS で [Node.js サービスのプロファイリングを有効に
 
 The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
-[1]: /profiler/enabling/nodejs
+[1]: /ja/profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -99,12 +99,12 @@ Setting these variables will record up to 1 minute (or 5 MiB) of execution traci
 
 This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline view) and works best with Go version 1.18 or later (1.21 or later for timeline view).
 
-[1]: /profiler/enabling/go
+[1]: /ja/profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
-[3]: /profiler/profile_visualizations/#single-profile
-[4]: /profiler/profile_visualizations/#timeline-view
+[3]: /ja/profiler/profile_visualizations/#single-profile
+[4]: /ja/profiler/profile_visualizations/#timeline-view
 [5]: https://github.com/dominikh/gotraceui
-[6]: /tracing/trace_explorer/
+[6]: /ja/tracing/trace_explorer/
 [7]: https://blog.felixge.de/waiting-for-go1-21-execution-tracing-with-less-than-one-percent-overhead/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
@@ -113,7 +113,7 @@ This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline vie
 
 This capability requires `dd-trace-dotnet` version 2.30.0+.
 
-[1]: /profiler/enabling/dotnet
+[1]: /ja/profiler/enabling/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -125,7 +125,7 @@ To enable the [timeline feature](#span-execution-timeline-view):
 - Upgrade to `dd-trace-php` version 0.98+.
 - Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
-[1]: /profiler/enabling/php
+[1]: /ja/profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -255,8 +255,8 @@ Endpoint profiling is enabled by default when you [turn on profiling for your Ja
 
 [Datadog プロファイラーの使用][2]が必要です。JFR はサポートされていません。
 
-[1]: /profiler/enabling/java
-[2]: /profiler/enabling/java/?tab=datadog#requirements
+[1]: /ja/profiler/enabling/java
+[2]: /ja/profiler/enabling/java/?tab=datadog#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -264,14 +264,14 @@ Endpoint profiling is enabled by default when you [turn on profiling for your Ja
 
 Requires `dd-trace-py` version 0.54.0+.
 
-[1]: /profiler/enabling/python
+[1]: /ja/profiler/enabling/python
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 [Go サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
 `dd-trace-go` バージョン 1.37.0 以上が必要で、Go バージョン 1.18 以降で最適に動作します。
 
-[1]: /profiler/enabling/go
+[1]: /ja/profiler/enabling/go
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -279,7 +279,7 @@ Requires `dd-trace-py` version 0.54.0+.
 
 Requires `dd-trace-rb` version 0.54.0+.
 
-[1]: /profiler/enabling/ruby
+[1]: /ja/profiler/enabling/ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -287,7 +287,7 @@ Linux と macOS で [Node.js サービスのプロファイリングを有効に
 
 `dd-trace-js` のバージョン 5.0.0 以降、4.24.0 以降または 3.45.0 以降が必要です。
 
-[1]: /profiler/enabling/nodejs
+[1]: /ja/profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -295,7 +295,7 @@ Linux と macOS で [Node.js サービスのプロファイリングを有効に
 
 Requires `dd-trace-dotnet` version 2.15.0+.
 
-[1]: /profiler/enabling/dotnet
+[1]: /ja/profiler/enabling/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -303,7 +303,7 @@ Requires `dd-trace-dotnet` version 2.15.0+.
 
 Requires `dd-trace-php` version 0.79.0+.
 
-[1]: /profiler/enabling/php
+[1]: /ja/profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -350,4 +350,3 @@ The following example shows that CPU per request increased for `/GET train`:
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-

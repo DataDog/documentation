@@ -1,9 +1,9 @@
 ---
-title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
 further_reading:
 - link: /containers/kubernetes/installation
   tag: Documentation
   text: Install the Datadog Agent on Kubernetes
+title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
 ---
 
 ## インストール
@@ -359,18 +359,18 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 [10]: /resources/yaml/datadog-agent-npm.yaml
 [11]: /resources/yaml/datadog-agent-vanilla.yaml
 [12]: /resources/yaml/datadog-agent-windows-vanilla.yaml
-[13]: /agent/kubernetes/apm/#setup
-[14]: /agent/kubernetes/log/
-[15]: /agent/kubernetes/apm/
-[16]: /infrastructure/process/?tab=kubernetes#installation
-[17]: /network_monitoring/performance/setup/
-[18]: /data_security/agent/
+[13]: /ja/agent/kubernetes/apm/#setup
+[14]: /ja/agent/kubernetes/log/
+[15]: /ja/agent/kubernetes/apm/
+[16]: /ja/infrastructure/process/?tab=kubernetes#installation
+[17]: /ja/network_monitoring/performance/setup/
+[18]: /ja/data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
-[20]: /getting_started/site/
-[21]: /agent/docker/?tab=standard#ignore-containers
-[22]: /containers/kubernetes/log
-[23]: /agent/configuration/proxy/#agent-v6
-[24]: /developers/dogstatsd/
-[25]: /developers/dogstatsd/unix_socket/
-[26]: /containers/kubernetes/tag/
-[27]: /agent/guide/autodiscovery-management/
+[20]: /ja/getting_started/site/
+[21]: /ja/agent/docker/?tab=standard#ignore-containers
+[22]: /ja/containers/kubernetes/log
+[23]: /ja/agent/configuration/proxy/#agent-v6
+[24]: /ja/developers/dogstatsd/
+[25]: /ja/developers/dogstatsd/unix_socket/
+[26]: /ja/containers/kubernetes/tag/
+[27]: /ja/agent/guide/autodiscovery-management/

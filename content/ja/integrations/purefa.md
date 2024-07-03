@@ -1,74 +1,74 @@
 ---
-"app_id": "purefa"
-"app_uuid": "a2d8f393-62cd-4ece-bfab-e30797698b12"
-"assets":
-  "dashboards":
-    "purefa_overview": assets/dashboards/purefa_overview.json
-    "purefa_overview_legacy": assets/dashboards/purefa_overview_legacy.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": purefa.info
-      "metadata_path": metadata.csv
-      "prefix": purefa.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10256"
-    "source_type_name": PureFA
-"author":
-  "homepage": "https://purestorage.com"
-  "name": Pure Storage
-  "sales_email": sales@purestorage.com
-  "support_email": pure-observability@purestorage.com
-"categories":
+app_id: purefa
+app_uuid: a2d8f393-62cd-4ece-bfab-e30797698b12
+assets:
+  dashboards:
+    purefa_overview: assets/dashboards/purefa_overview.json
+    purefa_overview_legacy: assets/dashboards/purefa_overview_legacy.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: purefa.info
+      metadata_path: metadata.csv
+      prefix: purefa.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10256
+    source_type_name: PureFA
+author:
+  homepage: https://purestorage.com
+  name: Pure Storage
+  sales_email: sales@purestorage.com
+  support_email: pure-observability@purestorage.com
+categories:
 - data stores
 - os & system
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "purefa"
-"integration_id": "purefa"
-"integration_title": "Pure Storage FlashArray"
-"integration_version": "1.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "purefa"
-"public_title": "Pure Storage FlashArray"
-"short_description": "Monitor the performance and utilization of Pure Storage FlashArrays"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: purefa
+integration_id: purefa
+integration_title: Pure Storage FlashArray
+integration_version: 1.2.0
+is_public: true
+manifest_version: 2.0.0
+name: purefa
+public_title: Pure Storage FlashArray
+short_description: Monitor the performance and utilization of Pure Storage FlashArrays
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Category::OS & System"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor the performance and utilization of Pure Storage FlashArrays
-  "media":
-  - "caption": Pure Storage FlashArray Dashboard - Overview (Top)
-    "image_url": images/FA-overview-1.png
-    "media_type": image
-  - "caption": Pure Storage FlashArray Dashboard - Overview (Middle)
-    "image_url": images/FA-overview-2.png
-    "media_type": image
-  - "caption": Pure Storage FlashArray Dashboard - Overview (Bottom)
-    "image_url": images/FA-overview-3.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Pure Storage FlashArray
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Category::OS & System
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor the performance and utilization of Pure Storage FlashArrays
+  media:
+  - caption: Pure Storage FlashArray Dashboard - Overview (Top)
+    image_url: images/FA-overview-1.png
+    media_type: image
+  - caption: Pure Storage FlashArray Dashboard - Overview (Middle)
+    image_url: images/FA-overview-2.png
+    media_type: image
+  - caption: Pure Storage FlashArray Dashboard - Overview (Bottom)
+    image_url: images/FA-overview-3.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pure Storage FlashArray
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -230,15 +230,14 @@ For support or feature requests, contact Pure Storage through the following meth
 [1]: https://www.purestorage.com/products.html
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/PureStorage-OpenConnect/pure-fa-openmetrics-exporter
-[4]: https://docs.datadoghq.com/agent/guide/community-integrations-installation-with-docker-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/purefa/CHANGELOG.md
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/purefa/images/API.png
 [7]: https://github.com/datadog/integrations-extras/blob/master/purefa/datadog_checks/purefa/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/PureStorage-OpenConnect/pure-exporter
 [11]: https://github.com/datadog/integrations-extras/blob/master/purefa/datadog_checks/purefa/metrics.py
 [12]: https://github.com/DataDog/integrations-extras/blob/master/purefa/metadata.csv
 [13]: https://github.com/DataDog/integrations-extras/blob/master/purefa/assets/service_checks.json
 [14]: https://code-purestorage.slack.com/messages/C0357KLR1EU
-

@@ -1,5 +1,5 @@
 ---
-title: "SNS Topic Component"
+title: SNS Topic Component
 ---
 ## 概要
 
@@ -59,4 +59,4 @@ The following is an example JSON object of a SNS Topic component:
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-[3]: /cloudcraft/faq/scan-error-aws-china-region/
+[3]: /ja/cloudcraft/faq/scan-error-aws-china-region/

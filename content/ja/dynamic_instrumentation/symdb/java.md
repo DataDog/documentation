@@ -1,10 +1,10 @@
 ---
-title: Enable Symbol Database for Java
+code_lang: java
+code_lang_weight: 10
 is_beta: true
 private: true
-code_lang: java
+title: Enable Symbol Database for Java
 type: multi-code-lang
-code_lang_weight: 10
 ---
 
 {{< beta-callout-private url="https://forms.gle/UG9EELAy8Li6z2jW8" >}}
@@ -71,9 +71,9 @@ java \
 
 2. Symbol Database を有効にした状態でサービスを起動すると、[APM > ダイナミックインスツルメンテーションページ][4]で Symbol Database の IDE 同様の機能を利用することができます。
 
-[1]: /dynamic_instrumentation
+[1]: /ja/dynamic_instrumentation
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /dynamic_instrumentation/symdb
+[5]: /ja/getting_started/tagging/unified_service_tagging
+[6]: /ja/dynamic_instrumentation/symdb

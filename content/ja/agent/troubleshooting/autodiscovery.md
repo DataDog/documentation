@@ -1,7 +1,6 @@
 ---
-title: Autodiscovery Troubleshooting
 aliases:
-  - /agent/autodiscovery/troubleshooting
+- /ja/agent/autodiscovery/troubleshooting
 further_reading:
 - link: /agent/troubleshooting/
   tag: Documentation
@@ -12,6 +11,7 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: Documentation
   text: Send an Agent Flare
+title: Autodiscovery Troubleshooting
 ---
 
 Docker Agent オートディスカバリーのトラブルシューティングを開始するには、`configcheck` 初期化スクリプトコマンドを実行します。
@@ -74,5 +74,5 @@ instances:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /agent/troubleshooting/send_a_flare/
+[1]: /ja/help/
+[2]: /ja/agent/troubleshooting/send_a_flare/

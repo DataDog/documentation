@@ -1,48 +1,50 @@
 ---
-"app_id": "papertrail"
-"app_uuid": "630c6ff6-e853-4ef7-8be4-371a55269208"
-"assets":
-  "integration":
-    "auto_install": true
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "147"
-    "source_type_name": "PaperTrail"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "event management"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "papertrail"
-"integration_id": "papertrail"
-"integration_title": "Papertrail"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "papertrail"
-"public_title": "Papertrail"
-"short_description": "View, search on, and discuss Papertrail logs in your Datadog event stream."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Event Management"
-  - "Category::Notifications"
-  "configuration": "README.md#Setup"
-  "description": "View, search on, and discuss Papertrail logs in your Datadog event stream."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Papertrail"
+app_id: papertrail
+app_uuid: 630c6ff6-e853-4ef7-8be4-371a55269208
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 147
+    source_type_name: PaperTrail
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- event management
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: papertrail
+integration_id: papertrail
+integration_title: Papertrail
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: papertrail
+public_title: Papertrail
+short_description: View, search on, and discuss Papertrail logs in your Datadog event
+  stream.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Event Management
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: View, search on, and discuss Papertrail logs in your Datadog event
+    stream.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Papertrail
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -97,5 +99,4 @@ The Papertrail integration does not include any service checks.
 Need help? Contact [Datadog support][2].
 
 [1]: https://papertrailapp.com/events
-[2]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/help/

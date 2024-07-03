@@ -1,22 +1,22 @@
 ---
-title: Getting Started in Datadog
-kind: documentation
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/dd-101-dev"
-    tag: Learning Center
-    text: "Datadog 101: Developer"
-  - link: "https://learn.datadoghq.com/courses/dd-101-sre"
-    tag: Learning Center
-    text: "Datadog 101: Site Reliability Engineer"
-  - link: "https://dtdg.co/fe"
-    tag: Foundation Enablement
-    text: Join an interactive session to build a solid foundation of Datadog
-  - link: "https://www.datadoghq.com/blog/datadog-quick-nav-menu/"
-    tag: Blog
-    text: Introducing the Datadog quick nav menu
-  - link: "https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/"
-    tag: Blog
-    text: DRUIDS, the design system that powers Datadog
+- link: https://learn.datadoghq.com/courses/dd-101-dev
+  tag: Learning Center
+  text: 'Datadog 101: Developer'
+- link: https://learn.datadoghq.com/courses/dd-101-sre
+  tag: Learning Center
+  text: 'Datadog 101: Site Reliability Engineer'
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to build a solid foundation of Datadog
+- link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
+  tag: Blog
+  text: Introducing the Datadog quick nav menu
+- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
+  tag: Blog
+  text: DRUIDS, the design system that powers Datadog
+kind: documentation
+title: Getting Started in Datadog
 ---
 
 {{< learning-center-callout header="Try Datadog Foundation in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
@@ -138,26 +138,26 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 
 [1]: https://app.datadoghq.com
 [2]: http://www.datadoghq.com/integrations
-[3]: /api/
+[3]: /ja/api/
 [4]: https://github.com/DataDog/datadog-agent
-[5]: /logs/
-[6]: /tracing/
-[7]: /infrastructure/
-[8]: /getting_started/tagging/
-[9]: /infrastructure/hostmap/
-[10]: /service_management/events/
-[11]: /service_management/events/explorer/analytics
-[12]: /dashboards/
-[13]: /dashboards/#screenboards
-[14]: /dashboards/functions/arithmetic/
-[15]: /dashboards/functions/
-[16]: /monitors/
-[17]: /network_monitoring/performance/
-[18]: /real_user_monitoring/
-[19]: /real_user_monitoring/session_replay/browser/
-[20]: /serverless
-[21]: /security/cloud_siem/
-[22]: /synthetics/
-[23]: /service_management/mobile/
+[5]: /ja/logs/
+[6]: /ja/tracing/
+[7]: /ja/infrastructure/
+[8]: /ja/getting_started/tagging/
+[9]: /ja/infrastructure/hostmap/
+[10]: /ja/service_management/events/
+[11]: /ja/service_management/events/explorer/analytics
+[12]: /ja/dashboards/
+[13]: /ja/dashboards/#screenboards
+[14]: /ja/dashboards/functions/arithmetic/
+[15]: /ja/dashboards/functions/
+[16]: /ja/monitors/
+[17]: /ja/network_monitoring/performance/
+[18]: /ja/real_user_monitoring/
+[19]: /ja/real_user_monitoring/session_replay/browser/
+[20]: /ja/serverless
+[21]: /ja/security/cloud_siem/
+[22]: /ja/synthetics/
+[23]: /ja/service_management/mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318
 [25]: https://play.google.com/store/apps/details?id=com.datadog.app

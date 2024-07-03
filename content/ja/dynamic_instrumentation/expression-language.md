@@ -1,6 +1,6 @@
 ---
-title: Dynamic Instrumentation Expression Language
 private: false
+title: Dynamic Instrumentation Expression Language
 ---
 
 ## 概要
@@ -59,8 +59,8 @@ The Dynamic Instrumentation Expression Language helps you formulate log probe me
 | `len(value_src)` | コレクションサイズを取得します。 | `len(myCollection)` -> `3` |
 | `[ n ]` | コレクションの場合、コレクション内の n 番目のアイテムを返します。マップと辞書の場合、キー `n` に対応する値を返します。項目が存在しない場合、式はエラーを返します。 | `myCollection[1]` -> `2` |
 
-[1]: /metrics/types/?tab=count#metric-types
-[2]: /metrics/types/?tab=gauge#metric-types
-[3]: /metrics/types/?tab=histogram#metric-types
-[4]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
-[5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[1]: /ja/metrics/types/?tab=count#metric-types
+[2]: /ja/metrics/types/?tab=gauge#metric-types
+[3]: /ja/metrics/types/?tab=histogram#metric-types
+[4]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-spans
+[5]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-tags

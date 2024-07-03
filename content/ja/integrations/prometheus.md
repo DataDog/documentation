@@ -1,55 +1,57 @@
 ---
-"app_id": "prometheus"
-"app_uuid": "b978d452-7008-49d0-bb87-62d8639b2205"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10013"
-    "source_type_name": "Prometheus"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "metrics"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "prometheus"
-"integration_id": "prometheus"
-"integration_title": "Prometheus (レガシー)"
-"integration_version": "3.6.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "prometheus"
-"public_title": "Prometheus (legacy)"
-"short_description": "Prometheus is an open source monitoring system for timeseries metric data"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Metrics"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Prometheus is an open source monitoring system for timeseries metric data"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Prometheus (legacy)"
+app_id: prometheus
+app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10013
+    source_type_name: Prometheus
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- metrics
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: prometheus
+integration_id: prometheus
+integration_title: Prometheus (レガシー)
+integration_version: 3.6.0
+is_public: true
+manifest_version: 2.0.0
+name: prometheus
+public_title: Prometheus (legacy)
+short_description: Prometheus is an open source monitoring system for timeseries metric
+  data
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Metrics
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Prometheus is an open source monitoring system for timeseries metric
+    data
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Prometheus (legacy)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -153,14 +155,13 @@ Need help? Contact [Datadog support][7].
 - [Configuring a Prometheus Check][9]
 - [Writing a custom Prometheus Check][10]
 
-[1]: https://docs.datadoghq.com/integrations/openmetrics/
-[2]: https://docs.datadoghq.com/getting_started/integrations/prometheus/
-[3]: https://docs.datadoghq.com/getting_started/integrations/prometheus?tab=docker#configuration
+[1]: https://docs.datadoghq.com/ja/integrations/openmetrics/
+[2]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus?tab=docker#configuration
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/
 [8]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[9]: https://docs.datadoghq.com/agent/prometheus/
-[10]: https://docs.datadoghq.com/developers/prometheus/
-
+[9]: https://docs.datadoghq.com/ja/agent/prometheus/
+[10]: https://docs.datadoghq.com/ja/developers/prometheus/

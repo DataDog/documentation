@@ -1,11 +1,12 @@
 ---
-title: ユーザー保持
-kind: documentation
-description: Measure user retention to understand overall user satisfaction with your application.
+description: Measure user retention to understand overall user satisfaction with your
+  application.
 further_reading:
-    - link: /product_analytics/
-      tag: ドキュメント
-      text: 製品分析
+- link: /product_analytics/
+  tag: ドキュメント
+  text: 製品分析
+kind: documentation
+title: ユーザー保持
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -82,7 +83,7 @@ Data retention for this feature is limited to 30 days unless your organization i
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/retention-analysis
-[2]: /real_user_monitoring/browser/data_collected/#view-attributes
-[3]: /real_user_monitoring/browser/data_collected/#action-timing-metrics
-[4]: /real_user_monitoring/browser/advanced_configuration#user-session
-[5]: /help
+[2]: /ja/real_user_monitoring/browser/data_collected/#view-attributes
+[3]: /ja/real_user_monitoring/browser/data_collected/#action-timing-metrics
+[4]: /ja/real_user_monitoring/browser/advanced_configuration#user-session
+[5]: /ja/help

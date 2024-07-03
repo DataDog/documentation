@@ -1,28 +1,28 @@
 ---
-"categories":
+categories:
 - cloud
 - aws
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Amazon Managed Streaming for Apache Kafka (MSK) metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_msk/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-amazon-msk/"
-  "tag": Blog
-  "text": Monitor Amazon Managed Streaming for Apache Kafka with Datadog
-"git_integration_title": "amazon_msk"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Managed Streaming for Apache Kafka (MSK)"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_msk"
-"public_title": "Datadog-Amazon Managed Streaming for Apache Kafka (MSK) Integration"
-"short_description": "Track key Amazon MSK metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Amazon Managed Streaming for Apache Kafka (MSK) metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-amazon-msk/
+  tag: Blog
+  text: Monitor Amazon Managed Streaming for Apache Kafka with Datadog
+git_integration_title: amazon_msk
+has_logo: true
+integration_id: ''
+integration_title: Amazon Managed Streaming for Apache Kafka (MSK)
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_msk
+public_title: Datadog-Amazon Managed Streaming for Apache Kafka (MSK) Integration
+short_description: Track key Amazon MSK metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -86,13 +86,12 @@ Need help? Contact [Datadog support][9].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/amazon_kafka/
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_kafka/
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-msk
-[5]: https://docs.datadoghq.com/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_msk/amazon_msk_metadata.csv
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

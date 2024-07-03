@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting the Ruby Profiler
 code_lang: ruby
-type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-    - link: /tracing/troubleshooting
-      tag: Documentation
-      text: APM Troubleshooting
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM Troubleshooting
+title: Troubleshooting the Ruby Profiler
+type: multi-code-lang
 ---
 
 ## プロファイル検索ページにないプロファイル
@@ -91,8 +91,8 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
+[1]: /ja/tracing/troubleshooting/#tracer-debug-logs
+[2]: /ja/help/
 [3]: https://github.com/datadog/dd-trace-rb/releases/tag/v1.21.0
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks

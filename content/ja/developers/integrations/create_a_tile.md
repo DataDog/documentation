@@ -1,9 +1,9 @@
 ---
 aliases:
-- /developers/marketplace/offering
+- /ja/developers/marketplace/offering
 description: Learn how to develop and publish an integration tile.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-marketplace/"
+- link: https://www.datadoghq.com/blog/datadog-marketplace/
   tag: Blog
   text: Expand your monitoring reach with the Datadog Marketplace
 - link: /developers/integrations/marketplace_offering
@@ -90,7 +90,7 @@ For Datadog API integrations that will be available out-of-the-box on the [Integ
    ddev create -t tile "<Offering Name>"
    ```
 
-[101]: https://docs.datadoghq.com/developers/integrations/python
+[101]: https://docs.datadoghq.com/ja/developers/integrations/python
 [102]: https://github.com/Datadog/integrations-extras
 [103]: https://app.datadoghq.com/integrations
 
@@ -166,8 +166,8 @@ To create the tile-only listing's scaffolding:
    ```
 
 [101]: https://github.com/Datadog/marketplace
-[102]: https://docs.datadoghq.com/developers/integrations/marketplace_offering
-[103]: https://docs.datadoghq.com/developers/integrations/python
+[102]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering
+[103]: https://docs.datadoghq.com/ja/developers/integrations/python
 [104]: https://app.datadoghq.com/marketplace
 
 {{% /tab %}}
@@ -301,33 +301,33 @@ Datadog では、Marketplace の出品にのみ GTM サポートを提供して�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/marketplace/
-[2]: https://docs.datadoghq.com/developers/custom_checks/prometheus/
-[3]: https://docs.datadoghq.com/developers/integrations/agent_integration/#write-the-check
-[4]: https://docs.datadoghq.com/developers/dogstatsd/
-[5]: https://docs.datadoghq.com/api/latest/metrics/
-[6]: https://docs.datadoghq.com/logs/faq/partner_log_integration/
-[7]: https://docs.datadoghq.com/api/latest/events/
-[8]: https://docs.datadoghq.com/api/latest/service-checks/
-[9]: https://docs.datadoghq.com/tracing/guide/send_traces_to_agent_by_api/
-[10]: https://docs.datadoghq.com/api/latest/incidents/
-[11]: https://docs.datadoghq.com/api/latest/security-monitoring/
-[12]: https://docs.datadoghq.com/developers/integrations/
-[13]: https://docs.datadoghq.com/developers/#creating-your-own-solution
-[14]: https://docs.datadoghq.com/api/latest/
-[15]: https://docs.datadoghq.com/developers/integrations/oauth_for_integrations/
-[16]: https://docs.datadoghq.com/developers/datadog_apps/
+[2]: https://docs.datadoghq.com/ja/developers/custom_checks/prometheus/
+[3]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration/#write-the-check
+[4]: https://docs.datadoghq.com/ja/developers/dogstatsd/
+[5]: https://docs.datadoghq.com/ja/api/latest/metrics/
+[6]: https://docs.datadoghq.com/ja/logs/faq/partner_log_integration/
+[7]: https://docs.datadoghq.com/ja/api/latest/events/
+[8]: https://docs.datadoghq.com/ja/api/latest/service-checks/
+[9]: https://docs.datadoghq.com/ja/tracing/guide/send_traces_to_agent_by_api/
+[10]: https://docs.datadoghq.com/ja/api/latest/incidents/
+[11]: https://docs.datadoghq.com/ja/api/latest/security-monitoring/
+[12]: https://docs.datadoghq.com/ja/developers/integrations/
+[13]: https://docs.datadoghq.com/ja/developers/#creating-your-own-solution
+[14]: https://docs.datadoghq.com/ja/api/latest/
+[15]: https://docs.datadoghq.com/ja/developers/integrations/oauth_for_integrations/
+[16]: https://docs.datadoghq.com/ja/developers/datadog_apps/
 [17]: https://app.datadoghq.com/apps/
 [18]: https://github.com/Datadog/marketplace
-[19]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/#request-access-to-marketplace
+[19]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/#request-access-to-marketplace
 [20]: https://www.python.org/downloads/
 [21]: https://pypi.org/project/datadog-checks-dev/
-[22]: https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file
+[22]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#manifest-file
 [23]: https://datadoghq.com/blog/
 [24]: https://github.com/DataDog/integrations-extras/tree/master/vantage
-[25]: https://docs.datadoghq.com/developers/integrations/python
+[25]: https://docs.datadoghq.com/ja/developers/integrations/python
 [26]: https://github.com/Datadog/integrations-extras
-[27]: https://docs.datadoghq.com/developers/integrations/agent_integration/
-[28]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
+[27]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration/
+[28]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/
 [29]: https://github.com/
 [30]: https://www.markdownguide.org/basic-syntax/#reference-style-links
 [31]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md

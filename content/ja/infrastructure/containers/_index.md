@@ -1,9 +1,8 @@
 ---
-title: Containers View
 aliases:
-  - /guides/livecontainers
-  - /graphing/infrastructure/livecontainers/
-  - /infrastructure/livecontainers
+- /ja/guides/livecontainers
+- /ja/graphing/infrastructure/livecontainers/
+- /ja/infrastructure/livecontainers
 further_reading:
 - link: /infrastructure/livecontainers/configuration
   tag: Documentation
@@ -14,15 +13,16 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentation
   text: Understand what is going on at any level of your system
-- link: "https://www.datadoghq.com/blog/kubernetes-cpu-requests-limits/"
+- link: https://www.datadoghq.com/blog/kubernetes-cpu-requests-limits/
   tag: Blog
   text: A deep dive into CPU requests and limits in Kubernetes
-- link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
+- link: https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/
   tag: Blog
   text: Expedite infrastructure investigations with Kubernetes Anomalies
-- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+- link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: Blog
   text: Practical tips for rightsizing your Kubernetes workloads
+title: Containers View
 ---
 
 Datadog の [Containers][1] ページは、環境内のすべてのコンテナをリアルタイムで可視化します。
@@ -237,22 +237,22 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /integrations/docker_daemon/
-[3]: /agent/kubernetes/
-[4]: /agent/amazon_ecs/
-[5]: /infrastructure/livecontainers/configuration
-[6]: /tagging/assigning_tags?tab=agentv6v7#host-tags
-[7]: /getting_started/tagging/unified_service_tagging
-[8]: /dashboards/widgets/timeseries/
-[9]: /logs
-[10]: /metrics
-[11]: /tracing
-[12]: /events
-[13]: /logs/explorer/live_tail
+[2]: /ja/integrations/docker_daemon/
+[3]: /ja/agent/kubernetes/
+[4]: /ja/agent/amazon_ecs/
+[5]: /ja/infrastructure/livecontainers/configuration
+[6]: /ja/tagging/assigning_tags?tab=agentv6v7#host-tags
+[7]: /ja/getting_started/tagging/unified_service_tagging
+[8]: /ja/dashboards/widgets/timeseries/
+[9]: /ja/logs
+[10]: /ja/metrics
+[11]: /ja/tracing
+[12]: /ja/events
+[13]: /ja/logs/explorer/live_tail
 [14]: https://github.com/DataDog/datadog-agent/blob/7.23.1/Dockerfiles/manifests/cluster-agent/rbac.yaml
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
-[16]: /infrastructure/containers/configuration
-[17]: /infrastructure/faq/live-containers-legacy-configuration
+[16]: /ja/infrastructure/containers/configuration
+[17]: /ja/infrastructure/faq/live-containers-legacy-configuration
 [18]: https://app.datadoghq.com/orchestration/overview
-[19]: /infrastructure/containers/orchestrator_explorer/
-[20]: /infrastructure/containers/kubernetes_resources
+[19]: /ja/infrastructure/containers/orchestrator_explorer/
+[20]: /ja/infrastructure/containers/kubernetes_resources

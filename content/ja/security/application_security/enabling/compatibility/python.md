@@ -1,9 +1,9 @@
 ---
-title: Python Compatibility Requirements
-kind: documentation
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 50
+kind: documentation
+title: Python Compatibility Requirements
+type: multi-code-lang
 ---
 ## Application Security capabilities support
 
@@ -100,11 +100,7 @@ Python ライブラリは[データベース API 仕様][4]をサポートして
 |-------------------| --------------------------- |
 | Django            | 1.11、2.2、3.2、>= 4.0
 
-[1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[1]: /ja/tracing/trace_collection/compatibility/python/
+[2]: /ja/agent/remote_config/#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
-
-
-
-

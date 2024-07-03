@@ -2,21 +2,23 @@
 categories:
 - cloud
 - configuration & deployment
-description: "Enable the integration to see Datadog metrics in CloudCheckr."
+custom_kind: integration
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md
+description: Enable the integration to see Datadog metrics in CloudCheckr.
 doc_link: https://docs.datadoghq.com/integrations/cloudcheckr/
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md"]
+further_reading:
+- link: https://www.datadoghq.com/blog/rightsizing-cloudcheckr/
+  tag: Blog
+  text: 'CloudCheckr + Datadog: Better rightsizing of cloud resources'
 has_logo: true
+integration_id: cloudcheckr
 integration_title: CloudCheckr
 is_public: true
-custom_kind: integration
 name: cloudcheckr
 public_title: Datadog-CloudCheckr Integration
-short_description: "Add Datadog metrics in CloudCheckr to monitor and optimize your AWS usage."
-integration_id: "cloudcheckr"
-further_reading:
-  - link: "https://www.datadoghq.com/blog/rightsizing-cloudcheckr/"
-    tag: "Blog"
-    text: "CloudCheckr + Datadog: Better rightsizing of cloud resources"
+short_description: Add Datadog metrics in CloudCheckr to monitor and optimize your
+  AWS usage.
 ---
 
 ## Overview

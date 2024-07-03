@@ -1,14 +1,14 @@
 ---
-title: Custom Instrumentation for Rust
-kind: documentation
-description: 'Manually instrument your Rust applications to send custom traces to Datadog.'
+description: Manually instrument your Rust applications to send custom traces to Datadog.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+kind: documentation
+title: Custom Instrumentation for Rust
 ---
 
 Datadog supports custom instrumentation for Rust applications when you use the [OpenTelemetry SDK][1].

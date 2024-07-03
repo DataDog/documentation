@@ -1,5 +1,5 @@
 ---
-title: "Customer Gateway Component"
+title: Customer Gateway Component
 ---
 ## 概要
 
@@ -60,4 +60,4 @@ The following is an example JSON object of a Customer Gateway component:
 The customer gateway component can only be added to [VPCs][2].
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc
+[2]: /ja/cloudcraft/components-aws/vpc

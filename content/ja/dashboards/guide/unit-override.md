@@ -1,18 +1,20 @@
 ---
-title: Customize your visualizations with unit override
+algolia:
+  tags:
+  - unit override
+  - custom units
 disable_toc: false
 further_reading:
 - link: metrics/units/
   tag: Documentation
   text: Metric Units
-- link: "logs/explorer/facets/#units"
+- link: logs/explorer/facets/#units
   tag: Documentation
   text: Event units
 - link: dashboards/widgets/
   tag: Documentation
   text: List of Widgets
-algolia:
-  tags: [unit override, custom units]  
+title: Customize your visualizations with unit override
 ---
 
 ## 概要
@@ -56,4 +58,4 @@ Define completely custom units that are not included in the provided list of uni
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/dashboards/widgets/table/
+[1]: https://docs.datadoghq.com/ja/dashboards/widgets/table/

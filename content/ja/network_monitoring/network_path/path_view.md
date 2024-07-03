@@ -1,14 +1,14 @@
 ---
-title: Path View
-kind: documentation
-description: Investigate the Network Path - Path View 
+description: Investigate the Network Path - Path View
 further_reading:
 - link: /network_monitoring/network_path/setup
   tag: ドキュメント
   text: Setup Network Path
-- link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
+- link: https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/
   tag: ブログ
   text: Datadog NPM でクラウドアーキテクチャとアプリの依存関係を監視する
+kind: documentation
+title: Path View
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -79,5 +79,5 @@ The hop-to-hop latency graph provides a detailed view of the latency for each ho
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/network/path
-[2]: /network_monitoring/network_path/list_view
-[3]: /network_monitoring/devices
+[2]: /ja/network_monitoring/network_path/list_view
+[3]: /ja/network_monitoring/devices

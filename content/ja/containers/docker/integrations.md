@@ -1,7 +1,6 @@
 ---
-title: Docker and Integrations
 aliases:
-- /agent/docker/integrations
+- /ja/agent/docker/integrations
 further_reading:
 - link: /agent/docker/log/
   tag: Documentation
@@ -18,6 +17,7 @@ further_reading:
 - link: /agent/docker/tag/
   tag: Documentation
   text: Assign tags to all data emitted by a container
+title: Docker and Integrations
 ---
 
 This page covers how to install and configure integrations for your Docker infrastructure by using a Datadog feature known as _Autodiscovery_. Autodiscovery enables you to use [variables][1] like `%%host%%` to dynamically populate your configuration settings. 
@@ -214,10 +214,10 @@ key-value ストアがテンプレートソースとして有効になってい�
     ...
 ```
 
-[1]: /integrations/consul/
-[2]: /integrations/etcd/
-[3]: /integrations/zk/
-[4]: /agent/configuration/agent-commands/
+[1]: /ja/integrations/consul/
+[2]: /ja/integrations/etcd/
+[3]: /ja/integrations/zk/
+[4]: /ja/agent/configuration/agent-commands/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -315,11 +315,11 @@ All of these examples use [Autodiscovery template variables][1]:
 
 For more examples, including how to configure multiple checks for multiple sets of containers, see [Autodiscovery: Scenarios & Examples][8].
 
-[1]: /containers/guide/template_variables/
-[2]: /getting_started/containers/autodiscovery
-[3]: /containers/guide/autodiscovery-management
-[4]: /containers/kubernetes/integrations/
-[5]: /agent/guide/use-community-integrations/
-[6]: /containers/guide/auto_conf
-[7]: /containers/guide/ad_identifiers
-[8]: /containers/guide/autodiscovery-examples
+[1]: /ja/containers/guide/template_variables/
+[2]: /ja/getting_started/containers/autodiscovery
+[3]: /ja/containers/guide/autodiscovery-management
+[4]: /ja/containers/kubernetes/integrations/
+[5]: /ja/agent/guide/use-community-integrations/
+[6]: /ja/containers/guide/auto_conf
+[7]: /ja/containers/guide/ad_identifiers
+[8]: /ja/containers/guide/autodiscovery-examples

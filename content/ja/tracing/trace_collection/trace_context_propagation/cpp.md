@@ -1,16 +1,16 @@
 ---
-title: Propagating C++ Trace Context
-kind: documentation
 code_lang: cpp
-type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
-      tag: Blog
-      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: Blog
+  text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Propagating C++ Trace Context
+type: multi-code-lang
 ---
 
 ## Overview

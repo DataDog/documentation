@@ -1,10 +1,10 @@
 ---
-title: Automate open source risk reduction with Datadog SCA
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
+- link: https://www.datadoghq.com/blog/datadog-software-composition-analysis/
   tag: ブログ
   text: Datadog Software Composition Analysis でサードパーティライブラリの脆弱性を軽減する
+title: Automate open source risk reduction with Datadog SCA
 ---
 
 Datadog Software Composition Analysis (SCA) enables you to easily identify, prioritize, and resolve vulnerabilities and other risks in the third-party, open source software (OSS) libraries used in your application services.

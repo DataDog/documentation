@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting DBM Setup for Oracle
 description: Troubleshoot Database Monitoring setup for Oracle
+title: Troubleshooting DBM Setup for Oracle
 ---
 
 This page details common issues with setting up and using Database Monitoring with Oracle, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
@@ -36,6 +36,6 @@ Escape character is '^]'.
 ### "Table or view does not exist" error in `agent.log`
 Execute the permission grants listed in the **Grant permissions** step of the [setup instructions][3] for your hosting type.
 
-[1]: /database_monitoring/setup_oracle/
-[2]: /database_monitoring/setup_oracle#recommended-agent-version
-[3]: /database_monitoring/setup_oracle#setup
+[1]: /ja/database_monitoring/setup_oracle/
+[2]: /ja/database_monitoring/setup_oracle#recommended-agent-version
+[3]: /ja/database_monitoring/setup_oracle#setup

@@ -1,8 +1,8 @@
 ---
-title: Watchdog Impact Analysis
-description: Discover performance issues in your application impacting end users with Watchdog Impact Analysis.  
+description: Discover performance issues in your application impacting end users with
+  Watchdog Impact Analysis.
 further_reading:
-- link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"
+- link: https://www.datadoghq.com/blog/watchdog-impact-analysis/
   tag: Blog
   text: Understand the scope of user impact with Watchdog Impact Analysis
 - link: real_user_monitoring/explorer/watchdog_insights/
@@ -11,6 +11,7 @@ further_reading:
 - link: real_user_monitoring/connect_rum_and_traces/
   tag: Documentation
   text: Connect RUM and Traces
+title: Watchdog Impact Analysis
 ---
 
 ## 概要

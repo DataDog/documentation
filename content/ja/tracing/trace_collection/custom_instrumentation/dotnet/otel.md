@@ -1,19 +1,20 @@
 ---
-title: .NET Custom Instrumentation using OpenTelemetry API
-code_lang: otel
-type: multi-code-lang
-code_lang_weight: 2
-description: 'Instrument your .NET application with OpenTelemetry API, to send traces to Datadog.'
 aliases:
-- /tracing/trace_collection/otel_instrumentation/dotnet/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
+- /ja/tracing/trace_collection/otel_instrumentation/dotnet/
+- /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
+code_lang: otel
+code_lang_weight: 2
+description: Instrument your .NET application with OpenTelemetry API, to send traces
+  to Datadog.
 further_reading:
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+title: .NET Custom Instrumentation using OpenTelemetry API
+type: multi-code-lang
 ---
 
 {{% otel-custom-instrumentation-lang %}}
@@ -125,7 +126,7 @@ You can configure the propagation of context for distributed traces by injecting
 
 [5]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [8]: https://opentelemetry.io/docs/instrumentation/net/libraries/
-[10]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
-[11]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
-[13]: /tracing/trace_collection/single-step-apm/
-[14]: /tracing/trace_collection/trace_context_propagation/dotnet/
+[10]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
+[11]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[13]: /ja/tracing/trace_collection/single-step-apm/
+[14]: /ja/tracing/trace_collection/trace_context_propagation/dotnet/

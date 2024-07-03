@@ -1,8 +1,5 @@
 ---
-title: Configuring PagerDuty for DORA Metrics
-kind: ドキュメント
 description: Learn how to configure PagerDuty as a data source for DORA Metrics incidents.
-is_beta: true
 further_reading:
 - link: /dora_metrics/failures
   tag: ドキュメント
@@ -16,9 +13,12 @@ further_reading:
 - link: /monitors/types/metric
   tag: ドキュメント
   text: Learn about Metric Monitors
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: リリースノート
   text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
+is_beta: true
+kind: ドキュメント
+title: Configuring PagerDuty for DORA Metrics
 ---
 
 {{< site-region region="gov" >}}
@@ -76,7 +76,7 @@ For more information about setting the PagerDuty service URL for a Datadog servi
 [1]: https://support.pagerduty.com/docs/incidents
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://support.pagerduty.com/docs/services-and-integrations
-[4]: /service_catalog/
+[4]: /ja/service_catalog/
 [5]: https://support.pagerduty.com/docs/incident-priority
-[6]: /service_catalog/integrations/#pagerduty-integration
-[7]: /integrations/pagerduty/
+[6]: /ja/service_catalog/integrations/#pagerduty-integration
+[7]: /ja/integrations/pagerduty/

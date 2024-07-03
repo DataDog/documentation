@@ -1,7 +1,7 @@
 ---
+description: Learn how to use Product Analytics & Session Replay to monitor the performance
+  of UTM campaigns.
 title: How to Monitor UTM Campaigns in Product Analytics
-kind: ガイド
-description: Learn how to use Product Analytics & Session Replay to monitor the performance of UTM campaigns.
 ---
 
 ## 概要
@@ -42,4 +42,4 @@ As in the above query, you can count all views of a page, such as the landing pa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#views
+[1]: /ja/real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#views

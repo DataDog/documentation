@@ -1,72 +1,71 @@
 ---
-title: Cloud Metric Delay
-kind: guide
 aliases:
-    - /integrations/faq/are-my-aws-cloudwatch-metrics-delayed/
-    - /integrations/faq/why-is-there-a-delay-in-receiving-my-data/
-    - /integrations/faq/cloud-metric-delay
+- /ja/integrations/faq/are-my-aws-cloudwatch-metrics-delayed/
+- /ja/integrations/faq/why-is-there-a-delay-in-receiving-my-data/
+- /ja/integrations/faq/cloud-metric-delay
 further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: Why should I install the Datadog Agent on my cloud instances?
+title: Cloud Metric Delay
 ---
 
-## Overview
+## 概要
 
-When using any Datadog cloud integration (AWS, Azure, Google Cloud, etc.), metrics are pulled in by API with a crawler. You may see a delay in metrics due to constraints with the cloud provider API.
+Datadog のクラウドインテグレーション (AWS、Azure、Google Cloud など) を利用する場合、メトリクスは API によりクローラーで取り込まれます。クラウドプロバイダー API の制約により、メトリクスに遅延が発生する場合があります。
 
-## Summary
+## サマリー
 
-| Provider   | Default crawler  |
+| プロバイダー   | デフォルトのクローラー  |
 |------------|------------------|
-| Alibaba    | Every 10 minutes |
-| AWS        | Every 10 minutes |
-| Azure      | Every 2 minutes  |
-| Cloudflare | Every 15 minutes |
-| GCP        | Every 5 minutes  |
+| Alibaba    | 10 分ごと |
+| AWS        | 10 分ごと |
+| Azure      | 2 分ごと  |
+| Cloudflare | 15 分ごと |
+| GCP        | 5 分ごと  |
 
-## Cloud providers
+## クラウドプロバイダー
 
-These are specifics related to particular cloud providers.
+特定のクラウドプロバイダーに関する仕様です。
 
 ### Alibaba
 
-Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
+Alibaba は 1 分単位でメトリクスを発行しています。そのため、メトリクスの遅延は 7～8 分程度になることが予想されます。
 
 ### AWS
 
-AWS offers two levels of granularity for metrics (5 and 1 minute metrics). If you receive 5-minute metrics from CloudWatch, there can be ~15-20 minute delay in receiving your metrics. This is because CloudWatch makes your data available with a 5-10 minute latency plus the Datadog default of 10 minutes. Queueing and CloudWatch API limitations can add up to another 5 minutes. If you receive 1-minute metrics with CloudWatch, then their availability delay is about 2 minutes—so total latency to view your metrics may be ~10-12 minutes.
+AWS はメトリクスに 2 つの粒度 (5 分と 1 分のメトリクス) を提供しています。CloudWatch から 5 分のメトリクスを受け取る場合、15〜20 分の遅延が発生することがあります。これは、CloudWatch が 5〜10分 のレイテンシーに Datadog のデフォルトである 10 分を加えてデータを利用できるようにするためです。キューイングと CloudWatch API の制限により、さらに 5 分かかることがあります。CloudWatch で 1 分のメトリクスを受信する場合、その可用性の遅延は約 2 分で、メトリクスを見るための合計レイテンシーは 10～12 分程度になる可能性があります。
 
-Further, the CloudWatch API only offers a metric-by-metric crawl to pull data. The CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for *detailed metrics* within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
+さらに、CloudWatch API で提供されるのは、データを取得するためのメトリクス別のクロールだけです。CloudWatch API にはレート制限があり、認証証明書、リージョン、サービスの組み合わせに基づいて変化します。アカウント レベルにより、AWS で使用できるメトリクスは異なります。たとえば、AWS 上で*詳細なメトリクス*に対して支払いを行うと、短時間で入手できるようになります。この詳細なメトリクスのサービスのレベルは粒度にも適用され、一部のメトリクスは 1 分ごと、それ以外は 5 分ごとに使用可能になります。
 
 {{% site-region region="us,us5,eu,ap1" %}}
 On your selected [Datadog site][1] ({{< region-param key="dd_site_name" >}}), you can optionally configure Amazon CloudWatch Metric Streams and Amazon Data Firehose to get CloudWatch metrics into Datadog faster with a 2-3 minute latency. Visit the [documentation on metric streaming][2] to learn more about this approach.
 
-[1]: /getting_started/site/
-[2]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[1]: /ja/getting_started/site/
+[2]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
 {{% /site-region %}}
 
 ### Azure
 
-Azure emits metrics with 1-minute granularity. Therefore, expect metric delays of ~4-5 minutes.
+Azure は 1 分単位でメトリクスを発行しています。そのため、メトリクスの遅延は 4～5 分程度になることが予想されます。
 
 ### GCP
 
-GCP emits metrics with 1-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
+GCP は 1 分単位でメトリクスを発行しています。そのため、メトリクスの遅延は 7～8 分程度になることが予想されます。
 
-## Monitors
+## モニター
 
 When creating monitors in Datadog, a warning message displays if you choose a delayed metric. Datadog recommends extending the timeframe and delaying the monitor evaluation for these metrics.
 
-## Faster metrics
+## メトリクスの高速化
 
-To obtain system-level metrics with virtually zero delay, install the Datadog Agent on your cloud hosts when possible. For a full list of the benefits of installing the Agent on your cloud instances, refer to the documentation [Why should I install the Datadog Agent on my cloud instances?][1].
+システムレベルのメトリクスを実質的にゼロ遅延で取得するためには、可能な限り Datadog Agent をクラウドホストにインストールします。クラウドインスタンスに Agent をインストールするメリットの一覧は、ドキュメント[クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？][1]を参照してください。
 
 On the Datadog side for the AWS, Azure, and GCP integrations, Datadog may be able to speed up the default metric crawler for all metrics. Additionally, for AWS, Datadog has namespace specific crawlers. Contact [Datadog support][2] for more information.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-[2]: /help/
+[1]: /ja/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[2]: /ja/help/

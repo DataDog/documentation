@@ -1,6 +1,6 @@
 ---
-title: Archive Logs for the Splunk HTTP Event Collector (HEC)
 disable_toc: false
+title: Archive Logs for the Splunk HTTP Event Collector (HEC)
 ---
 
 ## 概要

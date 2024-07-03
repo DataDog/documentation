@@ -1,9 +1,9 @@
 ---
-title: standard deviation
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - variance
+- variance
+title: standard deviation
 ---
 A standard deviation is a measure of the amount of variation of a random variable relative to its mean.
 

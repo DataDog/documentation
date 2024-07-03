@@ -1,24 +1,24 @@
 ---
-title: Go Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
-    - /tracing/opentracing/go
-    - /tracing/manual_instrumentation/go
-    - /tracing/custom_instrumentation/go
-    - /tracing/setup_overview/custom_instrumentation/go
-    - /tracing/trace_collection/custom_instrumentation/go
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
-description: 'Instrument your code with the Datadog Go APM tracer.'
+- /ja/tracing/opentracing/go
+- /ja/tracing/manual_instrumentation/go
+- /ja/tracing/custom_instrumentation/go
+- /ja/tracing/setup_overview/custom_instrumentation/go
+- /ja/tracing/trace_collection/custom_instrumentation/go
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/go
 code_lang: dd-api
-type: multi-code-lang
 code_lang_weight: 1
+description: Instrument your code with the Datadog Go APM tracer.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+kind: documentation
+title: Go Custom Instrumentation using Datadog API
+type: multi-code-lang
 ---
 <div class="alert alert-info">
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/go/">Go Setup Instructions</a>.
@@ -216,12 +216,12 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#span-tags
-[2]: /tracing/glossary/#spans
-[3]: /tracing/setup/go/#compatibility
+[1]: /ja/tracing/glossary/#span-tags
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/tracing/setup/go/#compatibility
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
-[7]: /tracing/glossary/#trace
-[9]: /tracing/security
-[11]: /tracing/trace_collection/trace_context_propagation/go/
+[7]: /ja/tracing/glossary/#trace
+[9]: /ja/tracing/security
+[11]: /ja/tracing/trace_collection/trace_context_propagation/go/

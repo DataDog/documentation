@@ -1,9 +1,8 @@
 ---
-title: Topology Map Widget
-description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
-widget_type: "topology_map"
 aliases:
-- /dashboards/widgets/service_map
+- /ja/dashboards/widgets/service_map
+description: Displays a map of a service to all of the services that call it, and
+  all of the services that it calls.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
@@ -11,6 +10,8 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: Documentation
   text: Service Map
+title: Topology Map Widget
+widget_type: topology_map
 ---
 
 Topology Map ウィジェットには、データソースとその関係が視覚化されており、データがアーキテクチャ内をどのように流れているかを理解するのに役立ちます。
@@ -34,6 +35,6 @@ Topology Map ウィジェットには、データソースとその関係が視�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/services/services_map/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/tracing/services/services_map/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

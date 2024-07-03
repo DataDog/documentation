@@ -1,7 +1,7 @@
 ---
-title: Error Tracking
-kind: documentation
 disable_toc: false
+kind: documentation
+title: Error Tracking
 ---
 
 ## Overview
@@ -27,8 +27,8 @@ For details, see the product-specific Error Tracking documentation:
 - [Log Management][2]
 - [Real User Monitoring][3]
 
-[1]: /tracing/error_tracking#setup
-[2]: /logs/error_tracking#setup
-[3]: /real_user_monitoring/error_tracking#setup
-[4]: /tracing/error_tracking/execution_replay
-[5]: /error_tracking/explorer
+[1]: /ja/tracing/error_tracking#setup
+[2]: /ja/logs/error_tracking#setup
+[3]: /ja/real_user_monitoring/error_tracking#setup
+[4]: /ja/tracing/error_tracking/execution_replay
+[5]: /ja/error_tracking/explorer

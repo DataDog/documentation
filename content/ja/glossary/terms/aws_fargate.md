@@ -1,8 +1,8 @@
 ---
-title: AWS Fargate
-synonyms:
-  - Fargate
 core_product:
-  - serverless monitoring
+- serverless monitoring
+synonyms:
+- Fargate
+title: AWS Fargate
 ---
 AWS Fargate is a serverless compute engine.

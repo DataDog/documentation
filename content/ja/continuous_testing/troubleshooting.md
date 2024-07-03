@@ -1,15 +1,16 @@
 ---
-title: Continuous Testing and CI/CD Troubleshooting
-description: Learn about Continuous Testing and CI/CD concepts and troubleshoot common errors.
 aliases:
-  - /synthetics/cicd_integrations/troubleshooting
+- /ja/synthetics/cicd_integrations/troubleshooting
+description: Learn about Continuous Testing and CI/CD concepts and troubleshoot common
+  errors.
 further_reading:
 - link: /synthetics/cicd_integrations/configuration
   tag: Documentation
   text: Learn how to configure Continuous Testing and CI/CD
-- link: "https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/"
+- link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: Blog
   text: Best practices for continuous testing with Datadog
+title: Continuous Testing and CI/CD Troubleshooting
 ---
 
 ## 概要
@@ -48,12 +49,12 @@ CI/CD テスト実行のトリガーに API エンドポイントを使用して
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
-[3]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
-[4]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
-[5]: /continuous_testing/cicd_integrations
-[6]: /continuous_testing/cicd_integrations#use-the-cli
-[7]: /synthetics/api_tests/
-[8]: /synthetics/browser_tests/?tab=requestoptions
-[9]: /continuous_testing/settings
+[1]: /ja/help/
+[2]: /ja/api/latest/synthetics/#trigger-tests-from-cicd-pipelines
+[3]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[4]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[5]: /ja/continuous_testing/cicd_integrations
+[6]: /ja/continuous_testing/cicd_integrations#use-the-cli
+[7]: /ja/synthetics/api_tests/
+[8]: /ja/synthetics/browser_tests/?tab=requestoptions
+[9]: /ja/continuous_testing/settings

@@ -1,18 +1,18 @@
 ---
-title: Mute Issues in Cloud Security Management
+aliases:
+- /ja/security/cloud_security_management/mute_issues
 further_reading:
 - link: security/default_rules
   tag: Documentation
   text: Explore out-of-the-box security detection rules
-aliases:
-  - /security/cloud_security_management/mute_issues
 products:
-  - name: CSM Misconfigurations
-    url: /security/cloud_security_management/misconfigurations/
-    icon: cloud-security-management
-  - name: CSM Identity Risks
-    url: /security/cloud_security_management/identity_risks/
-    icon: cloud-security-management
+- icon: cloud-security-management
+  name: CSM Misconfigurations
+  url: /security/cloud_security_management/misconfigurations/
+- icon: cloud-security-management
+  name: CSM Identity Risks
+  url: /security/cloud_security_management/identity_risks/
+title: Mute Issues in Cloud Security Management
 ---
 
 {{< product-availability >}}
@@ -65,4 +65,4 @@ products:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/cis-aws-1.5.0-2.1.5/
+[1]: /ja/security/default_rules/cis-aws-1.5.0-2.1.5/

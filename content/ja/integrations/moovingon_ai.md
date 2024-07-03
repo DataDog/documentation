@@ -1,17 +1,17 @@
 ---
-"app_id": "moovingon-ai"
-"app_uuid": "1a02140e-4927-49c9-8442-dff81a18c703"
-"assets":
-  "dashboards":
-    "moovingon.ai Overview": assets/dashboards/moovingon.ai_overview.json
-  "logs": {}
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://www.moovingon.com/"
-  "name": moovingon
-  "sales_email": sales@moovingon.com
-  "support_email": support@moovingon.com
-"categories":
+app_id: moovingon-ai
+app_uuid: 1a02140e-4927-49c9-8442-dff81a18c703
+assets:
+  dashboards:
+    moovingon.ai Overview: assets/dashboards/moovingon.ai_overview.json
+  logs: {}
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://www.moovingon.com/
+  name: moovingon
+  sales_email: sales@moovingon.com
+  support_email: support@moovingon.com
+categories:
 - notifications
 - incidents
 - automation
@@ -19,58 +19,58 @@
 - event management
 - alerting
 - issue tracking
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/moovingon_ai/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "moovingon_ai"
-"integration_id": "moovingon-ai"
-"integration_title": "moovingon.ai"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "moovingon_ai"
-"public_title": "moovingon.ai"
-"short_description": "moovingon.ai is a NOC orchestration and automation platform"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/moovingon_ai/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: moovingon_ai
+integration_id: moovingon-ai
+integration_title: moovingon.ai
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: moovingon_ai
+public_title: moovingon.ai
+short_description: moovingon.ai is a NOC orchestration and automation platform
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Notifications"
-  - "Category::Incidents"
-  - "Category::Automation"
-  - "Category::Collaboration"
-  - "Category::Event Management"
-  - "Category::Alerting"
-  - "Category::Issue Tracking"
-  - "Offering::Integration"
-  - "Queried Data Type::Events"
-  - "Submitted Data Type::Events"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": moovingon.ai is a NOC orchestration and automation platform
-  "media":
-  - "caption": moovingon.ai Guidelines
-    "image_url": images/moovingon_ai-guidelines.png
-    "media_type": image
-  - "caption": moovingon.ai Events
-    "image_url": images/moovingon_ai-events.png
-    "media_type": image
-  - "caption": moovingon.ai Integrations
-    "image_url": images/moovingon.ai-integrations.png
-    "media_type": image
-  - "caption": moovingon.ai Overview Dashboard
-    "image_url": images/moovingon_ai-overview-dashbard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": moovingon.ai
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Notifications
+  - Category::Incidents
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Event Management
+  - Category::Alerting
+  - Category::Issue Tracking
+  - Offering::Integration
+  - Queried Data Type::Events
+  - Submitted Data Type::Events
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: moovingon.ai is a NOC orchestration and automation platform
+  media:
+  - caption: moovingon.ai Guidelines
+    image_url: images/moovingon_ai-guidelines.png
+    media_type: image
+  - caption: moovingon.ai Events
+    image_url: images/moovingon_ai-events.png
+    media_type: image
+  - caption: moovingon.ai Integrations
+    image_url: images/moovingon.ai-integrations.png
+    media_type: image
+  - caption: moovingon.ai Overview Dashboard
+    image_url: images/moovingon_ai-overview-dashbard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: moovingon.ai
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -122,4 +122,3 @@ Need help? Contact [moovingon.ai support][2].
 
 [1]: https://moovingon.ai/
 [2]: mailto:support@moovingon.com
-

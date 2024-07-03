@@ -1,12 +1,11 @@
 ---
-title: Watchdog Insights for RUM
-kind: documentation
-description: 'Learn how to investigate issues in your RUM applications with Watchdog Insights.'
+description: Learn how to investigate issues in your RUM applications with Watchdog
+  Insights.
 further_reading:
-- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: Blog
   text: Monitor Core Web Vitals with RUM
-- link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
+- link: https://www.datadoghq.com/blog/datadog-mobile-rum/
   tag: Blog
   text: Improve mobile user experience with Datadog Mobile RUM
 - link: /watchdog/insights
@@ -15,6 +14,8 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Learn how to search in the RUM Explorer
+kind: documentation
+title: Watchdog Insights for RUM
 ---
 
 ## Overview
@@ -72,8 +73,8 @@ You can begin your investigation for the root cause of a performance issue in th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /watchdog/insights/
-[2]: /real_user_monitoring/explorer
-[3]: /real_user_monitoring/explorer/search/#facets
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[5]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[1]: /ja/watchdog/insights/
+[2]: /ja/real_user_monitoring/explorer
+[3]: /ja/real_user_monitoring/explorer/search/#facets
+[4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[5]: /ja/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa

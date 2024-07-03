@@ -1,7 +1,6 @@
 ---
-title: SLO Alerts
-aliases :
-  - /monitors/create/types/slo/
+aliases:
+- /ja/monitors/create/types/slo/
 further_reading:
 - link: /service_management/service_level_objectives/burn_rate
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /service_management/service_level_objectives/error_budget
   tag: Documentation
   text: エラーバジェットアラート
+title: SLO Alerts
 ---
 
 <div class="alert alert-info">
@@ -52,9 +52,9 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/
+[1]: /ja/service_management/service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo
-[3]: /service_management/service_level_objectives/error_budget/
-[4]: /service_management/service_level_objectives/burn_rate/
-[5]: /monitors/notify/#overview
-[6]: /monitors/notify/variables/?tab=is_alert#template-variables
+[3]: /ja/service_management/service_level_objectives/error_budget/
+[4]: /ja/service_management/service_level_objectives/burn_rate/
+[5]: /ja/monitors/notify/#overview
+[6]: /ja/monitors/notify/variables/?tab=is_alert#template-variables

@@ -1,8 +1,8 @@
 ---
-title: Fine-tuning CSM Threats Security Signals
 aliases:
-  - /security_platform/cloud_workload_security/guide/tuning-rules/
-  - /security_platform/cloud_security_management/guide/tuning-rules/
+- /ja/security_platform/cloud_workload_security/guide/tuning-rules/
+- /ja/security_platform/cloud_security_management/guide/tuning-rules/
+title: Fine-tuning CSM Threats Security Signals
 ---
 
 ## 概要 
@@ -186,5 +186,3 @@ CSM Threats では、収集したカーネルイベントからランタイム A
 **This rule will not generate signal if there is match** (このルールは、一致がある場合、シグナルを発生させません) にこれらのキー値を入力し、不要なシグナルを抑制します。
 
 一方、正しい属性セットを識別して特定の条件でシグナルを発生させたい場合は、**Only generate a signal if there is a match** (一致がある場合、シグナルのみを発生させる) の組み合わせを指定します。
-
-

@@ -1,5 +1,5 @@
 ---
-title: "Subnet Component"
+title: Subnet Component
 ---
 
 ## 概要

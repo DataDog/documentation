@@ -1,50 +1,50 @@
 ---
-"app_id": "vscode"
-"app_uuid": "93a7b892-5393-4f40-896a-905b553a7669"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: vscode
+app_uuid: 93a7b892-5393-4f40-896a-905b553a7669
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "vscode"
-"integration_id": "vscode"
-"integration_title": "Visual Studio Code"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "vscode"
-"public_title": "Visual Studio Code"
-"short_description": "Datadog Extension for VS Code"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: vscode
+integration_id: vscode
+integration_title: Visual Studio Code
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: vscode
+public_title: Visual Studio Code
+short_description: Datadog Extension for VS Code
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Developer Tools"
-  "configuration": "README.md#Setup"
-  "description": Datadog Extension for VS Code
-  "media":
-  - "caption": Error Tracking insights in VS Code
-    "image_url": images/overview.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": その他
-    "url": "https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode"
-  "support": "README.md#Support"
-  "title": Visual Studio Code
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Developer Tools
+  configuration: README.md#Setup
+  description: Datadog Extension for VS Code
+  media:
+  - caption: Error Tracking insights in VS Code
+    image_url: images/overview.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+  support: README.md#Support
+  title: Visual Studio Code
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -86,8 +86,7 @@ Select the Datadog services relevant to your project from the plugin settings.
 
 Need help? Contact [Datadog support][3] or open an [issue on GitHub][4].
 
-[1]: https://docs.datadoghq.com/developers/ide_integrations/vscode/
+[1]: https://docs.datadoghq.com/ja/developers/ide_integrations/vscode/
 [2]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
-[3]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/help/
 [4]: https://github.com/DataDog/datadog-for-vscode
-

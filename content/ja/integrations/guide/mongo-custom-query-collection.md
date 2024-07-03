@@ -1,31 +1,30 @@
 ---
-title: Collect MongoDB Custom Metrics
-kind: guide
 further_reading:
 - link: /integrations/mongo/
   tag: Documentation
   text: Learn about the MongoDB integration
+title: Collect MongoDB Custom Metrics
 ---
 
-## Overview
+## 概要
 
 To collect custom metrics with the [MongoDB integration][8], use the `custom_queries` option in the `conf.d/mongo.d/conf.yaml` file at the root of your [Agent's configuration directory][1]. See the sample [mongo.d/conf.yaml][2] for more details.
 
-## Configuration
+## 構成
 
-`custom_queries` has the following options:
+`custom_queries` には以下のオプションがあります:
 
-* **`metric_prefix`**: Each metric starts with the chosen prefix.
-* **`query`**: This is the [Mongo runCommand][3] query to execute as a JSON object. **Note**: The Agent only supports `count`, `find`, and `aggregates` queries.
+* **`metric_prefix`**: 各メトリクスは選択したプレフィックスで始まります。
+* **`query`**: JSON オブジェクトとして実行する [Mongo runCommand][3] クエリです。**注**: Agent では `count`、`find`、`aggregates` クエリのみサポートされます。
 * **`database`**: This is the MongoDB database to collect metrics from.
-* **`fields`**: Ignored for `count` queries. This is a list representing each field with no specific order. Ignores unspecified and missing fields. There are three required pieces of data for each `fields`:
-  * `field_name`: This is the name of the field from which to fetch the data.
-  * `name`: This is the suffix to append to the metric_prefix to form the full metric name. If `type` is `tag`, this column is treated as a tag and applied to every metric collected by this particular query.
+* **`fields`**: `count` クエリでは無視されます。各フィールドを表す順不同のリストです。未指定および欠落フィールドは無視します。各 `fields` には 3 つの必須データがあります:
+  * `field_name`: データを取得するフィールドの名前。
+  * `name`: 完全なメトリクス名を形成するために metric_prefix に付けるサフィックス。`type` が `tag` である場合、この列はタグとして扱われ、この特定のクエリによって収集されたすべてのメトリクスに適用されます。
   * `type`: This is the submission method (`gauge`, `count`, `rate`, and more). This can also be set to `tag` to tag each metric in the row with the name and value of the item in this column. You can use the `count` type to perform aggregation for queries that return multiple rows with the same or no tags.
-* **`tags`**: A list of tags to apply to each metric (as specified above).
+* **`tags`**: 各メトリクスに適用するタグのリスト（上記で指定）。
 * **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, and more) of the count result. Ignored for non-count queries.
 
-## Examples
+## 例
 
 For the examples below, the following Mongo collection `user_collection` is used:
 
@@ -35,18 +34,18 @@ For the examples below, the following Mongo collection `user_collection` is used
 { name: "foobar", id: 16273, active: true, age:35, is_admin: false}
 ```
 
-Choose the type of query you would like to see an example for:
+クエリタイプを選択すると例が表示されます。
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
-To monitor how many users are active at a given time, your [Mongo count command][1] would be:
+所定の時間にアクティブユーザーの数を監視するには、次のような [Mongo count コマンド][1]を実行します:
 
 ```text
 db.runCommand( {count: user_collection, query: {active:true}})
 ```
 
-Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
+`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML コンフィギュレーションに対応するクエリ:
 
 ```yaml
 custom_queries:
@@ -59,20 +58,20 @@ custom_queries:
 
 This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
-**Note**: The [metric type][2] defined is `gauge`.
+**注**: 定義されている[メトリクスタイプ][2]は `gauge` です。
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /metrics/types/
+[2]: /ja/metrics/types/
 {{% /tab %}}
 {{% tab "Find" %}}
 
-To monitor the age per user, your [Mongo find command][1] would be:
+ユーザーの平均年齢を監視するには、次のような [Mongo find コマンド][1]を実行します。
 
 ```text
 db.runCommand( {find: user_collection, filter: {active:true} )
 ```
 
-Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
+`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML コンフィギュレーションに対応するクエリ:
 
 ```yaml
 custom_queries:
@@ -88,16 +87,16 @@ custom_queries:
 
 ```
 
-This would emit one `gauge` metric `mongo.example2.user.age` with two tags: `name:foo` and `name:foobar`
+これにより、`name:foo` と `name:foobar` の 2 つのタグを持つ 1 つの `gauge` メトリクス `mongo.example2.user.age` が生成されます。
 
-**Note**: The [metric type][2] defined is `gauge`.
+**注**: 定義されている[メトリクスタイプ][2]は `gauge` です。
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
-[2]: /metrics/types/
+[2]: /ja/metrics/types/
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 
-To monitor the average age for an admin and a non-admin user, your [Mongo aggregate command][1] would be:
+管理者および非管理者ユーザーの平均年齢を監視するには、次のような [Mongo aggregate コマンド][1]を実行します:
 
 ```text
 db.runCommand(
@@ -112,7 +111,7 @@ db.runCommand(
             )
 ```
 
-Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
+`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML コンフィギュレーションに対応するクエリ:
 
 ```yaml
 custom_queries:
@@ -129,31 +128,31 @@ custom_queries:
       - test:mongodb
 ```
 
-This would emit one `gauge` metric `mongo.example3.user.age` with two tags: `is_admin:true` and `is_admin:false` representing the average age of users for each tags.
+これにより、`is_admin:true` と `is_admin:false` の 2 つのタグを持つ 1 つの `gauge` メトリクス `mongo.example3.user.age`（各タグのユーザーの平均年齢を表す）が生成されます。
 
 [1]: https://docs.mongodb.com/manual/reference/command/aggregate/#dbcmd.aggregate
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: After updating the Mongo YAML file, [restart the Datadog Agent][4].
+**注**: Mongo YAML ファイルを更新した後、[Datadog Agentを再起動][4]します。
 
-### Validation
+### 検証
 
 To verify the result, search for the metrics using the [Metrics Explorer][5].
 
-### Debugging
+### デバッグ
 
-[Run the Agent's status subcommand][6] and look for `mongo` under the Checks section. Additionally, the [Agent's logs][7] may provide useful information.
+[Agent のステータスサブコマンドを実行][7]し、Checks セクションで `mongo` を探します。さらに、[Agent のログ][7]から有用な情報が得られることもあります。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [3]: https://docs.mongodb.com/manual/reference/command
-[4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: /metrics/explorer/
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: /agent/guide/agent-log-files/
-[8]: /integrations/mongodb
+[4]: /ja/agent/guide/agent-commands/#restart-the-agent
+[5]: /ja/metrics/explorer/
+[6]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: /ja/agent/guide/agent-log-files/
+[8]: /ja/integrations/mongodb

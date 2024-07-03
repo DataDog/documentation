@@ -1,33 +1,33 @@
 ---
-title: Docker Agent for Docker, containerd, and Podman
 aliases:
-  - /guides/basic_agent_usage/docker/
-  - /agent/docker
-  - /agent/basic_agent_usage/docker/
-  - /integrations/docker_daemon/
-  - /docker/
+- /ja/guides/basic_agent_usage/docker/
+- /ja/agent/docker
+- /ja/agent/basic_agent_usage/docker/
+- /ja/integrations/docker_daemon/
+- /ja/docker/
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
-    tag: Release Notes
-    text: Check out the latest Datadog Containers releases! (App login required).
-  - link: /agent/docker/log/
-    tag: Documentation
-    text: Collect your application logs
-  - link: /agent/docker/apm/
-    tag: Documentation
-    text: Collect your application traces
-  - link: /agent/docker/prometheus/
-    tag: Documentation
-    text: Collect your Prometheus metrics
-  - link: /agent/docker/integrations/
-    tag: Documentation
-    text: Collect automatically your applications metrics and logs
-  - link: /agent/guide/autodiscovery-management/
-    tag: Documentation
-    text: Limit data collection to a subset of containers only
-  - link: /agent/docker/tag/
-    tag: Documentation
-    text: Assign tags to all data emitted by a container
+- link: https://app.datadoghq.com/release-notes?category=Container%20Monitoring
+  tag: Release Notes
+  text: Check out the latest Datadog Containers releases! (App login required).
+- link: /agent/docker/log/
+  tag: Documentation
+  text: Collect your application logs
+- link: /agent/docker/apm/
+  tag: Documentation
+  text: Collect your application traces
+- link: /agent/docker/prometheus/
+  tag: Documentation
+  text: Collect your Prometheus metrics
+- link: /agent/docker/integrations/
+  tag: Documentation
+  text: Collect automatically your applications metrics and logs
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Limit data collection to a subset of containers only
+- link: /agent/docker/tag/
+  tag: Documentation
+  text: Assign tags to all data emitted by a container
+title: Docker Agent for Docker, containerd, and Podman
 ---
 
 ## 概要
@@ -288,7 +288,7 @@ If you installed the Datadog Docker Agent with Single Step APM Instrumentation, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
+[1]: /ja/agent/
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 [4]: https://gallery.ecr.aws/datadog/agent
@@ -296,28 +296,28 @@ If you installed the Datadog Docker Agent with Single Step APM Instrumentation, 
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
 [8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
-[9]: /agent/supported_platforms/?tab=cloudandcontainers
+[9]: /ja/agent/supported_platforms/?tab=cloudandcontainers
 [10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: /agent/guide/compose-and-the-datadog-agent/
-[12]: /agent/docker/integrations/
-[13]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[14]: /agent/docker/apm/
-[15]: /agent/configuration/proxy/#agent-v6
-[16]: /agent/docker/apm/#tracing-from-other-containers
-[17]: /agent/docker/log/
-[18]: /infrastructure/process/
-[19]: /infrastructure/livecontainers/
-[20]: /developers/dogstatsd/
-[21]: /developers/dogstatsd/unix_socket/
-[22]: /getting_started/tagging/unified_service_tagging/
-[23]: /agent/docker/tag/
-[24]: /agent/configuration/secrets-management/?tab=linux
-[25]: /agent/guide/autodiscovery-management/
-[26]: /agent/configuration/agent-commands/
-[27]: /integrations/container/
-[28]: /integrations/system/#metrics
-[29]: /integrations/disk/#metrics
-[30]: /agent/docker/data_collected/#metrics
-[31]: /integrations/network/#metrics
-[32]: /integrations/ntp/#metrics
-[33]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure
+[11]: /ja/agent/guide/compose-and-the-datadog-agent/
+[12]: /ja/agent/docker/integrations/
+[13]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[14]: /ja/agent/docker/apm/
+[15]: /ja/agent/configuration/proxy/#agent-v6
+[16]: /ja/agent/docker/apm/#tracing-from-other-containers
+[17]: /ja/agent/docker/log/
+[18]: /ja/infrastructure/process/
+[19]: /ja/infrastructure/livecontainers/
+[20]: /ja/developers/dogstatsd/
+[21]: /ja/developers/dogstatsd/unix_socket/
+[22]: /ja/getting_started/tagging/unified_service_tagging/
+[23]: /ja/agent/docker/tag/
+[24]: /ja/agent/configuration/secrets-management/?tab=linux
+[25]: /ja/agent/guide/autodiscovery-management/
+[26]: /ja/agent/configuration/agent-commands/
+[27]: /ja/integrations/container/
+[28]: /ja/integrations/system/#metrics
+[29]: /ja/integrations/disk/#metrics
+[30]: /ja/agent/docker/data_collected/#metrics
+[31]: /ja/integrations/network/#metrics
+[32]: /ja/integrations/ntp/#metrics
+[33]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure

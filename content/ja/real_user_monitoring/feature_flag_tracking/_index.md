@@ -1,6 +1,4 @@
 ---
-title: Feature Flag Tracking
-kind: documentation
 disable_toc: false
 further_reading:
 - link: /real_user_monitoring/guide/setup-feature-flag-data-collection/
@@ -9,9 +7,11 @@ further_reading:
 - link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Learn about the RUM Explorer
-- link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
+- link: https://www.datadoghq.com/blog/feature-flag-tracking/
   tag: Blog
   text: Ensure release safety with feature flag tracking in Datadog RUM
+kind: documentation
+title: Feature Flag Tracking
 ---
 
 ## Overview
@@ -89,12 +89,12 @@ You can compare important metrics to you and your teams by grouping your query b
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/setup-feature-flag-data-collection/
-[2]: /real_user_monitoring/browser#setup
-[3]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
+[1]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/
+[2]: /ja/real_user_monitoring/browser#setup
+[3]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
 [4]: https://app.datadoghq.com/rum/feature-flags
-[5]: /real_user_monitoring/session_replay/browser/
-[6]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues
+[5]: /ja/real_user_monitoring/session_replay/browser/
+[6]: /ja/real_user_monitoring/error_tracking/explorer/#explore-your-issues
 [7]: https://app.datadoghq.com/rum/explorer
-[8]: /dashboards/
-[9]: /monitors/#create-monitors
+[8]: /ja/dashboards/
+[9]: /ja/monitors/#create-monitors

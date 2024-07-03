@@ -1,20 +1,21 @@
 ---
-title: PHP Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your PHP application with OpenTelemetry API to send traces to Datadog.'
-code_lang: otel
-type: multi-code-lang
-code_lang_weight: 2
 aliases:
-- /tracing/trace_collection/otel_instrumentation/php/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/php
+- /ja/tracing/trace_collection/otel_instrumentation/php/
+- /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/php
+code_lang: otel
+code_lang_weight: 2
+description: Instrument your PHP application with OpenTelemetry API to send traces
+  to Datadog.
 further_reading:
-  - link: tracing/glossary/
-    tag: Documentation
-    text: Explore your services, resources, and traces
-  - link: /opentelemetry/guide/otel_api_tracing_interoperability
-    tag: Documentation
-    text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: PHP Custom Instrumentation using OpenTelemetry API
+type: multi-code-lang
 ---
 
 {{% otel-custom-instrumentation-lang %}}
@@ -115,5 +116,5 @@ $span = OpenTelemetry\API\Trace\Span::getCurrent();
 {{< partial name="whats-next/whats-next.html" >}}
 
 [5]: https://opentelemetry.io/docs/instrumentation/php/manual/
-[6]: /tracing/trace_collection/dd_libraries/php#getting-started
+[6]: /ja/tracing/trace_collection/dd_libraries/php#getting-started
 [13]: https://opentelemetry.io/docs/languages/php/instrumentation/#instrumentation-setup

@@ -1,124 +1,126 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "kitepipe-atomwatch"
-"app_uuid": "c9c6ace5-9793-48da-a4be-7bbd4c3e9b06"
-"assets":
-  "dashboards":
-    "AtomWatch Boomi Cluster Monitoring": assets/dashboards/boomi_cluster_monitoring2.json
-    "AtomWatch Boomi Compute Monitoring": assets/dashboards/boomi_compute_monitoring2.json
-    "AtomWatch Boomi Workload Monitoring": assets/dashboards/boomi_workload_monitoring2.json
-    "AtomWatch Overview": assets/dashboards/atomwatch_overview.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": kitepipe.atomwatch.integration_completed
-      "metadata_path": metadata.csv
-      "prefix": kitepipe.atomwatch.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10355"
-    "source_type_name": AtomWatch
-  "monitors":
-    "AtomWatch is Down": assets/monitors/atomwatch_down.json
-    "AtomWatch: Boomi Cluster Node \"View File\" is Missing": assets/monitors/cluster_view_file_missing.json
-    "AtomWatch: Boomi Cluster Node \"View File\" is Too Old": assets/monitors/cluster_view_file_too_old.json
-    "AtomWatch: Boomi Cluster Problem": assets/monitors/cluster_view_file_problem.json
-    "AtomWatch: Execution Duration Anomaly": assets/monitors/execution_duration_anomaly.json
-    "AtomWatch: Failure calling Boomi Platform API": assets/monitors/failed_boomi_platform_api_call.json
-    "AtomWatch: Infrastructure - API Gateway Node CPU Usage High": assets/monitors/api_gw_node_cpu.json
-    "AtomWatch: Infrastructure - API Gateway Node Disk Usage High": assets/monitors/api_gw_node_disk.json
-    "AtomWatch: Infrastructure - API Gateway Node Memory Usage High": assets/monitors/api_gw_node_ram.json
-    "AtomWatch: Infrastructure - Molecule Node CPU Usage High": assets/monitors/molecule_node_cpu.json
-    "AtomWatch: Infrastructure - Molecule Node Disk Usage High": assets/monitors/molecule_node_disk.json
-    "AtomWatch: Infrastructure - Molecule Node Memory Usage High": assets/monitors/molecule_node_ram.json
-    "AtomWatch: Runtime Online Status": assets/monitors/boomi_online_status.json
-"author":
-  "homepage": "https://www.kitepipe.com"
-  "name": Kitepipe
-  "sales_email": AtomWatch.Sales@kitepipe.com
-  "support_email": AtomWatch.Support@kitepipe.com
-  "vendor_id": kitepipe
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: kitepipe-atomwatch
+app_uuid: c9c6ace5-9793-48da-a4be-7bbd4c3e9b06
+assets:
+  dashboards:
+    AtomWatch Boomi Cluster Monitoring: assets/dashboards/boomi_cluster_monitoring2.json
+    AtomWatch Boomi Compute Monitoring: assets/dashboards/boomi_compute_monitoring2.json
+    AtomWatch Boomi Workload Monitoring: assets/dashboards/boomi_workload_monitoring2.json
+    AtomWatch Overview: assets/dashboards/atomwatch_overview.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: kitepipe.atomwatch.integration_completed
+      metadata_path: metadata.csv
+      prefix: kitepipe.atomwatch.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10355
+    source_type_name: AtomWatch
+  monitors:
+    AtomWatch is Down: assets/monitors/atomwatch_down.json
+    'AtomWatch: Boomi Cluster Node "View File" is Missing': assets/monitors/cluster_view_file_missing.json
+    'AtomWatch: Boomi Cluster Node "View File" is Too Old': assets/monitors/cluster_view_file_too_old.json
+    'AtomWatch: Boomi Cluster Problem': assets/monitors/cluster_view_file_problem.json
+    'AtomWatch: Execution Duration Anomaly': assets/monitors/execution_duration_anomaly.json
+    'AtomWatch: Failure calling Boomi Platform API': assets/monitors/failed_boomi_platform_api_call.json
+    'AtomWatch: Infrastructure - API Gateway Node CPU Usage High': assets/monitors/api_gw_node_cpu.json
+    'AtomWatch: Infrastructure - API Gateway Node Disk Usage High': assets/monitors/api_gw_node_disk.json
+    'AtomWatch: Infrastructure - API Gateway Node Memory Usage High': assets/monitors/api_gw_node_ram.json
+    'AtomWatch: Infrastructure - Molecule Node CPU Usage High': assets/monitors/molecule_node_cpu.json
+    'AtomWatch: Infrastructure - Molecule Node Disk Usage High': assets/monitors/molecule_node_disk.json
+    'AtomWatch: Infrastructure - Molecule Node Memory Usage High': assets/monitors/molecule_node_ram.json
+    'AtomWatch: Runtime Online Status': assets/monitors/boomi_online_status.json
+author:
+  homepage: https://www.kitepipe.com
+  name: Kitepipe
+  sales_email: AtomWatch.Sales@kitepipe.com
+  support_email: AtomWatch.Support@kitepipe.com
+  vendor_id: kitepipe
+categories:
 - alerting
 - aws
 - event management
 - log collection
 - marketplace
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kitepipe_atomwatch"
-"integration_id": "kitepipe-atomwatch"
-"integration_title": "Kitepipe AtomWatch"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "kitepipe_atomwatch"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.kitepipe.atomwatch
-  "product_id": atomwatch
-  "short_description": Unit price per Boomi Atom or Molecule Node
-  "tag": billing_key
-  "unit_label": Boomi Atom or Molecule Node
-  "unit_price": !!int "200"
-"public_title": "Kitepipe AtomWatch"
-"short_description": "Monitor Boomi processes and infrastructure"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: kitepipe_atomwatch
+integration_id: kitepipe-atomwatch
+integration_title: Kitepipe AtomWatch
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: kitepipe_atomwatch
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.kitepipe.atomwatch
+  product_id: atomwatch
+  short_description: Unit price per Boomi Atom or Molecule Node
+  tag: billing_key
+  unit_label: Boomi Atom or Molecule Node
+  unit_price: 200
+public_title: Kitepipe AtomWatch
+short_description: Monitor Boomi processes and infrastructure
+supported_os:
 - linux
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Category::Alerting"
-  - "Category::AWS"
-  - "Category::Event Management"
-  - "Category::Log Collection"
-  - "Category::Marketplace"
-  - "Category::Notifications"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Submitted Data Type::Events"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Monitor Boomi processes and infrastructure
-  "media":
-  - "caption": Enhanced Process Reporting lets you look back more than 30 days and filter by more fields, with wildcards.
-    "image_url": images/enhanced_process_reporting.png
-    "media_type": image
-  - "caption": See long-running processes at a glance and receive alerts with anomaly detection.
-    "image_url": images/execution_duration_anomalies.png
-    "media_type": image
-  - "caption": Extensive infrastructure monitoring including CPU, RAM, Disk, Network.
-    "image_url": images/infrastructure_monitoring.png
-    "media_type": image
-  - "caption": Cluster monitoring that exceeds Boomi's published recommendations.
-    "image_url": images/cluster_monitoring.png
-    "media_type": image
-  - "caption": Toplists and graphs of errored Boomi processes.
-    "image_url": images/error_monitoring.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": documentation
-    "url": "https://atomwatch.refined.site/space/CS/11108353"
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/kitepipe-datadog-marketplace/"
-  "support": "README.md#Support"
-  "title": Kitepipe AtomWatch
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Alerting
+  - Category::AWS
+  - Category::Event Management
+  - Category::Log Collection
+  - Category::Marketplace
+  - Category::Notifications
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Submitted Data Type::Events
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Monitor Boomi processes and infrastructure
+  media:
+  - caption: Enhanced Process Reporting lets you look back more than 30 days and filter
+      by more fields, with wildcards.
+    image_url: images/enhanced_process_reporting.png
+    media_type: image
+  - caption: See long-running processes at a glance and receive alerts with anomaly
+      detection.
+    image_url: images/execution_duration_anomalies.png
+    media_type: image
+  - caption: Extensive infrastructure monitoring including CPU, RAM, Disk, Network.
+    image_url: images/infrastructure_monitoring.png
+    media_type: image
+  - caption: Cluster monitoring that exceeds Boomi's published recommendations.
+    image_url: images/cluster_monitoring.png
+    media_type: image
+  - caption: Toplists and graphs of errored Boomi processes.
+    image_url: images/error_monitoring.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://atomwatch.refined.site/space/CS/11108353
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/kitepipe-datadog-marketplace/
+  support: README.md#Support
+  title: Kitepipe AtomWatch
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

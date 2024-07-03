@@ -1,9 +1,9 @@
 ---
 aliases:
-- /continuous_integration/static_analysis/github_actions
-- /static_analysis/github_actions
+- /ja/continuous_integration/static_analysis/github_actions
+- /ja/static_analysis/github_actions
 dependencies:
-- "https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"
+- https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md
 description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
 title: Static Analysis and GitHub Actions
 ---
@@ -89,8 +89,8 @@ Static Analysis に以下のパラメーターを設定することができま�
 
 - [Learn about Code Analysis][1]
 
-[1]: https://docs.datadoghq.com/code_analysis/static_analysis
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/
-[3]: https://docs.datadoghq.com/getting_started/site/
+[1]: https://docs.datadoghq.com/ja/code_analysis/static_analysis
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
 [5]: https://github.com/DataDog/datadog-static-analyzer/blob/main/README.md#diff-aware-scanning

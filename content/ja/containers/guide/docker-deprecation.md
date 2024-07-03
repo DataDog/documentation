@@ -1,7 +1,7 @@
 ---
-title: Docker Deprecation in Kubernetes
 aliases:
- - /agent/guide/docker-deprecation
+- /ja/agent/guide/docker-deprecation
+title: Docker Deprecation in Kubernetes
 ---
 
 Kubernetes は、バージョン 1.20 以降ランタイムとしての Docker を廃止します。また一部のクラウドプロバイダーは、画像において Docker を廃止しました。
@@ -72,5 +72,5 @@ volumes:
 [3]: https://aws.amazon.com/blogs/containers/amazon-eks-1-21-released/
 [4]: https://docs.oracle.com/en-us/iaas/releasenotes/changes/52d34150-0cb8-4a0f-95f3-924dec5a3c83/
 [5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim
-[6]: /integrations/containerd/
-[7]: /integrations/crio/
+[6]: /ja/integrations/containerd/
+[7]: /ja/integrations/crio/

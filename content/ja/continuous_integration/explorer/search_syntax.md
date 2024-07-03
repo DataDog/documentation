@@ -1,6 +1,6 @@
 ---
-title: CI Visibility Explorer Search Syntax
-description: Learn how to search for all of your pipeline executions in the CI Visibility Explorer.
+description: Learn how to search for all of your pipeline executions in the CI Visibility
+  Explorer.
 further_reading:
 - link: /continuous_integration/search
   tag: Documentation
@@ -8,6 +8,7 @@ further_reading:
 - link: /continuous_integration/explorer/facets
   tag: Documentation
   text: Learn about facets
+title: CI Visibility Explorer Search Syntax
 ---
 
 ## 概要
@@ -76,8 +77,8 @@ Your pipeline executions inherit tags from [hosts][3] and [integrations][4] that
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/explorer/facets
-[2]: /getting_started/tagging/using_tags
-[3]: /infrastructure
-[4]: /integrations
-[5]: /getting_started/tagging/#define-tags
+[1]: /ja/continuous_integration/explorer/facets
+[2]: /ja/getting_started/tagging/using_tags
+[3]: /ja/infrastructure
+[4]: /ja/integrations
+[5]: /ja/getting_started/tagging/#define-tags

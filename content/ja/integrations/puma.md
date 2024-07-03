@@ -1,59 +1,59 @@
 ---
-"app_id": "puma"
-"app_uuid": "c517e801-0fa5-4f5e-8175-a7d5d48a8131"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": puma.workers
-      "metadata_path": metadata.csv
-      "prefix": puma.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10126"
-    "source_type_name": Puma
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": justin.morris@ferocia.com.au
-  "support_email": justin.morris@ferocia.com.au
-"categories":
+app_id: puma
+app_uuid: c517e801-0fa5-4f5e-8175-a7d5d48a8131
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: puma.workers
+      metadata_path: metadata.csv
+      prefix: puma.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10126
+    source_type_name: Puma
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: justin.morris@ferocia.com.au
+  support_email: justin.morris@ferocia.com.au
+categories:
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/puma/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "puma"
-"integration_id": "puma"
-"integration_title": "Puma"
-"integration_version": "1.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "puma"
-"public_title": "Puma"
-"short_description": "A fast, concurrent web server for Ruby and Rack"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: puma
+integration_id: puma
+integration_title: Puma
+integration_version: 1.2.1
+is_public: true
+manifest_version: 2.0.0
+name: puma
+public_title: Puma
+short_description: A fast, concurrent web server for Ruby and Rack
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Metrics"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": A fast, concurrent web server for Ruby and Rack
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Puma
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Metrics
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: A fast, concurrent web server for Ruby and Rack
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Puma
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -111,12 +111,11 @@ Need help? Contact [Datadog support][11].
 [1]: https://puma.io/
 [2]: https://github.com/puma/puma#controlstatus-server
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[5]: https://docs.datadoghq.com/getting_started/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [6]: https://github.com/DataDog/integrations-extras/blob/master/puma/datadog_checks/puma/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/puma/metadata.csv
 [10]: https://github.com/DataDog/integrations-extras/blob/master/puma/assets/service_checks.json
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

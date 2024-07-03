@@ -1,11 +1,11 @@
 ---
-title: NDM Troubleshooting
 aliases:
-    - /network_performance_monitoring/devices/troubleshooting/
+- /ja/network_performance_monitoring/devices/troubleshooting/
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
   text: Monitor SNMP with Datadog
+title: NDM Troubleshooting
 ---
 
 ## 概要
@@ -89,4 +89,4 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /help
+[1]: /ja/help

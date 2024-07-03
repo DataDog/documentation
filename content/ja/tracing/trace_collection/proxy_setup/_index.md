@@ -1,57 +1,60 @@
 ---
-title: Tracing a Proxy
-kind: documentation
+algolia:
+  tags:
+  - proxies
+  - tracing proxies
+  - proxy
+aliases:
+- /ja/tracing/proxies/envoy
+- /ja/tracing/envoy/
+- /ja/tracing/proxies/nginx
+- /ja/tracing/nginx/
+- /ja/tracing/istio/
+- /ja/tracing/setup/envoy/
+- /ja/tracing/setup/nginx/
+- /ja/tracing/setup/istio/
+- /ja/tracing/proxies
+- /ja/tracing/setup_overview/envoy/
+- /ja/tracing/setup_overview/nginx/
+- /ja/tracing/setup_overview/istio/
+- /ja/tracing/setup_overview/httpd/
+- /ja/tracing/setup_overview/proxy_setup/
 further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: Explore your services, resources and traces
-- link: "https://www.envoyproxy.io/"
+- link: https://www.envoyproxy.io/
   tag: 外部サイト
   text: Envoy website
-- link: "https://www.envoyproxy.io/docs/envoy/latest/"
+- link: https://www.envoyproxy.io/docs/envoy/latest/
   tag: 外部サイト
   text: Envoy documentation
-- link: "https://www.nginx.com/"
+- link: https://www.nginx.com/
   tag: 外部サイト
   text: NGINX website
-- link: "https://istio.io/"
+- link: https://istio.io/
   tag: 外部サイト
   text: Istio website
-- link: "https://istio.io/docs/"
+- link: https://istio.io/docs/
   tag: 外部サイト
   text: Istio documentation
-- link: "https://docs.konghq.com/gateway/latest/"
+- link: https://docs.konghq.com/gateway/latest/
   tag: 外部サイト
   text: Kong website
-- link: "https://github.com/DataDog/dd-trace-cpp"
+- link: https://github.com/DataDog/dd-trace-cpp
   tag: Source Code
   text: Datadog C++ Client
-- link: "https://github.com/DataDog/kong-plugin-ddtrace/"
+- link: https://github.com/DataDog/kong-plugin-ddtrace/
   tag: Source Code
   text: Datadog APM Plugin for Kong
-- link: "https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentelemetry/"
+- link: https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentelemetry/
   tag: 外部サイト
   text: OpenTelemetry for Ingress-NGINX Controller
-- link: "https://github.com/DataDog/httpd-datadog"
+- link: https://github.com/DataDog/httpd-datadog
   tag: ソースコード
   text: Datadog Module for Apache HTTP Server
-aliases:
-- /tracing/proxies/envoy
-- /tracing/envoy/
-- /tracing/proxies/nginx
-- /tracing/nginx/
-- /tracing/istio/
-- /tracing/setup/envoy/
-- /tracing/setup/nginx/
-- /tracing/setup/istio/
-- /tracing/proxies
-- /tracing/setup_overview/envoy/
-- /tracing/setup_overview/nginx/
-- /tracing/setup_overview/istio/
-- /tracing/setup_overview/httpd/
-- /tracing/setup_overview/proxy_setup/
-algolia:
-  tags: [proxies,tracing proxies,proxy]
+kind: documentation
+title: Tracing a Proxy
 ---
 
 プロキシに関するトレース情報の収集を含めるよう、トレースを設定することができます。
@@ -289,8 +292,8 @@ DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 The available [environment variables][2] depend on the version of the C++ tracer embedded in Envoy.
 The version of the C++ tracer can be found in the logs, indicated by the line starting with "DATADOG TRACER CONFIGURATION".
 
-[1]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[2]: /tracing/setup/cpp/#environment-variables
+[1]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[2]: /ja/tracing/setup/cpp/#environment-variables
 {{% /tab %}}
 {{% tab "NGINX" %}}
 
@@ -460,7 +463,7 @@ Additionally, ensure that your controller's pod spec has the `HOST_IP` environme
 [2]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
 [3]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
-[5]: /opentelemetry/otlp_ingest_in_the_agent/
+[5]: /ja/opentelemetry/otlp_ingest_in_the_agent/
 {{% /tab %}}
 
 {{% tab "Istio" %}}
@@ -592,16 +595,16 @@ spec:
 この機能は、この特定のサービスについての[プロトコルの手動選択][12]を使用することで無効にすることが可能です。`datadog-agent` サービス内のポート名は `tcp-traceport` に変更できます。
 Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProtocol: tcp` を追加できます。
 
-[1]: /integrations/istio/
-[2]: /network_monitoring/performance/setup/#istio
+[1]: /ja/integrations/istio/
+[2]: /ja/network_monitoring/performance/setup/#istio
 [3]: https://www.datadoghq.com/blog/istio-datadog/
-[4]: /agent/kubernetes/
-[5]: /agent/kubernetes/apm/
+[4]: /ja/agent/kubernetes/
+[5]: /ja/agent/kubernetes/apm/
 [6]: https://istio.io/docs/setup/install/istioctl/
 [7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[9]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[9]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[10]: /ja/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 [13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
 {{% /tab %}}

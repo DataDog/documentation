@@ -1,62 +1,62 @@
 ---
-"app_id": "jmeter"
-"app_uuid": "be62a333-998e-4fea-b0e4-dd4a45b859b4"
-"assets":
-  "dashboards":
-    "JMeter Overview": assets/dashboards/JMeterOverview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": jmeter.responses_count
-      "metadata_path": metadata.csv
-      "prefix": jmeter.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10164"
-    "source_type_name": JMeter
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: jmeter
+app_uuid: be62a333-998e-4fea-b0e4-dd4a45b859b4
+assets:
+  dashboards:
+    JMeter Overview: assets/dashboards/JMeterOverview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: jmeter.responses_count
+      metadata_path: metadata.csv
+      prefix: jmeter.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10164
+    source_type_name: JMeter
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - testing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "jmeter"
-"integration_id": "jmeter"
-"integration_title": "JMeter"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "jmeter"
-"public_title": "JMeter"
-"short_description": "A Datadog plugin for Apache JMeter"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: jmeter
+integration_id: jmeter
+integration_title: JMeter
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: jmeter
+public_title: JMeter
+short_description: A Datadog plugin for Apache JMeter
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Log Collection"
-  - "Category::Testing"
-  "configuration": "README.md#Setup"
-  "description": A Datadog plugin for Apache JMeter
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": JMeter
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Testing
+  configuration: README.md#Setup
+  description: A Datadog plugin for Apache JMeter
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JMeter
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -142,6 +142,5 @@ JMeter には、イベントは含まれません。
 [3]: https://jmeter-plugins.org/wiki/PluginsManager/
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://github.com/DataDog/integrations-core/blob/master/jmeter/metadata.csv
-[6]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/monitor-jmeter-test-results-datadog/
-

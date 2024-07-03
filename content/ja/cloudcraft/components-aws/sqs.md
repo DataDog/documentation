@@ -1,5 +1,5 @@
 ---
-title: "SQS Component"
+title: SQS Component
 ---
 ## 概要
 

@@ -1,5 +1,4 @@
 ---
-title: タグパイプライン
 further_reading:
 - link: /cloud_cost_management/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /integrations/guide/reference-tables
   tag: ドキュメント
   text: Learn about Reference Tables
+title: タグパイプライン
 ---
 
 {{< site-region region="gov" >}}
@@ -77,6 +77,6 @@ Using tags helps correlate your metrics, traces, processes, and logs. Reserved t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/tag-pipelines
-[2]: /integrations/guide/reference-tables/?tab=manualupload
-[3]: /getting_started/tagging/unified_service_tagging/
-[4]: /getting_started/tagging/
+[2]: /ja/integrations/guide/reference-tables/?tab=manualupload
+[3]: /ja/getting_started/tagging/unified_service_tagging/
+[4]: /ja/getting_started/tagging/

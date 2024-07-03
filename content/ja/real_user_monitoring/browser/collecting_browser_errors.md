@@ -1,22 +1,22 @@
 ---
-title: Collecting Browser Errors
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/error_tracking/
-    tag: Documentation
-    text: Error tracking
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: Blog
-    text: Real User Monitoring
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Explore your views within Datadog
-  - link: /real_user_monitoring/explorer/visualize/
-    tag: Documentation
-    text: Apply visualizations on your events
-  - link: /real_user_monitoring/platform/dashboards/
-    tag: Documentation
-    text: RUM Dashboards
+- link: /real_user_monitoring/error_tracking/
+  tag: Documentation
+  text: Error tracking
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: Blog
+  text: Real User Monitoring
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Explore your views within Datadog
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: Apply visualizations on your events
+- link: /real_user_monitoring/platform/dashboards/
+  tag: Documentation
+  text: RUM Dashboards
+kind: documentation
+title: Collecting Browser Errors
 ---
 ## Overview
 
@@ -249,14 +249,14 @@ Get visibility into cross-origin scripts by following these two steps:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /ja/real_user_monitoring/browser/data_collected/
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[4]: /real_user_monitoring/error_tracking
+[4]: /ja/real_user_monitoring/error_tracking
 [5]: https://legacy.reactjs.org/docs/error-boundaries.html
-[6]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs#upload-your-source-maps
+[6]: /ja/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs#upload-your-source-maps
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
-[11]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[11]: /ja/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs

@@ -1,5 +1,4 @@
 ---
-title: "Autodiscovery: Scenarios & Examples"
 further_reading:
 - link: /agent/kubernetes/log/
   tag: ドキュメント
@@ -16,6 +15,7 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
+title: 'Autodiscovery: Scenarios & Examples'
 ---
 
 This page contains detailed example templates for configuring integrations in containerized environments in the following scenarios:
@@ -268,7 +268,7 @@ As a result, the Agent contains a `redisdb.yaml` file with the above configurati
 
 **Note**: The Redis integration comes with [default auto-configuration][1], which takes precedence over configuration set in the Datadog Operator manifest. Because of this, the provided example manifest uses the `DD_IGNORE_AUTOCONF` variable to disable auto-configuration.
 
-[1]: /containers/guide/auto_conf
+[1]: /ja/containers/guide/auto_conf
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -292,7 +292,7 @@ As a result, the Agent contains a `redisdb.yaml` file with the above configurati
 
 **Note**: The Redis integration comes with [default auto-configuration][1], which takes precedence over configuration set in Helm values. Because of this, the provided example uses `datadog.ignoreAutoConfig` to disable auto-configuration.
 
-[1]: /containers/guide/auto_conf
+[1]: /ja/containers/guide/auto_conf
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -578,7 +578,7 @@ spec:
 
 **Note**: The Apache integration comes with [default auto-configuration][1], which takes precedence over configuration set in the Datadog Operator manifest. Because of this, the provided example manifest uses the `DD_IGNORE_AUTOCONF` variable to disable auto-configuration.
 
-[1]: /containers/guide/auto_conf
+[1]: /ja/containers/guide/auto_conf
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -611,7 +611,7 @@ datadog:
 
 **Note**: The Apache integration comes with [default auto-configuration][1], which takes precedence over configuration set in Helm values. Because of this, the provided example uses `datadog.ignoreAutoConfig` to disable auto-configuration.
 
-[1]: /containers/guide/auto_conf
+[1]: /ja/containers/guide/auto_conf
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -623,15 +623,15 @@ All of these examples use [Autodiscovery template variables][7]:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/containers/autodiscovery
-[2]: /containers/docker/integrations
-[3]: /containers/kubernetes/integrations
-[4]: /containers/guide/auto_conf
-[5]: /integrations/redisdb
+[1]: /ja/getting_started/containers/autodiscovery
+[2]: /ja/containers/docker/integrations
+[3]: /ja/containers/kubernetes/integrations
+[4]: /ja/containers/guide/auto_conf
+[5]: /ja/integrations/redisdb
 [6]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[7]: /containers/guide/template_variables/
-[8]: /integrations/apache
-[9]: /integrations/http_check/
+[7]: /ja/containers/guide/template_variables/
+[8]: /ja/integrations/apache
+[9]: /ja/integrations/http_check/
 [10]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[11]: /developers/write_agent_check/#updating-the-collection-interval
+[11]: /ja/developers/write_agent_check/#updating-the-collection-interval
 [12]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

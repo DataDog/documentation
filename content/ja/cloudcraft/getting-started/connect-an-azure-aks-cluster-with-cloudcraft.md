@@ -35,4 +35,4 @@ Cloudcraft がクラスターにアクセスできることをテストするに
 
 {{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/test-cluster-access.png" alt="手順と Test Cluster Access ボタンが表示された Cloudcraft の Enable Kubernetes Cluster Scanning インターフェースのスクリーンショット。" responsive="true" style="width:100%;">}}
 
-[1]: /cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
+[1]: /ja/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/

@@ -1,6 +1,6 @@
 ---
-title: Error Tracking for APM
 kind: documentation
+title: Error Tracking for APM
 ---
 
 Error Tracking is available for all the languages supported by APM and does not require using a different SDK.

@@ -1,10 +1,11 @@
 ---
 aliases:
-- /developers/integrations/integration_sdk/
-- /developers/integrations/testing/
-- /integrations/datadog_checks_dev/
-- /guides/new_integration/
-- /developers/integrations/new_check_howto/
+- /ja/developers/integrations/integration_sdk/
+- /ja/developers/integrations/testing/
+- /ja/integrations/datadog_checks_dev/
+- /ja/guides/new_integration/
+- /ja/developers/integrations/new_check_howto/
+description: Learn how to develop and publish a Datadog Agent integration.
 further_reading:
 - link: /developers/integrations/create_a_tile/
   tag: Documentation
@@ -16,7 +17,6 @@ further_reading:
   tag: Documentation
   text: Learn how to develop on the Datadog platform
 title: Create an Agent Integration
-description: Learn how to develop and publish a Datadog Agent integration.
 ---
 ## 概要
 
@@ -94,7 +94,7 @@ Agent Integration Developer Tool を使用すると、インテグレーショ�
    ```
 
 [101]: https://github.com/Datadog/integrations-extras
-[102]: https://docs.datadoghq.com/developers/integrations/python
+[102]: https://docs.datadoghq.com/ja/developers/integrations/python
 
 {{% /tab %}}
 
@@ -143,8 +143,8 @@ Agent Integration Developer Tool をインストールしたら、Marketplace �
    ```
 
 [101]: https://github.com/Datadog/marketplace
-[102]: https://docs.datadoghq.com/developers/integrations/marketplace_offering
-[103]: https://docs.datadoghq.com/developers/integrations/python
+[102]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering
+[103]: https://docs.datadoghq.com/ja/developers/integrations/python
 
 {{% /tab %}}
 
@@ -471,37 +471,37 @@ In addition to any code changes, the following is required when bumping an integ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/developers/#creating-your-own-solution
+[1]: https://docs.datadoghq.com/ja/developers/#creating-your-own-solution
 [2]: https://github.com/pypa/pipx
-[3]: https://docs.datadoghq.com/developers/integrations/python/
+[3]: https://docs.datadoghq.com/ja/developers/integrations/python/
 [4]: https://docs.docker.com/get-docker/
 [5]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 [6]: https://github.com/datadog/integrations-extras
-[7]: /metrics/custom_metrics/agent_metrics_submission/?tab=count
+[7]: /ja/metrics/custom_metrics/agent_metrics_submission/?tab=count
 [8]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
 [9]: https://docs.pytest.org/en/latest
 [10]: https://github.com/pypa/hatch
 [11]: https://datadoghq.dev/integrations-core/meta/config-specs/
-[12]: /developers/integrations/check_references/#configuration-file
-[13]: /developers/integrations/check_references/#manifest-file
-[14]: /developers/integrations/check_references/#metrics-metadata-file
-[15]: /developers/integrations/check_references/#service-check-file
+[12]: /ja/developers/integrations/check_references/#configuration-file
+[13]: /ja/developers/integrations/check_references/#manifest-file
+[14]: /ja/developers/integrations/check_references/#metrics-metadata-file
+[15]: /ja/developers/integrations/check_references/#service-check-file
 [16]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
-[17]: https://docs.datadoghq.com/agent/
-[18]: https://docs.datadoghq.com/service_management/events/
+[17]: https://docs.datadoghq.com/ja/agent/
+[18]: https://docs.datadoghq.com/ja/service_management/events/
 [19]: https://desktop.github.com/
-[20]: https://docs.datadoghq.com/developers/integrations/create_a_tile
+[20]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
 [21]: https://github.com/Datadog/integrations-extras
 [22]: https://github.com/Datadog/marketplace
 [23]: https://app.datadoghq.com/integrations
 [24]: https://app.datadoghq.com/marketplace
-[25]: https://docs.datadoghq.com/developers/service_checks/
-[26]: https://docs.datadoghq.com/logs/
-[27]: https://docs.datadoghq.com/monitors/
-[28]: https://docs.datadoghq.com/dashboards/
-[29]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
-[30]: https://docs.datadoghq.com/glossary/#check
-[31]: https://docs.datadoghq.com/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
+[25]: https://docs.datadoghq.com/ja/developers/service_checks/
+[26]: https://docs.datadoghq.com/ja/logs/
+[27]: https://docs.datadoghq.com/ja/monitors/
+[28]: https://docs.datadoghq.com/ja/dashboards/
+[29]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/
+[30]: https://docs.datadoghq.com/ja/glossary/#check
+[31]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
 [32]: https://partners.datadoghq.com/
-[33]: https://docs.datadoghq.com/developers/integrations/check_references/
-[34]: https://docs.datadoghq.com/metrics/
+[33]: https://docs.datadoghq.com/ja/developers/integrations/check_references/
+[34]: https://docs.datadoghq.com/ja/metrics/

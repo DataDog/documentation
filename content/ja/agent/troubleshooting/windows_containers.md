@@ -1,5 +1,4 @@
 ---
-title: Windows Containers Issues
 further_reading:
 - link: /agent/docker/?tab=windows
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: ドキュメント
   text: Agent Troubleshooting
+title: Windows Containers Issues
 ---
 
 このページでは、Containerized Windows Applications Monitoring の既知の未解決の問題について説明します。

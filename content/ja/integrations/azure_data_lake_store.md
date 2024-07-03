@@ -1,26 +1,26 @@
 ---
-"aliases":
-- /integrations/azure_datalakestore
-"categories":
+aliases:
+- /ja/integrations/azure_datalakestore
+categories:
 - azure
 - cloud
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Data Lake Store metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_data_lake_store/"
-"draft": false
-"git_integration_title": "azure_data_lake_store"
-"has_logo": true
-"integration_id": "azure-datalakestore"
-"integration_title": "Microsoft Azure Data Lake Store"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_data_lake_store"
-"public_title": "Datadog-Microsoft Azure Data Lake Store Integration"
-"short_description": "Track key Azure Data Lake Store metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Data Lake Store metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
+draft: false
+git_integration_title: azure_data_lake_store
+has_logo: true
+integration_id: azure-datalakestore
+integration_title: Microsoft Azure Data Lake Store
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_data_lake_store
+public_title: Datadog-Microsoft Azure Data Lake Store Integration
+short_description: Track key Azure Data Lake Store metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -56,8 +56,7 @@ The Azure Data Lake Store integration does not include any service checks.
 
 Need help? Contact [Datadog support][4].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_lake_store/azure_data_lake_store_metadata.csv
 [3]: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

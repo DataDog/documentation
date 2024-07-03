@@ -1,7 +1,6 @@
 ---
-title: Docker Tag Extraction
 aliases:
-- /agent/docker/tag
+- /ja/agent/docker/tag
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
@@ -12,6 +11,7 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Limit data collection to a subset of containers only
+title: Docker Tag Extraction
 ---
 
 ## 概要
@@ -95,7 +95,7 @@ container_labels_as_tags:
 ```
 
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -153,7 +153,7 @@ container_env_as_tags:
   ENVIRONMENT: env
 ```
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -161,7 +161,7 @@ container_env_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/tag/#extract-environment-variables-as-tags
-[2]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/agent/docker/tag/#extract-environment-variables-as-tags
+[2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: https://github.com/opencontainers/image-spec/blob/02efb9a75ee11e05937b535cc5f228f9343ab2f5/annotations.md#pre-defined-annotation-keys
-[4]: /agent/docker/?tab=standard#tagging
+[4]: /ja/agent/docker/?tab=standard#tagging

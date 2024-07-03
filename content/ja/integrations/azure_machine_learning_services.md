@@ -1,28 +1,28 @@
 ---
-"categories":
+categories:
 - cloud
 - azure
 - ai/ml
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Machine Learning metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_machine_learning_services/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/"
-  "tag": Blog
-  "text": Best practices for monitoring ML models in production
-"git_integration_title": "azure_machine_learning_services"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Microsoft Azure Machine Learning"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_machine_learning_services"
-"public_title": "Datadog-Microsoft Azure Machine Learning Integration"
-"short_description": "Track key Azure Machine Learning metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Machine Learning metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_machine_learning_services/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/
+  tag: Blog
+  text: Best practices for monitoring ML models in production
+git_integration_title: azure_machine_learning_services
+has_logo: true
+integration_id: ''
+integration_title: Microsoft Azure Machine Learning
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_machine_learning_services
+public_title: Datadog-Microsoft Azure Machine Learning Integration
+short_description: Track key Azure Machine Learning metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -58,7 +58,6 @@ Need help? Contact [Datadog support][3].
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_machine_learning_services/azure_machine_learning_services_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

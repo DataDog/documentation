@@ -1,18 +1,17 @@
 ---
-title: Send custom pipelines to Datadog
 aliases:
-  - /continuous_integration/setup_pipelines/custom
+- /ja/continuous_integration/setup_pipelines/custom
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/guides/pipeline_data_model
-      tag: Documentation
-      text: Learn about the Pipeline Data Model and Execution Types
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
-
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/guides/pipeline_data_model
+  tag: Documentation
+  text: Learn about the Pipeline Data Model and Execution Types
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+title: Send custom pipelines to Datadog
 ---
 
 {{< site-region region="gov" >}}
@@ -44,15 +43,15 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
-[2]: /continuous_integration/guides/pipeline_data_model/
+[1]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
+[2]: /ja/continuous_integration/guides/pipeline_data_model/
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: /glossary/#custom-tag
-[6]: /glossary/#custom-measure
-[7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: /glossary/#manual-step
-[9]: /glossary/#parameter
-[10]: /glossary/#partial-retry
-[11]: /glossary/#pipeline-failure
-[12]: /glossary/#queue-time
+[5]: /ja/glossary/#custom-tag
+[6]: /ja/glossary/#custom-measure
+[7]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[8]: /ja/glossary/#manual-step
+[9]: /ja/glossary/#parameter
+[10]: /ja/glossary/#partial-retry
+[11]: /ja/glossary/#pipeline-failure
+[12]: /ja/glossary/#queue-time

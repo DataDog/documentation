@@ -1,7 +1,4 @@
 ---
-title: Upcoming Changes to Security Notification Rules
-kind: documentation
-is_beta: true
 further_reading:
 - link: /security/notifications/rules/
   tag: Documentation
@@ -9,6 +6,9 @@ further_reading:
 - link: /security/notifications/
   tag: Documentation
   text: Notification Rules
+is_beta: true
+kind: documentation
+title: Upcoming Changes to Security Notification Rules
 ---
 
 This article outlines upcoming changes to how [notification rules][1] are configured. Although the most significant changes apply to [Cloud Security Management (CSM)][4], they also impact [Application Security Management][5] and [Cloud SIEM][6].
@@ -69,9 +69,9 @@ To migrate notifications that are configured for individual detection rules:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/rules/
-[2]: /security/misconfigurations
+[1]: /ja/security/notifications/rules/
+[2]: /ja/security/misconfigurations
 [3]: https://app.datadoghq.com/security/configuration/compliance/rules
-[4]: /security/cloud_security_management/ 
-[5]: /security/application_security/
-[6]: /security/cloud_siem/
+[4]: /ja/security/cloud_security_management/ 
+[5]: /ja/security/application_security/
+[6]: /ja/security/cloud_siem/

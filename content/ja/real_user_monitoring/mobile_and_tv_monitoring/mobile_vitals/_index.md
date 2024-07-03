@@ -1,26 +1,26 @@
 ---
-title: Mobile Vitals
 aliases:
-- /real_user_monitoring/android/mobile_vitals
-- /real_user_monitoring/ios/mobile_vitals
-- /real_user_monitoring/flutter/mobile_vitals
-- /real_user_monitoring/reactnative/mobile_vitals
+- /ja/real_user_monitoring/android/mobile_vitals
+- /ja/real_user_monitoring/ios/mobile_vitals
+- /ja/real_user_monitoring/flutter/mobile_vitals
+- /ja/real_user_monitoring/reactnative/mobile_vitals
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-android"
+- link: https://github.com/DataDog/dd-sdk-android
   tag: ソースコード
   text: Source code for dd-sdk-android
-- link: "https://github.com/DataDog/dd-sdk-ios"
+- link: https://github.com/DataDog/dd-sdk-ios
   tag: ソースコード
   text: Source code for dd-sdk-ios
-- link: "https://github.com/DataDog/dd-sdk-flutter"
+- link: https://github.com/DataDog/dd-sdk-flutter
   tag: ソースコード
   text: Source code for dd-sdk-flutter
-- link: "https://github.com/DataDog/dd-sdk-reactnative"
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: ソースコード
   text: Source code for dd-sdk-reactnative
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+title: Mobile Vitals
 ---
 
 ## 概要
@@ -63,7 +63,7 @@ The following telemetry provide insight into your mobile application's performan
 [3]: https://developer.android.com/topic/performance/vitals/frozen
 [4]: https://developer.android.com/topic/performance/vitals/anr
 [5]: https://developer.android.com/topic/performance/vitals/crash
-[6]: /real_user_monitoring/error_tracking/android
+[6]: /ja/real_user_monitoring/error_tracking/android
 [7]: https://developer.android.com/topic/performance/power
 [8]: https://developer.android.com/reference/java/lang/OutOfMemoryError
 
@@ -83,7 +83,7 @@ The following telemetry provide insight into your mobile application's performan
 [2]: https://developer.android.com/guide/topics/media/frame-rate
 [3]: https://developer.android.com/topic/performance/vitals/frozen
 [4]: https://developer.apple.com/documentation/xcode/diagnosing-issues-using-crash-reports-and-device-logs
-[5]: /real_user_monitoring/ios/crash_reporting/
+[5]: /ja/real_user_monitoring/ios/crash_reporting/
 [6]: https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/
 [7]: https://developer.android.com/reference/java/lang/OutOfMemoryError
 
@@ -107,7 +107,7 @@ The following telemetry provide insight into your mobile application's performan
 [3]: https://developer.android.com/topic/performance/vitals/frozen
 [4]: https://developer.android.com/topic/performance/vitals/anr
 [5]: https://docs.flutter.dev/reference/crash-reporting
-[6]: /real_user_monitoring/error_tracking/flutter
+[6]: /ja/real_user_monitoring/error_tracking/flutter
 [7]: https://docs.flutter.dev/perf/best-practices#build-and-display-frames-in-16ms
 [8]: https://docs.flutter.dev/tools/devtools/memory
 [9]: https://docs.flutter.dev/perf/best-practices#control-build-cost
@@ -131,7 +131,7 @@ The following telemetry provide insight into your mobile application's performan
 [2]: https://reactnative.dev/docs/performance#what-you-need-to-know-about-frames
 [3]: https://firebase.google.com/docs/perf-mon/screen-traces?platform=ios#frozen-frames
 [4]: https://docs.microsoft.com/en-us/appcenter/sdk/crashes/react-native
-[5]: /real_user_monitoring/ios/crash_reporting/
+[5]: /ja/real_user_monitoring/ios/crash_reporting/
 [6]: https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/
 [7]: https://docs.sentry.io/platforms/apple/guides/ios/configuration/out-of-memory/
 
@@ -144,4 +144,3 @@ The following telemetry provide insight into your mobile application's performan
 
 [1]: https://developer.android.com/topic/performance/vitals
 [2]: https://developer.apple.com/documentation/metrickit
-

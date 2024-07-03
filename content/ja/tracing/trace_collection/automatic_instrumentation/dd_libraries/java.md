@@ -1,24 +1,24 @@
 ---
-title: Tracing Java Applications
-kind: documentation
 aliases:
-    - /tracing/java
-    - /tracing/languages/java
-    - /agent/apm/java/
-    - /tracing/setup/java
-    - /tracing/setup_overview/java
-    - /tracing/setup_overview/setup/java
-    - /tracing/trace_collection/dd_libraries/java/
+- /ja/tracing/java
+- /ja/tracing/languages/java
+- /ja/agent/apm/java/
+- /ja/tracing/setup/java
+- /ja/tracing/setup_overview/java
+- /ja/tracing/setup_overview/setup/java
+- /ja/tracing/trace_collection/dd_libraries/java/
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-    - link: "https://github.com/DataDog/dd-trace-java"
-      tag: ソースコード
-      text: Datadog Java APM source code
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: https://github.com/DataDog/dd-trace-java
+  tag: ソースコード
+  text: Datadog Java APM source code
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+kind: documentation
+title: Tracing Java Applications
+type: multi-code-lang
 ---
 ## Compatibility requirements
 
@@ -237,21 +237,21 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/compatibility_requirements/java
+[1]: /ja/tracing/compatibility_requirements/java
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
-[4]: /account_management/billing/apm_tracing_profiler/
-[5]: /profiler/
-[6]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /ja/account_management/billing/apm_tracing_profiler/
+[5]: /ja/profiler/
+[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
 [7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[9]: /tracing/trace_collection/library_config/java/
-[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
-[11]: /tracing/trace_collection/library_injection_local/
-[16]: /agent/remote_config/
+[9]: /ja/tracing/trace_collection/library_config/java/
+[10]: /ja/tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
+[11]: /ja/tracing/trace_collection/library_injection_local/
+[16]: /ja/agent/remote_config/
 [17]: https://app.datadoghq.com/services
-[18]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[18]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
 [20]: https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/managing-subscriptions-for-activity-on-github/viewing-your-subscriptions
 [21]: https://github.com/DataDog/dd-trace-java/releases
-[22]: https://docs.datadoghq.com/getting_started/support/
+[22]: https://docs.datadoghq.com/ja/getting_started/support/

@@ -1,8 +1,8 @@
 ---
-title: Why am I unable to iFrame certain HTTPS URLs?
 aliases:
-    - /graphing/faq/why-am-i-unable-to-iframe-certain-https-urls
-    - /dashboards/faq/why-am-i-unable-to-iframe-certain-https-urls
+- /ja/graphing/faq/why-am-i-unable-to-iframe-certain-https-urls
+- /ja/dashboards/faq/why-am-i-unable-to-iframe-certain-https-urls
+title: Why am I unable to iFrame certain HTTPS URLs?
 ---
 
 The issue most likely has to do with the headers set on the URL page, specifically `X-Frame-Options:`.

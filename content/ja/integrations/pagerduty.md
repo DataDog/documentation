@@ -1,37 +1,37 @@
 ---
-"categories":
-- "collaboration"
-- "incidents"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog のメトリクスとイベントから PagerDuty アラートを生成。"
-"doc_link": "https://docs.datadoghq.com/integrations/pagerduty/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/mobile-incident-management-datadog/"
-  "tag": "ブログ"
-  "text": "Datadog モバイルアプリで外出先からインシデントを管理"
-- "link": "https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/"
-  "tag": "ブログ"
-  "text": "Datadog で PagerDuty を安全にデプロイする方法"
-- "link": "https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration"
-  "tag": "ブログ"
-  "text": "サービスカタログとのインテグレーションを利用する"
-- "link": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty"
-  "tag": "Terraform"
-  "text": "Terraform による Datadog Pagerduty インテグレーションの作成と管理"
-"git_integration_title": "pagerduty"
-"has_logo": true
-"integration_id": ""
-"integration_title": "PagerDuty"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "pagerduty"
-"public_title": "Datadog-PagerDuty Integration"
-"short_description": "Generate PagerDuty alerts from Datadog metrics and events."
-"version": "1.0"
+categories:
+- collaboration
+- incidents
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
+doc_link: https://docs.datadoghq.com/integrations/pagerduty/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/mobile-incident-management-datadog/
+  tag: ブログ
+  text: Datadog モバイルアプリで外出先からインシデントを管理
+- link: https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/
+  tag: ブログ
+  text: Datadog で PagerDuty を安全にデプロイする方法
+- link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration
+  tag: ブログ
+  text: サービスカタログとのインテグレーションを利用する
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty
+  tag: Terraform
+  text: Terraform による Datadog Pagerduty インテグレーションの作成と管理
+git_integration_title: pagerduty
+has_logo: true
+integration_id: ''
+integration_title: PagerDuty
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: pagerduty
+public_title: Datadog-PagerDuty Integration
+short_description: Generate PagerDuty alerts from Datadog metrics and events.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -103,5 +103,4 @@ Datadog has an upper limit on your monitor notification lengths sent to PagerDut
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
-[2]: https://docs.datadoghq.com/events/explorer/
-
+[2]: https://docs.datadoghq.com/ja/events/explorer/

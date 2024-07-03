@@ -1,17 +1,18 @@
 ---
-title: Cloud Security Management Agentless Scanning
 aliases:
- - /security/agentless_scanning
+- /ja/security/agentless_scanning
 further_reading:
 - link: /security/cloud_security_management/setup/agentless_scanning
   tag: Documentation
   text: Setting up Agentless Scanning
-- link: "https://www.datadoghq.com/blog/agentless-scanning/"
+- link: https://www.datadoghq.com/blog/agentless-scanning/
   tag: Blog
-  text: Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management
+  text: Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security
+    Management
 - link: /security/vulnerabilities
   tag: Documentation
   text: Read more about CSM Vulnerabilities
+title: Cloud Security Management Agentless Scanning
 ---
 
 {{< site-region region="gov" >}}
@@ -113,13 +114,13 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
-[2]: /agent/remote_config/?tab=configurationyamlfile
+[1]: /ja/security/cloud_security_management/setup/agentless_scanning
+[2]: /ja/agent/remote_config/?tab=configurationyamlfile
 [3]: https://cyclonedx.org/
-[4]: /security/cloud_security_management/setup/agentless_scanning/#permissions
+[4]: /ja/security/cloud_security_management/setup/agentless_scanning/#permissions
 [5]: https://app.datadoghq.com/security/csm/vm
-[6]: /security/cloud_security_management/setup/agentless_scanning#terraform
+[6]: /ja/security/cloud_security_management/setup/agentless_scanning#terraform
 [7]: mailto:success@datadoghq.com
-[8]: /sensitive_data_scanner
-[9]: /security/cloud_security_management
-[10]: /agent/remote_config
+[8]: /ja/sensitive_data_scanner
+[9]: /ja/security/cloud_security_management
+[10]: /ja/agent/remote_config

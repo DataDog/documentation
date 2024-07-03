@@ -1,6 +1,4 @@
 ---
-title: Security Inbox
-kind: documentation
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -8,19 +6,22 @@ further_reading:
 - link: /security/cloud_security_management
   tag: Documentation
   text: Learn more about Cloud Security Management
-- link: "/security/default_rules/#all"
+- link: /security/default_rules/#all
   tag: Documentation
   text: Out-of-the-box Detection Rules
-- link: "https://www.datadoghq.com/blog/security-inbox/"
+- link: https://www.datadoghq.com/blog/security-inbox/
   tag: Blog
-  text: Easily identify and prioritize your top security risks with Datadog Security Inbox
+  text: Easily identify and prioritize your top security risks with Datadog Security
+    Inbox
+kind: documentation
 products:
-- name: Cloud Security Management
+- icon: cloud-security-management
+  name: Cloud Security Management
   url: /security/cloud_security_management/
-  icon: cloud-security-management
-- name: Application Security Management
+- icon: app-sec
+  name: Application Security Management
   url: /security/application_security/
-  icon: app-sec
+title: Security Inbox
 ---
 
 {{< product-availability >}}
@@ -51,12 +52,12 @@ Security Inbox also takes the following detected risks into consideration when d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/?category=cat-csm-security-issues#all
-[2]: /security/cloud_security_management/misconfigurations/
-[3]: /security/cloud_security_management/identity_risks/
-[4]: /security/application_security/software_composition_analysis
-[5]: /security/application_security/code_security
-[6]: /security/cloud_security_management/guide/public-accessibility-logic/
+[1]: /ja/security/default_rules/?category=cat-csm-security-issues#all
+[2]: /ja/security/cloud_security_management/misconfigurations/
+[3]: /ja/security/cloud_security_management/identity_risks/
+[4]: /ja/security/application_security/software_composition_analysis
+[5]: /ja/security/application_security/code_security
+[6]: /ja/security/cloud_security_management/guide/public-accessibility-logic/
 [7]: https://www.cisa.gov/
 [8]: https://www.exploit-db.com/
 [9]: https://nvd.nist.gov/

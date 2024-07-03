@@ -1,25 +1,25 @@
 ---
-"aliases":
-- /integrations/azure_loadbalancer
-"categories":
+aliases:
+- /ja/integrations/azure_loadbalancer
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Load Balancer metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_load_balancer/"
-"draft": false
-"git_integration_title": "azure_load_balancer"
-"has_logo": true
-"integration_id": "azure-load-balancer"
-"integration_title": "Microsoft Azure Load Balancer"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_load_balancer"
-"public_title": "Datadog-Microsoft Azure Load Balancer Integration"
-"short_description": "Track key Azure Load Balancer metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Load Balancer metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
+draft: false
+git_integration_title: azure_load_balancer
+has_logo: true
+integration_id: azure-load-balancer
+integration_title: Microsoft Azure Load Balancer
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_load_balancer
+public_title: Datadog-Microsoft Azure Load Balancer Integration
+short_description: Track key Azure Load Balancer metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -53,7 +53,6 @@ The Azure Load Balancer integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_load_balancer/azure_load_balancer_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

@@ -1,10 +1,8 @@
 ---
-title: Configuring APM Deployment Tracking for DORA Metrics
-kind: ドキュメント
-description: Learn how to configure APM Deployment Tracking as a data source for DORA Metrics deployments.
 aliases:
-- /continuous_integration/dora_metrics/setup/apm
-is_beta: true
+- /ja/continuous_integration/dora_metrics/setup/apm
+description: Learn how to configure APM Deployment Tracking as a data source for DORA
+  Metrics deployments.
 further_reading:
 - link: /dora_metrics/deployments
   tag: ドキュメント
@@ -15,15 +13,18 @@ further_reading:
 - link: /tracing/service_catalog
   tag: ドキュメント
   text: サービスカタログについて
-- link: "https://github.com/DataDog/datadog-ci"
+- link: https://github.com/DataDog/datadog-ci
   tag: ソースコード
   text: datadog-ci CLI ツールについて
 - link: /continuous_delivery/deployments
   tag: ドキュメント
   text: Deployment Visibility について
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: リリースノート
   text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
+is_beta: true
+kind: ドキュメント
+title: Configuring APM Deployment Tracking for DORA Metrics
 ---
 
 {{< site-region region="gov" >}}
@@ -58,10 +59,10 @@ For more information about change lead time metrics, see [Data Collected][7].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_catalog/add_metadata
-[2]: /tracing/services/deployment_tracking
-[3]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[1]: /ja/service_catalog/add_metadata
+[2]: /ja/tracing/services/deployment_tracking
+[3]: /ja/getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [4]: https://app.datadoghq.com/source-code/setup/apm
-[5]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
-[6]: /integrations/github/
-[7]: /dora_metrics/data_collected/#change-lead-time-metrics
+[5]: /ja/integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
+[6]: /ja/integrations/github/
+[7]: /ja/dora_metrics/data_collected/#change-lead-time-metrics

@@ -1,7 +1,6 @@
 ---
-title: Datadog Admission Controller
 aliases:
-- /agent/cluster_agent/admission_controller
+- /ja/agent/cluster_agent/admission_controller
 further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentation
@@ -9,9 +8,11 @@ further_reading:
 - link: /containers/troubleshooting/admission-controller
   tag: Documentation
   text: Troubleshooting the Admission Controller
-- link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
+- link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: Blog
-  text: Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM
+  text: Use library injection to auto-instrument tracing for Kubernetes applications
+    with Datadog APM
+title: Datadog Admission Controller
 ---
 
 ## 概要
@@ -194,8 +195,8 @@ Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
-[2]: /tracing/trace_collection/library_injection_local/
-[3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
+[2]: /ja/tracing/trace_collection/library_injection_local/
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 [5]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
-[6]: /containers/troubleshooting/admission-controller
+[6]: /ja/containers/troubleshooting/admission-controller

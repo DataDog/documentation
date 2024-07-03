@@ -1,33 +1,33 @@
 ---
-title: Azure Native Integration Programmatic Management Guide
-kind: guide
-description: "Steps for programmatically managing the Azure Native integration with Datadog"
+description: Steps for programmatically managing the Azure Native integration with
+  Datadog
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/azure/"
+- link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentation
   text: Azure Integration
-- link: "https://docs.datadoghq.com/integrations/guide/azure-portal"
+- link: https://docs.datadoghq.com/integrations/guide/azure-portal
   tag: Documentation
   text: Managing the Azure Native Integration
+title: Azure Native Integration Programmatic Management Guide
 ---
 
 {{< site-region region="us3" >}}
 
-## Overview
+## 概要
 
 The Azure Native integration uses the Datadog resource in Azure to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This method involves creating the [azurerm_datadog_monitor][3] resource and assigning it the [Monitoring Reader role][4] to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
 
-## Setup
+## セットアップ
 
-**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to. 
+**注**: Azure Native インテグレーションを設定するには、リンクしたい Azure サブスクリプションの Owner であり、リンク先の Datadog 組織の Admin である必要があります。
 
 ### Terraform
 
-1. Ensure that you have configured the [Terraform Azure provider][1].
+1. [Terraform Azure プロバイダー][1]の構成が完了していることを確認してください。
 
-2. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment with Terraform:
+2. `azurerm_datadog_monitor` リソースを作成し、Terraform で `Monitoring Reader` ロールの割り当てを実行するには、下のテンプレートを使用してください。
 
-#### Azure Datadog Monitor resource
+#### Azure Datadog Monitor リソース
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -55,7 +55,7 @@ resource "azurerm_datadog_monitor" "example" {
 
 {{< /code-block >}}
 
-#### Monitoring Reader role
+#### Reader ロールの監視
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -73,14 +73,14 @@ resource "azurerm_role_assignment" "example" {
 
 {{< /code-block >}}
 
-3. Run `terraform apply`.
+3. `terraform apply` を実行します。
 
-## Log collection
+## ログ収集
 
-Once the Datadog resource is set up in your Azure account, configure log collection through the Azure Portal. See [Configure metrics and logs][5] in the Azure documentation for more information.
+Azure アカウントで Datadog リソースのセットアップが完了したら、Azure ポータルを通じてログの収集を構成します。詳細については、Azure ドキュメントの[メトリクスとログの構成][5]を参照してください。
 
 [1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
-[2]: /integrations/guide/azure-portal/
+[2]: /ja/integrations/guide/azure-portal/
 [3]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors
 [4]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors#role-assignment
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/create#configure-metrics-and-logs
@@ -88,7 +88,7 @@ Once the Datadog resource is set up in your Azure account, configure log collect
 
 {{< site-region region="us,us5,eu,ap1,gov" >}}
 
-<div class="alert alert-info">The Azure Native integration is only available for organizations on Datadog's US3 site. If you're using a different <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>, see the standard <a href="https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/" target="_blank">Azure Programmatic Management guide</a>. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
+<div class="alert alert-info">Azure Native インテグレーションは、Datadog の US3 サイトの組織のみご利用いただけます。それ以外の <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog サイト</a>をご利用の場合は、標準の <a href="https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/" target="_blank">Azure プログラム管理ガイドガイド</a>を参照してください。Datadog US3 サイトをご利用の場合は、本ページの右側にある<a href="?site=us3" target="_blank">サイトセレクターを変更</a>してください。</div>
 
 {{< /site-region >}}
 

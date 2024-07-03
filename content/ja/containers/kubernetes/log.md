@@ -1,7 +1,6 @@
 ---
-title: Kubernetes log collection
 aliases:
-  - /agent/kubernetes/log
+- /ja/agent/kubernetes/log
 further_reading:
 - link: /agent/kubernetes/apm/
   tag: Documentation
@@ -18,6 +17,7 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentation
   text: Assign tags to all data emitted by a container
+title: Kubernetes log collection
 ---
 
 このページでは、Kubernetes ログファイルからのログの収集について説明します。
@@ -262,8 +262,8 @@ key-value ストアがテンプレートソースとして有効になってい�
 
 **注**: key-value ストアを使用している場合、オートディスカバリーは特定の構成を特定のコンテナに適用するために、`<CONTAINER_IDENTIFIER>` と `.spec.containers[0].image` の一致を試みることで、コンテナを**イメージ**で識別します。
 
-[1]: /integrations/consul/
-[2]: /agent/configuration/agent-commands/
+[1]: /ja/integrations/consul/
+[2]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -469,15 +469,15 @@ datadog:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/log-collection-with-docker-socket/
-[2]: /agent/kubernetes/
-[3]: /integrations/#cat-autodiscovery
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: /agent/logs/advanced_log_collection/?tab=kubernetes#filter-logs
-[6]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
-[7]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
-[8]: /agent/guide/autodiscovery-management/
-[9]: /containers/guide/kubernetes_daemonset/#log-collection
-[10]: /getting_started/containers/autodiscovery
-[11]: /logs/log_configuration/attributes_naming_convention/
-[12]: /getting_started/tagging/assigning_tags/#integration-inheritance
+[1]: /ja/agent/faq/log-collection-with-docker-socket/
+[2]: /ja/agent/kubernetes/
+[3]: /ja/integrations/#cat-autodiscovery
+[4]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /ja/agent/logs/advanced_log_collection/?tab=kubernetes#filter-logs
+[6]: /ja/agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
+[7]: /ja/agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
+[8]: /ja/agent/guide/autodiscovery-management/
+[9]: /ja/containers/guide/kubernetes_daemonset/#log-collection
+[10]: /ja/getting_started/containers/autodiscovery
+[11]: /ja/logs/log_configuration/attributes_naming_convention/
+[12]: /ja/getting_started/tagging/assigning_tags/#integration-inheritance

@@ -1,58 +1,58 @@
 ---
-"app_id": "rbltracker"
-"app_uuid": "4b512bd9-ca9d-4d6a-b4f2-5fec54ce75bc"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": []
-      "metadata_path": "metadata.csv"
-      "prefix": "rbltracker."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10007"
-    "source_type_name": "RBLTracker"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "RBL Tracker"
-  "sales_email": "help@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "security"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rbltracker"
-"integration_id": "rbltracker"
-"integration_title": "RBLTracker"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rbltracker"
-"public_title": "RBLTracker"
-"short_description": "RBLTracker provides easy-to-use, real-time blacklist monitoring."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Security"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "RBLTracker provides easy-to-use, real-time blacklist monitoring."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "RBLTracker"
+app_id: rbltracker
+app_uuid: 4b512bd9-ca9d-4d6a-b4f2-5fec54ce75bc
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: rbltracker.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10007
+    source_type_name: RBLTracker
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: RBL Tracker
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- security
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rbltracker
+integration_id: rbltracker
+integration_title: RBLTracker
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rbltracker
+public_title: RBLTracker
+short_description: RBLTracker provides easy-to-use, real-time blacklist monitoring.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Security
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: RBLTracker provides easy-to-use, real-time blacklist monitoring.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RBLTracker
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -97,6 +97,5 @@ Need help? Contact [Datadog support][5].
 [1]: https://rbltracker.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://rbltracker.com/docs/adding-a-datadog-contact-type
-[4]: https://docs.datadoghq.com/events/
-[5]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/events/
+[5]: https://docs.datadoghq.com/ja/help/

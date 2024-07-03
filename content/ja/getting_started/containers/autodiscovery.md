@@ -1,10 +1,8 @@
 ---
-title: Basic Agent Autodiscovery
-kind: documentation
 aliases:
- - /agent/autodiscovery/basic_autodiscovery
- - /getting_started/agent/autodiscovery
- - /agent/autodiscovery
+- /ja/agent/autodiscovery/basic_autodiscovery
+- /ja/getting_started/agent/autodiscovery
+- /ja/agent/autodiscovery
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
@@ -24,6 +22,8 @@ further_reading:
 - link: /agent/configuration/secrets-management/
   tag: Documentation
   text: Secrets Management
+kind: documentation
+title: Basic Agent Autodiscovery
 ---
 
 ## Overview
@@ -73,7 +73,7 @@ In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, 
 
 `redisdb` is the name of the check to run. `init_config` contains some configuration parameters, such as minimum collection interval, and is optional. Each item in `instances` represents the configuration to run for one instance of a check. **Note**: In this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 
 {{% tab "AD Annotations v1" %}}
@@ -100,7 +100,7 @@ In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, 
 
 `check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. **Note**: In this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -144,7 +144,7 @@ If you are using Autodiscovery and an application is deployed on a new node, you
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/ad_identifiers/
-[2]: /agent/faq/template_variables/
-[3]: /agent/faq/auto_conf/
-[4]: /agent/kubernetes/integrations/
+[1]: /ja/agent/guide/ad_identifiers/
+[2]: /ja/agent/faq/template_variables/
+[3]: /ja/agent/faq/auto_conf/
+[4]: /ja/agent/kubernetes/integrations/

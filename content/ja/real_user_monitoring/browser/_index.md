@@ -1,6 +1,4 @@
 ---
-title: RUM Browser Monitoring
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/
   tag: Documentation
@@ -8,6 +6,8 @@ further_reading:
 - link: /logs/log_collection/javascript/
   tag: Documentation
   text: Learn about the Datadog Browser SDK for Logs
+kind: documentation
+title: RUM Browser Monitoring
 ---
 
 ## 概要
@@ -37,6 +37,6 @@ From here, you can modify the [data and context][2] the RUM Browser SDK collects
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#setup
-[2]: /real_user_monitoring/browser/data_collected/
-[3]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /ja/real_user_monitoring/browser/setup/#setup
+[2]: /ja/real_user_monitoring/browser/data_collected/
+[3]: /ja/real_user_monitoring/browser/advanced_configuration/

@@ -1,96 +1,96 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "nerdvision"
-"app_uuid": "dace6217-8e5b-4b96-ae65-b0b58d44cc3e"
-"assets":
-  "dashboards":
-    "NerdVision Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": nerdvision.clients
-      "metadata_path": metadata.csv
-      "prefix": nerdvision.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10140"
-    "source_type_name": NerdVision
-"author":
-  "homepage": "https://nerd.vision"
-  "name": NerdVision
-  "sales_email": support@nerd.vision
-  "support_email": support@nerd.vision
-  "vendor_id": nerdvision
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: nerdvision
+app_uuid: dace6217-8e5b-4b96-ae65-b0b58d44cc3e
+assets:
+  dashboards:
+    NerdVision Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: nerdvision.clients
+      metadata_path: metadata.csv
+      prefix: nerdvision.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10140
+    source_type_name: NerdVision
+author:
+  homepage: https://nerd.vision
+  name: NerdVision
+  sales_email: support@nerd.vision
+  support_email: support@nerd.vision
+  vendor_id: nerdvision
+categories:
 - log collection
 - marketplace
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "nerdvision"
-"integration_id": "nerdvision"
-"integration_title": "NerdVision"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "nerdvision"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.nerdvision.clients
-  "product_id": clients
-  "short_description": Debugging and data collection tool.
-  "tag": hostname
-  "unit_label": client
-  "unit_price": !!int "2"
-"public_title": "NerdVision"
-"short_description": "Live debugger for .NET, Java, Python and Node"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: nerdvision
+integration_id: nerdvision
+integration_title: NerdVision
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: nerdvision
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.nerdvision.clients
+  product_id: clients
+  short_description: Debugging and data collection tool.
+  tag: hostname
+  unit_label: client
+  unit_price: 2
+public_title: NerdVision
+short_description: Live debugger for .NET, Java, Python and Node
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Marketplace"
-  - "Offering::Integration"
-  - "Offering::Software License"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Events"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Live debugger for .NET, Java, Python and Node
-  "media":
-  - "caption": Interactive debugger in NerdVision.
-    "image_url": images/debugger.png
-    "media_type": image
-  - "caption": List of captured errors in NerdVision.
-    "image_url": images/error_list.png
-    "media_type": image
-  - "caption": NerdVision dashboard in Datadog.
-    "image_url": images/screenshot_datadog.png
-    "media_type": image
-  - "caption": Snapshot details in NerdVision.
-    "image_url": images/snapshot_details.png
-    "media_type": image
-  - "caption": List of snapshots in NerdVision.
-    "image_url": images/snapshot_list.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": NerdVision
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Marketplace
+  - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Live debugger for .NET, Java, Python and Node
+  media:
+  - caption: Interactive debugger in NerdVision.
+    image_url: images/debugger.png
+    media_type: image
+  - caption: List of captured errors in NerdVision.
+    image_url: images/error_list.png
+    media_type: image
+  - caption: NerdVision dashboard in Datadog.
+    image_url: images/screenshot_datadog.png
+    media_type: image
+  - caption: Snapshot details in NerdVision.
+    image_url: images/snapshot_details.png
+    media_type: image
+  - caption: List of snapshots in NerdVision.
+    image_url: images/snapshot_list.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: NerdVision
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

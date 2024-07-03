@@ -1,17 +1,17 @@
 ---
-title: RUM Android Advanced Configuration
-code_lang: android
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
-    - /real_user_monitoring/android/advanced_configuration/
+- /ja/real_user_monitoring/android/advanced_configuration/
+code_lang: android
+code_lang_weight: 10
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-android"
+- link: https://github.com/DataDog/dd-sdk-android
   tag: ソースコード
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+title: RUM Android Advanced Configuration
+type: multi-code-lang
 ---
 ## 概要
 
@@ -500,12 +500,12 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/android
-[3]: /real_user_monitoring/android/data_collected
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
+[2]: /ja/real_user_monitoring/android
+[3]: /ja/real_user_monitoring/android/data_collected
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
-[9]: /real_user_monitoring/android/data_collected/#event-specific-attributes
-[10]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[9]: /ja/real_user_monitoring/android/data_collected/#event-specific-attributes
+[10]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures

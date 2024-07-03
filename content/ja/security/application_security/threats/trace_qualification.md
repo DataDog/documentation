@@ -1,6 +1,5 @@
 ---
-title: トレースの適格性確認
-aliases:  
+aliases: null
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -8,6 +7,7 @@ further_reading:
 - link: /security/application_security/how-appsec-works//
   tag: Documentation
   text: How Application Security Management Works
+title: トレースの適格性確認
 ---
 
 ## 概要
@@ -44,4 +44,3 @@ Example of a trace that ASM has qualified as harmful:
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-

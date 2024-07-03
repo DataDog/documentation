@@ -1,7 +1,7 @@
 ---
-title: Setting up Postgres
 description: Setting up Database Monitoring on a Postgres database
 disable_sidebar: true
+title: Setting up Postgres
 ---
 
 ### サポートされる Postgres バージョン

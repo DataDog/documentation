@@ -1,9 +1,9 @@
 ---
-title: APM Billing
 aliases:
-- /account_management/billing/profiler/
-- /account_management/billing/apm_distributed_tracing/
-- /account_management/billing/apm_tracing_profiling/
+- /ja/account_management/billing/profiler/
+- /ja/account_management/billing/apm_distributed_tracing/
+- /ja/account_management/billing/apm_tracing_profiling/
+title: APM Billing
 ---
 
 APM は、APM、APM Pro、APM Enterprise の 3 つの階層で提供されています。APM は、分散型トレーシング機能、トレース、ログ、その他のテレメトリー間のシームレスな相関、サービスに対するすぐに使えるパフォーマンスダッシュボードにより、アプリケーションの深い可視性を提供します。APM Enterprise の Continuous Profiler を使用すると、サービスやエンドポイントレベルの集計、および分散型トレーシングごとに、最も時間がかかり、最もリソースを消費するメソッドをピンポイントで特定することができます。APM Pro と APM Enterprise の Data Streams Monitoring (DSM) を使用すると、Kafka と RabbitMQ を使用するデータストリーミングパイプラインとイベント駆動型アプリケーションのエンドツーエンドパフォーマンスを簡単に追跡することができます。
@@ -178,18 +178,18 @@ Datadogは、Ingested Span と Indexed Span のボリュームを監視するた
 {{< /whatsnext >}}
 
 
-[1]: /tracing/
-[2]: /tracing/trace_pipeline/ingestion_controls
-[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[4]: /account_management/billing/pricing/#infrastructure-monitoring
-[5]: /account_management/billing/pricing/#apm
-[6]: /profiler/
+[1]: /ja/tracing/
+[2]: /ja/tracing/trace_pipeline/ingestion_controls
+[3]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /ja/account_management/billing/pricing/#infrastructure-monitoring
+[5]: /ja/account_management/billing/pricing/#apm
+[6]: /ja/profiler/
 [7]: https://www.datadoghq.com/pricing/
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
-[10]: /account_management/billing/serverless/#serverless-functions
-[11]: /account_management/billing/
-[12]: /tracing/trace_collection/dd_libraries/
-[13]: /tracing/trace_pipeline/trace_retention/
-[14]: /tracing/trace_pipeline/metrics
-[15]: /universal_service_monitoring/
+[10]: /ja/account_management/billing/serverless/#serverless-functions
+[11]: /ja/account_management/billing/
+[12]: /ja/tracing/trace_collection/dd_libraries/
+[13]: /ja/tracing/trace_pipeline/trace_retention/
+[14]: /ja/tracing/trace_pipeline/metrics
+[15]: /ja/universal_service_monitoring/

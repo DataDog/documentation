@@ -1,27 +1,26 @@
 ---
-title: RUM Flutter Advanced Configuration
-kind: documentation
-description: Learn how to configure Flutter Monitoring.
-code_lang: flutter
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
-    - /real_user_monitoring/flutter/advanced_configuration
-    - /real_user_monitoring/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
-    - /real_user_monitoring/flutter/otel_support/
+- /ja/real_user_monitoring/flutter/advanced_configuration
+- /ja/real_user_monitoring/otel
+- /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/otel
+- /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/otel
+- /ja/real_user_monitoring/flutter/otel_support/
+code_lang: flutter
+code_lang_weight: 30
+description: Learn how to configure Flutter Monitoring.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-flutter"
+- link: https://github.com/DataDog/dd-sdk-flutter
   tag: ソースコード
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-- link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
   tag: Blog
   text: Monitor Flutter application performance with Datadog Mobile RUM
-
+kind: documentation
+title: RUM Flutter Advanced Configuration
+type: multi-code-lang
 ---
 ## Overview
 
@@ -386,9 +385,9 @@ This information is merged with any hosts set on `DatadogConfiguration.firstPart
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter#setup
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
-[4]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter#setup
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[4]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [5]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
 [7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogNavigationObserver-class.html
@@ -401,4 +400,4 @@ This information is merged with any hosts set on `DatadogConfiguration.firstPart
 [14]: https://github.com/openzipkin/b3-propagation#single-headers
 [15]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [16]: https://www.w3.org/TR/trace-context/#tracestate-header
-[17]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter
+[17]: /ja/real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter

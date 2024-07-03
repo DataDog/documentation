@@ -1,5 +1,5 @@
 ---
-title: "Service bus namespace Component"
+title: Service bus namespace Component
 ---
 
 ## 概要

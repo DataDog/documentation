@@ -1,69 +1,69 @@
 ---
-"app_id": "twistlock"
-"app_uuid": "b10f1447-4e25-4c76-ab05-911cde5df5c6"
-"assets":
-  "dashboards":
-    "Twistlock": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": twistlock.images.cve.details
-      "metadata_path": metadata.csv
-      "prefix": twistlock.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10052"
-    "source_type_name": Twistlock
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: twistlock
+app_uuid: b10f1447-4e25-4c76-ab05-911cde5df5c6
+assets:
+  dashboards:
+    Twistlock: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: twistlock.images.cve.details
+      metadata_path: metadata.csv
+      prefix: twistlock.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10052
+    source_type_name: Twistlock
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - compliance
 - containers
 - log collection
 - network
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "twistlock"
-"integration_id": "twistlock"
-"integration_title": "Prisma Cloud Compute Edition"
-"integration_version": "3.6.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "twistlock"
-"public_title": "Prisma Cloud Compute Edition"
-"short_description": "Twistlock is a container security scanner"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: twistlock
+integration_id: twistlock
+integration_title: Prisma Cloud Compute Edition
+integration_version: 3.6.1
+is_public: true
+manifest_version: 2.0.0
+name: twistlock
+public_title: Prisma Cloud Compute Edition
+short_description: Twistlock is a container security scanner
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Compliance"
-  - "Category::Containers"
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Twistlock is a container security scanner
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Prisma Cloud Compute Edition
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Compliance
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Network
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Twistlock is a container security scanner
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Prisma Cloud Compute Edition
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -95,7 +95,7 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 2. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -197,12 +197,12 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 4. [Agent を再起動します][5]。
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
-[3]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#log-collection
-[4]: https://docs.datadoghq.com/agent/kubernetes/?tab=daemonset
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -232,5 +232,5 @@ Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベン�
 
 [1]: https://www.paloaltonetworks.com/prisma/cloud
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

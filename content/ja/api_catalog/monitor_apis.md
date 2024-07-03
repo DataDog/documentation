@@ -1,6 +1,6 @@
 ---
-title: Monitoring APIs
-is_beta: true
+aliases:
+- /ja/tracing/api_catalog/monitor_apis/
 further_reading:
 - link: /tracing/api_catalog/get_started/
   tag: Documentation
@@ -14,8 +14,8 @@ further_reading:
 - link: /security/application_security/
   tag: Documentation
   text: Application Security Monitoring
-aliases:
-    - /tracing/api_catalog/monitor_apis/
+is_beta: true
+title: Monitoring APIs
 ---
 
 ## 概要
@@ -59,8 +59,8 @@ Powered by Datadog [Application Security Management (ASM)][4], the **SECURITY SI
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api_catalog/add_entries/#register-automatically-detected-endpoints
-[2]: /api_catalog/owners_and_tags/#establishing-owners
-[3]: /synthetics/api_tests/http_tests/
-[4]: /security/application_security/threats/
-[5]: /monitors/
+[1]: /ja/api_catalog/add_entries/#register-automatically-detected-endpoints
+[2]: /ja/api_catalog/owners_and_tags/#establishing-owners
+[3]: /ja/synthetics/api_tests/http_tests/
+[4]: /ja/security/application_security/threats/
+[5]: /ja/monitors/

@@ -1,25 +1,25 @@
 ---
-"categories":
-- "azure"
-- "cloud"
-- "data stores"
-- "provisioning"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Azure SQL Elastic Pool の主要メトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/"
-"draft": false
-"git_integration_title": "azure_sql_elastic_pool"
-"has_logo": true
-"integration_id": "azure-sql-elastic-pool"
-"integration_title": "Microsoft Azure SQL Elastic Pool"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_sql_elastic_pool"
-"public_title": "Datadog-Microsoft Azure SQL Elastic Pool Integration"
-"short_description": "Track key Azure SQL Elastic Pool metrics."
-"version": "1.0"
+categories:
+- azure
+- cloud
+- data stores
+- provisioning
+custom_kind: インテグレーション
+dependencies: []
+description: Azure SQL Elastic Pool の主要メトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/
+draft: false
+git_integration_title: azure_sql_elastic_pool
+has_logo: true
+integration_id: azure-sql-elastic-pool
+integration_title: Microsoft Azure SQL Elastic Pool
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_sql_elastic_pool
+public_title: Datadog-Microsoft Azure SQL Elastic Pool Integration
+short_description: Track key Azure SQL Elastic Pool metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -56,7 +56,6 @@ The Azure SQL Elastic pools integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_sql_elastic_pool/azure_sql_elastic_pool_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

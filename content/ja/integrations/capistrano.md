@@ -1,26 +1,26 @@
 ---
-"categories":
-- "automation"
-- "configuration & deployment"
-- "developer tools"
-- "orchestration"
-- "provisioning"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。"
-"doc_link": "https://docs.datadoghq.com/integrations/capistrano/"
-"draft": false
-"git_integration_title": "capistrano"
-"has_logo": true
-"integration_id": "capistrano"
-"integration_title": "Capistrano"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "capistrano"
-"public_title": "Datadog-Capistrano Integration"
-"short_description": "Capture and search for deploys, overlay them onto key metrics graphs."
-"version": "1.0"
+categories:
+- automation
+- configuration & deployment
+- developer tools
+- orchestration
+- provisioning
+custom_kind: インテグレーション
+dependencies: []
+description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
+doc_link: https://docs.datadoghq.com/integrations/capistrano/
+draft: false
+git_integration_title: capistrano
+has_logo: true
+integration_id: capistrano
+integration_title: Capistrano
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: capistrano
+public_title: Datadog-Capistrano Integration
+short_description: Capture and search for deploys, overlay them onto key metrics graphs.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -84,5 +84,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: http://capistranorb.com
 [2]: https://app.datadoghq.com/event/stream
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

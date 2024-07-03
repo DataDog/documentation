@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - cloud
 - aws
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS Step Functions metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_step_functions/"
-"draft": false
-"git_integration_title": "amazon_step_functions"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Step Functions"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_step_functions"
-"public_title": "Datadog-AWS Step Functions Integration"
-"short_description": "Track key AWS Step Functions metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS Step Functions metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/
+draft: false
+git_integration_title: amazon_step_functions
+has_logo: true
+integration_id: ''
+integration_title: AWS Step Functions
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_step_functions
+public_title: Datadog-AWS Step Functions Integration
+short_description: Track key AWS Step Functions metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -104,17 +104,16 @@ AWS Step Functions インテグレーションには、サービスのチェッ�
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
-[1]: /integrations/amazon_web_services/
+[1]: /ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-step-functions
-[4]: /tagging/
-[5]: /serverless/
-[6]: https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics
+[4]: /ja/tagging/
+[5]: /ja/serverless/
+[6]: https://docs.datadoghq.com/ja/serverless/step_functions/enhanced-metrics
 [7]: https://docs.aws.amazon.com/step-functions/latest/dg/cw-logs.html
-[8]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
-[9]: https://docs.datadoghq.com/serverless/step_functions
-[10]: /tracing/serverless_functions/enable_aws_xray
-[11]: /integrations/amazon_xray/#installing-the-x-ray-client-libraries
+[8]: /ja/integrations/amazon_web_services/?tab=roledelegation#log-collection
+[9]: https://docs.datadoghq.com/ja/serverless/step_functions
+[10]: /ja/tracing/serverless_functions/enable_aws_xray
+[11]: /ja/integrations/amazon_xray/#installing-the-x-ray-client-libraries
 [12]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
-[13]: /help/
-
+[13]: /ja/help/

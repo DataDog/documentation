@@ -1,5 +1,7 @@
 ---
-title: Reducing Data Related Risks
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /data_security/logs/
   tag: Documentation
@@ -22,9 +24,7 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: Documentation
   text: Sensitive Data Scanner
-cascade:
-    algolia:
-        rank: 70
+title: Reducing Data Related Risks
 ---
 
 <div class="alert alert-info">このページでは、Datadog に送信されるデータを保護するためのツールやセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
@@ -143,26 +143,26 @@ Continuous Integration のパイプラインとテスト
 
 [1]: https://www.datadoghq.com/security/
 [2]: https://www.datadoghq.com/legal/privacy/
-[3]: /developers/dogstatsd/
-[4]: /data_security/agent/
-[5]: /agent/configuration/secrets-management/
-[6]: /integrations/amazon_web_services/
+[3]: /ja/developers/dogstatsd/
+[4]: /ja/data_security/agent/
+[5]: /ja/agent/configuration/secrets-management/
+[6]: /ja/integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
-[8]: /integrations/azure/
-[9]: /integrations/google_cloud_platform/
-[10]: /sensitive_data_scanner/
-[11]: /data_security/logs/
-[12]: /logs/guide/control-sensitive-logs-data/
-[13]: /agent/logs/advanced_log_collection
-[14]: /logs/guide/logs-rbac
-[15]: /logs/guide/logs-rbac-permissions
-[16]: /infrastructure/process/#process-arguments-scrubbing
-[17]: /infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
-[18]: /tracing/configure_data_security/
-[19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
-[20]: /data_security/synthetics/
-[21]: /real_user_monitoring/browser/advanced_configuration/
-[22]: /real_user_monitoring/session_replay/browser/privacy_options
-[23]: /database_monitoring/data_collected/#sensitive-information
-[24]: /getting_started/tagging/
-[25]: /tracing/glossary/
+[8]: /ja/integrations/azure/
+[9]: /ja/integrations/google_cloud_platform/
+[10]: /ja/sensitive_data_scanner/
+[11]: /ja/data_security/logs/
+[12]: /ja/logs/guide/control-sensitive-logs-data/
+[13]: /ja/agent/logs/advanced_log_collection
+[14]: /ja/logs/guide/logs-rbac
+[15]: /ja/logs/guide/logs-rbac-permissions
+[16]: /ja/infrastructure/process/#process-arguments-scrubbing
+[17]: /ja/infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
+[18]: /ja/tracing/configure_data_security/
+[19]: /ja/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
+[20]: /ja/data_security/synthetics/
+[21]: /ja/real_user_monitoring/browser/advanced_configuration/
+[22]: /ja/real_user_monitoring/session_replay/browser/privacy_options
+[23]: /ja/database_monitoring/data_collected/#sensitive-information
+[24]: /ja/getting_started/tagging/
+[25]: /ja/tracing/glossary/

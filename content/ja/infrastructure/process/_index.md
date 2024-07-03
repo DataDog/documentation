@@ -1,28 +1,29 @@
 ---
-title: Live Processes
-kind: documentation
 aliases:
-    - /guides/process
-    - /graphing/infrastructure/process/
+- /ja/guides/process
+- /ja/graphing/infrastructure/process/
 further_reading:
-    - link: "https://www.datadoghq.com/blog/live-process-monitoring/"
-      tag: Blog
-      text: Monitor your processes with Datadog
-    - link: /infrastructure/process/generate_process_metrics/
-      tag: Documentation
-      text: Increase the retention of process data with metrics
-    - link: /infrastructure/livecontainers
-      tag: ドキュメント
-      text: Get real-time visibility of all of the containers across your environment
-    - link: "https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/"
-      tag: Blog
-      text: Correlate software performance and resource consumption with saved views
-    - link: "https://www.datadoghq.com/blog/process-level-data/"
-      tag: Blog
-      text: Troubleshoot faster with process-level app and network data
-    - link: "https://www.datadoghq.com/blog/watchdog-live-processes/"
-      tag: Blog
-      text: Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes
+- link: https://www.datadoghq.com/blog/live-process-monitoring/
+  tag: Blog
+  text: Monitor your processes with Datadog
+- link: /infrastructure/process/generate_process_metrics/
+  tag: Documentation
+  text: Increase the retention of process data with metrics
+- link: /infrastructure/livecontainers
+  tag: ドキュメント
+  text: Get real-time visibility of all of the containers across your environment
+- link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
+  tag: Blog
+  text: Correlate software performance and resource consumption with saved views
+- link: https://www.datadoghq.com/blog/process-level-data/
+  tag: Blog
+  text: Troubleshoot faster with process-level app and network data
+- link: https://www.datadoghq.com/blog/watchdog-live-processes/
+  tag: Blog
+  text: Troubleshoot anomalies in workload performance with Watchdog Insights for
+    Live Processes
+kind: documentation
+title: Live Processes
 ---
 
 
@@ -64,8 +65,8 @@ Additionally, some configuration options may be set as environment variables.
 After configuration is complete, [restart the Agent][2].
 
 
-[1]: /agent/configuration/agent-configuration-files/
-[2]: /agent/configuration/agent-commands/#restart-the-agent
+[1]: /ja/agent/configuration/agent-configuration-files/
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -82,7 +83,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 - Running the Agent as a container still allows you to collect host processes.
 
 
-[1]: /agent/docker/#run-the-docker-agent
+[1]: /ja/agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -152,8 +153,8 @@ See the standard [DaemonSet installation][1] and the [Docker Agent][2] informati
 
 **注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
-[1]: /containers/guide/kubernetes_daemonset
-[2]: /agent/docker/#run-the-docker-agent
+[1]: /ja/containers/guide/kubernetes_daemonset
+[2]: /ja/agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
@@ -200,7 +201,7 @@ Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page
 For more information about installing the Datadog Agent with AWS ECS Fargate, see the [ECS Fargate integration documentation][2].
 
 [1]: https://app.datadoghq.com/process
-[2]: /integrations/ecs_fargate/#installation
+[2]: /ja/integrations/ecs_fargate/#installation
 [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 
 {{% /tab %}}
@@ -466,16 +467,15 @@ Processes are normally collected at 10s resolution. While actively working with 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/agent-5-process-collection/
-[2]: /agent/
-[3]: /getting_started/tagging/
-[4]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/agent/faq/agent-5-process-collection/
+[2]: /ja/agent/
+[3]: /ja/getting_started/tagging/
+[4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
-[6]: /monitors/types/process/
+[6]: /ja/monitors/types/process/
 [7]: https://app.datadoghq.com/monitors#create/live_process
-[8]: /dashboards/widgets/timeseries/#pagetitle
-[9]: /infrastructure/livecontainers/
-[10]: /tracing/
-[11]: /network_monitoring/performance/network_analytics
-[12]: /agent/configuration/agent-commands/#restart-the-agent
-
+[8]: /ja/dashboards/widgets/timeseries/#pagetitle
+[9]: /ja/infrastructure/livecontainers/
+[10]: /ja/tracing/
+[11]: /ja/network_monitoring/performance/network_analytics
+[12]: /ja/agent/configuration/agent-commands/#restart-the-agent

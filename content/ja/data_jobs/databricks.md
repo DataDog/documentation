@@ -1,9 +1,9 @@
 ---
-title: Enable Data Jobs Monitoring for Databricks
 further_reading:
-    - link: /data_jobs
-      tag: Documentation
-      text: Data Jobs Monitoring
+- link: /data_jobs
+  tag: Documentation
+  text: Data Jobs Monitoring
+title: Enable Data Jobs Monitoring for Databricks
 ---
 
 [Data Jobs Monitoring][7] は、Apache Spark と Databricks のジョブのパフォーマンスと信頼性を視覚化します。
@@ -84,7 +84,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Include init script logs for debugging when reporting a failure back to Datadog. | false |
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
+[2]: /ja/getting_started/site/
 
 {{% /tab %}}
 {{% tab "特定のクラスターで" %}}
@@ -133,7 +133,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
+[2]: /ja/getting_started/site/
 
 3. **Confirm** をクリックします。
 
@@ -191,7 +191,7 @@ Datadog で [Data Jobs Monitoring][6] ページを表示すると、Databricks �
 [1]: https://app.datadoghq.com/integrations/databricks?search=databricks
 [4]: https://docs.databricks.com/en/security/secrets/index.html
 [6]: https://app.datadoghq.com/data-jobs/
-[7]: /data_jobs
+[7]: /ja/data_jobs
 [8]: https://docs.databricks.com/api/workspace/jobs/submit
 [9]: https://docs.databricks.com/en/security/auth-authz/access-control/index.html#job-acls
 [10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal

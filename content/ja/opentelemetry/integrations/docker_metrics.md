@@ -1,11 +1,11 @@
 ---
-title: Docker Metrics
 aliases:
-- /opentelemetry/collector_exporter/docker_metrics/
+- /ja/opentelemetry/collector_exporter/docker_metrics/
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
   text: Setting Up the OpenTelemetry Collector
+title: Docker Metrics
 ---
 
 ## Overview
@@ -130,5 +130,5 @@ Value: 0.170933
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
-[2]: /opentelemetry/guide/metrics_mapping/#container-metrics
+[2]: /ja/opentelemetry/guide/metrics_mapping/#container-metrics
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/docker-stats.yaml

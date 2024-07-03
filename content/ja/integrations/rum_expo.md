@@ -1,56 +1,56 @@
 ---
-"app_id": "rum-expo"
-"app_uuid": "6894cf91-e7a2-4600-966b-20a0c99ff08d"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-expo
+app_uuid: 6894cf91-e7a2-4600-966b-20a0c99ff08d
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - モニター
 - mobile
 - network
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_expo/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_expo"
-"integration_id": "rum-expo"
-"integration_title": "Expo"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_expo"
-"public_title": "Expo"
-"short_description": "Monitor Expo applications and generate metrics using Datadog RUM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_expo/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_expo
+integration_id: rum-expo
+integration_title: Expo
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_expo
+public_title: Expo
+short_description: Monitor Expo applications and generate metrics using Datadog RUM
+supported_os:
 - android
 - ios
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Metrics"
-  - "Category::Mobile"
-  - "Category::Network"
-  - "Category::Tracing"
-  - "Supported OS::Android"
-  - "Supported OS::iOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor Expo applications and generate metrics using Datadog RUM
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": documentation
-    "url": "https://docs.datadoghq.com/real_user_monitoring/reactnative/expo/"
-  - "resource_type": documentation
-    "url": "https://docs.datadoghq.com/real_user_monitoring/error_tracking/expo/"
-  "support": "README.md#Support"
-  "title": Expo
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Metrics
+  - Category::Mobile
+  - Category::Network
+  - Category::Tracing
+  - Supported OS::Android
+  - Supported OS::iOS
+  configuration: README.md#Setup
+  description: Monitor Expo applications and generate metrics using Datadog RUM
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/reactnative/expo/
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/error_tracking/expo/
+  support: README.md#Support
+  title: Expo
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -116,10 +116,9 @@ Expo インテグレーションには、サービスのチェック機能は含
 - [Expo のクラッシュレポートとエラー追跡][7]
 
 [1]: https://app.datadoghq.com/integrations/rum-expo
-[2]: https://docs.datadoghq.com/real_user_monitoring/reactnative/expo/#setup
-[3]: https://docs.datadoghq.com/real_user_monitoring/reactnative/#manual-instrumentation
-[4]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[5]: https://docs.datadoghq.com/real_user_monitoring/reactnative/expo/
-[6]: https://docs.datadoghq.com/help/
-[7]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/expo/
-
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/#setup
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/#manual-instrumentation
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/expo/

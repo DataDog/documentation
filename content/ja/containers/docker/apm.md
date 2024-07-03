@@ -1,29 +1,29 @@
 ---
-title: Tracing Docker Applications
 aliases:
-    - /tracing/docker/
-    - /tracing/setup/docker/
-    - /agent/apm/docker
-    - /agent/docker/apm
+- /ja/tracing/docker/
+- /ja/tracing/setup/docker/
+- /ja/agent/apm/docker
+- /ja/agent/docker/apm
 further_reading:
-    - link: "https://github.com/DataDog/datadog-agent/tree/main/pkg/trace"
-      tag: ソースコード
-      text: Source code
-    - link: "/integrations/amazon_ecs/#trace-collection"
-      tag: Documentation
-      text: Trace your ECS applications
-    - link: /agent/docker/log/
-      tag: Documentation
-      text: Collect your application logs
-    - link: /agent/docker/integrations/
-      tag: Documentation
-      text: Collect automatically your applications metrics and logs
-    - link: /agent/guide/autodiscovery-management/
-      tag: Documentation
-      text: Limit data collection to a subset of containers only
-    - link: /agent/docker/tag/
-      tag: Documentation
-      text: Assign tags to all data emitted by a container
+- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/trace
+  tag: ソースコード
+  text: Source code
+- link: /integrations/amazon_ecs/#trace-collection
+  tag: Documentation
+  text: Trace your ECS applications
+- link: /agent/docker/log/
+  tag: Documentation
+  text: Collect your application logs
+- link: /agent/docker/integrations/
+  tag: Documentation
+  text: Collect automatically your applications metrics and logs
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Limit data collection to a subset of containers only
+- link: /agent/docker/tag/
+  tag: Documentation
+  text: Assign tags to all data emitted by a container
+title: Tracing Docker Applications
 ---
 
 Agent 6.0.0 では、Trace Agent はデフォルトで有効になっています。オフにした場合は、`gcr.io/datadoghq/agent` コンテナで環境変数として `DD_APM_ENABLED=true` を渡すことで再び有効にすることができます。
@@ -384,10 +384,10 @@ Refer to the [language-specific APM instrumentation docs][3] for tracer settings
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /tracing/configure_data_security/#replace-tags
-[3]: /tracing/setup/
-[4]: /agent/proxy
-[5]: /tracing/guide/ignoring_apm_resources/
-[6]: /tracing/troubleshooting/agent_rate_limits
-[7]: /getting_started/site/
+[2]: /ja/tracing/configure_data_security/#replace-tags
+[3]: /ja/tracing/setup/
+[4]: /ja/agent/proxy
+[5]: /ja/tracing/guide/ignoring_apm_resources/
+[6]: /ja/tracing/troubleshooting/agent_rate_limits
+[7]: /ja/getting_started/site/
 [8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

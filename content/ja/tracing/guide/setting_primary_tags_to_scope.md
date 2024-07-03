@@ -1,8 +1,6 @@
 ---
-title: Set Primary Tags to Scope
-kind: documentation
 aliases:
-  - /tracing/advanced/setting_primary_tags_to_scope/
+- /ja/tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: ドキュメント
@@ -16,6 +14,8 @@ further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: Explore your services, resources, and traces
+kind: documentation
+title: Set Primary Tags to Scope
 ---
 
 ## Definition
@@ -136,7 +136,7 @@ services:
 ```
 
 
-[1]: /agent/guide/compose-and-the-datadog-agent/
+[1]: /ja/agent/guide/compose-and-the-datadog-agent/
 {{% /tab %}}
 {{% tab "Environment variables" %}}
 
@@ -168,12 +168,12 @@ Primary tags appear at the top of APM pages. Use these selectors to filter the d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#trace
-[2]: /getting_started/tagging/
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /getting_started/tagging/assigning_tags/#traces
-[5]: /tracing/metrics/metrics_namespace/
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/getting_started/tagging/
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: /ja/getting_started/tagging/assigning_tags/#traces
+[5]: /ja/tracing/metrics/metrics_namespace/
 [6]: https://app.datadoghq.com/apm/settings
 [7]: https://app.datadoghq.com/services
-[8]: /getting_started/tagging/assigning_tags
-[9]: /tracing/troubleshooting/#data-volume-guidelines
+[8]: /ja/getting_started/tagging/assigning_tags
+[9]: /ja/tracing/troubleshooting/#data-volume-guidelines

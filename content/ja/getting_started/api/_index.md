@@ -1,10 +1,10 @@
 ---
-title: Using Postman with Datadog APIs
-kind: documentation
 aliases:
-    - /developers/faq/using-postman-with-datadog-apis
-    - /getting_started/using-postman-with-datadog-apis
-    - /developers/guide/using-postman-with-datadog-apis
+- /ja/developers/faq/using-postman-with-datadog-apis
+- /ja/getting_started/using-postman-with-datadog-apis
+- /ja/developers/guide/using-postman-with-datadog-apis
+kind: documentation
+title: Using Postman with Datadog APIs
 ---
 
 ## Overview
@@ -117,5 +117,5 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
 [6]: https://learning.postman.com/docs/sending-requests/variables/variables/#defining-collection-variables
-[7]: /api/latest/#api-reference
-[8]: /api/
+[7]: /ja/api/latest/#api-reference
+[8]: /ja/api/

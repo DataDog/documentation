@@ -1,11 +1,11 @@
 ---
-title: profiling flame graph
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - trace
-  - resource
-  - dashboard
+- trace
+- resource
+- dashboard
+title: profiling flame graph
 ---
 The profiling flame graph visualization represents a breakdown of top consuming lines of code such as CPU and Memory. 
 

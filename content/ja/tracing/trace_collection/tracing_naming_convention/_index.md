@@ -1,16 +1,16 @@
 ---
-title: Span Tag Semantics
-kind: documentation
 further_reading:
-    - link: logs/log_configuration/attributes_naming_convention
-      tag: Documentation
-      text: Learn more about standard attributes for Log Management
-    - link: /real_user_monitoring/browser/data_collected
-      tag: Documentation
-      text: Data collected for RUM Browser
-    - link: /tracing/trace_explorer/query_syntax/
-      tag: Documentation
-      text: Learn how to explore your traces
+- link: logs/log_configuration/attributes_naming_convention
+  tag: Documentation
+  text: Learn more about standard attributes for Log Management
+- link: /real_user_monitoring/browser/data_collected
+  tag: Documentation
+  text: Data collected for RUM Browser
+- link: /tracing/trace_explorer/query_syntax/
+  tag: Documentation
+  text: Learn how to explore your traces
+kind: documentation
+title: Span Tag Semantics
 ---
 
 ## Overview
@@ -74,9 +74,9 @@ To find span attributes in Datadog, go to the **Info** tab in the Trace side pan
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/
-[2]: /glossary/#span-tag
+[1]: /ja/tracing/setup_overview/
+[2]: /ja/glossary/#span-tag
 [3]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
-[4]: /tracing/setup_overview/configure_data_security/
-[5]: /tracing/trace_collection/library_config/
-[6]: /standard-attributes/?product=apm
+[4]: /ja/tracing/setup_overview/configure_data_security/
+[5]: /ja/tracing/trace_collection/library_config/
+[6]: /ja/standard-attributes/?product=apm

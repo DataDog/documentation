@@ -1,5 +1,5 @@
 ---
-title: "ElastiCache Component"
+title: ElastiCache Component
 ---
 ## 概要
 
@@ -127,6 +127,6 @@ The `billingOptions` key supports all billing options that are accepted by the C
 - **purchaseOption: string**: The purchase option for the instance. Accepted values are `Heavy Utilization`, `No Upfront`, `Partial Upfront`, and `All Upfront`.
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/security-group/
-[4]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/security-group/
+[4]: /ja/cloudcraft/components-aws/subnet/

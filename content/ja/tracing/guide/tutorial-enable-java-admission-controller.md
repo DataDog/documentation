@@ -1,6 +1,4 @@
 ---
-title: Tutorial - Enabling Tracing for a Java Application with the Admission Controller
-kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: ドキュメント
@@ -14,60 +12,62 @@ further_reading:
 - link: /tracing/trace_collection/custom_instrumentation/java/
   tag: ドキュメント
   text: Manually configuring traces and spans
-- link: "https://github.com/DataDog/dd-trace-java"
+- link: https://github.com/DataDog/dd-trace-java
   tag: ソースコード
   text: Tracing library open source code repository
 - link: /containers/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Troubleshooting the Datadog Cluster Agent
-- link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
+- link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: ブログ
-  text: Use library injection to auto-instrument and trace your Kubernetes applications with Datadog APM
+  text: Use library injection to auto-instrument and trace your Kubernetes applications
+    with Datadog APM
+title: Tutorial - Enabling Tracing for a Java Application with the Admission Controller
 ---
 
-## Overview
+## 概要
 
-This tutorial walks you through the steps to enable tracing for Java Application using the Datadog Admission Controller.
+このチュートリアルでは、Datadog Admission Controller を使用して Java アプリケーションのトレースを有効にする手順を説明します。
 
-For other scenarios, including on a host, in a container, on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
+ホスト、コンテナ、クラウドインフラストラクチャー、他の言語で書かれたアプリケーションなど、他のシナリオについては、他の[トレース有効化のチュートリアル][1]を参照してください。
 
-See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
+Java の一般的なトレース設定ドキュメントについては、[Java アプリケーションのトレース][2]を参照してください。
 
-### Prerequisites
+### 前提条件
 
-- A Datadog account and [organization API key][3]
+- Datadog のアカウントと[組織の API キー][3]
 - Git
 - Docker
 - Curl
 - Kubernetes v1.14+
 
-## Install the sample application
+## サンプルアプリケーションのインストール
 
-To demonstrate how to instrument your app with the Datadog Admission Controller, this tutorial uses a Java app built with Spring. You can find the code for the app in the [springblog GitHub repository][4].
+このチュートリアルでは、Datadog Admission Controller でアプリをインスツルメンテーションする方法を説明するために、Spring でビルドした Java アプリを使用します。アプリのコードは [springblog GitHub リポジトリ][4]にあります。
 
-To get started, clone the repository:
+始めるには、リポジトリを複製します。
 
 {{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/springblog.git
 {{< /code-block >}}
 
-The repository contains a multi-service Java application pre-configured to be run within Docker and Kubernetes. The sample app is a basic Spring app using REST.
+このリポジトリには、Docker と Kubernetes 内で実行できるようにあらかじめ構成されたマルチサービスの Java アプリケーションが含まれています。サンプルアプリは REST を使った基本的な Spring アプリです。
 
-## Start and run the sample application 
+## サンプルアプリケーションの起動と実行
 
-1. Switch to to the `/k8s` subdirectory in the springblog repo:
+1. springblog リポジトリの `/k8s` サブディレクトリに移動します。
    {{< code-block lang="shell" >}}
 cd springblog/k8s/{{< /code-block >}}
 
-2. Deploy the workload with the `depl.yaml` file:
+2. `depl.yaml` ファイルを使用してワークロードをデプロイします。
    {{< code-block lang="shell" >}}
 kubectl apply -f ./depl.yaml{{< /code-block >}}
 
-3. Verify that it is running with the following command:
+3. 以下のコマンドで実行されていることを確認します。
    {{< code-block lang="shell" >}}
 kubectl get pods{{< /code-block >}}
 
-    You should see something like this:
+    このように表示されるはずです。
 
     ```
     NAME                                       READY   STATUS        RESTARTS        AGE
@@ -75,38 +75,38 @@ kubectl get pods{{< /code-block >}}
     springfront-797b78d6db-p5c84               1/1     Terminating   0               2m41s
     ```
 
-    The service is started and listens on port 8080. It exposes an `/upstream` endpoint. 
+   サービスが開始され、8080 番ポートをリッスンします。このサービスは `/upstream` エンドポイントを公開します。
 
-4. Check that communication takes place by running the following curl command:
+4. 以下の curl コマンドを実行して、通信が行われていることを確認します。
    {{< code-block lang="shell" >}}
 curl localhost:8080/upstream
 Quote{type='success', values=Values{id=6, quote='Alea jacta est'}}{{< /code-block >}}
 
-5. To stop the application, run this command from the `springblog/k8s` directory so you can enable tracing on it:
+5. アプリケーションを停止するには、`springblog/k8s` ディレクトリからこのコマンドを実行して、トレースを有効にします。
    {{< code-block lang="shell" >}}
 kubectl delete -f ./depl-with-lib-inj.yaml{{< /code-block >}}
 
-## Instrument your app with Datadog Admission Controller
+## Datadog Admission Controller でアプリをインスツルメンテーションする
 
-After you have your application working, instrument it using the Datadog Admission Controller. In containerized environments, the process is generally:
+アプリケーションを動作させたら、Datadog Admission Controller を使用してインスツルメンテーションを行います。コンテナ化された環境では、このプロセスは一般的に以下の通りです。
 
-1. Install the [Datadog Cluster Agent][5].
-2. Add [Unified Service Tags][6] in pod definition.
-3. [Annotate][7] your pod for library injection.
-4. [Label][8] your pod to instruct the Datadog Admission controller to mutate the pod.
+1. [Datadog Cluster Agent][5] をインストールします。
+2. ポッド定義に[統合サービスタグ付け][6]を追加します。
+3. ライブラリ挿入のためにポッドに[アノテーション][7]を付けます。
+4. [ラベル][8]をポッドに貼って、Datadog Admission Controller にポッドの変異を指示します。
 
-There's no need to add the tracing library because it's automatically injected. You don't need to redeploy your app yet. This section of the tutorial steps you through the process of adding Datadog variables and deploying a new image or version of your app.
+トレーシングライブラリは自動的に挿入されるので、追加する必要はありません。アプリを再デプロイする必要はありません。チュートリアルのこのセクションでは、Datadog 変数を追加し、アプリの新しいイメージまたはバージョンをデプロイするプロセスを説明します。
 
-1. From the `k8s` subdirectory, use the following command to install the Datadog Cluster Agent, specifying the `values-with-lib-inj.yaml` config file and your [Datadog API key](/account_management/api-app-keys/):
+1. `k8s` サブディレクトリから、以下のコマンドを使用して、`values-with-lib-inj.yaml` コンフィギュレーションファイルと [Datadog API キー](/account_management/api-app-keys/)を指定して、Datadog Cluster Agent をインストールします。
    {{< code-block lang="shell" >}}
 helm install datadog-agent -f values-with-lib-inj.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey=$DD_API_KEY datadog/datadog{{< /code-block >}}
-    <div class="alert alert-warning">For more detailed information, read <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Installing the Datadog Agent on Kubernetes with Helm</a></div>
+   <div class="alert alert-warning">より詳細な情報については、<a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Helm を使用した Kubernetes への Datadog Agent のインストール</a>をお読みください</div>
 
-2. You can check the Datadog Cluster Agent is running with the following command:
+2. Datadog Cluster Agent が実行しているかどうかは、以下のコマンドで確認できます。
    {{< code-block lang="shell" >}}
 kubectl get pods{{< /code-block >}}
 
-    You should see something like this:
+    このように表示されるはずです。
 
     ```
     NAME                                                READY   STATUS    RESTARTS  AGE
@@ -115,21 +115,21 @@ kubectl get pods{{< /code-block >}}
     datadog-agent-kube-state-metrics-86f46b8484-mlqp7   1/1     Running   0         30s
     ```
 
-3. Add [Unified Service Tags][6] to the pod by adding the following block to the [`depl.yaml` file][9]:
+3. 以下のブロックを [`depl.yaml` ファイル][9]に追加して、[統合サービスタグ付け][6]をポッドに追加します。
    {{< code-block lang="yaml" >}}
 labels:
   tags.datadoghq.com/env: "dev"
   tags.datadoghq.com/service: "springfront"
   tags.datadoghq.com/version: "12"{{< /code-block >}}
 
-4. Configure the Datadog Admission Controller to inject a Java tracing library to the app container by adding the following annotation to the pod:
+4. 以下のアノテーションをポッドに追加して、Java トレーシングライブラリをアプリコンテナに挿入するように Datadog Admission Controller を構成します。
    {{< code-block lang="yaml" >}}
 annotations:
   admission.datadoghq.com/java-lib.version: "latest"{{< /code-block >}}
 
-    This annotation specifies the latest version of the Java tracing library. You can also reference a specific version of the library, such as `"v1.5.0"`.
+   このアノテーションは Java トレーシングライブラリの最新バージョンを指定します。`"v1.5.0"` のようにライブラリの特定のバージョンを参照することもできます。
 
-    The final pod definition should look like the excerpt below. See also the full [YAML file][10] in the sample repo. The instructions you added to instrument the app are highlighted:
+    最終的なポッドの定義は下の抜粋のようになります。サンプルリポジトリにある完全な [YAML ファイル][10]も参照してください。アプリをインスツルメンテーションするために追加した指示がハイライトされています。
 
     {{< highlight yaml "hl_lines=6-8 24-28" >}}
     apiVersion: apps/v1
@@ -162,15 +162,15 @@ annotations:
             admission.datadoghq.com/java-lib.version: "latest"
     {{< /highlight >}}
 
-5. Run the sample app with the following command:
+5. 以下のコマンドでサンプルアプリを実行します。
    {{< code-block lang="shell" >}}
 kubectl apply -f depl-with-lib-inj.yaml{{< /code-block >}}
 
-6. Run the following command to show that the app and Agent are running:
+6. 以下のコマンドを実行して、アプリと Agent が実行されていることを確認します。
    {{< code-block lang="shell" >}}
 kubectl get pods{{< /code-block >}}
 
-    You should see something like this:
+    このように表示されるはずです。
 
     ```
     NAME                                                READY   STATUS    RESTARTS   AGE
@@ -181,11 +181,11 @@ kubectl get pods{{< /code-block >}}
     springfront-797b78d6db-mppbg                        1/1     Running   0          27m
     ```
 
-7. Run the following command to see details of the pod:
+7. 以下のコマンドを実行すると、ポッドの詳細が表示されます。
    {{< code-block lang="shell" >}}
 kubectl describe pod springfront{{< /code-block >}}
 
-   You should see something like this:
+   このように表示されるはずです。
 
     ```
     Events:
@@ -202,7 +202,7 @@ kubectl describe pod springfront{{< /code-block >}}
     Normal  Started    2s    kubelet            Started container springfront
     ```
 
-    As you can see, an init-container is added to your pod. This container includes the Datadog Java tracing libraries to a volume mount. Also `JAVA_TOOL_OPTIONS` is modified to include `javaagent`. And Datadog-specific environment variables are added to the container:
+   ご覧のように、ポッドに init コンテナが追加されます。このコンテナには、ボリュームマウントへの Datadog の Java トレーシングライブラリが含まれています。また、`JAVA_TOOL_OPTIONS` は `javaagent` を含むように変更されています。そして Datadog 固有の環境変数がコンテナに追加されます。
 
     ```
     Environment:
@@ -219,57 +219,57 @@ kubectl describe pod springfront{{< /code-block >}}
     /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qvmtk (ro)
     ```
 
-8. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example::
+8. ポッドのログを確認して、Datadog トレーシングライブラリがポッドに挿入されていることを確認します。例:
    {{< code-block lang="shell" >}}
 kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 
-    You should see something like this:
+    このように表示されるはずです。
 
     ```
     Defaulted container "springfront" out of: springfront, datadog-lib-java-init (init)
     Picked up JAVA_TOOL_OPTIONS:  -javaagent:/datadog-lib/dd-java-agent.jar
     ```
 
-## View APM traces in Datadog
+## Datadog で APM トレースを表示
 
-1. Run the following command:
+1. 次のコマンドを実行します。
    {{< code-block lang="shell" >}}
 curl localhost:8080/upstream{{< /code-block >}}
 
-2. Open the Datadog UI and see the two services reporting under the [Service Catalog][11]:
-   {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-catalog.png" alt="Springback and springfront services in the Service Catalog." style="width:100%;" >}}
+2. Datadog の UI を開き、[サービスカタログ][11]の下に 2 つのサービスがレポートされていることを確認します。
+   {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-catalog.png" alt="サービスカタログのスプリングバックとスプリングフロントサービス。" style="width:100%;" >}}
 
-3. Explore Traces and see the associated Service Map:
-    {{< img src="tracing/guide/tutorials/tutorial-admission-controller-traces.png" alt="The flame graph that represents the service." style="width:100%;" >}}
-    {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-map.png" alt="The service map that represents the service." style="width:100%;" >}}
+3. トレースを探索し、関連するサービスマップを参照します。
+    {{< img src="tracing/guide/tutorials/tutorial-admission-controller-traces.png" alt="サービスを表すフレームグラフ。" style="width:100%;" >}}
+    {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-map.png" alt="サービスを表すサービスマップ。" style="width:100%;" >}}
 
-## Clean up the environment
+## 環境のクリーンアップ
 
-Clean up your environment with the following command:
+以下のコマンドで環境をクリーンアップします。
 
 {{< code-block lang="shell" >}}
 kubectl delete -f depl-with-lib-inj.yaml
 {{< /code-block >}}
 
-Library injection with the Admission Controller simplifies service instrumentation, enabling you to view APM traces without changing or rebuilding your application. To learn more, read [Datadog Library injection][12].
+Admission Controller を使用したライブラリ挿入は、サービスインスツルメンテーションを簡素化し、アプリケーションを変更または再構築することなく APM トレースを表示することができます。詳しくは、[Datadog ライブラリ挿入][12]を参照してください。
 
-## Troubleshooting
-If you're not receiving traces as expected, set up debug mode for the Java tracer. To learn more, read [Enable debug mode][13].
+## トラブルシューティング
+期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]をお読みください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/#enabling-tracing-tutorials
-[2]: /tracing/trace_collection/dd_libraries/java
-[3]: /account_management/api-app-keys
+[1]: /ja/tracing/guide/#enabling-tracing-tutorials
+[2]: /ja/tracing/trace_collection/dd_libraries/java
+[3]: /ja/account_management/api-app-keys
 [4]: https://github.com/DataDog/springblog
-[5]: /containers/cluster_agent
-[6]: /getting_started/tagging/unified_service_tagging
-[7]: /tracing/trace_collection/library_injection_local
-[8]: /tracing/trace_collection/library_injection_local
+[5]: /ja/containers/cluster_agent
+[6]: /ja/getting_started/tagging/unified_service_tagging
+[7]: /ja/tracing/trace_collection/library_injection_local
+[8]: /ja/tracing/trace_collection/library_injection_local
 [9]: https://github.com/DataDog/springblog/blob/main/k8s/depl.yaml
 [10]: https://github.com/DataDog/springblog/blob/main/k8s/depl-with-lib-inj.yaml
 [11]: https://app.datadoghq.com/services
-[12]: /tracing/trace_collection/admission_controller
-[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[12]: /ja/tracing/trace_collection/admission_controller
+[13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode

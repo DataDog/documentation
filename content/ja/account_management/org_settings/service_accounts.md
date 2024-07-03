@@ -1,9 +1,9 @@
 ---
-title: Service Accounts
 further_reading:
-    - link: "https://docs.datadoghq.com/api/latest/service-accounts/"
-      tag: Documentation
-      text: Service accounts API reference
+- link: https://docs.datadoghq.com/api/latest/service-accounts/
+  tag: Documentation
+  text: Service accounts API reference
+title: Service Accounts
 ---
 
 ## 概要
@@ -103,6 +103,6 @@ Datadog は、以下のアクションが発生すると、サービスアカウ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/org_settings/
+[1]: /ja/account_management/org_settings/
 [2]: https://app.datadoghq.com/organization-settings/service-accounts
-[3]: /api/latest/service-accounts/
+[3]: /ja/api/latest/service-accounts/

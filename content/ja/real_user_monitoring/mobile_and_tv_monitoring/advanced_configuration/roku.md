@@ -1,17 +1,17 @@
 ---
-title: RUM Roku Advanced Configuration
-code_lang: roku
-type: multi-code-lang
-code_lang_weight: 50
 aliases:
-    - /real_user_monitoring/roku/advanced_configuration/
+- /ja/real_user_monitoring/roku/advanced_configuration/
+code_lang: roku
+code_lang_weight: 50
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-roku"
+- link: https://github.com/DataDog/dd-sdk-roku
   tag: ソースコード
   text: dd-sdk-roku のソースコード
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+title: RUM Roku Advanced Configuration
+type: multi-code-lang
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
@@ -134,7 +134,7 @@ SDK により自動的に取得されるデフォルトの属性に加えて、�
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku
 
 
 ## その他の参考資料

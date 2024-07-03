@@ -1,10 +1,11 @@
 ---
-title: Search Spans
-description: 'Filter spans to narrow down, broaden, or shift your focus on the subset of spans of current interest.'
+description: Filter spans to narrow down, broaden, or shift your focus on the subset
+  of spans of current interest.
 further_reading:
-    - link: tracing/trace_explorer/query_syntax
-      tag: Documentation
-      text: Query Syntax
+- link: tracing/trace_explorer/query_syntax
+  tag: Documentation
+  text: Query Syntax
+title: Search Spans
 ---
 
 ## 概要
@@ -26,7 +27,7 @@ further_reading:
 {{< site-region region="us,eu,us3,us5,ap1" >}}
 **注**: `key:value` クエリでは、事前に[ファセットを宣言][1]する必要は**ありません**。
 
-[1]: /tracing/trace_explorer/query_syntax/#facets
+[1]: /ja/tracing/trace_explorer/query_syntax/#facets
 {{< /site-region >}}
 
 ## クエリ構文
@@ -38,6 +39,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_explorer/query_syntax/#facets
-[2]: /tracing/trace_explorer/query_syntax
-[3]: /dashboards/guide/custom_time_frames
+[1]: /ja/tracing/trace_explorer/query_syntax/#facets
+[2]: /ja/tracing/trace_explorer/query_syntax
+[3]: /ja/dashboards/guide/custom_time_frames

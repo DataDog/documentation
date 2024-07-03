@@ -1,14 +1,14 @@
 ---
-title: DogStatsD Mapper
-kind: documentation
 description: Convert parts of statsd metric names to tags using mapping rules in DogStatsD.
 further_reading:
-    - link: developers/dogstatsd
-      tag: Documentation
-      text: Introduction to DogStatsD
-    - link: developers/libraries
-      tag: Documentation
-      text: Official and Community created API and DogStatsD client libraries
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Introduction to DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Official and Community created API and DogStatsD client libraries
+kind: documentation
+title: DogStatsD Mapper
 ---
 
 With Agent v7.17+, the DogStatsD Mapper feature allows you to convert parts of a metric name submitted to DogStatsD to tags using mapping rules with wildcard and regex patterns. For example it allows you to transform the metric:
@@ -123,4 +123,4 @@ It would send the metric `custom_metric.process.prod.value_1.live` to Datadog wi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file

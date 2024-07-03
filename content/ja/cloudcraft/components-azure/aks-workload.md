@@ -1,5 +1,5 @@
 ---
-title: "AKS Workload Component"
+title: AKS Workload Component
 ---
 
 ## 概要

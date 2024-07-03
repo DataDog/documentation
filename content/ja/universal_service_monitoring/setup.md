@@ -1,13 +1,13 @@
 ---
-title: Setting up Universal Service Monitoring
-kind: Documentation
 further_reading:
 - link: /universal_service_monitoring/
   tag: Documentation
   text: ユニバーサルサービスモニタリングについて
-- link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
+- link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: Blog
   text: Golden signals in seconds with Universal Service Monitoring
+kind: Documentation
+title: Setting up Universal Service Monitoring
 ---
 
 
@@ -401,7 +401,7 @@ services:
 
 If the operating system does not have a running `apparmor` instance, use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
 
-[1]: /universal_service_monitoring/setup/?tab=dockercompose#enabling-universal-service-monitoring
+[1]: /ja/universal_service_monitoring/setup/?tab=dockercompose#enabling-universal-service-monitoring
 
 {{% /tab %}}
 {{% tab "コンフィギュレーションファイル (Linux)" %}}
@@ -710,8 +710,8 @@ If you use load balancers with your services, enable additional cloud integratio
    SERVICE=<service>
    ```
 
-[1]: /containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
-[2]: /integrations/amazon_web_services/
+[1]: /ja/containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
+[2]: /ja/integrations/amazon_web_services/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -727,7 +727,7 @@ If you use load balancers with your services, enable additional cloud integratio
    service_monitoring_config:
      enabled: true
    ```
-[1]: /agent/basic_agent_usage/windows/?tab=commandline
+[1]: /ja/agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -1065,4 +1065,4 @@ agents:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/getting_started/tagging/unified_service_tagging

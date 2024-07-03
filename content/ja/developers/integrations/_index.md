@@ -1,8 +1,8 @@
 ---
 aliases:
-- /guides/agent_checks/
-- /agent/agent_checks
-- /developers/agent_checks/
+- /ja/guides/agent_checks/
+- /ja/agent/agent_checks
+- /ja/developers/agent_checks/
 description: Learn how to develop and publish an offering on the Integrations page.
 further_reading:
 - link: /developers/integrations/agent_integration/
@@ -117,20 +117,20 @@ API ベースのインテグレーションでは、[Datadog API][12] を使用�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/developers/integrations/api_integration/
-[2]: https://docs.datadoghq.com/developers/integrations/agent_integration/
-[3]: https://docs.datadoghq.com/integrations/
-[4]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
+[1]: https://docs.datadoghq.com/ja/developers/integrations/api_integration/
+[2]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration/
+[3]: https://docs.datadoghq.com/ja/integrations/
+[4]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/
 [5]: https://partners.datadoghq.com/
-[6]: https://docs.datadoghq.com/account_management/users/#add-new-members-and-manage-invites
+[6]: https://docs.datadoghq.com/ja/account_management/users/#add-new-members-and-manage-invites
 [7]: https://learn.datadoghq.com/courses/intro-to-integrations
 [8]: https://learn.datadoghq.com/
-[9]: https://docs.datadoghq.com/developers/authorization/
+[9]: https://docs.datadoghq.com/ja/developers/authorization/
 [10]: https://app.datadoghq.com/integrations
-[11]: https://docs.datadoghq.com/agent/
-[12]: https://docs.datadoghq.com/api/latest/
-[13]: https://docs.datadoghq.com/developers/authorization/
-[14]: https://docs.datadoghq.com/metrics/custom_metrics/
-[15]: https://docs.datadoghq.com/getting_started/site/
-[16]: https://docs.datadoghq.com/help/
+[11]: https://docs.datadoghq.com/ja/agent/
+[12]: https://docs.datadoghq.com/ja/api/latest/
+[13]: https://docs.datadoghq.com/ja/developers/authorization/
+[14]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[15]: https://docs.datadoghq.com/ja/getting_started/site/
+[16]: https://docs.datadoghq.com/ja/help/
 [17]: https://app.datadoghq.com/marketplace

@@ -1,24 +1,22 @@
 ---
-title: Query Syntax
-kind: documentation
-description: "Global search of all your traces with tags"
 aliases:
- - /tracing/search_syntax/
- - /tracing/trace_search_analytics/
- - /tracing/trace_search/
- - /tracing/search
- - /tracing/getting_further/apm_events/
- - /tracing/trace_search_and_analytics/search/
- - /tracing/search/
- - /tracing/advanced/search/
- - /tracing/app_analytics/search
- - /tracing/live_search_and_analytics/search
- - /tracing/trace_search_analytics/analytics
- - /tracing/analytics
- - /tracing/visualization/analytics
- - /tracing/trace_search_and_analytics/analytics/
- - /tracing/app_analytics/analytics
- - /tracing/trace_search_and_analytics/query_syntax
+- /ja/tracing/search_syntax/
+- /ja/tracing/trace_search_analytics/
+- /ja/tracing/trace_search/
+- /ja/tracing/search
+- /ja/tracing/getting_further/apm_events/
+- /ja/tracing/trace_search_and_analytics/search/
+- /ja/tracing/search/
+- /ja/tracing/advanced/search/
+- /ja/tracing/app_analytics/search
+- /ja/tracing/live_search_and_analytics/search
+- /ja/tracing/trace_search_analytics/analytics
+- /ja/tracing/analytics
+- /ja/tracing/visualization/analytics
+- /ja/tracing/trace_search_and_analytics/analytics/
+- /ja/tracing/app_analytics/analytics
+- /ja/tracing/trace_search_and_analytics/query_syntax
+description: Global search of all your traces with tags
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
@@ -35,6 +33,8 @@ further_reading:
 - link: /tracing/services/resource_page/
   tag: Documentation
   text: Dive into your resource performance and traces
+kind: documentation
+title: Query Syntax
 ---
 
 ## Search bar
@@ -298,19 +298,19 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/java/#integrations
-[2]: /getting_started/tagging/#tags-best-practices
-[3]: /dashboards/guide/custom_time_frames/
-[4]: /tracing/trace_search_and_analytics/
-[5]: /tracing/glossary/#apm-event
-[6]: /tracing/glossary/#services
-[7]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[8]: /tracing/trace_search_and_analytics/query_syntax/#facets
-[9]: /tracing/trace_search_and_analytics/query_syntax/#measures
-[10]: /tracing/glossary/#trace
-[11]: /monitors/types/apm/
-[12]: /dashboards/#get-started
-[13]: /help/
-[14]: /tracing/glossary/#indexed-span
-[15]: /dashboards/
-[16]: /dashboards/widgets/timeseries/
+[1]: /ja/tracing/setup/java/#integrations
+[2]: /ja/getting_started/tagging/#tags-best-practices
+[3]: /ja/dashboards/guide/custom_time_frames/
+[4]: /ja/tracing/trace_search_and_analytics/
+[5]: /ja/tracing/glossary/#apm-event
+[6]: /ja/tracing/glossary/#services
+[7]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[8]: /ja/tracing/trace_search_and_analytics/query_syntax/#facets
+[9]: /ja/tracing/trace_search_and_analytics/query_syntax/#measures
+[10]: /ja/tracing/glossary/#trace
+[11]: /ja/monitors/types/apm/
+[12]: /ja/dashboards/#get-started
+[13]: /ja/help/
+[14]: /ja/tracing/glossary/#indexed-span
+[15]: /ja/dashboards/
+[16]: /ja/dashboards/widgets/timeseries/

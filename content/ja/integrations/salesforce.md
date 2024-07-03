@@ -1,28 +1,28 @@
 ---
-"categories":
+categories:
 - cloud
 - network
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Collect Salesforce real-time platform events as Datadog logs."
-"doc_link": "https://docs.datadoghq.com/integrations/salesforce/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-salesforce-logs-datadog/"
-  "tag": Blog
-  "text": Monitor Salesforce logs with Datadog
-"git_integration_title": "salesforce"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Salesforce"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "salesforce"
-"public_title": "Salesforce"
-"short_description": "Collect Salesforce real-time platform events as Datadog logs."
-"team": "web-integrations"
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Collect Salesforce real-time platform events as Datadog logs.
+doc_link: https://docs.datadoghq.com/integrations/salesforce/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-salesforce-logs-datadog/
+  tag: Blog
+  text: Monitor Salesforce logs with Datadog
+git_integration_title: salesforce
+has_logo: true
+integration_id: ''
+integration_title: Salesforce
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: salesforce
+public_title: Salesforce
+short_description: Collect Salesforce real-time platform events as Datadog logs.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -120,18 +120,17 @@ Need help? Contact [Datadog support][14].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/
-[2]: /monitors/monitor_types/
-[3]: /events/
-[4]: /security_platform/
+[1]: /ja/logs/
+[2]: /ja/monitors/monitor_types/
+[3]: /ja/events/
+[4]: /ja/security_platform/
 [5]: https://trailhead.salesforce.com/content/learn/modules/event_monitoring
 [6]: https://www.salesforce.com/editions-pricing/platform/shield
 [7]: https://help.salesforce.com/s/articleView?id=000339868&type=1
 [8]: https://login.salesforce.com/
 [9]: https://app.datadoghq.com/integrations/salesforce
-[10]: /getting_started/tagging/using_tags/
+[10]: /ja/getting_started/tagging/using_tags/
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/salesforce/salesforce_metadata.csv
 [12]: https://developer.salesforce.com/docs/atlas.en-us.securityImplGuide.meta/securityImplGuide/real_time_event_monitoring_storage.htm#storage-events
 [13]: https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_eventlogfile_supportedeventtypes.htm
-[14]: https://docs.datadoghq.com/help/
-
+[14]: https://docs.datadoghq.com/ja/help/

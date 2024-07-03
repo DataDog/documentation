@@ -1,64 +1,66 @@
 ---
-"app_id": "aqua"
-"app_uuid": "d3819b09-3e08-492f-b0f8-b0d3f53fbdf5"
-"assets":
-  "dashboards":
-    "aqua": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": aqua.running_containers
-      "metadata_path": metadata.csv
-      "prefix": aqua.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10042"
-    "source_type_name": Aqua
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Aqua
-  "sales_email": oran.moshai@aquasec.com
-  "support_email": oran.moshai@aquasec.com
-"categories":
+app_id: aqua
+app_uuid: d3819b09-3e08-492f-b0f8-b0d3f53fbdf5
+assets:
+  dashboards:
+    aqua: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: aqua.running_containers
+      metadata_path: metadata.csv
+      prefix: aqua.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10042
+    source_type_name: Aqua
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Aqua
+  sales_email: oran.moshai@aquasec.com
+  support_email: oran.moshai@aquasec.com
+categories:
 - containers
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "aqua"
-"integration_id": "aqua"
-"integration_title": "Aqua"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "aqua"
-"public_title": "Aqua"
-"short_description": "Full dev-to-prod security solution for containers and cloud native applications"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: aqua
+integration_id: aqua
+integration_title: Aqua
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: aqua
+public_title: Aqua
+short_description: Full dev-to-prod security solution for containers and cloud native
+  applications
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Full dev-to-prod security solution for containers and cloud native applications
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Aqua
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Full dev-to-prod security solution for containers and cloud native
+    applications
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Aqua
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -162,16 +164,15 @@ Need help? Contact [Datadog support][14].
 
 [1]: https://www.aquasec.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
-[5]: https://docs.datadoghq.com/agent/faq/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[5]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys
-[9]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#log-collection
-[10]: https://docs.datadoghq.com/agent/kubernetes/?tab=daemonset#installation
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[9]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
+[10]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset#installation
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
 [13]: https://github.com/DataDog/integrations-extras/blob/master/aqua/assets/service_checks.json
-[14]: https://docs.datadoghq.com/help/
-
+[14]: https://docs.datadoghq.com/ja/help/

@@ -1,10 +1,10 @@
 ---
-title: The Trace Pipeline
 aliases:
-    - /tracing/ingestion/
-    - /tracing/trace_ingestion/
-    - /tracing/trace_retention_and_ingestion/
-description: "Learn how to control span ingestion"
+- /ja/tracing/ingestion/
+- /ja/tracing/trace_ingestion/
+- /ja/tracing/trace_retention_and_ingestion/
+description: Learn how to control span ingestion
+title: The Trace Pipeline
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースパイプライン" >}}
@@ -45,9 +45,9 @@ APM 推定使用量や取り込み理由ダッシュボードの使用など、�
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage ダッシュボード" >}}
 
 
-[1]: /tracing/trace_explorer
-[2]: /tracing/trace_pipeline/ingestion_mechanisms/
-[3]: /tracing/trace_pipeline/ingestion_controls
-[4]: /tracing/trace_pipeline/generate_metrics
-[5]: /tracing/trace_pipeline/trace_retention
-[6]: /tracing/trace_pipeline/metrics
+[1]: /ja/tracing/trace_explorer
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /ja/tracing/trace_pipeline/ingestion_controls
+[4]: /ja/tracing/trace_pipeline/generate_metrics
+[5]: /ja/tracing/trace_pipeline/trace_retention
+[6]: /ja/tracing/trace_pipeline/metrics

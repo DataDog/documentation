@@ -1,59 +1,59 @@
 ---
-"app_id": "hyper-v"
-"app_uuid": "6024e97b-c3c6-45e3-ba71-a48adeebc191"
-"assets":
-  "dashboards":
-    "hyper-v": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": hyperv.hypervisor_logical_processor.total_run_time
-      "metadata_path": metadata.csv
-      "prefix": hyperv.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10046"
-    "source_type_name": HyperV
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: hyper-v
+app_uuid: 6024e97b-c3c6-45e3-ba71-a48adeebc191
+assets:
+  dashboards:
+    hyper-v: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hyperv.hypervisor_logical_processor.total_run_time
+      metadata_path: metadata.csv
+      prefix: hyperv.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10046
+    source_type_name: HyperV
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
 - os & system
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "hyperv"
-"integration_id": "hyper-v"
-"integration_title": "HyperV"
-"integration_version": "1.11.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "hyperv"
-"public_title": "HyperV"
-"short_description": "Monitor Microsoft's Hyper-V virtualization technology."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: hyperv
+integration_id: hyper-v
+integration_title: HyperV
+integration_version: 1.11.0
+is_public: true
+manifest_version: 2.0.0
+name: hyperv
+public_title: HyperV
+short_description: Monitor Microsoft's Hyper-V virtualization technology.
+supported_os:
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::OS & System"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": Monitor Microsoft's Hyper-V virtualization technology.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": HyperV
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::OS & System
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Monitor Microsoft's Hyper-V virtualization technology.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HyperV
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -108,10 +108,9 @@ Additional helpful documentation, links, and articles:
 [1]: https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-on-windows-server
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/hyperv/datadog_checks/hyperv/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://github.com/DataDog/integrations-core/blob/7.33.x/hyperv/datadog_checks/hyperv/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/hyperv/metadata.csv
-[8]: https://docs.datadoghq.com/help/
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
-

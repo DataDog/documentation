@@ -1,17 +1,16 @@
 ---
-title: Testing Local and Staging Environments
-description: Learn about using Continuous Testing in local and remote environments.
 aliases:
-  - /synthetics/testing_tunnel
-  - /continuous_testing/testing_tunnel
+- /ja/synthetics/testing_tunnel
+- /ja/continuous_testing/testing_tunnel
+description: Learn about using Continuous Testing in local and remote environments.
 further_reading:
-- link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
+- link: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
   tag: Blog
   text: Best practices for shift-left testing
-- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
+- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
   tag: Blog
   text: Incorporate Datadog Synthetic tests into your CI/CD pipeline
-- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: ラーニングセンター
   text: Learn how to run tests in a CI/CD pipeline
 - link: /continuous_testing/environments/multiple_env
@@ -23,6 +22,7 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: Learn about private locations
+title: Testing Local and Staging Environments
 ---
 
 ## 概要
@@ -54,6 +54,6 @@ Continuous Testing は、Synthetic が管理するロケーションからプラ
 [1]: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
 [2]: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
 [3]: https://en.wikipedia.org/wiki/Blue%E2%80%93green_deployment
-[4]: /continuous_testing/environments/multiple_env
-[5]: /continuous_testing/environments/proxy_firewall_vpn/#what-is-the-testing-tunnel
-[6]: /continuous_testing/environments/proxy_firewall_vpn
+[4]: /ja/continuous_testing/environments/multiple_env
+[5]: /ja/continuous_testing/environments/proxy_firewall_vpn/#what-is-the-testing-tunnel
+[6]: /ja/continuous_testing/environments/proxy_firewall_vpn

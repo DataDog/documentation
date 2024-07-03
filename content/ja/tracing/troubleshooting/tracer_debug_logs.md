@@ -1,10 +1,10 @@
 ---
-title: Tracer Debug Logs
-kind: Documentation
 further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: Documentation
   text: Troubleshooting APM Connection Errors
+kind: Documentation
+title: Tracer Debug Logs
 ---
 
 ## Enable debug mode
@@ -190,9 +190,9 @@ If neither of these log entries is present, then no request was sent to the Agen
 For more tracer settings, check out the [API documentation][4].
 
 
-[1]: /agent/troubleshooting/
-[2]: /help/
-[3]: /agent/troubleshooting/#send-a-flare
+[1]: /ja/agent/troubleshooting/
+[2]: /ja/help/
+[3]: /ja/agent/troubleshooting/#send-a-flare
 [4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{< /programming-lang >}}
 
@@ -228,8 +228,8 @@ There are two types of logs that are created in these paths:
 2. **Logs from managed code:** In 1.21.0 and higher, these logs are saved `dotnet-tracer-managed-<processname>-<date>.log`. In 1.20.x and older versions, this was stored as `dotnet-tracer-<processname>-<date>.log`.
 
 
-[1]: /tracing/trace_collection/library_injection/?tab=kubernetes
-[2]: /tracing/setup/dotnet/#configuration
+[1]: /ja/tracing/trace_collection/library_injection/?tab=kubernetes
+[2]: /ja/tracing/setup/dotnet/#configuration
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
@@ -260,7 +260,7 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 
 
 [1]: https://www.php-fig.org/psr/psr-3
-[2]: /tracing/trace_collection/library_config/php/
+[2]: /ja/tracing/trace_collection/library_config/php/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -481,5 +481,5 @@ Available starting in 0.98.0:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /agent/troubleshooting/#send-a-flare
+[1]: /ja/help/
+[2]: /ja/agent/troubleshooting/#send-a-flare

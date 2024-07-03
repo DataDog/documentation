@@ -1,74 +1,74 @@
 ---
-"app_id": "mysql"
-"app_uuid": "f6177896-da1e-4bc4-ab19-fd32e8868647"
-"assets":
-  "dashboards":
-    "mysql": "assets/dashboards/overview.json"
-    "mysql-screenboard": "assets/dashboards/overview-screenboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": "mysql.net.connections"
-      "metadata_path": "metadata.csv"
-      "prefix": "mysql."
-    "process_signatures":
-    - "mysqld"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "18"
-    "source_type_name": "MySQL"
-  "monitors":
-    "replica running": "assets/monitors/replica_running.json"
-    "select query rate": "assets/monitors/select_query_rate.json"
-  "saved_views":
-    "mysql_processes": "assets/saved_views/mysql_processes.json"
-    "operations": "assets/saved_views/operations.json"
-    "operations_overview": "assets/saved_views/operations_overview.json"
-    "slow_operations": "assets/saved_views/slow_operations.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/mysql/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mysql"
-"integration_id": "mysql"
-"integration_title": "MySQL"
-"integration_version": "12.5.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mysql"
-"public_title": "MySQL"
-"short_description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "MySQL"
+app_id: mysql
+app_uuid: f6177896-da1e-4bc4-ab19-fd32e8868647
+assets:
+  dashboards:
+    mysql: assets/dashboards/overview.json
+    mysql-screenboard: assets/dashboards/overview-screenboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: mysql.net.connections
+      metadata_path: metadata.csv
+      prefix: mysql.
+    process_signatures:
+    - mysqld
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 18
+    source_type_name: MySQL
+  monitors:
+    replica running: assets/monitors/replica_running.json
+    select query rate: assets/monitors/select_query_rate.json
+  saved_views:
+    mysql_processes: assets/saved_views/mysql_processes.json
+    operations: assets/saved_views/operations.json
+    operations_overview: assets/saved_views/operations_overview.json
+    slow_operations: assets/saved_views/slow_operations.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/mysql/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: mysql
+integration_id: mysql
+integration_title: MySQL
+integration_version: 12.5.1
+is_public: true
+manifest_version: 2.0.0
+name: mysql
+public_title: MySQL
+short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MySQL
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -299,10 +299,10 @@ _Agent バージョン 6.0 以降で利用可能_
 
 4. [Agent を再起動します][4]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: https://dev.mysql.com/doc/refman/5.7/en/performance-schema-quick-start.html
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 #### Docker
@@ -332,10 +332,10 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 ```
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
-[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -421,12 +421,12 @@ metadata:
     name: mysql
 ```
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/agent/faq/template_variables/
-[4]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
-[5]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[6]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -473,10 +473,10 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
   }]
 }
 ```
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
-[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -661,19 +661,19 @@ MySQL チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd-2.png
-[2]: https://docs.datadoghq.com/database_monitoring/
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/database_monitoring/#mysql
+[4]: https://docs.datadoghq.com/ja/database_monitoring/#mysql
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/integrations/guide/connection-issues-with-the-sql-server-integration/
-[9]: https://docs.datadoghq.com/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
-[10]: https://docs.datadoghq.com/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
-[11]: https://docs.datadoghq.com/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
-[12]: https://docs.datadoghq.com/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
-[13]: https://docs.datadoghq.com/integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics/
-[14]: https://docs.datadoghq.com/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
-[15]: https://docs.datadoghq.com/integrations/faq/database-user-lacks-privileges/
-[16]: https://docs.datadoghq.com/integrations/guide/collect-sql-server-custom-metrics/#collecting-metrics-from-a-custom-procedure
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/integrations/guide/connection-issues-with-the-sql-server-integration/
+[9]: https://docs.datadoghq.com/ja/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
+[11]: https://docs.datadoghq.com/ja/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
+[12]: https://docs.datadoghq.com/ja/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
+[13]: https://docs.datadoghq.com/ja/integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics/
+[14]: https://docs.datadoghq.com/ja/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[15]: https://docs.datadoghq.com/ja/integrations/faq/database-user-lacks-privileges/
+[16]: https://docs.datadoghq.com/ja/integrations/guide/collect-sql-server-custom-metrics/#collecting-metrics-from-a-custom-procedure
 [17]: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics

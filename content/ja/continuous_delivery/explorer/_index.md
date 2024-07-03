@@ -1,5 +1,4 @@
 ---
-title: Continuous Delivery Visibility Explorer
 description: Learn about the CD Visibility Explorer for deployment executions.
 further_reading:
 - link: /continuous_delivery/deployments/
@@ -8,6 +7,7 @@ further_reading:
 - link: /continuous_delivery/explorer/saved_views
   tag: Documentation
   text: Learn about Saved Views
+title: Continuous Delivery Visibility Explorer
 ---
 
 {{< site-region region="gov" >}}
@@ -50,8 +50,8 @@ Export your [view][5] in the [CD Visibility Explorer][4] to reuse it later or in
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_delivery/search
-[2]: /continuous_delivery/explorer/search_syntax
-[3]: /continuous_delivery/explorer/facets
+[1]: /ja/continuous_delivery/search
+[2]: /ja/continuous_delivery/explorer/search_syntax
+[3]: /ja/continuous_delivery/explorer/facets
 [4]: https://app.datadoghq.com/ci/deployments/executions
-[5]: /continuous_delivery/explorer/saved_views
+[5]: /ja/continuous_delivery/explorer/saved_views

@@ -1,59 +1,59 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-whisperer-advisory-services"
-"app_uuid": "c76c78cb-17ac-4d2f-9957-fe7c33e834dc"
-"assets": {}
-"author":
-  "contact_link": "https://meetings.hubspot.com/ewilliams/rapdev-marketplace"
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-whisperer-advisory-services
+app_uuid: c76c78cb-17ac-4d2f-9957-fe7c33e834dc
+assets: {}
+author:
+  contact_link: https://meetings.hubspot.com/ewilliams/rapdev-marketplace
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_whisperer_advisory_services"
-"integration_id": "rapdev-whisperer-advisory-services"
-"integration_title": "Whisperer Advisory Services"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rapdev_whisperer_advisory_services"
-"pricing":
-- "includes_assets": true
-  "private_offer_only": true
-  "product_id": whisperer-advisory-services
-  "short_description": Private offer placeholder
-  "unit_price": !!null "null"
-"public_title": "Whisperer Advisory Services"
-"short_description": "Datadog Advisory and Consultation services from RapDev"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_whisperer_advisory_services
+integration_id: rapdev-whisperer-advisory-services
+integration_title: Whisperer Advisory Services
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rapdev_whisperer_advisory_services
+pricing:
+- includes_assets: true
+  private_offer_only: true
+  product_id: whisperer-advisory-services
+  short_description: Private offer placeholder
+  unit_price: null
+public_title: Whisperer Advisory Services
+short_description: Datadog Advisory and Consultation services from RapDev
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Offering::Professional Service"
-  "configuration": "README.md#Setup"
-  "description": Datadog Advisory and Consultation services from RapDev
-  "media":
-  - "caption": RapDev Services Overview
-    "image_url": images/rapdev_whisperer.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Whisperer Advisory Services
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Offering::Professional Service
+  configuration: README.md#Setup
+  description: Datadog Advisory and Consultation services from RapDev
+  media:
+  - caption: RapDev Services Overview
+    image_url: images/rapdev_whisperer.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Whisperer Advisory Services
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

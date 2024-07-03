@@ -1,8 +1,8 @@
 ---
 aliases:
-- /developers/integrations/oauth_for_data_integrations/
-title: OAuth for Integrations
+- /ja/developers/integrations/oauth_for_data_integrations/
 description: Use OAuth to authenticate integrations.
+title: OAuth for Integrations
 ---
 {{< callout btn_hidden="true" >}}
   Datadog Developer Platform はベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
@@ -133,15 +133,15 @@ OAuth クライアントが公開のために送信されると、チームに�
 - [Datadog の OAuth 2.0][1]
 - [OAuth で Datadog のインテグレーションを認可する][11]
 
-[1]: https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog/
+[1]: https://docs.datadoghq.com/ja/developers/authorization/oauth2_in_datadog/
 [2]: https://app.datadoghq.com/marketplace
 [3]: https://app.datadoghq.com/integrations
 [4]: https://app.datadoghq.com/apps
 [5]: https://github.com/DataDog/integrations-extras/
 [6]: http://github.com/DataDog/marketplace
-[7]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/#list-an-offering
-[8]: https://docs.datadoghq.com/getting_started/site/
+[7]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/#list-an-offering
+[8]: https://docs.datadoghq.com/ja/getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://www.datadoghq.com/blog/oauth/
-[12]: https://docs.datadoghq.com/api/latest/using-the-api/
+[12]: https://docs.datadoghq.com/ja/api/latest/using-the-api/

@@ -1,7 +1,6 @@
 ---
-title: Configure Containers View
 aliases:
-  - /infrastructure/livecontainers/configuration
+- /ja/infrastructure/livecontainers/configuration
 further_reading:
 - link: /infrastructure/hostmap/
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentation
   text: Understand what is going on at any level of your system
+title: Configure Containers View
 ---
 
 このページでは、Datadog の [Containers][1] ページの構成オプションについて説明します。Containers ページとその機能の詳細については、[コンテナビュー][2]ドキュメントを参照してください。
@@ -194,6 +194,4 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /infrastructure/containers
-
-
+[2]: /ja/infrastructure/containers

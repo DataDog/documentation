@@ -1,64 +1,64 @@
 ---
-"app_id": "citrix-hypervisor"
-"app_uuid": "cf4ad6ea-85ae-4f7d-8e79-7b8d36924425"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": citrix_hypervisor.host.cpu
-      "metadata_path": metadata.csv
-      "prefix": citrix_hypervisor.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10198"
-    "source_type_name": Citrix Hypervisor
-  "monitors":
-    "Host CPU high": assets/monitors/host_cpu_high.json
-    "VM CPU high": assets/monitors/vm_cpu_high.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: citrix-hypervisor
+app_uuid: cf4ad6ea-85ae-4f7d-8e79-7b8d36924425
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: citrix_hypervisor.host.cpu
+      metadata_path: metadata.csv
+      prefix: citrix_hypervisor.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10198
+    source_type_name: Citrix Hypervisor
+  monitors:
+    Host CPU high: assets/monitors/host_cpu_high.json
+    VM CPU high: assets/monitors/vm_cpu_high.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "citrix_hypervisor"
-"integration_id": "citrix-hypervisor"
-"integration_title": "Citrix Hypervisor"
-"integration_version": "3.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "citrix_hypervisor"
-"public_title": "Citrix Hypervisor"
-"short_description": "Monitor the health and performance of a Citrix Hypervisor host."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: citrix_hypervisor
+integration_id: citrix-hypervisor
+integration_title: Citrix Hypervisor
+integration_version: 3.2.1
+is_public: true
+manifest_version: 2.0.0
+name: citrix_hypervisor
+public_title: Citrix Hypervisor
+short_description: Monitor the health and performance of a Citrix Hypervisor host.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of a Citrix Hypervisor host.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Citrix Hypervisor
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Monitor the health and performance of a Citrix Hypervisor host.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Citrix Hypervisor
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -140,14 +140,13 @@ Citrix Hypervisor インテグレーションには、イベントは含まれ�
 - [Datadog を使用した Citrix Hypervisor パフォーマンスの監視][11]
 
 [1]: https://www.citrix.com/products/citrix-hypervisor/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.citrix.com/en-us/xencenter/7-1/rbac-roles.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/datadog_checks/citrix_hypervisor/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.datadoghq.com/blog/monitor-citrix-hypervisor-datadog/
-

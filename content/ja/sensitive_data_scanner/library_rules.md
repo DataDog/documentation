@@ -1,10 +1,10 @@
 ---
-title: Library Rules
-kind: documentation
 further_reading:
-    - link: /sensitive_data_scanner/
-      tag: Documentation
-      text: Set up Sensitive Data Scanner
+- link: /sensitive_data_scanner/
+  tag: Documentation
+  text: Set up Sensitive Data Scanner
+kind: documentation
+title: Library Rules
 ---
 
 ## Overview
@@ -128,4 +128,4 @@ These rules can also be viewed in Datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/
-[2]: /sensitive_data_scanner/?#add-scanning-rules
+[2]: /ja/sensitive_data_scanner/?#add-scanning-rules

@@ -1,6 +1,4 @@
 ---
-title: Quality Gates Explorer Search Syntax
-kind: documentation
 description: Search all of your quality gates or rule executions.
 further_reading:
 - link: /quality_gates/search
@@ -9,6 +7,8 @@ further_reading:
 - link: /quality_gates/explorer/facets
   tag: Documentation
   text: Learn about facets
+kind: documentation
+title: Quality Gates Explorer Search Syntax
 ---
 
 {{< site-region region="gov" >}}
@@ -76,7 +76,7 @@ When searching for an attribute or tag value that contains special characters or
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /quality_gates/explorer/facets
-[2]: /getting_started/tagging/using_tags
-[3]: /infrastructure
-[4]: /integrations
+[1]: /ja/quality_gates/explorer/facets
+[2]: /ja/getting_started/tagging/using_tags
+[3]: /ja/infrastructure
+[4]: /ja/integrations

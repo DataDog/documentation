@@ -1,10 +1,8 @@
 ---
-title: Heatmap Widget
-description: "Build temporal heat map over a given metric."
-widget_type: "heatmap"
 aliases:
-    - /graphing/widgets/heat_map/
-    - /dashboards/widgets/heat_map/
+- /ja/graphing/widgets/heat_map/
+- /ja/dashboards/widgets/heat_map/
+description: Build temporal heat map over a given metric.
 further_reading:
 - link: /product_analytics/heatmaps/
   tag: Documentation
@@ -12,9 +10,11 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
-- link: "https://www.datadoghq.com/blog/visualize-behavior-datadog-heatmaps/"
+- link: https://www.datadoghq.com/blog/visualize-behavior-datadog-heatmaps/
   tag: Blog
   text: Visualize user behavior with Datadog Heatmaps
+title: Heatmap Widget
+widget_type: heatmap
 ---
 
 {{< img src="dashboards/widgets/heatmap/heatmap.png" alt="ヒートマップグラフの視覚化例" style="width:100%;">}}
@@ -63,6 +63,6 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /events/explorer/#search-syntax
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/events/explorer/#search-syntax
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

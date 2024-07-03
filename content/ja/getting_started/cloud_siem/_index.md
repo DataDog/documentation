@@ -1,45 +1,46 @@
 ---
-title: Getting Started with Cloud SIEM
-kind: documentation
 aliases:
-    - /cloud-siem/getting_started/
-    - /security_monitoring/getting_started/
-    - /security_platform/security_monitoring/
-    - /security_platform/security_monitoring/getting_started
-    - /security_platform/getting_started/
-    - /security_platform/cloud_siem/getting_started/
-    - /security/cloud_siem/getting_started/
+- /ja/cloud-siem/getting_started/
+- /ja/security_monitoring/getting_started/
+- /ja/security_platform/security_monitoring/
+- /ja/security_platform/security_monitoring/getting_started
+- /ja/security_platform/getting_started/
+- /ja/security_platform/cloud_siem/getting_started/
+- /ja/security/cloud_siem/getting_started/
 further_reading:
-    - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
-      tag: Learning Center
-      text: Introduction to Cloud SIEM course
-    - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
-      tag: Blog
-      text: Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM
-    - link: "https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY"
-      tag: App
-      text: Automate responses with Workflows security blueprints
-    - link: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-      tag: Documentation
-      text: AWS configuration guide for Cloud SIEM
-    - link: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
-      tag: Documentation
-      text: Google Cloud configuration guide for Cloud SIEM
-    - link: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
-      tag: Documentation
-      text: Azure configuration guide for Cloud SIEM
-    - link: /security/notifications/variables/
-      tag: Documentation
-      text: Learn more about notification variables to customize notifications
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session to elevate your security and threat detection
-    - link: "https://securitylabs.datadoghq.com/"
-      tag: Security Labs
-      text: Read about security-related topics on Datadog's Security Labs
-    - link: "https://www.datadoghq.com/blog/content-packs/"
-      tag: Blog
-      text: Easily ingest and monitor security logs with Cloud SIEM Content Packs
+- link: https://learn.datadoghq.com/courses/intro-to-cloud-siem
+  tag: Learning Center
+  text: Introduction to Cloud SIEM course
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: Blog
+  text: Automate common security tasks and stay ahead of threats with Datadog Workflows
+    and Cloud SIEM
+- link: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
+  tag: App
+  text: Automate responses with Workflows security blueprints
+- link: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+  tag: Documentation
+  text: AWS configuration guide for Cloud SIEM
+- link: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
+  tag: Documentation
+  text: Google Cloud configuration guide for Cloud SIEM
+- link: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
+  tag: Documentation
+  text: Azure configuration guide for Cloud SIEM
+- link: /security/notifications/variables/
+  tag: Documentation
+  text: Learn more about notification variables to customize notifications
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to elevate your security and threat detection
+- link: https://securitylabs.datadoghq.com/
+  tag: Security Labs
+  text: Read about security-related topics on Datadog's Security Labs
+- link: https://www.datadoghq.com/blog/content-packs/
+  tag: Blog
+  text: Easily ingest and monitor security logs with Cloud SIEM Content Packs
+kind: documentation
+title: Getting Started with Cloud SIEM
 ---
 
 ## Overview
@@ -114,28 +115,28 @@ After the index is moved to the first index position, review the settings and st
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/
+[1]: /ja/security/cloud_siem/
 [2]: https://app.datadoghq.com/security/configuration/siem/log-sources
-[3]: /logs/guide/best-practices-for-log-management/
-[4]: /integrations/
-[5]: /logs/log_configuration/pipelines/
+[3]: /ja/logs/guide/best-practices-for-log-management/
+[4]: /ja/integrations/
+[5]: /ja/logs/log_configuration/pipelines/
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
 [8]: https://app.datadoghq.com/security/landing
 [9]: https://app.datadoghq.com/security/content-packs
 [10]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
-[12]: /security/default_rules/#cat-cloud-siem-log-detection
-[13]: /security/detection_rules/
+[12]: /ja/security/default_rules/#cat-cloud-siem-log-detection
+[13]: /ja/security/detection_rules/
 [14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[15]: /security/cloud_siem/investigate_security_signals
+[15]: /ja/security/cloud_siem/investigate_security_signals
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
-[17]: /security/notifications/rules/
+[17]: /ja/security/notifications/rules/
 [18]: https://app.datadoghq.com/security/configuration/reports
 [19]: https://app.datadoghq.com/security/investigator/
-[20]: /security/cloud_siem/investigator
+[20]: /ja/security/cloud_siem/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
-[22]: /dashboards/#overview
-[23]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
-[24]: /security/cloud_siem/log_detection_rules/
+[22]: /ja/dashboards/#overview
+[23]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[24]: /ja/security/cloud_siem/log_detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/

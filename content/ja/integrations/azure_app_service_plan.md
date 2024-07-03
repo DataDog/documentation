@@ -1,25 +1,25 @@
 ---
-"aliases":
-- /integrations/azure_appserviceplan
-"categories":
+aliases:
+- /ja/integrations/azure_appserviceplan
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure App Service Plan metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_app_service_plan/"
-"draft": false
-"git_integration_title": "azure_app_service_plan"
-"has_logo": true
-"integration_id": "azure-appserviceplan"
-"integration_title": "Microsoft Azure App Service Plan"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_app_service_plan"
-"public_title": "Datadog-Microsoft Azure App Service Plan Integration"
-"short_description": "Track key Azure App Service Plan metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure App Service Plan metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
+draft: false
+git_integration_title: azure_app_service_plan
+has_logo: true
+integration_id: azure-appserviceplan
+integration_title: Microsoft Azure App Service Plan
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_app_service_plan
+public_title: Datadog-Microsoft Azure App Service Plan Integration
+short_description: Track key Azure App Service Plan metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -53,7 +53,6 @@ The Azure App Service Plan integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_service_plan/azure_app_service_plan_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

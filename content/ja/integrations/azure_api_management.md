@@ -1,25 +1,25 @@
 ---
-"aliases":
-- /integrations/azure_apimanagement
-"categories":
+aliases:
+- /ja/integrations/azure_apimanagement
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure API Management metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_api_management/"
-"draft": false
-"git_integration_title": "azure_api_management"
-"has_logo": true
-"integration_id": "azure-apimanagement"
-"integration_title": "Microsoft Azure API Management"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_api_management"
-"public_title": "Datadog-Microsoft Azure API Management Integration"
-"short_description": "Track key Azure API Management metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure API Management metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_api_management/
+draft: false
+git_integration_title: azure_api_management
+has_logo: true
+integration_id: azure-apimanagement
+integration_title: Microsoft Azure API Management
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_api_management
+public_title: Datadog-Microsoft Azure API Management Integration
+short_description: Track key Azure API Management metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -53,7 +53,6 @@ The Azure API Management integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_api_management/azure_api_management_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

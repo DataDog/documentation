@@ -1,20 +1,20 @@
 ---
-title: Enabling the Java Profiler
+aliases:
+- /ja/tracing/profiler/enabling/java/
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profile_visualizations
-      tag: Documentation
-      text: Learn more about available profile visualizations
-    - link: profiler/profiler_troubleshooting/java
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
-aliases:
-  - /tracing/profiler/enabling/java/
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profile_visualizations
+  tag: Documentation
+  text: Learn more about available profile visualizations
+- link: profiler/profiler_troubleshooting/java
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+title: Enabling the Java Profiler
+type: multi-code-lang
 ---
 
 プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
@@ -60,8 +60,8 @@ Additional requirements for profiling [Code Hotspots][12]:
  - OpenJDK 11+ および `dd-trace-java` バージョン 0.65.0+
  - OpenJDK 8 8u282+ および `dd-trace-java` バージョン 0.77.0+
 
-[3]: /profiler/profiler_troubleshooting/java/#java-8-support
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[3]: /ja/profiler/profiler_troubleshooting/java/#java-8-support
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -343,17 +343,17 @@ The [Getting Started with Profiler][11] guide takes a sample service with a perf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
+[1]: /ja/tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
-[3]: /profiler/profiler_troubleshooting/#java-8-support
+[3]: /ja/profiler/profiler_troubleshooting/#java-8-support
 [4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[7]: /integrations/guide/source-code-integration/?tab=java
+[7]: /ja/integrations/guide/source-code-integration/?tab=java
 [8]: https://app.datadoghq.com/profiling
-[9]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
-[10]: /getting_started/tagging/unified_service_tagging
-[11]: /getting_started/profiler/
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/enabling/supported_versions/
-[14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
+[9]: /ja/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
+[10]: /ja/getting_started/tagging/unified_service_tagging
+[11]: /ja/getting_started/profiler/
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /ja/profiler/enabling/supported_versions/
+[14]: /ja/tracing/trace_collection/compatibility/java/?tab=graalvm#setup

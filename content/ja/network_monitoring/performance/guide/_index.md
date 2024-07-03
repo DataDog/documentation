@@ -1,9 +1,9 @@
 ---
-title: Network Performance Monitoring Guides
 aliases:
-    - /network_performance_monitoring/guide/
-private: true
+- /ja/network_performance_monitoring/guide/
 disable_toc: true
+private: true
+title: Network Performance Monitoring Guides
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}

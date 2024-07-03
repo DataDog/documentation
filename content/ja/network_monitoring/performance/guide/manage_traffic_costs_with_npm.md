@@ -1,7 +1,7 @@
 ---
-title: Manage Cloud Traffic Costs with NPM
 aliases:
-    - /network_performance_monitoring/guide/manage_traffic_costs_with_npm/
+- /ja/network_performance_monitoring/guide/manage_traffic_costs_with_npm/
+title: Manage Cloud Traffic Costs with NPM
 ---
 特にクラウド環境ではトラフィックが高額になりがちです。クラウドプロバイダーはトラフィックがアベイラビリティーゾーン (AZ) の範囲内、AZ 間、特定のリージョン間、またはオープンなインターネットのどれに流入するのかに応じて異なる課金形態を採用しています。クロスリージョンおよび送信トラフィックは最も高額となるだけでなく、エラー、レイテンシー、セキュリティ上の脅威に対する脆弱性も最高水準となります。
 

@@ -1,7 +1,7 @@
 ---
-title: Cross-Organization Visibility
-private: true
 is_beta: true
+private: true
+title: Cross-Organization Visibility
 ---
 
 {{< callout url="#" header="false" btn_hidden="true">}}
@@ -137,12 +137,12 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 - Use the organization identifier, which you can recover from the [Organizations endpoint][9], to identify the organization on which the query runs.
 - Though this parameter accepts an array, the array must contain only one element. Adding multiple elements to the `cross_org_uuids` array results in a 400 error.
 
-[1]: /account_management/multi_organization/
-[2]: /dashboards/widgets
-[3]: /metrics/custom_metrics/#overview
-[4]: /tracing/metrics/metrics_namespace/
-[5]: /logs/log_configuration/logs_to_metrics/
+[1]: /ja/account_management/multi_organization/
+[2]: /ja/dashboards/widgets
+[3]: /ja/metrics/custom_metrics/#overview
+[4]: /ja/tracing/metrics/metrics_namespace/
+[5]: /ja/logs/log_configuration/logs_to_metrics/
 [6]: https://app.datadoghq.com/organization-settings/cross-org-visibility
-[7]: /account_management/org_settings/cross_org_visibility_api
-[8]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
-[9]: /api/latest/organizations/#list-your-managed-organizations
+[7]: /ja/account_management/org_settings/cross_org_visibility_api
+[8]: /ja/api/latest/metrics/#query-timeseries-data-across-multiple-products
+[9]: /ja/api/latest/organizations/#list-your-managed-organizations

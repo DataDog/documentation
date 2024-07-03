@@ -1,5 +1,5 @@
 ---
-title: "Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering"
+title: 'Crafting Better Diagrams: Cloudcraft''s Live Diagramming and Filtering'
 ---
 
 ## 概要
@@ -76,6 +76,6 @@ To filter resources by tags. Click the **Custom tags**, **AWS tags**, **Terrafor
 
 Cloudcraft's New Live Experience is part of an ongoing effort to improve the user experience and make cloud infrastructure diagramming more efficient and effective. Tell us how you use these new features and [give feedback in this form][3].
 
-[1]: https://docs.datadoghq.com/cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
-[2]: https://docs.datadoghq.com/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
+[1]: https://docs.datadoghq.com/ja/cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
+[2]: https://docs.datadoghq.com/ja/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
 [3]: https://docs.google.com/forms/d/e/1FAIpQLSemnd5CJgrS9o-5ZCoZSxi99ATqIg9jpgqtcUZpMBzPJO75Wg/viewform

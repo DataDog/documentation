@@ -1,8 +1,7 @@
 ---
-title: Kubernetes Tag Extraction
 aliases:
-- /agent/autodiscovery/tag/
-- /agent/kubernetes/tag
+- /ja/agent/autodiscovery/tag/
+- /ja/agent/kubernetes/tag
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
@@ -13,6 +12,7 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Limit data collection to a subset of containers only
+title: Kubernetes Tag Extraction
 ---
 
 The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
@@ -632,6 +632,6 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
-[2]: /getting_started/tagging/unified_service_tagging
-[3]: /account_management/billing/custom_metrics
+[1]: /ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
+[2]: /ja/getting_started/tagging/unified_service_tagging
+[3]: /ja/account_management/billing/custom_metrics

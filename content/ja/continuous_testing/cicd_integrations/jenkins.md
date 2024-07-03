@@ -1,15 +1,16 @@
 ---
-title: Jenkins
-description: Configure your Jenkins instance to run Continuous Testing tests in your CI/CD pipelines.
 aliases:
-  - /synthetics/cicd_integrations/jenkins
+- /ja/synthetics/cicd_integrations/jenkins
+description: Configure your Jenkins instance to run Continuous Testing tests in your
+  CI/CD pipelines.
 further_reading:
-- link: "https://www.datadoghq.com/blog/jenkins-testing/"
+- link: https://www.datadoghq.com/blog/jenkins-testing/
   tag: Blog
   text: Run Datadog Synthetic tests in your Jenkins pipelines
 - link: /continuous_integration/setup_pipelines/jenkins/
   tag: Documentation
   text: Set up Tracing on a Jenkins pipeline
+title: Jenkins
 ---
 
 ## 概要
@@ -101,5 +102,5 @@ pipeline {
 [1]: https://www.jenkins.io/doc/book/pipeline/docker/#using-docker-with-pipeline
 [2]: https://plugins.jenkins.io/config-file-provider/
 [3]: https://www.jenkins.io/doc/book/using/using-credentials/#adding-new-global-credentials
-[4]: /continuous_testing/cicd_integrations/configuration#configure-tests
-[5]: /continuous_integration/pipelines/jenkins/
+[4]: /ja/continuous_testing/cicd_integrations/configuration#configure-tests
+[5]: /ja/continuous_integration/pipelines/jenkins/

@@ -1,6 +1,6 @@
 ---
-title: Agent Resource Usage by APM
 kind: Documentation
+title: Agent Resource Usage by APM
 ---
 
 
@@ -33,5 +33,5 @@ Based on that metric's value, follow the table below to choose adequate CPU and 
 - The values are based on Agent `7.39.0` benchmarks.
 - The benchmarks were performed on an AWS `c5.2xlarge` instance (8 VCPU/ 16GiB RAM)
 
-[1]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
-[2]: /tracing/send_traces/agent-apm-metrics/
+[1]: /ja/tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
+[2]: /ja/tracing/send_traces/agent-apm-metrics/

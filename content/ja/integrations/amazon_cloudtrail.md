@@ -1,28 +1,28 @@
 ---
-"aliases":
-- "/integrations/awscloudtrail/"
-- "/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/"
-"categories":
-- "aws"
-- "cloud"
-- "log collection"
-- "security"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "不審な AWS アカウントアクティビティを警告。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_cloudtrail/"
-"draft": false
-"git_integration_title": "amazon_cloudtrail"
-"has_logo": true
-"integration_id": "amazon-cloudtrail"
-"integration_title": "AWS CloudTrail"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_cloudtrail"
-"public_title": "Datadog-AWS CloudTrail Integration"
-"short_description": "Alert on suspicious AWS account activity."
-"version": "1.0"
+aliases:
+- /ja/integrations/awscloudtrail/
+- /ja/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/
+categories:
+- aws
+- cloud
+- log collection
+- security
+custom_kind: インテグレーション
+dependencies: []
+description: 不審な AWS アカウントアクティビティを警告。
+doc_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
+draft: false
+git_integration_title: amazon_cloudtrail
+has_logo: true
+integration_id: amazon-cloudtrail
+integration_title: AWS CloudTrail
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_cloudtrail
+public_title: Datadog-AWS CloudTrail Integration
+short_description: Alert on suspicious AWS account activity.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -154,17 +154,16 @@ The AWS CloudTrail integration does not include any service checks.
 
 You need to first configure the [Amazon Web Services][13] integration. Then the CloudTrail tile can be configured.
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_Operations.html
 [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html
 [5]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
 [6]: https://app.datadoghq.com/integrations/amazon-cloudtrail
-[7]: https://docs.datadoghq.com/help/
+[7]: https://docs.datadoghq.com/ja/help/
 [8]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html
-[9]: https://docs.datadoghq.com/logs/guide/forwarder/
+[9]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [10]: https://app.datadoghq.com/logs
-[11]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[12]: https://docs.datadoghq.com/events/
-[13]: https://docs.datadoghq.com/integrations/aws/
-
+[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[12]: https://docs.datadoghq.com/ja/events/
+[13]: https://docs.datadoghq.com/ja/integrations/aws/

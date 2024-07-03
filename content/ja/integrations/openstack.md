@@ -1,75 +1,75 @@
 ---
-"app_id": "openstack"
-"app_uuid": "38f1f51e-9f6a-49fc-84d5-358bde9e3782"
-"assets":
-  "dashboards":
-    "openstack": "assets/dashboards/openstack_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "openstack.nova.hypervisor_load.1"
-      "metadata_path": "metadata.csv"
-      "prefix": "openstack."
-    "process_signatures":
-    - "stack.sh"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "125"
-    "source_type_name": "OpenStack"
-  "saved_views":
-    "openstack_processes": "assets/saved_views/openstack_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "cloud"
-- "log collection"
-- "network"
-- "provisioning"
-- "configuration & deployment"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/openstack/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "openstack"
-"integration_id": "openstack"
-"integration_title": "OpenStack (レガシー)"
-"integration_version": "2.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "openstack"
-"public_title": "OpenStack (レガシー)"
-"short_description": "ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::クラウド"
-  - "Category::ログの収集"
-  - "Category::ネットワーク"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::プロビジョニング"
-  - "Category::構成 & デプロイ"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": "ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "OpenStack (レガシー)"
+app_id: openstack
+app_uuid: 38f1f51e-9f6a-49fc-84d5-358bde9e3782
+assets:
+  dashboards:
+    openstack: assets/dashboards/openstack_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: openstack.nova.hypervisor_load.1
+      metadata_path: metadata.csv
+      prefix: openstack.
+    process_signatures:
+    - stack.sh
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 125
+    source_type_name: OpenStack
+  saved_views:
+    openstack_processes: assets/saved_views/openstack_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- cloud
+- log collection
+- network
+- provisioning
+- configuration & deployment
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: openstack
+integration_id: openstack
+integration_title: OpenStack (レガシー)
+integration_version: 2.0.0
+is_public: true
+manifest_version: 2.0.0
+name: openstack
+public_title: OpenStack (レガシー)
+short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::クラウド
+  - Category::ログの収集
+  - Category::ネットワーク
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::プロビジョニング
+  - Category::構成 & デプロイ
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenStack (レガシー)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -239,16 +239,15 @@ OpenStack チェックには、イベントは含まれません。
 - [OpenStack: ホストアグリゲート、フレーバー、アベイラビリティーゾーン][13]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/openstack/images/openstack_dashboard.png
-[2]: https://docs.datadoghq.com/integrations/openstack_controller
+[2]: https://docs.datadoghq.com/ja/integrations/openstack_controller
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/openstack/datadog_checks/openstack/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/openstack/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.datadoghq.com/blog/openstack-monitoring-nova
 [12]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
 [13]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones
-

@@ -1,10 +1,11 @@
 ---
-title: Setting Up Database Monitoring for Google Cloud SQL managed Postgres
-description: Install and configure Database Monitoring for Postgres managed on Google Cloud SQL.
+description: Install and configure Database Monitoring for Postgres managed on Google
+  Cloud SQL.
 further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Basic Postgres Integration
+title: Setting Up Database Monitoring for Google Cloud SQL managed Postgres
 ---
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
@@ -154,9 +155,9 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
 `project_id` と `instance_id` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][3]を参照してください。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[2]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[4]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[4]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -207,10 +208,10 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][4]でパスワードを環境変数として渡す方法をご確認ください。
 
 
-[1]: /agent/docker/integrations/?tab=docker
+[1]: /ja/agent/docker/integrations/?tab=docker
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[3]: /agent/configuration/secrets-management
-[4]: /agent/faq/template_variables/
+[3]: /ja/agent/configuration/secrets-management
+[4]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -261,8 +262,8 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### マウントされたファイルで構成する
 
@@ -326,11 +327,11 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
+[1]: /ja/agent/cluster_agent
+[2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[5]: /agent/configuration/secrets-management
+[5]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -352,15 +353,15 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/agent_integration_overhead/?tab=postgres
-[2]: /database_monitoring/data_collected/#sensitive-information
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=postgres
+[2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://cloud.google.com/sql/docs/postgres/flags
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: /integrations/faq/postgres-custom-metric-collection-explained/
+[6]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
 [8]: https://app.datadoghq.com/account/settings/agent/latest
-[9]: /agent/configuration/agent-commands/#agent-status-and-information
+[9]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
-[11]: /integrations/google_cloudsql
-[12]: /database_monitoring/troubleshooting/?tab=postgres
+[11]: /ja/integrations/google_cloudsql
+[12]: /ja/database_monitoring/troubleshooting/?tab=postgres

@@ -1,10 +1,10 @@
 ---
-title: Container Troubleshooting
 description: Troubleshooting containers-related issues
 further_reading:
 - link: /containers/troubleshooting/duplicate_hosts
   tag: Documentation
   text: Duplicate hosts with Kubernetes on AWS (EC2 or EKS)
+title: Container Troubleshooting
 ---
 
 コンテナモニタリングに関するトラブルシューティング情報を提供します。
@@ -154,19 +154,19 @@ $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/containers/docker/?tab=standard
-[2]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli
-[3]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#
-[4]: https://docs.datadoghq.com/integrations/eks_fargate
-[5]: https://docs.datadoghq.com/containers/kubernetes/
-[6]: https://docs.datadoghq.com/help/
+[1]: https://docs.datadoghq.com/ja/containers/docker/?tab=standard
+[2]: https://docs.datadoghq.com/ja/containers/amazon_ecs/?tab=awscli
+[3]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/?tab=webui#
+[4]: https://docs.datadoghq.com/ja/integrations/eks_fargate
+[5]: https://docs.datadoghq.com/ja/containers/kubernetes/
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://app.datadoghq.com/release-notes
-[8]: https://docs.datadoghq.com/agent/guide/environment-variables/#overview
-[9]: https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=operator
-[10]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[11]: https://docs.datadoghq.com/agent/guide/autodiscovery-management/?tab=containerizedagent
-[12]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#log-collection
-[13]: https://docs.datadoghq.com/integrations/eks_fargate/#log-collection
-[14]: https://docs.datadoghq.com/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/#overview
-[15]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare
-[16]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=operator
+[8]: https://docs.datadoghq.com/ja/agent/guide/environment-variables/#overview
+[9]: https://docs.datadoghq.com/ja/containers/cluster_agent/admission_controller/?tab=operator
+[10]: https://docs.datadoghq.com/ja/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[11]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-management/?tab=containerizedagent
+[12]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/?tab=webui#log-collection
+[13]: https://docs.datadoghq.com/ja/integrations/eks_fargate/#log-collection
+[14]: https://docs.datadoghq.com/ja/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/#overview
+[15]: https://docs.datadoghq.com/ja/agent/troubleshooting/send_a_flare
+[16]: https://docs.datadoghq.com/ja/containers/kubernetes/installation/?tab=operator

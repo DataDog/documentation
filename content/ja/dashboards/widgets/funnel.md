@@ -1,15 +1,15 @@
 ---
-title: Funnel Widget
-widget_type: funnel
 aliases:
-- /graphing/widgets/funnel/
+- /ja/graphing/widgets/funnel/
 further_reading:
-- link: "https://docs.datadoghq.com/product_analytics/journeys/funnel_analysis/"
+- link: https://docs.datadoghq.com/product_analytics/journeys/funnel_analysis/
   tag: Documentation
   text: Learn more about Funnel Analysis
-- link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
+- link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: Blog
   text: Use funnel analysis to understand and optimize key user flows
+title: Funnel Widget
+widget_type: funnel
 ---
 
 Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. The funnel widget visualizes conversion rates across user workflows and end-to-end user journeys.
@@ -43,7 +43,7 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/search/
-[2]: /product_analytics/journeys/funnel_analysis
-[3]: /api/latest/dashboards/
-[4]: /dashboards/graphing_json/widget_json/
+[1]: /ja/real_user_monitoring/explorer/search/
+[2]: /ja/product_analytics/journeys/funnel_analysis
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

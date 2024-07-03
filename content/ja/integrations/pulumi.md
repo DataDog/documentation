@@ -1,26 +1,26 @@
 ---
-"app_id": "pulumi"
-"app_uuid": "7604c52b-dc07-4854-a5e4-799ab62798d8"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": pulumi.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10220"
-    "source_type_name": Pulumi
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Pulumi
-  "sales_email": team@pulumi.com
-  "support_email": team@pulumi.com
-"categories":
+app_id: pulumi
+app_uuid: 7604c52b-dc07-4854-a5e4-799ab62798d8
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: pulumi.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10220
+    source_type_name: Pulumi
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Pulumi
+  sales_email: team@pulumi.com
+  support_email: team@pulumi.com
+categories:
 - aws
 - automation
 - cloud
@@ -28,43 +28,45 @@
 - developer tools
 - orchestration
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "pulumi"
-"integration_id": "pulumi"
-"integration_title": "Pulumi"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "pulumi"
-"public_title": "Pulumi"
-"short_description": "Infrastructure as code for any cloud using your favorite programming languages"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: pulumi
+integration_id: pulumi
+integration_title: Pulumi
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: pulumi
+public_title: Pulumi
+short_description: Infrastructure as code for any cloud using your favorite programming
+  languages
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AWS"
-  - "Category::Automation"
-  - "Category::Cloud"
-  - "Category::Configuration & Deployment"
-  - "Category::Developer Tools"
-  - "Category::Orchestration"
-  - "Category::Provisioning"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Infrastructure as code for any cloud using your favorite programming languages
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Pulumi
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Automation
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Infrastructure as code for any cloud using your favorite programming
+    languages
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pulumi
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -130,10 +132,9 @@ Pulumi does not include any events.
 Need help? Contact [Datadog support][7].
 
 [1]: https://pulumi.com
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#aws-iam-permissions
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#aws-iam-permissions
 [3]: https://www.pulumi.com/docs/intro/cloud-providers/datadog/
 [4]: https://www.pulumi.com/pricing/
 [5]: https://www.pulumi.com/docs/get-started/
 [6]: https://www.pulumi.com/docs/reference/pkg/datadog/
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

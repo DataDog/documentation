@@ -17,5 +17,5 @@ CSM Threats events have the following JSON schema depending on the platform:
 * [Linux][1]
 * [Windows][2]
 
-[1]: /security/threats/backend_linux
-[2]: /security/threats/backend_windows
+[1]: /ja/security/threats/backend_linux
+[2]: /ja/security/threats/backend_windows

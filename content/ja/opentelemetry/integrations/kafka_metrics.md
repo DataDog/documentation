@@ -1,9 +1,9 @@
 ---
-title: Kafka Metrics
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
   text: Setting Up the OpenTelemetry Collector
+title: Kafka Metrics
 ---
 
 <div class="alert alert-warning">
@@ -297,9 +297,9 @@ Please see the following [example application][6] which demonstrates the configu
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkametricsreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jmxreceiver
 [3]: https://github.com/open-telemetry/opentelemetry-java-contrib/blob/main/jmx-metrics 
-[4]: /opentelemetry/collector_exporter/log_collection
+[4]: /ja/opentelemetry/collector_exporter/log_collection
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
 [7]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
-[9]: /opentelemetry/guide/metrics_mapping/#kafka-metrics
+[9]: /ja/opentelemetry/guide/metrics_mapping/#kafka-metrics

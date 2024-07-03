@@ -1,18 +1,18 @@
 ---
-title: Scale Graphing Expertise with Powerpacks
 further_reading:
 - link: /dashboards/widgets/powerpack
   tag: Documentation
   text: Powerpack Widget
-- link: "https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show"
+- link: https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show
   tag: Documentation
   text: Add widgets and refine what they show
-- link: "https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/"
+- link: https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/
   tag: Blog
   text: Save dashboard widgets in reusable groups with Powerpacks
-- link: "https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/"
+- link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: Guide
   text: Best practices for maintaining relevant dashboards
+title: Scale Graphing Expertise with Powerpacks
 ---
 
 ## 概要

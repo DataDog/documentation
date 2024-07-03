@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting the Python Profiler
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: /tracing/troubleshooting
-      tag: Documentation
-      text: APM Troubleshooting
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM Troubleshooting
+title: Troubleshooting the Python Profiler
+type: multi-code-lang
 ---
 
 ## プロファイル検索ページにないプロファイル
@@ -23,6 +23,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
+[1]: /ja/tracing/troubleshooting/#tracer-debug-logs
+[2]: /ja/help/
 [3]: https://ddtrace.readthedocs.io/en/stable/troubleshooting.html

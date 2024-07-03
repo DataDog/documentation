@@ -1,17 +1,17 @@
 ---
 aliases:
-- /tracing/ruby/
-- /tracing/languages/ruby/
-- /tracing/setup/ruby/
-- /tracing/setup_overview/ruby/
-- /agent/apm/ruby/
-- /tracing/setup_overview/setup/ruby
-- /tracing/trace_collection/ruby
-- /tracing/trace_collection/dd_libraries/ruby/
+- /ja/tracing/ruby/
+- /ja/tracing/languages/ruby/
+- /ja/tracing/setup/ruby/
+- /ja/tracing/setup_overview/ruby/
+- /ja/agent/apm/ruby/
+- /ja/tracing/setup_overview/setup/ruby
+- /ja/tracing/trace_collection/ruby
+- /ja/tracing/trace_collection/dd_libraries/ruby/
 code_lang: ruby
 code_lang_weight: 15
 dependencies:
-- "https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"
+- https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md
 kind: documentation
 title: Tracing Ruby Applications
 type: multi-code-lang
@@ -2659,5 +2659,5 @@ See [this issue](https://github.com/DataDog/dd-trace-rb/issues/3015) for a discu
 <!---->
 
 [header tags]: https://docs.datadoghq.com/tracing/configure_data_security/#applying-header-tags-to-root-spans
-[1]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/
-[2]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby#integrations
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/compatibility/ruby/
+[2]: https://docs.datadoghq.com/ja/tracing/trace_collection/compatibility/ruby#integrations

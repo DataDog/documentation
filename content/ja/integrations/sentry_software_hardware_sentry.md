@@ -1,122 +1,136 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "hardware-sentry"
-"app_uuid": "daade024-2095-4a73-afe5-35afbe9e2b12"
-"assets":
-  "dashboards":
-    "Hardware Sentry - Host": assets/dashboards/host.json
-    "Hardware Sentry - Main": assets/dashboards/main.json
-    "Hardware Sentry - Site": assets/dashboards/site.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": hardware_sentry.agent.info
-      "metadata_path": metadata.csv
-      "prefix": hardware_sentry.
-    "service_checks":
-      "metadata_path": service_checks.json
-    "source_type_id": !!int "10286"
-    "source_type_name": Hardware Sentry
-  "logs": {}
-  "monitors":
-    "Hardware Sentry - Agent-NoData": assets/monitors/agent-nodata.json
-    "Hardware Sentry - Connector Failed": assets/monitors/connector-failed.json
-    "Hardware Sentry - Critical Fan Speed": assets/monitors/critical-fan-speed.json
-    "Hardware Sentry - Critical Temperature": assets/monitors/critical-temperature.json
-    "Hardware Sentry - Errors": assets/monitors/errors.json
-    "Hardware Sentry - High Temperature": assets/monitors/high-temperature.json
-    "Hardware Sentry - High Voltage": assets/monitors/high-voltage.json
-    "Hardware Sentry - Intrusion": assets/monitors/intrusion.json
-    "Hardware Sentry - Link Down": assets/monitors/network-link-down.json
-    "Hardware Sentry - Low Battery": assets/monitors/low-battery.json
-    "Hardware Sentry - Low Fan Speed": assets/monitors/low-fan-speed.json
-    "Hardware Sentry - Low Fan Speed %": assets/monitors/low-fan-speed-percent.json
-    "Hardware Sentry - Low Voltage": assets/monitors/low-voltage.json
-    "Hardware Sentry - Lun Multipathing": assets/monitors/lun-multipathing.json
-    "Hardware Sentry - Missing Device": assets/monitors/missing-device.json
-    "Hardware Sentry - Network Errors": assets/monitors/errors-network.json
-    "Hardware Sentry - Power Capacity": assets/monitors/power-capacity.json
-    "Hardware Sentry - Predicted Failure": assets/monitors/predicted-failure.json
-    "Hardware Sentry - Status Degraded": assets/monitors/status-degraded.json
-    "Hardware Sentry - Status Failed": assets/monitors/status-failed.json
-    "Hardware Sentry - Tape Drive Cleaning": assets/monitors/tape-drive-cleaning.json
-"author":
-  "homepage": "https://sentrysoftware.com"
-  "name": Sentry Software
-  "sales_email": datadog@sentrysoftware.com
-  "support_email": support@sentrysoftware.com
-  "vendor_id": sentry-software
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: hardware-sentry
+app_uuid: daade024-2095-4a73-afe5-35afbe9e2b12
+assets:
+  dashboards:
+    Hardware Sentry - Host: assets/dashboards/host.json
+    Hardware Sentry - Main: assets/dashboards/main.json
+    Hardware Sentry - Site: assets/dashboards/site.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: hardware_sentry.agent.info
+      metadata_path: metadata.csv
+      prefix: hardware_sentry.
+    service_checks:
+      metadata_path: service_checks.json
+    source_type_id: 10286
+    source_type_name: Hardware Sentry
+  logs: {}
+  monitors:
+    Hardware Sentry - Agent-NoData: assets/monitors/agent-nodata.json
+    Hardware Sentry - Connector Failed: assets/monitors/connector-failed.json
+    Hardware Sentry - Critical Fan Speed: assets/monitors/critical-fan-speed.json
+    Hardware Sentry - Critical Temperature: assets/monitors/critical-temperature.json
+    Hardware Sentry - Errors: assets/monitors/errors.json
+    Hardware Sentry - High Temperature: assets/monitors/high-temperature.json
+    Hardware Sentry - High Voltage: assets/monitors/high-voltage.json
+    Hardware Sentry - Intrusion: assets/monitors/intrusion.json
+    Hardware Sentry - Link Down: assets/monitors/network-link-down.json
+    Hardware Sentry - Low Battery: assets/monitors/low-battery.json
+    Hardware Sentry - Low Fan Speed: assets/monitors/low-fan-speed.json
+    Hardware Sentry - Low Fan Speed %: assets/monitors/low-fan-speed-percent.json
+    Hardware Sentry - Low Voltage: assets/monitors/low-voltage.json
+    Hardware Sentry - Lun Multipathing: assets/monitors/lun-multipathing.json
+    Hardware Sentry - Missing Device: assets/monitors/missing-device.json
+    Hardware Sentry - Network Errors: assets/monitors/errors-network.json
+    Hardware Sentry - Power Capacity: assets/monitors/power-capacity.json
+    Hardware Sentry - Predicted Failure: assets/monitors/predicted-failure.json
+    Hardware Sentry - Status Degraded: assets/monitors/status-degraded.json
+    Hardware Sentry - Status Failed: assets/monitors/status-failed.json
+    Hardware Sentry - Tape Drive Cleaning: assets/monitors/tape-drive-cleaning.json
+author:
+  homepage: https://sentrysoftware.com
+  name: Sentry Software
+  sales_email: datadog@sentrysoftware.com
+  support_email: support@sentrysoftware.com
+  vendor_id: sentry-software
+categories:
 - cost management
 - marketplace
 - network
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sentry_software_hardware_sentry"
-"integration_id": "hardware-sentry"
-"integration_title": "Hardware Sentry"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "sentry_software_hardware_sentry"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": hardware_sentry.host.configured
-  "product_id": hardware-sentry
-  "short_description": The price of the monthly subscription is based on the number of hosts monitored with Hardware Sentry OpenTelemetry Collector. The subscription grants access to the support services provided by Sentry Desk.
-  "tag": host
-  "unit_label": monitored host
-  "unit_price": !!int "8"
-"public_title": "Hardware Sentry"
-"short_description": "Hardware & sustainability metrics for 100+ systems (Cisco, Dell EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: sentry_software_hardware_sentry
+integration_id: hardware-sentry
+integration_title: Hardware Sentry
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: sentry_software_hardware_sentry
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: hardware_sentry.host.configured
+  product_id: hardware-sentry
+  short_description: The price of the monthly subscription is based on the number
+    of hosts monitored with Hardware Sentry OpenTelemetry Collector. The subscription
+    grants access to the support services provided by Sentry Desk.
+  tag: host
+  unit_label: monitored host
+  unit_price: 8
+public_title: Hardware Sentry
+short_description: Hardware & sustainability metrics for 100+ systems (Cisco, Dell
+  EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
+supported_os:
 - linux
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cost Management"
-  - "Category::Marketplace"
-  - "Category::Network"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Hardware & sustainability metrics for 100+ systems (Cisco, Dell EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
-  "media":
-  - "caption": The main Hardware Sentry dashboard provides an overview of the energy usage and carbon emissions of all data centers and server rooms. It leverages the metrics collected by Hardware Sentry OpenTelemetry Collector.
-    "image_url": images/dashboard-main.png
-    "media_type": image
-  - "caption": "Architecture diagram: Hardware Sentry OpenTelemetry Collector runs on-prem, monitors your servers, switches and storage systems, and pushes metrics to your Datadog environment."
-    "image_url": images/architecture.png
-    "media_type": image
-  - "caption": For each monitored host, Hardware Sentry monitors its electronic components (CPUs, memory, disks, NICs, sensors, etc.), its power consumption, and carbon emissions.
-    "image_url": images/dashboard-host.png
-    "media_type": image
-  - "caption": For each site (data center or server room), energy and carbon emissions are estimated for 1 day, 1 month and 1 year. Recommendation of optimal temperature is made with its potential energy savings over a year.
-    "image_url": images/dashboard-site.png
-    "media_type": image
-  - "caption": All hardware problems (disks, memory modules, NICs, power supplies, etc.) are monitored with specific monitors, with detailed messages.
-    "image_url": images/events-explorer.png
-    "media_type": image
-  - "caption": The Hardware Sentry integration comes with a collection of recommended monitors to report hardware problems in your infrastructure.
-    "image_url": images/triggered-monitors.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Hardware Sentry
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cost Management
+  - Category::Marketplace
+  - Category::Network
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Hardware & sustainability metrics for 100+ systems (Cisco, Dell EMC,
+    HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
+  media:
+  - caption: The main Hardware Sentry dashboard provides an overview of the energy
+      usage and carbon emissions of all data centers and server rooms. It leverages
+      the metrics collected by Hardware Sentry OpenTelemetry Collector.
+    image_url: images/dashboard-main.png
+    media_type: image
+  - caption: 'Architecture diagram: Hardware Sentry OpenTelemetry Collector runs on-prem,
+      monitors your servers, switches and storage systems, and pushes metrics to your
+      Datadog environment.'
+    image_url: images/architecture.png
+    media_type: image
+  - caption: For each monitored host, Hardware Sentry monitors its electronic components
+      (CPUs, memory, disks, NICs, sensors, etc.), its power consumption, and carbon
+      emissions.
+    image_url: images/dashboard-host.png
+    media_type: image
+  - caption: For each site (data center or server room), energy and carbon emissions
+      are estimated for 1 day, 1 month and 1 year. Recommendation of optimal temperature
+      is made with its potential energy savings over a year.
+    image_url: images/dashboard-site.png
+    media_type: image
+  - caption: All hardware problems (disks, memory modules, NICs, power supplies, etc.)
+      are monitored with specific monitors, with detailed messages.
+    image_url: images/events-explorer.png
+    media_type: image
+  - caption: The Hardware Sentry integration comes with a collection of recommended
+      monitors to report hardware problems in your infrastructure.
+    image_url: images/triggered-monitors.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hardware Sentry
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

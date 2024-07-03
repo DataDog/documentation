@@ -1,7 +1,5 @@
 ---
-title: Pie Chart Widget
-widget_type: "sunburst"
-description: "Graph proportions of one or more datasets."
+description: Graph proportions of one or more datasets.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
@@ -9,6 +7,8 @@ further_reading:
 - link: /dashboards/widgets/treemap/
   tag: Documentation
   text: Treemap Widget
+title: Pie Chart Widget
+widget_type: sunburst
 ---
 
 円グラフウィジェットは、単一のデータセットとそれに対応する比率、または複数のデータセットを入れ子にして比率を表示することができます。
@@ -74,11 +74,11 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /dashboards/querying
-[2]: /logs/explorer/search_syntax/
-[3]: /dashboards/functions/
-[4]: /dashboards/guide/context-links/
-[5]: /dashboards/widgets/#full-screen
-[6]: /api/latest/dashboards/
-[7]: /dashboards/graphing_json/widget_json/
-[8]: /dashboards/widgets/treemap/
+[1]: /ja/dashboards/querying
+[2]: /ja/logs/explorer/search_syntax/
+[3]: /ja/dashboards/functions/
+[4]: /ja/dashboards/guide/context-links/
+[5]: /ja/dashboards/widgets/#full-screen
+[6]: /ja/api/latest/dashboards/
+[7]: /ja/dashboards/graphing_json/widget_json/
+[8]: /ja/dashboards/widgets/treemap/

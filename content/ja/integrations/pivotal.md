@@ -1,24 +1,24 @@
 ---
-"categories":
-- "Collaboration"
-- "issue tracking"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog イベントストリームでストーリーを参照してコメントを入力。"
-"doc_link": "https://docs.datadoghq.com/integrations/pivotal/"
-"draft": false
-"git_integration_title": "pivotal"
-"has_logo": true
-"integration_id": "pivotal"
-"integration_title": "Pivotal Tracker"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "pivotal"
-"public_title": "Datadog-Pivotal Tracker Integration"
-"short_description": "See and comment on stories in your Datadog event stream."
-"team": "web-integrations"
-"version": "1.0"
+categories:
+- Collaboration
+- issue tracking
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog イベントストリームでストーリーを参照してコメントを入力。
+doc_link: https://docs.datadoghq.com/integrations/pivotal/
+draft: false
+git_integration_title: pivotal
+has_logo: true
+integration_id: pivotal
+integration_title: Pivotal Tracker
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: pivotal
+public_title: Datadog-Pivotal Tracker Integration
+short_description: See and comment on stories in your Datadog event stream.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -58,5 +58,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://www.pivotaltracker.com/features
 [2]: https://www.pivotaltracker.com/signin
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

@@ -1,73 +1,73 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-usage-tracker"
-"app_uuid": "a7bdd804-96cb-422f-ab2b-46adcf1f5b5f"
-"assets": {}
-"author":
-  "contact_link": "https://meetings.hubspot.com/ewilliams/rapdev-marketplace"
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-usage-tracker
+app_uuid: a7bdd804-96cb-422f-ab2b-46adcf1f5b5f
+assets: {}
+author:
+  contact_link: https://meetings.hubspot.com/ewilliams/rapdev-marketplace
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
 - モニター
 - alerting
 - cost management
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_usage_tracker"
-"integration_id": "rapdev-usage-tracker"
-"integration_title": "Usage Tracker"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rapdev_usage_tracker"
-"pricing":
-- "includes_assets": true
-  "private_offer_only": true
-  "product_id": usage-tracker
-  "short_description": Datadog usage monitoring with enriched notifications
-  "unit_price": !!null "null"
-"public_title": "Usage Tracker"
-"short_description": "Datadog usage monitoring with enriched notifications"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_usage_tracker
+integration_id: rapdev-usage-tracker
+integration_title: Usage Tracker
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rapdev_usage_tracker
+pricing:
+- includes_assets: true
+  private_offer_only: true
+  product_id: usage-tracker
+  short_description: Datadog usage monitoring with enriched notifications
+  unit_price: null
+public_title: Usage Tracker
+short_description: Datadog usage monitoring with enriched notifications
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Category::Metrics"
-  - "Category::Alerting"
-  - "Category::Cost Management"
-  - "Offering::Professional Service"
-  - "Queried Data Type::Logs"
-  - "Queried Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Datadog usage monitoring with enriched notifications
-  "media":
-  - "caption": Usage Tracker Weekly Report
-    "image_url": images/weekly_report.png
-    "media_type": image
-  - "caption": Dashboard Displaying Account Usage
-    "image_url": images/dashboard.png
-    "media_type": image
-  - "caption": Usage Tracker Alert Email Example
-    "image_url": images/alert_email.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Usage Tracker
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Category::Metrics
+  - Category::Alerting
+  - Category::Cost Management
+  - Offering::Professional Service
+  - Queried Data Type::Logs
+  - Queried Data Type::Metrics
+  configuration: README.md#Setup
+  description: Datadog usage monitoring with enriched notifications
+  media:
+  - caption: Usage Tracker Weekly Report
+    image_url: images/weekly_report.png
+    media_type: image
+  - caption: Dashboard Displaying Account Usage
+    image_url: images/dashboard.png
+    media_type: image
+  - caption: Usage Tracker Alert Email Example
+    image_url: images/alert_email.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Usage Tracker
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

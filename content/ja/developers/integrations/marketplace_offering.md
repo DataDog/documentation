@@ -1,11 +1,12 @@
 ---
 aliases:
-- /developers/marketplace/
+- /ja/developers/marketplace/
+description: Learn about the Datadog marketplace.
 further_reading:
-- link: "https://www.datadoghq.com/partner/"
+- link: https://www.datadoghq.com/partner/
   tag: Partner Network
   text: Datadog Partner Network
-- link: "https://www.datadoghq.com/blog/datadog-marketplace/"
+- link: https://www.datadoghq.com/blog/datadog-marketplace/
   tag: Blog
   text: Expand your monitoring reach with the Datadog Marketplace
 - link: /developers/integrations/create_a_tile
@@ -16,7 +17,6 @@ further_reading:
   text: Create an Agent-based Integration
 title: Build A Marketplace Offering
 type: documentation
-description: Learn about the Datadog marketplace.
 ---
 ## Overview
 
@@ -89,16 +89,16 @@ To get started with creating an API-based integration, software license, or prof
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/marketplace
 [3]: https://partners.datadoghq.com/
-[5]: https://docs.datadoghq.com/developers/datadog_apps
+[5]: https://docs.datadoghq.com/ja/developers/datadog_apps
 [6]: https://partners.datadoghq.com/English/
-[7]: /account_management/users/#add-new-members-and-manage-invites
+[7]: /ja/account_management/users/#add-new-members-and-manage-invites
 [8]: https://learn.datadoghq.com/courses/intro-to-integrations
 [9]: https://learn.datadoghq.com/
 [10]: https://chat.datadoghq.com/
-[11]: https://docs.datadoghq.com/developers/authorization/
+[11]: https://docs.datadoghq.com/ja/developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
-[13]: https://docs.datadoghq.com/developers/integrations/create_a_tile
-[15]: https://docs.datadoghq.com/developers/integrations/api_integration
-[19]: https://docs.datadoghq.com/developers/integrations/agent_integration
+[13]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
+[15]: https://docs.datadoghq.com/ja/developers/integrations/api_integration
+[19]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration
 [20]: https://www.dashcon.io/
 [21]: https://www.datadoghq.com/blog/

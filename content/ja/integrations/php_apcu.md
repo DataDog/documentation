@@ -1,62 +1,62 @@
 ---
-"app_id": "php-apcu"
-"app_uuid": "ec09379e-851f-4ecc-be78-de5297087994"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": php_apcu.cache.mem_size
-      "metadata_path": metadata.csv
-      "prefix": php_apcu.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10139"
-    "source_type_name": PHP APCu
-  "monitors":
-    "[php_apcu] Cache Full has been detected": assets/monitors/php-apcu_expunges.json
-    "[php_apcu] Detected High Cache Usage": assets/monitors/php-apcu_high_usage.json
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": noname@withgod.jp
-  "support_email": noname@withgod.jp
-"categories":
+app_id: php-apcu
+app_uuid: ec09379e-851f-4ecc-be78-de5297087994
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: php_apcu.cache.mem_size
+      metadata_path: metadata.csv
+      prefix: php_apcu.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10139
+    source_type_name: PHP APCu
+  monitors:
+    '[php_apcu] Cache Full has been detected': assets/monitors/php-apcu_expunges.json
+    '[php_apcu] Detected High Cache Usage': assets/monitors/php-apcu_high_usage.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: noname@withgod.jp
+  support_email: noname@withgod.jp
+categories:
 - caching
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "php_apcu"
-"integration_id": "php-apcu"
-"integration_title": "PHP APCu"
-"integration_version": "0.0.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "php_apcu"
-"public_title": "PHP APCu"
-"short_description": "Monitor PHP APCu in-memory data caching."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: php_apcu
+integration_id: php-apcu
+integration_title: PHP APCu
+integration_version: 0.0.2
+is_public: true
+manifest_version: 2.0.0
+name: php_apcu
+public_title: PHP APCu
+short_description: Monitor PHP APCu in-memory data caching.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor PHP APCu in-memory data caching.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": PHP APCu
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor PHP APCu in-memory data caching.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PHP APCu
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -135,12 +135,11 @@ Need help? Contact [Datadog support][10].
 
 [1]: https://www.php.net/manual/en/book.apcu.php
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

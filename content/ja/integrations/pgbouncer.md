@@ -1,68 +1,68 @@
 ---
-"app_id": "pgbouncer"
-"app_uuid": "8aabdf7d-2d07-4d77-a76e-0ade64d8e70f"
-"assets":
-  "dashboards":
-    "pgbouncer": "assets/dashboards/pgbouncer_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "pgbouncer.pools.sv_idle"
-      "metadata_path": "metadata.csv"
-      "prefix": "pgbouncer."
-    "process_signatures":
-    - "pgbouncer"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "118"
-    "source_type_name": "PGBouncer"
-  "saved_views":
-    "error_warning_status": "assets/saved_views/error_warning_status.json"
-    "instance_overview": "assets/saved_views/instance_overview.json"
-    "pgbouncer_processes": "assets/saved_views/pgbouncer_processes.json"
-    "user_overview": "assets/saved_views/user_overview.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "pgbouncer"
-"integration_id": "pgbouncer"
-"integration_title": "PGBouncer"
-"integration_version": "6.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "pgbouncer"
-"public_title": "PGBouncer"
-"short_description": "接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視"
-"supported_os":
-- "linux"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "PGBouncer"
+app_id: pgbouncer
+app_uuid: 8aabdf7d-2d07-4d77-a76e-0ade64d8e70f
+assets:
+  dashboards:
+    pgbouncer: assets/dashboards/pgbouncer_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: pgbouncer.pools.sv_idle
+      metadata_path: metadata.csv
+      prefix: pgbouncer.
+    process_signatures:
+    - pgbouncer
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 118
+    source_type_name: PGBouncer
+  saved_views:
+    error_warning_status: assets/saved_views/error_warning_status.json
+    instance_overview: assets/saved_views/instance_overview.json
+    pgbouncer_processes: assets/saved_views/pgbouncer_processes.json
+    user_overview: assets/saved_views/user_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: pgbouncer
+integration_id: pgbouncer
+integration_title: PGBouncer
+integration_version: 6.2.0
+is_public: true
+manifest_version: 2.0.0
+name: pgbouncer
+public_title: PGBouncer
+short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
+supported_os:
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Data Stores
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PGBouncer
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -154,11 +154,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][5]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
 [3]: https://www.postgresql.org/docs/9.1/libpq-ssl.html
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -184,8 +184,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ----------------------------------------------- |
 | `<LOG_CONFIG>` | {"source": "pgbouncer", "service": "pgbouncer"} |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -216,5 +216,5 @@ PgBouncer チェックには、イベントは含まれません。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

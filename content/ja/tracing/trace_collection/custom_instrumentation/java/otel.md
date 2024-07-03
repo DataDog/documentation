@@ -1,20 +1,21 @@
 ---
-title: Java Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your Java application with OpenTelemetry API to send traces to Datadog.'
-code_lang: otel
-type: multi-code-lang
-code_lang_weight: 2
 aliases:
-- /tracing/trace_collection/otel_instrumentation/java/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/java
+- /ja/tracing/trace_collection/otel_instrumentation/java/
+- /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/java
+code_lang: otel
+code_lang_weight: 2
+description: Instrument your Java application with OpenTelemetry API to send traces
+  to Datadog.
 further_reading:
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Java Custom Instrumentation using OpenTelemetry API
+type: multi-code-lang
 ---
 
 {{% otel-custom-instrumentation-lang %}}
@@ -198,9 +199,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[15]: /tracing/setup/java/
-[16]: /tracing/glossary/#trace
-[17]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
-[18]: /tracing/trace_collection/trace_context_propagation/java/
-[19]: /tracing/security
-[20]: /tracing/guide/ignoring_apm_resources/
+[15]: /ja/tracing/setup/java/
+[16]: /ja/tracing/glossary/#trace
+[17]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
+[18]: /ja/tracing/trace_collection/trace_context_propagation/java/
+[19]: /ja/tracing/security
+[20]: /ja/tracing/guide/ignoring_apm_resources/

@@ -1,23 +1,24 @@
 ---
-"categories":
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。"
-"doc_link": "https://docs.datadoghq.com/integrations/pingdom/"
-"draft": false
-"git_integration_title": "pingdom"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Pingdom Legacy API (V2.1)"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "pingdom"
-"public_title": "Datadog-Pingdom Legacy API (V2.1) Integration"
-"short_description": "Manage and migrate existing configuration of legacy Pingdom monitoring endpoints."
-"team": "web-integrations"
-"version": "1.0"
+categories:
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。
+doc_link: https://docs.datadoghq.com/integrations/pingdom/
+draft: false
+git_integration_title: pingdom
+has_logo: true
+integration_id: ''
+integration_title: Pingdom Legacy API (V2.1)
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: pingdom
+public_title: Datadog-Pingdom Legacy API (V2.1) Integration
+short_description: Manage and migrate existing configuration of legacy Pingdom monitoring
+  endpoints.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -80,4 +81,3 @@ Add the email address of your Pingdom account owner in the **(Optional) Account 
 
 [1]: https://app.datadoghq.com/monitors/create/integration
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/pingdom/pingdom_metadata.csv
-

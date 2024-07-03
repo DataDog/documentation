@@ -1,75 +1,77 @@
 ---
-"app_id": "meraki"
-"app_uuid": "c34bd865-7ddf-4336-9cf2-02e1a2f05bbd"
-"assets":
-  "dashboards":
-    "meraki": assets/dashboards/meraki_overview.json
-  "integration":
-    "auto_install": false
-    "metrics":
-      "check":
+app_id: meraki
+app_uuid: c34bd865-7ddf-4336-9cf2-02e1a2f05bbd
+assets:
+  dashboards:
+    meraki: assets/dashboards/meraki_overview.json
+  integration:
+    auto_install: false
+    metrics:
+      check:
       - meraki.port.usageInKb.recv
       - snmp.devStatus
-      "metadata_path": metadata.csv
-      "prefix": meraki.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "602"
-    "source_type_name": Meraki
-  "monitors":
-    "[Meraki] A Meraki Device Uplink is Failing": assets/monitors/uplink_device_is_failing.json
-    "[Meraki] A Meraki Device is in an Alerting State": assets/monitors/device_is_in_alert_state.json
-    "[Meraki] Abnormally High Latency on a Meraki Uplink": assets/monitors/high_latency_on_uplink.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: meraki.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 602
+    source_type_name: Meraki
+  monitors:
+    '[Meraki] A Meraki Device Uplink is Failing': assets/monitors/uplink_device_is_failing.json
+    '[Meraki] A Meraki Device is in an Alerting State': assets/monitors/device_is_in_alert_state.json
+    '[Meraki] Abnormally High Latency on a Meraki Uplink': assets/monitors/high_latency_on_uplink.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - network
 - log collection
 - security
 - snmp
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "meraki"
-"integration_id": "meraki"
-"integration_title": "Cisco Meraki"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "meraki"
-"public_title": "Cisco Meraki"
-"short_description": "Monitor your Cisco Meraki Environment with Network Device Monitoring, Logs, and Cloud SIEM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: meraki
+integration_id: meraki
+integration_title: Cisco Meraki
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: meraki
+public_title: Cisco Meraki
+short_description: Monitor your Cisco Meraki Environment with Network Device Monitoring,
+  Logs, and Cloud SIEM
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Network"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Category::SNMP"
-  - "Submitted Data Type::Logs"
-  - "Submitted Data Type::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor your Cisco Meraki Environment with Network Device Monitoring, Logs, and Cloud SIEM
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": documentation
-    "url": "https://docs.datadoghq.com/network_monitoring/devices/"
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/monitor-meraki/"
-  "support": "README.md#Support"
-  "title": Cisco Meraki
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Network
+  - Category::Log Collection
+  - Category::Security
+  - Category::SNMP
+  - Submitted Data Type::Logs
+  - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor your Cisco Meraki Environment with Network Device Monitoring,
+    Logs, and Cloud SIEM
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/network_monitoring/devices/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-meraki/
+  support: README.md#Support
+  title: Cisco Meraki
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -178,11 +180,10 @@ Datadog sometimes encounters issues accessing Meraki from its servers. Add Datad
 [3]: https://developer.cisco.com/meraki/api/get-network-appliance-security-events/
 [4]: https://app.datadoghq.com/logs/pipelines?search=meraki
 [5]: https://developer.cisco.com/meraki/api/get-network-events/
-[6]: https://docs.datadoghq.com/integrations/snmp/
+[6]: https://docs.datadoghq.com/ja/integrations/snmp/
 [7]: https://app.datadoghq.com/integrations/meraki
 [8]: https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API
 [9]: https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API#Enable_API_access
-[10]: https://docs.datadoghq.com/help/
-[11]: https://docs.datadoghq.com/network_monitoring/devices/
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/ja/network_monitoring/devices/
 [12]: https://www.datadoghq.com/blog/monitor-meraki/
-

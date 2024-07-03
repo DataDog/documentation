@@ -1,13 +1,12 @@
 ---
-title: Cloud Security Management Vulnerabilities
 aliases:
-    - /security/infrastructure_vulnerabilities/
-    - /security/vulnerabilities/
+- /ja/security/infrastructure_vulnerabilities/
+- /ja/security/vulnerabilities/
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: /security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers
   tag: Documentation
   text: Setting up container image vulnerabilities
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
+- link: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts
   tag: Documentation
   text: Setting up host vulnerabilities
 - link: /infrastructure/containers/container_images
@@ -16,12 +15,14 @@ further_reading:
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities
   tag: Documentation
   text: Troubleshooting CSM Vulnerabilities
-- link: "https://www.datadoghq.com/blog/csm-vulnerability-management/"
+- link: https://www.datadoghq.com/blog/csm-vulnerability-management/
   tag: Blog
   text: Mitigate infrastructure vulnerabilities with Datadog Cloud Security Management
-- link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
+- link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: Blog
-  text: Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring
+  text: Enhance your troubleshooting workflow with Container Images in Datadog Container
+    Monitoring
+title: Cloud Security Management Vulnerabilities
 ---
 
 {{< site-region region="gov" >}}
@@ -76,7 +77,7 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [2]: https://app.datadoghq.com/containers/images
 [3]: https://app.datadoghq.com/security/csm
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
-[5]: /security/application_security/software_composition_analysis/
+[5]: /ja/security/application_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 

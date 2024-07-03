@@ -1,7 +1,6 @@
 ---
-title: Container Images for Docker Environments
 aliases:
-  - /agent/guide/container-images-for-docker-environments
+- /ja/agent/guide/container-images-for-docker-environments
 further_reading:
 - link: /agent/docker/
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /agent/cluster_agent/
   tag: Documentation
   text: Get started with the Cluster Agent
+title: Container Images for Docker Environments
 ---
 
 ## 概要
@@ -27,13 +27,13 @@ Docker を使用している場合は、GCR と ECR を介して利用できる�
 | [Synthetics プライベートロケーションワーカー][7]  | [Synthetics プライベートロケーションワーカー][8]  | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
 
 
-[1]: /agent/docker/
+[1]: /ja/agent/docker/
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
-[3]: /developers/dogstatsd/
+[3]: /ja/developers/dogstatsd/
 [4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
-[5]: /agent/cluster_agent/
+[5]: /ja/agent/cluster_agent/
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
-[7]: /getting_started/synthetics/private_location/
+[7]: /ja/getting_started/synthetics/private_location/
 [8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
 {{% /tab %}}
 {{% tab "ECR" %}}
@@ -47,14 +47,14 @@ Docker を使用している場合は、GCR と ECR を介して利用できる�
 | [Synthetics プライベートロケーションワーカー][8] | [Synthetics プライベートロケーションワーカー][9]  | `docker pull public.ecr.aws/datadog/synthetics-private-location-worker` |
 
 
-[1]: /agent/docker/
+[1]: /ja/agent/docker/
 [2]: https://gallery.ecr.aws/datadog/agent
 [3]: https://gallery.ecr.aws/datadog/docker-dd-agent
-[4]: /developers/dogstatsd/
+[4]: /ja/developers/dogstatsd/
 [5]: https://gallery.ecr.aws/datadog/dogstatsd
-[6]: /agent/cluster_agent/
+[6]: /ja/agent/cluster_agent/
 [7]: https://gallery.ecr.aws/datadog/cluster-agent
-[8]: /getting_started/synthetics/private_location
+[8]: /ja/getting_started/synthetics/private_location
 [9]: https://gallery.ecr.aws/datadog/synthetics-private-location-worker
 {{% /tab %}}
 {{< /tabs >}}
@@ -65,4 +65,4 @@ Docker Hub を使用する必要がある場合は、[Docker Hub][1] を参照�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/docker-hub/
+[1]: /ja/agent/faq/docker-hub/

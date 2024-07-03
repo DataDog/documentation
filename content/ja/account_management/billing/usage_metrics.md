@@ -78,7 +78,7 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 
 課金に関するご質問は、[カスタマーサクセス][2]マネージャーにお問い合わせください。
 
-[1]: /help/
+[1]: /ja/help/
 [2]: mailto:success@datadoghq.com
-[3]: /monitors/types/metric/?tab=threshold
-[4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
+[3]: /ja/monitors/types/metric/?tab=threshold
+[4]: /ja/logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month

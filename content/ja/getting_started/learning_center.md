@@ -1,40 +1,40 @@
 ---
-title: Datadog Learning Center
-kind: documentation
 aliases:
-  - /video-categories/
-  - /video-categories/datadog-101/
-  - /video-categories/installation/
-  - /videos/
-  - /videos/anomaly_detection/
-  - /videos/apm_dashboards_trace_metrics/
-  - /videos/apm_overview/
-  - /videos/apm_traces_flame_graph/
-  - /videos/apmsetup-rails/
-  - /videos/autodiscovery/
-  - /videos/dashboard_permissions/
-  - /videos/dashboards/
-  - /videos/datadog-101/
-  - /videos/datadog101-1-overview/
-  - /videos/datadog101-2-collection/
-  - /videos/datadog101-3-dashboards/
-  - /videos/datadog101-4-functions/
-  - /videos/datadog101-5-aggregation/
-  - /videos/datadog101-6-notifications/
-  - /videos/five_minute_intro/
-  - /videos/hostmap/
-  - /videos/install-in-eight-mins/
-  - /videos/installation/
-  - /videos/introduction/
-  - /videos/navigation/
-  - /videos/share_screenboards/
-  - /videos/two_minute_intro/
-  - /videos/unshare_screenboards/
-  - /videos/weekly_monitor_report/
-  - /video-categories/フレームグラフ/
-  - /videos/apm
-  - /videos/aws
-  - /videos/host-map
+- /ja/video-categories/
+- /ja/video-categories/datadog-101/
+- /ja/video-categories/installation/
+- /ja/videos/
+- /ja/videos/anomaly_detection/
+- /ja/videos/apm_dashboards_trace_metrics/
+- /ja/videos/apm_overview/
+- /ja/videos/apm_traces_flame_graph/
+- /ja/videos/apmsetup-rails/
+- /ja/videos/autodiscovery/
+- /ja/videos/dashboard_permissions/
+- /ja/videos/dashboards/
+- /ja/videos/datadog-101/
+- /ja/videos/datadog101-1-overview/
+- /ja/videos/datadog101-2-collection/
+- /ja/videos/datadog101-3-dashboards/
+- /ja/videos/datadog101-4-functions/
+- /ja/videos/datadog101-5-aggregation/
+- /ja/videos/datadog101-6-notifications/
+- /ja/videos/five_minute_intro/
+- /ja/videos/hostmap/
+- /ja/videos/install-in-eight-mins/
+- /ja/videos/installation/
+- /ja/videos/introduction/
+- /ja/videos/navigation/
+- /ja/videos/share_screenboards/
+- /ja/videos/two_minute_intro/
+- /ja/videos/unshare_screenboards/
+- /ja/videos/weekly_monitor_report/
+- /ja/video-categories/フレームグラフ/
+- /ja/videos/apm
+- /ja/videos/aws
+- /ja/videos/host-map
+kind: documentation
+title: Datadog Learning Center
 ---
 
 Datadog is an extensive platform for understanding your infrastructure. [The Datadog Learning Center][1] ensures you are able to leverage everything the platform has to offer.

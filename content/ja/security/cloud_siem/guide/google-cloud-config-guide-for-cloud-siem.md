@@ -1,7 +1,6 @@
 ---
-title: Google Cloud Configuration Guide for Cloud SIEM
 further_reading:
-- link: "/security/default_rules/#cat-cloud-siem-log-detection"
+- link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentation
   text: Explore Cloud SIEM default detection rules
 - link: /security/cloud_siem/investigate_security_signals
@@ -10,12 +9,14 @@ further_reading:
 - link: /security/cloud_siem/log_detection_rules/
   tag: Documentation
   text: Create new detection rules
-- link: "/integrations/google_cloud_platform/#log-collection"
+- link: /integrations/google_cloud_platform/#log-collection
   tag: Documentation
   text: Collect Google Cloud Platform logs
-- link: "https://www.datadoghq.com/blog/visualize-google-cloud-activity-cloud-siem-investigator/"
+- link: https://www.datadoghq.com/blog/visualize-google-cloud-activity-cloud-siem-investigator/
   tag: Blog
-  text: Visualize activity in your Google Cloud environment with Datadog Cloud SIEM Investigator
+  text: Visualize activity in your Google Cloud environment with Datadog Cloud SIEM
+    Investigator
+title: Google Cloud Configuration Guide for Cloud SIEM
 ---
 
 ## 概要
@@ -177,13 +178,13 @@ Cloud SIEM は、設定した Google Cloud の監査ログを含む、処理さ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/
+[1]: /ja/security/cloud_siem/
 [2]: https://cloud.google.com/dataflow?hl=en
 [3]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [4]: https://console.cloud.google.com/iam-admin/audit
 [5]: https://console.cloud.google.com/cloudpubsub/topic
 [6]: https://cloud.google.com/pubsub/quotas#quotas
-[7]: /integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[7]: /ja/integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
 [8]: https://console.cloud.google.com/security/secret-manager
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
@@ -201,5 +202,5 @@ Cloud SIEM は、設定した Google Cloud の監査ログを含む、処理さ�
 [22]: https://app.datadoghq.com/logs/
 [23]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
 [24]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
-[25]: /security/default_rules/#cat-cloud-siem
-[26]: /security/detection_rules/
+[25]: /ja/security/default_rules/#cat-cloud-siem
+[26]: /ja/security/detection_rules/

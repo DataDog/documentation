@@ -123,14 +123,14 @@ To customize your team, see [Team Management][3].
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: https://app.datadoghq.com/teams
-[3]: /account_management/teams/manage/
-[4]: /account_management/saml/mapping/#map-saml-attributes-to-teams
-[5]: /dashboards/#dashboard-details
-[6]: /service_management/incident_management/incident_details#overview-section
-[7]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[8]: /infrastructure/resource_catalog/
-[9]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
-[10]: /service_management/service_level_objectives/#slo-tags
+[3]: /ja/account_management/teams/manage/
+[4]: /ja/account_management/saml/mapping/#map-saml-attributes-to-teams
+[5]: /ja/dashboards/#dashboard-details
+[6]: /ja/service_management/incident_management/incident_details#overview-section
+[7]: /ja/monitors/configuration/?tab=thresholdalert#add-metadata
+[8]: /ja/infrastructure/resource_catalog/
+[9]: /ja/tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[10]: /ja/service_management/service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services
 [13]: https://app.datadoghq.com/incidents

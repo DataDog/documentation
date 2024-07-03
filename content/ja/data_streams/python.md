@@ -1,12 +1,12 @@
 ---
-title: Setup Data Streams Monitoring for Python
 further_reading:
-    - link: /integrations/kafka/
-      tag: Documentation
-      text: Kafka Integration
-    - link: /tracing/service_catalog/
-      tag: Documentation
-      text: Service Catalog
+- link: /integrations/kafka/
+  tag: Documentation
+  text: Kafka Integration
+- link: /tracing/service_catalog/
+  tag: Documentation
+  text: Service Catalog
+title: Setup Data Streams Monitoring for Python
 ---
 
 {{< site-region region="ap1" >}}
@@ -45,8 +45,8 @@ There are no message attributes in Kinesis to propagate context and track a mess
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: /tracing/trace_collection/dd_libraries/python
+[1]: /ja/agent
+[2]: /ja/tracing/trace_collection/dd_libraries/python
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [5]: https://pypi.org/project/kombu/

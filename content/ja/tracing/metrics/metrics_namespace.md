@@ -1,27 +1,28 @@
 ---
-title: Trace Metrics
-kind: documentation
-further_reading:
-    - link: tracing/trace_collection/
-      tag: Documentation
-      text: Learn how to setup APM tracing with your application
-    - link: tracing/service_catalog/
-      tag: Documentation
-      text: Discover and catalog the services reporting to Datadog
-    - link: tracing/services/service_page
-      tag: Documentation
-      text: Learn more about services in Datadog
-    - link: tracing/services/resource_page
-      tag: Documentation
-      text: Dive into your resource performance and traces
-    - link: tracing/trace_explorer/trace_view/
-      tag: Documentation
-      text: Understand how to read a Datadog Trace
-aliases:
-    - /tracing/getting_further/metrics_namespace
-    - /tracing/guide/metrics_namespace
 algolia:
-  tags: [trace metrics]
+  tags:
+  - trace metrics
+aliases:
+- /ja/tracing/getting_further/metrics_namespace
+- /ja/tracing/guide/metrics_namespace
+further_reading:
+- link: tracing/trace_collection/
+  tag: Documentation
+  text: Learn how to setup APM tracing with your application
+- link: tracing/service_catalog/
+  tag: Documentation
+  text: Discover and catalog the services reporting to Datadog
+- link: tracing/services/service_page
+  tag: Documentation
+  text: Learn more about services in Datadog
+- link: tracing/services/resource_page
+  tag: Documentation
+  text: Dive into your resource performance and traces
+- link: tracing/trace_explorer/trace_view/
+  tag: Documentation
+  text: Understand how to read a Datadog Trace
+kind: documentation
+title: Trace Metrics
 ---
 
 ## Overview
@@ -124,13 +125,13 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
-[2]: /tracing/trace_pipeline/ingestion_mechanisms
-[3]: /tracing/glossary/#trace-metrics
-[4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /metrics/types/?tab=count#metric-types
-[6]: /metrics/types/?tab=distribution#metric-types
-[7]: /metrics/types/?tab=gauge#metric-types
-[8]: /tracing/service_catalog/#services-types
-[9]: /tracing/glossary/#services
-[10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[1]: /ja/tracing/trace_collection/
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms
+[3]: /ja/tracing/glossary/#trace-metrics
+[4]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[5]: /ja/metrics/types/?tab=count#metric-types
+[6]: /ja/metrics/types/?tab=distribution#metric-types
+[7]: /ja/metrics/types/?tab=gauge#metric-types
+[8]: /ja/tracing/service_catalog/#services-types
+[9]: /ja/tracing/glossary/#services
+[10]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

@@ -1,9 +1,9 @@
 ---
-title: Enable AWS X-Ray Tracing
-kind: documentation
-description: 'Trace your Lambda functions with AWS X-Ray'
 aliases:
-    - /tracing/serverless_functions/enable_aws_xray/
+- /ja/tracing/serverless_functions/enable_aws_xray/
+description: Trace your Lambda functions with AWS X-Ray
+kind: documentation
+title: Enable AWS X-Ray Tracing
 ---
 ## Enable AWS X-Ray
 
@@ -167,9 +167,9 @@ See:
 
 {{< /programming-lang-wrapper >}}
 
-[1]: /integrations/amazon_web_services/#setup
+[1]: /ja/integrations/amazon_web_services/#setup
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
 [3]: https://github.com/DataDog/serverless-plugin-datadog
-[4]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
 [5]: https://www.datadoghq.com/blog/serverless-framework-plugin
 [6]: https://console.aws.amazon.com/apigateway/

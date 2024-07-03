@@ -1,12 +1,12 @@
 ---
-title: Security Guides
-private: true
-disable_toc: true
 cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: Security Guides
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: Security Guides
+disable_toc: true
+private: true
+title: Security Guides
 ---
 
 

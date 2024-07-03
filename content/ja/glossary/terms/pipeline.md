@@ -1,8 +1,8 @@
 ---
-title: pipeline
 core_product:
-  - log management
-  - observability pipelines
+- log management
+- observability pipelines
+title: pipeline
 ---
 1. In Log Management, a pipeline is an ordered set of processors applied to a filtered subset of logs, which happens after the collection of logs but before indexing.
 

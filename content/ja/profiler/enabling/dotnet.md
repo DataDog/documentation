@@ -1,23 +1,23 @@
 ---
-title: Enabling the .NET Profiler
+aliases:
+- /ja/tracing/profiler/enabling/dotnet/
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profile_visualizations
-      tag: Documentation
-      text: Learn more about available profile visualizations
-    - link: profiler/profiler_troubleshooting/dotnet
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
-    - link: "https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/"
-      tag: Blog
-      text: Optimize your .NET application performance with the Datadog Continuous Profiler
-aliases:
-  - /tracing/profiler/enabling/dotnet/
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profile_visualizations
+  tag: Documentation
+  text: Learn more about available profile visualizations
+- link: profiler/profiler_troubleshooting/dotnet
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+- link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
+  tag: Blog
+  text: Optimize your .NET application performance with the Datadog Continuous Profiler
+title: Enabling the .NET Profiler
+type: multi-code-lang
 ---
 
 プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][5]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
@@ -138,8 +138,8 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 .NET Profiler を Web アプリ単位でインストールするには
 1. Install the Azure App Service Datadog APM Extension [for Windows][1] or use the [Linux setup][2] for your webapp.
 
-[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
-[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
+[1]: /ja/serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /ja/serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -190,7 +190,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 3. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
+[2]: https://docs.datadoghq.com/ja/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
@@ -385,8 +385,8 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 
 2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
 
-[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
-[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
+[1]: /ja/serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /ja/serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -431,9 +431,9 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /getting_started/profiler/
-[5]: /tracing/trace_collection/
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
-[14]: /profiler/enabling/supported_versions/
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: /ja/getting_started/profiler/
+[5]: /ja/tracing/trace_collection/
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/

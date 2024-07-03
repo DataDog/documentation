@@ -1,10 +1,10 @@
 ---
-title: Create an Integration Dashboard
 description: Learn how to create an integration dashboard.
 further_reading:
 - link: /dashboards/
   tag: Documentation
   text: Learn about Dashboards
+title: Create an Integration Dashboard
 ---
 ## 概要
 
@@ -37,7 +37,7 @@ Datadog の [**Dashboard List**][12] から、**+ New Dashboard** をクリッ�
 
 このファイルを、インテグレーションの `assets/dashboards` フォルダに保存します。アセットを `manifest.json` ファイルに追加します。インテグレーションのファイル構造とマニフェストファイルの詳細については、[インテグレーションアセットリファレンス][101]を参照してください。
 
-[101]: /developers/integrations/check_references/#manifest-file
+[101]: /ja/developers/integrations/check_references/#manifest-file
 
 {{% /tab %}}
 {{% tab "プログラム" %}}
@@ -59,7 +59,7 @@ ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
 
 [101]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-config
 [102]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-meta-dash-export
-[103]: /developers/integrations/python/
+[103]: /ja/developers/integrations/python/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -224,17 +224,17 @@ ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/
-[2]: /developers/integrations/agent_integration/
-[3]: /dashboards/#new-dashboard
-[4]: /dashboards/widgets/timeseries/
-[5]: /dashboards/widgets/query_value/
-[6]: /dashboards/widgets/table/
-[7]: /dashboards/widgets/
-[8]: /dashboards/template_variables/
-[9]: /dashboards/widgets/timeseries/#metric-aliasing
-[10]: /dashboards/#copy-import-or-export-dashboard-json
-[11]: /developers/integrations/check_references/#manifest-file
+[1]: /ja/dashboards/
+[2]: /ja/developers/integrations/agent_integration/
+[3]: /ja/dashboards/#new-dashboard
+[4]: /ja/dashboards/widgets/timeseries/
+[5]: /ja/dashboards/widgets/query_value/
+[6]: /ja/dashboards/widgets/table/
+[7]: /ja/dashboards/widgets/
+[8]: /ja/dashboards/template_variables/
+[9]: /ja/dashboards/widgets/timeseries/#metric-aliasing
+[10]: /ja/dashboards/#copy-import-or-export-dashboard-json
+[11]: /ja/developers/integrations/check_references/#manifest-file
 [12]: https://app.datadoghq.com/dashboard/lists
 [13]: https://github.com/DataDog/integrations-extras
-[14]: /dashboards/widgets/powerpack/
+[14]: /ja/dashboards/widgets/powerpack/

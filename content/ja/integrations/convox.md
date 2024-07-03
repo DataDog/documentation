@@ -1,65 +1,66 @@
 ---
-"app_id": "convox"
-"app_uuid": "4476973b-6e79-4861-a321-7e24e581873b"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": "metadata.csv"
-      "prefix": "convox."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10006"
-    "source_type_name": "Convox"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Convox"
-  "sales_email": "help@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "cloud"
-- "configuration & deployment"
-- "containers"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/convox/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "convox"
-"integration_id": "convox"
-"integration_title": "Convox"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "convox"
-"public_title": "Convox"
-"short_description": "Convox is an open-source PaaS designed for total privacy and zero upkeep."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Configuration & Deployment"
-  - "Category::Containers"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Convox is an open-source PaaS designed for total privacy and zero upkeep."
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/"
-  "support": "README.md#Support"
-  "title": "Convox"
+app_id: convox
+app_uuid: 4476973b-6e79-4861-a321-7e24e581873b
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: convox.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10006
+    source_type_name: Convox
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Convox
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- cloud
+- configuration & deployment
+- containers
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: convox
+integration_id: convox
+integration_title: Convox
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: convox
+public_title: Convox
+short_description: Convox is an open-source PaaS designed for total privacy and zero
+  upkeep.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Containers
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Convox is an open-source PaaS designed for total privacy and zero upkeep.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/
+  support: README.md#Support
+  title: Convox
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -131,6 +132,5 @@ Convox インテグレーションには、サービスのチェック機能は�
 [2]: https://docs.convox.com/integrations/monitoring/datadog
 [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_cwet.html
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/setting_environment_variables.png
-[5]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog/monitor-aws-ecs-convox-integration/
-

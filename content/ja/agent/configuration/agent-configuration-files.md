@@ -1,14 +1,16 @@
 ---
-title: Agent Configuration Files
-aliases:
-  - /agent/faq/agent-configuration-files
-  - /agent/guide/agent-configuration-files
 algolia:
-  rank: 80
   category: guide
+  rank: 80
   subcategory: Agent Configuration Files
-  tags: [agent config, agent configuration, agent directory]
-
+  tags:
+  - agent config
+  - agent configuration
+  - agent directory
+aliases:
+- /ja/agent/faq/agent-configuration-files
+- /ja/agent/guide/agent-configuration-files
+title: Agent Configuration Files
 ---
 
 ## Agent のメイン構成ファイル
@@ -109,5 +111,5 @@ A special case are YAML files with the suffix `.default`. These files are loaded
 
 JMX Agent チェックには、独自の構成フォルダーに追加の `metrics.yaml` ファイルがあります。これは、Datadog Agent がデフォルトで収集するすべての Bean のリストです。これにより、[Docker ラベルまたは k8s アノテーション][1]によってチェックを構成する際に、すべての Bean を手動でリストする必要がなくなります。
 
-[1]: /agent/kubernetes/integrations/#configuration
+[1]: /ja/agent/kubernetes/integrations/#configuration
 [2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

@@ -1,80 +1,80 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "trek10-coverage-advisor"
-"app_uuid": "2faacd70-a192-4a28-8b36-e55298d7b3b4"
-"assets":
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": trek10.coverage.aws_metric_count
-      "metadata_path": metadata.csv
-      "prefix": trek10.coverage
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10114"
-    "source_type_name": Trek10 AWS Coverage Advisor
-  "monitors":
-    "Trek10 AWS Coverage Advisor - New Unmonited Metric Available": assets/monitors/monitor_new.json
-    "Trek10 AWS Coverage Advisor - New Unmonitored Metric Discovered": assets/monitors/monitor_existing.json
-"author":
-  "homepage": "https://www.trek10.com"
-  "name": Trek10
-  "sales_email": signup-trek10-coverage-advisor@trek10.com
-  "support_email": trek10-coverage-advisor@trek10.com
-  "vendor_id": trek10
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: trek10-coverage-advisor
+app_uuid: 2faacd70-a192-4a28-8b36-e55298d7b3b4
+assets:
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: trek10.coverage.aws_metric_count
+      metadata_path: metadata.csv
+      prefix: trek10.coverage
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10114
+    source_type_name: Trek10 AWS Coverage Advisor
+  monitors:
+    Trek10 AWS Coverage Advisor - New Unmonited Metric Available: assets/monitors/monitor_new.json
+    Trek10 AWS Coverage Advisor - New Unmonitored Metric Discovered: assets/monitors/monitor_existing.json
+author:
+  homepage: https://www.trek10.com
+  name: Trek10
+  sales_email: signup-trek10-coverage-advisor@trek10.com
+  support_email: trek10-coverage-advisor@trek10.com
+  vendor_id: trek10
+categories:
 - marketplace
 - aws
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "trek10_coverage_advisor"
-"integration_id": "trek10-coverage-advisor"
-"integration_title": "Trek10 AWS Coverage Advisor"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "trek10_coverage_advisor"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": coverage-advisor
-  "short_description": Flat fee for Trek10 AWS Coverage Advisor
-  "unit_price": !!int "100"
-"public_title": "Trek10 AWS Coverage Advisor"
-"short_description": "Checks over 120 AWS metrics for coverage gaps"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: trek10_coverage_advisor
+integration_id: trek10-coverage-advisor
+integration_title: Trek10 AWS Coverage Advisor
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: trek10_coverage_advisor
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: coverage-advisor
+  short_description: Flat fee for Trek10 AWS Coverage Advisor
+  unit_price: 100
+public_title: Trek10 AWS Coverage Advisor
+short_description: Checks over 120 AWS metrics for coverage gaps
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Marketplace"
-  - "Category::AWS"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Events"
-  "configuration": "README.md#Setup"
-  "description": Checks over 120 AWS metrics for coverage gaps
-  "media":
-  - "caption": Trek10 Dashboard
-    "image_url": images/1600px-900px_maindashview_trek10_DDG_image.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Trek10 AWS Coverage Advisor
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Category::AWS
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
+  configuration: README.md#Setup
+  description: Checks over 120 AWS metrics for coverage gaps
+  media:
+  - caption: Trek10 Dashboard
+    image_url: images/1600px-900px_maindashview_trek10_DDG_image.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Trek10 AWS Coverage Advisor
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

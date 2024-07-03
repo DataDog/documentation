@@ -1,47 +1,47 @@
 ---
-"app_id": "snmpwalk"
-"app_uuid": "bc37c561-7ac5-4799-a56b-d85347bc9ff1"
-"assets": {}
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Community"
-  "sales_email": "help@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "notifications"
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "snmpwalk"
-"integration_id": "snmpwalk"
-"integration_title": "SNMP walk"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "snmpwalk"
-"public_title": "SNMP walk"
-"short_description": "snmpwalk description."
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Notifications"
-  - "Category::Network"
-  "configuration": "README.md#Setup"
-  "description": "snmpwalk description."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "SNMP walk"
+app_id: snmpwalk
+app_uuid: bc37c561-7ac5-4799-a56b-d85347bc9ff1
+assets: {}
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- notifications
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: snmpwalk
+integration_id: snmpwalk
+integration_title: SNMP walk
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: snmpwalk
+public_title: SNMP walk
+short_description: snmpwalk description.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Notifications
+  - Category::Network
+  configuration: README.md#Setup
+  description: snmpwalk description.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SNMP walk
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -100,12 +100,11 @@ Need help? Contact [Datadog support][9].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[3]: https://docs.datadoghq.com/getting_started/integrations/
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/datadog_checks/snmpwalk/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [8]: https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/assets/service_checks.json
 [9]: http://docs.datadoghq.com/help
-

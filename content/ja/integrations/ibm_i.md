@@ -1,59 +1,61 @@
 ---
-"app_id": "ibm-i"
-"app_uuid": "30045928-4be2-4efd-9a08-160e904494a1"
-"assets":
-  "dashboards":
-    "IBM i Overview": assets/dashboards/ibm_i_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": ibm_i.system.cpu_usage
-      "metadata_path": metadata.csv
-      "prefix": ibm_i.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10219"
-    "source_type_name": IBM i
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: ibm-i
+app_uuid: 30045928-4be2-4efd-9a08-160e904494a1
+assets:
+  dashboards:
+    IBM i Overview: assets/dashboards/ibm_i_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ibm_i.system.cpu_usage
+      metadata_path: metadata.csv
+      prefix: ibm_i.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10219
+    source_type_name: IBM i
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - os & system
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ibm_i"
-"integration_id": "ibm-i"
-"integration_title": "IBM i"
-"integration_version": "2.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ibm_i"
-"public_title": "IBM i"
-"short_description": "Remotely monitor IBM i systems including jobs, job queues, ASPs, and more."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ibm_i
+integration_id: ibm-i
+integration_title: IBM i
+integration_version: 2.2.0
+is_public: true
+manifest_version: 2.0.0
+name: ibm_i
+public_title: IBM i
+short_description: Remotely monitor IBM i systems including jobs, job queues, ASPs,
+  and more.
+supported_os:
 - linux
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Category::OS & System"
-  "configuration": "README.md#Setup"
-  "description": Remotely monitor IBM i systems including jobs, job queues, ASPs, and more.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": IBM i
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Remotely monitor IBM i systems including jobs, job queues, ASPs, and
+    more.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM i
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -131,13 +133,12 @@ The IBM i check does not include any events.
 Need help? Contact [Datadog support][10].
 
 [1]: https://www.ibm.com/it-infrastructure/power/os/ibm-i
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://www.ibm.com/support/pages/ibm-i-access-client-solutions
 [5]: https://github.com/DataDog/integrations-core/blob/master/ibm_i/datadog_checks/ibm_i/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/ibm_i/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/ibm_i/datadog_checks/ibm_i/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

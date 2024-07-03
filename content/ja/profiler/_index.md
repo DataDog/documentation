@@ -1,42 +1,42 @@
 ---
-title: Continuous Profiler
 aliases:
-    - /tracing/profiling/
-    - /tracing/profiler/
-further_reading:
-    - link: /profiler/enabling
-      tag: Documentation
-      text: Enable continuous profiler for your application
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Continuous Profiler
-    - link: profiler/search_profiles
-      tag: Documentation
-      text: Learn more about available profile types
-    - link: /developers/guide/data-collection-resolution-retention/
-      tag: Documentation
-      text: Data collection, resolution, and retention
-    - link: "https://www.datadoghq.com/blog/source-code-preview/"
-      tag: Blog
-      text: Focus on code that matters with source code previews in Continuous Profiler      
-    - link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
-      tag: Blog
-      text: Datadog に常時接続型の本番環境プロファイリングが登場
-    - link: "https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/"
-      tag: Blog
-      text: 継続的な脆弱性分析のための Datadog GitHub アクション
-    - link: "https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/"
-      tag: Blog
-      text: Datadog プロファイル比較を使用してコードを比較および最適化します。
-    - link: "https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/"
-      tag: Blog
-      text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
-    - link: "https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/"
-      tag: ブログ
-      text: Datadog Continuous Profiler で Ruby のコードパフォーマンスを分析
+- /ja/tracing/profiling/
+- /ja/tracing/profiler/
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+further_reading:
+- link: /profiler/enabling
+  tag: Documentation
+  text: Enable continuous profiler for your application
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Continuous Profiler
+- link: profiler/search_profiles
+  tag: Documentation
+  text: Learn more about available profile types
+- link: /developers/guide/data-collection-resolution-retention/
+  tag: Documentation
+  text: Data collection, resolution, and retention
+- link: https://www.datadoghq.com/blog/source-code-preview/
+  tag: Blog
+  text: Focus on code that matters with source code previews in Continuous Profiler
+- link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
+  tag: Blog
+  text: Datadog に常時接続型の本番環境プロファイリングが登場
+- link: https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/
+  tag: Blog
+  text: 継続的な脆弱性分析のための Datadog GitHub アクション
+- link: https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/
+  tag: Blog
+  text: Datadog プロファイル比較を使用してコードを比較および最適化します。
+- link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
+  tag: Blog
+  text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
+- link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
+  tag: ブログ
+  text: Datadog Continuous Profiler で Ruby のコードパフォーマンスを分析
+title: Continuous Profiler
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
@@ -103,9 +103,9 @@ Continuous Profiler は、JDK Flight Recorder などの技術を活用し、す�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/profiler/
-[2]: /profiler/search_profiles
-[3]: /tracing/
-[4]: /profiler/connect_traces_and_profiles/
-[5]: /profiler/compare_profiles/
-[6]: /profiler/profile_types/
+[1]: /ja/getting_started/profiler/
+[2]: /ja/profiler/search_profiles
+[3]: /ja/tracing/
+[4]: /ja/profiler/connect_traces_and_profiles/
+[5]: /ja/profiler/compare_profiles/
+[6]: /ja/profiler/profile_types/

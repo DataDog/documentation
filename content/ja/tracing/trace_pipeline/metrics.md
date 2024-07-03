@@ -1,11 +1,9 @@
 ---
-title: Usage Metrics
-kind: documentation
 aliases:
-    - /tracing/trace_retention_and_ingestion/usage_metrics/
-    - /tracing/trace_retention/usage_metrics/
-    - /tracing/trace_ingestion/usage_metrics/
-description: "Learn how to monitor your APM usage."
+- /ja/tracing/trace_retention_and_ingestion/usage_metrics/
+- /ja/tracing/trace_retention/usage_metrics/
+- /ja/tracing/trace_ingestion/usage_metrics/
+description: Learn how to monitor your APM usage.
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
@@ -13,6 +11,8 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentation
   text: Trace Retention
+kind: documentation
+title: Usage Metrics
 ---
 
 ## Overview
@@ -81,11 +81,11 @@ For each ingestion reason, you can find out which environments and services are 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_pipeline/ingestion_controls
-[2]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[1]: /ja/tracing/trace_pipeline/ingestion_controls
+[2]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
-[4]: /account_management/billing/apm_tracing_profiler/
-[5]: /tracing/trace_pipeline/ingestion_mechanisms/
+[4]: /ja/account_management/billing/apm_tracing_profiler/
+[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [6]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[7]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [8]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

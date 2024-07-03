@@ -1,69 +1,69 @@
 ---
-"app_id": "voltdb"
-"app_uuid": "4ea56824-28da-4beb-8937-c45ef32fdb7f"
-"assets":
-  "dashboards":
-    "VoltDB - Overview": assets/dashboards/voltdb_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": voltdb.cpu.percent_used
-      "metadata_path": metadata.csv
-      "prefix": voltdb.
-    "process_signatures":
+app_id: voltdb
+app_uuid: 4ea56824-28da-4beb-8937-c45ef32fdb7f
+assets:
+  dashboards:
+    VoltDB - Overview: assets/dashboards/voltdb_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: voltdb.cpu.percent_used
+      metadata_path: metadata.csv
+      prefix: voltdb.
+    process_signatures:
     - voltdb
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10149"
-    "source_type_name": VoltDB
-  "monitors":
-    "CPU load": assets/monitors/cpu_load.json
-  "saved_views":
-    "voltdb_processes": assets/saved_views/voltdb_processes.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10149
+    source_type_name: VoltDB
+  monitors:
+    CPU load: assets/monitors/cpu_load.json
+  saved_views:
+    voltdb_processes: assets/saved_views/voltdb_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "voltdb"
-"integration_id": "voltdb"
-"integration_title": "VoltDB"
-"integration_version": "3.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "voltdb"
-"public_title": "VoltDB"
-"short_description": "Collect status, performance and other metrics from a VoltDB cluster."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: voltdb
+integration_id: voltdb
+integration_title: VoltDB
+integration_version: 3.2.1
+is_public: true
+manifest_version: 2.0.0
+name: voltdb
+public_title: VoltDB
+short_description: Collect status, performance and other metrics from a VoltDB cluster.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Collect status, performance and other metrics from a VoltDB cluster.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": VoltDB
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Collect status, performance and other metrics from a VoltDB cluster.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: VoltDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -197,14 +197,13 @@ VoltDB チェックは [Datadog Agent][3] パッケージに含まれていま�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://voltdb.com
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/voltdb/datadog_checks/voltdb/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.voltdb.com/UsingVoltDB/SecuritySSL.php
-[7]: https://docs.datadoghq.com/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/voltdb/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/voltdb/assets/service_checks.json
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

@@ -1,5 +1,5 @@
 ---
-title: "Image Component"
+title: Image Component
 ---
 
 ## 概要

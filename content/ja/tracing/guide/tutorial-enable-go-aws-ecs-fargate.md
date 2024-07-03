@@ -1,6 +1,4 @@
 ---
-title: Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate
-kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: ドキュメント
@@ -17,48 +15,49 @@ further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
   tag: ドキュメント
   text: Ingestion mechanisms
-- link: "https://github.com/DataDog/dd-trace-Go"
+- link: https://github.com/DataDog/dd-trace-Go
   tag: ソースコード
   text: Tracing library open source code repository
+title: Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate
 ---
 
-## Overview
+## 概要
 
-This tutorial walks you through the steps for enabling tracing on a sample Go application installed in a cluster on AWS Elastic Container Service (ECS) with Fargate. In this scenario, the Datadog Agent is also installed in the cluster.
+このチュートリアルでは、AWS Elastic Container Service (ECS) with Fargate 上のクラスターにインストールされたサンプル Go アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、Datadog Agent もクラスターにインストールされています。
 
-For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, the application and Agent on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1]. Some of those other tutorials, for example, the ones using containers or EKS, step through the differences seen in Datadog between automatic and custom instrumentation. This tutorial skips right to a fully custom instrumented example.
+ホスト上のアプリケーションと Agent、コンテナ内のアプリケーションとホスト上の Agent、クラウドインフラストラクチャー上のアプリケーションと Agent、他の言語で書かれたアプリケーションなど、他のシナリオについては、他の[トレース有効化のチュートリアル][1]を参照してください。例えば、コンテナや EKS を使用したチュートリアルの中には、Datadog で見られる自動インスツルメンテーションとカスタムインスツルメンテーションの違いを説明するものがあります。このチュートリアルでは、完全にカスタムインスツルメンテーションされた例までスキップします。
 
-This tutorial also uses intermediate-level AWS topics, so it requires that you have some familiarity with AWS networking and applications. If you're not as familiar with AWS, and you are trying to learn the basics of Datadog APM setup, use one of the host or container tutorials instead.
+このチュートリアルでは、中級レベルの AWS トピックも使用しているので、AWS のネットワークとアプリケーションにある程度慣れていることが必要です。もしあなたが AWS にそれほど精通しておらず、Datadog APM のセットアップの基本を学ぼうとしているならば、代わりにホストまたはコンテナのチュートリアルのいずれかを使用してください。
 
-See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.
+Go の一般的なトレース設定ドキュメントについては、[Go アプリケーションのトレース][2]を参照してください。
 
-### Prerequisites
+### 前提条件
 
-- A Datadog account and [organization API key][3]
+- Datadog のアカウントと[組織の API キー][3]
 - Git
 - Docker
 - Terraform
 - Amazon ECS
 - an Amazon ECR repository for hosting images
-- An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Configuring the AWS SDK for Go V2][4].
+- `AdministratorAccess` 権限を持つ AWS IAM ユーザー。アクセスキーとシークレットアクセスキーを使用して、ローカルの資格情報ファイルにプロファイルを追加する必要があります。詳しくは、[AWS SDK for Go V2 の構成][4]をご覧ください。
 
-## Install the sample Go application
+## サンプルの Go アプリケーションをインストールする
 
-Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-golang.git][5]. Clone the git repository by running:
+次に、トレースするためのサンプルアプリケーションをインストールします。このチュートリアルのコードサンプルは [github.com/DataDog/apm-tutorial-golang.git][5] で見ることができます。以下を実行することで git リポジトリの複製を行います。
 
 {{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-golang.git
 {{< /code-block >}}
 
-The repository contains a multi-service Go application pre-configured to run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the `notes` and `calendar` service that make up the sample application.
+リポジトリには、Docker コンテナ内で動作するようにあらかじめ構成されたマルチサービスの Go アプリが含まれています。コンテナを作成するための `docker-compose` YAML ファイルは `docker` ディレクトリに配置されています。このチュートリアルでは、サンプルアプリケーションを構成する `notes` および `calendar` サービス用のコンテナをビルドする `service-docker-compose-ECS.yaml` ファイルを使用します。
 
-In addition, this tutorial uses several configuration files in the `terraform/Fargate` directory to create the environment to deploy the sample application to ECS with Fargate.
+また、このチュートリアルでは、`terraform/Fargate` ディレクトリにあるいくつかのコンフィギュレーションファイルを使用して、Fargate でサンプルアプリケーションを ECS にデプロイするための環境を構築しています。
 
-### Initial ECS setup
+### ECS の初期設定
 
 The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and Amazon ECR repository.
 
-Open `terraform/Fargate/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
+`terraform/Fargate/global_constants/variables.tf` を開きます。以下の変数の値を、正しい AWS アカウント情報に置き換えます。
 
 ```tf
 output "aws_profile" {
@@ -77,41 +76,41 @@ output "aws_ecr_repository" {
 }
 ```
 
-Leave the `datadog_api_key` section commented for now. You'll set up Datadog later in the tutorial.
+`datadog_api_key` セクションは、とりあえずコメントにしておきます。Datadog の設定はチュートリアルの後半で行うことになります。
 
-### Build and upload the application images
+### アプリケーションイメージの構築とアップロード
 
-If you're not familiar with Amazon ECR, a registry for container images, it might be helpful to read [Using Amazon ECR with the AWS CLI][6].
+コンテナイメージのレジストリである Amazon ECR に馴染みがない方は、[Amazon ECR を AWS CLI で使う][6]を読むとよいかもしれません。
 
-In the sample project's `/docker` directory, run the following commands:
+サンプルプロジェクトの `/docker` ディレクトリで、以下のコマンドを実行します。
 
-1. Authenticate with ECR by supplying your username and password in this command:
+1. このコマンドでユーザー名とパスワードを入力し、ECR で認証します。
    {{< code-block lang="shell" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>{{< /code-block >}}
 
-2. Build a Docker image for the sample apps, adjusting the platform setting to match yours:
+2. サンプルアプリの Docker イメージを構築し、プラットフォーム設定を合わせます。
    {{< code-block lang="shell" >}}
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build{{< /code-block >}}
 
-3. Tag the containers with the ECR destination:
+3. コンテナに ECR 宛先のタグを付けます。
    {{< code-block lang="shell" >}}
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
 docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-4. Upload the container to the ECR registry:
+4. コンテナを ECR レジストリにアップロードします。
    {{< code-block lang="shell" >}}
 docker push <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-Your application (without tracing enabled) is containerized and available for ECS to pull.
+(トレースを有効にしていない) アプリケーションはコンテナ化され、ECS がプルできるようになります。
 
-### Deploy the application
+### アプリケーションをデプロイする
 
-Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
+アプリケーションを起動し、トレースせずにいくつかのリクエストを送信します。アプリケーションがどのように動作するかを確認した後、トレーシングライブラリと Datadog Agent を使用してインスツルメントを行います。
 
 To start, use a Terraform script to deploy to Amazon ECS:
 
-1. From the `terraform/Fargate/deployment` directory, run the following commands:
+1. `terraform/Fargate/deployment` ディレクトリで、以下のコマンドを実行します。
 
    ```shell
    terraform init
@@ -119,11 +118,11 @@ To start, use a Terraform script to deploy to Amazon ECS:
    terraform state show 'aws_alb.application_load_balancer'
    ```
 
-   **Note**: If the `terraform apply` command returns a CIDR block message, the script to obtain your IP address did not work on your local machine. To fix this, set the value manually in the `terraform/Fargate/deployment/security.tf` file. Inside the `ingress` block of the `load_balancer_security_group`, switch which `cidr_blocks` line is commented out and update the now-uncommented example line with your machine's IP4 address.
+   **注**: `terraform apply` コマンドが CIDR ブロックメッセージを返す場合、IP アドレスを取得するスクリプトはローカルマシンでは動作しませんでした。これを解決するには、`terraform/Fargate/deployment/security.tf` ファイルで値を手動で設定します。`load_balancer_security_group` の `ingress` ブロック内で、どの `cidr_blocks` 行がコメントアウトされているかを切り替え、コメントアウトされていない例の行をマシンの IP4 アドレスで更新してください。
 
-2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app. Wait a few minutes for the instances to start up.
+2. ロードバランサーの DNS 名をメモしておきます。サンプルアプリの API コールでは、そのベースドメインを使用します。インスタンスが起動するまで数分待ちます。
 
-3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
+3. 別のターミナルを開いて、アプリを行使するために API リクエストを送信します。ノートアプリケーションは、同じコンテナで実行されているメモリ内 H2 データベースにデータを保存する REST API です。これにいくつかのコマンドを送信します。
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[]`
@@ -146,20 +145,20 @@ To start, use a Terraform script to deploy to Amazon ECS:
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
 
-      This command calls both the `notes` and `calendar` services.
+   このコマンドは `notes` と `calendar` の両方のサービスを呼び出します。
 
-4. After you've seen the application running, run the following command to stop it and clean up the AWS resources so that you can enable tracing:
+4. アプリケーションの実行を確認したら、以下のコマンドを実行してアプリケーションを停止し、AWS リソースをクリーンアップして、トレースを有効にできるようにします。
    {{< code-block lang="shell" >}}
 terraform destroy{{< /code-block >}}
 
 
-## Enable tracing
+## トレースを有効にする
 
-Next, configure the Go application to enable tracing.
+次に、トレースを有効にするために Go アプリケーションを構成します。
 
-To enable tracing support:
+トレースサポートを有効にするには
 
-1. Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
+1. `apm-tutorial-golang/cmd/notes/main.go` で以下のインポートのコメントを解除してください。
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
      sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
@@ -168,7 +167,7 @@ To enable tracing support:
      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
    {{< /code-block >}}
 
-1. In the `main()` function, uncomment the following lines:
+1. `main()` 関数で、以下の行のコメントを解除します。
 
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    tracer.Start()
@@ -182,7 +181,7 @@ To enable tracing support:
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
 
-1. In `setupDB()`, uncomment the following lines:
+1. `setupDB()` で、以下の行のコメントを解除します。
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
    db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
@@ -190,11 +189,11 @@ To enable tracing support:
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
    db, err := sql.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
-1. The steps above enabled automatic tracing with fully supported libraries. In cases where code doesn't fall under a supported library, you can create spans manually.
+1. 上記の手順で、完全にサポートされているライブラリでの自動トレーシングが可能になりました。コードがサポートされているライブラリに該当しない場合、スパンを手動で作成することができます。
 
-   Open `notes/notesController.go`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
+   `notes/notesController.go` を開きます。このサンプルには、コードにカスタムトレースを設定するさまざまな方法を示す、コメントアウトされたコードがすでに含まれています。
 
-1. The `makeSpanMiddleware` function in `notes/notesController.go` generates middleware that wraps a request in a span with the supplied name. Uncomment the following lines:
+1. `notes/notesController.go` の `makeSpanMiddleware` 関数は、リクエストを指定された名前のスパンでラップするミドルウェアを生成します。以下の行のコメントを解除します。
 
    {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
    r.Get("/notes", nr.GetAllNotes)                // GET /notes
@@ -210,12 +209,12 @@ To enable tracing support:
    r.Put("/notes/{noteID}", makeSpanMiddleware("UpdateNote", nr.UpdateNoteByID))    // PUT /notes/123
    r.Delete("/notes/{noteID}", makeSpanMiddleware("DeleteNote", nr.DeleteNoteByID)) // DELETE /notes/123{{< /code-block >}}
 
-   Also remove the comment around the following import:
+   また、以下のインポート周りのコメントも削除してください。
 
    {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"{{< /code-block >}}
 
-1. The `doLongRunningProcess` function creates child spans from a parent context. Remove the comments to enable it:
+1. `doLongRunningProcess` 関数は、親コンテキストから子スパンを作成します。コメントを削除して有効にします。
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
    func doLongRunningProcess(ctx context.Context) {
     childSpan, ctx := tracer.StartSpanFromContext(ctx, "traceMethod1")
@@ -227,7 +226,7 @@ To enable tracing support:
     privateMethod1(ctx)
   }{{< /code-block >}}
 
-1. The `privateMethod1` function demonstrates creating a completely separate service from a context. Remove the comments to enable it:
+1. `privateMethod1` 関数は、コンテキストから完全に独立したサービスを作成することを示します。コメントを削除して有効にします。
 
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
 func privateMethod1(ctx context.Context) {
@@ -243,15 +242,15 @@ func privateMethod1(ctx context.Context) {
 }
 {{< /code-block >}}
 
-   For more information on custom tracing, see [Go Custom Instrumentation][7].
+   カスタムトレースの詳細については、[Go カスタムインスツルメンテーション][7]を参照してください。
 
-1. Open `terraform/Fargate/deployment/main.tf`. The sample app already has the base configurations necessary to run the Datadog Agent on ECS Fargate and collect traces: the API key (which you configure in the next step), enabling ECS Fargate, and enabling APM. The definition is provided in both the `notes` task and the `calendar` task.
+1. `terraform/Fargate/deployment/main.tf` を開きます。サンプルアプリには ECS Fargate 上で Datadog Agent を実行しトレースを収集するために必要な基本構成が既にあります。つまり、ECS Fargate を有効にし APM を有効にする API キー (次のステップで構成する) です。この定義は、`notes` タスクと `calendar` タスクの両方で提供されています。
 
-1. Provide the API key variable with a value. Open `terraform/Fargate/global_constants/variables.tf`, uncomment the `output "datadog_api_key"` section, and provide your organization's Datadog API key.
+1. API キー変数に値を指定します。`terraform/Fargate/global_constants/variables.tf` を開き、`output "datadog_api_key"` セクションのコメントを解除し、組織の Datadog API キーを提供します。
 
-1. [Universal Service Tags][8] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed on ECS, these environment variables are set within the task definition for the containers.
+1. 異なるバージョンやデプロイ環境間でトレースされたサービスを識別する[統合サービスタグ][8]により、Datadog 内で相関が取れるようになり、検索やフィルターに利用できるようになります。統合サービスタグ付けに使用する環境変数は、`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の 3 つです。ECS 上にデプロイされたアプリケーションの場合、これらの環境変数はコンテナのタスク定義内で設定されます。
 
-   For this tutorial, the `/terraform/Fargate/deployment/main.tf` file already has these environment variables defined for the notes and calendar applications. For example, for `notes`:
+   このチュートリアルでは、`/terraform/Fargate/deployment/main.tf` ファイルに、ノートとカレンダーアプリケーションのためのこれらの環境変数がすでに定義されています。例えば `notes` の場合:
 
    ```yaml
    {
@@ -295,7 +294,7 @@ func privateMethod1(ctx context.Context) {
 
     ...
    ```
-   And for `calendar`:
+   そして `calendar` の場合:
 
    ```yaml
    ...
@@ -325,11 +324,11 @@ func privateMethod1(ctx context.Context) {
     ...
    ```
 
-   You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set. This allows you also to get Docker metrics once your application is running.
+   また、同じユニバーサルサービスタグの `service`、`env`、`version` の値に対する Docker ラベルが設定されていることがわかります。これにより、アプリケーションを起動したら Docker メトリクスを取得することもできます。
 
-### Rebuild and upload the application image
+### アプリケーションイメージの再構築とアップロード
 
-Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-images):
+[前回と同じ手順](#build-and-upload-the-application-images)でトレースを有効にしてイメージを再構築します。
 
 {{< code-block lang="shell" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
@@ -339,11 +338,11 @@ docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar
 docker push <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-Your multi-service application with tracing enabled is containerized and available for ECS to pull.
+トレースを有効にしたマルチサービスアプリケーションはコンテナ化され、ECS がプルできるようになります。
 
-## Launch the app to see traces
+## トレースを見るためにアプリを起動する
 
-Redeploy the application and exercise the API:
+アプリケーションを再デプロイし、API を実行します。
 
 1. Redeploy the application to Amazon ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/deployment` directory, run the following commands:
 
@@ -353,9 +352,9 @@ Redeploy the application and exercise the API:
    terraform state show 'aws_alb.application_load_balancer'
    ```
 
-2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app.
+2. ロードバランサーの DNS 名をメモしておきます。サンプルアプリの API コールでは、そのベースドメインを使用します。
 
-3. Wait a few minutes for the instances to start up. Wait a few minutes to ensure the containers for the applications are ready. Run some curl commands to exercise the instrumented app:
+3. インスタンスが起動するまで数分待ちます。アプリケーション用のコンテナが準備できたことを確認するため、数分間待ちます。いくつかの curl コマンドを実行して、インスツルメンテーションされたアプリを実行します。
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[]`
@@ -377,63 +376,63 @@ Redeploy the application and exercise the API:
 
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
-   : This command calls both the `notes` and `calendar` services.
+   : このコマンドは `notes` と `calendar` の両方のサービスを呼び出します。
 
-4. Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][9]. The Traces list shows something like this:
+4. しばらく待って、Datadog の UI を見てみてください。[**APM > Traces**][9] に移動します。Traces リストには、次のように表示されます。
    {{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
-   There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
+   データベース (`db`) と `notes` アプリのエントリがあります。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 
-If you don't see traces, clear any filter in the **Traces** Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+もし、トレースが表示されない場合は、**Traces** Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
 
-### Examine a trace
+### トレースの検証
 
-On the Traces page, click on a `POST /notes` trace, to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
+Traces ページで、`POST /notes` トレースをクリックすると、各スパンにかかった時間や、あるスパンが完了する前に他のスパンが発生したことを示すフレームグラフが表示されます。グラフの上部にあるバーは、前の画面で選択したスパンです (この場合、ノートアプリケーションへの最初のエントリポイントです)。
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
+バーの幅は、それが完了するまでにかかった時間を示します。低い深さのバーは、高い深さのバーの寿命の間に完了するスパンを表します。
 
-The flame graph for a `POST` trace looks something like this:
+`POST` トレースのフレームグラフは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-go-host-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-go-host-post-flame.png" alt="POST トレースのフレームグラフ。" style="width:100%;" >}}
 
-A `GET /notes` trace looks something like this:
+`GET /notes` トレースは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-go-host-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-go-host-get-flame.png" alt="GET トレースのフレームグラフ。" style="width:100%;" >}}
 
-For more information, read [Custom Instrumentation][7].
+詳しくは、[カスタムインストルメンテーション][7]をご覧ください。
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. Click the trace for the last API call, the one that added a date to the note, to see a distributed trace between the two services:
+単一のアプリケーションをトレースすることは素晴らしいスタートです。しかし、トレースの本当の価値は、リクエストがサービスを通じてどのように流れているかを見ることです。これを_分散型トレーシング_と呼びます。最後の API コール (ノートに日付を追加したコール) のトレースをクリックすると、2 つのサービス間の分散型トレースを見ることができます。
 
-{{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
 
-This flame graph combines interactions from multiple applications:
-- The first span is a POST request sent by the user and handled by the `chi` router through the supported `go-chi` library.
-- The second span is a `createNote` function that was manually traced by the `makeSpanMiddleware` function. The function created a span from the context of the HTTP request.
-- The next span is the request sent by the notes application using the supported `http` library and the client initialized in the `main.go` file. This GET request is sent to the calendar application. The calendar application spans appear in blue because they are separate service.
-- Inside the calendar application, a `go-chi` router handles the GET request and the `GetDate` function is manually traced with its own span under the GET request.
-- Finally, the purple `db` call is its own service from the supported `sql` library. It appears at the same level as the `GET /Calendar` request because they are both called by the parent span `CreateNote`.
+複数のアプリケーションからのインタラクションを組み合わせたフレームグラフです。
+- 最初のスパンは、ユーザーが送信した POST リクエストで、サポートされている `go-chi` ライブラリを通じて `chi` ルーターが処理します。
+- 2 つ目のスパンは、`makeSpanMiddleware` 関数によって手動でトレースされた `createNote` 関数です。この関数は、HTTP リクエストのコンテキストからスパンを作成します。
+- 次のスパンは、サポートされている `http` ライブラリと `main.go` ファイルで初期化されたクライアントを使用して、ノートアプリケーションから送信されたリクエストです。この GET リクエストは、カレンダーアプリケーションに送信されます。カレンダーアプリケーションのスパンは、別のサービスであるため、青色で表示されます。
+- カレンダーアプリケーションの内部では、`go-chi` ルーターが GET リクエストを処理し、`GetDate` 関数は GET リクエストの下にある独自のスパンで手動でトレースされます。
+- 最後に、紫の `db` 呼び出しは、サポートされている `sql` ライブラリからの独自のサービスです。`GET /Calendar` リクエストと同じレベルに表示されますが、これはどちらも親スパンの `CreateNote` から呼び出されるからです。
 
-When you're done exploring, clean up all resources and delete the deployments:
+確認が終わったら、すべてのリソースをクリーンアップし、デプロイを削除してください。
 
 {{< code-block lang="shell" >}}
 terraform destroy
 {{< /code-block >}}
 
-## Troubleshooting
+## トラブルシューティング
 
-If you're not receiving traces as expected, set up debug mode for the Go tracer. Read [Enable debug mode][10] to find out more.
+もし、期待通りのトレースが受信できない場合は、Go トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][10]を読んでください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/#enabling-tracing-tutorials
-[2]: /tracing/trace_collection/dd_libraries/go/
-[3]: /account_management/api-app-keys/
+[1]: /ja/tracing/guide/#enabling-tracing-tutorials
+[2]: /ja/tracing/trace_collection/dd_libraries/go/
+[3]: /ja/account_management/api-app-keys/
 [4]: https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials
 [5]: https://github.com/DataDog/apm-tutorial-golang
 [6]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
-[7]: /tracing/trace_collection/custom_instrumentation/go/
-[8]: /getting_started/tagging/unified_service_tagging/
+[7]: /ja/tracing/trace_collection/custom_instrumentation/go/
+[8]: /ja/getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/apm/traces
-[10]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=go
+[10]: /ja/tracing/troubleshooting/tracer_debug_logs/?code-lang=go

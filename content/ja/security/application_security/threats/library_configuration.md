@@ -1,9 +1,8 @@
 ---
-title: Library Configuration
 aliases:
-  - /security_platform/application_security/setup_and_configure
-  - /security/application_security/setup_and_configure
-  - /security/application_security/threats/setup_and_configure
+- /ja/security_platform/application_security/setup_and_configure
+- /ja/security/application_security/setup_and_configure
+- /ja/security/application_security/threats/setup_and_configure
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -23,6 +22,7 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: How Application Security Management Works in Datadog
+title: Library Configuration
 ---
 
 
@@ -105,13 +105,11 @@ Datadog Agent やライブラリの他のメカニズムで、機密データを
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/add-user-info/
+[1]: /ja/security/application_security/add-user-info/
 [2]: https://github.com/google/re2/wiki/Syntax
-[3]: /tracing/configure_data_security/
+[3]: /ja/tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/configuration/asm/passlist
-[6]: /help/
-[7]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+[6]: /ja/help/
+[7]: /ja/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
 [8]: https://app.datadoghq.com/security/configuration/asm/services-config
-
-

@@ -1,11 +1,10 @@
 ---
-title: SAML Troubleshooting
 description: Troubleshoot SAML issues for your Datadog account
 further_reading:
-- link: "https://www.samltool.com/online_tools.php"
+- link: https://www.samltool.com/online_tools.php
   tag: 外部サイト
   text: Identify your assertions with developer SAML tools
-
+title: SAML Troubleshooting
 ---
 
 ## 概要
@@ -142,7 +141,7 @@ Datadog のサポートに連絡する前に、管理者に連絡してくださ
 
 [1]: https://app.datadoghq.com/organization-settings/login-methods
 [2]: https://app.datadoghq.com/organization-settings/login-methods/saml
-[3]: https://docs.datadoghq.com/account_management/saml/#assertions-and-attributes
+[3]: https://docs.datadoghq.com/ja/account_management/saml/#assertions-and-attributes
 [4]: https://app.datadoghq.com/organization-settings/users
 [5]: https://www.samltool.com/validate_xml.php
 [6]: https://www.samltool.com/saml_tools.php

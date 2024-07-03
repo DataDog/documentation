@@ -1,7 +1,4 @@
 ---
-title: Datadog Costs
-is_beta: true
-private: true
 disable_toc: false
 further_reading:
 - link: /cloud_cost_management/
@@ -22,6 +19,9 @@ further_reading:
 - link: /cloud_cost_management/custom
   tag: ドキュメント
   text: カスタムコストに関する洞察を得る
+is_beta: true
+private: true
+title: Datadog Costs
 ---
 
 {{< site-region region="gov" >}}
@@ -36,7 +36,7 @@ Daily Datadog costs in Cloud Cost Management are in private beta. To request acc
 
 Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3]. 
 
-You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like Cost Summary and Cost Chargebacks on the [**Usage & Cost** page][4].
+You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
 <div class="alert alert-info">Costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a> are based on usage only and do not include historical credits and adjustments.</div>
 
@@ -70,11 +70,13 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/
-[2]: /cloud_cost_management/monitors
-[3]: /cloud_cost_management/saas_costs
+[1]: /ja/cloud_cost_management/
+[2]: /ja/cloud_cost_management/monitors
+[3]: /ja/cloud_cost_management/saas_costs
 [4]: https://app.datadoghq.com/billing/usage
-[5]: /account_management/rbac/
-[6]: /account_management/rbac/permissions
-[7]: /account_management/plan_and_usage/cost_details/
-[8]: /account_management/billing/usage_attribution/
+[5]: /ja/account_management/rbac/
+[6]: /ja/account_management/rbac/permissions
+[7]: /ja/account_management/plan_and_usage/cost_details/
+[8]: /ja/account_management/billing/usage_attribution/
+[9]: /ja/account_management/plan_and_usage/cost_details/#cost-summary
+[10]: /ja/account_management/plan_and_usage/cost_details/#cost-chargebacks

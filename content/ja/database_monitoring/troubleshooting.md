@@ -1,7 +1,6 @@
 ---
-title: Troubleshooting Database Monitoring
 description: Troubleshoot Database Monitoring setup
-
+title: Troubleshooting Database Monitoring
 ---
 
 このページでは、データベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
@@ -63,10 +62,10 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 問題が解決しない場合は、[Datadog サポート][5]までお問い合わせください。
 
 
-[1]: /database_monitoring/#getting-started
-[2]: /database_monitoring/setup_mysql/troubleshooting/
-[3]: /database_monitoring/setup_postgres/troubleshooting/
-[4]: /database_monitoring/setup_sql_server/troubleshooting/
-[5]: /help/
-[7]: /agent/configuration/proxy/?tab=linux
-[8]: /database_monitoring/setup_oracle/troubleshooting/
+[1]: /ja/database_monitoring/#getting-started
+[2]: /ja/database_monitoring/setup_mysql/troubleshooting/
+[3]: /ja/database_monitoring/setup_postgres/troubleshooting/
+[4]: /ja/database_monitoring/setup_sql_server/troubleshooting/
+[5]: /ja/help/
+[7]: /ja/agent/configuration/proxy/?tab=linux
+[8]: /ja/database_monitoring/setup_oracle/troubleshooting/

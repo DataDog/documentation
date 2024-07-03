@@ -1,13 +1,13 @@
 ---
-title: Search Test Batches
-kind: documentation
-description: Examine batches of executed CI jobs and troubleshoot failing test results.
 aliases:
-  - /synthetics/explorer/search
+- /ja/synthetics/explorer/search
+description: Examine batches of executed CI jobs and troubleshoot failing test results.
 further_reading:
 - link: /continuous_testing/explorer
   tag: Documentation
   text: Learn about the Synthetic Monitoring & Testing Results Explorer
+kind: documentation
+title: Search Test Batches
 ---
 
 ## Overview
@@ -84,4 +84,4 @@ For more information about searching for CI batches, see [Search Syntax][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer/
-[2]: /continuous_testing/explorer/search_syntax
+[2]: /ja/continuous_testing/explorer/search_syntax

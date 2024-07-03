@@ -1,56 +1,56 @@
 ---
-"app_id": "reboot-required"
-"app_uuid": "673a1136-68ad-46f4-ba6f-4203df10db6a"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": "metadata.csv"
-      "prefix": "reboot-required."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10209"
-    "source_type_name": "Reboot required"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Community"
-  "sales_email": "support@krugerheavyindustries.com"
-  "support_email": "support@krugerheavyindustries.com"
-"categories":
-- "developer tools"
-- "os & system"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "reboot_required"
-"integration_id": "reboot-required"
-"integration_title": "Reboot Required"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "reboot_required"
-"public_title": "Reboot Required"
-"short_description": "Monitor systems that require a reboot after software update"
-"supported_os":
-- "linux"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::OS & System"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": "Monitor systems that require a reboot after software update"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Reboot Required"
+app_id: reboot-required
+app_uuid: 673a1136-68ad-46f4-ba6f-4203df10db6a
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: reboot-required.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10209
+    source_type_name: Reboot required
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: support@krugerheavyindustries.com
+  support_email: support@krugerheavyindustries.com
+categories:
+- developer tools
+- os & system
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: reboot_required
+integration_id: reboot-required
+integration_title: Reboot Required
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: reboot_required
+public_title: Reboot Required
+short_description: Monitor systems that require a reboot after software update
+supported_os:
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::OS & System
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Monitor systems that require a reboot after software update
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Reboot Required
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -113,12 +113,11 @@ Need help? Contact [Datadog support][9].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[3]: https://docs.datadoghq.com/getting_started/integrations/
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-extras/blob/master/reboot_required/datadog_checks/reboot_required/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [8]: https://github.com/DataDog/integrations-extras/blob/master/reboot_required/assets/service_checks.json
 [9]: http://docs.datadoghq.com/help
-

@@ -1,29 +1,28 @@
 ---
-title: RUM Unity Monitoring Setup
-kind: documentation
-is_beta: true
-private: true
-description: Collect RUM data from your Unity Mobile projects.
 aliases:
-    - /real_user_monitoring/unity/
-    - /real_user_monitoring/unity/setup
+- /ja/real_user_monitoring/unity/
+- /ja/real_user_monitoring/unity/setup
 code_lang: unity
-type: multi-code-lang
 code_lang_weight: 30
+description: Collect RUM data from your Unity Mobile projects.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-unity"
+- link: https://github.com/DataDog/dd-sdk-unity
   tag: ソースコード
   text: Source code for dd-sdk-unity
-- link: "https://github.com/DataDog/unity-package"
+- link: https://github.com/DataDog/unity-package
   tag: ソースコード
   text: Package URL for Unity SDK
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-- link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
   tag: Blog
   text: Monitor Flutter application performance with Datadog Mobile RUM
-
+is_beta: true
+kind: documentation
+private: true
+title: RUM Unity Monitoring Setup
+type: multi-code-lang
 ---
 ## Overview
 
@@ -169,9 +168,9 @@ Datadog 分散型トレーシングを有効にするには、プロジェクト
 `First Party Hosts` ではワイルドカードは使用できませんが、指定されたドメインの任意のサブドメインとマッチします。例えば、api.example.com は staging.api.example.com と prod.api.example.com にはマッチしますが、news.example.com にはマッチしません。
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /account_management/api-app-keys/#client-tokens
+[2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: https://github.com/googlesamples/unity-jar-resolver
 [4]: https://openupm.com/packages/com.google.external-dependency-manager/
 [5]: https://github.com/DataDog/unity-package
 [6]: https://docs.unity3d.com/Manual/gradle-templates.html
-[7]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
+[7]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum

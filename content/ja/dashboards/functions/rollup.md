@@ -1,7 +1,7 @@
 ---
-title: Rollup
 aliases:
-    - /graphing/functions/rollup/
+- /ja/graphing/functions/rollup/
+title: Rollup
 ---
 
 すべてのメトリクスクエリは本質的に集計されます。しかし、クエリの最後に `.rollup()` 関数を追加することで、デフォルトをオーバーライドしたカスタムの[時間集計][1]を行うことができます。この関数を使用すると、次のような定義を行うことができます。
@@ -90,8 +90,8 @@ You can customize how your metrics data is bucketed over time when using the `.r
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /dashboards/functions/#add-a-function
-[2]: /metrics/faq/rollup-for-distributions-with-percentiles/
+[1]: /ja/dashboards/functions/#add-a-function
+[2]: /ja/metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[4]: /metrics/custom_metrics/type_modifiers/
-[5]: /monitors/types/metric/
+[4]: /ja/metrics/custom_metrics/type_modifiers/
+[5]: /ja/monitors/types/metric/

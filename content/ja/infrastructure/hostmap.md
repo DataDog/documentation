@@ -1,10 +1,8 @@
 ---
-title: Host and Container Maps
-kind: documentation
 aliases:
-  - /graphing/infrastructure/hostmap/
-  - /infrastructure/containermap/
-  - /guides/hostmap
+- /ja/graphing/infrastructure/hostmap/
+- /ja/infrastructure/containermap/
+- /ja/guides/hostmap
 further_reading:
 - link: /infrastructure/livecontainers/
   tag: ドキュメント
@@ -12,6 +10,8 @@ further_reading:
 - link: /infrastructure/process/
   tag: ドキュメント
   text: Understand what is going on at any level of your system
+kind: documentation
+title: Host and Container Maps
 ---
 
 ## Overview
@@ -130,10 +130,10 @@ In the screenshot below, some hosts have much less usable memory than others, de
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/
-[2]: /integrations/
-[3]: /infrastructure/hostmap/
+[1]: /ja/getting_started/tagging/
+[2]: /ja/integrations/
+[3]: /ja/infrastructure/hostmap/
 [4]: https://app.datadoghq.com/infrastructure/map?node_type=host
 [5]: https://app.datadoghq.com/infrastructure/map?node_type=container
-[6]: /agent/
-[7]: /agent/docker/
+[6]: /ja/agent/
+[7]: /ja/agent/docker/

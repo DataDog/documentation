@@ -1,21 +1,21 @@
 ---
-title: Increase Process Retention
-kind: documentation
 aliases:
-    - /infrastructure/process/generate_process_metrics/
-    - /processes/processing/process_to_metrics/
-    - /infrastructure/generate_process_metrics/
+- /ja/infrastructure/process/generate_process_metrics/
+- /ja/processes/processing/process_to_metrics/
+- /ja/infrastructure/generate_process_metrics/
 description: Generate metrics from processes.
 further_reading:
-    - link: metrics/distributions/
-      tag: Documentation
-      text: Distribution Metrics
-    - link: monitors/monitor_types/metric/?tab=threshold
-      tag: Documentation
-      text: Create a Metrics monitor
-    - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
-      tag: Blog
-      text: Practical tips for rightsizing your Kubernetes workloads
+- link: metrics/distributions/
+  tag: Documentation
+  text: Distribution Metrics
+- link: monitors/monitor_types/metric/?tab=threshold
+  tag: Documentation
+  text: Create a Metrics monitor
+- link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
+  tag: Blog
+  text: Practical tips for rightsizing your Kubernetes workloads
+kind: documentation
+title: Increase Process Retention
 ---
 
 ## Overview
@@ -77,5 +77,5 @@ Once created, you can use process distribution aggregate and percentile metrics 
 
 [1]: https://app.datadoghq.com/process?view=metrics
 [2]: https://app.datadoghq.com/process
-[3]: /metrics/custom_metrics/
-[4]: /dashboards/correlations/
+[3]: /ja/metrics/custom_metrics/
+[4]: /ja/dashboards/correlations/

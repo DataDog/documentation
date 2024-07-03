@@ -1,7 +1,7 @@
 ---
-title: Enabling ASM using Single Step Instrumentation 
-kind: documentation
 disable_toc: true
+kind: documentation
+title: Enabling ASM using Single Step Instrumentation
 ---
 
 <div class="alert alert-info">Enabling ASM using single step instrumentation is in beta.</div>
@@ -18,4 +18,4 @@ The following documentation provides instructions to enable ASM with single step
      {{< nextlink href="/security/application_security/enabling/single_step/code_security" >}}Enabling ASM for Code Security using using single step instrumentation{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]:/security/application_security/enabling/tracing_libraries/
+[1]:/ja/security/application_security/enabling/tracing_libraries/

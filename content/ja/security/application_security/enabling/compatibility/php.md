@@ -1,9 +1,9 @@
 ---
-title: PHP Compatibility Requirements
-kind: documentation
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 40
+kind: documentation
+title: PHP Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Application Security capabilities support
@@ -151,5 +151,5 @@ The following frameworks aren't directly instrumented by Application Security, b
 | Symfony   | 3.3                       |
 | Wordpress | 4.8                       |
 
-[1]: /tracing/trace_collection/compatibility/php/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[1]: /ja/tracing/trace_collection/compatibility/php/
+[2]: /ja/agent/remote_config/#enabling-remote-configuration

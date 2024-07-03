@@ -1,8 +1,7 @@
 ---
-title: DBM Setup Architectures
 description: Learn about Database Monitoring and get started
 further_reading:
-- link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
+- link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
   tag: Blog
   text: Monitor and visualize database performance
 - link: /database_monitoring/data_collected/
@@ -11,7 +10,7 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: Documentation
   text: Troubleshooting
-
+title: DBM Setup Architectures
 ---
 
 ## 概要
@@ -83,20 +82,20 @@ Aurora データベースのモニタリングでは、Agent はプロキシ、�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage/
-[2]: /integrations/postgres/?tab=host#data-collected
-[3]: /integrations/mysql/?tab=host#data-collected
-[4]: /integrations/sqlserver/?tabs=host#data-collected
-[5]: /database_monitoring/setup_postgres/selfhosted/
-[6]: /database_monitoring/setup_mysql/selfhosted/
-[7]: /database_monitoring/setup_sql_server/selfhosted/
-[8]: /integrations/amazon_rds/
-[9]: /agent/amazon_ecs/
-[10]: /agent/docker/
-[11]: /agent/kubernetes/integrations/
-[12]: /database_monitoring/setup_postgres/rds/?tab=kubernetes
-[13]: /agent/cluster_agent/clusterchecks/
+[1]: /ja/agent/basic_agent_usage/
+[2]: /ja/integrations/postgres/?tab=host#data-collected
+[3]: /ja/integrations/mysql/?tab=host#data-collected
+[4]: /ja/integrations/sqlserver/?tabs=host#data-collected
+[5]: /ja/database_monitoring/setup_postgres/selfhosted/
+[6]: /ja/database_monitoring/setup_mysql/selfhosted/
+[7]: /ja/database_monitoring/setup_sql_server/selfhosted/
+[8]: /ja/integrations/amazon_rds/
+[9]: /ja/agent/amazon_ecs/
+[10]: /ja/agent/docker/
+[11]: /ja/agent/kubernetes/integrations/
+[12]: /ja/database_monitoring/setup_postgres/rds/?tab=kubernetes
+[13]: /ja/agent/cluster_agent/clusterchecks/
 [14]: https://www.datadoghq.com/blog/datadog-cluster-agent/
-[15]: /database_monitoring/setup_postgres/aurora/
-[16]: /database_monitoring/setup_oracle/selfhosted/
-[17]: /integrations/oracle/?tab=linux#data-collected
+[15]: /ja/database_monitoring/setup_postgres/aurora/
+[16]: /ja/database_monitoring/setup_oracle/selfhosted/
+[17]: /ja/integrations/oracle/?tab=linux#data-collected

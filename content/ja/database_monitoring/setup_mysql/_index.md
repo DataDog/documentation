@@ -1,7 +1,7 @@
 ---
-title: Setting up MySQL
 description: Setting up Database Monitoring on a MySQL database
 disable_sidebar: true
+title: Setting up MySQL
 ---
 
 ### サポートされる MySQL バージョン

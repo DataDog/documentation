@@ -1,65 +1,65 @@
 ---
-"app_id": "superwise"
-"app_uuid": "814d45d4-bf11-46c9-98a2-5fab9c997c94"
-"assets":
-  "dashboards":
-    "Superwise": assets/dashboards/superwise.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": superwise.metric.overall.quantity
-      "metadata_path": metadata.csv
-      "prefix": superwise.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10246"
-    "source_type_name": Superwise
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Superwise
-  "sales_email": support@superwise.ai
-  "support_email": support@superwise.ai
-"categories":
+app_id: superwise
+app_uuid: 814d45d4-bf11-46c9-98a2-5fab9c997c94
+assets:
+  dashboards:
+    Superwise: assets/dashboards/superwise.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: superwise.metric.overall.quantity
+      metadata_path: metadata.csv
+      prefix: superwise.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10246
+    source_type_name: Superwise
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Superwise
+  sales_email: support@superwise.ai
+  support_email: support@superwise.ai
+categories:
 - incidents
 - ai/ml
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/superwise/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "superwise"
-"integration_id": "superwise"
-"integration_title": "Superwise"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "superwise"
-"public_title": "Superwise"
-"short_description": "Model observability platform for machine learning models in production"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/superwise/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: superwise
+integration_id: superwise
+integration_title: Superwise
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: superwise
+public_title: Superwise
+short_description: Model observability platform for machine learning models in production
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Incidents"
-  - "Category::AI/ML"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Model observability platform for machine learning models in production
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/superwise-datadog-marketplace/"
-  "support": "README.md#Support"
-  "title": Superwise
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Incidents
+  - Category::AI/ML
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Model observability platform for machine learning models in production
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
+  support: README.md#Support
+  title: Superwise
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -130,4 +130,3 @@ Superwise インテグレーションには、サービスのチェック機能�
 [8]: https://github.com/DataDog/integrations-extras/blob/master/superwise/metadata.csv
 [9]: https://docs.superwise.ai
 [10]: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
-

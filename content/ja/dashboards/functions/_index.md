@@ -1,27 +1,27 @@
 ---
-title: Functions
 aliases:
-  - /examples/
-  - /examples/aws-metrics/
-  - /examples/month_before/
-  - /examples/graphing-functions/
-  - /examples/day_before/
-  - /examples/json-editing/
-  - /examples/nginx-metrics/
-  - /examples/dashboards/
-  - /examples/hour_before/
-  - /examples/os-metrics/
-  - /examples/week_before/
-  - /examples/cassandra-metrics/
-  - /graphing/miscellaneous/functions
-  - /graphing/miscellaneous/
-  - /getting_started/from_the_query_to_the_graph
-  - /graphing/miscellaneous/from_the_query_to_the_graph
-  - /graphing/functions/
+- /ja/examples/
+- /ja/examples/aws-metrics/
+- /ja/examples/month_before/
+- /ja/examples/graphing-functions/
+- /ja/examples/day_before/
+- /ja/examples/json-editing/
+- /ja/examples/nginx-metrics/
+- /ja/examples/dashboards/
+- /ja/examples/hour_before/
+- /ja/examples/os-metrics/
+- /ja/examples/week_before/
+- /ja/examples/cassandra-metrics/
+- /ja/graphing/miscellaneous/functions
+- /ja/graphing/miscellaneous/
+- /ja/getting_started/from_the_query_to_the_graph
+- /ja/graphing/miscellaneous/from_the_query_to_the_graph
+- /ja/graphing/functions/
 further_reading:
-- link: "/metrics/#querying-metrics"
+- link: /metrics/#querying-metrics
   tag: Documentation
   text: Querying metrics
+title: Functions
 ---
 
 ## 概要
@@ -57,6 +57,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/#time-aggregation
-[2]: /metrics/#space-aggregation
-[3]: /metrics/#anatomy-of-a-metric-query
+[1]: /ja/metrics/#time-aggregation
+[2]: /ja/metrics/#space-aggregation
+[3]: /ja/metrics/#anatomy-of-a-metric-query

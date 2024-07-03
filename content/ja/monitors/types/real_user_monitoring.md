@@ -1,8 +1,7 @@
 ---
-title: Real User Monitoring Monitor
 aliases:
-- /monitors/monitor_types/real_user_monitoring
-- /monitors/create/types/real_user_monitoring/
+- /ja/monitors/monitor_types/real_user_monitoring
+- /ja/monitors/create/types/real_user_monitoring/
 further_reading:
 - link: /real_user_monitoring/explorer/
   tag: Documentation
@@ -16,6 +15,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Check your monitor status
+title: Real User Monitoring Monitor
 ---
 
 ## 概要
@@ -98,10 +98,10 @@ For more information about the **Configure notifications and automations** secti
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/
+[1]: /ja/real_user_monitoring/
 [2]: https://app.datadoghq.com/monitors/create/rum
-[3]: /real_user_monitoring/explorer/search/
-[4]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
-[5]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[6]: /monitors/configuration/#advanced-alert-conditions
-[7]: /monitors/notify/
+[3]: /ja/real_user_monitoring/explorer/search/
+[4]: /ja/real_user_monitoring/explorer/?tab=facets#setup-facets-measures
+[5]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-measures
+[6]: /ja/monitors/configuration/#advanced-alert-conditions
+[7]: /ja/monitors/notify/

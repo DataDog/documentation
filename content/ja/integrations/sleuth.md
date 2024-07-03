@@ -1,65 +1,65 @@
 ---
-"app_id": "sleuth"
-"app_uuid": "7923b3ef-2436-4315-bf2e-7631a6975886"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": sleuth.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10118"
-    "source_type_name": Sleuth
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Sleuth
-  "sales_email": support@sleuth.io
-  "support_email": support@sleuth.io
-"categories":
+app_id: sleuth
+app_uuid: 7923b3ef-2436-4315-bf2e-7631a6975886
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: sleuth.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10118
+    source_type_name: Sleuth
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Sleuth
+  sales_email: support@sleuth.io
+  support_email: support@sleuth.io
+categories:
 - configuration & deployment
 - issue tracking
 - orchestration
 - source control
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sleuth"
-"integration_id": "sleuth"
-"integration_title": "Sleuth"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "sleuth"
-"public_title": "Sleuth"
-"short_description": "Sleuth Deployment Tracker"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: sleuth
+integration_id: sleuth
+integration_title: Sleuth
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: sleuth
+public_title: Sleuth
+short_description: Sleuth Deployment Tracker
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Issue Tracking"
-  - "Category::Orchestration"
-  - "Category::Source Control"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Sleuth Deployment Tracker
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Sleuth
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Issue Tracking
+  - Category::Orchestration
+  - Category::Source Control
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Sleuth Deployment Tracker
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Sleuth
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -132,4 +132,3 @@ Need help? Contact the [maintainer][6] of this integration.
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-enabled-metric-pick.png
 [5]: https://help.sleuth.io/dashboard
 [6]: https://github.com/DataDog/integrations-extras/blob/master/sleuth/manifest.json
-

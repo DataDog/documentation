@@ -1,10 +1,10 @@
 ---
-title: Events Side Panel
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Search for your events
+kind: documentation
+title: Events Side Panel
 ---
 
 ## Overview
@@ -38,4 +38,4 @@ RUM collects contextual information by default. You can also add additional cont
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context

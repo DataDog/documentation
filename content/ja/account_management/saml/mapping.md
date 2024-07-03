@@ -1,9 +1,9 @@
 ---
-title: SAML Group Mapping
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
   text: Single sign on with SAML
+title: SAML Group Mapping
 ---
 
 ## 概要
@@ -64,10 +64,10 @@ Datadog を使用すると、アイデンティティプロバイダー (IdP) �
 
 **注:** ロールとは異なり、チームはログインエクスペリエンスに何ら影響を与えません。Datadog は、チームマッピングを純粋にプロビジョニングソースとして使用します。例えば、ユーザーがどのチームにも所属していない場合でも、Datadog にサインインすることができます。
 
-[1]: /account_management/rbac/
-[2]: /account_management/teams/
+[1]: /ja/account_management/rbac/
+[2]: /ja/account_management/teams/
 [3]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm
 [4]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
 [5]: https://www.samltool.com/validate_response.php
-[6]: /account_management/authn_mapping/
-[7]: /account_management/teams/#choose-provisioning-source
+[6]: /ja/account_management/authn_mapping/
+[7]: /ja/account_management/teams/#choose-provisioning-source

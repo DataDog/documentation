@@ -1,61 +1,61 @@
 ---
-"app_id": "jboss-wildfly"
-"app_uuid": "4ad5a2e9-106b-43a2-820a-f146c7effffe"
-"assets":
-  "dashboards":
-    "JBoss WildFly": assets/dashboards/jboss_wildfly.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": jboss.jdbc_connections.count
-      "metadata_path": metadata.csv
-      "prefix": jboss.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10060"
-    "source_type_name": JBoss/WildFly
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: jboss-wildfly
+app_uuid: 4ad5a2e9-106b-43a2-820a-f146c7effffe
+assets:
+  dashboards:
+    JBoss WildFly: assets/dashboards/jboss_wildfly.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: jboss.jdbc_connections.count
+      metadata_path: metadata.csv
+      prefix: jboss.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10060
+    source_type_name: JBoss/WildFly
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "jboss_wildfly"
-"integration_id": "jboss-wildfly"
-"integration_title": "JBoss/WildFly"
-"integration_version": "2.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "jboss_wildfly"
-"public_title": "JBoss/WildFly"
-"short_description": "Gathers various JMX metrics from JBoss and WildFly Applications"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: jboss_wildfly
+integration_id: jboss-wildfly
+integration_title: JBoss/WildFly
+integration_version: 2.2.0
+is_public: true
+manifest_version: 2.0.0
+name: jboss_wildfly
+public_title: JBoss/WildFly
+short_description: Gathers various JMX metrics from JBoss and WildFly Applications
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Gathers various JMX metrics from JBoss and WildFly Applications
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": JBoss/WildFly
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Gathers various JMX metrics from JBoss and WildFly Applications
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JBoss/WildFly
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -121,7 +121,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
 [2]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -141,8 +141,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ---------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "jboss_wildfly", "service": "<サービス名>"}` |
 
-[1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -178,7 +178,7 @@ You can configure the Datadog Agent to collect Java application metrics through 
 [1]: https://developers.redhat.com/products/eap/overview
 [2]: http://wildfly.org
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/integrations/java/
-[6]: https://docs.datadoghq.com/help/
-[7]: https://docs.datadoghq.com/integrations/java
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/integrations/java/
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/integrations/java

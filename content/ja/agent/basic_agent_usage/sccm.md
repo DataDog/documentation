@@ -1,6 +1,5 @@
 ---
-title: SCCM
-description: "SCCM (Systems Center Configuration Manager)"
+description: SCCM (Systems Center Configuration Manager)
 disable_toc: false
 further_reading:
 - link: /logs/
@@ -15,9 +14,10 @@ further_reading:
 - link: /agent/architecture
   tag: Documentation
   text: Find out more about the Agent's architecture
-- link: "/agent/configuration/network#configure-ports"
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: Configure inbound ports
+title: SCCM
 ---
 
 Microsoft SCCM (Systems Center Configuration Manager) is a configuration management solution that comes packaged with Microsoft's Systems Center suite of tools. This page covers installing and configuring the Datadog Agent using SCCM.
@@ -80,7 +80,7 @@ Restart the Agent service to observe your configuration changes:
 
 [1]: https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/manage-content-and-content-infrastructure
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[3]: /agent/basic_agent_usage/windows/?tab=commandline#configuration
+[3]: /ja/agent/basic_agent_usage/windows/?tab=commandline#configuration
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/collections/create-collections#bkmk_create
-[6]: /agent/basic_agent_usage/windows/#agent-commands
+[6]: /ja/agent/basic_agent_usage/windows/#agent-commands

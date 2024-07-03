@@ -1,10 +1,7 @@
 ---
-title: (LEGACY) Sensitive Data Scanner Transform
-disable_toc: false
-private: true
-is_beta: true
 aliases:
-  - /observability_pipelines/guide/sensitive_data_scanner_transform/
+- /ja/observability_pipelines/guide/sensitive_data_scanner_transform/
+disable_toc: false
 further_reading:
 - link: /observability_pipelines/legacy/setup/
   tag: Documentation
@@ -12,6 +9,9 @@ further_reading:
 - link: /observability_pipelines/legacy/working_with_data/
   tag: Documentation
   text: Working with data in Observability Pipelines
+is_beta: true
+private: true
+title: (LEGACY) Sensitive Data Scanner Transform
 ---
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfnNnV823zAgOCowCYuXJE5cDtRqIipKsYcNpaOo1LKpGfppA/viewform" btn_hidden="false" header="Request Access!">}}

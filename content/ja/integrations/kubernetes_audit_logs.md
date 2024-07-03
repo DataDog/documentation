@@ -1,34 +1,34 @@
 ---
-title: Kubernetes Audit Logs
-name: kubernetes_audit_logs
-custom_kind: インテグレーション
-description: 'Track everything that happens inside your Kubernetes clusters'
-short_description: 'Track inside Kubernetes clusters'
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md"]
-categories:
-    - log collection
-    - containers
-    - orchestration
-doc_link: /integrations/kubernetes_audit_logs/
 aliases:
-    - /logs/log_collection/kubernetes_audit_logs
+- /ja/logs/log_collection/kubernetes_audit_logs
+categories:
+- log collection
+- containers
+- orchestration
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
+description: Track everything that happens inside your Kubernetes clusters
+doc_link: /integrations/kubernetes_audit_logs/
+further_reading:
+- link: logs/
+  tag: Documentation
+  text: Log Management
+- link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
+  tag: Blog
+  text: Key Kubernetes audit logs for monitoring cluster security
 has_logo: true
+integration_id: kubernetes-audit-logs
 integration_title: Kubernetes Audit Logs
 is_public: true
+name: kubernetes_audit_logs
 public_title: Datadog-Kubernetes Audit Logs
+short_description: Track inside Kubernetes clusters
 supported_os:
-    - linux
-    - mac_os
-    - windows
-further_reading:
-    - link: logs/
-      tag: Documentation
-      text: Log Management
-    - link: "https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/"
-      tag: Blog
-      text: Key Kubernetes audit logs for monitoring cluster security
-integration_id: "kubernetes-audit-logs"
+- linux
+- mac_os
+- windows
+title: Kubernetes Audit Logs
 ---
 
 ## Overview
@@ -186,9 +186,9 @@ Need help? Contact [Datadog support][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/#installation
+[1]: /ja/agent/kubernetes/#installation
 [2]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
-[4]: /agent/kubernetes/log/
-[5]: /agent/guide/agent-commands/#agent-status-and-information
-[6]: /help/
+[4]: /ja/agent/kubernetes/log/
+[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ja/help/

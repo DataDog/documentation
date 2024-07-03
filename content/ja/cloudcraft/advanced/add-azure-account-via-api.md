@@ -39,6 +39,6 @@ curl \
 アカウントの追加に成功したら、同じコマンドを使用して Cloudcraft に他のアカウントを追加できます。
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/account-management/roles-and-permissions/
+[2]: /ja/cloudcraft/account-management/roles-and-permissions/
 [3]: https://www.cloudcraft.co/pricing
-[4]: /cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
+[4]: /ja/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/

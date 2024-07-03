@@ -1,73 +1,74 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "avio-consulting-datadog-implementation-services"
-"app_uuid": "04beee47-5751-48a8-8714-96e9a5747ef1"
-"assets": {}
-"author":
-  "contact_link": "https://www.avioconsulting.com"
-  "homepage": "https://www.avioconsulting.com"
-  "name": AVIO Consulting
-  "sales_email": sales@avioconsulting.com
-  "support_email": support@avioconsulting.com
-  "vendor_id": avio-consulting
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: avio-consulting-datadog-implementation-services
+app_uuid: 04beee47-5751-48a8-8714-96e9a5747ef1
+assets: {}
+author:
+  contact_link: https://www.avioconsulting.com
+  homepage: https://www.avioconsulting.com
+  name: AVIO Consulting
+  sales_email: sales@avioconsulting.com
+  support_email: support@avioconsulting.com
+  vendor_id: avio-consulting
+categories:
 - モニター
 - log collection
 - tracing
 - configuration & deployment
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "opentelemetry_for_mulesoft_implementation"
-"integration_id": "avio-consulting-datadog-implementation-services"
-"integration_title": "Datadog Implementation Services"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "opentelemetry_for_mulesoft_implementation"
-"pricing":
-- "includes_assets": false
-  "private_offer_only": true
-  "product_id": implementation-services
-  "short_description": Private offer placeholder
-  "unit_price": !!null "null"
-"public_title": "Datadog Implementation Services"
-"short_description": "Datadog Implementation and Metrics, Tracing and Logs for MuleSoft applications"
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Log Collection"
-  - "Category::Tracing"
-  - "Category::Configuration & Deployment"
-  - "Category::Marketplace"
-  - "Offering::Professional Service"
-  "configuration": "README.md#Setup"
-  "description": Datadog Implementation and Metrics, Tracing and Logs for MuleSoft applications
-  "media":
-  - "caption": Application specific dashboards combing metric, trace and log data
-    "image_url": images/Datadog_1_v2.jpg
-    "media_type": image
-  - "caption": Application level OS, JVM and MuleSoft metrics
-    "image_url": images/Datadog_5_v2.jpg
-    "media_type": image
-  - "caption": Dashboard
-    "image_url": images/Datadog_4_v2.jpg
-    "media_type": image
-  - "caption": Dashboard
-    "image_url": images/Datadog_2_v2.jpg
-    "media_type": image
-  - "caption": Dashboard
-    "image_url": images/Datadog_3_v2.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Datadog Implementation Services
-  "uninstallation": "README.md#Uninstallation"
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: opentelemetry_for_mulesoft_implementation
+integration_id: avio-consulting-datadog-implementation-services
+integration_title: Datadog Implementation Services
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: opentelemetry_for_mulesoft_implementation
+pricing:
+- includes_assets: false
+  private_offer_only: true
+  product_id: implementation-services
+  short_description: Private offer placeholder
+  unit_price: null
+public_title: Datadog Implementation Services
+short_description: Datadog Implementation and Metrics, Tracing and Logs for MuleSoft
+  applications
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Log Collection
+  - Category::Tracing
+  - Category::Configuration & Deployment
+  - Category::Marketplace
+  - Offering::Professional Service
+  configuration: README.md#Setup
+  description: Datadog Implementation and Metrics, Tracing and Logs for MuleSoft applications
+  media:
+  - caption: Application specific dashboards combing metric, trace and log data
+    image_url: images/Datadog_1_v2.jpg
+    media_type: image
+  - caption: Application level OS, JVM and MuleSoft metrics
+    image_url: images/Datadog_5_v2.jpg
+    media_type: image
+  - caption: Dashboard
+    image_url: images/Datadog_4_v2.jpg
+    media_type: image
+  - caption: Dashboard
+    image_url: images/Datadog_2_v2.jpg
+    media_type: image
+  - caption: Dashboard
+    image_url: images/Datadog_3_v2.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Datadog Implementation Services
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

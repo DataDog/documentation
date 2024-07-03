@@ -1,38 +1,37 @@
 ---
-title: Setting up Heroku Postgres for Database Monitoring
-kind: guide
-private: true
 further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: Documentation
   text: Datadog Heroku Buildpack
+private: true
+title: Setting up Heroku Postgres for Database Monitoring
 ---
 
-This guide assumes that you have configured the [Datadog Heroku buildpack][1] in your application dynos.
+このガイドでは、アプリケーション dyno に [Datadog Heroku ビルドパック][1]を構成したことを前提に説明します。
 
-[Datadog Database Monitoring][2] allows you to view query metrics and explain plans from all of your databases in a single place. This guide covers how to set up Database Monitoring for a [Heroku Postgres managed database][3].
+[Datadog データベースモニタリング][2]は、すべてのデータベースのクエリメトリクスと実行計画を一箇所で見ることができます。このガイドでは、[Heroku Postgres マネージドデータベース][3]に対するデータベースモニタリングのセットアップ方法を説明します。
 
-*Note*: Only databases in the [Standard and Premium plans][4] publish metrics used by the integration. Not all the features of Database Monitoring are available when used with a Postgres instance in the Hobby plan.
+*注*: [Standard プランと Premium プラン][4]のデータベースのみ、インテグレーションで使用されるメトリクスを公開します。Hobby プランの Postgres インスタンスで使用する場合、データベースモニタリングのすべての機能が利用できるわけではありません。
 
-First, create a `datadog` user in your database:
+まず、データベースに `datadog` ユーザーを作成します。
 
 ```shell
-# Ensure that you are in the root directory of the application
+# アプリケーションのルートディレクトリにいることを確認します
 heroku pg:credentials:create --name datadog
 
-# Attach the new credential to the application
+# 新しい資格情報をアプリケーションにアタッチします
 heroku addons:attach <database-name> --credential datadog
 ```
 
-Attaching the new credential to the application creates a new environment variable in your application with the connection URL. Note that environment variable, as you will use it later.
+新しい資格情報をアプリケーションにアタッチすると、アプリケーションに接続 URL を含む新しい環境変数が作成されます。この環境変数は後で使うことになるので、書き留めてください。
 
-Login to your Postgres database using the default credentials and give the `datadog` credential the right permissions:
+デフォルトの資格情報を使って Postgres データベースにログインし、`datadog` という資格情報に正しい権限を与えます。
 
 ```shell
 heroku pg:psql
 ```
 
-Once in the psql terminal, create the following schema:
+psql のターミナルに入ったら、以下のスキーマを作成します。
 
 ```
 CREATE SCHEMA datadog;
@@ -42,7 +41,7 @@ GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-Create the following function in the database:
+データベースに以下の関数を作成します。
 
 ```
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -67,15 +66,15 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-Finally, we configure the Datadog agent to enable the Postgres check using the new credentials:
+最後に、新しい資格情報を使って Postgres のチェックを有効にするために、Datadog Agent を構成します。
 
 ```shell
-# Ensure that you are in the root directory of your application
-# Create the folder for the integrations configuration in your application code
+# アプリケーションのルートディレクトリにいることを確認
+# アプリケーションコードで、インテグレーションコンフィギュレーションのフォルダーを作成
 mkdir -p datadog/conf.d/
 ```
 
-Create a configuration file called `postgres.yaml` with the following contents (do not replace with your credentials, as this is done as part of the prerun script):
+以下の内容で `postgres.yaml` というコンフィギュレーションファイルを作成します (prerun スクリプトの一部として実行されるため、資格情報に置き換えないでください)。
 
 ```yaml
 init_config:
@@ -90,12 +89,12 @@ instances:
     ssl: True
 ```
 
-Using the environment variable that was created when the `datadog` credential was attached to the application (in the example below, this is assumed to be `HEROKU_POSTGRESQL_PINK_URL`) add the following to the [prerun script][5] to replace those values before starting the Datadog Agent:
+アプリケーションに `datadog` 資格情報をアタッチしたときに作成された環境変数 (以下の例では `HEROKU_POSTGRESQL_PINK_URL` と仮定) を使用して、Datadog Agent の起動前にこれらの値を置き換えるために[事前実行スクリプト][5]に以下を追加してください。
 
 ```bash
 #!/usr/bin/env bash
 
-# Update the Postgres configuration from above using the Heroku application environment variable
+# Heroku アプリケーションの環境変数を使用して、Postgres の構成を上記の設定から更新します
 if [ -n "$HEROKU_POSTGRESQL_PINK_URL" ]; then
   POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
   if [[ $HEROKU_POSTGRESQL_PINK_URL =~ $POSTGREGEX ]]; then
@@ -108,17 +107,17 @@ if [ -n "$HEROKU_POSTGRESQL_PINK_URL" ]; then
 fi
 ```
 
-Deploy to Heroku:
+Heroku へのデプロイ:
 
 ```shell
-# Deploy to Heroku
+# Heroku にデプロイ
 git add .
 git commit -m "Enable postgres integration"
 git push heroku main
 ```
 
-[1]: /agent/basic_agent_usage/heroku/
+[1]: /ja/agent/basic_agent_usage/heroku/
 [2]: https://www.datadoghq.com/product/database-monitoring/
 [3]: https://devcenter.heroku.com/articles/heroku-postgresql
 [4]: https://devcenter.heroku.com/articles/heroku-postgres-plans
-[5]: /agent/basic_agent_usage/heroku/#prerun-script
+[5]: /ja/agent/basic_agent_usage/heroku/#prerun-script

@@ -1,69 +1,69 @@
 ---
-"app_id": "neo4j"
-"app_uuid": "f2657bb8-ded4-48f3-8095-f703cc203149"
-"assets":
-  "dashboards":
-    "Neo4j V4 Dashboard": assets/dashboards/Neo4j4.xDefaultDashboard.json
-    "Neo4j V5 Cluster Dashboard": assets/dashboards/Neo4j5ClusterDashboard.json
-    "Neo4j V5 Dashboard": assets/dashboards/Neo4j5DefaultDashboard.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": neo4j.dbms.page_cache.hits
-      "metadata_path": metadata.csv
-      "prefix": neo4j.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10202"
-    "source_type_name": Neo4j
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Neo4j
-  "sales_email": support@neotechnology.com
-  "support_email": support@neotechnology.com
-"categories":
+app_id: neo4j
+app_uuid: f2657bb8-ded4-48f3-8095-f703cc203149
+assets:
+  dashboards:
+    Neo4j V4 Dashboard: assets/dashboards/Neo4j4.xDefaultDashboard.json
+    Neo4j V5 Cluster Dashboard: assets/dashboards/Neo4j5ClusterDashboard.json
+    Neo4j V5 Dashboard: assets/dashboards/Neo4j5DefaultDashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: neo4j.dbms.page_cache.hits
+      metadata_path: metadata.csv
+      prefix: neo4j.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10202
+    source_type_name: Neo4j
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Neo4j
+  sales_email: support@neotechnology.com
+  support_email: support@neotechnology.com
+categories:
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "neo4j"
-"integration_id": "neo4j"
-"integration_title": "Neo4j"
-"integration_version": "3.0.3"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "neo4j"
-"public_title": "Neo4j"
-"short_description": "Gathers Neo4j metrics"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: neo4j
+integration_id: neo4j
+integration_title: Neo4j
+integration_version: 3.0.3
+is_public: true
+manifest_version: 2.0.0
+name: neo4j
+public_title: Neo4j
+short_description: Gathers Neo4j metrics
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  "configuration": "README.md#Setup"
-  "description": Gathers Neo4j metrics
-  "media":
-  - "caption": Neo4j 5 Dashboard
-    "image_url": images/Neo4j_5_Dashboard.png
-    "media_type": image
-  - "caption": Neo4j 5 Database
-    "image_url": images/neo4j_graph.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Neo4j
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  configuration: README.md#Setup
+  description: Gathers Neo4j metrics
+  media:
+  - caption: Neo4j 5 Dashboard
+    image_url: images/Neo4j_5_Dashboard.png
+    media_type: image
+  - caption: Neo4j 5 Database
+    image_url: images/neo4j_graph.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Neo4j
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -125,13 +125,12 @@ Neo4j does not include any events.
 Need help? Contact [Neo4j support][10].
 
 [1]: https://neo4j.com/
-[2]: https://docs.datadoghq.com/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/datadog_checks/neo4j/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://neo4j.com/docs/operations-manual/4.4/monitoring/metrics/reference/
 [8]: https://neo4j.com/docs/operations-manual/5/monitoring/metrics/reference/
 [9]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
 [10]: mailto:support@neo4j.com
-

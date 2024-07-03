@@ -1,12 +1,12 @@
 ---
-title: Account Management
-description: "Datadog アカウントと組織を管理する"
 aliases:
-    - /guides/billing
-    - /account_management/settings
+- /ja/guides/billing
+- /ja/account_management/settings
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+description: Datadog アカウントと組織を管理する
+title: Account Management
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
@@ -95,13 +95,13 @@ Datadog の組織アカウントを無効にするには、[Datadog サポート
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en
 [3]: https://app.datadoghq.com/personal-settings/preferences
-[4]: /account_management/users/
-[5]: /account_management/saml/
-[6]: /account_management/org_settings/#change-your-organization-name
-[7]: /account_management/multi_organization/
-[8]: /account_management/org_settings/
-[9]: /integrations/github/
-[10]: /help/
+[4]: /ja/account_management/users/
+[5]: /ja/account_management/saml/
+[6]: /ja/account_management/org_settings/#change-your-organization-name
+[7]: /ja/account_management/multi_organization/
+[8]: /ja/account_management/org_settings/
+[9]: /ja/integrations/github/
+[10]: /ja/help/
 [11]: https://app.datadoghq.com/personal-settings/profile
 [12]: https://app.datadoghq.com/personal-settings/organizations
 [13]: https://app.datadoghq.com/personal-settings/application-keys

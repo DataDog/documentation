@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Optimizing the Instance
 aliases:
-  - /observability_pipelines/architecture/optimize/
+- /ja/observability_pipelines/architecture/optimize/
+title: (LEGACY) Optimizing the Instance
 ---
 
 {{< site-region region="gov" >}}
@@ -67,4 +67,4 @@ This guide is for large-scale production-level deployments.
 
 可能であれば、glibc (GNU) ≧ 2.14 (2011 年リリース) の Linux ベースの OS を選択してください。観測可能性パイプラインワーカーは他のプラットフォームでも動作しますが、この組み合わせが Datadog のベンチマークで最高のパフォーマンスを発揮します。
 
-[1]: /observability_pipelines/legacy/architecture/preventing_data_loss
+[1]: /ja/observability_pipelines/legacy/architecture/preventing_data_loss

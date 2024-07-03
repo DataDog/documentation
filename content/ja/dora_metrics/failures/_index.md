@@ -1,10 +1,8 @@
 ---
-title: How to Set Up Incident Data for DORA Metrics
-description: Learn how to send incident events for DORA Metrics.
 aliases:
-- /continuous_integration/dora_metrics/setup/incidents
-- /dora_metrics/setup/incidents
-is_beta: true
+- /ja/continuous_integration/dora_metrics/setup/incidents
+- /ja/dora_metrics/setup/incidents
+description: Learn how to send incident events for DORA Metrics.
 further_reading:
 - link: /continuous_integration/dora_metrics/setup/deployments
   tag: ドキュメント
@@ -12,15 +10,17 @@ further_reading:
 - link: /tracing/service_catalog
   tag: ドキュメント
   text: サービスカタログについて
-- link: "https://github.com/DataDog/datadog-ci"
+- link: https://github.com/DataDog/datadog-ci
   tag: ソースコード
   text: datadog-ci CLI ツールについて
 - link: /continuous_delivery/deployments
   tag: ドキュメント
   text: Deployment Visibility について
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: リリースノート
   text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
+is_beta: true
+title: How to Set Up Incident Data for DORA Metrics
 ---
 
 {{< site-region region="gov" >}}
@@ -54,10 +54,10 @@ DORA Metrics generates the `dora.time_to_restore` metric by recording the start 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[1]: /ja/api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /tracing/service_catalog
-[4]: /tracing/service_catalog/setup
-[5]: /tracing/service_catalog/adding_metadata
+[3]: /ja/tracing/service_catalog
+[4]: /ja/tracing/service_catalog/setup
+[5]: /ja/tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
-[7]: /dora_metrics/deployments
+[7]: /ja/dora_metrics/deployments

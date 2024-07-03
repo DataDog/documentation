@@ -1,10 +1,10 @@
 ---
-title: Search and Manage Quality Gate Rules 
 description: Learn how to search for your Quality Gate rules.
 further_reading:
 - link: /quality_gates
   tag: Documentation
   text: Learn about Quality Gates
+title: Search and Manage Quality Gate Rules
 ---
 
 {{< site-region region="gov" >}}
@@ -38,4 +38,4 @@ To pivot to related Static Analysis or Software Composition Analysis results in 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/quality-gates
-[2]: /code_analysis/
+[2]: /ja/code_analysis/

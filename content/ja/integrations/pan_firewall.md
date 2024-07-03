@@ -1,66 +1,66 @@
 ---
-"app_id": "pan-firewall"
-"app_uuid": "1e4b89ef-f66e-4c78-8cb3-70a222a1fcb4"
-"assets":
-  "dashboards":
-    "Palo Alto Networks Firewall Overview": assets/dashboards/palo_alto_networks_firewall_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10155"
-    "source_type_name": Palo Alto Networks Firewall
-  "saved_views":
-    "Authentication Protocol": assets/saved_views/top_ips_flagged_in_high_severity_threats.json
-    "High Severity Issues": assets/saved_views/all_high_severity_issues.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: pan-firewall
+app_uuid: 1e4b89ef-f66e-4c78-8cb3-70a222a1fcb4
+assets:
+  dashboards:
+    Palo Alto Networks Firewall Overview: assets/dashboards/palo_alto_networks_firewall_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10155
+    source_type_name: Palo Alto Networks Firewall
+  saved_views:
+    Authentication Protocol: assets/saved_views/top_ips_flagged_in_high_severity_threats.json
+    High Severity Issues: assets/saved_views/all_high_severity_issues.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - network
 - os & system
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "pan_firewall"
-"integration_id": "pan-firewall"
-"integration_title": "Palo Alto Networks Firewall"
-"integration_version": "1.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "pan_firewall"
-"public_title": "Palo Alto Networks Firewall"
-"short_description": "Palo Alto Networks Firewall log events"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: pan_firewall
+integration_id: pan-firewall
+integration_title: Palo Alto Networks Firewall
+integration_version: 1.2.0
+is_public: true
+manifest_version: 2.0.0
+name: pan_firewall
+public_title: Palo Alto Networks Firewall
+short_description: Palo Alto Networks Firewall log events
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Category::OS & System"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Palo Alto Networks Firewall log events
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Palo Alto Networks Firewall
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Network
+  - Category::OS & System
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Palo Alto Networks Firewall log events
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Palo Alto Networks Firewall
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -157,10 +157,9 @@ PANOS インテグレーションには、サービスのチェック機能は�
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://www.youtube.com/watch?v=LOPXg0oCMPs
 [3]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/network_monitoring/devices/#vendor-profiles
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
 [7]: https://docs.paloaltonetworks.com/pan-os/9-1/pan-os-admin/monitoring/use-syslog-for-monitoring/syslog-field-descriptions
-[8]: https://docs.datadoghq.com/logs/log_collection/?tab=tailexistingfiles#getting-started-with-the-agent
-[9]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/logs/log_collection/?tab=tailexistingfiles#getting-started-with-the-agent
+[9]: https://docs.datadoghq.com/ja/help/

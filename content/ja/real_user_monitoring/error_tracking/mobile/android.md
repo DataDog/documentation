@@ -1,12 +1,9 @@
 ---
-title: Android Crash Reporting and Error Tracking
-kind: documentation
-description: Set up Error Tracking for your Android applications.
 aliases:
-    - /real_user_monitoring/error_tracking/android
-type: multi-code-lang
+- /ja/real_user_monitoring/error_tracking/android
 code_lang: android
 code_lang_weight: 10
+description: Set up Error Tracking for your Android applications.
 further_reading:
 - link: /real_user_monitoring/error_tracking/
   tag: ドキュメント
@@ -14,7 +11,9 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: Visualize Error Tracking data in the Explorer
-
+kind: documentation
+title: Android Crash Reporting and Error Tracking
+type: multi-code-lang
 ---
 
 ## Overview
@@ -238,9 +237,9 @@ To test your implementation:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android#setup
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/android#setup
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters
 [6]: https://developer.android.com/topic/performance/vitals/anr
 [7]: https://developer.android.com/reference/android/app/ApplicationExitInfo
 [8]: https://developer.android.com/tools/releases/platforms#11

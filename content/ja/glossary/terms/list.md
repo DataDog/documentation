@@ -1,9 +1,9 @@
 ---
-title: list
 core_product:
-  - ダッシュボード
-  - log management 
+- ダッシュボード
+- log management
 related_terms:
-  - dashboard
+- dashboard
+title: list
 ---
 The list widget displays a list of events and issues, which can come from a variety of sources such as Logs, RUM, or Events. Search and query across sources to narrow down the events you want the widget to highlight and display. For more information, <a href="/dashboards/widgets/list/">see the documentation</a>.

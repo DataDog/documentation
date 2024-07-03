@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting the Java Profiler
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-    - link: /tracing/troubleshooting
-      tag: Documentation
-      text: APM Troubleshooting
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM Troubleshooting
+title: Troubleshooting the Java Profiler
+type: multi-code-lang
 ---
 
 ## プロファイル検索ページにないプロファイル
@@ -153,5 +153,5 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
+[1]: /ja/tracing/troubleshooting/#tracer-debug-logs
+[2]: /ja/help/

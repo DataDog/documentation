@@ -1,6 +1,6 @@
 ---
-title: Teams
 kind: documentation
+title: Teams
 ---
 
 ## Overview
@@ -147,13 +147,13 @@ To enforce a strict membership model, configure your default team settings so **
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: https://app.datadoghq.com/teams
-[3]: /account_management/saml/mapping/#map-saml-attributes-to-teams
-[4]: /dashboards/#dashboard-details
-[5]: /service_management/incident_management/incident_details#overview-section
-[6]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[7]: /infrastructure/resource_catalog/
-[8]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
-[9]: /service_management/service_level_objectives/#slo-tags
+[3]: /ja/account_management/saml/mapping/#map-saml-attributes-to-teams
+[4]: /ja/dashboards/#dashboard-details
+[5]: /ja/service_management/incident_management/incident_details#overview-section
+[6]: /ja/monitors/configuration/?tab=thresholdalert#add-metadata
+[7]: /ja/infrastructure/resource_catalog/
+[8]: /ja/tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /ja/service_management/service_level_objectives/#slo-tags
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: https://app.datadoghq.com/services
 [12]: https://app.datadoghq.com/incidents

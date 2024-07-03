@@ -1,18 +1,18 @@
 ---
-title: Datadog Operator
 aliases:
-  - /agent/kubernetes/operator_configuration
-  - /containers/kubernetes/operator_configuration
+- /ja/agent/kubernetes/operator_configuration
+- /ja/containers/kubernetes/operator_configuration
 further_reading:
-  - link: /getting_started/containers/datadog_operator
-    tag: guide
-    text: Getting Started with the Datadog Operator
-  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md"
-    tag: ソースコード
-    text: "Datadog Operator: Advanced Installation"
-  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md"
-    tag: ソースコード
-    text: "Datadog Operator: Configuration"
+- link: /getting_started/containers/datadog_operator
+  tag: guide
+  text: Getting Started with the Datadog Operator
+- link: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
+  tag: ソースコード
+  text: 'Datadog Operator: Advanced Installation'
+- link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+  tag: ソースコード
+  text: 'Datadog Operator: Configuration'
+title: Datadog Operator
 ---
 
 [Datadog Operator][1] は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][2] です。
@@ -50,9 +50,9 @@ Operator を使用して Datadog Agent をデプロイする方法について�
 
 [1]: http://github.com/DataDog/datadog-operator
 [2]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
-[3]: /containers/cluster_agent
-[4]: /containers/cluster_agent/clusterchecks
+[3]: /ja/containers/cluster_agent
+[4]: /ja/containers/cluster_agent/clusterchecks
 [5]: https://github.com/DataDog/extendeddaemonset
-[6]: /getting_started/containers/datadog_operator
+[6]: /ja/getting_started/containers/datadog_operator
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

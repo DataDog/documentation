@@ -1,15 +1,13 @@
 ---
-title: Log Detection Rules
-type: documentation
 aliases:
- - /security_platform/detection_rules/cloud_siem
- - /security_platform/detection_rules/security_monitoring
- - /security_platform/detection_rules/create_a_new_rule
- - /security_platform/cloud_siem/log_detection_rules/
- - /cloud_siem/detection_rules/security_monitoring/
- - /security/detection_rules/cloud_siem/
- - /security/detection_rules/security_monitoring
- - /security/detection_rules/create_a_new_rule
+- /ja/security_platform/detection_rules/cloud_siem
+- /ja/security_platform/detection_rules/security_monitoring
+- /ja/security_platform/detection_rules/create_a_new_rule
+- /ja/security_platform/cloud_siem/log_detection_rules/
+- /ja/cloud_siem/detection_rules/security_monitoring/
+- /ja/security/detection_rules/cloud_siem/
+- /ja/security/detection_rules/security_monitoring
+- /ja/security/detection_rules/create_a_new_rule
 further_reading:
 - link: /cloud_siem/default_rules/
   tag: Documentation
@@ -17,21 +15,23 @@ further_reading:
 - link: /cloud_siem/explorer/
   tag: Documentation
   text: Learn about the Security Signals Explorer
-- link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
+- link: https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/
   tag: Blog
   text: Detect unauthorized third parties in your AWS account
-- link: "https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/"
+- link: https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/
   tag: Blog
   text: Detect security threats with anomaly detection rules
 - link: /security/notifications/variables/
   tag: Documentation
   text: Learn more about Security notification variables
-- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+- link: https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/
   tag: Blog
   text: Monitor Cloudflare Zero Trust with Datadog Cloud SIEM
-- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
   tag: Blog
   text: Monitor 1Password with Datadog Cloud SIEM
+title: Log Detection Rules
+type: documentation
 ---
 
 ## Overview
@@ -97,7 +97,7 @@ The Detection Rule cases join these queries together based on their group by val
 
 In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
 
-[1]: /logs/search_syntax/
+[1]: /ja/logs/search_syntax/
 {{% /tab %}}
 
 {{% tab "New Value" %}}
@@ -120,7 +120,7 @@ For example, create a query for successful user authentication and set **Detect 
 
 You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
-[1]: /logs/search_syntax/
+[1]: /ja/logs/search_syntax/
 {{% /tab %}}
 
 {{% tab "Anomaly" %}}
@@ -159,8 +159,8 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
-[1]: /logs/search_syntax/
-[2]: /logs/log_configuration/processors#geoip-parser
+[1]: /ja/logs/search_syntax/
+[2]: /ja/logs/log_configuration/processors#geoip-parser
 {{% /tab %}}
 
 {{% tab "Third Party" %}}
@@ -173,7 +173,7 @@ Click **Add Query** to add additional queries.
 
 **Note**: The query applies to all ingested logs.
 
-[1]: /logs/search_syntax/
+[1]: /ja/logs/search_syntax/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -322,4 +322,4 @@ The rule deprecation process is as follows:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
-[2]: /security/detection_rules/#clone-a-rule
+[2]: /ja/security/detection_rules/#clone-a-rule

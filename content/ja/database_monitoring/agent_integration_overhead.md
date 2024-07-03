@@ -1,7 +1,6 @@
 ---
-title: DBM Agent Integration Overhead
 description: Learn about the overhead of integrating the Datadog Agent with your database
-
+title: DBM Agent Integration Overhead
 ---
 
 ## 概要

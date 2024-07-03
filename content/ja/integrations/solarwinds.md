@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - event management
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Ingest alerts from SolarWinds Orion into your Datadog Event Stream."
-"doc_link": "https://docs.datadoghq.com/integrations/solarwinds/"
-"draft": false
-"git_integration_title": "solarwinds"
-"has_logo": true
-"integration_id": ""
-"integration_title": "SolarWinds"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "solarwinds"
-"public_title": "Datadog-SolarWinds Integration"
-"short_description": "Ingest alerts from SolarWinds Orion into your Datadog Event Stream."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Ingest alerts from SolarWinds Orion into your Datadog Event Stream.
+doc_link: https://docs.datadoghq.com/integrations/solarwinds/
+draft: false
+git_integration_title: solarwinds
+has_logo: true
+integration_id: ''
+integration_title: SolarWinds
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: solarwinds
+public_title: Datadog-SolarWinds Integration
+short_description: Ingest alerts from SolarWinds Orion into your Datadog Event Stream.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -122,4 +122,3 @@ The SolarWinds integration does not include any service checks.
 ## トラブルシューティング
 
 Need help? Contact Datadog support
-

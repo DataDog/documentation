@@ -1,56 +1,57 @@
 ---
-"app_id": "ntp"
-"app_uuid": "399b74d9-ece5-4517-ae16-c05cac6911b2"
-"assets":
-  "integration":
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "ntp.offset"
-      "metadata_path": "metadata.csv"
-      "prefix": "ntp."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_name": "NTP"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/ntp/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ntp"
-"integration_id": "ntp"
-"integration_title": "NTP"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ntp"
-"public_title": "NTP"
-"short_description": "Get alerts when your hosts drift out of sync with your chosen NTP server."
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Network"
-  "configuration": "README.md#Setup"
-  "description": "Get alerts when your hosts drift out of sync with your chosen NTP server."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "NTP"
+app_id: ntp
+app_uuid: 399b74d9-ece5-4517-ae16-c05cac6911b2
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: ntp.offset
+      metadata_path: metadata.csv
+      prefix: ntp.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: NTP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ntp
+integration_id: ntp
+integration_title: NTP
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: ntp
+public_title: NTP
+short_description: Get alerts when your hosts drift out of sync with your chosen NTP
+  server.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  configuration: README.md#Setup
+  description: Get alerts when your hosts drift out of sync with your chosen NTP server.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: NTP
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -110,11 +111,10 @@ The NTP check does not include any events.
 Need help? Contact [Datadog support][8].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/ntp.d/conf.yaml.default
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/ntp/metadata.csv
 [7]: https://github.com/DataDog/integrations-core/blob/master/ntp/assets/service_checks.json
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

@@ -1,37 +1,39 @@
 ---
-title: Network Performance Monitoring
-description: Explore metrics for point to point communication on your infrastructure.
+algolia:
+  tags:
+  - npm
+  - network performance monitoring
 aliases:
-  - /monitors/network_flow_monitors/
-  - /graphing/infrastructure/network_performance_monitor/
-  - /network_performance_monitoring/
+- /ja/monitors/network_flow_monitors/
+- /ja/graphing/infrastructure/network_performance_monitor/
+- /ja/network_performance_monitoring/
+description: Explore metrics for point to point communication on your infrastructure.
 further_reading:
-- link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
+- link: https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/
   tag: Blog
   text: Monitor cloud architecture and app dependencies with Datadog NPM
-- link: "https://www.datadoghq.com/blog/network-performance-monitoring"
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
   tag: Blog
   text: Network Performance Monitoring
-- link: "https://www.datadoghq.com/blog/npm-windows-support/"
+- link: https://www.datadoghq.com/blog/npm-windows-support/
   tag: Blog
   text: Monitor Windows hosts with Network Performance Monitoring
-- link: "https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/"
+- link: https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/
   tag: Blog
   text: Monitor cloud endpoint health with cloud service autodetection
-- link: "https://www.datadoghq.com/blog/npm-best-practices/"
+- link: https://www.datadoghq.com/blog/npm-best-practices/
   tag: Blog
   text: Best practices for getting started with Datadog NPM
-- link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+- link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: Blog
   text: Datadog NPM now supports Consul networking
-- link: "https://www.datadoghq.com/blog/npm-story-centric-ux/"
+- link: https://www.datadoghq.com/blog/npm-story-centric-ux/
   tag: Blog
   text: Quickstart network investigations with NPM's story-centric UX
-- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: ブログ
   text: Monitor DNS logs for network and security analysis
-algolia:
-  tags: [npm, network performance monitoring]
+title: Network Performance Monitoring
 ---
 
 ## 概要
@@ -64,4 +66,4 @@ Additionally, [Network path][5], a feature of NPM, is available in private beta,
 [2]: https://app.datadoghq.com/network/map
 [3]: https://www.datadoghq.com/blog/npm-windows-support/
 [4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
-[5]: /network_monitoring/network_path/
+[5]: /ja/network_monitoring/network_path/

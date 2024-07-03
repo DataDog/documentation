@@ -1,12 +1,12 @@
 ---
-title: Querying
 aliases:
-  - /graphing/using_graphs/
+- /ja/graphing/using_graphs/
 description: Query your data to gain insight
 further_reading:
-- link: "https://learn.datadoghq.com/courses/building-better-dashboards"
+- link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Learning Center
   text: Building Better Dashboards
+title: Querying
 ---
 
 ## 概要
@@ -235,19 +235,19 @@ min(status:error, status:warn)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/
-[2]: /dashboards/guide/quick-graphs/
-[3]: /dashboards/widgets/
+[1]: /ja/dashboards/graphing_json/
+[2]: /ja/dashboards/guide/quick-graphs/
+[3]: /ja/dashboards/widgets/
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: https://app.datadoghq.com/notebook/list
 [6]: https://app.datadoghq.com/metric/summary
-[7]: /metrics/advanced-filtering/
-[8]: /getting_started/tagging/
-[9]: /metrics/#time-aggregation
-[10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
-[11]: /dashboards/functions/rollup/
-[12]: /dashboards/functions/#function-types
-[13]: /metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /logs/explorer/search_syntax/
-[15]: /dashboards/widgets/timeseries/#event-overlay
-[16]: /dashboards/template_variables/
+[7]: /ja/metrics/advanced-filtering/
+[8]: /ja/getting_started/tagging/
+[9]: /ja/metrics/#time-aggregation
+[10]: /ja/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[11]: /ja/dashboards/functions/rollup/
+[12]: /ja/dashboards/functions/#function-types
+[13]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
+[14]: /ja/logs/explorer/search_syntax/
+[15]: /ja/dashboards/widgets/timeseries/#event-overlay
+[16]: /ja/dashboards/template_variables/

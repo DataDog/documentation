@@ -1,10 +1,10 @@
 ---
-title: Saved Views
 descriptions: Learn how to create and share saved views in the CD Visibility Explorer.
 further_reading:
 - link: /continuous_delivery/explorer/search_syntax/
   tag: Documentation
   text: Learn how to create a search query
+title: Saved Views
 ---
 
 {{< site-region region="gov" >}}
@@ -67,4 +67,4 @@ You can set a saved view to be your default landing page in the [CD Visibility E
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/deployments/executions
-[2]: /continuous_delivery/explorer/
+[2]: /ja/continuous_delivery/explorer/

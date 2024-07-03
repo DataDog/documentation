@@ -1,7 +1,4 @@
 ---
-title: Compatibility Requirements
-kind: documentation
-type: multi-code-lang
 further_reading:
 - link: /security/application_security/troubleshooting
   tag: Documentation
@@ -9,6 +6,9 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: How Application Security Management Works in Datadog
+kind: documentation
+title: Compatibility Requirements
+type: multi-code-lang
 ---
 
 {{% asm-libraries-capabilities %}}
@@ -20,4 +20,3 @@ further_reading:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-

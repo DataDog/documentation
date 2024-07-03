@@ -1,78 +1,78 @@
 ---
-"app_id": "rabbitmq"
-"app_uuid": "a10b582b-71ef-4773-b7b8-b7751c724620"
-"assets":
-  "dashboards":
-    "rabbitmq": "assets/dashboards/rabbitmq_dashboard.json"
-    "rabbitmq_screenboard": "assets/dashboards/rabbitmq_screenboard_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": "rabbitmq.queue.messages"
-      "metadata_path": "metadata.csv"
-      "prefix": "rabbitmq."
-    "process_signatures":
-    - "rabbitmq"
-    - "rabbitmq-server"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "51"
-    "source_type_name": "RabbitMQ"
-  "monitors":
-    "consumers_at_zero": "assets/monitors/consumers_at_zero.json"
-    "disk_usage": "assets/monitors/disk_usage.json"
-    "disk_usage_prometheus": "assets/monitors/disk_usage_prometheus.json"
-    "message_ready": "assets/monitors/message_ready.json"
-    "message_unack_prometheus": "assets/monitors/message_unack_prometheus.json"
-    "message_unacknowledge_rate_anomaly": "assets/monitors/message_unacknowledge_rate_anomaly.json"
-  "saved_views":
-    "pid_overview": "assets/saved_views/status_overview.json"
-    "rabbitmq_pattern": "assets/saved_views/rabbitmq_pattern.json"
-    "rabbitmq_processes": "assets/saved_views/rabbitmq_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-- "message queues"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rabbitmq"
-"integration_id": "rabbitmq"
-"integration_title": "RabbitMQ"
-"integration_version": "5.3.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rabbitmq"
-"public_title": "RabbitMQ"
-"short_description": "キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Category::Message Queues"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "RabbitMQ"
+app_id: rabbitmq
+app_uuid: a10b582b-71ef-4773-b7b8-b7751c724620
+assets:
+  dashboards:
+    rabbitmq: assets/dashboards/rabbitmq_dashboard.json
+    rabbitmq_screenboard: assets/dashboards/rabbitmq_screenboard_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: rabbitmq.queue.messages
+      metadata_path: metadata.csv
+      prefix: rabbitmq.
+    process_signatures:
+    - rabbitmq
+    - rabbitmq-server
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 51
+    source_type_name: RabbitMQ
+  monitors:
+    consumers_at_zero: assets/monitors/consumers_at_zero.json
+    disk_usage: assets/monitors/disk_usage.json
+    disk_usage_prometheus: assets/monitors/disk_usage_prometheus.json
+    message_ready: assets/monitors/message_ready.json
+    message_unack_prometheus: assets/monitors/message_unack_prometheus.json
+    message_unacknowledge_rate_anomaly: assets/monitors/message_unacknowledge_rate_anomaly.json
+  saved_views:
+    pid_overview: assets/saved_views/status_overview.json
+    rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
+    rabbitmq_processes: assets/saved_views/rabbitmq_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- message queues
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rabbitmq
+integration_id: rabbitmq
+integration_title: RabbitMQ
+integration_version: 5.3.1
+is_public: true
+manifest_version: 2.0.0
+name: rabbitmq
+public_title: RabbitMQ
+short_description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Category::Message Queues
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RabbitMQ
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -192,9 +192,9 @@ _Agent バージョン 6.0 以降で利用可能_
 
 4. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -222,9 +222,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": [{"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}]}` |
 
-[1]: https://docs.datadoghq.com/containers/docker/integrations/?tab=dockeradv2
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/containers/docker/integrations/?tab=dockeradv2
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -285,10 +285,10 @@ For more information, see [Tagging RabbitMQ queues by tag family][11].
 [6]: https://www.rabbitmq.com/prometheus.html#default-endpoint
 [7]: https://www.rabbitmq.com/prometheus.html#detailed-endpoint
 [8]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://docs.datadoghq.com/integrations/rabbitmq/?tab=host#metrics
-[11]: https://docs.datadoghq.com/integrations/faq/tagging-rabbitmq-queues-by-tag-family/
-[12]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/integrations/rabbitmq/?tab=host#metrics
+[11]: https://docs.datadoghq.com/ja/integrations/faq/tagging-rabbitmq-queues-by-tag-family/
+[12]: https://docs.datadoghq.com/ja/help/
 [13]: https://www.datadoghq.com/blog/rabbitmq-monitoring
 [14]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
 [15]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog

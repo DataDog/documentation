@@ -1,6 +1,6 @@
 ---
-title: Archive Logs for the Sumo Logic Hosted Collector HTTP Logs Source
 disable_toc: false
+title: Archive Logs for the Sumo Logic Hosted Collector HTTP Logs Source
 ---
 
 ## 概要

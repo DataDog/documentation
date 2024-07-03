@@ -1,12 +1,12 @@
 ---
-title: Mobile Session Replay
-kind: documentation
+aliases: null
 description: Setting up Session Replay for mobile devices.
-aliases:
 further_reading:
-    - link: /real_user_monitoring/session_replay
-      tag: Documentation
-      text: Session Replay
+- link: /real_user_monitoring/session_replay
+  tag: Documentation
+  text: Session Replay
+kind: documentation
+title: Mobile Session Replay
 ---
 
 <div class="alert alert-warning">
@@ -38,7 +38,7 @@ Learn how to [Troubleshoot Mobile Session Replay][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
-[2]: /real_user_monitoring/session_replay/mobile/privacy_options
-[3]: /real_user_monitoring/session_replay/mobile/app_performance
-[4]: /real_user_monitoring/session_replay/mobile/troubleshooting
+[1]: /ja/real_user_monitoring/session_replay/mobile/setup_and_configuration
+[2]: /ja/real_user_monitoring/session_replay/mobile/privacy_options
+[3]: /ja/real_user_monitoring/session_replay/mobile/app_performance
+[4]: /ja/real_user_monitoring/session_replay/mobile/troubleshooting

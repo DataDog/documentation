@@ -1,9 +1,10 @@
 ---
-title: Custom Metrics Billing
-aliases:
-    - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 algolia:
-  tags: [custom metrics billing]
+  tags:
+  - custom metrics billing
+aliases:
+- /ja/integrations/faq/what-standard-integrations-emit-custom-metrics/
+title: Custom Metrics Billing
 ---
 
 メトリクスが [{{< translate key="integration_count" >}} を超える Datadog インテグレーション][1]のいずれかから送信されていない場合、それは[カスタムメトリクス][2]と見なされます。特定の標準インテグレーションも、カスタム メトリクスを出力できる可能性があります。詳細については、[カスタムメトリクスと標準インテグレーション][14]を参照してください。
@@ -112,9 +113,9 @@ Metrics without LimitsTM を使って、`endpoint` と `status` のタグだけ�
 
 [Metrics without LimitsTM][3] の詳細についてはこちらをご覧ください。
 
-[1]: /metrics/types/?tab=count#metric-types
-[2]: /metrics/types/?tab=rate#metric-types
-[3]: /metrics/metrics-without-limits
+[1]: /ja/metrics/types/?tab=count#metric-types
+[2]: /ja/metrics/types/?tab=rate#metric-types
+[3]: /ja/metrics/metrics-without-limits
 {{% /tab %}}
 {{% tab "Gauge" %}}
 このタグスキームで GAUGE メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
@@ -189,7 +190,7 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 [Metrics without LimitsTM][1] の詳細についてはこちらをご覧ください。
 
-[1]: /metrics/metrics-without-limits
+[1]: /ja/metrics/metrics-without-limits
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -210,9 +211,9 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 - Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][3]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、パーセンタイル順位が 95 の `95percentile` だけが Datadog に送信されます。
 
 
-[1]: /metrics/types/?tab=histogram#metric-types
-[2]: /metrics/types/?tab=histogram#definition
-[3]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/metrics/types/?tab=histogram#metric-types
+[2]: /ja/metrics/types/?tab=histogram#definition
+[3]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
@@ -273,8 +274,8 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 [Metrics without LimitsTM][2] の詳細についてはこちらをご覧ください。
 
-[1]: /metrics/types/?tab=distribution#definition
-[2]: /metrics/metrics-without-limits
+[1]: /ja/metrics/types/?tab=distribution#definition
+[2]: /ja/metrics/metrics-without-limits
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -305,17 +306,17 @@ Datadog では、料金プランごとに一定数の**インジェスト**お�
 
 課金に関するご質問は、[カスタマーサクセス][12]マネージャーにお問い合わせください。
 
-[1]: /integrations/
-[2]: /metrics/custom_metrics/
-[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[4]: /metrics/custom_metrics/agent_metrics_submission/
-[5]: /metrics/metrics-without-limits
-[6]: /metrics/types/#metric-types
-[7]: /account_management/users/default_roles/
+[1]: /ja/integrations/
+[2]: /ja/metrics/custom_metrics/
+[3]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /ja/metrics/custom_metrics/agent_metrics_submission/
+[5]: /ja/metrics/metrics-without-limits
+[6]: /ja/metrics/types/#metric-types
+[7]: /ja/account_management/users/default_roles/
 [8]: https://app.datadoghq.com/billing/usage
-[9]: /account_management/plan_and_usage/usage_details/
+[9]: /ja/account_management/plan_and_usage/usage_details/
 [10]: https://app.datadoghq.com/metric/summary
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
-[13]: /help/
-[14]: /metrics/custom_metrics/#standard-integrations
+[13]: /ja/help/
+[14]: /ja/metrics/custom_metrics/#standard-integrations

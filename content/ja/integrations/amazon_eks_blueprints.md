@@ -1,60 +1,62 @@
 ---
-"app_id": "amazon-eks-blueprints"
-"app_uuid": "4c0828d6-0c41-47d0-aa20-c174773e2bda"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10268"
-    "source_type_name": amazon_eks_blueprints
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: amazon-eks-blueprints
+app_uuid: 4c0828d6-0c41-47d0-aa20-c174773e2bda
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10268
+    source_type_name: amazon_eks_blueprints
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - aws
 - configuration & deployment
 - containers
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "amazon_eks_blueprints"
-"integration_id": "amazon-eks-blueprints"
-"integration_title": "Datadog Blueprints Add-on"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "amazon_eks_blueprints"
-"public_title": "Datadog Blueprints Add-on"
-"short_description": "Amazon EKS Blueprints consolidates cluster configuration and deployment tools."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: amazon_eks_blueprints
+integration_id: amazon-eks-blueprints
+integration_title: Datadog Blueprints Add-on
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: amazon_eks_blueprints
+public_title: Datadog Blueprints Add-on
+short_description: Amazon EKS Blueprints consolidates cluster configuration and deployment
+  tools.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AWS"
-  - "Category::Configuration & Deployment"
-  - "Category::Containers"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Amazon EKS Blueprints consolidates cluster configuration and deployment tools.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Datadog Blueprints Add-on
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Configuration & Deployment
+  - Category::Containers
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Amazon EKS Blueprints consolidates cluster configuration and deployment
+    tools.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Datadog Blueprints Add-on
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -162,9 +164,8 @@ Also set up the integrations for any other AWS services that you are running wit
 Need help? Contact [Datadog support][6].
 
 [1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#all-configuration-options
-[2]: https://docs.datadoghq.com/integrations/kubernetes/
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[4]: https://docs.datadoghq.com/integrations/amazon_ec2/
-[5]: https://docs.datadoghq.com/integrations/amazon_elb/
-[6]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/integrations/kubernetes/
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_ec2/
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_elb/
+[6]: https://docs.datadoghq.com/ja/help/

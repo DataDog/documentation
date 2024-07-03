@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Networking
 aliases:
-  - /observability_pipelines/architecture/networking/
+- /ja/observability_pipelines/architecture/networking/
+title: (LEGACY) Networking
 ---
 
 {{< site-region region="gov" >}}
@@ -69,5 +69,5 @@ Datadog のベンチマークによると、圧縮を行うとスループット
 
 ネットワークトラフィックの圧縮は、パフォーマンスに影響を与えるため、コスト重視のイグレスシナリオにのみ使用する必要があります (例えば、公衆インターネット上でのデータ送信など)。したがって、内部ネットワークトラフィックの圧縮は推奨されません。
 
-[1]: /observability_pipelines/legacy/architecture/advanced_configurations
+[1]: /ja/observability_pipelines/legacy/architecture/advanced_configurations
 [2]: https://wiki.archlinux.org/title/Domain_name_resolution

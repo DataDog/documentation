@@ -1,15 +1,16 @@
 ---
-title: GitLab
-description: Configure your GitLab instance to run Continuous Testing tests in your CI/CD pipelines.
 aliases:
-  - /synthetics/cicd_integrations/gitlab
+- /ja/synthetics/cicd_integrations/gitlab
+description: Configure your GitLab instance to run Continuous Testing tests in your
+  CI/CD pipelines.
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
   text: Run Datadog Synthetic tests in your GitLab pipelines
 - link: /continuous_integration/pipelines/gitlab/
   tag: Documentation
   text: Set up Tracing on a GitLab Pipeline
+title: GitLab
 ---
 
 ## 概要
@@ -98,7 +99,7 @@ synthetic-tests:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/gitlab/
+[1]: /ja/integrations/gitlab/
 [2]: https://docs.gitlab.com/ee/ci/pipelines/
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
-[4]: /synthetics/cicd_integrations/configuration
+[4]: /ja/synthetics/cicd_integrations/configuration

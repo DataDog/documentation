@@ -1,8 +1,8 @@
 ---
-title: Dashboard Lists API (v1)
 aliases:
-  - /graphing/faq/dashboard-lists-api-doc
-  - /graphing/guide/dashboard-lists-api-v1-doc
+- /ja/graphing/faq/dashboard-lists-api-doc
+- /ja/graphing/guide/dashboard-lists-api-v1-doc
+title: Dashboard Lists API (v1)
 ---
 
 APIを介してすべてのダッシュボードを簡単に整理、検索、およびチームや組織と共有できます。

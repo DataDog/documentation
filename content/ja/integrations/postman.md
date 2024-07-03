@@ -1,58 +1,60 @@
 ---
-"app_id": "postman"
-"app_uuid": "9ba70e31-8e84-4d6b-84a1-95d6ba713df9"
-"assets":
-  "dashboards":
-    "Postman API Dashboard": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": postman.monitor.run.total_latency
-      "metadata_path": metadata.csv
-      "prefix": postman
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10162"
-    "source_type_name": Postman
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Postman
-  "sales_email": integrations-partnerships@postman.com
-  "support_email": integrations-partnerships@postman.com
-"categories": []
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/postman/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "postman"
-"integration_id": "postman"
-"integration_title": "Postman"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "postman"
-"public_title": "Postman"
-"short_description": "Analyze metrics and generate events in Datadog from Postman Monitoring runs."
-"supported_os":
+app_id: postman
+app_uuid: 9ba70e31-8e84-4d6b-84a1-95d6ba713df9
+assets:
+  dashboards:
+    Postman API Dashboard: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: postman.monitor.run.total_latency
+      metadata_path: metadata.csv
+      prefix: postman
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10162
+    source_type_name: Postman
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Postman
+  sales_email: integrations-partnerships@postman.com
+  support_email: integrations-partnerships@postman.com
+categories: []
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/postman/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: postman
+integration_id: postman
+integration_title: Postman
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: postman
+public_title: Postman
+short_description: Analyze metrics and generate events in Datadog from Postman Monitoring
+  runs.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": Analyze metrics and generate events in Datadog from Postman Monitoring runs.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Postman
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Analyze metrics and generate events in Datadog from Postman Monitoring
+    runs.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Postman
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -119,4 +121,3 @@ Need help? Contact [Postman Support][8].
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
 [7]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv
 [8]: https://www.postman.com/support/
-

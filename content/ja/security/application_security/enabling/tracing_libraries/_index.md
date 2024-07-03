@@ -1,7 +1,7 @@
 ---
-title: Enabling ASM using Datadog Tracing Libraries
-kind: documentation
 disable_toc: true
+kind: documentation
+title: Enabling ASM using Datadog Tracing Libraries
 ---
 
 ## Overview
@@ -18,4 +18,4 @@ The following documentation provides instructions to enable ASM using Datadog tr
      {{< nextlink href="/security/application_security/enabling/tracing_libraries/sca" >}}Enabling Software Composition Analysis using Datadog tracing libraries{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/application_security/enabling/single_step/
+[1]: /ja/security/application_security/enabling/single_step/

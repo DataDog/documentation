@@ -1,9 +1,9 @@
 ---
-title: Nginx Compatibility Requirements
-kind: ドキュメント
 code_lang: nginx
-type: multi-code-lang
 code_lang_weight: 40
+kind: ドキュメント
+title: Nginx Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Application Security capabilities support
@@ -33,4 +33,4 @@ the unsupported capabilities, let us know! Fill out <a
 href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send
 details</a>.</div>
 
-[1]: /security/application_security/enabling/tracing_libraries/threat_detection/nginx/#limitations
+[1]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/nginx/#limitations

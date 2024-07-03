@@ -1,65 +1,65 @@
 ---
-"app_id": "sigsci"
-"app_uuid": "edc9a664-24f1-45ee-88ad-04e5da064f51"
-"assets":
-  "dashboards":
-    "sigsci": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": sigsci.agent.signal
-      "metadata_path": metadata.csv
-      "prefix": sigsci.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10037"
-    "source_type_name": Signal Sciences
-  "monitors":
-    "Excessive blocked http requests": assets/monitors/excessiveblockedHTTP.json
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Signal Sciences
-  "sales_email": info@signalsciences.com
-  "support_email": info@signalsciences.com
-"categories":
+app_id: sigsci
+app_uuid: edc9a664-24f1-45ee-88ad-04e5da064f51
+assets:
+  dashboards:
+    sigsci: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: sigsci.agent.signal
+      metadata_path: metadata.csv
+      prefix: sigsci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10037
+    source_type_name: Signal Sciences
+  monitors:
+    Excessive blocked http requests: assets/monitors/excessiveblockedHTTP.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Signal Sciences
+  sales_email: info@signalsciences.com
+  support_email: info@signalsciences.com
+categories:
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sigsci"
-"integration_id": "sigsci"
-"integration_title": "Signal Sciences"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "sigsci"
-"public_title": "Signal Sciences"
-"short_description": "Collect data from Signal Sciences to see anomalies and block attacks"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: sigsci
+integration_id: sigsci
+integration_title: Signal Sciences
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: sigsci
+public_title: Signal Sciences
+short_description: Collect data from Signal Sciences to see anomalies and block attacks
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Security"
-  "configuration": "README.md#Setup"
-  "description": Collect data from Signal Sciences to see anomalies and block attacks
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.signalsciences.com/blog/"
-  "support": "README.md#Support"
-  "title": Signal Sciences
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  configuration: README.md#Setup
+  description: Collect data from Signal Sciences to see anomalies and block attacks
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.signalsciences.com/blog/
+  support: README.md#Support
+  title: Signal Sciences
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -173,12 +173,11 @@ Signal Sciences インテグレーションには、サービスのチェック�
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
 [3]: https://docs.signalsciences.net/install-guides/
-[4]: https://docs.datadoghq.com/agent/kubernetes/dogstatsd/
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/dogstatsd/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://dashboard.signalsciences.net
 [7]: https://docs.signalsciences.net/integrations/datadog/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/sigsci/metadata.csv
-[9]: https://docs.datadoghq.com/events/
-[10]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/events/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.signalsciences.com/blog/
-

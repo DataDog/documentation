@@ -1,27 +1,27 @@
 ---
-"categories":
+categories:
 - cloud
-"dependencies": []
-"description": "Integrate Akamai mPulse with Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/akamai_mpulse/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/integrate-akamai-mpulse-real-user-monitoring-with-datadog/"
-  "tag": Blog
-  "text": Integrate Akamai mPulse real user monitoring with Datadog
-"git_integration_title": "akamai_mpulse"
-"has_logo": true
-"integration_id": "akamai-mpulse"
-"integration_title": "Akamai mPulse"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "akamai_mpulse"
-"public_title": "Datadog-Akamai mPulse"
-"short_description": "Integrate Akamai mPulse with Datadog."
-"team": "web-integrations"
-"version": "1.0"
+dependencies: []
+description: Integrate Akamai mPulse with Datadog.
+doc_link: https://docs.datadoghq.com/integrations/akamai_mpulse/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/integrate-akamai-mpulse-real-user-monitoring-with-datadog/
+  tag: Blog
+  text: Integrate Akamai mPulse real user monitoring with Datadog
+git_integration_title: akamai_mpulse
+has_logo: true
+integration_id: akamai-mpulse
+integration_title: Akamai mPulse
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: akamai_mpulse
+public_title: Datadog-Akamai mPulse
+short_description: Integrate Akamai mPulse with Datadog.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -88,11 +88,10 @@ Need help? Contact [Datadog support][7].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/akamai_datastream_2/
-[2]: https://docs.datadoghq.com/integrations/nginx/
-[3]: https://docs.datadoghq.com/integrations/mysql/
+[1]: https://docs.datadoghq.com/ja/integrations/akamai_datastream_2/
+[2]: https://docs.datadoghq.com/ja/integrations/nginx/
+[3]: https://docs.datadoghq.com/ja/integrations/mysql/
 [4]: https://app.datadoghq.com/integrations/akamai-mpulse
 [5]: https://community.akamai.com/customers/s/article/mPulse-API-Login-Changes?language=en_US
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_mpulse/akamai_mpulse_metadata.csv
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

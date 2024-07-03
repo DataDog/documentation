@@ -1,60 +1,60 @@
 ---
-"app_id": "retool"
-"app_uuid": "13239057-ebc6-4cb6-a789-35f064bbcd0f"
-"assets":
-  "dashboards":
-    "Retool + Datadog: ElasticSearch Action Console": assets/dashboards/retool_retool_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": retool
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10176"
-    "source_type_name": Retool
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Retool
-  "sales_email": support@retool.com
-  "support_email": support@retool.com
-"categories":
+app_id: retool
+app_uuid: 13239057-ebc6-4cb6-a789-35f064bbcd0f
+assets:
+  dashboards:
+    'Retool + Datadog: ElasticSearch Action Console': assets/dashboards/retool_retool_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: retool
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10176
+    source_type_name: Retool
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Retool
+  sales_email: support@retool.com
+  support_email: support@retool.com
+categories:
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/retool/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "retool"
-"integration_id": "retool"
-"integration_title": "Retool"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "retool"
-"public_title": "Retool"
-"short_description": "Retool is a fast way to build internal tools"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/retool/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: retool
+integration_id: retool
+integration_title: Retool
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: retool
+public_title: Retool
+short_description: Retool is a fast way to build internal tools
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Developer Tools"
-  "configuration": "README.md#Setup"
-  "description": Retool is a fast way to build internal tools
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Retool
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Developer Tools
+  configuration: README.md#Setup
+  description: Retool is a fast way to build internal tools
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Retool
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -99,5 +99,4 @@ The Retool does not include any service checks at this time.
 Need help? Contact [Datadog support][2]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/retool/images/1.png
-[2]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/help/

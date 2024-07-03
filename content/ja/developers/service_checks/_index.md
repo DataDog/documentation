@@ -1,11 +1,11 @@
 ---
-title: Service Check
-kind: documentation
 aliases:
-    - /developers/faq/how-can-i-submit-a-custom-status-check
-    - /developers/service_checks/visualize-your-service-check-in-the-datadog-ui
-    - /guides/services_checks/
-    - /monitors/guide/visualize-your-service-check-in-the-datadog-ui
+- /ja/developers/faq/how-can-i-submit-a-custom-status-check
+- /ja/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
+- /ja/guides/services_checks/
+- /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui
+kind: documentation
+title: Service Check
 ---
 
 ## Overview
@@ -78,5 +78,5 @@ For more information on creating a service check, see [Service Check Monitor][5]
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors/create/custom
-[4]: /monitors/notify/
-[5]: /monitors/types/service_check/
+[4]: /ja/monitors/notify/
+[5]: /ja/monitors/types/service_check/

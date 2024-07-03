@@ -1,10 +1,10 @@
 ---
-title: Attacker Explorer
 disable_toc: false
 further_reading:
 - link: /security/application_security/threats/protection
   tag: Documentation
   text: Protection
+title: Attacker Explorer
 ---
 
 This topic describes how to use **Attacker Explorer** to investigate and block Flagged Attackers.

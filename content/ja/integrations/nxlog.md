@@ -1,23 +1,23 @@
 ---
-title: NXLog
-name: nxlog
-custom_kind: インテグレーション
-description: 'Configure NXLog to gather logs from your host, containers, & services.'
-short_description: 'Configure NXLog to gather logs from your host, containers, & services.'
-categories:
-    - log collection
-doc_link: /integrations/nxlog/
 aliases:
-    - /logs/log_collection/nxlog
+- /ja/logs/log_collection/nxlog
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md
+description: Configure NXLog to gather logs from your host, containers, & services.
+doc_link: /integrations/nxlog/
 has_logo: true
+integration_id: nxlog
 integration_title: nxlog
 is_public: true
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md"]
+name: nxlog
 public_title: Datadog-NXlog Integration
+short_description: Configure NXLog to gather logs from your host, containers, & services.
 supported_os:
-    - windows
-integration_id: "nxlog"
+- windows
+title: NXLog
 ---
 
 ## Overview
@@ -245,4 +245,4 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 Need help? Contact [Datadog support][1].
 
-[1]: /help/
+[1]: /ja/help/

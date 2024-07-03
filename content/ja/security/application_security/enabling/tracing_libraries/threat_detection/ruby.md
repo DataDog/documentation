@@ -1,26 +1,26 @@
 ---
-title: Enabling ASM for Ruby
-kind: documentation
-code_lang: ruby
-type: multi-code-lang
-code_lang_weight: 30
 aliases:
-  - /security_platform/application_security/getting_started/ruby
-  - /security/application_security/getting_started/ruby
-  - /security/application_security/enabling/ruby
+- /ja/security_platform/application_security/getting_started/ruby
+- /ja/security/application_security/getting_started/ruby
+- /ja/security/application_security/enabling/ruby
+code_lang: ruby
+code_lang_weight: 30
 further_reading:
-    - link: /security/application_security/add-user-info/
-      tag: Documentation
-      text: Adding user information to traces
-    - link: "https://github.com/DataDog/dd-trace-rb"
-      tag: ソースコード
-      text: Ruby Datadog library source code
-    - link: /security/default_rules/?category=cat-application-security
-      tag: Documentation
-      text: OOTB Application Security Management Rules
-    - link: /security/application_security/troubleshooting
-      tag: Documentation
-      text: Troubleshooting Application Security Management
+- link: /security/application_security/add-user-info/
+  tag: Documentation
+  text: Adding user information to traces
+- link: https://github.com/DataDog/dd-trace-rb
+  tag: ソースコード
+  text: Ruby Datadog library source code
+- link: /security/default_rules/?category=cat-application-security
+  tag: Documentation
+  text: OOTB Application Security Management Rules
+- link: /security/application_security/troubleshooting
+  tag: Documentation
+  text: Troubleshooting Application Security Management
+kind: documentation
+title: Enabling ASM for Ruby
+type: multi-code-lang
 ---
 
 You can monitor application security for Ruby apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
@@ -217,6 +217,6 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/compatibility/ruby
+[1]: /ja/security/application_security/enabling/compatibility/ruby
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide2.md
-[3]: /tracing/trace_collection/dd_libraries/ruby/
+[3]: /ja/tracing/trace_collection/dd_libraries/ruby/

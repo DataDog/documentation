@@ -1,66 +1,66 @@
 ---
-"app_id": "supervisord"
-"app_uuid": "c4ee3618-f4b4-48b8-9515-a4a2f4091c0d"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "supervisord.process.count"
-      "metadata_path": "metadata.csv"
-      "prefix": "supervisord."
-    "process_signatures":
-    - "python supervisord"
-    - "supervisord"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "116"
-    "source_type_name": "Supervisord"
-  "saved_views":
-    "supervisord_processes": "assets/saved_views/supervisord_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "os & system"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "supervisord"
-"integration_id": "supervisord"
-"integration_title": "Supervisord"
-"integration_version": "2.6.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "supervisord"
-"public_title": "Supervisord"
-"short_description": "Supervisor 管理プロセスのステータス、アップタイム、数を監視。"
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::OS とシステム"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "Supervisor 管理プロセスのステータス、アップタイム、数を監視。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Supervisord"
+app_id: supervisord
+app_uuid: c4ee3618-f4b4-48b8-9515-a4a2f4091c0d
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: supervisord.process.count
+      metadata_path: metadata.csv
+      prefix: supervisord.
+    process_signatures:
+    - python supervisord
+    - supervisord
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 116
+    source_type_name: Supervisord
+  saved_views:
+    supervisord_processes: assets/saved_views/supervisord_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- os & system
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: supervisord
+integration_id: supervisord
+integration_title: Supervisord
+integration_version: 2.6.0
+is_public: true
+manifest_version: 2.0.0
+name: supervisord
+public_title: Supervisord
+short_description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS とシステム
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Supervisord
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -145,9 +145,9 @@ instances:
 
 [Agent を再起動][3]すると、Datadog への Supervisor メトリクスの送信が開始されます。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -161,7 +161,7 @@ instances:
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                                                      |
 | `<INSTANCE_CONFIG>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "username":"<USERNAME>", "password":"<PASSWORD>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -219,7 +219,7 @@ Supervisor チェックには、イベントは含まれません。
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor

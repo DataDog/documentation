@@ -1,19 +1,19 @@
 ---
-title: Instrumenting Java Serverless Applications
-kind: documentation
-further_reading:
-    - link: /serverless/configuration
-      tag: Documentation
-      text: Configure Serverless Monitoring
-    - link: /serverless/guide/troubleshoot_serverless_monitoring
-      tag: Documentation
-      text: Troubleshoot Serverless Monitoring
-    - link: serverless/custom_metrics/
-      tag: Documentation
-      text: Submitting Custom Metrics from Serverless Applications
 aliases:
-    - /serverless/datadog_lambda_library/java/
-    - /serverless/installation/java
+- /ja/serverless/datadog_lambda_library/java/
+- /ja/serverless/installation/java
+further_reading:
+- link: /serverless/configuration
+  tag: Documentation
+  text: Configure Serverless Monitoring
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: Documentation
+  text: Troubleshoot Serverless Monitoring
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: Submitting Custom Metrics from Serverless Applications
+kind: documentation
+title: Instrumenting Java Serverless Applications
 ---
 
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), Java 17 (`java17`), or Java 21 (`java21`) runtimes with at least 1024 MB of memory.
@@ -88,7 +88,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     Additional parameters can be found in the [CLI documentation][2].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -117,8 +117,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     For more information and additional settings, see the [plugin documentation][1].
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -161,8 +161,8 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
     More information and additional parameters can be found in the [macro documentation][1].
 
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -453,13 +453,13 @@ resource "aws_lambda_function" "lambda" {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/functions
-[2]: https://docs.datadoghq.com/metrics/dogstatsd_metrics_submission/
-[3]: /tracing/custom_instrumentation/java/
-[4]: /serverless/guide/troubleshoot_serverless_monitoring/
-[5]: /serverless/configuration/
-[6]: /agent/guide/private-link/
-[7]: /getting_started/site/
-[8]: /agent/configuration/proxy/
-[9]: /serverless/guide/datadog_forwarder_java
-[10]: /serverless/guide/upgrade_java_instrumentation
-[11]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[2]: https://docs.datadoghq.com/ja/metrics/dogstatsd_metrics_submission/
+[3]: /ja/tracing/custom_instrumentation/java/
+[4]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[5]: /ja/serverless/configuration/
+[6]: /ja/agent/guide/private-link/
+[7]: /ja/getting_started/site/
+[8]: /ja/agent/configuration/proxy/
+[9]: /ja/serverless/guide/datadog_forwarder_java
+[10]: /ja/serverless/guide/upgrade_java_instrumentation
+[11]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

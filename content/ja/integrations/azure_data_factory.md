@@ -1,26 +1,26 @@
 ---
-"aliases":
-- /integrations/azure_datafactory
-"categories":
+aliases:
+- /ja/integrations/azure_datafactory
+categories:
 - azure
 - cloud
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Data Factory metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_data_factory/"
-"draft": false
-"git_integration_title": "azure_data_factory"
-"has_logo": true
-"integration_id": "azure-datafactory"
-"integration_title": "Microsoft Azure Data Factory"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_data_factory"
-"public_title": "Datadog-Microsoft Azure Data Factory Integration"
-"short_description": "Track key Azure Data Factory metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Data Factory metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/
+draft: false
+git_integration_title: azure_data_factory
+has_logo: true
+integration_id: azure-datafactory
+integration_title: Microsoft Azure Data Factory
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_data_factory
+public_title: Datadog-Microsoft Azure Data Factory Integration
+short_description: Track key Azure Data Factory metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -54,7 +54,6 @@ The Azure Data Factory integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_factory/azure_data_factory_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

@@ -1,67 +1,67 @@
 ---
-"app_id": "hudi"
-"app_uuid": "ee9cd120-9667-4a81-a309-c34f5942406a"
-"assets":
-  "dashboards":
-    "Hudi Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": hudi.action.duration
-      "metadata_path": metadata.csv
-      "prefix": hudi.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10217"
-    "source_type_name": Hudi
-  "monitors":
-    "commit_duration": assets/monitors/commit_duration.json
-  "saved_views":
-    "hudi_error_logs": assets/saved_views/error_logs.json
-    "hudi_overview": assets/saved_views/hudi_overview.json
-    "hudi_patterns": assets/saved_views/hudi_patterns.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: hudi
+app_uuid: ee9cd120-9667-4a81-a309-c34f5942406a
+assets:
+  dashboards:
+    Hudi Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hudi.action.duration
+      metadata_path: metadata.csv
+      prefix: hudi.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10217
+    source_type_name: Hudi
+  monitors:
+    commit_duration: assets/monitors/commit_duration.json
+  saved_views:
+    hudi_error_logs: assets/saved_views/error_logs.json
+    hudi_overview: assets/saved_views/hudi_overview.json
+    hudi_patterns: assets/saved_views/hudi_patterns.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/hudi/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "hudi"
-"integration_id": "hudi"
-"integration_title": "Hudi"
-"integration_version": "2.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "hudi"
-"public_title": "Hudi"
-"short_description": "Track metrics for your Hudi configuration."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/hudi/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: hudi
+integration_id: hudi
+integration_title: Hudi
+integration_version: 2.3.0
+is_public: true
+manifest_version: 2.0.0
+name: hudi
+public_title: Hudi
+short_description: Track metrics for your Hudi configuration.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Track metrics for your Hudi configuration.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Hudi
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Track metrics for your Hudi configuration.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hudi
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -177,12 +177,11 @@ Hudi インテグレーションには、イベントは含まれません。
 [5]: https://hudi.apache.org/docs/metrics/#jmxmetricsreporter
 [6]: https://github.com/DataDog/integrations-core/blob/master/hudi/datadog_checks/hudi/data/conf.yaml.example
 [7]: https://github.com/DataDog/integrations-core/blob/master/hudi/assets/service_checks.json
-[8]: https://docs.datadoghq.com/integrations/java/
-[9]: https://docs.datadoghq.com/help/
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/integrations/java/
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/hudi/metadata.csv
 [13]: https://github.com/apache/flink/tree/release-1.11.4/flink-dist/src/main/flink-bin/conf
 [14]: https://github.com/apache/spark/tree/v3.1.2/conf
-[15]: https://docs.datadoghq.com/logs/processing/#integration-pipelines
-
+[15]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines

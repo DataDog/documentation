@@ -1,7 +1,7 @@
 ---
-title: Rank
 aliases:
-    - /graphing/functions/rank/
+- /ja/graphing/functions/rank/
+title: Rank
 ---
 
 ## トップ

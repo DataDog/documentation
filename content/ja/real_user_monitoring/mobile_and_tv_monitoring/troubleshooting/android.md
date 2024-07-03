@@ -1,19 +1,19 @@
 ---
-title: Troubleshooting Android SDK issues
-kind: documentation
-description: Learn how to troubleshoot issues with Android Monitoring.
 aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+- /ja/real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: android
-type: multi-code-lang
 code_lang_weight: 10
+description: Learn how to troubleshoot issues with Android Monitoring.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-android"
+- link: https://github.com/DataDog/dd-sdk-android
   tag: ソースコード
   text: dd-sdk-android Source code
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Real User Monitoring
+kind: documentation
+title: Troubleshooting Android SDK issues
+type: multi-code-lang
 ---
 
 ## 概要
@@ -68,5 +68,5 @@ If you've been using the SDK v1, there are some breaking changes introduced in v
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /ja/help
 [2]: https://github.com/DataDog/dd-sdk-android/blob/develop/MIGRATION.MD

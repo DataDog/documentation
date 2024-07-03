@@ -1,19 +1,19 @@
 ---
-title: Instrumenting Go Serverless Applications
-kind: documentation
-further_reading:
-    - link: /serverless/configuration
-      tag: Documentation
-      text: Configure Serverless Monitoring
-    - link: /serverless/guide/troubleshoot_serverless_monitoring
-      tag: Documentation
-      text: Troubleshoot Serverless Monitoring
-    - link: serverless/custom_metrics/
-      tag: Documentation
-      text: Submitting Custom Metrics from Serverless Applications
 aliases:
-    - /serverless/datadog_lambda_library/go/
-    - /serverless/installation/go
+- /ja/serverless/datadog_lambda_library/go/
+- /ja/serverless/installation/go
+further_reading:
+- link: /serverless/configuration
+  tag: Documentation
+  text: Configure Serverless Monitoring
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: Documentation
+  text: Troubleshoot Serverless Monitoring
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: Submitting Custom Metrics from Serverless Applications
+kind: documentation
+title: Instrumenting Go Serverless Applications
 ---
 
 <div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
@@ -50,9 +50,9 @@ To fill in the placeholders:
 
 For more information and additional settings, see the [plugin documentation][1].
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
-[3]: https://docs.datadoghq.com/getting_started/site/
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
@@ -73,7 +73,7 @@ For more information and additional settings, see the [plugin documentation][1].
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /serverless/configuration/
+[3]: /ja/serverless/configuration/
 {{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
@@ -175,7 +175,6 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/functions
-[2]: /serverless/guide/troubleshoot_serverless_monitoring/
-[3]: /serverless/configuration/
-[4]: /security/application_security/enabling/serverless/?tab=serverlessframework
-
+[2]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[3]: /ja/serverless/configuration/
+[4]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

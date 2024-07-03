@@ -1,66 +1,67 @@
 ---
-"app_id": "altostra"
-"app_uuid": "c22d6f84-3404-4638-99bc-7cb19ab4508a"
-"assets":
-  "dashboards":
-    "Altostra": assets/dashboards/altostra.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": altostra.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10181"
-    "source_type_name": Altostra
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Altostra
-  "sales_email": support@altostra.com
-  "support_email": support@altostra.com
-"categories":
+app_id: altostra
+app_uuid: c22d6f84-3404-4638-99bc-7cb19ab4508a
+assets:
+  dashboards:
+    Altostra: assets/dashboards/altostra.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: altostra.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10181
+    source_type_name: Altostra
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Altostra
+  sales_email: support@altostra.com
+  support_email: support@altostra.com
+categories:
 - automation
 - cloud
 - configuration & deployment
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "altostra"
-"integration_id": "altostra"
-"integration_title": "Altostra"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "altostra"
-"public_title": "Altostra"
-"short_description": "Automatically send your cloud applications logs from Altostra to Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: altostra
+integration_id: altostra
+integration_title: Altostra
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: altostra
+public_title: Altostra
+short_description: Automatically send your cloud applications logs from Altostra to
+  Datadog
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Automation"
-  - "Category::Cloud"
-  - "Category::Configuration & Deployment"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Automatically send your cloud applications logs from Altostra to Datadog
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Altostra
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Automation
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Automatically send your cloud applications logs from Altostra to Datadog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Altostra
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -103,5 +104,4 @@ Need help? Contact [Datadog Support][3].
 
 [1]: https://app.altostra.com/team/settings/integrations/logging
 [2]: https://app.altostra.com/environments
-[3]: /help
-
+[3]: /ja/help

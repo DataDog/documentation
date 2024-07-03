@@ -1,25 +1,25 @@
 ---
-title: Correlating Java Logs and Traces
-kind: documentation
-description: 'Connect your Java logs and traces to correlate them in Datadog.'
-code_lang: java
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
-  - /tracing/connect_logs_and_traces/java
+- /ja/tracing/connect_logs_and_traces/java
+code_lang: java
+code_lang_weight: 10
+description: Connect your Java logs and traces to correlate them in Datadog.
 further_reading:
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: "https://www.datadoghq.com/blog/request-log-correlation/"
-      tag: Blog
-      text: Correlate request logs with traces automatically
-    - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-      tag: Guide
-      text: Ease troubleshooting with cross product correlation.
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Correlate request logs with traces automatically
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Ease troubleshooting with cross product correlation.
+kind: documentation
+title: Correlating Java Logs and Traces
+type: multi-code-lang
 ---
 ## Before you begin
 
@@ -108,8 +108,8 @@ try {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/java/
-[2]: /tracing/trace_collection/dd_libraries/java/
-[3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?
-[4]: /logs/log_collection/java/#raw-format
-[5]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[1]: /ja/logs/log_collection/java/
+[2]: /ja/tracing/trace_collection/dd_libraries/java/
+[3]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?
+[4]: /ja/logs/log_collection/java/#raw-format
+[5]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

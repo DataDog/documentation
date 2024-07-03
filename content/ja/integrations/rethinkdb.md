@@ -1,67 +1,68 @@
 ---
-"app_id": "rethinkdb"
-"app_uuid": "f8348717-0ba8-4d42-b856-983e0cde0314"
-"assets":
-  "dashboards":
-    "RethinkDB Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": rethinkdb.config.servers
-      "metadata_path": metadata.csv
-      "prefix": rethinkdb.
-    "process_signatures":
+app_id: rethinkdb
+app_uuid: f8348717-0ba8-4d42-b856-983e0cde0314
+assets:
+  dashboards:
+    RethinkDB Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rethinkdb.config.servers
+      metadata_path: metadata.csv
+      prefix: rethinkdb.
+    process_signatures:
     - rethinkdb
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10092"
-    "source_type_name": RethinkDB
-  "saved_views":
-    "rethinkdb_processes": assets/saved_views/rethinkdb_processes.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10092
+    source_type_name: RethinkDB
+  saved_views:
+    rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rethinkdb"
-"integration_id": "rethinkdb"
-"integration_title": "RethinkDB"
-"integration_version": "3.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rethinkdb"
-"public_title": "RethinkDB"
-"short_description": "Collect status, performance and other metrics from a RethinkDB cluster."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rethinkdb
+integration_id: rethinkdb
+integration_title: RethinkDB
+integration_version: 3.1.0
+is_public: true
+manifest_version: 2.0.0
+name: rethinkdb
+public_title: RethinkDB
+short_description: Collect status, performance and other metrics from a RethinkDB
+  cluster.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Collect status, performance and other metrics from a RethinkDB cluster.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": RethinkDB
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Collect status, performance and other metrics from a RethinkDB cluster.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RethinkDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -165,16 +166,15 @@ RethinkDB には、イベントは含まれません。
 
 
 [1]: https://rethinkdb.com
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://rethinkdb.com/docs/permissions-and-accounts/
 [5]: https://rethinkdb.com/docs/security/#the-admin-account
-[6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/datadog_checks/rethinkdb/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/agent/kubernetes/log/
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/metadata.csv
 [12]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/assets/service_checks.json
-[13]: https://docs.datadoghq.com/help/
-
+[13]: https://docs.datadoghq.com/ja/help/

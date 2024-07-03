@@ -1,37 +1,41 @@
 ---
-title: OpenTelemetry in Datadog
+algolia:
+  tags:
+  - opentelemetry
+  - open telemetry
+  - otel
 aliases:
-- /tracing/setup_overview/open_standards/
+- /ja/tracing/setup_overview/open_standards/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
-- link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
+- link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   tag: Blog
   text: Datadog's partnership with OpenTelemetry
-- link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: Blog
   text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: Blog
-  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter 
-- link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/"
+  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog
+    Exporter
+- link: https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/
   tag: Blog
   text: Forward logs from the OpenTelemetry Collector with the Datadog Exporter
-- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
+- link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/
   tag: Blog
   text: OTLP ingestion in the Agent
-- link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
+- link: https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/
   tag: Blog
   text: Learn more about AWS's managed Lambda Layer for OpenTelemetry
-- link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
+- link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: Blog
   text: Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications
-- link: "https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/"
+- link: https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/
   tag: Blog
   text: Monitor runtime metrics from OTel-instrumented apps with Datadog APM
-algolia:
-  tags: [opentelemetry, open telemetry, otel]
-cascade:
-    algolia:
-        rank: 70
+title: OpenTelemetry in Datadog
 ---
 
 <div class="alert alert-danger">
@@ -60,7 +64,7 @@ Datadog supports the [W3C Trace Context standard][6], ensuring complete traces a
 
 [1]: https://opentelemetry.io/
 [2]: https://www.cncf.io/
-[3]: /opentelemetry/collector_exporter/
-[4]: /opentelemetry/otlp_ingest_in_the_agent/
-[5]: /tracing/trace_collection/trace_context_propagation/
+[3]: /ja/opentelemetry/collector_exporter/
+[4]: /ja/opentelemetry/otlp_ingest_in_the_agent/
+[5]: /ja/tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/

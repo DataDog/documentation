@@ -1,59 +1,59 @@
 ---
-"app_id": "logstash"
-"app_uuid": "efcb18d9-2789-4481-bd4b-ff5a4c058dc3"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": "logstash.process.cpu.percent"
-      "metadata_path": "metadata.csv"
-      "prefix": "logstash."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10016"
-    "source_type_name": "Logstash"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Community"
-  "sales_email": "ervansetiawan@gmail.com"
-  "support_email": "ervansetiawan@gmail.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "logstash"
-"integration_id": "logstash"
-"integration_title": "Logstash"
-"integration_version": "1.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "logstash"
-"public_title": "Logstash"
-"short_description": "Monitor and collect runtime metrics from a Logstash instance"
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": "Monitor and collect runtime metrics from a Logstash instance"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Logstash"
+app_id: logstash
+app_uuid: efcb18d9-2789-4481-bd4b-ff5a4c058dc3
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: logstash.process.cpu.percent
+      metadata_path: metadata.csv
+      prefix: logstash.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10016
+    source_type_name: Logstash
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: ervansetiawan@gmail.com
+  support_email: ervansetiawan@gmail.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: logstash
+integration_id: logstash
+integration_title: Logstash
+integration_version: 1.1.0
+is_public: true
+manifest_version: 2.0.0
+name: logstash
+public_title: Logstash
+short_description: Monitor and collect runtime metrics from a Logstash instance
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Monitor and collect runtime metrics from a Logstash instance
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Logstash
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -87,8 +87,8 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Logstash
 
 2. Configure your integration similar to core [integrations][2].
 
-[1]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[2]: https://docs.datadoghq.com/getting_started/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[2]: https://docs.datadoghq.com/ja/getting_started/integrations/
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -105,7 +105,7 @@ If you are using Kubernetes, update your Datadog Operator or Helm chart configur
 
 See [Use Community Integrations][1] for more context.
 
-[1]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[1]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -134,9 +134,9 @@ See [Use Community Integrations][1] for more context.
 
 2. [Restart the Agent][3].
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -154,8 +154,8 @@ To learn how to apply this template, see [Docker Integrations][1] or [Kubernetes
 
 See the [sample logstash.d/conf.yaml][3] for all available configuration options.
 
-[1]: https://docs.datadoghq.com/containers/docker/integrations
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/containers/docker/integrations
+[2]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
 {{% /tab %}}
 {{< /tabs >}}
@@ -279,10 +279,10 @@ If you need further help, contact [Datadog support][10].
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/logstash-output-datadog_logs
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.datadoghq.com/agent/proxy/#proxy-for-logs
-[5]: /logs/#edit-reserved-attributes
-[6]: /logs/processing/#integration-pipelines
-[7]: /getting_started/tagging/assigning_tags
+[4]: https://docs.datadoghq.com/ja/agent/proxy/#proxy-for-logs
+[5]: /ja/logs/#edit-reserved-attributes
+[6]: /ja/logs/processing/#integration-pipelines
+[7]: /ja/getting_started/tagging/assigning_tags
 [8]: https://app.datadoghq.com/infrastructure
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [10]: http://docs.datadoghq.com/help

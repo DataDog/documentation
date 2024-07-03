@@ -1,14 +1,14 @@
 ---
-title: Domain Allowlist
-private: true
-is_beta: true
 further_reading:
-- link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
+- link: https://app.datadoghq.com/organization-settings/domain-allowlist
   tag: In the app
   text: Domain Allowlist
 - link: /account_management/org_settings/domain_allowlist_api
   tag: ドキュメント
   text: Domain Allowlist API
+is_beta: true
+private: true
+title: Domain Allowlist
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
@@ -51,5 +51,4 @@ To remove a domain from the allowlist, select the delete icon.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/domain-allowlist
-[2]: /account_management/org_settings/domain_allowlist_api
-
+[2]: /ja/account_management/org_settings/domain_allowlist_api

@@ -1,7 +1,6 @@
 ---
-title: Variables
 aliases:
-  - /security_platform/notifications/variables
+- /ja/security_platform/notifications/variables
 further_reading:
 - link: /security/detection_rules/
   tag: Documentation
@@ -10,15 +9,16 @@ further_reading:
   tag: Documentation
   text: Learn more about Security notifications
 products:
-- name: Cloud SIEM
+- icon: siem
+  name: Cloud SIEM
   url: /security/cloud_siem/
-  icon: siem
-- name: Cloud Security Management
+- icon: cloud-security-management
+  name: Cloud Security Management
   url: /security/cloud_security_management/
-  icon: cloud-security-management
-- name: Application Security Management
+- icon: app-sec
+  name: Application Security Management
   url: /security/application_security/
-  icon: app-sec
+title: Variables
 ---
 
 {{< product-availability >}}
@@ -291,6 +291,6 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/detection_rules/#creating-and-managing-detection-rules
-[2]: /monitors/guide/template-variable-evaluation/
+[1]: /ja/security/detection_rules/#creating-and-managing-detection-rules
+[2]: /ja/monitors/guide/template-variable-evaluation/
 [3]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

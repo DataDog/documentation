@@ -1,6 +1,8 @@
 ---
-title: List Widget
-widget_type: list_stream
+algolia:
+  tags:
+  - event stream
+  - log stream
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
@@ -8,8 +10,8 @@ further_reading:
 - link: /notebooks/
   tag: Documentation
   text: Notebooks
-algolia:
-  tags: [event stream, log stream]
+title: List Widget
+widget_type: list_stream
 ---
 
 The list widget displays a list of events and issues, which can come from a variety of sources such as Logs, RUM, or Events. Search and query across sources to narrow down the events you want the widget to highlight and display.
@@ -91,5 +93,5 @@ RUM については、以下でソートすることができます。
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dashboards/
-[2]: /dashboards/graphing_json/widget_json/
+[1]: /ja/api/latest/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

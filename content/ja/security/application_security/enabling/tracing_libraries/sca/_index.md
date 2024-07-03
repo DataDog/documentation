@@ -1,6 +1,4 @@
 ---
-title: Enabling Software Composition Analysis using Datadog tracing libraries
-kind: documentation
 disable_toc: false
 further_reading:
 - link: /security/default_rules/?category=cat-application-security
@@ -12,9 +10,11 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog における Application Security Management の仕組み
-- link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
+- link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
   tag: ブログ
   text: Datadog ASM でサーバーレスアプリケーションのセキュリティを強化する
+kind: documentation
+title: Enabling Software Composition Analysis using Datadog tracing libraries
 ---
 
 You can use Datadog Software Composition Analysis (SCA) to monitor the open source libraries in your apps.
@@ -135,12 +135,8 @@ java -javaagent:dd-java-agent.jar \
 
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /security/application_security/enabling/compatibility/java
-[3]: /security/application_security/enabling/compatibility/java/#asm-capabilities-support
+[2]: /ja/security/application_security/enabling/compatibility/java
+[3]: /ja/security/application_security/enabling/compatibility/java/#asm-capabilities-support
 [4]: https://app.datadoghq.com/security/appsec/vm
-[5]: /help
-[6]: /agent/versions/upgrade_between_agent_minor_versions/
-
-
-
-
+[5]: /ja/help
+[6]: /ja/agent/versions/upgrade_between_agent_minor_versions/

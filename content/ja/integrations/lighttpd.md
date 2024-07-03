@@ -1,65 +1,65 @@
 ---
-"app_id": "lighttpd"
-"app_uuid": "3d7ace6a-9efd-4d21-b4e6-a9956512a875"
-"assets":
-  "dashboards":
-    "lighttpd": "assets/dashboards/lighttpd_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "lighttpd.performance.uptime"
-      "metadata_path": "metadata.csv"
-      "prefix": "lighttpd."
-    "process_signatures":
-    - "lighttpd"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "58"
-    "source_type_name": "Lighttpd"
-  "saved_views":
-    "lighttpd_processes": "assets/saved_views/lighttpd_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "lighttpd"
-"integration_id": "lighttpd"
-"integration_title": "Lighttpd"
-"integration_version": "3.5.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "lighttpd"
-"public_title": "Lighttpd"
-"short_description": "アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Lighttpd"
+app_id: lighttpd
+app_uuid: 3d7ace6a-9efd-4d21-b4e6-a9956512a875
+assets:
+  dashboards:
+    lighttpd: assets/dashboards/lighttpd_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: lighttpd.performance.uptime
+      metadata_path: metadata.csv
+      prefix: lighttpd.
+    process_signatures:
+    - lighttpd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 58
+    source_type_name: Lighttpd
+  saved_views:
+    lighttpd_processes: assets/saved_views/lighttpd_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: lighttpd
+integration_id: lighttpd
+integration_title: Lighttpd
+integration_version: 3.5.1
+is_public: true
+manifest_version: 2.0.0
+name: lighttpd
+public_title: Lighttpd
+short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Lighttpd
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -102,9 +102,9 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 
 2. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -118,7 +118,7 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 | `<INIT_CONFIG>`      | 空白または `{}`                                                   |
 | `<INSTANCE_CONFIG>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -175,7 +175,7 @@ Lighttpd チェックには、イベントは含まれません。
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard_2.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics

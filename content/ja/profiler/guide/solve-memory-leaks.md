@@ -1,5 +1,4 @@
 ---
-title: Solve Memory Leaks with Profiling
 further_reading:
 - link: /profiler
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /profiler/compare_profiles/
   tag: Documentation
   text: Comparing Profiles
+title: Solve Memory Leaks with Profiling
 ---
 
 ## 概要
@@ -45,9 +45,9 @@ To investigate a memory leak using the guided walkthrough:
 3. Follow the guided steps to complete your investigation.
 
 
-[1]: /profiler/enabling/supported_versions/#profile-types
-[2]: /profiler/compare_profiles
-[3]: /profiler/enabling
+[1]: /ja/profiler/enabling/supported_versions/#profile-types
+[2]: /ja/profiler/compare_profiles
+[3]: /ja/profiler/enabling
 
 ## 参考資料
 

@@ -1,11 +1,9 @@
 ---
-title: Using Tags
-kind: documentation
-description: Learn how to use tags in Datadog products.
 aliases:
-- /tagging/using_tags/
+- /ja/tagging/using_tags/
+description: Learn how to use tags in Datadog products.
 further_reading:
-- link: "https://www.datadoghq.com/blog/tagging-best-practices/"
+- link: https://www.datadoghq.com/blog/tagging-best-practices/
   tag: Blog
   text: Best practices for tagging your infrastructure and applications
 - link: /getting_started/tagging/
@@ -14,6 +12,8 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags/
   tag: Documentation
   text: Learn how to assign tags
+kind: documentation
+title: Using Tags
 ---
 
 ## Overview
@@ -69,9 +69,9 @@ Use [template variables][3] to save time switching the **from** tag on graphs in
 
 {{< img src="tagging/using_tags/dashboard_dynamic_template_variables.png" alt="Dashboard Template Variables" style="width:80%;">}}
 
-[1]: /dashboards/
-[2]: /events/
-[3]: /dashboards/template_variables/
+[1]: /ja/dashboards/
+[2]: /ja/events/
+[3]: /ja/dashboards/template_variables/
 {{% /tab %}}
 {{% tab "Examples" %}}
 
@@ -220,8 +220,8 @@ In the [Trace Explorer][1], you can filter traces with tags using the search bar
 
 {{< img src="tagging/using_tags/trace_explorer.png" alt="Trace Explorer Tags" style="width:80%;">}}
 
-[1]: /tracing/trace_explorer/search/
-[2]: /tracing/trace_explorer/query_syntax/
+[1]: /ja/tracing/trace_explorer/search/
+[2]: /ja/tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -229,11 +229,11 @@ After [assigning tags][1], use the Service Map to navigate to different areas of
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags" style="width:80%;">}}
 
-[1]: /getting_started/tagging/assigning_tags/
-[2]: /tracing/app_analytics/search/
-[3]: /monitors/manage/
-[4]: /logs/explorer/search/
-[5]: /infrastructure/hostmap/
+[1]: /ja/getting_started/tagging/assigning_tags/
+[2]: /ja/tracing/app_analytics/search/
+[3]: /ja/monitors/manage/
+[4]: /ja/logs/explorer/search/
+[5]: /ja/infrastructure/hostmap/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -300,7 +300,7 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 
 
 [1]: https://app.datadoghq.com/synthetics/tests
-[2]: /synthetics/search/
+[2]: /ja/synthetics/search/
 {{% /tab %}}
 {{% tab "Explorer" %}}
 
@@ -312,8 +312,8 @@ To filter test runs by tags, use the search bar or facet checkboxes. The search 
 
 
 [1]: https://app.datadoghq.com/synthetics/explorer/
-[2]: /continuous_testing/cicd_integrations
-[3]: /continuous_testing/explorer/search/
+[2]: /ja/continuous_testing/cicd_integrations
+[3]: /ja/continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -328,7 +328,7 @@ To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. Th
 
 SLO tags are different and separate from metric or monitor tags used in the underlying metrics or monitors of an SLO.
 
-[1]: /getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
+[1]: /ja/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
 {{% /tab %}}
 
 {{% tab "Metric-based SLOs" %}}
@@ -338,7 +338,7 @@ When creating a [metric-based SLO][1], use metric tags in the SLO's success rati
 * **from** text box to limit the metric scope to only those tags.
 * **sum by** text box to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
 
-[1]: /service_management/service_level_objectives/metric/
+[1]: /ja/service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
@@ -346,8 +346,8 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Monitor-based SLO Tags" style="width:80%;">}}
 
-[1]: /service_management/service_level_objectives/monitor/
-[2]: /getting_started/tagging/using_tags/?tab=newmonitor#monitors
+[1]: /ja/service_management/service_level_objectives/monitor/
+[2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -363,7 +363,7 @@ To filter test runs by tags, use the search bar or facet checkboxes. The search 
 {{< img src="/continuous_integration/test_runs.png" alt="Test runs in the CI Visibility Explorer" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /tests/search/
+[102]: /ja/tests/search/
 
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}
@@ -375,7 +375,7 @@ To filter pipeline executions by tags, use the search bar or facet checkboxes. T
 {{< img src="/continuous_integration/pipeline_executions.png" alt="Pipeline executions in the CI Visibility Explorer" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/pipeline-executions
-[102]: /continuous_testing/explorer/search/
+[102]: /ja/continuous_testing/explorer/search/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -405,35 +405,35 @@ See this list for links to respective sections:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/assigning_tags/
-[2]: /service_management/events/explorer
-[3]: /integrations/
-[4]: /infrastructure/hostmap/
-[5]: /infrastructure/
-[6]: /infrastructure/livecontainers/
-[7]: /infrastructure/process/
-[8]: /metrics/explorer/
-[9]: /notebooks/
-[10]: /logs/explorer/search/
-[11]: /logs/explorer/analytics/
-[12]: /logs/explorer/patterns/
-[13]: /logs/live_tail/
-[14]: /logs/log_configuration/pipelines
-[15]: /real_user_monitoring/explorer/
-[16]: /real_user_monitoring/explorer/search/
-[17]: /api/
-[18]: /api/v1/downtimes/#schedule-a-downtime
-[19]: /api/v1/events/#query-the-event-stream
-[20]: /api/v1/hosts/
-[21]: /api/v1/aws-integration/
-[22]: /api/v1/gcp-integration/
-[23]: /api/v1/metrics/#query-timeseries-points
-[24]: /api/v1/monitors/#get-all-monitor-details
-[25]: /api/v1/monitors/#mute-a-monitor
-[26]: /api/v1/dashboards/#create-a-new-dashboard
-[27]: /api/v1/service-level-objectives/#create-a-slo-object
-[28]: /api/v1/service-level-objectives/#get-a-slos-details
-[29]: /api/v1/service-level-objectives/#update-a-slo
-[30]: /monitors/manage/#monitor-tags
-[31]: /monitors/downtimes/
-[32]: /getting_started/tagging/assigning_tags?tab=monitors
+[1]: /ja/getting_started/tagging/assigning_tags/
+[2]: /ja/service_management/events/explorer
+[3]: /ja/integrations/
+[4]: /ja/infrastructure/hostmap/
+[5]: /ja/infrastructure/
+[6]: /ja/infrastructure/livecontainers/
+[7]: /ja/infrastructure/process/
+[8]: /ja/metrics/explorer/
+[9]: /ja/notebooks/
+[10]: /ja/logs/explorer/search/
+[11]: /ja/logs/explorer/analytics/
+[12]: /ja/logs/explorer/patterns/
+[13]: /ja/logs/live_tail/
+[14]: /ja/logs/log_configuration/pipelines
+[15]: /ja/real_user_monitoring/explorer/
+[16]: /ja/real_user_monitoring/explorer/search/
+[17]: /ja/api/
+[18]: /ja/api/v1/downtimes/#schedule-a-downtime
+[19]: /ja/api/v1/events/#query-the-event-stream
+[20]: /ja/api/v1/hosts/
+[21]: /ja/api/v1/aws-integration/
+[22]: /ja/api/v1/gcp-integration/
+[23]: /ja/api/v1/metrics/#query-timeseries-points
+[24]: /ja/api/v1/monitors/#get-all-monitor-details
+[25]: /ja/api/v1/monitors/#mute-a-monitor
+[26]: /ja/api/v1/dashboards/#create-a-new-dashboard
+[27]: /ja/api/v1/service-level-objectives/#create-a-slo-object
+[28]: /ja/api/v1/service-level-objectives/#get-a-slos-details
+[29]: /ja/api/v1/service-level-objectives/#update-a-slo
+[30]: /ja/monitors/manage/#monitor-tags
+[31]: /ja/monitors/downtimes/
+[32]: /ja/getting_started/tagging/assigning_tags?tab=monitors

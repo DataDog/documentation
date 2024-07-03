@@ -1,24 +1,25 @@
 ---
-"aliases":
-- "/integrations/sumologic/"
-"categories":
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。"
-"doc_link": "https://docs.datadoghq.com/integrations/sumologic/"
-"draft": false
-"git_integration_title": "sumo_logic"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Sumo Logic"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "sumo_logic"
-"public_title": "Datadog-Sumo Logic Integration"
-"short_description": "Send logs from Sumo Logic to Datadog; send Datadog notifications to Sumo Logic."
-"version": "1.0"
+aliases:
+- /ja/integrations/sumologic/
+categories:
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
+doc_link: https://docs.datadoghq.com/integrations/sumologic/
+draft: false
+git_integration_title: sumo_logic
+has_logo: true
+integration_id: ''
+integration_title: Sumo Logic
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: sumo_logic
+public_title: Datadog-Sumo Logic Integration
+short_description: Send logs from Sumo Logic to Datadog; send Datadog notifications
+  to Sumo Logic.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -62,4 +63,3 @@ Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log d
 10. Choose Webhook for the **Alert Type**. Choose your new Datadog connection from the list of webhooks. Optionally customize the payload and change the **Alert Condition** to send a notification only if the number of results is greater than 0. {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="Hosted Collection" popup="true">}}
 
 [1]: https://app.datadoghq.com/integrations/sumo_logic
-

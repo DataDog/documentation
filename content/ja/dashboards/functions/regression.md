@@ -1,7 +1,7 @@
 ---
-title: Regression
 aliases:
-    - /graphing/functions/regression/
+- /ja/graphing/functions/regression/
+title: Regression
 ---
 
 ## ロバスト回帰

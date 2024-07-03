@@ -1,7 +1,7 @@
 ---
-title: NetFlow
 core_product:
-  - network performance monitoring
+- network performance monitoring
+title: NetFlow
 ---
 [NetFlow][1] is a network protocol system that collects IP network traffic as it enters or exits an interface. It was introduced by Cisco in 1996.
 

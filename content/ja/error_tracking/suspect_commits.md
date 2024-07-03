@@ -1,6 +1,6 @@
 ---
-title: Suspect Commits
 disable_toc: false
+title: Suspect Commits
 ---
 ## 概要
 
@@ -37,6 +37,6 @@ The Suspect Commits feature requires [Source Code Integration][1]. To enable Sou
 ### Install the GitHub integration
 Install [the GitHub integration][2], enabling read permissions for pull requests and contents.
 
-[1]: /integrations/guide/source-code-integration
-[2]: /integrations/github/
+[1]: /ja/integrations/guide/source-code-integration
+[2]: /ja/integrations/github/
 [3]: https://app.datadoghq.com/integrations

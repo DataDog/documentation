@@ -1,6 +1,4 @@
 ---
-title: RUM Mobile SDKs Deprecation Policy
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
@@ -8,6 +6,8 @@ further_reading:
 - link: /real_user_monitoring/guide/mobile-sdk-upgrade
   tag: Documentation
   text: Upgrade your Datadog Mobile SDK
+kind: documentation
+title: RUM Mobile SDKs Deprecation Policy
 ---
 
 ## Overview
@@ -46,4 +46,4 @@ During this support period, we provide new features and bug fixes, in addition t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://semver.org/
-[2]: /real_user_monitoring/guide/mobile-sdk-upgrade
+[2]: /ja/real_user_monitoring/guide/mobile-sdk-upgrade

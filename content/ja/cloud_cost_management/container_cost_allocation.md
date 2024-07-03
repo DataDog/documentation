@@ -1,11 +1,12 @@
 ---
-title: Container Cost Allocation
-private: true
-description: Learn how to allocate Cloud Cost Management spending across your organization with Container Cost Allocation.
+description: Learn how to allocate Cloud Cost Management spending across your organization
+  with Container Cost Allocation.
 further_reading:
 - link: /cloud_cost_management/
   tag: Documentation
   text: Cloud Cost Management について
+private: true
+title: Container Cost Allocation
 ---
 
 {{< site-region region="gov" >}}
@@ -48,9 +49,9 @@ The following table presents the list of collected features and the minimal Agen
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
 
 [101]: https://app.datadoghq.com/cost/setup
-[102]: /containers/kubernetes/installation/?tab=operator
-[103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
-[104]: /containers/amazon_ecs/
+[102]: /ja/containers/kubernetes/installation/?tab=operator
+[103]: /ja/infrastructure/containers/orchestrator_explorer?tab=datadogoperator
+[104]: /ja/containers/amazon_ecs/
 [105]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 
 {{% /tab %}}
@@ -68,8 +69,8 @@ The following table presents the list of collected features and the minimal Agen
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 
 [101]: https://app.datadoghq.com/cost/setup
-[102]: /containers/kubernetes/installation/?tab=operator
-[103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
+[102]: /ja/containers/kubernetes/installation/?tab=operator
+[103]: /ja/infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 
 {{% /tab %}}
 {{% tab "Google" %}}
@@ -86,8 +87,8 @@ The following table presents the list of collected features and the minimal Agen
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 
 [101]: https://app.datadoghq.com/cost/setup
-[102]: /containers/kubernetes/installation/?tab=operator
-[103]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
+[102]: /ja/containers/kubernetes/installation/?tab=operator
+[103]: /ja/infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -129,8 +130,8 @@ ECS の割り当てにおいて、Datadog は ECS に使用された各 EC2 イ�
 
 ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM enriches that data by adding out-of-the-box tags and container tags to the AWS Fargate cost.
 
-[101]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
-[102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
+[101]: /ja/containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
+[102]: /ja/containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 
 {{% /tab %}}
@@ -146,8 +147,8 @@ For Kubernetes compute allocation, a Kubernetes node is joined with its associat
 
 All other costs are given the same value and tags as the source metric `azure.cost.amortized`.
 
-[101]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
-[102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
+[101]: /ja/containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
+[102]: /ja/containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 
 {{% /tab %}}
 {{% tab "Google" %}}
@@ -175,8 +176,8 @@ To view the costs of GKE clusters without enabling Datadog Infrastructure Monito
 
 To enable GKE cost allocation, see the [official GKE documentation][105].
 
-[101]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
-[102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
+[101]: /ja/containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
+[102]: /ja/containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
 [103]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations
 [104]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#limitations
 [105]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#enable_breakdown

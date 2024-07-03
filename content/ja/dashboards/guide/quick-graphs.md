@@ -61,19 +61,19 @@ title: Quick Graphs
 
 **Export** をクリックして、ダッシュボードやノートブックに保存します。グラフの変更は、いつでもエディターに戻って行うことができます。ダッシュボードやノートブックを使わずにグラフへのリンクを直接共有したい場合は、**Copy to Clipboard** をクリックしてください。
 
-[1]: /dashboards/querying/#define-the-metric
-[2]: /dashboards/querying/#filter
-[3]: /dashboards/querying/#aggregate-and-rollup
-[4]: /dashboards/querying/#advanced-graphing
-[5]: /logs/explorer/
-[6]: /tracing/trace_explorer/
-[7]: /real_user_monitoring/explorer/search/
-[8]: /security/
-[9]: /events/
-[10]: /continuous_integration/pipelines/
-[11]: /continuous_integration/tests/
-[12]: /security/cloud_security_management/misconfigurations/findings/
-[13]: /dashboards/widgets/timeseries/
-[14]: /dashboards/widgets/top_list/
-[15]: /dashboards/widgets/query_value/
-[16]: /dashboards/widgets/geomap/
+[1]: /ja/dashboards/querying/#define-the-metric
+[2]: /ja/dashboards/querying/#filter
+[3]: /ja/dashboards/querying/#aggregate-and-rollup
+[4]: /ja/dashboards/querying/#advanced-graphing
+[5]: /ja/logs/explorer/
+[6]: /ja/tracing/trace_explorer/
+[7]: /ja/real_user_monitoring/explorer/search/
+[8]: /ja/security/
+[9]: /ja/events/
+[10]: /ja/continuous_integration/pipelines/
+[11]: /ja/continuous_integration/tests/
+[12]: /ja/security/cloud_security_management/misconfigurations/findings/
+[13]: /ja/dashboards/widgets/timeseries/
+[14]: /ja/dashboards/widgets/top_list/
+[15]: /ja/dashboards/widgets/query_value/
+[16]: /ja/dashboards/widgets/geomap/

@@ -1,11 +1,12 @@
 ---
-title: Datadog IDE Plugins for Code Analysis
-description: Learn how to set up Datadog IDE plugins for enhanced code analysis and quality assurance in your development environment.
+description: Learn how to set up Datadog IDE plugins for enhanced code analysis and
+  quality assurance in your development environment.
 disable_toc: false
 further_reading:
 - link: /developers/ide_plugins
   tag: ドキュメント
   text: Learn about Datadog IDE Plugins
+title: Datadog IDE Plugins for Code Analysis
 ---
 
 ## 概要
@@ -22,4 +23,4 @@ Enhance your developer capabilities by integrating [Code Analysis][1] directly i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /code_analysis/
+[1]: /ja/code_analysis/

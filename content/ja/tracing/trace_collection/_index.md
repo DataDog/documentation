@@ -1,22 +1,22 @@
 ---
-title: Application Instrumentation
-kind: documentation
-description: "Get Started with Datadog APM"
 aliases:
-    - /tracing/setup
-    - /tracing/send_traces/
-    - /tracing/setup/
-    - /tracing/environments/
-    - /tracing/setup/environment
-    - /tracing/setup/first_class_dimensions
-    - /tracing/getting_further/first_class_dimensions/
-    - /agent/apm/
-    - /tracing/setup_overview/
-    - /tracing/trace_collection/library_injection_remote
+- /ja/tracing/setup
+- /ja/tracing/send_traces/
+- /ja/tracing/setup/
+- /ja/tracing/environments/
+- /ja/tracing/setup/environment
+- /ja/tracing/setup/first_class_dimensions
+- /ja/tracing/getting_further/first_class_dimensions/
+- /ja/agent/apm/
+- /ja/tracing/setup_overview/
+- /ja/tracing/trace_collection/library_injection_remote
+description: Get Started with Datadog APM
 further_reading:
 - link: tracing/trace_collection/compatibility
   tag: Documentation
   text: Compatibility requirements
+kind: documentation
+title: Application Instrumentation
 ---
 
 ## Overview
@@ -80,12 +80,12 @@ The following tutorials guide you through setting up distributed tracing for a s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
-[2]: /tracing/trace_collection/library_injection_local/
-[4]: /tracing/trace_collection/dd_libraries/
-[5]: /tracing/trace_collection/automatic_instrumentation/
-[6]: /tracing/trace_collection/custom_instrumentation/
-[7]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
-[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
-[10]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/developers/community/libraries/#apm-tracing-client-libraries
+[2]: /ja/tracing/trace_collection/library_injection_local/
+[4]: /ja/tracing/trace_collection/dd_libraries/
+[5]: /ja/tracing/trace_collection/automatic_instrumentation/
+[6]: /ja/tracing/trace_collection/custom_instrumentation/
+[7]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[8]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[9]: /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/
+[10]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

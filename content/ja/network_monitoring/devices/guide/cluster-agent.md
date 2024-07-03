@@ -1,7 +1,6 @@
 ---
-title: Network Device Monitoring with the Cluster Agent
 aliases:
-    - /network_performance_monitoring/devices/guide/cluster-agent/
+- /ja/network_performance_monitoring/devices/guide/cluster-agent/
 further_reading:
 - link: /agent/cluster_agent
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /agent/cluster_agent/clusterchecks
   tag: Documentation
   text: Cluster Checks
+title: Network Device Monitoring with the Cluster Agent
 ---
 
 Kubernetes 環境では、Network Device Monitoring (NDM) のオートディスカバリー論理を[クラスターチェック][2]のソースとして使用するよう [Datadog Cluster Agent][1] (DCA) を構成することが可能です。
@@ -229,6 +229,6 @@ clusterAgent:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks
+[1]: /ja/agent/cluster_agent
+[2]: /ja/agent/cluster_agent/clusterchecks
 [3]: https://app.datadoghq.com/organization-settings/api-keys

@@ -1,7 +1,4 @@
 ---
-title: Enabling ASM Threat Detection using Datadog Tracing Libraries
-kind: documentation
-type: multi-code-lang
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -21,9 +18,12 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: How Application Security Management Works in Datadog
-- link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
+- link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
   tag: Blog
   text: Secure serverless applications with Datadog ASM
+kind: documentation
+title: Enabling ASM Threat Detection using Datadog Tracing Libraries
+type: multi-code-lang
 ---
 
 Select your application language for details on how to enable ASM Threat Detection for your language and infrastructure types.

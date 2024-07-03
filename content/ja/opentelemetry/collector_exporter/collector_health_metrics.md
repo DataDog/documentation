@@ -1,9 +1,9 @@
 ---
-title: Health Metrics
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
   text: Setting Up the OpenTelemetry Collector
+title: Health Metrics
 ---
 
 ## Overview

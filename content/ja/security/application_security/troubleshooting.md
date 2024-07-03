@@ -1,7 +1,6 @@
 ---
-title: Troubleshooting Application Security Management
 aliases:
-  - /security_platform/application_security/troubleshooting
+- /ja/security_platform/application_security/troubleshooting
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -15,6 +14,7 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: How Application Security Management Works in Datadog
+title: Troubleshooting Application Security Management
 ---
 
 
@@ -176,7 +176,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 - spring-web
 - tomcat
 
-[1]: /security/application_security/enabling/compatibility/java
+[1]: /ja/security/application_security/enabling/compatibility/java
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -184,14 +184,14 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 **注:** ASP.NET Core が無効になっている場合でも、ASM はこのフレームワークで動作するはずです。
 
-[1]: /security/application_security/enabling/compatibility/dotnet
+[1]: /ja/security/application_security/enabling/compatibility/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
 [PHP][1] については、必須のインテグレーションはありません。
 <p></p>
 
-[1]: /security/application_security/enabling/compatibility/php
+[1]: /ja/security/application_security/enabling/compatibility/php
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -205,7 +205,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 お使いのフレームワークがサポートされていない場合は、Go リポジトリで [新しい問題を作成][7] してください。
 
-[1]: /security/application_security/enabling/compatibility/go
+[1]: /ja/security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -218,7 +218,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 For [Node.js][1], the HTTP integration is required.
 <p></p>
 
-[1]: /security/application_security/enabling/compatibility/nodejs
+[1]: /ja/security/application_security/enabling/compatibility/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -226,11 +226,11 @@ For [Node.js][1], the HTTP integration is required.
 
 **注:** Rack は手動で追加するか、[Rails][4] または [Sinatra][5] とのインテグレーションで自動的に追加することができます。手動で追加した場合、Rack スタックにおいて、トレーサーミドルウェアはセキュリティミドルウェアの前に表示される必要があります。
 
-[1]: /security/application_security/enabling/compatibility/ruby
-[2]: /tracing/trace_collection/dd_libraries/ruby/#rack
+[1]: /ja/security/application_security/enabling/compatibility/ruby
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
-[4]: /tracing/trace_collection/dd_libraries/ruby/#rails
-[5]: /tracing/trace_collection/dd_libraries/ruby/#sinatra
+[4]: /ja/tracing/trace_collection/dd_libraries/ruby/#rails
+[5]: /ja/tracing/trace_collection/dd_libraries/ruby/#sinatra
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -238,7 +238,7 @@ For [Node.js][1], the HTTP integration is required.
 [Python][1] の場合、WSGI インテグレーションと、Django や Flask のような使用中のフレームワークのインテグレーションが必要です。
 <p></p>
 
-[1]: /security/application_security/enabling/compatibility/python
+[1]: /ja/security/application_security/enabling/compatibility/python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -367,7 +367,7 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 
 **注:** ASM は、有効になっているときのみログを出力します。ASM を有効にするには、環境変数 `DD_APPSEC_ENABLED=1` を使用します。
 
-[1]: /tracing/troubleshooting/tracer_startup_logs/
+[1]: /ja/tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
@@ -404,9 +404,9 @@ Node.js アプリケーションの[トレースとシグナルエクスプロ�
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
-[3]: /tracing/troubleshooting/tracer_startup_logs/
-[4]: /security/application_security/enabling/nodejs/?tab=dockercli
-[5]: /tracing/troubleshooting/
+[3]: /ja/tracing/troubleshooting/tracer_startup_logs/
+[4]: /ja/security/application_security/enabling/nodejs/?tab=dockercli
+[5]: /ja/tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -433,7 +433,7 @@ Python アプリケーションの[トレースとシグナルエクスプロー
 
 
 [1]: https://app.datadoghq.com/security/appsec/
-[2]: /tracing/troubleshooting/
+[2]: /ja/tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -533,7 +533,7 @@ Metrics: [
 Agent がトレースを転送するのを 1 分ほど待ってから、APM ダッシュボードでトレースが表示されていることを確認してください。トレース内のセキュリティ情報は、Datadog で処理されるまでにさらに時間がかかり、ASM の[トレースとシグナルエクスプローラー][1]にセキュリティトレースとして表示される場合があります。
 
 [1]: https://app.datadoghq.com/security/appsec/
-[2]: /tracing/troubleshooting/#tracer-debug-logs
+[2]: /ja/tracing/troubleshooting/#tracer-debug-logs
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -612,19 +612,19 @@ ASM で問題が解決しない場合は、以下の情報を添えて [Datadog 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /ja/help/
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: https://app.datadoghq.com/security/appsec?instructions=all
-[4]: /tracing/troubleshooting/
-[5]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
-[6]: /tracing/troubleshooting/connection_errors/
-[7]: /security/default_rules/security-scan-detected/
-[8]: /tracing/troubleshooting/tracer_startup_logs/
-[9]: /tracing/glossary/#spans
-[10]: /tracing/troubleshooting/#tracer-debug-logs
-[11]: /security/application_security/enabling/
+[4]: /ja/tracing/troubleshooting/
+[5]: /ja/tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[6]: /ja/tracing/troubleshooting/connection_errors/
+[7]: /ja/security/default_rules/security-scan-detected/
+[8]: /ja/tracing/troubleshooting/tracer_startup_logs/
+[9]: /ja/tracing/glossary/#spans
+[10]: /ja/tracing/troubleshooting/#tracer-debug-logs
+[11]: /ja/security/application_security/enabling/
 [12]: https://app.datadoghq.com/security/appsec/vm
-[13]: /security/application_security/code_security/
-[14]: /security/application_security/software_composition_analysis
+[13]: /ja/security/application_security/code_security/
+[14]: /ja/security/application_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
 [16]: https://app.datadoghq.com/organization-settings/remote-config

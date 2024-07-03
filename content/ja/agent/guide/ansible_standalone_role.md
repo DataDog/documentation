@@ -1,6 +1,6 @@
 ---
 dependencies:
-- "https://github.com/DataDog/ansible-datadog/blob/main/README.md"
+- https://github.com/DataDog/ansible-datadog/blob/main/README.md
 title: Set up Ansible Using a Standalone Datadog Role
 ---
 Datadog Agent Ansible ロールは、Datadog Agent とインテグレーションをインストールおよび構成します。
@@ -657,23 +657,23 @@ If you need to install the agent through Ansible but don't want to specify an AP
 
 [1]: https://galaxy.ansible.com/Datadog/datadog
 [2]: https://github.com/DataDog/ansible-datadog
-[3]: https://docs.datadoghq.com/agent/autodiscovery
-[4]: https://docs.datadoghq.com/agent/guide/integration-management/
+[3]: https://docs.datadoghq.com/ja/agent/autodiscovery
+[4]: https://docs.datadoghq.com/ja/agent/guide/integration-management/
 [5]: https://github.com/DataDog/integrations-core
-[6]: https://docs.datadoghq.com/infrastructure/process/
-[7]: https://docs.datadoghq.com/network_performance_monitoring/
-[8]: https://docs.datadoghq.com/security_platform/cloud_workload_security/getting_started/
-[9]: https://docs.datadoghq.com/network_performance_monitoring/installation/?tab=agent#setup
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#restart-the-agent
+[6]: https://docs.datadoghq.com/ja/infrastructure/process/
+[7]: https://docs.datadoghq.com/ja/network_performance_monitoring/
+[8]: https://docs.datadoghq.com/ja/security_platform/cloud_workload_security/getting_started/
+[9]: https://docs.datadoghq.com/ja/network_performance_monitoring/installation/?tab=agent#setup
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 [11]: https://app.datadoghq.com/help/agent_fix
 [12]: https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html#playbook-keywords
 [13]: https://github.com/DataDog/ansible-datadog/blob/main/tasks/agent-linux.yml
 [14]: https://github.com/DataDog/ansible-datadog/blob/main/tasks/agent-win.yml
 [15]: https://www.datadoghq.com/blog/datadog-marketplace/
 [16]: https://github.com/ansible/ansible/blob/stable-2.9/changelogs/CHANGELOG-v2.9.rst#id61
-[17]: https://docs.datadoghq.com/tracing/universal_service_monitoring/?tab=configurationfiles#enabling-universal-service-monitoring
-[18]: https://docs.datadoghq.com/security/cspm/setup/?tab=docker
+[17]: https://docs.datadoghq.com/ja/tracing/universal_service_monitoring/?tab=configurationfiles#enabling-universal-service-monitoring
+[18]: https://docs.datadoghq.com/ja/security/cspm/setup/?tab=docker
 [19]: https://github.com/DataDog/integrations-core
 [20]: https://github.com/DataDog/integrations-extras
-[23]: https://docs.datadoghq.com/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers#configure-docker-injection
+[23]: https://docs.datadoghq.com/ja/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers#configure-docker-injection
 [24]: https://docs.datadog.com/tracing/trace_collection/library_injection_local

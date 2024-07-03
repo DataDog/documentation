@@ -1,27 +1,27 @@
 ---
-"aliases":
-- "/integrations/awskms/"
-"categories":
-- "cloud"
-- "security"
-- "aws"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track AWS KMS key expiration."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_kms/"
-"draft": false
-"git_integration_title": "amazon_kms"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Key Management Service (KMS)"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_kms"
-"public_title": "Datadog-AWS Key Management Service (KMS) Integration"
-"short_description": "Track AWS KMS key expiration."
-"version": "1.0"
+aliases:
+- /ja/integrations/awskms/
+categories:
+- cloud
+- security
+- aws
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: Track AWS KMS key expiration.
+doc_link: https://docs.datadoghq.com/integrations/amazon_kms/
+draft: false
+git_integration_title: amazon_kms
+has_logo: true
+integration_id: ''
+integration_title: AWS Key Management Service (KMS)
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_kms
+public_title: Datadog-AWS Key Management Service (KMS) Integration
+short_description: Track AWS KMS key expiration.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -79,12 +79,11 @@ The AWS KMS integration does not include any service checks.
 
 Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-kms
-[4]: https://docs.datadoghq.com/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kms/amazon_kms_metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

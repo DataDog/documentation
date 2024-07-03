@@ -1,9 +1,9 @@
 ---
-title: Node.js Compatibility Requirements
-kind: documentation
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 50
+kind: documentation
+title: Node.js Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Application Security capabilities
@@ -159,8 +159,8 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | passport-local  | 1.0.0                     |
 | passport-http   | 0.3.0                     |
 
-[1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[1]: /ja/tracing/trace_collection/compatibility/nodejs/
+[2]: /ja/agent/remote_config/#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver

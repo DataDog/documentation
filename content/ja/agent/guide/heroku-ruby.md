@@ -1,5 +1,4 @@
 ---
-title: Instrumenting a Ruby on Rails application on Heroku with Datadog
 further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: Documentation
   text: Collect Heroku logs
+title: Instrumenting a Ruby on Rails application on Heroku with Datadog
 ---
 
 Heroku は、Ruby の開発者、特に Ruby on Rails の開発者に人気のプラットフォームです。Datadog は Heroku および Ruby の両方をサポートするため、Heroku Ruby アプリケーションのメトリクス、ログ、トレースを Datadog へ送信できます。
@@ -845,20 +845,20 @@ Agent (v7.27.0)
 [7]: https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
 [8]: https://app.datadoghq.com
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/
+[10]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/heroku/
 [11]: https://devcenter.heroku.com/articles/buildpacks/
 [12]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Adatadog.heroku_agent.running&filter=dyno%3Aweb.1
-[13]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#enabling-integrations
-[14]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#prerun-script
+[13]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/heroku/#enabling-integrations
+[14]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/heroku/#prerun-script
 [15]: https://app.datadoghq.com/metric/summary?filter=postgresql
 [16]: https://elements.heroku.com/addons/heroku-redis
 [17]: https://elements.heroku.com/addons/memcachedcloud
-[18]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
+[18]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
 [19]: https://app.datadoghq.com/apm/traces
 [20]: https://app.datadoghq.com/services
 [21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
 [22]: https://app.datadoghq.com/logs/livetail
 [23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages
 [24]: https://app.datadoghq.com/logs/livetail?cols=core_host%2Ccore_service&from_ts=0&index=%2A&live=true&messageDisplay=inline&query=source%3Aruby&stream_sort=desc&to_ts=-1
-[25]: https://docs.datadoghq.com/integrations/
+[25]: https://docs.datadoghq.com/ja/integrations/
 [26]: https://devcenter.heroku.com/articles/exec#environment-variables

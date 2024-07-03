@@ -1,9 +1,7 @@
 ---
-title: Generate Custom Metrics From RUM Events
-kind: documentation
-description: "Create custom metrics from your RUM events."
 aliases:
-- /real_user_monitoring/generate_metrics
+- /ja/real_user_monitoring/generate_metrics
+description: Create custom metrics from your RUM events.
 further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
@@ -11,15 +9,17 @@ further_reading:
 - link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to create queries in the RUM Explorer
-- link: "/real_user_monitoring/explorer/search/#event-types"
+- link: /real_user_monitoring/explorer/search/#event-types
   tag: Documentation
   text: Learn about RUM event types
 - link: /logs/log_configuration/logs_to_metrics/
   tag: Documentation
   text: Generate metrics from ingested logs
-- link: "https://www.datadoghq.com/blog/track-customer-experience-with-rum-metrics/"
+- link: https://www.datadoghq.com/blog/track-customer-experience-with-rum-metrics/
   tag: Blog
   text: Generate RUM-based metrics to track historical trends in customer experience
+kind: documentation
+title: Generate Custom Metrics From RUM Events
 ---
 
 ## Overview
@@ -107,18 +107,18 @@ You can use RUM-based custom metrics for the following actions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/sampling-browser-plans
+[1]: /ja/real_user_monitoring/guide/sampling-browser-plans
 [2]: https://app.datadoghq.com/rum/explorer
-[3]: /metrics/custom_metrics/
+[3]: /ja/metrics/custom_metrics/
 [4]: https://app.datadoghq.com/rum/generate-metrics
-[5]: /real_user_monitoring/explorer/
-[6]: /metrics/custom_metrics/#naming-custom-metrics
-[7]: /real_user_monitoring/explorer/search/#event-types
-[8]: /real_user_monitoring/explorer/search_syntax/
-[9]: /dashboards/
-[10]: /monitors/
-[11]: /metrics/distributions/
-[12]: /dashboards/querying/#configuring-a-graph
-[13]: /monitors/types/anomaly/
-[14]: /monitors/types/forecasts/
-[15]: /service_management/service_level_objectives/metric/
+[5]: /ja/real_user_monitoring/explorer/
+[6]: /ja/metrics/custom_metrics/#naming-custom-metrics
+[7]: /ja/real_user_monitoring/explorer/search/#event-types
+[8]: /ja/real_user_monitoring/explorer/search_syntax/
+[9]: /ja/dashboards/
+[10]: /ja/monitors/
+[11]: /ja/metrics/distributions/
+[12]: /ja/dashboards/querying/#configuring-a-graph
+[13]: /ja/monitors/types/anomaly/
+[14]: /ja/monitors/types/forecasts/
+[15]: /ja/service_management/service_level_objectives/metric/

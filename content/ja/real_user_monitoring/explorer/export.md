@@ -1,6 +1,4 @@
 ---
-title: Export RUM Events and Graphs
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
@@ -14,6 +12,8 @@ further_reading:
 - link: /monitors
   tag: Documentation
   text: Learn about Monitors
+kind: documentation
+title: Export RUM Events and Graphs
 ---
 
 ## Overview
@@ -40,10 +40,10 @@ Options available for some visualization types are not supported in others. For 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/latest/rum/#search-rum-events
+[1]: https://docs.datadoghq.com/ja/api/latest/rum/#search-rum-events
 [2]: https://app.datadoghq.com/rum/explorer
-[3]: /real_user_monitoring/explorer/
-[4]: https://docs.datadoghq.com/api/latest/rum/
-[5]: /metrics/explorer/
-[6]: /monitors/types/real_user_monitoring/
-[7]: /notebooks/
+[3]: /ja/real_user_monitoring/explorer/
+[4]: https://docs.datadoghq.com/ja/api/latest/rum/
+[5]: /ja/metrics/explorer/
+[6]: /ja/monitors/types/real_user_monitoring/
+[7]: /ja/notebooks/

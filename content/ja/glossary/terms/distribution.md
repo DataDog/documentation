@@ -1,10 +1,10 @@
 ---
-title: distribution
 core_product:
-  - モニター
+- モニター
 related_terms:
-  - flush interval
-  - heatmap
+- flush interval
+- heatmap
+title: distribution
 ---
 A distribution is a metric type that aggregates values (such as `count`, `min`, `max`, `sum`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`) sent from multiple hosts during a flush interval.
 

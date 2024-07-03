@@ -1,40 +1,40 @@
 ---
-title: Getting Started with Incident Management
-kind: documentation
 further_reading:
-    - link: "https://learn.datadoghq.com/courses/intro-to-incident-management"
-      tag: Learning Center
-      text: Introduction to Incident Management
-    - link: /service_management/incident_management/datadog_clipboard
-      tag: Documentation
-      text: Datadog Clipboard
-    - link: "https://www.youtube.com/watch?v=QIambwILy_M"
-      tag: Video
-      text: Datadog on Incident Management
-    - link: /monitors/incident_management
-      tag: Documentation
-      text: Incident Management
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session to improve your Incident Management
-    - link: "https://www.datadoghq.com/blog/incident-response-with-datadog/"
-      tag: Blog
-      text: Incident Management with Datadog
-    - link: /service_management/incident_management/incident_settings
-      tag: Documentation
-      text: Notification Rules
-    - link: "/integrations/slack/?tab=slackapplicationus#using-datadog-incidents"
-      tag: Documentation
-      text: Slack integration with incidents
-    - link: "https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/"
-      tag: Blog
-      text: More efficient pair programming with Datadog CoScreen
-    - link: "https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/"
-      tag: Blog
-      text: Best practices for writing incident postmortems
-    - link: "https://www.datadoghq.com/blog/how-datadog-manages-incidents/"
-      tag: Blog
-      text: How we manage incidents at Datadog
+- link: https://learn.datadoghq.com/courses/intro-to-incident-management
+  tag: Learning Center
+  text: Introduction to Incident Management
+- link: /service_management/incident_management/datadog_clipboard
+  tag: Documentation
+  text: Datadog Clipboard
+- link: https://www.youtube.com/watch?v=QIambwILy_M
+  tag: Video
+  text: Datadog on Incident Management
+- link: /monitors/incident_management
+  tag: Documentation
+  text: Incident Management
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to improve your Incident Management
+- link: https://www.datadoghq.com/blog/incident-response-with-datadog/
+  tag: Blog
+  text: Incident Management with Datadog
+- link: /service_management/incident_management/incident_settings
+  tag: Documentation
+  text: Notification Rules
+- link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+  tag: Documentation
+  text: Slack integration with incidents
+- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
+  tag: Blog
+  text: More efficient pair programming with Datadog CoScreen
+- link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
+  tag: Blog
+  text: Best practices for writing incident postmortems
+- link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
+  tag: Blog
+  text: How we manage incidents at Datadog
+kind: documentation
+title: Getting Started with Incident Management
 ---
 
 {{% site-region region="gov" %}}
@@ -196,18 +196,18 @@ You can also declare and edit incidents and quickly communicate to your teams th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/slack/
-[2]: /service_management/incident_management/datadog_clipboard
-[3]: /notebooks/#overview
-[4]: /service_management/incident_management/#from-a-graph
-[5]: /service_management/incident_management/#from-a-monitor
-[6]: /api/latest/incidents/#create-an-incident
+[1]: /ja/integrations/slack/
+[2]: /ja/service_management/incident_management/datadog_clipboard
+[3]: /ja/notebooks/#overview
+[4]: /ja/service_management/incident_management/#from-a-graph
+[5]: /ja/service_management/incident_management/#from-a-monitor
+[6]: /ja/api/latest/incidents/#create-an-incident
 [7]: https://app.datadoghq.com/notebook/list
 [8]: https://app.datadoghq.com/incidents/settings#Messages
-[9]: /service_management/incident_management/#status-levels
-[10]: /service_management/incident_management/incident_settings
+[9]: /ja/service_management/incident_management/#status-levels
+[10]: /ja/service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /service_management/mobile/
+[12]: /ja/service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
 [15]: https://app.datadoghq.com/dashboard/lists

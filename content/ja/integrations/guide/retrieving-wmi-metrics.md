@@ -1,19 +1,18 @@
 ---
-title: Retrieving WMI metrics
-kind: guide
 aliases:
-  - /integrations/faq/how-to-retrieve-wmi-metrics
+- /ja/integrations/faq/how-to-retrieve-wmi-metrics
+title: Retrieving WMI metrics
 ---
 
-## What is WMI?
+## WMI とは？
 
-In the Windows world, operating systems and applications metrics are exposed using the Windows Management Instrumentation. The Datadog Agent for Windows comes with a WMI Integration out of the box, so you can monitor the information that matters to you.
+Windows の世界では、オペレーティングシステムやアプリケーションのメトリクスは、Windows Management Instrumentation を使用して公開されています。Datadog Agent for Windows には、すぐに WMI インテグレーションが付属しているので、重要な情報を監視することができます。
 
-Data in WMI is grouped into classes. There are several hundreds classes that come by default, and each additional role and feature brings its own. Some Applications can also add classes such as Microsoft SQL Server, Microsoft Exchange along with various third party apps.
+WMI のデータは、クラスに分類されます。デフォルトで用意されているクラスは数百あり、ロールや機能を追加するごとに独自のクラスが追加されます。アプリケーションによっては、Microsoft SQL Server、Microsoft Exchange、および様々なサードパーティアプリなどのクラスを追加することもできます。
 
-Microsoft Powershell is considered the standard way to interact with a Windows system programmatically, and it comes with the tools to manage WMI.
+Microsoft Powershell は、Windows システムをプログラムで操作するための標準的な方法と考えられており、WMI を管理するためのツールが付属しています。
 
-To list all classes available on a computer, run:
+コンピュータで利用できるすべてのクラスを一覧表示するには、以下を実行します。
 
 ```text
 PS C:\> Get-WmiObject -List
@@ -31,14 +30,14 @@ __IndicationRelated {} {}
 [...]
 ```
 
-To count how many classes are available, run:
+クラスがいくつあるかカウントするには、以下を実行します。
 
 ```text
 PS C:\> (Get-WmiObject -List).count
 931
 ```
 
-You can find classes about a specific topic by using the `where` statement. To display classes that hold processes information, run:
+特定のトピックに関するクラスは、`where` ステートメントを使用することで見つけることができます。プロセス情報を保持するクラスを表示するには、以下を実行します。
 
 ```text
 PS C:\> Get-WmiObject -List | where {$_.name -match "process"} | select Name
@@ -57,9 +56,9 @@ Win32_PerfFormattedData_PerfProc_Process
 [...]
 ```
 
-To browse the data exposed by a class, you can use a syntax similar to SQL called [WQL][1].
+クラスが公開するデータを閲覧するには、[WQL][1] と呼ばれる SQL に似た構文を使用することができます。
 
-Many performance related metrics are reported by the PerfMon tool, and are called `Win32_PerfFormattedData_`. In this example, look at the processes information so you can query the `Win32_PerfFormattedData_PerfProc_Process` class:
+多くのパフォーマンス関連のメトリクスは PerfMon ツールによってレポートされ、`Win32_PerfFormattedData_` と呼ばれています。この例では、`Win32_PerfFormattedData_PerfProc_Process` クラスにクエリできるように、プロセス情報を見てください。
 
 ```text
 PS C:\> Get-WmiObject -Query "select * from Win32_PerfFormattedData_PerfProc_Process where Name = 'Powershell'"
@@ -112,59 +111,59 @@ WorkingSet              : 41054208
 WorkingSetPeak          : 45273088
 ```
 
-This command returns details about the Powershell process. It includes a lot of information including memory usage and I/O operations.
+このコマンドは、Powershell プロセスに関する詳細を返します。メモリ使用量や I/O 操作など、多くの情報が含まれています。
 
-For those who can run third-party applications on their machine the tool WMI Explorer is great for browsing the information exposed by WMI. It's available here https://www.ks-soft.net/hostmon.eng/wmi/, it's a self-contained .exe file so you don't have to install it, and it's virus-free https://www.virustotal.com/en/file/df8e909491da38556a6c9a50abf42b3b906127e0d4b35d0198ef491139d1622c/analysis/.
+マシン上でサードパーティのアプリケーションを実行できる場合、WMI Explorer というツールは、WMI によって公開された情報を閲覧するのに適しています。このツールは、https://www.ks-soft.net/hostmon.eng/wmi/ で取得でき、自己完結型の .exe ファイルなのでインストールする必要がなく、ウイルスフリー (https://www.virustotal.com/en/file/df8e909491da38556a6c9a50abf42b3b906127e0d4b35d0198ef491139d1622c/analysis/) です。
 
-## Leveraging WMI in Datadog
+## Datadog で WMI を活用する
 
-After understanding a little bit about how WMI works, you can get this data into Datadog. Open the Datadog Agent Manager and click on the WMI Check integration in the left panel.
+WMI の仕組みについて少し理解したら、このデータを Datadog に取り込むことができます。Datadog Agent Manager を開き、左のパネルにある WMI Check インテグレーションをクリックします。
 
-Start with a simple example: monitoring the number of processes on the machine:
+まずは簡単な例として、マシン上のプロセス数を監視することから始めましょう。
 
 ```yaml
 init_config:
 
-# Each WMI query has 2 required options, `class` and `metrics`
-# `class` is the name of the WMI class, for example Win32_OperatingSystem
-# `metrics` is a list of metrics you want to capture, with each item in the
-# list being a set of [WMI property name, metric name, metric type].
+# 各 WMI クエリには、`class` と `metrics` の 2 つの必須オプションがあります
+# `class` は WMI クラス名で、例えば Win32_OperatingSystem のようになります
+# `metrics` はキャプチャしたいメトリクスのリストで、
+# リストの各項目は [WMI プロパティ名、メトリクス名、メトリクスタイプ]のセットとなります。
 
 instances:
 
-  # Fetch the number of processes
+  # プロセス数を取得します
   - class: Win32_OperatingSystem
     metrics:
       - [NumberOfProcesses, system.proc.count, gauge]
 ```
 
-Save the configuration, enable the integration and restart then go to 'Logs and Status -> Agent Status'. Under the 'Checks' section you should see the following:
+構成を保存し、インテグレーションを有効にして再起動した後、'Logs and Status -> Agent Status' に進みます。'Checks' セクションの下に、以下のように表示されるはずです。
 
 ```text
 wmi_check Instance #0 OK Collected 1 metrics, 0 events and 1 service check
 ```
 
-Monitor the Windows Powershell process you were looking at earlier:
+先ほど見ていた Windows Powershell のプロセスを監視します。
 
 ```yaml
 init_config:
 
-#   Fetch metrics for a single running application
+#   単一の実行中のアプリケーションのメトリクスをフェッチします
 instances:
   - class: Win32_PerfFormattedData_PerfProc_Process
     metrics:
       - [ThreadCount, powershell.threads.count, gauge]
       - [VirtualBytes, powershell.mem.virtual, gauge]
 
-  # `filters` is a list of filters on the WMI query you may want. For example,
-  # for a process-based WMI class you may want metrics for only certain
-  # processes running on your machine, so you could add a filter for each
-  # process name. See below for an example of this case.
+  # `filters` は、WMI クエリに必要なフィルターのリストです。例えば、
+  # プロセスベースの WMI クラスでは、マシン上で実行されている特定のプロセスのみのメトリクスが
+  # 必要な場合があるので、各プロセス名のフィルターを追加することができます。
+  # この場合の例として、以下を参照してください。
     filters:
       - Name: powershell
 ```
 
-In your Metrics Explorer you should find 2 metrics called powershell.threads.count and powershell.mem.virtual. But what happens if you have 2 Powershell consoles opened? You may find the following error in the 'Checks section':
+メトリクスエクスプローラーには、powershell.threads.count と powershell.mem.virtual という 2 つのメトリクスがあるはずです。しかし、2 つの Powershell コンソールを開いている場合、どうなるでしょうか？'Checks section' に以下のようなエラーが表示されることがあります。
 
 ```text
 wmi_check
@@ -176,30 +175,31 @@ wmi_check
   Collected 0 metrics, 0 events and 1 service check
 ```
 
-This is because the Agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 you can use the `tag_by: Instance_Property_Name statement` to use the value of an instance's property as an additional tag:
+これは、Agent が同じ名前とタグのセットを持つ 2 つの異なるメトリクスについてレポートできないからです。この 2 つを区別するために、`tag_by: Instance_Property_Name statement` を使用すると、インスタンスのプロパティの値を追加のタグとして使用できます。
 
 ```yaml
 init_config:
 
 instances:
 
-#   Fetch metrics for each instance of a running application
+#   実行中のアプリケーションの各インスタンスのメトリクスを取得します
   - class: Win32_PerfFormattedData_PerfProc_Process
     metrics:
       - [ThreadCount, powershell.threads.count, gauge]
       - [VirtualBytes, powershell.mem.virtual, gauge]
     filters:
       - Name: powershell
-# `tag_by` optionally lets you tag each metric with a property from the
-# WMI class you're using. This is only useful when you have multiple
-# values for your WMI query. The examples below show how you can tag your
-# process metrics with the process name (giving a tag of "name:app_name").
+# `tag_by` はオプションで、各メトリクスに使用している WMI クラスの
+# プロパティをタグ付けすることができます。これは、WMI クエリに
+# 複数の値がある場合にのみ有用です。以下の例では、プロセスメトリクスを
+# プロセス名でタグ付けする方法を示しています ("name:app_name" というタグを指定します)。
     tag_by: Name
-# Note that bellow works on Window >= 2008, as process names are appended a `#XYZ` where `XYZ` is an incremental number
-# If running on Windows 2003, use a different uniq value like `tag_by: IDProcess`
+# プロセス名には `#XYZ` が付加され、`XYZ` はインクリメンタルな数字であるため、以下は Window >= 2008 で動作することに注意してください
+# Windows 2003 で動作している場合は、`tag_by: IDProcess` のように別の一意の値を使用します
 ```
 
-Which gives you 2 metrics per Powershell console opened:
+
+これにより、Powershell コンソールを開くごとに 2 つのメトリクスを得ることができます。
 
 ```text
 wmi_check
@@ -208,33 +208,33 @@ wmi_check
   Collected 4 metrics, 0 events and 1 service check
 ```
 
-If the information that you would like to use as a tag is not part of the class you're getting the data from, you have the possibility to use the tag_queries list to link data from different tables.
+タグとして使用したい情報が、データを取得するクラスの一部でない場合、tag_queries リストを使用して、異なるテーブルのデータをリンクさせることができます。
 
-Say you want to report on PoolNonPagedBytes from Win32_PerfFormattedData_PerfProc_Process and you want to addCreationDate from Win32_Process as a tag. These 2 classes expose the PID with different names: IDProcess inWin32_PerfFormattedData_PerfProc_Process and Handle in Win32_Process. So the former is the link source property and the later the target property:
+例えば、Win32_PerfFormattedData_PerfProc_Process の PoolNonPagedBytes をレポートし、Win32_Process の CreationDate をタグとして追加したいとします。この 2 つのクラスは、異なる名前で PID を公開しています。Win32_PerfFormattedData_PerfProc_Process の IDProcess と Win32_Process の Handle です。つまり、前者がリンク元プロパティ、後者がターゲットプロパティとなります。
 
 ```yaml
-# `tag_queries` optionally lets you specify a list of queries, to tag metrics
-# with a target class property. Each item in the list is a set of
-# [link source property, target class, link target class property, target property]
-# where:
+# `tag_queries` は、オプションで、ターゲットクラスプロパティでメトリクスに
+# タグ付けするためのクエリのリストを指定することができます。
+# リストの各項目は、[link source property, target class, link target class property, target property] のセットです
+# ここで、
 #
-# - 'link source property' contains the link value
-# - 'target class' is the class to link to
-# - 'link target class property' is the target class property to link to
-# - 'target property' contains the value to tag with
+# - 'link source property' にはリンク値が入ります
+# - 'target class' はリンク先のクラスです
+# - 'link target class property' はリンク先のクラスプロパティです
+# - 'target property' には、タグ付けする値が入ります
 #
-# It translates to a WMI query:
+# WMI クエリに変換されます。
 # SELECT 'target property' FROM 'target class'
 #                 WHERE 'link target class property' = 'link source property'
 #
-# Note: setting this causes any instance number to be removed from tag_by values
-# i.e. name:process#1 => name:process
+# 注: これを設定すると、tag_by の値からインスタンス番号が削除されます
+# すなわち、name:process#1 => name:process
 
 init_config:
 
 instances:
 
-#   Fetch metrics for a single running application
+#   単一の実行中のアプリケーションのメトリクスを取得します
   - class: Win32_PerfFormattedData_PerfProc_Process
     metrics:
       - [ThreadCount, powershell.threads.count, gauge]

@@ -1,58 +1,60 @@
 ---
-"app_id": "rigor"
-"app_uuid": "f9ab0c97-235c-4f88-8b92-89eb563e18ba"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": rigor.http.dns_time
-      "metadata_path": metadata.csv
-      "prefix": rigor.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10029"
-    "source_type_name": Rigor
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Rigor
-  "sales_email": support@rigor.com
-  "support_email": support@rigor.com
-"categories":
+app_id: rigor
+app_uuid: f9ab0c97-235c-4f88-8b92-89eb563e18ba
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: rigor.http.dns_time
+      metadata_path: metadata.csv
+      prefix: rigor.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10029
+    source_type_name: Rigor
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Rigor
+  sales_email: support@rigor.com
+  support_email: support@rigor.com
+categories:
 - testing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rigor"
-"integration_id": "rigor"
-"integration_title": "Rigor"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rigor"
-"public_title": "Rigor"
-"short_description": "Rigor provides synthetic monitoring and optimization throughout dev lifecycle"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rigor
+integration_id: rigor
+integration_title: Rigor
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rigor
+public_title: Rigor
+short_description: Rigor provides synthetic monitoring and optimization throughout
+  dev lifecycle
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Testing"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Rigor provides synthetic monitoring and optimization throughout dev lifecycle
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Rigor
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Testing
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Rigor provides synthetic monitoring and optimization throughout dev
+    lifecycle
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rigor
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -147,4 +149,3 @@ Need help? Contact [Rigor support][12].
 [10]: https://github.com/DataDog/integrations-extras/blob/master/rigor/metadata.csv
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_events_example.png
 [12]: mailto:support@rigor.com
-

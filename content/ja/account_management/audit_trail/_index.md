@@ -1,7 +1,6 @@
 ---
-title: Datadog Audit Trail
 aliases:
-    - /account_management/audit_logs/
+- /ja/account_management/audit_logs/
 further_reading:
 - link: /account_management/audit_trail/events/
   tag: Documentation
@@ -12,12 +11,14 @@ further_reading:
 - link: /data_security/pci_compliance/
   tag: Documentation
   text: Set up a PCI-compliant Datadog organization
-- link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
-  text: Build compliance, governance, and transparency across your teams with Datadog Audit Trail
-- link: "https://www.datadoghq.com/blog/audit-trail-best-practices/"
+  text: Build compliance, governance, and transparency across your teams with Datadog
+    Audit Trail
+- link: https://www.datadoghq.com/blog/audit-trail-best-practices/
   tag: Blog
   text: Monitor critical Datadog assets and configurations with Audit Trail
+title: Datadog Audit Trail
 ---
 
 ## 概要
@@ -219,15 +220,15 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/audit-trail
-[2]: /data_security/pci_compliance/
+[2]: /ja/data_security/pci_compliance/
 [3]: https://app.datadoghq.com/organization-settings/
 [4]: https://app.datadoghq.com/event/explorer
-[5]: /logs/explorer/
-[6]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
-[7]: /monitors/types/audit_trail/
-[8]: /dashboards/
-[9]: /dashboards/widgets/top_list/
-[10]: /dashboards/widgets/timeseries/
-[11]: /dashboards/widgets/list/
-[12]: /dashboards/querying/#define-the-metric/
+[5]: /ja/logs/explorer/
+[6]: https://docs.datadoghq.com/ja/account_management/rbac/permissions/?tab=ui#general-permissions
+[7]: /ja/monitors/types/audit_trail/
+[8]: /ja/dashboards/
+[9]: /ja/dashboards/widgets/top_list/
+[10]: /ja/dashboards/widgets/timeseries/
+[11]: /ja/dashboards/widgets/list/
+[12]: /ja/dashboards/querying/#define-the-metric/
 [13]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

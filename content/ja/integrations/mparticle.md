@@ -1,22 +1,22 @@
 ---
-"categories":
-- "mobile"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。"
-"doc_link": "https://docs.datadoghq.com/integrations/mparticle/"
-"draft": false
-"git_integration_title": "mparticle"
-"has_logo": true
-"integration_id": "mparticle"
-"integration_title": "mParticle"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "mparticle"
-"public_title": "Datadog-mParticle Integration"
-"short_description": "Monitor app crashes and collect detailed runtime performance metrics."
-"version": "1.0"
+categories:
+- mobile
+custom_kind: インテグレーション
+dependencies: []
+description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
+doc_link: https://docs.datadoghq.com/integrations/mparticle/
+draft: false
+git_integration_title: mparticle
+has_logo: true
+integration_id: mparticle
+integration_title: mParticle
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: mparticle
+public_title: Datadog-mParticle Integration
+short_description: Monitor app crashes and collect detailed runtime performance metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -63,5 +63,4 @@ Need help? Contact [Datadog support][5].
 [2]: https://docs.mparticle.com/integrations/datadog/event/
 [3]: https://app.mparticle.com/login?return=
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

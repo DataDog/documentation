@@ -1,68 +1,69 @@
 ---
-"app_id": "twingate"
-"app_uuid": "c88bd253-18da-4224-af14-7854ce8ae6ed"
-"assets":
-  "dashboards":
-    "Twingate Dashboard": assets/dashboards/twingate_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10338"
-    "source_type_name": Twingate
-"author":
-  "homepage": "https://www.twingate.com/?utm_source=datadog&utm_medium=partner&utm_campaign=integrations"
-  "name": Twingate
-  "sales_email": sales@twingate.com
-  "support_email": support@twingate.com
-"categories":
+app_id: twingate
+app_uuid: c88bd253-18da-4224-af14-7854ce8ae6ed
+assets:
+  dashboards:
+    Twingate Dashboard: assets/dashboards/twingate_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10338
+    source_type_name: Twingate
+author:
+  homepage: https://www.twingate.com/?utm_source=datadog&utm_medium=partner&utm_campaign=integrations
+  name: Twingate
+  sales_email: sales@twingate.com
+  support_email: support@twingate.com
+categories:
 - network
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/twingate/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "twingate"
-"integration_id": "twingate"
-"integration_title": "Twingate"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "twingate"
-"public_title": "Twingate"
-"short_description": "Twingate provides a modern, Zero Trust alternative to corporate VPNs"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/twingate/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: twingate
+integration_id: twingate
+integration_title: Twingate
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: twingate
+public_title: Twingate
+short_description: Twingate provides a modern, Zero Trust alternative to corporate
+  VPNs
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Network"
-  - "Category::Security"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Twingate provides a modern, Zero Trust alternative to corporate VPNs
-  "media":
-  - "caption": Twingate Activity Log
-    "image_url": images/twingate_activity_log.png
-    "media_type": image
-  - "caption": Twingate Real-Time Activity Dashboard
-    "image_url": images/dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/monitor-network-access-with-twingate/"
-  "support": "README.md#Support"
-  "title": Twingate
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Network
+  - Category::Security
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Twingate provides a modern, Zero Trust alternative to corporate VPNs
+  media:
+  - caption: Twingate Activity Log
+    image_url: images/twingate_activity_log.png
+    media_type: image
+  - caption: Twingate Real-Time Activity Dashboard
+    image_url: images/dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-network-access-with-twingate/
+  support: README.md#Support
+  title: Twingate
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -171,11 +172,10 @@ docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
 - [Datadog Marketplace の Twingate の製品を使ってネットワークアクセスを監視する][8]
 
 [1]: https://www.twingate.com/
-[2]: https://docs.datadoghq.com/getting_started/agent/
+[2]: https://docs.datadoghq.com/ja/getting_started/agent/
 [3]: https://docs.twingate.com/docs/connector-real-time-logs
-[4]: https://docs.datadoghq.com/agent/logs/?tab=journald
+[4]: https://docs.datadoghq.com/ja/agent/logs/?tab=journald
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/dashboard/lists
 [7]: https://help.twingate.com/hc/en-us
 [8]: https://www.datadoghq.com/blog/monitor-network-access-with-twingate/
-

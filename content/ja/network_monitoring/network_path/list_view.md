@@ -1,8 +1,5 @@
 ---
-title: List View
-kind: documentation
 description: Investigate the Network Path List View
-is_beta: true
 further_reading:
 - link: /network_monitoring/network_path/path_view
   tag: ドキュメント
@@ -10,6 +7,9 @@ further_reading:
 - link: /network_monitoring/network_path/setup
   tag: ドキュメント
   text: Setup Network Path
+is_beta: true
+kind: documentation
+title: List View
 ---
 
 {{< site-region region="gov" >}}
@@ -59,5 +59,5 @@ For more information on this view, see the [Path View][1] documentation.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/network_path/path_view
+[1]: /ja/network_monitoring/network_path/path_view
 [2]: https://app.datadoghq.com/network/path

@@ -1,32 +1,31 @@
 ---
-title: Datadog Cluster Monitoring for VMware Tanzu
-kind: guide
-description: "Datadog Cluster Monitoring for VMware Tanzu"
+description: Datadog Cluster Monitoring for VMware Tanzu
 further_reading:
-- link: "https://www.datadoghq.com/blog/collecting-pcf-logs/"
+- link: https://www.datadoghq.com/blog/collecting-pcf-logs/
   tag: Blog
   text: Collecting Pivotal Platform logs and metrics
-- link: "https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/"
+- link: https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/
   tag: Blog
   text: Pivotal Platform Monitoring with Datadog
 - link: /integrations/guide/application-monitoring-vmware-tanzu/
   tag: documentation
   text: Datadog Application Monitoring for VMware Tanzu
+title: Datadog Cluster Monitoring for VMware Tanzu
 ---
 
 
-## Overview
+## 概要
 
 Datadog Cluster Monitoring for VMware Tanzu combines the [Datadog Firehose Nozzle][6] with the [Datadog Agent][7], and enables VMware Tanzu users and administrators to monitor the health and performance of their VMware Tanzu clusters.
 It consists of the following three components:
 
-* The Datadog Firehose Nozzle
-* The Datadog Agent
-* The Datadog Cluster Agent
+* Datadog Firehose Nozzle
+* Datadog Agent
+* Datadog Cluster Agent
 
 The Datadog Firehose Nozzle is a [Cloud Foundry][8] component which forwards metrics from the [Loggregator Firehose][14] to the Datadog monitoring platform. Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in your deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
 
-## Prerequisites
+## 前提条件
 
 Datadog Cluster Monitoring for VMware Tanzu has the following requirements:
 
@@ -40,7 +39,7 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 * Visualization of all cluster-level operational metrics and KPIs.
 * Alerting on VMware Tanzu cluster and component health.
 * Monitoring of jobs.
-* Tracking and reporting of BOSH events.
+* BOSH イベントの追跡と報告。
 * Autodiscovery of integrations.
 
 ## インストール
@@ -65,12 +64,12 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 1. In the **Cloud Foundry Settings** section, specify a UAA Client and UAA Secret from the previous step.
 1. If Ops Manager requires you to upload a stemcell, [download a stemcell][13] from the 621 line of releases. Upload it to Ops Manager with the **Import Stemcell** button.
 1. The **Datadog Firehose Nozzle Config** section contains optional configurations for the Nozzle, and the **Datadog Agent Config** section contains optional configurations for the Agent. You do not need to configure anything in either section.
-    <p class='note'><strong>Note:</strong> If you are using a single Datadog account to monitor multiple foundations, you must check the <strong>Use UUID Hostname</strong> checkbox.</p>
+   <p class='note'><strong>注:</strong> 複数のファウンデーションを監視するために単一の Datadog アカウントを使用している場合は、<strong>Use UUID Hostname</strong> チェックボックスをチェックする必要があります。</p>
 1. The **Datadog Cluster Agent Settings** section contains configurations for the [Datadog Cluster Agent][15] that provides autodiscovery of integrations and application container features.
-Enter an **Authentication token** in the **Datadog Cluster Agent Settings**, a string of 32 or more characters. This token is shared by both the Cluster Agent and the Datadog Agents to secure communication.
+**Datadog Cluster Agent Settings** に **Authentication token** (32 文字以上の文字列) を入力します。このトークンは、Cluster Agent と Datadog Agent の両方で共有され、通信を保護します。
 1. Return to the Tanzu Ops Manager Installation Dashboard and click **Apply Changes** to install Datadog Cluster Monitoring for the VMware Tanzu tile.
 
-## View metrics and dashboards
+## メトリクスとダッシュボードの表示
 
 1. Review the Cloud Foundry [Overview][18] Dashboard.
 
@@ -80,27 +79,27 @@ Enter an **Authentication token** in the **Datadog Cluster Agent Settings**, a s
 
  {{< img src="/integrations/guide/vmware_tanzu/metrics-explorer-cloud-foundry.png" alt="Cloud foundry metrics that start with cloudfoundry.nozzle" >}}
 
-3. [Create alerts][16] for your Cloud Foundry metrics.
+3. Cloud Foundry メトリクスに対する[アラートを作成][16]します。
 4. See the [Datadog Cloud Foundry Integration][17] for troubleshooting steps.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /help/
+[2]: /ja/help/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/signup
-[5]: /integrations/pivotal_platform/#monitor-your-pivotal-platform-cluster/
+[5]: /ja/integrations/pivotal_platform/#monitor-your-pivotal-platform-cluster/
 [6]: https://github.com/DataDog/datadog-firehose-nozzle
-[7]: /agent/
-[8]: /integrations/guide/cloud-foundry-setup/
-[10]: /integrations/cloud_foundry/#configure-the-datadog-plugin-for-bosh-health-monitor
+[7]: /ja/agent/
+[8]: /ja/integrations/guide/cloud-foundry-setup/
+[10]: /ja/integrations/cloud_foundry/#configure-the-datadog-plugin-for-bosh-health-monitor
 [11]: https://network.pivotal.io/products/datadog/
 [12]: https://docs.pivotal.io/application-service/uaa/uaa-user-management.html
 [13]: https://network.pivotal.io/products/stemcells-ubuntu-xenial/#/releases/721399
 [14]: https://www.datadoghq.com/blog/pivotal-cloud-foundry-architecture/#loggregator
 [15]: https://github.com/DataDog/datadog-cluster-agent-boshrelease#datadog-cluster-agent-bosh-release
-[16]: /guides/monitors/
-[17]: /integrations/cloud_foundry/
+[16]: /ja/guides/monitors/
+[17]: /ja/integrations/cloud_foundry/
 [18]: https://app.datadoghq.com/screen/integration/cloudfoundry
 [19]: https://app.datadoghq.com/metric/explorer

@@ -1,8 +1,7 @@
 ---
-title: CSM Threats Detection Rules
 aliases:
-  - /security_platform/cloud_workload_security/workload_security_rules
-  - /security/cloud_workload_security/workload_security_rules
+- /ja/security_platform/cloud_workload_security/workload_security_rules
+- /ja/security/cloud_workload_security/workload_security_rules
 further_reading:
 - link: /security/threats/setup
   tag: Documentation
@@ -16,6 +15,7 @@ further_reading:
 - link: /security/notifications/variables/
   tag: Documentation
   text: Learn more about Security notification variables
+title: CSM Threats Detection Rules
 ---
 
 This topic explains how Cloud Security Management Threats (CSM Threats) actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
@@ -129,15 +129,15 @@ A process ancestor's filename in CSM Threats is an attribute with the symbol `pr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/#cat-workload-security
-[2]: /security/threats/agent_expressions
+[1]: /ja/security/default_rules/#cat-workload-security
+[2]: /ja/security/threats/agent_expressions
 [3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
-[5]: /security/notifications/variables/
+[5]: /ja/security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
-[8]: /security/threats/security_signals
+[7]: /ja/security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
+[8]: /ja/security/threats/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
-[11]: /security/threats/workload_security_rules/custom_rules
-[12]: /security/cloud_security_management/guide/active-protection
+[11]: /ja/security/threats/workload_security_rules/custom_rules
+[12]: /ja/security/cloud_security_management/guide/active-protection

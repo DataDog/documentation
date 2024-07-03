@@ -1,20 +1,19 @@
 ---
-title: Troubleshooting React Native SDK issues
-kind: documentation
-description: Learn how to troubleshoot issues with React Native Monitoring.
 aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+- /ja/real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: reactnative
-type: multi-code-lang
 code_lang_weight: 50
+description: Learn how to troubleshoot issues with React Native Monitoring.
 further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-reactnative"
-    tag: ソースコード
-    text: Source code for dd-sdk-reactnative
-  - link: /real_user_monitoring
-    tag: Documentation
-    text: Datadog Real User Monitoring
-
+- link: https://github.com/DataDog/dd-sdk-reactnative
+  tag: ソースコード
+  text: Source code for dd-sdk-reactnative
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Datadog Real User Monitoring
+kind: documentation
+title: Troubleshooting React Native SDK issues
+type: multi-code-lang
 ---
 
 ## 概要
@@ -286,7 +285,7 @@ dependencies {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /ja/help
 [2]: https://github.com/JakeWharton/pidcat
 [3]: https://github.com/JakeWharton/pidcat/issues/180#issuecomment-1124019329
 [4]: https://github.com/facebook/react-native/commit/6e08f84719c47985e80123c72686d7a1c89b72ed

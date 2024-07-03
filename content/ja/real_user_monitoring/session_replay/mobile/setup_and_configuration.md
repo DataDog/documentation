@@ -1,24 +1,24 @@
 ---
-title: Mobile Session Replay Setup and Configuration
-kind: documentation
+aliases: null
 description: Setting up and configuring Mobile Session Replay.
-aliases:
 further_reading:
-    - link: /real_user_monitoring/session_replay/mobile
-      tag: Documentation
-      text: Mobile Session Replay
-    - link: /real_user_monitoring/session_replay/mobile/app_performance
-      tag: Documentation
-      text: How Mobile Session Replay Impacts App Performance
-    - link: /real_user_monitoring/session_replay/mobile/privacy_options
-      tag: Documentation
-      text: Mobile Session Replay Privacy Options
-    - link: /real_user_monitoring/session_replay/mobile/troubleshooting
-      tag: Documentation
-      text: Troubleshoot Mobile Session Replay
-    - link: /real_user_monitoring/session_replay
-      tag: Documentation
-      text: Session Replay
+- link: /real_user_monitoring/session_replay/mobile
+  tag: Documentation
+  text: Mobile Session Replay
+- link: /real_user_monitoring/session_replay/mobile/app_performance
+  tag: Documentation
+  text: How Mobile Session Replay Impacts App Performance
+- link: /real_user_monitoring/session_replay/mobile/privacy_options
+  tag: Documentation
+  text: Mobile Session Replay Privacy Options
+- link: /real_user_monitoring/session_replay/mobile/troubleshooting
+  tag: Documentation
+  text: Troubleshoot Mobile Session Replay
+- link: /real_user_monitoring/session_replay
+  tag: Documentation
+  text: Session Replay
+kind: documentation
+title: Mobile Session Replay Setup and Configuration
 ---
 
 ## Setup
@@ -51,8 +51,8 @@ To set up Mobile Session Replay for Android:
    {{< /code-block >}}
 
 [1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
-[2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
-[3]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin#declare-the-sdk-as-a-dependency
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=kotlin
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=kotlin#declare-the-sdk-as-a-dependency
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -81,7 +81,7 @@ To set up Mobile Session Replay for iOS:
    )
    {{< /code-block >}}
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/?tab=swift
 [2]: https://cocoapods.org/
 [3]: https://www.swift.org/package-manager/
 [4]: https://github.com/Carthage/Carthage
@@ -151,7 +151,7 @@ If everything is fine, following logs should appear in the Xcode debug console i
 
 See [Privacy Options][1].
 
-[1]: /real_user_monitoring/session_replay/mobile/privacy_options
+[1]: /ja/real_user_monitoring/session_replay/mobile/privacy_options
 
 ## Further reading
 

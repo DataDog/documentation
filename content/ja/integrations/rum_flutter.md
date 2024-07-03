@@ -1,51 +1,52 @@
 ---
-"app_id": "rum-flutter"
-"app_uuid": "a7344e0c-5fcf-43c0-af3b-734b484c1f29"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-flutter
+app_uuid: a7344e0c-5fcf-43c0-af3b-734b484c1f29
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - モニター
 - mobile
 - network
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_flutter/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_flutter"
-"integration_id": "rum-flutter"
-"integration_title": "Flutter"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_flutter"
-"public_title": "Flutter"
-"short_description": "Monitor Flutter applications and generate metrics using Datadog RUM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_flutter/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_flutter
+integration_id: rum-flutter
+integration_title: Flutter
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_flutter
+public_title: Flutter
+short_description: Monitor Flutter applications and generate metrics using Datadog
+  RUM
+supported_os:
 - android
 - ios
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Metrics"
-  - "Category::Mobile"
-  - "Category::Network"
-  - "Category::Tracing"
-  - "Supported OS::Android"
-  - "Supported OS::iOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor Flutter applications and generate metrics using Datadog RUM
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Flutter
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Metrics
+  - Category::Mobile
+  - Category::Network
+  - Category::Tracing
+  - Supported OS::Android
+  - Supported OS::iOS
+  configuration: README.md#Setup
+  description: Monitor Flutter applications and generate metrics using Datadog RUM
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Flutter
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -113,9 +114,8 @@ Additional helpful documentation, links, and articles:
 
 
 [1]: https://app.datadoghq.com/integrations/rum-flutter
-[2]: https://docs.datadoghq.com/real_user_monitoring/flutter/#setup
-[3]: https://docs.datadoghq.com/logs/log_collection/flutter/
-[4]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[5]: https://docs.datadoghq.com/real_user_monitoring/flutter/
-[6]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/#setup
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/flutter/
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/
+[6]: https://docs.datadoghq.com/ja/help/

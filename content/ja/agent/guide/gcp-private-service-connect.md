@@ -1,12 +1,12 @@
 ---
-title: Connect to Datadog over Google Cloud Private Service Connect
 further_reading:
-    - link: /integrations/google_cloud_platform/
-      tag: Documentation
-      text: Datadog-Google Cloud Platform Integration
-    - link: /agent/guide/private-link
-      tag: Documentation
-      text: Connect to Datadog over AWS PrivateLink
+- link: /integrations/google_cloud_platform/
+  tag: Documentation
+  text: Datadog-Google Cloud Platform Integration
+- link: /agent/guide/private-link
+  tag: Documentation
+  text: Connect to Datadog over AWS PrivateLink
+title: Connect to Datadog over Google Cloud Private Service Connect
 ---
 
 {{% site-region region="us,us3,gov,ap1" %}}

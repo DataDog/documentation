@@ -1,38 +1,38 @@
 ---
-"aliases":
-- "/integrations/aws/"
-- "/logs/aws"
-- "/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/"
-- "/integrations/faq/additional-aws-metrics-min-max-sum"
-- "/integrations/faq/why-am-i-only-seeing-the-average-values-of-my-custom-aws-cloudwatch-metrics/"
-"categories":
-- "aws"
-- "cloud"
-- "iot"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "AWS サービスを Datadog と統合。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_web_services/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/"
-  "tag": "ブログ"
-  "text": "Datadog で AWS コントロールプレーン API の使用量メトリクスを監視する"
-- "link": "https://www.datadoghq.com/blog/aws-reinvent-2022-recap/"
-  "tag": "ブログ"
-  "text": "AWS re:Invent 2022 のハイライト"
-"git_integration_title": "amazon_web_services"
-"has_logo": true
-"integration_id": "amazon-web-services"
-"integration_title": "AWS"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_web_services"
-"public_title": "Datadog-AWS Integration"
-"short_description": "Integrate your AWS services with Datadog."
-"version": "1.0"
+aliases:
+- /ja/integrations/aws/
+- /ja/logs/aws
+- /ja/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/
+- /ja/integrations/faq/additional-aws-metrics-min-max-sum
+- /ja/integrations/faq/why-am-i-only-seeing-the-average-values-of-my-custom-aws-cloudwatch-metrics/
+categories:
+- aws
+- cloud
+- iot
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: AWS サービスを Datadog と統合。
+doc_link: https://docs.datadoghq.com/integrations/amazon_web_services/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/
+  tag: ブログ
+  text: Datadog で AWS コントロールプレーン API の使用量メトリクスを監視する
+- link: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
+  tag: ブログ
+  text: AWS re:Invent 2022 のハイライト
+git_integration_title: amazon_web_services
+has_logo: true
+integration_id: amazon-web-services
+integration_title: AWS
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_web_services
+public_title: Datadog-AWS Integration
+short_description: Integrate your AWS services with Datadog.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -207,66 +207,65 @@ See the [AWS Integration Troubleshooting guide][62] to resolve issues related to
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/getting_started/integrations/aws/
+[1]: https://docs.datadoghq.com/ja/getting_started/integrations/aws/
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
-[3]: https://docs.datadoghq.com/integrations/#cat-aws
-[4]: https://docs.datadoghq.com/integrations/guide/aws-terraform-setup
+[3]: https://docs.datadoghq.com/ja/integrations/#cat-aws
+[4]: https://docs.datadoghq.com/ja/integrations/guide/aws-terraform-setup
 [5]: https://docs.aws.amazon.com/controltower/latest/userguide/account-factory.html
 [6]: https://aws.amazon.com/blogs/awsmarketplace/deploy-datadogs-aws-integration-accounts-aws-control-tower-account-factory-customization/
-[7]: https://docs.datadoghq.com/integrations/guide/aws-organizations-setup/
-[8]: https://docs.datadoghq.com/integrations/guide/aws-manual-setup/
-[9]: https://docs.datadoghq.com/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly
+[7]: https://docs.datadoghq.com/ja/integrations/guide/aws-organizations-setup/
+[8]: https://docs.datadoghq.com/ja/integrations/guide/aws-manual-setup/
+[9]: https://docs.datadoghq.com/ja/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly
 [10]: https://www.datadoghq.com/legal/restricted-service-locations/
-[11]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[12]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[13]: https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/#aws
-[14]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
-[15]: https://docs.datadoghq.com/account_management/billing/aws/
-[16]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
+[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[12]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[13]: https://docs.datadoghq.com/ja/integrations/guide/cloud-metric-delay/#aws
+[14]: https://docs.datadoghq.com/ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[15]: https://docs.datadoghq.com/ja/account_management/billing/aws/
+[16]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
 [17]: https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit
 [18]: https://app.datadoghq.com/integrations/amazon-web-services
 [19]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html#API_DescribeAlarmHistory_RequestParameters
-[20]: https://docs.datadoghq.com/integrations/amazon_sns/#receive-sns-messages
+[20]: https://docs.datadoghq.com/ja/integrations/amazon_sns/#receive-sns-messages
 [21]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
-[22]: https://docs.datadoghq.com/integrations/amazon_api_gateway/
-[23]: https://docs.datadoghq.com/integrations/amazon_app_runner
-[24]: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
-[25]: https://docs.datadoghq.com/integrations/amazon_billing/
-[26]: https://docs.datadoghq.com/integrations/amazon_cloudfront/
-[27]: https://docs.datadoghq.com/integrations/amazon_codebuild/
-[28]: https://docs.datadoghq.com/integrations/amazon_codedeploy/
-[29]: https://docs.datadoghq.com/integrations/amazon_directconnect/
-[30]: https://docs.datadoghq.com/integrations/amazon_dynamodb/
-[31]: https://docs.datadoghq.com/integrations/amazon_ebs/
-[32]: https://docs.datadoghq.com/integrations/amazon_ec2/
-[33]: https://docs.datadoghq.com/integrations/amazon_ecs/
-[34]: https://docs.datadoghq.com/integrations/amazon_efs/
-[35]: https://docs.datadoghq.com/integrations/amazon_elasticache/
-[36]: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
-[37]: https://docs.datadoghq.com/integrations/amazon_elb/
-[38]: https://docs.datadoghq.com/integrations/amazon_emr/
-[39]: https://docs.datadoghq.com/integrations/amazon_es/
-[40]: https://docs.datadoghq.com/integrations/amazon_firehose/
-[41]: https://docs.datadoghq.com/integrations/amazon_fsx/
-[42]: https://docs.datadoghq.com/integrations/amazon_health/
-[43]: https://docs.datadoghq.com/integrations/amazon_iot/
-[44]: https://docs.datadoghq.com/integrations/amazon_kinesis/
-[45]: https://docs.datadoghq.com/integrations/amazon_kms/
-[46]: https://docs.datadoghq.com/integrations/amazon_lambda/
-[47]: https://docs.datadoghq.com/integrations/amazon_machine_learning/
-[48]: https://docs.datadoghq.com/integrations/amazon_mq/
-[49]: https://docs.datadoghq.com/integrations/amazon_ops_works/
-[50]: https://docs.datadoghq.com/integrations/amazon_polly/
-[51]: https://docs.datadoghq.com/integrations/amazon_rds/
-[52]: https://docs.datadoghq.com/integrations/amazon_rds_proxy/
-[53]: https://docs.datadoghq.com/integrations/amazon_redshift/
-[54]: https://docs.datadoghq.com/integrations/amazon_route53/
-[55]: https://docs.datadoghq.com/integrations/amazon_s3/
-[56]: https://docs.datadoghq.com/integrations/amazon_ses/
-[57]: https://docs.datadoghq.com/integrations/amazon_sns/
-[58]: https://docs.datadoghq.com/integrations/amazon_sqs/
-[59]: https://docs.datadoghq.com/integrations/amazon_vpc/
-[60]: https://docs.datadoghq.com/integrations/amazon_workspaces/
+[22]: https://docs.datadoghq.com/ja/integrations/amazon_api_gateway/
+[23]: https://docs.datadoghq.com/ja/integrations/amazon_app_runner
+[24]: https://docs.datadoghq.com/ja/integrations/amazon_auto_scaling/
+[25]: https://docs.datadoghq.com/ja/integrations/amazon_billing/
+[26]: https://docs.datadoghq.com/ja/integrations/amazon_cloudfront/
+[27]: https://docs.datadoghq.com/ja/integrations/amazon_codebuild/
+[28]: https://docs.datadoghq.com/ja/integrations/amazon_codedeploy/
+[29]: https://docs.datadoghq.com/ja/integrations/amazon_directconnect/
+[30]: https://docs.datadoghq.com/ja/integrations/amazon_dynamodb/
+[31]: https://docs.datadoghq.com/ja/integrations/amazon_ebs/
+[32]: https://docs.datadoghq.com/ja/integrations/amazon_ec2/
+[33]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
+[34]: https://docs.datadoghq.com/ja/integrations/amazon_efs/
+[35]: https://docs.datadoghq.com/ja/integrations/amazon_elasticache/
+[36]: https://docs.datadoghq.com/ja/integrations/amazon_elasticbeanstalk/
+[37]: https://docs.datadoghq.com/ja/integrations/amazon_elb/
+[38]: https://docs.datadoghq.com/ja/integrations/amazon_emr/
+[39]: https://docs.datadoghq.com/ja/integrations/amazon_es/
+[40]: https://docs.datadoghq.com/ja/integrations/amazon_firehose/
+[41]: https://docs.datadoghq.com/ja/integrations/amazon_fsx/
+[42]: https://docs.datadoghq.com/ja/integrations/amazon_health/
+[43]: https://docs.datadoghq.com/ja/integrations/amazon_iot/
+[44]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/
+[45]: https://docs.datadoghq.com/ja/integrations/amazon_kms/
+[46]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/
+[47]: https://docs.datadoghq.com/ja/integrations/amazon_machine_learning/
+[48]: https://docs.datadoghq.com/ja/integrations/amazon_mq/
+[49]: https://docs.datadoghq.com/ja/integrations/amazon_ops_works/
+[50]: https://docs.datadoghq.com/ja/integrations/amazon_polly/
+[51]: https://docs.datadoghq.com/ja/integrations/amazon_rds/
+[52]: https://docs.datadoghq.com/ja/integrations/amazon_rds_proxy/
+[53]: https://docs.datadoghq.com/ja/integrations/amazon_redshift/
+[54]: https://docs.datadoghq.com/ja/integrations/amazon_route53/
+[55]: https://docs.datadoghq.com/ja/integrations/amazon_s3/
+[56]: https://docs.datadoghq.com/ja/integrations/amazon_ses/
+[57]: https://docs.datadoghq.com/ja/integrations/amazon_sns/
+[58]: https://docs.datadoghq.com/ja/integrations/amazon_sqs/
+[59]: https://docs.datadoghq.com/ja/integrations/amazon_vpc/
+[60]: https://docs.datadoghq.com/ja/integrations/amazon_workspaces/
 [61]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/service_checks.json
-[62]: https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/
-
+[62]: https://docs.datadoghq.com/ja/integrations/guide/aws-integration-troubleshooting/

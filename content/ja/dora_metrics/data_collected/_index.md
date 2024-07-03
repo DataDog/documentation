@@ -1,6 +1,4 @@
 ---
-title: DORA Metrics Data Collected
-kind: ドキュメント
 further_reading:
 - link: /dora_metrics/
   tag: ドキュメント
@@ -14,6 +12,8 @@ further_reading:
 - link: /getting_started/tagging/
   tag: ドキュメント
   text: Getting started with Tags
+kind: ドキュメント
+title: DORA Metrics Data Collected
 ---
 
 {{< site-region region="gov" >}}
@@ -78,13 +78,13 @@ These metrics can be queried programmatically by using the [Query timeseries poi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/events/explorer/
-[2]: /api/latest/metrics/#query-timeseries-points
-[3]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
+[1]: /ja/service_management/events/explorer/
+[2]: /ja/api/latest/metrics/#query-timeseries-points
+[3]: /ja/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
-[6]: /getting_started/tagging/
-[7]: /api/latest/dora-metrics/
+[6]: /ja/getting_started/tagging/
+[7]: /ja/api/latest/dora-metrics/
 [8]: https://app.datadoghq.com/ci/dora
-[9]: https://docs.datadoghq.com/metrics/
-[10]: /dora_metrics/deployments/
+[9]: https://docs.datadoghq.com/ja/metrics/
+[10]: /ja/dora_metrics/deployments/
 [11]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true

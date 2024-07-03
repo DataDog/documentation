@@ -1,9 +1,9 @@
 ---
-title: Switching Between Organizations
 further_reading:
 - link: account_management/multi_organization/
   tag: ドキュメント
   text: マルチオーガニゼーションアカウントの管理
+title: Switching Between Organizations
 ---
 
 If you belong to multiple Datadog organizations, the org switcher at the bottom left of the nav bar allows you to toggle between organizations. You can also view all organizations and switch between them from the [**Organizations** page][1] in **Personal Settings**.
@@ -39,5 +39,5 @@ If the above troubleshooting steps fail, contact the [Datadog support team][3] a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/personal-settings/organizations
-[2]: /account_management/saml/#saml-strict
-[3]: /help/
+[2]: /ja/account_management/saml/#saml-strict
+[3]: /ja/help/

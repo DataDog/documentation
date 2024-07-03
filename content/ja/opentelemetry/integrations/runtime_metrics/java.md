@@ -1,10 +1,10 @@
 ---
-title: OpenTelemetry Java Runtime Metrics
 aliases:
-- /opentelemetry/runtime_metrics/java/
+- /ja/opentelemetry/runtime_metrics/java/
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 10
+title: OpenTelemetry Java Runtime Metrics
+type: multi-code-lang
 ---
 
 ## 前提条件
@@ -57,7 +57,7 @@ Java アプリケーションを [OpenTelemetry 手動インスツルメンテ�
 |   `jvm.os.open_file_descriptors` | | N/A |
 
 
-[1]: /opentelemetry/otel_metrics
+[1]: /ja/opentelemetry/otel_metrics
 [2]: https://app.datadoghq.com/integrations/java
 [3]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/java/manual/

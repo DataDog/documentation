@@ -1,84 +1,84 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "sofy-sofy-license"
-"app_uuid": "da7fd688-3ed6-4ecc-808a-604fba2ae168"
-"assets": {}
-"author":
-  "homepage": "http://sofy.ai"
-  "name": Sofy
-  "sales_email": sofysales@sofy.ai
-  "support_email": support@sofy.ai
-  "vendor_id": sofy
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: sofy-sofy-license
+app_uuid: da7fd688-3ed6-4ecc-808a-604fba2ae168
+assets: {}
+author:
+  homepage: http://sofy.ai
+  name: Sofy
+  sales_email: sofysales@sofy.ai
+  support_email: support@sofy.ai
+  vendor_id: sofy
+categories:
 - testing
 - marketplace
 - mobile
 - collaboration
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sofy_sofy_license"
-"integration_id": "sofy-sofy-license"
-"integration_title": "Sofy"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "sofy_sofy_license"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": false
-  "product_id": sofy-license
-  "short_description": No-code testing platform for mobile apps
-  "unit_price": !!int "599"
-"public_title": "Sofy"
-"short_description": "No-Code Testing for Mobile Apps"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: sofy_sofy_license
+integration_id: sofy-sofy-license
+integration_title: Sofy
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: sofy_sofy_license
+pricing:
+- billing_type: flat_fee
+  includes_assets: false
+  product_id: sofy-license
+  short_description: No-code testing platform for mobile apps
+  unit_price: 599
+public_title: Sofy
+short_description: No-Code Testing for Mobile Apps
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Testing"
-  - "Category::Marketplace"
-  - "Category::Mobile"
-  - "Category::Collaboration"
-  - "Submitted Data Type::Metrics"
-  - "Offering::Software License"
-  "configuration": "README.md#Setup"
-  "description": No-Code Testing for Mobile Apps
-  "media":
-  - "caption": Sofy Dashboard
-    "image_url": images/sofy_dashboard.png
-    "media_type": image
-  - "caption": Sofy Devices
-    "image_url": images/sofy_devices.png
-    "media_type": image
-  - "caption": Sofy Device Lab
-    "image_url": images/sofy_lab.png
-    "media_type": image
-  - "caption": Sofy Testruns Reports
-    "image_url": images/sofy_report.png
-    "media_type": image
-  - "caption": Sofy Testrun Result
-    "image_url": images/sofy_result.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/sofy-mobile-tests/"
-  - "resource_type": documentation
-    "url": "https://docs.sofy.ai"
-  "support": "README.md#Support"
-  "title": Sofy
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Testing
+  - Category::Marketplace
+  - Category::Mobile
+  - Category::Collaboration
+  - Submitted Data Type::Metrics
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: No-Code Testing for Mobile Apps
+  media:
+  - caption: Sofy Dashboard
+    image_url: images/sofy_dashboard.png
+    media_type: image
+  - caption: Sofy Devices
+    image_url: images/sofy_devices.png
+    media_type: image
+  - caption: Sofy Device Lab
+    image_url: images/sofy_lab.png
+    media_type: image
+  - caption: Sofy Testruns Reports
+    image_url: images/sofy_report.png
+    media_type: image
+  - caption: Sofy Testrun Result
+    image_url: images/sofy_result.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/sofy-mobile-tests/
+  - resource_type: documentation
+    url: https://docs.sofy.ai
+  support: README.md#Support
+  title: Sofy
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

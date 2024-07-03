@@ -1,29 +1,29 @@
 ---
-"aliases":
-- "/integrations/awselasticache/"
-- "/integrations/elasticache/"
-"categories":
-- "aws"
-- "caching"
-- "cloud"
-- "configuration & deployment"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Amazon ElasicCache のキーメトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_elasticache/"
-"draft": false
-"git_integration_title": "amazon_elasticache"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon ElastiCache"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_elasticache"
-"public_title": "Datadog-Amazon ElastiCache Integration"
-"short_description": "Track key Amazon ElasicCache metrics."
-"version": "1.0"
+aliases:
+- /ja/integrations/awselasticache/
+- /ja/integrations/elasticache/
+categories:
+- aws
+- caching
+- cloud
+- configuration & deployment
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: Amazon ElasicCache のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
+draft: false
+git_integration_title: amazon_elasticache
+has_logo: true
+integration_id: ''
+integration_title: Amazon ElastiCache
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_elasticache
+public_title: Datadog-Amazon ElastiCache Integration
+short_description: Track key Amazon ElasicCache metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -133,13 +133,12 @@ Need help? Contact [Datadog support][10].
 
 [1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
 [2]: https://www.coursera.org
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
-[5]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [6]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html
 [7]: https://app.datadoghq.com/integrations/amazon-elasticache
-[8]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticache/amazon_elasticache_metadata.csv
-[10]: https://docs.datadoghq.com/help/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics
-

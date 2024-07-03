@@ -1,27 +1,26 @@
 ---
-title: RUM Expo Setup
-kind: documentation
-description: Monitor your React Native projects using Expo and Expo Go with Datadog.
 aliases:
-    - /real_user_monitoring/reactnative/expo/
-    - /real_user_monitoring/reactnative-expo/
+- /ja/real_user_monitoring/reactnative/expo/
+- /ja/real_user_monitoring/reactnative-expo/
 code_lang: expo
-type: multi-code-lang
 code_lang_weight: 50
+description: Monitor your React Native projects using Expo and Expo Go with Datadog.
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/reactnative
   tag: Documentation
   text: RUM React Native Advanced Configuration
-- link: "https://github.com/DataDog/dd-sdk-reactnative"
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: ソースコード
   text: Source code for dd-sdk-reactnative
-- link: "https://www.datadoghq.com/blog/react-native-monitoring/"
+- link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog
   text: Monitor React Native applications
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-
+kind: documentation
+title: RUM Expo Setup
+type: multi-code-lang
 ---
 
 ## Overview
@@ -275,8 +274,8 @@ config.resourceEventMapper = event => {
 [1]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
 [2]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
 [3]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
-[5]: /real_user_monitoring/error_tracking/mobile/expo/
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
+[5]: /ja/real_user_monitoring/error_tracking/mobile/expo/
 [6]: https://expo.github.io/router/docs/
 [7]: https://docs.expo.dev/development/introduction/
 [8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to

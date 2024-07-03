@@ -1,10 +1,8 @@
 ---
-title: Trace Retention
-kind: documentation
-description: "Learn how to control trace retention with retention filters."
 aliases:
-- /tracing/trace_retention/
-- /tracing/trace_queries/one_percent_flat_sampling/
+- /ja/tracing/trace_retention/
+- /ja/tracing/trace_queries/one_percent_flat_sampling/
+description: Learn how to control trace retention with retention filters.
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: Documentation
@@ -15,6 +13,8 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentation
   text: Usage Metrics
+kind: documentation
+title: Trace Retention
 ---
 
 {{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Retention filters" >}}
@@ -140,18 +140,18 @@ For the reasons explained above, spans indexed by the intelligent retention filt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_pipeline/
-[2]: /tracing/trace_pipeline/metrics
+[1]: /ja/tracing/trace_pipeline/
+[2]: /ja/tracing/trace_pipeline/metrics
 [3]: https://app.datadoghq.com/apm/traces/retention-filters
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[5]: /tracing/glossary/#service-entry-span
-[6]: /tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
-[7]: /tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
-[8]: /tracing/glossary/#trace-root-span
-[9]: /tracing/services/service_page/
-[10]: /tracing/services/resource_page/
-[11]: /tracing/trace_explorer/trace_queries
-[12]: /tracing/trace_pipeline/ingestion_controls/
-[13]: /tracing/trace_explorer/
-[14]: /monitors/types/apm/?tab=traceanalytics
-[15]: /synthetics/apm/
+[5]: /ja/tracing/glossary/#service-entry-span
+[6]: /ja/tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
+[7]: /ja/tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
+[8]: /ja/tracing/glossary/#trace-root-span
+[9]: /ja/tracing/services/service_page/
+[10]: /ja/tracing/services/resource_page/
+[11]: /ja/tracing/trace_explorer/trace_queries
+[12]: /ja/tracing/trace_pipeline/ingestion_controls/
+[13]: /ja/tracing/trace_explorer/
+[14]: /ja/monitors/types/apm/?tab=traceanalytics
+[15]: /ja/synthetics/apm/

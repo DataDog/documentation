@@ -1,10 +1,10 @@
 ---
-title: Supported Platforms
 disable_toc: false
 further_reading:
 - link: agent/basic_agent_usage/
   tag: Documentation
   text: Basic Agent Usage
+title: Supported Platforms
 ---
 
 The Datadog Agent is supported on a range of widely used operating systems and platforms. If your operating system is not listed below, [a source installation][1] might work for you.
@@ -203,11 +203,11 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   </tr>
 </table>
 
-[1]: /agent/basic_agent_usage/amazonlinux/
-[2]: /agent/basic_agent_usage/deb/
-[3]: /agent/basic_agent_usage/ubuntu/
-[4]: /agent/basic_agent_usage/redhat/
-[7]: /agent/basic_agent_usage/fedora/
+[1]: /ja/agent/basic_agent_usage/amazonlinux/
+[2]: /ja/agent/basic_agent_usage/deb/
+[3]: /ja/agent/basic_agent_usage/ubuntu/
+[4]: /ja/agent/basic_agent_usage/redhat/
+[7]: /ja/agent/basic_agent_usage/fedora/
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -314,9 +314,9 @@ Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 | [Kubernetes][6] | 1.3 以降   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
 
-[5]: /agent/docker/
-[6]: /agent/basic_agent_usage/kubernetes/
-[7]: /agent/basic_agent_usage/windows/
+[5]: /ja/agent/docker/
+[6]: /ja/agent/basic_agent_usage/kubernetes/
+[7]: /ja/agent/basic_agent_usage/windows/
 
 {{% /tab %}}
 
@@ -329,7 +329,7 @@ Agent 6 および 7 は、以下の [AIX][1] バージョンをサポートし�
 - 7.2 TL3 SP0
 
 
-[1]: /agent/basic_agent_usage/aix/
+[1]: /ja/agent/basic_agent_usage/aix/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -337,4 +337,4 @@ Agent 6 および 7 は、以下の [AIX][1] バージョンをサポートし�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage/source/
+[1]: /ja/agent/basic_agent_usage/source/

@@ -1,62 +1,62 @@
 ---
-"app_id": "auth0"
-"app_uuid": "0c91d12e-f01e-47d9-8a07-4dba1cde4b67"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": auth0.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10098"
-    "source_type_name": Auth0
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Auth0
-  "sales_email": help@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: auth0
+app_uuid: 0c91d12e-f01e-47d9-8a07-4dba1cde4b67
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: auth0.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10098
+    source_type_name: Auth0
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Auth0
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - incidents
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "auth0"
-"integration_id": "auth0"
-"integration_title": "Auth0"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "auth0"
-"public_title": "Auth0"
-"short_description": "View and analyze your Auth0 events."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: auth0
+integration_id: auth0
+integration_title: Auth0
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: auth0
+public_title: Auth0
+short_description: View and analyze your Auth0 events.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Incidents"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": View and analyze your Auth0 events.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Auth0
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Incidents
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: View and analyze your Auth0 events.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Auth0
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -138,8 +138,7 @@ Read more about this integration in our [blog post][6].
 
 [1]: https://manage.auth0.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.datadoghq.com/getting_started/site/
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://auth0.com/docs/logs/references/log-event-type-codes
-[5]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/
-

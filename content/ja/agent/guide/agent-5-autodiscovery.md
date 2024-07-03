@@ -1,8 +1,8 @@
 ---
-title: Autodiscovery with Agent v5
-private: true
 aliases:
-  - /agent/faq/agent-5-autodiscovery
+- /ja/agent/faq/agent-5-autodiscovery
+private: true
+title: Autodiscovery with Agent v5
 ---
 
 <div class="alert alert-info">
@@ -387,8 +387,8 @@ checks:
 [1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: https://gcr.io/datadoghq/docker-dd-agent
-[4]: /agent/kubernetes/
-[5]: /integrations/amazon_ecs/#installation
+[4]: /ja/agent/kubernetes/
+[5]: /ja/integrations/amazon_ecs/#installation
 [6]: https://github.com/DataDog/docker-dd-agent#environment-variables
 [7]: https://github.com/DataDog/jmxfetch
 [8]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
@@ -405,5 +405,5 @@ checks:
 [19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [20]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[22]: /agent/configuration/agent-commands/#start-stop-restart-the-agent
+[22]: /ja/agent/configuration/agent-commands/#start-stop-restart-the-agent
 [23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

@@ -1,16 +1,17 @@
 ---
-title: Testing Multiple Environments
-description: Learn how to use Continuous Testing to reuse the same Synthetics scenarios against multiple environments.
+description: Learn how to use Continuous Testing to reuse the same Synthetics scenarios
+  against multiple environments.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
+- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
   tag: Blog
   text: Incorporate Datadog Continuous Testing tests into your CI/CD pipeline
-- link: "https://www.datadoghq.com/blog/internal-application-testing-with-datadog/"
+- link: https://www.datadoghq.com/blog/internal-application-testing-with-datadog/
   tag: Blog
   text: Test internal applications with Datadog's testing tunnel and private locations
 - link: /continuous_testing/environments/proxy_firewall_vpn
   tag: Documentation
   text: Learn about testing while using proxies, firewalls, or VPNs
+title: Testing Multiple Environments
 ---
 
 ## 概要
@@ -65,7 +66,7 @@ With this tool, any scheduled test used on your production environment can be re
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/
-[2]: /synthetics/api_tests/
-[3]: /continuous_testing/environments/proxy_firewall_vpn
-[4]: /synthetics/private_locations
+[1]: /ja/synthetics/browser_tests/
+[2]: /ja/synthetics/api_tests/
+[3]: /ja/continuous_testing/environments/proxy_firewall_vpn
+[4]: /ja/synthetics/private_locations

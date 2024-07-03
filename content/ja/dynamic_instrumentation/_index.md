@@ -1,10 +1,7 @@
 ---
-title: Dynamic Instrumentation
 aliases:
-    - /tracing/dynamic_instrumentation/
-    - /dynamic_instrumentation/how-it-works/
-is_beta: false
-private: false
+- /ja/tracing/dynamic_instrumentation/
+- /ja/dynamic_instrumentation/how-it-works/
 further_reading:
 - link: /dynamic_instrumentation/expression-language/
   tag: Documentation
@@ -24,9 +21,12 @@ further_reading:
 - link: /metrics
   tag: Documentation
   text: Learn more about Metrics
-- link: "https://www.datadoghq.com/blog/dynamic-instrumentation-application-logging/"
+- link: https://www.datadoghq.com/blog/dynamic-instrumentation-application-logging/
   tag: Blog
   text: Use Datadog Dynamic Instrumentation to add application logs without redeploying
+is_beta: false
+private: false
+title: Dynamic Instrumentation
 ---
 
 ## 概要
@@ -205,20 +205,20 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /agent/remote_config/
+[1]: /ja/agent/
+[2]: /ja/agent/remote_config/
 [3]: https://github.com/DataDog/dd-trace-java
 [4]: https://github.com/DataDog/dd-trace-py
 [5]: https://github.com/DataDog/dd-trace-dotnet
-[6]: /getting_started/tagging/unified_service_tagging/
-[7]: /integrations/guide/source-code-integration/
-[8]: /account_management/rbac/permissions#apm
-[9]: /logs/log_configuration/indexes/#exclusion-filters
-[10]: /logs/log_configuration/indexes/#add-indexes
-[11]: /dynamic_instrumentation/how-it-works/
+[6]: /ja/getting_started/tagging/unified_service_tagging/
+[7]: /ja/integrations/guide/source-code-integration/
+[8]: /ja/account_management/rbac/permissions#apm
+[9]: /ja/logs/log_configuration/indexes/#exclusion-filters
+[10]: /ja/logs/log_configuration/indexes/#add-indexes
+[11]: /ja/dynamic_instrumentation/how-it-works/
 [12]: https://app.datadoghq.com/dynamic-instrumentation
-[13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
-[14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
-[15]: /dynamic_instrumentation/expression-language
+[13]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-spans
+[14]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[15]: /ja/dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
-[17]: /dynamic_instrumentation/symdb/
+[17]: /ja/dynamic_instrumentation/symdb/

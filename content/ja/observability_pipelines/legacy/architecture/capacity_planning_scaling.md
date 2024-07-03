@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Capacity Planning and Scaling
 aliases:
-  - /observability_pipelines/architecture/capacity_planning_scaling/
+- /ja/observability_pipelines/architecture/capacity_planning_scaling/
+title: (LEGACY) Capacity Planning and Scaling
 ---
 
 {{< site-region region="gov" >}}
@@ -97,5 +97,5 @@ Datadog では、レイヤー 4 (L4) ロードバランサー (ネットワー�
 - 使用率 85% を目標とした平均的な CPU。
 - スケールアップとスケールダウンのための 5 分間の安定時間。
 
-[1]: /observability_pipelines/legacy/architecture/advanced_configurations
-[2]: /observability_pipelines/legacy/architecture/networking
+[1]: /ja/observability_pipelines/legacy/architecture/advanced_configurations
+[2]: /ja/observability_pipelines/legacy/architecture/networking

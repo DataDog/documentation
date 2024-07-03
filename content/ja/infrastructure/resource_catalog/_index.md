@@ -1,11 +1,8 @@
 ---
-title: Datadog Resource Catalog
-kind: documentation
-is_beta: true
 aliases:
-  - /security_platform/cspm/resource_catalog
-  - /security/cspm/resource_catalog
-  - /security/misconfigurations/resource_catalog
+- /ja/security_platform/cspm/resource_catalog
+- /ja/security/cspm/resource_catalog
+- /ja/security/misconfigurations/resource_catalog
 further_reading:
 - link: /security/misconfigurations/
   tag: Documentation
@@ -13,9 +10,12 @@ further_reading:
 - link: /security/threats/
   tag: Documentation
   text: Cloud Security Management Threats
-- link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
+- link: https://www.datadoghq.com/blog/datadog-resource-catalog/
   tag: Blog
   text: Govern your infrastructure resources with the Datadog Resource Catalog
+is_beta: true
+kind: documentation
+title: Datadog Resource Catalog
 ---
 
 {{< site-region region="gov" >}}
@@ -97,12 +97,8 @@ Click the **Share** button and select **Share event** to share a link to the cur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup
+[1]: /ja/security/cloud_security_management/setup
 [2]: https://app.datadoghq.com/infrastructure/catalog
-[3]: /integrations/#cat-notification
-[4]: /account_management/teams
+[3]: /ja/integrations/#cat-notification
+[4]: /ja/account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
-
-
-
-

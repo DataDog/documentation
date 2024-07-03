@@ -1,7 +1,6 @@
 ---
-title: Exploring Database Hosts
 description: Explore and dig into your database host health and configuration
-
+title: Exploring Database Hosts
 ---
 
 {{< img src="database_monitoring/databases-list-2.png" alt="The Databases page in Datadog" style="width:90%;" >}}

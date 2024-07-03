@@ -1,30 +1,30 @@
 ---
-"categories":
-- "collaboration"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。"
-"doc_link": "https://docs.datadoghq.com/integrations/opsgenie/"
-"draft": false
-"further_reading":
-- "link": "https://docs.datadoghq.com/tracing/service_catalog/integrations/#opsgenie-integration"
-  "tag": "ブログ"
-  "text": "サービスカタログとのインテグレーションを利用する"
-- "link": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_opsgenie_service_object"
-  "tag": "Terraform"
-  "text": "Terraform による Opsgenie サービスオブジェクトの作成と管理"
-"git_integration_title": "opsgenie"
-"has_logo": true
-"integration_id": ""
-"integration_title": "OpsGenie"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "opsgenie"
-"public_title": "Datadog-OpsGenie Integration"
-"short_description": "Use OpsGenie as a notification channel in Datadog alerts and events."
-"version": "1.0"
+categories:
+- collaboration
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
+doc_link: https://docs.datadoghq.com/integrations/opsgenie/
+draft: false
+further_reading:
+- link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#opsgenie-integration
+  tag: ブログ
+  text: サービスカタログとのインテグレーションを利用する
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_opsgenie_service_object
+  tag: Terraform
+  text: Terraform による Opsgenie サービスオブジェクトの作成と管理
+git_integration_title: opsgenie
+has_logo: true
+integration_id: ''
+integration_title: OpsGenie
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: opsgenie
+public_title: Datadog-OpsGenie Integration
+short_description: Use OpsGenie as a notification channel in Datadog alerts and events.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -83,5 +83,4 @@ Need help? Contact [Datadog support][4].
 [1]: https://app.opsgenie.com/settings/integration/integration-list
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/account/settings
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

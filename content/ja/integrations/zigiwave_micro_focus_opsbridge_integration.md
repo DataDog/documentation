@@ -1,80 +1,81 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "zigiwave-micro-focus-opsbridge-integration"
-"app_uuid": "b904a102-65fe-4e4d-b693-e4ab98086277"
-"assets":
-  "dashboards":
-    "ZigiWave Incidents Dashboard": assets/dashboards/ZigiWaveOpsBridge_DataDogIncidentDashboard.json
-"author":
-  "homepage": "https://zigiwave.com"
-  "name": ZigiWave
-  "sales_email": info@zigiwave.com
-  "support_email": support@zigiwave.com
-  "vendor_id": zigiwave
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: zigiwave-micro-focus-opsbridge-integration
+app_uuid: b904a102-65fe-4e4d-b693-e4ab98086277
+assets:
+  dashboards:
+    ZigiWave Incidents Dashboard: assets/dashboards/ZigiWaveOpsBridge_DataDogIncidentDashboard.json
+author:
+  homepage: https://zigiwave.com
+  name: ZigiWave
+  sales_email: info@zigiwave.com
+  support_email: support@zigiwave.com
+  vendor_id: zigiwave
+categories:
 - event management
 - incidents
 - marketplace
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "zigiwave_micro_focus_opsbridge_integration"
-"integration_id": "zigiwave-micro-focus-opsbridge-integration"
-"integration_title": "OpsBridge"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "zigiwave_micro_focus_opsbridge_integration"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": micro-focus-opsbridge-integration
-  "short_description": Monthly license for a pair of connected Datadog/MF OpsBridge instances
-  "unit_price": !!float "750.0"
-"public_title": "OpsBridge"
-"short_description": "No-code integration between Datadog and OpsBridge"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: zigiwave_micro_focus_opsbridge_integration
+integration_id: zigiwave-micro-focus-opsbridge-integration
+integration_title: OpsBridge
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: zigiwave_micro_focus_opsbridge_integration
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: micro-focus-opsbridge-integration
+  short_description: Monthly license for a pair of connected Datadog/MF OpsBridge
+    instances
+  unit_price: 750.0
+public_title: OpsBridge
+short_description: No-code integration between Datadog and OpsBridge
+supported_os:
 - linux
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Event Management"
-  - "Category::Incidents"
-  - "Category::Marketplace"
-  - "Category::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Events"
-  - "Submitted Data Type::Incidents"
-  "configuration": "README.md#Setup"
-  "description": No-code integration between Datadog and OpsBridge
-  "media":
-  - "caption": Available Integration Templates With Datadog
-    "image_url": images/datadog_market_2.jpg
-    "media_type": image
-  - "caption": ZigiOps Topology Dashboard
-    "image_url": images/datadog_marketplace_dashboard_6.jpg
-    "media_type": image
-  - "caption": ZigiOps Metrics Dashboard
-    "image_url": images/datadog_marketplace_4.jpg
-    "media_type": image
-  - "caption": ZigiOps integration for transfering incidents to Datadog
-    "image_url": images/OpsBridge-DataDog-Incidents.jpg
-    "media_type": image
-  - "caption": Datadog Incidents Dashboard
-    "image_url": images/ddog_mf_integration-dashboard.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": OpsBridge
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Event Management
+  - Category::Incidents
+  - Category::Marketplace
+  - Category::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
+  - Submitted Data Type::Incidents
+  configuration: README.md#Setup
+  description: No-code integration between Datadog and OpsBridge
+  media:
+  - caption: Available Integration Templates With Datadog
+    image_url: images/datadog_market_2.jpg
+    media_type: image
+  - caption: ZigiOps Topology Dashboard
+    image_url: images/datadog_marketplace_dashboard_6.jpg
+    media_type: image
+  - caption: ZigiOps Metrics Dashboard
+    image_url: images/datadog_marketplace_4.jpg
+    media_type: image
+  - caption: ZigiOps integration for transfering incidents to Datadog
+    image_url: images/OpsBridge-DataDog-Incidents.jpg
+    media_type: image
+  - caption: Datadog Incidents Dashboard
+    image_url: images/ddog_mf_integration-dashboard.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpsBridge
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

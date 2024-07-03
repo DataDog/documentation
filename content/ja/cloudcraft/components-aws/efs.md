@@ -1,5 +1,5 @@
 ---
-title: "EFS Component"
+title: EFS Component
 ---
 ## 概要
 
@@ -73,6 +73,6 @@ The following is an example JSON of a EFS component:
 The EFS component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/security-group/
-[4]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/security-group/
+[4]: /ja/cloudcraft/components-aws/subnet/

@@ -1,7 +1,7 @@
 ---
-title: Changing Your Container Registry
 aliases:
- - /agent/guide/changing_container_registry
+- /ja/agent/guide/changing_container_registry
+title: Changing Your Container Registry
 ---
 
 Datadog は、Google の gcr.io、AWS の ECR、および Docker Hub でコンテナイメージを公開しています。
@@ -167,13 +167,13 @@ image:
 ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials
-[2]: https://docs.datadoghq.com/agent/docker/?tab=standard
-[3]: https://docs.datadoghq.com/agent/kubernetes/?tab=helm
+[2]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=helm
 [4]: https://github.com/DataDog/helm-charts/blob/dae884481c5b3c9b67fc8dbd69c944bf3ec955e9/charts/datadog/values.yaml#L19
-[5]: https://docs.datadoghq.com/agent/kubernetes/?tab=operator#deploy-an-agent-with-the-operator
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=operator#deploy-an-agent-with-the-operator
 [6]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/values.yaml#L28
-[7]: https://docs.datadoghq.com/agent/amazon_ecs/?tab=awscli
+[7]: https://docs.datadoghq.com/ja/agent/amazon_ecs/?tab=awscli
 [8]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/#deploy-the-agent-on-ecs
 [9]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/#deploy-the-agent-on-eks
-[10]: https://docs.datadoghq.com/agent/cluster_agent/
-[11]: https://docs.datadoghq.com/agent/cluster_agent/setup/?tab=helm
+[10]: https://docs.datadoghq.com/ja/agent/cluster_agent/
+[11]: https://docs.datadoghq.com/ja/agent/cluster_agent/setup/?tab=helm

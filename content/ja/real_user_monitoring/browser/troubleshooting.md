@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting
 further_reading:
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
   text: Real User Monitoring
 - link: /integrations/content_security_policy_logs/
   tag: Documentation
   text: Content Security Policy
+title: Troubleshooting
 ---
 
 Datadog Browser RUM で予期しない動作が発生した場合に問題は、このガイドを使うと迅速に解決することができます。問題が解決しない場合は、[Datadog サポート][1]にお問い合わせください。各リリースには改善と修正が含まれているため、[RUM Browser SDK][2] は定期的に最新バージョンに更新してください。
@@ -134,16 +134,16 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /ja/help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
-[3]: /real_user_monitoring/browser/setup/#npm
-[4]: /real_user_monitoring/guide/proxy-rum-data/
-[5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[7]: /real_user_monitoring/browser/data_collected/?tab=session
+[3]: /ja/real_user_monitoring/browser/setup/#npm
+[4]: /ja/real_user_monitoring/guide/proxy-rum-data/
+[5]: /ja/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[6]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[7]: /ja/real_user_monitoring/browser/data_collected/?tab=session
 [8]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
-[9]: /real_user_monitoring/guide/sampling-browser-plans/
-[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[12]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
-[13]: /real_user_monitoring/browser/setup/#initialization-parameters
+[9]: /ja/real_user_monitoring/guide/sampling-browser-plans/
+[10]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[11]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[12]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
+[13]: /ja/real_user_monitoring/browser/setup/#initialization-parameters

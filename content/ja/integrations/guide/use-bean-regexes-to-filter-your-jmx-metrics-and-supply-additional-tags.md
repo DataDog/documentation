@@ -1,8 +1,6 @@
 ---
-title: Use Bean regexes to filter your JMX metrics and supply additional tags
-kind: guide
 aliases:
-  - /integrations/faq/how-to-use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags
+- /ja/integrations/faq/how-to-use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags
 further_reading:
 - link: /integrations/java/
   tag: Documentation
@@ -10,22 +8,23 @@ further_reading:
 - link: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
   tag: Documentation
   text: View JMX data in jConsole and set up your jmx.yaml to collect them
+title: Use Bean regexes to filter your JMX metrics and supply additional tags
 ---
 
-Datadog supports regexes to match JMX Mbean names and domain names to configure your `include` and `exclude` filters. The regexes must conform to [Java's regular expression format][1]. Note that these filters were added in version 5.5.0.
+Datadog は、JMX Mbean 名とドメイン名をマッチングさせて、`include` と `exclude` フィルターを構成するための正規表現をサポートしています。正規表現は、[Java の正規表現形式][1]に準拠する必要があります。これらのフィルターはバージョン 5.5.0 で追加されたことに注意してください。
 
-Capture groups from the provided regex can be used to supply additional tag values for your metrics.
+提供された正規表現からのキャプチャグループは、メトリクスの追加のタグ値を供給するために使用することができます。
 
-This article provides one example of how to use the `bean_regex` from the [Java integration][2], and how to reference such capture groups to set additional tags.
+この記事では、[Java インテグレーション][2]の `bean_regex` を使用する方法の一例と、そのようなキャプチャグループを参照して追加のタグを設定する方法について説明します。
 
-Suppose you have the following Mbean name: `domain.example.com:name=my.metric.name.env.dev.region.eu-central-1.method.GET.status.200`. There is some information you could use as tags once the Agent has collected the metric. For instance, you could export a metric with the following tags:
+`domain.example.com:name=my.metric.name.env.dev.region.eu-central-1.method.GET.status.200` という Mbean 名があるとします。Agent がメトリクスを収集した後、タグとして使用できる情報がいくつかあります。例えば、以下のタグでメトリクスをエクスポートすることができます。
 
 * `env`: `dev`
 * `region`: `eu-central-1`
 * `method`: `GET`
 * `status`: `200`
 
-Bean regexes can be supplied as a single regex or a list of regex expressions. For the latter, only the first entry of the list that matches will be taken into account. See an example of a configuration file to export your custom metrics with some additional tags:
+Bean 正規表現は、単一の正規表現または正規表現のリストとして提供することができます。後者の場合、リストの中で最初にマッチしたエントリのみが考慮されます。カスタムメトリクスにいくつかのタグを追加してエクスポートするためのコンフィギュレーションファイルの例をご覧ください。
 
 ```yaml
 init_config:
@@ -52,9 +51,9 @@ instances:
               optional: tag
 ```
 
-Each capture group is stored in a Java Map. The first capture group starts at position `0`. After you have determined which capture group you want to export as a tag, you need to reference them in the `tags` section of your `include` or `exclude` filter, as well as to the number of the group (for example, the position inside the Map).
+各キャプチャグループは、Java Map に格納されます。最初のキャプチャグループは位置 `0` から始まります。どのキャプチャグループをタグとしてエクスポートするかを決めたら、`include` または `exclude` フィルターの `tags` セクションで、グループの番号 (例えば、Map 内の位置) と同様に参照する必要があります。
 
-For the provided example in `bean_regex`, the capture groups are:
+`bean_regex` で提供された例では、キャプチャグループは次のとおりです。
 
 * `$0`: `domain.example.com:name=my.metric.name.env.dev.region.eu-central-1.method.GET.status.200`
 * `$1`: `dev`
@@ -62,12 +61,12 @@ For the provided example in `bean_regex`, the capture groups are:
 * `$3`: `GET`
 * `$4`: `200`
 
-Using the [Metrics Explorer][3], you are able to query your metrics and filter them by the tags you have just created.
+[メトリクスエクスプローラー][3]を使用すると、メトリクスをクエリしたり、先ほど作成したタグでフィルターをかけたりすることができます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[2]: /integrations/java/
-[3]: /metrics/explorer/
+[2]: /ja/integrations/java/
+[3]: /ja/metrics/explorer/

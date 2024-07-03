@@ -1,11 +1,11 @@
 ---
-title: Setting Up Software Composition Analysis
-description: Learn how to set up Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
-is_beta: true
+description: Learn how to set up Software Composition Analysis to scan your imported
+  open-source libraries for known security vulnerabilities before you ship to production.
 further_reading:
-- link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
+- link: https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/
   tag: Blog
-  text: Enhance application security in production with Datadog Application Vulnerability Management
+  text: Enhance application security in production with Datadog Application Vulnerability
+    Management
 - link: /getting_started/application_security/software_composition_analysis
   tag: Documentation
   text: Getting Started with Software Composition Analysis
@@ -18,6 +18,8 @@ further_reading:
 - link: /code_analysis/static_analysis/
   tag: Documentation
   text: Learn about Static Analysis
+is_beta: true
+title: Setting Up Software Composition Analysis
 ---
 
 {{% site-region region="gov" %}}
@@ -53,10 +55,10 @@ Datadog Software Composition Analysis runs in your CI pipelines using the [`data
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/application_security/vulnerability_management
-[2]: /code_analysis/
-[3]: /account_management/api-app-keys/
-[4]: /getting_started/site/
+[1]: /ja/getting_started/application_security/vulnerability_management
+[2]: /ja/code_analysis/
+[3]: /ja/account_management/api-app-keys/
+[4]: /ja/getting_started/site/
 [5]: https://github.com/DataDog/datadog-ci
 [6]: https://app.datadoghq.com/ci/code-analysis
-[7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[7]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account

@@ -1,6 +1,4 @@
 ---
-title: Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers
-kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: ドキュメント
@@ -14,52 +12,53 @@ further_reading:
 - link: /tracing/trace_collection/custom_instrumentation/python/
   tag: ドキュメント
   text: Manually configuring traces and spans
-- link: "https://github.com/DataDog/dd-trace-py"
+- link: https://github.com/DataDog/dd-trace-py
   tag: ソースコード
   text: Tracing library open source code repository
+title: Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers
 ---
 
-## Overview
+## 概要
 
-This tutorial walks you through the steps for enabling tracing on a sample Python application installed in a container. In this scenario, the Datadog Agent is also installed in a container.
+このチュートリアルでは、コンテナにインストールされたサンプル Python アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、Datadog Agent はコンテナにもインストールされています。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-containers-overview.png" alt="Diagram showing installation scenario for this tutorial" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-containers-overview.png" alt="このチュートリアルのインストールシナリオを示す図" style="width:100%;" >}}
 
-For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
+ホスト上のアプリケーションと Agent、ホスト上のコンテナと Agent のアプリケーション、他の言語で書かれたアプリケーションなど、その他のシナリオについては、その他の[トレース有効化のチュートリアル][1]を参照してください。
 
-See [Tracing Python Applications][2] for general comprehensive tracing setup documentation for Python.
+Python の一般的なトレース設定ドキュメントについては、[Python アプリケーションのトレース][2]を参照してください。
 
-### Prerequisites
+### 前提条件
 
-- A Datadog account and [organization API key][3]
+- Datadog のアカウントと[組織の API キー][3]
 - Git
-- Python that meets the [tracing library requirements][4]
+- [トレーシングライブラリの要件][4]を満たす Python
 
-## Install the sample Dockerized Python application
+## Docker 化されたサンプル Python アプリケーションのインストール
 
-The code sample for this tutorial is on GitHub, at [github.com/Datadog/apm-tutorial-python][9]. To get started, clone the repository:
+このチュートリアルのコードサンプルは、GitHub の [github.com/Datadog/apm-tutorial-python][9] にあります。まずは、このリポジトリを複製してください。
 
 {{< code-block lang="sh" >}}
 git clone https://github.com/DataDog/apm-tutorial-python.git
 {{< /code-block >}}
 
-The repository contains a multi-service Python application pre-configured to be run within Docker containers. The sample app is a basic notes app with a REST API to add and change data.
+このリポジトリには、Docker コンテナ内で実行できるようにあらかじめ構成されたマルチサービスの Python アプリケーションが含まれています。サンプルアプリは、データの追加や変更を行うための REST API を備えた基本的なノートアプリです。
 
-### Starting and exercising the sample application
+### サンプルアプリケーションの起動と実行
 
-1. Build the application's container by running:
+1. 以下を実行することでアプリケーションのコンテナを構築します。
 
    {{< code-block lang="sh" >}}
 docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
 {{< /code-block >}}
 
-2. Start the container:
+2. コンテナを起動します。
 
    {{< code-block lang="sh" >}}
 docker-compose -f docker/containers/exercise/docker-compose.yaml up db notes_app
 {{< /code-block >}}
 
-   The application is ready to use when you see the following output in the terminal: 
+   ターミナルに次のような出力が表示されたら、アプリケーションの使用準備は完了です。
 
    ```
    notes          |  * Debug mode: on
@@ -73,9 +72,9 @@ docker-compose -f docker/containers/exercise/docker-compose.yaml up db notes_app
    notes          | INFO:werkzeug: * Debugger PIN: 143-375-699
    ```
 
-   You can also verify that it's running by viewing the running containers with the `docker ps` command.
+   また、`docker ps` コマンドで実行中のコンテナを表示することで、実行されていることを確認することができます。
 
-3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in a Postgres database running in another container. Send it a few commands:
+3. 別のターミナルを開いて、アプリを行使するために API リクエストを送信します。ノートアプリケーションは、別のコンテナで実行されている Postgres データベースにデータを保存する REST API です。これにいくつかのコマンドを送信します。
 
 `curl -X GET 'localhost:8080/notes'`
 : `{}`
@@ -95,25 +94,25 @@ docker-compose -f docker/containers/exercise/docker-compose.yaml up db notes_app
 `curl -X DELETE 'localhost:8080/notes?id=1'`
 : `Deleted`
 
-### Stop the application
+### アプリケーションを停止します。
 
-After you've seen the application running, stop it so that you can enable tracing on it.
+アプリケーションの実行を確認したら、それを停止して、トレースを有効にします。
 
-1. Stop the containers:
+1. コンテナを停止します。
    {{< code-block lang="sh" >}}
 docker-compose -f docker/containers/exercise/docker-compose.yaml down
 {{< /code-block >}}
 
-2. Remove the containers:
+2. コンテナを削除します。
    {{< code-block lang="sh" >}}
 docker-compose -f docker/containers/exercise/docker-compose.yaml rm
 {{< /code-block >}}
 
-## Enable tracing
+## トレースを有効にする
 
-Now that you have a working Python application, configure it to enable tracing.
+Python アプリケーションが動作するようになったので、トレースを有効にするための構成を行います。
 
-1. Add the Python tracing package to your project. Open the file `apm-tutorial-python/requirements.txt`, and add `ddtrace` to the list if it is not already there:
+1. Python トレーシングパッケージをプロジェクトに追加します。ファイル `apm-tutorial-python/requirements.txt` を開き、`ddtrace` がなければ追加してください。
 
    ```
    flask==2.2.2
@@ -122,16 +121,16 @@ Now that you have a working Python application, configure it to enable tracing.
    ddtrace
    ```
 
-2. Within the notes application Dockerfile, `docker/containers/exercise/Dockerfile.notes`, change the CMD line that starts the application to use the `ddtrace` package:
+2. ノートアプリケーションの Dockerfile (`docker/containers/exercise/Dockerfile.notes`) 内で、アプリケーションを起動する CMD 行を変更し、`ddtrace` パッケージを使用するようにしてください。
 
    ```
    # Run the application with Datadog 
    CMD ["ddtrace-run", "python", "-m", "notes_app.app"]
    ```
 
-   This automatically instruments the application with Datadog services.
+   これにより、アプリケーションは自動的に Datadog のサービスにインスツルメンテーションされます。
 
-3. Apply [Universal Service Tags][10], which identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. Add the following environment variables in the Dockerfile:
+3. 異なるバージョンやデプロイ環境間でトレースされたサービスを識別する[統合サービスタグ][10]を適用することで、Datadog 内で相関が取れるようになり、検索やフィルターに利用できるようになります。統合サービスタグ付けに使用する環境変数は、`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の 3 つです。Dockerfile に以下の環境変数を追加します。
 
    ```
    ENV DD_SERVICE="notes"
@@ -139,7 +138,7 @@ Now that you have a working Python application, configure it to enable tracing.
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Add Docker labels that correspond to the Universal Service Tags. This allows you also to get Docker metrics once your application is running. 
+4. 統合サービスタグに対応する Docker ラベルを追加します。これにより、アプリケーションが実行されると、Docker のメトリクスも取得できるようになります。
 
    ```
    LABEL com.datadoghq.tags.service="notes"
@@ -147,13 +146,13 @@ Now that you have a working Python application, configure it to enable tracing.
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/containers/solution/Dockerfile.notes`.
+正しく設定されているか確認するために、サンプルリポジトリのソリューションファイル `docker/containers/solution/Dockerfile.notes` で提供されている Dockerfile ファイルと比較してみてください。
 
-## Add the Agent container
+## Agent コンテナの追加
 
-Add the Datadog Agent in the services section of the `docker/containers/exercise/docker-compose.yaml` file:
+`docker/containers/exercise/docker-compose.yaml` ファイルのサービスセクションに Datadog Agent を追加します。
 
-1. Add the Agent configuration, and specify your own [Datadog API key][3] and [site][6]:
+1. Agent の構成を追加し、自分の [Datadog API キー][3]と[サイト][6]を指定します。
    ```yaml
      datadog:
        container_name: dd-agent
@@ -168,28 +167,28 @@ Add the Datadog Agent in the services section of the `docker/containers/exercise
           - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
    ```
 
-2. Add the environment variable `DD_AGENT_HOST` and specify the hostname of the Agent container to the section for each container with code that you want to monitor, in this case, the `notes_app` container:
+2. 環境変数 `DD_AGENT_HOST` を追加し、監視したいコードを持つ各コンテナ (この場合は `notes_app` コンテナ) のセクションに、Agent コンテナのホスト名を指定します。
    ```yaml
        environment:
         - DD_AGENT_HOST=datadog
    ```
 
-To check that you've set things up correctly, compare your `docker-compose.yaml` file with the one provided in the sample repository's solution file, `docker/containers/solution/docker-compose.yaml`.
+正しく設定されているか確認するために、サンプルリポジトリのソリューションファイル `docker/containers/solution/docker-compose.yaml` で提供されている `docker-compose.yaml` ファイルと比較してみてください。
 
-## Launch the containers to see automatic tracing
+## 自動トレースを見るためにコンテナを起動する
 
-Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
+トレーシングライブラリがインストールされたので、アプリケーションを再起動し、トレースの受信を開始します。以下のコマンドを実行します。
 
 ```
 docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
 docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog notes_app
 ```
 
-You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
+Agent が動作しているかどうかは、ターミナルで連続出力を観察するか、Datadog の[イベントエクスプローラー][8]を開いて Agent の開始イベントを確認することで分かります。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-agent-start-event.png" alt="Agent start event shown in Events Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-agent-start-event.png" alt="イベントエクスプローラーに表示される Agent の開始イベント" style="width:100%;" >}}
 
-With the application running, send some curl requests to it:
+アプリケーションを起動した状態で、いくつかの curl リクエストを送信します。
 
 `curl -X POST 'localhost:8080/notes?desc=hello'`
 : `(1, hello)`
@@ -203,39 +202,39 @@ With the application running, send some curl requests to it:
 `curl -X DELETE 'localhost:8080/notes?id=1'`
 : `Deleted`
 
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-traces.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
 
-If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+もし、数分待ってもトレースが表示されない場合は、Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
 
-### Examine a trace
+### トレースの検証
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+Traces ページで、`POST /notes` トレースをクリックすると、各スパンにかかった時間や、あるスパンが完了する前に他のスパンが発生したことを示すフレームグラフが表示されます。グラフの上部にあるバーは、前の画面で選択したスパンです (この場合、ノートアプリケーションへの最初のエントリポイントです)。
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+バーの幅は、それが完了するまでにかかった時間を示します。低い深さのバーは、高い深さのバーの寿命の間に完了するスパンを表します。
 
-The flame graph for a `POST` trace looks something like this:
+`POST` トレースのフレームグラフは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-post-flame.png" alt="POST トレースのフレームグラフ。" style="width:100%;" >}}
 
-A `GET /notes` trace looks something like this:
+`GET /notes` トレースは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-get-flame.png" alt="GET トレースのフレームグラフ。" style="width:100%;" >}}
 
 
-## Add custom instrumentation to the Python application
+## Python アプリケーションにカスタムインスツルメンテーションを追加する
 
-Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
+自動インスツルメンテーションは便利ですが、より細かいスパンが欲しい場合もあります。Datadog の Python DD Trace API では、アノテーションやコードを使用してコード内のスパンを指定することができます。
 
-The following steps walk you through adding annotations to the code to trace some sample methods.
+次のステップでは、コードにアノテーションを追加して、いくつかのサンプルメソッドをトレースする方法を説明します。
 
-1. Open `notes_app/notes_helper.py`.
-2. Add the following import:
+1. `notes_app/notes_helper.py` を開きます。
+2. 以下のインポートを追加します。
    {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
 
-3. Inside the `NotesHelper` class, add a tracer wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
+3. `NotesHelper` クラスの中に、`notes_helper` というトレーサーラッパーを追加して、`notes_helper.long_running_process` メソッドがどのように動作するかを確認できるようにします。
    {{< code-block lang="python" >}}class NotesHelper:
 
     @tracer.wrap(service="notes_helper")
@@ -244,34 +243,34 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
+   さて、トレーサーは自動的にリソースにラップされている関数名、この場合は `long_running_process` をラベル付けしています。
 
-4. Rebuild the containers by running:
+4. 以下を実行してコンテナを再構築します。
    {{< code-block lang="sh" >}}
 docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
 docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog notes_app
 {{< /code-block >}}
-4. Resend some HTTP requests, specifically some `GET` requests.
-5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
+4. いくつかの HTTP リクエスト、特にいくつかの `GET` リクエストを再送します。
+5. トレースエクスプローラーで、新しい `GET` リクエストの 1 つをクリックすると、次のようなフレームグラフが表示されます。
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-python-container-custom-flame.png" alt="カスタムインスツルメンテーションを用いた GET トレースのフレームグラフ。" style="width:100%;" >}}
 
-   Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
+   `get_notes` 関数にカスタムトレースが追加され、スタックトレースがより詳細になったことに注意してください。
 
-For more information, read [Custom Instrumentation][12].
+詳しくは、[カスタムインストルメンテーション][12]をご覧ください。
 
-## Add a second application to see distributed traces
+## 分散型トレーシングを見るために 2 つ目のアプリケーションを追加する
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
+単一のアプリケーションをトレースすることは素晴らしいスタートですが、トレースの本当の価値は、リクエストがサービスを通じてどのように流れるかを見ることです。これは、_分散型トレーシング_と呼ばれています。
 
-The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
+サンプルプロジェクトには `calendar_app` という 2 番目のアプリケーションが含まれており、呼び出されるたびにランダムな日付を返します。Notes アプリケーションの `POST` エンドポイントには、`add_date` という名前の 2 つ目のクエリパラメーターがあります。このパラメータが `y` に設定されると、Notes はカレンダーアプリケーションを呼び出して、ノートに追加する日付を取得します。
 
-1. Configure the calendar app for tracing by adding `dd_trace` to the startup command in the Dockerfile, like you previously did for the notes app. Open `docker/containers/exercise/Dockerfile.calendar` and update the CMD line like this:
+1. Dockerfile の起動コマンドに `dd_trace` を追加して、カレンダーアプリをトレース用に構成します。`docker/containers/exercise/Dockerfile.calendar` を開き、CMD 行を以下のように更新します。
    ```
    CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
    ```
 
-3. Apply Universal Service Tags, just like we did for the notes app. Add the following environment variables in the `Dockerfile.calendar` file:
+3. ノートアプリと同様に、統合サービスタグを適用します。`Dockerfile.calendar` ファイルに、以下の環境変数を追加します。
 
    ```
    ENV DD_SERVICE="calendar"
@@ -279,7 +278,7 @@ The sample project includes a second application called `calendar_app` that retu
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Again, add Docker labels that correspond to the Universal Service Tags, allowing you to also get Docker metrics once your application runs. 
+4. 再び、統合サービスタグに対応する Docker ラベルを追加します。これにより、アプリケーションが実行されると、Docker のメトリクスも取得できるようになります。
 
    ```
    LABEL com.datadoghq.tags.service="calendar"
@@ -287,52 +286,52 @@ The sample project includes a second application called `calendar_app` that retu
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-2. Add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container to send traces to the correct location. Open `docker/containers/exercise/docker-compose.yaml` and add the following lines to the `calendar_app` section:
+2. Agent コンテナのホスト名である `DD_AGENT_HOST` をカレンダーアプリのコンテナに追加し、トレースを正しい場所に送信します。`docker/containers/exercise/docker-compose.yaml` を開き、`calendar_app` セクションに以下の行を追加してください。
 
    ```yaml
        environment:
         - DD_AGENT_HOST=datadog
    ```
 
-   To check that you've set things up correctly, compare your setup with the Dockerfile and `docker-config.yaml` files provided in the sample repository's `docker/containers/solution` directory.
+   正しく設定されているか確認するために、サンプルリポジトリの `docker/containers/solution` ディレクトリで提供されている Dockerfile と `docker-config.yaml` ファイルと比較してみてください。
 
-5. Build the multi-service application by restarting the containers. First, stop all running containers:
+5. コンテナを再起動し、マルチサービスアプリケーションを構築します。まず、実行中のコンテナをすべて停止します。
    ```
    docker-compose -f docker/containers/exercise/docker-compose.yaml down
    ```
 
-   Then run the following commands to start them:
+   その後、以下のコマンドを実行して起動します。
    ```
    docker-compose -f docker/containers/exercise/docker-compose.yaml build
    docker-compose -f docker/containers/exercise/docker-compose.yaml up
    ```
 
-6. Send a POST request with the `add_date` parameter:
+6. `add_date` パラメーターを指定して、POST リクエストを送信します。
 
 `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
 : `(2, hello_again with date 2022-11-06)`
 
 
-7. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+7. トレースエクスプローラーで、この最新のトレースをクリックすると、2 つのサービス間の分散型トレーシングが表示されます。
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-python-container-distributed.png" alt="分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
 
-## Add more custom instrumentation
+## カスタムインスツルメンテーションの追加
 
-You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
+コードを使って、カスタムのインスツルメンテーションを追加することができます。例えば、カレンダサービスをさらにインスツルメンテーションして、トレースを見やすくしたいとします。
 
-1. Open `notes_app/notes_logic.py`. 
-2. Add the following import
+1. `notes_app/notes_logic.py` を開きます。
+2. 以下のインポートを追加します。
 
    ```python
    from ddtrace import tracer
    ```
-3. Inside the `try` block, at about line 28, add the following `with` statement:
+3. `try` ブロックの内部、28 行目あたりに、次の `with` ステートメントを追加してください。
 
    ```python
    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
    ```
-   Resulting in this:
+   その結果、こうなりました。
    {{< code-block lang="python" >}}
 def create_note(self, desc, add_date=None):
         if (add_date):
@@ -350,32 +349,32 @@ def create_note(self, desc, add_date=None):
         note = Note(description=desc, id=None)
         note.id = self.db.create_note(note){{< /code-block >}}
 
-4. Rebuild the containers:
+4. コンテナを再構築します。
    ```
    docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
    docker-compose -f docker/containers/exercise/docker-compose.yaml up
    ```
 
-5. Send some more HTTP requests, specifically `POST` requests, with the `add_date` argument.
-6. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
-   {{< img src="tracing/guide/tutorials/tutorial-python-container-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
-   Note the new span labeled `notes_helper.another_process`.
+5. 引数 `add_date` を指定して、より多くの HTTP リクエスト、特に `POST` リクエストを送信します。
+6. トレースエクスプローラーで、これらの新しい `POST` トレースをクリックすると、複数のサービスにわたるカスタムトレースが表示されます。
+   {{< img src="tracing/guide/tutorials/tutorial-python-container-cust-dist.png" alt="カスタムインスツルメンテーションを用いた分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
+   新しいスパンには `notes_helper.another_process` というラベルが付けられていることに注意してください。
 
-If you're not receiving traces as expected, set up debug mode in the `ddtrace` Python package. Read [Enable debug mode][13] to find out more.
+もし、期待通りのトレースが受信できない場合は、Python パッケージの `ddtrace` でデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/#enabling-tracing-tutorials
-[2]: /tracing/trace_collection/dd_libraries/python/
-[3]: /account_management/api-app-keys/
-[4]: /tracing/trace_collection/compatibility/python/
-[6]: /getting_started/site/
+[1]: /ja/tracing/guide/#enabling-tracing-tutorials
+[2]: /ja/tracing/trace_collection/dd_libraries/python/
+[3]: /ja/account_management/api-app-keys/
+[4]: /ja/tracing/trace_collection/compatibility/python/
+[6]: /ja/getting_started/site/
 [8]: https://app.datadoghq.com/event/explorer
 [9]: https://github.com/DataDog/apm-tutorial-python
-[10]: /getting_started/tagging/unified_service_tagging/
+[10]: /ja/getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/apm/traces
-[12]: /tracing/trace_collection/custom_instrumentation/python/
-[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[12]: /ja/tracing/trace_collection/custom_instrumentation/python/
+[13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode

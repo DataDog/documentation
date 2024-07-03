@@ -1,8 +1,6 @@
 ---
-title: Getting Started with Browser Tests
-kind: documentation
 further_reading:
-- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: Learning Center
   text: Introduction to Synthetic Tests
 - link: /synthetics/browser_tests
@@ -20,7 +18,8 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: Learn about Synthetic test monitors
-
+kind: documentation
+title: Getting Started with Browser Tests
 ---
 
 ## Overview
@@ -131,17 +130,17 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /synthetics/browser_tests/
+[1]: /ja/synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/tests
 [3]: https://app.datadoghq.com/synthetics/browser/create
-[4]: /getting_started/synthetics/private_location
-[5]: /continuous_testing/cicd_integrations
-[6]: /integrations/#cat-notification
+[4]: /ja/getting_started/synthetics/private_location
+[5]: /ja/continuous_testing/cicd_integrations
+[6]: /ja/integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
-[8]: /synthetics/guide/synthetic-test-monitors
+[8]: /ja/synthetics/guide/synthetic-test-monitors
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[10]: /synthetics/browser_tests/test_results#test-failure
-[11]: /synthetics/browser_tests/test_results#errors
-[12]: /synthetics/browser_tests/test_results#resources
-[13]: /synthetics/browser_tests/test_results#page-performance
-[14]: /synthetics/apm/
+[10]: /ja/synthetics/browser_tests/test_results#test-failure
+[11]: /ja/synthetics/browser_tests/test_results#errors
+[12]: /ja/synthetics/browser_tests/test_results#resources
+[13]: /ja/synthetics/browser_tests/test_results#page-performance
+[14]: /ja/synthetics/apm/

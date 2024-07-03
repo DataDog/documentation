@@ -1,9 +1,8 @@
 ---
-title: Process Check Monitor
-description: "Check if a process is running on a host"
 aliases:
-- /monitors/monitor_types/process_check
-- /monitors/create/types/process_check/
+- /ja/monitors/monitor_types/process_check
+- /ja/monitors/create/types/process_check/
+description: Check if a process is running on a host
 further_reading:
 - link: /monitors/notify/
   tag: Documentation
@@ -14,6 +13,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Check your monitor status
+title: Process Check Monitor
 ---
 
 ## 概要
@@ -83,10 +83,10 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/process/
+[1]: /ja/integrations/process/
 [2]: https://app.datadoghq.com/monitors#create/process
-[3]: /monitors/configuration/#advanced-alert-conditions
-[4]: /monitors/configuration/#no-data
-[5]: /monitors/configuration/#auto-resolve
-[6]: /monitors/configuration/#new-group-delay
-[7]: /monitors/notify/
+[3]: /ja/monitors/configuration/#advanced-alert-conditions
+[4]: /ja/monitors/configuration/#no-data
+[5]: /ja/monitors/configuration/#auto-resolve
+[6]: /ja/monitors/configuration/#new-group-delay
+[7]: /ja/monitors/notify/

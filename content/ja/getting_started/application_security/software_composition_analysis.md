@@ -1,12 +1,11 @@
 ---
-title: Getting Started with Software Composition Analysis
-kind: documentation
 aliases:
-- /getting_started/application_security/vulnerability_management
+- /ja/getting_started/application_security/vulnerability_management
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
+- link: https://www.datadoghq.com/blog/datadog-software-composition-analysis/
   tag: Blog
-  text: Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis
+  text: Mitigate vulnerabilities from third-party libraries with Datadog Software
+    Composition Analysis
 - link: /code_analysis/software_composition_analysis/
   tag: Documentation
   text: Read more about Software Composition Analysis in source code
@@ -19,12 +18,15 @@ further_reading:
 - link: /security/application_security/getting_started
   tag: Documentation
   text: Enabling ASM
-- link: "https://securitylabs.datadoghq.com/"
+- link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Security research, reports, tips, and videos from Datadog
-- link: "https://www.datadoghq.com/blog/sca-supply-chain-security/"
+- link: https://www.datadoghq.com/blog/sca-supply-chain-security/
   tag: ブログ
-  text: Beyond vulnerabilities, towards a holistic approach to securing the software supply chain
+  text: Beyond vulnerabilities, towards a holistic approach to securing the software
+    supply chain
+kind: documentation
+title: Getting Started with Software Composition Analysis
 ---
 
 
@@ -113,14 +115,14 @@ This guide walks you through best practices for getting your team up and running
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/vulnerability_management/
-[2]: /security/application_security/enabling/compatibility/
-[3]: /security/application_security/enabling/
+[1]: /ja/security/application_security/vulnerability_management/
+[2]: /ja/security/application_security/enabling/compatibility/
+[3]: /ja/security/application_security/enabling/
 [4]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: https://app.datadoghq.com/services
-[7]: /tracing/service_catalog/#security-view
-[8]: /tracing/service_catalog/#investigate-a-service
+[7]: /ja/tracing/service_catalog/#security-view
+[8]: /ja/tracing/service_catalog/#investigate-a-service
 [9]: https://app.datadoghq.com/security/configuration/asm/setup
-[10]: /account_management/rbac/permissions/#integrations
-[11]: /integrations/jira/
+[10]: /ja/account_management/rbac/permissions/#integrations
+[11]: /ja/integrations/jira/

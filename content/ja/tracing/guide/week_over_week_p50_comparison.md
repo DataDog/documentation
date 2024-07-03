@@ -1,6 +1,4 @@
 ---
-title: Compare a Service's latency to the previous week
-kind: guide
 further_reading:
 - link: /tracing/guide/alert_anomalies_p99_database/
   tag: 3 mins
@@ -12,11 +10,12 @@ further_reading:
   tag: 3 mins
   text: Debug the slowest trace on the slowest endpoint of a web service
 - link: /tracing/guide/
-  tag: ""
+  tag: ''
   text: All guides
+title: Compare a Service's latency to the previous week
 ---
 
-_2 minutes to complete_
+_2 分で読了_
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3_cropped_small.mp4" alt="comparison video" video="true" style="width:90%;">}}
 
@@ -26,7 +25,7 @@ Datadog can show you the latency of your application over time and how it compar
 
     This page contains a list of all [services][2] providing data to Datadog. You can search over your services by keywords, filter them by `env` tag, and set the time frame.
 
-2. **Search and open a relevant and active service**.
+2. **関連するアクティブなサービスを検索して開きます**。
 
     This example uses the `web-store` service because it is stable. Double-check that issues have not appeared over the last month.
 
@@ -38,18 +37,18 @@ Datadog can show you the latency of your application over time and how it compar
 
 {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_s3_cropped.png" alt="Full view of latency chart with week-over-week display enabled" style="width:90%;">}}
 
-    Datadog APM allows you to compare the different percentiles of latency for the service over time but also to view the full distribution of latencies in the Latency Distribution graph below.
+Datadog APM を使用すると、サービスのレイテンシーのさまざまなパーセンタイルを経時的に比較できますが、以下のレイテンシー分布グラフでレイテンシーの完全な分布を表示することもできます。
 
 4. **Add the previous week's p50 performance** by checking the `Week` option in the *Compare to Last* section on the right.
 
-{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_1.png" alt="Full view of latency chart with week-over-week display enabled" style="width:90%;">}}
+{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_1.png" alt="週ごとの表示を有効にしたレイテンシーチャートのフルビュー" style="width:90%;">}}
 
 **Note**: As you conduct your analysis you can export this graph to any dashboard from the Service view, and display this data alongside any other chart generated in Datadog, including your custom metrics, host-level information, and logs.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /tracing/glossary/#services
-[3]: /tracing/glossary/#resources
+[2]: /ja/tracing/glossary/#services
+[3]: /ja/tracing/glossary/#resources

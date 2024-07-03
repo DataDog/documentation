@@ -1,18 +1,18 @@
 ---
-title: RUM Android Data Collected
-kind: documentation
-code_lang: android
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
-- /real_user_monitoring/android/data_collected/
+- /ja/real_user_monitoring/android/data_collected/
+code_lang: android
+code_lang_weight: 10
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-android"
+- link: https://github.com/DataDog/dd-sdk-android
   tag: ソースコード
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+kind: documentation
+title: RUM Android Data Collected
+type: multi-code-lang
 ---
 
 ## Overview
@@ -261,12 +261,12 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#enrich-user-sessions
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#track-custom-global-attributes
-[4]: /getting_started/tagging/unified_service_tagging/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#track-user-sessions
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#enrich-user-sessions
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#track-custom-global-attributes
+[4]: /ja/getting_started/tagging/unified_service_tagging/
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#track-user-sessions
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://developer.android.com/training/articles/direct-boot
-[8]: /data_security/real_user_monitoring/#ip-address
-[9]: /data_security/real_user_monitoring/#geolocation
+[8]: /ja/data_security/real_user_monitoring/#ip-address
+[9]: /ja/data_security/real_user_monitoring/#geolocation

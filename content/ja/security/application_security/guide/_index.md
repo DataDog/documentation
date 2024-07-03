@@ -1,7 +1,7 @@
 ---
-title: Application Security Management Guides
-private: true
 disable_toc: true
+private: true
+title: Application Security Management Guides
 ---
 
 {{< whatsnext desc="Getting Started" >}}
@@ -13,4 +13,3 @@ disable_toc: true
 {{< whatsnext desc="Software Composition Analysis" >}}
     {{< nextlink href="/security/application_security/guide/automate_risk_reduction_sca/" >}}Automate open source risk reduction with Datadog SCA{{< /nextlink >}}
 {{< /whatsnext >}}
-

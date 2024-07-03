@@ -1,9 +1,7 @@
 ---
-title: Adding a Custom Python Package to the Agent
-kind: documentation
 aliases:
-- /agent/custom_python_package
-- /agent/faq/custom_python_package
+- /ja/agent/custom_python_package
+- /ja/agent/faq/custom_python_package
 further_reading:
 - link: /logs/
   tag: Documentation
@@ -14,6 +12,8 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Collect your traces
+kind: documentation
+title: Adding a Custom Python Package to the Agent
 ---
 
 {{< tabs >}}
@@ -66,7 +66,7 @@ then [restart your Agent][1].
 
 {{< img src="agent/windows_python_package.png" alt="windows python package" >}}
 
-[1]: /agent/basic_agent_usage/windows/
+[1]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -1,15 +1,15 @@
 ---
-title: Graphing Guides
-private: true
-disable_toc: true
 aliases:
-    - /graphing/guide/
-    - /faq/treemap-graph-visualization-can-i-use-this-elsewhere/
+- /ja/graphing/guide/
+- /ja/faq/treemap-graph-visualization-can-i-use-this-elsewhere/
 cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: Graphing Guides
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: Graphing Guides
+disable_toc: true
+private: true
+title: Graphing Guides
 ---
 
 {{< whatsnext desc="General Guides:" >}}

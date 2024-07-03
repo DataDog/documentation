@@ -1,12 +1,12 @@
 ---
-title: AWS Batch with ECS Fargate and the Datadog Agent
-further_reading:
-    - link: "integrations/ecs_fargate/?tab=webui#aws-batch-on-ecs-fargate"
-      tag: ドキュメント
-      text: Amazon ECS on AWS Fargate with AWS Batch
 aliases:
-    - /integrations/faq/aws-batch-ecs-fargate
-    - /agent/guide/aws-batch-ecs-fargate-datadog-agent
+- /ja/integrations/faq/aws-batch-ecs-fargate
+- /ja/agent/guide/aws-batch-ecs-fargate-datadog-agent
+further_reading:
+- link: integrations/ecs_fargate/?tab=webui#aws-batch-on-ecs-fargate
+  tag: ドキュメント
+  text: Amazon ECS on AWS Fargate with AWS Batch
+title: AWS Batch with ECS Fargate and the Datadog Agent
 ---
 
 You can run the Datadog Agent alongside your AWS Batch job containers by adding the container to your job definition.

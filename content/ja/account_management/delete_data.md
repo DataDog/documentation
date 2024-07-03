@@ -1,6 +1,6 @@
 ---
-title: Delete Data
 private: true
+title: Delete Data
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
@@ -58,7 +58,7 @@ To cancel a deletion, click **Cancel** on an **Upcoming** or **In Progress** job
 Deletions are logged in [Deletion History][5] for 90 days. They are also logged in [Audit Trail][6] alongside the requesting user's details.
 
 [1]: https://www.datadoghq.com/support/
-[2]: /account_management/rbac/permissions/
+[2]: /ja/account_management/rbac/permissions/
 [3]: https://app.datadoghq.com/organization-settings/roles
 [4]: https://app.datadoghq.com/organization-settings/data-deletion
 [5]: https://app.datadoghq.com/organization-settings/data-deletion?data-deletion-tab=deletion-history

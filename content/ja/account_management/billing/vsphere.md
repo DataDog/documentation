@@ -19,6 +19,6 @@ Datadog では、vCenter サーバーにインストールされている Agent 
 課金に関するご質問は、[カスタマーサクセス][4]マネージャーにお問い合わせください。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example
-[2]: /infrastructure/
-[3]: /help/
+[2]: /ja/infrastructure/
+[3]: /ja/help/
 [4]: mailto:success@datadoghq.com

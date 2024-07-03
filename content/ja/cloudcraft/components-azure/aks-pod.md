@@ -1,5 +1,5 @@
 ---
-title: "AKS Pod Component"
+title: AKS Pod Component
 ---
 
 ## 概要

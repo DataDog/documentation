@@ -1,8 +1,9 @@
 ---
-title: Getting Started with Synthetic Monitoring
-kind: documentation
+algolia:
+  tags:
+  - synthetics
 further_reading:
-- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: Learning Center
   text: Introduction to Synthetic Tests
 - link: /synthetics/api_tests
@@ -20,11 +21,11 @@ further_reading:
 - link: /continuous_testing/cicd_integrations
   tag: Documentation
   text: Learn about running Synthetic tests in a CI pipeline
-- link: "https://dtdg.co/fe"
+- link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Join an interactive session to enhance your synthetic testing capabilities
-algolia:
-  tags: [synthetics]
+kind: documentation
+title: Getting Started with Synthetic Monitoring
 ---
 
 ## Overview
@@ -57,7 +58,7 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/
-[2]: /getting_started/synthetics/api_test/
-[3]: /getting_started/synthetics/api_test/#create-a-multistep-api-test
-[4]: /getting_started/synthetics/browser_test/
-[5]: /getting_started/synthetics/private_location/
+[2]: /ja/getting_started/synthetics/api_test/
+[3]: /ja/getting_started/synthetics/api_test/#create-a-multistep-api-test
+[4]: /ja/getting_started/synthetics/browser_test/
+[5]: /ja/getting_started/synthetics/private_location/

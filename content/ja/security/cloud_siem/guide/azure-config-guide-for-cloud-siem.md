@@ -1,7 +1,6 @@
 ---
-title: Azure Configuration Guide for Cloud SIEM
 further_reading:
-- link: "/security/default_rules/#cat-cloud-siem-log-detection"
+- link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentation
   text: Explore Cloud SIEM default detection rules
 - link: /security/cloud_siem/investigate_security_signals
@@ -10,6 +9,7 @@ further_reading:
 - link: /security/cloud_siem/log_detection_rules/
   tag: Documentation
   text: Create new detection rules
+title: Azure Configuration Guide for Cloud SIEM
 ---
 
 ## 概要
@@ -37,7 +37,7 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 
 デプロイが正常に完了したら、[ログエクスプローラー][2]で検索クエリに `service:azure` と入力し、Azure のログを表示します。
 
-[1]: /logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
+[1]: /ja/logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
 [2]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
@@ -166,7 +166,7 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 [2]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
 [3]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
-[5]: https://docs.datadoghq.com/getting_started/site/
+[5]: https://docs.datadoghq.com/ja/getting_started/site/
 [6]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
 [7]: https://app.datadoghq.com/logs
 

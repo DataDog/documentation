@@ -1,60 +1,60 @@
 ---
-"app_id": "algorithmia"
-"app_uuid": "09ef6f74-1555-4082-a69e-b5cf21ec4512"
-"assets":
-  "dashboards":
-    "Algorithmia": assets/dashboards/algorithmia.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": algorithmia.duration_milliseconds
-      "metadata_path": metadata.csv
-      "prefix": algorithmia.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10128"
-    "source_type_name": Algorithmia
-  "monitors":
-    "Algorithmia": assets/monitors/algorithm_duration.json
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Algorithmia
-  "sales_email": support@algorithmia.io
-  "support_email": support@algorithmia.io
-"categories":
+app_id: algorithmia
+app_uuid: 09ef6f74-1555-4082-a69e-b5cf21ec4512
+assets:
+  dashboards:
+    Algorithmia: assets/dashboards/algorithmia.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: algorithmia.duration_milliseconds
+      metadata_path: metadata.csv
+      prefix: algorithmia.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10128
+    source_type_name: Algorithmia
+  monitors:
+    Algorithmia: assets/monitors/algorithm_duration.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Algorithmia
+  sales_email: support@algorithmia.io
+  support_email: support@algorithmia.io
+categories:
 - metrics
 - ai/ml
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "algorithmia"
-"integration_id": "algorithmia"
-"integration_title": "Algorithmia"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "algorithmia"
-"public_title": "Algorithmia"
-"short_description": "Monitor metrics for machine learning models in production"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: algorithmia
+integration_id: algorithmia
+integration_title: Algorithmia
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: algorithmia
+public_title: Algorithmia
+short_description: Monitor metrics for machine learning models in production
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::AI/ML"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": Monitor metrics for machine learning models in production
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Algorithmia
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::AI/ML
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Monitor metrics for machine learning models in production
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Algorithmia
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -138,4 +138,3 @@ Need help? Contact [Algorithmia support][5].
 [3]: https://github.com/algorithmiaio/integrations
 [4]: https://github.com/DataDog/integrations-extras/blob/master/algorithmia/metadata.csv
 [5]: https://algorithmia.com/contact
-

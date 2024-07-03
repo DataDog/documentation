@@ -1,9 +1,13 @@
 ---
-title: Datadog Windows Agent User
-aliases:
-  - /agent/faq/windows-agent-ddagent-user/
 algolia:
-  tags: [windows agent user, windows user,ddagentuser, group policy]
+  tags:
+  - windows agent user
+  - windows user
+  - ddagentuser
+  - group policy
+aliases:
+- /ja/agent/faq/windows-agent-ddagent-user/
+title: Datadog Windows Agent User
 ---
 
 By default, the Windows Agent uses the `ddagentuser` account created at install time. The account is assigned to the following groups during installation:
@@ -156,12 +160,12 @@ Cassandra Nodetool インテグレーションが引き続き動作するよう�
 5. *OK*、*Apply* をクリックします。
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/adschema/a-samaccountname?redirectedfrom=MSDN
-[2]: /integrations/activemq/
-[3]: /integrations/activemq/#activemq-xml-integration
-[4]: /integrations/cassandra/
-[5]: /integrations/java/
-[6]: /integrations/presto/
-[7]: /integrations/solr/
-[8]: /integrations/tomcat/
-[9]: /integrations/kafka/
-[10]: /integrations/win32_event_log/
+[2]: /ja/integrations/activemq/
+[3]: /ja/integrations/activemq/#activemq-xml-integration
+[4]: /ja/integrations/cassandra/
+[5]: /ja/integrations/java/
+[6]: /ja/integrations/presto/
+[7]: /ja/integrations/solr/
+[8]: /ja/integrations/tomcat/
+[9]: /ja/integrations/kafka/
+[10]: /ja/integrations/win32_event_log/

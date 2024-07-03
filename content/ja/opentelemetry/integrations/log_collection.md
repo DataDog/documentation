@@ -1,11 +1,11 @@
 ---
-title: Log Collection
 aliases:
-- /opentelemetry/collector_exporter/log_collection/
+- /ja/opentelemetry/collector_exporter/log_collection/
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
   text: Setting Up the OpenTelemetry Collector
+title: Log Collection
 ---
 
 ## Overview

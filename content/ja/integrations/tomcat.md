@@ -1,79 +1,79 @@
 ---
-"app_id": "tomcat"
-"app_uuid": "9497c2d8-63cb-4d90-b73c-f32065349fe1"
-"assets":
-  "dashboards":
-    "tomcat": "assets/dashboards/metrics.json"
-    "tomcat--overview": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "tomcat.threads.count"
-      "metadata_path": "metadata.csv"
-      "prefix": "tomcat."
-    "process_signatures":
-    - "java tomcat"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "43"
-    "source_type_name": "Tomcat"
-  "monitors":
-    "[Tomcat] % of busy threads is high for host: {{host.name}}": "assets/monitors/thread_busy.json"
-    "[Tomcat] % of thread count managed by the thread pool is high for host: {{host.name}}": "assets/monitors/thread_count_max.json"
-    "[Tomcat] Anomalous average processing time for host {{host.name}}": "assets/monitors/processing_time.json"
-    "[Tomcat] Anomalous max processing time for host {{host.name}}": "assets/monitors/max_proc_time.json"
-    "[Tomcat] Anomalous request rate for host {{host.name}}": "assets/monitors/req_count.json"
-    "[Tomcat] Increase of the errors/second rate for host: {{host.name}}": "assets/monitors/error_count.json"
-  "saved_views":
-    "tomcat_4xx": "assets/saved_views/tomcat_4xx.json"
-    "tomcat_5xx": "assets/saved_views/tomcat_5xx.json"
-    "tomcat_overview": "assets/saved_views/tomcat_overview.json"
-    "tomcat_processes": "assets/saved_views/tomcat_processes.json"
-    "tomcat_status_code_overview": "assets/saved_views/tomcat_status_code_overview.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "tomcat"
-"integration_id": "tomcat"
-"integration_title": "Tomcat"
-"integration_version": "2.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "tomcat"
-"public_title": "Tomcat"
-"short_description": "毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::キャッシュ"
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Tomcat"
+app_id: tomcat
+app_uuid: 9497c2d8-63cb-4d90-b73c-f32065349fe1
+assets:
+  dashboards:
+    tomcat: assets/dashboards/metrics.json
+    tomcat--overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: tomcat.threads.count
+      metadata_path: metadata.csv
+      prefix: tomcat.
+    process_signatures:
+    - java tomcat
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 43
+    source_type_name: Tomcat
+  monitors:
+    '[Tomcat] % of busy threads is high for host: {{host.name}}': assets/monitors/thread_busy.json
+    '[Tomcat] % of thread count managed by the thread pool is high for host: {{host.name}}': assets/monitors/thread_count_max.json
+    '[Tomcat] Anomalous average processing time for host {{host.name}}': assets/monitors/processing_time.json
+    '[Tomcat] Anomalous max processing time for host {{host.name}}': assets/monitors/max_proc_time.json
+    '[Tomcat] Anomalous request rate for host {{host.name}}': assets/monitors/req_count.json
+    '[Tomcat] Increase of the errors/second rate for host: {{host.name}}': assets/monitors/error_count.json
+  saved_views:
+    tomcat_4xx: assets/saved_views/tomcat_4xx.json
+    tomcat_5xx: assets/saved_views/tomcat_5xx.json
+    tomcat_overview: assets/saved_views/tomcat_overview.json
+    tomcat_processes: assets/saved_views/tomcat_processes.json
+    tomcat_status_code_overview: assets/saved_views/tomcat_status_code_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: tomcat
+integration_id: tomcat
+integration_title: Tomcat
+integration_version: 2.0.0
+is_public: true
+manifest_version: 2.0.0
+name: tomcat
+public_title: Tomcat
+short_description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::キャッシュ
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Tomcat
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -250,12 +250,12 @@ mydomain:attr0=val0,attr1=val1
 
 5. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/integrations/java/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/integrations/java/
 [5]: https://tomcat.apache.org/tomcat-8.0-doc/logging.html#Using_Log4j
-[6]: https://docs.datadoghq.com/logs/processing/#integration-pipelines
+[6]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
 [7]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
@@ -264,7 +264,7 @@ mydomain:attr0=val0,attr1=val1
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-[1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -342,8 +342,8 @@ The `datadog-agent jmx list` has a number of available subcommands:
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tomcat/images/tomcat_dashboard_2.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://tomcat.apache.org/tomcat-10.1-doc/monitoring.html
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/integrations/java/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/integrations/java/
 [6]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
 [7]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
 [8]: https://www.datadoghq.com/blog/analyzing-tomcat-logs-and-metrics-with-datadog

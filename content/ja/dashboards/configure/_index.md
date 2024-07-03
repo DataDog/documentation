@@ -1,10 +1,10 @@
 ---
-title: Configure
 disable_toc: false
 further_reading:
 - link: /dashboards/
   tag: Documentation
   text: Dashboards Overview
+title: Configure
 ---
 
 ## 概要
@@ -113,11 +113,11 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/teams/
-[2]: /dashboards/template_variables/
-[3]: /dashboards/guide/version_history/
-[4]: /account_management/audit_trail/
-[5]: /events/
-[6]: /dashboards/list
-[7]: /account_management/rbac/
-[8]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[1]: /ja/account_management/teams/
+[2]: /ja/dashboards/template_variables/
+[3]: /ja/dashboards/guide/version_history/
+[4]: /ja/account_management/audit_trail/
+[5]: /ja/events/
+[6]: /ja/dashboards/list
+[7]: /ja/account_management/rbac/
+[8]: /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/

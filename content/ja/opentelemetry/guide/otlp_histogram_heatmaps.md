@@ -1,5 +1,4 @@
 ---
-title: Visualizing OTLP Histograms as heatmaps
 further_reading:
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: OpenTelemetry Support in Datadog
+title: Visualizing OTLP Histograms as heatmaps
 ---
 
 ## 概要
@@ -87,9 +87,9 @@ OTLP ヒストグラムをヒートマップウィジェットとして確認で
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /opentelemetry/otel_metrics
-[2]: /opentelemetry/guide/otlp_delta_temporality
+[1]: /ja/opentelemetry/otel_metrics
+[2]: /ja/opentelemetry/guide/otlp_delta_temporality
 [3]: https://opentelemetry.io/docs/reference/specification/metrics/sdk/#explicit-bucket-histogram-aggregation
-[4]: /metrics/distributions
-[5]: /dashboards/widgets/heatmap
-[6]: /integrations/openmetrics
+[4]: /ja/metrics/distributions
+[5]: /ja/dashboards/widgets/heatmap
+[6]: /ja/integrations/openmetrics

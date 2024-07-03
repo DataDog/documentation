@@ -1,27 +1,27 @@
 ---
-"aliases":
-- "/integrations/awsredshift/"
-"categories":
-- "aws"
-- "cloud"
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Amazon Redshift のキーメトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_redshift/"
-"draft": false
-"git_integration_title": "amazon_redshift"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Redshift"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_redshift"
-"public_title": "Datadog-Amazon Redshift Integration"
-"short_description": "Track key Amazon Redshift metrics."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsredshift/
+categories:
+- aws
+- cloud
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: Amazon Redshift のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/
+draft: false
+git_integration_title: amazon_redshift
+has_logo: true
+integration_id: ''
+integration_title: Amazon Redshift
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_redshift
+public_title: Datadog-Amazon Redshift Integration
+short_description: Track key Amazon Redshift metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -97,17 +97,16 @@ The Amazon Redshift integration does not include any service checks.
 
 Need help? Contact [Datadog support][13].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-authentication-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-redshift
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tabs=awsconsole#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tabs=awsconsole#collecting-logs-from-s3-buckets
 [7]: https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing-console.html
-[8]: https://docs.datadoghq.com/logs/guide/forwarder/
-[9]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tabs=awsconsole#automatically-set-up-triggers
+[8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tabs=awsconsole#automatically-set-up-triggers
 [10]: https://app.datadoghq.com/logs
-[11]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [12]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_redshift/amazon_redshift_metadata.csv
-[13]: https://docs.datadoghq.com/help/
-
+[13]: https://docs.datadoghq.com/ja/help/

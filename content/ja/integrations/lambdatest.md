@@ -1,72 +1,72 @@
 ---
-"app_id": "lambdatest"
-"app_uuid": "8d4556af-b5e8-4608-a4ca-4632111931c1"
-"assets":
-  "dashboards":
-    "LambdaTest": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": lambdatest.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10243"
-    "source_type_name": LambdaTest
-  "logs":
-    "source": lambdatest
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": LambdaTest
-  "sales_email": prateeksaini@lambdatest.com
-  "support_email": prateeksaini@lambdatest.com
-"categories":
+app_id: lambdatest
+app_uuid: 8d4556af-b5e8-4608-a4ca-4632111931c1
+assets:
+  dashboards:
+    LambdaTest: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: lambdatest.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10243
+    source_type_name: LambdaTest
+  logs:
+    source: lambdatest
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: LambdaTest
+  sales_email: prateeksaini@lambdatest.com
+  support_email: prateeksaini@lambdatest.com
+categories:
 - automation
 - containers
 - incidents
 - issue tracking
 - testing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "lambdatest"
-"integration_id": "lambdatest"
-"integration_title": "LambdaTest"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "lambdatest"
-"public_title": "LambdaTest"
-"short_description": "Most powerful automation testing platform"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: lambdatest
+integration_id: lambdatest
+integration_title: LambdaTest
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: lambdatest
+public_title: LambdaTest
+short_description: Most powerful automation testing platform
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Containers"
-  - "Category::Incidents"
-  - "Category::Issue Tracking"
-  - "Category::Testing"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Most powerful automation testing platform
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": LambdaTest
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Containers
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Most powerful automation testing platform
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: LambdaTest
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -119,4 +119,3 @@ Website: https://www.lambdatest.com/
 
 [1]: https://www.lambdatest.com/support/docs/datadog-integration/
 [2]: https://app.datadoghq.com/organization-settings/api-keys?filter=LambdaTest
-

@@ -1,114 +1,114 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "mainstorconcept-ziris"
-"app_uuid": "dc8b4d40-72a3-46c2-9f9a-ffaadaeacb83"
-"assets":
-  "dashboards":
-    "JDBC and z/OS": assets/dashboards/JDBC_Dashboard.json
-    "MQ Buffer Pool Manager": assets/dashboards/MQ_Buffer_Pool_Manager.json
-    "MQ Channel Initiator": assets/dashboards/MQ_Channel_Initiator.json
-    "MQ Data Manager": assets/dashboards/MQ_Data_Manager.json
-    "MQ Log Manager": assets/dashboards/MQ_Log_Manager.json
-    "MQ Message Manager": assets/dashboards/MQ_Message_Manager.json
-    "MQ Storage Manager": assets/dashboards/MQ_Storage_Manager.json
-    "z/OS Connect Metrics": assets/dashboards/z_OS_Connect_Metrics.json
-    "z/OS Infrastructure": assets/dashboards/z_OS_Infrastructure.json
-  "integration":
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": mainstorconcept.zos.connect.elapsed_time
-      "metadata_path": metadata.csv
-      "prefix": mainstorconcept.zos.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_name": mainstorconcept-ziris
-  "monitors":
-    "MQ Active Dataset Reads": assets/monitors/mq_active_dataset_reads_monitor.json
-    "MQ Archive Dataset Reads": assets/monitors/mq_archive_dataset_reads_monitor.json
-    "MQ Checkpoints": assets/monitors/mq_checkpoints_monitor.json
-    "MQ Insufficient Storage Events": assets/monitors/mq_insufficient_storage_events_monitor.json
-    "MQ Storage Contractions": assets/monitors/mq_storage_contractions_monitor.json
-    "MQ Suspensions": assets/monitors/mq_suspensions_monitor.json
-"author":
-  "homepage": "https://mainstorconcept.com"
-  "name": mainstorconcept GmbH
-  "sales_email": sales@mainstorconcept.com
-  "support_email": support@mainstorconcept.com
-  "vendor_id": mainstorconcept
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: mainstorconcept-ziris
+app_uuid: dc8b4d40-72a3-46c2-9f9a-ffaadaeacb83
+assets:
+  dashboards:
+    JDBC and z/OS: assets/dashboards/JDBC_Dashboard.json
+    MQ Buffer Pool Manager: assets/dashboards/MQ_Buffer_Pool_Manager.json
+    MQ Channel Initiator: assets/dashboards/MQ_Channel_Initiator.json
+    MQ Data Manager: assets/dashboards/MQ_Data_Manager.json
+    MQ Log Manager: assets/dashboards/MQ_Log_Manager.json
+    MQ Message Manager: assets/dashboards/MQ_Message_Manager.json
+    MQ Storage Manager: assets/dashboards/MQ_Storage_Manager.json
+    z/OS Connect Metrics: assets/dashboards/z_OS_Connect_Metrics.json
+    z/OS Infrastructure: assets/dashboards/z_OS_Infrastructure.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: mainstorconcept.zos.connect.elapsed_time
+      metadata_path: metadata.csv
+      prefix: mainstorconcept.zos.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: mainstorconcept-ziris
+  monitors:
+    MQ Active Dataset Reads: assets/monitors/mq_active_dataset_reads_monitor.json
+    MQ Archive Dataset Reads: assets/monitors/mq_archive_dataset_reads_monitor.json
+    MQ Checkpoints: assets/monitors/mq_checkpoints_monitor.json
+    MQ Insufficient Storage Events: assets/monitors/mq_insufficient_storage_events_monitor.json
+    MQ Storage Contractions: assets/monitors/mq_storage_contractions_monitor.json
+    MQ Suspensions: assets/monitors/mq_suspensions_monitor.json
+author:
+  homepage: https://mainstorconcept.com
+  name: mainstorconcept GmbH
+  sales_email: sales@mainstorconcept.com
+  support_email: support@mainstorconcept.com
+  vendor_id: mainstorconcept
+categories:
 - mainframe
 - marketplace
 - network
 - os & system
 - tracing
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mainstorconcept_ziris"
-"integration_id": "mainstorconcept-ziris"
-"integration_title": "z/IRIS"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": EULA.pdf
-"manifest_version": "2.0.0"
-"name": "mainstorconcept_ziris"
-"oauth": {}
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": false
-  "product_id": ziris
-  "short_description": Price covers 50 MSUs on mainframe.
-  "unit_price": !!float "4000.0"
-"public_title": "z/IRIS"
-"short_description": "Collects IBM z/OS performance data from mainframes"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: mainstorconcept_ziris
+integration_id: mainstorconcept-ziris
+integration_title: z/IRIS
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: EULA.pdf
+manifest_version: 2.0.0
+name: mainstorconcept_ziris
+oauth: {}
+pricing:
+- billing_type: flat_fee
+  includes_assets: false
+  product_id: ziris
+  short_description: Price covers 50 MSUs on mainframe.
+  unit_price: 4000.0
+public_title: z/IRIS
+short_description: Collects IBM z/OS performance data from mainframes
+supported_os:
 - ibm z/os
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Mainframe"
-  - "Category::Marketplace"
-  - "Category::Network"
-  - "Category::OS & System"
-  - "Category::Tracing"
-  - "Offering::Integration"
-  - "Supported OS::IBM z/OS"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": Collects IBM z/OS performance data from mainframes
-  "media":
-  - "caption": z/IRIS - Mainframe-inclusive observability
-    "image_url": images/thumbnail_mainstorconcept_ziris.PNG
-    "media_type": video
-    "vimeo_id": !!int "630489680"
-  - "caption": Service Map with Spans created by z/IRIS
-    "image_url": images/datadog-service-map-with-spans-created-by-ziris.png
-    "media_type": image
-  - "caption": z/IRIS Dashboards
-    "image_url": images/datadog-ziris-dashboards.png
-    "media_type": image
-  - "caption": Analyze z/OS application performance in Trace Explorer
-    "image_url": images/datadog-trace-explorer-filtering-zos-application-performance-measurements.png
-    "media_type": image
-  - "caption": z/IRIS extends flame graphs and span lists
-    "image_url": images/datadog-annotated-zosconnect-cics-db2-trace-page.png
-    "media_type": image
-  - "caption": z/IRIS integrates with Datadog
-    "image_url": images/ziris-otel-integration-with-datadog.png
-    "media_type": image
-  - "caption": CICS service page
-    "image_url": images/datadog-annotated-cics-service-page.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": z/IRIS
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Mainframe
+  - Category::Marketplace
+  - Category::Network
+  - Category::OS & System
+  - Category::Tracing
+  - Offering::Integration
+  - Supported OS::IBM z/OS
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Collects IBM z/OS performance data from mainframes
+  media:
+  - caption: z/IRIS - Mainframe-inclusive observability
+    image_url: images/thumbnail_mainstorconcept_ziris.PNG
+    media_type: video
+    vimeo_id: 630489680
+  - caption: Service Map with Spans created by z/IRIS
+    image_url: images/datadog-service-map-with-spans-created-by-ziris.png
+    media_type: image
+  - caption: z/IRIS Dashboards
+    image_url: images/datadog-ziris-dashboards.png
+    media_type: image
+  - caption: Analyze z/OS application performance in Trace Explorer
+    image_url: images/datadog-trace-explorer-filtering-zos-application-performance-measurements.png
+    media_type: image
+  - caption: z/IRIS extends flame graphs and span lists
+    image_url: images/datadog-annotated-zosconnect-cics-db2-trace-page.png
+    media_type: image
+  - caption: z/IRIS integrates with Datadog
+    image_url: images/ziris-otel-integration-with-datadog.png
+    media_type: image
+  - caption: CICS service page
+    image_url: images/datadog-annotated-cics-service-page.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: z/IRIS
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -506,8 +506,8 @@ Additional helpful documentation, links, and articles:
 [6]: https://public.mainstorconcept.com/home/z-os-work-observability
 [7]: https://public.mainstorconcept.com/home/ibm-mq-for-z-os-observability
 [8]: https://public.mainstorconcept.com/home/cics-transaction-observability
-[9]: https://docs.datadoghq.com/tracing/trace_explorer/
-[10]: https://docs.datadoghq.com/watchdog/
+[9]: https://docs.datadoghq.com/ja/tracing/trace_explorer/
+[10]: https://docs.datadoghq.com/ja/watchdog/
 [11]: https://public.mainstorconcept.com/home/rmf-metrics-streaming
 [12]: https://public.mainstorconcept.com/home/z-os-connect-metrics-streaming
 [13]: https://public.mainstorconcept.com/home/mq-metrics-streaming
@@ -520,8 +520,8 @@ Additional helpful documentation, links, and articles:
 [20]: mailto:support@mainstorconcept.com
 [21]: https://service.mainstorconcept.com/mscportal/login
 [22]: https://www.datadoghq.com/blog/mainframe-monitoring-mainstorconcept-datadog-marketplace/
-[23]: https://docs.datadoghq.com/watchdog/
-[24]: https://docs.datadoghq.com/tracing/services/services_map/
+[23]: https://docs.datadoghq.com/ja/watchdog/
+[24]: https://docs.datadoghq.com/ja/tracing/services/services_map/
 
 ---
 This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/mainstorconcept-ziris" target="_blank">Click Here</a> to purchase this application.

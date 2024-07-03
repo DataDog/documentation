@@ -1,27 +1,27 @@
 ---
-"aliases":
-- "/integrations/awsdynamo/"
-"categories":
-- "cloud"
-- "data stores"
-- "aws"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "テーブルサイズ、読み取り/書き込み容量、リクエストレイテンシーなどの追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_dynamodb/"
-"draft": false
-"git_integration_title": "amazon_dynamodb"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon DynamoDB"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_dynamodb"
-"public_title": "Datadog-Amazon DynamoDB Integration"
-"short_description": "Track table size, read/write capacity, request latency, and more."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsdynamo/
+categories:
+- cloud
+- data stores
+- aws
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: テーブルサイズ、読み取り/書き込み容量、リクエストレイテンシーなどの追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb/
+draft: false
+git_integration_title: amazon_dynamodb
+has_logo: true
+integration_id: ''
+integration_title: Amazon DynamoDB
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_dynamodb
+public_title: Datadog-Amazon DynamoDB Integration
+short_description: Track table size, read/write capacity, request latency, and more.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -89,15 +89,14 @@ The Amazon DynamoDB integration does not include any service checks.
 
 Need help? Contact [Datadog support][11].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/authentication-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-dynamodb
 [6]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html
-[7]: https://docs.datadoghq.com/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [8]: https://app.datadoghq.com/logs
-[9]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dynamodb/amazon_dynamodb_metadata.csv
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

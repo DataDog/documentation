@@ -1,16 +1,16 @@
 ---
-title: Propagating Ruby Trace Context
-kind: documentation
 code_lang: ruby
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
-      tag: Blog
-      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: Blog
+  text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Propagating Ruby Trace Context
+type: multi-code-lang
 ---
 
 <div class="alert alert-info">This documentation is for <code>datadog</code> gem v2.x. If you are looking for <code>ddtrace</code> gem v1.x documentation, see the legacy <a href="/tracing/trace_collection/trace_context_propagation/ruby_v1">Propagating Ruby Trace Context
@@ -60,6 +60,6 @@ For more information about trace context propagation configuration, read [the Di
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/dd_libraries/ruby/#distributed-tracing
+[1]: /ja/tracing/trace_collection/dd_libraries/ruby/#distributed-tracing
 [6]: https://github.com/openzipkin/b3-propagation
 [7]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

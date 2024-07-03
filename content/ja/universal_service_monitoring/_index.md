@@ -1,13 +1,14 @@
 ---
-title: Universal Service Monitoring
-kind: documentation
 aliases:
-- /tracing/universal_service_monitoring/
+- /ja/tracing/universal_service_monitoring/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /universal_service_monitoring/setup/
   tag: Documentation
   text: Setting Up Universal Service Monitoring
-- link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
+- link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: Blog
   text: Golden signals in seconds with Universal Service Monitoring
 - link: /getting_started/tagging/unified_service_tagging/
@@ -22,9 +23,8 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: Documentation
   text: Read about the Service Map
-cascade:
-    algolia:
-        rank: 70
+kind: documentation
+title: Universal Service Monitoring
 ---
 
 {{< site-region region="gov" >}}
@@ -74,10 +74,10 @@ After enabling Universal Service Monitoring, you can:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
-[2]: /tracing/services/deployment_tracking/
-[3]: /tracing/service_catalog/
-[4]: /monitors/types/apm/?tab=apmmetrics
-[5]: /dashboards/
-[6]: /service_management/service_level_objectives/metric/
-[7]: /universal_service_monitoring/setup/
+[1]: /ja/getting_started/tagging/unified_service_tagging
+[2]: /ja/tracing/services/deployment_tracking/
+[3]: /ja/tracing/service_catalog/
+[4]: /ja/monitors/types/apm/?tab=apmmetrics
+[5]: /ja/dashboards/
+[6]: /ja/service_management/service_level_objectives/metric/
+[7]: /ja/universal_service_monitoring/setup/

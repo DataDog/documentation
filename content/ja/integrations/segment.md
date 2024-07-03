@@ -1,28 +1,29 @@
 ---
-"categories":
+categories:
 - cloud
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Segment integration can collect event delivery metrics for your workspace destinations."
-"doc_link": "https://docs.datadoghq.com/integrations/segment/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-segment-datadog/"
-  "tag": Blog
-  "text": Monitor customer data infrastructure with Segment and Datadog
-"git_integration_title": "segment"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Segment"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "segment"
-"public_title": "Datadog-Segment Integration"
-"short_description": "Collects Segment event delivery metrics."
-"team": "web-integrations"
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Segment integration can collect event delivery metrics for your workspace
+  destinations.
+doc_link: https://docs.datadoghq.com/integrations/segment/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-segment-datadog/
+  tag: Blog
+  text: Monitor customer data infrastructure with Segment and Datadog
+git_integration_title: segment
+has_logo: true
+integration_id: ''
+integration_title: Segment
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: segment
+public_title: Datadog-Segment Integration
+short_description: Collects Segment event delivery metrics.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -68,5 +69,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/integrations/segment
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/segment/segment_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

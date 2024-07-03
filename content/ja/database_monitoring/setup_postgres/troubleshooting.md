@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting DBM Setup for Postgres
 description: Troubleshoot Database Monitoring setup for Postgres
+title: Troubleshooting DBM Setup for Postgres
 ---
 
 このページでは、Postgres によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
@@ -248,13 +248,13 @@ sudo apt-get install postgresql-contrib-10
 `pg_stat_statements.max` の推奨値は `10000` です。この構成を高い値に設定すると、収集クエリの実行に時間がかかり、クエリのタイムアウトやクエリメトリクスの収集のギャップにつながる可能性があります。Agent がこの警告を表示した場合は、データベースで `pg_stat_statements.max` が `10000` に設定されていることを確認します。
 
 
-[1]: /database_monitoring/setup_postgres/
-[2]: /agent/troubleshooting/
-[3]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /agent/configuration/agent-log-files
-[5]: /database_monitoring/data_collected/#which-queries-are-tracked
+[1]: /ja/database_monitoring/setup_postgres/
+[2]: /ja/agent/troubleshooting/
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ja/agent/configuration/agent-log-files
+[5]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
-[7]: /database_monitoring/setup_postgres/advanced_configuration
+[7]: /ja/database_monitoring/setup_postgres/advanced_configuration
 [8]: https://www.postgresql.org/docs/current/runtime-config-statistics.html
 [9]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
 [10]: https://github.com/jackc/pgx

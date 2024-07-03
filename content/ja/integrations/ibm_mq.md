@@ -1,65 +1,65 @@
 ---
-"app_id": "ibm-mq"
-"app_uuid": "d29a1df9-6038-41f5-b017-82bf45f58767"
-"assets":
-  "dashboards":
-    "IBM MQ": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": ibm_mq.queue.usage
-      "metadata_path": metadata.csv
-      "prefix": ibm_mq.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10049"
-    "source_type_name": IBM MQ
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: ibm-mq
+app_uuid: d29a1df9-6038-41f5-b017-82bf45f58767
+assets:
+  dashboards:
+    IBM MQ: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ibm_mq.queue.usage
+      metadata_path: metadata.csv
+      prefix: ibm_mq.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10049
+    source_type_name: IBM MQ
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - message queues
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ibm_mq"
-"integration_id": "ibm-mq"
-"integration_title": "IBM MQ"
-"integration_version": "6.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ibm_mq"
-"public_title": "IBM MQ"
-"short_description": "IBM MQ is a Message Queue"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ibm_mq
+integration_id: ibm-mq
+integration_title: IBM MQ
+integration_version: 6.3.0
+is_public: true
+manifest_version: 2.0.0
+name: ibm_mq
+public_title: IBM MQ
+short_description: IBM MQ is a Message Queue
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Message Queues"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": IBM MQ is a Message Queue
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": IBM MQ
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Message Queues
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: IBM MQ is a Message Queue
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM MQ
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -281,7 +281,7 @@ _Agent バージョン 6.0 以降で利用可能_
 3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/datadog_checks/ibm_mq/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -307,8 +307,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "ibm_mq", "service": "<サービス名>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{2}/\d{2}/\d{4}"}}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -379,8 +379,8 @@ IBM MQ チェックはサーバー上でクエリを実行しますが、これ�
 [4]: https://www.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm~WebSphere&product=ibm/WebSphere/WebSphere+MQ&release=9.3.0.0&platform=All&function=fixid&fixids=*IBM-MQC-Redist-*
 [5]: https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html#//apple_ref/doc/uid/TP40016462-CH3-SW1
 [6]: https://www.ibm.com/docs/en/ibm-mq/9.1?topic=formats-reset-queue-statistics
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=reference-setmqaut-grant-revoke-authority
 [9]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=queues-dynamic-model
-[10]: https://docs.datadoghq.com/help/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog

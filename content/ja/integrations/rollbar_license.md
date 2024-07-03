@@ -1,78 +1,78 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rollbar-license"
-"app_uuid": "8b08ddce-a1be-4438-9889-ba4113de9a93"
-"assets": {}
-"author":
-  "homepage": "https://rollbar.com"
-  "name": Rollbar
-  "sales_email": support@rollbar.com
-  "support_email": support@rollbar.com
-  "vendor_id": rollbar
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rollbar-license
+app_uuid: 8b08ddce-a1be-4438-9889-ba4113de9a93
+assets: {}
+author:
+  homepage: https://rollbar.com
+  name: Rollbar
+  sales_email: support@rollbar.com
+  support_email: support@rollbar.com
+  vendor_id: rollbar
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rollbar_license"
-"integration_id": "rollbar-license"
-"integration_title": "Rollbar"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rollbar_license"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.rollbar.rollbar
-  "product_id": rollbar
-  "short_description": Real-time exception tracking with 500,000 events / month.
-  "tag": event
-  "unit_label": 500,000 events
-  "unit_price": !!int "350"
-"public_title": "Rollbar"
-"short_description": "Proactively discover errors in real-time."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rollbar_license
+integration_id: rollbar-license
+integration_title: Rollbar
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rollbar_license
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rollbar.rollbar
+  product_id: rollbar
+  short_description: Real-time exception tracking with 500,000 events / month.
+  tag: event
+  unit_label: 500,000 events
+  unit_price: 350
+public_title: Rollbar
+short_description: Proactively discover errors in real-time.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Marketplace"
-  - "Offering::Software License"
-  "configuration": "README.md#Setup"
-  "description": Proactively discover errors in real-time.
-  "media":
-  - "caption": Real-time Errors
-    "image_url": images/realtimeerrors.jpg
-    "media_type": image
-  - "caption": Error Traceback
-    "image_url": images/traceback.jpg
-    "media_type": image
-  - "caption": Release Health
-    "image_url": images/releasehealth.jpg
-    "media_type": image
-  - "caption": Frontend Telemetry
-    "image_url": images/breadcrumbs.jpg
-    "media_type": image
-  - "caption": Notifications
-    "image_url": images/msgnotifications.jpg
-    "media_type": image
-  - "caption": Notification Rules
-    "image_url": images/notificationrules.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Rollbar
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: Proactively discover errors in real-time.
+  media:
+  - caption: Real-time Errors
+    image_url: images/realtimeerrors.jpg
+    media_type: image
+  - caption: Error Traceback
+    image_url: images/traceback.jpg
+    media_type: image
+  - caption: Release Health
+    image_url: images/releasehealth.jpg
+    media_type: image
+  - caption: Frontend Telemetry
+    image_url: images/breadcrumbs.jpg
+    media_type: image
+  - caption: Notifications
+    image_url: images/msgnotifications.jpg
+    media_type: image
+  - caption: Notification Rules
+    image_url: images/notificationrules.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rollbar
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

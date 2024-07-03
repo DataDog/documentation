@@ -1,9 +1,8 @@
 ---
-title: Live Process Monitor
-description: "Check if a process is running on a host"
 aliases:
-- /monitors/monitor_types/process
-- /monitors/create/types/process/
+- /ja/monitors/monitor_types/process
+- /ja/monitors/create/types/process/
+description: Check if a process is running on a host
 further_reading:
 - link: /monitors/notify/
   tag: Documentation
@@ -14,9 +13,10 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Check your monitor status
-- link: "https://www.datadoghq.com/blog/monitor-fargate-processes/"
+- link: https://www.datadoghq.com/blog/monitor-fargate-processes/
   tag: Blog
   text: Monitor processes running on AWS Fargate with Datadog
+title: Live Process Monitor
 ---
 
 ## 概要
@@ -93,10 +93,10 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/process/
+[1]: /ja/infrastructure/process/
 [2]: https://app.datadoghq.com/monitors#create/live_process
-[3]: /infrastructure/process/#search-syntax
+[3]: /ja/infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
-[5]: /monitors/configuration/#advanced-alert-conditions
-[6]: /monitors/notify/
-[7]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[5]: /ja/monitors/configuration/#advanced-alert-conditions
+[6]: /ja/monitors/notify/
+[7]: /ja/monitors/configuration/?tab=thresholdalert#evaluation-window

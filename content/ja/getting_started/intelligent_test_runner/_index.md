@@ -1,8 +1,13 @@
 ---
-title: Getting Started with Intelligent Test Runner
-kind: documentation
+algolia:
+  tags:
+  - intelligent test runner
+  - ci test
+  - ci tests
+  - flaky test
+  - flaky tests
 further_reading:
-- link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
+- link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
   tag: Blog
   text: Streamline your CI testing with Datadog Intelligent Test Runner
 - link: /intelligent_test_runner/
@@ -11,8 +16,8 @@ further_reading:
 - link: /tests/code_coverage/
   tag: Documentation
   text: Learn about Code Coverage
-algolia:
-  tags: [intelligent test runner, ci test, ci tests, flaky test, flaky tests]
+kind: documentation
+title: Getting Started with Intelligent Test Runner
 ---
 
 ## Overview
@@ -144,13 +149,13 @@ Then, click on a test session run and see the amount of time saved by the Intell
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /intelligent_test_runner/
-[2]: /tests/
+[1]: /ja/intelligent_test_runner/
+[2]: /ja/tests/
 [3]: https://app.datadoghq.com/ci/settings/test-service
-[4]: /account_management/rbac/permissions/
-[5]: /tests/code_coverage
-[6]: /dashboards/
+[4]: /ja/account_management/rbac/permissions/
+[5]: /ja/tests/code_coverage
+[6]: /ja/dashboards/
 [7]: https://app.datadoghq.com/dash/integration/30941/ci-visibility---intelligent-test-runner
-[8]: /tests/explorer/
-[9]: /continuous_integration/explorer/facets/?tab=testruns
-[10]: /intelligent_test_runner/how_it_works/
+[8]: /ja/tests/explorer/
+[9]: /ja/continuous_integration/explorer/facets/?tab=testruns
+[10]: /ja/intelligent_test_runner/how_it_works/

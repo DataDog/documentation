@@ -1,74 +1,74 @@
 ---
-"app_id": "ray"
-"app_uuid": "bae260a0-91be-4dc4-9767-61f072f82d76"
-"assets":
-  "dashboards":
-    "Ray Overview Dashboard": assets/dashboards/overview_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": ray.process.open_fds
-      "metadata_path": metadata.csv
-      "prefix": ray.
-    "process_signatures":
+app_id: ray
+app_uuid: bae260a0-91be-4dc4-9767-61f072f82d76
+assets:
+  dashboards:
+    Ray Overview Dashboard: assets/dashboards/overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ray.process.open_fds
+      metadata_path: metadata.csv
+      prefix: ray.
+    process_signatures:
     - python -m ray.util.client.server
     - gcs_server
     - raylet
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10393"
-    "source_type_name": Ray
-  "monitors":
-    "high cpu utilization": assets/monitors/cpu_utilization.json
-    "high failed tasks": assets/monitors/failed_task.json
-    "high memory utilization": assets/monitors/mem_utilization.json
-    "low GPU utilization": assets/monitors/gpu_utilization.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10393
+    source_type_name: Ray
+  monitors:
+    high cpu utilization: assets/monitors/cpu_utilization.json
+    high failed tasks: assets/monitors/failed_task.json
+    high memory utilization: assets/monitors/mem_utilization.json
+    low GPU utilization: assets/monitors/gpu_utilization.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - ai/ml
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/ray/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ray"
-"integration_id": "ray"
-"integration_title": "Ray"
-"integration_version": "1.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ray"
-"public_title": "Ray"
-"short_description": "Monitor the health and performance of Ray"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/ray/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ray
+integration_id: ray
+integration_title: Ray
+integration_version: 1.2.1
+is_public: true
+manifest_version: 2.0.0
+name: ray
+public_title: Ray
+short_description: Monitor the health and performance of Ray
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::AI/ML"
-  - "Category::Log Collection"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of Ray
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Ray
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::AI/ML
+  - Category::Log Collection
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor the health and performance of Ray
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Ray
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -111,7 +111,7 @@ Starting from Agent release 7.49.0, the Ray check is included in the [Datadog Ag
 2. [Restart the Agent][2] after modifying the configuration.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ray/datadog_checks/ray/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -248,8 +248,8 @@ spec:
     - name: ray
 ```
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/log/#setup
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/#configuration
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/log/#setup
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -261,11 +261,11 @@ For more information about the logging configuration with Ray and all the log fi
 
 
 [1]: https://www.ray.io/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/integrations/openmetrics/
+[4]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [5]: https://docs.ray.io/en/latest/ray-observability/user-guides/add-app-metrics.html
 [6]: https://github.com/DataDog/integrations-core/blob/master/ray/datadog_checks/ray/data/conf.yaml.example#L59-L105
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.ray.io/en/latest/ray-observability/user-guides/configure-logging.html
-[9]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/help/

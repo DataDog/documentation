@@ -1,23 +1,24 @@
 ---
-title: Network Analytics
-description: Explore your Network data between each source and destination across your stack.
 aliases:
-    - /network_performance_monitoring/network_table
-    - /network_performance_monitoring/network_page
-    - /network_monitoring/performance/network_page
+- /ja/network_performance_monitoring/network_table
+- /ja/network_performance_monitoring/network_page
+- /ja/network_monitoring/performance/network_page
+description: Explore your Network data between each source and destination across
+  your stack.
 further_reading:
-    - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-      tag: Blog
-      text: Network Performance Monitoring
-    - link: "https://www.datadoghq.com/blog/datadog-npm-search-map-updates/"
-      tag: Blog
-      text: Streamline network investigations with an enhanced querying and map experience
-    - link: /network_monitoring/devices
-      tag: Documentation
-      text: Network Device Monitoring
-    - link: /network_monitoring/performance/setup
-      tag: Documentation
-      text: Collect your Network Data with the Datadog Agent.
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Network Performance Monitoring
+- link: https://www.datadoghq.com/blog/datadog-npm-search-map-updates/
+  tag: Blog
+  text: Streamline network investigations with an enhanced querying and map experience
+- link: /network_monitoring/devices
+  tag: Documentation
+  text: Network Device Monitoring
+- link: /network_monitoring/performance/setup
+  tag: Documentation
+  text: Collect your Network Data with the Datadog Agent.
+title: Network Analytics
 ---
 
 ## 概要
@@ -335,15 +336,15 @@ Hover over a row in the analytics table to pivot to [network path][11] and see t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/search_syntax/
-[2]: /network_monitoring/performance/network_map/
-[3]: /network_monitoring/performance/guide/aws_supported_services/
-[4]: /network_monitoring/performance/guide/gcp_supported_services/
-[5]: /logs/explorer/saved_views/
-[6]: /security/threats/
-[7]: /security/cloud_security_management/misconfigurations/
-[8]: /security/detection_rules/
-[9]: /network_monitoring/performance/setup/#enhanced-resolution
-[10]: /network_monitoring/dns/#recommended-queries
-[11]: /getting_started/tagging/unified_service_tagging/
-[12]: /network_monitoring/network_path
+[1]: /ja/logs/search_syntax/
+[2]: /ja/network_monitoring/performance/network_map/
+[3]: /ja/network_monitoring/performance/guide/aws_supported_services/
+[4]: /ja/network_monitoring/performance/guide/gcp_supported_services/
+[5]: /ja/logs/explorer/saved_views/
+[6]: /ja/security/threats/
+[7]: /ja/security/cloud_security_management/misconfigurations/
+[8]: /ja/security/detection_rules/
+[9]: /ja/network_monitoring/performance/setup/#enhanced-resolution
+[10]: /ja/network_monitoring/dns/#recommended-queries
+[11]: /ja/getting_started/tagging/unified_service_tagging/
+[12]: /ja/network_monitoring/network_path

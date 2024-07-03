@@ -1,11 +1,11 @@
 ---
 aliases:
-- /synthetics/cicd_integrations/configuration
+- /ja/synthetics/cicd_integrations/configuration
 dependencies:
-- "https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"
+- https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md
 description: Configure Continuous Testing to run tests in your CI/CD pipelines.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
+- link: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
   tag: Blog
   text: Use Datadog's GitHub Action to add continuous testing to workflows
 - link: /continuous_testing/cicd_integrations
@@ -546,14 +546,14 @@ datadog-ci synthetics upload-application --config global.config.json
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://github.com/TooTallNate/node-proxy-agent
-[3]: https://docs.datadoghq.com/continuous_testing/environments/
+[3]: https://docs.datadoghq.com/ja/continuous_testing/environments/
 [4]: https://app.datadoghq.com/synthetics/explorer/
 [5]: https://app.datadoghq.com/synthetics/tests
 [6]: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
-[7]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/
-[8]: https://docs.datadoghq.com/continuous_testing/explorer/
+[7]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/
+[8]: https://docs.datadoghq.com/ja/continuous_testing/explorer/
 [9]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
-[10]: https://docs.datadoghq.com/mobile_app_testing/
+[10]: https://docs.datadoghq.com/ja/mobile_app_testing/
 
 <!--
   This page is single-sourced:

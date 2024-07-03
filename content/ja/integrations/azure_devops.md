@@ -1,38 +1,38 @@
 ---
-"categories":
+categories:
 - azure
 - collaboration
 - developer tools
 - issue tracking
 - provisioning
 - source control
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure DevOps metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_devops"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/"
-  "tag": Blog
-  "text": Monitor Azure Pipelines with Datadog CI Visibility
-- "link": "https://www.datadoghq.com/blog/azure-pipeline-testing-with-datadog-synthetic-monitoring/"
-  "tag": Blog
-  "text": Run Datadog Synthetic tests in Azure Pipelines
-- "link": "https://www.datadoghq.com/blog/monitor-azure-devops/"
-  "tag": Blog
-  "text": Monitor Azure DevOps workflows and pipelines with Datadog
-"git_integration_title": "azure_devops"
-"has_logo": true
-"integration_id": "azuredevops"
-"integration_title": "Microsoft Azure DevOps"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_devops"
-"public_title": "Datadog-Microsoft Azure DevOps Integration"
-"short_description": "Track key Azure DevOps metrics."
-"team": "web-integrations"
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure DevOps metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_devops
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: Blog
+  text: Monitor Azure Pipelines with Datadog CI Visibility
+- link: https://www.datadoghq.com/blog/azure-pipeline-testing-with-datadog-synthetic-monitoring/
+  tag: Blog
+  text: Run Datadog Synthetic tests in Azure Pipelines
+- link: https://www.datadoghq.com/blog/monitor-azure-devops/
+  tag: Blog
+  text: Monitor Azure DevOps workflows and pipelines with Datadog
+git_integration_title: azure_devops
+has_logo: true
+integration_id: azuredevops
+integration_title: Microsoft Azure DevOps
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_devops
+public_title: Datadog-Microsoft Azure DevOps Integration
+short_description: Track key Azure DevOps metrics.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -159,9 +159,8 @@ The service hook subscription test only checks whether Azure DevOps is able to s
 [5]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
 [6]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
 [7]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
-[8]: /monitors/monitor_types/composite/
+[8]: /ja/monitors/monitor_types/composite/
 [9]: https://github.com/DataDog/azure-devops-monitor-gate-extension
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
 [11]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops#available-event-types
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

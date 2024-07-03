@@ -1,23 +1,23 @@
 ---
-"categories":
-- "alerting"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。"
-"doc_link": "https://docs.datadoghq.com/integrations/victorops/"
-"draft": false
-"git_integration_title": "victorops"
-"has_logo": true
-"integration_id": "victorops"
-"integration_title": "VictorOps"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "victorops"
-"public_title": "Datadog-VictorOps Integration"
-"short_description": "Use VictorOps as a notification channel in Datadog alerts and events."
-"version": "1.0"
+categories:
+- alerting
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
+doc_link: https://docs.datadoghq.com/integrations/victorops/
+draft: false
+git_integration_title: victorops
+has_logo: true
+integration_id: victorops
+integration_title: VictorOps
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: victorops
+public_title: Datadog-VictorOps Integration
+short_description: Use VictorOps as a notification channel in Datadog alerts and events.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -70,5 +70,4 @@ Special characters are not allowed in the names. Upper/lower case letters, numbe
 
 If this field is empty, the default endpoint is 'https://alert.victorops.com/integrations/datadog/20140523/alert'
 
-[1]: https://docs.datadoghq.com/help/
-
+[1]: https://docs.datadoghq.com/ja/help/

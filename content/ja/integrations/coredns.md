@@ -1,70 +1,70 @@
 ---
-"app_id": "coredns"
-"app_uuid": "b613759e-89ca-4d98-a2c1-4d465c42e413"
-"assets":
-  "dashboards":
-    "CoreDNS": assets/dashboards/coredns.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": coredns.request_count
-      "metadata_path": metadata.csv
-      "prefix": coredns.
-    "process_signatures":
+app_id: coredns
+app_uuid: b613759e-89ca-4d98-a2c1-4d465c42e413
+assets:
+  dashboards:
+    CoreDNS: assets/dashboards/coredns.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: coredns.request_count
+      metadata_path: metadata.csv
+      prefix: coredns.
+    process_signatures:
     - coredns
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10038"
-    "source_type_name": CoreDNS
-  "monitors":
-    "[CoreDNS] Cache hits count low": assets/monitors/coredns_cache_hits_low.json
-    "[CoreDNS] Request duration high": assets/monitors/coredns_request_duration_high.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10038
+    source_type_name: CoreDNS
+  monitors:
+    '[CoreDNS] Cache hits count low': assets/monitors/coredns_cache_hits_low.json
+    '[CoreDNS] Request duration high': assets/monitors/coredns_request_duration_high.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - caching
 - containers
 - kubernetes
 - log collection
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/coredns/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "coredns"
-"integration_id": "coredns"
-"integration_title": "CoreDNS"
-"integration_version": "3.2.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "coredns"
-"public_title": "CoreDNS"
-"short_description": "CoreDNS collects DNS metrics in Kubernetes."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: coredns
+integration_id: coredns
+integration_title: CoreDNS
+integration_version: 3.2.2
+is_public: true
+manifest_version: 2.0.0
+name: coredns
+public_title: CoreDNS
+short_description: CoreDNS collects DNS metrics in Kubernetes.
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Category::Containers"
-  - "Category::Kubernetes"
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": CoreDNS collects DNS metrics in Kubernetes.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": CoreDNS
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: CoreDNS collects DNS metrics in Kubernetes.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CoreDNS
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -127,8 +127,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 ```
 
 [1]: http://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -241,11 +241,11 @@ metadata:
     name: coredns
 ```
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset
-[4]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=kubernetes#examples---datadog-redis-integration
-[5]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=file
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=kubernetes#examples---datadog-redis-integration
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=file
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -300,9 +300,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
   }]
 }
 ```
-[1]: https://docs.datadoghq.com/agent/amazon_ecs/?tab=awscli#process-collection
-[2]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
-[3]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux#activate-log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/amazon_ecs/?tab=awscli#process-collection
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux#activate-log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -338,13 +338,13 @@ CoreDNS チェックには、イベントは含まれません。
 
 
 
-[1]: https://docs.datadoghq.com/integrations/guide/versions-for-openmetrics-based-integrations
+[1]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
 [2]: https://github.com/DataDog/integrations-core/blob/master/coredns/metadata.csv
 [3]: https://github.com/DataDog/integrations-core/blob/7.32.x/coredns/datadog_checks/coredns/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/auto_conf.yaml
 [5]: https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/conf.yaml.example
 [6]: https://app.datadoghq.com/account/settings/agent/latest
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: http://docs.datadoghq.com/help
 [9]: https://www.datadoghq.com/blog/coredns-metrics/
 [10]: https://www.datadoghq.com/blog/coredns-monitoring-tools/

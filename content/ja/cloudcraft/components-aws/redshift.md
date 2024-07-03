@@ -1,5 +1,5 @@
 ---
-title: "Redshift Component"
+title: Redshift Component
 ---
 ## 概要
 
@@ -81,6 +81,6 @@ large、xlarge、xlplus、4xlarge、8xlarge、16xlarge
 ```
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/security-group/
-[4]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/security-group/
+[4]: /ja/cloudcraft/components-aws/subnet/

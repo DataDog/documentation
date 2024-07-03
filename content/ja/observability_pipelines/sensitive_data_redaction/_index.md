@@ -1,6 +1,6 @@
 ---
-title: Sensitive Data Redaction
 disable_toc: false
+title: Sensitive Data Redaction
 ---
 
 ## 概要
@@ -18,7 +18,7 @@ Select a log source to get started:
 - [Splunk Heavy and Universal Forwarders (TCP)][3]
 - [Sumo Logic Hosted Collector][4]
 
-[1]: /observability_pipelines/sensitive_data_redaction/datadog_agent
-[2]: /observability_pipelines/sensitive_data_redaction/splunk_hec
-[3]: /observability_pipelines/sensitive_data_redaction/splunk_tcp
-[4]: /observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector
+[1]: /ja/observability_pipelines/sensitive_data_redaction/datadog_agent
+[2]: /ja/observability_pipelines/sensitive_data_redaction/splunk_hec
+[3]: /ja/observability_pipelines/sensitive_data_redaction/splunk_tcp
+[4]: /ja/observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector

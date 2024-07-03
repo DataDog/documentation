@@ -1,8 +1,8 @@
 ---
 aliases:
-- /synthetics/cicd_integrations/github_actions
+- /ja/synthetics/cicd_integrations/github_actions
 dependencies:
-- "https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"
+- https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
 title: Continuous Testing and CI GitHub Actions
 ---
 ## 概要
@@ -154,15 +154,15 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md)
 - [Datadog を使った継続的テストのベストプラクティス][10]
 
 [1]: https://github.com/DataDog/datadog-ci
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-[4]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
-[5]: https://docs.datadoghq.com/synthetics/search/#search
-[6]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration
+[4]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
+[5]: https://docs.datadoghq.com/ja/synthetics/search/#search
+[6]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration
 [7]: https://semver.org/#summary
 [8]: https://github.com/DataDog/synthetics-ci-github-action/tags
-[9]: https://docs.datadoghq.com/continuous_testing/testing_tunnel/
+[9]: https://docs.datadoghq.com/ja/continuous_testing/testing_tunnel/
 [10]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
-[11]: https://docs.datadoghq.com/getting_started/site
-[12]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[11]: https://docs.datadoghq.com/ja/getting_started/site
+[12]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [13]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json

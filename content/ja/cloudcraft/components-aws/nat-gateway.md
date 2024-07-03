@@ -1,5 +1,5 @@
 ---
-title: "NAT Gateway Component"
+title: NAT Gateway Component
 ---
 ## 概要
 
@@ -62,5 +62,5 @@ The following is an example JSON of a NAT gateway component:
 The NAT gateway component can be added to [VPCs][2] and [subnets][3].
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/subnet/

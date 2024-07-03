@@ -1,15 +1,16 @@
 ---
-title: Session Replay Browser Privacy Options
-description: Describes privacy controls available in Session Replay and how to set privacy options
 aliases:
-- /real_user_monitoring/session_replay/privacy_options
+- /ja/real_user_monitoring/session_replay/privacy_options
+description: Describes privacy controls available in Session Replay and how to set
+  privacy options
 further_reading:
-    - link: /real_user_monitoring/session_replay
-      tag: Documentation
-      text: Session Replay
-    - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
-      tag: Blog
-      text: Obfuscate user data with Session Replay default privacy settings
+- link: /real_user_monitoring/session_replay
+  tag: Documentation
+  text: Session Replay
+- link: https://www.datadoghq.com/blog/default-privacy-session-replay/
+  tag: Blog
+  text: Obfuscate user data with Session Replay default privacy settings
+title: Session Replay Browser Privacy Options
 ---
 
 ## 概要

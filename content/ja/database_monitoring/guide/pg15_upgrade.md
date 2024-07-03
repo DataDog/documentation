@@ -1,6 +1,5 @@
 ---
 title: Upgrading to PostgreSQL 15 and higher
-kind: guide
 ---
 
 Run this command on each database host to enable the additional permission needed for the `datadog` user:

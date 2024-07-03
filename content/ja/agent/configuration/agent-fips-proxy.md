@@ -1,18 +1,23 @@
 ---
-title: Datadog FIPS Compliance
-disable_toc: false
+algolia:
+  rank: 80
+  tags:
+  - fips
+  - fips proxy
+  - compliance
+  - fedramp
+  - govcloud
 alias:
 - /agent/guide/agent-fips-proxy
+disable_toc: false
 further_reading:
 - link: agent/configuration/proxy
   tag: Documentation
   text: Agent Proxy Configuration
-- link: "https://www.datadoghq.com/blog/datadog-fips-enabled-agent/"
+- link: https://www.datadoghq.com/blog/datadog-fips-enabled-agent/
   tag: Blog
   text: Monitor highly regulated workloads with Datadog's FIPS-enabled Agent
-algolia:
-  rank: 80
-  tags: [fips, fips proxy, compliance, fedramp, govcloud]
+title: Datadog FIPS Compliance
 ---
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
@@ -169,11 +174,11 @@ sudo journalctl -u datadog-fips-proxy
 1. [Agent を再起動します][6]。
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[3]: /logs/
-[4]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
-[5]: /integrations/journald/#configuration
-[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[2]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[3]: /ja/logs/
+[4]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[5]: /ja/integrations/journald/#configuration
+[6]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 
 {{% tab "Amazon EKS の Helm" %}}
@@ -200,7 +205,7 @@ Agent がプロキシと通信するために HTTP を使用するため、`use_
 
 Amazon ECS への FIPS プロキシのインストール方法については、[GOVCLOUD 環境向け FIPS プロキシ][1]をご参照ください。
 
-[1]: /containers/amazon_ecs/#fips-proxy-for-govcloud-environments
+[1]: /ja/containers/amazon_ecs/#fips-proxy-for-govcloud-environments
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -356,7 +361,7 @@ Datadog Agent FIPS Proxy がドキュメント通りに使用されていない�
 
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
-[3]: /agent/troubleshooting/
+[3]: /ja/agent/troubleshooting/
 [4]: https://ip-ranges.ddog-gov.com/
-[5]: /agent/configuration/network/#destinations
-[6]: /help/
+[5]: /ja/agent/configuration/network/#destinations
+[6]: /ja/help/

@@ -1,7 +1,8 @@
 ---
-title: Billing and usage reporting
-description: "Monitoring individual client and aggregate usage of the Datadog platform in multi-organization account setups."
+description: Monitoring individual client and aggregate usage of the Datadog platform
+  in multi-organization account setups.
 private: true
+title: Billing and usage reporting
 ---
 
 複数組織のアカウントで、Datadog プラットフォームの個々のクライアントと集計された使用量の両方を監視する方法については、こちらをご覧ください。
@@ -21,9 +22,9 @@ private: true
   - 子組織だけでなく、タグごとの使用量を月末に集計します。
   使用属性は、Enterprise プランに含まれる高度な機能であることに注意してください。その他のプランについては、Datadog パートナー担当者にお問い合わせの上、この機能をリクエストしてください。
 
-[1]: /account_management/rbac/
-[2]: /account_management/multi_organization/#multi-org-usage
-[3]: /account_management/rbac/permissions/?tab=ui#billing-and-usage
-[4]: /account_management/billing/usage_metrics/
-[5]: /dashboards/sharing/
-[6]: /account_management/billing/usage_attribution/
+[1]: /ja/account_management/rbac/
+[2]: /ja/account_management/multi_organization/#multi-org-usage
+[3]: /ja/account_management/rbac/permissions/?tab=ui#billing-and-usage
+[4]: /ja/account_management/billing/usage_metrics/
+[5]: /ja/dashboards/sharing/
+[6]: /ja/account_management/billing/usage_attribution/

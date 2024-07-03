@@ -1,38 +1,37 @@
 ---
-title: Azure Status and Count Metrics
-kind: guide
 aliases:
-  - /integrations/faq/azure-vm-status-is-not-reporting
-  - /integrations/faq/azure-status-metric
+- /ja/integrations/faq/azure-vm-status-is-not-reporting
+- /ja/integrations/faq/azure-status-metric
+title: Azure Status and Count Metrics
 ---
 
-## Overview
+## 概要
 
-Datadog generates two additional metrics for each resource monitored with the [Azure integration][1]: `azure.*.status` and `azure.*.count`. For example, Azure Virtual Machines monitored by Datadog reports `azure.vm.status` and `azure.vm.count`. These two metrics cover similar information.
+Datadog は、[Azure インテグレーション][1]で監視している各リソースに対して、`azure.*.status` と `azure.*.count` という 2 つの追加のメトリクスを生成します。例えば、Datadog で監視している Azure Virtual Machines は、`azure.vm.status` と `azure.vm.count` をレポートします。この 2 つのメトリクスは、同様の情報をカバーしています。
 
-The `azure.*.count` metric is an improvement over `azure.*.status`, which is deprecated.
+`zure.*.count` メトリクスは `azure.*.status` を改良したもので、非推奨となっています。
 
-## Count metric
+## カウントメトリクス
 
-The `azure.*.count` metric provides two fundamental pieces of information:
+`azure.*.count` メトリクスは、2 つの基本的な情報を提供します。
 
-- The number of resources of that type.
-- The status of each resource as reported by Azure.
+- そのタイプのリソースの数。
+- Azure から報告された各リソースのステータス。
 
-The `azure.*.count` metric is created in the same namespace as the other metrics for that resource type, for example: `azure.network_loadbalancers.count`. It includes all of the same metadata tags as the other metrics in that namespace, plus as additional tag for `status`.
+`azure.*.count` メトリクスは、そのリソースタイプの他のメトリクスと同じネームスペースに作成されます (例: `azure.network_loadbalancers.count`)。そのネームスペース内の他のメトリクスと同じメタデータタグをすべて含み、さらに `status` のタグも追加されます。
 
-### Use cases
+### ユースケース
 
-Use the `azure.*.count` metric to:
+`azure.*.count` メトリクスを使うと以下のことができます。
 
-- Create a view of the number of Virtual Machines broken out by their status over time by graphing `azure.vm.count` over everything and summing by `status`.
-- Create query widgets in dashboards to display the number of a given resource type. Use any available tags to scope the count to a relevant aggregation such as region, resource group, kind, or status.
-- Create monitors to alert you about the status of different Azure resources.
+- すべてに対する `azure.vm.count` をグラフ化し、`status` で合計することで、時間経過に対する仮想マシンの数をステータス別に表示するビューを作成します。
+- ダッシュボードにクエリウィジェットを作成し、指定されたリソースタイプの数を表示します。利用可能なタグを使用して、地域、リソースグループ、種類、ステータスなど、関連する集計にカウントをスコープします。
+- さまざまな Azure リソースのステータスをアラートするためのモニターを作成します。
 
-**Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This does not affect monitors or widgets scoped to a specific status.
-You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using `.fill(null)`. 
+**注**: デフォルトの視覚化設定により、チャートやクエリウィジェットでリソースが断続的にダブルカウントされているように見える場合があります。これは、特定のステータスにスコープされたモニターまたはウィジェットには影響しません。
+Interpolation > none を設定してチャートやクエリウィジェットで[補間][2]をオフにするか、`.fill(null)` を使用すると、この効果を減らすことができます。
 
-For most resource types, the possible statuses are:
+ほとんどのリソースタイプで、可能性のあるステータスは次のとおりです。
 
 - Running
 - Unavailable
@@ -40,7 +39,7 @@ For most resource types, the possible statuses are:
 - Degraded
 - Failed
 
-Virtual machines have more detailed statuses, including:
+仮想マシンには、より詳細なステータスがあります。
 
 - Running
 - Stopped_deallocated
@@ -50,32 +49,32 @@ Virtual machines have more detailed statuses, including:
 - Degraded
 - Failed
 
-If you see a status of `query_failed` you need to enable the [Resource Health provider](#troubleshooting) in Azure.
+`query_failed` というステータスが表示された場合、Azure の [Resource Health プロバイダー](#troubleshooting)を有効化する必要があります。
 
-## Status metric
+## ステータスメトリクス
 
-The `azure.*.status` metric is the previous solution for this same type of information. It reports the number of available resources for each Azure resource type.
+`azure.*.status` メトリクスは、この同じ種類の情報に対する以前のソリューションです。これは、各 Azure リソースタイプの利用可能なリソースの数をレポートします。
 
-### Differences
+### 相違点
 
-The key differences between the `.status` and `.count` metric:
+`.status` と `.count` のメトリクスの主な違い:
 
-- `azure.*.count` includes all resources that exist in the Azure account while `azure.*.status` only reports the number of available resources.
-- `azure.*.count` includes a `status` tag, which reports the specific availability state for the resource while `azure.*.status` only includes the standard tags for the resource type.
-- `azure.*.count` includes improvements in the accuracy and reliability of the metric value.
+- `azure.*.count` は Azure アカウントに存在するすべてのリソースを含み、`azure.*.status` は利用可能なリソースの数のみを報告します。
+- `azure.*.count` には `status` タグが含まれ、リソースの特定の利用可能状態を報告します。一方 `azure.*.status` にはリソースタイプに応じた標準のタグだけが含まれます。
+- `azure.*.count` には、メトリクス値の精度と信頼性の向上が含まれています。
 
-## Troubleshooting
+## トラブルシューティング
 
-If your Azure integration is reporting metrics but not `azure.*.status`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
+Azure インテグレーションがメトリクスを報告しているが、`azure.*.status` を返していない、または `azure.*.count` が `status:query_failed` を返している場合、Azure サブスクリプションが Azure Resource Health プロバイダーを登録する必要があります。
 
-Using the Azure Command Line Interface:
+Azure コマンドラインインターフェイスの使用:
 ```bash
-azure login # Login to the Azure user associated with your Datadog account
+azure login # Datadog アカウントに関連付けられた Azure ユーザーにログインします
 azure config mode arm
 azure provider register Microsoft.ResourceHealth
 ```
 
-The `azure.*.status` metric should show in Datadog within 5 - 10 minutes.
+Datadog では 5～10 分以内に `azure.*.status` というメトリクスが表示されるはずです。
 
-[1]: /integrations/azure/
-[2]: /metrics/guide/interpolation-the-fill-modifier-explained/
+[1]: /ja/integrations/azure/
+[2]: /ja/metrics/guide/interpolation-the-fill-modifier-explained/

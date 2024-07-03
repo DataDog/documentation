@@ -1,7 +1,6 @@
 ---
-title: Ingestion Sampling with OpenTelemetry
 aliases:
-  - /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
+- /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
 - link: /tracing/guide/trace_ingestion_volume_control
   tag: Guide
@@ -12,6 +11,7 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: OpenTelemetry Support in Datadog
+title: Ingestion Sampling with OpenTelemetry
 ---
 
 ## 概要
@@ -127,20 +127,20 @@ If the ingestion volume is higher than expected, consider adjusting your samplin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/otel_collector_datadog_exporter
-[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
-[3]: /opentelemetry/otlp_ingest_in_the_agent
-[4]: /tracing/metrics/metrics_namespace/
+[1]: /ja/opentelemetry/otel_collector_datadog_exporter
+[2]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
+[3]: /ja/opentelemetry/otlp_ingest_in_the_agent
+[4]: /ja/tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [6]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
-[7]: /dashboards/functions/#add-a-function
-[8]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
+[7]: /ja/dashboards/functions/#add-a-function
+[8]: /ja/tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector#datadog-connector
-[12]: /tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
+[12]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
-[14]: /opentelemetry/guide/migration/
-[15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
-[16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
-[17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids
+[14]: /ja/opentelemetry/guide/migration/
+[15]: /ja/opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[16]: /ja/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
+[17]: /ja/opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids

@@ -1,6 +1,6 @@
 ---
-title: Enabling Code Security using single step instrumentation
 kind: documentation
+title: Enabling Code Security using single step instrumentation
 ---
 
 <div class="alert alert-info">Enabling Code Security using single step instrumentation is in beta.</div>
@@ -81,10 +81,10 @@ Set `DD_ENV` in your one-line installation command for Linux to automatically ta
 DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_IAST_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-[2]: /agent/remote_config
-[3]: /getting_started/site/
+[2]: /ja/agent/remote_config
+[3]: /ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /service_catalog/
+[5]: /ja/service_catalog/
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 {{% /tab %}}
@@ -165,7 +165,7 @@ docker run -d --name dd-agent \
 {{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /service_catalog/
+[6]: /ja/service_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 
@@ -225,12 +225,12 @@ For more information on Kubernetes single step instrumentation, see the followin
 [9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://app.datadoghq.com/organization-settings/application-keys
-[12]: /getting_started/site
+[12]: /ja/getting_started/site
 [13]: https://v3.helm.sh/docs/intro/install/
 [14]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-[15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#enabling-or-disabling-instrumentation-for-namespaces
-[16]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#specifying-tracing-library-versions
-[17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#removing-instrumentation-for-specific-services
+[15]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#enabling-or-disabling-instrumentation-for-namespaces
+[16]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#specifying-tracing-library-versions
+[17]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#removing-instrumentation-for-specific-services
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -330,4 +330,4 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/remote_config
+[2]: /ja/agent/remote_config

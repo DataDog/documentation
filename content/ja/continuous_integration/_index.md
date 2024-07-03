@@ -1,39 +1,41 @@
 ---
-title: Continuous Integration Visibility
 aliases:
-  - /ci
-further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-    tag: Release Notes
-    text: Check out the latest Software Delivery releases! (App login required)
-  - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
-    tag: Blog
-    text: Monitor your CircleCI environment with Datadog
-  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-    tag: Blog
-    text: Configure pipeline alerts with Datadog CI monitors
-  - link: /continuous_integration/pipelines/
-    tag: Documentation
-    text: Explore pipeline data to resolve build problems
-  - link: /continuous_integration/tests/
-    tag: Documentation
-    text: Explore test data to find and fix problem tests
-  - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
-    tag: Blog
-    text: Best practices for monitoring static web applications
-  - link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
-    tag: Blog
-    text: Best practices for CI/CD monitoring
-  - link: "https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/"
-    tag: Blog
-    text: Best practices for monitoring software testing in CI/CD
-  - link: "https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/"
-    tag: ブログ
-    text: Monitor your CI/CD modernizations with Datadog CI Pipeline Visibility
+- /ja/ci
 cascade:
-    algolia:
-        rank: 70
-        tags: [ci/cd, continuous integration]
+  algolia:
+    rank: 70
+    tags:
+    - ci/cd
+    - continuous integration
+further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: Release Notes
+  text: Check out the latest Software Delivery releases! (App login required)
+- link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+  tag: Blog
+  text: Monitor your CircleCI environment with Datadog
+- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
+  tag: Blog
+  text: Configure pipeline alerts with Datadog CI monitors
+- link: /continuous_integration/pipelines/
+  tag: Documentation
+  text: Explore pipeline data to resolve build problems
+- link: /continuous_integration/tests/
+  tag: Documentation
+  text: Explore test data to find and fix problem tests
+- link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
+  tag: Blog
+  text: Best practices for monitoring static web applications
+- link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
+  tag: Blog
+  text: Best practices for CI/CD monitoring
+- link: https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/
+  tag: Blog
+  text: Best practices for monitoring software testing in CI/CD
+- link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
+  tag: ブログ
+  text: Monitor your CI/CD modernizations with Datadog CI Pipeline Visibility
+title: Continuous Integration Visibility
 ---
 
 {{< site-region region="gov" >}}
@@ -76,9 +78,9 @@ Datadog は、様々な CI プロバイダーと統合し、コミットから�
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: https://app.datadoghq.com/notebook/list
-[3]: /continuous_integration/pipelines/
-[4]: /continuous_integration/tests/
-[6]: /monitors/types/ci/
-[7]: /continuous_integration/explorer/
-[8]: /continuous_integration/pipelines/custom_commands/
-[9]: /continuous_integration/pipelines/custom_tags_and_measures/
+[3]: /ja/continuous_integration/pipelines/
+[4]: /ja/continuous_integration/tests/
+[6]: /ja/monitors/types/ci/
+[7]: /ja/continuous_integration/explorer/
+[8]: /ja/continuous_integration/pipelines/custom_commands/
+[9]: /ja/continuous_integration/pipelines/custom_tags_and_measures/

@@ -1,72 +1,72 @@
 ---
-"app_id": "ngrok"
-"app_uuid": "3b096ceb-d7a5-4bb5-bf0a-3a07d308d56a"
-"assets":
-  "dashboards":
-    "ngrok_http_events": assets/dashboards/ngrok_http_events.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10397"
-    "source_type_name": ngrok
-"author":
-  "homepage": "https://ngrok.com"
-  "name": ngrok
-  "sales_email": sales@ngrok.com
-  "support_email": support@ngrok.com
-"categories":
+app_id: ngrok
+app_uuid: 3b096ceb-d7a5-4bb5-bf0a-3a07d308d56a
+assets:
+  dashboards:
+    ngrok_http_events: assets/dashboards/ngrok_http_events.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10397
+    source_type_name: ngrok
+author:
+  homepage: https://ngrok.com
+  name: ngrok
+  sales_email: sales@ngrok.com
+  support_email: support@ngrok.com
+categories:
 - developer tools
 - cloud
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/ngrok/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ngrok"
-"integration_id": "ngrok"
-"integration_title": "ngrok"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ngrok"
-"public_title": "ngrok"
-"short_description": "Visualize valuable application insights with ngrok HTTP events"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/ngrok/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ngrok
+integration_id: ngrok
+integration_title: ngrok
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: ngrok
+public_title: ngrok
+short_description: Visualize valuable application insights with ngrok HTTP events
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::Cloud"
-  - "Submitted Data Type::Logs"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Queried Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Visualize valuable application insights with ngrok HTTP events
-  "media":
-  - "caption": ngrok HTTP request events overview dashboard
-    "image_url": images/dashboard.png
-    "media_type": image
-  - "caption": ngrok services platform
-    "image_url": images/diag1.png
-    "media_type": image
-  - "caption": ngrok + datadog
-    "image_url": images/diag2.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": その他
-    "url": "https://ngrok.com/solutions"
-  "support": "README.md#Support"
-  "title": ngrok
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::Cloud
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Queried Data Type::Logs
+  configuration: README.md#Setup
+  description: Visualize valuable application insights with ngrok HTTP events
+  media:
+  - caption: ngrok HTTP request events overview dashboard
+    image_url: images/dashboard.png
+    media_type: image
+  - caption: ngrok services platform
+    image_url: images/diag1.png
+    media_type: image
+  - caption: ngrok + datadog
+    image_url: images/diag2.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://ngrok.com/solutions
+  support: README.md#Support
+  title: ngrok
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -134,11 +134,10 @@ ngrok イベントを Datadog に転送するには、2 つの構成が必要で
 
 [1]: https://dashboard.ngrok.com
 [2]: https://ngrok.com/docs/integrations/datadog/event-destination/
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://docs.datadoghq.com/account_management/api-app-keys/
-[5]: https://docs.datadoghq.com/logs/explorer/facets/
-[6]: https://docs.datadoghq.com/logs/explorer/facets/#create-facets
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[5]: https://docs.datadoghq.com/ja/logs/explorer/facets/
+[6]: https://docs.datadoghq.com/ja/logs/explorer/facets/#create-facets
 [7]: mailto:support@ngrok.com
 [8]: https://ngrok.com/docs/integrations/datadog/
 [9]: https://ngrok.com/solutions
-

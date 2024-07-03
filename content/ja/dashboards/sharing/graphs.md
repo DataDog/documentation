@@ -1,11 +1,10 @@
 ---
-title: グラフの共有
 aliases:
-    - /graphing/faq/is-there-a-way-to-share-graphs
-    - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
-    - /graphing/dashboards/shared_graph/
+- /ja/graphing/faq/is-there-a-way-to-share-graphs
+- /ja/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
+- /ja/graphing/dashboards/shared_graph/
 further_reading:
-- link: "https://www.datadoghq.com/blog/dashboard-sharing/"
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
   tag: ブログ
   text: ダッシュボードを組織外の人と安全に共有する
 - link: /dashboards/
@@ -17,6 +16,7 @@ further_reading:
 - link: /dashboards/widgets/
   tag: ドキュメント
   text: ダッシュボードのウィジェットについて
+title: グラフの共有
 ---
 
 To share a graph:
@@ -60,11 +60,11 @@ Datadog has a [dedicated API][4] allowing you to interact with your shared graph
 
 
 [1]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
-[2]: /help/
+[2]: /ja/help/
 [3]: https://app.datadoghq.com/organization-settings/public-sharing/settings
-[4]: /api/latest/embeddable-graphs/
-[5]: /api/latest/embeddable-graphs/#get-all-embeds
-[6]: /api/latest/embeddable-graphs/#create-embed
-[7]: /api/latest/embeddable-graphs/#get-specific-embed
-[8]: /api/latest/embeddable-graphs/#enable-embed
-[9]: /api/latest/embeddable-graphs/#revoke-embed
+[4]: /ja/api/latest/embeddable-graphs/
+[5]: /ja/api/latest/embeddable-graphs/#get-all-embeds
+[6]: /ja/api/latest/embeddable-graphs/#create-embed
+[7]: /ja/api/latest/embeddable-graphs/#get-specific-embed
+[8]: /ja/api/latest/embeddable-graphs/#enable-embed
+[9]: /ja/api/latest/embeddable-graphs/#revoke-embed

@@ -1,66 +1,66 @@
 ---
-"app_id": "signl4"
-"app_uuid": "07952edd-2dc5-4c11-a697-5cba325f64ee"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": signl4.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10158"
-    "source_type_name": SIGNL4
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": SIGNL4
-  "sales_email": success@signl4.com
-  "support_email": success@signl4.com
-"categories":
+app_id: signl4
+app_uuid: 07952edd-2dc5-4c11-a697-5cba325f64ee
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: signl4.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10158
+    source_type_name: SIGNL4
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: SIGNL4
+  sales_email: success@signl4.com
+  support_email: success@signl4.com
+categories:
 - alerting
 - collaboration
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "signl4"
-"integration_id": "signl4"
-"integration_title": "SIGNL4"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "signl4"
-"public_title": "SIGNL4"
-"short_description": "Get notified of your Datadog alerts and take actions using SIGNL4."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: signl4
+integration_id: signl4
+integration_title: SIGNL4
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: signl4
+public_title: SIGNL4
+short_description: Get notified of your Datadog alerts and take actions using SIGNL4.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Issue Tracking"
-  - "Category::Notifications"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Get notified of your Datadog alerts and take actions using SIGNL4.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SIGNL4
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Get notified of your Datadog alerts and take actions using SIGNL4.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SIGNL4
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -236,4 +236,3 @@ Need help? Contact [SIGNL4 Support][9].
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/signl4/images/datadog-incidents-rule.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/signl4/images/signl4-datadog-connector-app.png
 [9]: mailto:success@signl4.com
-

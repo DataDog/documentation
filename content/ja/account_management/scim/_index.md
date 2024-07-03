@@ -1,14 +1,17 @@
 ---
-title: User Provisioning with SCIM
-further_reading:
-    - link: /account_management/scim/azure/
-      tag: Documentation
-      text: Configure SCIM with Azure Active Directory
-    - link: account_management/scim/okta
-      tag: Documentation
-      text: Configure SCIM with Okta
 algolia:
-  tags: [scim, identity provider, IdP]
+  tags:
+  - scim
+  - identity provider
+  - IdP
+further_reading:
+- link: /account_management/scim/azure/
+  tag: Documentation
+  text: Configure SCIM with Azure Active Directory
+- link: account_management/scim/okta
+  tag: Documentation
+  text: Configure SCIM with Okta
+title: User Provisioning with SCIM
 ---
 
 <div class="alert alert-info">
@@ -56,10 +59,10 @@ SCIM で新規ユーザーを作成すると、そのユーザーにメールが
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/scim/#email-verification
-[2]: /account_management/scim/azure
-[3]: /account_management/scim/okta
-[4]: /account_management/scim/#using-a-service-account-with-scim
-[5]: /account_management/api-app-keys
-[6]: /account_management/org_settings/service_accounts
+[1]: /ja/account_management/scim/#email-verification
+[2]: /ja/account_management/scim/azure
+[3]: /ja/account_management/scim/okta
+[4]: /ja/account_management/scim/#using-a-service-account-with-scim
+[5]: /ja/account_management/api-app-keys
+[6]: /ja/account_management/org_settings/service_accounts
 [7]: https://app.datadoghq.com/organization-settings/users

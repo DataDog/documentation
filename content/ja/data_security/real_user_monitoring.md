@@ -1,7 +1,6 @@
 ---
-title: Real User Monitoring Data Security
 aliases:
-    - /real_user_monitoring/security/
+- /ja/real_user_monitoring/security/
 further_reading:
 - link: /data_security/
   tag: Documentation
@@ -12,9 +11,10 @@ further_reading:
 - link: /real_user_monitoring/session_replay/browser/privacy_options/
   tag: Documentation
   text: Session Replay Privacy Options
-- link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
+- link: https://www.datadoghq.com/blog/default-privacy-session-replay/
   tag: Blog
   text: Obfuscate user data with Session Replay default privacy settings
+title: Real User Monitoring Data Security
 ---
 
 <div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
@@ -135,23 +135,23 @@ IP データの収集を無効にすると、その変更はすぐに適用さ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
-[2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#modify-or-drop-rum-events
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter/#modify-or-drop-rum-events
-[5]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[8]: /help/
-[9]: /help/
-[10]: /account_management/rbac/permissions/#real-user-monitoring
-[11]: /sensitive_data_scanner/
-[12]: /real_user_monitoring/session_replay/browser/privacy_options
+[1]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
+[2]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#modify-or-drop-rum-events
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter/#modify-or-drop-rum-events
+[5]: /ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[6]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[7]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[8]: /ja/help/
+[9]: /ja/help/
+[10]: /ja/account_management/rbac/permissions/#real-user-monitoring
+[11]: /ja/sensitive_data_scanner/
+[12]: /ja/real_user_monitoring/session_replay/browser/privacy_options
 [13]: https://www.datadoghq.com/privacy/
-[14]: /real_user_monitoring/explorer/search/
-[15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
-[17]: /real_user_monitoring/browser/setup/#configuration
-[18]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[19]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
+[14]: /ja/real_user_monitoring/explorer/search/
+[15]: /ja/real_user_monitoring/guide/proxy-rum-data/?tab=npm
+[16]: /ja/real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
+[17]: /ja/real_user_monitoring/browser/setup/#configuration
+[18]: /ja/account_management/api-app-keys/#add-an-api-key-or-client-token
+[19]: /ja/real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [20]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration

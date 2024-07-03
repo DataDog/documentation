@@ -1,68 +1,69 @@
 ---
-"app_id": "iis"
-"app_uuid": "4620121f-b5ca-4b9c-aca2-c69bf18bc362"
-"assets":
-  "dashboards":
-    "IIS-Overview": assets/dashboards/iis_overview.json
-    "iis": assets/dashboards/iis_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": iis.uptime
-      "metadata_path": metadata.csv
-      "prefix": iis.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "46"
-    "source_type_name": IIS
-  "monitors":
-    "[IIS] Anomalous amount of requests for site: {{site.name}}": assets/monitors/req.json
-    "[IIS] Increase of locked error per second for site: {{site.name}}": assets/monitors/lock.json
-    "[IIS] Increase of not found error per second for site: {{site.name}}": assets/monitors/err.json
-  "saved_views":
-    "4xx_errors": assets/saved_views/4xx_errors.json
-    "5xx_errors": assets/saved_views/5xx_errors.json
-    "bot_errors": assets/saved_views/bot_errors.json
-    "response_time_overview": assets/saved_views/response_time.json
-    "status_code_overview": assets/saved_views/status_code_overview.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: iis
+app_uuid: 4620121f-b5ca-4b9c-aca2-c69bf18bc362
+assets:
+  dashboards:
+    IIS-Overview: assets/dashboards/iis_overview.json
+    iis: assets/dashboards/iis_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: iis.uptime
+      metadata_path: metadata.csv
+      prefix: iis.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 46
+    source_type_name: IIS
+  monitors:
+    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
+    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
+    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    response_time_overview: assets/saved_views/response_time.json
+    status_code_overview: assets/saved_views/status_code_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/iis/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "iis"
-"integration_id": "iis"
-"integration_title": "IIS"
-"integration_version": "3.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "iis"
-"public_title": "IIS"
-"short_description": "Track total or per-site metrics and monitor each site's up/down status."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/iis/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: iis
+integration_id: iis
+integration_title: IIS
+integration_version: 3.1.0
+is_public: true
+manifest_version: 2.0.0
+name: iis
+public_title: IIS
+short_description: Track total or per-site metrics and monitor each site's up/down
+  status.
+supported_os:
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": Track total or per-site metrics and monitor each site's up/down status.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": IIS
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Track total or per-site metrics and monitor each site's up/down status.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IIS
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -142,14 +143,13 @@ IIS チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/iis/images/iisgraph.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/#agent-check-directory-structure
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/windows/#agent-check-directory-structure
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://github.com/DataDog/integrations-core/blob/7.33.x/iis/datadog_checks/iis/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/iis/metadata.csv
 [11]: https://github.com/DataDog/integrations-core/blob/master/iis/assets/service_checks.json
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

@@ -1,30 +1,30 @@
 ---
-title: .NET Custom Instrumentation using Datadog API
-kind: documentation
-code_lang: dd-api
-type: multi-code-lang
-code_lang_weight: 1
 aliases:
-    - /tracing/opentracing/dotnet
-    - /tracing/manual_instrumentation/dotnet
-    - /tracing/custom_instrumentation/dotnet
-    - /tracing/setup_overview/custom_instrumentation/dotnet
-    - /tracing/trace_collection/custom_instrumentation/dotnet
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/dotnet
-description: 'Manually instrument your .NET application to send custom traces to Datadog.'
+- /ja/tracing/opentracing/dotnet
+- /ja/tracing/manual_instrumentation/dotnet
+- /ja/tracing/custom_instrumentation/dotnet
+- /ja/tracing/setup_overview/custom_instrumentation/dotnet
+- /ja/tracing/trace_collection/custom_instrumentation/dotnet
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/dotnet
+code_lang: dd-api
+code_lang_weight: 1
+description: Manually instrument your .NET application to send custom traces to Datadog.
 further_reading:
-    - link: tracing/guide/instrument_custom_method
-      tag: Guide
-      text: Instrument a custom method to get deep visibility into your business logic
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-      tag: ソースコード
-      text: .NET code samples
+- link: tracing/guide/instrument_custom_method
+  tag: Guide
+  text: Instrument a custom method to get deep visibility into your business logic
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
+  tag: ソースコード
+  text: .NET code samples
+kind: documentation
+title: .NET Custom Instrumentation using Datadog API
+type: multi-code-lang
 ---
 
 <div class="alert alert-info">
@@ -223,14 +223,14 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/trace_collection/compatibility/dotnet-framework
-[2]: /tracing/trace_collection/compatibility/dotnet-core
-[3]: /tracing/trace_collection/dd_libraries/dotnet-core
-[5]: /tracing/glossary/#span-tags
-[6]: /tracing/glossary/#spans
-[7]: /tracing/glossary/#trace
-[8]: /tracing/trace_collection/library_config/dotnet-framework/#automatic-instrumentation-optional-configuration
-[9]: /tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
-[10]: /tracing/security
-[11]: /tracing/trace_collection/library_config/dotnet-core/
-[12]: /tracing/trace_collection/trace_context_propagation/dotnet/
+[1]: /ja/tracing/trace_collection/compatibility/dotnet-framework
+[2]: /ja/tracing/trace_collection/compatibility/dotnet-core
+[3]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
+[5]: /ja/tracing/glossary/#span-tags
+[6]: /ja/tracing/glossary/#spans
+[7]: /ja/tracing/glossary/#trace
+[8]: /ja/tracing/trace_collection/library_config/dotnet-framework/#automatic-instrumentation-optional-configuration
+[9]: /ja/tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
+[10]: /ja/tracing/security
+[11]: /ja/tracing/trace_collection/library_config/dotnet-core/
+[12]: /ja/tracing/trace_collection/trace_context_propagation/dotnet/

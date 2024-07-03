@@ -1,63 +1,65 @@
 ---
-"app_id": "ibm-db2"
-"app_uuid": "e588293a-833f-4888-a7b4-2208e087059a"
-"assets":
-  "dashboards":
-    "IBM Db2 Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": ibm_db2.connection.active
-      "metadata_path": metadata.csv
-      "prefix": ibm_db2.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10054"
-    "source_type_name": IBM Db2
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: ibm-db2
+app_uuid: e588293a-833f-4888-a7b4-2208e087059a
+assets:
+  dashboards:
+    IBM Db2 Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: ibm_db2.connection.active
+      metadata_path: metadata.csv
+      prefix: ibm_db2.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10054
+    source_type_name: IBM Db2
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ibm_db2"
-"integration_id": "ibm-db2"
-"integration_title": "IBM Db2"
-"integration_version": "2.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ibm_db2"
-"public_title": "IBM Db2"
-"short_description": "Monitor table space, buffer pool, and other metrics from your IBM Db2 database."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ibm_db2
+integration_id: ibm-db2
+integration_title: IBM Db2
+integration_version: 2.2.0
+is_public: true
+manifest_version: 2.0.0
+name: ibm_db2
+public_title: IBM Db2
+short_description: Monitor table space, buffer pool, and other metrics from your IBM
+  Db2 database.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Monitor table space, buffer pool, and other metrics from your IBM Db2 database.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": IBM Db2
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Monitor table space, buffer pool, and other metrics from your IBM Db2
+    database.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM Db2
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -198,7 +200,7 @@ _Agent バージョン 6.0 以降で利用可能_
 3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -224,8 +226,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "ibm_db2", "service": "<SERVICE_NAME>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])"}}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -331,9 +333,9 @@ Agent はデータベースに正しく接続する場所を決定するため�
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/ibmdb/python-ibmdb
 [5]: https://www.ibm.com/docs/en/db2oc?topic=views-monitor-procedures-functions
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://pypi.org/project/ibm-db/#files
 [8]: https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/
-[9]: https://docs.datadoghq.com/developers/guide/custom-python-package/?tab=linux
-[10]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.datadoghq.com/blog/monitor-db2-with-datadog

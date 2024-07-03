@@ -1,82 +1,82 @@
 ---
-"app_id": "sofy"
-"app_uuid": "eea6fdbc-2f8d-4483-bbd3-767818b1c25a"
-"assets":
-  "dashboards":
-    "Sofy Overview": assets/dashboards/sofy_sofy_overview.json
-  "integration":
-    "auto_install": true
-    "metrics":
-      "check": sofy.step.cpu_utilization
-      "metadata_path": metadata.csv
-      "prefix": sofy.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10353"
-    "source_type_name": Sofy
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://sofy.ai"
-  "name": Sofy
-  "sales_email": devops@sofy.ai
-  "support_email": devops@sofy.ai
-  "vendor_id": sofy
-"categories":
+app_id: sofy
+app_uuid: eea6fdbc-2f8d-4483-bbd3-767818b1c25a
+assets:
+  dashboards:
+    Sofy Overview: assets/dashboards/sofy_sofy_overview.json
+  integration:
+    auto_install: true
+    metrics:
+      check: sofy.step.cpu_utilization
+      metadata_path: metadata.csv
+      prefix: sofy.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10353
+    source_type_name: Sofy
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://sofy.ai
+  name: Sofy
+  sales_email: devops@sofy.ai
+  support_email: devops@sofy.ai
+  vendor_id: sofy
+categories:
 - testing
 - mobile
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/sofy_sofy/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sofy_sofy"
-"integration_id": "sofy"
-"integration_title": "Sofy"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "sofy_sofy"
-"pricing": []
-"public_title": "Sofy"
-"short_description": "Monitors device metrics during automated test case runs"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/sofy_sofy/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: sofy_sofy
+integration_id: sofy
+integration_title: Sofy
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: sofy_sofy
+pricing: []
+public_title: Sofy
+short_description: Monitors device metrics during automated test case runs
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Testing"
-  - "Category::Mobile"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Monitors device metrics during automated test case runs
-  "media":
-  - "caption": Connect Sofy with Datadog
-    "image_url": images/datadog_connect.png
-    "media_type": image
-  - "caption": Enable Application to Send Metrics
-    "image_url": images/datadog_monitoring.png
-    "media_type": image
-  - "caption": Sofy Device Metrics
-    "image_url": images/datadog_metrics.png
-    "media_type": image
-  - "caption": No Code Automated Testcase Test run
-    "image_url": images/datadog_testperform.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/sofy-mobile-tests/"
-  - "resource_type": documentation
-    "url": "https://docs.sofy.ai"
-  "support": "README.md#Support"
-  "title": Sofy
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Testing
+  - Category::Mobile
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Monitors device metrics during automated test case runs
+  media:
+  - caption: Connect Sofy with Datadog
+    image_url: images/datadog_connect.png
+    media_type: image
+  - caption: Enable Application to Send Metrics
+    image_url: images/datadog_monitoring.png
+    media_type: image
+  - caption: Sofy Device Metrics
+    image_url: images/datadog_metrics.png
+    media_type: image
+  - caption: No Code Automated Testcase Test run
+    image_url: images/datadog_testperform.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/sofy-mobile-tests/
+  - resource_type: documentation
+    url: https://docs.sofy.ai
+  support: README.md#Support
+  title: Sofy
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -132,4 +132,3 @@ Sofy インテグレーションを設定するには
 [6]: https://support.sofy.ai/support/tickets/new
 [7]: https://www.datadoghq.com/blog/sofy-mobile-tests/
 [8]: https://docs.sofy.ai
-

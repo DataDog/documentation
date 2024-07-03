@@ -1,11 +1,11 @@
 ---
-title: Symbol Database
-is_beta: true
-private: true
 further_reading:
 - link: /dynamic_instrumentation/
   tag: Documentation
   text: Learn more about Dynamic Instrumentation
+is_beta: true
+private: true
+title: Symbol Database
 ---
 
 {{< site-region region="gov,ap1" >}}
@@ -56,12 +56,12 @@ Symbol Database は、クラス名およびメソッド名の検索機能を提�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dynamic_instrumentation/
-[2]: /agent/
-[3]: /agent/remote_config/
-[4]: /getting_started/tagging/unified_service_tagging/
-[5]: /dynamic_instrumentation/expression-language
+[1]: /ja/dynamic_instrumentation/
+[2]: /ja/agent/
+[3]: /ja/agent/remote_config/
+[4]: /ja/getting_started/tagging/unified_service_tagging/
+[5]: /ja/dynamic_instrumentation/expression-language
 [6]: https://github.com/DataDog/dd-trace-java
 [7]: https://github.com/DataDog/dd-trace-py
 [8]: https://github.com/DataDog/dd-trace-dotnet
-[9]: /integrations/guide/source-code-integration/
+[9]: /ja/integrations/guide/source-code-integration/

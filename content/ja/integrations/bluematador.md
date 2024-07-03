@@ -1,60 +1,62 @@
 ---
-"app_id": "blue-matador"
-"app_uuid": "b1cfb279-ab1a-4f63-a04f-9c6508d06588"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": bluematador.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10071"
-    "source_type_name": Blue Matador
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Blue Matador
-  "sales_email": support@bluematador.com
-  "support_email": support@bluematador.com
-"categories":
+app_id: blue-matador
+app_uuid: b1cfb279-ab1a-4f63-a04f-9c6508d06588
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: bluematador.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10071
+    source_type_name: Blue Matador
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Blue Matador
+  sales_email: support@bluematador.com
+  support_email: support@bluematador.com
+categories:
 - alerting
 - automation
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "bluematador"
-"integration_id": "blue-matador"
-"integration_title": "Blue Matador"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "bluematador"
-"public_title": "Blue Matador"
-"short_description": "Blue Matador automatically sets up and dynamically maintains hundreds of alerts"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: bluematador
+integration_id: blue-matador
+integration_title: Blue Matador
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: bluematador
+public_title: Blue Matador
+short_description: Blue Matador automatically sets up and dynamically maintains hundreds
+  of alerts
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Automation"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Blue Matador automatically sets up and dynamically maintains hundreds of alerts
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Blue Matador
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Automation
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Blue Matador automatically sets up and dynamically maintains hundreds
+    of alerts
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Blue Matador
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -101,4 +103,3 @@ Need help? Contact the [maintainer][5] of this integration.
 [3]: https://www.bluematador.com/monitored-events
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://github.com/DataDog/integrations-extras/blob/master/bluematador/manifest.json
-

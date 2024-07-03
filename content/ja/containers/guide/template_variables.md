@@ -1,9 +1,8 @@
 ---
-title: Autodiscovery Template Variables
 aliases:
- - /agent/autodiscovery/template_variables
- - /agent/faq/template_variables
- - /agent/guide/template_variables
+- /ja/agent/autodiscovery/template_variables
+- /ja/agent/faq/template_variables
+- /ja/agent/guide/template_variables
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
@@ -14,6 +13,7 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Manage which container to include in the Agent Autodiscovery
+title: Autodiscovery Template Variables
 ---
 
 コンテナの値を動的に割り当てるために、オートディスカバリーを構成するときに次のテンプレート変数を使用します。

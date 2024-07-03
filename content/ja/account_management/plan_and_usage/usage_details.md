@@ -1,7 +1,7 @@
 ---
-title: Usage Details
 aliases:
-  - /account_management/billing/usage_details/
+- /ja/account_management/billing/usage_details/
+title: Usage Details
 ---
 
 ## 概要
@@ -155,12 +155,12 @@ If your Datadog account is a multi-organization, parent organization users with 
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-across-your-multi-org-account
-[3]: https://docs.datadoghq.com/api/latest/usage-metering/#get-billable-usage-across-your-account
-[4]: /metrics/custom_metrics/
+[2]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-usage-across-your-multi-org-account
+[3]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-billable-usage-across-your-account
+[4]: /ja/metrics/custom_metrics/
 [5]: https://app.datadoghq.com/billing/usage
-[6]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[7]: https://docs.datadoghq.com/metrics/summary/#overview
-[8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
-[9]: /help/
+[6]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[7]: https://docs.datadoghq.com/ja/metrics/summary/#overview
+[8]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
+[9]: /ja/help/
 [10]: mailto:success@datadoghq.com

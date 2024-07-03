@@ -1,8 +1,5 @@
 ---
-title: Network Path
-kind: documentation
-description: Investigate network traffic paths 
-is_beta: true
+description: Investigate network traffic paths
 further_reading:
 - link: /network_monitoring/network_path/list_view
   tag: ドキュメント
@@ -13,9 +10,12 @@ further_reading:
 - link: /network_monitoring/network_path/setup
   tag: ドキュメント
   text: Setup Network Path
-- link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
+- link: https://www.datadoghq.com/blog/datadog-network-path-monitoring/
   tag: ブログ
   text: Get end-to-end network visibility with Datadog Network Path
+is_beta: true
+kind: documentation
+title: Network Path
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -47,4 +47,4 @@ The following diagram depicts the typical flow of a network path from a source (
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/network/path
-[2]: /network_monitoring/performance/
+[2]: /ja/network_monitoring/performance/

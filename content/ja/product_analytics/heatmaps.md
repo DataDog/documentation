@@ -1,14 +1,15 @@
 ---
-title: ヒートマップ
-kind: documentation
 description: ヒートマップは、ユーザーが Web サイト上でどこをクリックしたかを視覚化するものです。
 further_reading:
 - link: /product_analytics/session_replay/browser/
   tag: ドキュメント
   text: セッション リプレイ
-- link: "https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/"
+- link: https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/
   tag: ブログ
-  text: Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps
+  text: Visualize user interactions with your pages by using Scrollmaps in Datadog
+    Heatmaps
+kind: documentation
+title: ヒートマップ
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -124,8 +125,8 @@ User information is not collected by default. Heatmaps use the user information 
 ## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/session_replay/browser/
+[1]: /ja/product_analytics/session_replay/browser/
 [2]: https://app.datadoghq.com/product-analytics/heatmap
 [3]: https://app.datadoghq.com/product-analytics/summary
-[4]: /product_analytics/analytics_explorer/
-[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json 
+[4]: /ja/product_analytics/analytics_explorer/
+[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json

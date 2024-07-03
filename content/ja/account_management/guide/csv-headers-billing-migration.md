@@ -1,9 +1,9 @@
 ---
-title: Migrating to New Plan & Usage CSV Headers the week of February 19, 2024
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Plan and Usage Settings
+title: Migrating to New Plan & Usage CSV Headers the week of February 19, 2024
 ---
 Plan & Usage Cost Chargebacks CSV ファイルのヘッダーは、2024 年 2 月 19 日の週に更新されます。この更新により、CSV ファイル内のコストとアプリ内に表示されるコストデータが一致します。
 
@@ -18,5 +18,5 @@ Usage ページからダウンロードした Cost Chargebacks ファイルの C
 
 
 
-[1]: /account_management/guide/csv_headers/individual-orgs-summary/
-[2]: /account_management/guide/csv_headers/usage-trends/
+[1]: /ja/account_management/guide/csv_headers/individual-orgs-summary/
+[2]: /ja/account_management/guide/csv_headers/usage-trends/

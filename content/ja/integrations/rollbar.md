@@ -1,50 +1,52 @@
 ---
-"app_id": "rollbar"
-"app_uuid": "63175032-65a1-4bc8-82da-251a27005f1f"
-"assets":
-  "integration":
-    "auto_install": true
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "137"
-    "source_type_name": "Rollbar"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-- "issue tracking"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rollbar"
-"integration_id": "rollbar"
-"integration_title": "Rollbar"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rollbar"
-"public_title": "Rollbar"
-"short_description": "Send exceptions, errors, and code deployments to your Datadog event stream."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Issue Tracking"
-  - "Category::Notifications"
-  "configuration": "README.md#Setup"
-  "description": "Send exceptions, errors, and code deployments to your Datadog event stream."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Rollbar"
+app_id: rollbar
+app_uuid: 63175032-65a1-4bc8-82da-251a27005f1f
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 137
+    source_type_name: Rollbar
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- issue tracking
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rollbar
+integration_id: rollbar
+integration_title: Rollbar
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rollbar
+public_title: Rollbar
+short_description: Send exceptions, errors, and code deployments to your Datadog event
+  stream.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Issue Tracking
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: Send exceptions, errors, and code deployments to your Datadog event
+    stream.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rollbar
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -103,5 +105,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/rollbar
 [2]: https://app.datadoghq.com/event/explorer
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

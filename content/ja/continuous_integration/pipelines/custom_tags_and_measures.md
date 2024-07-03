@@ -1,15 +1,15 @@
 ---
-title: Adding Custom Tags and Measures to Pipeline Traces
 aliases:
-  - /continuous_integration/pipelines/custom_tags_and_metrics
-  - /continuous_integration/setup_pipelines/custom_tags_and_metrics
+- /ja/continuous_integration/pipelines/custom_tags_and_metrics
+- /ja/continuous_integration/setup_pipelines/custom_tags_and_metrics
 further_reading:
-  - link: /continuous_integration/troubleshooting/
-    tag: Documentation
-    text: Troubleshooting CI Visibility
-  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-    tag: Blog
-    text: Configure pipeline alerts with Datadog CI monitors
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
+  tag: Blog
+  text: Configure pipeline alerts with Datadog CI monitors
+title: Adding Custom Tags and Measures to Pipeline Traces
 ---
 
 {{< site-region region="gov" >}}
@@ -159,11 +159,11 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 [2]: https://github.com/datadog/datadog-ci#standalone-binary-beta
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: /continuous_integration/pipelines/jenkins?tab=usingui#setting-custom-tags-for-your-pipelines
-[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux#add-tags-and-measures-to-github-jobs
+[5]: /ja/continuous_integration/pipelines/jenkins?tab=usingui#setting-custom-tags-for-your-pipelines
+[6]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux#add-tags-and-measures-to-github-jobs
 [7]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
 [8]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 [9]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy
-[10]: /continuous_integration/pipelines/explorer
-[11]: /continuous_integration/pipelines/
-[12]: /getting_started/site/
+[10]: /ja/continuous_integration/pipelines/explorer
+[11]: /ja/continuous_integration/pipelines/
+[12]: /ja/getting_started/site/

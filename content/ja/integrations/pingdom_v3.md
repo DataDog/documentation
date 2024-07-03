@@ -1,59 +1,59 @@
 ---
-"app_id": "pingdom-v3"
-"app_uuid": "d7f6a5a2-9614-45f1-9022-2ca1eba7bd5c"
-"assets":
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": pingdom.response_time
-      "metadata_path": metadata.csv
-      "prefix": pingdom.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "615"
-    "source_type_name": Pingdom
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: pingdom-v3
+app_uuid: d7f6a5a2-9614-45f1-9022-2ca1eba7bd5c
+assets:
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: pingdom.response_time
+      metadata_path: metadata.csv
+      prefix: pingdom.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 615
+    source_type_name: Pingdom
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - metrics
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "pingdom_v3"
-"integration_id": "pingdom-v3"
-"integration_title": "Pingdom"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "pingdom_v3"
-"public_title": "Pingdom"
-"short_description": "See Pingdom-collected uptimes, response times, and alerts in Datadog."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: pingdom_v3
+integration_id: pingdom-v3
+integration_title: Pingdom
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: pingdom_v3
+public_title: Pingdom
+short_description: See Pingdom-collected uptimes, response times, and alerts in Datadog.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Metrics"
-  - "Category::Notifications"
-  "configuration": "README.md#Setup"
-  "description": See Pingdom-collected uptimes, response times, and alerts in Datadog.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Troubleshooting"
-  "title": Pingdom
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Metrics
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: See Pingdom-collected uptimes, response times, and alerts in Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Troubleshooting
+  title: Pingdom
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -106,10 +106,9 @@ For the `pingdom.status` check, Pingdom transaction check results correlate to D
 
 Need help? Contact [Datadog support][6].
 
-[1]: https://docs.datadoghq.com/integrations/pingdom/
+[1]: https://docs.datadoghq.com/ja/integrations/pingdom/
 [2]: https://docs.pingdom.com/api/
 [3]: https://my.pingdom.com/
 [4]: https://app.datadoghq.com/account/settings#integrations/pingdom-v3
 [5]: https://github.com/DataDog/integrations-internal-core/blob/main/pingdom/metadata.csv
-[6]: https://docs.datadoghq.com/help
-
+[6]: https://docs.datadoghq.com/ja/help

@@ -1,13 +1,11 @@
 ---
-title: Frustration Signals
-kind: documentation
 aliases:
-- /real_user_monitoring/frustration_signals
+- /ja/real_user_monitoring/frustration_signals
 further_reading:
-- link: "https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/"
+- link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
   tag: Blog
   text: Detect user pain points with Datadog Frustration Signals
-- link: "/real_user_monitoring/platform/dashboards/usage#frustration-signals"
+- link: /real_user_monitoring/platform/dashboards/usage#frustration-signals
   tag: Documentation
   text: Frustration Signals Dashboard
 - link: /real_user_monitoring/explorer
@@ -16,6 +14,8 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: Documentation
   text: Learn about Session Replay
+kind: documentation
+title: Frustration Signals
 ---
 
 ## Overview
@@ -159,12 +159,12 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/list
-[2]: /real_user_monitoring/explorer/
-[3]: /real_user_monitoring/platform/dashboards/usage#frustration-signals
+[2]: /ja/real_user_monitoring/explorer/
+[3]: /ja/real_user_monitoring/platform/dashboards/usage#frustration-signals
 [4]: https://app.datadoghq.com/rum/explorer
-[5]: /dashboards/
-[6]: /monitors/
+[5]: /ja/dashboards/
+[6]: /ja/monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
-[8]: /real_user_monitoring/session_replay/browser/
-[9]: /monitors/types/real_user_monitoring/
+[8]: /ja/real_user_monitoring/session_replay/browser/
+[9]: /ja/monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

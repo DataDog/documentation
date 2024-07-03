@@ -1,13 +1,12 @@
 ---
-title: Ingestion Controls
 aliases:
-    - /tracing/trace_ingestion/control_page
-    - /tracing/trace_ingestion/ingestion_control_page
-    - /account_management/billing/usage_control_apm/
-    - /tracing/app_analytics/
-    - /tracing/guide/ingestion_control_page/
-    - /tracing/trace_ingestion/ingestion_controls
-description: "Learn how to control Ingestion rates with APM."
+- /ja/tracing/trace_ingestion/control_page
+- /ja/tracing/trace_ingestion/ingestion_control_page
+- /ja/account_management/billing/usage_control_apm/
+- /ja/tracing/app_analytics/
+- /ja/tracing/guide/ingestion_control_page/
+- /ja/tracing/trace_ingestion/ingestion_controls
+description: Learn how to control Ingestion rates with APM.
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
   tag: Documentation
@@ -15,6 +14,7 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentation
   text: Usage Metrics
+title: Ingestion Controls
 ---
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="取り込みサンプリングルール" >}}
@@ -147,17 +147,17 @@ Traffic Breakdown の列は、サービスを起点とするすべてのトレ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/metrics/metrics_namespace/
+[1]: /ja/tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
 [3]: https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler
-[4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
-[6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
-[7]: /tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
-[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
-[9]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
-[10]: /tracing/trace_pipeline/metrics
-[11]: /tracing/trace_pipeline/ingestion_mechanisms/
+[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
+[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[9]: /ja/tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
+[10]: /ja/tracing/trace_pipeline/metrics
+[11]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /agent/remote_config/#enabling-remote-configuration
+[14]: /ja/agent/remote_config/#enabling-remote-configuration

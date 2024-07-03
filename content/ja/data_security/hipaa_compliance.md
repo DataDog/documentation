@@ -1,13 +1,13 @@
 ---
-title: HIPAA Compliance
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/hipaa-compliant-log-management/"
+- link: https://www.datadoghq.com/blog/hipaa-compliant-log-management/
   tag: Blog
   text: HIPAA-compliant observability and security for health information systems
 - link: data_security/logs
   tag: Documentation
   text: Data Security for Log Management
+title: HIPAA Compliance
 ---
 
 ## 概要
@@ -24,4 +24,4 @@ Organizations use cloud-based solutions to manage patient data, which requires a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/#share-views
+[1]: /ja/logs/explorer/#share-views

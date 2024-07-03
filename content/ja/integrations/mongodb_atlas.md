@@ -1,71 +1,71 @@
 ---
-"app_id": "mongodb-atlas"
-"app_uuid": "d7f734da-a1f7-4e3f-a590-ea154018a8d8"
-"assets":
-  "dashboards":
-    "MongoDB-Atlas-Overview": assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": mongodb.atlas.connections.current
-      "metadata_path": metadata.csv
-      "prefix": mongodb.atlas.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "230"
-    "source_type_name": MongoDB Atlas
-  "monitors":
-    "[MongoDB Atlas] CPU usage is higher than average on host: {{host.name}}": assets/monitors/high_cpu.json
-    "[MongoDB Atlas] Efficiency of queries is degrading": assets/monitors/query_efficiency.json
-    "[MongoDB Atlas] Memory usage is higher than average on host: {{host.name}}": assets/monitors/memory.json
-    "[MongoDB Atlas] Read Latency is higher than average for host: {{host.name}}": assets/monitors/read_latency.json
-    "[MongoDB Atlas] Write Latency is higher than average for host: {{host.name}}": assets/monitors/write_latency.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: mongodb-atlas
+app_uuid: d7f734da-a1f7-4e3f-a590-ea154018a8d8
+assets:
+  dashboards:
+    MongoDB-Atlas-Overview: assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: mongodb.atlas.connections.current
+      metadata_path: metadata.csv
+      prefix: mongodb.atlas.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 230
+    source_type_name: MongoDB Atlas
+  monitors:
+    '[MongoDB Atlas] CPU usage is higher than average on host: {{host.name}}': assets/monitors/high_cpu.json
+    '[MongoDB Atlas] Efficiency of queries is degrading': assets/monitors/query_efficiency.json
+    '[MongoDB Atlas] Memory usage is higher than average on host: {{host.name}}': assets/monitors/memory.json
+    '[MongoDB Atlas] Read Latency is higher than average for host: {{host.name}}': assets/monitors/read_latency.json
+    '[MongoDB Atlas] Write Latency is higher than average for host: {{host.name}}': assets/monitors/write_latency.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mongodb_atlas"
-"integration_id": "mongodb-atlas"
-"integration_title": "MongoDB Atlas"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mongodb_atlas"
-"public_title": "MongoDB Atlas"
-"short_description": "MongoDB Atlas"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: mongodb_atlas
+integration_id: mongodb-atlas
+integration_title: MongoDB Atlas
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: mongodb_atlas
+public_title: MongoDB Atlas
+short_description: MongoDB Atlas
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Metrics"
-  "configuration": "README.md#Setup"
-  "description": MongoDB Atlas
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/monitor-atlas-performance-metrics-with-datadog/"
-  - "resource_type": その他
-    "url": "https://www.mongodb.com/products/platform/atlas-for-government"
-  "support": "README.md#Support"
-  "title": MongoDB Atlas
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Metrics
+  configuration: README.md#Setup
+  description: MongoDB Atlas
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-atlas-performance-metrics-with-datadog/
+  - resource_type: その他
+    url: https://www.mongodb.com/products/platform/atlas-for-government
+  support: README.md#Support
+  title: MongoDB Atlas
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -120,7 +120,6 @@ MongoDB Atlas インテグレーションには、サービスのチェック機
 [2]: https://docs.atlas.mongodb.com/tutorial/monitoring-integrations/#procedure
 [3]: https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/metadata.csv
 [4]: https://www.mongodb.com/docs/atlas/configure-alerts/#std-label-notification-options
-[5]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog/monitor-atlas-performance-metrics-with-datadog/
 [7]: https://www.mongodb.com/products/platform/atlas-for-government
-

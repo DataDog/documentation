@@ -1,12 +1,12 @@
 ---
-title: Discovering Endpoints from APM
-is_beta: true
+aliases:
+- /ja/tracing/api_catalog/endpoint_discovery/
 further_reading:
 - link: /tracing/api_catalog/
   tag: Documentation
   text: Datadog API Catalog
-aliases:
-    - /tracing/api_catalog/endpoint_discovery/
+is_beta: true
+title: Discovering Endpoints from APM
 ---
 
 ## 概要
@@ -46,4 +46,4 @@ This leads to the endpoint displaying in the API Catalog:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[8]: /api/latest/api-management
+[8]: /ja/api/latest/api-management

@@ -1,5 +1,4 @@
 ---
-title: Example Natural Language Queries
 disable_toc: false
 further_reading:
 - link: bits_ai/
@@ -11,6 +10,7 @@ further_reading:
 - link: bits_ai/managing_incidents/"
   tag: Documentation
   text: Managing Incidents
+title: Example Natural Language Queries
 ---
 
 ## 概要

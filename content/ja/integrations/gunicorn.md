@@ -1,67 +1,67 @@
 ---
-"app_id": "gunicorn"
-"app_uuid": "49687997-bbf2-45db-9b4f-223cf7c492ed"
-"assets":
-  "dashboards":
-    "gunicorn": "assets/dashboards/gunicorn_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "gunicorn.workers"
-      "metadata_path": "metadata.csv"
-      "prefix": "gunicorn."
-    "process_signatures":
-    - "gunicorn: master"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "60"
-    "source_type_name": "Gunicorn"
-  "saved_views":
-    "4xx_errors": "assets/saved_views/4xx_errors.json"
-    "5xx_errors": "assets/saved_views/5xx_errors.json"
-    "bot_errors": "assets/saved_views/bot_errors.json"
-    "gunicorn_processes": "assets/saved_views/gunicorn_processes.json"
-    "status_code_overview": "assets/saved_views/status_code_overview.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "gunicorn"
-"integration_id": "gunicorn"
-"integration_title": "Gunicorn"
-"integration_version": "2.7.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "gunicorn"
-"public_title": "Gunicorn"
-"short_description": "リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。"
-"supported_os":
-- "linux"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Gunicorn"
+app_id: gunicorn
+app_uuid: 49687997-bbf2-45db-9b4f-223cf7c492ed
+assets:
+  dashboards:
+    gunicorn: assets/dashboards/gunicorn_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: gunicorn.workers
+      metadata_path: metadata.csv
+      prefix: gunicorn.
+    process_signatures:
+    - 'gunicorn: master'
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 60
+    source_type_name: Gunicorn
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    gunicorn_processes: assets/saved_views/gunicorn_processes.json
+    status_code_overview: assets/saved_views/status_code_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: gunicorn
+integration_id: gunicorn
+integration_title: Gunicorn
+integration_version: 2.7.0
+is_public: true
+manifest_version: 2.0.0
+name: gunicorn
+public_title: Gunicorn
+short_description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
+supported_os:
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gunicorn
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -225,15 +225,14 @@ ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/gunicorn/images/gunicorn-dash.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://pypi.python.org/pypi/setproctitle
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/datadog_checks/gunicorn/data/conf.yaml.example
 [6]: https://docs.gunicorn.org/en/stable/settings.html#statsd-host
-[7]: https://docs.datadoghq.com/guides/dogstatsd/
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/guides/dogstatsd/
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.gunicorn.org/en/stable/settings.html#accesslog
 [10]: https://docs.gunicorn.org/en/stable/settings.html#errorlog
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/metadata.csv
 [13]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/assets/service_checks.json
 [14]: https://www.datadoghq.com/blog/monitor-gunicorn-performance
-

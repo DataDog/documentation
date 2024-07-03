@@ -1,34 +1,34 @@
 ---
-"aliases":
-- "/integrations/awsbeanstalk/"
-- "/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd/"
-"categories":
-- "aws"
-- "cloud"
-- "configuration & deployment"
-- "log collection"
-- "network"
-- "provisioning"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key AWS Elastic Beanstalk metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk"
-  "tag": "ブログ"
-  "text": "AWS Elastic Beanstalk への Datadog のデプロイ"
-"git_integration_title": "amazon_elasticbeanstalk"
-"has_logo": true
-"integration_id": ""
-"integration_title": "AWS Elastic Beanstalk"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_elasticbeanstalk"
-"public_title": "Datadog-AWS Elastic Beanstalk Integration"
-"short_description": "Track key AWS Elastic Beanstalk metrics."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsbeanstalk/
+- /ja/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd/
+categories:
+- aws
+- cloud
+- configuration & deployment
+- log collection
+- network
+- provisioning
+custom_kind: インテグレーション
+dependencies: []
+description: Track key AWS Elastic Beanstalk metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk
+  tag: ブログ
+  text: AWS Elastic Beanstalk への Datadog のデプロイ
+git_integration_title: amazon_elasticbeanstalk
+has_logo: true
+integration_id: ''
+integration_title: AWS Elastic Beanstalk
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_elasticbeanstalk
+public_title: Datadog-AWS Elastic Beanstalk Integration
+short_description: Track key AWS Elastic Beanstalk metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -96,12 +96,12 @@ When the application isn't containerized and the Datadog Agent is configured wit
 
 [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
-[3]: https://docs.datadoghq.com/config/99datadog.config
+[3]: https://docs.datadoghq.com/ja/config/99datadog.config
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
-[8]: https://docs.datadoghq.com/tracing/setup/
+[8]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 
 {{% tab "No containers (Windows)" %}}
@@ -123,12 +123,12 @@ When the application isn't containerized and the Datadog Agent is configured wit
 
 [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
-[3]: https://docs.datadoghq.com/config/99datadog-windows.config
+[3]: https://docs.datadoghq.com/ja/config/99datadog-windows.config
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
-[8]: https://docs.datadoghq.com/tracing/setup/
+[8]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 
 {{% tab "Single container" %}}
@@ -217,7 +217,7 @@ func main() {
 [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
 [2]: https://aws.amazon.com/secrets-manager/
 [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
-[4]: https://docs.datadoghq.com/config/99datadog.config
+[4]: https://docs.datadoghq.com/ja/config/99datadog.config
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
@@ -338,7 +338,7 @@ See [DogStatsD and Docker][5] for additional information.
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
 [3]: https://gcr.io/datadoghq/agent
 [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
-[5]: https://docs.datadoghq.com/integrations/faq/dogstatsd-and-docker/
+[5]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -410,9 +410,8 @@ Need help? Contact [Datadog support][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
 [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console
-[4]: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
-[5]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
+[5]: https://docs.datadoghq.com/ja/help/

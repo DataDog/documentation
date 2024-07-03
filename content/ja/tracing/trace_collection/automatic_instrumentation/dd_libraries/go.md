@@ -1,26 +1,26 @@
 ---
-title: Tracing Go Applications
 aliases:
-- /tracing/go/
-- /tracing/languages/go
-- /agent/apm/go/
-- /tracing/setup/go
-- /tracing/setup_overview/go
-- /tracing/setup_overview/setup/go
-- /tracing/trace_collection/dd_libraries/go
+- /ja/tracing/go/
+- /ja/tracing/languages/go
+- /ja/agent/apm/go/
+- /ja/tracing/setup/go
+- /ja/tracing/setup_overview/go
+- /ja/tracing/setup_overview/setup/go
+- /ja/tracing/trace_collection/dd_libraries/go
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-go/tree/v1"
+- link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: ソースコード
   text: Source code
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: 外部サイト
   text: Package page
 - link: /tracing/glossary/
   tag: Documentation
   text: Explore your services, resources and traces
+title: Tracing Go Applications
+type: multi-code-lang
 ---
 
 ## 互換性要件
@@ -45,8 +45,8 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/go
+[1]: /ja/tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
-[3]: /tracing/trace_collection/library_config/go/
+[3]: /ja/tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[5]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

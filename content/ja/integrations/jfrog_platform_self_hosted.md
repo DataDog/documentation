@@ -1,89 +1,90 @@
 ---
-"app_id": "jfrog-platform"
-"app_uuid": "b2748652-b976-461c-91dd-5abd4467f361"
-"assets":
-  "dashboards":
-    "Artifactory Metrics": assets/dashboards/jfrog_artifactory_metrics_(self-hosted).json
-    "Jfrog Artifactory Dashboard": assets/dashboards/jfrog_artifactory_logs_(self-hosted).json
-    "Xray Logs": assets/dashboards/jfrog_xray_logs_(self-hosted).json
-    "Xray Metrics": assets/dashboards/jfrog_xray_metrics_(self-hosted).json
-    "Xray Violations": assets/dashboards/jfrog_xray_violations_(self-hosted).json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": jfrog.artifactory.app_disk_free_bytes
-      "metadata_path": metadata.csv
-      "prefix": jfrog.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10121"
-    "source_type_name": JFrog Platform
-"author":
-  "homepage": "https://github.com/jfrog/log-analytics-datadog"
-  "name": JFrog
-  "sales_email": partners@jfrog.com
-  "support_email": support@jfrog.com
-"categories":
+app_id: jfrog-platform
+app_uuid: b2748652-b976-461c-91dd-5abd4467f361
+assets:
+  dashboards:
+    Artifactory Metrics: assets/dashboards/jfrog_artifactory_metrics_(self-hosted).json
+    Jfrog Artifactory Dashboard: assets/dashboards/jfrog_artifactory_logs_(self-hosted).json
+    Xray Logs: assets/dashboards/jfrog_xray_logs_(self-hosted).json
+    Xray Metrics: assets/dashboards/jfrog_xray_metrics_(self-hosted).json
+    Xray Violations: assets/dashboards/jfrog_xray_violations_(self-hosted).json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: jfrog.artifactory.app_disk_free_bytes
+      metadata_path: metadata.csv
+      prefix: jfrog.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10121
+    source_type_name: JFrog Platform
+author:
+  homepage: https://github.com/jfrog/log-analytics-datadog
+  name: JFrog
+  sales_email: partners@jfrog.com
+  support_email: support@jfrog.com
+categories:
 - containers
 - log collection
 - metrics
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform_self_hosted/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "jfrog_platform_self_hosted"
-"integration_id": "jfrog-platform"
-"integration_title": "JFrog Platform (Self-hosted)"
-"integration_version": "1.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "jfrog_platform_self_hosted"
-"public_title": "JFrog Platform (Self-hosted)"
-"short_description": "View and analyze JFrog Artifactory and Xray Logs, Violations and Metrics"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform_self_hosted/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: jfrog_platform_self_hosted
+integration_id: jfrog-platform
+integration_title: JFrog Platform (Self-hosted)
+integration_version: 1.3.0
+is_public: true
+manifest_version: 2.0.0
+name: jfrog_platform_self_hosted
+public_title: JFrog Platform (Self-hosted)
+short_description: View and analyze JFrog Artifactory and Xray Logs, Violations and
+  Metrics
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Log Collection"
-  - "Category::Metrics"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": View and analyze JFrog Artifactory and Xray Logs, Violations and Metrics
-  "media":
-  - "caption": JFrog Artifactory Logs dashboard
-    "image_url": images/jfrog_artifactory_logs.png
-    "media_type": image
-  - "caption": JFrog Artifactory Metrics dashboard
-    "image_url": images/jfrog_artifactory_metrics.png
-    "media_type": image
-  - "caption": JFrog Xray Logs dashboard
-    "image_url": images/jfrog_xray_logs.png
-    "media_type": image
-  - "caption": JFrog Xray Violations dashboard
-    "image_url": images/jfrog_xray_violations.png
-    "media_type": image
-  - "caption": JFrog Xray Metrics dashboard
-    "image_url": images/jfrog_xray_metrics.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": JFrog Platform (Self-hosted)
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Metrics
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: View and analyze JFrog Artifactory and Xray Logs, Violations and Metrics
+  media:
+  - caption: JFrog Artifactory Logs dashboard
+    image_url: images/jfrog_artifactory_logs.png
+    media_type: image
+  - caption: JFrog Artifactory Metrics dashboard
+    image_url: images/jfrog_artifactory_metrics.png
+    media_type: image
+  - caption: JFrog Xray Logs dashboard
+    image_url: images/jfrog_xray_logs.png
+    media_type: image
+  - caption: JFrog Xray Violations dashboard
+    image_url: images/jfrog_xray_violations.png
+    media_type: image
+  - caption: JFrog Xray Metrics dashboard
+    image_url: images/jfrog_xray_metrics.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JFrog Platform (Self-hosted)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -157,8 +158,8 @@ A: At launch, the SaaS version of the integration will only stream the artifacto
 
 
 [1]: https://jfrog.com/
-[2]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source
-[3]: https://docs.datadoghq.com/logs/explorer/facets/
+[2]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/?tab=source
+[3]: https://docs.datadoghq.com/ja/logs/explorer/facets/
 [4]: https://github.com/jfrog/log-analytics-datadog
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://github.com/jfrog/log-analytics-datadog#os--virtual-machine
@@ -167,4 +168,3 @@ A: At launch, the SaaS version of the integration will only stream the artifacto
 [9]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/metadata.csv
 [10]: support@jfrog.com
 [11]: https://support.jfrog.com/s/login/?language=en_US&ec=302&startURL=%2Fs%2F
-

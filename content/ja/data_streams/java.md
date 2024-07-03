@@ -1,12 +1,12 @@
 ---
-title: Setup Data Streams Monitoring for Java
 further_reading:
-    - link: /integrations/kafka/
-      tag: Documentation
-      text: Kafka Integration
-    - link: /tracing/service_catalog/
-      tag: Documentation
-      text: Service Catalog
+- link: /integrations/kafka/
+  tag: Documentation
+  text: Kafka Integration
+- link: /tracing/service_catalog/
+  tag: Documentation
+  text: Service Catalog
+title: Setup Data Streams Monitoring for Java
 ---
 
 {{< site-region region="ap1" >}}
@@ -55,8 +55,8 @@ Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: /tracing/trace_collection/dd_libraries/java/
+[1]: /ja/agent
+[2]: /ja/tracing/trace_collection/dd_libraries/java/
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[5]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration

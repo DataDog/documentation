@@ -1,48 +1,50 @@
 ---
-"app_id": "pingdom"
-"app_uuid": "bde11e46-65f6-4cee-b011-f0944c5fb5bb"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": pingdom.response_time
-      "metadata_path": metadata.csv
-      "prefix": pingdom.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "8"
-    "source_type_name": Pingdom Legacy API (V2.1)
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories": []
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "pingdom_legacy"
-"integration_id": "pingdom"
-"integration_title": "Pingdom Legacy API (V2.1)"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "pingdom_legacy"
-"public_title": "Pingdom Legacy API (V2.1)"
-"short_description": "Manage and migrate existing configuration of legacy Pingdom monitoring endpoints."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags": []
-  "configuration": "README.md#Setup"
-  "description": Manage and migrate existing configuration of legacy Pingdom monitoring endpoints.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Pingdom Legacy API (V2.1)
+app_id: pingdom
+app_uuid: bde11e46-65f6-4cee-b011-f0944c5fb5bb
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: pingdom.response_time
+      metadata_path: metadata.csv
+      prefix: pingdom.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 8
+    source_type_name: Pingdom Legacy API (V2.1)
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories: []
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: pingdom_legacy
+integration_id: pingdom
+integration_title: Pingdom Legacy API (V2.1)
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: pingdom_legacy
+public_title: Pingdom Legacy API (V2.1)
+short_description: Manage and migrate existing configuration of legacy Pingdom monitoring
+  endpoints.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags: []
+  configuration: README.md#Setup
+  description: Manage and migrate existing configuration of legacy Pingdom monitoring
+    endpoints.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pingdom Legacy API (V2.1)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -105,4 +107,3 @@ Add the email address of your Pingdom account owner in the **(Optional) Account 
 
 [1]: https://app.datadoghq.com/monitors/create/integration
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/pingdom/pingdom_metadata.csv
-

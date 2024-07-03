@@ -1,9 +1,9 @@
 ---
-title: OAuth Apps
 further_reading:
 - link: /account_management/org_settings/
   tag: Documentation
   text: Learn more about organization settings
+title: OAuth Apps
 ---
 ## 概要
 
@@ -45,7 +45,7 @@ OAuth Apps の管理ページからアプリケーションを無効化する方
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/
-[2]: /account_management/rbac/permissions/#general-permissions
-[3]: /account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /developers/ui_extensions/
-[5]: /developers/ui_extensions/#oauth-api-access
+[2]: /ja/account_management/rbac/permissions/#general-permissions
+[3]: /ja/account_management/rbac/?tab=datadogapplication#custom-role
+[4]: /ja/developers/ui_extensions/
+[5]: /ja/developers/ui_extensions/#oauth-api-access

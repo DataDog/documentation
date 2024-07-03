@@ -1,10 +1,10 @@
 ---
-title: OAuth2 in Datadog
 description: Learn about how Datadog uses OAuth 2.0.
 further_reading:
 - link: /developers/authorization/oauth2_endpoints
   tag: Documentation
   text: Learn how to use the OAuth 2.0 authorization endpoints
+title: OAuth2 in Datadog
 ---
 
 ## 概要
@@ -98,19 +98,19 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://datatracker.ietf.org/doc/html/rfc6749
-[2]: /api/latest/scopes/
-[3]: /developers/datadog_apps/#oauth-api-access
+[2]: /ja/api/latest/scopes/
+[3]: /ja/developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /developers/integrations/oauth_for_integrations
-[6]: /developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
-[7]: /developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
+[5]: /ja/developers/integrations/oauth_for_integrations
+[6]: /ja/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
+[7]: /ja/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1
-[9]: /developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#obtain-an-authorization-code
-[10]: /developers/authorization/oauth2_endpoints/?tab=tokenendpoints#exchange-authorization-code-for-access-token
+[9]: /ja/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#obtain-an-authorization-code
+[10]: /ja/developers/authorization/oauth2_endpoints/?tab=tokenendpoints#exchange-authorization-code-for-access-token
 [11]: https://datatracker.ietf.org/doc/html/rfc7636
 [12]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.1
 [13]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.2
 [14]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.3
 [15]: https://datatracker.ietf.org/doc/html/rfc6234#section-4.1
 [16]: https://app.datadoghq.com/apps
-[17]: /getting_started/site/
+[17]: /ja/getting_started/site/

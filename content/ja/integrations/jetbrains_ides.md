@@ -1,50 +1,50 @@
 ---
-"app_id": "jetbrains-ides"
-"app_uuid": "f27e2abf-7827-46f8-bddb-266a0c1acd9f"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: jetbrains-ides
+app_uuid: f27e2abf-7827-46f8-bddb-266a0c1acd9f
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "jetbrains_ides"
-"integration_id": "jetbrains-ides"
-"integration_title": "JetBrains IDEs"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "jetbrains_ides"
-"public_title": "JetBrains IDEs"
-"short_description": "Datadog Plugin for IntelliJ IDEA, GoLand, PhpStorm, and PyCharm"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: jetbrains_ides
+integration_id: jetbrains-ides
+integration_title: JetBrains IDEs
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: jetbrains_ides
+public_title: JetBrains IDEs
+short_description: Datadog Plugin for IntelliJ IDEA, GoLand, PhpStorm, and PyCharm
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Developer Tools"
-  "configuration": "README.md#Setup"
-  "description": Datadog Plugin for IntelliJ IDEA, GoLand, PhpStorm, and PyCharm
-  "media":
-  - "caption": Error Tracking insights in IntelliJ IDEA
-    "image_url": images/overview.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": その他
-    "url": "https://plugins.jetbrains.com/plugin/19495-datadog"
-  "support": "README.md#Support"
-  "title": JetBrains IDEs
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Developer Tools
+  configuration: README.md#Setup
+  description: Datadog Plugin for IntelliJ IDEA, GoLand, PhpStorm, and PyCharm
+  media:
+  - caption: Error Tracking insights in IntelliJ IDEA
+    image_url: images/overview.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://plugins.jetbrains.com/plugin/19495-datadog
+  support: README.md#Support
+  title: JetBrains IDEs
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -94,9 +94,8 @@ To use the **View in IDE** feature, the plugin requires the [JetBrains Toolbox][
 
 Need help? Contact [Datadog support][4] or open an [issue on GitHub][5].
 
-[1]: https://docs.datadoghq.com/developers/ide_integrations/idea/
+[1]: https://docs.datadoghq.com/ja/developers/ide_integrations/idea/
 [2]: https://www.jetbrains.com/toolbox-app/
 [3]: https://plugins.jetbrains.com/plugin/19495-datadog
-[4]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/help/
 [5]: https://github.com/DataDog/datadog-for-intellij-platform
-

@@ -1,26 +1,26 @@
 ---
-"categories":
-- "automation"
-- "configuration & deployment"
-- "log collection"
-- "orchestration"
-- "provisioning"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。"
-"doc_link": "https://docs.datadoghq.com/integrations/ansible/"
-"draft": false
-"git_integration_title": "ansible"
-"has_logo": true
-"integration_id": "ansible"
-"integration_title": "Ansible"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "ansible"
-"public_title": "Datadog-Ansible Integration"
-"short_description": "Track failed tasks and see playbook runs in your event stream."
-"version": "1.0"
+categories:
+- automation
+- configuration & deployment
+- log collection
+- orchestration
+- provisioning
+custom_kind: インテグレーション
+dependencies: []
+description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
+doc_link: https://docs.datadoghq.com/integrations/ansible/
+draft: false
+git_integration_title: ansible
+has_logo: true
+integration_id: ansible
+integration_title: Ansible
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: ansible
+public_title: Datadog-Ansible Integration
+short_description: Track failed tasks and see playbook runs in your event stream.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -85,5 +85,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://app.datadoghq.com/account/settings/agent/latest?platform=ansible
 [4]: https://github.com/DataDog/ansible-datadog#example-playbooks
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/ansible/ansible_metadata.csv
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

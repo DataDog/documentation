@@ -1,6 +1,6 @@
 ---
-title: Getting Started with the DevSecOps Bundles
 kind: documentation
+title: Getting Started with the DevSecOps Bundles
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
@@ -33,16 +33,16 @@ Learn more about the features included with APM DevSecOps:
 - [Universal Service Monitoring][2]: Gain visibility into your service health metrics
 - [Software Composition Analysis][3]: Detect vulnerabilities in your service's open source dependencies
 
-[1]: /tracing/
-[2]: /universal_service_monitoring/
-[3]: /security/application_security/vulnerability_management/
-[4]: /security/application_security
-[5]: /agent/
-[6]: /tracing/trace_collection/
-[7]: /universal_service_monitoring/setup/
-[8]: /security/application_security/enabling/
-[9]: /tracing/metrics/
-[10]: /getting_started/application_security/vulnerability_management/
+[1]: /ja/tracing/
+[2]: /ja/universal_service_monitoring/
+[3]: /ja/security/application_security/vulnerability_management/
+[4]: /ja/security/application_security
+[5]: /ja/agent/
+[6]: /ja/tracing/trace_collection/
+[7]: /ja/universal_service_monitoring/setup/
+[8]: /ja/security/application_security/enabling/
+[9]: /ja/tracing/metrics/
+[10]: /ja/getting_started/application_security/vulnerability_management/
 
 {{% /tab %}}
 {{% tab "APM DevSecOps Pro" %}}
@@ -70,17 +70,17 @@ Learn more about the features included with APM DevSecOps Pro:
 - [Data Streams Monitoring][3]: Understand and manage your pipelines at scale
 - [Software Composition Analysis][4]: Detect vulnerabilities in your service's open source dependencies
 
-[1]: /tracing/
-[2]: /universal_service_monitoring/
-[3]: /data_streams/
-[4]: /security/application_security/vulnerability_management/
-[5]: /security/application_security
-[6]: /agent/
-[7]: /tracing/trace_collection/
-[8]: /universal_service_monitoring/setup/
-[9]: /data_streams/#setup
-[10]: /getting_started/application_security/vulnerability_management/
-[11]: /tracing/metrics/
+[1]: /ja/tracing/
+[2]: /ja/universal_service_monitoring/
+[3]: /ja/data_streams/
+[4]: /ja/security/application_security/vulnerability_management/
+[5]: /ja/security/application_security
+[6]: /ja/agent/
+[7]: /ja/tracing/trace_collection/
+[8]: /ja/universal_service_monitoring/setup/
+[9]: /ja/data_streams/#setup
+[10]: /ja/getting_started/application_security/vulnerability_management/
+[11]: /ja/tracing/metrics/
 
 {{% /tab %}}
 {{% tab "APM DevSecOps Enterprise" %}}
@@ -110,20 +110,20 @@ Learn more about the features included with APM DevSecOps Enterprise:
 - [Continuous Profiler][4]: Optimize code performance in production
 - [Software Composition Analysis][5]: Detect vulnerabilities in your service's open source dependencies
 
-[1]: /tracing/
-[2]: /universal_service_monitoring/
-[3]: /data_streams/
-[4]: /profiler/
-[5]: /security/application_security/vulnerability_management/
-[6]: /security/application_security
-[7]: /agent/
-[8]: /tracing/trace_collection/
-[9]: /universal_service_monitoring/setup/
-[10]: /data_streams/#setup
-[11]: /profiler/enabling
-[12]: /security/application_security/enabling/
-[13]: /tracing/metrics/
-[14]: /getting_started/application_security/vulnerability_management/
+[1]: /ja/tracing/
+[2]: /ja/universal_service_monitoring/
+[3]: /ja/data_streams/
+[4]: /ja/profiler/
+[5]: /ja/security/application_security/vulnerability_management/
+[6]: /ja/security/application_security
+[7]: /ja/agent/
+[8]: /ja/tracing/trace_collection/
+[9]: /ja/universal_service_monitoring/setup/
+[10]: /ja/data_streams/#setup
+[11]: /ja/profiler/enabling
+[12]: /ja/security/application_security/enabling/
+[13]: /ja/tracing/metrics/
+[14]: /ja/getting_started/application_security/vulnerability_management/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -162,17 +162,17 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 - [Serverless][2]: Gain full visibility into all of the managed services that power your serverless applications
 - [Cloud Security Management][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
-[1]: /containers/
-[2]: /serverless/
-[3]: /security/cloud_security_management/setup/
-[4]: /integrations/
-[5]: /agent/
-[6]: /security/cloud_security_management/setup/csm_pro
-[7]: /infrastructure/list/
-[8]: /metrics/
-[9]: /infrastructure/hostmap/
-[10]: /infrastructure/containers/
-[11]: /security/cloud_security_management/
+[1]: /ja/containers/
+[2]: /ja/serverless/
+[3]: /ja/security/cloud_security_management/setup/
+[4]: /ja/integrations/
+[5]: /ja/agent/
+[6]: /ja/security/cloud_security_management/setup/csm_pro
+[7]: /ja/infrastructure/list/
+[8]: /ja/metrics/
+[9]: /ja/infrastructure/hostmap/
+[10]: /ja/infrastructure/containers/
+[11]: /ja/security/cloud_security_management/
 
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
@@ -206,28 +206,28 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 - [Watchdog][15]: Automatically detect potential application and infrastructure issues
 - [Cloud Security Management][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
-[1]: /containers/
-[2]: /serverless/
-[3]: /infrastructure/process/
-[4]: /security/cloud_security_management/setup/
-[5]: /integrations/
-[6]: /agent/
-[7]: /infrastructure/process/?tab=linuxwindows#installation
-[8]: /security/cloud_security_management/setup/csm_enterprise
-[9]: /infrastructure/list/
-[10]: /metrics/
-[11]: /dashboards/correlations/
-[12]: /infrastructure/hostmap/
-[13]: /infrastructure/containers/
-[14]: /infrastructure/process/
-[15]: /watchdog/
-[16]: /security/cloud_security_management/
+[1]: /ja/containers/
+[2]: /ja/serverless/
+[3]: /ja/infrastructure/process/
+[4]: /ja/security/cloud_security_management/setup/
+[5]: /ja/integrations/
+[6]: /ja/agent/
+[7]: /ja/infrastructure/process/?tab=linuxwindows#installation
+[8]: /ja/security/cloud_security_management/setup/csm_enterprise
+[9]: /ja/infrastructure/list/
+[10]: /ja/metrics/
+[11]: /ja/dashboards/correlations/
+[12]: /ja/infrastructure/hostmap/
+[13]: /ja/infrastructure/containers/
+[14]: /ja/infrastructure/process/
+[15]: /ja/watchdog/
+[16]: /ja/security/cloud_security_management/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /security/application_security/vulnerability_management/
-[2]: /security/application_security
-[3]: /security/cloud_security_management/
-[4]: /tracing
-[10]: /security/application_security/software_composition_analysis/
+[1]: /ja/security/application_security/vulnerability_management/
+[2]: /ja/security/application_security
+[3]: /ja/security/cloud_security_management/
+[4]: /ja/tracing
+[10]: /ja/security/application_security/software_composition_analysis/

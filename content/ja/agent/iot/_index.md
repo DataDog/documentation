@@ -1,9 +1,9 @@
 ---
-title: IoT Agent
 further_reading:
-  - link: /getting_started/agent/
-    tag: Documentation
-    text: Getting Started with the Agent
+- link: /getting_started/agent/
+  tag: Documentation
+  text: Getting Started with the Agent
+title: IoT Agent
 ---
 
 ## 概要
@@ -183,13 +183,13 @@ sudo apt-get remove --purge datadog-iot-agent -y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/system
-[2]: /integrations/disk
-[3]: /integrations/network
-[4]: /integrations/systemd
-[5]: /integrations/ntp
-[6]: /developers/dogstatsd
-[7]: /agent/logs/?tab=tailfiles#custom-log-collection
-[8]: /agent/logs/?tab=tcpudp#custom-log-collection
-[9]: /agent/logs/?tab=journald#custom-log-collection
-[10]: /agent/basic_agent_usage/#cli
+[1]: /ja/integrations/system
+[2]: /ja/integrations/disk
+[3]: /ja/integrations/network
+[4]: /ja/integrations/systemd
+[5]: /ja/integrations/ntp
+[6]: /ja/developers/dogstatsd
+[7]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[8]: /ja/agent/logs/?tab=tcpudp#custom-log-collection
+[9]: /ja/agent/logs/?tab=journald#custom-log-collection
+[10]: /ja/agent/basic_agent_usage/#cli

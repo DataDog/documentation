@@ -1,129 +1,128 @@
 ---
-title: Define Services And Track UI Components In Your Browser Application
-kind: guide
 disable_toc: false
 further_reading:
 - link: /real_user_monitoring/browser/
   tag: Documentation
   text: RUM Browser Monitoring
+title: Define Services And Track UI Components In Your Browser Application
 ---
 
-## Overview
+## 概要
 
-RUM captures events from your browser applications and lets you explore them to troubleshoot slow pages and code errors, or to analyze application usage. All captured events are available in [RUM Explorer][1] for querying, dashboarding, and alerting.
+RUM は、ブラウザアプリケーションのすべてのイベントをキャプチャし、これにより遅いページやコードエラーのトラブルシューティング、またはアプリケーションの使用状況を分析するためにそれらを調査することができます。すべてのキャプチャイベントは [RUM エクスプローラー][1]でクエリ、ダッシュボード、アラートを行うことができます。
 
-If your browser application is large, it's likely been built by multiple web development teams. Each team has an area of ownership that they focus on when troubleshooting errors, slowness, or analyzing usage.
+ブラウザ アプリケーションの規模が大きい場合、複数の Web 開発チームによって構築されている可能性があります。各チームは、エラー、速度低下、または使用状況の分析をトラブルシューティングする際に、重点的に取り組むべき領域を持っています。
 
-This guide describes how to define an application in RUM. In addition, it covers common use cases in large applications where web development teams may require visibility into the health and usage of their area of ownership.
+このガイドでは、RUM でアプリケーションを定義する方法について説明します。さらに、Web 開発チームが所有する領域の健全性と使用状況の可視化を必要とするような、大規模なアプリケーションにおける一般的なユースケースについても説明します。
 
-## Create a RUM application
+## RUM アプリケーションの作成
 
-The first step to tracking and analyzing your browser application is to [create a RUM application][2]. A RUM application maps a browser application available at a given domain that renders the experience for what customers would perceive as a website.
+ブラウザアプリケーションを追跡・分析するための最初のステップは、[RUM アプリケーションを作成する][2]ことです。RUM アプリケーションは、顧客が Web サイトとして認識するような体験をレンダリングする、特定のドメインで利用可能なブラウザアプリケーションをマッピングします。
 
-## Track pages in your browser application
+## ブラウザアプリケーション内のページの追跡
 
-Whether your browser application is a single page application or is one that uses server-side rendering, the Browser RUM SDK automatically tracks route changes and creates a view event for every route change.
+ブラウザアプリケーションが単一ページのアプリケーションであっても、サーバーサイドレンダリングを使用するアプリケーションであっても、ブラウザ RUM SDK は自動的にルート変更を追跡し、ルート変更ごとにビューイベントを作成します。
 
-- A view has a **URL** available at `@view.url`, such as `https://www.yourwebsite.com/about`.
-- A view has a **path** available at `@view.url_path`, such as `/about`.
+- ビューには、`https://www.yourwebsite.com/about` のような `@view.url` で利用可能な **URL** があります。
+- ビューには、`/about` のような `@view.url_path` で利用可能な**パス**があります。
 
 If, for example, automatically capturing pageviews by route change does not provide enough visibility, you can specify a different name for your pages. To do this, you can [track views manually][3] and assign them each a name available at `@view.name`, such as "About Us".
 
-## Track timings during the rendering lifecycle of your pages
+## ページのレンダリングライフサイクルにおけるタイミングの追跡
 
-The Browser SDK automatically tracks a set of industry-standard timings, Core Web Vitals, page loading times [and more][4].
+Browser SDK は、業界標準のタイミング、Core Web Vitals、ページの読み込み時間[など][4]を自動的に追跡します。
 
-In addition, you can track the time it takes for a specific item on the page to render, such as an image or a component. You can track more timings by capturing them in code, then pasting the values in your view events. For details on how to do this, see the documentation on [adding your own performance timing][5].
+さらに、イメージやコンポーネントなど、ページ上の特定のアイテムのレンダリングにかかる時間を追跡することができます。コードでキャプチャして、その値をビューイベントに貼り付けることで、さらに多くのタイミングを追跡できます。この方法の詳細については、[独自のパフォーマンスタイミングを追加する][5]のドキュメントを参照してください。
 
-Once timings are captured, they are available like any auto-collected timing. You can use timings to do the following:
+一度キャプチャしたタイミングは、自動収集されたタイミングと同様に利用することができます。タイミングを利用して、以下のようなことが可能です。
 
-- Analyze the distribution of the time across versions of the code in the RUM Explorer
-- Troubleshoot possible high values in the [view waterfall][6]
+- RUM エクスプローラーでコードのバージョン間の時間分布を分析する
+- [ビューウォーターフォール][6]で潜在的な高い値をトラブルシューティングする
 
-## Track components in web pages
+## Web ページ内のコンポーネントを追跡する
 
-If your browser application uses UI components that are present across multiple pages in one application and/or across multiple applications, you can use custom instrumentation to track the usage and rendering time of these components across pages.
+ブラウザアプリケーションで、1 つのアプリケーション内の複数のページや複数のアプリケーションにまたがって存在する UI コンポーネントを使用している場合、カスタムインストルメンテーションを使用して、ページ間のこれらのコンポーネントの使用量とレンダリング時間を追跡することができます。
 
-[Generate a custom action][7] to track the lifecycle of components across pages. Let's imagine the `/myorders` page and the `/search` page both use the search box component below.
+[カスタムアクションを生成][7]して、ページ間のコンポーネントのライフサイクルを追跡することができます。例えば、`/myorders` ページと `/search` ページの両方が、以下の検索ボックスコンポーネントを使用しているとします。
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-autofill.jpg" alt="Generate a custom action to track the lifecycle of components across pages" style="width:30%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-autofill.jpg" alt="ページ間のコンポーネントのライフサイクルを追跡するためのカスタムアクションを生成する" style="width:30%;">}}
 
-You can track the following milestones in the lifecycle of the search component by sending a custom action every time:
+カスタムアクションを毎回送信することで、検索コンポーネントのライフサイクルにおける以下のマイルストーンを追跡することができます。
 
-- `search_component_render`: The search component renders
-- `search_component_input`: The search component gets input from the user keyboard
-- `search_component_suggestions_display`: The search component displays suggestions
+- `search_component_render`: 検索コンポーネントは、レンダリングする
+- `search_component_input`: 検索コンポーネントは、ユーザーのキーボードから入力を取得する
+- `search_component_suggestions_display`: 検索コンポーネントは、候補を表示する
 
-The custom action then automatically carries attributes for:
+そして、このカスタムアクションは、自動的に以下の属性を担います。
 
-- The RUM application it was used in
-- `@view`: The page it was rendered in
-- `@geo`: Geolocation information (if enabled)
-- `@session`: The session identifier of the user
+- 使用された RUM のアプリケーション
+- `@view`: レンダリングされたページ
+- `@geo`: ジオロケーション情報 (有効な場合)
+- `@session`: ユーザーのセッション識別子
 
-With custom instrumentation, the custom action can be assigned attributes for:
+カスタムインスツルメンテーションを使用すると、カスタムアクションに以下の属性を割り当てることができます。
 
-- The team it belongs to
-- The time it took to render
+- 所属するチーム
+- レンダリングに要した時間
 
 ```
 datadogRum.addAction('search_component_render', {
-    'team': 'Team A', // for example, 42.12
-    'time_to_full_render': 16.5, // for example, ['tomato', 'strawberries']
+    'team': 'Team A', // 例: 42.12
+    'time_to_full_render': 16.5, // 例: ['tomato', 'strawberries']
 })
 ```
 
-From the RUM Explorer, you can then analyze:
+次に RUM エクスプローラーから、以下を分析することができます。
 
-- The page where a component is used the most
-- The browser application where a component is used the most
-- The P75 percentile for the time for the component to fully render
+- あるコンポーネントが最も多く使用されたページ
+- コンポーネントが最も多く使用されるブラウザアプリケーション
+- コンポーネントが完全にレンダリングされるまでの時間の P75 パーセンタイル
 
-## Track team ownership
+## チームオーナーシップの追跡
 
-### Teams own a set of pages
+### チームが一連のページを所有する
 
-Imagine a web development team owns a set of pages like the example below.
+ある Web 開発チームが、以下の例のような一連のページを所有しているとします。
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership-2.png" alt="Examples of sets of pages a web development could own" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership-2.png" alt="Web 開発者が所有する一連のページの例" style="width:90%;">}}
 
-Inside your RUM application, create services for each set of pages owned by a team by doing the following:
+RUM アプリケーション内で、以下のようにして、チームが所有するページの各セットにサービスを作成します。
 
-1. Turn on manual view tracking by setting the configuration option `trackViewsManually` to `true`.
-2. For each page of your website, assign a view name and a service following [the instructions for overriding default RUM view names][8].
-   - `"purchase"` service for the pages available at `/checkout`, `/payment`, `/confirmOrder`.
-   - `"catalog"` service for the pages available at `/beds`, `/chairs/123`, `/search`.
-3. [Upload a source map for each service][9] to view unminified stack traces in Error Tracking.
+1. 構成オプション `trackViewsManually` を `true` に設定することで、手動でのビュー追跡をオンにします。
+2. Web サイトの各ページに、[デフォルトの RUM ビュー名をオーバーライドする手順][8]に従って、ビュー名とサービスを割り当てます。
+   - `/checkout`、`/payment`、`/confirmOrder` で利用できるページの `"purchase"` サービス。
+   - `/beds`、`/chairs/123`、`/search` で利用できるページの `"catalog"` サービス。
+3. [各サービスのソースマップをアップロードする][9]と、エラー追跡で最小化されていないスタックトレースを表示することができます。
 
-Get insights into the performance or the adoption of a given team's scope by using the `service` attribute in RUM:
+RUM の `service` 属性を使用して、指定されたチームのスコープのパフォーマンスや採用状況を把握することができます。
 
-1. From the RUM Application Overview page, narrow down all graphs by `service` to get a holistic view for a team's scope
-2. Any query done in the RUM Explorer can use the `service` attribute to filter:
-   - Errors by service
+1. RUM アプリケーションの概要ページから、すべてのグラフを `service` で絞り込み、チームのスコープを全体的に把握することができます。
+2. RUM エクスプローラーで行うすべてのクエリは、`service` 属性を使用して以下をフィルタリングすることができます。
+   - サービス別エラー数 
    - Pageviews by service
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Shopist の Cart ページでユーザー名でグループ分けされたアクションを検索するクエリ" style="width:90%;">}}
 
-### Teams own UI components
+### チームが UI コンポーネントを所有する
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-2.png" alt="Components can be tracked using custom actions" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-2.png" alt="カスタムアクションでコンポーネントを追跡可能" style="width:90%;">}}
 
-Components are tracked using custom actions [mentioned above][10]:
+コンポーネントは、[前述][10]のカスタムアクションを使って追跡されます。
 
-1. Add a team attribute inside the custom action definition.
-2. Track the loading time and other timings during the component's lifecycle as attributes in the custom actions.
+1. カスタムアクションの定義内にチーム属性を追加します。
+2. カスタムアクションの属性として、コンポーネントのライフサイクルにおけるロード時間やその他のタイミングを追跡します。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/browser/setup
-[3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
-[5]: /real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#overview
-[7]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
+[1]: /ja/real_user_monitoring/explorer/
+[2]: /ja/real_user_monitoring/browser/setup
+[3]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[5]: /ja/real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
+[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#overview
+[7]: /ja/real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
+[8]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[9]: /ja/real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
 [10]: #track-components-in-web-pages

@@ -1,10 +1,10 @@
 ---
-title: OpenTelemetry Go Runtime Metrics
 aliases:
-- /opentelemetry/runtime_metrics/go/
+- /ja/opentelemetry/runtime_metrics/go/
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 30
+title: OpenTelemetry Go Runtime Metrics
+type: multi-code-lang
 ---
 
 ## 前提条件
@@ -58,7 +58,7 @@ OpenTelemetry (OTel) Go アプリケーションは[手動でインスツルメ�
 | `runtime.go.gc_stats.pause_quantiles.75p` | GC 休止時間の分布: 75 パーセンタイル。 | N/A |
 | `runtime.go.gc_stats.pause_quantiles.max` | GC 休止時間の分布: 最大値。 | N/A |
 
-[1]: /opentelemetry/otel_metrics
+[1]: /ja/opentelemetry/otel_metrics
 [2]: https://app.datadoghq.com/integrations/go
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime

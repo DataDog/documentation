@@ -1,14 +1,14 @@
 ---
-title: Sending large volumes of metrics
-kind: documentation
-description: 'Optimizing DogStatsD for high throughput'
+description: Optimizing DogStatsD for high throughput
 further_reading:
-    - link: developers/dogstatsd
-      tag: Documentation
-      text: Introduction to DogStatsD
-    - link: developers/libraries
-      tag: Documentation
-      text: Official and Community created API and DogStatsD client libraries
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Introduction to DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Official and Community created API and DogStatsD client libraries
+kind: documentation
+title: Sending large volumes of metrics
 ---
 
 DogStatsD works by sending metrics generated from your application to the [Agent][1] over a transport protocol. This protocol can be UDP (User Datagram Protocol) or [UDS (Unix Domain Socket)][2].
@@ -782,9 +782,9 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /developers/dogstatsd/unix_socket/
-[3]: /developers/dogstatsd/#code
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#sample-rates
-[5]: /developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
+[1]: /ja/agent/
+[2]: /ja/developers/dogstatsd/unix_socket/
+[3]: /ja/developers/dogstatsd/#code
+[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#sample-rates
+[5]: /ja/developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

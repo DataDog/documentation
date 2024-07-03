@@ -1,79 +1,79 @@
 ---
-"app_id": "seagence"
-"app_uuid": "94f4e504-c98c-466f-b934-5e5ee0331944"
-"assets":
-  "dashboards":
-    "seagence_overview": assets/dashboards/seagence_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10360"
-    "source_type_name": Seagence
-  "monitors":
-    "Seagence Defect Detection": assets/monitors/defect_detection_monitor.json
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://www.seagence.com/"
-  "name": Seagence Technologies
-  "sales_email": sales@seagence.com
-  "support_email": support@seagence.com
-"categories":
+app_id: seagence
+app_uuid: 94f4e504-c98c-466f-b934-5e5ee0331944
+assets:
+  dashboards:
+    seagence_overview: assets/dashboards/seagence_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10360
+    source_type_name: Seagence
+  monitors:
+    Seagence Defect Detection: assets/monitors/defect_detection_monitor.json
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://www.seagence.com/
+  name: Seagence Technologies
+  sales_email: sales@seagence.com
+  support_email: support@seagence.com
+categories:
 - alerting
 - automation
 - event management
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/seagence/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "seagence"
-"integration_id": "seagence"
-"integration_title": "Seagence"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "seagence"
-"public_title": "Seagence"
-"short_description": "Realtime Defect Detection & Resolution tool that eliminates debugging."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/seagence/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: seagence
+integration_id: seagence
+integration_title: Seagence
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: seagence
+public_title: Seagence
+short_description: Realtime Defect Detection & Resolution tool that eliminates debugging.
+supported_os:
 - any
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Any"
-  - "Submitted Data Type::Events"
-  - "Category::Alerting"
-  - "Category::Automation"
-  - "Category::Event Management"
-  - "Category::Developer Tools"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Realtime Defect Detection & Resolution tool that eliminates debugging.
-  "media":
-  - "caption": Seagence Defects Overview dashboard
-    "image_url": images/datadog-dashboard.png
-    "media_type": image
-  - "caption": Seagence Defect Detection monitor
-    "image_url": images/seagence-datadog-monitor.png
-    "media_type": image
-  - "caption": Success and Defect Execution Paths
-    "image_url": images/defect-and-successexecution-paths-1440x810.png
-    "media_type": image
-  - "caption": Defect and Success Clusters
-    "image_url": images/defect-and-success-clusters.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/seagence-datadog-marketplace/"
-  "support": "README.md#Support"
-  "title": Seagence
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Any
+  - Submitted Data Type::Events
+  - Category::Alerting
+  - Category::Automation
+  - Category::Event Management
+  - Category::Developer Tools
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Realtime Defect Detection & Resolution tool that eliminates debugging.
+  media:
+  - caption: Seagence Defects Overview dashboard
+    image_url: images/datadog-dashboard.png
+    media_type: image
+  - caption: Seagence Defect Detection monitor
+    image_url: images/seagence-datadog-monitor.png
+    media_type: image
+  - caption: Success and Defect Execution Paths
+    image_url: images/defect-and-successexecution-paths-1440x810.png
+    media_type: image
+  - caption: Defect and Success Clusters
+    image_url: images/defect-and-success-clusters.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/seagence-datadog-marketplace/
+  support: README.md#Support
+  title: Seagence
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -137,4 +137,3 @@ Need help? Contact [Seagence support][6].
 [5]: https://app.datadoghq.com/organization-settings/api-keys?filter=Seagence
 [6]: mailto:support@seagence.com
 [7]: https://www.datadoghq.com/blog/seagence-datadog-marketplace/
-

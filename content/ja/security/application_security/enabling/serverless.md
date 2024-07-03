@@ -1,23 +1,24 @@
 ---
-title: Enabling ASM for Serverless
 aliases:
-  - /security/application_security/getting_started/serverless
+- /ja/security/application_security/getting_started/serverless
 further_reading:
-    - link: /security/application_security/how-appsec-works/
-      tag: Documentation
-      text: How Application Security Works
-    - link: /security/default_rules/?category=cat-application-security
-      tag: Documentation
-      text: OOTB Application Security Management Rules
-    - link: /security/application_security/troubleshooting
-      tag: Documentation
-      text: Troubleshooting Application Security Management
-    - link: /security/application_security/threats/
-      tag: Documentation
-      text: Application Threat Management
-    - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
-      tag: Blog
-      text: Datadog Security extends compliance and threat protection capabilities for Google Cloud
+- link: /security/application_security/how-appsec-works/
+  tag: Documentation
+  text: How Application Security Works
+- link: /security/default_rules/?category=cat-application-security
+  tag: Documentation
+  text: OOTB Application Security Management Rules
+- link: /security/application_security/troubleshooting
+  tag: Documentation
+  text: Troubleshooting Application Security Management
+- link: /security/application_security/threats/
+  tag: Documentation
+  text: Application Threat Management
+- link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
+  tag: Blog
+  text: Datadog Security extends compliance and threat protection capabilities for
+    Google Cloud
+title: Enabling ASM for Serverless
 ---
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
@@ -70,10 +71,10 @@ Datadog Serverless Framework プラグインをインストールして構成す
 
 4. 関数を再デプロイして呼び出します。数分後、[ASM ビュー][3]に表示されます。
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-[4]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+[4]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/plugin/#configuration-parameters
 
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
@@ -139,7 +140,7 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
@@ -430,7 +431,7 @@ CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
 
 実行するコマンドが `datadog-init` の引数として渡される限り、完全なインスツルメンテーションを受け取ります。
 
-[1]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+[1]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -506,7 +507,7 @@ CMD ["your_entrypoint.sh", "/dd_tracer/python/bin/ddtrace-run", "python", "app.p
 
 実行するコマンドが `datadog-init` の引数として渡される限り、完全なインスツルメンテーションを受け取ります。
 
-[1]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+[1]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -583,7 +584,7 @@ CMD ["your_entrypoint.sh", "./mvnw", "spring-boot:run"]
 
 実行するコマンドが `datadog-init` の引数として渡される限り、完全なインスツルメンテーションを受け取ります。
 
-[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+[1]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -651,7 +652,7 @@ CMD ["your_entrypoint.sh", "/path/to/your-go-binary"]
 
 実行するコマンドが `datadog-init` の引数として渡される限り、完全なインスツルメンテーションを受け取ります。
 
-[1]: /tracing/trace_collection/dd_libraries/go
+[1]: /ja/tracing/trace_collection/dd_libraries/go
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -728,7 +729,7 @@ CMD ["your_entrypoint.sh", "dotnet", "helloworld.dll"]
 
 実行するコマンドが `datadog-init` の引数として渡される限り、完全なインスツルメンテーションを受け取ります。
 
-[1]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
+[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -806,7 +807,7 @@ CMD ["your_entrypoint.sh", "rails", "server", "-b", "0.0.0.0"]
 
 実行するコマンドが `datadog-init` の引数として渡される限り、完全なインスツルメンテーションを受け取ります。
 
-[1]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+[1]: /ja/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
 [2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 
 {{% /tab %}}
@@ -917,7 +918,7 @@ CMD your_entrypoint.sh php-fpm; your_entrypoint.sh nginx -g daemon off;
 
 実行するコマンドが `datadog-init` の引数として渡される限り、完全なインスツルメンテーションを受け取ります。
 
-[1]: /tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
+[1]: /ja/tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -995,9 +996,9 @@ Application Security Management の脅威検出を実際に確認するために
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?query=type%3Afunction%20&env=prod&groupBy=&hostGroup=%2A&lens=Security&sort=-attackExposure&view=list
-[2]: /serverless/distributed_tracing/
+[2]: /ja/serverless/distributed_tracing/
 [3]: https://app.datadoghq.com/security/appsec
-[4]: /security/application_security/enabling/compatibility/serverless
-[5]: /security/default_rules/security-scan-detected/
-[6]: /serverless/libraries_integrations/plugin/
+[4]: /ja/security/application_security/enabling/compatibility/serverless
+[5]: /ja/security/default_rules/security-scan-detected/
+[6]: /ja/serverless/libraries_integrations/plugin/
 [apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/

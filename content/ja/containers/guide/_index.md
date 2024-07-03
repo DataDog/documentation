@@ -1,7 +1,7 @@
 ---
-title: Containers Guides
-private: true
 disable_toc: true
+private: true
+title: Containers Guides
 ---
 
 {{< whatsnext desc="General containers guides:" >}}

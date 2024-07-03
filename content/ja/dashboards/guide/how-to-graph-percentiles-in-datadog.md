@@ -1,8 +1,8 @@
 ---
-title: How to graph percentiles in Datadog?
 aliases:
-  - /graphing/faq/how-to-graph-percentiles-in-datadog
-  - /graphing/guide/how-to-graph-percentiles-in-datadog
+- /ja/graphing/faq/how-to-graph-percentiles-in-datadog
+- /ja/graphing/guide/how-to-graph-percentiles-in-datadog
+title: How to graph percentiles in Datadog?
 ---
 
 ## DogStatsD の実装
@@ -44,8 +44,8 @@ Agent の構成ファイルの「histogram_percentiles」行を使用して、�
 
 [Datadog のヒストグラムの特性については、こちらを参照してください][5]。
 
-[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[1]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[3]: /developers/community/libraries/
-[4]: /metrics/types/?tab=histogram#metric-types
-[5]: /developers/faq/characteristics-of-datadog-histograms/
+[3]: /ja/developers/community/libraries/
+[4]: /ja/metrics/types/?tab=histogram#metric-types
+[5]: /ja/developers/faq/characteristics-of-datadog-histograms/

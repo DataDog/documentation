@@ -1,7 +1,6 @@
 ---
-title: Use Session Replay In Your Technical Support Workflow
-kind: guide
-description: Learn how to adopt RUM & Session Replay in your Solutions or Support organization. 
+description: Learn how to adopt RUM & Session Replay in your Solutions or Support
+  organization.
 further_reading:
 - link: /real_user_monitoring/platform/connect_rum_and_traces/
   tag: Documentation
@@ -12,65 +11,66 @@ further_reading:
 - link: /real_user_monitoring/session_replay/browser/developer_tools
   tag: Documentation
   text: Learn about Browser Dev Tools
+title: Use Session Replay In Your Technical Support Workflow
 ---
 
-## Overview
+## 概要
 
-You can enable your technical solutions and support teams to better troubleshoot customer issues using [Session Replay][1]. With RUM & Session Replay, you can locate specific user sessions, observe user journeys, and access developer tools to see events, logs, errors, and attributes. 
+[セッションリプレイ][1]を使用することで、テクニカルソリューションとサポートチームが顧客の問題をより適切にトラブルシューティングできるようになります。RUM とセッションリプレイを使用すると、特定のユーザーセッションを見つけ、ユーザージャーニーを観察し、開発者ツールにアクセスしてイベント、ログ、エラー、および属性を確認することができます。
 
-This guide describes a workflow that organizations can replicate and use as an asset for solutions teams to integrate into their workflows.
+このガイドでは、組織がワークフローを複製し、ソリューションチームがワークフローにインテグレーションするための資産として使用できるワークフローを説明しています。
 
-{{< img src="real_user_monitoring/guide/session-replay/session-replay-recording.png" alt="Session Replay recording of a user session in the Shopist application" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/session-replay/session-replay-recording.png" alt="Shopist アプリケーションにおけるユーザーセッションのセッションリプレイ記録" style="width:100%;">}}
 
-## Assess user issues
+## ユーザーの問題を評価する
 
-Assume that a customer encounters an issue using Datadog. Your Technical Solutions team may use a support solution, such as Zendesk or ServiceNow, that creates a ticket when this customer reports that they cannot update or save a Synthetics multistep API test. 
+ある顧客が Datadog を使用して問題に遭遇したと仮定します。テクニカルソリューションチームは、Zendesk や ServiceNow などのサポートソリューションを使用して、この顧客が Synthetic のマルチステップ API テストを更新または保存できないことを報告すると、チケットを作成することができます。
 
-The team may request more information from the customer (such as the specific test ID and a screen recording with the [Browser Dev Tools][2] open) that may provide additional context for the customer's test not updating or saving. If no console errors were recorded, the team would not have any hints to start investigating the multistep API test's issue. 
+チームは、顧客のテストが更新または保存されないことの追加コンテキストを提供する可能性がある顧客からより多くの情報 (特定のテスト ID および[ブラウザ開発ツール][2]を開いた画面の記録など) を要求する場合があります。コンソールエラーが記録されていない場合、チームはマルチステップ API テストの問題を調査するためのヒントを得られません。
 
-The Technical Solutions team may try to understand the following questions:
+テクニカルソリューションズチームは、次のような質問を理解しようとすることがあります。
 
-- What is the exact error the customer is experiencing?
-- Is the customer seeing an in-app notification that hints at a particular issue (such as a console error or an error message)?
-- What buttons did the customer click on, and in what order? Did an unexpected action occur before the customer clicked on a button?
+- 顧客が経験している正確なエラーは何か？
+- 特定の問題を示唆するアプリ内通知 (コンソールエラーやエラーメッセージなど) を顧客が見ているか？
+- 顧客はどのボタンをどのような順序でクリックしたのか？顧客がボタンをクリックする前に、予期せぬアクションが発生しなかったか？
 
-## Investigate the root cause
+## 根本原因の調査
 
 If there were a way to view the customer's user journey in Datadog and see associated backend requests, the Technical Solutions team would have a better understanding of what may be causing this issue.
 
-{{< img src="real_user_monitoring/guide/session-replay/apm-traces-in-session-replay.png" alt="An APM stack trace associated with a RUM view action" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/session-replay/apm-traces-in-session-replay.png" alt="RUM ビューアクションに関連する APM スタックトレース" style="width:100%;">}}
 
-With the APM integration, you can connect requests from your web application with corresponding backend traces to access APM trace data from a RUM event and uncover any backend errors in the **Errors** tab. 
+APM インテグレーションを使用すると、Web アプリケーションからのリクエストと対応するバックエンドトレースを接続して、RUM イベントから APM トレースデータにアクセスし、**Errors** タブでバックエンドエラーを明らかにすることができます。
 
-For more information, see [Connect RUM and Traces][3].
+詳しくは、[RUM とトレースの接続][3]をご覧ください。
 
-## Watch user sessions in Session Replay
+## セッションリプレイでユーザーセッションを見る
 
-The Technical Solutions team may have internal tools that connect a support platform, like Zendesk, with Datadog products, such as RUM & Session Replay. For example, a contextual link in Zendesk can redirect you to the [RUM Explorer][4] and autofill the user ID in the search query. Filter for individual user sessions from the event list.
+テクニカルソリューションチームは、Zendesk のようなサポートプラットフォームと、RUM & セッションリプレイのような Datadog 製品を接続する内部ツールを持っている場合があります。例えば、Zendesk のコンテキストリンクから [RUM エクスプローラー][4]にリダイレクトし、検索クエリにユーザー ID を自動入力することが可能です。イベントリストから個々のユーザーセッションにフィルターをかけることができます。
 
-The Technical Solutions team can use Session Replay to view a replica of the user journey in Datadog and use Browser Dev Tools to access additional errors that may appear in the frontend. With access to frontend errors and backend traces, your Technical Solutions team is empowered to use the RUM & Session Replay and APM integration to help troubleshoot customer issues.
+テクニカルソリューションチームは、セッションリプレイを使用して Datadog のユーザージャーニーのレプリカを表示し、ブラウザ開発ツールを使用してフロントエンドに表示される可能性のある追加のエラーにアクセスすることができます。フロントエンドのエラーとバックエンドのトレースにアクセスすることで、テクニカルソリューションチームは、RUM & セッションリプレイと APM インテグレーションを使用して、顧客の問題のトラブルシューティングを支援する権限を与えられます。
 
 Click on a user session with a replay recording to observe the user's behavior on the Datadog platform. By using Session Replay, you can locate the corresponding RUM events and identify the specific `click` action to save the multistep API test. Clicking **Save** in the UI triggers the backend call to save the test's configuration.
 
-## Uncover errors in backend traces
+## バックエンドのトレースからエラーを発見
 
-While examining errors in the multistep API tests' APM trace, the Technical Solutions team may encounter an `APIInvalidInputError` related to the `maxLength` of a `​​https://properties.steps.items.properties.name/` configuration, which appears to be the root cause of the failed test save. 
+マルチステップ API テストの APM トレースでエラーを調査していると、テクニカルソリューションチームは `​​https://properties.steps.items.properties.name/` 構成の `maxLength` に関連する `APIInvalidInputError` に遭遇することがあり、これがテスト保存失敗の根本原因であるように思われます。
 
-{{< img src="real_user_monitoring/guide/session-replay/view-traces.png" alt="An APM stack trace associated with a RUM view action" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/session-replay/view-traces.png" alt="RUM ビューアクションに関連する APM スタックトレース" style="width:100%;">}}
 
 The multistep API test did not save because of a character limit in the step's name. 
 
-## Resolve user problems
+## ユーザーの問題を解決する
 
-To resolve this customer issue, the Technical Solutions team may request the Product team to update the multistep API test workflow with contextual help for when a test is unable to be saved. 
+この顧客の問題を解決するために、テクニカルソリューションチームは、テストを保存できない場合のコンテキストヘルプを備えたマルチステップ API テストワークフローの更新を製品チームに要求することができます。
 
-The Frontend team may also be encouraged to implement an error message in the UI that ensures users are notified when they breach the maximum character limit for the test step name.
+また、Frontend チームには、テストステップ名の最大文字数制限を超えた場合にユーザーに通知されるように、UI にエラーメッセージを実装することも推奨されるかもしれません。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/browser/
-[2]: /real_user_monitoring/session_replay/browser/developer_tools/
-[3]: /real_user_monitoring/connect_rum_and_traces
+[1]: /ja/real_user_monitoring/session_replay/browser/
+[2]: /ja/real_user_monitoring/session_replay/browser/developer_tools/
+[3]: /ja/real_user_monitoring/connect_rum_and_traces
 [4]: https://app.datadoghq.com/rum/explorer

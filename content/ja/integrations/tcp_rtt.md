@@ -1,18 +1,18 @@
 ---
-integration_title: TCP RTT
-name: tcp_rtt
-custom_kind: インテグレーション
-newhlevel: true
-is_public: true
-public_title: Datadog-TCP RTT Integration
-short_description: 'Monitor TCP connectivity to remote hosts.'
-categories:
-    - network
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md"]
-integration_id: "tcp-rtt"
 aliases:
-    - /integrations/tcprtt
+- /ja/integrations/tcprtt
+categories:
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
+integration_id: tcp-rtt
+integration_title: TCP RTT
+is_public: true
+name: tcp_rtt
+newhlevel: true
+public_title: Datadog-TCP RTT Integration
+short_description: Monitor TCP connectivity to remote hosts.
 ---
 
 ## Overview
@@ -103,5 +103,5 @@ This is a passive check, so unless there are packets actively being sent to the 
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
 
 [1]: https://github.com/DataDog/go-metro#usage
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/datadog_checks/go-metro/data/conf.yaml.example

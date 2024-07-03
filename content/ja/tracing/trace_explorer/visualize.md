@@ -1,10 +1,11 @@
 ---
-title: Span Visualizations
-description: 'View spans in a list, or aggregate spans into timeseries, top lists and more.'
+description: View spans in a list, or aggregate spans into timeseries, top lists and
+  more.
 further_reading:
-    - link: tracing/trace_explorer/
-      tag: Documentation
-      text: Trace Explorer
+- link: tracing/trace_explorer/
+  tag: Documentation
+  text: Trace Explorer
+title: Span Visualizations
 ---
 
 ## 概要
@@ -93,8 +94,8 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_explorer/query_syntax/#search-syntax
-[2]: /tracing/trace_explorer/query_syntax/#time-range
-[3]: /tracing/trace_explorer/facets/#quantitative-facets-measures
-[4]: /tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
-[5]: /tracing/error_tracking/
+[1]: /ja/tracing/trace_explorer/query_syntax/#search-syntax
+[2]: /ja/tracing/trace_explorer/query_syntax/#time-range
+[3]: /ja/tracing/trace_explorer/facets/#quantitative-facets-measures
+[4]: /ja/tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
+[5]: /ja/tracing/error_tracking/

@@ -1,28 +1,28 @@
 ---
-title: Getting Started with Dashboards
-kind: documentation
 further_reading:
-  - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
-    tag: Blog
-    text: Share dashboards securely with anyone outside of your organization
-  - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
-    tag: Blog
-    text: Use associated template variables to refine your dashboards
-  - link: "https://learn.datadoghq.com/courses/building-better-dashboards"
-    tag: Learning Center
-    text: Building Better Dashboards
-  - link: /dashboards/
-    tag: Documentation
-    text: Dashboards basics
-  - link: /notebooks/
-    tag: Documentation
-    text: Tell a story about data with notebooks
-  - link: /monitors/
-    tag: Documentation
-    text: Monitors, SLOs, notifications, downtimes, and incidents
-  - link: "https://dtdg.co/fe"
-    tag: Foundation Enablement
-    text: Join an interactive session on better visualizations with Dashboards  
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
+  tag: Blog
+  text: Share dashboards securely with anyone outside of your organization
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: Blog
+  text: Use associated template variables to refine your dashboards
+- link: https://learn.datadoghq.com/courses/building-better-dashboards
+  tag: Learning Center
+  text: Building Better Dashboards
+- link: /dashboards/
+  tag: Documentation
+  text: Dashboards basics
+- link: /notebooks/
+  tag: Documentation
+  text: Tell a story about data with notebooks
+- link: /monitors/
+  tag: Documentation
+  text: Monitors, SLOs, notifications, downtimes, and incidents
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session on better visualizations with Dashboards
+kind: documentation
+title: Getting Started with Dashboards
 ---
 
 ## Overview
@@ -135,20 +135,20 @@ The mobile app enables you to view and search all of the dashboards that you hav
 
 [1]: https://app.datadoghq.com/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /metrics/introduction/
-[4]: /metrics/explorer/
-[5]: /integrations/amazon_s3/#data-collected
-[6]: /dashboards/widgets/
-[7]: /dashboards/querying/
-[8]: /dashboards/functions/
-[9]: /metrics/distributions/
-[10]: /dashboards/template_variables/
-[11]: /dashboards/
-[12]: /dashboards/widgets/timeseries/
+[3]: /ja/metrics/introduction/
+[4]: /ja/metrics/explorer/
+[5]: /ja/integrations/amazon_s3/#data-collected
+[6]: /ja/dashboards/widgets/
+[7]: /ja/dashboards/querying/
+[8]: /ja/dashboards/functions/
+[9]: /ja/metrics/distributions/
+[10]: /ja/dashboards/template_variables/
+[11]: /ja/dashboards/
+[12]: /ja/dashboards/widgets/timeseries/
 [13]: https://learn.datadoghq.com/courses/building-better-dashboards/
-[14]: /dashboards/sharing/
-[15]: /integrations/slack/
-[16]: /api/v1/dashboards/
-[17]: /service_management/mobile/
+[14]: /ja/dashboards/sharing/
+[15]: /ja/integrations/slack/
+[16]: /ja/api/v1/dashboards/
+[17]: /ja/service_management/mobile/
 [18]: https://apps.apple.com/app/datadog/id1391380318
 [19]: https://play.google.com/store/apps/details?id=com.datadog.app

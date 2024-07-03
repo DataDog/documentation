@@ -1,28 +1,30 @@
 ---
-"categories":
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Connect to Microsoft 365 to pull an organization's audit logs into Datadog's logging platform."
-"doc_link": "https://docs.datadoghq.com/integrations/microsoft_365/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/microsoft-365-integration/"
-  "tag": Blog
-  "text": Collect and monitor Microsoft 365 audit logs with Datadog
-"git_integration_title": "microsoft_365"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Microsoft 365 Security and Audit Logs"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "microsoft_365"
-"public_title": "Datadog-Microsoft 365 Security and Audit Logs"
-"short_description": "View Microsoft 365 audit logs in Datadog from services such as: Microsoft Teams, Power BI, Azure Active Directory, Dynamics 365, and more"
-"team": "web-integrations"
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Connect to Microsoft 365 to pull an organization's audit logs into Datadog's
+  logging platform.
+doc_link: https://docs.datadoghq.com/integrations/microsoft_365/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/microsoft-365-integration/
+  tag: Blog
+  text: Collect and monitor Microsoft 365 audit logs with Datadog
+git_integration_title: microsoft_365
+has_logo: true
+integration_id: ''
+integration_title: Microsoft 365 Security and Audit Logs
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: microsoft_365
+public_title: Datadog-Microsoft 365 Security and Audit Logs
+short_description: 'View Microsoft 365 audit logs in Datadog from services such as:
+  Microsoft Teams, Power BI, Azure Active Directory, Dynamics 365, and more'
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -196,8 +198,7 @@ Need help? Contact [Datadog support][31].
 [25]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityComplianceCenter%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
 [26]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityMonitoringEntityReducer%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
 [27]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AThreatIntelligence%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[28]: https://docs.datadoghq.com/security/#cloud-siem
-[29]: https://docs.datadoghq.com/security/default_rules/?category=cat-cloud-siem-log-detection&search=microsoft+365
-[30]: https://docs.datadoghq.com/security/detection_rules/#create-detection-rules
-[31]: https://docs.datadoghq.com/help/
-
+[28]: https://docs.datadoghq.com/ja/security/#cloud-siem
+[29]: https://docs.datadoghq.com/ja/security/default_rules/?category=cat-cloud-siem-log-detection&search=microsoft+365
+[30]: https://docs.datadoghq.com/ja/security/detection_rules/#create-detection-rules
+[31]: https://docs.datadoghq.com/ja/help/

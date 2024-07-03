@@ -1,65 +1,65 @@
 ---
-"app_id": "proxysql"
-"app_uuid": "aadfa11b-3de5-4827-9cdd-888c4e9587d0"
-"assets":
-  "dashboards":
-    "ProxySQL Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": proxysql.active_transactions
-      "metadata_path": metadata.csv
-      "prefix": proxysql.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10096"
-    "source_type_name": ProxySQL
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: proxysql
+app_uuid: aadfa11b-3de5-4827-9cdd-888c4e9587d0
+assets:
+  dashboards:
+    ProxySQL Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: proxysql.active_transactions
+      metadata_path: metadata.csv
+      prefix: proxysql.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10096
+    source_type_name: ProxySQL
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
 - caching
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "proxysql"
-"integration_id": "proxysql"
-"integration_title": "ProxySQL"
-"integration_version": "5.1.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "proxysql"
-"public_title": "ProxySQL"
-"short_description": "Collect your ProxySQL metrics and logs."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: proxysql
+integration_id: proxysql
+integration_title: ProxySQL
+integration_version: 5.1.1
+is_public: true
+manifest_version: 2.0.0
+name: proxysql
+public_title: ProxySQL
+short_description: Collect your ProxySQL metrics and logs.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  - "Category::Caching"
-  "configuration": "README.md#Setup"
-  "description": Collect your ProxySQL metrics and logs.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": ProxySQL
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Log Collection
+  - Category::Caching
+  configuration: README.md#Setup
+  description: Collect your ProxySQL metrics and logs.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ProxySQL
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -133,9 +133,9 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -159,8 +159,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "proxysql", "service": "<サービス名>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -189,7 +189,7 @@ ProxySQL チェックにはイベントは含まれません。
 
 
 [1]: https://proxysql.com/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/help
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help

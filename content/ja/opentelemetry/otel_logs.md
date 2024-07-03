@@ -1,17 +1,18 @@
 ---
-title: Send Logs from OpenTelemetry to Datadog
 aliases:
-- /logs/log_collection/opentelemetry/
+- /ja/logs/log_collection/opentelemetry/
 further_reading:
-- link: "https://opentelemetry.io/docs/collector/"
+- link: https://opentelemetry.io/docs/collector/
   tag: 外部サイト
   text: Collector documentation
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: Blog
-  text: Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter
+  text: Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using
+    Datadog Exporter
 - link: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
   tag: Documentation
   text: Connect OpenTelemetry Traces and Logs
+title: Send Logs from OpenTelemetry to Datadog
 ---
 
 <div class="alert alert-warning"><a href="https://opentelemetry.io/docs/reference/specification/logs/">OpenTelemetry のロギング</a>と Datadog Exporter の Datadog にログを送信する機能は、アルファ版です。</div>
@@ -42,5 +43,5 @@ OpenTelemetry Collector は、あらゆるベンダーに対応するエージ�
 [2]: https://www.cncf.io/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/reference/specification/logs/overview/#third-party-application-logs
-[5]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#step-4---configure-the-logger-for-your-application
-[6]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
+[5]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=onahost#step-4---configure-the-logger-for-your-application
+[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python

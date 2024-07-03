@@ -1,11 +1,12 @@
 ---
-title: API and Application Keys
-aliases:
-    - /account_management/faq/how-do-i-reset-my-application-keys/
-    - /agent/faq/how-do-i-reset-my-datadog-api-keys/
-    - /account_management/faq/api-app-key-management/
 algolia:
-  tags: [api key]
+  tags:
+  - api key
+aliases:
+- /ja/account_management/faq/how-do-i-reset-my-application-keys/
+- /ja/agent/faq/how-do-i-reset-my-datadog-api-keys/
+- /ja/account_management/faq/api-app-key-management/
+title: API and Application Keys
 ---
 
 ## API キー
@@ -126,18 +127,18 @@ If any unusual activity is identified, or you need additional help securing your
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
-[3]: /api/latest/scopes/
-[4]: /account_management/rbac/permissions
-[5]: /api/latest/key-management/
-[6]: /logs/log_collection/javascript/
-[7]: /logs/log_collection/android/
-[8]: /logs/log_collection/ios/
-[9]: /logs/log_collection/reactnative/
-[10]: /logs/log_collection/flutter/
-[11]: /logs/log_collection/roku/
-[12]: /real_user_monitoring/
+[3]: /ja/api/latest/scopes/
+[4]: /ja/account_management/rbac/permissions
+[5]: /ja/api/latest/key-management/
+[6]: /ja/logs/log_collection/javascript/
+[7]: /ja/logs/log_collection/android/
+[8]: /ja/logs/log_collection/ios/
+[9]: /ja/logs/log_collection/reactnative/
+[10]: /ja/logs/log_collection/flutter/
+[11]: /ja/logs/log_collection/roku/
+[12]: /ja/real_user_monitoring/
 [13]: https://app.datadoghq.com/organization-settings/client-tokens
-[14]: /api/latest/key-management/#create-an-application-key-for-current-user
-[15]: /api/latest/service-accounts/
-[16]: /help/
-[17]: /account_management/org_settings/service_accounts/
+[14]: /ja/api/latest/key-management/#create-an-application-key-for-current-user
+[15]: /ja/api/latest/service-accounts/
+[16]: /ja/help/
+[17]: /ja/account_management/org_settings/service_accounts/

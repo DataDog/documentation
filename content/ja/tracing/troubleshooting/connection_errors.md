@@ -1,8 +1,8 @@
 ---
-title: APM Connection Errors
-kind: Documentation
 aliases:
-  - /tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+- /ja/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+kind: Documentation
+title: APM Connection Errors
 ---
 
 If the application with the tracing library cannot reach the Datadog Agent, look for connection errors in the [tracer startup logs][1] or [tracer debug logs][2], which can be found with your application logs.
@@ -262,24 +262,24 @@ If the configuration is correct, but you're still seeing connection errors, [con
 - A Datadog [Agent flare][5]. For dedicated containers, send the flare from the [dedicated Trace Agent container][20].
 
 
-[1]: /tracing/troubleshooting/tracer_startup_logs/
-[2]: /tracing/troubleshooting/tracer_debug_logs/
-[3]: /agent/configuration/agent-commands/#agent-information
-[4]: /help/
-[5]: /agent/troubleshooting/send_a_flare/
+[1]: /ja/tracing/troubleshooting/tracer_startup_logs/
+[2]: /ja/tracing/troubleshooting/tracer_debug_logs/
+[3]: /ja/agent/configuration/agent-commands/#agent-information
+[4]: /ja/help/
+[5]: /ja/agent/troubleshooting/send_a_flare/
 [6]: https://app.datadoghq.com/apm/service-setup
-[7]: /agent/amazon_ecs/apm/?tab=ec2metadataendpoint
-[8]: /integrations/ecs_fargate/#trace-collection
-[9]: /integrations/eks_fargate/#traces-collection
-[10]: /integrations/amazon_elasticbeanstalk/?tab=singlecontainer#trace-collection
-[11]: /integrations/amazon_elasticbeanstalk/?tab=multiplecontainers#trace-collection
-[12]: /agent/kubernetes/apm/
-[13]: /containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
+[7]: /ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint
+[8]: /ja/integrations/ecs_fargate/#trace-collection
+[9]: /ja/integrations/eks_fargate/#traces-collection
+[10]: /ja/integrations/amazon_elasticbeanstalk/?tab=singlecontainer#trace-collection
+[11]: /ja/integrations/amazon_elasticbeanstalk/?tab=multiplecontainers#trace-collection
+[12]: /ja/agent/kubernetes/apm/
+[13]: /ja/containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
 [14]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[15]: /agent/cluster_agent/admission_controller/
-[16]: /integrations/amazon_eks/#setup
-[17]: /agent/docker/apm/#tracing-from-other-containers
-[18]: /tracing/trace_collection/dd_libraries/php/?tab=containers#apache
-[19]: /tracing/trace_collection/dd_libraries/php/?tab=containers#nginx
-[20]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
+[15]: /ja/agent/cluster_agent/admission_controller/
+[16]: /ja/integrations/amazon_eks/#setup
+[17]: /ja/agent/docker/apm/#tracing-from-other-containers
+[18]: /ja/tracing/trace_collection/dd_libraries/php/?tab=containers#apache
+[19]: /ja/tracing/trace_collection/dd_libraries/php/?tab=containers#nginx
+[20]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
 [21]: https://kubernetes.io/docs/concepts/services-networking/network-policies/

@@ -1,58 +1,58 @@
 ---
-"app_id": "redis-sentinel"
-"app_uuid": "207e2b2c-5fad-40a4-a4fc-09f119e142d3"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "redis.sentinel.known_sentinels"
-      "metadata_path": "metadata.csv"
-      "prefix": "redis."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10210"
-    "source_type_name": "Redis Sentinel"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Community"
-  "sales_email": "help@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "os & system"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "redis_sentinel"
-"integration_id": "redis-sentinel"
-"integration_title": "Redis Sentinel"
-"integration_version": "1.1.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "redis_sentinel"
-"public_title": "Redis Sentinel"
-"short_description": "Redis Sentinel provides high availability for Redis."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::OS & System"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Redis Sentinel provides high availability for Redis."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Redis Sentinel"
+app_id: redis-sentinel
+app_uuid: 207e2b2c-5fad-40a4-a4fc-09f119e142d3
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: redis.sentinel.known_sentinels
+      metadata_path: metadata.csv
+      prefix: redis.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10210
+    source_type_name: Redis Sentinel
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- os & system
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: redis_sentinel
+integration_id: redis-sentinel
+integration_title: Redis Sentinel
+integration_version: 1.1.1
+is_public: true
+manifest_version: 2.0.0
+name: redis_sentinel
+public_title: Redis Sentinel
+short_description: Redis Sentinel provides high availability for Redis.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::OS & System
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Redis Sentinel provides high availability for Redis.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Redis Sentinel
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -112,13 +112,12 @@ Need help? Contact [Datadog support][10].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[3]: https://docs.datadoghq.com/getting_started/integrations/
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/datadog_checks/redis_sentinel/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [8]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/assets/service_checks.json
 [10]: http://docs.datadoghq.com/help
-

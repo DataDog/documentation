@@ -1,68 +1,68 @@
 ---
-"app_id": "pagerduty-ui"
-"app_uuid": "fbbb4a11-4a8f-4911-bdf7-bd867d9bdfb2"
-"assets":
-  "dashboards":
-    "PagerDuty for Datadog": assets/dashboards/pagerduty_overview.json
-"author":
-  "homepage": "https://pagerduty.com"
-  "name": PagerDuty
-  "sales_email": sales@pagerduty.com
-  "support_email": support@pagerduty.com
-"categories":
+app_id: pagerduty-ui
+app_uuid: fbbb4a11-4a8f-4911-bdf7-bd867d9bdfb2
+assets:
+  dashboards:
+    PagerDuty for Datadog: assets/dashboards/pagerduty_overview.json
+author:
+  homepage: https://pagerduty.com
+  name: PagerDuty
+  sales_email: sales@pagerduty.com
+  support_email: support@pagerduty.com
+categories:
 - alerting
 - collaboration
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "pagerduty_ui"
-"integration_id": "pagerduty-ui"
-"integration_title": "PagerDuty UI"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "pagerduty_ui"
-"public_title": "PagerDuty UI"
-"short_description": "Monitor your PagerDuty incidents from your Datadog dashboard"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: pagerduty_ui
+integration_id: pagerduty-ui
+integration_title: PagerDuty UI
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: pagerduty_ui
+public_title: PagerDuty UI
+short_description: Monitor your PagerDuty incidents from your Datadog dashboard
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Issue Tracking"
-  - "Category::Notifications"
-  - "Offering::UI Extension"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor your PagerDuty incidents from your Datadog dashboard
-  "media":
-  - "caption": Landing page
-    "image_url": images/landing_page.png
-    "media_type": image
-  - "caption": Status Dashboard by PagerDuty
-    "image_url": images/status_dashboard.jpg
-    "media_type": image
-  - "caption": Status Dashboard by PagerDuty
-    "image_url": images/status_dashboard2.jpg
-    "media_type": image
-  - "caption": Incidents by PagerDuty
-    "image_url": images/incidents.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": PagerDuty UI
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor your PagerDuty incidents from your Datadog dashboard
+  media:
+  - caption: Landing page
+    image_url: images/landing_page.png
+    media_type: image
+  - caption: Status Dashboard by PagerDuty
+    image_url: images/status_dashboard.jpg
+    media_type: image
+  - caption: Status Dashboard by PagerDuty
+    image_url: images/status_dashboard2.jpg
+    media_type: image
+  - caption: Incidents by PagerDuty
+    image_url: images/incidents.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PagerDuty UI
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -128,7 +128,6 @@ PagerDuty customer or [Datadog Support][3] for any troubleshooting.
 [Contact the Pagerduty Sales Team][2] if you would like to
 upgrade to a plan including the status dashboard feature and Incidents by Pagerduty.
 
-[1]: https://docs.datadoghq.com/dashboards/#new-dashboard
+[1]: https://docs.datadoghq.com/ja/dashboards/#new-dashboard
 [2]: https://www.pagerduty.com/contact-sales/
 [3]: https://www.datadoghq.com/support/
-

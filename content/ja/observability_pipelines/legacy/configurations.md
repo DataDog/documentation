@@ -1,17 +1,17 @@
 ---
-title: (LEGACY) Configurations
 aliases:
-  - /integrations/observability_pipelines/vector_configurations/
-  - /observability_pipelines/vector_configurations/
-  - /observability_pipelines/reference/
-  - /observability_pipelines/configurations/
+- /ja/integrations/observability_pipelines/vector_configurations/
+- /ja/observability_pipelines/vector_configurations/
+- /ja/observability_pipelines/reference/
+- /ja/observability_pipelines/configurations/
 further_reading:
-  - link: /observability_pipelines/legacy/working_with_data/
-    tag: Documentation
-    text: Working with data using Observability Pipelines
-  - link: /observability_pipelines/legacy/setup
-    tag: Documentation
-    text: Set up Observability Pipelines
+- link: /observability_pipelines/legacy/working_with_data/
+  tag: Documentation
+  text: Working with data using Observability Pipelines
+- link: /observability_pipelines/legacy/setup
+  tag: Documentation
+  text: Set up Observability Pipelines
+title: (LEGACY) Configurations
 ---
 
 {{< site-region region="gov" >}}
@@ -287,6 +287,6 @@ vector --config ./<configuration_filename>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/legacy/reference/sources/
-[2]: /observability_pipelines/legacy/reference/transforms/
-[3]: /observability_pipelines/legacy/reference/sinks/
+[1]: /ja/observability_pipelines/legacy/reference/sources/
+[2]: /ja/observability_pipelines/legacy/reference/transforms/
+[3]: /ja/observability_pipelines/legacy/reference/sinks/

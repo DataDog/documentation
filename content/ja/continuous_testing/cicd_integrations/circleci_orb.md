@@ -1,8 +1,8 @@
 ---
 aliases:
-- /synthetics/cicd_integrations/circleci_orb
+- /ja/synthetics/cicd_integrations/circleci_orb
 dependencies:
-- "https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"
+- https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md
 title: Continuous Testing and CircleCI Orb
 ---
 ## 概要
@@ -170,19 +170,19 @@ CircleCI パイプラインの追加オプションについては、[Continuous
 
 [1]: https://github.com/DataDog/datadog-ci/
 [2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics
-[3]: https://docs.datadoghq.com/continuous_testing/cicd_integrations
+[3]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations
 [4]: https://bats-core.readthedocs.io/en/stable/installation.html
 [5]: https://circleci.com/orbs/registry/orb/datadog/synthetics-ci-orb
 [6]: https://circleci.com/docs/2.0/orb-intro/#section=configuration
 [7]: https://github.com/DataDog/synthetics-test-automation-circleci-orb/issues
 [8]: https://github.com/DataDog/synthetics-test-automation-circleci-orb/pulls
 [9]: https://discuss.circleci.com/c/orbs
-[10]: https://docs.datadoghq.com/continuous_testing/testing_tunnel
-[11]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/github_actions
-[12]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration?tab=npm
+[10]: https://docs.datadoghq.com/ja/continuous_testing/testing_tunnel
+[11]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/github_actions
+[12]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration?tab=npm
 [13]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
 [14]: https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/src/commands/run-tests.yml
 [15]: https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/src/examples/simple-example.yml
 [16]: https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/src/examples/advanced-example.yml
-[17]: https://docs.datadoghq.com/getting_started/site/
-[18]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[17]: https://docs.datadoghq.com/ja/getting_started/site/
+[18]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files

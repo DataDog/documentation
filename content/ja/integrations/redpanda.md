@@ -1,65 +1,65 @@
 ---
-"app_id": "redpanda"
-"app_uuid": "4c7855c5-6c2c-46c5-bfc3-1a7df1ac6b77"
-"assets":
-  "dashboards":
-    "Redpanda Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": redpanda.application.uptime
-      "metadata_path": metadata.csv
-      "prefix": redpanda.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10232"
-    "source_type_name": Redpanda
-  "logs":
-    "source": redpanda
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Redpanda
-  "sales_email": support@redpanda.com
-  "support_email": support@redpanda.com
-"categories":
+app_id: redpanda
+app_uuid: 4c7855c5-6c2c-46c5-bfc3-1a7df1ac6b77
+assets:
+  dashboards:
+    Redpanda Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: redpanda.application.uptime
+      metadata_path: metadata.csv
+      prefix: redpanda.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10232
+    source_type_name: Redpanda
+  logs:
+    source: redpanda
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Redpanda
+  sales_email: support@redpanda.com
+  support_email: support@redpanda.com
+categories:
 - log collection
 - message queues
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "redpanda"
-"integration_id": "redpanda"
-"integration_title": "Redpanda"
-"integration_version": "2.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "redpanda"
-"public_title": "Redpanda"
-"short_description": "Monitor the overall health and performance of Redpanda clusters."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: redpanda
+integration_id: redpanda
+integration_title: Redpanda
+integration_version: 2.0.0
+is_public: true
+manifest_version: 2.0.0
+name: redpanda
+public_title: Redpanda
+short_description: Monitor the overall health and performance of Redpanda clusters.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Message Queues"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor the overall health and performance of Redpanda clusters.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Redpanda
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Message Queues
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor the overall health and performance of Redpanda clusters.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Redpanda
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -162,9 +162,9 @@ By default, collecting logs is disabled in the Datadog Agent. Log collection is 
       source: redpanda
     ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-extras/blob/master/redpanda/datadog_checks/redpanda/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -186,7 +186,7 @@ To enable logs, see [Kubernetes Log Collection][2].
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "redpanda", "service": "redpanda_cluster"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 {{% /tab %}}
 {{< /tabs >}}
@@ -216,6 +216,6 @@ Need help? Contact [Datadog support][5].
 
 [1]: https://redpanda.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/community-integrations-installation-with-docker-agent
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/

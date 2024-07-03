@@ -1,5 +1,5 @@
 ---
-title: "SNS Component (Deprecated)"
+title: SNS Component (Deprecated)
 ---
 ## 概要
 

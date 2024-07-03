@@ -1,12 +1,12 @@
 ---
-title: Setting up Cloud Security Management on ECS EC2
-code_lang: ecs_ec2
-type: multi-code-lang
-code_lang_weight: 70 # a number that represents relative weight.
 aliases:
-  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/ecs_ec2
-  - /security/cloud_security_management/setup/csm_pro/agent/ecs_ec2/
-  - /security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
+- /ja/security/cloud_security_management/setup/csm_cloud_workload_security/agent/ecs_ec2
+- /ja/security/cloud_security_management/setup/csm_pro/agent/ecs_ec2/
+- /ja/security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
+code_lang: ecs_ec2
+code_lang_weight: 70
+title: Setting up Cloud Security Management on ECS EC2
+type: multi-code-lang
 ---
 
 Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
@@ -183,7 +183,7 @@ Agent がコンテナイメージから SBOM を抽出できない場合は、�
 }
 ```
 
-[1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
-[3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[1]: /ja/security/cloud_security_management/misconfigurations/
+[2]: /ja/security/threats
+[3]: /ja/security/cloud_security_management/vulnerabilities
+[4]: /ja/security/cloud_security_management/setup#supported-deployment-types-and-features

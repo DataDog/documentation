@@ -1,6 +1,6 @@
 ---
-title: Build diagrams with Mermaid JS
 disable_toc: false
+title: Build diagrams with Mermaid JS
 ---
 
 ## 概要

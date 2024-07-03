@@ -1,19 +1,19 @@
 ---
-title: (LEGACY) Set Up Observability Pipelines in your Splunk Environment
 aliases:
-  - /integrations/observability_pipelines/splunk
-  - /observability_pipelines/guide/setup_splunk_environment
-  - /observability_pipelines/setup/splunk/
+- /ja/integrations/observability_pipelines/splunk
+- /ja/observability_pipelines/guide/setup_splunk_environment
+- /ja/observability_pipelines/setup/splunk/
 further_reading:
-  - link: /observability_pipelines/legacy/working_with_data/
-    tag: Documentation
-    text: Working with data using Observability Pipelines
-  - link: /observability_pipelines/legacy/configurations/
-    tag: Documentation
-    text: Learn more about Observability Pipelines configurations
-  - link: "https://dtdg.co/d22op"
-    tag: ラーニングセンター
-    text: Safe and Secure Local Processing with Observability Pipelines
+- link: /observability_pipelines/legacy/working_with_data/
+  tag: Documentation
+  text: Working with data using Observability Pipelines
+- link: /observability_pipelines/legacy/configurations/
+  tag: Documentation
+  text: Learn more about Observability Pipelines configurations
+- link: https://dtdg.co/d22op
+  tag: ラーニングセンター
+  text: Safe and Secure Local Processing with Observability Pipelines
+title: (LEGACY) Set Up Observability Pipelines in your Splunk Environment
 ---
 
 {{< site-region region="gov" >}}
@@ -81,7 +81,7 @@ See [Best Practices for OPW Aggregator Architecture][4] for production-level req
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 [2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
-[4]: /observability_pipelines/legacy/architecture/
+[4]: /ja/observability_pipelines/legacy/architecture/
 
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
@@ -89,14 +89,14 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
 
 See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
 
-[1]: /observability_pipelines/legacy/architecture/
+[1]: /ja/observability_pipelines/legacy/architecture/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
 See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
 
-[1]: /observability_pipelines/legacy/architecture/
+[1]: /ja/observability_pipelines/legacy/architecture/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 There are no provider-specific requirements for APT-based Linux.
@@ -489,7 +489,7 @@ service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zo
 See [AWS Load Balancer Controller][3] for more details.
 
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
-[2]: /observability_pipelines/legacy/architecture/capacity_planning_scaling/
+[2]: /ja/observability_pipelines/legacy/architecture/capacity_planning_scaling/
 [3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
@@ -503,7 +503,7 @@ See [Capacity Planning and Scaling][1] for load balancer recommendations when sc
 #### クロスアベイラビリティゾーンロードバランシング
 提供されている Helm の構成は、ロードバランシングの簡素化を目指していますが、クロス AZ (アヴェイラビリティーゾーン) トラフィックの潜在的な価格的影響を考慮する必要があります。可能な限り、サンプルは複数のクロス AZ ホップが起こりうる状況を避けるよう努めています。
 
-[1]: /observability_pipelines/legacy/architecture/capacity_planning_scaling/
+[1]: /ja/observability_pipelines/legacy/architecture/capacity_planning_scaling/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 Use the load balancers provided by your cloud provider.
@@ -519,7 +519,7 @@ See [Capacity Planning and Scaling][1] for load balancer recommendations when sc
 
 Global Access is enabled by default since that is likely required for use in a shared tools cluster.
 
-[1]: /observability_pipelines/legacy/architecture/capacity_planning_scaling/
+[1]: /ja/observability_pipelines/legacy/architecture/capacity_planning_scaling/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
@@ -606,6 +606,6 @@ The sample Observability Pipelines configuration does the following:
 ## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/legacy/
-[2]: /account_management/api-app-keys/#api-keys
+[1]: /ja/observability_pipelines/legacy/
+[2]: /ja/account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/observability-pipelines/create

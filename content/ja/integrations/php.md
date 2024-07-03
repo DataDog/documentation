@@ -1,31 +1,31 @@
 ---
-"categories":
-- "languages"
-- "log collection"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "PHP アプリケーションのメトリクス、トレース、ログ、プロファイルデータを収集します。"
-"doc_link": "https://docs.datadoghq.com/integrations/php/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-php-performance/"
-  "tag": "ブログ"
-  "text": "Datadog APM と分散型トレーシングを使用した PHP の監視。"
-- "link": "https://www.datadoghq.com/blog/php-logging-guide/"
-  "tag": "ブログ"
-  "text": "PHP ログを収集、カスタマイズ、分析する方法。"
-"git_integration_title": "php"
-"has_logo": true
-"integration_id": "php"
-"integration_title": "PHP"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "php"
-"public_title": "Datadog-PHP Integration"
-"short_description": "Collect metrics, traces, logs, and profile data from your PHP applications."
-"version": "1.0"
+categories:
+- languages
+- log collection
+- tracing
+custom_kind: インテグレーション
+dependencies: []
+description: PHP アプリケーションのメトリクス、トレース、ログ、プロファイルデータを収集します。
+doc_link: https://docs.datadoghq.com/integrations/php/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-php-performance/
+  tag: ブログ
+  text: Datadog APM と分散型トレーシングを使用した PHP の監視。
+- link: https://www.datadoghq.com/blog/php-logging-guide/
+  tag: ブログ
+  text: PHP ログを収集、カスタマイズ、分析する方法。
+git_integration_title: php
+has_logo: true
+integration_id: php
+integration_title: PHP
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: php
+public_title: Datadog-PHP Integration
+short_description: Collect metrics, traces, logs, and profile data from your PHP applications.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -61,9 +61,8 @@ Need help? Contact [Datadog support][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/developers/dogstatsd/?tab=php
-[2]: https://docs.datadoghq.com/tracing/setup/php/
-[3]: https://docs.datadoghq.com/logs/log_collection/php/
-[4]: https://docs.datadoghq.com/profiler/enabling/php/
-[5]: https://docs.datadoghq.com/help/
-
+[1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=php
+[2]: https://docs.datadoghq.com/ja/tracing/setup/php/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/php/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/php/
+[5]: https://docs.datadoghq.com/ja/help/

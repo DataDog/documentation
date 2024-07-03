@@ -1,26 +1,26 @@
 ---
-title: Setting up Cloud Security Management
 aliases:
-  - /security_platform/cloud_workload_security/getting_started
-  - /security/cloud_workload_security/getting_started
-  - /security/cloud_workload_security/setup
-  - /security/threats/setup
-  - /security_platform/cspm/getting_started
-  - /security/cspm/getting_started
-  - /security/cspm/setup
-  - /security/misconfigurations/setup
-  - /security/vulnerabilities/setup
-  - /security/infrastructure_vulnerabilities/setup/
-  - /security/cloud_security_management/setup/csm_enterprise
-  - /security/cloud_security_management/setup/csm_cloud_workload_security
-  - /security/cloud_security_management/setup/csm_pro
+- /ja/security_platform/cloud_workload_security/getting_started
+- /ja/security/cloud_workload_security/getting_started
+- /ja/security/cloud_workload_security/setup
+- /ja/security/threats/setup
+- /ja/security_platform/cspm/getting_started
+- /ja/security/cspm/getting_started
+- /ja/security/cspm/setup
+- /ja/security/misconfigurations/setup
+- /ja/security/vulnerabilities/setup
+- /ja/security/infrastructure_vulnerabilities/setup/
+- /ja/security/cloud_security_management/setup/csm_enterprise
+- /ja/security/cloud_security_management/setup/csm_cloud_workload_security
+- /ja/security/cloud_security_management/setup/csm_pro
 further_reading:
-    - link: /security/cloud_security_management/setup/supported_deployment_types
-      tag: Documentation
-      text: Supported Deployment Types
-    - link: /security/cloud_security_management/guide/agent_variables/
-      tag: ガイド
-      text: Cloud Security Management Agent Variables
+- link: /security/cloud_security_management/setup/supported_deployment_types
+  tag: Documentation
+  text: Supported Deployment Types
+- link: /security/cloud_security_management/guide/agent_variables/
+  tag: ガイド
+  text: Cloud Security Management Agent Variables
+title: Setting up Cloud Security Management
 ---
 
 Datadog provides a guided workflow for setting up [Cloud Security Management (CSM)][6]. The first step is to select the features you want to enable. After that, follow the instructions provided to configure the selected features.
@@ -105,17 +105,17 @@ You can enable additional CSM features at any time by returning to the [Features
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agent
-[2]: /security/cloud_security_management/setup/cloud_accounts
+[1]: /ja/security/cloud_security_management/setup/agent
+[2]: /ja/security/cloud_security_management/setup/cloud_accounts
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: /security/cloud_security_management/setup/agentless_scanning
+[4]: /ja/security/cloud_security_management/setup/agentless_scanning
 [5]: https://app.datadoghq.com/security/csm
-[6]: /security/cloud_security_management/
-[7]: /security/guide/aws_fargate_config_guide/
+[6]: /ja/security/cloud_security_management/
+[7]: /ja/security/guide/aws_fargate_config_guide/
 [9]: https://app.datadoghq.com/security/getting-started
 [10]: https://app.datadoghq.com/security/csm/intro
 [11]: https://app.datadoghq.com/security/configuration/csm/features
-[12]: /security/cloud_security_management/setup/threat_detection
-[13]: /security/cloud_security_management/setup/identity_risks_ciem
-[14]: /security/cloud_security_management/setup/host_vulnerability_management
-[15]: /security/cloud_security_management/setup/container_vulnerability_management
+[12]: /ja/security/cloud_security_management/setup/threat_detection
+[13]: /ja/security/cloud_security_management/setup/identity_risks_ciem
+[14]: /ja/security/cloud_security_management/setup/host_vulnerability_management
+[15]: /ja/security/cloud_security_management/setup/container_vulnerability_management

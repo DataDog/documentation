@@ -1,8 +1,9 @@
 ---
-title: Service Page
-kind: documentation
+algolia:
+  tags:
+  - service page
 aliases:
-- /tracing/visualization/service/
+- /ja/tracing/visualization/service/
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
@@ -16,14 +17,15 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentation
   text: Understand how to read a Datadog Trace
-- link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+- link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: Blog
   text: Add an APM service page URL to your clipboard
-- link: "https://www.datadoghq.com/blog/apm-security-view/"
+- link: https://www.datadoghq.com/blog/apm-security-view/
   tag: Blog
-  text: Gain visibility into risks, vulnerabilities, and attacks with APM Security View
-algolia:
-  tags: [service page]
+  text: Gain visibility into risks, vulnerabilities, and attacks with APM Security
+    View
+kind: documentation
+title: Service Page
 ---
 
 {{< img src="tracing/visualization/service/overview_service_page_1.png" alt="Detailed service page" style="width:100%;">}}
@@ -257,25 +259,25 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/
-[2]: /tracing/services/resource_page/
-[3]: /monitors/types/apm/
-[4]: /tracing/error_tracking/
-[5]: /service_management/service_level_objectives/
-[6]: /service_management/incident_management/
-[7]: /watchdog/
-[8]: /tracing/metrics/metrics_namespace/
-[9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[10]: /dashboards/
-[11]: /tracing/glossary/#resources
-[12]: /tracing/services/deployment_tracking/#versions-deployed
-[13]: /getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
-[14]: /tracing/metrics/runtime_metrics/
-[15]: /profiler/
-[16]: /tracing/trace_explorer/query_syntax/#facets
+[1]: /ja/tracing/glossary/
+[2]: /ja/tracing/services/resource_page/
+[3]: /ja/monitors/types/apm/
+[4]: /ja/tracing/error_tracking/
+[5]: /ja/service_management/service_level_objectives/
+[6]: /ja/service_management/incident_management/
+[7]: /ja/watchdog/
+[8]: /ja/tracing/metrics/metrics_namespace/
+[9]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[10]: /ja/dashboards/
+[11]: /ja/tracing/glossary/#resources
+[12]: /ja/tracing/services/deployment_tracking/#versions-deployed
+[13]: /ja/getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
+[14]: /ja/tracing/metrics/runtime_metrics/
+[15]: /ja/profiler/
+[16]: /ja/tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /security/application_security/how-appsec-works/
+[18]: /ja/security/application_security/how-appsec-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
-[21]: /database_monitoring/connect_dbm_and_apm/
-[22]: /cloud_cost_management/
+[21]: /ja/database_monitoring/connect_dbm_and_apm/
+[22]: /ja/cloud_cost_management/
 [23]: https://app.datadoghq.com/services

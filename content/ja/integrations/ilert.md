@@ -1,69 +1,69 @@
 ---
-"app_id": "ilert"
-"app_uuid": "12731389-915a-4fb7-baec-3319f87dfc7f"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": ilert.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10154"
-    "source_type_name": iLert
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": ilert
-  "sales_email": support@ilert.com
-  "support_email": support@ilert.com
-"categories":
+app_id: ilert
+app_uuid: 12731389-915a-4fb7-baec-3319f87dfc7f
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: ilert.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10154
+    source_type_name: iLert
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: ilert
+  sales_email: support@ilert.com
+  support_email: support@ilert.com
+categories:
 - alerting
 - collaboration
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ilert"
-"integration_id": "ilert"
-"integration_title": "ilert"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ilert"
-"public_title": "ilert"
-"short_description": "Get notified of your Datadog alerts & take actions using ilert"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ilert
+integration_id: ilert
+integration_title: ilert
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: ilert
+public_title: ilert
+short_description: Get notified of your Datadog alerts & take actions using ilert
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Issue Tracking"
-  - "Category::Notifications"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Get notified of your Datadog alerts & take actions using ilert
-  "media":
-  - "caption": ilert alert list
-    "image_url": images/ilert-alert-list.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": ilert
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Get notified of your Datadog alerts & take actions using ilert
+  media:
+  - caption: ilert alert list
+    image_url: images/ilert-alert-list.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ilert
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -161,5 +161,4 @@ Need help? Contact [Datadog Support][9].
 [6]: https://app.datadoghq.com/integrations/webhooks
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ilert/images/datadog-webhook-new.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ilert/images/datadog-webhook-view.png
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

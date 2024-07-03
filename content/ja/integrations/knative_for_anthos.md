@@ -1,5 +1,5 @@
 ---
-"categories":
+categories:
 - cloud
 - configuration & deployment
 - containers
@@ -7,22 +7,24 @@
 - kubernetes
 - log collection
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Collect metrics and logs from Knative for Anthos clusters and analyze them in Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/knative_for_anthos/"
-"draft": false
-"git_integration_title": "knative_for_anthos"
-"has_logo": true
-"integration_id": "knative-for-anthos"
-"integration_title": "Knative for Anthos"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "knative_for_anthos"
-"public_title": "Datadog- Knative for Anthos Integration"
-"short_description": "Collect metrics and logs from your Knative for Anthos clusters and analyze them in Datadog."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Collect metrics and logs from Knative for Anthos clusters and analyze
+  them in Datadog.
+doc_link: https://docs.datadoghq.com/integrations/knative_for_anthos/
+draft: false
+git_integration_title: knative_for_anthos
+has_logo: true
+integration_id: knative-for-anthos
+integration_title: Knative for Anthos
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: knative_for_anthos
+public_title: Datadog- Knative for Anthos Integration
+short_description: Collect metrics and logs from your Knative for Anthos clusters
+  and analyze them in Datadog.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -85,11 +87,10 @@ Need help? Contact [Datadog support][8].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://knative.dev/
-[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
 [3]: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
 [4]: https://cloud.google.com/anthos/run/docs/logging
-[5]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
+[5]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
 [6]: https://console.cloud.google.com/anthos/run
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_run_for_anthos/google_cloud_run_for_anthos_metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

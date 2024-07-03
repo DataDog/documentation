@@ -1,17 +1,17 @@
 ---
-title: Intelligent Test Runner
 aliases:
-- /continuous_integration/intelligent_test_runner/
+- /ja/continuous_integration/intelligent_test_runner/
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-    tag: Release Notes
-    text: Check out the latest Software Delivery releases! (App login required)
-  - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
-    tag: Blog
-    text: Streamline CI testing with Datadog Intelligent Test Runner
-  - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
-    tag: Blog
-    text: Monitor all your CI pipelines with Datadog
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: Release Notes
+  text: Check out the latest Software Delivery releases! (App login required)
+- link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
+  tag: Blog
+  text: Streamline CI testing with Datadog Intelligent Test Runner
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
+  tag: Blog
+  text: Monitor all your CI pipelines with Datadog
+title: Intelligent Test Runner
 ---
 
 ## 概要
@@ -111,10 +111,10 @@ Track your organization's savings and adoption of Intelligent Test Runner throug
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /intelligent_test_runner/how_it_works/
-[2]: /glossary/#flaky-test
-[3]: /continuous_integration/intelligent_test_runner/setup
-[4]: /continuous_integration/tests/
+[1]: /ja/intelligent_test_runner/how_it_works/
+[2]: /ja/glossary/#flaky-test
+[3]: /ja/continuous_integration/intelligent_test_runner/setup
+[4]: /ja/continuous_integration/tests/
 [5]: https://app.datadoghq.com/ci/settings/test-service
 [6]: https://git-scm.com/
 [7]: https://app.datadoghq.com/ci/test-runs

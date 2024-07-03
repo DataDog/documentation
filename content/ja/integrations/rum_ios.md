@@ -1,45 +1,45 @@
 ---
-"app_id": "rum-ios"
-"app_uuid": "53933f32-091c-4b8d-83a5-bd53ac9eacdb"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-ios
+app_uuid: 53933f32-091c-4b8d-83a5-bd53ac9eacdb
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - metrics
 - mobile
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_ios/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_ios"
-"integration_id": "rum-ios"
-"integration_title": "iOS"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_ios"
-"public_title": "iOS"
-"short_description": "Monitor iOS applications and generate metrics using Datadog RUM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_ios/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_ios
+integration_id: rum-ios
+integration_title: iOS
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_ios
+public_title: iOS
+short_description: Monitor iOS applications and generate metrics using Datadog RUM
+supported_os:
 - ios
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Mobile"
-  - "Category::Tracing"
-  - "Supported OS::iOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor iOS applications and generate metrics using Datadog RUM
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": iOS
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Mobile
+  - Category::Tracing
+  - Supported OS::iOS
+  configuration: README.md#Setup
+  description: Monitor iOS applications and generate metrics using Datadog RUM
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: iOS
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -105,12 +105,11 @@ Additional helpful documentation, links, and articles:
 
 
 [1]: https://app.datadoghq.com/integrations/rum-ios
-[2]: https://docs.datadoghq.com/real_user_monitoring/ios/?tabs=swift#setup
-[3]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ios/?tab=cocoapods
-[4]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=iosrum#setup-rum
-[5]: https://docs.datadoghq.com/logs/log_collection/ios/
-[6]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[7]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected/
-[8]: https://docs.datadoghq.com/help/
-[9]: https://docs.datadoghq.com/real_user_monitoring/ios/
-
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/?tabs=swift#setup
+[3]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ios/?tab=cocoapods
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=iosrum#setup-rum
+[5]: https://docs.datadoghq.com/ja/logs/log_collection/ios/
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[7]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected/
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/

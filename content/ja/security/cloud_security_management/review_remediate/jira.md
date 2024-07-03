@@ -1,21 +1,21 @@
 ---
-title: Create Jira Issues for Cloud Security Management Issues
-further_reading:
-  - link: /security/cloud_security_management/guide
-    tag: Documentation
-    text: Cloud Security Management Guides
-  - link: /integrations/jira/
-    tag: Documentation
-    text: Datadog Jira Integration
 aliases:
-  - /security/cloud_security_management/guide/jira
+- /ja/security/cloud_security_management/guide/jira
+further_reading:
+- link: /security/cloud_security_management/guide
+  tag: Documentation
+  text: Cloud Security Management Guides
+- link: /integrations/jira/
+  tag: Documentation
+  text: Datadog Jira Integration
 products:
-  - name: CSM Misconfigurations
-    url: /security/cloud_security_management/misconfigurations/
-    icon: cloud-security-management
-  - name: CSM Identity Risks
-    url: /security/cloud_security_management/identity_risks/
-    icon: cloud-security-management
+- icon: cloud-security-management
+  name: CSM Misconfigurations
+  url: /security/cloud_security_management/misconfigurations/
+- icon: cloud-security-management
+  name: CSM Identity Risks
+  url: /security/cloud_security_management/identity_risks/
+title: Create Jira Issues for Cloud Security Management Issues
 ---
 
 {{< product-availability >}}
@@ -100,8 +100,8 @@ After you create the issue, a link to the Jira issue is displayed on the side pa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/jira/
-[2]: /account_management/rbac/permissions/#cloud-security-platform
-[3]: /security/cloud_security_management/misconfigurations/
-[4]: /security/cloud_security_management/identity_risks/
+[1]: /ja/integrations/jira/
+[2]: /ja/account_management/rbac/permissions/#cloud-security-platform
+[3]: /ja/security/cloud_security_management/misconfigurations/
+[4]: /ja/security/cloud_security_management/identity_risks/
 [5]: https://app.datadoghq.com/integrations/jira?search=jira

@@ -1,23 +1,24 @@
 ---
+algolia:
+  tags:
+  - api
+cascade:
+  algolia:
+    category: API
+    rank: 10
+    subcategory: API Reference
+further_reading:
+- link: /api/latest/using-the-api/
+  tag: Documentation
+  text: Using the API
+- link: /api/latest/scopes/
+  tag: Documentation
+  text: Authorization Scopes
+- link: /api/latest/rate-limits/
+  tag: Documentation
+  text: Rate Limits
 title: API Reference
 type: documentation
-further_reading:
-  - link: /api/latest/using-the-api/
-    tag: Documentation
-    text: Using the API
-  - link: /api/latest/scopes/
-    tag: Documentation
-    text: Authorization Scopes
-  - link: /api/latest/rate-limits/
-    tag: Documentation
-    text: Rate Limits
-cascade:
-    algolia:
-        rank: 10
-        category: API
-        subcategory: API Reference
-algolia:
-  tags: [api]
 ---
 
 {{< h2 >}}API Reference{{< /h2 >}}
@@ -212,10 +213,10 @@ Trying to get started with the application instead? Check out Datadogs general [
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
+[1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#application-keys
 [3]: https://run.pstmn.io/button.svg
-[4]: /api/v1/using-the-api/
+[4]: /ja/api/v1/using-the-api/
 [5]: https://brew.sh
-[6]: https://docs.datadoghq.com/developers/community/libraries/
-[7]: /getting_started/application/
+[6]: https://docs.datadoghq.com/ja/developers/community/libraries/
+[7]: /ja/getting_started/application/

@@ -1,23 +1,23 @@
 ---
-"categories":
-- "cloud"
-- "collaboration"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog アラートとグラフを Moxtra に送信。"
-"doc_link": "https://docs.datadoghq.com/integrations/moxtra/"
-"draft": false
-"git_integration_title": "moxtra"
-"has_logo": true
-"integration_id": "moxtra"
-"integration_title": "Moxtra"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "moxtra"
-"public_title": "Datadog-Moxtra Integration"
-"short_description": "Send Datadog alerts and graphs to Moxtra."
-"version": "1.0"
+categories:
+- cloud
+- collaboration
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog アラートとグラフを Moxtra に送信。
+doc_link: https://docs.datadoghq.com/integrations/moxtra/
+draft: false
+git_integration_title: moxtra
+has_logo: true
+integration_id: moxtra
+integration_title: Moxtra
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: moxtra
+public_title: Datadog-Moxtra Integration
+short_description: Send Datadog alerts and graphs to Moxtra.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -61,5 +61,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/integrations/webhooks
 [2]: https://app.datadoghq.com/integrations/moxtra
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

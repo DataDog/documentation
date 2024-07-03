@@ -1,11 +1,10 @@
 ---
-title: Understanding How Rule Scopes Work in Quality Gates
-kind: ガイド
 description: Learn how to configure rule scopes for Quality Gate rules.
 further_reading:
-  - link: /quality_gates/setup
-    tag: ドキュメント
-    text: Learn how to set up Quality Gates
+- link: /quality_gates/setup
+  tag: ドキュメント
+  text: Learn how to set up Quality Gates
+title: Understanding How Rule Scopes Work in Quality Gates
 ---
 
 ## 概要

@@ -1,19 +1,19 @@
 ---
-title: Getting Started with Private Locations
-kind: documentation
 further_reading:
-    - link: "https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/"
-      tag: Blog
-      text: Monitor your Synthetic private locations with Datadog
-    - link: /getting_started/synthetics/api_test
-      tag: Documentation
-      text: Create your first API test
-    - link: /getting_started/synthetics/browser_test
-      tag: Documentation
-      text: Create your first browser test
-    - link: /synthetics/private_locations
-      tag: Documentation
-      text: Learn more about private locations
+- link: https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/
+  tag: Blog
+  text: Monitor your Synthetic private locations with Datadog
+- link: /getting_started/synthetics/api_test
+  tag: Documentation
+  text: Create your first API test
+- link: /getting_started/synthetics/browser_test
+  tag: Documentation
+  text: Create your first browser test
+- link: /synthetics/private_locations
+  tag: Documentation
+  text: Learn more about private locations
+kind: documentation
+title: Getting Started with Private Locations
 ---
 
 ## Overview
@@ -99,17 +99,17 @@ Use your new private location just like a managed location in your Synthetic tes
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_testing/cicd_integrations
+[1]: /ja/continuous_testing/cicd_integrations
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
-[3]: /getting_started/synthetics/
+[3]: /ja/getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [5]: https://app.datadoghq.com/synthetics/settings/private-locations
-[6]: /synthetics/private_locations/configuration/#configuration-options
-[7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
-[8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
-[9]: /getting_started/synthetics/browser_test
+[6]: /ja/synthetics/private_locations/configuration/#configuration-options
+[7]: /ja/synthetics/private_locations/?tab=docker#blocking-reserved-ips
+[8]: /ja/getting_started/synthetics/api_test#create-a-multistep-api-test
+[9]: /ja/getting_started/synthetics/browser_test
 [10]: https://podman.io/
 [11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
-[12]: /synthetics/private_locations?tab=windows#install-your-private-location
+[12]: /ja/synthetics/private_locations?tab=windows#install-your-private-location
 [13]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.48.0.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/

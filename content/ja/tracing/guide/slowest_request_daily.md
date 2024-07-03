@@ -1,6 +1,4 @@
 ---
-title: Debug the slowest trace on the slowest endpoint of a web service
-kind: guide
 further_reading:
 - link: /tracing/guide/alert_anomalies_p99_database/
   tag: 3 mins
@@ -12,21 +10,22 @@ further_reading:
   tag: 4 mins
   text: Create a Dashboard to track and correlate APM metrics
 - link: /tracing/guide/
-  tag: ""
+  tag: ''
   text: All guides
+title: Debug the slowest trace on the slowest endpoint of a web service
 ---
 
-_3 minutes to complete_
+_所要時間 3 分_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1_cropped.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it" style="width:90%;">}}
 
-With Datadog APM, you can investigate the performance of your endpoints, identify slow requests, and investigate the root cause of latency issues. This example shows the slowest [trace][1] of the day for an e-commerce checkout endpoint and how it slows down because of high CPU usage.
+Datadog APM を使用すると、エンドポイントのパフォーマンスを調査して遅いリクエストを特定し、レイテンシー問題の根本原因を調査できます。上記の例では、E コマースチェックポイントのエンドポイントについて、1 日のうちで最も遅い[トレース][1]と、CPU 使用率が高いためにそのトレースが遅くなっている様子を示しています。
 
 1. **Open the [Service Catalog][2]**.
 
     This page contains a list of all services sending data to Datadog. Note you can search for keywords, filter by `env-tag`, and set the time frame.
 
-2. **Search for a relevant and active web service and open the Service Page**.
+2. **関連性があるアクティブなウェブサービスを検索し、そのサービス詳細画面を開きます**。
 
     The `web-store` service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services.
 
@@ -34,14 +33,14 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
 
     In addition to throughput, latency, and error rate information, the service details page contains a list of Resources (major operations like API endpoints, SQL queries, and web requests) identified for the service.
 
-3. **Sort the Resource table by p99 latency** and click into the slowest resource.
-    **Note**: If you cannot see a p99 latency column, you can click on the cog icon `Change Columns` and flip the switch for `p99`.
+3. **リソース表を p99 レイテンシーで並べ替え**、最も遅いリソースをクリックして開きます。
+    **注**: p99 レイテンシーの列が表示されていない場合は、歯車アイコン `Change Columns` をクリックして `p99` に切り替えます。
 
-    The [Resource][4] page contains high-level metrics about this resource like throughput, latency, error rate, and a breakdown of the time spent on each downstream service from the resource. In addition, it contains the specific [traces][1] that pass through the resource and an aggregate view of the [spans][5] that make up these traces.
+    [Resource][4] ページには、スループット、レイテンシー、エラー率、リソースからの各ダウンストリームサービスにかかった時間の内訳など、このリソースに関する上位のメトリクスが表示されます。また、リソースをパススルーする特定の[トレース][1]や、このトレースを構成する[スパン][5]の集計ビューも確認できます。
 
      {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3_cropped.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over the top trace in the table and **click View Trace**
+4. 時間フィルターを `1d One Day` に設定します。トレース表までスクロールダウンし、**期間で並べ替え**、表の一番上のトレースにマウスを合わせ **View Trace をクリックします**。
 
     This is the flame graph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error-prone ones. The flame graph can be zoomed, scrolled, and explored naturally. Under the flame graph you can see associated metadata, Logs, and Host information.
 
@@ -51,20 +50,20 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
 
     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4_cropped.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-5. **Click into the Host tab**, observe the CPU and memory performance of the underlying host while the request was hitting it.
-6. **Click Open Host Dashboard** to view all relevant data about the host
+5. **Host タブをクリックして開き**、リクエストがヒットしていた間の下層のホストの CPU とメモリのパフォーマンスを調査します。
+6. **Open Host Dashboard をクリックして**、ホストに関するすべての関連データを表示します。
 
 Datadog APM seamlessly integrates with the other Datadog metrics and information - like infrastructure metrics and Logs. Using the flame graph, this information is available to you as well as any [custom metadata][7] you are sending with your traces.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#trace
+[1]: /ja/tracing/glossary/#trace
 [2]: https://app.datadoghq.com/services
-[3]: /tracing/glossary/#services
-[4]: /tracing/glossary/#resources
-[5]: /tracing/glossary/#spans
-[6]: /tracing/trace_explorer/trace_view/?tab=spanmetadata
-[7]: /tracing/guide/adding_metadata_to_spans/
-[8]: /tracing/other_telemetry/connect_logs_and_traces/
+[3]: /ja/tracing/glossary/#services
+[4]: /ja/tracing/glossary/#resources
+[5]: /ja/tracing/glossary/#spans
+[6]: /ja/tracing/trace_explorer/trace_view/?tab=spanmetadata
+[7]: /ja/tracing/guide/adding_metadata_to_spans/
+[8]: /ja/tracing/other_telemetry/connect_logs_and_traces/

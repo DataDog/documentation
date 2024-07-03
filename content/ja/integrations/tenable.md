@@ -1,55 +1,55 @@
 ---
-"app_id": "tenable"
-"app_uuid": "09a46b1b-a940-4aba-8e9f-bde9e5ae2c3f"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10089"
-    "source_type_name": Tenable
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: tenable
+app_uuid: 09a46b1b-a940-4aba-8e9f-bde9e5ae2c3f
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10089
+    source_type_name: Tenable
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/tenable/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "tenable"
-"integration_id": "tenable"
-"integration_title": "Tenable Nessus"
-"integration_version": "1.5.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "tenable"
-"public_title": "Tenable Nessus"
-"short_description": "Track nessus backend and webserver logs"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/tenable/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: tenable
+integration_id: tenable
+integration_title: Tenable Nessus
+integration_version: 1.5.0
+is_public: true
+manifest_version: 2.0.0
+name: tenable
+public_title: Tenable Nessus
+short_description: Track nessus backend and webserver logs
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Track nessus backend and webserver logs
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Tenable Nessus
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Track nessus backend and webserver logs
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Tenable Nessus
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -122,8 +122,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://www.tenable.com/products/nessus
-[2]: https://docs.datadoghq.com/agent/guide/integration-management/#install
+[2]: https://docs.datadoghq.com/ja/agent/guide/integration-management/#install
 [3]: https://github.com/DataDog/integrations-core/blob/master/tenable/datadog_checks/tenable/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/help/

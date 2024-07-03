@@ -1,7 +1,9 @@
 ---
-title: Agent Flare
+algolia:
+  tags:
+  - agent flare
 aliases:
-  - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+- /ja/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: ドキュメント
@@ -9,8 +11,7 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: ドキュメント
   text: Get the Status of an Agent Check
-algolia:
-  tags: [agent flare]
+title: Agent Flare
 ---
 
 {{< site-region region="gov" >}}
@@ -112,9 +113,9 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 **Note:** ECS Exec can only be enabled for new tasks. You must recreate existing tasks to use ECS Exec.
 
-[1]: /agent/basic_agent_usage/#gui
-[2]: /agent/basic_agent_usage/windows/#agent-v6
-[3]: /agent/guide/heroku-troubleshooting/#send-a-flare
+[1]: /ja/agent/basic_agent_usage/#gui
+[2]: /ja/agent/basic_agent_usage/windows/#agent-v6
+[3]: /ja/agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}
@@ -135,8 +136,8 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 **メモ**: Linux ベースのシステムを使用していて `service` ラッパーコマンドを使用できない場合は、[代替手段の一覧][2]をご参照ください。
 
-[1]: /agent/basic_agent_usage/windows/#agent-v5
-[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
+[1]: /ja/agent/basic_agent_usage/windows/#agent-v5
+[2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 {{% /tab %}}
 
 {{% tab "Cluster Agent" %}}
@@ -173,6 +174,5 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
-[2]: /agent/fleet_automation/
-[3]: /agent/remote_config#enabling-remote-configuration
-
+[2]: /ja/agent/fleet_automation/
+[3]: /ja/agent/remote_config#enabling-remote-configuration

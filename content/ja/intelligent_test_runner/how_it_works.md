@@ -1,19 +1,19 @@
 ---
-title: How Intelligent Test Runner Works in Datadog
-kind: documentation
 further_reading:
-  - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
-    tag: Blog
-    text: Streamline CI testing with Datadog Intelligent Test Runner
-  - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
-    tag: Blog
-    text: Monitor all your CI pipelines with Datadog
-  - link: /intelligent_test_runner
-    tag: Documentation
-    text: Learn about Intelligent Test Runner
-  - link: /tests
-    tag: Documentation
-    text: Learn about Test Visibility
+- link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
+  tag: Blog
+  text: Streamline CI testing with Datadog Intelligent Test Runner
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
+  tag: Blog
+  text: Monitor all your CI pipelines with Datadog
+- link: /intelligent_test_runner
+  tag: Documentation
+  text: Learn about Intelligent Test Runner
+- link: /tests
+  tag: Documentation
+  text: Learn about Test Visibility
+kind: documentation
+title: How Intelligent Test Runner Works in Datadog
 ---
 
 ## Overview
@@ -70,5 +70,5 @@ The diagram above shows a developer branch that branches out from `main` and has
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/
-[2]: /intelligent_test_runner/#tracked-files
+[1]: /ja/tests/
+[2]: /ja/intelligent_test_runner/#tracked-files

@@ -1,55 +1,55 @@
 ---
-"app_id": "workday"
-"app_uuid": "011547b7-572e-481a-988a-69c1ad8c6779"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10381"
-    "source_type_name": Workday
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: workday
+app_uuid: 011547b7-572e-481a-988a-69c1ad8c6779
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10381
+    source_type_name: Workday
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "workday"
-"integration_id": "workday"
-"integration_title": "Workday User Activity Logs"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "workday"
-"public_title": "Workday User Activity Logs"
-"short_description": "View Workday logs in Datadog for compliance and Cloud SIEM analysis."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: workday
+integration_id: workday
+integration_title: Workday User Activity Logs
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: workday
+public_title: Workday User Activity Logs
+short_description: View Workday logs in Datadog for compliance and Cloud SIEM analysis.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Submitted Data Type::Logs"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": View Workday logs in Datadog for compliance and Cloud SIEM analysis.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Workday User Activity Logs
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: View Workday logs in Datadog for compliance and Cloud SIEM analysis.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Workday User Activity Logs
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -144,5 +144,4 @@ Need help? Contact [Datadog support][5].
 [2]: https://app.datadoghq.com/logs/pipelines?search=workday
 [3]: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html#privacy/v1/get-/activityLogging
 [4]: https://github.com/DataDog/integrations-internal-core/blob/master/workday/assets/service_checks.json
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

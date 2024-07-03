@@ -1,6 +1,6 @@
 ---
-title: Log Volume Control for the Sumo Logic Hosted Collector HTTP Logs Source
 disable_toc: false
+title: Log Volume Control for the Sumo Logic Hosted Collector HTTP Logs Source
 ---
 
 ## 概要

@@ -1,8 +1,5 @@
 ---
-title: Resource-based sampling
-kind: ガイド
 disable_toc: false
-private: true
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: ドキュメント
@@ -10,6 +7,8 @@ further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls
   tag: ドキュメント
   text: 取り込み制御ページ
+private: true
+title: Resource-based sampling
 ---
 
 {{< callout url="https://forms.gle/WCG57yTCG27BCBB67" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
@@ -71,12 +70,12 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_pipeline/ingestion_controls#service-ingestion-summary
+[1]: /ja/tracing/trace_pipeline/ingestion_controls#service-ingestion-summary
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
-[3]: /agent/remote_config
-[4]: /account_management/rbac/permissions/
+[3]: /ja/agent/remote_config
+[4]: /ja/account_management/rbac/permissions/
 [5]: github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
 [6]: github.com/DataDog/dd-trace-go/releases/tag/v1.63.1
-[7]: /tracing/trace_pipeline/ingestion_mechanisms#in-tracing-libraries-user-defined-rules
-[8]: /tracing/trace_pipeline/ingestion_mechanisms#in-the-agent
-[9]: /tracing/trace_explorer/#live-search-for-15-minutes
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms#in-tracing-libraries-user-defined-rules
+[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent
+[9]: /ja/tracing/trace_explorer/#live-search-for-15-minutes

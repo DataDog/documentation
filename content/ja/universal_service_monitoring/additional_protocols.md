@@ -1,15 +1,15 @@
 ---
-title: Cloud Service Discovery and Additional Protocols
-kind: documentation
-is_beta: true
-private: true
 further_reading:
 - link: /universal_service_monitoring/
   tag: Documentation
   text: Universal Service Monitoring
-- link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
+- link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: Blog
   text: Golden signals in seconds with Universal Service Monitoring
+is_beta: true
+kind: documentation
+private: true
+title: Cloud Service Discovery and Additional Protocols
 ---
 
 {{< callout url="https://docs.google.com/forms/d/1dYRQxWEAC3nFsv75tlG0hbiPXd899r36v5R2ar6hJLE/" >}}

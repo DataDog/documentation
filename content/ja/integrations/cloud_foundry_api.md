@@ -1,59 +1,59 @@
 ---
-"app_id": "cloud-foundry-api"
-"app_uuid": "a0c8e3e8-f3de-4405-88d3-0856e6c0948f"
-"assets":
-  "integration":
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cloud_foundry_api.events.count
-      "metadata_path": metadata.csv
-      "prefix": cloud_foundry_api.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_name": Cloud Foundry API
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: cloud-foundry-api
+app_uuid: a0c8e3e8-f3de-4405-88d3-0856e6c0948f
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cloud_foundry_api.events.count
+      metadata_path: metadata.csv
+      prefix: cloud_foundry_api.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cloud Foundry API
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cloud_foundry_api"
-"integration_id": "cloud-foundry-api"
-"integration_title": "Cloud Foundry API"
-"integration_version": "3.3.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cloud_foundry_api"
-"public_title": "Cloud Foundry API"
-"short_description": "Collects Cloud Foundry audit events."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cloud_foundry_api
+integration_id: cloud-foundry-api
+integration_title: Cloud Foundry API
+integration_version: 3.3.1
+is_public: true
+manifest_version: 2.0.0
+name: cloud_foundry_api
+public_title: Cloud Foundry API
+short_description: Collects Cloud Foundry audit events.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Cloud"
-  - "Category::Orchestration"
-  "configuration": "README.md#Setup"
-  "description": Collects Cloud Foundry audit events.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cloud Foundry API
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Orchestration
+  configuration: README.md#Setup
+  description: Collects Cloud Foundry audit events.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cloud Foundry API
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -102,12 +102,11 @@ Need help? Contact [Datadog support][9].
 
 
 [1]: http://v3-apidocs.cloudfoundry.org
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/datadog_checks/cloud_foundry_api/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/assets/service_checks.json
-[9]: https://docs.datadoghq.com/help
-
+[9]: https://docs.datadoghq.com/ja/help

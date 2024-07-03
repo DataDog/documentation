@@ -1,5 +1,5 @@
 ---
-title: "Area Component"
+title: Area Component
 ---
 ## 概要
 

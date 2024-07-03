@@ -1,9 +1,7 @@
 ---
-title: Correlated Logs Are Not Showing Up In The Trace ID Panel
-kind: documentation
 aliases:
-  - /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
-  - /tracing/troubleshooting/correlating-logs-not-showing-up-in-the-trace-id-panel/
+- /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+- /ja/tracing/troubleshooting/correlating-logs-not-showing-up-in-the-trace-id-panel/
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: Documentation
@@ -11,6 +9,8 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Documentation
   text: Ease troubleshooting with cross product correlation
+kind: documentation
+title: Correlated Logs Are Not Showing Up In The Trace ID Panel
 ---
 
 ## Overview
@@ -54,9 +54,9 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="The preprocessing for JSON logs page with the Trace Id section highlighted" >}}
 
-[1]: /tracing/glossary/#trace
-[2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#remapper
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/logs/log_configuration/processors/#remapper
 [4]: https://app.datadoghq.com/logs/pipelines/remapping
    {{% /tab %}}
    {{% tab "With Log integration" %}}
@@ -69,8 +69,8 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    It is possible that the log format is not recognized by the integration pipeline. In this case, clone the pipeline and follow the [parsing troubleshooting guide][2] to make sure the pipeline accepts the log format.
 
-[1]: /logs/log_collection/?tab=application#setup
-[2]: /logs/faq/how-to-investigate-a-log-parsing-issue/
+[1]: /ja/logs/log_collection/?tab=application#setup
+[2]: /ja/logs/faq/how-to-investigate-a-log-parsing-issue/
    {{% /tab %}}
    {{% tab "Custom" %}}
 
@@ -82,9 +82,9 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    2. Then define a [Trace remapper][3] on the extracted attribute to remap it to the official trace ID of the logs.
 
-[1]: /tracing/glossary/#trace
-[2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#trace-remapper
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/logs/log_configuration/processors/#trace-remapper
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -98,7 +98,7 @@ Once the IDs are properly injected and remapped to your logs, you can see the lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#trace
+[1]: /ja/tracing/glossary/#trace
 [2]: https://app.datadoghq.com/logs
-[3]: /logs/guide/logs-not-showing-expected-timestamp/
-[4]: /tracing/other_telemetry/connect_logs_and_traces/
+[3]: /ja/logs/guide/logs-not-showing-expected-timestamp/
+[4]: /ja/tracing/other_telemetry/connect_logs_and_traces/

@@ -1,14 +1,16 @@
 ---
-title: Set Up the Datadog Cluster Agent
+algolia:
+  tags:
+  - cluster agent
 aliases:
-- /agent/cluster_agent/setup
-- /agent/cluster_agent/event_collection
-- /containers/cluster_agent/event_collection
+- /ja/agent/cluster_agent/setup
+- /ja/agent/cluster_agent/event_collection
+- /ja/containers/cluster_agent/event_collection
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
   text: Introducing the Datadog Cluster Agent
-- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: Blog
   text: Autoscale your Kubernetes workloads with any Datadog metric
 - link: /agent/cluster_agent/clusterchecks/
@@ -17,8 +19,7 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentation
   text: Troubleshooting the Datadog Cluster Agent
-algolia:
-  tags: [cluster agent]
+title: Set Up the Datadog Cluster Agent
 ---
 
 Helm chart v2.7.0+ または Datadog Operator v0.7.0+ を使用して Datadog Agent をデプロイした場合、Cluster Agent はデフォルトで有効化されます。
@@ -193,9 +194,9 @@ Datadog Cluster Agent と通信するために、Datadog Agent の構成を変�
 これらの構成で DaemonSet を再デプロイすると、Datadog Agent は Cluster Agent と通信できるようになります。完全な例については、提供されている Cluster Agent [`daemonset.yaml` マニフェスト][14]を参照することができます。
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/manifests/cluster-agent
-[2]: /agent/kubernetes/?tab=daemonset
-[3]: /agent/faq/rbac-for-dca-running-on-aks-with-helm/
-[4]: /agent/cluster_agent/setup/?tab=daemonset#configure-the-datadog-agent
+[2]: /ja/agent/kubernetes/?tab=daemonset
+[3]: /ja/agent/faq/rbac-for-dca-running-on-aks-with-helm/
+[4]: /ja/agent/cluster_agent/setup/?tab=daemonset#configure-the-datadog-agent
 [5]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml
 [6]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/secret-api-key.yaml
 [7]: https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/manifests/cluster-agent/secret-application-key.yaml
@@ -203,8 +204,8 @@ Datadog Cluster Agent と通信するために、Datadog Agent の構成を変�
 [9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://app.datadoghq.com/access/application-keys
-[12]: /agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
-[13]: /agent/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
+[12]: /ja/agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
+[13]: /ja/agent/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
 [14]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
 {{% /tab %}}
 {{< /tabs >}}
@@ -299,5 +300,5 @@ clusterAgent:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
-[2]: https://docs.datadoghq.com/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
+[2]: https://docs.datadoghq.com/ja/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

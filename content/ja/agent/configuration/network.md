@@ -1,26 +1,31 @@
 ---
-title: Network Traffic
-aliases:
-    - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
-    - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
-    - /agent/network
-    - /agent/faq/network
-    - /agent/guide/network
-further_reading:
-    - link: /getting_started/site
-      tag: Documentation
-      text: Learn about the Datadog site
-    - link: /logs/
-      tag: Documentation
-      text: Collect your logs
-    - link: /infrastructure/process
-      tag: Documentation
-      text: Collect your processes
-    - link: tracing
-      tag: Documentation
-      text: Collect your traces
 algolia:
-  tags: [network traffic, destinations, ports, data buffering, static IP addresses]
+  tags:
+  - network traffic
+  - destinations
+  - ports
+  - data buffering
+  - static IP addresses
+aliases:
+- /ja/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
+- /ja/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
+- /ja/agent/network
+- /ja/agent/faq/network
+- /ja/agent/guide/network
+further_reading:
+- link: /getting_started/site
+  tag: Documentation
+  text: Learn about the Datadog site
+- link: /logs/
+  tag: Documentation
+  text: Collect your logs
+- link: /infrastructure/process
+  tag: Documentation
+  text: Collect your processes
+- link: tracing
+  tag: Documentation
+  text: Collect your traces
+title: Network Traffic
 ---
 
 ## 概要
@@ -73,8 +78,8 @@ Synthetic Worker < v0.1.5 の API テスト結果: `api.`{{< region-param key="d
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /agent/remote_config
-[102]: /database_monitoring/
+[101]: /ja/agent/remote_config
+[102]: /ja/database_monitoring/
 
 {{% /site-region %}}
 
@@ -90,9 +95,9 @@ HTTP: `agent-http-intake.logs.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.datadoghq.com`<br>
 `http-encrypted-intake.logs.datadoghq.com`
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[203]: /logs/log_collection/#logging-endpoints
+[200]: /ja/logs/
+[201]: /ja/data_security/logs/#hipaa-enabled-customers
+[203]: /ja/logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="eu" %}}
@@ -107,9 +112,9 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `gcp-encrypted-intake.logs.datadoghq.eu`<br>
 `http-encrypted-intake.logs.datadoghq.eu`
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
+[200]: /ja/logs/
+[201]: /ja/data_security/logs/#hipaa-enabled-customers
+[202]: /ja/logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="us3" %}}
@@ -122,9 +127,9 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
 `http-encrypted-intake.logs.us3.datadoghq.com`
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
+[200]: /ja/logs/
+[201]: /ja/data_security/logs/#hipaa-enabled-customers
+[202]: /ja/logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}
@@ -137,9 +142,9 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `http-encrypted-intake.logs.us5.datadoghq.com`
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
+[200]: /ja/logs/
+[201]: /ja/data_security/logs/#hipaa-enabled-customers
+[202]: /ja/logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="ap1" %}}
@@ -147,9 +152,9 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 : HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
 その他: [ログのエンドポイント][202]を参照してください
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
+[200]: /ja/logs/
+[201]: /ja/data_security/logs/#hipaa-enabled-customers
+[202]: /ja/logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
@@ -162,9 +167,9 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 `gcp-encrypted-intake.logs.ddog-gov.com`<br>
 `http-encrypted-intake.logs.ddog-gov.com`
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
+[200]: /ja/logs/
+[201]: /ja/data_security/logs/#hipaa-enabled-customers
+[202]: /ja/logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 その他すべての Agent データ
@@ -254,11 +259,11 @@ For example, Agent v7.31.0 sends flare data to `7-31-0-flare.agent.`{{< region-p
 10250/tcp
 : [Kubernetes HTTPS Kubelet][4] 用のポート。
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
-[5]: /containers/guide/cluster_agent_autoscaling_metrics
+[1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /ja/integrations/ntp/#overview
+[3]: /ja/logs/log_collection/#logging-endpoints
+[4]: /ja/agent/basic_agent_usage/kubernetes/
+[5]: /ja/containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
@@ -281,10 +286,10 @@ For example, Agent v7.31.0 sends flare data to `7-31-0-flare.agent.`{{< region-p
 10250/tcp
 : [Kubernetes HTTPS Kubelet][4] 用のポート。
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
+[1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /ja/integrations/ntp/#overview
+[3]: /ja/logs/log_collection/#logging-endpoints
+[4]: /ja/agent/basic_agent_usage/kubernetes/
 
 {{% /site-region %}}
 
@@ -303,10 +308,10 @@ For example, Agent v7.31.0 sends flare data to `7-31-0-flare.agent.`{{< region-p
 10250/tcp
 : [Kubernetes HTTPS Kubelet][4] 用のポート。
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
+[1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /ja/integrations/ntp/#overview
+[3]: /ja/logs/log_collection/#logging-endpoints
+[4]: /ja/agent/basic_agent_usage/kubernetes/
 
 {{% /site-region %}}
 
@@ -338,9 +343,9 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 8126/tcp
 : [APM Receiver][3] 用のポート
 
-[1]: /integrations/go_expvar/
-[2]: /agent/basic_agent_usage/#gui
-[3]: /tracing/
+[1]: /ja/integrations/go_expvar/
+[2]: /ja/agent/basic_agent_usage/#gui
+[3]: /ja/tracing/
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}
 
@@ -373,9 +378,9 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 17124/tcp
 : オプションの graphite アダプター。
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /tracing/
+[1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
+[2]: /ja/integrations/ntp/#overview
+[3]: /ja/tracing/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -450,16 +455,16 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/
-[2]: /database_monitoring/
-[3]: /infrastructure/livecontainers/
-[4]: /infrastructure/process/
-[5]: /infrastructure/containers/#kubernetes-orchestrator-explorer
-[6]: /real_user_monitoring/
-[7]: /profiler/
-[8]: /synthetics/private_locations
-[9]: /agent/configuration/proxy/
-[10]: /network_monitoring/devices
-[11]: /getting_started/site/
-[12]: /agent/troubleshooting/send_a_flare
-[13]: /infrastructure/containers/container_images
+[1]: /ja/tracing/
+[2]: /ja/database_monitoring/
+[3]: /ja/infrastructure/livecontainers/
+[4]: /ja/infrastructure/process/
+[5]: /ja/infrastructure/containers/#kubernetes-orchestrator-explorer
+[6]: /ja/real_user_monitoring/
+[7]: /ja/profiler/
+[8]: /ja/synthetics/private_locations
+[9]: /ja/agent/configuration/proxy/
+[10]: /ja/network_monitoring/devices
+[11]: /ja/getting_started/site/
+[12]: /ja/agent/troubleshooting/send_a_flare
+[13]: /ja/infrastructure/containers/container_images

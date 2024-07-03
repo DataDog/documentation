@@ -1,11 +1,10 @@
 ---
-title: 共有
 aliases:
-    - /graphing/faq/is-there-a-way-to-share-graphs
-    - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
-    - /graphing/dashboards/shared_graph/
+- /ja/graphing/faq/is-there-a-way-to-share-graphs
+- /ja/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
+- /ja/graphing/dashboards/shared_graph/
 further_reading:
-- link: "https://www.datadoghq.com/blog/dashboard-sharing/"
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
   tag: ブログ
   text: ダッシュボードを組織外の人と安全に共有する
 - link: /dashboards/
@@ -14,6 +13,7 @@ further_reading:
 - link: /dashboards/widgets/
   tag: ドキュメント
   text: ダッシュボードのウィジェットについて
+title: 共有
 ---
 
 ## 概要
@@ -35,5 +35,5 @@ To see the complete list of publicly shared dashboards, navigate to [**Organizat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/public-sharing/shared-dashboards
-[2]: /dashboards/sharing/public_dashboards/#revoke
-[3]: /dashboards/sharing/graphs/#revoke
+[2]: /ja/dashboards/sharing/public_dashboards/#revoke
+[3]: /ja/dashboards/sharing/graphs/#revoke

@@ -1,18 +1,18 @@
 ---
-title: Cluster Check Runners
 aliases:
-- /agent/cluster_agent/clusterchecksrunner
-- /containers/cluster_agent/clusterchecksrunner
+- /ja/agent/cluster_agent/clusterchecksrunner
+- /ja/containers/cluster_agent/clusterchecksrunner
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
   text: Introducing the Datadog Cluster Agent
-- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: Blog
   text: Autoscale your Kubernetes workloads with any Datadog metric
 - link: /containers/cluster_agent/clusterchecks/
   tag: Documentation
   text: Cluster Checks
+title: Cluster Check Runners
 ---
 
 Cluster Agent は[エンドポイントチェック][1]と[クラスターチェック][2]の 2 種類のチェックをディスパッチできます。チェックの内容は若干異なります。
@@ -96,8 +96,8 @@ clusterChecksRunner:
 **注**: Datadog Operator および Helm チャートは、どちらも `podAntiAffinity` を使用して複数のクラスターチェックランナーが同じノードに適用されるのを回避しています。Cluster Agent はノード名でクラスターチェックを識別するため、これは重要です。`podAntiAffinity` を使用することで名前の衝突を避けることができます。
 
 
-[1]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
-[3]: https://docs.datadoghq.com/agent/cluster_agent/setup/
+[1]: https://docs.datadoghq.com/ja/agent/cluster_agent/endpointschecks/
+[2]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
+[3]: https://docs.datadoghq.com/ja/agent/cluster_agent/setup/
 [4]: https://github.com/DataDog/datadog-operator
 [5]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml

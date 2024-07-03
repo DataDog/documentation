@@ -1,5 +1,5 @@
 ---
-title: "API Management Component"
+title: API Management Component
 ---
 
 ## 概要

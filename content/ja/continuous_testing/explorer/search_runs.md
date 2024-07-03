@@ -1,11 +1,11 @@
 ---
-title: Search Test Runs
-kind: documentation
 description: Examine all of your test runs and troubleshoot failing test results.
 further_reading:
 - link: /continuous_testing/explorer
   tag: Documentation
   text: Learn about the Synthetic Monitoring & Testing Results Explorer
+kind: documentation
+title: Search Test Runs
 ---
 
 ## Overview
@@ -90,4 +90,4 @@ For more information about searching for test runs, see [Search Syntax][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer/
-[2]: /continuous_testing/explorer/search_syntax
+[2]: /ja/continuous_testing/explorer/search_syntax

@@ -1,18 +1,18 @@
 ---
-title: Agent Environment Variables
 further_reading:
-  - link: "/agent/docker/#environment-variables"
-    tag: Documentation
-    text: Docker Agent environment variables
-  - link: "/agent/docker/apm/#docker-apm-agent-environment-variables"
-    tag: Documentation
-    text: APM Agent environment variables
-  - link: "/logs/log_collection/#container-log-collection"
-    tag: Documentation
-    text: Container log collection
-  - link: "/agent/configuration/proxy/#environment-variables"
-    tag: Documentation
-    text: Proxy environment variables
+- link: /agent/docker/#environment-variables
+  tag: Documentation
+  text: Docker Agent environment variables
+- link: /agent/docker/apm/#docker-apm-agent-environment-variables
+  tag: Documentation
+  text: APM Agent environment variables
+- link: /logs/log_collection/#container-log-collection
+  tag: Documentation
+  text: Container log collection
+- link: /agent/configuration/proxy/#environment-variables
+  tag: Documentation
+  text: Proxy environment variables
+title: Agent Environment Variables
 ---
 
 <div class="alert alert-warning">
@@ -110,11 +110,11 @@ Datadog Agent 7.45 から、Datadog Agent サービス (`datadog-agent.service` 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/configuration/proxy/#environment-variables
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /ja/getting_started/tagging/unified_service_tagging
+[3]: /ja/agent/configuration/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
-[5]: https://docs.datadoghq.com/agent/docker/apm/#docker-apm-agent-environment-variables
+[5]: https://docs.datadoghq.com/ja/agent/docker/apm/#docker-apm-agent-environment-variables
 [6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
 [7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
 [8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment

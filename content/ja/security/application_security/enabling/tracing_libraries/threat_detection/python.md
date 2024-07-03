@@ -1,25 +1,25 @@
 ---
-title: Enabling ASM for Python
-code_lang: python
-type: multi-code-lang
-code_lang_weight: 50
 aliases:
-  - /security_platform/application_security/getting_started/python
-  - /security/application_security/getting_started/python
-  - /security/application_security/enabling/python
+- /ja/security_platform/application_security/getting_started/python
+- /ja/security/application_security/getting_started/python
+- /ja/security/application_security/enabling/python
+code_lang: python
+code_lang_weight: 50
 further_reading:
-    - link: /security/application_security/add-user-info/
-      tag: Documentation
-      text: Adding user information to traces
-    - link: "https://github.com/DataDog/dd-trace-py"
-      tag: ソースコード
-      text: Python Datadog library source code
-    - link: /security/default_rules/?category=cat-application-security
-      tag: Documentation
-      text: OOTB Application Security Management Rules
-    - link: /security/application_security/troubleshooting
-      tag: Documentation
-      text: Troubleshooting Application Security Management
+- link: /security/application_security/add-user-info/
+  tag: Documentation
+  text: Adding user information to traces
+- link: https://github.com/DataDog/dd-trace-py
+  tag: ソースコード
+  text: Python Datadog library source code
+- link: /security/default_rules/?category=cat-application-security
+  tag: Documentation
+  text: OOTB Application Security Management Rules
+- link: /security/application_security/troubleshooting
+  tag: Documentation
+  text: Troubleshooting Application Security Management
+title: Enabling ASM for Python
+type: multi-code-lang
 ---
 
 Docker、Kubernetes、Amazon ECS、AWS Fargate で実行されている Python アプリのセキュリティを監視することができます。
@@ -112,4 +112,4 @@ Docker、Kubernetes、Amazon ECS、AWS Fargate で実行されている Python �
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/compatibility/python
+[1]: /ja/security/application_security/enabling/compatibility/python

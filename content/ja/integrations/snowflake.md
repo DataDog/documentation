@@ -1,68 +1,70 @@
 ---
-"app_id": "snowflake"
-"app_uuid": "23e9084d-5801-4a71-88fe-f62b7c1bb289"
-"assets":
-  "dashboards":
-    "Snowflake": assets/dashboards/snowflake.json
-    "Snowflake Organization Metrics": assets/dashboards/organization_metrics.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": snowflake.storage.storage_bytes.total
-      "metadata_path": metadata.csv
-      "prefix": snowflake.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10123"
-    "source_type_name": Snowflake
-  "monitors":
-    "Snowflake failed logins": assets/monitors/snowflake_failed_logins.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: snowflake
+app_uuid: 23e9084d-5801-4a71-88fe-f62b7c1bb289
+assets:
+  dashboards:
+    Snowflake: assets/dashboards/snowflake.json
+    Snowflake Organization Metrics: assets/dashboards/organization_metrics.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: snowflake.storage.storage_bytes.total
+      metadata_path: metadata.csv
+      prefix: snowflake.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10123
+    source_type_name: Snowflake
+  monitors:
+    Snowflake failed logins: assets/monitors/snowflake_failed_logins.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
 - data stores
 - cost management
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "snowflake"
-"integration_id": "snowflake"
-"integration_title": "Snowflake"
-"integration_version": "5.6.0"
-"is_public": true
-"kind": "integration"
-"manifest_version": "2.0.0"
-"name": "snowflake"
-"public_title": "Snowflake"
-"short_description": "Monitor key metrics for credit usage, storage, query, user history and more."
-"supported_os":
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: snowflake
+integration_id: snowflake
+integration_title: Snowflake
+integration_version: 5.6.0
+is_public: true
+kind: integration
+manifest_version: 2.0.0
+name: snowflake
+public_title: Snowflake
+short_description: Monitor key metrics for credit usage, storage, query, user history
+  and more.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Cloud"
-  - "Category::Data Stores"
-  - "Category::Cost Management"
-  "configuration": "README.md#Setup"
-  "description": Monitor key metrics for credit usage, storage, query, user history and more.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Snowflake
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Data Stores
+  - Category::Cost Management
+  configuration: README.md#Setup
+  description: Monitor key metrics for credit usage, storage, query, user history
+    and more.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Snowflake
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -340,20 +342,19 @@ Additional helpful documentation, links, and articles:
 
 [1]: https://www.snowflake.com/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-v6-python-3/?tab=hostagent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=hostagent
 [4]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
 [5]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.snowflake.com/en/user-guide/python-connector-example.html#using-a-proxy-server
 [8]: https://github.com/snowflakedb/snowflake-connector-python/blob/d6df58f1c338b255393571a08a1f9f3a71d8f7b6/src/snowflake/connector/proxy.py#L40-L41
 [9]: https://docs.snowflake.com/en/user-guide/private-snowflake-service.html
 [10]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink.html
 [11]: https://docs.snowflake.com/en/sql-reference/account-usage/query_history.html
-[12]: https://docs.datadoghq.com/metrics/summary/
+[12]: https://docs.datadoghq.com/ja/metrics/summary/
 [13]: https://raw.githubusercontent.com/DataDog/integrations-core/master/snowflake/images/custom_query.png
-[14]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [15]: https://github.com/DataDog/integrations-core/blob/master/snowflake/metadata.csv
 [16]: https://github.com/DataDog/integrations-core/blob/master/snowflake/assets/service_checks.json
-[17]: https://docs.datadoghq.com/help/
+[17]: https://docs.datadoghq.com/ja/help/
 [18]: https://www.datadoghq.com/blog/snowflake-monitoring-datadog/
-

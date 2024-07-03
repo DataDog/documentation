@@ -1,63 +1,65 @@
 ---
-"app_id": "sap-hana"
-"app_uuid": "53d66afa-de92-4f09-9514-778324f38f5c"
-"assets":
-  "dashboards":
-    "SAP HANA Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": sap_hana.uptime
-      "metadata_path": metadata.csv
-      "prefix": sap_hana.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10076"
-    "source_type_name": SAP HANA
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: sap-hana
+app_uuid: 53d66afa-de92-4f09-9514-778324f38f5c
+assets:
+  dashboards:
+    SAP HANA Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sap_hana.uptime
+      metadata_path: metadata.csv
+      prefix: sap_hana.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10076
+    source_type_name: SAP HANA
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - sap
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sap_hana"
-"integration_id": "sap-hana"
-"integration_title": "SAP HANA"
-"integration_version": "3.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "sap_hana"
-"public_title": "SAP HANA"
-"short_description": "Monitor memory, network, volume, and other metrics from your SAP HANA system."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: sap_hana
+integration_id: sap-hana
+integration_title: SAP HANA
+integration_version: 3.2.0
+is_public: true
+manifest_version: 2.0.0
+name: sap_hana
+public_title: SAP HANA
+short_description: Monitor memory, network, volume, and other metrics from your SAP
+  HANA system.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Category::SAP"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor memory, network, volume, and other metrics from your SAP HANA system.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SAP HANA
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Category::SAP
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor memory, network, volume, and other metrics from your SAP HANA
+    system.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SAP HANA
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -182,9 +184,8 @@ Need help? Contact [Datadog support][10].
 [3]: https://pypi.org/project/hdbcli/
 [4]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

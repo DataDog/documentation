@@ -1,5 +1,4 @@
 ---
-title: Setup
 disable_toc: false
 further_reading:
 - link: /observability_pipelines/log_volume_control/
@@ -20,15 +19,20 @@ further_reading:
 - link: /observability_pipelines/update_existing_pipelines/
   tag: Documentation
   text: Update existing pipelines
+title: Setup
 ---
 
 ## 概要
 
-<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>. 
+<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>.
 Modifying files under that location while OPW is running might have adverse effects.
 </div>
 
-Bootstrap the Observability Pipelines Worker within your infrastructure before you set up a pipeline. These environment variables are separate from the pipeline environment variables.
+Bootstrap the Observability Pipelines Worker within your infrastructure before you set up a pipeline. These environment variables are separate from the pipeline environment variables. The location of the related directories and files:
+
+- Default data directory: `var/lib/observability-pipelines-worker`
+- Bootstrap file: `/etc/observability-pipelines-worker/bootstrap.yaml`
+- Environment variables file: `/etc/default/observability-pipelines-worker`
 
 ## Bootstrap Options
 
@@ -67,4 +71,4 @@ To set bootstrap options, do one of the following:
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/observability-pipelines
-[3]: /getting_started/site/
+[3]: /ja/getting_started/site/

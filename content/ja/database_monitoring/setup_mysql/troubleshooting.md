@@ -1,6 +1,6 @@
 ---
-title: Troubleshoot Database Monitoring setup for MySQL
 description: Troubleshoot Database Monitoring setup
+title: Troubleshoot Database Monitoring setup for MySQL
 ---
 
 このページでは、MySQL によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
@@ -214,12 +214,12 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 接続にデフォルトのデータベースが構成されていない場合、その接続で行われるクエリには `schema` タグは付きません。
 
-[1]: /database_monitoring/setup_mysql/
-[2]: /agent/troubleshooting/
-[3]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /agent/configuration/agent-log-files
-[5]: /database_monitoring/setup_mysql/advanced_configuration/
+[1]: /ja/database_monitoring/setup_mysql/
+[2]: /ja/agent/troubleshooting/
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ja/agent/configuration/agent-log-files
+[5]: /ja/database_monitoring/setup_mysql/advanced_configuration/
 [6]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
-[7]: /database_monitoring/data_collected/#which-queries-are-tracked
+[7]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [8]: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_digest_length
 [9]: https://dev.mysql.com/doc/refman/8.0/en/use.html

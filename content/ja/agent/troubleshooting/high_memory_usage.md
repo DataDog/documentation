@@ -1,5 +1,4 @@
 ---
-title: High CPU or Memory Consumption
 disable_toc: false
 further_reading:
 - link: /agent/troubleshooting/send_a_flare/
@@ -8,6 +7,7 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: ドキュメント
   text: Get the Status of an Agent Check
+title: High CPU or Memory Consumption
 ---
 
 Agent の CPU やメモリの消費量が多くなる場合、いくつかの要因が考えられます。以下の手順を試しても問題が解決しない場合は、[Datadog サポートにお問い合わせください](#reach-out-to-datadog-support)。
@@ -56,10 +56,10 @@ Agent の CPU やメモリの消費量が多くなる場合、いくつかの要
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /agent/basic_agent_usage/#cli
-[3]: /infrastructure/process/
-[4]: /integrations/process/#configuration
-[5]: /developers/write_agent_check/#collection-interval
-[6]: /getting_started/containers/#enable-autodiscovery
-[7]: /agent/troubleshooting/debug_mode/
+[1]: /ja/help/
+[2]: /ja/agent/basic_agent_usage/#cli
+[3]: /ja/infrastructure/process/
+[4]: /ja/integrations/process/#configuration
+[5]: /ja/developers/write_agent_check/#collection-interval
+[6]: /ja/getting_started/containers/#enable-autodiscovery
+[7]: /ja/agent/troubleshooting/debug_mode/

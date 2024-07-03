@@ -63,5 +63,5 @@ DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent
 | NOT     | Boolean logic, !a       |
 | IS NULL | Returns true for each row that is null |
 
-[1]: /dashboards/ddsql_editor/reference/tags/
+[1]: /ja/dashboards/ddsql_editor/reference/tags/
 [2]: https://www.postgresql.org/docs/current/functions-comparison.html

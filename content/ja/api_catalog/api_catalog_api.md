@@ -1,12 +1,12 @@
 ---
-title: API Catalog API
-is_beta: true
+aliases:
+- /ja/tracing/api_catalog/api_catalog_api/
 further_reading:
 - link: /tracing/api_catalog/
   tag: Documentation
   text: Datadog API Catalog
-aliases:
-    - /tracing/api_catalog/api_catalog_api/
+is_beta: true
+title: API Catalog API
 ---
 
 ## 概要
@@ -16,4 +16,4 @@ For more details about creating, getting, and deleting endpoint definitions, see
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[8]: /api/latest/api-management
+[8]: /ja/api/latest/api-management

@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - cloud
 - aws
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Ingest AWS Security Hub events as log."
-"doc_link": ""
-"draft": false
-"git_integration_title": "amazon_security_hub"
-"has_logo": true
-"integration_id": "amazon-security-hub"
-"integration_title": "AWS Security Hub"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_security_hub"
-"public_title": "Datadog-AWS Security Hub Integration"
-"short_description": "Ingest AWS Security Hub events as logs."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Ingest AWS Security Hub events as log.
+doc_link: ''
+draft: false
+git_integration_title: amazon_security_hub
+has_logo: true
+integration_id: amazon-security-hub
+integration_title: AWS Security Hub
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_security_hub
+public_title: Datadog-AWS Security Hub Integration
+short_description: Ingest AWS Security Hub events as logs.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -52,6 +52,5 @@ Need help? Contact [Datadog support][4].
 
 [1]: https://github.com/DataDog/securityhub-eventbridge-example
 [2]: https://aws.amazon.com/eventbridge/
-[3]: https://docs.datadoghq.com/serverless/libraries_integrations/forwarder/
-[4]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/forwarder/
+[4]: https://docs.datadoghq.com/ja/help/

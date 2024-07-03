@@ -1,17 +1,17 @@
 ---
-title: React Native Libraries for RUM
-code_lang: reactnative
-type: multi-code-lang
-code_lang_weight: 20
 aliases:
-- /real_user_monitoring/reactnative/integrated_libraries/
+- /ja/real_user_monitoring/reactnative/integrated_libraries/
+code_lang: reactnative
+code_lang_weight: 20
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-reactnative"
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: ソースコード
   text: Source code for dd-sdk-reactnative
 - link: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
   tag: Documentation
   text: Integrated Libraries
+title: React Native Libraries for RUM
+type: multi-code-lang
 ---
 
 This page lists integrated libraries you can use for React Native applications.

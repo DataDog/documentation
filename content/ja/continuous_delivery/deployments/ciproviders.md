@@ -1,7 +1,5 @@
 ---
-title: Monitor CI Providers Deployments
 description: Learn how to monitor deployments from CI Providers in Datadog CD Visibility.
-is_beta: true
 further_reading:
 - link: /continuous_delivery/deployments
   tag: Documentation
@@ -9,6 +7,8 @@ further_reading:
 - link: /continuous_delivery/explorer
   tag: Documentation
   text: Learn how to query and visualize deployment executions
+is_beta: true
+title: Monitor CI Providers Deployments
 ---
 
 {{< site-region region="gov" >}}
@@ -127,18 +127,17 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /continuous_integration/pipelines/
-[2]: /continuous_integration/pipelines/custom_tags_and_measures/
-[3]: /getting_started/site/
+[1]: /ja/continuous_integration/pipelines/
+[2]: /ja/continuous_integration/pipelines/custom_tags_and_measures/
+[3]: /ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://app.datadoghq.com/ci/deployments
 [6]: https://app.datadoghq.com/ci/deployments/executions
-[7]: /continuous_delivery/search
-[8]: /continuous_delivery/explorer
-[9]: /continuous_integration/pipelines/#terminology
-[10]: /continuous_delivery/deployments
-[11]: /continuous_delivery/deployments/ciproviders#mark-github-actions-jobs-as-deployments
+[7]: /ja/continuous_delivery/search
+[8]: /ja/continuous_delivery/explorer
+[9]: /ja/continuous_integration/pipelines/#terminology
+[10]: /ja/continuous_delivery/deployments
+[11]: /ja/continuous_delivery/deployments/ciproviders#mark-github-actions-jobs-as-deployments
 [12]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
 [13]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 [14]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy
-

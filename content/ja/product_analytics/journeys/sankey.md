@@ -1,12 +1,12 @@
 ---
-title: Sankey Diagram
-kind: documentation
 aliases:
-- /real_user_monitoring/product_analytics/sankey
+- /ja/real_user_monitoring/product_analytics/sankey
 further_reading:
 - link: /product_analytics/journeys
   tag: ドキュメント
   text: Journeys
+kind: documentation
+title: Sankey Diagram
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -81,5 +81,5 @@ In addition, funnels do not include active sessions, while Sankey diagrams do in
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey
-[2]: /real_user_monitoring/explorer/search_syntax/#wildcards
-[3]: /real_user_monitoring/session_replay/
+[2]: /ja/real_user_monitoring/explorer/search_syntax/#wildcards
+[3]: /ja/real_user_monitoring/session_replay/

@@ -1,25 +1,25 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Amazon RDS Proxy metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_rds_proxy/"
-"draft": false
-"git_integration_title": "amazon_rds_proxy"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon RDS Proxy"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_rds_proxy"
-"public_title": "Datadog-Amazon RDS Proxy Integration"
-"short_description": "Track key Amazon RDS Proxy metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Amazon RDS Proxy metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_rds_proxy/
+draft: false
+git_integration_title: amazon_rds_proxy
+has_logo: true
+integration_id: ''
+integration_title: Amazon RDS Proxy
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_rds_proxy
+public_title: Datadog-Amazon RDS Proxy Integration
+short_description: Track key Amazon RDS Proxy metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -72,13 +72,12 @@ The Amazon RDS Proxy integration does not include any service checks.
 
 Need help? Contact [Datadog support][9].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[2]: https://docs.datadoghq.com/integrations/amazon_rds/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_rds/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-rds-proxy
 [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-setup.html#rds-proxy-creating
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#log-collection
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#log-collection
 [7]: https://app.datadoghq.com/logs
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds_proxy/amazon_rds_proxy_metadata.csv
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

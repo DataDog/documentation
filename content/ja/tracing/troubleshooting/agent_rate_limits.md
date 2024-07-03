@@ -1,8 +1,8 @@
 ---
-title: Agent Rate Limits
-kind: Documentation
 aliases:
-  - /tracing/troubleshooting/apm_rate_limits
+- /ja/tracing/troubleshooting/apm_rate_limits
+kind: Documentation
+title: Agent Rate Limits
 ---
 
 ## Maximum connection limit
@@ -34,4 +34,4 @@ This setting defines the maximum CPU percentage that the APM agent should be usi
 
 If you want your orchestrator (or an external service) to manage resource limitations for the Datadog Agent, Datadog recommends disabling this by setting the environment variable `DD_APM_MAX_CPU_PERCENT` to `0` (supported since Datadog Agent 7.23.0).
 
-[1]: /tracing/trace_pipeline/ingestion_controls/#service-table-view
+[1]: /ja/tracing/trace_pipeline/ingestion_controls/#service-table-view

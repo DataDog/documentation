@@ -1,18 +1,18 @@
 ---
-title: Java Compatibility Requirements
-kind: documentation
-description: 'Compatibility Requirements for the Java tracer'
-code_lang: java
-type: multi-code-lang
-code_lang_weight: 0
 aliases:
-    - /tracing/compatibility_requirements/
-    - /tracing/compatibility_requirements/java
-    - /tracing/setup_overview/compatibility_requirements/java
+- /ja/tracing/compatibility_requirements/
+- /ja/tracing/compatibility_requirements/java
+- /ja/tracing/setup_overview/compatibility_requirements/java
+code_lang: java
+code_lang_weight: 0
+description: Compatibility Requirements for the Java tracer
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/java
-      tag: Documentation
-      text: Instrument Your Application
+- link: tracing/trace_collection/dd_libraries/java
+  tag: Documentation
+  text: Instrument Your Application
+kind: documentation
+title: Java Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Compatibility
@@ -304,7 +304,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
 
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
 
 {{% tab "Quarkus Native" %}}
@@ -318,7 +318,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
 
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
 
 {{% tab "Spring Native" %}}
@@ -350,7 +350,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
 3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
 
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog
 {{% /tab %}}
 
@@ -402,8 +402,8 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 
 [1]: https://github.com/DataDog/dd-trace-java
 [2]: https://www.datadoghq.com/support/
-[3]: /tracing/manual_instrumentation/java
+[3]: /ja/tracing/manual_instrumentation/java
 [4]: https://github.com/DataDog/documentation#outside-contributors
-[5]: /tracing/trace_collection/otel_instrumentation/java/
+[5]: /ja/tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
-[9]: /tracing/trace_explorer/
+[9]: /ja/tracing/trace_explorer/

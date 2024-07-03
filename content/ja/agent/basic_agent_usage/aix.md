@@ -1,17 +1,19 @@
 ---
-title: Basic Agent Usage for AIX
+algolia:
+  tags:
+  - アンインストール
+  - uninstalling
 further_reading:
-- link: "/agent/basic_agent_usage/#agent-architecture"
+- link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Find out more about the Agent's architecture
-- link: "/agent/configuration/network#configure-ports"
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: Configure inbound ports
-- link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
+- link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
   tag: Blog
   text: Monitor AIX with the Datadog Unix Agent
-algolia:
-  tags: [アンインストール, uninstalling]
+title: Basic Agent Usage for AIX
 ---
 
 <div class="alert alert-info">

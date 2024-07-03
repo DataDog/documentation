@@ -1,9 +1,9 @@
 ---
-title: Python Version Management
 further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentation
   text: Upgrade to Agent v7
+title: Python Version Management
 ---
 
 Agent v6 を使用している場合、Datadog は [Agent v7 へのアップグレード][1]を推奨しています。Agent v7 は、Python 3 のみのサポートとなります。
@@ -276,6 +276,6 @@ datadog_config:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/versions/upgrade_to_agent_v7/?tab=linux
-[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[3]: /agent/configuration/agent-commands/#restart-the-agent
+[1]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux
+[2]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent

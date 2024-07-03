@@ -1,16 +1,14 @@
 ---
-title: Quality Gates
-kind: documentation
-description: Learn how to use Quality Gates to enable your team to control what code makes it to production.
-is_beta: true
+description: Learn how to use Quality Gates to enable your team to control what code
+  makes it to production.
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: Release Notes
   text: Check out the latest Software Delivery releases! (App login required)
-- link: "https://www.datadoghq.com/blog/datadog-quality-gates/"
+- link: https://www.datadoghq.com/blog/datadog-quality-gates/
   tag: ブログ
   text: Enhance code reliability with Datadog Quality Gates
-- link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+- link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: ブログ
   text: Use Datadog monitors as quality gates for GitHub Actions deployments
 - link: /quality_gates/explorer
@@ -19,6 +17,9 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: ドキュメント
   text: Learn about Audit Trail
+is_beta: true
+kind: documentation
+title: Quality Gates
 ---
 
 {{< site-region region="gov" >}}
@@ -68,7 +69,7 @@ You can create rules to block code from being merged that introduces new [flaky 
 
 {{< img src="quality_gates/setup/flaky_test.png" alt="A Quality Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
 
-[101]: /tests/guides/flaky_test_management/
+[101]: /ja/tests/guides/flaky_test_management/
 
 {{% /tab %}}
 {{% tab "Pipelines" %}}
@@ -135,15 +136,15 @@ For more information, see the [Audit Trail documentation][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/guides/flaky_test_management/
-[2]: /quality_gates/setup/
-[3]: /account_management/audit_trail/
-[4]: /account_management/audit_trail/events/#ci-visibility-events
-[5]: /quality_gates/search/
+[1]: /ja/tests/guides/flaky_test_management/
+[2]: /ja/quality_gates/setup/
+[3]: /ja/account_management/audit_trail/
+[4]: /ja/account_management/audit_trail/events/#ci-visibility-events
+[5]: /ja/quality_gates/search/
 [6]: https://app.datadoghq.com/ci/quality-gates
-[7]: /monitors/guide/github_gating/
-[8]: /quality_gates/explorer/
-[9]: /tests/
-[10]: /continuous_integration/
-[11]: /code_analysis/static_analysis
-[12]: /code_analysis/software_composition_analysis
+[7]: /ja/monitors/guide/github_gating/
+[8]: /ja/quality_gates/explorer/
+[9]: /ja/tests/
+[10]: /ja/continuous_integration/
+[11]: /ja/code_analysis/static_analysis
+[12]: /ja/code_analysis/software_composition_analysis

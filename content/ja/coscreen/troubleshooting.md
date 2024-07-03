@@ -1,6 +1,6 @@
 ---
-title: CoScreen Optimization and Troubleshooting
 is_beta: false
+title: CoScreen Optimization and Troubleshooting
 ---
 
 ### Why does the audio quality degrade when using the microphone of my Bluetooth headset as input in CoScreen, Zoom, and other tools?

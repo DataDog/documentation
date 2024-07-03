@@ -1,6 +1,6 @@
 ---
-title: Log Volume Control
 disable_toc: false
+title: Log Volume Control
 ---
 
 ## 概要
@@ -20,7 +20,7 @@ Select a log source to get started:
 - [Splunk Heavy and Universal Forwarders (TCP)][2]
 - [Sumo Logic Hosted Collector][3]
 
-[1]: /observability_pipelines/log_volume_control/splunk_hec
-[2]: /observability_pipelines/log_volume_control/splunk_tcp
-[3]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
-[4]: /observability_pipelines/log_volume_control/datadog_agent
+[1]: /ja/observability_pipelines/log_volume_control/splunk_hec
+[2]: /ja/observability_pipelines/log_volume_control/splunk_tcp
+[3]: /ja/observability_pipelines/log_volume_control/sumo_logic_hosted_collector
+[4]: /ja/observability_pipelines/log_volume_control/datadog_agent

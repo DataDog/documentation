@@ -1,67 +1,67 @@
 ---
-"app_id": "tidb"
-"app_uuid": "79e5c6d7-c494-4df7-98bc-c639e211c0b8"
-"assets":
-  "dashboards":
-    "TiDB Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": tidb_cluster.tidb_executor_statement_total
-      "metadata_path": metadata.csv
-      "prefix": tidb_cluster
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10172"
-    "source_type_name": TiDB
-  "logs":
-    "source": tidb
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": PingCAP
-  "sales_email": xuyifan02@pingcap.com
-  "support_email": xuyifan02@pingcap.com
-"categories":
+app_id: tidb
+app_uuid: 79e5c6d7-c494-4df7-98bc-c639e211c0b8
+assets:
+  dashboards:
+    TiDB Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: tidb_cluster.tidb_executor_statement_total
+      metadata_path: metadata.csv
+      prefix: tidb_cluster
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10172
+    source_type_name: TiDB
+  logs:
+    source: tidb
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: PingCAP
+  sales_email: xuyifan02@pingcap.com
+  support_email: xuyifan02@pingcap.com
+categories:
 - data stores
 - cloud
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "tidb"
-"integration_id": "tidb"
-"integration_title": "TiDB"
-"integration_version": "2.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "tidb"
-"public_title": "TiDB"
-"short_description": "The integration for TiDB cluster"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: tidb
+integration_id: tidb
+integration_title: TiDB
+integration_version: 2.1.0
+is_public: true
+manifest_version: 2.0.0
+name: tidb
+public_title: TiDB
+short_description: The integration for TiDB cluster
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": The integration for TiDB cluster
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": TiDB
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: The integration for TiDB cluster
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TiDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -237,15 +237,14 @@ Since there are many important metrics in a TiDB cluster, the TiDB check sets `m
 Need help? Contact [Datadog support][12].
 
 [1]: https://docs.pingcap.com/tidb/stable
-[2]: https://docs.datadoghq.com/integrations/tidb_cloud/
+[2]: https://docs.datadoghq.com/ja/integrations/tidb_cloud/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/community-integrations-installation-with-docker-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/tidb/datadog_checks/tidb/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/tidb/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/tidb/assets/service_checks.json
 [10]: https://docs.pingcap.com/tidb/stable/tiup-playground
 [11]: https://github.com/DataDog/integrations-extras/tree/master/tidb/tests/compose
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

@@ -1,22 +1,23 @@
 ---
-title: Profile Visualizations
 aliases:
-    - /tracing/profiling/search_profiles/
-    - /tracing/profiler/search_profiles/
-    - /profiler/search_profiles/
+- /ja/tracing/profiling/search_profiles/
+- /ja/tracing/profiler/search_profiles/
+- /ja/profiler/search_profiles/
 further_reading:
-    - link: profiler/enabling
-      tag: Documentation
-      text: Enable continuous profiler for your application
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
-      tag: ブログ
-      text: Introducing always-on production profiling in Datadog
-    - link: "https://www.datadoghq.com/blog/continuous-profiler-timeline-view/"
-      tag: ブログ
-      text: Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view
+- link: profiler/enabling
+  tag: Documentation
+  text: Enable continuous profiler for your application
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
+  tag: ブログ
+  text: Introducing always-on production profiling in Datadog
+- link: https://www.datadoghq.com/blog/continuous-profiler-timeline-view/
+  tag: ブログ
+  text: Diagnose runtime and code inefficiencies using Continuous Profiler's timeline
+    view
+title: Profile Visualizations
 ---
 
 ## プロファイルの検索
@@ -128,7 +129,7 @@ See [prerequisites][1] to learn how to enable this feature for Go.
 
 タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [Datadog のプロファイリングタイムラインによる Go リクエストレイテンシーのデバッグ][2]を参照してください。
 
-[1]: /profiler/connect_traces_and_profiles/#prerequisites
+[1]: /ja/profiler/connect_traces_and_profiles/#prerequisites
 [2]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
@@ -140,7 +141,7 @@ The thread ID is shown as `native-thread-id (ruby-object-id)` where the native t
 
 **Note**: The Ruby VM or your operating system might reuse native thread IDs.
 
-[1]: /profiler/connect_traces_and_profiles/#prerequisites
+[1]: /ja/profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 See [prerequisites][1] to learn how to enable this feature for Node.js.
@@ -152,7 +153,7 @@ the maximum concurrency of these activities so they can be visualized without ov
 
 Lanes on the top are garbage collector **runtime activities** that may add extra latency to your request.
 
-[1]: /profiler/connect_traces_and_profiles/#prerequisites
+[1]: /ja/profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
@@ -172,7 +173,7 @@ Fibers that run in this **thread** are represented in the same lane.
 
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 
-[1]: /profiler/connect_traces_and_profiles/#prerequisites
+[1]: /ja/profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -180,10 +181,10 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces/#configure-your-environment
-[2]: /tracing/glossary/#services
+[1]: /ja/tracing/send_traces/#configure-your-environment
+[2]: /ja/tracing/glossary/#services
 [3]: https://app.datadoghq.com/profiling/search?viz=timeseries
-[4]: /profiler/profile_types/
-[5]: /dashboards/widgets/profiling_flame_graph
-[6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[4]: /ja/profiler/profile_types/
+[5]: /ja/dashboards/widgets/profiling_flame_graph
+[6]: /ja/profiler/connect_traces_and_profiles/#span-execution-timeline-view
 [7]: https://app.datadoghq.com/profiling/explorer?viz=thread_timeline

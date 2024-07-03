@@ -1,25 +1,25 @@
 ---
-"categories":
-- "azure"
-- "cloud"
-- "log collection"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Azure Event Hub のキーメトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/azure_event_hub/"
-"draft": false
-"git_integration_title": "azure_event_hub"
-"has_logo": true
-"integration_id": "azure-event-hub"
-"integration_title": "Microsoft Azure Event Hub"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_event_hub"
-"public_title": "Datadog-Microsoft Azure Event Hub Integration"
-"short_description": "Track key Azure Event Hub metrics."
-"version": "1.0"
+categories:
+- azure
+- cloud
+- log collection
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Azure Event Hub のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/azure_event_hub/
+draft: false
+git_integration_title: azure_event_hub
+has_logo: true
+integration_id: azure-event-hub
+integration_title: Microsoft Azure Event Hub
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_event_hub
+public_title: Datadog-Microsoft Azure Event Hub Integration
+short_description: Track key Azure Event Hub metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -70,8 +70,7 @@ The Azure Event Hub integration does not include any service checks.
 
 Need help? Contact [Datadog support][4].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
-[2]: https://docs.datadoghq.com/integrations/azure/#log-collection
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[2]: https://docs.datadoghq.com/ja/integrations/azure/#log-collection
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_event_hub/azure_event_hub_metadata.csv
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

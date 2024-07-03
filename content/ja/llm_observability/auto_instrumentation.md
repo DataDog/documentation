@@ -1,7 +1,7 @@
 ---
-title: Auto Instrumentation
 aliases:
-    - /tracing/llm_observability/auto_instrumentation
+- /ja/tracing/llm_observability/auto_instrumentation
+title: Auto Instrumentation
 ---
 
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
@@ -108,8 +108,8 @@ The Anthropic integration instruments the following methods:
 [9]: https://docs.anthropic.com/en/api/client-sdks#python
 [10]: https://docs.anthropic.com/en/api/messages
 [11]: https://docs.anthropic.com/en/api/messages-streaming
-[12]: /llm_observability/sdk/#in-code-setup
+[12]: /ja/llm_observability/sdk/#in-code-setup
 [13]: https://python.langchain.com/v0.2/docs/concepts/#llms
 [14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
 [15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
-[16]: /llm_observability/sdk/
+[16]: /ja/llm_observability/sdk/

@@ -1,7 +1,7 @@
 ---
-title: execution time
 core_product:
-  - apm
+- apm
+title: execution time
 ---
 In APM, execution time is the total time that a span is considered active, or not waiting for a child span to complete.
 

@@ -1,61 +1,61 @@
 ---
-"app_id": "ibm-ace"
-"app_uuid": "81e0df5f-8778-4558-88c3-884dcab5ce89"
-"assets":
-  "dashboards":
-    "IBM ACE Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": ibm_ace.messages.current
-      "metadata_path": metadata.csv
-      "prefix": ibm_ace.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10262"
-    "source_type_name": IBM ACE
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: ibm-ace
+app_uuid: 81e0df5f-8778-4558-88c3-884dcab5ce89
+assets:
+  dashboards:
+    IBM ACE Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ibm_ace.messages.current
+      metadata_path: metadata.csv
+      prefix: ibm_ace.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10262
+    source_type_name: IBM ACE
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/ibm_ace/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ibm_ace"
-"integration_id": "ibm-ace"
-"integration_title": "IBM ACE"
-"integration_version": "2.2.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ibm_ace"
-"public_title": "IBM ACE"
-"short_description": "Monitor IBM ACE resource statistics and message flows."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/ibm_ace/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ibm_ace
+integration_id: ibm-ace
+integration_title: IBM ACE
+integration_version: 2.2.2
+is_public: true
+manifest_version: 2.0.0
+name: ibm_ace
+public_title: IBM ACE
+short_description: Monitor IBM ACE resource statistics and message flows.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor IBM ACE resource statistics and message flows.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": IBM ACE
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor IBM ACE resource statistics and message flows.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM ACE
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -181,15 +181,14 @@ IBM ACE インテグレーションには、イベントは含まれません。
 
 
 [1]: https://www.ibm.com/docs/en/app-connect/12.0?topic=overview-app-connect-enterprise-introduction
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://www.ibm.com/products/mq
 [4]: https://www.ibm.com/docs/en/app-connect/12.0?topic=properties-mqendpoint-policy
 [5]: https://www.ibm.com/docs/en/app-connect/12.0?topic=mq-connecting-secured-queue-manager
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://github.com/DataDog/integrations-core/blob/master/ibm_ace/datadog_checks/ibm_ace/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/ibm_ace/metadata.csv
 [11]: https://github.com/DataDog/integrations-core/blob/master/ibm_ace/assets/service_checks.json
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

@@ -1,54 +1,54 @@
 ---
-title: Tracing .NET Framework Applications
-kind: documentation
 aliases:
-    - /tracing/dotnet
-    - /tracing/languages/dotnet
-    - /tracing/setup/dotnet
-    - /tracing/setup_overview/dotnet
-    - /agent/apm/dotnet/
-    - /tracing/dotnet-framework
-    - /tracing/languages/dotnet-framework
-    - /tracing/setup/dotnet-framework
-    - /agent/apm/dotnet-framework/
-    - /tracing/setup_overview/dotnet-framework
-    - /tracing/setup_overview/setup/dotnet
-    - /tracing/setup_overview/setup/dotnet-framework
-    - /tracing/trace_collection/dd_libraries/dotnet-framework
+- /ja/tracing/dotnet
+- /ja/tracing/languages/dotnet
+- /ja/tracing/setup/dotnet
+- /ja/tracing/setup_overview/dotnet
+- /ja/agent/apm/dotnet/
+- /ja/tracing/dotnet-framework
+- /ja/tracing/languages/dotnet-framework
+- /ja/tracing/setup/dotnet-framework
+- /ja/agent/apm/dotnet-framework/
+- /ja/tracing/setup_overview/dotnet-framework
+- /ja/tracing/setup_overview/setup/dotnet
+- /ja/tracing/setup_overview/setup/dotnet-framework
+- /ja/tracing/trace_collection/dd_libraries/dotnet-framework
 code_lang: dotnet-framework
-type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-  - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-    tag: Documentation
-    text: Connect .NET application logs to traces
-  - link: /tracing/metrics/runtime_metrics/dotnet/
-    tag: Documentation
-    text: Runtime metrics
-  - link: /serverless/azure_app_services/
-    tag: Documentation
-    text: Microsoft Azure App Service extension
-  - link: /tracing/glossary/
-    tag: Documentation
-    text: Explore your services, resources, and traces
-  - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
-    tag: Blog
-    text: .NET monitoring with Datadog APM and distributed tracing
-  - link: "https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/"
-    tag: Blog
-    text: Monitor containerized ASP.NET Core applications
-  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/"
-    tag: Blog
-    text: Monitor containerized ASP.NET Core applications on AWS Fargate
-  - link: "https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/"
-    tag: Blog
-    text: Optimize your .NET application performance with the Datadog Continuous Profiler
-  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: ソースコード
-    text: Examples of custom instrumentation
-  - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: ソースコード
-    text: Source code
+- link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
+  tag: Documentation
+  text: Connect .NET application logs to traces
+- link: /tracing/metrics/runtime_metrics/dotnet/
+  tag: Documentation
+  text: Runtime metrics
+- link: /serverless/azure_app_services/
+  tag: Documentation
+  text: Microsoft Azure App Service extension
+- link: /tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/net-monitoring-apm/
+  tag: Blog
+  text: .NET monitoring with Datadog APM and distributed tracing
+- link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
+  tag: Blog
+  text: Monitor containerized ASP.NET Core applications
+- link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
+  tag: Blog
+  text: Monitor containerized ASP.NET Core applications on AWS Fargate
+- link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
+  tag: Blog
+  text: Optimize your .NET application performance with the Datadog Continuous Profiler
+- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
+  tag: ソースコード
+  text: Examples of custom instrumentation
+- link: https://github.com/DataDog/dd-trace-dotnet
+  tag: ソースコード
+  text: Source code
+kind: documentation
+title: Tracing .NET Framework Applications
+type: multi-code-lang
 ---
 ## Compatibility requirements
 
@@ -290,10 +290,10 @@ dotnet.exe example.dll
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/compatibility_requirements/dotnet-framework
-[2]: /agent/
+[1]: /ja/tracing/compatibility_requirements/dotnet-framework
+[2]: /ja/agent/
 [3]: https://app.datadoghq.com/apm/traces
-[4]: /tracing/trace_collection/library_config/dotnet-framework/
-[5]: /tracing/trace_collection/custom_instrumentation/dotnet/
-[11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[4]: /ja/tracing/trace_collection/library_config/dotnet-framework/
+[5]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
+[11]: /ja/tracing/trace_collection/library_injection_local/
+[12]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

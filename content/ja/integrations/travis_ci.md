@@ -1,27 +1,29 @@
 ---
-"categories":
+categories:
 - automation
 - cloud
 - configuration & deployment
 - developer tools
 - モニター
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Connect to Travis CI to view metrics about build times, build statuses, jobs, and more."
-"doc_link": "https://docs.datadoghq.com/integrations/travis_ci/"
-"draft": false
-"git_integration_title": "travis_ci"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Travis CI"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "travis_ci"
-"public_title": "Datadog-Travis CI Integration"
-"short_description": "Connect to Travis CI to view metrics about build times and build statuses."
-"team": "web-integrations"
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Connect to Travis CI to view metrics about build times, build statuses,
+  jobs, and more.
+doc_link: https://docs.datadoghq.com/integrations/travis_ci/
+draft: false
+git_integration_title: travis_ci
+has_logo: true
+integration_id: ''
+integration_title: Travis CI
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: travis_ci
+public_title: Datadog-Travis CI Integration
+short_description: Connect to Travis CI to view metrics about build times and build
+  statuses.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -70,5 +72,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/integrations/travis_ci
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/travis_ci/travis_ci_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

@@ -1,9 +1,9 @@
 ---
-title: Interoperability with Datadog and OpenTelemetry
 further_reading:
-    - link: /opentelemetry/schema_semantics/
-      tag: Documentation
-      text: Schema and Semantics
+- link: /opentelemetry/schema_semantics/
+  tag: Documentation
+  text: Schema and Semantics
+title: Interoperability with Datadog and OpenTelemetry
 ---
 
 ## 概要

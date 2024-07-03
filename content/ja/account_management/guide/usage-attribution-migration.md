@@ -1,9 +1,9 @@
 ---
-title: Migrating to Hourly and Monthly Usage Attribution APIs
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Plan and Usage Settings
+title: Migrating to Hourly and Monthly Usage Attribution APIs
 ---
 
 ## サマリー
@@ -405,11 +405,11 @@ v2 API に移行するには、更新されたフィールド名でサーバー�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/usage-metering/#get-usage-attribution
-[2]: /api/latest/usage-metering/#get-the-list-of-available-daily-custom-reports
-[3]: /api/latest/usage-metering/#get-specified-daily-custom-reports
-[4]: /api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports
-[5]: /api/latest/usage-metering/#get-specified-monthly-custom-reports
-[6]: /api/latest/usage-metering/#get-usage-attribution
-[7]: /api/latest/usage-metering/#get-monthly-usage-attribution
-[8]: /api/latest/usage-metering/#get-hourly-usage-attribution
+[1]: /ja/api/latest/usage-metering/#get-usage-attribution
+[2]: /ja/api/latest/usage-metering/#get-the-list-of-available-daily-custom-reports
+[3]: /ja/api/latest/usage-metering/#get-specified-daily-custom-reports
+[4]: /ja/api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports
+[5]: /ja/api/latest/usage-metering/#get-specified-monthly-custom-reports
+[6]: /ja/api/latest/usage-metering/#get-usage-attribution
+[7]: /ja/api/latest/usage-metering/#get-monthly-usage-attribution
+[8]: /ja/api/latest/usage-metering/#get-hourly-usage-attribution

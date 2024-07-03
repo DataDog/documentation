@@ -1,89 +1,89 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "avmconsulting-workday"
-"app_uuid": "72aa287e-21c7-473a-9efd-523d9687f7f1"
-"assets":
-  "dashboards":
-    "AVM Consulting Workday Integrations Trends": assets/dashboards/workday_integrations_trends.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": avmconsulting.workday.total_jobs
-      "metadata_path": metadata.csv
-      "prefix": avmconsulting.workday.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10251"
-    "source_type_name": AVM Consulting Workday
-  "monitors":
-    "AVM Consulting Workday Connection Status": assets/monitors/workday_connect.json
-    "AVM Consulting Workday Integration Status": assets/monitors/workday_integrations_monitor.json
-"author":
-  "homepage": "https://avmconsulting.net/"
-  "name": AVMConsulting
-  "sales_email": integrations@avmconsulting.net
-  "support_email": integrations@avmconsulting.net
-  "vendor_id": avmconsulting
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: avmconsulting-workday
+app_uuid: 72aa287e-21c7-473a-9efd-523d9687f7f1
+assets:
+  dashboards:
+    AVM Consulting Workday Integrations Trends: assets/dashboards/workday_integrations_trends.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: avmconsulting.workday.total_jobs
+      metadata_path: metadata.csv
+      prefix: avmconsulting.workday.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10251
+    source_type_name: AVM Consulting Workday
+  monitors:
+    AVM Consulting Workday Connection Status: assets/monitors/workday_connect.json
+    AVM Consulting Workday Integration Status: assets/monitors/workday_integrations_monitor.json
+author:
+  homepage: https://avmconsulting.net/
+  name: AVMConsulting
+  sales_email: integrations@avmconsulting.net
+  support_email: integrations@avmconsulting.net
+  vendor_id: avmconsulting
+categories:
 - log collection
 - marketplace
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "avmconsulting_workday"
-"integration_id": "avmconsulting-workday"
-"integration_title": "Workday"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "avmconsulting_workday"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.avmconsulting.workday
-  "product_id": workday
-  "short_description": Workday pricing per job
-  "tag": job_id
-  "unit_label": Workday Job
-  "unit_price": !!int "1"
-"public_title": "Workday"
-"short_description": "Provides observability into the status of Workday integrations"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: avmconsulting_workday
+integration_id: avmconsulting-workday
+integration_title: Workday
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: avmconsulting_workday
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.avmconsulting.workday
+  product_id: workday
+  short_description: Workday pricing per job
+  tag: job_id
+  unit_label: Workday Job
+  unit_price: 1
+public_title: Workday
+short_description: Provides observability into the status of Workday integrations
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Marketplace"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Provides observability into the status of Workday integrations
-  "media":
-  - "caption": Workday Integrations Summary
-    "image_url": images/Workday_integration_trends.png
-    "media_type": image
-  - "caption": Workday Integrations Summary
-    "image_url": images/Workday_integration_trends_2.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Workday
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Marketplace
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Provides observability into the status of Workday integrations
+  media:
+  - caption: Workday Integrations Summary
+    image_url: images/Workday_integration_trends.png
+    media_type: image
+  - caption: Workday Integrations Summary
+    image_url: images/Workday_integration_trends_2.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Workday
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -122,9 +122,9 @@ Additional helpful documentation, links, and articles:
 - [Monitor Workday with AVM Consulting’s integration in the Datadog Marketplace][5]
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/developers/guide/custom-python-package/?tab=linux
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
 [5]: https://www.datadoghq.com/blog/workday-monitoring-with-avm-and-datadog/
 [6]: mailto:integrations@avmconsulting.net
 

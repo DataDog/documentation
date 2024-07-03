@@ -1,78 +1,80 @@
 ---
-"algolia":
-  "subcategory": Marketplace インテグレーション
-"app_id": "io-connect-services-mule-apm-instrumentation"
-"app_uuid": "e6a3dcaa-d6f0-4cf5-8dcf-1fd813a6bbda"
-"assets": {}
-"author":
-  "contact_link": "https://www.ioconnectservices.com/contact-us/"
-  "homepage": "https://www.ioconnectservices.com/"
-  "name": IO Connect Services
-  "sales_email": contact@ioconnectservices.com
-  "support_email": contact@ioconnectservices.com
-  "vendor_id": ioconnect
-"categories":
+algolia:
+  subcategory: Marketplace インテグレーション
+app_id: io-connect-services-mule-apm-instrumentation
+app_uuid: e6a3dcaa-d6f0-4cf5-8dcf-1fd813a6bbda
+assets: {}
+author:
+  contact_link: https://www.ioconnectservices.com/contact-us/
+  homepage: https://www.ioconnectservices.com/
+  name: IO Connect Services
+  sales_email: contact@ioconnectservices.com
+  support_email: contact@ioconnectservices.com
+  vendor_id: ioconnect
+categories:
 - marketplace
 - alerting
 - 問題追跡
 - ログの収集
 - トレーシング
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "io_connect_services_mule_apm_instrumentation"
-"integration_id": "io-connect-services-mule-apm-instrumentation"
-"integration_title": "Mule APM Instrumentation"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "io_connect_services_mule_apm_instrumentation"
-"pricing":
-- "includes_assets": false
-  "private_offer_only": true
-  "product_id": mule-apm-instrumentation
-  "short_description": Contact us for a private offering.
-  "unit_price": !!null "null"
-"public_title": "Mule APM Instrumentation"
-"short_description": "Implementation services to instrument Mule applications with Datadog APM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: io_connect_services_mule_apm_instrumentation
+integration_id: io-connect-services-mule-apm-instrumentation
+integration_title: Mule APM Instrumentation
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: io_connect_services_mule_apm_instrumentation
+pricing:
+- includes_assets: false
+  private_offer_only: true
+  product_id: mule-apm-instrumentation
+  short_description: Contact us for a private offering.
+  unit_price: null
+public_title: Mule APM Instrumentation
+short_description: Implementation services to instrument Mule applications with Datadog
+  APM
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Category::Alerting"
-  - "Category::Issue Tracking"
-  - "Category::Log Collection"
-  - "Category::Tracing"
-  - "Offering::Professional Service"
-  "configuration": "README.md#Setup"
-  "description": Implementation services to instrument Mule applications with Datadog APM
-  "media":
-  - "caption": "DMI4APM: Traces logs"
-    "image_url": images/dmi_apm_logs.png
-    "media_type": image
-  - "caption": "DMI4APM: Trace details"
-    "image_url": images/dmi_apm_trace.png
-    "media_type": image
-  - "caption": "DMI4APM: Traces list"
-    "image_url": images/dmi_apm_traces.png
-    "media_type": image
-  - "caption": "DMI4APM: Mule connector"
-    "image_url": images/dmi_mule_connector.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Mule APM Instrumentation
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Category::Alerting
+  - Category::Issue Tracking
+  - Category::Log Collection
+  - Category::Tracing
+  - Offering::Professional Service
+  configuration: README.md#Setup
+  description: Implementation services to instrument Mule applications with Datadog
+    APM
+  media:
+  - caption: 'DMI4APM: Traces logs'
+    image_url: images/dmi_apm_logs.png
+    media_type: image
+  - caption: 'DMI4APM: Trace details'
+    image_url: images/dmi_apm_trace.png
+    media_type: image
+  - caption: 'DMI4APM: Traces list'
+    image_url: images/dmi_apm_traces.png
+    media_type: image
+  - caption: 'DMI4APM: Mule connector'
+    image_url: images/dmi_mule_connector.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Mule APM Instrumentation
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

@@ -1,89 +1,89 @@
 ---
-"app_id": "haproxy"
-"app_uuid": "804dd2ae-d0a9-4063-a2bc-bd949ac7bb62"
-"assets":
-  "dashboards":
-    "HAProxy - Overview (OpenMetrics)": "assets/dashboards/openmetrics_overview.json"
-    "HAProxy - Overview (Prometheus)": "assets/dashboards/prometheus_overview.json"
-    "haproxy": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
-      - "haproxy.frontend.bytes.in.count"
-      - "haproxy.frontend.bytes.in_rate"
-      - "haproxy.frontend.bytes.in.total"
-      "metadata_path": "metadata.csv"
-      "prefix": "haproxy."
-    "process_signatures":
-    - "haproxy"
-    - "haproxy-master"
-    - "haproxy-controller"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "38"
-    "source_type_name": "HAProxy"
-  "monitors":
-    "[HAProxy] Anomalous frontend request rate for host {{host.name}}": "assets/monitors/request_rate.json"
-    "[HAProxy] Anomalous number of frontend 4xx HTTP responses for host: {{host.name}}": "assets/monitors/frontend_5xx.json"
-    "[HAProxy] Anomalous number of frontend 5xx HTTP responses for host: {{host.name}}": "assets/monitors/frontend_4xx.json"
-    "[HAProxy] Backend queue time went above 500ms for host: {{host.name}}": "assets/monitors/backend_queue_time.json"
-    "[HAProxy] Backend response time is above 500ms for host: {{host.name}}": "assets/monitors/backend_rtime.json"
-    "[HAProxy] High amount of backend session usage for host: {{host.name}}": "assets/monitors/backend_sessions.json"
-    "[HAProxy] High amount of frontend session usage for host: {{host.name}}": "assets/monitors/frontend_sessions.json"
-    "[HAProxy] High number of backend denied responses for host: {{host.name}}": "assets/monitors/backend_dreq.json"
-    "[HAProxy] High number of frontend denied requests for host: {{host.name}}": "assets/monitors/frontend_dreq.json"
-    "[HAProxy] Number of backend connection failures for host: {{host.name}} is above normal.": "assets/monitors/backend_econ.json"
-    "[HAProxy] Number of client-side request error for {{host.name}} is above normal.": "assets/monitors/frontend_ereq.json"
-  "saved_views":
-    "4xx_errors": "assets/saved_views/4xx_errors.json"
-    "5xx_errors": "assets/saved_views/5xx_errors.json"
-    "bot_errors": "assets/saved_views/bot_errors.json"
-    "haproxy_processes": "assets/saved_views/haproxy_processes.json"
-    "response_time_overview": "assets/saved_views/response_time.json"
-    "status_code_overview": "assets/saved_views/status_code_overview.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "haproxy"
-"integration_id": "haproxy"
-"integration_title": "HAProxy"
-"integration_version": "5.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "haproxy"
-"public_title": "HAProxy"
-"short_description": "リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "HAProxy"
+app_id: haproxy
+app_uuid: 804dd2ae-d0a9-4063-a2bc-bd949ac7bb62
+assets:
+  dashboards:
+    HAProxy - Overview (OpenMetrics): assets/dashboards/openmetrics_overview.json
+    HAProxy - Overview (Prometheus): assets/dashboards/prometheus_overview.json
+    haproxy: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - haproxy.frontend.bytes.in.count
+      - haproxy.frontend.bytes.in_rate
+      - haproxy.frontend.bytes.in.total
+      metadata_path: metadata.csv
+      prefix: haproxy.
+    process_signatures:
+    - haproxy
+    - haproxy-master
+    - haproxy-controller
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 38
+    source_type_name: HAProxy
+  monitors:
+    '[HAProxy] Anomalous frontend request rate for host {{host.name}}': assets/monitors/request_rate.json
+    '[HAProxy] Anomalous number of frontend 4xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_5xx.json
+    '[HAProxy] Anomalous number of frontend 5xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_4xx.json
+    '[HAProxy] Backend queue time went above 500ms for host: {{host.name}}': assets/monitors/backend_queue_time.json
+    '[HAProxy] Backend response time is above 500ms for host: {{host.name}}': assets/monitors/backend_rtime.json
+    '[HAProxy] High amount of backend session usage for host: {{host.name}}': assets/monitors/backend_sessions.json
+    '[HAProxy] High amount of frontend session usage for host: {{host.name}}': assets/monitors/frontend_sessions.json
+    '[HAProxy] High number of backend denied responses for host: {{host.name}}': assets/monitors/backend_dreq.json
+    '[HAProxy] High number of frontend denied requests for host: {{host.name}}': assets/monitors/frontend_dreq.json
+    '[HAProxy] Number of backend connection failures for host: {{host.name}} is above normal.': assets/monitors/backend_econ.json
+    '[HAProxy] Number of client-side request error for {{host.name}} is above normal.': assets/monitors/frontend_ereq.json
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    haproxy_processes: assets/saved_views/haproxy_processes.json
+    response_time_overview: assets/saved_views/response_time.json
+    status_code_overview: assets/saved_views/status_code_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: haproxy
+integration_id: haproxy
+integration_title: HAProxy
+integration_version: 5.2.1
+is_public: true
+manifest_version: 2.0.0
+name: haproxy
+public_title: HAProxy
+short_description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HAProxy
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -168,7 +168,7 @@ HAProxy チェックは [Datadog Agent][5] パッケージに含まれていま�
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/7.34.x/haproxy/datadog_checks/haproxy/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -309,9 +309,9 @@ Agent は、メトリクスを統計エンドポイントを使って収集し�
 
 4. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -339,9 +339,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]'
 ```
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -420,11 +420,11 @@ spec:
     - name: haproxy
 ```
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
-[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -470,9 +470,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 }
 ```
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -512,18 +512,18 @@ syslog があるシステムで、Agent がポート 514 で HAProxy ログを�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/haproxy/images/haproxy-dash.png
-[2]: https://docs.datadoghq.com/integrations/guide/versions-for-openmetrics-based-integrations
+[2]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
 [3]: https://datadoghq.dev/integrations-core/base/openmetrics/
-[4]: https://docs.datadoghq.com/agent/guide/agent-v6-python-3/?tab=helm#use-python-3-with-datadog-agent-v6
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=helm#use-python-3-with-datadog-agent-v6
 [5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://github.com/prometheus/haproxy_exporter
-[7]: https://docs.datadoghq.com/integrations/guide/prometheus-host-collection/
+[7]: https://docs.datadoghq.com/ja/integrations/guide/prometheus-host-collection/
 [8]: https://www.haproxy.com/blog/haproxy-exposes-a-prometheus-metrics-endpoint/
 [9]: https://www.haproxy.org/download/1.7/doc/management.txt
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/0e34b3309cc1371095762bfcaf121b0b45a4e263/haproxy/datadog_checks/haproxy/data/conf.yaml.example#L631
-[12]: https://docs.datadoghq.com/help/
+[12]: https://docs.datadoghq.com/ja/help/
 [13]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
 [14]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
 [15]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
-[16]: https://docs.datadoghq.com/integrations/faq/haproxy-multi-process/
+[16]: https://docs.datadoghq.com/ja/integrations/faq/haproxy-multi-process/

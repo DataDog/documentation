@@ -1,5 +1,4 @@
 ---
-title: Kubernetes Security Posture Management
 further_reading:
 - link: security/default_rules
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /security/misconfigurations/custom_rules
   tag: Documentation
   text: Create Custom Rules
+title: Kubernetes Security Posture Management
 ---
 
 Kubernetes Security Posture Management (KSPM) for Cloud Security Management (CSM) helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-detection-rules).
@@ -66,17 +66,17 @@ After you create the detection rule, you can customize its severity (`Critical`,
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.cisecurity.org/cis-benchmarks
-[2]: /security/cloud_security_management#track-your-organizations-health
-[3]: /glossary/#security-posture-score
+[2]: /ja/security/cloud_security_management#track-your-organizations-health
+[3]: /ja/glossary/#security-posture-score
 [4]: https://www.openpolicyagent.org/docs/latest/policy-language/
-[5]: /security/cloud_security_management/guide/writing_rego_rules/
-[6]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
-[7]: /security/cloud_security_management/review_remediate/jira
-[8]: /security/cloud_security_management/review_remediate/workflows
+[5]: /ja/security/cloud_security_management/guide/writing_rego_rules/
+[6]: /ja/security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
+[7]: /ja/security/cloud_security_management/review_remediate/jira
+[8]: /ja/security/cloud_security_management/review_remediate/workflows
 [9]: https://app.datadoghq.com/security/compliance/home
-[10]: /api/latest/security-monitoring/#list-findings
+[10]: /ja/api/latest/security-monitoring/#list-findings
 [11]: https://app.datadoghq.com/security/compliance
-[12]: /security/cloud_security_management/setup/csm_pro/agent/kubernetes
-[13]: /security/cloud_security_management/setup/csm_pro/cloud_accounts
-[14]: /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes
-[15]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+[12]: /ja/security/cloud_security_management/setup/csm_pro/agent/kubernetes
+[13]: /ja/security/cloud_security_management/setup/csm_pro/cloud_accounts
+[14]: /ja/security/cloud_security_management/setup/csm_enterprise/agent/kubernetes
+[15]: /ja/security/cloud_security_management/setup/csm_enterprise/cloud_accounts

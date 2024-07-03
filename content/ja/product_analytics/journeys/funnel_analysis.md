@@ -1,15 +1,16 @@
 ---
-title: ファネル分析
-disable_toc: false
+algolia:
+  tags:
+  - ファネル
 aliases:
-- /real_user_monitoring/funnel_analysis
-- /real_user_monitoring/product_analytics/funnel_analysis
+- /ja/real_user_monitoring/funnel_analysis
+- /ja/real_user_monitoring/product_analytics/funnel_analysis
+disable_toc: false
 further_reading:
 - link: /product_analytics/analytics_explorer/
   tag: ドキュメント
   text: Analytics Explorer
-algolia:
-  tags: [ファネル]
+title: ファネル分析
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -81,10 +82,10 @@ From this page, choose your starting view or action and click on the plus icon t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/#default-attributes
-[2]: /real_user_monitoring/browser/data_collected/#session-metrics
-[3]: /real_user_monitoring/browser/frustration_signals/
-[4]: /notebooks/
-[5]: /real_user_monitoring/session_replay
-[6]: /dashboards/
-[7]: /real_user_monitoring/error_tracking/
+[1]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
+[2]: /ja/real_user_monitoring/browser/data_collected/#session-metrics
+[3]: /ja/real_user_monitoring/browser/frustration_signals/
+[4]: /ja/notebooks/
+[5]: /ja/real_user_monitoring/session_replay
+[6]: /ja/dashboards/
+[7]: /ja/real_user_monitoring/error_tracking/

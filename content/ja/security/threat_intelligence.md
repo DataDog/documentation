@@ -1,23 +1,23 @@
 ---
-title: Threat Intelligence
-kind: documentation
 aliases:
-    - /security/threat_intel
-description: "Threat Intelligence at Datadog"
+- /ja/security/threat_intel
+description: Threat Intelligence at Datadog
 further_reading:
-  - link: /security/application_security/threats/threat-intelligence/
-    tag: documentation
-    text: ASM Threat Intelligence
+- link: /security/application_security/threats/threat-intelligence/
+  tag: documentation
+  text: ASM Threat Intelligence
+kind: documentation
 products:
-- name: Cloud SIEM
+- icon: siem
+  name: Cloud SIEM
   url: /security/cloud_siem/
-  icon: siem
-- name: CSM Threats
+- icon: cloud-security-management
+  name: CSM Threats
   url: /security/threats/
-  icon: cloud-security-management
-- name: Application Security Management
+- icon: app-sec
+  name: Application Security Management
   url: /security/application_security/
-  icon: app-sec
+title: Threat Intelligence
 ---
 
 {{< product-availability >}}
@@ -107,4 +107,4 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/security/detection_rules/
+[1]:/ja/security/detection_rules/

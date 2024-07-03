@@ -1,13 +1,13 @@
 ---
-title: Free Text Widget
-widget_type: free_text
-description: "Display text in a dashboard widget."
 aliases:
-- /graphing/widgets/free_text/
+- /ja/graphing/widgets/free_text/
+description: Display text in a dashboard widget.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Free Text Widget
+widget_type: free_text
 ---
 
 フリーテキストは、[スクリーンボード][1]に見出しを追加できるウィジェットです。
@@ -33,6 +33,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#screenboards
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/#screenboards
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

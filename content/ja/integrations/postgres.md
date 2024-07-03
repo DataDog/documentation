@@ -1,83 +1,83 @@
 ---
-"app_id": "postgres"
-"app_uuid": "e6b3c5ec-b293-4a22-9145-277a12a9abd4"
-"assets":
-  "dashboards":
-    "postgresql": "assets/dashboards/postgresql_dashboard.json"
-    "postgresql_screenboard": "assets/dashboards/postgresql_screenboard_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "postgresql.connections"
-      - "postgresql.max_connections"
-      "metadata_path": "metadata.csv"
-      "prefix": "postgresql."
-    "process_signatures":
-    - "postgres -D"
-    - "pg_ctl start -l logfile"
-    - "postgres -c 'pg_ctl start -D -l"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "28"
-    "source_type_name": "Postgres"
-  "monitors":
-    "percent_usage_connections": "assets/monitors/percent_usage_connections.json"
-    "replication_delay": "assets/monitors/replication_delay.json"
-  "saved_views":
-    "operations": "assets/saved_views/operations.json"
-    "postgres_pattern": "assets/saved_views/postgres_pattern.json"
-    "postgres_processes": "assets/saved_views/postgres_processes.json"
-    "sessions_by_host": "assets/saved_views/sessions_by_host.json"
-    "slow_operations": "assets/saved_views/slow_operations.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-- "notifications"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/postgres/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "postgres"
-"integration_id": "postgres"
-"integration_title": "Postgres"
-"integration_version": "18.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "postgres"
-"public_title": "Postgres"
-"short_description": "データベースパフォーマンスと健全性のメトリクスを豊富に収集"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  - "Category::Notifications"
-  - "Category::Tracing"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "データベースパフォーマンスと健全性のメトリクスを豊富に収集"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Postgres"
+app_id: postgres
+app_uuid: e6b3c5ec-b293-4a22-9145-277a12a9abd4
+assets:
+  dashboards:
+    postgresql: assets/dashboards/postgresql_dashboard.json
+    postgresql_screenboard: assets/dashboards/postgresql_screenboard_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - postgresql.connections
+      - postgresql.max_connections
+      metadata_path: metadata.csv
+      prefix: postgresql.
+    process_signatures:
+    - postgres -D
+    - pg_ctl start -l logfile
+    - postgres -c 'pg_ctl start -D -l
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 28
+    source_type_name: Postgres
+  monitors:
+    percent_usage_connections: assets/monitors/percent_usage_connections.json
+    replication_delay: assets/monitors/replication_delay.json
+  saved_views:
+    operations: assets/saved_views/operations.json
+    postgres_pattern: assets/saved_views/postgres_pattern.json
+    postgres_processes: assets/saved_views/postgres_processes.json
+    sessions_by_host: assets/saved_views/sessions_by_host.json
+    slow_operations: assets/saved_views/slow_operations.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+- notifications
+- tracing
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: postgres
+integration_id: postgres
+integration_title: Postgres
+integration_version: 18.3.0
+is_public: true
+manifest_version: 2.0.0
+name: postgres
+public_title: Postgres
+short_description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Category::ログの収集
+  - Category::Notifications
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Postgres
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -310,11 +310,11 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
 
 5. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/integrations/postgres/?tab=host#faq
+[1]: https://docs.datadoghq.com/ja/integrations/postgres/?tab=host#faq
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/tracing/send_traces/
-[5]: https://docs.datadoghq.com/tracing/setup/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
 [6]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [7]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
 {{% /tab %}}
@@ -362,10 +362,10 @@ Agent コンテナで必要な環境変数
 次に、[Postgres にリクエストを送信するアプリケーションのコンテナをインスツルメント][3]し、Agent のコンテナ名に `DD_AGENT_HOST` を設定します。
 
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[4]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -465,12 +465,12 @@ Agent コンテナで必要な環境変数
 
 そして、[Postgres へのリクエストを作成するアプリケーションコンテナをインスツルメントします][4]。
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
-[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
-[6]: https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+[6]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 [7]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/service_checks.json
 {{% /tab %}}
 {{% tab "ECS" %}}
@@ -532,11 +532,11 @@ Agent コンテナで必要な環境変数
 
 次に、[Postgres にリクエストを送信するアプリケーションのコンテナをインスツルメント][3]し、[EC2 プライベート IP アドレス][5]に `DD_AGENT_HOST` を設定します。
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[4]: https://docs.datadoghq.com/agent/docker/apm/
-[5]: https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/docker/apm/
+[5]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -583,13 +583,13 @@ PostgreSQL チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
-[2]: https://docs.datadoghq.com/database_monitoring/
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/database_monitoring/#postgres
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/database_monitoring/#postgres
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/help
-[8]: https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/
+[7]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
 [9]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
 [10]: https://www.datadoghq.com/blog/postgresql-monitoring
 [11]: https://www.datadoghq.com/blog/postgresql-monitoring-tools

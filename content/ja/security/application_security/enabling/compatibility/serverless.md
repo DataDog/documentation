@@ -1,9 +1,9 @@
 ---
-title: Serverless Compatibility Requirements 
-kind: documentation
 code_lang: serverless
-type: multi-code-lang
 code_lang_weight: 90
+kind: documentation
+title: Serverless Compatibility Requirements
+type: multi-code-lang
 ---
 
 Application Security provides serverless capability for the following platforms and libraries:
@@ -85,9 +85,9 @@ Only *web applications* are supported. Azure Functions are not supported.
 | PHP       | Linux              |                  | {{< X >}}                          |                                          |
 
 
-[1]: /serverless/distributed_tracing/
-[2]: /serverless/guide/datadog_forwarder_python
-[3]: /serverless/guide/upgrade_java_instrumentation
-[4]: /serverless/guide/serverless_tracing_and_bundlers/
-[5]: /service_management/workflows/
-[6]: /security/application_security/threats/inapp_waf_rules/
+[1]: /ja/serverless/distributed_tracing/
+[2]: /ja/serverless/guide/datadog_forwarder_python
+[3]: /ja/serverless/guide/upgrade_java_instrumentation
+[4]: /ja/serverless/guide/serverless_tracing_and_bundlers/
+[5]: /ja/service_management/workflows/
+[6]: /ja/security/application_security/threats/inapp_waf_rules/

@@ -1,16 +1,16 @@
 ---
-title: Safety Center
-is_beta: true
 further_reading:
-    - link: /account_management/api-app-keys/
-      tag: ドキュメント
-      text: API キーとアプリケーションキー
-    - link: /account_management/users/
-      tag: ドキュメント
-      text: ユーザー管理
-    - link: /account_management/org_settings/oauth_apps
-      tag: ドキュメント
-      text: OAuth アプリ
+- link: /account_management/api-app-keys/
+  tag: ドキュメント
+  text: API キーとアプリケーションキー
+- link: /account_management/users/
+  tag: ドキュメント
+  text: ユーザー管理
+- link: /account_management/org_settings/oauth_apps
+  tag: ドキュメント
+  text: OAuth アプリ
+is_beta: true
+title: Safety Center
 ---
 
 {{< callout url="#" header="false" btn_hidden="true" >}}
@@ -74,9 +74,9 @@ Giving **admin access** to users without careful consideration increases potenti
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/#datadog-default-roles
-[2]: /account_management/api-app-keys/#application-keys
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#what-to-do-if-an-api-or-application-key-was-exposed
-[5]: /account_management/org_settings/oauth_apps
-[7]: /account_management/users/#add-new-members-and-manage-invites
+[1]: /ja/account_management/rbac/#datadog-default-roles
+[2]: /ja/account_management/api-app-keys/#application-keys
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#what-to-do-if-an-api-or-application-key-was-exposed
+[5]: /ja/account_management/org_settings/oauth_apps
+[7]: /ja/account_management/users/#add-new-members-and-manage-invites

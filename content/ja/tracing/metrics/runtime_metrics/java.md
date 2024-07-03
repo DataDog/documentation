@@ -1,22 +1,23 @@
 ---
-title: Java Runtime Metrics
-kind: documentation
-description: "Gain additional insights into your Java application's performance with the runtime metrics associated to your traces."
-code_lang: java
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
-- /tracing/runtime_metrics/java
+- /ja/tracing/runtime_metrics/java
+code_lang: java
+code_lang_weight: 10
+description: Gain additional insights into your Java application's performance with
+  the runtime metrics associated to your traces.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+kind: documentation
+title: Java Runtime Metrics
+type: multi-code-lang
 ---
 
 ## Automatic configuration
@@ -57,11 +58,11 @@ Additional JMX metrics can be added using configuration files that are passed on
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /developers/dogstatsd/#setup
-[3]: /agent/docker/#dogstatsd-custom-metrics
-[4]: /developers/dogstatsd/?tab=kubernetes#agent
-[5]: /agent/amazon_ecs/#create-an-ecs-task
+[2]: /ja/developers/dogstatsd/#setup
+[3]: /ja/agent/docker/#dogstatsd-custom-metrics
+[4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
+[5]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 [7]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
-[8]: /integrations/java/#configuration
-[9]: /developers/dogstatsd/unix_socket/
+[8]: /ja/integrations/java/#configuration
+[9]: /ja/developers/dogstatsd/unix_socket/

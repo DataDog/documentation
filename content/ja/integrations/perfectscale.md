@@ -1,71 +1,73 @@
 ---
-"app_id": "perfectscale"
-"app_uuid": "1f6c7afa-b008-4fa6-a82d-8259c9c423e3"
-"assets":
-  "dashboards":
-    "PerfectScale": assets/dashboards/perfectscale_alerts.json
-"author":
-  "homepage": "https://www.perfectscale.io/"
-  "name": PerfectScale
-  "sales_email": info@perfectscale.io
-  "support_email": support@perfectscale.io
-"categories":
+app_id: perfectscale
+app_uuid: 1f6c7afa-b008-4fa6-a82d-8259c9c423e3
+assets:
+  dashboards:
+    PerfectScale: assets/dashboards/perfectscale_alerts.json
+author:
+  homepage: https://www.perfectscale.io/
+  name: PerfectScale
+  sales_email: info@perfectscale.io
+  support_email: support@perfectscale.io
+categories:
 - alerting
 - automation
 - cloud
 - cost management
 - issue tracking
 - kubernetes
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/perfectscale/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "perfectscale"
-"integration_id": "perfectscale"
-"integration_title": "PerfectScale"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "perfectscale"
-"public_title": "PerfectScale"
-"short_description": "Receive PerfectScale optimization alerts directly in Datadog to expedite remediations."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/perfectscale/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: perfectscale
+integration_id: perfectscale
+integration_title: PerfectScale
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: perfectscale
+public_title: PerfectScale
+short_description: Receive PerfectScale optimization alerts directly in Datadog to
+  expedite remediations.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Alerting"
-  - "Category::Automation"
-  - "Category::Cloud"
-  - "Category::Cost Management"
-  - "Category::Issue Tracking"
-  - "Category::Kubernetes"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Receive PerfectScale optimization alerts directly in Datadog to expedite remediations.
-  "media":
-  - "caption": PerfectScale pushes alerts to the Datadog dashboard
-    "image_url": images/perfectscale-alerts.png
-    "media_type": image
-  - "caption": PerfectScale's alerts dashboard
-    "image_url": images/perfectscale-dashboard.png
-    "media_type": image
-  - "caption": PerfectScale's anomalies summary
-    "image_url": images/perfectscale-anomalies.png
-    "media_type": image
-  - "caption": Kubernetes Optimization Alerts Dashboard
-    "image_url": images/perfectscale-datadog-dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": PerfectScale
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Alerting
+  - Category::Automation
+  - Category::Cloud
+  - Category::Cost Management
+  - Category::Issue Tracking
+  - Category::Kubernetes
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Receive PerfectScale optimization alerts directly in Datadog to expedite
+    remediations.
+  media:
+  - caption: PerfectScale pushes alerts to the Datadog dashboard
+    image_url: images/perfectscale-alerts.png
+    media_type: image
+  - caption: PerfectScale's alerts dashboard
+    image_url: images/perfectscale-dashboard.png
+    media_type: image
+  - caption: PerfectScale's anomalies summary
+    image_url: images/perfectscale-anomalies.png
+    media_type: image
+  - caption: Kubernetes Optimization Alerts Dashboard
+    image_url: images/perfectscale-datadog-dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PerfectScale
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -111,6 +113,5 @@ Need help with the integration? Contact [PerfectScale support][8].
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/perfectscale/images/perfectscale-connect-cluster.png
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.perfectscale.io/customizations/communication-and-messaging/datadog-alerts-integration
-[7]: https://docs.datadoghq.com/getting_started/site/
+[7]: https://docs.datadoghq.com/ja/getting_started/site/
 [8]: mailto:support@perfectscale.io
-

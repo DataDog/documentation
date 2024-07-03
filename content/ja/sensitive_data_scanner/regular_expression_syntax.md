@@ -1,11 +1,11 @@
 ---
-title: Regular Expression Syntax
-kind: documentation
 disable_toc: false
 further_reading:
-    - link: /sensitive_data_scanner/
-      tag: Documentation
-      text: Set up Sensitive Data Scanner
+- link: /sensitive_data_scanner/
+  tag: Documentation
+  text: Set up Sensitive Data Scanner
+kind: documentation
+title: Regular Expression Syntax
 ---
 
 ## Overview
@@ -220,6 +220,6 @@ Script names can be used to match any character from the script. The following a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /sensitive_data_scanner/
-[2]: /sensitive_data_scanner/library_rules/
+[1]: /ja/sensitive_data_scanner/
+[2]: /ja/sensitive_data_scanner/library_rules/
 [3]: https://www.pcre.org/current/doc/html/pcre2syntax.html

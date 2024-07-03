@@ -37,7 +37,7 @@ In [User Management][4], you can filter users by the override methods set, or vi
 
 ユーザーのオーバーライドを編集するか、オーバーライドを完全に削除して、ユーザーがデフォルトのみを使用できるようにすることができます。詳しくは、[ユーザーのログイン方法を編集する][1]を参照してください。
 
-[1]: /account_management/users/#edit-a-users-login-methods
-[2]: /account_management/saml/
+[1]: /ja/account_management/users/#edit-a-users-login-methods
+[2]: /ja/account_management/saml/
 [3]: https://app.datadoghq.com/organization-settings/login-methods
 [4]: https://app.datadoghq.com/organization-settings/users

@@ -1,59 +1,61 @@
 ---
-"app_id": "oracle-cloud-infrastructure"
-"app_uuid": "c2b4d38f-dd23-4ca2-8bc4-b70360868e8c"
-"assets":
-  "dashboards":
-    "OCI-Overview-Beta": assets/dashboards/oci-overview-beta-dashboard.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: oracle-cloud-infrastructure
+app_uuid: c2b4d38f-dd23-4ca2-8bc4-b70360868e8c
+assets:
+  dashboards:
+    OCI-Overview-Beta: assets/dashboards/oci-overview-beta-dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
       - oci.computeagent.cpu_utilization
-      "metadata_path": metadata.csv
-      "prefix": oci.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "310"
-    "source_type_name": Oracle Cloud Infrastructure
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: oci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 310
+    source_type_name: Oracle Cloud Infrastructure
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
 - log collection
 - network
 - oracle
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "oracle_cloud_infrastructure"
-"integration_id": "oracle-cloud-infrastructure"
-"integration_title": "Oracle Cloud Infrastructure"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "oracle_cloud_infrastructure"
-"public_title": "Oracle Cloud Infrastructure"
-"short_description": "Oracle Cloud Infrastructure (OCI) is an IaaS platform that delivers high-performance computing and simple migrations."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Category::Oracle"
-  "configuration": "README.md#Setup"
-  "description": Oracle Cloud Infrastructure (OCI) is an IaaS platform that delivers high-performance computing and simple migrations.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Oracle Cloud Infrastructure
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: oracle_cloud_infrastructure
+integration_id: oracle-cloud-infrastructure
+integration_title: Oracle Cloud Infrastructure
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: oracle_cloud_infrastructure
+public_title: Oracle Cloud Infrastructure
+short_description: Oracle Cloud Infrastructure (OCI) is an IaaS platform that delivers
+  high-performance computing and simple migrations.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Log Collection
+  - Category::Network
+  - Category::Oracle
+  configuration: README.md#Setup
+  description: Oracle Cloud Infrastructure (OCI) is an IaaS platform that delivers
+    high-performance computing and simple migrations.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Oracle Cloud Infrastructure
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -124,7 +126,7 @@ OCI オブジェクトストレージの詳細については、[Oracle のサ�
 [4]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/func.yaml
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt
 [6]: https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available
-[7]: https://docs.datadoghq.com/help/
+[7]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}
 {{% tab "オブジェクトストア" %}}
 
@@ -198,4 +200,3 @@ OCI オブジェクトストレージの詳細については、[イベント入
 [7]: https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm
 {{% /tab %}}
 {{< /tabs >}}
-

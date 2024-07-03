@@ -1,55 +1,55 @@
 ---
-"app_id": "akamai"
-"app_uuid": "5ee63b45-092e-4d63-b980-1675f328bf6b"
-"assets":
-  "dashboards":
-    "akamai-application-security-overview": assets/dashboards/akamai_application_security_overview.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10392"
-    "source_type_name": Akamai
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: akamai
+app_uuid: 5ee63b45-092e-4d63-b980-1675f328bf6b
+assets:
+  dashboards:
+    akamai-application-security-overview: assets/dashboards/akamai_application_security_overview.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10392
+    source_type_name: Akamai
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "akamai_application_security"
-"integration_id": "akamai"
-"integration_title": "Akamai Application Security"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "akamai_application_security"
-"public_title": "Akamai Application Security"
-"short_description": "Integrate with Akamai to get event logs for Akamai products."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Submitted Data Type::Logs"
-  - "Category::Log Collection"
-  - "Category::Security"
-  "configuration": "README.md#Setup"
-  "description": Integrate with Akamai to get event logs for Akamai products.
-  "media":
-  - "caption": Akamai Application Security Dashboard Overview
-    "image_url": images/akamai-application-security-dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Akamai Application Security
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: akamai_application_security
+integration_id: akamai
+integration_title: Akamai Application Security
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: akamai_application_security
+public_title: Akamai Application Security
+short_description: Integrate with Akamai to get event logs for Akamai products.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Submitted Data Type::Logs
+  - Category::Log Collection
+  - Category::Security
+  configuration: README.md#Setup
+  description: Integrate with Akamai to get event logs for Akamai products.
+  media:
+  - caption: Akamai Application Security Dashboard Overview
+    image_url: images/akamai-application-security-dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Akamai Application Security
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -128,5 +128,4 @@ Need help? Contact [Datadog support][5].
 [2]: https://app.datadoghq.com/integrations/akamai
 [3]: https://control.akamai.com/apps/auth/#/login
 [4]: https://github.com/DataDog/integrations-internal-core/blob/master/akamai/assets/service_checks.json
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

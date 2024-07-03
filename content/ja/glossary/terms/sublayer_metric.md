@@ -1,7 +1,7 @@
 ---
-title: sublayer metric
 core_product:
-  - apm
+- apm
+title: sublayer metric
 ---
 A sublayer metric is the execution duration of a given type or service within a trace.
 
@@ -9,4 +9,4 @@ Some [Tracing Application Metrics][1] are tagged with `sublayer_service` and `su
 
 Sublayer metrics are only available if a service has downstream dependencies.
 
-[1]: /tracing/metrics/metrics_namespace/
+[1]: /ja/tracing/metrics/metrics_namespace/

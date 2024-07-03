@@ -1,56 +1,56 @@
 ---
-"app_id": "tcp-queue-length"
-"app_uuid": "2c48a360-9fbb-4cd6-9316-0e9afd9926c8"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": tcp_queue.read_buffer_max_usage_pct
-      "metadata_path": metadata.csv
-      "prefix": tcp_queue.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10295"
-    "source_type_name": TCP Queue Length
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: tcp-queue-length
+app_uuid: 2c48a360-9fbb-4cd6-9316-0e9afd9926c8
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: tcp_queue.read_buffer_max_usage_pct
+      metadata_path: metadata.csv
+      prefix: tcp_queue.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10295
+    source_type_name: TCP Queue Length
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - developer tools
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "tcp_queue_length"
-"integration_id": "tcp-queue-length"
-"integration_title": "TCP Queue Length"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "tcp_queue_length"
-"public_title": "TCP Queue Length"
-"short_description": "Track the size of the TCP buffers with Datadog."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: tcp_queue_length
+integration_id: tcp-queue-length
+integration_title: TCP Queue Length
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: tcp_queue_length
+public_title: TCP Queue Length
+short_description: Track the size of the TCP buffers with Datadog.
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": Track the size of the TCP buffers with Datadog.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": TCP Queue Length
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::Network
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Track the size of the TCP buffers with Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TCP Queue Length
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -157,8 +157,7 @@ The TCP Queue Length check does not include any events.
 Need help? Contact [Datadog support][5].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/tcp_queue_length.d/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/helm-charts
 [4]: https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/metadata.csv
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

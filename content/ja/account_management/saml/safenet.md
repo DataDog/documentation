@@ -1,9 +1,9 @@
 ---
-title: SafeNet SAML IdP
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
   text: Configure SAML for your Datadog account
+title: SafeNet SAML IdP
 ---
 
 ## セットアップ
@@ -32,6 +32,6 @@ Datadog のログイン URL にアクセスします。SafeNet Trusted Access �
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/saml/#configure-saml
+[1]: /ja/account_management/saml/#configure-saml
 [2]: https://resources.safenetid.com/help/Datadog/Index.htm
 [3]: https://app.datadoghq.com/account/saml/metadata.xml

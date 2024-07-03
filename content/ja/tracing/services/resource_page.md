@@ -1,12 +1,11 @@
 ---
-title: Resource Page
-kind: documentation
 aliases:
-- /tracing/visualization/resource/
+- /ja/tracing/visualization/resource/
 further_reading:
-- link: "https://www.datadoghq.com/blog/dependency-map-navigator/"
+- link: https://www.datadoghq.com/blog/dependency-map-navigator/
   tag: Blog
-  text: Pinpoint performance issues in downstream services with the Dependency Map Navigator
+  text: Pinpoint performance issues in downstream services with the Dependency Map
+    Navigator
 - link: /tracing/trace_collection/
   tag: Documentation
   text: Learn how to setup APM tracing with your application
@@ -19,6 +18,8 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentation
   text: Understand how to read a Datadog Trace
+kind: documentation
+title: Resource Page
 ---
 
 {{< img src="tracing/visualization/resource/resource-page-cropped.png" alt="The APM resource page, showing monitor status and trends for key metrics" >}}
@@ -121,11 +122,11 @@ Consult the list of [traces][7] associated with this resource in the [Trace sear
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#services
-[2]: /tracing/glossary/
-[3]: /tracing/glossary/#trace
-[4]: /dashboards/
-[5]: /monitors/manage/status/
-[6]: /tracing/glossary/#spans
-[7]: /tracing/trace_explorer/trace_view/
-[8]: /tracing/search/
+[1]: /ja/tracing/glossary/#services
+[2]: /ja/tracing/glossary/
+[3]: /ja/tracing/glossary/#trace
+[4]: /ja/dashboards/
+[5]: /ja/monitors/manage/status/
+[6]: /ja/tracing/glossary/#spans
+[7]: /ja/tracing/trace_explorer/trace_view/
+[8]: /ja/tracing/search/

@@ -1,16 +1,16 @@
 ---
-title: Propagating Java Trace Context
-kind: documentation
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
-      tag: Blog
-      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: Blog
+  text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Propagating Java Trace Context
+type: multi-code-lang
 ---
 
 
@@ -47,6 +47,6 @@ For reference details about the context propagation settings and other configura
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/library_config/java/#headers-extraction-and-injection
+[1]: /ja/tracing/trace_collection/library_config/java/#headers-extraction-and-injection
 [13]: https://github.com/openzipkin/b3-propagation
 [14]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

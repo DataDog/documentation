@@ -1,10 +1,7 @@
 ---
-title: Configuring Incident Event Submission for DORA Metrics
-kind: ドキュメント
-description: Learn how to send incident events for DORA Metrics.
 aliases:
-- /continuous_integration/dora_metrics/setup/incidents
-is_beta: true
+- /ja/continuous_integration/dora_metrics/setup/incidents
+description: Learn how to send incident events for DORA Metrics.
 further_reading:
 - link: /dora_metrics/failures
   tag: ドキュメント
@@ -15,9 +12,12 @@ further_reading:
 - link: /continuous_delivery/deployments
   tag: ドキュメント
   text: Deployment Visibility について
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: リリースノート
   text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
+is_beta: true
+kind: ドキュメント
+title: Configuring Incident Event Submission for DORA Metrics
 ---
 
 {{< site-region region="gov" >}}
@@ -81,6 +81,6 @@ EOF
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
-[2]: /dora_metrics/deployments
+[1]: /ja/api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[2]: /ja/dora_metrics/deployments
 [3]: https://app.datadoghq.com/ci/dora

@@ -1,13 +1,13 @@
 ---
-title: Session Replay Browser Developer Tools
-kind: documentation
-description: Describes the developer tools available in Session Replay
 aliases:
-- /real_user_monitoring/session_replay/developer_tools
+- /ja/real_user_monitoring/session_replay/developer_tools
+description: Describes the developer tools available in Session Replay
 further_reading:
-    - link: /real_user_monitoring/session_replay/browser
-      tag: Documentation
-      text: Browser Session Replay
+- link: /real_user_monitoring/session_replay/browser
+  tag: Documentation
+  text: Browser Session Replay
+kind: documentation
+title: Session Replay Browser Developer Tools
 ---
 
 ## Overview
@@ -54,9 +54,9 @@ The **Attributes** tab displays all attributes related to the session. For more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
-[2]: /logs/log_collection/javascript/
-[3]: /logs/explorer/
-[4]: /real_user_monitoring/browser/collecting_browser_errors/
-[5]: /real_user_monitoring/error_tracking/
-[6]: /real_user_monitoring/browser/data_collected/#default-attributes
+[1]: /ja/real_user_monitoring/explorer/
+[2]: /ja/logs/log_collection/javascript/
+[3]: /ja/logs/explorer/
+[4]: /ja/real_user_monitoring/browser/collecting_browser_errors/
+[5]: /ja/real_user_monitoring/error_tracking/
+[6]: /ja/real_user_monitoring/browser/data_collected/#default-attributes

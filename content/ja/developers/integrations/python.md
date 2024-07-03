@@ -1,6 +1,6 @@
 ---
-title: Install the Datadog Agent Integration Developer Tool
 description: Install the Datadog Agent Integration Developer Tool.
+title: Install the Datadog Agent Integration Developer Tool
 ---
 This document covers how to setup a Python environment to work on Agent-based Integrations, including installing the interpreter and developer tool.
 

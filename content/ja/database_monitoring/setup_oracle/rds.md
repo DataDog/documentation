@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for RDS Oracle
 description: Install and configure Database Monitoring for RDS Oracle
 further_reading:
 - link: /integrations/oracle/
   tag: Documentation
   text: Basic Oracle Integration
-
+title: Setting Up Database Monitoring for RDS Oracle
 ---
 
 {{% dbm-oracle-definition %}}
@@ -135,16 +134,16 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
-[1]: /database_monitoring/agent_integration_overhead/?tab=oracle
-[2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[3]: /agent/configuration/agent-commands/#agent-status-and-information
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=oracle
+[2]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [4]: https://app.datadoghq.com/databases
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
-[6]: /database_monitoring/data_collected/#sensitive-information
+[6]: /ja/database_monitoring/data_collected/#sensitive-information
 [7]: https://app.datadoghq.com/integrations/oracle
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
-[10]: /database_monitoring/architecture/
+[10]: /ja/database_monitoring/architecture/
 
 ## 参考資料
 

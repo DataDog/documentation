@@ -1,13 +1,14 @@
 ---
-title: RUM Dashboards
-kind: documentation
-description: Use out-of-the-box RUM dashboards to learn more about your application's data and performance.
 aliases:
-- /real_user_monitoring/dashboards
+- /ja/real_user_monitoring/dashboards
+description: Use out-of-the-box RUM dashboards to learn more about your application's
+  data and performance.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Learn about the RUM Explorer
+kind: documentation
+title: RUM Dashboards
 ---
 
 ## Overview
@@ -51,9 +52,9 @@ You can also modify the template variables and create a [saved view][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/data_collected/
+[1]: /ja/real_user_monitoring/data_collected/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /dashboards/
-[4]: /real_user_monitoring/explorer/
-[5]: /dashboards/template_variables
-[6]: /real_user_monitoring/explorer/saved_views/
+[3]: /ja/dashboards/
+[4]: /ja/real_user_monitoring/explorer/
+[5]: /ja/dashboards/template_variables
+[6]: /ja/real_user_monitoring/explorer/saved_views/

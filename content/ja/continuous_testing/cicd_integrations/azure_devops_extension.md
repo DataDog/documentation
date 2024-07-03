@@ -1,9 +1,10 @@
 ---
 aliases:
-- /synthetics/cicd_integrations/azure_devops_extension
+- /ja/synthetics/cicd_integrations/azure_devops_extension
 dependencies:
-- "https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"
-description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
+- https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md
+description: Use the Synthetics and Datadog CI extension to create tasks that you
+  can use in a CI pipeline.
 title: Continuous Testing and Datadog CI Azure DevOps Extension
 ---
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Datadog.datadog-ci)][1]
@@ -166,14 +167,14 @@ For an example of a global configuration file, see this [`global.config.json` fi
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-ci
 [2]: https://github.com/DataDog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci-azure-devops/tree/main/SyntheticsRunTestsTask
-[4]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration
+[4]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration
 [5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints
-[6]: https://docs.datadoghq.com/account_management/api-app-keys/
+[6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [7]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/set-secret-variables
-[8]: https://docs.datadoghq.com/synthetics/search/#search
-[9]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
-[10]: https://docs.datadoghq.com/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
-[11]: https://docs.datadoghq.com/getting_started/site/
+[8]: https://docs.datadoghq.com/ja/synthetics/search/#search
+[9]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
+[10]: https://docs.datadoghq.com/ja/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
+[11]: https://docs.datadoghq.com/ja/getting_started/site/
 [12]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
 [13]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
-[14]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[14]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files

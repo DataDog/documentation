@@ -1,61 +1,61 @@
 ---
-"app_id": "amazon-api-gateway"
-"app_uuid": "431bfc66-cc6e-40c5-b7f0-dbb2990322c8"
-"assets":
-  "dashboards":
-    "Amazon API Gateway": "assets/dashboards/aws_api_gateway_dashboard.json"
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "aws.apigateway.latency"
-      "metadata_path": "metadata.csv"
-      "prefix": "aws.apigateway"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "166"
-    "source_type_name": "Amazon Api Gateway"
-  "monitors":
-    "[AWS] API Gateway Elevated 4XX Error Rate for REST API {{apiname.name}}": "assets/monitors/rec_mon_4xx_errors.json"
-    "[AWS] API Gateway Elevated 5XX Error Rate for REST API {{apiname.name}}": "assets/monitors/rec_mon_5xx_errors.json"
-    "[AWS] API Gateway High Response Time (latency) on {{apiname.name}}": "assets/monitors/rec_mon_high_latency.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "aws"
-- "metrics"
-- "cloud"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "amazon_api_gateway"
-"integration_id": "amazon-api-gateway"
-"integration_title": "Amazon API Gateway"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "amazon_api_gateway"
-"public_title": "Amazon Api Gateway Integration"
-"short_description": "Amazon API Gateway is a managed service for APIs."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::AWS"
-  - "Category::Metrics"
-  - "Category::Cloud"
-  "configuration": "README.md#Setup"
-  "description": "Amazon API Gateway is a managed service for APIs."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Amazon Api Gateway Integration"
+app_id: amazon-api-gateway
+app_uuid: 431bfc66-cc6e-40c5-b7f0-dbb2990322c8
+assets:
+  dashboards:
+    Amazon API Gateway: assets/dashboards/aws_api_gateway_dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.apigateway.latency
+      metadata_path: metadata.csv
+      prefix: aws.apigateway
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 166
+    source_type_name: Amazon Api Gateway
+  monitors:
+    '[AWS] API Gateway Elevated 4XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_4xx_errors.json
+    '[AWS] API Gateway Elevated 5XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_5xx_errors.json
+    '[AWS] API Gateway High Response Time (latency) on {{apiname.name}}': assets/monitors/rec_mon_high_latency.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- aws
+- metrics
+- cloud
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: amazon_api_gateway
+integration_id: amazon-api-gateway
+integration_title: Amazon API Gateway
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: amazon_api_gateway
+public_title: Amazon Api Gateway Integration
+short_description: Amazon API Gateway is a managed service for APIs.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Metrics
+  - Category::Cloud
+  configuration: README.md#Setup
+  description: Amazon API Gateway is a managed service for APIs.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon Api Gateway Integration
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -142,12 +142,11 @@ The Amazon API Gateway integration does not include any service checks.
 
 Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://app.datadoghq.com/integrations/amazon-api-gateway
-[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

@@ -1,9 +1,9 @@
 ---
-title: Context Links
 further_reading:
 - link: /dashboards/widgets
   tag: Documentation
   text: Dashboard widget list
+title: Context Links
 ---
 
 ## 概要
@@ -253,26 +253,26 @@ service:backend (env:{{$env.value}})
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /monitors/notify/
-[2]: /notebooks/
-[3]: /dashboards/configure/#permissions
+[1]: /ja/monitors/notify/
+[2]: /ja/notebooks/
+[3]: /ja/dashboards/configure/#permissions
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/
-[7]: /real_user_monitoring/data_collected/
-[8]: /infrastructure/hostmap/#overview
-[9]: /getting_started/dashboards/#explore-out-of-the-box-dashboards
-[10]: /infrastructure/livecontainers/
-[11]: /infrastructure/process/?tab=linuxwindows
-[12]: /tracing/trace_explorer/?tab=listview
-[13]: /real_user_monitoring/explorer/
-[14]: /profiler/profile_visualizations/
-[15]: /logs/explorer/
-[16]: /dashboards/widgets/
-[17]: /real_user_monitoring/
-[18]: /security/cloud_siem/
-[19]: /integrations/amazon_ec2/
+[7]: /ja/real_user_monitoring/data_collected/
+[8]: /ja/infrastructure/hostmap/#overview
+[9]: /ja/getting_started/dashboards/#explore-out-of-the-box-dashboards
+[10]: /ja/infrastructure/livecontainers/
+[11]: /ja/infrastructure/process/?tab=linuxwindows
+[12]: /ja/tracing/trace_explorer/?tab=listview
+[13]: /ja/real_user_monitoring/explorer/
+[14]: /ja/profiler/profile_visualizations/
+[15]: /ja/logs/explorer/
+[16]: /ja/dashboards/widgets/
+[17]: /ja/real_user_monitoring/
+[18]: /ja/security/cloud_siem/
+[19]: /ja/integrations/amazon_ec2/
 [20]: https://aws.amazon.com/console/
-[21]: /logs/
-[22]: /integrations/#cat-log-collection
-[23]: /logs/explorer/saved_views/
+[21]: /ja/logs/
+[22]: /ja/integrations/#cat-log-collection
+[23]: /ja/logs/explorer/saved_views/

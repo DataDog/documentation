@@ -1,30 +1,30 @@
 ---
-"categories":
-- "alerting"
-- "incidents"
-- "issue tracking"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog アラートからチケットを自動的に生成および更新"
-"doc_link": "https://docs.datadoghq.com/integrations/servicenow/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/"
-  "tag": "ブログ"
-  "text": "Datadog アラートからの ServiceNow チケットの作成"
-"git_integration_title": "servicenow"
-"has_logo": true
-"integration_id": ""
-"integration_title": "ServiceNow"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "servicenow"
-"public_title": "Datadog-ServiceNow Integration"
-"short_description": "Have your Datadog alerts automatically generate and update tickets."
-"team": "web-integrations"
-"version": "1.0"
+categories:
+- alerting
+- incidents
+- issue tracking
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog アラートからチケットを自動的に生成および更新
+doc_link: https://docs.datadoghq.com/integrations/servicenow/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/
+  tag: ブログ
+  text: Datadog アラートからの ServiceNow チケットの作成
+git_integration_title: servicenow
+has_logo: true
+integration_id: ''
+integration_title: ServiceNow
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: servicenow
+public_title: Datadog-ServiceNow Integration
+short_description: Have your Datadog alerts automatically generate and update tickets.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -157,7 +157,7 @@ To use the Datadog integration for Monitors, Case Management, and Incident Manag
 
 ### Install the Datadog update set
 
-Download the latest Update Set here: [`Datadog-Snow_Update_Set_v2.5.1.xml`][9]
+Download the latest Update Set here: [`Datadog-Snow_Update_Set_v2.5.2.xml`][9]
 
 **Note**: Integration with Case Management is only supported with v2.4.0 and later. Integration with Incident Management and bidirectional syncing with Case Management is only supported with v2.5.0 and later.
 
@@ -363,11 +363,10 @@ To validate the integration is set up correctly, add `@servicenow` in a monitor 
 [3]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/c877cb86687e0050f8774bfad236c950/1.2.1
 [4]: https://store.servicenow.com/
 [5]: https://app.datadoghq.com/event/explorer
-[6]: https://docs.datadoghq.com/tracing/service_catalog/
+[6]: https://docs.datadoghq.com/ja/tracing/service_catalog/
 [7]: https://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/configuration-management/task/use-cmdb-query-builder.html
-[8]: https://docs.datadoghq.com/tracing/service_catalog/adding_metadata/
-[9]: https://docs.datadoghq.com/resources/xml/Datadog-Snow_Update_Set_v2.5.1.xml
-[10]: https://docs.datadoghq.com/service_management/case_management/settings#servicenow
-[11]: https://docs.datadoghq.com/help/
+[8]: https://docs.datadoghq.com/ja/tracing/service_catalog/adding_metadata/
+[9]: https://docs.datadoghq.com/resources/xml/Datadog-Snow_Update_Set_v2.5.2.xml
+[10]: https://docs.datadoghq.com/ja/service_management/case_management/settings#servicenow
+[11]: https://docs.datadoghq.com/ja/help/
 [12]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
-

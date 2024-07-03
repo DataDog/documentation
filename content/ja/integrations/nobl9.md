@@ -1,60 +1,61 @@
 ---
-"app_id": "nobl9"
-"app_uuid": "678f6805-2038-4705-80b3-de7cc143baef"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": nobl9.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10230"
-    "source_type_name": Nobl9
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Nobl9
-  "sales_email": support@nobl9.com
-  "support_email": support@nobl9.com
-"categories":
+app_id: nobl9
+app_uuid: 678f6805-2038-4705-80b3-de7cc143baef
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: nobl9.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10230
+    source_type_name: Nobl9
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Nobl9
+  sales_email: support@nobl9.com
+  support_email: support@nobl9.com
+categories:
 - metrics
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "nobl9"
-"integration_id": "nobl9"
-"integration_title": "Nobl9"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "nobl9"
-"public_title": "Nobl9"
-"short_description": "Nobl9 enables SLI collection, SLO calculation, and error budget alerts"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: nobl9
+integration_id: nobl9
+integration_title: Nobl9
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: nobl9
+public_title: Nobl9
+short_description: Nobl9 enables SLI collection, SLO calculation, and error budget
+  alerts
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Notifications"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Nobl9 enables SLI collection, SLO calculation, and error budget alerts
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Nobl9
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Nobl9 enables SLI collection, SLO calculation, and error budget alerts
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nobl9
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -103,5 +104,4 @@ Need help? Contact [Nobl9 Support][6] or [Datadog Support][7].
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/nobl9/images/service_health.png
 [5]: https://nobl9.github.io/techdocs_User_Guide/#service-level-objectives-38
 [6]: https://nobl9.com/about/#contact
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

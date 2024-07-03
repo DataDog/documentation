@@ -1,12 +1,11 @@
 ---
-title: Cluster Agent Commands and Options
 aliases:
-- /agent/cluster_agent/commands
+- /ja/agent/cluster_agent/commands
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
   text: Introducing the Datadog Cluster Agent
-- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
+- link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: Blog
   text: Autoscale your Kubernetes workloads with any Datadog metric
 - link: /agent/cluster_agent/clusterchecks/
@@ -18,6 +17,7 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentation
   text: Troubleshooting the Datadog Cluster Agent
+title: Cluster Agent Commands and Options
 ---
 
 ## Cluster Agent のコマンド

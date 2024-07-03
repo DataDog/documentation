@@ -1,23 +1,23 @@
 ---
-title: .NET and .NET Core Compatibility Requirements
-kind: documentation
-description: 'Compatibility Requirements for the .NET Tracer'
 aliases:
-  - /tracing/compatibility_requirements/dotnet-core
-  - /tracing/setup_overview/compatibility_requirements/dotnet-core
+- /ja/tracing/compatibility_requirements/dotnet-core
+- /ja/tracing/setup_overview/compatibility_requirements/dotnet-core
 code_lang: dotnet-core
-type: multi-code-lang
 code_lang_weight: 70
+description: Compatibility Requirements for the .NET Tracer
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/dotnet-core
-      tag: Documentation
-      text: Instrument Your Application
-    - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-      tag: ソースコード
-      text: Examples of Custom Instrumentation
-    - link: "https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/"
-      tag: Blog
-      text: Monitor containerized ASP.NET Core applications
+- link: tracing/trace_collection/dd_libraries/dotnet-core
+  tag: Documentation
+  text: Instrument Your Application
+- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
+  tag: ソースコード
+  text: Examples of Custom Instrumentation
+- link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
+  tag: Blog
+  text: Monitor containerized ASP.NET Core applications
+kind: documentation
+title: .NET and .NET Core Compatibility Requirements
+type: multi-code-lang
 ---
 
 
@@ -154,14 +154,14 @@ Version updates imply the following changes to runtime support:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: /tracing/compatibility_requirements/dotnet-framework/
+[2]: /ja/tracing/compatibility_requirements/dotnet-framework/
 [3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[5]: /help/
+[5]: /ja/help/
 [6]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
 [7]: https://github.com/dotnet/runtime/issues/23938
-[8]: /agent/basic_agent_usage/?tab=agentv6v7
-[9]: /agent/basic_agent_usage/?tab=agentv5
+[8]: /ja/agent/basic_agent_usage/?tab=agentv6v7
+[9]: /ja/agent/basic_agent_usage/?tab=agentv5
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/

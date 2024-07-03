@@ -1,17 +1,17 @@
 ---
-title: APM Metrics
-kind: documentation
-description: 'Learn about useful metrics you can generate from APM data.'
+description: Learn about useful metrics you can generate from APM data.
 further_reading:
-    - link: tracing/trace_pipeline/
-      tag: Documentation
-      text: Customize trace ingestion and retain important traces.
-    - link: tracing/trace_collection/
-      tag: Documentation
-      text: Instrument your services and set up trace data collection in the Agent
-    - link: monitors/
-      tag: Documentation
-      text: Create and manage monitors to notify your teams when it matters.
+- link: tracing/trace_pipeline/
+  tag: Documentation
+  text: Customize trace ingestion and retain important traces.
+- link: tracing/trace_collection/
+  tag: Documentation
+  text: Instrument your services and set up trace data collection in the Agent
+- link: monitors/
+  tag: Documentation
+  text: Create and manage monitors to notify your teams when it matters.
+kind: documentation
+title: APM Metrics
 ---
 
 ## Trace metrics
@@ -40,6 +40,6 @@ Enable [runtime metrics collection][3] in supported tracing libraries to gain in
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/metrics/metrics_namespace/
-[2]: /tracing/trace_pipeline/ingestion_mechanisms
-[3]: /tracing/metrics/runtime_metrics/
+[1]: /ja/tracing/metrics/metrics_namespace/
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms
+[3]: /ja/tracing/metrics/runtime_metrics/

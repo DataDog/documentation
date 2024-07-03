@@ -1,9 +1,9 @@
 ---
-title: Further Configure the Datadog Agent on Kubernetes
 aliases:
-    - /integrations/faq/gathering-kubernetes-events
-    - /agent/kubernetes/event_collection
-    - /agent/kubernetes/configuration
+- /ja/integrations/faq/gathering-kubernetes-events
+- /ja/agent/kubernetes/event_collection
+- /ja/agent/kubernetes/configuration
+title: Further Configure the Datadog Agent on Kubernetes
 ---
 
 ## 概要
@@ -127,7 +127,7 @@ agents:
     create: true
 ```
 
-[1]: /containers/cluster_agent
+[1]: /ja/containers/cluster_agent
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -555,7 +555,7 @@ Use the following configuration fields to configure the Datadog Agent.
 
 For a complete list of configuration fields for the Datadog Operator, see the [Operator v2alpha1 spec][2]. For older versions, see the [Operator v1alpha1 spec][3]. Configuration fields can also be queried using `kubectl explain datadogagent --recursive`.
 
-[1]: /getting_started/
+[1]: /ja/getting_started/
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md 
 {{% /tab %}}
@@ -573,7 +573,7 @@ For a complete list of configuration fields for the Datadog Operator, see the [O
 
 Helm チャートの環境変数の完全なリストについては、`datadog-values.yaml` の[オプションの完全なリスト][2]を参照してください。
 
-[1]: /getting_started/site
+[1]: /ja/getting_started/site
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#all-configuration-options
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
@@ -842,22 +842,22 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Agent でのイベント収集を有効にします。クラスターで複数の Agent インスタンスを実行している場合は、`DD_LEADER_ELECTION` も `true` に設定します。                                                                                                                       |
 
 
-[1]: /agent/
-[2]: /containers/cluster_agent/
+[1]: /ja/agent/
+[2]: /ja/containers/cluster_agent/
 [3]: https://app.datadoghq.com/containers
-[5]: /containers/kubernetes/integrations/
-[12]: /agent/configuration/secrets-management/
-[13]: /agent/guide/autodiscovery-management/
-[14]: /containers/guide/kubernetes_daemonset#cluster-agent-event-collection
-[15]: /infrastructure/containers/
-[16]: /containers/kubernetes/apm
-[17]: /containers/kubernetes/log
-[18]: /network_monitoring/performance/
-[19]: /developers/dogstatsd
+[5]: /ja/containers/kubernetes/integrations/
+[12]: /ja/agent/configuration/secrets-management/
+[13]: /ja/agent/guide/autodiscovery-management/
+[14]: /ja/containers/guide/kubernetes_daemonset#cluster-agent-event-collection
+[15]: /ja/infrastructure/containers/
+[16]: /ja/containers/kubernetes/apm
+[17]: /ja/containers/kubernetes/log
+[18]: /ja/network_monitoring/performance/
+[19]: /ja/developers/dogstatsd
 [20]: https://app.datadoghq.com/orchestration/overview
-[21]: /infrastructure/containers/orchestrator_explorer
-[22]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
-[23]: /infrastructure/process/ 
-[24]: /account_management/api-app-keys/#application-keys
-[25]: /integrations/kubernetes_state_core/
-[26]: /containers/docker/?tab=standard#environment-variables
+[21]: /ja/infrastructure/containers/orchestrator_explorer
+[22]: /ja/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
+[23]: /ja/infrastructure/process/ 
+[24]: /ja/account_management/api-app-keys/#application-keys
+[25]: /ja/integrations/kubernetes_state_core/
+[26]: /ja/containers/docker/?tab=standard#environment-variables

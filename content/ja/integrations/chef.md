@@ -1,28 +1,29 @@
 ---
-"aliases":
-- "/guides/chef/"
-"categories":
-- "automation"
-- "configuration & deployment"
-- "issue tracking"
-- "log collection"
-- "provisioning"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Chef クライアントの実行を追跡。失敗、成功、大きな変更を把握。"
-"doc_link": "https://docs.datadoghq.com/integrations/chef/"
-"draft": false
-"git_integration_title": "chef"
-"has_logo": true
-"integration_id": "chef"
-"integration_title": "Chef"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "chef"
-"public_title": "Datadog-Chef Integration"
-"short_description": "Track Chef client runs: know when they fail, succeed, or make big changes."
-"version": "1.0"
+aliases:
+- /ja/guides/chef/
+categories:
+- automation
+- configuration & deployment
+- issue tracking
+- log collection
+- provisioning
+custom_kind: インテグレーション
+dependencies: []
+description: Chef クライアントの実行を追跡。失敗、成功、大きな変更を把握。
+doc_link: https://docs.datadoghq.com/integrations/chef/
+draft: false
+git_integration_title: chef
+has_logo: true
+integration_id: chef
+integration_title: Chef
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: chef
+public_title: Datadog-Chef Integration
+short_description: 'Track Chef client runs: know when they fail, succeed, or make
+  big changes.'
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -239,4 +240,3 @@ Read each recipe file for the exact details of the integration values to pass in
 [5]: https://app.datadoghq.com/dashboard/lists
 [6]: https://github.com/DataDog/chef-datadog/blob/v2.15.0/attributes/default.rb#L383-L388
 [7]: https://app.datadoghq.com/event/stream
-

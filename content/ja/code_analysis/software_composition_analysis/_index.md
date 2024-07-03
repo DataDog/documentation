@@ -1,12 +1,11 @@
 ---
-title: Software Composition Analysis
-description: Learn about Datadog Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
-is_beta: true
+description: Learn about Datadog Software Composition Analysis to scan your imported
+  open-source libraries for known security vulnerabilities before you ship to production.
 further_reading:
-- link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
+- link: https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/
   tag: Blog
   text: Enhance application security in production with Software Composition Analysis
-- link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
+- link: https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/
   tag: Blog
   text: Prioritize vulnerability remediation with Datadog SCA
 - link: /getting_started/application_security/software_composition_analysis
@@ -18,6 +17,8 @@ further_reading:
 - link: /integrations/guide/source-code-integration/
   tag: Documentation
   text: Learn about the Source Code Integration
+is_beta: true
+title: Software Composition Analysis
 ---
 
 {{% site-region region="gov" %}}
@@ -102,7 +103,7 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/software_composition_analysis/
+[1]: /ja/security/application_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/ci/setup/code-analysis
-[3]: /code_analysis/software_composition_analysis/setup
+[3]: /ja/code_analysis/software_composition_analysis/setup
 [4]: https://app.datadoghq.com/ci/code-analysis

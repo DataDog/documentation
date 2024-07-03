@@ -1,17 +1,17 @@
 ---
-title: Troubleshoot AWS Lambda Monitoring
-kind: documentation
+aliases:
+- /ja/serverless/guide/troubleshoot_serverless_monitoring
+- /ja/serverless/guide/troubleshooting
+- /ja/serverless/troubleshooting
 further_reading:
 - link: /serverless/installation/
   tag: Documentation
   text: Installing Serverless Monitoring
-- link: "/serverless/guide/#troubleshoot-your-installation"
+- link: /serverless/guide/#troubleshoot-your-installation
   tag: Documentation
   text: Troubleshoot Common Issues
-aliases:
-  - /serverless/guide/troubleshoot_serverless_monitoring
-  - /serverless/guide/troubleshooting
-  - /serverless/troubleshooting
+kind: documentation
+title: Troubleshoot AWS Lambda Monitoring
 ---
 
 <div class="alert alert-info">Check out the additional <a href="/serverless/guide/#troubleshoot-your-installation">troubleshooting guides</a> for common issues such as the function code size is too large or webpack compatibility. This guide helps you troubleshoot general telemetry collection issues.</div>
@@ -97,15 +97,15 @@ Create a [Zendesk ticket](https://help.datadoghq.com/hc/en-us/requests/new), and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/glossary/#datadog-serverless-for-aws-lambda-concepts
-[2]: /logs/guide/forwarder/
-[3]: /serverless/libraries_integrations/extension/
+[1]: /ja/serverless/glossary/#datadog-serverless-for-aws-lambda-concepts
+[2]: /ja/logs/guide/forwarder/
+[3]: /ja/serverless/libraries_integrations/extension/
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
 [5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html
-[6]: /serverless/guide/extension_motivation/
-[7]: /serverless/configuration/#migrate-to-the-datadog-lambda-extension
-[8]: /logs/guide/lambda-logs-collection-troubleshooting-guide/
-[9]: /serverless/installation/
-[10]: /integrations/amazon_web_services/
+[6]: /ja/serverless/guide/extension_motivation/
+[7]: /ja/serverless/configuration/#migrate-to-the-datadog-lambda-extension
+[8]: /ja/logs/guide/lambda-logs-collection-troubleshooting-guide/
+[9]: /ja/serverless/installation/
+[10]: /ja/integrations/amazon_web_services/
 [11]: https://chat.datadoghq.com/
 [12]: https://www.datadoghq.com/support/

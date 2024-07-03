@@ -1,15 +1,15 @@
 ---
-title: Quality Gates Explorer
-description: Learn about the Quality Gates Explorer for quality gates and rule executions.
 aliases:
-- /continuous_integration/quality_gates/
+- /ja/continuous_integration/quality_gates/
+description: Learn about the Quality Gates Explorer for quality gates and rule executions.
 further_reading:
-  - link: /quality_gates/
-    tag: Documentation
-    text: Learn about Quality Gates
-  - link: /quality_gates/explorer/saved_views/
-    tag: Documentation
-    text: Learn about Saved Views
+- link: /quality_gates/
+  tag: Documentation
+  text: Learn about Quality Gates
+- link: /quality_gates/explorer/saved_views/
+  tag: Documentation
+  text: Learn about Saved Views
+title: Quality Gates Explorer
 ---
 
 {{< site-region region="gov" >}}
@@ -105,8 +105,8 @@ Export your view in the [Quality Gates Explorer][5] to reuse it later or in diff
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /quality_gates/search
-[2]: /quality_gates/explorer/search_syntax
-[3]: /quality_gates/explorer/facets
-[4]: /quality_gates/explorer/saved_views
-[5]: /quality_gates/explorer
+[1]: /ja/quality_gates/search
+[2]: /ja/quality_gates/explorer/search_syntax
+[3]: /ja/quality_gates/explorer/facets
+[4]: /ja/quality_gates/explorer/saved_views
+[5]: /ja/quality_gates/explorer

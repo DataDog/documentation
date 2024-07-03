@@ -1,25 +1,25 @@
 ---
-"aliases": []
-"categories":
+aliases: []
+categories:
 - azure
 - cloud
 - containers
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Get metrics from Azure Container Apps."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_container_apps/"
-"draft": false
-"git_integration_title": "azure_container_apps"
-"has_logo": true
-"integration_id": "azure-container-apps"
-"integration_title": "Microsoft Azure Container Apps"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_container_apps"
-"public_title": "Datadog-Microsoft Azure Container Apps Integration"
-"short_description": "Get metrics from Azure Container Apps."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Get metrics from Azure Container Apps.
+doc_link: https://docs.datadoghq.com/integrations/azure_container_apps/
+draft: false
+git_integration_title: azure_container_apps
+has_logo: true
+integration_id: azure-container-apps
+integration_title: Microsoft Azure Container Apps
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_container_apps
+public_title: Datadog-Microsoft Azure Container Apps Integration
+short_description: Get metrics from Azure Container Apps.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -52,7 +52,6 @@ The Azure Container Apps integration does not include any service checks.
 Need help? Contact [Datadog support][4].
 
 [1]: https://docs.microsoft.com/en-us/azure/container-apps/overview
-[2]: https://docs.datadoghq.com/integrations/azure/
+[2]: https://docs.datadoghq.com/ja/integrations/azure/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_container_apps/azure_container_apps_metadata.csv
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

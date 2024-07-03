@@ -1,9 +1,7 @@
 ---
-title: Enabling ASM
-type: multi-code-lang
 aliases:
-  - /security_platform/application_security/getting_started/
-  - /security/application_security/getting_started/
+- /ja/security_platform/application_security/getting_started/
+- /ja/security/application_security/getting_started/
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -23,9 +21,11 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: How Application Security Management Works in Datadog
-- link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
+- link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
   tag: Blog
   text: Secure serverless applications with Datadog ASM
+title: Enabling ASM
+type: multi-code-lang
 ---
 
 {{< site-region region="gov" >}}
@@ -56,10 +56,10 @@ Add an environment variable or a new argument to your [Datadog Tracing Library][
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/threats/
-[2]: /security/application_security/risk_management/
-[3]: /security/application_security/enabling/single_step
-[4]: /security/application_security/enabling/tracing_libraries
+[1]: /ja/security/application_security/threats/
+[2]: /ja/security/application_security/risk_management/
+[3]: /ja/security/application_security/enabling/single_step
+[4]: /ja/security/application_security/enabling/tracing_libraries
 [5]: https://app.datadoghq.com/account/settings/agent/latest
-[6]: /tracing/trace_collection/dd_libraries/
-[7]: /security/application_security/enabling/compatibility/
+[6]: /ja/tracing/trace_collection/dd_libraries/
+[7]: /ja/security/application_security/enabling/compatibility/

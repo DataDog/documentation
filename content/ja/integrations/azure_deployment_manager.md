@@ -1,27 +1,27 @@
 ---
-"categories":
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Use Datadog to monitor Canary Deployments in Azure Deployment Manager."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_deployment_manager/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/"
-  "tag": Blog
-  "text": Canary releases with Azure Deployment Manager and Datadog
-"git_integration_title": "azure_deployment_manager"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Microsoft Azure Deployment Manager"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_deployment_manager"
-"public_title": "Datadog-Microsoft Azure Deployment Manager"
-"short_description": "Monitor Canary Deployments in Azure Deployment Manager."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Use Datadog to monitor Canary Deployments in Azure Deployment Manager.
+doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
+  tag: Blog
+  text: Canary releases with Azure Deployment Manager and Datadog
+git_integration_title: azure_deployment_manager
+has_logo: true
+integration_id: ''
+integration_title: Microsoft Azure Deployment Manager
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_deployment_manager
+public_title: Datadog-Microsoft Azure Deployment Manager
+short_description: Monitor Canary Deployments in Azure Deployment Manager.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -207,8 +207,7 @@ Need help? Contact [Datadog support][6].
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial
 [2]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
-[3]: https://docs.datadoghq.com/monitors/monitor_types/composite/
+[3]: https://docs.datadoghq.com/ja/monitors/monitor_types/composite/
 [4]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template
 [5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

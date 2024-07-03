@@ -1,11 +1,11 @@
 ---
-title: Audit Trail Events
 aliases:
-    - /account_management/audit_trail_events/
+- /ja/account_management/audit_trail_events/
 further_reading:
 - link: /account_management/audit_trail/
   tag: Documentation
   text: Learn more about Audit Trail
+title: Audit Trail Events
 ---
 
 ## 概要
@@ -272,7 +272,7 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/audit-trail
-[2]: /account_management/audit_trail/
+[2]: /ja/account_management/audit_trail/
 [3]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Aapplication_key
 [4]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Aidentity_provider
 [5]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Auser
@@ -288,15 +288,15 @@ further_reading:
 [15]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Amodified%20
 [16]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ARequest%20%40action%3Aaccessed
 [17]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Aretention_filter
-[18]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[18]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
 [19]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Acustom_metrics
-[20]: /tracing/trace_pipeline/generate_metrics/
+[20]: /ja/tracing/trace_pipeline/generate_metrics/
 [21]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Afacet
-[22]: /tracing/trace_explorer/facets/
+[22]: /ja/tracing/trace_explorer/facets/
 [23]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Aservice_operation_name
-[24]: /tracing/guide/configuring-primary-operation/
+[24]: /ja/tracing/guide/configuring-primary-operation/
 [25]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Asecond_primary_tag
-[26]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[26]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [27]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40asset.type%3Asamplerconfig
 [28]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Audit%20Trail%22%20%40asset.type%3Aaudit_events_csv
 [29]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40asset.type%3Aapi_key

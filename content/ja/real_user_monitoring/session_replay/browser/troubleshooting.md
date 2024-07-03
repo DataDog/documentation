@@ -1,11 +1,9 @@
 ---
-title: Session Replay Browser Troubleshooting
-kind: documentation
-description: Learn how to troubleshoot issues with Session Replay.
 aliases:
-- /real_user_monitoring/session_replay/troubleshooting
+- /ja/real_user_monitoring/session_replay/troubleshooting
+description: Learn how to troubleshoot issues with Session Replay.
 further_reading:
-- link: "https://github.com/DataDog/browser-sdk"
+- link: https://github.com/DataDog/browser-sdk
   tag: ソースコード
   text: browser-sdk Source code
 - link: /real_user_monitoring/session_replay
@@ -14,6 +12,8 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: Documentation
   text: Detect and aggregate CSP violations with Datadog
+kind: documentation
+title: Session Replay Browser Troubleshooting
 ---
 
 ## Overview
@@ -64,7 +64,7 @@ Additionally, authorize the `example.com` domain in the `assets.example.com`. Th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /ja/help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 [4]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS

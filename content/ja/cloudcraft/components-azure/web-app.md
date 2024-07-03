@@ -1,5 +1,5 @@
 ---
-title: "Web app Component"
+title: Web app Component
 ---
 
 ## 概要

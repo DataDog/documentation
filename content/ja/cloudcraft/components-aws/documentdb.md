@@ -1,5 +1,5 @@
 ---
-title: "DocumentDB Component"
+title: DocumentDB Component
 ---
 ## 概要
 
@@ -82,6 +82,6 @@ medium, large, xlarge, 2xlarge, 4xlarge, 8xlarge, 12xlarge, 16xlarge, 24xlarge
 ```
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/security-group/
-[4]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/security-group/
+[4]: /ja/cloudcraft/components-aws/subnet/

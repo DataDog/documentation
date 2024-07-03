@@ -1,16 +1,16 @@
 ---
-title: Getting Started with Workflow Automation
-kind: documentation
 further_reading:
-    - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
-      tag: Blog
-      text: Automate end-to-end processes and quickly respond to events with Datadog Workflows
-    - link: /service_management/workflows/access/
-      tag: Documentation
-      text: Access and authentication
-    - link: /security/cloud_security_management/workflows/
-      tag: Documentation
-      text: Automate security workflows
+- link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
+  tag: Blog
+  text: Automate end-to-end processes and quickly respond to events with Datadog Workflows
+- link: /service_management/workflows/access/
+  tag: Documentation
+  text: Access and authentication
+- link: /security/cloud_security_management/workflows/
+  tag: Documentation
+  text: Automate security workflows
+kind: documentation
+title: Getting Started with Workflow Automation
 ---
 
 ## Overview
@@ -151,15 +151,13 @@ The workflow also creates a Slack message to notify your team of the Jira issue 
 
 
 [1]: https://www.datadoghq.com/free-datadog-trial/
-[2]: /integrations/slack/
-[3]: /integrations/jira/
-[4]: /service_management/workflows/connections/
+[2]: /ja/integrations/slack/
+[3]: /ja/integrations/jira/
+[4]: /ja/service_management/workflows/connections/
 [5]: https://app.datadoghq.com/workflow
-[6]: /workflows/build/#context-variables
+[6]: /ja/workflows/build/#context-variables
 [7]: https://app.datadoghq.com/monitors/manage
-[8]: /service_management/workflows/actions_catalog/
-[9]: /workflows/build
-[10]: /service_management/workflows/actions_catalog/generic_actions/#http
-[11]: /service_management/workflows/actions_catalog/generic_actions/#data-transformation
-
-
+[8]: /ja/service_management/workflows/actions_catalog/
+[9]: /ja/workflows/build
+[10]: /ja/service_management/workflows/actions_catalog/generic_actions/#http
+[11]: /ja/service_management/workflows/actions_catalog/generic_actions/#data-transformation

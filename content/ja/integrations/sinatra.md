@@ -1,24 +1,24 @@
 ---
-title: Sinatra
-name: Sinatra
-custom_kind: インテグレーション
-description: 'Gather Sinatra application logs.'
-short_description: 'Gather Sinatra application logs.'
-categories:
-    - log collection
 aliases:
-    - /logs/log_collection/nxlog
+- /ja/logs/log_collection/nxlog
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md
+description: Gather Sinatra application logs.
 has_logo: true
+integration_id: sinatra
 integration_title: Sinatra
 is_public: true
+name: Sinatra
 public_title: Datadog-Sinatra Integration
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md"]
+short_description: Gather Sinatra application logs.
 supported_os:
-    - linux
-    - mac_os
-    - windows
-integration_id: "sinatra"
+- linux
+- mac_os
+- windows
+title: Sinatra
 ---
 
 ## Overview
@@ -94,5 +94,5 @@ _Available for Agent versions >6.0_
 [3]: http://sinatrarb.com/intro.html#Logging
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
-[6]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: /agent/guide/agent-commands/#restart-the-agent
+[6]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /ja/agent/guide/agent-commands/#restart-the-agent

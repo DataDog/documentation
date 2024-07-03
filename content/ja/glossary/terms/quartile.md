@@ -1,9 +1,9 @@
 ---
-title: quartile
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - median
+- median
+title: quartile
 ---
 Quartiles organize data into four sections with 25% of the data in each. 
 

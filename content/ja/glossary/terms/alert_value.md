@@ -1,10 +1,10 @@
 ---
-title: alert value
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - alert
-  - dashboard
+- alert
+- dashboard
+title: alert value
 ---
 The Alert value widget displays the current query value from a simple-alert metric monitor. Simple-alert monitors have a metric query that is not grouped and returns one value. 
 

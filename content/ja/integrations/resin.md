@@ -1,59 +1,59 @@
 ---
-"app_id": "resin"
-"app_uuid": "ff99886d-87b7-407a-aa90-7bea5ca27564"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": resin.thread_pool.thread_count
-      "metadata_path": metadata.csv
-      "prefix": resin.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10203"
-    "source_type_name": Resin
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": brent@bmontague.com
-  "support_email": brent@bmontague.com
-"categories":
+app_id: resin
+app_uuid: ff99886d-87b7-407a-aa90-7bea5ca27564
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: resin.thread_pool.thread_count
+      metadata_path: metadata.csv
+      prefix: resin.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10203
+    source_type_name: Resin
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: brent@bmontague.com
+  support_email: brent@bmontague.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/resin/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "resin"
-"integration_id": "resin"
-"integration_title": "Resin"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "resin"
-"public_title": "Resin"
-"short_description": "Track thread pool, connection pool settings within resin"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: resin
+integration_id: resin
+integration_title: Resin
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: resin
+public_title: Resin
+short_description: Track thread pool, connection pool settings within resin
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Track thread pool, connection pool settings within resin
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Resin
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Track thread pool, connection pool settings within resin
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Resin
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -126,10 +126,9 @@ Need help? Contact [Datadog support][9].
 [1]: https://caucho.com/
 [2]: https://github.com/DataDog/integrations-extras/blob/master/resin/datadog_checks/resin/data/conf.yaml.example
 [3]: https://www.caucho.com/resin-4.0/admin/cluster-server.xtp#JVMparameters:settingtheJVMcommandline
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 [7]: https://github.com/DataDog/integrations-extras/blob/master/resin/metadata.csv
 [8]: https://github.com/DataDog/integrations-extras/blob/master/resin/assets/service_checks.json
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

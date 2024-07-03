@@ -1,56 +1,56 @@
 ---
-"app_id": "split-rum"
-"app_uuid": "750d9e38-2856-44fe-98d0-9fbbc617d876"
-"assets": {}
-"author":
-  "homepage": "https://split.io/"
-  "name": Split
-  "sales_email": partners@split.io
-  "support_email": support@split.io
-"categories":
+app_id: split-rum
+app_uuid: 750d9e38-2856-44fe-98d0-9fbbc617d876
+assets: {}
+author:
+  homepage: https://split.io/
+  name: Split
+  sales_email: partners@split.io
+  support_email: support@split.io
+categories:
 - configuration & deployment
 - issue tracking
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/split-rum/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "split-rum"
-"integration_id": "split-rum"
-"integration_title": "Split - RUM"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "split-rum"
-"public_title": "Split - RUM"
-"short_description": "Enriches your RUM data with your feature flags from Split"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/split-rum/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: split-rum
+integration_id: split-rum
+integration_title: Split - RUM
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: split-rum
+public_title: Split - RUM
+short_description: Enriches your RUM data with your feature flags from Split
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Configuration & Deployment"
-  - "Category::Issue Tracking"
-  - "Category::Developer Tools"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Enriches your RUM data with your feature flags from Split
-  "media":
-  - "caption": Datadog RUM with Split Feature Flags overview (list of flags)
-    "image_url": images/split-feature-flags-list-in-dd-rum.png
-    "media_type": image
-  - "caption": Datadog RUM with Split Feature Flag details
-    "image_url": images/split-feature-flag-detail-in-dd-rum.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Troubleshooting"
-  "title": Split - RUM
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Configuration & Deployment
+  - Category::Issue Tracking
+  - Category::Developer Tools
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Enriches your RUM data with your feature flags from Split
+  media:
+  - caption: Datadog RUM with Split Feature Flags overview (list of flags)
+    image_url: images/split-feature-flags-list-in-dd-rum.png
+    media_type: image
+  - caption: Datadog RUM with Split Feature Flag details
+    image_url: images/split-feature-flag-detail-in-dd-rum.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Troubleshooting
+  title: Split - RUM
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -96,7 +96,6 @@ Need help? See the [JavaScript SDK page][4] in the Split documentation or contac
 
 [1]: https://split.io
 [2]: https://www.split.io/product/
-[3]: https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/setup-feature-flag-data-collection/
 [4]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

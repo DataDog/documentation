@@ -1,66 +1,66 @@
 ---
-"app_id": "z-scaler"
-"app_uuid": "102476f5-1e00-452f-b841-9e32bb66d4bc"
-"assets":
-  "dashboards":
-    "Zscaler Overview": assets/dashboards/zscaler_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": zscaler.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10261"
-    "source_type_name": Zscaler (Community Version)
-  "logs":
-    "source": zscaler
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Datadog
-  "sales_email": help@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: z-scaler
+app_uuid: 102476f5-1e00-452f-b841-9e32bb66d4bc
+assets:
+  dashboards:
+    Zscaler Overview: assets/dashboards/zscaler_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: zscaler.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10261
+    source_type_name: Zscaler (Community Version)
+  logs:
+    source: zscaler
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Datadog
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md"
-"description": "TODO"
-"display_on_public_website": true
-"doc_link": "https://docs.datadoghq.com/integrations/zscaler/"
-"draft": false
-"git_integration_title": "zscaler"
-"has_logo": true
-"integration_id": "z-scaler"
-"integration_title": "Zscaler"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "zscaler"
-"public_title": "Zscaler"
-"short_description": "The Zscaler integration provides cloud security logs"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md
+description: TODO
+display_on_public_website: true
+doc_link: https://docs.datadoghq.com/integrations/zscaler/
+draft: false
+git_integration_title: zscaler
+has_logo: true
+integration_id: z-scaler
+integration_title: Zscaler
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: zscaler
+public_title: Zscaler
+short_description: The Zscaler integration provides cloud security logs
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": The Zscaler integration provides cloud security logs
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Zscaler
-"version": "1.0"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: The Zscaler integration provides cloud security logs
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Zscaler
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -197,6 +197,5 @@ Need help? Contact [Datadog support][4].
 
 [1]: https://www.zscaler.com/products/zscaler-internet-access
 [2]: https://help.zscaler.com/zia/about-nanolog-streaming-service
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

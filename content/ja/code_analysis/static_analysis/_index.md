@@ -1,17 +1,18 @@
 ---
-title: Static Analysis
-description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
-- /continuous_integration/static_analysis
-- /static_analysis
-is_beta: true
+- /ja/continuous_integration/static_analysis
+- /ja/static_analysis
+description: Learn about Datadog Static Analysis to scan code for quality issues and
+  security vulnerabilities before your code reaches production.
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
   text: Monitor all your CI pipelines with Datadog
 - link: /integrations/guide/source-code-integration/
   tag: Documentation
   text: Learn about the Source Code Integration
+is_beta: true
+title: Static Analysis
 ---
 
 {{% site-region region="gov" %}}
@@ -160,9 +161,9 @@ If you believe a specific violation is a false positive, you can indicate false 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/code-analysis
-[2]: /code_analysis/static_analysis_rules?categories=Security
-[3]: /code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
-[4]: /integrations/github/
-[5]: /code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
+[2]: /ja/code_analysis/static_analysis_rules?categories=Security
+[3]: /ja/code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
+[4]: /ja/integrations/github/
+[5]: /ja/code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case

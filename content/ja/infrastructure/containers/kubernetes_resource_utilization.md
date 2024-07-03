@@ -1,12 +1,12 @@
 ---
-title: Kubernetes Resource Utilization
-kind: documentation
 aliases:
-- /infrastructure/containers/kubernetes_resources
+- /ja/infrastructure/containers/kubernetes_resources
 further_reading:
-- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+- link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: Blog
   text: Practical tips for rightsizing your Kubernetes workloads
+kind: documentation
+title: Kubernetes Resource Utilization
 ---
 
 {{< img src="infrastructure/livecontainers/kubernetes_resource_utilization.png" alt="Kubernetes resource utilization view" >}}
@@ -77,6 +77,6 @@ The summation of resource requests and limits for a group is independent of the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator#setup
+[1]: /ja/infrastructure/containers/orchestrator_explorer?tab=datadogoperator#setup
 [2]: https://app.datadoghq.com/kubernetes
 [3]: https://app.datadoghq.com/orchestration/resource/pod?groups=tag%23kube_deployment%2Ctag%23kube_namespace%2Ctag%23kube_cluster_name

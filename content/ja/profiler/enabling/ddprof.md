@@ -1,18 +1,18 @@
 ---
-title: Enabling the Native Profiler for Compiled Languages
-code_lang: ddprof
-type: multi-code-lang
-code_lang_weight: 90
 aliases:
-  - /tracing/profiler/enabling/linux/
-  - /tracing/profiler/enabling/ddprof/
+- /ja/tracing/profiler/enabling/linux/
+- /ja/tracing/profiler/enabling/ddprof/
+code_lang: ddprof
+code_lang_weight: 90
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profiler_troubleshooting/ddprof
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profiler_troubleshooting/ddprof
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+title: Enabling the Native Profiler for Compiled Languages
+type: multi-code-lang
 ---
 
 <div class="alert alert-warning">
@@ -217,10 +217,10 @@ ddprof --help
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/profiler_troubleshooting
+[1]: /ja/profiler/profiler_troubleshooting
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
-[4]: /getting_started/tagging/unified_service_tagging
+[4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: https://github.com/DataDog/ddprof/blob/main/docs/Commands.md
-[6]: /getting_started/profiler/
-[7]: /profiler/enabling/supported_versions/
+[6]: /ja/getting_started/profiler/
+[7]: /ja/profiler/enabling/supported_versions/

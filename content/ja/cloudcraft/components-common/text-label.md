@@ -1,5 +1,5 @@
 ---
-title: "Text label Component"
+title: Text label Component
 ---
 
 ## 概要

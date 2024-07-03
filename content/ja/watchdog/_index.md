@@ -1,35 +1,37 @@
 ---
-title: Datadog WatchdogTM
-description: Automatically detect potential application and infrastructure issues
-aliases:
-  - /tracing/watchdog
-further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Watchdog"
-    tag: Release Notes
-    text: Check out the latest Datadog Watchdog releases! (App login required).
-  - link: "https://www.datadoghq.com/blog/datadog-bits-generative-ai/"
-    tag: Blog
-    text: Introducing Bits AI, your new DevOps copilot
-  - link: /logs/
-    tag: Documentation
-    text: Collect your logs
-  - link: /tracing/
-    tag: Documentation
-    text: Collect your traces
-  - link: "https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/"
-    tag: Blog
-    text: Automated root cause analysis with Watchdog RCA
-  - link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"
-    tag: Blog
-    text: Understand user impact scope with Watchdog Impact Analysis
-  - link: "https://www.datadoghq.com/blog/watchdog-live-processes/"
-    tag: Blog
-    text: Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes
 algolia:
-  tags: [watchdog]
+  tags:
+  - watchdog
+aliases:
+- /ja/tracing/watchdog
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+description: Automatically detect potential application and infrastructure issues
+further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Watchdog
+  tag: Release Notes
+  text: Check out the latest Datadog Watchdog releases! (App login required).
+- link: https://www.datadoghq.com/blog/datadog-bits-generative-ai/
+  tag: Blog
+  text: Introducing Bits AI, your new DevOps copilot
+- link: /logs/
+  tag: Documentation
+  text: Collect your logs
+- link: /tracing/
+  tag: Documentation
+  text: Collect your traces
+- link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
+  tag: Blog
+  text: Automated root cause analysis with Watchdog RCA
+- link: https://www.datadoghq.com/blog/watchdog-impact-analysis/
+  tag: Blog
+  text: Understand user impact scope with Watchdog Impact Analysis
+- link: https://www.datadoghq.com/blog/watchdog-live-processes/
+  tag: Blog
+  text: Troubleshoot anomalies in workload performance with Watchdog Insights for
+    Live Processes
+title: Datadog WatchdogTM
 ---
 ## 概要
 
@@ -73,12 +75,12 @@ To help investigation, Watchdog shows context-based insights in all explorers, s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /watchdog/alerts
-[3]: /watchdog/faulty_deployment_detection/
-[4]: /watchdog/insights?tab=logmanagement
-[5]: /watchdog/rca/
-[6]: /watchdog/impact_analysis/
-[7]: /monitors/types/anomaly/#anomaly-detection-algorithms
-[8]: /monitors/types/forecasts/?tab=linear#algorithms
-[9]: /monitors/types/outlier/?tab=dbscan#algorithms
+[1]: /ja/help/
+[2]: /ja/watchdog/alerts
+[3]: /ja/watchdog/faulty_deployment_detection/
+[4]: /ja/watchdog/insights?tab=logmanagement
+[5]: /ja/watchdog/rca/
+[6]: /ja/watchdog/impact_analysis/
+[7]: /ja/monitors/types/anomaly/#anomaly-detection-algorithms
+[8]: /ja/monitors/types/forecasts/?tab=linear#algorithms
+[9]: /ja/monitors/types/outlier/?tab=dbscan#algorithms

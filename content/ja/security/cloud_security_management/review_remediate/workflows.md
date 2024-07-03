@@ -1,24 +1,24 @@
 ---
-title: Automate Security Workflows with Workflow Automation
-further_reading:
-  - link: /security/cloud_security_management
-    tag: Documentation
-    text: Cloud Security Management
-  - link: /service_management/workflows/
-    tag: Documentation
-    text: Workflow Automation
 aliases:
-  - /security/cloud_security_management/workflows
+- /ja/security/cloud_security_management/workflows
+further_reading:
+- link: /security/cloud_security_management
+  tag: Documentation
+  text: Cloud Security Management
+- link: /service_management/workflows/
+  tag: Documentation
+  text: Workflow Automation
 products:
-  - name: CSM Threats
-    url: /security/threats/
-    icon: cloud-security-management
-  - name: CSM Misconfigurations
-    url: /security/cloud_security_management/misconfigurations/
-    icon: cloud-security-management
-  - name: CSM Identity Risks
-    url: /security/cloud_security_management/identity_risks/
-    icon: cloud-security-management
+- icon: cloud-security-management
+  name: CSM Threats
+  url: /security/threats/
+- icon: cloud-security-management
+  name: CSM Misconfigurations
+  url: /security/cloud_security_management/misconfigurations/
+- icon: cloud-security-management
+  name: CSM Identity Risks
+  url: /security/cloud_security_management/identity_risks/
+title: Automate Security Workflows with Workflow Automation
 ---
 
 {{< product-availability >}}
@@ -165,11 +165,11 @@ In the side panel, click **Actions** > **Run Workflow**, and select a workflow t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows
-[2]: /security/cloud_security_management/
-[3]: /service_management/workflows/build/
+[1]: /ja/service_management/workflows
+[2]: /ja/security/cloud_security_management/
+[3]: /ja/service_management/workflows/build/
 [4]: https://app.datadoghq.com/workflow
-[5]: /integrations/slack/
-[6]: /integrations/jira/
-[7]: /service_management/workflows/build/#source-object-variables
-[8]: /api/latest/security-monitoring/#get-a-finding
+[5]: /ja/integrations/slack/
+[6]: /ja/integrations/jira/
+[7]: /ja/service_management/workflows/build/#source-object-variables
+[8]: /ja/api/latest/security-monitoring/#get-a-finding

@@ -1,8 +1,8 @@
 ---
 aliases:
-- /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+- /ja/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
-- "https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"
+- https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
 title: Datadog Heroku Buildpack
 ---
 [Heroku ビルドパック][1]は、Datadog Agent を Heroku dyno にインストールして、システムメトリクス、カスタムアプリケーションメトリクス、トレースを収集します。カスタムアプリケーションメトリクスとトレースを収集するには、[DogStatsD または Datadog APM ライブラリ][2]をアプリケーションに含める必要があります。
@@ -541,30 +541,30 @@ APM Agent
 ビルドパックまたは Agent のアップグレード後は、アプリケーションのスラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイルのセクション](#upgrading-and-slug-recompilation)を確認してください。
 
 [1]: https://devcenter.heroku.com/articles/buildpacks
-[2]: https://docs.datadoghq.com/libraries
+[2]: https://docs.datadoghq.com/ja/libraries
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app#viewing-buildpacks
 [5]: https://github.com/heroku/heroku-buildpack-apt
 [6]: https://github.com/jontewks/puppeteer-heroku-buildpack
 [7]: https://github.com/lstoll/heroku-buildpack-monorepo
 [8]: https://github.com/DataDog/heroku-buildpack-datadog/releases
-[10]: https://docs.datadoghq.com/tagging/
-[11]: https://docs.datadoghq.com/dashboards/guide/how-to-graph-percentiles-in-datadog/
-[12]: https://docs.datadoghq.com/agent
+[10]: https://docs.datadoghq.com/ja/tagging/
+[11]: https://docs.datadoghq.com/ja/dashboards/guide/how-to-graph-percentiles-in-datadog/
+[12]: https://docs.datadoghq.com/ja/agent
 [13]: https://devcenter.heroku.com/articles/dyno-metadata
 [14]: https://devcenter.heroku.com/articles/log-runtime-metrics
-[15]: https://docs.datadoghq.com/logs/guide/collect-heroku-logs
-[16]: https://docs.datadoghq.com/logs/logs_to_metrics/
-[17]: https://docs.datadoghq.com/database_monitoring/
-[18]: https://docs.datadoghq.com/database_monitoring/setup_postgres/selfhosted/?tab=postgres10#grant-the-agent-access
-[19]: https://docs.datadoghq.com/integrations/
-[20]: https://docs.datadoghq.com/getting_started/integrations/#configuring-agent-integrations
-[21]: https://docs.datadoghq.com/integrations/mcache/
+[15]: https://docs.datadoghq.com/ja/logs/guide/collect-heroku-logs
+[16]: https://docs.datadoghq.com/ja/logs/logs_to_metrics/
+[17]: https://docs.datadoghq.com/ja/database_monitoring/
+[18]: https://docs.datadoghq.com/ja/database_monitoring/setup_postgres/selfhosted/?tab=postgres10#grant-the-agent-access
+[19]: https://docs.datadoghq.com/ja/integrations/
+[20]: https://docs.datadoghq.com/ja/getting_started/integrations/#configuring-agent-integrations
+[21]: https://docs.datadoghq.com/ja/integrations/mcache/
 [22]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
 [23]: https://github.com/DataDog/integrations-extras/
 [24]: https://github.com/DataDog/integrations-extras/tree/master/ping
-[25]: https://docs.datadoghq.com/developers/custom_checks/
-[26]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[25]: https://docs.datadoghq.com/ja/developers/custom_checks/
+[26]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [27]: https://devcenter.heroku.com/articles/slug-compiler
 [28]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
 [29]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md

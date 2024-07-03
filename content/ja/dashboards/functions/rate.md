@@ -1,11 +1,11 @@
 ---
-title: Rate
 aliases:
-    - /graphing/functions/rate/
+- /ja/graphing/functions/rate/
 further_reading:
 - link: /monitors/guide/alert-on-no-change-in-value/
   tag: Documentation
   text: Alert on no change in value
+title: Rate
 ---
 
 ## 毎秒

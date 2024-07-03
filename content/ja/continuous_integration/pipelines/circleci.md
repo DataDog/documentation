@@ -1,20 +1,20 @@
 ---
-title: Set up Tracing on a CircleCI Workflow
 aliases:
-  - /continuous_integration/setup_pipelines/circleci
+- /ja/continuous_integration/setup_pipelines/circleci
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/pipelines/custom_commands/
-      tag: Documentation
-      text: Extend Pipeline Visibility by tracing individual commands
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
-    - link: /continuous_integration/pipelines/custom_tags_and_measures/
-      tag: Documentation
-      text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/pipelines/custom_commands/
+  tag: Documentation
+  text: Extend Pipeline Visibility by tracing individual commands
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines/custom_tags_and_measures/
+  tag: Documentation
+  text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
+title: Set up Tracing on a CircleCI Workflow
 ---
 
 {{< site-region region="gov" >}}
@@ -108,13 +108,13 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: /continuous_integration/pipelines/circleci/#set-custom-tags
-[7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: /account_management/teams/
+[6]: /ja/continuous_integration/pipelines/circleci/#set-custom-tags
+[7]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[8]: /ja/account_management/teams/
 [9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
-[10]: /continuous_integration/pipelines/circleci/#enable-log-collection
-[11]: /integrations/circleci/#setup
-[12]: /glossary/#partial-retry
-[13]: /glossary/#custom-span
-[14]: /glossary/#custom-tag
-[15]: /glossary/#custom-measure
+[10]: /ja/continuous_integration/pipelines/circleci/#enable-log-collection
+[11]: /ja/integrations/circleci/#setup
+[12]: /ja/glossary/#partial-retry
+[13]: /ja/glossary/#custom-span
+[14]: /ja/glossary/#custom-tag
+[15]: /ja/glossary/#custom-measure

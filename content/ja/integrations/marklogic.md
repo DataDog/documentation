@@ -1,71 +1,71 @@
 ---
-"app_id": "marklogic"
-"app_uuid": "92342b09-db9a-4542-b442-76bb9b7f716e"
-"assets":
-  "dashboards":
-    "MarkLogic - Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": marklogic.hosts.total_hosts
-      "metadata_path": metadata.csv
-      "prefix": marklogic.
-    "process_signatures":
+app_id: marklogic
+app_uuid: 92342b09-db9a-4542-b442-76bb9b7f716e
+assets:
+  dashboards:
+    MarkLogic - Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: marklogic.hosts.total_hosts
+      metadata_path: metadata.csv
+      prefix: marklogic.
+    process_signatures:
     - MarkLogic
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10124"
-    "source_type_name": MarkLogic
-  "monitors":
-    "Marklogic high load": assets/monitors/marklogic_high_load.json
-    "Marklogic long requests": assets/monitors/marklogic_long_requests.json
-    "Marklogic low cache": assets/monitors/marklogic_low_cache.json
-  "saved_views":
-    "marklogic_processes": assets/saved_views/marklogic_processes.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10124
+    source_type_name: MarkLogic
+  monitors:
+    Marklogic high load: assets/monitors/marklogic_high_load.json
+    Marklogic long requests: assets/monitors/marklogic_long_requests.json
+    Marklogic low cache: assets/monitors/marklogic_low_cache.json
+  saved_views:
+    marklogic_processes: assets/saved_views/marklogic_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "marklogic"
-"integration_id": "marklogic"
-"integration_title": "MarkLogic"
-"integration_version": "4.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "marklogic"
-"public_title": "MarkLogic"
-"short_description": "Tracks metrics about MarkLogic databases, forests, hosts and servers."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: marklogic
+integration_id: marklogic
+integration_title: MarkLogic
+integration_version: 4.2.1
+is_public: true
+manifest_version: 2.0.0
+name: marklogic
+public_title: MarkLogic
+short_description: Tracks metrics about MarkLogic databases, forests, hosts and servers.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Tracks metrics about MarkLogic databases, forests, hosts and servers.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": MarkLogic
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Tracks metrics about MarkLogic databases, forests, hosts and servers.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MarkLogic
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -186,16 +186,15 @@ MarkLogic には、イベントは含まれません。
 
 
 [1]: https://www.marklogic.com
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.marklogic.com/guide/admin/pre_def_roles#id_64197
 [5]: https://docs.marklogic.com/guide/admin/pre_def_roles#id_28243
 [6]: https://docs.marklogic.com/REST/POST/manage/v2/users
 [7]: https://docs.marklogic.com/sec:create-user
 [8]: https://github.com/DataDog/integrations-core/blob/master/marklogic/datadog_checks/marklogic/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/marklogic/metadata.csv
 [12]: https://github.com/DataDog/integrations-core/blob/master/marklogic/assets/service_checks.json
-[13]: https://docs.datadoghq.com/help
-
+[13]: https://docs.datadoghq.com/ja/help

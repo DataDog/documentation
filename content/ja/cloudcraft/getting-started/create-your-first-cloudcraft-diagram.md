@@ -91,6 +91,6 @@ If you click a component, for example, an EC2 instance, the **Live Feed** modal 
 
 {{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/live-feed.png" alt="Interactive cloud infrastructure diagram with highlighted EC2 instance and live feed information modal displaying instance details and status." responsive="true" style="width:100%;">}}
 
-[1]: /cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
-[2]: /cloudcraft/faq/supported-aws-components/
+[1]: /ja/cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
+[2]: /ja/cloudcraft/faq/supported-aws-components/
 [3]: https://app.cloudcraft.co/support

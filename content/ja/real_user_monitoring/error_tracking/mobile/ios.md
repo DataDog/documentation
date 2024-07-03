@@ -1,23 +1,22 @@
 ---
-title: iOS Crash Reporting and Error Tracking
 aliases:
-- /real_user_monitoring/ios/crash_reporting/
-- /real_user_monitoring/error_tracking/ios
-type: multi-code-lang
+- /ja/real_user_monitoring/ios/crash_reporting/
+- /ja/real_user_monitoring/error_tracking/ios
 code_lang: ios
 code_lang_weight: 20
 description: Set up Error Tracking for your iOS projects.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-ios"
+- link: https://github.com/DataDog/dd-sdk-ios
   tag: ソースコード
   text: Source code for dd-sdk-ios
-- link: "https://datadoghq.com/blog/ios-crash-reporting-datadog/"
+- link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: Blog
   text: Introducing iOS Crash Reporting and Error Tracking
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
-
+title: iOS Crash Reporting and Error Tracking
+type: multi-code-lang
 ---
 ## 概要
 
@@ -281,10 +280,10 @@ iOS のクラッシュレポートとエラー追跡の構成を確認するに�
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/ios
-[4]: /logs/log_collection/ios
-[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#notes
-[6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#get-deobfuscated-stack-traces
+[3]: /ja/real_user_monitoring/ios
+[4]: /ja/logs/log_collection/ios
+[5]: /ja/real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#notes
+[6]: /ja/real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#get-deobfuscated-stack-traces
 [7]: https://appstoreconnect.apple.com/
 [8]: https://www.npmjs.com/package/@datadog/datadog-ci
 [9]: https://github.com/DataDog/datadog-fastlane-plugin

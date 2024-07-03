@@ -32,7 +32,7 @@ Datadog Forwarder の Lambda 関数にトリガーを設定し、S3 バケット
 6. **Add** をクリックします。
 7. See CloudTrail logs in Datadog's [Log Explorer][4].
 
-[1]: /integrations/amazon_web_services/
+[1]: /ja/integrations/amazon_web_services/
 [2]: https://console.aws.amazon.com/cloudtrail/home
 [3]: https://console.aws.amazon.com/lambda/home
 [4]: https://app.datadoghq.com/logs?query=service%3Acloudtrail

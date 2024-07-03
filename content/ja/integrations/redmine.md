@@ -1,24 +1,25 @@
 ---
-"categories":
-- "collaboration"
-- "developer tools"
-- "issue tracking"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。"
-"doc_link": "https://docs.datadoghq.com/integrations/redmine/"
-"draft": false
-"git_integration_title": "redmine"
-"has_logo": true
-"integration_id": "redmine"
-"integration_title": "Redmine"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "redmine"
-"public_title": "Datadog-Redmine Integration"
-"short_description": "View, search on, and discuss Redmine updates in your Datadog event stream."
-"version": "1.0"
+categories:
+- collaboration
+- developer tools
+- issue tracking
+custom_kind: インテグレーション
+dependencies: []
+description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。
+doc_link: https://docs.datadoghq.com/integrations/redmine/
+draft: false
+git_integration_title: redmine
+has_logo: true
+integration_id: redmine
+integration_title: Redmine
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: redmine
+public_title: Datadog-Redmine Integration
+short_description: View, search on, and discuss Redmine updates in your Datadog event
+  stream.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -57,6 +58,5 @@ The Redmine integration does not include any service checks.
 Need help? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/integrations/redmine
-[2]: https://docs.datadoghq.com/service_management/events/explorer/
-[3]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/service_management/events/explorer/
+[3]: https://docs.datadoghq.com/ja/help/

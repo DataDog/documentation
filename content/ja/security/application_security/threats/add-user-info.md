@@ -1,8 +1,7 @@
 ---
-title: User Monitoring and Protection
 aliases:
-  - /security_platform/application_security/add-user-info
-  - /security/application_security/add-user-info
+- /ja/security_platform/application_security/add-user-info
+- /ja/security/application_security/add-user-info
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /security/application_security/threats/library_configuration/
   tag: Documentation
   text: Other setup considerations and configuration options
+title: User Monitoring and Protection
 ---
 
 ## 概要
@@ -77,7 +77,7 @@ Blocking
     .blockIfMatch();
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/opentracing/java#setup
+[1]: /ja/tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -709,7 +709,7 @@ track_custom_event(tracer, event_name, metadata)
 ルールが保存されると、リモート構成が有効になっているサービスのインスタンスにデプロイされます。
 
 
-[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[1]: /ja/agent/remote_config?tab=configurationyamlfile#application-security-management-asm
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
 ## ユーザーアクティビティイベントの自動追跡
@@ -742,14 +742,14 @@ ASM を有効にすると、最近の Datadog トレーシングライブラリ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /tracing/trace_collection/custom_instrumentation/
-[4]: /security/default_rules/bl-rate-limiting/
-[5]: /security/default_rules/bl-privilege-violation-user/
-[6]: /security/default_rules/appsec-ato-groupby-ip/
-[7]: /security/default_rules/bl-signup-ratelimit/
-[8]: /security/default_rules/bl-account-deletion-ratelimit/
-[9]: /security/default_rules/bl-password-reset/
-[10]: /security/default_rules/bl-payment-failures/
+[3]: /ja/tracing/trace_collection/custom_instrumentation/
+[4]: /ja/security/default_rules/bl-rate-limiting/
+[5]: /ja/security/default_rules/bl-privilege-violation-user/
+[6]: /ja/security/default_rules/appsec-ato-groupby-ip/
+[7]: /ja/security/default_rules/bl-signup-ratelimit/
+[8]: /ja/security/default_rules/bl-account-deletion-ratelimit/
+[9]: /ja/security/default_rules/bl-password-reset/
+[10]: /ja/security/default_rules/bl-payment-failures/
 [11]: https://guid.one/guid
-[12]: /security/default_rules/appsec-ato-bf/
-[13]: /security/default_rules/distributed-ato-ua-asn/
+[12]: /ja/security/default_rules/appsec-ato-bf/
+[13]: /ja/security/default_rules/distributed-ato-ua-asn/

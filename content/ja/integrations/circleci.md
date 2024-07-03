@@ -1,63 +1,65 @@
 ---
-"app_id": "circleci"
-"app_uuid": "042c421c-c655-4034-9b2f-c2c09faf0800"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: circleci
+app_uuid: 042c421c-c655-4034-9b2f-c2c09faf0800
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
       - circleci.finished_builds.count
-      "metadata_path": metadata.csv
-      "prefix": circleci
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "213"
-    "source_type_name": CircleCI
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: circleci
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 213
+    source_type_name: CircleCI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - モニター
 - configuration & deployment
 - automation
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "circleci"
-"integration_id": "circleci"
-"integration_title": "CircleCI"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "circleci"
-"public_title": "CircleCI"
-"short_description": "CircleCI's platform makes it easy to rapidly build and release quality software."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Configuration & Deployment"
-  - "Category::Automation"
-  - "Category::Developer Tools"
-  "configuration": "README.md#Setup"
-  "description": CircleCI's platform makes it easy to rapidly build and release quality software.
-  "media":
-  - "caption": Synthetics
-    "image_url": images/circleci_synthetics.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
-  "support": "README.md#Support"
-  "title": CircleCI
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: circleci
+integration_id: circleci
+integration_title: CircleCI
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: circleci
+public_title: CircleCI
+short_description: CircleCI's platform makes it easy to rapidly build and release
+  quality software.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Configuration & Deployment
+  - Category::Automation
+  - Category::Developer Tools
+  configuration: README.md#Setup
+  description: CircleCI's platform makes it easy to rapidly build and release quality
+    software.
+  media:
+  - caption: Synthetics
+    image_url: images/circleci_synthetics.jpg
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+  support: README.md#Support
+  title: CircleCI
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -109,8 +111,7 @@ CircleCI インテグレーションには、サービスのチェック機能�
 - [Datadog で CircleCI 環境を監視する][5]
 
 [1]: https://app.datadoghq.com/integrations/circleci
-[2]: https://docs.datadoghq.com/continuous_integration/pipelines/circleci/
+[2]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/circleci/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/circleci/circleci_metadata.csv
-[4]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
-

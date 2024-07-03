@@ -1,9 +1,9 @@
 ---
-title: treemap
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - metric
+- metric
+title: treemap
 ---
 The treemap widget allows you to display proportions of one or more datasets. 
 

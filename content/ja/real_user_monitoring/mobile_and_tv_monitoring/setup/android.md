@@ -1,20 +1,20 @@
 ---
-title: RUM Android and Android TV Monitoring Setup
 aliases:
-    - /real_user_monitoring/android/
+- /ja/real_user_monitoring/android/
 code_lang: android
-type: multi-code-lang
 code_lang_weight: 10
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
   tag: Documentation
   text: RUM Android Advanced Configuration
-- link: "https://github.com/DataDog/dd-sdk-android"
+- link: https://github.com/DataDog/dd-sdk-android
   tag: ソースコード
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+title: RUM Android and Android TV Monitoring Setup
+type: multi-code-lang
 ---
 ## 概要
 
@@ -427,17 +427,17 @@ val inputStream = context.getRawResAsRumResource(id)
 
 [1]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
-[8]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#client-tokens
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[8]: /ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [9]: https://square.github.io/okhttp/interceptors/
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-views
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
+[10]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-views
+[11]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
 [12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[13]: /real_user_monitoring/android/web_view_tracking/
-[14]: /getting_started/tagging/using_tags/#rum--session-replay
-[15]: /real_user_monitoring/android/data_collected/
-[16]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
+[13]: /ja/real_user_monitoring/android/web_view_tracking/
+[14]: /ja/getting_started/tagging/using_tags/#rum--session-replay
+[15]: /ja/real_user_monitoring/android/data_collected/
+[16]: /ja/tracing/trace_collection/dd_libraries/android/?tab=kotlin

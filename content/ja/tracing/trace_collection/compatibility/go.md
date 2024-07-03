@@ -1,17 +1,17 @@
 ---
-title: Go Compatibility Requirements
-kind: documentation
-description: 'Compatibility Requirements for the Go tracer'
 aliases:
-  - /tracing/compatibility_requirements/go
-  - /tracing/setup_overview/compatibility_requirements/go
+- /ja/tracing/compatibility_requirements/go
+- /ja/tracing/setup_overview/compatibility_requirements/go
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 30
+description: Compatibility Requirements for the Go tracer
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/go
-      tag: Documentation
-      text: Instrument Your Application
+- link: tracing/trace_collection/dd_libraries/go
+  tag: Documentation
+  text: Instrument Your Application
+kind: documentation
+title: Go Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Compatibility
@@ -167,4 +167,4 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [74]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
 [75]: https://aws.github.io/aws-sdk-go-v2/docs/
 [76]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws
-[77]: /tracing/trace_collection/library_config/go/
+[77]: /ja/tracing/trace_collection/library_config/go/

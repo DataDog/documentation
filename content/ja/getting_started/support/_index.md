@@ -1,10 +1,10 @@
 ---
-title: Getting Started with Datadog Support
-kind: documentation
 further_reading:
-- link: "https://docs.datadoghq.com/agent/troubleshooting/"
+- link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: Documentation
   text: Agent Troubleshooting
+kind: documentation
+title: Getting Started with Datadog Support
 ---
 
 ## 概要
@@ -71,6 +71,6 @@ To get started, click **Support** on the bottom-left corner of the navigation me
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://help.datadoghq.com/hc/
-[2]: /account_management/org_switching/
-[3]: /getting_started/site/
-[4]: /agent/troubleshooting/send_a_flare/
+[2]: /ja/account_management/org_switching/
+[3]: /ja/getting_started/site/
+[4]: /ja/agent/troubleshooting/send_a_flare/

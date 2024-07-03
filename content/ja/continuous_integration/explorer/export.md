@@ -1,5 +1,4 @@
 ---
-title: Export Pipeline Executions 
 further_reading:
 - link: /continuous_integration/search/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /monitors/types/ci
   tag: Documentation
   text: CI Pipeline Monitors について
+title: Export Pipeline Executions
 ---
 
 ## 概要
@@ -35,10 +35,10 @@ You can copy, export, or download your aggregated search query and visualization
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/ci-visibility-pipelines/#search-pipelines-events
+[1]: /ja/api/latest/ci-visibility-pipelines/#search-pipelines-events
 [2]: https://app.datadoghq.com/ci/pipeline-executions
-[3]: /continuous_integration/explorer/
-[4]: /api/latest/
-[5]: /monitors/types/ci/
-[6]: /notebooks/
-[7]: /continuous_integration/explorer/saved_views/
+[3]: /ja/continuous_integration/explorer/
+[4]: /ja/api/latest/
+[5]: /ja/monitors/types/ci/
+[6]: /ja/notebooks/
+[7]: /ja/continuous_integration/explorer/saved_views/

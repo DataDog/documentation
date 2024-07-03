@@ -1,162 +1,161 @@
 ---
-title: Trace Sampling Use Cases
-kind: guide
 further_reading:
 - link: /tracing/guide/trace_ingestion_volume_control/
   tag: Guide
   text: How to control ingested volumes
+title: Trace Sampling Use Cases
 ---
 
-## Overview
+## 概要
 
-Trace data tends to be repetitive. A problem in your application is rarely identified in only one trace and no others. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms repeatedly in multiple traces. Consequently, there's usually no need for you to collect every single trace for a service or endpoint, or every span within a trace. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
+トレースデータは反復される傾向があります。アプリケーションの問題が、たった 1 つのトレースで特定され、他のトレースがないことはほとんどありません。高スループットのサービス、特に注意を要するインシデントの場合、問題は複数のトレースで繰り返し症状が現れます。その結果、サービスやエンドポイントのトレースやトレース内のスパンをすべて収集する必要はありません。Datadog APM [取り込み制御メカニズム][1]は、問題のトラブルシューティングに必要な可視性を維持しながら、ノイズを削減し、コストを管理するのに役立ちます。
 
-Ingestion mechanisms are configurations within the Datadog Agent and Datadog tracing libraries. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
+取り込みの仕組みは、Datadog Agent と Datadog トレーシングライブラリ内の構成です。OpenTelemetry SDK を使用してアプリケーションのインスツルメンテーションを行っている場合は、[OpenTelemetry による取り込みサンプリング][2]をお読みください。
 
-This guide helps you understand when and how to use ingestion control configurations depending on the main use cases you might encounter. It covers:
+このガイドでは、遭遇する可能性のある主なユースケースに応じて、いつ、どのように取り込み制御の構成を使用するかを理解するのに役立ちます。本書は、以下の内容をカバーしています。
 
-- [Determining which ingestion mechanisms are used](#determining-which-ingestion-mechanisms-are-used) for a given service
-- [Use cases that focus on keeping particular types of traces](#keeping-certain-types-of-traces)
-- [Use cases that focus on reducing ingested traces](#reducing-ingestion-for-high-volume-services)
+- あるサービスに対して、[どの取り込みメカニズムを使用するかを判断する](#determining-which-ingestion-mechanisms-are-used)
+- [特定の種類のトレースを保持することに重点を置いたユースケース](#keeping-certain-types-of-traces)
+- [取り込みトレースの低減に重点を置いたユースケース](#reducing-ingestion-for-high-volume-services)
 
 
-## Determining which ingestion mechanisms are used
+## どの取り込みメカニズムを使用するかを判断する
 
-To identify which ingestion mechanisms are currently used in your Datadog environment, navigate to the [Ingestion Control Page][3].
+Datadog 環境で現在使用されている取り込みメカニズムを確認するには、[Ingestion Control ページ][3]に移動してください。
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/ingestion_control_page.png" alt="Ingestion Control Page" style="width:90%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/ingestion_control_page.png" alt="Ingestion Control ページ" style="width:90%;" >}}
 
-The table gives insights on ingested volumes *by service*. The Configuration column provides a first indication of the current set up. It shows:
-- `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][5].
-- `CONFIGURED` if a custom trace sampling rate configured in the tracing library is applied to the traces that start from the service.
+この表は、*サービス別*の取り込みボリュームに関する洞察を提供します。構成列は、現在のセットアップの最初の指標となります。これは、次のことを示しています。
+- Datadog Agent で計算したサンプリングレートをサービスから始まるトレースに適用する場合は `AUTOMATIC` となります。[Datadog Agent の取り込みロジック][5]の仕様については、こちらをご覧ください。
+- サービスから開始するトレースにトレーシングライブラリで構成したカスタムトレースサンプリングレートが適用される場合は `CONFIGURED` となります。
 
-Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services.
+サービスをクリックすると、各サービスで使用されているサンプリングの決定要因 (Agent やトレーシングライブラリ、ルールやサンプルレートなど) や、取り込みスパンのサービスで利用されている[取り込みサンプリングメカニズム][1]の詳細を確認できます。
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
-In the Service Ingestion Summary example above, the **Ingestion reasons breakdown** table shows that most of the ingestion reasons for this service come from `rule` ([user defined sampling rule][6]).
+上記の Service Ingestion Summary の例では、**Ingestion reasons breakdown** テーブルに、このサービスの取り込み理由のほとんどが `rule` ([ユーザー定義サンプリングルール][6]) に由来することが示されています。
 
-The Top sampling decision makers for this service show that `web-store` service gets sampling decisions from `web-store`, `shopist-web-ui`, `shipping-worker`, `synthetics-browser`, and `product-recommendation`. These five services all contribute in the overall sampling decisions that affect the `web-store` service spans. When determining how to fine tune the ingestion for web-store, all five services need to be considered.
+このサービスのトップサンプリング決定要因は、`web-store` サービスが、`web-store`、`shopist-web-ui`、`shipping-worker`、`synthetics-browser`、`product-recommendation` からサンプリング決定を受けることを示しています。これらの 5 つのサービスはすべて、`web-store` のサービススパンに影響を与える全体的なサンプリング決定に寄与しています。Web ストアの取り込みを微調整する方法を決定する場合、5 つのサービスすべてを考慮する必要があります。
 
-## Keeping certain types of traces
+## 特定の種類のトレースを保持する
 
-### Keeping entire transaction traces
+### トランザクションのトレースをすべて保持する
 
-Ingesting entire transaction traces ensures visibility over the **end-to-end service request flow** for specific individual requests.
+トランザクショントレース全体を取り込むことで、個々のリクエストに対する**エンドツーエンドのサービスリクエストの流れ**を可視化することができます。
 
-#### Solution: Head-based sampling
+#### ソリューション: ヘッドベースサンプリング
 
-Complete traces can be ingested with [head-based sampling][4] mechanisms: the decision to keep or drop the trace is determined from the first span of the trace, the *head*, when the trace is created. This decision is propagated through the request context to downstream services.
+完全なトレースは、[ヘッドベースサンプリング][4]メカニズムで取り込むことができます。トレースが作成されたときに、トレースを維持するか削除するかの決定は、トレースの最初のスパン、*ヘッド*から決定されます。この決定は、リクエストコンテキストを通じてダウンストリームサービスに伝搬されます。
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Head-based Sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="ヘッドベースサンプリング" style="width:100%;" >}}
 
-To decide which traces to keep and drop, the Datadog Agent computes [default sampling rates][5] for each service to apply at trace creation, based on the application traffic:
-- For low-traffic applications, a sampling rate of 100% is applied.
-- For high-traffic applications, a lower sampling rate is applied with a target of 10 complete traces per second per Agent.
+Datadog Agent は、トレースの保持と削除を決定するために、アプリケーショントラフィックに基づいて、トレース作成時に適用する各サービスの[デフォルトサンプリングレート][5]を計算します。
+- トラフィックの少ないアプリケーションでは、サンプリング率 100% が適用されます。
+- トラフィックの多いアプリケーションでは、Agent あたり毎秒 10 個の完全なトレースを目標に、低いサンプリングレートが適用されます。
 
-You can also override the default Agent sampling rate by configuring the sampling rate by service. See how to [keep more traces for specific services](#keeping-more-traces-for-specific-services-or-resources) for more information.
+また、サービスごとにサンプリングレートを構成することで、Agent のデフォルトサンプリングレートをオーバーライドすることができます。詳しくは、[特定のサービスに対してより多くのトレースを保持する](#keeping-more-traces-for-specific-services-or-resources)方法を参照してください。
 
-#### Configuring head-based sampling
+#### ヘッドベースサンプリングの構成
 
-Default sampling rates are calculated to target 10 complete traces per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time.
+デフォルトのサンプリングレートは、Agent ごとに 1 秒間に 10 個の完全なトレースを目標に計算されています。これはトレースの*目標*数であり、一定期間のトレースを平均化した結果です。これはハード的な制限では*ありません*。また、トラフィックの急増により、短時間のうちに Datadog に送信されるトレースが大幅に増加することがあります。
 
-You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
+Datadog Agent のパラメーター `max_traces_per_second` または環境変数 `DD_APM_MAX_TPS` を構成することで、この目標を増減することができます。ヘッドベースサンプリングの取り込みメカニズム][5]の詳細はこちらをご覧ください。
 
-**Note:** Changing an Agent configuration impacts the percentage sampling rates for *all services* reporting traces to this Datadog Agent.
+**注:** Agent の構成を変更すると、この Datadog Agent にトレースを報告する*すべてのサービス*のパーセントサンプリングレートに影響します。
 
-For most scenarios, this Agent-level configuration stays within the allotted quota, provides enough visibility into your application's performance, and helps you make appropriate decisions for your business.
+ほとんどのシナリオで、この Agent レベルの構成は割り当てられたクォータ内にとどまり、アプリケーションのパフォーマンスを十分に可視化し、ビジネスのための適切な意思決定を支援します。
 
-### Keeping more traces for specific services or resources
+### 特定のサービスやリソースに対してより多くのトレースを保持する
 
-If some services and requests are critical to your business, you want higher visibility into them. You may want to send all related traces to Datadog so that you can look into any of the individual transactions.
+サービスやリクエストがビジネスにとって重要なものである場合、その可視性を高めたいと思うものです。Datadog に関連するすべてのトレースを送信して、個々のトランザクションを調べることができるようにするとよいでしょう。
 
-#### Solution: Sampling rules
+#### ソリューション: サンプリングルール
 
-By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring [sampling rules][6] in the tracing library.
+デフォルトでは、サンプリングレートは、Datadog Agent あたり 1 秒あたり 10 トレースを目標に計算されます。トレーシングライブラリで[サンプリングルール][6]を構成することで、デフォルトで計算されたサンプリングレートをオーバーライドすることができます。
 
-You can configure sampling rules by service. For traces that start from the rule's specified service, the defined percentage sampling rate is applied instead of the Agent's default sampling rate.
+サービス別にサンプリングルールを構成することができます。ルールの指定したサービスから始まるトレースには、Agent のデフォルトサンプリングレートの代わりに、定義されたパーセンテージサンプリングレートが適用されます。
 
-#### Configuring a sampling rule
+#### サンプリングルールの構成
 
-You can configure sampling rules by setting the environment variable `DD_TRACE_SAMPLING_RULES`.
+環境変数 `DD_TRACE_SAMPLING_RULES` を設定することで、サンプリングルールを構成することができます。
 
-For example, to send 20 percent of the traces for the service named `my-service`:
+例えば、`my-service` という名前のサービスのトレースの 20% を送信するには
 
 ```
 DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
-Read more about [sampling rules ingestion mechanisms][6].
+[サンプリングルールの取り込みメカニズム][6]について詳しくはこちら。
 
-### Keeping more error-related traces
+### エラー関連のトレースをより多く保持する
 
-Traces with error spans are often symptoms of system failures. Keeping a higher proportion of transactions with errors ensures that you always have access to some relevant individual requests.
+エラースパンを持つトレースは、しばしばシステム障害の症状です。エラーのあるトランザクションの割合を高く保つことで、常にいくつかの関連する個々のリクエストにアクセスすることができます。
 
-#### Solution: Error sampling rate
+#### ソリューション: エラーサンプリングレート
 
-In addition to head-based sampled traces, you can increase the error sampling rate so that each Agent keeps additional error spans even if the related traces are not kept by head-based sampling.
+ヘッドベースサンプリングされたトレースに加えて、エラーサンプリングレートを上げることで、ヘッドベースサンプリングで関連トレースが保持されない場合でも、各 Agent が追加のエラースパンを保持することができます。
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Error Sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="エラーサンプリング" style="width:100%;" >}}
 
-**Notes:**
-- Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
-- Starting with **Datadog Agent 6/7.41.0 and higher**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` can be set to include spans dropped by tracing library rules or `manual.drop`. More details can be found in the [Error traces section of the Ingestion Mechanisms doc][9].
+**注:**
+- Datadog Agent レベルでローカルにサンプリングが行われるため、トレースチャンクの分散された断片は取り込まれない可能性があります。
+- **Datadog Agent 6/7.41.0 以降**では、`DD_APM_FEATURES=error_rare_sample_tracer_drop` を設定することで、トレーシングライブラリルールまたは `manual.drop` でドロップしたスパンが含まれます。詳細は、[取り込みのメカニズムのドキュメントのエラートレースセクション][9]に記載されています。
 
-#### Configuring error sampling
+#### エラーサンプリングの構成
 
-You can configure the number of error chunks per second per Agent to capture by setting the environment variable `DD_APM_ERROR_TPS`. The default value is `10` errors per second. To ingest **all errors**, set it to an arbitrary high value. To disable error sampling, set `DD_APM_ERROR_TPS` to `0`.
+環境変数 `DD_APM_ERROR_TPS` を設定することで、Agent ごとに 1 秒間に何個のエラーチャンクをキャプチャするかを構成することができます。デフォルト値は、1 秒間に `10` 個のエラーです。**すべてのエラー**を取り込みたい場合は、任意の高い値を設定してください。エラーサンプリングを無効にするには、`DD_APM_ERROR_TPS` を `0` に設定します。
 
-## Reducing ingestion for high volume services
+## ボリュームの大きいサービスの取り込みを減らす
 
-### Reducing volume from database or cache services
+### データベースやキャッシュサービスからのボリュームを減らす
 
-Traced database calls can represent a large amount of ingested data while the application performance metrics (such as error counts, request hit counts, and latency) are enough to monitor database health.
+トレースされたデータベース呼び出しは大量の取り込みデータを表し、アプリケーションのパフォーマンスメトリクス (エラーカウント、リクエストヒットカウント、レイテンシーなど) はデータベースの健全性を監視するのに十分です。
 
-#### Solution: Sampling rules for traces with database calls
+#### ソリューション: データベース呼び出しのあるトレースのサンプリングルール
 
-To reduce the span volume created by tracing database calls, configure the sampling at the head of the trace.
+データベース呼び出しをトレースすることで生じるスパン量を減らすために、トレースの先頭でサンプリングを構成します。
 
-Database services rarely start a trace. Usually, client database spans are children of an instrumented backend service span.
+データベースサービスがトレースを開始することはほとんどありません。通常、クライアントデータベーススパンは、インスツルメンテーションされたバックエンドサービススパンの子です。
 
-To know **which services start database traces**, use the `Top Sampling Decision Makers` top list graph on the ingestion control page [Service Ingestion Summary][7]. Configuring head-based sampling for these specific services reduces the volume of ingested database spans, while making sure that no incomplete traces are ingested. The distributed traces are either kept or dropped altogether.
+**どのサービスがデータベーストレースを開始するか**を知るには、取り込み制御ページ [Service Ingestion Summary][7] の `Top Sampling Decision Makers` トップリストグラフを使用します。これらの特定のサービスに対してヘッドベースサンプリングを構成すると、取り込まれるデータベーススパンの量が減少し、不完全なトレースが取り込まれないようにすることができます。分散型トレーシングは、保持されるか、完全に削除されます。
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary-database.png" alt="Top Sampling Decision Makers" style="width:90%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary-database.png" alt="トップサンプリング決定要因" style="width:90%;" >}}
 
-For instance, for the traced database calls of `web-store-mongo`, traces originate from services `web-store` and `shipping-worker` 99% of the time. As a result, to reduce the volume for `web-store-mongo`, configure sampling for `web-store` and `shipping-worker` services.
+例えば、`web-store-mongo` のデータベース呼び出しのトレースでは、99% の確率で `web-store` と `shipping-worker` のサービスからトレースが発生します。そのため、`web-store-mongo` のトレース量を減らすには、`web-store` と `shipping-worker` のサービスに対してサンプリングを構成します。
 
-#### Configure sampling to drop database spans
+#### データベーススパンをドロップするサンプリングの構成
 
-Refer to the [sampling rule configuration section](#configuring-a-sampling-rule) for more information about sampling rules syntax.
+サンプリングルールの構文については、[サンプリングルール構成セクション](#configuring-a-sampling-rule)を参照してください。
 
-The backend service `web-store` is calling a Mongo database multiple times per trace, and it's creating a lot of unwanted span volume:
+バックエンドサービスの `web-store` は、トレースごとに何度も Mongo データベースを呼び出しており、不要なスパンボリュームを大量に作り出しています。
 
-- Configure a **trace sampling rule** for the backend service `web-store`, ensuring 10 percent of entire traces are kept, including Mongo spans.
+- バックエンドサービス `web-store` の **トレースサンプリングルール** を構成し、Mongo スパンを含むトレース全体の 10% を保持します。
 
   ```
   DD_TRACE_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 0.1}]'
   ```
 
-- Optionally, if you want to keep all the `web-store` spans, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `web-store`. This sampling does not ingest any database call spans outside of the 10 percent identified above.
+- オプションとして、すべての `web-store` スパンを保持したい場合は、バックエンドサービス `web-store` のスパンの 100% を保持する**シングルスパンサンプリングルール**を構成してください。このサンプリングでは、上記の 10% 以外のデータベース呼び出しスパンは取り込まれません。
 
   ```
   DD_SPAN_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 1}]'
   ```
 
-  **Note**: Configuring a single span sampling rule is especially useful if you are using [span-based metrics][8], which are derived from ingested spans.
+  **注**: スパンサンプリングルールの構成は、取り込みスパンから得られる[スパンベースメトリクス][8]を使用する場合に特に有効です。
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling3.png" alt="Database spans sampling" style="width:100%;" >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_pipeline/ingestion_mechanisms/
-[2]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
+[1]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[2]: /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 [3]: https://app.datadoghq.com/apm/traces/ingestion-control
-[4]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
-[5]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[6]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
-[7]: /tracing/trace_pipeline/ingestion_controls/#service-ingestion-summary
-[8]: /tracing/trace_pipeline/generate_metrics/
-[9]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#error-and-rare-traces
+[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[7]: /ja/tracing/trace_pipeline/ingestion_controls/#service-ingestion-summary
+[8]: /ja/tracing/trace_pipeline/generate_metrics/
+[9]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java#error-and-rare-traces

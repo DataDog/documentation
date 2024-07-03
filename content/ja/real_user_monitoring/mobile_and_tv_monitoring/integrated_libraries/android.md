@@ -1,18 +1,18 @@
 ---
-title: Android and Android TV Libraries for RUM
-kind: documentation
-code_lang: android
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
-- /real_user_monitoring/android/integrated_libraries/
+- /ja/real_user_monitoring/android/integrated_libraries/
+code_lang: android
+code_lang_weight: 10
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-android"
+- link: https://github.com/DataDog/dd-sdk-android
   tag: ソースコード
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
   tag: Documentation
   text: Integrated Libraries
+kind: documentation
+title: Android and Android TV Libraries for RUM
+type: multi-code-lang
 ---
 
 This page lists integrated libraries you can use for Android and Android TV applications.

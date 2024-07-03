@@ -1,5 +1,10 @@
 ---
-title: CD Visibility in Datadog
+cascade:
+  algolia:
+    rank: 70
+    tags:
+    - cd pipeline
+    - cd pipelines
 further_reading:
 - link: /continuous_delivery/search
   tag: Documentation
@@ -7,10 +12,7 @@ further_reading:
 - link: /continuous_delivery/explorer
   tag: Documentation
   text: Learn about the CD Visibility Explorer
-cascade:
-    algolia:
-        rank: 70
-        tags: [cd pipeline, cd pipelines]
+title: CD Visibility in Datadog
 ---
 
 {{< site-region region="gov" >}}
@@ -51,6 +53,6 @@ You can export your search query to a [saved view][6] by clicking the **Export**
 [1]: https://app.datadoghq.com/ci/deployments
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: https://app.datadoghq.com/notebook/list
-[4]: /dashboards
-[5]: /notebooks
-[6]: /continuous_delivery/explorer/saved_views
+[4]: /ja/dashboards
+[5]: /ja/notebooks
+[6]: /ja/continuous_delivery/explorer/saved_views

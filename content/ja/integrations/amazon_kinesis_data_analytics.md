@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - cloud
 - aws
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Amazon Kinesis Data Analytics metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_kinesis_data_analytics/"
-"draft": false
-"git_integration_title": "amazon_kinesis_data_analytics"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Kinesis Data Analytics"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_kinesis_data_analytics"
-"public_title": "Datadog-Amazon Kinesis Data Analytics Integration"
-"short_description": "Track key Amazon Kinesis Data Analytics metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Amazon Kinesis Data Analytics metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis_data_analytics/
+draft: false
+git_integration_title: amazon_kinesis_data_analytics
+has_logo: true
+integration_id: ''
+integration_title: Amazon Kinesis Data Analytics
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_kinesis_data_analytics
+public_title: Datadog-Amazon Kinesis Data Analytics Integration
+short_description: Track key Amazon Kinesis Data Analytics metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -60,9 +60,8 @@ checks.
 
 Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-kinesis-data-analytics
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis_data_analytics/amazon_kinesis_data_analytics_metadata.csv
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

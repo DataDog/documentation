@@ -1,5 +1,5 @@
 ---
-title: "EKS Pod Component"
+title: EKS Pod Component
 ---
 ## 概要
 
@@ -104,4 +104,4 @@ cpu   | memoryGB
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-[3]: /cloudcraft/faq/scan-error-aws-china-region/
+[3]: /ja/cloudcraft/faq/scan-error-aws-china-region/

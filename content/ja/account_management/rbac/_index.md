@@ -1,27 +1,28 @@
 ---
-title: Access Control
 aliases:
-    - /guides/rbac
-    - /account_management/rbac/role_api
-    - /account_management/users/default_roles
-    - /account_management/users/custom_roles
-    - /account_management/rbac/log_management
+- /ja/guides/rbac
+- /ja/account_management/rbac/role_api
+- /ja/account_management/users/default_roles
+- /ja/account_management/users/custom_roles
+- /ja/account_management/rbac/log_management
 further_reading:
-    - link: /api/v2/roles/
-      tag: Documentation
-      text: Manage roles and permissions with the Roles API
-    - link: "/api/v2/roles/#list-permissions"
-      tag: Documentation
-      text: Manage your permissions with the Permissions API
-    - link: /account_management/rbac/permissions
-      tag: Documentation
-      text: Discover the list of permissions available
-    - link: /account_management/saml/
-      tag: Documentation
-      text: Enable single sign on with SAML
-    - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
-      tag: Blog
-      text: Build compliance, governance, and transparency across your teams with Datadog Audit Trail
+- link: /api/v2/roles/
+  tag: Documentation
+  text: Manage roles and permissions with the Roles API
+- link: /api/v2/roles/#list-permissions
+  tag: Documentation
+  text: Manage your permissions with the Permissions API
+- link: /account_management/rbac/permissions
+  tag: Documentation
+  text: Discover the list of permissions available
+- link: /account_management/saml/
+  tag: Documentation
+  text: Enable single sign on with SAML
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
+  tag: Blog
+  text: Build compliance, governance, and transparency across your teams with Datadog
+    Audit Trail
+title: Access Control
 ---
 
 ## 概要
@@ -84,15 +85,15 @@ The custom roles feature gives your organization the ability to create new roles
 
 
 [1]: https://app.datadoghq.com/access/roles
-[2]: /account_management/rbac/permissions/
-[3]: /account_management/users/#edit-a-user-roles
+[2]: /ja/account_management/rbac/permissions/
+[3]: /ja/account_management/users/#edit-a-user-roles
 {{% /tab %}}
 {{% tab "API" %}}
 
 [ロールの作成 API リファレンス][1]で、ロールの作成方法の例をご紹介しています。
 
 
-[1]: /api/latest/roles/#create-role
+[1]: /ja/api/latest/roles/#create-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -113,14 +114,14 @@ The custom roles feature gives your organization the ability to create new roles
 
 
 [1]: https://app.datadoghq.com/access/roles
-[2]: /account_management/rbac/permissions/
+[2]: /ja/account_management/rbac/permissions/
 {{% /tab %}}
 {{% tab "API" %}}
 
 [ロールの更新 API リファレンス][1]で、ロールの更新方法の例をご紹介しています。
 
 
-[1]: /api/latest/roles/#update-a-role
+[1]: /ja/api/latest/roles/#update-a-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -146,7 +147,7 @@ The custom roles feature gives your organization the ability to create new roles
 
 [ロールのクローン作成 API リファレンス][1]で、ロールのクローン作成方法の例をご紹介しています。
 
-[1]: /api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
+[1]: /ja/api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -173,7 +174,7 @@ The custom roles feature gives your organization the ability to create new roles
 [ロールの削除 API リファレンス][1]で、ロールの削除方法の例をご紹介しています。
 
 
-[1]: /api/latest/roles/#delete-role
+[1]: /ja/api/latest/roles/#delete-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -194,13 +195,13 @@ Datadog サイトでロールを作成または更新する際、Datadog ロー�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/permissions/
-[2]: /account_management/rbac/granular_access/
-[3]: /account_management/multi_organization/
-[4]: /account_management/saml/mapping/
-[5]: /dashboards/
-[6]: /monitors/
-[7]: /events/
-[8]: /api/v2/roles/
+[1]: /ja/account_management/rbac/permissions/
+[2]: /ja/account_management/rbac/granular_access/
+[3]: /ja/account_management/multi_organization/
+[4]: /ja/account_management/saml/mapping/
+[5]: /ja/dashboards/
+[6]: /ja/monitors/
+[7]: /ja/events/
+[8]: /ja/api/v2/roles/
 [9]: https://app.datadoghq.com/organization-settings/
-[10]: /api/latest/roles/#create-role
+[10]: /ja/api/latest/roles/#create-role

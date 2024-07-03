@@ -1,9 +1,9 @@
 ---
-title: .NET Compatibility Requirements
-kind: documentation
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 10
+kind: documentation
+title: .NET Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Application Security capabilities support
@@ -106,6 +106,6 @@ Integrations to **User Authentication Frameworks provides:**
 |-------------------|
 | > .Net Core 2.1   |
 
-[1]: /tracing/trace_collection/compatibility/dotnet-core/
-[2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/remote_config/#enabling-remote-configuration
+[1]: /ja/tracing/trace_collection/compatibility/dotnet-core/
+[2]: /ja/tracing/trace_collection/compatibility/dotnet-framework/
+[3]: /ja/agent/remote_config/#enabling-remote-configuration

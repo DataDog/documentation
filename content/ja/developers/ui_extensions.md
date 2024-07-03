@@ -1,13 +1,13 @@
 ---
 aliases:
-- /developers/datadog_apps/
+- /ja/developers/datadog_apps/
 dependencies:
-- "https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"
+- https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md
 further_reading:
-- link: "https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md"
+- link: https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md
   tag: Github
   text: Design Guidelines
-- link: "https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md"
+- link: https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md
   tag: Github
   text: Programming Model
 kind: documentation

@@ -1,10 +1,10 @@
 ---
-title: App Analytics
-kind: documentation
 aliases:
-  - /tracing/visualization/search/
-  - /tracing/trace_search_and_analytics/
-  - /tracing/advanced_usage/
+- /ja/tracing/visualization/search/
+- /ja/tracing/trace_search_and_analytics/
+- /ja/tracing/advanced_usage/
+kind: documentation
+title: App Analytics
 ---
 
 <div class="alert alert-danger">
@@ -148,7 +148,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/compatibility_requirements/java/#compatibility
+[1]: /ja/tracing/compatibility_requirements/java/#compatibility
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -182,7 +182,7 @@ Where `integration` is the name of the integration. See the [list of available i
 * `false` disables analytics for this integration, regardless of the global setting.
 * `nil` defers to global setting for analytics.
 
-[1]: /tracing/setup/ruby/#library-compatibility
+[1]: /ja/tracing/setup/ruby/#library-compatibility
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -220,7 +220,7 @@ tracer.use('express', {
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/nodejs/#integrations
+[1]: /ja/tracing/setup/nodejs/#integrations
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -246,7 +246,7 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 
 Integration names can be found on the [integrations table][1]. **Note:** On Linux, the names of environment variables are case-sensitive.
 
-[1]: /tracing/setup/dotnet/#integrations
+[1]: /ja/tracing/setup/dotnet/#integrations
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -260,7 +260,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/php/#integration-names
+[1]: /ja/tracing/setup/php/#integration-names
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -328,7 +328,7 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 
 Integration names can be found on the [integrations table][1]. **Note:** On Linux, the names of environment variables are case-sensitive.
 
-[1]: /tracing/setup/dotnet/#integrations
+[1]: /ja/tracing/setup/dotnet/#integrations
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -342,7 +342,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/php/#integrations
+[1]: /ja/tracing/setup/php/#integrations
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -374,8 +374,8 @@ class MyClass {
 **Note:** App analytics for [dd.trace.methods][1] or [trace annotations][2] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
 
 
-[1]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
-[2]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
+[1]: https://docs.datadoghq.com/ja/tracing/custom_instrumentation/java/#dd-trace-methods
+[2]: https://docs.datadoghq.com/ja/tracing/custom_instrumentation/java/#trace-annotations
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -514,5 +514,5 @@ To increase the APM rate limit for the Agent, configure the `max_events_per_seco
 **Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
 
 
-[1]: /tracing/trace_pipeline/ingestion_controls/
-[2]: /tracing/trace_pipeline/ingestion_mechanisms/
+[1]: /ja/tracing/trace_pipeline/ingestion_controls/
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/

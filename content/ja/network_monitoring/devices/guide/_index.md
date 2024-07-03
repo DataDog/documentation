@@ -1,16 +1,16 @@
 ---
-title: NDM Guides
-private: true
-disable_toc: true
 aliases:
-    - /network_performance_monitoring/devices/guide/
+- /ja/network_performance_monitoring/devices/guide/
+disable_toc: true
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
   text: Monitor SNMP with Datadog
-- link: "https://www.datadoghq.com/blog/monitor-meraki/"
+- link: https://www.datadoghq.com/blog/monitor-meraki/
   tag: Blog
   text: Monitor Cisco Meraki with Datadog
+private: true
+title: NDM Guides
 ---
 
 {{< whatsnext desc="General Guides:" >}}

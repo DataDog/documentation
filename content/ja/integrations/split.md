@@ -1,62 +1,62 @@
 ---
-"app_id": "split"
-"app_uuid": "690989fe-dca5-4394-b38a-86f9770dd470"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": []
-      "metadata_path": "metadata.csv"
-      "prefix": "split."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10008"
-    "source_type_name": "Split"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Split"
-  "sales_email": "help@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "configuration & deployment"
-- "notifications"
-- "event management"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/split/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "split"
-"integration_id": "split"
-"integration_title": "Split"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "split"
-"public_title": "Split"
-"short_description": "Feature Experimentation Platform for Engineering and Product Teams."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Notifications"
-  - "Category::Event Management"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Feature Experimentation Platform for Engineering and Product Teams."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Split"
+app_id: split
+app_uuid: 690989fe-dca5-4394-b38a-86f9770dd470
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: split.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10008
+    source_type_name: Split
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Split
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- configuration & deployment
+- notifications
+- event management
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/split/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: split
+integration_id: split
+integration_title: Split
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: split
+public_title: Split
+short_description: Feature Experimentation Platform for Engineering and Product Teams.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Notifications
+  - Category::Event Management
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Feature Experimentation Platform for Engineering and Product Teams.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Split
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -112,9 +112,8 @@ Need help? Contact [Datadog support][7].
 
 [1]: http://www.split.io
 [2]: http://www.split.io/articles/controlled-rollout
-[3]: https://docs.datadoghq.com/integrations/split-rum/
+[3]: https://docs.datadoghq.com/ja/integrations/split-rum/
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/split/images/in-split.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/split/images/integrations-datadog.png
-[6]: https://docs.datadoghq.com/events/
-[7]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/events/
+[7]: https://docs.datadoghq.com/ja/help/

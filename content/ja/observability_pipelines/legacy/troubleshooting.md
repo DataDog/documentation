@@ -1,12 +1,12 @@
 ---
-title: (LEGACY) Troubleshooting
-disable_toc: false
 aliases:
-  - /observability_pipelines/troubleshooting/
+- /ja/observability_pipelines/troubleshooting/
+disable_toc: false
 further_reading:
-  - link: /observability_pipelines/legacy/monitoring/
-    tag: Documentation
-    text: Monitor the health of your pipelines
+- link: /observability_pipelines/legacy/monitoring/
+  tag: Documentation
+  text: Monitor the health of your pipelines
+title: (LEGACY) Troubleshooting
 ---
 
 {{< site-region region="gov" >}}
@@ -95,5 +95,5 @@ The expected output should be similar to the following, where the `log` attribut
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines/
-[2]: /observability_pipelines/legacy/setup/
-[3]: /help
+[2]: /ja/observability_pipelines/legacy/setup/
+[3]: /ja/help

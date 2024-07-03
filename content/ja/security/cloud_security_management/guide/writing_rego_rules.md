@@ -1,7 +1,6 @@
 ---
-title: Writing Custom Rules with Rego
 aliases:
-  - /security_platform/cloud_security_management/guide/writing_rego_rules/
+- /ja/security_platform/cloud_security_management/guide/writing_rego_rules/
 further_reading:
 - link: /security/default_rules
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
   tag: Guide
   text: Learn about frameworks and industry benchmarks
 is_beta: true
+title: Writing Custom Rules with Rego
 ---
 
 ## 概要

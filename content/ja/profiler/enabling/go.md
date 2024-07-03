@@ -1,20 +1,20 @@
 ---
-title: Enabling the Go Profiler
+aliases:
+- /ja/tracing/profiler/enabling/go/
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profile_visualizations
-      tag: Documentation
-      text: Learn more about available profile visualizations
-    - link: profiler/profiler_troubleshooting/go
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
-aliases:
-  - /tracing/profiler/enabling/go/
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profile_visualizations
+  tag: Documentation
+  text: Learn more about available profile visualizations
+- link: profiler/profiler_troubleshooting/go
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+title: Enabling the Go Profiler
+type: multi-code-lang
 ---
 
 プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
@@ -136,22 +136,22 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
-[2]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[3]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[1]: /ja/tracing/trace_collection/
+[2]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[3]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
-[7]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
-[8]: /profiler/connect_traces_and_profiles/#prerequisites
-[9]: /integrations/guide/source-code-integration/?tab=go
+[7]: /ja/profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[8]: /ja/profiler/connect_traces_and_profiles/#prerequisites
+[9]: /ja/integrations/guide/source-code-integration/?tab=go
 [10]: https://app.datadoghq.com/profiling
 [11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
 [12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
-[13]: /getting_started/tagging/unified_service_tagging
+[13]: /ja/getting_started/tagging/unified_service_tagging
 [14]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
 [15]: https://tip.golang.org/doc/go1.21
-[16]: /profiler/guide/save-cpu-in-production-with-go-pgo
-[17]: /getting_started/profiler/
-[18]: /profiler/enabling/supported_versions/
+[16]: /ja/profiler/guide/save-cpu-in-production-with-go-pgo
+[17]: /ja/getting_started/profiler/
+[18]: /ja/profiler/enabling/supported_versions/
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview

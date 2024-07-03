@@ -1,6 +1,6 @@
 ---
-title: Archive Logs to Datadog Archives
 disable_toc: false
+title: Archive Logs to Datadog Archives
 ---
 
 ## 概要
@@ -20,8 +20,7 @@ Select a source to get started:
 - [Splunk Heavy and Universal Forwarders (TCP)][3]
 - [Sumo Logic Hosted Collector][4]
 
-[1]: /observability_pipelines/archive_logs/datadog_agent
-[2]: /observability_pipelines/archive_logs/splunk_hec
-[3]: /observability_pipelines/archive_logs/splunk_tcp
-[4]: /observability_pipelines/archive_logs/sumo_logic_hosted_collector
-
+[1]: /ja/observability_pipelines/archive_logs/datadog_agent
+[2]: /ja/observability_pipelines/archive_logs/splunk_hec
+[3]: /ja/observability_pipelines/archive_logs/splunk_tcp
+[4]: /ja/observability_pipelines/archive_logs/sumo_logic_hosted_collector

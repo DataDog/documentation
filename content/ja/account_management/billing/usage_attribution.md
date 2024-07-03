@@ -1,14 +1,16 @@
 ---
-title: Usage Attribution
+algolia:
+  tags:
+  - usage attribution
+  - cost attribution
 aliases:
-    - /account_management/billing/advanced_usage_reporting/
-    - /account_management/billing/custom_usage_reporitng/
+- /ja/account_management/billing/advanced_usage_reporting/
+- /ja/account_management/billing/custom_usage_reporitng/
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Plan and Usage Settings
-algolia:
-  tags: [usage attribution, cost attribution]
+title: Usage Attribution
 ---
 
 ## 概要
@@ -106,7 +108,7 @@ For direct billing customers, month-end cost attribution reports are generated a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
-[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
-[3]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
-[4]: https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-cost-attribution
+[1]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-monthly-usage-attribution
+[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
+[3]: https://docs.datadoghq.com/ja/getting_started/tagging/#define-tags
+[4]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-monthly-cost-attribution

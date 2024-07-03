@@ -1,9 +1,9 @@
 ---
-title: API セキュリティインベントリ
 further_reading:
-- link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
+- link: https://www.datadoghq.com/blog/primary-risks-to-api-security/
   tag: Blog
   text: Mitigate the primary risks to API security
+title: API セキュリティインベントリ
 ---
 
 ## 概要
@@ -114,10 +114,10 @@ By default, API Security Inventory evaluates every tenth request (10% sample rat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[2]: /security/application_security/threats/
-[3]: /security/application_security/software_composition_analysis/
-[4]: /agent/remote_config/
-[5]: /security/application_security/enabling/
-[6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[1]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /ja/security/application_security/threats/
+[3]: /ja/security/application_security/software_composition_analysis/
+[4]: /ja/agent/remote_config/
+[5]: /ja/security/application_security/enabling/
+[6]: /ja/security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis

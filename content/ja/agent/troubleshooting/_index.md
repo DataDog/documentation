@@ -1,8 +1,7 @@
 ---
-title: Agent Troubleshooting
 aliases:
-    - /agent/faq/agent-s-are-no-longer-reporting-data
-    - /agent/faq/common-windows-agent-installation-error-1721
+- /ja/agent/faq/agent-s-are-no-longer-reporting-data
+- /ja/agent/faq/common-windows-agent-installation-error-1721
 further_reading:
 - link: /agent/troubleshooting/hostname_containers/
   tag: Documentation
@@ -28,6 +27,7 @@ further_reading:
 - link: /agent/troubleshooting/high_memory_usage/
   tag: Documentation
   text: High CPU or memory consumption
+title: Agent Troubleshooting
 ---
 
 <mrk mid="39" mtype="seg">Datadog Agent をまだインストールしていない場合は、[こちら][1]のページにアクセスし、指示に従ってインストールを進めてください。</mrk><mrk mid="40" mtype="seg">Agent をインストールしたばかりの場合は、メトリクスが表示されるまでに数分かかることがあります。</mrk><mrk mid="41" mtype="seg">メトリクスについて確認する場合は、まず[メトリクスエクスプローラー][2]をご覧ください。</mrk>
@@ -52,12 +52,12 @@ further_reading:
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://app.datadoghq.com/metric/explorer
-[3]: /agent/troubleshooting/hostname_containers/
-[4]: /agent/configuration/proxy/
+[3]: /ja/agent/troubleshooting/hostname_containers/
+[4]: /ja/agent/configuration/proxy/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /agent/troubleshooting/site/
-[7]: /agent/configuration/agent-commands/#agent-status-and-information
-[8]: /agent/configuration/agent-log-files/
-[9]: /agent/troubleshooting/debug_mode/
-[10]: /help/
-[11]: /agent/troubleshooting/send_a_flare/
+[6]: /ja/agent/troubleshooting/site/
+[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[8]: /ja/agent/configuration/agent-log-files/
+[9]: /ja/agent/troubleshooting/debug_mode/
+[10]: /ja/help/
+[11]: /ja/agent/troubleshooting/send_a_flare/

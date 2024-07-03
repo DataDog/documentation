@@ -1,8 +1,8 @@
 ---
-title: Dual Ship Logs
-disable_toc: false
 aliases:
-    -  /observability_pipelines/dual_ship_logs/datadog_agent
+- /ja/observability_pipelines/dual_ship_logs/datadog_agent
+disable_toc: false
+title: Dual Ship Logs
 ---
 
 ## 概要
@@ -17,6 +17,6 @@ Select a source to get started:
 - [Splunk Heavy and Universal Forwarders (TCP)][2]
 - [Sumo Logic Hosted Collector][3]
 
-[1]: /observability_pipelines/dual_ship_logs/splunk_hec
-[2]: /observability_pipelines/dual_ship_logs/splunk_tcp
-[3]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
+[1]: /ja/observability_pipelines/dual_ship_logs/splunk_hec
+[2]: /ja/observability_pipelines/dual_ship_logs/splunk_tcp
+[3]: /ja/observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector

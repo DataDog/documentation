@@ -1,19 +1,19 @@
 ---
-title: Troubleshooting iOS SDK issues
-kind: documentation
-description: Learn how to troubleshoot issues with iOS Monitoring.
 aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+- /ja/real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: ios
-type: multi-code-lang
 code_lang_weight: 20
+description: Learn how to troubleshoot issues with iOS Monitoring.
 further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: ソースコード
-    text: Source code for dd-sdk-ios
-  - link: /real_user_monitoring
-    tag: Documentation
-    text: Datadog Real User Monitoring
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: ソースコード
+  text: Source code for dd-sdk-ios
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Datadog Real User Monitoring
+kind: documentation
+title: Troubleshooting iOS SDK issues
+type: multi-code-lang
 ---
 
 ## 概要
@@ -91,8 +91,8 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
+[1]: /ja/help
+[2]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
 [3]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogInternal/Sources/NetworkInstrumentation/URLSession/DatadogURLSessionDelegate.swift#L14
 [4]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1643148-urlsession
 [5]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411610-urlsession

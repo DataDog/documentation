@@ -35,8 +35,8 @@ Datadog-Azure インテグレーションタイルを使用して、Datadog に�
 課金に関するご質問は、[カスタマーサクセス][3]マネージャーにお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-[2]: /getting_started/tagging/using_tags/#integrations
-[3]: /infrastructure/
-[4]: /account_management/billing/custom_metrics/?tab=countrate
-[5]: /integrations/azure#configuration
-[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported 
+[2]: /ja/getting_started/tagging/using_tags/#integrations
+[3]: /ja/infrastructure/
+[4]: /ja/account_management/billing/custom_metrics/?tab=countrate
+[5]: /ja/integrations/azure#configuration
+[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported

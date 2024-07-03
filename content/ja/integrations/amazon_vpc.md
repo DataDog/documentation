@@ -1,30 +1,30 @@
 ---
-"aliases": []
-"categories":
+aliases: []
+categories:
 - aws
 - cloud
 - log collection
 - network
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Gather your Amazon VPC logs."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_vpc/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/vpc-security-flowlogs/"
-  "tag": Blog
-  "text": Monitor flow logs to ensure VPC security with Datadog
-"git_integration_title": "amazon_vpc"
-"has_logo": false
-"integration_id": ""
-"integration_title": "Amazon VPC"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_vpc"
-"public_title": "Datadog-Amazon VPC Integration"
-"short_description": "Gather your Amazon VPC logs."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Gather your Amazon VPC logs.
+doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/vpc-security-flowlogs/
+  tag: Blog
+  text: Monitor flow logs to ensure VPC security with Datadog
+git_integration_title: amazon_vpc
+has_logo: false
+integration_id: ''
+integration_title: Amazon VPC
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_vpc
+public_title: Datadog-Amazon VPC Integration
+short_description: Gather your Amazon VPC logs.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -112,13 +112,12 @@ Need help? Contact [Datadog support][3].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs
-[3]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/help/
 [4]: https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-amazon-vpc-flow-logs-kinesis-data-firehose/
-[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[6]: https://docs.datadoghq.com/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/logs/explorer/
-[8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/ja/logs/explorer/
+[8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
-

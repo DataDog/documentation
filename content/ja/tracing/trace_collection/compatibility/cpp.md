@@ -1,17 +1,17 @@
 ---
-title: C++ Compatibility Requirements
-kind: documentation
-description: 'Compatibility Requirements for the C++ tracer'
 aliases:
-  - /tracing/compatibility_requirements/cpp
-  - /tracing/setup_overview/compatibility_requirements/cpp
+- /ja/tracing/compatibility_requirements/cpp
+- /ja/tracing/setup_overview/compatibility_requirements/cpp
 code_lang: cpp
-type: multi-code-lang
 code_lang_weight: 60
+description: Compatibility Requirements for the C++ tracer
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/cpp
-      tag: Documentation
-      text: Instrument Your Application
+- link: tracing/trace_collection/dd_libraries/cpp
+  tag: Documentation
+  text: Instrument Your Application
+kind: documentation
+title: C++ Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Compatibility

@@ -1,23 +1,23 @@
 ---
-title: Managing Multiple-Organization Accounts
 aliases:
-  - /guides/multiaccountorg
-  - /account_management/mult_account
-  - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
-  - /account_management/multi_organisations
+- /ja/guides/multiaccountorg
+- /ja/account_management/mult_account
+- /ja/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
+- /ja/account_management/multi_organisations
 further_reading:
-- link: "/account_management/saml/"
-  tag: "Documentation"
-  text: "Datadog アカウントで SAML を設定"
-- link: "/account_management/billing/usage_details"
-  tag: "Documentation"
-  text: "使用量の詳細について"
-- link: "/account_management/billing/usage_attribution"
-  tag: "Documentation"
-  text: "使用属性のセットアップ"
-- link: "/account_management/org_settings/cross_org_visibility"
-  tag: "Documentation"
-  text: "Cross-Organization Visibility"
+- link: /account_management/saml/
+  tag: Documentation
+  text: Datadog アカウントで SAML を設定
+- link: /account_management/billing/usage_details
+  tag: Documentation
+  text: 使用量の詳細について
+- link: /account_management/billing/usage_attribution
+  tag: Documentation
+  text: 使用属性のセットアップ
+- link: /account_management/org_settings/cross_org_visibility
+  tag: Documentation
+  text: Cross-Organization Visibility
+title: Managing Multiple-Organization Accounts
 ---
 
 ## 概要
@@ -156,17 +156,17 @@ The parent-organization can view the usage of child-organizations by existing ta
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /account_management/#managing-your-organizations
-[3]: /account_management/org_settings/cross_org_visibility/
+[1]: /ja/help/
+[2]: /ja/account_management/#managing-your-organizations
+[3]: /ja/account_management/org_settings/cross_org_visibility/
 [4]: https://app.datadoghq.com/account/new_org
-[5]: /account_management/rbac/permissions/#advanced-permissions
+[5]: /ja/account_management/rbac/permissions/#advanced-permissions
 [6]: mailto:success@datadoghq.com
-[7]: /api/
+[7]: /ja/api/
 [8]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[9]: /monitors/manage/
-[10]: /account_management/saml/
+[9]: /ja/monitors/manage/
+[10]: /ja/account_management/saml/
 [11]: https://app.datadoghq.com/billing/usage?cost_summary
-[12]: /account_management/plan_and_usage/usage_details/
-[13]: /account_management/billing/usage_attribution/
+[12]: /ja/account_management/plan_and_usage/usage_details/
+[13]: /ja/account_management/billing/usage_attribution/
 [14]: https://app.datadoghq.com/billing/usage-attribution

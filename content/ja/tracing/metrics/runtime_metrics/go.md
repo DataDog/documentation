@@ -1,21 +1,22 @@
 ---
-title: Go Runtime Metrics
-description: "Gain additional insights into your Go application's performance with the runtime metrics associated to your traces."
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 60
 aliases:
-- /tracing/runtime_metrics/go
+- /ja/tracing/runtime_metrics/go
+code_lang: go
+code_lang_weight: 60
+description: Gain additional insights into your Go application's performance with
+  the runtime metrics associated to your traces.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+title: Go Runtime Metrics
+type: multi-code-lang
 ---
 
 ## 自動コンフィギュレーション
@@ -55,10 +56,10 @@ APM サービス詳細画面にこれらのメトリクスを表示するだけ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /developers/dogstatsd/#setup
+[2]: /ja/developers/dogstatsd/#setup
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
-[4]: /agent/docker/#dogstatsd-custom-metrics
-[5]: /developers/dogstatsd/?tab=kubernetes#agent
-[6]: /agent/amazon_ecs/#create-an-ecs-task
+[4]: /ja/agent/docker/#dogstatsd-custom-metrics
+[5]: /ja/developers/dogstatsd/?tab=kubernetes#agent
+[6]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30587/go-runtime-metrics
-[8]: /developers/dogstatsd/unix_socket/
+[8]: /ja/developers/dogstatsd/unix_socket/

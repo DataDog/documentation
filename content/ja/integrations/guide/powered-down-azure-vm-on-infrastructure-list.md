@@ -1,25 +1,24 @@
 ---
-title: Powered-down Azure VMs on the Infrastructure List
-kind: guide
 aliases:
-  - /integrations/faq/my-Azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
+- /ja/integrations/faq/my-Azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
 further_reading:
 - link: /account_management/billing/azure/
   tag: FAQ
   text: Azure integration billing
-- link: "/account_management/billing/azure/#azure-vm-exclusion"
+- link: /account_management/billing/azure/#azure-vm-exclusion
   tag: Documentation
   text: Filter Azure VMs by tag
+title: Powered-down Azure VMs on the Infrastructure List
 ---
 
-When you power down your VMs in Azure, the Datadog Azure integration still collects the metric `azure.vm.status` for that VM. This metric is tagged with `status:running`, `status:not_running`, or `status:unknown`.
+Azure の VM をパワーダウンしても、Datadog Azure インテグレーションは、その VM のメトリクス `azure.vm.status` を収集します。このメトリクスには、`status:running`、`status:not_running`、または `status:unknown` というタグが付けられています。
 
-This is intended, but causes the VM to remain on your infrastructure list. If your VM reports only this metric, it does not count towards your billable host-count. See the Datadog [Billing section][1] for more info on billing matters.
+これは意図的なものですが、その VM はインフラストラクチャーリストに残ります。VM がこのメトリクスのみを報告する場合、請求可能なホスト数にはカウントされません。請求に関する詳細については、Datadog [請求セクション][1]を参照してください。
 
-If you destroy your Azure VM, it phases out of your infrastructure list within 3 hours.
+Azure VM を破壊した場合、3 時間以内にインフラストラクチャーリストからフェイズアウトします。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/billing/
+[1]: /ja/account_management/billing/

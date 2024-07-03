@@ -29,8 +29,8 @@ When you're done, click **Save key** to create a new API key. Make sure to write
 
 If you have any questions or issues with creating an API key, [contact Cloudcraft's support team through the in-app beacon][5].
 
-[1]: /cloudcraft/api/
-[2]: /cloudcraft/account-management/roles-and-permissions/
+[1]: /ja/cloudcraft/api/
+[2]: /ja/cloudcraft/account-management/roles-and-permissions/
 [3]: https://www.cloudcraft.co/pricing
 [4]: https://en.wikipedia.org/wiki/Principle_of_least_privilege
 [5]: https://app.cloudcraft.co/support

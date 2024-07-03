@@ -1,56 +1,60 @@
 ---
-title: RUM & Session Replay
-kind: documentation
-description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
-disable_sidebar: true
+algolia:
+  tags:
+  - rum
+  - real user monitoring
 aliases:
-  - /real_user_monitoring/installation
-  - /real_user_monitoring/faq/
+- /ja/real_user_monitoring/installation
+- /ja/real_user_monitoring/faq/
+cascade:
+  algolia:
+    rank: 70
+description: Visualize, observe, and analyze the performance of your front-end applications
+  as seen by your users.
+disable_sidebar: true
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+- link: https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring
   tag: Release Notes
   text: Check out the latest Datadog RUM releases! (App login required)
-- link: "https://dtdg.co/fe"
+- link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Join an interactive session to gain insights through Real User Monitoring
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
   text: Introducing Datadog Real User Monitoring
-- link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
+- link: https://www.datadoghq.com/blog/datadog-mobile-rum/
   tag: Blog
   text: Improve mobile user experience with Datadog Mobile Real User Monitoring
-- link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
+- link: https://www.datadoghq.com/blog/mobile-monitoring-best-practices/
   tag: Blog
   text: Best practices for monitoring mobile app performance
-- link: "https://www.datadoghq.com/blog/error-tracking/"
+- link: https://www.datadoghq.com/blog/error-tracking/
   tag: Blog
   text: Make sense of application issues with Datadog Error Tracking
-- link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
+- link: https://www.datadoghq.com/blog/unify-apm-rum-datadog/
   tag: Blog
   text: Unify APM and RUM data for full-stack visibility
-- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+- link: https://www.datadoghq.com/blog/datadog-geomaps/
   tag: Blog
   text: Use geomaps to visualize your app data by location
-- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
+- link: https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection
   tag: Blog
   text: Get better RUM data with our custom React components
-- link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
+- link: https://www.datadoghq.com/blog/hybrid-app-monitoring/
   tag: Blog
   text: Monitor your hybrid mobile applications with Datadog
-- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
+- link: https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/
   tag: Blog
-  text: How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues
-- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  text: How Datadog's Technical Solutions team uses RUM, Session Replay, and Error
+    Tracking to resolve customer issues
+- link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
   tag: Blog
   text: Best practices for monitoring static web applications
 - link: /real_user_monitoring/browser/data_collected/
   tag: Documentation
   text: RUM Browser Data Collected
-algolia:
-  tags: [rum, real user monitoring]
-cascade:
-    algolia:
-        rank: 70
+kind: documentation
+title: RUM & Session Replay
 ---
 
 {{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
@@ -168,16 +172,16 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
-[2]: /real_user_monitoring/platform/dashboards/
-[3]: /real_user_monitoring/explorer/visualize/
-[4]: /monitors/types/real_user_monitoring/
-[5]: /real_user_monitoring/platform/connect_rum_and_traces/
-[6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[8]: /real_user_monitoring/ios/mobile_vitals/
-[9]: /real_user_monitoring/android/mobile_vitals/
-[10]: /real_user_monitoring/ios/web_view_tracking/
-[11]: /real_user_monitoring/android/web_view_tracking/
-[12]: /real_user_monitoring/session_replay/browser/
-[13]: /real_user_monitoring/session_replay/browser/privacy_options/
-[14]: /real_user_monitoring/session_replay/browser/developer_tools/
+[2]: /ja/real_user_monitoring/platform/dashboards/
+[3]: /ja/real_user_monitoring/explorer/visualize/
+[4]: /ja/monitors/types/real_user_monitoring/
+[5]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
+[6]: /ja/real_user_monitoring/error_tracking/
+[7]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[8]: /ja/real_user_monitoring/ios/mobile_vitals/
+[9]: /ja/real_user_monitoring/android/mobile_vitals/
+[10]: /ja/real_user_monitoring/ios/web_view_tracking/
+[11]: /ja/real_user_monitoring/android/web_view_tracking/
+[12]: /ja/real_user_monitoring/session_replay/browser/
+[13]: /ja/real_user_monitoring/session_replay/browser/privacy_options/
+[14]: /ja/real_user_monitoring/session_replay/browser/developer_tools/

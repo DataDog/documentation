@@ -1,9 +1,9 @@
 ---
-title: Upgrade to Datadog Agent v7
 further_reading:
 - link: /agent/guide/python-3/
   tag: Documentation
   text: Migrate your Custom Checks from python 2 to python 3
+title: Upgrade to Datadog Agent v7
 ---
 
 <div class="alert alert-info">
@@ -61,7 +61,7 @@ Agent をバージョン 5 からバージョン 7 にアップグレードす�
 1. [手動のアップグレードプロセス][1]に従って、Agent をバージョン 6 にアップグレードします。
 2. [Agent v6 から Agent v7](#Agent v6 から Agent v7) へのアップグレード手順に従います。
 
-[1]: /agent/versions/upgrade_to_agent_v6/?tab=windows#manual-upgrade
+[1]: /ja/agent/versions/upgrade_to_agent_v6/?tab=windows#manual-upgrade
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
@@ -80,4 +80,4 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/python-3/
+[1]: /ja/agent/guide/python-3/

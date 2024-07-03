@@ -41,7 +41,7 @@ title: Setting up Agentless Scanning for Cloud Security Management
 {{< img src="/security/agentless_scanning/agentless_quickstart_2.png" alt="各クラウドアカウントにデプロイされているエージェントレススキャナを示すエージェントレススキャンの図" width="90%" >}}
 
 [3]: https://app.datadoghq.com/security/csm/vm
-[4]: /agent/remote_config/?tab=configurationyamlfile#setup
+[4]: /ja/agent/remote_config/?tab=configurationyamlfile#setup
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -69,7 +69,7 @@ title: Setting up Agentless Scanning for Cloud Security Management
 
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
-[3]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts/?tab=aws
+[3]: /ja/security/cloud_security_management/setup/csm_enterprise/cloud_accounts/?tab=aws
 [4]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
 
 {{% /tab %}}
@@ -107,9 +107,9 @@ title: Setting up Agentless Scanning for Cloud Security Management
 1. リモート構成に構成済みの API キーを選択します。リモート構成が有効になっていない API キーを入力すると、選択時に自動的に有効になります。
 1. **Launch CloudFormation Template** をクリックします。テンプレートにはエージェントレススキャナのデプロイと管理に必要なすべての[権限][3]が含まれており、スキャンを受信するにはテンプレートが正常に実行される必要があります。
 
-[1]: /integrations/amazon_web_services/
-[2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
-[3]: /security/cloud_security_management/setup/agentless_scanning/?tab=agentlessscanningnewawsaccount#permissions
+[1]: /ja/integrations/amazon_web_services/
+[2]: /ja/integrations/amazon_web_services/?tab=roledelegation#resource-collection
+[3]: /ja/security/cloud_security_management/setup/agentless_scanning/?tab=agentlessscanningnewawsaccount#permissions
 
 {{% /tab %}}
 
@@ -149,10 +149,9 @@ AWS コンソールにアクセスし、エージェントレススキャン用�
 
 [Terraform][9] のアンインストールの手順に従ってください。
 
-[1]: /security/vulnerabilities
+[1]: /ja/security/vulnerabilities
 [3]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [4]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 [8]: mailto:success@datadoghq.com
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
-

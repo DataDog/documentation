@@ -1,5 +1,4 @@
 ---
-title: Application Threat Management
 further_reading:
 - link: /security/application_security/threats/add-user-info/
   tag: Documentation
@@ -13,6 +12,7 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: How ASM Works
+title: Application Threat Management
 ---
 
 {{< site-region region="gov" >}}
@@ -51,8 +51,8 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 
 [1]: https://app.datadoghq.com/services?lens=Security
 [2]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&viz=stream&start=1694726477747&end=1695331277747&paused=false
-[4]: /security/application_security/how-appsec-works/
-[5]: /security/application_security/threats/inapp_waf_rules/
-[6]: /security/application_security/threats/custom_rules/
+[4]: /ja/security/application_security/how-appsec-works/
+[5]: /ja/security/application_security/threats/inapp_waf_rules/
+[6]: /ja/security/application_security/threats/custom_rules/
 [7]: https://app.datadoghq.com/security/appsec?
-[8]: /security/application_security/threats/security_signals/
+[8]: /ja/security/application_security/threats/security_signals/

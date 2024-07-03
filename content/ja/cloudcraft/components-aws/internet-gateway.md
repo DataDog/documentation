@@ -1,5 +1,5 @@
 ---
-title: "Internet Gateway Component"
+title: Internet Gateway Component
 ---
 ## 概要
 
@@ -59,4 +59,4 @@ The following is an example JSON of an Internet Gateway component:
 The internet gateway component can only be added to [VPCs][2].
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
+[2]: /ja/cloudcraft/components-aws/vpc/

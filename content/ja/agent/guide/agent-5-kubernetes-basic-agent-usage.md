@@ -1,8 +1,8 @@
 ---
-title: Kubernetes Basic Agent Usage in Agent v5
-private: true
 aliases:
-  - /agent/faq/agent-5-kubernetes-basic-agent-usage
+- /ja/agent/faq/agent-5-kubernetes-basic-agent-usage
+private: true
+title: Kubernetes Basic Agent Usage in Agent v5
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード" >}}
@@ -281,18 +281,18 @@ Checks
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gcr.io/datadoghq/docker-dd-agent
-[3]: /#host-setup
-[4]: /integrations/docker_daemon/
-[5]: /agent/kubernetes/
+[3]: /ja/#host-setup
+[4]: /ja/integrations/docker_daemon/
+[5]: /ja/agent/kubernetes/
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
-[9]: /getting_started/agent/autodiscovery/
+[9]: /ja/getting_started/agent/autodiscovery/
 [10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
-[11]: /agent/configuration/agent-commands/#agent-status-and-information
+[11]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics
 [13]: https://quay.io/coreos/kube-state-metrics
 [14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [15]: https://yum.datadoghq.com/stable/6/x86_64
-[16]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
+[16]: /ja/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/conf.yaml.example

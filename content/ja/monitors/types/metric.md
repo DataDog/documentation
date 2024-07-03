@@ -1,10 +1,9 @@
 ---
-title: Metric Monitor
-description: "Compare values of a metric with a user defined threshold"
 aliases:
-- /monitors/monitor_types/metric
-- /monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter
-- /monitors/create/types/metric
+- /ja/monitors/monitor_types/metric
+- /ja/monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter
+- /ja/monitors/create/types/metric
+description: Compare values of a metric with a user defined threshold
 further_reading:
 - link: /monitors/notify/
   tag: Documentation
@@ -18,6 +17,7 @@ further_reading:
 - link: /monitors/types/change-alert
   tag: Documentation
   text: Troubleshoot change alert monitors
+title: Metric Monitor
 ---
 
 ## 概要
@@ -37,7 +37,7 @@ On each alert evaluation, Datadog calculates the average, minimum, maximum, or s
 
 For more information, see the [Set alert conditions](#set-alert-conditions) section.
 
-[1]: /metrics/distributions/
+[1]: /ja/metrics/distributions/
 {{% /tab %}}
 {{% tab "変化" %}}
 
@@ -49,7 +49,7 @@ For more information, see the [Set alert conditions](#set-alert-conditions) sect
 
 For more information, see the [Change alert monitors][1] guide.
 
-[1]: /monitors/types/change-alert/
+[1]: /ja/monitors/types/change-alert/
 {{% /tab %}}
 {{% tab "異常" %}}
 
@@ -61,7 +61,7 @@ For more information, see the [Change alert monitors][1] guide.
 
 For more information, see the [Anomaly Monitor][1] page.
 
-[1]: /monitors/types/anomaly/
+[1]: /ja/monitors/types/anomaly/
 {{% /tab %}}
 {{% tab "外れ値" %}}
 
@@ -71,7 +71,7 @@ For more information, see the [Anomaly Monitor][1] page.
 
 For more information, see the [Outlier Monitor][1] page.
 
-[1]: /monitors/types/outlier/
+[1]: /ja/monitors/types/outlier/
 {{% /tab %}}
 {{% tab "予測値" %}}
 
@@ -81,7 +81,7 @@ For more information, see the [Outlier Monitor][1] page.
 
 For more information, see the [Forecast Monitor][1] page.
 
-[1]: /monitors/types/forecasts/
+[1]: /ja/monitors/types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -216,9 +216,9 @@ For instructions on the **Configure notifications and automations** section, see
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/create
-[2]: /dashboards/querying/#advanced-graphing
-[3]: /monitors/guide/as-count-in-monitor-evaluations/
-[5]: /monitors/configuration/?tab=thresholdalert#evaluation-window
-[6]: /monitors/configuration/#advanced-alert-conditions
-[7]: /monitors/notify/
-[8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
+[2]: /ja/dashboards/querying/#advanced-graphing
+[3]: /ja/monitors/guide/as-count-in-monitor-evaluations/
+[5]: /ja/monitors/configuration/?tab=thresholdalert#evaluation-window
+[6]: /ja/monitors/configuration/#advanced-alert-conditions
+[7]: /ja/monitors/notify/
+[8]: /ja/monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations

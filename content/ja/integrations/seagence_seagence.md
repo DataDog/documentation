@@ -1,74 +1,75 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "seagence-seagence"
-"app_uuid": "194f32bb-fc70-41e5-a742-bcacc3db13ed"
-"assets": {}
-"author":
-  "homepage": "https://www.seagence.com"
-  "name": Seagence Technologies
-  "sales_email": sales@seagence.com
-  "support_email": support@seagence.com
-  "vendor_id": seagence
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: seagence-seagence
+app_uuid: 194f32bb-fc70-41e5-a742-bcacc3db13ed
+assets: {}
+author:
+  homepage: https://www.seagence.com
+  name: Seagence Technologies
+  sales_email: sales@seagence.com
+  support_email: support@seagence.com
+  vendor_id: seagence
+categories:
 - alerting
 - automation
 - marketplace
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "seagence_seagence"
-"integration_id": "seagence-seagence"
-"integration_title": "seagence"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "seagence_seagence"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.seagence.seagence
-  "product_id": seagence
-  "short_description": Seagence license per host per month
-  "tag": host
-  "unit_label": ホスト
-  "unit_price": !!int "21"
-"public_title": "seagence"
-"short_description": "Realtime Defect Detection & Resolution tool that eliminates debugging."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: seagence_seagence
+integration_id: seagence-seagence
+integration_title: seagence
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: seagence_seagence
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.seagence.seagence
+  product_id: seagence
+  short_description: Seagence license per host per month
+  tag: host
+  unit_label: ホスト
+  unit_price: 21
+public_title: seagence
+short_description: Realtime Defect Detection & Resolution tool that eliminates debugging.
+supported_os:
 - any
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Any"
-  - "Category::Alerting"
-  - "Category::Automation"
-  - "Category::Marketplace"
-  - "Category::Developer Tools"
-  - "Offering::Software License"
-  "configuration": "README.md#Setup"
-  "description": Realtime Defect Detection & Resolution tool that eliminates debugging.
-  "media":
-  - "caption": Seagence Defects Overview dashboard
-    "image_url": images/datadog-dashboard.png
-    "media_type": image
-  - "caption": Transactions timeline view highlights defect and success transactions
-    "image_url": images/timeline.png
-    "media_type": image
-  - "caption": Seagence's clustering groups defect and success transactions into separate clusters
-    "image_url": images/defect-and-success-clusters.png
-    "media_type": image
-  - "caption": List of Transactions and Exceptions
-    "image_url": images/list-of-transactions-and-exceptions.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": seagence
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Any
+  - Category::Alerting
+  - Category::Automation
+  - Category::Marketplace
+  - Category::Developer Tools
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: Realtime Defect Detection & Resolution tool that eliminates debugging.
+  media:
+  - caption: Seagence Defects Overview dashboard
+    image_url: images/datadog-dashboard.png
+    media_type: image
+  - caption: Transactions timeline view highlights defect and success transactions
+    image_url: images/timeline.png
+    media_type: image
+  - caption: Seagence's clustering groups defect and success transactions into separate
+      clusters
+    image_url: images/defect-and-success-clusters.png
+    media_type: image
+  - caption: List of Transactions and Exceptions
+    image_url: images/list-of-transactions-and-exceptions.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: seagence
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

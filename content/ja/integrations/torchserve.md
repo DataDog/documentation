@@ -1,73 +1,73 @@
 ---
-"app_id": "torchserve"
-"app_uuid": "d5400c22-0f0a-4ce4-894d-c3cda48140e9"
-"assets":
-  "dashboards":
-    "torchserve_overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
+app_id: torchserve
+app_uuid: d5400c22-0f0a-4ce4-894d-c3cda48140e9
+assets:
+  dashboards:
+    torchserve_overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check:
       - torchserve.openmetrics.inference.count
       - torchserve.management_api.models
-      "metadata_path": metadata.csv
-      "prefix": torchserve.
-    "process_signatures":
+      metadata_path: metadata.csv
+      prefix: torchserve.
+    process_signatures:
     - torchserve
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10357"
-    "source_type_name": TorchServe
-  "monitors":
-    "error_ratio": assets/monitors/error_ratio.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10357
+    source_type_name: TorchServe
+  monitors:
+    error_ratio: assets/monitors/error_ratio.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - configuration & deployment
 - log collection
 - ai/ml
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/torchserve/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "torchserve"
-"integration_id": "torchserve"
-"integration_title": "TorchServe"
-"integration_version": "2.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "torchserve"
-"public_title": "TorchServe"
-"short_description": "Monitor the health and performance of TorchServe"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/torchserve/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: torchserve
+integration_id: torchserve
+integration_title: TorchServe
+integration_version: 2.2.1
+is_public: true
+manifest_version: 2.0.0
+name: torchserve
+public_title: TorchServe
+short_description: Monitor the health and performance of TorchServe
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::AI/ML"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of TorchServe
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": TorchServe
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::AI/ML
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor the health and performance of TorchServe
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TorchServe
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -250,7 +250,7 @@ instances:
 
 構成変更後、[Agent を再起動][1]します。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -373,13 +373,13 @@ For more information about the logging configuration with TorchServe, see the [o
 
 
 [1]: https://pytorch.org/serve/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://pytorch.org/serve/inference_api.html
 [5]: https://pytorch.org/serve/management_api.html
 [6]: https://pytorch.org/serve/metrics_api.html
 [7]: https://pytorch.org/serve/configuration.html#configure-torchserve-listening-address-and-port
 [8]: https://github.com/DataDog/integrations-core/blob/master/torchserve/datadog_checks/torchserve/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://pytorch.org/serve/logging.html?highlight=logs
-[11]: https://docs.datadoghq.com/help/
+[11]: https://docs.datadoghq.com/ja/help/

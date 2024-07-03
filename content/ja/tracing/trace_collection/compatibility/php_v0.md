@@ -1,11 +1,11 @@
 ---
-title: (Legacy) PHP Compatibility Requirements
-kind: ドキュメント
-description: 'PHP トレーサーの互換性要件です'
+description: PHP トレーサーの互換性要件です
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/php
-      tag: ドキュメント
-      text: アプリケーションのインスツルメンテーション
+- link: tracing/trace_collection/dd_libraries/php
+  tag: ドキュメント
+  text: アプリケーションのインスツルメンテーション
+kind: ドキュメント
+title: (Legacy) PHP Compatibility Requirements
 ---
 <div class="alert alert-warning">This documentation is for the PHP tracer v0.x. If you are looking for the PHP tracer v1.x documentation, see the latest <a href="/tracing/trace_collection/compatibility/php/">PHP Compatibility Requirements
 </a> documentation.</div>
@@ -178,4 +178,4 @@ Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcnt
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: https://www.datadoghq.com/support/
-[3]: /help
+[3]: /ja/help

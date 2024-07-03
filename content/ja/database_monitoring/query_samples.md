@@ -1,6 +1,6 @@
 ---
-title: Exploring Query Samples
-description: Get information about queries currently running and find problematic outliers
+description: Get information about queries currently running and find problematic
+  outliers
 further_reading:
 - link: /database_monitoring/
   tag: Documentation
@@ -11,7 +11,7 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: Documentation
   text: Troubleshooting
-
+title: Exploring Query Samples
 ---
 
 The [Samples page][1] helps you understand which queries were running at a given time. Compare each execution to the average performance of the query and related queries.
@@ -90,4 +90,4 @@ The explain plan also shows measures for each node (step) in the plan: startup c
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/databases/samples
-[2]: /database_monitoring/data_collected/#which-queries-are-tracked
+[2]: /ja/database_monitoring/data_collected/#which-queries-are-tracked

@@ -1,10 +1,9 @@
 ---
-title: Cluster Agent Troubleshooting
 aliases:
-- /agent/cluster_agent/troubleshooting
-- /containers/cluster_agent/troubleshooting
+- /ja/agent/cluster_agent/troubleshooting
+- /ja/containers/cluster_agent/troubleshooting
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+- link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
   text: Introducing the Datadog Cluster Agent
 - link: /containers/kubernetes/installation/
@@ -13,6 +12,7 @@ further_reading:
 - link: /containers/kubernetes/integrations/
   tag: Documentation
   text: Custom Integrations
+title: Cluster Agent Troubleshooting
 ---
 
 このドキュメントには、次のコンポーネントのトラブルシューティング情報が記載されています。

@@ -1,7 +1,7 @@
 ---
-title: Beta Functions
 aliases:
-    - /graphing/functions/beta/
+- /ja/graphing/functions/beta/
+title: Beta Functions
 ---
 
 ベータ関数は、クエリ用 JSON を直接編集することによって使用できます。

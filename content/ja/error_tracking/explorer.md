@@ -1,11 +1,11 @@
 ---
-title: Error Tracking Explorer
-kind: documentation
 description: Learn about the Error Tracking Explorer.
 further_reading:
 - link: /monitors/types/error_tracking
   tag: Documentation
   text: Learn about Error Tracking Monitors
+kind: documentation
+title: Error Tracking Explorer
 ---
 
 ## Overview
@@ -63,5 +63,5 @@ Each event generated is tagged with the version, the service, and the environmen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /events
-[2]: /monitors/types/event/
+[1]: /ja/events
+[2]: /ja/monitors/types/event/

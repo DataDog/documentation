@@ -1,5 +1,5 @@
 ---
-title: "Icon Component"
+title: Icon Component
 ---
 
 ## 概要

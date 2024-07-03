@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting Cloud Security Management Threats
 aliases:
-  - /security_platform/cloud_workload_security/troubleshooting/
-  - /security_platform/cloud_security_management/troubleshooting/
+- /ja/security_platform/cloud_workload_security/troubleshooting/
+- /ja/security_platform/cloud_security_management/troubleshooting/
 further_reading:
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities
   tag: Documentation
   text: Troubleshooting CSM Vulnerabilities
+title: Troubleshooting Cloud Security Management Threats
 ---
 
 ## 概要
@@ -87,4 +87,4 @@ DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[1]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7

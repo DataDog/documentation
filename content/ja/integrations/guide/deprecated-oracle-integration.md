@@ -1,9 +1,8 @@
 ---
 title: Configuring the Oracle Integration on Agent Versions Lower than 7.50.1
-kind: guide
 ---
 
-## Overview
+## 概要
 
 This guide describes setting up the Oracle integration on versions of the Datadog Agent lower than 7.50.1. For more information on the Oracle integration, including setting it up on newer Agent versions, see the [Oracle integration documentation][1].
 
@@ -11,20 +10,20 @@ This guide describes setting up the Oracle integration on versions of the Datado
 
 ### インストール
 
-#### Prerequisite
+#### 前提条件
 
-To use the Oracle integration you can either use the native client (no additional install steps required), or the Oracle Instant Client.
+Oracle インテグレーションを使用するためには、ネイティブクライアント (追加のインストール手順は不要)、または Oracle Instant Client のいずれかを使用できます。
 
 ##### Oracle Instant Client
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-1. Follow the [Oracle Instant Client installation for Linux][1].
+1. [Linux 用の Oracle Instant Client のインストール][1]に従ってください。
 
-2. Verify the following:
-    - Both the *Instant Client Basic* and *SDK* packages are installed. Find them on Oracle's [download page][2].
+2. 以下を確認してください。
+    - *Instant Client Basic* パッケージと *SDK* パッケージの両方がインストールされます。Oracle の[ダウンロードページ][2]にあります。
 
-        After the Instant Client libraries are installed, ensure the runtime linker can find the libraries. For example, using `ldconfig`:
+      Instant Client ライブラリのインストール後に、ランタイムリンカがライブラリを見つけることができることを確認します。たとえば、`ldconfig` を使用します。
 
        ```shell
        # Put the library location in an ld configuration file.
@@ -37,7 +36,7 @@ To use the Oracle integration you can either use the native client (no additiona
        sudo ldconfig
        ```
 
-    - Both packages are decompressed into a single directory that is available to all users on the given machine (for example, `/opt/oracle`):
+    - 両方のパッケージは、特定のマシン上のすべてのユーザーが使用できる単一のディレクトリ (たとえば、`/opt/oracle`) に解凍されます。
        ```shell
        mkdir -p /opt/oracle/ && cd /opt/oracle/
        unzip /opt/oracle/instantclient-basic-linux.x64-12.1.0.2.0.zip
@@ -49,45 +48,45 @@ To use the Oracle integration you can either use the native client (no additiona
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. Follow the [Oracle Windows installation guide][1] to configure your Oracle Instant Client.
+1. [Oracle Windows インストールガイド][1]に従って、Oracle Instant Client を構成します。
 
-2. Verify the following:
-    - The [Microsoft Visual Studio 2017 Redistributable][2] or the appropriate version is installed for the Oracle Instant Client.
+2. 以下を確認してください。
+    - [Microsoft Visual Studio 2017 再頒布可能パッケージ][2]または適切なバージョンが Oracle Instant Client にインストールされます。
 
     - Both the *Instant Client Basic* and *SDK* packages from Oracle's [download page][18] are installed.
 
-    - Both packages are extracted into a single directory that is available to all users on the given machine (for example, `C:\oracle`).
+    - 両方のパッケージは、特定のマシン上のすべてのユーザーが使用できる単一のディレクトリ (たとえば、`C:\oracle`) に抽出されます。
 
 [1]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
 [2]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
 {{% /tab %}}
 {{< /tabs >}}
 
-##### JDBC driver
+##### JDBC Driver
 
-*NOTE*: This method only works on Linux.
+*注*: この方法は Linux でのみ機能します。
 
-Java 8 or higher is required on your system for JPype, one of the libraries used by the Agent when using JDBC driver.
+Java 8 以降は、JDBC Driver を使用するときに Agent が使用するライブラリの 1 つである JPype のシステムに必要です。
 
 Once it is installed, complete the following steps:
 
-1. [Download the JDBC Driver][4] JAR file.
-2. Add the path to the downloaded file in your `$CLASSPATH` or the check configuration file under `jdbc_driver_path` (see the [sample oracle.yaml][5]).
+1. [JDBC Driver JAR ファイルをダウンロード][4]します。
+2. ダウンロードしたファイルのパスを `$CLASSPATH` に追加するか、チェックコンフィギュレーションファイルの `jdbc_driver_path` の下に追加します ([サンプル oracle.yaml][5] を参照)。
 
-#### Datadog user creation
+#### Datadog ユーザーの作成
 
 {{< tabs >}}
 {{% tab "Standalone" %}}
 Create a read-only `datadog` user with proper access to your Oracle Database Server. Connect to your Oracle database with an administrative user, such as `SYSDBA` or `SYSOPER`, and run:
 
 ```text
--- Enable Oracle Script.
+-- Oracle Script を有効にします。
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 
--- Create the datadog user. Replace the password placeholder with a secure password.
-CREATE USER datadog IDENTIFIED BY <PASSWORD>;
+-- Datadog ユーザーを作成します。パスワードのプレースホルダーは、安全なパスワードに置き換えてください。
+CREATE USER datadog IDENTIFIED BY <パスワード>;
 
--- Grant access to the datadog user.
+-- Datadog ユーザーにアクセス権を付与します。
 GRANT CONNECT TO datadog;
 GRANT SELECT ON GV_$PROCESS TO datadog;
 GRANT SELECT ON gv_$sysmetric TO datadog;
@@ -96,7 +95,7 @@ GRANT SELECT ON sys.dba_tablespaces TO datadog;
 GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
 ```
 
-**Note**: If you're using Oracle 11g, there's no need to run the following line:
+**注**: Oracle 11g を使用している場合、次の行を実行する必要はありません。
 
 ```text
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
@@ -104,9 +103,9 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 {{% /tab %}}
 
 {{% tab "Multi-tenant" %}}
-##### Oracle 12c or 19c
+##### Oracle 12c または 19c
 
-Log in to the root database as an Administrator to create a `datadog` user and grant permissions:
+管理者としてルートデータベースにログインして、`datadog` ユーザーを作成し、アクセス許可を付与します。
 
 ```text
 alter session set container = cdb$root;
@@ -153,10 +152,10 @@ To configure this check for an Agent running on a host:
         password: <PASSWORD>
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
 
-#### Only custom queries
+#### カスタムクエリのみ
 
 To skip default metric checks for an instance and only run custom queries with an existing metrics-gathering user, insert the tag `only_custom_queries` with a value of `true`. This allows a configured instance of the Oracle integration to prevent the system, process, and tablespace metrics from running, and allows custom queries to be run without having the permissions described in the [Datadog user creation](#datadog-user-creation) section. If this configuration entry is omitted, the user you specify must have those table permissions to run a custom query.
 
@@ -164,38 +163,38 @@ To skip default metric checks for an instance and only run custom queries with a
 init_config:
 
 instances:
-  ## @param server - string - required
-  ## The IP address or hostname of the Oracle Database Server.
+  ## @param server - 文字列 - 必須
+  ## Oracle Database Server の IP アドレスまたはホスト名。
   #
   - server: localhost:1521
 
-    ## @param service_name - string - required
-    ## The Oracle Database service name. To view the services available on your server,
-    ## run the following query:
+    ## @param service_name - 文字列 - 必須
+    ## Oracle Database サービス名。サーバーで利用可能なサービスを表示するには、
+    ## 次のクエリを実行します。
     ## `SELECT value FROM v$parameter WHERE name='service_names'`
     #
     service_name: "<SERVICE_NAME>"
 
-    ## @param username - string - required
-    ## The username for the user account.
+    ## @param username - 文字列 - 必須
+    ## ユーザーアカウントのユーザー名。
     #
     username: <USER>
 
-    ## @param password - string - required
-    ## The password for the user account.
+    ## @param password - 文字列 - 必須
+    ## ユーザーアカウントのパスワード。
     #
     password: "<PASSWORD>"
 
-    ## @param only_custom_queries - string - optional
-    ## Set this parameter to any value if you want to only run custom
-    ## queries for this instance.
+    ## @param only_custom_queries - 文字列 - 任意
+    ## このインスタンスに対してカスタムクエリのみを実行する場合は、
+    ## このパラメーターを任意の値に設定します。
     #
     only_custom_queries: true
 ```
 
-#### Connect to Oracle through TCPS
+#### TCPS による Oracle への接続
 
-1. To connect to Oracle through TCPS (TCP with SSL), uncomment the `protocol` configuration option and select `TCPS`. Update the `server` option to set the TCPS server to monitor.
+1. TCPS (TCP with SSL) を使って Oracle に接続するには、`protocol` 構成オプションのコメントを解除して、`TCPS` を選択します。`server` オプションを更新して、監視する TCPS サーバーを設定します。
 
     ```yaml
     init_config:
@@ -236,50 +235,50 @@ instances:
 
 2. Update the `sqlnet.ora`, `listener.ora`, and `tnsnames.ora` to allow TCPS connections on your Oracle Database.
 
-##### TCPS through Oracle without JDBC
+##### JDBC を使用しない Oracle 経由の TCPS
 
-If you are not using JDBC, verify that the Datadog Agent is able to connect to your database. Use the `sqlplus` command line tool with the information inputted in your configuration options:
+JDBC を使用していない場合、Datadog Agent がデータベースに接続できることを確認します。構成オプションに入力された情報を使って、`sqlplus` コマンドラインツールを使用します。
 
 ```shell
 sqlplus <USER>/<PASSWORD>@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCPS)(HOST=<HOST>)(PORT=<PORT>))(SERVICE_NAME=<SERVICE_NAME>)))
 ```
 
 When using the [Oracle Instant Client][5] connection, move three files to the `network/admin` directory of the client libraries used by your application:
-  * `tnsnames.ora`: Maps net service names used for application connection strings to your database services.
-  * `sqlnet.ora`: Configures Oracle Network settings.
-  * `cwallet.sso`: Enables SSL or TLS connections. Keep this file secure.
+  * `tnsnames.ora`: アプリケーションの接続文字列で使用されるネットサービス名をデータベースサービスにマッピングします。
+  * `sqlnet.ora`: Oracle Network の設定を構成します。
+  * `cwallet.sso`: SSL または TLS 接続を有効にします。このファイルの安全性を確保するようにしてください。
 
-##### TCPS through JDBC
+##### JDBC による TCPS
 
 If you are connecting to Oracle Database using JDBC, you also need to specify `jdbc_truststore_path`, `jdbc_truststore_type`, and `jdbc_truststore_password` (optional) if there is a password on the truststore.
 
-**Note**: `SSO` truststores don't require passwords.
+**注**: SSO のトラストストアはパスワードを必要としません。
 
 ```yaml
-    # In the `instances:` section
+    # `instances:` セクションで
     ...
 
-    ## @param jdbc_truststore_path - string - optional
-    ## The JDBC truststore file path.
+    ## @param jdbc_truststore_path - 文字列 - オプション
+    ## JDBC トラストストアのファイルパス。
     #
     jdbc_truststore_path: /path/to/truststore
 
-    ## @param jdbc_truststore_type - string - optional
-    ## The JDBC truststore file type. Supported truststore types include JKS, SSO, and PKCS12.
+    ## @param jdbc_truststore_type - 文字列 - オプション
+    ## JDBC トラストストアのファイルタイプ。サポートされているトラストストアのタイプには、JKS、SSO、および PKCS12 があります。
     #
     jdbc_truststore_type: SSO
 
-    ## @param jdbc_truststore_password - string - optional
-    ## The password for the truststore when connecting via JDBC.
+    ## @param jdbc_truststore_password - 文字列 - オプション
+    ## JDBC で接続する際のトラストストアのパスワード。
     #
     # jdbc_truststore_password: <JDBC_TRUSTSTORE_PASSWORD>
 ```
 
-For more information about connecting to the Oracle Database through TCPS on JDBC, see the official [Oracle whitepaper][4].
+TCPS on JDBC による Oracle Database への接続の詳細については、公式の [Oracle ホワイトペーパー][4]を参照してください。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
 [5]: https://python-oracledb.readthedocs.io/en/latest/user_guide/connection_handling.html#install-the-wallet-and-network-configuration-files
 
@@ -288,48 +287,48 @@ For more information about connecting to the Oracle Database through TCPS on JDB
 {{% tab "Containerized" %}}
 For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| Parameter            | Value                                                                                                     |
+| パラメーター            | 値                                                                                                     |
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `oracle`                                                                                                  |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                             |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                             |
 | `<INSTANCE_CONFIG>`  | `{"server": "%%host%%:1521", "service_name":"<SERVICE_NAME>", "username":"datadog", "password":"<PASSWORD>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][9] and look for `oracle` under the Checks section.
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `oracle` を探します。
 
-## Custom query
+## カスタムクエリ
 
-Providing custom queries is also supported. Each query must have two parameters:
+カスタムクエリの指定もサポートされています。各クエリには、次の 2 つのパラメーターを含める必要があります。
 
-| Parameter       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| パラメーター       | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `query`         | This is the SQL to execute. It can be a simple statement or a multi-line script. All rows of the result are evaluated.                                                                                                                                                                                                                                                                                                                        |
-| `columns`       | This is a list representing each column, ordered sequentially from left to right. There are two required pieces of data: <br> a. `type` - This is the submission method (`gauge`, `count`, etc.). <br> b. name - This is the suffix used to form the full metric name. If `type` is `tag`, this column is instead considered as a tag which is applied to every metric collected by this particular query. |
+| `query`         | 実行する SQL です。簡単なステートメントにすることも、複数行のスクリプトにすることもできます。結果のすべての行が評価されます。                                                                                                                                                                                                                                                                                                                        |
+| `columns`       | 列を表すリストです。左から右の順に並べられます。次の 2 つの必須データがあります。<br> a. `type` - 送信方法 (`gauge`、`count` など)。<br> b. name - メトリクス名のサフィックス。これは、完全なメトリクス名を形成するために使用されるサフィックスです。`type` が `tag` の場合、この列は、このクエリによって収集されるすべてのメトリクスに適用されるタグと見なされます。 |
 
-Optionally use the `tags` parameter to apply a list of tags to each metric collected.
+オプションで、`tags` パラメーターを使用して、収集される各メトリクスにタグのリストを適用できます。
 
-The following:
+以下のメトリクスは
 
 ```python
 self.gauge('oracle.custom_query.metric1', value, tags=['tester:oracle', 'tag1:value'])
 self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:value'])
 ```
 
-is what the following example configuration would become:
+以下の構成例から作成されます。
 
 ```yaml
-- query: | # Use the pipe if you require a multi-line script.
+- query: | # 複数行のスクリプトが必要な場合は、パイプを使用します。
     SELECT columns
     FROM tester.test_table
     WHERE conditions
   columns:
-    # Put this for any column you wish to skip:
+    # スキップする列にはこれを入れます。
     - {}
     - name: metric1
       type: gauge
@@ -341,13 +340,13 @@ is what the following example configuration would become:
     - tester:oracle
 ```
 
-See the [sample oracle.d/conf.yaml][5] for all available configuration options.
+使用可能なすべての構成オプションの詳細については、[サンプル oracle.d/conf.yaml][5] を参照してください。
 
-### Example
+### 例
 
-Create a query configuration to help identify database locks:
+データベースロックの識別に役立つクエリコンフィギュレーションを作成します。
 
-1. To include a custom query, modify `conf.d\oracle.d\conf.yaml`. Uncomment the `custom_queries` block, add the required queries and columns, and restart the Agent.
+1. カスタムクエリを含めるには、`conf.d\oracle.d\conf.yaml` を変更します。`custom_queries` ブロックのコメントを解除し、必要なクエリと列を追加して、Agent を再起動します。
 
 ```yaml
   init_config:
@@ -381,19 +380,19 @@ Create a query configuration to help identify database locks:
                 type: tag
 ```
 
-2. To access `v_$session`, give permission to `DATADOG` and test the permissions.
+2. `v_$session` にアクセスするには、`DATADOG` にアクセス許可を付与し、アクセス許可をテストします。
 
 ```text
 SQL> grant select on sys.v_$session to datadog;
 
-##connecting with the DD user to validate the access:
+##アクセスを検証するために DD ユーザーと接続します。
 
 
 SQL> show user
 USER is "DATADOG"
 
 
-##creating a synonym to make the view visible
+##ビューを表示するための同義語の作成
 SQL> create synonym datadog.v_$session for sys.v_$session;
 
 
@@ -408,20 +407,20 @@ where blocking_session is not NULL order by blocking_session;
 
 ## トラブルシューティング
 
-### Common problems
+### 一般的な問題
 
 #### Oracle Native Client
-- If you encounter a `DPY-6000: cannot connect to database`:
+- `DPY-6000: cannot connect to database` のエラーが発生した場合
   ```text
   Failed to connect to Oracle DB, error: DPY-6000: cannot connect to database. Listener refused connection. (Similar to ORA-12660)
   ```
- - Ensure Native Network Encryption or Checksumming are not enabled. If they are enabled, you must use the Instant Client method by setting `use_instant_client: true`.
+ - Native Network Encryption または Checksumming が有効になっていないことを確認してください。有効になっている場合は、`use_instant_client: true` を設定して Instant Client 方式を使用する必要があります。
 
 For more information about setting up the Oracle Instant Client, see the [Oracle integration documentation][3].
 
 #### Oracle Instant Client
-- Verify that both the Oracle Instant Client and SDK files are located in the same directory.
-The structure of the directory should look similar:
+- Oracle Instant Client ファイルと SDK ファイルの両方が同じディレクトリにあることを確認します。
+ディレクトリの構造は次のようになります。
   ```text
   |___ BASIC_LITE_LICENSE
   |___ BASIC_LITE_README
@@ -459,39 +458,39 @@ The structure of the directory should look similar:
   `___ xstreams.jar
   ```
 
-#### JDBC driver (Linux only)
-- If you encounter a `JVMNotFoundException`:
+#### JDBC Driver (Linux のみ)
+- `JVMNotFoundException` が発生した場合:
 
     ```text
     JVMNotFoundException("No JVM shared library file ({jpype._jvmfinder.JVMNotFoundException: No JVM shared library file (libjvm.so) found. Try setting up the JAVA_HOME environment variable properly.})"
     ```
 
-    - Ensure that the `JAVA_HOME` environment variable is set and pointing to the correct directory.
-    - Add the environment variable to `/etc/environment`:
+    - `JAVA_HOME` 環境変数が設定され、正しいディレクトリを指していることを確認してください。
+    - 環境変数を `/etc/environment` に追加します:
         ```text
         JAVA_HOME=/path/to/java
         ```
-    - Then restart the Agent.
+    - 次に、Agent を再起動します。
 
 - If you encounter this error `Unsupported major.minor version 52.0` it means you're running a Java version that is too old. You need to either update your system Java or additionally install a newer version and point your `JAVA_HOME` variable to the new install as explained above.
 
-- Verify your environment variables are set correctly by running the following command from the Agent.
-Ensure the displayed output matches the correct value.
+- Agent から次のコマンドを実行して、環境変数が正しく設定されていることを確認します。
+表示された出力が正しい値と一致することを確認してください。
 
     ```shell script
       sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/python -c "import os; print(\"JAVA_HOME:{}\".format(os.environ.get(\"JAVA_HOME\")))"
     ```
 
-Need help? Contact [Datadog support][14].
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
 
-[1]: https://docs.datadoghq.com/integrations/oracle/?tab=linux
+[1]: https://docs.datadoghq.com/ja/integrations/oracle/?tab=linux
 [2]: https://oracle.github.io/python-oracledb/
 [3]: https://github.com/DataDog/integrations-core/tree/7.41.x/oracle#oracle-instant-client
 [4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://docs.datadoghq.com/monitors/monitor_types/metric/?tab=threshold
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/monitors/monitor_types/metric/?tab=threshold
 [11]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
 [12]: https://github.com/DataDog/integrations-core/blob/master/oracle/assets/service_checks.json
-[14]: https://docs.datadoghq.com/help/
+[14]: https://docs.datadoghq.com/ja/help/
 [18]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm

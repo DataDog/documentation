@@ -1,31 +1,31 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - data stores
 - log collection
 - network
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Ingest Amazon Security Lake logs."
-"doc_link": ""
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/aws-reinvent-2022-recap/"
-  "tag": Blog
-  "text": "Highlights from AWS re:Invent 2022"
-"git_integration_title": "amazon_security_lake"
-"has_logo": true
-"integration_id": "amazon-security-lake"
-"integration_title": "Amazon Security Lake"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_security_lake"
-"public_title": "Datadog-Amazon Security Lake Integration"
-"short_description": "Ingest Amazon Security Lake logs."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Ingest Amazon Security Lake logs.
+doc_link: ''
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
+  tag: Blog
+  text: Highlights from AWS re:Invent 2022
+git_integration_title: amazon_security_lake
+has_logo: true
+integration_id: amazon-security-lake
+integration_title: Amazon Security Lake
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_security_lake
+public_title: Datadog-Amazon Security Lake Integration
+short_description: Ingest Amazon Security Lake logs.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -81,7 +81,7 @@ This integration ingests security logs stored in Amazon Security Lake into Datad
    - For **HTTPS key value**, open a new tab and go to the [API Keys page][9] in Datadog to find or create a Datadog API key. Copy and paste it into the form on AWS.
 
 [7]: https://app.datadoghq.com/integrations/amazon-web-services?panel=account-details
-[8]: https://docs.datadoghq.com/getting_started/site/
+[8]: https://docs.datadoghq.com/ja/getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
@@ -98,7 +98,7 @@ This integration ingests security logs stored in Amazon Security Lake into Datad
    - For **HTTPS key value**, open a new tab and go to the [API Keys page][9] in Datadog to find or create a Datadog API key. Copy and paste it into the form on AWS.
 
 [7]: https://app.datadoghq.com/integrations/amazon-web-services?panel=account-details
-[8]: https://docs.datadoghq.com/getting_started/site/
+[8]: https://docs.datadoghq.com/ja/getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
@@ -140,11 +140,10 @@ Need additional help? Contact [Datadog support][10].
 [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/
 [2]: https://www.datadoghq.com/product/log-management/
 [3]: https://www.datadoghq.com/product/cloud-security-management/cloud-siem/
-[4]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [5]: https://app.datadoghq.com/integrations/amazon-web-services?panel=metric-collection
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [7]: https://app.datadoghq.com/logs?query=source%3Aamazon-security-lake&cols=host%2Cservice%2C%40task_name%2C%40identity.user.type%2Caws.source%2C%40network.client.ip%2C%40identity.session.mfa%2C%40evt.name%2C%40connection_info.direction&index=%2A&messageDisplay=inline
 [8]: https://www.datadoghq.com/blog/analyze-amazon-security-lake-logs-with-datadog
-[9]: https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
-[10]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
+[10]: https://docs.datadoghq.com/ja/help/

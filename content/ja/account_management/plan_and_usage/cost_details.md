@@ -1,15 +1,15 @@
 ---
-title: Cost Details
 further_reading:
-- link: "https://docs.datadoghq.com/account_management/billing/"
+- link: https://docs.datadoghq.com/account_management/billing/
   tag: Documentation
   text: Billing
-- link: "https://docs.datadoghq.com/account_management/billing/usage_details/"
+- link: https://docs.datadoghq.com/account_management/billing/usage_details/
   tag: Documentation
   text: Usage details
-- link: "https://docs.datadoghq.com/account_management/multi_organization/"
+- link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: Documentation
   text: Managing multiple-organization accounts
+title: Cost Details
 ---
 
 ## 概要
@@ -147,9 +147,9 @@ Datadog の当月請求予定額は月によって異なります。各製品の
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/
+[1]: /ja/account_management/rbac/
 [2]: https://app.datadoghq.com/billing/usage
-[3]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
-[4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
-[5]: /account_management/plan_and_usage/cost_details/#cost-summary
-[6]: /api/latest/usage-metering/#get-projected-cost-across-your-account
+[3]: /ja/api/latest/usage-metering/#get-estimated-cost-across-your-account
+[4]: /ja/api/latest/usage-metering/#get-historical-cost-across-your-account
+[5]: /ja/account_management/plan_and_usage/cost_details/#cost-summary
+[6]: /ja/api/latest/usage-metering/#get-projected-cost-across-your-account

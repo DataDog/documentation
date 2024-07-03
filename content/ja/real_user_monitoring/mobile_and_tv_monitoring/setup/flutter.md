@@ -1,27 +1,26 @@
 ---
-title: RUM Flutter Monitoring Setup
-kind: documentation
-description: Collect RUM data from your Flutter projects.
 aliases:
-    - /real_user_monitoring/flutter/
-    - /real_user_monitoring/flutter/setup
+- /ja/real_user_monitoring/flutter/
+- /ja/real_user_monitoring/flutter/setup
 code_lang: flutter
-type: multi-code-lang
 code_lang_weight: 30
+description: Collect RUM data from your Flutter projects.
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
   tag: Documentation
   text: RUM Flutter Advanced Configuration
-- link: "https://github.com/DataDog/dd-sdk-flutter"
+- link: https://github.com/DataDog/dd-sdk-flutter
   tag: ソースコード
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-- link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
   tag: Blog
   text: Monitor Flutter application performance with Datadog Mobile RUM
-
+kind: documentation
+title: RUM Flutter Monitoring Setup
+type: multi-code-lang
 ---
 ## Overview
 
@@ -357,16 +356,16 @@ Container(
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /account_management/api-app-keys/#client-tokens
+[2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
-[4]: /real_user_monitoring/error_tracking/flutter
+[4]: /ja/real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/packages/datadog_tracking_http_client
-[6]: /serverless/distributed_tracing
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[6]: /ja/serverless/distributed_tracing
+[7]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [11]: https://pub.dev/packages/go_router
-[12]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter#automatic-view-tracking
+[12]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter#automatic-view-tracking
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html

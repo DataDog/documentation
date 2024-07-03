@@ -1,13 +1,13 @@
 ---
-title: Glossary
 aliases:
-    - /glossary/terms/wall_time/
+- /ja/glossary/terms/wall_time/
 cascade:
-    disable_toc: true
-scrollspy:
-    target: "#glossary-nav"
-    offset: 5
+  disable_toc: true
 filter_all: All
+scrollspy:
+  offset: 5
+  target: '#glossary-nav'
+title: Glossary
 ---
 
 {{< jqmath-vanilla >}}

@@ -1,13 +1,13 @@
 ---
-title: Watchdog RCA
-kind: documentation
 further_reading:
 - link: /watchdog/faq/root-cause-not-showing/
   tag: Documentation
   text: Root cause not showing
-- link: "https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/"
+- link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
   tag: Blog
   text: Automated root cause analysis
+kind: documentation
+title: Watchdog RCA
 ---
 
 ## Overview
@@ -58,5 +58,5 @@ Watchdog RCA also identifies services indirectly affected by the root cause. Any
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/
-[2]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/tracing/
+[2]: /ja/getting_started/tagging/unified_service_tagging

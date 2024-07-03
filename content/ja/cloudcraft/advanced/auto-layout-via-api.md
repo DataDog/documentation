@@ -74,7 +74,7 @@ curl \
 ご不明な点やトラブルがございましたら、[Cloudcraft のサポートチームまでご連絡ください][5]。
 
 [1]: https://www.cloudcraft.co/pricing
-[2]: /cloudcraft/api/aws-accounts/#snapshot-aws-account
-[3]: /cloudcraft/api/azure-accounts/#snapshot-an-azure-account
-[4]: /cloudcraft/api/blueprints/#create-a-blueprint
+[2]: /ja/cloudcraft/api/aws-accounts/#snapshot-aws-account
+[3]: /ja/cloudcraft/api/azure-accounts/#snapshot-an-azure-account
+[4]: /ja/cloudcraft/api/blueprints/#create-a-blueprint
 [5]: https://app.cloudcraft.co/app/support

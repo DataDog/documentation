@@ -1,8 +1,6 @@
 ---
-title: Signal Correlation Rules
-type: documentation
 aliases:
- - /security_platform/cloud_siem/signal_correlation_rules
+- /ja/security_platform/cloud_siem/signal_correlation_rules
 further_reading:
 - link: /cloud_siem/explorer/
   tag: Documentation
@@ -10,6 +8,8 @@ further_reading:
 - link: /security/notifications/variables/
   tag: Documentation
   text: Learn more about Security notification variables
+title: Signal Correlation Rules
+type: documentation
 ---
 
 ## Overview

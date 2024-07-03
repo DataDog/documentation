@@ -1,6 +1,6 @@
 ---
-title: Log Volume Control for the Datadog Agent
 disable_toc: false
+title: Log Volume Control for the Datadog Agent
 ---
 
 ## 概要

@@ -1,13 +1,12 @@
 ---
-title: Use Multiple Instances of the Mobile SDK
-kind: guide
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualize your RUM data in the Explorer
+title: Use Multiple Instances of the Mobile SDK
 ---
 
-## Overview
+## 概要
 
 
 <div class="alert alert-info">In order to use multiple instances of the SDK, you will need to adopt version <code>2.0.0</code> or higher. See the <a href="https://docs.datadoghq.com/real_user_monitoring/guide/mobile-sdk-upgrade">Upgrade RUM Mobile SDKs</a> guide.</div>
@@ -104,7 +103,6 @@ let monitor = RUMMonitor.shared(in: core)
 {{< /tabs >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-

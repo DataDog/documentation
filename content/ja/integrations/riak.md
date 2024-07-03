@@ -1,63 +1,63 @@
 ---
-"app_id": "riak"
-"app_uuid": "9f45bc5b-ef21-4336-a44d-7891a7a35cec"
-"assets":
-  "dashboards":
-    "riak": "assets/dashboards/riak_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "riak.memory_processes"
-      "metadata_path": "metadata.csv"
-      "prefix": "riak."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "50"
-    "source_type_name": "Riak"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/riak/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "riak"
-"integration_id": "riak"
-"integration_title": "Riak"
-"integration_version": "3.5.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "riak"
-"public_title": "Riak"
-"short_description": "RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡"
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Riak"
+app_id: riak
+app_uuid: 9f45bc5b-ef21-4336-a44d-7891a7a35cec
+assets:
+  dashboards:
+    riak: assets/dashboards/riak_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: riak.memory_processes
+      metadata_path: metadata.csv
+      prefix: riak.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 50
+    source_type_name: Riak
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/riak/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: riak
+integration_id: riak
+integration_title: Riak
+integration_version: 3.5.1
+is_public: true
+manifest_version: 2.0.0
+name: riak
+public_title: Riak
+short_description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Riak
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -140,9 +140,9 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -168,8 +168,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "riak", "service": "riak", "log_processing_rules": {"type": "multi_line", "name": "new_log_Start_with_date", "pattern": "\d{4}\-\d{2}\-\d{2}"}}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -199,5 +199,5 @@ Riak チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riak/images/riak_graph.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

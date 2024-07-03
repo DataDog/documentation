@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - collaboration
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Be notified of Datadog alerts and events in Microsoft Teams."
-"doc_link": "https://docs.datadoghq.com/integrations/microsoft_teams/"
-"draft": false
-"git_integration_title": "microsoft_teams"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Microsoft Teams"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "microsoft_teams"
-"public_title": "Datadog-Microsoft Teams Integration"
-"short_description": "Be notified of Datadog alerts and events in Microsoft Teams."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Be notified of Datadog alerts and events in Microsoft Teams.
+doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
+draft: false
+git_integration_title: microsoft_teams
+has_logo: true
+integration_id: ''
+integration_title: Microsoft Teams
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: microsoft_teams
+public_title: Datadog-Microsoft Teams Integration
+short_description: Be notified of Datadog alerts and events in Microsoft Teams.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -230,10 +230,9 @@ Datadog for Microsoft Teams には、以下の権限が必要です。詳細に�
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/integrations/microsoft-teams
-[2]: https://docs.datadoghq.com/monitors/notifications/#notification
+[2]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
-[4]: https://docs.datadoghq.com/dashboards/scheduled_reports/
+[4]: https://docs.datadoghq.com/ja/dashboards/scheduled_reports/
 [5]: https://app.datadoghq.com/incidents/settings#Integrations
 [6]: https://learn.microsoft.com/en-us/graph/permissions-reference
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

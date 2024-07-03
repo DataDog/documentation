@@ -1,16 +1,16 @@
 ---
-title: Enable Dynamic Instrumentation for Python
 aliases:
-    - /tracing/dynamic_instrumentation/enabling/python/
-is_beta: false
-private: false
+- /ja/tracing/dynamic_instrumentation/enabling/python/
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: /agent/
-      tag: Documentation
-      text: Getting Started with Datadog Agent
+- link: /agent/
+  tag: Documentation
+  text: Getting Started with Datadog Agent
+is_beta: false
+private: false
+title: Enable Dynamic Instrumentation for Python
+type: multi-code-lang
 ---
 
 ダイナミックインスツルメンテーションは、Datadog のトレーシングライブラリをサポートする機能です。すでに [APM を使用してアプリケーションのトレースを収集][1]している場合は、Agent とトレーシングライブラリが必要なバージョンであることを確認し、ステップ 4 のダイナミックインスツルメンテーションの有効化に直接進みます。
@@ -75,8 +75,8 @@ DynamicInstrumentation.enable()
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/trace_collection/
+[1]: /ja/tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/dynamic-instrumentation
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: /dynamic_instrumentation/
+[4]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /ja/dynamic_instrumentation/

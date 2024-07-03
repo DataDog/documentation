@@ -1,20 +1,20 @@
 ---
 aliases:
-- /tracing/setup_overview/setup/android
-- /tracing/setup/android
-- /tracing/trace_collection/dd_libraries/android
-description: Collect traces from your Android applications.
+- /ja/tracing/setup_overview/setup/android
+- /ja/tracing/setup/android
+- /ja/tracing/trace_collection/dd_libraries/android
 code_lang: android
-type: multi-code-lang
 code_lang_weight: 80
+description: Collect traces from your Android applications.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-android"
+- link: https://github.com/DataDog/dd-sdk-android
   tag: Source Code
   text: dd-sdk-android Source code
 - link: tracing/visualization/
   tag: Documentation
   text: Explore your services, resources, and traces
 title: Tracing Android Applications
+type: multi-code-lang
 ---
 [Datadog の `dd-sdk-android-trace` クライアント側トレーシングライブラリ][2]を使用すると、Android アプリケーションから Datadog へ[トレース][1]を送信するとともに、次の機能を利用できます。
 
@@ -936,15 +936,15 @@ remoteDataSource.getData(query)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /ja/tracing/visualization/#trace
 [2]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace
-[3]: /tracing/visualization/#spans
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /account_management/api-app-keys/#api-keys
+[3]: /ja/tracing/visualization/#spans
+[4]: /ja/account_management/api-app-keys/#client-tokens
+[5]: /ja/account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/
-[7]: /real_user_monitoring/android/?tab=us
+[7]: /ja/real_user_monitoring/android/?tab=us
 [8]: https://github.com/opentracing-contrib/java-rxjava
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
-[10]: /tracing/trace_collection/custom_instrumentation/android/otel
+[10]: /ja/tracing/trace_collection/custom_instrumentation/android/otel
 [11]: https://opentracing.io
-[12]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file
+[12]: /ja/real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file

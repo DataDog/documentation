@@ -1,7 +1,7 @@
 ---
-title: Custom Grouping
-kind: documentation
 description: Customize how error spans are grouped into issues.
+kind: documentation
+title: Custom Grouping
 ---
 
 ## Overview
@@ -214,7 +214,7 @@ DD_RUM.init({
 
 In both cases, `my-custom-grouping-material` is used to group the Browser RUM errors into a single issue in Error Tracking.
 
-[1]: /real_user_monitoring/browser/collecting_browser_errors/
+[1]: /ja/real_user_monitoring/browser/collecting_browser_errors/
 [2]: https://github.com/DataDog/browser-sdk/releases/tag/v4.42.0
 {{% /tab %}}
 
@@ -314,8 +314,8 @@ final configuration = DatadogConfiguration(
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /tracing/
-[2]: /logs/log_collection/
-[3]: /real_user_monitoring/browser/
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup
-[5]: /error_tracking/default_grouping
+[1]: /ja/tracing/
+[2]: /ja/logs/log_collection/
+[3]: /ja/real_user_monitoring/browser/
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup
+[5]: /ja/error_tracking/default_grouping

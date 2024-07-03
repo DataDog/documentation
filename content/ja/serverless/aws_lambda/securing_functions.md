@@ -1,5 +1,4 @@
 ---
-title: Securing Functions
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /security/application_security/how-appsec-works
   tag: Documentation
   text: How Application Security Works
+title: Securing Functions
 ---
 
 [Datadog Application Security Management (ASM)][2] は、コードレベルの脆弱性を悪用することを目的としたアプリケーションレベルの攻撃や、システムを狙う悪質な行為に対する観測可能性を提供します。
@@ -21,5 +21,5 @@ ASM は、インジェクション攻撃、クロスサイトスクリプティ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /security/application_security/
-[3]: /security/application_security/enabling/serverless/
+[2]: /ja/security/application_security/
+[3]: /ja/security/application_security/enabling/serverless/

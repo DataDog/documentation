@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Preventing Data Loss
 aliases:
-  - /observability_pipelines/architecture/preventing_data_loss/
+- /ja/observability_pipelines/architecture/preventing_data_loss/
+title: (LEGACY) Preventing Data Loss
 ---
 
 {{< site-region region="gov" >}}
@@ -74,5 +74,5 @@ If durability is the most important criteria, use the direct archiving method be
 
 Destination failures refer to the total failure of a downstream destination (for example, Elasticsearch). Data loss can be mitigated for issues with the downstream destination by using disk buffers large enough to sustain the outage time. This allows data to durably buffer while the service is down and then drain when the service comes back up. For this reason, disk buffers large enough to hold at least one hour's worth of data are recommended. See [Optimizing the Instance][2] for more details.
 
-[1]: /logs/log_configuration/archives
-[2]: /observability_pipelines/legacy/architecture/optimize
+[1]: /ja/logs/log_configuration/archives
+[2]: /ja/observability_pipelines/legacy/architecture/optimize

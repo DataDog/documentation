@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting DBM Setup for SQL Server
 description: Troubleshoot Database Monitoring setup for SQL Server
+title: Troubleshooting DBM Setup for SQL Server
 ---
 
 このページでは、SQL Server によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
@@ -352,10 +352,10 @@ The following metrics are not available for SQL Server 2014:
 - `sqlserver.ao.secondary_lag_seconds`
 - `sqlserver.latches.latch_wait_time`
 
-[1]: /database_monitoring/setup_sql_server/
+[1]: /ja/database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication
 [3]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-sql-server-authentication
-[4]: https://docs.datadoghq.com/agent/guide/windows-agent-ddagent-user/#installation
+[4]: https://docs.datadoghq.com/ja/agent/guide/windows-agent-ddagent-user/#installation
 [5]: https://learn.microsoft.com/en-us/troubleshoot/sql/connect/login-failed-for-user
 [6]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16#3-microsoft-ole-db-driver-for-sql-server-msoledbsql
 [7]: https://techcommunity.microsoft.com/t5/sql-server-blog/ole-db-driver-19-0-for-sql-server-released/ba-p/3170362

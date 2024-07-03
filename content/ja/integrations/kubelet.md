@@ -1,57 +1,57 @@
 ---
-"app_id": "kubelet"
-"app_uuid": "8afd5500-0b72-4574-95f9-81282e2bd535"
-"assets":
-  "integration":
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "kubernetes.cpu.usage.total"
-      "metadata_path": "metadata.csv"
-      "prefix": "kubernetes."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_name": "Kubelet"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "containers"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kubelet"
-"integration_id": "kubelet"
-"integration_title": "Kubelet"
-"integration_version": "7.13.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "kubelet"
-"public_title": "Kubelet"
-"short_description": "Collects container stats from kubelet."
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Containers"
-  "configuration": "README.md#Setup"
-  "description": "Collects container stats from kubelet."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Kubelet"
+app_id: kubelet
+app_uuid: 8afd5500-0b72-4574-95f9-81282e2bd535
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kubernetes.cpu.usage.total
+      metadata_path: metadata.csv
+      prefix: kubernetes.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kubelet
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- containers
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: kubelet
+integration_id: kubelet
+integration_title: Kubelet
+integration_version: 7.13.2
+is_public: true
+manifest_version: 2.0.0
+name: kubelet
+public_title: Kubelet
+short_description: Collects container stats from kubelet.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Collects container stats from kubelet.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubelet
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -125,11 +125,10 @@ Need help? Contact [Datadog support][8].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubelet/datadog_checks/kubelet/data/conf.yaml.default
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.openshift.org/3.7/install_config/master_node_configuration.html#node-configuration-files
 [6]: https://github.com/DataDog/integrations-core/blob/master/kubelet/assets/service_checks.json
-[7]: https://docs.datadoghq.com/agent/guide/autodiscovery-management/?tab=containerizedagent
-[8]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-management/?tab=containerizedagent
+[8]: https://docs.datadoghq.com/ja/help/

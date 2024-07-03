@@ -1,29 +1,29 @@
 ---
-title: Docker Log collection
 aliases:
-    - /logs/docker
-    - /logs/languages/docker
-    - /logs/log_collection/docker
-    - /agent/docker/log
+- /ja/logs/docker
+- /ja/logs/languages/docker
+- /ja/logs/log_collection/docker
+- /ja/agent/docker/log
 further_reading:
-    - link: logs/explorer
-      tag: Documentation
-      text: Learn how to explore your logs
-    - link: /agent/docker/apm/
-      tag: Documentation
-      text: Collect your application traces
-    - link: /agent/docker/prometheus/
-      tag: Documentation
-      text: Collect your Prometheus metrics
-    - link: /agent/docker/integrations/
-      tag: Documentation
-      text: Collect automatically your applications metrics and logs
-    - link: /agent/guide/autodiscovery-management/
-      tag: Documentation
-      text: Limit data collection to a subset of containers only
-    - link: /agent/docker/tag/
-      tag: Documentation
-      text: Assign tags to all data emitted by a container
+- link: logs/explorer
+  tag: Documentation
+  text: Learn how to explore your logs
+- link: /agent/docker/apm/
+  tag: Documentation
+  text: Collect your application traces
+- link: /agent/docker/prometheus/
+  tag: Documentation
+  text: Collect your Prometheus metrics
+- link: /agent/docker/integrations/
+  tag: Documentation
+  text: Collect automatically your applications metrics and logs
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Limit data collection to a subset of containers only
+- link: /agent/docker/tag/
+  tag: Documentation
+  text: Assign tags to all data emitted by a container
+title: Docker Log collection
 ---
 
 ## 概要
@@ -158,9 +158,9 @@ environment:
 3. **Windows 10 のみ**: Docker コンテナ作業のアクセス許可を得るには、Datadog Agent ユーザーが `docker-users` グループのメンバーである必要があります。管理者コマンドプロンプトから `net localgroup docker-users "ddagentuser" /ADD` を実行するか、[Docker ユーザーグループ][2]のコンフィギュレーション手順に従ってください。
 4. [Agent を再起動][3]して、Datadog ですべてのコンテナログを確認します。
 
-[1]: /agent/basic_agent_usage/
+[1]: /ja/agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
-[3]: /agent/configuration/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "カスタムログを使用するホスト Agent" %}}
 
@@ -181,10 +181,10 @@ environment:
 
 **注**: カスタムログ構成のコンテナによって生成されたログを Agent が収集するためには、ログがホストからアクセス可能なボリュームに書き込まれる必要があります。コンテナログは、自動的に収集できるように `stdout` と `stderr` に書き込むことをお勧めします。
 
-[1]: /agent/basic_agent_usage/
-[2]: /agent/logs/#custom-log-collection
-[3]: /agent/configuration/agent-configuration-files/
-[4]: /agent/configuration/agent-commands/#restart-the-agent
+[1]: /ja/agent/basic_agent_usage/
+[2]: /ja/agent/logs/#custom-log-collection
+[3]: /ja/agent/configuration/agent-configuration-files/
+[4]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -286,7 +286,7 @@ labels:
 [複数行の処理規則][1]には、他にもさまざまなパターンが記載されています。
 
 
-[1]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[1]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 {{% /tab %}}
 {{% tab "From file" %}}
 
@@ -357,15 +357,15 @@ Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
-[2]: /integrations/journald/
-[3]: /agent/docker/integrations/
-[4]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[5]: /agent/logs/#custom-log-collection
-[6]: /getting_started/tagging/unified_service_tagging
-[7]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
-[8]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[9]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[10]: /logs/guide/docker-logs-collection-troubleshooting-guide/
-[11]: /agent/guide/autodiscovery-management/
-[12]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
+[1]: /ja/getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
+[2]: /ja/integrations/journald/
+[3]: /ja/agent/docker/integrations/
+[4]: /ja/agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
+[5]: /ja/agent/logs/#custom-log-collection
+[6]: /ja/getting_started/tagging/unified_service_tagging
+[7]: /ja/agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[8]: /ja/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[9]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[10]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide/
+[11]: /ja/agent/guide/autodiscovery-management/
+[12]: /ja/agent/kubernetes/log/?tab=daemonset#short-lived-containers

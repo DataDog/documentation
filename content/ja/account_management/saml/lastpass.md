@@ -1,8 +1,7 @@
 ---
-title: LastPass SAML IdP
 aliases:
-  - /account_management/saml/nopassword
-  - /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/
+- /ja/account_management/saml/nopassword
+- /ja/account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configuring Teams & Organizations with Multiple Accounts
+title: LastPass SAML IdP
 ---
 
 [LastPass Datadog アプリインテグレーション][1]のセットアップおよびコンフィギュレーションのドキュメントに従い、LastPass を SAML IdP として使用します。

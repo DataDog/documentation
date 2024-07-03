@@ -1,7 +1,7 @@
 ---
-title: trace root span
 core_product:
-  - apm
+- apm
+title: trace root span
 ---
 A [span][1] is a trace root span when it is the first span of a trace. The root span is the entry-point method of the traced request. Its start marks the beginning of the trace.
 
@@ -14,4 +14,4 @@ In this example, the **service entry spans** are:
 - The topmost green span below `aspnet_coremvc.request`
 - Every orange `mongodb` span
 
-[1]: /glossary/#span
+[1]: /ja/glossary/#span

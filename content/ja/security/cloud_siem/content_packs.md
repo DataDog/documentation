@@ -1,5 +1,4 @@
 ---
-title: コンテンツパック
 disable_toc: false
 further_reading:
 - link: /security/cloud_siem/log_detection_rules
@@ -11,6 +10,7 @@ further_reading:
 - link: /security/cloud_siem/investigate_security_signals
   tag: ドキュメント
   text: Investigate security signals
+title: コンテンツパック
 ---
 
 ## 概要
@@ -211,47 +211,47 @@ The [CrowdStrike Content Pack][29] includes:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/content-packs
-[2]: /security/detection_rules/
-[3]: /security/cloud_siem/investigator
-[4]: /service_management/workflows/
+[2]: /ja/security/detection_rules/
+[3]: /ja/security/cloud_siem/investigator
+[4]: /ja/service_management/workflows/
 [5]: https://app.datadoghq.com/security/content-packs/aws-cloudtrail
-[6]: /security/default_rules/#cloudtrail
+[6]: /ja/security/default_rules/#cloudtrail
 [7]: https://app.datadoghq.com/security/content-packs/azure
-[8]: /security/default_rules/#azuresecurity
+[8]: /ja/security/default_rules/#azuresecurity
 [9]: https://app.datadoghq.com/security/content-packs/gcp-audit-logs
-[10]: /security/default_rules/#gcp
+[10]: /ja/security/default_rules/#gcp
 [11]: https://app.datadoghq.com/security/content-packs/kubernetes-audit-logs
-[12]: /security/default_rules/#kubernetes
+[12]: /ja/security/default_rules/#kubernetes
 [13]: https://app.datadoghq.com/security/content-packs/1password
-[14]: /security/default_rules/#1password
+[14]: /ja/security/default_rules/#1password
 [15]: https://app.datadoghq.com/security/content-packs/auth0
-[16]: /security/default_rules/#auth0
+[16]: /ja/security/default_rules/#auth0
 [17]: https://app.datadoghq.com/security/content-packs/jumpcloud
-[18]: /security/default_rules/#jumpcloud
+[18]: /ja/security/default_rules/#jumpcloud
 [19]: https://app.datadoghq.com/security/content-packs/okta
-[20]: /security/default_rules/#okta
+[20]: /ja/security/default_rules/#okta
 [21]: https://app.datadoghq.com/security/content-packs/google-workspace
-[22]: /security/default_rules/#gsuite
+[22]: /ja/security/default_rules/#gsuite
 [23]: https://app.datadoghq.com/security/content-packs/microsoft-365
-[24]: /security/default_rules/#microsoft-365
+[24]: /ja/security/default_rules/#microsoft-365
 [25]: https://app.datadoghq.com/security/content-packs/cloudflare
-[26]: /security/default_rules/#cloudflare
+[26]: /ja/security/default_rules/#cloudflare
 [27]: https://app.datadoghq.com/security/content-packs/github
-[28]: /security/default_rules/#github-telemetry
+[28]: /ja/security/default_rules/#github-telemetry
 [29]: https://app.datadoghq.com/security/content-packs/crowdstrike
-[30]: /security/default_rules/#crowdstrike
+[30]: /ja/security/default_rules/#crowdstrike
 [31]: https://app.datadoghq.com/security/content-packs/cisco-duo
-[32]: /security/default_rules/#cisco-duo
+[32]: /ja/security/default_rules/#cisco-duo
 [33]: https://app.datadoghq.com/security/content-packs/slack
-[34]: /security/default_rules/#slack
+[34]: /ja/security/default_rules/#slack
 [35]: https://app.datadoghq.com/security/content-packs/meraki
-[36]: /security/default_rules/#meraki
+[36]: /ja/security/default_rules/#meraki
 [37]: https://app.datadoghq.com/security/content-packs/pan-firewall
-[38]: /security/default_rules/#panfirewall
+[38]: /ja/security/default_rules/#panfirewall
 [39]: https://app.datadoghq.com/security/content-packs/cisco-umbrella-dns
-[40]: /security/default_rules/#cisco-umbrella-dns
+[40]: /ja/security/default_rules/#cisco-umbrella-dns
 [41]: https://app.datadoghq.com/security/content-packs/nginx
-[42]: /security/default_rules/#nginx
-[43]: https://docs.datadoghq.com/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[44]: https://docs.datadoghq.com/security/cloud_siem/guide/azure-config-guide-for-cloud-siem
-[45]: https://docs.datadoghq.com/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
+[42]: /ja/security/default_rules/#nginx
+[43]: https://docs.datadoghq.com/ja/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[44]: https://docs.datadoghq.com/ja/security/cloud_siem/guide/azure-config-guide-for-cloud-siem
+[45]: https://docs.datadoghq.com/ja/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/

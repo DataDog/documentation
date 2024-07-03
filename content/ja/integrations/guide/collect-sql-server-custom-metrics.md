@@ -1,34 +1,33 @@
 ---
-title: Collect SQL Server Custom Metrics
-kind: guide
 aliases:
-  - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
+- /ja/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
 - link: /integrations/mysql/
   tag: Documentation
   text: Datadog-MySQL integration
+title: Collect SQL Server Custom Metrics
 ---
 
-This guide explains how to collect custom metrics from SQL Server.
+このガイドでは、SQL Server からカスタムメトリクスを収集する方法を説明します。
 
-## Custom queries
+## カスタムクエリ
 
-To collect more complex custom metrics with the SQL Server integration, use the `custom_queries` option in the `conf.d/sqlserver.d/conf.yaml` file at the root of your [Agent's configuration directory][5]. See the sample [sqlserver.d/conf.yaml][6] for more details.
+SQL Server インテグレーションでより複雑なカスタムメトリクスを収集するには、[Agent の構成ディレクトリ][5]のルートにある `conf.d/sqlserver.d/conf.yaml` ファイルの `custom_queries` オプションを使用します。詳細については、サンプル [sqlserver.d/conf.yaml][6] を参照してください。
 
-### Configuration
+### 構成
 
-`custom_queries` has the following options:
+`custom_queries` には以下のオプションがあります:
 
-| Option        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| オプション        | 必須 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| query         | Yes      | The SQL to execute. This can be a simple statement or a multi-line script. All rows of the results are evaluated. Use the pipe character (`\|`) if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| columns       | Yes      | A list representing each column ordered sequentially from left to right.<br><br>There are two required pieces of data:<br>  - **`name`**: The suffix to append to the `metric_prefix` to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: The submission method (`gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. |
-| tags          | No       | A list of static tags to apply to each metric.
+| クエリ         | はい      | 実行する SQL です。簡単なステートメントにすることも、複数行のスクリプトにすることもできます。結果のすべての行が評価されます。複数行のスクリプトが必要な場合は、パイプ文字  (`\|`) を使用します。                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 列       | はい      | 列を表すリストです。左から右へ順に並べられます。<br><br>次の 2 つの必須データがあります。<br> - **`name`**: サフィックスとして `metric_prefix` に付加され、完全な名前を形成します。`type` が `tag` と指定されている場合、この列は、このクエリによって収集されるすべてのメトリクスにタグとして適用されます。<br> - **`type`**: 送信方法 (`gauge`、`count`、`rate` など)。`tag` と設定し、この列のアイテムの名前と値 (`<name>:<row_value>`) で行の各メトリクスにタグ付けすることができます。 |
+| usage-metering-get-hourly-usage-for-lambda-traced-invocations          | いいえ       | 各メトリクスに適用する静的タグのリスト。
 
 
-- At least one of the items in defined `columns` should be a metric type (`gauge`, `count`, `rate`, etc.).
-- The number of items defined in `columns` must equal the number of columns returned in the query.
-- The order in which the items in `columns` are defined must be same order returned in the query.
+- 定義済みの `columns` のうち最低 1 つは、メトリクスタイプ (`gauge`、`count`、`rate` など) である必要があります。
+- `columns` 内の定義済みアイテム数は、クエリで返される列数と同じである必要があります。
+- `columns` のアイテムが定義される順番は、クエリで返される順番と同じである必要があります。
 
   ```yaml
   custom_queries:
@@ -40,9 +39,9 @@ To collect more complex custom metrics with the SQL Server integration, use the 
       [...]
   ```
 
-### Example
+### 例
 
-Below is a `company` table from a `testdb` database. The table contains three employee records:
+以下に示すのは、`testdb` データベースの `company` テーブルです。テーブルには 3 件の従業員レコードが含まれています。
 
 ```text
 testdb=# SELECT * FROM company;
@@ -54,13 +53,13 @@ id| name  | age| address    |salary | entry_date | last_raise_time
 3 | Teddy | 23 | Norway     | 45000 | 1457570120 | 1457570300
 ```
 
-The following SQL query captures the age and salary of Paul as metric values, with Paul's name and address as tags.
+次の SQL クエリは、Paul の年齢と給料をメトリクス値として、Paul の名前と住所をタグとして取得します。
 
 ```text
 SELECT age,salary,name,address FROM company WHERE name = 'Paul'
 ```
 
-Corresponding `custom_queries` YAML configuration:
+対応する YAML `custom_queries`  の構成
 
 ```yaml
 custom_queries:
@@ -78,15 +77,15 @@ custom_queries:
       - 'query:custom'
 ```
 
-After you update the SQL Server YAML file, [restart the Datadog Agent][7].
+SQL Server YAML ファイルを更新した後、[Datadog Agent を再起動][7]します。
 
-#### Validation
+#### 検証
 
-To verify your results, search for the metrics using the [Metrics Explorer][8].
+結果を確認するには、[メトリクスエクスプローラー][8]を使用してメトリクスを検索します。
 
-#### Debugging
+#### デバッグ
 
-[Run the Agent's status subcommand][9] and look for `sqlserver` under the Checks section:
+[Agent の status サブコマンドを実行][9]し、Checks セクションの `sqlserver` を探します。
 
 ```text
 sqlserver
@@ -95,13 +94,13 @@ sqlserver
   - Collected 0 metrics, 0 events & 0 service checks
 ```
 
-Additionally, the [Agent's logs][10] may provide useful information.
+また、[Agent のログ][10]でも有益な情報を確認できる場合があります。
 
-## Collecting metrics from Performance Counters
+## パフォーマンスカウンターからメトリクスを収集する
 
-By default, the [Datadog-SQL server Check][1] only captures *some* of the metrics available in the `sys.dm_os_performance_counters` table.
+デフォルトでは、[Datadog-SQL Server チェック][1]は、`sys.dm_os_performance_counters` テーブルで利用可能なメトリクスの*一部*のみをキャプチャします。
 
-Find below an example for a basic metric collection from performance counters. **Note**: You can specify optional `tags` to be sent with your metrics:
+パフォーマンスカウンターからの基本的なメトリクス収集の例を以下に示します。**注**: オプションで、メトリクスとともに送信される `tags` を指定できます。
 
 ```yaml
 custom_metrics:
@@ -111,15 +110,15 @@ custom_metrics:
       - tag_name:value
 ```
 
-Parameter descriptions:
+パラメーターの説明:
 
-| Parameter      | Description                                           |
+| パラメーター      | 説明                                           |
 |----------------|-------------------------------------------------------|
-| `name`         | Name of your metric inside Datadog.                   |
-| `counter_name` | The counter name of [SQL server database objects][2]. |
-| `tags`         | A list of key:value tag pairs.                        |
+| `name`         | Datadog 内のメトリクスの名前。                   |
+| `counter_name` | [SQL Server データベースオブジェクト][2]のカウンター名。 |
+| `tags`         | キー:値のペアで構成されたタグのリスト。                        |
 
-If a counter has multiple instances associated with it, you can choose to fetch a single instance with the `instance_name` parameter name:
+カウンターに複数のインスタンスが関連付けられている場合、`instance_name` パラメーター名を使用して単一のインスタンスを取得することを選択できます。
 
 ```yaml
 custom_metrics:
@@ -128,7 +127,7 @@ custom_metrics:
     instance_name: Cumulative execution time (ms) per second
 ```
 
-For finer granularity, query by the `object_name` :
+粒度をより細かくするために、`object_name` でクエリします。
 
 ```yaml
 custom_metrics:
@@ -138,7 +137,7 @@ custom_metrics:
   object_name: SQLServer:Plan Cache
 ```
 
-To collect all instances of a counter with multiple instances, use the special, case-sensitive value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
+複数のインスタンスを持つカウンターのすべてのインスタンスを収集するには、 `instance_name` パラメーターに特別な値 `ALL` (大文字小文字が区別されます) を使用します。このパラメーターは `tag_by` パラメーターの値を**必要とします**。この例では、`db:mydb1`、`db:mydb2` とタグ付けされたメトリクスを取得します。
 
 ```yaml
 custom_metrics:
@@ -148,9 +147,9 @@ custom_metrics:
     tag_by: db
 ```
 
-The default table from which counters are drawn is the `sys.dm_os_performance_counters` table. The Datadog-SQL Server check also supports `sys.dm_os_wait_stats`, `sys.dm_os_memory_clerks`, and `sys.dm_io_virtual_file_stats`.
+カウンターが取得されるデフォルトのテーブルは、`sys.dm_os_performance_counters` テーブルです。Datadog-SQL Server チェックは、`sys.dm_os_wait_stats`、`sys.dm_os_memory_clerks`、`sys.dm_io_virtual_file_stats` もサポートしています。
 
-To report a metric drawn from one of the additional tables, specify the table in the counter definition with the `table` parameter, as well as the counter columns to be reported with the `columns` parameter:
+追加のテーブルの 1 つから取得されたメトリクスをレポートするには、`table` パラメーターでカウンター定義のテーブルを指定し、`columns` パラメーターでレポートするカウンター列を指定します。
 
 ```yaml
 custom_metrics:
@@ -163,9 +162,9 @@ custom_metrics:
 
 ```
 
-The above example reports two metrics, `sqlserver.LCK_M_S.max_wait_time.ms` and `sqlserver.LCK_M_S.signal_wait_time_ms`.
+上記の例では、2 つのメトリクス `sqlserver.LCK_M_S.max_wait_time.ms` と `sqlserver.LCK_M_S.signal_wait_time_ms` をレポートします。
 
-**Note**: If metrics like `sys.dm_io_virtual_file_stats` and `sys.dm_os_memory_clerks` are not associated with a `counter_name` only the columns need to be specified:
+**注**: `sys.dm_io_virtual_file_stats` や `sys.dm_os_memory_clerks` などのメトリクスが `counter_name` に関連付けられていない場合、列のみを指定する必要があります。
 
 ```yaml
 custom_metrics:
@@ -176,32 +175,32 @@ custom_metrics:
       - num_of_writes
 ```
 
-The above example reports two metrics, `sqlserver.io_file_stats.num_of_reads` and `sqlserver.io_file_stats.num_of_writes` each tagged with the database ID and file ID.
+上記の例は、それぞれデータベース ID とファイル ID でタグ付けされた 2 つのメトリクス、`sqlserver.io_file_stats.num_of_reads` と `sqlserver.io_file_stats.num_of_writes` をレポートします。
 
-## Collecting metrics from a custom procedure (legacy)
+## カスタムプロシージャからメトリクスを収集する (レガシー)
 
-This is a legacy method of collecting custom metrics from the database. It is recommended to use the `custom_queries` parameter, which requires less setup, provides more flexibility in the types of T-SQL that can be executed, and is easier to debug. Collecting metrics from a custom procedure produces a large volume of custom metrics that may affect your billing.
+データベースからカスタムメトリクスを収集するための旧来の方法です。設定手順がよりシンプルで、実行可能な T-SQL の種類に関しても柔軟性が高く、デバックも容易な `custom_queries` パラメーターの使用をお勧めします。カスタムプロシージャからメトリクスを収集すると大量のカスタムメトリクスが生成され、請求に影響する可能性があります。
 
-### Setup a stored procedure
+### ストアドプロシージャのセットアップ
 
-You must set up a temporary table to collect the custom metrics for reporting to Datadog. The table needs the following columns:
+Datadog にレポートするためのカスタムメトリクスを収集するには、一時テーブルを設定する必要があります。テーブルには次の列が必要です。
 
-| Column   | Description                                               |
+| 列   | 説明                                               |
 |----------|-----------------------------------------------------------|
-| `metric` | The name of the metric as it appears in Datadog.          |
-| `type`   | The [metric type][3] (gauge, rate, or [histogram][4]).    |
-| `value`  | The value of the metric (must be convertible to a float). |
-| `tags`   | The tags that appear in Datadog separated by a comma.     |
+| `metric` | Datadog に表示されるメトリクスの名前。          |
+| `type`   | [メトリクスタイプ][3]（ゲージ、レート、または[ヒストグラム][4]）。    |
+| `value`  | メトリクスの値（浮動小数点数に変換可能である必要があります）。 |
+| `tags`   | カンマで区切られた Datadog に表示されるタグ。     |
 
-The following stored procedure is created within the master database:
+次のストアドプロシージャがマスターデータベース内に作成されます。
 
 ```text
--- Create a stored procedure with the name <PROCEDURE_NAME>
+-- <PROCEDURE_NAME> という名前のストアドプロシージャを作成します
 CREATE PROCEDURE [dbo].[<PROCEDURE_NAME>]
 AS
 BEGIN
 
-  -- Create a temporary table
+  -- 一時テーブルを作成します
   CREATE TABLE #DataDog
   (
     [metric] varchar(255) not null,
@@ -210,14 +209,14 @@ BEGIN
     [tags] varchar(255)
   )
 
-  -- Remove row counts from result sets
+  -- 結果セットから行カウントを削除します
   SET NOCOUNT ON;
 
-  -- Create variable count and set it equal to the number of User Connections
+  -- 変数 count を作成し、User Connections の数に設定します
   DECLARE @count float;
   SET @count = (select cntr_value from sys.dm_os_performance_counters where counter_name = 'User Connections');
 
-  -- Insert any custom metrics into the table #Datadog
+  -- テーブル #Datadog にカスタムメトリクスを挿入します
   INSERT INTO #Datadog (metric, type, value, tags)
   VALUES ('sql.test.test', 'gauge', @count, 'db:master,env:staging')
         ,('sql.test.gauge', 'gauge', FLOOR(RAND()*20), 'tag:test')
@@ -227,12 +226,12 @@ BEGIN
 END
 GO
 
--- Grant permission to run the stored procedure
+-- ストアドプロシージャを実行する権限を付与します
 GRANT EXECUTE ON [dbo].[<PROCEDURE_NAME>] To Public
 GO
 ```
 
-The stored procedure outputs the following custom metrics:
+ストアドプロシージャは、次のカスタムメトリクスを出力します。
 
 * `sql.test.test`
 * `sql.test.gauge`
@@ -243,52 +242,52 @@ The stored procedure outputs the following custom metrics:
 * `sql.test.histogram.max`
 * `sql.test.histogram.median`
 
-### Update the SQL Server integration configuration
+### SQL Server インテグレーション構成を更新する
 
-To collect metrics from a custom procedure, create a new instance definition inside your `sqlserver.d/conf.yaml` file with the procedure to execute. A separate instance is required for any existing configuration. Instances with a stored procedure do not process anything but the stored procedure, for example:
+カスタムプロシージャからメトリクスを収集するには、実行するプロシージャを含む `sqlserver.d/conf.yaml` ファイル内に新しいインスタンス定義を作成します。既存の構成には個別のインスタンスが必要です。ストアドプロシージャを持つインスタンスは、ストアドプロシージャ以外は処理しません。例:
 
 ```yaml
   - host: 127.0.0.1,1433
     username: datadog
-    password: "<PASSWORD>"
+    password: "<パスワード>"
     database: master
   - host: 127.0.0.1,1433
     username: datadog
-    password: "<PASSWORD>"
-    stored_procedure: "<PROCEDURE_NAME>"
+    password: "<パスワード>"
+    stored_procedure: "<プロシージャ名>"
     database: master
 ```
 
-You can also specify:
+以下を指定することもできます。
 
-| Parameter                 | Description                                                                               | Default            |
+| パラメーター                 | 説明                                                                               | デフォルト            |
 |---------------------------|-------------------------------------------------------------------------------------------|--------------------|
-| `ignore_missing_database` | If the DB specified doesn't exist on the server, then don't do the check.                  | `False`            |
-| `proc_only_if`            | Run this SQL before each call to `stored_procedure`. If it returns 1, call the procedure. |                    |
-| `proc_only_if_database`   | The database to run the `proc_only_if` SQL in.                                            | database attribute |
+| `ignore_missing_database` | 指定された DB がサーバーに存在しない場合は、チェックを実行しません。                  | `False`            |
+| `proc_only_if`            | `stored_procedure` の各呼び出しの前にこの SQL を実行します。1 を返した場合、プロシージャを呼び出します。 |                    |
+| `proc_only_if_database`   | `proc_only_if` SQL を実行するデータベース。                                            | データベース属性 |
 
-**Note**: The `proc_only_if` guard condition is useful for high-availability scenarios where a database can move between servers.
+**注**: `proc_only_if` ガード条件は、データベースがサーバー間を移動できる高可用性シナリオに役立ちます。
 
-### Troubleshooting
+### トラブルシューティング
 
-If your custom metrics do not appear in Datadog, check the Agent log file. If you see the following error: `Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure`, it could be one of the following issues:
+カスタムメトリクスが Datadog に表示されない場合は、Agent ログファイルを確認してください。`Could not call procedure <PROCEDURE_NAME>: You must supply -1 parameters for this stored procedure` というエラーが表示される場合は、次のいずれかの問題である可能性があります。
 
-* The `<PROCEDURE_NAME>` is typed incorrectly.
-* The database username specified in the configuration may not have permission to run the stored procedure.
+* `<プロシージャ名>` が正しく入力されていない。
+* 構成で指定されたデータベースユーザー名に、ストアドプロシージャを実行する権限がない可能性がある。
 
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/sqlserver/
+[1]: /ja/integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
-[3]: /metrics/#metric-types
-[4]: /metrics/types/?tab=histogram#metric-types
-[5]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /ja/metrics/#metric-types
+[4]: /ja/metrics/types/?tab=histogram#metric-types
+[5]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[7]: /agent/guide/agent-commands/#restart-the-agent
-[8]: /metrics/explorer/
-[9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: /agent/guide/agent-log-files
+[7]: /ja/agent/guide/agent-commands/#restart-the-agent
+[8]: /ja/metrics/explorer/
+[9]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: /ja/agent/guide/agent-log-files

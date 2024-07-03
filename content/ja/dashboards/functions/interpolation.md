@@ -1,7 +1,6 @@
 ---
-title: Interpolation
 aliases:
-    - /graphing/functions/interpolation/
+- /ja/graphing/functions/interpolation/
 further_reading:
 - link: /dashboards/functions/
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /metrics/guide/interpolation-the-fill-modifier-explained/
   tag: Documentation
   text: Interpolation and the Fill Modifier
+title: Interpolation
 ---
 
 ## フィル
@@ -96,7 +96,7 @@ default_zero(avg:custom_metric{*})
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
-[2]: /dashboards/functions/#add-a-function
-[3]: /monitors/guide/as-count-in-monitor-evaluations/
-[4]: /metrics/
+[1]: /ja/metrics/guide/interpolation-the-fill-modifier-explained/
+[2]: /ja/dashboards/functions/#add-a-function
+[3]: /ja/monitors/guide/as-count-in-monitor-evaluations/
+[4]: /ja/metrics/

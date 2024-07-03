@@ -1,9 +1,9 @@
 ---
-title: Java Compatibility Requirements
-kind: documentation
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 0
+kind: documentation
+title: Java Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Application Security capabilities
@@ -158,6 +158,6 @@ Datadog does not officially support any early-access versions of Java.
 | Spring Security   | 5.5+                      |
 
 
-[1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[3]: /security/application_security/vulnerability_management/#manage-code-level-vulnerabilities
+[1]: /ja/tracing/trace_collection/compatibility/java/
+[2]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[3]: /ja/security/application_security/vulnerability_management/#manage-code-level-vulnerabilities

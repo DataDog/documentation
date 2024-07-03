@@ -1,76 +1,76 @@
 ---
-"app_id": "redis"
-"app_uuid": "15f0ff37-2b36-4165-9606-758271d4a16d"
-"assets":
-  "dashboards":
-    "redis": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "redis.net.clients"
-      "metadata_path": "metadata.csv"
-      "prefix": "redis."
-    "process_signatures":
-    - "redis-server"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "21"
-    "source_type_name": "Redis"
-  "monitors":
-    "[Redis] High memory consumption": "assets/monitors/high_mem.json"
-  "saved_views":
-    "error_warning_status": "assets/saved_views/error_warning_status.json"
-    "pid_overview": "assets/saved_views/pid_overview.json"
-    "redis_pattern": "assets/saved_views/redis_pattern.json"
-    "redis_processes": "assets/saved_views/redis_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "data stores"
-- "log collection"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "redisdb"
-"integration_id": "redis"
-"integration_title": "Redis"
-"integration_version": "5.5.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "redisdb"
-"public_title": "Redis"
-"short_description": "redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::キャッシュ"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  - "Category::Tracing"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Redis"
+app_id: redis
+app_uuid: 15f0ff37-2b36-4165-9606-758271d4a16d
+assets:
+  dashboards:
+    redis: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: redis.net.clients
+      metadata_path: metadata.csv
+      prefix: redis.
+    process_signatures:
+    - redis-server
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 21
+    source_type_name: Redis
+  monitors:
+    '[Redis] High memory consumption': assets/monitors/high_mem.json
+  saved_views:
+    error_warning_status: assets/saved_views/error_warning_status.json
+    pid_overview: assets/saved_views/pid_overview.json
+    redis_pattern: assets/saved_views/redis_pattern.json
+    redis_processes: assets/saved_views/redis_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- data stores
+- log collection
+- tracing
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: redisdb
+integration_id: redis
+integration_title: Redis
+integration_version: 5.5.0
+is_public: true
+manifest_version: 2.0.0
+name: redisdb
+public_title: Redis
+short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::キャッシュ
+  - Category::Data Stores
+  - Category::ログの収集
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Redis
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -164,12 +164,12 @@ Datadog APM は、Redis と統合して分散システム全体のトレース�
 2. [Redis へのリクエストを作成するアプリケーションをインスツルメントします][6]。
 
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
 [3]: https://docs.redis.com/latest/rs/security/passwords-users-roles/
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/tracing/send_traces/
-[6]: https://docs.datadoghq.com/tracing/setup/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[6]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -218,13 +218,13 @@ Agent コンテナで必要な環境変数
 次に、[Redis にリクエストを送信するアプリケーションのコンテナをインスツルメント][7]し、Agent のコンテナ名に `DD_AGENT_HOST` を設定します。
 
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/agent/guide/secrets-management/?tab=linux
-[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
-[5]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[6]: https://docs.datadoghq.com/agent/docker/apm/?tab=linux
-[7]: https://docs.datadoghq.com/tracing/setup/
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/ja/agent/guide/secrets-management/?tab=linux
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[6]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
+[7]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -340,16 +340,16 @@ Agent コンテナで必要な環境変数
 
 そして、[Redis へのリクエストを作成するアプリケーションコンテナをインスツルメントします][10]。
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/agent/faq/template_variables/
-[4]: https://docs.datadoghq.com/agent/guide/secrets-management/?tab=linux
-[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
-[6]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[7]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
-[8]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=java
-[9]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[10]: https://docs.datadoghq.com/tracing/setup/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[4]: https://docs.datadoghq.com/ja/agent/guide/secrets-management/?tab=linux
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[6]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+[8]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[9]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[10]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -413,14 +413,14 @@ Agent コンテナで必要な環境変数
 
 次に、[Redis にリクエストを送信するアプリケーションのコンテナをインスツルメント][7]し、 [EC2 プライベート IP アドレス][8]に `DD_AGENT_HOST` を設定します。
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/agent/guide/secrets-management/?tab=linux
-[4]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
-[5]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[6]: https://docs.datadoghq.com/agent/docker/apm/?tab=linux
-[7]: https://docs.datadoghq.com/tracing/setup/
-[8]: https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/ja/agent/guide/secrets-management/?tab=linux
+[4]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[6]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
+[7]: https://docs.datadoghq.com/ja/tracing/setup/
+[8]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -474,5 +474,5 @@ Redis チェックには、イベントは含まれません。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

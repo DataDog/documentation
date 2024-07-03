@@ -1,33 +1,33 @@
 ---
-title: Detection Rules
 aliases:
-  - /security_monitoring/detection_rules/
-  - /cloud_siem/detection_rules/
-  - /security_platform/detection_rules/
-  - /security/security_monitoring/log_detection_rules/
+- /ja/security_monitoring/detection_rules/
+- /ja/cloud_siem/detection_rules/
+- /ja/security_platform/detection_rules/
+- /ja/security/security_monitoring/log_detection_rules/
 further_reading:
-- link: "/security/default_rules/#all"
+- link: /security/default_rules/#all
   tag: Documentation
   text: Explore default detection rules
 - link: /security/notifications/
   tag: Documentation
   text: Learn more about security notifications
-- link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
+- link: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
   tag: Blog
   text: Detect abuse of functionality with Datadog
-- link: "https://www.datadoghq.com/blog/impossible-travel-detection-rules/"
+- link: https://www.datadoghq.com/blog/impossible-travel-detection-rules/
   tag: Blog
   text: Detect suspicious login activity with impossible travel detection rules
 products:
-- name: Cloud SIEM
+- icon: siem
+  name: Cloud SIEM
   url: /security/cloud_siem/
-  icon: siem
-- name: Cloud Security Management
+- icon: cloud-security-management
+  name: Cloud Security Management
   url: /security/cloud_security_management/
-  icon: cloud-security-management
-- name: Application Security Management
+- icon: app-sec
+  name: Application Security Management
   url: /security/application_security/
-  icon: app-sec
+title: Detection Rules
 ---
 
 {{< product-availability >}}
@@ -151,19 +151,19 @@ Regular audits of all detection rules are performed to maintain high fidelity si
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/
-[2]: /security/cloud_siem/
-[3]: /security/cloud_siem/log_detection_rules/
-[4]: /security/cloud_security_management/misconfigurations/
-[5]: /security/threats/
-[6]: /security/application_security/
-[7]: /tracing/
-[8]: /agent/
+[1]: /ja/security/default_rules/
+[2]: /ja/security/cloud_siem/
+[3]: /ja/security/cloud_siem/log_detection_rules/
+[4]: /ja/security/cloud_security_management/misconfigurations/
+[5]: /ja/security/threats/
+[6]: /ja/security/application_security/
+[7]: /ja/tracing/
+[8]: /ja/agent/
 [9]: https://app.datadoghq.com/security/configuration/rules
-[10]: /account_management/rbac/
-[11]: /security/application_security/threats/custom_rules/
-[12]: /security/cloud_security_management/misconfigurations/custom_rules
-[13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /security/cloud_security_management/identity_risks/
+[10]: /ja/account_management/rbac/
+[11]: /ja/security/application_security/threats/custom_rules/
+[12]: /ja/security/cloud_security_management/misconfigurations/custom_rules
+[13]: /ja/security/threats/workload_security_rules?tab=host#create-custom-rules
+[14]: /ja/security/cloud_security_management/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security

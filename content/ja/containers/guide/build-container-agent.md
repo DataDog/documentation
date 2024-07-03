@@ -1,7 +1,7 @@
 ---
-title: Build Datadog Agent image
 aliases:
- - /agent/guide/build-container-agent
+- /ja/agent/guide/build-container-agent
+title: Build Datadog Agent image
 ---
 
 Datadog Docker Agent を特定の `<AGENT_VERSION>` でビルドするには、以下の手順に従います。Agent のバージョンは v6.0 以降です。

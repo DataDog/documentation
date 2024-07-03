@@ -1,23 +1,23 @@
 ---
-title: Compare Profiles
 aliases:
-- /tracing/profiler/compare_profiles/
+- /ja/tracing/profiler/compare_profiles/
 further_reading:
-    - link: profiler/enabling
-      tag: Documentation
-      text: Enable continuous profiler for your application
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
-      tag: Blog
-      text: Introducing always-on production profiling in Datadog
-    - link: "https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/"
-      tag: Blog
-      text: Compare and optimize your code with Datadog Profile Comparison
-    - link: "https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/"
-      tag: Blog
-      text: How we optimized our Akka application using Datadog's Continuous Profiler
+- link: profiler/enabling
+  tag: Documentation
+  text: Enable continuous profiler for your application
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
+  tag: Blog
+  text: Introducing always-on production profiling in Datadog
+- link: https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/
+  tag: Blog
+  text: Compare and optimize your code with Datadog Profile Comparison
+- link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
+  tag: Blog
+  text: How we optimized our Akka application using Datadog's Continuous Profiler
+title: Compare Profiles
 ---
 
 Continuous Profiler は、2 つのプロファイルまたはプロファイル集計を相互に比較して、コードパフォーマンスの向上、回帰、構造の変更を特定するのに役立ちます。プロファイルは次のものと比較できます。

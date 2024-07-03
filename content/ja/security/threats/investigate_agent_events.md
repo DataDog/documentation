@@ -1,19 +1,19 @@
 ---
-title: Agent イベントの調査
 disable_toc: false
 further_reading:
-  - link: "/security/default_rules/?category=cat-csm-threats#all"
-    tag: ドキュメント
-    text: CSM Threats 検出ルールの確認
-  - link: /security/threats/workload_security_rules
-    tag: ドキュメント
-    text: CSM Threats 検出ルールの管理方法について
-  - link: /security/notifications/
-    tag: ドキュメント
-    text: セキュリティ通知について
-  - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
-    tag: ブログ
-    text: Secure your Windows workloads with Datadog Cloud Security Management
+- link: /security/default_rules/?category=cat-csm-threats#all
+  tag: ドキュメント
+  text: CSM Threats 検出ルールの確認
+- link: /security/threats/workload_security_rules
+  tag: ドキュメント
+  text: CSM Threats 検出ルールの管理方法について
+- link: /security/notifications/
+  tag: ドキュメント
+  text: セキュリティ通知について
+- link: https://www.datadoghq.com/blog/datadog-csm-windows/
+  tag: ブログ
+  text: Secure your Windows workloads with Datadog Cloud Security Management
+title: Agent イベントの調査
 ---
 
 
@@ -66,11 +66,11 @@ To triage an event:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[11]: /security/threats/security_signals
-[12]: /security/default_rules/#cat-cloud-security-management
+[11]: /ja/security/threats/security_signals
+[12]: /ja/security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
-[14]: /service_management/events/explorer/
-[15]: /infrastructure/process/
-[16]: /metrics/
+[14]: /ja/service_management/events/explorer/
+[15]: /ja/infrastructure/process/
+[16]: /ja/metrics/
 [17]: https://app.datadoghq.com/process
-[18]: /security/cloud_security_management/guide/active-protection
+[18]: /ja/security/cloud_security_management/guide/active-protection

@@ -1,8 +1,6 @@
 ---
-title: Primary Operations in Services
-kind: guide
 aliases:
-- /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+- /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
@@ -19,55 +17,56 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentation
   text: Understand how to read a Datadog Trace
+title: Primary Operations in Services
 ---
 
-## APM services
+## APM サービス
 
 APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service Catalog, and the Service Map.
 
-**Note**: Trace Metrics can be queried based on their `trace.*` [namespace][1].
+**注**: トレースメトリクスは、`trace.*` [ネームスペース][1]に基づき照会できます。
 
-## Primary operations
-### Definition
+## プライマリオペレーション
+### 定義
 
-The primary operation name of a service determines how that service is represented in the UI. The Datadog backend automatically selects an operation name that is deemed the entry-point into the service based on the throughput of requests.
+サービスのプライマリオペレーション名により、サービスが UI でどのように表示されるかが決まります。Datadog のバックエンドは、リクエストスループットに基づいて、サービスのエントリーポイントとみなされるオペレーション名を自動的に選択します。
 
-As an example, a `web-store` service can have multiple endpoints which are instrumented as resources. These resources then share the same primary operation because the entry-point into these resources is consistent. For example, the resources `/user/home` and `/user/new` should both have the same primary operation `web.request`. In different languages a primary operation for a service may look like:
+たとえば、`web-store` サービスは、リソースとしてインスツルメントされた複数のエンドポイントを持つことができます。これらのリソースでは、サービスのエントリーポイントが一致しているため、同じプライマリオペレーションを共有できます。例を挙げると、リソース `/user/home` と `/user/new` は共に、同じプライマリオペレーション `web.request` を持ちます。他の言語では、サービスのプライマリオペレーションは以下のような形式をとります。
 
-| Service Type           | Primary Operation                                 |
+| サービスの種類           | プライマリオペレーション                                 |
 |------------------------|---------------------------------------------------|
-| web                    | `servlet.request`, `flask.request`, `web.request` |
-| db                     | `postgres.query`, `db.query`                      |
-| custom-instrumentation | `trace.annotation`, `method.call`                 |
+| web                    | `servlet.request`、`flask.request`、`web.request` |
+| db                     | `postgres.query`、`db.query`                      |
+| カスタムインスツルメンテーション | `trace.annotation`、`method.call`                 |
 
-### Configuration
+### 構成
 
-When there are multiple primary operations defined for a service, the highest request throughput determines the operation automatically selected to be the entry-point for the service. An admin user can set this setting manually:
+1  つのサービスに複数のプライマリオペレーションが定義されている場合は、最も高いリクエストスループットによってオペレーションが自動的に選択され、サービスのエントリーポイントとなります。管理者ユーザーはこれを手動で設定できます。
 
-1. Go to the [APM settings page][2].
-2. Select the **Primary Operation Name** tab.
-3. Click on the edit icon for the service that you want to manually set.
-4. Click the **Set Manually** tab.
-5. Select the operation that you want reflected as the entry-point to the service.
-6. Click **Save**.
+1. [APM 設定ページ][2]に移動します。
+2. **Primary Operation Name** タブを選択します。
+3. 手動設定を行うサービスの編集アイコンをクリックします。
+4. **Set Manually** タブをクリックします。
+5. サービスのエントリーポイントとして設定するオペレーションを選択します。
+6. **Save** をクリックします。
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM の保存" >}}
 
-## Viewing stats for additional span names
+## 追加スパン名の統計を表示する
 
-To ensure that all traces are being sent to Datadog correctly outside of any instrumentation, you can view your resources by additional span names that are considered a secondary operation with a dropdown menu. However, these are not used to calculate service-level statistics.
+すべてのトレースがインスツルメンテーション以外でも Datadog に正しく送信されているか確認するには、追加スパン名によりリソースを表示できます。追加スパン名はセカンダリオペレーションとしてドロップダウンメニューで表示されます。ただし、追加スパン名はサービスレベルの統計の計算には使用されません。
 
-{{< img src="tracing/guide/primary_operation/dropdown.mp4" alt="APM save" video=true >}}
+{{< img src="tracing/guide/primary_operation/dropdown.mp4" alt="APM の保存" video=true >}}
 
-## Manual instrumentation
+## 手動インスツルメンテーション
 
-When writing custom spans, statically set the span name to ensure that your resources are grouped with the same primary operation (for example, `web.request`). If the span is being named dynamically, set it as the resource (for example, `/user/profile`).
+カスタムスパンを作成する際は、リソースが確実に同じプライマリオペレーション (例: `web.request`) で分類されるよう、スパン名を静的に設定します。スパン名が動的に設定されている場合は、リソースとして設定します (たとえば `/user/profile`)。
 
-See [Custom Instrumentation][3] for your programming language for detailed information.
+詳細は、プログラミング言語の[カスタムインスツルメンテーション][3]をご参照ください。
 
 ## OpenTracing
 
-When using Datadog, the OpenTracing operation name is a resource and the OpenTracing "component" tag is Datadog's span name. For example, to define (in OpenTracing terms) a span that has the resource "/user/profile", and the span name "http.request":
+Datadog を使用している場合、OpenTracing オペレーション名はリソース、OpenTracing "component" タグは Datadog のスパン名となります。たとえば、リソースが "/user/profile"、スパン名が "http.request" のスパンを OpenTracing 用語で定義するには、次のようになります。
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -80,17 +79,17 @@ Span span = tracer.buildSpan("http.request").start();
 try (Scope scope = tracer.activateSpan(span)) {
     span.setTag("service.name", "service_name");
     span.setTag("resource.name", "/user/profile");
-    // code being traced
+    // トレースされるコード
 } finally {
     span.finish();
 }
 
 ```
 
-For more information, see [Setting up Java and OpenTracing][1].
+詳細は、[Java および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/opentracing/java/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/java/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -106,10 +105,10 @@ span.finish()
 
 ```
 
-For more information, see [Setting up Python and OpenTracing][1].
+詳細は、[Python および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/opentracing/python/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/python/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -117,13 +116,13 @@ For more information, see [Setting up Python and OpenTracing][1].
 ```ruby
 OpenTracing.start_active_span('http.request') do |scope|
   scope.span.datadog_span.resource = '/user/profile'
-  # code being traced
+  # トレースされるコード
 end
 ```
-For more information, see [Setting up Ruby and OpenTracing][1].
+詳細は、[Ruby および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/opentracing/ruby/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/ruby/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -132,10 +131,10 @@ For more information, see [Setting up Ruby and OpenTracing][1].
 opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 ```
 
-For more information, see [Setting up Go and OpenTracing][1].
+詳細は、[Go および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/opentracing/go/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -144,14 +143,14 @@ For more information, see [Setting up Go and OpenTracing][1].
 const span = tracer.startSpan('http.request');
 span.setTag('resource.name',  '/user/profile')
 span.setTag('span.type', 'web')
-// code being traced
+// トレースされるコード
 span.finish();
 ```
 
-For more information, see [Setting up Node.js and OpenTracing][1].
+詳細は、[Node.js および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/opentracing/nodejs/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/nodejs/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -163,67 +162,67 @@ using OpenTracing.Util;
 using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(finishSpanOnDispose: true))
 {
     scope.Span.SetTag("resource.name", "/user/profile");
-    // code being traced
+    // トレースされるコード
 }
 
 ```
 
-For more information, see [Setting up .NET and OpenTracing][1].
+詳細は、[.NET および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/opentracing/dotnet/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/dotnet/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
 
 ```php
-// Once, at the beginning of your index.php, right after composer's autoloader import.
-// For OpenTracing <= 1.0-beta6
+// Composer のオートローダーのインポート後、index.php の初めに一度。
+// OpenTracing 1.0-beta6 以下の場合
 $otTracer = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
-// For OpenTracing >= 1.0
+// OpenTracing >= 1.0 以降の場合
 $otTracer = new \DDTrace\OpenTracer1\Tracer(\DDTrace\GlobalTracer::get());
-// Register the global tracer wrapper
+// グローバルのトレーサーラッパーを登録
  \OpenTracing\GlobalTracer::set($otTracer);
 
-// Anywhere in your application code
+// アプリケーションコードの任意の場所
 $otTracer = \OpenTracing\GlobalTracer::get();
 $scope = $otTracer->startActiveSpan('http.request');
 $span = $scope->getSpan();
 $span->setTag('service.name', 'service_name');
 $span->setTag('resource.name', '/user/profile');
 $span->setTag('span.type', 'web');
-// ...Use OpenTracing as expected
+// ...OpenTracing を予期されるとおりに使用
 $scope->close();
 ```
 
-For more information, see [Setting up PHP and OpenTracing][1].
+詳細は、[PHP および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/opentracing/php/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/php/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
 
 ```cpp
-// Create a root span for the current request.
+// 現在のリクエストにルートスパンを作成。
 auto root_span = tracer->StartSpan("web.request");
-// Set a resource name for the root span.
+// ルートスパンにリソース名を設定。
 root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 ```
 
-For more information, see [Setting up C++ and Custom Instrumentation][1].
+詳細は、[C++ および カスタムインスツルメンテーションのセットアップ][1]をご参照ください。
 
 
-[1]: /tracing/trace_collection/custom_instrumentation/cpp/#manually-instrument-a-method
+[1]: /ja/tracing/trace_collection/custom_instrumentation/cpp/#manually-instrument-a-method
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/metrics/metrics_namespace/
+[1]: /ja/tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
-[3]: /tracing/trace_collection/custom_instrumentation/
+[3]: /ja/tracing/trace_collection/custom_instrumentation/

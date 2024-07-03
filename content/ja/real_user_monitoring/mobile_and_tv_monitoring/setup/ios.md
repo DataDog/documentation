@@ -1,36 +1,36 @@
 ---
-title: RUM iOS and tvOS Monitoring Setup
-kind: documentation
-beta: true
-description: "Collect RUM data from your iOS and tvOS applications."
 aliases:
-  - /real_user_monitoring/ios
-  - /real_user_monitoring/ios/getting_started
-  - /real_user_monitoring/ios/swiftui/
-  - /real_user_monitoring/swiftui/
-  - /real_user_monitoring/mobile_and_tv_monitoring/swiftui/
+- /ja/real_user_monitoring/ios
+- /ja/real_user_monitoring/ios/getting_started
+- /ja/real_user_monitoring/ios/swiftui/
+- /ja/real_user_monitoring/swiftui/
+- /ja/real_user_monitoring/mobile_and_tv_monitoring/swiftui/
+beta: true
 code_lang: ios
-type: multi-code-lang
 code_lang_weight: 20
+description: Collect RUM data from your iOS and tvOS applications.
 further_reading:
- - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
-   tag: Documentation
-   text: RUM iOS Advanced Configuration
- - link: "https://github.com/DataDog/dd-sdk-ios"
-   tag: ソースコード
-   text: Source code for dd-sdk-ios
- - link: /real_user_monitoring
-   tag: Documentation
-   text: Learn how to explore your RUM data
- - link: /real_user_monitoring/error_tracking/ios/
-   tag: Documentation
-   text: Learn how to track iOS errors
- - link: /real_user_monitoring/ios/swiftui/
-   tag: Documentation
-   text: Learn about instrumenting SwiftUI applications
- - link: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
-   tag: ドキュメント
-   text: RUM iOS and tvOS monitoring supported versions
+- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+  tag: Documentation
+  text: RUM iOS Advanced Configuration
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: ソースコード
+  text: Source code for dd-sdk-ios
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Learn how to explore your RUM data
+- link: /real_user_monitoring/error_tracking/ios/
+  tag: Documentation
+  text: Learn how to track iOS errors
+- link: /real_user_monitoring/ios/swiftui/
+  tag: Documentation
+  text: Learn about instrumenting SwiftUI applications
+- link: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+  tag: ドキュメント
+  text: RUM iOS and tvOS monitoring supported versions
+kind: documentation
+title: RUM iOS and tvOS Monitoring Setup
+type: multi-code-lang
 ---
 
 ## 概要
@@ -473,19 +473,19 @@ See [Supported versions][19] for a list operating system versions and platforms 
 [1]: https://github.com/microsoft/plcrashreporter/issues/288
 [2]: https://developer.apple.com/xcode/
 [3]: https://developer.apple.com/news/?id=jd9wcyov
-[4]: /logs/log_collection/ios/?tab=swiftpackagemanagerspm
-[5]: /logs/log_collection/ios/?tab=carthage
+[4]: /ja/logs/log_collection/ios/?tab=swiftpackagemanagerspm
+[5]: /ja/logs/log_collection/ios/?tab=carthage
 [6]: https://github.com/DataDog/dd-sdk-ios/tree/develop/DatadogExtensions/Alamofire
 [7]: https://github.com/microsoft/plcrashreporter
 [8]: https://app.datadoghq.com/rum/application/create
-[9]: /real_user_monitoring/ios/web_view_tracking/
-[10]: /real_user_monitoring/ios/data_collected/
-[11]: /account_management/api-app-keys/#api-keys
-[12]: /account_management/api-app-keys/#client-tokens
-[13]: /getting_started/tagging/using_tags/#rum--session-replay
-[14]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
-[15]: /real_user_monitoring/ios/advanced_configuration/#set-tracking-consent-gdpr-compliance
+[9]: /ja/real_user_monitoring/ios/web_view_tracking/
+[10]: /ja/real_user_monitoring/ios/data_collected/
+[11]: /ja/account_management/api-app-keys/#api-keys
+[12]: /ja/account_management/api-app-keys/#client-tokens
+[13]: /ja/getting_started/tagging/using_tags/#rum--session-replay
+[14]: /ja/real_user_monitoring/ios/advanced_configuration/#initialization-parameters
+[15]: /ja/real_user_monitoring/ios/advanced_configuration/#set-tracking-consent-gdpr-compliance
 [16]: https://github.com/DataDog/dd-sdk-ios
-[17]: /real_user_monitoring/error_tracking/ios/
-[18]: /real_user_monitoring/explorer/
-[19]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[17]: /ja/real_user_monitoring/error_tracking/ios/
+[18]: /ja/real_user_monitoring/explorer/
+[19]: /ja/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/

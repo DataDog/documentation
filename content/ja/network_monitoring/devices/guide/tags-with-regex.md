@@ -1,7 +1,6 @@
 ---
-title: NDM Tags with Regex
 aliases:
-    - /network_performance_monitoring/devices/guide/tags-with-regex/
+- /ja/network_performance_monitoring/devices/guide/tags-with-regex/
 further_reading:
 - link: /network_monitoring/devices/snmp_metrics
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /getting_started/tagging
   tag: Documentation
   text: Getting Started with Tags
+title: NDM Tags with Regex
 ---
 
 Datadog ネットワークデバイスモニタリング (NDM) は、正規表現に対応し `<KEY>:<VALUE>` の形式でメトリクスタグを作成します。
@@ -65,6 +65,6 @@ metrics:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/devices/snmp_metrics
+[1]: /ja/network_monitoring/devices/snmp_metrics
 [2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [3]: https://docs.python.org/3/library/re.html

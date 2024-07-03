@@ -1,6 +1,6 @@
 ---
-title: Issue States in Error Tracking
 kind: documentation
+title: Issue States in Error Tracking
 ---
 
 ## Overview
@@ -56,7 +56,7 @@ View a history of your issue activity with the **Activity Timeline**. On the det
 
 {{< img src="error_tracking/issue-status-history.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:80%;" >}}
 
-[1]: /tracing/services/deployment_tracking
-[2]: /real_user_monitoring/guide/setup-rum-deployment-tracking/?tab=npm
-[3]: /getting_started/tagging/unified_service_tagging/
-[4]: /monitors/types/error_tracking/
+[1]: /ja/tracing/services/deployment_tracking
+[2]: /ja/real_user_monitoring/guide/setup-rum-deployment-tracking/?tab=npm
+[3]: /ja/getting_started/tagging/unified_service_tagging/
+[4]: /ja/monitors/types/error_tracking/

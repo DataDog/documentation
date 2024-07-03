@@ -1,23 +1,24 @@
 ---
+aliases:
+- /ja/getting_started/observability_pipelines/
+- /ja/observability_pipelines/installation/
+- /ja/observability_pipelines/setup/
+further_reading:
+- link: /observability_pipelines/legacy/working_with_data/
+  tag: Documentation
+  text: Working with data in Observability Pipelines
+- link: /observability_pipelines/legacy/production_deployment_overview/
+  tag: Documentation
+  text: Deployment Design and Principles for the Observability Pipelines Worker
+- link: /observability_pipelines/legacy/architecture/
+  tag: Documentation
+  text: Production deployment design and principles for the Observability Pipelines
+    Worker
+- link: https://dtdg.co/d22op
+  tag: ラーニングセンター
+  text: Safe and Secure Local Processing with Observability Pipelines
 title: (LEGACY) Set Up the Observability Pipelines Worker
 type: multi-code-lang
-aliases:
-  - /getting_started/observability_pipelines/
-  - /observability_pipelines/installation/
-  - /observability_pipelines/setup/
-further_reading:
-  - link: /observability_pipelines/legacy/working_with_data/
-    tag: Documentation
-    text: Working with data in Observability Pipelines
-  - link: /observability_pipelines/legacy/production_deployment_overview/
-    tag: Documentation
-    text: Deployment Design and Principles for the Observability Pipelines Worker
-  - link: /observability_pipelines/legacy/architecture/
-    tag: Documentation
-    text: Production deployment design and principles for the Observability Pipelines Worker
-  - link: "https://dtdg.co/d22op"
-    tag: ラーニングセンター
-    text: Safe and Secure Local Processing with Observability Pipelines
 ---
 
 {{< site-region region="gov" >}}
@@ -86,7 +87,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
-[3]: /observability_pipelines/legacy/configurations/
+[3]: /ja/observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart values file][1] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
@@ -106,7 +107,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
-[2]: /observability_pipelines/legacy/configurations/
+[2]: /ja/observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 1. Download the [Helm chart values file][1] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
@@ -126,7 +127,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
-[2]: /observability_pipelines/legacy/configurations/
+[2]: /ja/observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 1. Download the [Helm chart values file][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
@@ -146,7 +147,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
-[2]: /observability_pipelines/legacy/configurations/
+[2]: /ja/observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "APT ベースの Linux" %}}
 
@@ -213,7 +214,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
-[2]: /observability_pipelines/legacy/configurations/
+[2]: /ja/observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "RPM ベースの Linux" %}}
 
@@ -281,7 +282,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
-[2]: /observability_pipelines/legacy/configurations/
+[2]: /ja/observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
@@ -291,7 +292,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 サンプル構成で使用されているソース、トランスフォーム、シンクの詳細については、[構成][2]を参照してください。
 
 [1]: /resources/yaml/observability_pipelines/quickstart/terraform_opw.tf
-[2]: /observability_pipelines/legacy/configurations/
+[2]: /ja/observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -316,13 +317,13 @@ For recommendations on deploying and scaling multiple Workers:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/legacy/#what-is-observability-pipelines-and-the-observability-pipelines-worker
-[2]: /observability_pipelines/legacy/setup/datadog/
-[3]: /observability_pipelines/legacy/setup/datadog_with_archiving/
-[4]: /observability_pipelines/legacy/setup/splunk/
+[1]: /ja/observability_pipelines/legacy/#what-is-observability-pipelines-and-the-observability-pipelines-worker
+[2]: /ja/observability_pipelines/legacy/setup/datadog/
+[3]: /ja/observability_pipelines/legacy/setup/datadog_with_archiving/
+[4]: /ja/observability_pipelines/legacy/setup/splunk/
 [5]: https://www.datadoghq.com/legal/eula/
 [6]: https://app.datadoghq.com/observability-pipelines
-[7]: /account_management/api-app-keys/#api-keys
-[8]: /observability_pipelines/legacy/working_with_data/
-[9]: /observability_pipelines/legacy/production_deployment_overview/
-[10]: /observability_pipelines/legacy/architecture/
+[7]: /ja/account_management/api-app-keys/#api-keys
+[8]: /ja/observability_pipelines/legacy/working_with_data/
+[9]: /ja/observability_pipelines/legacy/production_deployment_overview/
+[10]: /ja/observability_pipelines/legacy/architecture/

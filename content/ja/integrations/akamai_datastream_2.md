@@ -1,65 +1,65 @@
 ---
-"app_id": "akamai-datastream-2"
-"app_uuid": "9a772881-d31a-4ffb-92bb-7beef1088a55"
-"assets":
-  "dashboards":
-    "Akamai DataStream 2": assets/dashboards/akamai_datastream_2_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": akamai_datastream.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10273"
-    "source_type_name": Akamai DataStream 2
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Datadog
-  "sales_email": help@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: akamai-datastream-2
+app_uuid: 9a772881-d31a-4ffb-92bb-7beef1088a55
+assets:
+  dashboards:
+    Akamai DataStream 2: assets/dashboards/akamai_datastream_2_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: akamai_datastream.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10273
+    source_type_name: Akamai DataStream 2
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Datadog
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - caching
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "akamai_datastream_2"
-"integration_id": "akamai-datastream-2"
-"integration_title": "Akamai DataStream 2"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "akamai_datastream_2"
-"public_title": "Akamai DataStream 2"
-"short_description": "Send your Akamai DataStream logs to Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: akamai_datastream_2
+integration_id: akamai-datastream-2
+integration_title: Akamai DataStream 2
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: akamai_datastream_2
+public_title: Akamai DataStream 2
+short_description: Send your Akamai DataStream logs to Datadog
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Send your Akamai DataStream logs to Datadog
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/monitor-akamai-datastream2/"
-  "support": "README.md#Support"
-  "title": Akamai DataStream 2
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Send your Akamai DataStream logs to Datadog
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-akamai-datastream2/
+  support: README.md#Support
+  title: Akamai DataStream 2
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -116,5 +116,4 @@ Akamai DataStream 2 には、イベントは含まれません。
 [1]: https://techdocs.akamai.com/datastream2/docs
 [2]: https://www.datadoghq.com/blog/monitor-akamai-datastream2/
 [3]: https://app.datadoghq.com/logs?query=source%3Aakamai.datastream
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

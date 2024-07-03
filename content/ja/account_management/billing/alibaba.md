@@ -25,7 +25,7 @@ Agent が実行されている VM は引き続き表示され、課金対象に�
 課金に関するご質問は、[カスタマーサクセス][5]マネージャーにお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/alibaba-cloud
-[2]: /getting_started/tagging/using_tags/#integrations
-[3]: /infrastructure/
-[4]: /help/
+[2]: /ja/getting_started/tagging/using_tags/#integrations
+[3]: /ja/infrastructure/
+[4]: /ja/help/
 [5]: mailto:success@datadoghq.com

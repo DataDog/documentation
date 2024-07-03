@@ -1,15 +1,14 @@
 ---
-title: Which Integrations use Jmxfetch?
-kind: guide
 further_reading:
 - link: /agent/faq/log4j_mitigation/
   tag: Documentation
   text: Mitigating the Risk of Remote Code Execution Due to Log4Shell
+title: Which Integrations use Jmxfetch?
 ---
 
-## Default integrations
+## デフォルトのインテグレーション
 
-The following integrations use [JMXFetch][1] and are included by default in the Datadog Agent:
+以下のインテグレーションは [JMXFetch][1] を使用しており、Datadog Agent にデフォルトで含まれています。
 
 * [ActiveMQ][2]
 * [Cassandra][3]
@@ -29,9 +28,9 @@ The following integrations use [JMXFetch][1] and are included by default in the 
 
 **Note**: These integrations do **not** run by default. Each integration must be configured to run on a host.
 
-## Community integrations
+## コミュニティのインテグレーション
 
-The following [Community Integrations][17] use jmxfetch and are **not** included by default in the Datadog Agent:
+以下の[コミュニティインテグレーション][17]は jmxfetch を使用しており、Datadog Agent にデフォルトで**含まれていません**。
 
 * [nextcloud][18]
 * [flume][19]
@@ -48,31 +47,31 @@ The following [Community Integrations][17] use jmxfetch and are **not** included
 
 **Note**: These integrations do **not** run by default. Each integration must be installed and configured to run on a host.
 
-## Custom checks
+## カスタムチェック
 
-Datadog users can monitor any Java Application by configuring the [Java/JMX][10] check. The name of these checks is determined by the user who creates the check.
+Datadog ユーザーは、[Java/JMX][10] チェックを構成することで、あらゆる Java アプリケーションを監視することができます。これらのチェックの名前は、チェックを作成するユーザーによって決定されます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/jmxfetch
-[2]: https://docs.datadoghq.com/integrations/activemq/
-[3]: https://docs.datadoghq.com/integrations/cassandra/
-[4]: https://docs.datadoghq.com/integrations/confluent_platform/
-[5]: https://docs.datadoghq.com/integrations/hazelcast/
-[6]: https://docs.datadoghq.com/integrations/hive/
-[7]: https://docs.datadoghq.com/integrations/hivemq/
-[8]: https://docs.datadoghq.com/integrations/hudi/
-[9]: https://docs.datadoghq.com/integrations/ignite/
-[10]: https://docs.datadoghq.com/integrations/java
-[11]: https://docs.datadoghq.com/integrations/jboss_wildfly/
-[12]: https://docs.datadoghq.com/integrations/kafka/
-[13]: https://docs.datadoghq.com/integrations/presto/
-[14]: https://docs.datadoghq.com/integrations/solr/
-[15]: https://docs.datadoghq.com/integrations/sonarqube/
-[16]: https://docs.datadoghq.com/integrations/tomcat/
-[17]: /agent/guide/use-community-integrations/?tab=agentv721v621
+[2]: https://docs.datadoghq.com/ja/integrations/activemq/
+[3]: https://docs.datadoghq.com/ja/integrations/cassandra/
+[4]: https://docs.datadoghq.com/ja/integrations/confluent_platform/
+[5]: https://docs.datadoghq.com/ja/integrations/hazelcast/
+[6]: https://docs.datadoghq.com/ja/integrations/hive/
+[7]: https://docs.datadoghq.com/ja/integrations/hivemq/
+[8]: https://docs.datadoghq.com/ja/integrations/hudi/
+[9]: https://docs.datadoghq.com/ja/integrations/ignite/
+[10]: https://docs.datadoghq.com/ja/integrations/java
+[11]: https://docs.datadoghq.com/ja/integrations/jboss_wildfly/
+[12]: https://docs.datadoghq.com/ja/integrations/kafka/
+[13]: https://docs.datadoghq.com/ja/integrations/presto/
+[14]: https://docs.datadoghq.com/ja/integrations/solr/
+[15]: https://docs.datadoghq.com/ja/integrations/sonarqube/
+[16]: https://docs.datadoghq.com/ja/integrations/tomcat/
+[17]: /ja/agent/guide/use-community-integrations/?tab=agentv721v621
 [18]: https://github.com/DataDog/integrations-extras/tree/master/nextcloud
 [19]: https://github.com/DataDog/integrations-extras/tree/master/flume
 [20]: https://github.com/DataDog/integrations-extras/tree/master/stardog

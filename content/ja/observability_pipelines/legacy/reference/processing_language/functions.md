@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Functions
 aliases:
-  - /observability_pipelines/reference/processing_language/functions/
+- /ja/observability_pipelines/reference/processing_language/functions/
+title: (LEGACY) Functions
 ---
 
 {{< site-region region="gov" >}}

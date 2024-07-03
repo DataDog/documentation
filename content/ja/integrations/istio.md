@@ -1,85 +1,85 @@
 ---
-"app_id": "istio"
-"app_uuid": "de5b5443-5038-46cf-a052-0484348776d6"
-"assets":
-  "dashboards":
-    "Istio Overview 1.5": "assets/dashboards/istio_1_5_overview.json"
-    "Istio Overview 1.5 (OpenMetrics)": "assets/dashboards/istio_1_5_openmetrics_overview.json"
-    "Istio base dashboard": "assets/dashboards/istio_overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "istio.mixer.process.cpu_seconds_total"
-      - "istio.mesh.request.count"
-      - "istio.galley.endpoint_no_pod"
-      "metadata_path": "metadata.csv"
-      "prefix": "istio."
-    "process_signatures":
-    - "pilot-agent proxy router"
-    - "envoy envoy-rev0.json"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10017"
-    "source_type_name": "Istio"
-  "monitors":
-    "Failed sidecar injections": "assets/monitors/failed_sidecar_injection.json"
-  "saved_views":
-    "Istio Error Overview": "assets/saved_views/istio_error_overview.json"
-    "Istio Overview": "assets/saved_views/istio_overview.json"
-    "Istio Pilot Error Logs": "assets/saved_views/istio_pilot_errors.json"
-    "Istio Pilot Logs": "assets/saved_views/istio_pilot_logs.json"
-    "Istio Proxyv2 Error Logs": "assets/saved_views/istio_proxyv2_errors.json"
-    "Istio Proxyv2 Logs": "assets/saved_views/istio_proxyv2_logs.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-- "network"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/istio/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "istio"
-"integration_id": "istio"
-"integration_title": "Istio"
-"integration_version": "6.1.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "istio"
-"public_title": "Istio"
-"short_description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Category::ネットワーク"
-  - "Category::Tracing"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Submitted Data Type::Traces"
-  "configuration": "README.md#Setup"
-  "description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Istio"
+app_id: istio
+app_uuid: de5b5443-5038-46cf-a052-0484348776d6
+assets:
+  dashboards:
+    Istio Overview 1.5: assets/dashboards/istio_1_5_overview.json
+    Istio Overview 1.5 (OpenMetrics): assets/dashboards/istio_1_5_openmetrics_overview.json
+    Istio base dashboard: assets/dashboards/istio_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - istio.mixer.process.cpu_seconds_total
+      - istio.mesh.request.count
+      - istio.galley.endpoint_no_pod
+      metadata_path: metadata.csv
+      prefix: istio.
+    process_signatures:
+    - pilot-agent proxy router
+    - envoy envoy-rev0.json
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10017
+    source_type_name: Istio
+  monitors:
+    Failed sidecar injections: assets/monitors/failed_sidecar_injection.json
+  saved_views:
+    Istio Error Overview: assets/saved_views/istio_error_overview.json
+    Istio Overview: assets/saved_views/istio_overview.json
+    Istio Pilot Error Logs: assets/saved_views/istio_pilot_errors.json
+    Istio Pilot Logs: assets/saved_views/istio_pilot_logs.json
+    Istio Proxyv2 Error Logs: assets/saved_views/istio_proxyv2_errors.json
+    Istio Proxyv2 Logs: assets/saved_views/istio_proxyv2_logs.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- network
+- tracing
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/istio/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: istio
+integration_id: istio
+integration_title: Istio
+integration_version: 6.1.1
+is_public: true
+manifest_version: 2.0.0
+name: istio
+public_title: Istio
+short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Category::ネットワーク
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Submitted Data Type::Traces
+  configuration: README.md#Setup
+  description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Istio
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -299,27 +299,26 @@ instances:
 - [Datadog を使用した Istio の監視方法][3]
 
 [1]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
-[2]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
+[2]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
 [3]: https://www.datadoghq.com/blog/istio-datadog/
-[4]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[5]: https://docs.datadoghq.com/integrations/guide/versions-for-openmetrics-based-integrations
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[5]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://github.com/DataDog/integrations-core/tree/master/envoy#istio
-[8]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
 [10]: https://istio.io/latest/docs/ops/deployment/architecture/
 [11]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
-[12]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=file#configuration
+[12]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=file#configuration
 [13]: https://istio.io/latest/docs/setup/install/
-[14]: https://docs.datadoghq.com/agent/kubernetes/
-[15]: https://docs.datadoghq.com/integrations/envoy/#log-collection
+[14]: https://docs.datadoghq.com/ja/agent/kubernetes/
+[15]: https://docs.datadoghq.com/ja/integrations/envoy/#log-collection
 [16]: https://istio.io/v1.4/docs/tasks/observability/logs/collecting-logs/
-[17]: https://docs.datadoghq.com/agent/kubernetes/log/
-[18]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[17]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[18]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [19]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
 [20]: https://github.com/DataDog/integrations-core/blob/master/istio/assets/service_checks.json
-[21]: https://docs.datadoghq.com/integrations/openmetrics/
-[22]: https://docs.datadoghq.com/help/
+[21]: https://docs.datadoghq.com/ja/integrations/openmetrics/
+[22]: https://docs.datadoghq.com/ja/help/
 [23]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
 [24]: https://www.datadoghq.com/blog/istio-metrics/
-

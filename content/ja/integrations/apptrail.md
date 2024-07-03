@@ -1,65 +1,72 @@
 ---
-"app_id": "apptrail"
-"app_uuid": "302b6db7-d1d6-445c-ae20-00743775cb6b"
-"assets": {}
-"author":
-  "homepage": "https://apptrail.com"
-  "name": Apptrail
-  "sales_email": sales@apptrail.com
-  "support_email": support@apptrail.com
-"categories":
+app_id: apptrail
+app_uuid: 302b6db7-d1d6-445c-ae20-00743775cb6b
+assets: {}
+author:
+  homepage: https://apptrail.com
+  name: Apptrail
+  sales_email: sales@apptrail.com
+  support_email: support@apptrail.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "apptrail"
-"integration_id": "apptrail"
-"integration_title": "Apptrail"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "apptrail"
-"public_title": "Apptrail"
-"short_description": "Monitor, analyze, & alert on all your SaaS audit logs using Apptrail"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: apptrail
+integration_id: apptrail
+integration_title: Apptrail
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: apptrail
+public_title: Apptrail
+short_description: Monitor, analyze, & alert on all your SaaS audit logs using Apptrail
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor, analyze, & alert on all your SaaS audit logs using Apptrail
-  "media":
-  - "caption": Apptrail hosts an audit logs Portal on behalf of SaaS vendors, where customers can view, search, configure, and export their audit logs.
-    "image_url": images/1-at-portal.png
-    "media_type": image
-  - "caption": View a full audit event history from the Apptrail Portal, and search & filter by time and event properties.
-    "image_url": images/2-at-events-history.png
-    "media_type": image
-  - "caption": Apptrail audit events contain detailed information on the who, what, where, when, and how of a recorded activity, alongside contextual information like IP address and custom event data.
-    "image_url": images/3-at-log-detail.png
-    "media_type": image
-  - "caption": Create trails to continuously stream audit logs to dozens of destinations, like Datadog, in realtime for archival, monitoring, and analysis.
-    "image_url": images/4-at-create-trail-sel.png
-    "media_type": image
-  - "caption": Use trail rules to filter and select a subset of events to deliver from a trail.
-    "image_url": images/5-at-trail-detail.png
-    "media_type": image
-  - "caption": Apptrail audit logs are continously exported to Datadog Logs in realtime, where you can analyze, query, and monitor your audit logs.
-    "image_url": images/6-datadog-preview.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Apptrail
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor, analyze, & alert on all your SaaS audit logs using Apptrail
+  media:
+  - caption: Apptrail hosts an audit logs Portal on behalf of SaaS vendors, where
+      customers can view, search, configure, and export their audit logs.
+    image_url: images/1-at-portal.png
+    media_type: image
+  - caption: View a full audit event history from the Apptrail Portal, and search
+      & filter by time and event properties.
+    image_url: images/2-at-events-history.png
+    media_type: image
+  - caption: Apptrail audit events contain detailed information on the who, what,
+      where, when, and how of a recorded activity, alongside contextual information
+      like IP address and custom event data.
+    image_url: images/3-at-log-detail.png
+    media_type: image
+  - caption: Create trails to continuously stream audit logs to dozens of destinations,
+      like Datadog, in realtime for archival, monitoring, and analysis.
+    image_url: images/4-at-create-trail-sel.png
+    media_type: image
+  - caption: Use trail rules to filter and select a subset of events to deliver from
+      a trail.
+    image_url: images/5-at-trail-detail.png
+    media_type: image
+  - caption: Apptrail audit logs are continously exported to Datadog Logs in realtime,
+      where you can analyze, query, and monitor your audit logs.
+    image_url: images/6-datadog-preview.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Apptrail
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -121,12 +128,11 @@ Need help? Contact [Datadog support][10] or reach out to [Apptrail support][11].
 [2]: https://apptrail.com/docs/consumers/guide/event-delivery/#trails
 [3]: https://apptrail.com/docs/consumers/guide/event-delivery/working-with-trails#creating-a-trail
 [4]: https://portal.apptrail.com/trails
-[5]: https://docs.datadoghq.com/getting_started/site/
+[5]: https://docs.datadoghq.com/ja/getting_started/site/
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: https://apptrail.com/docs/consumers/guide/event-delivery/integrations/datadog
 [8]: https://apptrail.com/docs/consumers/guide/event-delivery/working-with-trails#selecting-events-using-trail-rules
 [9]: https://apptrail.com/docs/consumers/guide/event-format
-[10]: https://docs.datadoghq.com/help/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: mailto:support@apptrail.com
 [12]: https://apptrail.com/docs/consumers/guide
-

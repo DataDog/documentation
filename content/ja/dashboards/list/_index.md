@@ -1,6 +1,5 @@
 ---
-title: Dashboard List
-description: "Organize and manage dashboards with lists"
+description: Organize and manage dashboards with lists
 disable_toc: false
 further_reading:
 - link: dashboards/
@@ -9,6 +8,7 @@ further_reading:
 - link: dashboards/guide/maintain-relevant-dashboards
   tag: Guide
   text: Best practices for maintaining relevant dashboards
+title: Dashboard List
 ---
 
 ## 概要
@@ -91,4 +91,4 @@ Favorite lists (お気に入りリスト) は、現在ログインしている�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /account_management/teams/
+[2]: /ja/account_management/teams/

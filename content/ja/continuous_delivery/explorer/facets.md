@@ -1,5 +1,4 @@
 ---
-title: Deployment Execution Facets
 description: Learn about facets for filtering and grouping your deployment executions.
 further_reading:
 - link: continuous_delivery/explorer/
@@ -8,6 +7,7 @@ further_reading:
 - link: continuous_delivery/search/
   tag: Documentation
   text: Learn how to search and manage your deployment results
+title: Deployment Execution Facets
 ---
 
 {{< site-region region="gov" >}}
@@ -113,10 +113,10 @@ Autocomplete based on the content in deployment executions of the current views 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/types/ci
-[2]: /dashboards/
-[3]: /notebooks/
-[4]: /continuous_delivery/explorer
-[5]: /continuous_delivery/search
-[6]: /continuous_delivery/explorer/search_syntax
+[1]: /ja/monitors/types/ci
+[2]: /ja/dashboards/
+[3]: /ja/notebooks/
+[4]: /ja/continuous_delivery/explorer
+[5]: /ja/continuous_delivery/search
+[6]: /ja/continuous_delivery/explorer/search_syntax
 [7]: https://app.datadoghq.com/ci/deployments/executions

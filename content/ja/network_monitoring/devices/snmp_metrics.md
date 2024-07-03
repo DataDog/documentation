@@ -1,18 +1,18 @@
 ---
-title: Collect SNMP Metrics From Your Network Devices
 aliases:
-    - /network_performance_monitoring/devices/setup/
-    - /network_monitoring/devices/setup/
+- /ja/network_performance_monitoring/devices/setup/
+- /ja/network_monitoring/devices/setup/
 further_reading:
 - link: /network_monitoring/devices/profiles
   tag: Documentation
   text: Using Profiles with Network Device Monitoring
-- link: "https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/"
+- link: https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/
   tag: Knowledge Center
   text: SNMP Monitoring Overview
-- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
   text: Monitor SNMP with Datadog
+title: Collect SNMP Metrics From Your Network Devices
 ---
 
 ## インストール
@@ -256,12 +256,12 @@ ping:
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /network_monitoring/devices/profiles#sysoid-mapped-devices
-[3]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /ja/network_monitoring/devices/profiles#sysoid-mapped-devices
+[3]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
-[5]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[5]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
-[7]: /agent
-[8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: /agent/configuration/agent-commands/#agent-status-and-information
+[7]: /ja/agent
+[8]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[9]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855

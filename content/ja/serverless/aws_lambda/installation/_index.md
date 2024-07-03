@@ -1,16 +1,16 @@
 ---
-title: Install Serverless Monitoring for AWS Lambda
-kind: documentation
 aliases:
-    - /serverless/installation/installing_the_library/
-    - /serverless/installation
+- /ja/serverless/installation/installing_the_library/
+- /ja/serverless/installation
 further_reading:
-    - link: /serverless/configuration/
-      tag: Documentation
-      text: Configure Serverless Monitoring
-    - link: /integrations/amazon_lambda/
-      tag: Documentation
-      text: AWS Lambda Integration
+- link: /serverless/configuration/
+  tag: Documentation
+  text: Configure Serverless Monitoring
+- link: /integrations/amazon_lambda/
+  tag: Documentation
+  text: AWS Lambda Integration
+kind: documentation
+title: Install Serverless Monitoring for AWS Lambda
 ---
 
 ## Quick start
@@ -45,4 +45,4 @@ After you're done with installation and you've set up telemetry collection, you 
 
 [1]: https://app.datadoghq.com/signup/
 [2]: https://app.datadoghq.com/signup/agent#lambda
-[3]: /serverless/configuration/
+[3]: /ja/serverless/configuration/

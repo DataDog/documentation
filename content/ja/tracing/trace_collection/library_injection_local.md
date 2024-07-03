@@ -1,9 +1,9 @@
 ---
-title: Injecting Libraries Locally
-description: "Inject instrumentation libraries into applications"
 aliases:
- - /tracing/trace_collection/admission_controller/
- - /tracing/trace_collection/library_injection/
+- /ja/tracing/trace_collection/admission_controller/
+- /ja/tracing/trace_collection/library_injection/
+description: Inject instrumentation libraries into applications
+title: Injecting Libraries Locally
 ---
 
 ## 概要
@@ -225,9 +225,9 @@ The library injection mechanism for Python only supports injecting the Python li
 - **Solution**: Remove the installation of `ddtrace` if library injection is desired. Otherwise, use the installed library ([see documentation][26]) instead of library injection.
 
 
-[1]: /containers/cluster_agent/admission_controller/
+[1]: /ja/containers/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
-[3]: /containers/kubernetes/installation/?tab=helm
+[3]: /ja/containers/kubernetes/installation/?tab=helm
 [4]: http://gcr.io/datadoghq/dd-lib-java-init
 [5]: http://hub.docker.com/r/datadog/dd-lib-java-init
 [6]: http://gallery.ecr.aws/datadog/dd-lib-java-init
@@ -245,12 +245,12 @@ The library injection mechanism for Python only supports injecting the Python li
 [18]: https://github.com/DataDog/dd-trace-py/releases
 [19]: https://github.com/DataDog/dd-trace-dotnet/releases
 [20]: https://github.com/DataDog/dd-trace-rb/releases
-[21]: /getting_started/tagging/unified_service_tagging/
+[21]: /ja/getting_started/tagging/unified_service_tagging/
 [22]: https://app.datadoghq.com/apm/traces
 [23]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
-[26]: /tracing/trace_collection/dd_libraries/python/
+[26]: /ja/tracing/trace_collection/dd_libraries/python/
 {{% /tab %}}
 
 {{% tab "Host" %}}
@@ -486,11 +486,11 @@ DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC python <SERVICE_2>.py
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[2]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[2]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
-[4]: /tracing/trace_collection/library_config/
+[4]: /ja/tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
-[6]: /tracing/other_telemetry/connect_logs_and_traces/
+[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
 [8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
@@ -677,8 +677,8 @@ Agent を起動し、通常通りコンテナ化されたサービスを起動�
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
-[3]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
-[4]: /tracing/trace_collection/library_config/
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[4]: /ja/tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
 [7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
 [8]: https://cloud.google.com/docs/authentication#service-accounts
@@ -896,7 +896,7 @@ docker-compose up -d dd-agent
 
 [1]: https://docs.docker.com/engine/install/ubuntu/
 [2]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-[3]: /tracing/trace_collection/library_config/
+[3]: /ja/tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
 [7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
 [8]: https://cloud.google.com/docs/authentication#service-accounts
@@ -987,10 +987,10 @@ The supported features and configuration options for the tracing library are the
   Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.
 
 
-[1]: /tracing/trace_collection/
-[2]: /tracing/trace_collection/library_config/
-[3]: /security/application_security/enabling/tracing_libraries/threat_detection/java
-[4]: /profiler/enabling/java/?tab=environmentvariables#installation
-[5]: /tracing/trace_collection/automatic_instrumentation/
-[6]: /tracing/trace_collection/single-step-apm
-[7]: /tracing/trace_collection/dd_libraries/
+[1]: /ja/tracing/trace_collection/
+[2]: /ja/tracing/trace_collection/library_config/
+[3]: /ja/security/application_security/enabling/tracing_libraries/threat_detection/java
+[4]: /ja/profiler/enabling/java/?tab=environmentvariables#installation
+[5]: /ja/tracing/trace_collection/automatic_instrumentation/
+[6]: /ja/tracing/trace_collection/single-step-apm
+[7]: /ja/tracing/trace_collection/dd_libraries/

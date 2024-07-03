@@ -1,57 +1,59 @@
 ---
-"app_id": "system"
-"app_uuid": "114d71e8-0128-4dca-aee8-297178732d31"
-"assets":
-  "integration":
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "system.net.bytes_rcvd"
-      "metadata_path": "metadata.csv"
-      "prefix": "system."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_name": "Network"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/network/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ネットワーク"
-"integration_id": "システム"
-"integration_title": "Network"
-"integration_version": "3.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "network"
-"public_title": "Network"
-"short_description": "Track bytes and packets in/out, connection states, round trip times, and more."
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Network"
-  "configuration": "README.md#Setup"
-  "description": "Track bytes and packets in/out, connection states, round trip times, and more."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Network"
+app_id: system
+app_uuid: 114d71e8-0128-4dca-aee8-297178732d31
+assets:
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.net.bytes_rcvd
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Network
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/network/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ネットワーク
+integration_id: システム
+integration_title: Network
+integration_version: 3.3.0
+is_public: true
+manifest_version: 2.0.0
+name: network
+public_title: Network
+short_description: Track bytes and packets in/out, connection states, round trip times,
+  and more.
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  configuration: README.md#Setup
+  description: Track bytes and packets in/out, connection states, round trip times,
+    and more.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Network
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -182,14 +184,13 @@ The Network check does not include any service checks.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/network/images/netdashboard.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/network/datadog_checks/network/data/conf.yaml.default
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-network-performance-ena.html
-[7]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=helm#installation
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/containers/kubernetes/installation/?tab=helm#installation
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/network/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/network/CHANGELOG.md#1110--2019-05-14
-[11]: https://docs.datadoghq.com/integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/
-[12]: https://docs.datadoghq.com/monitors/monitor_types/network/
-
+[11]: https://docs.datadoghq.com/ja/integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/
+[12]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/

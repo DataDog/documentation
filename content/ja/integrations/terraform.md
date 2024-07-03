@@ -1,58 +1,58 @@
 ---
-"app_id": "terraform"
-"app_uuid": "05198ed5-6fe5-417b-8711-e124718e9715"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10153"
-    "source_type_name": terraform
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: terraform
+app_uuid: 05198ed5-6fe5-417b-8711-e124718e9715
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10153
+    source_type_name: terraform
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - configuration & deployment
 - developer tools
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/terraform/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "terraform"
-"integration_id": "terraform"
-"integration_title": "Terraform"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "terraform"
-"public_title": "Terraform"
-"short_description": "Manage your Datadog account using Terraform"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/terraform/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: terraform
+integration_id: terraform
+integration_title: Terraform
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: terraform
+public_title: Terraform
+short_description: Manage your Datadog account using Terraform
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Developer Tools"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Manage your Datadog account using Terraform
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Terraform
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Manage your Datadog account using Terraform
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Terraform
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -164,8 +164,7 @@ Need help? Contact [Datadog support][7].
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [2]: https://learn.hashicorp.com/tutorials/terraform/install-cli
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs#optional
-[4]: https://docs.datadoghq.com/getting_started/site/
-[5]: https://docs.datadoghq.com/monitors/types/process/
+[4]: https://docs.datadoghq.com/ja/getting_started/site/
+[5]: https://docs.datadoghq.com/ja/monitors/types/process/
 [6]: https://github.com/DataDog/datadogpy
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

@@ -1,25 +1,25 @@
 ---
-title: Enabling ASM for Node.js
-kind: documentation
-code_lang: nodejs
-type: multi-code-lang
-code_lang_weight: 50
 aliases:
-  - /security_platform/application_security/getting_started/nodejs
-  - /security/application_security/getting_started/nodejs
+- /ja/security_platform/application_security/getting_started/nodejs
+- /ja/security/application_security/getting_started/nodejs
+code_lang: nodejs
+code_lang_weight: 50
 further_reading:
-    - link: /security/application_security/add-user-info/
-      tag: Documentation
-      text: Adding user information to traces
-    - link: "https://github.com/DataDog/dd-trace-js"
-      tag: ソースコード
-      text: Node.js Datadog library source code
-    - link: /security/default_rules/?category=cat-application-security
-      tag: Documentation
-      text: OOTB Application Security Management Rules
-    - link: /security/application_security/troubleshooting
-      tag: Documentation
-      text: Troubleshooting Application Security Management
+- link: /security/application_security/add-user-info/
+  tag: Documentation
+  text: Adding user information to traces
+- link: https://github.com/DataDog/dd-trace-js
+  tag: ソースコード
+  text: Node.js Datadog library source code
+- link: /security/default_rules/?category=cat-application-security
+  tag: Documentation
+  text: OOTB Application Security Management Rules
+- link: /security/application_security/troubleshooting
+  tag: Documentation
+  text: Troubleshooting Application Security Management
+kind: documentation
+title: Enabling ASM for Node.js
+type: multi-code-lang
 ---
 
 You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
@@ -111,8 +111,8 @@ If you need additional assistance, contact [Datadog support][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security/application_security/enabling/compatibility/nodejs
-[3]: /security/application_security/enabling/compatibility/nodejs#asm-capabilities-support
-[4]: /agent/versions/upgrade_between_agent_minor_versions/
+[2]: /ja/security/application_security/enabling/compatibility/nodejs
+[3]: /ja/security/application_security/enabling/compatibility/nodejs#asm-capabilities-support
+[4]: /ja/agent/versions/upgrade_between_agent_minor_versions/
 [5]: https://app.datadoghq.com/security/appsec/vm
-[6]: /help
+[6]: /ja/help

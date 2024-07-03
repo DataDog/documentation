@@ -1,7 +1,6 @@
 ---
-title: OpenTelemetry Semantic Conventions and Datadog Conventions
 aliases:
-- /opentelemetry/guide/semantic_mapping/
+- /ja/opentelemetry/guide/semantic_mapping/
 further_reading:
 - link: /opentelemetry/guide/metrics_mapping
   tag: Documentation
@@ -9,9 +8,10 @@ further_reading:
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: Documentation
   text: OpenTelemetry metric types
-- link: "https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go"
+- link: https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go
   tag: ソースコード
   text: Implementation code for these mappings
+title: OpenTelemetry Semantic Conventions and Datadog Conventions
 ---
 
 OpenTelemetry では、さまざまなデータタイプの名前を指定する、多くの[セマンティック規則][1]を使用しています。このページでは、OpenTelemetry のセマンティック規則と Datadog のセマンティック規則のマッピングをリストアップします。
@@ -139,5 +139,5 @@ Enabling this option adds both the OpenTelemetry resource attributes and the Dat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/concepts/semantic-conventions/
-[2]: /getting_started/tagging/unified_service_tagging
+[2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: https://opentelemetry.io/docs/specs/semconv/resource/container/

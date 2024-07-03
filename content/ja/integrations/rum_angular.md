@@ -1,43 +1,44 @@
 ---
-"app_id": "rum-angular"
-"app_uuid": "0dd38c9b-921d-4252-8c46-c7a6d83c5778"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-angular
+app_uuid: 0dd38c9b-921d-4252-8c46-c7a6d83c5778
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - metrics
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_angular"
-"integration_id": "rum-angular"
-"integration_title": "Angular"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_angular"
-"public_title": "Angular"
-"short_description": "Monitor Angular applications and generate metrics using Datadog RUM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_angular
+integration_id: rum-angular
+integration_title: Angular
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_angular
+public_title: Angular
+short_description: Monitor Angular applications and generate metrics using Datadog
+  RUM
+supported_os:
 - any
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Tracing"
-  - "Supported OS::Any"
-  "configuration": "README.md#Setup"
-  "description": Monitor Angular applications and generate metrics using Datadog RUM
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Angular
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Tracing
+  - Supported OS::Any
+  configuration: README.md#Setup
+  description: Monitor Angular applications and generate metrics using Datadog RUM
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Angular
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -99,9 +100,8 @@ Need help? Contact [Datadog Support][6].
 
 
 [1]: https://app.datadoghq.com/integrations/rum-angular
-[2]: https://docs.datadoghq.com/real_user_monitoring/browser/
-[3]: https://docs.datadoghq.com/logs/log_collection/javascript/
-[4]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[5]: https://docs.datadoghq.com/real_user_monitoring/browser/data_collected/
-[6]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/data_collected/
+[6]: https://docs.datadoghq.com/ja/help/

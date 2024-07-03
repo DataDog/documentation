@@ -1,61 +1,61 @@
 ---
-"app_id": "aerospike"
-"app_uuid": "68799442-b764-489c-8bbd-44cb11a15f4e"
-"assets":
-  "dashboards":
-    "Aerospike Overview": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "aerospike.uptime"
-      - "aerospike.namespace.memory_free_pct"
-      "metadata_path": "metadata.csv"
-      "prefix": "aerospike."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10067"
-    "source_type_name": "Aerospike"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "aerospike"
-"integration_id": "aerospike"
-"integration_title": "Aerospike"
-"integration_version": "2.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "aerospike"
-"public_title": "Aerospike"
-"short_description": "Aerospike データベースからクラスターやネームスペースの統計を収集"
-"supported_os":
-- "linux"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "Aerospike データベースからクラスターやネームスペースの統計を収集"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Aerospike"
+app_id: aerospike
+app_uuid: 68799442-b764-489c-8bbd-44cb11a15f4e
+assets:
+  dashboards:
+    Aerospike Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aerospike.uptime
+      - aerospike.namespace.memory_free_pct
+      metadata_path: metadata.csv
+      prefix: aerospike.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10067
+    source_type_name: Aerospike
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: aerospike
+integration_id: aerospike
+integration_title: Aerospike
+integration_version: 2.2.1
+is_public: true
+manifest_version: 2.0.0
+name: aerospike
+public_title: Aerospike
+short_description: Aerospike データベースからクラスターやネームスペースの統計を収集
+supported_os:
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Data Stores
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Aerospike データベースからクラスターやネームスペースの統計を収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Aerospike
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -121,8 +121,8 @@ Aerospike チェックは [Datadog Agent][2] パッケージに含まれてい�
 [1]: https://github.com/aerospike/aerospike-prometheus-exporter
 [2]: https://docs.aerospike.com/monitorstack/new/installing-components
 [3]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/integrations/openmetrics/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [6]: https://github.com/DataDog/integrations-core/blob/7.36.x/aerospike/datadog_checks/aerospike/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
@@ -150,8 +150,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "aerospike", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -181,5 +181,5 @@ Aerospike には、イベントは含まれません。
 
 [1]: https://download.aerospike.com/download/client/python/notes.html#5.0.0
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

@@ -1,24 +1,28 @@
 ---
-title: Sensitive Data Scanner
 aliases:
-    - /logs/log_configuration/sensitive_data_detection
-    - /account_management/org_settings/sensitive_data_detection
+- /ja/logs/log_configuration/sensitive_data_detection
+- /ja/account_management/org_settings/sensitive_data_detection
 further_reading:
-    - link: /data_security/
-      tag: Documentation
-      text: Reducing data related risks
-    - link: /sensitive_data_scanner/regular_expression_syntax
-      tag: Documentation
-      text: Regular expression syntax for custom scanning rules
-    - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
-      tag: Blog
-      text: Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner
-    - link: "https://www.datadoghq.com/blog/sensitive-data-scanner/"
-      tag: Blog
-      text: Build a modern data compliance strategy with Datadog's Sensitive Data Scanner
-    - link: "https://www.datadoghq.com/blog/sensitive-data-management-best-practices/"
-      tag: Blog
-      text: Best practices for sensitive data management
+- link: /data_security/
+  tag: Documentation
+  text: Reducing data related risks
+- link: /sensitive_data_scanner/regular_expression_syntax
+  tag: Documentation
+  text: Regular expression syntax for custom scanning rules
+- link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
+  tag: Blog
+  text: Discover, triage, and remediate sensitive data issues at scale with Sensitive
+    Data Scanner
+- link: https://www.datadoghq.com/blog/sensitive-data-scanner/
+  tag: Blog
+  text: Build a modern data compliance strategy with Datadog's Sensitive Data Scanner
+- link: https://www.datadoghq.com/blog/sensitive-data-management-best-practices/
+  tag: Blog
+  text: Best practices for sensitive data management
+- link: https://www.datadoghq.com/blog/data-security/
+  tag: ブログ
+  text: Discover sensitive data in your cloud data stores with Data Security
+title: Sensitive Data Scanner
 ---
 
 ## 概要
@@ -66,8 +70,8 @@ By default, users with the Datadog Admin role have access to view and set up sca
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
-[1]: /account_management/rbac/permissions/#compliance
-[2]: /account_management/rbac/
+[1]: /ja/account_management/rbac/permissions/#compliance
+[2]: /ja/account_management/rbac/
 {{% /tab %}}
 {{% tab "Using the Agent" %}}
 
@@ -77,9 +81,9 @@ By default, users with the Datadog Admin role have access to view and set up sca
 2. Follow the steps to [enable remote configuration][3].
 3. Install the Datadog Agent v7.54 or newer.
 
-[1]: /account_management/rbac/permissions/#compliance
-[2]: /account_management/rbac/
-[3]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[1]: /ja/account_management/rbac/permissions/#compliance
+[2]: /ja/account_management/rbac/
+[3]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -101,7 +105,7 @@ To set up a scanning group, perform the following steps:
 1. **Create** をクリックします。
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[2]: /logs/explorer/search_syntax/
+[2]: /ja/logs/explorer/search_syntax/
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 {{% /tab %}}
 {{% tab "Using the Agent" %}}
@@ -118,7 +122,7 @@ To set up a scanning group, perform the following steps:
 1. **Save** をクリックします。
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
-[2]: /logs/explorer/search_syntax/
+[2]: /ja/logs/explorer/search_syntax/
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 {{% /tab %}}
 {{< /tabs >}}
@@ -181,7 +185,7 @@ See [Investigate Sensitive Data Issues][3] for details on how to use the [Summar
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[3]: /sensitive_data_scanner/investigate_sensitive_data_issues/
+[3]: /ja/sensitive_data_scanner/investigate_sensitive_data_issues/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
 
 {{% /tab %}}
@@ -280,7 +284,7 @@ To redact sensitive data contained in tags, you must [remap][2] the tag to an at
 8. **Add Rules** をクリックします。
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[2]: /logs/log_configuration/processors/?tab=ui#remapper
+[2]: /ja/logs/log_configuration/processors/?tab=ui#remapper
 [3]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "Using the Agent" %}}
@@ -312,20 +316,20 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /data_security/pci_compliance/
-[2]: /account_management/rbac/permissions/#compliance
-[3]: /account_management/rbac/
-[4]: /logs/explorer/search_syntax/
+[1]: /ja/data_security/pci_compliance/
+[2]: /ja/account_management/rbac/permissions/#compliance
+[3]: /ja/account_management/rbac/
+[4]: /ja/logs/explorer/search_syntax/
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 [6]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[8]: /sensitive_data_scanner/investigate_sensitive_data_issues/
+[8]: /ja/sensitive_data_scanner/investigate_sensitive_data_issues/
 [9]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
-[10]: /logs/guide/logs-rbac/
-[11]: /logs/log_configuration/processors/?tab=ui#remapper
+[10]: /ja/logs/guide/logs-rbac/
+[11]: /ja/logs/log_configuration/processors/?tab=ui#remapper
 [12]: https://app.datadoghq.com/logs/pipelines
 [13]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
-[14]: /observability_pipelines/sensitive_data_redaction/
-[16]: /security/cloud_security_management
-[17]: /security/cloud_security_management/setup/agentless_scanning
-[18]: /agent/remote_config
+[14]: /ja/observability_pipelines/sensitive_data_redaction/
+[16]: /ja/security/cloud_security_management
+[17]: /ja/security/cloud_security_management/setup/agentless_scanning
+[18]: /ja/agent/remote_config

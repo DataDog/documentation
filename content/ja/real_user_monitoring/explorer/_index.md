@@ -1,18 +1,18 @@
 ---
-title: RUM Explorer
-kind: documentation
 aliases:
-- /real_user_monitoring/rum_explorer
+- /ja/real_user_monitoring/rum_explorer
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Learn more about search in the RUM Explorer
-- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: Blog
   text: Monitor Core Web Vitals with RUM
-- link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
+- link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
   tag: Blog
   text: Start monitoring single-page applications
+kind: documentation
+title: RUM Explorer
 ---
 
 ## Overview
@@ -56,6 +56,6 @@ To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualization
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/sessions
-[2]: /real_user_monitoring/explorer/group
-[3]: /real_user_monitoring/explorer/search_syntax
-[4]: /real_user_monitoring/explorer/visualize
+[2]: /ja/real_user_monitoring/explorer/group
+[3]: /ja/real_user_monitoring/explorer/search_syntax
+[4]: /ja/real_user_monitoring/explorer/visualize

@@ -1,6 +1,6 @@
 ---
-title: Configure the Datadog Tracing Library
 kind: documentation
+title: Configure the Datadog Tracing Library
 type: multi-code-lang
 ---
 
@@ -14,4 +14,4 @@ To instrument an application written in a language that does not yet have offici
 
 
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
+[1]: /ja/developers/community/libraries/#apm-tracing-client-libraries

@@ -85,10 +85,10 @@ Cloudcraft がクラスターにアクセスできることをテストするに
 他のクラスターをスキャンする場合は、上記のプロセスを必要な回数繰り返します。
 
 [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
-[2]: /cloudcraft/faq/how-cloudcraft-connects-to-aws/
+[2]: /ja/cloudcraft/faq/how-cloudcraft-connects-to-aws/
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
-[4]: /cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
-[5]: /cloudcraft/getting-started/create-your-first-cloudcraft-diagram/
+[4]: /ja/cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
+[5]: /ja/cloudcraft/getting-started/create-your-first-cloudcraft-diagram/
 [6]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding
 [7]: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
 [8]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings

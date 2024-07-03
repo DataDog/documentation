@@ -1,8 +1,7 @@
 ---
-title: Kubernetes Data Collected
 aliases:
- - /agent/kubernetes/metrics
- - /agent/kubernetes/data_collected
+- /ja/agent/kubernetes/metrics
+- /ja/agent/kubernetes/data_collected
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentation
@@ -22,6 +21,7 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentation
   text: Assign tags to all data emitted by a container
+title: Kubernetes Data Collected
 ---
 
 このページでは、Kubernetes クラスターにデプロイした際に Datadog Agent が収集したデータを一覧表示します。
@@ -172,9 +172,9 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/kubelet/
-[2]: /integrations/kube_controller_manager/
-[3]: /integrations/kube_apiserver_metrics/
-[4]: /integrations/kube_metrics_server
-[5]: /integrations/kube_scheduler
-[6]: /integrations/kubernetes_state_core/
+[1]: /ja/integrations/kubelet/
+[2]: /ja/integrations/kube_controller_manager/
+[3]: /ja/integrations/kube_apiserver_metrics/
+[4]: /ja/integrations/kube_metrics_server
+[5]: /ja/integrations/kube_scheduler
+[6]: /ja/integrations/kubernetes_state_core/

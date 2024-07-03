@@ -1,30 +1,30 @@
 ---
-"aliases":
-- "/integrations/awsmq/"
-"categories":
-- "cloud"
-- "aws"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "AWS MQ のキーメトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_mq/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog"
-  "tag": "ブログ"
-  "text": "Datadog で Amazon MQ のメトリクスを監視"
-"git_integration_title": "amazon_mq"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon MQ"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_mq"
-"public_title": "Datadog-Amazon MQ Integration"
-"short_description": "Track key AWS MQ metrics."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsmq/
+categories:
+- cloud
+- aws
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: AWS MQ のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog
+  tag: ブログ
+  text: Datadog で Amazon MQ のメトリクスを監視
+git_integration_title: amazon_mq
+has_logo: true
+integration_id: ''
+integration_title: Amazon MQ
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_mq
+public_title: Datadog-Amazon MQ Integration
+short_description: Track key AWS MQ metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -86,12 +86,11 @@ Need help? Contact [Datadog support][8].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-mq
-[4]: https://docs.datadoghq.com/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mq/amazon_mq_metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

@@ -1,33 +1,34 @@
 ---
-"aliases":
-- "/integrations/nodejs/"
-"categories":
-- "languages"
-- "log collection"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。"
-"doc_link": "https://docs.datadoghq.com/integrations/nodejs/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/node-logging-best-practices/"
-  "tag": "ブログ"
-  "text": "Node.js ログを収集、カスタマイズ、一元化する方法"
-- "link": "https://www.datadoghq.com/blog/node-monitoring-apm/"
-  "tag": "ブログ"
-  "text": "Datadog APM と分散型トレーシングを使用した Node.js の監視。"
-"git_integration_title": "node"
-"has_logo": true
-"integration_id": "node"
-"integration_title": "NodeJS"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "node"
-"public_title": "Datadog-NodeJS Integration"
-"short_description": "Send custom metrics from your Node.js services via DogStatsD or our API."
-"version": "1.0"
+aliases:
+- /ja/integrations/nodejs/
+categories:
+- languages
+- log collection
+- tracing
+custom_kind: インテグレーション
+dependencies: []
+description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
+doc_link: https://docs.datadoghq.com/integrations/nodejs/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/node-logging-best-practices/
+  tag: ブログ
+  text: Node.js ログを収集、カスタマイズ、一元化する方法
+- link: https://www.datadoghq.com/blog/node-monitoring-apm/
+  tag: ブログ
+  text: Datadog APM と分散型トレーシングを使用した Node.js の監視。
+git_integration_title: node
+has_logo: true
+integration_id: node
+integration_title: NodeJS
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: node
+public_title: Datadog-NodeJS Integration
+short_description: Send custom metrics from your Node.js services via DogStatsD or
+  our API.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -93,9 +94,8 @@ Need help? Contact [Datadog support][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
-[2]: https://docs.datadoghq.com/tracing/setup/nodejs/
-[3]: https://docs.datadoghq.com/logs/log_collection/nodejs/
-[4]: https://docs.datadoghq.com/profiler/enabling/nodejs/
-[5]: https://docs.datadoghq.com/help/
-
+[1]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
+[2]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/nodejs/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/nodejs/
+[5]: https://docs.datadoghq.com/ja/help/

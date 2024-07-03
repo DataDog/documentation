@@ -1,13 +1,13 @@
 ---
-title: Group Widget
-widget_type: group
-description: "Group your widgets together in a dashboard widget."
 aliases:
-- /graphing/widgets/group/
+- /ja/graphing/widgets/group/
+description: Group your widgets together in a dashboard widget.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Group Widget
+widget_type: group
 ---
 
 ## 概要
@@ -34,6 +34,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#get-started
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/#get-started
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

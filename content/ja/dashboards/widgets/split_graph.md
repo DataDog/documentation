@@ -1,10 +1,10 @@
 ---
-title: Split Graph Widget
-widget_type: split_group
 further_reading:
 - link: /dashboards/guide/graphing_json/
   tag: Guide
   text: Build dashboards using JSON
+title: Split Graph Widget
+widget_type: split_group
 ---
 
 <div class="alert alert-info">Split graph widgets are not supported on screenboards and <a href="https://docs.datadoghq.com/dashboards/sharing/public_dashboards">public dashboards.</a></div>
@@ -78,6 +78,6 @@ This widget can be used with the [Dashboards API][2]. See the following table fo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/widgets/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

@@ -1,19 +1,19 @@
 ---
-title: Prometheus and OpenMetrics metrics collection from a host
-kind: documentation
 further_reading:
-    - link: logs/log_collection
-      tag: Documentation
-      text: Collect your logs
-    - link: /infrastructure/process
-      tag: Documentation
-      text: Collect your processes
-    - link: tracing
-      tag: Documentation
-      text: Collect your traces
-    - link: developers/prometheus
-      tag: Documentation
-      text: Write your own custom Prometheus Check
+- link: logs/log_collection
+  tag: Documentation
+  text: Collect your logs
+- link: /infrastructure/process
+  tag: Documentation
+  text: Collect your processes
+- link: tracing
+  tag: Documentation
+  text: Collect your traces
+- link: developers/prometheus
+  tag: Documentation
+  text: Write your own custom Prometheus Check
+kind: documentation
+title: Prometheus and OpenMetrics metrics collection from a host
 ---
 
 Collect your exposed Prometheus and OpenMetrics metrics from your application running on your hosts using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
@@ -128,18 +128,18 @@ Official integrations have their own dedicated directories. There's a default in
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/openmetrics/
-[2]: /integrations/prometheus/
+[1]: /ja/integrations/openmetrics/
+[2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
+[5]: /ja/developers/custom_checks/prometheus/
 [6]: https://app.datadoghq.com/account/settings/agent/latest
-[7]: /getting_started/tagging/
-[8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /ja/getting_started/tagging/
+[8]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://prometheus.io/docs/prometheus/latest/getting_started/
-[12]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[12]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [13]: https://app.datadoghq.com/metric/summary
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
-[15]: /metrics/distributions/
+[15]: /ja/metrics/distributions/

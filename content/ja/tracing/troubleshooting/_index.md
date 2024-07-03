@@ -1,7 +1,6 @@
 ---
-title: APM Troubleshooting
 aliases:
-    - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
+- /ja/tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
 - link: /tracing/troubleshooting/connection_errors
   tag: Documentation
@@ -15,6 +14,7 @@ further_reading:
 - link: /tracing/troubleshooting/agent_apm_metrics/
   tag: Documentation
   text: APM metrics sent by the Datadog Agent
+title: APM Troubleshooting
 ---
 
 Datadog APM で予期しない動作が発生した場合に、ご自分で確認できるよくある問題を本ガイドでいくつかご紹介します。問題が解決しない場合は、[Datadog サポート][1] にお問い合わせください。また、各リリースには改善と修正が含まれているため、使用する Datadog トレースライブラリの最新バージョンに定期的に更新することをお勧めします。
@@ -157,20 +157,20 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /tracing/metrics/metrics_namespace/
-[3]: /tracing/troubleshooting/tracer_startup_logs/
-[4]: /tracing/troubleshooting/connection_errors/
-[5]: /tracing/troubleshooting/tracer_debug_logs/
-[6]: /tracing/glossary/#services
-[7]: /tracing/glossary/#resources
-[8]: /glossary/#span-tag
-[9]: /tracing/troubleshooting/agent_rate_limits
-[10]: /tracing/troubleshooting/agent_apm_resource_usage/
-[11]: /tracing/custom_instrumentation/agent_customization
-[12]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
-[13]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
-[14]: /tracing/custom_instrumentation/
-[15]: /tracing/compatibility_requirements/
-[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
-[17]: /tracing/guide/setting_primary_tags_to_scope/
+[1]: /ja/help/
+[2]: /ja/tracing/metrics/metrics_namespace/
+[3]: /ja/tracing/troubleshooting/tracer_startup_logs/
+[4]: /ja/tracing/troubleshooting/connection_errors/
+[5]: /ja/tracing/troubleshooting/tracer_debug_logs/
+[6]: /ja/tracing/glossary/#services
+[7]: /ja/tracing/glossary/#resources
+[8]: /ja/glossary/#span-tag
+[9]: /ja/tracing/troubleshooting/agent_rate_limits
+[10]: /ja/tracing/troubleshooting/agent_apm_resource_usage/
+[11]: /ja/tracing/custom_instrumentation/agent_customization
+[12]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[13]: /ja/agent/troubleshooting/debug_mode/?tab=agentv6v7
+[14]: /ja/tracing/custom_instrumentation/
+[15]: /ja/tracing/compatibility_requirements/
+[16]: /ja/tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[17]: /ja/tracing/guide/setting_primary_tags_to_scope/

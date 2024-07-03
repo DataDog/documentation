@@ -198,7 +198,7 @@ DEB ベースのシステム (Debian/Ubuntu) の Agent v5 ユーザーは、ロ�
 [8]: https://github.com/DataDog/puppet-datadog-agent
 [9]: https://github.com/DataDog/datadog-formula
 [10]: https://github.com/DataDog/heroku-buildpack-datadog
-[11]: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk
+[11]: https://docs.datadoghq.com/ja/integrations/amazon_elasticbeanstalk
 [12]: https://manpages.ubuntu.com/manpages/jammy/man1/debsig-verify.1.html
 [13]: https://app.datadoghq.com/account/settings/agent/latest
 [14]: https://github.com/ansible-collections/Datadog

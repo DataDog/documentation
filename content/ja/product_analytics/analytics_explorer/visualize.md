@@ -1,10 +1,10 @@
 ---
-title: 視覚化
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: イベント検索
+kind: documentation
+title: 視覚化
 ---
 
 ## 概要
@@ -102,4 +102,4 @@ By default, events in the list visualization are organized by timestamp, with th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/analytics_explorer/
+[1]: /ja/product_analytics/analytics_explorer/

@@ -1,16 +1,16 @@
 ---
-"app_id": "akeyless-gateway"
-"app_uuid": "a71a3b29-5921-4bc9-8a7e-38de5a940ad8"
-"assets":
-  "dashboards":
-    "akeyless_gateway_dashboard": assets/dashboards/akeyless_gateway_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: akeyless-gateway
+app_uuid: a71a3b29-5921-4bc9-8a7e-38de5a940ad8
+assets:
+  dashboards:
+    akeyless_gateway_dashboard: assets/dashboards/akeyless_gateway_dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - akeyless.gw.system.cpu
       - akeyless.gw.system.disk
       - akeyless.gw.system.load
@@ -22,57 +22,57 @@
       - akeyless.gw.system.http_response_status_code
       - akeyless.gw.system.request_count
       - akeyless.gw.system.healthcheck.status
-      "metadata_path": metadata.csv
-      "prefix": akeyless
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10426"
-    "source_type_name": Akeyless Gateway
-"author":
-  "homepage": "https://www.akeyless.io"
-  "name": Akeyless Security
-  "sales_email": sales@akeyless.io
-  "support_email": support@akeyless.io
-"categories":
+      metadata_path: metadata.csv
+      prefix: akeyless
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10426
+    source_type_name: Akeyless Gateway
+author:
+  homepage: https://www.akeyless.io
+  name: Akeyless Security
+  sales_email: sales@akeyless.io
+  support_email: support@akeyless.io
+categories:
 - security
 - kubernetes
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "akeyless_gateway"
-"integration_id": "akeyless-gateway"
-"integration_title": "Akeyless Gateway"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "akeyless_gateway"
-"public_title": "Akeyless Gateway"
-"short_description": "Track your Akeyless Gateway key metrics."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: akeyless_gateway
+integration_id: akeyless-gateway
+integration_title: Akeyless Gateway
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: akeyless_gateway
+public_title: Akeyless Gateway
+short_description: Track your Akeyless Gateway key metrics.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Security"
-  - "Category::Kubernetes"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Track your Akeyless Gateway key metrics.
-  "media":
-  - "caption": Akeyless Gateway metrics dashboard
-    "image_url": images/AKs-Graphs-Light.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Akeyless Gateway
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Security
+  - Category::Kubernetes
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Track your Akeyless Gateway key metrics.
+  media:
+  - caption: Akeyless Gateway metrics dashboard
+    image_url: images/AKs-Graphs-Light.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Akeyless Gateway
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -184,9 +184,8 @@ Need help? Contact [Akeyless Support][7].
 
 [1]: https://docs.akeyless.io/docs/api-gw
 [2]: https://docs.akeyless.io/docs/gateway-k8s
-[3]: https://docs.datadoghq.com/getting_started/site/
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://docs.akeyless.io/docs/install-and-configure-the-gateway
 [5]: https://app.datadoghq.com/metric/explorer
 [6]: https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/metadata.csv
 [7]: mailto:support@akeyless.io
-

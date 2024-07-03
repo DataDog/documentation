@@ -1,5 +1,5 @@
 ---
-title: "Azure Table Component"
+title: Azure Table Component
 ---
 
 ## 概要

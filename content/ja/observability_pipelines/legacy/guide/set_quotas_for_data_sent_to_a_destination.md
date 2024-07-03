@@ -1,10 +1,7 @@
 ---
-title: (LEGACY) Set Quotas for Data Sent to a Destination
-disable_toc: false
-private: true
-is_beta: true
 aliases:
-  - /observability_pipelines/guide/set_quotas_for_data_sent_to_a_destination/
+- /ja/observability_pipelines/guide/set_quotas_for_data_sent_to_a_destination/
+disable_toc: false
 further_reading:
 - link: /observability_pipelines/legacy/setup/
   tag: Documentation
@@ -15,6 +12,9 @@ further_reading:
 - link: /monitors/configuration/
   tag: Documentation
   text: Learn more about configuring monitors
+is_beta: true
+private: true
+title: (LEGACY) Set Quotas for Data Sent to a Destination
 ---
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfnNnV823zAgOCowCYuXJE5cDtRqIipKsYcNpaOo1LKpGfppA/viewform" btn_hidden="false" header="Request Access!">}}
@@ -199,15 +199,15 @@ sinks:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/legacy/reference/transforms/#sample
-[3]: /observability_pipelines/legacy/reference/sinks/
-[4]: /observability_pipelines/legacy/configurations/
+[2]: /ja/observability_pipelines/legacy/reference/transforms/#sample
+[3]: /ja/observability_pipelines/legacy/reference/sinks/
+[4]: /ja/observability_pipelines/legacy/configurations/
 [5]: https://app.datadoghq.com/monitors/create
-[6]: /monitors/types/metric/
-[7]: /monitors/notify/
-[8]: /monitors/notify/variables/
-[9]: /monitors/notify/#renotify
-[10]: /monitors/notify/#metadata
-[11]: /monitors/notify/#permissions
-[12]: /logs/log_configuration/archives/
-[13]: /observability_pipelines/legacy/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/
+[6]: /ja/monitors/types/metric/
+[7]: /ja/monitors/notify/
+[8]: /ja/monitors/notify/variables/
+[9]: /ja/monitors/notify/#renotify
+[10]: /ja/monitors/notify/#metadata
+[11]: /ja/monitors/notify/#permissions
+[12]: /ja/logs/log_configuration/archives/
+[13]: /ja/observability_pipelines/legacy/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/

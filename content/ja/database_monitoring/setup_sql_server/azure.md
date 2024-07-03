@@ -1,5 +1,4 @@
 ---
-title: Setting Up Database Monitoring for Azure SQL Server
 description: Install and configure Database Monitoring for SQL Server managed on Azure.
 further_reading:
 - link: /integrations/sqlserver/
@@ -8,8 +7,7 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentation
   text: Troubleshoot Common Issues
-
-
+title: Setting Up Database Monitoring for Azure SQL Server
 ---
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
@@ -85,7 +83,7 @@ Datadog Agent のインストールと構成の詳細については、[Agent �
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
-[3]: /database_monitoring/guide/managed_authentication
+[3]: /ja/database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "Azure SQL Managed Instance" %}}
@@ -108,7 +106,7 @@ GRANT VIEW ANY DEFINITION to datadog;
 
 **注:** Azure マネージドアイデンティティ認証もサポートされています。Azure SQL DB インスタンスの構成方法については、[ガイド][1]を参照してください。
 
-[3]: /database_monitoring/guide/managed_authentication
+[3]: /ja/database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "Windows Azure VM の SQL Server" %}}
@@ -116,7 +114,7 @@ GRANT VIEW ANY DEFINITION to datadog;
 [Windows Azure VM の SQL Server][1] の場合は、[セルフホスティングの SQL Server のデータベースモニタリングを設定する][2]のドキュメントに従って、Windows Server ホスト VM に直接 Datadog Agent をインストールしてください。
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview
-[2]: /database_monitoring/setup_sql_server/selfhosted/
+[2]: /ja/database_monitoring/setup_sql_server/selfhosted/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -188,12 +186,12 @@ driver: '{ODBC Driver 18 for SQL Server}'
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
-[5]: /getting_started/tagging/unified_service_tagging
+[5]: /ja/getting_started/tagging/unified_service_tagging
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/configuration/agent-commands/#agent-status-and-information
+[9]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux ホスト" %}}
@@ -238,9 +236,9 @@ instances:
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/configuration/agent-commands/#agent-status-and-information
+[5]: /ja/getting_started/tagging/unified_service_tagging
+[6]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -286,11 +284,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 [Agent の status サブコマンドを実行][5]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][6]のページへ移動して開始します。
 
 
-[1]: /agent/faq/template_variables/
+[1]: /ja/agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: /agent/configuration/agent-commands/#agent-status-and-information
+[4]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -339,8 +337,8 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### マウントされたファイルで構成する
 
@@ -409,11 +407,11 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
+[1]: /ja/agent/cluster_agent
+[2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[5]: /agent/configuration/secrets-management
+[5]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -428,4 +426,4 @@ Azure からより包括的なデータベースメトリクスとログを収�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/azure
+[1]: /ja/integrations/azure

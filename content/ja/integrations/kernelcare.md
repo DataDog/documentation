@@ -1,61 +1,61 @@
 ---
-"app_id": "kernelcare"
-"app_uuid": "7bfd2b8a-d461-4890-aeba-f1e9eab617c7"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": kernelcare.uptodate
-      "metadata_path": metadata.csv
-      "prefix": kernelcare.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10109"
-    "source_type_name": Kernelcare
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": CloudLinux
-  "sales_email": schvaliuk@cloudlinux.com
-  "support_email": schvaliuk@cloudlinux.com
-"categories":
+app_id: kernelcare
+app_uuid: 7bfd2b8a-d461-4890-aeba-f1e9eab617c7
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kernelcare.uptodate
+      metadata_path: metadata.csv
+      prefix: kernelcare.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10109
+    source_type_name: Kernelcare
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: CloudLinux
+  sales_email: schvaliuk@cloudlinux.com
+  support_email: schvaliuk@cloudlinux.com
+categories:
 - os & system
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kernelcare"
-"integration_id": "kernelcare"
-"integration_title": "Kernelcare"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "kernelcare"
-"public_title": "Kernelcare"
-"short_description": "Monitor kernelcare server activity and status metrics."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: kernelcare
+integration_id: kernelcare
+integration_title: Kernelcare
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: kernelcare
+public_title: Kernelcare
+short_description: Monitor kernelcare server activity and status metrics.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::OS & System"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor kernelcare server activity and status metrics.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Kernelcare
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::OS & System
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor kernelcare server activity and status metrics.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kernelcare
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -114,12 +114,11 @@ Need help? Contact [Datadog support][10].
 
 [1]: https://www.kernelcare.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/datadog_checks/kernelcare/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

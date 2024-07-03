@@ -1,54 +1,54 @@
 ---
-"app_id": "microsoft-defender-for-cloud"
-"app_uuid": "e9e9981e-c97a-4395-a98b-b39b2adf1bb6"
-"assets":
-  "dashboards":
-    "MicrosoftDefenderforCloud-Overview": assets/dashboards/MicrosoftDefenderforCloud-Overview_dashboard.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10376"
-    "source_type_name": Microsoft Defender for Cloud
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: microsoft-defender-for-cloud
+app_uuid: e9e9981e-c97a-4395-a98b-b39b2adf1bb6
+assets:
+  dashboards:
+    MicrosoftDefenderforCloud-Overview: assets/dashboards/MicrosoftDefenderforCloud-Overview_dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10376
+    source_type_name: Microsoft Defender for Cloud
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - azure
 - cloud
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "microsoft_defender_for_cloud"
-"integration_id": "microsoft-defender-for-cloud"
-"integration_title": "Microsoft Defender for Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "microsoft_defender_for_cloud"
-"public_title": "Microsoft Defender for Cloud"
-"short_description": "Monitor Microsoft Defender for Cloud"
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Azure"
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  - "Category::Security"
-  "configuration": "README.md#Setup"
-  "description": Monitor Microsoft Defender for Cloud
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Microsoft Defender for Cloud
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: microsoft_defender_for_cloud
+integration_id: microsoft-defender-for-cloud
+integration_title: Microsoft Defender for Cloud
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: microsoft_defender_for_cloud
+public_title: Microsoft Defender for Cloud
+short_description: Monitor Microsoft Defender for Cloud
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Log Collection
+  - Category::Security
+  configuration: README.md#Setup
+  description: Monitor Microsoft Defender for Cloud
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Microsoft Defender for Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -113,5 +113,4 @@ If you are still having trouble, contact [Datadog support][4].
 [1]: https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction
 [2]: https://learn.microsoft.com/en-us/azure/defender-for-cloud/continuous-export?tabs=azure-portal
 [3]: https://learn.microsoft.com/en-us/azure/defender-for-cloud/alert-validation
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

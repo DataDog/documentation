@@ -1,10 +1,10 @@
 ---
-title: Service Observability
-description: 'Use Datadog to monitor, troubleshoot, and manage your services'
+description: Use Datadog to monitor, troubleshoot, and manage your services
 further_reading:
-    - link: getting_started/tagging/unified_service_tagging/
-      tag: Documentation
-      text: Learn about Unified Service Tagging and reserved tags
+- link: getting_started/tagging/unified_service_tagging/
+  tag: Documentation
+  text: Learn about Unified Service Tagging and reserved tags
+title: Service Observability
 ---
 
 {{< img src="tracing/apm_lifecycle/stats_pipeline.png" style="width:65%; background:none; border:none; box-shadow:none;" alt="サービス統計パイプライン" >}}

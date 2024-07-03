@@ -1,27 +1,27 @@
 ---
-"aliases":
-- "/integrations/awsebs/"
-"categories":
-- "cloud"
-- "data stores"
-- "aws"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_ebs/"
-"draft": false
-"git_integration_title": "amazon_ebs"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Elastic Block Store"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_ebs"
-"public_title": "Datadog-Amazon Elastic Block Store Integration"
-"short_description": "Track snapshot age, IOPS, read/write times, and more."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsebs/
+categories:
+- cloud
+- data stores
+- aws
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_ebs/
+draft: false
+git_integration_title: amazon_ebs
+has_logo: true
+integration_id: ''
+integration_title: Amazon Elastic Block Store
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_ebs
+public_title: Datadog-Amazon Elastic Block Store Integration
+short_description: Track snapshot age, IOPS, read/write times, and more.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -86,16 +86,15 @@ Need help? Contact [Datadog support][9].
 - [Collecting Amazon EBS metrics][11]
 - [Monitoring Amazon EBS volumes with Datadog][12]
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-ebs
-[4]: https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion
-[5]: https://docs.datadoghq.com/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/ja/account_management/billing/aws/#aws-resource-exclusion
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ebs/amazon_ebs_metadata.csv
-[9]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/help/
 [10]: https://www.datadoghq.com/blog/amazon-ebs-monitoring
 [11]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics
 [12]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog
-

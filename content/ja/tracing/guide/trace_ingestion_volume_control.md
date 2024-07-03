@@ -1,158 +1,157 @@
 ---
-title: Ingestion volume control with APM Distributed Tracing
-kind: guide
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
   text: Ingestion Control Page
+title: Ingestion volume control with APM Distributed Tracing
 ---
 
-## Overview
+## 概要
 
-The [Ingestion control page][1] provides granular visibility into the ingestion configuration for all services, in the agent and in the tracing libraries. All [Ingestion Mechanisms][2] are publicly documented and configurable.
+[取り込み制御ページ][1]は、Agent とトレーシングライブラリのすべてのサービスに対する取り込み構成に対するきめ細かい可視性を提供します。すべての[取り込みメカニズム][2]は公開されており、構成することができます。
 
-With the ingestion control page, you have full visibility and complete control of your span volume. Consequently, you are be able to:
-- Ingest the data that is most relevant to your business and your observability goals.
-- Reduce network costs by avoiding sending unused trace data to the Datadog platform.
-- Control and manage your overall costs.
+取り込み制御ページでは、スパンボリュームを完全に可視化し、完全に制御することができます。その結果、以下のことが可能になります。
+- ビジネスと観測可能性の目標に最も関連性の高いデータを取り込みます。
+- 未使用のトレースデータを Datadog プラットフォームに送信しないようにすることで、ネットワークコストを削減します。
+- 全体のコストをコントロールし、管理します。
 
-## Effects of reducing trace ingestion volume
+## トレース取り込み量低減の効果
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="APM ingestion sampling displaying 25 percent complete traces ingested" style="width:70%;" >}}
+{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="25% のトレースが取り込まれたことを表示する APM 取り込みサンプリング" style="width:70%;" >}}
 
-If you decide to reduce the ingestion volume for certain services, the **request, error, and latency [metrics][3]** (known as RED metrics, for Requests, Errors, and Duration) remain 100% accurate, as they are being calculated based on 100% of the application's traffic, regardless of any sampling configuration. These metrics are included when purchasing Datadog APM. In order to make sure you have full visibility into your application's traffic, you can use these metrics to spot potential errors on a service or a resource, by creating dashboards, monitors, and SLOs.
+特定のサービスの取り込み量を減らすことにしても、**リクエスト、エラー、およびレイテンシーの[メトリクス][3]** (RED (Requests, Errors, and Duration) メトリクスとして知られている) は、サンプリング構成に関係なく、アプリケーションの 100% のトラフィックに基づいて計算されているため、100% の精度を維持します。これらのメトリクスは、Datadog APM の購入時に含まれています。アプリケーションのトラフィックを完全に可視化するために、これらのメトリクスを使用して、ダッシュボード、モニター、SLO を作成し、サービスやリソースの潜在的なエラーを発見することができます。
 
 **Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data by default. See [Ingestion Sampling with OpenTelemetry][4] for more information.
 
-<div class="alert alert-info"><strong>Beta</strong>: Alternatively, use the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> to calculate APM metrics on unsampled data. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> for more information.</div>
+<div class="alert alert-info"><strong>ベータ版</strong>: あるいは、<a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> を使用して、サンプリングされていないデータの APM メトリクスを計算します。詳しくは<a href="/opentelemetry/guide/switch_from_processor_to_connector">OpenTelemetry APM メトリクスを Datadog プロセッサから Datadog Connector に切り替える</a>をお読みください。</div>
 
-Trace data is very repetitive, which means trace samples to investigate any issues are still available with ingestion sampling. For high throughput services, there's usually no need for you to collect every single request - an important enough problem should always show symptoms in multiple traces. Ingestion controls helps you to have the visibility that you need to troubleshoot problems while remaining within budget.
+トレースデータは非常に反復性が高いため、取り込みサンプリングでも問題を調査するためのトレースサンプルは利用可能です。高スループットのサービスでは、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。取り込み制御は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
 
-#### Metrics from spans
+#### スパンからのメトリクス
 
-[Metrics from spans][5] are based on ingested spans.
+[スパンからのメトリクス][5]は、取り込まれたスパンに基づいています。
 
-Reducing ingestion sampling rates will impact any **count** type metric. **Distribution** type metrics, for instance `duration` measures, are not impacted as the sampling is mostly uniform, the distribution of latencies remains representative of the traffic.
+取り込みサンプリングレートを下げると、**count** タイプのメトリクスに影響があります。** Distribution** タイプのメトリクス、例えば `duration` メトリクスは、サンプリングがほぼ均一で、レイテンシーの分布がトラフィックを代表するままであるため、影響を受けません。
 
-#### Monitors
+#### モニター
 
-Any **metric** monitor using [metrics from spans](#metrics-from-spans) is impacted by ingestion volume reduction. Metric monitors based on **trace.__** metrics will remain accurate, because these metrics are calculated based on 100% of the traffic.
+[スパンからのメトリクス](#metrics-from-span)を使用するすべての ** metric** モニターは、取り込み量の減少の影響を受けます。**trace.__** メトリクスに基づくメトリクスモニターは、100% のトラフィックに基づいて計算されるため、正確さを維持します。
 
-Count-based [**Trace analytics**][6] monitors are impacted as well. Check if you have trace analytics monitors created by looking for `type:trace-analytics` monitors in the manage monitors page.
+カウントベースの [**Trace analytics**][6] モニターにも影響があります。モニター管理ページで `type:trace-analytics` モニターを探し、トレース分析モニターが作成されているかどうかを確認してください。
 
-## Assess your services' ingestion configuration
+## サービスの取り込み構成を評価する
 
-To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and tracing library configuration.
+アプリケーションのインスツルメンテーションの現状を評価するために、Agent とトレースライブラリの構成に関する詳細な情報を提供する[トレース取り込み制御ページ][1]を活用してください。
 
-### Understanding if you are within your monthly ingestion allocation
+### 月間の取り込み割り当ての範囲内かどうかの把握
 
-Use the ingestion monthly usage KPI to get an estimation of your usage compared to the monthly allocation of 150 GB of ingested spans per APM host (summed across all APM hosts).
+取り込み月間使用量 KPI を使用して、APM ホストごとに取り込まれるスパンの月間割り当て 150 GB (すべての APM ホストで合計) と比較して、使用量を推定します。
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/ingestion_overage.png" alt="Ingestion Overage KPI displaying 170 percent estimated monthly usage of 23.3 monthly available TB across all infrastructure" style="width:40%;" >}}
+{{< img src="/tracing/guide/trace_ingestion_volume_control/ingestion_overage.png" alt="取り込みオーバー KPI: 全インフラストラクチャーで月間 23.3 TB の推定使用量の 170% を表示" style="width:40%;" >}}
 
-### Advanced APM usage investigation
+### APM の高度な使用量調査
 
-The ingestion configuration can be investigated for each service. Click on a service row to see the Service Ingestion Summary, which surfaces:
-- **Ingestion reason breakdown**: which [ingestion mechanism][2] is responsible for the ingestion volume
-- **Top sampling decision makers**: which upstream services are taking sampling decisions for the spans ingested in regards to the [default ingestion mechanism][7]
+各サービスごとに取り込み構成を調べることができます。サービス行をクリックすると、Service Ingestion Summary が表示され、以下が示されます。
+- **Ingestion reason breakdown**: どの[取り込みメカニズム][2]が取り込み量を担っているか
+- **Top sampling decision makers**: [デフォルトの取り込みメカニズム][7]に関して、取り込まれたスパンに対してどの上流サービスがサンプリング決定をしているか
 
-An [out-of-the-box dashboard][8] is also available to get more insights on historical trends related to your ingestion usage and volume. Clone this dashboard to be able to edit widgets and perform further analysis.
+また、取り込みの使用や量に関する過去の傾向をより深く理解するための[すぐに使えるダッシュボード][8]も利用可能です。このダッシュボードを複製すると、ウィジェットの編集やさらなる分析が可能になります。
 
-## Reduce your ingestion volume
+## 取り込み量を減らす
 
-### Identify services responsible for most of the ingestion volume
+### 取り込み量の大部分を占めるサービスの特定
 
-To identify which services are responsible for most of the ingestion volume, sort the table by **Downstream Bytes/s**. This column allows you to spot which services take most of the sampling decisions, which also impact downstream services.
+どのサービスが取り込み量の大部分を占めているかを確認するには、表を **Downstream Bytes/s** でソートします。この列では、どのサービスがサンプリング決定の大部分を行い、それが下流のサービスにも影響を及ぼしているかを見分けることができます。
 
-If the service is starting the trace, **Downstream Bytes/s** also encompasses the volume of spans coming from downstream services for which the service took the sampling decision.
+サービスがトレースを開始している場合、**Downstream Bytes/s** には、サービスがサンプリング決定を行った下流サービスからのスパン量も含まれます。
 
-The **Traffic Breakdown** column gives a good indication of the service's sampling configuration.
+**Traffic Breakdown** 列を見ると、サービスのサンプリング構成がよくわかります。
 
-If the service has a high Downstream Bytes/s rate and a high sampling rate (displayed as the blue filled section of the traffic breakdown column), reducing the sampling rate for this service is expected to have a high impact on the ingestion volume.
+Downstream Bytes/s レートが高く、サンプリングレートも高いサービス (トラフィック内訳列の青く塗りつぶされた部分として表示) の場合、このサービスのサンプリングレートを下げると、取り込み量に高い影響を与えることが予想されます。
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="APM ingestion sampling displaying 99 percent complete traces ingested, meaning no sampling" style="width:70%;" >}}
+{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="99% のトレースが取り込まれたことを表示する APM 取り込みサンプリング、つまりサンプリングがない" style="width:70%;" >}}
 
-### Globally configure the ingestion sampling rate at the Agent level
+### Agent レベルで取り込みサンプリングレートをグローバルに構成する
 
-The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally accross services.
+**Configuration** の列は、サービスにサンプリングルールが構成されているかどうかを示しています。上位のサービスが `AUTOMATIC` 構成である場合、**Agent configuration** を変更すると、サービス全体でボリュームが減少します。
 
-To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
+Agent レベルで取り込み量を減らすには、`DD_APM_MAX_TPS` (デフォルトでは `10` に設定) を構成して、ヘッドベースのサンプリング量のシェアを減らしてください。[デフォルトのサンプリングメカニズム][7]について詳しくはこちら。
 
-**Note**: This configuration option only goes into effect when using **Datadog tracing libraries**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_MAX_TPS` does not change sampling rates that are applied in tracing libraries.
+**注**: この構成オプションは、**Datadog トレーシングライブラリ**を使用しているときのみ有効になります。Agent の OTLP Ingest が OpenTelemetry でインスツルメンテーションされたアプリケーションからデータを収集する場合、`DD_APM_MAX_TPS` を変更しても、トレーシングライブラリで適用されるサンプリングレートは変わりません。
 
-Additionally, to reduce the volume of [error][9] and [rare][10] traces:
-- Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.
-- Set `DD_APM_DISABLE_RARE_SAMPLER` to true to stop sampling rare traces.
+さらに、[エラー][9]や[レア][10]トレースの量を減らすには
+- エラーサンプリングのシェアを減らすために、`DD_APM_ERROR_TPS` を構成します。
+- `DD_APM_DISABLE_RARE_SAMPLER` を true に設定すると、レアトレースのサンプリングが停止します。
 
-### Independently configure the ingestion sampling rate for services at the library level
+### ライブラリレベルでサービスの取り込みサンプリングレートを独立して構成する
 
-By configuring sampling rates for a few high-throughput services, most of the "exceeding" ingestion volume can be lowered.
+一部の高スループットサービスのサンプリングレートを構成することで、「超過」取り込み量の大部分を低減することができます。
 
-Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
+サービスをクリックすると、**Service Ingestion Summary** が表示されます。サイドパネルの **Ingestion reasons breakdown** をご覧ください。各メカニズムに起因する取り込み量のシェアの概要を確認することができます。
 
-If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the tracing library level.
+取り込み量のほとんどの主な理由がヘッドベースサンプリング (`auto` または `rule`) である場合、トレースライブラリレベルでサンプリングルールを設定することで、取り込み量を構成することができます。
 
-Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
+サービスのサンプリングレートを構成するには、**Manage Ingestion Rate** ボタンをクリックします。サービスの言語と適用したい取り込みサンプリングレートを選択します。
 
-**Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][11].
+**注:** 構成の変更を適用するには、アプリケーションを再デプロイする必要があります。Datadog では、[環境変数][11]を設定することで変更を適用することを推奨しています。
 
-### Trace sampling with OpenTelemetry
+### OpenTelemetry によるトレースサンプリング
 
-If your applications and services are instrumented with OpenTelemetry libraries and you're using the OpenTelemetry collector, you can use the following OpenTelemetry sampling capabilities:
+アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメンテーションされ、OpenTelemetry コレクターを使用している場合、以下の OpenTelemetry サンプリング機能を使用することができます。
 
-- [TraceIdRatioBased][12] and [ParentBased][13] are 2 built-in samplers that allow you to implement deterministic head-based sampling based on the trace_id at the **SDK** level.
-- The [Tail Sampling Processor][14] and [Probabilistic Sampling Processor][15] allow you to sample traces based on a set of rules at the **collector** level.
+- [TraceIdRatioBased][12] と [ParentBased][13] は、**SDK** レベルで trace_id に基づく決定論的なヘッドベースサンプリングを実装することができる 2 つの組み込みサンプラーです。
+- [Tail Sampling Processor][14] と [Probabilistic Sampling Processor][15] は、**コレクター**レベルで一連のルールに基づいてトレースをサンプリングすることが可能です。
 
-Using either of the two options results in sampled [APM Metrics](#effects-of-reducing-trace-ingestion-volume).
+2 つのオプションのいずれかを使用すると、[APM メトリクス](#effects-of-reducing-trace-ingestion-volume)のサンプリングが行われます。
 
-## Ingestion reasons glossary
+## 取り込み理由の用語集
 
-_Know which ingestion mechanisms are responsible for most of the ingestion volume_
+_どの取り込みメカニズムが取り込み量の大部分を担っているのかを把握する_
 
-The default mechanism to sample traces is head-based sampling. The decision whether to sample a trace or not is taken at the beginning of its lifecycle, and propagated downstream in the context of the requests in order to ensure that you can always view and analyze complete traces.
+トレースをサンプリングするデフォルトのメカニズムは、ヘッドベースサンプリングです。トレースをサンプリングするかどうかの判断はライフサイクルの最初に行われ、 常に完全なトレースを表示して分析できるようにするために、 リクエストのコンテキストで下流に伝搬されます。
 
-Head-based sampling is configurable in the tracing libraries or from the Datadog Agent:
+ヘッドベースサンプリングは、トレースライブラリまたは Datadog Agent から構成可能です。
 
-| ingestion reason   | Where             | Ingestion Mechanism Description | Default |
+| 取り込み理由   | 場所             | 取り込みのメカニズムの説明 | デフォルト |
 |--------------------|-------------------|-----------------------|---------|
-| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | The Datadog Agent distributes sampling rates to tracing libraries.    | 10 traces per second per Agent |
-| `rule`             | [Tracing Libraries](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | The libraries' defined sampling percentage for specific services.   | null                 |
+| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Datadog Agent は、サンプリングレートをトレーシングライブラリに配布します。    | 10 トレース/秒/Agent |
+| `rule`             | [トレーシングライブラリ](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | 特定のサービスに対してライブラリが定めたサンプリング率。   | null                 |
 
 
-Several other ingestion reasons are surfaced in the Ingestion Control page and as a tag on the `datadog.estimated_usage.apm.ingested_bytes` metric. These ingestion reasons may be responsible for your ingestion volume:
+その他のいくつかの取り込み理由は、Ingestion Control ページと `datadog.estimated_usage.apm.ingested_bytes` メトリクスのタグとして表示されます。これらの取り込み理由は、取り込み量の原因になっている可能性があります。
 
-| ingestion reason   | Where             | Ingestion Mechanism Description | Default |
+| 取り込み理由   | 場所             | 取り込みのメカニズムの説明 | デフォルト |
 |--------------------|-------------------|-----------------------|---------|
-| `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Sampling of errors uncaught by the head-based sampling.             | 10 traces per second per Agent (null, if rules are defined) |
-| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Sampling of rare traces (catching all combinations of a set of span tags).        | 5 traces per second per Agent (null, if rules are defined) |
-| `manual`             | In-code         | In-code decision override to keep/drop a span and its children.    | null |
-| `analytics`          | Agent and Tracing Libraries | [Deprecated ingestion mechanism][16] that samples single spans without the full trace.   | null                 |
+| `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | ヘッドベースサンプリングで捕捉できないエラーのサンプリング。             | 10 トレース/秒/Agent (ルールが定義されている場合は null) |
+| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  レアトレースのサンプリング (一連のスパンタグのすべての組み合わせを捕捉)。        | 5 トレース/秒/Agent (ルールが定義されている場合は null) |
+| `manual`             | コード内         | スパンとその子を保持/削除するための、コード内決定のオーバーライド。    | null |
+| `analytics`          | Agent とトレーシングライブラリ | フルトレースなしで単一スパンをサンプリングする[非推奨の取り込みメカニズム][16]。   | null                 |
 
-Additionally, other products can be responsible for sampled span volume:
+さらに、サンプリングされたスパン量には、他の製品が関与している可能性があります。
 
-- `synthetics` and `synthetics-browser`: API and browser tests are connected to the trace generated by the test.
-- `rum`: Requests from web and mobile applications are linked to the corresponding backend traces.
-- `lambda` and `xray`: Traces generated from AWS lambda functions instrumented with X-Ray or Datadog libraries.
+- `synthetics` と `synthetics-browser`: API およびブラウザテストは、テストによって生成されたトレースに接続されています。
+- `rum`: Web アプリケーションやモバイルアプリケーションからのリクエストは、対応するバックエンドのトレースとリンクしています。
+- `lambda` と `xray`: X-Ray または Datadog ライブラリでインスツルメントされた AWS lambda 関数から生成されたトレース。
 
-Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2].
+取り込みの理由については、[取り込みメカニズムに関するドキュメント][2]を参照してください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_pipeline/ingestion_controls
-[2]: /tracing/trace_pipeline/ingestion_mechanisms/
-[3]: /tracing/metrics/metrics_namespace/
-[4]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
-[5]: /tracing/trace_pipeline/generate_metrics/
-[6]: /monitors/types/apm/?tab=analytics
-[7]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
-[8]: /tracing/trace_pipeline/metrics/
-[9]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
-[10]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
-[11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[1]: /ja/tracing/trace_pipeline/ingestion_controls
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /ja/tracing/metrics/metrics_namespace/
+[4]: /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry/
+[5]: /ja/tracing/trace_pipeline/generate_metrics/
+[6]: /ja/monitors/types/apm/?tab=analytics
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[8]: /ja/tracing/trace_pipeline/metrics/
+[9]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[10]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[11]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
 [12]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [13]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
-[16]: /tracing/legacy_app_analytics
+[16]: /ja/tracing/legacy_app_analytics

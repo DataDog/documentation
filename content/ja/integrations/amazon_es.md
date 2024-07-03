@@ -1,53 +1,53 @@
 ---
-"app_id": "amazon-es"
-"app_uuid": "c00f4e38-7cc5-42ae-9ea1-519776f5f350"
-"assets":
-  "dashboards":
-    "aws_es": "assets/dashboards/amazon_es_overview.json"
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "aws.es.cpuutilization"
-      "metadata_path": "metadata.csv"
-      "prefix": "aws.es."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "148"
-    "source_type_name": "Amazon ES"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "metrics"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "amazon_es"
-"integration_id": "amazon-es"
-"integration_title": "Amazon OpenSearch Service"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "amazon_es"
-"public_title": "Amazon OpenSearch Service"
-"short_description": "Amazon OpenSearch Service makes it easy to deploy and operate OpenSearch."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Metrics"
-  "configuration": "README.md#Setup"
-  "description": "Amazon OpenSearch Service makes it easy to deploy and operate OpenSearch."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Amazon OpenSearch Service"
+app_id: amazon-es
+app_uuid: c00f4e38-7cc5-42ae-9ea1-519776f5f350
+assets:
+  dashboards:
+    aws_es: assets/dashboards/amazon_es_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.es.cpuutilization
+      metadata_path: metadata.csv
+      prefix: aws.es.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 148
+    source_type_name: Amazon ES
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- metrics
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: amazon_es
+integration_id: amazon-es
+integration_title: Amazon OpenSearch Service
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: amazon_es
+public_title: Amazon OpenSearch Service
+short_description: Amazon OpenSearch Service makes it easy to deploy and operate OpenSearch.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  configuration: README.md#Setup
+  description: Amazon OpenSearch Service makes it easy to deploy and operate OpenSearch.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon OpenSearch Service
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -88,10 +88,9 @@ The Amazon OpenSearch Service integration does not include any service checks.
 
 Need help? Contact [Datadog support][6].
 
-[1]: https://docs.datadoghq.com/integrations/elastic
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/elastic
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-es
 [5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/metadata.csv
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

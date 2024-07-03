@@ -1,10 +1,10 @@
 ---
-title: dashboard
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - screenboard
-  - timeboard
+- screenboard
+- timeboard
+title: dashboard
 ---
 
 A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying key performance metrics, enabling you to monitor the health of your infrastructure.

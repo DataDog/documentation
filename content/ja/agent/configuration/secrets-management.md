@@ -1,14 +1,18 @@
 ---
-title: Secrets Management
+algolia:
+  tags:
+  - secrets
+  - secrets executable
+  - secrets provider
+  - list secrets
 aliases:
-  - /agent/faq/kubernetes-secrets
-  - /agent/guide/secrets-management
+- /ja/agent/faq/kubernetes-secrets
+- /ja/agent/guide/secrets-management
 further_reading:
 - link: /agent/autodiscovery/
   tag: Documentation
   text: Autodiscovery
-algolia:
-  tags: [secrets, secrets executable, secrets provider, list secrets]
+title: Secrets Management
 ---
 
 Agent の構成ファイルにプレーンテキストでシークレットを保存したくない場合は、シークレット管理パッケージを使用できます。
@@ -556,10 +560,10 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/integrations/
+[1]: /ja/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent/secrets-helper/readsecret_multiple_providers.sh
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [4]: https://docs.docker.com/engine/swarm/secrets/
 [5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
-[6]: /agent/configuration/agent-commands/#restart-the-agent
+[6]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

@@ -1,7 +1,7 @@
 ---
-title: span summary
 core_product:
-  - apm
+- apm
+title: span summary
 ---
 
 The span summary table in APM shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance.
@@ -22,4 +22,4 @@ Average duration
 Average percentage of execution time
 : Average ratio of execution time for which the span was active for traces, including the current resource, where the span is present at least once.
 
-[1]: /glossary/#span
+[1]: /ja/glossary/#span

@@ -1,9 +1,7 @@
 ---
-title: Check Status Widget
-widget_type: check_status
-description: "Graph the current status or number of results for any check performed."
 aliases:
-- /graphing/widgets/check_status/
+- /ja/graphing/widgets/check_status/
+description: Graph the current status or number of results for any check performed.
 further_reading:
 - link: /developers/service_checks
   tag: Documentation
@@ -11,6 +9,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Check Status Widget
+widget_type: check_status
 ---
 
 サービスチェックは、特定のサービスがアップ状態かダウン状態かを監視します。指定された回数連続して監視 Agent がサービスに接続できない場合、アラートが発生します。Check Status ウィジェットにより、ダッシュボード上でサービスの劣化、サービス障害、クラスター全体の問題、スループットの低下、レイテンシーの増加を視覚的に表示できます。詳細については、[サービスチェック][1]のドキュメントを参照してください。
@@ -42,6 +42,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/service_checks
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/developers/service_checks
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

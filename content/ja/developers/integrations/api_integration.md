@@ -1,4 +1,5 @@
 ---
+description: Learn how to develop and publish a Datadog API integration.
 further_reading:
 - link: /api/latest/using-the-api/
   tag: Documentation
@@ -11,7 +12,6 @@ further_reading:
   text: Learn how to develop on the Datadog platform
 title: Create an API Integration
 type: documentation
-description: Learn how to develop and publish a Datadog API integration.
 ---
 ## Overview
 
@@ -92,32 +92,32 @@ Updates to assets such as dashboards and recommended monitors are available to c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/latest/using-the-api/
-[2]: https://docs.datadoghq.com/api/latest/metrics/
-[3]: https://docs.datadoghq.com/logs/faq/partner_log_integration/
-[4]: https://docs.datadoghq.com/api/latest/events/
-[5]: https://docs.datadoghq.com/api/latest/service-checks/
-[6]: https://docs.datadoghq.com/tracing/guide/send_traces_to_agent_by_api/
-[7]: https://docs.datadoghq.com/api/latest/incidents/
-[8]: https://docs.datadoghq.com/api/latest/security-monitoring/
-[9]: https://docs.datadoghq.com/developers/#creating-your-own-solution
-[10]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[11]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
-[12]: https://docs.datadoghq.com/getting_started/site
-[13]: https://docs.datadoghq.com/account_management/api-app-keys/
-[14]: https://docs.datadoghq.com/developers/authorization/
-[15]: https://docs.datadoghq.com/developers/integrations/oauth_for_integrations/
-[16]: https://docs.datadoghq.com/developers/authorization/oauth2_endpoints/
+[1]: https://docs.datadoghq.com/ja/api/latest/using-the-api/
+[2]: https://docs.datadoghq.com/ja/api/latest/metrics/
+[3]: https://docs.datadoghq.com/ja/logs/faq/partner_log_integration/
+[4]: https://docs.datadoghq.com/ja/api/latest/events/
+[5]: https://docs.datadoghq.com/ja/api/latest/service-checks/
+[6]: https://docs.datadoghq.com/ja/tracing/guide/send_traces_to_agent_by_api/
+[7]: https://docs.datadoghq.com/ja/api/latest/incidents/
+[8]: https://docs.datadoghq.com/ja/api/latest/security-monitoring/
+[9]: https://docs.datadoghq.com/ja/developers/#creating-your-own-solution
+[10]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[11]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#application-keys
+[12]: https://docs.datadoghq.com/ja/getting_started/site
+[13]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[14]: https://docs.datadoghq.com/ja/developers/authorization/
+[15]: https://docs.datadoghq.com/ja/developers/integrations/oauth_for_integrations/
+[16]: https://docs.datadoghq.com/ja/developers/authorization/oauth2_endpoints/
 [17]: https://github.com/DataDog/integrations-extras/tree/master/vantage
 [18]: https://www.python.org/downloads/
 [19]: https://pypi.org/project/datadog-checks-dev/
-[20]: https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file
+[20]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#manifest-file
 [21]: https://github.com/DataDog/integrations-extras/
 [22]: https://app.datadoghq.com/integrations
-[23]: https://docs.datadoghq.com/developers/integrations/python
-[24]: https://docs.datadoghq.com/developers/integrations/create_a_tile
-[25]: https://docs.datadoghq.com/monitors/
-[26]: https://docs.datadoghq.com/dashboards/
-[27]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
-[28]: /developers/authorization/oauth2_in_datadog/
+[23]: https://docs.datadoghq.com/ja/developers/integrations/python
+[24]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
+[25]: https://docs.datadoghq.com/ja/monitors/
+[26]: https://docs.datadoghq.com/ja/dashboards/
+[27]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/
+[28]: /ja/developers/authorization/oauth2_in_datadog/
 [29]: https://partners.datadoghq.com/

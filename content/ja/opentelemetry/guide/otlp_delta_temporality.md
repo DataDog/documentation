@@ -1,5 +1,4 @@
 ---
-title: Producing Delta Temporality Metrics with OpenTelemetry
 further_reading:
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: OpenTelemetry Support in Datadog
+title: Producing Delta Temporality Metrics with OpenTelemetry
 ---
 
 ## 概要
@@ -281,7 +281,7 @@ processors:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/open_telemetry/otlp_metric_types
+[1]: /ja/metrics/open_telemetry/otlp_metric_types
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#sums
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/cumulativetodeltaprocessor
 [4]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/spec-compliance-matrix.md#environment-variables

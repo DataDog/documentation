@@ -1,21 +1,21 @@
 ---
-title: Network Map
-description: Map your Network data across all your tags.
 aliases:
-    - /network_performance_monitoring/network_map/
+- /ja/network_performance_monitoring/network_map/
+description: Map your Network data across all your tags.
 further_reading:
-    - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-      tag: Blog
-      text: Network Performance Monitoring
-    - link: "https://www.datadoghq.com/blog/datadog-npm-search-map-updates/"
-      tag: Blog
-      text: Streamline network investigations with an enhanced querying and map experience
-    - link: /network_monitoring/devices
-      tag: Documentation
-      text: Network Device Monitoring
-    - link: /network_monitoring/performance/setup
-      tag: Documentation
-      text: Collect your Network Data with the Datadog Agent.
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: Blog
+  text: Network Performance Monitoring
+- link: https://www.datadoghq.com/blog/datadog-npm-search-map-updates/
+  tag: Blog
+  text: Streamline network investigations with an enhanced querying and map experience
+- link: /network_monitoring/devices
+  tag: Documentation
+  text: Network Device Monitoring
+- link: /network_monitoring/performance/setup
+  tag: Documentation
+  text: Collect your Network Data with the Datadog Agent.
+title: Network Map
 ---
 
 ## 概要

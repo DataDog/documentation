@@ -1,71 +1,71 @@
 ---
-"app_id": "cockroachdb"
-"app_uuid": "7368f005-2333-4dc5-a2b5-14419e4995d1"
-"assets":
-  "dashboards":
-    "CockroachDB Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cockroachdb.sys.uptime
-      "metadata_path": metadata.csv
-      "prefix": cockroachdb.
-    "process_signatures":
+app_id: cockroachdb
+app_uuid: 7368f005-2333-4dc5-a2b5-14419e4995d1
+assets:
+  dashboards:
+    CockroachDB Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cockroachdb.sys.uptime
+      metadata_path: metadata.csv
+      prefix: cockroachdb.
+    process_signatures:
     - cockroach
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10036"
-    "source_type_name": CockroachDB
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10036
+    source_type_name: CockroachDB
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - caching
 - cloud
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cockroachdb"
-"integration_id": "cockroachdb"
-"integration_title": "CockroachDB"
-"integration_version": "3.3.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cockroachdb"
-"public_title": "CockroachDB"
-"short_description": "Monitor the overall health and performance of CockroachDB clusters."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cockroachdb
+integration_id: cockroachdb
+integration_title: CockroachDB
+integration_version: 3.3.1
+is_public: true
+manifest_version: 2.0.0
+name: cockroachdb
+public_title: CockroachDB
+short_description: Monitor the overall health and performance of CockroachDB clusters.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Category::Cloud"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor the overall health and performance of CockroachDB clusters.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": CockroachDB
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Cloud
+  - Category::Data Stores
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor the overall health and performance of CockroachDB clusters.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CockroachDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -139,9 +139,9 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 [2]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -165,8 +165,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_NAME>"}]'
 ```
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -201,8 +201,8 @@ CockroachDB チェックには、イベントは含まれません。
 
 [1]: https://www.cockroachlabs.com/product/cockroachdb
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/integrations/guide/versions-for-openmetrics-based-integrations
+[3]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
 [4]: https://github.com/DataDog/integrations-core/blob/7.33.x/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog

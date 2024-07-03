@@ -1,19 +1,19 @@
 ---
-title: Monitoring Resource Performance
-kind: documentation
 further_reading:
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: Blog
-    text: Real User Monitoring
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Explore your views within Datadog
-  - link: /real_user_monitoring/explorer/visualize/
-    tag: Documentation
-    text: Apply visualizations on your events
-  - link: /real_user_monitoring/platform/dashboards/
-    tag: Documentation
-    text: RUM Dashboards
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: Blog
+  text: Real User Monitoring
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Explore your views within Datadog
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: Apply visualizations on your events
+- link: /real_user_monitoring/platform/dashboards/
+  tag: Documentation
+  text: RUM Dashboards
+kind: documentation
+title: Monitoring Resource Performance
 ---
 
 The RUM Browser SDK collects resources and assets for every RUM view (page load): [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files. A RUM Resource event is generated for each one of them, with detailed timings and metadata.
@@ -80,6 +80,6 @@ To resolve this, enable extended data collection for resources subject to CORS b
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /real_user_monitoring/platform/connect_rum_and_traces
+[2]: /ja/real_user_monitoring/platform/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

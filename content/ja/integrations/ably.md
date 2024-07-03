@@ -1,75 +1,75 @@
 ---
-"app_id": "ably"
-"app_uuid": "4596cd59-d3f2-4921-8133-3a448ccaea61"
-"assets":
-  "dashboards":
-    "Ably": assets/dashboards/ably.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: ably
+app_uuid: 4596cd59-d3f2-4921-8133-3a448ccaea61
+assets:
+  dashboards:
+    Ably: assets/dashboards/ably.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - ably.channels.mean
       - ably.channels.min
       - ably.channels.peak
       - ably.connections.all.mean
       - ably.connections.all.min
       - ably.connections.all.peak
-      "metadata_path": metadata.csv
-      "prefix": ably.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10340"
-    "source_type_name": Ably
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://ably.com"
-  "name": Ably
-  "sales_email": sales@ably.com
-  "support_email": support@ably.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: ably.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10340
+    source_type_name: Ably
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://ably.com
+  name: Ably
+  sales_email: sales@ably.com
+  support_email: support@ably.com
+categories:
 - cloud
 - metrics
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/ably/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ably"
-"integration_id": "ably"
-"integration_title": "Ably"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"manifest_version": "2.0.0"
-"name": "ably"
-"public_title": "Ably"
-"short_description": "Collect and graph Ably metrics"
-"supported_os":
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/ably/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ably
+integration_id: ably
+integration_title: Ably
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: 2.0.0
+name: ably
+public_title: Ably
+short_description: Collect and graph Ably metrics
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Cloud"
-  - "Category::Metrics"
-  - "Submitted Data Type::Metrics"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Collect and graph Ably metrics
-  "media":
-  - "caption": Ably - Dashboard
-    "image_url": images/ably-dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Ably
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Cloud
+  - Category::Metrics
+  - Submitted Data Type::Metrics
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Collect and graph Ably metrics
+  media:
+  - caption: Ably - Dashboard
+    image_url: images/ably-dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Ably
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -153,4 +153,3 @@ Need help? Contact [Ably support][9].
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ably/images/uninstall-integration.png
 [8]: https://app.datadoghq.com/organization-settings/api-keys?filter=Ably
 [9]: https://ably.com/support
-

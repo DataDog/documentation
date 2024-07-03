@@ -1,13 +1,14 @@
 ---
-title: Scatter Plot Widget
-description: "Graph a chosen scope over two different metrics with their respective aggregation"
-widget_type: "scatterplot"
 aliases:
-- /graphing/widgets/scatter_plot/
+- /ja/graphing/widgets/scatter_plot/
+description: Graph a chosen scope over two different metrics with their respective
+  aggregation
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Scatter Plot Widget
+widget_type: scatterplot
 ---
 
 A scatter plot identifies a possible relationship between changes observed in two different sets of variables. It provides a visual and statistical means to test the strength of a relationship between two variables. The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregations.
@@ -45,6 +46,6 @@ A scatter plot identifies a possible relationship between changes observed in tw
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/context-links/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/guide/context-links/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

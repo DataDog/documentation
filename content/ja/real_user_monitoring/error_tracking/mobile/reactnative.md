@@ -1,23 +1,22 @@
 ---
-title: React Native Crash Reporting and Error Tracking
-kind: documentation
-description: Set up Error Tracking for your React Native projects.
 aliases:
-- /real_user_monitoring/error_tracking/reactnative
-type: multi-code-lang
+- /ja/real_user_monitoring/error_tracking/reactnative
 code_lang: reactnative
 code_lang_weight: 40
+description: Set up Error Tracking for your React Native projects.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-reactnative"
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: ソースコード
   text: dd-sdk-reactnative Source code
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
-- link: "https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/"
+- link: https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/
   tag: Blog
   text: RUM now offers React Native Crash Reporting and Error Tracking
-
+kind: documentation
+title: React Native Crash Reporting and Error Tracking
+type: multi-code-lang
 ---
 
 ## Overview
@@ -471,8 +470,8 @@ datadog {
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/reactnative/
-[4]: /real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
+[3]: /ja/real_user_monitoring/reactnative/
+[4]: /ja/real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [7]: https://github.com/cwhenderson20/react-native-crash-tester

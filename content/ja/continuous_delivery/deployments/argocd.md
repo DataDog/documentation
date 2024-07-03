@@ -1,7 +1,5 @@
 ---
-title: Monitor Argo CD Deployments
 description: Learn how to monitor deployments from Argo CD in Datadog CD Visibility.
-is_beta: true
 further_reading:
 - link: /continuous_delivery/deployments
   tag: Documentation
@@ -9,6 +7,8 @@ further_reading:
 - link: /continuous_delivery/explorer
   tag: Documentation
   text: Learn how to query and visualize deployment executions
+is_beta: true
+title: Monitor Argo CD Deployments
 ---
 
 {{< site-region region="gov" >}}
@@ -164,8 +164,8 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [6]: https://app.datadoghq.com/ci/deployments
 [7]: https://app.datadoghq.com/ci/deployments/executions
 [8]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/troubleshooting/
-[9]: /continuous_delivery/search
-[10]: /continuous_delivery/explorer
+[9]: /ja/continuous_delivery/search
+[10]: /ja/continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
-[13]: /tracing/service_catalog
+[13]: /ja/tracing/service_catalog

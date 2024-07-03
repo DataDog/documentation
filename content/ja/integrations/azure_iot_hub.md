@@ -1,25 +1,25 @@
 ---
-"categories":
-- "azure"
-- "cloud"
-- "iot"
-- "provisioning"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Azure IOT Hub のキーメトリクスを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/azure_iot_hub/"
-"draft": false
-"git_integration_title": "azure_iot_hub"
-"has_logo": true
-"integration_id": "azure-iot-hub"
-"integration_title": "Microsoft Azure IOT Hub"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_iot_hub"
-"public_title": "Datadog-Microsoft Azure IOT Hub Integration"
-"short_description": "Track key Azure IOT Hub metrics."
-"version": "1.0"
+categories:
+- azure
+- cloud
+- iot
+- provisioning
+custom_kind: インテグレーション
+dependencies: []
+description: Azure IOT Hub のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/azure_iot_hub/
+draft: false
+git_integration_title: azure_iot_hub
+has_logo: true
+integration_id: azure-iot-hub
+integration_title: Microsoft Azure IOT Hub
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_iot_hub
+public_title: Datadog-Microsoft Azure IOT Hub Integration
+short_description: Track key Azure IOT Hub metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -58,7 +58,6 @@ The Azure IoT Hub integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_iot_hub/azure_iot_hub_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

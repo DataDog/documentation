@@ -1,72 +1,72 @@
 ---
-"app_id": "uptycs"
-"app_uuid": "d27ee4b6-649d-42bd-b7ac-fb40537d7031"
-"assets":
-  "dashboards":
-    "Uptycs Events Dashboard": assets/dashboards/uptycs.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10400"
-    "source_type_name": Uptycs
-"author":
-  "homepage": "https://www.uptycs.com"
-  "name": Uptycs
-  "sales_email": sales@uptycs.com
-  "support_email": support@uptycs.com
-"categories":
+app_id: uptycs
+app_uuid: d27ee4b6-649d-42bd-b7ac-fb40537d7031
+assets:
+  dashboards:
+    Uptycs Events Dashboard: assets/dashboards/uptycs.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10400
+    source_type_name: Uptycs
+author:
+  homepage: https://www.uptycs.com
+  name: Uptycs
+  sales_email: sales@uptycs.com
+  support_email: support@uptycs.com
+categories:
 - cloud
 - collaboration
 - alerting
 - compliance
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/uptycs/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "uptycs"
-"integration_id": "uptycs"
-"integration_title": "Uptycs"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "uptycs"
-"public_title": "Uptycs"
-"short_description": "Collect alerts and detection from Uptycs"
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Collaboration"
-  - "Category::Alerting"
-  - "Category::Compliance"
-  - "Category::Security"
-  - "Offering::Integration"
-  - "Submitted Data Type::Events"
-  "configuration": "README.md#Setup"
-  "description": Collect alerts and detection from Uptycs
-  "media":
-  - "caption": Uptycs events dashboard
-    "image_url": images/integration_dashboard_1.png
-    "media_type": image
-  - "caption": Uptycs events per host trend graph
-    "image_url": images/integration_dashboard_2.png
-    "media_type": image
-  - "caption": Uptycs detection as a Datadog event
-    "image_url": images/data_collected_1.png
-    "media_type": image
-  - "caption": Uptycs alert as a Datadog event
-    "image_url": images/data_collected_2.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Uptycs
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/uptycs/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: uptycs
+integration_id: uptycs
+integration_title: Uptycs
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: uptycs
+public_title: Uptycs
+short_description: Collect alerts and detection from Uptycs
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Collaboration
+  - Category::Alerting
+  - Category::Compliance
+  - Category::Security
+  - Offering::Integration
+  - Submitted Data Type::Events
+  configuration: README.md#Setup
+  description: Collect alerts and detection from Uptycs
+  media:
+  - caption: Uptycs events dashboard
+    image_url: images/integration_dashboard_1.png
+    media_type: image
+  - caption: Uptycs events per host trend graph
+    image_url: images/integration_dashboard_2.png
+    media_type: image
+  - caption: Uptycs detection as a Datadog event
+    image_url: images/data_collected_1.png
+    media_type: image
+  - caption: Uptycs alert as a Datadog event
+    image_url: images/data_collected_2.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Uptycs
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -148,9 +148,8 @@ Need help? Contact [Support][7].
 
 [1]: https://www.uptycs.com
 [2]: https://www.uptycs.com/about/contact/
-[3]: https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token
+[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptycs/images/integration_setup_1.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptycs/images/integration_setup_2.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptycs/images/integration_setup_3.png
 [7]: mailto:support@uptycs.com
-

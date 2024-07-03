@@ -1,21 +1,20 @@
 ---
-title: Running JMX commands in Windows
-kind: guide
 aliases:
-  - /integrations/faq/how-to-run-jmx-commands-in-windows
+- /ja/integrations/faq/how-to-run-jmx-commands-in-windows
+title: Running JMX commands in Windows
 ---
 
-If you are monitoring a JMX application with a Windows Agent, you can get access to the same [troubleshooting tools][1] that are available on Linux.
+Windows Agent で JMX アプリケーションを監視している場合、Linux で利用できるものと同じ[トラブルシューティングツール][1]にアクセスすることができます。
 
-If java is in your path, from a command prompt you should be able to run:
+java がパスに入っていれば、コマンドプロンプトから、以下を実行できるはずです。
 
 ```text
 java -Xms50m -Xmx200m -classpath "%ProgramFiles%\Datadog\Datadog Agent\files\jmxfetch\jmxfetch-0.7.0-jar-with-dependencies.jar" org.datadog.jmxfetch.App --check tomcat.yaml --conf_directory "C:\ProgramData\Datadog\conf.d" --log_level DEBUG --reporter console [collect, list_everything, list_collected_attributes, list_matching_attributes, list_not_matching_attributes, list_limited_attributes, help]
 ```
 
-Make sure that the JMXFetch version is the same as the one that ships with your version of the Agent.
+JMXFetch のバージョンが、お使いの Agent のバージョンに同梱されているものと同じであることを確認してください。
 
-Here is a subset of the output from the list_matching_attributes command:
+以下は、list_matching_attributes コマンドの出力の一部です。
 
 ```text
 java -Xms50m -Xmx200m -classpath "%ProgramFiles%\Datadog\Datadog Agent\files\jmxfetch\jmxfe
@@ -39,4 +38,4 @@ Instance: localhost:9012
 [...]
 ```
 
-[1]: /integrations/java/
+[1]: /ja/integrations/java/

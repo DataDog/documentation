@@ -1,10 +1,10 @@
 ---
-title: Search Syntax
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Search for your events
+kind: documentation
+title: Search Syntax
 ---
 
 ## Overview
@@ -68,4 +68,4 @@ You can search for a numerical attribute within a specific range. For example, r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/saved_views
+[1]: /ja/real_user_monitoring/explorer/saved_views

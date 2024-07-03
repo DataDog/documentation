@@ -1,8 +1,10 @@
 ---
-title: Agent Log Files
+algolia:
+  tags:
+  - agent log files
 aliases:
-  - /agent/faq/agent-log-files
-  - /agent/guide/agent-log-files
+- /ja/agent/faq/agent-log-files
+- /ja/agent/guide/agent-log-files
 further_reading:
 - link: /agent/troubleshooting/
   tag: Documentation
@@ -13,8 +15,7 @@ further_reading:
 - link: /agent/configuration/agent-commands/
   tag: FAQ
   text: Agent commands
-algolia:
-  tags: [agent log files]
+title: Agent Log Files
 ---
 
 Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバーを行います。ロールオーバーが発生すると、1 つのバックアップ (`agent.log.1`) が保存されます。以前のバックアップが存在する場合、ロールオーバー中に上書きされます。1 つのログファイルの最大サイズと保持するバックアップファイルの最大数を設定するには、[Agent メインコンフィギュレーションファイル][1]で `log_file_max_size` (デフォルト: 10485760 バイト) と `log_file_max_rolls` (デフォルト: 1) を使用します。
@@ -81,4 +82,4 @@ Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

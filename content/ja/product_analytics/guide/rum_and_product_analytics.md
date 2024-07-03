@@ -1,11 +1,11 @@
 ---
-title: Understanding RUM and Product Analytics
-kind: ガイド
-description: Guide for existing RUM users looking to understand the relationship between RUM and Product Analytics.
+description: Guide for existing RUM users looking to understand the relationship between
+  RUM and Product Analytics.
 further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: Learn about RUM
+title: Understanding RUM and Product Analytics
 ---
 
 ## What is Product Analytics?

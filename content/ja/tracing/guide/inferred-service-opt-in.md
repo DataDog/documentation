@@ -1,8 +1,5 @@
 ---
-title: Inferred Service dependencies
-kind: Guide
 disable_toc: false
-private: true
 further_reading:
 - link: /tracing/services/
   tag: Documentation
@@ -13,6 +10,8 @@ further_reading:
 - link: /tracing/trace_collection/dd_libraries/
   tag: Documentation
   text: Add the Datadog Tracing Library
+private: true
+title: Inferred Service dependencies
 ---
 
 {{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
@@ -33,11 +32,11 @@ If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customi
 
 ### Service page Dependency map
 
-Use the dependency map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
+依存関係マップを使用して、サービス間通信を視覚化し、データベース、キュー、サードパーティ依存関係などのシステムコンポーネントを把握できます。依存関係をタイプ別にグループ化し、リクエスト、レイテンシー、エラーでフィルターをかけて、接続の遅延や接続の失敗を特定できます。
 
 {{< img src="tracing/services/service_page/dependencies.png" alt="Service page service dependency map" style="width:100%;">}}
 
-## Opt in
+## オプトイン
 
 <div class="alert alert-warning">Only go through migration steps once Datadog support confirmed the feature is enabled for you on the Datadog side.</div>
 
@@ -244,9 +243,9 @@ And these target similar service names, update those items to use the global def
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /tracing/service_catalog/
+[3]: /ja/tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
-[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[5]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
-[8]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L517-L538 
+[8]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L517-L538

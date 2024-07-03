@@ -1,20 +1,4 @@
 ---
-categories:
-- log collection
-- security
-description: 'Detect and aggregate CSP violations with Datadog'
-doc_link: /integrations/content_security_policy_logs/
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md"]
-has_logo: true
-integration_title: Content Security Policy
-is_public: true
-custom_kind: インテグレーション
-name: content_security_policy_logs
-public_title: Datadog-Content Security Policy
-short_description: 'Detect CSP violations'
-version: '1.0'
-integration_id: "content_security_policy_logs"
 algolia:
   tags:
   - csp-report
@@ -28,11 +12,27 @@ algolia:
   - worker-src
   - connect-src
 aliases:
-  - /real_user_monitoring/faq/content_security_policy
+- /ja/real_user_monitoring/faq/content_security_policy
+categories:
+- log collection
+- security
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md
+description: Detect and aggregate CSP violations with Datadog
+doc_link: /integrations/content_security_policy_logs/
 further_reading:
-  - link: /getting_started/tagging/unified_service_tagging/
-    tag: Documentation
-    text: Learn about Unified Service Tagging
+- link: /getting_started/tagging/unified_service_tagging/
+  tag: Documentation
+  text: Learn about Unified Service Tagging
+has_logo: true
+integration_id: content_security_policy_logs
+integration_title: Content Security Policy
+is_public: true
+name: content_security_policy_logs
+public_title: Datadog-Content Security Policy
+short_description: Detect CSP violations
+version: '1.0'
 ---
 
 ## Overview
@@ -206,11 +206,11 @@ script-src https://www.datadoghq-browser-agent.com
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
-[5]: /logs/log_collection/javascript/#initialization-parameters
-[6]: /real_user_monitoring/browser/setup
-[7]: /logs/log_collection/javascript/#cdn-async
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/setup/#initialization-parameters
+[5]: /ja/logs/log_collection/javascript/#initialization-parameters
+[6]: /ja/real_user_monitoring/browser/setup
+[7]: /ja/logs/log_collection/javascript/#cdn-async
 [8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4470
 [9]: https://www.npmjs.com/package/@datadog/browser-worker
 [10]: https://v4.webpack.js.org/loaders/file-loader/

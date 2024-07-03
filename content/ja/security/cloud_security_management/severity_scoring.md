@@ -1,5 +1,4 @@
 ---
-title: Severity Scoring
 further_reading:
 - link: /security/cloud_security_management/misconfigurations/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /security/cloud_security_management/vulnerabilities/
   tag: Documentation
   text: Learn more about CSM Vulnerabilities
+title: Severity Scoring
 ---
 
 Accurate severity scores help security teams understand the risks that vulnerabilities pose to their environment. This guide explains how Cloud Security Management (CSM) uses different measures of severity to calculate the scores.
@@ -127,8 +127,8 @@ CSM Vulnerabilities uses Common Vulnerability Scoring System version 3.0 ([CVSS 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security/default_rules/aws-sns-subscription/
-[2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-instance-ec2-instances-should-enforce-imdsv2/
+[1]: https://docs.datadoghq.com/ja/security/default_rules/aws-sns-subscription/
+[2]: https://docs.datadoghq.com/ja/security/default_rules/aws-ec2-instance-ec2-instances-should-enforce-imdsv2/
 [3]: https://hackingthe.cloud/aws/general-knowledge/intro_metadata_service/
 [4]: https://hackingthe.cloud/aws/exploitation/ec2-metadata-ssrf/
 [5]: https://www.first.org/cvss/v3-0/

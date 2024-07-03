@@ -1,73 +1,73 @@
 ---
-"app_id": "activemq"
-"app_uuid": "ab0b15e8-b7ae-4570-bde2-433a079cdb83"
-"assets":
-  "dashboards":
-    "activemq": "assets/dashboards/activemq_dashboard.json"
-    "artemis": "assets/dashboards/artemis_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "activemq.queue.size"
-      - "activemq.artemis.queue.message_count"
-      "metadata_path": "metadata.csv"
-      "prefix": "activemq."
-    "process_signatures":
-    - "activemq"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "40"
-    "source_type_name": "ActiveMQ"
-  "monitors":
-    "[ActiveMQ Artemis] High disk store usage": "assets/monitors/activemq_artemis_high_disk_store.json"
-    "[ActiveMQ Artemis] High unrouted messages": "assets/monitors/activemq_artemis_unrouted_messages.json"
-  "saved_views":
-    "activemq_processes": "assets/saved_views/activemq_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-- "message queues"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/activemq/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "activemq"
-"integration_id": "activemq"
-"integration_title": "ActiveMQ"
-"integration_version": "3.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "activemq"
-"public_title": "ActiveMQ"
-"short_description": "ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Category::Message Queues"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "ActiveMQ"
+app_id: activemq
+app_uuid: ab0b15e8-b7ae-4570-bde2-433a079cdb83
+assets:
+  dashboards:
+    activemq: assets/dashboards/activemq_dashboard.json
+    artemis: assets/dashboards/artemis_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - activemq.queue.size
+      - activemq.artemis.queue.message_count
+      metadata_path: metadata.csv
+      prefix: activemq.
+    process_signatures:
+    - activemq
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 40
+    source_type_name: ActiveMQ
+  monitors:
+    '[ActiveMQ Artemis] High disk store usage': assets/monitors/activemq_artemis_high_disk_store.json
+    '[ActiveMQ Artemis] High unrouted messages': assets/monitors/activemq_artemis_unrouted_messages.json
+  saved_views:
+    activemq_processes: assets/saved_views/activemq_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- message queues
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: activemq
+integration_id: activemq
+integration_title: ActiveMQ
+integration_version: 3.1.0
+is_public: true
+manifest_version: 2.0.0
+name: activemq
+public_title: ActiveMQ
+short_description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Category::Message Queues
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ActiveMQ
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -143,10 +143,10 @@ _Agent バージョン 6.0 以降で利用可能_
 3. [Agent を再起動します][5]。
 
 [1]: https://activemq.apache.org/jmx.html
-[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -172,8 +172,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "activemq", "service": "<YOUR_APP_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/containers/guide/autodiscovery-with-jmx/?tab=containeragent
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/containers/guide/autodiscovery-with-jmx/?tab=containeragent
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -307,13 +307,13 @@ ActiveMQ XML チェックには、サービスのチェック機能は含まれ�
 [2]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/jmxfetch
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
 [8]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
-[9]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [10]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/developers/metrics/custom_metrics/
-[12]: https://docs.datadoghq.com/account_management/billing/custom_metrics/
-[13]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[14]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[11]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[12]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
+[13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[14]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

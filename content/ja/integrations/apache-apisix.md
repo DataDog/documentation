@@ -1,71 +1,71 @@
 ---
-"app_id": "apache-apisix"
-"app_uuid": "b842d639-caf6-4b3a-8115-52458b9a0753"
-"assets":
-  "dashboards":
-    "Apache APISIX Dashboard": assets/dashboards/apache-apisix_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: apache-apisix
+app_uuid: b842d639-caf6-4b3a-8115-52458b9a0753
+assets:
+  dashboards:
+    Apache APISIX Dashboard: assets/dashboards/apache-apisix_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - apisix.request.counter
       - apisix.request.latency
       - apisix.upstream.latency
       - apisix.apisix.latency
       - apisix.ingress.size
       - apisix.egress.size
-      "metadata_path": metadata.csv
-      "prefix": apisix.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10244"
-    "source_type_name": Apache APISIX
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": dev@apisix.apache.org
-  "support_email": dev@apisix.apache.org
-"categories":
+      metadata_path: metadata.csv
+      prefix: apisix.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10244
+    source_type_name: Apache APISIX
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: dev@apisix.apache.org
+  support_email: dev@apisix.apache.org
+categories:
 - cloud
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "apache-apisix"
-"integration_id": "apache-apisix"
-"integration_title": "Apache APISIX"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "apache-apisix"
-"public_title": "Apache APISIX"
-"short_description": "Datadog-APISIX Integration"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: apache-apisix
+integration_id: apache-apisix
+integration_title: Apache APISIX
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: apache-apisix
+public_title: Apache APISIX
+short_description: Datadog-APISIX Integration
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Datadog-APISIX Integration
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://apisix.apache.org/blog/2021/11/12/apisix-datadog"
-  "support": "README.md#Support"
-  "title": Apache APISIX
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Datadog-APISIX Integration
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
+  support: README.md#Support
+  title: Apache APISIX
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -172,11 +172,10 @@ Apache APISIX チェックにはイベントは含まれません。
 
 [1]: https://apisix.apache.org/docs/apisix/plugins/datadog
 [2]: https://apisix.apache.org/
-[3]: https://docs.datadoghq.com/agent/
+[3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://www.datadoghq.com/
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apache-apisix/images/screenshot_1.png
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/metadata.csv
-[8]: https://docs.datadoghq.com/help/
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
-

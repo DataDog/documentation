@@ -1,10 +1,8 @@
 ---
-title: Datadog Extension for Visual Studio Code
-kind: documentation
-description: Learn how to run Synthetic tests on local environments directly in VS Code.
-is_beta: true
 aliases:
-- /developers/ide_integrations/vscode/
+- /ja/developers/ide_integrations/vscode/
+description: Learn how to run Synthetic tests on local environments directly in VS
+  Code.
 further_reading:
 - link: /getting_started/synthetics/
   tag: Documentation
@@ -15,16 +13,18 @@ further_reading:
 - link: /integrations/guide/source-code-integration/
   tag: Documentation
   text: Learn about Source Code Integration.
-- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
+- link: https://www.datadoghq.com/blog/datadog-ide-plugins/
   tag: Blog
   text: Reduce context switching while troubleshooting with Datadog's IDE plugins
+is_beta: true
+title: Datadog Extension for Visual Studio Code
 ---
 
-## Overview
+## 概要
 
-The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.
+Visual Studio Code (VS Code) 用の Datadog 拡張機能は、Datadog とインテグレーションして開発を加速します。
 
-{{< img src="/developers/ide_plugins/vscode/datadog-vscode.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode-2.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
 It packs several features, including:
 
@@ -174,31 +174,30 @@ Check out the [issues][27] section to discover known issues.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_testing/
+[1]: /ja/continuous_testing/
 [2]: https://www.datadoghq.com/
 [3]: https://app.datadoghq.com/synthetics/create
-[4]: /getting_started/synthetics/api_test
-[5]: /getting_started/synthetics/browser_test
+[4]: /ja/getting_started/synthetics/api_test
+[5]: /ja/getting_started/synthetics/browser_test
 [6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
-[7]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[8]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[7]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[8]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
 [9]: mailto:team-ide-integration@datadoghq.com
-[10]: /tracing/error_tracking/
-[11]: /security/application_security/vulnerability_management/
-[12]: /continuous_integration/guides/flaky_test_management/
-[13]: /watchdog/insights
-[14]: /continuous_integration/static_analysis/?tab=githubactions
-[15]: /continuous_integration/static_analysis/rules/
-[16]: /logs/log_collection/javascript/
+[10]: /ja/tracing/error_tracking/
+[11]: /ja/security/application_security/vulnerability_management/
+[12]: /ja/continuous_integration/guides/flaky_test_management/
+[14]: /ja/continuous_integration/static_analysis/?tab=githubactions
+[15]: /ja/continuous_integration/static_analysis/rules/
+[16]: /ja/logs/log_collection/javascript/
 [17]: https://github.com/winstonjs/winston
 [18]: https://github.com/pinojs/pino
 [19]: https://github.com/trentm/node-bunyan
 [20]: https://github.com/log4js-node/log4js-node
 [21]: https://docs.python.org/3/library/logging.html
-[22]: /continuous_integration/static_analysis/?tab=circleciorbs#setup
+[22]: /ja/continuous_integration/static_analysis/?tab=circleciorbs#setup
 [23]: https://www.datadoghq.com/legal/eula/
 [24]: https://www.datadoghq.com/legal/privacy/
 [25]: https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events
 [26]: https://github.com/DataDog/datadog-for-vscode
 [27]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
-[28]: /logs/explorer/
+[28]: /ja/logs/explorer/

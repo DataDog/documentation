@@ -1,17 +1,18 @@
 ---
-title: Static Analysis Setup
-description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
-- /continuous_integration/static_analysis
-- /static_analysis
-is_beta: true
+- /ja/continuous_integration/static_analysis
+- /ja/static_analysis
+description: Learn about Datadog Static Analysis to scan code for quality issues and
+  security vulnerabilities before your code reaches production.
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
   text: Monitor all your CI pipelines with Datadog
 - link: /integrations/guide/source-code-integration/
   tag: Documentation
   text: Learn about the Source Code Integration
+is_beta: true
+title: Static Analysis Setup
 ---
 
 {{% site-region region="gov" %}}
@@ -206,11 +207,11 @@ SARIF レポートをアップロードするには
 
 [1]: https://app.datadoghq.com/ci/setup/code-analysis
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
-[3]: /developers/ide_plugins/idea/#static-analysis
-[4]: /account_management/api-app-keys/
-[6]: /code_analysis/static_analysis_rules
-[7]: /getting_started/site/
+[3]: /ja/developers/ide_plugins/idea/#static-analysis
+[4]: /ja/account_management/api-app-keys/
+[6]: /ja/code_analysis/static_analysis_rules
+[7]: /ja/getting_started/site/
 [8]: https://github.com/DataDog/datadog-ci
-[9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[10]: /integrations/guide/source-code-integration
-[11]: /code_analysis/github_pull_requests/
+[9]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[10]: /ja/integrations/guide/source-code-integration
+[11]: /ja/code_analysis/github_pull_requests/

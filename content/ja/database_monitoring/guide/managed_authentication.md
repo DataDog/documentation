@@ -1,26 +1,25 @@
 ---
 title: Connecting with Managed Authentication
-kind: guide
 ---
 
-This guide assumes that you have configured [Database Monitoring][1].
+このガイドでは、[Database Monitoring][1] を構成していることを前提にしています。
 
 
 [Datadog Database Monitoring (DBM)][8] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to use cloud managed authentication features, such as IAM, to connect the Agent to your database. This provides a more secure way to authenticate and saves you from having to manage database credentials across your agent hosts.
 
 
-## Before you begin
+## はじめに
 
 
-Supported databases
-: Postgres, SQL Server
+対応データベース
+: Postgres、SQL Server
 
 
-Supported authentication types and Agent versions
+対応認証タイプと Agent バージョン
 :
 
 
-| Authentication Type                      | Agent Version | Postgres  | SQL Server |
+| 認証タイプ                      | Agent バージョン | Postgres  | SQL Server |
 |:-----------------------------------------|:--------------|:---------:|:----------:|
 | [IAM][2]                                 |               |           |            |
 |                                          | 7.46          | {{< X >}} |            |
@@ -30,13 +29,13 @@ Supported authentication types and Agent versions
 
 
 
-## Configure IAM authentication
+## IAM 認証の構成
 
 
-AWS supports IAM authentication to RDS and Aurora databases. In order to configure the Agent to connect using IAM, do the following:
+AWS は、RDS および Aurora データベースへの IAM 認証をサポートしています。IAM を使用して接続するように Agent を構成するには、以下の手順を実行します。
 
 
-1. Turn on IAM authentication on your [RDS][3] or [Aurora][4] instance.
+1. [RDS][3] または [Aurora][4] インスタンスで IAM 認証を有効にします。
 2. Create an IAM policy for DB authentication. Replace `<YOUR_IAM_AUTH_DB_USER>` with the local database user in the IAM policy document:
 {{< tabs >}}
 {{% tab "RDS" %}}
@@ -405,23 +404,23 @@ instances:
 ```
 
 
-[1]: /database_monitoring/#getting-started
+[1]: /ja/database_monitoring/#getting-started
 [2]: https://repost.aws/knowledge-center/rds-postgresql-connect-using-iam
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
 [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
-[6]: /database_monitoring/setup_postgres/rds/#grant-the-agent-access
-[7]: /database_monitoring/setup_postgres/aurora/#grant-the-agent-access
-[8]: /database_monitoring
+[6]: /ja/database_monitoring/setup_postgres/rds/#grant-the-agent-access
+[7]: /ja/database_monitoring/setup_postgres/aurora/#grant-the-agent-access
+[8]: /ja/database_monitoring
 [9]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
 [10]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
 [11]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
 [12]: https://learn.microsoft.com/en-us/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
 [13]: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
-[14]: /database_monitoring/setup_postgres/azure/#grant-the-agent-access
+[14]: /ja/database_monitoring/setup_postgres/azure/#grant-the-agent-access
 [15]: https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis
 [16]: https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
-[17]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
+[17]: /ja/database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
 [18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
-[19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
+[19]: /ja/database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
 [20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL

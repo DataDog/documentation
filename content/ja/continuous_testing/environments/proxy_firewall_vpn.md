@@ -1,16 +1,16 @@
 ---
-title: Testing With Proxies, Firewalls, or VPNs
 description: Learn how to set up Continuous Testing on a private environment.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
+- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
   tag: Blog
   text: Incorporate Datadog Continuous Testing tests into your CI/CD pipeline
-- link: "https://www.datadoghq.com/blog/internal-application-testing-with-datadog/"
+- link: https://www.datadoghq.com/blog/internal-application-testing-with-datadog/
   tag: Blog
   text: Test internal applications with Datadog's testing tunnel and private locations
 - link: /continuous_testing/cicd_integrations
   tag: Documentation
   text: Learn about Continuous Testing and CI/CD
+title: Testing With Proxies, Firewalls, or VPNs
 ---
 
 ## 概要
@@ -101,6 +101,6 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/private_locations
+[1]: /ja/synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /continuous_testing/cicd_integrations#use-the-cli
+[3]: /ja/continuous_testing/cicd_integrations#use-the-cli

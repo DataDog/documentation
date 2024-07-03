@@ -1,13 +1,13 @@
 ---
-title: Image Widget
-widget_type: image
-description: "Include an image or a gif in your Datadog dashboards."
 aliases:
-- /graphing/widgets/image/
+- /ja/graphing/widgets/image/
+description: Include an image or a gif in your Datadog dashboards.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Image Widget
+widget_type: image
 ---
 
 イメージウィジェットを使用すると、ダッシュボードにイメージを埋め込むことができます。イメージには、URLでアクセスできる場所でホストされている PNG、JPG、またはアニメーション GIF を使用できます。
@@ -34,5 +34,5 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dashboards/
-[2]: /dashboards/graphing_json/widget_json/
+[1]: /ja/api/latest/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

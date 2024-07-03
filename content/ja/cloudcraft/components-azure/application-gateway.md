@@ -1,5 +1,5 @@
 ---
-title: "Application Gateway Component"
+title: Application Gateway Component
 ---
 
 ## 概要

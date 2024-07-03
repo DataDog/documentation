@@ -1,60 +1,60 @@
 ---
-"app_id": "zendesk"
-"app_uuid": "8943eea8-230f-4b1b-9895-8d60d5593e7b"
-"assets":
-  "dashboards":
-    "zendesk": "assets/dashboards/zendesk_overview.json"
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
-      - "zendesk.ticket.count"
-      "metadata_path": "metadata.csv"
-      "prefix": "zendesk"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "146"
-    "source_type_name": "Zendesk"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "metrics"
-- "log collection"
-- "event management"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "zendesk"
-"integration_id": "zendesk"
-"integration_title": "Zendesk"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "zendesk"
-"public_title": "Zendesk"
-"short_description": "Zendesk is customer service and support ticket SaaS."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::Log Collection"
-  - "Category::Event Management"
-  "configuration": "README.md#Setup"
-  "description": "Zendesk is customer service and support ticket SaaS."
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/zendesk-session-replay-integration/"
-  "support": "README.md#Support"
-  "title": "Zendesk"
+app_id: zendesk
+app_uuid: 8943eea8-230f-4b1b-9895-8d60d5593e7b
+assets:
+  dashboards:
+    zendesk: assets/dashboards/zendesk_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - zendesk.ticket.count
+      metadata_path: metadata.csv
+      prefix: zendesk
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 146
+    source_type_name: Zendesk
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- metrics
+- log collection
+- event management
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: zendesk
+integration_id: zendesk
+integration_title: Zendesk
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: zendesk
+public_title: Zendesk
+short_description: Zendesk is customer service and support ticket SaaS.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Log Collection
+  - Category::Event Management
+  configuration: README.md#Setup
+  description: Zendesk is customer service and support ticket SaaS.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
+  support: README.md#Support
+  title: Zendesk
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -145,13 +145,12 @@ Zendesk チケットを作成してグループに割り当てることができ
 [2]: https://app.datadoghq.com/security/home
 [3]: https://app.datadoghq.com
 [4]: https://app.datadoghq.com/account/settings#integrations/zendesk
-[5]: https://docs.datadoghq.com/real_user_monitoring/
-[6]: https://docs.datadoghq.com/integrations/zendesk/#installation
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/
+[6]: https://docs.datadoghq.com/ja/integrations/zendesk/#installation
 [7]: https://www.zendesk.com/marketplace/apps/support/993138/datadog/
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: https://app.datadoghq.com/integrations/zendesk
-[10]: https://docs.datadoghq.com/getting_started/site/
+[10]: https://docs.datadoghq.com/ja/getting_started/site/
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/zendesk/zendesk_metadata.csv
 [12]: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
-[13]: https://docs.datadoghq.com/help/
-
+[13]: https://docs.datadoghq.com/ja/help/

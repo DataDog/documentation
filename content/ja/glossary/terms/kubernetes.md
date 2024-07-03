@@ -1,6 +1,6 @@
 ---
-title: Kubernetes
 core_product:
-  - infrastructure monitoring
+- infrastructure monitoring
+title: Kubernetes
 ---
 Kubernetes is a platform for managing containers.

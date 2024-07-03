@@ -1,8 +1,7 @@
 ---
-title: Custom Detection Rules
 aliases:
-  - /security_platform/application_security/custom_rules
-  - /security/application_security/custom_rules
+- /ja/security_platform/application_security/custom_rules
+- /ja/security/application_security/custom_rules
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -19,6 +18,7 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentation
   text: Syntax for defining the ASM query
+title: Custom Detection Rules
 ---
 
 ## 概要
@@ -109,12 +109,11 @@ OOTB 検出ルールをカスタマイズするには、まず既存のルール
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/?category=cat-application-security
+[1]: /ja/security/default_rules/?category=cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
-[3]: /tracing/trace_explorer/query_syntax/
-[4]: /monitors/notify/?tab=is_alert#integrations
-[5]: /security/notifications/variables/
-[6]: /security/notifications/variables/#template-variables
-[7]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[8]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
-
+[3]: /ja/tracing/trace_explorer/query_syntax/
+[4]: /ja/monitors/notify/?tab=is_alert#integrations
+[5]: /ja/security/notifications/variables/
+[6]: /ja/security/notifications/variables/#template-variables
+[7]: /ja/security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /ja/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking

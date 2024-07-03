@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for MongoDB Atlas
 description: Install and configure Database Monitoring for MongoDB Atlas
 further_reading:
 - link: /ja/integrations/mongo/
   tag: ドキュメント
   text: Basic MongoDB Integration
-
+title: Setting Up Database Monitoring for MongoDB Atlas
 ---
 
 <div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
@@ -205,5 +204,5 @@ Database Monitoring for MongoDB is available in the beta version of the Datadog 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /database_monitoring/architecture/#cloud-managed-databases
-[2]: /account_management/api-app-keys/
+[1]: /ja/database_monitoring/architecture/#cloud-managed-databases
+[2]: /ja/account_management/api-app-keys/

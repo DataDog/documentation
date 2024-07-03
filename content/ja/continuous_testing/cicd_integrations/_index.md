@@ -1,18 +1,18 @@
 ---
-title: Continuous Testing and CI/CD
-description: Run Continuous Testing tests on-demand or at predefined intervals in your CI/CD pipelines.
-aliases: 
-  - /synthetics/ci
-  - /synthetics/cicd_testing
-  - /synthetics/cicd_integrations
+aliases:
+- /ja/synthetics/ci
+- /ja/synthetics/cicd_testing
+- /ja/synthetics/cicd_integrations
+description: Run Continuous Testing tests on-demand or at predefined intervals in
+  your CI/CD pipelines.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
+- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
   tag: Blog
   text: Incorporate Datadog Synthetic tests into your CI/CD pipeline
-- link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
+- link: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
   tag: Blog
   text: Best practices for shift-left testing
-- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: Learning Center
   text: Learn how to run Synthetic tests in a CI/CD pipeline
 - link: /synthetics/api_tests/
@@ -24,7 +24,7 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: Documentation
   text: Learn how to configure a browser test
-
+title: Continuous Testing and CI/CD
 ---
 
 <div class="alert alert-info">このページでは、継続的インテグレーション (CI) と継続的デリバリー (CD) のパイプラインの Continuous Testing テストの実行について説明します。CI のメトリクスやデータを Datadog のダッシュボードに取り込みたい場合は、<a href="/continuous_integration/" target="_blank">CI Visibility</a> のセクションを参照してください。</div>
@@ -102,7 +102,7 @@ API エンドポイントを使用して、新しいデプロイメントが回�
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /continuous_testing/cicd_integrations/configuration
-[4]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
-[5]: /api/latest/synthetics/#get-details-of-batch
-[6]: /continuous_testing/cicd_integrations/configuration#configure-tests
+[3]: /ja/continuous_testing/cicd_integrations/configuration
+[4]: /ja/api/latest/synthetics/#trigger-tests-from-cicd-pipelines
+[5]: /ja/api/latest/synthetics/#get-details-of-batch
+[6]: /ja/continuous_testing/cicd_integrations/configuration#configure-tests

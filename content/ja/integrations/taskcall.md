@@ -1,69 +1,69 @@
 ---
-"app_id": "taskcall"
-"app_uuid": "dd54da03-0a8c-4796-aaa6-61eeb04e611b"
-"assets":
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://taskcallapp.com"
-  "name": TaskCall
-  "sales_email": support@taskcallapp.com
-  "support_email": support@taskcallapp.com
-"categories":
+app_id: taskcall
+app_uuid: dd54da03-0a8c-4796-aaa6-61eeb04e611b
+assets:
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://taskcallapp.com
+  name: TaskCall
+  sales_email: support@taskcallapp.com
+  support_email: support@taskcallapp.com
+categories:
 - alerting
 - collaboration
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/taskcall/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "taskcall"
-"integration_id": "taskcall"
-"integration_title": "TaskCall"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "taskcall"
-"public_title": "TaskCall"
-"short_description": "Monitor and centralize Datadog incidents with TaskCall"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/taskcall/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: taskcall
+integration_id: taskcall
+integration_title: TaskCall
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: taskcall
+public_title: TaskCall
+short_description: Monitor and centralize Datadog incidents with TaskCall
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Issue Tracking"
-  - "Category::Notifications"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Queried Data Type::Incidents"
-  "configuration": "README.md#Setup"
-  "description": Monitor and centralize Datadog incidents with TaskCall
-  "media":
-  - "caption": Incident Notifications
-    "image_url": images/incident_notifications.png
-    "media_type": image
-  - "caption": Incident Details
-    "image_url": images/incident_details.png
-    "media_type": image
-  - "caption": Impact Visibility and Status Dashboard
-    "image_url": images/impact_visibility_status_dashboard.png
-    "media_type": image
-  - "caption": On-Call Management
-    "image_url": images/on_call_management.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": TaskCall
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Queried Data Type::Incidents
+  configuration: README.md#Setup
+  description: Monitor and centralize Datadog incidents with TaskCall
+  media:
+  - caption: Incident Notifications
+    image_url: images/incident_notifications.png
+    media_type: image
+  - caption: Incident Details
+    image_url: images/incident_details.png
+    media_type: image
+  - caption: Impact Visibility and Status Dashboard
+    image_url: images/impact_visibility_status_dashboard.png
+    media_type: image
+  - caption: On-Call Management
+    image_url: images/on_call_management.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TaskCall
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -180,4 +180,3 @@ For more information, see the [TaskCall Datadog Integration Guide][6].
 [5]: https://docs.taskcallapp.com/integrations/v1/datadog-integration-guide#in-datadog
 [6]: https://docs.taskcallapp.com/integrations/v1/datadog-integration-guide
 [7]: https://www.taskcallapp.com/contact-us
-

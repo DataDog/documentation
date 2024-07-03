@@ -1,5 +1,4 @@
 ---
-title: Guidelines for Writing Custom CSM Threats Rules
 further_reading:
 - link: /security/threats/workload_security_rules
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /security/threats/agent_expressions
   tag: Documentation
   text: Agent Expression Syntax
+title: Guidelines for Writing Custom CSM Threats Rules
 ---
 
 ある時点で、独自の[カスタム Cloud Security Management Threats (CSM Threats) Agent ルール][1]を書きたいと思うことがあるかもしれません。独自のルールを書く場合、効率のために最適化するために使用できる戦略がいくつかあります。
@@ -45,5 +45,5 @@ CSM Threats は、ポリシー内のどのルールもトリガーすべきで�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats/workload_security_rules
-[2]: /security/threats/agent_expressions/#operators
+[1]: /ja/security/threats/workload_security_rules
+[2]: /ja/security/threats/agent_expressions/#operators

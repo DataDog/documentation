@@ -1,29 +1,29 @@
 ---
-title: Kubernetes distributions
 aliases:
-- /agent/kubernetes/distributions
+- /ja/agent/kubernetes/distributions
 further_reading:
-    - link: agent/kubernetes/log
-      tag: Documentation
-      text: Collect your application logs
-    - link: /agent/kubernetes/apm
-      tag: Documentation
-      text: Collect your application traces
-    - link: /agent/kubernetes/prometheus
-      tag: Documentation
-      text: Collect your Prometheus metrics
-    - link: /agent/kubernetes/integrations
-      tag: Documentation
-      text: Collect automatically your applications metrics and logs
-    - link: /agent/guide/autodiscovery-management
-      tag: Documentation
-      text: Limit data collection to a subset of containers only
-    - link: /agent/kubernetes/tag
-      tag: Documentation
-      text: Assign tags to all data emitted by a container
-    - link: "https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/"
-      tag: Blog
-      text: Monitor Tanzu Kubernetes Grid on vSphere
+- link: agent/kubernetes/log
+  tag: Documentation
+  text: Collect your application logs
+- link: /agent/kubernetes/apm
+  tag: Documentation
+  text: Collect your application traces
+- link: /agent/kubernetes/prometheus
+  tag: Documentation
+  text: Collect your Prometheus metrics
+- link: /agent/kubernetes/integrations
+  tag: Documentation
+  text: Collect automatically your applications metrics and logs
+- link: /agent/guide/autodiscovery-management
+  tag: Documentation
+  text: Limit data collection to a subset of containers only
+- link: /agent/kubernetes/tag
+  tag: Documentation
+  text: Assign tags to all data emitted by a container
+- link: https://www.datadoghq.com/blog/monitor-vsphere-tanzu-kubernetes-grid-with-datadog/
+  tag: Blog
+  text: Monitor Tanzu Kubernetes Grid on vSphere
+title: Kubernetes distributions
 ---
 
 ## 概要
@@ -75,8 +75,8 @@ spec:
         name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
-[1]:/containers/kubernetes/installation/?tab=datadogoperator
-[2]: /agent/guide/operator-eks-addon
+[1]:/ja/containers/kubernetes/installation/?tab=datadogoperator
+[2]: /ja/agent/guide/operator-eks-addon
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -664,9 +664,9 @@ agents:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/cluster_agent/admission_controller
+[1]: /ja/containers/cluster_agent/admission_controller
 [2]: https://github.com/Azure/AKS/releases/tag/2022-10-30
 [3]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
 [4]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
-[5]: /getting_started/containers/datadog_operator
-[6]: /agent/guide/operator-eks-addon
+[5]: /ja/getting_started/containers/datadog_operator
+[6]: /ja/agent/guide/operator-eks-addon

@@ -1,64 +1,64 @@
 ---
-"app_id": "cisco-sdwan"
-"app_uuid": "2da35edb-5e33-4e5f-93c3-65e08478d566"
-"assets":
-  "dashboards":
-    "Cisco SD-WAN": assets/dashboards/cisco_sd-wan.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cisco_sdwan.device.reachable
-      "metadata_path": metadata.csv
-      "prefix": cisco_sdwan.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "12300976"
-    "source_type_name": Cisco SDWAN
-  "monitors":
-    "[Cisco SD-WAN] Device Reboot Alert": assets/monitors/device_reboot.json
-    "[Cisco SD-WAN] Device Unreachable Alert": assets/monitors/device_unreachable.json
-    "[Cisco SD-WAN] Tunnel Down Alert": assets/monitors/tunnel_down.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com (日本語対応)
-  "support_email": help@datadoghq.com
-"categories":
+app_id: cisco-sdwan
+app_uuid: 2da35edb-5e33-4e5f-93c3-65e08478d566
+assets:
+  dashboards:
+    Cisco SD-WAN: assets/dashboards/cisco_sd-wan.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: cisco_sdwan.device.reachable
+      metadata_path: metadata.csv
+      prefix: cisco_sdwan.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 12300976
+    source_type_name: Cisco SDWAN
+  monitors:
+    '[Cisco SD-WAN] Device Reboot Alert': assets/monitors/device_reboot.json
+    '[Cisco SD-WAN] Device Unreachable Alert': assets/monitors/device_unreachable.json
+    '[Cisco SD-WAN] Tunnel Down Alert': assets/monitors/tunnel_down.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
+categories:
 - ネットワーク
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cisco_sdwan/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cisco_sdwan"
-"integration_id": "cisco-sdwan"
-"integration_title": "Cisco SD-WAN"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cisco_sdwan"
-"public_title": "Cisco SD-WAN"
-"short_description": "Monitor your Cisco SD-WAN environment with Datadog."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cisco_sdwan/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cisco_sdwan
+integration_id: cisco-sdwan
+integration_title: Cisco SD-WAN
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: cisco_sdwan
+public_title: Cisco SD-WAN
+short_description: Monitor your Cisco SD-WAN environment with Datadog.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Network"
-  "configuration": "README.md#Setup"
-  "description": Monitor your Cisco SD-WAN environment with Datadog.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cisco SD-WAN
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Network
+  configuration: README.md#Setup
+  description: Monitor your Cisco SD-WAN environment with Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cisco SD-WAN
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -109,10 +109,9 @@ The Cisco SD-WAN check does not include any service checks.
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/devices
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/cisco_sdwan.d/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/blob/master/cisco_sdwan/metadata.csv
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

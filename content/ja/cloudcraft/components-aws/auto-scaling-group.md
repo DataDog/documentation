@@ -1,5 +1,5 @@
 ---
-title: "Auto Scaling Group Component"
+title: Auto Scaling Group Component
 ---
 ## 概要
 

@@ -1,5 +1,4 @@
 ---
-title: Go - Save up to 14% CPU in Production with Profile-Guided Optimization
 further_reading:
 - link: /profiler
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /profiler/compare_profiles/
   tag: Documentation
   text: Comparing Profiles
+title: Go - Save up to 14% CPU in Production with Profile-Guided Optimization
 ---
 
 ## 概要
@@ -58,9 +58,9 @@ The `pgo` tag was implemented in dd-trace-go 1.61.0, so any profiles prior to th
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: https://tip.golang.org/doc/go1.21
-[2]: /profiler/enabling/go
+[2]: /ja/profiler/enabling/go
 [3]: https://github.com/golang/go/issues/65532
 [4]: https://go.dev/doc/pgo
-[5]: /account_management/api-app-keys
+[5]: /ja/account_management/api-app-keys
 [6]: https://github.com/DataDog/datadog-pgo?tab=readme-ov-file#getting-started
 [7]: https://app.datadoghq.com/profiling/explorer?query=runtime%3Ago%20-pgo%3Atrue%20&viz=stream

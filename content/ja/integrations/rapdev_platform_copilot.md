@@ -1,60 +1,60 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-platform-copilot"
-"app_uuid": "3663ba8b-3a61-43e2-ab02-4541dce5e57f"
-"assets":
-  "oauth": assets/oauth_clients.json
-"author":
-  "contact_link": "https://meetings.hubspot.com/ewilliams/rapdev-marketplace"
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-platform-copilot
+app_uuid: 3663ba8b-3a61-43e2-ab02-4541dce5e57f
+assets:
+  oauth: assets/oauth_clients.json
+author:
+  contact_link: https://meetings.hubspot.com/ewilliams/rapdev-marketplace
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_platform_copilot"
-"integration_id": "rapdev-platform-copilot"
-"integration_title": "RapDev Platform Co-Pilot"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rapdev_platform_copilot"
-"pricing":
-- "includes_assets": true
-  "private_offer_only": true
-  "product_id": platform-copilot
-  "short_description": Private offer placeholder
-  "unit_price": !!null "null"
-"public_title": "RapDev Platform Co-Pilot"
-"short_description": "Flexible access to our Datadog expertise for your Datadog deployment"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_platform_copilot
+integration_id: rapdev-platform-copilot
+integration_title: RapDev Platform Co-Pilot
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rapdev_platform_copilot
+pricing:
+- includes_assets: true
+  private_offer_only: true
+  product_id: platform-copilot
+  short_description: Private offer placeholder
+  unit_price: null
+public_title: RapDev Platform Co-Pilot
+short_description: Flexible access to our Datadog expertise for your Datadog deployment
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Offering::Professional Service"
-  "configuration": "README.md#Setup"
-  "description": Flexible access to our Datadog expertise for your Datadog deployment
-  "media":
-  - "caption": RapDev Services Overview
-    "image_url": images/dd-pcp-op2.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": RapDev Platform Co-Pilot
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Offering::Professional Service
+  configuration: README.md#Setup
+  description: Flexible access to our Datadog expertise for your Datadog deployment
+  media:
+  - caption: RapDev Services Overview
+    image_url: images/dd-pcp-op2.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RapDev Platform Co-Pilot
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

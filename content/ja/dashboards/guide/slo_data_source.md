@@ -1,6 +1,6 @@
 ---
-title: Graph historical SLO data on Dashboards
 disable_toc: false
+title: Graph historical SLO data on Dashboards
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
@@ -36,6 +36,6 @@ For the *Measure* parameter, see the table below for more information on what ea
 
 
 
-[1]: /dashboards/sharing/scheduled_reports/
-[2]: /service_management/service_level_objectives/#slo-status-corrections
-[3]: /service_management/service_level_objectives/#configuration
+[1]: /ja/dashboards/sharing/scheduled_reports/
+[2]: /ja/service_management/service_level_objectives/#slo-status-corrections
+[3]: /ja/service_management/service_level_objectives/#configuration

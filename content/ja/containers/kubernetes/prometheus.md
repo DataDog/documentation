@@ -1,11 +1,10 @@
 ---
-title: Kubernetes Prometheus and OpenMetrics metrics collection
 aliases:
-    - /getting_started/prometheus
-    - /getting_started/integrations/prometheus
-    - /agent/openmetrics
-    - /agent/prometheus
-    - /agent/kubernetes/prometheus
+- /ja/getting_started/prometheus
+- /ja/getting_started/integrations/prometheus
+- /ja/agent/openmetrics
+- /ja/agent/prometheus
+- /ja/agent/kubernetes/prometheus
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentation
@@ -25,6 +24,7 @@ further_reading:
 - link: /integrations/guide/prometheus-metrics/
   tag: Documentation
   text: Mapping Prometheus Metrics to Datadog Metrics
+title: Kubernetes Prometheus and OpenMetrics metrics collection
 ---
 
 ## 概要
@@ -411,18 +411,18 @@ For DaemonSet, advanced configuration is defined in the `DD_PROMETHEUS_SCRAPE_CH
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/openmetrics/
-[2]: /integrations/prometheus/
+[1]: /ja/integrations/openmetrics/
+[2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
-[6]: /integrations/guide/prometheus-metrics
-[7]: /agent/kubernetes/#installation
-[8]: /getting_started/tagging/
+[5]: /ja/developers/custom_checks/prometheus/
+[6]: /ja/integrations/guide/prometheus-metrics
+[7]: /ja/agent/kubernetes/#installation
+[8]: /ja/getting_started/tagging/
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [10]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
-[13]: /agent/faq/template_variables/
+[13]: /ja/agent/faq/template_variables/
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
 [15]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/autodiscovery/common/types/prometheus.go#L57-L123

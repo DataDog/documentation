@@ -1,32 +1,35 @@
 ---
-title: Cloud SIEM
 aliases:
-  - /security_monitoring/
-  - /security_platform/cloud_siem/security_home/
-  - /security_platform/cloud_siem/
-  - /security/cloud_siem/security_home/
+- /ja/security_monitoring/
+- /ja/security_platform/cloud_siem/security_home/
+- /ja/security_platform/cloud_siem/
+- /ja/security/cloud_siem/security_home/
 further_reading:
-- link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
+- link: https://www.datadoghq.com/blog/track-issues-datadog-case-management/
   tag: Blog
   text: Proactively track, triage, and assign issues with Datadog Case Management
-- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
   tag: Blog
-  text: Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM
-- link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+  text: Automate common security tasks and stay ahead of threats with Datadog Workflows
+    and Cloud SIEM
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
-  text: Build compliance, governance, and transparency across your teams with Datadog Audit Trail
-- link: "https://www.datadoghq.com/blog/aws-threat-emulation-detection-validation-datadog/"
+  text: Build compliance, governance, and transparency across your teams with Datadog
+    Audit Trail
+- link: https://www.datadoghq.com/blog/aws-threat-emulation-detection-validation-datadog/
   tag: Blog
-  text: AWS threat emulation and detection validation with Stratus Red Team and Datadog Cloud SIEM
-- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  text: AWS threat emulation and detection validation with Stratus Red Team and Datadog
+    Cloud SIEM
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
   tag: Blog
   text: Monitor 1Password with Datadog Cloud SIEM
-- link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
+- link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
   tag: Blog
   text: Build sufficient security coverage for your cloud environment
-- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: ブログ
   text: ネットワークとセキュリティ分析のための DNS ログの監視
+title: Cloud SIEM
 ---
 ## 概要
 
@@ -52,6 +55,6 @@ Datadog Cloud SIEM (Security Information and Event Management) は、開発、�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/investigate_security_signals
-[2]: /security/default_rules#cat-cloud-siem
-[3]: /security/detection_rules
+[1]: /ja/security/cloud_siem/investigate_security_signals
+[2]: /ja/security/default_rules#cat-cloud-siem
+[3]: /ja/security/detection_rules

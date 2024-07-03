@@ -16,4 +16,4 @@ site: {{< region-param key="dd_site" >}}
 ```
 
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file

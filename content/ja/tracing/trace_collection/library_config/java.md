@@ -1,18 +1,18 @@
 ---
-title: Configuring the Java Tracing Library
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-    - link: "https://github.com/DataDog/dd-trace-java"
-      tag: ソースコード
-      text: Datadog Java APM source code
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources and traces
-    - link: /tracing/trace_collection/trace_context_propagation/java/
-      tag: Documentation
-      text: Propagating trace context with headers
+- link: https://github.com/DataDog/dd-trace-java
+  tag: ソースコード
+  text: Datadog Java APM source code
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources and traces
+- link: /tracing/trace_collection/trace_context_propagation/java/
+  tag: Documentation
+  text: Propagating trace context with headers
+title: Configuring the Java Tracing Library
+type: multi-code-lang
 ---
 
 コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成した後、オプションで[統合サービスタグ付け][1]のセットアップなど、必要に応じてトレーシングライブラリを構成してください。
@@ -500,19 +500,19 @@ These extraction and injection settings have been deprecated in favor of the `dd
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging/
-[2]: /agent/logs/advanced_log_collection
-[3]: /agent/remote_config/
+[1]: /ja/getting_started/tagging/unified_service_tagging/
+[2]: /ja/agent/logs/advanced_log_collection
+[3]: /ja/agent/remote_config/
 [4]: https://app.datadoghq.com/services
-[5]: /tracing/setup/docker/
-[6]: /agent/configuration/network/#configure-ports
+[5]: /ja/tracing/setup/docker/
+[6]: /ja/agent/configuration/network/#configure-ports
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: /tracing/configure_data_security/#telemetry-collection
-[9]: /developers/dogstatsd/#setup
-[10]: /agent/docker/#dogstatsd-custom-metrics
-[11]: /developers/dogstatsd/
-[12]: /agent/amazon_ecs/#create-an-ecs-task
-[13]: /tracing/compatibility_requirements/java#disabling-integrations
-[14]: /integrations/java/?tab=host#metric-collection
-[15]: /tracing/trace_collection/trace_context_propagation/java/
-[16]: /tracing/trace_collection/custom_instrumentation/java/otel/
+[8]: /ja/tracing/configure_data_security/#telemetry-collection
+[9]: /ja/developers/dogstatsd/#setup
+[10]: /ja/agent/docker/#dogstatsd-custom-metrics
+[11]: /ja/developers/dogstatsd/
+[12]: /ja/agent/amazon_ecs/#create-an-ecs-task
+[13]: /ja/tracing/compatibility_requirements/java#disabling-integrations
+[14]: /ja/integrations/java/?tab=host#metric-collection
+[15]: /ja/tracing/trace_collection/trace_context_propagation/java/
+[16]: /ja/tracing/trace_collection/custom_instrumentation/java/otel/

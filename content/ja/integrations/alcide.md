@@ -2,18 +2,19 @@
 categories:
 - log collection
 - Security
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
 description: Ingest and process your Alcide logs
-doc_link: "https://docs.datadoghq.com/integrations/alcide/"
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md"]
+doc_link: https://docs.datadoghq.com/integrations/alcide/
 has_logo: true
+integration_id: alcide
 integration_title: Alcide
 is_public: true
-custom_kind: インテグレーション
 name: alcide
 public_title: Datadog-Alcide Integration
 short_description: Ingest and process your Alcide logs
 version: '1.0'
-integration_id: "alcide"
 ---
 
 ## Overview
@@ -53,4 +54,4 @@ Then, go to the _Selected Audit Entries Integration Configuration_ section, loca
 Need help? Contact [Datadog support][2].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /help/
+[2]: /ja/help/

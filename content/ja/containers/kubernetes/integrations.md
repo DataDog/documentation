@@ -1,11 +1,9 @@
 ---
-title: Kubernetes and Integrations
 aliases:
-  - /agent/autodiscovery/integrations
-  - /guides/servicediscovery/
-  - /guides/autodiscovery/
-  - /agent/kubernetes/integrations
-kind: documentation
+- /ja/agent/autodiscovery/integrations
+- /ja/guides/servicediscovery/
+- /ja/guides/autodiscovery/
+- /ja/agent/kubernetes/integrations
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentation
@@ -22,6 +20,8 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentation
   text: Assign tags to all data emitted by a container
+kind: documentation
+title: Kubernetes and Integrations
 ---
 
 This page covers how to install and configure integrations for your Kubernetes infrastructure by using a Datadog feature known as _Autodiscovery_. This enables you to use [variables][16] like `%%host%%` to dynamically populate your configuration settings. For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][12]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Autodiscovery Management][23].
@@ -203,10 +203,10 @@ key-value ストアがテンプレートソースとして有効になってい�
     ...
 ```
 
-[1]: /integrations/consul/
-[2]: /integrations/etcd/
-[3]: /integrations/zk/
-[4]: /agent/configuration/agent-commands/
+[1]: /ja/integrations/consul/
+[2]: /ja/integrations/etcd/
+[3]: /ja/integrations/zk/
+[4]: /ja/agent/configuration/agent-commands/
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -271,7 +271,7 @@ spec:
 
 See [Cluster Checks][1] for more context.
 
-[1]: /agent/cluster_agent/clusterchecks
+[1]: /ja/agent/cluster_agent/clusterchecks
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -316,7 +316,7 @@ See [Cluster Checks][3] for more context.
 
 [1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
 [2]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
-[3]: /agent/cluster_agent/clusterchecks
+[3]: /ja/agent/cluster_agent/clusterchecks
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -594,29 +594,29 @@ For more examples, including how to configure multiple checks for multiple sets 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/integrations/
-[2]: /getting_started/integrations/#configuring-agent-integrations
-[3]: /agent/configuration/secrets-management/
-[4]: /integrations/ceph/
-[5]: /integrations/varnish/#autodiscovery
-[6]: /integrations/postfix/
-[7]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[8]: /integrations/gunicorn/
-[9]: /integrations/apache/#setup
-[10]: /integrations/http_check/#setup
-[11]: /getting_started/integrations/
-[12]: /getting_started/containers/autodiscovery
-[13]: /agent/guide/use-community-integrations/
-[14]: /integrations/redis
+[1]: /ja/agent/docker/integrations/
+[2]: /ja/getting_started/integrations/#configuring-agent-integrations
+[3]: /ja/agent/configuration/secrets-management/
+[4]: /ja/integrations/ceph/
+[5]: /ja/integrations/varnish/#autodiscovery
+[6]: /ja/integrations/postfix/
+[7]: /ja/integrations/cassandra/#agent-check-cassandra-nodetool
+[8]: /ja/integrations/gunicorn/
+[9]: /ja/integrations/apache/#setup
+[10]: /ja/integrations/http_check/#setup
+[11]: /ja/getting_started/integrations/
+[12]: /ja/getting_started/containers/autodiscovery
+[13]: /ja/agent/guide/use-community-integrations/
+[14]: /ja/integrations/redis
 [15]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[16]: /containers/guide/template_variables/
-[17]: /integrations/coredns
-[18]: /integrations/etcd/
-[19]: /integrations/kube_apiserver_metrics
-[20]: /containers/guide/auto_conf
-[21]: /containers/guide/ad_identifiers
-[22]: /containers/guide/auto_conf/#disable-auto-configuration
-[23]: /containers/guide/autodiscovery-management
-[24]: /containers/guide/autodiscovery-examples
-[25]: /integrations/istio/
-[26]: /integrations/postgres
+[16]: /ja/containers/guide/template_variables/
+[17]: /ja/integrations/coredns
+[18]: /ja/integrations/etcd/
+[19]: /ja/integrations/kube_apiserver_metrics
+[20]: /ja/containers/guide/auto_conf
+[21]: /ja/containers/guide/ad_identifiers
+[22]: /ja/containers/guide/auto_conf/#disable-auto-configuration
+[23]: /ja/containers/guide/autodiscovery-management
+[24]: /ja/containers/guide/autodiscovery-examples
+[25]: /ja/integrations/istio/
+[26]: /ja/integrations/postgres

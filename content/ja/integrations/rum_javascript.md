@@ -1,45 +1,47 @@
 ---
-"app_id": "rum-javascript"
-"app_uuid": "d2496eee-ced1-4bf2-a85d-b8277b4952cf"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-javascript
+app_uuid: d2496eee-ced1-4bf2-a85d-b8277b4952cf
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - languages
 - metrics
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_javascript"
-"integration_id": "rum-javascript"
-"integration_title": "JavaScript"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_javascript"
-"public_title": "JavaScript"
-"short_description": "Monitor JavaScript applications and generate metrics using Datadog RUM"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_javascript
+integration_id: rum-javascript
+integration_title: JavaScript
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_javascript
+public_title: JavaScript
+short_description: Monitor JavaScript applications and generate metrics using Datadog
+  RUM
+supported_os:
 - any
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Languages"
-  - "Category::Metrics"
-  - "Category::Tracing"
-  - "Supported OS::Any"
-  "configuration": "README.md#Setup"
-  "description": Monitor JavaScript applications and generate metrics using Datadog RUM
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": JavaScript
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Languages
+  - Category::Metrics
+  - Category::Tracing
+  - Supported OS::Any
+  configuration: README.md#Setup
+  description: Monitor JavaScript applications and generate metrics using Datadog
+    RUM
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JavaScript
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -103,10 +105,9 @@ Additional helpful documentation, links, and articles:
 
 
 [1]: https://app.datadoghq.com/integrations/rum-javascript
-[2]: https://docs.datadoghq.com/real_user_monitoring/browser/
-[3]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tabs=browserrum
-[4]: https://docs.datadoghq.com/logs/log_collection/javascript/
-[5]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[6]: https://docs.datadoghq.com/real_user_monitoring/browser/data_collected/
-[7]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tabs=browserrum
+[4]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/data_collected/
+[7]: https://docs.datadoghq.com/ja/help/

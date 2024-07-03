@@ -1,66 +1,67 @@
 ---
-"app_id": "oracle"
-"app_uuid": "34835d2b-a812-4aac-8cc2-d298db851b80"
-"assets":
-  "dashboards":
-    "DBM Oracle Database Overview": "assets/dashboards/dbm_oracle_database_overview.json"
-    "oracle": "assets/dashboards/oracle_overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "oracle.session_count"
-      "metadata_path": "metadata.csv"
-      "prefix": "oracle."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10000"
-    "source_type_name": "Oracle Database"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "network"
-- "oracle"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/oracle/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "oracle"
-"integration_id": "oracle"
-"integration_title": "Oracle"
-"integration_version": "5.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "oracle"
-"public_title": "Oracle"
-"short_description": "Oracle relational database system designed for enterprise grid computing"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Category::Network"
-  - "Category::Oracle"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Oracle relational database system designed for enterprise grid computing"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Oracle"
+app_id: oracle
+app_uuid: 34835d2b-a812-4aac-8cc2-d298db851b80
+assets:
+  dashboards:
+    DBM Oracle Database Overview: assets/dashboards/dbm_oracle_database_overview.json
+    oracle: assets/dashboards/oracle_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: oracle.session_count
+      metadata_path: metadata.csv
+      prefix: oracle.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10000
+    source_type_name: Oracle Database
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- network
+- oracle
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: oracle
+integration_id: oracle
+integration_title: Oracle
+integration_version: 5.2.0
+is_public: true
+manifest_version: 2.0.0
+name: oracle
+public_title: Oracle
+short_description: Oracle relational database system designed for enterprise grid
+  computing
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Category::Network
+  - Category::Oracle
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Oracle relational database system designed for enterprise grid computing
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Oracle
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -498,9 +499,9 @@ Need help? Contact [Datadog support][7].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
-[2]: https://docs.datadoghq.com/database_monitoring/
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/

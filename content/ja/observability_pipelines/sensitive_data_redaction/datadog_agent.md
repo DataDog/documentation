@@ -1,6 +1,6 @@
 ---
-title: Sensitive Data Redaction for the Datadog Agent
 disable_toc: false
+title: Sensitive Data Redaction for the Datadog Agent
 ---
 
 ## 概要

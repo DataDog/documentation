@@ -1,7 +1,14 @@
 ---
-title: Installing the Agent on a server with limited internet connectivity
+algolia:
+  tags:
+  - airgap
+  - airgapped
+  - air gap
+  - air gapped
+  - air-gap
+  - air-gapped
 aliases:
-  - /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
+- /ja/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
 further_reading:
 - link: /agent/
   tag: Documentation
@@ -9,8 +16,7 @@ further_reading:
 - link: /agent/configuration/proxy/
   tag: Documentation
   text: Learn more about Proxy
-algolia:
-  tags: [airgap, airgapped, air gap, air gapped, air-gap, air-gapped]
+title: Installing the Agent on a server with limited internet connectivity
 ---
 
 [Agent インストール手順][1]で提供される 1 行のインストールコマンドは、正しく機能するためにいくつかの異なるエンドポイントへのアウトバウンド HTTPS アクセスを必要とし、インターネットアクセスが制限されているサーバーでは動作しない可能性があります。具体的には、以下の通りです。
@@ -55,9 +61,9 @@ sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-age
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/configuration/proxy
+[2]: /ja/agent/configuration/proxy
 [3]: https://yum.datadoghq.com/stable/6
 [4]: https://yum.datadoghq.com/stable/7
 [5]: https://apt.datadoghq.com/pool/d/da
 [6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /agent/configuration/agent-commands/#start-the-agent
+[7]: /ja/agent/configuration/agent-commands/#start-the-agent

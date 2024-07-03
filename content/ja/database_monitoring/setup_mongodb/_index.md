@@ -1,7 +1,7 @@
 ---
-title: Setting up MongoDB
 description: Setting up Database Monitoring on a MongoDB cluster
 disable_sidebar: true
+title: Setting up MongoDB
 ---
 
 <div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
@@ -18,4 +18,3 @@ disable_sidebar: true
 ホスティングタイプを選択して設定の手順を確認します。
 
 {{< partial name="dbm/dbm-setup-mongodb" >}}
-

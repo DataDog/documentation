@@ -1,22 +1,22 @@
 ---
-title: Basic Agent Usage
 aliases:
-    - /guides/basic_agent_usage/
-    - /agent/faq/where-is-the-configuration-file-for-the-agent/
-    - /agent/faq/log-location
+- /ja/guides/basic_agent_usage/
+- /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
+- /ja/agent/faq/log-location
 further_reading:
-- link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
-  tag: "よくあるご質問"
-  text: "Datadog が Agent ホスト名を決定する方法"
-- link: "/agent/configuration/agent-commands/"
-  tag: "よくあるご質問"
-  text: "すべての Agent コマンド"
-- link: "/agent/configuration/agent-configuration-files/"
-  tag: "よくあるご質問"
-  text: "すべての Agent 構成ファイルの場所"
-- link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
-  tag: "ブログ"
-  text: "Datadog Agent メトリクスパイプラインのパフォーマンス向上"
+- link: /agent/faq/how-datadog-agent-determines-the-hostname/
+  tag: よくあるご質問
+  text: Datadog が Agent ホスト名を決定する方法
+- link: /agent/configuration/agent-commands/
+  tag: よくあるご質問
+  text: すべての Agent コマンド
+- link: /agent/configuration/agent-configuration-files/
+  tag: よくあるご質問
+  text: すべての Agent 構成ファイルの場所
+- link: https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/
+  tag: ブログ
+  text: Datadog Agent メトリクスパイプラインのパフォーマンス向上
+title: Basic Agent Usage
 ---
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
@@ -124,12 +124,12 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/troubleshooting/send_a_flare/
-[2]: /agent/configuration/agent-commands/
-[6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
+[1]: /ja/agent/troubleshooting/send_a_flare/
+[2]: /ja/agent/configuration/agent-commands/
+[6]: /ja/agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings/agent/latest
-[8]: /agent/guide/integration-management/
-[9]: /agent/configuration/agent-configuration-files/
-[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[11]: /getting_started/site/
-[12]: /agent/configuration/agent-log-files/
+[8]: /ja/agent/guide/integration-management/
+[9]: /ja/agent/configuration/agent-configuration-files/
+[10]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /ja/getting_started/site/
+[12]: /ja/agent/configuration/agent-log-files/

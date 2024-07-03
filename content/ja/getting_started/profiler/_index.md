@@ -1,25 +1,25 @@
 ---
-title: Getting Started with the Continuous Profiler
 aliases:
-    - /tracing/profiling/intro_to_profiling
-    - /tracing/profiler/intro_to_profiling
-    - /tracing/profiler/getting_started
+- /ja/tracing/profiling/intro_to_profiling
+- /ja/tracing/profiler/intro_to_profiling
+- /ja/tracing/profiler/getting_started
 further_reading:
-    - link: /profiler/
-      tag: Documentation
-      text: Continuous Profiler
-    - link: /profiler/enabling/
-      tag: Documentation
-      text: Enabling the Profiler
-    - link: "https://learn.datadoghq.com/courses/intro-to-apm"
-      tag: Learning Center
-      text: Introduction to Application Performance Monitoring
-    - link: "https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/"
-      tag: Blog
-      text: How we optimized our Akka application using Datadog's Continuous Profiler
-    - link: "https://www.datadoghq.com/blog/request-latency-profiling/"
-      tag: Blog
-      text: Understanding Request Latency with Profiling
+- link: /profiler/
+  tag: Documentation
+  text: Continuous Profiler
+- link: /profiler/enabling/
+  tag: Documentation
+  text: Enabling the Profiler
+- link: https://learn.datadoghq.com/courses/intro-to-apm
+  tag: Learning Center
+  text: Introduction to Application Performance Monitoring
+- link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
+  tag: Blog
+  text: How we optimized our Akka application using Datadog's Continuous Profiler
+- link: https://www.datadoghq.com/blog/request-latency-profiling/
+  tag: Blog
+  text: Understanding Request Latency with Profiling
+title: Getting Started with the Continuous Profiler
 ---
 
 プロファイリングはサービスをより速く、より安く、より信頼性の高いものにするために役立ちますが、プロファイラーを使ったことがない人には少し分かりにくいかもしれません。
@@ -257,4 +257,4 @@ docker-compose down
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
 [7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
-[8]: /profiler/enabling/
+[8]: /ja/profiler/enabling/

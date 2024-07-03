@@ -1,14 +1,14 @@
 ---
-title: (LEGACY) Ingest Amazon S3 Logs with the Observability Pipelines Worker
 aliases:
-  - /observability_pipelines/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker/
+- /ja/observability_pipelines/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker/
 further_reading:
-  - link: /observability_pipelines/legacy/working_with_data/
-    tag: Documentation
-    text: Working with data using Observability Pipelines
-  - link: /observability_pipelines/legacy/configurations/
-    tag: Documentation
-    text: Learn more about Observability Pipelines configurations
+- link: /observability_pipelines/legacy/working_with_data/
+  tag: Documentation
+  text: Working with data using Observability Pipelines
+- link: /observability_pipelines/legacy/configurations/
+  tag: Documentation
+  text: Learn more about Observability Pipelines configurations
+title: (LEGACY) Ingest Amazon S3 Logs with the Observability Pipelines Worker
 ---
 
 ## 概要
@@ -207,12 +207,12 @@ transforms:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/legacy/#observability-pipelines-worker
-[2]: /observability_pipelines/legacy/setup/
-[3]: /observability_pipelines/legacy/configurations/
+[1]: /ja/observability_pipelines/legacy/#observability-pipelines-worker
+[2]: /ja/observability_pipelines/legacy/setup/
+[3]: /ja/observability_pipelines/legacy/configurations/
 [4]: https://console.aws.amazon.com/sqs/home
 [5]: https://console.aws.amazon.com/s3/
 [6]: https://console.aws.amazon.com/iam/
-[7]: /observability_pipelines/legacy/reference/sources/#awss3
-[8]: /observability_pipelines/legacy/reference/transforms/
-[9]: /observability_pipelines/legacy/reference/sinks/
+[7]: /ja/observability_pipelines/legacy/reference/sources/#awss3
+[8]: /ja/observability_pipelines/legacy/reference/transforms/
+[9]: /ja/observability_pipelines/legacy/reference/sinks/

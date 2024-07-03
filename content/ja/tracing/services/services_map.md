@@ -1,20 +1,20 @@
 ---
-title: Service Map
-kind: documentation
-description: "The Service Map visualizes data that is being collected by Datadog APM."
 aliases:
-  - /tracing/servicemap
-  - /tracing/visualization/services_map/
+- /ja/tracing/servicemap
+- /ja/tracing/visualization/services_map/
+description: The Service Map visualizes data that is being collected by Datadog APM.
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
   text: Learn how to setup APM tracing with your application
-- link: "https://www.datadoghq.com/blog/service-map/"
+- link: https://www.datadoghq.com/blog/service-map/
   tag: Blog
   text: Introducing the Service Map in Datadog
-- link: "https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/"
+- link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
   tag: Blog
   text: Creating context with service maps (Datadog + Airbnb)
+kind: documentation
+title: Service Map
 ---
 
 The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
@@ -103,8 +103,8 @@ The Service Map is rendered based on complete traces that include the root spans
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#services
-[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[1]: /ja/tracing/glossary/#services
+[3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://app.datadoghq.com/services
-[5]: /tracing/glossary/#trace
-[6]: /tracing/troubleshooting/connection_errors
+[5]: /ja/tracing/glossary/#trace
+[6]: /ja/tracing/troubleshooting/connection_errors

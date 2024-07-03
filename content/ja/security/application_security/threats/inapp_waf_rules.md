@@ -1,9 +1,8 @@
 ---
-title: In-App WAF Rules
 aliases:
-  - /security_platform/application_security/event_rules
-  - /security/application_security/event_rules
-  - /security/application_security/threats/event_rules
+- /ja/security_platform/application_security/event_rules
+- /ja/security/application_security/event_rules
+- /ja/security/application_security/threats/event_rules
 further_reading:
 - link: /security/application_security/
   tag: Documentation
@@ -14,6 +13,7 @@ further_reading:
 - link: /security/application_security/troubleshooting
   tag: Documentation
   text: Troubleshoot common Datadog Application Security Management issues
+title: In-App WAF Rules
 ---
 
 ## 概要
@@ -125,7 +125,7 @@ Next, [configure detection rules to create security signals][1] based on those s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/custom_rules/
+[1]: /ja/security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
-[3]: /security/application_security/enabling/
+[3]: /ja/security/application_security/enabling/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules

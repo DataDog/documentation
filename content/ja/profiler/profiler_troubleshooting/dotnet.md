@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting the .NET Profiler
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-    - link: /tracing/troubleshooting
-      tag: Documentation
-      text: APM Troubleshooting
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM Troubleshooting
+title: Troubleshooting the .NET Profiler
+type: multi-code-lang
 ---
 
 ## プロファイル検索ページにないプロファイル
@@ -72,7 +72,7 @@ further_reading:
 
    なお、`Profiler signal handler has been replaced. Restoring it.` というメッセージが表示されることがありますが、Datadog のプロファイリングには影響しません。これは、Datadog のシグナルハンドラーが上書きされたときに再インストールされることだけを示しています。
 
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
+[1]: /ja/profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
@@ -123,7 +123,7 @@ further_reading:
 
    5. API キーが無効な場合、403 などのエラーの可能性がありますので、他の HTTP コードを確認してください。
 
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
+[1]: /ja/profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
@@ -188,6 +188,6 @@ Linux でアプリケーションがハングアップするなどして無反�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
-[3]: /profiler/profile_types/?code-lang=dotnet
+[1]: /ja/tracing/troubleshooting/#tracer-debug-logs
+[2]: /ja/help/
+[3]: /ja/profiler/profile_types/?code-lang=dotnet

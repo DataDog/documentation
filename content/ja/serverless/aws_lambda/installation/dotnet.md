@@ -1,17 +1,17 @@
 ---
-title: Instrumenting .NET Serverless Applications
 aliases:
-    - /serverless/installation/dotnet
+- /ja/serverless/installation/dotnet
 further_reading:
-    - link: /serverless/configuration
-      tag: Documentation
-      text: Configure Serverless Monitoring
-    - link: /serverless/guide/troubleshoot_serverless_monitoring
-      tag: Documentation
-      text: Troubleshoot Serverless Monitoring
-    - link: serverless/custom_metrics/
-      tag: Documentation
-      text: Submitting Custom Metrics from Serverless Applications
+- link: /serverless/configuration
+  tag: Documentation
+  text: Configure Serverless Monitoring
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: Documentation
+  text: Troubleshoot Serverless Monitoring
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: Submitting Custom Metrics from Serverless Applications
+title: Instrumenting .NET Serverless Applications
 ---
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
@@ -80,7 +80,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
     その他のパラメーターは、[CLI ドキュメント][2]に記載されています。
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -109,8 +109,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 
     詳細および追加設定については、[プラグインドキュメント][1]を参照してください。
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -153,8 +153,8 @@ Datadog サーバーレスプラグインをインストールして構成する
     [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -378,8 +378,8 @@ resource "aws_lambda_function" "lambda" {
 
 
 [1]: https://app.datadoghq.com/functions
-[2]: https://docs.datadoghq.com/metrics/dogstatsd_metrics_submission/
-[3]: /tracing/custom_instrumentation/dotnet/
-[4]: /serverless/guide/troubleshoot_serverless_monitoring/
-[5]: /serverless/configuration/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[2]: https://docs.datadoghq.com/ja/metrics/dogstatsd_metrics_submission/
+[3]: /ja/tracing/custom_instrumentation/dotnet/
+[4]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[5]: /ja/serverless/configuration/
+[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

@@ -1,22 +1,22 @@
 ---
-title: Host Agent Log collection
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
-- link: "agent/logs/advanced_log_collection/#filter-logs"
+- link: agent/logs/advanced_log_collection/#filter-logs
   tag: Documentation
   text: Filter logs sent to Datadog
-- link: "agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs"
+- link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
   tag: Documentation
   text: Scrub sensitive data from your logs
-- link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
+- link: agent/logs/advanced_log_collection/#multi-line-aggregation
   tag: Documentation
   text: Multi-line log aggregation
-- link: "agent/logs/advanced_log_collection/#tail-directories-using-wildcards"
+- link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
   tag: Documentation
   text: Tail directories by using wildcards
-- link: "agent/logs/advanced_log_collection/#global-processing-rules"
+- link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: Documentation
   text: Global processing rules
+title: Host Agent Log collection
 ---
 
 ログの収集には、Datadog Agent v6.0 以上が必要です。古いバージョンの Agent には、`log collection` インターフェイスが含まれていません。まだ Agent を使用していない場合は、[Agent のインストール手順][1]に従ってください。
@@ -70,7 +70,7 @@ Windows では、パス `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log` 
 
 **Note**: A log line needs to be terminated with a newline character, `\n` or `\r\n`, otherwise the Agent waits indefinitely and does not send the log line.
 
-[1]: /agent/configuration/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "TCP/UDP" %}}
@@ -93,7 +93,7 @@ Agent バージョン 7.31.0 以降では、TCP 接続はアイドル状態で�
 - The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 - A log line needs to be terminated with a newline character, `\n` or `\r\n`, otherwise the Agent waits indefinitely and does not send the log line.
 
-[1]: /agent/configuration/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -107,8 +107,8 @@ logs:
 
 コンテナ化環境およびユニットフィルタリングの設定については、[journald インテグレーション][2]に関するドキュメントを参照してください。
 
-[1]: /agent/configuration/agent-configuration-files/
-[2]: /integrations/journald/
+[1]: /ja/agent/configuration/agent-configuration-files/
+[2]: /ja/integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
 
@@ -148,8 +148,8 @@ logs:
 
 最後に、[Agent を再起動][2]します。
 
-[1]: /logs/log_configuration/pipelines/#integration-pipelines
-[2]: /agent/basic_agent_usage/windows/
+[1]: /ja/logs/log_configuration/pipelines/#integration-pipelines
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -197,15 +197,15 @@ file および journald テーラータイプの両方で、`end` または `beg
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/observability_pipelines/
-[3]: /agent/kubernetes/log/
-[4]: /agent/docker/log/
-[5]: /agent/configuration/agent-configuration-files/
-[6]: /agent/logs/log_transport/
-[7]: /agent/configuration/agent-commands/#restart-the-agent
-[8]: /agent/configuration/agent-commands/#agent-status-and-information
-[9]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files'
-[10]: /tracing/
-[11]: /getting_started/tagging/unified_service_tagging
-[12]: /metrics/custom_metrics/#overview
-[13]: /getting_started/tagging/
+[2]: https://docs.datadoghq.com/ja/observability_pipelines/
+[3]: /ja/agent/kubernetes/log/
+[4]: /ja/agent/docker/log/
+[5]: /ja/agent/configuration/agent-configuration-files/
+[6]: /ja/agent/logs/log_transport/
+[7]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[8]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[9]: /ja/logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files'
+[10]: /ja/tracing/
+[11]: /ja/getting_started/tagging/unified_service_tagging
+[12]: /ja/metrics/custom_metrics/#overview
+[13]: /ja/getting_started/tagging/

@@ -1,66 +1,66 @@
 ---
-"app_id": "ssh"
-"app_uuid": "66833cbe-1bfc-4104-9d77-7b828219470b"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "sftp.response_time"
-      "metadata_path": "metadata.csv"
-      "prefix": "sftp."
-    "process_signatures":
-    - "ssh"
-    - "sftp"
-    - "sshd"
-    - "sshd:"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "90"
-    "source_type_name": "SSH"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "developer tools"
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ssh_check"
-"integration_id": "ssh"
-"integration_title": "SSH"
-"integration_version": "2.8.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ssh_check"
-"public_title": "SSH"
-"short_description": "Monitor SSH connectivity and SFTP latency."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Developer Tools"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Monitor SSH connectivity and SFTP latency."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "SSH"
+app_id: ssh
+app_uuid: 66833cbe-1bfc-4104-9d77-7b828219470b
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sftp.response_time
+      metadata_path: metadata.csv
+      prefix: sftp.
+    process_signatures:
+    - ssh
+    - sftp
+    - sshd
+    - 'sshd:'
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 90
+    source_type_name: SSH
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- developer tools
+- network
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ssh_check
+integration_id: ssh
+integration_title: SSH
+integration_version: 2.8.0
+is_public: true
+manifest_version: 2.0.0
+name: ssh_check
+public_title: SSH
+short_description: Monitor SSH connectivity and SFTP latency.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Developer Tools
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor SSH connectivity and SFTP latency.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SSH
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -103,9 +103,9 @@ To configure this check for an Agent running on a host:
 
 2. [Restart the Agent][3] to start sending SSH/SFTP metrics and service checks to Datadog.
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -119,7 +119,7 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 | `<INIT_CONFIG>`      | blank or `{}`                                                |
 | `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -148,5 +148,5 @@ Need help? Contact [Datadog support][3].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

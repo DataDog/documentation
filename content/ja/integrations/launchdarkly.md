@@ -1,79 +1,80 @@
 ---
-"app_id": "launchdarkly"
-"app_uuid": "7144d0c5-42f2-4cc5-b562-5f77debc0c52"
-"assets":
-  "dashboards":
-    "launchdarkly": assets/dashboards/launchdarkly.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": launchdarkly_relay.connections_env_platformCategory_userAgent
-      "metadata_path": metadata.csv
-      "prefix": launchdarkly_relay.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10025"
-    "source_type_name": LaunchDarkly
-"author":
-  "homepage": "https://launchdarkly.com"
-  "name": LaunchDarkly
-  "sales_email": sales@launchdarkly.com
-  "support_email": support@launchdarkly.com
-"categories":
+app_id: launchdarkly
+app_uuid: 7144d0c5-42f2-4cc5-b562-5f77debc0c52
+assets:
+  dashboards:
+    launchdarkly: assets/dashboards/launchdarkly.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: launchdarkly_relay.connections_env_platformCategory_userAgent
+      metadata_path: metadata.csv
+      prefix: launchdarkly_relay.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10025
+    source_type_name: LaunchDarkly
+author:
+  homepage: https://launchdarkly.com
+  name: LaunchDarkly
+  sales_email: sales@launchdarkly.com
+  support_email: support@launchdarkly.com
+categories:
 - configuration & deployment
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "launchdarkly"
-"integration_id": "launchdarkly"
-"integration_title": "LaunchDarkly"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "launchdarkly"
-"public_title": "LaunchDarkly"
-"short_description": "Control feature releases and infrastructure changes with confidence."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: launchdarkly
+integration_id: launchdarkly
+integration_title: LaunchDarkly
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: launchdarkly
+public_title: LaunchDarkly
+short_description: Control feature releases and infrastructure changes with confidence.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Notifications"
-  - "Offering::Integration"
-  - "Offering::UI Extension"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Control feature releases and infrastructure changes with confidence.
-  "media":
-  - "caption": A brief overview of LaunchDarkly.
-    "image_url": images/video-thumbnail.png
-    "media_type": video
-    "vimeo_id": !!int "637675972"
-  - "caption": The LaunchDarkly dashboard configured with the LaunchDarkly flags widget and events integration.
-    "image_url": images/dashboard.png
-    "media_type": image
-  - "caption": The LaunchDarkly dashboard with a the flag change side panel open.
-    "image_url": images/toggle-flag.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": その他
-    "url": "https://launchdarkly.com"
-  - "resource_type": documentation
-    "url": "https://docs.launchdarkly.com/integrations/datadog/events"
-  "support": "README.md#Support"
-  "title": LaunchDarkly
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Notifications
+  - Offering::Integration
+  - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Control feature releases and infrastructure changes with confidence.
+  media:
+  - caption: A brief overview of LaunchDarkly.
+    image_url: images/video-thumbnail.png
+    media_type: video
+    vimeo_id: 637675972
+  - caption: The LaunchDarkly dashboard configured with the LaunchDarkly flags widget
+      and events integration.
+    image_url: images/dashboard.png
+    media_type: image
+  - caption: The LaunchDarkly dashboard with a the flag change side panel open.
+    image_url: images/toggle-flag.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://launchdarkly.com
+  - resource_type: documentation
+    url: https://docs.launchdarkly.com/integrations/datadog/events
+  support: README.md#Support
+  title: LaunchDarkly
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -187,10 +188,9 @@ LaunchDarkly インテグレーションには、サービスのチェック機�
 [2]: https://docs.launchdarkly.com/home/relay-proxy
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.launchdarkly.com/integrations/datadog/events
-[5]: https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/setup-feature-flag-data-collection/
 [6]: https://app.datadoghq.com/integrations/launchdarkly
-[7]: https://docs.datadoghq.com/dashboards/template_variables/
+[7]: https://docs.datadoghq.com/ja/dashboards/template_variables/
 [8]: https://github.com/launchdarkly/ld-relay/blob/v6/docs/metrics.md
 [9]: https://github.com/launchdarkly/ld-relay/blob/v6/docs/endpoints.md
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

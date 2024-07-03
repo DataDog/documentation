@@ -1,72 +1,72 @@
 ---
-"app_id": "couchdb"
-"app_uuid": "0a7006e2-c76d-4ef0-8af7-347bad2db768"
-"assets":
-  "dashboards":
-    "couchdb": "assets/dashboards/CouchDB-overview_dashboard.json"
-    "couchdb-v1": "assets/dashboards/CouchDBv1-overview_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "couchdb.couchdb.request_time.n"
-      - "couchdb.couchdb.request_time"
-      "metadata_path": "metadata.csv"
-      "prefix": "couchdb."
-    "process_signatures":
-    - "couchjs"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "20"
-    "source_type_name": "CouchDB"
-  "saved_views":
-    "couchdb_processes": "assets/saved_views/couchdb_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/couch/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "couch"
-"integration_id": "couchdb"
-"integration_title": "CouchDB"
-"integration_version": "6.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "couch"
-"public_title": "CouchDB"
-"short_description": "CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::キャッシュ"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "CouchDB"
+app_id: couchdb
+app_uuid: 0a7006e2-c76d-4ef0-8af7-347bad2db768
+assets:
+  dashboards:
+    couchdb: assets/dashboards/CouchDB-overview_dashboard.json
+    couchdb-v1: assets/dashboards/CouchDBv1-overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - couchdb.couchdb.request_time.n
+      - couchdb.couchdb.request_time
+      metadata_path: metadata.csv
+      prefix: couchdb.
+    process_signatures:
+    - couchjs
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 20
+    source_type_name: CouchDB
+  saved_views:
+    couchdb_processes: assets/saved_views/couchdb_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/couch/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: couch
+integration_id: couchdb
+integration_title: CouchDB
+integration_version: 6.2.1
+is_public: true
+manifest_version: 2.0.0
+name: couch
+public_title: CouchDB
+short_description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::キャッシュ
+  - Category::Data Stores
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CouchDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -140,9 +140,9 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -168,8 +168,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "couchdb", "service": "<サービス名>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -202,6 +202,6 @@ Couch チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couch/images/couchdb_dashboard.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog

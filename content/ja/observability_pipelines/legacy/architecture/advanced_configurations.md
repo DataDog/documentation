@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Advanced Configurations
 aliases:
-  - /observability_pipelines/architecture/advanced_configurations/
+- /ja/observability_pipelines/architecture/advanced_configurations/
+title: (LEGACY) Advanced Configurations
 ---
 
 {{< site-region region="gov" >}}
@@ -61,5 +61,5 @@ In the above diagram, the tier two aggregators receive an aggregated sub-stream 
 - Limit global aggregation to tasks that can reduce data, such as computing global histograms. Never send all data to your global aggregators.
 - 単一障害点を発生させないために、ほとんどのデータの処理と配信には、引き続きローカルアグリゲーターを使用してください。
 
-[1]: /observability_pipelines/legacy/architecture/networking
-[2]: /observability_pipelines/legacy/architecture/availability_disaster_recovery
+[1]: /ja/observability_pipelines/legacy/architecture/networking
+[2]: /ja/observability_pipelines/legacy/architecture/availability_disaster_recovery

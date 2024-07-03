@@ -1,8 +1,7 @@
 ---
-title: Debug Mode
 aliases:
-    - /agent/faq/how-to-get-more-logging-from-the-agent
-    - /agent/faq/agent-5-container-more-log
+- /ja/agent/faq/how-to-get-more-logging-from-the-agent
+- /ja/agent/faq/agent-5-container-more-log
 further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: ドキュメント
@@ -10,6 +9,7 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: ドキュメント
   text: Get the Status of an Agent Check
+title: Debug Mode
 ---
 
 ## Agent
@@ -31,9 +31,9 @@ Agent のフルデバッグモードを有効にするには
 
 4. ログが生成されるまで数分待ちます。各 OS 固有の詳細については、[Agent ログファイル][3]をご参照ください。
 
-[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/configuration/agent-commands/#restart-the-agent
-[3]: /agent/configuration/agent-log-files/
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -45,9 +45,9 @@ Agent のフルデバッグモードを有効にするには
 
 4. ログが生成されるまで数分待ちます。各 OS 固有の詳細については、[Agent ログファイル][3]をご参照ください。
 
-[1]: /agent/configuration/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
-[2]: /agent/configuration/agent-commands/?tab=agentv5#restart-the-agent
-[3]: /agent/configuration/agent-log-files/?tab=agentv5
+[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
+[2]: /ja/agent/configuration/agent-commands/?tab=agentv5#restart-the-agent
+[3]: /ja/agent/configuration/agent-log-files/?tab=agentv5
 {{% /tab %}}
 {{< /tabs >}}
 

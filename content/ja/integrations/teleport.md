@@ -1,67 +1,67 @@
 ---
-"app_id": "teleport"
-"app_uuid": "e47d5541-de7d-4ce6-8105-03c6dac5852a"
-"assets":
-  "dashboards":
-    "Teleport Overview": assets/dashboards/teleport_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: teleport
+app_uuid: e47d5541-de7d-4ce6-8105-03c6dac5852a
+assets:
+  dashboards:
+    Teleport Overview: assets/dashboards/teleport_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
       - teleport.common.process_state
       - teleport.common.rx
       - teleport.common.tx
       - teleport.common.teleport_build_info
-      "metadata_path": metadata.csv
-      "prefix": teleport.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "7291105"
-    "source_type_name": Teleport
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com (日本語対応)
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: teleport.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 7291105
+    source_type_name: Teleport
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
+categories:
 - クラウド
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/teleport/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "teleport"
-"integration_id": "teleport"
-"integration_title": "Teleport"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "teleport"
-"public_title": "Teleport"
-"short_description": "Collect key metrics to monitor the health of your Teleport instance."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/teleport/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: teleport
+integration_id: teleport
+integration_title: Teleport
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: teleport
+public_title: Teleport
+short_description: Collect key metrics to monitor the health of your Teleport instance.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Cloud"
-  - "Category::Security"
-  "configuration": "README.md#Setup"
-  "description": Collect key metrics to monitor the health of your Teleport instance.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Teleport
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Cloud
+  - Category::Security
+  configuration: README.md#Setup
+  description: Collect key metrics to monitor the health of your Teleport instance.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Teleport
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -148,16 +148,15 @@ The Teleport integration does not include any service checks.
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://docs.datadoghq.com/integrations/teleport
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/integrations/teleport
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://goteleport.com/docs/management/diagnostics/monitoring/#healthz
 [4]: https://goteleport.com/docs/reference/metrics/#auth-service-and-backends
 [5]: https://goteleport.com/docs/management/diagnostics/monitoring/#enable-health-monitoring
 [6]: https://github.com/DataDog/integrations-core/blob/master/teleport/datadog_checks/teleport/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://github.com/DataDog/integrations-core/blob/master/teleport/assets/service_checks.json
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/teleport/metadata.csv
 [11]: https://www.datadoghq.com/blog/teleport-integration/
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

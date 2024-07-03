@@ -1,8 +1,7 @@
 ---
-title: GitHub Pull Requests
-description: Learn how to use Code Analysis in GitHub pull requests.
 aliases:
-- /static_analysis/github_pull_requests
+- /ja/static_analysis/github_pull_requests
+description: Learn how to use Code Analysis in GitHub pull requests.
 further_reading:
 - link: /integrations/github/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /code_analysis/
   tag: Documentation
   text: Learn about Code Analysis
+title: GitHub Pull Requests
 ---
 
 ## 概要
@@ -73,9 +73,9 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /code_analysis#setup
-[2]: /integrations/github/
+[1]: /ja/code_analysis#setup
+[2]: /ja/integrations/github/
 [3]: https://app.datadoghq.com/integrations/github/add
 [4]: https://app.datadoghq.com/ci/settings/static-analysis
 [5]: https://app.datadoghq.com/integrations/github/configuration
-[6]: /code_analysis/static_analysis/github_actions/
+[6]: /ja/code_analysis/static_analysis/github_actions/

@@ -1,6 +1,6 @@
 ---
-title: Dual Ship Logs for the Datadog Agent
 disable_toc: false
+title: Dual Ship Logs for the Datadog Agent
 ---
 
 ## 概要

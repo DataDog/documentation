@@ -1,11 +1,11 @@
 ---
-title: Advanced setup for Datadog Operator
 aliases:
- - /agent/guide/operator-advanced
+- /ja/agent/guide/operator-advanced
 further_reading:
-  - link: agent/kubernetes/log
-    tag: Documentation
-    text: Datadog and Kubernetes
+- link: agent/kubernetes/log
+  tag: Documentation
+  text: Datadog and Kubernetes
+title: Advanced setup for Datadog Operator
 ---
 
 [Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。

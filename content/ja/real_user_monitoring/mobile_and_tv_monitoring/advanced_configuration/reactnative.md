@@ -1,23 +1,23 @@
 ---
-title: RUM React Native Advanced Configuration
-kind: documentation
-description: Learn about advanced configuration options for your React Native setup.
-code_lang: reactnative
-type: multi-code-lang
-code_lang_weight: 40
 aliases:
-    - /real_user_monitoring/react-native/advanced_configuration/
-    - /real_user_monitoring/reactnative/advanced_configuration/
+- /ja/real_user_monitoring/react-native/advanced_configuration/
+- /ja/real_user_monitoring/reactnative/advanced_configuration/
+code_lang: reactnative
+code_lang_weight: 40
+description: Learn about advanced configuration options for your React Native setup.
 further_reading:
-    - link: "https://github.com/DataDog/dd-sdk-reactnative"
-      tag: Source Code
-      text: Source code for dd-sdk-reactnative
-    - link: real_user_monitoring/reactnative/
-      tag: Documentation
-      text: Learn about React Native monitoring
-    - link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
-      tag: Documentation
-      text: Monitor hybrid React Native applications
+- link: https://github.com/DataDog/dd-sdk-reactnative
+  tag: Source Code
+  text: Source code for dd-sdk-reactnative
+- link: real_user_monitoring/reactnative/
+  tag: Documentation
+  text: Learn about React Native monitoring
+- link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+  tag: Documentation
+  text: Monitor hybrid React Native applications
+kind: documentation
+title: RUM React Native Advanced Configuration
+type: multi-code-lang
 ---
 
 ## Overview
@@ -490,16 +490,16 @@ See [Monitor hybrid React Native applications][16].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/reactnative
+[2]: /ja/real_user_monitoring/reactnative
 [3]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [4]: https://jestjs.io/
 [5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[8]: /account_management/api-app-keys/#client-tokens
-[9]: /getting_started/site/
-[11]: /real_user_monitoring/browser/frustration_signals/
-[12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
-[13]: /real_user_monitoring/guide/proxy-mobile-rum-data/
-[15]: /getting_started/tagging/#define-tags
-[16]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
+[8]: /ja/account_management/api-app-keys/#client-tokens
+[9]: /ja/getting_started/site/
+[11]: /ja/real_user_monitoring/browser/frustration_signals/
+[12]: /ja/real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
+[13]: /ja/real_user_monitoring/guide/proxy-mobile-rum-data/
+[15]: /ja/getting_started/tagging/#define-tags
+[16]: /ja/real_user_monitoring/guide/monitor-hybrid-react-native-applications

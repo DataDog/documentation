@@ -1,7 +1,5 @@
 ---
-title: Analytics Explorer
-kind: documentation
-description: ""
+description: ''
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
@@ -9,12 +7,14 @@ further_reading:
 - link: /dashboards/functions/
   tag: ドキュメント
   text: Add a function to your query
-- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+- link: https://www.datadoghq.com/blog/datadog-geomaps/
   tag: ブログ
   text: ジオマップを使用して、場所ごとにアプリデータを視覚化する
-- link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
+- link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: ブログ
   text: ファネル分析により、主要なユーザーフローを理解し、最適化する
+kind: documentation
+title: Analytics Explorer
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -60,5 +60,5 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/analytics
-[2]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
-[3]: /product_analytics/analytics_explorer/group/
+[2]: /ja/real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
+[3]: /ja/product_analytics/analytics_explorer/group/

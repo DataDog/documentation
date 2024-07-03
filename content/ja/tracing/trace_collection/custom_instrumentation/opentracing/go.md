@@ -1,14 +1,14 @@
 ---
-title: Go OpenTracing Instrumentation
-kind: documentation
 aliases:
-- /tracing/setup_overview/open_standards/go
-- /tracing/trace_collection/open_standards/go
-- /tracing/trace_collection/opentracing/go/
-description: 'OpenTracing Instrumentation for Go'
+- /ja/tracing/setup_overview/open_standards/go
+- /ja/tracing/trace_collection/open_standards/go
+- /ja/tracing/trace_collection/opentracing/go/
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 30
+description: OpenTracing Instrumentation for Go
+kind: documentation
+title: Go OpenTracing Instrumentation
+type: multi-code-lang
 ---
 
 

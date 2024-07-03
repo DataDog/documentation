@@ -1,8 +1,8 @@
 ---
-title: topology
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - dashboard
+- dashboard
+title: topology
 ---
 The Topology Map widget displays a visualization of data sources and their relationships to help understand how data flows through your architecture. For more information, <a href="/dashboards/widgets/topology_map/">see the documentation</a>.

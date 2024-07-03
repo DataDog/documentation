@@ -1,49 +1,49 @@
 ---
-"app_id": "rum-cypress"
-"app_uuid": "a6c112b6-f3af-4f9e-bf25-e0f8d8d7bb5f"
-"assets": {}
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: rum-cypress
+app_uuid: a6c112b6-f3af-4f9e-bf25-e0f8d8d7bb5f
+assets: {}
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - issue tracking
 - metrics
 - network
 - testing
 - tracing
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rum_cypress/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rum_cypress"
-"integration_id": "rum-cypress"
-"integration_title": "Cypress"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rum_cypress"
-"public_title": "Cypress"
-"short_description": "Monitor application's Cypress test runs using Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rum_cypress/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rum_cypress
+integration_id: rum-cypress
+integration_title: Cypress
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rum_cypress
+public_title: Cypress
+short_description: Monitor application's Cypress test runs using Datadog
+supported_os:
 - any
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Issue Tracking"
-  - "Category::Metrics"
-  - "Category::Network"
-  - "Category::Testing"
-  - "Category::Tracing"
-  - "Supported OS::Any"
-  "configuration": "README.md#Setup"
-  "description": Monitor application's Cypress test runs using Datadog
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cypress
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Issue Tracking
+  - Category::Metrics
+  - Category::Network
+  - Category::Testing
+  - Category::Tracing
+  - Supported OS::Any
+  configuration: README.md#Setup
+  description: Monitor application's Cypress test runs using Datadog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cypress
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -95,9 +95,8 @@ Additional helpful documentation, links, and articles:
 
 
 [1]: https://app.datadoghq.com/integrations/rum-cypress
-[2]: https://docs.datadoghq.com/continuous_integration/guides/rum_integration/
-[3]: https://docs.datadoghq.com/continuous_integration/guides/rum_integration/#browser-tests-and-rum
-[4]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
-[5]: https://docs.datadoghq.com/help/
-[6]: https://docs.datadoghq.com/continuous_integration/
-
+[2]: https://docs.datadoghq.com/ja/continuous_integration/guides/rum_integration/
+[3]: https://docs.datadoghq.com/ja/continuous_integration/guides/rum_integration/#browser-tests-and-rum
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/continuous_integration/

@@ -1,50 +1,50 @@
 ---
-"app_id": "okta"
-"app_uuid": "1bbd0367-66bf-41c9-be58-8f3313afd0e5"
-"assets":
-  "dashboards":
-    "Okta-Overview": assets/dashboards/Okta-Overview_dashboard.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "236"
-    "source_type_name": Okta
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: okta
+app_uuid: 1bbd0367-66bf-41c9-be58-8f3313afd0e5
+assets:
+  dashboards:
+    Okta-Overview: assets/dashboards/Okta-Overview_dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 236
+    source_type_name: Okta
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "okta"
-"integration_id": "okta"
-"integration_title": "Okta"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "okta"
-"public_title": "Okta"
-"short_description": "Integrate your Okta security event logs into Datadog."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Security"
-  "configuration": "README.md#Setup"
-  "description": Integrate your Okta security event logs into Datadog.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Okta
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: okta
+integration_id: okta
+integration_title: Okta
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: okta
+public_title: Okta
+short_description: Integrate your Okta security event logs into Datadog.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  configuration: README.md#Setup
+  description: Integrate your Okta security event logs into Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Okta
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -121,7 +121,6 @@ The Okta integration does not include any service checks.
 Need help? Contact [Datadog support][4].
 
 [1]: https://developer.okta.com/docs/reference/api/event-types/
-[2]: https://docs.datadoghq.com/account_management/saml/okta/
+[2]: https://docs.datadoghq.com/ja/account_management/saml/okta/
 [3]: https://app.datadoghq.com/account/settings#integrations/okta
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

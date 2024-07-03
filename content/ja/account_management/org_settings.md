@@ -1,12 +1,12 @@
 ---
-title: Organization Settings
 further_reading:
-    - link: "/account_management/api-app-keys/"
-      tag: "Documentation"
-      text: "API キーとアプリケーションキー"
-    - link: "/account_management/users/"
-      tag: "Documentation"
-      text: "ユーザー管理"
+- link: /account_management/api-app-keys/
+  tag: Documentation
+  text: API キーとアプリケーションキー
+- link: /account_management/users/
+  tag: Documentation
+  text: ユーザー管理
+title: Organization Settings
 ---
 ## 概要
 左ナビゲーションの下部にあるアカウントメニューで **Organization Settings** をクリックするか、Personal Settings ページの上部にあるドロップダウンで **Organization Settings** を選択すると、[管理者][1]はオーガニゼーションの設定セクションにアクセスできます。
@@ -148,18 +148,18 @@ The [**OAuth Apps**][15] page allows you to view or manage OAuth applications in
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/users/default_roles/
-[2]: /account_management/users/
-[3]: /account_management/teams/?s=login%20methods
-[4]: /account_management/org_settings/service_accounts
-[5]: /account_management/login_methods/
-[6]: /account_management/saml/
-[7]: /account_management/saml/mapping
-[8]: /account_management/api-app-keys/
-[9]: /account_management/rbac/
-[10]: /agent/remote_config/?tab=configurationyamlfile#how-it-works
-[11]: /account_management/api-app-keys/#client-tokens
-[12]: /service_management/events/guides/email/
-[13]: /synthetics/settings/?tab=specifyvalue#overview
-[14]: /account_management/safety_center
-[15]: /account_management/org_settings/oauth_apps
+[1]: /ja/account_management/users/default_roles/
+[2]: /ja/account_management/users/
+[3]: /ja/account_management/teams/?s=login%20methods
+[4]: /ja/account_management/org_settings/service_accounts
+[5]: /ja/account_management/login_methods/
+[6]: /ja/account_management/saml/
+[7]: /ja/account_management/saml/mapping
+[8]: /ja/account_management/api-app-keys/
+[9]: /ja/account_management/rbac/
+[10]: /ja/agent/remote_config/?tab=configurationyamlfile#how-it-works
+[11]: /ja/account_management/api-app-keys/#client-tokens
+[12]: /ja/service_management/events/guides/email/
+[13]: /ja/synthetics/settings/?tab=specifyvalue#overview
+[14]: /ja/account_management/safety_center
+[15]: /ja/account_management/org_settings/oauth_apps

@@ -1,6 +1,6 @@
 ---
-title: Dual Ship Logs for Splunk Heavy and Universal Forwarders (TCP)
 disable_toc: false
+title: Dual Ship Logs for Splunk Heavy and Universal Forwarders (TCP)
 ---
 
 ## 概要

@@ -1,67 +1,67 @@
 ---
-"app_id": "linkerd"
-"app_uuid": "971384a8-4745-4b31-89b5-b112507543e6"
-"assets":
-  "dashboards":
-    "Linkerd - Overview": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "linkerd.prometheus.health"
-      - "linkerd.openmetrics.health"
-      "metadata_path": "metadata.csv"
-      "prefix": "linkerd."
-    "process_signatures":
-    - "linkerd"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10019"
-    "source_type_name": "Linkerd"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "configuration & deployment"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "linkerd"
-"integration_id": "linkerd"
-"integration_title": "Linkerd"
-"integration_version": "4.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "linkerd"
-"public_title": "Linkerd"
-"short_description": "Monitor your services health with metrics from linkerd."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Monitor your services health with metrics from linkerd."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Linkerd"
+app_id: linkerd
+app_uuid: 971384a8-4745-4b31-89b5-b112507543e6
+assets:
+  dashboards:
+    Linkerd - Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - linkerd.prometheus.health
+      - linkerd.openmetrics.health
+      metadata_path: metadata.csv
+      prefix: linkerd.
+    process_signatures:
+    - linkerd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10019
+    source_type_name: Linkerd
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- configuration & deployment
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: linkerd
+integration_id: linkerd
+integration_title: Linkerd
+integration_version: 4.2.1
+is_public: true
+manifest_version: 2.0.0
+name: linkerd
+public_title: Linkerd
+short_description: Monitor your services health with metrics from linkerd.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor your services health with metrics from linkerd.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Linkerd
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -101,10 +101,10 @@ To configure this check for an Agent running on a host:
 
 2. [Restart the Agent][4].
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -143,9 +143,9 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 
 To increase the verbosity of the data plane logs, see [Modifying the Proxy Log Level][4].
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [4]: https://linkerd.io/2/tasks/modifying-proxy-log-level/
 {{% /tab %}}
 {{< /tabs >}}
@@ -188,11 +188,11 @@ Need help? Contact [Datadog support][9].
 
 
 [1]: https://linkerd.io
-[2]: https://docs.datadoghq.com/integrations/guide/versions-for-openmetrics-based-integrations
+[2]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/linkerd/metadata.csv
 [6]: https://twitter.github.io/finagle/guide/Metrics.html
 [7]: https://gist.githubusercontent.com/arbll/2f63a5375a4d6d5acface6ca8a51e2ab/raw/bc35ed4f0f4bac7e2643a6009f45f9068f4c1d12/gistfile1.txt
 [8]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/help/

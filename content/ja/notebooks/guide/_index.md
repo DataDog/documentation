@@ -1,8 +1,8 @@
 ---
-title: Notebooks Guides
 description: Index of Notebooks Guides
-private: true
 disable_toc: true
+private: true
+title: Notebooks Guides
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

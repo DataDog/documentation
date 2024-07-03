@@ -1,5 +1,5 @@
 ---
-title: "CloudFront Component"
+title: CloudFront Component
 ---
 ## 概要
 

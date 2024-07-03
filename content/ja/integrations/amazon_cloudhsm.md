@@ -1,19 +1,19 @@
 ---
 categories:
-    - cloud
-    - aws
-    - log collection
+- cloud
+- aws
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md
 description: Gather your HSM audit logs in your Datadog organization.
 has_logo: true
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md"]
+integration_id: amazon-cloudhsm
 integration_title: AWS CloudHSM
 is_public: true
-custom_kind: インテグレーション
 name: amazon_cloudhsm
 public_title: Datadog-AWS Cloudhsm Integration
 short_description: Gather your HSM audit logs in your Datadog organization.
-integration_id: "amazon-cloudhsm"
 ---
 
 ## Overview
@@ -47,7 +47,7 @@ For more information on collecting AWS Services logs, see [Send AWS Services Log
 
 Need help? Contact [Datadog Support][4].
 
-[1]: /logs/guide/forwarder/
+[1]: /ja/logs/guide/forwarder/
 [2]: https://app.datadoghq.com/logs
-[3]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[4]: /help/
+[3]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[4]: /ja/help/

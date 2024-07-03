@@ -1,68 +1,68 @@
 ---
-"app_id": "amixr"
-"app_uuid": "051b4bbe-d7cc-46bf-9a66-169ab7d5a4aa"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": amixr.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10103"
-    "source_type_name": Amixr
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Amixr
-  "sales_email": ildar@amixr.io
-  "support_email": ildar@amixr.io
-"categories":
+app_id: amixr
+app_uuid: 051b4bbe-d7cc-46bf-9a66-169ab7d5a4aa
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: amixr.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10103
+    source_type_name: Amixr
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Amixr
+  sales_email: ildar@amixr.io
+  support_email: ildar@amixr.io
+categories:
 - alerting
 - automation
 - collaboration
 - incidents
 - notifications
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "amixr"
-"integration_id": "amixr"
-"integration_title": "Amixr"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "amixr"
-"public_title": "Amixr"
-"short_description": "Developer-friendly Alert Management with a brilliant Slack integration"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: amixr
+integration_id: amixr
+integration_title: Amixr
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: amixr
+public_title: Amixr
+short_description: Developer-friendly Alert Management with a brilliant Slack integration
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Automation"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Notifications"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Developer-friendly Alert Management with a brilliant Slack integration
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Amixr
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Notifications
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Developer-friendly Alert Management with a brilliant Slack integration
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amixr
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -133,4 +133,3 @@ Need help? Contact [Amixr support][2].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/amixr/images/amixr-interface.png
 [2]: https://amixr.io/support/
-

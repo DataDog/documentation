@@ -1,6 +1,8 @@
 ---
-title: Basic Agent Usage for Oracle Linux
-platform: Oracle
+algolia:
+  tags:
+  - アンインストール
+  - アンインストール
 further_reading:
 - link: /logs/
   tag: Documentation
@@ -11,14 +13,14 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Collect your traces
-- link: "/agent/basic_agent_usage/#agent-architecture"
+- link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Find out more about the Agent's architecture
-- link: "/agent/configuration/network#configure-ports"
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: Configure inbound ports
-algolia:
-  tags: [アンインストール, アンインストール]
+platform: Oracle
+title: Basic Agent Usage for Oracle Linux
 ---
 
 ## 概要
@@ -97,7 +99,7 @@ Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /integrations/
+[1]: /ja/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -109,7 +111,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /integrations/
+[1]: /ja/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -179,5 +181,5 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=oracle
-[2]: /agent/troubleshooting/
-[3]: /developers/guide/custom-python-package/
+[2]: /ja/agent/troubleshooting/
+[3]: /ja/developers/guide/custom-python-package/

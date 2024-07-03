@@ -1,7 +1,7 @@
 ---
-title: Setting up Oracle
 description: Setting up Database Monitoring on an Oracle database
 disable_sidebar: true
+title: Setting up Oracle
 ---
 
 ## Supported Oracle versions
@@ -26,6 +26,6 @@ For setup instructions, select your hosting type:
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
-[10]: /database_monitoring/architecture/
-[15]: /agent/versions/upgrade_between_agent_minor_versions/?tab=linux
-[20]: /agent/versions/upgrade_to_agent_v7/?tab=linux
+[10]: /ja/database_monitoring/architecture/
+[15]: /ja/agent/versions/upgrade_between_agent_minor_versions/?tab=linux
+[20]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux

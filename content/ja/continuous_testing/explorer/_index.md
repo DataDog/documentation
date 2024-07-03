@@ -1,16 +1,14 @@
 ---
-title: Synthetic Monitoring & Testing Results Explorer
-kind: documentation
+aliases:
+- /ja/synthetics/cicd_testing/ci_results_explorer
+- /ja/synthetics/ci_results_explorer
+- /ja/synthetics/explorer
 description: Examine CI jobs executing Continuous Testing tests.
-aliases: 
-  - /synthetics/cicd_testing/ci_results_explorer
-  - /synthetics/ci_results_explorer
-  - /synthetics/explorer
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
+- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
   tag: Blog
   text: Incorporate Datadog Synthetic tests into your CI/CD pipeline
-- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: Learning Center
   text: Learn how to run Synthetic tests in a CI/CD pipeline
 - link: /continuous_testing/explorer/search/
@@ -19,6 +17,8 @@ further_reading:
 - link: /continuous_testing/explorer/search_runs/
   tag: Documentation
   text: Learn how to search through your test runs
+kind: documentation
+title: Synthetic Monitoring & Testing Results Explorer
 ---
 
 ## Overview
@@ -86,11 +86,11 @@ Export your view as a [saved view][9] in the Synthetic Monitoring & Testing Resu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer/
-[2]: /continuous_testing/cicd_integrations
+[2]: /ja/continuous_testing/cicd_integrations
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
-[4]: /continuous_testing/explorer/search/
-[5]: /continuous_testing/explorer/search_syntax/
-[6]: /continuous_testing/explorer/search_runs/
-[7]: /synthetics/
-[8]: /continuous_testing/
-[9]: /continuous_testing/explorer/saved_views/
+[4]: /ja/continuous_testing/explorer/search/
+[5]: /ja/continuous_testing/explorer/search_syntax/
+[6]: /ja/continuous_testing/explorer/search_runs/
+[7]: /ja/synthetics/
+[8]: /ja/continuous_testing/
+[9]: /ja/continuous_testing/explorer/saved_views/

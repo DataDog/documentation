@@ -1,20 +1,21 @@
 ---
-title: Ruby Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your Ruby application with OpenTelemetry API to send traces to Datadog.'
-code_lang: otel
-type: multi-code-lang
-code_lang_weight: 2
 aliases:
-- /tracing/trace_collection/otel_instrumentation/ruby/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/ruby
+- /ja/tracing/trace_collection/otel_instrumentation/ruby/
+- /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/ruby
+code_lang: otel
+code_lang_weight: 2
+description: Instrument your Ruby application with OpenTelemetry API to send traces
+  to Datadog.
 further_reading:
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Ruby Custom Instrumentation using OpenTelemetry API
+type: multi-code-lang
 ---
 
 {{% otel-custom-instrumentation %}}
@@ -79,9 +80,9 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/ruby/manual/
-[6]: /tracing/trace_collection/dd_libraries/ruby/#additional-configuration
-[7]: /tracing/trace_collection/dd_libraries/ruby#integration-instrumentation
+[6]: /ja/tracing/trace_collection/dd_libraries/ruby/#additional-configuration
+[7]: /ja/tracing/trace_collection/dd_libraries/ruby#integration-instrumentation
 [8]: https://opentelemetry.io/docs/instrumentation/ruby/automatic/
-[9]: /tracing/trace_collection/trace_context_propagation/ruby/
-[10]: /tracing/trace_collection/dd_libraries/ruby/#custom-logging
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
+[9]: /ja/tracing/trace_collection/trace_context_propagation/ruby/
+[10]: /ja/tracing/trace_collection/dd_libraries/ruby/#custom-logging
+[12]: /ja/opentelemetry/guide/otel_api_tracing_interoperability/

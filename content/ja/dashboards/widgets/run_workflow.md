@@ -1,11 +1,11 @@
 ---
-title: Run Workflow Widget
-widget_type: run_workflow
 disable_toc: false
 further_reading:
 - link: /service_management/workflows/
   tag: Documentation
   text: Workflow Automation
+title: Run Workflow Widget
+widget_type: run_workflow
 ---
 
 ## 概要
@@ -35,5 +35,5 @@ Run Workflow ウィジェットを使用すると、ダッシュボードから�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dashboards/
-[2]: /dashboards/graphing_json/widget_json/
+[1]: /ja/api/latest/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

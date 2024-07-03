@@ -1,17 +1,16 @@
 ---
-title: Template Variables
 aliases:
-    - /graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
-    - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
-    - /graphing/dashboards/template_variables/
+- /ja/graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
+- /ja/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
+- /ja/graphing/dashboards/template_variables/
 further_reading:
-- link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
   tag: Blog
   text: Use associated template variables to refine your dashboards
-- link: "https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/"
+- link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
   tag: Blog
   text: Speed up dashboard workflows with dynamic template variable syntax
-- link: "https://www.datadoghq.com/blog/template-variable-available-values/"
+- link: https://www.datadoghq.com/blog/template-variable-available-values/
   tag: Blog
   text: Filter dashboards faster with template variable available values
 - link: /dashboards/
@@ -23,6 +22,7 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentation
   text: Discover Widgets for your Dashboard
+title: Template Variables
 ---
 
 ## 概要
@@ -166,6 +166,6 @@ $<TEMPLATE_VARIABLE_NAME>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/#define-tags
-[2]: /logs/explorer/facets/
-[3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
+[1]: /ja/getting_started/tagging/#define-tags
+[2]: /ja/logs/explorer/facets/
+[3]: /ja/real_user_monitoring/explorer/?tab=facets#setup-facets-measures

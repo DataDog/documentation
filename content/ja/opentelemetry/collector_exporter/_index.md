@@ -1,23 +1,24 @@
 ---
-title: OpenTelemetry Collector and Datadog Exporter
 aliases:
-- /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
-- /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
-- /opentelemetry/otel_collector_datadog_exporter/
-description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
+- /ja/tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
+- /ja/tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
+- /ja/opentelemetry/otel_collector_datadog_exporter/
+description: Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter
 further_reading:
-- link: "https://opentelemetry.io/docs/collector/"
+- link: https://opentelemetry.io/docs/collector/
   tag: 外部サイト
   text: Collector documentation
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: Blog
-  text: Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter
-- link: "https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/"
+  text: Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using
+    Datadog Exporter
+- link: https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/
   tag: Blog
   text: Use HiveMQ and OpenTelemetry to monitor IoT applications in Datadog
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: Documentation
   text: OTLP Metrics Types
+title: OpenTelemetry Collector and Datadog Exporter
 ---
 
 ## 概要
@@ -52,7 +53,7 @@ Datadog provides out-of-the-box dashboards that you can copy and customize. To u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[2]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
 [9]: https://app.datadoghq.com/integrations/otel

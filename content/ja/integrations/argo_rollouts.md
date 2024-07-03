@@ -1,76 +1,76 @@
 ---
-"app_id": "argo-rollouts"
-"app_uuid": "28d531ac-954c-4c5a-8769-589589f793e0"
-"assets":
-  "dashboards":
-    "Argo Rollouts Overview": assets/dashboards/argo_rollouts_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": argo_rollouts.go.threads
-      "metadata_path": metadata.csv
-      "prefix": argo_rollouts.
-    "process_signatures":
+app_id: argo-rollouts
+app_uuid: 28d531ac-954c-4c5a-8769-589589f793e0
+assets:
+  dashboards:
+    Argo Rollouts Overview: assets/dashboards/argo_rollouts_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: argo_rollouts.go.threads
+      metadata_path: metadata.csv
+      prefix: argo_rollouts.
+    process_signatures:
     - rollouts-controller
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "8465752"
-    "source_type_name": Argo Rollouts
-  "monitors":
-    "Rollout Phase": assets/monitors/rollout_phase.json
-  "saved_views":
-    "Argo Rollouts Error Logs Overview": assets/saved_views/error_logs_overview.json
-    "Argo Rollouts Logs Overview": assets/saved_views/logs_overview.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 8465752
+    source_type_name: Argo Rollouts
+  monitors:
+    Rollout Phase: assets/monitors/rollout_phase.json
+  saved_views:
+    Argo Rollouts Error Logs Overview: assets/saved_views/error_logs_overview.json
+    Argo Rollouts Logs Overview: assets/saved_views/logs_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - モニター
 - kubernetes
 - developer tools
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/argo_rollouts/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "argo_rollouts"
-"integration_id": "argo-rollouts"
-"integration_title": "Argo Rollouts"
-"integration_version": "1.0.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "argo_rollouts"
-"public_title": "Argo Rollouts"
-"short_description": "Monitor the health and performance of Argo Rollouts"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/argo_rollouts/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: argo_rollouts
+integration_id: argo-rollouts
+integration_title: Argo Rollouts
+integration_version: 1.0.1
+is_public: true
+manifest_version: 2.0.0
+name: argo_rollouts
+public_title: Argo Rollouts
+short_description: Monitor the health and performance of Argo Rollouts
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Metrics"
-  - "Category::Kubernetes"
-  - "Category::Developer Tools"
-  - "Category::Log Collection"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of Argo Rollouts
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Argo Rollouts
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Metrics
+  - Category::Kubernetes
+  - Category::Developer Tools
+  - Category::Log Collection
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor the health and performance of Argo Rollouts
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Argo Rollouts
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -160,13 +160,12 @@ The Argo Rollouts integration does not include any events.
 
 
 [1]: https://argoproj.github.io/rollouts/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/integrations/openmetrics/
+[4]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [5]: https://github.com/DataDog/integrations-core/blob/master/argo_rollouts/datadog_checks/argo_rollouts/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/argo_rollouts/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/argo_rollouts/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

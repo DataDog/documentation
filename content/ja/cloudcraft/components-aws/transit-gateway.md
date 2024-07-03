@@ -1,5 +1,5 @@
 ---
-title: "Transit Gateway Component"
+title: Transit Gateway Component
 ---
 ## 概要
 

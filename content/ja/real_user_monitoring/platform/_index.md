@@ -1,11 +1,11 @@
 ---
-title: Platform
-kind: documentation
 description: Learn how to leverage Datadog platform capabilities to maximize RUM capabilities.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Learn about the RUM Explorer
+kind: documentation
+title: Platform
 ---
 
 ## Overview
@@ -36,7 +36,7 @@ Generate [custom metrics][3] to track application KPIs over an extended period o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/platform/dashboards
-[2]: /monitors/types/real_user_monitoring/
-[3]: /real_user_monitoring/platform/generate_metrics
-[4]: /real_user_monitoring/platform/connect_rum_and_traces
+[1]: /ja/real_user_monitoring/platform/dashboards
+[2]: /ja/monitors/types/real_user_monitoring/
+[3]: /ja/real_user_monitoring/platform/generate_metrics
+[4]: /ja/real_user_monitoring/platform/connect_rum_and_traces

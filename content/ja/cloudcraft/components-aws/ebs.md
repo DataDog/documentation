@@ -1,5 +1,5 @@
 ---
-title: "EBS Component"
+title: EBS Component
 ---
 ## 概要
 

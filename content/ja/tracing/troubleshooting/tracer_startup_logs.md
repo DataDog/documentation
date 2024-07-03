@@ -1,10 +1,10 @@
 ---
-title: Tracer Startup Logs
-kind: Documentation
 further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: Documentation
   text: Troubleshooting APM Connection Errors
+kind: Documentation
+title: Tracer Startup Logs
 ---
 ## Startup logs
 
@@ -32,7 +32,7 @@ If you do not see logs at all, ensure that your application logs are not silence
 The Java tracer does not output Diagnostics logs. For this check, run the tracer in [debug mode][1].
 
 
-[1]: /tracing/troubleshooting/tracer_debug_logs/
+[1]: /ja/tracing/troubleshooting/tracer_debug_logs/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -85,7 +85,7 @@ DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 ```
 
-[1]: /tracing/trace_collection/library_injection/?tab=kubernetes
+[1]: /ja/tracing/trace_collection/library_injection/?tab=kubernetes
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -150,7 +150,7 @@ Access the startup logs as a JSON string at runtime with `\DDTrace\startup_logs(
 echo \DDTrace\startup_logs() . PHP_EOL;
 ```
 
-[1]: /tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
+[1]: /ja/tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -222,7 +222,7 @@ The Python tracer prints a diagnostic line when the Agent cannot be reached.
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Connection refused
 ```
-[1]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=python#enable-debug-mode
+[1]: /ja/tracing/troubleshooting/tracer_debug_logs/?code-lang=python#enable-debug-mode
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
@@ -285,11 +285,11 @@ For each language, you can disable startup logs by setting the environment varia
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_ecs/?tab=java#trace-collection
-[2]: /agent/kubernetes/?tab=helm
-[3]: /agent/docker/apm/?tab=java
-[4]: /tracing/send_traces/
-[5]: /help/
-[6]: /tracing/troubleshooting/connection_errors/
-[7]: /tracing/compatibility_requirements/
-[8]: /tracing/troubleshooting/tracer_debug_logs/
+[1]: /ja/integrations/amazon_ecs/?tab=java#trace-collection
+[2]: /ja/agent/kubernetes/?tab=helm
+[3]: /ja/agent/docker/apm/?tab=java
+[4]: /ja/tracing/send_traces/
+[5]: /ja/help/
+[6]: /ja/tracing/troubleshooting/connection_errors/
+[7]: /ja/tracing/compatibility_requirements/
+[8]: /ja/tracing/troubleshooting/tracer_debug_logs/

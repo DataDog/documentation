@@ -1,16 +1,16 @@
 ---
-title: Continuous Profiler Guides
 disable_toc: true
 further_reading:
-- link: "https://www.datadoghq.com/blog/request-latency-profiling/"
+- link: https://www.datadoghq.com/blog/request-latency-profiling/
   tag: Blog
   text: Understanding Request Latency with Profiling
-- link: "https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/"
+- link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: ブログ
   text: How we optimized our Akka application using Continuous Profiler
-- link: "https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/"
+- link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
   tag: Blog
   text: Optimize your .NET application performance with the Continuous Profiler
+title: Continuous Profiler Guides
 ---
 
 

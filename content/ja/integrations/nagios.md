@@ -1,65 +1,65 @@
 ---
-"app_id": "nagios"
-"app_uuid": "7e61b923-1847-4c43-85cf-5f4c49ff4806"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": "nagios.host.rta"
-      "metadata_path": "metadata.csv"
-      "prefix": "nagios."
-    "process_signatures":
-    - "nagios"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "3"
-    "source_type_name": "Nagios"
-  "saved_views":
-    "nagios_processes": "assets/saved_views/nagios_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/nagios/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "nagios"
-"integration_id": "nagios"
-"integration_title": "Nagios"
-"integration_version": "1.13.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "nagios"
-"public_title": "Nagios"
-"short_description": "Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Category::Notifications"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Nagios"
+app_id: nagios
+app_uuid: 7e61b923-1847-4c43-85cf-5f4c49ff4806
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: nagios.host.rta
+      metadata_path: metadata.csv
+      prefix: nagios.
+    process_signatures:
+    - nagios
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 3
+    source_type_name: Nagios
+  saved_views:
+    nagios_processes: assets/saved_views/nagios_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- notifications
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: nagios
+integration_id: nagios
+integration_title: Nagios
+integration_version: 1.13.0
+is_public: true
+manifest_version: 2.0.0
+name: nagios
+public_title: Nagios
+short_description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nagios
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -101,11 +101,11 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 **注**: Nagios チェックでは[カスタムメトリクス][4]を送信することができますが、これはお客様の[課金][5]に影響します。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/developers/metrics/custom_metrics/
-[5]: https://docs.datadoghq.com/account_management/billing/custom_metrics/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -121,7 +121,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 **注**: コンテナ化された Agent から `/etc/nagios3/nagios.cfg` ファイルにアクセスして Datadog-Nagios インテグレーションを有効化できます。
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -184,8 +184,8 @@ Nagios チェックには、サービスのチェック機能は含まれませ�
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog/nagios-monitoring

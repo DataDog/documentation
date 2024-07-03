@@ -1,92 +1,92 @@
 ---
-"app_id": "buoyant-cloud"
-"app_uuid": "dee4b74f-34b7-457e-98b1-7bb8306f2c18"
-"assets":
-  "dashboards":
-    "Buoyant Cloud": assets/dashboards/buoyant_cloud_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check":
+app_id: buoyant-cloud
+app_uuid: dee4b74f-34b7-457e-98b1-7bb8306f2c18
+assets:
+  dashboards:
+    Buoyant Cloud: assets/dashboards/buoyant_cloud_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check:
       - buoyant_cloud.cp_workload.inbound_response.rate1m
-      "metadata_path": metadata.csv
-      "prefix": buoyant_cloud.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10320"
-    "source_type_name": Buoyant Cloud
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://buoyant.io/cloud"
-  "name": Buoyant
-  "sales_email": cloud@buoyant.io
-  "support_email": cloud@buoyant.io
-"categories":
+      metadata_path: metadata.csv
+      prefix: buoyant_cloud.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10320
+    source_type_name: Buoyant Cloud
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://buoyant.io/cloud
+  name: Buoyant
+  sales_email: cloud@buoyant.io
+  support_email: cloud@buoyant.io
+categories:
 - cloud
 - network
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/buoyant_cloud/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "buoyant_cloud"
-"integration_id": "buoyant-cloud"
-"integration_title": "Buoyant Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "buoyant_cloud"
-"public_title": "Buoyant Cloud"
-"short_description": "Buoyant Cloud provides fully managed Linkerd, right on your cluster."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/buoyant_cloud/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: buoyant_cloud
+integration_id: buoyant-cloud
+integration_title: Buoyant Cloud
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: buoyant_cloud
+public_title: Buoyant Cloud
+short_description: Buoyant Cloud provides fully managed Linkerd, right on your cluster.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Network"
-  - "Category::Security"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Buoyant Cloud provides fully managed Linkerd, right on your cluster.
-  "media":
-  - "caption": "Buoyant Cloud: Datadog dashboard"
-    "image_url": images/bcloud_datadog_dashboard.png
-    "media_type": image
-  - "caption": "Buoyant Cloud: Overview page"
-    "image_url": images/bcloud_01.png
-    "media_type": image
-  - "caption": "Buoyant Cloud: Linkerd health view"
-    "image_url": images/bcloud_02.png
-    "media_type": image
-  - "caption": "Buoyant Cloud: Managed Linkerd event"
-    "image_url": images/bcloud_03.png
-    "media_type": image
-  - "caption": "Buoyant Cloud: Traffic page"
-    "image_url": images/bcloud_04.png
-    "media_type": image
-  - "caption": "Buoyant Cloud: Topology page"
-    "image_url": images/bcloud_05.png
-    "media_type": image
-  - "caption": "Buoyant Cloud: Metrics page"
-    "image_url": images/bcloud_06.png
-    "media_type": image
-  - "caption": "Buoyant Cloud: Workload Detail page"
-    "image_url": images/bcloud_07.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Buoyant Cloud
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Network
+  - Category::Security
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Buoyant Cloud provides fully managed Linkerd, right on your cluster.
+  media:
+  - caption: 'Buoyant Cloud: Datadog dashboard'
+    image_url: images/bcloud_datadog_dashboard.png
+    media_type: image
+  - caption: 'Buoyant Cloud: Overview page'
+    image_url: images/bcloud_01.png
+    media_type: image
+  - caption: 'Buoyant Cloud: Linkerd health view'
+    image_url: images/bcloud_02.png
+    media_type: image
+  - caption: 'Buoyant Cloud: Managed Linkerd event'
+    image_url: images/bcloud_03.png
+    media_type: image
+  - caption: 'Buoyant Cloud: Traffic page'
+    image_url: images/bcloud_04.png
+    media_type: image
+  - caption: 'Buoyant Cloud: Topology page'
+    image_url: images/bcloud_05.png
+    media_type: image
+  - caption: 'Buoyant Cloud: Metrics page'
+    image_url: images/bcloud_06.png
+    media_type: image
+  - caption: 'Buoyant Cloud: Workload Detail page'
+    image_url: images/bcloud_07.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Buoyant Cloud
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -155,4 +155,3 @@ Need help? Get support from the following sources:
 [8]: https://docs.buoyant.cloud
 [9]: https://slack.linkerd.io
 [10]: mailto:cloud@buoyant.io
-

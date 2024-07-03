@@ -1,28 +1,28 @@
 ---
-"aliases": []
-"categories":
+aliases: []
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Arc metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_arc/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/azure-arc-integration/"
-  "tag": Blog
-  "text": Monitor your Azure Arc hybrid infrastructure with Datadog
-"git_integration_title": "azure_arc"
-"has_logo": true
-"integration_id": "azure-arc"
-"integration_title": "Microsoft Azure Arc"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_arc"
-"public_title": "Datadog-Microsoft Azure Arc Integration"
-"short_description": "Track key Azure Arc metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Arc metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_arc/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/azure-arc-integration/
+  tag: Blog
+  text: Monitor your Azure Arc hybrid infrastructure with Datadog
+git_integration_title: azure_arc
+has_logo: true
+integration_id: azure-arc
+integration_title: Microsoft Azure Arc
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_arc
+public_title: Datadog-Microsoft Azure Arc Integration
+short_description: Track key Azure Arc metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -68,8 +68,7 @@ Need help? Contact [Datadog support][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/guide/powershell-command-to-install-azure-datadog-extension/#install-on-azure-arc
-[2]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/guide/powershell-command-to-install-azure-datadog-extension/#install-on-azure-arc
+[2]: https://docs.datadoghq.com/ja/integrations/azure/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_arc/azure_arc_metadata.csv
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

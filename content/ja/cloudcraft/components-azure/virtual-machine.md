@@ -1,5 +1,5 @@
 ---
-title: "Virtual machine Component"
+title: Virtual machine Component
 ---
 
 ## 概要

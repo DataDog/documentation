@@ -1,6 +1,6 @@
 ---
-title: function
 core_product:
-  - serverless monitoring
+- serverless monitoring
+title: function
 ---
 In serverless computing, a function is a programmatic function hosted on managed infrastructure.

@@ -1,6 +1,6 @@
 ---
-title: OpenTelemetry Guides and Resources
 private: true
+title: OpenTelemetry Guides and Resources
 ---
 
 ## ガイド

@@ -1,11 +1,12 @@
 ---
-title: Generic CI Providers
-description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
-is_beta: true
+description: Learn about Datadog Static Analysis to scan code for quality issues and
+  security vulnerabilities before your code reaches production.
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
   text: Monitor all your CI pipelines with Datadog
+is_beta: true
+title: Generic CI Providers
 ---
 
 {{% site-region region="gov" %}}
@@ -71,6 +72,6 @@ datadog-ci sbom upload --service "my-app" --env "ci" /tmp/sbom.json
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/api-app-keys/#api-keys
-[2]: /account_management/api-app-keys/#application-keys
-[3]: /getting_started/site/
+[1]: /ja/account_management/api-app-keys/#api-keys
+[2]: /ja/account_management/api-app-keys/#application-keys
+[3]: /ja/getting_started/site/

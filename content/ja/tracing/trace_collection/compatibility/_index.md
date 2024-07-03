@@ -1,16 +1,16 @@
 ---
-title: Compatibility Requirements
-type: multi-code-lang
-description:
+aliases:
+- /ja/tracing/compatibility
+- /ja/tracing/compatibility_requirements
+- /ja/tracing/setup_overview/compatibility_requirements/undefined
+- /ja/tracing/setup_overview/compatibility_requirements/
+description: null
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
   text: Add the tracing library to your application
-aliases:
-  - /tracing/compatibility
-  - /tracing/compatibility_requirements
-  - /tracing/setup_overview/compatibility_requirements/undefined
-  - /tracing/setup_overview/compatibility_requirements/
+title: Compatibility Requirements
+type: multi-code-lang
 ---
 
 Datadog APM の互換性要件とサポートされているインテグレーションを確認するには、言語を選択してください。

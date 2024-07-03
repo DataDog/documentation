@@ -1,9 +1,9 @@
 ---
-title: Data Jobs Monitoring for Spark on Kubernetes
 further_reading:
-    - link: /data_jobs
-      tag: Documentation
-      text: Data Jobs Monitoring
+- link: /data_jobs
+  tag: Documentation
+  text: Data Jobs Monitoring
+title: Data Jobs Monitoring for Spark on Kubernetes
 ---
 
 [Data Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
@@ -83,7 +83,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: https://kubernetes.io/docs/concepts/configuration/secret/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /getting_started/site
+[5]: /ja/getting_started/site
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -130,7 +130,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 [1]: https://kubernetes.io/docs/concepts/configuration/secret/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: /getting_started/site
+[4]: /ja/getting_started/site
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -213,9 +213,9 @@ In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your da
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/kubernetes/installation/?tab=operator
-[2]: /containers/cluster_agent/admission_controller/?tab=operator
-[3]: /containers/datadog_operator
+[1]: /ja/containers/kubernetes/installation/?tab=operator
+[2]: /ja/containers/cluster_agent/admission_controller/?tab=operator
+[3]: /ja/containers/datadog_operator
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
-[6]: /data_jobs
+[6]: /ja/data_jobs

@@ -1,25 +1,26 @@
 ---
-"categories":
-- "collaboration"
-- "developer tools"
-- "issue tracking"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "このインテグレーションにより、Datadog でトリガーされたアラートからチケットを作成し、新しい情報が発生すると既存のチケットを更新することができます。さらに、Jira チケットの作成を Datadog 内のイベントとして表示し、すべてのメトリクスと重ね合わせることができます。"
-"doc_link": "https://docs.datadoghq.com/integrations/jira/"
-"draft": false
-"git_integration_title": "jira"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Jira"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "jira"
-"public_title": "Datadog-Jira Integration"
-"short_description": "Have your Datadog alerts auto-generate and later update Jira tickets."
-"version": "1.0"
+categories:
+- collaboration
+- developer tools
+- issue tracking
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: このインテグレーションにより、Datadog でトリガーされたアラートからチケットを作成し、新しい情報が発生すると既存のチケットを更新することができます。さらに、Jira
+  チケットの作成を Datadog 内のイベントとして表示し、すべてのメトリクスと重ね合わせることができます。
+doc_link: https://docs.datadoghq.com/integrations/jira/
+draft: false
+git_integration_title: jira
+has_logo: true
+integration_id: ''
+integration_title: Jira
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: jira
+public_title: Datadog-Jira Integration
+short_description: Have your Datadog alerts auto-generate and later update Jira tickets.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -139,9 +140,8 @@ Jira インテグレーションには、サービスのチェック機能は含
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://app.datadoghq.com/integrations/jira
-[2]: https://docs.datadoghq.com/api/latest/ip-ranges/
-[3]: https://docs.datadoghq.com/service_management/case_management/settings/#jira
+[2]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
+[3]: https://docs.datadoghq.com/ja/service_management/case_management/settings/#jira
 [4]: https://app.datadoghq.com/account/settings#integrations/jira
-[5]: https://docs.datadoghq.com/integrations/webhooks/
-[6]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/integrations/webhooks/
+[6]: https://docs.datadoghq.com/ja/help/

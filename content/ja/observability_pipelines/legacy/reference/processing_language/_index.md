@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) Datadog Processing Language / Vector Remap Language
 aliases:
-  - /observability_pipelines/reference/processing_language/
+- /ja/observability_pipelines/reference/processing_language/
+title: (LEGACY) Datadog Processing Language / Vector Remap Language
 ---
 
 {{< site-region region="gov" >}}
@@ -24,16 +24,16 @@ Remap transforms act on a single event and can be used to transform them or spec
 - [Parse][11] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
 - Manipulate event [metadata][12] and [paths][13].
 
-[1]: /observability_pipelines/legacy/reference/processing_language/functions/
-[2]: /observability_pipelines/legacy/reference/processing_language/functions/#array
-[3]: /observability_pipelines/legacy/reference/processing_language/functions/#string
-[4]: /observability_pipelines/legacy/reference/processing_language/functions/#codec
-[5]: /observability_pipelines/legacy/reference/processing_language/functions/#encrypt
-[6]: /observability_pipelines/legacy/reference/processing_language/functions/#decrypt
-[7]: /observability_pipelines/legacy/reference/processing_language/functions/#coerce
-[8]: /observability_pipelines/legacy/reference/processing_language/functions/#convert
-[9]: /observability_pipelines/legacy/reference/processing_language/functions/#enrichment
-[10]: /observability_pipelines/legacy/reference/processing_language/functions/#ip
-[11]: /observability_pipelines/legacy/reference/processing_language/functions/#parse
-[12]: /observability_pipelines/legacy/reference/processing_language/functions/#event
-[13]: /observability_pipelines/legacy/reference/processing_language/functions/#path
+[1]: /ja/observability_pipelines/legacy/reference/processing_language/functions/
+[2]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#array
+[3]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#string
+[4]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#codec
+[5]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#encrypt
+[6]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#decrypt
+[7]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#coerce
+[8]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#convert
+[9]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#enrichment
+[10]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#ip
+[11]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#parse
+[12]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#event
+[13]: /ja/observability_pipelines/legacy/reference/processing_language/functions/#path

@@ -1,70 +1,72 @@
 ---
-"app_id": "langchain"
-"app_uuid": "7993851f-d36b-40f3-8425-92080f3b9d61"
-"assets":
-  "dashboards":
-    "LangChain Overview Dashboard": assets/dashboards/overview_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": langchain.request.duration
-      "metadata_path": metadata.csv
-      "prefix": langchain.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10372"
-    "source_type_name": LangChain
-  "monitors":
-    "Error Rate": assets/monitors/error_rate.json
-    "Request Latency": assets/monitors/request_duration.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: langchain
+app_uuid: 7993851f-d36b-40f3-8425-92080f3b9d61
+assets:
+  dashboards:
+    LangChain Overview Dashboard: assets/dashboards/overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: langchain.request.duration
+      metadata_path: metadata.csv
+      prefix: langchain.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10372
+    source_type_name: LangChain
+  monitors:
+    Error Rate: assets/monitors/error_rate.json
+    Request Latency: assets/monitors/request_duration.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - ai/ml
 - developer tools
 - cost management
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/langchain/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "langchain"
-"integration_id": "langchain"
-"integration_title": "LangChain"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "langchain"
-"public_title": "LangChain"
-"short_description": "Optimize LangChain usage: prompt sampling and performance and cost metrics."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/langchain/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: langchain
+integration_id: langchain
+integration_title: LangChain
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: langchain
+public_title: LangChain
+short_description: 'Optimize LangChain usage: prompt sampling and performance and
+  cost metrics.'
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AI/ML"
-  - "Category::Developer Tools"
-  - "Category::Cost Management"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Submitted Data Type::Traces"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Optimize LangChain usage: prompt sampling and performance and cost metrics."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": LangChain
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AI/ML
+  - Category::Developer Tools
+  - Category::Cost Management
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Submitted Data Type::Traces
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: 'Optimize LangChain usage: prompt sampling and performance and cost
+    metrics.'
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: LangChain
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -180,5 +182,4 @@ Need help? Contact [Datadog support][5].
 [2]: https://ddtrace.readthedocs.io/en/stable/installation_quickstart.html
 [3]: https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain
 [4]: https://github.com/DataDog/integrations-core/blob/master/langchain/metadata.csv
-[5]: https://docs.datadoghq.com/help/
-
+[5]: https://docs.datadoghq.com/ja/help/

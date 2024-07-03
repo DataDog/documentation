@@ -1,74 +1,74 @@
 ---
-"app_id": "scalr"
-"app_uuid": "d74ce5c8-4e5a-485a-be79-ff55f8205c9d"
-"assets":
-  "dashboards":
-    "Scalr Overview Dashboard": assets/dashboards/scalr_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": scalr.runs.count
-      "metadata_path": metadata.csv
-      "prefix": scalr.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10312"
-    "source_type_name": Scalr (Community Version)
-"author":
-  "homepage": "https://scalr.com"
-  "name": Scalr
-  "sales_email": sales@scalr.com
-  "support_email": support@scalr.com
-"categories":
+app_id: scalr
+app_uuid: d74ce5c8-4e5a-485a-be79-ff55f8205c9d
+assets:
+  dashboards:
+    Scalr Overview Dashboard: assets/dashboards/scalr_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: scalr.runs.count
+      metadata_path: metadata.csv
+      prefix: scalr.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10312
+    source_type_name: Scalr (Community Version)
+author:
+  homepage: https://scalr.com
+  name: Scalr
+  sales_email: sales@scalr.com
+  support_email: support@scalr.com
+categories:
 - automation
 - configuration & deployment
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "scalr"
-"integration_id": "scalr"
-"integration_title": "Scalr"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "scalr"
-"public_title": "Scalr"
-"short_description": "Scalr is a Terraform Automation and COllaboration (TACO) product"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: scalr
+integration_id: scalr
+integration_title: Scalr
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: scalr
+public_title: Scalr
+short_description: Scalr is a Terraform Automation and COllaboration (TACO) product
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Configuration & Deployment"
-  - "Category::Orchestration"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Scalr is a Terraform Automation and COllaboration (TACO) product
-  "media":
-  - "caption": Scalr dashboard.
-    "image_url": images/scalr_dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": documentation
-    "url": "https://docs.scalr.com"
-  - "resource_type": documentation
-    "url": "https://docs.scalr.com/en/latest/integrations.html#datadog"
-  "support": "README.md#Support"
-  "title": Scalr
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Configuration & Deployment
+  - Category::Orchestration
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Scalr is a Terraform Automation and COllaboration (TACO) product
+  media:
+  - caption: Scalr dashboard.
+    image_url: images/scalr_dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.scalr.com
+  - resource_type: documentation
+    url: https://docs.scalr.com/en/latest/integrations.html#datadog
+  support: README.md#Support
+  title: Scalr
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -126,19 +126,18 @@ Scalr は、実行結果をイベントとして[イベントエクスプロー�
 
 
 [1]: https://docs.scalr.com/en/latest/integrations.html
-[2]: https://docs.datadoghq.com/events/
+[2]: https://docs.datadoghq.com/ja/events/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[5]: https://docs.datadoghq.com/getting_started/integrations/
-[6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-extras/blob/master/scalr/datadog_checks/scalr/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [10]: https://github.com/DataDog/integrations-extras/blob/master/scalr/metadata.csv
 [11]: https://github.com/DataDog/integrations-extras/blob/master/scalr/assets/service_checks.json
-[12]: https://docs.datadoghq.com/events/explorer/
-[13]: https://docs.datadoghq.com/help/
+[12]: https://docs.datadoghq.com/ja/events/explorer/
+[13]: https://docs.datadoghq.com/ja/help/
 [14]: https://scalr-labs.atlassian.net/servicedesk/customer/portal/31
 [15]: https://docs.scalr.com
 [16]: https://docs.scalr.com/en/latest/integrations.html#datadog
-

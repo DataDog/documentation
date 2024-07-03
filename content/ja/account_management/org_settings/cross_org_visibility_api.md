@@ -1,7 +1,7 @@
 ---
-title: Cross-Organization Connections API
-private: true
 is_beta: true
+private: true
+title: Cross-Organization Connections API
 ---
 
 {{< callout url="#" header="false" btn_hidden="true">}}
@@ -69,6 +69,6 @@ Deletes a connection. Perform this operation either from the source organization
 - The organization does not participate as a source or a destination to the connection
 - The connection does not exist
 
-[1]: /account_management/org_settings/cross_org_visibility
-[2]: /account_management/rbac/permissions/#access-management
-[3]: /api/latest/organizations/#list-your-managed-organizations
+[1]: /ja/account_management/org_settings/cross_org_visibility
+[2]: /ja/account_management/rbac/permissions/#access-management
+[3]: /ja/api/latest/organizations/#list-your-managed-organizations

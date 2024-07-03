@@ -1,20 +1,20 @@
 ---
-title: Generate Metrics from Spans
-kind: documentation
-description: 'Generate custom metrics from ingested spans.'
 aliases:
-- /tracing/span_to_metrics/
-- /tracing/generate_metrics/
+- /ja/tracing/span_to_metrics/
+- /ja/tracing/generate_metrics/
+description: Generate custom metrics from ingested spans.
 further_reading:
-    - link: tracing/trace_pipeline
-      tag: Documentation
-      text: Customize trace ingestion and retain important traces.
-    - link: tracing/trace_search_and_analytics/query_syntax
-      tag: Documentation
-      text: Use Analytics queries and monitors based on retained traces.
-    - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric"
-      tag: 外部サイト
-      text: Create and manage span-based metrics with Terraform
+- link: tracing/trace_pipeline
+  tag: Documentation
+  text: Customize trace ingestion and retain important traces.
+- link: tracing/trace_search_and_analytics/query_syntax
+  tag: Documentation
+  text: Use Analytics queries and monitors based on retained traces.
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric
+  tag: 外部サイト
+  text: Create and manage span-based metrics with Terraform
+kind: documentation
+title: Generate Metrics from Spans
 ---
 
 {{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Span-based metrics" >}}
@@ -78,14 +78,14 @@ After a metric is created, only two fields can be updated:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/trace_pipeline/trace_retention
-[2]: /account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/metrics/#overview
-[4]: /monitors/types/anomaly/#overview
-[5]: /tracing/trace_explorer/
-[6]: /tracing/trace_explorer/query_syntax/#analytics-query
-[7]: /monitors/types/forecasts/
+[1]: /ja/tracing/trace_pipeline/trace_retention
+[2]: /ja/account_management/billing/custom_metrics/
+[3]: https://docs.datadoghq.com/ja/metrics/#overview
+[4]: /ja/monitors/types/anomaly/#overview
+[5]: /ja/tracing/trace_explorer/
+[6]: /ja/tracing/trace_explorer/query_syntax/#analytics-query
+[7]: /ja/monitors/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
-[10]: /tracing/trace_explorer/query_syntax/
-[11]: /metrics/#naming-metrics
+[10]: /ja/tracing/trace_explorer/query_syntax/
+[11]: /ja/metrics/#naming-metrics

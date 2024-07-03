@@ -1,7 +1,7 @@
 ---
-title: AWS Integration Billing
 aliases:
-- /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
+- /ja/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
+title: AWS Integration Billing
 ---
 
 ## 概要
@@ -58,8 +58,8 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: /api/latest/aws-integration/#set-an-aws-tag-filter
-[5]: /infrastructure/
-[6]: /help/
+[4]: /ja/api/latest/aws-integration/#set-an-aws-tag-filter
+[5]: /ja/infrastructure/
+[6]: /ja/help/
 [7]: mailto:success@datadoghq.com
-[8]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
+[8]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling

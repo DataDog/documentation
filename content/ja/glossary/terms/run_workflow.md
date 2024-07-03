@@ -1,9 +1,9 @@
 ---
-title: run workflow
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - dashboard
+- dashboard
+title: run workflow
 ---
 The run workflow widget allows you to automate critical tasks from dashboards. 
 

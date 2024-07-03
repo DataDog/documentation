@@ -1,7 +1,7 @@
 ---
-title: Core LLM Observability Concepts
 aliases:
-    - /tracing/llm_observability/core_concepts
+- /ja/tracing/llm_observability/core_concepts
+title: Core LLM Observability Concepts
 ---
 
 {{% site-region region="gov" %}}
@@ -85,7 +85,7 @@ Evaluations are a method for measuring the performance of your LLM application. 
 
 Datadog's LLM Observability associates evaluations with individual spans so that you can view the inputs and outputs that led to a specific evaluation. Datadog provides a few out-of-the-box evaluations for your traces, but you can also submit your own evaluations to LLM Observability (see the [Evaluations guide][3] for more information).
 
-[1]: /llm_observability/span_kinds
-[2]: /llm_observability/auto_instrumentation
-[3]: /llm_observability/submit_evaluations
-[4]: /llm_observability/trace_an_llm_application/?tab=decorators#instrument-your-llm-application
+[1]: /ja/llm_observability/span_kinds
+[2]: /ja/llm_observability/auto_instrumentation
+[3]: /ja/llm_observability/submit_evaluations
+[4]: /ja/llm_observability/trace_an_llm_application/?tab=decorators#instrument-your-llm-application

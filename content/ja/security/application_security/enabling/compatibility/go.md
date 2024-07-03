@@ -1,9 +1,9 @@
 ---
-title: Go Compatibility Requirements
-kind: documentation
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 20
+kind: documentation
+title: Go Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Application Security capabilities
@@ -83,7 +83,7 @@ The Go packages listed in this page are relevant for Application Security capabi
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [sql][14]          | {{< X >}} |   {{< X >}}    |
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: /ja/agent/remote_config/#enabling-remote-configuration
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://github.com/DataDog/dd-trace-go#support-policy
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance
@@ -98,7 +98,6 @@ The Go packages listed in this page are relevant for Application Security capabi
 [13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
 [14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
 [15]: https://github.com/golang/go/wiki/cgo
-[16]: /tracing/compatibility_requirements/go
+[16]: /ja/tracing/compatibility_requirements/go
 [17]: https://pkg.go.dev/github.com/graphql-go/graphql
 [18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
-

@@ -223,7 +223,7 @@ Not all types are convertible in this way.
 
 DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>`. For example, `SELECT 1::text;`.
 
-[1]: /dashboards/functions/interpolation/#fill
-[2]: /dashboards/ddsql_editor/reference/aggr_functions
-[3]: /dashboards/ddsql_editor/reference#supported-sql-syntax
-[4]: /dashboards/ddsql_editor/reference/expressions_and_operators
+[1]: /ja/dashboards/functions/interpolation/#fill
+[2]: /ja/dashboards/ddsql_editor/reference/aggr_functions
+[3]: /ja/dashboards/ddsql_editor/reference#supported-sql-syntax
+[4]: /ja/dashboards/ddsql_editor/reference/expressions_and_operators

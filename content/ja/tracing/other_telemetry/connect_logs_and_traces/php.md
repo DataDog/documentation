@@ -1,25 +1,25 @@
 ---
-title: Correlating PHP Logs and Traces
-kind: documentation
-description: 'Connect your PHP logs and traces to correlate them in Datadog.'
 aliases:
-  - /tracing/connect_logs_and_traces/php
+- /ja/tracing/connect_logs_and_traces/php
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 70
+description: Connect your PHP logs and traces to correlate them in Datadog.
 further_reading:
-    - link: tracing/trace_collection/custom_instrumentation
-      tag: Documentation
-      text: Manually instrument your application to create traces.
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: "https://www.datadoghq.com/blog/request-log-correlation/"
-      tag: Blog
-      text: Correlate request logs with traces automatically
-    - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-      tag: Guide
-      text: Ease troubleshooting with cross product correlation.
+- link: tracing/trace_collection/custom_instrumentation
+  tag: Documentation
+  text: Manually instrument your application to create traces.
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Correlate request logs with traces automatically
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Ease troubleshooting with cross product correlation.
+kind: documentation
+title: Correlating PHP Logs and Traces
+type: multi-code-lang
 ---
 
 ## Automatic injection
@@ -179,11 +179,11 @@ If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/php/
-[2]: /logs/log_configuration/processors/#trace-remapper
-[3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[1]: /ja/logs/log_collection/php/
+[2]: /ja/logs/log_configuration/processors/#trace-remapper
+[3]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog
 [5]: https://github.com/laminas/laminas-log
-[6]: /getting_started/tagging/unified_service_tagging
-[7]: /logs/log_configuration/pipelines
+[6]: /ja/getting_started/tagging/unified_service_tagging
+[7]: /ja/logs/log_configuration/pipelines
 [8]: https://app.datadoghq.com/logs/pipelines/remapping

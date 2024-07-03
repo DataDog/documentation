@@ -1,15 +1,15 @@
 ---
-title: Datagram Format and Shell Usage
-description: DogStatsD が使用するデータグラム形式および (高度な) シェルの使用方法の概要
 aliases:
-    - /developers/dogstatsd/data_types/
+- /ja/developers/dogstatsd/data_types/
+description: DogStatsD が使用するデータグラム形式および (高度な) シェルの使用方法の概要
 further_reading:
-    - link: 'developers/dogstatsd'
-      tag: 'ドキュメント'
-      text: 'DogStatsD 入門'
-    - link: 'developers/libraries'
-      tag: 'ドキュメント'
-      text: '公式/コミュニティ作成の API および DogStatsD クライアントライブラリ'
+- link: developers/dogstatsd
+  tag: ドキュメント
+  text: DogStatsD 入門
+- link: developers/libraries
+  tag: ドキュメント
+  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+title: Datagram Format and Shell Usage
 ---
 
 ここでは、DogStatsD が受け付けるメトリクス、イベント、サービスチェックの生のデータグラム形式を規定します。生のデータグラムは UTF-8 でエンコーディングされています。[DogStatsD クライアントライブラリ][1]を使用する場合は、これをお読みになる必要はありません。独自のライブラリを記述する場合、あるいはシェルを使用してメトリクスを送信する場合は、以下を参照してください。
@@ -84,11 +84,11 @@ Unix のタイムスタンプは、過去の有効な正の数である必要が
 
 - `page.views:15|c|#env:dev|T1656581400`: 2022 年 6 月 30 日午前 9 時 30 分 (UTC) に 15 ページビューが発生したことを示す COUNT
 
-[101]: /metrics/#metric-name
-[102]: /metrics/types/
-[103]: /getting_started/tagging/
-[104]: /containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[105]: /containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[101]: /ja/metrics/#metric-name
+[102]: /ja/metrics/types/
+[103]: /ja/getting_started/tagging/
+[104]: /ja/containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[105]: /ja/containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -258,8 +258,8 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
+[1]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
-[3]: /developers/dogstatsd/
-[4]: /agent/kubernetes/apm/
-[5]: /agent/docker/apm/
+[3]: /ja/developers/dogstatsd/
+[4]: /ja/agent/kubernetes/apm/
+[5]: /ja/agent/docker/apm/

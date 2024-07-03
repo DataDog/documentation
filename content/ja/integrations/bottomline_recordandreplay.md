@@ -1,74 +1,76 @@
 ---
-"app_id": "bottomline-recordandreplay"
-"app_uuid": "d87fbcfa-71db-4d62-8264-5d88ba2338ce"
-"assets":
-  "dashboards":
-    "Bottomline Record and Replay Overview": assets/dashboards/bottomline_activity_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": bottomline.mainframe.activity.resource.duration
-      "metadata_path": metadata.csv
-      "prefix": bottomline.mainframe.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10324"
-    "source_type_name": Bottomline Mainframe
-  "monitors":
-    "Mainframe resource taking long time to respond": assets/monitors/bottomline_mainframe_resource_has_problem.json
-"author":
-  "homepage": "https://www.bottomline.com/"
-  "name": Bottomline Technologies
-  "sales_email": partner.cfrm@bottomline.com
-  "support_email": partner.cfrm@bottomline.com
-  "vendor_id": bottomline
-"categories":
+app_id: bottomline-recordandreplay
+app_uuid: d87fbcfa-71db-4d62-8264-5d88ba2338ce
+assets:
+  dashboards:
+    Bottomline Record and Replay Overview: assets/dashboards/bottomline_activity_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: bottomline.mainframe.activity.resource.duration
+      metadata_path: metadata.csv
+      prefix: bottomline.mainframe.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10324
+    source_type_name: Bottomline Mainframe
+  monitors:
+    Mainframe resource taking long time to respond: assets/monitors/bottomline_mainframe_resource_has_problem.json
+author:
+  homepage: https://www.bottomline.com/
+  name: Bottomline Technologies
+  sales_email: partner.cfrm@bottomline.com
+  support_email: partner.cfrm@bottomline.com
+  vendor_id: bottomline
+categories:
 - mainframes
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "bottomline_recordandreplay"
-"integration_id": "bottomline-recordandreplay"
-"integration_title": "Bottomline's Record and Replay: Mainframe"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "bottomline_recordandreplay"
-"public_title": "Bottomline's Record and Replay: Mainframe"
-"short_description": "Monitor your 3270/5250 Mainframe users and resources using network traffic"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: bottomline_recordandreplay
+integration_id: bottomline-recordandreplay
+integration_title: 'Bottomline''s Record and Replay: Mainframe'
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: bottomline_recordandreplay
+public_title: 'Bottomline''s Record and Replay: Mainframe'
+short_description: Monitor your 3270/5250 Mainframe users and resources using network
+  traffic
+supported_os:
 - linux
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Mainframes"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": Monitor your 3270/5250 Mainframe users and resources using network traffic
-  "media":
-  - "caption": Mainframe Record and Replay User Session
-    "image_url": images/mainframe_replay.png
-    "media_type": image
-  - "caption": Mainframe Record and Replay Dashboard
-    "image_url": images/bt_dashboard.png
-    "media_type": image
-  - "caption": Mainframe Record and Replay Overview
-    "image_url": images/bt_replay.png
-    "media_type": image
-  - "caption": Mainframe Record and Replay Architecture
-    "image_url": images/bt_architecture.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Bottomline's Record and Replay: Mainframe"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Mainframes
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Monitor your 3270/5250 Mainframe users and resources using network
+    traffic
+  media:
+  - caption: Mainframe Record and Replay User Session
+    image_url: images/mainframe_replay.png
+    media_type: image
+  - caption: Mainframe Record and Replay Dashboard
+    image_url: images/bt_dashboard.png
+    media_type: image
+  - caption: Mainframe Record and Replay Overview
+    image_url: images/bt_replay.png
+    media_type: image
+  - caption: Mainframe Record and Replay Architecture
+    image_url: images/bt_architecture.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: 'Bottomline''s Record and Replay: Mainframe'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -119,4 +121,3 @@ For support or feature requests, contact [Bottomline][4].
 [2]: https://app.datadoghq.com/marketplace/app/bottomline-mainframe
 [3]: https://github.com/nbk96f1/datadog/tree/main/Documentation
 [4]: mailto:partner.cfrm@bottomline.com
-

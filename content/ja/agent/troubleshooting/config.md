@@ -1,9 +1,9 @@
 ---
-title: Agent Runtime Configuration Management
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: ドキュメント
   text: Agent Debug Mode
+title: Agent Runtime Configuration Management
 ---
 
 Agent 6.19+/7.19+ を実行している場合は、コンフィギュレーションの変更を反映するために Agent を再起動する必要はなく、ランタイム時に一部の設定を動的に変更できます。
@@ -44,4 +44,4 @@ sudo datadog-agent config get log_level
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage/windows/#agent-v6
+[1]: /ja/agent/basic_agent_usage/windows/#agent-v6

@@ -1,10 +1,9 @@
 ---
-title: Outlier Monitor
 aliases:
-    - /guides/outliers
-    - /monitors/monitor_types/outlier
-    - /monitors/create/types/outlier/
-description: "Alert on members of a group behaving differently than the others"
+- /ja/guides/outliers
+- /ja/monitors/monitor_types/outlier
+- /ja/monitors/create/types/outlier/
+description: Alert on members of a group behaving differently than the others
 further_reading:
 - link: /monitors/notify/
   tag: Documentation
@@ -18,6 +17,7 @@ further_reading:
 - link: /watchdog/insights/
   tag: ドキュメント
   text: Outlier detection in Watchdog Insights
+title: Outlier Monitor
 ---
 
 ## 概要
@@ -120,8 +120,8 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/outlier
-[2]: /monitors/types/metric/#define-the-metric
-[3]: /monitors/configuration/#advanced-alert-conditions
-[4]: /monitors/notify/
-[5]: /api/v1/monitors/#create-a-monitor
-[6]: /monitors/manage/status/#settings
+[2]: /ja/monitors/types/metric/#define-the-metric
+[3]: /ja/monitors/configuration/#advanced-alert-conditions
+[4]: /ja/monitors/notify/
+[5]: /ja/api/v1/monitors/#create-a-monitor
+[6]: /ja/monitors/manage/status/#settings

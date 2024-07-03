@@ -1,73 +1,73 @@
 ---
-"app_id": "mongodb"
-"app_uuid": "54cca53a-3c87-4b53-beb4-fce95d1fcfb5"
-"assets":
-  "dashboards":
-    "mongodb": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": "mongodb.connections.available"
-      "metadata_path": "metadata.csv"
-      "prefix": "mongodb."
-    "process_signatures":
-    - "mongod"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "19"
-    "source_type_name": "MongoDB"
-  "monitors":
-    "[MongoDB] High incoming connections": "assets/monitors/high_connections.json"
-  "saved_views":
-    "mongodb_processes": "assets/saved_views/mongodb_processes.json"
-    "operations_by_type_overview": "assets/saved_views/operations_by_type_overview.json"
-    "queries": "assets/saved_views/queries.json"
-    "queries_by_type_overview": "assets/saved_views/queries_by_type_overview.json"
-    "slow_queries": "assets/saved_views/slow_queries.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/mongo/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mongo"
-"integration_id": "mongodb"
-"integration_title": "MongoDB"
-"integration_version": "6.6.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mongo"
-"public_title": "MongoDB"
-"short_description": "読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。"
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "MongoDB"
+app_id: mongodb
+app_uuid: 54cca53a-3c87-4b53-beb4-fce95d1fcfb5
+assets:
+  dashboards:
+    mongodb: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: mongodb.connections.available
+      metadata_path: metadata.csv
+      prefix: mongodb.
+    process_signatures:
+    - mongod
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 19
+    source_type_name: MongoDB
+  monitors:
+    '[MongoDB] High incoming connections': assets/monitors/high_connections.json
+  saved_views:
+    mongodb_processes: assets/saved_views/mongodb_processes.json
+    operations_by_type_overview: assets/saved_views/operations_by_type_overview.json
+    queries: assets/saved_views/queries.json
+    queries_by_type_overview: assets/saved_views/queries_by_type_overview.json
+    slow_queries: assets/saved_views/slow_queries.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: mongo
+integration_id: mongodb
+integration_title: MongoDB
+integration_version: 6.6.0
+is_public: true
+manifest_version: 2.0.0
+name: mongo
+public_title: MongoDB
+short_description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MongoDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -305,11 +305,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/tracing/send_traces/
-[5]: https://docs.datadoghq.com/tracing/setup/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -354,11 +354,11 @@ Agent コンテナで必要な環境変数
 次に、[アプリケーションコンテナをインスツルメント][5]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[4]: https://docs.datadoghq.com/agent/docker/apm/?tab=linux
-[5]: https://docs.datadoghq.com/tracing/setup/
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -457,14 +457,14 @@ Agent コンテナで必要な環境変数
 
 次に、[アプリケーションコンテナをインスツルメント][8]し、Agent コンテナ名に `DD_AGENT_HOST` を設定します。
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
-[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
-[6]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=java
-[7]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[8]: https://docs.datadoghq.com/tracing/setup/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[8]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -527,12 +527,12 @@ Agent コンテナで必要な環境変数
 次に、[アプリケーションのコンテナをインスツルメント][5]し、[EC2 プライベート IP アドレス][6]に `DD_AGENT_HOST` を設定します。
 
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[4]: https://docs.datadoghq.com/agent/docker/apm/?tab=linux
-[5]: https://docs.datadoghq.com/tracing/setup/
-[6]: https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
+[6]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -591,8 +591,8 @@ Agent コンテナで必要な環境変数
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.mongodb.org/manual/reference/command/dbStats
-[5]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger
 [7]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-mmap

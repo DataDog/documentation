@@ -1,14 +1,13 @@
 ---
-title: Widgets
 aliases:
-    - /graphing/dashboards/widgets
-    - /graphing/faq/widgets
-    - /graphing/widgets
+- /ja/graphing/dashboards/widgets
+- /ja/graphing/faq/widgets
+- /ja/graphing/widgets
 further_reading:
-    - link: /dashboards/guide/context-links/
-      tag: Documentation
-      text: Custom Links
-
+- link: /dashboards/guide/context-links/
+  tag: Documentation
+  text: Custom Links
+title: Widgets
 ---
 
 ## 概要
@@ -199,14 +198,14 @@ Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/timeseries/#full-screen
-[2]: /dashboards/guide/context-links/
-[3]: /dashboards/guide/unit-override
-[4]: /dashboards/
-[5]: /notebooks/
-[6]: /tracing/services/service_page/
-[7]: /tracing/services/resource_page/
-[8]: /logs/explorer/
-[9]: /tracing/trace_explorer/
-[10]: /profiler/profile_visualizations/
-[11]: /dashboards/guide/custom_time_frames/
+[1]: /ja/dashboards/widgets/timeseries/#full-screen
+[2]: /ja/dashboards/guide/context-links/
+[3]: /ja/dashboards/guide/unit-override
+[4]: /ja/dashboards/
+[5]: /ja/notebooks/
+[6]: /ja/tracing/services/service_page/
+[7]: /ja/tracing/services/resource_page/
+[8]: /ja/logs/explorer/
+[9]: /ja/tracing/trace_explorer/
+[10]: /ja/profiler/profile_visualizations/
+[11]: /ja/dashboards/guide/custom_time_frames/

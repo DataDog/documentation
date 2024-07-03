@@ -1,95 +1,95 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "moogsoft"
-"app_uuid": "db3d32c6-1127-4bd5-b270-01aa573616b7"
-"assets":
-  "dashboards":
-    "Moogsoft Overview": assets/dashboards/moogsoft_overview.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": moogsoft.incident.count
-      "metadata_path": metadata.csv
-      "prefix": moogsoft.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10151"
-    "source_type_name": Moogsoft
-"author":
-  "homepage": "https://moogsoft.com"
-  "name": Moogsoft
-  "sales_email": subscriptions@moogsoft.com
-  "support_email": support@moogsoft.com
-  "vendor_id": moogsoft
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: moogsoft
+app_uuid: db3d32c6-1127-4bd5-b270-01aa573616b7
+assets:
+  dashboards:
+    Moogsoft Overview: assets/dashboards/moogsoft_overview.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: moogsoft.incident.count
+      metadata_path: metadata.csv
+      prefix: moogsoft.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10151
+    source_type_name: Moogsoft
+author:
+  homepage: https://moogsoft.com
+  name: Moogsoft
+  sales_email: subscriptions@moogsoft.com
+  support_email: support@moogsoft.com
+  vendor_id: moogsoft
+categories:
 - automation
 - incidents
 - marketplace
 - notifications
 - ai/ml
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "moogsoft"
-"integration_id": "moogsoft"
-"integration_title": "Moogsoft"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "moogsoft"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.moogsoft
-  "product_id": cloud
-  "short_description": Pricing tiers based on event/metric volumes
-  "tag": core
-  "unit_label": Moogsoft Event or 500 Moogsoft Metrics
-  "unit_price": !!float "0.05"
-"public_title": "Moogsoft"
-"short_description": "Advanced self-servicing AI-driven observability platform"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: moogsoft
+integration_id: moogsoft
+integration_title: Moogsoft
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: moogsoft
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.moogsoft
+  product_id: cloud
+  short_description: Pricing tiers based on event/metric volumes
+  tag: core
+  unit_label: Moogsoft Event or 500 Moogsoft Metrics
+  unit_price: 0.05
+public_title: Moogsoft
+short_description: Advanced self-servicing AI-driven observability platform
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Incidents"
-  - "Category::Marketplace"
-  - "Category::Notifications"
-  - "Category::AI/ML"
-  - "Offering::Integration"
-  - "Offering::Software License"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Incidents"
-  "configuration": "README.md#Setup"
-  "description": Advanced self-servicing AI-driven observability platform
-  "media":
-  - "caption": Moogsoft Correlation
-    "image_url": images/moogsoft.correlation.png
-    "media_type": image
-  - "caption": Moogsoft Dashboard
-    "image_url": images/moogsoft.dashboard.png
-    "media_type": image
-  - "caption": Moogsoft Incident Correlation
-    "image_url": images/moogsoft.main.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Moogsoft
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Incidents
+  - Category::Marketplace
+  - Category::Notifications
+  - Category::AI/ML
+  - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Incidents
+  configuration: README.md#Setup
+  description: Advanced self-servicing AI-driven observability platform
+  media:
+  - caption: Moogsoft Correlation
+    image_url: images/moogsoft.correlation.png
+    media_type: image
+  - caption: Moogsoft Dashboard
+    image_url: images/moogsoft.dashboard.png
+    media_type: image
+  - caption: Moogsoft Incident Correlation
+    image_url: images/moogsoft.main.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Moogsoft
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

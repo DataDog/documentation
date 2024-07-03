@@ -1,7 +1,6 @@
 ---
-title: Advanced Configuration for Postgres Database Monitoring
 description: Advanced Configuration for Postgres Database Monitoring
-
+title: Advanced Configuration for Postgres Database Monitoring
 ---
 
 ## 多数のリレーションの取り扱い

@@ -1,17 +1,14 @@
 ---
-title: Expo Crash Reporting and Error Tracking
-kind: documentation
-description: Capture Expo crash reports in Datadog.
 aliases:
-- /real_user_monitoring/error_tracking/expo
-type: multi-code-lang
+- /ja/real_user_monitoring/error_tracking/expo
 code_lang: expo
 code_lang_weight: 30
+description: Capture Expo crash reports in Datadog.
 further_reading:
-- link: "https://www.datadoghq.com/blog/debug-android-crashes/"
+- link: https://www.datadoghq.com/blog/debug-android-crashes/
   tag: Blog
   text: Debug Android crashes faster with Datadog
-- link: "https://www.datadoghq.com/blog/ios-crash-reporting-datadog/"
+- link: https://www.datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: Blog
   text: Debug iOS crashes efficiently with Datadog
 - link: /real_user_monitoring/error_tracking/
@@ -20,7 +17,9 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: Visualize Error Tracking data in the RUM Explorer
-
+kind: documentation
+title: Expo Crash Reporting and Error Tracking
+type: multi-code-lang
 ---
 ## Overview
 
@@ -178,4 +177,4 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage

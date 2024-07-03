@@ -1,58 +1,60 @@
 ---
-"app_id": "twilio"
-"app_uuid": "488f85eb-ce17-4c50-a6e9-78d61f360693"
-"assets":
-  "dashboards":
-    "twilio": assets/dashboards/twilio_overview.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10406"
-    "source_type_name": Twilio
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com (日本語対応)
-  "support_email": help@datadoghq.com
-"categories":
+app_id: twilio
+app_uuid: 488f85eb-ce17-4c50-a6e9-78d61f360693
+assets:
+  dashboards:
+    twilio: assets/dashboards/twilio_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10406
+    source_type_name: Twilio
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
+categories:
 - コスト管理
 - イベント管理
 - 問題追跡
 - ログの収集
 - security
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "twilio"
-"integration_id": "twilio"
-"integration_title": "Twilio"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "twilio"
-"public_title": "Twilio"
-"short_description": "Monitor performance issues, reduce costs, and identify security threats across all your Twilio resources."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cost Management"
-  - "Category::Event Management"
-  - "Category::Issue Tracking"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Offering::Integration"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor performance issues, reduce costs, and identify security threats across all your Twilio resources.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Twilio
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: twilio
+integration_id: twilio
+integration_title: Twilio
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: twilio
+public_title: Twilio
+short_description: Monitor performance issues, reduce costs, and identify security
+  threats across all your Twilio resources.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cost Management
+  - Category::Event Management
+  - Category::Issue Tracking
+  - Category::Log Collection
+  - Category::Security
+  - Offering::Integration
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor performance issues, reduce costs, and identify security threats
+    across all your Twilio resources.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Twilio
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -125,6 +127,5 @@ The Twilio integration ingests [event resources][1].
 [6]: https://www.twilio.com/docs/iam/api-keys#create-an-api-key
 [7]: https://app.datadoghq.com/integrations/twilio
 [8]: https://app.datadoghq.com/cost
-[9]: https://docs.datadoghq.com/cloud_cost_management/saas_costs/?tab=twilio#data-collected
-[10]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/cloud_cost_management/saas_costs/?tab=twilio#data-collected
+[10]: https://docs.datadoghq.com/ja/help/

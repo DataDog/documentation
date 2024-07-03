@@ -1,15 +1,14 @@
 ---
-title: Proxy Your Browser RUM Data
-kind: guide
 aliases:
-  - /real_user_monitoring/faq/proxy_rum_data/
+- /ja/real_user_monitoring/faq/proxy_rum_data/
 further_reading:
-  - link: /real_user_monitoring/
-    tag: Documentation
-    text: Learn about Real User Monitoring
+- link: /real_user_monitoring/
+  tag: Documentation
+  text: Learn about Real User Monitoring
+title: Proxy Your Browser RUM Data
 ---
 
-## Overview
+## 概要
 
 The RUM Browser SDK can be configured to send requests through a proxy. When you set the SDK's `proxy` [initialization parameter][1] to a URL such as `https://www.example-proxy.com/any-endpoint`, all RUM data is sent to that URL using the POST method. The RUM data still needs to be forwarded to Datadog from the proxy.
 
@@ -19,8 +18,8 @@ To successfully forward a request to Datadog, your proxy must
 
 1. [Build the Datadog intake URL](#build-the-datadog-intake-url).
 2. Add an `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
-3. Forward the request to the Datadog intake URL using the POST method.
-4. Leave the request body unchanged.
+3. POST メソッドで Datadog インテーク URL にリクエストを転送します。
+4. リクエスト本文は変更しないでください。
 
 <div class="alert alert-warning">
 <ul>
@@ -42,9 +41,9 @@ The Datadog intake origin corresponding to your `site` parameter should be defin
 
 The Datadog intake origins for each site are listed below:
 
-| Site    | Site Parameter            | Datadog intake origin                      |
+| サイト    | サイトパラメーター            | Datadog インテークオリジン                      |
 |---------|---------------------------|--------------------------------------------|
-| US1     | `datadoghq.com` (default) | `https://browser-intake-datadoghq.com`     |
+| US1     | `datadoghq.com` (デフォルト) | `https://browser-intake-datadoghq.com`     |
 | US3     | `us3.datadoghq.com`       | `https://browser-intake-us3-datadoghq.com` |
 | US5     | `us5.datadoghq.com`       | `https://browser-intake-us5-datadoghq.com` |
 | EU1     | `datadoghq.eu`            | `https://browser-intake-datadoghq.eu`      |
@@ -104,7 +103,7 @@ From Browser SDK v5.4.0, the `proxy` initialization parameter supports a functio
 This function receives an object with the following properties:
 
 - `path`: the path for the Datadog requests (example: `/api/v2/rum`)
-- `parameters`: the parameters of the Datadog requests (example: `ddsource=browser&...`)
+- `parameters`: Datadog リクエストのパラメーター (例: `ddsource=browser&...`)
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -148,21 +147,19 @@ window.DD_RUM &&
 
 For example, with a `site` set to `datadoghq.eu` and the `proxy` configuration from the example, the RUM Browser SDK sends requests to an URL that looks this: `https://www.proxy.com/foo/api/v2/rum/bar?ddsource=browser`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
-**Note:**
+**注:**
 - Some privacy blockers already target the intake [URL patterns][2], so you may want to take that into account when building your proxy URL.
 - The `proxy` function is called for each request, so it should avoid any heavy computation.
 
 ## Legacy SDK setup (<4.34.0)
 
-Before Browser SDK v4.34.0, the `proxyUrl` initialization parameter was used, and the Datadog intake origin was included in the `ddforward` attribute. The proxy implementation was in charge of validating this host, and failure to do so resulted in various vulnerabilities.
+Browser SDK v4.34.0 より前では、`proxyUrl` 初期化パラメーターが使用され、Datadog インテークオリジンが `ddforward` 属性に含まれていました。プロキシ実装はこのホストの検証を担当し、これに失敗すると様々な脆弱性が発生しました。
 
-The Datadog intake origin needs to be defined in your proxy implementation to ensure security. <strong>If you are still using a proxy with an older version of the Browser SDK, upgrade to a newer version of the Browser SDK to avoid vulnerabilities.</strong>
+セキュリティを確保するために、Datadog インテークオリジンをプロキシ実装で定義する必要があります。<strong>まだ古いバージョンの Browser SDK でプロキシを使用している場合は、新しいバージョンの Browser SDK にアップグレードして脆弱性を回避してください。</strong>
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#initialization-parameters
+[1]: /ja/real_user_monitoring/browser/setup/#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
-
-

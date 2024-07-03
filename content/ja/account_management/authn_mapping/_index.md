@@ -1,12 +1,12 @@
 ---
-title: Federated Authentication to Role Mapping API
-beta: true
 aliases:
-  - /account_management/authen_mapping/
+- /ja/account_management/authen_mapping/
+beta: true
 further_reading:
 - link: /account_management/rbac/log_management/
   tag: Documentation
   text: RBAC for Log Management
+title: Federated Authentication to Role Mapping API
 ---
 
 フェデレーション認証メカニズムを使用する場合、この API を利用することにより、Datadog 内で ID プロバイダーから送信される属性を使用してユーザーグループをロールに自動的にマッピングできます。API を使用して認証マッピングを作成および管理するには、ユーザーはアクセス管理許可を持つ所有者のいるアプリケーションキーを使用する必要があります。
@@ -607,5 +607,5 @@ curl -X POST \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/saml/mapping
-[2]: /api/v2/roles/#list-roles
+[1]: /ja/account_management/saml/mapping
+[2]: /ja/api/v2/roles/#list-roles

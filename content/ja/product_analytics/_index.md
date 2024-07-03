@@ -1,16 +1,16 @@
 ---
-title: 製品分析
-kind: documentation
-description: Product Analytics help you understand your application usage at a glance.
 aliases:
-- /real_user_monitoring/product_analytics
+- /ja/real_user_monitoring/product_analytics
+description: Product Analytics help you understand your application usage at a glance.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
+- link: https://www.datadoghq.com/blog/datadog-product-analytics/
   tag: ブログ
   text: Make data-driven design decisions with Product Analytics
 - link: /product_analytics/analytics_explorer/
   tag: ドキュメント
   text: Analytics Explorer
+kind: documentation
+title: 製品分析
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -62,10 +62,10 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/privacy/
-[2]: /product_analytics/user_retention
-[3]: /product_analytics/journeys
-[4]: /product_analytics/journeys/funnel_analysis
-[5]: /product_analytics/journeys/sankey
-[6]: /product_analytics/journeys#conversion
-[7]: /product_analytics/segmentation/
-[8]: /product_analytics/heatmaps
+[2]: /ja/product_analytics/user_retention
+[3]: /ja/product_analytics/journeys
+[4]: /ja/product_analytics/journeys/funnel_analysis
+[5]: /ja/product_analytics/journeys/sankey
+[6]: /ja/product_analytics/journeys#conversion
+[7]: /ja/product_analytics/segmentation/
+[8]: /ja/product_analytics/heatmaps

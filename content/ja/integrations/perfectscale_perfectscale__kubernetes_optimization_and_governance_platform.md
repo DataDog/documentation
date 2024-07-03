@@ -1,16 +1,16 @@
 ---
-"algolia":
-  "subcategory": Marketplace インテグレーション
-"app_id": "perfectscale-perfectscale"
-"app_uuid": "5be9f1ea-2247-4116-97e2-6b506d828bfa"
-"assets": {}
-"author":
-  "homepage": "https://www.perfectscale.io/"
-  "name": PerfectScale
-  "sales_email": sales@perfectscale.io
-  "support_email": support@perfectscale.io
-  "vendor_id": perfectscale
-"categories":
+algolia:
+  subcategory: Marketplace インテグレーション
+app_id: perfectscale-perfectscale
+app_uuid: 5be9f1ea-2247-4116-97e2-6b506d828bfa
+assets: {}
+author:
+  homepage: https://www.perfectscale.io/
+  name: PerfectScale
+  sales_email: sales@perfectscale.io
+  support_email: support@perfectscale.io
+  vendor_id: perfectscale
+categories:
 - alerting
 - 自動化
 - incident-teams
@@ -19,71 +19,75 @@
 - コスト管理
 - プロビジョニング
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "perfectscale_perfectscale__kubernetes_optimization_and_governance_platform"
-"integration_id": "perfectscale-perfectscale"
-"integration_title": "PerfectScale"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "perfectscale_perfectscale__kubernetes_optimization_and_governance_platform"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": false
-  "metric": datadog.marketplace.perfectscale.usage
-  "product_id": perfectscale
-  "short_description": Cut K8s costs by up to 50%, while improving stability and resilience 
-  "tag": 1000_vcpu_core_hour
-  "unit_label": 1000 vCPU Core Hour
-  "unit_price": !!float "2.0"
-"public_title": "PerfectScale"
-"short_description": "Ensure peak performance and cut spending with data-driven, autonomous actions to optimize Kubernetes clusters"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: perfectscale_perfectscale__kubernetes_optimization_and_governance_platform
+integration_id: perfectscale-perfectscale
+integration_title: PerfectScale
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: perfectscale_perfectscale__kubernetes_optimization_and_governance_platform
+pricing:
+- billing_type: tag_count
+  includes_assets: false
+  metric: datadog.marketplace.perfectscale.usage
+  product_id: perfectscale
+  short_description: Cut K8s costs by up to 50%, while improving stability and resilience
+  tag: 1000_vcpu_core_hour
+  unit_label: 1000 vCPU Core Hour
+  unit_price: 2.0
+public_title: PerfectScale
+short_description: Ensure peak performance and cut spending with data-driven, autonomous
+  actions to optimize Kubernetes clusters
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Automation"
-  - "Category::Containers"
-  - "Category::Kubernetes"
-  - "Category::Cloud"
-  - "Category::Cost Management"
-  - "Category::Provisioning"
-  - "Category::Marketplace"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Software License"
-  "configuration": "README.md#Setup"
-  "description": Ensure peak performance and cut spending with data-driven, autonomous actions to optimize Kubernetes clusters
-  "media":
-  - "caption": Multi-Cloud, Multi-Cluster Kubernetes Optimization and Governance Platform
-    "image_url": images/PS Datadog 8@2x.png
-    "media_type": image
-  - "caption": Quickly identify and proactively remove waste and resolve resiliency issues
-    "image_url": images/Waste and Performance optimization.png
-    "media_type": image
-  - "caption": Advanced visibility and optimization insights across your underlying node infrastructure
-    "image_url": images/Infrastructure and Machine Optimization.png
-    "media_type": image
-  - "caption": Cost And Performance reporting across your complete K8s environment 
-    "image_url": images/Comprehensive analysis.png
-    "media_type": image
-  - "caption": Send PerfectScale Alerts directly to Datadog to expedite resolutions 
-    "image_url": images/Alerts Integration.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": PerfectScale
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Automation
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Cloud
+  - Category::Cost Management
+  - Category::Provisioning
+  - Category::Marketplace
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: Ensure peak performance and cut spending with data-driven, autonomous
+    actions to optimize Kubernetes clusters
+  media:
+  - caption: Multi-Cloud, Multi-Cluster Kubernetes Optimization and Governance Platform
+    image_url: images/PS Datadog 8@2x.png
+    media_type: image
+  - caption: Quickly identify and proactively remove waste and resolve resiliency
+      issues
+    image_url: images/Waste and Performance optimization.png
+    media_type: image
+  - caption: Advanced visibility and optimization insights across your underlying
+      node infrastructure
+    image_url: images/Infrastructure and Machine Optimization.png
+    media_type: image
+  - caption: Cost And Performance reporting across your complete K8s environment
+    image_url: images/Comprehensive analysis.png
+    media_type: image
+  - caption: Send PerfectScale Alerts directly to Datadog to expedite resolutions
+    image_url: images/Alerts Integration.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PerfectScale
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

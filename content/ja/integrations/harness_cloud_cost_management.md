@@ -1,58 +1,59 @@
 ---
-"app_id": "harness-cloud-cost-management"
-"app_uuid": "3eb2e9ef-2c9c-45b6-8f1c-8a900910f948"
-"assets":
-  "dashboards":
-    "harness_cloud_cost_management_overview": assets/dashboards/harness_cloud_cost_management_overview.json
-"author":
-  "homepage": "https://www.harness.io"
-  "name": Harness IO
-  "sales_email": akash.bhardwaj@harness.io
-  "support_email": akash.bhardwaj@harness.io
-"categories":
+app_id: harness-cloud-cost-management
+app_uuid: 3eb2e9ef-2c9c-45b6-8f1c-8a900910f948
+assets:
+  dashboards:
+    harness_cloud_cost_management_overview: assets/dashboards/harness_cloud_cost_management_overview.json
+author:
+  homepage: https://www.harness.io
+  name: Harness IO
+  sales_email: akash.bhardwaj@harness.io
+  support_email: akash.bhardwaj@harness.io
+categories:
 - cost management
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/harness_cloud_cost_management/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "harness_cloud_cost_management"
-"integration_id": "harness-cloud-cost-management"
-"integration_title": "Harness Cloud Cost Mgmt"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "harness_cloud_cost_management"
-"public_title": "Harness Cloud Cost Mgmt"
-"short_description": "View your Harness cloud and cluster cost metrics over a range of dates"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/harness_cloud_cost_management/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: harness_cloud_cost_management
+integration_id: harness-cloud-cost-management
+integration_title: Harness Cloud Cost Mgmt
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: harness_cloud_cost_management
+public_title: Harness Cloud Cost Mgmt
+short_description: View your Harness cloud and cluster cost metrics over a range of
+  dates
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cost Management"
-  - "Offering::UI Extension"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": View your Harness cloud and cluster cost metrics over a range of dates
-  "media":
-  - "caption": Cloud Cost Management Video Overview
-    "image_url": images/ccm_dashboard_video_thumbnail.png
-    "media_type": video
-    "vimeo_id": !!int "637675885"
-  - "caption": Cloud Cost Management Dashboard on Datadog
-    "image_url": images/ccm_dashboard_on_datadog.png
-    "media_type": image
-  - "caption": Cloud Cost Management Dashboard on Harness
-    "image_url": images/ccm_dashboard_on_harness.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Harness Cloud Cost Mgmt
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cost Management
+  - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: View your Harness cloud and cluster cost metrics over a range of dates
+  media:
+  - caption: Cloud Cost Management Video Overview
+    image_url: images/ccm_dashboard_video_thumbnail.png
+    media_type: video
+    vimeo_id: 637675885
+  - caption: Cloud Cost Management Dashboard on Datadog
+    image_url: images/ccm_dashboard_on_datadog.png
+    media_type: image
+  - caption: Cloud Cost Management Dashboard on Harness
+    image_url: images/ccm_dashboard_on_harness.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Harness Cloud Cost Mgmt
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -90,5 +91,4 @@ The Harness Cloud Cost Management check does not include any service checks.
 Need help? Contact [Datadog support][2].
 
 [1]: https://app.harness.io/auth/#/signup/
-[2]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/help/

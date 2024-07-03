@@ -1,10 +1,10 @@
 ---
-title: OpenTelemetry .NET Runtime Metrics
 aliases:
-- /opentelemetry/runtime_metrics/dotnet/
+- /ja/opentelemetry/runtime_metrics/dotnet/
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 20
+title: OpenTelemetry .NET Runtime Metrics
+type: multi-code-lang
 ---
 
 ## 前提条件
@@ -55,7 +55,7 @@ The default metric export interval for the .NET OTel SDK is different from the d
 | `runtime.dotnet.aspnetcore.`<br/>`connections.queue_length` | HTTP サーバー接続キューの現在の長さ。(.NET Core のみ) | N/A |
 
 
-[1]: /opentelemetry/otel_metrics
+[1]: /ja/opentelemetry/otel_metrics
 [2]: https://app.datadoghq.com/integrations/dotnet
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/

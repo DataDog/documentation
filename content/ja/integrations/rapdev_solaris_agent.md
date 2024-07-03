@@ -1,79 +1,79 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-solaris-agent"
-"app_uuid": "a994f2cf-1f77-4e74-803d-fb833455e224"
-"assets":
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": datadog.marketplace.rapdev.solaris_agent
-      "metadata_path": metadata.csv
-      "prefix": rapdev.solaris_agent.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10135"
-    "source_type_name": RapDev Solaris Agent
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-solaris-agent
+app_uuid: a994f2cf-1f77-4e74-803d-fb833455e224
+assets:
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: datadog.marketplace.rapdev.solaris_agent
+      metadata_path: metadata.csv
+      prefix: rapdev.solaris_agent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10135
+    source_type_name: RapDev Solaris Agent
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
 - oracle
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_solaris_agent"
-"integration_id": "rapdev-solaris-agent"
-"integration_title": "Solaris Agent"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rapdev_solaris_agent"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.rapdev.solaris_agent
-  "product_id": solaris-agent
-  "short_description": Unit price per host
-  "tag": host
-  "unit_label": Solaris Agent
-  "unit_price": !!int "40"
-"public_title": "Solaris Agent"
-"short_description": "Agent providing metrics for Solaris 10 and 11 on sparc and i86pc"
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Marketplace"
-  - "Category::Oracle"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Agent providing metrics for Solaris 10 and 11 on sparc and i86pc
-  "media":
-  - "caption": Infrastructure List
-    "image_url": images/1.png
-    "media_type": image
-  - "caption": Host Infrastructure Details
-    "image_url": images/2.png
-    "media_type": image
-  - "caption": Host Metrics
-    "image_url": images/3.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Solaris Agent
-  "uninstallation": "README.md#Uninstallation"
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_solaris_agent
+integration_id: rapdev-solaris-agent
+integration_title: Solaris Agent
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_solaris_agent
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.solaris_agent
+  product_id: solaris-agent
+  short_description: Unit price per host
+  tag: host
+  unit_label: Solaris Agent
+  unit_price: 40
+public_title: Solaris Agent
+short_description: Agent providing metrics for Solaris 10 and 11 on sparc and i86pc
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Marketplace
+  - Category::Oracle
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Agent providing metrics for Solaris 10 and 11 on sparc and i86pc
+  media:
+  - caption: Infrastructure List
+    image_url: images/1.png
+    media_type: image
+  - caption: Host Infrastructure Details
+    image_url: images/2.png
+    media_type: image
+  - caption: Host Metrics
+    image_url: images/3.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Solaris Agent
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

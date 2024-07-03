@@ -1,10 +1,8 @@
 ---
-title: Manage Your Security Compliance Posture
-kind: documentation
 aliases:
-  - /security_platform/cspm/frameworks_and_benchmarks
-  - /security/cspm/frameworks_and_benchmarks
-  - /security/misconfigurations/frameworks_and_benchmarks
+- /ja/security_platform/cspm/frameworks_and_benchmarks
+- /ja/security/cspm/frameworks_and_benchmarks
+- /ja/security/misconfigurations/frameworks_and_benchmarks
 further_reading:
 - link: security/cspm/setup
   tag: Documentation
@@ -15,6 +13,8 @@ further_reading:
 - link: security/cspm/findings
   tag: Documentation
   text: Search and explore misconfigurations
+kind: documentation
+title: Manage Your Security Compliance Posture
 ---
 
 CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a compliance standard or industry benchmarks. See [Supported Frameworks][2] for more information.
@@ -47,20 +47,20 @@ Select a rule to view details about the misconfigured resources, the rule descri
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_monitoring/default_rules/
-[2]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks/
-[11]: /security/cloud_siem/
-[12]: /integrations/amazon_cloudtrail/
+[1]: /ja/security_monitoring/default_rules/
+[2]: /ja/security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks/
+[11]: /ja/security/cloud_siem/
+[12]: /ja/integrations/amazon_cloudtrail/
 [13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
-[14]: /integrations/slack/
-[15]: /integrations/jira/
-[16]: /integrations/pagerduty
-[17]: /integrations/servicenow/
-[18]: /integrations/microsoft_teams/
-[19]: /integrations/webhooks/
+[14]: /ja/integrations/slack/
+[15]: /ja/integrations/jira/
+[16]: /ja/integrations/pagerduty
+[17]: /ja/integrations/servicenow/
+[18]: /ja/integrations/microsoft_teams/
+[19]: /ja/integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance/homepage
-[21]: /security/cloud_security_management/misconfigurations/detection_rules
-[26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
+[21]: /ja/security/cloud_security_management/misconfigurations/detection_rules
+[26]: /ja/security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
 [27]: https://app.datadoghq.com/security/compliance
-[28]: /dashboards/template_variables/
-[29]: /api/latest/security-monitoring/#update-an-existing-rule
+[28]: /ja/dashboards/template_variables/
+[29]: /ja/api/latest/security-monitoring/#update-an-existing-rule

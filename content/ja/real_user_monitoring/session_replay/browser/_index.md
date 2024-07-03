@@ -1,18 +1,17 @@
 ---
-title: Browser Session Replay
-kind: documentation
-description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
 aliases:
-- /real_user_monitoring/guide/session-replay-getting-started/
-- /real_user_monitoring/session_replay/
+- /ja/real_user_monitoring/guide/session-replay-getting-started/
+- /ja/real_user_monitoring/session_replay/
+description: Learn about how to capture and visually replay your users' web browsing
+  experience with Session Replay.
 further_reading:
-- link: "https://www.datadoghq.com/blog/session-replay-datadog/"
+- link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: Blog
   text: Use Datadog Session Replay to view real-time user journeys
-- link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
+- link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: Blog
   text: Use funnel analysis to understand and optimize key user flows
-- link: "https://www.datadoghq.com/blog/zendesk-session-replay-integration/"
+- link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
   tag: Blog
   text: Visually replay user-facing issues with Zendesk and Datadog Session Replay
 - link: /real_user_monitoring/explorer
@@ -21,6 +20,8 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: Documentation
   text: Detect and aggregate CSP violations with Datadog
+kind: documentation
+title: Browser Session Replay
 ---
 
 ## Overview
@@ -117,9 +118,9 @@ Learn more about the [Session Replay for Mobile][5].
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /real_user_monitoring/browser/
-[5]: /real_user_monitoring/session_replay/mobile/
+[4]: /ja/real_user_monitoring/browser/
+[5]: /ja/real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[7]: https://docs.datadoghq.com/account_management/audit_trail/
-[8]: https://docs.datadoghq.com/notebooks/
+[7]: https://docs.datadoghq.com/ja/account_management/audit_trail/
+[8]: https://docs.datadoghq.com/ja/notebooks/
 [9]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history

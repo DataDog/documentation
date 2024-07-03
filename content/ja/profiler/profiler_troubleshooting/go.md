@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting the Go Profiler
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: /tracing/troubleshooting
-      tag: Documentation
-      text: APM Troubleshooting
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM Troubleshooting
+title: Troubleshooting the Go Profiler
+type: multi-code-lang
 ---
 
 ## プロファイル検索ページにないプロファイル
@@ -21,5 +21,5 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
-[2]: /help/
+[1]: /ja/tracing/troubleshooting/#tracer-debug-logs
+[2]: /ja/help/

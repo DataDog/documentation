@@ -1,7 +1,7 @@
 ---
+disable_sidebar: true
 title: Authorization Scopes
 type: documentation
-disable_sidebar: true
 ---
 ## Authorization scopes
 
@@ -15,5 +15,5 @@ You may use scopes two ways with Datadog:
 
 {{< api-scopes >}}
 
-[1]: https://docs.datadoghq.com/developers/datadog_apps/#oauth-api-access
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/
+[1]: https://docs.datadoghq.com/ja/developers/datadog_apps/#oauth-api-access
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/

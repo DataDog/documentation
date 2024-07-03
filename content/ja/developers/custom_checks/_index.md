@@ -1,6 +1,6 @@
 ---
-title: Custom Checks
 description: Setting up a custom check with Datadog
+title: Custom Checks
 ---
 
 ## 概要 
@@ -20,6 +20,6 @@ description: Setting up a custom check with Datadog
     {{< nextlink href="/developers/custom_checks/prometheus/" >}}一般的なチェックよりも高度なニーズ (メトリクスの前処理など) がある場合は、カスタムオープンメトリクスチェック作成のドキュメントを参照してください。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /developers/service_checks/
-[2]: /developers/integrations/agent_integration/
-[3]: /developers/
+[1]: /ja/developers/service_checks/
+[2]: /ja/developers/integrations/agent_integration/
+[3]: /ja/developers/

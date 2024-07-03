@@ -1,16 +1,16 @@
 ---
-title: Span Links
-kind: documentation
 further_reading:
-    - link: "https://opentelemetry.io/docs/concepts/signals/traces/#span-links"
-      tag: Documentation
-      text: OpenTelemetry Span Links
-    - link: /tracing/trace_collection/otel_instrumentation/
-      tag: Documentation
-      text: Custom Instrumentation with the OpenTelemetry API
-    - link: /tracing/trace_collection/custom_instrumentation/
-      tag: Documentation
-      text: Datadog ライブラリを使ったカスタムインスツルメンテーション
+- link: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
+  tag: Documentation
+  text: OpenTelemetry Span Links
+- link: /tracing/trace_collection/otel_instrumentation/
+  tag: Documentation
+  text: Custom Instrumentation with the OpenTelemetry API
+- link: /tracing/trace_collection/custom_instrumentation/
+  tag: Documentation
+  text: Datadog ライブラリを使ったカスタムインスツルメンテーション
+kind: documentation
+title: Span Links
 ---
 
 <div class="alert alert-info">Span link support is in beta.</a></div>
@@ -73,12 +73,11 @@ You can view span links from the [Trace Explorer][4] in Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/php/#adding-span-links-beta
+[1]: /ja/tracing/trace_collection/custom_instrumentation/php/#adding-span-links-beta
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/#link
 [3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
-[4]: /tracing/trace_explorer/trace_view/?tab=spanlinksbeta#more-information
+[4]: /ja/tracing/trace_explorer/trace_view/?tab=spanlinksbeta#more-information
 [5]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
-[7]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[8]: https://docs.datadoghq.com/opentelemetry/interoperability/otlp_ingest_in_the_agent
-
+[7]: https://docs.datadoghq.com/ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[8]: https://docs.datadoghq.com/ja/opentelemetry/interoperability/otlp_ingest_in_the_agent

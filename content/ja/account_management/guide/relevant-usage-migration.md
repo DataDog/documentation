@@ -505,5 +505,5 @@ After October 1, 2024, the [Get usage across your account][2] endpoint will have
     { ... // Summary usage by sub-organization }
 {{< /highlight >}}
 
-[1]: /api/latest/usage-metering/#get-hourly-usage-by-product-family
-[2]: /api/latest/usage-metering/#get-usage-across-your-account
+[1]: /ja/api/latest/usage-metering/#get-hourly-usage-by-product-family
+[2]: /ja/api/latest/usage-metering/#get-usage-across-your-account

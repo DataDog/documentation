@@ -1,68 +1,70 @@
 ---
-"app_id": "stackpulse"
-"app_uuid": "c42edc68-cb25-43f9-9bd2-657a2b7dea82"
-"assets":
-  "dashboards":
-    "StackPulse": assets/dashboards/stackpulse_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": stackpulse.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10173"
-    "source_type_name": StackPulse
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Torq
-  "sales_email": support@stackpulse.io
-  "support_email": support@stackpulse.io
-"categories":
+app_id: stackpulse
+app_uuid: c42edc68-cb25-43f9-9bd2-657a2b7dea82
+assets:
+  dashboards:
+    StackPulse: assets/dashboards/stackpulse_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: stackpulse.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10173
+    source_type_name: StackPulse
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Torq
+  sales_email: support@stackpulse.io
+  support_email: support@stackpulse.io
+categories:
 - automation
 - collaboration
 - incidents
 - notifications
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "stackpulse"
-"integration_id": "stackpulse"
-"integration_title": "StackPulse"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "stackpulse"
-"public_title": "StackPulse"
-"short_description": "Automate your alert responses and track playbook executions in your event stream"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: stackpulse
+integration_id: stackpulse
+integration_title: StackPulse
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: stackpulse
+public_title: StackPulse
+short_description: Automate your alert responses and track playbook executions in
+  your event stream
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Notifications"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Automate your alert responses and track playbook executions in your event stream
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": StackPulse
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Notifications
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Automate your alert responses and track playbook executions in your
+    event stream
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: StackPulse
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -164,8 +166,7 @@ Need help? Contact [Datadog support][7].
 [1]: https://stackpulse.com
 [2]: https://stackpulse.com/get-started/
 [3]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[4]: https://docs.datadoghq.com/monitors/manage/
+[4]: https://docs.datadoghq.com/ja/monitors/manage/
 [5]: https://app.stackpulse.io/integrations/datadog%20api%20keys?create=true
 [6]: https://github.com/stackpulse/steps/tree/master/steps/datadog/post-event
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

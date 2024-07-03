@@ -1,50 +1,52 @@
 ---
-"app_id": "statuspage"
-"app_uuid": "04411bc4-4af1-482e-b05d-eeec3a40c464"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "135"
-    "source_type_name": "StatusPage"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "incidents"
-- "issue tracking"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "statuspage"
-"integration_id": "statuspage"
-"integration_title": "StatusPage"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "statuspage"
-"public_title": "StatusPage"
-"short_description": "StatusPage.io helps companies setup status pages with public metrics and automatic updates for customers."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Incidents"
-  - "Category::Issue Tracking"
-  - "Category::Notifications"
-  "configuration": "README.md#Setup"
-  "description": "StatusPage.io helps companies setup status pages with public metrics and automatic updates for customers."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "StatusPage"
+app_id: statuspage
+app_uuid: 04411bc4-4af1-482e-b05d-eeec3a40c464
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 135
+    source_type_name: StatusPage
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- incidents
+- issue tracking
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: statuspage
+integration_id: statuspage
+integration_title: StatusPage
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: statuspage
+public_title: StatusPage
+short_description: StatusPage.io helps companies setup status pages with public metrics
+  and automatic updates for customers.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: StatusPage.io helps companies setup status pages with public metrics
+    and automatic updates for customers.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: StatusPage
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -108,6 +110,5 @@ Need help? Contact [Datadog support][5].
 [1]: https://www.atlassian.com/software/statuspage
 [2]: https://manage.statuspage.io/login
 [3]: https://app.datadoghq.com/integrations/statuspage
-[4]: https://docs.datadoghq.com/monitors/monitor_types/event/
-[5]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/monitors/monitor_types/event/
+[5]: https://docs.datadoghq.com/ja/help/

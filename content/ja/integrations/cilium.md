@@ -1,72 +1,72 @@
 ---
-"app_id": "cilium"
-"app_uuid": "791bc8e8-1a70-465a-b423-709b6af4e6e5"
-"assets":
-  "dashboards":
-    "Cilium Overview": assets/dashboards/overview.json
-    "Cilium Overview v2": assets/dashboards/overview_v2.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cilium.endpoint.state
-      "metadata_path": metadata.csv
-      "prefix": cilium.
-    "process_signatures":
+app_id: cilium
+app_uuid: 791bc8e8-1a70-465a-b423-709b6af4e6e5
+assets:
+  dashboards:
+    Cilium Overview: assets/dashboards/overview.json
+    Cilium Overview v2: assets/dashboards/overview_v2.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cilium.endpoint.state
+      metadata_path: metadata.csv
+      prefix: cilium.
+    process_signatures:
     - cilium-operator-generic
     - cilium-agent
     - cilium-health-responder
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10077"
-    "source_type_name": Cilium
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10077
+    source_type_name: Cilium
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - containers
 - network
 - security
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cilium/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cilium"
-"integration_id": "cilium"
-"integration_title": "Cilium"
-"integration_version": "3.5.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cilium"
-"public_title": "Cilium"
-"short_description": "Collect per pod agent metrics and cluster-wide operator metrics"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cilium/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cilium
+integration_id: cilium
+integration_title: Cilium
+integration_version: 3.5.0
+is_public: true
+manifest_version: 2.0.0
+name: cilium
+public_title: Cilium
+short_description: Collect per pod agent metrics and cluster-wide operator metrics
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Containers"
-  - "Category::Network"
-  - "Category::Security"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Collect per pod agent metrics and cluster-wide operator metrics
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cilium
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  - Category::Network
+  - Category::Security
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Collect per pod agent metrics and cluster-wide operator metrics
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cilium
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -179,8 +179,8 @@ Cilium contains two types of logs: `cilium-agent` and `cilium-operator`.
 3. [Restart the Agent][2].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/cilium/datadog_checks/cilium/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://docs.datadoghq.com/agent/kubernetes/?tab=daemonset#installation
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset#installation
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -222,8 +222,8 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "cilium-operator", "service": "cilium-operator"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -251,8 +251,8 @@ Need help? Contact [Datadog support][6].
 
 
 [1]: https://cilium.io
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadohgq.com/integrations/guide/versions-for-openmetrics-based-integrations
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/

@@ -1,71 +1,71 @@
 ---
-"app_id": "sql-server"
-"app_uuid": "bfa2f276-da05-4153-b8d4-48d4e41f5e40"
-"assets":
-  "dashboards":
-    "SQLServer-AlwaysOn": "assets/dashboards/SQLServer-AlwaysOn_dashboard.json"
-    "SQLServer-Overview": "assets/dashboards/SQLServer-Overview_dashboard.json"
-    "sqlserver": "assets/dashboards/sqlserver_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "sqlserver.stats.connections"
-      "metadata_path": "metadata.csv"
-      "prefix": "sqlserver."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "45"
-    "source_type_name": "SQL Server"
-  "monitors":
-    "SQLServer ao not healthy": "assets/monitors/sqlserver_ao_not_healthy.json"
-    "SQLServer db not in sync": "assets/monitors/sqlserver_db_not_sync.json"
-    "SQLServer db not online": "assets/monitors/sqlserver_db_not_online.json"
-    "SQLServer high failed auto param": "assets/monitors/sqlserver_high_number_failed_auto_param.json"
-    "SQLServer high processes blocked": "assets/monitors/sqlserver_high_processes_blocked.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "data stores"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sqlserver"
-"integration_id": "sql-server"
-"integration_title": "SQL Server"
-"integration_version": "17.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "sqlserver"
-"public_title": "SQL Server"
-"short_description": "SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。"
-"supported_os":
-- "linux"
-- "macos"
-- "windows"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "SQL Server"
+app_id: sql-server
+app_uuid: bfa2f276-da05-4153-b8d4-48d4e41f5e40
+assets:
+  dashboards:
+    SQLServer-AlwaysOn: assets/dashboards/SQLServer-AlwaysOn_dashboard.json
+    SQLServer-Overview: assets/dashboards/SQLServer-Overview_dashboard.json
+    sqlserver: assets/dashboards/sqlserver_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sqlserver.stats.connections
+      metadata_path: metadata.csv
+      prefix: sqlserver.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 45
+    source_type_name: SQL Server
+  monitors:
+    SQLServer ao not healthy: assets/monitors/sqlserver_ao_not_healthy.json
+    SQLServer db not in sync: assets/monitors/sqlserver_db_not_sync.json
+    SQLServer db not online: assets/monitors/sqlserver_db_not_online.json
+    SQLServer high failed auto param: assets/monitors/sqlserver_high_number_failed_auto_param.json
+    SQLServer high processes blocked: assets/monitors/sqlserver_high_processes_blocked.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- data stores
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: sqlserver
+integration_id: sql-server
+integration_title: SQL Server
+integration_version: 17.3.0
+is_public: true
+manifest_version: 2.0.0
+name: sqlserver
+public_title: SQL Server
+short_description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
+supported_os:
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SQL Server
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -188,10 +188,10 @@ _Agent バージョン 6.0 以降で利用可能_
 
 3. [Agent を再起動します][4]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-2017
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
 [6]: http://www.freetds.org/
 {{% /tab %}}
@@ -221,9 +221,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "sqlserver", "service": "sqlserver"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -280,13 +280,13 @@ This is fixed in version 15.2.0 of the check and in Agent versions 7.49.1 and ab
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/sqlserver/images/sqlserver_dashboard_02_2024.png
-[2]: https://docs.datadoghq.com/database_monitoring/
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/database_monitoring/#sqlserver
-[5]: https://docs.datadoghq.com/database_monitoring/setup_sql_server/
+[4]: https://docs.datadoghq.com/ja/database_monitoring/#sqlserver
+[5]: https://docs.datadoghq.com/ja/database_monitoring/setup_sql_server/
 [6]: https://docs.microsoft.com/en-us/sql/t-sql/statements/grant-server-permissions-transact-sql?view=sql-server-ver15
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/help/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
 [10]: https://www.datadoghq.com/blog/sql-server-monitoring
 [11]: https://www.datadoghq.com/blog/sql-server-monitoring-tools

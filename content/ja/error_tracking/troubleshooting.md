@@ -1,6 +1,6 @@
 ---
-title: Error Tracking Troubleshooting
 kind: documentation
+title: Error Tracking Troubleshooting
 ---
 
 If you experience unexpected behavior with Error Tracking, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1]. 
@@ -79,11 +79,11 @@ All errors are processed, but only retained errors are available in the issue pa
 
 Spans associated with the error need to be retained with a custom retention filter in order for samples of that error to show up in the issue panel.
 
-[1]: /help/
-[2]: /logs/error_tracking/backend/?tab=serilog#attributes-for-error-tracking
+[1]: /ja/help/
+[2]: /ja/logs/error_tracking/backend/?tab=serilog#attributes-for-error-tracking
 [3]: https://app.datadoghq.com/logs?query=status%3A%28emergency%20OR%20alert%20OR%20critical%20OR%20error%29%20AND%20%28%40error.stack%3A%2A%20OR%20%40error.kind%3A%2A%29%20
-[4]: /tracing/error_tracking/#use-span-tags-to-track-error-spans
+[4]: /ja/tracing/error_tracking/#use-span-tags-to-track-error-spans
 [5]: https://app.datadoghq.com/apm/traces?query=%40_top_level%3A1%20%40error.stack%3A%2A%20AND%20%40error.message%3A%2A%20AND%20error.type%3A%2A%20AND%20%40_top_level%3A1%20
 [6]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aerror%20%40error.stack%3A%2A
 [7]: https://app.datadoghq.com/error-tracking/settings
-[8]: /tracing/trace_collection/custom_instrumentation/java/dd-api/#set-tags--errors-on-a-root-span-from-a-child-span
+[8]: /ja/tracing/trace_collection/custom_instrumentation/java/dd-api/#set-tags--errors-on-a-root-span-from-a-child-span

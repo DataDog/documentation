@@ -1,21 +1,21 @@
 ---
-title: Manage CSM Misconfigurations Compliance Rules
 aliases:
-  - /security_platform/cspm/configuration_rules
-  - /security/cspm/configuration_rules
-  - /security/cspm/detection_rules
-  - /security/cspm/compliance_rules
-  - /security/misconfigurations/compliance_rules
+- /ja/security_platform/cspm/configuration_rules
+- /ja/security/cspm/configuration_rules
+- /ja/security/cspm/detection_rules
+- /ja/security/cspm/compliance_rules
+- /ja/security/misconfigurations/compliance_rules
 further_reading:
-  - link: /security/cloud_security_management/misconfigurations
-    tag: Documentation
-    text: Getting Started with CSM Misconfigurations
-  - link: /security/cloud_security_management/misconfigurations/custom_rules/
-    tag: Documentation
-    text: Custom Rules
-  - link: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/
-    tag: Documentation
-    text: Misconfigurations Reports
+- link: /security/cloud_security_management/misconfigurations
+  tag: Documentation
+  text: Getting Started with CSM Misconfigurations
+- link: /security/cloud_security_management/misconfigurations/custom_rules/
+  tag: Documentation
+  text: Custom Rules
+- link: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/
+  tag: Documentation
+  text: Misconfigurations Reports
+title: Manage CSM Misconfigurations Compliance Rules
 ---
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) の[すぐに使えるコンプライアンスルール][1]は、クラウドリソースの構成を評価し、潜在的な誤構成を特定するので、すぐに是正のための措置を講じることができます。
@@ -92,21 +92,21 @@ Alternatively, create [notification rules][21] that span across multiple complia
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/#cat-csm-misconfigurations-cloud
-[2]: /security/detection_rules/
-[3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
-[4]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
-[5]: /security/default_rules/#cat-posture-management-infra
-[6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
-[7]: /security/notifications/
+[1]: /ja/security/default_rules/#cat-csm-misconfigurations-cloud
+[2]: /ja/security/detection_rules/
+[3]: https://docs.datadoghq.com/ja/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
+[4]: /ja/security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
+[5]: /ja/security/default_rules/#cat-posture-management-infra
+[6]: https://docs.datadoghq.com/ja/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
+[7]: /ja/security/notifications/
 [13]: https://app.datadoghq.com/security/configuration/compliance/rules
-[14]: /integrations/slack/
-[15]: /integrations/jira/
-[16]: /integrations/pagerduty
-[17]: /integrations/servicenow/
-[18]: /integrations/microsoft_teams/
-[19]: /integrations/webhooks/
-[20]: /security/cloud_security_management/misconfigurations/custom_rules/
-[21]: /security/notifications/rules/
-[22]: /security/cloud_security_management/misconfigurations/signals_explorer/
-[23]: /security/detection_rules/#clone-a-rule
+[14]: /ja/integrations/slack/
+[15]: /ja/integrations/jira/
+[16]: /ja/integrations/pagerduty
+[17]: /ja/integrations/servicenow/
+[18]: /ja/integrations/microsoft_teams/
+[19]: /ja/integrations/webhooks/
+[20]: /ja/security/cloud_security_management/misconfigurations/custom_rules/
+[21]: /ja/security/notifications/rules/
+[22]: /ja/security/cloud_security_management/misconfigurations/signals_explorer/
+[23]: /ja/security/detection_rules/#clone-a-rule

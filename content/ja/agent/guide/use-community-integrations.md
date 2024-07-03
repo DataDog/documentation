@@ -1,14 +1,14 @@
 ---
-title: Use Community and Marketplace Integrations
 aliases:
-  - /agent/guide/community-integrations-installation-with-docker-agent
+- /ja/agent/guide/community-integrations-installation-with-docker-agent
 further_reading:
-  - link: /agent/troubleshooting/
-    tag: Documentation
-    text: Agent Troubleshooting
-  - link: /developers/integrations/agent_integration
-    tag: Documentation
-    text: Create a New Integration
+- link: /agent/troubleshooting/
+  tag: Documentation
+  text: Agent Troubleshooting
+- link: /developers/integrations/agent_integration
+  tag: Documentation
+  text: Create a New Integration
+title: Use Community and Marketplace Integrations
 ---
 
 ## 概要
@@ -37,8 +37,8 @@ Agent v7.21 / v6.21 以降の場合:
 
 **注**: I必要に応じて、インストールコマンドの先頭に `sudo -u dd-agent` を追加します。
 
-[1]: /getting_started/integrations/
-[2]: /agent/configuration/agent-commands/#restart-the-agent
+[1]: /ja/getting_started/integrations/
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -57,7 +57,7 @@ If you are using Kubernetes, update your Helm chart or Datadog Operator configur
 
 Use [Autodiscovery][1] to enable and configure the integration.
 
-[1]: /agent/autodiscovery/
+[1]: /ja/agent/autodiscovery/
 [2]: https://github.com/DataDog/integrations-extras
 {{% /tab %}}
 
@@ -76,9 +76,9 @@ Agent v7.21 / v6.21 以前の場合:
 
 
 [1]: https://github.com/DataDog/integrations-extras
-[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
-[3]: /getting_started/integrations/
-[4]: /agent/configuration/agent-commands/#restart-the-agent
+[2]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[3]: /ja/getting_started/integrations/
+[4]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -94,4 +94,4 @@ Agent v7.21 / v6.21 以前の場合:
 
 [1]: https://github.com/DataDog/integrations-extras
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: /agent/configuration/network
+[3]: /ja/agent/configuration/network

@@ -1,10 +1,10 @@
 ---
-title: Forwarding Audit Events to Custom Destinations
 disable_toc: false
 further_reading:
 - link: /account_management/audit_trail/
   tag: Documentation
   text: Learn more about Audit Trail
+title: Forwarding Audit Events to Custom Destinations
 ---
 
 {{% site-region region="gov" %}}
@@ -85,4 +85,4 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 
 [1]: https://ip-ranges.datadoghq.com/
 [2]: https://app.datadoghq.com/organization-settings/audit-trail-settings
-[3]: /logs/explorer/search_syntax/
+[3]: /ja/logs/explorer/search_syntax/

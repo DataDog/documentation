@@ -1,5 +1,4 @@
 ---
-title: OTLP Receiver
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /opentelemetry/otlp_ingest_in_the_agent/
   tag: Documentation
   text: OTLP Ingestion by the Datadog Agent
+title: OTLP Receiver
 ---
 
 ## Overview

@@ -84,6 +84,6 @@ if ok {
     ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
 ```
 
-[1]: /agent
+[1]: /ja/agent
 [2]: https://github.com/DataDog/dd-trace-go
-[3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[3]: https://docs.datadoghq.com/ja/tracing/trace_collection/library_config/go/

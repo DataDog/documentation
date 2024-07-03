@@ -1,32 +1,32 @@
 ---
-"aliases":
-- "/integrations/awsec2/"
-- "/agent/faq/install-the-agent-with-aws-ssm"
-"categories":
-- "cloud"
-- "os & system"
-- "aws"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_ec2/"
-"draft": false
-"git_integration_title": "amazon_ec2"
-"has_logo": true
-"integration_id": "amazon-ec2"
-"integration_title": "Amazon EC2"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"monitors":
-  "ec2_cpu_utilization": "assets/monitors/ec2_cpu_utilization.json"
-  "ec2_host_ok": "assets/monitors/ec2_host_ok.json"
-  "ec2_status_check": "assets/monitors/ec2_status_check.json"
-"name": "amazon_ec2"
-"public_title": "Datadog-Amazon EC2 Integration"
-"short_description": "Track instance resource usage, monitor status checks, and more."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsec2/
+- /ja/agent/faq/install-the-agent-with-aws-ssm
+categories:
+- cloud
+- os & system
+- aws
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
+doc_link: https://docs.datadoghq.com/integrations/amazon_ec2/
+draft: false
+git_integration_title: amazon_ec2
+has_logo: true
+integration_id: amazon-ec2
+integration_title: Amazon EC2
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+monitors:
+  ec2_cpu_utilization: assets/monitors/ec2_cpu_utilization.json
+  ec2_host_ok: assets/monitors/ec2_host_ok.json
+  ec2_status_check: assets/monitors/ec2_status_check.json
+name: amazon_ec2
+public_title: Datadog-Amazon EC2 Integration
+short_description: Track instance resource usage, monitor status checks, and more.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -165,13 +165,13 @@ Need help? Contact [Datadog support][21].
 - [How to collect EC2 metrics][26]
 - [How to monitor EC2 instances with Datadog][27]
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html
 [5]: https://app.datadoghq.com/integrations/amazon-ec2
 [6]: https://app.datadoghq.com/monitors/downtimes
-[7]: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[7]: https://docs.datadoghq.com/ja/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
 [9]: https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-permissions.html
 [10]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html
@@ -182,14 +182,13 @@ Need help? Contact [Datadog support][21].
 [15]: https://docs.datadoghq.com/resources/json/dd-agent-install-eu-site.json
 [16]: https://console.aws.amazon.com/systems-manager/run-command/executing-commands
 [17]: https://app.datadoghq.com/infrastructure
-[18]: https://docs.datadoghq.com/agent/logs/
-[19]: https://docs.datadoghq.com/integrations/rsyslog/
+[18]: https://docs.datadoghq.com/ja/agent/logs/
+[19]: https://docs.datadoghq.com/ja/integrations/rsyslog/
 [20]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/amazon_ec2_metadata.csv
-[21]: https://docs.datadoghq.com/help/
+[21]: https://docs.datadoghq.com/ja/help/
 [22]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/service_checks.json
 [23]: https://app.datadoghq.com/dash/integration/60/aws-ec2-overview
 [24]: https://app.datadoghq.com/monitors/recommended
 [25]: https://www.datadoghq.com/blog/ec2-monitoring
 [26]: https://www.datadoghq.com/blog/collecting-ec2-metrics
 [27]: https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog
-

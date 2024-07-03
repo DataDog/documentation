@@ -1,7 +1,6 @@
 ---
-title: OpenTelemetry Metrics Mapping
 aliases:
-- /opentelemetry/guide/metrics_mapping/
+- /ja/opentelemetry/guide/metrics_mapping/
 further_reading:
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /opentelemetry/guide/semantic_mapping
   tag: Documentation
   text: Resource attribute mapping from OpenTelemetry to Datadog
+title: OpenTelemetry Metrics Mapping
 ---
 
 ## 概要
@@ -154,13 +154,12 @@ The following table shows what Datadog container metric names are associated wit
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[2]: /opentelemetry/otel_collector_datadog_exporter/
-[3]: /universal_service_monitoring/setup/
-[4]: /opentelemetry/guide/semantic_mapping/
+[2]: /ja/opentelemetry/otel_collector_datadog_exporter/
+[3]: /ja/universal_service_monitoring/setup/
+[4]: /ja/opentelemetry/guide/semantic_mapping/
 [5]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [6]: https://app.datadoghq.com/infrastructure
-[7]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
-[8]: /tracing/trace_explorer/trace_view/?tab=hostinfo
-[9]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
-[10]: /tracing/trace_explorer/trace_view/
-
+[7]: /ja/opentelemetry/collector_exporter/#out-of-the-box-dashboards
+[8]: /ja/tracing/trace_explorer/trace_view/?tab=hostinfo
+[9]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
+[10]: /ja/tracing/trace_explorer/trace_view/

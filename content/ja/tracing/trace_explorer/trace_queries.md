@@ -1,20 +1,21 @@
 ---
-title: トレースクエリ
-kind: documentation
-description: "トレースクエリ"
-is_beta: true
 aliases:
- - /tracing/trace_queries
+- /ja/tracing/trace_queries
+description: トレースクエリ
 further_reading:
-- link: "https://www.datadoghq.com/blog/trace-queries/"
+- link: https://www.datadoghq.com/blog/trace-queries/
   tag: Blog
-  text: Analyze the root causes and business impact of production issues with Trace Queries
+  text: Analyze the root causes and business impact of production issues with Trace
+    Queries
 - link: tracing/trace_explorer
   tag: Documentation
   text: トレースエクスプローラー
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentation
   text: Span Query Syntax
+is_beta: true
+kind: documentation
+title: トレースクエリ
 ---
 
 ## Overview
@@ -129,8 +130,8 @@ Every 15 minutes, diversity sampling retains at least one span and the associate
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_explorer/query_syntax/
-[2]: /tracing/trace_explorer/visualize/#timeseries
-[3]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
-[4]: /tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling
-[5]: /tracing/trace_pipeline/trace_retention/#diversity-sampling
+[1]: /ja/tracing/trace_explorer/query_syntax/
+[2]: /ja/tracing/trace_explorer/visualize/#timeseries
+[3]: /ja/tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
+[4]: /ja/tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling
+[5]: /ja/tracing/trace_pipeline/trace_retention/#diversity-sampling

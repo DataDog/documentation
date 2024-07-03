@@ -1,6 +1,6 @@
 ---
-title: Pipeline Execution Facets
-description: Learn about default facets that you can use to search your pipeline executions in the CI Visibility Explorer.
+description: Learn about default facets that you can use to search your pipeline executions
+  in the CI Visibility Explorer.
 further_reading:
 - link: continuous_integration/search/
   tag: Documentation
@@ -8,6 +8,7 @@ further_reading:
 - link: continuous_integration/explorer/
   tag: Documentation
   text: CI Visibility Explorer について
+title: Pipeline Execution Facets
 ---
 
 ## 概要
@@ -151,10 +152,10 @@ Autocomplete based on the content in pipeline executions of the current views he
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/types/ci
-[2]: /dashboards/
-[3]: /notebooks/
-[4]: /continuous_integration/explorer
-[5]: /continuous_integration/search
-[6]: /continuous_integration/explorer/search_syntax/
+[1]: /ja/monitors/types/ci
+[2]: /ja/dashboards/
+[3]: /ja/notebooks/
+[4]: /ja/continuous_integration/explorer
+[5]: /ja/continuous_integration/search
+[6]: /ja/continuous_integration/explorer/search_syntax/
 [7]: https://app.datadoghq.com/ci/pipeline-executions

@@ -1,58 +1,58 @@
 ---
-"app_id": "snmp-cisco"
-"app_uuid": "91202d4a-1af4-4c64-88e4-5ba02b23c69f"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10136"
-    "source_type_name": Cisco
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: snmp-cisco
+app_uuid: 91202d4a-1af4-4c64-88e4-5ba02b23c69f
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10136
+    source_type_name: Cisco
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - network
 - notifications
 - snmp
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "snmp_cisco"
-"integration_id": "snmp-cisco"
-"integration_title": "Cisco"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "snmp_cisco"
-"public_title": "Cisco"
-"short_description": "Collect SNMP metrics from your Cisco network devices."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: snmp_cisco
+integration_id: snmp-cisco
+integration_title: Cisco
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: snmp_cisco
+public_title: Cisco
+short_description: Collect SNMP metrics from your Cisco network devices.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Network"
-  - "Category::Notifications"
-  - "Category::SNMP"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Collect SNMP metrics from your Cisco network devices.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cisco
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Network
+  - Category::Notifications
+  - Category::SNMP
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Collect SNMP metrics from your Cisco network devices.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cisco
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -104,13 +104,12 @@ SNMP Cisco には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-[1]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/
-[2]: https://docs.datadoghq.com/integrations/meraki/
+[1]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_cisco_asa/
+[2]: https://docs.datadoghq.com/ja/integrations/meraki/
 [3]: https://app.datadoghq.com/account/settings#integrations/meraki
-[4]: https://docs.datadoghq.com/integrations/cisco_sdwan/
-[5]: https://docs.datadoghq.com/network_monitoring/devices/#vendor-profiles
-[6]: https://docs.datadoghq.com/network_performance_monitoring/devices/setup
+[4]: https://docs.datadoghq.com/ja/integrations/cisco_sdwan/
+[5]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[6]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
 [7]: https://app.datadoghq.com/account/settings#integrations/snmp
 [8]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

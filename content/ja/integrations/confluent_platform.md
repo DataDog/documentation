@@ -1,64 +1,64 @@
 ---
-"app_id": "confluent-platform"
-"app_uuid": "14e9ea66-bd7c-4c84-b642-a0290166deb4"
-"assets":
-  "dashboards":
-    "Confluent Platform Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": confluent.kafka.producer.outgoing_byte_rate
-      "metadata_path": metadata.csv
-      "prefix": confluent.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10091"
-    "source_type_name": Confluent Platform
-  "monitors":
-    "[Confluent Platform] Unclean leader election": assets/monitors/unclean_leader_election.json
-    "[Confluent Platform] Unused topic partition": assets/monitors/unused_partition.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: confluent-platform
+app_uuid: 14e9ea66-bd7c-4c84-b642-a0290166deb4
+assets:
+  dashboards:
+    Confluent Platform Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: confluent.kafka.producer.outgoing_byte_rate
+      metadata_path: metadata.csv
+      prefix: confluent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10091
+    source_type_name: Confluent Platform
+  monitors:
+    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
+    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "confluent_platform"
-"integration_id": "confluent-platform"
-"integration_title": "Confluent Platform"
-"integration_version": "1.10.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "confluent_platform"
-"public_title": "Confluent Platform"
-"short_description": "Monitor Confluent Platform components."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: confluent_platform
+integration_id: confluent-platform
+integration_title: Confluent Platform
+integration_version: 1.10.2
+is_public: true
+manifest_version: 2.0.0
+name: confluent_platform
+public_title: Confluent Platform
+short_description: Monitor Confluent Platform components.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor Confluent Platform components.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Confluent Platform
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor Confluent Platform components.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Confluent Platform
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -185,10 +185,9 @@ Confluent Platform チェックには、イベントは含まれません。
 [2]: https://github.com/DataDog/jmxfetch
 [3]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/metadata.csv
-[7]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

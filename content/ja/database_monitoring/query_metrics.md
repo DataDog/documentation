@@ -1,5 +1,4 @@
 ---
-title: Exploring Query Metrics
 description: Explore and dig into your database and query performance metrics
 further_reading:
 - link: /database_monitoring/
@@ -16,15 +15,14 @@ further_reading:
   text: SQL Server integration
 - link: /integrations/oracle/
   tag: Documentation
-  text: Oracle integration  
+  text: Oracle integration
 - link: /database_monitoring/data_collected/
   tag: Documentation
   text: 収集データ
 - link: /database_monitoring/troubleshooting/
   tag: Documentation
   text: Troubleshooting
-
-
+title: Exploring Query Metrics
 ---
 
 クエリメトリクスビューには、正規化されたクエリの過去のクエリパフォーマンスが表示されます。インフラストラクチャーまたはデータセンターのアベイラビリティーゾーンなどのカスタムタグによってパフォーマンスの傾向を視覚化し、異常についてアラートを受け取ります。
@@ -125,9 +123,9 @@ Datadog collects explain plans continuously, so a given query can have multiple 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/databases/queries
-[2]: /database_monitoring/data_collected/#which-queries-are-tracked
-[3]: /database_monitoring/query_samples/
-[4]: /database_monitoring/data_collected/#normalized-queries
-[5]: /database_monitoring/query_samples/#sample-details
-[6]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans
-[7]: /database_monitoring/database_hosts/#stored-procedures
+[2]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
+[3]: /ja/database_monitoring/query_samples/
+[4]: /ja/database_monitoring/data_collected/#normalized-queries
+[5]: /ja/database_monitoring/query_samples/#sample-details
+[6]: /ja/database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[7]: /ja/database_monitoring/database_hosts/#stored-procedures

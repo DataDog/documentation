@@ -1,9 +1,9 @@
 ---
-title: Datadog IDE Plugins
+aliases:
+- /ja/developers/ide_integrations/
 description: Learn how to set up Datadog IDE plugins.
 disable_toc: false
-aliases:
-- /developers/ide_integrations/
+title: Datadog IDE Plugins
 ---
 
 ## 概要

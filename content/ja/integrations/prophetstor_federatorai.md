@@ -1,99 +1,108 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "prophetstor-federatorai-license"
-"app_uuid": "965e6142-3b99-4999-a7c6-09a00775e511"
-"assets":
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": ""
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": federatorai.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10187"
-    "source_type_name": Federator.ai.license
-"author":
-  "homepage": "https://www.prophetstor.com/"
-  "name": ProphetStor
-  "sales_email": dd_subscription@prophetstor.com
-  "support_email": support@prophetstor.com
-  "vendor_id": prophetstor
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: prophetstor-federatorai-license
+app_uuid: 965e6142-3b99-4999-a7c6-09a00775e511
+assets:
+  integration:
+    auto_install: false
+    configuration:
+      spec: ''
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: federatorai.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10187
+    source_type_name: Federator.ai.license
+author:
+  homepage: https://www.prophetstor.com/
+  name: ProphetStor
+  sales_email: dd_subscription@prophetstor.com
+  support_email: support@prophetstor.com
+  vendor_id: prophetstor
+categories:
 - containers
 - kubernetes
 - marketplace
 - orchestration
 - ai/ml
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "prophetstor_federatorai"
-"integration_id": "prophetstor-federatorai-license"
-"integration_title": "ProphetStor Federator.ai"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "prophetstor_federatorai"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": federatorai-license
-  "short_description": $2000 per month
-  "unit_price": !!int "2000"
-"public_title": "ProphetStor Federator.ai"
-"short_description": "Federator.ai license for optimizing Kubernetes applications"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: prophetstor_federatorai
+integration_id: prophetstor-federatorai-license
+integration_title: ProphetStor Federator.ai
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: prophetstor_federatorai
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: federatorai-license
+  short_description: $2000 per month
+  unit_price: 2000
+public_title: ProphetStor Federator.ai
+short_description: Federator.ai license for optimizing Kubernetes applications
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Kubernetes"
-  - "Category::Marketplace"
-  - "Category::Orchestration"
-  - "Category::AI/ML"
-  - "Offering::Software License"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": Federator.ai license for optimizing Kubernetes applications
-  "media":
-  - "caption": The ProphetStor Federator.ai Cluster Overview dashboard displays resource usage predictions and recommendations for Kubernetes clusters and nodes and historical usage.
-    "image_url": images/Federator_ai_Datadog_Cluster_Overview.png
-    "media_type": image
-  - "caption": The ProphetStor Federator.ai Application Overview dashboard displays predicted CPU and memory usage and recommendations for each application.
-    "image_url": images/Federator_ai_Datadog_Application_Overview.png
-    "media_type": image
-  - "caption": The ProphetStor Federator.ai Kafka Overview dashboard displays usage information and recommendations about autoscaling Kafka consumer replicas.
-    "image_url": images/Federator_ai_Datadog_Kafka_Overview.png
-    "media_type": image
-  - "caption": The ProphetStor Federator.ai Cost Analysis Overview dashboard shows deployment cost of a Kubernetes cluster and recommendations of cluster configuration and estimated cost/savings when it is deployed on public cloud service providers.
-    "image_url": images/Federator_ai_Datadog_Cost_Analysis_Overview.png
-    "media_type": image
-  - "caption": Federator.ai dashboard displays workload prediction and resource recommendations for Kubernetes or VM clusters and applications.
-    "image_url": images/Federator_ai_Dashboard.png
-    "media_type": image
-  - "caption": Federator.ai provides predictions and resource recommendations for clusters, nodes, namespaces, applications, and controllers
-    "image_url": images/Federator_ai_Workload_Prediction.png
-    "media_type": image
-  - "caption": Based on predicted workload of a cluster, Federator.ai recommends most cost-effective cluster configuration for different public cloud provider.
-    "image_url": images/Federator_ai_Multicloud_Cost_Analysis.png
-    "media_type": image
-  - "caption": Federator.ai analyzes and projects cost trend for individual namespace.
-    "image_url": images/Federator_ai_Cost_Allocation.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": ProphetStor Federator.ai
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Marketplace
+  - Category::Orchestration
+  - Category::AI/ML
+  - Offering::Software License
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Federator.ai license for optimizing Kubernetes applications
+  media:
+  - caption: The ProphetStor Federator.ai Cluster Overview dashboard displays resource
+      usage predictions and recommendations for Kubernetes clusters and nodes and
+      historical usage.
+    image_url: images/Federator_ai_Datadog_Cluster_Overview.png
+    media_type: image
+  - caption: The ProphetStor Federator.ai Application Overview dashboard displays
+      predicted CPU and memory usage and recommendations for each application.
+    image_url: images/Federator_ai_Datadog_Application_Overview.png
+    media_type: image
+  - caption: The ProphetStor Federator.ai Kafka Overview dashboard displays usage
+      information and recommendations about autoscaling Kafka consumer replicas.
+    image_url: images/Federator_ai_Datadog_Kafka_Overview.png
+    media_type: image
+  - caption: The ProphetStor Federator.ai Cost Analysis Overview dashboard shows deployment
+      cost of a Kubernetes cluster and recommendations of cluster configuration and
+      estimated cost/savings when it is deployed on public cloud service providers.
+    image_url: images/Federator_ai_Datadog_Cost_Analysis_Overview.png
+    media_type: image
+  - caption: Federator.ai dashboard displays workload prediction and resource recommendations
+      for Kubernetes or VM clusters and applications.
+    image_url: images/Federator_ai_Dashboard.png
+    media_type: image
+  - caption: Federator.ai provides predictions and resource recommendations for clusters,
+      nodes, namespaces, applications, and controllers
+    image_url: images/Federator_ai_Workload_Prediction.png
+    media_type: image
+  - caption: Based on predicted workload of a cluster, Federator.ai recommends most
+      cost-effective cluster configuration for different public cloud provider.
+    image_url: images/Federator_ai_Multicloud_Cost_Analysis.png
+    media_type: image
+  - caption: Federator.ai analyzes and projects cost trend for individual namespace.
+    image_url: images/Federator_ai_Cost_Allocation.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ProphetStor Federator.ai
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -126,9 +135,9 @@ For support or requests, contact [ProphetStor support](mailto:support@prophetsto
 [4]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20Installation%20Guide.pdf
 [5]: images/add_cluster_window.png
 [6]: https://www.datadoghq.com/
-[7]: https://docs.datadoghq.com/account_management/api-app-keys/
+[7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [8]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20User%20Guide.pdf
-[9]: /integrations/federatorai
+[9]: /ja/integrations/federatorai
 
 ---
 This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/prophetstor-federatorai-license" target="_blank">Click Here</a> to purchase this application.

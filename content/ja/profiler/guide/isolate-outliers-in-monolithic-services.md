@@ -1,5 +1,4 @@
 ---
-title: Isolate Outliers in Monolithic Services
 further_reading:
 - link: /profiler
   tag: Documentation
@@ -7,6 +6,7 @@ further_reading:
 - link: /profiler/compare_profiles/
   tag: Documentation
   text: Comparing Profiles
+title: Isolate Outliers in Monolithic Services
 ---
 
 ## 概要

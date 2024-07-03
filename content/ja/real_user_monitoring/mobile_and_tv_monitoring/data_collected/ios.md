@@ -1,17 +1,17 @@
 ---
-title: RUM iOS Data Collected
-code_lang: ios
-type: multi-code-lang
-code_lang_weight: 20
 aliases:
-- /real_user_monitoring/ios/data_collected/
+- /ja/real_user_monitoring/ios/data_collected/
+code_lang: ios
+code_lang_weight: 20
 further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: ソースコード
-    text: Source code for dd-sdk-ios
-  - link: /real_user_monitoring/
-    tag: Documentation
-    text: Datadog Real User Monitoring
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: ソースコード
+  text: Source code for dd-sdk-ios
+- link: /real_user_monitoring/
+  tag: Documentation
+  text: Datadog Real User Monitoring
+title: RUM iOS Data Collected
+type: multi-code-lang
 ---
 
 ## 概要
@@ -250,9 +250,9 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
-[2]: /real_user_monitoring/ios/advanced_configuration/#track-user-sessions
+[1]: /ja/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
+[2]: /ja/real_user_monitoring/ios/advanced_configuration/#track-user-sessions
 [3]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [4]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
-[5]: /data_security/real_user_monitoring/#ip-address
-[6]: /data_security/real_user_monitoring/#geolocation
+[5]: /ja/data_security/real_user_monitoring/#ip-address
+[6]: /ja/data_security/real_user_monitoring/#geolocation

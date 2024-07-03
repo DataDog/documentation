@@ -1,19 +1,19 @@
 ---
-title: Graphing with JSON
 aliases:
-- /graphingjson/
-- /graphing/miscellaneous/graphingjson
-- /graphing/graphing_json/
-- /dashboards/graphing_json/
-- /dashboards/graphing_json/request_json/
-- /dashboards/graphing_json/widget_json/
+- /ja/graphingjson/
+- /ja/graphing/miscellaneous/graphingjson
+- /ja/graphing/graphing_json/
+- /ja/dashboards/graphing_json/
+- /ja/dashboards/graphing_json/request_json/
+- /ja/dashboards/graphing_json/widget_json/
 further_reading:
-- link: "https://docs.datadoghq.com/api/latest/dashboards/"
+- link: https://docs.datadoghq.com/api/latest/dashboards/
   tag: API
   text: Dashboards API
 - link: /dashboards/widgets/
   tag: Documentation
   text: Widgets
+title: Graphing with JSON
 ---
 
 ## 概要
@@ -48,9 +48,9 @@ Datadog の Y 軸コントロールには以下の機能があります。
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#get-started
-[2]: /api/v1/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
-[4]: /dashboards/template_variables/
-[6]: /dashboards/querying/#graphing-editor
-[7]: /dashboards/widgets/
+[1]: /ja/dashboards/#get-started
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/
+[4]: /ja/dashboards/template_variables/
+[6]: /ja/dashboards/querying/#graphing-editor
+[7]: /ja/dashboards/widgets/

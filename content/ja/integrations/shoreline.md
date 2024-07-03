@@ -1,57 +1,57 @@
 ---
-"app_id": "shoreline-integration"
-"app_uuid": "90e1b0ed-0907-4973-929c-7e7f1be0c4f4"
-"assets":
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://shoreline.io/"
-  "name": Shoreline.io
-  "sales_email": sales@shoreline.io
-  "support_email": support@shoreline.io
-"categories":
+app_id: shoreline-integration
+app_uuid: 90e1b0ed-0907-4973-929c-7e7f1be0c4f4
+assets:
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://shoreline.io/
+  name: Shoreline.io
+  sales_email: sales@shoreline.io
+  support_email: support@shoreline.io
+categories:
 - automation
 - incidents
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/shoreline/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "shoreline"
-"integration_id": "shoreline-integration"
-"integration_title": "Shoreline.io"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"manifest_version": "2.0.0"
-"name": "shoreline"
-"public_title": "Shoreline.io"
-"short_description": "Build automations to repair triggered monitors"
-"supported_os":
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/shoreline/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: shoreline
+integration_id: shoreline-integration
+integration_title: Shoreline.io
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: 2.0.0
+name: shoreline
+public_title: Shoreline.io
+short_description: Build automations to repair triggered monitors
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Incidents"
-  - "Offering::UI Extension"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": Build automations to repair triggered monitors
-  "media":
-  - "caption": Remediation dashboard
-    "image_url": images/remediation_dashboard.png
-    "media_type": image
-  - "caption": Example of remediation automation setup
-    "image_url": images/automate_remediation.png
-    "media_type": image
-  - "caption": Example of fleetwide interactive debugging and repair
-    "image_url": images/fleetwide_interactive_debugging_and_repair.png
-    "media_type": image
-  - "caption": Example of fleetwide linux command details
-    "image_url": images/fleetwide_linux_command_details.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Shoreline.io
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Incidents
+  - Offering::UI Extension
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Build automations to repair triggered monitors
+  media:
+  - caption: Remediation dashboard
+    image_url: images/remediation_dashboard.png
+    media_type: image
+  - caption: Example of remediation automation setup
+    image_url: images/automate_remediation.png
+    media_type: image
+  - caption: Example of fleetwide interactive debugging and repair
+    image_url: images/fleetwide_interactive_debugging_and_repair.png
+    media_type: image
+  - caption: Example of fleetwide linux command details
+    image_url: images/fleetwide_linux_command_details.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Shoreline.io
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -120,6 +120,5 @@ For more information, see the [Shoreline documentation][8].
 [4]: https://docs.shoreline.io/installation/virtual-machines
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/shoreline/images/integrate_shoreline_and_datadog.png
 [6]: https://docs.shoreline.io/integrations/datadog
-[7]: https://docs.datadoghq.com/help/
+[7]: https://docs.datadoghq.com/ja/help/
 [8]: https://docs.shoreline.io/
-

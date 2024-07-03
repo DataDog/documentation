@@ -1,6 +1,6 @@
 ---
-title: Watchdog Alerts
 kind: documentation
+title: Watchdog Alerts
 ---
 
 ## Overview
@@ -91,8 +91,8 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 To disable log anomaly detection, go to the [Log Management pipeline page][4] and click the Log Anomalies toggle.
 
 [1]: https://app.datadoghq.com/watchdog
-[2]: /monitors/types/watchdog/
-[3]: /watchdog/insights?tab=logmanagement#explore-insights
+[2]: /ja/monitors/types/watchdog/
+[3]: /ja/watchdog/insights?tab=logmanagement#explore-insights
 [4]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "APM" %}}
@@ -151,20 +151,20 @@ Watchdog looks at infrastructure metrics from the following integrations:
 Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
 Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
-[1]: /integrations/system/
-[2]: /integrations/redisdb/
-[3]: /integrations/postgres/
-[4]: /integrations/nginx/
-[5]: /integrations/amazon_web_services/
-[6]: /integrations/amazon_s3/
-[7]: /integrations/amazon_elb/
-[8]: /integrations/amazon_cloudfront/
-[9]: /integrations/amazon_dynamodb/
-[10]: /integrations/amazon_rds/
-[11]: /containers/amazon_ecs/?tab=awscli
-[12]: /serverless/
-[13]: /containers/docker/?tab=standard
-[14]: /containers/kubernetes/installation/?tab=operator
+[1]: /ja/integrations/system/
+[2]: /ja/integrations/redisdb/
+[3]: /ja/integrations/postgres/
+[4]: /ja/integrations/nginx/
+[5]: /ja/integrations/amazon_web_services/
+[6]: /ja/integrations/amazon_s3/
+[7]: /ja/integrations/amazon_elb/
+[8]: /ja/integrations/amazon_cloudfront/
+[9]: /ja/integrations/amazon_dynamodb/
+[10]: /ja/integrations/amazon_rds/
+[11]: /ja/containers/amazon_ecs/?tab=awscli
+[12]: /ja/serverless/
+[13]: /ja/containers/docker/?tab=standard
+[14]: /ja/containers/kubernetes/installation/?tab=operator
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -207,14 +207,14 @@ To see archived alerts, select the checkbox option to **Show _N_ archived alerts
 
 **注**: アーカイブ後であっても、Watchdog はサービスやリソースに関連する問題にフラグを立てます。
 
-[1]: /watchdog
-[3]: /tracing/services/service_page/
-[4]: /watchdog/impact_analysis/
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: /tracing/service_catalog/
-[8]: /watchdog/insights?tab=logmanagement#explore-insights
-[9]: /watchdog/rca/
-[10]: /monitors/types/anomaly/
-[11]: /monitors/types/forecasts/?tab=linear
-[12]: /monitors/types/outlier/?tab=dbscan
+[1]: /ja/watchdog
+[3]: /ja/tracing/services/service_page/
+[4]: /ja/watchdog/impact_analysis/
+[5]: /ja/getting_started/tagging/unified_service_tagging/
+[6]: /ja/tracing/guide/setting_primary_tags_to_scope/
+[7]: /ja/tracing/service_catalog/
+[8]: /ja/watchdog/insights?tab=logmanagement#explore-insights
+[9]: /ja/watchdog/rca/
+[10]: /ja/monitors/types/anomaly/
+[11]: /ja/monitors/types/forecasts/?tab=linear
+[12]: /ja/monitors/types/outlier/?tab=dbscan

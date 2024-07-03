@@ -1,9 +1,9 @@
 ---
-title: イベントサイドパネル
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: イベント検索
+title: イベントサイドパネル
 ---
 
 ## 概要
@@ -33,4 +33,4 @@ Product Analytics collects contextual information by default. You can also add a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/explorer
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context

@@ -1,15 +1,15 @@
 ---
-title: SLO List Widget
-widget_type: slo_list
-description: "Display a list of SLOs"
-aliases:
+aliases: null
+description: Display a list of SLOs
 further_reading:
-- link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
+- link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
   tag: Blog
   text: Track the status of all your SLOs in Datadog
 - link: /dashboards/graphing_json/
   tag: Documentation
-  text: Building Dashboards using JSON 
+  text: Building Dashboards using JSON
+title: SLO List Widget
+widget_type: slo_list
 ---
 
 SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service.
@@ -41,6 +41,6 @@ The SLO List widget displays a subset of SLOs over their primary time window. Al
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/service_management/service_level_objectives/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

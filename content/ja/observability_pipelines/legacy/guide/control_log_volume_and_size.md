@@ -1,15 +1,15 @@
 ---
-title: (LEGACY) Control Log Volume and Size
 aliases:
-  - /integrations/observability_pipelines/guide/control_log_volume_and_size/
-  - /observability_pipelines/guide/control_log_volume_and_size/
+- /ja/integrations/observability_pipelines/guide/control_log_volume_and_size/
+- /ja/observability_pipelines/guide/control_log_volume_and_size/
 further_reading:
-  - link: /observability_pipelines/legacy/working_with_data/
-    tag: Documentation
-    text: Working with data using Observability Pipelines
-  - link: /observability_pipelines/legacy/configurations/
-    tag: Documentation
-    text: Learn more about Observability Pipelines configurations
+- link: /observability_pipelines/legacy/working_with_data/
+  tag: Documentation
+  text: Working with data using Observability Pipelines
+- link: /observability_pipelines/legacy/configurations/
+  tag: Documentation
+  text: Learn more about Observability Pipelines configurations
+title: (LEGACY) Control Log Volume and Size
 ---
 
 ## 概要
@@ -493,13 +493,12 @@ del(.unecessary_tag_field)"""
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/legacy/setup/
-[2]: /observability_pipelines/legacy/configurations/
-[3]: /observability_pipelines/legacy/reference/transforms/#dedupe
-[4]: /observability_pipelines/legacy/reference/transforms/#filter
-[5]: /observability_pipelines/legacy/reference/processing_language/
-[6]: /logs/explorer/search_syntax/
-[7]: /observability_pipelines/legacy/reference/transforms/#sample
-[8]: /observability_pipelines/legacy/reference/transforms/#logtometric
-[9]: /observability_pipelines/legacy/reference/transforms/#reduce
-
+[1]: /ja/observability_pipelines/legacy/setup/
+[2]: /ja/observability_pipelines/legacy/configurations/
+[3]: /ja/observability_pipelines/legacy/reference/transforms/#dedupe
+[4]: /ja/observability_pipelines/legacy/reference/transforms/#filter
+[5]: /ja/observability_pipelines/legacy/reference/processing_language/
+[6]: /ja/logs/explorer/search_syntax/
+[7]: /ja/observability_pipelines/legacy/reference/transforms/#sample
+[8]: /ja/observability_pipelines/legacy/reference/transforms/#logtometric
+[9]: /ja/observability_pipelines/legacy/reference/transforms/#reduce

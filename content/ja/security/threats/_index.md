@@ -1,12 +1,12 @@
 ---
-title: Cloud Security Management Threats
 aliases:
-  - /security_platform/cloud_workload_security/
-  - /security/cloud_workload_security/
-  - /security/cloud_workload_security/agent_expressions
-  - /security/cloud_workload_security/backend/
-  - /security/threats/security_profiles
-  - /security/threats/runtime_anomaly_detection
+- /ja/security_platform/cloud_workload_security/
+- /ja/security/cloud_workload_security/
+- /ja/security/cloud_workload_security/agent_expressions
+- /ja/security/cloud_workload_security/backend/
+- /ja/security/threats/security_profiles
+- /ja/security/threats/runtime_anomaly_detection
+title: Cloud Security Management Threats
 ---
 
 Cloud Security Management Threats (CSM Threats) は、環境全体のファイル、ネットワーク、プロセスアクティビティを監視し、インフラストラクチャーに対する脅威をリアルタイムで検出します。Datadog プラットフォームの一部として、CSM Threats のリアルタイム脅威検出をメトリクス、ログ、トレース、その他のテレメトリーと組み合わせることで、ワークロードに対する潜在的な攻撃を取り巻く完全なコンテキストを確認することができます。
@@ -65,13 +65,13 @@ Datadog is introducing a new feature called Active Protection to address the cry
   {{< nextlink href="/getting_started/cloud_security_management">}}Cloud Security Management の概要{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/threats/setup/?tab=kuberneteshelm#prerequisites
-[2]: /agent/
-[3]: /security/notifications/
-[4]: /security/notifications/#notification-channels
-[5]: /security/notifications/#detection-rule-notifications
-[6]: /security/threats/agent_expressions
-[7]: /security/threats/setup
-[8]: /security/threats/security_signals
-[9]: /network_monitoring/performance/
-[10]: /security/cloud_security_management/guide/active-protection
+[1]: /ja/security/threats/setup/?tab=kuberneteshelm#prerequisites
+[2]: /ja/agent/
+[3]: /ja/security/notifications/
+[4]: /ja/security/notifications/#notification-channels
+[5]: /ja/security/notifications/#detection-rule-notifications
+[6]: /ja/security/threats/agent_expressions
+[7]: /ja/security/threats/setup
+[8]: /ja/security/threats/security_signals
+[9]: /ja/network_monitoring/performance/
+[10]: /ja/security/cloud_security_management/guide/active-protection

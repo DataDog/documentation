@@ -1,13 +1,12 @@
 ---
-title: Real User Monitoring & Session Replay Guides
-kind: guide
-private: true
-disable_toc: true
 cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: RUM & Session Replay Guides
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: RUM & Session Replay Guides
+disable_toc: true
+private: true
+title: Real User Monitoring & Session Replay Guides
 ---
 
 {{< whatsnext desc="General RUM:" >}}
@@ -25,38 +24,38 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Browser RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Send custom user actions{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identify bots in the RUM Explorer{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Upload JavaScript source maps{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}Control session volume using sampling configuration for Browser RUM and Browser RUM & Session Replay{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Enrich and control your browser RUM data{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Upgrade the RUM Browser SDK{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Proxy your browser RUM data {{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}Tips when using browser developers tools{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}Define services and track UI components in your browser application {{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Enable RUM on your Shopify store{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Squarespace store{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitor your Next.js application with RUM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
+{{< whatsnext desc="ブラウザ RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}カスタムユーザーアクションの送信{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}RUM エクスプローラーでボットを特定する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}JavaScript ソースマップのアップロード{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}ブラウザ RUM およびブラウザ RUM & セッションリプレイのサンプリング構成によるセッションボリュームの制御{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}ブラウザ RUM データの強化および制御{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}RUM ブラウザ SDK のアップグレード{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}ブラウザ RUM データをプロキシする {{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}ブラウザ開発ツール使用時の注意点{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}ブラウザアプリケーションでサービスを定義し、UI コンポーネントを追跡する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Shopify ストアで RUM を有効にする{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Squarespace ストアで RUM を有効にする{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}WordPress + WooCommerce ストアで RUM を有効にする{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}RUM を使用した Next.js アプリケーションの監視{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Electron アプリケーションの監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Mobile RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDKs Deprecation Policy{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Upgrade the RUM Mobile SDKs{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Use multiple instances of the Mobile SDK{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Proxy your Mobile RUM data{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}Initialize your native SDK before React Native starts{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}Monitor hybrid React Native applications{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDK の非推奨ポリシー{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM Mobile SDK のアップグレード{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Mobile SDK の複数インスタンスの使用{{< /nextlink >}}
+ {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}モバイル RUM データのプロキシ{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}React Native の起動前にネイティブ SDK を初期化する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}ハイブリッド React Native アプリケーションを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Session Replay:" >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Allow third-party service workers for Session Replay{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Use Session Replay in your Support workflows{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enrich your Session Replays with Shadow DOM components{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connect Session Replay to your third-party tools{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Using Session Replay as a key tool in post-mortems{{< /nextlink >}}
-    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generate Synthetic Browser Tests from Session Replay{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigate Zendesk Tickets with Session Replay{{< /nextlink >}}
+{{< whatsnext desc="セッションリプレイ" >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}セッションリプレイのためのサードパーティサービスワーカーの許可{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}サポートのワークフローでセッションリプレイを使用する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM コンポーネントでセッションリプレイをリッチ化する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}セッションリプレイとサードパーティツールの連携{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}ポストモーテムでの主要ツールとしてセッションリプレイを使用する{{< /nextlink >}}
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}セッションリプレイから Synthetic ブラウザテストを生成する{{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}セッションリプレイで Zendesk チケットを調査する{{< /nextlink >}}
 {{< /whatsnext >}}

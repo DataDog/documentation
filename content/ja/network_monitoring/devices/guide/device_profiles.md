@@ -1,7 +1,4 @@
 ---
-title: Getting Started with Device Profiles
-kind: ガイド
-is_beta: true
 further_reading:
 - link: /network_monitoring/devices/guide/build-ndm-profile/
   tag: ドキュメント
@@ -9,6 +6,8 @@ further_reading:
 - link: /network_monitoring/devices/profiles
   tag: ドキュメント
   text: Read more about NDM Profiles
+is_beta: true
+title: Getting Started with Device Profiles
 ---
 
 {{< site-region region="gov" >}}
@@ -131,7 +130,7 @@ The advanced options for scalar and tabular metrics are the same:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/devices
-[2]: /network_monitoring/devices/profiles/
+[2]: /ja/network_monitoring/devices/profiles/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [4]: https://app.datadoghq.com/devices/profiles
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#format-mac_address

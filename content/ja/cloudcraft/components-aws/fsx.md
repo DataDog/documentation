@@ -1,5 +1,5 @@
 ---
-title: "FSx Component"
+title: FSx Component
 ---
 ## 概要
 
@@ -84,6 +84,6 @@ FSx コンポーネントは [VPC][2]、[セキュリティグループ][3]、[�
 `throughputCapacity` キーは `fileSystemType` が `windows` に設定されている場合にのみ適用できます。
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/security-group/
-[4]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/security-group/
+[4]: /ja/cloudcraft/components-aws/subnet/

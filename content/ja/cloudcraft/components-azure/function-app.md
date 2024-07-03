@@ -1,5 +1,5 @@
 ---
-title: "Function App Component"
+title: Function App Component
 ---
 
 ## 概要

@@ -1,65 +1,65 @@
 ---
-"app_id": "cert-manager"
-"app_uuid": "d8bac6db-8cf7-49ca-a4b8-643714fbc7b9"
-"assets":
-  "dashboards":
-    "Cert-Manager Overview Dashboard": assets/dashboards/certmanager_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cert_manager.clock_time
-      "metadata_path": metadata.csv
-      "prefix": cert_manager.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10161"
-    "source_type_name": cert-manager
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: cert-manager
+app_uuid: d8bac6db-8cf7-49ca-a4b8-643714fbc7b9
+assets:
+  dashboards:
+    Cert-Manager Overview Dashboard: assets/dashboards/certmanager_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cert_manager.clock_time
+      metadata_path: metadata.csv
+      prefix: cert_manager.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10161
+    source_type_name: cert-manager
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - security
 - configuration & deployment
 - containers
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cert_manager/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cert_manager"
-"integration_id": "cert-manager"
-"integration_title": "cert-manager"
-"integration_version": "4.1.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cert_manager"
-"public_title": "cert-manager"
-"short_description": "Track all your cert-manager metrics with Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cert_manager/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cert_manager
+integration_id: cert-manager
+integration_title: cert-manager
+integration_version: 4.1.1
+is_public: true
+manifest_version: 2.0.0
+name: cert_manager
+public_title: cert-manager
+short_description: Track all your cert-manager metrics with Datadog
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Security"
-  - "Category::Configuration & Deployment"
-  - "Category::Containers"
-  "configuration": "README.md#Setup"
-  "description": Track all your cert-manager metrics with Datadog
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": cert-manager
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Configuration & Deployment
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Track all your cert-manager metrics with Datadog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: cert-manager
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -123,11 +123,10 @@ Need further help? Contact [Datadog support][11].
 [2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cert_manager/images/overview_dashboard.png
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/datadog_checks/cert_manager/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/assets/service_checks.json
-[9]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [10]: https://github.com/DataDog/integrations-core/blob/81b91a54328f174c5c1e92cb818640cba1ddfec3/cert_manager/datadog_checks/cert_manager/data/conf.yaml.example#L153-L155
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

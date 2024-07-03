@@ -1,8 +1,8 @@
 ---
+cascade:
+  disable_toc: true
 title: Cloudcraft API Reference
 type: documentation
-cascade:
-        disable_toc: true
 ---
 
 {{< openapi-ref-docs url="cloudcraft.json" >}}

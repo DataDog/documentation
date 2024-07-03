@@ -1,12 +1,13 @@
 ---
-title: Cloud Security Management Misconfigurations
-aliases:
-  - /security_platform/cspm/
-  - "/security/cspm/#glossary"
-  - /security/cspm/
-  - /security/misconfigurations/
 algolia:
-  tags: [cspm]
+  tags:
+  - cspm
+aliases:
+- /ja/security_platform/cspm/
+- /ja/security/cspm/#glossary
+- /ja/security/cspm/
+- /ja/security/misconfigurations/
+title: Cloud Security Management Misconfigurations
 ---
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) は、お使いのクラウドリソースにおける現在および過去のセキュリティポスチャ (セキュリティ体制) のスムーズな評価と視覚化、監査エビデンス収集の自動化、攻撃に対する組織の脆弱性の原因となる誤構成の修復などをサポートします。誤構成に起因するセキュリティ上の弱点を継続的に洗い出すことで、業界標準への準拠を確保しつつ、リスクを軽減することができます。
@@ -68,16 +69,16 @@ You can also [create a Jira issue][15] and assign it to a team, use Terraform re
 
 [1]: https://app.datadoghq.com/security/csm
 [2]: https://app.datadoghq.com/security/compliance
-[3]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
-[4]: /security/default_rules/#cat-posture-management-cloud
-[5]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks#view-your-compliance-posture
-[6]: /security/cloud_security_management/misconfigurations/custom_rules
-[7]: /security/notifications/
-[8]: /security/notifications/#notification-channels
-[9]: /security/notifications/#detection-rule-notifications
-[10]: /security/cloud_security_management/misconfigurations/findings
-[11]: /security/default_rules/#cat-posture-management-infra
+[3]: /ja/security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
+[4]: /ja/security/default_rules/#cat-posture-management-cloud
+[5]: /ja/security/cloud_security_management/misconfigurations/frameworks_and_benchmarks#view-your-compliance-posture
+[6]: /ja/security/cloud_security_management/misconfigurations/custom_rules
+[7]: /ja/security/notifications/
+[8]: /ja/security/notifications/#notification-channels
+[9]: /ja/security/notifications/#detection-rule-notifications
+[10]: /ja/security/cloud_security_management/misconfigurations/findings
+[11]: /ja/security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
-[13]: /security/cloud_security_management/mute_issues
-[14]: /security/cloud_security_management/review_remediate/workflows/
-[15]: /security/cloud_security_management/review_remediate/jira?tab=csmmisconfigurations
+[13]: /ja/security/cloud_security_management/mute_issues
+[14]: /ja/security/cloud_security_management/review_remediate/workflows/
+[15]: /ja/security/cloud_security_management/review_remediate/jira?tab=csmmisconfigurations

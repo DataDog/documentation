@@ -1,8 +1,6 @@
 ---
-title: Top List Widget
-widget_type: "toplist"
 aliases:
-    - /graphing/widgets/top_list/
+- /ja/graphing/widgets/top_list/
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
@@ -10,9 +8,11 @@ further_reading:
 - link: /notebooks/
   tag: Documentation
   text: Notebooks
-- link: "/dashboards/guide/context-links/#overview/"
+- link: /dashboards/guide/context-links/#overview/
   tag: Documentation
   text: Context Links
+title: Top List Widget
+widget_type: toplist
 ---
 
 トップリストの視覚化を使用すると、CPU の消費量が最も多い対象、ディスク容量が最も少ないホスト、コストが最も高いクラウド製品など、メトリクスまたはイベントの値が最も多いまたは最も少ないタグ値のリストを表示できます。
@@ -58,9 +58,9 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/querying/
-[2]: /tracing/trace_explorer/query_syntax/#search-bar
-[3]: /logs/search_syntax/
-[4]: /dashboards/guide/context-links
-[5]: /api/latest/dashboards/
-[6]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/querying/
+[2]: /ja/tracing/trace_explorer/query_syntax/#search-bar
+[3]: /ja/logs/search_syntax/
+[4]: /ja/dashboards/guide/context-links
+[5]: /ja/api/latest/dashboards/
+[6]: /ja/dashboards/graphing_json/widget_json/

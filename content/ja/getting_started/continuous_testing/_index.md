@@ -1,14 +1,15 @@
 ---
-title: Getting Started with Continuous Testing
-kind: documentation
+algolia:
+  tags:
+  - continuous testing
 further_reading:
-- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: ラーニングセンター
   text: Introduction to Synthetic Tests in a CI/CD Pipeline
-- link: "https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/"
+- link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: Blog
   text: Best practices for continuous testing with Datadog
-- link: "https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/"
+- link: https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/
   tag: Blog
   text: Use Datadog Continuous Testing to release with confidence
 - link: /continuous_testing/environments
@@ -17,8 +18,8 @@ further_reading:
 - link: /continuous_testing/cicd_integrations
   tag: Documentation
   text: Learn about Continuous Testing and CI/CD
-algolia:
-  tags: [continuous testing]
+kind: documentation
+title: Getting Started with Continuous Testing
 ---
 {{< jqmath-vanilla >}}
 
@@ -169,30 +170,30 @@ For more information, see the [Parallelization documentation][18].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/
-[2]: /getting_started/synthetics/api_test/
-[3]: /getting_started/synthetics/browser_test/
-[4]: /mobile_app_testing/
-[5]: /synthetics/explorer?track=synbatch
-[6]: /continuous_testing/cicd_integrations/configuration/?tab=npm
-[7]: /developers/ide_plugins/
+[1]: /ja/synthetics/
+[2]: /ja/getting_started/synthetics/api_test/
+[3]: /ja/getting_started/synthetics/browser_test/
+[4]: /ja/mobile_app_testing/
+[5]: /ja/synthetics/explorer?track=synbatch
+[6]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm
+[7]: /ja/developers/ide_plugins/
 [8]: https://datadoghq.com
-[9]: /getting_started/synthetics/browser_test/#create-a-browser-test
-[10]: /continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
-[11]: /continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
-[12]: /developers/ide_plugins/vscode/
-[13]: /getting_started/synthetics/private_location/
-[14]: /continuous_testing/environments/
-[15]: /continuous_testing/explorer/?tab=testruns#create-a-search-query
-[16]: /continuous_testing/explorer/saved_views/
-[17]: /continuous_testing/explorer/search_runs/
-[18]: /continuous_testing/settings/#parallelization
+[9]: /ja/getting_started/synthetics/browser_test/#create-a-browser-test
+[10]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
+[11]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
+[12]: /ja/developers/ide_plugins/vscode/
+[13]: /ja/getting_started/synthetics/private_location/
+[14]: /ja/continuous_testing/environments/
+[15]: /ja/continuous_testing/explorer/?tab=testruns#create-a-search-query
+[16]: /ja/continuous_testing/explorer/saved_views/
+[17]: /ja/continuous_testing/explorer/search_runs/
+[18]: /ja/continuous_testing/settings/#parallelization
 [19]: https://app.datadoghq.com/synthetics/tests
-[22]: /glossary/?product=synthetic-monitoring#test-batch
-[23]: /glossary/?product=synthetic-monitoring#test-run
-[24]: /glossary/?product=synthetic-monitoring#parallelization
-[25]: /account_management/teams/
+[22]: /ja/glossary/?product=synthetic-monitoring#test-batch
+[23]: /ja/glossary/?product=synthetic-monitoring#test-run
+[24]: /ja/glossary/?product=synthetic-monitoring#parallelization
+[25]: /ja/account_management/teams/
 [26]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.unhealthy%3Atrue&index=%2A&track=synthetics&viz=stream&from_ts=1713544430419&to_ts=1713548030419&live=true
 [27]: https://app.datadoghq.com/synthetics/settings/continuous-testing
-[28]: /integrations/slack/
-[29]: /integrations/jira/
+[28]: /ja/integrations/slack/
+[29]: /ja/integrations/jira/

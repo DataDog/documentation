@@ -1,13 +1,13 @@
 ---
-title: Adding Metadata to APIs
-is_beta: true
+aliases:
+- /ja/tracing/api_catalog/metadata/
+- /ja/tracing/api_catalog/add_metadata/
 further_reading:
 - link: /tracing/service_catalog/
   tag: Documentation
   text: Datadog Service Catalog
-aliases:
-    - /tracing/api_catalog/metadata/
-    - /tracing/api_catalog/add_metadata/
+is_beta: true
+title: Adding Metadata to APIs
 ---
 
 ## 概要
@@ -86,5 +86,5 @@ To import an OpenAPI or Swagger file using the GitHub integration:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/github/
+[1]: /ja/integrations/github/
 [2]: https://app.datadoghq.com/apis/catalog

@@ -1,20 +1,20 @@
 ---
-title: Enabling the Node.js Profiler
+aliases:
+- /ja/tracing/profiler/enabling/nodejs/
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profile_visualizations
-      tag: Documentation
-      text: Learn more about available profile visualizations
-    - link: profiler/profiler_troubleshooting
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
-aliases:
-  - /tracing/profiler/enabling/nodejs/
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profile_visualizations
+  tag: Documentation
+  text: Learn more about available profile visualizations
+- link: profiler/profiler_troubleshooting
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+title: Enabling the Node.js Profiler
+type: multi-code-lang
 ---
 
 プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
@@ -90,10 +90,10 @@ Node.js 16 以上を推奨します。それ以前のバージョンでは、ア
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
+[1]: /ja/tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[4]: /integrations/guide/source-code-integration/?tab=nodejs
+[4]: /ja/integrations/guide/source-code-integration/?tab=nodejs
 [5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/profiler/
-[7]: /profiler/enabling/supported_versions/
+[6]: /ja/getting_started/profiler/
+[7]: /ja/profiler/enabling/supported_versions/

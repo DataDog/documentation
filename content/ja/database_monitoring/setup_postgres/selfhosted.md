@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for self hosted Postgres
 description: Install and configure Database Monitoring for self-hosted Postgres.
 further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Basic Postgres Integration
-
+title: Setting Up Database Monitoring for self hosted Postgres
 ---
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
@@ -310,17 +309,17 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
-[2]: /database_monitoring/agent_integration_overhead/?tab=postgres
-[3]: /database_monitoring/data_collected/#sensitive-information
+[2]: /ja/database_monitoring/agent_integration_overhead/?tab=postgres
+[3]: /ja/database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: /integrations/faq/postgres-custom-metric-collection-explained/
+[6]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[10]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[13]: /agent/configuration/agent-commands/#agent-status-and-information
+[13]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
-[15]: /database_monitoring/troubleshooting/?tab=postgres
+[15]: /ja/database_monitoring/troubleshooting/?tab=postgres

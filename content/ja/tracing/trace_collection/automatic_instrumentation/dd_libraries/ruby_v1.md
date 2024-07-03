@@ -1,6 +1,6 @@
 ---
 dependencies:
-- "https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md"
+- https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md
 kind: ドキュメント
 title: (Legacy) Tracing Ruby Applications
 ---
@@ -2843,6 +2843,6 @@ Resque's default of forking a process per job can, in rare situations, result in
 <!---->
 
 [ヘッダータグ]: https://docs.datadoghq.com/tracing/configure_data_security/#applying-header-tags-to-root-spans
-[1]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/
-[2]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby#integrations
-[3]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby#ci-visibility-integrations
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/compatibility/ruby/
+[2]: https://docs.datadoghq.com/ja/tracing/trace_collection/compatibility/ruby#integrations
+[3]: https://docs.datadoghq.com/ja/tracing/trace_collection/compatibility/ruby#ci-visibility-integrations

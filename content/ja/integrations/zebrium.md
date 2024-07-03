@@ -1,77 +1,78 @@
 ---
-"app_id": "zebrium"
-"app_uuid": "a1fa9510-af05-4950-ad67-4eed3f14d4bf"
-"assets":
-  "dashboards":
-    "Zebrium Root Cause as a Service Sample Dashboard": assets/dashboards/root_cause_as_a_service_sample_dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": zebrium.logs.all.count
-      "metadata_path": metadata.csv
-      "prefix": zebrium.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10272"
-    "source_type_name": zebrium
-"author":
-  "homepage": "https://www.zebrium.com"
-  "name": Zebrium
-  "sales_email": hello@zebrium.com
-  "support_email": support@zebrium.com
-"categories":
+app_id: zebrium
+app_uuid: a1fa9510-af05-4950-ad67-4eed3f14d4bf
+assets:
+  dashboards:
+    Zebrium Root Cause as a Service Sample Dashboard: assets/dashboards/root_cause_as_a_service_sample_dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: zebrium.logs.all.count
+      metadata_path: metadata.csv
+      prefix: zebrium.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10272
+    source_type_name: zebrium
+author:
+  homepage: https://www.zebrium.com
+  name: Zebrium
+  sales_email: hello@zebrium.com
+  support_email: support@zebrium.com
+categories:
 - automation
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "zebrium"
-"integration_id": "zebrium"
-"integration_title": "Zebrium RCaaS"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "zebrium"
-"public_title": "Zebrium RCaaS"
-"short_description": "Discover the root cause of problems directly on your dashboards"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: zebrium
+integration_id: zebrium
+integration_title: Zebrium RCaaS
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: zebrium
+public_title: Zebrium RCaaS
+short_description: Discover the root cause of problems directly on your dashboards
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Notifications"
-  - "Offering::Integration"
-  - "Offering::UI Extension"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Discover the root cause of problems directly on your dashboards
-  "media":
-  - "caption": "Video: Root Cause Finder for Datadog."
-    "image_url": images/Zebrium-Root_Cause_as_a_Service_thumb.png
-    "media_type": video
-    "vimeo_id": !!int "703040365"
-  - "caption": Zebrium widget showing two root cause detections (red dot on vertical lines).
-    "image_url": images/Zebrium_Root_Cause_Finder_Widget.png
-    "media_type": image
-  - "caption": Zebrium root cause summary shown in a side panel.
-    "image_url": images/Zebrium_Root_Cause_Finder_With_Side_Panel.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/"
-  "support": "README.md#Support"
-  "title": Zebrium RCaaS
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Notifications
+  - Offering::Integration
+  - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Discover the root cause of problems directly on your dashboards
+  media:
+  - caption: 'Video: Root Cause Finder for Datadog.'
+    image_url: images/Zebrium-Root_Cause_as_a_Service_thumb.png
+    media_type: video
+    vimeo_id: 703040365
+  - caption: Zebrium widget showing two root cause detections (red dot on vertical
+      lines).
+    image_url: images/Zebrium_Root_Cause_Finder_Widget.png
+    media_type: image
+  - caption: Zebrium root cause summary shown in a side panel.
+    image_url: images/Zebrium_Root_Cause_Finder_With_Side_Panel.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
+  support: README.md#Support
+  title: Zebrium RCaaS
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -133,4 +134,3 @@ Zebrium のイベントメトリクスインテグレーションは、[Datadog 
 [4]: https://cloud.zebrium.com
 [5]: http://docs.datadoghq.com/help
 [6]: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
-

@@ -1,61 +1,65 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "avm-consulting-insightflow"
-"app_uuid": "1f5f3120-5585-45ad-ac50-4b34f73637fd"
-"assets": {}
-"author":
-  "contact_link": "https://avmconsulting.net/contact-us/"
-  "homepage": "https://avmconsulting.net/"
-  "name": AVM Consulting
-  "sales_email": contact@avmconsulting.net
-  "support_email": contact@avmconsulting.net
-  "vendor_id": avmconsulting
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: avm-consulting-insightflow
+app_uuid: 1f5f3120-5585-45ad-ac50-4b34f73637fd
+assets: {}
+author:
+  contact_link: https://avmconsulting.net/contact-us/
+  homepage: https://avmconsulting.net/
+  name: AVM Consulting
+  sales_email: contact@avmconsulting.net
+  support_email: contact@avmconsulting.net
+  vendor_id: avmconsulting
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "avm_consulting_avm_bootstrap_datadog"
-"integration_id": "avm-consulting-insightflow"
-"integration_title": "InsightFlow - Bootstrap Datadog"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "avm_consulting_avm_bootstrap_datadog"
-"pricing":
-- "includes_assets": true
-  "private_offer_only": true
-  "product_id": insightflow
-  "short_description": Our professional services offer three tailored solutions to meet your unique observability goals. Examples include implementing an effective tagging strategy for your managed services, and offering consultation services.
-  "unit_price": !!null "null"
-"public_title": "InsightFlow - Bootstrap Datadog"
-"short_description": "Unleash the Full Power of Datadog with InsightFlow, AVM's Professional Services"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: avm_consulting_avm_bootstrap_datadog
+integration_id: avm-consulting-insightflow
+integration_title: InsightFlow - Bootstrap Datadog
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: avm_consulting_avm_bootstrap_datadog
+pricing:
+- includes_assets: true
+  private_offer_only: true
+  product_id: insightflow
+  short_description: Our professional services offer three tailored solutions to meet
+    your unique observability goals. Examples include implementing an effective tagging
+    strategy for your managed services, and offering consultation services.
+  unit_price: null
+public_title: InsightFlow - Bootstrap Datadog
+short_description: Unleash the Full Power of Datadog with InsightFlow, AVM's Professional
+  Services
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Offering::Professional Service"
-  "configuration": "README.md#Setup"
-  "description": Unleash the Full Power of Datadog with InsightFlow, AVM's Professional Services
-  "media":
-  - "caption": AVM InsightFlow
-    "image_url": images/avmpsdd.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": InsightFlow - Bootstrap Datadog
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Offering::Professional Service
+  configuration: README.md#Setup
+  description: Unleash the Full Power of Datadog with InsightFlow, AVM's Professional
+    Services
+  media:
+  - caption: AVM InsightFlow
+    image_url: images/avmpsdd.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: InsightFlow - Bootstrap Datadog
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

@@ -49,6 +49,6 @@ With **Strict mode** enabled, all users must log in with SAML SSO. Existing user
 
 Before enabling this option, make sure that the SAML SSO login is working properly so that you don't end up locking yourself out of your account.
 
-[1]: /cloudcraft/account-management/enable-sso-with-azure-ad/
-[2]: /cloudcraft/account-management/enable-sso-with-okta/
-[3]: /cloudcraft/account-management/enable-sso-with-generic-idp/
+[1]: /ja/cloudcraft/account-management/enable-sso-with-azure-ad/
+[2]: /ja/cloudcraft/account-management/enable-sso-with-okta/
+[3]: /ja/cloudcraft/account-management/enable-sso-with-generic-idp/

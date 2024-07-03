@@ -1,21 +1,21 @@
 ---
-title: RUM CodePush Setup
-kind: documentation
-description: Learn how to use a client-side React Native module to interact with Appcenter Codepush and Datadog.
 aliases:
-    - /real_user_monitoring/reactnative/codepush
-    - /real_user_monitoring/reactnative-codepush/
+- /ja/real_user_monitoring/reactnative/codepush
+- /ja/real_user_monitoring/reactnative-codepush/
 code_lang: codepush
-type: multi-code-lang
 code_lang_weight: 50
+description: Learn how to use a client-side React Native module to interact with Appcenter
+  Codepush and Datadog.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-reactnative"
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: ソースコード
   text: Source code for dd-sdk-reactnative
 - link: real_user_monitoring/reactnative/
   tag: Documentation
   text: Learn about React Native monitoring
-
+kind: documentation
+title: RUM CodePush Setup
+type: multi-code-lang
 ---
 
 ## Overview
@@ -161,7 +161,7 @@ Then, upload your source maps using the [`datadog-ci react-native upload`][5] co
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[2]: /real_user_monitoring/reactnative/
+[2]: /ja/real_user_monitoring/reactnative/
 [3]: https://github.com/DataDog/datadog-ci
 [4]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-api-ref#codepushgetupdatemetadata
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#upload

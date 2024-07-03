@@ -1,8 +1,8 @@
 ---
-title: Application Security Management
-description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:
-  - /security_platform/application_security
+- /ja/security_platform/application_security
+description: Monitor threats targeting production system, leveraging the execution
+  context provided by distributed traces.
 further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
@@ -13,33 +13,35 @@ further_reading:
 - link: /security/application_security/software_composition_analysis/
   tag: Documentation
   text: Software Composition Analysis
-- link: "/security/application_security/enabling/#compatibility"
+- link: /security/application_security/enabling/#compatibility
   tag: Documentation
   text: Learn more about language and framework compatibility
-- link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
+- link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: Product Page
   text: Datadog Application Security Management
-- link: "https://www.datadoghq.com/blog/datadog-application-security/"
+- link: https://www.datadoghq.com/blog/datadog-application-security/
   tag: Blog
   text: Introducing Datadog Application Security
-- link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
+- link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
   tag: Blog
   text: Secure serverless applications with Datadog ASM
-- link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
+- link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
   tag: Blog
   text: Best practices for application security in cloud-native environments
-- link: "https://www.datadoghq.com/blog/apm-security-view/"
+- link: https://www.datadoghq.com/blog/apm-security-view/
   tag: Blog
-  text: Gain visibility into risks, vulnerabilities, and attacks with APM Security View
-- link: "https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/"
+  text: Gain visibility into risks, vulnerabilities, and attacks with APM Security
+    View
+- link: https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/
   tag: Blog
   text: Block attackers in your apps and APIs with Datadog Application Security Management
-- link: "https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/"
+- link: https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/
   tag: Blog
   text: Threat modeling with Datadog Application Security Management
-- link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
+- link: https://www.datadoghq.com/blog/aws-waf-datadog/
   tag: ブログ
   text: Monitor AWS WAF activity with Datadog
+title: Application Security Management
 ---
 
 {{< site-region region="gov" >}}
@@ -82,11 +84,11 @@ Application Security Management がどのように構成され、トレースデ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/
-[2]: /agent/
-[3]: /security/application_security/how-appsec-works/
-[4]: /security/default_rules/?category=cat-application-security
-[5]: /security/application_security/enabling/
+[1]: /ja/tracing/
+[2]: /ja/agent/
+[3]: /ja/security/application_security/how-appsec-works/
+[4]: /ja/security/default_rules/?category=cat-application-security
+[5]: /ja/security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/software_composition_analysis/
+[8]: /ja/security/application_security/software_composition_analysis/

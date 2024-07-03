@@ -1,13 +1,14 @@
 ---
-title: Monitor Summary Widget
-description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
-widget_type: "manage_status"
 aliases:
-- /graphing/widgets/monitor_summary/
+- /ja/graphing/widgets/monitor_summary/
+description: Display a summary view of all your Datadog monitors, or a subset based
+  on a query.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Monitor Summary Widget
+widget_type: manage_status
 ---
 
 モニターサマリーウィジェットは、Datadog のすべてのモニターまたはクエリに基づく一部のモニターの概要を表示します。
@@ -78,7 +79,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/manage/
-[2]: /monitors/manage/#grouped-results
-[3]: /api/latest/dashboards/
-[4]: /dashboards/graphing_json/widget_json/
+[1]: /ja/monitors/manage/
+[2]: /ja/monitors/manage/#grouped-results
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

@@ -1,8 +1,9 @@
 ---
-title: Datadog API Catalog
-is_beta: true
+aliases:
+- /ja/tracing/api_catalog/get_started
+- /ja/tracing/api_catalog/
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
+- link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
   tag: Blog
   text: Manage API performance, security, and ownership with Datadog API Catalog
 - link: /tracing/service_catalog/
@@ -11,15 +12,14 @@ further_reading:
 - link: /synthetics/api_tests/http_tests/
   tag: Documentation
   text: Synthetic API Tests
-- link: "/security/application_security/how-appsec-works/#api-security"
+- link: /security/application_security/how-appsec-works/#api-security
   tag: Documentation
   text: ASM API Security
-- link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
+- link: https://www.datadoghq.com/blog/primary-risks-to-api-security/
   tag: Blog
   text: Mitigate the primary risks to API security
-aliases:
-    - /tracing/api_catalog/get_started
-    - /tracing/api_catalog/
+is_beta: true
+title: Datadog API Catalog
 ---
 
 {{< site-region region="gov,ap1" >}}
@@ -114,9 +114,9 @@ Partner APIs
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/catalog
-[3]: /api_catalog/explore_apis/
-[6]: /api_catalog/owners_and_tags/
-[7]: /api_catalog/monitor_apis/
-[8]: /tracing/trace_collection/
-[9]: /api_catalog/add_entries
-[10]: /api_catalog/add_metadata
+[3]: /ja/api_catalog/explore_apis/
+[6]: /ja/api_catalog/owners_and_tags/
+[7]: /ja/api_catalog/monitor_apis/
+[8]: /ja/tracing/trace_collection/
+[9]: /ja/api_catalog/add_entries
+[10]: /ja/api_catalog/add_metadata

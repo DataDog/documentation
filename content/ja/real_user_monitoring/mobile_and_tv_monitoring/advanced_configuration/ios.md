@@ -1,20 +1,20 @@
 ---
-title: RUM iOS Advanced Configuration
-code_lang: ios
-type: multi-code-lang
-code_lang_weight: 20
 aliases:
-    - /real_user_monitoring/ios/advanced_configuration
+- /ja/real_user_monitoring/ios/advanced_configuration
+code_lang: ios
+code_lang_weight: 20
 further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: ソースコード
-    text: Source code for dd-sdk-ios
-  - link: /real_user_monitoring
-    tag: Documentation
-    text: RUM & Session Replay
-  - link: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
-    tag: ドキュメント
-    text: RUM iOS and tvOS monitoring supported versions
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: ソースコード
+  text: Source code for dd-sdk-ios
+- link: /real_user_monitoring
+  tag: Documentation
+  text: RUM & Session Replay
+- link: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+  tag: ドキュメント
+  text: RUM iOS and tvOS monitoring supported versions
+title: RUM iOS Advanced Configuration
+type: multi-code-lang
 ---
 
 まだ RUM iOS SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[RUM iOS セットアップドキュメント][2]を参照してください。
@@ -494,7 +494,7 @@ let session = URLSession(
 
 これにより、インスツルメントされた `session` とともに送信されたすべてのリクエストが追跡されます。`example.com` ドメインに一致するリクエストは "first party" とマークされ、トレース情報がバックエンドに送信されて [RUM リソースがトレースに接続されます][1]。
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 
 {{% /tab %}}
 {{% tab "Objective-C" %}}
@@ -736,11 +736,11 @@ RUM では、ユーザーのデバイスがオフラインのときにもデー�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/ios
-[3]: /real_user_monitoring/ios/data_collected
-[4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[5]: /real_user_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
-[7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
+[2]: /ja/real_user_monitoring/ios
+[3]: /ja/real_user_monitoring/ios/data_collected
+[4]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures
+[5]: /ja/real_user_monitoring/ios/data_collected/?tab=error#error-attributes
+[6]: /ja/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
+[7]: /ja/real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
-[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[10]: /ja/real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting

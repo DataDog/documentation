@@ -1,58 +1,58 @@
 ---
-"app_id": "botprise"
-"app_uuid": "91806afb-9bd7-4ab2-91e4-7c7f2d05780f"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": botprise.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10113"
-    "source_type_name": botprise
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Botprise
-  "sales_email": help@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: botprise
+app_uuid: 91806afb-9bd7-4ab2-91e4-7c7f2d05780f
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: botprise.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10113
+    source_type_name: botprise
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Botprise
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - alerting
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "botprise"
-"integration_id": "botprise"
-"integration_title": "Botprise"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "botprise"
-"public_title": "Botprise"
-"short_description": "Botprise integration to monitor generated events"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: botprise
+integration_id: botprise
+integration_title: Botprise
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: botprise
+public_title: Botprise
+short_description: Botprise integration to monitor generated events
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Botprise integration to monitor generated events
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Botprise
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Botprise integration to monitor generated events
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Botprise
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -102,8 +102,7 @@ Need help? Contact [Datadog support][7].
 [1]: https://www.botprise.com/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/botprise/images/datadog-botprise-events.png
 [3]: https://app.datadoghq.com/infrastructure/map
-[4]: https://docs.datadoghq.com/metrics/
+[4]: https://docs.datadoghq.com/ja/metrics/
 [5]: https://developer.servicenow.com/dev.do#!/home
-[6]: https://docs.datadoghq.com/account_management/api-app-keys/
-[7]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[7]: https://docs.datadoghq.com/ja/help/

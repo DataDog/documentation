@@ -1,51 +1,51 @@
 ---
-"app_id": "splunk"
-"app_uuid": "a3e6047c-501a-4a70-a465-19c0f117d1ac"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "70"
-    "source_type_name": "Splunk"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "splunk"
-"integration_id": "splunk"
-"integration_title": "Splunk"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "splunk"
-"public_title": "Splunk"
-"short_description": "Capture events from Splunk and overlay them onto key metrics graphs."
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Notifications"
-  "configuration": "README.md#Setup"
-  "description": "Capture events from Splunk and overlay them onto key metrics graphs."
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/"
-  "support": "README.md#Support"
-  "title": "Splunk"
+app_id: splunk
+app_uuid: a3e6047c-501a-4a70-a465-19c0f117d1ac
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 70
+    source_type_name: Splunk
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: splunk
+integration_id: splunk
+integration_title: Splunk
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: splunk
+public_title: Splunk
+short_description: Capture events from Splunk and overlay them onto key metrics graphs.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: Capture events from Splunk and overlay them onto key metrics graphs.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/
+  support: README.md#Support
+  title: Splunk
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -139,4 +139,3 @@ _このドキュメントは、2015 年 10 月 28 日に [AWS 上の Splunk Ente
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/
 [3]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
-

@@ -1,20 +1,21 @@
 ---
-title: Go Custom Instrumentation using OpenTelemetry API
-kind: documentation
-description: 'Instrument your Go application with OpenTelemetry API to send traces to Datadog'
-code_lang: otel
-type: multi-code-lang
-code_lang_weight: 2
 aliases:
-- /tracing/trace_collection/otel_instrumentation/go/
-- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/go
+- /ja/tracing/trace_collection/otel_instrumentation/go/
+- /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/go
+code_lang: otel
+code_lang_weight: 2
+description: Instrument your Go application with OpenTelemetry API to send traces
+  to Datadog
 further_reading:
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
-    - link: /opentelemetry/guide/otel_api_tracing_interoperability
-      tag: Documentation
-      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: /opentelemetry/guide/otel_api_tracing_interoperability
+  tag: Documentation
+  text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+kind: documentation
+title: Go Custom Instrumentation using OpenTelemetry API
+type: multi-code-lang
 ---
 
 {{% otel-custom-instrumentation-lang %}}
@@ -170,9 +171,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [6]: https://opentelemetry.io/docs/instrumentation/go/
-[9]: /tracing/trace_collection/trace_context_propagation/go/
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
-[13]: /tracing/trace_collection/trace_context_propagation/go/
-[14]: /tracing/security
-[15]: /tracing/glossary/#trace
+[9]: /ja/tracing/trace_collection/trace_context_propagation/go/
+[12]: /ja/opentelemetry/guide/otel_api_tracing_interoperability/
+[13]: /ja/tracing/trace_collection/trace_context_propagation/go/
+[14]: /ja/tracing/security
+[15]: /ja/tracing/glossary/#trace
 [16]: https://pkg.go.dev/context

@@ -1,70 +1,70 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "shoreline-software-license"
-"app_uuid": "d1da5605-5ef5-47bc-af8d-16005945e21e"
-"assets": {}
-"author":
-  "homepage": "https://shoreline.io/"
-  "name": Shoreline.io
-  "sales_email": sales@shoreline.io
-  "support_email": support@shoreline.io
-  "vendor_id": shoreline
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: shoreline-software-license
+app_uuid: d1da5605-5ef5-47bc-af8d-16005945e21e
+assets: {}
+author:
+  homepage: https://shoreline.io/
+  name: Shoreline.io
+  sales_email: sales@shoreline.io
+  support_email: support@shoreline.io
+  vendor_id: shoreline
+categories:
 - automation
 - marketplace
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "shoreline_license"
-"integration_id": "shoreline-software-license"
-"integration_title": "Shoreline.io"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "shoreline_license"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.shoreline.shoreline
-  "product_id": software-license
-  "short_description": Per host / month. No extra cost for pods or containers
-  "tag": host
-  "unit_label": Host
-  "unit_price": !!int "25"
-"public_title": "Shoreline.io"
-"short_description": "Build automations to repair triggered monitors"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: shoreline_license
+integration_id: shoreline-software-license
+integration_title: Shoreline.io
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: shoreline_license
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.shoreline.shoreline
+  product_id: software-license
+  short_description: Per host / month. No extra cost for pods or containers
+  tag: host
+  unit_label: Host
+  unit_price: 25
+public_title: Shoreline.io
+short_description: Build automations to repair triggered monitors
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Category::Automation"
-  - "Category::Marketplace"
-  - "Offering::Software License"
-  "configuration": "README.md#Setup"
-  "description": Build automations to repair triggered monitors
-  "media":
-  - "caption": Remediation dashboard
-    "image_url": images/remediation_dashboard.png
-    "media_type": image
-  - "caption": Example of remediation automation setup
-    "image_url": images/automate_remediation.png
-    "media_type": image
-  - "caption": Example of fleetwide interactive debugging and repair
-    "image_url": images/fleetwide_interactive_debugging_and_repair.png
-    "media_type": image
-  - "caption": Example of fleetwide linux command details
-    "image_url": images/fleetwide_linux_command_details.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Shoreline.io
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Automation
+  - Category::Marketplace
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: Build automations to repair triggered monitors
+  media:
+  - caption: Remediation dashboard
+    image_url: images/remediation_dashboard.png
+    media_type: image
+  - caption: Example of remediation automation setup
+    image_url: images/automate_remediation.png
+    media_type: image
+  - caption: Example of fleetwide interactive debugging and repair
+    image_url: images/fleetwide_interactive_debugging_and_repair.png
+    media_type: image
+  - caption: Example of fleetwide linux command details
+    image_url: images/fleetwide_linux_command_details.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Shoreline.io
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

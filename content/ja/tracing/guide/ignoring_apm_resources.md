@@ -1,6 +1,6 @@
 ---
-title: Ignoring Unwanted Resources in APM
 kind: documentation
+title: Ignoring Unwanted Resources in APM
 ---
 
 A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application.
@@ -93,7 +93,7 @@ agents:
 
 {{% k8s-helm-redeploy %}}
 
-[1]: /agent/kubernetes/?tab=helm#installation
+[1]: /ja/agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -364,7 +364,7 @@ helm install dd-agent -f values.yaml \
   datadog/datadog
 {{< /code-block >}}
 
-[1]: /agent/kubernetes/?tab=helm#installation
+[1]: /ja/agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
 {{% tab "Amazon ECS Task Definition" %}}
 
@@ -406,8 +406,8 @@ Datadog::Tracing.before_flush(
 )
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
+[1]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -484,15 +484,15 @@ public class GreetingController {
 }
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
+[1]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 <div class="alert alert-warning"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
 
-[1]: /help/
-[2]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[3]: /tracing/guide/metrics_namespace/
-[4]: /tracing/trace_ingestion/ingestion_controls
-[5]: /tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[1]: /ja/help/
+[2]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[3]: /ja/tracing/guide/metrics_namespace/
+[4]: /ja/tracing/trace_ingestion/ingestion_controls
+[5]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
 [6]: https://golang.org/pkg/regexp/

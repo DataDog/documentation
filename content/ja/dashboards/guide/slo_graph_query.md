@@ -1,10 +1,10 @@
 ---
-title: Scope metric-based SLO queries
 disable_toc: false
 further_reading:
 - link: /dashboards/widgets/slo/
   tag: Documentation
   text: SLO Widget
+title: Scope metric-based SLO queries
 ---
 
 <div class="alert alert-info">この機能は、<strong>メトリクスベース</strong>の SLO クエリでのみ使用できます。</div>
@@ -48,6 +48,6 @@ The SLO widget filters the SLO metric queries by those additional tags for your 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/slo/
-[2]: /service_management/service_level_objectives/metric/
-[3]: /dashboards/template_variables/
+[1]: /ja/dashboards/widgets/slo/
+[2]: /ja/service_management/service_level_objectives/metric/
+[3]: /ja/dashboards/template_variables/

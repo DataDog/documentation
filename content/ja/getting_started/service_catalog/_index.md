@@ -1,22 +1,22 @@
 ---
-title: Getting Started with Service Catalog
-kind: documentation
 further_reading:
-    - link: /service_catalog/
-      tag: Documentation
-      text: Service Catalog
-    - link: "https://learn.datadoghq.com/courses/managing-service-catalog"
-      tag: Learning Center
-      text: Managing Services with the Service Catalog
-    - link: "https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/"
-      tag: Blog
-      text: Simplify microservice governance with the Datadog Service Catalog
-    - link: /service_catalog/troubleshooting
-      tag: Documentation
-      text: トラブルシューティング
-    - link: /service_catalog/scorecards
-      tag: Documentation
-      text: サービススコアカード
+- link: /service_catalog/
+  tag: Documentation
+  text: Service Catalog
+- link: https://learn.datadoghq.com/courses/managing-service-catalog
+  tag: Learning Center
+  text: Managing Services with the Service Catalog
+- link: https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/
+  tag: Blog
+  text: Simplify microservice governance with the Datadog Service Catalog
+- link: /service_catalog/troubleshooting
+  tag: Documentation
+  text: トラブルシューティング
+- link: /service_catalog/scorecards
+  tag: Documentation
+  text: サービススコアカード
+kind: documentation
+title: Getting Started with Service Catalog
 ---
 
 {{< img src="/getting_started/service_catalog/overview_image.jpeg" alt="Service Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:90%;" >}}
@@ -170,15 +170,15 @@ To add custom rules to your Scorecards dashboard:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com
-[2]: /tracing
-[3]: /universal_service_monitoring
-[4]: /real_user_monitoring
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /integrations/servicenow/#service-ingestion
-[7]: /service_catalog/setup#import-data-from-other-sources
+[2]: /ja/tracing
+[3]: /ja/universal_service_monitoring
+[4]: /ja/real_user_monitoring
+[5]: /ja/getting_started/tagging/unified_service_tagging
+[6]: /ja/integrations/servicenow/#service-ingestion
+[7]: /ja/service_catalog/setup#import-data-from-other-sources
 [8]: https://www.datadoghq.com/blog/github-actions-service-catalog
 [9]: https://backstage.io/docs/overview/what-is-backstage
-[10]:/api/latest/service-definition
-[11]: /service_catalog/add_metadata#metadata-structure-and-supported-versions
-[12]: /service_catalog/scorecards
-[13]: /api/latest/service-scorecards
+[10]:/ja/api/latest/service-definition
+[11]: /ja/service_catalog/add_metadata#metadata-structure-and-supported-versions
+[12]: /ja/service_catalog/scorecards
+[13]: /ja/api/latest/service-scorecards

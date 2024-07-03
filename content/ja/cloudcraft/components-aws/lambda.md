@@ -1,5 +1,5 @@
 ---
-title: "Lambda Component"
+title: Lambda Component
 ---
 ## 概要
 

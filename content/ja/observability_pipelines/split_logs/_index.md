@@ -1,6 +1,6 @@
 ---
-title: Split Logs
 disable_toc: false
+title: Split Logs
 ---
 
 ## 概要
@@ -16,7 +16,7 @@ Select your log source to get started:
 - [Splunk Heavy and Universal Forwarders (TCP)][3]
 - [Sumo Logic Hosted Collector][4]
 
-[1]: /observability_pipelines/split_logs/datadog_agent
-[2]: /observability_pipelines/split_logs/splunk_hec
-[3]: /observability_pipelines/split_logs/splunk_tcp
-[4]: /observability_pipelines/split_logs/sumo_logic_hosted_collector
+[1]: /ja/observability_pipelines/split_logs/datadog_agent
+[2]: /ja/observability_pipelines/split_logs/splunk_hec
+[3]: /ja/observability_pipelines/split_logs/splunk_tcp
+[4]: /ja/observability_pipelines/split_logs/sumo_logic_hosted_collector

@@ -1,65 +1,65 @@
 ---
-"app_id": "boundary"
-"app_uuid": "61898266-9c80-442d-89d3-22e7aeeafb94"
-"assets":
-  "dashboards":
-    "Boundary Overview": assets/dashboards/boundary_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": boundary.worker.proxy.websocket.active_connections
-      "metadata_path": metadata.csv
-      "prefix": boundary.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10280"
-    "source_type_name": Boundary
-  "monitors":
-    "[Boundary] High active connections": assets/monitors/active_connections.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: boundary
+app_uuid: 61898266-9c80-442d-89d3-22e7aeeafb94
+assets:
+  dashboards:
+    Boundary Overview: assets/dashboards/boundary_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: boundary.worker.proxy.websocket.active_connections
+      metadata_path: metadata.csv
+      prefix: boundary.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10280
+    source_type_name: Boundary
+  monitors:
+    '[Boundary] High active connections': assets/monitors/active_connections.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - configuration & deployment
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/boundary/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "boundary"
-"integration_id": "boundary"
-"integration_title": "Boundary"
-"integration_version": "2.2.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "boundary"
-"public_title": "Boundary"
-"short_description": "Monitor Boundary controllers and workers."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/boundary/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: boundary
+integration_id: boundary
+integration_title: Boundary
+integration_version: 2.2.2
+is_public: true
+manifest_version: 2.0.0
+name: boundary
+public_title: Boundary
+short_description: Monitor Boundary controllers and workers.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Configuration & Deployment"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Monitor Boundary controllers and workers.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Boundary
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Monitor Boundary controllers and workers.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Boundary
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -163,12 +163,11 @@ Boundary インテグレーションには、イベントは含まれません�
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://www.boundaryproject.io
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/boundary/datadog_checks/boundary/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/boundary/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/boundary/assets/service_checks.json
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

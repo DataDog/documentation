@@ -1,7 +1,11 @@
 ---
-title: Configure SCIM with Azure Active Directory
 algolia:
-  tags: [scim, identity provider, IdP, Azure AD]
+  tags:
+  - scim
+  - identity provider
+  - IdP
+  - Azure AD
+title: Configure SCIM with Azure Active Directory
 ---
 
 See the following instructions to synchronize your Datadog users with Azure Active Directory using SCIM.
@@ -69,8 +73,8 @@ SAML と SCIM を併用する場合、Datadog は、アクセスの不一致を�
 
 グループマッピングはサポートされていません。
 
-[1]: /account_management/scim/
-[2]: /account_management/scim/#using-a-service-account-with-scim
-[3]: /getting_started/site
+[1]: /ja/account_management/scim/
+[2]: /ja/account_management/scim/#using-a-service-account-with-scim
+[3]: /ja/getting_started/site
 [4]: https://app.datadoghq.com/organization-settings/application-keys
-[5]: /account_management/org_settings/service_accounts
+[5]: /ja/account_management/org_settings/service_accounts

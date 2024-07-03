@@ -1,7 +1,6 @@
 ---
-title: Troubleshooting Admission Controller
 further_reading:
-- link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
+- link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: Blog
   text: Auto Instrument Kubernetes Tracing
 - link: /containers/cluster_agent/admission_controller/
@@ -10,6 +9,7 @@ further_reading:
 - link: /tracing/trace_collection/library_injection_local/?tab=kubernetes
   tag: Documentation
   text: Kubernetes Library Injection
+title: Troubleshooting Admission Controller
 ---
 
 ## 概要
@@ -391,10 +391,10 @@ To use Rancher in a private GKE cluster, edit your firewall rules to allow inbou
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/cluster_agent/admission_controller
-[2]: /containers/cluster_agent/admission_controller/#apm-and-dogstatsd
-[3]: /tracing/trace_collection/library_injection_local/?tab=kubernetes
-[4]: /agent/troubleshooting/debug_mode/
+[1]: /ja/containers/cluster_agent/admission_controller
+[2]: /ja/containers/cluster_agent/admission_controller/#apm-and-dogstatsd
+[3]: /ja/tracing/trace_collection/library_injection_local/?tab=kubernetes
+[4]: /ja/agent/troubleshooting/debug_mode/
 [5]: https://kubernetes.io/docs/concepts/services-networking/network-policies/#networkpolicy-resource
 [6]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html
 [7]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
@@ -407,5 +407,5 @@ To use Rancher in a private GKE cluster, edit your firewall rules to allow inbou
 [14]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#step_1_view_control_planes_cidr_block
 [15]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 [16]: https://ranchermanager.docs.rancher.com/reference-guides/rancher-webhook#common-issues
-[17]: /containers/kubernetes/distributions/#autopilot
-[18]: /containers/kubernetes/distributions/#Openshift
+[17]: /ja/containers/kubernetes/distributions/#autopilot
+[18]: /ja/containers/kubernetes/distributions/#Openshift

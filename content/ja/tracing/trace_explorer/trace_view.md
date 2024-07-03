@@ -1,8 +1,9 @@
 ---
-title: Trace View
-kind: documentation
+algolia:
+  tags:
+  - trace view
 aliases:
-- /tracing/visualization/trace/
+- /ja/tracing/visualization/trace/
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
@@ -19,8 +20,8 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentation
   text: Understand how to read a Datadog Trace
-algolia:
-  tags: [trace view]
+kind: documentation
+title: Trace View
 ---
 
 {{< img src="tracing/trace_view/trace_view.png" alt="Trace View" style="width:90%;">}}
@@ -63,8 +64,8 @@ Filter resources by type or naming information using the corresponding buttons a
 
 Groups can be sorted by clicking on the corresponding column header: **RESOURCE**, **SPANS**, average duration (**AVG DURATION**), execution time (**EXEC TIME**), or percentage of trace execution time (**% EXEC TIME**).
 
-[1]: /tracing/glossary/#resources
-[2]: /tracing/glossary/#services
+[1]: /ja/tracing/glossary/#resources
+[2]: /ja/tracing/glossary/#services
 {{% /tab %}}
 {{% tab "Waterfall" %}}
 
@@ -115,7 +116,7 @@ Other information may be displayed under various conditions:
 
 {{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
 
-[1]: /tracing/glossary/#trace
+[1]: /ja/tracing/glossary/#trace
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
@@ -133,7 +134,7 @@ See logs related to your service at the time of the trace. When you hover over a
 {{< img src="tracing/trace_view/logs_tab.png" alt="Logs tab" style="width:90%;">}}
 
 
-[1]: /logs/explorer/search/
+[1]: /ja/logs/explorer/search/
 {{% /tab %}}
 {{% tab "Processes" %}}
 
@@ -141,8 +142,8 @@ Click on a service's span to see the processes running on its underlying infrast
 
 {{< img src="tracing/trace_view/processes_tab.png" alt="Processes tab" style="width:90%;">}}
 
-[1]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows
-[2]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows#installation
+[1]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows
+[2]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows#installation
 {{% /tab %}}
 
 {{% tab "Network" %}}
@@ -153,8 +154,8 @@ Click on a service's span to see network dependencies of the service making the 
 
 {{< img src="tracing/trace_view/network_tab.png" alt="Network tab" style="width:90%;">}}
 
-[1]: /network_monitoring/performance/network_analytics
-[2]: /network_monitoring/performance/setup
+[1]: /ja/network_monitoring/performance/network_analytics
+[2]: /ja/network_monitoring/performance/setup
 {{% /tab %}}
 
 {{% tab "Security" %}}
@@ -165,7 +166,7 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 
 {{< img src="tracing/trace_view/security_tab.png" alt="Security tab" style="width:90%;">}}
 
-[1]: /security/application_security/how-appsec-works/
+[1]: /ja/security/application_security/how-appsec-works/
 {{% /tab %}}
 {{% tab "Code Hotspots" %}}
 
@@ -173,7 +174,7 @@ View [Code Hotspots][1] to identify lines of code related to performance issues.
 
 {{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
 
-[1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[1]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
 {{% tab "Span Links (Beta)" %}}
@@ -190,10 +191,10 @@ Click a span in the flame graph to display spans connected with span links:
 
 To learn more about span links and how to add them with custom instrumentation, read [Span Links][4].
 
-[1]: /tracing/trace_pipeline/trace_retention/
-[2]: /tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
-[3]: /tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
-[4]: /tracing/trace_collection/span_links/
+[1]: /ja/tracing/trace_pipeline/trace_retention/
+[2]: /ja/tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
+[3]: /ja/tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
+[4]: /ja/tracing/trace_collection/span_links/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -202,8 +203,8 @@ To learn more about span links and how to add them with custom instrumentation, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#trace
-[2]: /tracing/glossary/#spans
-[3]: /tracing/glossary/#services
-[4]: /tracing/glossary/#resources
-[5]: /tracing/trace_explorer
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/tracing/glossary/#services
+[4]: /ja/tracing/glossary/#resources
+[5]: /ja/tracing/trace_explorer

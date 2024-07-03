@@ -1,19 +1,19 @@
 ---
-title: Cluster Checks
 aliases:
-    - /agent/autodiscovery/clusterchecks
-    - /agent/faq/kubernetes-state-cluster-check
-    - /agent/cluster_agent/clusterchecks
+- /ja/agent/autodiscovery/clusterchecks
+- /ja/agent/faq/kubernetes-state-cluster-check
+- /ja/agent/cluster_agent/clusterchecks
 further_reading:
-    - link: /containers/cluster_agent/
-      tag: Documentation
-      text: Datadog Cluster Agent
-    - link: /containers/troubleshooting/cluster-and-endpoint-checks
-      tag: Documentation
-      text: Troubleshooting Cluster Checks
-    - link: /containers/guide/clustercheckrunners
-      text: Cluster Check Runners
-      tag: Documentation
+- link: /containers/cluster_agent/
+  tag: Documentation
+  text: Datadog Cluster Agent
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
+  tag: Documentation
+  text: Troubleshooting Cluster Checks
+- link: /containers/guide/clustercheckrunners
+  tag: Documentation
+  text: Cluster Check Runners
+title: Cluster Checks
 ---
 
 ## 概要
@@ -94,7 +94,7 @@ Datadog **Node** Agent で `clusterchecks` 構成プロバイダーを有効に�
           polling: true
     ```
 
-[1]: /agent/cluster_agent/setup/
+[1]: /ja/agent/cluster_agent/setup/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -240,7 +240,7 @@ data:
 これは、Cluster Agent の `/conf.d/` ディレクトリに、インテグレーションに対応するファイルを作成します。例: `/conf.d/mysql.yaml` または `/conf.d/http_check.yaml`。
 
 
-[1]: /agent/kubernetes/integrations/?tab=configmap#configuration
+[1]: /ja/agent/kubernetes/integrations/?tab=configmap#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -395,10 +395,10 @@ spec:
 
 さらに、集約されたサービスだけではなく各ワーカーのモニターも可能なため、各ポッドは [NGINX チェック][12]によりモニターされます。
 
-[1]: /agent/kubernetes/integrations/
-[10]: /integrations/http_check/
-[11]: /agent/faq/template_variables/
-[12]: /integrations/nginx/
+[1]: /ja/agent/kubernetes/integrations/
+[10]: /ja/integrations/http_check/
+[11]: /ja/agent/faq/template_variables/
+[12]: /ja/integrations/nginx/
 {{% /tab %}}
 
 {{% tab "Kubernetes (AD v1)" %}}
@@ -448,10 +448,10 @@ spec:
 
 さらに、集約されたサービスだけではなく各ワーカーのモニターも可能なため、各ポッドは [NGINX チェック][12]によりモニターされます。
 
-[1]: /agent/kubernetes/integrations/
-[10]: /integrations/http_check/
-[11]: /agent/faq/template_variables/
-[12]: /integrations/nginx/
+[1]: /ja/agent/kubernetes/integrations/
+[10]: /ja/integrations/http_check/
+[11]: /ja/agent/faq/template_variables/
+[12]: /ja/integrations/nginx/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -501,18 +501,18 @@ Init Config:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/integrations/
-[2]: /agent/cluster_agent/
-[3]: /agent/cluster_agent/clusterchecksrunner?tab=helm
-[4]: /agent/cluster_agent/clusterchecksrunner?tab=operator
-[5]: /containers/guide/clustercheckrunners
-[6]: /developers/custom_checks/write_agent_check/
-[7]: /agent/guide/template_variables/
-[8]: /agent/cluster_agent/clusterchecks/#example-http_check-on-a-kubernetes-service
-[9]: /integrations/mysql/
-[10]: /integrations/http_check/
-[11]: /agent/faq/template_variables/
-[12]: /integrations/nginx/
-[13]: /containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
-[14]: /containers/cluster_agent/commands/#cluster-agent-commands
-[15]: /containers/cluster_agent/commands/?tab=datadogoperator#cluster-agent-environment-variables
+[1]: /ja/agent/kubernetes/integrations/
+[2]: /ja/agent/cluster_agent/
+[3]: /ja/agent/cluster_agent/clusterchecksrunner?tab=helm
+[4]: /ja/agent/cluster_agent/clusterchecksrunner?tab=operator
+[5]: /ja/containers/guide/clustercheckrunners
+[6]: /ja/developers/custom_checks/write_agent_check/
+[7]: /ja/agent/guide/template_variables/
+[8]: /ja/agent/cluster_agent/clusterchecks/#example-http_check-on-a-kubernetes-service
+[9]: /ja/integrations/mysql/
+[10]: /ja/integrations/http_check/
+[11]: /ja/agent/faq/template_variables/
+[12]: /ja/integrations/nginx/
+[13]: /ja/containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
+[14]: /ja/containers/cluster_agent/commands/#cluster-agent-commands
+[15]: /ja/containers/cluster_agent/commands/?tab=datadogoperator#cluster-agent-environment-variables

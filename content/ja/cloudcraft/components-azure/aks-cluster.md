@@ -1,5 +1,5 @@
 ---
-title: "AKS Cluster Component"
+title: AKS Cluster Component
 ---
 
 ## 概要

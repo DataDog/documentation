@@ -1,26 +1,26 @@
 ---
-title: Kubernetes Control Plane Monitoring
 aliases:
-- /agent/kubernetes/control_plane
+- /ja/agent/kubernetes/control_plane
 further_reading:
-    - link: agent/kubernetes/log
-      tag: Documentation
-      text: Collect your application logs
-    - link: /agent/kubernetes/apm
-      tag: Documentation
-      text: Collect your application traces
-    - link: /agent/kubernetes/prometheus
-      tag: Documentation
-      text: Collect your Prometheus metrics
-    - link: /agent/kubernetes/integrations
-      tag: Documentation
-      text: Collect automatically your application metrics and logs
-    - link: /agent/guide/autodiscovery-management
-      tag: Documentation
-      text: Limit data collection to a subset of containers only
-    - link: /agent/kubernetes/tag
-      tag: Documentation
-      text: Assign tags to all data emitted by a container
+- link: agent/kubernetes/log
+  tag: Documentation
+  text: Collect your application logs
+- link: /agent/kubernetes/apm
+  tag: Documentation
+  text: Collect your application traces
+- link: /agent/kubernetes/prometheus
+  tag: Documentation
+  text: Collect your Prometheus metrics
+- link: /agent/kubernetes/integrations
+  tag: Documentation
+  text: Collect automatically your application metrics and logs
+- link: /agent/guide/autodiscovery-management
+  tag: Documentation
+  text: Limit data collection to a subset of containers only
+- link: /agent/kubernetes/tag
+  tag: Documentation
+  text: Assign tags to all data emitted by a container
+title: Kubernetes Control Plane Monitoring
 ---
 
 ## 概要
@@ -946,13 +946,13 @@ kubectl apply -f <filename>
 Azure Kubernetes Service (AKS) や Google Kubernetes Engine (GKE) などのその他のマネージドサービスでは、ユーザーは Control Plane コンポーネントにアクセスできません。そのため、これらの環境では `kube_apiserver`、`kube_controller_manager`、`kube_scheduler`、または `etcd` チェックを実行することができません。
 
 
-[1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
-[2]: https://docs.datadoghq.com/integrations/etcd/?tab=containerized
-[3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
-[4]: https://docs.datadoghq.com/integrations/kube_scheduler/
+[1]: https://docs.datadoghq.com/ja/integrations/kube_apiserver_metrics/
+[2]: https://docs.datadoghq.com/ja/integrations/etcd/?tab=containerized
+[3]: https://docs.datadoghq.com/ja/integrations/kube_controller_manager/
+[4]: https://docs.datadoghq.com/ja/integrations/kube_scheduler/
 [5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane/#monitor-control-plane-metrics
-[6]: https://docs.datadoghq.com/agent/cluster_agent/setup
-[7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
-[8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
+[6]: https://docs.datadoghq.com/ja/agent/cluster_agent/setup
+[7]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
+[8]: https://docs.datadoghq.com/ja/agent/cluster_agent/endpointschecks/
 [9]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml

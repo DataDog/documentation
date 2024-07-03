@@ -1,21 +1,22 @@
 ---
-title: Instrumenting Python Serverless Applications
-further_reading:
-    - link: /serverless/configuration
-      tag: Documentation
-      text: Configure Serverless Monitoring
-    - link: /serverless/guide/troubleshoot_serverless_monitoring
-      tag: Documentation
-      text: Troubleshoot Serverless Monitoring
-    - link: serverless/custom_metrics/
-      tag: Documentation
-      text: Submitting Custom Metrics from Serverless Applications
-aliases:
-    - /serverless/datadog_lambda_library/python/
-    - /serverless/guide/python/
-    - /serverless/installation/python
 algolia:
-  tags: [python lambda traces]
+  tags:
+  - python lambda traces
+aliases:
+- /ja/serverless/datadog_lambda_library/python/
+- /ja/serverless/guide/python/
+- /ja/serverless/installation/python
+further_reading:
+- link: /serverless/configuration
+  tag: Documentation
+  text: Configure Serverless Monitoring
+- link: /serverless/guide/troubleshoot_serverless_monitoring
+  tag: Documentation
+  text: Troubleshoot Serverless Monitoring
+- link: serverless/custom_metrics/
+  tag: Documentation
+  text: Submitting Custom Metrics from Serverless Applications
+title: Instrumenting Python Serverless Applications
 ---
 
 <div class="alert alert-warning">Python Lambda 関数が <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 以下</a>で書かれている場合、または以前に Datadog Forwarder を使って Lambda 関数をセットアップした場合は、<a href="/serverless/guide/datadog_forwarder_python">Datadog Forwarder を使ったインスツルメンテーション</a>をご覧ください。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。</div>
@@ -87,7 +88,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -116,8 +117,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 
     詳細および追加設定については、[プラグインドキュメント][1]を参照してください。
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -160,8 +161,8 @@ Datadog サーバーレスプラグインをインストールして構成する
     [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
+[2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -243,7 +244,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
-[2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Terraform" %}}
@@ -300,7 +301,7 @@ module "lambda-datadog" {
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
 [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
 [3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
-[4]: /getting_started/site/
+[4]: /ja/getting_started/site/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -395,7 +396,7 @@ module "lambda-datadog" {
 [3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [5]: https://pypi.org/project/datadog-lambda/
-[6]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
+[6]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://aws.github.io/chalice/
 [9]: https://aws.github.io/chalice/topics/middleware.html
@@ -458,8 +459,8 @@ def get_message():
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/functions
-[2]: /serverless/guide/troubleshoot_serverless_monitoring/
-[3]: /serverless/configuration/
-[4]: /serverless/custom_metrics?tab=python
-[5]: /tracing/custom_instrumentation/python/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[2]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[3]: /ja/serverless/configuration/
+[4]: /ja/serverless/custom_metrics?tab=python
+[5]: /ja/tracing/custom_instrumentation/python/
+[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

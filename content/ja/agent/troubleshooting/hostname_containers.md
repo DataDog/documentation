@@ -236,9 +236,9 @@ Agent を **CI 環境** (つまり Agent はエフェメラル) またはホス�
 
 上記の解決策で Agent の設定がうまくいかない場合は、[Datadog サポートチーム][6]までご連絡ください。
 
-[1]: /containers/kubernetes/distributions
+[1]: /ja/containers/kubernetes/distributions
 [2]: https://github.com/DataDog/helm-charts
 [3]: https://github.com/DataDog/datadog-operator
 [4]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/manifests
-[5]: /containers/troubleshooting/duplicate_hosts
-[6]: /help/
+[5]: /ja/containers/troubleshooting/duplicate_hosts
+[6]: /ja/help/

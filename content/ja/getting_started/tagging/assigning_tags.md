@@ -1,10 +1,8 @@
 ---
-title: Assigning Tags
-kind: documentation
-description: 'Learn how to assign tags in Datadog.'
 aliases:
-    - /agent/tagging
-    - /tagging/assigning_tags/
+- /ja/agent/tagging
+- /ja/tagging/assigning_tags/
+description: Learn how to assign tags in Datadog.
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
@@ -12,6 +10,8 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
   text: Learn how to use tags in Datadog
+kind: documentation
+title: Assigning Tags
 ---
 
 ## Overview
@@ -38,9 +38,9 @@ The goal of Autodiscovery is to apply a Datadog integration configuration when r
 If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations the same as within a non-containerized environments. These tags, along with manually added tags are configured in the [Datadog Agent configuration file](#configuration-file).
 
 
-[1]: /getting_started/agent/autodiscovery/
-[2]: /getting_started/tagging/unified_service_tagging
-[3]: /getting_started/agent/autodiscovery/?tab=docker#integration-templates
+[1]: /ja/getting_started/agent/autodiscovery/
+[2]: /ja/getting_started/tagging/unified_service_tagging
+[3]: /ja/getting_started/agent/autodiscovery/?tab=docker#integration-templates
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -94,11 +94,11 @@ hostname: mymachine.mydomain
 * To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
 
-[1]: /getting_started/integrations/
-[2]: /agent/configuration/agent-configuration-files/
-[3]: /getting_started/tagging/#define-tags
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
-[5]: /dashboards/querying/#arithmetic-between-two-metrics
+[1]: /ja/getting_started/integrations/
+[2]: /ja/agent/configuration/agent-configuration-files/
+[3]: /ja/getting_started/tagging/#define-tags
+[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
+[5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -136,11 +136,11 @@ hostname: mymachine.mydomain
 * To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
 
-[1]: /getting_started/integrations/
-[2]: /agent/configuration/agent-configuration-files/
-[3]: /getting_started/tagging/#define-tags
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
-[5]: /dashboards/querying/#arithmetic-between-two-metrics
+[1]: /ja/getting_started/integrations/
+[2]: /ja/agent/configuration/agent-configuration-files/
+[3]: /ja/getting_started/tagging/#define-tags
+[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
+[5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -269,7 +269,7 @@ Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (h
 {{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
 
 
-[1]: /infrastructure/hostmap/
+[1]: /ja/infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
@@ -278,7 +278,7 @@ Assign host tags in the UI using the [Infrastructure List page][1]. Click on any
 {{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Infrastructure List with an Infrastructure details panel opened highlighting Add Tags button" style="width:80%;">}}
 
 
-[1]: /infrastructure/
+[1]: /ja/infrastructure/
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
@@ -289,7 +289,7 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 {{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: /monitors/manage/
+[2]: /ja/monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
@@ -299,8 +299,8 @@ Create percentile aggregations within [Distribution Metrics][1] by applying an a
 
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" style="width:80%;">}}
 
-[1]: /metrics/distributions/
-[2]: /metrics/custom_metrics/
+[1]: /ja/metrics/distributions/
+[2]: /ja/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
@@ -308,7 +308,7 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" style="width:80%;">}}
 
-[1]: /integrations/amazon_web_services/
+[1]: /ja/integrations/amazon_web_services/
 {{% /tab %}}
 {{% tab "Service Level Objectives" %}}
 
@@ -335,17 +335,17 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 * [Send traces][9]
 * [Create][10] or [Update][11] a Service Level Objective
 
-[1]: /api/v1/service-checks/#submit-a-service-check
-[2]: /api/v1/events/#post-an-event
-[3]: /api/v1/aws-integration/
-[4]: /api/v1/metrics/#submit-metrics
-[5]: /api/v1/monitors/#create-a-monitor
-[6]: /api/v1/monitors/#edit-a-monitor
-[7]: /api/v1/tags/#add-tags-to-a-host
-[8]: /api/v1/tags/#update-host-tags
-[9]: /tracing/guide/send_traces_to_agent_by_api/
-[10]: /api/v1/service-level-objectives/#create-a-slo-object
-[11]: /api/v1/service-level-objectives/#update-a-slo
+[1]: /ja/api/v1/service-checks/#submit-a-service-check
+[2]: /ja/api/v1/events/#post-an-event
+[3]: /ja/api/v1/aws-integration/
+[4]: /ja/api/v1/metrics/#submit-metrics
+[5]: /ja/api/v1/monitors/#create-a-monitor
+[6]: /ja/api/v1/monitors/#edit-a-monitor
+[7]: /ja/api/v1/tags/#add-tags-to-a-host
+[8]: /ja/api/v1/tags/#update-host-tags
+[9]: /ja/tracing/guide/send_traces_to_agent_by_api/
+[10]: /ja/api/v1/service-level-objectives/#create-a-slo-object
+[11]: /ja/api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}
 {{% tab "Example" %}}
 
@@ -401,14 +401,14 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/#define-tags
-[2]: /getting_started/tagging/unified_service_tagging
-[3]: /integrations/#cat-cloud
-[4]: /getting_started/agent/#setup
-[5]: /integrations/#cat-web
-[6]: /agent/docker/?tab=standard#tagging
-[7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
-[9]: /tracing/setup/
-[10]: /developers/dogstatsd/
-[11]: /developers/community/libraries/
+[1]: /ja/getting_started/tagging/#define-tags
+[2]: /ja/getting_started/tagging/unified_service_tagging
+[3]: /ja/integrations/#cat-cloud
+[4]: /ja/getting_started/agent/#setup
+[5]: /ja/integrations/#cat-web
+[6]: /ja/agent/docker/?tab=standard#tagging
+[7]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[8]: /ja/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[9]: /ja/tracing/setup/
+[10]: /ja/developers/dogstatsd/
+[11]: /ja/developers/community/libraries/

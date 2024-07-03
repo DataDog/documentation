@@ -1,9 +1,9 @@
 ---
-title: mode
 core_product:
-  - モニター
+- モニター
 related_terms:
-  - mean
-  - median
+- mean
+- median
+title: mode
 ---
 The mode is the most frequent number in a dataset.

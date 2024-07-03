@@ -1,26 +1,25 @@
 ---
-title: Dogwrap
-description: "Call commands and generate events from their results with Dogwrap"
-kind: guide
 aliases:
-- /developers/faq/can-i-call-scripts-and-generate-events-from-their-results
-- /dashboards/faq/how-do-i-track-cron-jobs
+- /ja/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
+- /ja/dashboards/faq/how-do-i-track-cron-jobs
+description: Call commands and generate events from their results with Dogwrap
+title: Dogwrap
 ---
 
-The Dogwrap command line tool allows you to call commands and generate events from their results. In order to use Dogwrap, install the [Datadog Python Library][1]:
+Dogwrap コマンドラインツールを使用すると、コマンドを呼び出して、その結果からイベントを生成できます。Dogwrap を使用するには、[Datadog Python ライブラリ][1]をインストールします。
 
-To install from pip:
+pip からインストールする場合
 
 ```text
 pip install datadog
 ```
 
-To install from source:
+ソースからインストールする場合
 
-1. Clone the [DataDog/datadogpy][1] repository.
-2. Inside the root folder, run `python setup.py install`.
+1. [DataDog/datadogpy][1] リポジトリを複製します。
+2. ルートフォルダーで `python setup.py install` を実行します。
 
-The minimum valid `dogwrap` command has the following layout:
+有効な最小限の `dogwrap` コマンドは、以下のレイアウトを持ちます。
 
 {{< site-region region="us,gov,ap1" >}}
 ```bash
@@ -48,27 +47,27 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
 
 **Note**: The `dogwrap` command sends data to the US Datadog site by default. If you need to send data to another site, you must include the `-s` option specifying a target site, such as `eu`, `us3`, `us5`, etc.
 
-With the following placeholders:
+次のプレースホルダーと組み合わせます。
 
-* `<EVENT_TITLE>`: Title of the event to display in Datadog.
-* `<DATADOG_API_KEY>`: [The Datadog API key associated with your organization][2].
-* `<COMMAND>`: Command to wrap and generate events from. Enclose your called command in quotes to prevent Python from thinking the command line arguments belong to the Python command instead of the wrapped one.
+* `<EVENT_TITLE>`: Datadog に表示するイベントのタイトル。
+* `<DATADOG_API_KEY>`: [オーガニゼーションに関連付けられた Datadog API キー][2]。
+* `<COMMAND>`: ラップしてイベントを生成するコマンド。呼び出されるコマンドは引用符で囲みます。これは、Python がこのコマンドラインの引数を、ラップされたコマンドの引数ではなく Python コマンドの引数と見なさないようにするためです。
 
-**Note**: Use the Dogwrap help command `dogwrap --help` to discover all available options.
+**注**: Dogwrap のヘルプコマンド `dogwrap --help` を使用すると、使用可能なすべてのオプションが表示されます。
 
-For an example of `dogwrap` in action, consider `cron`. If you have a cron script to vacuum a Postgres table every day:
+実際の `dogwrap` の例として、`cron` を考えます。次のように、Postgres テーブルを毎日バキュームする cron スクリプトがあるとします。
 
 ```bash
 0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
 ```
 
-Vacuuming is particularly resource-intensive, so you might want Datadog events for each time they run to correlate metrics and other events with vacuums:
+バキュームは特にリソースを集中的に使用します。そこで、バキュームを実行するたびに、メトリクスやイベントをバキュームに関連付ける Datadog イベントを生成できます。
 
 ```bash
 dogwrap -n "Vacuuming mytable" -k $DATADOG_API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log"
 ```
 
-This calls the command at the end of the script and, if it exits with a non-zero exit code (like an error), sends Datadog events. Using `--submit_mode all` sends events on every run of this command.
+これは、スクリプトの最後にあるコマンドを呼び出し、コマンドが 0 以外の終了コード (エラーなど) で終了すると、Datadog イベントを送信します。`--submit_mode all` を使用すると、このコマンドを実行するたびに、イベントが送信されます。
 
 [1]: https://github.com/DataDog/datadogpy
 [2]: https://app.datadoghq.com/organization-settings/api-keys

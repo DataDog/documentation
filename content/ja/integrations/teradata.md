@@ -1,64 +1,64 @@
 ---
-"app_id": "teradata"
-"app_uuid": "8cac0599-64ca-4a46-8c68-1c5db6cc65ca"
-"assets":
-  "dashboards":
-    "Teradata Overview": assets/dashboards/teradata_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": teradata.disk_space.curr_perm.total
-      "metadata_path": metadata.csv
-      "prefix": teradata.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10275"
-    "source_type_name": Teradata
-  "monitors":
-    "High disk space": assets/monitors/high_disk_space.json
-    "Low ready threads": assets/monitors/low_ready_threads.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: teradata
+app_uuid: 8cac0599-64ca-4a46-8c68-1c5db6cc65ca
+assets:
+  dashboards:
+    Teradata Overview: assets/dashboards/teradata_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: teradata.disk_space.curr_perm.total
+      metadata_path: metadata.csv
+      prefix: teradata.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10275
+    source_type_name: Teradata
+  monitors:
+    High disk space: assets/monitors/high_disk_space.json
+    Low ready threads: assets/monitors/low_ready_threads.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - caching
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/teradata/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "teradata"
-"integration_id": "teradata"
-"integration_title": "Teradata"
-"integration_version": "2.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "teradata"
-"public_title": "Teradata"
-"short_description": "Monitor the health and performance of your Teradata Vantage Database."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/teradata/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: teradata
+integration_id: teradata
+integration_title: Teradata
+integration_version: 2.2.0
+is_public: true
+manifest_version: 2.0.0
+name: teradata
+public_title: Teradata
+short_description: Monitor the health and performance of your Teradata Vantage Database.
+supported_os:
 - linux
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Category::Data Stores"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of your Teradata Vantage Database.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Teradata
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Data Stores
+  - Supported OS::Linux
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Monitor the health and performance of your Teradata Vantage Database.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Teradata
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -184,17 +184,16 @@ Need help? Contact [Datadog support][14].
 
 [12]:https://docs.teradata.com/r/Teradata-VantageTM-Data-Dictionary/July-2021/Data-Dictionary-Views/Access-to-Data-Dictionary-Views/Default-PUBLIC-Privileges-for-Views
 [1]: https://www.teradata.com/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/Teradata/python-driver#Installation
-[5]: https://docs.datadoghq.com/developers/guide/custom-python-package/?tab=linux#pagetitle
+[5]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux#pagetitle
 [6]: https://docs.teradata.com/r/Teradata-VantageTM-Resource-Usage-Macros-and-Tables/July-2021/ResUsageSpma-Table
 [7]: https://docs.teradata.com/r/Teradata-VantageTM-Database-Utilities/July-2021/Control-GDO-Editor-ctl/Ctl-Commands/SCREEN
 [8]: https://docs.teradata.com/r/Teradata-VantageTM-Resource-Usage-Macros-and-Tables/July-2021/Planning-Your-Resource-Usage-Data/Resource-Usage-Logging
 [9]: https://github.com/DataDog/integrations-core/blob/master/teradata/datadog_checks/teradata/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/teradata/metadata.csv
 [13]: https://github.com/DataDog/integrations-core/blob/master/teradata/assets/service_checks.json
-[14]: https://docs.datadoghq.com/help/
-
+[14]: https://docs.datadoghq.com/ja/help/

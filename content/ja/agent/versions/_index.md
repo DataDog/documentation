@@ -1,18 +1,18 @@
 ---
-title: Agent Version differences
 further_reading:
-    - link: agent/versions/upgrade_to_agent_v7
-      tag: Documentation
-      text: Upgrade to Agent v7
-    - link: agent/versions/upgrade_to_agent_v6
-      tag: Documentation
-      text: Upgrade to Agent v6
-    - link: agent/versions/upgrade_between_agent_minor_versions
-      tag: Documentation
-      text: Upgrade Between Agent Minor Versions
-    - link: agent/faq/agent_v6_changes
-      tag: FAQ
-      text: Agent v6 Changes
+- link: agent/versions/upgrade_to_agent_v7
+  tag: Documentation
+  text: Upgrade to Agent v7
+- link: agent/versions/upgrade_to_agent_v6
+  tag: Documentation
+  text: Upgrade to Agent v6
+- link: agent/versions/upgrade_between_agent_minor_versions
+  tag: Documentation
+  text: Upgrade Between Agent Minor Versions
+- link: agent/faq/agent_v6_changes
+  tag: FAQ
+  text: Agent v6 Changes
+title: Agent Version differences
 ---
 
 <div class="alert alert-info"><p>
@@ -37,9 +37,9 @@ Agent をバージョン 7 にアップグレードする方法については�
 **注**: [Datadog Agent v6 で Python 3 を使用する][3]で、Agent v6 でこの移行をテストできます。
 
 
-[1]: /agent/versions/upgrade_to_agent_v7/
-[2]: /agent/guide/python-3/
-[3]: /agent/guide/agent-v6-python-3/
+[1]: /ja/agent/versions/upgrade_to_agent_v7/
+[2]: /ja/agent/guide/python-3/
+[3]: /ja/agent/guide/agent-v6-python-3/
 {{% /tab %}}
 {{% tab "Agent v6 と v5" %}}
 
@@ -74,14 +74,14 @@ Agent v5 から Agent v6 へのすべての変更内容については、[Datado
 - [すべてのログを Datadog に送信して、アラート設定、分析、メトリクスとの関連付けなどを行うことができます][8]。
 
 
-[1]: /agent/#agent-architecture
-[2]: /agent/configuration/agent-commands/
-[3]: /developers/dogstatsd/unix_socket/
+[1]: /ja/agent/#agent-architecture
+[2]: /ja/agent/configuration/agent-commands/
+[3]: /ja/developers/dogstatsd/unix_socket/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /metrics/types/?tab=distribution#metric-types
-[6]: /infrastructure/process/
+[5]: /ja/metrics/types/?tab=distribution#metric-types
+[6]: /ja/infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[8]: /logs/
+[8]: /ja/logs/
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -1,12 +1,12 @@
 ---
-title: 構成
 further_reading:
-- link: "https://opentelemetry.io/docs/collector/management/"
+- link: https://opentelemetry.io/docs/collector/management/
   tag: 外部サイト
   text: OpenTelemetry Collector Management
-- link: "https://opentelemetry.io/docs/collector/configuration/"
+- link: https://opentelemetry.io/docs/collector/configuration/
   tag: 外部サイト
   text: OpenTelemetry Collector Configuration
+title: 構成
 ---
 
 ## OpenTelemetry Collector configuration

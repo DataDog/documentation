@@ -1,6 +1,4 @@
 ---
-title: Enable RUM on Your Squarespace Store
-kind: guide
 further_reading:
 - link: /real_user_monitoring/guide/rum-for-product-analytics/
   tag: Documentation
@@ -8,56 +6,57 @@ further_reading:
 - link: /real_user_monitoring/guide/alerting-with-conversion-rates/
   tag: Documentation
   text: Alerting With Conversion Rates
+title: Enable RUM on Your Squarespace Store
 ---
 
-## Overview
+## 概要
 
-Understanding how customers interact with your web pages is crucial to the success of your online store.
+オンラインストアを成功させるには、顧客がどのように Web ページとやりとりしているかを理解することが重要です。
 
-This guide walks through how you can set up Real User Monitoring on your Squarespace-powered store.
+このガイドでは、Squarespace ストアでリアルユーザーモニタリングを設定する方法を説明します。
 
-## Setup
+## セットアップ
 
-1. Log into your Squarespace administration panel and click **Settings**.
+1. Squarespace の管理パネルにログインし、** Settings** をクリックします。
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Squarespace ストアで RUM を有効にする" style="width:30%;">}}
 
-2. Under **Settings**, click **Advanced**.
+2. **Settings** の下にある **Advanced** をクリックします。
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Squarespace ストアで RUM を有効にする" style="width:30%;">}}
 
-3. In the open menu, click **Code Injection**.
+3. 開いているメニューで、**Code Injection** をクリックします。
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Squarespace ストアで RUM を有効にする" style="width:30%;">}}
 
-4. Initialize the Browser RUM SDK by adding the SDK code snippet inside the **Header** section. See more information about which installation method to choose in the [RUM Browser Monitoring documentation][1].
+4. **Header** セクション内に SDK コードスニペットを追加して、ブラウザ RUM SDK を初期化します。どのインストール方法を選択するかについては、[RUM ブラウザモニタリングドキュメント][1]を参照してください。
 
    {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-4.png" alt="Enable RUM on your Squarespace store" >}}
 
-5. Click the **Save** button to save your changes.
+5. **Save** ボタンをクリックして変更を保存します。
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Enable RUM on your Squarespace store" style="width:50%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Squarespace ストアで RUM を有効にする" style="width:50%;">}}
 
-See more information regarding code injection in [Squarespace's documentation][2].
+コード挿入に関する詳細は、[Squarespace のドキュメント][2]を参照してください。
 
-## Start exploring
+## 探索を始める
 
-Once you've initialized the RUM Browser SDK, you can start using Real User Monitoring with your Squarespace store.
+RUM ブラウザ SDK を初期化したら、Squarespace ストアでリアルユーザーモニタリングを使い始めることができます。
 
-For example, you can:
+たとえば、次のようなことができます。
 
-- Get valuable insights about your customers' behavior by
-making data-driven decisions to improve your store
-- Increase conversion by watching browser recordings enriched sessions with [Session Replay][3]
+- データに基づいてストアを改善するための意思決定を行うことで、
+顧客の行動に関する貴重な洞察を得ることができます
+- [セッションリプレイ][3]を使ってブラウザの記録でリッチ化されたセッションを見ることでコンバージョンを増加させます。
 - Use [funnel analysis][4] to better understand the customer journey, or
-- [Generate metrics][5] from those newly captured sessions
+- 新たにキャプチャされたセッションから[メトリクスを生成][5]します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#choose-the-right-installation-method/
+[1]: /ja/real_user_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: https://support.squarespace.com/hc/en-us/articles/205815908-Using-code-injection
-[3]: /real_user_monitoring/session_replay/browser/
-[4]: /product_analytics/journeys/funnel_analysis/
-[5]: /real_user_monitoring/generate_metrics/
+[3]: /ja/real_user_monitoring/session_replay/browser/
+[4]: /ja/product_analytics/journeys/funnel_analysis/
+[5]: /ja/real_user_monitoring/generate_metrics/

@@ -1,21 +1,21 @@
 ---
-title: Tracing iOS Applications
-kind: documentation
 aliases:
-- /tracing/setup_overview/setup/ios/
-- /tracing/setup/ios/
-- /tracing/trace_collection/dd_libraries/ios
-description: Collect traces from your iOS applications.
+- /ja/tracing/setup_overview/setup/ios/
+- /ja/tracing/setup/ios/
+- /ja/tracing/trace_collection/dd_libraries/ios
 code_lang: ios
-type: multi-code-lang
 code_lang_weight: 90
+description: Collect traces from your iOS applications.
 further_reading:
-- link: "https://github.com/DataDog/dd-sdk-ios"
+- link: https://github.com/DataDog/dd-sdk-ios
   tag: Source Code
   text: dd-sdk-ios Source code
 - link: tracing/visualization/
   tag: Documentation
   text: Explore your services, resources, and traces
+kind: documentation
+title: Tracing iOS Applications
+type: multi-code-lang
 ---
 Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side tracing library][2] and leverage the following features:
 
@@ -524,13 +524,13 @@ The following attributes in `Trace.Configuration` can be used when creating the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/visualization/#trace
+[1]: https://docs.datadoghq.com/ja/tracing/visualization/#trace
 [2]: https://github.com/DataDog/dd-sdk-ios
-[3]: https://docs.datadoghq.com/tracing/visualization/#spans
-[6]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[7]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[3]: https://docs.datadoghq.com/ja/tracing/visualization/#spans
+[6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
+[7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [8]: https://opentracing.io
 [9]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
-[10]: https://docs.datadoghq.com/tracing/
+[10]: https://docs.datadoghq.com/ja/tracing/
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[12]: /tracing/trace_collection/custom_instrumentation/ios/otel
+[12]: /ja/tracing/trace_collection/custom_instrumentation/ios/otel

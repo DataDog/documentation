@@ -1,10 +1,10 @@
 ---
-title: トラブルシューティング
-is_beta: true
 further_reading:
 - link: /tracing/api_catalog/
   tag: Documentation
   text: API Catalog
+is_beta: true
+title: トラブルシューティング
 ---
 
 Datadog API カタログで想定外の挙動に遭遇した場合、このガイドが問題解決の助けとなるかもしれません。問題が解決しない場合は、[Datadog サポート][1]にお問い合わせください。
@@ -32,6 +32,6 @@ API カタログは APM トレーシングに基づいているため、エン�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /tracing/trace_collection/
-[3]: /tracing/trace_pipeline/ingestion_controls/
+[1]: /ja/help/
+[2]: /ja/tracing/trace_collection/
+[3]: /ja/tracing/trace_pipeline/ingestion_controls/

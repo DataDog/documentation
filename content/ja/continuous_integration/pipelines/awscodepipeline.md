@@ -1,17 +1,17 @@
 ---
-title: Set up Tracing on a AWS CodePipeline Pipeline
 aliases:
-  - /continuous_integration/setup_pipelines/codepipeline
+- /ja/continuous_integration/setup_pipelines/codepipeline
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
-    - link: "https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/"
-      tag: Blog
-      text: Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+- link: https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/
+  tag: Blog
+  text: Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility
+title: Set up Tracing on a AWS CodePipeline Pipeline
 ---
 
 {{< site-region region="gov" >}}
@@ -136,15 +136,15 @@ The **CI Pipeline List** page shows data for only the [default branch][13] of ea
 [3]: https://aws.amazon.com/eventbridge/
 [4]: https://docs.aws.amazon.com/codepipeline/latest/userguide/detect-state-changes-cloudwatch-events.html
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /continuous_integration/pipelines/awscodepipeline/#create-the-api-destination
-[7]: /continuous_integration/pipelines/awscodepipeline/#only-monitor-specific-pipelines
-[8]: https://docs.datadoghq.com/continuous_integration/tests/
+[6]: /ja/continuous_integration/pipelines/awscodepipeline/#create-the-api-destination
+[7]: /ja/continuous_integration/pipelines/awscodepipeline/#only-monitor-specific-pipelines
+[8]: https://docs.datadoghq.com/ja/continuous_integration/tests/
 [9]: https://aws.amazon.com/codebuild/
 [10]: https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html
 [11]: https://app.datadoghq.com/ci/pipelines
 [12]: https://app.datadoghq.com/ci/pipeline-executions
-[13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
-[14]: /glossary/#partial-retry
-[15]: /glossary/#running-pipeline
-[16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
-[17]: /glossary/#approval-wait-time
+[13]: https://docs.datadoghq.com/ja/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
+[14]: /ja/glossary/#partial-retry
+[15]: /ja/glossary/#running-pipeline
+[16]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[17]: /ja/glossary/#approval-wait-time

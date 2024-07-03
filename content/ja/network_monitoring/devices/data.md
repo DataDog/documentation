@@ -1,8 +1,8 @@
 ---
-title: NDM Data Collected
-disable_toc: true
 aliases:
-    - /network_performance_monitoring/devices/data/
+- /ja/network_performance_monitoring/devices/data/
+disable_toc: true
+title: NDM Data Collected
 ---
 
 ## イベント

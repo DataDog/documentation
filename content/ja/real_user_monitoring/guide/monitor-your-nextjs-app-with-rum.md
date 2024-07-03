@@ -1,32 +1,31 @@
 ---
-title: Monitor Your Next.js App With RUM
-kind: guide
 description: Guide for monitoring Next.js applications with RUM.
 further_reading:
 - link: /monitors/create/types/real_user_monitoring/
   tag: Documentation
   text: Learn about RUM Monitors
+title: Monitor Your Next.js App With RUM
 ---
 
-## Overview
+## 概要
 
-[Next.js][1] is a JavaScript framework created by [Vercel][8] that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend and backend applications for browser-related metrics that you give insight into performance and user behavior.
+[Next.js][1] は、React.js Web ページや Node.js API を作成するために使用される、[Vercel][8] によって作成された JavaScript フレームワークです。Next.js を RUM とインテグレーションすることで、フロントエンドとバックエンドのアプリケーションのブラウザ関連のメトリクスを監視し、パフォーマンスとユーザー行動を把握することができます。
 
-## Setup
+## セットアップ
 
-Follow the steps below to set up Datadog RUM browser monitoring.
+以下の手順に従って、Datadog RUM ブラウザモニタリングを設定します。
 
-### Create an application
+### アプリケーションの作成
 
 1. Navigate to **[Digital Experience > Performance Summary][2]**.
-2. Click the **New Application** button.
-3. Make sure JS is selected, then enter a name for your application and click **Create New RUM Application**. A `clientToken` and `applicationId` are automatically generated for your application.
+2. **New Application** ボタンをクリックします。
+3. JS が選択されていることを確認し、アプリケーションの名前を入力して **Create New RUM Application** をクリックします。アプリケーションの `clientToken` と `applicationId` が自動的に生成されます。
 
 <div class="alert alert-info">When using `.env.local`, only variables prefixed with `NEXT_PUBLIC_` are included in the client bundle. See <a href="https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser" target="_blank">Bundling Environment Variables for the Browser</a> in the Next.js docs.</div>
 
-### Instrument your application
+### アプリケーションをインスツルメントする
 
-1. Choose your instrumentation type, then copy and paste the code snippet from the Datadog RUM UI into the appropriate file based on the instrumentation type.
+1. インスツルメンテーションの種類を選択し、Datadog RUM UI からインスツルメンテーションの種類に応じた適切なファイルにコードスニペットをコピーアンドペーストします。
 
    {{< tabs >}}
    {{% tab "npm" %}}
@@ -48,7 +47,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
       site: "datadoghq.com",
       service: "<SERVICE_NAME>",
       env: "<ENV_NAME>",
-      // Specify a version number to identify the deployed version of your application in Datadog
+      // Datadog のデプロイされたアプリケーションのバージョンを識別するためにバージョン番号を指定します
       // version: '1.0.0',
       sessionSampleRate: 100,
       sessionReplaySampleRate: 20,
@@ -96,15 +95,15 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    [5]: https://nextjs.org/docs/app/building-your-application/rendering/client-components#using-client-components-in-nextjs
 
    {{% /tab %}}
-   {{% tab "CDN async" %}}
+   {{% tab "CDN 非同期" %}}
 
-   When using CDN async, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
+CDN 非同期を使用する場合は、root `layout.tsx` ファイルまたはカスタム `_app.tsx` ファイル (Datadog は両方をサポートしています) に貼り付ける前に、Datadog RUM UI からコードスニペットにいくつかの小さな変更を加える必要があります。
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
-   - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
-   - The Next.js external scripts need to be loaded like in [this page][5].
+   - アプリケーションが**より新しい** Next.js [App Router][1] (バージョン 13 以上) に依存している場合は、スニペットを root [`layout.tsx`][2] ファイルに貼り付けます。
+   - Next.js アプリケーションが**より古い** Next.js [Page Router][3] に依存している場合は、スニペットをカスタム [`_app.tsx`][4] ファイルに貼り付けます。
+   - [このページ][5]のように、Next.js の外部スクリプトを読み込む必要があります。
 
-   **Note**: The Next.js scripts include import and export lines, and includes curly braces and backticks between the `Script id`, where all instances of `Script` are in uppercase.
+   **注**: Next.js スクリプトには import と export の行があり、`Script id` の間には中かっこやバックスティックが含まれています。ここで、`Script` のインスタンスはすべて大文字です。
 
    {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
 
@@ -156,15 +155,15 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
 
    {{% /tab %}}
-   {{% tab "CDN sync" %}}
+   {{% tab "CDN 同期" %}}
 
-   When using CDN sync, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
+CDN 同期を使用する場合は、root `layout.tsx` ファイルまたはカスタム `_app.tsx` ファイル (Datadog は両方をサポートしています) に貼り付ける前に、Datadog RUM UI からコードスニペットにいくつかの小さな変更を加える必要があります。
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
-   - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
-   - The Next.js external scripts need to be loaded like in [this page][5].
+   - アプリケーションが**より新しい** Next.js [App Router][1] (バージョン 13 以上) に依存している場合は、スニペットを root [`layout.tsx`][2] ファイルに貼り付けます。
+   - Next.js アプリケーションが**より古い** Next.js [Page Router][3] に依存している場合は、スニペットをカスタム [`_app.tsx`][4] ファイルに貼り付けます。
+   - [このページ][5]のように、Next.js の外部スクリプトを読み込む必要があります。
 
-   **Note**: The Next.js scripts include import and export lines, and includes curly braces and backticks between the `Script id`, where all instances of `Script` are in uppercase.
+   **注**: Next.js スクリプトには import と export の行があり、`Script id` の間には中かっこやバックスティックが含まれています。ここで、`Script` のインスタンスはすべて大文字です。
 
    {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
 
@@ -219,26 +218,26 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    {{% /tab %}}
    {{< /tabs >}}
 
-3. Follow the in-app steps to verify your installation.
-4. Deploy the changes to your application. Once your deployment is live, Datadog collects events from user browsers.
-5. You can visualize the [data collected][3] in your Next.js application using [dashboards][4].
+3. アプリ内の手順に従ってインストールを検証します。
+4. 変更をアプリケーションにデプロイします。実行が開始されると、ユーザーブラウザから Datadog によってイベントが収集されます。
+5. [収集したデータ][3]は、[ダッシュボード][4]を使用して Next.js アプリケーションで視覚化できます。
 
 ## Backend monitoring
 
-To start backend monitoring of your Next.js applications:
+Next.js アプリケーションのバックエンドモニタリングを開始するには
 
-1. Follow the browser setup steps for [Connecting RUM and Traces][6].
-2. Follow the browser setup steps for [OpenTelemetry support][7] to connect with APM.
+1. [RUM とトレースの接続][6]のブラウザの設定手順に従います。
+2. [OpenTelemetry サポート][7]のブラウザの設定手順に従って、APM と接続します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://nextjs.org/
 [2]: https://app.datadoghq.com/rum/performance-monitoring?_gl=1*il22i*_gcl_aw*R0NMLjE2OTAzMDM5MzcuQ2owS0NRanc1ZjJsQmhDa0FSSXNBSGVUdmxqb3ZQX1YyMFRsV1o1UlJLVHNUNHNITll2ZEJ0bTZONnlxdVM1X3lzY2NOejE4QzVON1ktOGFBcHpYRUFMd193Y0I.*_gcl_au*MjMxOTI4ODMzLjE2OTAyMjI1NTA.*_ga*MTIwMTk2NTA5Ny4xNjY2NzEzMjY2*_ga_KN80RDFSQK*MTY5MTc5ODE4OS4xMzYuMS4xNjkxNzk4NTQyLjAuMC4w*_fplc*RnA3SEVTb1BoTG9ndDI0OFQ5TERxRWRtMjNwTWVrTWZ3VGNGeWRaYm9HRkpJSXBxVHdVdFNTcURCWW1rZENHUldmU2EyTzhtZ3NXVzRUR0JUTzRnSGdPeGRkVVpWYVA5V0x4JTJGeTFRNWo5djNqYmNwQnJpckdHUU93M08xU3clM0QlM0Q
-[3]: /real_user_monitoring/browser/data_collected/
-[4]: /real_user_monitoring/platform/dashboards/
+[3]: /ja/real_user_monitoring/browser/data_collected/
+[4]: /ja/real_user_monitoring/platform/dashboards/
 [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
-[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
-[7]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[6]: /ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
+[7]: /ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
 [8]: https://vercel.com

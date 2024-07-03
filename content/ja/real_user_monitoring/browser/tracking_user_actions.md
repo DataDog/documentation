@@ -1,21 +1,22 @@
 ---
-title: Tracking User Actions
-kind: documentation
-further_reading:
-    - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-      tag: Blog
-      text: Introducing Datadog Real User Monitoring
-    - link: /real_user_monitoring/explorer/
-      tag: Documentation
-      text: Explore your views within Datadog
-    - link: /real_user_monitoring/explorer/visualize/
-      tag: Documentation
-      text: Apply visualizations on your events
-    - link: /real_user_monitoring/platform/dashboards/
-      tag: Documentation
-      text: Learn about RUM dashboards
 algolia:
-  tags: [user actions]
+  tags:
+  - user actions
+further_reading:
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: Blog
+  text: Introducing Datadog Real User Monitoring
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Explore your views within Datadog
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: Apply visualizations on your events
+- link: /real_user_monitoring/platform/dashboards/
+  tag: Documentation
+  text: Learn about RUM dashboards
+kind: documentation
+title: Tracking User Actions
 ---
 
 ## Overview
@@ -119,9 +120,9 @@ The Datadog Browser SDK uses different strategies to compute click action names:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[3]: /real_user_monitoring/browser/data_collected/#default-attributes
+[1]: /ja/real_user_monitoring/browser/advanced_configuration/
+[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[3]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
-[5]: /real_user_monitoring/guide/send-rum-custom-actions
-[6]: /real_user_monitoring/session_replay/privacy_options#mask-action-names
+[5]: /ja/real_user_monitoring/guide/send-rum-custom-actions
+[6]: /ja/real_user_monitoring/session_replay/privacy_options#mask-action-names

@@ -1,10 +1,10 @@
 ---
-title: funnel
 core_product:
-  - ダッシュボード
-  - real user monitoring
+- ダッシュボード
+- real user monitoring
 related_terms:
-  - metric
+- metric
+title: funnel
 ---
 Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. 
 

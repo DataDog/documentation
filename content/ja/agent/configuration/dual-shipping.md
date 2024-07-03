@@ -1,11 +1,11 @@
 ---
-title: Dual Shipping
 aliases:
-- /agent/guide/dual-shipping
+- /ja/agent/guide/dual-shipping
 further_reading:
 - link: /agent/configuration/network/
   tag: Guide
   text: Network Traffic
+title: Dual Shipping
 ---
 
 <div class="alert alert-danger">
@@ -412,7 +412,7 @@ If you're using the [Datadog Agent operator][3], similarly, you can set the `age
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/network/
+[1]: /ja/agent/configuration/network/
 [2]: https://github.com/DataDog/helm-charts
 [3]: https://github.com/DataDog/datadog-operator
 [4]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md

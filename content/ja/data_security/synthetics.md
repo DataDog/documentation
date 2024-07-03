@@ -1,11 +1,11 @@
 ---
-title: Synthetic Monitoring Data Security
 aliases:
-    - /synthetics/security/
+- /ja/synthetics/security/
 further_reading:
 - link: /data_security/
   tag: Documentation
   text: Review the main categories of data submitted to Datadog
+title: Synthetic Monitoring Data Security
 ---
 
 <div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
@@ -109,11 +109,11 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /data_security/
-[2]: /synthetics/
+[1]: /ja/data_security/
+[2]: /ja/synthetics/
 [3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-[4]: /synthetics/settings/?tab=specifyvalue#global-variables
-[5]: /account_management/rbac/permissions/#synthetic-monitoring
-[6]: /synthetics/api_tests/http_tests?tab=privacy#define-request
-[7]: /synthetics/multistep?tab=privacy#define-the-request
-[8]: /synthetics/browser_tests/?tab=privacy#test-configuration
+[4]: /ja/synthetics/settings/?tab=specifyvalue#global-variables
+[5]: /ja/account_management/rbac/permissions/#synthetic-monitoring
+[6]: /ja/synthetics/api_tests/http_tests?tab=privacy#define-request
+[7]: /ja/synthetics/multistep?tab=privacy#define-the-request
+[8]: /ja/synthetics/browser_tests/?tab=privacy#test-configuration

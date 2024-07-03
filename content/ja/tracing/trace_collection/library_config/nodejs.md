@@ -1,25 +1,25 @@
 ---
-title: Configuring the Node.js Tracing Library
-kind: documentation
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: "https://github.com/DataDog/dd-trace-js"
-      tag: ソースコード
-      text: Source code
-    - link: "https://datadog.github.io/dd-trace-js"
-      tag: Documentation
-      text: API documentation
-    - link: /tracing/trace_collection/trace_context_propagation/nodejs/
-      tag: Documentation
-      text: Propagating trace context
-    - link: tracing/glossary/
-      tag: ドキュメント
-      text: Explore your services, resources and traces
-    - link: tracing/
-      tag: ドキュメント
-      text: Advanced Usage
+- link: https://github.com/DataDog/dd-trace-js
+  tag: ソースコード
+  text: Source code
+- link: https://datadog.github.io/dd-trace-js
+  tag: Documentation
+  text: API documentation
+- link: /tracing/trace_collection/trace_context_propagation/nodejs/
+  tag: Documentation
+  text: Propagating trace context
+- link: tracing/glossary/
+  tag: ドキュメント
+  text: Explore your services, resources and traces
+- link: tracing/
+  tag: ドキュメント
+  text: Advanced Usage
+kind: documentation
+title: Configuring the Node.js Tracing Library
+type: multi-code-lang
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -265,9 +265,9 @@ For more examples of how to work with the library see [API documentation][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging/
+[1]: /ja/getting_started/tagging/unified_service_tagging/
 [2]: https://datadog.github.io/dd-trace-js/
-[3]: /tracing/trace_pipeline/ingestion_mechanisms/
-[4]: /help/
-[5]: /tracing/trace_collection/trace_context_propagation/nodejs
-[13]: /agent/configuration/network/#configure-ports
+[3]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[4]: /ja/help/
+[5]: /ja/tracing/trace_collection/trace_context_propagation/nodejs
+[13]: /ja/agent/configuration/network/#configure-ports

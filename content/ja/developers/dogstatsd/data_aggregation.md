@@ -1,15 +1,16 @@
 ---
-title: DogStatsD Data Aggregation
-description: Learn how the DogStatsD server aggregates your data before sending it to Datadog
 aliases:
-    - /developers/faq/data-aggregation-with-dogstatsd-threadstats
+- /ja/developers/faq/data-aggregation-with-dogstatsd-threadstats
+description: Learn how the DogStatsD server aggregates your data before sending it
+  to Datadog
 further_reading:
-    - link: developers/dogstatsd
-      tag: Documentation
-      text: Introduction to DogStatsD
-    - link: developers/libraries
-      tag: Documentation
-      text: Official and Community created API and DogStatsD client libraries
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Introduction to DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Official and Community created API and DogStatsD client libraries
+title: DogStatsD Data Aggregation
 ---
 
 Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機能を追加して実装します。DogStatsD を使用すると、アプリケーションコードのメトリクス送信や監視を、コードをブロックせずに行うことができます。データはアプリケーションから UDP を通じてローカルの（Datadog Agent に組み込まれた） [DogStatsD サーバー][2]に送信され、そこで集計されてから、Datadog の API エンドポイントに送られます。[DogStatsD のセットアップについてはこちらを参照してください][2]。
@@ -44,10 +45,10 @@ Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/
-[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[3]: /metrics/types/?tab=count#metric-types
-[4]: /metrics/types/
-[5]: /metrics/types/?tab=gauge#metric-types
-[6]: /metrics/types/?tab=histogram#metric-types
-[7]: /metrics/types/?tab=distribution#metric-types
+[1]: /ja/developers/dogstatsd/
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[3]: /ja/metrics/types/?tab=count#metric-types
+[4]: /ja/metrics/types/
+[5]: /ja/metrics/types/?tab=gauge#metric-types
+[6]: /ja/metrics/types/?tab=histogram#metric-types
+[7]: /ja/metrics/types/?tab=distribution#metric-types

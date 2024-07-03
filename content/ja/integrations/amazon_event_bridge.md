@@ -1,24 +1,26 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "A serverless event bus that processes events from AWS services, SaaS, and your apps in near real time."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_event_bridge/"
-"draft": false
-"git_integration_title": "amazon_event_bridge"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon EventBridge"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_event_bridge"
-"public_title": "Datadog-Amazon EventBridge Integration"
-"short_description": "A serverless event bus that processes events from AWS services, SaaS, and your apps in near real time."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: A serverless event bus that processes events from AWS services, SaaS,
+  and your apps in near real time.
+doc_link: https://docs.datadoghq.com/integrations/amazon_event_bridge/
+draft: false
+git_integration_title: amazon_event_bridge
+has_logo: true
+integration_id: ''
+integration_title: Amazon EventBridge
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_event_bridge
+public_title: Datadog-Amazon EventBridge Integration
+short_description: A serverless event bus that processes events from AWS services,
+  SaaS, and your apps in near real time.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -104,15 +106,14 @@ Amazon EventBridge インテグレーションには、サービスのチェッ�
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[2]: https://docs.datadoghq.com/api/latest/aws-integration/#create-an-amazon-eventbridge-source
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[2]: https://docs.datadoghq.com/ja/api/latest/aws-integration/#create-an-amazon-eventbridge-source
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws_event_bridge
-[4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#datadog-aws-iam-policy
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#datadog-aws-iam-policy
 [5]: https://app.datadoghq.com/integrations/amazon-event-bridge
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html
 [7]: https://console.aws.amazon.com/events/home#/partners/datadoghq.com?page=overview
 [8]: https://console.aws.amazon.com/events/
-[9]: https://docs.datadoghq.com/monitors/monitor_types/process/
+[9]: https://docs.datadoghq.com/ja/monitors/monitor_types/process/
 [10]: https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

@@ -1,6 +1,6 @@
 ---
-title: Adding Entries to API Catalog
-is_beta: true
+aliases:
+- /ja/tracing/api_catalog/add_entries
 further_reading:
 - link: /tracing/service_catalog/
   tag: Documentation
@@ -11,8 +11,8 @@ further_reading:
 - link: /tracing/api_catalog/monitor_apis/
   tag: Documentation
   text: Monitoring APIs
-aliases:
-    - /tracing/api_catalog/add_entries
+is_beta: true
+title: Adding Entries to API Catalog
 ---
 
 {{< site-region region="gov,ap1" >}}
@@ -60,8 +60,8 @@ OpenAPI/Swagger ファイルをインポートするには
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/setup
-[2]: /tracing/service_catalog/
-[3]: /tracing/trace_collection/
+[2]: /ja/tracing/service_catalog/
+[3]: /ja/tracing/trace_collection/
 [4]: https://app.datadoghq.com/apis/catalog-page
 [5]: https://app.datadoghq.com/apis/catalog
-[6]: /tracing/api_catalog/monitor_apis/
+[6]: /ja/tracing/api_catalog/monitor_apis/

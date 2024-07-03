@@ -1,14 +1,14 @@
 ---
-title: Node.js OpenTracing Instrumentation
-kind: documentation
 aliases:
-- /tracing/setup_overview/open_standards/nodejs
-- /tracing/trace_collection/open_standards/nodejs
-- /tracing/trace_collection/opentracing/nodejs/
-description: 'OpenTracing instrumentation for Node.js'
+- /ja/tracing/setup_overview/open_standards/nodejs
+- /ja/tracing/trace_collection/open_standards/nodejs
+- /ja/tracing/trace_collection/opentracing/nodejs/
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 40
+description: OpenTracing instrumentation for Node.js
+kind: documentation
+title: Node.js OpenTracing Instrumentation
+type: multi-code-lang
 ---
 
 

@@ -1,23 +1,23 @@
 ---
-title: Ruby Custom Instrumentation using Datadog API
 aliases:
-    - /tracing/opentracing/ruby
-    - /tracing/manual_instrumentation/ruby
-    - /tracing/custom_instrumentation/ruby
-    - /tracing/setup_overview/custom_instrumentation/ruby
-    - /tracing/trace_collection/custom_instrumentation/ruby
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/ruby
-description: 'Manually instrument your Ruby application to send custom traces to Datadog.'
+- /ja/tracing/opentracing/ruby
+- /ja/tracing/manual_instrumentation/ruby
+- /ja/tracing/custom_instrumentation/ruby
+- /ja/tracing/setup_overview/custom_instrumentation/ruby
+- /ja/tracing/trace_collection/custom_instrumentation/ruby
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/ruby
 code_lang: dd-api
-type: multi-code-lang
 code_lang_weight: 1
+description: Manually instrument your Ruby application to send custom traces to Datadog.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+title: Ruby Custom Instrumentation using Datadog API
+type: multi-code-lang
 ---
 <div class="alert alert-info">
 自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/python/">Python セットアップ手順</a>をお読みください。
@@ -86,7 +86,7 @@ get '/posts' do
 end
 ```
 
-[1]: /tracing/glossary/#span-tags
+[1]: /ja/tracing/glossary/#span-tags
 
 
 ### すべてのスパンにグローバルにタグを追加する
@@ -302,11 +302,11 @@ Datadog::Tracing.before_flush(MyCustomProcessor.new)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#span-tags
-[2]: /tracing/glossary/#spans
-[3]: /tracing/setup/ruby/#environment-and-tags
-[4]: /tracing/compatibility_requirements/ruby/
-[5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
-[6]: /tracing/trace_collection/trace_context_propagation/ruby/
-[7]: /tracing/security
+[1]: /ja/tracing/glossary/#span-tags
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/tracing/setup/ruby/#environment-and-tags
+[4]: /ja/tracing/compatibility_requirements/ruby/
+[5]: /ja/tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
+[6]: /ja/tracing/trace_collection/trace_context_propagation/ruby/
+[7]: /ja/tracing/security
 [8]: https://github.com/DataDog/dd-trace-rb/releases

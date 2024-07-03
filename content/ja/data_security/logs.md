@@ -1,7 +1,6 @@
 ---
-title: Log Management Data Security
 aliases:
-    - /logs/security/
+- /ja/logs/security/
 further_reading:
 - link: /data_security/
   tag: Documentation
@@ -9,9 +8,10 @@ further_reading:
 - link: /data_security/pci_compliance/
   tag: Documentation
   text: Set up a PCI-compliant Datadog organization
-- link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
+- link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: Blog
   text: Announcing PCI-Compliant Log Management and APM from Datadog
+title: Log Management Data Security
 ---
 
 <div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
@@ -52,8 +52,8 @@ Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Da
 
 詳しくは [PCI DSS 準拠][1]を参照してください。APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][1]を参照してください。
 
-[1]: /data_security/pci_compliance/
-[2]: /data_security/pci_compliance/?tab=apm
+[1]: /ja/data_security/pci_compliance/
+[2]: /ja/data_security/pci_compliance/?tab=apm
 
 {{< /site-region >}}
 
@@ -76,9 +76,9 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/
-[2]: /agent/logs/log_transport
-[3]: /agent/logs/advanced_log_collection/#filter-logs
-[4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-[5]: /logs/explorer/#share-views
+[1]: /ja/logs/log_collection/
+[2]: /ja/agent/logs/log_transport
+[3]: /ja/agent/logs/advanced_log_collection/#filter-logs
+[4]: /ja/agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
+[5]: /ja/logs/explorer/#share-views
 [6]: https://www.datadoghq.com/legal/hipaa-eligible-services/

@@ -1,38 +1,38 @@
 ---
-"aliases":
-- "/integrations/awslambda/"
-- "/serverless/real-time-enhanced-metrics/"
-"categories":
-- "aws"
-- "cloud"
-- "log collection"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Lambda の実行、エラー、呼び出しの回数などを追跡"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_lambda/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/how-to-monitor-lambda-functions/"
-  "tag": "ブログ"
-  "text": "Lambda 関数の監視方法"
-- "link": "https://www.datadoghq.com/blog/datadog-lambda-layer/"
-  "tag": "ブログ"
-  "text": "Datadog の Lambda レイヤー: カスタムサーバーレスメトリクスの監視"
-- "link": "https://www.datadoghq.com/blog/datadog-lambda-extension/"
-  "tag": "ブログ"
-  "text": "Datadog の Lambda 関数について"
-"git_integration_title": "amazon_lambda"
-"has_logo": true
-"integration_id": "amazon-lambda"
-"integration_title": "AWS Lambda"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_lambda"
-"public_title": "Datadog-AWS Lambda Integration"
-"short_description": "Track lambda run times, errors, invocation counts, and more."
-"version": "1.0"
+aliases:
+- /ja/integrations/awslambda/
+- /ja/serverless/real-time-enhanced-metrics/
+categories:
+- aws
+- cloud
+- log collection
+- tracing
+custom_kind: インテグレーション
+dependencies: []
+description: Lambda の実行、エラー、呼び出しの回数などを追跡
+doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/how-to-monitor-lambda-functions/
+  tag: ブログ
+  text: Lambda 関数の監視方法
+- link: https://www.datadoghq.com/blog/datadog-lambda-layer/
+  tag: ブログ
+  text: 'Datadog の Lambda レイヤー: カスタムサーバーレスメトリクスの監視'
+- link: https://www.datadoghq.com/blog/datadog-lambda-extension/
+  tag: ブログ
+  text: Datadog の Lambda 関数について
+git_integration_title: amazon_lambda
+has_logo: true
+integration_id: amazon-lambda
+integration_title: AWS Lambda
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_lambda
+public_title: Datadog-AWS Lambda Integration
+short_description: Track lambda run times, errors, invocation counts, and more.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -124,20 +124,19 @@ Need help? Contact [Datadog support][16].
 
 
 
-[1]: /integrations/amazon_web_services/
+[1]: /ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: /integrations/amazon_web_services/#installation
+[3]: /ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html
 [5]: https://app.datadoghq.com/integrations/amazon-lambda
 [6]: https://app.datadoghq.com/functions
-[7]: /serverless
+[7]: /ja/serverless
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
-[9]: /serverless/deployment_tracking
-[10]: /serverless/enhanced_lambda_metrics/
-[11]: /serverless/custom_metrics/#custom-metrics
-[12]: /serverless/forwarder/
-[13]: /serverless/distributed_tracing/
+[9]: /ja/serverless/deployment_tracking
+[10]: /ja/serverless/enhanced_lambda_metrics/
+[11]: /ja/serverless/custom_metrics/#custom-metrics
+[12]: /ja/serverless/forwarder/
+[13]: /ja/serverless/distributed_tracing/
 [14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
 [15]: https://app.datadoghq.com/monitors/recommended
-[16]: /help/
-
+[16]: /ja/help/

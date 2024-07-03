@@ -1,26 +1,19 @@
 ---
-integration_title: VMware Tanzu Application Service
-name: vmware_tanzu_application_service
-custom_kind: インテグレーション
 aliases:
-    - /integrations/cloud_foundry/
-    - /integrations/pivotal_platform/
-newhlevel: true
-updated_for_agent: 6.0
-description: 'Track the health of your VMware Tanzu Application Service (formerly Pivotal Cloud Foundry) VMs and the jobs they run.'
-is_public: true
-public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) Integration
-short_description: 'Track the health of VMware Tanzu Application Service VMs and the jobs they run.'
+- /ja/integrations/cloud_foundry/
+- /ja/integrations/pivotal_platform/
 categories:
-    - provisioning
-    - configuration & deployment
-    - log collection
+- provisioning
+- configuration & deployment
+- log collection
+custom_kind: インテグレーション
 dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md"]
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
+description: Track the health of your VMware Tanzu Application Service (formerly Pivotal
+  Cloud Foundry) VMs and the jobs they run.
 doc_link: /integrations/vmware_tanzu_application_service/
-integration_id: "pivotal-platform"
 further_reading:
-- link: "https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/"
+- link: https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/
   tag: Blog
   text: Pivotal Platform Monitoring with Datadog
 - link: /integrations/guide/application-monitoring-vmware-tanzu/
@@ -29,7 +22,15 @@ further_reading:
 - link: /integrations/guide/cluster-monitoring-vmware-tanzu/
   tag: documentation
   text: Datadog Cluster Monitoring for VMware Tanzu
-
+integration_id: pivotal-platform
+integration_title: VMware Tanzu Application Service
+is_public: true
+name: vmware_tanzu_application_service
+newhlevel: true
+public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) Integration
+short_description: Track the health of VMware Tanzu Application Service VMs and the
+  jobs they run.
+updated_for_agent: 6.0
 ---
 
 ## Overview
@@ -128,8 +129,8 @@ cf set-env <YOUR_APP> DD_TAGS key1=value1,key2=value2
 cf restage <YOUR_APP>
 ```
 
-[101]: /agent/logs/proxy/
-[102]: /events/explorer/
+[101]: /ja/agent/logs/proxy/
+[102]: /ja/events/explorer/
 
 {{% /site-region %}}
 
@@ -158,22 +159,22 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
-[2]: /integrations/guide/pivotal-cloud-foundry-manual-setup
-[3]: /integrations/faq/pivotal_architecture
-[4]: /integrations/guide/application-monitoring-vmware-tanzu/
-[5]: /integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
-[6]: /tracing/setup/
-[7]: /profiler/enabling/
-[8]: /agent/logs/proxy/
-[9]: /events/explorer/
-[10]: /developers/dogstatsd/
-[11]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[12]: /libraries/
-[13]: /integrations/guide/cluster-monitoring-vmware-tanzu/#installation
-[14]: /integrations/guide/cloud-foundry-setup/#monitor-your-cloud-foundry-cluster
-[15]: /integrations/system/#metrics
-[16]: /integrations/network/#metrics
-[17]: /integrations/disk/#metrics
-[18]: /integrations/ntp/#metrics
+[2]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup
+[3]: /ja/integrations/faq/pivotal_architecture
+[4]: /ja/integrations/guide/application-monitoring-vmware-tanzu/
+[5]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
+[6]: /ja/tracing/setup/
+[7]: /ja/profiler/enabling/
+[8]: /ja/agent/logs/proxy/
+[9]: /ja/events/explorer/
+[10]: /ja/developers/dogstatsd/
+[11]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[12]: /ja/libraries/
+[13]: /ja/integrations/guide/cluster-monitoring-vmware-tanzu/#installation
+[14]: /ja/integrations/guide/cloud-foundry-setup/#monitor-your-cloud-foundry-cluster
+[15]: /ja/integrations/system/#metrics
+[16]: /ja/integrations/network/#metrics
+[17]: /ja/integrations/disk/#metrics
+[18]: /ja/integrations/ntp/#metrics
 [19]: https://github.com/cloudfoundry/loggregator-api
 [20]: https://docs.cloudfoundry.org/running/all_metrics.html

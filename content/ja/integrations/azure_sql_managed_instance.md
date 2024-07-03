@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure SQL Managed Instance metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_sql_managed_instance/"
-"draft": false
-"git_integration_title": "azure_sql_managed_instance"
-"has_logo": true
-"integration_id": "azure-sql-managed-instance"
-"integration_title": "Microsoft Azure SQL Managed Instance"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_sql_managed_instance"
-"public_title": "Datadog-Microsoft Azure SQL Managed Instance Integration"
-"short_description": "Track key Azure SQL Managed Instance metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure SQL Managed Instance metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_sql_managed_instance/
+draft: false
+git_integration_title: azure_sql_managed_instance
+has_logo: true
+integration_id: azure-sql-managed-instance
+integration_title: Microsoft Azure SQL Managed Instance
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_sql_managed_instance
+public_title: Datadog-Microsoft Azure SQL Managed Instance Integration
+short_description: Track key Azure SQL Managed Instance metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -50,8 +50,7 @@ Need help? Contact [Datadog support][3].
 
 - [https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/][4]
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_sql_managed_instance/azure_sql_managed_instance_metadata.csv
-[3]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/help/
 [4]: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
-

@@ -1,11 +1,10 @@
 ---
-title: Setting Up Database Monitoring for Oracle RAC
 description: Install and configure Database Monitoring for Oracle RAC
 further_reading:
 - link: /integrations/oracle/
   tag: Documentation
   text: Basic Oracle Integration
-
+title: Setting Up Database Monitoring for Oracle RAC
 ---
 
 {{% dbm-oracle-definition %}}
@@ -101,18 +100,18 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
-[1]: /agent/configuration/agent-commands/#agent-status-and-information
+[1]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [2]: https://app.datadoghq.com/databases
-[3]: /database_monitoring/setup_oracle/selfhosted
+[3]: /ja/database_monitoring/setup_oracle/selfhosted
 [4]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
-[6]: /database_monitoring/agent_integration_overhead/?tab=oracle
-[7]: /database_monitoring/data_collected/#sensitive-information
+[6]: /ja/database_monitoring/agent_integration_overhead/?tab=oracle
+[7]: /ja/database_monitoring/data_collected/#sensitive-information
 [8]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [9]: https://app.datadoghq.com/account/settings/agent/latest
 [10]: https://app.datadoghq.com/integrations/oracle
 [11]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
-[12]: /database_monitoring/architecture/
+[12]: /ja/database_monitoring/architecture/
 
 ## 参考資料
 

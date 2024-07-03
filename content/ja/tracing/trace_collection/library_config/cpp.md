@@ -1,11 +1,8 @@
 ---
-title: Configuring the C++ Tracing Library
-kind: documentation
 code_lang: cpp
-type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-cpp"
+- link: https://github.com/DataDog/dd-trace-cpp
   tag: ソースコード
   text: Source code
 - link: /tracing/glossary/
@@ -14,6 +11,9 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/cpp/
   tag: Documentation
   text: Propagating trace context
+kind: documentation
+title: Configuring the C++ Tracing Library
+type: multi-code-lang
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -157,8 +157,8 @@ If `true`, delegate trace sampling decision to a child service and prefer the re
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging/
-[2]: /tracing/trace_pipeline/ingestion_mechanisms/
-[3]: /agent/configuration/network/#configure-ports
-[4]: /tracing/configure_data_security#telemetry-collection
-[5]: /agent/remote_config
+[1]: /ja/getting_started/tagging/unified_service_tagging/
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /ja/agent/configuration/network/#configure-ports
+[4]: /ja/tracing/configure_data_security#telemetry-collection
+[5]: /ja/agent/remote_config

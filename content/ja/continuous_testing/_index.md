@@ -1,18 +1,21 @@
 ---
-title: Continuous Testing
-description: Customize the number of Continuous Testing tests running in parallel in your CI/CD pipelines to increase your testing coverage.
+cascade:
+  algolia:
+    rank: 70
+description: Customize the number of Continuous Testing tests running in parallel
+  in your CI/CD pipelines to increase your testing coverage.
 disable_sidebar: true
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
+- link: https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring
   tag: Release Notes
   text: Check out the latest Datadog Continuous Testing releases! (App login required)
-- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: Learning Center
   text: Continuous Testing in a CI/CD Pipeline
 - link: /getting_started/continuous_testing
   tag: Documentation
   text: Learn about Continuous Testing
-- link: "/synthetics/private_locations/#scale-your-private-location"
+- link: /synthetics/private_locations/#scale-your-private-location
   tag: Documentation
   text: Learn about Private Locations
 - link: /continuous_testing/environments
@@ -21,15 +24,13 @@ further_reading:
 - link: /continuous_testing/troubleshooting/
   tag: Documentation
   text: Troubleshoot Continuous Testing and CI/CD
-- link: "https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/"
+- link: https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/
   tag: Blog
   text: Use Datadog Continuous Testing to release with confidence
-- link: "https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/"
+- link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: Blog
   text: Best practices for continuous testing with Datadog
-cascade:
-    algolia:
-        rank: 70
+title: Continuous Testing
 ---
 
 <div class="alert alert-info">このページでは、CI/CD パイプラインで Continuous Testing のテストを実行する方法について説明します。CI/CD のメトリクスやダッシュボードを表示したい場合は、<a href="/continuous_integration/" target="_blank">CI Visibility のドキュメント</a>を参照してください。</div>
@@ -88,17 +89,17 @@ Synthetic テストの実行や、CI/CD パイプラインで実行されてい�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_testing/cicd_integrations/
-[2]: /synthetics/browser_tests
-[3]: /continuous_testing/settings
-[4]: /synthetics/
+[1]: /ja/continuous_testing/cicd_integrations/
+[2]: /ja/synthetics/browser_tests
+[3]: /ja/continuous_testing/settings
+[4]: /ja/synthetics/
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/
-[11]: /continuous_testing/explorer
-[12]: /synthetics/apm/
+[11]: /ja/continuous_testing/explorer
+[12]: /ja/synthetics/apm/
 [13]: https://app.datadoghq.com/synthetics/create#
-[14]: /continuous_testing/cicd_integrations/configuration
-[15]: /mobile_app_testing/mobile_app_tests
-[16]: /mobile_app_testing/
-[17]: /continuous_testing/environments
-[18]: /integrations/slack/
-[19]: /integrations/jira/
+[14]: /ja/continuous_testing/cicd_integrations/configuration
+[15]: /ja/mobile_app_testing/mobile_app_tests
+[16]: /ja/mobile_app_testing/
+[17]: /ja/continuous_testing/environments
+[18]: /ja/integrations/slack/
+[19]: /ja/integrations/jira/

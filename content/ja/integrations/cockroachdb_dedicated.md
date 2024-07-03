@@ -1,65 +1,65 @@
 ---
-"app_id": "cockroach-cloud"
-"app_uuid": "e0ab9a47-da5b-4008-8571-3842ac318f74"
-"assets":
-  "dashboards":
-    "cockroach_cloud_dedicated_overview": assets/dashboards/cockroach_cloud_dedicated_overview.json
-    "cockroach_cloud_serverless_overview": assets/dashboards/cockroach_cloud_serverless_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: cockroach-cloud
+app_uuid: e0ab9a47-da5b-4008-8571-3842ac318f74
+assets:
+  dashboards:
+    cockroach_cloud_dedicated_overview: assets/dashboards/cockroach_cloud_dedicated_overview.json
+    cockroach_cloud_serverless_overview: assets/dashboards/cockroach_cloud_serverless_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - crdb_dedicated.sys.uptime
       - crdb_cloud.sys.uptime
-      "metadata_path": metadata.csv
-      "prefix": crdb_
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10274"
-    "source_type_name": CockroachDB Dedicated
-  "logs":
-    "source": cockroach-cloud
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Datadog
-  "sales_email": help@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: crdb_
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10274
+    source_type_name: CockroachDB Dedicated
+  logs:
+    source: cockroach-cloud
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Datadog
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cockroachdb_dedicated"
-"integration_id": "cockroach-cloud"
-"integration_title": "Cockroach Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cockroachdb_dedicated"
-"public_title": "Cockroach Cloud"
-"short_description": "Send your Cockroach Cloud metrics to DataDog."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cockroachdb_dedicated
+integration_id: cockroach-cloud
+integration_title: Cockroach Cloud
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: cockroachdb_dedicated
+public_title: Cockroach Cloud
+short_description: Send your Cockroach Cloud metrics to DataDog.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Data Stores"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Send your Cockroach Cloud metrics to DataDog.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cockroach Cloud
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Data Stores
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Send your Cockroach Cloud metrics to DataDog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cockroach Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -155,16 +155,15 @@ Need help? Contact [Datadog support][13].
 
 
 [1]: https://www.cockroachlabs.com/docs/cockroachcloud/tools-page
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token
-[3]: https://docs.datadoghq.com/getting_started/site/
-[4]: https://docs.datadoghq.com/infrastructure/list/
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
+[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[4]: https://docs.datadoghq.com/ja/infrastructure/list/
 [5]: https://app.datadoghq.com/dashboard/lists
-[6]: https://docs.datadoghq.com/dashboards/configure/#configuration-actions
-[7]: https://docs.datadoghq.com/dashboards/#new-dashboard
-[8]: https://docs.datadoghq.com/integrations/cockroachdb_dedicated/#data-collected
-[9]: https://docs.datadoghq.com/metrics/explorer/
+[6]: https://docs.datadoghq.com/ja/dashboards/configure/#configuration-actions
+[7]: https://docs.datadoghq.com/ja/dashboards/#new-dashboard
+[8]: https://docs.datadoghq.com/ja/integrations/cockroachdb_dedicated/#data-collected
+[9]: https://docs.datadoghq.com/ja/metrics/explorer/
 [10]: https://support.cockroachlabs.com/
-[11]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/
+[11]: https://docs.datadoghq.com/ja/developers/guide/data-collection-resolution-retention/
 [12]: https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/metadata.csv
-[13]: https://docs.datadoghq.com/help/
-
+[13]: https://docs.datadoghq.com/ja/help/

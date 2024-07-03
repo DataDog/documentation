@@ -1,9 +1,9 @@
 ---
-title: Migrating from the V1 Hourly Usage APIs to V2
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Plan and Usage Settings
+title: Migrating from the V1 Hourly Usage APIs to V2
 ---
 
 ## サマリー
@@ -476,5 +476,4 @@ v2 API では、1 回のリクエストで全地域の子組織の使用量デ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://jsonapi.org/format/
-[2]: /api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
-
+[2]: /ja/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers

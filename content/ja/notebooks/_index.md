@@ -1,23 +1,24 @@
 ---
-title: Notebooks
 aliases:
-  - /graphing/notebooks/
+- /ja/graphing/notebooks/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
-- link: "https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/"
+- link: https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/
   tag: Blog
   text: Create and navigate a documentation library
-- link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
+- link: https://www.datadoghq.com/blog/collaborative-notebooks-datadog/
   tag: Blog
   text: Tell data-driven stories with Collaborative Notebooks
-- link: "https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/"
+- link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
   text: Best practices for writing incident postmortems
-- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
   tag: blog
-  text: Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM
-cascade:
-    algolia:
-        rank: 70
+  text: Automate common security tasks and stay ahead of threats with Datadog Workflows
+    and Cloud SIEM
+title: Notebooks
 ---
 
 ## 概要
@@ -202,18 +203,18 @@ cascade:
 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook/template-gallery
-[3]: /notebooks/guide/version_history
-[4]: /dashboards/template_variables/
+[3]: /ja/notebooks/guide/version_history
+[4]: /ja/dashboards/template_variables/
 [5]: https://daringfireball.net/projects/markdown/
 [6]: https://mermaid.js.org/
-[7]: /dashboards/widgets/timeseries/
-[8]: /dashboards/widgets/top_list/
-[9]: /dashboards/widgets/table/
-[10]: /dashboards/widgets/heatmap/
-[11]: /dashboards/widgets/distribution/
-[12]: /dashboards/widgets/list/
-[13]: /dashboards/widgets/query_value/
-[14]: /dashboards/widgets/funnel/
-[15]: /dashboards/widgets/pie_chart/
-[16]: /dashboards/widgets/slo/
-[17]: /account_management/rbac/
+[7]: /ja/dashboards/widgets/timeseries/
+[8]: /ja/dashboards/widgets/top_list/
+[9]: /ja/dashboards/widgets/table/
+[10]: /ja/dashboards/widgets/heatmap/
+[11]: /ja/dashboards/widgets/distribution/
+[12]: /ja/dashboards/widgets/list/
+[13]: /ja/dashboards/widgets/query_value/
+[14]: /ja/dashboards/widgets/funnel/
+[15]: /ja/dashboards/widgets/pie_chart/
+[16]: /ja/dashboards/widgets/slo/
+[17]: /ja/account_management/rbac/

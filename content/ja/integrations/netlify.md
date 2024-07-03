@@ -1,30 +1,30 @@
 ---
-"categories":
+categories:
 - collaboration
 - log collection
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track Netlify logs."
-"doc_link": "https://docs.datadoghq.com/integrations/netlify/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitor-netlify-with-datadog/"
-  "tag": Blog
-  "text": Monitor your Netlify sites with Datadog
-"git_integration_title": "netlify"
-"has_logo": true
-"integration_id": "netlify"
-"integration_title": "Netlify"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "netlify"
-"public_title": "Datadog-Netlify Integration"
-"short_description": "Track Netlify logs."
-"team": "web-integrations"
-"type": ""
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track Netlify logs.
+doc_link: https://docs.datadoghq.com/integrations/netlify/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-netlify-with-datadog/
+  tag: Blog
+  text: Monitor your Netlify sites with Datadog
+git_integration_title: netlify
+has_logo: true
+integration_id: netlify
+integration_title: Netlify
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: netlify
+public_title: Datadog-Netlify Integration
+short_description: Track Netlify logs.
+team: web-integrations
+type: ''
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -67,9 +67,8 @@ Need help? Contact [Datadog support][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.netlify.com/
-[2]: https://docs.datadoghq.com/logs/
-[3]: https://docs.datadoghq.com/synthetics/
+[2]: https://docs.datadoghq.com/ja/logs/
+[3]: https://docs.datadoghq.com/ja/synthetics/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.netlify.com/monitor-sites/log-drains/
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

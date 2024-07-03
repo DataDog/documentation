@@ -1,20 +1,20 @@
 ---
-title: Intelligent Test Runner for Swift
-kind: documentation
-is_beta: true
-code_lang: swift
-type: multi-code-lang
-code_lang_weight: 40
 aliases:
-  - /continuous_integration/intelligent_test_runner/swift/
-  - /continuous_integration/intelligent_test_runner/setup/swift/
+- /ja/continuous_integration/intelligent_test_runner/swift/
+- /ja/continuous_integration/intelligent_test_runner/setup/swift/
+code_lang: swift
+code_lang_weight: 40
 further_reading:
-    - link: /continuous_integration/tests
-      tag: Documentation
-      text: Explore Test Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- link: /continuous_integration/tests
+  tag: Documentation
+  text: Explore Test Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+is_beta: true
+kind: documentation
+title: Intelligent Test Runner for Swift
+type: multi-code-lang
 ---
 
 {{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Swift is in beta.{{< /callout >}}
@@ -46,4 +46,4 @@ To enable Intelligent Test Runner, set the following environment variables:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/swift
+[1]: /ja/continuous_integration/tests/swift

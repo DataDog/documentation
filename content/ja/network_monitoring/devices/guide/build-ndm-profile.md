@@ -1,14 +1,14 @@
 ---
-title: Build an NDM Profile (Advanced)
 aliases:
-    - /network_performance_monitoring/devices/guide/build-ndm-profile
+- /ja/network_performance_monitoring/devices/guide/build-ndm-profile
 further_reading:
-- link: "https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/"
+- link: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
   tag: Documentation
   text: Profile format reference
-- link: "https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/"
+- link: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
   tag: Documentation
   text: Simulation data format reference
+title: Build an NDM Profile (Advanced)
 ---
 
 Datadog ネットワークデバイスモニタリングは、プロファイルを使用してネットワークデバイスからメトリクスを収集します。これらは MIB により狭義されており、特定のデバイスメーカーおよびモデルからメトリクスを収集します。このチュートリアルでは、HP iLO4 デバイスから OID メトリクスを収集する基本の NDM プロファイルを構築するためのステップをご説明します。
@@ -79,7 +79,7 @@ metrics:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/devices/troubleshooting#terminology
+[1]: /ja/network_monitoring/devices/troubleshooting#terminology
 [2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware

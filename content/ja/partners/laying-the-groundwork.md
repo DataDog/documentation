@@ -1,7 +1,8 @@
 ---
-title: Laying the groundwork
-description: "How to get started and which key decisions you should make at the very beginning."
+description: How to get started and which key decisions you should make at the very
+  beginning.
 private: true
+title: Laying the groundwork
 ---
 
 このパートでは、Datadog マネージドサービスプロバイダーとしての旅の最初の段階で行うべき重要な決定事項について説明します。
@@ -157,23 +158,23 @@ Datadog の目標は、簡単で直感的に使えるサービスを提供する
 
 次のパート、[データの取り込み][17]では、Datadog にデータを送り込むことに焦点を当てます。
 
-[1]: /account_management/multi_organization/
+[1]: /ja/account_management/multi_organization/
 [2]: https://app.datadoghq.com
 [3]: https://app.datadoghq.eu
-[4]: /account_management/multi_organization/#custom-sub-domains
-[5]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[6]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[7]: /account_management/rbac/
-[8]: /account_management/multi_organization/#set-up-saml
-[9]: /account_management/saml/
-[10]: /account_management/users/#add-new-members-and-manage-invites
-[11]: /api/latest/users/#create-a-user
-[12]: /account_management/saml/#just-in-time-jit-provisioning
+[4]: /ja/account_management/multi_organization/#custom-sub-domains
+[5]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[6]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
+[7]: /ja/account_management/rbac/
+[8]: /ja/account_management/multi_organization/#set-up-saml
+[9]: /ja/account_management/saml/
+[10]: /ja/account_management/users/#add-new-members-and-manage-invites
+[11]: /ja/api/latest/users/#create-a-user
+[12]: /ja/account_management/saml/#just-in-time-jit-provisioning
 [13]: https://www.youtube.com/user/DatadogHQ
 [14]: https://learn.datadoghq.com/
 [15]: https://www.datadoghq.com/blog/
 [16]: https://partners.datadoghq.com/
-[17]: /partners/data-intake/
-[18]: /api/latest/organizations/#create-a-child-organization
-[19]: /api/latest/organizations/#spin-off-child-organization
-[20]: /partners/data-intake/#tagging-strategy
+[17]: /ja/partners/data-intake/
+[18]: /ja/api/latest/organizations/#create-a-child-organization
+[19]: /ja/api/latest/organizations/#spin-off-child-organization
+[20]: /ja/partners/data-intake/#tagging-strategy

@@ -1,6 +1,5 @@
 ---
 title: Best Practices for Scaling Observability Pipelines
-
 ---
 
 {{< site-region region="gov" >}}

@@ -1,11 +1,11 @@
 ---
-title: Cloud SIEM Guides
 aliases:
-  - /security_monitoring/guide/
-  - /security_platform/guide/
-  - /security_platform/cloud_siem/guide/
-private: true
+- /ja/security_monitoring/guide/
+- /ja/security_platform/guide/
+- /ja/security_platform/cloud_siem/guide/
 disable_toc: true
+private: true
+title: Cloud SIEM Guides
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}

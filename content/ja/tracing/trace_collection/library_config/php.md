@@ -1,14 +1,11 @@
 ---
-title: Configuring the PHP Tracing Library
-kind: documentation
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-php-performance/"
+- link: https://www.datadoghq.com/blog/monitor-php-performance/
   tag: Blog
   text: PHP monitoring with Datadog APM and distributed tracing
-- link: "https://github.com/DataDog/dd-trace-php"
+- link: https://github.com/DataDog/dd-trace-php
   tag: ソースコード
   text: Source code
 - link: /tracing/trace_collection/trace_context_propagation/php/
@@ -20,6 +17,9 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Advanced Usage
+kind: documentation
+title: Configuring the PHP Tracing Library
+type: multi-code-lang
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -593,21 +593,21 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging/
+[1]: /ja/getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[3]: /tracing/trace_collection/proxy_setup/?tab=nginx
-[4]: /profiler/enabling/php/
+[3]: /ja/tracing/trace_collection/proxy_setup/?tab=nginx
+[4]: /ja/profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
-[6]: /tracing/trace_pipeline/ingestion_mechanisms/
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
-[11]: /tracing/trace_collection/trace_context_propagation/php/
-[13]: /agent/configuration/network/#configure-ports
-[14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
-[15]: /tracing/guide/trace-php-cli-scripts/
-[16]: /tracing/configure_data_security#telemetry-collection
-[17]: /tracing/other_telemetry/connect_logs_and_traces/php
-[18]: /tracing/trace_collection/otel_instrumentation/php/
-[19]: /tracing/trace_collection/compatibility/php/
+[11]: /ja/tracing/trace_collection/trace_context_propagation/php/
+[13]: /ja/agent/configuration/network/#configure-ports
+[14]: /ja/tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
+[15]: /ja/tracing/guide/trace-php-cli-scripts/
+[16]: /ja/tracing/configure_data_security#telemetry-collection
+[17]: /ja/tracing/other_telemetry/connect_logs_and_traces/php
+[18]: /ja/tracing/trace_collection/otel_instrumentation/php/
+[19]: /ja/tracing/trace_collection/compatibility/php/

@@ -29,6 +29,6 @@ The list above is not comprehensive of all rate limits on Datadog APIs. If you a
 | `X-RateLimit-Reset`     | time in seconds until next reset.                        |
 | `X-RateLimit-Name`      | name of the rate limit for increase requests             |
 
-[1]: /help/
-[2]: /api/v1/metrics/
-[3]: /metrics/custom_metrics/
+[1]: /ja/help/
+[2]: /ja/api/v1/metrics/
+[3]: /ja/metrics/custom_metrics/

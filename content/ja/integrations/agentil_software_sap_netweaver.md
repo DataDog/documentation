@@ -1,105 +1,106 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "agentil-software-sap-netweaver"
-"app_uuid": "5b070928-c509-4826-93db-8b5e9206c355"
-"assets":
-  "dashboards":
-    "ABAP transactions response times": assets/dashboards/agentil_software_abap_transactions_response_times.json
-    "SAP ABAP Transactions Details": assets/dashboards/agentil_software_abap_transactions_details.json
-    "SAP Netweaver overview": assets/dashboards/agentil_software_sap_global_overview.json
-    "SAP Netweaver system dashboard": assets/dashboards/agentil_software_sap_netweaver_system.json
-    "SAP System IDOCS": assets/dashboards/agentil_software_system_idocs.json
-    "SAP System Shortdumps": assets/dashboards/agentil_software_system_shortdumps.json
-    "SAP jobs details": assets/dashboards/agentil_software_sap_jobs_details.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": datadog.marketplace.agentil_software.sap_netweaver.system
-      "metadata_path": metadata.csv
-      "prefix": agentil_software
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10218"
-    "source_type_name": AGENTIL Software SAP NetWeaver
-"author":
-  "homepage": "https://www.agentil-software.com"
-  "name": Agentil Software
-  "sales_email": sales@agentil-software.com
-  "support_email": support@agentil-software.com
-  "vendor_id": agentil-software
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: agentil-software-sap-netweaver
+app_uuid: 5b070928-c509-4826-93db-8b5e9206c355
+assets:
+  dashboards:
+    ABAP transactions response times: assets/dashboards/agentil_software_abap_transactions_response_times.json
+    SAP ABAP Transactions Details: assets/dashboards/agentil_software_abap_transactions_details.json
+    SAP Netweaver overview: assets/dashboards/agentil_software_sap_global_overview.json
+    SAP Netweaver system dashboard: assets/dashboards/agentil_software_sap_netweaver_system.json
+    SAP System IDOCS: assets/dashboards/agentil_software_system_idocs.json
+    SAP System Shortdumps: assets/dashboards/agentil_software_system_shortdumps.json
+    SAP jobs details: assets/dashboards/agentil_software_sap_jobs_details.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: datadog.marketplace.agentil_software.sap_netweaver.system
+      metadata_path: metadata.csv
+      prefix: agentil_software
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10218
+    source_type_name: AGENTIL Software SAP NetWeaver
+author:
+  homepage: https://www.agentil-software.com
+  name: Agentil Software
+  sales_email: sales@agentil-software.com
+  support_email: support@agentil-software.com
+  vendor_id: agentil-software
+categories:
 - marketplace
 - sap
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "agentil_software_sap_netweaver"
-"integration_id": "agentil-software-sap-netweaver"
-"integration_title": "SAP S/4HANA & NetWeaver"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "agentil_software_sap_netweaver"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.agentil_software.sap_netweaver.system
-  "product_id": sap-netweaver
-  "short_description": Count one license unit per monitored SAP system (identified by SID)
-  "tag": uri
-  "unit_label": SAP system ID (SID)
-  "unit_price": !!int "250"
-"public_title": "SAP S/4HANA & NetWeaver"
-"short_description": "Monitor ABAP and J2EE stacks of your S/4HANA and NetWeaver systems"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: agentil_software_sap_netweaver
+integration_id: agentil-software-sap-netweaver
+integration_title: SAP S/4HANA & NetWeaver
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: agentil_software_sap_netweaver
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.agentil_software.sap_netweaver.system
+  product_id: sap-netweaver
+  short_description: Count one license unit per monitored SAP system (identified by
+    SID)
+  tag: uri
+  unit_label: SAP system ID (SID)
+  unit_price: 250
+public_title: SAP S/4HANA & NetWeaver
+short_description: Monitor ABAP and J2EE stacks of your S/4HANA and NetWeaver systems
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Marketplace"
-  - "Category::SAP"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Events"
-  "configuration": "README.md#Setup"
-  "description": Monitor ABAP and J2EE stacks of your S/4HANA and NetWeaver systems
-  "media":
-  - "caption": SAP NetWeaver global overview
-    "image_url": images/dashboard_overview.png
-    "media_type": image
-  - "caption": SAP NetWeaver system dashboard
-    "image_url": images/dashboard_netweaver.png
-    "media_type": image
-  - "caption": SAP NetWeaver job logs
-    "image_url": images/logs_example_jobs.png
-    "media_type": image
-  - "caption": SAP ABAP transaction times
-    "image_url": images/abap_transaction_response_time.png
-    "media_type": image
-  - "caption": SAP ABAP transaction details
-    "image_url": images/abap_transaction_details.png
-    "media_type": image
-  - "caption": SAP IDOC messages
-    "image_url": images/abap_idocs.png
-    "media_type": image
-  - "caption": SAP background jobs
-    "image_url": images/abap_background_jobs.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/"
-  "support": "README.md#Support"
-  "title": SAP S/4HANA & NetWeaver
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Marketplace
+  - Category::SAP
+  - Offering::Integration
+  - Supported OS::Linux
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
+  configuration: README.md#Setup
+  description: Monitor ABAP and J2EE stacks of your S/4HANA and NetWeaver systems
+  media:
+  - caption: SAP NetWeaver global overview
+    image_url: images/dashboard_overview.png
+    media_type: image
+  - caption: SAP NetWeaver system dashboard
+    image_url: images/dashboard_netweaver.png
+    media_type: image
+  - caption: SAP NetWeaver job logs
+    image_url: images/logs_example_jobs.png
+    media_type: image
+  - caption: SAP ABAP transaction times
+    image_url: images/abap_transaction_response_time.png
+    media_type: image
+  - caption: SAP ABAP transaction details
+    image_url: images/abap_transaction_details.png
+    media_type: image
+  - caption: SAP IDOC messages
+    image_url: images/abap_idocs.png
+    media_type: image
+  - caption: SAP background jobs
+    image_url: images/abap_background_jobs.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
+  support: README.md#Support
+  title: SAP S/4HANA & NetWeaver
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

@@ -1,66 +1,66 @@
 ---
-"app_id": "alertnow"
-"app_uuid": "cdb258cc-5e74-4fa2-be21-1489375bb370"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": alertnow.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10279"
-    "source_type_name": AlertNow
-"author":
-  "homepage": "https://service.opsnow.com"
-  "name": AlertNow
-  "sales_email": sales@opsnow.com
-  "support_email": support@opsnow.com
-"categories":
+app_id: alertnow
+app_uuid: cdb258cc-5e74-4fa2-be21-1489375bb370
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: alertnow.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10279
+    source_type_name: AlertNow
+author:
+  homepage: https://service.opsnow.com
+  name: AlertNow
+  sales_email: sales@opsnow.com
+  support_email: support@opsnow.com
+categories:
 - alerting
 - automation
 - collaboration
 - incidents
 - mobile
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "alertnow"
-"integration_id": "alertnow"
-"integration_title": "AlertNow"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "alertnow"
-"public_title": "AlertNow"
-"short_description": "Sync Datadog alerts with those in AlertNow"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: alertnow
+integration_id: alertnow
+integration_title: AlertNow
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: alertnow
+public_title: AlertNow
+short_description: Sync Datadog alerts with those in AlertNow
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Automation"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Mobile"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Sync Datadog alerts with those in AlertNow
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": AlertNow
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Mobile
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Sync Datadog alerts with those in AlertNow
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: AlertNow
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -174,6 +174,5 @@ Need help? Contact [AlertNow support][8].
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/alertnow/images/datadog_integration_detail.png
 [5]: https://app.datadoghq.com/account/login?next=%2Faccount%2Fsettings#integrations/webhooks
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/alertnow/images/datadog_webhook.png
-[7]: https://docs.datadoghq.com/monitors/
+[7]: https://docs.datadoghq.com/ja/monitors/
 [8]: mailto:support@opsnow.com
-

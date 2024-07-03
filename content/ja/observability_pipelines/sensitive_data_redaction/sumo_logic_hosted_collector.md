@@ -1,6 +1,6 @@
 ---
-title: Sensitive Data Redaction for the Sumo Logic Hosted Collector HTTP Logs Source
 disable_toc: false
+title: Sensitive Data Redaction for the Sumo Logic Hosted Collector HTTP Logs Source
 ---
 
 ## 概要

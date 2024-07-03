@@ -1,5 +1,4 @@
 ---
-title: Azure
 further_reading:
 - link: /cloud_cost_management/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /cloud_cost_management/google_cloud
   tag: Documentation
   text: Gain insights into your Google Cloud bill
+title: Azure
 ---
 
 {{< site-region region="gov" >}}
@@ -32,7 +32,7 @@ Datadog provides cost visibility on a Subscription, Resource Group, and Billing 
 - 従量課金制のアカウントには対応していません。
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: /integrations/azure/?tab=azurecliv20#setup
+[2]: /ja/integrations/azure/?tab=azurecliv20#setup
 {{% /site-region %}}
 
 ### Configure the Azure integration
@@ -142,7 +142,7 @@ You can create historical data in your storage account using the [Microsoft API]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
+[2]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#setup
 [3]: https://app.datadoghq.com/cost/setup?cloud=azure
 [4]: https://app.datadoghq.com/integrations/azure
 [5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports

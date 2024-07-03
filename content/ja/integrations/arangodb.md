@@ -1,68 +1,68 @@
 ---
-"app_id": "arangodb"
-"app_uuid": "2851c4fa-97d2-4949-9673-b21671b57b0a"
-"assets":
-  "dashboards":
-    "ArangoDB Overview": assets/dashboards/arangodb_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": arangodb.process.system_time
-      "metadata_path": metadata.csv
-      "prefix": arangodb.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10266"
-    "source_type_name": ArangoDB
-  "monitors":
-    "[ArangoDB] High server Kernel mode percentage usage": assets/monitors/high_server_kernel_mode.json
-    "[ArangoDB] High server User mode percentage usage": assets/monitors/high_server_user_mode.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: arangodb
+app_uuid: 2851c4fa-97d2-4949-9673-b21671b57b0a
+assets:
+  dashboards:
+    ArangoDB Overview: assets/dashboards/arangodb_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: arangodb.process.system_time
+      metadata_path: metadata.csv
+      prefix: arangodb.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10266
+    source_type_name: ArangoDB
+  monitors:
+    '[ArangoDB] High server Kernel mode percentage usage': assets/monitors/high_server_kernel_mode.json
+    '[ArangoDB] High server User mode percentage usage': assets/monitors/high_server_user_mode.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - caching
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/arangodb/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "arangodb"
-"integration_id": "arangodb"
-"integration_title": "ArangoDB"
-"integration_version": "2.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "arangodb"
-"public_title": "ArangoDB"
-"short_description": "Track metrics for your ArangoDB configuration."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/arangodb/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: arangodb
+integration_id: arangodb
+integration_title: ArangoDB
+integration_version: 2.2.1
+is_public: true
+manifest_version: 2.0.0
+name: arangodb
+public_title: ArangoDB
+short_description: Track metrics for your ArangoDB configuration.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Caching"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Track metrics for your ArangoDB configuration.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": ArangoDB
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Caching
+  - Category::Data Stores
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Track metrics for your ArangoDB configuration.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ArangoDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -155,13 +155,12 @@ ArangoDB インテグレーションには、イベントは含まれません�
 
 
 [1]: https://www.arangodb.com/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/arangodb/datadog_checks/arangodb/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/arangodb/metadata.csv
 [8]: https://www.arangodb.com/docs/3.8/programs-arangod-log.html
 [9]: https://github.com/DataDog/integrations-core/blob/master/arangodb/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

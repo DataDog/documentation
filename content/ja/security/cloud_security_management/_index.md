@@ -1,55 +1,58 @@
 ---
-title: Cloud Security Management
-aliases:
-  - /security_platform/cloud_security_management/
-further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
-    tag: Release Notes
-    text: See What's New in Datadog Security Compliance
-  - link: /security/cloud_security_management/misconfigurations/
-    tag: Documentation
-    text: Start tracking misconfigurations with CSM Misconfigurations
-  - link: /security/threats/setup
-    tag: Documentation
-    text: Uncover kernel-level threats with CSM Threats
-  - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
-    tag: Blog
-    text: Elevate AWS threat detection with Stratus Red Team
-  - link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
-    tag: Blog
-    text: Best practices for securing Kubernetes applications
-  - link: "https://www.datadoghq.com/blog/workload-security-evaluator/"
-    tag: Blog
-    text: Run Atomic Red Team detection tests in container environments with Datadog’s Workload Security Evaluator
-  - link: "https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/"
-    tag: Blog
-    text: Add security context to observability data with Datadog Cloud Security Management
-  - link: "https://www.datadoghq.com/blog/security-labs-ruleset-launch/"
-    tag: Blog
-    text: Fix common cloud security risks with the Datadog Security Labs Ruleset
-  - link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
-    tag: Blog
-    text: Best practices for application security in cloud-native environments
-  - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
-    tag: Blog
-    text: Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management
-  - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
-    tag: Blog
-    text: Build sufficient security coverage for your cloud environment
-  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
-    tag: Blog
-    text: Key learnings from the State of Cloud Security study
-  - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
-    tag: Blog
-    text: Detect malware in your containers with Datadog Cloud Security Management
-  - link: "https://www.datadoghq.com/blog/security-posture-csm/"
-    tag: Blog
-    text: Report on changes to your security posture with Cloud Security Management
 algolia:
-  tags: [inbox]
+  tags:
+  - inbox
+aliases:
+- /ja/security_platform/cloud_security_management/
 cascade:
-    algolia:
-        subcategory: Cloud Security Management
+  algolia:
+    subcategory: Cloud Security Management
+further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance
+  tag: Release Notes
+  text: See What's New in Datadog Security Compliance
+- link: /security/cloud_security_management/misconfigurations/
+  tag: Documentation
+  text: Start tracking misconfigurations with CSM Misconfigurations
+- link: /security/threats/setup
+  tag: Documentation
+  text: Uncover kernel-level threats with CSM Threats
+- link: https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/
+  tag: Blog
+  text: Elevate AWS threat detection with Stratus Red Team
+- link: https://www.datadoghq.com/blog/kubernetes-security-best-practices/
+  tag: Blog
+  text: Best practices for securing Kubernetes applications
+- link: https://www.datadoghq.com/blog/workload-security-evaluator/
+  tag: Blog
+  text: Run Atomic Red Team detection tests in container environments with Datadog’s
+    Workload Security Evaluator
+- link: https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/
+  tag: Blog
+  text: Add security context to observability data with Datadog Cloud Security Management
+- link: https://www.datadoghq.com/blog/security-labs-ruleset-launch/
+  tag: Blog
+  text: Fix common cloud security risks with the Datadog Security Labs Ruleset
+- link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
+  tag: Blog
+  text: Best practices for application security in cloud-native environments
+- link: https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/
+  tag: Blog
+  text: Customize rules for detecting cloud misconfigurations with Datadog Cloud Security
+    Management
+- link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
+  tag: Blog
+  text: Build sufficient security coverage for your cloud environment
+- link: https://www.datadoghq.com/blog/cloud-security-study-learnings/
+  tag: Blog
+  text: Key learnings from the State of Cloud Security study
+- link: https://www.datadoghq.com/blog/cloud-security-malware-detection/
+  tag: Blog
+  text: Detect malware in your containers with Datadog Cloud Security Management
+- link: https://www.datadoghq.com/blog/security-posture-csm/
+  tag: Blog
+  text: Report on changes to your security posture with Cloud Security Management
+title: Cloud Security Management
 ---
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
@@ -101,16 +104,16 @@ To get started with CSM, navigate to the [**Cloud Security Management Setup**][3
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats/
-[2]: /security/cloud_security_management/misconfigurations/
+[1]: /ja/security/threats/
+[2]: /ja/security/cloud_security_management/misconfigurations/
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/security/csm
-[5]: /glossary/#posture-score
-[6]: /security/notifications/
+[5]: /ja/glossary/#posture-score
+[6]: /ja/security/notifications/
 [7]: https://app.datadoghq.com/security/compliance
-[8]: /security/cloud_security_management/identity_risks/
-[9]: /security/cloud_security_management/vulnerabilities/
-[10]: /security/cloud_security_management/setup/
+[8]: /ja/security/cloud_security_management/identity_risks/
+[9]: /ja/security/cloud_security_management/vulnerabilities/
+[10]: /ja/security/cloud_security_management/setup/
 [11]: https://app.datadoghq.com/security/configuration/reports
 [12]: https://app.datadoghq.com/infrastructure/catalog
-[13]: /infrastructure/resource_catalog
+[13]: /ja/infrastructure/resource_catalog

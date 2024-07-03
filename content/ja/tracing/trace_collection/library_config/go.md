@@ -1,13 +1,11 @@
 ---
-title: Configuring the Go Tracing Library
 code_lang: go
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-go/tree/v1"
+- link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: ソースコード
   text: Source code
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: 外部サイト
   text: Package page
 - link: /tracing/glossary/
@@ -16,6 +14,8 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/go/
   tag: Documentation
   text: Propagating trace context
+title: Configuring the Go Tracing Library
+type: multi-code-lang
 ---
 
 [コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成し、Go インテグレーションをアクティブ化][1]した後、オプションで、必要に応じてトレーシングライブラリを構成してください。
@@ -156,16 +156,16 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/dd_libraries/go
-[2]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/tracing/trace_collection/dd_libraries/go
+[2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[4]: /tracing/trace_pipeline/ingestion_mechanisms/
-[5]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
-[6]: /tracing/configure_data_security#telemetry-collection
-[7]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[8]: /getting_started/tracing/#environment-name
+[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
+[6]: /ja/tracing/configure_data_security#telemetry-collection
+[7]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
+[8]: /ja/getting_started/tracing/#environment-name
 [9]: https://github.com/openzipkin/b3-propagation
-[13]: /agent/configuration/network/#configure-ports
+[13]: /ja/agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context
 [15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2

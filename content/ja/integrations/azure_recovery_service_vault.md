@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Recovery Service Vault metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_recovery_service_vault/"
-"draft": false
-"git_integration_title": "azure_recovery_service_vault"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Azure Recovery Service Vault"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_recovery_service_vault"
-"public_title": "Datadog-Azure Recovery Service Vault Integration"
-"short_description": "Track key Azure Recovery Service Vault metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Recovery Service Vault metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_recovery_service_vault/
+draft: false
+git_integration_title: azure_recovery_service_vault
+has_logo: true
+integration_id: ''
+integration_title: Azure Recovery Service Vault
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_recovery_service_vault
+public_title: Datadog-Azure Recovery Service Vault Integration
+short_description: Track key Azure Recovery Service Vault metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -53,10 +53,9 @@ Need help? Contact [Datadog support][7].
 
 
 [1]: https://www.datadoghq.com/blog/dont-fear-the-agent/
-[2]: https://docs.datadoghq.com/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
-[3]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/#agent-installation
-[4]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
-[5]: https://docs.datadoghq.com/integrations/azure/
+[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
+[3]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/#agent-installation
+[4]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
+[5]: https://docs.datadoghq.com/ja/integrations/azure/
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_recovery_service_vault/azure_recovery_service_vault_metadata.csv
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

@@ -1,11 +1,9 @@
 ---
-title: Getting Started with API Tests
-kind: documentation
 further_reading:
-- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: Learning Center
   text: Introduction to Synthetic Tests
-- link: "/api/latest/synthetics/#create-an-api-test"
+- link: /api/latest/synthetics/#create-an-api-test
   tag: API
   text: Create an API test programmatically
 - link: /synthetics/api_tests
@@ -26,7 +24,8 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: Learn about Synthetic test monitors
-
+kind: documentation
+title: Getting Started with API Tests
 ---
 
 ## Overview
@@ -207,18 +206,18 @@ With Datadog's [APM integration with Synthetic Monitoring][14], access the root 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests/
-[2]: /synthetics/multistep
-[3]: /synthetics/api_tests/http_tests
+[1]: /ja/synthetics/api_tests/
+[2]: /ja/synthetics/multistep
+[3]: /ja/synthetics/api_tests/http_tests
 [4]: https://app.datadoghq.com/synthetics/tests
 [5]: https://app.datadoghq.com/synthetics/create
-[6]: /synthetics/settings/#global-variables
-[7]: /synthetics/api_tests/http_tests#variables
-[8]: /getting_started/synthetics/private_location
-[9]: /synthetics/ci
-[10]: /integrations/#cat-notification
+[6]: /ja/synthetics/settings/#global-variables
+[7]: /ja/synthetics/api_tests/http_tests#variables
+[8]: /ja/getting_started/synthetics/private_location
+[9]: /ja/synthetics/ci
+[10]: /ja/integrations/#cat-notification
 [11]: https://app.datadoghq.com/account/settings
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
-[13]: /synthetics/guide/synthetic-test-monitors
-[14]: /synthetics/apm/
-[15]: /synthetics/api_tests/grpc_tests
+[13]: /ja/synthetics/guide/synthetic-test-monitors
+[14]: /ja/synthetics/apm/
+[15]: /ja/synthetics/api_tests/grpc_tests

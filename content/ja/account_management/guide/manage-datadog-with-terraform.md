@@ -1,12 +1,12 @@
 ---
-title: Manage Datadog with Terraform
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Plan and Usage Settings
-- link: "https://www.datadoghq.com/blog/datadog-teams/"
+- link: https://www.datadoghq.com/blog/datadog-teams/
   tag: Blog
   text: Streamline collaboration throughout your organization with Datadog Teams
+title: Manage Datadog with Terraform
 ---
 
 ## 概要
@@ -88,21 +88,21 @@ Restriction policies are associated to a specific **resource**, and define the l
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/child_organization
-[2]: /help/
-[3]: /account_management/multi_organization/
+[2]: /ja/help/
+[3]: /ja/account_management/multi_organization/
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/organization_settings
-[5]: /account_management/saml/
+[5]: /ja/account_management/saml/
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/api_key
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/application_key
-[8]: /integrations/terraform/
-[9]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[8]: /ja/integrations/terraform/
+[9]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/user
 [11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team
 [12]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team_membership
-[13]: /account_management/teams/
+[13]: /ja/account_management/teams/
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_account
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_account_application_key
-[16]: /account_management/org_settings/service_accounts
+[16]: /ja/account_management/org_settings/service_accounts
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team_permission_setting
 [18]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/restriction_policy

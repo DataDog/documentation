@@ -1,13 +1,14 @@
 ---
-title: Continuous Integration Visibility Explorer
-description: Learn how to search and filter your pipeline executions in the CI Visibility Explorer.
+description: Learn how to search and filter your pipeline executions in the CI Visibility
+  Explorer.
 further_reading:
-  - link: /continuous_integration/pipelines/
-    tag: Documentation
-    text: Explore pipeline data to resolve build problems
-  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-    tag: ブログ
-    text: Datadog CI モニターによるパイプラインアラートの構成
+- link: /continuous_integration/pipelines/
+  tag: Documentation
+  text: Explore pipeline data to resolve build problems
+- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
+  tag: ブログ
+  text: Datadog CI モニターによるパイプラインアラートの構成
+title: Continuous Integration Visibility Explorer
 ---
 
 ## 概要
@@ -91,10 +92,10 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/search
-[2]: /continuous_integration/explorer/search_syntax
-[3]: /continuous_integration/explorer/facets
-[4]: /continuous_integration/explorer/saved_views
+[1]: /ja/continuous_integration/search
+[2]: /ja/continuous_integration/explorer/search_syntax
+[3]: /ja/continuous_integration/explorer/facets
+[4]: /ja/continuous_integration/explorer/saved_views
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: https://app.datadoghq.com/dashboard/lists
 [7]: https://app.datadoghq.com/notebook/list

@@ -1,5 +1,5 @@
 ---
-title: "Service bus queue Component"
+title: Service bus queue Component
 ---
 
 ## 概要

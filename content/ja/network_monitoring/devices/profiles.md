@@ -1,14 +1,14 @@
 ---
-title: NDM Profiles
 aliases:
-    - /network_performance_monitoring/devices/profiles/
+- /ja/network_performance_monitoring/devices/profiles/
 further_reading:
 - link: /network_monitoring/devices/data
   tag: Documentation
   text: Data Collected with Network Device Monitoring
-- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
   text: Monitor SNMP with Datadog
+title: NDM Profiles
 ---
 
 ## 概要
@@ -97,4 +97,4 @@ Datadog Agent バージョン 7.52 以降では、デバイスメタデータ用
 [4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go#L51-L76
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [6]: https://app.datadoghq.com/devices/
-[7]: /network_monitoring/devices/guide/device_profiles/
+[7]: /ja/network_monitoring/devices/guide/device_profiles/

@@ -1,5 +1,5 @@
 ---
-title: "Load Balancer Component"
+title: Load Balancer Component
 ---
 
 ## 概要

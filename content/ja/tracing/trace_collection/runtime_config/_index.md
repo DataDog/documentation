@@ -1,10 +1,10 @@
 ---
-title: Configuration at Runtime
-kind: documentation
 further_reading:
 - link: /agent/remote_config/
   tag: Documentation
   text: Remote Configuration
+kind: documentation
+title: Configuration at Runtime
 ---
 
 <div class="alert alert-info">This feature is in public beta.</div>
@@ -57,8 +57,8 @@ The following options are supported with configuration at runtime. The required 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/
-[2]: /agent/
-[3]: /tracing/service_catalog/
-[4]: /account_management/rbac/permissions/
-[5]: /tracing/trace_explorer/trace_view
+[1]: /ja/agent/remote_config/
+[2]: /ja/agent/
+[3]: /ja/tracing/service_catalog/
+[4]: /ja/account_management/rbac/permissions/
+[5]: /ja/tracing/trace_explorer/trace_view

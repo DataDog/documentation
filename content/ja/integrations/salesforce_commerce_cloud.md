@@ -1,47 +1,47 @@
 ---
-"app_id": "salesforce-commerce-cloud"
-"app_uuid": "fe465a7e-7702-40fb-9a88-a0e4198d1983"
-"assets":
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "616"
-    "source_type_name": Salesforce Commerce Cloud
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: salesforce-commerce-cloud
+app_uuid: fe465a7e-7702-40fb-9a88-a0e4198d1983
+assets:
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 616
+    source_type_name: Salesforce Commerce Cloud
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "salesforce_commerce_cloud"
-"integration_id": "salesforce-commerce-cloud"
-"integration_title": "Salesforce Commerce Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "salesforce_commerce_cloud"
-"public_title": "Salesforce Commerce Cloud"
-"short_description": "Import your Salesforce Commerce Cloud logs into Datadog"
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Import your Salesforce Commerce Cloud logs into Datadog
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Salesforce Commerce Cloud
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: salesforce_commerce_cloud
+integration_id: salesforce-commerce-cloud
+integration_title: Salesforce Commerce Cloud
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: salesforce_commerce_cloud
+public_title: Salesforce Commerce Cloud
+short_description: Import your Salesforce Commerce Cloud logs into Datadog
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Import your Salesforce Commerce Cloud logs into Datadog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Salesforce Commerce Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -114,8 +114,7 @@ The Salesforce Commerce Cloud integration does not include any service checks.
 
 Need help? Contact [Datadog support][4].
 
-[1]: /logs/
+[1]: /ja/logs/
 [2]: https://help.salesforce.com/s/articleView?id=cc.b2c_account_manager_add_api_client_id.htm&type=5
 [3]: https://app.datadoghq.com/account/settings#integrations/salesforce-commerce-cloud
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

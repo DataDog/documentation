@@ -1,6 +1,4 @@
 ---
-title: Serverless Monitoring for AWS Lambda
-kind: documentation
 further_reading:
 - link: /serverless/configuration/
   tag: Documentation
@@ -8,24 +6,27 @@ further_reading:
 - link: /integrations/amazon_lambda/
   tag: Documentation
   text: AWS Lambda integration
-- link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
+- link: https://www.datadoghq.com/blog/monitoring-lambda-containers/
   tag: Blog
   text: Monitor AWS Lambda functions deployed using container images
-- link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
+- link: https://www.datadoghq.com/blog/manage-serverless-logs-datadog/
   tag: Blog
   text: Best practices for collecting and managing serverless logs
-- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
+- link: https://www.datadoghq.com/blog/aws-serverless-application-design/
   tag: Blog
   text: Designing production-ready AWS serverless applications
-- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
+- link: https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/
   tag: Blog
-  text: Best practices for building serverless applications that follow AWS's Well-Architected Framework
-- link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
+  text: Best practices for building serverless applications that follow AWS's Well-Architected
+    Framework
+- link: https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/
   tag: Blog
   text: Monitor your AWS Lambda functions' ephemeral storage usage
-- link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
+- link: https://www.datadoghq.com/blog/serverless-cold-start-traces/
   tag: Blog
   text: Understand serverless function performance with Cold Start Tracing
+kind: documentation
+title: Serverless Monitoring for AWS Lambda
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.
@@ -92,4 +93,4 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/installation
+[1]: /ja/serverless/installation

@@ -1,9 +1,7 @@
 ---
-title: Profiling Flame Graph Widget
-description: "Graph a breakdown of top consuming lines of code (CPU, Memory, ...)"
-widget_type: "flame_graph"
 aliases:
-- /video-categories/flamegraph/
+- /ja/video-categories/flamegraph/
+description: Graph a breakdown of top consuming lines of code (CPU, Memory, ...)
 further_reading:
 - link: /profiler/profile_visualizations/
   tag: Documentation
@@ -11,6 +9,8 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Profiling Flame Graph Widget
+widget_type: flame_graph
 ---
 
 ## 概要
@@ -59,6 +59,6 @@ This widget can be used with the **[Dashboards API][2]**. See the [widget JSON s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/profile_visualizations/#flame-graph
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/profiler/profile_visualizations/#flame-graph
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

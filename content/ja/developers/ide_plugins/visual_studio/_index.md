@@ -1,8 +1,6 @@
 ---
-title: Datadog Extension for Visual Studio
-is_beta: true
 aliases:
-- /developers/ide_integrations/visual_studio/
+- /ja/developers/ide_integrations/visual_studio/
 further_reading:
 - link: /getting_started/profiler/
   tag: Documentation
@@ -13,12 +11,14 @@ further_reading:
 - link: /code_analysis/static_analysis
   tag: ドキュメント
   text: Learn about Static Analysis
-- link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
+- link: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
   tag: 外部サイト
-  text: Visual Studio Marketplace  
-- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
+  text: Visual Studio Marketplace
+- link: https://www.datadoghq.com/blog/datadog-ide-plugins/
   tag: ブログ
   text: Reduce context switching while troubleshooting with Datadog's IDE plugins
+is_beta: true
+title: Datadog Extension for Visual Studio
 ---
 
 ## 概要
@@ -29,7 +29,7 @@ Visual Studio 用の Datadog 拡張機能を使用すると、サービスやラ
 
 ### Code insights
 
-[Error Tracking][5] の問題、[Security Vulnerabilities][6]、[Flaky Tests][10]、[Watchdog][7] のプロファイリングに関する洞察を、Visual Studio にいながらにして入手できます。
+Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], and [Flaky Tests][10] without leaving Visual Studio.
 
 {{< img src="/developers/ide_plugins/visual_studio/code-insights.png" alt="The Code Insights view" >}}
 
@@ -92,20 +92,19 @@ GitHub の [Discussion Forum][15] や [Issue Tracker][16] でバグを報告し�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-for-visual-studio/discussions
-[2]: /getting_started/profiler/
+[2]: /ja/getting_started/profiler/
 [3]: https://www.datadoghq.com/
 [4]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
-[5]: /tracing/error_tracking/
-[6]: /security/application_security/vulnerability_management/
-[7]: /watchdog/insights
-[8]: /profiler/
-[10]: /continuous_integration/guides/flaky_test_management/
-[12]: /integrations/guide/source-code-integration/
-[13]: /profiler/enabling/dotnet/?tab=linux#enabling-the-profiler
+[5]: /ja/tracing/error_tracking/
+[6]: /ja/security/application_security/vulnerability_management/
+[8]: /ja/profiler/
+[10]: /ja/continuous_integration/guides/flaky_test_management/
+[12]: /ja/integrations/guide/source-code-integration/
+[13]: /ja/profiler/enabling/dotnet/?tab=linux#enabling-the-profiler
 [14]: https://www.datadoghq.com/lpg/
 [15]: https://github.com/DataDog/datadog-for-visual-studio/discussions
 [16]: https://github.com/DataDog/datadog-for-visual-studio/issues
 [17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
-[18]: /logs/explorer/
-[19]: /code_analysis/static_analysis/
-[20]: /code_analysis/static_analysis_rules/
+[18]: /ja/logs/explorer/
+[19]: /ja/code_analysis/static_analysis/
+[20]: /ja/code_analysis/static_analysis_rules/

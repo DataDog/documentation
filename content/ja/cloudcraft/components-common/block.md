@@ -1,5 +1,5 @@
 ---
-title: "Block Component"
+title: Block Component
 ---
 ## 概要
 
@@ -54,4 +54,4 @@ title: "Block Component"
 [1]: https://developers.cloudcraft.co/
 [2]: https://help.cloudcraft.co/article/118-component-vpc
 [3]: https://help.cloudcraft.co/article/119-component-security-group
-[4]: /cloudcraft/components-aws/subnet/
+[4]: /ja/cloudcraft/components-aws/subnet/

@@ -40,5 +40,5 @@ Datadog に送信されたログイベントの数は、複数箇所で確認で
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs
-[4]: /help/
+[4]: /ja/help/
 [5]: mailto:success@datadoghq.com

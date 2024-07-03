@@ -1,11 +1,11 @@
 ---
-title: Setting up Cloud Security Management on Docker
-code_lang: docker
-type: multi-code-lang
-code_lang_weight: 65 # a number that represents relative weight.
 aliases:
-  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/docker
-  - /security/cloud_security_management/setup/csm_enterprise/agent/docker
+- /ja/security/cloud_security_management/setup/csm_cloud_workload_security/agent/docker
+- /ja/security/cloud_security_management/setup/csm_enterprise/agent/docker
+code_lang: docker
+code_lang_weight: 65
+title: Setting up Cloud Security Management on Docker
+type: multi-code-lang
 ---
 
 Use the following instructions to enable Misconfigurations and Threat Detection.
@@ -50,6 +50,6 @@ docker run -d --name dd-agent \
 
 {{< /code-block >}}
 
-[1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
-[3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[1]: /ja/security/cloud_security_management/misconfigurations/
+[2]: /ja/security/threats
+[3]: /ja/security/cloud_security_management/setup#supported-deployment-types-and-features

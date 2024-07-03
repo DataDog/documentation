@@ -1,15 +1,16 @@
 ---
-title: Container Monitoring
+algolia:
+  tags:
+  - containers
+cascade:
+  algolia:
+    rank: 70
 description: Install & configure the Agent to collect data on containerized infrastructures
 further_reading:
-    - link: "https://www.datadoghq.com/container-report/"
-      tag: Datadog Research
-      text: Datadog's Annual State of Containers Report
-algolia:
-  tags: [containers]
-cascade:
-    algolia:
-        rank: 70
+- link: https://www.datadoghq.com/container-report/
+  tag: Datadog Research
+  text: Datadog's Annual State of Containers Report
+title: Container Monitoring
 ---
 
 ## 概要

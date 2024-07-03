@@ -1,6 +1,6 @@
 ---
-title: Cloud Security Management Troubleshooting
 disable_toc: true
+title: Cloud Security Management Troubleshooting
 ---
 
 {{< whatsnext desc="トラブルシューティングガイド" >}}

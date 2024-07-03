@@ -1,6 +1,4 @@
 ---
-title: Account Takeover Protection
-kind: documentation
 disable_toc: false
 further_reading:
 - link: security/application_security/terms/
@@ -12,6 +10,8 @@ further_reading:
 - link: security/application_security/guide/
   tag: Documentation
   text: Application Security Management Guides
+kind: documentation
+title: Account Takeover Protection
 ---
 
 ASM provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
@@ -254,15 +254,15 @@ Datadog は、攻撃者の属性の類似性によって攻撃者をクラスタ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/
+[1]: https://docs.datadoghq.com/ja/security/application_security/threats/add-user-info/
 [2]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
 [3]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
-[4]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: https://docs.datadoghq.com/ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [5]: https://app.datadoghq.com/security/appsec/business-logic
-[6]: https://docs.datadoghq.com/security/notifications/rules/
+[6]: https://docs.datadoghq.com/ja/security/notifications/rules/
 [7]: https://app.datadoghq.com/integrations?category=Collaboration
-[8]: https://docs.datadoghq.com/security/threat_intelligence#threat-intelligence-sources
-[9]: https://docs.datadoghq.com/security/threat_intelligence#best-practices-in-threat-intelligence
+[8]: https://docs.datadoghq.com/ja/security/threat_intelligence#threat-intelligence-sources
+[9]: https://docs.datadoghq.com/ja/security/threat_intelligence#best-practices-in-threat-intelligence
 [10]: https://en.wikipedia.org/wiki/Carrier-grade_NAT
 [11]: https://app.datadoghq.com/security/appsec/threat
 [12]: https://app.datadoghq.com/security/appsec/passlist

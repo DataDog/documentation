@@ -62,14 +62,13 @@ Datadog は、これらのライブラリのインストールや構成を管理
 [3]: mailto:success@datadoghq.com
 [4]: https://app.datadoghq.com/account/usage
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[6]: /api/latest/aws-integration/#set-an-aws-tag-filter
-[7]: /help/
+[6]: /ja/api/latest/aws-integration/#set-an-aws-tag-filter
+[7]: /ja/help/
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/metric/explorer?exp_metric=aws.lambda.invocations&exp_group=functionname&exp_agg=sum
-[10]: /integrations/amazon_billing/
-[11]: /serverless/libraries_integrations/extension/
-[12]: /logs/guide/forwarder/
-[13]: /integrations/amazon_lambda/
-[14]: /serverless/aws_lambda
-[15]: /serverless/installation/
-
+[10]: /ja/integrations/amazon_billing/
+[11]: /ja/serverless/libraries_integrations/extension/
+[12]: /ja/logs/guide/forwarder/
+[13]: /ja/integrations/amazon_lambda/
+[14]: /ja/serverless/aws_lambda
+[15]: /ja/serverless/installation/

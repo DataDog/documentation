@@ -1,59 +1,61 @@
 ---
-"app_id": "zabbix"
-"app_uuid": "9b7022c4-95c7-4872-83b6-7eaba2cc9d88"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": zabbix.system.uptime
-      "metadata_path": metadata.csv
-      "prefix": zabbix.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10166"
-    "source_type_name": Zabbix (Community Version)
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": KosukeKamiya@users.noreply.github.com
-  "support_email": KosukeKamiya@users.noreply.github.com
-"categories":
+app_id: zabbix
+app_uuid: 9b7022c4-95c7-4872-83b6-7eaba2cc9d88
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: zabbix.system.uptime
+      metadata_path: metadata.csv
+      prefix: zabbix.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10166
+    source_type_name: Zabbix (Community Version)
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: KosukeKamiya@users.noreply.github.com
+  support_email: KosukeKamiya@users.noreply.github.com
+categories:
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "zabbix"
-"integration_id": "zabbix"
-"integration_title": "zabbix"
-"integration_version": "1.1.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "zabbix"
-"public_title": "zabbix"
-"short_description": "Collect item history by the Zabbix API and report them to Datadog as metrics."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: zabbix
+integration_id: zabbix
+integration_title: zabbix
+integration_version: 1.1.1
+is_public: true
+manifest_version: 2.0.0
+name: zabbix
+public_title: zabbix
+short_description: Collect item history by the Zabbix API and report them to Datadog
+  as metrics.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Network"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Collect item history by the Zabbix API and report them to Datadog as metrics.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": zabbix
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Collect item history by the Zabbix API and report them to Datadog as
+    metrics.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: zabbix
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -175,13 +177,12 @@ Need help? Contact [Datadog support][11].
 
 [1]: https://www.zabbix.com/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://www.zabbix.com/documentation/current/en/manual/web_interface/time_zone
 [6]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
 [10]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/assets/service_checks.json
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

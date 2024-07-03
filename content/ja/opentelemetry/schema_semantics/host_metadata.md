@@ -1,11 +1,11 @@
 ---
-title: Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information
 aliases:
-- /opentelemetry/guide/host_metadata/
+- /ja/opentelemetry/guide/host_metadata/
 further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: OpenTelemetry Support in Datadog
+title: Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information
 ---
 
 <div class="alert alert-info">
@@ -93,11 +93,11 @@ To collect these conventions with the OpenTelemetry Collector, set up the [recom
 
 [1]: https://opentelemetry.io/docs/concepts/glossary/#resource
 [2]: https://opentelemetry.io/docs/concepts/semantic-conventions/
-[3]: /opentelemetry/collector_exporter/host_metrics
+[3]: /ja/opentelemetry/collector_exporter/host_metrics
 [4]: https://opentelemetry.io/docs/specs/semconv/resource/host/
 [5]: https://opentelemetry.io/docs/specs/semconv/system/system-metrics/
-[6]: /infrastructure/list/
+[6]: /ja/infrastructure/list/
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor#transform-processor
 [8]: https://opentelemetry.io/docs/specs/semconv/resource/os/
 [9]: https://opentelemetry.io/docs/collector/deployment/
-[10]: /opentelemetry/schema_semantics/hostname/
+[10]: /ja/opentelemetry/schema_semantics/hostname/

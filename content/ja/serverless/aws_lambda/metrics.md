@@ -1,11 +1,11 @@
 ---
-title: AWS Lambda metrics
-kind: documentation
 aliases:
-  - /serverless/custom_metrics
-  - /serverless/enhanced_lambda_metrics
-  - /serverless/real-time-enhanced-metrics
-  - /serverless/real_time_enhanced_metrics
+- /ja/serverless/custom_metrics
+- /ja/serverless/enhanced_lambda_metrics
+- /ja/serverless/real-time-enhanced-metrics
+- /ja/serverless/real_time_enhanced_metrics
+kind: documentation
+title: AWS Lambda metrics
 ---
 
 This page discusses metrics for monitoring serverless applications on AWS Lambda. 
@@ -20,11 +20,11 @@ Datadog can also help you collect metrics for AWS managed resources—such as [A
 
 To collect these metrics, set up the [Datadog AWS integration][5].
 
-[1]: /serverless/aws_lambda/installation
-[2]: /integrations/amazon_api_gateway/#data-collected
-[3]: /integrations/amazon_appsync/#data-collected
-[4]: /integrations/amazon_sqs/#data-collected
-[5]: /integrations/amazon_web_services/
+[1]: /ja/serverless/aws_lambda/installation
+[2]: /ja/integrations/amazon_api_gateway/#data-collected
+[3]: /ja/integrations/amazon_appsync/#data-collected
+[4]: /ja/integrations/amazon_sqs/#data-collected
+[5]: /ja/integrations/amazon_web_services/
 
 ## Enhanced Lambda metrics
 
@@ -80,9 +80,9 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 `aws.lambda.enhanced.out_of_memory`
 : Measures the number of times a function runs out of memory.
 
-[6]: /integrations/amazon_lambda/#metric-collection
+[6]: /ja/integrations/amazon_lambda/#metric-collection
 [7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
-[8]: /metrics/distributions/
+[8]: /ja/metrics/distributions/
 
 ## Submit custom metrics
 
@@ -234,8 +234,8 @@ namespace Example
 1. [Install][1] the DogStatsD client for your runtime
 2. Follow the [sample code][2] to submit your custom metrics.
 
-[1]: /developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
-[2]: /developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
+[1]: /ja/developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
+[2]: /ja/developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -430,9 +430,9 @@ A Lambda function may launch many concurrent execution environments when traffic
 
 Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also [manage tags][12]. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][13]. To monitor a distribution for a count metric type, use `sum` for both the [time and space aggregations][13]. Refer to the guide [Query to the Graph][14] for how time and space aggregations work.
 
-[9]: /logs/logs_to_metrics/
-[10]: /tracing/trace_pipeline/generate_metrics/
-[11]: /metrics/distributions/
-[12]: /metrics/distributions/#customize-tagging
-[13]: /metrics/#time-and-space-aggregation
-[14]: /dashboards/guide/query-to-the-graph/
+[9]: /ja/logs/logs_to_metrics/
+[10]: /ja/tracing/trace_pipeline/generate_metrics/
+[11]: /ja/metrics/distributions/
+[12]: /ja/metrics/distributions/#customize-tagging
+[13]: /ja/metrics/#time-and-space-aggregation
+[14]: /ja/dashboards/guide/query-to-the-graph/

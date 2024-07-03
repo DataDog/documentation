@@ -1,7 +1,7 @@
 ---
-title: Docker Data Collected
 aliases:
-- /agent/docker/data_collected
+- /ja/agent/docker/data_collected
+title: Docker Data Collected
 ---
 
 ## Docker インテグレーション

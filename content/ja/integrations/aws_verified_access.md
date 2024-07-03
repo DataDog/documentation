@@ -1,30 +1,30 @@
 ---
-"aliases":
-- /integrations/amazon_verified_access
-"categories":
+aliases:
+- /ja/integrations/amazon_verified_access
+categories:
 - cloud
 - aws
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Collect AWS Verified Access logs."
-"doc_link": "https://docs.datadoghq.com/integrations/aws_verified_access/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/verified-access-datadog/"
-  "tag": Blog
-  "text": Enhance corporate application security with AWS Verified Access and Datadog
-"git_integration_title": "aws_verified_access"
-"has_logo": true
-"integration_id": "amazon-verified-access"
-"integration_title": "AWS Verified Access"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "aws_verified_access"
-"public_title": "Datadog-AWS Verified Access Integration"
-"short_description": "Collect AWS Verified Access logs."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Collect AWS Verified Access logs.
+doc_link: https://docs.datadoghq.com/integrations/aws_verified_access/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/verified-access-datadog/
+  tag: Blog
+  text: Enhance corporate application security with AWS Verified Access and Datadog
+git_integration_title: aws_verified_access
+has_logo: true
+integration_id: amazon-verified-access
+integration_title: AWS Verified Access
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: aws_verified_access
+public_title: Datadog-AWS Verified Access Integration
+short_description: Collect AWS Verified Access logs.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -94,12 +94,11 @@ Need help? Contact [Datadog support][8].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/verified-access/latest/ug/access-logs-enable.html
-[3]: https://docs.datadoghq.com/integrations/amazon_security_lake/
-[4]: https://docs.datadoghq.com/logs/guide/forwarder/
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_security_lake/
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://app.datadoghq.com/logs
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [7]: https://docs.aws.amazon.com/verified-access/latest/ug/access-logs.html
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

@@ -1,5 +1,5 @@
 ---
-title: "Cosmos DB Component"
+title: Cosmos DB Component
 ---
 
 ## 概要

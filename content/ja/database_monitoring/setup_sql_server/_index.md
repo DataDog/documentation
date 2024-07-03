@@ -1,7 +1,7 @@
 ---
-title: Setting up SQL Server
 description: Setting up Database Monitoring on a SQL Server database
 disable_sidebar: true
+title: Setting up SQL Server
 ---
 
 ### サポートされる SQL Server バージョン
@@ -21,4 +21,4 @@ disable_sidebar: true
 
 <br>
 
-[1]: /database_monitoring/setup_sql_server/troubleshooting/#known-limitations
+[1]: /ja/database_monitoring/setup_sql_server/troubleshooting/#known-limitations

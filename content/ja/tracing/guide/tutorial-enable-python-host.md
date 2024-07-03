@@ -1,6 +1,4 @@
 ---
-title: Tutorial - Enabling Tracing for a Python Application on the Same Host as the Datadog Agent
-kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: ドキュメント
@@ -14,55 +12,57 @@ further_reading:
 - link: /tracing/trace_collection/custom_instrumentation/python/
   tag: ドキュメント
   text: Manually configuring traces and spans
-- link: "https://github.com/DataDog/dd-trace-py"
+- link: https://github.com/DataDog/dd-trace-py
   tag: ソースコード
   text: Tracing library open source code repository
+title: Tutorial - Enabling Tracing for a Python Application on the Same Host as the
+  Datadog Agent
 ---
 
-## Overview
+## 概要
 
-This tutorial walks you through the steps for enabling tracing on a sample Python application installed on a host. In this scenario, you install a Datadog Agent on the same host as the application.
+このチュートリアルでは、ホスト上にインストールされたサンプル Python アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、アプリケーションと同じホスト上に Datadog Agent をインストールします。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-overview.png" alt="Diagram showing installation scenario for this tutorial" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-host-overview.png" alt="このチュートリアルのインストールシナリオを示す図" style="width:100%;" >}}
 
-For other scenarios, including applications in containers, Agent in a container, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
+コンテナ内のアプリケーション、コンテナ内の Agent、異なる言語で書かれたアプリケーションなど、その他のシナリオについては、その他の[トレース有効化のチュートリアル][1]を参照してください。
 
-See [Tracing Python Applications][2] for general comprehensive tracing setup documentation for Python.
+Python の一般的なトレース設定ドキュメントについては、[Python アプリケーションのトレース][2]を参照してください。
 
-### Prerequisites
+### 前提条件
 
-- A Datadog account and [organization API key][3]
+- Datadog のアカウントと[組織の API キー][3]
 - Git
-- Python that meets the [tracing library requirements][4]
+- [トレーシングライブラリの要件][4]を満たす Python
 
-## Install the Agent
+## Agent のインストール
 
-If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
+Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
 {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
 {{< /code-block >}}
 
-To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
+`datadoghq.com` 以外の Datadog サイトにデータを送信するには、`DD_SITE` 環境変数を [Datadog サイト][6]に置き換えてください。
 
-If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
+もしホストに既に Agent がインストールされている場合は、少なくともバージョン 7.28 であることを確認してください。Python アプリケーションをトレースするために `ddtrace` を使用するために必要な Datadog Agent の最小バージョンは、[トレーシングライブラリ開発者向けドキュメント][7]に記載されています。
 
-Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+[**Events &gt; Explorer**][8] を開き、オプションで `Datadog` ソースファセットでフィルタリングし、ホストへの Agent インストールを確認するイベントを探して、Agent が実行されており、Datadog にデータを送信していることを確認します。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Agent がホストにインストールされたことを示す Datadog からのメッセージを表示するイベントエクスプローラー。" style="width:70%;" >}}
 
-<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
+<div class="alert alert-info">数分後、Datadog にホストが表示されない場合 (<strong>Infrastructure > Host map</strong>)、<a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a> にある組織の正しい API キーを使用したことを確認してください。</div>
 
 
-## Install and run a sample Python application
+## サンプル Python アプリケーションのインストールと実行
 
-Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/Datadog/apm-tutorial-python][9]. Clone the git repository by running:
+次に、トレースするためのサンプルアプリケーションをインストールします。このチュートリアルのコードサンプルは [github.com/Datadog/apm-tutorial-python][9] で見ることができます。以下を実行することで git リポジトリの複製を行います。
 
 {{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-python.git
 {{< /code-block >}}
 
-Setup, configure, and install Python dependencies for the sample using either Poetry or pip. Run one of the following:
+Poetry または pip のいずれかを使用して、サンプルに必要な Python の依存関係を設定し、構成し、インストールします。以下のいずれかを実行します。
 
 {{< tabs >}}
 {{% tab "Poetry" %}}
@@ -83,7 +83,7 @@ pip install -r requirements.txt
 {{% /tab %}}
 {{< /tabs >}}
 
-Start the application by running:
+以下を実行することでアプリケーションを起動します。
 
 {{% tabs %}}
 {{% tab "Poetry" %}}
@@ -103,34 +103,34 @@ python -m notes_app.app
 {{% /tab %}}
 {{< /tabs >}}
 
-The sample `notes_app` application is a basic REST API that stores data in an in-memory database. Open another terminal and use `curl` to send a few API requests:
+サンプルの `notes_app` アプリケーションは、インメモリデータベースにデータを保存する基本的な REST API です。別のターミナルを開き、`curl` を使っていくつかの API リクエストを送信します。
 
 `curl -X GET 'localhost:8080/notes'`
-: Returns `{}` because there is nothing in the database yet
+: まだデータベースに何もないので `{}` を返します
 
 `curl -X POST 'localhost:8080/notes?desc=hello'`
-: Adds a note with the description `hello` and an ID value of `1`. Returns `( 1, hello)`.
+: ノートに `hello` という説明と `1` という ID 値を追加します。`( 1, hello)` を返します。
 
 `curl -X GET 'localhost:8080/notes?id=1'`
-: Returns the note with `id` value of `1`: `( 1, hello)`
+: `id` の値が `1` であるノートを返します: `( 1, hello)`
 
 `curl -X POST 'localhost:8080/notes?desc=otherNote'`
-: Adds a note with the description `otherNote` and an ID value of `2`. Returns `( 2, otherNote)`
+: `otherNote` という説明と `2` という ID 値を持つノートを追加します。`( 2, otherNote)` を返します
 
 `curl -X GET 'localhost:8080/notes'`
-: Returns the contents of the database: `{ "1": "hello", "2": "otherNote" }`
+: データベースの内容を返します: `{ "1": "hello", "2": "otherNote" }`
 
 `curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
-: Updates the description value for the first note to `UpdatedNote`.
+: 最初のノートの説明の値を `UpdatedNote` に更新します。
 
 `curl -X DELETE 'localhost:8080/notes?id=1'`
-: Removes the first note from the database.
+: データベースから最初のノートを削除します。
 
-Run more API calls to see the application in action. When you're done, type Ctrl+C to stop the application.
+さらに API コールを実行し、アプリケーションのアクションを確認します。終了したら、Ctrl+C でアプリケーションを停止します。
 
-## Install Datadog tracing
+## Datadog トレーシングのインストール
 
-Next, install the tracing library by using Poetry or pip (minimum version 18). From your `apm-tutorial-python` directory, run:
+次に、トレーシングライブラリを Poetry または pip (最小バージョン 18) を使ってインストールします。`apm-tutorial-python` ディレクトリから、以下を実行します。
 
 {{< tabs >}}
 {{% tab "Poetry" %}}
@@ -151,9 +151,9 @@ pip install ddtrace
 {{% /tab %}}
 {{< /tabs >}}
 
-## Launch the Python application with automatic instrumentation
+## 自動インスツルメンテーションによる Python アプリケーションの起動
 
-To start generating and collecting traces, restart the sample application in a slightly different way than previously. Run:
+トレースの生成と収集を開始するには、前回とは少し異なる方法でサンプルアプリケーションを再起動します。以下を実行します。
 
 {{< tabs >}}
 {{% tab "Poetry" %}}
@@ -175,9 +175,9 @@ DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
 {{% /tab %}}
 {{< /tabs >}}
 
-That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
+このコマンドは、`DD_SERVICE`、`DD_VERSION`、`DD_ENV` 環境変数を設定して[統合サービスタグ付け][10]を有効にし、Datadog 全体のデータ相関を可能にするものです。
 
-Use `curl` to again send requests to the application:
+再びアプリケーションにリクエストを送るには、`curl` を使用します。
 
 `curl -X GET 'localhost:8080/notes'`
 : `{}`
@@ -194,39 +194,39 @@ Use `curl` to again send requests to the application:
 `curl -X GET 'localhost:8080/notes'`
 : `{ "1": "hello", "2": "newNote" }`
 
-Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]). The Traces list shows something like this:
+しばらく待って、Datadog の UI を見てみてください。[**APM > Traces**][11] に移動します。Traces リストには、次のように表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-host-traces.png" alt="Traces ビューには、ホストから入ってくるトレースデータが表示されます。" style="width:100%;" >}}
 
-If you don't see traces, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+もし、トレースが表示されない場合は、Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
 
-### Examine a trace
+### トレースの検証
 
-In the Traces page, click on a `POST /notes` trace and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
+Traces ページで、`POST /notes` トレースをクリックすると、各スパンにかかった時間や、あるスパンが完了する前に他のスパンが発生したことを示すフレームグラフが表示されます。グラフの上部にあるバーは、前の画面で選択したスパンです (この場合、ノートアプリケーションへの最初のエントリポイントです)。
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
+バーの幅は、それが完了するまでにかかった時間を示します。低い深さのバーは、高い深さのバーの寿命の間に完了するスパンを表します。
 
-The flame graph for a `POST` trace looks something like this:
+`POST` トレースのフレームグラフは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-host-post-flame.png" alt="POST トレースのフレームグラフ。" style="width:100%;" >}}
 
-A `GET /notes` trace looks something like this:
+`GET /notes` トレースは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-host-get-flame.png" alt="GET トレースのフレームグラフ。" style="width:100%;" >}}
 
 
-## Add custom instrumentation to the Python application
+## Python アプリケーションにカスタムインスツルメンテーションを追加する
 
-Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
+自動インスツルメンテーションは便利ですが、より細かいスパンが欲しい場合もあります。Datadog の Python DD Trace API では、アノテーションやコードを使用してコード内のスパンを指定することができます。
 
-The following steps walk you through adding annotations to the code to trace some sample methods.
+次のステップでは、コードにアノテーションを追加して、いくつかのサンプルメソッドをトレースする方法を説明します。
 
-1. Open `notes_app/notes_helper.py`.
-2. Add the following import:
+1. `notes_app/notes_helper.py` を開きます。
+2. 以下のインポートを追加します。
    {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
 
-3. Inside the `NotesHelper` class, add a tracer wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
+3. `NotesHelper` クラスの中に、`notes_helper` というトレーサーラッパーを追加して、`notes_helper.long_running_process` メソッドがどのように動作するかを確認できるようにします。
    {{< code-block lang="python" >}}class NotesHelper:
 
     @tracer.wrap(service="notes_helper")
@@ -235,24 +235,24 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
+   さて、トレーサーは自動的にリソースにラップされている関数名、この場合は `long_running_process` をラベル付けしています。
 
-4. Resend some HTTP requests, specifically some `GET` requests.
-5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
+4. いくつかの HTTP リクエスト、特にいくつかの `GET` リクエストを再送します。
+5. トレースエクスプローラーで、新しい `GET` リクエストの 1 つをクリックすると、次のようなフレームグラフが表示されます。
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-python-host-custom-flame.png" alt="カスタムインスツルメンテーションを用いた GET トレースのフレームグラフ。" style="width:100%;" >}}
 
-   Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
+   `get_notes` 関数にカスタムトレースが追加され、スタックトレースがより詳細になったことに注意してください。
 
-For more information, read [Custom Instrumentation][12].
+詳しくは、[カスタムインストルメンテーション][12]をご覧ください。
 
-## Add a second application to see distributed traces
+## 分散型トレーシングを見るために 2 つ目のアプリケーションを追加する
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
+単一のアプリケーションをトレースすることは素晴らしいスタートですが、トレースの本当の価値は、リクエストがサービスを通じてどのように流れるかを見ることです。これは、_分散型トレーシング_と呼ばれています。
 
-The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
+サンプルプロジェクトには `calendar_app` という 2 番目のアプリケーションが含まれており、呼び出されるたびにランダムな日付を返します。Notes アプリケーションの `POST` エンドポイントには、`add_date` という名前の 2 つ目のクエリパラメーターがあります。このパラメータが `y` に設定されると、Notes はカレンダーアプリケーションを呼び出して、ノートに追加する日付を取得します。
 
-1. Start the calendar application by running:
+1. 以下を実行することでカレンダーアプリケーションを起動します。
 
    {{< tabs >}}
    {{% tab "Poetry" %}}
@@ -274,32 +274,32 @@ The sample project includes a second application called `calendar_app` that retu
    {{% /tab %}}
    {{< /tabs >}}
 
-2. Send a POST request with the `add_date` parameter:
+2. `add_date` パラメーターを指定して、POST リクエストを送信します。
 
    `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
    : `(2, hello_again with date 2022-11-06)`
 
 
-3. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+3. トレースエクスプローラーで、この最新のトレースをクリックすると、2 つのサービス間の分散型トレーシングが表示されます。
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-python-host-distributed.png" alt="分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
 
-## Add more custom instrumentation
+## カスタムインスツルメンテーションの追加
 
-You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
+コードを使って、カスタムのインスツルメンテーションを追加することができます。例えば、カレンダサービスをさらにインスツルメンテーションして、トレースを見やすくしたいとします。
 
-1. Open `notes_app/notes_logic.py`.
-2. Add the following import:
+1. `notes_app/notes_logic.py` を開きます。
+2. 以下のインポートを追加します。
 
    ```python
    from ddtrace import tracer
    ```
-3. Inside the `try` block, at about line 28, add the following `with` statement:
+3. `try` ブロックの内部、28 行目あたりに、次の `with` ステートメントを追加してください。
 
    ```python
    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
    ```
-   Resulting in this:
+   その結果、こうなりました。
    {{< code-block lang="python" >}}
 def create_note(self, desc, add_date=None):
         if (add_date):
@@ -317,28 +317,28 @@ def create_note(self, desc, add_date=None):
         note = Note(description=desc, id=None)
         note.id = self.db.create_note(note){{< /code-block >}}
 
-4. Send more HTTP requests, specifically `POST` requests, with the `add_date` argument.
-5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
-   Note the new span labeled `notes_helper.another_process`.
+4. 引数 `add_date` を指定して、より多くの HTTP リクエスト、特に `POST` リクエストを送信します。
+5. トレースエクスプローラーで、これらの新しい `POST` トレースをクリックすると、複数のサービスにわたるカスタムトレースが表示されます。
+   {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="カスタムインスツルメンテーションを用いた分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
+   新しいスパンには `notes_helper.another_process` というラベルが付けられていることに注意してください。
 
-If you're not receiving traces as expected, set up debug mode in the `ddtrace` Python package. Read [Enable debug mode][13] to find out more.
+もし、期待通りのトレースが受信できない場合は、Python パッケージの `ddtrace` でデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/#enabling-tracing-tutorials
-[2]: /tracing/trace_collection/dd_libraries/python/
-[3]: /account_management/api-app-keys/
-[4]: /tracing/trace_collection/compatibility/python/
+[1]: /ja/tracing/guide/#enabling-tracing-tutorials
+[2]: /ja/tracing/trace_collection/dd_libraries/python/
+[3]: /ja/account_management/api-app-keys/
+[4]: /ja/tracing/trace_collection/compatibility/python/
 [5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[6]: /getting_started/site/
+[6]: /ja/getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer
 [9]: https://github.com/DataDog/apm-tutorial-python
-[10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
+[10]: /ja/getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [11]: https://app.datadoghq.com/apm/traces
-[12]: /tracing/trace_collection/custom_instrumentation/python/
-[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[12]: /ja/tracing/trace_collection/custom_instrumentation/python/
+[13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode

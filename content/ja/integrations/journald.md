@@ -1,55 +1,55 @@
 ---
-"app_id": "journald"
-"app_uuid": "2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10167"
-    "source_type_name": journald
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: journald
+app_uuid: 2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10167
+    source_type_name: journald
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/journald/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "journald"
-"integration_id": "journald"
-"integration_title": "journald"
-"integration_version": "1.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "journald"
-"public_title": "journald"
-"short_description": "Monitor your systemd-journald logs with Datadog."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/journald/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: journald
+integration_id: journald
+integration_title: journald
+integration_version: 1.2.0
+is_public: true
+manifest_version: 2.0.0
+name: journald
+public_title: journald
+short_description: Monitor your systemd-journald logs with Datadog.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Monitor your systemd-journald logs with Datadog.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": journald
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Monitor your systemd-journald logs with Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: journald
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -107,8 +107,8 @@ To fill `source` and `service` attributes, the Agent collects `SYSLOG_IDENTIFIER
 [Restart the Agent][2].
 
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -123,8 +123,8 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "journald", "service": "<YOUR_APP_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -248,7 +248,7 @@ journald does not include any events.
 Need help? Contact [Datadog support][4].
 
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

@@ -1,9 +1,9 @@
 ---
-title: トラブルシューティング
 further_reading:
-- link: "https://opentelemetry.io/docs/collector/troubleshooting/"
+- link: https://opentelemetry.io/docs/collector/troubleshooting/
   tag: 外部サイト
   text: OpenTelemetry Troubleshooting
+title: トラブルシューティング
 ---
 
 If you experience unexpected behavior using OpenTelemetry with Datadog, this guide may help you resolve the issue. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
@@ -54,4 +54,4 @@ processors:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /ja/help/

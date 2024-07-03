@@ -1,63 +1,63 @@
 ---
-"app_id": "cloudsmith"
-"app_uuid": "92b5a159-e5e9-4e38-a4d4-b987cd03b7a1"
-"assets":
-  "dashboards":
-    "Cloudsmith": assets/dashboards/cloudsmith_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cloudsmith.bandwidth_used
-      "metadata_path": metadata.csv
-      "prefix": cloudsmith.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10208"
-    "source_type_name": Cloudsmith
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Cloudsmith
-  "sales_email": ccarey@cloudsmith.io
-  "support_email": ccarey@cloudsmith.io
-"categories":
+app_id: cloudsmith
+app_uuid: 92b5a159-e5e9-4e38-a4d4-b987cd03b7a1
+assets:
+  dashboards:
+    Cloudsmith: assets/dashboards/cloudsmith_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cloudsmith.bandwidth_used
+      metadata_path: metadata.csv
+      prefix: cloudsmith.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10208
+    source_type_name: Cloudsmith
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Cloudsmith
+  sales_email: ccarey@cloudsmith.io
+  support_email: ccarey@cloudsmith.io
+categories:
 - cloud
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cloudsmith"
-"integration_id": "cloudsmith"
-"integration_title": "Cloudsmith"
-"integration_version": "0.0.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cloudsmith"
-"public_title": "Cloudsmith"
-"short_description": "Monitor Cloudsmith metrics"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cloudsmith
+integration_id: cloudsmith
+integration_title: Cloudsmith
+integration_version: 0.0.2
+is_public: true
+manifest_version: 2.0.0
+name: cloudsmith
+public_title: Cloudsmith
+short_description: Monitor Cloudsmith metrics
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor Cloudsmith metrics
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cloudsmith
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor Cloudsmith metrics
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cloudsmith
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -118,12 +118,11 @@ Need help? Contact [Cloudsmith support][10].
 
 [1]: https://cloudsmith.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/datadog_checks/cloudsmith/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/assets/service_checks.json
 [10]: https://help.cloudsmith.io/docs/contact-us#live-chat-via-intercom
-

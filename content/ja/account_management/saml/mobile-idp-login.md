@@ -1,8 +1,6 @@
 ---
-title: The Datadog Mobile App with IdP Initiated SAML
-is_public: true
 aliases:
-  - /account_management/faq/how-do-i-use-the-mobile-app-with-saml/
+- /ja/account_management/faq/how-do-i-use-the-mobile-app-with-saml/
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
@@ -10,6 +8,8 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configuring Teams & Organizations with Multiple Accounts
+is_public: true
+title: The Datadog Mobile App with IdP Initiated SAML
 ---
 
 ## セットアップ
@@ -47,4 +47,4 @@ SAML 用 Google アプリを構成する場合は、Service Provider Details に
 
 Relay State を構成後、ログイン時に `403 Forbidden` エラーが表示される場合は、[サポート][1]にお問い合わせの上、組織にこの機能が有効化されていることをご確認ください。
 
-[1]: /help/
+[1]: /ja/help/

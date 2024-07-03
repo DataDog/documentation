@@ -32,7 +32,7 @@ The following table summarizes the scope of coverage available relative to each 
 
 **注**: CSM Misconfigurations は、さらに、EC2 インスタンス、RDS、S3、ELB など、Windows と AWS Fargate を実行しているクラウドアカウントで使用されている一般的なリソースを監視します。
 
-[1]: /security/cloud_security_management/setup/#csm-threats
-[2]: /security/cloud_security_management/setup/#csm-vulnerabilities
-[3]: /security/cloud_security_management/setup/#csm-identity-risks
-[4]: /security/cloud_security_management/setup/agentless_scanning?tab=crossaccountscanning#prerequisites
+[1]: /ja/security/cloud_security_management/setup/#csm-threats
+[2]: /ja/security/cloud_security_management/setup/#csm-vulnerabilities
+[3]: /ja/security/cloud_security_management/setup/#csm-identity-risks
+[4]: /ja/security/cloud_security_management/setup/agentless_scanning?tab=crossaccountscanning#prerequisites

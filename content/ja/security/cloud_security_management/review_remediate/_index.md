@@ -1,6 +1,6 @@
 ---
-title: Review and Remediate
 disable_toc: true
+title: Review and Remediate
 ---
 
 {{< whatsnext desc="" >}}

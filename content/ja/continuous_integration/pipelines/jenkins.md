@@ -1,17 +1,17 @@
 ---
-title: Set up Tracing on a Jenkins Pipeline
 aliases:
-  - /continuous_integration/setup_pipelines/jenkins
+- /ja/continuous_integration/setup_pipelines/jenkins
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/pipelines/custom_commands/
-      tag: Documentation
-      text: Extend Pipeline Visibility by tracing individual commands
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/pipelines/custom_commands/
+  tag: Documentation
+  text: Extend Pipeline Visibility by tracing individual commands
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+title: Set up Tracing on a Jenkins Pipeline
 ---
 
 {{< site-region region="gov" >}}
@@ -676,7 +676,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 3. [Restart the Agent][101] for the changes to take effect.
 
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[101]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -694,7 +694,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 3. [Restart the Agent][101] for the changes to take effect.
 
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[101]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{% tab "macOS" %}}
@@ -712,7 +712,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 3. [Restart the Agent][101] for the changes to take effect.
 
-[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[101]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -1546,27 +1546,26 @@ Datadog-Plugin Tracer の再初期化に失敗した。Jenkins 起動コマン�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /agent/cluster_agent/admission_controller/
+[1]: /ja/agent/
+[2]: /ja/agent/cluster_agent/admission_controller/
 [3]: https://plugins.jenkins.io/datadog/
 [4]: https://wiki.jenkins-ci.org/display/JENKINS/Plugins#Plugins-Howtoinstallplugins
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
-[10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
-[11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
-[12]: /continuous_integration/pipelines/custom_tags_and_measures/
-[14]: /agent/
-[15]: /account_management/teams/
-[16]: /continuous_integration/tests/
-[17]: /continuous_integration/tests/setup/
-[18]: /tracing/trace_collection/library_config/
+[10]: /ja/continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
+[11]: /ja/continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
+[12]: /ja/continuous_integration/pipelines/custom_tags_and_measures/
+[14]: /ja/agent/
+[15]: /ja/account_management/teams/
+[16]: /ja/continuous_integration/tests/
+[17]: /ja/continuous_integration/tests/setup/
+[18]: /ja/tracing/trace_collection/library_config/
 [19]: https://www.jenkins.io/
-[20]: /glossary/#manual-step
-[21]: /glossary/#queue-time
-[22]: /glossary/#custom-tag
-[23]: /glossary/#custom-measure
-[24]: /glossary/#parameter
-[25]: /glossary/#pipeline-failure
-[26]: /glossary/#custom-span
-
+[20]: /ja/glossary/#manual-step
+[21]: /ja/glossary/#queue-time
+[22]: /ja/glossary/#custom-tag
+[23]: /ja/glossary/#custom-measure
+[24]: /ja/glossary/#parameter
+[25]: /ja/glossary/#pipeline-failure
+[26]: /ja/glossary/#custom-span

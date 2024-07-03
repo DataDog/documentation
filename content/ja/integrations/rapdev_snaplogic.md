@@ -1,85 +1,85 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-snaplogic"
-"app_uuid": "c3f2e4a6-a17f-4b66-b72d-4be62b648fb8"
-"assets":
-  "dashboards":
-    "RapDev SnapLogic Snaplex Dashboard": assets/dashboards/snaplex_dashboard.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": rapdev.snaplogic.snaplex_node.running
-      "metadata_path": metadata.csv
-      "prefix": rapdev.snaplogic.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "6643655"
-    "source_type_name": RapDev SnapLogic
-  "monitors":
-    "Connection to SnapLogic API is Failing": assets/monitors/snaplogic_can_connect.json
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": datadog-engineering@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-snaplogic
+app_uuid: c3f2e4a6-a17f-4b66-b72d-4be62b648fb8
+assets:
+  dashboards:
+    RapDev SnapLogic Snaplex Dashboard: assets/dashboards/snaplex_dashboard.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rapdev.snaplogic.snaplex_node.running
+      metadata_path: metadata.csv
+      prefix: rapdev.snaplogic.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 6643655
+    source_type_name: RapDev SnapLogic
+  monitors:
+    Connection to SnapLogic API is Failing: assets/monitors/snaplogic_can_connect.json
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: datadog-engineering@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
 - developer tools
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_snaplogic"
-"integration_id": "rapdev-snaplogic"
-"integration_title": "SnapLogic"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rapdev_snaplogic"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.rapdev.snaplogic
-  "product_id": snaplogic
-  "short_description": Unit price per snaplex
-  "tag": snaplex_label
-  "unit_label": SnapLogic Snaplexes
-  "unit_price": !!int "10"
-"public_title": "SnapLogic"
-"short_description": "Monitor SnapLogic Pipelines and Snaplexes"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_snaplogic
+integration_id: rapdev-snaplogic
+integration_title: SnapLogic
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_snaplogic
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.snaplogic
+  product_id: snaplogic
+  short_description: Unit price per snaplex
+  tag: snaplex_label
+  unit_label: SnapLogic Snaplexes
+  unit_price: 10
+public_title: SnapLogic
+short_description: Monitor SnapLogic Pipelines and Snaplexes
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Marketplace"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Developer Tools"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Monitor SnapLogic Pipelines and Snaplexes
-  "media":
-  - "caption": SnapLogic Dashboard
-    "image_url": images/dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SnapLogic
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Marketplace
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Developer Tools
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Monitor SnapLogic Pipelines and Snaplexes
+  media:
+  - caption: SnapLogic Dashboard
+    image_url: images/dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SnapLogic
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -106,10 +106,10 @@ Made with ❤️ in Boston
 
 ---
 [1]: mailto:sales@rapdev.io
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439028/Creating+a+User
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#agent-information
 [6]: https://www.rapdev.io/#Get-in-touch
 [7]: mailto:support@rapdev.io
 [8]: https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/The+SnapLogic+Snaplex

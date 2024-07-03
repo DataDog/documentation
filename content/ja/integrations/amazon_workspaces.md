@@ -1,26 +1,27 @@
 ---
-"aliases":
-- "/integrations/awsworkspaces/"
-"categories":
-- "cloud"
-- "aws"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_workspaces/"
-"draft": false
-"git_integration_title": "amazon_workspaces"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon WorkSpaces"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_workspaces"
-"public_title": "Datadog-Amazon WorkSpaces Integration"
-"short_description": "Track failed connections, session latency, unhealthy workspaces, and more."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsworkspaces/
+categories:
+- cloud
+- aws
+- log collection
+custom_kind: インテグレーション
+dependencies: []
+description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_workspaces/
+draft: false
+git_integration_title: amazon_workspaces
+has_logo: true
+integration_id: ''
+integration_title: Amazon WorkSpaces
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_workspaces
+public_title: Datadog-Amazon WorkSpaces Integration
+short_description: Track failed connections, session latency, unhealthy workspaces,
+  and more.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -77,12 +78,11 @@ The Amazon WorkSpaces integration does not include any service checks.
 
 Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-workspaces
-[4]: https://docs.datadoghq.com/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_workspaces/amazon_workspaces_metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

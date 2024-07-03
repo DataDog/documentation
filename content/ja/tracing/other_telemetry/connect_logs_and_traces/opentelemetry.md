@@ -1,25 +1,26 @@
 ---
-title: Correlating OpenTelemetry Traces and Logs
-kind: documentation
-description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
-code_lang: opentelemetry
-type: multi-code-lang
-code_lang_weight: 80
 aliases:
-  - /tracing/connect_logs_and_traces/opentelemetry
+- /ja/tracing/connect_logs_and_traces/opentelemetry
+code_lang: opentelemetry
+code_lang_weight: 80
+description: Connect your application logs and OpenTelemetry traces to correlate them
+  in Datadog
 further_reading:
 - link: /opentelemetry/otel_tracing/
   tag: Documentation
   text: Send OpenTelemetry Traces to Datadog
-- link: "https://opentelemetry.io/docs/collector/"
+- link: https://opentelemetry.io/docs/collector/
   tag: 外部サイト
   text: Collector documentation
-- link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
+- link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   tag: Blog
   text: Datadog's partnership with OpenTelemetry
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Guide
   text: Ease troubleshooting with cross product correlation.
+kind: documentation
+title: Correlating OpenTelemetry Traces and Logs
+type: multi-code-lang
 ---
 
 Connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:
@@ -75,7 +76,7 @@ log.info("Example log line with trace correlation info")
 
 
 [1]: https://www.structlog.org/en/stable/standard-library.html
-[2]: /tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
 {{% /tab %}}
 
@@ -126,7 +127,7 @@ logger.info("Example log line with trace correlation info")
 
 
 [1]: https://github.com/winstonjs/winston
-[2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/node-microservice/logger.js#L86
 {{% /tab %}}
 
@@ -158,7 +159,7 @@ logger.info("Example log line with trace correlation info")
 
 
 [1]: https://ruby-doc.org/stdlib-3.0.0/libdoc/logger/rdoc/index.html
-[2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/ruby-microservice/app.rb#L21-L35
 {{% /tab %}}
 
@@ -183,8 +184,8 @@ See [Java Log Collection][4] on how to send your Java logs to Datadog.
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
 [2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
-[3]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
-[4]: /logs/log_collection/java/?tab=logback
+[3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
+[4]: /ja/logs/log_collection/java/?tab=logback
 {{% /tab %}}
 
 {{% tab "PHP" %}}
@@ -196,8 +197,8 @@ For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] t
 
 
 
-[1]: /tracing/other_telemetry/connect_logs_and_traces/php/
-[2]: /help/
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/php/
+[2]: /ja/help/
 {{% /tab %}}
 
 {{% tab "Go" %}}
@@ -255,7 +256,7 @@ func convertTraceID(id string) string {
 
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /help/
+[2]: /ja/help/
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -286,6 +287,6 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/other_telemetry/connect_logs_and_traces/
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [2]: https://github.com/open-telemetry/opentelemetry-specification/blob/eeef21259a12d61100804eff2e12ba06523821c3/specification/trace/api.md#retrieving-the-traceid-and-spanid
-[3]: /api/latest/tracing/#send-traces
+[3]: /ja/api/latest/tracing/#send-traces

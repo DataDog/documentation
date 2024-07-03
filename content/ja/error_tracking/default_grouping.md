@@ -1,7 +1,7 @@
 ---
-title: Default Grouping
-kind: documentation
 description: Understand how errors are grouped into issues.
+kind: documentation
+title: Default Grouping
 ---
 
 ## Overview

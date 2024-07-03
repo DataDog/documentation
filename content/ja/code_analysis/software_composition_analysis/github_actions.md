@@ -1,7 +1,8 @@
 ---
 dependencies:
-- "https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"
-description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
+- https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md
+description: Use Datadog and GitHub to run Software Composition Analysis jobs in a
+  CI pipeline.
 title: Software Composition Analysis and GitHub Actions
 ---
 Run a Datadog [Software Composition Analysis][1] job in your GitHub Action workflows.
@@ -58,5 +59,5 @@ jobs:
 
 - [Learn about Software Composition Analysis][1]
 
-[1]: https://docs.datadoghq.com/code_analysis/software_composition_analysis
+[1]: https://docs.datadoghq.com/ja/code_analysis/software_composition_analysis
 [2]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository

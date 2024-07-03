@@ -1,9 +1,9 @@
 ---
-title: query value
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - metric
+- metric
+title: query value
 ---
 Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range. This can be supplemented with optional backgrounds of timeseries data. 
 

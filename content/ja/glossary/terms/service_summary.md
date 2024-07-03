@@ -1,10 +1,10 @@
 ---
-title: service summary
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - service
-  - dashboard
+- service
+- dashboard
+title: service summary
 ---
 A service is a set of processes that do the same job, for example, a web framework or database. Datadog provides out-of-the-box graphs to display service information, as seen on the <a href="/tracing/services/service_page/">Service page</a>. 
 

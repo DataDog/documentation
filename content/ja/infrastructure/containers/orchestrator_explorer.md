@@ -1,6 +1,6 @@
 ---
-title: Orchestrator Explorer
 kind: documentation
+title: Orchestrator Explorer
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ex.png" alt="Orchestrator Explorer, showing Kubernetes Pods." style="width:80%;">}}
@@ -63,7 +63,7 @@ Then, upgrade your Helm chart.
 {{% tab "Manual" %}}
 For manual setup, see [Set up Orchestrator Explorer with DaemonSet][5].
 
-[5]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
+[5]: /ja/infrastructure/faq/set-up-orchestrator-explorer-daemonset
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -349,13 +349,13 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][15] for more details.
 
 [1]: https://app.datadoghq.com/orchestration/overview
-[2]: /infrastructure/containers/?tab=datadogoperator#setup
-[9]: /logs
-[10]: /metrics
-[11]: /tracing
-[12]: /events
-[13]: /infrastructure/containers/kubernetes_resource_utilization
+[2]: /ja/infrastructure/containers/?tab=datadogoperator#setup
+[9]: /ja/logs
+[10]: /ja/metrics
+[11]: /ja/tracing
+[12]: /ja/events
+[13]: /ja/infrastructure/containers/kubernetes_resource_utilization
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
-[20]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
+[20]: /ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments
 [25]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 [26]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/

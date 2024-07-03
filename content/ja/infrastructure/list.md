@@ -1,9 +1,7 @@
 ---
-title: Infrastructure List
-kind: documentation
 aliases:
-  - /hostnames
-  - /graphing/infrastructure/list/
+- /ja/hostnames
+- /ja/graphing/infrastructure/list/
 further_reading:
 - link: /infrastructure/hostmap/
   tag: Documentation
@@ -14,6 +12,8 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentation
   text: Live Process Monitoring
+kind: documentation
+title: Infrastructure List
 ---
 
 ## Overview
@@ -146,13 +146,13 @@ for host in infra['rows']:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/how-datadog-agent-determines-the-hostname/
-[2]: /getting_started/tagging/
-[3]: /metrics/
-[4]: /infrastructure/livecontainers/?tab=helm#overview
-[5]: /logs/
-[6]: /agent/configuration/agent-configuration-files/
-[7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
-[8]: /developers/guide/query-the-infrastructure-list-via-the-api/
+[1]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/
+[2]: /ja/getting_started/tagging/
+[3]: /ja/metrics/
+[4]: /ja/infrastructure/livecontainers/?tab=helm#overview
+[5]: /ja/logs/
+[6]: /ja/agent/configuration/agent-configuration-files/
+[7]: /ja/api/v1/hosts/#get-the-total-number-of-active-hosts
+[8]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure

@@ -1,7 +1,8 @@
 ---
-title: Partner Sales Enablement Guide
-description: "A training roadmap for a new MSP to be ready to lead a Datadog sales engineering process"
+description: A training roadmap for a new MSP to be ready to lead a Datadog sales
+  engineering process
 private: true
+title: Partner Sales Enablement Guide
 ---
 Datadog パートナーネットワークでは、パートナー向けに多くのリソースを提供しています。これは、セールスエンジニア、ソリューションアーキテクト、テクニカルアカウントマネージャーなど、パートナー組織で Datadog の販売に技術的な側面から関わっている人向けのトレーニングの案内です。
 
@@ -77,5 +78,5 @@ Datadog 販売認定を取得し、Datadog の基礎知識を身につけたら�
 
 [1]: https://partners.datadoghq.com/
 [2]: https://learn.datadoghq.com/bundles/dd-fundamentals
-[3]: /account_management/billing/pricing/
+[3]: /ja/account_management/billing/pricing/
 [4]: https://www.datadoghq.com/pricing/

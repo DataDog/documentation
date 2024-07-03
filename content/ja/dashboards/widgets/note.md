@@ -1,13 +1,13 @@
 ---
-title: Notes and Links Widget
-widget_type: note
-description: "Display text in a dashboard widget."
 aliases:
-- /graphing/widgets/note/
+- /ja/graphing/widgets/note/
+description: Display text in a dashboard widget.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Learn how to build dashboards using JSON
+title: Notes and Links Widget
+widget_type: note
 ---
 
 **Notes & Links** ウィジェットは、[フリーテキストウィジェット][1]と似ていますが、より多くのフォーマットと表示オプションが含まれています。
@@ -43,6 +43,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/free_text/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/widgets/free_text/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

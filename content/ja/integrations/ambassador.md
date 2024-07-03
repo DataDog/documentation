@@ -1,64 +1,66 @@
 ---
-"app_id": "ambassador"
-"app_uuid": "eb591405-8cda-486a-8cf5-a06af769a3d7"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "envoy.listener.downstream_cx_total"
-      "metadata_path": "metadata.csv"
-      "prefix": "envoy."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10010"
-    "source_type_name": "Ambassador"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Ambassador"
-  "sales_email": "hello@datawire.io"
-  "support_email": "hello@datawire.io"
-"categories":
-- "cloud"
-- "containers"
-- "kubernetes"
-- "orchestration"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "ambassador"
-"integration_id": "ambassador"
-"integration_title": "Ambassador API Gateway"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "ambassador"
-"public_title": "Ambassador API Gateway"
-"short_description": "Ambassador is an open source, Kubernetes-native API Gateway built on Envoy"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Containers"
-  - "Category::Kubernetes"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "Ambassador is an open source, Kubernetes-native API Gateway built on Envoy"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Ambassador API Gateway"
+app_id: ambassador
+app_uuid: eb591405-8cda-486a-8cf5-a06af769a3d7
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: envoy.listener.downstream_cx_total
+      metadata_path: metadata.csv
+      prefix: envoy.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10010
+    source_type_name: Ambassador
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Ambassador
+  sales_email: hello@datawire.io
+  support_email: hello@datawire.io
+categories:
+- cloud
+- containers
+- kubernetes
+- orchestration
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: ambassador
+integration_id: ambassador
+integration_title: Ambassador API Gateway
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: ambassador
+public_title: Ambassador API Gateway
+short_description: Ambassador is an open source, Kubernetes-native API Gateway built
+  on Envoy
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Ambassador is an open source, Kubernetes-native API Gateway built on
+    Envoy
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Ambassador API Gateway
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -114,5 +116,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://www.getambassador.io/docs/edge-stack/latest/topics/running/statistics/envoy-statsd/
 [4]: https://www.getambassador.io/docs/latest/howtos/tracing-datadog/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

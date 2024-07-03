@@ -1,11 +1,9 @@
 ---
-title: Roku Crash Reporting and Error Tracking
-description: Set up Error Tracking for your Roku channels.
 aliases:
-- /real_user_monitoring/error_tracking/roku
-type: multi-code-lang
+- /ja/real_user_monitoring/error_tracking/roku
 code_lang: roku
 code_lang_weight: 50
+description: Set up Error Tracking for your Roku channels.
 further_reading:
 - link: /real_user_monitoring/error_tracking/
   tag: ドキュメント
@@ -13,6 +11,8 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: Visualize Error Tracking data in the Explorer
+title: Roku Crash Reporting and Error Tracking
+type: multi-code-lang
 ---
 
 {{< site-region region="gov" >}}
@@ -74,9 +74,9 @@ To test your implementation:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
 [4]: https://github.com/DataDog/dd-sdk-roku
-[5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters
 
 
 ## その他の参考資料

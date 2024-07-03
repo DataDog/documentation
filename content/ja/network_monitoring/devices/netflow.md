@@ -1,16 +1,16 @@
 ---
-title: NetFlow Monitoring
-is_beta: true
 further_reading:
 - link: /network_monitoring/devices/profiles
   tag: Documentation
   text: Using Profiles with Network Device Monitoring
-- link: "https://www.datadoghq.com/blog/monitor-netflow-with-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
   tag: Blog
   text: Monitor NetFlow traffic data with Datadog
-- link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
+- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: Blog
   text: Monitor and diagnose network performance issues with SNMP Traps
+is_beta: true
+title: NetFlow Monitoring
 ---
 
 ## 概要
@@ -50,7 +50,7 @@ network_devices:
 
 ## 集計
 
-The Datadog Agent automatically aggregates the received NetFlow data in order to limit the number of records sent to the platform while maintaining most of the information. By default there is a five-minute aggregation interval, during which flow recordings which share the same identifying information (source and destination address and port, protocol, and so forth) are aggregated together. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
+The Datadog Agent automatically aggregates the data received into NetFlow to limit the number of records sent to the platform while maintaining most of the information. By default, flow recordings that have the same identifiers, such as `source`, `destination address`, `port`, and `protocol`, are aggregated together in five minute intervals. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
 
 ## リッチ化
 
@@ -213,8 +213,8 @@ NetFlow data is retained for 30 days by default, with options for 15, 30, 60, an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /network_monitoring/devices/snmp_metrics/
-[3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[4]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[2]: /ja/network_monitoring/devices/snmp_metrics/
+[3]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[4]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://app.datadoghq.com/devices/netflow
-[6]: /monitors/types/netflow/
+[6]: /ja/monitors/types/netflow/

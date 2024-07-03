@@ -1,57 +1,57 @@
 ---
-"app_id": "unifi-console"
-"app_uuid": "224a050d-7ed3-4e7a-ada6-410f61393fc0"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": unifi.device.status
-      "metadata_path": metadata.csv
-      "prefix": unifi.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10298"
-    "source_type_name": Unifi Console
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": antonin.bruneau@gmail.com
-  "support_email": antonin.bruneau@gmail.com
-"categories": []
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/unifi_console/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "unifi_console"
-"integration_id": "unifi-console"
-"integration_title": "Unifi Console"
-"integration_version": "1.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "unifi_console"
-"public_title": "Unifi Console"
-"short_description": "This check collects metrics from the Unifi Controller"
-"supported_os":
+app_id: unifi-console
+app_uuid: 224a050d-7ed3-4e7a-ada6-410f61393fc0
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: unifi.device.status
+      metadata_path: metadata.csv
+      prefix: unifi.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10298
+    source_type_name: Unifi Console
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: antonin.bruneau@gmail.com
+  support_email: antonin.bruneau@gmail.com
+categories: []
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/unifi_console/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: unifi_console
+integration_id: unifi-console
+integration_title: Unifi Console
+integration_version: 1.2.0
+is_public: true
+manifest_version: 2.0.0
+name: unifi_console
+public_title: Unifi Console
+short_description: This check collects metrics from the Unifi Controller
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  "configuration": "README.md#Setup"
-  "description": This check collects metrics from the Unifi Controller
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Troubleshooting"
-  "title": Unifi Console
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: This check collects metrics from the Unifi Controller
+  media: []
+  overview: README.md#Overview
+  support: README.md#Troubleshooting
+  title: Unifi Console
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -109,12 +109,11 @@ Need help? Contact [Datadog support][10].
 
 [1]: https://ui.com/consoles
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/getting_started/integrations/
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/unifi_console/datadog_checks/unifi_console/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/unifi_console/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/unifi_console/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
-
+[10]: https://docs.datadoghq.com/ja/help/

@@ -1,14 +1,14 @@
 ---
-title: Set up Tracing on Codefresh Pipelines
 aliases:
-  - /continuous_integration/setup_pipelines/codefresh
+- /ja/continuous_integration/setup_pipelines/codefresh
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+title: Set up Tracing on Codefresh Pipelines
 ---
 
 {{< site-region region="gov" >}}
@@ -57,7 +57,7 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: https://codefresh.io/docs/docs/codefresh-yaml/variables/#user-provided-variables
-[7]: /glossary/#partial-retry
-[8]: /glossary/#manual-step
-[9]: /glossary/#parameter
-[10]: /glossary/#pipeline-failure
+[7]: /ja/glossary/#partial-retry
+[8]: /ja/glossary/#manual-step
+[9]: /ja/glossary/#parameter
+[10]: /ja/glossary/#pipeline-failure

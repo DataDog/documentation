@@ -1,90 +1,90 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-swiftmq"
-"app_uuid": "93738439-2cde-4718-a7f6-004f2da0177e"
-"assets":
-  "dashboards":
-    "RapDev SwiftMQ Summary": assets/dashboards/summary.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": rapdev.swiftmq.env
-      "metadata_path": metadata.csv
-      "prefix": rapdev.swiftmq
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10378"
-    "source_type_name": RapDev SwiftMQ
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-swiftmq
+app_uuid: 93738439-2cde-4718-a7f6-004f2da0177e
+assets:
+  dashboards:
+    RapDev SwiftMQ Summary: assets/dashboards/summary.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rapdev.swiftmq.env
+      metadata_path: metadata.csv
+      prefix: rapdev.swiftmq
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10378
+    source_type_name: RapDev SwiftMQ
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - message queues
 - marketplace
 - モニター
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_swiftmq"
-"integration_id": "rapdev-swiftmq"
-"integration_title": "SwiftMQ"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rapdev_swiftmq"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.rapdev.swiftmq
-  "product_id": swiftmq
-  "short_description": Unit price per instance.
-  "tag": swiftmq_endpoint
-  "unit_label": SwiftMQ Instance
-  "unit_price": !!int "10"
-"public_title": "SwiftMQ"
-"short_description": "Monitor the health and activity of your SwiftMQ instances"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_swiftmq
+integration_id: rapdev-swiftmq
+integration_title: SwiftMQ
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_swiftmq
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.swiftmq
+  product_id: swiftmq
+  short_description: Unit price per instance.
+  tag: swiftmq_endpoint
+  unit_label: SwiftMQ Instance
+  unit_price: 10
+public_title: SwiftMQ
+short_description: Monitor the health and activity of your SwiftMQ instances
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Message Queues"
-  - "Category::Marketplace"
-  - "Category::Metrics"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and activity of your SwiftMQ instances
-  "media":
-  - "caption": SwiftMQ Summary Dashboard (1/3)
-    "image_url": images/swiftmq_dash_one.png
-    "media_type": image
-  - "caption": SwiftMQ Summary Dashboard (2/3)
-    "image_url": images/swiftmq_dash_two.png
-    "media_type": image
-  - "caption": SwiftMQ Summary Dashboard (3/3)
-    "image_url": images/swiftmq_dash_three.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SwiftMQ
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Message Queues
+  - Category::Marketplace
+  - Category::Metrics
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Monitor the health and activity of your SwiftMQ instances
+  media:
+  - caption: SwiftMQ Summary Dashboard (1/3)
+    image_url: images/swiftmq_dash_one.png
+    media_type: image
+  - caption: SwiftMQ Summary Dashboard (2/3)
+    image_url: images/swiftmq_dash_two.png
+    media_type: image
+  - caption: SwiftMQ Summary Dashboard (3/3)
+    image_url: images/swiftmq_dash_three.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SwiftMQ
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -119,7 +119,7 @@ Made with ❤️ in Boston
 [6]: https://www.flowdirector.io/apps/prometheus/swiftmqprometheus/
 [7]: https://help.flowdirector.io/spma/install-the-app
 [8]: https://help.flowdirector.io/spma/quick-setup
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 
 ---
 This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/rapdev-swiftmq" target="_blank">Click Here</a> to purchase this application.

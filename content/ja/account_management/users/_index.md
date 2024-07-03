@@ -1,8 +1,7 @@
 ---
-title: User Management
-description: "Add or remove users in your organization. Modify user roles."
 aliases:
- - /account_management/team/
+- /ja/account_management/team/
+description: Add or remove users in your organization. Modify user roles.
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
@@ -16,6 +15,7 @@ further_reading:
 - link: /api/v1/users/
   tag: Documentation
   text: Manage your users with the USER API
+title: User Management
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
@@ -86,5 +86,5 @@ Datadog Admin Role などの User Access Management アクセス許可を持つ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/users/default_roles/
-[2]: /account_management/rbac/
+[1]: /ja/account_management/users/default_roles/
+[2]: /ja/account_management/rbac/

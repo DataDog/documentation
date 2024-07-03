@@ -1,9 +1,8 @@
 ---
-title: Testing and Deployment Dashboards
-description: Learn about the out-of-the-box RUM testing and deployment dashboards.
 aliases:
-- /real_user_monitoring/dashboards/testing_coverage
-- /real_user_monitoring/platform/dashboards/testing_coverage
+- /ja/real_user_monitoring/dashboards/testing_coverage
+- /ja/real_user_monitoring/platform/dashboards/testing_coverage
+description: Learn about the out-of-the-box RUM testing and deployment dashboards.
 further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
@@ -11,9 +10,10 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentation
   text: Learn about Synthetic browser tests
-- link: "https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/"
+- link: https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/
   tag: Blog
   text: Track your test coverage with RUM and Synthetic Monitoring
+title: Testing and Deployment Dashboards
 ---
 
 ## テストカバレッジ
@@ -75,10 +75,10 @@ RUM モバイルアプリデプロイ追跡ダッシュボードは、最近の�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dash/integration/30697/synthetics---browser-test-performance
-[2]: /real_user_monitoring/browser/data_collected/
-[3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/browser/setup/#initialization-parameters
-[5]: /real_user_monitoring/ios/data_collected/
-[6]: /real_user_monitoring/android/data_collected/
-[7]: /real_user_monitoring/reactnative/data_collected/
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[2]: /ja/real_user_monitoring/browser/data_collected/
+[3]: /ja/synthetics/browser_tests/
+[4]: /ja/real_user_monitoring/browser/setup/#initialization-parameters
+[5]: /ja/real_user_monitoring/ios/data_collected/
+[6]: /ja/real_user_monitoring/android/data_collected/
+[7]: /ja/real_user_monitoring/reactnative/data_collected/
+[8]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter

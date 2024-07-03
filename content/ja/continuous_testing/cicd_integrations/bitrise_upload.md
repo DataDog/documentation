@@ -1,7 +1,6 @@
 ---
 dependencies:
-- "https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"
-kind: documentation
+- https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md
 title: Continuous Testing and Bitrise
 ---
 ![GitHub Release](https://img.shields.io/github/v/release/DataDog/synthetics-test-automation-bitrise-step-upload-application)
@@ -104,17 +103,17 @@ For reference, this is an example of a complete configuration:
 
 <!-- Links to Marketplace -->
 [1]: https://bitrise.io/integrations/steps/datadog-mobile-app-upload
-[2]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#run-tests
+[2]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#run-tests
 [3]: https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps/adding-steps-to-a-workflow.html
 [4]: https://devcenter.bitrise.io/en/builds/secrets.html#setting-a-secret
 [5]: https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps/step-inputs.html
 [6]: https://github.com/bitrise-io/bitrise
 [7]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
-[8]: https://docs.datadoghq.com/account_management/api-app-keys/
-[9]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[8]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[9]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
 [10]: https://bitrise.io/integrations/steps/datadog-mobile-app-run-tests
-[11]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration
+[11]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration
 [12]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
-[13]: https://docs.datadoghq.com/getting_started/continuous_testing/
-[14]: https://docs.datadoghq.com/getting_started/site/
-[15]: https://docs.datadoghq.com/synthetics/mobile_app_testing/
+[13]: https://docs.datadoghq.com/ja/getting_started/continuous_testing/
+[14]: https://docs.datadoghq.com/ja/getting_started/site/
+[15]: https://docs.datadoghq.com/ja/synthetics/mobile_app_testing/

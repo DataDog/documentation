@@ -1,15 +1,13 @@
 ---
-title: DORA メトリクス
-kind: documentation
-description: Learn how to use DORA metrics to measure and improve your organization's software delivery processes.
 aliases:
-- /continuous_integration/dora_metrics
-is_beta: true
+- /ja/continuous_integration/dora_metrics
+description: Learn how to use DORA metrics to measure and improve your organization's
+  software delivery processes.
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: Release Notes
   text: Check out the latest Software Delivery releases! (App login required)
-- link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
+- link: https://www.datadoghq.com/blog/dora-metrics-software-delivery/
   tag: ブログ
   text: Best practices for using DORA metrics to improve software delivery
 - link: /continuous_delivery/deployments
@@ -24,6 +22,9 @@ further_reading:
 - link: /service_catalog
   tag: ドキュメント
   text: Learn about the Service Catalog
+is_beta: true
+kind: documentation
+title: DORA メトリクス
 ---
 
 {{< site-region region="gov" >}}
@@ -83,8 +84,8 @@ Click the **Export** icon on any visualization to add it to an incident, dashboa
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/knowledge-center/dora-metrics/
-[2]: /dora_metrics/setup/
-[3]: /dora_metrics/data_collected/
+[2]: /ja/dora_metrics/setup/
+[3]: /ja/dora_metrics/data_collected/
 [4]: https://app.datadoghq.com/ci/dora
-[5]: /monitors/types/metric/?tab=threshold
-[6]: /monitors/
+[5]: /ja/monitors/types/metric/?tab=threshold
+[6]: /ja/monitors/

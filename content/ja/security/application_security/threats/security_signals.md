@@ -1,15 +1,15 @@
 ---
-title: Investigate Security Signals
 further_reading:
-  - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
-    tag: Documentation
-    text: Explore ASM threat detection OOTB rules
-  - link: /security/application_security/threats/custom_rules/
-    tag: Documentation
-    text: Configure custom ASM threat detection rules
-  - link: /security/application_security/threats/threat-intelligence/
-    tag: Documentation
-    text: ASM threat intelligence
+- link: /security/default_rules/?category=cat-application-security#cat-application-security
+  tag: Documentation
+  text: Explore ASM threat detection OOTB rules
+- link: /security/application_security/threats/custom_rules/
+  tag: Documentation
+  text: Configure custom ASM threat detection rules
+- link: /security/application_security/threats/threat-intelligence/
+  tag: Documentation
+  text: ASM threat intelligence
+title: Investigate Security Signals
 ---
 
 ## 概要
@@ -81,11 +81,11 @@ Use [Case Management][6] to track, triage, and investigate security signals.
 
 [1]: https://app.datadoghq.com/services?lens=Security
 [2]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&viz=stream&start=1694726477747&end=1695331277747&paused=false
-[4]: /service_management/incident_management/
-[5]: /service_management/workflows/
-[6]: /service_management/case_management/
+[4]: /ja/service_management/incident_management/
+[5]: /ja/service_management/workflows/
+[6]: /ja/service_management/case_management/
 [7]: https://app.datadoghq.com/security/appsec?
-[8]: /security/notifications/rules/
-[9]: /account_management/rbac/permissions/#cloud-security-platform
-[10]: /security/application_security/threats/protection/#respond-to-threats-in-real-time-by-automating-attacker-blocking
-[11]: /security/application_security/threats/protection/#blocking-attack-attempts-with-in-app-waf
+[8]: /ja/security/notifications/rules/
+[9]: /ja/account_management/rbac/permissions/#cloud-security-platform
+[10]: /ja/security/application_security/threats/protection/#respond-to-threats-in-real-time-by-automating-attacker-blocking
+[11]: /ja/security/application_security/threats/protection/#blocking-attack-attempts-with-in-app-waf

@@ -1,7 +1,7 @@
 ---
-title: Partners
-description: "Getting started with Datadog for Sales & Services Partners"
+description: Getting started with Datadog for Sales & Services Partners
 private: true
+title: Partners
 ---
 
 Datadog は、クライアントのハイブリッドクラウドインフラストラクチャーとアプリケーションに対するインサイトを提供します。直感的な UI と強力な API により、クライアントの多様な環境のオンボード、プロビジョニング、管理を実現し、各アカウントのデータセキュリティを確立することができます。
@@ -69,11 +69,11 @@ Datadog の最新情報を入手するためのその他の重要なリソース
 
 {{< /whatsnext >}}
 
-[1]: /partners/laying-the-groundwork/
-[2]: /partners/data-intake/
-[3]: /partners/delivering-value/
-[4]: /partners/billing-and-usage-reporting/
-[5]: /partners/sales-enablement/
+[1]: /ja/partners/laying-the-groundwork/
+[2]: /ja/partners/data-intake/
+[3]: /ja/partners/delivering-value/
+[4]: /ja/partners/billing-and-usage-reporting/
+[5]: /ja/partners/sales-enablement/
 [6]: https://app.datadoghq.com/release-notes
 [7]: https://partners.datadoghq.com/
 [8]: https://datadogon.datadoghq.com/

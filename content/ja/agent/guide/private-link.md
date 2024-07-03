@@ -1,12 +1,12 @@
 ---
-title: Connect to Datadog over AWS PrivateLink
 further_reading:
-    - link: /agent/logs
-      tag: Documentation
-      text: Enable log collection with the Agent
-    - link: "/integrations/amazon_web_services/#log-collection"
-      tag: Documentation
-      text: Collect logs from your AWS services
+- link: /agent/logs
+  tag: Documentation
+  text: Enable log collection with the Agent
+- link: /integrations/amazon_web_services/#log-collection
+  tag: Documentation
+  text: Collect logs from your AWS services
+title: Connect to Datadog over AWS PrivateLink
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
@@ -94,11 +94,11 @@ Datadog は、**{{< region-param key="aws_region" >}}** の AWS PrivateLink エ�
 
 
 
-[1]: /help/
-[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[1]: /ja/help/
+[2]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[3]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-[5]: /agent/configuration/agent-commands/#restart-the-agent
+[5]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 
 {{% tab "VPC ピアリングを使用した他のリージョンからの接続" %}}
@@ -236,15 +236,15 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 3. [Agent を再起動します][7]。
 
 
-[1]: /help/
+[1]: /ja/help/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html
 [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html
 [4]: https://docs.aws.amazon.com/vpc/latest/privatelink/view-vpc-endpoint-service-dns-name.html
 [5]: https://docs.amazonaws.cn/en_us/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
 [6]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html#hosted-zone-private-considerations-vpc-settings
-[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[7]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[9]: https://docs.datadoghq.com/ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [10]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 {{% /tab %}}
 {{< /tabs >}}

@@ -1,7 +1,9 @@
 ---
-title: Amazon ECS
+algolia:
+  tags:
+  - ecs
 aliases:
-  - /agent/amazon_ecs/
+- /ja/agent/amazon_ecs/
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: Documentation
@@ -9,17 +11,16 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: Documentation
   text: Collect your application traces
-- link: "/agent/amazon_ecs/data_collected/#metrics"
+- link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentation
   text: Collect ECS metrics
-- link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
+- link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: Blog
   text: Announcing support for Amazon ECS Anywhere
-- link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
   tag: blog
   text: Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management
-algolia:
-  tags: [ecs]
+title: Amazon ECS
 ---
 
 ## 概要
@@ -396,7 +397,7 @@ To send data to the Datadog for Government site, add the `fips-proxy` sidecar co
    "family": "datadog-agent-task"
 }
 ```
-[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
+[1]: https://docs.datadoghq.com/ja/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /site-region %}}
 
 ## トラブルシューティング
@@ -408,19 +409,19 @@ To send data to the Datadog for Government site, add the `fips-proxy` sidecar co
 {{< partial name="whats-next/whats-next.html" >}}
 
 [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-ec2-cluster-console-v2.html
-[5]: https://docs.datadoghq.com/agent/autodiscovery/
-[6]: /containers/amazon_ecs/apm/
-[7]: /containers/amazon_ecs/logs/
-[8]: /developers/dogstatsd/?tab=containeragent
+[5]: https://docs.datadoghq.com/ja/agent/autodiscovery/
+[6]: /ja/containers/amazon_ecs/apm/
+[7]: /ja/containers/amazon_ecs/logs/
+[8]: /ja/developers/dogstatsd/?tab=containeragent
 [9]: https://aws.amazon.com/cli
 [10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
-[11]: https://docs.datadoghq.com/help/
-[12]: https://docs.datadoghq.com/containers/docker/integrations/?tab=docker
-[13]: /getting_started/site/
+[11]: https://docs.datadoghq.com/ja/help/
+[12]: https://docs.datadoghq.com/ja/containers/docker/integrations/?tab=docker
+[13]: /ja/getting_started/site/
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
-[17]: /containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
+[17]: /ja/containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
 [20]: /resources/json/datadog-agent-ecs.json
 [21]: /resources/json/datadog-agent-ecs1.json
 [22]: /resources/json/datadog-agent-ecs-win.json

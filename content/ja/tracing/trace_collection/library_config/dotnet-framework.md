@@ -1,40 +1,40 @@
 ---
-title: Configuring the .NET Framework Tracing Library
-kind: documentation
 code_lang: dotnet-framework
-type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-  - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-    tag: Documentation
-    text: Connect .NET application logs to traces
-  - link: /tracing/metrics/runtime_metrics/dotnet/
-    tag: Documentation
-    text: Runtime metrics
-  - link: /tracing/trace_collection/trace_context_propagation/dotnet/
-    tag: Documentation
-    text: Propagating trace context
-  - link: /serverless/azure_app_services/
-    tag: Documentation
-    text: Microsoft Azure App Service extension
-  - link: /tracing/glossary/
-    tag: Documentation
-    text: Explore your services, resources, and traces
-  - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
-    tag: Blog
-    text: .NET monitoring with Datadog APM and distributed tracing
-  - link: "https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/"
-    tag: Blog
-    text: Monitor containerized ASP.NET Core applications
-  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/"
-    tag: Blog
-    text: Monitor containerized ASP.NET Core applications on AWS Fargate
-  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: ソースコード
-    text: Examples of custom instrumentation
-  - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: ソースコード
-    text: Source code
+- link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
+  tag: Documentation
+  text: Connect .NET application logs to traces
+- link: /tracing/metrics/runtime_metrics/dotnet/
+  tag: Documentation
+  text: Runtime metrics
+- link: /tracing/trace_collection/trace_context_propagation/dotnet/
+  tag: Documentation
+  text: Propagating trace context
+- link: /serverless/azure_app_services/
+  tag: Documentation
+  text: Microsoft Azure App Service extension
+- link: /tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/net-monitoring-apm/
+  tag: Blog
+  text: .NET monitoring with Datadog APM and distributed tracing
+- link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
+  tag: Blog
+  text: Monitor containerized ASP.NET Core applications
+- link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
+  tag: Blog
+  text: Monitor containerized ASP.NET Core applications on AWS Fargate
+- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
+  tag: ソースコード
+  text: Examples of custom instrumentation
+- link: https://github.com/DataDog/dd-trace-dotnet
+  tag: ソースコード
+  text: Source code
+kind: documentation
+title: Configuring the .NET Framework Tracing Library
+type: multi-code-lang
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
@@ -49,7 +49,7 @@ You can set configuration settings in the .NET Tracer with any of the following 
 
 To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
 
-[1]: /tracing/trace_collection/dd_libraries/dotnet-framework/#configuring-process-environment-variables
+[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/#configuring-process-environment-variables
 
 {{% /tab %}}
 
@@ -334,19 +334,19 @@ The following configuration variables are for features that are available for us
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /tracing/trace_pipeline/ingestion_mechanisms/
-[4]: /getting_started/tagging/unified_service_tagging/
-[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#head-based-sampling
-[7]: /tracing/trace_collection/compatibility/dotnet-framework/#integrations
-[8]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[3]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[4]: /ja/getting_started/tagging/unified_service_tagging/
+[5]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#head-based-sampling
+[7]: /ja/tracing/trace_collection/compatibility/dotnet-framework/#integrations
+[8]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
-[12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[13]: /agent/configuration/network/#configure-ports
-[14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
-[15]: /tracing/configure_data_security#telemetry-collection
-[16]: /agent/remote_config/
+[12]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[13]: /ja/agent/configuration/network/#configure-ports
+[14]: /ja/tracing/configure_data_security/#redacting-the-query-in-the-url
+[15]: /ja/tracing/configure_data_security#telemetry-collection
+[16]: /ja/agent/remote_config/
 [17]: https://app.datadoghq.com/services
-[18]: /tracing/trace_collection/otel_instrumentation/dotnet/
-[19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
+[18]: /ja/tracing/trace_collection/otel_instrumentation/dotnet/
+[19]: /ja/tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations

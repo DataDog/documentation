@@ -1,20 +1,20 @@
 ---
-title: Enabling the Python Profiler
+aliases:
+- /ja/tracing/profiler/enabling/python/
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profile_visualizations
-      tag: Documentation
-      text: Learn more about available profile visualizations
-    - link: profiler/profiler_troubleshooting/python
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
-aliases:
-  - /tracing/profiler/enabling/python/
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profile_visualizations
+  tag: Documentation
+  text: Learn more about available profile visualizations
+- link: profiler/profiler_troubleshooting/python
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+title: Enabling the Python Profiler
+type: multi-code-lang
 ---
 
 プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
@@ -124,14 +124,14 @@ Python プロファイラーはコードプロベナンスレポートをサポ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
+[1]: /ja/tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[4]: /integrations/guide/source-code-integration/?tab=python
+[4]: /ja/integrations/guide/source-code-integration/?tab=python
 [5]: https://app.datadoghq.com/profiling
 [6]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
-[7]: /getting_started/profiler/
-[8]: /profiler/profile_types/?code-lang=python
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
-[14]: /profiler/enabling/supported_versions/
+[7]: /ja/getting_started/profiler/
+[8]: /ja/profiler/profile_types/?code-lang=python
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/

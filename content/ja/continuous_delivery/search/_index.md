@@ -1,10 +1,10 @@
 ---
-title: Search and Manage Deployments 
 description: Learn how to search and manage your deployments.
 further_reading:
 - link: /continuous_delivery/explorer
   tag: Documentation
   text: Search and filter pipeline executions
+title: Search and Manage Deployments
 ---
 
 {{< site-region region="gov" >}}

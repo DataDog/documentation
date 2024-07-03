@@ -1,5 +1,5 @@
 ---
-title: "Block Blob Component"
+title: Block Blob Component
 ---
 
 ## 概要

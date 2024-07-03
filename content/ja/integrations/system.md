@@ -1,27 +1,28 @@
 ---
+aliases:
+- /ja/integrations/system_swap/
+- /ja/integrations/system_core/
+categories:
+- os & system
+- configuration & deployment
+custom_kind: integration
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md
+description: 'Track system resource usage: CPU, memory, disk, filesystem, and more.'
+git_integration_title: system
+integration_id: システム
 integration_title: System Check
+is_public: true
 name: system
 newhlevel: true
-custom_kind: integration
-git_integration_title: system
-updated_for_agent: 5.8.5
-description: 'Track system resource usage: CPU, memory, disk, filesystem, and more.'
-is_public: true
 public_title: Datadog-System Integration
-short_description: 'Track system resource usage: CPU, memory, disk, filesystem, and more.'
-categories:
-    - os & system
-    - configuration & deployment
-aliases:
-    - /integrations/system_swap/
-    - /integrations/system_core/
+short_description: 'Track system resource usage: CPU, memory, disk, filesystem, and
+  more.'
 supported_os:
-    - linux
-    - mac_os
-    - windows
-dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md']
-integration_id: "システム"
+- linux
+- mac_os
+- windows
+updated_for_agent: 5.8.5
 ---
 
 ## 概要
@@ -139,11 +140,11 @@ System スワップチェックには、イベントは含まれません。
 
 System スワップチェックには、サービスのチェック機能は含まれません。
 
-[1]: /integrations/directory/
-[2]: /integrations/disk/
-[3]: /integrations/process/
-[4]: /agent/guide/agent-commands/#agent-status-and-information
-[5]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /ja/integrations/directory/
+[2]: /ja/integrations/disk/
+[3]: /ja/integrations/process/
+[4]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
-[7]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 [8]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example

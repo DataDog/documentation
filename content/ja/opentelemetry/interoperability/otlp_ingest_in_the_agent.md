@@ -1,12 +1,11 @@
 ---
-title: Datadog Agent による OTLP の取り込み
 aliases:
-  - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
-  - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
-  - /opentelemetry/otlp_ingest_in_the_agent/
-description: 'Ingest OTLP trace data through the Datadog Agent'
+- /ja/tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
+- /ja/tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
+- /ja/opentelemetry/otlp_ingest_in_the_agent/
+description: Ingest OTLP trace data through the Datadog Agent
 further_reading:
-- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
+- link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/
   tag: Blog
   text: OTLP ingestion in the Agent
 - link: /metrics/open_telemetry/otlp_metric_types
@@ -15,6 +14,7 @@ further_reading:
 - link: /opentelemetry/runtime_metrics/
   tag: Documentation
   text: OpenTelemetry Runtime Metrics
+title: Datadog Agent による OTLP の取り込み
 ---
 
 
@@ -82,7 +82,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    ```
 
 [1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
-[2]: /agent/logs/
+[2]: /ja/agent/logs/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -96,7 +96,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    - Set `DD_LOGS_ENABLED` to true.
    - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
 
-[1]: /agent/docker/
+[1]: /ja/agent/docker/
 {{% /tab %}}
 {{% tab "Kubernetes (Daemonset)" %}}
 
@@ -149,8 +149,8 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    value: "true"
    ```
 
-[1]: /agent/kubernetes/?tab=daemonset
-[2]: /containers/guide/kubernetes_daemonset/#log-collection
+[1]: /ja/agent/kubernetes/?tab=daemonset
+[2]: /ja/containers/guide/kubernetes_daemonset/#log-collection
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm) - values.yaml" %}}
@@ -180,7 +180,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
 これは、各プロトコルをデフォルトのポート (OTLP/gRPC は `4317`、OTLP/HTTP は `4318`) で有効にするものです。
 
 
-[1]: /agent/kubernetes/?tab=helm
+[1]: /ja/agent/kubernetes/?tab=helm
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm) - set" %}}
@@ -200,7 +200,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
 
 これは、各プロトコルをデフォルトのポート (OTLP/gRPC は `4317`、OTLP/HTTP は `4318`) で有効にするものです。
 
-[1]: /agent/kubernetes/?tab=helm
+[1]: /ja/agent/kubernetes/?tab=helm
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -218,7 +218,7 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
 
 2. 両方のコンテナが同じブリッジネットワークに定義されている必要がありますが、これは Docker Compose を使用している場合に自動的に処理されます。そうでない場合は、[Docker アプリケーションのトレース][1]の Docker の例に従って、正しいポートでブリッジネットワークをセットアップしてください。
 
-[1]: /agent/docker/apm/#docker-network
+[1]: /ja/agent/docker/apm/#docker-network
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -257,9 +257,9 @@ env:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/
-[2]: /metrics/open_telemetry/otlp_metric_types/
+[2]: /ja/metrics/open_telemetry/otlp_metric_types/
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
-[10]: /opentelemetry/runtime_metrics/
+[10]: /ja/opentelemetry/runtime_metrics/

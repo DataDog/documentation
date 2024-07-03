@@ -1,5 +1,5 @@
 ---
-title: "Elasticsearch Component"
+title: Elasticsearch Component
 ---
 ## 概要
 
@@ -130,6 +130,6 @@ micro、small、medium、large、xlarge、2xlarge、4xlarge、8xlarge、9xlarge�
 - **purchaseOption: 文字列**: インスタンスの購入オプション。許容される値は `No Upfront`、`Partial Upfront`、および `All Upfront` です。
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/security-group/
-[4]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/security-group/
+[4]: /ja/cloudcraft/components-aws/subnet/

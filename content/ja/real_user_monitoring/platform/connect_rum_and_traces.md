@@ -1,32 +1,33 @@
 ---
-title: Connect RUM and Traces
-kind: documentation
-aliases:
-- /real_user_monitoring/connect_rum_and_traces
-further_reading:
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: Blog
-    text: Real User Monitoring
-  - link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
-    tag: Blog
-    text: Start monitoring single-page applications
-  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    tag: Guide
-    text: Ease troubleshooting with cross-product correlation
-  - link: /tracing/
-    tag: Documentation
-    text: APM and Distributed Tracing
-  - link: /real_user_monitoring
-    tag: Documentation
-    text: RUM & Session Replay
-  - link: "https://www.datadoghq.com/blog/troubleshoot-with-session-replay-developer-tools/"
-    tag: Blog
-    text: Troubleshoot with Session Replay browser dev tools
-  - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
-    tag: Blog
-    text: Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications
 algolia:
-  tags: [rum traces]
+  tags:
+  - rum traces
+aliases:
+- /ja/real_user_monitoring/connect_rum_and_traces
+further_reading:
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: Blog
+  text: Real User Monitoring
+- link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
+  tag: Blog
+  text: Start monitoring single-page applications
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Ease troubleshooting with cross-product correlation
+- link: /tracing/
+  tag: Documentation
+  text: APM and Distributed Tracing
+- link: /real_user_monitoring
+  tag: Documentation
+  text: RUM & Session Replay
+- link: https://www.datadoghq.com/blog/troubleshoot-with-session-replay-developer-tools/
+  tag: Blog
+  text: Troubleshoot with Session Replay browser dev tools
+- link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
+  tag: Blog
+  text: Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications
+kind: documentation
+title: Connect RUM and Traces
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
@@ -127,8 +128,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
-[1]: /real_user_monitoring/browser/
-[2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[1]: /ja/real_user_monitoring/browser/
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
@@ -167,8 +168,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 * `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
-[1]: /real_user_monitoring/android/
-[2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
+[1]: /ja/real_user_monitoring/android/
+[2]: /ja/tracing/trace_collection/dd_libraries/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
@@ -234,7 +235,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```
 **Note**: `sampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-[1]: /real_user_monitoring/ios/
+[1]: /ja/real_user_monitoring/ios/
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
@@ -262,7 +263,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     **Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-[1]: /real_user_monitoring/reactnative/
+[1]: /ja/real_user_monitoring/reactnative/
 {{% /tab %}}
 {{% tab "Flutter RUM" %}}
 
@@ -277,8 +278,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )..enableHttpTracking()
     ```
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/#automatic-resource-tracking
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
 
@@ -300,7 +301,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         result = ddUrlTransfer.GetToString()
     ```
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
 
 
 {{% /tab %}}
@@ -318,7 +319,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 2. In your browser's developer tools, go to the **Network** tab.
 3. Check the request headers for a resource request that you expect to be correlated contains the [correlation headers from Datadog][1].
 
-[1]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
+[1]: /ja/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -329,7 +330,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[2]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=androidrum#how-are-rum-resources-linked-to-traces
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/connect_rum_and_traces?tab=androidrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -340,7 +341,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
-[2]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=iosrum#how-are-rum-resources-linked-to-traces
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=iosrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -352,7 +353,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[3]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -364,7 +365,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://docs.flutter.dev/tools/devtools/overview
 [2]: https://docs.flutter.dev/tools/devtools/network
-[3]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/platform/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -578,23 +579,23 @@ RUM とトレースを接続すると、APM の取り込み量が大幅に増加
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/dd_libraries/ios/?tab=swiftpackagemanagerspm
-[2]: /tracing
-[3]: /tracing/trace_collection/dd_libraries/python/
+[1]: /ja/tracing/trace_collection/dd_libraries/ios/?tab=swiftpackagemanagerspm
+[2]: /ja/tracing
+[3]: /ja/tracing/trace_collection/dd_libraries/python/
 [4]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[5]: /tracing/trace_collection/dd_libraries/go/
+[5]: /ja/tracing/trace_collection/dd_libraries/go/
 [6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[7]: /tracing/trace_collection/dd_libraries/java/
+[7]: /ja/tracing/trace_collection/dd_libraries/java/
 [8]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[9]: /tracing/trace_collection/dd_libraries/ruby/
+[9]: /ja/tracing/trace_collection/dd_libraries/ruby/
 [10]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[11]: /tracing/trace_collection/dd_libraries/nodejs/
+[11]: /ja/tracing/trace_collection/dd_libraries/nodejs/
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[13]: /tracing/trace_collection/dd_libraries/php/
+[13]: /ja/tracing/trace_collection/dd_libraries/php/
 [14]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[15]: /tracing/trace_collection/dd_libraries/dotnet-core/
+[15]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/
 [16]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [17]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
 [18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[19]: /tracing/trace_explorer/#live-search-for-15-minutes
-[20]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[19]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
+[20]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters

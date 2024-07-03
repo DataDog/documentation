@@ -2,7 +2,8 @@
 integration_title: Hdfs
 is_public: true
 kind: integration
-short_description: Track cluster disk usage, volume failures, dead DataNodes, and more.
+short_description: Track cluster disk usage, volume failures, dead DataNodes, and
+  more.
 ---
 
 
@@ -249,13 +250,13 @@ Need help? Contact [Datadog support][8].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/hdfs_datanode/images/hadoop_dashboard.png
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/hdfs_datanode/datadog_checks/hdfs_datanode/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/hadoop-architecture-overview
 [10]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
 [11]: https://www.datadoghq.com/blog/collecting-hadoop-metrics

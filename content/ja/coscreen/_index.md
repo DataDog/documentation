@@ -1,12 +1,12 @@
 ---
-title: CoScreen
+cascade:
+  algolia:
+    rank: 70
 further_reading:
-- link: "https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/"
+- link: https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/
   tag: Blog
   text: Leverage collaborative screen sharing with Datadog CoScreen
-cascade:
-    algolia:
-        rank: 70
+title: CoScreen
 ---
 
 {{< img src="coscreen/collab-v2.mp4" alt="3 人のユーザーが同時に 3 つのウィンドウを共有。" width=80% video="true">}}
@@ -140,4 +140,4 @@ CoScreen がどのように安全なコラボレーションを可能にする�
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
-[8]: /sensitive_data_scanner/
+[8]: /ja/sensitive_data_scanner/

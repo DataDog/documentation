@@ -1,71 +1,73 @@
 ---
-"app_id": "confluent-cloud"
-"app_uuid": "406c781b-842d-4e0c-84dc-4b13b8e93fb6"
-"assets":
-  "dashboards":
-    "confluent-cloud": assets/dashboards/confluent_cloud_overview.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: confluent-cloud
+app_uuid: 406c781b-842d-4e0c-84dc-4b13b8e93fb6
+assets:
+  dashboards:
+    confluent-cloud: assets/dashboards/confluent_cloud_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
       - confluent_cloud.kafka.received_bytes
       - confluent_cloud.connect.sent_records
       - confluent_cloud.ksql.streaming_unit_count
       - confluent_cloud.schema_registry.schema_count
-      "metadata_path": metadata.csv
-      "prefix": confluent_cloud.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "609"
-    "source_type_name": Confluent Cloud
-  "monitors":
-    "[Confluent Cloud] Mirror topic lag is increasing": assets/monitors/cluster_link_lag_rate_change_percent.json
-    "[Confluent Cloud] Topic lag is Increasing": assets/monitors/consumer_lag_monitor_rate_change_percent.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: confluent_cloud.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 609
+    source_type_name: Confluent Cloud
+  monitors:
+    '[Confluent Cloud] Mirror topic lag is increasing': assets/monitors/cluster_link_lag_rate_change_percent.json
+    '[Confluent Cloud] Topic lag is Increasing': assets/monitors/consumer_lag_monitor_rate_change_percent.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - コスト管理
 - モニター
 - メッセージキュー
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "confluent_cloud"
-"integration_id": "confluent-cloud"
-"integration_title": "Confluent Cloud"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "confluent_cloud"
-"public_title": "Confluent Cloud"
-"short_description": "Collect various Kafka metrics and related cost data from Confluent Cloud."
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cost Management"
-  - "Category::Metrics"
-  - "Category::Message Queues"
-  "configuration": "README.md#Setup"
-  "description": Collect various Kafka metrics and related cost data from Confluent Cloud.
-  "media":
-  - "caption": Confluent Cloud Dashboard Overview
-    "image_url": images/confluent_dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": その他
-    "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_account"
-  - "resource_type": その他
-    "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_resource"
-  "support": "README.md#Support"
-  "title": Confluent Cloud
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: confluent_cloud
+integration_id: confluent-cloud
+integration_title: Confluent Cloud
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: confluent_cloud
+public_title: Confluent Cloud
+short_description: Collect various Kafka metrics and related cost data from Confluent
+  Cloud.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cost Management
+  - Category::Metrics
+  - Category::Message Queues
+  configuration: README.md#Setup
+  description: Collect various Kafka metrics and related cost data from Confluent
+    Cloud.
+  media:
+  - caption: Confluent Cloud Dashboard Overview
+    image_url: images/confluent_dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_account
+  - resource_type: その他
+    url: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_resource
+  support: README.md#Support
+  title: Confluent Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -154,10 +156,9 @@ Confluent Cloud インテグレーションには、サービスのチェック�
 [2]: https://app.datadoghq.com/integrations/confluent-cloud
 [3]: https://docs.confluent.io/cloud/current/access-management/access-control/rbac/predefined-rbac-roles.html#billingadmin-role
 [4]: https://app.datadoghq.com/cost
-[5]: https://docs.datadoghq.com/cloud_cost_management/saas_costs/?tab=confluentcloud#data-collected
+[5]: https://docs.datadoghq.com/ja/cloud_cost_management/saas_costs/?tab=confluentcloud#data-collected
 [6]: https://docs.confluent.io/cloud/current/monitoring/metrics-api.html#add-the-metricsviewer-role-to-a-new-service-account-in-the-ui
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/confluent_cloud/confluent_cloud_metadata.csv
-[8]: https://docs.datadoghq.com/help/
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_account
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_resource
-

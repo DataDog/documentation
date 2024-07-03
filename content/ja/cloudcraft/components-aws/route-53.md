@@ -1,5 +1,5 @@
 ---
-title: "Route 53 Component"
+title: Route 53 Component
 ---
 ## 概要
 

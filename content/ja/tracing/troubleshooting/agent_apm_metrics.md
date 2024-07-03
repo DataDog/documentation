@@ -1,9 +1,9 @@
 ---
-title: APM metrics sent by the Datadog Agent
-kind: Documentation
 aliases:
-    - /agent/faq/agent-apm-metrics/
-    - /tracing/send_traces/agent-apm-metrics/
+- /ja/agent/faq/agent-apm-metrics/
+- /ja/tracing/send_traces/agent-apm-metrics/
+kind: Documentation
+title: APM metrics sent by the Datadog Agent
 ---
 
 Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent when [APM is enabled][1]. Import the [APM monitoring dashboard][2] in your Datadog account in order to get an out-of-the-box dashboard exploiting most of those metrics.
@@ -226,5 +226,5 @@ Number of spans processed.
 : **Type**: Count<br>
 Number of traces processed.
 
-[1]: /tracing/setup/
+[1]: /ja/tracing/setup/
 [2]: /resources/json/APM_monitoring_dashboard.json

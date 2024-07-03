@@ -1,5 +1,4 @@
 ---
-title: Network Performance Monitor
 further_reading:
 - link: /network_monitoring/performance/
   tag: Documentation
@@ -16,6 +15,7 @@ further_reading:
 - link: /network_monitoring/performance/recommended_monitors
   tag: ドキュメント
   text: Recommended NPM Monitors
+title: Network Performance Monitor
 ---
 <div class="alert alert-info">The NPM monitor is in public beta.</div>
 
@@ -112,9 +112,9 @@ DNS failure monitor tracks DNS server performance to help you identify server-si
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/performance/
+[1]: /ja/network_monitoring/performance/
 [2]: https://app.datadoghq.com/monitors/create/network-performance
-[3]: /network_monitoring/performance/network_analytics/
-[4]: /dashboards/functions/
-[5]: /monitors/configuration/
-[6]: /monitors/notify/
+[3]: /ja/network_monitoring/performance/network_analytics/
+[4]: /ja/dashboards/functions/
+[5]: /ja/monitors/configuration/
+[6]: /ja/monitors/notify/

@@ -1,9 +1,9 @@
 ---
-title: Configure Apdex score by service
-kind: documentation
 aliases:
-    - /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
-    - /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
+- /ja/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+- /ja/tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
+kind: documentation
+title: Configure Apdex score by service
 ---
 {{< jqmath-vanilla >}}
 

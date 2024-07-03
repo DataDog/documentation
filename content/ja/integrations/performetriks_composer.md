@@ -1,73 +1,80 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "performetriks-composer"
-"app_uuid": "b1b4d663-f81a-4892-8aef-5dd67b40a37f"
-"assets": {}
-"author":
-  "homepage": "https://www.performetriks.com/composer-datadog-product-guide"
-  "name": Performetriks
-  "sales_email": composer@performetriks.com
-  "support_email": composer@performetriks.com
-  "vendor_id": performetriks
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: performetriks-composer
+app_uuid: b1b4d663-f81a-4892-8aef-5dd67b40a37f
+assets: {}
+author:
+  homepage: https://www.performetriks.com/composer-datadog-product-guide
+  name: Performetriks
+  sales_email: composer@performetriks.com
+  support_email: composer@performetriks.com
+  vendor_id: performetriks
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "performetriks_composer"
-"integration_id": "performetriks-composer"
-"integration_title": "Composer"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "performetriks_composer"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": composer
-  "short_description": Monthly flat fee for Performetriks Composer
-  "unit_price": !!int "99"
-"public_title": "Composer"
-"short_description": "Configuration management for your Datadog environment"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: performetriks_composer
+integration_id: performetriks-composer
+integration_title: Composer
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: performetriks_composer
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: composer
+  short_description: Monthly flat fee for Performetriks Composer
+  unit_price: 99
+public_title: Composer
+short_description: Configuration management for your Datadog environment
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Marketplace"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Configuration management for your Datadog environment
-  "media":
-  - "caption": Composer is a Configuration tool to simplify administrative tasks in Datadog and provide a configuration management solution for all config settings.
-    "image_url": images/composervideo.png
-    "media_type": video
-    "vimeo_id": !!int "692276988"
-  - "caption": Composer reduces complexity and increases efficiency when dealing with version management of your Datadog configuration. You can quickly find out if there have been changes in the configuration and easily reset them.
-    "image_url": images/composer1.png
-    "media_type": image
-  - "caption": Composer reduces complexity and increases efficiency when dealing with version management of your Datadog configuration. You can quickly find out if there have been changes in the configuration and easily reset them.
-    "image_url": images/composer2.png
-    "media_type": image
-  - "caption": Composer simplifies Datadog admin tasks through introducing Version Management for Datadog, identifying changes in tenants, and automating manual tasks such as the creation of applications, dashboards, and management zones from templates.
-    "image_url": images/composer3.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/"
-  "support": "README.md#Support"
-  "title": Composer
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Configuration management for your Datadog environment
+  media:
+  - caption: Composer is a Configuration tool to simplify administrative tasks in
+      Datadog and provide a configuration management solution for all config settings.
+    image_url: images/composervideo.png
+    media_type: video
+    vimeo_id: 692276988
+  - caption: Composer reduces complexity and increases efficiency when dealing with
+      version management of your Datadog configuration. You can quickly find out if
+      there have been changes in the configuration and easily reset them.
+    image_url: images/composer1.png
+    media_type: image
+  - caption: Composer reduces complexity and increases efficiency when dealing with
+      version management of your Datadog configuration. You can quickly find out if
+      there have been changes in the configuration and easily reset them.
+    image_url: images/composer2.png
+    media_type: image
+  - caption: Composer simplifies Datadog admin tasks through introducing Version Management
+      for Datadog, identifying changes in tenants, and automating manual tasks such
+      as the creation of applications, dashboards, and management zones from templates.
+    image_url: images/composer3.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
+  support: README.md#Support
+  title: Composer
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -110,7 +117,7 @@ Composer では、モニタリングのコンフィギュレーションをコ�
 
 - [Datadog Marketplace の Performetriks の製品を使って Datadog の構成をコードとして保存・管理する][3]
 
-[1]: https://docs.datadoghq.com/account_management/api-app-keys/
+[1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [2]: mailto:composer@performetriks.com
 [3]: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
 

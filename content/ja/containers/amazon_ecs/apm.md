@@ -1,14 +1,14 @@
 ---
-title: Tracing ECS Applications
 aliases:
-  - /agent/amazon_ecs/apm
+- /ja/agent/amazon_ecs/apm
 further_reading:
-    - link: /agent/amazon_ecs/logs/
-      tag: Documentation
-      text: Collect your application logs
-    - link: /agent/amazon_ecs/tags/
-      tag: Documentation
-      text: Assign tags to all data emitted by a container
+- link: /agent/amazon_ecs/logs/
+  tag: Documentation
+  text: Collect your application logs
+- link: /agent/amazon_ecs/tags/
+  tag: Documentation
+  text: Assign tags to all data emitted by a container
+title: Tracing ECS Applications
 ---
 
 ## 概要
@@ -257,7 +257,7 @@ func main() {
 ```
 Java 起動コマンドには、`-javaagent:/path/to/dd-java-agent.jar` を含める必要があります。さらなる例は、[JVM にトレーサーを追加するための Java トレースに関するドキュメント][1]を参照してください。
 
-[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-tracer-to-the-jvm
+[1]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-tracer-to-the-jvm
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
@@ -310,7 +310,7 @@ env[DD_ENV] = $DD_ENV
 env[DD_VERSION] = $DD_VERSION
 ```
 
-[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
+[1]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
@@ -330,9 +330,9 @@ IMDSv2 を使用する場合、同等の `entryPoint` の構成は以下のよ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /container/amazon_ecs/
-[2]: /tracing/trace_collection/
+[1]: /ja/container/amazon_ecs/
+[2]: /ja/tracing/trace_collection/
 [3]: /resources/json/datadog-agent-ecs-apm.json
-[4]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
-[5]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
-[6]: /containers/amazon_ecs/?tab=awscli#setup
+[4]: /ja/containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
+[5]: /ja/containers/amazon_ecs/?tab=awscli#registering-the-task-definition
+[6]: /ja/containers/amazon_ecs/?tab=awscli#setup

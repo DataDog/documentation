@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting the PHP Profiler
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-    - link: /tracing/troubleshooting
-      tag: Documentation
-      text: APM Troubleshooting
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM Troubleshooting
+title: Troubleshooting the PHP Profiler
+type: multi-code-lang
 ---
 
 ## プロファイル検索ページにないプロファイル
@@ -43,5 +43,5 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /help/
-[2]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
+[1]: /ja/help/
+[2]: /ja/tracing/trace_collection/library_config/php/#environment-variable-configuration

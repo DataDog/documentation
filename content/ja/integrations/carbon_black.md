@@ -2,18 +2,19 @@
 categories:
 - log collection
 - Security
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md
 description: Collect your Carbon Black Defense Logs
-doc_link: "https://docs.datadoghq.com/integrations/carbon_black/"
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md"]
+doc_link: https://docs.datadoghq.com/integrations/carbon_black/
 has_logo: true
+integration_id: carbonblack
 integration_title: Carbon Black
 is_public: true
-custom_kind: インテグレーション
 name: carbon_black
 public_title: Datadog-Carbon Black Integration
 short_description: Collect your Carbon Black Defense Logs
 version: '1.0'
-integration_id: "carbonblack"
 ---
 
 ## 概要
@@ -47,12 +48,12 @@ Carbon Black は、Carbon Black イベントフォワーダーの作成に使用
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://documenter.getpostman.com/view/7740922/SWE9YGSs?version=latest
-[2]: /logs/guide/forwarder/
+[2]: /ja/logs/guide/forwarder/
 [3]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-a-bucket
 [4]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-bucket-to-write-events
 [5]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-access-level
 [6]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-api-key
 [7]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-api-in-postman
 [8]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-forwarder
-[9]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[10]: /help/
+[9]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[10]: /ja/help/

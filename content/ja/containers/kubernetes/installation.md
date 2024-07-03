@@ -1,19 +1,19 @@
 ---
-title: Install the Datadog Agent on Kubernetes
 aliases:
-    - /agent/kubernetes/daemonset_setup
-    - /agent/kubernetes/helm
-    - /agent/kubernetes/installation
+- /ja/agent/kubernetes/daemonset_setup
+- /ja/agent/kubernetes/helm
+- /ja/agent/kubernetes/installation
 further_reading:
-    - link: /agent/kubernetes/configuration
-      tag: Documentation
-      text: Further Configure the Datadog Agent on Kubernetes
-    - link: "https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options"
-      tag: Source Code
-      text: Datadog Helm chart - All configuration options
-    - link: "https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading"
-      tag: Source Code
-      text: Upgrading Datadog Helm
+- link: /agent/kubernetes/configuration
+  tag: Documentation
+  text: Further Configure the Datadog Agent on Kubernetes
+- link: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options
+  tag: Source Code
+  text: Datadog Helm chart - All configuration options
+- link: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
+  tag: Source Code
+  text: Upgrading Datadog Helm
+title: Install the Datadog Agent on Kubernetes
 ---
 
 ## 概要
@@ -90,7 +90,7 @@ Datadog の [Installing on Kubernetes][16] ページを利用すると、イン�
    ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
+[2]: /ja/getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 <div class="alert alert-info">Requires <a href="https://helm.sh">Helm</a>.</div>
@@ -130,7 +130,7 @@ Datadog の [Installing on Kubernetes][16] ページを利用すると、イン�
    </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
+[2]: /ja/getting_started/site
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -298,28 +298,28 @@ helm uninstall datadog-agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/distributions
-[2]: /agent/kubernetes/control_plane
-[3]: /infrastructure/livecontainers/configuration/
-[4]: /agent/kubernetes/configuration/
-[5]: /agent/kubernetes/integrations/
-[6]: /agent/kubernetes/apm/
-[7]: /agent/kubernetes/log/
-[8]: /containers/cluster_agent/#minimum-agent-and-cluster-agent-versions
-[9]: /containers/datadog_operator
+[1]: /ja/agent/kubernetes/distributions
+[2]: /ja/agent/kubernetes/control_plane
+[3]: /ja/infrastructure/livecontainers/configuration/
+[4]: /ja/agent/kubernetes/configuration/
+[5]: /ja/agent/kubernetes/integrations/
+[6]: /ja/agent/kubernetes/apm/
+[7]: /ja/agent/kubernetes/log/
+[8]: /ja/containers/cluster_agent/#minimum-agent-and-cluster-agent-versions
+[9]: /ja/containers/datadog_operator
 [10]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [11]: https://helm.sh
-[12]: /containers/guide/kubernetes_daemonset/
+[12]: /ja/containers/guide/kubernetes_daemonset/
 [13]: https://app.datadoghq.com/containers
-[14]: /infrastructure/containers
-[15]: /containers/kubernetes/apm
+[14]: /ja/infrastructure/containers
+[15]: /ja/containers/kubernetes/apm
 [16]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[17]: /containers/guide/changing_container_registry/
+[17]: /ja/containers/guide/changing_container_registry/
 [18]: https://app.datadoghq.com/containers/images
-[19]: /security/cloud_security_management
-[20]: /infrastructure/containers/container_images
+[19]: /ja/security/cloud_security_management
+[20]: /ja/infrastructure/containers/container_images
 [21]: https://app.datadoghq.com/kubernetes
 [22]: https://app.datadoghq.com/orchestration/overview
 [23]: https://app.datadoghq.com/orchestration/resource/pod
-[24]: /infrastructure/containers/orchestrator_explorer
-[25]: /infrastructure/containers/kubernetes_resource_utilization
+[24]: /ja/infrastructure/containers/orchestrator_explorer
+[25]: /ja/infrastructure/containers/kubernetes_resource_utilization

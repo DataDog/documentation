@@ -1,16 +1,16 @@
 ---
-title: Fleet Automation
 disable_toc: false
 further_reading:
 - link: /agent/remote_config
   tag: Documentation
   text: Find out more about Remote Configuration
-- link: "/infrastructure/list/#agent-configuration"
+- link: /infrastructure/list/#agent-configuration
   tag: Documentation
   text: Learn about the Agent configuration view
-- link: "https://www.datadoghq.com/blog/fleet-automation/"
+- link: https://www.datadoghq.com/blog/fleet-automation/
   tag: Blog
   text: Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation
+title: Fleet Automation
 ---
 
 {{< callout btn_hidden="true">}}Fleet Automation is in beta. Access it from the <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> page in Datadog.{{< /callout >}}
@@ -77,7 +77,7 @@ For information on setting up roles and permissions, see [Access Control][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/fleet
-[2]: /agent/configuration/agent-configuration-files/
-[3]: /agent/remote_config#enabling-remote-configuration
-[4]: /infrastructure/list/#agent-configuration
-[5]: https://docs.datadoghq.com/account_management/rbac/
+[2]: /ja/agent/configuration/agent-configuration-files/
+[3]: /ja/agent/remote_config#enabling-remote-configuration
+[4]: /ja/infrastructure/list/#agent-configuration
+[5]: https://docs.datadoghq.com/ja/account_management/rbac/

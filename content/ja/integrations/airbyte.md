@@ -1,71 +1,71 @@
 ---
-"app_id": "airbyte"
-"app_uuid": "5994a02c-8754-40c3-9e99-a39ffc862b1c"
-"assets":
-  "dashboards":
-    "airbyte_overview": assets/dashboards/airbyte_overview.json
-  "integration":
-    "auto_install": true
-    "metrics":
-      "check":
+app_id: airbyte
+app_uuid: 5994a02c-8754-40c3-9e99-a39ffc862b1c
+assets:
+  dashboards:
+    airbyte_overview: assets/dashboards/airbyte_overview.json
+  integration:
+    auto_install: true
+    metrics:
+      check:
       - airbyte.metrics_reporter.est_num_metrics_emitted_by_reporter
       - airbyte.worker.attempt.created
       - airbyte.cron.jobs_run
-      "metadata_path": metadata.csv
-      "prefix": airbyte.
-    "process_signatures":
+      metadata_path: metadata.csv
+      prefix: airbyte.
+    process_signatures:
     - airbyte-cron
     - airbyte-metrics-reporter
     - airbyte-server
     - airbyte-workers
-    - "uvicorn connector_builder.entrypoint:app"
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10386"
-    "source_type_name": Airbyte
-  "monitors":
-    "long_running_jobs": assets/monitors/long_running_jobs.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    - uvicorn connector_builder.entrypoint:app
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10386
+    source_type_name: Airbyte
+  monitors:
+    long_running_jobs: assets/monitors/long_running_jobs.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - ai/ml
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "airbyte"
-"integration_id": "airbyte"
-"integration_title": "Airbyte"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "airbyte"
-"public_title": "Airbyte"
-"short_description": "Monitor the state of your Airbyte deployment."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: airbyte
+integration_id: airbyte
+integration_title: Airbyte
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: airbyte
+public_title: Airbyte
+short_description: Monitor the state of your Airbyte deployment.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::AI/ML"
-  - "Category::Data Stores"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Monitor the state of your Airbyte deployment.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Airbyte
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AI/ML
+  - Category::Data Stores
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Monitor the state of your Airbyte deployment.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Airbyte
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -167,11 +167,10 @@ The Airbyte check does not include any events.
 Need help? Contact [Datadog support][8].
 
 [1]: https://airbyte.com/
-[2]: https://docs.datadoghq.com/developers/dogstatsd
+[2]: https://docs.datadoghq.com/ja/developers/dogstatsd
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.airbyte.com/operator-guides/collecting-metrics/
-[5]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [7]: https://github.com/DataDog/integrations-core/blob/master/airbyte/metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

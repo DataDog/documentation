@@ -1,8 +1,14 @@
 ---
-title: Software Composition Analysis
+algolia:
+  tags:
+  - Software Composition Analysis
+  - Vulnerability Management
+  - SCA
+  - AVM
+  - GuardDog
 aliases:
-  - /security/application_security/risk_management/
-  - /security/application_security/vulnerability_management/
+- /ja/security/application_security/risk_management/
+- /ja/security/application_security/vulnerability_management/
 further_reading:
 - link: /getting_started/application_security/software_composition_analysis
   tag: Guide
@@ -13,20 +19,21 @@ further_reading:
 - link: /code_analysis/software_composition_analysis/
   tag: documentation
   text: Setup Software Composition Analysis on your CI pipelines
-- link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
+- link: https://www.datadoghq.com/blog/datadog-software-composition-analysis/
   tag: Blog
-  text: Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis 
-- link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
+  text: Mitigate vulnerabilities from third-party libraries with Datadog Software
+    Composition Analysis
+- link: https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/
   tag: Blog
-  text: Enhance application security in production with Application Vulnerability Management  
-- link: "https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages/"
+  text: Enhance application security in production with Application Vulnerability
+    Management
+- link: https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages/
   tag: Blog
-  text: "Finding malicious PyPI packages through static code analysis: Meet GuardDog"
-- link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
+  text: 'Finding malicious PyPI packages through static code analysis: Meet GuardDog'
+- link: https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/
   tag: Blog
   text: Prioritize vulnerability remediation with Datadog SCA
-algolia:
-  tags: [Software Composition Analysis, Vulnerability Management, SCA, AVM, GuardDog]
+title: Software Composition Analysis
 ---
 
 {{< site-region region="gov" >}}
@@ -117,16 +124,16 @@ Software Composition Analysis は、APM がすでに収集している情報を�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /ja/help/
 [2]: https://app.datadoghq.com/services?lens=Security
 [3]: https://app.datadoghq.com/security/appsec/vm
 [4]: https://app.datadoghq.com/security/appsec
 [5]: https://app.datadoghq.com/security/appsec/landing
-[6]: /security/application_security/enabling/compatibility
-[7]: /getting_started/application_security/software_composition_analysis
+[6]: /ja/security/application_security/enabling/compatibility
+[7]: /ja/getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
-[9]: /code_analysis/software_composition_analysis/setup/?tab=githubactions
-[10]: /account_management/rbac/permissions/#integrations
-[11]: /integrations/jira/
+[9]: /ja/code_analysis/software_composition_analysis/setup/?tab=githubactions
+[10]: /ja/account_management/rbac/permissions/#integrations
+[11]: /ja/integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup
 [13]: https://github.com/DataDog/guarddog

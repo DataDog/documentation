@@ -1,5 +1,5 @@
 ---
-title: "EC2 Component"
+title: EC2 Component
 ---
 ## 概要
 
@@ -154,7 +154,7 @@ micro、nano、small、medium、large、xlarge、2xlarge、3xlarge、4xlarge、6
 - **utilization: 数値**: 指定された月にインスタンスがどれくらい使用されたかを表す浮動小数点数。
 
 [1]: https://developers.cloudcraft.co/
-[2]: /cloudcraft/components-aws/vpc/
-[3]: /cloudcraft/components-aws/security-group/
-[4]: /cloudcraft/components-aws/auto-scaling-group/
-[5]: /cloudcraft/components-aws/subnet/
+[2]: /ja/cloudcraft/components-aws/vpc/
+[3]: /ja/cloudcraft/components-aws/security-group/
+[4]: /ja/cloudcraft/components-aws/auto-scaling-group/
+[5]: /ja/cloudcraft/components-aws/subnet/

@@ -1,9 +1,9 @@
 ---
-title: Libraries
 aliases:
-   - /libraries/
-   - /developers/faq/monitoring-akka/
-   - /developers/libraries/
+- /ja/libraries/
+- /ja/developers/faq/monitoring-akka/
+- /ja/developers/libraries/
+title: Libraries
 ---
 
 ## API と DogStatsD クライアントライブラリ
@@ -158,10 +158,10 @@ Winston Datadog [転送][61]。
 
 Datadog ライブラリを作成し、このページに追加する場合は、[opensource@datadoghq.com][64] にメールを送信してください。
 
-[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[2]: /tracing/
-[3]: /serverless/
-[4]: /api/
+[1]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[2]: /ja/tracing/
+[3]: /ja/serverless/
+[4]: /ja/api/
 [5]: https://github.com/brightcove/dog-watcher
 [6]: https://www.brightcove.com
 [7]: https://github.com/Shopify/doggy
@@ -188,7 +188,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [29]: https://github.com/cvent/dogscaler
 [30]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
 [31]: https://github.com/wimactel
-[34]: /logs/guide/collect-heroku-logs/
+[34]: /ja/logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
@@ -198,7 +198,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd
 [44]: https://docs.moogsoft.com/AIOps.6.2.0/Datadog-Solution-Pak_13737047.html
-[45]: /metrics/custom_metrics/
+[45]: /ja/metrics/custom_metrics/
 [46]: https://github.com/simplifi/ngx_lua_datadog
 [47]: https://github.com/dailymotion/lua-resty-dogstatsd
 [48]: http://www.mediba.jp

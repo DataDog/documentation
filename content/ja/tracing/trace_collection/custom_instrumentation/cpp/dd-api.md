@@ -1,20 +1,20 @@
 ---
-title: C++ Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
-    - /tracing/manual_instrumentation/cpp
-    - /tracing/custom_instrumentation/cpp
-    - /tracing/setup_overview/custom_instrumentation/cpp
-    - /tracing/trace_collection/custom_instrumentation/cpp
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/cpp
-description: 'Manually instrument your C++ application to send custom traces to Datadog.'
+- /ja/tracing/manual_instrumentation/cpp
+- /ja/tracing/custom_instrumentation/cpp
+- /ja/tracing/setup_overview/custom_instrumentation/cpp
+- /ja/tracing/trace_collection/custom_instrumentation/cpp
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/cpp
+description: Manually instrument your C++ application to send custom traces to Datadog.
 further_reading:
-    - link: tracing/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/visualization/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/visualization/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+kind: documentation
+title: C++ Custom Instrumentation using Datadog API
 ---
 
 <div class="alert alert-info">
@@ -144,9 +144,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#span-tags
-[2]: /tracing/glossary/#spans
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /tracing/error_tracking/
-[5]: /tracing/trace_collection/trace_context_propagation/cpp
-[6]: /tracing/security
+[1]: /ja/tracing/glossary/#span-tags
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: /ja/tracing/error_tracking/
+[5]: /ja/tracing/trace_collection/trace_context_propagation/cpp
+[6]: /ja/tracing/security

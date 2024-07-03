@@ -1,6 +1,6 @@
 ---
-title: Code Analysis Troubleshooting
-description: Learn how to troubleshoot common Code Analysis issues and how to engage with Support.
+description: Learn how to troubleshoot common Code Analysis issues and how to engage
+  with Support.
 further_reading:
 - link: /code_analysis/
   tag: Documentation
@@ -11,6 +11,7 @@ further_reading:
 - link: /code_analysis/software_composition_analysis/
   tag: Documentation
   text: Learn about Software Composition Analysis
+title: Code Analysis Troubleshooting
 ---
 
 ## 概要
@@ -58,6 +59,6 @@ For issues with Datadog Software Composition Analysis, include the following inf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /code_analysis/static_analysis/github_actions
-[3]: /code_analysis/static_analysis/github_actions#inputs
+[1]: /ja/help/
+[2]: /ja/code_analysis/static_analysis/github_actions
+[3]: /ja/code_analysis/static_analysis/github_actions#inputs

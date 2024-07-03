@@ -1,25 +1,25 @@
 ---
-title: Monitoring Page Performance
-kind: documentation
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
-    tag: Learning Center
-    text: "Interactive Lab: Core Web Vitals"
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: Blog
-    text: Real User Monitoring
-  - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
-    tag: Blog
-    text: Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Explore your views within Datadog
-  - link: /real_user_monitoring/explorer/visualize/
-    tag: Documentation
-    text: Apply visualizations on your events
-  - link: /real_user_monitoring/platform/dashboards/
-    tag: Documentation
-    text: Learn about RUM Dashboards
+- link: https://learn.datadoghq.com/courses/core-web-vitals-lab
+  tag: Learning Center
+  text: 'Interactive Lab: Core Web Vitals'
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: Blog
+  text: Real User Monitoring
+- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
+  tag: Blog
+  text: Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Explore your views within Datadog
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: Apply visualizations on your events
+- link: /real_user_monitoring/platform/dashboards/
+  tag: Documentation
+  text: Learn about RUM Dashboards
+kind: documentation
+title: Monitoring Page Performance
 ---
 
 ## Overview
@@ -195,16 +195,16 @@ document.addEventListener("scroll", function handler() {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/platform/dashboards/
-[2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/platform/dashboards/performance
-[4]: /real_user_monitoring/explorer/
+[1]: /ja/real_user_monitoring/platform/dashboards/
+[2]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
+[3]: /ja/real_user_monitoring/platform/dashboards/performance
+[4]: /ja/real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
-[6]: /synthetics/browser_tests/
+[6]: /ja/synthetics/browser_tests/
 [7]: https://web.dev/lcp/
 [8]: https://web.dev/fid/
 [9]: https://web.dev/cls/
-[10]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[10]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [11]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
@@ -212,5 +212,5 @@ document.addEventListener("scroll", function handler() {
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
-[18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[18]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures
 [19]: https://web.dev/inp/

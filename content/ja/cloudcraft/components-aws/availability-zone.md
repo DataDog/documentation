@@ -1,5 +1,5 @@
 ---
-title: "Availability Zone Component"
+title: Availability Zone Component
 ---
 ## 概要
 

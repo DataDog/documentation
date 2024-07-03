@@ -1,8 +1,11 @@
 ---
-title: Create Custom Rules
 aliases:
-  - /security/cspm/custom_rules
-  - /security/misconfigurations/custom_rules
+- /ja/security/cspm/custom_rules
+- /ja/security/misconfigurations/custom_rules
+cascade:
+  algolia:
+    rank: 30
+    subcategory: Cloud Security Posture Management
 further_reading:
 - link: security/cloud_security_management/guide/writing_rego_rules
   tag: Guide
@@ -14,10 +17,7 @@ further_reading:
   tag: Documentation
   text: Learn about frameworks and industry benchmarks
 is_beta: true
-cascade:
-    algolia:
-        rank: 30
-        subcategory: Cloud Security Posture Management
+title: Create Custom Rules
 ---
 
 ## 概要
@@ -80,8 +80,8 @@ CSM Misconfigurations コンプライアンスルールを作成、複製、ま�
 [1]: https://app.datadoghq.com/security/configuration/compliance/rules
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
-[4]: /security/cloud_security_management/guide/writing_rego_rules/
-[5]: /security/cloud_security_management/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
-[6]: /security/notifications/
+[4]: /ja/security/cloud_security_management/guide/writing_rego_rules/
+[5]: /ja/security/cloud_security_management/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
+[6]: /ja/security/notifications/
 [7]: https://app.datadoghq.com/security/
-[8]: /infrastructure/resource_catalog/schema/
+[8]: /ja/infrastructure/resource_catalog/schema/

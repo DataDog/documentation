@@ -1,5 +1,4 @@
 ---
-title: TCP Agent proxy for logs
 further_reading:
 - link: /logs/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Collect your traces
+title: TCP Agent proxy for logs
 ---
 
 ## 概要
@@ -290,5 +290,5 @@ stream {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/logs/log_transport?tab=https
-[2]: /agent/configuration/proxy/
+[1]: /ja/agent/logs/log_transport?tab=https
+[2]: /ja/agent/configuration/proxy/

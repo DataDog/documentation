@@ -1,14 +1,16 @@
 ---
-title: Correlate APM Data with Other Telemetry
-kind: documentation
-description: Learn how to connect APM data with telemetry collected by additional Datadog products.
+description: Learn how to connect APM data with telemetry collected by additional
+  Datadog products.
 further_reading:
-  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    tag: Documentation
-    text: Ease troubleshooting with cross-product correlation
-  - link: "https://www.datadoghq.com/blog/link-dbm-and-apm/"
-    tag: Blog
-    text: Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Documentation
+  text: Ease troubleshooting with cross-product correlation
+- link: https://www.datadoghq.com/blog/link-dbm-and-apm/
+  tag: Blog
+  text: Seamlessly correlate DBM and APM telemetry to understand end-to-end query
+    performance
+kind: documentation
+title: Correlate APM Data with Other Telemetry
 ---
 
 Correlating data by various Datadog products gives context to help estimate the business impact and find the root cause of an issue in a few clicks. Set up connections between incoming data to facilitate quick pivots in your explorers and dashboards.
@@ -50,8 +52,8 @@ Read [Investigate Slow Traces or Endpoints][5] for more information.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/other_telemetry/connect_logs_and_traces/
-[2]: /real_user_monitoring/platform/connect_rum_and_traces/
-[3]: /synthetics/apm/
-[4]: /database_monitoring/connect_dbm_and_apm/
-[5]: /profiler/connect_traces_and_profiles/
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[2]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
+[3]: /ja/synthetics/apm/
+[4]: /ja/database_monitoring/connect_dbm_and_apm/
+[5]: /ja/profiler/connect_traces_and_profiles/

@@ -1,12 +1,12 @@
 ---
-title: Troubleshooting the Native Profiler for Compiled Languages
 code_lang: ddprof
-type: multi-code-lang
 code_lang_weight: 90
 further_reading:
-    - link: /tracing/troubleshooting
-      tag: Documentation
-      text: APM Troubleshooting
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: APM Troubleshooting
+title: Troubleshooting the Native Profiler for Compiled Languages
+type: multi-code-lang
 ---
 
 <div class="alert alert-warning">
@@ -87,4 +87,4 @@ error while loading shared libraries: libdd_profiling.so: cannot open shared obj
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /ja/help/

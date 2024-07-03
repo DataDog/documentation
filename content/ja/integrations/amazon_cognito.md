@@ -1,25 +1,25 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - log collection
 - mobile
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Amazon Cognito metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_cognito/"
-"draft": false
-"git_integration_title": "amazon_cognito"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Cognito"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_cognito"
-"public_title": "Datadog-Amazon Cognito Integration"
-"short_description": "Track key Amazon Cognito metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Amazon Cognito metrics.
+doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/
+draft: false
+git_integration_title: amazon_cognito
+has_logo: true
+integration_id: ''
+integration_title: Amazon Cognito
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_cognito
+public_title: Datadog-Amazon Cognito Integration
+short_description: Track key Amazon Cognito metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -78,13 +78,12 @@ The Amazon Cognito integration does not include any service checks.
 
 Need help? Contact [Datadog support][9].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-cognito
 [4]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
-[5]: https://docs.datadoghq.com/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cognito/amazon_cognito_metadata.csv
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

@@ -1,15 +1,15 @@
 ---
-title: OpenTelemetry Terms and Concepts
 further_reading:
-    - link: "https://opentelemetry.io/docs/concepts/"
-      tag: 外部サイト
-      text: OpenTelemetry Concepts
-    - link: "https://opentelemetry.io/docs/concepts/glossary/"
-      tag: 外部サイト
-      text: OpenTelemetry Glossary
-    - link: "https://docs.datadoghq.com/glossary/"
-      tag: Documentation
-      text: Datadog Glossary
+- link: https://opentelemetry.io/docs/concepts/
+  tag: 外部サイト
+  text: OpenTelemetry Concepts
+- link: https://opentelemetry.io/docs/concepts/glossary/
+  tag: 外部サイト
+  text: OpenTelemetry Glossary
+- link: https://docs.datadoghq.com/glossary/
+  tag: Documentation
+  text: Datadog Glossary
+title: OpenTelemetry Terms and Concepts
 ---
 
 This page describes essential terms and concepts for OpenTelemetry and Datadog. For additional definitions and descriptions, see the [OpenTelemetry Glossary][6].
@@ -27,9 +27,9 @@ This page describes essential terms and concepts for OpenTelemetry and Datadog. 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/collector_exporter/
-[2]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/
-[3]: /opentelemetry/collector_exporter/otlp_receiver/
-[4]: /opentelemetry/interoperability/
-[5]: /opentelemetry/schema_semantics/semantic_mapping/
+[1]: /ja/opentelemetry/collector_exporter/
+[2]: /ja/opentelemetry/collector_exporter/otel_collector_datadog_exporter/
+[3]: /ja/opentelemetry/collector_exporter/otlp_receiver/
+[4]: /ja/opentelemetry/interoperability/
+[5]: /ja/opentelemetry/schema_semantics/semantic_mapping/
 [6]: https://opentelemetry.io/docs/concepts/glossary/

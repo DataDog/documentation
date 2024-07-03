@@ -1,61 +1,61 @@
 ---
-"app_id": "twemproxy"
-"app_uuid": "34f4e81a-6fd2-48fd-a10c-5bffb75bbd0e"
-"assets":
-  "dashboards":
-    "Twemproxy - Overview": "assets/dashboards/twemproxy_overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "twemproxy.total_connections"
-      "metadata_path": "metadata.csv"
-      "prefix": "twemproxy."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10070"
-    "source_type_name": "Twemproxy"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "twemproxy"
-"integration_id": "twemproxy"
-"integration_title": "Twemproxy"
-"integration_version": "1.15.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "twemproxy"
-"public_title": "Twemproxy"
-"short_description": "twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Twemproxy"
+app_id: twemproxy
+app_uuid: 34f4e81a-6fd2-48fd-a10c-5bffb75bbd0e
+assets:
+  dashboards:
+    Twemproxy - Overview: assets/dashboards/twemproxy_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: twemproxy.total_connections
+      metadata_path: metadata.csv
+      prefix: twemproxy.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10070
+    source_type_name: Twemproxy
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: twemproxy
+integration_id: twemproxy
+integration_title: Twemproxy
+integration_version: 1.15.0
+is_public: true
+manifest_version: 2.0.0
+name: twemproxy
+public_title: Twemproxy
+short_description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Twemproxy
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -114,9 +114,9 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -138,8 +138,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "twemproxy", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -168,5 +168,5 @@ Twemproxy チェックには、イベントは含まれません。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

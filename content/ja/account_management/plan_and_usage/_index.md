@@ -24,7 +24,7 @@ Plan & Usage セクションの **Plan** タブからアカウントをアップ
 アカウントの請求履歴は、[Plan & Usage セクション][2]の **Billing History** タブに表示されます。請求に関する個別の照会は、アカウント担当者または [success@datadoghq.com][4] にお問い合わせください。
 
 
-[1]: /account_management/users/default_roles/
+[1]: /ja/account_management/users/default_roles/
 [2]: https://app.datadoghq.com/account/billing
-[3]: /account_management/multi_organization/
+[3]: /ja/account_management/multi_organization/
 [4]: mailto://success@datadoghq.com

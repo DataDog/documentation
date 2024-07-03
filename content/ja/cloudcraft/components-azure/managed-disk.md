@@ -1,5 +1,5 @@
 ---
-title: "Managed Disk Component"
+title: Managed Disk Component
 ---
 
 ## 概要

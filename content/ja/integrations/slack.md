@@ -1,25 +1,25 @@
 ---
-"aliases":
-- "/integrations/hipchat/"
-"categories":
-- "collaboration"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog のアラートとグラフをチームの Slack チャンネルに送信。"
-"doc_link": "https://docs.datadoghq.com/integrations/slack/"
-"draft": false
-"git_integration_title": "slack"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Slack"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "slack"
-"public_title": "Datadog-Slack Integration"
-"short_description": "Send Datadog alerts and graphs to your team's Slack channel."
-"version": "1.0"
+aliases:
+- /ja/integrations/hipchat/
+categories:
+- collaboration
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog のアラートとグラフをチームの Slack チャンネルに送信。
+doc_link: https://docs.datadoghq.com/integrations/slack/
+draft: false
+git_integration_title: slack
+has_logo: true
+integration_id: ''
+integration_title: Slack
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: slack
+public_title: Datadog-Slack Integration
+short_description: Send Datadog alerts and graphs to your team's Slack channel.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -58,7 +58,7 @@ Once the Slack integration is installed, you can use the `/datadog` command in a
 
 
 [1]: https://app.datadoghq.com/integrations/slack
-[2]: https://docs.datadoghq.com/integrations/slack#permissions
+[2]: https://docs.datadoghq.com/ja/integrations/slack#permissions
 {{% /tab %}}
 
 {{% tab "Slack Webhook (レガシー)" %}}
@@ -83,8 +83,8 @@ You can also send notifications to Slack from [monitors][3] and [events][4].
 
 [1]: https://app.datadoghq.com/integrations/slack
 [2]: https://slack.com/apps/A0F7XDT7F-datadog-legacy
-[3]: https://docs.datadoghq.com/monitors/notifications/
-[4]: https://docs.datadoghq.com/service_management/events/explorer/notifications/
+[3]: https://docs.datadoghq.com/ja/monitors/notifications/
+[4]: https://docs.datadoghq.com/ja/service_management/events/explorer/notifications/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -336,16 +336,15 @@ Slack 用インテグレーションには、サービスのチェック機能�
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://docs.datadoghq.com/monitors/configuration/
-[2]: https://docs.datadoghq.com/monitors/notifications/
+[1]: https://docs.datadoghq.com/ja/monitors/configuration/
+[2]: https://docs.datadoghq.com/ja/monitors/notifications/
 [3]: http://slack.com/account/settings
 [4]: https://api.slack.com/methods/usergroups.list
 [5]: https://app.datadoghq.com/integrations/slack
-[6]: https://docs.datadoghq.com/dashboards/scheduled_reports/
+[6]: https://docs.datadoghq.com/ja/dashboards/scheduled_reports/
 [7]: https://app.datadoghq.com/incidents
 [8]: https://app.datadoghq.com/incidents/settings#Integrations
-[9]: https://docs.datadoghq.com/service_management/incident_management/
+[9]: https://docs.datadoghq.com/ja/service_management/incident_management/
 [10]: https://api.slack.com/admins/audit-logs-call
 [11]: https://api.slack.com/scopes
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

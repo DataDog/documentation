@@ -1,9 +1,8 @@
 ---
-title: Watchdog Monitor
-description: "Algorithmically detects application and infrastructure issues."
 aliases:
-- /monitors/monitor_types/watchdog
-- /monitors/create/types/watchdog/
+- /ja/monitors/monitor_types/watchdog
+- /ja/monitors/create/types/watchdog/
+description: Algorithmically detects application and infrastructure issues.
 further_reading:
 - link: /monitors/notify/
   tag: Documentation
@@ -11,6 +10,7 @@ further_reading:
 - link: /watchdog/
   tag: Documentation
   text: Watchdog, algorithmically detect application and infrastructure issues
+title: Watchdog Monitor
 ---
 
 ## 概要
@@ -46,7 +46,7 @@ For more instructions on the **Configure notifications and automations** section
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /watchdog/
+[1]: /ja/watchdog/
 [2]: https://app.datadoghq.com/monitors#create/watchdog
-[3]: /monitors/configuration/?tab=thresholdalert#alert-grouping
-[4]: /monitors/notify/
+[3]: /ja/monitors/configuration/?tab=thresholdalert#alert-grouping
+[4]: /ja/monitors/notify/

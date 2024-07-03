@@ -1,23 +1,23 @@
 ---
-"categories":
-- "collaboration"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog のアラートとグラフをチームの Chatwork ルームに送信。"
-"doc_link": "https://docs.datadoghq.com/integrations/chatwork/"
-"draft": false
-"git_integration_title": "chatwork"
-"has_logo": true
-"integration_id": "chatwork"
-"integration_title": "Chatwork"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "chatwork"
-"public_title": "Datadog-Chatwork Integration"
-"short_description": "Send Datadog alerts and graphs to your team's Chatworks room."
-"version": "1.0"
+categories:
+- collaboration
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog のアラートとグラフをチームの Chatwork ルームに送信。
+doc_link: https://docs.datadoghq.com/integrations/chatwork/
+draft: false
+git_integration_title: chatwork
+has_logo: true
+integration_id: chatwork
+integration_title: Chatwork
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: chatwork
+public_title: Datadog-Chatwork Integration
+short_description: Send Datadog alerts and graphs to your team's Chatworks room.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -66,5 +66,4 @@ Need help? Contact [Datadog support][4].
 [1]: https://www.chatwork.com/login.php?redirect=apply_beta&package=chatwork&subpackage=api&args=
 [2]: http://developer.chatwork.com/ja/authenticate.html
 [3]: https://app.datadoghq.com/integrations/chatwork
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

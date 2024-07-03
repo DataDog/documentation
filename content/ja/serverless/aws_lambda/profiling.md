@@ -1,12 +1,12 @@
 ---
-title: Continuous Profiler for AWS Lambda
 further_reading:
-    - link: /profiler/
-      tag: Documentation
-      text: Continuous Profiler
-    - link: /serverless/distributed_tracing
-      tag: Documentation
-      text: Distributed Tracing for AWS Lambda
+- link: /profiler/
+  tag: Documentation
+  text: Continuous Profiler
+- link: /serverless/distributed_tracing
+  tag: Documentation
+  text: Distributed Tracing for AWS Lambda
+title: Continuous Profiler for AWS Lambda
 ---
 
 {{< img src="serverless/lambda/profiling_hero.png" alt="AWS Lambda の Continuous Profiling" style="width:100%;" >}}
@@ -42,5 +42,5 @@ Data is available after a minimum of 60 execution seconds of the Lambda function
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/
-[2]: /serverless/installation
+[1]: /ja/profiler/
+[2]: /ja/serverless/installation

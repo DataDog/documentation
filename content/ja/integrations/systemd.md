@@ -1,56 +1,56 @@
 ---
-"app_id": "systemd"
-"app_uuid": "a18dccd2-35c0-40e2-9c0a-7a01a5daf5f3"
-"assets":
-  "dashboards":
-    "Systemd Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": systemd.units_by_state
-      "metadata_path": metadata.csv
-      "prefix": systemd.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10066"
-    "source_type_name": Systemd
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: systemd
+app_uuid: a18dccd2-35c0-40e2-9c0a-7a01a5daf5f3
+assets:
+  dashboards:
+    Systemd Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: systemd.units_by_state
+      metadata_path: metadata.csv
+      prefix: systemd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10066
+    source_type_name: Systemd
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - os & system
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/systemd/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "systemd"
-"integration_id": "systemd"
-"integration_title": "Systemd"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "systemd"
-"public_title": "Systemd"
-"short_description": "Get metrics about Systemd and units managed by Systemd"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: systemd
+integration_id: systemd
+integration_title: Systemd
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: systemd
+public_title: Systemd
+short_description: Get metrics about Systemd and units managed by Systemd
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Category::OS & System"
-  "configuration": "README.md#Setup"
-  "description": Get metrics about Systemd and units managed by Systemd
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Systemd
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Get metrics about Systemd and units managed by Systemd
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Systemd
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -85,7 +85,7 @@ To configure this check for an Agent running on a host:
 2. [Restart the Agent][2].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -143,5 +143,5 @@ Need help? Contact [Datadog support][4].
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

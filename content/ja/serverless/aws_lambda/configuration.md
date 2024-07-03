@@ -1,22 +1,22 @@
 ---
-title: Configure Serverless Monitoring for AWS Lambda
-kind: documentation
-further_reading:
-  - link: /serverless/installation/
-    tag: Documentation
-    text: Install Serverless Monitoring for AWS Lambda
-  - link: /serverless/troubleshooting/
-    tag: Documentation
-    text: Troubleshoot Serverless Monitoring for AWS Lambda
-  - link: /integrations/github
-    tag: Documentation
-    text: Datadog GitHub integration
 aliases:
-    - /serverless/distributed_tracing/collect_lambda_payloads
-    - /serverless/libraries_integrations/lambda_code_signing
-    - /serverless/guide/forwarder_extension_migration/
-    - /serverless/guide/extension_private_link/
-    - /serverless/configuration
+- /ja/serverless/distributed_tracing/collect_lambda_payloads
+- /ja/serverless/libraries_integrations/lambda_code_signing
+- /ja/serverless/guide/forwarder_extension_migration/
+- /ja/serverless/guide/extension_private_link/
+- /ja/serverless/configuration
+further_reading:
+- link: /serverless/installation/
+  tag: Documentation
+  text: Install Serverless Monitoring for AWS Lambda
+- link: /serverless/troubleshooting/
+  tag: Documentation
+  text: Troubleshoot Serverless Monitoring for AWS Lambda
+- link: /integrations/github
+  tag: Documentation
+  text: Datadog GitHub integration
+kind: documentation
+title: Configure Serverless Monitoring for AWS Lambda
 ---
 
 First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, traces, and logs. After installation is complete, refer to the following topics to configure your installation to suit your monitoring needs.
@@ -86,7 +86,7 @@ datadog-ci lambda instrument \
     # ... other required arguments, such as function names
 ```
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -104,7 +104,7 @@ custom:
 
 By default, if you don't define `env` and `service`, the plugin automatically uses the `stage` and `service` values from the serverless application definition. To disable this feature, set `enableTags` to `false`.
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -122,7 +122,7 @@ Transform:
       tags: "team:avengers,project:marvel"
 ```
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -151,8 +151,8 @@ If you are collecting telemetry from your Lambda functions using the [Datadog La
 
 If you are collecting telemetry from your Lambda functions using the [Datadog Forwarder Lambda function][2], set the `env`, `service`, `version`, and additional tags as AWS resource tags on your Lambda functions. Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation stack for your Datadog Forwarder. This option defaults to true since version 3.19.0.
 
-[1]: /serverless/libraries_integrations/extension/
-[2]: /serverless/libraries_integrations/forwarder/
+[1]: /ja/serverless/libraries_integrations/extension/
+[2]: /ja/serverless/libraries_integrations/forwarder/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -181,7 +181,7 @@ datadog-ci lambda instrument \
     # ... other required arguments, such as function names
 ```
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -194,7 +194,7 @@ custom:
     captureLambdaPayload: true
 ```
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -209,7 +209,7 @@ Transform:
       captureLambdaPayload: true
 ```
 
-[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -506,7 +506,7 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
 
-[101]: /integrations/guide/source-code-integration/?tab=go#serverless
+[101]: /ja/integrations/guide/source-code-integration/?tab=go#serverless
 
 ## Collect Profiling data (public beta)
 
@@ -695,51 +695,51 @@ If you have trouble configuring your installations, set the environment variable
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /serverless/installation/
-[2]: /serverless/libraries_integrations/extension/
-[3]: /integrations/amazon_web_services/
-[4]: /serverless/libraries_integrations/forwarder/
+[1]: /ja/serverless/installation/
+[2]: /ja/serverless/libraries_integrations/extension/
+[3]: /ja/integrations/amazon_web_services/
+[4]: /ja/serverless/libraries_integrations/forwarder/
 [5]: https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads/
-[6]: /tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
-[7]: /serverless/enhanced_lambda_metrics
-[8]: /integrations/amazon_api_gateway/#data-collected
-[9]: /integrations/amazon_appsync/#data-collected
-[10]: /integrations/amazon_sqs/#data-collected
-[11]: /integrations/amazon_web_services/#log-collection
+[6]: /ja/tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
+[7]: /ja/serverless/enhanced_lambda_metrics
+[8]: /ja/integrations/amazon_api_gateway/#data-collected
+[9]: /ja/integrations/amazon_appsync/#data-collected
+[10]: /ja/integrations/amazon_sqs/#data-collected
+[11]: /ja/integrations/amazon_web_services/#log-collection
 [12]: https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/
-[13]: /agent/logs/advanced_log_collection/
-[14]: /logs/log_configuration/pipelines/
-[15]: /tracing/trace_collection/compatibility/
-[16]: /tracing/trace_collection/custom_instrumentation/
-[17]: /tracing/trace_pipeline/ingestion_controls/#configure-the-service-ingestion-rate
-[18]: /tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
-[19]: /tracing/trace_pipeline/ingestion_mechanisms/?tabs=environmentvariables#head-based-sampling
-[20]: /tracing/trace_pipeline/trace_retention/
-[21]: /tracing/trace_pipeline/
-[22]: /tracing/guide/ignoring_apm_resources/
-[23]: /tracing/configure_data_security/
-[24]: /tracing/other_telemetry/connect_logs_and_traces/
-[25]: /logs/log_configuration/parsing/
-[26]: /integrations/guide/source-code-integration
-[27]: /serverless/aws_lambda/metrics/#submit-custom-metrics
-[28]: /agent/guide/private-link/
-[29]: /getting_started/site/
-[30]: /agent/proxy/
+[13]: /ja/agent/logs/advanced_log_collection/
+[14]: /ja/logs/log_configuration/pipelines/
+[15]: /ja/tracing/trace_collection/compatibility/
+[16]: /ja/tracing/trace_collection/custom_instrumentation/
+[17]: /ja/tracing/trace_pipeline/ingestion_controls/#configure-the-service-ingestion-rate
+[18]: /ja/tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
+[19]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tabs=environmentvariables#head-based-sampling
+[20]: /ja/tracing/trace_pipeline/trace_retention/
+[21]: /ja/tracing/trace_pipeline/
+[22]: /ja/tracing/guide/ignoring_apm_resources/
+[23]: /ja/tracing/configure_data_security/
+[24]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[25]: /ja/logs/log_configuration/parsing/
+[26]: /ja/integrations/guide/source-code-integration
+[27]: /ja/serverless/aws_lambda/metrics/#submit-custom-metrics
+[28]: /ja/agent/guide/private-link/
+[29]: /ja/getting_started/site/
+[30]: /ja/agent/proxy/
 [31]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
-[32]: /agent/guide/dual-shipping/
-[33]: /serverless/distributed_tracing/#trace-propagation
-[34]: /integrations/amazon_xray/
-[35]: /serverless/distributed_tracing/#trace-merging
+[32]: /ja/agent/guide/dual-shipping/
+[33]: /ja/serverless/distributed_tracing/#trace-propagation
+[34]: /ja/integrations/amazon_xray/
+[35]: /ja/serverless/distributed_tracing/#trace-merging
 [36]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
-[37]: /serverless/guide/extension_motivation/
-[38]: /serverless/guide#install-using-the-datadog-forwarder
-[39]: /serverless/guide/troubleshoot_serverless_monitoring/
-[40]: /serverless/libraries_integrations/extension/
+[37]: /ja/serverless/guide/extension_motivation/
+[38]: /ja/serverless/guide#install-using-the-datadog-forwarder
+[39]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[40]: /ja/serverless/libraries_integrations/extension/
 [41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-[42]: /profiler/
-[43]: /serverless/installation#installation-instructions
-[44]: /security/default_rules/security-scan-detected/
-[45]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
-[46]: https://docs.datadoghq.com/tracing/glossary/#services
-[47]: /logs/
-[48]: /tracing/trace_collection/otel_instrumentation/
+[42]: /ja/profiler/
+[43]: /ja/serverless/installation#installation-instructions
+[44]: /ja/security/default_rules/security-scan-detected/
+[45]: https://docs.datadoghq.com/ja/tracing/trace_collection/library_config/
+[46]: https://docs.datadoghq.com/ja/tracing/glossary/#services
+[47]: /ja/logs/
+[48]: /ja/tracing/trace_collection/otel_instrumentation/

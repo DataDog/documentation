@@ -1,23 +1,23 @@
 ---
-"categories":
-- "collaboration"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Datadog のアラートとグラフをチームの Hipchat ルームに送信。"
-"doc_link": "https://docs.datadoghq.com/integrations/hipchat/"
-"draft": false
-"git_integration_title": "hipchat"
-"has_logo": true
-"integration_id": ""
-"integration_title": "HipChat"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "hipchat"
-"public_title": "Datadog-HipChat Integration"
-"short_description": "Send Datadog alerts and graphs to your team's Hipchat room."
-"version": "1.0"
+categories:
+- collaboration
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
+doc_link: https://docs.datadoghq.com/integrations/hipchat/
+draft: false
+git_integration_title: hipchat
+has_logo: true
+integration_id: ''
+integration_title: HipChat
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: hipchat
+public_title: Datadog-HipChat Integration
+short_description: Send Datadog alerts and graphs to your team's Hipchat room.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -75,5 +75,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://www.hipchat.com/admin/api
 [2]: https://app.datadoghq.com/integrations/hipchat
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

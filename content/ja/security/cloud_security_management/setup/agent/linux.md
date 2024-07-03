@@ -1,12 +1,12 @@
 ---
-title: Setting up Cloud Security Management on Linux
-code_lang: linux
-type: multi-code-lang
-code_lang_weight: 80 # a number that represents relative weight.
 aliases:
-  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/linux
-  - /security/cloud_security_management/setup/csm_pro/agent/linux/
-  - /security/cloud_security_management/setup/csm_enterprise/agent/linux/
+- /ja/security/cloud_security_management/setup/csm_cloud_workload_security/agent/linux
+- /ja/security/cloud_security_management/setup/csm_pro/agent/linux/
+- /ja/security/cloud_security_management/setup/csm_enterprise/agent/linux/
+code_lang: linux
+code_lang_weight: 80
+title: Setting up Cloud Security Management on Linux
+type: multi-code-lang
 ---
 
 Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
@@ -95,8 +95,8 @@ sudo chmod 640 /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-
 sudo chgrp dd-agent /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-agent.yaml
 ```
 
-[1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
-[3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
-[5]: /getting_started/agent/#installation
+[1]: /ja/security/cloud_security_management/misconfigurations/
+[2]: /ja/security/threats
+[3]: /ja/security/cloud_security_management/vulnerabilities
+[4]: /ja/security/cloud_security_management/setup#supported-deployment-types-and-features
+[5]: /ja/getting_started/agent/#installation

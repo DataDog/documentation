@@ -1,7 +1,7 @@
 ---
-title: Detecting a Network Outage
 aliases:
-    - /network_performance_monitoring/guide/detecting_a_network_outage/
+- /ja/network_performance_monitoring/guide/detecting_a_network_outage/
+title: Detecting a Network Outage
 ---
 ネットワークの停止は、多くの場合、インフラストラクチャー、アプリケーション、またはコンテナの問題に偽装されているため、検出が困難です。地域のネットワークパフォーマンスまたは依存しているサードパーティのエンドポイントのパフォーマンスを可視化しないと、サードパーティまたはクラウドの地域の停止を検出するのに数時間かかる場合があり、最終的には顧客に影響を与える可能性があります。
 

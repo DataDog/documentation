@@ -1,9 +1,9 @@
 ---
-title: Batch and Memory Settings
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentation
   text: Setting Up the OpenTelemetry Collector
+title: Batch and Memory Settings
 ---
 
 ## Overview

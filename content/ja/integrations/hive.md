@@ -1,61 +1,61 @@
 ---
-"app_id": "hive"
-"app_uuid": "827ff57e-83db-45b4-8a59-2f0270d389e8"
-"assets":
-  "dashboards":
-    "Hive Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": hive.server.memory.total.used
-      "metadata_path": metadata.csv
-      "prefix": hive.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10062"
-    "source_type_name": Hive
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: hive
+app_uuid: 827ff57e-83db-45b4-8a59-2f0270d389e8
+assets:
+  dashboards:
+    Hive Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hive.server.memory.total.used
+      metadata_path: metadata.csv
+      prefix: hive.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10062
+    source_type_name: Hive
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/hive/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "hive"
-"integration_id": "hive"
-"integration_title": "Hive"
-"integration_version": "1.10.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "hive"
-"public_title": "Hive"
-"short_description": "Gathers various JMX metrics from HiveServer2 and Hive MetaStore"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/hive/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: hive
+integration_id: hive
+integration_title: Hive
+integration_version: 1.10.0
+is_public: true
+manifest_version: 2.0.0
+name: hive
+public_title: Hive
+short_description: Gathers various JMX metrics from HiveServer2 and Hive MetaStore
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Gathers various JMX metrics from HiveServer2 and Hive MetaStore
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Hive
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Gathers various JMX metrics from HiveServer2 and Hive MetaStore
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hive
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -145,10 +145,10 @@ _Agent バージョン 6.0 以降で利用可能_
 3. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/integrations/java/
-[4]: https://docs.datadoghq.com/help/
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/integrations/java/
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -170,9 +170,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "hive", "service": "<サービス名>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -202,5 +202,5 @@ Hive チェックには、イベントは含まれません。
 [1]: https://cwiki.apache.org/confluence/display/Hive/Home
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-Metrics
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/

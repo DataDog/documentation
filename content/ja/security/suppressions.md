@@ -1,18 +1,18 @@
 ---
-title: Suppressions
-kind: documentation
 disable_toc: false
 further_reading:
 - link: security/detection_rules/
   tag: Documentation
   text: Learn more about detection rules
+kind: documentation
 products:
-- name: Cloud SIEM
+- icon: siem
+  name: Cloud SIEM
   url: /security/cloud_siem/
-  icon: siem
-- name: CSM Threats
+- icon: cloud-security-management
+  name: CSM Threats
   url: /security/threats/
-  icon: cloud-security-management
+title: Suppressions
 ---
 
 {{< product-availability >}}
@@ -61,7 +61,7 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules/new
-[2]: /security/detection_rules/
+[2]: /ja/security/detection_rules/
 [3]: https://app.datadoghq.com/security/configuration/suppressions
 [4]: https://app.datadoghq.com/security/rules
-[5]: /logs/explorer/facets/#log-side-panel
+[5]: /ja/logs/explorer/facets/#log-side-panel

@@ -1,11 +1,11 @@
 ---
-title: Auth0 SAML IdP
 aliases:
-  - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
+- /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
   text: Configure SAML for your Datadog account
+title: Auth0 SAML IdP
 ---
 
 ## 設定およびコンフィギュレーション

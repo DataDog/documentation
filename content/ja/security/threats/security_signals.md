@@ -1,19 +1,19 @@
 ---
-title: Investigate Security Signals
 disable_toc: false
 further_reading:
-  - link: "/security/default_rules/?category=cat-csm-threats#all"
-    tag: Documentation
-    text: Explore CSM Threats detection rules
-  - link: /security/threats/workload_security_rules
-    tag: Documentation
-    text: Learn how to manage CSM Threats detection rules
-  - link: /security/notifications/
-    tag: Documentation
-    text: Learn more about security notifications
-  - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
-    tag: Blog
-    text: Secure your Windows workloads with Datadog Cloud Security Management
+- link: /security/default_rules/?category=cat-csm-threats#all
+  tag: Documentation
+  text: Explore CSM Threats detection rules
+- link: /security/threats/workload_security_rules
+  tag: Documentation
+  text: Learn how to manage CSM Threats detection rules
+- link: /security/notifications/
+  tag: Documentation
+  text: Learn more about security notifications
+- link: https://www.datadoghq.com/blog/datadog-csm-windows/
+  tag: Blog
+  text: Secure your Windows workloads with Datadog Cloud Security Management
+title: Investigate Security Signals
 ---
 
 [Cloud Security Management Threats][9] (CSM Threats) security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
@@ -73,12 +73,12 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/rules/
-[2]: /account_management/audit_trail/events/#cloud-security-platform-events
-[3]: /account_management/rbac/permissions/#cloud-security-platform
+[1]: /ja/security/notifications/rules/
+[2]: /ja/account_management/audit_trail/events/#cloud-security-platform-events
+[3]: /ja/account_management/rbac/permissions/#cloud-security-platform
 [4]: https://app.datadoghq.com/security?product=cws
-[5]: /service_management/incident_management/
-[6]: /service_management/case_management/
-[7]: /security/cloud_security_management/workflows
-[8]: /service_management/workflows
-[9]: /security/threats/
+[5]: /ja/service_management/incident_management/
+[6]: /ja/service_management/case_management/
+[7]: /ja/security/cloud_security_management/workflows
+[8]: /ja/service_management/workflows
+[9]: /ja/security/threats/

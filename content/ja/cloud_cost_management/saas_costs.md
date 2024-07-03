@@ -1,7 +1,4 @@
 ---
-title: SaaS Cost Integrations
-is_beta: true
-private: true
 disable_toc: false
 further_reading:
 - link: /cloud_cost_management/
@@ -19,6 +16,9 @@ further_reading:
 - link: /cloud_cost_management/custom
   tag: Documentation
   text: Gain insights into your custom costs
+is_beta: true
+private: true
+title: SaaS Cost Integrations
 ---
 
 {{< site-region region="gov" >}}
@@ -315,11 +315,11 @@ Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and clic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/custom
-[2]: /cloud_cost_management
+[1]: /ja/cloud_cost_management/custom
+[2]: /ja/cloud_cost_management
 [3]: https://app.datadoghq.com/cost/analytics
 [4]: https://app.datadoghq.com/cost/tags?cloud=custom
-[5]: /dashboards
-[6]: /notebooks
-[7]: /monitors/types/cloud_cost
+[5]: /ja/dashboards
+[6]: /ja/notebooks
+[7]: /ja/monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts

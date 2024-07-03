@@ -1,12 +1,11 @@
 ---
-title: Setting Up Database Monitoring for Google Cloud SQL managed SQL Server
-description: Install and configure Database Monitoring for SQL Server managed on Google Cloud SQL
+description: Install and configure Database Monitoring for SQL Server managed on Google
+  Cloud SQL
 further_reading:
 - link: /integrations/sqlserver/
   tag: Documentation
   text: SQL Server Integration
-
-
+title: Setting Up Database Monitoring for Google Cloud SQL managed SQL Server
 ---
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
@@ -112,12 +111,12 @@ driver: '{ODBC Driver 18 for SQL Server}'
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
-[5]: /getting_started/tagging/unified_service_tagging
+[5]: /ja/getting_started/tagging/unified_service_tagging
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/configuration/agent-commands/#agent-status-and-information
+[9]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux ホスト" %}}
@@ -162,9 +161,9 @@ instances:
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/configuration/agent-commands/#agent-status-and-information
+[5]: /ja/getting_started/tagging/unified_service_tagging
+[6]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -210,11 +209,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 [Agent の status サブコマンドを実行][5]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][6]のページへ移動して開始します。
 
-[1]: /agent/faq/template_variables/
+[1]: /ja/agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: /agent/configuration/agent-commands/#agent-status-and-information
+[4]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -263,8 +262,8 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### マウントされたファイルで構成する
 
@@ -334,11 +333,11 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
+[1]: /ja/agent/cluster_agent
+[2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
-[5]: /agent/configuration/secrets-management
+[5]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -354,4 +353,4 @@ Google Cloud SQL からより包括的なデータベースメトリクスを収
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://cloud.google.com/sql/docs/sqlserver/create-manage-users#creating
-[2]: /integrations/google_cloudsql
+[2]: /ja/integrations/google_cloudsql

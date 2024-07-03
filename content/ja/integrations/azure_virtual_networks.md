@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - azure
 - cloud
 - network
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Virtual Network metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_virtual_networks/"
-"draft": false
-"git_integration_title": "azure_virtual_networks"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Microsoft Azure Virtual Network"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_virtual_networks"
-"public_title": "Datadog-Microsoft Azure Virtual Network Integration"
-"short_description": "Track key Azure Virtual Network metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Virtual Network metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_virtual_networks/
+draft: false
+git_integration_title: azure_virtual_networks
+has_logo: true
+integration_id: ''
+integration_title: Microsoft Azure Virtual Network
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_virtual_networks
+public_title: Datadog-Microsoft Azure Virtual Network Integration
+short_description: Track key Azure Virtual Network metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -57,7 +57,6 @@ The Azure Virtual Network integration does not include any service checks.
 ## トラブルシューティング
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_virtual_networks/azure_virtual_networks_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

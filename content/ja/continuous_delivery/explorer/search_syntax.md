@@ -1,5 +1,4 @@
 ---
-title: CD Visibility Explorer Search Syntax
 description: Search all of your deployment executions.
 further_reading:
 - link: /continuous_delivery/search
@@ -8,6 +7,7 @@ further_reading:
 - link: /continuous_delivery/explorer/facets
   tag: Documentation
   text: Learn about facets
+title: CD Visibility Explorer Search Syntax
 ---
 
 {{< site-region region="gov" >}}

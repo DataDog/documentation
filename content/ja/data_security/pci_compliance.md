@@ -1,10 +1,10 @@
 ---
-title: PCI DSS Compliance
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
+- link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: Blog
   text: Announcing PCI-Compliant Log Management and APM from Datadog
+title: PCI DSS Compliance
 ---
 
 {{% site-region region="us3,us5,eu,ap1,gov" %}}
@@ -54,7 +54,7 @@ PCI 準拠の Datadog 組織をセットアップするには、以下の手順�
 
 {{< /tabs >}}
 
-[1]: /getting_started/site/
+[1]: /ja/getting_started/site/
 
 {{% /site-region %}}
 

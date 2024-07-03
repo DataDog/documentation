@@ -1,72 +1,74 @@
 ---
-"app_id": "azure-iot-edge"
-"app_uuid": "9c4d7121-eed1-429c-bd86-18952b11d3f5"
-"assets":
-  "dashboards":
-    "azure_iot_edge": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": azure.iot_edge.edge_agent.iotedged_uptime_seconds
-      "metadata_path": metadata.csv
-      "prefix": azure.iot_edge.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10125"
-    "source_type_name": Azure IoT Edge
-  "monitors":
-    "Disk usage": assets/monitors/disk_usage.json
-    "Edge Hub retries": assets/monitors/edgehub_retries.json
-    "IoT Hub syncs": assets/monitors/iothub_syncs.json
-    "Memory usage": assets/monitors/memory_usage.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: azure-iot-edge
+app_uuid: 9c4d7121-eed1-429c-bd86-18952b11d3f5
+assets:
+  dashboards:
+    azure_iot_edge: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: azure.iot_edge.edge_agent.iotedged_uptime_seconds
+      metadata_path: metadata.csv
+      prefix: azure.iot_edge.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10125
+    source_type_name: Azure IoT Edge
+  monitors:
+    Disk usage: assets/monitors/disk_usage.json
+    Edge Hub retries: assets/monitors/edgehub_retries.json
+    IoT Hub syncs: assets/monitors/iothub_syncs.json
+    Memory usage: assets/monitors/memory_usage.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - azure
 - iot
 - log collection
 - network
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "azure_iot_edge"
-"integration_id": "azure-iot-edge"
-"integration_title": "Azure IoT Edge"
-"integration_version": "4.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "azure_iot_edge"
-"public_title": "Azure IoT Edge"
-"short_description": "Monitor the health and performance of an Azure IoT Edge device and modules."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: azure_iot_edge
+integration_id: azure-iot-edge
+integration_title: Azure IoT Edge
+integration_version: 4.2.1
+is_public: true
+manifest_version: 2.0.0
+name: azure_iot_edge
+public_title: Azure IoT Edge
+short_description: Monitor the health and performance of an Azure IoT Edge device
+  and modules.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Azure"
-  - "Category::IoT"
-  - "Category::Log Collection"
-  - "Category::Network"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor the health and performance of an Azure IoT Edge device and modules.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Azure IoT Edge
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::IoT
+  - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor the health and performance of an Azure IoT Edge device and
+    modules.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure IoT Edge
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -196,11 +198,10 @@ Azure IoT Edge には、イベントは含まれません。
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-modules-portal
 [4]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/datadog_checks/azure_iot_edge/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/docker/integrations/
-[6]: https://docs.datadoghq.com/agent/guide/environment-variables/
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/docker/integrations/
+[6]: https://docs.datadoghq.com/ja/agent/guide/environment-variables/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/assets/service_checks.json
-[10]: https://docs.datadoghq.com/help/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.datadoghq.com/blog/monitor-azure-iot-edge-with-datadog/
-

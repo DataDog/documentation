@@ -1,12 +1,12 @@
 ---
-title: Setting up Cloud Security Management on Kubernetes
-code_lang: kubernetes
-type: multi-code-lang
-code_lang_weight: 60 # a number that represents relative weight.
 aliases:
-  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/kubernetes/
-  - /security/cloud_security_management/setup/csm_pro/agent/kubernetes/
-  - /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
+- /ja/security/cloud_security_management/setup/csm_cloud_workload_security/agent/kubernetes/
+- /ja/security/cloud_security_management/setup/csm_pro/agent/kubernetes/
+- /ja/security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
+code_lang: kubernetes
+code_lang_weight: 60
+title: Setting up Cloud Security Management on Kubernetes
+type: multi-code-lang
 ---
 
 Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
@@ -134,7 +134,7 @@ Use the following instructions to enable Misconfigurations, Threat Detection, Ho
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
-[3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[1]: /ja/security/cloud_security_management/misconfigurations/
+[2]: /ja/security/threats
+[3]: /ja/security/cloud_security_management/vulnerabilities
+[4]: /ja/security/cloud_security_management/setup#supported-deployment-types-and-features

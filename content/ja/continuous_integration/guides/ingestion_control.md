@@ -1,13 +1,14 @@
 ---
-title: Set Ingestion Control for CI Visibility
-description: Learn how to define condition(s) by which to exclude specific events from being processed by CI Visibility.
+description: Learn how to define condition(s) by which to exclude specific events
+  from being processed by CI Visibility.
 further_reading:
-  - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
-    tag: Blog
-    text: Streamline your CI testing with Datadog Intelligent Test Runner
-  - link: /continuous_integration/pipelines
-    tag: Documentation
-    text: Learn about Pipeline Visibility
+- link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
+  tag: Blog
+  text: Streamline your CI testing with Datadog Intelligent Test Runner
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Learn about Pipeline Visibility
+title: Set Ingestion Control for CI Visibility
 ---
 
 {{< site-region region="gov" >}}
@@ -84,8 +85,8 @@ git author のメールアドレス (`@git.commit.author.email`) をフィルタ
 ## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/permissions/#ci-visibility
-[3]: /getting_started/tagging/
-[4]: /account_management/rbac/permissions/#ci-visibility
-[5]: /account_management/audit_trail/events/#ci-visibility-events
-[6]: /monitors/types/apm/
+[1]: /ja/account_management/rbac/permissions/#ci-visibility
+[3]: /ja/getting_started/tagging/
+[4]: /ja/account_management/rbac/permissions/#ci-visibility
+[5]: /ja/account_management/audit_trail/events/#ci-visibility-events
+[6]: /ja/monitors/types/apm/

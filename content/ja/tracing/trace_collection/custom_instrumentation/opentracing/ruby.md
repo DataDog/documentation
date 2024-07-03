@@ -1,14 +1,14 @@
 ---
-title: Ruby OpenTracing Instrumentation
-kind: documentation
 aliases:
-- /tracing/setup_overview/open_standards/ruby
-- /tracing/trace_collection/open_standards/ruby
-- /tracing/trace_collection/opentracing/ruby
-description: 'OpenTracing instrumentation for Ruby'
+- /ja/tracing/setup_overview/open_standards/ruby
+- /ja/tracing/trace_collection/open_standards/ruby
+- /ja/tracing/trace_collection/opentracing/ruby
 code_lang: ruby
-type: multi-code-lang
 code_lang_weight: 20
+description: OpenTracing instrumentation for Ruby
+kind: documentation
+title: Ruby OpenTracing Instrumentation
+type: multi-code-lang
 ---
 
 <div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/ruby/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
@@ -41,8 +41,8 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 | `OpenTracing::FORMAT_BINARY`   | No         |                                                                                                                                                                                                                                                                                                               |
 
 
-[1]: /tracing/setup/ruby/#quickstart-for-opentracing
-[2]: /tracing/setup/ruby/#tracer-settings
-[3]: /tracing/glossary/#spans
-[4]: /tracing/glossary/#trace
-[5]: /tracing/setup/ruby/#integration-instrumentation
+[1]: /ja/tracing/setup/ruby/#quickstart-for-opentracing
+[2]: /ja/tracing/setup/ruby/#tracer-settings
+[3]: /ja/tracing/glossary/#spans
+[4]: /ja/tracing/glossary/#trace
+[5]: /ja/tracing/setup/ruby/#integration-instrumentation

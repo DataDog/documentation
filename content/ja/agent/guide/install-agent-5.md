@@ -1,9 +1,9 @@
 ---
-title: Install Datadog Agent 5
 further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentation
   text: Agent の基本的な使い方
+title: Install Datadog Agent 5
 ---
 
 This guide covers installing Agent 5. Datadog recommends installing or upgrading to Agent 7 for the latest features. For information on installing the latest version of the Agent, follow the [Agent 7 Installation Instructions][1]. For information on upgrading to Agent 7 from an earlier version, see [Upgrade to Datadog Agent v7][2].
@@ -391,7 +391,7 @@ For a full list of the available installation script environment variables, see 
    sudo startsrc -s datadog-agent
    ```
 
-[1]: /agent/basic_agent_usage/aix/#installation
+[1]: /ja/agent/basic_agent_usage/aix/#installation
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
 {{% /tab %}}
 
@@ -520,10 +520,10 @@ To customize your Agent configuration, see the documentation in the Agent 5 [doc
 For information on collecting metrics, service checks, and events, see the [Kubernetes integration][5] documentation.
 
 [1]: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-[2]: /metrics/custom_metrics
+[2]: /ja/metrics/custom_metrics
 [3]: https://github.com/DataDog/docker-dd-agent
-[4]: /containers/kubernetes/integrations/?tab=kubernetesadv2
-[5]: /integrations/kubernetes/
+[4]: /ja/containers/kubernetes/integrations/?tab=kubernetesadv2
+[5]: /ja/integrations/kubernetes/
 
 {{% /tab %}}
 
@@ -563,7 +563,7 @@ To customize your Agent configuration, see the documentation in the Agent 5 [doc
 
 [1]: https://github.com/DataDog/docker-dd-agent?tab=readme-ov-file#cgroups
 [2]: https://github.com/DataDog/docker-dd-agent
-[3]: https://docs.datadoghq.com/containers/docker/integrations/?tabs=docker
+[3]: https://docs.datadoghq.com/ja/containers/docker/integrations/?tabs=docker
 
 {{% /tab %}}
 
@@ -731,7 +731,7 @@ You can find more examples of the Agent role usage on the Github repo for the [s
 To get metrics and events on Datadog after Ansible runs, see the Ansible callback project's [Github page][4].
 
 [1]: https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/
-[2]: /agent/guide/ansible_standalone_role/#ansible-role-versus-ansible-collection
+[2]: /ja/agent/guide/ansible_standalone_role/#ansible-role-versus-ansible-collection
 [3]: https://github.com/DataDog/ansible-datadog/#role-variables
 [4]: https://github.com/DataDog/ansible-datadog-callback
 
@@ -961,11 +961,11 @@ To make the installation permanent, set up your `init` daemon to run `$sandbox_d
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[2]: /agent/versions/upgrade_to_agent_v7/
+[2]: /ja/agent/versions/upgrade_to_agent_v7/
 [3]: https://install.datadoghq.com/datadog-agent-5.11.3-1.dmg
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
 [5]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-32bit-cli.msi
 [6]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 [7]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
-[8]: /integrations/azure/
+[8]: /ja/integrations/azure/
 [9]: https://github.com/DataDog/dd-agent/wiki/Windows-Agent-Installation

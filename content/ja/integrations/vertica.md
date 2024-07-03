@@ -1,65 +1,65 @@
 ---
-"app_id": "vertica"
-"app_uuid": "c5946789-de76-4ec6-9485-db83dd66fd28"
-"assets":
-  "dashboards":
-    "Vertica Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": vertica.connection.active
-      "metadata_path": metadata.csv
-      "prefix": vertica.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10072"
-    "source_type_name": Vertica
-  "monitors":
-    "[Vertica] Nodes down above K-safety level": assets/monitors/vertica_replication_safety.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: vertica
+app_uuid: c5946789-de76-4ec6-9485-db83dd66fd28
+assets:
+  dashboards:
+    Vertica Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: vertica.connection.active
+      metadata_path: metadata.csv
+      prefix: vertica.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10072
+    source_type_name: Vertica
+  monitors:
+    '[Vertica] Nodes down above K-safety level': assets/monitors/vertica_replication_safety.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - data stores
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/vertica/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "vertica"
-"integration_id": "vertica"
-"integration_title": "Vertica"
-"integration_version": "4.5.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "vertica"
-"public_title": "Vertica"
-"short_description": "Monitor Vertica projection storage, license usage, and more."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: vertica
+integration_id: vertica
+integration_title: Vertica
+integration_version: 4.5.0
+is_public: true
+manifest_version: 2.0.0
+name: vertica
+public_title: Vertica
+short_description: Monitor Vertica projection storage, license usage, and more.
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Log Collection"
-  "configuration": "README.md#Setup"
-  "description": Monitor Vertica projection storage, license usage, and more.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Vertica
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Monitor Vertica projection storage, license usage, and more.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vertica
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -155,9 +155,8 @@ Vertica には、イベントは含まれません。
 [5]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/AdministratorsGuide/DBUsersAndPrivileges/Roles/SYSMONITORROLE.htm
 [6]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/SQLReferenceManual/Functions/VerticaFunctions/LicenseManagement/AUDIT_LICENSE_SIZE.htm
 [7]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/AdministratorsGuide/Licensing/MonitoringDatabaseSizeForLicenseCompliance.htm
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/?#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/vertica/metadata.csv
 [11]: https://github.com/DataDog/integrations-core/blob/master/vertica/assets/service_checks.json
-[12]: https://docs.datadoghq.com/help/
-
+[12]: https://docs.datadoghq.com/ja/help/

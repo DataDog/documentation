@@ -71,4 +71,4 @@ SAML 属性を使用してチームおよびチームメンバーシップを管
 厳密なメンバーシップモデルを実施するには、デフォルトのチーム設定で、**user_access_manage** を持つユーザーだけがメンバーを追加または削除できるように構成します。`teams_manage` 権限を組織管理者にのみ割り当てます。
 
 [1]: https://app.datadoghq.com/organization-settings/teams
-[2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
+[2]: /ja/account_management/saml/mapping/#map-saml-attributes-to-teams

@@ -1,10 +1,10 @@
 ---
-title: Saved Views
-kind: documentation
 further_reading:
 - link: /continuous_testing/explorer/search_syntax/
   tag: Documentation
   text: Learn how to create a search query
+kind: documentation
+title: Saved Views
 ---
 
 ## Overview
@@ -55,4 +55,4 @@ In the default view entry in the **Views** panel, you can:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer
-[2]: /continuous_testing/explorer/
+[2]: /ja/continuous_testing/explorer/

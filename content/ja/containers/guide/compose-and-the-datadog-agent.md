@@ -1,18 +1,18 @@
 ---
-title: Compose and the Datadog Agent
-further_reading:
-    - link: "https://github.com/DataDog/docker-compose-example"
-      tag: ソースコード
-      text: Using Docker Compose with Datadog Example
-    - link: /agent/docker/
-      tag: Documentation
-      text: Datadog Docker Agent documentation
-    - link: /agent/docker/log/
-      tag: Documentation
-      text: Datadog Docker Log collection documentation
 aliases:
-    - /integrations/faq/compose-and-the-datadog-agent
-    - /agent/guide/compose-and-the-datadog-agent
+- /ja/integrations/faq/compose-and-the-datadog-agent
+- /ja/agent/guide/compose-and-the-datadog-agent
+further_reading:
+- link: https://github.com/DataDog/docker-compose-example
+  tag: ソースコード
+  text: Using Docker Compose with Datadog Example
+- link: /agent/docker/
+  tag: Documentation
+  text: Datadog Docker Agent documentation
+- link: /agent/docker/log/
+  tag: Documentation
+  text: Datadog Docker Log collection documentation
+title: Compose and the Datadog Agent
 ---
 
 [Compose][1] は、複数のコンテナを 1 つのアプリケーションとして定義、ビルド、実行できるようにすることで、Docker 上でのアプリケーション構築を簡素化する Docker ツールです。
@@ -101,6 +101,6 @@ services:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.docker.com/compose/overview
-[2]: /agent/docker/
+[2]: /ja/agent/docker/
 [3]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[4]: /agent/logs/
+[4]: /ja/agent/logs/

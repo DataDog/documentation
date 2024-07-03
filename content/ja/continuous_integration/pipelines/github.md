@@ -1,20 +1,20 @@
 ---
-title: Set up Tracing on GitHub Actions Workflows
 aliases:
-  - /continuous_integration/setup_pipelines/github
+- /ja/continuous_integration/setup_pipelines/github
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
-    - link: /continuous_integration/pipelines/custom_tags_and_measures/
-      tag: Documentation
-      text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
-    - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
-      tag: blog
-      text: Monitor your GitHub Actions workflows with Datadog CI Visibility
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines/custom_tags_and_measures/
+  tag: Documentation
+  text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
+- link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
+  tag: blog
+  text: Monitor your GitHub Actions workflows with Datadog CI Visibility
+title: Set up Tracing on GitHub Actions Workflows
 ---
 
 {{< site-region region="gov" >}}
@@ -112,15 +112,15 @@ CI Visibility GitHub Actions のインテグレーションを無効にするに
 [2]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [3]: https://app.datadoghq.com/integrations/github/
 [4]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[5]: /logs/
+[5]: /ja/logs/
 [6]: https://app.datadoghq.com/ci/settings
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
-[10]: /continuous_integration/pipelines/github/#enable-log-collection
-[11]: /continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
-[12]: /glossary/#running-pipeline
-[13]: /glossary/#partial-retry
-[14]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[15]: /glossary/#queue-time
-[16]: /glossary/#approval-wait-time
+[10]: /ja/continuous_integration/pipelines/github/#enable-log-collection
+[11]: /ja/continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
+[12]: /ja/glossary/#running-pipeline
+[13]: /ja/glossary/#partial-retry
+[14]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[15]: /ja/glossary/#queue-time
+[16]: /ja/glossary/#approval-wait-time

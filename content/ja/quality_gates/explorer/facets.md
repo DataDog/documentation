@@ -1,6 +1,4 @@
 ---
-title: Quality Gates or Rule Execution Facets
-kind: documentation
 description: Learn about facets in the Quality Gates Explorer.
 further_reading:
 - link: quality_gates/explorer/
@@ -9,6 +7,8 @@ further_reading:
 - link: quality_gates/search/
   tag: Documentation
   text: Learn how to search your rules and executions
+kind: documentation
+title: Quality Gates or Rule Execution Facets
 ---
 
 {{< site-region region="gov" >}}
@@ -35,7 +35,7 @@ Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executio
 {{< img src="quality_gates/explorer/facets_gates.png" text="Facets list for gates on the Quality Gates Explorer" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/quality-gates/executions
-[102]: /quality_gates/explorer/?tab=gates
+[102]: /ja/quality_gates/explorer/?tab=gates
 
 {{% /tab %}}
 {{% tab "Rules" %}}
@@ -45,7 +45,7 @@ Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executio
 {{< img src="quality_gates/explorer/facets_rules.png" text="Facets list for rules on the Quality Gates Explorer" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/quality-gates/executions
-[102]: /quality_gates/explorer/?tab=rules
+[102]: /ja/quality_gates/explorer/?tab=rules
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -110,9 +110,9 @@ Autocomplete based on the content in quality gates of the current views helps yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/types/ci
-[2]: /dashboards/
-[3]: /notebooks/
-[4]: /quality_gates/explorer
-[5]: /quality_gates/search
-[6]: /quality_gates/explorer/search_syntax/
+[1]: /ja/monitors/types/ci
+[2]: /ja/dashboards/
+[3]: /ja/notebooks/
+[4]: /ja/quality_gates/explorer
+[5]: /ja/quality_gates/search
+[6]: /ja/quality_gates/explorer/search_syntax/

@@ -1,71 +1,71 @@
 ---
-"app_id": "komodor"
-"app_uuid": "995fe904-e761-4f2f-8dbf-148baf3f080a"
-"assets": {}
-"author":
-  "homepage": "https://komodor.com/"
-  "name": Komodor
-  "sales_email": sales@komodor.com
-  "support_email": support@komodor.com
-"categories":
+app_id: komodor
+app_uuid: 995fe904-e761-4f2f-8dbf-148baf3f080a
+assets: {}
+author:
+  homepage: https://komodor.com/
+  name: Komodor
+  sales_email: sales@komodor.com
+  support_email: support@komodor.com
+categories:
 - containers
 - kubernetes
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/komodor/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "komodor"
-"integration_id": "komodor"
-"integration_title": "Komodor Automation"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "komodor"
-"public_title": "Komodor Automation"
-"short_description": "Track changes across your entire K8s landscape and stack"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/komodor/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: komodor
+integration_id: komodor
+integration_title: Komodor Automation
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: komodor
+public_title: Komodor Automation
+short_description: Track changes across your entire K8s landscape and stack
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Containers"
-  - "Category::Kubernetes"
-  - "Category::Notifications"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Track changes across your entire K8s landscape and stack
-  "media":
-  - "caption": Main services screen.
-    "image_url": images/Komodor_screen_01.png
-    "media_type": image
-  - "caption": Service view events timeline and related services.
-    "image_url": images/Komodor_screen_02.png
-    "media_type": image
-  - "caption": Services view reviewing a deployment and its changes.
-    "image_url": images/Komodor_screen_03.png
-    "media_type": image
-  - "caption": Reviewing a deployment's replicaset and its pods and logs
-    "image_url": images/Komodor_screen_04.png
-    "media_type": image
-  - "caption": Events timelines for multiple clusters and deployments.
-    "image_url": images/Komodor_screen_05.png
-    "media_type": image
-  - "caption": Service view showing Datadog Monitoring Alert.
-    "image_url": images/Komodor_screen_06.png
-    "media_type": image
-  - "caption": Datadog metrics view showing link back into Komodor.
-    "image_url": images/Komodor_screen_07.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Komodor Automation
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Notifications
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Track changes across your entire K8s landscape and stack
+  media:
+  - caption: Main services screen.
+    image_url: images/Komodor_screen_01.png
+    media_type: image
+  - caption: Service view events timeline and related services.
+    image_url: images/Komodor_screen_02.png
+    media_type: image
+  - caption: Services view reviewing a deployment and its changes.
+    image_url: images/Komodor_screen_03.png
+    media_type: image
+  - caption: Reviewing a deployment's replicaset and its pods and logs
+    image_url: images/Komodor_screen_04.png
+    media_type: image
+  - caption: Events timelines for multiple clusters and deployments.
+    image_url: images/Komodor_screen_05.png
+    media_type: image
+  - caption: Service view showing Datadog Monitoring Alert.
+    image_url: images/Komodor_screen_06.png
+    media_type: image
+  - caption: Datadog metrics view showing link back into Komodor.
+    image_url: images/Komodor_screen_07.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Komodor Automation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -98,8 +98,7 @@ For more information please [visit our website][8] or [contact us][9].
 [3]: https://docs.komodor.com/Integrations/Datadog.html
 [4]: https://docs.komodor.com/Integrations/datadog-webhook.html
 [5]: https://docs.komodor.com/Integrations/Datadog-Monitor-Notification.html
-[6]: https://docs.datadoghq.com/monitors/notify/
+[6]: https://docs.datadoghq.com/ja/monitors/notify/
 [7]: https://docs.komodor.com/Learn/Annotations.html
 [8]: https://komodor.com/sign-up/
 [9]: https://komodor.com/contact-us/
-

@@ -1,9 +1,9 @@
 ---
-title: Mapping OpenTelemetry Semantic Conventions to Hostnames
 further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: OpenTelemetry Support in Datadog
+title: Mapping OpenTelemetry Semantic Conventions to Hostnames
 ---
 
 ## 概要
@@ -105,7 +105,7 @@ This may lead to incorrect hostnames in [gateway deployments][1]. To avoid this,
 
 The Datadog Agent hostname is used. See [How does Datadog determine the Agent hostname?][1] for more information.
 
-[1]: /agent/faq/how-datadog-agent-determines-the-hostname/
+[1]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -124,6 +124,6 @@ The Datadog Agent hostname is used. See [How does Datadog determine the Agent ho
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
-[2]: /opentelemetry/interoperability/otlp_ingest_in_the_agent
-[3]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter
-[4]: /opentelemetry/collector_exporter/hostname_tagging/?tab=host
+[2]: /ja/opentelemetry/interoperability/otlp_ingest_in_the_agent
+[3]: /ja/opentelemetry/collector_exporter/otel_collector_datadog_exporter
+[4]: /ja/opentelemetry/collector_exporter/hostname_tagging/?tab=host

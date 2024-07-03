@@ -1,10 +1,10 @@
 ---
-title: 保存ビュー
-kind: documentation
 further_reading:
 - link: /quality_gates/explorer/search_syntax/
   tag: Documentation
   text: Learn how to create a search query
+kind: documentation
+title: 保存ビュー
 ---
 
 {{< site-region region="gov" >}}
@@ -62,4 +62,4 @@ From your current default saved view, take actions to update the view to a diffe
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/quality-gates/executions
-[2]: /quality_gates/explorer/
+[2]: /ja/quality_gates/explorer/

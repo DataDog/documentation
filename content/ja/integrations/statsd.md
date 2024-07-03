@@ -1,59 +1,59 @@
 ---
-"app_id": "statsd"
-"app_uuid": "847f92f2-77e2-4429-844f-50f4d9c8097f"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "statsd.counters.count"
-      "metadata_path": "metadata.csv"
-      "prefix": "statsd."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10086"
-    "source_type_name": "StatsD"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/statsd/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "statsd"
-"integration_id": "statsd"
-"integration_title": "StatsD"
-"integration_version": "1.12.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "statsd"
-"public_title": "StatsD"
-"short_description": "StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "StatsD"
+app_id: statsd
+app_uuid: 847f92f2-77e2-4429-844f-50f4d9c8097f
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: statsd.counters.count
+      metadata_path: metadata.csv
+      prefix: statsd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10086
+    source_type_name: StatsD
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: statsd
+integration_id: statsd
+integration_title: StatsD
+integration_version: 1.12.0
+is_public: true
+manifest_version: 2.0.0
+name: statsd
+public_title: StatsD
+short_description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: StatsD
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -92,9 +92,9 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 2. [Agent を再起動][3]すると、Datadog への StatsD メトリクスおよびサービスチェックの送信が開始されます。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/statsd/datadog_checks/statsd/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -108,7 +108,7 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 | `<INIT_CONFIG>`      | 空白または `{}`                         |
 | `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"8126"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -167,8 +167,8 @@ StatsD チェックには、イベントは含まれません。
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/statsd/datadog_checks/statsd/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog/statsd
 [7]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing

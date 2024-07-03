@@ -1,6 +1,6 @@
 ---
-title: archive
 core_product:
-  - log management
+- log management
+title: archive
 ---
-An archive is a long-term cloud storage solution to store logs, whether they are indexed or not, for longer periods. 
+An archive is a long-term cloud storage solution to store logs, whether they are indexed or not, for longer periods.

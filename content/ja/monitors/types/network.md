@@ -1,9 +1,8 @@
 ---
-title: Network Monitor
-description: "Check the status of TCP/HTTP endpoints."
 aliases:
-- /monitors/monitor_types/network
-- /monitors/create/types/network/
+- /ja/monitors/monitor_types/network
+- /ja/monitors/create/types/network/
+description: Check the status of TCP/HTTP endpoints.
 further_reading:
 - link: /monitors/notify/
   tag: Documentation
@@ -14,6 +13,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Check your monitor status
+title: Network Monitor
 ---
 
 ## 概要
@@ -91,13 +91,13 @@ Create a network metric monitor by following the instructions in the [metric mon
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/http_check/
-[2]: /integrations/tcp_check/
+[1]: /ja/integrations/http_check/
+[2]: /ja/integrations/tcp_check/
 [3]: https://app.datadoghq.com/monitors#create/network
-[4]: /monitors/configuration/#advanced-alert-conditions
-[5]: /monitors/configuration/#no-data
-[6]: /monitors/configuration/#auto-resolve
-[7]: /monitors/configuration/#new-group-delay
-[8]: /monitors/notify/
+[4]: /ja/monitors/configuration/#advanced-alert-conditions
+[5]: /ja/monitors/configuration/#no-data
+[6]: /ja/monitors/configuration/#auto-resolve
+[7]: /ja/monitors/configuration/#new-group-delay
+[8]: /ja/monitors/notify/
 [9]: https://app.datadoghq.com/monitors/manage
-[10]: /monitors/types/metric
+[10]: /ja/monitors/types/metric

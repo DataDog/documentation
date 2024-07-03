@@ -1,9 +1,9 @@
 ---
-title: table
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - metric
+- metric
+title: table
 ---
 The table visualization displays columns of aggregated data grouped by tag key. 
 

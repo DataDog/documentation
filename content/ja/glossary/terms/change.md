@@ -1,8 +1,8 @@
 ---
-title: change
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - metric
+- metric
+title: change
 ---
 The change visualization shows you the change in a metric over a period of time. It compares the absolute or relative (%) change in value between N minutes ago and now against a given threshold. For more information, <a href="/dashboards/widgets/change/">see the documentation</a>.

@@ -30,8 +30,8 @@ Data Streams Monitoring は、[confluent-kafka ライブラリ][4]をサポー�
 Data Streams Monitoring は、1 つの[メッセージ属性][5]を使用して、SQS キューを通過するメッセージの経路を追跡します。Amazon SQS は、メッセージごとに許可されるメッセージ属性の上限が 10 個であるため、データパイプラインを通じてストリーミングされるすべてのメッセージには、9 個以下のメッセージ属性が設定されている必要があり、残りの属性は Data Streams Monitoring に使用できます。
 
 
-[1]: /agent
-[2]: /tracing/trace_collection/dd_libraries/dotnet-core
-[3]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[1]: /ja/agent
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
+[3]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
 [4]: https://pypi.org/project/confluent-kafka/
 [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html

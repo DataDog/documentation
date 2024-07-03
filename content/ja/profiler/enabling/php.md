@@ -1,20 +1,20 @@
 ---
-title: Enabling the PHP Profiler
+aliases:
+- /ja/tracing/profiler/enabling/php/
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-    - link: getting_started/profiler
-      tag: Documentation
-      text: Getting Started with Profiler
-    - link: profiler/profile_visualizations
-      tag: Documentation
-      text: Learn more about available profile visualizations
-    - link: profiler/profiler_troubleshooting/php
-      tag: Documentation
-      text: Fix problems you encounter while using the profiler
-aliases:
-  - /tracing/profiler/enabling/php/
+- link: getting_started/profiler
+  tag: Documentation
+  text: Getting Started with Profiler
+- link: profiler/profile_visualizations
+  tag: Documentation
+  text: Learn more about available profile visualizations
+- link: profiler/profiler_troubleshooting/php
+  tag: Documentation
+  text: Fix problems you encounter while using the profiler
+title: Enabling the PHP Profiler
+type: multi-code-lang
 ---
 
 ## 要件
@@ -101,10 +101,10 @@ settings.
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: https://github.com/DataDog/dd-trace-php/releases
-[4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
+[4]: /ja/tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/profiler/
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
-[14]: /profiler/enabling/supported_versions/
-[15]: /profiler/profile_visualizations/#timeline-view
+[6]: /ja/getting_started/profiler/
+[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /ja/profiler/enabling/supported_versions/
+[15]: /ja/profiler/profile_visualizations/#timeline-view

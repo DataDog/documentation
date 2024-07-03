@@ -1,62 +1,61 @@
 ---
-title: Cloud Foundry Setup Guide
-kind: guide
-description: "Steps for setting up the Cloud Foundry Integration"
 aliases:
-- /integrations/guide/pivotal-cloud-foundry-manual-setup
+- /ja/integrations/guide/pivotal-cloud-foundry-manual-setup
+description: Steps for setting up the Cloud Foundry Integration
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
+- link: https://www.datadoghq.com/blog/monitor-tanzu-application-service/
   tag: Blog
   text: Monitor applications running on VMware Tanzu Application Service
+title: Cloud Foundry Setup Guide
 ---
 
-## Overview
+## 概要
 
-Cloud Foundry deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to set up monitoring for your Cloud Foundry environment.
+Cloud Foundry デプロイメントは、Datadog にメトリクスやイベントを送信することができます。デプロイメント内のすべてのノードの健全性と可用性を追跡し、それらが実行するジョブを監視し、Loggregator Firehose からメトリクスを収集するなど、さまざまなことが可能です。このページでは、Cloud Foundry 環境のモニタリングをセットアップする方法を説明します。
 
-There are four main components for the Cloud Foundry integration with Datadog.
+Cloud Foundry と Datadog のインテグレーションには、主に 4 つのコンポーネントがあります。
 
-- **The Cloud Foundry Buildpack -** used to collect custom metrics, logs, traces, and profiles from your Cloud Foundry applications.
-- **The Agent BOSH Release -** used to collect events and metrics from BOSH VMs and sends them to Datadog.
-- **The Cluster Agent BOSH Release -**  used to collect cluster-level and application-level metadata from the CAPI and the BBS and container tags.
-- **The Firehose Nozzle -** collects all other metrics from the Loggregator Firehose in your infrastructure.
+- **The Cloud Foundry Buildpack -** Cloud Foundry アプリケーションからカスタムメトリクス、ログ、トレース、プロファイルを収集するために使用します。
+- **The Agent BOSH Release -** BOSH VM からイベントとメトリクスを収集し、Datadog に送信するために使用します。
+- **The Cluster Agent BOSH Release -**  CAPI、BBS、コンテナタグからクラスターレベルおよびアプリケーションレベルのメタデータを収集するために使用します。
+- **The Firehose Nozzle -** インフラストラクチャー内の Loggregator Firehose から他のすべてのメトリクスを収集します。
 
-Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
+詳細については、[Datadog VMware Tanzu Application Service アーキテクチャ][32]ガイドをお読みください。
 
-## Monitor your applications
+## アプリケーションを監視する
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent (a lightweight version of the Agent), Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
+Cloud Foundry アプリケーションの監視には、**Datadog Cloud Foundry Buildpack** を使用します。これは、アプリが実行されているコンテナに Datadog Container Agent (Agent の軽量版)、Datadog Trace Agent for APM、Datadog DogStatsD のバイナリファイルをインストールする Cloud Foundry [サプライビルドパック][2]です。
 
-### Multiple Buildpacks (recommended)
+### Multiple Buildpacks (推奨)
 
-1. Download the [latest Datadog buildpack release][7] and upload it to your Cloud Foundry environment.
+1. [最新の Datadog ビルドパックリリース][7]をダウンロードして、Cloud Foundry 環境にアップロードします。
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
-2. Push your application, including both the Datadog buildpack and your regular buildpacks. The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
+2. Datadog ビルドパックと通常のビルドパックの両方を含め、アプリケーションをプッシュします。複数のビルドパックを使用してアプリケーションをプッシュするプロセスは、[複数のビルドパックと併せてアプリをプッシュする][3]で説明されています。
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Note**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
+    **注**: 以前に単一のビルドパックを使用していた場合は、それが最終的なビルドパックとして機能するように、最後にロードされる必要があります。詳しくは、[Cloud Foundry のビルドパックの仕組み][6]を参照してください。
 
-### Multi-Buildpack (deprecated)
+### Multi-Buildpack (非推奨)
 
-The Datadog buildpack uses the Cloud Foundry [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
+Datadog のビルドパックは、バージョン `1.12` で導入された Cloud Foundry の[複数のビルドパックと併せてアプリをプッシュする][3] 機能を使用しています。
 
-For older versions, Cloud Foundry provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version to use Datadog's buildpack.
+古いバージョンの場合、Cloud Foundry はこの機能の後方互換バージョンを[マルチビルドパック][4]という形で提供しています。Datadog のビルドパックを使用するには、このバージョンをインストールし、構成する必要があります。
 
-1. Download the latest multi-buildpack release and upload it to your Cloud Foundry environment.
+1. 最新のマルチビルドパックリリースをダウンロードして、Cloud Foundry 環境にアップロードします。
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. Add a multi-buildpack manifest to your application. As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack:
+2. アプリケーションにマルチビルドパックマニフェストを追加します。マルチビルドパックリポジトリの[使用セクション][5]で説明されているように、アプリケーションのルートに `multi-buildpack.yml` ファイルを作成し、環境に合わせて構成します。Datadog Cloud Foundry Buildpack と通常のビルドパックへのリンクを追加します。
 
     ```yaml
     buildpacks:
@@ -64,47 +63,47 @@ For older versions, Cloud Foundry provides a backwards compatible version of thi
       - "https://github.com/cloudfoundry/ruby-buildpack#v1.7.18" # Replace this with your regular buildpack
     ```
 
-      The URLs for the Datadog Buildpack are:
+    Datadog Buildpack の URL は次のとおりです。
       - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
       - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
 
-      Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
+      ここでは `latest` バージョンは使用しないでください (`x.y.z` を特定のバージョンに置き換えます)。
 
-      **Note**: Your regular buildpack should be the last one listed in the manifest. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
+      **注**: 通常のビルドパックは、マニフェストの最後に記述する必要があります。詳しくは、[Cloud Foundry のビルドパックの仕組み][6]を参照してください。
 
-3. Push your application with the multi-buildpack. Ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application:
+3. マルチビルドパックと併せてアプリケーションをプッシュします。`multi-buildpack` が、アプリケーション用に Cloud Foundry によって選択されたビルドパックであることを確認します。
 
     ```shell
     cf push <YOUR_APP> -b multi-buildpack
     ```
 
-### Meta-Buildpack **(deprecated)**
+### Meta-Buildpack **(非推奨)**
 
-If you are a [meta-buildpack][8] user, Datadog's buildpack can be used as a decorator out of the box.
+[メタビルドパック][8]を使用している場合は、Datadog のビルドパックをそのままデコレータとして使用できます。
 
-**Note**: Cloud Foundry has deprecated the meta-buildpack in favor of the multi-buildpack.
+**注**: Cloud Foundry はメタビルドパックを非推奨とし、マルチビルドパックを推奨しています。
 
-## Monitor your Cloud Foundry cluster
+## Cloud Foundry クラスターを監視する
 
-There are three points of integration with Datadog, each of which achieves a different goal:
+Datadog とのインテグレーションには 3 つのポイントがあり、それぞれ異なる目標を実現します。
 
-- **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
-- **Datadog Cluster Agent BOSH release** - Deploy one Datadog Cluster Agent job. The job queries the CAPI and BBS API to collect cluster-level and application-level metadata to provide improved tagging capabilities in your applications and containers.
-- **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
+- **Datadog Agent BOSH リリース** - Datadog Agent をデプロイのすべてのノードにインストールし、システム、ネットワーク、ディスクのメトリクスを追跡します。その他の Agent チェックを任意に有効にします。
+- **Datadog Cluster Agent BOSH リリース** - Datadog Cluster Agent ジョブを 1 つデプロイします。このジョブは、CAPI と BBS API をクエリしてクラスターレベルとアプリケーションレベルのメタデータを収集し、アプリケーションとコンテナのタグ付け機能を向上させます。
+- **Datadog Firehose Nozzle** - 1 つ以上の Datadog Firehose Nozzle ジョブをデプロイします。これらのジョブはデプロイの Loggregator Firehose を活用し、すべての非コンテナメトリクスを Datadog に送信します。
 
 <div class="alert alert-warning">
-These integrations are meant for Cloud Foundry deployment administrators, not end users.
+これらのインテグレーションは Cloud Foundry デプロイ管理者向けです。エンドユーザー向けではありません。
 </div>
 
-### Prerequisites
+### 前提条件
 
-You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI -- [v1][15] or [v2][16].
+動作する Cloud Foundry デプロイと、それを管理する BOSH Director へのアクセス権を持つ必要があります。また、各インテグレーションをデプロイするために BOSH CLI が必要です。メジャーバージョン CLI -- [v1][15] または [v2][16] のいずれかを使用できます。
 
-### Install the Datadog Agent BOSH release
+### Datadog Agent BOSH リリースのインストール
 
-Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][17] (the same way a Director deploys the BOSH Agent to all nodes).
+Datadog は、BOSH リリースとしてパッケージ化された Datadog Agent のタールボールを提供します。最新リリースを BOSH Director にアップロードしてから、デプロイのすべてのノードに[アドオン][17]としてインストールします (Director が BOSH Agent をすべてのノードにデプロイする方法と同じ)。
 
-#### Upload Datadog's release to your BOSH Director
+#### Datadog のリリースを BOSH Director にアップロード
 
 ```text
 # BOSH CLI v1
@@ -113,17 +112,17 @@ bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-age
 bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][18].
+独自のリリースを作成する場合は、[Datadog Agent BOSH リリースリポジトリ][18]を参照してください。
 
-#### Configure the Agent as an addon in your BOSH Director
+#### BOSH Director で Agent をアドオンとして構成
 
-Add the following to your BOSH Director's runtime configuration file (`runtime.yml`):
+BOSH Director のランタイム構成ファイル (`runtime.yml`) に以下を追加します。
 
 ```text
 ---
 releases:
   - name: datadog-agent
-    version: <VERSION_YOU_UPLOADED> # specify the real version (x.y.z not 'latest')
+    version: <アップロードしたバージョン> # 実際のバージョン ('latest' ではなく x.y.z) を指定します
 addons:
 - name: datadog
   jobs:
@@ -132,17 +131,17 @@ addons:
   properties:
     dd:
       use_dogstatsd: true
-      dogstatsd_port: 18125       # Many CF deployments have a StatsD already on port 8125
-      api_key: <DATADOG_API_KEY>
-      tags: ["<KEY:VALUE>"]       # any tags you wish
-      generate_processes: true    # to enable the process check
+      dogstatsd_port: 18125       # 多くの CF デプロイでは既にポート 8125 が StatsD です
+      api_key: <DATADOG_API_キー>
+      tags: ["<キー:値>"]       # 任意のタグ
+      generate_processes: true    # プロセスチェックを有効にするため
 ```
 
-To see which `datadog-agent` release version was uploaded earlier, run `bosh releases`.
+以前にアップロードされた `datadog-agent` のリリースバージョンを確認するには、`bosh releases` を実行します。
 
-#### Load the runtime.yml
+#### runtime.yml のロード
 
-Check if you have a previously configured `runtime-config` by running:
+以前に構成された `runtime-config` があるかをチェックするには、以下を実行します。
 
 ```text
 # BOSH CLI v1
@@ -151,11 +150,11 @@ Check if you have a previously configured `runtime-config` by running:
 bosh -e <BOSH_ENV> runtime-config
 ```
 
-In BOSH v2, if the `runtime.yml` file is empty, you should see the response: `No runtime config`.
+BOSH v2 では、`runtime.yml` ファイルが空の場合は、`No runtime config` という応答が表示されます。
 
-#### Enable extra Agent checks
+#### 追加の Agent チェックの有効化
 
-For each extra Agent check to enable across your deployment, add its configuration under the `properties.dd.integrations` key, for example:
+次の例のように、デプロイ全体で有効にする追加の Agent チェックごとに、`properties.dd.integrations` キーの下にその構成を追加します。
 
 ```yaml
 properties:
@@ -170,13 +169,13 @@ properties:
             #...
 ```
 
-The configuration under each check name uses the same format as when configuring the check in its own file in the Agent's `conf.d` directory.
+各チェック名の下の構成は、Agent の `conf.d` ディレクトリにある独自のファイルでチェックを構成するときと同じ形式を使用します。
 
-Everything you configure in `runtime.yml` applies to every node. You cannot configure a check for a subset of nodes in your deployment.
+`runtime.yml` 内で行った構成は、すべてのノードに適用されます。デプロイ内のノードの一部に対してチェックを構成することはできません。
 
-To customize configuration for the default checks (system, network, disk, and NTP), see the [full list of configuration options][19] for the Datadog Agent BOSH release.
+デフォルトのチェック (システム、ネットワーク、ディスク、NTP) の構成をカスタマイズするには、Datadog Agent BOSH リリースの[すべての構成オプション][19]を参照してください。
 
-#### Sync the runtime configuration to the BOSH Director
+#### ランタイム構成と BOSH Director の同期
 
 ```text
 # BOSH CLI v1
@@ -185,7 +184,7 @@ bosh update runtime-config runtime.yml
 bosh update-runtime-config -e <BOSH_ENV> runtime.yml
 ```
 
-#### Redeploy your Cloud Foundry deployment
+#### Cloud Foundry デプロイの再デプロイ
 
 ```text
 # BOSH CLI v1
@@ -195,30 +194,30 @@ bosh -n deploy --recreate
 bosh -n -d <YOUR_DEPLOYMENT> -e <BOSH_ENV> deploy --recreate <YOUR_DEPLOYMENT_MANIFEST>.yml
 ```
 
-Since runtime configuration applies globally, BOSH redeploys every node in your deployment. If you have more than one deployment, redeploy all deployments to install the Datadog Agent everywhere.
+ランタイム構成はグローバルに適用されるため、BOSH は、デプロイ内のすべてのノードを再デプロイします。デプロイが複数ある場合は、すべてのデプロイを再デプロイすることで、すべての場所に Datadog Agent がインストールされます。
 
-#### Verify the Agent is installed everywhere
+#### すべての場所に Agent がインストールされたかどうかの確認
 
-To check if the Agent installations were successful, filter by `cloudfoundry` on the [Host Map][20]. The Datadog Agent BOSH release tags each host with `cloudfoundry`. Optionally, group hosts by any tag, such as `bosh_job`, as in the following screenshot:
+Agent のインストールが成功したかどうかを確認するには、[ホストマップ][20]で `cloudfoundry` でフィルタリングします。Datadog Agent BOSH リリースでは、各ホストに `cloudfoundry` のタグを付けています。オプションとして、以下のスクリーンショットのように、`bosh_job` など、任意のタグでホストをグループ化します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="The host map in Datadog with cloudfoundry entered in the Filter section and bosh_job in the Group section" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="Datadog のホストマップの Filter セクションに cloudfoundry を、Group セクションに bosh_job を入力したもの" >}}
 
-Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving system metrics:
+いずれかのホストをクリックしてズームインし、六角形の中の **system** をクリックして、Datadog がシステムメトリクスを受信していることを確認します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="The detail view for a host in the Datadog host map with the system integration selected and multiple graphs displaying data" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="Datadog ホストマップのホストの詳細表示で、システムインテグレーションが選択され、複数のグラフでデータが表示されている様子" >}}
 
-#### Collect CAPI metadata and Cluster Agent tags in Cloud Foundry containers
+#### Cloud Foundry コンテナ内の CAPI メタデータと Cluster Agent タグを収集する
 
-For Datadog Agent versions `7.40.1` and later, you can collect CAPI metadata and Datadog Cluster Agent (DCA) tags from Cloud Foundry containers. Application labels and annotations are present in the application logs, metrics, and traces. 
+Datadog Agent バージョン `7.40.1` 以降では、Cloud Foundry コンテナから CAPI メタデータと Datadog Cluster Agent (DCA) タグを収集することができます。アプリケーションラベルとアノテーションは、アプリケーションログ、メトリクス、およびトレースに存在します。
 
-### Install the Datadog Cluster Agent (DCA) BOSH release
+### Datadog Cluster Agent (DCA) BOSH リリースのインストール
 
-The Datadog Cluster Agent BOSH release is a BOSH package for running the Datadog Cluster Agent on Cloud Foundry.
+Datadog Cluster Agent BOSH リリースは、Cloud Foundry 上で Datadog Cluster Agent  を動作させるための BOSH パッケージです。
 
-This package is to be used in conjunction with the [Datadog Agent BOSH Release][18].
-It provides a BOSH link consumed by the Datadog Agent BOSH release to Autodiscover and schedule integrations for your apps, as well as improved tagging for application containers and process discovery. For more information, see the [spec in GitHub][33].
+このパッケージは、[Datadog Agent BOSH リリース][18]と組み合わせて使用するものです。
+Datadog Agent BOSH リリースによって消費される BOSH リンクを提供し、アプリの自動検出やインテグレーションをスケジュールしたり、アプリケーションコンテナやプロセス検出のためのタグ付けが改善されます。詳細については、[GitHub における仕様][33]を参照してください。
 
-#### Upload Datadog's Cluster Agent release to your BOSH Director
+#### Datadog の Cluster Agent リリースを BOSH Director にアップロード
 
 ```text
 # BOSH CLI v1
@@ -227,8 +226,8 @@ bosh upload release https://cloudfoundry.datadoghq.com/datadog-cluster-agent/dat
 bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-cluster-agent/datadog-cluster-agent-boshrelease-latest.tgz
 ```
 
-#### Deployment
-Use the example deploy manifest template below to deploy the Datadog Cluster Agent and expose it to the Datadog Agent. See the [spec in GitHub][33] for available properties.
+#### デプロイ
+以下のデプロイマニフェストテンプレートの例を使用して、Datadog Cluster Agent をデプロイし、Datadog Agent に公開します。利用可能なプロパティについては、[GitHub における仕様][33]を参照してください。
 
 ```yaml
 jobs:
@@ -236,7 +235,7 @@ jobs:
   release: datadog-cluster-agent
   properties:
     cluster_agent:
-      token: <TOKEN>  # 32 or more characters in length 
+      token: <TOKEN>  # 32 文字以上の長さ
       bbs_poll_interval: 10
       warmup_duration: 5
       log_level: INFO
@@ -249,11 +248,11 @@ jobs:
         - domain: <DNS_NAME (e.g. datadog-cluster-agent)>
 ```
 
-Replace `<TOKEN>` with your [Cluster Agent token][34].
+`<TOKEN>` を [Cluster Agent トークン][34]に置き換えてください。
 
-**Note**: This creates a DNS alias for the Datadog Cluster Agent service which makes it addressable through a static alias. See [Aliases to services](https://bosh.io/docs/dns/#aliases-to-services) in the BOSH documentation for more details on BOSH DNS aliases.
+**注**: これは、Datadog Cluster Agent サービスの DNS エイリアスを作成し、静的なエイリアスを介してアドレスを取得できるようにします。BOSH DNS エイリアスに関する詳細は、BOSH ドキュメントの[サービスに対するエイリアス](https://bosh.io/docs/dns/#aliases-to-services)を参照してください。
 
-This DNS alias is specified in the [`cluster_agent.address`](https://bosh.io/jobs/dd-agent?source=github.com/DataDog/datadog-agent-boshrelease&version=4.0.0#p%3dcluster_agent.address) job property of the Datadog Agent runtime configuration, as shown in the example template below:
+この DNS エイリアスは、以下のテンプレート例に示すように、Datadog Agent ランタイム構成の [`cluster_agent.address`](https://bosh.io/jobs/dd-agent?source=github.com/DataDog/datadog-agent-boshrelease&amp;version=4.0.0#p%3dcluster_agent.address) ジョブプロパティで指定されます。
 
 ```yaml
 jobs:
@@ -266,13 +265,13 @@ jobs:
     ...
 ```
 
-#### Integration configurations discovery
-The Datadog Cluster Agent discovers integrations based on an `AD_DATADOGHQ_COM` environment variable set in your applications.
-This environment variable is a JSON object containing the Autodiscovery configuration templates for your application. The Datadog Cluster Agent can discover and render two types of configurations:
-  1. Configurations for services bound to your application, whether they be user-provided or from a service broker.
-  2. Configurations for services running inside your application, for example, a web-server.
+#### インテグレーション構成の発見
+Datadog Cluster Agent は、アプリケーションに設定された `AD_DATADOGHQ_COM` 環境変数に基づきインテグレーションを発見します。
+この環境変数は、アプリケーションのオートディスカバリー構成テンプレートを含む JSON オブジェクトです。Datadog Cluster Agent は、2 種類の構成を発見してレンダリングすることができます。
+  1. ユーザー提供のサービスであれ、サービスブローカーからのサービスであれ、アプリケーションにバインドされるサービスの構成。
+  2. アプリケーション内部で動作するサービスの構成 (例: Web サーバー)。
 
-The JSON object should be a dictionary associating a service name to its Autodiscovery template:
+JSON オブジェクトは、サービス名とそのオートディスカバリーテンプレートを関連付けた辞書である必要があります。
 ```
 {
     "<SERVICE_NAME>": {
@@ -284,15 +283,15 @@ The JSON object should be a dictionary associating a service name to its Autodis
 }
 ```
 
-For services bound to the application, the `<SERVICE_NAME>` should be the name of the service as it appears in the `cf services` command output. For services running inside the application, the `<SERVICE_NAME>` can be anything.  
+アプリケーションにバインドされているサービスの場合、`<SERVICE_NAME>` は `cf services` コマンドの出力に表示されているサービスの名前でなければなりません。アプリケーションの中で動作しているサービスの場合、`<SERVICE_NAME>` は何でも構いません。
 
-The `variables` key is used only for bound services to resolve template variables inside the configuration template, and must contain the JSON path of the desired value for the `VCAP_SERVICES` environment variable. You can inspect this with the `cf env <APPLICATION_NAME>` command.
+`variables` キーは、バインドされたサービスが構成テンプレート内のテンプレート変数を解決するためにのみ使用され、環境変数 `VCAP_SERVICES` に設定する値の JSON パスを含める必要があります。これは `cf env <APPLICATION_NAME>` コマンドで検査することができます。
 
-**Note:** The Datadog Cluster Agent is only able to resolve credentials of services directly available in the `VCAP_SERVICES` environment variable for Autodiscovery.
+**注:** Datadog Cluster Agent は、オートディスカバリーのための `VCAP_SERVICES` 環境変数で直接利用できるサービスの資格情報を解決することだけが可能です。
 
-##### Example
+##### 例
 
-This Autodiscovery configuration in the `AD_DATADOGHQ_COM` environment variable demonstrates a Cloud Foundry application running a web server bound to a PostgreSQL service:
+`AD_DATADOGHQ_COM` 環境変数にあるこのオートディスカバリー構成は、PostgreSQL サービスにバインドされた Web サーバーを実行する Cloud Foundry アプリケーションを例示しています。
 
 ```
 AD_DATADOGHQ_COM: '{
@@ -329,7 +328,7 @@ AD_DATADOGHQ_COM: '{
 }'
 ```
 
-This example demonstrates the accompanying `VCAP_SERVICES` environment variable:
+この例では、付属の `VCAP_SERVICES` 環境変数を使用しています。
 
 ```
 VCAP_SERVICES: '{
@@ -347,31 +346,31 @@ VCAP_SERVICES: '{
 }'
 ```
 
-In the example above, the first item `web_server` is a configuration for a service running inside the application.
-There are no `variables`, and it uses the `%%host%%` and `%%port%%` template variables available through Autodiscovery.
+上の例では、最初の項目 `web_server` はアプリケーション内で動作するサービス用の構成です。
+`variables` はなく、オートディスカバリーで利用できる `%%host%%` と `%%port%%` テンプレート変数が使用されています。
 
-The second item `postgres-service-name` is a configuration for a service bound to the application.
-To resolve the template variables, it uses the `variables` dictionary to define the values used in the instance configuration.
-This dictionary contains a JSONPath object indicating where to find the variable values for the service `postgres-service-name` defined in the `VCAP_SERVICES` environment variable.
+2 番目の項目 `postgres-service-name` は、アプリケーションにバインドされているサービスの構成です。
+テンプレート変数を解決するために、インスタンス構成で使用される値を定義する `variables` 辞書を使用します。
+この辞書には、環境変数 `VCAP_SERVICES` で定義されたサービス `postgres-service-name` の変数値がどこにあるかを示す JSONPath オブジェクトが含まれています。
 
-See [Cluster Checks][35] for more information about Autodiscovery through the DCA.
+DCA によるオートディスカバリーの詳細については、[クラスターチェック][35]を参照してください。
 
-#### Improve CCCache performance on cache miss
+#### キャッシュミス時の CCCache のパフォーマンス向上
 
-For Datadog Agent versions `7.40.1` and later, you can add more flags to increase control over the CCCache behavior and the number of API calls:
+Datadog Agent のバージョン `7.40.1` 以降では、CCCache の動作と API コールの回数を制御するために、さらにフラグを追加することができます。
 
-- `refresh_on_cache_miss` to control cache miss behavior
-- Split `advanced_tags` into `sidecars_tags` and `isolation_segments_tags`
+- キャッシュミスの動作を制御する `refresh_on_cache_miss`
+- `advanced_tags` を `sidecars_tags` と `isolation_segments_tags` に分割する
 
-#### Improved tagging for application containers and process discovery
+#### アプリケーションコンテナやプロセスディスカバリーのタグ付けの改善
 
-Once the two releases are linked, the Datadog Cluster Agent automatically provides cluster-level metadata, which the Node Agents attach as tags to their corresponding Cloud Foundry application containers.
+2 つのリリースがリンクされると、Datadog Cluster Agent が自動的にクラスターレベルのメタデータを提供し、Node Agent が対応する Cloud Foundry アプリケーションコンテナにタグとしてアタッチします。
 
-### Deploy the Datadog Firehose Nozzle
+### Datadog Firehose Nozzle のデプロイ
 
-Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The following instructions assume you're adding it to an existing Cloud Foundry deployment that has a working Loggregator Firehose.
+Datadog は Datadog Firehose Nozzle の BOSH リリースを提供します。このリリースを Director にアップロードしたら、既存のデプロイに Nozzle を追加するか、Nozzle のみを含む新しいデプロイを作成します。以下の手順は、Loggregator Firehose が動作している既存の Cloud Foundry デプロイにリリースを追加する例です。
 
-#### Upload Datadog's release to your BOSH Director
+#### Datadog のリリースを BOSH Director にアップロード
 
 ```text
 # BOSH CLI v1
@@ -380,11 +379,11 @@ bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/da
 bosh upload-release -e <BOSH_ENV> http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ```
 
-If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][21].
+独自のリリースを作成する場合は、[Datadog Firehose Nozzle リリースリポジトリ][21]を参照してください。
 
-#### Configure a UAA client
+#### UAA クライアントの構成
 
-In the manifest that contains your UAA configuration, add a new client for the Datadog Nozzle so that jobs can access the Firehose:
+UAA 構成を含むマニフェストで、Datadog Nozzle のための新しいクライアントを追加し、ジョブが Firehose にアクセスできるようにします。
 
 ```yaml
 uaa:
@@ -395,72 +394,72 @@ uaa:
             authorized-grant-types: client_credentials
             override: true
             scope: doppler.firehose,cloud_controller.admin_read_only
-            secret: <YOUR_SECRET>
+            secret: <シークレット>
 ```
 
-Redeploy to add the user.
+再デプロイしてユーザーを追加します。
 
-#### Add Firehose Nozzle jobs
+#### Firehose Nozzle ジョブの追加
 
-Configure one or more Nozzle jobs in your main Cloud Foundry deployment manifest (`cf-manifest.yml`):
+メイン Cloud Foundry デプロイのマニフェスト (`cf-manifest.yml`) で、1 つ以上の Nozzle ジョブを構成します。
 
 ```yaml
 jobs:
 #- instances: 4
-#  name: some_other_job
+#  name: 他のジョブ
 #  ...
-# add more instances if one job cannot keep up with the Firehose
+# 1 つのジョブが Firehose に対応できない場合は、インスタンスを追加します
 - instances: 1
   name: datadog_nozzle_z1
   networks:
-    # some network you've configured elsewhere in the manifest
+    # マニフェストの他の場所で構成したネットワーク
     - name: cf1
-  # some resource_pool you've configured elsewhere in the manifest
+  # マニフェストの他の場所で構成した resource_pool
   resource_pool: small_z1
   templates:
     - name: datadog-firehose-nozzle
       release: datadog-firehose-nozzle
   properties:
     datadog:
-      api_key: "<YOUR_DATADOG_API_KEY>"
+      api_key: "<DATADOG_API_キー>"
       api_url: https://api.datadoghq.com/api/v1/series
-      # seconds between flushes to Datadog. Default is 15.
+      # Datadog へのフラッシュ間の秒数。デフォルトは 15 です。
       flush_duration_seconds: 15
     loggregator:
-      # do NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' works
-      # for example, ws://traffic-controller.your-cf-domain.com:8081
+      # URL に '/firehose' や末尾のスラッシュを追加しないでください。'ws://<ホスト>:<ポート>' は機能します
+      # 例: ws://traffic-controller.your-cf-domain.com:8081
       traffic_controller_url: "<LOGGREGATOR_URL>"
     nozzle:
-      # tags each firehose metric with 'deployment:<DEPLOYMENT_NAME>'
-      deployment: "<DEPLOYMENT_NAME>"
-      # can be anything (firehose streams data evenly to all jobs using the same subscription_id)
+      # 各 Firehose メトリクスに 'deployment:<デプロイ名>' のタグを付けます
+      deployment: "<デプロイ名>"
+      # 何でもかまいません（Firehose は同じ subscription_id を使用するすべてのジョブにデータを均等にストリーミングします）
       subscription_id: datadog-nozzle
-      # for development only
+      # 開発専用
       # disable_access_control: true
-      # for development only; enable if your UAA does not use a verifiable cert
+      # 開発専用。UAA が検証可能な証明書を使用しない場合は有効にします
       # insecure_ssl_skip_verify: true
     uaa:
-      client: datadog-firehose-nozzle # client name you just configured
-      client_secret: "<SECRET_YOU_JUST_CONFIGURED>"
-      url: <UAA_URL> # for example, https://uaa.your-cf-domain.com:8443
+      client: datadog-firehose-nozzle # 構成したクライアント名
+      client_secret: "<構成したシークレット>"
+      url: <UAA_URL> # 例: https://uaa.your-cf-domain.com:8443
 ```
 
-To see all available configuration options, check the [Datadog Firehose Nozzle repository][22].
+使用できるすべての構成オプションについては、[Datadog Firehose Nozzle リポジトリ][22]を参照してください。
 
-In the same manifest, add the Datadog Nozzle release name and version:
+同じマニフェストに、Datadog Nozzle リリース名とバージョンを追加します。
 
 ```yaml
 releases:
-    # - name: "<SOME_OTHER_RELEASE>"
+    # - name: "<他のリリース>"
     #   version: <x.y.z>
     # ...
     - name: datadog-firehose-nozzle
-      version: '<VERSION_YOU_UPLOADED>' # specify the real version (x.y.z not 'latest')
+      version: '<アップロードしたバージョン>' # 実際のバージョン ('latest' ではなく x.y.z) を指定します
 ```
 
-To see which `datadog-firehose-nozzle` release version was uploaded earlier, run `bosh releases`.
+以前にアップロードされた `datadog-firehose-nozzle` のリリースバージョンを確認するには、`bosh releases` を実行します。
 
-#### Redeploy the deployment
+#### デプロイの再デプロイ
 
 ```text
 # BOSH CLI v1
@@ -470,19 +469,19 @@ bosh -n deploy --recreate
 bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 ```
 
-#### Verify the Firehose Nozzle is collecting data
+#### Firehose Nozzle がデータを収集していることを確認する
 
-In the [Metrics Explorer][23], search for metrics beginning with `cloudfoundry.nozzle`.
+[メトリクスエクスプローラー][23]で、`cloudfoundry.nozzle` で始まるメトリクスを検索します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="The Metrics Explorer in Datadog with cloudfoundry.nozzle entered in the search bar" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="検索バーに cloudfoundry.nozle を入力した Datadog のメトリクスエクスプローラー" >}}
 
-#### Control the application metadata prefix
+#### アプリケーションのメタデータプレフィックスを制御する
 
-You can enable or disable the application metadata prefix in the Firehose Nozzle app metrics.
+Firehose Nozzle のアプリメトリクスで、アプリケーションメタデータのプレフィックスを有効または無効にすることができます。
 
-{{< img src="integrations/cloud_foundry/enable_metadata_app_prefix.png" alt="The integration tile settings in Datadog with Enable Metadata App Metrics Prefix unchecked" >}}
+{{< img src="integrations/cloud_foundry/enable_metadata_app_prefix.png" alt="Datadog のインテグレーションタイルの設定で、Enable Metadata App Metrics Prefix のチェックが外れているもの" >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -503,14 +502,14 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [21]: https://github.com/DataDog/datadog-firehose-nozzle-release
 [22]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
 [23]: https://app.datadoghq.com/metric/explorer
-[24]: /integrations/system/#metrics
-[25]: /integrations/network/#metrics
-[26]: /integrations/disk/#metrics
-[27]: /integrations/ntp/#metrics
+[24]: /ja/integrations/system/#metrics
+[25]: /ja/integrations/network/#metrics
+[26]: /ja/integrations/disk/#metrics
+[27]: /ja/integrations/ntp/#metrics
 [28]: https://github.com/cloudfoundry/loggregator-api
 [29]: https://docs.cloudfoundry.org/running/all_metrics.html
-[30]: /profiler/enabling/
-[32]: /integrations/faq/pivotal_architecture
+[30]: /ja/profiler/enabling/
+[32]: /ja/integrations/faq/pivotal_architecture
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
-[34]: /containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
-[35]: /containers/cluster_agent/clusterchecks/
+[34]: /ja/containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
+[35]: /ja/containers/cluster_agent/clusterchecks/

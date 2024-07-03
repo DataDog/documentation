@@ -1,6 +1,4 @@
 ---
-title: Exploring SQL Server AlwaysOn Availability Groups
-kind: documentation
 further_reading:
 - link: /database_monitoring/
   tag: Documentation
@@ -11,6 +9,8 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: Documentation
   text: Troubleshooting Database Monitoring
+kind: documentation
+title: Exploring SQL Server AlwaysOn Availability Groups
 ---
 
 The Database Monitoring AlwaysOn Clusters view enables you to detect data synchronization issues, understand availability group behavior, and identify cluster bottlenecks in SQL Server availability groups.

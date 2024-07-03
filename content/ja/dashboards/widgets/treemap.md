@@ -1,9 +1,7 @@
 ---
-title: Treemap Widget
-widget_type: treemap
-description: "Graph proportions of one or more datasets"
 aliases:
-- /graphing/widgets/treemap/
+- /ja/graphing/widgets/treemap/
+description: Graph proportions of one or more datasets
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
@@ -11,6 +9,8 @@ further_reading:
 - link: /dashboards/widgets/pie_chart/
   tag: Documentation
   text: Pie Chart Widget
+title: Treemap Widget
+widget_type: treemap
 ---
 
 The treemap widget allows you to display proportions of one or more datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
@@ -66,11 +66,11 @@ The treemap widget allows you to display proportions of one or more datasets. Th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/querying
-[2]: /logs/explorer/search_syntax/
-[3]: /dashboards/functions/
-[4]: /dashboards/guide/context-links/
-[5]: /dashboards/widgets/#full-screen
-[6]: /api/latest/dashboards/
-[7]: /dashboards/graphing_json/widget_json/
-[8]: /dashboards/widgets/pie_chart/
+[1]: /ja/dashboards/querying
+[2]: /ja/logs/explorer/search_syntax/
+[3]: /ja/dashboards/functions/
+[4]: /ja/dashboards/guide/context-links/
+[5]: /ja/dashboards/widgets/#full-screen
+[6]: /ja/api/latest/dashboards/
+[7]: /ja/dashboards/graphing_json/widget_json/
+[8]: /ja/dashboards/widgets/pie_chart/

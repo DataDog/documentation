@@ -1,11 +1,12 @@
 ---
 aliases:
-- /integrations/mesos_master/
-- /integrations/mesos_slave/
+- /ja/integrations/mesos_master/
+- /ja/integrations/mesos_slave/
 integration_title: Mesos
 is_public: true
 kind: integration
-short_description: Track cluster resource usage, master and slave counts, tasks statuses, and more.
+short_description: Track cluster resource usage, master and slave counts, tasks statuses,
+  and more.
 ---
 
 
@@ -281,12 +282,12 @@ Need help? Contact [Datadog support][6].
 - [Installing Datadog on Mesos with DC/OS][7]
 
 
-[1]: https://docs.datadoghq.com/integrations/mesos/#mesos-slave-integration
+[1]: https://docs.datadoghq.com/ja/integrations/mesos/#mesos-slave-integration
 [2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_master/images/mesos_dashboard.png
 [3]: https://github.com/DataDog/integrations-core/blob/master/mesos_master/datadog_checks/mesos_master/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/kubernetes/log/
-[6]: https://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/deploy-datadog-dcos
 [8]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
 [9]: https://hub.docker.com/r/datadog/agent/tags

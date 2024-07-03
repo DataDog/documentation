@@ -1,7 +1,6 @@
 ---
-title: Managing Incidents
 further_reading:
-- link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
+- link: https://www.datadoghq.com/blog/bits-ai-for-incident-management/
   tag: Blog
   text: Stay up to date on the latest incidents with Bits AI
 - link: bits_ai/
@@ -13,6 +12,7 @@ further_reading:
 - link: bits_ai/query_examples
   tag: Documentation
   text: Example Natural Language Queries
+title: Managing Incidents
 ---
 
 ## 概要

@@ -1,14 +1,13 @@
 ---
-title: Getting Started with AWS Lambda Serverless Monitoring
-kind: documentation
-
 further_reading:
-    - link: /agent/basic_agent_usage/
-      tag: Documentation
-      text: Basic Agent Usage
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session to learn more about serverless monitoring
+- link: /agent/basic_agent_usage/
+  tag: Documentation
+  text: Basic Agent Usage
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session to learn more about serverless monitoring
+kind: documentation
+title: Getting Started with AWS Lambda Serverless Monitoring
 ---
 
 ## Overview
@@ -133,15 +132,15 @@ The serverless sample app has logs enabled by default. You can see each function
 You can filter these logs to only see errors, or view them in the [Log Explorer][12].
 
 
-[1]: /serverless
+[1]: /ja/serverless
 [2]: https://github.com/DataDog/serverless-sample-app
 [3]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: https://docs.datadoghq.com/getting_started/site
+[5]: https://docs.datadoghq.com/ja/getting_started/site
 [6]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
-[7]: https://docs.datadoghq.com/serverless/guide/insights/#high-errors
-[8]: https://docs.datadoghq.com/serverless/guide/insights/#high-duration
-[9]: https://docs.datadoghq.com/serverless/guide/insights/#cold-starts
-[10]: https://docs.datadoghq.com/serverless/enhanced_lambda_metrics
+[7]: https://docs.datadoghq.com/ja/serverless/guide/insights/#high-errors
+[8]: https://docs.datadoghq.com/ja/serverless/guide/insights/#high-duration
+[9]: https://docs.datadoghq.com/ja/serverless/guide/insights/#cold-starts
+[10]: https://docs.datadoghq.com/ja/serverless/enhanced_lambda_metrics
 [11]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
-[12]: https://docs.datadoghq.com/logs/explorer/
+[12]: https://docs.datadoghq.com/ja/logs/explorer/

@@ -1,27 +1,27 @@
 ---
-title: Getting Started with Tags
-kind: documentation
-description: 'Learn how to assign and use tags in Datadog.'
 aliases:
-    - /getting_started/getting_started_with_tags
-    - /guides/getting_started/tagging/
-    - /developers/getting_started/tagging/
-    - /tagging
-    - /guides/tagging/
-    - /faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
+- /ja/getting_started/getting_started_with_tags
+- /ja/guides/getting_started/tagging/
+- /ja/developers/getting_started/tagging/
+- /ja/tagging
+- /ja/guides/tagging/
+- /ja/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
+description: Learn how to assign and use tags in Datadog.
 further_reading:
-    - link: /getting_started/tagging/assigning_tags/
-      tag: Documentation
-      text: Learn how to assign tags
-    - link: /getting_started/tagging/unified_service_tagging/
-      tag: Documentation
-      text: Learn how to configure unified service tagging
-    - link: /getting_started/tagging/using_tags/
-      tag: Documentation
-      text: Learn how to use tags
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session on effective tagging with Datadog
+- link: /getting_started/tagging/assigning_tags/
+  tag: Documentation
+  text: Learn how to assign tags
+- link: /getting_started/tagging/unified_service_tagging/
+  tag: Documentation
+  text: Learn how to configure unified service tagging
+- link: /getting_started/tagging/using_tags/
+  tag: Documentation
+  text: Learn how to use tags
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session on effective tagging with Datadog
+kind: documentation
+title: Getting Started with Tags
 ---
 
 ## Overview
@@ -116,27 +116,27 @@ For more information, see [Using Tags][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/using_tags/
-[2]: /metrics/
-[3]: /getting_started/tagging/assigning_tags/#configuration-files
-[4]: /getting_started/tagging/assigning_tags/#ui
-[5]: /getting_started/tagging/assigning_tags/#api
-[6]: /getting_started/tagging/assigning_tags/#dogstatsd
-[7]: /getting_started/tagging/assigning_tags/
-[8]: /getting_started/tagging/unified_service_tagging
-[9]: /integrations/
-[10]: /getting_started/tagging/using_tags/#events
-[11]: /getting_started/tagging/using_tags/#dashboards
-[12]: /getting_started/tagging/using_tags/#infrastructure
-[13]: /getting_started/tagging/using_tags/#monitors
-[14]: /getting_started/tagging/using_tags/#metrics
-[15]: /getting_started/tagging/using_tags/#integrations
-[16]: /getting_started/tagging/using_tags/#apm
-[17]: /getting_started/tagging/using_tags/#rum--session-replay
-[18]: /getting_started/tagging/using_tags/#synthtics
-[19]: /getting_started/tagging/using_tags/#notebooks
-[20]: /getting_started/tagging/using_tags/#logs
-[21]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
-[22]: /getting_started/tagging/using_tags/#developers
-[23]: /account_management/billing/usage_attribution/
-[24]: /getting_started/tagging/using_tags/#ci-visibility
+[1]: /ja/getting_started/tagging/using_tags/
+[2]: /ja/metrics/
+[3]: /ja/getting_started/tagging/assigning_tags/#configuration-files
+[4]: /ja/getting_started/tagging/assigning_tags/#ui
+[5]: /ja/getting_started/tagging/assigning_tags/#api
+[6]: /ja/getting_started/tagging/assigning_tags/#dogstatsd
+[7]: /ja/getting_started/tagging/assigning_tags/
+[8]: /ja/getting_started/tagging/unified_service_tagging
+[9]: /ja/integrations/
+[10]: /ja/getting_started/tagging/using_tags/#events
+[11]: /ja/getting_started/tagging/using_tags/#dashboards
+[12]: /ja/getting_started/tagging/using_tags/#infrastructure
+[13]: /ja/getting_started/tagging/using_tags/#monitors
+[14]: /ja/getting_started/tagging/using_tags/#metrics
+[15]: /ja/getting_started/tagging/using_tags/#integrations
+[16]: /ja/getting_started/tagging/using_tags/#apm
+[17]: /ja/getting_started/tagging/using_tags/#rum--session-replay
+[18]: /ja/getting_started/tagging/using_tags/#synthtics
+[19]: /ja/getting_started/tagging/using_tags/#notebooks
+[20]: /ja/getting_started/tagging/using_tags/#logs
+[21]: /ja/getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
+[22]: /ja/getting_started/tagging/using_tags/#developers
+[23]: /ja/account_management/billing/usage_attribution/
+[24]: /ja/getting_started/tagging/using_tags/#ci-visibility

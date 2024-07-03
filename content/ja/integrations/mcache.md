@@ -1,68 +1,68 @@
 ---
-"app_id": "memcached"
-"app_uuid": "711c00b1-c62c-4a50-867b-be1929950b2c"
-"assets":
-  "dashboards":
-    "memcached": "assets/dashboards/memcached_dashboard.json"
-    "memcached_screenboard": "assets/dashboards/memcached_screenboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "memcache.uptime"
-      "metadata_path": "metadata.csv"
-      "prefix": "memcache."
-    "process_signatures":
-    - "memcached"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "32"
-    "source_type_name": "Memcached"
-  "saved_views":
-    "memcached_processes": "assets/saved_views/memcached_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "caching"
-- "log collection"
-- "tracing"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/mcache/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "mcache"
-"integration_id": "memcached"
-"integration_title": "Memcache"
-"integration_version": "4.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mcache"
-"public_title": "Memcache"
-"short_description": "メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。"
-"supported_os":
-- "linux"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::キャッシュ"
-  - "Category::ログの収集"
-  - "Category::Tracing"
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Memcache"
+app_id: memcached
+app_uuid: 711c00b1-c62c-4a50-867b-be1929950b2c
+assets:
+  dashboards:
+    memcached: assets/dashboards/memcached_dashboard.json
+    memcached_screenboard: assets/dashboards/memcached_screenboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: memcache.uptime
+      metadata_path: metadata.csv
+      prefix: memcache.
+    process_signatures:
+    - memcached
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 32
+    source_type_name: Memcached
+  saved_views:
+    memcached_processes: assets/saved_views/memcached_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- caching
+- log collection
+- tracing
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: mcache
+integration_id: memcached
+integration_title: Memcache
+integration_version: 4.1.0
+is_public: true
+manifest_version: 2.0.0
+name: mcache
+public_title: Memcache
+short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
+supported_os:
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::キャッシュ
+  - Category::ログの収集
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Memcache
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -114,11 +114,11 @@ Datadog APM は、Memcache と統合して分散システム全体のトレー�
 1. [Datadog でトレースの収集を有効にします][4]。
 2. [Memcache へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/tracing/send_traces/
-[5]: https://docs.datadoghq.com/tracing/setup/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -166,11 +166,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 2. [Agent を再起動][5]して、変更を検証します。
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=java
-[3]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[4]: https://docs.datadoghq.com/tracing/setup/
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[4]: https://docs.datadoghq.com/ja/tracing/setup/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -206,8 +206,8 @@ Mcache チェックには、イベントは含まれません。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/
 [4]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached
 [5]: https://www.datadoghq.com/blog/instrument-memcached-performance-metrics-dogstatsd
 [6]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached

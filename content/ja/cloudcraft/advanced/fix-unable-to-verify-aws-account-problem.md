@@ -16,5 +16,5 @@ IT チームにポリシーの `us-east-1` リージョンへのアクセスを�
 
 Web インターフェイスを使用する代わりに、Cloudcraft の API を使用してアカウントを追加し、アカウントをチェックするリージョンを指定することができます。詳細については、[Cloudcraft API による AWS アカウントの追加][2]を参照してください。
 
-[1]: /cloudcraft/advanced/minimal-iam-policy/
-[2]: /cloudcraft/advanced/add-aws-account-via-api/
+[1]: /ja/cloudcraft/advanced/minimal-iam-policy/
+[2]: /ja/cloudcraft/advanced/add-aws-account-via-api/

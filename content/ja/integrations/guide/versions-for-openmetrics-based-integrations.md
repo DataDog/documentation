@@ -1,41 +1,41 @@
 ---
+description: Learn about the difference between the latest (V2) and legacy (V1) versions
+  of OpenMetrics-based integrations.
 title: Latest and Legacy Versioning For OpenMetrics-based Integrations
-kind: guide
-description: Learn about the difference between the latest (V2) and legacy (V1) versions of OpenMetrics-based integrations.
 ---
 
-## Overview
+## 概要
 
-Some of the Datadog OpenMetrics-based integrations, including the generic OpenMetrics integration, support two modes of operation: latest and legacy. These two modes come with different defaults and configuration parameters.
+一般的な OpenMetrics インテグレーションを含む、Datadog OpenMetrics ベースのインテグレーションには、最新とレガシーという 2 つの動作モードがあります。この 2 つのモードには、異なるデフォルトと構成パラメーターがあります。
 
-Latest
-: Datadog recommends using the `latest` version and referencing the `latest` version of the documentation when setting up an OpenMetrics-based integration from scratch on the latest Agent version.
+最新
+: Datadog は、最新の Agent バージョンで OpenMetrics ベースのインテグレーションをゼロからセットアップする場合、`latest` バージョンを使用し、ドキュメントの `latest` バージョンを参照することを推奨します。
 
-Legacy
-: The `legacy` version is maintained only for backward compatibility reasons—mainly to allow integrations to continue working after an Agent upgrade without requiring a change in configuration. </br></br> If you have set up an OpenMetrics-based integration in the past, you may be using the old version, in which case you can use the `legacy` configuration example linked from the documentation as a reference. Datadog recommends migrating to the `latest` version when possible.
+レガシー
+: `legacy` バージョンは、後方互換性のためにのみ維持されています (主に、Agent のアップグレード後も構成を変更することなくインテグレーションを継続できるようにするため)。 </br></br> 過去に OpenMetrics ベースのインテグレーションをセットアップしたことがある場合、古いバージョンを使用している可能性があります。その場合、ドキュメントからリンクされている `legacy` 構成例をリファレンスとして使用することができます。Datadog では、可能な限り `latest` バージョンに移行することを推奨しています。
 
-## Mode-dependent metrics
+## モード依存メトリクス
 
-Integrations with `latest` and `legacy` modes may produce different subsets of metrics, indicated in the documentation and in-app metric descriptions as OpenMetrics V2 (`latest`) and OpenMetrics V1 (`legacy`). 
+`latest` モードと `legacy` モードのインテグレーションでは、OpenMetrics V2 (`latest`) とOpenMetrics V1 (`legacy`) としてドキュメントやアプリ内のメトリクス説明で示されている、メトリクスの異なるサブセットが生成されることがあります。
 
-In `latest` mode, metrics are submitted more accurately by default and behave closer to Prometheus metric types. For example, Prometheus metrics ending in  `_count` and `_sum` are submitted as `monotonic_count` by default.
+`latest` モードでは、デフォルトでより正確にメトリクスが送信され、Prometheus のメトリクスタイプに近い挙動をします。例えば、Prometheus の `_count` や `_sum` で終わるメトリクスは、デフォルトでは `monotonic_count` として送信されます。
 
-When you look for metric names on the Datadog site or set up [dashboards][3] and [monitors][4], make sure to use metrics appropriate for your version of the integration.
+Datadog サイトでメトリクス名を探したり、[ダッシュボード][3]や[モニター][4]をセットアップする際には、インテグレーションバージョンに適したメトリクスを使用するようにしてください。
 
-## OpenMetrics-based integration modes
+## OpenMetrics ベースのインテグレーションモード
 
-While it may vary for each OpenMetrics-based integration, you can enable the `latest` mode by either:
+OpenMetrics ベースのインテグレーションごとに異なるかもしれませんが、`latest` モードを有効にするには次のいずれかを行います。
 
-* Setting `openmetrics_endpoint` to a target endpoint.
-* Setting `use_openmetrics` to true.
+* `openmetrics_endpoint` をターゲットエンドポイントに設定する。
+* `use_openmetrics` を true に設定する。
 
-## History of latest and legacy versions
+## 最新バージョンとレガシーバージョンの履歴
 
-<div class="alert alert-info">Datadog avoids introducing breaking changes to integrations as much as possible, so customers can update the Datadog Agent without needing to make large configuration changes. This commitment to backwards compatibility makes it difficult to address existing design issues in the configuration and default behavior.</div>
+<div class="alert alert-info">Datadog は、インテグレーションを破壊するような変更を可能な限り避けているため、お客様は大規模な構成変更を行うことなく Datadog Agent を更新することができます。この後方互換性へのコミットメントにより、構成やデフォルトの動作における既存の設計上の問題に対処することが難しくなります。</div>
 
-Since the OpenMetrics format is commonly used to export metrics, many integrations are based on it. These integrations share a set of configuration options and default behavior. Datadog is committed to providing an improved experience in the `latest` version, and maintaining the original experience in the `legacy` version.  
+OpenMetrics 形式はメトリクスのエクスポートに一般的に使用されているため、多くのインテグレーションが OpenMetrics をベースにしています。これらのインテグレーションは、一連の構成オプションとデフォルトの動作を共有しています。Datadog は、`latest` バージョンでは改善されたエクスペリエンスを提供し、`legacy` バージョンでは元のエクスペリエンスを維持することをお約束します。 
 
-For more information, see the appropriate OpenMetrics-based integration documentation.
+詳細については、該当する OpenMetrics ベースのインテグレーションドキュメントを参照してください。
 
-[3]: /dashboards/
-[4]: /monitors/
+[3]: /ja/dashboards/
+[4]: /ja/monitors/

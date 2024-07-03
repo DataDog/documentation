@@ -1,9 +1,8 @@
 ---
-title: Permission Issues
 aliases:
-  - /agent/faq/how-to-solve-permission-denied-errors
-  - /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
-  - /agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
+- /ja/agent/faq/how-to-solve-permission-denied-errors
+- /ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
+- /ja/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: ドキュメント
@@ -11,6 +10,7 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: ドキュメント
   text: Send an Agent Flare
+title: Permission Issues
 ---
 
 Agent がホストでデータを収集するためには、特定のアクセス許可が必要です。このページでは最も一般的なアクセス許可に関する問題とその解決方法について説明します。
@@ -110,8 +110,8 @@ v6.3 以前の Agent v6 を実行している場合は、Agent をアップデ�
 3. [Agent を起動します][3]
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /agent/configuration/agent-commands/#stop-the-agent
-[3]: /agent/configuration/agent-commands/#start-the-agent
+[2]: /ja/agent/configuration/agent-commands/#stop-the-agent
+[3]: /ja/agent/configuration/agent-commands/#start-the-agent
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -125,12 +125,12 @@ Agent v5 を実行している場合は、[最新バージョンの Agent 6][1] 
 
 3. [Agent を起動します][6]
 
-[1]: /agent/guide/upgrade-to-agent-v6/
+[1]: /ja/agent/guide/upgrade-to-agent-v6/
 [2]: https://github.com/DataDog/dd-agent
-[3]: /agent/configuration/agent-commands/?tab=agentv5#stop-the-agent
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv5#stop-the-agent
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[6]: /agent/configuration/agent-commands/?tab=agentv5#start-the-agent
+[6]: /ja/agent/configuration/agent-commands/?tab=agentv5#start-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -143,10 +143,10 @@ Agent v5 を実行している場合は、[最新バージョンの Agent 6][1] 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/agent-commands/
-[2]: /agent/configuration/agent-log-files/
-[3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
-[4]: /agent/faq/network/
-[5]: /agent/configuration/agent-commands/#start-the-agent
-[6]: /help/
-[7]: /integrations/process/
+[1]: /ja/agent/configuration/agent-commands/
+[2]: /ja/agent/configuration/agent-log-files/
+[3]: /ja/agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
+[4]: /ja/agent/faq/network/
+[5]: /ja/agent/configuration/agent-commands/#start-the-agent
+[6]: /ja/help/
+[7]: /ja/integrations/process/

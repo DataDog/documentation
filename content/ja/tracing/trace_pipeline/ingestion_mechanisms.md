@@ -1,10 +1,9 @@
 ---
-title: Ingestion Mechanisms
-kind: documentation
-description: "Overview of the mechanisms in the tracer and the Agent that control trace ingestion."
 aliases:
-- /tracing/trace_ingestion/mechanisms
-- /tracing/trace_pipeline/ingestion_mechanisms//
+- /ja/tracing/trace_ingestion/mechanisms
+- /ja/tracing/trace_pipeline/ingestion_mechanisms//
+description: Overview of the mechanisms in the tracer and the Agent that control trace
+  ingestion.
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
@@ -15,6 +14,8 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentation
   text: Usage Metrics
+kind: documentation
+title: Ingestion Mechanisms
 ---
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}
@@ -106,8 +107,8 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /chec
 
 サンプリングコントロールについては、[Java トレースライブラリドキュメント][2]を参照してください。
 
-[1]: /tracing/guide/resource_based_sampling
-[2]: /tracing/trace_collection/dd_libraries/java
+[1]: /ja/tracing/guide/resource_based_sampling
+[2]: /ja/tracing/trace_collection/dd_libraries/java
 [3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.26.0
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -126,7 +127,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource": "GET /che
 サンプリングコントロールについては、[Python トレースライブラリドキュメント][2]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.8.0
-[2]: /tracing/trace_collection/dd_libraries/python
+[2]: /ja/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
 Ruby アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
@@ -142,7 +143,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 
 サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /tracing/trace_collection/dd_libraries/ruby#sampling
+[1]: /ja/tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
 **Remote configuration**
@@ -169,9 +170,9 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource": "GET /che
 
 サンプリングコントロールについては、[Go トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /tracing/trace_collection/dd_libraries/go
+[1]: /ja/tracing/trace_collection/dd_libraries/go
 [2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
-[3]: /tracing/guide/resource_based_sampling
+[3]: /ja/tracing/guide/resource_based_sampling
 {{% /tab %}}
 {{% tab "Node.js" %}}
 Node.js アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
@@ -195,7 +196,7 @@ tracer.init({
 
 サンプリングコントロールについては、[Node.js トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /tracing/trace_collection/dd_libraries/nodejs
+[1]: /ja/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
 PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
@@ -209,7 +210,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 
 サンプリングコントロールについては、[PHP トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /tracing/trace_collection/dd_libraries/php
+[1]: /ja/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
 Starting in [v0.1.0][1], the Datadog C++ library supports the following configurations:
@@ -227,7 +228,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 C++ does not provide integrations for automatic instrumentation, but it's used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][2].
 
 [1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
-[2]: /tracing/trace_collection/proxy_setup
+[2]: /ja/tracing/trace_collection/proxy_setup
 {{% /tab %}}
 {{% tab ".NET" %}}
 .NET アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
@@ -246,8 +247,8 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 Read more about sampling controls in the [.NET tracing library documentation][1].\
 Read more about [configuring environment variables for .NET][2].
 
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
-[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core?tab=registryeditor#configuring-process-environment-variables
+[1]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[2]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core?tab=registryeditor#configuring-process-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -660,7 +661,7 @@ span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_D
 サンプリングコントロールについては、[Java トレースライブラリドキュメント][2]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
-[2]: /tracing/trace_collection/dd_libraries/java
+[2]: /ja/tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Python" %}}
 バージョン [v1.4.0][1] 以降、Python アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
@@ -675,7 +676,7 @@ span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_D
 サンプリングコントロールについては、[Python トレースライブラリドキュメント][2]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
-[2]: /tracing/trace_collection/dd_libraries/python
+[2]: /ja/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
 バージョン [v1.5.0][1] 以降、Ruby アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
@@ -689,7 +690,7 @@ span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_D
 サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][2]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.5.0
-[2]: /tracing/trace_collection/dd_libraries/ruby#sampling
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
 バージョン [v1.41.0][1] 以降、Go アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
@@ -710,7 +711,7 @@ For example, to collect `100%` of the spans from the service for the resource `P
 サンプリングコントロールについては、[Go トレースライブラリドキュメント][2]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
-[2]: /tracing/trace_collection/dd_libraries/go
+[2]: /ja/tracing/trace_collection/dd_libraries/go
 [3]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -724,7 +725,7 @@ Node.js アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` �
 
 サンプリングコントロールについては、[Node.js トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /tracing/trace_collection/dd_libraries/nodejs
+[1]: /ja/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
 バージョン [v0.77.0][1] 以降、PHP アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
@@ -738,7 +739,7 @@ Node.js アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` �
 サンプリングコントロールについては、[PHP トレースライブラリドキュメント][2]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.77.0
-[2]: /tracing/trace_collection/dd_libraries/php
+[2]: /ja/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
 Starting from version [v0.1.0][1], for C++ applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
@@ -763,7 +764,7 @@ Starting from version [v0.1.0][1], for C++ applications, set by-service and by-o
 サンプリングコントロールについては、[.NET トレースライブラリドキュメント][2]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.18.0
-[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -815,26 +816,26 @@ OpenTelemetry SDK のセットアップ (OpenTelemetry Collector または Datad
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/dd_libraries/
-[2]: /tracing/trace_pipeline/metrics/
+[1]: /ja/tracing/trace_collection/dd_libraries/
+[2]: /ja/tracing/trace_pipeline/metrics/
 [3]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[4]: /tracing/glossary/#trace-root-span
-[5]: /tracing/trace_pipeline/ingestion_controls/
-[6]: /tracing/trace_pipeline/generate_metrics/
-[7]: /real_user_monitoring/platform/connect_rum_and_traces/
+[4]: /ja/tracing/glossary/#trace-root-span
+[5]: /ja/tracing/trace_pipeline/ingestion_controls/
+[6]: /ja/tracing/trace_pipeline/generate_metrics/
+[7]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
 [8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.30.0
 [9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
 [10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
 [11]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv1.0.0
 [12]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0
-[13]: /synthetics/apm/
-[14]: /serverless/distributed_tracing/
-[15]: /security/application_security/
+[13]: /ja/synthetics/apm/
+[14]: /ja/serverless/distributed_tracing/
+[15]: /ja/security/application_security/
 [16]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.13.0
 [17]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.15.0
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /agent/remote_config/#enabling-remote-configuration
-[22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry
-[23]: /agent/remote_config/
+[21]: /ja/agent/remote_config/#enabling-remote-configuration
+[22]: /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry
+[23]: /ja/agent/remote_config/

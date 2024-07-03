@@ -1,65 +1,65 @@
 ---
-"app_id": "keep"
-"app_uuid": "40ac95c0-35bd-49c8-a5f0-b21037bc87b4"
-"assets":
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://www.keephq.dev"
-  "name": Keep
-  "sales_email": founders@keephq.dev
-  "support_email": tal@keephq.dev
-"categories":
+app_id: keep
+app_uuid: 40ac95c0-35bd-49c8-a5f0-b21037bc87b4
+assets:
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://www.keephq.dev
+  name: Keep
+  sales_email: founders@keephq.dev
+  support_email: tal@keephq.dev
+categories:
 - alerting
 - developer tools
 - incidents
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/keep/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "keep"
-"integration_id": "keep"
-"integration_title": "Keep"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "keep"
-"public_title": "Keep"
-"short_description": "Send monitor metrics from Keep's AIOps platform into Datadog"
-"supported_os": []
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Developer Tools"
-  - "Category::Incidents"
-  - "Queried Data Type::Metrics"
-  - "Queried Data Type::Logs"
-  - "Queried Data Type::Events"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Send monitor metrics from Keep's AIOps platform into Datadog
-  "media":
-  - "caption": A short product tour to Keep
-    "image_url": images/alerts-page.png
-    "media_type": video
-    "vimeo_id": !!int "906118097"
-  - "caption": Keep's alerts page
-    "image_url": images/alerts-page.png
-    "media_type": image
-  - "caption": Keep's noise-reduction rules builder page
-    "image_url": images/alert-rules.png
-    "media_type": image
-  - "caption": Keep's workflows viewer
-    "image_url": images/workflows.png
-    "media_type": image
-  - "caption": Keep's workflow builder page
-    "image_url": images/workflow-builder.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Keep
-  "uninstallation": "README.md#Uninstallation"
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/keep/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: keep
+integration_id: keep
+integration_title: Keep
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: keep
+public_title: Keep
+short_description: Send monitor metrics from Keep's AIOps platform into Datadog
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Developer Tools
+  - Category::Incidents
+  - Queried Data Type::Metrics
+  - Queried Data Type::Logs
+  - Queried Data Type::Events
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Send monitor metrics from Keep's AIOps platform into Datadog
+  media:
+  - caption: A short product tour to Keep
+    image_url: images/alerts-page.png
+    media_type: video
+    vimeo_id: 906118097
+  - caption: Keep's alerts page
+    image_url: images/alerts-page.png
+    media_type: image
+  - caption: Keep's noise-reduction rules builder page
+    image_url: images/alert-rules.png
+    media_type: image
+  - caption: Keep's workflows viewer
+    image_url: images/workflows.png
+    media_type: image
+  - caption: Keep's workflow builder page
+    image_url: images/workflow-builder.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Keep
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -131,8 +131,7 @@ Need help? Contact [Keep's Support team][7].
 [1]: https://www.keephq.dev/
 [2]: https://docs.keephq.dev/providers/documentation/datadog-provider
 [3]: https://app.datadoghq.com/integrations/keephq
-[4]: /developers/authorization/oauth2_in_datadog/
+[4]: /ja/developers/authorization/oauth2_in_datadog/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/integrations/webhooks
 [7]: mailto:rnd@keephq.dev?subject=[Datadog]%20OAuth%20Integration%20Support
-

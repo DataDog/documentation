@@ -1,23 +1,24 @@
 ---
-title: Rsyslog
-name: rsyslog
-custom_kind: インテグレーション
-description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
-short_description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
-categories:
-    - log collection
-doc_link: /integrations/rsyslog/
 aliases:
-    - /logs/log_collection/rsyslog
+- /ja/logs/log_collection/rsyslog
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
+description: Configure Rsyslog to gather logs from your host, containers, & services.
+doc_link: /integrations/rsyslog/
 has_logo: true
+integration_id: rsyslog
 integration_title: rsyslog
 is_public: true
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md"]
+name: rsyslog
 public_title: Datadog-Rsyslog Integration
+short_description: Configure Rsyslog to gather logs from your host, containers, &
+  services.
 supported_os:
-    - linux
-integration_id: "rsyslog"
+- linux
+title: Rsyslog
 ---
 
 ## Overview
@@ -164,7 +165,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```
 {{% /site-region %}}
 
-[1]: /agent/logs/
+[1]: /ja/agent/logs/
 {{% /tab %}}
 
 {{% tab "Amazon Linux, CentOS, and Red Hat" %}}
@@ -300,7 +301,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```
 {{% /site-region %}}
 
-[1]: /agent/logs/
+[1]: /ja/agent/logs/
 {{% /tab %}}
 
 {{% tab "Fedora" %}}
@@ -437,7 +438,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ```
 {{% /site-region %}}
 
-[1]: /agent/logs/
+[1]: /ja/agent/logs/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -447,4 +448,4 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 Need help? Contact [Datadog support][1].
 
 
-[1]: /help/
+[1]: /ja/help/

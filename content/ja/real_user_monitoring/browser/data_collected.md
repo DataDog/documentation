@@ -1,15 +1,13 @@
 ---
-title: RUM Browser Data Collected
-kind: documentation
 aliases:
-  - /real_user_monitoring/data_collected/
-  - /real_user_monitoring/data_collected/view/
-  - /real_user_monitoring/data_collected/resource/
-  - /real_user_monitoring/data_collected/long_task/
-  - /real_user_monitoring/data_collected/error/
-  - /real_user_monitoring/data_collected/user_action/
+- /ja/real_user_monitoring/data_collected/
+- /ja/real_user_monitoring/data_collected/view/
+- /ja/real_user_monitoring/data_collected/resource/
+- /ja/real_user_monitoring/data_collected/long_task/
+- /ja/real_user_monitoring/data_collected/error/
+- /ja/real_user_monitoring/data_collected/user_action/
 further_reading:
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
   text: Introducing Datadog Real User Monitoring
 - link: /real_user_monitoring/browser/advanced_configuration
@@ -24,6 +22,8 @@ further_reading:
 - link: /logs/log_configuration/attributes_naming_convention
   tag: Documentation
   text: Datadog standard attributes
+kind: documentation
+title: RUM Browser Data Collected
 ---
 
 ## Overview
@@ -207,17 +207,17 @@ Source errors include code-level information about the error. For more informati
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /standard-attributes/?product=browser
-[2]: /data_security/real_user_monitoring/#ip-address
-[3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[1]: /ja/standard-attributes/?product=browser
+[2]: /ja/data_security/real_user_monitoring/#ip-address
+[3]: /ja/synthetics/browser_tests/
+[4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [5]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[11]: /real_user_monitoring/browser/collecting_browser_errors#error-sources
+[11]: /ja/real_user_monitoring/browser/collecting_browser_errors#error-sources
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[13]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
-[14]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[13]: /ja/real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
+[14]: /ja/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions

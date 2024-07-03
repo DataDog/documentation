@@ -1,5 +1,4 @@
 ---
-title: Creating Custom Detection Rules
 further_reading:
 - link: /security/threats/setup
   tag: Documentation
@@ -13,6 +12,7 @@ further_reading:
 - link: /security/notifications/variables/
   tag: Documentation
   text: Learn more about Security notification variables
+title: Creating Custom Detection Rules
 ---
 
 This topic explains how to create custom Datadog Agent and detection rules for [CSM Threats][8].
@@ -117,7 +117,7 @@ You can use Remote Configuration to automatically deploy the custom policy to yo
 
 変更を適用するには、[Datadog Agent][1] を再起動します。
 
-[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 
 {{% /tab %}}
 
@@ -150,7 +150,7 @@ You can use Remote Configuration to automatically deploy the custom policy to yo
 
 4. [Datadog Agent を再起動][1]します。
 
-[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -190,9 +190,9 @@ Agent のデフォルトルールを無効にするには、[**Agent Configurati
 
 [3]: https://app.datadoghq.com/security/configuration/workload/rules
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
-[5]: /security/notifications/variables/?tab=cloudsiem
+[5]: /ja/security/notifications/variables/?tab=cloudsiem
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /security/threats/workload_security_rules
-[8]: /security/threats/
-[9]: /security/cloud_siem/log_detection_rules/?tab=threshold#set-a-rule-case
+[7]: /ja/security/threats/workload_security_rules
+[8]: /ja/security/threats/
+[9]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook

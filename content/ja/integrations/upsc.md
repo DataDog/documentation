@@ -1,54 +1,54 @@
 ---
-"app_id": "upsc"
-"app_uuid": "4681a41f-efdc-4d22-b573-06e101b9cf24"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "upsc.battery.charge"
-      "metadata_path": "metadata.csv"
-      "prefix": "upsc."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10211"
-    "source_type_name": "UPSC"
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": "Community"
-  "sales_email": "help@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "os & system"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "upsc"
-"integration_id": "upsc"
-"integration_title": "UPSC"
-"integration_version": "1.0.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "upsc"
-"public_title": "UPSC"
-"short_description": "UPSC stats collector for UPS batteries"
-"supported_os":
-- "linux"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::OS & System"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": "UPSC stats collector for UPS batteries"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "UPSC"
+app_id: upsc
+app_uuid: 4681a41f-efdc-4d22-b573-06e101b9cf24
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: upsc.battery.charge
+      metadata_path: metadata.csv
+      prefix: upsc.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10211
+    source_type_name: UPSC
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- os & system
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: upsc
+integration_id: upsc
+integration_title: UPSC
+integration_version: 1.0.1
+is_public: true
+manifest_version: 2.0.0
+name: upsc
+public_title: UPSC
+short_description: UPSC stats collector for UPS batteries
+supported_os:
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::OS & System
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: UPSC stats collector for UPS batteries
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: UPSC
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -106,12 +106,11 @@ The UPSC check does not include any service checks.
 Need help? Contact [Datadog support][9].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
-[3]: https://docs.datadoghq.com/getting_started/integrations/
-[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[3]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-extras/blob/master/upsc/datadog_checks/upsc/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [8]: https://github.com/DataDog/integrations-extras/blob/master/upsc/metadata.csv
 [9]: http://docs.datadoghq.com/help
-

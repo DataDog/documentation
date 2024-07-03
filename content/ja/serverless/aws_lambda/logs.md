@@ -1,6 +1,6 @@
 ---
-title: Log Collection for AWS Lambda
 kind: documentation
+title: Log Collection for AWS Lambda
 ---
 
 ### Collect logs from non-Lambda resources
@@ -149,11 +149,11 @@ If you are using a runtime or custom logger that isn't supported, follow these s
     3. Enable the cloned pipeline and disable the default one.
     4. Update the [Grok parser][25] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
 
-[2]: /serverless/libraries_integrations/extension/
-[4]: /serverless/libraries_integrations/forwarder/
-[11]: /integrations/amazon_web_services/#log-collection
-[13]: /agent/logs/advanced_log_collection/
-[14]: /logs/log_configuration/pipelines/
-[24]: /tracing/other_telemetry/connect_logs_and_traces/
-[25]: /logs/log_configuration/parsing/
-[47]: /logs/
+[2]: /ja/serverless/libraries_integrations/extension/
+[4]: /ja/serverless/libraries_integrations/forwarder/
+[11]: /ja/integrations/amazon_web_services/#log-collection
+[13]: /ja/agent/logs/advanced_log_collection/
+[14]: /ja/logs/log_configuration/pipelines/
+[24]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[25]: /ja/logs/log_configuration/parsing/
+[47]: /ja/logs/

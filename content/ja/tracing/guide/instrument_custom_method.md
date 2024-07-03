@@ -1,6 +1,4 @@
 ---
-title: Instrument a custom method to get deep visibility into your business logic
-kind: guide
 further_reading:
 - link: /tracing/guide/alert_anomalies_p99_database/
   tag: 3 mins
@@ -12,44 +10,45 @@ further_reading:
   tag: 3 mins
   text: Debug the slowest trace on the slowest endpoint of a web service
 - link: /tracing/guide/
-  tag: ""
+  tag: ''
   text: All guides
+title: Instrument a custom method to get deep visibility into your business logic
 ---
 
-_8 minutes to complete_
+_8 分で読了_
 
-{{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="Analytics View" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="分析ビュー" style="width:90%;">}}
 
 <div class="alert alert-warning"><strong>Note</strong>: This page describes using OpenTracing to custom instrument applications. OpenTracing is deprecated. The concepts presented here still apply, but follow the <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with OpenTelemetry</a> instructions and examples for your language instead. </div>
 
-To provide you with deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
+ビジネスロジックを詳細に可視化するために、Datadog APM では、ニーズと実装に基づいてトレースを構成するスパンをカスタマイズできます。これにより、コードベース内のあらゆるメソッド、さらにはメソッド内の特定のコンポーネントをトレースすることができます。これを使用すれば、アプリケーションの重要な領域を最適な粒度で最適化、監視できます。
 
-Datadog instruments many frameworks out-of-the-box, such as web services, databases, and caches, and enables you to instrument your own business logic to have the exact visibility you need. By creating spans for methods, you can optimize timing and track errors using the APM flame graph and monitors.
+Datadog は、ウェブサービス、データベース、キャッシュなど、すぐに使用できる多くのフレームワークをインスツルメントするため、独自のビジネスロジックをインスツルメントして、求められる正確な可視性を獲得できます。メソッドのスパンを作成することにより、APM フレームグラフとモニターを使用してタイミングを最適化し、エラーを追跡できます。
 
-## Instrumenting your code
+## コードのインスツルメンテーション
 
-**Follow the example to get your code instrumented**.
+**例に従いコードをインスツルメントします**。
 
-These examples walk through tracing the entire `BackupLedger.write` method to measure its execution time and status. `BackupLedger.write` is an action that saves the current state of a transaction ledger in memory before making a call to a payments database to post a new customer charge. This happens when the `charge` endpoint of the payments service is hit:
+以下の例では、`BackupLedger.write` メソッド全体をトレースして、実行時間とステータスを測定します。`BackupLedger.write` は、トランザクション台帳の現在の状態をメモリに保存してから、支払いデータベースを呼び出して新しい顧客請求を送信するアクションです。これは、支払いサービスの `charge` エンドポイントがヒットしたときに発生します。
 
-{{< img src="tracing/guide/custom_span/custom_span_2_cropped.png" alt="Analytics View" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_2_cropped.png" alt="分析ビュー" style="width:90%;">}}
 
-The `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
+`http.request POST /charge/` スパンは、直接の子スパンがないと多くの時間がかかります。これは、このリクエストがその動作に対するより優れた情報を得るために、さらなるインスツルメンテーションを必要とする手がかりです。使用しているプログラミング言語に応じて、関数を異なる方法で装飾する必要があります。
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 
-In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
+Java の場合、Datadog APM により、メソッドデコレータを使用するか、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
-**Instument a method with a decorator**:
+**デコレータを使用してメソッドをインスツルメントする**
 
-This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
+この例では、`BackupLedger.write` メソッドにスパンを追加し、トランザクション台帳に新しい行を追加します。投稿されたすべてのトランザクションを単一のユニットとして追跡するために、1 つのスパンが追加されます。
 
 ```java
 import datadog.trace.api.Trace
 
 public class BackupLedger {
 
-  // Use @Trace annotation to trace custom methods
+  // @Trace アノテーションを使用してカスタムメソッドをトレースします
   @Trace
   public void write(List<Transaction> transactions) {
     for (Transaction transaction : transactions) {
@@ -61,9 +60,9 @@ public class BackupLedger {
 }
 ```
 
-**Instrument a specific code block**:
+**特定のコードブロックをインスツルメントする**
 
-This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
+この例では、上記で作成した `BackupLedger.write` スパンに子スパンを追加します。このメソッドは、台帳内のすべてのトランザクションの子スパンと、特定のトランザクション ID を持つ[カスタムタグ][1]を追加します。
 
 ```java
 import datadog.trace.api.Trace;
@@ -73,18 +72,18 @@ import io.opentracing.util.GlobalTracer;
 
 public class BackupLedger {
 
-  // Use `@Trace` annotation to trace custom methods
+  // `@Trace` アノテーションを使用してカスタムメソッドをトレースします
   @Trace
   public void write(List<Transaction> transactions) {
     for (Transaction transaction : transactions) {
-      // Use `GlobalTracer` to trace blocks of inline code
+      // `GlobalTracer` を使用してインラインコードのブロックをトレースします
       Tracer tracer = GlobalTracer.get();
-      // Note: The scope in the try with resource block below
-      // will be automatically closed at the end of the code block.
-      // If you do not use a try with resource statement, you need
-      // to call scope.close().
+     // 注: 以下の try with resource ブロックのスコープは、
+     // コードブロックの最後で自動的に閉じられます。
+     // resource 文で try を使用しない場合は、scope.close() 
+     // を呼び出す必要があります。
       try (Scope scope = tracer.buildSpan("BackupLedger.persist").startActive(true)) {
-        // Add custom metadata to the span
+        // スパンにカスタムメタデータを追加します
         scope.span().setTag("transaction.id", transaction.getId());
         ledger.put(transaction.getId(), transaction);
       }
@@ -95,22 +94,22 @@ public class BackupLedger {
 }
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
+Python の場合、Datadog APM により、メソッドデコレータを使用するか、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
-**Instument a method with a decorator**:
+**デコレータを使用してメソッドをインスツルメントする**
 
-This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit.
+この例では、`BackupLedger.write` メソッドにスパンを追加し、トランザクション台帳に新しい行を追加します。投稿されたすべてのトランザクションを単一のユニットとして追跡するために、1 つのスパンが追加されます。
 
 ```python
 from ddtrace import tracer
 
 class BackupLedger:
 
-    # Use `tracer.wrap` decorator to trace custom methods
+    # `tracer.wrap` デコレータを使用してカスタムメソッドをトレースします
     @tracer.wrap()
     def write(self, transactions):
         for transaction in transactions:
@@ -119,35 +118,35 @@ class BackupLedger:
         # [...]
 ```
 
-**Instrument a specific code block**:
+**特定のコードブロックをインスツルメントする**
 
-This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
+この例では、上記で作成した `BackupLedger.write` スパンに子スパンを追加します。このメソッドは、台帳内のすべてのトランザクションの子スパンと、特定のトランザクション ID を持つ[カスタムタグ][1]を追加します。
 
 ```python
 from ddtrace import tracer
 
 class BackupLedger:
 
-    # Use `tracer.wrap` decorator to trace custom methods
+    # `tracer.wrap` デコレータを使用してカスタムメソッドをトレースします
     @tracer.wrap()
     def write(self, transactions):
         for transaction in transactions:
-            # Use `tracer.trace` context manager to trace blocks of inline code
+            # `tracer.trace` コンテキストマネージャーを使用してインラインコードのブロックをトレースします
             with tracer.trace('BackupLedger.persist') as span:
-                # Add custom metadata to the "persist_transaction" span
+                # "persist_transaction" スパンにカスタムメタデータを追加します
                 span.set_tag('transaction.id', transaction.id)
                 self.ledger[transaction.id] = transaction
 
         # [...]
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-  In Ruby, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  Ruby の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
-  This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
+この例では、`BackupLedger.write` メソッドの呼び出し用に新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]で台帳に投稿されたすべてのトランザクションに子スパンを作成します。
 
 ```ruby
 require 'ddtrace'
@@ -155,11 +154,11 @@ require 'ddtrace'
 class BackupLedger
 
   def write(transactions)
-    # Use global `Datadog::Tracing.trace` to trace blocks of inline code
+    # グローバルな `Datadog::Tracing.trace` を使用してインラインコードのブロックをトレースします
     Datadog::Tracing.trace('BackupLedger.write') do |method_span|
       transactions.each do |transaction|
         Datadog::Tracing.trace('BackupLedger.persist') do |span|
-          # Add custom metadata to the "persist_transaction" span
+          # "persist_transaction" スパンにカスタムメタデータを追加します
           span.set_tag('transaction.id', transaction.id)
           ledger[transaction.id] = transaction
         end
@@ -171,13 +170,13 @@ class BackupLedger
 end
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-  In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  Go の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
-  This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
+この例では、台帳に投稿されたすべてのトランザクションに対して新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]をスパンに追加します。
 
 ```go
 package ledger
@@ -187,7 +186,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 // [...]
 
 func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) (err error) {
-  // Trace the `write` function and capture the error if present
+  // `write` 関数をトレースし、存在する場合はエラーをキャプチャします
   span, ctx := tracer.StartSpanFromContext(ctx, "BackupLedger.write")
   defer func() {
     span.Finish(tracer.WithError(err))
@@ -201,9 +200,9 @@ func (bl *BackupLedger) write(ctx context.Context, transactions []*Transaction) 
   return nil
 }
 
-// persistTransaction is an inner function you may want to Trace. You can use the
-// same approach as before because the `ctx` you pass down includes out-of-the-box span
-// references to create a parent/child relationships.
+// persistTransaction は、トレースしたい内部関数です。 
+// 以前と同じアプローチを使用できます。
+// これは、渡した `ctx` に親/子関係を作成するための、すぐに使用できるスパン参照が含まれるためです。
 func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Transaction) error {
   id := transaction.ID
   span, _ := tracer.StartSpanFromContext(ctx, "BackupLedger.persist", tracer.Tag("transaction_id", id))
@@ -217,25 +216,25 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 }
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-  In Node.js, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  Node.js の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
-This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
+この例では、`BackupLedger.write` メソッドの呼び出し用に新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]で台帳に投稿されたすべてのトランザクションに子スパンを作成します。
 
 ```javascript
 const tracer = require('dd-trace')
 
 function write (transactions) {
-  // Use `tracer.trace` context manager to trace blocks of inline code
+  // `tracer.trace` コンテキストマネージャーを使用してインラインコードのブロックをトレースします
   tracer.trace('BackupLedger.write', () => {
     for (const transaction of transactions) {
-      tracer.trace('BackupLedger.persist' , (span) => {
-        // Add custom metadata to the "persist_transaction" span
-        span.setTag('transaction.id', transaction.id)
-        this.ledger[transaction.id] = transaction
+     tracer.trace('BackupLedger.persist' , (span) => {
+      // "persist_transaction" スパンにカスタムメタデータを追加します
+       span.setTag('transaction.id', transaction.id)
+       this.ledger[transaction.id] = transaction
       })
     }
   })
@@ -244,27 +243,27 @@ function write (transactions) {
 }
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-  In .NET, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  .NET の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
-This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
+この例では、台帳に投稿されたすべてのトランザクションに対して新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]をスパンに追加します。
 
 ```csharp
 using Datadog.Trace;
 
 public void Write(List<Transaction> transactions)
 {
-    // Use global tracer to trace blocks of inline code
+    //グローバルトレーサーを使用してインラインコードのブロックをトレースします
     using (var scope = Tracer.Instance.StartActive("BackupLedger.write"))
     {
         foreach (var transaction in transactions)
         {
             using (var scope = Tracer.Instance.StartActive("BackupLedger.persist"))
             {
-                // Add custom metadata to the span
+                // スパンにカスタムメタデータを追加します
                 scope.Span.SetTag("transaction.id", transaction.Id);
                 this.ledger[transaction.Id] = transaction;
             }
@@ -275,15 +274,15 @@ public void Write(List<Transaction> transactions)
 }
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-In PHP, Datadog APM allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
+PHP の場合、Datadog APM により、メソッドラッパーを使用するか、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
-**Instrument a method with a wrapper**:
+**ラッパーを使用してメソッドをインスツルメントする**
 
-This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit by using the `DDTrace\trace_method()` function.
+この例では、`BackupLedger.write` メソッドにスパンを追加し、トランザクション台帳に新しい行を追加します。`DDTrace\trace_method()` 関数を使用して、投稿されたすべてのトランザクションを単一のユニットとして追跡するために、1 つのスパンが追加されます。
 
 ```php
 <?php
@@ -298,20 +297,20 @@ This example adds a span to the `BackupLedger.write` method, which adds new rows
     }
   }
 
-  // For ddtrace < v0.47.0 use \dd_trace_method()
+  // ddtrace v0.47.0 以前の場合、\dd_trace_method() を使用
   \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
-    // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
+    // SpanData::$name のデフォルトは、設定されていない場合 'ClassName.methodName' (v0.47.0 以降)
     $span->name = 'BackupLedger.write';
-    // SpanData::$resource defaults to SpanData::$name if not set (>= v0.47.0)
+    // SpanData::$resource のデフォルトは、設定されていない場合 SpanData::$name if not set (v0.47.0 以降)
     $span->resource = 'BackupLedger.write';
     $span->service = 'php';
   });
 ?>
 ```
 
-**Instrument a specific code block**:
+**特定のコードブロックをインスツルメントする**
 
-This example adds child spans to the `BackupLedger.write` span created above. This method adds a child span for every transaction in the ledger and a [custom tag][1] with the specific transaction ID.
+この例では、上記で作成した `BackupLedger.write` スパンに子スパンを追加します。このメソッドは、台帳内のすべてのトランザクションの子スパンと、特定のトランザクション ID を持つ[カスタムタグ][1]を追加します。
 
 ```php
 <?php
@@ -319,15 +318,15 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 
     public function write(array $transactions) {
       foreach ($transactions as $transaction) {
-        // Use global tracer to trace blocks of inline code
+        // グローバルトレーサーを使用してインラインコードのブロックをトレース
         $span = \DDTrace\start_span();
         $span->name = 'BackupLedger.persist';
 
-        // Add custom metadata to the span
+        // スパンにカスタムメタデータを追加
         $span->meta['transaction.id'] = $transaction->getId();
         $this->transactions[$transaction->getId()] = $transaction;
 
-        // Close the span
+        // スパンを閉じる
         \DDTrace\close_span();
       }
 
@@ -335,42 +334,42 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
     }
   }
 
-  // For ddtrace < v0.47.0 use \dd_trace_method()
+  // ddtrace v0.47.0 未満の場合、\dd_trace_method() を使用
   \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
-    // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
+    // SpanData::$name のデフォルトは、設定されていない場合 'ClassName.methodName' (v0.47.0 以降)
     $span->name = 'BackupLedger.write';
-    // SpanData::$resource defaults to SpanData::$name if not set (>= v0.47.0)
+    // SpanData::$resource のデフォルトは、設定されていない場合 SpanData::$name (v0.47.0 以降)
     $span->resource = 'BackupLedger.write';
     $span->service = 'php';
   });
 ?>
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## Leverage the Datadog UI to see your new custom spans
+## Datadog UI を活用して新しいカスタムスパンを表示する
 
-Now that you have instrumented your business logic, it's time to see the results in the Datadog APM UI.
+ビジネスロジックをインスツルメントしたら、Datadog APM UI で結果を確認します。
 
-1. Go to the **[Service Catalog][1]**, and click the service you added custom spans to, to open its service page. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
+1. **[サービスカタログ][1]**に移動し、カスタムスパンを追加したサービスをクリックして、そのサービスページを開きます。サービスページで、追加した**特定のリソース**をクリックし、時間フィルターを `The past 15 minutes` に変更し、スパンサマリーテーブルまでスクロールダウンします。
 
-    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="スパンサマリーテーブル" style="width:90%;">}}
 
-The span summary table provides aggregate information about the spans that make up your traces. Here you can identify spans that repeat an abnormal amount of times indicating some looping or database access inefficiency (like the [`n+1` issue][2]).
+スパンサマリーテーブルでは、トレースを構成するスパンに関する集約情報を確認できます。ここで、異常な回数繰り返されるスパンを特定して、ループやデータベースアクセスの非効率性を見つけることができます（[`n+1` 問題][2]など）。
 
-2. Scroll down to the **Traces list** and click into one of your traces.
+2. **トレースの一覧画面**までスクロールダウンし、トレースのいずれかをクリックします。
 
-    {{< img src="tracing/guide/custom_span/custom_span_4_cropped.png" alt="Analytics View" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_4_cropped.png" alt="分析ビュー" style="width:90%;">}}
 
-You've now successfully added custom spans to your codebase, making them available on the flame graph and in [App Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
+これで、カスタムスパンがコードベースに正常に追加され、フレームグラフと [App Analytics][3] で利用できるようになりました。これは、Datadog のツールを最大限に活用するための最初のステップです。次に[カスタムタグをスパンに追加][4]すれば、さらに強力にすることができます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/traces?viz=timeseries
-[4]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[4]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

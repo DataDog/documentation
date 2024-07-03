@@ -1,7 +1,6 @@
 ---
-title: Notifications
 aliases:
-  - /security_platform/notifications/
+- /ja/security_platform/notifications/
 further_reading:
 - link: /security/notifications/rules/
   tag: Documentation
@@ -13,15 +12,16 @@ further_reading:
   tag: Documentation
   text: Explore security detection rules
 products:
-- name: Cloud SIEM
+- icon: siem
+  name: Cloud SIEM
   url: /security/cloud_siem/
-  icon: siem
-- name: Cloud Security Management
+- icon: cloud-security-management
+  name: Cloud Security Management
   url: /security/cloud_security_management/
-  icon: cloud-security-management
-- name: Application Security Management
+- icon: app-sec
+  name: Application Security Management
   url: /security/application_security/
-  icon: app-sec
+title: Notifications
 ---
 
 {{< product-availability >}}
@@ -62,6 +62,6 @@ Notifications can be sent to individuals and teams through email, Slack, Jira, P
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/variables/
-[2]: /security/detection_rules/#creating-and-managing-detection-rules
-[3]: /security/notifications/rules/
+[1]: /ja/security/notifications/variables/
+[2]: /ja/security/detection_rules/#creating-and-managing-detection-rules
+[3]: /ja/security/notifications/rules/

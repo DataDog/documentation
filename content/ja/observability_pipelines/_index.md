@@ -1,5 +1,4 @@
 ---
-title: Observability Pipelines
 disable_toc: false
 further_reading:
 - link: /logs/log_collection/
@@ -11,24 +10,26 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: documentation
   text: Sensitive Data Scanner
-- link: "/agent/configuration/dual-shipping/#yaml-configuration"
+- link: /agent/configuration/dual-shipping/#yaml-configuration
   tag: documentation
   text: Dual shipping with Observability Pipelines
-- link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
+- link: https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/
   tag: blog
   text: Redact sensitive data from your logs on-prem by using Observability Pipelines
-- link: "https://www.datadoghq.com/blog/observability-pipelines-dual-ship-logs/"
+- link: https://www.datadoghq.com/blog/observability-pipelines-dual-ship-logs/
   tag: blog
   text: Dual ship logs with Datadog Observability Pipelines
-- link: "https://www.datadoghq.com/blog/observability-pipelines-log-volume-control/"
+- link: https://www.datadoghq.com/blog/observability-pipelines-log-volume-control/
   tag: blog
   text: Control your log volumes with Datadog Observability Pipelines
-- link: "https://www.datadoghq.com/blog/observability-pipelines-archiving/"
+- link: https://www.datadoghq.com/blog/observability-pipelines-archiving/
   tag: blog
-  text: Archive your logs with Observability Pipelines for a simple and affordable migration to Datadog
-- link: "https://www.datadoghq.com/blog/observability-pipelines/"
+  text: Archive your logs with Observability Pipelines for a simple and affordable
+    migration to Datadog
+- link: https://www.datadoghq.com/blog/observability-pipelines/
   tag: blog
   text: Aggregate, process, and route logs easily with Datadog Observability Pipelines
+title: Observability Pipelines
 ---
 
 {{< site-region region="gov" >}}
@@ -71,10 +72,10 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/setup_opw/
+[1]: /ja/observability_pipelines/setup_opw/
 [2]: https://app.datadoghq.com/observability-pipelines
-[3]: /observability_pipelines/log_volume_control/
-[4]: /observability_pipelines/dual_ship_logs/
-[5]: /observability_pipelines/split_logs/
-[6]: /observability_pipelines/archive_logs/
-[7]: /observability_pipelines/sensitive_data_redaction/
+[3]: /ja/observability_pipelines/log_volume_control/
+[4]: /ja/observability_pipelines/dual_ship_logs/
+[5]: /ja/observability_pipelines/split_logs/
+[6]: /ja/observability_pipelines/archive_logs/
+[7]: /ja/observability_pipelines/sensitive_data_redaction/

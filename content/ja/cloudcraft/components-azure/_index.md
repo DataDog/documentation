@@ -1,5 +1,5 @@
 ---
-title: "Components: Azure"
+title: 'Components: Azure'
 ---
 
 {{< whatsnext desc="Compute:" >}}

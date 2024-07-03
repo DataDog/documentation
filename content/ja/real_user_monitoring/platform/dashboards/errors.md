@@ -1,12 +1,12 @@
 ---
-title: RUM Error Dashboards
-kind: documentation
 aliases:
-- /real_user_monitoring/platform/dashboards/errors_dashboard
+- /ja/real_user_monitoring/platform/dashboards/errors_dashboard
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Learn about the RUM Explorer
+kind: documentation
+title: RUM Error Dashboards
 ---
 
 ## Web app errors
@@ -42,8 +42,8 @@ For more information about the data displayed, see our documentation for each pl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
-[2]: /real_user_monitoring/data_collected/
-[3]: /real_user_monitoring/ios/data_collected/
-[4]: /real_user_monitoring/android/data_collected/
-[5]: /real_user_monitoring/reactnative/data_collected/
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[2]: /ja/real_user_monitoring/data_collected/
+[3]: /ja/real_user_monitoring/ios/data_collected/
+[4]: /ja/real_user_monitoring/android/data_collected/
+[5]: /ja/real_user_monitoring/reactnative/data_collected/
+[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter

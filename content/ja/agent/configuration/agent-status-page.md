@@ -1,7 +1,9 @@
 ---
-title: Agent v6 Status Page
+algolia:
+  tags:
+  - status page
 aliases:
-- /agent/guide/agent-status-page
+- /ja/agent/guide/agent-status-page
 further_reading:
 - link: /agent/troubleshooting/
   tag: Documentation
@@ -12,8 +14,7 @@ further_reading:
 - link: /agent/configuration/agent-commands/
   tag: Guide
   text: Agent Commands
-algolia:
-  tags: [status page]
+title: Agent v6 Status Page
 ---
 
 Agent v6 ステータスページでは、実行中の Agent に関する情報が表示されます。[Agent のコマンド][1] で、使用中の環境のステータスコマンドを探すことができます。次のセクションでは、ステータスページの詳細を説明します。
@@ -273,6 +274,6 @@ Forwarder はいくつかのワーカーを使用して Datadog にペイロー�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/agent-commands/#agent-information
-[2]: /agent/troubleshooting/ntp/
-[3]: /agent/faq/how-datadog-agent-determines-the-hostname/
+[1]: /ja/agent/configuration/agent-commands/#agent-information
+[2]: /ja/agent/troubleshooting/ntp/
+[3]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/

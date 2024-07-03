@@ -1,66 +1,66 @@
 ---
-"app_id": "redisenterprise"
-"app_uuid": "a353f8c5-240c-48f9-b2a1-c86d2da0c07e"
-"assets":
-  "dashboards":
-    "Redis Enterprise Active/Active Statistics": assets/dashboards/redis_enterprise_active_active.json
-    "Redis Enterprise Cluster Overview": assets/dashboards/redisenterprise_cluster_top_view.json
-    "Redis Enterprise Database Overview": assets/dashboards/redisenterprise_overview.json
-    "Redis Enterprise Redis on Flash": assets/dashboards/redisenterprise_rof.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": redisenterprise.total_node_count
-      "metadata_path": metadata.csv
-      "prefix": redisenterprise.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10190"
-    "source_type_name": Redis Enterprise
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Redis
-  "sales_email": github@mague.com
-  "support_email": github@mague.com
-"categories":
+app_id: redisenterprise
+app_uuid: a353f8c5-240c-48f9-b2a1-c86d2da0c07e
+assets:
+  dashboards:
+    Redis Enterprise Active/Active Statistics: assets/dashboards/redis_enterprise_active_active.json
+    Redis Enterprise Cluster Overview: assets/dashboards/redisenterprise_cluster_top_view.json
+    Redis Enterprise Database Overview: assets/dashboards/redisenterprise_overview.json
+    Redis Enterprise Redis on Flash: assets/dashboards/redisenterprise_rof.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: redisenterprise.total_node_count
+      metadata_path: metadata.csv
+      prefix: redisenterprise.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10190
+    source_type_name: Redis Enterprise
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Redis
+  sales_email: github@mague.com
+  support_email: github@mague.com
+categories:
 - data stores
 - caching
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "redisenterprise"
-"integration_id": "redisenterprise"
-"integration_title": "RedisEnterprise (Deprecated)"
-"integration_version": "1.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "redisenterprise"
-"public_title": "RedisEnterprise (Deprecated)"
-"short_description": "Redis Enterprise Observability"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: redisenterprise
+integration_id: redisenterprise
+integration_title: RedisEnterprise (Deprecated)
+integration_version: 1.2.0
+is_public: true
+manifest_version: 2.0.0
+name: redisenterprise
+public_title: RedisEnterprise (Deprecated)
+short_description: Redis Enterprise Observability
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Data Stores"
-  - "Category::Caching"
-  "configuration": "README.md#Setup"
-  "description": Redis Enterprise Observability
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": RedisEnterprise (Deprecated)
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Caching
+  configuration: README.md#Setup
+  description: Redis Enterprise Observability
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RedisEnterprise (Deprecated)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -185,7 +185,7 @@ Contact the [Redis Field Engineering Team][20].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/redis-enterprise.jpg
-[2]: https://docs.datadoghq.com/integrations/redis_enterprise/
+[2]: https://docs.datadoghq.com/ja/integrations/redis_enterprise/
 [3]: http://www.redislabs.com
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/dashboard.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/datadog_cluster_top_view.png
@@ -193,15 +193,14 @@ Contact the [Redis Field Engineering Team][20].
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/active_active_dashboard.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/events.png
 [9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/redisenterprise/images/logo-redis.png
-[10]: https://docs.datadoghq.com/agent/guide/use-community-integrations/?tab=agentv721v621
-[11]: https://docs.datadoghq.com/agent/guide/use-community-integrations/?tab=agentearlierversions
-[12]: https://docs.datadoghq.com/agent/guide/use-community-integrations/?tab=docker
+[10]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentv721v621
+[11]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=agentearlierversions
+[12]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/?tab=docker
 [13]: https://app.datadoghq.com/account/settings/agent/latest
 [14]: https://github.com/DataDog/integrations-extras/tags
-[15]: https://docs.datadoghq.com/getting_started/integrations/
+[15]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [16]: https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/datadog_checks/redisenterprise/data/conf.yaml.example
 [17]: https://docs.redislabs.com/latest/rc/security/database-security/passwords-users-roles/
 [18]: https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/metadata.csv
 [19]: https://docs.redislabs.com/latest/rs/administering/monitoring-metrics/#cluster-alerts
 [20]: mailto:redis.observability@redis.com?subject=Datadog%20Integration%20Support
-

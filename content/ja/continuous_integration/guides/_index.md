@@ -1,12 +1,12 @@
 ---
-title: CI Visibility Guides
-private: true
-disable_toc: true
 cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: CI Visibility Guides
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: CI Visibility Guides
+disable_toc: true
+private: true
+title: CI Visibility Guides
 ---
 
 {{< whatsnext desc="Pipeline Visibility ガイド:" >}}

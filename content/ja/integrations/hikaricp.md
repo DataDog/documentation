@@ -1,57 +1,57 @@
 ---
-"app_id": "hikaricp"
-"app_uuid": "fa40ec7e-e8f6-4c4b-a675-31716b23a9fa"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": hikaricp.connections.active
-      "metadata_path": metadata.csv
-      "prefix": hikaricp.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10308"
-    "source_type_name": hikaricp
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": damien.bertau@blablacar.com
-  "support_email": damien.bertau@blablacar.com
-"categories": []
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/hikaricp/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "hikaricp"
-"integration_id": "hikaricp"
-"integration_title": "HikariCP"
-"integration_version": "1.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "hikaricp"
-"public_title": "HikariCP"
-"short_description": "HikariCP integration with openmetrics v2"
-"supported_os":
+app_id: hikaricp
+app_uuid: fa40ec7e-e8f6-4c4b-a675-31716b23a9fa
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hikaricp.connections.active
+      metadata_path: metadata.csv
+      prefix: hikaricp.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10308
+    source_type_name: hikaricp
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: damien.bertau@blablacar.com
+  support_email: damien.bertau@blablacar.com
+categories: []
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/hikaricp/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: hikaricp
+integration_id: hikaricp
+integration_title: HikariCP
+integration_version: 1.2.0
+is_public: true
+manifest_version: 2.0.0
+name: hikaricp
+public_title: HikariCP
+short_description: HikariCP integration with openmetrics v2
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": HikariCP integration with openmetrics v2
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": HikariCP
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: HikariCP integration with openmetrics v2
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HikariCP
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -105,12 +105,11 @@ Need help? Contact [Datadog support][9].
 
 
 [1]: https://github.com/brettwooldridge/HikariCP
-[2]: https://docs.datadoghq.com/developers/integrations/python/
+[2]: https://docs.datadoghq.com/ja/developers/integrations/python/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-extras/blob/master/hikaricp/datadog_checks/hikaricp/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-extras/blob/master/hikaricp/metadata.csv
 [8]: https://github.com/DataDog/integrations-extras/blob/master/hikaricp/assets/service_checks.json
-[9]: https://docs.datadoghq.com/help/
-
+[9]: https://docs.datadoghq.com/ja/help/

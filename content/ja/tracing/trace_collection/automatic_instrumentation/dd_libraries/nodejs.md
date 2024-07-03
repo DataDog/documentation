@@ -1,32 +1,32 @@
 ---
-title: Tracing Node.js Applications
-kind: documentation
 aliases:
-    - /tracing/nodejs/
-    - /tracing/languages/nodejs/
-    - /tracing/languages/javascript/
-    - /tracing/setup/javascript/
-    - /agent/apm/nodejs/
-    - /tracing/setup/nodejs
-    - /tracing/setup_overview/nodejs
-    - /tracing/setup_overview/setup/nodejs
-    - /tracing/trace_collection/dd_libraries/nodejs/
+- /ja/tracing/nodejs/
+- /ja/tracing/languages/nodejs/
+- /ja/tracing/languages/javascript/
+- /ja/tracing/setup/javascript/
+- /ja/agent/apm/nodejs/
+- /ja/tracing/setup/nodejs
+- /ja/tracing/setup_overview/nodejs
+- /ja/tracing/setup_overview/setup/nodejs
+- /ja/tracing/trace_collection/dd_libraries/nodejs/
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: "https://github.com/DataDog/dd-trace-js"
-      tag: ソースコード
-      text: Source code
-    - link: "https://datadog.github.io/dd-trace-js"
-      tag: Documentation
-      text: API documentation
-    - link: tracing/glossary/
-      tag: ドキュメント
-      text: Explore your services, resources and traces
-    - link: tracing/
-      tag: ドキュメント
-      text: Advanced Usage
+- link: https://github.com/DataDog/dd-trace-js
+  tag: ソースコード
+  text: Source code
+- link: https://datadog.github.io/dd-trace-js
+  tag: Documentation
+  text: API documentation
+- link: tracing/glossary/
+  tag: ドキュメント
+  text: Explore your services, resources and traces
+- link: tracing/
+  tag: ドキュメント
+  text: Advanced Usage
+kind: documentation
+title: Tracing Node.js Applications
+type: multi-code-lang
 ---
 ## Compatibility requirements
 
@@ -199,10 +199,10 @@ cp -R ./node_modules path/to/bundle
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/nodejs
+[1]: /ja/tracing/compatibility_requirements/nodejs
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[4]: /tracing/trace_collection/library_config/nodejs/
+[4]: /ja/tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[11]: /tracing/trace_collection/library_injection_local/
-[13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[11]: /ja/tracing/trace_collection/library_injection_local/
+[13]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

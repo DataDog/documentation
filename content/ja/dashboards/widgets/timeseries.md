@@ -1,13 +1,12 @@
 ---
-title: Timeseries Widget
-widget_type: timeseries
-description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:
-    - /graphing/widgets/timeseries/
-    - /dashboards/widgets/network/
-    - /graphing/widgets/network/
+- /ja/graphing/widgets/timeseries/
+- /ja/dashboards/widgets/network/
+- /ja/graphing/widgets/network/
+description: Display the evolution of one or more metrics, log events, indexed spans,
+  or process metrics over time.
 further_reading:
-- link: "https://www.datadoghq.com/blog/full-screen-graphs"
+- link: https://www.datadoghq.com/blog/full-screen-graphs
   tag: Blog
   text: Explore your data in full-screen graph mode
 - link: /dashboards/graphing_json/
@@ -16,6 +15,8 @@ further_reading:
 - link: /dashboards/guide/slo_data_source
   tag: Guide
   text: Graph historical SLO data on Dashboards
+title: Timeseries Widget
+widget_type: timeseries
 ---
 
 時系列可視化機能を使用すると、1 つ以上のメトリクス、ログイベント、Indexed Span などの動きを経時的に表示できます。タイムウィンドウは、[タイムボード][1]または[スクリーンボード][2]で選択した内容によって異なります。
@@ -147,17 +148,17 @@ Y 軸コントロールは、UI と JSON エディタで使用できます。Y �
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#get-started
-[2]: /dashboards/#screenboards
-[3]: /dashboards/querying/
-[4]: /tracing/trace_explorer/query_syntax/#search-bar
-[5]: /logs/search_syntax/
-[6]: /dashboards/guide/widget_colors/
-[7]: /dashboards/querying/#filter
-[8]: /events/
-[9]: /dashboards/template_variables/
-[10]: /dashboards/guide/context-links/
-[11]: /dashboards/widgets/#full-screen
+[1]: /ja/dashboards/#get-started
+[2]: /ja/dashboards/#screenboards
+[3]: /ja/dashboards/querying/
+[4]: /ja/tracing/trace_explorer/query_syntax/#search-bar
+[5]: /ja/logs/search_syntax/
+[6]: /ja/dashboards/guide/widget_colors/
+[7]: /ja/dashboards/querying/#filter
+[8]: /ja/events/
+[9]: /ja/dashboards/template_variables/
+[10]: /ja/dashboards/guide/context-links/
+[11]: /ja/dashboards/widgets/#full-screen
 [12]: https://www.datadoghq.com/blog/full-screen-graphs
-[13]: /api/latest/dashboards/
-[14]: /dashboards/graphing_json/widget_json/
+[13]: /ja/api/latest/dashboards/
+[14]: /ja/dashboards/graphing_json/widget_json/

@@ -1,5 +1,4 @@
 ---
-title: Getting Started
 further_reading:
 - link: bits_ai/
   tag: Documentation
@@ -10,6 +9,7 @@ further_reading:
 - link: bits_ai/managing_incidents/
   tag: Documentation
   text: Managing Incidents
+title: Getting Started
 ---
 
 ## Querying in Datadog
@@ -53,4 +53,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/slack/?tab=applicationforslack
+[1]: /ja/integrations/slack/?tab=applicationforslack

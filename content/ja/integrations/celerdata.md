@@ -1,68 +1,68 @@
 ---
-"app_id": "celerdata"
-"app_uuid": "790d8932-0833-43ac-b9d8-d6d0a4f11517"
-"assets":
-  "dashboards":
-    "CelerData Default Dashboard": assets/dashboards/CelerData.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": celerdata.fe.job
-      "metadata_path": metadata.csv
-      "prefix": celerdata.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10130457"
-    "source_type_name": celerdata
-"author":
-  "homepage": "https://celerdata.com"
-  "name": CelerData
-  "sales_email": Sales@celerdata.com
-  "support_email": support@celerdata.com
-"categories":
+app_id: celerdata
+app_uuid: 790d8932-0833-43ac-b9d8-d6d0a4f11517
+assets:
+  dashboards:
+    CelerData Default Dashboard: assets/dashboards/CelerData.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: celerdata.fe.job
+      metadata_path: metadata.csv
+      prefix: celerdata.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10130457
+    source_type_name: celerdata
+author:
+  homepage: https://celerdata.com
+  name: CelerData
+  sales_email: Sales@celerdata.com
+  support_email: support@celerdata.com
+categories:
 - log collection
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/celerdata/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "celerdata"
-"integration_id": "celerdata"
-"integration_title": "CelerData"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "celerdata"
-"public_title": "CelerData"
-"short_description": "Gathers CelerData metrics and logs"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/celerdata/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: celerdata
+integration_id: celerdata
+integration_title: CelerData
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: celerdata
+public_title: CelerData
+short_description: Gathers CelerData metrics and logs
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Data Stores"
-  - "Offering::Integration"
-  - "Supported OS::Linux"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  "configuration": "README.md#Setup"
-  "description": Gathers CelerData metrics and logs
-  "media":
-  - "caption": CelerData Dashboard
-    "image_url": images/celerdata-dashboard.png
-    "media_type": image
-  - "caption": CelerData Logs
-    "image_url": images/celerdata-logs.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": CelerData
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Data Stores
+  - Offering::Integration
+  - Supported OS::Linux
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  configuration: README.md#Setup
+  description: Gathers CelerData metrics and logs
+  media:
+  - caption: CelerData Dashboard
+    image_url: images/celerdata-dashboard.png
+    media_type: image
+  - caption: CelerData Logs
+    image_url: images/celerdata-logs.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CelerData
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -116,13 +116,12 @@ The CelerData integration does not include any events.
 Need help? Contact [CelerData support][10].
 
 [1]: https://celerdata.com/
-[2]: https://docs.datadoghq.com/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
 [3]: https://docs.starrocks.io/docs/administration/metrics/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-extras/blob/master/celerdata/datadog_checks/celerdata/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/celerdata/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/celerdata/service_checks.json
 [10]: mailto:support@celerdata.com
-

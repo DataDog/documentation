@@ -1,5 +1,4 @@
 ---
-title: Setting Up Database Monitoring for SQL Server on Amazon RDS
 description: Install and configure Database Monitoring for SQL Server managed on RDS.
 further_reading:
 - link: /integrations/sqlserver/
@@ -8,8 +7,7 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentation
   text: Troubleshoot Common Issues
-
-
+title: Setting Up Database Monitoring for SQL Server on Amazon RDS
 ---
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
@@ -97,5 +95,5 @@ AWS からより包括的なデータベースメトリクスとログを収集�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_rds
+[1]: /ja/integrations/amazon_rds
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

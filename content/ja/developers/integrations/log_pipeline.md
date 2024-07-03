@@ -1,9 +1,10 @@
 ---
 aliases:
-- /logs/faq/partner_log_integration
-- /developers/integrations/log_integration/
+- /ja/logs/faq/partner_log_integration
+- /ja/developers/integrations/log_integration/
+description: Learn how to create a Datadog Log integration.
 further_reading:
-- link: "/integrations/#cat-log-collection"
+- link: /integrations/#cat-log-collection
   tag: Documentation
   text: See existing Datadog Log integrations
 - link: /logs/explorer/facets/
@@ -16,7 +17,6 @@ further_reading:
   tag: Documentation
   text: Learn about log pipelines
 title: Create a Log Pipeline
-description: Learn how to create a Datadog Log integration.
 ---
 ## 概要
 
@@ -155,25 +155,25 @@ Once validations pass, Datadog creates and deploys the new log integration asset
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/latest/logs/#send-logs
-[2]: https://docs.datadoghq.com/getting_started/site/
+[1]: https://docs.datadoghq.com/ja/api/latest/logs/#send-logs
+[2]: https://docs.datadoghq.com/ja/getting_started/site/
 [3]: https://app.datadoghq.com/logs/pipelines
-[4]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-date-remapper
-[5]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[6]: https://docs.datadoghq.com/standard-attributes?product=log+management
-[7]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
-[8]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#grok-parser
-[9]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
-[10]: https://docs.datadoghq.com/logs/log_configuration/processors/
-[11]: https://docs.datadoghq.com/logs/explorer/facets/#units
-[12]: https://docs.datadoghq.com/logs/explorer/facets/
-[13]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
-[14]: https://docs.datadoghq.com/glossary/#facet
-[15]: https://docs.datadoghq.com/glossary/#measure
-[16]: https://docs.datadoghq.com/logs/explorer/
-[17]: https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#standard-attributes
-[18]: https://docs.datadoghq.com/developers/integrations/?tab=integrations
-[19]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
+[4]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#log-date-remapper
+[5]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#remapper
+[6]: https://docs.datadoghq.com/ja/standard-attributes?product=log+management
+[7]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#service-remapper
+[8]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#grok-parser
+[9]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#log-message-remapper
+[10]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/
+[11]: https://docs.datadoghq.com/ja/logs/explorer/facets/#units
+[12]: https://docs.datadoghq.com/ja/logs/explorer/facets/
+[13]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/
+[14]: https://docs.datadoghq.com/ja/glossary/#facet
+[15]: https://docs.datadoghq.com/ja/glossary/#measure
+[16]: https://docs.datadoghq.com/ja/logs/explorer/
+[17]: https://docs.datadoghq.com/ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[18]: https://docs.datadoghq.com/ja/developers/integrations/?tab=integrations
+[19]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#category-processor
 [20]: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
 [21]: https://partners.datadoghq.com/
-[22]: https://docs.datadoghq.com/developers/integrations/create_a_tile/?tab=buildatileontheintegrationspage#open-a-pull-request
+[22]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile/?tab=buildatileontheintegrationspage#open-a-pull-request

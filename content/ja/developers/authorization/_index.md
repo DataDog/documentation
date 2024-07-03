@@ -1,8 +1,6 @@
 ---
-title: Authorization
-type: documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/oauth/"
+- link: https://www.datadoghq.com/blog/oauth/
   tag: Blog
   text: Authorize your Datadog integrations with OAuth
 - link: /developers/integrations/oauth_for_integrations
@@ -14,6 +12,8 @@ further_reading:
 - link: /developers/authorization/oauth2_endpoints
   tag: API
   text: OAuth2 Authorization Endpoints Reference
+title: Authorization
+type: documentation
 ---
 
 ## Overview
@@ -44,6 +44,6 @@ Client Secret
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://datatracker.ietf.org/doc/html/rfc6749
-[2]: https://docs.datadoghq.com/api/latest/scopes/
+[2]: https://docs.datadoghq.com/ja/api/latest/scopes/
 [3]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[4]: https://docs.datadoghq.com/developers/ui_extensions/#oauth-api-access
+[4]: https://docs.datadoghq.com/ja/developers/ui_extensions/#oauth-api-access

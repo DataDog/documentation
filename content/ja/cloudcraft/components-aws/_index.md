@@ -1,5 +1,5 @@
 ---
-title: "AWS Components"
+title: AWS Components
 ---
 
 {{< whatsnext desc="Common:" >}}

@@ -1,35 +1,35 @@
 ---
-"categories":
+categories:
 - aws
 - cloud
 - log collection
 - network
 - tracing
-"creates_events": false
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "AWS App Mesh is an open source edge and service proxy."
-"display_name": "AWS App Mesh"
-"draft": false
-"further_reading":
-- "link": "https://docs.datadoghq.com/integrations/envoy/"
-  "tag": Documentation
-  "text": Envoy integration
-"git_integration_title": "amazon_app_mesh"
-"guid": "04669673-120b-48c9-a855-06d57d92c7cf"
-"integration_id": "amazon-app-mesh"
-"integration_title": "AWS App Mesh"
-"integration_version": ""
-"is_public": true
-"maintainer": "help@datadoghq.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "envoy."
-"metric_to_check": "envoy.stats.overflow"
-"name": "amazon_app_mesh"
-"public_title": "Datadog-AWS App Mesh Integration"
-"short_description": "AWS App Mesh is an open source edge and service proxy."
-"support": "core"
-"supported_os":
+creates_events: false
+custom_kind: インテグレーション
+dependencies: []
+description: AWS App Mesh is an open source edge and service proxy.
+display_name: AWS App Mesh
+draft: false
+further_reading:
+- link: https://docs.datadoghq.com/integrations/envoy/
+  tag: Documentation
+  text: Envoy integration
+git_integration_title: amazon_app_mesh
+guid: 04669673-120b-48c9-a855-06d57d92c7cf
+integration_id: amazon-app-mesh
+integration_title: AWS App Mesh
+integration_version: ''
+is_public: true
+maintainer: help@datadoghq.com
+manifest_version: 1.0.0
+metric_prefix: envoy.
+metric_to_check: envoy.stats.overflow
+name: amazon_app_mesh
+public_title: Datadog-AWS App Mesh Integration
+short_description: AWS App Mesh is an open source edge and service proxy.
+support: core
+supported_os:
 - linux
 - mac_os
 - windows
@@ -104,7 +104,7 @@ Log collection is not supported for this site.
 
 To enable log collection, update the Agent’s DaemonSet with the dedicated [Kubernetes log collection instructions][1].
 
-[1]: https://docs.datadoghq.com/integrations/ecs_fargate/#log-collection
+[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
 
 {{< /site-region >}}
 
@@ -126,7 +126,7 @@ Select the namespace to deploy the `datadog-agent` and service, for example: `mo
 Alternatively, the appmesh injector can be deployed by following the [App Mesh with EKS][2] documentation using the option `enable-datadog-tracing=true` or environment variable `ENABLE_DATADOG_TRACING=true`.
 
 
-[1]: https://docs.datadoghq.com/integrations/amazon_eks/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_eks/
 [2]: https://github.com/aws/aws-app-mesh-examples/blob/master/walkthroughs/eks/base.md#install-app-mesh--kubernetes-components
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
@@ -159,7 +159,7 @@ Log collection is not supported for this site.
 
 Enable log collection with the instructions in the [ECS Fargate integration documentation][1].
 
-[1]: https://docs.datadoghq.com/integrations/ecs_fargate/#log-collection
+[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
 
 {{< /site-region >}}
 
@@ -170,9 +170,9 @@ Enable log collection with the instructions in the [ECS Fargate integration docu
 Set the AWS App Mesh parameters `ENABLE_ENVOY_DATADOG_TRACING` and `DATADOG_TRACER_PORT` as environment variables in the ECS Fargate task definition. Learn more in the [AWS App Mesh][4] documentation.
 
 
-[1]: https://docs.datadoghq.com/integrations/ecs_fargate/
-[2]: https://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate/
-[3]: https://docs.datadoghq.com/integrations/ecs_fargate/#trace-collection
+[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/
+[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
+[3]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{% tab "ECS EC2" %}}
@@ -205,7 +205,7 @@ Log collection is not supported for this site.
 
 Enable log collection with the instructions in the [ECS integration documentation][1].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_ecs/#log-collection
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#log-collection
 
 {{< /site-region >}}
 
@@ -216,9 +216,9 @@ Enable log collection with the instructions in the [ECS integration documentatio
 2. Set the AWS App Mesh parameters `ENABLE_ENVOY_DATADOG_TRACING` and `DATADOG_TRACER_PORT` as environment variables in the ECS task definition. Learn more in the [AWS App Mesh][4] documentation.
 
 
-[1]: https://docs.datadoghq.com/integrations/amazon_ecs/
-[2]: https://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate/
-[3]: https://docs.datadoghq.com/integrations/amazon_ecs/#trace-collection
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
+[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -246,6 +246,5 @@ Need help? Contact [Datadog support][3].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/app-mesh
-[2]: https://docs.datadoghq.com/integrations/envoy/#metrics
-[3]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/integrations/envoy/#metrics
+[3]: https://docs.datadoghq.com/ja/help/

@@ -1,12 +1,11 @@
 ---
-title: Code Analysis
-description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development to prevent customer impact.
-is_beta: true
+description: Learn how to use Datadog Code Analysis to address maintainability issues,
+  bugs, and security vulnerabilities in development to prevent customer impact.
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: Release Notes
   text: Check out the latest Software Delivery releases! (App login required)
-- link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
   text: Monitor all your CI pipelines with Datadog
 - link: /integrations/guide/source-code-integration/
@@ -18,6 +17,8 @@ further_reading:
 - link: /security/application_security/software_composition_analysis
   tag: Documentation
   text: Learn about Software Composition Analysis
+is_beta: true
+title: Code Analysis
 ---
 
 {{% site-region region="gov" %}}
@@ -104,8 +105,8 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 
 {{< img src="code_analysis/setup/enable_repository.png" alt="Enable Software Composition Analysis on a GitHub repository" style="width:100%;">}}
 
-[101]: /code_analysis/software_composition_analysis
-[102]: /integrations/github/
+[101]: /ja/code_analysis/software_composition_analysis
+[102]: /ja/integrations/github/
 
 {{% /tab %}}
 {{% tab "CI Pipelines" %}}
@@ -122,13 +123,13 @@ See the following documentation to configure your CI/CD provider to run Static A
 - [Software Composition Analysis and GitHub Actions][104]
 - [Software Composition Analysis and Generic CI Providers][105]
 
-[101]: /code_analysis/static_analysis/github_actions 
-[102]: /code_analysis/static_analysis/circleci_orbs 
-[103]: /code_analysis/static_analysis/generic_ci_providers 
-[104]: /code_analysis/software_composition_analysis/github_actions 
-[105]: /code_analysis/software_composition_analysis/generic_ci_providers 
-[106]: /code_analysis/static_analysis
-[107]: /code_analysis/software_composition_analysis
+[101]: /ja/code_analysis/static_analysis/github_actions 
+[102]: /ja/code_analysis/static_analysis/circleci_orbs 
+[103]: /ja/code_analysis/static_analysis/generic_ci_providers 
+[104]: /ja/code_analysis/software_composition_analysis/github_actions 
+[105]: /ja/code_analysis/software_composition_analysis/generic_ci_providers 
+[106]: /ja/code_analysis/static_analysis
+[107]: /ja/code_analysis/software_composition_analysis
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -145,14 +146,14 @@ For more information, see the [Source Code Integration documentation][10].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /code_analysis/static_analysis
-[2]: /code_analysis/software_composition_analysis
-[3]: /developers/ide_integrations/vscode/#static-analysis
-[4]: /developers/ide_integrations/idea/#static-analysis
-[5]: /code_analysis/github_pull_requests/
-[6]: /code_analysis/static_analysis_rules
-[7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[8]: /integrations/guide/source-code-integration
+[1]: /ja/code_analysis/static_analysis
+[2]: /ja/code_analysis/software_composition_analysis
+[3]: /ja/developers/ide_integrations/vscode/#static-analysis
+[4]: /ja/developers/ide_integrations/idea/#static-analysis
+[5]: /ja/code_analysis/github_pull_requests/
+[6]: /ja/code_analysis/static_analysis_rules
+[7]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[8]: /ja/integrations/guide/source-code-integration
 [9]: https://app.datadoghq.com/ci/code-analysis
-[10]: /integrations/guide/source-code-integration/?tab=codeanalysis
-[11]: /code_analysis/ide_plugins/
+[10]: /ja/integrations/guide/source-code-integration/?tab=codeanalysis
+[11]: /ja/code_analysis/ide_plugins/

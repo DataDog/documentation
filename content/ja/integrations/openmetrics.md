@@ -1,55 +1,55 @@
 ---
-"app_id": "openmetrics"
-"app_uuid": "302b841e-8270-4ecd-948e-f16317a316bc"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10045"
-    "source_type_name": OpenMetrics
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: openmetrics
+app_uuid: 302b841e-8270-4ecd-948e-f16317a316bc
+assets:
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10045
+    source_type_name: OpenMetrics
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - metrics
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "openmetrics"
-"integration_id": "openmetrics"
-"integration_title": "OpenMetrics"
-"integration_version": "4.2.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "openmetrics"
-"public_title": "OpenMetrics"
-"short_description": "OpenMetrics is an open standard for exposing metric data"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: openmetrics
+integration_id: openmetrics
+integration_title: OpenMetrics
+integration_version: 4.2.1
+is_public: true
+manifest_version: 2.0.0
+name: openmetrics
+public_title: OpenMetrics
+short_description: OpenMetrics is an open standard for exposing metric data
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Metrics"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": OpenMetrics is an open standard for exposing metric data
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": OpenMetrics
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Metrics
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: OpenMetrics is an open standard for exposing metric data
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenMetrics
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -160,16 +160,15 @@ Need help? Contact [Datadog support][11].
 
 [1]: https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format
 [2]: https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md#suffixes
-[3]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[4]: https://docs.datadoghq.com/integrations/guide/versions-for-openmetrics-based-integrations
-[5]: https://docs.datadoghq.com/getting_started/integrations/prometheus/?tab=docker#configuration
-[6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[4]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
+[5]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/?tab=docker#configuration
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [8]: https://github.com/DataDog/integrations-core/blob/7.30.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://docs.datadoghq.com/getting_started/integrations/prometheus/
-[11]: https://docs.datadoghq.com/help/
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
+[11]: https://docs.datadoghq.com/ja/help/
 [12]: https://github.com/DataDog/integrations-core/blob/7.46.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L537-L546
-[13]: https://docs.datadoghq.com/agent/openmetrics/
-[14]: https://docs.datadoghq.com/developers/openmetrics/
-
+[13]: https://docs.datadoghq.com/ja/agent/openmetrics/
+[14]: https://docs.datadoghq.com/ja/developers/openmetrics/

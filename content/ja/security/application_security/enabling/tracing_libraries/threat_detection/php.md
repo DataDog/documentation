@@ -1,26 +1,26 @@
 ---
-title: Enabling ASM for PHP
-kind: documentation
-code_lang: php
-type: multi-code-lang
-code_lang_weight: 40
 aliases:
-  - /security_platform/application_security/getting_started/php
-  - /security/application_security/getting_started/php
-  - /security/application_security/enabling/php
+- /ja/security_platform/application_security/getting_started/php
+- /ja/security/application_security/getting_started/php
+- /ja/security/application_security/enabling/php
+code_lang: php
+code_lang_weight: 40
 further_reading:
-    - link: /security/application_security/add-user-info/
-      tag: Documentation
-      text: Adding user information to traces
-    - link: "https://github.com/DataDog/dd-trace-php"
-      tag: ソースコード
-      text: PHP Datadog Tracer Library source code
-    - link: /security/default_rules/?category=cat-application-security
-      tag: Documentation
-      text: OOTB Application Security Management Rules
-    - link: /security/application_security/troubleshooting
-      tag: Documentation
-      text: Troubleshooting Application Security Management
+- link: /security/application_security/add-user-info/
+  tag: Documentation
+  text: Adding user information to traces
+- link: https://github.com/DataDog/dd-trace-php
+  tag: ソースコード
+  text: PHP Datadog Tracer Library source code
+- link: /security/default_rules/?category=cat-application-security
+  tag: Documentation
+  text: OOTB Application Security Management Rules
+- link: /security/application_security/troubleshooting
+  tag: Documentation
+  text: Troubleshooting Application Security Management
+kind: documentation
+title: Enabling ASM for PHP
+type: multi-code-lang
 ---
 
 You can monitor application security for PHP apps running in host-based or container-based environments such as Docker, Kubernetes, AWS ECS, and AWS EKS.
@@ -100,4 +100,4 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/enabling/compatibility/php
+[1]: /ja/security/application_security/enabling/compatibility/php

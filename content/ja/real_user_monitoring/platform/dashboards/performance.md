@@ -1,18 +1,17 @@
 ---
-title: RUM Performance Overview Dashboards
-kind: documentation
 aliases:
-- /real_user_monitoring/dashboards/performance_overview_dashboard/
-- /real_user_monitoring/dashboards/resources_dashboard
-- /real_user_monitoring/dashboards/mobile_dashboard
-- /real_user_monitoring/platform/dashboards/performance_overview_dashboard/
-- /real_user_monitoring/platform/dashboards/resources_dashboard
-- /real_user_monitoring/platform/dashboards/mobile_dashboard
-
+- /ja/real_user_monitoring/dashboards/performance_overview_dashboard/
+- /ja/real_user_monitoring/dashboards/resources_dashboard
+- /ja/real_user_monitoring/dashboards/mobile_dashboard
+- /ja/real_user_monitoring/platform/dashboards/performance_overview_dashboard/
+- /ja/real_user_monitoring/platform/dashboards/resources_dashboard
+- /ja/real_user_monitoring/platform/dashboards/mobile_dashboard
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Learn about the RUM Explorer
+kind: documentation
+title: RUM Performance Overview Dashboards
 ---
 
 ## Web app performance
@@ -68,9 +67,9 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/data_collected/
-[2]: /real_user_monitoring/ios/data_collected/
-[3]: /real_user_monitoring/android/data_collected/
-[4]: /real_user_monitoring/reactnative/data_collected/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
-[6]: /data_security/real_user_monitoring/
+[1]: /ja/real_user_monitoring/data_collected/
+[2]: /ja/real_user_monitoring/ios/data_collected/
+[3]: /ja/real_user_monitoring/android/data_collected/
+[4]: /ja/real_user_monitoring/reactnative/data_collected/
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[6]: /ja/data_security/real_user_monitoring/

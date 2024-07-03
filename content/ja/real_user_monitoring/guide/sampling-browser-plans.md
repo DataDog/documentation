@@ -1,29 +1,29 @@
 ---
-title: Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling
-kind: guide
-description: Learn how to customize your Browser RUM and Browser RUM & Session Replay sampling configuration.
 aliases:
-- /real_user_monitoring/guide/sampling-browser-and-browser-premium/
+- /ja/real_user_monitoring/guide/sampling-browser-and-browser-premium/
+description: Learn how to customize your Browser RUM and Browser RUM & Session Replay
+  sampling configuration.
 further_reading:
 - link: /real_user_monitoring/browser/
   tag: Documentation
   text: Learn about RUM Browser Monitoring
+title: Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling
 ---
 
-## Overview
+## 概要
 
-When instrumenting a [Browser RUM application][1], set the sample rate for the total amount of user sessions you want to collect and the percentage of user sessions collected that include [Browser RUM & Session Replay][2] capabilities.
+[Browser RUM アプリケーション][1]をインスツルメントする場合、収集したいユーザーセッションの総量と、[Browser RUM & セッションリプレイ][2]機能を含むユーザーセッションの収集率に応じてサンプルレートを設定します。
 
-This guide provides an example of how to customize the amount of Browser RUM & Session Replay sessions you want to collect from the total amount of user sessions in Datadog.
+このガイドでは、Datadog のユーザーセッションの総量から収集したい Browser RUM &amp; セッションリプレイセッションの量をカスタマイズする方法を例として説明します。
 
-## Setup
+## セットアップ
 
-The `sessionReplaySampleRate` parameter is a percentage of `sessionSampleRate`.
+`sessionReplaySampleRate` パラメーターには、`sessionSampleRate` に対するパーセンテージを指定します。
 
-This feature requires the Datadog Browser SDK v3.0.0+.
+この機能を使用するには、Datadog ブラウザ SDK v3.0.0+ が必要です。
 
 <blockquote class="alert alert-info">
-The Datadog Browser SDK v4.20.0 introduces the <code>sessionReplaySampleRate</code> initialization parameter, deprecating the <code>premiumSampleRate</code> and <code>replaySampleRate</code> initialization parameter.
+Datadog ブラウザ SDK v4.20.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターが導入され、<code>premiumSampleRate</code> と <code>replaySampleRate</code> 初期化パラメーターは非推奨となりました。
 </blockquote>
 <blockquote class="alert alert-info">
 The Datadog Browser SDK v5.0.0 introduces two major behavior changes:
@@ -31,20 +31,20 @@ The Datadog Browser SDK v5.0.0 introduces two major behavior changes:
 - Only sessions that have recorded a replay are considered as Browser RUM & Session Replay
 - The <code>sessionReplaySampleRate</code> initialization parameter default value is `0` . Previous versions of the SDK use `100`.
 </blockquote>
-When a session is created, RUM tracks it as either:
+セッションが作成されると、RUM はそのセッションを次のいずれかとして追跡します。
 
 - [**Browser RUM**][2]: Sessions, views, actions, resources, long tasks, and errors are collected.
 - [**Browser RUM & Session Replay**][2]: Everything from Browser RUM is collected, including replay recordings.
 
-Two initialization parameters are available to control how the session is tracked:
+セッションの追跡方法を制御するために、2 つの初期化パラメーターが利用可能です。
 
-- `sessionSampleRate` controls the percentage of overall sessions being tracked. It defaults to `100%`, so every session is tracked by default.
+- `sessionSampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
 - `sessionReplaySampleRate` is applied **after** the overall sample rate, and controls the percentage of sessions tracked as Browser RUM & Session Replay. From Datadog Browser SDK v5.0.0, it defaults to `0`, so no session is tracked as Browser RUM & Session Replay by default.
 
-To track 100% of your sessions as Browser RUM:
+セッションの 100% を Browser RUM として追跡する場合
 
 <details open>
-  <summary>Latest version</summary>
+  <summary>最新バージョン</summary>
 
 ```
 datadogRum.init({
@@ -57,7 +57,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.30.0</code></summary>
+  <summary><code>v4.30.0</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -70,7 +70,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.20.0</code></summary>
+  <summary><code>v4.20.0</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -83,7 +83,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.10.2</code></summary>
+  <summary><code>v4.10.2</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -95,10 +95,10 @@ datadogRum.init({
 
 </details>
 
-To track 100% of your sessions as Browser RUM & Session Replay:
+セッションの 100% を Browser RUM & セッションリプレイとして追跡する場合
 
 <details open>
-  <summary>Latest version</summary>
+  <summary>最新バージョン</summary>
 
 ```
 datadogRum.init({
@@ -111,7 +111,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.30.0</code></summary>
+  <summary><code>v4.30.0</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -124,7 +124,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.20.0</code></summary>
+  <summary><code>v4.20.0</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -138,7 +138,7 @@ datadogRum.init({
 
 
 <details>
-  <summary>before<code>v4.10.2</code></summary>
+  <summary><code>v4.10.2</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -150,14 +150,14 @@ datadogRum.init({
 
 </details>
 
-Use the slider to set the percentage of Browser RUM & Session Replay sessions collected from the percentage of total user sessions collected for your application.
+スライダーを使用して、アプリケーションで収集された総ユーザーセッションの割合から、収集された Browser RUM & セッションリプレイセッションの割合を設定します。
 
-{{< img src="real_user_monitoring/browser/example-initialization-snippet.mp4" alt="Example initialization snippet for a browser application with custom percentages" video="true" width="100%" >}}
+{{< img src="real_user_monitoring/browser/example-initialization-snippet.mp4" alt="カスタムパーセンテージを使用したブラウザアプリケーションの初期化スニペット例" video="true" width="100%" >}}
 
-If you set `sessionSampleRate` to 60 and `sessionReplaySampleRate` to 50, 40% of sessions are dropped, 30% of sessions are collected as Browser RUM, and 30% of sessions are collected as Browser RUM & Session Replay.
+`sessionSampleRate` を 60、`sessionReplaySampleRate` を 50 に設定すると、40% のセッションがドロップされ、30% のセッションが Browser RUM として、30% のセッションが Browser RUM & セッションリプレイとして収集されるようになります。
 
 <details open>
-  <summary>Latest version</summary>
+  <summary>最新バージョン</summary>
 
 ```
 datadogRum.init({
@@ -170,7 +170,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.30.0</code></summary>
+  <summary><code>v4.30.0</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -183,7 +183,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.20.0</code></summary>
+  <summary><code>v4.20.0</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -196,7 +196,7 @@ datadogRum.init({
 </details>
 
 <details>
-  <summary>before<code>v4.10.2</code></summary>
+  <summary><code>v4.10.2</code> より前</summary>
 
 ```
 datadogRum.init({
@@ -224,12 +224,12 @@ datadogRum.startSessionReplayRecording()
 
 With the use of `startSessionReplayRecordingManually: true`, sessions that do not call `startSessionReplayRecording()` are considered as Browser RUM.
 
-For more information about tagging and exploring attributes, see [Browser Monitoring][3].
+タグ付けや属性の確認については、[ブラウザモニタリング][3]を参照してください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser#setup
+[1]: /ja/real_user_monitoring/browser#setup
 [2]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[3]: /real_user_monitoring/browser#tagging
+[3]: /ja/real_user_monitoring/browser#tagging

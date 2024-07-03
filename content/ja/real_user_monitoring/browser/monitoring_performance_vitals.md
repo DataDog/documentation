@@ -1,16 +1,16 @@
 ---
-title: Monitoring Performance Vitals
-kind: documentation
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
-    tag: ラーニングセンター
-    text: "インタラクティブラボ: コアウェブバイタル"
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: ブログ
-    text: Real User Monitoring
-  - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
-    tag: ブログ
-    text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
+- link: https://learn.datadoghq.com/courses/core-web-vitals-lab
+  tag: ラーニングセンター
+  text: 'インタラクティブラボ: コアウェブバイタル'
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: Real User Monitoring
+- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
+  tag: ブログ
+  text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
+kind: documentation
+title: Monitoring Performance Vitals
 ---
 
 ## 概要
@@ -84,9 +84,9 @@ You can select another sample event using the dropdown in the top left, and expa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
-[3]: /real_user_monitoring/browser/setup/
-[4]: /real_user_monitoring/session_replay/
+[1]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[3]: /ja/real_user_monitoring/browser/setup/
+[4]: /ja/real_user_monitoring/session_replay/
 [5]: https://app.datadoghq.com/rum/vitals
 [6]: https://app.datadoghq.com/rum/performance-monitoring

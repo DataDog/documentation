@@ -1,72 +1,72 @@
 ---
-"app_id": "sonarqube"
-"app_uuid": "c6033e2f-8b3d-4b82-8d35-7c61ce7d0908"
-"assets":
-  "dashboards":
-    "Sonarqube Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": sonarqube.server.database.pool_active_connections
-      "metadata_path": metadata.csv
-      "prefix": sonarqube.
-    "process_signatures":
+app_id: sonarqube
+app_uuid: c6033e2f-8b3d-4b82-8d35-7c61ce7d0908
+assets:
+  dashboards:
+    Sonarqube Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sonarqube.server.database.pool_active_connections
+      metadata_path: metadata.csv
+      prefix: sonarqube.
+    process_signatures:
     - java org.sonar.server.app.WebServer
     - java org.sonar.ce.app.CeServer
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10132"
-    "source_type_name": SonarQube
-  "monitors":
-    "SonarQube vulnerabilities": assets/monitors/vulnerabilities.json
-  "saved_views":
-    "status_overview": assets/saved_views/status_overview.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10132
+    source_type_name: SonarQube
+  monitors:
+    SonarQube vulnerabilities: assets/monitors/vulnerabilities.json
+  saved_views:
+    status_overview: assets/saved_views/status_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - automation
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "sonarqube"
-"integration_id": "sonarqube"
-"integration_title": "SonarQube"
-"integration_version": "3.2.2"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "sonarqube"
-"public_title": "SonarQube"
-"short_description": "Monitor your SonarQube server and projects."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: sonarqube
+integration_id: sonarqube
+integration_title: SonarQube
+integration_version: 3.2.2
+is_public: true
+manifest_version: 2.0.0
+name: sonarqube
+public_title: SonarQube
+short_description: Monitor your SonarQube server and projects.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Monitor your SonarQube server and projects.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": SonarQube
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Monitor your SonarQube server and projects.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SonarQube
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -258,10 +258,10 @@ instances:
 5. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/integrations/java/
-[4]: https://docs.datadoghq.com/help/
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/integrations/java/
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.sonarqube.org/latest/instance-administration/system-info/
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
@@ -280,8 +280,8 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 | -------------- | -------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "sonarqube"}` |
 
-[1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[2]: https://docs.datadoghq.com/agent/docker/log/
+[1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -406,6 +406,6 @@ SonarQube には、イベントは含まれません。
 [3]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/metrics.yaml
 [4]: https://docs.sonarqube.org/latest/instance-administration/monitoring/
 [5]: https://docs.sonarsource.com/sonarqube/latest/instance-administration/monitoring/instance/#how-do-i-activate-jmx
-[6]: https://docs.datadoghq.com/integrations/java/
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/integrations/java/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/

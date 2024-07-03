@@ -1,10 +1,10 @@
 ---
-title: roles-create-a-new-role-by-cloning-an-existing-role
 core_product:
-  - ダッシュボード
+- ダッシュボード
 related_terms:
-  - group
-  - dashboard
+- group
+- dashboard
+title: roles-create-a-new-role-by-cloning-an-existing-role
 ---
 Powerpacks are templated groups of widgets that scale graphing expertise as reusable dashboard building blocks. 
 

@@ -1,64 +1,64 @@
 ---
-"app_id": "rundeck"
-"app_uuid": "beb808d2-cc12-4bc5-8ff7-b63552b35e0a"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": rundeck.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10099"
-    "source_type_name": Rundeck
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Rundeck
-  "sales_email": forrest@rundeck.com
-  "support_email": forrest@rundeck.com
-"categories":
+app_id: rundeck
+app_uuid: beb808d2-cc12-4bc5-8ff7-b63552b35e0a
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: rundeck.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10099
+    source_type_name: Rundeck
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Rundeck
+  sales_email: forrest@rundeck.com
+  support_email: forrest@rundeck.com
+categories:
 - automation
 - incidents
 - notifications
 - orchestration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rundeck"
-"integration_id": "rundeck"
-"integration_title": "Rundeck"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "rundeck"
-"public_title": "Rundeck"
-"short_description": "Automate Remediation Actions using Rundeck Webhooks"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rundeck
+integration_id: rundeck
+integration_title: Rundeck
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: rundeck
+public_title: Rundeck
+short_description: Automate Remediation Actions using Rundeck Webhooks
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Incidents"
-  - "Category::Notifications"
-  - "Category::Orchestration"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Automate Remediation Actions using Rundeck Webhooks
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Rundeck
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Incidents
+  - Category::Notifications
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Automate Remediation Actions using Rundeck Webhooks
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rundeck
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -145,5 +145,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rundeck/images/dd-search.png
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rundeck/images/webhooks-config.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rundeck/images/webhook-fill.png
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

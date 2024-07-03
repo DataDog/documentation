@@ -1,9 +1,6 @@
 ---
-title: Error Tracking Dynamic Sampling
-kind: ドキュメント
-is_beta: false
-private: true
-description: Learn about how Dynamic Sampling in Error Tracking can make sure that your volume isn't consumed all at once.
+description: Learn about how Dynamic Sampling in Error Tracking can make sure that
+  your volume isn't consumed all at once.
 further_reading:
 - link: /logs/error_tracking/manage_data_collection
   tag: ドキュメント
@@ -11,6 +8,10 @@ further_reading:
 - link: /logs/error_tracking
   tag: ドキュメント
   text: ログのエラー追跡について
+is_beta: false
+kind: ドキュメント
+private: true
+title: Error Tracking Dynamic Sampling
 ---
 
 ## 概要
@@ -43,7 +44,7 @@ When Dynamic Sampling is applied, the following steps are recommended:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/events/
+[1]: /ja/service_management/events/
 [2]: https://app.datadoghq.com/error-tracking/settings/rate-limits
-[3]: /logs/error_tracking/manage_data_collection#add-a-rule
+[3]: /ja/logs/error_tracking/manage_data_collection#add-a-rule
 [4]: https://app.datadoghq.com/error-tracking/settings

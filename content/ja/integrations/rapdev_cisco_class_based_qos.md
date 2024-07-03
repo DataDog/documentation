@@ -1,91 +1,92 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-cisco-class-based-qos"
-"app_uuid": "97f3eada-2bd0-4100-94f7-fe7f20132442"
-"assets":
-  "dashboards":
-    "RapDev Cisco QOS Dashboard": assets/dashboards/rapdev_cisco_classbased_qos_overview.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": rapdev.cisco_class_based_qos.devices_monitored
-      "metadata_path": metadata.csv
-      "prefix": rapdev.cisco_class_based_qos.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10457427"
-    "source_type_name": cisco_class_based_qos
-  "logs": {}
-"author":
-  "homepage": "https://rapdev.io"
-  "name": RapDev
-  "sales_email": sales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-cisco-class-based-qos
+app_uuid: 97f3eada-2bd0-4100-94f7-fe7f20132442
+assets:
+  dashboards:
+    RapDev Cisco QOS Dashboard: assets/dashboards/rapdev_cisco_classbased_qos_overview.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rapdev.cisco_class_based_qos.devices_monitored
+      metadata_path: metadata.csv
+      prefix: rapdev.cisco_class_based_qos.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10457427
+    source_type_name: cisco_class_based_qos
+  logs: {}
+author:
+  homepage: https://rapdev.io
+  name: RapDev
+  sales_email: sales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
 - network
 - snmp
 - モニター
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_cisco_class_based_qos"
-"integration_id": "rapdev-cisco-class-based-qos"
-"integration_title": "Cisco Quality of Service (QOS)"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rapdev_cisco_class_based_qos"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.rapdev.cisco_class_based_qos
-  "product_id": cisco
-  "short_description": Unit price per QOS device
-  "tag": qos_host
-  "unit_label": QOS device
-  "unit_price": !!int "20"
-"public_title": "Cisco Quality of Service (QOS)"
-"short_description": "Monitor the network traffic using Cisco class-based Quality of Service"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_cisco_class_based_qos
+integration_id: rapdev-cisco-class-based-qos
+integration_title: Cisco Quality of Service (QOS)
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_cisco_class_based_qos
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.cisco_class_based_qos
+  product_id: cisco
+  short_description: Unit price per QOS device
+  tag: qos_host
+  unit_label: QOS device
+  unit_price: 20
+public_title: Cisco Quality of Service (QOS)
+short_description: Monitor the network traffic using Cisco class-based Quality of
+  Service
+supported_os:
 - linux
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Category::Marketplace"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  - "Category::Network"
-  - "Category::SNMP"
-  - "Category::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Monitor the network traffic using Cisco class-based Quality of Service
-  "media":
-  - "caption": QOS Dashboard - Lightmode 1/3
-    "image_url": images/dashboard_light_1.jpg
-    "media_type": image
-  - "caption": QOS Dashboard - Lightmode 2/3
-    "image_url": images/dashboard_light_2.jpg
-    "media_type": image
-  - "caption": QOS Dashboard - Lightmode 3/3
-    "image_url": images/dashboard_light_3.jpg
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cisco Quality of Service (QOS)
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Marketplace
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Category::Network
+  - Category::SNMP
+  - Category::Metrics
+  configuration: README.md#Setup
+  description: Monitor the network traffic using Cisco class-based Quality of Service
+  media:
+  - caption: QOS Dashboard - Lightmode 1/3
+    image_url: images/dashboard_light_1.jpg
+    media_type: image
+  - caption: QOS Dashboard - Lightmode 2/3
+    image_url: images/dashboard_light_2.jpg
+    media_type: image
+  - caption: QOS Dashboard - Lightmode 3/3
+    image_url: images/dashboard_light_3.jpg
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cisco Quality of Service (QOS)
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -114,10 +115,10 @@ For support or feature requests, contact RapDev.io through the following channel
 - Chat: [rapdev.io][10]  
 - Phone: 855-857-0222
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book/qos-plcshp-class-plc.html
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://sourceforge.net/projects/net-snmp/
 [6]: https://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/7282-12.html
 [7]: https://community.cisco.com/t5/networking-knowledge-base/configuration-template-for-snmpv3/ta-p/4666450

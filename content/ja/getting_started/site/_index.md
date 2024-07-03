@@ -1,15 +1,17 @@
 ---
-title: Getting Started with Datadog Sites
-kind: documentation
+algolia:
+  tags:
+  - site
+  - datadog site
 further_reading:
-- link: "https://learn.datadoghq.com/courses/dashboards-slos"
+- link: https://learn.datadoghq.com/courses/dashboards-slos
   tag: Learning Center
   text: Create Business-Critical Insights Using Dashboards and SLOs
 - link: /agent/configuration/dual-shipping/
   tag: Guide
   text: Dual Shipping
-algolia:
-  tags: [site,datadog site]
+kind: documentation
+title: Getting Started with Datadog Sites
 ---
 
 ## Overview
@@ -70,5 +72,5 @@ The Datadog for Government site (US1-FED) is meant to allow US government agenci
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /agent/configuration/dual-shipping/
-[3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
+[2]: /ja/agent/configuration/dual-shipping/
+[3]: /ja/real_user_monitoring/#supported-endpoints-for-sdk-domains

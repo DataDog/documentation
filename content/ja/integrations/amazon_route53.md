@@ -1,28 +1,28 @@
 ---
-"aliases":
-- "/integrations/awsroute53/"
-"categories":
-- "aws"
-- "cloud"
-- "log collection"
-- "network"
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Route 53 メトリクスを追跡し、健全性チェックを監視。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_route53/"
-"draft": false
-"git_integration_title": "amazon_route53"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Amazon Route 53"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "amazon_route53"
-"public_title": "Datadog-Amazon Route 53 Integration"
-"short_description": "Track Route53 metrics, and monitor health checks."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsroute53/
+categories:
+- aws
+- cloud
+- log collection
+- network
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: Route 53 メトリクスを追跡し、健全性チェックを監視。
+doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
+draft: false
+git_integration_title: amazon_route53
+has_logo: true
+integration_id: ''
+integration_title: Amazon Route 53
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: amazon_route53
+public_title: Datadog-Amazon Route 53 Integration
+short_description: Track Route53 metrics, and monitor health checks.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -116,15 +116,14 @@ The Amazon Route 53 integration does not include any service checks.
 
 Need help? Contact [Datadog support][11].
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/auth-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-route53
 [6]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-monitor-view-status.html#monitoring-health-checks
-[7]: https://docs.datadoghq.com/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [8]: https://app.datadoghq.com/logs
-[9]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_route53/amazon_route53_metadata.csv
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

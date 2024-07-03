@@ -1,67 +1,67 @@
 ---
-"app_id": "open-policy-agent"
-"app_uuid": "98c54837-27eb-48ca-9780-29bb593eecb8"
-"assets":
-  "dashboards":
-    "OPA base dashboard": assets/dashboards/open_policy_agent_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": open_policy_agent.policies
-      "metadata_path": metadata.csv
-      "prefix": open_policy_agent.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10142"
-    "source_type_name": open_policy_agent
-  "logs":
-    "source": opa
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Community
-  "sales_email": ara.pulido@datadoghq.com
-  "support_email": ara.pulido@datadoghq.com
-"categories":
+app_id: open-policy-agent
+app_uuid: 98c54837-27eb-48ca-9780-29bb593eecb8
+assets:
+  dashboards:
+    OPA base dashboard: assets/dashboards/open_policy_agent_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: open_policy_agent.policies
+      metadata_path: metadata.csv
+      prefix: open_policy_agent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10142
+    source_type_name: open_policy_agent
+  logs:
+    source: opa
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: ara.pulido@datadoghq.com
+  support_email: ara.pulido@datadoghq.com
+categories:
 - compliance
 - configuration & deployment
 - containers
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "open_policy_agent"
-"integration_id": "open-policy-agent"
-"integration_title": "Open Policy Agent"
-"integration_version": "0.0.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "open_policy_agent"
-"public_title": "Open Policy Agent"
-"short_description": "OPA integration"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: open_policy_agent
+integration_id: open-policy-agent
+integration_title: Open Policy Agent
+integration_version: 0.0.1
+is_public: true
+manifest_version: 2.0.0
+name: open_policy_agent
+public_title: Open Policy Agent
+short_description: OPA integration
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Compliance"
-  - "Category::Configuration & Deployment"
-  - "Category::Containers"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": OPA integration
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Open Policy Agent
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Compliance
+  - Category::Configuration & Deployment
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: OPA integration
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Open Policy Agent
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -195,17 +195,16 @@ Need help? Contact [Datadog support][14].
 
 
 [1]: https://www.openpolicyagent.org/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/developers/integrations/python/
-[4]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[3]: https://docs.datadoghq.com/ja/developers/integrations/python/
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/open_policy_agent/images/msg_facet.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/open_policy_agent/images/kind_facet.png
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/open_policy_agent/images/allowed_facet.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/open_policy_agent/images/metric.png
 [9]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/datadog_checks/open_policy_agent/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/metadata.csv
 [13]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/assets/service_checks.json
-[14]: https://docs.datadoghq.com/help/
-
+[14]: https://docs.datadoghq.com/ja/help/

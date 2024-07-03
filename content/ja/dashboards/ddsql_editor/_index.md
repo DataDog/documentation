@@ -50,4 +50,4 @@ Browse and re-run saved queries in the side panel.
 {{< img src="dashboards/ddsql/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /dashboards/ddsql_editor/reference
+[2]: /ja/dashboards/ddsql_editor/reference

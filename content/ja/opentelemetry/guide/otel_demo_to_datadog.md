@@ -1,5 +1,10 @@
 ---
-title: Sending Data from the OpenTelemetry Demo to Datadog
+algolia:
+  tags:
+  - opentelemetry
+  - open telemetry
+  - otel
+  - opentelemetry demo
 further_reading:
 - link: /service_catalog/
   tag: Documentation
@@ -13,8 +18,7 @@ further_reading:
 - link: /error_tracking/
   tag: Documentation
   text: Error Tracking
-algolia:
-  tags: [opentelemetry, open telemetry, otel, opentelemetry demo]
+title: Sending Data from the OpenTelemetry Demo to Datadog
 ---
 
 ## 概要
@@ -136,7 +140,7 @@ Complete the following steps to configure these three components.
     The previous configuration does not replace the values configured in the main <code>otelcol-config</code> file.
     </div>
 
-[7]: /getting_started/site/
+[7]: /ja/getting_started/site/
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 
 {{% /tab %}}

@@ -1,58 +1,58 @@
 ---
-"app_id": "cortex"
-"app_uuid": "15baccdd-d89c-4591-ab45-e6378d8c174f"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": cortex.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10178"
-    "source_type_name": cortex
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Cortex
-  "sales_email": support@getcortexapp.com
-  "support_email": support@getcortexapp.com
-"categories":
+app_id: cortex
+app_uuid: 15baccdd-d89c-4591-ab45-e6378d8c174f
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: cortex.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10178
+    source_type_name: cortex
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Cortex
+  sales_email: support@getcortexapp.com
+  support_email: support@getcortexapp.com
+categories:
 - incidents
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cortex"
-"integration_id": "cortex"
-"integration_title": "Cortex"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cortex"
-"public_title": "Cortex"
-"short_description": "Create Datadog Incidents directly from the Cortex dashboard."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cortex
+integration_id: cortex
+integration_title: Cortex
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: cortex
+public_title: Cortex
+short_description: Create Datadog Incidents directly from the Cortex dashboard.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Incidents"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Create Datadog Incidents directly from the Cortex dashboard.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cortex
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Incidents
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Create Datadog Incidents directly from the Cortex dashboard.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cortex
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -102,10 +102,9 @@ Cortex does not include any events.
 Need help? Contact [support@getcortexapp.com][7].
 
 [1]: https://www.getcortexapp.com/
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[3]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#application-keys
 [4]: https://app.getcortexapp.com/admin/settings/datadog
 [5]: https://app.getcortexapp.com/admin/index
 [6]: https://app.getcortexapp.com/admin/service/new
 [7]: mailto:support@getcortexapp.com
-

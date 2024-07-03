@@ -1,12 +1,12 @@
 ---
-title: Set up DORA Metrics
-kind: documentation
 aliases:
-- /continuous_integration/dora_metrics/setup/
+- /ja/continuous_integration/dora_metrics/setup/
 further_reading:
 - link: /dora_metrics/
   tag: ドキュメント
   text: Learn about DORA Metrics
+kind: documentation
+title: Set up DORA Metrics
 ---
 
 {{< site-region region="gov" >}}
@@ -46,10 +46,10 @@ Each event type supports different data sources.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /dora_metrics/
-[4]: /service_management/events/explorer/
-[5]: /api/latest/metrics/#query-timeseries-points
-[6]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
-[7]: /dora_metrics/data_collected/
-[8]: /dora_metrics/deployments/
-[9]: /dora_metrics/failures/
+[3]: /ja/dora_metrics/
+[4]: /ja/service_management/events/explorer/
+[5]: /ja/api/latest/metrics/#query-timeseries-points
+[6]: /ja/api/latest/metrics/#query-timeseries-data-across-multiple-products
+[7]: /ja/dora_metrics/data_collected/
+[8]: /ja/dora_metrics/deployments/
+[9]: /ja/dora_metrics/failures/

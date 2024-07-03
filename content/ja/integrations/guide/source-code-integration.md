@@ -1,7 +1,7 @@
 ---
-title: Datadog Source Code Integration
-kind: guide
-description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed git information into artifacts in your CI pipeline, and use the GitHub integration to generate inline code snippets."
+description: Set up the source code integration that integrates with APM to link your
+  telemetry with your repositories, embed git information into artifacts in your CI
+  pipeline, and use the GitHub integration to generate inline code snippets.
 further_reading:
 - link: /integrations/github/
   tag: Documentation
@@ -12,7 +12,7 @@ further_reading:
 - link: /profiler/
   tag: Documentation
   text: Learn about the Continuous Profiler
-- link: "/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code"
+- link: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
   tag: Documentation
   text: Learn about Serverless Monitoring
 - link: /tests/developer_workflows/
@@ -27,6 +27,10 @@ further_reading:
 - link: /logs/error_tracking/
   tag: ドキュメント
   text: Learn about Error Tracking for logs
+- link: https://www.datadoghq.com/blog/live-debugging/
+  tag: ブログ
+  text: Fix production bugs efficiently with Datadog Live Debugging
+title: Datadog Source Code Integration
 ---
 
 ## 概要
@@ -107,7 +111,7 @@ If you are using a host, you have two options.
 
 [101]: https://tip.golang.org/doc/go1.18
 [102]: https://www.npmjs.com/package/@datadog/datadog-ci
-[103]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
+[103]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/plugin/
 [104]: https://github.com/DataDog/datadog-cdk-constructs
 
 {{% /tab %}}
@@ -350,11 +354,11 @@ The source code integration supports the following Git providers:
 
 | プロバイダー | Context Links Support | Code Snippets Support |
 |---|---|---|
-| GitHub SaaS (github.com) | Yes | Yes |
-| GitHub Enterprise Server | Yes | Yes |
-| GitLab SaaS (gitlab.com) | Yes | はい |
-| GitLab self-managed | Yes | No |
-| Bitbucket | Yes | No |
+| GitHub SaaS (github.com) | はい | Yes |
+| GitHub Enterprise Server | はい | Yes |
+| GitLab SaaS (gitlab.com) | はい | はい |
+| GitLab self-managed | はい | いいえ |
+| Bitbucket | はい | いいえ |
 | Azure DevOps Services | はい | いいえ |
 | Azure DevOps Server | はい | いいえ |
 
@@ -365,13 +369,13 @@ Install Datadog's [GitHub integration][101] on the [GitHub integration tile][102
 
 GitHub インテグレーションを設定することで、[**Error Tracking**][103]、[**Continuous Profiler**][104]、[**Serverless Monitoring**][105]、[**CI Visibility**][106]、[**Application Security Monitoring**][107] でインラインコードスニペットを確認することもできます。
 
-[101]: https://docs.datadoghq.com/integrations/github/
+[101]: https://docs.datadoghq.com/ja/integrations/github/
 [102]: https://app.datadoghq.com/integrations/github/
-[103]: /logs/error_tracking/backend/?tab=serilog#setup
-[104]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
-[105]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[106]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
-[107]: /security/application_security/
+[103]: /ja/logs/error_tracking/backend/?tab=serilog#setup
+[104]: /ja/integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
+[105]: /ja/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[106]: /ja/tests/developer_workflows/#open-tests-in-github-and-your-ide
+[107]: /ja/security/application_security/
 
 {{% /tab %}}
 {{% tab "GitLab" %}}
@@ -402,11 +406,11 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 
 [1]: https://gitlab.com
 [2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[3]: /logs/error_tracking/backend/?tab=serilog#setup
-[4]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
-[5]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[6]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
-[7]: /security/application_security/
+[3]: /ja/logs/error_tracking/backend/?tab=serilog#setup
+[4]: /ja/integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
+[5]: /ja/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[6]: /ja/tests/developer_workflows/#open-tests-in-github-and-your-ide
+[7]: /ja/security/application_security/
 
 {{% /tab %}}
 {{% tab "その他の Git プロバイダー" %}}
@@ -453,7 +457,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 
 If you're using the GitHub integration, or if you're hosting your repositories on the GitLab SaaS instance (gitlab.com), click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace.
 
-[1]: /tracing/error_tracking/
+[1]: /ja/tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
 
 {{% /tab %}}
@@ -475,7 +479,7 @@ You can also see links from profile frames to their source repository. This is s
 
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Continuous Profiler から GitHub へのリンク" style="width:100%;">}}
 
-[1]: /profiler/
+[1]: /ja/profiler/
 [2]: https://app.datadoghq.com/profiling/search
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
@@ -505,7 +509,7 @@ You can see links from failed test runs to their source repository in **Test Vis
 For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
+[102]: /ja/tests/developer_workflows/#open-tests-in-github-and-your-ide
 
 {{% /tab %}}
 {{% tab "Code Analysis" %}}
@@ -520,7 +524,7 @@ You can see links from failed Static Analysis and Software Composition Analysis 
 For more information, see the [Code Analysis documentation][102].
 
 [101]: https://app.datadoghq.com/ci/code-analysis
-[102]: /code_analysis/
+[102]: /ja/code_analysis/
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}
@@ -547,8 +551,8 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 [1]: https://app.datadoghq.com/apm/error-tracking
 [2]: https://app.datadoghq.com/integrations/github/
 [3]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
-[5]: /integrations/github/
-[6]: /tracing/
+[5]: /ja/integrations/github/
+[6]: /ja/tracing/
 [7]: https://app.datadoghq.com/source-code/setup/apm
-[8]: /tracing/error_tracking/
-[9]: /tracing/trace_collection/dd_libraries/
+[8]: /ja/tracing/error_tracking/
+[9]: /ja/tracing/trace_collection/dd_libraries/

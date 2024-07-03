@@ -1,6 +1,6 @@
 ---
-title: Log Volume Control for the Splunk HTTP Event Collector (HEC)
 disable_toc: false
+title: Log Volume Control for the Splunk HTTP Event Collector (HEC)
 ---
 
 ## 概要

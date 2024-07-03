@@ -1,16 +1,16 @@
 ---
-title: Quantization of APM Data
-kind: Documentation
 further_reading:
-  - link: /tracing/trace_collection/custom_instrumentation/
-    tag: Documentation
-    text: Custom Instrumentation
-  - link: "/tracing/configure_data_security/#scrub-sensitive-data-from-your-spans"
-    tag: Documentation
-    text: Replace tags in spans
-  - link: /tracing/trace_collection/library_config/
-    tag: Documentation
-    text: Tracing Library Configuration
+- link: /tracing/trace_collection/custom_instrumentation/
+  tag: Documentation
+  text: Custom Instrumentation
+- link: /tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
+  tag: Documentation
+  text: Replace tags in spans
+- link: /tracing/trace_collection/library_config/
+  tag: Documentation
+  text: Tracing Library Configuration
+kind: Documentation
+title: Quantization of APM Data
 ---
 
 ## Overview
@@ -77,6 +77,6 @@ export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get_id_[0-9]+",
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#spans
-[2]: /tracing/glossary/#resources
-[3]: /tracing/trace_collection/custom_instrumentation/
+[1]: /ja/tracing/glossary/#spans
+[2]: /ja/tracing/glossary/#resources
+[3]: /ja/tracing/trace_collection/custom_instrumentation/

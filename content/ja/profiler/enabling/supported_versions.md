@@ -1,10 +1,10 @@
 ---
-title: Language and Library Versions for Profiler Features
 disable_sidebar: true
 further_reading:
 - link: /profiler/enabling
   tag: Documentation
   text: Enabling Profiler
+title: Language and Library Versions for Profiler Features
 ---
 
 The following tables summarize the features available for each language runtime.
@@ -53,14 +53,14 @@ To access additional profiling features, use at least the minimum versions summa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/enabling/java/
-[2]: /profiler/enabling/python/
-[3]: /profiler/enabling/go/
-[4]: /profiler/enabling/ruby/
-[5]: /profiler/enabling/nodejs/
-[6]: /profiler/enabling/dotnet/
-[7]: /profiler/enabling/php/
-[8]: /profiler/enabling/ddprof/
+[1]: /ja/profiler/enabling/java/
+[2]: /ja/profiler/enabling/python/
+[3]: /ja/profiler/enabling/go/
+[4]: /ja/profiler/enabling/ruby/
+[5]: /ja/profiler/enabling/nodejs/
+[6]: /ja/profiler/enabling/dotnet/
+[7]: /ja/profiler/enabling/php/
+[8]: /ja/profiler/enabling/ddprof/
 [9]: https://github.com/DataDog/dd-trace-java/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases
 [11]: https://github.com/DataDog/dd-trace-go/releases
@@ -69,7 +69,7 @@ To access additional profiling features, use at least the minimum versions summa
 [14]: https://github.com/DataDog/dd-trace-dotnet/releases
 [15]: https://github.com/DataDog/dd-trace-php/releases
 [16]: https://github.com/DataDog/ddprof/releases
-[17]: /profiler/enabling/java/#requirements
-[18]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[19]: /profiler/connect_traces_and_profiles/#endpoint-profiling
-[20]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[17]: /ja/profiler/enabling/java/#requirements
+[18]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[19]: /ja/profiler/connect_traces_and_profiles/#endpoint-profiling
+[20]: /ja/profiler/connect_traces_and_profiles/#span-execution-timeline-view

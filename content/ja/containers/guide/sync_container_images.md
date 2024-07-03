@@ -1,7 +1,7 @@
 ---
-title: Synchronize Datadog's images with a private registry
 aliases:
- - /agent/guide/sync_container_images
+- /ja/agent/guide/sync_container_images
+title: Synchronize Datadog's images with a private registry
 ---
 
 Datadog publishes container images in multiple public container registries. While this is convenient for many users, some organizations may want to use a private container registry. This guide explains how to synchronize Datadog's container images to a private registry.
@@ -52,5 +52,5 @@ For more information about creating a pull secret, see the [Kubernetes documenta
 
 [1]: https://github.com/google/go-containerregistry/tree/main/cmd/crane
 [2]: https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md
-[3]: https://docs.datadoghq.com/containers/guide/changing_container_registry
+[3]: https://docs.datadoghq.com/ja/containers/guide/changing_container_registry
 [4]: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials

@@ -1,5 +1,5 @@
 ---
-title: "Database for MySQL Component"
+title: Database for MySQL Component
 ---
 
 ## 概要

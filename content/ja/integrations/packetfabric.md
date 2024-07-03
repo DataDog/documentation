@@ -1,73 +1,73 @@
 ---
-"app_id": "packetfabric"
-"app_uuid": "da10a120-217b-40f3-8b7f-7dc2fdea3b94"
-"assets":
-  "dashboards":
-    "PacketFabric-Metrics": assets/dashboards/metrics_dashboard.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: packetfabric
+app_uuid: da10a120-217b-40f3-8b7f-7dc2fdea3b94
+assets:
+  dashboards:
+    PacketFabric-Metrics: assets/dashboards/metrics_dashboard.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
       - packetfabric.ifd_traffic_rate_metric
       - packetfabric.ifl_traffic_rate_metric
-      "metadata_path": metadata.csv
-      "prefix": packetfabric.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "8623825"
-    "source_type_name": PacketFabric
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://packetfabric.com"
-  "name": PacketFabric
-  "sales_email": sales@packetfabric.com
-  "support_email": support@packetfabric.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: packetfabric.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 8623825
+    source_type_name: PacketFabric
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://packetfabric.com
+  name: PacketFabric
+  sales_email: sales@packetfabric.com
+  support_email: support@packetfabric.com
+categories:
 - network
 - cloud
 - モニター
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/packetfabric/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "packetfabric"
-"integration_id": "packetfabric"
-"integration_title": "PacketFabric"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "packetfabric"
-"public_title": "PacketFabric"
-"short_description": "Sync PacketFabric metrics with Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/packetfabric/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: packetfabric
+integration_id: packetfabric
+integration_title: PacketFabric
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: packetfabric
+public_title: PacketFabric
+short_description: Sync PacketFabric metrics with Datadog
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Network"
-  - "Category::Cloud"
-  - "Category::Metrics"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Sync PacketFabric metrics with Datadog
-  "media":
-  - "caption": PacketFabric Metrics Dashboard
-    "image_url": images/metrics_dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": PacketFabric
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Network
+  - Category::Cloud
+  - Category::Metrics
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Sync PacketFabric metrics with Datadog
+  media:
+  - caption: PacketFabric Metrics Dashboard
+    image_url: images/metrics_dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PacketFabric
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -120,4 +120,3 @@ Need help? Contact [PacketFabric Support][5].
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/packetfabric/images/metrics_dashboard.png
 [4]: https://github.com/DataDog/integrations-extras/blob/master/packetfabric/metadata.csv
 [5]: mailto:support@packetfabric.com
-

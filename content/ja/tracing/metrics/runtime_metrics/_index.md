@@ -1,11 +1,12 @@
 ---
-title: Runtime Metrics
-kind: documentation
-type: multi-code-lang
 aliases:
-  - /tracing/advanced/runtime_metrics/
-  - /tracing/runtime_metrics/
-description: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
+- /ja/tracing/advanced/runtime_metrics/
+- /ja/tracing/runtime_metrics/
+description: Gain additional insights into an application's performance with the runtime
+  metrics associated to your traces.
+kind: documentation
+title: Runtime Metrics
+type: multi-code-lang
 ---
 
 {{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
@@ -15,4 +16,4 @@ Enable runtime metrics collection in the tracing client to gain additional insig
 {{< partial name="apm/apm-runtime-metrics.html" >}}
 <br>
 
-[1]: /tracing/glossary/#services
+[1]: /ja/tracing/glossary/#services

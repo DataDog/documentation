@@ -1,10 +1,10 @@
 ---
-title: AWS Lambda and OpenTelemetry
-kind: ドキュメント
 further_reading:
-  - link: /opentelemetry/
-    tag: ドキュメント
-    text: Datadog の OpenTelemetry
+- link: /opentelemetry/
+  tag: ドキュメント
+  text: Datadog の OpenTelemetry
+kind: ドキュメント
+title: AWS Lambda and OpenTelemetry
 ---
 
 [OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data.
@@ -180,6 +180,6 @@ This approach is analogous to [OLTP Ingest in the Datadog Agent][4]. It is recom
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/
-[2]: /opentelemetry
-[3]: /tracing/trace_collection/otel_instrumentation/
-[4]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[2]: /ja/opentelemetry
+[3]: /ja/tracing/trace_collection/otel_instrumentation/
+[4]: /ja/opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host

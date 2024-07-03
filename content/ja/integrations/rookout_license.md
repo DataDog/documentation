@@ -1,67 +1,67 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rookout-license"
-"app_uuid": "db9216cf-1ab9-43f4-8c16-ccc7dd0f4f72"
-"assets": {}
-"author":
-  "homepage": "https://rookout.com"
-  "name": Rookout
-  "sales_email": sales@rookout.com
-  "support_email": support@rookout.com
-  "vendor_id": rookout
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rookout-license
+app_uuid: db9216cf-1ab9-43f4-8c16-ccc7dd0f4f72
+assets: {}
+author:
+  homepage: https://rookout.com
+  name: Rookout
+  sales_email: sales@rookout.com
+  support_email: support@rookout.com
+  vendor_id: rookout
+categories:
 - marketplace
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rookout_license"
-"integration_id": "rookout-license"
-"integration_title": "Rookout"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "rookout_license"
-"oauth": {}
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": license
-  "short_description": Rookout license for up to 5 users
-  "unit_price": !!int "599"
-"public_title": "Rookout"
-"short_description": "Painless Cloud-Native Debugging"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rookout_license
+integration_id: rookout-license
+integration_title: Rookout
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: rookout_license
+oauth: {}
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: license
+  short_description: Rookout license for up to 5 users
+  unit_price: 599
+public_title: Rookout
+short_description: Painless Cloud-Native Debugging
+supported_os:
 - linux
 - macos
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Supported OS::Windows"
-  - "Category::Marketplace"
-  - "Offering::Software License"
-  "configuration": "README.md#Setup"
-  "description": Painless Cloud-Native Debugging
-  "media":
-  - "caption": Rookout Debugger
-    "image_url": images/debugger1.png
-    "media_type": image
-  - "caption": Rookout Profiling
-    "image_url": images/debugger2.png
-    "media_type": image
-  - "caption": Rookout Logger
-    "image_url": images/logger1.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Rookout
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: Painless Cloud-Native Debugging
+  media:
+  - caption: Rookout Debugger
+    image_url: images/debugger1.png
+    media_type: image
+  - caption: Rookout Profiling
+    image_url: images/debugger2.png
+    media_type: image
+  - caption: Rookout Logger
+    image_url: images/logger1.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rookout
+  uninstallation: README.md#Uninstallation
 ---
 
 

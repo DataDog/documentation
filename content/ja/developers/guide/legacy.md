@@ -1,8 +1,8 @@
 ---
-title: Create an Agent check for Datadog Agent 5
-description: Learn how to create an Agent check for Datadog Agent 5.
 aliases:
-- /developers/integrations/legacy
+- /ja/developers/integrations/legacy
+description: Learn how to create an Agent check for Datadog Agent 5.
+title: Create an Agent check for Datadog Agent 5
 ---
 Datadog Agent v5 は既に Agent v6 に置き換えられていますが、このドキュメントでは、v5 に対応した Agent チェックの作成方法を説明します。引き続き v5 で独自のローカルチェックを書くことはできますが、v5 用の新しいインテグレーションはアップストリームと見なされません。Agent v6 用のインテグレーションの作成の詳細については、[新しいインテグレーションの設定][1]を参照してください。
 
@@ -278,7 +278,7 @@ Datadog Agent のディレクトリ構造の詳細については、[新しい�
 * テストクラスター。単一のソフトウェアインスタンスをテストする方が簡単なことは当然ですが、現実的な使用方法を代表する複数のセットアップに対してテストを実行する方がさらに有益です。たとえば、MongoDB は通常、シャーディング機能や Replica Set 機能と共に使用されるので、[テスト][24]はそれを反映しています。
 * 未加工のメトリクスだけでなく、算出メトリクスを生成することも考慮します。たとえば、多くのデータベースが持つクエリは、遅いですが、あまり実行されていません。したがって、パーセンタイルを見るとよいことがよくあります。たとえば、Datadog MySQL インテグレーションには、[95 パーセンタイルクエリ実行時間][2]の算出メトリクスが含まれます。
 
-[1]: https://docs.datadoghq.com/developers/integrations/agent_integration
+[1]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration
 [2]: https://www.ruby-lang.org
 [3]: https://www.ruby-lang.org/en/documentation/installation
 [4]: https://www.gnu.org/software/wget
@@ -287,11 +287,11 @@ Datadog Agent のディレクトリ構造の詳細については、[新しい�
 [7]: https://rubygems.org/gems/datadog-sdk-testing
 [8]: https://github.com/DataDog/integrations-extras
 [9]: https://virtualenv.pypa.io/en/stable
-[11]: https://docs.datadoghq.com/developers/integrations/
+[11]: https://docs.datadoghq.com/ja/developers/integrations/
 [12]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md#integration-tests
 [13]: https://github.com/DataDog/dd-agent/blob/master/ci/common.rb
 [14]: https://github.com/DataDog/dd-agent/blob/master/CONTRIBUTING.md#submitting-issues
-[15]: /integrations
+[15]: /ja/integrations
 [16]: https://github.com/DataDog/integrations-core/blob/master/activemq/manifest.json
 [17]: https://github.com/DataDog/integrations-extras/issues
 [18]: https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py

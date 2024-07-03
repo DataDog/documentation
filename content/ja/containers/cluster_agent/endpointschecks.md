@@ -1,20 +1,19 @@
 ---
-title: Endpoint Checks with Autodiscovery
 aliases:
-    - /agent/autodiscovery/endpointchecks
-    - /agent/autodiscovery/endpointschecks
-    - /agent/cluster_agent/endpointschecks
+- /ja/agent/autodiscovery/endpointchecks
+- /ja/agent/autodiscovery/endpointschecks
+- /ja/agent/cluster_agent/endpointschecks
 further_reading:
-    - link: /agent/kubernetes/cluster/
-      tag: Documentation
-      text: Cluster Agent
-    - link: /containers/cluster_agent/clusterchecks/
-      tag: Documentation
-      text: Cluster Checks
-    - link: /containers/troubleshooting/cluster-and-endpoint-checks
-      tag: Documentation
-      text: Troubleshooting Endpoint Checks
-
+- link: /agent/kubernetes/cluster/
+  tag: Documentation
+  text: Cluster Agent
+- link: /containers/cluster_agent/clusterchecks/
+  tag: Documentation
+  text: Cluster Checks
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
+  tag: Documentation
+  text: Troubleshooting Endpoint Checks
+title: Endpoint Checks with Autodiscovery
 ---
 
 ## 概要
@@ -159,8 +158,8 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 [Agent を再起動][2]して、構成の変更を適用します。
 
-[1]: /agent/cluster_agent/clusterchecks/
-[2]: /agent/configuration/agent-commands/
+[1]: /ja/agent/cluster_agent/clusterchecks/
+[2]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -315,11 +314,11 @@ spec:
         app: nginx
 ```
 
-[1]: /containers/kubernetes/integrations/?tab=kubernetesadv2
-[9]: /integrations/http_check/
-[11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[12]: /integrations/nginx/
-[13]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/containers/kubernetes/integrations/?tab=kubernetesadv2
+[9]: /ja/integrations/http_check/
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging
 
 {{% /tab %}}
 
@@ -384,11 +383,11 @@ spec:
         app: nginx
 ```
 
-[9]: /integrations/http_check/
-[10]: /agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[12]: /integrations/nginx/
-[13]: /getting_started/tagging/unified_service_tagging
+[9]: /ja/integrations/http_check/
+[10]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -396,16 +395,16 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/kubernetes/integrations/?tab=kubernetesadv2
-[2]: /agent/cluster_agent
-[3]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[4]: /agent/cluster_agent/clusterchecks/
-[5]: /containers/guide/clustercheckrunners
-[6]: /containers/kubernetes/control_plane/?tab=helm#api-server-2
-[7]: /agent/guide/template_variables/
-[8]: /agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
-[9]: /integrations/http_check/
-[10]: /agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[12]: /integrations/nginx/
-[13]: /getting_started/tagging/unified_service_tagging
+[1]: /ja/containers/kubernetes/integrations/?tab=kubernetesadv2
+[2]: /ja/agent/cluster_agent
+[3]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[4]: /ja/agent/cluster_agent/clusterchecks/
+[5]: /ja/containers/guide/clustercheckrunners
+[6]: /ja/containers/kubernetes/control_plane/?tab=helm#api-server-2
+[7]: /ja/agent/guide/template_variables/
+[8]: /ja/agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
+[9]: /ja/integrations/http_check/
+[10]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging

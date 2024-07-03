@@ -1,24 +1,24 @@
 ---
-"categories":
+categories:
 - azure
 - cloud
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Blob Storage metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_blob_storage/"
-"draft": false
-"git_integration_title": "azure_blob_storage"
-"has_logo": true
-"integration_id": "azure-blob-storage"
-"integration_title": "Microsoft Azure Blob Storage"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_blob_storage"
-"public_title": "Datadog-Microsoft Azure Blob Storage Integration"
-"short_description": "Track key Azure Blob Storage metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Blob Storage metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
+draft: false
+git_integration_title: azure_blob_storage
+has_logo: true
+integration_id: azure-blob-storage
+integration_title: Microsoft Azure Blob Storage
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_blob_storage
+public_title: Datadog-Microsoft Azure Blob Storage Integration
+short_description: Track key Azure Blob Storage metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -53,7 +53,6 @@ The Azure Blob Storage integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_blob_storage/azure_blob_storage_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

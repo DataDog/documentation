@@ -1,54 +1,54 @@
 ---
-"app_id": "oom-kill"
-"app_uuid": "7546b270-2efe-4a59-8f94-3447df2db801"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": oom_kill.oom_process.count
-      "metadata_path": metadata.csv
-      "prefix": oom_kill.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10293"
-    "source_type_name": OOM Kill
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: oom-kill
+app_uuid: 7546b270-2efe-4a59-8f94-3447df2db801
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: oom_kill.oom_process.count
+      metadata_path: metadata.csv
+      prefix: oom_kill.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10293
+    source_type_name: OOM Kill
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - os & system
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "oom_kill"
-"integration_id": "oom-kill"
-"integration_title": "OOM Kill"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "oom_kill"
-"public_title": "OOM Kill"
-"short_description": "Track process OOM kills by the system or cgroup."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: oom_kill
+integration_id: oom-kill
+integration_title: OOM Kill
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: oom_kill
+public_title: OOM Kill
+short_description: Track process OOM kills by the system or cgroup.
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Category::OS & System"
-  "configuration": "README.md#Setup"
-  "description": Track process OOM kills by the system or cgroup.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": OOM Kill
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Track process OOM kills by the system or cgroup.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OOM Kill
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -175,9 +175,8 @@ Need help? Contact [Datadog support][7].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/helm-charts
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
-[7]: https://docs.datadoghq.com/help/
-
+[7]: https://docs.datadoghq.com/ja/help/

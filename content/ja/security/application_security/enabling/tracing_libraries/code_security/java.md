@@ -1,17 +1,14 @@
 ---
-title: Enabling ASM for Java
-kind: documentation
-code_lang: java
-type: multi-code-lang
-code_lang_weight: 0
 aliases:
-  - /security_platform/application_security/getting_started/java
-  - /security/application_security/getting_started/java
+- /ja/security_platform/application_security/getting_started/java
+- /ja/security/application_security/getting_started/java
+code_lang: java
+code_lang_weight: 0
 further_reading:
 - link: /security/application_security/add-user-info/
   tag: Documentation
   text: Adding user information to traces
-- link: "https://github.com/DataDog/dd-trace-java"
+- link: https://github.com/DataDog/dd-trace-java
   tag: ソースコード
   text: Java Datadog library source code
 - link: /security/default_rules/?category=cat-application-security
@@ -20,7 +17,9 @@ further_reading:
 - link: /security/application_security/troubleshooting
   tag: Documentation
   text: Troubleshooting Application Security Management
-
+kind: documentation
+title: Enabling ASM for Java
+type: multi-code-lang
 ---
 
 You can monitor application security for Java apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
@@ -115,8 +114,8 @@ If you need additional assistance, contact [Datadog support][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /security/application_security/enabling/compatibility/java
-[3]: /security/application_security/enabling/compatibility/java/#asm-capabilities-support
+[2]: /ja/security/application_security/enabling/compatibility/java
+[3]: /ja/security/application_security/enabling/compatibility/java/#asm-capabilities-support
 [4]: https://app.datadoghq.com/security/appsec/vm
-[5]: /help
-[6]: /agent/versions/upgrade_between_agent_minor_versions/
+[5]: /ja/help
+[6]: /ja/agent/versions/upgrade_between_agent_minor_versions/

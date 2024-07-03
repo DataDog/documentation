@@ -1,29 +1,29 @@
 ---
-title: Kubernetes
 aliases:
-    - /guides/basic_agent_usage/kubernetes
-    - /agent/basic_agent_usage/kubernetes
-    - /tracing/kubernetes/
-    - /tracing/setup/kubernetes
-    - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-    - /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
-    - /integrations/faq/docker-ecs-kubernetes-events/
-    - /integrations/faq/container-integration-event/
-    - /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
-    - /agent/kubernetes/
+- /ja/guides/basic_agent_usage/kubernetes
+- /ja/agent/basic_agent_usage/kubernetes
+- /ja/tracing/kubernetes/
+- /ja/tracing/setup/kubernetes
+- /ja/integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+- /ja/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
+- /ja/integrations/faq/docker-ecs-kubernetes-events/
+- /ja/integrations/faq/container-integration-event/
+- /ja/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
+- /ja/agent/kubernetes/
 further_reading:
-    - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
-      tag: Release Notes
-      text: Check out the latest Datadog Containers releases (App login required).
-    - link: /agent/guide/autodiscovery-management
-      tag: Documentation
-      text: Limit data collection to a subset of containers only
-    - link: /agent/guide/docker-deprecation
-      tag: Documentation
-      text: Docker runtime deprecation in Kubernetes
-    - link: "https://dtdg.co/fe"
-      tag: Foundation Enablement
-      text: Join an interactive session for insights on Kubernetes monitoring
+- link: https://app.datadoghq.com/release-notes?category=Container%20Monitoring
+  tag: Release Notes
+  text: Check out the latest Datadog Containers releases (App login required).
+- link: /agent/guide/autodiscovery-management
+  tag: Documentation
+  text: Limit data collection to a subset of containers only
+- link: /agent/guide/docker-deprecation
+  tag: Documentation
+  text: Docker runtime deprecation in Kubernetes
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session for insights on Kubernetes monitoring
+title: Kubernetes
 ---
 
 ## 概要
@@ -53,6 +53,6 @@ Agent のコマンドについては、[Agent コマンドガイド][2]を参照
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/kubernetes-legacy/
-[2]: /agent/configuration/agent-commands/
-[3]: /containers/cluster_agent/
+[1]: /ja/agent/faq/kubernetes-legacy/
+[2]: /ja/agent/configuration/agent-commands/
+[3]: /ja/containers/cluster_agent/

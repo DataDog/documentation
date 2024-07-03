@@ -1,49 +1,49 @@
 ---
-title: Tracing .NET Core Applications
-kind: documentation
 aliases:
-  - /tracing/dotnet-core
-  - /tracing/languages/dotnet-core
-  - /tracing/setup/dotnet-core
-  - /agent/apm/dotnet-core/
-  - /tracing/setup/dotnet-core
-  - /tracing/setup_overview/dotnet-core
-  - /tracing/setup_overview/setup/dotnet-core
-  - /tracing/trace_collection/dd_libraries/dotnet-core
+- /ja/tracing/dotnet-core
+- /ja/tracing/languages/dotnet-core
+- /ja/tracing/setup/dotnet-core
+- /ja/agent/apm/dotnet-core/
+- /ja/tracing/setup/dotnet-core
+- /ja/tracing/setup_overview/dotnet-core
+- /ja/tracing/setup_overview/setup/dotnet-core
+- /ja/tracing/trace_collection/dd_libraries/dotnet-core
 code_lang: dotnet-core
-type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-  - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-    tag: Documentation
-    text: Connect .NET application logs to traces
-  - link: /tracing/metrics/runtime_metrics/dotnet/
-    tag: Documentation
-    text: Runtime metrics
-  - link: /serverless/azure_app_services/
-    tag: Documentation
-    text: Microsoft Azure App Service extension
-  - link: /tracing/glossary/
-    tag: Documentation
-    text: Explore your services, resources, and traces
-  - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
-    tag: Blog
-    text: .NET monitoring with Datadog APM and distributed tracing
-  - link: "https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/"
-    tag: Blog
-    text: Monitor containerized ASP.NET Core applications
-  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
-    tag: Blog
-    text: Deploy ASP.NET Core applications to Azure App Service
-  - link: "https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/"
-    tag: Blog
-    text: Optimize your .NET application performance with the Datadog Continuous Profiler
-  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: ソースコード
-    text: Examples of custom instrumentation
-  - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: ソースコード
-    text: Source code
+- link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
+  tag: Documentation
+  text: Connect .NET application logs to traces
+- link: /tracing/metrics/runtime_metrics/dotnet/
+  tag: Documentation
+  text: Runtime metrics
+- link: /serverless/azure_app_services/
+  tag: Documentation
+  text: Microsoft Azure App Service extension
+- link: /tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/net-monitoring-apm/
+  tag: Blog
+  text: .NET monitoring with Datadog APM and distributed tracing
+- link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
+  tag: Blog
+  text: Monitor containerized ASP.NET Core applications
+- link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
+  tag: Blog
+  text: Deploy ASP.NET Core applications to Azure App Service
+- link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
+  tag: Blog
+  text: Optimize your .NET application performance with the Datadog Continuous Profiler
+- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
+  tag: ソースコード
+  text: Examples of custom instrumentation
+- link: https://github.com/DataDog/dd-trace-dotnet
+  tag: ソースコード
+  text: Source code
+kind: documentation
+title: Tracing .NET Core Applications
+type: multi-code-lang
 ---
 
 ## Compatibility requirements
@@ -435,11 +435,11 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/trace_collection/compatibility/dotnet-core
-[2]: /agent/
+[1]: /ja/tracing/trace_collection/compatibility/dotnet-core
+[2]: /ja/agent/
 [3]: https://app.datadoghq.com/apm/traces
-[4]: /tracing/trace_collection/library_config/dotnet-core/
-[5]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[4]: /ja/tracing/trace_collection/library_config/dotnet-core/
+[5]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
-[11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[11]: /ja/tracing/trace_collection/library_injection_local/
+[12]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

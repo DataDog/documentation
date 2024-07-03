@@ -1,13 +1,14 @@
 ---
-title: Single Sign On With SAML
+algolia:
+  tags:
+  - saml
 aliases:
-  - /guides/saml
+- /ja/guides/saml
 further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configuring Teams & Organizations with Multiple Accounts
-algolia:
-  tags: [saml]
+title: Single Sign On With SAML
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
@@ -142,25 +143,25 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
-[2]: /help/
+[2]: /ja/help/
 [3]: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/auth-saml
 [4]: https://auth0.com/docs/protocols/saml-protocol
 [5]: https://cloud.google.com/architecture/identity/single-sign-on
 [6]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
 [7]: https://developer.okta.com/docs/concepts/saml/
 [8]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
-[9]: /account_management/users/default_roles/
-[10]: /account_management/saml/activedirectory/
-[11]: /account_management/saml/auth0/
-[12]: /account_management/saml/azure/
-[13]: /account_management/saml/google/
-[14]: /account_management/saml/nopassword/
-[15]: /account_management/saml/okta/
-[16]: /account_management/saml/safenet/
+[9]: /ja/account_management/users/default_roles/
+[10]: /ja/account_management/saml/activedirectory/
+[11]: /ja/account_management/saml/auth0/
+[12]: /ja/account_management/saml/azure/
+[13]: /ja/account_management/saml/google/
+[14]: /ja/account_management/saml/nopassword/
+[15]: /ja/account_management/saml/okta/
+[16]: /ja/account_management/saml/safenet/
 [17]: https://app.datadoghq.com/organization-settings/login-methods
 [18]: https://app.datadoghq.com/account/saml/metadata.xml
 [19]: https://app.datadoghq.com/saml/saml_setup
 [20]: https://app.datadoghq.com/account/team
-[21]: /account_management/multi_organization/#setting-up-saml
-[22]: /account_management/saml/mapping/
-[23]: /account_management/login_methods/#reviewing-user-overrides
+[21]: /ja/account_management/multi_organization/#setting-up-saml
+[22]: /ja/account_management/saml/mapping/
+[23]: /ja/account_management/login_methods/#reviewing-user-overrides

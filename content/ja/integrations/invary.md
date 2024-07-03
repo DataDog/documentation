@@ -1,63 +1,63 @@
 ---
-"app_id": "invary"
-"app_uuid": "13509f2d-d922-4d8b-b3c2-7a8c2dd7fc54"
-"assets":
-  "dashboards":
-    "Invary Runtime Integrity": assets/dashboards/invary_runtime_integrity.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10409"
-    "source_type_name": Invary
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://www.invary.com"
-  "name": Invary
-  "sales_email": sales@invary.com
-  "support_email": support@invary.com
-"categories":
+app_id: invary
+app_uuid: 13509f2d-d922-4d8b-b3c2-7a8c2dd7fc54
+assets:
+  dashboards:
+    Invary Runtime Integrity: assets/dashboards/invary_runtime_integrity.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10409
+    source_type_name: Invary
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://www.invary.com
+  name: Invary
+  sales_email: sales@invary.com
+  support_email: support@invary.com
+categories:
 - automation
 - log collection
 - os & system
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/invary/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "invary"
-"integration_id": "invary"
-"integration_title": "Invary"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "invary"
-"public_title": "Invary"
-"short_description": "Visualize the Runtime Integrity of your operating systems"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/invary/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: invary
+integration_id: invary
+integration_title: Invary
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: invary
+public_title: Invary
+short_description: Visualize the Runtime Integrity of your operating systems
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Log Collection"
-  - "Category::OS & System"
-  - "Category::Security"
-  - "Submitted Data Type::Logs"
-  - "Supported OS::Linux"
-  "configuration": "README.md#Setup"
-  "description": Visualize the Runtime Integrity of your operating systems
-  "media":
-  - "caption": Invary Runtime Integrity OOTB Dashboard
-    "image_url": images/dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Invary
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Log Collection
+  - Category::OS & System
+  - Category::Security
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Visualize the Runtime Integrity of your operating systems
+  media:
+  - caption: Invary Runtime Integrity OOTB Dashboard
+    image_url: images/dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Invary
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -117,4 +117,3 @@ Need help? Contact [Invary Support][3].
 [1]: https://developers.invary.com/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: mailto:support@invary.com
-

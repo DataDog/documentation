@@ -1,16 +1,17 @@
 ---
-title: Custom Instrumentation
-further_reading:
-    - link: tracing/guide/instrument_custom_method
-      text: Instrument a custom method to get deep visibility into your business logic
-    - link: tracing/connect_logs_and_traces
-      text: Connect your Logs and Traces together
-    - link: tracing/visualization/
-      text: Explore your services, resources, and traces
-    - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
-      text: Learn More about Datadog and the OpenTelemetry initiative
 algolia:
-  tags: [apm custom instrumentation]
+  tags:
+  - apm custom instrumentation
+further_reading:
+- link: tracing/guide/instrument_custom_method
+  text: Instrument a custom method to get deep visibility into your business logic
+- link: tracing/connect_logs_and_traces
+  text: Connect your Logs and Traces together
+- link: tracing/visualization/
+  text: Explore your services, resources, and traces
+- link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
+  text: Learn More about Datadog and the OpenTelemetry initiative
+title: Custom Instrumentation
 ---
 
 ## 概要
@@ -63,8 +64,8 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 <br>
 
-[1]: /tracing/trace_collection/otel_instrumentation/
-[2]: /tracing/trace_collection/custom_instrumentation/
+[1]: /ja/tracing/trace_collection/otel_instrumentation/
+[2]: /ja/tracing/trace_collection/custom_instrumentation/
 [3]: https://opentracing.io/docs/
 
 {{% /tab %}}
@@ -74,11 +75,10 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[2]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
-[3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
-[4]: /tracing/trace_collection/custom_instrumentation/opentracing/
-[5]: /tracing/trace_collection/single-step-apm
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[7]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
-
+[1]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[2]: /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/
+[3]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation
+[4]: /ja/tracing/trace_collection/custom_instrumentation/opentracing/
+[5]: /ja/tracing/trace_collection/single-step-apm
+[6]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[7]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

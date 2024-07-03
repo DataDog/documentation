@@ -1,5 +1,5 @@
 ---
-title: "EventBridge Bus Component"
+title: EventBridge Bus Component
 ---
 
 ## 概要

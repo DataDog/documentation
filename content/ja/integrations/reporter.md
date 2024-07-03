@@ -1,80 +1,80 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-reporter"
-"app_uuid": "debb66b8-6675-4273-85a2-55d806e68e1b"
-"assets":
-  "dashboards":
-    "Reporter": assets/dashboards/reporter_dashboard.json
-  "integration":
-    "auto_install": false
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": ""
-    "service_checks":
-      "metadata_path": service_checks.json
-    "source_type_id": !!int "10110"
-    "source_type_name": Reporter
-"author":
-  "homepage": "https://www.rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-reporter
+app_uuid: debb66b8-6675-4273-85a2-55d806e68e1b
+assets:
+  dashboards:
+    Reporter: assets/dashboards/reporter_dashboard.json
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: ''
+    service_checks:
+      metadata_path: service_checks.json
+    source_type_id: 10110
+    source_type_name: Reporter
+author:
+  homepage: https://www.rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - marketplace
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "reporter"
-"integration_id": "rapdev-reporter"
-"integration_title": "Reporter"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "reporter"
-"pricing":
-- "billing_type": flat_fee
-  "includes_assets": true
-  "product_id": reporter
-  "short_description": Flat fee for this integration
-  "unit_price": !!int "299"
-"public_title": "Reporter"
-"short_description": "Generate Email reports for any Datadog dashboard"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: reporter
+integration_id: rapdev-reporter
+integration_title: Reporter
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: reporter
+pricing:
+- billing_type: flat_fee
+  includes_assets: true
+  product_id: reporter
+  short_description: Flat fee for this integration
+  unit_price: 299
+public_title: Reporter
+short_description: Generate Email reports for any Datadog dashboard
+supported_os:
 - linux
 - windows
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Category::Marketplace"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Generate Email reports for any Datadog dashboard
-  "media":
-  - "caption": Reporter Introduction
-    "image_url": images/video.png
-    "media_type": video
-    "vimeo_id": !!int "630489700"
-  - "caption": Sample Email Report
-    "image_url": images/3.png
-    "media_type": image
-  - "caption": Report Configuration Page
-    "image_url": images/1.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Reporter
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Marketplace
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Generate Email reports for any Datadog dashboard
+  media:
+  - caption: Reporter Introduction
+    image_url: images/video.png
+    media_type: video
+    vimeo_id: 630489700
+  - caption: Sample Email Report
+    image_url: images/3.png
+    media_type: image
+  - caption: Report Configuration Page
+    image_url: images/1.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Reporter
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->

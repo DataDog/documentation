@@ -1,13 +1,13 @@
 ---
-title: Host Map Widget
-widget_type: hostmap
-description: "Display the Datadog host map in your dashboards."
 aliases:
-- /graphing/widgets/hostmap/
+- /ja/graphing/widgets/hostmap/
+description: Display the Datadog host map in your dashboards.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Building Dashboards using JSON
+title: Host Map Widget
+widget_type: hostmap
 ---
 
 ホストマップウィジェットは、メインの[ホストマップ][1]ページから利用できる同じ視覚化機能を使用して、ホスト全体のあらゆるメトリクスをグラフ化します。
@@ -48,7 +48,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/hostmap/
-[2]: /dashboards/guide/context-links/
-[3]: /api/latest/dashboards/
-[4]: /dashboards/graphing_json/widget_json/
+[1]: /ja/infrastructure/hostmap/
+[2]: /ja/dashboards/guide/context-links/
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

@@ -117,15 +117,15 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /infrastructure/
-[3]: /agent/
-[4]: /account_management/billing/pricing/#apm
-[5]: /account_management/billing/serverless
+[2]: /ja/infrastructure/
+[3]: /ja/agent/
+[4]: /ja/account_management/billing/pricing/#apm
+[5]: /ja/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: /account_management/rbac/permissions/#billing-and-usage
+[8]: /ja/account_management/rbac/permissions/#billing-and-usage
 [9]: https://app.datadoghq.com/billing/plan
-[10]: /account_management/rbac/#datadog-default-roles
+[10]: /ja/account_management/rbac/#datadog-default-roles
 [11]: https://app.datadoghq.com/account/billing_history
-[12]: /account_management/billing/credit_card/
+[12]: /ja/account_management/billing/credit_card/
 [13]: mailto:billing@datadoghq.com

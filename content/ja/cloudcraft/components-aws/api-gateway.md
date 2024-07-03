@@ -1,5 +1,5 @@
 ---
-title: "API Gateway Component"
+title: API Gateway Component
 ---
 ## 概要
 

@@ -1,5 +1,4 @@
 ---
-title: Agent Architecture
 disable_toc: false
 further_reading:
 - link: /agent/supported_platforms/
@@ -8,6 +7,7 @@ further_reading:
 - link: /agent/configuration/
   tag: Documentation
   text: Agent Configuration
+title: Agent Architecture
 ---
 
 ## Agent アーキテクチャ
@@ -56,13 +56,13 @@ The Agent forwarder sends metrics over HTTPS to Datadog. Buffering prevents netw
 
 In Agent 6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric aggregation daemon. DogStatsD receives and rolls up arbitrary metrics over UDP or a UNIX socket, allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][7].
 
-[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
-[2]: /tracing/guide/terminology/
-[3]: /agent/configuration/network/#open-ports
-[4]: /agent/configuration/network#configure-ports
-[5]: /developers/custom_checks/write_agent_check/
+[1]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
+[2]: /ja/tracing/guide/terminology/
+[3]: /ja/agent/configuration/network/#open-ports
+[4]: /ja/agent/configuration/network#configure-ports
+[5]: /ja/developers/custom_checks/write_agent_check/
 [6]: https://github.com/etsy/statsd
-[7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[7]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -98,11 +98,11 @@ All listening processes are bound by default to `127.0.0.1` and/or `::1` on Agen
 minfds = 100 # ハードウェア制限
 ```
 
-[1]: /integrations/
-[2]: /metrics/custom_metrics/
-[3]: /agent/configuration/network/?tab=agentv5v4#open-ports
-[4]: /agent/configuration/proxy/?tab=agentv5
-[5]: /agent/faq/network/
+[1]: /ja/integrations/
+[2]: /ja/metrics/custom_metrics/
+[3]: /ja/agent/configuration/network/?tab=agentv5v4#open-ports
+[4]: /ja/agent/configuration/proxy/?tab=agentv5
+[5]: /ja/agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
 

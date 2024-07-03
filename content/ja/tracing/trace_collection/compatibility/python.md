@@ -1,16 +1,16 @@
 ---
-title: Python Compatibility Requirements
-description: 'Compatibility Requirements for the Python tracer'
 aliases:
-  - /tracing/compatibility_requirements/python
-  - /tracing/setup_overview/compatibility_requirements/python
+- /ja/tracing/compatibility_requirements/python
+- /ja/tracing/setup_overview/compatibility_requirements/python
 code_lang: python
-type: multi-code-lang
 code_lang_weight: 10
+description: Compatibility Requirements for the Python tracer
 further_reading:
-    - link: tracing/trace_collection/dd_libraries/python
-      tag: Documentation
-      text: Instrument Your Application
+- link: tracing/trace_collection/dd_libraries/python
+  tag: Documentation
+  text: Instrument Your Application
+title: Python Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## リリース
@@ -130,7 +130,7 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 
 
 [1]: https://ddtrace.readthedocs.io/en/stable/versioning.html
-[2]: /help
+[2]: /ja/help
 [3]: http://asgi.readthedocs.io/
 [4]: https://aiohttp.readthedocs.io
 [5]: https://bottlepy.org

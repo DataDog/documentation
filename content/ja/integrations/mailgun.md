@@ -1,60 +1,62 @@
 ---
-"app_id": "mailgun"
-"app_uuid": "40d251a6-a42d-42e2-8d06-75f7aac35dc7"
-"assets":
-  "dashboards":
-    "mailgun": assets/dashboards/mailgun_overview.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": mailgun.emails.accepted.total
-      "metadata_path": metadata.csv
-      "prefix": mailgun.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "623"
-    "source_type_name": Mailgun
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: mailgun
+app_uuid: 40d251a6-a42d-42e2-8d06-75f7aac35dc7
+assets:
+  dashboards:
+    mailgun: assets/dashboards/mailgun_overview.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: mailgun.emails.accepted.total
+      metadata_path: metadata.csv
+      prefix: mailgun.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 623
+    source_type_name: Mailgun
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - モニター
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Monitor Mailgun's email delivery and engagement statistics with Datadog."
-"display_on_public_website": true
-"doc_link": "https://docs.datadoghq.com/integrations/mailgun/"
-"draft": false
-"git_integration_title": "mailgun"
-"has_logo": false
-"integration_id": "mailgun"
-"integration_title": "Mailgun"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "mailgun"
-"public_title": "Mailgun"
-"short_description": "Cloud based email service that helps developers send, track, and receive emails"
-"supported_os": []
-"team": "web-integrations"
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Cloud based email service that helps developers send, track, and receive emails
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Mailgun
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Monitor Mailgun's email delivery and engagement statistics with Datadog.
+display_on_public_website: true
+doc_link: https://docs.datadoghq.com/integrations/mailgun/
+draft: false
+git_integration_title: mailgun
+has_logo: false
+integration_id: mailgun
+integration_title: Mailgun
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: mailgun
+public_title: Mailgun
+short_description: Cloud based email service that helps developers send, track, and
+  receive emails
+supported_os: []
+team: web-integrations
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Metrics
+  configuration: README.md#Setup
+  description: Cloud based email service that helps developers send, track, and receive
+    emails
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Mailgun
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -138,5 +140,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://app.datadoghq.com/integrations/mailgun
 [4]: https://documentation.mailgun.com/en/latest/user_manual.html#webhooks-1
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/mailgun/mailgun_metadata.csv
-[6]: https://docs.datadoghq.com/help
-
+[6]: https://docs.datadoghq.com/ja/help

@@ -1,26 +1,26 @@
 ---
-"aliases":
-- /integrations/azure_containerservice
-"categories":
+aliases:
+- /ja/integrations/azure_containerservice
+categories:
 - cloud
 - containers
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Kubernetes Service metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_container_service/"
-"draft": false
-"git_integration_title": "azure_container_service"
-"has_logo": true
-"integration_id": "azure-containerservice"
-"integration_title": "Microsoft Azure Kubernetes Service"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_container_service"
-"public_title": "Datadog-Microsoft Azure Kubernetes Service Integration"
-"short_description": "Track key Azure Kubernetes Service metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Kubernetes Service metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_container_service/
+draft: false
+git_integration_title: azure_container_service
+has_logo: true
+integration_id: azure-containerservice
+integration_title: Microsoft Azure Kubernetes Service
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_container_service
+public_title: Datadog-Microsoft Azure Kubernetes Service Integration
+short_description: Track key Azure Kubernetes Service metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -54,7 +54,6 @@ The Azure Kubernetes Service integration does not include any service checks.
 
 Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_container_service/azure_container_service_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

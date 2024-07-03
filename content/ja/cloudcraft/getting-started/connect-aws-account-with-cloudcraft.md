@@ -72,9 +72,9 @@ Cloudcraft は、SOC2 準拠プログラムにより厳格なセキュリティ�
 
 アカウントを削除するには、削除したいアカウントの右側にあるゴミ箱アイコンをクリックし、**Remove** をクリックします。
 
-[1]: /cloudcraft/account-management/roles-and-permissions/
+[1]: /ja/cloudcraft/account-management/roles-and-permissions/
 [2]: https://www.cloudcraft.co/pricing
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[4]: /cloudcraft/advanced/minimal-iam-policy/
+[4]: /ja/cloudcraft/advanced/minimal-iam-policy/
 [5]: https://www.cloudcraft.co/security
 [6]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html

@@ -1,6 +1,4 @@
 ---
-title: Tutorial - Enabling Tracing for a Java Application on AWS Elastic Kubernetes Service
-kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: ドキュメント
@@ -14,40 +12,42 @@ further_reading:
 - link: /tracing/trace_collection/custom_instrumentation/java/
   tag: ドキュメント
   text: Manually configuring traces and spans
-- link: "https://github.com/DataDog/dd-trace-java"
+- link: https://github.com/DataDog/dd-trace-java
   tag: ソースコード
   text: Tracing library open source code repository
+title: Tutorial - Enabling Tracing for a Java Application on AWS Elastic Kubernetes
+  Service
 ---
 
-## Overview
+## 概要
 
 This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Kubernetes Service (EKS). In this scenario, the Datadog Agent is also installed in the cluster.
 
-For other scenarios, including on a host, in a container, on other cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
+ホスト、コンテナ、他のクラウドインフラストラクチャー、他の言語で書かれたアプリケーションなど、他のシナリオについては、他の[トレース有効化のチュートリアル][1]を参照してください。
 
-See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
+Java の一般的なトレース設定ドキュメントについては、[Java アプリケーションのトレース][2]を参照してください。
 
-### Prerequisites
+### 前提条件
 
-- A Datadog account and [organization API key][3]
+- Datadog のアカウントと[組織の API キー][3]
 - Git
 - Kubectl
 - eksctl
-- Helm - Install by running these commands:
+- Helm - 以下のコマンドを実行してインストールします。
   {{< code-block lang="sh" >}}
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh{{< /code-block >}}
-  Configure Helm by running these commands:
+  以下のコマンドを実行し、Helm を構成します。
   {{< code-block lang="sh" >}}
 helm repo add datadog-crds https://helm.datadoghq.com
 helm repo add kube-state-metrics https://prometheus-community.github.io/helm-charts
 helm repo add datadog https://helm.datadoghq.com
 helm repo update{{< /code-block >}}
 
-## Install the sample Kubernetes Java application
+## サンプルの Kubernetes Java アプリケーションをインストールします。
 
-The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutorial-java-host][9]. To get started, clone the repository:
+このチュートリアルのコードサンプルは、GitHub の [github.com/DataDog/apm-tutorial-java-host][9] にあります。まずは、このリポジトリを複製してください。
 
 {{< code-block lang="sh" >}}
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
@@ -55,62 +55,62 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 The repository contains a multi-service Java application pre-configured to run inside a Kubernetes cluster. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files to make the containers for the Kubernetes pods are located in the `docker` directory. This tutorial uses the `service-docker-compose-k8s.yaml` file, which builds containers for the application.
 
-In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
+`notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
 
-Kubernetes configuration files for the `notes` app, the `calendar` app, and the Datadog Agent are in the `kubernetes` directory.
+`notes` アプリ、`calendar` アプリ、Datadog Agent の Kubernetes の構成ファイルは、`kubernetes` ディレクトリにあります。
 
-The process of getting the sample application involves building the images from the `docker` folder, uploading them to a registry, and creating kubernetes resources from the `kubernetes` folder.
+サンプルアプリケーションを取得するまでの流れは、`docker` フォルダからイメージをビルドし、レジストリにアップロードし、`kubernetes` フォルダから kubernetes リソースを作成する、というものです。
 
-### Starting the cluster
+### クラスターを起動する
 
-If you don't already have an EKS cluster that you want to re-use, create one by running the following command, replacing `<CLUSTER_NAME>` with the name you want to use:
+再利用したい EKS クラスターがまだない場合は、以下のコマンドを実行し、`<CLUSTER_NAME>` を使用したい名前に置き換えて、クラスターを作成します。
 
 {{< code-block lang="sh" >}}
 eksctl create cluster --name <CLUSTER_NAME>{{< /code-block >}}
 
-This creates an EKS cluster with a managed nodegroup where you can deploy pods. Read [the eksctl documentation on creating clusters][16] for more information on troubleshooting and configuration. If you're using a cluster created another way (for example by the AWS web console), ensure that the cluster is connected to your local `kubeconfig` file as described in the eksctl documentation.
+これにより、ポッドをデプロイできるマネージドノードグループを持つ EKS クラスターが作成されます。トラブルシューティングと構成の詳細については、[クラスター作成に関する eksctl ドキュメント][16]をお読みください。別の方法 (例えば AWS Web コンソール) で作成したクラスターを使用する場合は、eksctl ドキュメントに記載されているように、クラスターがローカルの `kubeconfig` ファイルに接続されていることを確認します。
 
-Creating the clusters may take 15 to 20 minutes to complete. Continue to other steps while waiting for the cluster to finish creation.
+クラスターの作成は 15～20 分ほどかかる場合があります。クラスターの作成が完了するのを待ちながら、他の手順に進んでください。
 
-### Build and upload the application image
+### アプリケーションイメージの構築とアップロード
 
-If you're not familiar with Amazon ECR, a registry for EKS images, it might be helpful to read [Using Amazon ECR with the AWS CLI][17].
+EKS イメージのレジストリである Amazon ECR に馴染みがない方は、[Amazon ECR を AWS CLI で使う][17]を読むとよいかもしれません。
 
-In the sample project's `/docker` directory, run the following commands:
+サンプルプロジェクトの `/docker` ディレクトリで、以下のコマンドを実行します。
 
-1. Authenticate with ECR by supplying your username and password in this command:
+1. このコマンドでユーザー名とパスワードを入力し、ECR で認証します。
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>{{< /code-block >}}
 
-2. Build a Docker image for the sample app, adjusting the platform setting to match yours:
+2. サンプルアプリの Docker イメージを構築し、プラットフォーム設定を合わせます。
    {{< code-block lang="sh" >}}
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes{{< /code-block >}}
 
-3. Tag the container with the ECR destination:
+3. コンテナに ECR 宛先のタグを付けます。
    {{< code-block lang="sh" >}}
 docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes{{< /code-block >}}
 
-4. Upload the container to the ECR registry:
+4. コンテナを ECR レジストリにアップロードします。
    {{< code-block lang="sh" >}}
 docker push <ECR_REGISTRY_URL>:notes{{< /code-block >}}
 
-Your application is containerized and available for EKS clusters to pull.
+アプリケーションはコンテナ化され、EKS クラスターがプルできるようになります。
 
-### Update AWS cluster inbound security policies
+### AWS クラスターのインバウンドセキュリティポリシーの更新
 
 To communicate with the sample applications, ensure that the cluster's security rules are configured with ports `30080` and `30090` open.
 
 1. Open AWS Console and navigate to your deployed cluster within the EKS service.
 
-2. On the cluster console, select the networking tab, and click your cluster security group.
+2. クラスターコンソールで、networking タブを選択し、クラスターセキュリティグループをクリックします。
 
 3. In your security group settings, edit the inbound rules. Add a rule allowing custom TCP traffic, a port range of `30060` to `30100`, and source of `0.0.0.0/0`.
 
-4. Save the rule.
+4. ルールを保存します。
 
-### Configure the application locally and deploy
+### アプリケーションをローカルに構成してデプロイする
 
-1. Open `kubernetes/notes-app.yaml` and update the `image` entry with the URL for the ECR image, where you pushed the container above:
+1. `kubernetes/notes-app.yaml` を開き、`image` の項目を、上記でコンテナをプッシュした ECR イメージの URL で更新します。
    {{< code-block lang="yaml" >}}
     spec:
       containers:
@@ -119,27 +119,27 @@ To communicate with the sample applications, ensure that the cluster's security 
           imagePullPolicy: Always
 {{< /code-block >}}
 
-2. From the `/kubernetes` directory, run the following command to deploy the `notes` app:
+2. `/kubernetes` ディレクトリから、以下のコマンドを実行して、`notes` アプリをデプロイします。
    {{< code-block lang="sh" >}}
 kubectl create -f notes-app.yaml{{< /code-block >}}
 
-3. To exercise the app, you need to find its external IP address to call its REST API. First, find the `notes-app-deploy` pod in the list output by the following command, and note its node:
+3. アプリを実行するには、アプリの REST API を呼び出すための外部 IP アドレスを見つける必要があります。まず、以下のコマンドで出力される一覧から `notes-app-deploy` というポッドを見つけ、そのノードをメモしておきます。
 
    {{< code-block lang="sh" >}}
 kubectl get pods -o wide{{< /code-block >}}
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-eks-pods.png" alt="Output of the kubectl command showing the notes-app-deploy pod and its associated node name" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-eks-pods.png" alt="notes-app-deploy ポッドとその関連ノード名を示す kubectl コマンドの出力" style="width:100%;" >}}
 
-   Then find that node name in the output from the following command, and note the external IP value:
+   次に、次のコマンドの出力からそのノード名を見つけ、外部 IP の値をメモします。
 
       {{< code-block lang="sh" >}}
 kubectl get nodes -o wide{{< /code-block >}}
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-eks-external-ip.png" alt="Output of the kubectl command showing the external IP value for the node" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-eks-external-ip.png" alt="ノードの外部 IP 値を示す kubectl コマンドの出力" style="width:100%;" >}}
 
-   In the examples shown, the `notes-app` is running on node `ip-192-189-63-129.ec2.internal`, which has an external IP of `34.230.7.210`.
+   この例では、`notes-app` はノード `ip-192-189-63-129.ec2.internal` で動作しており、その外部 IP は `34.230.7.210` であることが示されています。
 
-3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
+3. 別のターミナルを開いて、アプリを行使するために API リクエストを送信します。ノートアプリケーションは、同じコンテナで実行されているメモリ内 H2 データベースにデータを保存する REST API です。これにいくつかのコマンドを送信します。
 
 `curl '<EXTERNAL_IP>:30080/notes'`
 : `[]`
@@ -153,33 +153,33 @@ kubectl get nodes -o wide{{< /code-block >}}
 `curl '<EXTERNAL_IP>:30080/notes'`
 : `[{"id":1,"description":"hello"}]`
 
-4. After you've seen the application running, stop it so that you can enable tracing on it:
+4. アプリケーションの実行を確認したら、それを停止して、トレースを有効にします。
    {{< code-block lang="sh" >}}
 kubectl delete -f notes-app.yaml{{< /code-block >}}
 
-## Enable tracing
+## トレースを有効にする
 
-Now that you have a working Java application, configure it to enable tracing.
+Java アプリケーションが動作するようになったので、トレースを有効にするための構成を行います。
 
-1. Add the Java tracing package to your project. Because the Agent runs in an EKS cluster, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
+1. Java tracing パッケージをプロジェクトに追加します。Agent は EKS クラスターで動作するため、Dockerfile が適切に構成されていることを確認し、何もインストールする必要はありません。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除します。
 
    ```
    RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
-2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
+2. 同じ `notes/dockerfile.notes.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
 
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/notes-0.0.1-SNAPSHOT.jar"]
    ```
 
-   This automatically instruments the application with Datadog services.
+   これにより、アプリケーションは自動的に Datadog のサービスにインスツルメンテーションされます。
 
-   <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
+   <div class="alert alert-warning"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
 
-3. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed with Kubernetes, these environment variables can be added within the deployment YAML file, specifically for the deployment object, pod spec, and pod container template.
+3. 異なるバージョンやデプロイ環境間でトレースされたサービスを識別する[統合サービスタグ][10]により、Datadog 内で相関が取れるようになり、検索やフィルターに利用できるようになります。統合サービスタグ付けに使用する環境変数は、`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の 3 つです。Kubernetes でデプロイされるアプリケーションでは、これらの環境変数をデプロイメント YAML ファイル内、特にデプロイメントオブジェクト、ポッド仕様、ポッドコンテナテンプレートに追加することができます。
 
-   For this tutorial, the `kubernetes/notes-app.yaml` file already has these environment variables defined for the notes application for the deployment object, the pod spec, and the pod container template, for example:
+   このチュートリアルでは、`kubernetes/notes-app.yaml` ファイルに、デプロイメントオブジェクト、ポッド仕様、ポッドコンテナテンプレートなど、ノートアプリケーションのためのこれらの環境変数がすでに定義されています。
 
    ```yaml
    ...
@@ -201,34 +201,34 @@ Now that you have a working Java application, configure it to enable tracing.
       ...
    ```
 
-### Rebuild and upload the application image
+### アプリケーションイメージの再構築とアップロード
 
-Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-image):
+[前と同じ手順](#build-and-upload-the-application-image)で、トレースを有効にしてイメージを再構築します。
 {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build notes
 docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:notes{{< /code-block >}}
 
-Your application with tracing enabled is containerized and available for EKS clusters to pull.
+トレースを有効にしたアプリケーションはコンテナ化され、EKS クラスターがプルできるようになります。
 
-## Install and run the Agent using Helm
+## Helm を使用した Agent のインストールと実行
 
-Next, deploy the Agent to EKS to collect the trace data from your instrumented application.
+次に、インスツルメンテーションされたアプリケーションからトレースデータを収集するために、EKS に Agent をデプロイします。
 
-1. Open `kubernetes/datadog-values.yaml` to see the minimum required configuration for the Agent and APM on GKE. This configuration file is used by the command you run next.
+1. `kubernetes/datadog-values.yaml` を開くと、GKE 上の Agent と APM に最低限必要な構成が表示されます。このコンフィギュレーションファイルは、次に実行するコマンドで使用されます。
 
-2. From the `/kubernetes` directory, run the following command, inserting your API key and cluster name:
+2. `/kubernetes` ディレクトリから、API キーとクラスター名を入れて、以下のコマンドを実行します。
    {{< code-block lang="sh" >}}
 helm upgrade -f datadog-values.yaml --install --debug latest --set datadog.apiKey=<DD_API_KEY> --set datadog.clusterName=<CLUSTER_NAME> --set datadog.site=datadoghq.com datadog/datadog{{< /code-block >}}
 
-   For more secure deployments that do not expose the API Key, read [this guide on using secrets][18]. Also, if you use a [Datadog site][6] other than `us1`, replace `datadoghq.com` with your site.
+   API キーを公開しない、より安全なデプロイについては、[シークレットの使用に関するこのガイド][18]をお読みください。また、`us1` 以外の [Datadog サイト][6]を使用している場合は、`datadoghq.com` を自分のサイトに置き換えてください。
 
-## Launch the app to see automatic tracing
+## 自動トレースを見るためにアプリを起動する
 
-Using [the same steps as before](#configure-the-application-locally-and-deploy), deploy the `notes` app with `kubectl create -f notes-app.yaml` and find the external IP address for the node it runs on.
+[前回と同じ手順](#configure the-application-locally-and-deploy)で、`notes` アプリを `kubectl create -f notes-app.yaml` でデプロイし、実行するノードの外部 IP アドレスを確認します。
 
-Run some curl commands to exercise the app:
+アプリを動かすために、いくつかの curl コマンドを実行します。
 
 `curl '<EXTERNAL_IP>:30080/notes'`
 : `[]`
@@ -243,49 +243,49 @@ Run some curl commands to exercise the app:
 : `[{"id":1,"description":"hello"}]`
 
 
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
-The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
+`h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 
-If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+もし、数分待ってもトレースが表示されない場合は、Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
 
-### Examine a trace
+### トレースの検証
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
+Traces ページで、`POST /notes` トレースをクリックすると、各スパンにかかった時間や、あるスパンが完了する前に他のスパンが発生したことを示すフレームグラフが表示されます。グラフの上部にあるバーは、前の画面で選択したスパンです (この場合、ノートアプリケーションへの最初のエントリポイントです)。
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
+バーの幅は、それが完了するまでにかかった時間を示します。低い深さのバーは、高い深さのバーの寿命の間に完了するスパンを表します。
 
-The flame graph for a `POST` trace looks something like this:
+`POST` トレースのフレームグラフは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-post-flame.png" alt="POST トレースのフレームグラフ。" style="width:100%;" >}}
 
-A `GET /notes` trace looks something like this:
+`GET /notes` トレースは次のようになります。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-get-flame.png" alt="GET トレースのフレームグラフ。" style="width:100%;" >}}
 
-### Tracing configuration
+### トレーシングのコンフィギュレーション
 
-The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+Java トレーシングライブラリは、Java のビルトイン Agent とモニタリングのサポートを利用します。Dockerfile のフラグ `-javaagent:../dd-java-agent.jar` は、JVM が Java Agent として実行できるように、Java トレーシングライブラリをどこで見つけるかを指示します。Java Agent については、[https://www.baeldung.com/java-instrumentation][7] で詳しく説明されています。
 
-The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
+`dd.trace.sample.rate` フラグは、このアプリケーションのサンプルレートを設定します。Dockerfile の ENTRYPOINT コマンドでは、この値を `1` に設定しています。これは、`notes` サービスに対する全てのリクエストの 100% が、分析と表示のために Datadog のバックエンドに送信されることを意味します。低容量のテストアプリケーションの場合、これは問題ありません。実稼働時や大量のデータを扱う環境では、このようなことはしないでください。代わりに、リクエストの一部をサンプリングします。例えば、`-Ddd.trace.sample.rate=0.1` とすると、リクエストの 10% 分のトレースが Datadog に送信されます。[トレース構成設定][14]と[サンプリング機構][15]について詳しくお読みください。
 
-Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That's because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+このコマンドのサンプリングレートフラグは `-jar` フラグの_前に_表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
 
-## Add manual instrumentation to the Java application
+## Java アプリケーションに手動インスツルメンテーションを追加する
 
-Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code.
+自動インスツルメンテーションは便利ですが、より細かいスパンが欲しい場合もあります。Datadog の Java DD Trace API では、アノテーションやコードを使用してコード内のスパンを指定することができます。
 
-The following steps walk you through modifying the build scripts to download the Java tracing library and adding some annotations to the code to trace into some sample methods.
+次のステップでは、ビルドスクリプトを修正して Java トレーシングライブラリをダウンロードし、コードにいくつかのアノテーションを追加して、いくつかのサンプルメソッドにトレースする手順を説明します。
 
-1. Delete the current application deployments:
+1. 現在のアプリケーションデプロイを削除します。
    {{< code-block lang="sh" >}}
 kubectl delete -f notes-app.yaml{{< /code-block >}}
 
-2. Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
+2. `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java` を開きます。このサンプルには、コードにカスタムトレースを設定するさまざまな方法を示す、コメントアウトされたコードがすでに含まれています。
 
-3. Uncomment the lines that import libraries to support manual tracing:
+3. 手動トレーシングをサポートするためのライブラリをインポートしている行のコメントを解除します。
 
    ```java
    import datadog.trace.api.Trace;
@@ -299,14 +299,14 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
    import java.io.StringWriter
    ```
 
-4. Uncomment the lines that manually trace the two public processes. These demonstrate the use of `@Trace` annotations to specify aspects such as `operationName` and `resourceName` in a trace:
+4. 2 つのパブリックプロセスを手動でトレースしている行のコメントを解除します。これらは、`@Trace` アノテーションを使用して、`operationName` や `resourceName` などのアスペクトをトレースで指定することを示しています。
    ```java
    @Trace(operationName = "traceMethod1", resourceName = "NotesHelper.doLongRunningProcess")
    // ...
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-5. You can also create a separate span for a specific code block in the application. Within the span, add service and resource name tags and error handling tags. These tags result in a flame graph showing the span and metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
+5. また、アプリケーション内の特定のコードブロックに対して、別のスパンを作成することもできます。スパン内には、サービスやリソース名のタグ、エラー処理タグを追加します。これらのタグは、Datadog の視覚化でスパンとメトリクスを表示するフレームグラフになります。プライベートメソッドを手動でトレースする行のコメントを解除します。
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -321,7 +321,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
    ```
-   And also the lines that set tags on errors:
+   また、エラー時にタグを設定する行も:
    ```java
         } catch (Exception e) {
             // Set error on span
@@ -338,9 +338,9 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
         }
    ```
 
-6. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
+6. `notes/pom.xml` を開き、手動トレースの依存関係を構成する行のコメントを解除して、Maven ビルドを更新します。`dd-trace-api` ライブラリは `@Trace` アノテーションに使用され、`opentracing-util` と `opentracing-api` は手動でスパンを作成するために使用されます。
 
-7. Rebuild the application and upload it to ECR following the [same steps as before](#build-and-upload-the-application-image), running these commands:
+7. アプリケーションを再構築し、[前回と同じ手順](#build-and-upload-the-application-image)に従って ECR にアップロードし、以下のコマンドを実行します。
 
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
@@ -349,40 +349,40 @@ docker tag docker-notes:latest <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:notes
 {{< /code-block >}}
 
-8. Using [the same steps as before](#configure-the-application-locally-and-deploy), deploy the `notes` app with `kubectl create -f notes-app.yaml` and find the external IP address for the node it runs on.
+8. [前回と同じ手順](#configure the-application-locally-and-deploy)で、`notes` アプリを `kubectl create -f notes-app.yaml` でデプロイし、実行するノードの外部 IP アドレスを確認します。
 
-9. Resend some HTTP requests, specifically some `GET` requests.
-10. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
+9. いくつかの HTTP リクエスト、特にいくつかの `GET` リクエストを再送します。
+10. トレースエクスプローラーで、新しい `GET` リクエストの 1 つをクリックすると、次のようなフレームグラフが表示されます。
 
-    {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+    {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="カスタムインスツルメンテーションを用いた GET トレースのフレームグラフ。" style="width:100%;" >}}
 
-    Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
+    `getAll` 関数にカスタムトレースが追加され、スタックトレースがより詳細になったことに注意してください。
 
-    The `privateMethod` around which you created a manual span now shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
+    手動でスパンを作成した `privateMethod` は、他のコールとは別のブロックとして表示され、別の色でハイライトされています。`@Trace` アノテーションを使用した他のメソッドは、`GET` リクエスト (`notes` アプリケーション) と同じサービス、同じ色で表示されます。カスタムインスツルメンテーションは、ハイライトして監視する必要があるコードの重要な部分がある場合に有効です。
 
-For more information, read [Custom Instrumentation][12].
+詳しくは、[カスタムインストルメンテーション][12]をご覧ください。
 
-## Add a second application to see distributed traces
+## 分散型トレーシングを見るために 2 つ目のアプリケーションを追加する
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
+単一のアプリケーションをトレースすることは素晴らしいスタートですが、トレースの本当の価値は、リクエストがサービスを通じてどのように流れるかを見ることです。これは、_分散型トレーシング_と呼ばれています。
 
-The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
+サンプルプロジェクトには `calendar` という 2 番目のアプリケーションが含まれており、呼び出されるたびにランダムな日付を返します。Notes アプリケーションの `POST` エンドポイントには、`add_date` という名前の 2 つ目のクエリパラメーターがあります。このパラメータが `y` に設定されると、Notes はカレンダーアプリケーションを呼び出して、ノートに追加する日付を取得します。
 
-1. Configure the `calendar` app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
+1. ノートアプリと同様に、Dockerfile の起動コマンドに `dd-java-agent` を追加して、トレース用の `calendar` アプリの構成を確認します。`calendar/dockerfile.calendar.maven` を開き、すでに `dd-java-agent` がダウンロードされていることを確認します。
 
    ```
    RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
-2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
+2. 同じ `calendar/dockerfile.calendar.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
 
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>Note</strong>: Again, the flags, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
+   <div class="alert alert-warning"><strong>注</strong>: 繰り返しになりますが、フラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
 
-3. Build both applications and publish them to ECR. From the `docker` directory, run:
+3. 両方のアプリケーションをビルドし、ECR に公開します。`docker` ディレクトリから、以下を実行します。
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-k8s.yaml build calendar
@@ -390,7 +390,7 @@ docker tag docker-calendar:latest <ECR_REGISTRY_URL>:calendar
 docker push <ECR_REGISTRY_URL>:calendar
 {{< /code-block >}}
 
-4. Open `kubernetes/calendar-app.yaml` and update the `image` entry with the URL for the ECR image, where you pushed the `calendar` app in the previous step:
+4. `kubernetes/calendar-app.yaml` を開き、`image` エントリを ECR イメージの URL で更新します。これは前のステップで `calendar` アプリ をプッシュした場所です。
    {{< code-block lang="yaml" >}}
     spec:
       containers:
@@ -399,53 +399,53 @@ docker push <ECR_REGISTRY_URL>:calendar
           imagePullPolicy: Always
 {{< /code-block >}}
 
-5. Deploy both `notes` and `calendar` apps, now with custom instrumentation, on the cluster:
+5. カスタムインスツルメンテーションを持つようになった `notes` と `calendar` の両アプリをクラスター上にデプロイします。
    {{< code-block lang="sh" >}}
 kubectl create -f notes-app.yaml
 kubectl create -f calendar-app.yaml{{< /code-block >}}
 
-6. Using the method you used before, find the external IP of the `notes` app.
+6. 先ほどの方法で、`notes` アプリの外部 IP を探します。
 
-7. Send a POST request with the `add_date` parameter:
+7. `add_date` パラメーターを指定して、POST リクエストを送信します。
 
 `curl -X POST '<EXTERNAL_IP>:30080/notes?desc=hello_again&add_date=y'`
 : `{"id":1,"description":"hello_again with date 2022-11-06"}`
 
-8. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+8. トレースエクスプローラーで、この最新のトレースをクリックすると、2 つのサービス間の分散型トレーシングが表示されます。
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
 
-   Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
+   `notes` アプリケーションでは何も変更していないことに注意してください。Datadog は `notes` から `calendar` への HTTP コールに使用される `okHttp` ライブラリと、`notes` と `calendar` の HTTP リクエストをリッスンするために使用する Jetty ライブラリの両方を自動的にインスツルメントします。これにより、トレース情報を 1 つのアプリケーションから他のアプリケーションに渡すことができ、分散型トレースをキャプチャすることができます。
 
-9. When you're done exploring, clean up all resources and delete the deployments:
+9. 確認が終わったら、すべてのリソースをクリーンアップし、デプロイを削除してください。
    {{< code-block lang="sh" >}}
 kubectl delete -f notes-app.yaml
 kubectl delete -f calendar-app.yaml{{< /code-block >}}
 
-   See [the documentation for EKS][19] for information about deleting the cluster.
+   クラスターの削除については、[EKS のドキュメント][19]を参照してください。
 
-## Troubleshooting
+## トラブルシューティング
 
-If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
+もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/#enabling-tracing-tutorials
-[2]: /tracing/trace_collection/dd_libraries/java/
-[3]: /account_management/api-app-keys/
-[4]: /tracing/trace_collection/compatibility/java/
-[6]: /getting_started/site/
+[1]: /ja/tracing/guide/#enabling-tracing-tutorials
+[2]: /ja/tracing/trace_collection/dd_libraries/java/
+[3]: /ja/account_management/api-app-keys/
+[4]: /ja/tracing/trace_collection/compatibility/java/
+[6]: /ja/getting_started/site/
 [8]: https://app.datadoghq.com/event/explorer
 [7]: https://www.baeldung.com/java-instrumentation
 [9]: https://github.com/DataDog/apm-tutorial-java-host
-[10]: /getting_started/tagging/unified_service_tagging/
+[10]: /ja/getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/apm/traces
-[12]: /tracing/trace_collection/custom_instrumentation/java/
-[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /tracing/trace_collection/library_config/java/
-[15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
+[12]: /ja/tracing/trace_collection/custom_instrumentation/java/
+[13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[14]: /ja/tracing/trace_collection/library_config/java/
+[15]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [16]: https://eksctl.io/usage/creating-and-managing-clusters/
 [17]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
 [18]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#create-and-provide-a-secret-that-contains-your-datadog-api-and-app-keys

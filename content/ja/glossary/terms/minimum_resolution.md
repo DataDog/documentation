@@ -1,7 +1,7 @@
 ---
-title: minimum resolution
 related_terms:
-  - collection interval
+- collection interval
+title: minimum resolution
 ---
 Minimum resolution is the shortest interval between datapoints for which Datadog can retain unique records. For example, if the minimum resolution is 1 second, only one value per unique combination of tags and metrics can be stored within each 1-second window. Any subsequent value sent within the same second overwrites the previous value. 
 

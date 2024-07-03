@@ -1,21 +1,18 @@
 ---
-title: RUM React Native Monitoring Setup
-kind: documentation
-description: Collect RUM data from your React Native projects.
 aliases:
-    - /real_user_monitoring/react-native/
-    - /real_user_monitoring/reactnative/
+- /ja/real_user_monitoring/react-native/
+- /ja/real_user_monitoring/reactnative/
 code_lang: reactnative
-type: multi-code-lang
 code_lang_weight: 40
+description: Collect RUM data from your React Native projects.
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/reactnative
   tag: Documentation
   text: RUM React Native Advanced Configuration
-- link: "https://github.com/DataDog/dd-sdk-reactnative"
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: ソースコード
   text: Source code for dd-sdk-reactnative
-- link: "https://www.datadoghq.com/blog/react-native-monitoring/"
+- link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog
   text: Monitor React Native applications
 - link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
@@ -24,7 +21,9 @@ further_reading:
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-
+kind: documentation
+title: RUM React Native Monitoring Setup
+type: multi-code-lang
 ---
 ## Overview
 
@@ -445,19 +444,19 @@ end
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: https://raw.githubusercontent.com/DataDog/dd-sdk-reactnative/main/docs/image_reactnative.png
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#client-tokens
 [5]: https://github.com/wix/react-native-navigation
-[6]: /real_user_monitoring/reactnative/integrated_libraries/
+[6]: /ja/real_user_monitoring/reactnative/integrated_libraries/
 [7]: https://github.com/react-navigation/react-navigation
-[8]: /real_user_monitoring/reactnative/integrated_libraries/
+[8]: /ja/real_user_monitoring/reactnative/integrated_libraries/
 [9]: https://github.com/DataDog/dd-sdk-reactnative/blob/main/LICENSE
 [10]: https://source.android.com/security/app-sandbox
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [12]: https://docs.expo.dev/
-[13]: /real_user_monitoring/reactnative/expo/
+[13]: /ja/real_user_monitoring/reactnative/expo/
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
-[15]: /getting_started/tagging/#define-tags
+[15]: /ja/getting_started/tagging/#define-tags
 [16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [17]: https://reactnative.dev/docs/the-new-architecture/landing-page
-[18]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/#initialize-the-library-with-application-context
+[18]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/#initialize-the-library-with-application-context

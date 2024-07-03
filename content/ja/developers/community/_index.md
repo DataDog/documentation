@@ -1,12 +1,12 @@
 ---
-title: Community
 aliases:
-   - /developers/office_hours/
-   - /developers/community/office_hours/
+- /ja/developers/office_hours/
+- /ja/developers/community/office_hours/
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-open-source-hub/"
+- link: https://www.datadoghq.com/blog/introducing-open-source-hub/
   tag: Blog
   text: Introducing the Datadog Open Source Hub
+title: Community
 ---
 
 私たちは皆様のおかげで成り立つこの素晴らしいオープンソースコミュニティを大切にしています。

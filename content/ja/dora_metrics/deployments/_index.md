@@ -1,11 +1,8 @@
 ---
-title: How to Set Up Deployment Data for DORA Metrics
-kind: ドキュメント
-description: Learn how to send deployment events for DORA Metrics.
 aliases:
-- /continuous_integration/dora_metrics/setup/deployments
-- /dora_metrics/setup/deployments
-is_beta: true
+- /ja/continuous_integration/dora_metrics/setup/deployments
+- /ja/dora_metrics/setup/deployments
+description: Learn how to send deployment events for DORA Metrics.
 further_reading:
 - link: /dora_metrics/failures
   tag: ドキュメント
@@ -13,12 +10,15 @@ further_reading:
 - link: /tracing/service_catalog
   tag: ドキュメント
   text: サービスカタログについて
-- link: "https://github.com/DataDog/datadog-ci"
+- link: https://github.com/DataDog/datadog-ci
   tag: ソースコード
   text: datadog-ci CLI ツールについて
 - link: /continuous_delivery/deployments
   tag: ドキュメント
   text: Deployment Visibility について
+is_beta: true
+kind: ドキュメント
+title: How to Set Up Deployment Data for DORA Metrics
 ---
 
 {{< site-region region="gov" >}}
@@ -73,7 +73,7 @@ When configuring the GitHub application:
 
 To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, under the **Features** tab, the **DORA Metrics: Collect Change Lead Time metric** feature is enabled.
 
-[1]: https://docs.datadoghq.com/integrations/github/
+[1]: https://docs.datadoghq.com/ja/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 
@@ -147,10 +147,10 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[1]: /ja/api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /tracing/service_catalog
-[4]: /tracing/service_catalog/setup
-[5]: /tracing/service_catalog/adding_metadata
+[3]: /ja/tracing/service_catalog
+[4]: /ja/tracing/service_catalog/setup
+[5]: /ja/tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
-[7]: /dora_metrics/data_collected
+[7]: /ja/dora_metrics/data_collected

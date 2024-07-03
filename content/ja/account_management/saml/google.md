@@ -1,7 +1,6 @@
 ---
-title: Google SAML IdP
 aliases:
-  - /account_management/faq/how-do-i-configure-google-as-a-saml-idp/
+- /ja/account_management/faq/how-do-i-configure-google-as-a-saml-idp/
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
@@ -9,6 +8,7 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configuring Teams & Organizations with Multiple Accounts
+title: Google SAML IdP
 ---
 
 ## Google を SAML IdP としてセットアップする

@@ -1,24 +1,25 @@
 ---
-title: Syslog-ng
-name: syslog_ng
-custom_kind: インテグレーション
-description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
-short_description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
-categories:
-    - log collection
-doc_link: /integrations/syslog_ng/
 aliases:
-    - /logs/log_collection/syslog_ng
+- /ja/logs/log_collection/syslog_ng
+categories:
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
+description: Configure Syslog-ng to gather logs from your host, containers, & services.
+doc_link: /integrations/syslog_ng/
 has_logo: true
+integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
+name: syslog_ng
 public_title: Datadog-Syslog-ng Integration
-dependencies:
-    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md"]
+short_description: Configure Syslog-ng to gather logs from your host, containers,
+  & services.
 supported_os:
-    - linux
-    - windows
-integration_id: "syslog_ng"
+- linux
+- windows
+title: Syslog-ng
 ---
 
 ## Overview
@@ -98,4 +99,4 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 Need help? Contact [Datadog support][2].
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
-[2]: /help/
+[2]: /ja/help/

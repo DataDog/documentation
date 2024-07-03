@@ -1,17 +1,17 @@
 ---
-title: Set up Tracing on a GitLab Pipeline
 aliases:
-  - /continuous_integration/setup_pipelines/gitlab
+- /ja/continuous_integration/setup_pipelines/gitlab
 further_reading:
-    - link: /continuous_integration/pipelines
-      tag: Documentation
-      text: Explore Pipeline Execution Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
-    - link: /continuous_integration/pipelines/custom_tags_and_measures/
-      tag: Documentation
-      text: Extend Pipeline Visibility by adding custom tags and measures
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explore Pipeline Execution Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+- link: /continuous_integration/pipelines/custom_tags_and_measures/
+  tag: Documentation
+  text: Extend Pipeline Visibility by adding custom tags and measures
+title: Set up Tracing on a GitLab Pipeline
 ---
 
 {{< site-region region="gov" >}}
@@ -306,7 +306,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/site/
+[1]: /ja/getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
@@ -314,19 +314,19 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [6]: https://docs.gitlab.com/runner/register/
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[9]: /logs/
-[10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
-[11]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
-[13]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
-[15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
-[16]: /account_management/teams/
-[17]: /logs/log_configuration/processors/
-[18]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[9]: /ja/logs/
+[10]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
+[11]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
+[12]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[13]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[14]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
+[15]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
+[16]: /ja/account_management/teams/
+[17]: /ja/logs/log_configuration/processors/
+[18]: /ja/continuous_integration/guides/infrastructure_metrics_with_gitlab
 [19]: https://about.gitlab.com/
-[20]: /glossary/#partial-retry
-[21]: /glossary/#manual-step
-[22]: /glossary/#queue-time
-[23]: /glossary/#approval-wait-time
-[24]: /glossary/#pipeline-execution-time
+[20]: /ja/glossary/#partial-retry
+[21]: /ja/glossary/#manual-step
+[22]: /ja/glossary/#queue-time
+[23]: /ja/glossary/#approval-wait-time
+[24]: /ja/glossary/#pipeline-execution-time

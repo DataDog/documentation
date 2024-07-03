@@ -1,79 +1,79 @@
 ---
-"app_id": "nginx"
-"app_uuid": "b98a5a97-1d65-4f74-9d1a-b2c1be85a470"
-"assets":
-  "dashboards":
-    "NGINX Plus base overview": "assets/dashboards/plus_overview.json"
-    "NGINX-Metrics": "assets/dashboards/NGINX-Metrics_dashboard.json"
-    "NGINX-Overview": "assets/dashboards/NGINX-Overview_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "nginx.net.connections"
-      - "nginx.connections.active"
-      "metadata_path": "metadata.csv"
-      "prefix": "nginx."
-    "process_signatures":
-    - "nginx: master process"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "31"
-    "source_type_name": "Nginx"
-  "monitors":
-    "[NGINX] 4xx Errors higher than usual": "assets/monitors/4xx.json"
-    "[NGINX] 5xx Errors higher than usual": "assets/monitors/5xx.json"
-    "[NGINX] Upstream peers fails": "assets/monitors/upstream_peer_fails.json"
-  "saved_views":
-    "4xx_errors": "assets/saved_views/4xx_errors.json"
-    "5xx_errors": "assets/saved_views/5xx_errors.json"
-    "bot_errors": "assets/saved_views/bot_errors.json"
-    "nginx_processes": "assets/saved_views/nginx_processes.json"
-    "status_code_overview": "assets/saved_views/status_code_overview.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "configuration & deployment"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/nginx/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "nginx"
-"integration_id": "nginx"
-"integration_title": "Nginx"
-"integration_version": "6.3.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "nginx"
-"public_title": "Nginx"
-"short_description": "接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。"
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::構成 & デプロイ"
-  - "Category::ログの収集"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": "接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Nginx"
+app_id: nginx
+app_uuid: b98a5a97-1d65-4f74-9d1a-b2c1be85a470
+assets:
+  dashboards:
+    NGINX Plus base overview: assets/dashboards/plus_overview.json
+    NGINX-Metrics: assets/dashboards/NGINX-Metrics_dashboard.json
+    NGINX-Overview: assets/dashboards/NGINX-Overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - nginx.net.connections
+      - nginx.connections.active
+      metadata_path: metadata.csv
+      prefix: nginx.
+    process_signatures:
+    - 'nginx: master process'
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 31
+    source_type_name: Nginx
+  monitors:
+    '[NGINX] 4xx Errors higher than usual': assets/monitors/4xx.json
+    '[NGINX] 5xx Errors higher than usual': assets/monitors/5xx.json
+    '[NGINX] Upstream peers fails': assets/monitors/upstream_peer_fails.json
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    nginx_processes: assets/saved_views/nginx_processes.json
+    status_code_overview: assets/saved_views/status_code_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- configuration & deployment
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: nginx
+integration_id: nginx
+integration_title: Nginx
+integration_version: 6.3.1
+is_public: true
+manifest_version: 2.0.0
+name: nginx
+public_title: Nginx
+short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::構成 & デプロイ
+  - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nginx
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -304,7 +304,7 @@ http {
 ```
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx/datadog_checks/nginx/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -335,9 +335,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 ```
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -414,11 +414,11 @@ metadata:
     name: nginx
 ```
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
-[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
-[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -465,9 +465,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 }
 ```
 
-[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
-[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -532,9 +532,9 @@ NGINX チェックには、イベントは含まれません。
 [2]: https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
 [3]: https://nginx.org/en/docs/http/ngx_http_status_module.html
 [4]: https://www.nginx.com/blog/nginx-plus-r13-released
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
-[7]: https://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
+[7]: https://docs.datadoghq.com/ja/help/
 [8]: https://www.datadoghq.com/blog/how-to-monitor-nginx
 [9]: https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html
 [10]: https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html

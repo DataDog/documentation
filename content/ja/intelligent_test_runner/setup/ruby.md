@@ -1,16 +1,16 @@
 ---
-title: Intelligent Test Runner for Ruby
-kind: documentation
 code_lang: ruby
-type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: /tests
-      tag: Documentation
-      text: Explore Test Results and Performance
-    - link: /tests/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- link: /tests
+  tag: Documentation
+  text: Explore Test Results and Performance
+- link: /tests/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+kind: documentation
+title: Intelligent Test Runner for Ruby
+type: multi-code-lang
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Ruby in beta.{{< /beta-callout >}}
@@ -177,5 +177,5 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/ruby
+[1]: /ja/tests/ruby
 [2]: https://edgeguides.rubyonrails.org/testing.html#parallel-testing

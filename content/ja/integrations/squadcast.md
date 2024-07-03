@@ -1,66 +1,66 @@
 ---
-"app_id": "squadcast"
-"app_uuid": "cfa65726-33af-42bf-8be3-7abb43147a47"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": squadcast.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10090"
-    "source_type_name": Squadcast
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": Squadcast
-  "sales_email": it@squadcast.com
-  "support_email": it@squadcast.com
-"categories":
+app_id: squadcast
+app_uuid: cfa65726-33af-42bf-8be3-7abb43147a47
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: squadcast.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10090
+    source_type_name: Squadcast
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Squadcast
+  sales_email: it@squadcast.com
+  support_email: it@squadcast.com
+categories:
 - alerting
 - collaboration
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "squadcast"
-"integration_id": "squadcast"
-"integration_title": "Squadcast"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "squadcast"
-"public_title": "Squadcast"
-"short_description": "Get notified of your Datadog alerts & take actions using Squadcast."
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: squadcast
+integration_id: squadcast
+integration_title: Squadcast
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: squadcast
+public_title: Squadcast
+short_description: Get notified of your Datadog alerts & take actions using Squadcast.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Alerting"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Issue Tracking"
-  - "Category::Notifications"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Get notified of your Datadog alerts & take actions using Squadcast.
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Squadcast
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Alerting
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Get notified of your Datadog alerts & take actions using Squadcast.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Squadcast
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -172,5 +172,4 @@ Need help? Contact [Datadog Support][3].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-webhook.png
 [2]: https://support.squadcast.com/docs/datadog
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

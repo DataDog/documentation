@@ -1,89 +1,91 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "rapdev-gmeet"
-"app_uuid": "0aa39e5e-89dd-4437-8411-33ca5a69174f"
-"assets":
-  "dashboards":
-    "Google Meet Dashboard": assets/dashboards/google_meet_dashboard.json
-  "integration":
-    "auto_install": false
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": rapdev.gmeet.call_ended
-      "metadata_path": metadata.csv
-      "prefix": rapdev.gmeet.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10434"
-    "source_type_name": RapDev Gmeet
-  "monitors":
-    "RapDev Google Meet Monitor": assets/monitors/rapdev_google_meet_monitor.json
-"author":
-  "homepage": "https://rapdev.io"
-  "name": RapDev
-  "sales_email": ddsales@rapdev.io
-  "support_email": support@rapdev.io
-  "vendor_id": rapdev
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: rapdev-gmeet
+app_uuid: 0aa39e5e-89dd-4437-8411-33ca5a69174f
+assets:
+  dashboards:
+    Google Meet Dashboard: assets/dashboards/google_meet_dashboard.json
+  integration:
+    auto_install: false
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: rapdev.gmeet.call_ended
+      metadata_path: metadata.csv
+      prefix: rapdev.gmeet.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10434
+    source_type_name: RapDev Gmeet
+  monitors:
+    RapDev Google Meet Monitor: assets/monitors/rapdev_google_meet_monitor.json
+author:
+  homepage: https://rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
+  support_email: support@rapdev.io
+  vendor_id: rapdev
+categories:
 - collaboration
 - event management
 - marketplace
 - モニター
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "rapdev_gmeet"
-"integration_id": "rapdev-gmeet"
-"integration_title": "Google Meet"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/EULA.pdf
-"manifest_version": "2.0.0"
-"name": "rapdev_gmeet"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.rapdev.gmeet
-  "product_id": gmeet
-  "short_description": Unit price per active user
-  "tag": display_name
-  "unit_label": Active User
-  "unit_price": !!int "1"
-"public_title": "Google Meet"
-"short_description": "Visualize Google Meet meeting details and performance as metrics and events."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: rapdev_gmeet
+integration_id: rapdev-gmeet
+integration_title: Google Meet
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/EULA.pdf
+manifest_version: 2.0.0
+name: rapdev_gmeet
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.rapdev.gmeet
+  product_id: gmeet
+  short_description: Unit price per active user
+  tag: display_name
+  unit_label: Active User
+  unit_price: 1
+public_title: Google Meet
+short_description: Visualize Google Meet meeting details and performance as metrics
+  and events.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Collaboration"
-  - "Category::Event Management"
-  - "Category::Marketplace"
-  - "Category::Metrics"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Events"
-  "configuration": "README.md#Setup"
-  "description": Visualize Google Meet meeting details and performance as metrics and events.
-  "media":
-  - "caption": RapDev Google Meet Overview Dashboard
-    "image_url": images/dashboard_example.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Google Meet
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Collaboration
+  - Category::Event Management
+  - Category::Marketplace
+  - Category::Metrics
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
+  configuration: README.md#Setup
+  description: Visualize Google Meet meeting details and performance as metrics and
+    events.
+  media:
+  - caption: RapDev Google Meet Overview Dashboard
+    image_url: images/dashboard_example.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Meet
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
@@ -140,7 +142,7 @@ Made with ❤️ in Boston
 [5]: https://console.cloud.google.com/apis/library/admin.googleapis.com
 [6]: https://console.cloud.google.com/iam-admin/serviceaccounts/create
 [7]: https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority
-[8]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [9]: mailto:support@rapdev.io
 [10]: https://www.rapdev.io/#Get-in-touch
 

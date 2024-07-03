@@ -1,8 +1,7 @@
 ---
-title: Database Monitoring Data Collected
 description: Information about the data that Database Monitoring collects.
-further_reading:
-
+further_reading: null
+title: Database Monitoring Data Collected
 ---
 
 データベースモニタリングを設定すると、Agent は対応するインテグレーションのドキュメントで説明されたすべてのメトリクスを収集します。これには、データベースの状態、イベント、フェイルオーバー、接続、バッファプール、に関するメトリクスの他、データベースモニタリングが使用するクエリパフォーマンスのメトリクスが含まれます。
@@ -79,7 +78,7 @@ Datadog データベースモニタリングでは、ホストでの実行にか
 _その他のクエリ_ とは、上位 200 件に表れなかったすべてのクエリのメトリクスのことです。クエリは、ある時間枠にトップクエリでも他ではトップクエリでないため、特定のクエリのメトリクスは別の正規化されたクエリとして追跡され、他の時間はその他のクエリとしてカウントされます。
 
 
-[1]: /dashboards/
-[2]: /monitors/
-[3]: /notebooks/
-[4]: /data_security/logs/
+[1]: /ja/dashboards/
+[2]: /ja/monitors/
+[3]: /ja/notebooks/
+[4]: /ja/data_security/logs/

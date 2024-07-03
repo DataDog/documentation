@@ -1,5 +1,4 @@
 ---
-title: Setting Up Database Monitoring for self-hosted SQL Server
 description: Install and configure Database Monitoring for self-hosted SQL Server
 further_reading:
 - link: /integrations/sqlserver/
@@ -8,13 +7,13 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentation
   text: Troubleshoot Common Issues
-- link: "https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/"
+- link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
   tag: Blog
   text: Strategize your Azure migration for SQL workloads with Datadog
-- link: "https://www.datadoghq.com/blog/datadog-monitoring-always-on/"
+- link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
   tag: Blog
   text: Monitor your AlwaysOn availability groups with Datadog Database Monitoring
-
+title: Setting Up Database Monitoring for self-hosted SQL Server
 ---
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。

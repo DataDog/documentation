@@ -1,26 +1,27 @@
 ---
-title: Node.js Custom Instrumentation using Datadog API
 aliases:
-    - /tracing/opentracing/nodejs
-    - /tracing/manual_instrumentation/nodejs
-    - /tracing/custom_instrumentation/nodejs
-    - /tracing/setup_overview/custom_instrumentation/nodejs
-    - /tracing/trace_collection/custom_instrumentation/nodejs
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/nodejs
-description: 'Manually instrument your Node.js application to send custom traces to Datadog.'
+- /ja/tracing/opentracing/nodejs
+- /ja/tracing/manual_instrumentation/nodejs
+- /ja/tracing/custom_instrumentation/nodejs
+- /ja/tracing/setup_overview/custom_instrumentation/nodejs
+- /ja/tracing/trace_collection/custom_instrumentation/nodejs
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/nodejs
 code_lang: dd-api
 code_lang_weight: 1
-type: multi-code-lang
+description: Manually instrument your Node.js application to send custom traces to
+  Datadog.
 further_reading:
-    - link: /tracing/trace_collection/trace_context_propagation/nodejs/
-      tag: Documentation
-      text: Propagating trace context
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: /tracing/trace_collection/trace_context_propagation/nodejs/
+  tag: Documentation
+  text: Propagating trace context
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+title: Node.js Custom Instrumentation using Datadog API
+type: multi-code-lang
 ---
 
 <div class="alert alert-info">
@@ -272,7 +273,7 @@ tracer.use('http', {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/nodejs/
-[2]: /tracing/glossary/#spans
-[3]: /tracing/security
-[4]: /tracing/guide/ignoring_apm_resources/
+[1]: /ja/tracing/compatibility_requirements/nodejs/
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/tracing/security
+[4]: /ja/tracing/guide/ignoring_apm_resources/

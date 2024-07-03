@@ -1,13 +1,13 @@
 ---
-title: Single Step APM Instrumentation (Beta)
-kind: documentation
-is_beta: true
 aliases:
-- /tracing/trace_collection/single-step-apm
+- /ja/tracing/trace_collection/single-step-apm
 further_reading:
-  - link: /tracing/metrics/runtime_metrics/
-    tag: Documentation
-    text: Enable Runtime Metrics
+- link: /tracing/metrics/runtime_metrics/
+  tag: Documentation
+  text: Enable Runtime Metrics
+is_beta: true
+kind: documentation
+title: Single Step APM Instrumentation (Beta)
 ---
 ## Overview
 
@@ -43,9 +43,9 @@ For an Ubuntu host:
 2. 新しいシェルセッションを開始します。
 3. Restart the services on the host or VM.
 
-[3]: /getting_started/site/
+[3]: /ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/service_catalog/
+[5]: /ja/tracing/service_catalog/
 [7]: https://github.com/DataDog/dd-trace-java/releases
 [8]: https://github.com/DataDog/dd-trace-js/releases
 [9]: https://github.com/DataDog/dd-trace-py/releases
@@ -82,7 +82,7 @@ For a Docker Linux container:
 4. [Explore the performance observability of your services in Datadog][6].
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /tracing/service_catalog/
+[6]: /ja/tracing/service_catalog/
 
 {{% /tab %}}
 
@@ -187,7 +187,7 @@ To enable Single Step Instrumentation with Helm:
 [9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://app.datadoghq.com/organization-settings/application-keys
-[12]: /getting_started/site
+[12]: /ja/getting_started/site
 [13]: https://v3.helm.sh/docs/intro/install/
 [36]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 
@@ -223,7 +223,7 @@ Available versions are listed in tracer source repositories for each language:
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
 
-[2]: /agent/remote_config
+[2]: /ja/agent/remote_config
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 [8]: https://github.com/DataDog/dd-trace-java/releases
 [9]: https://github.com/DataDog/dd-trace-js/releases
@@ -442,9 +442,9 @@ For instructions on changing your container registry, see [Changing Your Contain
 [1]: https://helm.sh/
 [2]: https://kubernetes.io/docs/tasks/tools/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /getting_started/site/
+[4]: /ja/getting_started/site/
 [5]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
-[6]: /getting_started/site
+[6]: /ja/getting_started/site
 [15]: http://gcr.io/datadoghq/dd-lib-java-init
 [16]: http://hub.docker.com/r/datadog/dd-lib-java-init
 [17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
@@ -460,7 +460,7 @@ For instructions on changing your container registry, see [Changing Your Contain
 [27]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
-[30]: /containers/guide/changing_container_registry/
+[30]: /ja/containers/guide/changing_container_registry/
 [31]: https://github.com/DataDog/dd-trace-java/releases
 [32]: https://github.com/DataDog/dd-trace-js/releases
 [33]: https://github.com/DataDog/dd-trace-py/releases
@@ -591,6 +591,6 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /tracing/metrics/runtime_metrics/
-[3]: /tracing/service_catalog/
-[4]: /tracing/glossary/#instrumentation
+[2]: /ja/tracing/metrics/runtime_metrics/
+[3]: /ja/tracing/service_catalog/
+[4]: /ja/tracing/glossary/#instrumentation

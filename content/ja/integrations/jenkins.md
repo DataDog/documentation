@@ -4,8 +4,7 @@ categories:
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
-description: Jenkins のメトリクス、イベント、サービスチェックを自動転送
-  to Datadog.
+description: Jenkins のメトリクス、イベント、サービスチェックを自動転送 to Datadog.
 doc_link: https://docs.datadoghq.com/integrations/jenkins/
 git_integration_title: jenkins
 has_logo: true
@@ -468,11 +467,11 @@ Checkout the [development document][12] for tips on spinning up a quick developm
 [10]: https://github.com/jenkinsci/datadog-plugin/blob/master/CHANGELOG.md
 [11]: https://github.com/jenkinsci/datadog-plugin/blob/master/CONTRIBUTING.md
 [12]: https://github.com/jenkinsci/datadog-plugin/blob/master/DEVELOPMENT.md
-[13]: https://docs.datadoghq.com/agent/logs/?tab=tcpudp#custom-log-collection
-[14]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[15]: https://docs.datadoghq.com/logs/log_collection/?tab=http
+[13]: https://docs.datadoghq.com/ja/agent/logs/?tab=tcpudp#custom-log-collection
+[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[15]: https://docs.datadoghq.com/ja/logs/log_collection/?tab=http
 [16]: https://raw.githubusercontent.com/jenkinsci/datadog-plugin/master/images/dashboard.png
-[17]: https://docs.datadoghq.com/developers/dogstatsd/?tab=containeragent#
+[17]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=containeragent#
 [18]: https://www.jenkins.io/doc/book/using/using-credentials/
-[19]: https://docs.datadoghq.com/tests/
-[20]: https://docs.datadoghq.com/tests/setup/
+[19]: https://docs.datadoghq.com/ja/tests/
+[20]: https://docs.datadoghq.com/ja/tests/setup/

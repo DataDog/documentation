@@ -1,17 +1,18 @@
 ---
-title: デバイストポロジーマップ
 aliases:
-- /network_monitoring/devices/network_topology_map
+- /ja/network_monitoring/devices/network_topology_map
 further_reading:
-- link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
+- link: https://www.datadoghq.com/blog/visualize-network-device-topology/
   tag: ブログ
-  text: Visualize relationships across your on-premise network with the Device Topology Map
+  text: Visualize relationships across your on-premise network with the Device Topology
+    Map
 - link: /network_monitoring/devices/data
   tag: ドキュメント
   text: ネットワークデバイスモニタリングで収集されるデータ
-- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: ブログ
   text: Datadog での SNMP モニタリング
+title: デバイストポロジーマップ
 ---
 
 ## 概要
@@ -223,9 +224,9 @@ The device resolution can fail if the device is not monitored with NDM, or the L
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/devices/netflow/
+[1]: /ja/network_monitoring/devices/netflow/
 [2]: https://app.datadoghq.com/infrastructure/devices?viewTab=topology
-[3]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
-[4]: /network_monitoring/devices/profiles/
-[5]: /help
-[6]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#ping
+[3]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
+[4]: /ja/network_monitoring/devices/profiles/
+[5]: /ja/help
+[6]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2#ping

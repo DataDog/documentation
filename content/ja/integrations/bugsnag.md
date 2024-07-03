@@ -1,23 +1,24 @@
 ---
-"categories":
-- "notifications"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "複数のアプリケーションのエラー率を一元的に追跡。"
-"doc_link": "https://docs.datadoghq.com/integrations/bugsnag/"
-"draft": false
-"git_integration_title": "bugsnag"
-"has_logo": true
-"integration_id": "bugsnag"
-"integration_title": "Bugsnag"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "bugsnag"
-"public_title": "Datadog-Bugsnag Integration"
-"short_description": "Centrally track error rates across your applications as they rise and fall."
-"team": "web-integrations"
-"version": "1.0"
+categories:
+- notifications
+custom_kind: インテグレーション
+dependencies: []
+description: 複数のアプリケーションのエラー率を一元的に追跡。
+doc_link: https://docs.datadoghq.com/integrations/bugsnag/
+draft: false
+git_integration_title: bugsnag
+has_logo: true
+integration_id: bugsnag
+integration_title: Bugsnag
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: bugsnag
+public_title: Datadog-Bugsnag Integration
+short_description: Centrally track error rates across your applications as they rise
+  and fall.
+team: web-integrations
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -73,5 +74,4 @@ The Bugsnag integration does not include any service checks.
 Need help? Contact [Datadog support][2].
 
 [1]: https://bugsnag.com
-[2]: https://docs.datadoghq.com/help/
-
+[2]: https://docs.datadoghq.com/ja/help/

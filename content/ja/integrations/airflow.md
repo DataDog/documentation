@@ -1,70 +1,70 @@
 ---
-"app_id": "airflow"
-"app_uuid": "ed426432-3df4-4ab8-ab2f-a5a85900c59b"
-"assets":
-  "dashboards":
-    "Airflow Overview": assets/dashboards/overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": airflow.dagbag_size
-      "metadata_path": metadata.csv
-      "prefix": airflow.
-    "process_signatures":
+app_id: airflow
+app_uuid: ed426432-3df4-4ab8-ab2f-a5a85900c59b
+assets:
+  dashboards:
+    Airflow Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: airflow.dagbag_size
+      metadata_path: metadata.csv
+      prefix: airflow.
+    process_signatures:
     - airflow
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10083"
-    "source_type_name": Airflow
-  "monitors":
-    "Heartbeat Failure": assets/monitors/heartbeat_failures.json
-    "Ongoing Duration": assets/monitors/ongoing_duration.json
-  "saved_views":
-    "airflow_overview": assets/saved_views/airflow_overview.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10083
+    source_type_name: Airflow
+  monitors:
+    Heartbeat Failure: assets/monitors/heartbeat_failures.json
+    Ongoing Duration: assets/monitors/ongoing_duration.json
+  saved_views:
+    airflow_overview: assets/saved_views/airflow_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - automation
 - log collection
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/airflow/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "airflow"
-"integration_id": "airflow"
-"integration_title": "Airflow"
-"integration_version": "5.0.1"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "airflow"
-"public_title": "Airflow"
-"short_description": "Tracks metrics related to DAGs, tasks, pools, executors, etc"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/airflow/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: airflow
+integration_id: airflow
+integration_title: Airflow
+integration_version: 5.0.1
+is_public: true
+manifest_version: 2.0.0
+name: airflow
+public_title: Airflow
+short_description: Tracks metrics related to DAGs, tasks, pools, executors, etc
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Automation"
-  - "Category::Log Collection"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Tracks metrics related to DAGs, tasks, pools, executors, etc
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Airflow
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Tracks metrics related to DAGs, tasks, pools, executors, etc
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Airflow
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -345,9 +345,9 @@ _Agent バージョン 6.0 以降で利用可能_
 [5]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#metrics
 [6]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
 [7]: https://airflow.apache.org/docs/stable/metrics.html
-[8]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
-[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/help/
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -409,14 +409,14 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 |----------------|-------------------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "airflow", "service": "<YOUR_APP_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/getting_started/agent/autodiscovery/?tab=docker#integration-templates
+[1]: https://docs.datadoghq.com/ja/getting_started/agent/autodiscovery/?tab=docker#integration-templates
 [2]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#base-url
 [3]: https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/metrics.html
 [4]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#metrics
 [5]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
-[6]: https://docs.datadoghq.com/developers/dogstatsd/?tab=kubernetes#setup
-[7]: /integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
-[8]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[6]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=kubernetes#setup
+[7]: /ja/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
+[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -455,8 +455,8 @@ Airflow チェックには、イベントは含まれません。
 
 
 [1]: https://airflow.apache.org/docs/stable/metrics.html
-[2]: https://docs.datadoghq.com/developers/dogstatsd/
-[3]: https://docs.datadoghq.com/agent/
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
+[3]: https://docs.datadoghq.com/ja/agent/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-datadog/stable/_modules/airflow/providers/datadog/hooks/datadog.html
-[6]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/help/

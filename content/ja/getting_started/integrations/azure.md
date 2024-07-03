@@ -1,21 +1,22 @@
 ---
-title: Getting Started with Azure
 further_reading:
-    - link: "https://docs.datadoghq.com/integrations/azure/#overview"
-      tag: ドキュメント
-      text: Microsoft Azure integration
-    - link: "https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/"
-      tag: ガイド
-      text: Azure Integration Architecture and Configuration
-    - link: "https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/"
-      tag: ガイド
-      text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
-    - link: "https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension"
-      tag: ガイド
-      text: Azure Native インテグレーションの管理
-    - link: "https://www.datadoghq.com/blog/azure-integration-configuration/"
-      text: Fine-tune observability configurations for all your Azure integrations in one place
-      tag: ブログ
+- link: https://docs.datadoghq.com/integrations/azure/#overview
+  tag: ドキュメント
+  text: Microsoft Azure integration
+- link: https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/
+  tag: ガイド
+  text: Azure Integration Architecture and Configuration
+- link: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: ガイド
+  text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
+- link: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension
+  tag: ガイド
+  text: Azure Native インテグレーションの管理
+- link: https://www.datadoghq.com/blog/azure-integration-configuration/
+  tag: ブログ
+  text: Fine-tune observability configurations for all your Azure integrations in
+    one place
+title: Getting Started with Azure
 ---
 
 
@@ -75,8 +76,8 @@ For automatic configuration of the Azure Native integration through Terraform, s
 
 For manual configuration of the Azure Native integration through creation of the Datadog resource in Azure, see the [Azure Native Integration Manual Setup Guide][202].
 
-[201]: /integrations/guide/azure-native-programmatic-management/
-[202]: /integrations/guide/azure-native-manual-setup/
+[201]: /ja/integrations/guide/azure-native-programmatic-management/
+[202]: /ja/integrations/guide/azure-native-manual-setup/
 
 {{% /site-region %}}
 
@@ -159,21 +160,21 @@ See the [Azure Troubleshooting guide][16].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/getting_started/agent/
+[1]: https://docs.datadoghq.com/ja/getting_started/agent/
 [2]: https://www.datadoghq.com/
-[3]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
-[4]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration
+[3]: https://docs.datadoghq.com/ja/getting_started/site/#access-the-datadog-site
+[4]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration
 [5]: https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create
-[6]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/?tab=windows
-[7]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=azurecli
+[6]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/?tab=windows
+[7]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/?tab=azurecli
 [8]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/metrics-index
-[9]: https://docs.datadoghq.com/integrations/#cat-azure
-[10]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/?tab=automatedinstallation
-[11]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension#install
-[12]: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=aksclusterextension#install
-[13]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=vmextension#agent-installation
-[14]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=aksclusterextension#agent-installation
-[15]: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
-[16]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/
-[17]: https://docs.datadoghq.com/help/
-[18]: https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/
+[9]: https://docs.datadoghq.com/ja/integrations/#cat-azure
+[10]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/?tab=automatedinstallation
+[11]: https://docs.datadoghq.com/ja/integrations/guide/azure-portal/?tab=vmextension#install
+[12]: https://docs.datadoghq.com/ja/integrations/guide/azure-portal/?tab=aksclusterextension#install
+[13]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/?tab=vmextension#agent-installation
+[14]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/?tab=aksclusterextension#agent-installation
+[15]: https://docs.datadoghq.com/ja/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
+[16]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/
+[17]: https://docs.datadoghq.com/ja/help/
+[18]: https://docs.datadoghq.com/ja/logs/guide/azure-native-logging-guide/

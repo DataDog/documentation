@@ -1,21 +1,20 @@
 ---
-title: Setting Up APM with C++
-kind: guide
 further_reading:
 - link: /tracing/trace_collection/dd_libraries/cpp/
   tag: Documentation
   text: Learn more about tracing applications with C++
+title: Setting Up APM with C++
 ---
 
-## Overview
+## 概要
 
-This guide expands on the [C++ APM docs][1] to provide step-by-step instructions on how to set up a simple C++ app with APM on your VM for troubleshooting.
+このガイドは、[C++ APM ドキュメント][1]の内容を拡張したものです。C++ による簡単な APM アプリを、トラブルシューティングの目的で VM にセットアップする方法について、手順を追って説明します。
 
-## Setting up your box
+## ボックスをセットアップする
 
-### Basic environment
+### 基本の環境
 
-First, spin up a fresh `ubuntu/jammy64` Vagrant box and `ssh` into it with:
+最初に、新しい `ubuntu/jammy64` Vagrant ボックスをスピンアップし、それに対して `ssh` を実行します。
 
 ```bash
 vagrant init ubuntu/jammy64
@@ -23,11 +22,11 @@ vagrant up
 vagrant ssh
 ```
 
-Next, install the agent with the [instructions in the UI][2].
+次に、[UI の指示][2]に従って Agent をインストールします。
 
-### Prepping for C++
+### C++ の準備
 
-Install `g++` and `cmake` with:
+`g++` と `cmake` をインストールします。
 
 ```shell
 sudo apt-get update
@@ -142,5 +141,5 @@ The service then shows up in the Service Catalog in Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/cpp/
+[1]: /ja/tracing/setup/cpp/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu

@@ -72,4 +72,4 @@ Datadog では、色覚異常、視力低下、コントラスト感度などの
 {{< img src="dashboards/guide/colors/visual_accessibility.png" alt="利用可能な視覚的アクセシビリティオプション: デフォルト、プロタノピア (緑と赤の区別がつきにくい)、デュータノピア (赤、緑、黄の区別がつきにくい)、トリタノピア (青と緑の区別がつきにくい)、ハイコントラスト (低視力用に色の区切りを増やす)、低彩度 (視覚化するためにコントラストを下げる)。" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/personal-settings/preferences
-[2]: /dashboards/guide/compatible_semantic_tags
+[2]: /ja/dashboards/guide/compatible_semantic_tags

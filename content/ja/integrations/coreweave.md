@@ -1,74 +1,74 @@
 ---
-"app_id": "coreweave"
-"app_uuid": "74da15c6-f6f3-4d03-b44e-9e126e5da9e7"
-"assets":
-  "dashboards":
-    "coreweave": assets/dashboards/coreweave_dashboard.json
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
+app_id: coreweave
+app_uuid: 74da15c6-f6f3-4d03-b44e-9e126e5da9e7
+assets:
+  dashboards:
+    coreweave: assets/dashboards/coreweave_dashboard.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
       - coreweave.kube_pod_status_phase
-      "metadata_path": metadata.csv
-      "prefix": coreweave.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10368"
-    "source_type_name": coreweave
-  "monitors":
-    "[CoreWeave] Abnormal Billing Activity": assets/monitors/coreweave_billing.json
-    "[CoreWeave] High CPU Load": assets/monitors/coreweave_high_cpu.json
-    "[CoreWeave] High Memory % Usage": assets/monitors/coreweave_high_mem.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+      metadata_path: metadata.csv
+      prefix: coreweave.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10368
+    source_type_name: coreweave
+  monitors:
+    '[CoreWeave] Abnormal Billing Activity': assets/monitors/coreweave_billing.json
+    '[CoreWeave] High CPU Load': assets/monitors/coreweave_high_cpu.json
+    '[CoreWeave] High Memory % Usage': assets/monitors/coreweave_high_mem.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - metrics
 - ai/ml
 - kubernetes
 - provisioning
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "coreweave"
-"integration_id": "coreweave"
-"integration_title": "CoreWeave"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "coreweave"
-"public_title": "CoreWeave"
-"short_description": "Gather prometheus metrics from Coreweave"
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: coreweave
+integration_id: coreweave
+integration_title: CoreWeave
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: coreweave
+public_title: CoreWeave
+short_description: Gather prometheus metrics from Coreweave
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Metrics"
-  - "Category::AI/ML"
-  - "Category::Kubernetes"
-  - "Category::Provisioning"
-  - "Offering::Integration"
-  - "Submitted Data Type::Metrics"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Gather prometheus metrics from Coreweave
-  "media":
-  - "caption": CoreWeave Dashboard Overview
-    "image_url": images/coreweave_dashboard.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": CoreWeave
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::AI/ML
+  - Category::Kubernetes
+  - Category::Provisioning
+  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Gather prometheus metrics from Coreweave
+  media:
+  - caption: CoreWeave Dashboard Overview
+    image_url: images/coreweave_dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CoreWeave
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
@@ -133,5 +133,4 @@ Need help? Contact [Datadog support][4].
 [1]: https://cloud.coreweave.com/api-access
 [2]: https://app.datadoghq.com/integrations/coreweave
 [3]: https://github.com/DataDog/integrations-internal-core/blob/main/coreweave/metadata.csv
-[4]: https://docs.datadoghq.com/help/
-
+[4]: https://docs.datadoghq.com/ja/help/

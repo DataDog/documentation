@@ -1,7 +1,7 @@
 ---
-title: RUM Billing Details
 beta: true
 private: true
+title: RUM Billing Details
 ---
 
 <div class="alert alert-warning">

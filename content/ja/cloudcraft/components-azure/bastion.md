@@ -1,5 +1,5 @@
 ---
-title: "Bastion Component"
+title: Bastion Component
 ---
 
 ## 概要

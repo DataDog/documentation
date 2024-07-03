@@ -1,62 +1,62 @@
 ---
-"app_id": "perimeterx"
-"app_uuid": "47527216-ad8e-454b-8291-494f05c2d5c9"
-"assets":
-  "dashboards":
-    "PerimeterX Overview": assets/dashboards/PerimeterX_Bot_Defender_Dashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": perimeterx.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10105"
-    "source_type_name": PerimeterX
-"author":
-  "homepage": "https://github.com/DataDog/integrations-extras"
-  "name": PerimeterX
-  "sales_email": support@perimeterx.com
-  "support_email": support@perimeterx.com
-"categories":
+app_id: perimeterx
+app_uuid: 47527216-ad8e-454b-8291-494f05c2d5c9
+assets:
+  dashboards:
+    PerimeterX Overview: assets/dashboards/PerimeterX_Bot_Defender_Dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: perimeterx.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10105
+    source_type_name: PerimeterX
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: PerimeterX
+  sales_email: support@perimeterx.com
+  support_email: support@perimeterx.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "perimeterx"
-"integration_id": "perimeterx"
-"integration_title": "PerimeterX"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "perimeterx"
-"public_title": "PerimeterX"
-"short_description": "Integrate PerimeterX Logs and Metrics with DataDog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: perimeterx
+integration_id: perimeterx
+integration_title: PerimeterX
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: perimeterx
+public_title: PerimeterX
+short_description: Integrate PerimeterX Logs and Metrics with DataDog
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Integrate PerimeterX Logs and Metrics with DataDog
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": PerimeterX
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Integrate PerimeterX Logs and Metrics with DataDog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PerimeterX
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -114,5 +114,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: mailto:support@perimeterx.com
 [5]: https://docs.perimeterx.com/pxconsole/docs/data-schema-metrics
-[6]: https://docs.datadoghq.com/help/
-
+[6]: https://docs.datadoghq.com/ja/help/

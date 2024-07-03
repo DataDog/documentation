@@ -1,5 +1,5 @@
 ---
-title: "SES Component"
+title: SES Component
 ---
 ## 概要
 

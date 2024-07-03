@@ -1,10 +1,10 @@
 ---
-title: RUM イベントのグループ化
-kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: イベント検索
+kind: documentation
+title: RUM イベントのグループ化
 ---
 
 ## 概要

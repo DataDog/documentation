@@ -1,14 +1,13 @@
 ---
-title: Monitor Hybrid React Native Applications
-kind: guide
 description: Guide for monitoring hybrid React Native applications.
 further_reading:
 - link: /monitors/create/types/real_user_monitoring/
   tag: Documentation
   text: Learn about RUM Monitors
+title: Monitor Hybrid React Native Applications
 ---
 
-## Overview
+## 概要
 
 React Native is a JavaScript framework for developing hybrid mobile applications that can run natively on both Android and iOS.
 
@@ -16,7 +15,7 @@ If you have a hybrid application that is built on React Native, you can use Data
 
 RUM Events from both of these sources are reported as coming from the same application and the same source in Datadog RUM.
 
-## Limitations
+## 制限
 
 - For **errors, resources, and interactions tracking**, the SDKs can work in the following ways:
   - Through *auto-instrumentation* - Some React classes and methods are modified to automate this. Auto-instrumentation for JavaScript errors, resources, and interactions can only be started from JavaScript code.
@@ -77,19 +76,19 @@ If you have enabled tracing with your backend, first-party hosts for your native
 
 If you use OkHttp, you can use Datadog's interceptor to [automatically track network requests][1]. Alternatively, you can [manually track resources][2].
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/advanced_configuration/?tab=objectivec#automatically-track-network-requests
-[2]: https://docs.datadoghq.com/real_user_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-network-requests
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/advanced_configuration/?tab=objectivec#automatically-track-network-requests
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-network-requests
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 You can track network requests by monitoring your `URLSession`. Learn more about how to [automatically track network requests][3].
 
-[3]: https://docs.datadoghq.com/real_user_monitoring/android/advanced_configuration/?tab=kotlin#custom-resources
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/?tab=kotlin#custom-resources
 {{% /tab %}}
 {{< /tabs >}}
 
-### Limitations
+### 制限
 
 If you write any native code that relies on the Datadog SDK, make sure you execute that code **after** initializing the SDK on the React Native side. When you initialize the SDK on the React Native side, it is also initialized on the native side.
 
@@ -105,7 +104,7 @@ Install the React Native Datadog SDK with the following command options:
 yarn add @datadog/mobile-react-native
 ```
 
-or
+または
 
 ```shell
 npm install @datadog/mobile-react-native
@@ -126,14 +125,14 @@ implementation "com.datadoghq:dd-sdk-android-webview"
 
 Initialize the SDK on the native side. See the official [Android][1] documentation for instructions.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 Initialize the SDK on the native side. See the official [iOS][1] documentation for instructions.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -255,7 +254,7 @@ rumConfiguration.setActionEventMapper(RNActionEventMapper())
 
 If you have enabled ProGuard obfuscation, add rules to prevent obfuscation of the target packages in release builds.
 
-### Limitations
+### 制限
 
 If you specified a `resourceEventMapper` or `actionEventMapper` in your React Native configuration, resources and actions won't be dropped if you return `null` in the mapper.
 
@@ -312,10 +311,10 @@ RUM.Configuration(
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#custom-views
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#custom-views
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#custom-views
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#custom-views

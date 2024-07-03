@@ -1,20 +1,19 @@
 ---
-title: Intelligent Test Runner for Java
-kind: documentation
-code_lang: java
-type: multi-code-lang
-code_lang_weight: 10
 aliases:
-  - /continuous_integration/intelligent_test_runner/java/
-  - /continuous_integration/intelligent_test_runner/setup/java/
-
+- /ja/continuous_integration/intelligent_test_runner/java/
+- /ja/continuous_integration/intelligent_test_runner/setup/java/
+code_lang: java
+code_lang_weight: 10
 further_reading:
-    - link: /continuous_integration/tests
-      tag: Documentation
-      text: Explore Test Results and Performance
-    - link: /continuous_integration/troubleshooting/
-      tag: Documentation
-      text: Troubleshooting CI Visibility
+- link: /continuous_integration/tests
+  tag: Documentation
+  text: Explore Test Results and Performance
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Troubleshooting CI Visibility
+kind: documentation
+title: Intelligent Test Runner for Java
+type: multi-code-lang
 ---
 
 ## Compatibility
@@ -314,5 +313,5 @@ class MyTestSuite extends AnyFlatSpec {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/java
+[1]: /ja/continuous_integration/tests/java
 [2]: https://www.jacoco.org/jacoco/

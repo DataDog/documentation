@@ -1,14 +1,15 @@
 ---
-title: Send Metrics from OpenTelemetry to Datadog
 aliases:
-- /metrics/open_telemetry/
+- /ja/metrics/open_telemetry/
 further_reading:
-    - link: /opentelemetry/
-      tag: Documentation
-      text: Learn more about OpenTelemetry
-    - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
-      tag: Blog
-      text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter
+- link: /opentelemetry/
+  tag: Documentation
+  text: Learn more about OpenTelemetry
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
+  tag: Blog
+  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog
+    Exporter
+title: Send Metrics from OpenTelemetry to Datadog
 ---
 
 ## 概要
@@ -43,8 +44,8 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 [2]: https://www.cncf.io/
 [3]: https://www.datadoghq.com/pricing/?product=infrastructure#infrastructure
 [4]: https://opentelemetry.io/docs/
-[5]: /opentelemetry/otel_collector_datadog_exporter/
-[6]: /opentelemetry/otlp_ingest_in_the_agent/
-[7]: /opentelemetry/
+[5]: /ja/opentelemetry/otel_collector_datadog_exporter/
+[6]: /ja/opentelemetry/otlp_ingest_in_the_agent/
+[7]: /ja/opentelemetry/
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver

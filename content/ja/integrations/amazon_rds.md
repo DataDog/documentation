@@ -1,44 +1,44 @@
 ---
-"aliases":
-- "/integrations/awsrds/"
-- "/integrations/rds/"
-- "/integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances/"
-"categories":
-- "aws"
-- "cloud"
-- "data stores"
-- "log collection"
-- "network"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Amazon RDS に関連する大量のメトリクスを追跡する。"
-"doc_link": "https://docs.datadoghq.com/integrations/amazon_rds/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/"
-  "tag": "ブログ"
-  "text": "RDS MySQL パフォーマンスメトリクスを監視する"
-- "link": "https://www.datadoghq.com/blog/aws-rds-postgresql-monitoring/"
-  "tag": "ブログ"
-  "text": "AWS RDS PostgreSQL 監視のキーメトリクス"
-- "link": "https://www.datadoghq.com/blog/monitoring-amazon-aurora-performance-metrics/"
-  "tag": "ブログ"
-  "text": "Amazon Aurora パフォーマンスメトリクスを監視する"
-"git_integration_title": "amazon_rds"
-"has_logo": true
-"integration_id": "amazon-rds"
-"integration_title": "Amazon RDS"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"monitors":
-  "rds_cpu_utilization": "assets/monitors/rds_cpu_utilization.json"
-  "rds_database_connections_anomaly": "assets/monitors/rds_database_connections_anomaly.json"
-  "rds_storage_utilization": "assets/monitors/rds_storage_utilization.json"
-"name": "amazon_rds"
-"public_title": "Datadog-Amazon RDS Integration"
-"short_description": "Track a wealth of metrics related to Amazon RDS."
-"version": "1.0"
+aliases:
+- /ja/integrations/awsrds/
+- /ja/integrations/rds/
+- /ja/integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances/
+categories:
+- aws
+- cloud
+- data stores
+- log collection
+- network
+custom_kind: インテグレーション
+dependencies: []
+description: Amazon RDS に関連する大量のメトリクスを追跡する。
+doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/
+  tag: ブログ
+  text: RDS MySQL パフォーマンスメトリクスを監視する
+- link: https://www.datadoghq.com/blog/aws-rds-postgresql-monitoring/
+  tag: ブログ
+  text: AWS RDS PostgreSQL 監視のキーメトリクス
+- link: https://www.datadoghq.com/blog/monitoring-amazon-aurora-performance-metrics/
+  tag: ブログ
+  text: Amazon Aurora パフォーマンスメトリクスを監視する
+git_integration_title: amazon_rds
+has_logo: true
+integration_id: amazon-rds
+integration_title: Amazon RDS
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+monitors:
+  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
+  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
+  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
+name: amazon_rds
+public_title: Datadog-Amazon RDS Integration
+short_description: Track a wealth of metrics related to Amazon RDS.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -80,9 +80,9 @@ There are 3 preset dashboards available for this configuration: MySQL, Aurora, a
 **Note**: These dashboard display metrics both from AWS CloudWatch and from the individual database engine itself. Enable one of the integrations, [MySQL][1], [Aurora][2], or [PostgreSQL][3], for all integration metrics.
 
 
-[1]: https://docs.datadoghq.com/integrations/mysql/
+[1]: https://docs.datadoghq.com/ja/integrations/mysql/
 [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_SettingUp_Aurora.html
-[3]: https://docs.datadoghq.com/integrations/postgres/
+[3]: https://docs.datadoghq.com/ja/integrations/postgres/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -95,7 +95,7 @@ There are 3 preset dashboards available for this configuration: MySQL, Aurora, a
 
 For the standard RDS integration, set up the [Amazon Web Services integration][1] first.
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services
 {{% /tab %}}
 {{% tab "Enhanced" %}}
 
@@ -148,7 +148,7 @@ When clicking on test button for your lambda function you might get this error:
 This can be ignored. The Test button doesn't work with this setup.
 
 
-[1]: https://docs.datadoghq.com/serverless/forwarder/
+[1]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [2]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/rds_enhanced_monitoring#setup
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -178,7 +178,7 @@ This can be ignored. The Test button doesn't work with this setup.
 3. Install the [Datadog - Amazon RDS integration][4].
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/integrations/amazon-rds
 {{% /tab %}}
@@ -197,7 +197,7 @@ This can be ignored. The Test button doesn't work with this setup.
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/integrations/amazon-rds
 {{% /tab %}}
@@ -266,7 +266,7 @@ Checks
       - Collected 8 metrics & 0 events
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-information
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-information
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -331,14 +331,13 @@ Need help? Contact [Datadog support][11].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html
-[2]: https://docs.datadoghq.com/dashboards/
-[3]: https://docs.datadoghq.com/monitors/
+[2]: https://docs.datadoghq.com/ja/dashboards/
+[3]: https://docs.datadoghq.com/ja/monitors/
 [4]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
-[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
 [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
 [9]: https://app.datadoghq.com/dash/integration/62/aws-rds
 [10]: https://app.datadoghq.com/monitors/recommended
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

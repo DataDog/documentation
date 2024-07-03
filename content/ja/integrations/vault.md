@@ -1,72 +1,72 @@
 ---
-"app_id": "vault"
-"app_uuid": "450e17a2-3ca0-4dc5-800c-99c5db736073"
-"assets":
-  "dashboards":
-    "Vault - Overview": assets/dashboards/vault_overview_legacy.json
-    "Vault - Overview (OpenMetricsV2)": assets/dashboards/vault_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": true
-    "metrics":
-      "check": vault.is_leader
-      "metadata_path": metadata.csv
-      "prefix": vault.
-    "process_signatures":
+app_id: vault
+app_uuid: 450e17a2-3ca0-4dc5-800c-99c5db736073
+assets:
+  dashboards:
+    Vault - Overview: assets/dashboards/vault_overview_legacy.json
+    Vault - Overview (OpenMetricsV2): assets/dashboards/vault_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: vault.is_leader
+      metadata_path: metadata.csv
+      prefix: vault.
+    process_signatures:
     - vault server
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10059"
-    "source_type_name": Vault
-  "monitors":
-    "[Vault] S3 time to access secrets is high": assets/monitors/vault_S3_time_high.json
-  "saved_views":
-    "error_warning_status": assets/saved_views/error_warning_status.json
-    "service_name_overview": assets/saved_views/service_name_overview.json
-    "vault_patern": assets/saved_views/vault_patern.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10059
+    source_type_name: Vault
+  monitors:
+    '[Vault] S3 time to access secrets is high': assets/monitors/vault_S3_time_high.json
+  saved_views:
+    error_warning_status: assets/saved_views/error_warning_status.json
+    service_name_overview: assets/saved_views/service_name_overview.json
+    vault_patern: assets/saved_views/vault_patern.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/vault/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "vault"
-"integration_id": "vault"
-"integration_title": "Vault"
-"integration_version": "4.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "vault"
-"public_title": "Vault"
-"short_description": "Vault is a secrets management service application"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/vault/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: vault
+integration_id: vault
+integration_title: Vault
+integration_version: 4.2.0
+is_public: true
+manifest_version: 2.0.0
+name: vault
+public_title: Vault
+short_description: Vault is a secrets management service application
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Vault is a secrets management service application
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Vault
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Vault is a secrets management service application
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vault
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -195,9 +195,9 @@ Vault インテグレーションには以下の機能が必要です。
 
 2. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -256,7 +256,7 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
 [3]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
 [4]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
@@ -301,12 +301,12 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [1]: https://www.vaultproject.io
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/integrations/guide/versions-for-openmetrics-based-integrations
+[3]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
 [4]: https://www.vaultproject.io/docs/configuration/telemetry#prometheus
 [5]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
 [6]: https://www.vaultproject.io/docs/auth
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/help/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
 [10]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
 [11]: https://www.datadoghq.com/blog/vault-monitoring-tools

@@ -1,6 +1,6 @@
 ---
-title: Mobile and TV Monitoring Supported Versions
 kind: ドキュメント
+title: Mobile and TV Monitoring Supported Versions
 type: multi-code-lang
 ---
 

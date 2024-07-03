@@ -1,20 +1,20 @@
 ---
-title: Autodiscovery with JMX
 aliases:
-  - /agent/guide/autodiscovery-with-jmx
+- /ja/agent/guide/autodiscovery-with-jmx
 further_reading:
-    - link: /agent/kubernetes/integrations/
-      tag: Documentation
-      text: Create and load an Autodiscovery integration template
-    - link: /agent/guide/ad_identifiers/
-      tag: Documentation
-      text: Match a container with the corresponding integration template
-    - link: /agent/guide/autodiscovery-management/
-      tag: Documentation
-      text: Manage which container to include in the Agent Autodiscovery
-    - link: /agent/kubernetes/tag/
-      tag: Documentation
-      text: Dynamically assign and collect tags from your application
+- link: /agent/kubernetes/integrations/
+  tag: Documentation
+  text: Create and load an Autodiscovery integration template
+- link: /agent/guide/ad_identifiers/
+  tag: Documentation
+  text: Match a container with the corresponding integration template
+- link: /agent/guide/autodiscovery-management/
+  tag: Documentation
+  text: Manage which container to include in the Agent Autodiscovery
+- link: /agent/kubernetes/tag/
+  tag: Documentation
+  text: Dynamically assign and collect tags from your application
+title: Autodiscovery with JMX
 ---
 
 コンテナ環境では、Agent が JMX サーバーに接続する方法にいくつかの違いがあります。オートディスカバリー機能により、これらのインテグレーションを動的にセットアップできます。Datadog の JMX ベースのインテグレーションを使用して、Kubernetes のポッドから JMX アプリケーションのメトリクスを収集しす。
@@ -357,54 +357,54 @@ Datadog Agent には、いくつかの JMX インテグレーションが事前�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/guide/ad_identifiers/?tab=kubernetes
-[2]: /tracing/metrics/runtime_metrics/java/
-[3]: /containers/guide/template_variables/
-[4]: /containers/guide/ad_identifiers/?tab=kubernetes#custom-autodiscovery-container-identifiers
+[1]: /ja/containers/guide/ad_identifiers/?tab=kubernetes
+[2]: /ja/tracing/metrics/runtime_metrics/java/
+[3]: /ja/containers/guide/template_variables/
+[4]: /ja/containers/guide/ad_identifiers/?tab=kubernetes#custom-autodiscovery-container-identifiers
 [5]: https://kubernetes.io/docs/concepts/workloads/pods/downward-api/
-[6]: /integrations/java/
-[41]: /integrations/activemq/
+[6]: /ja/integrations/java/
+[41]: /ja/integrations/activemq/
 [42]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [43]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[44]: /integrations/cassandra/
+[44]: /ja/integrations/cassandra/
 [45]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
 [46]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
-[47]: /integrations/confluent_platform/
+[47]: /ja/integrations/confluent_platform/
 [48]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
 [49]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
-[50]: /integrations/hazelcast/
+[50]: /ja/integrations/hazelcast/
 [51]: https://github.com/DataDog/integrations-core/blob/master/hazelcast/datadog_checks/hazelcast/data/metrics.yaml
 [52]: https://github.com/DataDog/integrations-core/blob/master/hazelcast/datadog_checks/hazelcast/data/conf.yaml.example
-[53]: /integrations/hive/
+[53]: /ja/integrations/hive/
 [54]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
 [55]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[56]: /integrations/hivemq/
+[56]: /ja/integrations/hivemq/
 [57]: https://github.com/DataDog/integrations-core/blob/master/hivemq/datadog_checks/hivemq/data/metrics.yaml
 [58]: https://github.com/DataDog/integrations-core/blob/master/hivemq/datadog_checks/hivemq/data/conf.yaml.example
-[59]: /integrations/hudi/
+[59]: /ja/integrations/hudi/
 [60]: https://github.com/DataDog/integrations-core/blob/master/hudi/datadog_checks/hudi/data/metrics.yaml
 [61]: https://github.com/DataDog/integrations-core/blob/master/hudi/datadog_checks/hudi/data/conf.yaml.example
-[62]: /integrations/ignite/
+[62]: /ja/integrations/ignite/
 [63]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/metrics.yaml
 [64]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
-[66]: /integrations/jboss_wildfly/
+[66]: /ja/integrations/jboss_wildfly/
 [67]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [68]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[69]: /integrations/kafka/
+[69]: /ja/integrations/kafka/
 [70]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
 [71]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[72]: /integrations/presto/
+[72]: /ja/integrations/presto/
 [73]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
 [74]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
-[75]: /integrations/solr/
+[75]: /ja/integrations/solr/
 [76]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
 [77]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[78]: /integrations/sonarqube/
+[78]: /ja/integrations/sonarqube/
 [79]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/metrics.yaml
 [80]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/conf.yaml.example
-[81]: /integrations/tomcat/
+[81]: /ja/integrations/tomcat/
 [82]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
 [83]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[84]: /integrations/weblogic/
+[84]: /ja/integrations/weblogic/
 [85]: https://github.com/DataDog/integrations-core/blob/master/weblogic/datadog_checks/weblogic/data/metrics.yaml
 [86]: https://github.com/DataDog/integrations-core/blob/master/weblogic/datadog_checks/weblogic/data/conf.yaml.example

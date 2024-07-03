@@ -1,68 +1,68 @@
 ---
-"app_id": "zookeeper"
-"app_uuid": "01aee33c-0c85-4800-ab79-c02a25da04fa"
-"assets":
-  "dashboards":
-    "zookeeper": "assets/dashboards/zookeeper_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "zookeeper.connections"
-      "metadata_path": "metadata.csv"
-      "prefix": "zookeeper."
-    "process_signatures":
-    - "zkServer.sh start"
-    - "java zoo.cfg"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "48"
-    "source_type_name": "ZooKeeper"
-  "saved_views":
-    "zookeeper_processes": "assets/saved_views/zookeeper_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "orchestration"
-- "notifications"
-- "log collection"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/zk/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "zk"
-"integration_id": "zookeeper"
-"integration_title": "ZooKeeper"
-"integration_version": "4.5.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "zk"
-"public_title": "ZooKeeper"
-"short_description": "クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。"
-"supported_os":
-- "linux"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Category::オーケストレーション"
-  - "Category::Notifications"
-  - "Category::ログの収集"
-  "configuration": "README.md#Setup"
-  "description": "クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "ZooKeeper"
+app_id: zookeeper
+app_uuid: 01aee33c-0c85-4800-ab79-c02a25da04fa
+assets:
+  dashboards:
+    zookeeper: assets/dashboards/zookeeper_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: zookeeper.connections
+      metadata_path: metadata.csv
+      prefix: zookeeper.
+    process_signatures:
+    - zkServer.sh start
+    - java zoo.cfg
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 48
+    source_type_name: ZooKeeper
+  saved_views:
+    zookeeper_processes: assets/saved_views/zookeeper_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- orchestration
+- notifications
+- log collection
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/zk/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: zk
+integration_id: zookeeper
+integration_title: ZooKeeper
+integration_version: 4.5.0
+is_public: true
+manifest_version: 2.0.0
+name: zk
+public_title: ZooKeeper
+short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
+supported_os:
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::オーケストレーション
+  - Category::Notifications
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ZooKeeper
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -180,9 +180,9 @@ _Agent バージョン 6.0 以降で利用可能_
 
 5. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "コンテナ化" %}}
 
@@ -208,8 +208,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ----------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "zookeeper", "service": "<サービス名>"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -249,5 +249,5 @@ ZooKeeper チェックには、イベントは含まれません。
 [3]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_clusterOptions
 [4]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_4lw
 [5]: https://cwiki.apache.org/confluence/display/ZOOKEEPER/ZooKeeper+SSL+User+Guide
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/

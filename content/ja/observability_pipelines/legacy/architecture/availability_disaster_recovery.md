@@ -1,7 +1,7 @@
 ---
-title: (LEGACY) High Availability and Disaster Recovery
 aliases:
-  - /observability_pipelines/architecture/availability_disaster_recovery/
+- /ja/observability_pipelines/architecture/availability_disaster_recovery/
+title: (LEGACY) High Availability and Disaster Recovery
 ---
 
 {{< site-region region="gov" >}}
@@ -58,5 +58,5 @@ Datadog のようなマネージドデスティネーションを使用してい
 
 {{< img src="observability_pipelines/production_deployment_overview/external_disaster_recovery.png" alt="観測可能性パイプラインワーカーを異なるゾーンに配置し、すべてのデータを同じ災害復旧宛先に送信している図" style="width:75%;" >}}
 
-[1]: /observability_pipelines/legacy/architecture/capacity_planning_scaling
-[2]: /observability_pipelines/legacy/architecture/networking
+[1]: /ja/observability_pipelines/legacy/architecture/capacity_planning_scaling
+[2]: /ja/observability_pipelines/legacy/architecture/networking

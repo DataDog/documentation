@@ -1,68 +1,68 @@
 ---
-"app_id": "cloudera"
-"app_uuid": "526ca1e8-f474-49cd-9a79-6cfe75de15fe"
-"assets":
-  "dashboards":
-    "Cloudera Data Platform Overview": assets/dashboards/cloudera_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": cloudera.cluster.cpu_percent_across_hosts
-      "metadata_path": metadata.csv
-      "prefix": cloudera.
-    "process_signatures":
+app_id: cloudera
+app_uuid: 526ca1e8-f474-49cd-9a79-6cfe75de15fe
+assets:
+  dashboards:
+    Cloudera Data Platform Overview: assets/dashboards/cloudera_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cloudera.cluster.cpu_percent_across_hosts
+      metadata_path: metadata.csv
+      prefix: cloudera.
+    process_signatures:
     - cdp
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10318"
-    "source_type_name": Cloudera
-  "monitors":
-    "Cloudera High CPU Usage": assets/monitors/cloudera_high_cpu.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10318
+    source_type_name: Cloudera
+  monitors:
+    Cloudera High CPU Usage: assets/monitors/cloudera_high_cpu.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - cloud
 - data stores
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "cloudera"
-"integration_id": "cloudera"
-"integration_title": "Cloudera"
-"integration_version": "2.2.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "cloudera"
-"public_title": "Cloudera"
-"short_description": "Cloudera"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: cloudera
+integration_id: cloudera
+integration_title: Cloudera
+integration_version: 2.2.0
+is_public: true
+manifest_version: 2.0.0
+name: cloudera
+public_title: Cloudera
+short_description: Cloudera
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Cloud"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Data Stores"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Cloudera
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Cloudera
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Data Stores
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Cloudera
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cloudera
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -137,7 +137,7 @@ The Cloudera check requires version 7 of Cloudera Manager.
 2. [Restart the Agent][2] to start collecting and sending Cloudera Data Hub cluster data to Datadog.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/cloudera/datadog_checks/cloudera/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -151,7 +151,7 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 | `<INIT_CONFIG>`      | `{"workload_username": "<WORKLOAD_USERNAME>", 'workload_password": "<WORKLOAD_PASSWORD>"}`                       |
 | `<INSTANCE_CONFIG>`  | `{"api_url": <API_URL>"}`                                                                                        |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -282,13 +282,13 @@ Additional helpful documentation, links, and articles:
 
 
 [1]: https://www.cloudera.com/products/cloudera-data-platform.html
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/user_management.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/create_machine_user.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/set_workload_password.png
 [7]: https://docs.cloudera.com/cloudera-manager/7.9.0/monitoring-and-diagnostics/topics/cm-tsquery-syntax.html
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.cloudera.com/data-hub/cloud/access-clusters/topics/mc-accessing-cluster-via-ssh.html
-[10]: https://docs.datadoghq.com/help/
+[10]: https://docs.datadoghq.com/ja/help/
 [11]: https://www.datadoghq.com/blog/cloudera-integration-announcement/

@@ -1,7 +1,7 @@
 ---
-title: Using the Docker integration with Podman container runtime
 aliases:
- - /agent/guide/podman-support-with-docker-integration
+- /ja/agent/guide/podman-support-with-docker-integration
+title: Using the Docker integration with Podman container runtime
 ---
 
 Podman は、Linux システムで OCI コンテナを開発、管理、実行するためのデーモンレスコンテナエンジンです。詳細については、[https://podman.io/][1] をご覧ください。
@@ -63,4 +63,4 @@ $ podman run -d --name dd-agent \
 どちらの場合も、Agent は root が管理するすべてのコンテナを検出し、すべてのコンテナに対して `container.*` メトリクスを出力する必要があります。
 
 [1]: https://podman.io/
-[2]: /agent/docker
+[2]: /ja/agent/docker

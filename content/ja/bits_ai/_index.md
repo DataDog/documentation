@@ -1,24 +1,24 @@
 ---
-title: Bits AI
 disable_toc: false
-private: false
-is_beta: true
 further_reading:
-    - link: "https://www.datadoghq.com/product/platform/bits-ai/"
-      tag: Product page
-      text: Bits AI
-    - link: "https://www.datadoghq.com/blog/datadog-bits-generative-ai/"
-      tag: Blog
-      text: Introducing Bits AI, Your New DevOps Copilot
-    - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
-      tag: Blog
-      text: Stay up to date on the latest incidents with Bits AI
-    - link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-bits-an-ai-assistant-to-help-engineers-quickly-resolve-application-issues/"
-      tag: Press release
-      text: Bits AI announcement
-    - link: "https://www.datadoghq.com/blog/bits-ai-autonomous-investigations/"
-      tag: ブログ
-      text: Reimagining the way you run operations with autonomous investigations
+- link: https://www.datadoghq.com/product/platform/bits-ai/
+  tag: Product page
+  text: Bits AI
+- link: https://www.datadoghq.com/blog/datadog-bits-generative-ai/
+  tag: Blog
+  text: Introducing Bits AI, Your New DevOps Copilot
+- link: https://www.datadoghq.com/blog/bits-ai-for-incident-management/
+  tag: Blog
+  text: Stay up to date on the latest incidents with Bits AI
+- link: https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-bits-an-ai-assistant-to-help-engineers-quickly-resolve-application-issues/
+  tag: Press release
+  text: Bits AI announcement
+- link: https://www.datadoghq.com/blog/bits-ai-autonomous-investigations/
+  tag: ブログ
+  text: Reimagining the way you run operations with autonomous investigations
+is_beta: true
+private: false
+title: Bits AI
 ---
 
 Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
@@ -66,7 +66,7 @@ Bits AI is in active development, and your feedback is valuable. To report issue
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/getting_started/
-[2]: /bits_ai/query_examples
-[3]: /service_management/incident_management
-[4]: /bits_ai/managing_incidents/
+[1]: /ja/bits_ai/getting_started/
+[2]: /ja/bits_ai/query_examples
+[3]: /ja/service_management/incident_management
+[4]: /ja/bits_ai/managing_incidents/

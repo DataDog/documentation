@@ -1,14 +1,16 @@
 ---
-title: (LEGACY) Set Up Observability Pipelines to Send Logs in Datadog-Rehydratable Format to Amazon S3 and Datadog
 aliases:
-  - /observability_pipelines/setup/datadog_with_archiving/
+- /ja/observability_pipelines/setup/datadog_with_archiving/
 further_reading:
-  - link: /observability_pipelines/legacy/production_deployment_overview/
-    tag: Documentation
-    text: Production deployment design and principles for the Observability Pipelines Worker
-  - link: "https://dtdg.co/d22op"
-    tag: ラーニングセンター
-    text: Safe and Secure Local Processing with Observability Pipelines
+- link: /observability_pipelines/legacy/production_deployment_overview/
+  tag: Documentation
+  text: Production deployment design and principles for the Observability Pipelines
+    Worker
+- link: https://dtdg.co/d22op
+  tag: ラーニングセンター
+  text: Safe and Secure Local Processing with Observability Pipelines
+title: (LEGACY) Set Up Observability Pipelines to Send Logs in Datadog-Rehydratable
+  Format to Amazon S3 and Datadog
 ---
 
 {{< site-region region="gov" >}}
@@ -76,7 +78,7 @@ See [Best Practices for OPW Aggregator Architecture][6] for production-level req
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 [2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
-[6]: /observability_pipelines/legacy/architecture/
+[6]: /ja/observability_pipelines/legacy/architecture/
 
 {{% /tab %}}
 {{% tab "APT ベースの Linux" %}}
@@ -368,7 +370,7 @@ service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zo
 See [AWS Load Balancer Controller][3] for more details.
 
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
-[2]: /observability_pipelines/legacy/architecture/capacity_planning_scaling/
+[2]: /ja/observability_pipelines/legacy/architecture/capacity_planning_scaling/
 [3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 
@@ -438,10 +440,10 @@ See [Rehydrating from Archives][4] for instructions on how to rehydrate your arc
 ## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/legacy/
-[2]: /account_management/api-app-keys/#api-keys
+[1]: /ja/observability_pipelines/legacy/
+[2]: /ja/account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/observability-pipelines/create
-[4]: /logs/log_configuration/rehydrating/
+[4]: /ja/logs/log_configuration/rehydrating/
 [5]: https://app.datadoghq.com/logs/pipelines/log-forwarding
-[6]: /logs/log_configuration/archives/#advanced-settings
-[7]: /logs/log_configuration/archives
+[6]: /ja/logs/log_configuration/archives/#advanced-settings
+[7]: /ja/logs/log_configuration/archives

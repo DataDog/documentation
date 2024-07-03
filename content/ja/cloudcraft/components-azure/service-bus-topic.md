@@ -1,5 +1,5 @@
 ---
-title: "Service bus topic Component"
+title: Service bus topic Component
 ---
 
 ## 概要

@@ -1,8 +1,6 @@
 ---
-title: Getting Started with OpenTelemetry at Datadog
-kind: documentation
 further_reading:
-- link: "https://opentelemetry.io/docs/"
+- link: https://opentelemetry.io/docs/
   tag: 外部サイト
   text: OpenTelemetry Documentation
 - link: /opentelemetry
@@ -11,18 +9,21 @@ further_reading:
 - link: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
   tag: Documentation
   text: Custom Instrumentation with OpenTelemetry
-- link: "https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog"
+- link: https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog
   tag: Blog
   text: Monitor runtime metrics from OTel-instrumented apps in Datadog APM
-- link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
+- link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: Blog
   text: Correlate Datadog RUM events with traces from OTel-instrumented applications
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter"
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter
   tag: Blog
-  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter
-- link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter"
+  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog
+    Exporter
+- link: https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter
   tag: Blog
   text: Forward logs from the OpenTelemetry Collector with the Datadog Exporter
+kind: documentation
+title: Getting Started with OpenTelemetry at Datadog
 ---
 
 
@@ -327,16 +328,16 @@ curl localhost:9090/calendar
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
 [3]: https://docs.docker.com/compose/install/
-[4]: /opentelemetry/collector_exporter/
+[4]: /ja/opentelemetry/collector_exporter/
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver/
-[6]: /getting_started/tagging/unified_service_tagging/
+[6]: /ja/getting_started/tagging/unified_service_tagging/
 [7]: https://app.datadoghq.com/services
-[8]: /tracing/glossary/#trace
+[8]: /ja/tracing/glossary/#trace
 [9]: https://www.datadoghq.com/knowledge-center/distributed-tracing/flame-graph/
-[10]: /opentelemetry/collector_exporter/otlp_receiver/
+[10]: /ja/opentelemetry/collector_exporter/otlp_receiver/
 [11]: https://opentelemetry.io/
 [12]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[14]: /opentelemetry/collector_exporter/
-[15]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[16]: /getting_started/site/
+[14]: /ja/opentelemetry/collector_exporter/
+[15]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[16]: /ja/getting_started/site/

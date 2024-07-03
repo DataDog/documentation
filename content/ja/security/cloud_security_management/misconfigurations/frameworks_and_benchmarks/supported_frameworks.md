@@ -1,9 +1,7 @@
 ---
-title: Supported Frameworks
-kind: documentation
 aliases:
-  - /security/misconfigurations/supported_frameworks
-  - /security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+- /ja/security/misconfigurations/supported_frameworks
+- /ja/security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
 further_reading:
 - link: security/cspm/setup
   tag: Documentation
@@ -14,9 +12,12 @@ further_reading:
 - link: security/cspm/findings
   tag: Documentation
   text: Search and explore misconfigurations
-- link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
+- link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
   tag: Blog
-  text: Datadog Security extends compliance and threat protection capabilities for Google Cloud
+  text: Datadog Security extends compliance and threat protection capabilities for
+    Google Cloud
+kind: documentation
+title: Supported Frameworks
 ---
 
 CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
@@ -60,7 +61,7 @@ CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_monitoring/default_rules/
+[1]: /ja/security_monitoring/default_rules/
 [2]: https://www.cisecurity.org/benchmark/amazon_web_services/
 [3]: https://www.cisecurity.org/benchmark/azure
 [4]: https://www.cisecurity.org/benchmark/docker
@@ -70,8 +71,8 @@ CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules
 [8]: https://www.iso.org/isoiec-27001-information-security.html
 [9]: https://www.hhs.gov/hipaa/index.html
 [10]: https://gdpr.eu/
-[11]: /security/cloud_siem/
-[12]: /integrations/amazon_cloudtrail/
+[11]: /ja/security/cloud_siem/
+[12]: /ja/integrations/amazon_cloudtrail/
 [22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform
 [23]: https://www.cisecurity.org/benchmark/ubuntu_linux
 [24]: https://www.cisecurity.org/benchmark/red_hat_linux

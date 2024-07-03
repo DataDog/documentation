@@ -1,68 +1,69 @@
 ---
-"app_id": "notion"
-"app_uuid": "0a709534-658c-4d8f-99a3-566dd7cd809b"
-"assets":
-  "dashboards":
-    "notion_events": assets/dashboards/NotionDashboard.json
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": []
-      "metadata_path": metadata.csv
-      "prefix": notion.
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10361"
-    "source_type_name": notion
-  "oauth": assets/oauth_clients.json
-"author":
-  "homepage": "https://www.notion.so/"
-  "name": Notion Labs, Inc.
-  "sales_email": integrations@makenotion.com
-  "support_email": team@makenotion.com
-"categories":
+app_id: notion
+app_uuid: 0a709534-658c-4d8f-99a3-566dd7cd809b
+assets:
+  dashboards:
+    notion_events: assets/dashboards/NotionDashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: notion.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10361
+    source_type_name: notion
+  oauth: assets/oauth_clients.json
+author:
+  homepage: https://www.notion.so/
+  name: Notion Labs, Inc.
+  sales_email: integrations@makenotion.com
+  support_email: team@makenotion.com
+categories:
 - log collection
 - collaboration
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/notion/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "notion"
-"integration_id": "notion"
-"integration_title": "Notion"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "notion"
-"public_title": "Notion"
-"short_description": "Monitor your Notion workspace events and customize detections in Datadog"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/notion/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: notion
+integration_id: notion
+integration_title: Notion
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: notion
+public_title: Notion
+short_description: Monitor your Notion workspace events and customize detections in
+  Datadog
+supported_os:
 - any
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Collaboration"
-  - "Supported OS::Any"
-  - "Submitted Data Type::Logs"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": Monitor your Notion workspace events and customize detections in Datadog
-  "media":
-  - "caption": Setting up the Datadog integration in Notion
-    "image_url": images/Notion_DD.png
-    "media_type": image
-  - "caption": Notion event logs in Datadog
-    "image_url": images/Notion_DD_2.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Notion
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Collaboration
+  - Supported OS::Any
+  - Submitted Data Type::Logs
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Monitor your Notion workspace events and customize detections in Datadog
+  media:
+  - caption: Setting up the Datadog integration in Notion
+    image_url: images/Notion_DD.png
+    media_type: image
+  - caption: Notion event logs in Datadog
+    image_url: images/Notion_DD_2.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Notion
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
@@ -95,8 +96,7 @@ In Notion, navigate to _Setting & Members_ > _Connections_ > _Workspace Connecti
 ## Support 
 Need help? Contact [Notion Support][4].
 
-[1]: https://docs.datadoghq.com/security/cloud_siem/
+[1]: https://docs.datadoghq.com/ja/security/cloud_siem/
 [2]: https://www.notion.so/help/audit-log
 [3]: https://app.datadoghq.com/organization-settings/api-keys?filter=Notion
 [4]: mailto:team@makenotion.com
-

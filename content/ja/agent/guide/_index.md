@@ -1,12 +1,12 @@
 ---
-title: Agent Guides
-private: true
-disable_toc: true
 cascade:
-    algolia:
-        rank: 70
-        category: Guide
-        subcategory: Agent Guides
+  algolia:
+    category: Guide
+    rank: 70
+    subcategory: Agent Guides
+disable_toc: true
+private: true
+title: Agent Guides
 ---
 
 {{< whatsnext desc="Configuration guides:" >}}

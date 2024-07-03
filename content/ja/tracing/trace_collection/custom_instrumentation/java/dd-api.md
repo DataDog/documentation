@@ -1,24 +1,24 @@
 ---
-title: Java Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
-    - /tracing/opentracing/java
-    - /tracing/manual_instrumentation/java
-    - /tracing/custom_instrumentation/java
-    - /tracing/setup_overview/custom_instrumentation/java
-    - /tracing/trace_collection/custom_instrumentation/java
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/java
-description: 'Instrument your code with the Datadog Java APM tracer.'
+- /ja/tracing/opentracing/java
+- /ja/tracing/manual_instrumentation/java
+- /ja/tracing/custom_instrumentation/java
+- /ja/tracing/setup_overview/custom_instrumentation/java
+- /ja/tracing/trace_collection/custom_instrumentation/java
+- /ja/tracing/trace_collection/custom_instrumentation/dd_libraries/java
 code_lang: dd-api
-type: multi-code-lang
 code_lang_weight: 1
+description: Instrument your code with the Datadog Java APM tracer.
 further_reading:
-    - link: tracing/other_telemetry/connect_logs_and_traces
-      tag: Documentation
-      text: Connect your Logs and Traces together
-    - link: tracing/glossary/
-      tag: Documentation
-      text: Explore your services, resources, and traces
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Connect your Logs and Traces together
+- link: tracing/glossary/
+  tag: Documentation
+  text: Explore your services, resources, and traces
+kind: documentation
+title: Java Custom Instrumentation using Datadog API
+type: multi-code-lang
 ---
 
 This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
@@ -349,14 +349,14 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/glossary/#span-tags
-[2]: /tracing/glossary/#spans
-[3]: /tracing/glossary/#trace
-[4]: /tracing/custom_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
-[5]: /tracing/setup/java/#compatibility
+[1]: /ja/tracing/glossary/#span-tags
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/tracing/glossary/#trace
+[4]: /ja/tracing/custom_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
+[5]: /ja/tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: /tracing/trace_collection/trace_context_propagation/java/
-[9]: /tracing/security
-[10]: /tracing/guide/ignoring_apm_resources/
-[11]: /tracing/setup/java/
+[8]: /ja/tracing/trace_collection/trace_context_propagation/java/
+[9]: /ja/tracing/security
+[10]: /ja/tracing/guide/ignoring_apm_resources/
+[11]: /ja/tracing/setup/java/

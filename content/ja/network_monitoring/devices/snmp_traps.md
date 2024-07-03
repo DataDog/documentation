@@ -1,10 +1,10 @@
 ---
-title: SNMP Traps
-description: "Enable listening for SNMP Traps."
+description: Enable listening for SNMP Traps.
 further_reading:
-  - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
-    tag: Blog
-    text: Monitor and diagnose network performance issues with SNMP Traps
+- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
+  tag: Blog
+  text: Monitor and diagnose network performance issues with SNMP Traps
+title: SNMP Traps
 ---
 
 ## 概要
@@ -131,7 +131,7 @@ MIB に依存関係がある場合、`ddev` はそれが見つかればオンラ
 
 
 
-[1]: /monitors/
-[2]: /network_monitoring/devices
-[3]: /developers/integrations/python
+[1]: /ja/monitors/
+[2]: /ja/network_monitoring/devices
+[3]: /ja/developers/integrations/python
 [4]: https://pypi.org/project/pysmi/

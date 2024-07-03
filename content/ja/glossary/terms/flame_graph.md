@@ -1,8 +1,8 @@
 ---
-title: flame graph
 core_product:
-  - apm
-  - continuous profiler
+- apm
+- continuous profiler
+title: flame graph
 ---
 A flame graph is a visualization of a trace, where bars represent spans and show the span's execution time as well as what called it and what calls it made. 
 

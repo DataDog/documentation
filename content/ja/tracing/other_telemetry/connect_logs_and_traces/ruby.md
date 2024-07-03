@@ -1,19 +1,19 @@
 ---
-title: Correlating Ruby Logs and Traces
-kind: documentation
-code_lang: ruby
-type: multi-code-lang
-code_lang_weight: 40
 aliases:
-  - /tracing/connect_logs_and_traces/ruby
-description: 'Connect your Ruby logs and traces to correlate them in Datadog.'
+- /ja/tracing/connect_logs_and_traces/ruby
+code_lang: ruby
+code_lang_weight: 40
+description: Connect your Ruby logs and traces to correlate them in Datadog.
 further_reading:
-    - link: "https://www.datadoghq.com/blog/request-log-correlation/"
-      tag: Blog
-      text: Correlate request logs with traces automatically
-    - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-      tag: Guide
-      text: Ease troubleshooting with cross product correlation.
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Correlate request logs with traces automatically
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Ease troubleshooting with cross product correlation.
+kind: documentation
+title: Correlating Ruby Logs and Traces
+type: multi-code-lang
 ---
 
 ## Trace correlation
@@ -72,5 +72,4 @@ Datadog::Tracing.trace('my.operation') { logger.warn('This is a traced operation
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-
+[1]: /ja/logs/log_configuration/processors/?tab=ui#trace-remapper

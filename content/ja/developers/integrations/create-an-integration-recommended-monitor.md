@@ -1,10 +1,10 @@
 ---
+description: Learn how to create a monitor for your integration.
 further_reading:
-- link: "https://docs.datadoghq.com/monitors/configuration/"
+- link: https://docs.datadoghq.com/monitors/configuration/
   tag: Documentation
   text: Configure Monitors
 title: Create an Integration-Recommended Monitor
-description: Learn how to create a monitor for your integration.
 ---
 ## 概要
 
@@ -77,12 +77,12 @@ Provides extra context around the failure mode and also about the impact this mo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/monitors/
+[1]: https://docs.datadoghq.com/ja/monitors/
 [2]: https://app.datadoghq.com/monitors/recommended
-[3]: https://docs.datadoghq.com/developers/integrations/agent_integration/
+[3]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration/
 [4]: https://app.datadoghq.com/monitors/create
-[5]: https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file
+[5]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#manifest-file
 [6]: https://github.com/DataDog/integrations-extras
-[7]: https://docs.datadoghq.com/monitors/configuration/
-[8]: https://docs.datadoghq.com/monitors/manage/#monitor-tags
+[7]: https://docs.datadoghq.com/ja/monitors/configuration/
+[8]: https://docs.datadoghq.com/ja/monitors/manage/#monitor-tags
 [9]: https://github.com/DataDog/marketplace

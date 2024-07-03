@@ -1,7 +1,6 @@
 ---
-title: Watchdog Insights
-kind: documentation
-description: View anomalies and outliers that match your search query with Watchdog Insights.
+description: View anomalies and outliers that match your search query with Watchdog
+  Insights.
 further_reading:
 - link: /logs/explorer/watchdog_insights/
   tag: Documentation
@@ -9,12 +8,15 @@ further_reading:
 - link: /real_user_monitoring/explorer/watchdog_insights/
   tag: Documentation
   text: Watchdog Insights for RUM
-- link: "https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/"
+- link: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
   tag: Blog
   text: Augmented troubleshooting with Watchdog Insights
-- link: "https://www.datadoghq.com/blog/watchdog-insights-apm/"
+- link: https://www.datadoghq.com/blog/watchdog-insights-apm/
   tag: Blog
-  text: Automatically detect error and latency patterns with Watchdog Insights for APM
+  text: Automatically detect error and latency patterns with Watchdog Insights for
+    APM
+kind: documentation
+title: Watchdog Insights
 ---
 
 ## Overview
@@ -95,8 +97,8 @@ In the full side panel view, you can see:
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
 
-[1]: /logs/explorer/facets/
-[2]: /logs/explorer/analytics/patterns
+[1]: /ja/logs/explorer/facets/
+[2]: /ja/logs/explorer/analytics/patterns
 {{% /tab %}}
 {{% tab "APM" %}}
 
@@ -239,9 +241,9 @@ In the full side panel, you can see a timeseries graph about the performance met
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
-[1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[1]: /ja/real_user_monitoring/explorer/search/#facets
+[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /ja/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
@@ -263,19 +265,19 @@ An overlay is then set on the function, with pink pills highlighting the differe
 
 {{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:100%;">}}
 
-[1]: /serverless/guide/serverless_warnings/#errors
+[1]: /ja/serverless/guide/serverless_warnings/#errors
 {{% /tab %}}
 {{% tab "Processes" %}}
 
 For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
 
-[1]: /watchdog/#overview
+[1]: /ja/watchdog/#overview
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kubernetes anomalies][1] for the current context of the Kubernetes Explorer.
 
-[1]: /watchdog/#overview
+[1]: /ja/watchdog/#overview
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -286,14 +288,14 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 
 [1]: https://app.datadoghq.com/logs
 [2]: https://app.datadoghq.com/apm/traces
-[3]: /tracing/services/service_page/
-[4]: /tracing/services/resource_page/
+[3]: /ja/tracing/services/service_page/
+[4]: /ja/tracing/services/resource_page/
 [5]: https://app.datadoghq.com/databases/list
 [6]: https://app.datadoghq.com/profiling/search
 [7]: https://app.datadoghq.com/process
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/orchestration/overview/pod
 [10]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
-[11]: /watchdog/#overview
+[11]: /ja/watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking

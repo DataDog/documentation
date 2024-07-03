@@ -1,27 +1,28 @@
 ---
-"categories":
-- "developer tools"
-- "notifications"
-"custom_kind": "integration"
-"dependencies": []
-"description": "Use any Webhook as a notification channel in Datadog alerts and events."
-"doc_link": "https://docs.datadoghq.com/integrations/webhooks/"
-"draft": false
-"further_reading":
-- "link": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/webhook"
-  "tag": "Terraform"
-  "text": "Create and manage webhooks with Terraform"
-"git_integration_title": "webhooks"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Webhooks"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "webhooks"
-"public_title": "Datadog-Webhooks Integration"
-"short_description": "Use any Webhook as a notification channel in Datadog alerts and events."
-"version": "1.0"
+categories:
+- developer tools
+- notifications
+custom_kind: integration
+dependencies: []
+description: Use any Webhook as a notification channel in Datadog alerts and events.
+doc_link: https://docs.datadoghq.com/integrations/webhooks/
+draft: false
+further_reading:
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/webhook
+  tag: Terraform
+  text: Create and manage webhooks with Terraform
+git_integration_title: webhooks
+has_logo: true
+integration_id: ''
+integration_title: Webhooks
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: webhooks
+public_title: Datadog-Webhooks Integration
+short_description: Use any Webhook as a notification channel in Datadog alerts and
+  events.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -406,4 +407,3 @@ Do not check the "Encode as form" checkbox.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/webhooks
-

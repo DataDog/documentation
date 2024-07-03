@@ -1,10 +1,10 @@
 ---
-title: heatmap
 core_product:
-  - ダッシュボード
-  - real user monitoring
+- ダッシュボード
+- real user monitoring
 related_terms:
-  - metric
+- metric
+title: heatmap
 ---
 The heatmap widget shows metrics aggregated across multiple tags. 
 

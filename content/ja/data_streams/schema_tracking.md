@@ -62,7 +62,7 @@ On the schemas tab, you can:
 - View a list of all schemas detected within the selected time frame, along with when it was first and last seen, its type (input or output schema), error rate, and throughput.
 - Expand a schema to view all of its fields.
 
-[1]: /data_streams/java/
+[1]: /ja/data_streams/java/
 [2]: https://github.com/DataDog/dd-trace-java
 [3]: https://app.datadoghq.com/data-streams/schemas
 [4]: https://app.datadoghq.com/data-streams/

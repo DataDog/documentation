@@ -1,72 +1,72 @@
 ---
-"app_id": "kubernetes-cluster-autoscaler"
-"app_uuid": "3a3fc186-af02-48e5-8b68-ee9ef37ea566"
-"assets":
-  "dashboards":
-    "Kubernetes Cluster Autoscaler Overview": assets/dashboards/kubernetes_cluster_autoscaler_overview.json
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": assets/configuration/spec.yaml
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": kubernetes_cluster_autoscaler.nodes.count
-      "metadata_path": metadata.csv
-      "prefix": kubernetes_cluster_autoscaler.
-    "process_signatures":
+app_id: kubernetes-cluster-autoscaler
+app_uuid: 3a3fc186-af02-48e5-8b68-ee9ef37ea566
+assets:
+  dashboards:
+    Kubernetes Cluster Autoscaler Overview: assets/dashboards/kubernetes_cluster_autoscaler_overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kubernetes_cluster_autoscaler.nodes.count
+      metadata_path: metadata.csv
+      prefix: kubernetes_cluster_autoscaler.
+    process_signatures:
     - cluster-autoscaler
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "14391189"
-    "source_type_name": Kubernetes Cluster Autoscaler
-  "logs":
-    "source": kubernetes_cluster_autoscaler
-  "monitors":
-    "Not safe to autoscale": assets/monitors/KCA_not_safe_to_autosclae.json
-    "Reporting Errors": assets/monitors/KCA_reporting_errors.json
-    "Unused Nodes Forcast": assets/monitors/KCA_unused_nodes_forecast.json
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com (日本語対応)
-  "support_email": help@datadoghq.com
-"categories":
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 14391189
+    source_type_name: Kubernetes Cluster Autoscaler
+  logs:
+    source: kubernetes_cluster_autoscaler
+  monitors:
+    Not safe to autoscale: assets/monitors/KCA_not_safe_to_autosclae.json
+    Reporting Errors: assets/monitors/KCA_reporting_errors.json
+    Unused Nodes Forcast: assets/monitors/KCA_unused_nodes_forecast.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
+categories:
 - モニター
 - kubernetes
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/kubernetes_cluster_autoscaler/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kubernetes_cluster_autoscaler"
-"integration_id": "kubernetes-cluster-autoscaler"
-"integration_title": "Kubernetes Cluster Autoscaler"
-"integration_version": "1.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "kubernetes_cluster_autoscaler"
-"public_title": "Kubernetes Cluster Autoscaler"
-"short_description": "Integration for Kubernetes Cluster Autoscaler"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/kubernetes_cluster_autoscaler/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: kubernetes_cluster_autoscaler
+integration_id: kubernetes-cluster-autoscaler
+integration_title: Kubernetes Cluster Autoscaler
+integration_version: 1.0.0
+is_public: true
+manifest_version: 2.0.0
+name: kubernetes_cluster_autoscaler
+public_title: Kubernetes Cluster Autoscaler
+short_description: Integration for Kubernetes Cluster Autoscaler
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Category::Metrics"
-  - "Category::Kubernetes"
-  - "Submitted Data Type::Metrics"
-  "configuration": "README.md#Setup"
-  "description": Integration for Kubernetes Cluster Autoscaler
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Kubernetes Cluster Autoscaler
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Metrics
+  - Category::Kubernetes
+  - Submitted Data Type::Metrics
+  configuration: README.md#Setup
+  description: Integration for Kubernetes Cluster Autoscaler
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubernetes Cluster Autoscaler
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -169,14 +169,13 @@ The Kubernetes Cluster Autoscaler integration does not include any events.
 
 
 [1]: **LINK_TO_INTEGRATION_SITE**
-[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_cluster_autoscaler/datadog_checks/kubernetes_cluster_autoscaler/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-monitor-cluster-autoscaler
 [7]: https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_cluster_autoscaler/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_cluster_autoscaler/assets/service_checks.json
-[11]: https://docs.datadoghq.com/help/
-
+[11]: https://docs.datadoghq.com/ja/help/

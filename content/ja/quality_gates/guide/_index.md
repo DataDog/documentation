@@ -1,13 +1,12 @@
 ---
-title: Quality Gates Guides
-kind: ガイド
-private: true
-disable_toc: true
 cascade:
-    algolia:
-        rank: 20
-        category: ガイド
-        subcategory: Quality Gates Guides
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: Quality Gates Guides
+disable_toc: true
+private: true
+title: Quality Gates Guides
 ---
 
 {{< whatsnext desc="Quality Gates Guides:" >}}

@@ -1,40 +1,42 @@
 ---
-title: Dashboards
 aliases:
-    - /guides/templating/
-    - /graphing/dashboards/
-    - /guides/graphing
-    - /graphing/miscellaneous/metrics_arithmetic
-    - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
-    - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
-    - /graphing/
-    - /dashboards/dashboards/
-    - /dashboards/screenboards/
-    - /dashboards/timeboards/
+- /ja/guides/templating/
+- /ja/graphing/dashboards/
+- /ja/guides/graphing
+- /ja/graphing/miscellaneous/metrics_arithmetic
+- /ja/graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
+- /ja/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
+- /ja/graphing/
+- /ja/dashboards/dashboards/
+- /ja/dashboards/screenboards/
+- /ja/dashboards/timeboards/
+cascade:
+  algolia:
+    rank: 70
+    tags:
+    - snapshot
+    - dashboards
 description: Visualize your data to gain insight
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Dashboards"
-    tag: Release Notes
-    text: Check out the latest Datadog Dashboards releases! (App login required).
-  - link: /dashboards/sharing/
-    tag: Documentation
-    text: Share your Graphs outside of Datadog
-  - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
-    tag: Blog
-    text: Add Dashboard widgets to your clipboard
-  - link: "https://www.datadoghq.com/blog/datadog-dashboards/"
-    tag: Blog
-    text: The new Datadog dashboards experience
-  - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
-    tag: Best Practices
-    text: Create great integration dashboards
-  - link: "https://dtdg.co/fe"
-    tag: Foundation Enablement
-    text: Join an interactive session on better visualizations with Dashboards
-cascade:
-    algolia:
-        rank: 70
-        tags: [snapshot, dashboards]
+- link: https://app.datadoghq.com/release-notes?category=Dashboards
+  tag: Release Notes
+  text: Check out the latest Datadog Dashboards releases! (App login required).
+- link: /dashboards/sharing/
+  tag: Documentation
+  text: Share your Graphs outside of Datadog
+- link: https://www.datadoghq.com/blog/datadog-clipboard/
+  tag: Blog
+  text: Add Dashboard widgets to your clipboard
+- link: https://www.datadoghq.com/blog/datadog-dashboards/
+  tag: Blog
+  text: The new Datadog dashboards experience
+- link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
+  tag: Best Practices
+  text: Create great integration dashboards
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Join an interactive session on better visualizations with Dashboards
+title: Dashboards
 ---
 
 ## 概要
@@ -111,7 +113,7 @@ cascade:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/mobile/
+[1]: /ja/service_management/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists

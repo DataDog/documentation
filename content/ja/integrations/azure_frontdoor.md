@@ -1,23 +1,23 @@
 ---
-"categories":
+categories:
 - cloud
 - azure
-"custom_kind": "インテグレーション"
-"dependencies": []
-"description": "Track key Azure Front Door metrics."
-"doc_link": "https://docs.datadoghq.com/integrations/azure_frontdoor/"
-"draft": false
-"git_integration_title": "azure_frontdoor"
-"has_logo": true
-"integration_id": ""
-"integration_title": "Microsoft Azure Front Door"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "azure_frontdoor"
-"public_title": "Datadog-Microsoft Azure Front Door Integration"
-"short_description": "Track key Azure Front Door metrics."
-"version": "1.0"
+custom_kind: インテグレーション
+dependencies: []
+description: Track key Azure Front Door metrics.
+doc_link: https://docs.datadoghq.com/integrations/azure_frontdoor/
+draft: false
+git_integration_title: azure_frontdoor
+has_logo: true
+integration_id: ''
+integration_title: Microsoft Azure Front Door
+integration_version: ''
+is_public: true
+manifest_version: '1.0'
+name: azure_frontdoor
+public_title: Datadog-Microsoft Azure Front Door Integration
+short_description: Track key Azure Front Door metrics.
+version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
@@ -53,7 +53,6 @@ Azure Front Door インテグレーションには、サービスのチェック
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_frontdoor/azure_frontdoor_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/ja/help/

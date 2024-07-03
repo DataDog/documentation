@@ -1,11 +1,11 @@
 ---
-title: Setting Up Database Monitoring for Google Cloud SQL managed MySQL
-description: Install and configure Database Monitoring for MySQL managed on Google Cloud SQL.
+description: Install and configure Database Monitoring for MySQL managed on Google
+  Cloud SQL.
 further_reading:
 - link: /integrations/mysql/
   tag: Documentation
   text: Basic MySQL Integration
-
+title: Setting Up Database Monitoring for Google Cloud SQL managed MySQL
 ---
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
@@ -204,9 +204,9 @@ instances:
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
 
-[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -257,9 +257,9 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][2]でパスワードを環境変数として渡す方法をご確認ください。
 
 
-[1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/faq/template_variables/
-[3]: /agent/configuration/secrets-management
+[1]: /ja/agent/docker/integrations/?tab=docker
+[2]: /ja/agent/faq/template_variables/
+[3]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -303,8 +303,8 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
+[2]: /ja/getting_started/site
+[3]: /ja/containers/kubernetes/installation/?tab=helm#installation
 
 ### マウントされたファイルで構成する
 
@@ -368,10 +368,10 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 `datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
+[1]: /ja/agent/cluster_agent
+[2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/configuration/secrets-management
+[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -397,12 +397,12 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /database_monitoring/data_collected/#sensitive-information
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
+[2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: /agent/configuration/agent-commands/#agent-status-and-information
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
-[7]: /integrations/google_cloudsql
-[8]: /database_monitoring/troubleshooting/?tab=mysql
+[7]: /ja/integrations/google_cloudsql
+[8]: /ja/database_monitoring/troubleshooting/?tab=mysql
 [9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema

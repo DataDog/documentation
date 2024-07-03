@@ -1,9 +1,9 @@
 ---
-title: Ruby Compatibility Requirements
-kind: documentation
 code_lang: ruby
-type: multi-code-lang
 code_lang_weight: 30
+kind: documentation
+title: Ruby Compatibility Requirements
+type: multi-code-lang
 ---
 
 ## Application Security capabilities support
@@ -119,5 +119,5 @@ These are supported on the following architectures:
 |-------------------| --------------------------- |
 | Devise            | 3.2.1
 
-[1]: /tracing/trace_collection/compatibility/ruby/
+[1]: /ja/tracing/trace_collection/compatibility/ruby/
 [2]: https://www.ruby-lang.org/

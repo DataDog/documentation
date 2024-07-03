@@ -1,60 +1,60 @@
 ---
-"app_id": "azure-active-directory"
-"app_uuid": "8c4717a8-93f0-4de6-b79b-1e7f52c94895"
-"assets":
-  "integration":
-    "auto_install": true
-    "configuration": {}
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": assets/service_checks.json
-    "source_type_id": !!int "10106"
-    "source_type_name": Azure Active Directory
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": Datadog
-  "sales_email": info@datadoghq.com
-  "support_email": help@datadoghq.com
-"categories":
+app_id: azure-active-directory
+app_uuid: 8c4717a8-93f0-4de6-b79b-1e7f52c94895
+assets:
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10106
+    source_type_name: Azure Active Directory
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
 - azure
 - cloud
 - log collection
 - security
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "azure_active_directory"
-"integration_id": "azure-active-directory"
-"integration_title": "Azure Active Directory"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "azure_active_directory"
-"public_title": "Azure Active Directory"
-"short_description": "Analyze your Azure Active Directory activity logs"
-"supported_os":
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: azure_active_directory
+integration_id: azure-active-directory
+integration_title: Azure Active Directory
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: azure_active_directory
+public_title: Azure Active Directory
+short_description: Analyze your Azure Active Directory activity logs
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Azure"
-  - "Category::Cloud"
-  - "Category::Log Collection"
-  - "Category::Security"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Analyze your Azure Active Directory activity logs
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Azure Active Directory
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Analyze your Azure Active Directory activity logs
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Active Directory
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -136,10 +136,9 @@ Datadog は、Azure アプリ登録、Key Vault キー、Key Vault シークレ�
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/overview-reports#activity-reports
-[2]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/
+[2]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/
 [3]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/tutorial-azure-monitor-stream-logs-to-event-hub
-[4]: https://docs.datadoghq.com/integrations/azure/
+[4]: https://docs.datadoghq.com/ja/integrations/azure/
 [5]: https://app.datadoghq.com/event/explorer
-[6]: https://docs.datadoghq.com/integrations/guide/azure-graph-api-permissions/
-[7]: https://docs.datadoghq.com/help
-
+[6]: https://docs.datadoghq.com/ja/integrations/guide/azure-graph-api-permissions/
+[7]: https://docs.datadoghq.com/ja/help

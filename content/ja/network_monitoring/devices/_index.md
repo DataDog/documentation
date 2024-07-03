@@ -1,29 +1,31 @@
 ---
-title: Network Device Monitoring
-description: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.
-aliases:
-    - /network_performance_monitoring/devices/
-further_reading:
-    - link: "https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/"
-      tag: Knowledge Center
-      text: SNMP Monitoring Overview
-    - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
-      tag: Blog
-      text: Monitor SNMP with Datadog
-    - link: "https://www.datadoghq.com/blog/monitor-meraki/"
-      tag: Blog
-      text: Monitor Cisco Meraki with Datadog
-    - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
-      tag: Blog
-      text: Monitor datacenters and network devices with Datadog
-    - link: "https://www.datadoghq.com/blog/network-device-monitoring/"
-      tag: Blog
-      text: Introducing Network Device Monitoring
-    - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
-      tag: Blog
-      text: Monitor and diagnose network performance issues with SNMP Traps
 algolia:
-  tags: [network device monitoring]
+  tags:
+  - network device monitoring
+aliases:
+- /ja/network_performance_monitoring/devices/
+description: Gain visibility into your network-connected devices, such as routers,
+  switches, servers, and firewalls.
+further_reading:
+- link: https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/
+  tag: Knowledge Center
+  text: SNMP Monitoring Overview
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  tag: Blog
+  text: Monitor SNMP with Datadog
+- link: https://www.datadoghq.com/blog/monitor-meraki/
+  tag: Blog
+  text: Monitor Cisco Meraki with Datadog
+- link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+  tag: Blog
+  text: Monitor datacenters and network devices with Datadog
+- link: https://www.datadoghq.com/blog/network-device-monitoring/
+  tag: Blog
+  text: Introducing Network Device Monitoring
+- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
+  tag: Blog
+  text: Monitor and diagnose network performance issues with SNMP Traps
+title: Network Device Monitoring
 ---
 
 ## 概要
@@ -147,15 +149,15 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
-[2]: /network_monitoring/devices/snmp_metrics/#autodiscovery
+[1]: /ja/network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
+[2]: /ja/network_monitoring/devices/snmp_metrics/#autodiscovery
 [3]: https://app.datadoghq.com/devices
 [4]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [5]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[6]: /monitors/types/metric/
-[7]: /integrations/meraki/
-[8]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
-[9]: /network_monitoring/devices/profiles/
+[6]: /ja/monitors/types/metric/
+[7]: /ja/integrations/meraki/
+[8]: /ja/network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
+[9]: /ja/network_monitoring/devices/profiles/
 [10]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com.yaml
 [11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tp-link.yaml
 [12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/a10.yaml
@@ -163,10 +165,10 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 [14]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/anue.yaml
 [15]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc.yaml
 [16]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/apc_ups.yaml
-[17]: https://docs.datadoghq.com/integrations/snmp_arista/
+[17]: https://docs.datadoghq.com/ja/integrations/snmp_arista/
 [18]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/arista.yaml
 [19]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_arista.yaml
-[20]: https://docs.datadoghq.com/integrations/snmp_aruba/
+[20]: https://docs.datadoghq.com/ja/integrations/snmp_aruba/
 [21]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-switch.yaml
 [22]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_aruba-base.yaml
 [23]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-access-point.yaml
@@ -225,7 +227,7 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 [77]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ixsystems-truenas.yaml
 [78]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ibm.yaml
 [79]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infinera-coriant-groove.yaml
-[213]:https://docs.datadoghq.com/integrations/rapdev_infoblox/
+[213]:https://docs.datadoghq.com/ja/integrations/rapdev_infoblox/
 [80]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infoblox-ipam.yaml
 [81]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_juniper.yaml
 [82]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-ex.yaml
@@ -267,19 +269,19 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 [119]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/western-digital-mycloud-ex2-ultra.yaml
 [120]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml
 [121]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml
-[200]: https://docs.datadoghq.com/integrations/crest_data_systems_barracuda_waf/
-[201]: https://docs.datadoghq.com/integrations/snmp_chatsworth_products/
-[202]: https://docs.datadoghq.com/integrations/snmp_cisco/
-[203]: https://docs.datadoghq.com/integrations/cisco_aci/?tab=host
-[204]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/
-[205]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_ise/
-[206]: https://docs.datadoghq.com/integrations/snmp_dell/
-[207]: https://docs.datadoghq.com/integrations/snmp_f5/
-[208]: https://docs.datadoghq.com/integrations/snmp_fortinet/
-[209]: https://docs.datadoghq.com/integrations/snmp_hewlett_packard_enterprise/
-[210]: https://docs.datadoghq.com/integrations/snmp_juniper/
-[211]: https://docs.datadoghq.com/integrations/pan_firewall/
-[212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
-[222]: https://docs.datadoghq.com/integrations/pan_firewall/
-[223]: https://docs.datadoghq.com/integrations/cisco_sdwan/
-[224]: /network_monitoring/devices/guide/device_profiles/
+[200]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_barracuda_waf/
+[201]: https://docs.datadoghq.com/ja/integrations/snmp_chatsworth_products/
+[202]: https://docs.datadoghq.com/ja/integrations/snmp_cisco/
+[203]: https://docs.datadoghq.com/ja/integrations/cisco_aci/?tab=host
+[204]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_cisco_asa/
+[205]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_cisco_ise/
+[206]: https://docs.datadoghq.com/ja/integrations/snmp_dell/
+[207]: https://docs.datadoghq.com/ja/integrations/snmp_f5/
+[208]: https://docs.datadoghq.com/ja/integrations/snmp_fortinet/
+[209]: https://docs.datadoghq.com/ja/integrations/snmp_hewlett_packard_enterprise/
+[210]: https://docs.datadoghq.com/ja/integrations/snmp_juniper/
+[211]: https://docs.datadoghq.com/ja/integrations/pan_firewall/
+[212]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_pfsense/
+[222]: https://docs.datadoghq.com/ja/integrations/pan_firewall/
+[223]: https://docs.datadoghq.com/ja/integrations/cisco_sdwan/
+[224]: /ja/network_monitoring/devices/guide/device_profiles/

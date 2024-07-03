@@ -1,68 +1,67 @@
 ---
-title: Send traces to the Agent by API
-kind: guide
-further_reading:
-  - link: /tracing/
-    tag: Documentation
-    text: Learn about Datadog APM tracing
-  - link: /tracing/glossary/
-    tag: Documentation
-    text: APM Terminology and Overview
 aliases:
-  - /api/latest/tracing/
-  - /api/v1/tracing/
-  - /api/v2/tracing/
+- /ja/api/latest/tracing/
+- /ja/api/v1/tracing/
+- /ja/api/v2/tracing/
+further_reading:
+- link: /tracing/
+  tag: Documentation
+  text: Learn about Datadog APM tracing
+- link: /tracing/glossary/
+  tag: Documentation
+  text: APM Terminology and Overview
+title: Send traces to the Agent by API
 ---
 
-Datadog APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
+Datadog の APM を使用すると、コードをトレースしてパフォーマンスメトリクスを収集し、アプリケーションのどの部分が実行に時間がかかるか、あるいは非効率であるかを特定できます。
 
-Tracing data is sent from your instrumented code to the Datadog Agent through an HTTP API. Datadog tracing libraries simplify sending metrics to the Datadog Agent. However you might want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog tracing library.
+トレーシングデータは、インスツルメントされたコードから HTTP API を介して Datadog Agent に送信されます。Datadog トレーシングライブラリを使用することで、Datadog Agent へのメトリクスの送信を簡略化できます。ただし、それらのライブラリを使用できないアプリケーションや、公式の Datadog トレーシングライブラリがまだ提供されていない言語で書かれたアプリケーションをインスツルメントするために、API を直接使用することもできます。
 
-The tracing API is an Agent API rather than a service side API. Submit your traces to the `http://localhost:8126/v0.3/traces` local endpoint so your Agent can forward them to Datadog.
+トレーシング API は、サービス側の API というよりはむしろ Agent の API です。トレースをローカルエンドポイント `http://localhost:8126/v0.3/traces` に送信して、それを Agent が Datadog に転送できるようにします。
 
-## Path
+## パス
 
 {{< code-block lang="bash" >}}
 PUT http://localhost:8126/v0.3/traces
 {{< /code-block >}}
 
-## Request
+## リクエスト
 
-Traces can be sent as an array of traces:
+トレースは、次のようなトレースの配列として送信されます。
 
 ```
 [ trace1, trace2, trace3 ]
 ```
-And each trace is an array of spans:
+それぞれのトレースは、次のようなスパンの配列となります。
 
 ```
 trace1 = [ span, span2, span3 ]
 ```
-and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on. Each span within a trace should use the same `trace_id`. However, `trace_id` and span_id must have different values.
+各スパンは `trace_id`、`span_id`、`resource` などを持つ辞書として機能します。トレース内の各スパンは同じ `trace_id` を使用する必要がありますが、`trace_id` と span_id は異なる値でなければなりません。
 
-### Model
+### モデル
 
-<div class="alert alert-info">Datadog tracing libraries support both 64-bit and 128-bit trace IDs. Read <a href="/tracing/guide/span_and_trace_id_format/">Span and Trace ID formats to learn more.</a></div>
+<div class="alert alert-info">Datadog トレーシングライブラリは、64 ビットおよび 128 ビットのトレースを両方サポートしています。詳しくは、<a href="/tracing/guide/span_and_trace_id_format/">トレースとスパン ID のフォーマット</a>をご覧ください。</div>
 
-| Field      | Type    | Description                           |
+| フィールド      | タイプ    | 説明                           |
 |------------|---------|---------------------------------------|
-| `duration`   | int64   | The duration of the request in nanoseconds. |
-| `error`      | int32   | Set this value to 1 to indicate if an error occurred. If an error occurs, you should pass additional information, such as the error message, type and stack information in the meta property. |
-| `meta`       | object  | A set of key-value metadata. Keys and values must be strings. |
-| - `<any-key>` | string | Additional properties for key-value metadata. |
-| モニター    | object  | A set of key-value metadata. Keys must be strings and values must be 64-bit floating point numbers. |
-| - `<any-key>` | double | Additional properties for key-value metrics. |
-| name       | string  | The span name. The span name must not be longer than 100 characters. |
-| `parent_id`  | int64   | The span integer ID of the parent span. |
-| `resource`   | string  | The resource you are tracing. The resource name must not be longer than 5000 characters. |
-| `service`    | string  | The service you are tracing. The service name must not be longer than 100 characters. |
-| `span_id`    | int64   | The span integer (64-bit unsigned) ID. |
-| `start`      | int64   | The start time of the request in nanoseconds from the UNIX epoch. |
-| `trace_id`   | int64 or int128   | The unique integer (64-bit unsigned or 128-bit unsigned) ID of the trace containing this span. |
-| `type`       | enum    | The type of request. Allowed enum values: `web`, `db`, `cache`, `custom` |
+| `duration`   | int64   | リクエストの処理時間 (ナノ秒単位)。 |
+| `error`      | int32   | エラーが発生したことを示すには、この値を 1 に設定します。エラーが発生した場合は、エラーメッセージ、タイプ、スタックなどの追加情報を meta プロパティで渡す必要があります。 |
+| `meta`       | オブジェクト  | キー/値メタデータのセット。キーと値は文字列でなければなりません。 |
+| - `<any-key>` | 文字列 | キー値メタデータの追加のプロパティ。 |
+| モニター    | オブジェクト  | キー/値メタデータのセット。キーは文字列、値は 64 ビット浮動小数点数でなければなりません。 |
+| - `<any-key>` | double | キー値メトリクスの追加のプロパティ。 |
+| name       | 文字列  | スパン名。スパン名の長さは、最大 100 文字です。 |
+| `parent_id`  | int64   | 親スパンの整数ID。 |
+| `resource`   | 文字列  | トレース対象のリソース。リソース名の長さは、最大 5000 文字です。 |
+| `service`    | 文字列  | トレース対象のサービス。サービス名の長さは、最大 100 文字です。 |
+| `span_id`    | int64   | スパンの整数 (64 ビット符号なし) ID。 |
+| `start`      | int64   | リクエストの開始時間を UNIX Epoch からのナノ秒で指定します。 |
+| `trace_id`   | int64 または int128   | このスパンが含まれるトレースの一意の整数 (64 ビット符号なし、または 128 ビット符号なし) ID。 |
+| `type`       | enum    | リクエストの種類。`web`、`db`、`cache`、`custom` などの enum 値を許容します。 |
 
 
-### Example
+### 例
 
 {{< code-block lang="json" >}}
 [
@@ -90,19 +89,19 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 {{< /code-block >}}
 
 
-## Response
+## 応答
 
 200
 : OK
 
-### Example
+### 例
 
 {{< tabs >}}
 
 {{% tab "Shell" %}}
 
 {{< code-block lang="curl" >}}
-# Curl command
+# Curl コマンド
 curl -X PUT "http://localhost:8126/v0.3/traces" \
 -H "Content-Type: application/json" \
 -d @- << EOF
@@ -127,7 +126,7 @@ EOF
 {{% tab "Powershell" %}}
 {{< code-block lang="curl" >}}
 
-# Invoke-RestMethod command
+# Invoke-RestMethod コマンド
 
 $uri = "http://localhost:8126/v0.3/traces"
 $headers = @{
@@ -154,6 +153,6 @@ Invoke-RestMethod -Uri $uri -Method Put -Body $body -Headers $headers
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

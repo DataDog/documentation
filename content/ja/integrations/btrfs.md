@@ -1,59 +1,61 @@
 ---
-"app_id": "btrfs"
-"app_uuid": "471f9447-678b-4199-9503-7170b65d07c5"
-"assets":
-  "dashboards":
-    "btrfs": "assets/dashboards/btrfs_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "system.disk.btrfs.total"
-      "metadata_path": "metadata.csv"
-      "prefix": "system.disk.btrfs."
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "89"
-    "source_type_name": "Btrfs"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "os & system"
-"custom_kind": "インテグレーション"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "btrfs"
-"integration_id": "btrfs"
-"integration_title": "Btrfs"
-"integration_version": "2.3.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "btrfs"
-"public_title": "Btrfs"
-"short_description": "Monitor usage on Btrfs volumes so you can respond before they fill up."
-"supported_os":
-- "linux"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Supported OS::Linux"
-  - "Supported OS::macOS"
-  - "Category::OS & System"
-  "configuration": "README.md#Setup"
-  "description": "Monitor usage on Btrfs volumes so you can respond before they fill up."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "Btrfs"
+app_id: btrfs
+app_uuid: 471f9447-678b-4199-9503-7170b65d07c5
+assets:
+  dashboards:
+    btrfs: assets/dashboards/btrfs_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.disk.btrfs.total
+      metadata_path: metadata.csv
+      prefix: system.disk.btrfs.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 89
+    source_type_name: Btrfs
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- os & system
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: btrfs
+integration_id: btrfs
+integration_title: Btrfs
+integration_version: 2.3.0
+is_public: true
+manifest_version: 2.0.0
+name: btrfs
+public_title: Btrfs
+short_description: Monitor usage on Btrfs volumes so you can respond before they fill
+  up.
+supported_os:
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Monitor usage on Btrfs volumes so you can respond before they fill
+    up.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Btrfs
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -103,10 +105,9 @@ Need help? Contact [Datadog support][8].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/btrfs/images/btrfs_metric.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/btrfs/datadog_checks/btrfs/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/btrfs/metadata.csv
-[8]: https://docs.datadoghq.com/help/
-
+[8]: https://docs.datadoghq.com/ja/help/

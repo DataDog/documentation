@@ -1,12 +1,12 @@
 ---
-title: Threat Intelligence
 further_reading:
-- link: "https://docs.datadoghq.com/security/threat_intelligence/"
+- link: https://docs.datadoghq.com/security/threat_intelligence/
   tag: Documentation
   text: Threat Intelligence at Datadog
 - link: /security/application_security/
   tag: Documentation
   text: Protect against threats with Datadog Application Security Management
+title: Threat Intelligence
 ---
 
 ## 概要
@@ -135,12 +135,12 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threat_intelligence/#threat-intelligence-sources
-[2]: /integrations/guide/reference-tables
-[3]: /security/threat_intelligence/#threat-intelligence-facets
+[1]: /ja/security/threat_intelligence/#threat-intelligence-sources
+[2]: /ja/integrations/guide/reference-tables
+[3]: /ja/security/threat_intelligence/#threat-intelligence-facets
 [4]: https://app.datadoghq.com/reference-tables/create
 [5]: https://app.datadoghq.com/security/configuration/asm/threat-intel
 [6]: https://app.datadoghq.com/security/configuration/asm/rules/edit/kdb-irk-nua?product=appsec
-[7]: /security/threat_intelligence#threat-intelligence-categories
-[8]: /security/threat_intelligence#threat-intelligence-intents
+[7]: /ja/security/threat_intelligence#threat-intelligence-categories
+[8]: /ja/security/threat_intelligence#threat-intelligence-intents
 [9]: https://app.datadoghq.com/security/appsec/traces

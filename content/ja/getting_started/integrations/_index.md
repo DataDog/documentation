@@ -1,13 +1,13 @@
 ---
-title: Introduction to Integrations
-kind: documentation
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/intro-to-integrations"
-    tag: Learning Center
-    text: Introduction to Integrations
-  - link: /integrations/
-    tag: Documentation
-    text: See a list of Datadog integrations
+- link: https://learn.datadoghq.com/courses/intro-to-integrations
+  tag: Learning Center
+  text: Introduction to Integrations
+- link: /integrations/
+  tag: Documentation
+  text: See a list of Datadog integrations
+kind: documentation
+title: Introduction to Integrations
 ---
 
 ## Overview
@@ -188,47 +188,47 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/agent_integration/
+[1]: /ja/developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
-[3]: /integrations/slack/
-[4]: /integrations/amazon_web_services/
-[5]: /integrations/azure/
-[6]: /integrations/pagerduty/
-[7]: /api/
-[8]: /integrations/node/
-[9]: /integrations/python/
-[10]: /developers/custom_checks/write_agent_check/
+[3]: /ja/integrations/slack/
+[4]: /ja/integrations/amazon_web_services/
+[5]: /ja/integrations/azure/
+[6]: /ja/integrations/pagerduty/
+[7]: /ja/api/
+[8]: /ja/integrations/node/
+[9]: /ja/integrations/python/
+[10]: /ja/developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
-[14]: /agent/guide/integration-management/
+[14]: /ja/agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings/agent/latest
-[16]: /account_management/api-app-keys/
+[16]: /ja/account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
-[18]: /integrations/
+[18]: /ja/integrations/
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[21]: /agent/guide/agent-commands/#restart-the-agent
-[22]: /developers/integrations/check_references/#param-specification
+[21]: /ja/agent/guide/agent-commands/#restart-the-agent
+[22]: /ja/developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /developers/custom_checks/write_agent_check/#updating-the-collection-interval
-[25]: /getting_started/tagging/
-[26]: /getting_started/agent/#setup
-[27]: /getting_started/tagging/unified_service_tagging/
-[28]: /agent/guide/agent-commands/#agent-status-and-information
-[29]: /infrastructure/process/
-[30]: /data_security/
-[31]: /metrics/explorer/
-[32]: /dashboards/
-[33]: /monitors/
-[34]: /logs/
-[35]: /tracing/
-[36]: /synthetics/
-[37]: /agent/troubleshooting/
-[38]: /help/
-[39]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[24]: /ja/developers/custom_checks/write_agent_check/#updating-the-collection-interval
+[25]: /ja/getting_started/tagging/
+[26]: /ja/getting_started/agent/#setup
+[27]: /ja/getting_started/tagging/unified_service_tagging/
+[28]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[29]: /ja/infrastructure/process/
+[30]: /ja/data_security/
+[31]: /ja/metrics/explorer/
+[32]: /ja/dashboards/
+[33]: /ja/monitors/
+[34]: /ja/logs/
+[35]: /ja/tracing/
+[36]: /ja/synthetics/
+[37]: /ja/agent/troubleshooting/
+[38]: /ja/help/
+[39]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [40]: https://app.datadoghq.com/event/explorer
 [41]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[42]: /metrics/
-[43]: /metrics/custom_metrics/
-[44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
-[45]: /account_management/rbac/permissions/#integrations
+[42]: /ja/metrics/
+[43]: /ja/metrics/custom_metrics/
+[44]: /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /ja/account_management/rbac/permissions/#integrations

@@ -1,5 +1,5 @@
 ---
-title: "SNS Subscriptions Component"
+title: SNS Subscriptions Component
 ---
 ## 概要
 

@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting Data Streams Monitoring
 description: Troubleshoot Data Streams Monitoring
+title: Troubleshooting Data Streams Monitoring
 ---
 
 {{% site-region region="gov,ap1" %}}
@@ -49,13 +49,13 @@ Queue タブにメトリクスを入力するためには、セルフホスト�
 * Confluent Cloud: DSM でインスツルメンテーションしたクラスターに [Confluent Cloud インテグレーション][10]が設定されていれば、クラスターの情報は DSM に自動的に伝播されます。
 * Confluent Platform: 上記のセルフホスティング Kafka と同様に、`kafka_cluster` タグを Agent の構成に追加する必要があります。
 
-[1]: /data_streams/#setup  
-[2]: /data_streams/go/
+[1]: /ja/data_streams/#setup  
+[2]: /ja/data_streams/go/
 [3]: https://github.com/DataDog/dd-trace-java/blob/76f25aedf70254cb04d55eedbed6e12921c6e509/dd-trace-api/src/main/java/datadog/trace/api/experimental/DataStreamsCheckpointer.java#L25
-[4]: /data_streams/#setup
-[5]: /integrations/kafka/?tab=host#kafka-consumer-integration
-[6]: /integrations/rabbitmq/?tab=host
-[7]: /integrations/kafka/?tab=host
-[8]: /help/
-[9]: https://docs.datadoghq.com/integrations/amazon_msk/ 
-[10]: https://docs.datadoghq.com/integrations/confluent_cloud/
+[4]: /ja/data_streams/#setup
+[5]: /ja/integrations/kafka/?tab=host#kafka-consumer-integration
+[6]: /ja/integrations/rabbitmq/?tab=host
+[7]: /ja/integrations/kafka/?tab=host
+[8]: /ja/help/
+[9]: https://docs.datadoghq.com/ja/integrations/amazon_msk/ 
+[10]: https://docs.datadoghq.com/ja/integrations/confluent_cloud/

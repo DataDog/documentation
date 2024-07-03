@@ -1,34 +1,34 @@
 ---
-title: Tracing PHP Applications
-kind: documentation
 aliases:
-- /tracing/languages/php
-- /agent/apm/php/
-- /tracing/php/
-- /tracing/setup/php
-- /tracing/setup_overview/php
-- /tracing/setup_overview/setup/php
-- /tracing/faq/php-tracer-manual-installation/
-- /tracing/trace_collection/dd_libraries/php/
+- /ja/tracing/languages/php
+- /ja/agent/apm/php/
+- /ja/tracing/php/
+- /ja/tracing/setup/php
+- /ja/tracing/setup_overview/php
+- /ja/tracing/setup_overview/setup/php
+- /ja/tracing/faq/php-tracer-manual-installation/
+- /ja/tracing/trace_collection/dd_libraries/php/
 code_lang: php
-type: multi-code-lang
 code_lang_weight: 40
 further_reading:
 - link: /tracing/guide/trace-php-cli-scripts/
   tag: ガイド
   text: Tracing PHP CLI Scripts
-- link: "https://www.datadoghq.com/blog/monitor-php-performance/"
+- link: https://www.datadoghq.com/blog/monitor-php-performance/
   tag: Blog
   text: PHP monitoring with Datadog APM and distributed tracing
-- link: "https://github.com/DataDog/dd-trace-php"
+- link: https://github.com/DataDog/dd-trace-php
   tag: ソースコード
   text: Source code
-- link: "https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md"
+- link: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
   tag: ソースコード
   text: Contributing to the open source project
 - link: /tracing/glossary/
   tag: Documentation
   text: Explore your services, resources and traces
+kind: documentation
+title: Tracing PHP Applications
+type: multi-code-lang
 ---
 ## Compatibility requirements
 
@@ -477,17 +477,17 @@ For Apache, run:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/php
+[1]: /ja/tracing/compatibility_requirements/php
 [2]: https://app.datadoghq.com/apm/service-setup
-[3]: /tracing/glossary/
+[3]: /ja/tracing/glossary/
 [4]: https://app.datadoghq.com/apm/traces
 [5]: https://github.com/DataDog/dd-trace-php/releases
-[6]: /tracing/trace_collection/library_config/php/
-[7]: /tracing/guide/trace-php-cli-scripts/
+[6]: /ja/tracing/trace_collection/library_config/php/
+[7]: /ja/tracing/guide/trace-php-cli-scripts/
 [8]: https://packages.sury.org/php/
 [9]: https://wiki.debian.org/HowToGetABacktrace
 [10]: https://launchpad.net/~ondrej/+archive/ubuntu/php
 [11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
 [12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
 [13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
-[14]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[14]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

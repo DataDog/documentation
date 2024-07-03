@@ -1,7 +1,7 @@
 ---
-title: Migrate to OpenTelemetry Collector version 0.95.0+
 aliases:
-- /opentelemetry/guide/switch_from_processor_to_connector
+- /ja/opentelemetry/guide/switch_from_processor_to_connector
+title: Migrate to OpenTelemetry Collector version 0.95.0+
 ---
 
 [OTel Collector Contrib version 0.95.0][1] disables Trace Metrics computation in the Datadog Exporter by default.
@@ -92,4 +92,4 @@ otelcol --config=config.yaml --feature-gates=-exporter.datadogexporter.DisableAP
 For questions or assistance, contact [Datadog support][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: https://docs.datadoghq.com/help/
+[2]: https://docs.datadoghq.com/ja/help/

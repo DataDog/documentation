@@ -1,7 +1,6 @@
 ---
-title: Kubernetes APM - Trace Collection
 aliases:
-    - /agent/kubernetes/apm
+- /ja/agent/kubernetes/apm
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentation
@@ -18,6 +17,7 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentation
   text: Assign tags to all data emitted by a container
+title: Kubernetes APM - Trace Collection
 ---
 
 {{< learning-center-callout header="Try Introduction to Monitoring Kubernetes in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}
@@ -96,7 +96,7 @@ To disable APM, set `datadog.apm.socketEnabled` to `false`.
 
 **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `datadog.kubelet.tlsVerify` to `false`.
 
-[1]: /containers/kubernetes/installation?tab=helm#installation
+[1]: /ja/containers/kubernetes/installation?tab=helm#installation
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -109,8 +109,8 @@ Datadog Admission Controller は、Datadog Cluster Agent のコンポーネン�
 
 Datadog Admission Controller を使用して環境変数を挿入し、新しいアプリケーションポッドに必要なボリュームをマウントすることで、ポッドと Agent のトレース通信を自動で構成します。Datadog Agent にトレースを送信するためにアプリケーションを自動的に構成する方法については、[Admission Controller を使ったライブラリの挿入][2]のドキュメントを参照してください。
 
-[1]: /agent/cluster_agent/admission_controller/
-[2]: /tracing/trace_collection/library_injection_local/
+[1]: /ja/agent/cluster_agent/admission_controller/
+[2]: /ja/tracing/trace_collection/library_injection_local/
 {{% /tab %}}
 
 {{% tab "Unix Domain Socket (UDS)" %}}
@@ -165,7 +165,7 @@ kind: Deployment
 ### アプリケーショントレーサーがトレースを発するように構成します。
 Datadog Agent がトレースを収集するように構成し、アプリケーションポッドにトレースの送信先に関する構成を行った後、Datadog トレーサーをアプリケーションにインストールして、トレースを送信します。これが完了すると、トレーサーは適切な `DD_AGENT_HOST` エンドポイントにトレースを自動的に送出します。
 
-[1]: /agent/cluster_agent/admission_controller/
+[1]: /ja/agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -310,15 +310,15 @@ List of environment variables available for configuring APM:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /containers/kubernetes/installation
-[2]: /tracing/setup/
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /tracing/configure_data_security/?tab=kubernetes#replace-tags
-[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[1]: /ja/containers/kubernetes/installation
+[2]: /ja/tracing/setup/
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: /ja/tracing/configure_data_security/?tab=kubernetes#replace-tags
+[5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 [6]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
-[7]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
+[7]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard#environment-variables
 [8]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
-[9]: /tracing/guide/setting_up_apm_with_kubernetes_service/
-[10]: /tracing
-[11]: /tracing/guide/ignoring_apm_resources/?tab=kubernetes
-[12]: /agent/configuration/dual-shipping/
+[9]: /ja/tracing/guide/setting_up_apm_with_kubernetes_service/
+[10]: /ja/tracing
+[11]: /ja/tracing/guide/ignoring_apm_resources/?tab=kubernetes
+[12]: /ja/agent/configuration/dual-shipping/

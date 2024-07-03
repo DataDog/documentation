@@ -1,13 +1,13 @@
 ---
-title: Container Discovery Management
 aliases:
- - /agent/autodiscovery/management
- - /agent/kubernetes/management
- - /agent/guide/autodiscovery-management
+- /ja/agent/autodiscovery/management
+- /ja/agent/kubernetes/management
+- /ja/agent/guide/autodiscovery-management
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
   text: Create and load an Autodiscovery Integration Template
+title: Container Discovery Management
 ---
 
 デフォルトで、Datadog Agent は、利用可能なすべてのコンテナを自動的に検出する設定になっています。検出パラメーターを制限したりデータの収集をコンテナのサブセットのみに制限するには、それぞれのコンフィギュレーションで取り扱いを設定します。
@@ -269,4 +269,4 @@ metadata:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /containers/kubernetes/log/?tab=helm#log-collection
+[1]: /ja/containers/kubernetes/log/?tab=helm#log-collection

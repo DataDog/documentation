@@ -1,9 +1,8 @@
 ---
-title: Signals Explorer
 aliases:
-  - /security_platform/cspm/signals_explorer
-  - /security/cspm/signals_explorer
-  - /security/misconfigurations/signals_explorer
+- /ja/security_platform/cspm/signals_explorer
+- /ja/security/cspm/signals_explorer
+- /ja/security/misconfigurations/signals_explorer
 further_reading:
 - link: security/default_rules
   tag: Documentation
@@ -11,9 +10,10 @@ further_reading:
 - link: security/cspm/frameworks_and_benchmarks
   tag: Documentation
   text: Learn about supported frameworks and industry benchmarks
-- link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
+- link: https://www.datadoghq.com/blog/datadog-csm-windows/
   tag: Blog
   text: Secure your Windows workloads with Datadog Cloud Security Management
+title: Signals Explorer
 ---
 
 ## 概要
@@ -62,7 +62,7 @@ Below is the message for the rule, including a description of misconfiguration a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/misconfigurations/findings/
-[2]: /security/cloud_siem/
-[3]: /security/threats/
+[1]: /ja/security/cloud_security_management/misconfigurations/findings/
+[2]: /ja/security/cloud_siem/
+[3]: /ja/security/threats/
 [4]: https://app.datadoghq.com/security

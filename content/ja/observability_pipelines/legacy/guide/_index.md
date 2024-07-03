@@ -1,15 +1,15 @@
 ---
-title: (LEGACY) Observability Pipelines Guides
-private: true
-disable_toc: true
 aliases:
-    - /integrations/observability_pipelines/guide/
-    - /observability_pipelines/guide/custom-metrics-governance
+- /ja/integrations/observability_pipelines/guide/
+- /ja/observability_pipelines/guide/custom-metrics-governance
 cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: Observability Pipelines Guides
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: Observability Pipelines Guides
+disable_toc: true
+private: true
+title: (LEGACY) Observability Pipelines Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}

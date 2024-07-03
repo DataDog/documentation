@@ -1,6 +1,6 @@
 ---
-title: Google Kubernetes Engine (GKE)
 core_product:
-  - infrastructure monitoring
+- infrastructure monitoring
+title: Google Kubernetes Engine (GKE)
 ---
 GKE is a managed Kubernetes service.

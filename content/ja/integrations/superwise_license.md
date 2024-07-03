@@ -1,83 +1,87 @@
 ---
-"algolia":
-  "subcategory": Marketplace Integrations
-"app_id": "superwise-license"
-"app_uuid": "f15082a6-d0ed-4f6f-a315-f7cbcaae6823"
-"assets": {}
-"author":
-  "homepage": "https://www.superwise.ai"
-  "name": Superwise
-  "sales_email": sales@superwise.ai
-  "support_email": support@superwise.ai
-  "vendor_id": superwise
-"categories":
+algolia:
+  subcategory: Marketplace Integrations
+app_id: superwise-license
+app_uuid: f15082a6-d0ed-4f6f-a315-f7cbcaae6823
+assets: {}
+author:
+  homepage: https://www.superwise.ai
+  name: Superwise
+  sales_email: sales@superwise.ai
+  support_email: support@superwise.ai
+  vendor_id: superwise
+categories:
 - incidents
 - marketplace
 - notifications
 - ai/ml
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "superwise_license"
-"integration_id": "superwise-license"
-"integration_title": "Superwise Model Observability"
-"integration_version": ""
-"is_public": true
-"legal_terms":
-  "eula": assets/eula.pdf
-"manifest_version": "2.0.0"
-"name": "superwise_license"
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.superwise
-  "product_id": license
-  "short_description": Priced per model per month and decreases as you scale
-  "tag": models
-  "unit_label": Model monitored
-  "unit_price": !!float "199.0"
-"public_title": "Superwise Model Observability"
-"short_description": "Self-service ML observability and monitoring SaaS platform."
-"supported_os":
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: superwise_license
+integration_id: superwise-license
+integration_title: Superwise Model Observability
+integration_version: ''
+is_public: true
+legal_terms:
+  eula: assets/eula.pdf
+manifest_version: 2.0.0
+name: superwise_license
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.superwise
+  product_id: license
+  short_description: Priced per model per month and decreases as you scale
+  tag: models
+  unit_label: Model monitored
+  unit_price: 199.0
+public_title: Superwise Model Observability
+short_description: Self-service ML observability and monitoring SaaS platform.
+supported_os:
 - linux
 - windows
 - macos
-"tile":
-  "changelog": CHANGELOG.md
-  "classifier_tags":
-  - "Category::Incidents"
-  - "Category::Marketplace"
-  - "Category::Notifications"
-  - "Category::AI/ML"
-  - "Offering::Software License"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  "configuration": "README.md#Setup"
-  "description": Self-service ML observability and monitoring SaaS platform.
-  "media":
-  - "caption": Superwise helps ML engineering teams monitor model health in production and shortens the time to detect and resolve.
-    "image_url": images/1_4.png
-    "media_type": image
-  - "caption": Superwise model observability dashboard gives you out-of-the-box visibility into model activity, drift, and open incidents. 
-    "image_url": images/2_4.png
-    "media_type": image
-  - "caption": Superwise incidents let you drill into monitoring policy violations and identify root causes quickly.
-    "image_url": images/3_4.png
-    "media_type": image
-  - "caption": With the monitoring policy builder, it is easy to configure policies across metrics, features, and subpopulations and send them to Datadog.
-    "image_url": images/4_4.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": blog
-    "url": "https://www.datadoghq.com/blog/superwise-datadog-marketplace/"
-  - "resource_type": documentation
-    "url": "https://docs.superwise.ai"
-  "support": "README.md#Support"
-  "title": Superwise Model Observability
-  "uninstallation": "README.md#Uninstallation"
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Incidents
+  - Category::Marketplace
+  - Category::Notifications
+  - Category::AI/ML
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Self-service ML observability and monitoring SaaS platform.
+  media:
+  - caption: Superwise helps ML engineering teams monitor model health in production
+      and shortens the time to detect and resolve.
+    image_url: images/1_4.png
+    media_type: image
+  - caption: Superwise model observability dashboard gives you out-of-the-box visibility
+      into model activity, drift, and open incidents.
+    image_url: images/2_4.png
+    media_type: image
+  - caption: Superwise incidents let you drill into monitoring policy violations and
+      identify root causes quickly.
+    image_url: images/3_4.png
+    media_type: image
+  - caption: With the monitoring policy builder, it is easy to configure policies
+      across metrics, features, and subpopulations and send them to Datadog.
+    image_url: images/4_4.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
+  - resource_type: documentation
+    url: https://docs.superwise.ai
+  support: README.md#Support
+  title: Superwise Model Observability
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
