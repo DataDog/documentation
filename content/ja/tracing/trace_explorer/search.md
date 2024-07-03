@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/query_syntax
   tag: ドキュメント
   text: 検索構文
-kind: documentation
 title: スパンを検索する
 ---
 

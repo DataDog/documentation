@@ -1,6 +1,5 @@
 ---
 title: Dynamic Instrumentation
-kind: documentation
 aliases:
     - /tracing/dynamic_instrumentation/
     - /dynamic_instrumentation/how-it-works/

@@ -1,6 +1,5 @@
 ---
 title: View and Manage Cases
-kind: Documentation
 further_reading:
 - link: "service_management/case_management/settings"
   tag: "Documentation"

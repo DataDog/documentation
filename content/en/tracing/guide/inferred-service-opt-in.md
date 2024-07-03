@@ -1,6 +1,6 @@
 ---
 title: Inferred Service dependencies
-kind: Guide
+
 disable_toc: false
 private: true
 further_reading:

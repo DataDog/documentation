@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/feature-flag-tracking/
   tag: ブログ
   text: Datadog RUM の機能フラグ追跡によるリリースの安全性の確保
-kind: documentation
 title: 機能フラグ追跡
 ---
 

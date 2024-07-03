@@ -1,6 +1,5 @@
 ---
 title: SNMP Traps
-kind: documentation
 description: "Enable listening for SNMP Traps."
 further_reading:
   - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"

@@ -26,7 +26,6 @@ further_reading:
 - link: /security/cloud_security_management/workflows
   tag: ドキュメント
   text: Workflow Automation によるセキュリティワークフローの自動化
-kind: documentation
 title: ワークフローをトリガーする
 ---
 

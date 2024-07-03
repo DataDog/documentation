@@ -8,7 +8,7 @@ further_reading:
 - link: /account_management/billing/azure/#azure-vm-exclusion
   tag: Documentation
   text: Filtrer les machines virtuelles Azure par tag
-kind: guide
+
 title: Machines virtuelles Azure hors tension dans la liste dʼinfrastructure
 ---
 

@@ -25,7 +25,6 @@ further_reading:
   tag: 블로그
   text: Datadog 동적 계측을 사용하여 재배치 없이 애플리케이션 로그 추가
 is_beta: false
-kind: documentation
 private: false
 title: 동적 계측
 ---

@@ -12,7 +12,7 @@ further_reading:
   tag: Documentation
   text: Découvrir comment gérer les fenêtres contextuelles dont l'affichage n'est
     pas prévu
-kind: guide
+
 title: Utiliser des assertions JavaScript personnalisées dans des tests Browser
 ---
 

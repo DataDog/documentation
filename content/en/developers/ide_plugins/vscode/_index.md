@@ -1,6 +1,5 @@
 ---
 title: Datadog Extension for Visual Studio Code
-kind: documentation
 description: Learn how to run Synthetic tests on local environments directly in VS Code.
 is_beta: true
 aliases:
@@ -24,7 +23,7 @@ further_reading:
 
 The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.
 
-{{< img src="/developers/ide_plugins/vscode/datadog-vscode.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode-2.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
 It packs several features, including:
 
@@ -186,7 +185,6 @@ Check out the [issues][27] section to discover known issues.
 [10]: /tracing/error_tracking/
 [11]: /security/application_security/vulnerability_management/
 [12]: /continuous_integration/guides/flaky_test_management/
-[13]: /watchdog/insights
 [14]: /continuous_integration/static_analysis/?tab=githubactions
 [15]: /continuous_integration/static_analysis/rules/
 [16]: /logs/log_collection/javascript/

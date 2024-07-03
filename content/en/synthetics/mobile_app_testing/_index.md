@@ -1,6 +1,5 @@
 ---
 title: Mobile Application Testing and Monitoring
-kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
 aliases:
 - /mobile_testing

@@ -10,7 +10,6 @@ further_reading:
 - link: monitors/
   tag: ドキュメント
   text: モニターを作成し、管理することで、重要なときにチームに通知することができます。
-kind: documentation
 title: APM メトリクス
 ---
 

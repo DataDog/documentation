@@ -11,7 +11,6 @@ further_reading:
 - link: getting_started/profiler
   tag: 설명서
   text: 프로파일러 시작하기
-kind: 설명서
 title: 느린 트레이스 또는 엔드포인트 조사
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: RUM Flutter Advanced Configuration
-kind: documentation
 description: Learn how to configure Flutter Monitoring.
 code_lang: flutter
 type: multi-code-lang
@@ -313,6 +312,16 @@ Depending on the event's type, only some specific properties can be modified:
 | RumResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                          |
 |                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action.   |
 |                  | `resourceEvent.view.url`          | URL of the view linked to this resource.      |
+
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```dart
+final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
+```
 
 ## Set tracking consent (GDPR & CCPA compliance)
 

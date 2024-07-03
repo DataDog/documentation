@@ -1,6 +1,5 @@
 ---
 title: Synthetic Monitoring & Testing Results Explorer
-kind: documentation
 description: Examine CI jobs executing Continuous Testing tests.
 aliases: 
   - /synthetics/cicd_testing/ci_results_explorer

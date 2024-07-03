@@ -1,6 +1,6 @@
 ---
 title: Cloud Metric Delay
-kind: guide
+
 aliases:
     - /integrations/faq/are-my-aws-cloudwatch-metrics-delayed/
     - /integrations/faq/why-is-there-a-delay-in-receiving-my-data/

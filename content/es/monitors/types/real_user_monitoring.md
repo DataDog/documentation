@@ -15,7 +15,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Comprobar el estado de tu monitor
-kind: documentación
 title: Monitor Real User Monitoring
 ---
 

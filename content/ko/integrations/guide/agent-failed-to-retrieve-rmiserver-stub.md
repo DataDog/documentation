@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: 에이전트가 RMIServer 스텁 가져오기에 실패할 경우
 ---
 

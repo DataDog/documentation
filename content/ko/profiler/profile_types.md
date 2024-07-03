@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
   tags: 블로그
   text: DataDog에 상시 가동 프로덕션 프로파일링 도입
-kind: 설명서
 title: 프로파일 유형
 ---
 

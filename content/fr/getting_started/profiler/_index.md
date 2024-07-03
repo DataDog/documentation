@@ -16,7 +16,6 @@ further_reading:
   tag: GitHub
   text: Comment nous avons optimisé notre application Akka grâce au profileur en continu
     Datadog
-kind: documentation
 title: Premiers pas avec le profileur en continu
 ---
 

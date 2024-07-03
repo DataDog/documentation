@@ -1,6 +1,5 @@
 ---
 title: Archive Logs for the Splunk HTTP Event Collector (HEC)
-kind: document
 disable_toc: false
 ---
 

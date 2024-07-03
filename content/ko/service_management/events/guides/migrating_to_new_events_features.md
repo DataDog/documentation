@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: 블로그
   text: 개선된 Datadog Events로 더 빠르게 문제 해결
-kind: guide
+
 title: 새로운 이벤트 기능으로 마이그레이션
 ---
 

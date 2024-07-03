@@ -8,7 +8,6 @@ further_reading:
 - link: data_security/logs
   tag: Documentación
   text: Seguridad de los datos para Log Management
-kind: Documentación
 title: Cumplimiento de la HIPAA
 ---
 

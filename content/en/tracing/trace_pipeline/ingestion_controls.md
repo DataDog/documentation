@@ -1,6 +1,5 @@
 ---
 title: Ingestion Controls
-kind: documentation
 aliases:
     - /tracing/trace_ingestion/control_page
     - /tracing/trace_ingestion/ingestion_control_page

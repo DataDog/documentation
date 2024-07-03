@@ -1,6 +1,10 @@
 ---
+<<<<<<< HEAD
 title: Enable Autocomplete and Search for Java
 kind: Documentation
+=======
+title: Enable Symbol Database for Java
+>>>>>>> origin/master
 is_beta: true
 private: false
 code_lang: java

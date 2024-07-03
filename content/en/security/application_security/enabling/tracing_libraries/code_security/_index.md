@@ -1,6 +1,5 @@
 ---
 title: Enabling Code Security using Datadog Tracing Libraries
-kind: documentation
 type: multi-code-lang
 further_reading:
 - link: "/security/application_security/"
@@ -25,8 +24,6 @@ further_reading:
   tag: "Blog"
   text: "Secure serverless applications with Datadog"
 ---
-
-<div class="alert alert-info">Code Security is in beta.</div>
 
 Select your application language for details on how to enable Code Security for your language and infrastructure types.
 

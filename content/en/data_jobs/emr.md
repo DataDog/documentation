@@ -1,6 +1,5 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
-kind: documentation
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -8,6 +7,10 @@ further_reading:
 ---
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
+
+## Requirements
+
+[Amazon EMR Release 6.6.0][10] or later is required.
 
 ## Setup
 
@@ -122,3 +125,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
+[10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-660-release.html

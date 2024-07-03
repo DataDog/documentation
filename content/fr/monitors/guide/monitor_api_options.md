@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Options de l'API Monitor
 ---
 

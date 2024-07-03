@@ -1,6 +1,10 @@
 ---
+<<<<<<< HEAD
 title: Autocomplete and Search
 kind: documentation
+=======
+title: Symbol Database
+>>>>>>> origin/master
 is_beta: true
 private: false
 further_reading:
