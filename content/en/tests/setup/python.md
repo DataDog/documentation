@@ -40,28 +40,27 @@ Supported test frameworks:
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-  <br/>
-  If your CI provider is Github Actions, you can use the dedicated <a href="https://github.com/marketplace/actions/configure-datadog-test-visibility">Datadog Test Visibility Github Action</a>.
-  <br/>
-  In either of these cases you can skip the setup steps below.
-</div>
-
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog Python library:
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" %}}
-
-{{% ci-agentless %}}
-
+{{% tab "Github Actions" %}}
+You can use the dedicated <a href="https://github.com/marketplace/actions/configure-datadog-test-visibility">Datadog Test Visibility Github Action</a> to enable Test Visibility.
+If you do so, the rest of the setup steps below can be skipped.
 {{% /tab %}}
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
+{{% tab "Jenkins" %}}
+You can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
+If you do so, the rest of the setup steps below can be skipped.
+{{% /tab %}}
+
+{{% tab "Other cloud CI provider" %}}
+{{% ci-agentless %}}
+{{% /tab %}}
+
+{{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
-
 {{% /tab %}}
 {{< /tabs >}}
 
