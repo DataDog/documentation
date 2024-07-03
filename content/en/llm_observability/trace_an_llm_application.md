@@ -22,7 +22,7 @@ If you're new to LLM Observability traces, read the [Core Concepts][3] before pr
 
 ## Instrument your LLM application
 
-<div class="alert alert-info">This guide uses the LLM Observability SDK for Python. If your application is running in a serverless environment, follow the [Serverless setup instructions][18]. If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</a></div>
+<div class="alert alert-info">This guide uses the LLM Observability SDK for Python. If your application is running in a serverless environment, follow the <a href="/llm_observability/sdk/#serverless-setup">Serverless setup instructions</a>. If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</div>
 
 Datadog provides [auto-instrumentation][4] to capture LLM calls for specific LLM provider libraries. However, manually instrumenting your LLM application using the Python SDK can unlock even more of Datadog's LLM Observability features.
 
@@ -186,4 +186,3 @@ Depending on the complexity of your LLM application, you can also:
 [15]: /llm_observability/sdk/#tracing-multiple-applications
 [16]: /llm_observability/submit_evaluations
 [17]: /llm_observability/core_concepts/#spans
-[18]: /llm_observability/sdk/#serverless-setup

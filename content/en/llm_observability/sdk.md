@@ -108,9 +108,7 @@ LLMObs.enable(
 
 Enable LLM Observability in a serverless environmant by using the [Datadog-Python and Datadog-Extension layers][14].
 
-For a complete auto-instrumented experience, you only need to enable the environment variables specified in [Command-line setup](#command-line-setup). No other code changes are needed.
-
-For manual instrumentation, following [In-code setup](#in-code-setup), you still need to set the `DD_LLMOBS_ENABLED` environment variable as outlined in [Command-line setup](#command-line-setup) in order for the layer to properly flush your LLM spans after the lambda execution.
+Regardless of whether or not you are manually instrumenting your application, or are only relying on auto-instrumented integrations to send data to LLM Observability, please specify `DD_LLMOBS_ENABLED` in your environment for these serverless layers to properly instrument and flush traces from your serverless application.
 
 #### Application naming guidelines
 
@@ -574,7 +572,9 @@ def separate_task(workflow_span):
 
 ### Flushing in serverless environments
 
-`LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
+If you are using the latest versions of the `Datadog-Python` and `Datadog-Extension` layers, flushing is handled out-of-the-box.
+
+In other cases, or if the provided flushing does not work, `LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
 ### Tracing multiple applications
 
@@ -664,4 +664,4 @@ def server_process_request(request):
 [11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
 [12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/auto_instrumentation/
-[14]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=custom
+[14]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=custom#installation
