@@ -1,9 +1,8 @@
 This processor combines multiple log events into a single event based on the selected fields and merge strategies. This is an example SQL command that carries out a similar action: `SELECT MAX(latency) GROUP BY service`. The reduce processor groups and merges events every 10 seconds.
 
 To set up the reduce processor:
-To set up the reduce processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. Reduced logs and logs that do not match the filter query are sent to the next step in the pipeline.
-2. In the **Group By** section, enter the field you want to group the logs by. 
+2. In the **Group By** section, enter the field you want to group the logs by.
 3. Click **Add Group by Field** to add additional fields.
 4. In the **Merge Strategy** section:
    - In **On Field**, enter the name of the field you want to merge the logs on.
