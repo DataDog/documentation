@@ -195,5 +195,5 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /tracing/service_catalog
-[14]: https://docs.datadoghq.com/containers/kubernetes/
+[14]: /containers/kubernetes
 [15]: https://app.datadoghq.com/orchestration/explorer
