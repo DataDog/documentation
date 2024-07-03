@@ -42,7 +42,7 @@ Configura el nivel Flex en la página [Configuración de ndices de logs][2]:
 2. Edita el índice que quieres activar con Flex Logs o crea un nuevo índice.
 3. Selecciona **Flex Tier** (Nivel Flex) y configura la opción de conservación en *Configure Storage Tier and Retention* (Configurar el nivel de almacenamiento y la opción de conservación).
 
-{{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Opciones de almacenamiento del nivel Flex en la configuración de índices" style="width:100%;" >}}
+{{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Opciones de almacenamiento de nivel Flex en la configuración de índices" style="width:100%;" >}}
 
 **Notas**:
 - Si se seleccionan ambas opciones, los logs se almacenan en el nivel estándar, hasta el final del período de conservación configurado, antes de ser almacenados en el nivel Flex. Por ejemplo, puedes seleccionar el nivel estándar, para una conservación de 3 días, y el nivel Flex, para una conservación de 90 días. Los Logs de ese índice se almacenan primero en el nivel estándar, durante 3 días, y luego en el nivel Flex, durante los 87 días restantes, lo que asciende a un total de 90 días de conservación.
@@ -64,7 +64,7 @@ El almacenamiento de nivel Flex es útil para almacenar logs, donde las investig
 - Necesidad de todos los logs para investigaciones de seguridad.
 - Necesidad de consultar logs para informes y análisis de datos de elevada cardinalidad durante largos periodos de tiempo.
 
-## Fuentes potenciales para el envío directo al nivel Flex de indexación de logs
+## Orígenes posibles para el envío directo al nivel Flex de indexación de logs
 
 La siguiente lista es un ejemplo de orígenes de logs que son potencialmente buenos candidatos para el envío de logs al nivel Flex, sin pasar primero por la indexación estándar. No se trata de una lista exhaustiva, y el objetivo de dar una idea de los tipos de logs adecuados para esta configuración. Otros orígenes de logs (por ejemplo, logs de aplicaciones) pueden enviarse al nivel Flex, después de pasar primero por la indexación estándar, para los casos de uso en directo de resolución de problemas, alertas y depuración. Tus casos de uso para estos orígenes pueden variar, así que es importante que lo tengas en cuenta a la hora de decidir si omitirás la indexación estándar.
 
@@ -101,7 +101,7 @@ La siguiente lista es un ejemplo de orígenes de logs que son potencialmente bue
 
 Puedes utilizar el espectro de tipos de logs que se muestran en la siguiente imagen para determinar cuándo utilizar el nivel Flex para logs. Todos los orígenes de logs de gran volumen, acceso poco frecuente y conservación a largo plazo son buenos candidatos, y esto incluye la ampliación del nivel estándar para los logs (por ejemplo, logs de aplicaciones) también al nivel Flex.
 
-{{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Gráfico del espectro de indexado y frecuencia de acceso de logs" style="width:100%;" >}}
+{{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Gráfico del espectro de indexado y la frecuencia de acceso de logs" style="width:100%;" >}}
 
 
 ## Leer más
