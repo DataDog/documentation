@@ -1916,12 +1916,12 @@ See [Session Replay Privacy Options][21].
 
 `enablePrivacyForActionName`
 : Optional<br/>
-**Type**: String<br/>
+**Type**: Boolean<br/>
 See [Mask Action Names][29].
 
 `actionNameAttribute`
 : Optional<br/>
-**Type**: Boolean<br/>
+**Type**: String<br/>
 Specify your own attribute to be used to [name actions][22].
 
 `sessionSampleRate`
