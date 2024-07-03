@@ -522,6 +522,14 @@ backend datadog-network-devices-netflow
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
+backend datadog-network-path
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
 backend datadog-remote-configuration
     balance roundrobin
     mode http
@@ -789,6 +797,14 @@ backend datadog-network-devices-netflow
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
 
+backend datadog-network-path
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 netpath-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
+
 backend datadog-remote-configuration
     balance roundrobin
     mode http
@@ -1047,6 +1063,12 @@ stream {
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
+        listen 3845; #listen for network path
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass netpath-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
         listen 3846; #listen for Remote Configuration requests
         proxy_ssl_verify on;
         proxy_ssl on;
@@ -1162,6 +1184,12 @@ stream {
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3845 ssl; #listen for network path
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass netpath-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
         listen 3846 ssl; #listen for Remote Configuration requests
