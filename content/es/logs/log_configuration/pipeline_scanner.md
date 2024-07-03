@@ -21,11 +21,11 @@ El analizador de pipelines de logs te permite analizar pipelines de logs en tiem
 
 Utiliza el analizador de pipelines para:
 
-- Solucionar problemas de procesamiento de logs, como logs sin procesar, etiquetas faltantes o cambios inesperados en la estructura de los logs.
+- Solucionar problemas de procesamiento de logs, como logs sin procesar, etiquetas (tags) faltantes o cambios inesperados en la estructura de los logs.
 - Determina y elimina las reglas de procesamiento contradictorias o redundantes.
-- Asegúrate de que los logs que pasan por los pipelines de logs cumplen los requisitos de seguridad y conformidad.
+- Asegúrate de que los logs que pasan por los pipelines de logs cumplen los requisitos de seguridad y cumplimiento normativo.
 
-{{< img src="logs/log_configuration/pipeline_scanner/pipeline_scanner.png" alt="Analizador de pipelines que muestra dos logs que coinciden con la consulta, los detalles del log seleccionado y los dos pipelines que modifican los logs consultados" style="width:80%;" >}}
+{{< img src="logs/log_configuration/pipeline_scanner/pipeline_scanner.png" alt="Analizador de pipelines que muestra los dos logs que coinciden con la consulta, los detalles del log seleccionado y los dos pipelines que modifican los logs consultados" style="width:80%;" >}}
 
 ## Identificar los pipelines y los procesadores que modifican un log
 
