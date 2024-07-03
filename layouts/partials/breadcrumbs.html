@@ -3,17 +3,19 @@
     {{- range .Ancestors.Reverse }}
       {{ if .File }}
         {{- $exclusions := (or (eq .File.Path "api/_index.md") (eq (.Title | lower) "service_managements")) -}}
+
         {{- if eq .File.Dir "/" -}}
-        {{- $text = i18n "docs" -}}
+          {{- $text = i18n "docs" -}}
         {{- else -}}
-        {{- $text = (replace .Title "_" " ") -}}
+          {{- $text = (replace .Title "_" " ") -}}
         {{- end -}}
+
         {{ if not $exclusions }}
-      {{ end }}
-      <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>
-&nbsp;>&nbsp;
+          <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>&nbsp;>&nbsp;
+        {{ end }}
       {{ end }}
     {{- end -}}
+
     <a class="text-primary text-uppercase" href="{{ .RelPermalink }}">
       {{- if and (eq .Section "integrations") (.Params.integration_title) -}}
         {{- .Params.integration_title -}}

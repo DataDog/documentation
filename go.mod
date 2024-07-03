@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/DataDog/websites-modules v1.4.163 // indirect
-	github.com/DataDog/websites-sources v0.0.0-20240701090409-a7f25b8d9663 // indirect
+	github.com/DataDog/websites-sources v0.0.0-20240703202006-25e603f11d96 // indirect
 )
 
 // replace github.com/DataDog/websites-modules => /Users/matt.fitzsimmons/source/websites-modules
