@@ -1921,7 +1921,7 @@ See [Mask Action Names][29].
 
 `actionNameAttribute`
 : Optional<br/>
-**Type**: String<br/>
+**Type**: Boolean<br/>
 Specify your own attribute to be used to [name actions][22].
 
 `sessionSampleRate`
