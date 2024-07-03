@@ -151,7 +151,7 @@ To enable automatic service tagging, you need to [monitor your Kubernetes infras
 1. `service` (required): specifies the Datadog service of this resource
 2. `team` (optional): specifies the Datadog team of this resource
 
-Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, `CronJob`.
+Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
 
 Add the following annotations to your Argo CD application:
 1. `dd_multiservice`: should be set to `true`. This annotation specifies that Datadog should automatically infer the services deployed in a sync based on the changed Kubernetes resources.
