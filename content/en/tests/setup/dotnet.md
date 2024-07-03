@@ -26,10 +26,6 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-</div>
-
 ## Compatibility
 
 Supported frameworks:
@@ -52,6 +48,14 @@ Supported test frameworks:
 | NUnit | >= 3.0 |
 | MsTestV2 | >= 14 |
 | [BenchmarkDotNet][1] | >= 0.13.2 |
+
+<div class="alert alert-info">
+  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
+  <br/>
+  If your CI provider is Github Actions, you can use the dedicated <a href="https://github.com/marketplace/actions/configure-datadog-test-visibility">Datadog Test Visibility Github Action</a>.
+  <br/>
+  In either of these cases you can skip the setup steps below.
+</div>
 
 ## Configuring reporting method
 
