@@ -215,7 +215,7 @@ NetFlow packet drops can occur when there are a high number of NetFlow packets p
 
 #### Identifying packet drops
 
-You can use the netstat -s command to see if there are any dropped UDP packets:
+Use the `netstat -s` command to see if there are any dropped UDP packets:
 ```bash
 netstat -s
 ```
