@@ -74,6 +74,8 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 
 The GitHub Actions CI Visibility integration also allows automatically forwarding workflow job logs to [Datadog Log Management][5].
 
+<div class="alert alert-info"><strong>Note</strong>: Log collection is not available for [PCI-compliant organizations][17].</div>
+
 To enable logs, follow these steps:
 
 1. Go to the **[CI Visibility settings][6]** page.
@@ -128,3 +130,4 @@ workflow job and workflow run events. To remove the events:
 [14]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [15]: /glossary/#queue-time
 [16]: /glossary/#approval-wait-time
+[17]: /data_security/pci_compliance/

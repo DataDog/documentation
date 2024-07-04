@@ -102,6 +102,8 @@ Example for enabling the hooks in specified projects:
 
 <div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
 
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for [PCI-compliant organizations][15].</div>
+
 Datadog supports log collection for your Azure DevOps pipelines. To enable it:
 
 1. Install a Datadog app registration on your Azure console. Follow the steps within the [Azure integration][14].
@@ -133,3 +135,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
 [14]: https://app.datadoghq.com/integrations/azure
+[15]: /data_security/pci_compliance/

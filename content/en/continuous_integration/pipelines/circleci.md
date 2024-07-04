@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-[CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale. 
+[CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale.
 
 Set up tracing on CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
 
@@ -89,6 +89,8 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog.
 
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for [PCI-compliant organizations][16].</div>
+
 To install and configure this integration, follow the [CircleCI setup guide][11].
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for CircleCI jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:circleci</code> tags.</div>
@@ -118,3 +120,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [13]: /glossary/#custom-span
 [14]: /glossary/#custom-tag
 [15]: /glossary/#custom-measure
+[16]: /data_security/pci_compliance/

@@ -265,6 +265,8 @@ The following GitLab versions support collecting job logs:
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
 
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for [PCI-compliant organizations][25].</div>
+
 Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
 For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
@@ -330,3 +332,4 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [22]: /glossary/#queue-time
 [23]: /glossary/#approval-wait-time
 [24]: /glossary/#pipeline-execution-time
+[25]: /data_security/pci_compliance/
