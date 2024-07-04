@@ -224,7 +224,7 @@ netstat -s
 **1. Increase the Number of NetFlow Listeners**
 
 Increase the number of NetFlow listeners by using a configuration similar to the following:
-We recommend setting the number of workers to match the number of CPU cores in your system:
+Datadog recommends setting the number of workers to match the number of CPU cores in your system:
 ```yaml
   netflow:
     enabled: true
