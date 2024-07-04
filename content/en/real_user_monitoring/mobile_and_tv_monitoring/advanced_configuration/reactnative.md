@@ -211,6 +211,12 @@ Enables tracking of RUM event when no RUM View is active. By default, background
 **Type**: ProxyConfiguration<br/>
 Optional [proxy configuration][13].
 
+`useAccessibilityLabel`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Determines whether the accessibility labels can be used to name RUM actions (default is true).
+
 ## Manual instrumentation
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
