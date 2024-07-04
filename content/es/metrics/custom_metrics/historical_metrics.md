@@ -27,7 +27,7 @@ Datadog clasifica las *métricas históricas* como puntos de métricas con marca
 
 Por ejemplo, tu métrica (`exampleMetricA`) emite un valor a Datadog a la 1:00 PM EST y la marca de tiempo de ese valor es 10:00 AM EST. Este valor de métrica se clasifica como histórico porque tiene una marca de tiempo 3 horas más antigua en relación con la hora del envío.
 
-Con el consumo de métricas históricas habilitado, si envías varios valores con la misma marca de tiempo y la misma combinación de valor-etiqueta a Datadog, Datadog conserva el valor enviado más recientemente. Es decir, si dentro de la misma marca de tiempo, envías una métrica con un valor de X, y también envías esa métrica con un valor de Y, se conservará el valor que se haya enviado más recientemente.
+Con el consumo de métricas históricas habilitado, si envías varios valores con la misma marca de tiempo y la misma combinación de valor-etiqueta (tag) a Datadog, Datadog conserva el valor enviado más recientemente. Es decir, si dentro de la misma marca de tiempo, envías una métrica con un valor de X, y también envías esa métrica con un valor de Y, se conservará el valor que se haya enviado más recientemente.
 
 Puedes empezar a consumir valores de métricas históricas habilitando el consumo de métricas históricas en la página [Resumen de métricas][1] para los tipos de métricas *Recuento, Tasa e Indicador*.
 
