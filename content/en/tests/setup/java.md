@@ -64,12 +64,12 @@ Other build systems, such as Ant or Bazel, are supported with the following limi
 
 You may follow interactive setup steps on the [Datadog site][2] or the instructions below.
 
-Configuring Datadog Java Tracer varies depending on your CI provider.
+Configuring the Datadog Java Tracer varies depending on your CI provider.
 
 {{< tabs >}}
 {{% tab "Github Actions" %}}
 You can use the dedicated <a href="https://github.com/marketplace/actions/configure-datadog-test-visibility">Datadog Test Visibility Github Action</a> to enable Test Visibility.
-If you do so, you can skip the "Downloading tracer library" and "Running your tests" steps below.
+If you do so, you can skip the **Downloading tracer library** and **Running your tests** steps below.
 {{% /tab %}}
 
 {{% tab "Jenkins" %}}
