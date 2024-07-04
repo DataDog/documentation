@@ -1,17 +1,12 @@
 ---
-<<<<<<< HEAD
 title: Enable Autocomplete and Search for Java
 kind: Documentation
-=======
-title: Enable Symbol Database for Java
->>>>>>> origin/master
 is_beta: true
 private: false
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
 ---
-
 {{< beta-callout url="#" btn_hidden="true" >}}
 Autocomplete and search are in public beta.
 {{< /beta-callout >}}
@@ -32,6 +27,7 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
 {{% tab "Command arguments" %}}
 
 Example service startup command:
+
 ```shell
 java \
     -javaagent:dd-java-agent.jar \
@@ -42,6 +38,7 @@ java \
     -Ddd.symbol.database.upload.enabled=true \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
+
 {{% /tab %}}
 
 {{% tab "Environment variables" %}}
@@ -56,6 +53,7 @@ java \
     -javaagent:dd-java-agent.jar \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -98,8 +96,8 @@ export DD_THIRD_PARTY_EXCLUDES=com.mycompany,io.mycompany
 ```
 
 [1]: /dynamic_instrumentation
-[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /dynamic_instrumentation/symdb
+

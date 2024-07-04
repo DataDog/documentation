@@ -1,18 +1,13 @@
 ---
-<<<<<<< HEAD
 title: Autocomplete and Search
 kind: documentation
-=======
-title: Symbol Database
->>>>>>> origin/master
 is_beta: true
 private: false
 further_reading:
-- link: "/dynamic_instrumentation/"
-  tag: "Documentation"
-  text: "Learn more about Dynamic Instrumentation"
+  - link: /dynamic_instrumentation/
+    tag: Documentation
+    text: Learn more about Dynamic Instrumentation
 ---
-
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Autocomplete and search are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
@@ -66,7 +61,4 @@ Dynamic Instrumentation also provides autocomplete for log templates and other t
 [3]: /agent/remote_config/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /dynamic_instrumentation/expression-language
-[6]: https://github.com/DataDog/dd-trace-java
-[7]: https://github.com/DataDog/dd-trace-py
-[8]: https://github.com/DataDog/dd-trace-dotnet
-[9]: /integrations/guide/source-code-integration/
+
