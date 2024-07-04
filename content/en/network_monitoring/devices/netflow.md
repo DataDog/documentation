@@ -216,40 +216,43 @@ NetFlow packet drops can occur when there are a high number of NetFlow packets p
 #### Identifying packet drops
 
 Use the `netstat -s` command to see if there are any dropped UDP packets:
-```bash
-netstat -s
-```
+
+    ```bash
+    netstat -s
+    ```
 
 #### Mitigation steps
-**1. Increase the Number of NetFlow Listeners**
+1. Increase the Number of NetFlow Listeners
 
-Increase the number of NetFlow listeners by using a configuration similar to the following:
-Datadog recommends setting the number of workers to match the number of CPU cores in your system:
-```yaml
-  netflow:
-    enabled: true
-    listeners:
-      - flow_type: netflow9
-        port: 2055
-        workers: 4 # 4 CPUs
-```
+  Increase the number of NetFlow listeners by using a configuration similar to the following:
+  Datadog recommends setting the number of workers to match the number of CPU cores in your system:
 
-**2. Increase UDP Queue Length**
+    ```yaml
+      netflow:
+        enabled: true
+        listeners:
+          - flow_type: netflow9
+            port: 2055
+            workers: 4 # 4 CPUs
+    ```
 
-Adjusting your system's UDP queue length can help accommodate the higher volume of NetFlow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
-```bash
-sudo sysctl -w net.core.rmem_max=26214400
-sudo sysctl -w net.core.rmem_default=26214400
-```
+2. Increase UDP Queue Length
 
-**3. Persisting the configuration**
+  Adjusting your system's UDP queue length can help accommodate the higher volume of NetFlow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
 
-To make these changes permanent, add the following lines to your `/etc/sysctl.conf` file:
+    ```bash
+    sudo sysctl -w net.core.rmem_max=26214400
+    sudo sysctl -w net.core.rmem_default=26214400
+    ```
 
-```bash
-net.core.rmem_max=26214400
-net.core.rmem_default=26214400
-```
+3. Persisting the configuration
+
+  To make these changes permanent, add the following lines to your `/etc/sysctl.conf` file:
+
+    ```bash
+    net.core.rmem_max=26214400
+    net.core.rmem_default=26214400
+    ```
 
 ## Further Reading
 
