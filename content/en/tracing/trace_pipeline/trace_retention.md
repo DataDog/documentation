@@ -118,7 +118,7 @@ For example, you can create filters to keep all traces for:
 
 ## Trace search and analytics on indexed spans
 
-### In the Trace Explorer, dashboards and notebooks.
+### In the Trace Explorer, dashboards, and notebooks
 
 By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table), as well as in dashboards and notebook queries.
 
