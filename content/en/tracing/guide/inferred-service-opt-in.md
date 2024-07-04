@@ -61,7 +61,7 @@ apm_config:
 
 {{< /code-block >}}
 
-You can also use the following environment variables in your Datadog Agent launch configuration:
+Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
 
 {{< code-block collapsible="true" lang="yaml" >}}
 
