@@ -221,7 +221,7 @@ netstat -s
 ```
 
 #### Mitigation steps
-**1. Increase the Number of Netflow Listeners**
+**1. Increase the Number of NetFlow Listeners**
 
 You can increase the number of Netflow listeners by using a configuration similar to the following.
 We recommend setting the number of workers to match the number of CPU cores in your system:
