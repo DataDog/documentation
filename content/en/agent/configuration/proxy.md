@@ -401,7 +401,7 @@ frontend instrumentation_telemetry_data_frontend
     option tcplog
     default_backend datadog-instrumentations-telemetry
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.forwarder.dd_url")
 frontend network_devices_netflow_frontend
     bind *:3845
