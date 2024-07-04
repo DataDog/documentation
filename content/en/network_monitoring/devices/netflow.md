@@ -220,7 +220,7 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 netstat -s
 ```
 
-#### Mitigation Steps
+#### Mitigation steps
 **1. Increase the Number of Netflow Listeners**
 
 You can increase the number of Netflow listeners by using a configuration similar to the following.
