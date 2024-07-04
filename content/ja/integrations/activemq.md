@@ -47,7 +47,7 @@ integration_id: activemq
 integration_title: ActiveMQ
 integration_version: 3.1.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: activemq
 public_title: ActiveMQ
