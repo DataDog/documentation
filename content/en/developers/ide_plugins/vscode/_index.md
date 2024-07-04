@@ -168,7 +168,7 @@ After the feature  has been enabled, you can see an `Exception Replay` button ne
 - navigate through the production code
 - review the value of the different variables involved
 
-Select an Error Tracking code insight from the Code Insights view. Go to the stack trace and click the Exception Replay button. VS Code shows a new activity with two new views: 
+Select an Error Tracking code insight from the Code Insights view. Go to the stack trace and click the Exception Replay button. VS Code shows a new activity with two new views:
 
 - **Variables**: It shows the variables related to a particular stack trace frame.
 - **Stack Trace**: It allows you to navigate through the different stack trace frames.
