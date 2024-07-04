@@ -700,7 +700,7 @@ frontend remote_configuration_frontend
     option tcplog
     default_backend datadog-remote-configuration
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending Network Path data (for example, the value of "network_path.forwarder.dd_url")
 frontend network_path_frontend
     bind *:3847 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
