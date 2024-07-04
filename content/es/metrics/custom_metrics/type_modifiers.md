@@ -100,7 +100,7 @@ Ejemplo de caso de uso:
 
 3. Te gusta el nombre `app.requests.served`, así que en lugar de enviar un nuevo nombre métrica con un tipo de `COUNT` más apropiado, podrías cambiar el tipo de `app.requests.served` actualizándolo:
   * Tu código de envío, llamando a `dogstatsd.increment('app.requests.served', N)` después de que se cumplan N peticiones, y
-  * El tipo in-app Datadog de la página de resumen de métricas a `RATE`.
+  * El tipo en la aplicación de Datadog de la página de resumen de métricas a `RATE`.
 
 Esto provoca que los datos enviados antes del cambio de tipo para `app.requests.served` se comporten incorrectamente. Esto se debe a que se almacenaron en un formato que debe interpretarse como un `GAUGE` en la aplicación (no como un `RATE`). Los datos enviados después del paso 3 se interpretan correctamente.
 
