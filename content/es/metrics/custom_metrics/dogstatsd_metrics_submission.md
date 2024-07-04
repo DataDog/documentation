@@ -1063,7 +1063,7 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 ### Etiquetado de métricas
 
-Añade etiquetas (tags) a cualquier métrica que envíes a DogStatsD con el parámetro `tags`.
+Añade etiquetas a cualquier métrica que envíes a DogStatsD con el parámetro `tags`.
 
 #### Ejemplos de códigos
 
