@@ -213,7 +213,7 @@ NetFlow data is retained for 30 days by default, with options for 15, 30, 60, an
 ### NetFlow packet drops
 NetFlow packet drops can occur when there are a high number of NetFlow packets per second, typically greater than 50,000. The following steps can help identify and mitigate NetFlow packet drops:
 
-#### Identifying Packet Drops
+#### Identifying packet drops
 
 You can use the netstat -s command to see if there are any dropped UDP packets:
 ```bash
