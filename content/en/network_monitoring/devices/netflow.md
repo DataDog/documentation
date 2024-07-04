@@ -211,7 +211,7 @@ NetFlow data is retained for 30 days by default, with options for 15, 30, 60, an
 ## Troubleshooting
 
 ### NetFlow packet drops
-Netflow packet drops can occur when there is a high number of Netflow packets per second, typically greater than 50,000. Here are some steps to identify and mitigate Netflow packet drops:
+NetFlow packet drops can occur when there are a high number of NetFlow packets per second, typically greater than 50,000. The following steps can help identify and mitigate NetFlow packet drops:
 
 #### Identifying Packet Drops
 
