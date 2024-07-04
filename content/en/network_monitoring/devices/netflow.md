@@ -236,7 +236,7 @@ Datadog recommends setting the number of workers to match the number of CPU core
 
 **2. Increase UDP Queue Length**
 
-Adjusting your system's UDP queue length can help accommodate the higher volume of Netflow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
+Adjusting your system's UDP queue length can help accommodate the higher volume of NetFlow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
 ```bash
 sudo sysctl -w net.core.rmem_max=26214400
 sudo sysctl -w net.core.rmem_default=26214400
