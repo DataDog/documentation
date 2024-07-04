@@ -242,7 +242,7 @@ sudo sysctl -w net.core.rmem_max=26214400
 sudo sysctl -w net.core.rmem_default=26214400
 ```
 
-**3. Persisting the Configuration**
+**3. Persisting the configuration**
 
 To make these changes permanent, add the following lines to your /etc/sysctl.conf file:
 
