@@ -310,7 +310,7 @@ When enabled, a watchdog termination will be reported and attached to the previo
 
 - The application was not upgraded in the meantime,
 
-- And it did id not call neither `exit`, nor `abort`,
+- And it did not call neither `exit`, nor `abort`,
 
 - And it did not crash, either because of an exception, or because of a fatal [app hang][13],
 
