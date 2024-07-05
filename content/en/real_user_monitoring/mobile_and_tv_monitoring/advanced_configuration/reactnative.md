@@ -215,7 +215,7 @@ Optional [proxy configuration][13].
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `true`<br/>
-Determines whether the accessibility labels can be used to name RUM actions (default is true).
+Determines whether the accessibility labels are used to name RUM actions (default is true).
 
 ## Manual instrumentation
 
