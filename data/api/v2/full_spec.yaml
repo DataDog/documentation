@@ -39459,8 +39459,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
-- description: Search your logs and send them to your Datadog platform over HTTP.
-    See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
+- description: 'Search your logs and send them to your Datadog platform over HTTP.
+    For more information, see the [Log Management](https://docs.datadoghq.com/logs/)
+    documentation. **Note**: Application keys must be [unscoped](https://docs.datadoghq.com/account_management/api-app-keys/#scopes).'
   name: Logs
 - description: 'Archives forward all the logs ingested to a cloud storage system.
 
