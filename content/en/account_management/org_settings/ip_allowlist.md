@@ -29,7 +29,7 @@ The IP allowlist feature does not block access to the following:
 - [Agent flare submission][3]
 - [Public dashboards][4]
 
-Applications and integrations that submit telemetry such as metrics, traces, and logs from the Agent and those that use an API key provided by the user are unaffected by the IP allowlist. Datadog recommends utilizing the [Audit Trail][5] to monitor for IP addresses from third parties.
+Applications and integrations that submit telemetry from the Agent (metrics, traces, and logs), and those that use an API key provided by the user, are not impacted by the IP allowlist. Datadog recommends utilizing the [Audit Trail][5] to monitor for IP addresses from third party applications and integrations.
 
 ### Functionality
 
