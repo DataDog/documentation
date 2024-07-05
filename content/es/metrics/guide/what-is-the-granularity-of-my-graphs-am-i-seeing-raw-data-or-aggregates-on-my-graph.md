@@ -16,7 +16,7 @@ Para un gráfico de un periodo de tiempo de 1 semana, sería necesario enviar ci
 
 Por ejemplo, en una vista de un día con la visualización "líneas", hay un punto de datos cada 5 minutos. Datadog divide el intervalo de 1 día en 288 buckets de 5 minutos. En cada bucket, todos los datos realizan un rollup a un único valor. Por ejemplo, el punto de datos que aparece en tu gráfico con la marca de tiempo 07:00 es en realidad un agregado de todos los puntos de datos reales enviados entre las 07:00:00 y las 07:05:00 de ese día.
 
-Por defecto, el agregado rollup se calcula promediando todos los valores reales, lo que tiende a [aplanar los gráficos a medida que se reduce un periodo de tiempo][1].
+Por defecto, el agregado rollup se calcula promediando todos los valores reales, lo que tiende a [suavizar los gráficos a medida que se aleja][1].
 
 ## ¿Qué puedes hacer?
 
