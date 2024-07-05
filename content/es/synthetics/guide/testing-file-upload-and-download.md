@@ -9,7 +9,6 @@ further_reading:
 - link: synthetics/browser_tests
   tag: Documentación
   text: Configurar un test de navegador
-kind: guía
 title: Probar la carga y la descarga de archivos
 ---
 

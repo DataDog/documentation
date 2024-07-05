@@ -8,7 +8,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-arc-integration/
   tag: Blog
   text: Surveillez votre infrastructure hybride Azure Arc avec Datadog
-kind: guide
+
 title: Commandes pour installer l'extension Azure Datadog
 ---
 

@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: 설명서
   text: 보존을 위한 트레이스 인덱싱 제어
-kind: 가이드
 title: Datadog 보존 정책을 이해하고 트레이스 데이터를 효율적으로 보존
 ---
 

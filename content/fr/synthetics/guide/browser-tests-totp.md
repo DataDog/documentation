@@ -1,6 +1,6 @@
 ---
 title: Mots de passe à usage unique basés sur le temps (TOTP) pour l'authentification multifacteur dans des tests Browser
-kind: guide
+
 further_reading:
   - link: https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/
     tag: Blog

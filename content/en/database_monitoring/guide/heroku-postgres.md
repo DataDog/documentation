@@ -1,6 +1,6 @@
 ---
 title: Setting up Heroku Postgres for Database Monitoring
-kind: guide
+
 private: true
 further_reading:
 - link: "/agent/basic_agent_usage/heroku/"

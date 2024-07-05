@@ -3,7 +3,6 @@ further_reading:
 - link: service_management/case_management/settings
   tag: 설명서
   text: 케이스 설정
-kind: 설명서
 title: 사례 보기 및 관리
 ---
 

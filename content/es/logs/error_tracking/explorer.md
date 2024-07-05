@@ -4,7 +4,6 @@ further_reading:
 - link: /monitors/types/error_tracking
   tag: Documentación
   text: Más información sobre los monitores de rastreo de errores
-kind: Documentación
 title: Error Tracking Explorer
 ---
 

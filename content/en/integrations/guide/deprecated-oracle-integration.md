@@ -1,6 +1,6 @@
 ---
 title: Configuring the Oracle Integration on Agent Versions Lower than 7.50.1
-kind: guide
+
 ---
 
 ## Overview

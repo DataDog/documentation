@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Incident Management
-kind: documentation
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'

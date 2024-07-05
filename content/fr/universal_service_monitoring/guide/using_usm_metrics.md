@@ -12,7 +12,7 @@ further_reading:
 - link: /tracing/metrics
   tag: Documentation
   text: En savoir plus sur les métriques APM
-kind: guide
+
 title: Utiliser vos métriques USM dans des monitors, des SLO et des dashboards
 ---
 

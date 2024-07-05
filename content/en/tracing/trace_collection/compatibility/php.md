@@ -1,6 +1,5 @@
 ---
 title: PHP Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the PHP tracer'
 aliases:
   - /tracing/compatibility_requirements/php

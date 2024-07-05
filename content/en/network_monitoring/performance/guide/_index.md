@@ -1,6 +1,5 @@
 ---
 title: Network Performance Monitoring Guides
-kind: guide
 aliases:
     - /network_performance_monitoring/guide/
 private: true

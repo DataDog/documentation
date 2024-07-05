@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Estados de emisión en el rastreo de errores
 ---
 

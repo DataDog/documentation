@@ -1,5 +1,4 @@
 ---
-kind: Documentación
 title: Navegar por el Explorer
 ---
 

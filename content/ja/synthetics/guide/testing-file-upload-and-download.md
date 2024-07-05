@@ -9,7 +9,6 @@ further_reading:
 - link: synthetics/browser_tests
   tag: Documentation
   text: ブラウザテストの設定
-kind: ガイド
 title: テストファイルのアップロードとダウンロード
 ---
 

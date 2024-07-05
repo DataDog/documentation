@@ -4,7 +4,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay/
   tag: Documentation
   text: セッションリプレイについて
-kind: ガイド
 title: Shadow DOM コンポーネントでセッションリプレイ機能を強化する
 ---
 

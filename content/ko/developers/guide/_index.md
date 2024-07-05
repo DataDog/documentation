@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: 개발자 가이드
 disable_toc: true
-kind: 가이드
 private: true
 title: 개발자 가이드
 ---
