@@ -310,6 +310,8 @@ When enabled, a watchdog termination will be reported and attached to the previo
 - And it was not force-quitted by the user,
 - And the device did not reboot (which includes upgrades of the operating system).
 
+{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination.png" alt="A watchdog termination in the RUM Error side panel." style="width:60%;" >}}
+
 #### Enable watchdog terminations reporting
 
 To enable watchdog terminations reporting, update the initialization snippet with the `trackWatchdogTerminations` flag:
