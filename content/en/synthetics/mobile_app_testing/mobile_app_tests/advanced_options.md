@@ -41,9 +41,9 @@ These points of reference become a set of locators, each of which uniquely defin
 
 Custom selectors are created by performing a [step in the recorder][1] (such as a **tap**, **double tap**, or **open deep link**) on any element of your page. This specifies the kind of step that needs to be performed.
 
-Optionally, use handlebars (`{{`) syntax to insert dynamic content such as variables:
+Optionally, under advanced options, use handlebars (`{{`) syntax to insert dynamic content. A pre-populated dropdown list of variables is shown:
 
-{{< img src="mobile_app_testing/mobile_app_advanced_user_locator.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
+{{< img src="mobile_app_testing/mobile_app_advanced_user_locator_2.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
 
 ## Timeout
 
