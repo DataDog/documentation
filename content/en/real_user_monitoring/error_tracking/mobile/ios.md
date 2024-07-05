@@ -146,6 +146,150 @@ To enable app hang monitoring:
 
 - The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to the `appHangThreshold` may not be reported.
 
+#### Compute the hang rate of your application
+
+[Xcode Organizer][15] and [MetricKit][16] both provide a hang rate metric defined as "the number of seconds per hour that the app is unresponsive, while only counting periods of unresponsiveness of more than 250 ms."
+
+To compute a similar hang rate on Datadog, make sure:
+
+1. That app hang reporting is enabled
+1. That the app hang threshold is equal or below 250 ms
+1. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are avaible in your facets (this should be the case by default. If it's not, you can manually [create facets][17])
+
+If all these pre-requisites are met, then create a new [Timeseries widget][18] on a Dashboard or a Notebook, and paste the following snippet in the JSON tab of your widget, under the "Graph your data" section
+
+{{< img src="real_user_monitoring/error_tracking/json-tab.png" alt="The modal to edit the configuration of a widget, with the JSON tab open" style="width:60%;" >}}
+
+<details>
+  <summary>JSON snippet of the hang rate widget</summary>
+  
+  ```json
+  {
+      "title": "Hang Rate",
+      "type": "timeseries",
+      "requests": [
+          {
+              "formulas": [
+                  {
+                      "number_format": {
+                          "unit": {
+                              "type": "custom_unit_label",
+                              "label": "seconds/hour"
+                          }
+                      },
+                      "formula": "(query2 * 3600000000000) / query1"
+                  }
+              ],
+              "queries": [
+                  {
+                      "name": "query2",
+                      "data_source": "rum",
+                      "search": {
+                          "query": "@type:error @error.category:\"App Hang\" @freeze.duration:>=250000000 @session.type:user"
+                      },
+                      "indexes": [
+                          "*"
+                      ],
+                      "group_by": [
+                          {
+                              "facet": "@application.name",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@freeze.duration"
+                              },
+                              "should_exclude_missing": true
+                          },
+                          {
+                              "facet": "version",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@freeze.duration"
+                              },
+                              "should_exclude_missing": true
+                          }
+                      ],
+                      "compute": {
+                          "aggregation": "sum",
+                          "metric": "@freeze.duration",
+                          "interval": 3600000
+                      },
+                      "storage": "hot"
+                  },
+                  {
+                      "name": "query1",
+                      "data_source": "rum",
+                      "search": {
+                          "query": "@type:session @session.type:user"
+                      },
+                      "indexes": [
+                          "*"
+                      ],
+                      "group_by": [
+                          {
+                              "facet": "@application.name",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@session.time_spent"
+                              },
+                              "should_exclude_missing": true
+                          },
+                          {
+                              "facet": "version",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@session.time_spent"
+                              },
+                              "should_exclude_missing": true
+                          }
+                      ],
+                      "compute": {
+                          "aggregation": "sum",
+                          "metric": "@session.time_spent",
+                          "interval": 3600000
+                      },
+                      "storage": "hot"
+                  }
+              ],
+              "response_format": "timeseries",
+              "style": {
+                  "palette": "dog_classic",
+                  "order_by": "values",
+                  "line_type": "solid",
+                  "line_width": "normal"
+              },
+              "display_type": "line"
+          }
+      ],
+      "yaxis": {
+          "include_zero": true,
+          "scale": "sqrt"
+      },
+      "markers": [
+          {
+              "value": "y > 12000000000",
+              "display_type": "error dashed"
+          },
+          {
+              "value": "6000000000 < y < 12000000000",
+              "display_type": "warning dashed"
+          },
+          {
+              "value": "0 < y < 6000000000",
+              "display_type": "ok dashed"
+          }
+      ]
+  }
+  ```
+</details>
+
 #### Disable app hang monitoring
 
 To disable app hang monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
@@ -330,3 +474,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [13]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
 [14]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals?tab=ios#telemetry
+[15]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
+[16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
+[17]: /real_user_monitoring/explorer/search/#facets
+[18]: /dashboards/widgets/timeseries
