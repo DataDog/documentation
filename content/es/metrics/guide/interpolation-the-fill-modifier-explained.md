@@ -13,7 +13,7 @@ title: Interpolación y modificador fill
 
 ## ¿Por qué interpolar?
 
-La interpolación no consiste en rellenar grandes huecos arbitrarios en una serie de métricas, sino en alinear varias series para poder realizar la agregación entre fuentes.
+La interpolación no consiste en rellenar grandes huecos arbitrarios en una serie de métricas, sino en alinear varias series para poder realizar la agregación entre orígenes.
 
 La mayor parte del tiempo crear gráficos en Datadog consiste en combinar datos de diferentes orígenes en una sola línea para tu gráfico. Sin embargo, es posible que los distintos orígenes no envíen datos al mismo tiempo ni con la misma frecuencia.
 
@@ -41,9 +41,9 @@ Donde X e Y se interpolan utilizando datos anteriores y posteriores al intervalo
 
 ## ¿En qué casos se produce la interpolación?
 
-La interpolación se produce cuando, por ejemplo, más de un origen corresponde a la consulta de tu gráfico:
+La interpolación se produce cuando, por ejemplo, más de un origen corresponde a tu consulta de gráfico:
 
-* Con la agregación espacial (`avg:system.cpu.user{env:prod}`), si tienes dos o más hosts con la etiqueta `env:prod` , Datadog calcula la media en el tiempo utilizando la interpolación.
+* Con la agregación espacial (`avg:system.cpu.user{env:prod}`), si tienes dos o más hosts con la etiqueta (tag) `env:prod` , Datadog calcula la media en el tiempo utilizando la interpolación.
 * Con las consultas de grupo (`net.bytes_rcvd{*} by {host}`, puede que no se realicen cálculos entre orígenes, pero proporcionar series alineadas facilita el paso del ratón por la línea del gráfico y las comparaciones.
 
 La interpolación no es necesaria cuando se representa gráficamente una métrica enviada desde un origen, por ejemplo `avg:net.bytes_rcvd{host:a}`, suponiendo que `host:a` envía siempre la métrica `net.bytes_rcvd` con las mismas etiquetas.
