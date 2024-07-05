@@ -12,7 +12,7 @@ further_reading:
   text: "Ingestion Control Page"
 ---
 
-{{< callout url="https://forms.gle/WCG57yTCG27BCBB67" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
 Remotely configured sampling rules are in Beta. To request access, complete the form.
 {{< /callout >}}
 
