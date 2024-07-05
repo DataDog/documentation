@@ -74,7 +74,7 @@ data:
 
   output.conf: |
     [OUTPUT]
-        Name amazon_data_firehose
+        Name kinesis_firehose
         Match kube.*
         region <REGION>
         delivery_stream <YOUR-DELIVERY-STREAM-NAME>
