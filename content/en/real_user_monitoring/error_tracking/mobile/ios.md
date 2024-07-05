@@ -103,7 +103,7 @@ CrashReporting.enable()
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Notes][5] for more guidance on what to set this value to.
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See the [dedicated section][5] for more guidance on what to set this value to.
 
 App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
@@ -132,11 +132,11 @@ To enable app hang monitoring:
    )
    ```
 
-2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Notes][5] for more guidance on what to set this value to.
+2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See the [following section][5] for more guidance on what to set this value to.
 
    Make sure you follow the steps below to get [deobfuscated stack traces][6].
 
-#### Notes
+#### Configure the app hang threshold
 
 - Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and then lowering it or increasing it incrementally to find the right setup.
 
@@ -320,7 +320,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/ios
 [4]: /logs/log_collection/ios
-[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#notes
+[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
 [6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#get-deobfuscated-stack-traces
 [7]: https://appstoreconnect.apple.com/
 [8]: https://www.npmjs.com/package/@datadog/datadog-ci
