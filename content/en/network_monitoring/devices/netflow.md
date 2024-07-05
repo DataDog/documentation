@@ -217,9 +217,9 @@ NetFlow packet drops can occur when there are a high number of NetFlow packets p
 
 Use the `netstat -s` command to see if there are any dropped UDP packets:
 
-    ```bash
+```bash
     netstat -s
-    ```
+  ```
 
 #### Mitigation steps
 1. Increase the Number of NetFlow Listeners
@@ -227,32 +227,32 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
   Increase the number of NetFlow listeners by using a configuration similar to the following:
   Datadog recommends setting the number of workers to match the number of CPU cores in your system:
 
-    ```yaml
+```yaml
       netflow:
         enabled: true
         listeners:
           - flow_type: netflow9
             port: 2055
             workers: 4 # 4 CPUs
-    ```
+```
 
 2. Increase UDP Queue Length
 
   Adjusting your system's UDP queue length can help accommodate the higher volume of NetFlow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
 
-    ```bash
+```bash
     sudo sysctl -w net.core.rmem_max=26214400
     sudo sysctl -w net.core.rmem_default=26214400
-    ```
+```
 
 3. Persisting the configuration
 
   To make these changes permanent, add the following lines to your `/etc/sysctl.conf` file:
 
-    ```bash
+```bash
     net.core.rmem_max=26214400
     net.core.rmem_default=26214400
-    ```
+```
 
 ## Further Reading
 
