@@ -8,6 +8,10 @@ further_reading:
   text: "Calculated Fields"
 ---
 
+{{< beta-callout url="https://docs.google.com/forms/d/18tDqsB2pg0gC2irdtfIscSsxbDkRfVbEqowLku4Uqvg/viewform?edit_requested=true" >}}
+<a href="https://docs.datadoghq.com/logs/explorer/calculated_fields/">Calculated Fields</a> is in beta. Have feedback or a feature request? <a href= "https://docs.google.com/forms/d/e/1FAIpQLScQLJ1O_plHp0wiqRiGEEhNaO_cY0jsmu35gtEbJh_RBkqzYg/viewform">Let us know</a>.
+{{< /beta-callout >}}
+
 ## Basic syntax and language constructs
 
 | Construct                                                                                          | Syntax and Notation                                                    |
