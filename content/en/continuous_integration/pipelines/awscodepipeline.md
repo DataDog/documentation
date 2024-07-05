@@ -121,7 +121,7 @@ The AWS CodePipeline integration supports correlating **CodeBuild** actions with
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the <code>source:codebuild</code> and <code>sourcecategory:aws</code> tags.</div>
 
-<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for [PCI-compliant organizations][18].</div>
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations.</a></div>
 
 ## Visualize pipeline data in Datadog
 

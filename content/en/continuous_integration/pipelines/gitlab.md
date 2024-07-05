@@ -265,7 +265,7 @@ The following GitLab versions support collecting job logs:
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
 
-<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for [PCI-compliant organizations][25].</div>
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations.</a>.</div>
 
 Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
