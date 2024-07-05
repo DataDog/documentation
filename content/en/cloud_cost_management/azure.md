@@ -42,14 +42,16 @@ Navigate to [Setup & Configuration][3] and select an Azure account from the menu
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
 
-{{< tabs >}}
-{{% tab "Regular exports" %}}
-
 1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. After the scope is selected, click **Add**.
 
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
+
+The [improved exports experience][8] is in Preview and may not be available for all customers.
+
+{{< tabs >}}
+{{% tab "Regular exports" %}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
@@ -66,14 +68,6 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 {{% /tab %}}
 
 {{% tab "Improved exports (Preview)" %}}
-
-The [improved exports experience][8] is currently in Preview and may not be available for all customers.
-
-1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
-2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
-3. After the scope is selected, click **Add**.
-
-{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
