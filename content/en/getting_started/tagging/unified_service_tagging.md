@@ -58,6 +58,8 @@ To start configuring unified service tagging, choose your environment:
 
 - [Containerized](#containerized-environment)
 - [Non-Containerized](#non-containerized-environment)
+- [Serverless](#serverless-environment)
+- [OpenTelemetry](#opentelemetry)
 
 ### Containerized environment
 
@@ -404,6 +406,68 @@ instances:
 ### Serverless environment
 
 For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
+
+### OpenTelemetry
+
+When using OpenTelemetry, map the following [resource attributes][16] to their corresponding Datadog conventions:
+
+| OpenTelemetry convention | Datadog convention |
+| --- | --- |
+| `deployment.environment` | `env` |
+| `service.name` | `service` |
+| `service.version` | `version` |
+
+<div class="alert alert-warning">Do not use Datadog-specific tags like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> in your OpenTelemetry configuration.</div>
+
+{{< tabs >}}
+{{% tab "Environment variables" %}}
+
+To set resource attributes using environment variables, set `OTEL_RESOURCE_ATTRIBUTES` with the appropriate values:
+
+```shell
+export OTEL_RESOURCE_ATTRIBUTES="service.name=my-service,deployment.environment=production,service.version=1.2.3"
+```
+
+{{% /tab %}}
+
+{{% tab "SDK" %}}
+
+To set resource attributes in your application code, create a `Resource` with the desired attributes and associate it with your `TracerProvider`.
+
+Here's an example using Python:
+
+```python
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvide
+resource = Resource(attributes={
+   "service.name": "<SERVICE>",
+   "deployment.environment": "<ENV>",
+   "service.version": "<VERSION>"
+})
+tracer_provider = TracerProvider(resource=resource)
+```
+
+{{% /tab %}}
+
+{{% tab "Collector" %}}
+
+To set resource attributes from the Collector, use the transform processor in your Collector configuration file. The transform processor allows you to modify attributes of the collected telemetry data before sending it to the Datadog exporter:
+
+```yaml
+processors:
+  transform:
+    trace_statements:
+      - context: resource
+        statements:
+          - set(attributes["service.name"], "my-service")
+          - set(attributes["deployment.environment"], "production")
+          - set(attributes["service.version"], "1.2.3")
+...
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -423,3 +487,5 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [13]: https://www.chef.io/
 [14]: https://www.ansible.com/
 [15]: /serverless/configuration/#connect-telemetry-using-tags
+[16]: https://opentelemetry.io/docs/languages/js/resources/
+[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
