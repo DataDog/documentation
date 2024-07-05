@@ -154,13 +154,11 @@ To enable app hang monitoring:
 
 To compute a similar hang rate on Datadog, make sure:
 
-1. That app hang reporting is enabled
+1. That app hang reporting is enabled.
+2. That the app hang threshold is equal or below 250 ms.
+3. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are available in your facets (this should be the case by default. If it's not, you can manually [create facets][17]).
 
-2. That the app hang threshold is equal or below 250 ms
-
-3. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are avaible in your facets (this should be the case by default. If it's not, you can manually [create facets][17])
-
-If all these pre-requisites are met, then create a new [Timeseries widget][18] on a Dashboard or a Notebook, and paste the following snippet in the JSON tab of your widget, under the "Graph your data" section
+If all these prerequisites are met, then create a new [Timeseries widget][18] on a Dashboard or a Notebook, and paste the following snippet in the JSON tab of your widget, under the "Graph your data" section:
 
 {{< img src="real_user_monitoring/error_tracking/json-tab.png" alt="The modal to edit the configuration of a widget, with the JSON tab open" style="width:60%;" >}}
 
@@ -339,7 +337,7 @@ To enable watchdog terminations reporting:
 
 #### Troubleshoot watchdog terminations
 
-When an application is terminated by the iOS Watchdog, it doesn’t get any termination signal. Because of this lack of termination signal, watchdog terminations do not contain any stack trace. To troubleshoot watchdog terminations, we recommend looking at the [vitals][14] of the parent RUM View (CPU Ticks, Memory).
+When an application is terminated by the iOS Watchdog, it doesn’t get any termination signal. As a result of this lack of a termination signal, watchdog terminations do not contain any stack trace. To troubleshoot watchdog terminations, we recommend looking at the [vitals][14] of the parent RUM View (CPU Ticks, Memory).
 
 #### Disable watchdog terminations reporting
 
