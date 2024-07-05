@@ -150,6 +150,43 @@ To enable app hang monitoring:
 
 To disable app hang monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
 
+### Add watchdog terminations reporting
+
+In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU, memory, etc. These Watchdog Terminations are fatal and not recoverable (more details in the official [Apple documentation][12]).
+
+By default, watchdog terminations reporting is **disabled**, but you can enable it by using the `trackWatchdogTerminations` initialization parameter.
+
+Watchdog terminations are reported through the RUM iOS SDK only (not through [Logs][4]).
+
+When enabled, a watchdog termination will be reported and attached to the previous RUM Session on the next application launch, based on heuristics:
+
+- The application was not upgraded in the meantime,
+- And it did id not call neither `exit`, nor `abort`,
+- And it did not crash, either because of an exception, or because of a fatal [app hang][13],
+- And it was not force-quitted by the user,
+- And the device did not reboot (which includes upgrades of the operating system).
+
+#### Enable watchdog terminations reporting
+
+To enable watchdog terminations reporting, update the initialization snippet with the `trackWatchdogTerminations` flag:
+
+```swift
+RUM.enable(
+    with: RUM.Configuration(
+        applicationID: "<rum application id>",
+        trackWatchdogTerminations: true
+    )
+)
+```
+
+#### Troubleshoot watchdog terminations
+
+When an application is terminated by the iOS Watchdog, it doesn’t get any termination signal. Because of this lack of termination signal, watchdog terminations do not contain any stack trace. To troubleshoot watchdog terminations, we recommend looking at the [vitals][14] of the parent RUM View (CPU Ticks, Memory).
+
+#### Disable watchdog terminations reporting
+
+To disable watchdog terminations reporting, update the initialization snippet and set the `trackWatchdogTerminations` parameter to `false`.
+
 ## Get deobfuscated stack traces
 
 Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
@@ -290,3 +327,6 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [9]: https://github.com/DataDog/datadog-fastlane-plugin
 [10]: https://github.com/marketplace/actions/datadog-upload-dsyms
 [11]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
+[12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
+[13]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
+[14]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals?tab=ios#telemetry
