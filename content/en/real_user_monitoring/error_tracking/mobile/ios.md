@@ -103,25 +103,27 @@ CrashReporting.enable()
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Notes][5] for more guidance on what to set this value to.
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See the [dedicated section][5] for more guidance on what to set this value to.
 
 App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
 When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. There are two types of hangs:
 
-- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking.
+- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the Error Tracking page." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the RUM Error side panel." style="width:60%;" >}}
 
-- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking.
+- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the Error Tracking page." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the RUM Error side panel." style="width:60%;" >}}
 
 #### Enable app hang monitoring
 
 To enable app hang monitoring:
 
-1. Update the initialization snippet with the `appHangThreshold` parameter:
+1. [Enable Crash Reporting][19]
+
+2. Update the initialization snippet with the `appHangThreshold` parameter:
 
    ```swift
    RUM.enable(
@@ -132,11 +134,11 @@ To enable app hang monitoring:
    )
    ```
 
-2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Notes][5] for more guidance on what to set this value to.
+3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See the [following section][5] for more guidance on what to set this value to.
 
    Make sure you follow the steps below to get [deobfuscated stack traces][6].
 
-#### Notes
+#### Configure the app hang threshold
 
 - Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and then lowering it or increasing it incrementally to find the right setup.
 
@@ -146,9 +148,200 @@ To enable app hang monitoring:
 
 - The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to the `appHangThreshold` may not be reported.
 
+#### Compute the hang rate of your application
+
+[Xcode Organizer][15] and [MetricKit][16] both provide a hang rate metric defined as "the number of seconds per hour that the app is unresponsive, while only counting periods of unresponsiveness of more than 250 ms."
+
+To compute a similar hang rate on Datadog, make sure:
+
+1. That app hang reporting is enabled.
+2. That the app hang threshold is equal or below 250 ms.
+3. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are available in your facets (this should be the case by default. If it's not, you can manually [create facets][17]).
+
+If all these prerequisites are met, then create a new [Timeseries widget][18] on a Dashboard or a Notebook, and paste the following snippet in the JSON tab of your widget, under the "Graph your data" section:
+
+{{< img src="real_user_monitoring/error_tracking/json-tab.png" alt="The modal to edit the configuration of a widget, with the JSON tab open" style="width:60%;" >}}
+
+<details>
+  <summary>JSON snippet of the hang rate widget</summary>
+  
+  ```json
+  {
+      "title": "Hang Rate",
+      "type": "timeseries",
+      "requests": [
+          {
+              "formulas": [
+                  {
+                      "number_format": {
+                          "unit": {
+                              "type": "custom_unit_label",
+                              "label": "seconds/hour"
+                          }
+                      },
+                      "formula": "(query2 * 3600000000000) / query1"
+                  }
+              ],
+              "queries": [
+                  {
+                      "name": "query2",
+                      "data_source": "rum",
+                      "search": {
+                          "query": "@type:error @error.category:\"App Hang\" @freeze.duration:>=250000000 @session.type:user"
+                      },
+                      "indexes": [
+                          "*"
+                      ],
+                      "group_by": [
+                          {
+                              "facet": "@application.name",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@freeze.duration"
+                              },
+                              "should_exclude_missing": true
+                          },
+                          {
+                              "facet": "version",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@freeze.duration"
+                              },
+                              "should_exclude_missing": true
+                          }
+                      ],
+                      "compute": {
+                          "aggregation": "sum",
+                          "metric": "@freeze.duration",
+                          "interval": 3600000
+                      },
+                      "storage": "hot"
+                  },
+                  {
+                      "name": "query1",
+                      "data_source": "rum",
+                      "search": {
+                          "query": "@type:session @session.type:user"
+                      },
+                      "indexes": [
+                          "*"
+                      ],
+                      "group_by": [
+                          {
+                              "facet": "@application.name",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@session.time_spent"
+                              },
+                              "should_exclude_missing": true
+                          },
+                          {
+                              "facet": "version",
+                              "limit": 10,
+                              "sort": {
+                                  "aggregation": "sum",
+                                  "order": "desc",
+                                  "metric": "@session.time_spent"
+                              },
+                              "should_exclude_missing": true
+                          }
+                      ],
+                      "compute": {
+                          "aggregation": "sum",
+                          "metric": "@session.time_spent",
+                          "interval": 3600000
+                      },
+                      "storage": "hot"
+                  }
+              ],
+              "response_format": "timeseries",
+              "style": {
+                  "palette": "dog_classic",
+                  "order_by": "values",
+                  "line_type": "solid",
+                  "line_width": "normal"
+              },
+              "display_type": "line"
+          }
+      ],
+      "yaxis": {
+          "include_zero": true,
+          "scale": "sqrt"
+      },
+      "markers": [
+          {
+              "value": "y > 12000000000",
+              "display_type": "error dashed"
+          },
+          {
+              "value": "6000000000 < y < 12000000000",
+              "display_type": "warning dashed"
+          },
+          {
+              "value": "0 < y < 6000000000",
+              "display_type": "ok dashed"
+          }
+      ]
+  }
+  ```
+</details>
+
 #### Disable app hang monitoring
 
 To disable app hang monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
+
+### Add watchdog terminations reporting
+
+In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU, memory, etc. These Watchdog Terminations are fatal and not recoverable (more details in the official [Apple documentation][12]).
+
+By default, watchdog terminations reporting is **disabled**, but you can enable it by using the `trackWatchdogTerminations` initialization parameter.
+
+Watchdog terminations are reported through the RUM iOS SDK only (not through [Logs][4]).
+
+When enabled, a watchdog termination will be reported and attached to the previous RUM Session on the next application launch, based on heuristics:
+
+- The application was not upgraded in the meantime,
+
+- And it did not call neither `exit`, nor `abort`,
+
+- And it did not crash, either because of an exception, or because of a fatal [app hang][13],
+
+- And it was not force-quitted by the user,
+
+- And the device did not reboot (which includes upgrades of the operating system).
+
+{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination.png" alt="A watchdog termination in the RUM Error side panel." style="width:60%;" >}}
+
+#### Enable watchdog terminations reporting
+
+To enable watchdog terminations reporting:
+
+1. [Enable Crash Reporting][19]
+
+2. Update the initialization snippet with the `trackWatchdogTerminations` flag:
+
+    ```swift
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
+            trackWatchdogTerminations: true
+        )
+    )
+    ```
+
+#### Troubleshoot watchdog terminations
+
+When an application is terminated by the iOS Watchdog, it doesn’t get any termination signal. As a result of this lack of a termination signal, watchdog terminations do not contain any stack trace. To troubleshoot watchdog terminations, we recommend looking at the [vitals][14] of the parent RUM View (CPU Ticks, Memory).
+
+#### Disable watchdog terminations reporting
+
+To disable watchdog terminations reporting, update the initialization snippet and set the `trackWatchdogTerminations` parameter to `false`.
 
 ## Get deobfuscated stack traces
 
@@ -283,10 +476,18 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/ios
 [4]: /logs/log_collection/ios
-[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#notes
+[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
 [6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#get-deobfuscated-stack-traces
 [7]: https://appstoreconnect.apple.com/
 [8]: https://www.npmjs.com/package/@datadog/datadog-ci
 [9]: https://github.com/DataDog/datadog-fastlane-plugin
 [10]: https://github.com/marketplace/actions/datadog-upload-dsyms
 [11]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
+[12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
+[13]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
+[14]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals?tab=ios#telemetry
+[15]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
+[16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
+[17]: /real_user_monitoring/explorer/search/#facets
+[18]: /dashboards/widgets/timeseries
+[19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
