@@ -43,7 +43,7 @@ To use a specific identifier (for example, to click on the `nth` element in a dr
 1. Record or manually add a [step][1] to your recording.
 2. Click on the recorded step and click **Advanced options**.
 3. Enter an XPath 1.0 selector or CSS class/ID under **User Specified Locator**, for example: `div`, `h1`, or `.hero-body`, for the HTML element.
-4. Optionally, handlebars syntax can be used to insert dynamic content such as variables:
+4. Optionally, use handlebars (`{{`) syntax to insert dynamic content such as variables:
 
 {{< img src="synthetics/browser_tests/advanced_options/advanced_user_locator.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
 
