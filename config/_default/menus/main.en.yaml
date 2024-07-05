@@ -4611,6 +4611,11 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
       weight: 707
+    - name: Dynamic Sampling
+      url: logs/error_tracking/dynamic_sampling
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_dynamic_sampling
+      weight: 707
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
