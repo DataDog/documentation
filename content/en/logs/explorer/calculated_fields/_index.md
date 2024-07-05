@@ -6,6 +6,9 @@ further_reading:
 - link: "/logs/explorer/calculated_fields/expression_language"
   tag: "Documentation"
   text: "Calculated Fields expression language"
+- link: "/logs/explorer/"
+  tag: "Documentation"
+  text: "Log Explorer"
 ---
 
 ## Overview
