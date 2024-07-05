@@ -12,16 +12,16 @@ Often, organizations need to send their logs to multiple products for different 
 Select your log source to get started:
 
 - [Datadog Agent][1]
-- [HTTP Client][2]
-- [Fluentd or Fluent Bit][3]
+- [Fluentd or Fluent Bit][2]
+- [HTTP Client][3]
 - [Splunk HTTP Event Collector (HEC)][4]
 - [Splunk Heavy and Universal Forwarders (TCP)][5]
 - [Sumo Logic Hosted Collector][6]
 - [Rsyslog or Syslog-ng][7]
 
 [1]: /observability_pipelines/split_logs/datadog_agent
-[2]: /observability_pipelines/split_logs/http_client
-[3]: /observability_pipelines/split_logs/fluent
+[2]: /observability_pipelines/split_logs/fluent
+[3]: /observability_pipelines/split_logs/http_client
 [4]: /observability_pipelines/split_logs/splunk_hec
 [5]: /observability_pipelines/split_logs/splunk_tcp
 [6]: /observability_pipelines/split_logs/sumo_logic_hosted_collector
