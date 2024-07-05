@@ -28,7 +28,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| [Running pipelines][25] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines will show with status "Running" on Datadog. |
+| [Running pipelines][25] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Partial retries][20] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][21] | Manual steps | View manually triggered pipelines. |
 | [Queue time][22] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |

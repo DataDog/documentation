@@ -29,7 +29,7 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
-| *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines will show with status "Running" on Datadog. |
+| *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#enable-log-correlation). |
 | [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 
