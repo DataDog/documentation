@@ -99,7 +99,7 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
         enabled:true
     
     ```
-4. [Restart the Datadog Agent][6] to enable CSM.
+4. [Restart the Datadog Agent][6] to enable CSM Vulnerability Management.
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
