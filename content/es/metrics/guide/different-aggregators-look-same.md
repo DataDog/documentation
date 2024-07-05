@@ -13,14 +13,14 @@ Cuando utilizas los agregadores `sum`/`min`/`max`/`avg`, buscas en varias series
 
 Por ejemplo, si desglosas las solicitudes web por `host` y `path`, obtendrás una serie para cada combinación. Los datos en un momento determinado pueden tener este aspecto:
 
-| Nombre de la métrica  | Etiquetas                      | Valor |
+| Nombre de la métrica  | Etiquetas (tags)                      | Valor |
 | ------------ | ------------------------- | ----- |
 | solicitudes web | `host: a`, `path: /test1` | 5     |
 | solicitudes web | `host: a`, `path: /test2` | 3     |
 | solicitudes web | `host: b`, `path: /test1` | 2     |
 | solicitudes web | `host: b`, `path: /test2` | 8     |
 
-Obtienes resultados diferentes por método de agregación al agrupar por `host`, ya que hay dos series por `host` que deben combinarse.
+Al agrupar por `host`, obtienes resultados diferentes por método de agregación, ya que hay dos series por `host` que deben combinarse.
 
 | Consulta                           | host: a | host: b |
 | ------------------------------- | ------- | ------- |
@@ -29,7 +29,7 @@ Obtienes resultados diferentes por método de agregación al agrupar por `host`,
 | `max:web.requests(*) by {host}` | 5       | 8       |
 | `avg:web.requests(*) by {host}` | 4       | 5       |
 
-Si agrupas por `host` **y** `path` en este ejemplo, se obtienen cuatro series en las que `sum`/`min`/`max`/`avg` son iguales por serie, ya que ese es el nivel más granular para estos datos.
+Si agrupas por `host` **y** `path` en este ejemplo, obtienes cuatro series en las que `sum`/`min`/`max`/`avg` son iguales por serie, ya que ese es el nivel más granular para estos datos.
 
 ## Leer más
 
