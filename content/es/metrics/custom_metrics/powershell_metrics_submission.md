@@ -32,7 +32,7 @@ function postMetric($metric,$tags) {
       "host" = $host_name;
       "tags" = $tags}}
   $post_json = $post_obj | ConvertTo-Json -Depth 5 -Compress
-  # POST a DD API
+  # PUBLICAR a DD API
   $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -ContentType "application/json"
 }
 
@@ -101,7 +101,7 @@ $http_request.responseText
     $app_key = "<DATADOG_APPLICATION_KEY>"
     ```
 
-2. Configure tus parámetros de acuerdo con [la descripción en la API host][4]:
+2. Configura tus parámetros de acuerdo con [la descripción en la API host][4]:
 
     ```powershell
     $host_name = "test.host"
