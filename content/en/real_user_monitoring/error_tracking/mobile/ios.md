@@ -109,13 +109,13 @@ App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
 When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. There are two types of hangs:
 
-- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking.
+- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the Error Tracking page." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the RUM Error side panel." style="width:60%;" >}}
 
-- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking.
+- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the Error Tracking page." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the RUM Error side panel." style="width:60%;" >}}
 
 #### Enable app hang monitoring
 
