@@ -34,11 +34,11 @@ Language  | Minimum version required
 ----------|--------------------------
 Java      | [v1.34.0][5]
 Go        | [v1.64.0][6]
-Python    | _Coming soon_
-Ruby      | _Coming soon_
-Node.js   | _Coming soon_
+Python    | [v.2.9.0][10]
+Ruby      | [v2.0.0][11]
+Node.js   | [v5.16.0][12]
 PHP       | _Coming soon_
-.NET      | _Coming soon_
+.NET      | [v.2.53.2][13]
 C++       | _Coming soon_
 
 ## See sampling rates by resource in the Ingestion Control page
@@ -80,3 +80,7 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 [7]: /tracing/trace_pipeline/ingestion_mechanisms#in-tracing-libraries-user-defined-rules
 [8]: /tracing/trace_pipeline/ingestion_mechanisms#in-the-agent
 [9]: /tracing/trace_explorer/#live-search-for-15-minutes
+[10]: github.com/DataDog/dd-trace-py/releases/tag/v2.9.0
+[11]: github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0
+[12]: github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
+[13]: github.com/DataDog/dd-trace-dotnet/releases/tag/v2.53.2
