@@ -23800,6 +23800,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_read
       summary: List APIs
       tags:
       - API Management
@@ -23843,6 +23848,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Delete an API
       tags:
       - API Management
@@ -23892,6 +23902,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_read
       summary: Get an API
       tags:
       - API Management
@@ -23950,6 +23965,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Update an API
       tags:
       - API Management
@@ -24000,6 +24020,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Create a new API
       tags:
       - API Management
@@ -24686,7 +24711,6 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 4
-      x-permission: OPEN()
       x-undo:
         type: safe
     post:
@@ -24741,7 +24765,6 @@ paths:
               \"authn_mappings\"\n  }\n}"
           step: there is a valid "authn_mapping" in the system
       x-menu-order: 5
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         operationId: DeleteAuthNMapping
         parameters:
@@ -24780,7 +24803,6 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 3
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
     get:
@@ -24817,7 +24839,6 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 1
-      x-permission: OPEN()
       x-undo:
         type: safe
     patch:
@@ -24880,7 +24901,6 @@ paths:
       - AuthN Mappings
       x-codegen-request-body-name: body
       x-menu-order: 2
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
   /api/v2/cases:
@@ -24922,6 +24942,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Search cases
       tags:
       - Case Management
@@ -24959,6 +24984,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Create a case
       tags:
       - Case Management
@@ -24997,6 +25027,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Get all projects
       tags:
       - Case Management
@@ -25030,6 +25065,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Create a project
       tags:
       - Case Management
@@ -25059,6 +25099,11 @@ paths:
           description: API error response
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Remove a project
       tags:
       - Case Management
@@ -25087,6 +25132,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Get the details of a project
       tags:
       - Case Management
@@ -25116,6 +25166,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Get the details of a case
       tags:
       - Case Management
@@ -25152,6 +25207,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Archive case
       tags:
       - Case Management
@@ -25188,6 +25248,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Assign case
       tags:
       - Case Management
@@ -25224,6 +25289,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Update case priority
       tags:
       - Case Management
@@ -25260,6 +25330,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Update case status
       tags:
       - Case Management
@@ -25296,6 +25371,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Unarchive case
       tags:
       - Case Management
@@ -25332,6 +25412,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Unassign case
       tags:
       - Case Management
@@ -25944,10 +26029,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
     post:
@@ -25989,10 +26070,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 3
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/aws_cur_config/{cloud_account_id}:
@@ -26027,10 +26104,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 4
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
     patch:
@@ -26068,10 +26141,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 2
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/aws_related_accounts:
@@ -26117,10 +26186,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 5
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
   /api/v2/cost/azure_uc_config:
@@ -26151,10 +26216,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 6
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
     post:
@@ -26196,10 +26257,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 8
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/azure_uc_config/{cloud_account_id}:
@@ -26234,10 +26291,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 9
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
     patch:
@@ -26281,10 +26334,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 7
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/enabled:
@@ -26315,10 +26364,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 10
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
@@ -28997,10 +29042,6 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - STANDARD
       x-undo:
         type: idempotent
   /api/v2/integrations/fastly/accounts:
@@ -33491,7 +33532,6 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 12
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         operationId: DeleteRole
         parameters:

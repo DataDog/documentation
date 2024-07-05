@@ -1,6 +1,5 @@
 ---
 title: Network Performance Monitoring Setup
-kind: documentation
 description: Collect your Network Data with the Agent.
 aliases:
     - /network_performance_monitoring/installation/
@@ -371,7 +370,6 @@ If you already have the [Agent running with a manifest][4]:
 To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
@@ -464,7 +462,7 @@ For additional information around these capabilities, see [Cloud service enhance
 
 <div class="alert alert-warning">Failed Connections are in private beta. To start seeing <a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">failed connection metrics</a>, reach out to your Datadog representative and request access.</div>
 
-To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/system-probe.yaml` file.
+To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/system-probe.yaml` file (`C:\ProgramData\Datadog\system-probe.yaml` for Windows).
 
 ```yaml
 network_config:   # use system_probe_config for Agent versions older than 7.24.1

@@ -1,6 +1,5 @@
 ---
 title: Propagating Go Trace Context
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30

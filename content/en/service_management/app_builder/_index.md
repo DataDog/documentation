@@ -1,6 +1,5 @@
 ---
 title: App Builder
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/service_management/workflows/actions_catalog/"

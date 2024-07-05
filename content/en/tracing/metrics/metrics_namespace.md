@@ -1,6 +1,5 @@
 ---
 title: Trace Metrics
-kind: documentation
 further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'

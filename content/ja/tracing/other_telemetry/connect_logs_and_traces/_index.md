@@ -3,7 +3,6 @@ aliases:
 - /ja/tracing/advanced/connect_logs_and_traces/
 - /ja/tracing/connect_logs_and_traces/
 description: ログとトレースを接続して Datadog で関連付けます。
-kind: documentation
 title: ログとトレースの接続
 type: multi-code-lang
 ---

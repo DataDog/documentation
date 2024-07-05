@@ -1,6 +1,5 @@
 ---
 title: Serverless Agent configuration
-kind: documentation
 ---
 
 ## Overview
@@ -21,7 +20,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | `DD_SITE`                      | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                  |
 | `DD_DD_URL`                    | Optional setting to override the URL for metric submission.                                                                                                                                                        |
 | `DD_URL`                       | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                      |
-| `DD_TRACE_ENABLED`             | Enables trace collection. Defaults to `true`. Fore more information about additional trace collection environment variables.                                                                                       |
+| `DD_TRACE_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about trace collection environment variables, see [Library Configuration][9].                                                                                       |
 | `DD_TAGS`                      | List of tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.                                                                                                         |
 | `DD_TAG_VALUE_SPLIT_SEPARATOR` | Split tag values according to a given separator. Only applies to host tags, and tags coming from container integrations. It does not apply to tags on DogStatsD metrics, or tags collected by other integrations. |
 |
@@ -115,3 +114,5 @@ Send custom metrics with [the StatsD protocol][5]:
 [7]: /serverless/libraries_integrations/cli/#environment-variables
 
 [8]: /agent/troubleshooting/debug_mode/?tab=agentv6v7#agent-log-level
+
+[9]: /tracing/trace_collection/library_config/

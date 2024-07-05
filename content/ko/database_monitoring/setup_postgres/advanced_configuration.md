@@ -1,6 +1,5 @@
 ---
 description: Postgres 데이터베이스 모니터링을 위한 고급 설정
-kind: 설명서
 title: Postgres 데이터베이스 모니터링을 위한 고급 설정
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/azure_app_service_environment/
   tag: 설명서
   text: Azure App Service 환경
-kind: 도움말
 title: Azure App Service - 리눅스(Linux) 컨테이너
 ---
 ## 개요

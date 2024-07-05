@@ -1,6 +1,5 @@
 ---
 title: Span Kinds
-kind: documentation
 aliases:
     - /tracing/llm_observability/span_kinds
 ---
@@ -10,8 +9,6 @@ aliases:
 LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
-
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
 ## Overview
 

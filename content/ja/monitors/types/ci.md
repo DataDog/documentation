@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
   tag: GitHub
   text: Datadog CI モニターによるパイプラインアラートの構成
-kind: documentation
 title: CI モニター
 ---
 

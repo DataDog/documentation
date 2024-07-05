@@ -1,6 +1,5 @@
 ---
 title: Navigate the Service Catalog
-kind: documentation
 aliases:
   - /tracing/service_catalog/browsing
   - /service_catalog/browsing

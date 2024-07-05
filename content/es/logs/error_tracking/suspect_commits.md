@@ -1,6 +1,5 @@
 ---
 disable_toc: false
-kind: Documentación
 title: Confirmaciones sospechosas
 ---
 

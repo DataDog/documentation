@@ -6,7 +6,6 @@ further_reading:
 - link: /opentelemetry/
   tag: 설명서
   text: Datadog의 OpenTelemetry 지원
-kind: guide
 title: OTLP 히스토그램을 히트맵으로 시각화
 ---
 

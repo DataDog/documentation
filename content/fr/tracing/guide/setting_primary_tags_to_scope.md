@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/visualization/
   tag: Utiliser l'UI de l'APM
   text: Explorer vos services, ressources et traces
-kind: documentation
 title: Configurer les tags primaires
 ---
 

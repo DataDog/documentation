@@ -1,6 +1,5 @@
 ---
 title: Other Frameworks
-kind: documentation
 type: multi-code-lang
 aliases:
 - /real_user_monitoring/ios/swiftui/

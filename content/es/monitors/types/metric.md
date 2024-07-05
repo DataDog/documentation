@@ -17,7 +17,6 @@ further_reading:
 - link: /monitors/types/change-alert
   tag: Documentación
   text: Solución de problemas de los monitores de alerta de cambios
-kind: documentación
 title: Monitor de métrica
 ---
 

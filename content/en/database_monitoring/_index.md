@@ -1,6 +1,5 @@
 ---
 title: Database Monitoring
-kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"

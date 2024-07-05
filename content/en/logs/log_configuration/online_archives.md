@@ -1,6 +1,5 @@
 ---
 title: Online Archives
-kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 private: true
 further_reading:

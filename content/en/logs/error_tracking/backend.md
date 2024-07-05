@@ -1,6 +1,5 @@
 ---
 title: Track Backend Errors
-kind: documentation
 description: Learn how to track backend errors from your logs.
 is_beta: true
 further_reading:

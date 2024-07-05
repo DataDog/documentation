@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: ドキュメント
   text: トレースエクスプローラー
-kind: documentation
 title: スパンの視覚化
 ---
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
   text: SLO の概要、構成、計算
-kind: documentation
 title: メトリクスベース SLO
 ---
 

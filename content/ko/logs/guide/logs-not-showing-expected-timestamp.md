@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: 로그 파싱 문제를 탐색하는 방법
-kind: 가이드
 title: 로그에 올바른 타임스탬프가 나타나지 않음
 ---
 

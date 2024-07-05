@@ -3,7 +3,6 @@ aliases:
 - /ja/logs/historical-views
 - /ja/logs/archives/rehydrating/
 description: ログイベントをアーカイブから取得し、Datadog に戻します。
-kind: ドキュメント
 title: アーカイブからのリハイドレート
 ---
 

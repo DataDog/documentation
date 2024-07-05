@@ -1,6 +1,5 @@
 ---
 title: Create a Case
-kind: Documentation
 further_reading:
 - link: "service_management/case_management/view_and_manage"
   tag: "Documentation"

@@ -1,6 +1,5 @@
 ---
 title: Setup
-kind: documentation
 description: Setting up Network Path 
 is_beta: true
 further_reading:

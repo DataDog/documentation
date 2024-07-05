@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors/
   tag: ドキュメント
   text: Synthetic テストモニターについて
-kind: ガイド
 title: モニターと Statuspage のインテグレーション
 ---
 

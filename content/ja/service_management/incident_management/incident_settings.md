@@ -3,7 +3,6 @@ aliases:
 - /ja/monitors/incident_management/notification_rules
 - /ja/monitors/incident_management/incident_settings
 description: インシデント管理機能の設定とカスタマイズ
-kind: documentation
 title: インシデント設定
 ---
 

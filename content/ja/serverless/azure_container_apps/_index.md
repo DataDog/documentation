@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-container-apps/
   tag: GitHub
   text: Container Apps サービスからのトレース、ログ、カスタムメトリクスの収集
-kind: documentation
 title: Azure Container Apps
 ---
 

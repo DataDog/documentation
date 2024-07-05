@@ -9,7 +9,6 @@ further_reading:
 - link: /developers/community/libraries/
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-kind: ドキュメント
 title: 過去のメトリクスの取り込み
 ---
 

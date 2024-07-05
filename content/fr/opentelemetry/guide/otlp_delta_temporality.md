@@ -6,7 +6,6 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: Prise en charge d'OpenTelemetry dans Datadog
-kind: guide
 title: Générer des métriques de temporalité delta avec OpenTelemetry
 ---
 

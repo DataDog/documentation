@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/guide/alerting-with-conversion-rates/
   tag: Documentation
   text: コンバージョン率でアラートを出す
-kind: ガイド
 title: Shopify ストアで RUM を有効にする
 ---
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /watchdog/
   tag: Documentación
   text: Watchdog detecta problemas en aplicaciones e infraestructuras mediante algoritmos
-kind: Documentación
 title: Monitor Watchdog
 ---
 

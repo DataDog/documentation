@@ -30,7 +30,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-live-processes/
   tag: 블로그
   text: Watchdog Insights for Live Processes를 사용하여 워크로드 성능 이상 문제 해결
-kind: 설명서
 title: Datadog WatchdogTM
 ---
 ## 개요

@@ -1,6 +1,5 @@
 ---
 title: Ingestion Sampling with OpenTelemetry
-kind: documentation
 aliases:
   - /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
