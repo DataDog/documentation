@@ -121,7 +121,9 @@ When enabled, any main thread pause that is longer than the specified `appHangTh
 
 To enable app hang monitoring:
 
-1. Update the initialization snippet with the `appHangThreshold` parameter:
+1. [Enable Crash Reporting][19]
+
+2. Update the initialization snippet with the `appHangThreshold` parameter:
 
    ```swift
    RUM.enable(
@@ -132,7 +134,7 @@ To enable app hang monitoring:
    )
    ```
 
-2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See the [following section][5] for more guidance on what to set this value to.
+3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See the [following section][5] for more guidance on what to set this value to.
 
    Make sure you follow the steps below to get [deobfuscated stack traces][6].
 
@@ -153,8 +155,10 @@ To enable app hang monitoring:
 To compute a similar hang rate on Datadog, make sure:
 
 1. That app hang reporting is enabled
-1. That the app hang threshold is equal or below 250 ms
-1. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are avaible in your facets (this should be the case by default. If it's not, you can manually [create facets][17])
+
+2. That the app hang threshold is equal or below 250 ms
+
+3. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are avaible in your facets (this should be the case by default. If it's not, you can manually [create facets][17])
 
 If all these pre-requisites are met, then create a new [Timeseries widget][18] on a Dashboard or a Notebook, and paste the following snippet in the JSON tab of your widget, under the "Graph your data" section
 
@@ -305,25 +309,33 @@ Watchdog terminations are reported through the RUM iOS SDK only (not through [Lo
 When enabled, a watchdog termination will be reported and attached to the previous RUM Session on the next application launch, based on heuristics:
 
 - The application was not upgraded in the meantime,
+
 - And it did id not call neither `exit`, nor `abort`,
+
 - And it did not crash, either because of an exception, or because of a fatal [app hang][13],
+
 - And it was not force-quitted by the user,
+
 - And the device did not reboot (which includes upgrades of the operating system).
 
 {{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination.png" alt="A watchdog termination in the RUM Error side panel." style="width:60%;" >}}
 
 #### Enable watchdog terminations reporting
 
-To enable watchdog terminations reporting, update the initialization snippet with the `trackWatchdogTerminations` flag:
+To enable watchdog terminations reporting:
 
-```swift
-RUM.enable(
-    with: RUM.Configuration(
-        applicationID: "<rum application id>",
-        trackWatchdogTerminations: true
+1. [Enable Crash Reporting][19]
+
+2. Update the initialization snippet with the `trackWatchdogTerminations` flag:
+
+    ```swift
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
+            trackWatchdogTerminations: true
+        )
     )
-)
-```
+    ```
 
 #### Troubleshoot watchdog terminations
 
@@ -480,3 +492,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 [17]: /real_user_monitoring/explorer/search/#facets
 [18]: /dashboards/widgets/timeseries
+[19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
