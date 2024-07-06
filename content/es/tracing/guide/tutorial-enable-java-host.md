@@ -293,7 +293,7 @@ Los siguientes pasos te guiarán a través de la adición de anotaciones al cód
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
    ```
-   Y también las líneas que establecen etiquetas (tags) en los errores:
+   Y también las líneas que establecen etiquetas en los errores:
    ```java
         } catch (Exception e) {
             // Set error on span
