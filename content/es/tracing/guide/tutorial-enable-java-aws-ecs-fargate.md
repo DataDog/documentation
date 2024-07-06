@@ -216,7 +216,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
    ```
-   Y también las líneas que establecen etiquetas en los errores:
+   Y también las líneas que establecen etiquetas (tags) en los errores:
    ```java
         } catch (Exception e) {
             // Set error on span
@@ -311,7 +311,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
       ...
      ```
 
-    También puedes ver que se configuran las etiquetas (labels) Docker para los mismos valores de etiquetas unificadas de servicios `service` , `env` y `version`. Esto también te permite obtener métricas Docker una vez que tu aplicación se esté ejecutando.
+    También puedes ver que se configuran las etiquetas (labels) Docker para los mismos valores de etiquetas (tags) unificadas de servicios `service` , `env` y `version`. Esto también te permite obtener métricas Docker una vez que tu aplicación se esté ejecutando.
 
 ### Configuración del rastreo
 
