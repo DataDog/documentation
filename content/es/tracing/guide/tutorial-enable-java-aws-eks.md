@@ -247,15 +247,15 @@ Espera unos instantes y ve a [**APM > Traces** (APM > Trazas)][11] en Datadog, d
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Trazas de la aplicación de ejemplo en APM Trace Explorer" style="width:100%;" >}}
 
-La base de datos en memoria integrada para este tutorial es `h2` y la aplicación Spring Boot es `notes`. La lista de trazas muestra todos los tramos (spans), cuándo se han iniciado, qué recurso se ha rastreado con el tramo (span) y cuánto tiempo ha tardado.
+La base de datos en memoria integrada para este tutorial es `h2` y la aplicación Spring Boot es `notes`. La lista de trazas muestra todos los tramos, cuándo se han iniciado, qué recurso se ha rastreado con el tramo y cuánto tiempo ha tardado.
 
 Si no ves trazas después de varios minutos, borra cualquier filtro en el campo de búsqueda de trazas (a veces se filtra sobre una variable de entorno como `ENV` que no estás utilizando).
 
 ### Análisis de una traza
 
-En la página de trazas, haz clic en una traza `POST /notes` para ver un gráfico de llama que muestra cuánto tiempo ha tardado cada tramo (span) y qué otros tramos (spans) han ocurrido antes de que se completara un tramo (span). La barra de la parte superior del gráfico es el tramo (span) seleccionado en la pantalla anterior (en este caso, el punto de entrada inicial en la aplicación de notas).
+En la página de trazas, haz clic en una traza `POST /notes` para ver un gráfico de llama que muestra cuánto tiempo ha tardado cada tramo y qué otros tramos han ocurrido antes de que se completara un tramo. La barra de la parte superior del gráfico es el tramo seleccionado en la pantalla anterior (en este caso, el punto de entrada inicial en la aplicación de notas).
 
-La anchura de una barra indica el tiempo que ha tardado en completarse. Una barra de menor profundidad representa una tramo (span) que se completa durante el tiempo de vida de una barra a mayor profundidad.
+La anchura de una barra indica el tiempo que ha tardado en completarse. Una barra de menor profundidad representa una tramo que se completa durante el tiempo de vida de una barra a mayor profundidad.
 
 El gráfico de llama de una traza `POST` tiene este aspecto:
 
@@ -275,7 +275,7 @@ Fíjate que la marca de la frecuencia de muestreo en el comando aparece antes qu
 
 ## Añadir la instrumentación manual a la aplicación Java 
 
-La instrumentación automática es práctica, pero a veces prefieres utilizar spans más precisos. La API de rastreo DD Java Datadog te permite especificar tramos en tu código mediante anotaciones o código.
+La instrumentación automática es práctica, pero a veces prefieres utilizar tramos más precisos. La API de rastreo DD Java Datadog te permite especificar tramos en tu código mediante anotaciones o código.
 
 Los siguientes pasos te guiarán a través de la modificación de los scripts de compilación para descargar la biblioteca de rastreo Java y añadir algunas anotaciones al código para rastrear en algunos métodos de ejemplo.
 
@@ -306,7 +306,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-5. También puedes crear un tramo separado para un bloque de código específico en la aplicación. Dentro del tramo (span), añade etiquetas de servicio y de nombre de recurso y etiquetas de gestión de errores. Estas etiquetas dan como resultado un gráfico de llama que muestra tramos y métricas en visualizaciones de Datadog. Descomenta las líneas que rastrean manualmente el método privado:
+5. También puedes crear un tramo separado para un bloque de código específico en la aplicación. Dentro del tramo, añade etiquetas de servicio y de nombre de recurso y etiquetas de gestión de errores. Estas etiquetas dan como resultado un gráfico de llama que muestra tramos y métricas en visualizaciones de Datadog. Descomenta las líneas que rastrean manualmente el método privado:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -358,7 +358,7 @@ docker push <ECR_REGISTRY_URL>:notes
 
     Observa el mayor nivel de detalle de la traza del stack tecnológico ahora que la función `getAll` cuenta con el rastreo personalizado.
 
-    El `privateMethod` alrededor del cual has creado un tramo (span) manual aparece ahora como un bloque separado de las otras llamadas y está resaltado con un color diferente. Los otros métodos en los que has utilizado la anotación `@Trace` se muestran bajo el mismo servicio y color que la solicitud `GET`, que es la aplicación `notes`. La instrumentación personal es valiosa cuando hay partes clave del código que necesitan ser resaltadas y monitorizadas.
+    El `privateMethod` alrededor del cual has creado un tramo manual aparece ahora como un bloque separado de las otras llamadas y está resaltado con un color diferente. Los otros métodos en los que has utilizado la anotación `@Trace` se muestran bajo el mismo servicio y color que la solicitud `GET`, que es la aplicación `notes`. La instrumentación personal es valiosa cuando hay partes clave del código que necesitan ser resaltadas y monitorizadas.
 
 Para obtener más información, consulta la [instrumentación personalizada][12].
 
