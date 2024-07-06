@@ -246,7 +246,7 @@ Una traza `GET /notes` tiene este aspecto:
 
 La biblioteca de rastreo Java utiliza el Agent incorporado y el soporte de monitorización Java. La marca `-javaagent:../dd-java-agent.jar` en el archivo Docker indica a la máquina virtual Java dónde encontrar la biblioteca de rastreo Java para que pueda ejecutarse como un Agent Java. Para obtener más información sobre Agents Java, consulta [https://www.baeldung.com/java-instrumentation][7].
 
-La marca `dd.trace.sample.rate` configura la frecuencia de muestreo para esta aplicación. El comando ENTRYPOINT en el archivo Docker configura su valor en `1`, lo que significa que el 100% de todas las solicitudes al servicio `notes` se envían al backend Datadog para su análisis y visualización. Para una aplicación de prueba de bajo volumen, esto está bien. Pero no lo hagas en producción o en entornos de gran volumen, ya que esto generará un volumen muy elevado de datos. En su lugar, muestrea algunas de tus solicitudes. Elige un valor entre 0 y 1. Por ejemplo, `-Ddd.trace.sample.rate=0.1` envía trazas (traces) del 10% de tus solicitudes a Datadog. Consulta la documentación para obtener más información sobre [parámetros de configuración del rastreo][14] y [mecanismos de muestreo][15].
+La marca `dd.trace.sample.rate` configura la frecuencia de muestreo para esta aplicación. El comando ENTRYPOINT en el archivo Docker configura su valor en `1`, lo que significa que el 100% de todas las solicitudes al servicio `notes` se envían al backend Datadog para su análisis y visualización. Para una aplicación de prueba de bajo volumen, esto está bien. Pero no lo hagas en producción o en entornos de gran volumen, ya que esto generará un volumen muy elevado de datos. En su lugar, muestrea algunas de tus solicitudes. Elige un valor entre 0 y 1. Por ejemplo, `-Ddd.trace.sample.rate=0.1` envía trazas del 10% de tus solicitudes a Datadog. Consulta la documentación para obtener más información sobre [parámetros de configuración del rastreo][14] y [mecanismos de muestreo][15].
 
 Fíjate que la marca de la frecuencia de muestreo en el comando aparece antes que la marca `-jar`. Esto se debe a que se trata de un parámetro para la máquina virtual Java y no para tu aplicación. Cuando añadas el Agent Java a tu aplicación, asegúrate de especificar la marca en la ubicación correcta.
 
@@ -280,7 +280,7 @@ Los siguientes pasos le guiarán a través de la adición de anotaciones al cód
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-4. También puedes crear un tramo separado para un bloque de código específico en la aplicación. Dentro del tramo, añade etiquetas de servicio y de nombre de recurso y etiquetas (tags) de gestión de errores. Estas etiquetas dan como resultado un gráfico de llamas que muestra tramos y métricas en visualizaciones de Datadog. Descomenta las líneas que rastrean manualmente el método privado:
+4. También puedes crear un tramo separado para un bloque de código específico en la aplicación. Dentro del tramo, añade etiquetas (tags) de servicio y de nombre de recurso y etiquetas de gestión de errores. Estas etiquetas dan como resultado un gráfico de llamas que muestra tramos y métricas en visualizaciones de Datadog. Descomenta las líneas que rastrean manualmente el método privado:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -350,7 +350,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que de
 
    <div class="alert alert-warning"><strong>Nota</strong>: Nuevamente, las marcas, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
 
-3. Abre `docker/service-docker-compose-linux.yaml` y descomenta las variables de entorno del servicio `calendar` para configurar el host del Agent y las etiquetas de servicio unificadas para la aplicación y para Docker. De la misma forma que para el contenedor `notes`, configura el valor de `DD_AGENT_HOST`, para que coincida con lo que requiere tu Docker, y elimina `extra_hosts` si no estás en Linux:
+3. Abre `docker/service-docker-compose-linux.yaml` y descomenta las variables de entorno del servicio `calendar` para configurar el host del Agent y las etiquetas (tags) de servicio unificadas para la aplicación y para Docker. De la misma forma que para el contenedor `notes`, configura el valor de `DD_AGENT_HOST`, para que coincida con lo que requiere tu Docker, y elimina `extra_hosts` si no estás en Linux:
 
    ```yaml
      calendar:
