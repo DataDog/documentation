@@ -156,7 +156,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    tags.datadoghq.com/env: "prod" # Etiqueta de servicio unificada - Etiqueta del entorno de despliegue
+    tags.datadoghq.com/env: "prod" # Etiqueta (tag) de servicio unificada - Etiqueta del entorno de despliegue
     tags.datadoghq.com/service: "my-service" # Etiqueta de servicio unificada - Etiqueta del servicio de despliegue
     tags.datadoghq.com/version: "1.1" # Etiqueta de servicio unificada - Etiqueta de la versión de despliegue
   # (...)
@@ -872,7 +872,7 @@ En el archivo de composición Docker que inicia tus contenedores, utiliza los si
       - /var/run/docker.sock:/var/run/docker.sock:ro
 ```
 
-## Especificación de etiquetas de servicio unificadas en contenedores
+## Especificación de etiquetas (tag) de servicio unificadas en contenedores
 
 Si las variables de entorno `DD_ENV` , `DD_SERVICE` o `DD_VERSION` se especifican en una imagen de contenedor de servicios, esos valores se utilizan para etiquetar la telemetría del contenedor.
 
