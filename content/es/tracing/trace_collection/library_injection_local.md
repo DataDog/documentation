@@ -59,7 +59,7 @@ Para tus aplicaciones Kubernetes cuyas trazas quieres enviar a Datadog, configur
 
 1. Habilita el controlador de admisión para mutar tus pods.
 2. Anota tus pods para seleccionar qué biblioteca de instrumentación inyectar.
-3. Etiqueta tus pods con el etiquetado unificado de servicios para unir la telemetría de Datadog y navegar sin problemas por trazas, métricas y logs con etiquetas coherentes.
+3. Etiqueta tus pods con el etiquetado unificado de servicios para unir la telemetría de Datadog y navegar sin problemas por trazas, métricas y logs con etiquetas (tags) coherentes.
 4. Aplica tu nueva configuración.
 
 <div class="alert alert-info">No es necesario generar una nueva imagen de la aplicación para inyectar la biblioteca. La inyección de bibliotecas se realiza añadiendo la biblioteca de instrumentación, por lo que no es necesario realizar ningún cambio en la imagen de la aplicación.</div>
@@ -112,7 +112,7 @@ Las versiones de biblioteca disponibles se enumeran en cada registro de contened
 
 **Nota**: Si ya tienes una aplicación instrumentada utilizando la versión X de la biblioteca y luego utilizas la inyección de bibliotecas para la instrumentación utilizando la versión Y de la misma biblioteca del rastreador, este no se rompe. En su lugar, se utiliza la versión de biblioteca cargada en primer lugar. Dado que la inyección de bibliotecas se produce en el nivel del controlador de admisión antes del tiempo de ejecución, tiene prioridad sobre las bibliotecas configuradas de forma manual.
 
-<div class="alert alert-warning"><strong>Nota</strong>: Se admite el uso de la <code>última</code> etiqueta, pero utilízala con precaución, ya que las principales versiones de bibliotecas pueden introducir cambios de última hora.</div>
+<div class="alert alert-warning"><strong>Nota</strong>: Se admite el uso de la <code>última</code> etiqueta (tag), pero utilízala con precaución, ya que las principales versiones de bibliotecas pueden introducir cambios de última hora.</div>
 
 Por ejemplo, para inyectar una biblioteca Java:
 
@@ -134,10 +134,10 @@ spec:
         - # (...)
 ```
 
-### Paso 3 - Etiquetar tus pods con etiquetas (tag) unificadas de servicios
+### Paso 3 - Etiquetar tus pods con etiquetas (tags) unificadas de servicios
 
 Con [etiquetas (tags) de servicios unificadas][21], puedes unir la telemetría de Datadog y navegar sin problemas a través de trazas, métricas, y logs con etiquetas coherentes. Define el etiquetado unificado de servicios tanto en el objeto de despliegue como en las especificaciones de la plantilla del pod.
-Define etiquetas de servicios unificadas utilizando las siguientes etiquetas:
+Define etiquetas de servicios unificadas utilizando las siguientes etiquetas (labels):
 
 ```yaml
   metadata:
@@ -561,7 +561,7 @@ Para obtener más información sobre la configuración de `BLOB` o `LOCAL`, cons
 **Por defecto**: `stderr`
 
 Opcional: `env`
-: Especifica la etiqueta `DD_ENV` para los contenedores que se ejecutan en Docker, por ejemplo, `dev`, `prod`, `staging`. <br>
+: Especifica la etiqueta (tag) `DD_ENV` para los contenedores que se ejecutan en Docker, por ejemplo, `dev`, `prod`, `staging`. <br>
 **Por defecto**: Nada.
 
 <a id="supplying-configuration-source-hc"></a>
@@ -663,7 +663,7 @@ health_metrics_enabled: true
 runtime_metrics_enabled: true
 ```
 
-## Especificación de etiquetas de servicio unificadas en contenedores
+## Especificación de etiquetas (tags) de servicio unificadas en contenedores
 
 Si las variables de entorno `DD_ENV` , `DD_SERVICE` o `DD_VERSION` se especifican en una imagen de contenedor de servicios, esos valores se utilizan para etiquetar la telemetría del contenedor.
 
@@ -749,7 +749,7 @@ Para obtener más información sobre la configuración de `BLOB` o `LOCAL`, cons
 **Por defecto**: `stderr`
 
 Opcional: `env`
-: Especifica la etiqueta `DD_ENV` para los contenedores que se ejecutan en Docker, por ejemplo, `dev`, `prod`, `staging`. <br>
+: Especifica la etiqueta (tag) `DD_ENV` para los contenedores que se ejecutan en Docker, por ejemplo, `dev`, `prod`, `staging`. <br>
 **Por defecto**: Nada.
 
 <a id="supplying-configuration-source-c"></a>
