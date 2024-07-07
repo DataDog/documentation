@@ -139,7 +139,7 @@ Ahora que ya tienes una aplicación Python en funcionamiento, configúrala para 
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Añade etiquetas (labels) Docker que correspondan a las etiquetas (tags) unificadas de servicios. Esto también te permite obtener métricas Docker una vez que ejecute tu aplicación.
+4. Añade etiquetas (labels) Docker que correspondan a las etiquetas (tags) unificadas de servicios. Esto también te permite obtener métricas Docker una vez que se ejecute tu aplicación.
 
    ```
    LABEL com.datadoghq.tags.service="notes"
@@ -279,7 +279,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar_app` qu
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Nuevamente, añade etiquetas (labels) Docker que correspondan a las etiquetas unificadas de servicios. Esto también te permite obtener métricas Docker una vez que se ejecute tu aplicación.
+4. Nuevamente, añade etiquetas (labels) Docker que correspondan a las etiquetas (tags) unificadas de servicios. Esto también te permite obtener métricas Docker una vez que se ejecute tu aplicación.
 
    ```
    LABEL com.datadoghq.tags.service="calendar"
