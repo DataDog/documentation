@@ -211,7 +211,7 @@ Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integra
 
 ## Use cloud cost data
 
-Visualize infrastructure spend alongside related utilization metrics to spot potential inefficiencies and savings opportunities.
+Visualize infrastructure spend alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities. 
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
@@ -221,7 +221,7 @@ Optionally, you can programmatically export a timeseries graph of your cloud cos
 
 ## Use daily Datadog cost data
 
-Visualize daily Datadog spending alongside related utilization metrics to spot potential inefficiencies and savings opportunities.
+Visualize daily Datadog spending alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities.
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
