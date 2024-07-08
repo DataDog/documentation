@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/security/security_monitoring/getting_started/
 further_reading:
 - link: /security/application_security/terms
   tag: Documentation
@@ -12,12 +14,13 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
-- link: /getting_started/application_security/vulnerability_management
+- link: /getting_started/application_security/software_composition_analysis
   tag: ガイド
-  text: Application Vulnerability Management を始める
+  text: Software Composition Analysis を始める
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
+kind: documentation
 title: Application Security Management を始める
 ---
 
@@ -30,13 +33,13 @@ Datadog Application Security Management (ASM) は、本番環境における Web
 ## セキュリティリスクのあるサービスの特定
 
 
-ASM が有効であると思われる、**攻撃にさらされやすいサービスを特定します**。[ASM Setup ページ][1]に移動し、そこで推奨されるサービスを選択します。
+ASM を活用できる、**攻撃に対して脆弱なサービスまたは攻撃にさらされているサービスを特定します**。[**Service Catalog > Security ページ**][1]で、有効にしたいサービスを表示して選択します。
 
-{{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="Vulnerabilities を表示し、Suspicious requests 列でソートされた ASM Services ページビュー。" style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="Vulnerabilities を表示し、Suspicious requests 列でソートされた ASM Services ページビュー。" style="width:100%;" >}}
 
 これらのセキュリティに関する洞察は、APM によって報告されたデータから検出されます。このインサイトは、セキュリティ対策に優先順位をつけるのに役立ちます。ASM は、サービス上のすべてのセキュリティリスクを特定し、優先順位を付け、修復を支援します。
 
-**注**: 脆弱性や不審なリクエストが報告されない場合、サービスが最新の Datadog トレーシングライブラリバージョンを使用していることを確認します。[APM Service Catalog][2] から、任意のサービスのサイドパネルを開き、その **Tracing Configuration** を見てください。
+**注**: 脆弱性や不審なリクエストが報告されない場合、サービスが最新の Datadog トレーシングライブラリのバージョンを使用していることを確認してください。[Security Service Catalog][2] から、任意のサービスのサイドパネルを開き、その **Tracing Configuration** を見てください。
 
 
 {{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="APM Service Catalog ページビューの Tracer Configuration タブ。Datadog Agent、Datadog トレーシングライブラリのどのバージョンがサービスで使用されているかをハイライトしています。" style="width:100%;" >}}
@@ -46,14 +49,17 @@ ASM が有効であると思われる、**攻撃にさらされやすいサー�
 
 ### アプリ内の指示で ASM を有効化
 
-[ASM Setup ページ][1]にアクセスし、指示に従ってセットアップを開始します。これには以下が含まれます。
+[ASM ランディングページ][18]で、指示に従ってセットアップを開始します。これには以下が含まれます。
 - ASM が有効であると思われるサービスの選定を指導します。
 - 環境変数で Datadog トレーシングライブラリを構成します。
 - サービスを再起動します。</br>
 
-1. [ASM に移動][18]し、**Get Started with ASM** をクリックします。
-2. Datadog が推奨するリスクにさらされているサービスを選択します。
+1. **Get Started with ASM** をクリックします。
+2. オープンソースライブラリの脆弱性を検出する (Software Composition Analysis)、コードレベルの脆弱性を検出して修正する (Code Security)、サービスの脅威検出を発見して有効化する (Threat Management) ためには、**Get Started** を選択してください。
 3. ASM を使い始めるには、指示に従ってください。
+
+   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis セットアップページ。" style="width:100%;" >}}
+
 
 ### リモート構成で ASM を有効にする
 #### 前提条件:
@@ -86,13 +92,19 @@ ASM を有効にすると、アプリケーションの脆弱性を即座に識�
 
 3. [セキュリティシグナルエクスプローラー][6]で、数秒後に発生するシグナルを確認してください。
 
+## レポートと通知
+
+1. [通知ルール][23]を設定して、Slack、Jira、メールなどを使用してアラートを受け取るようにします。
+3. 毎週の[脅威ダイジェスト][22]レポートを購読して、過去 7 日間に発見された最も重要なセキュリティ脅威の調査と対処を開始してください。
+
+
 さらなるベストプラクティスにご興味がおありですか？[製品内クイックスタートガイド][19]をご覧ください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/asm/services-setup/services-selection?services=recommended
+[1]: https://app.datadoghq.com/services?&lens=Security
 [2]: https://app.datadoghq.com/services?hostGroup=%2A&lens=Security
 [3]: /ja/security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /ja/security/application_security/how-appsec-works/
@@ -113,3 +125,5 @@ ASM を有効にすると、アプリケーションの脆弱性を即座に識�
 [19]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [20]: /ja/getting_started/application_security/#setup-asm
 [21]: /ja/agent/remote_config?tab=configurationyamlfile#setup
+[22]: https://app.datadoghq.com/security/configuration/reports
+[23]: https://app.datadoghq.com/security/configuration/notification-rules
