@@ -11,7 +11,6 @@ further_reading:
 - link: /monitors/types/ci
   tag: ドキュメント
   text: CI モニターについて
-kind: ドキュメント
 title: Datadog のコードカバレッジ
 ---
 

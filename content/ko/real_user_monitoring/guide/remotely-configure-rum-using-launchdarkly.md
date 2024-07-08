@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: 설명서
   text: RUM 탐색기에서 RUM 데이터 시각화
-kind: 가이드
 private: true
 title: LaunchDarkly를 사용해 RUM 원격 설정
 ---

@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 딕셔너리를 사용 중일 때는 수정하지 않기
 ---
 ## 메타데이터

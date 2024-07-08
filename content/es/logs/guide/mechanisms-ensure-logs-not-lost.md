@@ -11,7 +11,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada de glosario para "tail" (cola)
-kind: guía
 title: Mecanismos para asegurar que no se pierdan logs
 ---
 

@@ -16,7 +16,6 @@ further_reading:
 - link: /tests/code_coverage/
   tag: ドキュメント
   text: コードカバレッジについて
-kind: ドキュメント
 title: Intelligent Test Runner の概要
 ---
 

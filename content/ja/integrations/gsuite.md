@@ -27,7 +27,7 @@ integration_id: gsuite
 integration_title: Google Workspace
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: gsuite
 public_title: Google Workspace

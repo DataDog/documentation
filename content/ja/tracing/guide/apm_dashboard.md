@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
 ---
 

@@ -33,7 +33,7 @@ integration_id: circleci
 integration_title: CircleCI
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: circleci
 public_title: Aurora
