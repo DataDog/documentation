@@ -251,7 +251,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | RxJava              | 2.x        | Fully Supported                                                  | `rxjava`                                       |
 | Spring Data         | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
 | Spring Scheduling   | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
-| Tibco BusinessWorks | 5.14.0+    | [Beta](#framework-integrations-disabled-by-default)              | `tibco`, `tibco_bw`                            |
+| TIBCO BusinessWorks | 5.14.0+    | [Beta](#framework-integrations-disabled-by-default)              | `tibco`, `tibco_bw`                            |
 | Twilio SDK          | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
