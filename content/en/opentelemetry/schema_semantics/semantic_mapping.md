@@ -16,7 +16,7 @@ further_reading:
 
 OpenTelemetry makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
 
-### Unified Service Tagging
+### Unified service tagging
 
 | OpenTelemetry convention | Datadog convention |
 | --- | --- |
