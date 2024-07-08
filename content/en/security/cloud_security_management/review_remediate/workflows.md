@@ -33,7 +33,7 @@ Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate yo
 
 ## Understanding how triggers and sources work
 
-Workflow Automation allows you to trigger a workflow manually or automatically from a monitor, security signal, or custom schedule. In the example workflows in this article, the workflows are triggered manually by clicking the **Actions** > **Run Workflow** button on the side panels.
+Workflow Automation allows you to trigger a workflow manually or automatically. In the example workflows in this article, the workflows are triggered manually by clicking the **Actions** > **Run Workflow** button on the side panels.
 
 When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security finding. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][7].
 
@@ -48,6 +48,7 @@ This example creates a remediation workflow that sends an interactive Slack mess
 **Note**: To build this workflow, you must configure the [Slack integration][5].
 
 1. On the [Workflow Automation page][4], click **New Workflow**.
+1. Click **Add Trigger** > **Security**. A workflow must have the security trigger before you can run it.
 1. Enter a name for the workflow and click **Save**.
 
 #### Get security misconfiguration
@@ -130,6 +131,7 @@ This example creates an automated ticket routing workflow that creates and assig
 **Note**: To build this workflow, you must configure the [Jira integration][6].
 
 1. On the [Workflow Automation page][4], click **New Workflow**.
+1. Click **Add Trigger** > **Security**. A workflow must have the security trigger before you can run it.
 1. Enter a name for the workflow and click **Save**.
 
 #### Get security finding
@@ -155,7 +157,7 @@ To retrieve the finding and pass it into the workflow, use the **Get security fi
 
 You can trigger an existing workflow from the finding, misconfiguration, and resource side panels.
 
-In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
+In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. The workflow must have a security trigger to appear in the list. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
 
 {{< img src="/security/csm/run_workflow_side_panel.png" alt="The Actions menu on the misconfigurations side panel showing a list of actions to run" width="100%">}}
 

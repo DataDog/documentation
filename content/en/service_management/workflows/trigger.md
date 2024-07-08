@@ -30,7 +30,7 @@ further_reading:
 <div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-You can trigger a workflow manually or automatically.
+You can trigger a workflow manually or automatically. A can workflow can have multiple triggers.
 
 A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
 
@@ -46,11 +46,9 @@ To trigger a workflow manually:
 To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
 1. From your Dashboard, click **Add Widget**.
 1. Search for `workflows` and add the **Run Workflow** widget.
-1. Under **Select the workflow**, find your workflow in the dropdown menu.
+1. Under **Select the workflow**, find your workflow in the dropdown menu. Only published workflows with dashboard triggers appear in the list.
 1. Map dashboard template variables to workflow input parameters. This allows the values of your dashboard template variables to be mapped directly to the input parameters when you run the workflow.
 1. Enter a title for the widget and click **Save**.
-
-{{< img src="service_management/workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
 To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
@@ -69,21 +67,24 @@ If the child workflow has [input parameters][5], these parameters appear as requ
 
 ## Trigger a workflow from a Monitor
 
-To trigger a workflow from a Monitor:
-1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
+To trigger a workflow from a Monitor, you must first add a monitor trigger to your workflow:
+1. Add a Monitor trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Monitor**.
+   - If your workflow already has one more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
+1. Click the trigger and take note of the **Mention handle**.
 1. Save your Workflow.
+1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+Add the workflow to your monitor:
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-1. In the message section, add the full workflow mention name:
-   - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
-   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
+1. In the **Configure notifications & automations** section, click **Add Workflow**.
+1. Use the workflow mention name to search for your workflow and select it from the drop-down. Only workflows with monitor triggers appear in the list.
+1. Optionally, to pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
 1. Save the monitor.
 
-{{< img src="service_management/workflows/monitor-trigger.png" alt="Add a monitor trigger to the message section of a Monitor" >}}
-
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
-
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
 ### Test a monitor trigger
 
@@ -101,33 +102,37 @@ To test a monitor trigger:
 
 ## Trigger a workflow from a Security Signal
 
-You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel.
+You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel. Before you can add a workflow to a Security Signal, the workflow must have a Security trigger.
 
 ### Trigger a workflow automatically from Security Signal Notification Rules
 
 You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
 
-To trigger a workflow from a Notification Rule:
-1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
-1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
+To trigger a workflow from a notification rule, you must first add a security trigger to your workflow:
+1. Add a Security trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Security**.
+   - If your workflow already has one more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Security**.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
+1. Click the trigger and take note of the **Mention handle**.
 1. Save your Workflow.
+1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+Add the workflow to your notification rule:
 1. From the [Configuration][3] page, find the notification rule you'd like to use to trigger your workflow, or create a new rule.
-1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
-1. Add a unique notification name.
-1. Click **Save and Activate**.
+1. In the **Recipient** section, use the workflow mention name to find your workflow. For example, `@workflow-my-workflow`.
+1. Select the workflow from the drop-down. Only workflows with security triggers appear in the list.
+1. Click **Save**.
 
 {{< img src="service_management/workflows/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
 Each time the Notification Rule fires, it triggers a workflow run.
-
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
 ### Trigger a workflow manually from Cloud SIEM Security Signals
 
 You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 1. Click **Run Workflow** at the top of the Security Signal panel.
-1. In the search modal, enter the name of the workflow you want to run. Select the workflow. 
+1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with security triggers appear in the list.
 1. If your workflow requires input parameters, enter the values as required. You can copy the values from the Signal object JSON displayed next to the input parameters, and paste them into the parameter fields.
 1. Click **Run**.
 1. You can see the workflow run status in the **Workflow** section of the Security Signal.
@@ -136,13 +141,21 @@ For additional examples of Security workflows you can automate, see [Automate Se
 
 ## Trigger a workflow from incidents
 
-To trigger a workflow from incidents, create an incident notification rule:
-1. Create a workflow with a **Monitor, Incident, or Security signal** trigger, or add a **Monitor, Incident, or Security signal** trigger to an existing workflow.
-1. Click on the trigger in the workflow canvas and copy the **Mention handle**.
-1. From the [Incidents Settings][6] page, select **Rules**.
+To trigger a workflow from an incident notification rule, you must first add an incident trigger to your workflow:
+1. Add an Incident trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Incident**.
+   - If your workflow already has one more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Incident**.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
+1. Click the trigger and take note of the **Mention handle**.
+1. Save your Workflow.
+1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+Add the workflow to your incident notification rule:
+1. [Incidents Settings][6] page, select **Rules**.
 1. Click **New Rule**.
 1. Configure a **Severity**, **Service**, and **Other attributes** for your notification rule.
 1. Under **Notify**, paste the workflow handle that you copied earlier.
+1. In the **Recipient** section, use the workflow mention name to find your workflow. For example, `@workflow-my-workflow`. The workflow must have an incident trigger before you can trigger it from an incident.
 1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
 1. Click **Save**.
 
@@ -154,8 +167,7 @@ To schedule a workflow run:
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
-
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+1. Click **Publish**. Scheduled workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## Run history
 

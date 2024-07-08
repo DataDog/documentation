@@ -36,7 +36,7 @@ Create a workflow:
    Description: `Create a Jira issue and Slack notification when there is a monitor alert`.
 
 Add and configure the monitor:
-1. On the workflow canvas, click **Add Trigger** and select **Monitor, Incident, or Security Signal**.
+1. On the workflow canvas, click **Add Trigger** and select **Monitor**.
 1. In the **Configure** tab, next to `@workflow-`, enter a unique ID for your workflow: `Create-Jira-Ticket`.<br>
    Workflow handles always begin with `@workflow-`. Later, you use this handle to connect the workflow to a monitor notification.
 1. Click **Save** to save your workflow.
@@ -108,8 +108,9 @@ Scheduled and triggered workflows don't trigger automatically until you publish 
 
 1. Navigate to the [Monitors page][7] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-1. In the message section, add the full workflow mention name to an alert notification. The mention name starts with `@workflow-`. For example, `@workflow-Create-Jira-Ticket`.
-    - You can pass trigger variables into the workflow by using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname={{host.name}})`.
+1. In the **Configure notifications & automations** section, click **Add Workflow**.
+1. Use the workflow mention name (`@workflow-Create-Jira-Ticket`) to search for your workflow and select it from the drop-down.
+   - You can pass trigger variables into the workflow by using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname={{host.name}})`.
 1. Click **Test Notifications** to test the workflow and all of this monitor's notifications.
 1. Save the monitor.
 
