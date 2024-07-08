@@ -3,7 +3,7 @@
 {{ $hash := "" }}
 
 {{ with .File }}
-    {{ $hash := .UniqueID }}
+    {{ $hash = .UniqueID }}
 {{ end }}
 
 {{ if $dot.Params.meta_image }}
