@@ -192,9 +192,8 @@ If you are using self-hosted GitLab runners, you can correlate jobs with the inf
 
 #### Tagging runners with hostname
 
-The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
-[registering a new runner][6]. As a result, this method is is only available when the runner is directly running the job, excluding executors that are autoscaling the infrastructure in order to run the job
-(such as the Kubernetes, Docker Autoscaler or Instance executors) as it is not possible to add tags dynamically for those runners.
+The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job. This excludes executors that are autoscaling the infrastructure in order to run the job
+(such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
 
 For existing runners:
 
