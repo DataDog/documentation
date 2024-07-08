@@ -39295,6 +39295,8 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  x-merge-override:
+    /api/v2/apicatalog/api: true
 security:
 - apiKeyAuth: []
   appKeyAuth: []
