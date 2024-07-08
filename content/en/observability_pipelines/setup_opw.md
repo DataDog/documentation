@@ -65,6 +65,18 @@ To set bootstrap options, do one of the following:
 : env var: `DD_OP_THREADS`
 : The number of threads to use for processing (optional, default: the number of available cores).
 
+`proxy`
+: This option is available for Observability Pipelines Worker 2.1 and later.
+: env variables: `DD_PROXY_HTTP`, `DD_PROXY_HTTPS`, `DD_PROXY_NO_PROXY`
+: Set proxy servers for the Observability Pipelines Worker. The proxy configuration for the Worker works in the same way as it does for the [Datadog Agent][4].
+: The settings are applied to the entire Worker process. The HTTP proxy and HTTPS values are resolved in this order:
+<br>&nbsp;&nbsp;&nbsp;1. `DD_PROXY_HTTP(S)`
+<br>&nbsp;&nbsp;&nbsp;2. `HTTP(S)_PROXY`
+<br>&nbsp;&nbsp;&nbsp;3. `proxy`
+: 
+: An example proxy configuration:
+: &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
+: <b>Note</b>: The `DD_PROXY_HTTP(S)` and `HTTP(S)_PROXY` environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -72,3 +84,4 @@ To set bootstrap options, do one of the following:
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /getting_started/site/
+[4]: /agent/configuration/proxy/?tab=linux#environment-variables
