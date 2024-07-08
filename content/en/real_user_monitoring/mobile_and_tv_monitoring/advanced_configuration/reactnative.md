@@ -247,7 +247,7 @@ You can manually track RUM actions:
 DdRum.addAction(RumActionType.TAP, 'action name', {}, Date.now());
 ```
 
-In case you want to track a continuous action:
+To track a continuous action:
 
 ```javascript
 DdRum.startAction(RumActionType.TAP, 'action name', {}, Date.now());
