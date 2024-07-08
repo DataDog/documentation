@@ -30,20 +30,20 @@ cascade:
 
 ## Overview
 
-Datadog Monitors provide vital visibility into your infrastructure, enabling proactive detection and response to performance issues and outages in real-time. Configure monitors to track essential metrics and thresholds, so organizations can promptly receive alerts, allowing them to address problems before customer impact or system downtime occurs.
+Datadog Monitors provide vital visibility into your infrastructure, enabling proactive detection and real-time response to performance issues and outages. By configuring monitors to track key metrics and thresholds, organizations can receive immediate alerts and address problems before they impact customers or cause system downtime.
 
-Monitor critical changes by actively checking metrics, integration availability, and network endpoints, all managed conveniently on the Alerting platform. With Datadog Monitors you can:
+Monitor critical changes by checking metrics, integration availability, and network endpoints through the Alerting platform. With Datadog Monitors you can:
 - Simplify monitoring and response processes
 - Enhance operational efficiency
-- Ensure optimal performance 
+- Optimize performance 
 
-## Getting started
+## Get started
 
 The fastest way to start with Datadog Monitors is with [Recommended Monitors][1]. These are a collection of monitors within Datadog that are preconfigured by Datadog and integration partners.
 
 You can also build your own monitors from scratch in lab environments in the Learning Center, or in your application by following the Getting Started with Monitors guide.
 
-{{< whatsnext desc="Use the following resources to create:" >}}
+{{< whatsnext desc="Use the following resources to create a monitor:" >}}
     {{< nextlink href="/getting_started/monitors/" >}}Getting started with Monitors: Guide on how to build a metric based monitor{{< /nextlink >}}
     {{< nextlink href="/monitors/types/" >}}Create a monitor from Monitor Types{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Learning Center: Build a metric base monitor in a sandbox lab environment{{< /nextlink >}}
@@ -51,25 +51,25 @@ You can also build your own monitors from scratch in lab environments in the Lea
 
 ## Analyze aggregate data
 
-Good data should be well-understood, granular, tagged by scope, and long-lived. Use different data types for alerts and diagnostics, based on the level of urgency. Instrument everything and collect as much relevant data as possible for comprehensive measurements and observability of complex systems.
+Data should be well-understood, granular, tagged by scope, and long-lived. Use different data types for alerts and diagnostics, based on the level of urgency. Instrument all applications and collect as much relevant data as possible for comprehensive measurements and observability of complex systems.
 
-Measure the health of your applications and the state of your infrastructure through data sent to Datadog. Use data from across the platform whether Logs, Metrics, Traces, Cloud Cost, RUM, or Security, to create alerts on the potential issues.
+Measure the health of your applications and the state of your infrastructure with Datadog. Use data from across the Datadog platform to create alerts on potential issues.
 
 ## Alert on what matters
 
-Set up [Monitor Notifications][2] when creating monitors to keep your team informed of issues and provide troubleshooting guidance. Route the notifications to the correct people, leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. 
+Set up [Monitor Notifications][2] to keep your team informed of issues and provide troubleshooting guidance. Route the notifications to the correct people, leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. 
 
-Reduce alerting fatigue so teams can focus on the resolving alerts when it matters. Create [downtimes][3] to mute alerts during application maintenance. 
+Reduce alerting fatigue so teams can focus on resolving alerts when it matters. Create [downtimes][3] to mute alerts during application maintenance. 
 
 ## What's next
 
 Monitors and alerts are essential tools for ensuring the reliability, performance, and availability of IT systems and applications. They help maintain operational efficiency, improve user experience, and mitigate potential risks by enabling quick detection and response to issues before they escalate. Learn more about Monitor features: 
 1. [Select a monitor type.][4]
 1. [Configure monitors.][5]
-1. [Configure the notification message.][6]
+1. [Configure notification messages.][6]
 1. [Schedule downtimes to mute monitors.][7]
 1. [Organize and manage monitors.][8]
-1. [Resolve misconfigured monitors on Monitor Quality page.][9]
+1. [Resolve misconfigured monitors on the Monitor Quality page.][9]
 
 ## Further Reading
 
