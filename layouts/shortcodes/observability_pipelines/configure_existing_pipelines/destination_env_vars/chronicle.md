@@ -1,4 +1,2 @@
 - Google Chronicle endpoint URL:
    - Stored in the environment variable: `DD_OP_DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.
-- Google Chronicle API key:
-   - Stored in the environment variable: `DD_OP_DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_API_KEY`.
