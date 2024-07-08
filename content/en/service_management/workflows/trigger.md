@@ -100,8 +100,6 @@ To test a monitor trigger:
 1. Select a monitor state.
 1. Click **Run From Monitor**.
 
-{{< img src="service_management/workflows/test-monitor.mp4" alt="Test your monitor using the Test from Monitor button" video="true" >}}
-
 ## Trigger a workflow from a Security Signal
 
 You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel. Before you can add a workflow to a Security Signal, the workflow must have a Security trigger.
