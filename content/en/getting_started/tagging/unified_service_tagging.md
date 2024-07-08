@@ -438,7 +438,8 @@ Here's an example using Python:
 
 ```python
 from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace import TracerProvide
+from opentelemetry.sdk.trace import TracerProvider
+
 resource = Resource(attributes={
    "service.name": "<SERVICE>",
    "deployment.environment": "<ENV>",
@@ -451,7 +452,7 @@ tracer_provider = TracerProvider(resource=resource)
 
 {{% tab "Collector" %}}
 
-To set resource attributes from the Collector, use the transform processor in your Collector configuration file. The transform processor allows you to modify attributes of the collected telemetry data before sending it to the Datadog exporter:
+To set resource attributes from the OpenTelemetry Collector, use the [transform processor][100] in your Collector configuration file. The transform processor allows you to modify attributes of the collected telemetry data before sending it to the Datadog exporter:
 
 ```yaml
 processors:
@@ -464,6 +465,8 @@ processors:
           - set(attributes["service.version"], "1.2.3")
 ...
 ```
+
+[100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -488,4 +491,3 @@ processors:
 [14]: https://www.ansible.com/
 [15]: /serverless/configuration/#connect-telemetry-using-tags
 [16]: https://opentelemetry.io/docs/languages/js/resources/
-[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor

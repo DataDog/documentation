@@ -139,5 +139,5 @@ Enabling this option adds both the OpenTelemetry resource attributes and the Dat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/concepts/semantic-conventions/
-[2]: /getting_started/tagging/unified_service_tagging
+[2]: /getting_started/tagging/unified_service_tagging#opentelemetry
 [3]: https://opentelemetry.io/docs/specs/semconv/resource/container/
