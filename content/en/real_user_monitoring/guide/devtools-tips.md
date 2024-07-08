@@ -1,6 +1,6 @@
 ---
 title: Tips When Using Browser Developer Tools
-kind: guide
+
 further_reading:
     - link: '/real_user_monitoring/browser'
       tag: 'Documentation'

@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: ダウンタイムについて
-kind: ガイド
 title: ダウンタイムになったモニターからのアラートを防止する
 ---
 

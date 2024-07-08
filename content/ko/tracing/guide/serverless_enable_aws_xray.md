@@ -2,7 +2,6 @@
 aliases:
 - /ko/tracing/serverless_functions/enable_aws_xray/
 description: AWS X-Ray로 Lambda 함수 추적
-kind: 설명서
 title: AWS X-Ray 추적 활성화
 ---
 ## AWS X-Ray 활성화

@@ -14,7 +14,6 @@ further_reading:
 - link: /logs/live_tail/
   tag: Documentation
   text: Live Tail のご紹介
-kind: ガイド
 title: ログ用に RBAC を設定する方法
 ---
 

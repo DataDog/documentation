@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: ブログ
   text: Datadog Session Replay を使用してユーザージャーニーをリアルタイムで表示
-kind: ガイド
 title: RUM ブラウザ SDK のアップグレード
 ---
 

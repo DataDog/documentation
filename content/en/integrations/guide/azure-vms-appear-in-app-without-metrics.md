@@ -1,6 +1,6 @@
 ---
 title: Azure VMs appear in the App without metrics
-kind: guide
+
 aliases:
   - /integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
 ---

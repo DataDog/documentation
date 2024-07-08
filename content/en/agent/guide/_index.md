@@ -47,7 +47,6 @@ cascade:
     {{< nextlink href="agent/guide/agent-6-commands" >}}Agent 6 commands{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-6-configuration-files" >}}Agent 6 configuration files{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-6-log-files" >}}Agent 6 log files{{< /nextlink >}}
-
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent 5 guides:" >}}

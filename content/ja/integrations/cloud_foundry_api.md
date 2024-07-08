@@ -31,7 +31,7 @@ integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
 integration_version: 3.3.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: cloud_foundry_api
 public_title: Cloud Foundry API

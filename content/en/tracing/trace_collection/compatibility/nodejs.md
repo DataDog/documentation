@@ -76,6 +76,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
+| [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
 | [gRPC][11]              | `>=1.13` | Fully supported |                                            |
 | [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
@@ -151,7 +152,6 @@ Or, modify the `package.json` file if you typically start an application with np
 | [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
 | [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
 | [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
-| [kafka-node][47]           |          | Coming Soon     |                                                        |
 | [rhea][48]                 | `>=1`    | Fully supported |                                                        |
 
 ### SDK compatibility
@@ -238,7 +238,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [44]: https://github.com/squaremo/amqp.node
 [45]: https://github.com/coopernurse/node-pool
 [46]: https://github.com/tulios/kafkajs
-[47]: https://github.com/SOHU-Co/kafka-node
 [48]: https://github.com/amqp/rhea
 [49]: https://github.com/aws/aws-sdk-js
 [50]: https://github.com/petkaantonov/bluebird
@@ -256,3 +255,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [64]: https://github.com/openai/openai-node
+[65]: https://github.com/dotansimha/graphql-yoga

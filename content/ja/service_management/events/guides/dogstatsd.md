@@ -10,7 +10,6 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentation
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-kind: ガイド
 title: DogStatsD によるイベント
 ---
 

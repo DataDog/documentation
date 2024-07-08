@@ -1,6 +1,6 @@
 ---
 title: AWS CloudWatch Metric Streams with Amazon Data Firehose
-kind: guide
+
 further_reading:
 - link: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html"
   tag: "Documentation"

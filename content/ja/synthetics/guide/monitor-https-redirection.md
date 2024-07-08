@@ -1,6 +1,5 @@
 ---
 title: HTTP リクエストが HTTPS にリダイレクトされることを監視する
-kind: ガイド
 further_reading:
   - link: /synthetics/api_tests/http_tests
     tag: ドキュメント

@@ -1,6 +1,6 @@
 ---
 title: Infrastructure FAQ
-kind: faq
+
 cascade: 
   - private: true
 ---

@@ -14,7 +14,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイについて
-kind: ドキュメント
 title: コミュニティ
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Logs FAQ
-kind: faq
+
 cascade: 
   - private: true
 aliases:

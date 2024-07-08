@@ -14,7 +14,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여해 애플리케이션 성능 모니터링(APM)에 대한 이해도를 향상하세요.
-kind: 설명서
 title: 트레이싱 시작하기
 ---
 
