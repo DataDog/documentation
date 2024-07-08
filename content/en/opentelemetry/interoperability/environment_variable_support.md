@@ -27,13 +27,14 @@ further_reading:
       text: 'Ruby SDK Configuration'
 ---
 
-After you set up the SDK library with your code and configure the Agent to collect APM data, optionally configure the SDK library as desired using OpenTelemetry environment variables
+Since the Datadog SDKs implement the OpenTelemetry Tracing APIs and are continually being updated to further implement additional OpenTelemetry APIs, you can replace the OpenTelemetry SDK in your application with the Datadog SDK to receive traces and additional Datadog-supported signals with minimal changes to SDK configuration when using the OpenTelemetry SDK configurations outline below.
 
 SDK settings can be configured with the following environment variables with their equivalent Datadog environment variable mapping:
 
-Note: If both set, Datadog environment variables take precedence over OTel environment variables, Likewise Datadog defaults take precedence over OTel defaults. Please refer to the configuration page for the relevant SDK for more information on default values.
+Note: If both set, Datadog environment variables take precedence over OpenTelemetry environment variables, Likewise Datadog defaults take precedence over OpenTelemetry defaults. Please refer to the configuration page for the relevant SDK for more information on default values.
 
-## [General SDK Configuration][9]
+[for more info, see the OpenTelemetry documentation][9]
+## General SDK Configuration
 
 `OTEL_SERVICE_NAME`
 : **Corresponding Datadog Environment Variable**: `DD_SERVICE`<br>
@@ -44,7 +45,7 @@ Sets the service name<br>
 : **Corresponding Datadog Environment Variable**: `DD_LOG_LEVEL`<br>
 Log level used by the SDK logger<br>
 **Notes**: A log level of debug will also map to `DD_TRACE_DEBUG=true`<br>
-This maps to `DD_TRACE_LOG_LEVEL` in `node.js`<br>
+This maps to `DD_TRACE_LOG_LEVEL` in `nodejs` & `php` sdk's<br>
 **Not Supported In**: `python`, `dotnet`, `ruby`, & `golang` sdk's<br>
 
 `OTEL_PROPAGATORS`
@@ -91,7 +92,8 @@ Disable the SDK for all signals<br>
   - `false`|`true`
 **Not Supported In**: `ruby` & `golang` sdk's<br>
 
-## [Java Specific Configuration][10]
+[for more info, see the OpenTelemetry documentation][10]
+## Java Specific Configuration
 
 `OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED`
 : **Corresponding Datadog Environment Variable**: `!DD_INTEGRATIONS_ENABLED` <br>
