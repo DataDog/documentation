@@ -7,7 +7,6 @@ further_reading:
   tag: Blog
   text: Descubre, clasifica y corrige los problemas de datos confidenciales a escala
     con Sensitive Data Scanner.
-kind: documentation
 title: Investigar problemas de datos confidenciales
 ---
 
