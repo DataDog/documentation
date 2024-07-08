@@ -30,15 +30,18 @@ cascade:
 
 ## Overview
 
-Datadog Monitors provide vital visibility into your infrastructure, enabling proactive detection and response to performance issues and outages in real-time. By configuring monitors to track essential metrics and thresholds, organizations can promptly receive alerts, allowing them to address problems before customer impact or system downtime occurs. Additionally, with the capacity planning feature, businesses can predict resource needs for growing workloads, avoiding performance degradation by scaling infrastructure proactively. 
+Datadog Monitors provide vital visibility into your infrastructure, enabling proactive detection and response to performance issues and outages in real-time. Configure monitors to track essential metrics and thresholds, so organizations can promptly receive alerts, allowing them to address problems before customer impact or system downtime occurs.
 
-Datadog also allows users to monitor critical changes by actively checking metrics, integration availability, and network endpoints, all managed conveniently on the Alerting platform. Simplify monitoring and response processes, enhance operational efficiency, and ensure optimal performance with Datadog Monitors.
+Monitor critical changes by actively checking metrics, integration availability, and network endpoints, all managed conveniently on the Alerting platform. With Datadog Monitors you can:
+- Simplify monitoring and response processes
+- Enhance operational efficiency
+- Ensure optimal performance 
 
 ## Getting started
 
-The fastest way to start with Datadog Monitors is with [Recommended Monitors][1]. These are a collection of monitors within Datadog that have been preconfigured by Datadog, integration partners, and other users.
+The fastest way to start with Datadog Monitors is with [Recommended Monitors][1]. These are a collection of monitors within Datadog that are preconfigured by Datadog and integration partners.
 
-Build your own monitors from scratch in lab environments in the Learning Center, or in your application by following the Getting Started with Monitors guide.
+You can also build your own monitors from scratch in lab environments in the Learning Center, or in your application by following the Getting Started with Monitors guide.
 
 {{< whatsnext desc="Use the following resources to create:" >}}
     {{< nextlink href="/getting_started/monitors/" >}}Getting started with Monitors: Guide on how to build a metric based monitor{{< /nextlink >}}
@@ -48,7 +51,7 @@ Build your own monitors from scratch in lab environments in the Learning Center,
 
 ## Analyze aggregate data
 
-Monitor data to achieve observability in systems. Good data should be well-understood, granular, tagged by scope, and long-lived. Use different data types for alerts and diagnostics, based on the level of urgency. Instrument everything and collect as much relevant data as possible for comprehensive measurements and observability of complex systems.
+Good data should be well-understood, granular, tagged by scope, and long-lived. Use different data types for alerts and diagnostics, based on the level of urgency. Instrument everything and collect as much relevant data as possible for comprehensive measurements and observability of complex systems.
 
 Measure the health of your applications and the state of your infrastructure through data sent to Datadog. Use data from across the platform whether Logs, Metrics, Traces, Cloud Cost, RUM, or Security, to create alerts on the potential issues.
 
@@ -67,15 +70,6 @@ Monitors and alerts are essential tools for ensuring the reliability, performanc
 1. [Schedule downtimes to mute monitors.][7]
 1. [Organize and manage monitors.][8]
 1. [Resolve misconfigured monitors on Monitor Quality page.][9]
-
-<!-- {{< whatsnext desc="Learn more about Monitor features:">}}
-    {{< nextlink href="/monitors/types/" >}}1. Select a monitor type{{< /nextlink >}}
-    {{< nextlink href="/monitors/configuration" >}}2. Configure monitors{{< /nextlink >}}
-    {{< nextlink href="/monitors/notify" >}}3. Configure notifications{{< /nextlink >}}
-    {{< nextlink href="/monitors/downtimes" >}}4. Schedule downtimes{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide" >}}5. Organize and manage monitors{{< /nextlink >}}
-    {{< nextlink href="/monitors/quality" >}}6. Resolve misconfigured monitors with Monitor Quality{{< /nextlink >}}
-{{< /whatsnext >}} -->
 
 ## Further Reading
 
