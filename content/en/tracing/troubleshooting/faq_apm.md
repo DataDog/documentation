@@ -21,28 +21,34 @@ further_reading:
 If you experience unexpected behavior while using the APM product, the steps on this page can help you quickly resolve the issue. If you continue to have trouble, reach out to [Datadog support][1]. 
 
 
+# Trace metric related issues
 
-## Why are the number of traces different in the traces page and the monitors?
+## There are more traces in the Trace Explorer page than in other parts of Datadog (Dashboard, monitor, notebook ...) even when scoped to the same query
 
-The traces page includes traces retained by our [Datadog intelligent filter][2], [1% flat sampling][3] and [custom retention filters][4]. While monitors include only traces that are retained by the custom retention filters.
+This is an expected behavior <strong> if </strong> you do not have [custom retention filters][4]. 
 
-To resolve this, create a [custom retention filter][4] to retain all the spans you are using in your query. 
+The [Trace Explorer][12] page allows you to search all ingested or indexed spans using any tag on any span. As such you can easily query on any of your traces on the Trace Explorer page. 
+
+Datadog has some [retention filters][13] that are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces.
+After spans have been ingested, they are retained by
+- the [Datadog intelligent filter][2] by default, 
+- the [1% flat sampling][3] by default, 
+
+However, in order to use use these traces outside of the trace explorer page, you need to set the [custom retention filters][4]. (what is the reasoning behind this? is it because of the sheer volume?)
+
+The custom retention filter allows you to decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. You can also set a percentage of spans matching each filter to be retained. These indexed traces can then be searched in other parts of the Datadog platform. 
 
 
 
-## Why is there a difference in value between [trace metrics][6] and [custom span-based metrics][7]?
-The trace metrics are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. 
+## The trace metrics value is different from the custom span-based metrics value
+[Trace metrics][6] are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. The trace metrics namespace is formatted as: `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
 
-However, the custom metrics are generated based on the ingested spans. Hence, you need to make sure you have 100% ingestion configured for the application you are creating a custom metric for to have the value match the trace metrics.
+[Custom span-based metrics][7] are generated based on your ingested spans which is dependent on your [trace ingestion sampling][8]. If your ingesting 50% of your traces, your custom span-based metrics will be based on the 50% ingested spans.
 
-To resolve this, configure the trace sampling rule to 100% for the needed applications/services in the custom metric to match the trace metric value.
+To have the value of the trace metric and the value of the custom span-based metric be the same, you would need to make sure you have a 100% ingestion rate configured for your application/service. 
 
-## Common issues associated with data volume guidelines
-If you experiencing any of the following issues, you might be exceeding our [Data Volume Guidelines][5]:
-- <strong> missing some resources </strong>
-- <strong> trace metrics skewed/not reporting correctly </strong>
-- <strong> missing services in the service page even though they are reporting traces </strong>
-
+## The trace metrics are skewed or not reporting correctly 
+If your trace metrics are not reporting as you'd expect in the Datadog platform, there is a possibility that you are exceeding Datadog's volume guidelines:
 
 For a given 40 minute interval, Datadog accepts the following combinations:
 - 1000 unique `environments` and `service` combinations
@@ -53,7 +59,11 @@ For a given 40 minute interval, Datadog accepts the following combinations:
 
 If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
 
-## One service is showing up as multiple different services in Datadog.
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+# Service related issues
+
+## One service is showing up as multiple different services in Datadog
 
 An example of this issue is if your `service:test` is showing as all of these in the Datadog platform:
 - `Service:test`
@@ -61,24 +71,51 @@ An example of this issue is if your `service:test` is showing as all of these in
 - `Service:test-postgresdb` 
 
 
-If you would like to have the services merged into one, you can use one(1) of these two options:
+To have the service names merged into one, you can use one(1) of these two options:
 
-1. You could use `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` depending on the language used. This feature is offered in Java, Go, Python, Node.js, PHP and .NET. [Choose your language for additional information on the configuration options for tracing libraries][9]
+1. You could use `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` depending on the language used to rename the service. This feature is offered in Java, Go, Python, Node.js, PHP and .NET. You can [choose your application's language][9] for additional information on the configuration options available for tracing libraries.
 
 <br>
 
-2. You could use the [Inferred services][10]
+2. You could use the [Inferred services][10]. Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn’t been instrumented yet.
 
 
-
-## You see an increase in ingested/indexed spans in your Plan and Usage page and are not sure why
-To dive into what might be causing this issue, you can utilize the [estimated usage metrics][11]:
+## There is an unexpected increase in ingested/indexed spans in the Plan and Usage page
+Spikes in data ingestion and indexing can be a result of multiple things(share some reasons.. from reasonX to reasonY). To dive into what specifically might be causing this increase, use the [estimated usage metrics][11]:
 
 
 | USAGE TYPE | METRIC | DESCRIPTION |
 | ------- | ------------ |------------ |
 | APM Indexed Spans     | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters.|
 | APM Ingested Spans     | `datadog.estimated_usage.apm.ingested_spans`| Total number of ingested spans. |
+
+<!-- (should I combine this into one section?)- it may be easy to see as multiple sections, but happy to combine since it is the smae issue-->
+## Some resources are missing from the platform
+If you are missing some of your resources that you expected to see in the Datadog platform, your are probably exceeding Datadog's [Data Volume Guidelines][5]:
+
+For a given 40 minute interval, Datadog accepts the following combinations:
+- 1000 unique `environments` and `service` combinations
+- 30 unique `second primary tag values` per environment
+- 100 unique `operation names` per environment and service
+- 1000 unique `resources` per environment, service, and operation name
+- 30 unique `versions` per environment and service
+
+If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
+
+## Some resources are missing from the service page but they are reporting traces.
+
+If you are seeing traces from your service in the  but are not able to find this service on the [Service Catalog page][14] , you might be exceeding our [Data Volume Guidelines][5]
+
+For a given 40 minute interval, Datadog accepts the following combinations:
+- 1000 unique `environments` and `service` combinations
+- 30 unique `second primary tag values` per environment
+- 100 unique `operation names` per environment and service
+- 1000 unique `resources` per environment, service, and operation name
+- 30 unique `versions` per environment and service
+
+If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
+
+
 
 
 ## Further Reading
@@ -95,4 +132,7 @@ To dive into what might be causing this issue, you can utilize the [estimated us
 [8]: https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [9]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
 [10]: https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in/?tab=java 
-[11]: https://docs.datadoghq.com/account_management/billing/usage_metrics/#types-of-usage
+[11]: https://docs.datadoghq.com/tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
+[12]: https://app.datadoghq.com/apm/traces
+[13]: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters
+[14]: https://app.datadoghq.com/services
