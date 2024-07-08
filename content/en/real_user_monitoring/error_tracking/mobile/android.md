@@ -40,7 +40,7 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ### Add NDK crash reporting
 
-Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to get NDK crash reporting leverage the Datadog NDK plugin. 
+Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to enable NDK crash reporting, use the Datadog NDK plugin. 
 
 1. Declare `dd-sdk-android-ndk` as a dependency in your application module's build.gradle file.
 
