@@ -4,7 +4,6 @@ further_reading:
 - link: /continuous_testing/explorer
   tag: ドキュメント
   text: Synthetic Monitoring &amp; Continuous Testing Explorer について
-kind: documentation
 title: テスト実行の検索
 ---
 

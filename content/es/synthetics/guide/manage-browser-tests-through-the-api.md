@@ -9,7 +9,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Crear y gestionar tests de navegador Synthetic con Terraform
-kind: guía
 title: Gestiona tus pruebas de navegador de manera programada
 ---
 

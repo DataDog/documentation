@@ -2,7 +2,6 @@
 aliases:
 - /ko/serverless/real-time-enhanced-metrics
 - /ko/serverless/real_time_enhanced_metrics
-kind: 설명서
 title: 향상된 Lambda 메트릭
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Adding Metadata
-kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"

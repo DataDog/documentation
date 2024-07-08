@@ -4,8 +4,6 @@ aliases:
     - /tracing/llm_observability/auto_instrumentation
 ---
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 Datadog's [LLM Observability Python SDK][16] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 

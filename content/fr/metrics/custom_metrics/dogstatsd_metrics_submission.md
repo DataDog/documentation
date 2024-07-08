@@ -13,7 +13,6 @@ further_reading:
 - link: /metrics/types/
   tag: Documentation
   text: Types de métrique Datadog
-kind: documentation
 title: 'Envoi de métriques : DogStatsD'
 ---
 

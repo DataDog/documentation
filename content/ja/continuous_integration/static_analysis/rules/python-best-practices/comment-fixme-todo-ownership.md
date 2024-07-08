@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: TODO と FIXME コメントは所有権を持たなければならない
 ---
 ## メタデータ

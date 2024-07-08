@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/
   tag: Documentation
   text: クラスター Agent の概要
-kind: documentation
 title: Docker 環境のコンテナイメージ
 ---
 

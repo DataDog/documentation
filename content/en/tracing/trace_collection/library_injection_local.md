@@ -1,6 +1,5 @@
 ---
 title: Injecting Libraries Locally
-kind: documentation
 description: "Inject instrumentation libraries into applications"
 aliases:
  - /tracing/trace_collection/admission_controller/
@@ -269,13 +268,13 @@ When both the Agent and your services are running on a host, real or virtual, Da
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Exit and open a new shell to use the injection library.
@@ -372,7 +371,6 @@ The config file for `LOCAL` and `BLOB` can be formatted as JSON:
 ```json
 {
 	"version": 1,
-	"service_language": "<LANG>",
 	"tracing_enabled": true,
 	"log_injection_enabled": true,
 	"health_metrics_enabled": true,
@@ -399,7 +397,6 @@ Or as YAML:
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -424,16 +421,6 @@ tracing_log_level: debug
 ```
 
 The value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
-
-If the language is known, set `service_language` to one of the following values:
-
-- `java`
-- `node`
-- `dotnet`
-- `python`
-- `ruby`
-
-If multiple languages are used, leave `service_language` unset.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
@@ -528,13 +515,13 @@ Any newly started processes are intercepted and the specified instrumentation li
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Configure Docker injection {#configure-docker-injection-2}
@@ -586,7 +573,6 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 ```json
 {
 	"version": 1,
-	"service_language": "<LANG>",
 	"tracing_enabled": true,
 	"log_injection_enabled": true,
 	"health_metrics_enabled": true,
@@ -613,7 +599,6 @@ Or as YAML:
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -637,14 +622,6 @@ tracing_debug: true
 tracing_log_level: debug
 ```
 
-Set `service_language` to one of the following values:
-- `java`
-- `node`
-- `dotnet`
-- `python`
-- `ruby`
-
-In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
@@ -726,13 +703,13 @@ Any newly started processes are intercepted and the specified instrumentation li
 Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
 ```shell
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
 ```
 
 This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LANGUAGES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
 ```
 
 ## Configure Docker injection
@@ -784,7 +761,6 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 ```json
 {
 	"version": 1,
-	"service_language": "<LANG>",
 	"tracing_enabled": true,
 	"log_injection_enabled": true,
 	"health_metrics_enabled": true,
@@ -811,7 +787,6 @@ Or as YAML:
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -834,13 +809,6 @@ tracing_partial_flush_min_spans: 1
 tracing_debug: true
 tracing_log_level: debug
 ```
-
-Set `service_language` to one of the following values:
-- `java`
-- `node`
-- `dotnet`
-- `python`
-- `ruby`
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 

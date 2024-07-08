@@ -13,7 +13,6 @@ further_reading:
 - link: /developers/dogstatsd/
   tag: ドキュメント
   text: DogstatsD を使用してカスタムメトリクスを Datadog に転送する
-kind: ガイド
 title: VMware Tanzu のための Datadog アプリケーションモニタリング
 ---
 

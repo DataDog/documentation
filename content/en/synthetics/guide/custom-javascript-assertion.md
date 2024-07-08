@@ -1,6 +1,6 @@
 ---
 title: Use Custom JavaScript Assertions In Browser Tests
-kind: guide
+
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
 - link: '/synthetics/browser_tests/actions/'

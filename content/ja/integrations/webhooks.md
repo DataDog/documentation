@@ -1,18 +1,22 @@
 ---
 categories:
 - developer tools
-- notification
+- notifications
+custom_custom_kind: integration
 dependencies: []
 description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
 doc_link: https://docs.datadoghq.com/integrations/webhooks/
 draft: false
+further_reading:
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/webhook
+  tag: Terraform
+  text: 「Terraform で Webhook を作成・管理します」
 git_integration_title: Webhooks
 has_logo: true
 integration_id: ''
 integration_title: Webhooks
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: Webhooks
 public_title: 「Datadog-Webhooks インテグレーション」
@@ -20,6 +24,7 @@ short_description: 「Datadog のアラートやイベントで任意の Webhook
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Webhook を使用して、以下のことができます。
@@ -112,7 +117,7 @@ $ID
 
 $INCIDENT_ATTACHMENTS
 : インシデントの添付 (事後分析やドキュメントなど) のある JSON オブジェクトのリスト。<br />
-**例**: `[{"attachment_type": "postmortem", "attachment": {"url": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]` 
+**例**: `[{"attachment_type": "postmortem", "attachment": {"documentUrl": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]` 
 
 $INCIDENT_COMMANDER
 : JSON オブジェクトとインシデントコマンダーのハンドル、uuid、名前、メール、およびアイコン
@@ -165,7 +170,33 @@ $LINK
 **例**: `https://app.datadoghq.com/event/jump_to?event_id=123456`
 
 $LOGS_SAMPLE
-: ログモニターアラートからのログサンプル
+: ログモニターアラートからのログサンプルを含む JSON オブジェクト。サンプルメッセージの最大長は 500 文字です。<br />
+**例**:<br />
+: {{< code-block lang="json">}}
+{
+  "columns": [
+    "Time",
+    "Host"
+  ],
+  "label": "Sample Logs",
+  "rows": [
+    {
+      "items": [
+        "15:21:18 UTC",
+        "web"
+      ],
+      "message": "[14/Feb/2023:15:21:18 +0000] \"GET / HTTP/1.1\" 200"
+    },
+    {
+      "items": [
+        "15:21:13 UTC",
+        "web00"
+      ],
+      "message": "[14/Feb/2023:15:21:13 +0000] \"GET / HTTP/1.1\" 200"
+    }
+  ]
+}
+{{< /code-block >}}
 
 $METRIC_NAMESPACE
 : メトリクスがアラートの場合は、メトリクスのネームスペース
@@ -242,7 +273,7 @@ $SYNTHETICS_SUMMARY
   "result_url": "https://app.datadoghq.com/synthetics/details/anc-ki2-jwx?resultId=1871796423670117676",
   "location": "Frankfurt (AWS)",
   "browser": "Chrome",
-  "device": "Laptop Large"
+  "device": "Laptop Large",
   "failing_steps": [
     {
       "error_message": "Error: Element's content should contain given value.",
@@ -250,7 +281,7 @@ $SYNTHETICS_SUMMARY
       "is_critical": true,
       "number": "3.1"
     }
-  ],
+  ]
 }
 ```
 
@@ -276,9 +307,29 @@ $USERNAME
 
 組み込み変数のリストに加えて、インテグレーションタイルで独自のカスタム変数を作成することができます。これらの変数は、Webhook URL、ペイロード、カスタムヘッダーで使用することができます。一般的な使用例は、ユーザー名やパスワードのような資格情報の保存です。
 
-### Authentication
+また、セキュリティを高めるために、カスタム変数の値を非表示にすることもできます。値を非表示にするには、カスタム変数を編集または追加する際に、**hide from view** チェックボックスを選択します。
+
+{{< img src="/integrations/webhooks/webhook_hidefromview.png" alt="Hide from view チェックボックスでカスタム変数の値をマスキング" style="width:100%;" >}}
+
+### 認証
+
+#### HTTP Basic 認証
 
 認証を必要とするサービスに Webhook をポストする場合は、URL を `https://my.service.example.com` から `https://<USERNAME>:<PASSWORD>@my.service.example.com` に変更することで、Basic HTTP 認証を使用できます。
+
+#### OAuth 2.0 認証
+
+OAuth 2.0 認証を必要とするサービスに Webhook をポストしたい場合は、認証方式を設定します。認証方式には、サービスから OAuth トークンを取得するために必要なすべての情報が含まれます。認証方式が設定され、Webhook に関連付けられると、Datadog が OAuth トークンの取得、必要に応じたトークンの更新、Bearer トークンとしての Webhook リクエストへの追加を処理します。
+
+認証方式を追加するには、Auth Methods タブ をクリックし、New Auth Method ボタンをクリックします。認証方式にに分かりやすい名前を付け、以下の情報を入力します。
+
+* アクセストークン URL
+* Client ID
+* Client Secret
+* スコープ (オプション)
+* オーディエンス (オプション)
+
+Save をクリックして認証方式を作成します。この認証方式を Webhook に適用するには、Configuration タブに戻り、既存の Webhook 構成を選択して Edit ボタンをクリックします。作成した認証方式が認証方式選択リストに表示されます。
 
 ### 複数の Webhook
 
@@ -335,11 +386,11 @@ URL として使用する:
 | ---------  | ------------------- |
 | `ci_pipelines_alert` | CI パイプライン |
 | `ci_tests_alert` | CI テスト |
-| `composite_monitor` | 複合条件 |
-| `error_tracking_alert` | エラー トラッキング |
+| `composite_monitor` | コンポジット |
+| `error_tracking_alert` | Error Tracking |
 | `event_alert` | V1 エンドポイントを使用したイベント |
 | `event_v2_alert` | V2 エンドポイントを持つイベント |
-| `log_alert` | ログ管理 |
+| `log_alert` | Logs |
 | `monitor_slo_alert` | モニターベース SLO |
 | `metric_slo_alert` | メトリクスベース SLO |
 | `outlier_monitor` | 外れ値 |
@@ -347,7 +398,11 @@ URL として使用する:
 | `query_alert_monitor` | メトリクス、異常値、予測 |
 | `rum_alert` | RUM |
 | `service_check` | ホスト、サービスチェック |
-| `synthetics_alert` | Synthetics |
+| `synthetics_alert` | テストを一時停止または開始する |
 | `trace_analytics_alert` | トレース分析 |
 
-[1]: https://app.datadoghq.com/account/settings#integrations/webhooks
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/integrations/webhooks

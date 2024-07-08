@@ -1,6 +1,5 @@
 ---
 title: Monitors
-kind: documentation
 disable_sidebar: true
 aliases:
   - /guides/monitors/

@@ -8,7 +8,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/ruby/
   tag: Documentation
   text: トレースコンテキストの伝搬
-kind: documentation
 title: Ruby トレーシングライブラリの構成
 type: multi-code-lang
 ---

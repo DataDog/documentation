@@ -8,7 +8,6 @@ further_reading:
   tag: ドキュメント
   text: Datadog Agent の概要
 is_beta: false
-kind: ドキュメント
 private: false
 title: Python のダイナミックインスツルメンテーションを有効にする
 type: multi-code-lang

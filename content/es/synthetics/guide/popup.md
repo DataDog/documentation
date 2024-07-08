@@ -6,7 +6,6 @@ further_reading:
 - link: synthetics/browser_tests
   tag: Documentación
   text: Configurar un test de navegador
-kind: guía
 title: Gestionar las ventanas emergentes en los tests de navegador
 ---
 ## Información general

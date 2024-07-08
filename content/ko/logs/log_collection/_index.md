@@ -26,7 +26,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: 설명서
   text: 제한 없는 로그 수집*
-kind: 설명서
 title: 로그 수집 및 통합
 ---
 

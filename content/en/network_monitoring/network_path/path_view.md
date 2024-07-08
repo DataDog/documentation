@@ -1,6 +1,5 @@
 ---
 title: Path View
-kind: documentation
 description: Investigate the Network Path - Path View 
 further_reading:
 - link: "/network_monitoring/network_path/setup"

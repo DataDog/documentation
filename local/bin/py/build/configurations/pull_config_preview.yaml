@@ -20,7 +20,7 @@
             front_matters:
               dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
               public_title: Datadog-Jenkins Integration
-              kind: integration
+              custom_kind: integration
               name: jenkins
               is_public: true
               integration_title: Jenkins
@@ -230,7 +230,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
               title: Tracing Ruby Applications
-              kind: documentation
               code_lang: ruby
               type: multi-code-lang
               code_lang_weight: 15
@@ -253,7 +252,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md"]
               title: (Legacy) Tracing Ruby Applications
-              kind: documentation
 
       - repo_name: datadog-serverless-functions
         contents:
@@ -279,7 +277,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md"]
               title: Datadog Serverless Framework Plugin
-              kind: documentation
               aliases:
               - /serverless/serverless_integrations/plugin
 
@@ -295,7 +292,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-              kind: documentation
       
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
@@ -309,7 +305,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-              kind: documentation
 
 
       - repo_name: datadog-cloudformation-macro
@@ -324,7 +319,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"]
               title: Datadog Serverless Macro
-              kind: documentation
               aliases:
                 - /serverless/serverless_integrations/macro/
 
@@ -340,7 +334,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
               title: Datadog Serverless CLI
-              kind: documentation
               aliases:
                 - /serverless/datadog_lambda_library/
                 - /serverless/serverless_integrations/cli/
@@ -354,7 +347,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
-              kind: documentation
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
                 - /synthetics/cicd_integrations/configuration
@@ -444,7 +436,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
               title: Datadog CDK Construct
-              kind: documentation
 
       - repo_name: datadog-lambda-extension
         contents:
@@ -458,7 +449,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
               title: Datadog Lambda Extension
-              kind: documentation
               aliases:
                 - /serverless/datadog_lambda_library/extension
 
@@ -474,7 +464,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
               title: Continuous Testing and Datadog CI Azure DevOps Extension
-              kind: documentation
               description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
               aliases:
                 - /synthetics/cicd_integrations/azure_devops_extension
@@ -491,7 +480,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
               title: Continuous Testing and GitHub Actions
-              kind: documentation
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
@@ -507,7 +495,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"]
               title: Continuous Testing and CircleCI Orb
-              kind: documentation
               aliases:
                 - /synthetics/cicd_integrations/circleci_orb
 
@@ -523,7 +510,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
               title: Datadog-Amazon CloudFormation
-              kind: guide
               aliases:
                 - /developers/amazon_cloudformation/
 
@@ -629,7 +615,6 @@
               file_name: 'ruby.md'
               front_matters:
                 title: Ruby Compatibility Requirements
-                kind: documentation
                 aliases:
                   - /tracing/compatibility_requirements/ruby
                   - /tracing/setup_overview/compatibility_requirements/ruby
@@ -651,4 +636,3 @@
               front_matters:
                 dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
                 title: (Legacy) Ruby Compatibility Requirements
-                kind: documentation

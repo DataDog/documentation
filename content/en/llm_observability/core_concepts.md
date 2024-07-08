@@ -10,8 +10,6 @@ LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 ## Spans
 
 A span is a unit of work representing an operation in your LLM application, and is the building block of a [trace](#traces).
@@ -24,7 +22,7 @@ A span consists of the following attributes:
 - Error type, message, and traceback
 - Inputs and outputs, such as LLM prompts and completions
 - Metadata (for example, LLM parameters such as `temperature`, `max_tokens`)
-- Metrics, such as `prompt_tokens` and `completion_tokens`
+- Metrics, such as `input_tokens` and `output_tokens`
 - Tags
 
 ### Span kinds

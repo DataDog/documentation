@@ -1,6 +1,5 @@
 ---
 title: Configuring the Node.js Tracing Library
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30

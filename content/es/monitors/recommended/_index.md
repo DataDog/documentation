@@ -15,7 +15,6 @@ further_reading:
 - link: https://docs.datadoghq.com/developers/integrations/create-an-integration-recommended-monitor
   tag: Documentación
   text: Crear un monitor recomendado
-kind: Documentación
 title: Monitores recomendados
 ---
 

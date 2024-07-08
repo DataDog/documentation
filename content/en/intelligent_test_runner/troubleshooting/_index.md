@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner Troubleshooting
-kind: documentation
 further_reading:
 - link: "/intelligent_test_runner"
   tag: "Documentation"
@@ -34,11 +33,11 @@ Intelligent Test Runner only takes into account the commit history and test code
 
 ### Collecting coverages on GitHub Actions CI triggered by pull request events
 
-If you run tests on GitHub Actions CI using the [`pull_request` trigger][5] tests might not be skipped. Code coverage information collected from merge commits is not supported.
+Tests run in GitHub Actions CI using the [`pull_request` trigger][5] may not be skipped on subsequent commits within the pull request's branch. The trigger introduces changes using a new merge commit that is not considered by the Intelligent Test Runner.
 
 ### Squash and merge your commits
 
-Using [squash and merge][6] to integrate commits into the base branch causes the git history of the feature branch to be lost. As a result, Intelligent Test Runner can run tests in the base branch that should have been skipped.
+Using [squash and merge][6] to integrate commits into the base branch causes the git history of the feature branch to be lost. As a result, Intelligent Test Runner may not skip tests in the base branch that were recently skipped in the feature branch.
 
 ## Intelligent Test Runner incorrectly skipped a test
 

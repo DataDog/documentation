@@ -5,7 +5,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay/browser/
   tag: Documentation
   text: En savoir plus sur Session Replay
-kind: guide
+
 title: Autoriser les workers de services tiers pour Session Replay
 ---
 

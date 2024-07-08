@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: ログガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: ログガイド
 ---

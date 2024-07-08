@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/collecting-composite-type-jmx-attributes/
-kind: guide
+
 title: Recueillir des attributs JMX composites
 ---
 

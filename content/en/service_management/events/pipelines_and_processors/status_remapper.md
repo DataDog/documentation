@@ -1,6 +1,5 @@
 ---
 title: Status Remapper
-kind: Documentation
 
 ---
 

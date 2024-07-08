@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/guide/changing_container_registry
-kind: guía
 title: Cambiar tu registro de contenedores
 ---
 

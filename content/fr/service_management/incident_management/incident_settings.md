@@ -3,7 +3,6 @@ aliases:
 - /fr/monitors/incident_management/notification_rules
 - /fr/monitors/incident_management/incident_settings
 description: Configurer et personnaliser l'expérience de gestion des incidents
-kind: documentation
 title: Paramètres d'incident
 ---
 

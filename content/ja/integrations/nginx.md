@@ -53,7 +53,7 @@ integration_id: nginx
 integration_title: Nginx
 integration_version: 6.3.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: nginx
 public_title: Nginx

@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Service Catalog
-kind: documentation
 further_reading:
     - link: '/service_catalog/'
       tag: 'Documentation'

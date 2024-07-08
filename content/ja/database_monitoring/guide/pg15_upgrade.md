@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: PostgreSQL 15 以上へのアップグレード
 ---
 

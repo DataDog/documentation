@@ -1,6 +1,5 @@
 ---
 title: Advanced Options for Mobile App Testing Steps
-kind: documentation
 description: Configure advanced options for Mobile Test Steps
 aliases:
 - /mobile_testing/mobile_app_tests/advanced_options

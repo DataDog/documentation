@@ -1,6 +1,5 @@
 ---
 title: Forwarding Logs to Custom Destinations
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/route-logs-with-datadog-log-forwarding/"
   tag: "Blog"

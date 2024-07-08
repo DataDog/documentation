@@ -3,7 +3,6 @@ further_reading:
 - link: service_management/case_management/settings
   tag: Documentación
   text: Configuración del caso
-kind: Documentación
 title: Ver y gestionar casos
 ---
 

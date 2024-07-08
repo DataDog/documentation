@@ -1,6 +1,5 @@
 ---
 title: How to set up RBAC for Monitors
-kind: guide
 further_reading:
 - link: "/account_management/rbac/permissions/#monitors"
   tag: "Documentation"
@@ -8,7 +7,7 @@ further_reading:
 - link: "/api/latest/monitors/#create-a-monitor"
   tag: "Documentation"
   text: "Learn more about creating restricted monitors via API"
-- link: "/monitors/notify/#permissions"
+- link: "/monitors/configuration/#permissions"
   tag: "Documentation"
   text: "Learn more about creating restricted monitors via the UI"
 ---
@@ -36,7 +35,7 @@ For more information about default and custom roles, how to create custom roles,
 
 For more information, see [Monitors Permissions][1].
 
-[1]: /monitors/notify/#permissions
+[1]: /monitors/configuration/#permissions
 {{% /tab %}}
 
 {{% tab "API" %}}

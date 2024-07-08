@@ -1,6 +1,5 @@
 ---
 title: Writing a Custom Agent Check
-kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
     - /agent/faq/agent-5-custom-agent-check/

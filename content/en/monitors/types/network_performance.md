@@ -1,6 +1,5 @@
 ---
 title: Network Performance Monitor
-kind: Documentation
 further_reading:
 - link: "/network_monitoring/performance/"
   tag: "Documentation"

@@ -1,6 +1,5 @@
 ---
 title: Propagating the Trace Context
-kind: documentation
 type: multi-code-lang
 description: 'Extract and inject Datadog, B3, and W3C Trace Context headers to propagate the context of a distributed trace.'
 aliases:
