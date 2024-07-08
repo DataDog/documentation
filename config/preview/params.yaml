@@ -1,5 +1,5 @@
 environment: preview
-img_url: "https://datadog-docs-staging.imgix.net/"
+img_url: "https://d24im73ot8azv4.cloudfront.net/"
 static_url: "https://docs-staging.datadoghq.com/"
 ga: UA-21102638-9
 

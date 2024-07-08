@@ -1,5 +1,5 @@
 environment: live
-img_url: "https://datadog-docs.imgix.net/"
+img_url: "https://d24im73ot8azv4.cloudfront.net/"
 static_url: "https://docs.datadoghq.com/"
 ga: UA-21102638-5
 
