@@ -12,6 +12,7 @@ further_reading:
 - link: developers/prometheus
   tag: ドキュメント
   text: カスタム Prometheus チェックの記述
+kind: ドキュメント
 title: ホストからの Prometheus および OpenMetrics メトリクスの収集
 ---
 
@@ -39,7 +40,7 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
     init_config:
 
     instances:
-        - prometheus_url: 'localhost:<PORT>/<ENDPOINT>'
+        - openmetrics_endpoint: 'localhost:<PORT>/<ENDPOINT>'
           namespace: '<NAMESPACE>'
           metrics:
               - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
@@ -63,10 +64,10 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
 
 | 名前                                    | タイプ                                    | 要否 | デフォルト値 | 説明                                                                                                                                                                                                                                                          |
 | --------------------------------------- | --------------------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prometheus_url`                        | 文字列                                  | 必須  | なし          | Prometheus/OpenMetrics がアプリケーションメトリクスを公開する URL。                                                                                                                                                                                        |
+| `openmetrics_endpoint`                        | 文字列                                  | 必須  | なし          | OpenMetrics 形式のメトリクスを公開する URL です。                                                                           |
 | `namespace`                             | 文字列                                  | 必須  | なし          | すべてのメトリクスネームスペースの前に付加されるネームスペース。メトリクスは、`namespace.metric_name` の形式で収集されます。                                                                                                                                          |
 | `metrics`                               | 文字列リストまたは `key:value` 要素 | 必須  | なし          | Prometheus エンドポイントから取得されるメトリクスの `<フェッチするメトリクス>: <新しいメトリクス名>` ペアのリスト。<br> `<新しいメトリクス名>` はオプションです。設定すると、Datadog での名前が変換されます。このリストには少なくとも 1 つのメトリクスを指定する必要があります。                            |
-| `prometheus_metrics_prefix`             | 文字列                                  | オプション  | なし          | 公開された Prometheus/OpenMetrics メトリクスのプレフィックス。                                                                                                                                                                                                                   |
+| `raw_metric_prefix`             | 文字列                                  | オプション  | なし          | 公開されるすべてのメトリクス名から取り除かれるプレフィックスです (存在する場合)。                                                                                                                 |
 | `health_service_check`                  | boolean                                 | オプション  | true          | Prometheus エンドポイントの健全性について報告するサービスチェックを送信します。チェックの名前は `<ネームスペース>.prometheus.health` です。                                                                                                                                         |
 | `label_to_hostname`                     | 文字列                                  | オプション  | なし          | ホスト名を 1 つのラベルの値で上書きします。                                                                                                                                                                                                                   |
 | `label_joins`                           | オブジェクト                                  | オプション  | なし          | label_joins を使用すると、メトリクスを対象として指定して、そのラベルを 1:1 マッピングを介して取得できます。                                                                                                                                                                               |
@@ -105,7 +106,7 @@ Prometheus によって公開されたメトリクスの収集を開始するに
     init_config:
 
     instances:
-        - prometheus_url: http://localhost:9090/metrics
+        - openmetrics_endpoint: http://localhost:9090/metrics
           namespace: 'documentation_example'
           metrics:
               - promhttp_metric_handler_requests_total: prometheus.handler.requests.total
@@ -132,7 +133,7 @@ Prometheus によって公開されたメトリクスの収集を開始するに
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [5]: /ja/developers/custom_checks/prometheus/
-[6]: https://app.datadoghq.com/account/settings#agent
+[6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: /ja/getting_started/tagging/
 [8]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
