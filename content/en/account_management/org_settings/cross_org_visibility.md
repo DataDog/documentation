@@ -83,7 +83,7 @@ The following screenshot shows an example of a cross-organization formula query.
 ### In the API
 
 <div class="alert alert-info">
-The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support cross-organization queries.
+The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support creation of cross-organization connections. But a dashboard with widgets with cross-org queries may be terraformed through proper [JSON export][10].
 </div>
 
 You can define cross-organization queries in the following endpoint:
@@ -145,3 +145,4 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 [7]: /account_management/org_settings/cross_org_visibility_api
 [8]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [9]: /api/latest/organizations/#list-your-managed-organizations
+[10]: /dashboards/configure/#copy-import-or-export-dashboard-json
