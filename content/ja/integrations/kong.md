@@ -46,7 +46,7 @@ integration_id: kong
 integration_title: Kong
 integration_version: 3.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: kong
 public_title: Kong

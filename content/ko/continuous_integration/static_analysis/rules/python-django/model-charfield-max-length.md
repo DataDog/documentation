@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 항상 Charfield에 최대 길이를 지정하십시오.
 ---
 ## 메타데이터

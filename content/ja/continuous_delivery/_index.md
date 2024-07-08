@@ -21,7 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
   tag: ブログ
   text: CI/CD モニタリングのベストプラクティス
-kind: ドキュメント
 title: Continuous Delivery Visibility
 ---
 
