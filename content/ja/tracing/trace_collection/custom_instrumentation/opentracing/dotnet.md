@@ -9,7 +9,6 @@ description: .NET のための OpenTracing インスツルメンテーション
 further_reading:
 - link: tracing/services/services_map/
   text: トレースコンテキストの伝搬
-kind: ドキュメント
 title: .NET OpenTracing インスツルメンテーション
 type: multi-code-lang
 ---

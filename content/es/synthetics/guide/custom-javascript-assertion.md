@@ -11,7 +11,6 @@ further_reading:
 - link: /synthetics/guide/popup/#moving-popups
   tag: Documentación
   text: Gestionar las ventanas emergentes que aparecen de manera inesperada
-kind: guía
 title: Usar aserciones JavaScript personalizadas en tests de navegador
 ---
 

@@ -9,7 +9,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: 외부 사이트
   text: Terraform으로 신서틱(Synthetic) API 테스트 생성 및 관리
-kind: 지침
 title: API를 사용하여 API 테스트 생성
 ---
 

@@ -4,7 +4,6 @@ algolia:
   - 브라우저 로그
 aliases:
 - /ko/logs/log_collection/web_browser
-kind: 설명서
 title: 브라우저 로그 수집
 ---
 

@@ -76,6 +76,7 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
+  enablePrivacyForActionName: true,
 });
 ```
 
@@ -213,6 +214,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -241,6 +243,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -269,6 +272,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -297,6 +301,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -325,6 +330,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -353,6 +359,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -1087,6 +1094,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1110,6 +1118,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1133,6 +1142,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1156,6 +1166,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1179,6 +1190,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1202,6 +1214,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1901,6 +1914,12 @@ Enables collection of long task events.
 **Default**: `mask` <br/>
 See [Session Replay Privacy Options][21].
 
+`enablePrivacyForActionName`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false` <br/>
+See [Mask Action Names][29].
+
 `actionNameAttribute`
 : Optional<br/>
 **Type**: String<br/>
@@ -2116,3 +2135,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [26]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [27]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [28]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/
+[29]: /real_user_monitoring/session_replay/browser/privacy_options/#mask-action-names

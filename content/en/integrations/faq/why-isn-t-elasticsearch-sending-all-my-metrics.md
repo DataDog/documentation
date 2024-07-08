@@ -1,6 +1,6 @@
 ---
 title: Why isn't Elasticsearch sending all my metrics?
-kind: faq
+
 ---
 
 If you've configured the Elasticsearch integration but feel you are not being sent all the available metrics, it may be because your cluster is hosted externally.

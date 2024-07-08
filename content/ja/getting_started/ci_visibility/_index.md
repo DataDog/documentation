@@ -17,7 +17,6 @@ further_reading:
 - link: /monitors/types/ci
   tag: ドキュメント
   text: CI Pipeline Monitors について
-kind: ドキュメント
 title: CI Visibility の概要
 ---
 

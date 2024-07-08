@@ -10,7 +10,6 @@ further_reading:
 - link: /agent/configuration/dual-shipping/
   tag: Guía
   text: Envío doble
-kind: documentación
 title: Empezando con los sitios de Datadog
 ---
 

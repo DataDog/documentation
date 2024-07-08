@@ -3,7 +3,6 @@ aliases:
 - /ko/serverless/serverless_integrations/macro/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md
-kind: 설명서
 title: Datadog 서버리스 매크로
 ---
 ![빌드_서버리스](https://github.com/DataDog/datadog-cloudformation-macro/workflows/build_serverless/badge.svg)

@@ -13,7 +13,6 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: Documentación
   text: La vista de lista de logs
-kind: documentación
 title: Live Tail
 ---
 
