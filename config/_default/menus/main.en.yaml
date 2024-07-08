@@ -1934,6 +1934,16 @@ menu:
       parent: error_tracking
       identifier: error_tracking_logs
       weight: 7
+    - name: Manage Data Collection
+      url: error_tracking/manage_data_collection
+      parent: error_tracking_logs
+      identifier: logs_error_tracking_manage_data_collection
+      weight: 701
+    - name: Dynamic Sampling
+      url: error_tracking/dynamic_sampling
+      parent: error_tracking_logs
+      identifier: logs_error_tracking_dynamic_sampling
+      weight: 702
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
