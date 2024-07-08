@@ -26,6 +26,7 @@ caches:
         dir: :cacheDir/:project
         maxAge: '1h'
 
+# see: https://github.com/gohugoio/hugo/issues/12151
 ignoreLogs:
   - cascade-pattern-with-extension
 
