@@ -35,7 +35,7 @@ Para más definiciones y descripciones de términos importantes de APM, como _sp
 
 | Concepto                         | Descripción                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Servicio](#services)            | Los servicios son los bloques de construcción de las modernas arquitecturas de microservicios: en términos generales, un servicio agrupa endpoints, consultas o trabajos con el fin de construir tu aplicación.                                  |
+| [Servicio](#services)            | Los servicios son los bloques de construcción de las modernas arquitecturas de micro servicios: en términos generales, un servicio agrupa endpoints, consultas o trabajos con el fin de construir tu aplicación.                                  |
 | [Recurso](#resources)          | Los recursos representan un dominio concreto de una aplicación del cliente: suelen ser un endpoint web instrumentado, una consulta a una base de datos o un trabajo en segundo plano.                                                              |
 | [Monitores][23]                   | Los monitores APM de métrica funcionan como los monitores de métrica normales, pero con controles adaptados específicamente a APM. Utiliza estos monitores para recibir alertas al nivel de servicio sobre aciertos, errores y una variedad en las medidas de latencia. |
 | [Trazas](#trace)                 | Una traza se utiliza para realizar un seguimiento del tiempo empleado por una aplicación procesando una solicitud y el estado de esta solicitud. Cada traza consta de uno o varios tramos (spans).                                                             |
@@ -49,13 +49,13 @@ Después de [instrumentar su aplicación][3], el [servicio Catálogo][4] es su p
 
 {{< img src="tracing/visualization/service_catalog.png" alt="servicio Catálogo" >}}
 
-Los servicios son los componentes básicos de las arquitecturas de microservicios modernas: en términos generales, un servicio agrupa endpoints, consultas o trabajos con el fin de escalar instancias. Algunos ejemplos son:
+Los servicios son los componentes básicos de las arquitecturas de micro servicios modernas: en términos generales, un servicio agrupa endpoints, consultas o trabajos con el fin de escalar instancias. Algunos ejemplos son:
 
 * Un grupo de endpoints URL puede agruparse bajo un servicio API.
 * Un grupo de consultas a la base de datos que se agrupan dentro de un servicio de base de datos.
 * Un grupo de trabajos periódicos configurados en el servicio crond.
 
-La siguiente captura de pantalla es un sistema distribuido de microservicios para un constructor de sitios de comercio electrónico. Hay un `web-store`, `ad-server`, `payment-db` y `auth-service` todos representados como servicios en APM.
+La siguiente captura de pantalla es un sistema distribuido de micro servicios para un constructor de sitios de comercio electrónico. Hay un `web-store`, `ad-server`, `payment-db` y `auth-service` todos representados como servicios en APM.
 
 {{< img src="tracing/visualization/service_map.png" alt="Mapa de servicios" >}}
 
