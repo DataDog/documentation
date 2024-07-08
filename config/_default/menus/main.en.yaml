@@ -945,12 +945,23 @@ menu:
       identifier: api
       parent: essentials_heading
       weight: 80000
+    - name: Datadog Mobile App
+      url: mobile/
+      pre: mobile
+      identifier: mobile
+      parent: essentials_heading
+      weight: 90000
+    - name: Enterprise Configuration
+      url: mobile/enterprise_configuration
+      identifier: mobile_enterprise_configuration
+      parent: mobile
+      weight: 1
     - name: CoScreen
       url: coscreen/
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 90000
+      weight: 100000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -2183,17 +2194,6 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 3
-    - name: Mobile Application
-      url: service_management/mobile/
-      identifier: mobile
-      pre: mobile
-      parent: service_management_heading
-      weight: 50000
-    - name: Enterprise Configuration
-      url: service_management/mobile/enterprise_configuration
-      identifier: mobile_enterprise_configuration
-      parent: mobile
-      weight: 1
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
