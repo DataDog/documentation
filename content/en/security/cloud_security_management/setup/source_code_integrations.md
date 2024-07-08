@@ -17,7 +17,7 @@ After you set up the GitHub integration, enable IaC remediation for the reposito
 
 1. On the [CSM Setup page][4], expand the **Source Code Integrations** section.
 2. Click **Configure** for the GitHub account you want to configure.
-3. To enable IAC:
+3. To enable IaC:
     - For all repositories, switch on the IAC toggle under Enable Infrastructure as Code (IaC).
     - For a single repository, switch on the IAC toggle for that repository.
 
