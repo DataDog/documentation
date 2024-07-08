@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/multistep
   tag: ドキュメント
   text: マルチステップ API テストを作成する
-kind: ガイド
 title: API およびマルチステップ API テストでの認証使用
 ---
 

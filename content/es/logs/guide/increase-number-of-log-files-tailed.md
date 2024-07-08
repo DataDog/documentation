@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: ¿Cómo investigar un problema de parseo de logs?
-kind: guía
 title: Aumentar el número de archivos de log supervisados por el Agent
 ---
 

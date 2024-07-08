@@ -13,7 +13,7 @@ has_logo: true
 integration_id: fluentbit
 integration_title: Fluent Bit
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: fluentbit
 public_title: Datadog-Fluent Bit インテグレーション
 short_description: ログデータを複数ソースから収集してパースし、転送します。

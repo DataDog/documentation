@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 가능하면 편리한 가져오기를 사용하세요.
 ---
 ## 메타데이터

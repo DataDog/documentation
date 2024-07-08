@@ -4,7 +4,6 @@ further_reading:
 - link: /monitors/create/types/real_user_monitoring/
   tag: ドキュメント
   text: RUM モニターについて
-kind: ガイド
 title: コンバージョン率でアラートを出す
 ---
 

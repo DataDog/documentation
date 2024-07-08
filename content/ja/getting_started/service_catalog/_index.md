@@ -15,7 +15,6 @@ further_reading:
 - link: /service_catalog/scorecards
   tag: ドキュメント
   text: チームを作成する
-kind: ドキュメント
 title: サービスカタログの概要
 ---
 

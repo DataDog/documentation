@@ -2,7 +2,7 @@
 integration_title: System チェック
 name: system
 newhlevel: true
-kind: インテグレーション
+custom_kind: integration
 git_integration_title: system
 updated_for_agent: 5.8.5
 description: システムリソース (CPU、メモリ、ディスク、ファイルシステム) の使用状況を追跡。

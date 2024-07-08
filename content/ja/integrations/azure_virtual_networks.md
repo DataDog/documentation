@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Microsoft Azure Virtual Network
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_virtual_networks
 public_title: Datadog-Microsoft Azure Virtual Network インテグレーション

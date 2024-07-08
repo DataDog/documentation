@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/continuous_integration/dora_metrics/setup/
-kind: ドキュメント
 title: DORA メトリクスのセットアップ
 ---
 
