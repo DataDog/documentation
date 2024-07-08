@@ -45,7 +45,7 @@ Snapshot diagrams offer a static view of your infrastructure that you can modify
 2. Make changes to the layout, design, or components, which automatically switches the diagram to Snapshot mode.
 3. In Snapshot mode, freely adjust the layout and design as needed.
 4. To update the diagram with the latest infrastructure changes, switch back to Live mode by selecting the mode drop-down in the top-right corner of the diagram. However, note that this action deletes all modifications made in Snapshot mode.
-5. Each time you switch between Live and Snapshot modes, Cloudcraft creates a new version in the version control system, allowing you to revert to previous versions if necessary.
+5. Each time you switch from Snapshot to Live mode, Cloudcraft creates a new version in the version control system, allowing you to revert to previous versions if necessary.
 
 {{< img src="cloudcraft/getting-started/live-vs-snapshot-diagrams/mode-dropdown.png" alt="Screenshot of Cloudcraft's diagram mode selection drop-down showing the Live and Snapshot modes." responsive="true" style="width:100%;">}}
 
