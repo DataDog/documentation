@@ -50,7 +50,7 @@ Your Android application may be running native code (C/C++) for performance or c
         //(...)
     }
    ```
-2. Enable NDK Crash collection after you have initialized the RUM SDK.
+2. Enable NDK crash collection after initializing the RUM SDK.
 
     ``` kotlin
     NdkCrashReports.enable()
