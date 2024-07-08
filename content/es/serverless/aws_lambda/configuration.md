@@ -20,7 +20,7 @@ kind: documentación
 title: Configurar la monitorización serverless para AWS Lambda
 ---
 
-Primero, [instala][1] la monitorización serverless de Datadog para comenzar a recopilar métricas, trazas (traces) y logs. Cuando la instalación se complete, consulta los siguientes temas y configura la instalación según tus necesidades de monitorización.
+Primero, [instala][1] Datadog Serverless Monitoring para comenzar a recopilar métricas, trazas (traces) y logs. Cuando la instalación se complete, consulta los siguientes temas y configura la instalación según tus necesidades de monitorización.
 
 - [Conectar la telemetría mediante etiquetas](#connect-telemetry-using-tags)
 - [Recopilar las cargas útiles de solicitud y respuesta](#collect-the-request-and-response-payloads)
@@ -551,7 +551,7 @@ La extensión de Datadog es compatible con la recuperación automática de valor
 2. Añade el permiso `secretsmanager:GetSecretValue` a los permisos del rol de IAM de tu función de Lambda.
 3. Crea un secreto nuevo en Secrets Manager para almacenar la variable de entorno de las métricas de envío múltiple. El contenido debe ser similar a este: `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}`.
 4. Define la variable de entorno `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` en tu función de Lambda como el ARN del secreto antes mencionado.
-5. Crea un secreto nuevo en Secrets Manager para almacenar la variable de entorno de APM (trazas) de envío múltiple. El contenido debe ser **similar** a este:`{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`.
+5. Crea un secreto nuevo en Secrets Manager para almacenar la variable de entorno de APM (trazas) de envío múltiple. El contenido debe ser **similar** a este: `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`.
 6. Define la variable de entorno `DD_APM_ADDITIONAL_ENDPOINTS_SECRET_ARN` en tu función de Lambda para que sea igual que el ARN del secreto antes mencionado.
 7. Crea un secreto nuevo en Secrets Manager para almacenar la variable de entorno de APM (creación de perfiles) de envío múltiple. El contenido debe ser **similar** a este: `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`.
 8. Define la variable de entorno `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` en tu función de Lambda para que coincida con el ARN del secreto antes mencionado.
