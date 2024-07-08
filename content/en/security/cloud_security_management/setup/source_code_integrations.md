@@ -8,7 +8,7 @@ Use the following instructions to enable Infrastructure as Code (IaC) remediatio
 
 Follow [the instructions][3] for creating a GitHub app for your organization.
 
-<div class="alert alert-info">To use IaC remediation, you must have the Github App <code>Read & Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. These permissions can be applied to all or select repositories.
+<div class="alert alert-info">To use IaC remediation, you must give the Github App <code>Read & Write</code> permissions for <code>Contents</code> and <code>Pull Requests</code>. These permissions can be applied to all or select repositories.
 </div>
 
 ## Enable IaC remediation for your repositories
