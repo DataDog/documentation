@@ -72,7 +72,7 @@ Al identificar las configuraciones erróneas en las solicitudes con errores, pue
 
 ### Métricas en tiempo real para crear alertas sobre problemas en el entorno de las funciones de Lambda
 
-Las métricas de Lambda mejoradas de Datadog, que aparecen en Datadog con el prefijo `aws.lambda.enhanced`, están disponibles con un segundo nivel de granularidad y casi en tiempo real. Puedes utilizar las métricas de Lambda mejoradas para crear alertas o SLO sobre arranques en frío, costes estimados de AWS, tiempos de espera, errores de memoria agotada y uso de memoria en todas tus funciones de Lambda. Esto te permite ver los problemas de rendimiento en tus entornos serverless a medida que se producen y solucionarlos sin demora.
+Las métricas de Lambda mejoradas de Datadog, que aparecen en Datadog con el prefijo `aws.lambda.enhanced`, están disponibles con un segundo nivel de granularidad y casi en tiempo real. Puedes utilizar las métricas de Lambda mejoradas para crear alertas o SLOs sobre arranques en frío, costes estimados de AWS, tiempos de espera, errores de memoria agotada y uso de memoria en todas tus funciones de Lambda. Esto te permite ver los problemas de rendimiento en tus entornos serverless a medida que se producen y solucionarlos sin demora.
 
 {{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
