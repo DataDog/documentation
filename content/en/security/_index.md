@@ -60,8 +60,6 @@ cascade:
 
 Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-{{< img src="security/datadog_security_coverage_aws.png" alt="CSM graphic" width="90%">}}
-
 Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
 
 ## Application Security Management
