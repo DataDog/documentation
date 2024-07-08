@@ -120,4 +120,3 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [13]: /glossary/#custom-span
 [14]: /glossary/#custom-tag
 [15]: /glossary/#custom-measure
-[16]: /data_security/pci_compliance/

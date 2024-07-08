@@ -135,4 +135,3 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
 [14]: https://app.datadoghq.com/integrations/azure
-[15]: /data_security/pci_compliance/
