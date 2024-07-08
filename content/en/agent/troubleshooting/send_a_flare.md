@@ -34,7 +34,7 @@ To send a flare from the Datadog site, make sure you've enabled [Fleet Automatio
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
 ## Send a flare using the `flare` command
 
