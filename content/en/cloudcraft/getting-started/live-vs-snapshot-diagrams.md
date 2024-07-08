@@ -27,7 +27,7 @@ Snapshot diagrams offer a static view of your infrastructure that you can modify
 ### Updating mechanism
 
 - **Live diagrams**: Update automatically when accessed, reflecting any changes in your AWS or Azure infrastructure.
-- **Snapshot diagrams**: Remain static an don't update automatically.
+- **Snapshot diagrams**: Remain static and don't update automatically.
 
 ### Editing capabilities
 
