@@ -21,9 +21,9 @@ further_reading:
 If you experience unexpected behavior while using the APM product, the steps on this page can help you quickly resolve the issue. If you continue to have trouble, reach out to [Datadog support][1]. 
 
 
-# Trace metric related issues
+## Trace metric related issues
 
-## There are more traces in the Trace Explorer page than in other parts of Datadog (Dashboard, monitor, notebook ...) even when scoped to the same query
+{{% collapse-content title="There are more traces in the Trace Explorer page than in other parts of Datadog even when scoped to the same query" level="h4" %}}
 
 This is an expected behavior <strong> if </strong> you do not have [custom retention filters][4]. 
 
@@ -38,16 +38,24 @@ However, in order to use use these traces outside of the trace explorer page, yo
 
 The custom retention filter allows you to decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. You can also set a percentage of spans matching each filter to be retained. These indexed traces can then be searched in other parts of the Datadog platform. 
 
+{{% /collapse-content %}} 
 
 
-## The trace metrics value is different from the custom span-based metrics value
+
+{{% collapse-content title="The trace metrics value is different from the custom span-based metrics value" level="h4" %}}
+
 [Trace metrics][6] are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. The trace metrics namespace is formatted as: `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
 
 [Custom span-based metrics][7] are generated based on your ingested spans which is dependent on your [trace ingestion sampling][8]. If your ingesting 50% of your traces, your custom span-based metrics will be based on the 50% ingested spans.
 
 To have the value of the trace metric and the value of the custom span-based metric be the same, you would need to make sure you have a 100% ingestion rate configured for your application/service. 
 
-## The trace metrics are skewed or not reporting correctly 
+{{% /collapse-content %}} 
+
+
+
+{{% collapse-content title="The trace metrics are skewed or not reporting correctly" level="h4" %}}
+
 If your trace metrics are not reporting as you'd expect in the Datadog platform, there is a possibility that you are exceeding Datadog's volume guidelines:
 
 For a given 40 minute interval, Datadog accepts the following combinations:
@@ -59,28 +67,32 @@ For a given 40 minute interval, Datadog accepts the following combinations:
 
 If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
 
-<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+{{% /collapse-content %}} 
 
-# Service related issues
 
-## One service is showing up as multiple different services in Datadog
+
+<br>
+
+## Service related issues
+{{% collapse-content title="One of my services is showing up as multiple different services in Datadog" level="h4" %}}
 
 An example of this issue is if your `service:test` is showing as all of these in the Datadog platform:
 - `Service:test`
 - `Service:test-mongodb`
 - `Service:test-postgresdb` 
 
-
 To have the service names merged into one, you can use one(1) of these two options:
 
 1. You could use `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` depending on the language used to rename the service. This feature is offered in Java, Go, Python, Node.js, PHP and .NET. You can [choose your application's language][9] for additional information on the configuration options available for tracing libraries.
 
-<br>
+2. You could use the <strong> [Inferred services][10] </strong>. Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn’t been instrumented yet.
 
-2. You could use the [Inferred services][10]. Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn’t been instrumented yet.
+{{% /collapse-content %}} 
 
 
-## There is an unexpected increase in ingested/indexed spans in the Plan and Usage page
+
+{{% collapse-content title="There is an unexpected increase in ingested/indexed spans in the Plan and Usage page" level="h4" %}}
+
 Spikes in data ingestion and indexing can be a result of multiple things(share some reasons.. from reasonX to reasonY). To dive into what specifically might be causing this increase, use the [estimated usage metrics][11]:
 
 
@@ -89,8 +101,15 @@ Spikes in data ingestion and indexing can be a result of multiple things(share s
 | APM Indexed Spans     | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters.|
 | APM Ingested Spans     | `datadog.estimated_usage.apm.ingested_spans`| Total number of ingested spans. |
 
+{{% /collapse-content %}} 
+
+
+
+
 <!-- (should I combine this into one section?)- it may be easy to see as multiple sections, but happy to combine since it is the smae issue-->
-## Some resources are missing from the platform
+
+{{% collapse-content title="Some of my resources are missing from the Datadog platform" level="h4" %}}
+
 If you are missing some of your resources that you expected to see in the Datadog platform, your are probably exceeding Datadog's [Data Volume Guidelines][5]:
 
 For a given 40 minute interval, Datadog accepts the following combinations:
@@ -102,7 +121,11 @@ For a given 40 minute interval, Datadog accepts the following combinations:
 
 If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
 
-## Some resources are missing from the service page but they are reporting traces.
+{{% /collapse-content %}} 
+
+
+
+{{% collapse-content title=" Some of my resources are missing from the service page but they are reporting traces " level="h4" %}}
 
 If you are seeing traces from your service in the  but are not able to find this service on the [Service Catalog page][14] , you might be exceeding our [Data Volume Guidelines][5]
 
@@ -115,6 +138,7 @@ For a given 40 minute interval, Datadog accepts the following combinations:
 
 If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
 
+{{% /collapse-content %}} 
 
 
 
