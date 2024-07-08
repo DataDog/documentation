@@ -1,6 +1,6 @@
 ---
 title: Surveiller la disponibilité d'un site Web avec un SLO
-kind: guide
+
 aliases:
   - /fr/graphing/guide/uptime-percentage-widget
   - /fr/dashboards/guide/uptime-percentage-widget

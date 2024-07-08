@@ -1,6 +1,6 @@
 ---
 title: Enable RUM on Your Squarespace Store
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
   tag: 'Documentation'

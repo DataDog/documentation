@@ -236,7 +236,7 @@ This command starts a Docker container and makes your private location ready to 
 
 You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs/<filename>.pem` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
 For more information about private locations parameters for admins, see [Configuration][2].
 

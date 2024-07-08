@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
   tag: 블로그
   text: Datadog을 구동하는 설계 시스템, DRUIDS
-kind: 설명서
 title: Datadog 시작하기
 ---
 

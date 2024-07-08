@@ -15,7 +15,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para optimizar tu gestión de logs
-kind: documentación
 title: Empezando con los logs
 ---
 

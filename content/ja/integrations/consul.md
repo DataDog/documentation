@@ -51,7 +51,7 @@ integration_id: consul
 integration_title: Consul
 integration_version: 2.6.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: consul
 public_title: Consul

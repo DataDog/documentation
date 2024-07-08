@@ -5,7 +5,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentation
   text: Intégration Azure
-kind: guide
+
 title: Architecture et configuration de l'intégration Azure
 ---
 

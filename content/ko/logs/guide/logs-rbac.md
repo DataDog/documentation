@@ -14,7 +14,6 @@ further_reading:
 - link: /logs/live_tail/
   tag: 설명서
   text: 라이브 테일에 대해 알아보기
-kind: 가이드
 title: 로그의 BRAC 설정하는 방법
 ---
 

@@ -18,7 +18,6 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: 설명서
   text: Datadog으로 CSP 위반 감지 및 집계
-kind: 설명서
 title: 세션 재생
 ---
 

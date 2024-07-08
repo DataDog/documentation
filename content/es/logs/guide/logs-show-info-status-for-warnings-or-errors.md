@@ -15,7 +15,6 @@ further_reading:
 - link: /logs/FAQ/cómo-investigar-un-problema-de-parseo-de-log/
   tag: Documentación
   text: Aprende cómo investigar un problema de parseo de log
-kind: errores
 title: Los logs muestran el estado de información para la guía de advertencias o
 ---
 

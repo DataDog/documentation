@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/developers/faq/query-the-infrastructure-list-via-the-api
-kind: guía
 title: Consulta la lista de infraestructura con la API
 ---
 

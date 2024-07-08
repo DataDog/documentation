@@ -5,7 +5,7 @@ further_reading:
 - link: /integrations/mysql/
   tag: Documentation
   text: Intégration Datadog/MySQL
-kind: guide
+
 title: Recueillir des métriques custom SQL Server
 ---
 

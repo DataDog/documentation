@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Aritmética del monitor y métricas dispersas
 ---
 

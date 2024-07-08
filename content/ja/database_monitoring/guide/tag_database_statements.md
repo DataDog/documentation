@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: SQL ステートメントのタグ付け
 ---
 {{< site-region region="gov" >}}

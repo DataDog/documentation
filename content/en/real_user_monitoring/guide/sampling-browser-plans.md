@@ -1,6 +1,6 @@
 ---
 title: Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling
-kind: guide
+
 description: Learn how to customize your Browser RUM and Browser RUM & Session Replay sampling configuration.
 aliases:
 - /real_user_monitoring/guide/sampling-browser-and-browser-premium/

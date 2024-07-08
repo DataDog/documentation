@@ -14,7 +14,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 가이드
 title: 컨테이너 에이전트를 사용해 호스트에서 로그 테일링
 ---
 
