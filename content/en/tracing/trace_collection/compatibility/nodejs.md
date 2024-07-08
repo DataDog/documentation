@@ -152,7 +152,6 @@ Or, modify the `package.json` file if you typically start an application with np
 | [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
 | [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
 | [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
-| [kafka-node][47]           |          | Coming Soon     |                                                        |
 | [rhea][48]                 | `>=1`    | Fully supported |                                                        |
 
 ### SDK compatibility
@@ -239,7 +238,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [44]: https://github.com/squaremo/amqp.node
 [45]: https://github.com/coopernurse/node-pool
 [46]: https://github.com/tulios/kafkajs
-[47]: https://github.com/SOHU-Co/kafka-node
 [48]: https://github.com/amqp/rhea
 [49]: https://github.com/aws/aws-sdk-js
 [50]: https://github.com/petkaantonov/bluebird
