@@ -123,7 +123,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    ./gradlew uploadMappingRelease
    ```
 
-5. If running native code, run the NDK symbol upload task.
+5. If running native code, run the NDK symbol upload task:
    ```bash
    ./gradlew uploadNdkSymbolFilesRelease
    ```
