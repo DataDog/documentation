@@ -140,7 +140,7 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [8]: /monitors/notify/variables/
 [9]: /monitors/configuration/?tab=thresholdalert#alert-grouping
 [10]: /account_management/rbac/granular_access/
-[11]: /service_management/mobile/
+[11]: /mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
 [14]: /service_management/workflows/
