@@ -89,7 +89,7 @@ Key-value pairs to be used as resource attributes. See [Resource semantic conven
 Disable the SDK for all signals<br>
 **Notes**: Mapped values between `OTEL_SDK_DISABLED` & `DD_TRACE_OTEL_ENABLED`:<br>
   - `true`|`false`
-  - `false`|`true`
+  - `false`|`true`<br>
 **Not Supported In**: `ruby` & `golang` sdk's<br>
 
 [for more info, see the OpenTelemetry documentation][10]
