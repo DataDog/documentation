@@ -11,6 +11,11 @@ dropdowns.forEach((dropdown) => {
             const showDropdown = function () {
                 dropdown.classList.add('show');
                 dropdown.querySelector('.dropdown-menu').classList.add('show');
+                if (dropdown.classList.contains('product-dropdown')) {
+                  window.DD_RUM.onReady(function() {
+                    window.DD_RUM.addAction('Product Dropdown Open')
+                  })
+                }
             };
 
             setTimeout(showDropdown, 160);
@@ -23,6 +28,11 @@ dropdowns.forEach((dropdown) => {
             const hideDropdown = function () {
                 dropdown.querySelector('.dropdown-menu').classList.remove('show');
                 dropdown.classList.remove('show');
+                if (dropdown.classList.contains('product-dropdown')) {
+                  window.DD_RUM.onReady(function() {
+                    window.DD_RUM.addAction('Product Dropdown Close')
+                  })
+                }
             };
             const timer = setTimeout(hideDropdown, 160);
 
