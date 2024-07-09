@@ -46,7 +46,7 @@ To trigger a workflow manually:
 ## Trigger a workflow from a Dashboard
 
 To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
-1. From your Dashboard, click **Add Widget**.
+1. From your dashboard, click **Add Widget**.
 1. Search for `workflows` and add the **Run Workflow** widget.
 1. Under **Select the workflow**, find your workflow in the dropdown menu. Only published workflows with dashboard triggers appear in the list.
 1. Map dashboard template variables to workflow input parameters. This allows the values of your dashboard template variables to be mapped directly to the input parameters when you run the workflow.
@@ -67,10 +67,10 @@ If the child workflow has [input parameters][5], these parameters appear as requ
 
 {{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
-## Trigger a workflow from a Monitor
+## Trigger a workflow from a monitor
 
-To trigger a workflow from a Monitor, you must first add a monitor trigger to your workflow:
-1. Add a Monitor trigger to your workflow:
+To trigger a workflow from a monitor, you must first add a monitor trigger to your workflow:
+1. Add a monitor trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Monitor**.
    - If your workflow already has one more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
@@ -102,19 +102,19 @@ To test a monitor trigger:
 
 ## Trigger a workflow from a Security Signal
 
-You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel. Before you can add a workflow to a Security Signal, the workflow must have a Security trigger.
+You can trigger a workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel. Before you can add a workflow to a Security Signal, the workflow must have a security trigger.
 
 ### Trigger a workflow automatically from Security Signal Notification Rules
 
 You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
 
 To trigger a workflow from a notification rule, you must first add a security trigger to your workflow:
-1. Add a Security trigger to your workflow:
+1. Add a security trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Security**.
    - If your workflow already has one more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Security**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
 1. Click the trigger and take note of the **Mention handle**.
-1. Save your Workflow.
+1. Save your workflow.
 1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 Add the workflow to your notification rule:
@@ -125,24 +125,24 @@ Add the workflow to your notification rule:
 
 {{< img src="service_management/workflows/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
-Each time the Notification Rule fires, it triggers a workflow run.
+Each time the notification rule fires, it triggers a workflow run.
 
 ### Trigger a workflow manually from Cloud SIEM Security Signals
 
 You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
-1. Click **Run Workflow** at the top of the Security Signal panel.
+1. Click **Run Workflow** at the top of the **Security Signal** panel.
 1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with security triggers appear in the list.
 1. If your workflow requires input parameters, enter the values as required. You can copy the values from the Signal object JSON displayed next to the input parameters, and paste them into the parameter fields.
 1. Click **Run**.
 1. You can see the workflow run status in the **Workflow** section of the Security Signal.
 
-For additional examples of Security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
+For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
 ## Trigger a workflow from incidents
 
 To trigger a workflow from an incident notification rule, you must first add an incident trigger to your workflow:
-1. Add an Incident trigger to your workflow:
+1. Add an incident trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Incident**.
    - If your workflow already has one more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Incident**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
@@ -158,8 +158,6 @@ Add the workflow to your incident notification rule:
 1. In the **Recipient** section, use the workflow mention name to find your workflow. For example, `@workflow-my-workflow`. The workflow must have an incident trigger before you can trigger it from an incident.
 1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
 1. Click **Save**.
-
-Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## Trigger a workflow with an API call
 

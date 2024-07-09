@@ -110,7 +110,7 @@ Scheduled and triggered workflows don't trigger automatically until you publish 
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
 1. In the **Configure notifications & automations** section, click **Add Workflow**.
 1. Use the workflow mention name (`@workflow-Create-Jira-Ticket`) to search for your workflow and select it from the drop-down.
-   - You can pass trigger variables into the workflow by using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname={{host.name}})`.
+   - You can pass trigger variables into the workflow using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname={{host.name}})`.
 1. Click **Test Notifications** to test the workflow and all of this monitor's notifications.
 1. Save the monitor.
 
