@@ -5,7 +5,7 @@
 {{ $generalRegions := .generalRegions }}
 
 {{ range $path_key, $path_object := $spec.paths }}
-    {{ if not ($path_key hasPrefix "x-") }}
+    {{ if not (hasPrefix $path_key "x-") }}
         {{ range $action_type, $action := $path_object }}
             {{ if in $operationids $action.operationId }}
                 {{ $s.SetInMap "data" "pathKey" $path_key }}
