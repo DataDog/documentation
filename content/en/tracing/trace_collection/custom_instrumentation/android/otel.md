@@ -1,6 +1,9 @@
 ---
 title: Android and Android TV Custom Instrumentation using OpenTelemetry API
 description: 'Instrument your Android and Android TV application with OpenTelemetry API, to send traces to Datadog.'
+aliases:
+- /tracing/trace_collection/otel_instrumentation/android/
+- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/android
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
