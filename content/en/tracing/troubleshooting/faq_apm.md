@@ -42,13 +42,17 @@ The custom retention filter allows you to decide which spans are indexed and ret
 
 
 
-{{% collapse-content title="The trace metrics value is different from the custom span-based metrics value" level="h4" %}}
-
-[Trace metrics][6] are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. The trace metrics namespace is formatted as: `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
+{{% collapse-content title="The trace metrics value is different from the custom span-based metrics value" level="h4" %}} </strong>[Trace metrics][6] </strong> are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. The trace metrics namespace is formatted as: `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
 
 [Custom span-based metrics][7] are generated based on your ingested spans which is dependent on your [trace ingestion sampling][8]. If your ingesting 50% of your traces, your custom span-based metrics will be based on the 50% ingested spans.
 
 To have the value of the trace metric and the value of the custom span-based metric be the same, you would need to make sure you have a 100% ingestion rate configured for your application/service. 
+
+<div class="alert alert-info"> 
+
+Metric names must follow the [metric naming convention][15]. Metric names that start with `trace.*` are not permitted and will not be saved. 
+
+</div>
 
 {{% /collapse-content %}} 
 
@@ -140,7 +144,7 @@ If you need to accommodate larger volumes, contact [Datadog support][1] with you
 
 {{% /collapse-content %}} 
 
-
+<br>
 
 ## Further Reading
 
@@ -160,3 +164,4 @@ If you need to accommodate larger volumes, contact [Datadog support][1] with you
 [12]: https://app.datadoghq.com/apm/traces
 [13]: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters
 [14]: https://app.datadoghq.com/services
+[15]: https://docs.datadoghq.com/metrics/#naming-metrics 
