@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: GitHub
   text: Cloud Run サービスからのトレース、ログ、カスタムメトリクスの収集
-kind: documentation
 title: Google Cloud Run
 ---
 

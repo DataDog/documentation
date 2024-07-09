@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors/
   tag: 설명서
   text: Synthetic 테스트 모니터에 대해 알아보기
-kind: 가이드
 title: Statuspage를 사용해 모니터 통합하기
 ---
 

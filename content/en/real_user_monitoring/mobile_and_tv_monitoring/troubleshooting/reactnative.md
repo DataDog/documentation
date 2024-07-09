@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting React Native SDK issues
-kind: documentation
 description: Learn how to troubleshoot issues with React Native Monitoring.
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
@@ -281,6 +280,14 @@ dependencies {
     }
 }
 ```
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically deleted if it gets too old to ensure the React Native RUM SDK does not use too much disk space.
 
 ## Further Reading
 

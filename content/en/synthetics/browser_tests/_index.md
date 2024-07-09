@@ -1,6 +1,5 @@
 ---
 title: Browser Testing
-kind: documentation
 description: Simulate and monitor user journeys from specific locations.
 aliases:
   - /synthetics/browser_check
@@ -161,7 +160,7 @@ For more information, see [Using Synthetic Test Monitors][7].
 
 ## Record your steps
 
-Tests can be only recorded from [Google Chrome][8]. To record your test, download the [Datadog Record Test extension for Google Chrome][9].
+Tests can be recorded from [Google Chrome][8] and [Microsoft Edge][18]. To record your test, download the [Datadog Record Test extension][9].
 
 You can switch tabs in a browser test recording in order to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][10]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
@@ -212,3 +211,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [15]: /continuous_testing/environments/proxy_firewall_vpn
 [16]: /synthetics/guide/browser-tests-passkeys
 [17]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[18]: https://www.microsoft.com/edge/download

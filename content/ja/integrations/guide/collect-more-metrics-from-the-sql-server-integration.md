@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
-kind: ガイド
 title: SQL Server インテグレーションからより多くのメトリクスを収集する
 ---
 

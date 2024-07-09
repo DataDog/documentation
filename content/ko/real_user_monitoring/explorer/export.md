@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors
   tag: 설명서
   text: 모니터에 대해 알아보기
-kind: 설명서
 title: RUM 이벤트 및 그래프 내보내기
 ---
 

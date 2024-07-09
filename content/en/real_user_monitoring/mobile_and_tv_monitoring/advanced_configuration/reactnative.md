@@ -1,6 +1,5 @@
 ---
 title: RUM React Native Advanced Configuration
-kind: documentation
 description: Learn about advanced configuration options for your React Native setup.
 code_lang: reactnative
 type: multi-code-lang
@@ -212,6 +211,12 @@ Enables tracking of RUM event when no RUM View is active. By default, background
 **Type**: ProxyConfiguration<br/>
 Optional [proxy configuration][13].
 
+`useAccessibilityLabel`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true`<br/>
+Determines whether the accessibility labels are used to name RUM actions (default is true).
+
 ## Manual instrumentation
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
@@ -233,12 +238,20 @@ To manually track RUM Views, provide a `view key`, `view name`, and `action name
 DdRum.startView('<view-key>', 'View Name', {}, Date.now());
 //…
 DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
+```
 
-// Track RUM Actions manually
+### Manually track RUM Actions
+You can manually track RUM actions:
+
+```javascript
 DdRum.addAction(RumActionType.TAP, 'action name', {}, Date.now());
-// Or in case of continuous action
+```
+
+To track a continuous action:
+
+```javascript
 DdRum.startAction(RumActionType.TAP, 'action name', {}, Date.now());
-// To stop action above
+//...
 DdRum.stopAction({}, Date.now());
 ```
 
@@ -254,7 +267,7 @@ You can manually track RUM resources:
 
 ```javascript
 DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
-//…
+//...
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 ```
 

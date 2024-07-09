@@ -840,6 +840,8 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
+        metrics_config:
+          $ref: '#/components/schemas/AzureAccountMetricsConfig'
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -864,6 +866,27 @@ components:
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
+    AzureAccountMetricsConfig:
+      description: 'Dictionary containing the key `excluded_resource_providers` which
+        has to be a list of Microsoft Azure Resource Provider names.
+
+        This feature is currently being beta tested.
+
+        In order to enable all resource providers for metric collection, pass:
+
+        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
+        for `excluded_resource_providers`).'
+      properties:
+        excluded_resource_providers:
+          description: List of Microsoft Azure Resource Providers to exclude from
+            metric collection.
+          example:
+          - Microsoft.Sql
+          - Microsoft.Cdn
+          items:
+            type: string
+          type: array
+      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1116,6 +1139,17 @@ components:
           type: string
       readOnly: true
       type: object
+    CrossOrgUuids:
+      description: The source organization UUID for cross organization queries. Feature
+        in Private Beta.
+      example:
+      - 6434abde-xxxx-yyyy-zzzz-da7ad0900001
+      items:
+        description: The source organization UUID.
+        example: 6434abde-xxxx-yyyy-zzzz-da7ad0900001
+        type: string
+      maxItems: 1
+      type: array
     Dashboard:
       description: "A dashboard is Datadog\u2019s tool for visually tracking, analyzing,
         and displaying\nkey performance metrics, which enable you to monitor the health
@@ -2618,6 +2652,8 @@ components:
     FormulaAndFunctionApmDependencyStatsQueryDefinition:
       description: A formula and functions APM dependency stats query.
       properties:
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsDataSource'
         env:
@@ -2705,6 +2741,8 @@ components:
     FormulaAndFunctionApmResourceStatsQueryDefinition:
       description: APM resource stats query using formulas and functions.
       properties:
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsDataSource'
         env:
@@ -2770,6 +2808,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/WidgetAggregator'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionCloudCostDataSource'
         name:
@@ -2820,6 +2860,8 @@ components:
       properties:
         compute:
           $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionCompute'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
         group_by:
@@ -2976,6 +3018,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionMetricDataSource'
         name:
@@ -3006,6 +3050,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDataSource'
         is_normalized_cpu:
@@ -3113,6 +3159,8 @@ components:
           description: Additional filters applied to the SLO query.
           example: host:host_a,env:prod
           type: string
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionSLODataSource'
         group_mode:
@@ -6905,6 +6953,7 @@ components:
       - logs
       - spans
       - database_queries
+      - network_performance_queries
       example: rum
       type: string
       x-enum-varnames:
@@ -6916,6 +6965,7 @@ components:
       - LOGS
       - SPANS
       - DATABASE_QUERIES
+      - NETWORK_PERFORMANCE_QUERIES
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -7739,6 +7789,7 @@ components:
       - ci-tests alert
       - error-tracking alert
       - database-monitoring alert
+      - network-performance alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -7759,6 +7810,7 @@ components:
       - CI_TESTS_ALERT
       - ERROR_TRACKING_ALERT
       - DATABASE_MONITORING_ALERT
+      - NETWORK_PERFORMANCE_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -15144,6 +15196,13 @@ components:
 
         to delete.'
       properties:
+        force_delete_dependencies:
+          description: 'Delete the Synthetic test even if it''s referenced by other
+            resources
+
+            (for example, SLOs and composite monitors).'
+          example: false
+          type: boolean
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
           example: []
@@ -26049,8 +26108,9 @@ paths:
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"tenant_name\":
-              \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
+              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
+              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-undo:
@@ -28089,6 +28149,8 @@ paths:
 
         - database-monitoring: `database-monitoring alert`
 
+        - network-performance: `network-performance alert`
+
 
         **Notes**:
 
@@ -28385,6 +28447,28 @@ paths:
 
 
         Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
+
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **Network Performance Alert Query**
+
+
+        Example: `network-performance(query).rollup(rollup_method[, measure]).last(time_window)
         operator #`
 
 

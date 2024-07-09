@@ -1,6 +1,5 @@
 ---
 title: Instrument Azure App Service - Linux Containers
-kind: documentation
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"

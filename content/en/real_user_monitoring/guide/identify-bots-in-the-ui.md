@@ -1,6 +1,6 @@
 ---
 title: Identify Bots in the RUM Explorer
-kind: guide
+
 description: Identify incoming RUM requests.
 further_reading:
 - link: '/real_user_monitoring/explorer'

@@ -1,6 +1,5 @@
 ---
 title: Distributed Tracing with AWS Lambda Serverless Applications
-kind: documentation
 aliases:
   - /tracing/serverless_functions
   - /tracing/setup_overview/serverless_functions/

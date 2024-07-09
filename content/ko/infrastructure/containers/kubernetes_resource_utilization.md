@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: 블로그
   text: Kubernetes 워크로드 규모 효율화를 위한 실용적인 팁
-kind: 설명서
 title: Kubernetes 리소스 활용도
 ---
 

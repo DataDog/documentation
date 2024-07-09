@@ -1,6 +1,5 @@
 ---
 description: Acceso y autenticación para App builder
-kind: documentación
 title: Acceso y autenticación
 ---
 

@@ -16,7 +16,6 @@ further_reading:
 - link: /dashboards/guide/powerpacks-best-practices/
   tag: ドキュメント
   text: パワーパックについて
-kind: ガイド
 title: RUM とセッションリプレイを製品分析に活用する
 ---
 

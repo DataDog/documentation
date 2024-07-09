@@ -19,7 +19,6 @@ further_reading:
 - link: /tracing/
   tag: 설명서
   text: 고급 사용
-kind: documentation
 title: C++ 애플리케이션 추적하기
 type: multi-code-lang
 ---

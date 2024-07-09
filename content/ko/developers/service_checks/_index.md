@@ -4,7 +4,6 @@ aliases:
 - /ko/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
 - /ko/guides/services_checks/
 - /ko/monitors/guide/visualize-your-service-check-in-the-datadog-ui
-kind: 설명서
 title: 서비스 검사
 ---
 

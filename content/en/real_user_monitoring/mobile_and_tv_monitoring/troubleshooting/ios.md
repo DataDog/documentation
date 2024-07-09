@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting iOS SDK issues
-kind: documentation
 description: Learn how to troubleshoot issues with iOS Monitoring.
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
@@ -86,6 +85,14 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
   * [`urlSession(_:task:didCompleteWithError:)`][5]
 * implement `URLSessionDataDelegate` and forward:
   * [`urlSession(_:dataTask:didReceive:)`][6]
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the RUM iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
 
 ## Further Reading
 

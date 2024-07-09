@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Opciones de la API Monitor
 ---
 

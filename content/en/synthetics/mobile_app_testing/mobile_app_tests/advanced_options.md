@@ -1,6 +1,5 @@
 ---
 title: Advanced Options for Mobile App Testing Steps
-kind: documentation
 description: Configure advanced options for Mobile Test Steps
 aliases:
 - /mobile_testing/mobile_app_tests/advanced_options
@@ -41,6 +40,10 @@ By default, mobile app tests use the Datadog locator system. When a test searche
 These points of reference become a set of locators, each of which uniquely define the element. You should only use custom selectors in edge cases because the Datadog locator system enables tests to be self-maintaining.
 
 Custom selectors are created by performing a [step in the recorder][1] (such as a **tap**, **double tap**, or **open deep link**) on any element of your page. This specifies the kind of step that needs to be performed.
+
+Optionally, under advanced options, use handlebars (`{{`) syntax to insert dynamic content. A pre-populated dropdown list of variables is shown:
+
+{{< img src="mobile_app_testing/mobile_app_advanced_user_locator_2.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
 
 ## Timeout
 

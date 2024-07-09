@@ -19,7 +19,6 @@ further_reading:
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para potenciar la monitorización de tu
     infraestructura
-kind: documentación
 title: Infraestructura
 ---
 

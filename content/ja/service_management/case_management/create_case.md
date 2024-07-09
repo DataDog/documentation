@@ -3,7 +3,6 @@ further_reading:
 - link: service_management/case_management/view_and_manage
   tag: ドキュメント
   text: ケースの表示と管理
-kind: ドキュメント
 title: ケースの作成
 ---
 
