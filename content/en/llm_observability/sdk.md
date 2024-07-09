@@ -108,7 +108,13 @@ LLMObs.enable(
 
 Enable LLM Observability in a serverless environmant by using the [Datadog-Python and Datadog-Extension layers][14].
 
-Regardless of whether or not you are manually instrumenting your application, or are only relying on auto-instrumented integrations to send data to LLM Observability, please specify `DD_LLMOBS_ENABLED` in your environment for these serverless layers to properly instrument and flush traces from your serverless application.
+Please specify `DD_LLMOBS_ENABLED` in your environment for these serverless layers to properly instrument and flush traces from your serverless application, for both auto-instrumented and manual instrumentation use cases.
+
+#### Flushing in serverless environments
+
+Flusing from serverless functions is handled automatically when using the latest versions of the `Datadog-Python` and `Datadog-Extension` layers.
+
+Otherwise, `LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
 #### Application naming guidelines
 
@@ -569,12 +575,6 @@ def separate_task(workflow_span):
     workflow_span.finish()
     return
 {{< /code-block >}}
-
-### Flushing in serverless environments
-
-If you are using the latest versions of the `Datadog-Python` and `Datadog-Extension` layers, flushing is handled out-of-the-box.
-
-In other cases, or if the provided flushing does not work, `LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
 ### Tracing multiple applications
 
