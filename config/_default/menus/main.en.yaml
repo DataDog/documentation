@@ -4046,7 +4046,7 @@ menu:
       parent: software_delivery_heading
       identifier: code_analysis
       weight: 50000
-    - name: Static Analysis
+    - name: Static Analysis (SAST)
       url: code_analysis/static_analysis
       parent: code_analysis
       identifier: code_analysis_static_analysis
@@ -4071,7 +4071,7 @@ menu:
       parent: code_analysis_static_analysis
       identifier: code_analysis_static_analysis_other_providers
       weight: 104
-    - name: Software Composition Analysis
+    - name: Software Composition Analysis (SCA)
       url: code_analysis/software_composition_analysis
       parent: code_analysis
       identifier: code_analysis_software_composition_analysis
@@ -4091,7 +4091,7 @@ menu:
       parent: code_analysis_software_composition_analysis
       identifier: code_analysis_software_composition_analysis_other_providers
       weight: 203
-    - name: Static Analysis Rules
+    - name: Static Analysis (SAST) Rules
       url: code_analysis/static_analysis_rules
       parent: code_analysis
       identifier: code_analysis_static_analysis_rules

@@ -53,7 +53,6 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | `DD_APM_DD_URL`           | Define the endpoint and port to hit when using a proxy for APM. String in the format `<ENDPOINT>:<PORT>`. Because traces are forwarded in TCP, the proxy must be able to handle TCP connections.                                                        |
 | `DD_APM_REPLACE_TAGS`     | Defines a set of rules to replace or remove certain tags that contain [potentially sensitive information][3].                                                                                                                |
 | `DD_APM_IGNORE_RESOURCES` | An exclusion list of regular expressions. Any trace with a resource name that matches one of these expressions is ignored. Use a comma-separated list and surround each entry with double quotes. For example: `"^foo$", "bar$"`                                              |
-| `DD_APM_LOG_THROTTLING`   | Set to `true` to limit the total number of warnings and errors to 10 for every 10 second interval. Defaults to `true`.                                                                                                                                                    |
 
 ### Advanced networking configuration
 
