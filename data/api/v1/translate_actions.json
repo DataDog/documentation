@@ -234,7 +234,7 @@
     "summary": "Revoke embed"
   },
   "GetGraphSnapshot": {
-    "description": "Take graph snapshots.\n**Note**: When a snapshot is created, there is some delay before it is available.",
+    "description": "Take graph snapshots.\n\n**Notes**:\n- When a snapshot is created, there is some delay before it is available.\n- This endpoint requires an unscoped App Key.",
     "summary": "Take graph snapshots"
   },
   "MuteHost": {
