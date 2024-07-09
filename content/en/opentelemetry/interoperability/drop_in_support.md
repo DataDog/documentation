@@ -13,7 +13,7 @@ algolia:
   tags: ['otel drop-in instrumentation']
 ---
 
-Instrumentation is the act of adding observability code to an application. Automatic instrumentation is a way to instrument applications and libraries without touching their source code. Both OpenTelemetry and Datadog provide instrumentations as part of their SDKs, with varying amounts of coverage between them.
+[Instrumentation](/tracing/trace_collection/) is the act of adding observability code to an application. [Automatic instrumentation](/tracing/trace_collection/automatic_instrumentation/) is a way to instrument applications and libraries without directly modifying their source code. Both OpenTelemetry and Datadog provide instrumentations as part of their SDKs, with varying amounts of coverage between them.
 
 Datadog SDKs support adding instrumentations from OpenTelemetry alongside their original instrumentations. This gives users the same experience using OpenTelemetry instrumentations with Datadog SDKs as with the OpenTelemetry SDK.
 
