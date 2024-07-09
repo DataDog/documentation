@@ -12,6 +12,8 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
+algolia:
+  tags: ["static analysis", "static analysis rules", "static application security testing", "SAST"]
 ---
 
 {{% site-region region="gov" %}}

@@ -1,11 +1,13 @@
 ---
 title: Generic CI Providers
-description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
+description: Learn how to run the Datadog CLI directly in your CI pipeline to configure environment variables, install dependencies, and scan code for quality and security issues before it reaches production.
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
   text: "Monitor all your CI pipelines with Datadog"
+algolia:
+  tags: ["software composition analysis", "ci pipeline", "SCA"]
 ---
 
 {{% site-region region="gov" %}}

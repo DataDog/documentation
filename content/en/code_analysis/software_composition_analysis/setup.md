@@ -18,6 +18,8 @@ further_reading:
 - link: "/code_analysis/static_analysis/"
   tag: "Documentation"
   text: "Learn about Static Analysis"
+algolia:
+  tags: ["software composition analysis", "datadog software composition analysis", "library vulnerabilities", "security vulnerabilities", "SCA"]
 ---
 
 {{% site-region region="gov" %}}
