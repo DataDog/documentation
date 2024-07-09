@@ -67,16 +67,16 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "state"
+                "test_string"
               ]
             },
             ": ",
             {
               "$$mdtype": "Variable",
               "path": [
-                "state"
+                "test_string"
               ],
-              "value": "Illinois"
+              "value": "Datadog"
             }
           ]
         },
@@ -90,14 +90,14 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "alwaysTrue"
+                "always_true"
               ]
             },
             ": ",
             {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ],
               "value": true
             }
@@ -113,14 +113,14 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "alwaysFalse"
+                "always_false"
               ]
             },
             ": ",
             {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysFalse"
+                "always_false"
               ],
               "value": false
             }
@@ -163,7 +163,7 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysTrue"
+              "always_true"
             ],
             "value": true
           },
@@ -185,7 +185,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "equals($alwaysTrue, true)"
+                "equals($always_true, true)"
               ]
             },
             "."
@@ -204,11 +204,11 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "state"
+              "test_string"
             ],
-            "value": "Illinois"
+            "value": "Datadog"
           },
-          "1": "Illinois"
+          "1": "Datadog"
         }
       },
       "attributes": {
@@ -226,7 +226,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "equals($state, \"Illinois\")"
+                "equals($test_string, \"Datadog\")"
               ]
             },
             "."
@@ -245,7 +245,7 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysFalse"
+              "always_false"
             ],
             "value": false
           },
@@ -267,7 +267,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "equals($alwaysFalse, true)"
+                "equals($always_false, true)"
               ]
             },
             "."
@@ -286,11 +286,11 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "state"
+              "test_string"
             ],
-            "value": "Illinois"
+            "value": "Datadog"
           },
-          "1": "California"
+          "1": "Hello"
         }
       },
       "attributes": {
@@ -308,7 +308,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "equals($state, \"California\")"
+                "equals($test_string, \"Hello\")"
               ]
             },
             "."
@@ -383,7 +383,7 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysTrue"
+              "always_true"
             ],
             "value": true
           },
@@ -405,7 +405,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "default($alwaysTrue, false)"
+                "default($always_true, false)"
               ]
             },
             "."
@@ -480,14 +480,14 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysTrue"
+              "always_true"
             ],
             "value": true
           },
           "1": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysFalse"
+              "always_false"
             ],
             "value": false
           }
@@ -508,7 +508,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "or($alwaysTrue, $alwaysFalse)"
+                "or($always_true, $always_false)"
               ]
             },
             "."
@@ -532,11 +532,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "California"
+              "1": "Hello"
             }
           },
           "1": {
@@ -547,11 +547,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "Illinois"
+              "1": "Datadog"
             }
           }
         }
@@ -571,7 +571,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "or(equals($state, \"California\"), equals($state, \"Illinois\"))"
+                "or(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
               ]
             },
             "."
@@ -651,14 +651,14 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysTrue"
+              "always_true"
             ],
             "value": true
           },
           "1": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysTrue"
+              "always_true"
             ],
             "value": true
           }
@@ -679,7 +679,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "and($alwaysTrue, $alwaysTrue)"
+                "and($always_true, $always_true)"
               ]
             },
             "."
@@ -698,14 +698,14 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysTrue"
+              "always_true"
             ],
             "value": true
           },
           "1": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysFalse"
+              "always_false"
             ],
             "value": false
           }
@@ -726,7 +726,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "and($alwaysTrue, $alwaysFalse)"
+                "and($always_true, $always_false)"
               ]
             },
             "."
@@ -750,11 +750,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "California"
+              "1": "Hello"
             }
           },
           "1": {
@@ -765,11 +765,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "Illinois"
+              "1": "Datadog"
             }
           }
         }
@@ -789,7 +789,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "and(equals($state, \"California\"), equals($state, \"Illinois\"))"
+                "and(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
               ]
             },
             "."
@@ -824,7 +824,7 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysFalse"
+              "always_false"
             ],
             "value": false
           }
@@ -845,7 +845,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "not($alwaysFalse)"
+                "not($always_false)"
               ]
             },
             "."
@@ -869,11 +869,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "California"
+              "1": "Hello"
             }
           }
         }
@@ -893,7 +893,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "not(equals($state, \"California\"))"
+                "not(equals($test_string, \"Hello\"))"
               ]
             },
             "."
@@ -912,7 +912,7 @@
           "0": {
             "$$mdtype": "Variable",
             "path": [
-              "alwaysTrue"
+              "always_true"
             ],
             "value": true
           }
@@ -933,7 +933,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "not($alwaysTrue)"
+                "not($always_true)"
               ]
             },
             "."
@@ -957,11 +957,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "Illinois"
+              "1": "Datadog"
             }
           }
         }
@@ -981,7 +981,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "not(equals($state, \"Illinois\"))"
+                "not(equals($test_string, \"Datadog\"))"
               ]
             },
             "."
@@ -1013,7 +1013,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ],
                 "value": false
               }
@@ -1027,7 +1027,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ],
                 "value": true
               }
@@ -1050,7 +1050,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "or(not($alwaysFalse), not($alwaysTrue))"
+                "or(not($always_false), not($always_true))"
               ]
             },
             "."
@@ -1074,11 +1074,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "Illinois"
+              "1": "Datadog"
             }
           },
           "1": {
@@ -1089,11 +1089,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "California"
+              "1": "Hello"
             }
           }
         }
@@ -1113,7 +1113,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "or(equals($state, \"Illinois\"), equals($state, \"California\"))"
+                "or(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
               ]
             },
             "."
@@ -1142,7 +1142,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysFalse"
+                      "always_false"
                     ],
                     "value": false
                   }
@@ -1156,7 +1156,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysTrue"
+                      "always_true"
                     ],
                     "value": true
                   }
@@ -1177,7 +1177,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysFalse"
+                      "always_false"
                     ],
                     "value": false
                   }
@@ -1191,7 +1191,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysTrue"
+                      "always_true"
                     ],
                     "value": true
                   }
@@ -1216,7 +1216,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "and(or(not($alwaysFalse), not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue)))"
+                "and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))"
               ]
             },
             "."
@@ -1240,7 +1240,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ],
                 "value": false
               }
@@ -1264,7 +1264,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "equals(not($alwaysFalse), true)"
+                "equals(not($always_false), true)"
               ]
             },
             "."
@@ -1288,7 +1288,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ],
                 "value": false
               },
@@ -1300,7 +1300,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysTrue"
+                      "always_true"
                     ],
                     "value": true
                   }
@@ -1321,7 +1321,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysFalse"
+                      "always_false"
                     ],
                     "value": false
                   }
@@ -1335,7 +1335,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysTrue"
+                      "always_true"
                     ],
                     "value": true
                   }
@@ -1360,7 +1360,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "and(and($alwaysFalse, not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue)))"
+                "and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))"
               ]
             },
             "."
@@ -1384,7 +1384,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ],
                 "value": false
               }
@@ -1398,7 +1398,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ],
                 "value": true
               }
@@ -1421,7 +1421,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "and(not($alwaysFalse), not($alwaysTrue))"
+                "and(not($always_false), not($always_true))"
               ]
             },
             "."
@@ -1445,11 +1445,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "Illinois"
+              "1": "Datadog"
             }
           },
           "1": {
@@ -1460,11 +1460,11 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ],
-                "value": "Illinois"
+                "value": "Datadog"
               },
-              "1": "California"
+              "1": "Hello"
             }
           }
         }
@@ -1484,7 +1484,7 @@
               "name": "code",
               "attributes": {},
               "children": [
-                "and(equals($state, \"Illinois\"), equals($state, \"California\"))"
+                "and(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
               ]
             },
             "."

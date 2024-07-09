@@ -8,28 +8,28 @@ For easier checking, each section has its YESes at the top, and NOs at the botto
 
 ## Variable values
 
-- `state`: {% $state %}
-- `alwaysTrue`: {% $alwaysTrue %}
-- `alwaysFalse`: {% $alwaysFalse %}
+- `test_string`: {% $test_string %}
+- `always_true`: {% $always_true %}
+- `always_false`: {% $always_false %}
 
 ## Dynamic variables test
 
 ## `equals` test
 
-{% if equals($alwaysTrue, true) %}
-YES: Display if `equals($alwaysTrue, true)`.
+{% if equals($always_true, true) %}
+YES: Display if `equals($always_true, true)`.
 {% /if %}
 
-{% if equals($state, "Illinois") %}
-YES: Display if `equals($state, "Illinois")`.
+{% if equals($test_string, "Datadog") %}
+YES: Display if `equals($test_string, "Datadog")`.
 {% /if %}
 
-{% if equals($alwaysFalse, true) %}
-NO: Display if `equals($alwaysFalse, true)`.
+{% if equals($always_false, true) %}
+NO: Display if `equals($always_false, true)`.
 {% /if %}
 
-{% if equals($state, "California") %}
-NO: Display if `equals($state, "California")`.
+{% if equals($test_string, "Hello") %}
+NO: Display if `equals($test_string, "Hello")`.
 {% /if %}
 
 ## `default` test
@@ -38,8 +38,8 @@ NO: Display if `equals($state, "California")`.
 YES: Display if `default($notDefined, true)`.
 {% /if %}
 
-{% if default($alwaysTrue, false) %}
-YES: Display if `default($alwaysTrue, false)`.
+{% if default($always_true, false) %}
+YES: Display if `default($always_true, false)`.
 {% /if %}
 
 {% if default($notDefined, false) %}
@@ -48,12 +48,12 @@ NO: Display if `default($notDefined, false)`.
 
 ## `or` test
 
-{% if or($alwaysTrue, $alwaysFalse) %}
-YES: Display if `or($alwaysTrue, $alwaysFalse)`.
+{% if or($always_true, $always_false) %}
+YES: Display if `or($always_true, $always_false)`.
 {% /if %}
 
-{% if or(equals($state, "California"), equals($state, "Illinois")) %}
-YES: Display if `or(equals($state, "California"), equals($state, "Illinois"))`.
+{% if or(equals($test_string, "Hello"), equals($test_string, "Datadog")) %}
+YES: Display if `or(equals($test_string, "Hello"), equals($test_string, "Datadog"))`.
 {% /if %}
 
 {% if or($missingVarOne, $missingVarTwo) %}
@@ -62,62 +62,62 @@ NO: Display if `or($missingVarOne, $missingVarTwo)`.
 
 ## `and` test
 
-{% if and($alwaysTrue, $alwaysTrue) %}
-YES: Display if `and($alwaysTrue, $alwaysTrue)`.
+{% if and($always_true, $always_true) %}
+YES: Display if `and($always_true, $always_true)`.
 {% /if %}
 
-{% if and($alwaysTrue, $alwaysFalse) %}
-NO: Display if `and($alwaysTrue, $alwaysFalse)`.
+{% if and($always_true, $always_false) %}
+NO: Display if `and($always_true, $always_false)`.
 {% /if %}
 
-{% if and(equals($state, "California"), equals($state, "Illinois")) %}
-NO: Display if `and(equals($state, "California"), equals($state, "Illinois"))`.
+{% if and(equals($test_string, "Hello"), equals($test_string, "Datadog")) %}
+NO: Display if `and(equals($test_string, "Hello"), equals($test_string, "Datadog"))`.
 {% /if %}
 
 ## `not` test
 
-{% if not($alwaysFalse) %}
-YES: Display if `not($alwaysFalse)`.
+{% if not($always_false) %}
+YES: Display if `not($always_false)`.
 {% /if %}
 
-{% if not(equals($state, "California")) %}
-YES: Display if `not(equals($state, "California"))`.
+{% if not(equals($test_string, "Hello")) %}
+YES: Display if `not(equals($test_string, "Hello"))`.
 {% /if %}
 
-{% if not($alwaysTrue) %}
-NO: Display if `not($alwaysTrue)`.
+{% if not($always_true) %}
+NO: Display if `not($always_true)`.
 {% /if %}
 
-{% if not(equals($state, "Illinois")) %}
-NO: Display if `not(equals($state, "Illinois"))`.
+{% if not(equals($test_string, "Datadog")) %}
+NO: Display if `not(equals($test_string, "Datadog"))`.
 {% /if %}
 
 ## Nested functions
 
-{% if or(not($alwaysFalse), not($alwaysTrue)) %}
-YES: Display if `or(not($alwaysFalse), not($alwaysTrue))`.
+{% if or(not($always_false), not($always_true)) %}
+YES: Display if `or(not($always_false), not($always_true))`.
 {% /if %}
 
-{% if or(equals($state, "Illinois"), equals($state, "California")) %}
-YES: Display if `or(equals($state, "Illinois"), equals($state, "California"))`.
+{% if or(equals($test_string, "Datadog"), equals($test_string, "Hello")) %}
+YES: Display if `or(equals($test_string, "Datadog"), equals($test_string, "Hello"))`.
 {% /if %}
 
-{% if and(or(not($alwaysFalse), not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue))) %}
-YES: Display if `and(or(not($alwaysFalse), not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue)))`.
+{% if and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true))) %}
+YES: Display if `and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))`.
 {% /if %}
 
-{% if equals(not($alwaysFalse), true) %}
-YES: Display if `equals(not($alwaysFalse), true)`.
+{% if equals(not($always_false), true) %}
+YES: Display if `equals(not($always_false), true)`.
 {% /if %}
 
-{% if and(and($alwaysFalse, not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue))) %}
-NO: Display if `and(and($alwaysFalse, not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue)))`.
+{% if and(and($always_false, not($always_true)), or(not($always_false), not($always_true))) %}
+NO: Display if `and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))`.
 {% /if %}
 
-{% if and(not($alwaysFalse), not($alwaysTrue)) %}
-NO: Display if `and(not($alwaysFalse), not($alwaysTrue))`.
+{% if and(not($always_false), not($always_true)) %}
+NO: Display if `and(not($always_false), not($always_true))`.
 {% /if %}
 
-{% if and(equals($state, "Illinois"), equals($state, "California")) %}
-NO: Display if `and(equals($state, "Illinois"), equals($state, "California"))`.
+{% if and(equals($test_string, "Datadog"), equals($test_string, "Hello")) %}
+NO: Display if `and(equals($test_string, "Datadog"), equals($test_string, "Hello"))`.
 {% /if %}

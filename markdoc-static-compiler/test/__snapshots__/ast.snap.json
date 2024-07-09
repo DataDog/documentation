@@ -449,7 +449,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "state"
+                    "content": "test_string"
                   },
                   "children": [],
                   "type": "code",
@@ -500,7 +500,7 @@
                     "content": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "state"
+                        "test_string"
                       ]
                     }
                   },
@@ -572,7 +572,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "alwaysTrue"
+                    "content": "always_true"
                   },
                   "children": [],
                   "type": "code",
@@ -623,7 +623,7 @@
                     "content": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysTrue"
+                        "always_true"
                       ]
                     }
                   },
@@ -695,7 +695,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "alwaysFalse"
+                    "content": "always_false"
                   },
                   "children": [],
                   "type": "code",
@@ -746,7 +746,7 @@
                     "content": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysFalse"
+                        "always_false"
                       ]
                     }
                   },
@@ -988,7 +988,7 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ]
             },
             "1": true
@@ -1049,7 +1049,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals($alwaysTrue, true)"
+                    "content": "equals($always_true, true)"
                   },
                   "children": [],
                   "type": "code",
@@ -1128,7 +1128,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ]
               },
               "1": true
@@ -1164,10 +1164,10 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "state"
+                "test_string"
               ]
             },
-            "1": "Illinois"
+            "1": "Datadog"
           }
         }
       },
@@ -1225,7 +1225,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals($state, \"Illinois\")"
+                    "content": "equals($test_string, \"Datadog\")"
                   },
                   "children": [],
                   "type": "code",
@@ -1304,10 +1304,10 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ]
               },
-              "1": "Illinois"
+              "1": "Datadog"
             }
           }
         }
@@ -1340,7 +1340,7 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysFalse"
+                "always_false"
               ]
             },
             "1": true
@@ -1401,7 +1401,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals($alwaysFalse, true)"
+                    "content": "equals($always_false, true)"
                   },
                   "children": [],
                   "type": "code",
@@ -1480,7 +1480,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ]
               },
               "1": true
@@ -1516,10 +1516,10 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "state"
+                "test_string"
               ]
             },
-            "1": "California"
+            "1": "Hello"
           }
         }
       },
@@ -1577,7 +1577,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals($state, \"California\")"
+                    "content": "equals($test_string, \"Hello\")"
                   },
                   "children": [],
                   "type": "code",
@@ -1656,10 +1656,10 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "state"
+                  "test_string"
                 ]
               },
-              "1": "California"
+              "1": "Hello"
             }
           }
         }
@@ -1964,7 +1964,7 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ]
             },
             "1": false
@@ -2025,7 +2025,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "default($alwaysTrue, false)"
+                    "content": "default($always_true, false)"
                   },
                   "children": [],
                   "type": "code",
@@ -2104,7 +2104,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ]
               },
               "1": false
@@ -2412,13 +2412,13 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ]
             },
             "1": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysFalse"
+                "always_false"
               ]
             }
           }
@@ -2478,7 +2478,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "or($alwaysTrue, $alwaysFalse)"
+                    "content": "or($always_true, $always_false)"
                   },
                   "children": [],
                   "type": "code",
@@ -2557,13 +2557,13 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ]
               },
               "1": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ]
               }
             }
@@ -2602,10 +2602,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "California"
+                "1": "Hello"
               }
             },
             "1": {
@@ -2615,10 +2615,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "Illinois"
+                "1": "Datadog"
               }
             }
           }
@@ -2678,7 +2678,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "or(equals($state, \"California\"), equals($state, \"Illinois\"))"
+                    "content": "or(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -2761,10 +2761,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "California"
+                  "1": "Hello"
                 }
               },
               "1": {
@@ -2774,10 +2774,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "Illinois"
+                  "1": "Datadog"
                 }
               }
             }
@@ -3094,13 +3094,13 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ]
             },
             "1": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ]
             }
           }
@@ -3160,7 +3160,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and($alwaysTrue, $alwaysTrue)"
+                    "content": "and($always_true, $always_true)"
                   },
                   "children": [],
                   "type": "code",
@@ -3239,13 +3239,13 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ]
               },
               "1": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ]
               }
             }
@@ -3280,13 +3280,13 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ]
             },
             "1": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysFalse"
+                "always_false"
               ]
             }
           }
@@ -3346,7 +3346,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and($alwaysTrue, $alwaysFalse)"
+                    "content": "and($always_true, $always_false)"
                   },
                   "children": [],
                   "type": "code",
@@ -3425,13 +3425,13 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ]
               },
               "1": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ]
               }
             }
@@ -3470,10 +3470,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "California"
+                "1": "Hello"
               }
             },
             "1": {
@@ -3483,10 +3483,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "Illinois"
+                "1": "Datadog"
               }
             }
           }
@@ -3546,7 +3546,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(equals($state, \"California\"), equals($state, \"Illinois\"))"
+                    "content": "and(equals($test_string, \"Hello\"), equals($test_string, \"Datadog\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -3629,10 +3629,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "California"
+                  "1": "Hello"
                 }
               },
               "1": {
@@ -3642,10 +3642,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "Illinois"
+                  "1": "Datadog"
                 }
               }
             }
@@ -3776,7 +3776,7 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysFalse"
+                "always_false"
               ]
             }
           }
@@ -3836,7 +3836,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "not($alwaysFalse)"
+                    "content": "not($always_false)"
                   },
                   "children": [],
                   "type": "code",
@@ -3915,7 +3915,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysFalse"
+                  "always_false"
                 ]
               }
             }
@@ -3954,10 +3954,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "California"
+                "1": "Hello"
               }
             }
           }
@@ -4017,7 +4017,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "not(equals($state, \"California\"))"
+                    "content": "not(equals($test_string, \"Hello\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -4100,10 +4100,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "California"
+                  "1": "Hello"
                 }
               }
             }
@@ -4138,7 +4138,7 @@
             "0": {
               "$$mdtype": "Variable",
               "path": [
-                "alwaysTrue"
+                "always_true"
               ]
             }
           }
@@ -4198,7 +4198,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "not($alwaysTrue)"
+                    "content": "not($always_true)"
                   },
                   "children": [],
                   "type": "code",
@@ -4277,7 +4277,7 @@
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
-                  "alwaysTrue"
+                  "always_true"
                 ]
               }
             }
@@ -4316,10 +4316,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "Illinois"
+                "1": "Datadog"
               }
             }
           }
@@ -4379,7 +4379,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "not(equals($state, \"Illinois\"))"
+                    "content": "not(equals($test_string, \"Datadog\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -4462,10 +4462,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "Illinois"
+                  "1": "Datadog"
                 }
               }
             }
@@ -4576,7 +4576,7 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "alwaysFalse"
+                    "always_false"
                   ]
                 }
               }
@@ -4588,7 +4588,7 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "alwaysTrue"
+                    "always_true"
                   ]
                 }
               }
@@ -4650,7 +4650,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "or(not($alwaysFalse), not($alwaysTrue))"
+                    "content": "or(not($always_false), not($always_true))"
                   },
                   "children": [],
                   "type": "code",
@@ -4733,7 +4733,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysFalse"
+                      "always_false"
                     ]
                   }
                 }
@@ -4745,7 +4745,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysTrue"
+                      "always_true"
                     ]
                   }
                 }
@@ -4786,10 +4786,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "Illinois"
+                "1": "Datadog"
               }
             },
             "1": {
@@ -4799,10 +4799,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "California"
+                "1": "Hello"
               }
             }
           }
@@ -4862,7 +4862,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "or(equals($state, \"Illinois\"), equals($state, \"California\"))"
+                    "content": "or(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -4945,10 +4945,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "Illinois"
+                  "1": "Datadog"
                 }
               },
               "1": {
@@ -4958,10 +4958,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "California"
+                  "1": "Hello"
                 }
               }
             }
@@ -5004,7 +5004,7 @@
                     "0": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysFalse"
+                        "always_false"
                       ]
                     }
                   }
@@ -5016,7 +5016,7 @@
                     "0": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysTrue"
+                        "always_true"
                       ]
                     }
                   }
@@ -5034,7 +5034,7 @@
                     "0": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysFalse"
+                        "always_false"
                       ]
                     }
                   }
@@ -5046,7 +5046,7 @@
                     "0": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysTrue"
+                        "always_true"
                       ]
                     }
                   }
@@ -5110,7 +5110,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(or(not($alwaysFalse), not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue)))"
+                    "content": "and(or(not($always_false), not($always_true)), or(not($always_false), not($always_true)))"
                   },
                   "children": [],
                   "type": "code",
@@ -5197,7 +5197,7 @@
                       "0": {
                         "$$mdtype": "Variable",
                         "path": [
-                          "alwaysFalse"
+                          "always_false"
                         ]
                       }
                     }
@@ -5209,7 +5209,7 @@
                       "0": {
                         "$$mdtype": "Variable",
                         "path": [
-                          "alwaysTrue"
+                          "always_true"
                         ]
                       }
                     }
@@ -5227,7 +5227,7 @@
                       "0": {
                         "$$mdtype": "Variable",
                         "path": [
-                          "alwaysFalse"
+                          "always_false"
                         ]
                       }
                     }
@@ -5239,7 +5239,7 @@
                       "0": {
                         "$$mdtype": "Variable",
                         "path": [
-                          "alwaysTrue"
+                          "always_true"
                         ]
                       }
                     }
@@ -5282,7 +5282,7 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "alwaysFalse"
+                    "always_false"
                   ]
                 }
               }
@@ -5345,7 +5345,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "equals(not($alwaysFalse), true)"
+                    "content": "equals(not($always_false), true)"
                   },
                   "children": [],
                   "type": "code",
@@ -5428,7 +5428,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysFalse"
+                      "always_false"
                     ]
                   }
                 }
@@ -5470,7 +5470,7 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "alwaysFalse"
+                    "always_false"
                   ]
                 },
                 "1": {
@@ -5480,7 +5480,7 @@
                     "0": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysTrue"
+                        "always_true"
                       ]
                     }
                   }
@@ -5498,7 +5498,7 @@
                     "0": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysFalse"
+                        "always_false"
                       ]
                     }
                   }
@@ -5510,7 +5510,7 @@
                     "0": {
                       "$$mdtype": "Variable",
                       "path": [
-                        "alwaysTrue"
+                        "always_true"
                       ]
                     }
                   }
@@ -5574,7 +5574,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(and($alwaysFalse, not($alwaysTrue)), or(not($alwaysFalse), not($alwaysTrue)))"
+                    "content": "and(and($always_false, not($always_true)), or(not($always_false), not($always_true)))"
                   },
                   "children": [],
                   "type": "code",
@@ -5657,7 +5657,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysFalse"
+                      "always_false"
                     ]
                   },
                   "1": {
@@ -5667,7 +5667,7 @@
                       "0": {
                         "$$mdtype": "Variable",
                         "path": [
-                          "alwaysTrue"
+                          "always_true"
                         ]
                       }
                     }
@@ -5685,7 +5685,7 @@
                       "0": {
                         "$$mdtype": "Variable",
                         "path": [
-                          "alwaysFalse"
+                          "always_false"
                         ]
                       }
                     }
@@ -5697,7 +5697,7 @@
                       "0": {
                         "$$mdtype": "Variable",
                         "path": [
-                          "alwaysTrue"
+                          "always_true"
                         ]
                       }
                     }
@@ -5740,7 +5740,7 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "alwaysFalse"
+                    "always_false"
                   ]
                 }
               }
@@ -5752,7 +5752,7 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "alwaysTrue"
+                    "always_true"
                   ]
                 }
               }
@@ -5814,7 +5814,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(not($alwaysFalse), not($alwaysTrue))"
+                    "content": "and(not($always_false), not($always_true))"
                   },
                   "children": [],
                   "type": "code",
@@ -5897,7 +5897,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysFalse"
+                      "always_false"
                     ]
                   }
                 }
@@ -5909,7 +5909,7 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "alwaysTrue"
+                      "always_true"
                     ]
                   }
                 }
@@ -5950,10 +5950,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "Illinois"
+                "1": "Datadog"
               }
             },
             "1": {
@@ -5963,10 +5963,10 @@
                 "0": {
                   "$$mdtype": "Variable",
                   "path": [
-                    "state"
+                    "test_string"
                   ]
                 },
-                "1": "California"
+                "1": "Hello"
               }
             }
           }
@@ -6026,7 +6026,7 @@
                   ],
                   "inline": true,
                   "attributes": {
-                    "content": "and(equals($state, \"Illinois\"), equals($state, \"California\"))"
+                    "content": "and(equals($test_string, \"Datadog\"), equals($test_string, \"Hello\"))"
                   },
                   "children": [],
                   "type": "code",
@@ -6109,10 +6109,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "Illinois"
+                  "1": "Datadog"
                 }
               },
               "1": {
@@ -6122,10 +6122,10 @@
                   "0": {
                     "$$mdtype": "Variable",
                     "path": [
-                      "state"
+                      "test_string"
                     ]
                   },
-                  "1": "California"
+                  "1": "Hello"
                 }
               }
             }

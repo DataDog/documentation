@@ -14,18 +14,18 @@ describe('rendering stages', () => {
   // stage 2: build the renderable tree
   const renderableTree = MarkdocStaticCompiler.transform(ast, {
     variables: {
-      state: 'California',
-      alwaysFalse: false,
-      alwaysTrue: true
+      test_string: 'Datadog',
+      always_false: false,
+      always_true: true
     }
   });
 
   // stage 3: render the HTML
   const html = MarkdocStaticCompiler.renderers.html(renderableTree, {
     variables: {
-      state: 'Illinois',
-      alwaysFalse: false,
-      alwaysTrue: true
+      test_string: 'Datadog',
+      always_false: false,
+      always_true: true
     }
   });
 

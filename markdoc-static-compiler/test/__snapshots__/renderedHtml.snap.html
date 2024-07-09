@@ -31,15 +31,15 @@
   <h2>Variable values</h2>
   <ul>
     <li>
-      <code>state</code>
-      : Illinois
+      <code>test_string</code>
+      : Datadog
     </li>
     <li>
-      <code>alwaysTrue</code>
+      <code>always_true</code>
       : true
     </li>
     <li>
-      <code>alwaysFalse</code>
+      <code>always_false</code>
       : false
     </li>
   </ul>
@@ -51,28 +51,28 @@
   <div>
     <p>
       YES: Display if
-      <code>equals($alwaysTrue, true)</code>
+      <code>equals($always_true, true)</code>
       .
     </p>
   </div>
   <div>
     <p>
       YES: Display if
-      <code>equals($state, &quot;Illinois&quot;)</code>
+      <code>equals($test_string, &quot;Datadog&quot;)</code>
       .
     </p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>equals($alwaysFalse, true)</code>
+      <code>equals($always_false, true)</code>
       .
     </p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>equals($state, &quot;California&quot;)</code>
+      <code>equals($test_string, &quot;Hello&quot;)</code>
       .
     </p>
   </div>
@@ -90,7 +90,7 @@
   <div>
     <p>
       YES: Display if
-      <code>default($alwaysTrue, false)</code>
+      <code>default($always_true, false)</code>
       .
     </p>
   </div>
@@ -108,7 +108,7 @@
   <div>
     <p>
       YES: Display if
-      <code>or($alwaysTrue, $alwaysFalse)</code>
+      <code>or($always_true, $always_false)</code>
       .
     </p>
   </div>
@@ -116,8 +116,8 @@
     <p>
       YES: Display if
       <code>
-        or(equals($state, &quot;California&quot;), equals($state,
-        &quot;Illinois&quot;))
+        or(equals($test_string, &quot;Hello&quot;), equals($test_string,
+        &quot;Datadog&quot;))
       </code>
       .
     </p>
@@ -136,14 +136,14 @@
   <div>
     <p>
       YES: Display if
-      <code>and($alwaysTrue, $alwaysTrue)</code>
+      <code>and($always_true, $always_true)</code>
       .
     </p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>and($alwaysTrue, $alwaysFalse)</code>
+      <code>and($always_true, $always_false)</code>
       .
     </p>
   </div>
@@ -151,8 +151,8 @@
     <p>
       NO: Display if
       <code>
-        and(equals($state, &quot;California&quot;), equals($state,
-        &quot;Illinois&quot;))
+        and(equals($test_string, &quot;Hello&quot;), equals($test_string,
+        &quot;Datadog&quot;))
       </code>
       .
     </p>
@@ -164,28 +164,28 @@
   <div>
     <p>
       YES: Display if
-      <code>not($alwaysFalse)</code>
+      <code>not($always_false)</code>
       .
     </p>
   </div>
   <div>
     <p>
       YES: Display if
-      <code>not(equals($state, &quot;California&quot;))</code>
+      <code>not(equals($test_string, &quot;Hello&quot;))</code>
       .
     </p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>not($alwaysTrue)</code>
+      <code>not($always_true)</code>
       .
     </p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>not(equals($state, &quot;Illinois&quot;))</code>
+      <code>not(equals($test_string, &quot;Datadog&quot;))</code>
       .
     </p>
   </div>
@@ -193,7 +193,7 @@
   <div>
     <p>
       YES: Display if
-      <code>or(not($alwaysFalse), not($alwaysTrue))</code>
+      <code>or(not($always_false), not($always_true))</code>
       .
     </p>
   </div>
@@ -201,8 +201,8 @@
     <p>
       YES: Display if
       <code>
-        or(equals($state, &quot;Illinois&quot;), equals($state,
-        &quot;California&quot;))
+        or(equals($test_string, &quot;Datadog&quot;), equals($test_string,
+        &quot;Hello&quot;))
       </code>
       .
     </p>
@@ -211,8 +211,8 @@
     <p>
       YES: Display if
       <code>
-        and(or(not($alwaysFalse), not($alwaysTrue)), or(not($alwaysFalse),
-        not($alwaysTrue)))
+        and(or(not($always_false), not($always_true)), or(not($always_false),
+        not($always_true)))
       </code>
       .
     </p>
@@ -220,7 +220,7 @@
   <div>
     <p>
       YES: Display if
-      <code>equals(not($alwaysFalse), true)</code>
+      <code>equals(not($always_false), true)</code>
       .
     </p>
   </div>
@@ -228,8 +228,8 @@
     <p>
       NO: Display if
       <code>
-        and(and($alwaysFalse, not($alwaysTrue)), or(not($alwaysFalse),
-        not($alwaysTrue)))
+        and(and($always_false, not($always_true)), or(not($always_false),
+        not($always_true)))
       </code>
       .
     </p>
@@ -237,7 +237,7 @@
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>and(not($alwaysFalse), not($alwaysTrue))</code>
+      <code>and(not($always_false), not($always_true))</code>
       .
     </p>
   </div>
@@ -245,8 +245,8 @@
     <p>
       NO: Display if
       <code>
-        and(equals($state, &quot;Illinois&quot;), equals($state,
-        &quot;California&quot;))
+        and(equals($test_string, &quot;Datadog&quot;), equals($test_string,
+        &quot;Hello&quot;))
       </code>
       .
     </p>
