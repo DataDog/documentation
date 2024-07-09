@@ -9,7 +9,7 @@ Configure your Splunk HTTP Event Collectors (HEC) and set up Observability Pipel
 
 See [Dual Ship Logs from Splunk TCP][1] if you want to ingest logs from Splunk Heavy or Splunk Universal Forwarders.
 
-{{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
+{{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
 This document walks you through the following steps to set up dual shipping:
 

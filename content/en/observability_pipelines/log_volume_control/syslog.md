@@ -7,6 +7,8 @@ disable_toc: false
 
 Set up the Observability Pipelines Worker with the Rsyslog or Syslog-ng source so that you route only useful logs to your destinations.
 
+{{% observability_pipelines/use_case_images/log_volume_control %}}
+
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)

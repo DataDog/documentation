@@ -11,7 +11,7 @@ Use Observability Pipelines to route ingested logs to a Amazon S3 bucket in Data
 - You have a high volume of noisy logs, but you may need to index them in Log Management ad hoc.
 - You have a retention policy.
 
-{{< img src="observability_pipelines/use_cases/archive_logs.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
+{{% observability_pipelines/use_case_images/archive_logs %}}
 
 Select a source to get started:
 

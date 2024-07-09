@@ -11,7 +11,7 @@ Use the Observability Pipelines to identify, tag, and optionally redact or hash 
 
 Observability Pipelines supports Sumo Logic Collector HTTP Logs source.
 
-{{< img src="observability_pipelines/use_cases/sensitive_data_redaction.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
+{{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
