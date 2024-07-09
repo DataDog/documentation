@@ -12,7 +12,7 @@
         "prebuild": "rimraf public && npx hugo mod clean",
         "build": "yarn run prebuild && yarn run build:hugo",
         "build:preview": "yarn run build:hugo:preview",
-        "build:hugo": "./node_modules/.bin/hugo -d ./public -s ./ -v --minify",
+        "build:hugo": "./node_modules/.bin/hugo -d ./public -s ./ --minify --logLevel info",
         "build:hugo:preview": "yarn run build:hugo -D -F --environment preview",
         "build:hugo:live": "yarn run build:hugo -D -F --environment live",
         "build:live": "yarn run build:hugo:live",

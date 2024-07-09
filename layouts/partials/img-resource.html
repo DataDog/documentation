@@ -1,1 +1,11 @@
-{{- $dot := .context -}}{{- with resources.Get .src  -}}{{- $perm := ( . | resources.Fingerprint "md5").RelPermalink -}}{{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $perm -}}{{- end -}}
+{{- $dot := .context -}}
+
+{{- with resources.Get .src -}}
+{{- $full_permalink := ( . | resources.Fingerprint "md5").RelPermalink }}
+
+{{- if eq hugo.Environment "preview" -}}
+{{- $full_permalink = replace $full_permalink "$CI_COMMIT_REF_NAME/" ""}}
+{{- end -}}
+
+{{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $full_permalink -}}
+{{- end -}}
