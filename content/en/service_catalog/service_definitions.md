@@ -38,7 +38,7 @@ For more information about the latest updates, see the [schemas][2] on GitHub.
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][1].
 
 {{< callout type="info" header="Change to Field Name in the v3.0 Schema " >}}
-For current beta customers using v3.0, we have replaced `application` with `system` in our documentation to match the updated public schema terminology. 
+For beta customers using v3.0, <code>application</code> has been replaced with <code>system</code> in the documentation to match the updated public schema terminology. 
 {{< /callout >}}
 
 #### New features in v3.0
