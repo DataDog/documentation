@@ -1,7 +1,7 @@
 ---
 title: Enterprise Configuration
 aliases:
-- /mobile/enterprise-configuration
+- /service_management/enterprise-configuration
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
