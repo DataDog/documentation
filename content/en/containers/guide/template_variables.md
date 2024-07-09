@@ -28,7 +28,7 @@ You can use the following template variables to dynamically assign your containe
 | `"%%host%%"`                | The container's network IP. |
 | `"%%host_<NETWORK NAME>%%"` | When the container is attached to multiple networks, returns the network name to use. |
 | `"%%port%%"`                | The highest exposed port **sorted numerically and in ascending order**.<br>For example, returns `8443` for a container that exposes ports `80`, `443`, and `8443`. |
-| `"%%port_<NUMBER_X>%%"`     | The `<NUMBER_X>` port **sorted numerically and in ascending order**,<br>For example, if a container exposes ports `80`, `443`, and `8443`, `"%%port_0%%` refers to port `80`, and `"%%port_1%%"` refers to `443`. |
+| `"%%port_<NUMBER_X>%%"`     | The `<NUMBER_X>` port **sorted numerically and in ascending order**.<br>For example, if a container exposes ports `80`, `443`, and `8443`, `"%%port_0%%` refers to port `80`, and `"%%port_1%%"` refers to `443`. |
 | `"%%port_<NAME>%%"`     | The port associated with the port name `<NAME>`. |
 | `"%%pid%%"`                 | The container process ID, as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`. |
 | `"%%hostname%%"`            | The `hostname` value from the container configuration. Only use this variable if the `"%%host%%"` variable cannot fetch a reliable IP (for example, in [ECS awsvpc mode][2]).                                       |
