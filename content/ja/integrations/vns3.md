@@ -31,7 +31,7 @@ integration_id: vns3
 integration_title: VNS3
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: vns3
 public_title: VNS3

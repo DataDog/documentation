@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay/developer_tools
   tag: ドキュメント
   text: ブラウザ開発ツールについて
-kind: ガイド
 title: テクニカルサポートのワークフローにセッションリプレイを活用する
 ---
 

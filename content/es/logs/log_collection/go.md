@@ -23,7 +23,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada de glosario para "tail" (cola)
-kind: documentación
 title: Recopilación de logs de Go
 ---
 
@@ -31,7 +30,7 @@ Para enviar tus logs de Go a Datadog, loguea un archivo y luego [supervisa][11] 
 
 Datadog recomienda encarecidamente que configures tu biblioteca de registro para producir tus logs en JSON y evitar la necesidad de [reglas de parseo personalizadas][2].
 
-## Configurar tu logger
+## Configurar tu registrador
 
 Para una configuración de Go clásica, abre un archivo `main.go` y pega el siguiente código:
 
@@ -103,7 +102,7 @@ Una vez que [la recopilación de log está habilitada][3], configura la [recopil
 3. [Reinicia el Agent][6].
 4. Ejecuta el [subcomando de estado del Agent][7] y busca `go` en la sección `Checks` para confirmar que los logs se han enviado correctamente a Datadog.
 
-Si los logs están en formato JSON, Datadog [parsea los mensajes del log][7] de forma automática para extraer sus atributos. Utiliza el [Log Explorer][8] para ver tus logs y solucionar problemas relacionados.
+Si los logs están en formato JSON, Datadog [analiza automáticamente los mensajes de log][8] para extraer los atributos de log. Utiliza el [Log Explorer][9] para ver y solucionar los problemas de tus logs.
 
 ## Conectar logs y trazas
 

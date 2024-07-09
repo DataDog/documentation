@@ -6,7 +6,6 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentation
   text: ブラウザテストを作成する
-kind: ガイド
 title: ブラウザテストのための Chrome 拡張機能を手動で追加する
 ---
 

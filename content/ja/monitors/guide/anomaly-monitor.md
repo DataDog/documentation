@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/monitors/faq/anomaly-monitor.md
-kind: ガイド
 title: 異常検知モニター
 ---
 

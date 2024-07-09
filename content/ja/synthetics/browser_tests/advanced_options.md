@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/browser_tests/actions/
   tag: ドキュメント
   text: ブラウザテストステップについて
-kind: ドキュメント
 title: ブラウザテストステップの高度なオプション
 ---
 

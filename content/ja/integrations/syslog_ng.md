@@ -11,7 +11,7 @@ has_logo: true
 integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: syslog_ng
 public_title: Datadog-Syslog-ng インテグレーション
 short_description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集

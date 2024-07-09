@@ -1,6 +1,5 @@
 ---
 title: Synthetic テストでキャッシュの問題を回避する
-kind: ガイド
 further_reading:
   - link: synthetics/browser_tests
     tag: ドキュメント

@@ -35,7 +35,7 @@ integration_id: amazon-bedrock
 integration_title: Amazon Bedrock
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_bedrock
 public_title: Amazon Bedrock

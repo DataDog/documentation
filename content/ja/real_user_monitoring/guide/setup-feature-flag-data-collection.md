@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: RUM エクスプローラーで RUM データを視覚化する
-kind: ガイド
 title: RUM の機能フラグデータの概要
 ---
 
