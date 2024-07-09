@@ -13,7 +13,7 @@ code_lang_weight: 40
 further_reading:
 - link: /tracing/guide/trace-php-cli-scripts/
   tag: Guía
-  text: Rastreo de scripts CLI en PHP
+  text: Rastreo de scripts de CLI PHP
 - link: https://www.datadoghq.com/blog/monitor-php-performance/
   tag: Blog
   text: Monitorización PHP con Datadog APM y rastreo distribuido
