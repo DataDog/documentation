@@ -5,7 +5,7 @@ further_reading:
   text: 제품 분석을 위해 RUM 및 세션 재생 사용
 - link: /real_user_monitoring/guide/alerting-with-conversion-rates/
   tag: 설명서
-  text: 전환율로 알림
+  text: 전환율을 통한 알림
 title: Squarespace 스토어에서 RUM 활성화
 ---
 
