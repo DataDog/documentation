@@ -17,7 +17,7 @@ further_reading:
 - link: logs/logging_without_limits
   tag: 설명서
   text: 제한없는 로그 수집
-kind: faq
+
 title: 일반적으로 사용되는 로그 처리 규칙
 ---
 

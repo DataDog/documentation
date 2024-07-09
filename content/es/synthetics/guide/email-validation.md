@@ -8,7 +8,6 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentación
   text: Configurar opciones avanzadas en los pasos
-kind: documentación
 title: Validar correos electrónicos con tests de navegador
 ---
 

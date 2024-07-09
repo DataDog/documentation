@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Collector Datadog Exporter
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
@@ -185,7 +184,6 @@ In containerized environments, applications write logs to `stdout` or `stderr`. 
 
 ```
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: otel-agent
   labels:

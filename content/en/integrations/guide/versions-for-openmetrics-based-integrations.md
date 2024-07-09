@@ -1,6 +1,6 @@
 ---
 title: Latest and Legacy Versioning For OpenMetrics-based Integrations
-kind: guide
+
 description: Learn about the difference between the latest (V2) and legacy (V1) versions of OpenMetrics-based integrations.
 ---
 

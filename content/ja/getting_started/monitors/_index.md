@@ -17,7 +17,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: 効果的なモニターの作成に関するインタラクティブなセッションに参加できます
-kind: documentation
 title: モニターの概要
 ---
 

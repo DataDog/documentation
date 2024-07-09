@@ -1,6 +1,6 @@
 ---
 title: Ease Troubleshooting With Cross-Product Correlation
-kind: guide
+
 further_reading:
 - link: '/getting_started/tagging/unified_service_tagging/'
   tag: 'Documentation'

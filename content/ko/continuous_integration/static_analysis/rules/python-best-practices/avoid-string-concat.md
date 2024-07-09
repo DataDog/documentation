@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 문자열 연결 피하기
 ---
 ## 메타데이터

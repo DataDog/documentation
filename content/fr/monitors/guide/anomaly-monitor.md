@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/monitors/faq/anomaly-monitor.md
-kind: guide
+
 title: Monitors d'anomalie
 ---
 

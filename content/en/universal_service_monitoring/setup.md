@@ -1,6 +1,5 @@
 ---
 title: Setting up Universal Service Monitoring
-kind: Documentation
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
@@ -735,7 +734,7 @@ If you use load balancers with your services, enable additional cloud integratio
 
 ## Additional configuration
 
-The following systems or services require additonal configuration due to limited or beta support:
+The following systems or services require additonal configuration:
 
 {{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">

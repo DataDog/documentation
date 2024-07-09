@@ -1,6 +1,5 @@
 ---
 title: Java Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/java
     - /tracing/manual_instrumentation/java

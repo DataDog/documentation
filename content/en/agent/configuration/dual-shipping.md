@@ -169,7 +169,7 @@ agents:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.datadoghq.com":
-        - apikey2 
+        - apikey2
 
 clusterAgent:
 ...
@@ -177,7 +177,7 @@ clusterAgent:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.ddog-gov.com":
-        - apikey2 
+        - apikey2
 ```
 
 
@@ -323,6 +323,33 @@ network_devices:
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
 DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+```
+
+{{% agent-dual-shipping %}}
+
+## Network Path
+
+### YAML configuration
+
+Requires Agent >= 6.55 or 7.55.
+
+In `datadog.yaml`:
+```yaml
+network_path:
+  forwarder:
+    use_http: true
+    additional_endpoints:
+    - api_key: "apiKey2"
+      Host: "netpath-intake.datadoghq.com"
+      Port: 443
+      is_reliable: true
+```
+
+### Environment variable configuration
+
+```bash
+DD_NETWORK_PATH_FORWARDER_USE_HTTP=true
+DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"netpath-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}

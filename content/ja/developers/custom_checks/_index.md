@@ -1,6 +1,5 @@
 ---
 title: カスタムチェック
-kind: documentation
 description: Datadog を使用したカスタムチェックの設定
 ---
 ## 概要 

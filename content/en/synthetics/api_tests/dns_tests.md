@@ -1,6 +1,5 @@
 ---
 title: DNS Testing
-kind: documentation
 description: Monitor resolvability and lookup times of your DNS records
 aliases:
   - /synthetics/dns_test

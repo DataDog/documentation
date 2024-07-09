@@ -1,6 +1,5 @@
 ---
 title: Browser Crash Reporting and Error Tracking
-kind: documentation
 aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 further_reading:

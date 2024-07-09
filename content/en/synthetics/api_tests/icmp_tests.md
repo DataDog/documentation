@@ -1,6 +1,5 @@
 ---
 title: ICMP Testing
-kind: documentation
 description: Monitor the availability of your hosts and diagnose network issues.
 aliases:
   - /synthetics/icmp_test

@@ -2,7 +2,6 @@
 dependencies:
 - https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md
 description: Datadog과 GitHub를 사용해 CI 파이프라인에서 Static Analysis 작업을 실행하세요.
-kind: 도움말
 title: Static Analysis와 GitHub Actions
 ---
 ## 개요

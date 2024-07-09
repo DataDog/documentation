@@ -3,7 +3,6 @@ aliases:
 - /ko/libraries/
 - /ko/developers/faq/monitoring-akka/
 - /ko/developers/libraries/
-kind: 설명서
 title: 라이브러리
 ---
 

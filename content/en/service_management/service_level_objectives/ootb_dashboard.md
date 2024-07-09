@@ -1,6 +1,5 @@
 ---
-title: OOTB SLO Performance Dashboard
-kind: documentation
+title: OOTB SLO Performance Summary Dashboard
 further_reading:
 - link: "service_management/service_level_objectives/"
   tag: "Documentation"
@@ -11,7 +10,7 @@ further_reading:
 
 ## Overview
 
-The Out-of-the-Box (OOTB) SLO Performance Dashboard supports aggregated views of SLOs to help engineering leadership understand your organization's reliability at a glance. With this dashboard, you can:
+The Out-of-the-Box (OOTB) SLO Performance Summary Dashboard supports aggregated views of SLOs to help engineering leadership understand your organization's reliability at a glance. With this dashboard, you can:
 
 - Customize your SLO groupings to be based on service, team, user journey, or any other tag that has been added to your SLOs.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
@@ -30,7 +29,7 @@ By default, the OOTB dashboard is based on the `service` tag added to your SLOs.
 
 ### Summary score
 
-The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is designed as a summary metric for engineering leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs:
+The **SLO Summary** widget in the OOTB dashboard includes a "Score". It is designed as a summary metric for engineering leadership to understand the performance of a group of SLOs. The Score is calculated based on the average remaining error budget of the underlying SLOs, which is then mapped to a score between 0 - 100:
 
 - The Score is "passing" (green/yellow) when most SLOs are **not** breached and have remaining error budget
 - The Score is "failing" (red) when many SLOs are out of error budget or a few SLOs are far out of error budget

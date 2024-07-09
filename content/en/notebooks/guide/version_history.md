@@ -1,6 +1,5 @@
 ---
 title: Version History for Notebooks
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/notebooks/"

@@ -1,6 +1,5 @@
 ---
 title: Variables
-kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
 - link: "/monitors/guide/template-variable-evaluation/"
@@ -312,7 +311,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][8]_.
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -356,7 +355,7 @@ Logs, Event Management, spans, RUM, CI Pipeline, and CI Test events have generic
 | RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp`, `link` |
 | Event             | `{{event.key}}`     | `attributes`, `host.name`, `id`, `link`, `title`, `text`, `tags` |
 | CI Pipeline             | `{{cipipeline.key}}`     | `service`, `env`, `resource_name`, `ci_level`, `trace_id`, `span_id`, `pipeline_fingerprint`, `operation_name`, `ci_partial_array`, `status`, `timestamp`, `link` |
-| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `error.message`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
+| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
 
 If the matching event does not contain the attribute in its definition, the variable is rendered empty.
 
@@ -436,7 +435,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 ### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][6].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][7].
 
 ### Local time
 
@@ -448,7 +447,7 @@ For example, to add the last triggered time of the monitor in the Tokyo time zon
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
-See the [list of tz database time zones][7], particularly the TZ database name column, to see the list of available time zone values.
+See the [list of tz database time zones][8], particularly the TZ database name column, to see the list of available time zone values.
 
 ## Advanced
 
@@ -609,6 +608,6 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [3]: /monitors/types/apm/?tab=analytics
 [4]: /monitors/types/real_user_monitoring/
 [5]: /monitors/types/ci/
-[6]: /monitors/guide/template-variable-evaluation/
-[7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[8]: /monitors/types/database_monitoring/
+[6]: /monitors/types/database_monitoring/
+[7]: /monitors/guide/template-variable-evaluation/
+[8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

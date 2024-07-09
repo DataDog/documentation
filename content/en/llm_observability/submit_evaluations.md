@@ -1,6 +1,6 @@
 ---
 title: Submit Evaluations
-kind: guide
+
 aliases:
     - /tracing/llm_observability/submit_evaluations
 ---
@@ -9,8 +9,6 @@ aliases:
 LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
-
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
 ## Overview
 

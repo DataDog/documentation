@@ -1,6 +1,5 @@
 ---
 title: Upgrade Instrumentation for Java Lambda Functions
-kind: documentation
 ---
 
 This document contains instructions for upgrading your Datadog for Java Lambda instrumentation. If you are setting up instrumentation for the first time, follow the [Java Lambda installation instructions][1] instead.

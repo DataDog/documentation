@@ -18,7 +18,6 @@ further_reading:
 - link: /continuous_testing/cicd_integrations
   tag: 설명서
   text: CI 파이프라인에서 신서틱 테스트 실행하는 방법 알아보기
-kind: 설명서
 title: 지속적 테스팅 시작하기
 ---
 {{< jqmath-vanilla >}}

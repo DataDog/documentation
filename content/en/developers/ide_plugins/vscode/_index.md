@@ -1,6 +1,5 @@
 ---
 title: Datadog Extension for Visual Studio Code
-kind: documentation
 description: Learn how to run Synthetic tests on local environments directly in VS Code.
 is_beta: true
 aliases:
@@ -18,13 +17,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
+- link: "https://www.datadoghq.com/blog/exception-replay-datadog/"
+  tag: "Blog"
+  text: "Simplify production debugging with Datadog Exception Replay"
 ---
 
 ## Overview
 
 The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.
 
-{{< img src="/developers/ide_plugins/vscode/datadog-vscode.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode-2.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
 It packs several features, including:
 
@@ -44,6 +46,8 @@ It packs several features, including:
 - [**Code Delta**](#code-delta) to more accurately map observability data to your files in VS Code.
 
 - [**Static Analysis**](#static-analysis) to detect and fix problems even before you commit changes.
+
+- [**Exception Replay**](#exception-replay) to help you debug your production code.
 
 ## Requirements
 
@@ -152,6 +156,27 @@ Once the configuration file is created, the static analyzer runs automatically i
 
 <div class="alert alert-info">The Static Analysis feature does not require a Datadog account, as source files are analyzed locally.</div>
 
+## Exception Replay
+
+Exception Replay allows you to navigate through the stack trace frames of any Error Tracking code insight and get information about the values of the variables of the code running in production.
+
+In order to get access to this feature, you have to enable [Error Tracking Exception Replay][29] on Datadog.
+
+After the feature has been enabled, you can see an `Exception Replay` button next to the stack trace section of any instrumented Error Tracking code insight. If you click over it, you can:
+
+- access all the information Datadog has about the different frames
+- navigate through the production code
+- review the value of the different variables involved
+
+Select an Error Tracking code insight from the Code Insights view. Go to the stack trace and click the Exception Replay button. VS Code shows a new activity with two new views:
+
+- **Variables**: It shows the variables related to a particular stack trace frame.
+- **Stack Trace**: It allows you to navigate through the different stack trace frames.
+
+Select a stack trace frame and inspect the values of all the variables that Datadog captured from your production code.
+
+{{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
+
 ## License
 
 Please read this [End-User License Agreement][23] carefully before downloading or using the Datadog Visual Studio Code Extension.
@@ -186,7 +211,6 @@ Check out the [issues][27] section to discover known issues.
 [10]: /tracing/error_tracking/
 [11]: /security/application_security/vulnerability_management/
 [12]: /continuous_integration/guides/flaky_test_management/
-[13]: /watchdog/insights
 [14]: /continuous_integration/static_analysis/?tab=githubactions
 [15]: /continuous_integration/static_analysis/rules/
 [16]: /logs/log_collection/javascript/
@@ -202,3 +226,4 @@ Check out the [issues][27] section to discover known issues.
 [26]: https://github.com/DataDog/datadog-for-vscode
 [27]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
 [28]: /logs/explorer/
+[29]: /tracing/error_tracking/exception_replay

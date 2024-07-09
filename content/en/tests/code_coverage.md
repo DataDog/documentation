@@ -1,6 +1,5 @@
 ---
 title: Code Coverage in Datadog
-kind: documentation
 description: Learn how to report and use code coverage in Datadog.
 aliases:
 - /continuous_integration/guides/code_coverage/

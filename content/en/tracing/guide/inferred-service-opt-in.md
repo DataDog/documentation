@@ -1,6 +1,6 @@
 ---
 title: Inferred Service dependencies
-kind: Guide
+
 disable_toc: false
 private: true
 further_reading:
@@ -50,15 +50,27 @@ To opt in, Datadog recommends you adjust your:
 Requirements:
 - Datadog Agent version >= [7.50.3][4].
 
-Set the following environment variables in your Datadog Agent launch configuration:
+Update your `datadog.yaml` configuration file with the following:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
+
+apm_config:
+  compute_stats_by_span_kind: true
+  peer_tags_aggregation: true
+  peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+
+{{< /code-block >}}
+
+Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+
+{{< code-block collapsible="true" lang="yaml" >}}
 
 DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
 DD_APM_PEER_TAGS_AGGREGATION=true
 DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
 
 {{< /code-block >}}
+
 
 #### Helm 
 Include the same set of environment variables in your `values.yaml` [file][8].

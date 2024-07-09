@@ -8,7 +8,6 @@ further_reading:
 - link: /getting_started/tagging/
   tag: Documentación
   text: Empezando con las etiquetas (tags)
-kind: preguntas frecuentes
 title: ¿Cuáles son las prácticas recomendadas para nombrar métricas y etiquetas (tags)?
 ---
 

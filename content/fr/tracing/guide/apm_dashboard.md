@@ -1,6 +1,6 @@
 ---
 title: Créer un dashboard pour suivre et corréler les métriques APM
-kind: guide
+
 further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"
