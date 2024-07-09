@@ -19,6 +19,7 @@
         "@types/js-yaml": "^4.0.9",
         "@types/node": "^20.11.30",
         "typescript": "^5.4.3",
-        "esbuild": "0.20.2"
+        "esbuild": "0.20.2",
+        "vitest": "^1.6.0"
     }
 }
