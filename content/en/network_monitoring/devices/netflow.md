@@ -236,7 +236,7 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
             workers: 4 # 4 CPUs
 ```
 
-2. Increase UDP Queue Length
+2. Increase UDP Queue Length (Linux only)
 
   Adjusting your system's UDP queue length can help accommodate the higher volume of NetFlow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
 
@@ -245,7 +245,7 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
     sudo sysctl -w net.core.rmem_default=26214400
 ```
 
-3. Persisting the configuration
+3. Persisting the configuration (Linux only)
 
   To make these changes permanent, add the following lines to your `/etc/sysctl.conf` file:
 
