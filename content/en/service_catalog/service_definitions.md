@@ -49,7 +49,7 @@ v3.0 supports multiple kinds of entities. You can organize your systems using va
 With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
 
 ##### Inheritance of system metadata
-Components within an system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
+Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
 
 #### Example YAML for `kind:system`
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
