@@ -120,7 +120,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
-{{< nextlink href="/getting_started/Code Analysis" >}}<u>Code Analysis</u>: Analyze code in Datadog or code running in CI pipelines for poor practices and third-party libraries for vulnerabilities.{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_analysis" >}}<u>Code Analysis</u>: Analyze code in Datadog or code running in CI pipelines for poor practices and third-party libraries for vulnerabilities.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
