@@ -347,9 +347,9 @@ Instala el nombre de paquete resultante, si lo encuentras:
 apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 ```
 
-### Para lograr un volcado de núcleo
+### Obtener un volcado de núcleo
 
-Lograr un volcado de núcleo para aplicaciones PHP puede ser complicado, especialmente en PHP-FPM. Aquí tienes algunos consejos para ayudarte a lograr un volcado de núcleo:
+Obtener un volcado de núcleo para aplicaciones PHP puede ser complicado, especialmente en PHP-FPM. Aquí tienes algunos consejos para ayudarte a obtener un volcado de núcleo:
 
 1. Determina si PHP-FPM ha generado un volcado de núcleo consultando el log de errores de aplicación:
    - Busca `(SIGSEGV - core dumped)`, ya que un mensaje como este significa que el núcelo ha sido volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`.
@@ -365,7 +365,7 @@ Si no se ha generado ningún volcado de núcleo, comprueba las siguientes config
 1. Asegúrate de que dispones de un conjunto `ulimit` en tu sistema. Puedes configurarlo como ilimitado: `ulimit -c unlimited`.
 1. Si tu aplicación se ejecuta en un contenedor Docker, los cambios en `/proc/sys/*` deben realizarse en la máquina host. Ponte en contacto con el administrador del sistema para conocer las opciones disponibles. Si puedes, intenta recrear la incidencia en tus entornos de test o de staging.
 
-### Obtención de un volcado de núcleo desde dentro de un contenedor Docker
+### Obtener un volcado de núcleo desde dentro de un contenedor Docker
 
 Utiliza la siguiente información para ayudarte a obtener un volcado de núcleo en un contenedor Docker:
 
