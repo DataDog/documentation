@@ -1704,5 +1704,6 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
-  }
+  },
+  "undefined": {}
 }
