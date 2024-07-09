@@ -1,0 +1,50 @@
+---
+title: The Colors of the Common Traffic Light
+page_preferences:
+  - display_name: "Color"
+    identifier: color
+    options: traffic_light_color_options
+    remember_sitewide: true
+  - display_name: "Item"
+    identifier: item
+    options: <COLOR>_item_options
+---
+
+This test page explores everyday items that are green, yellow, or red -- which also happen to be the colors of the common traffic light. If this seems contrived and odd, that's only because test pages are often both of those things.
+
+## {% $item %}: Your {% $color %} item of choice
+
+<!-- green -->
+{% if equals($color, "green") %}
+
+<!-- green > grass -->
+{% if equals($item, "grass") %}
+Grass is a very common lawn plant. Alternatives to grass include clover and moss.
+{% /if %}
+
+<!-- green > emerald -->
+{% if equals($item, "emerald") %}
+Emeralds are a type of gemstone. They're not known for being very durable.
+{% /if %}
+
+<!-- green > lime -->
+{% if equals($item, "lime") %}
+Limes are a type of citrus fruit. They're often used in drinks and cooking.
+{% /if %}
+
+<!-- green > frog -->
+{% if equals($item, "frog") %}
+Frogs are amphibians. They're known for their jumping abilities.
+{% /if %}
+
+{% /if %}
+
+<!-- yellow -->
+{% if equals($color, "yellow") %}
+{% partial file="yellow.mdoc" %}
+{% /if %}
+
+<!-- red -->
+{% if equals($color, "red") %}
+{% partial file="red.mdoc" %}
+{% /if %}

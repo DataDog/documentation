@@ -1,0 +1,9 @@
+yellow_item_options:
+  - display_name: Banana
+    identifier: banana
+  - display_name: Sunflower
+    identifier: sunflower
+  - display_name: Lemon
+    identifier: lemon
+  - display_name: School bus
+    identifier: school_bus
