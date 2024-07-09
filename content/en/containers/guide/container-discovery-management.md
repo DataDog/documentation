@@ -4,25 +4,30 @@ aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management
  - /agent/guide/autodiscovery-management
+ - /containers/guide/autodiscovery-management
 further_reading:
-- link: "/agent/kubernetes/integrations/"
+- link: "/containers/kubernetes/integrations/"
   tag: "Documentation"
-  text: "Create and load an Autodiscovery Integration Template"
+  text: "Configure integrations with Autodiscovery on Kubernetes"
+- link: "/containers/docker/integrations/"
+  tag: "Documentation"
+  text: "Configure integrations with Autodiscovery on Docker"
 ---
 
-By default, the Datadog Agent automatically discovers all containers available. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
+By default, the Datadog Agent automatically discovers all containers available. This document describes how to restrict the Datadog Agent's discovery perimeter and limit data collection to a subset of containers.
 
-## Autodiscovery patterns
+## Container discovery patterns
 
-The Datadog Agent should be deployed once per host within containerized environments. This is typically done with a DaemonSet in Kubernetes (managed by Helm or Operator) or by ECS Daemon Services. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host.
+In a containerized environment, you should deploy the Datadog Agent once per host. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host.
 
-You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any Autodiscovery based Agent Integrations. When the [log "Container Collect All" feature][1] is enabled, all discovered containers have their logs collected, unless otherwise blocked by the rules described below.
+You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any [Autodiscovery][2]-based Agent integrations. 
 
-These restrictions can be set by either:
-- Providing environment variables to the Datadog Agent container as an allowlist/blocklist of containers.
-- Adding annotations to your Kubernetes pods to block individual pods or containers.
+When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. 
 
-The first option works well as a list of container names, images, or Kubernetes namespaces to exclude for the entire cluster. The second option works well for more fine tuned exclusions in Kubernetes.
+You can set exceptions in two ways:
+
+- Provide environment variables to the Datadog Agent container as an allowlist/blocklist of containers. Recommended if you have a list of container names, images, or namespaces to exclude for the entire cluster.
+- Add annotations to your Kubernetes pods to block individual pods or containers. Recommended if you need fine-tuned exclusions.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
 
@@ -270,3 +275,4 @@ metadata:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /containers/kubernetes/log/?tab=helm#log-collection
+[2]: /getting_started/containers/autodiscovery
