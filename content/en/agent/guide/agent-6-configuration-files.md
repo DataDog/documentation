@@ -1,19 +1,16 @@
 ---
-title: Agent Configuration Files
-aliases:
-  - /agent/faq/agent-configuration-files
-  - /agent/guide/agent-configuration-files
-algolia:
-  rank: 80
-  category: guide
-  subcategory: Agent Configuration Files
-  tags: ["agent config", "agent configuration", "agent directory"]
-
+title: Agent 6 Configuration Files
+kind: Guide
+disable_toc: false
 ---
 
-## Main configuration file
+## Agent main configuration file
 
-The location of the Agent configuration file differs depending on the operating system.
+Configuration files for Agent checks and integrations are stored in the `conf.d` directory.
+
+The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is retired in favor of `datadog.yaml` (v6).
+
+The location of the `conf.d` directory differs depending on the operating system.
 
 | Platform                             | Command                              |
 |:-------------------------------------|:-------------------------------------|
@@ -26,7 +23,7 @@ See the [sample `config_template.yaml` file][1] for all available configuration 
 
 ## Agent configuration directory
 
-Configuration files for Agent checks and integrations are stored in the `conf.d` directory. The location of the directory differs depending on the operating system.
+Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in the `conf.d` directory. The location of the directory differs depending on the operating system.
 
 | Platform                             | Command                        |
 |:-------------------------------------|:-------------------------------|
@@ -63,6 +60,8 @@ Autodiscovery template files are stored in the configuration folder with the `au
 ```
 
 For log collection, the Agent does not accept multiple YAML files that point to the same log source to prevent duplicate logs from being sent to Datadog. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
+
+To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml`, but migrating to the new layout is strongly recommended.
 
 ## JMX configuration file
 
