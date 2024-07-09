@@ -84,7 +84,8 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
   - Set the sample rate to 100% for services that have a `tier` tag with the value `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
 
 `DD_TRACE_SAMPLE_RATE`
-: Enable ingestion rate control.
+: **Default**: `nil`<br>
+Enable ingestion rate control.
 
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `nil`<br>
@@ -147,6 +148,15 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
 
+`DD_RUNTIME_METRICS_ENABLED`
+: **Default**: `false` <br>
+Enable [runtime metric][17] collection.
+Added in version 1.26.0.
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Default**: `datadog,tracecontext` <br>
+Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
+
 ## Configure APM environment name
 
 The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
@@ -169,3 +179,5 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [14]: https://github.com/w3c/trace-context
 [15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
+[17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
+[18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/go/
