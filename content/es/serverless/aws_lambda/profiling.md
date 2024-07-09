@@ -31,7 +31,7 @@ El generador de perfiles crea un subproceso que se activa periódicamente y toma
 
 ### Compatibilidad
 
-Dependiendo del tiempo de ejecución que utilices, esta característica requerirá las siguientes versiones del rastreador y la capa:
+Dependiendo del tiempo de ejecución que utilices, esta característica requerirá las siguientes versiones del rastreador y de la capa:
 
 | Tiempo de ejecución | Versión mínima del rastreador | Versión de mínima de la capa |
 | ------- | ---------------------- | --------------------- |
