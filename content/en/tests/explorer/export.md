@@ -1,6 +1,5 @@
 ---
 title: Export Test Runs 
-kind: documentation
 further_reading:
 - link: "/tests/search/"
   tag: "Documentation"

@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
   tag: 블로그
   text: 자동탐지에 대해 자세히 알아보기
-kind: 설명서
 title: 통합 서비스 태깅
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/amazon_web_services/#log-collection
   tag: 설명서
   text: AWS 서비스에서 로그 수집
-kind: guide
 title: AWS PrivateLink를 통해 Datadog에 연결
 ---
 

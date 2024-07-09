@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Datadog の TLS 証明書の信頼チェーンに関する変更点
 ---
 

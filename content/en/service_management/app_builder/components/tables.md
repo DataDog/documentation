@@ -1,6 +1,5 @@
 ---
 title: Tables
-kind: documentation
 disable_toc: false
 aliases:
 - /service_management/app_builder/tables/
@@ -16,10 +15,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< callout url="" btn_hidden="true" header="Try the Beta!">}}
-App Builder is in beta. Access it from the <a href="https://app.datadoghq.com/app-builder/">App Builder</a> page in Datadog.
-{{< /callout >}}
 
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
 

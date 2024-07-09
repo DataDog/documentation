@@ -10,7 +10,6 @@ further_reading:
 - link: /monitors/
   tag: ドキュメント
   text: モニターについて
-kind: ガイド
 title: RUM の使用量を監視する
 ---
 

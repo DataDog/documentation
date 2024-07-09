@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: 블로그
   text: 쿠버네티스 워크로드 규모 효율화를 위한 실용적인 팁
-kind: 설명서
 title: 프로세스 리텐션 증가
 ---
 

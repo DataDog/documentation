@@ -5,7 +5,6 @@ further_reading:
 - link: /tracing/troubleshooting
   tag: 설명서
   text: 애플리케이션 성능 모니터링(APM) 트러블슈팅
-kind: 설명서
 title: 파이썬(Python) 프로파일러 트러블슈팅
 type: multi-code-lang
 ---

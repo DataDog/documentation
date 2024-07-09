@@ -1,6 +1,7 @@
-Use the following instructions to enable [CSM Threats][11] on Windows. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][12].
 
-Datadog Cloud Security Management on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
+Use the following instructions to enable Threat Detection and Vulnerability scanning on Windows.
+
+Datadog Cloud Security Management on Windows includes host vulnerability detection as well as built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
 - Certutil used to transmit or decode a file
 - Process memory was dumped using the minidump functions of comsvcs.dll
@@ -84,6 +85,22 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
     ```
 1. [Restart the Datadog Agent][6] to enable CSM.
 
+### Enable Vulnerability scanning
+<div class="alert alert-warning">Vulnerability scanning on Windows hosts is available in public beta.</div>
+
+1. Update your Datadog agent to 7.55 or later
+2. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
+    - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
+3. In `C:\ProgramData\Datadog\datadog.yaml`, set the `sbom` and `host` flags:<br><br>
+    ```
+    sbom:
+      enabled: true
+      host:
+        enabled:true
+    
+    ```
+4. [Restart the Datadog Agent][6] to enable CSM Vulnerability Management.
+
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
 [3]: /agent/basic_agent_usage/windows/?tab=gui
@@ -95,4 +112,3 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 [9]: https://docs.datadoghq.com/security/notifications/rules/
 [10]: /security/cloud_security_management/setup
 [11]: /security/threats
-[12]: /security/cloud_security_management/setup#supported-deployment-types-and-features

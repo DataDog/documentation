@@ -6,7 +6,6 @@ further_reading:
 - link: /tracing/troubleshooting/
   tags: 설명서
   text: 트러블슈팅
-kind: 가이드
 title: PHP CLI 스크립트 추적
 ---
 

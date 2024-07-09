@@ -39,7 +39,7 @@ integration_id: weaviate
 integration_title: Weaviate
 integration_version: 2.3.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: weaviate
 public_title: Weaviate

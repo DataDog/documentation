@@ -1,12 +1,10 @@
 ---
 title: Cross-Organization Connections API
-kind: documentation
-private: true
 is_beta: true
 ---
 
 {{< callout url="#" header="false" btn_hidden="true">}}
-  Cross-organization visibility is in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
+  Note: Cross-organization visibility is in beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
 {{< /callout >}} 
 
 [Cross-organization visibility][1] allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
@@ -19,14 +17,14 @@ Configure connections through the public API `/api/v2/org_connections` endpoint.
 
 ## List connections
 
-List all the connections this organization participates in, either as a source organization or as a destination organization.
+List all the connections this organization participates in, either as a source organization or as a destination organization. Listing connections requires the _Org Connections Read_ permission.
 
 <span style="padding:3px" class="font-semibold text-api-get bg-bg-api-get">GET</span>
 https://{datadog_site}/api/v2/org_connections?api_key={datadog_api_key}&application_key={datadog_application_key}
 
 ## Create a connection
 
-Creates a connection from this organization to the destination organization. You must perform this operation in the to-be-source organization.
+Creates a connection from this organization to the destination organization. You must perform this operation in the to-be-source organization. Creating connections requires the _Org Connections Write_ permission.
 
 <span style="padding:3px" class="font-semibold text-api-post bg-bg-api-post">POST</span> https://{datadog_site}/api/v2/org_connections?api_key={datadog_api_key}&application_key={datadog_application_key}
 
@@ -61,7 +59,7 @@ Content-Type: application/json
 
 ## Delete a connection
 
-Deletes a connection. Perform this operation either from the source organization or the destination organization. Reference the connection to delete with its ID, which you can get from the [List connections](#list-connections) request.
+Deletes a connection. Perform this operation either from the source organization or the destination organization. Reference the connection to delete with its ID, which you can get from the [List connections](#list-connections) request. Deleting connections requires the _Org Connections Write_ permission.
 
 <span style="padding:3px" class="font-semibold text-api-delete bg-bg-api-delete">DELETE</span> https://{datadog_site}/api/v2/org_connections/{connection_id}?api_key={datadog_api_key}&application_key={datadog_application_key}
 

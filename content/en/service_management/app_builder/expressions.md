@@ -1,6 +1,5 @@
 ---
 title: JavaScript Expressions
-kind: documentation
 further_reading:
 - link: "/service_management/app_builder/build/"
   tag: "Documentation"
@@ -13,10 +12,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< callout url="" btn_hidden="true" header="Try the Beta!">}}
-App Builder is in beta. Access it from the <a href="https://app.datadoghq.com/app-builder/">App Builder</a> page in Datadog.
-{{< /callout >}}
 
 You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you type an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
 

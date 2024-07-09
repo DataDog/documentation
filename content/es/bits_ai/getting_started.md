@@ -9,7 +9,6 @@ further_reading:
 - link: bits_ai/managing_incidents/
   tag: Documentación
   text: Gestión de incidencias
-kind: guía
 title: Empezando
 ---
 

@@ -23,7 +23,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: ブログ
   text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
-kind: documentation
 title: サービス詳細画面
 ---
 

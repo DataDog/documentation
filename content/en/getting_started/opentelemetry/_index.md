@@ -1,6 +1,5 @@
 ---
 title: Getting Started with OpenTelemetry at Datadog
-kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
   tag: 'External Site'
@@ -239,7 +238,7 @@ The Calendar application is already configured with unified service tagging:
    {{< code-block lang="yaml" filename="docker-compose-otel.yml" collapsible="true" disable_copy="true" >}}
 environment:
   - OTEL_SERVICE_NAME=calendar-otel
-  - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
+  - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker,service.version=<IMAGE_TAG>
 {{< /code-block >}}
 
 ## Running the application

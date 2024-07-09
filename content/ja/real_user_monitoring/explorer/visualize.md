@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: ドキュメント
   text: イベント検索
-kind: documentation
 title: 視覚化
 ---
 

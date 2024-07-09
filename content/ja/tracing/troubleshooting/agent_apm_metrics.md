@@ -2,7 +2,6 @@
 aliases:
 - /ja/agent/faq/agent-apm-metrics/
 - /ja/tracing/send_traces/agent-apm-metrics/
-kind: ドキュメント
 title: Datadog Agent によって送信された APM メトリクス
 ---
 

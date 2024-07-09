@@ -3,7 +3,7 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualiser vos données RUM dans l'Explorer
-kind: guide
+
 title: Utiliser plusieurs instances du SDK Mobile
 ---
 

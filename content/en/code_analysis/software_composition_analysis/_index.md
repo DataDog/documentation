@@ -1,6 +1,5 @@
 ---
-title: Software Composition Analysis
-kind: documentation
+title: Software Composition Analysis (SCA)
 description: Learn about Datadog Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 is_beta: true
 further_reading:
@@ -35,12 +34,11 @@ Code Analysis is in public beta.
 
 Software Composition Analysis (SCA) scans open source libraries imported into repositories through package managers such as `npm` for [known vulnerabilities][1]. SCA enables engineering teams to identify vulnerable libraries early on in the development life cycle so they can update them to non-vulnerable versions or remove them entirely to ensure their production codebase is secure.
 
-SCA can run in CI pipelines by using [Code Analysis][3] and provide runtime monitoring capabilities by using [Datadog Application Security][1].
+You can run SCA scans on your repositories directly through Datadog or in your CI pipelines by using [Code Analysis][3] and get runtime monitoring capabilities by using [Datadog Application Security][1].
 
+## Set up Software Composition Analysis
 
-## Languages
-
-SCA currently supports scanning the following languages and technologies for vulnerable libraries:
+SCA supports scanning for vulnerable libraries in the following languages and technologies:
 
 - .NET
 - Go
@@ -50,7 +48,11 @@ SCA currently supports scanning the following languages and technologies for vul
 - Python
 - Ruby
 
-SCA performs scans by looking at the libraries contained in your lockfiles. Below are the supported lockfiles:
+### Lockfiles
+
+SCA performs scans by looking at the libraries contained in your lockfiles. 
+
+The following lockfiles are supported:
 
 | Package Manager | Lockfile                                 |
 |-----------------|------------------------------------------|
@@ -66,7 +68,7 @@ SCA performs scans by looking at the libraries contained in your lockfiles. Belo
 | Python (poetry) | `poetry.lock`                            |
 | Ruby (bundler)  | `Gemfile.lock`                           |
 
-## Integrations
+## Integrate Software Composition Analysis in your developer environment
 
 ### CI providers
 {{< whatsnext desc="With Software Composition Analysis, you can identify vulnerable open source libraries that have been imported into your codebase. See the documentation for information about the following integrations:">}}

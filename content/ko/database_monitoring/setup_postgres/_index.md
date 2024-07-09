@@ -1,7 +1,6 @@
 ---
 description: Postgres 데이터베이스에 데이터베이스 모니터링 설정
 disable_sidebar: true
-kind: 설명서
 title: Postgres 설정
 ---
 

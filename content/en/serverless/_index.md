@@ -1,6 +1,5 @@
 ---
 title: Serverless
-kind: documentation
 aliases:
   - /graphing/infrastructure/cloudfunctions
   - /graphing/infrastructure/serverless_functions
@@ -51,7 +50,7 @@ With [Distributed Tracing][5], you can connect your serverless traces to metrics
 
 [Deployment Tracking][6] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
-### AWS Step Functions (Public Beta)
+### AWS Step Functions
 
 AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows in AWS. 
 

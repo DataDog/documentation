@@ -1,6 +1,5 @@
 ---
 title: Further Configure the Datadog Agent on Kubernetes
-kind: documentation
 aliases:
     - /integrations/faq/gathering-kubernetes-events
     - /agent/kubernetes/event_collection

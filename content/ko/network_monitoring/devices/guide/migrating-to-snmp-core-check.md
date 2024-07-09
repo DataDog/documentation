@@ -3,7 +3,6 @@ further_reading:
 - link: network_monitoring/devices/setup
   tag: 설명서
   text: NDM 설정에 대해 자세히 알아보기
-kind: 가이드
 title: Python 기반 검사에서 SNMP 코어 검사(Go에서)로 마이그레이션하기
 ---
 

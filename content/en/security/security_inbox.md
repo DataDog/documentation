@@ -1,6 +1,5 @@
 ---
 title: Security Inbox
-kind: documentation
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

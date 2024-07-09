@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/functions/smoothing
   tag: Documentation
   text: スムーシング
-kind: ガイド
 title: weighted() の仕組みは？
 ---
 

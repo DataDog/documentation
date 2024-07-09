@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter
   tag: Blog
   text: Reenvío de logs desde OpenTelemetry Collector con Datadog Exporter
-kind: documentación
 title: Empezando con OpenTelemetry en Datadog
 ---
 

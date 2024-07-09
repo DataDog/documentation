@@ -1,6 +1,5 @@
 ---
 title: AWS Lambda metrics
-kind: documentation
 aliases:
   - /serverless/custom_metrics
   - /serverless/enhanced_lambda_metrics

@@ -687,6 +687,13 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "UpdateOrgConfig": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Update a specific Org Config returns \"OK\" response"
+    }
+  ],
   "CreatePowerpack": [
     {
       "group": "powerpack",

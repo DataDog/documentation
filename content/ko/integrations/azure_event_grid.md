@@ -14,7 +14,7 @@ integration_id: azure-eventgrid
 integration_title: Microsoft Azure Event Grid
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: azure_event_grid
 public_title: Datadog-Microsoft Azure Event Grid 통합

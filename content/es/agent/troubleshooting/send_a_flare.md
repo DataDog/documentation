@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: Documentación
   text: Consultar el estado de un check del Agent
-kind: documentación
 title: Flare del Agent
 ---
 
@@ -157,7 +156,7 @@ Para enviar un flare desde el sitio de Datadog, asegúrate de haber habilitado l
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
 
 ## Envío manual
 
