@@ -1,5 +1,5 @@
 ---
-title: Software Composition Analysis
+title: Software Composition Analysis (SCA)
 description: Learn about Datadog Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 is_beta: true
 further_reading:
