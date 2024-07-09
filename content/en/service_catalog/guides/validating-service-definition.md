@@ -1,6 +1,6 @@
 ---
 title: Validating Service Definition YAMLs
-kind: guide
+
 aliases:
   - /tracing/service_catalog/guides/validating-service-definition
 further_reading:

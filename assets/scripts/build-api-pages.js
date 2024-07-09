@@ -914,6 +914,8 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
 
   const actions = {};
   Object.keys(deref.paths)
+    // Ignore extensions since they're not paths.
+    .filter((path) => !path.startsWith("x-"))
     .forEach((path) => {
       Object.entries(deref.paths[path]).forEach(([actionKey, action]) => {
         const item = {

@@ -6,7 +6,6 @@ further_reading:
 - link: synthetics/browser_tests
   tag: Documentation
   text: En savoir plus sur les tests de navigateurs Synthetic
-kind: guide
 title: Gestion des fenêtres contextuelles lors des tests Browser
 ---
 ## Présentation

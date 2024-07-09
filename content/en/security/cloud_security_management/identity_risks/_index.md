@@ -18,6 +18,9 @@ further_reading:
 - link: "/service_management/workflows/"
   tag: "Documentation"
   text: "Learn more about Workflow Automation"
+- link: "https://www.datadoghq.com/blog/datadog-ciem-aws-iam-access-analyzer/"
+  tag: "Blog"
+  text: "Identify and remediate permission gaps in AWS with Datadog CIEM and AWS IAM Access Analyzer"
 ---
 
 {{< youtube id=fho9qYHfMe8 loading=lazy >}}

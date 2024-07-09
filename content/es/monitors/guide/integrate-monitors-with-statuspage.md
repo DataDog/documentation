@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors/
   tag: Documentación
   text: Más información sobre los monitores de test sintéticos
-kind: guía
 title: Integración de monitores con Statuspage
 ---
 

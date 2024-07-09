@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-recommended-monitors/
   tag: 블로그
   text: AWS용 권장 모니터로 사전 설정된 알림을 활성화하세요
-kind: 설명서
 title: 모니터링
 ---
 

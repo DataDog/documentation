@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/developers/faq/query-data-to-a-text-file-step-by-step
-kind: guía
 title: Consulta de datos a un archivo de texto, paso a paso
 ---
 

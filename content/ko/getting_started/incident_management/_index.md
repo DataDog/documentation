@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
   tag: 블로그
   text: Datadog의 인시던트 관리 방법
-kind: 설명서
 title: Incident Management 시작하기
 ---
 

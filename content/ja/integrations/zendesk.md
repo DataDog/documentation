@@ -34,7 +34,7 @@ integration_id: zendesk
 integration_title: Zendesk
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: zendesk
 public_title: Zendesk

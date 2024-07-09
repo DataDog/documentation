@@ -36,7 +36,7 @@ Daily Datadog costs in Cloud Cost Management are in private beta. To request acc
 
 Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3]. 
 
-You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like Cost Summary and Cost Chargebacks on the [**Usage & Cost** page][4].
+You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
 <div class="alert alert-info">Costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a> are based on usage only and do not include historical credits and adjustments.</div>
 
@@ -52,7 +52,7 @@ To see costs on the [**Usage & Cost** page][4], see the [Cost Details documentat
 
 Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [**Plan and Usage** page][4] because Plan and Usage costs are cumulative and are prorated monthly. Only Cloud Cost Management provides a daily calculation.
 
-Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source. You can create dashboards to monitor your daily costs, identify trends, and optimize resource usage.
+Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Costs** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}} 
 
@@ -78,3 +78,5 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [6]: /account_management/rbac/permissions
 [7]: /account_management/plan_and_usage/cost_details/
 [8]: /account_management/billing/usage_attribution/
+[9]: /account_management/plan_and_usage/cost_details/#cost-summary
+[10]: /account_management/plan_and_usage/cost_details/#cost-chargebacks

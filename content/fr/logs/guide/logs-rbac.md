@@ -14,7 +14,7 @@ further_reading:
 - link: /logs/live_tail/
   tag: Documentation
   text: Explorer la fonctionnalité Live Tail
-kind: guide
+
 title: Configuration du RBAC pour les logs
 ---
 

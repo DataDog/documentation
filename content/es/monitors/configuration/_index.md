@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Estado de los monitores
-kind: documentación
 title: Configurar monitores
 ---
 

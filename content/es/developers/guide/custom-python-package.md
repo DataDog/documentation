@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/
   tag: Documentación
   text: Recopilar trazas
-kind: documentación
 title: Añadir un paquete personalizado de Python al Agent
 ---
 

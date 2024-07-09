@@ -19,7 +19,6 @@ further_reading:
   tag: Blog
   text: Monitorizar servicios y establecer acuerdos de nivel de servicio (SLA) con
     Datadog
-kind: guía
 title: Solucionar problemas de alertas de monitor
 ---
 

@@ -15,7 +15,7 @@ integration_id: google-cloud-datastore
 integration_title: Google Datastore
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_datastore
 public_title: Datadog-Google Datastore インテグレーション

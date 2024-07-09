@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer/analytics
   tag: 설명서
   text: 로그 분석 방법 알아보기
-kind: 설명서
 title: 트랜잭션에 로그 그룹화
 ---
 
