@@ -60,11 +60,11 @@ Use [Incident Management][4] to create an incident for a security signal.
 Use [Workflow Automation][5] to manually trigger a workflow for a security signal. 
 
 1. Make sure the workflow you want to run has a security trigger.
-1. On the [Signals Explorer][2] page, select a security signal.
-2. Scroll down to the **What is Workflow Automation** section.
-3. Click **Run Workflow**.
-4. On the workflow modal, select the workflow you want to run. Depending on the workflow, you may be required to enter additional input parameters.
-5. Click **Run**.
+2. On the [Signals Explorer][2] page, select a security signal.
+3. Scroll down to the **What is Workflow Automation** section.
+4. Click **Run Workflow**.
+5. On the workflow modal, select the workflow you want to run. Depending on the workflow, you may be required to enter additional input parameters.
+6. Click **Run**.
 
 ## Review and remediate
 
