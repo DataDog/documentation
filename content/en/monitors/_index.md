@@ -119,7 +119,7 @@ To import a monitor:
 [12]: /monitors/downtimes
 [13]: /monitors/manage
 [14]: /monitors/settings/
-[15]: /service_management/mobile/?tab=ios#monitors
+[15]: /mobile/?tab=ios#monitors
 [16]: /monitors/manage/search/#saved-view
 [17]: /monitors/notify/#workflows
 [18]: /monitors/notify/#notifications
