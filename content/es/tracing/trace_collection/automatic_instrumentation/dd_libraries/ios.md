@@ -516,7 +516,7 @@ Los siguientes atributos de `Trace.Configuration` pueden utilizarse al crear el 
 |---|---|
 | `service` | Configura el valor del `service`. |
 | `networkInfoEnabled` | Selecciona `true` para enriquecer las trazas con información sobre la conexión de red (estado de accesibilidad, tipo de conexión, nombre del operador móvil, etc.).|
-| `tags` | Configura un par de etiquetas `<KEY>:<VALUE>` que se añadirán a tramos (spans) creados por el rastreador. |
+| `tags` | Configura un par de etiquetas `<KEY>:<VALUE>` que se añadirán a tramos creados por el rastreador. |
 | `bundleWithRumEnabled` | Configura como `true` para permitir que los tramos se enriquezcan con la información de la vista RUM actual. Esto te permite ver todos los tramos generados durante la vida útil de una vista específica en el Explorador RUM. |
 | `sampleRate` | Configura un valor `0-100` para definir el porcentaje de trazas a recopilar. |
 
