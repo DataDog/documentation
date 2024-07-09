@@ -16,11 +16,11 @@ El seguimiento del despliegue te ayuda a comprender cuándo una nueva versión d
 
 Para acceder al seguimiento del despliegue de tus aplicaciones serverless, selecciona una función en la [vista Serverless][1] para abrir un panel lateral y haz clic en la pestaña **Deployments** (Despliegues). Esto muestra métricas serverless clave como invocaciones, duración de la ejecución y recuentos de errores que se exhiben automáticamente con superposiciones de eventos que marcan despliegues de código y cambios de configuración relacionados con la función.
 
-Para ver el historial de cambios en el código y en la configuración, ajusta el selector de tiempo global situado en la parte superior derecha de la vista.
+Para ver el historial de cambios en el código y la configuración, ajusta el selector de tiempo global situado en la parte superior derecha de la vista.
 
 ## Configuración
 
-Datadog recopila eventos de cambios de código y configuración en tus funciones de AWS Lambda desde AWS CloudTrail.
+Datadog recopila los eventos de cambios en el código y la configuración de tus funciones de AWS Lambda desde AWS CloudTrail.
 
 Si aún no lo hiciste, configura primero la integración de [Amazon Web Services][2]. Luego, añade el siguiente permiso al documento de la política de tu rol de AWS/Datadog:
 
@@ -28,7 +28,7 @@ Si aún no lo hiciste, configura primero la integración de [Amazon Web Services
 cloudtrail:LookupEvents
 ```
 
-Si ya añadiste el permiso, pero sigues sin ver eventos para cualquiera de tus funciones de AWS Lambda, habilita el seguimiento del despliegue mediante cuadro de la integración de AWS Lambda.
+Si ya añadiste el permiso, pero sigues sin ver eventos para cualquiera de tus funciones de AWS Lambda, habilita el seguimiento del despliegue mediante el cuadro de la integración de AWS Lambda.
 
 {{< img src="serverless/lambda_integration_settings.png" alt="Parámetros de la integración de Lambda" style="width:100%;">}}
 
