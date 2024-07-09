@@ -5,8 +5,11 @@ disable_toc: false
 
 ## Overview
 
-This document walks you through the following steps to set up the Observability Pipelines Worker with the Sumo Logic Hosted Collector HTTP Logs source so that you only route useful logs to your destinations:
+This document walks you through the following steps to set up the Observability Pipelines Worker with the Sumo Logic Hosted Collector HTTP Logs source so that you only route useful logs to your destinations.
 
+{{% observability_pipelines/use_case_images/log_volume_control %}}
+
+This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Sending logs to the Observability Pipelines Worker over Sumo Logic HTTP Source](#send-logs-to-the-observability-pipelines-worker-over-sumo-logic-http-source)

@@ -13,6 +13,8 @@ As your infrastructure and applications grow, so does your log volume and the co
 - **Dedupe**: Drop duplicate copies of your logs, for example, due to retries because of network issues.
 - **Remap**: Add, drop, or rename a field in your logs.
 
+{{% observability_pipelines/use_case_images/log_volume_control %}}
+
 Select a log source to get started:
 
 - [Datadog Agent][1]

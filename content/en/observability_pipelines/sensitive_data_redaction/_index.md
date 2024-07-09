@@ -9,7 +9,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 
 Use the Observability Pipelines Worker to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
-{{< img src="observability_pipelines/use_cases/sensitive_data_redaction.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
+{{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
 Select a log source to get started:
 
