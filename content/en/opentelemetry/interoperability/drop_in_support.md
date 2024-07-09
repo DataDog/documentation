@@ -13,9 +13,12 @@ algolia:
   tags: ['otel drop-in instrumentation']
 ---
 
-[Instrumentation](/tracing/trace_collection/) is the act of adding observability code to an application. [Automatic instrumentation](/tracing/trace_collection/automatic_instrumentation/) is a way to instrument applications and libraries without directly modifying their source code. Both OpenTelemetry and Datadog provide instrumentations as part of their SDKs, with varying amounts of coverage between them.
+[Instrumentation](/tracing/trace_collection/) is the process of adding code to your application to capture and report observability data.
+[Automatic instrumentation](/tracing/trace_collection/automatic_instrumentation/) is a way to instrument applications and libraries without
+directly modifying their source code. Both OpenTelemetry and Datadog provide automatic instrumentations as part of their SDKs.
 
-Datadog SDKs support adding instrumentations from OpenTelemetry alongside their original instrumentations. This gives users the same experience using OpenTelemetry instrumentations with Datadog SDKs as with the OpenTelemetry SDK.
+Datadog SDKs support adding automatic instrumentations and instrumentation libraries from OpenTelemetry to their existing instrumentations.
+This provides observability for libraries not originally covered by Datadog SDKs without needing to switch SDKs.
 
 ## Language support
 
@@ -25,11 +28,11 @@ Datadog SDKs support adding instrumentations from OpenTelemetry alongside their 
 
 ## Compatibility requirements
 
-Support for adding OpenTelemetry instrumentations at runtime was introduced in v1.35.0 of Datadog's SDK for Java.
+Support for adding OpenTelemetry automatic instrumentations at runtime was introduced in v1.35.0 of Datadog's SDK for Java.
 
 Each instrumentation should be packaged as an OpenTelemetry [extension](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md).
-The SDK also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main) build,
-for example the [CFX instrumentation jar](https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0).
+The SDK also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main)
+build, for example the [CFX instrumentation jar](https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0).
 
 **Note**: Use of OpenTelemetry incubator APIs is not currently supported.
 
@@ -57,7 +60,8 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 **Default**: `false`<br>
 A comma-separated list of paths to extension jar files, or folders containing extension jar files.
 
-OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/java/agent/configuration/) page describes additional properties which are also recognized by the Datadog SDK.
+OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/java/agent/configuration/) page describes
+additional properties which are also recognized by the Datadog SDK.
 
 ## Verified OpenTelemetry Instrumentations
 

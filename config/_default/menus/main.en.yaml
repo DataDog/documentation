@@ -2907,11 +2907,6 @@ menu:
       parent: automatic_instrumentation
       identifier: auto_dd_libraries
       weight: 2012
-    - name: Using OpenTelemetry Instrumentations
-      url: /opentelemetry/interoperability/drop_in_support/
-      parent: automatic_instrumentation
-      identifier: auto_otel_drop_in
-      weight: 2013
     - name: Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection
