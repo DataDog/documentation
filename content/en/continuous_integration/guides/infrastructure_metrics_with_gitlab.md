@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-When you click on a GitLab job in the [CI Visibility Explorer][9], you can access an **Infrastructure** tab with information about the host displaying information about the host, system, host tags, host metrics, and more.
+When you click on a GitLab job in the [CI Visibility Explorer][9], you can access an **Infrastructure** tab with information about the host, system, host tags, host metrics, and more.
 
 {{< img src="continuous_integration/infrastructure_tab.png" alt="The Infrastructure tab displaying information about a host and its system, along with host metrics such as CPU usage and load averages." style="width:100%;">}}
 
