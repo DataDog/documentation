@@ -1,6 +1,7 @@
-import Barkdoc from '../../dist';
+import MarkdocStaticCompiler from '../../dist';
 import fs from 'fs';
 import { describe, test, expect } from 'vitest';
+import prettier from 'prettier';
 
 describe('rendering stages', () => {
   // retrieve test input file
@@ -8,10 +9,10 @@ describe('rendering stages', () => {
   const inputString = fs.readFileSync(inputPath, 'utf-8');
 
   // stage 1: build the AST
-  const ast = Barkdoc.parse(inputString);
+  const ast = MarkdocStaticCompiler.parse(inputString);
 
   // stage 2: build the renderable tree
-  const renderableTree = Barkdoc.transform(ast, {
+  const renderableTree = MarkdocStaticCompiler.transform(ast, {
     variables: {
       state: 'California',
       alwaysFalse: false,
@@ -20,7 +21,7 @@ describe('rendering stages', () => {
   });
 
   // stage 3: render the HTML
-  const html = Barkdoc.renderers.html(renderableTree, {
+  const html = MarkdocStaticCompiler.renderers.html(renderableTree, {
     variables: {
       state: 'Illinois',
       alwaysFalse: false,
@@ -33,7 +34,7 @@ describe('rendering stages', () => {
   // in a different style than "shown" content
   const htmlWithStyles = `
   <style>
-    .barkdoc__hidden {
+    .markdoc__hidden {
       background-color: dimgray;
       color: white;
     }
@@ -42,12 +43,18 @@ describe('rendering stages', () => {
       color: deeppink;
     }
 
-    .barkdoc__hidden code {
+    .markdoc__hidden code {
       color: pink;
     }
   </style>
   ${html}
   `;
+
+  // format the HTML with prettier
+  const formattedHtml = prettier.format(htmlWithStyles, {
+    parser: 'html',
+    htmlWhitespaceSensitivity: 'ignore'
+  });
 
   test('ast', () => {
     expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot('../__snapshots__/ast.snap.json');
@@ -58,6 +65,6 @@ describe('rendering stages', () => {
   });
 
   test('renderedHtml', () => {
-    expect(htmlWithStyles).toMatchFileSnapshot('../__snapshots__/renderedHtml.snap.html');
+    expect(formattedHtml).toMatchFileSnapshot('../__snapshots__/renderedHtml.snap.html');
   });
 });

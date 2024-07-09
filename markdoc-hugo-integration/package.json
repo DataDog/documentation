@@ -1,18 +1,18 @@
 {
-    "name": "hugo-markdoc-integration",
+    "name": "markdoc-hugo-integration",
     "version": "1.0.0",
     "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build-markdoc-integration": "rimraf ./dist && npx tsc",
-        "build-prod-renderer": "npx esbuild ./src/barkdoc-client-renderer.js --bundle --minify > ./dist/barkdoc-client-renderer.min.js",
-        "build-dev-renderer": "npx esbuild ./src/barkdoc-client-renderer.js --bundle > ./dist/barkdoc-client-renderer.js",
+        "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle --minify > ./dist/markdoc-client-renderer.min.js",
+        "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle > ./dist/markdoc-client-renderer.js",
         "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer"
     },
     "dependencies": {
         "js-yaml": "^4.1.0",
         "rimraf": "^5.0.5",
-        "barkdoc": "file:../barkdoc",
+        "markdoc-static-compiler": "file:../markdoc-static-compiler",
         "zod": "^3.22.4"
     },
     "devDependencies": {

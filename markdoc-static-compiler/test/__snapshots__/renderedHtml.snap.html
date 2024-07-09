@@ -1,0 +1,254 @@
+<style>
+  .markdoc__hidden {
+    background-color: dimgray;
+    color: white;
+  }
+
+  code {
+    color: deeppink;
+  }
+
+  .markdoc__hidden code {
+    color: pink;
+  }
+</style>
+<article>
+  <h1>Test document</h1>
+  <p>
+    Anything with a YES in front of it should display normally, with no visible
+    background color.
+  </p>
+  <p>
+    Anything with a NO in front of it should have a dark background (to indicate
+    that it has been given the
+    <code>markdoc__hidden</code>
+    class, and would be hidden in a real document).
+  </p>
+  <p>
+    For easier checking, each section has its YESes at the top, and NOs at the
+    bottom.
+  </p>
+  <h2>Variable values</h2>
+  <ul>
+    <li>
+      <code>state</code>
+      : Illinois
+    </li>
+    <li>
+      <code>alwaysTrue</code>
+      : true
+    </li>
+    <li>
+      <code>alwaysFalse</code>
+      : false
+    </li>
+  </ul>
+  <h2>Dynamic variables test</h2>
+  <h2>
+    <code>equals</code>
+    test
+  </h2>
+  <div>
+    <p>
+      YES: Display if
+      <code>equals($alwaysTrue, true)</code>
+      .
+    </p>
+  </div>
+  <div>
+    <p>
+      YES: Display if
+      <code>equals($state, &quot;Illinois&quot;)</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>equals($alwaysFalse, true)</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>equals($state, &quot;California&quot;)</code>
+      .
+    </p>
+  </div>
+  <h2>
+    <code>default</code>
+    test
+  </h2>
+  <div>
+    <p>
+      YES: Display if
+      <code>default($notDefined, true)</code>
+      .
+    </p>
+  </div>
+  <div>
+    <p>
+      YES: Display if
+      <code>default($alwaysTrue, false)</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>default($notDefined, false)</code>
+      .
+    </p>
+  </div>
+  <h2>
+    <code>or</code>
+    test
+  </h2>
+  <div>
+    <p>
+      YES: Display if
+      <code>or($alwaysTrue, $alwaysFalse)</code>
+      .
+    </p>
+  </div>
+  <div>
+    <p>
+      YES: Display if
+      <code>
+        or(equals($state, &quot;California&quot;), equals($state,
+        &quot;Illinois&quot;))
+      </code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>or($missingVarOne, $missingVarTwo)</code>
+      .
+    </p>
+  </div>
+  <h2>
+    <code>and</code>
+    test
+  </h2>
+  <div>
+    <p>
+      YES: Display if
+      <code>and($alwaysTrue, $alwaysTrue)</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>and($alwaysTrue, $alwaysFalse)</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>
+        and(equals($state, &quot;California&quot;), equals($state,
+        &quot;Illinois&quot;))
+      </code>
+      .
+    </p>
+  </div>
+  <h2>
+    <code>not</code>
+    test
+  </h2>
+  <div>
+    <p>
+      YES: Display if
+      <code>not($alwaysFalse)</code>
+      .
+    </p>
+  </div>
+  <div>
+    <p>
+      YES: Display if
+      <code>not(equals($state, &quot;California&quot;))</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>not($alwaysTrue)</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>not(equals($state, &quot;Illinois&quot;))</code>
+      .
+    </p>
+  </div>
+  <h2>Nested functions</h2>
+  <div>
+    <p>
+      YES: Display if
+      <code>or(not($alwaysFalse), not($alwaysTrue))</code>
+      .
+    </p>
+  </div>
+  <div>
+    <p>
+      YES: Display if
+      <code>
+        or(equals($state, &quot;Illinois&quot;), equals($state,
+        &quot;California&quot;))
+      </code>
+      .
+    </p>
+  </div>
+  <div>
+    <p>
+      YES: Display if
+      <code>
+        and(or(not($alwaysFalse), not($alwaysTrue)), or(not($alwaysFalse),
+        not($alwaysTrue)))
+      </code>
+      .
+    </p>
+  </div>
+  <div>
+    <p>
+      YES: Display if
+      <code>equals(not($alwaysFalse), true)</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>
+        and(and($alwaysFalse, not($alwaysTrue)), or(not($alwaysFalse),
+        not($alwaysTrue)))
+      </code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>and(not($alwaysFalse), not($alwaysTrue))</code>
+      .
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if
+      <code>
+        and(equals($state, &quot;Illinois&quot;), equals($state,
+        &quot;California&quot;))
+      </code>
+      .
+    </p>
+  </div>
+</article>
