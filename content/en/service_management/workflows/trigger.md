@@ -30,7 +30,7 @@ further_reading:
 <div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog Monitor and a Datadog Dashboard.
+You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog monitor and a Datadog dashboard.
 
 A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
 
@@ -45,7 +45,7 @@ To trigger a workflow manually:
 
 ## Trigger a workflow from a Dashboard
 
-To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
+To trigger a workflow from a dashboard, add the **Run Workflow** widget:
 1. From your dashboard, click **Add Widget**.
 1. Search for `workflows` and add the **Run Workflow** widget.
 1. Under **Select the workflow**, find your workflow in the dropdown menu. Only published workflows with dashboard triggers appear in the list.
@@ -72,7 +72,7 @@ If the child workflow has [input parameters][5], these parameters appear as requ
 To trigger a workflow from a monitor, you must first add a monitor trigger to your workflow:
 1. Add a monitor trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Monitor**.
-   - If your workflow already has one more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
+   - If your workflow already has one or more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
 1. Click the trigger and take note of the **Mention handle**.
 1. Save your Workflow.
@@ -111,7 +111,7 @@ You can set up a workflow to trigger every time a Security Signal Notification R
 To trigger a workflow from a notification rule, you must first add a security trigger to your workflow:
 1. Add a security trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Security**.
-   - If your workflow already has one more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Security**.
+   - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Security**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
 1. Click the trigger and take note of the **Mention handle**.
 1. Save your workflow.
@@ -144,7 +144,7 @@ For additional examples of security workflows you can automate, see [Automate Se
 To trigger a workflow from an incident notification rule, you must first add an incident trigger to your workflow:
 1. Add an incident trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Incident**.
-   - If your workflow already has one more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Incident**.
+   - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Incident**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
 1. Click the trigger and take note of the **Mention handle**.
 1. Save your Workflow.
