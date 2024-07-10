@@ -36,14 +36,14 @@ A workflow can either run with the identity of the user who owns it, or with the
 
 {{< img src="service_management/workflows/multiple-triggers.png" alt="A workflow with multiple triggers" style="width:100%;" >}}
 
-## Manually trigger a workflow
+## Manual triggers
 
 To trigger a workflow manually:
 1. From the workflow page, click **Run**.
 1. Enter the values for existing trigger variables.
 1. When you're ready to run the workflow, click **Save & Run**.
 
-## Trigger a workflow from a Dashboard
+## Dashboard triggers
 
 To trigger a workflow from a dashboard, add the **Run Workflow** widget:
 1. From your dashboard, click **Add Widget**.
@@ -57,17 +57,7 @@ To run the workflow:
 1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
 1. Click **Run** to run the workflow.
 
-## Trigger a workflow from a workflow
-
-You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
-
-<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
-
-If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **service_name** input parameter is required because `service_name` is set as an input parameter in the child workflow.
-
-{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
-
-## Trigger a workflow from a monitor
+## Monitor triggers
 
 To trigger a workflow from a monitor, you must first add a monitor trigger to your workflow:
 1. Add a monitor trigger to your workflow:
@@ -75,6 +65,7 @@ To trigger a workflow from a monitor, you must first add a monitor trigger to yo
    - If your workflow already has one or more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
 1. Click the trigger and take note of the **Mention handle**.
+1. Monitor triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the **Automatic triggering** option.
 1. Save your Workflow.
 1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
@@ -100,11 +91,32 @@ To test a monitor trigger:
 1. Select a monitor state.
 1. Click **Run From Monitor**.
 
-## Trigger a workflow from a Security Signal
+## Incident triggers
+
+To trigger a workflow from an incident notification rule, you must first add an incident trigger to your workflow:
+1. Add an incident trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Incident**.
+   - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Incident**.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
+1. Click the trigger and take note of the **Mention handle**.
+1. Incident triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the **Automatic triggering** option.
+1. Save your Workflow.
+1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+Add the workflow to your incident notification rule:
+1. [Incidents Settings][6] page, select **Rules**.
+1. Click **New Rule**.
+1. Configure a **Severity**, **Service**, and **Other attributes** for your notification rule.
+1. Under **Notify**, paste the workflow handle that you copied earlier.
+1. In the **Recipient** section, use the workflow mention name to find your workflow. For example, `@workflow-my-workflow`. The workflow must have an incident trigger before you can trigger it from an incident.
+1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
+1. Click **Save**.
+
+## Security Signal triggers
 
 You can trigger a workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel. Before you can add a workflow to a Security Signal, the workflow must have a security trigger.
 
-### Trigger a workflow automatically from Security Signal Notification Rules
+### Security Signal Notification Rule triggers
 
 You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
 
@@ -114,6 +126,7 @@ To trigger a workflow from a notification rule, you must first add a security tr
    - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Security**.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
 1. Click the trigger and take note of the **Mention handle**.
+1. Security triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the **Automatic triggering** option.
 1. Save your workflow.
 1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
@@ -127,7 +140,7 @@ Add the workflow to your notification rule:
 
 Each time the notification rule fires, it triggers a workflow run.
 
-### Trigger a workflow manually from Cloud SIEM Security Signals
+### Cloud SIEM Security Signal triggers
 
 You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
@@ -139,27 +152,7 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
-## Trigger a workflow from incidents
-
-To trigger a workflow from an incident notification rule, you must first add an incident trigger to your workflow:
-1. Add an incident trigger to your workflow:
-   - If your workflow doesn't have any triggers, click **Add Trigger** > **Incident**.
-   - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Incident**.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
-1. Click the trigger and take note of the **Mention handle**.
-1. Save your Workflow.
-1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
-
-Add the workflow to your incident notification rule:
-1. [Incidents Settings][6] page, select **Rules**.
-1. Click **New Rule**.
-1. Configure a **Severity**, **Service**, and **Other attributes** for your notification rule.
-1. Under **Notify**, paste the workflow handle that you copied earlier.
-1. In the **Recipient** section, use the workflow mention name to find your workflow. For example, `@workflow-my-workflow`. The workflow must have an incident trigger before you can trigger it from an incident.
-1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
-1. Click **Save**.
-
-## Trigger a workflow with an API call
+## API triggers
 
 {{< callout btn_hidden="true" header="false" >}}
 API triggers are in private beta.
@@ -201,7 +194,7 @@ curl -X POST \
 1. Click **Save**.
 1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it with a POST request. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
-## Trigger a workflow on a schedule
+## Scheduled triggers
 
 To schedule a workflow run:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **Schedule**.
@@ -210,6 +203,16 @@ To schedule a workflow run:
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
 1. Click **Publish**. Scheduled workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+## Trigger a workflow from a workflow
+
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
+
+<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
+
+If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **service_name** input parameter is required because `service_name` is set as an input parameter in the child workflow.
+
+{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
 ## Run history
 
