@@ -1,6 +1,6 @@
 ---
 title: Automatiser la correction des menaces détectées grâce aux webhooks
-kind: guide
+
 further_reading:
   - link: /security_platform/explorer/
     tag: Documentation

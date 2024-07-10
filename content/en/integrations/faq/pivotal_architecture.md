@@ -1,6 +1,6 @@
 ---
 title: Datadog VMware Tanzu Application Service Integration Architecture
-kind: faq
+
 description: "Overview of the Datadog integration with VMware Tanzu Application Service"
 further_reading:
 - link: "https://www.datadoghq.com/blog/pivotal-cloud-foundry-architecture/"

@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Azure Database for PostgreSQL
-kind: documentation
 description: Install and configure Database Monitoring for PostgreSQL managed on Azure.
 further_reading:
 - link: "/integrations/postgres/"
@@ -14,7 +13,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
+1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the Azure PostgreSQL integration](#install-the-azure-postgresql-integration)
 
 ## Before you begin
@@ -229,7 +228,7 @@ psql -h mydb.example.com -U datadog postgres -A \
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
 
-## Install the Agent
+## Install and configure the Agent
 
 To monitor Azure Postgres databases, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][7].
 
@@ -342,39 +341,52 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration with static files mounted in the Cluster Agent container, or using service annotations:
 
-### Command line with Helm
+### Helm
 
-Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        postgres.yaml: -|
+          cluster_check: true
+          init_config:
+          instances:
+            - dbm: true
+              host: <AZURE_INSTANCE_ENDPOINT>
+              port: 5432
+              username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
+              password: '<UNIQUE_PASSWORD>'
+              ssl: 'require'
+              azure:
+                deployment_type: '<DEPLOYMENT_TYPE>'
+                fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterChecksRunner.enabled=true' \
-  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <AZURE_INSTANCE_ENDPOINT>
-    port: 5432
-    username: "datadog@<AZURE_INSTANCE_ENDPOINT>"
-    password: "<UNIQUEPASSWORD>"
-    ssl: "require"
-    azure:
-      deployment_type: "<DEPLOYMENT_TYPE>"
-      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+    For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
-```
+    ```yaml
+    pg_stat_statements_view: datadog.pg_stat_statements()
+    pg_stat_activity_view: datadog.pg_stat_activity()
+    ```
+
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with mounted files
 

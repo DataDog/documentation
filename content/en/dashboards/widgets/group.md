@@ -34,6 +34,6 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#timeboards
+[1]: /dashboards/#get-started
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

@@ -1,6 +1,5 @@
 ---
 title: Run Synthetic Tests from Private Locations
-kind: documentation
 description: Run Synthetic API and browser tests from private locations
 aliases:
 - /synthetics/private_locations
@@ -48,11 +47,11 @@ To use private locations for [Continuous Testing tests][23], you need v1.27.0 or
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Docker hub. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
 
 **\*** **Use and operation of this software is governed by the End User License Agreement available [here][103].**
 
-[101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[101]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [102]: https://docs.docker.com/engine/install/
 [103]: https://www.datadoghq.com/legal/eula/
 
@@ -237,7 +236,7 @@ This command starts a Docker container and makes your private location ready to 
 
 You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs/<filename>.pem` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
 For more information about private locations parameters for admins, see [Configuration][2].
 

@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/amazon_ecs/tags/
   tag: Documentation
   text: Attribuer des tags à toutes les données envoyées par un conteneur
-kind: Documentation
 title: Tracing d'applications ECS
 ---
 

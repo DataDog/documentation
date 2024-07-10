@@ -1,6 +1,5 @@
 ---
 title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
-kind: documentation
 further_reading:
 - link: "/containers/kubernetes/installation"
   tag: "Documentation"

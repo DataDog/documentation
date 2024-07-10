@@ -7,7 +7,6 @@ cascade:
     rank: 20
     subcategory: Synthetic Monitoring 가이드
 disable_toc: true
-kind: 지침
 private: true
 title: Synthetic Monitoring 가이드
 ---
@@ -17,11 +16,10 @@ title: Synthetic Monitoring 가이드
     {{< nextlink href="synthetics/guide/clone-test" >}}신서틱 테스트 복제{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="경고:" >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}신서틱 테스트에서 모니터링 사용{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}신서틱 테스트가 모니터링 상태를 결정하는 방법 이해{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}신서틱 테스트에서 모니터링 사용{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}SLO로 웹사이트 업타임 모니터링{{< /nextlink >}}
+{{< whatsnext desc="알림:" >}}
+{{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}신서틱 테스트에서 모니터 사용{{< /nextlink >}}
+{{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}신서틱 테스트 재시도가 모니터 상태를 결정하는 방법 이해하기{{< /nextlink >}}
+{{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}SLO로 웹사이트 가동 시간 모니터링{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}

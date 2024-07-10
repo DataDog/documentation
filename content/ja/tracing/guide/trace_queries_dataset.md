@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/trace_explorer/trace_queries/
   tag: ドキュメント
   text: .NET
-kind: ガイド
 title: Trace Queries ソースデータ
 ---
 

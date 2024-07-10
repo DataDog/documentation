@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/network_performance_monitoring/guide/detecting_a_network_outage/
-kind: guide
 title: Détecter une panne de réseau
 ---
 Les pannes de réseau se cachent souvent derrière des problèmes d'infrastructure, d'application ou de conteneur, ce qui les rend difficiles à détecter. Si vous n'avez pas de moyen de surveiller les performances de votre réseau régional ou de l'endpoint tiers que vous utilisez, détecter une panne sur un cloud tiers ou régional peut prendre jusqu'à plusieurs heures, et pourrait finir par affecter vos clients.

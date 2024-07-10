@@ -14,7 +14,7 @@ integration_id: azure-streamanalytics
 integration_title: Microsoft Azure Stream Analytics
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_stream_analytics
 public_title: Datadog-Microsoft Azure Stream Analytics インテグレーション

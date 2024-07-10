@@ -1,6 +1,5 @@
 ---
 title: Java Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Java tracer'
 code_lang: java
 type: multi-code-lang
@@ -118,15 +117,17 @@ Also, frameworks like Spring Boot (version 3) inherently work because they usual
 
 The following instrumentations are disabled by default and can be enabled with the following settings:
 
-| Instrumentation | To Enable 									                                                                                                                       |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| JAX-WS		        | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
-| Mulesoft		      | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
-| Grizzly         | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
-| Grizzly-HTTP    | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
-| Ning            | `-Ddd.integration.ning.enabled=true`                                                                                                      |
-| Spark Java      | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
-| Hazelcast       | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                               |
+| Instrumentation     | To Enable 									                                                                                                              |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| JAX-WS		          | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
+| Mulesoft		        | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| Grizzly             | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
+| Grizzly-HTTP        | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
+| Ning                | `-Ddd.integration.ning.enabled=true`                                                                                                      |
+| Spark Java          | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast           | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
+| TIBCO BusinessWorks | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
+
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
 
@@ -199,7 +200,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                               |
 | MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                    |
 | OpenSearch Rest         | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-rest`                                                            |
-| OpenSearch Transport    | 1.0+     | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
+| OpenSearch Transport    | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
 | RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                       |
 | Redisson                | 2.x-3.x  | Fully Supported | `redisson`, `redis`                                                                        |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                             |
@@ -237,20 +238,21 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 | Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
 |-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
-| Datanucleus JDO   | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
-| Dropwizard Views  | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
-| GraphQL           | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
-| Hazelcast         | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
-| Hibernate         | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
-| Hystrix           | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
-| JSP Rendering     | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
-| JUnit             | 4.1+, 5.3+ | Fully Supported                                                  | `junit`, `junit-4`, `junit-5`                  |
-| Project Reactor   | 3.1+       | Fully Supported                                                  | `reactor-core`                                 |
-| Quartz            | 2.x        | Fully Supported                                                  | `quartz`                                       |
-| RxJava            | 2.x        | Fully Supported                                                  | `rxjava`                                       |
-| Spring Data       | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
-| Spring Scheduling | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
-| Twilio SDK        | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
+| Datanucleus JDO     | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
+| Dropwizard Views    | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
+| GraphQL             | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
+| Hazelcast           | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate           | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
+| Hystrix             | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
+| JSP Rendering       | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit               | 4.1+, 5.3+ | Fully Supported                                                  | `junit`, `junit-4`, `junit-5`                  |
+| Project Reactor     | 3.1+       | Fully Supported                                                  | `reactor-core`                                 |
+| Quartz              | 2.x        | Fully Supported                                                  | `quartz`                                       |
+| RxJava              | 2.x        | Fully Supported                                                  | `rxjava`                                       |
+| Spring Data         | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
+| Spring Scheduling   | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
+| TIBCO BusinessWorks | 5.14.0+    | [Beta](#framework-integrations-disabled-by-default)              | `tibco`, `tibco_bw`                            |
+| Twilio SDK          | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 

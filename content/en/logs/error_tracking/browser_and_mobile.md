@@ -1,6 +1,5 @@
 ---
 title: Track Browser and Mobile Errors
-kind: documentation
 description: Learn how to track browser and mobile errors from your logs.
 is_beta: true
 further_reading:

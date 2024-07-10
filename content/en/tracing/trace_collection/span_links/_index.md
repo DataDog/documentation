@@ -1,6 +1,5 @@
 ---
 title: Span Links
-kind: documentation
 further_reading:
     - link: 'https://opentelemetry.io/docs/concepts/signals/traces/#span-links'
       tag: 'Documentation'

@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Private Locations
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
       tag: 'Blog'

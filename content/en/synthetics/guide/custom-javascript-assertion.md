@@ -1,6 +1,6 @@
 ---
 title: Use Custom JavaScript Assertions In Browser Tests
-kind: guide
+
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
 - link: '/synthetics/browser_tests/actions/'
@@ -47,7 +47,7 @@ Your browser test results contain `console.error` logs.
 
 ## Assert that a radio button is checked
 
-To verify that a radio button is checked, use `return document.querySelector("<SELECTORS>").checked = true;` in the body assertion.
+To verify that a radio button is checked, use `return document.querySelector("<SELECTORS>").checked === true;` in the body assertion.
 
 ## Set the value of a specified local storage item
 

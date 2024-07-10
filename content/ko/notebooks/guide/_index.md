@@ -1,7 +1,6 @@
 ---
 description: 노트북 가이드 색인
 disable_toc: true
-kind: 가이드
 private: true
 title: 노트북 가이드
 ---

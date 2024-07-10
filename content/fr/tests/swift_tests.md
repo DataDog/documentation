@@ -12,7 +12,6 @@ further_reading:
 - link: /real_user_monitoring/ios
   tag: Documentation
   text: En savoir plus sur la surveillance iOS et tvOS avec RUM
-kind: documentation
 title: Instrumenter vos tests Swift avec RUM
 ---
 

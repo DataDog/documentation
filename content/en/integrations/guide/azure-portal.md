@@ -1,6 +1,6 @@
 ---
 title: Managing the Azure Native Integration
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"

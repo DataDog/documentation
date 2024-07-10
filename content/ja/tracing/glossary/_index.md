@@ -22,7 +22,6 @@ further_reading:
 - link: /monitors/types/apm/
   tag: Documentation
   text: APM モニターについて
-kind: documentation
 title: APM の用語と概念
 ---
 
