@@ -1,5 +1,5 @@
 ---
-title: Browser Crash Reporting and Error Tracking
+title: Browser Error Tracking
 aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 further_reading:
@@ -16,9 +16,7 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the browser by the RUM Browser SDK. Whenever a [source][1], [custom][2], or [report][3] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
-
-Your crash reports appear in [**Error Tracking**][4].
+[Error Tracking][4] processes errors collected from the browser by the RUM Browser SDK. Whenever a [source][1], [custom][2], or [report][3] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
 
 ## Setup
 
