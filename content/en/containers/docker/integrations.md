@@ -22,7 +22,7 @@ further_reading:
 
 This page covers how to install and configure integrations for your Docker infrastructure by using a Datadog feature known as _Autodiscovery_. Autodiscovery enables you to use [variables][1] like `%%host%%` to dynamically populate your configuration settings. 
 
-For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][2]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Autodiscovery Management][3].
+For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][2]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Container Discovery Management][3].
 
 If you are using Kubernetes, see [Kubernetes and Integrations][4].
 

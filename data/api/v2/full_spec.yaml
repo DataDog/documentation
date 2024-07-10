@@ -39299,6 +39299,8 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  x-merge-override:
+    /api/v2/logs/config/archives: true
 security:
 - apiKeyAuth: []
   appKeyAuth: []
