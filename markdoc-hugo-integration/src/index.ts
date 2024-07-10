@@ -25,11 +25,16 @@ export class MarkdocToHtmlCompiler {
   prefOptionsConfig: PrefOptionsConfig;
   sitewidePrefNames: string[] = [];
 
-  constructor(p: { preferencesConfigDir: string; contentDirectory: string; partialsDirectory: string }) {
+  constructor(p: {
+    sitewidePrefsFilepath: string;
+    prefOptionsConfigDir: string;
+    contentDir: string;
+    partialsDir: string;
+  }) {
     // ingest the pref options sets
-    this.prefOptionsConfig = this.#loadPrefOptionsFromYaml(p.preferencesConfigDir + '/preference_options');
+    this.prefOptionsConfig = this.#loadPrefOptionsFromYaml(p.prefOptionsConfigDir);
     // ingest sitewide preference names
-    this.sitewidePrefNames = this.#loadValidSitewidePrefNames(p.preferencesConfigDir + '/sitewide_preferences.yaml');
+    this.sitewidePrefNames = this.#loadValidSitewidePrefNames(p.sitewidePrefsFilepath);
     // register mdoc partials
     // register mdoc files
   }

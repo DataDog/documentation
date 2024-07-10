@@ -5,9 +5,10 @@ const TEST_SITE_DIR = __dirname + '/../test_site';
 
 describe('MarkdocToHtmlCompiler', () => {
   const compiler = new MarkdocToHtmlCompiler({
-    preferencesConfigDir: TEST_SITE_DIR + '/preferences_config',
-    contentDirectory: TEST_SITE_DIR + '/content',
-    partialsDirectory: TEST_SITE_DIR + '/partials'
+    prefOptionsConfigDir: TEST_SITE_DIR + '/preferences_config/options',
+    sitewidePrefsFilepath: TEST_SITE_DIR + '/preferences_config/sitewide_preferences.yaml',
+    contentDir: TEST_SITE_DIR + '/content',
+    partialsDir: TEST_SITE_DIR + '/partials'
   });
 
   test('.prefOptionsConfig', () => {

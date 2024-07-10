@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX } from './regexes';
+import { SNAKE_CASE_REGEX } from './../regexes';
 
 // An individual page preference configuration object
 // from the front matter of a doc
