@@ -417,7 +417,7 @@ When using OpenTelemetry, map the following [resource attributes][16] to their c
 | `service.name` | `service` |
 | `service.version` | `version` |
 
-<div class="alert alert-warning">Do not use Datadog-specific tags like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> in your OpenTelemetry configuration.</div>
+<div class="alert alert-warning">Datadog-specific environment variables like <code>DD_SERVICE</code>, <code>DD_ENV</code> or <code>DD_VERSION</code> are not supported out of the box in your OpenTelemetry configuration.</div>
 
 {{< tabs >}}
 {{% tab "Environment variables" %}}
