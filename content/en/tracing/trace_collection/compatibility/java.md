@@ -119,14 +119,14 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation     | To Enable 									                                                                                                              |
 |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| JAX-WS		          | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
-| Mulesoft		        | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
-| Grizzly             | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
-| Grizzly-HTTP        | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
-| Ning                | `-Ddd.integration.ning.enabled=true`                                                                                                      |
-| Spark Java          | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
-| Hazelcast           | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
-| TIBCO BusinessWorks | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
+| JAX-WS		                   | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
+| Mulesoft		                 | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
+| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
+| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                      |
+| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
+| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
 
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
