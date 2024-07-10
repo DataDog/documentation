@@ -610,7 +610,7 @@ Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corres
 
 ### For Python+Flask, call the entrypoint patch function
 
-If you're running a Flask application ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`, see: [Flask integration documentation](https://ddtrace.readthedocs.io/en/stable/integrations.html#flask).
+If you're running a Flask application ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. See the [Flask integration documentation][17] for more information.
   
 ## Need more help?
 
@@ -639,3 +639,4 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [14]: /security/application_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
 [16]: https://app.datadoghq.com/organization-settings/remote-config
+[17]: https://ddtrace.readthedocs.io/en/stable/integrations.html#flask
