@@ -3,6 +3,7 @@ red_item_options:
     identifier: ruby
   - display_name: Apple
     identifier: apple
+    default: true
   - display_name: Firetruck
     identifier: firetruck
   - display_name: Stop sign

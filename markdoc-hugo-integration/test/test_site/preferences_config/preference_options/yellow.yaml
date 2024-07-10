@@ -1,6 +1,7 @@
 yellow_item_options:
   - display_name: Banana
     identifier: banana
+    default: true
   - display_name: Sunflower
     identifier: sunflower
   - display_name: Lemon

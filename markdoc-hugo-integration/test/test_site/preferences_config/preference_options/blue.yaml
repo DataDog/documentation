@@ -3,6 +3,7 @@ blue_item_options:
     identifier: ocean
   - display_name: Sky
     identifier: sky
+    default: true
   - display_name: Jeans
     identifier: jeans
   - display_name: Blueberry

@@ -1,46 +1,8 @@
-import { PagePrefOptionsConfigSchema, PagePrefOptionsConfig } from './schemas/configurationYaml';
 import { PageDataManifestSchema } from './schemas/pageDataManifest';
 import { PageDataManifest } from './schemas/pageDataManifest';
-import { PagePrefsConfig } from './schemas/frontMatterYaml';
+import { PagePrefsConfig } from './schemas/yaml/frontMatter';
 import { PagePref, PagePrefs, PagePrefsSchema } from './schemas/pagePrefs';
 import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
-
-import yaml from 'js-yaml';
-
-function loadPrefsYamlFromStr(yamlFileContent: string): PagePrefOptionsConfig {
-  const parsedYaml = yaml.load(yamlFileContent) as PagePrefOptionsConfig;
-  return PagePrefOptionsConfigSchema.parse(parsedYaml);
-}
-
-export async function buildPagePrefsFromStr(yamlStr: string): Promise<PagePrefs> {
-  // Load and validate the YAML definition file
-  const validatedYAML = loadPrefsYamlFromStr(yamlStr);
-
-  // Populate the page preferences object
-  const pagePrefs: PagePrefs = {};
-  for (const [variableID, variableConfig] of Object.entries(validatedYAML)) {
-    const defaultOption = variableConfig.options.find((option) => option.default);
-
-    if (!defaultOption) {
-      throw new Error(`No default value found for variable ${variableID} during YAML parse.`);
-    }
-
-    pagePrefs[variableID] = {
-      id: variableID,
-      display_name: variableConfig.display_name,
-      options: variableConfig.options.map((option) => ({
-        id: option.id.toString(),
-        display_name: option.display_name.toString()
-      })),
-      default_value: defaultOption.id.toString()
-    };
-  }
-
-  // Validate the page preferences object
-  PagePrefsSchema.parse(pagePrefs);
-
-  return pagePrefs;
-}
 
 // TODO: Run some validations only in development mode
 export function buildPageDataManifest(p: {
@@ -56,13 +18,13 @@ export function buildPageDataManifest(p: {
     pagePrefs: {}
   };
 
-  // Assign values to variables, and build the chooser data
+  // Assign values to preferences, and build the chooser data
   p.pagePrefsConfig.forEach((prefConfig) => {
     // Replace any bracketed placeholders with the actual pref value
     let prefIdentifier = JSON.parse(JSON.stringify(prefConfig.options_source));
 
     // TODO: Verify ALL possible outcomes for the placeholder -- all should be valid options sets.
-    // Since the referenced param could also have a placeholder, this should be a recursive process.
+    // Since the referenced pref could also have a placeholder, this should be a recursive process.
 
     prefIdentifier = prefIdentifier.replace(GLOBAL_PLACEHOLDER_REGEX, (_match: string, placeholder: string) => {
       const value = pageDataManifest.valuesByParamName[placeholder.toLowerCase()];
