@@ -5920,6 +5920,11 @@ menu:
       url: account_management/org_settings/ip_allowlist
       parent: organization_settings
       weight: 206
+    - name: Cross-Organization Visibility
+      identifier: account_management_org_settings_cross_org_visibility
+      url: account_management/org_settings/cross_org_visibility
+      parent: organization_settings
+      weight: 207
     - name: Access Control
       url: account_management/rbac/
       parent: account_management
