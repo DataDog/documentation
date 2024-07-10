@@ -1920,41 +1920,46 @@ menu:
       parent: error_tracking
       identifier: error_tracking_states
       weight: 2
+    - name: Regression Detection
+      url: error_tracking/regression_detection
+      parent: error_tracking
+      identifier: error_tracking_regression_detection
+      weight: 3
     - name: Default Grouping
       url: error_tracking/default_grouping
       parent: error_tracking
       identifier: error_tracking_default_grouping
-      weight: 3
+      weight: 4
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 4
+      weight: 5
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 5
+      weight: 6
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 6
+      weight: 7
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 7
+      weight: 8
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 9
+      weight: 10
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -4046,7 +4051,7 @@ menu:
       parent: software_delivery_heading
       identifier: code_analysis
       weight: 50000
-    - name: Static Analysis
+    - name: Static Analysis (SAST)
       url: code_analysis/static_analysis
       parent: code_analysis
       identifier: code_analysis_static_analysis
@@ -4071,7 +4076,7 @@ menu:
       parent: code_analysis_static_analysis
       identifier: code_analysis_static_analysis_other_providers
       weight: 104
-    - name: Software Composition Analysis
+    - name: Software Composition Analysis (SCA)
       url: code_analysis/software_composition_analysis
       parent: code_analysis
       identifier: code_analysis_software_composition_analysis
@@ -4091,7 +4096,7 @@ menu:
       parent: code_analysis_software_composition_analysis
       identifier: code_analysis_software_composition_analysis_other_providers
       weight: 203
-    - name: Static Analysis Rules
+    - name: Static Analysis (SAST) Rules
       url: code_analysis/static_analysis_rules
       parent: code_analysis
       identifier: code_analysis_static_analysis_rules
