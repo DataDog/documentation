@@ -513,7 +513,7 @@ After October 1, 2024, the [Get usage across your account][2] endpoint will have
                "id":"abcd",
                "public_id":"abcd",
                "uuid":"abcd",
-               "region":"us"
+               "region":"us",
    // Deprecated intermediate groupings are nulled
                "indexed_events_count_sum": null,
                "live_indexed_events_sum": null,
@@ -526,7 +526,7 @@ After October 1, 2024, the [Get usage across your account][2] endpoint will have
                "id":"abcd",
                "public_id":"abcd",
                "uuid":"abcd",
-               "region":"us"
+               "region":"us",
    // Deprecated intermediate groupings are nulled
                "indexed_events_count_sum": null,
                "live_indexed_events_sum": null,
