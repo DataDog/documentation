@@ -12,7 +12,7 @@ further_reading:
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-py'
       tag: "Source Code"
-      text: '.NET Datadog library source code'
+      text: 'Python Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
