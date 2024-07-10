@@ -29,7 +29,7 @@ You can monitor application security for Python apps running in Docker, Kubernet
 
 NOTE: Code-Level Vulnerability detection in Python is currently in beta.
 
-If your service runs a [tracing library version that supports Vulnerability Management for code-Level vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
+If your service runs a [tracing library version that supports Vulnerability Management for Code-Level vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
 To detect code-level vulnerabilities for your service:
 
