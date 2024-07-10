@@ -18,6 +18,8 @@ further_reading:
 - link: "/code_analysis/static_analysis/"
   tag: "Documentation"
   text: "Learn about Static Analysis"
+algolia:
+  tags: ["static analysis", "static analysis rules", "static application security testing", "SAST"]
 ---
 
 {{% site-region region="gov" %}}

@@ -18,6 +18,8 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
+algolia:
+  tags: ["software composition analysis", "datadog software composition analysis", "library vulnerabilities", "SCA"]
 ---
 
 {{% site-region region="gov" %}}
