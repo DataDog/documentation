@@ -15,4 +15,10 @@ describe('MarkdocToHtmlCompiler', () => {
       './../__snapshots__/prefOptionsConfig.snap.json'
     );
   });
+
+  test('.sitewidePrefNames', () => {
+    expect(JSON.stringify(compiler.sitewidePrefNames, null, 2)).toMatchFileSnapshot(
+      './../__snapshots__/sitewidePrefNames.snap.json'
+    );
+  });
 });

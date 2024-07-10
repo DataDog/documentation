@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { PrefOptionsConfig, PrefOptionsConfigSchema } from './prefs_processing/schemas/yaml/prefOptions';
+import { SitewidePrefIdsConfig, SitewidePrefIdsConfigSchema } from './prefs_processing/schemas/yaml/sitewidePrefs';
 
 function findInDir(dir: string, filter: RegExp, fileList: string[] = []) {
   const files = fs.readdirSync(dir);
@@ -22,14 +23,13 @@ function findInDir(dir: string, filter: RegExp, fileList: string[] = []) {
 
 export class MarkdocToHtmlCompiler {
   prefOptionsConfig: PrefOptionsConfig;
+  sitewidePrefNames: string[] = [];
 
   constructor(p: { preferencesConfigDir: string; contentDirectory: string; partialsDirectory: string }) {
     // ingest the pref options sets
     this.prefOptionsConfig = this.#loadPrefOptionsFromYaml(p.preferencesConfigDir + '/preference_options');
-    // ingest site preference config from file
-    // validate site preference config
-    // ingest page preference options from provided directory
-    // validate page preference options config
+    // ingest sitewide preference names
+    this.sitewidePrefNames = this.#loadValidSitewidePrefNames(p.preferencesConfigDir + '/sitewide_preferences.yaml');
     // register mdoc partials
     // register mdoc files
   }
@@ -63,8 +63,13 @@ export class MarkdocToHtmlCompiler {
   #loadPrefsYamlFromStr(yamlFile: string): PrefOptionsConfig {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent) as PrefOptionsConfig;
-    console.log('Parsed options file YAML:');
-    console.log(JSON.stringify(parsedYaml, null, 2));
     return PrefOptionsConfigSchema.parse(parsedYaml);
+  }
+
+  #loadValidSitewidePrefNames(yamlFile: string): string[] {
+    const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
+    const parsedYaml = yaml.load(yamlFileContent) as SitewidePrefIdsConfig;
+    SitewidePrefIdsConfigSchema.parse(parsedYaml);
+    return parsedYaml.valid_sitewide_preference_identifiers;
   }
 }
