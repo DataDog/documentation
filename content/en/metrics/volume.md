@@ -1,6 +1,6 @@
 ---
 title: Volume
-description: "Understand and manage your custom metrics usage and costs."
+description: "Understand and manage your custom metrics usage and costs with the Volume Management page."
 further_reading:
   - link: "/metrics/summary/"
     tag: "Documentation"
@@ -14,11 +14,6 @@ further_reading:
 
 ---
 
-
-{{< beta-callout url="#" btn_hidden="true">}}
-  Metrics Volume is in <strong>beta</strong>. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
-{{< /beta-callout >}} 
-
 ## Overview
 
 {{< img src="metrics/volume/metrics_volume_overview.png" alt="Metrics Volume page set to a timeframe of the past hour (by default) showing the search, filter, facet and column sorting features available" style="width:100%;" >}}
@@ -27,12 +22,29 @@ Cloud-based applications generate massive amounts of data, which can be overwhel
 
 Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][3], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
+With the Metrics Volume Management page you can quickly answer the following questions in real-time: 
+- What is my overall account's realtime estimated Indexed Custom Metrics usage? (A
+- Out of my realtime estimated Indexed CM usage, how much of this volume comes from Metrics without Limits configured metric names vs not?
+- What is my overall account's realtime estimated Ingested Custom Metrics usage?
+- What are the Top 500 largest Metrics without Limits configured metric names by Ingested Custom Metrics volume?
+- What are the Top 500 largest metric names by Indexed Custom Metrics volume?
+- What are the Top 500 spiking cardinality metric names?
+- Which team owns these Top 500 metric names and is responsible for optimizing?
+
+## Real-time visibility and monitoring on your account's estimated Custom Metrics usage
+Datadog provides you real-time estimated usage metrics OOTB so you can understand and alert on your usage in real-time. You can quickly see a breakdown of: 
+- Your account's indexed custom metrics volume in real-time (and how much of that indexed volume hasn't been optimized with [Metrics without Limits™][3] yet) 
+- Your account's ingested custom metrics (emitted from metrics that have been configured with [Metrics without Limits™][3]) in real-time
+
+{{< img src="metrics/volume/compare_metric_cardinality.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics. On hover over the change in volume, displays the cardinality graph of the metric over the past day" style="width:100%;" >}}
+  
+
 ## Search, filter, and sort
 
 Use the search, filter, and sort features to understand:
-- Which team owns what metric names
-- Which metrics your team should focus its cost optimization efforts on
-- Which metrics have the highest cardinality, and which metrics have the highest increase in volume
+- Which team owns what metric names?
+- Which metrics your team should focus its cost optimization efforts on?
+- Which metrics have the highest cardinality, and which metrics have the highest increase in volume?
 
 The Metric and Tag search bars provide a set of actions to filter the list of metrics. Enter keywords to search metric names. Type in any tag key value pair in the *Filter by Tag Value* box to filter the list by a specific team, application, or service.
 
