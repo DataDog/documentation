@@ -1,5 +1,5 @@
 ---
-title: Using OpenTelemetry Instrumentations with Datadog SDKs
+title: Using OpenTelemetry Instrumentation Libraries with Datadog SDKs
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -10,7 +10,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
       text: 'Learn More about Datadog and the OpenTelemetry initiative'
 algolia:
-  tags: ['otel drop-in instrumentation']
+  tags: ['otel instrumentation']
 ---
 
 [Instrumentation](/tracing/trace_collection/) is the process of adding code to your application to capture and report observability data.
