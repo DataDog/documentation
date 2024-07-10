@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
@@ -6,6 +8,7 @@ assets:
     SAP BusinessObjects overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
     SAP BusinessObjects system dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -15,6 +18,7 @@ assets:
       prefix: agentil_software
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10252
     source_type_name: AGENTIL Software SAP BusinessObjects
 author:
   homepage: https://www.agentil-software.com
@@ -25,6 +29,7 @@ author:
 categories:
 - marketplace
 - sap
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,7 +38,6 @@ integration_id: agentil-software-sap-businessobjects
 integration_title: SAP BusinessObjects
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -58,6 +62,8 @@ tile:
   - Category::SAP
   - Offering::Integration
   - Supported OS::Linux
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: Surveillez vos systèmes SAP BusinessObjects
   media:
@@ -73,6 +79,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## Présentation
@@ -93,7 +100,7 @@ Cette intégration recueille et analyse en temps réel les données provenant de
 - Planifications et rapports
 - CMC et avertissements d'audit
 
-## Assistance
+## Agent
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez AGENTIL Software à l'adresse support@agentil-software.com
 
 *Si vous êtes à la recherche d'un partenaire de confiance pour des intégrations spécifiques avec SAP ou d'autres plateformes, vous êtes au bon endroit. Contactez-nous !*
