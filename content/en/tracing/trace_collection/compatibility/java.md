@@ -119,8 +119,8 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation     | To Enable 									                                                                                                              |
 |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| JAX-WS		                   | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
-| Mulesoft		                 | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
 | Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
 | Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
 | Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                      |
