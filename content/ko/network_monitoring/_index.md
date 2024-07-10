@@ -23,7 +23,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/
   tag: 블로그
   text: Datadog를 사용해 Cilium 관리 인프라스트럭처 모니터링
-kind: 설명서
 title: 네트워크 모니터링
 ---
 

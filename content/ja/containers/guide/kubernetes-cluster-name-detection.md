@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: documentation
   text: カスタムインテグレーション
-kind: documentation
 title: Kubernetes クラスター名の自動検出
 ---
 

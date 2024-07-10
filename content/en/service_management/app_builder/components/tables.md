@@ -1,6 +1,5 @@
 ---
 title: Tables
-kind: documentation
 disable_toc: false
 aliases:
 - /service_management/app_builder/tables/

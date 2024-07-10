@@ -16,7 +16,6 @@ further_reading:
 - link: /service_management/events/explorer
   tag: ドキュメント
   text: イベントエクスプローラーについて
-kind: documentation
 title: Synthetic テストの検索と管理
 ---
 

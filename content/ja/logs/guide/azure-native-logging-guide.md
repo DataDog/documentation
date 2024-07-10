@@ -3,7 +3,6 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: ログの調査方法
-kind: documentation
 title: Datadog リソースによる Azure ログの送信
 ---
 

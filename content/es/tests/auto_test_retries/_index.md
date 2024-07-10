@@ -8,7 +8,6 @@ further_reading:
 - link: /tests/guides/flaky_test_management
   tag: Documentación
   text: Más información sobre Gestión de pruebas defectuosas
-kind: documentación
 title: Reintentos automáticos de pruebas
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Threat Intelligence
-kind: documentation
 aliases:
     - /security/threat_intel
 description: "Threat Intelligence at Datadog"

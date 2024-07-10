@@ -2,7 +2,6 @@
 aliases:
 - /es/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
 description: Utiliza la API de Datadog desde el terminal o el shell
-kind: guía
 title: Dogshell
 ---
 

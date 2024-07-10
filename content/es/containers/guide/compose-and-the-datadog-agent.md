@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/docker/log/
   tag: Documentación
   text: Documentación sobre la recopilación de logs de Datadog Docker
-kind: guía
 title: Compose y el Datadog Agent
 ---
 

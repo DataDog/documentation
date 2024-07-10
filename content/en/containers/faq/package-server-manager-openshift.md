@@ -1,6 +1,5 @@
 ---
 title: Errors during OpenShift upgrade with custom SCCs
-kind: faq
 ---
 
 When upgrading OpenShift Container Platform (OCP) from 4.11 to 4.12 with Datadog installed on your cluster, you may encounter the following error for the `package-server-manager` pod:

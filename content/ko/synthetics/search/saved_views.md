@@ -3,7 +3,6 @@ further_reading:
 - link: /synthetics/search/
   tag: 설명서
   text: 신서틱(Synthetic) 테스트 검색 및 관리 방법 알아보기
-kind: 설명서
 title: 저장된 보기
 ---
 

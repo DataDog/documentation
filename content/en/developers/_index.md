@@ -1,6 +1,5 @@
 ---
 title: Developers
-kind: documentation
 description: Learn how to develop an integration on Datadog.
 aliases:
 - /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog

@@ -105,7 +105,7 @@ Dans l'interface Datadog, cliquez sur **Integrations > Agent** pour accéder à
 Exemple de commande d'installation Ubuntu d'une ligne :
 
 ```shell
-DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Pour obtenir les dernières instructions d'installation, accédez à la [page d'installation de l'Agent][18] pour votre système d'exploitation dans l'application.

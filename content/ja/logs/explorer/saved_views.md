@@ -1,6 +1,5 @@
 ---
 title: 保存ビュー
-kind: documentation
 description: 保存ビューを使用してログエクスプローラーを自動構成する
 further_reading:
   - link: logs/explorer/analytics

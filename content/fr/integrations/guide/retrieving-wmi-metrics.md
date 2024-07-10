@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/how-to-retrieve-wmi-metrics
-kind: guide
+
 title: Récupérer des métriques WMI
 ---
 

@@ -32,7 +32,7 @@ integration_id: ping
 integration_title: Ping
 integration_version: 1.0.2
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ping
 public_title: Ping

@@ -18,7 +18,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: Synthetic テストモニターについて
-kind: documentation
 title: ブラウザテストの概要
 ---
 

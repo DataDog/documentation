@@ -18,7 +18,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/set-and-monitor-slas/
   tag: Blog
   text: Surveiller des services et définir des SLA avec Datadog
-kind: guide
+
 title: Dépanner les alertes de monitor
 ---
 

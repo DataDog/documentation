@@ -15,7 +15,6 @@ further_reading:
 - link: /logs/guide/
   tag: 지침
   text: Datadog을 활용한 로그 수집 추가 지침
-kind: 설명서
 title: 로그 설정
 ---
 

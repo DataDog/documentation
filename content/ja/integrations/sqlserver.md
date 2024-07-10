@@ -43,7 +43,7 @@ integration_id: sql-server
 integration_title: SQL Server
 integration_version: 14.0.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: sqlserver
 public_title: SQL Server

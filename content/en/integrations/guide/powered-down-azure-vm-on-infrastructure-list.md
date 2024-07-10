@@ -1,6 +1,6 @@
 ---
 title: Powered-down Azure VMs on the Infrastructure List
-kind: guide
+
 aliases:
   - /integrations/faq/my-Azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
 further_reading:

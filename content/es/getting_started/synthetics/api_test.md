@@ -25,7 +25,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
   text: Más información sobre los monitores de tests Synthetic
-kind: documentación
 title: Empezando con los tests de API
 ---
 

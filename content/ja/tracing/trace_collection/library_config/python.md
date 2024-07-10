@@ -17,7 +17,6 @@ further_reading:
 - link: tracing/
   tag: 高度な使用方法
   text: 高度な使用方法
-kind: documentation
 title: Python トレーシングライブラリの構成
 type: multi-code-lang
 ---

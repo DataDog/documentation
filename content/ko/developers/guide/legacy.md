@@ -2,7 +2,6 @@
 aliases:
 - /ko/developers/integrations/legacy
 description: Datadog 에이전트 5용 에이전트 점검 생성 방법을 알아봅니다.
-kind: documentation
 title: Datadog 에이전트 5용 에이전트 점검 생성하기
 ---
 이 문서는 에이전트 v6로 대체된 Datadog 에이전트 v5를 위한 에이전트 검사 생성 방법을 설명합니다. v5에 대한 자체 로컬 검사 작성이 가능은 하지만 v5에 대한 새로운 통합은 업스트림으로 간주되지 않습니다. 에이전트 v6에 대한 통합을 만드려면 [새 통합 만들기][1]를 참조하세요.

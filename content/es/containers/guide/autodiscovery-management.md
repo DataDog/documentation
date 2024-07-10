@@ -7,7 +7,6 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentación
   text: Crea y carga una plantilla de integración de Autodiscovery
-kind: guía
 title: Gestión de detección de contenedores
 ---
 

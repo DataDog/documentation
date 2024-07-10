@@ -37,7 +37,7 @@ cascade:
 
 Cloud Cost Management provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify inefficiencies.
 
-{{< img src="cloud_cost/overview.png" alt="Gain insights into your cloud provider's cost and usage on the Cloud Costs Overview page in Datadog" style="width:100%;" >}}
+{{< img src="cloud_cost/overview_1.png" alt="Gain insights into all of your cloud provider's cost and usage on the Cloud Costs Overview page in Datadog" style="width:100%;" >}}
 
 Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Analytics** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
 
@@ -211,7 +211,7 @@ Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integra
 
 ## Use cloud cost data
 
-Visualize infrastructure spend alongside related utilization metrics to spot potential inefficiencies and savings opportunities.
+Visualize infrastructure spend alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities. 
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 
@@ -221,7 +221,7 @@ Optionally, you can programmatically export a timeseries graph of your cloud cos
 
 ## Use daily Datadog cost data
 
-Visualize daily Datadog spending alongside related utilization metrics to spot potential inefficiencies and savings opportunities.
+Visualize daily Datadog spending alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities.
 
 When creating a dashboard, select **Cloud Cost** as the data source for your search query.
 

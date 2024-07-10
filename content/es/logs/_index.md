@@ -45,7 +45,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: Blog
   text: Monitoriza logs de DNS para red y análisis de seguridad
-kind: Documentación
 title: Gestión de logs
 ---
 

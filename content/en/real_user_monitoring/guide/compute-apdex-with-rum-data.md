@@ -1,6 +1,6 @@
 ---
 title: Compute Apdex And Custom Performance Indicators With RUM Data
-kind: guide
+
 description: Guide for computing your Apdex score and custom performance indicators with RUM data
 further_reading:
     - link: '/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm'

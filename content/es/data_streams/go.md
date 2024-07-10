@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Configurar la monitorización de secuencias de datos para Go
 ---
 

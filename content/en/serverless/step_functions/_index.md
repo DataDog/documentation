@@ -1,6 +1,5 @@
 ---
 title: Serverless Monitoring for AWS Step Functions
-kind: documentation
 further_reading:
 - link: "/serverless/step_functions/installation"
   tag: "Documentation"

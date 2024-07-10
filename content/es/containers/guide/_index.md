@@ -1,6 +1,5 @@
 ---
 disable_toc: true
-kind: guía
 private: true
 title: Guías de contenedores
 ---

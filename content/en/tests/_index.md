@@ -1,6 +1,5 @@
 ---
 title: Test Visibility in Datadog
-kind: documentation
 aliases:
   - /continuous_integration/explore_tests/
   - /continuous_integration/guides/test_configurations/

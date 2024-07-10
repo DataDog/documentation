@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
   tag: Blog
   text: Surveiller des applications monopages
-kind: documentation
 title: RUM Explorer
 ---
 

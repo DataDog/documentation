@@ -6,7 +6,6 @@ further_reading:
 - link: /service_management/workflows/actions_catalog/
   tag: Documentación
   text: Catálogo de acciones
-kind: Documentación
 title: Crear aplicaciones
 ---
 

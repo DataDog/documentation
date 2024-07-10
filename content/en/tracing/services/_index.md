@@ -1,6 +1,5 @@
 ---
 title: Service Observability
-kind: documentation
 description: 'Use Datadog to monitor, troubleshoot, and manage your services'
 further_reading:
     - link: 'getting_started/tagging/unified_service_tagging/'

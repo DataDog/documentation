@@ -8,7 +8,6 @@ further_reading:
   tag: Documentation
   text: En savoir plus sur l'explorateur de surveillance Synthetic et de tests en
     continu
-kind: documentation
 title: Rechercher des lots de tests
 ---
 

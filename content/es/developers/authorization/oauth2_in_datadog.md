@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/oauth2_endpoints
   tag: Documentación
   text: Aprende a utilizar los endpoints de autorización OAuth 2.0
-kind: documentación
 title: OAuth2 en Datadog
 ---
 
