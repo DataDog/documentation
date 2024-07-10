@@ -22,13 +22,21 @@ This provides observability for libraries not originally covered by Datadog SDKs
 
 ## Language support
 
+| Language | Minimum version required |
+|----------|--------------------------|
+| Java     | v1.35.0                  |
+| Go       |                          |
+| Python   |                          |
+| Ruby     |                          |
+| Node.js  |                          |
+| PHP      |                          |
+| .NET     |                          |
+
 {{< tabs >}}
 
 {{% tab "Java" %}}
 
 ## Compatibility requirements
-
-Support for adding OpenTelemetry automatic instrumentations at runtime was introduced in v1.35.0 of Datadog's SDK for Java.
 
 Each instrumentation should be packaged as an OpenTelemetry [extension](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md).
 The SDK also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main)
