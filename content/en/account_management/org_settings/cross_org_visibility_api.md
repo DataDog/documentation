@@ -1,10 +1,9 @@
 ---
 title: Cross-Organization Connections API
-is_beta: true
 ---
 
-{{< callout url="#" header="false" btn_hidden="true">}}
-  Note: Cross-organization visibility is in beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+{{< callout url="#" btn_hidden="true">}}
+  Cross-organization visibility is in beta.
 {{< /callout >}} 
 
 [Cross-organization visibility][1] allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
