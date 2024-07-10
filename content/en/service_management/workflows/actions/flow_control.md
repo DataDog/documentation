@@ -32,7 +32,7 @@ The **Sleep** action pauses the execution of the workflow for a specified durati
 
 ## Iteration
 
-The **For each** action allows you to execute a specific action iteratively for each element in a given input list. It enables you to automate repetitive tasks by applying the same action to multiple items within a list.
+The **For Loop** action allows you to execute a set of actions iteratively for each element in a given input list.
 
 {{< img src="service_management/workflows/iteration.png" alt="An example of an interation step." style="width:100%;" >}}
 
