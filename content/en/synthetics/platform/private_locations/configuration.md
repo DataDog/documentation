@@ -178,9 +178,10 @@ Overrides the port for the private location status probes.
 
 `--config`
 : **Type**: String <br>
-**Default**: `/etc/datadog/synthetics-check-runner.json`<br>
+**Default**: `/etc/datadog/synthetics-check-runner.json`</br>
+**Windows**: `C:\ProgramData\Datadog-Synthetics\worker-config.json`</br>
 Path to the JSON configuration file.
-
+ 
 `--proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>

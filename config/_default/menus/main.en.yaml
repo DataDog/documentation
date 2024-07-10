@@ -1920,41 +1920,46 @@ menu:
       parent: error_tracking
       identifier: error_tracking_states
       weight: 2
+    - name: Regression Detection
+      url: error_tracking/regression_detection
+      parent: error_tracking
+      identifier: error_tracking_regression_detection
+      weight: 3
     - name: Default Grouping
       url: error_tracking/default_grouping
       parent: error_tracking
       identifier: error_tracking_default_grouping
-      weight: 3
+      weight: 4
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 4
+      weight: 5
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 5
+      weight: 6
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 6
+      weight: 7
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 7
+      weight: 8
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 9
+      weight: 10
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -5915,6 +5920,11 @@ menu:
       url: account_management/org_settings/ip_allowlist
       parent: organization_settings
       weight: 206
+    - name: Cross-Organization Visibility
+      identifier: account_management_org_settings_cross_org_visibility
+      url: account_management/org_settings/cross_org_visibility
+      parent: organization_settings
+      weight: 207
     - name: Access Control
       url: account_management/rbac/
       parent: account_management
