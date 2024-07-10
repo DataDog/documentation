@@ -19,7 +19,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Static Analysis"
 algolia:
-  tags: ["static analysis", "static analysis rules", "static application security testing", "SAST"]
+  tags: ['software composition analysis', 'software composition analysis rules', 'library vulnerabilities', 'SCA']
 ---
 
 {{% site-region region="gov" %}}

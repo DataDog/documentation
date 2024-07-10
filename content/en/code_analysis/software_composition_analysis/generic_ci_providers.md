@@ -7,7 +7,7 @@ further_reading:
   tag: "Blog"
   text: "Monitor all your CI pipelines with Datadog"
 algolia:
-  tags: ["software composition analysis", "ci pipeline", "SCA"]
+  tags: ['software composition analysis', 'ci pipeline', 'SCA']
 ---
 
 {{% site-region region="gov" %}}

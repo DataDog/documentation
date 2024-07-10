@@ -7,7 +7,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Datadog IDE Plugins"
 algolia:
-  tags: ["code analysis", "datadog code analysis", "static analysis", "ide plugins"", "SAST"]
+  tags: ['code analysis', 'datadog code analysis', 'static analysis', 'ide plugins', 'SAST']
 ---
 
 ## Overview

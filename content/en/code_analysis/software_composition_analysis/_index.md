@@ -19,7 +19,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
 algolia:
-  tags: ["software composition analysis", "datadog software composition analysis", "library vulnerabilities", "SCA"]
+  tags: ['software composition analysis', 'datadog software composition analysis', 'library vulnerabilities', 'SCA']
 ---
 
 {{% site-region region="gov" %}}

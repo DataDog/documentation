@@ -19,7 +19,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Software Composition Analysis"
 algolia:
-  tags: ["code analysis", "datadog code analysis", "static analysis", "software composition analysis", "SAST", "SCA"]
+  tags: ['code analysis', 'datadog code analysis', 'static analysis', 'software composition analysis', 'SAST', 'SCA']
 ---
 
 {{% site-region region="gov" %}}
