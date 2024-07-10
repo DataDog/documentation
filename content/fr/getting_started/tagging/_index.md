@@ -18,8 +18,9 @@ further_reading:
   tag: Documentation
   text: Apprendre à assigner des tags
 - link: https://dtdg.co/fe
-  tag: Validation des bases&
+  tag: Validation des bases
   text: Participer à une session interactive sur le tagging efficace avec Datadog
+kind: documentation
 title: Débuter avec les tags
 ---
 
@@ -101,14 +102,16 @@ Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous ass
 | [Intégrations][15]   | Définir des limites facultatives pour AWS, Google Cloud et Azure.                                        |
 | [APM][16]            | Filtrer des services, traces et profils ou accéder à d'autres sections avec la Service Map           |
 | [RUM et Session Replay][17] | Filtrer des recherches d'événements, des analyses, des patterns, des replays et des problèmes avec le RUM Explorer        |
-| [Synthetics][18]     | Filtrer et regrouper des tests Synthetic ou des tests s'exécutant dans des pipelines CI avec le CI Results Explorer   |
+| [Surveillance Synthetic et tests en continu][18]     | Filtrer et regrouper des tests Synthetic ou des tests s'exécutant dans des pipelines CI avec la surveillance Synthetic et les tests en continu   |
 | [Notebooks][19]      | Filtrer et regrouper des métriques dans des graphiques                                                               |
 | [Logs][20]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines.                                |
 | [SLO][21]           | Rechercher des SLO ainsi que des SLO groupés basés sur des métriques ou sur des monitors                       |
 | [Outils de développement][22]     | Récupérer des informations ou configurer différentes sections dans l'interface avec l'API.                                 |
 | [Facturation][23]        | Obtenir des informations sur votre utilisation de Datadog en choisissant jusqu'à trois tags, tels que `env`, `team`, et `account_id`. |
+| [CI Visibility][24]  | Filtrez et regroupez les exécutions de tests ou de pipelines avec l'explorer CI Visibility. |
 
 Pour en savoir plus, consultez la section [Utiliser les tags][1].
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -136,3 +139,4 @@ Pour en savoir plus, consultez la section [Utiliser les tags][1].
 [21]: /fr/getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [22]: /fr/getting_started/tagging/using_tags/#developers
 [23]: /fr/account_management/billing/usage_attribution/
+[24]: /fr/getting_started/tagging/using_tags/#ci-visibility
