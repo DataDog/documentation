@@ -8,15 +8,15 @@ code_lang_weight: 50
 
 The following application security capabilities are supported in the Python library, for the specified tracer version:
 
-| Application Security capability  | Minimum Python tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection | 1.9.0   |
-| Threat Protection | 1.10.0  |
-| Customize response to blocked requests | 1.19.0 |
-| Software Composition Analysis (SCA) | 1.5.0  |
-| Code Security         |  private beta  |
-| Automatic user activity event tracking | 1.17.0 |
-| API Security | 2.6.0 |
+| Application Security capability        | Minimum Python tracer version |
+|----------------------------------------|-------------------------------|
+| Threat Detection                       | 1.9.0                         |
+| Threat Protection                      | 1.10.0                        |
+| Customize response to blocked requests | 1.19.0                        |
+| Software Composition Analysis (SCA)    | 1.5.0                         |
+| Code Security (Beta)                   | 2.10.0                        |
+| Automatic user activity event tracking | 1.17.0                        |
+| API Security                           | 2.6.0                         |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
