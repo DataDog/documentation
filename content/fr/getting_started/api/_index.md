@@ -3,6 +3,7 @@ aliases:
 - /fr/developers/faq/using-postman-with-datadog-apis
 - /fr/getting_started/using-postman-with-datadog-apis
 - /fr/developers/guide/using-postman-with-datadog-apis
+kind: documentation
 title: Utiliser Postman avec les API Datadog
 ---
 
@@ -32,8 +33,7 @@ Commencez par [vous connecter à Postman][4]. Datadog recommande de [télécharg
 data-postman-action="collection/fork"
 data-postman-visibility="public"
 data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
-data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -46,21 +46,27 @@ data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsIn
 
 </br>Cette collection fonctionne dans l'interface Web ou l'application de Postman. Son chargement peut prendre quelques secondes.
 
+**Remarque** : configurez les **variables de collection** de la collection dʼ'API Datadog avec les valeurs de votre API et de votre clé d'application.
+
 ### Configuration de l'environnement Postman
 
 Après avoir importé la collection Postman, la liste complète des appels d'API Datadog disponibles s'affiche. Elle est arrangée par dossier dans le volet de gauche de Postman.
 
 #### Authentification
 
-La collection comprend un [environnement Postman][6] du nom de `Datadog Authentication`, au sein duquel vous pouvez ajouter votre clé d'API Datadog et des clés d'application pour l'authentification.
+Ajoutez votre API Datadog et vos clés d'application aux [variables de collection][6] pour vous authentifier.
 
 Suivez ces étapes pour configurer votre environnement :
 
-1. Cliquez sur le menu déroulant **Environments** en haut à droite de Postman. Si aucun environnement n'est sélectionné, l'option `No Environment` est affichée.
+1. Sélectionnez la collection dʼAPI Datadog.
 
-2. Sélectionnez **Datadog Authentication**.
+2. Cliquez sur l'onglet **Variables**.
 
-3. Modifiez l'environnement **Datadog Authentication** en ajoutant votre [clé d'API][2] Datadog en tant que valeur initiale et actuelle de la variable `api_key`. Ajoutez également votre [clé d'application][2] Datadog en tant que valeur initiale et actuelle de la variable `application_key`.
+3. Ajoutez vos clés d'application et d'API Datadog valides dans le champ **Current value** des variables `api_key` et `application_key`, respectivement.
+
+4. Cliquez sur **Save**.
+
+{{< img src="getting_started/postman/collection_variables.png" alt="La collection dʼAPI Datadog avec les variables de collection api_key et application_key configurées" style="width:100%;">}}
 
 #### Changer l'endpoint de l'API
 
@@ -110,6 +116,6 @@ Cet onglet remplace l'affichage de la structure `param1:value1&param2:value2` de
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
-[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[6]: https://learning.postman.com/docs/sending-requests/variables/variables/#defining-collection-variables
 [7]: /fr/api/latest/#api-reference
 [8]: /fr/api/
