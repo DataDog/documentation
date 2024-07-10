@@ -157,7 +157,7 @@ In contrast, **unblended** cost metrics show all charges on the date that they a
 
 In contrast, other metrics show private discounts as separate, negative-valued line items with no resource attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
 
-**Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account lacks negotiated enterprise discounts, the **Net Amortized** Cost will be equivalent to the **Amortized** Cost value.
+**Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account lacks negotiated enterprise discounts, the **Net Amortized** Cost will be equivalent to the **Amortized** Cost.
 
 ### Container allocation
 **Container allocation** metrics contain all of the same costs as the AWS metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][11] for more details.
