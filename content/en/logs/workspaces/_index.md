@@ -141,7 +141,7 @@ This example workspace has:
 
 This diagram shows the different transformation and analysis cells the data sources go through.
 
-{{< img src="logs/workspace/flowchart.png" alt="A flowchart showing the steps that the data sources go through" style="width:60%;"  >}}
+{{< img src="logs/workspace/flowchart_1.png" alt="A flowchart showing the steps that the data sources go through" style="width:100%;"  >}}
 
 ### Example walkthrough
 
