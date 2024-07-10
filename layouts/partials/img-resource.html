@@ -3,8 +3,8 @@
 {{- with resources.Get .src -}}
 {{- $full_permalink := ( . | resources.Fingerprint "md5").RelPermalink }}
 
-
-{{- $full_permalink = replace $full_permalink "$CI_COMMIT_REF_NAME/" ""}}
+{{- $p := (print $dot.Site.Params.branch "/") -}}
+{{- $full_permalink = replace $full_permalink $p ""}}
 
 
 {{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $full_permalink -}}
