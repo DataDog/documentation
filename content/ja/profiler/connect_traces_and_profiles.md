@@ -11,7 +11,6 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-kind: ドキュメント
 title: 遅いトレースやエンドポイントを調査する
 ---
 
@@ -66,13 +65,13 @@ Java Flight Recorder (JFR) の代わりに <a href="/profiler/enabling/java/?tab
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Code Hotspots (ベータ版) の識別は、[Node.js サービスのプロファイリングを有効にする][1] と、デフォルトでは有効になりません。この追加の環境変数を設定することで有効になります。
+Linux と macOS で [Node.js サービスのプロファイリングを有効にする][1]と、Code Hotspots の識別がデフォルトで有効になります。Windows ではこの機能は利用できません。
 
-```shell
-export DD_PROFILING_CODEHOTSPOTS_ENABLED=true
-```
+`dd-trace-js` のバージョン 5.0.0 以降、4.24.0 以降または 3.45.0 以降が必要です。
 
-`dd-trace-js` のバージョン 4.17.0 以降または 3.38.0 以降が必要です。
+[タイムライン機能](#span-execution-timeline-view) (ベータ版) を有効にするには
+- `dd-trace-js` 5.1.0 以降、4.25.0 以降または 3.46.0 以降にアップグレードします
+- `DD_PROFILING_TIMELINE_ENABLED=1` を設定します
 
 [1]: /ja/profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -120,6 +119,10 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 `dd-trace-php` のバージョン 0.71 以上が必要です。
 
+[タイムライン機能](#span-execution-timeline-view) (ベータ版) を有効にするには
+- `dd-trace-php` をバージョン 0.89 以上にアップグレードしてください。
+- 環境変数 `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=1` または INI 設定 `datadog.profiling.experimental_timeline_enabled=1` を設定します
+
 [1]: /ja/profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -129,7 +132,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 各トレースのビューから、選択したスパンの範囲内のプロファイリングデータが Code Hotspots タブに表示されます。
 
 左側の値は、選択されたスパンの間にそのメソッド呼び出しに費やされた時間を表します。ランタイムと言語によって、カテゴリーは異なります。
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 - **CPU** は、CPU タスクを実行するのに費やした時間を示します。
 - **Synchronization** は、モニター待ちの時間、スレッドがスリープしている時間、パークしている時間などを表示します。
@@ -146,6 +149,10 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 - **CPU** は、CPU タスクを実行するのに費やした時間を示します。
+- **Uncategorized** は、CPU 実行以外のスパン実行に要した時間を表示します。
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+- **CPU** は、CPU タスクの実行にかかった時間を示します。Node.js experimental CPU プロファイラーで収集されたプロファイルにのみ表示されます。
 - **Uncategorized** は、CPU 実行以外のスパン実行に要した時間を表示します。
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -179,15 +186,15 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 ランタイムや言語によって、レーンは異なります。
 
-{{< programming-lang-wrapper langs="java,go,ruby,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
+各レーンは**スレッド**を表しています。共通のプールからのスレッドはまとめてグループ化されています。プールを展開することで、各スレッドの詳細を確認できます。
 
 上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
 
 タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [プロファイリングでリクエストの遅延を理解する][1]を参照してください。
 
-[1]: https://richardstartin.github.io/posts/wallclock-profiler
+[1]: https://www.datadoghq.com/blog/request-latency-profiling/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 各レーンは **goroutine** を表します。これには、選択されたスパンを開始した goroutine と、その goroutine が作成した goroutine とその子孫が含まれます。同じ `go` ステートメントで作成された goroutine はグループ化されます。グループを展開して各 goroutine の詳細を見ることができます。
@@ -206,7 +213,21 @@ Ruby でこの機能を有効にする方法については、[前提条件](#pr
 {{< programming-lang lang="dotnet" >}}
 各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
 
-上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
+上部のレーンは、余分なレイテンシーを追加する可能性のあるランタイムアクティビティを表しています。これらはリクエスト自体に関係ないこともあります。
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+Node.js でこの機能を有効にする方法については、[前提条件](#prerequisites)を参照してください。
+
+JavaScript の**スレッド**には 1 つのレーンがあります。
+
+上のレーンはガベージコレクターの**ランタイムアクティビティ**で、リクエストに余分なレイテンシーを追加する可能性があります。
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+PHP でこの機能を有効にする方法については、[前提条件](#prerequisites)を参照してください。
+
+PHPの**スレッド**には 1 つのレーンがあります。この**スレッド**で実行されるファイバーは、グループ化された別々のレーンで表されます。
+
+上部のレーンは、ファイルのコンパイルやガベージコレクションによりリクエストのレイテンシーが増加する可能性のあるランタイムアクティビティを表しています。
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -260,18 +281,11 @@ Ruby でこの機能を有効にする方法については、[前提条件](#pr
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-エンドポイントのプロファイリング (ベータ版) は、[Node.js サービスのプロファイリングを有効にする][1] と、デフォルトでは有効になりません。この追加の環境変数を設定することで有効になります。
+Linux と macOS で [Node.js サービスのプロファイリングを有効にする][1]と、エンドポイントプロファイリングがデフォルトで有効になります。Windows ではこの機能は利用できません。
 
-```shell
-export DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true
-```
-
-この環境変数を設定すると、エンドポイントのプロファイリングに必要な [Code Hotspots (ベータ版)][2] も有効になります。
-
-`dd-trace-js` のバージョン 4.17.0 以降または 3.38.0 以降が必要です。
+`dd-trace-js` のバージョン 5.0.0 以降、4.24.0 以降または 3.45.0 以降が必要です。
 
 [1]: /ja/profiler/enabling/nodejs
-[2]: /ja/profiler/connect_traces_and_profiles/?code-lang=nodejs#identify-code-hotspots-in-slow-traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -319,6 +333,6 @@ CPU やウォールタイムなどの貴重なリソースを消費している�
 
 {{< img src="profiler/endpoint_per_request.mp4" alt="リクエストごとに多くのリソースを使用し始めたエンドポイントのトラブルシューティング" video=true >}}
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

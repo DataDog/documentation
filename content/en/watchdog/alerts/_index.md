@@ -1,6 +1,5 @@
 ---
 title: Watchdog Alerts
-kind: documentation
 ---
 
 ## Overview
@@ -74,18 +73,26 @@ All log anomalies are surfaced as [Insights][3] in the Log Explorer, matching th
 Log anomalies that Watchdog determines to be particularly `severe` are surfaced in the [Watchdog Alert Explorer][1] and can be alerted on by setting up a [Watchdog logs monitor][2].
 A `severe` anomaly is defined as:
 
-* containing error logs
-* lasting at least 10 minutes (to avoid transient errors)
-* having a significant increase (to avoid small increases)
+* Containing error logs.
+* Lasting at least 10 minutes (to avoid transient errors).
+* Having a significant increase (to avoid small increases).
+* Having a low `noise` score (to avoid having a lot of alerts for a given service). The `noise` score is calculated at the service level by:
+    * Looking at the number of error patterns (the higher, the noisier).
+    * Computing how close the patterns are to each other (the closer, the noisier).
 
 #### Required data history
 
 Watchdog requires some data to establish a baseline of expected behavior. For log anomalies, the minimum history is 24 hours. 
 Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history. 
 
+#### Disabling log anomaly detection
+
+To disable log anomaly detection, go to the [Log Management pipeline page][4] and click the Log Anomalies toggle.
+
 [1]: https://app.datadoghq.com/watchdog
 [2]: /monitors/types/watchdog/
 [3]: /watchdog/insights?tab=logmanagement#explore-insights
+[4]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "APM" %}}
 
@@ -100,6 +107,22 @@ Watchdog filters out barely-used endpoints or services to reduce noise and avoid
 #### Required data history
 
 Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
+
+{{% /tab %}}
+{{% tab "USM" %}}
+
+Watchdog scans all services and resources to look for anomalies on the following metrics:
+
+  * Error rate
+  * Latency
+  * Hits (request rate)
+
+Watchdog filters out minimally-used endpoints and services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is ignored. 
+
+#### Required data history
+
+Watchdog requires data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
 Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 {{% /tab %}}
@@ -154,7 +177,7 @@ Watchdog uses the same seasonal algorithms that power monitors and dashboards. T
 
 ## Where to find Watchdog Alerts
 
-Watchdog Alerts appear in three places within Datadog:
+Watchdog Alerts appear in the following places within Datadog:
 
 * The [Watchdog Alert Explorer][1]
 * On any individual [APM Service Page][3]

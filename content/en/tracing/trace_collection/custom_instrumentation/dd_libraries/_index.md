@@ -1,6 +1,5 @@
 ---
 title: Custom Instrumentation with Datadog Libraries
-kind: documentation
 type: multi-code-lang
 description: 'Customize your instrumentation and observability within your Datadog traces.'
 aliases:
@@ -29,7 +28,7 @@ algolia:
   tags: ['apm custom instrumentation']
 ---
 
-Custom instrumentation allows programmatic creation, modification, or deletion of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding any desired [span tags][1].
+Custom instrumentation allows programmatic creation, modification, or deletion of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding any desired span tags.
 
 Before instrumenting your application, review Datadog's [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
 
@@ -45,7 +44,6 @@ If you use an open standard to instrument your code, see [Instrumenting with Ope
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
 [2]: /tracing/glossary
 [3]: /tracing/trace_collection/opentracing/
 [4]: /tracing/trace_collection/otel_instrumentation

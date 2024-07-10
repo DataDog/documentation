@@ -130,8 +130,8 @@ DOMReady(doOnLoad);
 function getVisibleParentPath(ancestralEl, path){
     // returns the closest visible parent path
     // of a child path not visible in the left nav (anything more than 4 levels deep)
-
-    let el = document.querySelector(`${ancestralEl} [data-path="${path}"]`)
+    
+    let el = document.querySelector(`${ancestralEl} [data-path="${path}"][data-skip="false"]`)
     // account for preview branch name in url
     let endIdx = env === 'preview' ? 6 : 4
 
@@ -169,6 +169,7 @@ function getPathElement(event = null) {
     let path = window.location.pathname;
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
 
+    // remove active class from all sidenav links to close all open menus
     for (let i = 0; i < activeMenus.length; i++) {
         activeMenus[i]?.classList.remove('active');
     }
@@ -410,11 +411,8 @@ window.addEventListener(
     'popstate',
     function (event) {
         setMobileNav();
-        if (event.state) {
-            loadPage(window.location.href);
-            closeNav();
-            getPathElement();
-        }
-    },
-    false
+        loadPage(window.location.href);
+        closeNav();
+        getPathElement();
+    }
 );

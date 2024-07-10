@@ -13,11 +13,10 @@ further_reading:
   text: Recopilar tus trazas
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentación
-  text: Obtén más información sobre la arquitectura del Agent
-- link: /agent/guide/network#configure-ports
+  text: Más información sobre la arquitectura del Agent
+- link: /agent/configuration/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 platform: Amazon Linux
 title: Uso básico del Agent para Amazon Linux
 ---
@@ -28,16 +27,16 @@ En esta página se describen las funciones básicas del Datadog Agent para Amazo
 
 Los paquetes están disponibles para arquitecturas x86 de 64 bits y Arm v8. Para otras arquitecturas, utiliza la instalación de origen.
 
-## Commandos
+## Comandos
 
 En las versiones 6 y 7 del Agent, el gestor de servicios proporcionado por el sistema operativo es el responsable del ciclo de vida del Agent; sin embargo, para ejecutar otros comandos, hay que hacerlo directamente a través del archivo binario del Agent. En la versión 5 del Agent, por el contrario, casi todo se hace a través del gestor de servicios.
 
 {{< tabs >}}
 {{% tab "Agent v6 y v7" %}}
 
-### Amazon Linux 2, Amazon Linux 2022/2023
+### Amazon Linux 2, Amazon Linux 2022/2023
 
-<div class="alert alert-info">Para instalar Amazon Linux 2022/2023 en las versiones del Agent 6.39/7.39 (o anteriores), es necesario el paquete <code>libxcrypt-compat</code>. Para instalar este paquete, ejecuta:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre></div>
+<div class="alert alert-info">Para instalar Amazon Linux 2022/2023 en las versiones del Agent 6.39/7.39 (o anteriores), es necesario el paquete <code>libxcrypt-compat</code>. Para instalar este paquete, ejecuta:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre></div>
 
 | Descripción                        | Comando                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -90,7 +89,7 @@ En las versiones 6 y 7 del Agent, el gestor de servicios proporcionado por el s
 ## Configuración
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{% tab "Agent v6 y v7" %}}
 Los archivos y carpetas de configuración del Agent se encuentran en:
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -115,20 +114,71 @@ Archivos de configuración para las [integraciones][1]:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Desinstalar el Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 y v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+Este comando borra el Agent, pero no elimina:
+* El archivo de configuración `datadog.yaml`
+* Los archivos que ha creado el usuario en la carpeta de configuración `/etc/datadog-agent`
+* Los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`
+* El usuario `dd-agent`
+* Archivos de log de Datadog
+
+Si también quieres eliminar estos elementos, ejecuta este comando después de eliminar el Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+Este comando borra el Agent, pero no elimina:
+
+* El archivo de configuración `datadog.yaml`
+* Los archivos que ha creado el usuario en la carpeta de configuración `/etc/dd-agent`
+* Los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`
+* El usuario `dd-agent`
+* Archivos de log de Datadog
+
+Si también quieres eliminar estos elementos, ejecuta este comando después de eliminar el Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Solucionar problemas
 
-Consulta la [documentación sobre cómo solucionar problemas relacionados con el Agent][2].
+Consulta la [documentación sobre cómo solucionar problemas del Agent][2].
 
 ## Trabajar con el Agent integrado
 
-El Agent tiene un entorno Python integrado en `/opt/datadog-agent/embedded/`. Los sistemas binarios comunes como `python` y `pip` se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
+El Agent tiene un entorno de Python integrado en `/opt/datadog-agent/embedded/`. Los archivos binarios comunes, como `python` y `pip`, se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
 
-Si deseas obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][3].
+Si quieres obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][3].
 
-
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aws
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [2]: /es/agent/troubleshooting/
 [3]: /es/developers/guide/custom-python-package/

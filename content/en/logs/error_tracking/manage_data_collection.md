@@ -1,6 +1,5 @@
 ---
 title: Manage Data Collection
-kind: documentation
 is_beta: true
 private: true
 description: Learn how to control costs in Error Tracking.
@@ -12,8 +11,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Learn about Error Tracking for Backend Services'
 ---
-
-<div class="alert alert-info">Error Tracking Logs is beta.</div>
 
 ## Overview
 

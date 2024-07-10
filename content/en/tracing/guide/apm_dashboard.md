@@ -1,6 +1,6 @@
 ---
 title: Create a Dashboard to track and correlate APM metrics
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -11,9 +11,6 @@ further_reading:
 - link: "/tracing/guide/slowest_request_daily/"
   tag: "3 mins"
   text: "Debug the slowest trace on the slowest endpoint of a web service"
-- link: "/tracing/guide/add_span_md_and_graph_it/"
-  tag: "7 mins"
-  text: "Add span tags and filter and group your application performance"
 - link: "/tracing/guide/"
   tag: ""
   text: "All guides"
@@ -21,7 +18,7 @@ further_reading:
 
 _4 minutes to complete_
 
-{{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/apm_dashboard/dashboard_7_cropped.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
 
 Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
 You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
@@ -37,13 +34,13 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 2. **Find the Total Requests Graph** and click on the `export` button on the top right to choose `Export to Dashboard`. **Click `New Timeboard`**.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_2.png" alt="dashboard 2" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_2_cropped.png" alt="dashboard 2" style="width:90%;">}}
 
 3. **Click on `View Dashboard`** in the success message.
 
     In the new dashboard, the `Hit/error count on service` graph for the `web-store` service is now available. It shows the entire throughput of this service as well as its total amount of errors.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_3_cropped.png" alt="dashboard 3" style="width:90%;">}}
 
     **Note**: You can click on the pencil icon to edit this graph and see what precise metrics are being used.
 
@@ -89,7 +86,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     This example shows how to query the latency across the example application: breaking it down by merchants on the platform and view the top-10 merchants with highest latency. From the Analytics screen, export the graph to the dashboard and view it there:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_6_cropped.mp4" video="true" alt="dashboard 6" style="width:90%;">}}
 
 8. **Return to your dashboard**.
 
@@ -99,29 +96,25 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 9. **Click on the `Search Events or Logs`** button and add search for a relevant event explorer. **Note**: in this example Ansible is used, your [event explorer][5] might be different.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_1_cropped.png" alt="dashboard 1" style="width:90%;">}}
 
     Here, alongside the view of our dashboard, recent events that have happened (in datadog or in external services like Ansible, Chef, etc.) can be seen such as: deployments, task completions, or monitors alerting. These events can then be correlated to what is happening to the metrics setup in the dashboard.
 
-    Finally, make sure to use template variables. These are a set of values that dynamically control the widgets on the dashboards that every users can use without having to edit the widgets themselves.
+    Finally, make sure to use template variables. These are a set of values that dynamically control the widgets on the dashboards that every user can use without having to edit the widgets themselves. For more information, see the [Template Variable][6] documentation.
 
-10. **Click on `Add Template Variables`** in the control panel. **Click `Add Variable +`**, name the template variable and choose the tag that the variable will control.
+10. Click on **Add Variable** in the header. Choose the tag that the variable will control, and configure its name, default value, or available values.
 
     In this example a template variable for `Region` is added to see how the dashboard behaves across `us-east1` and `europe-west-4`, out two primary areas of operation.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_8.mp4" alt="dashboard 8" video="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable_cropped.png" alt="Add Variable popover showing field options to add variable name and variable tags" style="width:90%;">}}
 
     You can now add this template variable to each of the graphs:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_9.png" alt="dashboard 9" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_dynamic_template_variable.png" alt="Add dynamic template variables to your query, this example shows '$RG' to dynamically scope to the region template variable" style="width:90%;">}}
 
-    When you change the value in the control panel, all values update in the dashboard:
+    When you select template variable values, all values update in the applicable widgets of the dashboard.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="dashboard 10" video="true" style="width:90%;">}}
-
-    Be sure to explore all the metrics available to you and take full advantage of the Datadog 3 pillars of observability. You can turn this basic dashboard into a powerful tool that is a one-stop-shop for monitoring and observability in your organization:
-
-    {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
+    Be sure to explore all the metrics available to you and take full advantage of the Datadog 3 pillars of observability. You can turn this basic dashboard into a powerful tool that is a one-stop-shop for monitoring and observability in your organization.
 
 ## Further Reading
 
@@ -132,3 +125,4 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 [3]: /tracing/metrics/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [5]: /events/
+[6]: /dashboards/template_variables/

@@ -47,6 +47,10 @@ platforms:
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macosx.png"
     category: "macOS"
+  - name: Oracle
+    link: "agent/basic_agent_usage/oracle/"
+    image: "platform_oracle.png"
+    category: "Linux"  
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
     image: "platform_puppet.png"
@@ -74,6 +78,10 @@ platforms:
   - name: windows
     link: "agent/basic_agent_usage/windows/"
     image: "platform_windows.png"
+    category: "Windows"
+  - name: sccm
+    link: "agent/basic_agent_usage/sccm/"
+    image: "platform_sccm.png"
     category: "Windows"
   - name: source
     link: "agent/basic_agent_usage/source/"

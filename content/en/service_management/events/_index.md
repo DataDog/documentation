@@ -1,6 +1,5 @@
 ---
 title: Event Management
-kind: documentation
 is_beta: true
 aliases:
 - /guides/eventcorrelation/
@@ -19,15 +18,16 @@ further_reading:
 - link: "https://app.datadoghq.com/event/configuration/quick-start"
   tag: "App"
   text: "Quick Start Guide"
+- link: "https://www.datadoghq.com/blog/datadog-event-management"
+  tag: "Blog"
+  text: "Aggregate, correlate, and act on alerts faster with AIOps-powered Event Management"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Event Management is not supported for this site.</div>
 {{< /site-region >}}
 
-{{< callout url="https://app.datadoghq.com/event/configuration/quick-start" btn_hidden="false" header="Join the Beta!">}}
-Join the Event Management beta to correlate Datadog and third party alerts, change events into actionable insights, centralize investigations, and manage critical issues faster as a team. Read the <a href="https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#event-management">announcement</a> to learn more.
-{{< /callout >}}
+{{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
 
 ## Overview
 
@@ -39,8 +39,11 @@ More than 100 Datadog integrations support events collection, including [Kuberne
 
 {{< whatsnext desc="Event Management features:">}}
     {{< nextlink href="/service_management/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - Aggregate and view events coming into Datadog{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
+     {{< nextlink href="/service_management/events/pipelines_and_processors/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
+    {{< nextlink href="/service_management/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigure and the number of tickets/notifictions you recieve {{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 ## Further Reading

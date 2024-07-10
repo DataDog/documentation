@@ -34,10 +34,9 @@ integration_id: bottomline-recordandreplay
 integration_title: 'Bottomline の Record and Replay: Mainframe'
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: bottomline_recordandreplay
-oauth: {}
 public_title: 'Bottomline の Record and Replay: Mainframe'
 short_description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
 supported_os:

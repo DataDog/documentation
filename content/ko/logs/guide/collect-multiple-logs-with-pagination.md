@@ -15,7 +15,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: 설명서
   text: 무제한 로깅*
-kind: guide
+
 title: 페이지네이션으로 여러 로그 수집
 ---
 

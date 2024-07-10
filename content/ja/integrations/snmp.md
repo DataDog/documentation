@@ -40,12 +40,11 @@ draft: false
 git_integration_title: snmp
 integration_id: snmp
 integration_title: SNMP
-integration_version: 5.12.0
+integration_version: 6.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp
-oauth: {}
 public_title: SNMP
 short_description: ネットワークデバイスから SNMP メトリクスを収集。
 supported_os:

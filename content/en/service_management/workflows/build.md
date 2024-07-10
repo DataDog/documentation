@@ -1,12 +1,14 @@
 ---
 title: Build workflows
-kind: documentation
 disable_toc: false
 aliases:
 - /workflows/build
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/service_management/workflows/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
@@ -154,6 +156,27 @@ All the variables of the Source object are visible in the Context Variables tab.
 
 {{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
 
+## Workflow notifications
+
+You can configure your workflow to send you a notification on success or failure. The following integrations are supported:
+- Slack
+- Microsoft Teams
+- PagerDuty
+- Email
+
+To add a notification:
+1. In the workflow configuration panel, scroll down to the **Notifications** section.
+1. To add a notification if the workflow succeeds:
+   1. Click the plus (`+`) icon next to **Notify on success**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
+1. To add a notification if the workflow fails:
+   1. Click the plus (`+`) icon next to **Notify on failure**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
+
 ## Error handling
 
 You can specify the number of times you want your workflow to retry a failed step, and at what interval, before moving on to an optional error path. If no error path is present, the workflow terminates after all retries are exhausted.
@@ -178,7 +201,21 @@ To add an error path:
 
 {{< img src="service_management/workflows/error-path1.mp4" alt="Add an error path to your workflow" video=true >}}
 
-### Edit a workflow with JSON
+## Wait until condition
+
+Some actions allow you to add a condition that must be met before a workflow can mark a step as complete and continue.
+
+To add a condition:
+1. Click on the step in the workflow canvas.
+1. In the **Wait until condition** section, use the dropdown to select a preconfigured condition, or select **Configure custom wait condition** and build your own conditional.
+   - The list of available preconfigured conditions depends on the action.
+   - Conditional statement variables can be either a String, a Number, a Boolean, or a step output variable.
+   - Only the current step's output variables can be used in a custom conditional statement.
+1. Enter a maximum wait time for the workflow. If the condition is not met in time, the step fails.
+
+{{< img src="service_management/workflows/wait-until-condition.png" alt="An example of wait until condition" style="width:100%;" >}}
+
+## Edit a workflow with JSON
 
 Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
 - **Format JSON**: Beautify your JSON.
@@ -187,6 +224,8 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
 
 [1]: https://app.datadoghq.com/workflow
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
@@ -197,4 +236,5 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
+[10]: https://datadoghq.slack.com/
 

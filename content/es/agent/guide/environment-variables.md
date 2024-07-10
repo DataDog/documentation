@@ -9,10 +9,9 @@ further_reading:
 - link: /logs/log_collection/#container-log-collection
   tag: Documentación
   text: Recopilación de logs de contenedores
-- link: /agent/proxy/#environment-variables
+- link: /agent/configuration/proxy/#environment-variables
   tag: Documentación
   text: Variables de entorno del proxy
-kind: guía
 title: Variables de entorno del Agent
 ---
 
@@ -85,20 +84,37 @@ En general, puedes utilizar las siguientes reglas:
 
           ```yaml
              process_config:
-                 enabled: true
+                 process_collection:
+                     enabled: true
                  process_dd_url: https://process.datadoghq.com
-             # DD_PROCESS_AGENT_ENABLED=true
+             # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
              # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
           ```
+
+## Uso de variables de entorno en unidades systemd
+
+En los sistemas operativos que utilizan systemd para gestionar servicios, las variables de entorno globales (por ejemplo, `/etc/environment`) o basadas en sesiones (por ejemplo, `export VAR=value`) no suelen estar disponibles para servicios, a menos que se configuren para ello. Consulta la [página de ejecución manual de systemd][8] para obtener más información.
+
+A partir de Datadog Agent v7.45, la (unidad`datadog-agent.service` ) de servicio de Datadog Agent puede cargar opcionalmente asignaciones de variables de entorno desde un archivo (`<ETC_DIR>/environment`).
+
+1. Crea `/etc/datadog-agent/environment`, si no existe.
+2. Define asignaciones de variables de entorno separadas por nuevas líneas. Por ejemplo:
+  ```
+  GODEBUG=x509ignoreCN=0,x509sha1=1
+  DD_HOSTNAME=myhost.local
+  DD_TAGS=env:dev service:foo
+  ```
+3. Reinicia el servicio para que los cambios surtan efecto.
 
 ## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /es/getting_started/tagging/unified_service_tagging
-[3]: /es/agent/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go
+[3]: /es/agent/configuration/proxy/#environment-variables
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
 [5]: https://docs.datadoghq.com/es/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
-[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
+[8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment

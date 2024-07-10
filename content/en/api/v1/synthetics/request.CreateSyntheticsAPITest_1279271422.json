@@ -34,13 +34,47 @@
         "request": {
           "method": "GET",
           "timeout": 10,
-          "url": "https://datadoghq.com"
+          "url": "https://datadoghq.com",
+          "httpVersion": "http2"
         },
         "retry": {
           "count": 5,
           "interval": 1000
         },
         "subtype": "http"
+      },
+      {
+        "name": "Wait",
+        "subtype": "wait",
+        "value": 1
+      },
+      {
+        "name": "GRPC CALL",
+        "subtype": "grpc",
+        "extractedValues": [],
+        "allowFailure": false,
+        "isCritical": true,
+        "retry": {
+          "count": 0,
+          "interval": 300
+        },
+        "assertions": [
+          {
+            "operator": "lessThan",
+            "type": "responseTime",
+            "target": 1000
+          }
+        ],
+        "request": {
+          "host": "grpcbin.test.k6.io",
+          "port": 9000,
+          "service": "grpcbin.GRPCBin",
+          "method": "Index",
+          "message": "{}",
+          "compressedJsonDescriptor": "eJy1lU1z2yAQhv+Lzj74I3ETH506bQ7OZOSm1w4Wa4epBARQppqM/3v5koCJJdvtxCdW77vPssCO3zMKUgHOFu/ZXvBiS6hZho/f8qe7pftYgXphWJrlA8XwxywEvNba+6PhkC2yVcVVswYp0R6ykRYlZ1SCV21SDrxsssPIeS9FJKqGfK2rqnmmSBwhWa2XlKgtaQPiDcRGCUDVfwGD2sKUqKEtc1cSoOrsMlaMOec1sySYCCgUYRSVLv2zSva2u+FQkB0pVkIw8bFuIudOOn3pOaKYVT3Iy97Pd0AYhOx5QcMsnxvRHlnuLf8ETDd3CNtrv2nejkDpRnANCmGkkFn/hsYzpBKE7jVbufgnKnV9HRM9zRPDDKPttYT61n0TdWkAAjggk9AhuxIeaXd69CYTcsGw7cBTakLVbNpRzGEgyWjkSOpMbZXkhGL6oX30R49qt3GoHrap7i0XdD41WQ+2icCNm5p1hmFqnHNlcla0riKmDZ183crDxChjbnurtxHPRE784sVhWvDfGP+SsTKibU3o5NtWHuZFGZOxP6P5VXqIOvaOSec4eYohyd7NslHuJbd1bewds85xYrNxkr2d+5IhFWF3NvaO684xjE2S5ulY+tu64Pna0fCPJgzw6vF5/WucLcYjt5xoq19O3UDptOg/OamJQRaCcPPnMTQ2QDFn+uhPvUfnCrMc99upyQY4Ui9Dlc/YoG3R/v4Cs9YE+g==",
+          "metadata": {},
+          "callType": "unary"
+        }
       }
     ]
   },

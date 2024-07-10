@@ -26,7 +26,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging Without Limits*
-kind: Documentation
 title: ログの収集とインテグレーション
 ---
 
@@ -47,7 +46,7 @@ title: ログの収集とインテグレーション
 2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][5]を参照してください。
 3. Datadog Agent を有効にすると、[ログファイルの尾行または UDP/TCP 経由で送信されるログのリスニング][2]、[ログのフィルタリングまたは機密データのスクラビング][3]、[複数行ログの集約][4]を構成することができるようになります。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/logs/#custom-log-collection
 [3]: /ja/agent/logs/advanced_log_collection/#filter-logs
 [4]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
@@ -62,7 +61,7 @@ title: ログの収集とインテグレーション
 
 {{< partial name="logs/logs-languages.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/logs/
 {{< /tabs >}}
 
@@ -193,10 +192,10 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 | サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US5  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
-| US5  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
-| US5  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
-| US5  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+| AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
+| AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
+| AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
+| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
 
 [1]: /ja/api/latest/logs/#send-logs
 [2]: /ja/agent/logs/#send-logs-over-https

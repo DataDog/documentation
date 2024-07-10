@@ -1,6 +1,5 @@
 ---
 title: Datadog FIPS Compliance
-kind: Guide
 disable_toc: false
 alias:
 - /agent/guide/agent-fips-proxy
@@ -22,7 +21,7 @@ algolia:
 
 The Datadog Agent FIPS Proxy ensures that communication between the Datadog Agent and Datadog uses FIPS-compliant encryption.
 
-The Datadog Agent FIPS Proxy is a separately distributed component that you deploy on the same host as the Datadog Agent. The proxy acts as an intermediary between the Agent and Datadog intake. The Agent communicates with the Datadog Agent FIPS Proxy, which encrypts payloads using a FIPS 140-2 validated cryptography and relays the payloads to Datadog.
+The Datadog Agent FIPS Proxy is a separately distributed component that you deploy on the same host as the Datadog Agent. The proxy acts as an intermediary between the Agent and Datadog intake. The Agent communicates with the Datadog Agent FIPS Proxy, which encrypts payloads using a FIPS 140-2 validated cryptography and relays the payloads to Datadog. The Datadog Agent and the Agent FIPS Proxy must be configured in tandem to communicate with one another.
 
 ## Supported platforms and limitations
 
@@ -34,7 +33,7 @@ Supported platforms (64-bit x86):
 
 |||
 | ---  | ----------- |
-| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04|
+| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12 (beta)|
 | Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
 
 **Note**: arm64 architecture is available in beta
@@ -76,7 +75,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Setting the `DD_FIPS_MODE` environment variable installs the FIPS package along with the Agent, and configures the Agent to use the proxy. There are no additional configuration steps if you're using this method, but you should [verify the installation](#verify-your-installation).

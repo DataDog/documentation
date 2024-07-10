@@ -1,11 +1,15 @@
 ---
 title: Events with email
-kind: guide
+
 aliases:
 - /developers/events/email/
 - /guides/eventsemail
 - /events/guides/email
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Events with email is not supported on {{< region-param key=dd_datacenter code="true" >}}</div>
+{{< /site-region >}}
 
 If your application does not have an existing [Datadog integration][1], and you don't want to create a [custom Agent check][2], you can send events with email. This can also be done with messages published to an Amazon SNS topic; read the [Create Datadog Events from Amazon SNS Emails][6] guide for more information.
 

@@ -9,19 +9,15 @@ further_reading:
 - link: /tracing/guide/apm_dashboard/
   tag: 4 分
   text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-- link: /tracing/guide/add_span_md_and_graph_it/
-  tag: 7 分
-  text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: データベースサービスの異常な p99 レイテンシーに関するアラート
 ---
 
 _所要時間 3 分_
 
-{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_cropped.mp4" video="true" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
 Datadog では、ユーザー自身で継続的にサービスの健全性を監視する代わりに、APM を使用して健全性を追跡するようにモニターを設定できます。ここでは、異常検知モニターを使用します。[異常検知][1]とは、傾向や、季節的な曜日や時間帯のパターンを考慮しながら、メトリクスの挙動が過去のものとは異なる場合、これを認識できるアルゴリズム機能です。異常検知は、しきい値ベースのアラート設定では監視することが困難または不可能な強い傾向や反復パターンを持つメトリクスに適しています。
 
@@ -32,7 +28,7 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
     [サービス][5]を選択すると、次のステップを設定できるようになり、新しいモニターの追跡対象となるメトリクスのパフォーマンスを示すグラフがページ上部に表示されます。 
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
 3. ***Anomaly Alert* を選択**し、*For* オプションに「p99 latency」を選択します。
 
@@ -50,14 +46,15 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
     通知テキストのマークアップと、このフィールドで設定可能な値および条件の詳細については、[通知の概要][7]をご確認ください。
 
-6. ***Notify your team* ボックスに自分のユーザー名が表示されていることを確認**し、データベースのレイテンシー異常が検知された場合に通知するチームメンバーを追加します。
-    **注意**: 他のユーザーを追加するには、先頭に必ず `@` を入力してください。***Save* をクリックします**。
+6. ***Configure notifications and automations notification* (通知と自動化の通知を構成する) フィールドにユーザー名が表示されていることを確認**し、データベースのレイテンシー異常が発生した場合に通知する必要があるチームメンバーを追加します。
+
+   **注**: 別のユーザーを追加するには、先頭に `@` を入力します。***Save* をクリックします。**
 
     これでアラート設定が完了し、今後、この画面からパラメーターを調整したり、メトリクスのパフォーマンスを追跡したりできます。
 
 7. ***Edit* タブから *Status* タブに切り替えます**。
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
     このタブでは、モニターの現在の状況の確認やミュート設定、トリガーされたアラートの詳細調査をします。
 
@@ -65,16 +62,15 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
     このウィンドウでは、サービスに設定された他のモニターや推奨設定の提案モニターに加え、**新しいモニターが表示されます**。
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
     モニターを作成するにつれ、追加するサービス、メトリクス、イベントと、これらに設定する複雑な条件がさらに出てきます。モニターはそれぞれ、サービスに接続されているため、サービス詳細画面および [Service Map][9] からアクセスできます。
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="サービスマップ" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6_cropped.png" alt="サービスマップ" style="width:90%;">}}
 
     マップ上の各サービスの色分けは、緑色はすべてのモニターが正常、黄色は 2 つ以上のモニターで警告があるがアラートはなし、赤は 2 つ以上のモニターでアラートあり、灰色はモニター設定なし、という状態を示しています。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

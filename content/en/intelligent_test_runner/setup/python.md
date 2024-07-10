@@ -1,12 +1,11 @@
 ---
 title: Intelligent Test Runner for Python
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 30
 aliases:
-  - continuous_integration/intelligent_test_runner/python/
-  - continuous_integration/intelligent_test_runner/setup/python/
+  - /continuous_integration/intelligent_test_runner/python/
+  - /continuous_integration/intelligent_test_runner/setup/python/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -20,13 +19,16 @@ further_reading:
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
-* `pytest>=6.8.0`
+* `pytest>=7.2.0`
   * From `ddtrace>=2.1.0`.
   * From `Python>=3.7`.
   * Requires `coverage>=5.5`.
+  * Incompatible with `pytest-cov` (see [known limitations](#known-limitations))
 * `unittest`
   * From `ddtrace>=2.2.0`.
   * From `Python>=3.7`.
+* `coverage`
+  * Incompatible for coverage collection (see [known limitations](#known-limitations))
 
 ## Setup
 
@@ -35,6 +37,18 @@ Intelligent Test Runner is only supported in the following versions and testing 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
+
+### Required dependencies
+
+The Intelligent Test Runner requires the [`coverage` package][2].
+
+Install the package in your CI test environment by specifying it in the relevant requirements file, for example, or using `pip`:
+
+{{< code-block lang="shell" >}}
+pip install coverage
+{{< /code-block >}}
+
+See [known limitations](#known-limitations) if you are already using the `coverage` package or a plugin like `pytest-cov`.
 
 ## Running tests with the Intelligent Test Runner enabled
 
@@ -186,9 +200,23 @@ Using `@unittest.skipif` does not override any other `skip` marks, or `skipIf` m
 
 {{< /tabs >}}
 
+## Known limitations
+
+### Code coverage collection
+
+#### Interaction with coverage tools
+
+Coverage data may appear incomplete when the Intelligent Test Runner is enabled. Lines of code that would normally be covered by tests are not be covered when these tests are skipped.
+
+#### Interaction with the coverage package
+
+The Intelligent Test Runner uses the [`coverage`][2] package's API to collect code coverage. Data from `coverage run` or plugins like `pytest-cov` is incomplete as a result of `ddtrace`'s use of the `Coverage` class.
+
+Some race conditions may cause exceptions when using `pytest` plugins such as `pytest-xdist` that change test execution order or introduce parallelization.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/python
+[2]: https://pypi.org/project/coverage/

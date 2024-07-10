@@ -5,6 +5,7 @@ assets:
   dashboards:
     Systemd Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: systemd.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10066
     source_type_name: Systemd
 author:
   homepage: https://www.datadoghq.com
@@ -31,10 +33,9 @@ integration_id: systemd
 integration_title: Systemd
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: systemd
-oauth: {}
 public_title: Systemd
 short_description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
 supported_os:
@@ -52,6 +53,7 @@ tile:
   title: Systemd
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -61,20 +63,20 @@ tile:
 - Systemd の状態と健全性を追跡できます。
 - Systemd が管理するユニット、サービス、ソケットを監視できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Systemd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `systemd.d/conf.yaml` ファイルを編集して、
    Systemd パフォーマンスデータの収集を開始します。
@@ -85,7 +87,7 @@ Systemd チェックは [Datadog Agent][2] パッケージに含まれていま�
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -107,9 +109,9 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションの `systemd` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "systemd" >}}
 
 
@@ -125,21 +127,21 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 - `systemd.service.restart_count`: Systemd v235 が必要です。
 - `systemd.socket.connection_refused_count`: Systemd v239 が必要です。
 
-### イベント
+### ヘルプ
 
 Systemd チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "systemd" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

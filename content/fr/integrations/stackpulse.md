@@ -25,7 +25,7 @@ integration_id: stackpulse
 integration_title: StackPulse
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@stackpulse.io
 manifest_version: 1.0.0
 metric_prefix: stackpulse.

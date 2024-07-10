@@ -1,15 +1,11 @@
 ---
 title: OAuth2 Authorization Endpoints Reference
-kind: documentation
 description: Learn how to use the OAuth2 authorization endpoints.
 further_reading:
 - link: "/developers/authorization/"
   tag: "Documentation"
   text: "Learn about OAuth2 Authorization"
 ---
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is currently in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
 
 ## Overview
 
@@ -41,7 +37,7 @@ In the authorization request, the application constructs the redirect URI by add
 
 To render Datadog's consent page, redirect users to the endpoint with the specified parameters: 
 ```
-https://api.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/oauth_redirect&client_id=abcdefghijklmnopqrstuvwxyz_123456789&response_type=code&code_challenge=12345&code_challenge_method=S256
+https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/oauth_redirect&client_id=abcdefghijklmnopqrstuvwxyz_123456789&response_type=code&code_challenge=12345&code_challenge_method=S256
 ```
 
 #### Success Response

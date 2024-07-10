@@ -1,6 +1,6 @@
 ---
 title: Best Practices for RUM Sampling
-kind: guide
+
 description: Guide for RUM sampling.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -12,7 +12,7 @@ further_reading:
 
 Sampling in Datadog's Real User Monitoring product enables you to collect data from a certain percentage of user traffic.
 
-This guide walks you through best practices for RUM sampling so you can capture sessions and collect data based on your monitoring needs.
+This guide walks you through best practices for RUM sampling so you can capture sessions and collect data based on your monitoring needs. Learn more about how [sessions are defined][9] in RUM.
 
 ## Sampling configuration
 
@@ -33,7 +33,7 @@ The random sampling is by session, not by user.
 RUM metrics (such as Core Web Vitals and usage numbers) are calculated based on sessions that are sampled. For example, if the sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions. 
 
 ### Recommended sampling rate
-In terms of setting an ideal sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweaking it based on the data you need. Learn more about how [sessions are defined][9] in RUM.
+In terms of setting an ideal sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweaking it based on the data you need. 
 
 ### Sampling based on specific attributes
 Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].

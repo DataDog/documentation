@@ -18,10 +18,9 @@ integration_id: rum-roku
 integration_title: Roku
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_roku
-oauth: {}
 public_title: Roku
 short_description: Datadog RUM を使用した Roku チャンネルの監視とメトリクス生成
 supported_os: []

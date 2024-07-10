@@ -6,7 +6,7 @@ aliases:
 categories:
 - aws
 - cloud
-- data store
+- data stores
 - log collection
 - network
 dependencies: []
@@ -29,7 +29,7 @@ integration_id: amazon-rds
 integration_title: Amazon RDS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
@@ -41,7 +41,8 @@ short_description: Surveiller un ensemble de métriques relatives à Amazon RDS
 version: '1.0'
 ---
 
-{{< img src="integrations/awsrds/rdsdashboard.png" alt="Dashboard RDS" popup="true">}}
+<!-- SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" popup="true">}}
 
 ## Présentation
 
@@ -174,7 +175,7 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
     | `rds:ListTagsForResource` | Ajoute des tags personnalisés aux instances RDS.    |
     | `rds:DescribeEvents`      | Ajoute des événements associés aux bases de données RDS. |
 
-3. Installez l'[intégration Datadog/AWS RDS][4].
+3. Installez l'[intégration Datadog/Amazon RDS][4].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
@@ -192,7 +193,7 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
     | `rds:ListTagsForResource` | Ajoute des tags personnalisés aux instances RDS.    |
     | `rds:DescribeEvents`      | Ajoute des événements associés aux bases de données RDS. |
 
-3. Installez l'[intégration Datadog/AWS RDS][4].
+3. Installez l'[intégration Datadog/Amazon RDS][4].
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -299,9 +300,9 @@ Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes
 
 ### Événements
 
-L'intégration AWS RDS comprend des événements liés aux instances de base de données, aux groupes de sécurité, aux snapshots et aux groupes de paramètres. Vous trouverez ci-dessous des exemples d'événements :
+L'intégration Amazon RDS comprend des événements liés aux instances de base de données, aux groupes de sécurité, aux snapshots et aux groupes de paramètres. Vous trouverez ci-dessous des exemples d'événements :
 
-{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Événements AWS RDS" >}}
+{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Événements Amazon RDS" >}}
 
 ### Checks de service
 
@@ -315,10 +316,10 @@ Surveille le statut du [réplica en lecture][8]. Ce check renvoie l'un des statu
 
 ## Fonctionnalités de surveillance prêtes à l'emploi
 
-L'intégration AWS RDS propose des fonctionnalités de surveillance prêtes à l'emploi vous permettant de surveiller et d'optimiser vos performances.
+L'intégration Amazon RDS propose des fonctionnalités de surveillance prêtes à l'emploi vous permettant de surveiller et d'optimiser vos performances.
 
-- Dashboard AWS RDS : bénéficiez d'une vue d'ensemble détaillée de vos instances RDS grâce au [dashboard AWS RDS][9] prêt à l'emploi.
-- Monitors recommandés : activez les [monitors AWS RDS recommandés][10] pour détecter les problèmes de façon proactive et recevoir des alertes sans attendre.
+- Dashboard Amazon RDS : bénéficiez d'une vue d'ensemble complète de vos instances RDS grâce à [ce dashboard prêt à l'emploi][9].
+- Monitors recommandés : activez les [monitors Amazon RDS recommandés][10] pour détecter des problèmes de façon proactive et recevoir des alertes en temps opportun.
 
 ## Dépannage
 

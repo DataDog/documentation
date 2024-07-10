@@ -1,6 +1,6 @@
 ---
 title: Alerting With Conversion Rates
-kind: guide
+
 description: Guide for creating alerts on conversion rates.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -14,7 +14,7 @@ Conversion rates are crucial in monitoring the success of a user workflow. This 
 
 ## Create a funnel in the RUM Explorer
 
-In Datadog, navigate to [UX Monitoring > Product Analytics > Funnels][1].
+In Datadog, navigate to [Digital Experience > Product Analytics > Funnels][1].
 
 {{< img src="real_user_monitoring/funnel_analysis/rum-funnel-creation-2.png" alt="The funnel creation page with key actions highlighted" style="width:100%;" >}}
 

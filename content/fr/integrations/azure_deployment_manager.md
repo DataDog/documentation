@@ -1,42 +1,44 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
-description: Utilisez Datadog pour surveiller les déploiements Canary dans Azure Deployment Manager.
+description: Utilisez Datadog pour surveiller les déploiements Canary dans Azure Deployment
+  Manager.
 doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
-    tag: Blog
-    text: Versions Canary avec Azure Deployment Manager et Datadog
+- link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
+  tag: Blog
+  text: Versions Canary avec Azure Deployment Manager et Datadog
 git_integration_title: azure_deployment_manager
 has_logo: true
 integration_id: ''
 integration_title: Microsoft Azure Deployment Manager
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_deployment_manager
 public_title: Datadog/Microsoft Azure Deployment Manager
 short_description: Surveillez les déploiements Canary dans Azure Deployment Manager.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Deployment Manager (ADM) vous permet de coordonner un lancement par étapes pour le déploiement sécurisé d'applications complexes.
 
 Utilisez Datadog pour créer un check de santé pour Azure Deployment Manager et pour arrêter votre déploiement si des problèmes sont détectés.
 
-## Implémentation
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Pour utiliser Datadog comme check de santé pour ADM, vous avez besoin d'un compte Datadog actif et d'une instance active d'Azure Deployment Manager.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Commencez par configurer des monitors dans Datadog pour votre déploiement. Commencez avec un monitor pour chaque région. Selon la complexité de votre application, il peut être utile de configurer des monitors pour les différentes étapes de déploiement dans chaque région. Suivez le [Didacticiel : Utiliser Azure Deployment Manager avec des modèles Resource Manager][1] pour mieux savoir où placer les monitors. Pour obtenir des idées de monitor, consultez [cet article du blog][2].
 2. Si vous avez configuré plusieurs monitors pour chaque région, créez un [monitor composite][3] pour chaque étape de déploiement ou région. Chaque monitor composite est une combinaison logique de plusieurs monitors qui, ensemble, indiquent le statut général d'une étape de déploiement.
@@ -186,21 +188,21 @@ Azure Deployment Manager analyse la réponse avec la regex fournie dans le modè
 
 Si `overall_status: OK` est trouvé, le check est considéré comme sain. Si le statut est `Warn`, `No Data` ou `Alert`, le check est alors considéré comme non sain, et Azure Deployment Manager met fin au déploiement.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 Azure Deployment Manager n'envoie aucune métrique.
 
-### Événements
+### Aide
 
 Azure Deployment Manager ne comprend aucun événement.
 
-### Checks de service
+### Aide
 
 Azure Deployment Manager ne comprend aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 

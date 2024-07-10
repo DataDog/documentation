@@ -5,6 +5,7 @@ app_id: prophetstor-federatorai-license
 app_uuid: 965e6142-3b99-4999-a7c6-09a00775e511
 assets:
   integration:
+    auto_install: false
     configuration:
       spec: ''
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: federatorai.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10187
     source_type_name: Federator.ai.license
 author:
   homepage: https://www.prophetstor.com/
@@ -27,6 +29,7 @@ categories:
 - kubernetes
 - マーケットプレイス
 - orchestration
+- ai/ml
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,12 +38,11 @@ integration_id: prophetstor-federatorai-license
 integration_title: ProphetStor Federator.ai
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: prophetstor_federatorai
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -58,6 +60,7 @@ tile:
   - Category::Kubernetes
   - Category::Marketplace
   - Category::Orchestration
+  - Category::AI/ML
   - Offering::Software License
   - Supported OS::Linux
   configuration: README.md#Setup
@@ -93,6 +96,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -109,7 +113,7 @@ ProphetStor Federator.ai ライセンスを使用すると、AI ベースのソ�
 
 この Federator.ai ライセンスとは別に、すぐに使用できるダッシュボードと推奨モニターを備えた公式の [Datadog インテグレーション][9]を利用できます。Federator.ai の詳細については、[ProphetStor Federator.ai 機能デモ][2]ビデオをご覧ください。
 
-## サポート
+## Agent
 
 サポートやリクエストについては、[ProphetStor サポート](mailto:support@prophetstor.com)にお問い合わせください。
 

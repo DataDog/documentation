@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/awsredshift/
 categories:
-- cloud
 - aws
+- cloud
+- data stores
 - log collection
 dependencies: []
 description: Amazon Redshift のキーメトリクスを追跡。
@@ -11,11 +12,11 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/
 draft: false
 git_integration_title: amazon_redshift
 has_logo: true
-integration_id: amazon-redshift
+integration_id: ''
 integration_title: Amazon Redshift
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_redshift
 public_title: Datadog-Amazon Redshift インテグレーション
@@ -23,15 +24,16 @@ short_description: Amazon Redshift のキーメトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Redshift は、ペタバイトスケールの高速なフルマネージド型データウェアハウスサービスです。あらゆるデータをシンプルかつコスト効率よく能率的に分析できます。
 
 このインテグレーションを有効にすると、Datadog にすべての Redshift メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -46,13 +48,13 @@ Amazon Redshift は、ペタバイトスケールの高速なフルマネージ�
 
     詳細については、AWS ウェブサイト上の [Redshift ポリシー][4]を参照してください。
 
-3. [Datadog - AWS Redshift インテグレーション][5]をインストールします。
+3. [Datadog - Amazon Redshift インテグレーション][5]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
-ログを収集するには、まず Redshift Cluster でログを有効にします。Redshift ログを AWS S3 バケットに書き込み、[Lambda 関数で使用][6]します。詳細については、[コンソールを使用して監査を構成する][7]を参照してください。
+ログを収集するには、まず Redshift Cluster でログを有効にします。Redshift ログを Amazon S3 バケットに書き込み、[Lambda 関数で使用][6]します。詳細については、[コンソールを使用して監査を構成する][7]を参照してください。
 
 #### ログを Datadog に送信する方法
 
@@ -75,23 +77,23 @@ Amazon Redshift は、ペタバイトスケールの高速なフルマネージ�
 
 AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][11]を参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_redshift" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS Redshift インテグレーションには、イベントは含まれません。
+Amazon Redshift インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS Redshift インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Redshift インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

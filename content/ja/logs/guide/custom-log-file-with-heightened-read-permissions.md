@@ -11,7 +11,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: ガイド
 title: 高度な読み取り権限を持つカスタムログファイルからのログ送信
 ---
 

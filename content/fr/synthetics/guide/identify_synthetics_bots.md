@@ -8,14 +8,13 @@ further_reading:
   text: Présentation de la surveillance Synthetic Datadog
 - link: /synthetics/
   tag: Documentation
-  text: Gérer vos checks
+  text: En savoir plus sur la surveillance Synthetic
 - link: /synthetics/browser_tests/
   tag: Documentation
   text: Configurer un test Browser
 - link: /synthetics/api_tests/
   tag: Documentation
   text: Configurer un test API
-kind: documentation
 title: Identifier les bots Synthetic
 ---
 
@@ -97,13 +96,13 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 }
 ```
 
-Si vous utilisez une variable Browser pour identifier les robots Synthetic avec Firefox et Internet Explorer 11, Datadog ne peut pas garantir que la variable sera définie avant l'exécution de votre code.
+Si vous utilisez la variable browser pour identifier des bots Synthetic sur Firefox, Datadog nʼest pas en mesure de garantir quʼelle soit définie avant lʼexécution de votre code. 
 
 ## Cookies
 
 Les cookies `datadog-synthetics-public-id` et `datadog-synthetics-result-id` font partie des cookies appliqués à votre navigateur.
 
-Ces cookies peuvent être utilisés dans toutes les étapes sur Firefox et Internet Explorer 11. Pour Edge et Google Chrome, ils sont uniquement appliqués à l'URL de départ.
+Ces cookies sont disponibles pour toutes les étapes dans Firefox. Pour ce qui est de Microsoft Edge et Google Chrome, ils sont uniquement définis pour lʼURL de départ.
 
 ## Pour aller plus loin
 

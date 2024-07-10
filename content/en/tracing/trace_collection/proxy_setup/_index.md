@@ -1,28 +1,39 @@
 ---
 title: Tracing a Proxy
-kind: documentation
 further_reading:
 - link: "/tracing/glossary/"
-  tag: "Use the APM UI"
+  tag: "Documentation"
   text: "Explore your services, resources and traces"
 - link: "https://www.envoyproxy.io/"
-  tag: "Documentation"
+  tag: "External Site"
   text: "Envoy website"
 - link: "https://www.envoyproxy.io/docs/envoy/latest/"
-  tag: "Documentation"
+  tag: "External Site"
   text: "Envoy documentation"
 - link: "https://www.nginx.com/"
-  tag: "Documentation"
+  tag: "External Site"
   text: "NGINX website"
 - link: "https://istio.io/"
-  tag: "Documentation"
+  tag: "External Site"
   text: "Istio website"
 - link: "https://istio.io/docs/"
-  tag: "Documentation"
+  tag: "External Site"
   text: "Istio documentation"
+- link: "https://docs.konghq.com/gateway/latest/"
+  tag: "External Site"
+  text: "Kong website"
 - link: "https://github.com/DataDog/dd-trace-cpp"
   tag: "Source Code"
   text: "Datadog C++ Client"
+- link: "https://github.com/DataDog/kong-plugin-ddtrace/"
+  tag: "Source Code"
+  text: "Datadog APM Plugin for Kong"
+- link: "https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentelemetry/"
+  tag: "External Site"
+  text: "OpenTelemetry for Ingress-NGINX Controller"
+- link: "https://github.com/DataDog/httpd-datadog"
+  tag: "Source Code"
+  text: "Datadog Module for Apache HTTP Server"
 aliases:
 - /tracing/proxies/envoy
 - /tracing/envoy/
@@ -36,6 +47,7 @@ aliases:
 - /tracing/setup_overview/envoy/
 - /tracing/setup_overview/nginx/
 - /tracing/setup_overview/istio/
+- /tracing/setup_overview/httpd/
 - /tracing/setup_overview/proxy_setup/
 algolia:
   tags: ['proxies','tracing proxies','proxy']
@@ -51,7 +63,6 @@ Datadog APM is included in Envoy v1.9.0 and newer.
 ## Enabling Datadog APM
 
 **Note**: The example configuration below is for Envoy v1.19.
-Example configurations for other versions can be found [in the `dd-opentracing-cpp` GitHub repo][1].
 
 The following settings are required to enable Datadog APM in Envoy:
 
@@ -212,7 +223,7 @@ stats_config:
 
 To control the volume of Envoy traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Envoy are sent.
 
-To use the [Datadog Agent calculated sampling rates][2] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
+To use the [Datadog Agent calculated sampling rates][1] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
 ```
 DD_TRACE_SAMPLING_RULES=[]
@@ -270,22 +281,15 @@ To configure your sampling rate with `DD_TRACE_SAMPLING_RULES`, use one of the f
 
 ## Environment variables
 
-The available [environment variables][3] depend on the version of the C++ tracer embedded in Envoy.
+<div class="alert alert-warning">
+  <strong>Note:</strong> The variables <code>DD_AGENT_HOST</code>, <code>DD_TRACE_AGENT_PORT</code> and <code>DD_TRACE_AGENT_URL</code> do not apply to Envoy, as the address of the Datadog Agent is configured using the <code>cluster</code> settings.
+</div>
 
-**Note**: The variables `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT` and `DD_TRACE_AGENT_URL` do not apply to Envoy, as the address of the Datadog Agent is configured using the `cluster` settings.
+The available [environment variables][2] depend on the version of the C++ tracer embedded in Envoy.
+The version of the C++ tracer can be found in the logs, indicated by the line starting with "DATADOG TRACER CONFIGURATION".
 
-| Envoy Version | C++ Tracer Version |
-|---------------|--------------------|
-| v1.18.x - v1.26.0 | v1.2.1 |
-| v1.15.x - v1.17.x | v1.1.5 |
-| v1.14 | v1.1.3 |
-| v1.12.x - v1.13.x | v1.1.1 |
-| v1.10.x - v1.11.x | v0.4.2 |
-| v1.9.x | v0.3.6 |
-
-[1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
-[2]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[3]: /tracing/setup/cpp/#environment-variables
+[1]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[2]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
 {{% tab "NGINX" %}}
 
@@ -297,16 +301,14 @@ Datadog APM supports NGINX in two configurations:
 Datadog provides an NGINX module for distributed tracing.
 
 ### Module installation
-There is one version of the Datadog NGINX module for each supported Docker
-image. Install the module by downloading the appropriate file from the
-[latest nginx-datadog GitHub release][1] and extracting it into NGINX's modules
-directory.
+To install the Datadog NGINX module, follow these instructions:
+1. Download the appropriate version from the [latest nginx-datadog GitHub release][1]
+2. Choose the tarball corresponding to the specific NGINX version and CPU architecture.
 
-For example, the module compatible with the Docker image
-[nginx:1.23.2-alpine][3] is included in each release as the file
-`nginx_1.23.2-alpine-ngx_http_datadog_module.so.tgz`. The module compatible with
-the Docker image [amazonlinux:2.0.20230119.1][2] is included in each release as the file
-`amazonlinux_2.0.20230119.1-ngx_http_datadog_module.so.tgz`.
+Each release includes two tarballs per combination of NGINX version and CPU architecture.
+The main tarball contains a single file, `ngx_http_datadog_module.so`, which is the Datadog NGINX module. The second one is debug symbols, it is optional.
+
+For simplicity, the following script downloads only the module for the latest release:
 
 ```bash
 get_latest_release() {
@@ -340,15 +342,14 @@ if [ -z "$ARCH" ]; then
     exit 1
 fi
 
-BASE_IMAGE=nginx:1.23.2-alpine
-BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
+NGINX_VERSION="1.26.0"
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="$BASE_IMAGE_WITHOUT_COLONS-$ARCH-ngx_http_datadog_module.so.tgz"
-wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
-tar -xzf "$tarball" -C /usr/lib/nginx/modules
-rm "$tarball"
-ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
+TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
+
+curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/${RELEASE_TAG}/${TARBALL}"
 ```
+
+Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically locaated at `/usr/lib/nginx/modules`.
 
 ### NGINX configuration with Datadog module
 In the topmost section of the NGINX configuration, load the Datadog module.
@@ -359,7 +360,7 @@ load_module modules/ngx_http_datadog_module.so;
 
 The default configuration connects to a local Datadog Agent and produces traces
 for all NGINX locations. Specify custom configuration using the dedicated
-`datadog_*` directives described in the Datadog module's [API documentation][15].
+`datadog_*` directives described in the Datadog module's [API documentation][4].
 
 For example, the following NGINX configuration sets the service name to
 `usage-internal-nginx` and the sampling rate to 10%.
@@ -376,11 +377,48 @@ http {
 ```
 
 ## Ingress-NGINX Controller for Kubernetes
-To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
-The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
-If ingress-nginx was installed via helm chart, this ConfigMap will be named like `Release-Name-nginx-ingress-controller`.
 
-The ingress controller manages both the `nginx.conf` and `/etc/nginx/opentracing.json` files. Tracing is enabled for all `location` blocks.
+### Controller v1.10.0+
+
+<div class="alert alert-warning">
+  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingress controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
+  For older versions, see the <a href="#controller-v190-and-older">OpenTracing-based instructions</a>.
+</div>
+
+**1. Prepare the Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][5] to act as an OpenTelemetry Collector.
+
+**2. Configure the Ingress controller:** To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+```yaml
+- name: HOST_IP
+  valueFrom:
+    fieldRef:
+      fieldPath: status.hostIP
+- name: OTEL_EXPORTER_OTLP_ENDPOINT
+  value: "http://$(HOST_IP):4318"
+```
+
+Next, enable OpenTelemetry instrumentation for the controller. Create or edit a ConfigMap with the following details:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  enable-opentelemetry: "true"
+  otel-sampler: AlwaysOn
+  # Defaults
+  # otel-service-name: "nginx"
+  # otel-sampler-ratio: 0.01
+```
+
+### Controller v1.9.0 and older
+To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
+The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=<POD_NAMESPACE>/nginx-configuration`.
+If `ingress-nginx` was installed via Helm chart, the ConfigMap's name will follow the pattern `<RELEASE_NAME>-nginx-ingress-controller`.
+
+The Ingress controller manages both the `nginx.conf` and `/etc/nginx/opentracing.json` files. Tracing is enabled for all `location` blocks.
 
 ```yaml
 kind: ConfigMap
@@ -398,9 +436,10 @@ data:
   # datadog-service-name: "nginx"
   # datadog-collector-port: "8126"
   # datadog-operation-name-override: "nginx.handle"
+  # datadog-sample-rate: "1.0"
 ```
 
-Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
+Additionally, ensure that your controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
 
 ```yaml
 - name: HOST_IP
@@ -417,55 +456,13 @@ To set a different service name per Ingress using annotations:
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
-### Ingress Controller Sampling
-To set a fixed sampling rate, use the [datadog-sample-rate][16] option in the
-ingress controller's [ConfigMap][17]. For example, to set the sampling rate to
-40%:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-    app.kubernetes.io/component: controller
-    app.kubernetes.io/instance: ingress-nginx
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.7.1
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-data:
-  datadog-collector-host: $HOST_IP
-  enable-opentracing: "true"
-  datadog-sample-rate: "0.4"
-```
-
-<div class="alert alert-warning">
-Due to a bug in the Datadog tracing integration, the <a
-href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-priority-sampling">datadog-priority-sampling</a>
-option has no effect, and it is not possible to use the sampling rates <a
-href="https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent">calculated
-by the Datadog Agent</a>. We are working to resolve this bug.
-</div>
-
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
-[2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
-[3]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
-[4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
-[5]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
-[6]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
-[7]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
-[8]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
-[9]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog
-[10]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[11]: https://github.com/DataDog/dd-opentracing-cpp/
-[12]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
-[13]: https://github.com/kubernetes/ingress-nginx
-[14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
-[15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
-[16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
-[17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
+[2]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
+[3]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
+[4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
+[5]: /opentelemetry/otlp_ingest_in_the_agent/
 {{% /tab %}}
+
 {{% tab "Istio" %}}
 
 Datadog monitors every aspect of your Istio environment, so you can:
@@ -615,7 +612,6 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
-[11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 [13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
 {{% /tab %}}
@@ -665,6 +661,69 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 [3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
 
 {{% /tab %}}
+
+{{% tab "Apache HTTP Server" %}}
+
+Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IHS HTTP Server][3] capabilities with APM Tracing.
+
+### Compatibility
+
+Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
+
+### Installation
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
+</div>
+
+The module is provided as a shared library for dynamic loading by HTTPd. Each supported platform
+and architecture has its own artifact hosted on [httpd-datadog's repository][1].
+
+To install the module:
+
+1. Run the following script to download the latest version of the module:
+
+   ```bash
+   curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest \
+   | grep "mod_datadog-linux-x86_64.tar.gz" \
+   | cut -d : -f 2,3 \
+   | tr -d \" \
+   | wget -qi -
+   ```
+
+   When unpacking the tarball, the resulting file is `mod_datadog.so`, the shared library that must
+   be loaded by the server.
+
+1. Place the file in the directory where HTTPd searches for modules, typically `/usr/local/apache2/modules`.
+
+1. Load the module by adding the following line in the configuration file:
+
+   ```nginx
+   LoadModule datadog_module modules/mod_datadog.so
+   ```
+
+1. To enable the module, make sure to restart or reload HTTPd.
+
+### Configuration
+
+By default, all requests are traced and sent to the Datadog Agent.
+
+To change the module default behavior, use `Datadog*` directives described in the Datadog module's [API documentation][3].
+
+For example, the following configuration sets the service name to `my-service` and the sampling rate to 10%:
+
+```nginx
+LoadModule datadog_module modules/mod_datadog.so
+
+DatadogServiceName my-app
+DatadogSamplingRate 0.1
+```
+
+[1]: https://github.com/DataDog/httpd-datadog
+[2]: https://httpd.apache.org/
+[3]: https://github.com/DataDog/httpd-datadog/blob/main/doc/configuration.md
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading

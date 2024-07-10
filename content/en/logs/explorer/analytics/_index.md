@@ -1,6 +1,5 @@
 ---
 title: Log Analytics
-kind: documentation
 description: 'Group queried logs into fields, patterns, and transactions, and create multiple search queries, formulas, and functions for in-depth analysis.'
 aliases:
     - /logs/explorer/group
@@ -25,7 +24,7 @@ further_reading:
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. 
 
 {{< whatsnext desc="In order to expose this information, you can group your logs into:" >}}
-    {{< nextlink href="logs/explorer/analytics/#fields" >}}Fields{{< /nextlink >}}
+    {{< nextlink href="logs/explorer/analytics/#group-logs-by-fields" >}}Fields{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/patterns" >}}Patterns{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/transactions" >}}Transactions{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -45,7 +44,7 @@ When aggregating indexed logs by **Fields**, all logs matching your query filter
 On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
-- **unique count** of coded values for a query search value per group
+- **count of unique coded values** for a query search value per group (shown in the UI as `count unique of`)
 - **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a query search value per group
 
 Individual logs with multiple query search values belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.

@@ -23,7 +23,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: Fonctionnement d'Application Security Management dans Datadog
-kind: documentation
 title: Configuration de bibliothèque
 ---
 
@@ -95,16 +94,6 @@ Les données suivantes sont pas défaut considérées comme sensibles :
 * `ssh-rsa`
 
 Consultez la documentation relative à la [sécurité des données APM][3] pour obtenir des informations sur les autres mécanismes de l'Agent Datadog, ainsi que les bibliothèques permettant de supprimer des données sensibles.
-
-## Désactiver Application Security Management
-
-Pour désactiver ASM, supprimez la variable d'environnement `DD_APPSEC_ENABLED=true` de la configuration de votre application. Redémarrez ensuite votre service.
-
-Si aucune variable d'environnement `DD_APPSEC_ENABLED=true` n'est définie pour votre service, procédez comme suit :
-* S'il s'agit d'un service PHP : définissez explicitement la variable d'environnement sur `DD_APPSEC_ENABLED=false`, puis redémarrez votre service.
-* Si la solution ASM a été activée en un clic : accédez à la [configuration du service ASM][8], cliquez sur votre service, puis cliquez sur **Deactivate**.
-
-Si vous avez besoin d'aide supplémentaire, contactez l'[assistance Datadog][6].
 
 ## Configurer une page de blocage ou une charge utile personnalisée
 

@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Instrumenter des applications Node.js sans serveur avec le Forwarder Datadog
 ---
 
@@ -44,7 +44,7 @@ datadog-ci lambda instrument -f <nomfonction> -f <autre_nomfonction> -r <région
 
 Renseignez les paramètres fictifs comme suit :
 - Remplacez `<nomfonction>` et `<autre_nomfonction>` par les noms de vos fonctions Lambda.
-- Remplacez `<région_aws>` par le nom de la région AWS.
+- Remplacez `<aws_region>` par le nom de la région AWS.
 - Remplacez `<version_couche>` par la version souhaitée de la bibliothèque Lambda Datadog. La dernière version est `{{< latest-lambda-layer-version layer="node" >}}`.
 - Remplacez `<arn_forwarder>` par l'ARN du Forwarder (voir la [documentation sur le Forwarder][2]).
 
@@ -62,12 +62,13 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
+
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. Il configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][3] de votre fonction avant d'installer le plug-in Serverless Datadog.
+Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][6] de votre fonction avant d'installer le plug-in Serverless Datadog.
 
 Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes suivantes :
 
@@ -90,12 +91,11 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 
 **Remarque** : si votre fonction Lambda utilise à la fois les bibliothèques de tracing de Datadog et le [webpack][5], vous devez suivre ces [étapes de configuration supplémentaires][4].
 
-
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: /fr/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
+[6]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -219,7 +219,7 @@ yarn add datadog-lambda-js dd-trace
 
 **Remarque** : la version mineure du package `datadog-lambda-js` correspond toujours à la version de la couche. Par exemple, `datadog-lambda-js v0.5.0` correspond au contenu de la version 5 de la couche.
 
-### Configuration
+### Configurer les logs
 
 Pour configurer la fonction, suivez les étapes ci-dessous :
 
@@ -241,7 +241,7 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 [1]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [2]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
-{{% tab "Personnalisé" %}}
+{{% tab "Configuration personnalisée" %}}
 
 ### Installation
 
@@ -251,20 +251,21 @@ La version mineure du package `datadog-lambda-js` correspond toujours à la vers
 
 #### Utilisation de la couche
 
-[Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en suivant le format suivant.
+[Configurez les couches][8] pour votre fonction Lambda à l'aide de l'ARN en suivant le format suivant.
 
 ```
-# Pour les régions standard
+# Pour les régions us, us3, us5, eu et ap1
 arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # Pour les régions us-gov
 arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
-```
-
-Les options `RUNTIME` disponibles sont `Node12-x`, `Node14-x` et `Node16-x`. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+
+Les options `RUNTIME` disponibles sont {{< latest-lambda-layer-version layer="node-versions" >}}. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
+
+```
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][2] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.
@@ -285,7 +286,7 @@ yarn add datadog-lambda-js
 
 Consultez la [dernière version][3].
 
-### Configuration
+### Configurer les logs
 
 Pour configurer la fonction, suivez les étapes ci-dessous :
 
@@ -304,7 +305,6 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][6].
 2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][7].
 
-
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
@@ -312,6 +312,8 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -319,7 +321,7 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 
 Bien que cette opération soit facultative, Datadog vous recommande d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur. Pour ce faire, suivez la [documentation relative au tagging de service unifié][2].
 
-## Utilisation
+## Explorer les logs
 
 Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][3].
 

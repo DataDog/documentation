@@ -17,20 +17,19 @@ further_reading:
 - link: /continuous_testing/explorer/search_runs/
   tag: ドキュメント
   text: テスト実行を検索する方法を学ぶ
-kind: documentation
-title: Synthetic Monitoring & Continuous Testing Explorer
+title: Synthetic Monitoring & Testing Results Explorer
 ---
 
 ## 概要
 
-[Explorer][1] は、**Synthetic Monitoring** および **Continuous Testing** のためのすべてのテスト実行および CI バッチを視覚化するものです。
+[Results Explorer][1] は、**Synthetic Monitoring** および **Continuous Testing** におけるすべてのテスト実行と CI バッチの可視性を提供します。
 
 {{< tabs >}}
 {{% tab "CI Batches" %}}
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Synthetic Monitoring & Continuous Testing Explorer で CI バッチの検索と管理を行います" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Synthetic Monitoring & Testing Results Explorer で CI バッチの検索と管理を行います" style="width:100%;">}}
 {{% /tab %}}
 {{% tab "テスト実行" %}}
-{{< img src="continuous_testing/explorer_test_runs.png" alt="Synthetic Monitoring & Continuous Testing Explorer でテスト実行の検索と管理を行います" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Synthetic Monitoring & Testing Results Explorer でテスト実行の検索と管理を行います" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -42,9 +41,9 @@ title: Synthetic Monitoring & Continuous Testing Explorer
 
 ## 検索クエリを作成する
 
-[**UX Monitoring** > **Explorer**][1] に移動し、すぐに使える検索クエリをクリックすると、テストバッチまたは実行の表示と視覚化を開始できます。
+[**Digital Experience > Synthetic Monitoring & Testing** > **Continuous Testing**][1] に移動し、すぐに使える検索クエリをクリックすると、テストバッチまたは実行の表示を開始し、視覚化を作成できます。
 
-{{< img src="continuous_testing/explorer_search_query.png" alt="Explorer ですぐに使える検索クエリ" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_search_query_1.png" alt="Explorer ですぐに使える検索クエリ" style="width:100%;">}}
 
 - CI パイプラインで実行されている失敗したテストをブロックステータスでフィルターして表示し、それらが新しいリリースをブロックしているかどうかを確認します。
 - 失敗したテスト実行を HTTP エラーステータスコードで分析し、予期しないステータスコードを持つ API テストを特定します。
@@ -55,7 +54,7 @@ title: Synthetic Monitoring & Continuous Testing Explorer
 
 ## テストの実行を確認する
 
-Explorer には、[Synthetic Monitoring][7] および [Continuous Testing][8] で実行したすべてのテストが表示されます。すべてのテストは、高速再試行を含む、特定のテストサブタイプのテスト実行に対応します。Explorer でテストをクリックすると、テスト実行のページにアクセスできます。
+Results Explorer では、[Synthetic Monitoring][7] および [Continuous Testing][8] からのすべてのテスト実行が表示されます。すべてのテストは、高速再試行を含む、特定のテストサブタイプのテスト実行に対応します。Results Explorer でテストをクリックすると、テスト実行のページにアクセスできます。
 
 {{< img src="continuous_testing/api_test_run.png" alt="API テスト実行詳細ページ" style="width:100%;">}}
 
@@ -67,9 +66,9 @@ Explorer には、[Synthetic Monitoring][7] および [Continuous Testing][8] �
 
 ## テストバッチの確認
 
-Explorer は、[Continuous Testing と CI/CD プロバイダー][2]で実行されたテストのバッチを表示します。各バッチは Datadog API ([CI/CD インテグレーション][2]、[datadog-ci][3] NPM パッケージ、または直接 API エンドポイントを介して) の呼び出しに対応し、一つまたは複数のテストの実行をトリガーします。
+Results Explorer は、[Continuous Testing と CI/CD プロバイダー][2]で実行されたテストのバッチを表示します。各バッチは Datadog API ([CI/CD インテグレーション][2]、[datadog-ci][3] NPM パッケージ、または直接 API エンドポイントを介して) の呼び出しに対応し、一つまたは複数のテストの実行をトリガーします。
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="CI Results Explorer のサイドパネル" style="width:100%;">}}
+{{< img src="continuous_testing/ci_execution_side_panel.png" alt="Synthetic Monitoring & Testing Results Explorer のテスト実行の CI バッチのサイドパネル" style="width:100%;">}}
 
 1. バッチをクリックすると、バッチ CI/CD のメタデータとバッチテスト結果を含むサイドパネルが表示されます。
 2. バッチの一部として実行されたテストの実行を調査し、テストの失敗をピンポイントで特定します。
@@ -77,7 +76,11 @@ Explorer は、[Continuous Testing と CI/CD プロバイダー][2]で実行さ�
 
 テストバッチについては、[テストバッチを検索する][4]を参照してください。
 
-## その他の参考資料
+## エクスポート
+
+Synthetic Monitoring & Testing Results Explorer で、ビューを[保存ビュー][9]としてエクスポートします。
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -89,3 +92,4 @@ Explorer は、[Continuous Testing と CI/CD プロバイダー][2]で実行さ�
 [6]: /ja/continuous_testing/explorer/search_runs/
 [7]: /ja/synthetics/
 [8]: /ja/continuous_testing/
+[9]: /ja/continuous_testing/explorer/saved_views/

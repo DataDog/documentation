@@ -1,10 +1,9 @@
 ---
 title: Mobile and TV Monitoring
-kind: documentation
 description: Collect RUM data from your mobile and TV applications.
 type: multi-code-lang
 further_reading:
-- link: '/real_user_monitoring/session_replay/'
+- link: '/real_user_monitoring/session_replay/browser/'
   tag: 'Documentation'
   text: 'Session Replay'
 ---

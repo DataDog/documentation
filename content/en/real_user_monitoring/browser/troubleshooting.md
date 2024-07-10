@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'
@@ -21,6 +20,7 @@ If you can't see any RUM data or if data is missing for some users:
 | Ad blockers prevent the RUM Browser SDK from being downloaded or sending data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. See the [Install the RUM Browser SDK with npm][3] and [forward the collected data through a proxy][4] docs. |
 | Network rules, VPNs, or antivirus software can prevent the RUM Browser SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the RUM Browser SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
 | Scripts, packages, and clients initialized before the RUM Browser SDK can lead to missed logs, resources, and user actions. For example, initializing ApolloClient before the RUM Browser SDK may result in `graphql` requests not being logged as XHR resources in the RUM Explorer. | Check where the RUM Browser SDK is initialized and consider moving this step earlier in the execution of your application code.                                             |
+| If you've set `trackViewsManually: true` and notice that no sessions are present, the application may have suddenly stopped sending RUM information even though there are no network errors. | Be sure to start an initial view once you've initialized RUM to prevent any data loss. See [Advanced Configuration][6] for more information.|
 
 Read the [Content Security Policy guidelines][5] and ensure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
 
@@ -36,17 +36,25 @@ If the RUM Browser SDK is not installed, or if it is not successfully initialize
 
 You can also check your browser developer tools console or network tab if you notice any errors related to the loading of the RUM Browser SDK.
 
-**Note**: To ensure accurate results, set `sessionSampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][8].
+**Note**: To ensure accurate results, set `sessionSampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][9].
 
 ### Data to the Datadog intake
 
-The RUM Browser SDK sends batches of data periodically to the Datadog intake. If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
+
+The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions have been met:
+
+- Every 30 seconds
+- When 50 events have been reached
+- When the payload is >16 kB
+- On `visibility:hidden` or `beforeUnload`
+
+If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
 {{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="RUM requests to Datadog intake">}}
 
 ## RUM cookies
 
-The RUM Browser SDK relies on cookies to store session information and follow a [user session][6] across different pages. The cookies are first-party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the RUM Browser SDK:
+The RUM Browser SDK relies on cookies to store session information and follow a [user session][7] across different pages. The cookies are first-party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the RUM Browser SDK:
 
 | Cookie name        | Details                                                                                                                                                                                                                                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -55,6 +63,10 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 | `dd_cookie_test_*` | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 
 **Note**: The `_dd_l`, `_dd_r`, and `_dd` cookies have been replaced with `_dd_s` in recent versions of the RUM Browser SDK.
+
+## Session IDs, cookies and RUM applications
+
+There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
 
 ## Technical limitations
 
@@ -104,19 +116,19 @@ If an event or a request goes beyond any of the following limitations, it is rej
 
 ## "Customer data exceeds the recommended threshold" warning
 
-The RUM browser SDK allows you to set [global context][9], [user information][10] and [feature flags][11] which are then included with the collected events.
+The RUM browser SDK allows you to set [global context][10], [user information][11] and [feature flags][12] which are then included with the collected events.
 
 To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However, sending large volumes of data can still impact the performance for users on slow internet connections.
 
 For the best user experience, Datadog recommends keeping the size of the global context, user information, and feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
 
-Since v5.3.0, the RUM Browser SDK supports data compression via the `compressIntakeRequest` [initialization parameter][12]. When enabled, this recommended limit is extended from 3KiB to 16KiB.
+Since v5.3.0, the RUM Browser SDK supports data compression via the `compressIntakeRequest` [initialization parameter][13]. When enabled, this recommended limit is extended from 3KiB to 16KiB.
 
 ## Cross origin read blocking warning
 
 On Chromium-based browsers, when the RUM Browser SDK sends data to the Datadog intake, a CORB warning is printed in the console: `Cross-Origin Read Blocking (CORB) blocked cross-origin response`.
 
-The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue][7]. It does not impact the RUM Browser SDK and can safely be ignored.
+The warning is shown because the intake returns a non-empty JSON object. This behavior is a reported [Chromium issue][8]. It does not impact the RUM Browser SDK and can safely be ignored.
 
 ## Further Reading
 
@@ -124,13 +136,14 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
-[3]: /real_user_monitoring/browser/#npm
+[3]: /real_user_monitoring/browser/setup/#npm
 [4]: /real_user_monitoring/guide/proxy-rum-data/
 [5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[6]: /real_user_monitoring/browser/data_collected/?tab=session
-[7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
-[8]: /real_user_monitoring/guide/sampling-browser-plans/
-[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[11]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
-[12]: /real_user_monitoring/browser/#initialization-parameters
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[7]: /real_user_monitoring/browser/data_collected/?tab=session
+[8]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
+[9]: /real_user_monitoring/guide/sampling-browser-plans/
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[12]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
+[13]: /real_user_monitoring/browser/setup/#initialization-parameters

@@ -1,13 +1,12 @@
 ---
 title: Intelligent Test Runner for Swift
-kind: documentation
 is_beta: true
 code_lang: swift
 type: multi-code-lang
 code_lang_weight: 40
 aliases:
-  - continuous_integration/intelligent_test_runner/swift/
-  - continuous_integration/intelligent_test_runner/setup/swift/
+  - /continuous_integration/intelligent_test_runner/swift/
+  - /continuous_integration/intelligent_test_runner/setup/swift/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"

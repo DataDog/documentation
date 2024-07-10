@@ -1,6 +1,5 @@
 ---
 title: Custom Detection Rules
-kind: documentation
 aliases:
   - /security_platform/application_security/custom_rules
   - /security/application_security/custom_rules
@@ -110,7 +109,7 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/#cat-application-security
+[1]: /security/default_rules/?category=cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
 [3]: /tracing/trace_explorer/query_syntax/
 [4]: /monitors/notify/?tab=is_alert#integrations

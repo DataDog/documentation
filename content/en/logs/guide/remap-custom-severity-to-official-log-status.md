@@ -1,6 +1,6 @@
 ---
 title: Remap Custom Severity Values to the Official Log Status
-kind: guide
+
 aliases:
   - /logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status
 further_reading:

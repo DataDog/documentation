@@ -1,6 +1,5 @@
 ---
 description: Datadog Agent Integration Developer Tool をインストールします。
-kind: documentation
 title: Datadog Agent Integration Developer Tool をインストールする
 ---
 このドキュメントでは、インタープリターおよび開発ツールのインストールなど、Agent ベースのインテグレーションを開発するための Python 環境の設定方法について説明します。
@@ -12,7 +11,7 @@ title: Datadog Agent Integration Developer Tool をインストールする
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-[Homebrew][1] を使って Python 3.9 をインストールします。
+[Homebrew][1] を使って Python 3.11 をインストールします。
 
 1. Homebrew を更新します。
    ```
@@ -21,31 +20,31 @@ title: Datadog Agent Integration Developer Tool をインストールする
 
 2. Python をインストールします。
    ```
-   brew install python@3.9
+   brew install python@3.11
    ```
 
 3. Homebrew のインストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
 
 4. Python のバイナリが `PATH` にインストールされていることと、正しいバージョンがインストールされていることを確認します。
    ```
-   which python3.9
+   which python3.11
    ```
 
    お使いの Mac のアーキテクチャに応じて、以下の出力が表示されるはずです。
    - ARM (M1+) マシン:
      ```
-     /opt/homebrew/bin/python3.9
+     /opt/homebrew/bin/python3.11
      ```
    - Intel マシンの MacOS:
      ```
-     /usr/local/bin/python3.9
+     /usr/local/bin/python3.11
      ```
 
 [1]: https://brew.sh/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. [Python 3.9 64-bit 実行形式インストーラー][1]をダウンロードし、実行します。
+1. [Python 3.11 64 ビット版の実行形式インストーラー][1]をダウンロードして実行します。
 1. Python を PATH に追加するオプションを選択します。
 1. **Install Now** をクリックします。
 1. インストールが完了したら、マシンを再起動します。
@@ -56,11 +55,11 @@ title: Datadog Agent Integration Developer Tool をインストールする
    C:\Users\<USER>\AppData\Local\Programs\Python\Python39\python.exe
    ```
 
-[1]: https://www.python.org/downloads/release/python-3917/
+[1]: https://www.python.org/downloads/release/python-3115/
 {{< /tabs >}}
 
 {{% tab "Linux" %}}
-Linux においては、システムの Python を変更することは避けてください。Datadog は、[pyenv][1] または [miniconda][2] を使用して Python 3.9 をインストールすることを推奨します。
+Linux でのインストールでは、システム Python の変更は避けてください。Datadog では [pyenv][1] や [miniconda][2] を使用して Python 3.11 をインストールすることを推奨しています。
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html

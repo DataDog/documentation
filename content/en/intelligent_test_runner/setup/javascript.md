@@ -1,12 +1,11 @@
 ---
 title: Intelligent Test Runner for JavaScript and TypeScript
-kind: documentation
 code_lang: javascript
 type: multi-code-lang
 code_lang_weight: 20
 aliases:
-  - continuous_integration/intelligent_test_runner/javascript/
-  - continuous_integration/intelligent_test_runner/setup/javascript/
+  - /continuous_integration/intelligent_test_runner/javascript/
+  - /continuous_integration/intelligent_test_runner/setup/javascript/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"

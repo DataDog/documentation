@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: 설명서
   text: 에이전트 v7로 업그레이드
-kind: 가이드
 title: 파이썬(Python) 버전 관리
 ---
 
@@ -109,7 +108,6 @@ clusterChecksRunner:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -126,7 +124,6 @@ spec:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -153,7 +150,6 @@ spec:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -177,7 +173,6 @@ spec:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -209,7 +204,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:
@@ -224,7 +218,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:

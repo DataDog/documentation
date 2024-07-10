@@ -1,7 +1,7 @@
 ---
 algolia:
   tags:
-  - 고급 로그 필터
+  - advanced log filter
 description: Datadog Agent를 사용하여 로그를 수집하고 Datadog로 전송하기
 further_reading:
 - link: /logs/log_configuration/processors
@@ -18,15 +18,14 @@ further_reading:
   text: 로그 탐색 방법 알아보기
 - link: /logs/logging_without_limits/
   tag: 설명서
-  text: 제한 없는 로그 수집*
+  text: Logging without Limits*
 - link: /glossary/#tail
   tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 설명서
 title: 고급 로그 수집 설정
 ---
 
-로그 수집 설정을 사용자 지정합니다:
+[로그 수집][1]을 설정한 후에 수집 설정을 사용자 정의할 수 있습니다.
 * [로그 필터링](#filter-logs)
 * [로그에서 민감한 데이터 스크러빙](#scrub-sensitive-data-from-your-logs)
 * [다중 줄 로그 집계](#multi-line-aggregation)
@@ -35,15 +34,16 @@ title: 고급 로그 수집 설정
 * [로그 파일 인코딩 지정](#log-file-encodings)
 * [글로벌 처리 규칙 정의](#global-processing-rules)
 
-**참고**: 복수의 처리 규칙을 설정할 경우 순차적으로 적용되며 각 규칙은 이전 규칙의 결과에 적용됩니다.
-
-**참고**: 처리 규칙 패턴은 [Golang regexp 구문][1]을 따라야 합니다.
-
 Datadog 에이전트에서 수집한 모든 로그에 처리 규칙을 적용하려면 [Global 처리 규칙](#global-processing-rules) 섹션을 참조하세요.
+
+**참고**:
+- 여러 처리 규칙을 설정하면 순차적으로 적용되며 각 규칙은 이전 규칙의 결과에 적용됩니다.
+- 처리 규칙 패턴은 [Golang 정규 표현식 구문][2]을 준수해야 합니다.
+- `log_processing_rules` 파라미터는 통합 설정에서 로그 수집 설정을 사용자 정의하는 데 사용됩니다. Agent의 [기본 설정][5]에서 `processing_rules` 파라미터는 전역 처리 규칙을 정의하는 데 사용됩니다.
 
 ## 로그 필터링
 
-로그의 특정 하위 집합만 Datadog으로 보내려면 설정 파일의 `log_processing_rules` 파라미터를 **exclude_at_match** 또는 **include_at_match** `type`과 함께 사용합니다.
+특정 로그 하위 집합만 Datadog으로 보내려면 설정 파일에서 `exclude_at_match` 또는 `include_at_match` 유형과 함께 `log_processing_rules` 파라미터를 사용하세요.
 
 ### 매치 시 제외
 
@@ -51,7 +51,7 @@ Datadog 에이전트에서 수집한 모든 로그에 처리 규칙을 적용하
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | 지정한 패턴이 메시지에 포함된 경우 로그는 제외되고 Datadog으로 전송되지 않습니다. |
 
-예를 들어, Datadog 이메일 주소를 포함하는 로그를 **걸러내려면**다음 `log_processing_rules`을 사용합니다:
+예를 들어 Datadog 이메일 주소가 포함된 로그를 **필터링**하려면 다음 `log_processing_rules`을 사용하세요.
 
 {{< tabs >}}
 {{% tab "설정 파일" %}}
@@ -99,7 +99,6 @@ Docker 환경의 경우 **필터링할 로그를 보내는 컨테이너**에서 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -128,7 +127,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**참고**: 포드 어노테이션을 사용할 때 패턴의 정규식 문자를 이스케이프 하세요. 예를 들어 `\d`는 `\\d`, `\w`는 `\\w`이 됩니다.
+**참고**: 포드 어노테이션을 사용할 때 패턴의 정규식 문자를 이스케이프하세요. 예를 들어 `\d`는 `\\d`, `\w`는 `\\w`이 됩니다.
 
 **참고**: 주석 값은 JSON 구문을 따라야 하며, 따라오는 쉼표나 주석을 포함해서는 안됩니다.
 
@@ -142,7 +141,7 @@ spec:
 | `include_at_match` | 지정된 패턴이 포함된 메시지가 있는 로그만 Datadog으로 전송됩니다. 여러 `include_at_match` 규칙이 정의된 경우 로그를 포함시키기 위해 모든 규칙 패턴이 일치해야 합니다. |
 
 
-예를 들어, Datadog 이메일 주소가 포함된 로그를 **필터링해서 포함시키려면** 다음`log_processing_rules`을 사용합니다:
+예를 들어, Datadog 이메일 주소가 포함된 로그를 **필터링**하려면 다음 `log_processing_rules` 설정을 사용하세요.
 
 {{< tabs >}}
 {{% tab "설정 파일" %}}
@@ -160,7 +159,7 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-하나 이상의 패턴을 일치시키려면 단일 표현식으로 정의해야 합니다:
+하나 이상의 패턴을 일치시키려면 단일 표현식으로 정의해야 합니다.
 
 ```yaml
 logs:
@@ -174,7 +173,7 @@ logs:
       pattern: abc|123
 ```
 
-패턴이 너무 길어 한 줄에 맞지 않을 경우 여러 줄로 나눌 수 있습니다:
+패턴이 너무 길어서 한 줄에 읽을 수 없을 경우 여러 줄로 나눌 수 있습니다.
 
 ```yaml
 logs:
@@ -193,7 +192,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 환경의 경우 **필터링할 로그를 보내는 컨테이너**에서 라벨 `com.datadoghq.ad.logs`을 사용하여 `log_processing_rules`을 지정합니다. 예를 들어:
+Docker 환경에서는 필터링하려는 로그를 전송하는 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 지정합니다. 예를 들어:
 
 ```yaml
  labels:
@@ -220,7 +219,6 @@ Kubernetes 환경인 경우, 포드에서 포드 어노테이션인 `ad.datadogh
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -258,11 +256,11 @@ spec:
 
 ## 로그에서 민감한 데이터 스크러빙하기
 
-로그에 삭제가 필요한 민감한 정보가 포함되어 있는 경우 설정 파일의 `log_processing_rules` 파라미터를 **mask_sequences**`type`과 함께 사용하여 민감한 시퀀스를 스크러빙하도록 Datadog Agent를 설정합니다.
+로그에 삭제가 필요한 민감한 정보가 포함되어 있는 경우 설정 파일의 `log_processing_rules` 파라미터를 `mask_sequences` 유형과 함께 사용하여 민감한 시퀀스를 스크러빙하도록 Datadog Agent를 설정합니다.
 
 일치하는 모든 그룹이 `replace_placeholder` 파라미터 값으로 바뀝니다.
 
-예를 들어, 신용 카드 번호를 삭제합니다:
+예를 들어, 신용 카드 번호를 삭제하려면:
 
 {{< tabs >}}
 {{% tab "설정 파일" %}}
@@ -284,7 +282,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 환경의 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 다음과 같이 지정합니다:
+Docker 환경인 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 다음과 같이 지정합니다:
 
 ```yaml
  labels:
@@ -301,7 +299,7 @@ Docker 환경의 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 �
       }]
 ```
 
-**참고**: 라벨을 사용할 때 패턴에서 정규식 문자를 이스케이프하세요. 예를 들어 `\d`는  `\\d`가 되고, `\w`는 `\\w`이 됩니다.
+**참고**: 라벨을 사용할 때 패턴의 정규식 문자를 이스케이프하세요. 예를 들어 `\d`는  `\\d`, `\w`는 `\\w`이 됩니다.
 
 **참고**: 라벨 값은 JSON 구문을 따라야 하며, 따라오는 쉼표나 주석을 포함해서는 안 됩니다.
 
@@ -312,7 +310,6 @@ Kubernetes 환경인 경우, 포드에서 포드 어노테이션인 `ad.datadogh
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -360,7 +357,7 @@ Agent 버전 7.17+에서는 `replace_placeholder` 문자열을 사용하여 `$1`
 
 ## 다중 줄 집계
 
-로그가 JSON으로 전송되지 않고 여러 줄을 단일 항목으로 집계하려는 경우 한 줄당 하나의 로그 대신 특정 정규식 패턴을 사용하여 새 로그를 감지하도록 Datadog Agent를 구성합니다. 설정 파일의 `log_processing_rules` 파라미터를 **multi_line**`type`과 함께 사용하여 지정된 패턴이 다시 감지될 때까지 모든 줄을 단일 항목으로 집계하는 방식으로 수행됩니다.
+로그가 JSON으로 전송되지 않고 여러 줄을 단일 항목으로 집계하려는 경우 한 줄당 하나의 로그 대신 특정 정규식 패턴을 사용하여 새 로그를 감지하도록 Datadog Agent를 설정합니다. 지정된 패턴이 다시 감지될 때까지 모든 행을 단일 항목으로 집계하려면 `log_processing_rules` 파라미터에서 `multi_line` 유형을 사용하세요.
 
 예를 들어, 모든 Java 로그 줄은 `yyyy-dd-mm` 형식의 타임스탬프로 시작됩니다. 이 줄에는 두 개의 로그로 전송할 수 있는 스택 트레이스가 포함됩니다:
 
@@ -392,7 +389,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 환경의 경우 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 다음과 같이 지정합니다:
+Docker 환경인 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 다음과 같이 지정합니다:
 
 ```yaml
  labels:
@@ -415,7 +412,6 @@ Kubernetes 환경인 경우, 포드에서 포드 어노테이션인 `ad.datadogh
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -465,7 +461,7 @@ spec:
 | {"날짜": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### 자동 다중 줄 집계
-Agent 7.37+에서 `auto_multi_line_detection`을 사용할 수 있습니다. 이를 통해  Agent가 [공통 다중 줄 패턴][2]을 자동으로 탐지할 수 있습니다.
+Agent 7.37+에서 `auto_multi_line_detection`을 사용할 수 있습니다. 이를 통해 Agent가 [공통 다중 줄 패턴][2]을 자동으로 탐지할 수 있습니다.
 
 `datadog.yaml` 파일에서 전체적으로 `auto_multi_line_detection`을 활성화합니다:
 
@@ -503,7 +499,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 환경의 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 다음과 같이 지정합니다:
+Docker 환경인 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 다음과 같이 지정합니다:
 
 ```yaml
  labels:
@@ -520,7 +516,6 @@ Docker 환경의 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 �
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:
@@ -556,7 +551,7 @@ spec:
 
 ## 일반적으로 사용되는 로그 처리 규칙
 
-예제 목록을 보려면 [일반적으로 사용되는 로그 처리 규칙 FAQ][3]를 참조하세요.
+예제 목록을 보려면 [일반적으로 사용되는 로그 처리 규칙 FAQ][4]를 참조하세요.
 
 ## 와일드카드를 사용한 테일 디렉토리
 
@@ -638,7 +633,7 @@ logs:
 
 ## 글로벌 처리 규칙
 
-Datadog Agent v6.10+의 경우 , `exclude_at_match`, `include_at_match`, `mask_sequences` 처리 규칙을 Agent의 [기본 설정 파일][4]에 전반적으로 정의하거나 환경 변수를 통해 정의할 수 있습니다:
+Datadog Agent v6.10+의 경우 , `exclude_at_match`, `include_at_match`, `mask_sequences` 처리 규칙을 Agent의 [기본 설정 파일][4]에서 전체적으로 정의하거나 환경 변수를 통해 정의할 수 있습니다:
 
 {{< tabs >}}
 {{% tab "설정 파일" %}}
@@ -681,7 +676,7 @@ env:
 {{< /tabs >}}
 Datadog Agent에서 수집한 모든 로그는 글로벌 처리 규칙의 영향을 받습니다.
 
-**참고**: 글로벌 처리 규칙에 형식 문제가 있는 경우 Datadog Agent는 로그 컬렉터를 시작하지 않습니다. Agent의 [상태 하위 명령][5]을 실행하여 문제를 해결합니다.
+**참고**: 글로벌 처리 규칙에 형식 문제가 있는 경우 Datadog Agent는 로그 컬렉터를 시작하지 않습니다. Agent의 [상태 하위 명령][5]을 실행하여 문제를 해결하세요.
 
 ## 참고 자료
 
@@ -690,8 +685,9 @@ Datadog Agent에서 수집한 모든 로그는 글로벌 처리 규칙의 영향
 <br>
 *제한 없는 로그 수집(Logging without Limits)은 Datadog, Inc.의 상표입니다.
 
-[1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-[3]: /ko/agent/faq/commonly-used-log-processing-rules
-[4]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[5]: /ko/agent/configuration/agent-commands/#agent-information
+[1]: /ko/agent/logs/
+[2]: https://golang.org/pkg/regexp/syntax/
+[3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+[4]: /ko/agent/faq/commonly-used-log-processing-rules
+[5]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[6]: /ko/agent/configuration/agent-commands/#agent-information

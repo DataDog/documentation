@@ -1,6 +1,5 @@
 ---
 title: Automatic Instrumentation
-kind: documentation
 algolia:
   tags: ['apm automatic instrumentation']
 further_reading:
@@ -112,7 +111,7 @@ To instrument an application written in a language that does not have official l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+
 [2]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
 [3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
 [4]: /tracing/trace_collection/custom_instrumentation/opentracing/

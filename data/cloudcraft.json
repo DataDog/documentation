@@ -1,0 +1,2071 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Cloudcraft API Reference",
+    "description": "The Cloudcraft API provides programmatic access and remote rendering of your architecture diagrams. The API also provides fully automated visualization of AWS and Azure accounts that are linked to your Cloudcraft account, either as ready to use images or as JSON data.\n\nUse case examples:\n\n- Snapshot and visually compare your live AWS environment state before and after a deployment from the command line or as part of your automated CI pipeline.\n- Download an inventory of all your AWS resources from a linked account as JSON.\n- Write a converter from a third-party data format to Cloudcraft diagrams.\n- Backup, export, and import your Cloudcraft data.\n    \n\nAccess to the Cloudcraft API requires a [Cloudcraft](https://www.cloudcraft.co/) user account.\n\n## Authentication\n\nTo authenticate your Cloudcraft account for the API, you must include your secret key in the requests. You can create API keys in the **Manage API keys** > **Create API Key** section of the [Cloudcraft application](https://app.cloudcraft.co/).\n\n<img src=\"https://static.cloudcraft.co/docs/apikeys.png\" alt=\"Creating\" api=\"\" keys=\"\">\n\nThe API key provides access to your diagrams and linked AWS accounts in either read or read-write mode. Do not share your secret API keys in publicly accessible areas such as GitHub or client-side code.\n\nAuthentication to the API is performed via the _Bearer Authorization_ header over HTTPS. For example, using cURL an authorized request looks like this:\n\n```shell\ncurl -X GET \\\n  -H 'Authorization: Bearer bear3vFUUkgfzoBK+UKyPmZw1NsdfrFzdvZoyFJwe8=' \\\n  https://api.cloudcraft.co/user/me\n\n```\n\n## Endpoints\n\nThe Cloudcraft API endpoint is https://api.cloudcraft.co. For access to the Cloudcraft US GovCloud API, contact [Cloudcraft Support](https://app.cloudcraft.co/support).\n\nAll API requests must be made over HTTPS. Calls made over plain HTTP will fail.\n\n## Request rate limiting\n\nCloudcraft throttles the number of API request that can be made per API key. This is to help the performance of the service, and to ensure fair usage for all Cloudcraft customers. The current API limits are 20 requests / 10 seconds (120 req / minute).\n\nWhen the request submissions exceeds the rate limit, clients receive a `429 Too Many Requests` error response with a `Retry-After` header that indicates how long (in seconds) the user agent should wait before making a follow-up request. Clients should catch this exception, and retry based on the hint from `Retry-After` header until successful.\n\n## Access control lists\n\nBlueprints and AWS Accounts support the following access control properties:\n\n```json\n{\n ...\n readAccess: [],\n writeAcces: []\n}\n\n```\n\nWhere an ACL is a string of the form:\n\n- `team/TEAM_ID`\n- `customer/CUSTOMER_ID`\n    \n\nFor example, to share a blueprint with two teams:\n\n```json\n \"readAccess\": [\"team/512184ee-e683-45c1-948a-f588b8c833ca\", \"team/aab74437-ff4c-4a6d-b366-1311821905b1\"]\n\n```\n\nTo unshare a blueprint, set the list to `[]`;\n\n**Note**: The APIs validate both read and write access separately. In the UI, only the `readAccess` is reflected.",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "{{cloudcraft_url}}"
+    }
+  ],
+  "paths": {
+    "/blueprint": {
+      "get": {
+        "tags": [
+          "Blueprints"
+        ],
+        "summary": "List blueprints",
+        "description": "List all of your saved blueprints.\n\nEach entry includes the blueprint ID and name, access control, and user information.\n\nThe provided blueprint IDs are required to access the other blueprint-related APIs.",
+        "operationId": "listMyBlueprints",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "no-cache, no-store"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "320"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 20:56:21 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"140-v7EvuAiXXeV801uhn+FpKI6GfxM\""
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "blueprints": {
+                      "description": "An array of blueprint metadata.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "CreatorId": {
+                            "type": "string",
+                            "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                          },
+                          "LastUserId": {
+                            "type": "string",
+                            "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2022-01-01T20:54:47.302Z"
+                          },
+                          "id": {
+                            "type": "string",
+                            "example": "bp37712a-c507-4c62-ad8b-7d981cacb3be"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Web App Reference Architecture"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2022-01-01T20:55:52.876Z"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "CreatorId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                          "LastUserId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                          "createdAt": "2022-01-01T20:54:47.302Z",
+                          "id": "bp37712a-c507-4c62-ad8b-7d981cacb3be",
+                          "name": "Web App Reference Architecture",
+                          "updatedAt": "2022-01-01T20:55:52.876Z"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "List my blueprints": {
+                    "value": {
+                      "blueprints": [
+                        {
+                          "CreatorId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                          "LastUserId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                          "createdAt": "2022-01-01T20:54:47.302Z",
+                          "id": "bp37712a-c507-4c62-ad8b-7d981cacb3be",
+                          "name": "Web App Reference Architecture",
+                          "updatedAt": "2022-01-01T20:55:52.876Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Blueprints"
+        ],
+        "summary": "Create a blueprint",
+        "description": "Create a new blueprint.\n\nThe body of the request should contain the blueprint document in JSON format. The response contains the created blueprint, including the newly assigned ID.",
+        "operationId": "createBlueprint",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "grid": {
+                        "type": "string",
+                        "example": "standard"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "My new blueprint"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Create blueprint": {
+                  "value": {
+                    "data": {
+                      "grid": "standard",
+                      "name": "My new blueprint"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "342"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 20:59:57 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "ce1b1c578ba5ce9f32e0eca38bf3c4ce"
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CreatorId": {
+                      "type": "string",
+                      "description": "The user ID of the creator of the blueprint.",
+                      "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                    },
+                    "LastUserId": {
+                      "type": "string",
+                      "description": "The user ID of the last user to modify the blueprint.",
+                      "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "The date and time the blueprint was created.",
+                      "example": "2022-01-01T20:59:57.340Z"
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "The definition of the blueprint.",
+                      "properties": {
+                        "grid": {
+                          "type": "string",
+                          "description": "The size of the grid used in the blueprint.",
+                          "example": "standard"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "A human-readable name for the blueprint.",
+                          "example": "My new blueprint"
+                        },
+                        "version": {
+                          "type": "number",
+                          "example": 1
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier of the blueprint.",
+                      "example": "bp37712a-c507-4c62-ad8b-7d981cacb3be"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "The date and time the blueprint was last updated.",
+                      "example": "2022-01-01T20:59:57.340Z"
+                    }
+                  }
+                },
+                "examples": {
+                  "Create blueprint": {
+                    "value": {
+                      "CreatorId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                      "LastUserId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                      "createdAt": "2022-01-01T20:59:57.340Z",
+                      "data": {
+                        "grid": "standard",
+                        "name": "My new blueprint",
+                        "version": 1
+                      },
+                      "id": "bp37712a-c507-4c62-ad8b-7d981cacb3be",
+                      "updatedAt": "2022-01-01T20:59:57.340Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          }
+        }
+      }
+    },
+    "/blueprint/{blueprint_id}": {
+      "get": {
+        "tags": [
+          "Blueprints"
+        ],
+        "summary": "Retrieve a blueprint",
+        "description": "Retrieve a blueprint in JSON format.\n\n### Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.",
+        "operationId": "retrieveBlueprint",
+        "responses": {
+          "200": {
+            "description": "Retrieve blueprint",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "no-cache, no-store"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Encoding": {
+                "schema": {
+                  "type": "string",
+                  "example": "gzip"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 20:56:59 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "c6ed6253ec05e79c94809947df59dfed"
+                }
+              },
+              "Transfer-Encoding": {
+                "schema": {
+                  "type": "string",
+                  "example": "chunked"
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "text/plain": {
+                "examples": {
+                  "Retrieve blueprint": {
+                    "value": "{\n    \"id\": \"bp37712a-c507-4c62-ad8b-7d981cacb3be\",\n    \"data\": { See Blueprint data format specification },\n    \"createdAt\": \"2022-01-01T20:54:47.302Z\",\n    \"updatedAt\": \"2022-01-01T20:55:52.876Z\",\n    \"CreatorId\": \"us46e9aa-5806-4cd6-8e78-c22d58602d09\",\n    \"LastUserId\": \"us46e9aa-5806-4cd6-8e78-c22d58602d09\"\n}"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Blueprints"
+        ],
+        "summary": "Update a blueprint",
+        "description": "Update an existing blueprint.\n\nThe body of the request should contain the updated blueprint document in JSON format.\n\nOptionally, a conditional update of the blueprint can be perfomed by including the _If-Match_ HTTP header with the same ETag value as provided by the \"Retrieve blueprint\" API. If the blueprint has been modified since the retrieval, the update is rejected with a _412 Resource out of date_ response. If the update succeeds, the new ETag is returned.",
+        "operationId": "updateBlueprint",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "grid": {
+                        "type": "string",
+                        "example": "standard"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "My updated blueprint"
+                      },
+                      "text": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "color": {
+                              "type": "string",
+                              "example": "#f5b720"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "label1"
+                            },
+                            "mapPos": {
+                              "type": "array",
+                              "items": {
+                                "type": "number",
+                                "example": 0
+                              },
+                              "example": [
+                                0,
+                                0
+                              ]
+                            },
+                            "text": {
+                              "type": "string",
+                              "example": "Hello\nWorld!"
+                            },
+                            "textSize": {
+                              "type": "number",
+                              "example": 15
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "isotext"
+                            }
+                          }
+                        },
+                        "example": [
+                          {
+                            "color": "#f5b720",
+                            "id": "label1",
+                            "mapPos": [
+                              0,
+                              0
+                            ],
+                            "text": "Hello\nWorld!",
+                            "textSize": 15,
+                            "type": "isotext"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Update blueprint": {
+                  "value": {
+                    "data": {
+                      "grid": "standard",
+                      "name": "My updated blueprint",
+                      "text": [
+                        {
+                          "color": "#f5b720",
+                          "id": "label1",
+                          "mapPos": [
+                            0,
+                            0
+                          ],
+                          "text": "Hello\nWorld!",
+                          "textSize": 15,
+                          "type": "isotext"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 21:03:05 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "23ba636ed60e7c9e8eebbf5e8ca106e7"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          },
+          "412": {
+            "description": "Resource out of date"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Blueprints"
+        ],
+        "summary": "Delete a blueprint",
+        "description": "Delete a blueprint.\n\nWhen the deletion succeeds, *204 No Content* is returned.\n\n### Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.",
+        "operationId": "deleteBlueprint",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "grid": {
+                        "type": "string",
+                        "example": "standard"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "My new blueprint"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Delete blueprint": {
+                  "value": {
+                    "data": {
+                      "grid": "standard",
+                      "name": "My new blueprint"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 21:05:11 GMT"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          }
+        }
+      }
+    },
+    "/blueprint/{blueprint_id}/{format}": {
+      "get": {
+        "tags": [
+          "Blueprints"
+        ],
+        "summary": "Export a blueprint as an image",
+        "description": "Render blueprint for export in SVG, PNG, PDF, or MxGraph format.\n\n### Path Parameters\n\n- **blueprint_id**: _UUID_. Blueprint ID.\n- **format**: _String_. One of \"svg\", \"png\", \"pdf\", or \"mxGraph\".\n\n### Optional query parameters\n\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".",
+        "operationId": "exportBlueprintAsImage",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          }
+        }
+      }
+    },
+    "/aws/account": {
+      "get": {
+        "tags": [
+          "AWS Accounts"
+        ],
+        "summary": "List AWS accounts",
+        "description": "List all AWS accounts linked to your Cloudcraft account.\n\nThe response is an array of AWS accounts. Each entry includes the account ID and name, access control, and user information.\n\nThe provided account IDs are required to access the other AWS-related APIs.",
+        "operationId": "listMyAwsAccounts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "no-cache, no-store"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "359"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 21:21:28 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"167-gPmWWWu+dRvziSRFfqDCKGyuuPI\""
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accounts": {
+                      "type": "array",
+                      "description": "An array of AWS accounts.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "CreatorId": {
+                            "type": "string",
+                            "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2022-01-01T21:18:59.057Z"
+                          },
+                          "externalId": {
+                            "type": "string",
+                            "example": "ex53e827-a724-4a2a-9fec-b13761540785"
+                          },
+                          "id": {
+                            "type": "string",
+                            "example": "awfda35c-82fe-4edf-b9e9-ffd48f041c22"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Development"
+                          },
+                          "roleArn": {
+                            "type": "string",
+                            "example": "arn:aws:iam::1234567890:role/cloudcraft"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2022-01-01T21:19:03.487Z"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "CreatorId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                          "createdAt": "2022-01-01T21:18:59.057Z",
+                          "externalId": "ex53e827-a724-4a2a-9fec-b13761540785",
+                          "id": "awfda35c-82fe-4edf-b9e9-ffd48f041c22",
+                          "name": "Development",
+                          "roleArn": "arn:aws:iam::1234567890:role/cloudcraft",
+                          "updatedAt": "2022-01-01T21:19:03.487Z"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "List AWS accounts": {
+                    "value": {
+                      "accounts": [
+                        {
+                          "CreatorId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                          "createdAt": "2022-01-01T21:18:59.057Z",
+                          "externalId": "ex53e827-a724-4a2a-9fec-b13761540785",
+                          "id": "awfda35c-82fe-4edf-b9e9-ffd48f041c22",
+                          "name": "Development",
+                          "roleArn": "arn:aws:iam::1234567890:role/cloudcraft",
+                          "updatedAt": "2022-01-01T21:19:03.487Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AWS Accounts"
+        ],
+        "summary": "Add an AWS account",
+        "description": "Register a new AWS account with Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the created account object, including the newly assigned ID for use with other API endpoints.\n\n### Properties\n\n- **name**: A human-readable name for the AWS account. For example, \"Production\" or \"Staging\".\n- **roleArn**: The ARN of the read-only IAM role you've created in your AWS account for Cloudcraft. The IAM role must be created with the unique external ID value of the person who generated the API key being used. \n- **region**: Optional property representing the AWS region to be used for account validation. By default, the account will be validated in the us-east-1 region.",
+        "operationId": "addAwsAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "AWS account name (for example, prod or staging)"
+                  },
+                  "roleArn": {
+                    "type": "string",
+                    "example": "arn:aws:iam::1234567890:role/cloudcraft"
+                  }
+                }
+              },
+              "examples": {
+                "Add AWS account": {
+                  "value": {
+                    "name": "AWS account name (for example, prod or staging)",
+                    "roleArn": "arn:aws:iam::1234567890:role/cloudcraft"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "382"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 13 Nov 2019 01:37:55 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"17e-D6ffd9QodJEbYHbVhFmIRaSgjJ4\""
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CreatorId": {
+                      "type": "string",
+                      "description": "The user ID of the creator of the AWS account.",
+                      "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "The date and time the AWS account was created.",
+                      "example": "2022-01-01T01:37:55.709Z"
+                    },
+                    "externalId": {
+                      "type": "string",
+                      "description": "The unique external ID of the Cloudcraft user who created the AWS account.",
+                      "example": "ex53e827-a724-4a2a-9fec-b13761540785"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier of the AWS account.",
+                      "example": "awfda35c-82fe-4edf-b9e9-ffd48f041c22 "
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "A human-readable name for the AWS account.",
+                      "example": "AWS account name (for example prod or staging)"
+                    },
+                    "roleArn": {
+                      "type": "string",
+                      "description": "The ARN of the IAM role created in AWS for Cloudcraft.",
+                      "example": "arn:aws:iam::1234567890:role/cloudcraft"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "The date and time the AWS account was last updated.",
+                      "example": "2022-01-01T01:37:55.709Z"
+                    }
+                  }
+                },
+                "examples": {
+                  "Add an AWS account": {
+                    "value": {
+                      "CreatorId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                      "createdAt": "2022-01-01T01:37:55.709Z",
+                      "externalId": "ex53e827-a724-4a2a-9fec-b13761540785",
+                      "id": "awfda35c-82fe-4edf-b9e9-ffd48f041c22 ",
+                      "name": "AWS account name (for example prod or staging)",
+                      "roleArn": "arn:aws:iam::1234567890:role/cloudcraft",
+                      "updatedAt": "2022-01-01T01:37:55.709Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          }
+        }
+      }
+    },
+    "/aws/account/{account_id}/{region}/{format}": {
+      "get": {
+        "tags": [
+          "AWS Accounts"
+        ],
+        "summary": "Snapshot AWS account",
+        "description": "Scan and render one region of an AWS account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the AWS region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call will therefore directly return a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing in the background, and a retry will either immediately return the result or continue waiting.\n\n### Path Parameters\n\n*   **account_id**: *UUID*. The AWS account ID as registered with Cloudcraft.\n*   **region**: *String*. The AWS region, for example, \"us-east-1\".\n*   **format**: *String*. One of \"json\", \"svg\", \"png\", \"pdf\", \"mxGraph\".\n    \n\n### Optional query parameters\n\n*   **filter**: *String*. Render a subset of the AWS account. Accepts a filter expression as used on the **Live** tab in the web application. The filter expression terms must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. For example, \\`env=dev OR env=test\\`. \n*   **exclude**: *List of Strings*. Exclude AWS services by name. For example, \"ec2,sg\" to exclude both EC2s and Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n*   **label**: *Boolean*. Automatically label all components. Defaults to true.\n*   **autoconnect**: *Boolean*. Automatically connect all components. Defaults to true.\n*   **scale**: *Float*. Scale relative to original size (1.0). For example, 0.5 for half or 2.0 for double size.\n*   **width**: *Number*. Image width in pixels (for SVG, PNG, and PDF).\n*   **height**: *Number*. Image height in pixels (for SVG, PNG, and PDF).\n*   **grid**: *Boolean*. Enable or disable grid rendering.\n*   **transparent**: *Boolean*. Enable or disable transparent background rendering.\n*   **landscape**: *Boolean*. Enable or disable landscape paper format (PDF).\n*   **paperSize**: *String*. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\",  or \"A5\".\n*   **projection**: *String*. The visual style of the diagram. One of \"isometric\" or \"2d\".\n*   **theme**: *String*. The color theme of the diagram. One of \"light\" or \"dark\".",
+        "operationId": "snapshotAwsAccount",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Wait time exceeded",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "38"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Thu, 04 Mar 2021 20:43:22 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"26-tHbtjcHUZFizdbuDPgkTenQsk2Y\""
+                }
+              },
+              "Referrer-Policy": {
+                "schema": {
+                  "type": "string",
+                  "example": "strict-origin-when-cross-origin"
+                }
+              },
+              "Strict-Transport-Security": {
+                "schema": {
+                  "type": "string",
+                  "example": "max-age=15552000; includeSubDomains"
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "A code indicating the status of the snapshot generation.",
+                      "example": "STILL_PROCESSING"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "A message explaining the reason for the 202 response.",
+                      "example": "Result wait time exceeded. Processing continues in the background, retry to receive result."
+                    },
+                    "retry": {
+                      "type": "boolean",
+                      "description": "A flag indicating whether the client should retry the request.",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Snapshot AWS account, wait time exceeded": {
+                    "value": {
+                      "code": "STILL_PROCESSING",
+                      "message": "Result wait time exceeded. Processing continues in the background, retry to receive result.",
+                      "retry": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "AWS account not found"
+          }
+        }
+      }
+    },
+    "/aws/account/{account_id}": {
+      "put": {
+        "tags": [
+          "AWS Accounts"
+        ],
+        "summary": "Update an AWS account",
+        "description": "Update an AWS account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the updated account object.\n\n### Properties\n\n- **name**: A human-readable name for the AWS account. For example, \"Production\" or \"Staging\".\n- **roleArn**: The ARN of the read-only IAM role you've created in your AWS account for Cloudcraft. The IAM role must be created with the unique external ID value of the person who generated the API key being used.",
+        "operationId": "updateAwsAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "My updated AWS Account"
+                  },
+                  "roleArn": {
+                    "type": "string",
+                    "example": "arn:aws:iam::1234567890:role/cloudcraft"
+                  }
+                }
+              },
+              "examples": {
+                "Update AWS account": {
+                  "value": {
+                    "name": "My updated AWS Account",
+                    "roleArn": "arn:aws:iam::1234567890:role/cloudcraft"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AWS Accounts"
+        ],
+        "summary": "Delete AWS account",
+        "description": "Delete a registered AWS account.\n\n### Path Parameters\n\n*   **account_id**: *UUID*. AWS account ID. Required.",
+        "operationId": "deleteAwsAccount",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "AWS account not found"
+          }
+        }
+      }
+    },
+    "/aws/account/iamParameters": {
+      "get": {
+        "tags": [
+          "AWS Accounts"
+        ],
+        "summary": "Get AWS IAM role parameters",
+        "description": "List the parameters required for you to register a new IAM role in AWS for use with Cloudcraft.\n\nCombined with the AWS CLI to generate IAM roles, this endpoint can facilitate fully automated role creation at scale for organizations with many AWS accounts.",
+        "operationId": "getMyAwsIamRoleParameters",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "38"
+                }
+              },
+              "Content-Security-Policy-Report-Only": {
+                "schema": {
+                  "type": "string",
+                  "example": "default-src 'self'; script-src 'self' https://www.google-analytics.com https://ajax.googleapis.com https://apis.google.com https://cdnjs.cloudflare.com https://checkout.stripe.com https://static.accountdock.com https://stats.pusher.com https://beacon-v2.helpscout.net/ https://assets.calendly.com https://d3e54v103j8qbb.cloudfront.net 'sha256-CA+WQBPlufcdIkUhUDOoZD+LI9nFG5pEQ8mVu8YjH3Q=' 'sha256-MPJlsH5j4c6wINnG8IHGe5oFGnXdxl7l8rBToITQSpM=' 'sha256-mjdgHR9aXy+6OwAGlNS/XgNcYG1Uhd2U4pl8vi7+XCY=' 'sha256-1O6ukW7q59ovCfRL0we+oC30CpPXAEYXJADSQ1vqH0s=' 'sha256-CA+WQBPlufcdIkUhUDOoZD+LI9nFG5pEQ8mVu8YjH3Q='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com themes.googleusercontent.com https://maxcdn.bootstrapcdn.com; frame-src 'self' https://checkout.stripe.com https://accounts.google.com https://static.accountdock.com https://payments.stunning.co https://calendly.com/; connect-src 'self' https://images.cloudcraft.co https://api.rollbar.com https://www.google-analytics.com https://stats.g.doubleclick.net https://checkout.stripe.com https://beaconapi.helpscout.net https://chatapi.helpscout.net https://d3hb14vkzrxvla.cloudfront.net wss://ws-mt1.pusher.com; img-src 'self' https: blob:; object-src 'self'; report-uri /api/csp/report"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Thu, 24 Sep 2020 07:13:59 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"26-tHbtjcHUZFizdbuDPgkTenQsk2Y\""
+                }
+              },
+              "Referrer-Policy": {
+                "schema": {
+                  "type": "string",
+                  "example": "strict-origin-when-cross-origin"
+                }
+              },
+              "Strict-Transport-Security": {
+                "schema": {
+                  "type": "string",
+                  "example": "max-age=15552000; includeSubDomains"
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Security-Policy-Report-Only": {
+                "schema": {
+                  "type": "string",
+                  "example": "default-src 'self'; script-src 'self' https://www.google-analytics.com https://ajax.googleapis.com https://apis.google.com https://cdnjs.cloudflare.com https://checkout.stripe.com https://static.accountdock.com https://stats.pusher.com https://beacon-v2.helpscout.net/ https://assets.calendly.com https://d3e54v103j8qbb.cloudfront.net 'sha256-CA+WQBPlufcdIkUhUDOoZD+LI9nFG5pEQ8mVu8YjH3Q=' 'sha256-MPJlsH5j4c6wINnG8IHGe5oFGnXdxl7l8rBToITQSpM=' 'sha256-mjdgHR9aXy+6OwAGlNS/XgNcYG1Uhd2U4pl8vi7+XCY=' 'sha256-1O6ukW7q59ovCfRL0we+oC30CpPXAEYXJADSQ1vqH0s=' 'sha256-CA+WQBPlufcdIkUhUDOoZD+LI9nFG5pEQ8mVu8YjH3Q='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com themes.googleusercontent.com https://maxcdn.bootstrapcdn.com; frame-src 'self' https://checkout.stripe.com https://accounts.google.com https://static.accountdock.com https://payments.stunning.co https://calendly.com/; connect-src 'self' https://images.cloudcraft.co https://api.rollbar.com https://www.google-analytics.com https://stats.g.doubleclick.net https://checkout.stripe.com https://beaconapi.helpscout.net https://chatapi.helpscout.net https://d3hb14vkzrxvla.cloudfront.net wss://ws-mt1.pusher.com; img-src 'self' https: blob:; object-src 'self'; report-uri /api/csp/report"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-WebKit-CSP-Report-Only": {
+                "schema": {
+                  "type": "string",
+                  "example": "default-src 'self'; script-src 'self' https://www.google-analytics.com https://ajax.googleapis.com https://apis.google.com https://cdnjs.cloudflare.com https://checkout.stripe.com https://static.accountdock.com https://stats.pusher.com https://beacon-v2.helpscout.net/ https://assets.calendly.com https://d3e54v103j8qbb.cloudfront.net 'sha256-CA+WQBPlufcdIkUhUDOoZD+LI9nFG5pEQ8mVu8YjH3Q=' 'sha256-MPJlsH5j4c6wINnG8IHGe5oFGnXdxl7l8rBToITQSpM=' 'sha256-mjdgHR9aXy+6OwAGlNS/XgNcYG1Uhd2U4pl8vi7+XCY=' 'sha256-1O6ukW7q59ovCfRL0we+oC30CpPXAEYXJADSQ1vqH0s=' 'sha256-CA+WQBPlufcdIkUhUDOoZD+LI9nFG5pEQ8mVu8YjH3Q='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com themes.googleusercontent.com https://maxcdn.bootstrapcdn.com; frame-src 'self' https://checkout.stripe.com https://accounts.google.com https://static.accountdock.com https://payments.stunning.co https://calendly.com/; connect-src 'self' https://images.cloudcraft.co https://api.rollbar.com https://www.google-analytics.com https://stats.g.doubleclick.net https://checkout.stripe.com https://beaconapi.helpscout.net https://chatapi.helpscout.net https://d3hb14vkzrxvla.cloudfront.net wss://ws-mt1.pusher.com; img-src 'self' https: blob:; object-src 'self'; report-uri /api/csp/report"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accountId": {
+                      "type": "string",
+                      "description": "The AWS account ID for Cloudcraft.",
+                      "example": "1234567890"
+                    },
+                    "awsConsoleUrl": {
+                      "type": "string",
+                      "description": "The URL to the AWS IAM console with pre-filled role creation parameters.",
+                      "example": "https://console.aws.amazon.com/iam/home?#/roles..."
+                    },
+                    "externalId": {
+                      "type": "string",
+                      "description": "The unique external ID for the Cloudcraft user.",
+                      "example": "ex53e827-a724-4a2a-9fec-b13761540785"
+                    }
+                  }
+                },
+                "examples": {
+                  "Get my AWS IAM Role parameters": {
+                    "value": {
+                      "accountId": "1234567890",
+                      "awsConsoleUrl": "https://console.aws.amazon.com/iam/home?#/roles...",
+                      "externalId": "ex53e827-a724-4a2a-9fec-b13761540785"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/azure/account": {
+      "get": {
+        "tags": [
+          "Azure Accounts"
+        ],
+        "summary": "List Azure accounts",
+        "description": "List all Azure accounts linked to your Cloudcraft account.\n\nThe response is an array of Azure accounts. Each entry includes the account ID and name, access control, and user information.\n\nThe provided account IDs are required to access the other Azure-related APIs.",
+        "operationId": "listMyAzureAccounts",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Azure Accounts"
+        ],
+        "summary": "Add an Azure account",
+        "description": "Register a new Azure account with Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the created account object, including the newly assigned ID for use with other API endpoints.\n\n### Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure\n- **clientSecret**: Client secret associated with the registered application.",
+        "operationId": "addAzureAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "applicationId": {
+                    "type": "string",
+                    "example": "azapp737-4763-4fc4-9d2b-c5f4d07d22df"
+                  },
+                  "clientSecret": {
+                    "type": "string",
+                    "example": "secret~AIaxaBYlVBkbBhJIqhP9iXgh4c1jpdyaa9"
+                  },
+                  "directoryId": {
+                    "type": "string",
+                    "example": "azdirc44-0230-4732-9e70-cc00736f0a97"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Development"
+                  },
+                  "subscriptionId": {
+                    "type": "string",
+                    "example": "azsub827-5f07-45ce-8f2b-6c5001db5c6f"
+                  }
+                }
+              },
+              "examples": {
+                "Add an Azure account": {
+                  "value": {
+                    "applicationId": "azapp737-4763-4fc4-9d2b-c5f4d07d22df",
+                    "clientSecret": "secret~AIaxaBYlVBkbBhJIqhP9iXgh4c1jpdyaa9",
+                    "directoryId": "azdirc44-0230-4732-9e70-cc00736f0a97",
+                    "name": "Development",
+                    "subscriptionId": "azsub827-5f07-45ce-8f2b-6c5001db5c6f"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "454"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 03 May 20123 20:59:57 GMT"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string",
+                  "example": "1c6-t2BQ+GU3xa5paEKx4ZdF0u8/yRg"
+                }
+              },
+              "vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "x-content-type-options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "x-frame-options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "x-xss-protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CreatorId": {
+                      "type": "string",
+                      "description": "The user ID of the creator of the Azure account.",
+                      "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                    },
+                    "applicationId": {
+                      "type": "string",
+                      "description": "Identifier of the application registered with Azure.",
+                      "example": "azapp737-4763-4fc4-9d2b-c5f4d07d22df"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "The date and time the Azure account was created.",
+                      "example": "2022-01-01T21:18:59.057Z"
+                    },
+                    "directoryId": {
+                      "type": "string",
+                      "description": "The Azure Tenant or Directory ID.",
+                      "example": "azdirc44-0230-4732-9e70-cc00736f0a97"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier of the Azure account.",
+                      "example": "azfda35c-82fe-4edf-b9e9-ffd48f041c22"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "A human-readable name for the Azure account.",
+                      "example": "Development"
+                    },
+                    "subscriptionId": {
+                      "type": "string",
+                      "description": "Subscription ID of the Azure account.",
+                      "example": "azsub827-5f07-45ce-8f2b-6c5001db5c6f"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "The date and time the Azure account was last updated.",
+                      "example": "2022-01-01T21:19:03.487Z"
+                    }
+                  }
+                },
+                "examples": {
+                  "Add Azure account": {
+                    "value": {
+                      "CreatorId": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                      "applicationId": "azapp737-4763-4fc4-9d2b-c5f4d07d22df",
+                      "createdAt": "2022-01-01T21:18:59.057Z",
+                      "directoryId": "azdirc44-0230-4732-9e70-cc00736f0a97",
+                      "id": "azfda35c-82fe-4edf-b9e9-ffd48f041c22",
+                      "name": "Development",
+                      "subscriptionId": "azsub827-5f07-45ce-8f2b-6c5001db5c6f",
+                      "updatedAt": "2022-01-01T21:19:03.487Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          }
+        }
+      }
+    },
+    "/azure/account/{account_id}/{region}/{format}": {
+      "get": {
+        "tags": [
+          "Azure Accounts"
+        ],
+        "summary": "Snapshot an Azure account",
+        "description": "Scan and render one region of an Azure account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the Azure region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call returns a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing in the background, and a retry will either immediately return the result or continue waiting.\n\n### Path Parameters\n\n- **account_id**: _UUID_. Azure Account ID as registered with Cloudcraft. \n- **region**: _String_. Azure region, for example, \"eastus\".\n- **format**: _String_. One of \"json\", \"svg\", \"png\", \"pdf\", or \"mxGraph\".\n    \n\n### Optional query parameters\n\n- **filter**: _String_. Render a subset of the Azure account. Accepts a filter expression as used on the **Live** tab in the web application. The filter expression terms must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. For example, \\`env=dev OR env=test\\`.\n- **exclude**: _List of Strings_. Exclude Azure services by name. For example, \"azurevmss,azurensg\" to exclude both Virtual Machine Scale Set and Network Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n- **label**: _Boolean_. Automatically label all components. Defaults to true.\n- **autoconnect**: _Boolean_. Automatically connect all components. Defaults to true.\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n- **projection**: _String_. The visual style of the diagram. One of \"isometric\" or \"2d\".\n- **theme**: _String_. The color theme of the diagram. One of \"light\" or \"dark\".",
+        "operationId": "snapshotAzureAccount",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "examples": {
+                  "Snapshot Azure account": {
+                    "value": "Content-Type → image/png"
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Wait time exceeded",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "38"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Thu, 04 Mar 2021 20:43:22 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"26-tHbtjcHUZFizdbuDPgkTenQsk2Y\""
+                }
+              },
+              "Referrer-Policy": {
+                "schema": {
+                  "type": "string",
+                  "example": "strict-origin-when-cross-origin"
+                }
+              },
+              "Strict-Transport-Security": {
+                "schema": {
+                  "type": "string",
+                  "example": "max-age=15552000; includeSubDomains"
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "STILL_PROCESSING"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Result wait time exceeded. Processing continues in the background, retry to receive result."
+                    },
+                    "retry": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Snapshot Azure account, wait time exceeded": {
+                    "value": {
+                      "code": "STILL_PROCESSING",
+                      "message": "Result wait time exceeded. Processing continues in the background, retry to receive result.",
+                      "retry": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Azure account not found"
+          }
+        }
+      }
+    },
+    "/azure/account/{account_id}": {
+      "put": {
+        "tags": [
+          "Azure Accounts"
+        ],
+        "summary": "Update an Azure account",
+        "description": "Update an Azure account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the updated account object.\n\n### Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.\n    \n\n### Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure.\n- **clientSecret**: Client secret associated with the registered application.",
+        "operationId": "updateAzureAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "applicationId": {
+                    "type": "string",
+                    "example": "azapp737-4763-4fc4-9d2b-c5f4d07d22df"
+                  },
+                  "clientSecret": {
+                    "type": "string",
+                    "example": "secret~AIaxaBYlVBkbBhJIqhP9iXgh4c1jpdyaa9"
+                  },
+                  "directoryId": {
+                    "type": "string",
+                    "example": "azdirc44-0230-4732-9e70-cc00736f0a97"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Development123"
+                  },
+                  "subscriptionId": {
+                    "type": "string",
+                    "example": "azsub827-5f07-45ce-8f2b-6c5001db5c6f"
+                  }
+                }
+              },
+              "examples": {
+                "Update Azure account": {
+                  "value": {
+                    "applicationId": "azapp737-4763-4fc4-9d2b-c5f4d07d22df",
+                    "clientSecret": "secret~AIaxaBYlVBkbBhJIqhP9iXgh4c1jpdyaa9",
+                    "directoryId": "azdirc44-0230-4732-9e70-cc00736f0a97",
+                    "name": "Development123",
+                    "subscriptionId": "azsub827-5f07-45ce-8f2b-6c5001db5c6f"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Azure Accounts"
+        ],
+        "summary": "Delete an Azure account",
+        "description": "Delete a registered Azure account.\n\n### Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.",
+        "operationId": "deleteAzureAccount",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Azure account not found"
+          }
+        }
+      }
+    },
+    "/blueprint/{blueprint_id}/budget/{format}": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "summary": "Export budget for a blueprint",
+        "description": "Export the budget for a blueprint in CSV or XLSX format.\n\n### Path Parameters\n\n- **blueprint_id**: _UUID_. Blueprint ID\n- **format**: _String_. One of \"csv\" or \"xlsx\".\n\n### Optional query parameters\n\n- **currency**: _String_. Currency in ISO_4217 format. Should be one of \"USD\", \"AUD\", \"CHF\", \"CKK\", \"EUR\", \"GBP\", \"HKD\", \"JPY\", \"NOK\", \"NZD\", \"SEK\", or \"ZAR\". Defaults to \"USD\".\n- **period**: _String_. Period for budget. Should be one of \"h\" (hourly), \"d\" (daily), \"w\" (weekly), \"m\" (monthly), or \"y\" (yearly). Defaults to \"m\".\n- **rate**: _String_. Should be one of \"effective\" (includes upfront fees) or \"stated\" (excludes upfront fees). Defaults to \"effective\".",
+        "operationId": "exportBudgetForABlueprint",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          }
+        }
+      }
+    },
+    "/team": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "List teams",
+        "description": "List all teams linked to your Cloudcraft account.\n\nThe response is an array of teams. Each entry includes information about the team, such as the team ID, name, and members.",
+        "operationId": "listMyTeams",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "no-cache, no-store"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "271"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 21:14:32 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"10f-XQrUSiTExKF+oTaRV4ZXDCtfrGc\""
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier of the team.",
+                      "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the team.",
+                      "example": "Example Team Name"
+                    },
+                    "visible": {
+                      "type": "boolean",
+                      "description": "Whether the team is visible to other users.",
+                      "example": true
+                    },
+                    "crossOrganizational": {
+                      "type": "boolean",
+                      "description": "Whether the team is cross-organizational.",
+                      "example": false
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "The unique customer ID of the team.",
+                      "example": "86e9951e-3764-48d7-b318-969f8a6d180b"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "The date and time the team was last updated.",
+                      "example": "2022-01-01T20:54:53.963Z"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "The date and time the team was created.",
+                      "example": "2022-01-01T20:54:47.282Z"
+                    },
+                    "externalSharing": {
+                      "type": "boolean",
+                      "description": "Whether external sharing is enabled for the team.",
+                      "example": true
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "The role of the user in the team.",
+                      "example": "admin"
+                    },
+                    "members": {
+                      "type": "object",
+                      "description": "An array of key-value pairs representing the team's members.",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "example": "value"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Get team information": {
+                    "value": {
+                      "id": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                      "name": "Example Team Name",
+                      "visible": true,
+                      "crossOrganizational": false,
+                      "customerId": "86e9951e-3764-48d7-b318-969f8a6d180b",
+                      "updatedAt": "2022-01-01T20:54:53.963Z",
+                      "createdAt": "2022-01-01T20:54:47.282Z",
+                      "externalSharing": true,
+                      "role": "admin",
+                      "members": {
+                        "id": "17cf37c9-578c-4587-acb9-299c5431ad10",
+                        "role": "admin",
+                        "userId": "370809cc-abdc-42ad-bb40-8541ca0dfb1a",
+                        "name": "Example User Name",
+                        "email": "user@example.org",
+                        "mfaEnabled": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/user/me": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user profile",
+        "description": "Retrieve your user profile.",
+        "operationId": "getMyInformation",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "no-cache, no-store"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "271"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 21:14:32 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"10f-XQrUSiTExKF+oTaRV4ZXDCtfrGc\""
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "createdAt": {
+                      "type": "string",
+                      "description": "The date and time the user was created.",
+                      "example": "2022-01-01T20:54:47.282Z"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The email address of the user.",
+                      "example": "user@example.org"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier of the user.",
+                      "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the user.",
+                      "example": "Example API User"
+                    },
+                    "settings": {
+                      "type": "object",
+                      "description": "An array of key-value pairs representing the user's settings.",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "example": "value, Cloudcraft UI settings"
+                        }
+                      }
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "The date and time the user was last updated.",
+                      "example": "2022-01-01T20:54:53.963Z"
+                    }
+                  }
+                },
+                "examples": {
+                  "Get my information": {
+                    "value": {
+                      "createdAt": "2022-01-01T20:54:47.282Z",
+                      "email": "user@example.org",
+                      "id": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                      "name": "Example API User",
+                      "settings": {
+                        "key": "value, Cloudcraft UI settings"
+                      },
+                      "updatedAt": "2022-01-01T20:54:53.963Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Blueprints",
+      "description": "A Cloudcraft blueprint is a collection consists of a diagram, a budget, and the docs attached to the diagram and the individual components. At this time the Cloudcraft API only exposes the diagram parts of the blueprint.\n\nUse the API to create, read, update and delete diagrams. You can also export the diagrams in various image formats."
+    },
+    {
+      "name": "AWS Accounts"
+    },
+    {
+      "name": "Azure Accounts"
+    },
+    {
+      "name": "Budgets"
+    },
+    {
+      "name": "Teams",
+      "description": "Teams are groups of users in Cloudcraft. Teams can be used to manage access to resources and share diagrams."
+    },
+    {
+      "name": "Users",
+      "description": "Users represent you and your team members in Cloudcraft."
+    }
+  ]
+}

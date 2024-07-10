@@ -1,6 +1,5 @@
 ---
 title: Configure Monitors
-kind: documentation
 description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration
@@ -20,10 +19,10 @@ further_reading:
 
 To start configuring the monitor, complete the following:
 
-* **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, etc.
+* **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, and more.
 * **Set alert conditions:** Define alert and warning thresholds , evaluation time frames, and configure advanced alert options.
-* **Say what's happening:** Write a custom notification title and message with variables.
-* **Notify your team:** Choose how notifications are sent to your teams (email, Slack, PagerDuty, etc)
+* **Configure notifications and automations:** Write a custom notification title and message with variables. Choose how notifications are sent to your teams (email, Slack, or PagerDuty). Include workflow automations or cases in the alert notification.
+* **Define permissions and audit notifications:** Configure granular access controls and designate specific roles and users who can edit a monitor. Enable audit notifications to alert if a monitor is modified.
 
 ## Define the search query
 
@@ -53,9 +52,9 @@ The query returns a series of points, but a single value is needed to compare to
 | min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query.* |
 | sum | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
 
-\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed.
+\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed. For more examples, see the [Monitor aggregators][1] guide.
 
-**Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
+**Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][2] for details.
 
 ### Evaluation window
 
@@ -73,7 +72,7 @@ A rolling time window has a fixed size and moves its starting point over time. M
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
 
 - `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
-- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][2] by using the `current day` time window and letting it start at 2:00pm UTC.
+- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][3] by using the `current day` time window and letting it start at 2:00pm UTC.
 - `Current month`: Looks back at the current month starting on the first of the month at midnight UTC. This option represents a month-to-date time window and is only available for metric monitors.
 
 {{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
@@ -100,7 +99,7 @@ For more information, see the guide on how to [Customize monitor evaluation freq
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][3]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
 
 | Option                                   | Description                    |
 |------------------------------------------|--------------------------------|
@@ -116,10 +115,11 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
 
-[1]: /monitors/guide/as-count-in-monitor-evaluations/
-[2]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
-[3]: /monitors/guide/recovery-thresholds/
+[1]: /monitors/guide/monitor_aggregators/
+[2]: /monitors/guide/as-count-in-monitor-evaluations/
+[3]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
 [4]: /monitors/guide/custom_schedules
+[5]: /monitors/guide/recovery-thresholds/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
@@ -142,7 +142,7 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 
 [1]: /monitors/types/process_check/
-[2]: /monitors/types/integration/?tab=checkalert#integration-status
+[2]: /monitors/types/integration/?tab=checkalert#integration-metric
 [3]: /monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
@@ -157,30 +157,17 @@ In this case, you should enable notifications for missing data. The sections bel
 
 **Note**: The monitor must be able to evaluate data before alerting on missing data. For example, if you create a monitor for `service:abc` and data from that `service` is not reporting, the monitor does not send alerts.
 
-There are two ways to deal with missing data:
-- Metric-based monitors using the limited `Notify no data` option
-- The `On missing data` option is supported by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors
 
 {{< tabs >}}
 {{% tab "Metric-based monitors" %}}
 
-`Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
+If you are monitoring a metric over an auto-scaling group of hosts that stops and starts automatically, notifying for `no data` produces a lot of notifications. In this case, you should not enable notifications for missing data. This option does not work unless it is enabled at a time when data has been reporting for a long period.
 
-You are notified if data is missing or if data is not missing. The notification occurs when no data was received during the configured time window.
+| Option                                                     | Description                                                                                                                                        | Notes        |
+| ---------------------------------------------------------  | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| **Do not notify** if data is missing                       | No notification is sent if data is missing                                                                                                         | <u>Simple Alert</u>: the monitor skips evaluations and stays green until data returns that would change the status from OK <br> <u>Multi Alert</u>: if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.|
+| **Notify** if data is missing for more than **N** minutes. | You are notified if data is missing. The notification occurs when no data was received during the configured time window.| Datadog recommends that you set the missing data window to at least two times the evaluation period. |
 
-**Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
-
-If you are monitoring a metric over an auto-scaling group of hosts that stops and starts automatically, notifying for no data produces a lot of notifications.
-
-In this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
-
-##### Simple Alert
-
-For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that would change the status from OK.
-
-##### Multi Alert
-
-For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 
 {{% /tab %}}
 
@@ -215,17 +202,17 @@ The `Evaluate as zero` and `Show last known status` options are displayed based 
 
 #### Auto resolve
 
-`[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
+`[Never]`, `After 1 hour`, `After 2 hours` and so on. automatically resolve this event from a triggered state.
 
 Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state if data is still reporting. If data is still being submitted, the [renotify][2] feature can be utilized to let your team know when an issue is not resolved.
 
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
-In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
+In most cases this setting is not useful because you only want an alert to resolve after it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
 
 #### Group retention time
 
-You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours.
+You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours. For multi alert monitors, select **Remove the non-reporting group after `N (length of time)`**.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 
@@ -257,19 +244,28 @@ Delay evaluation by `N` seconds.
 
 The time (in seconds) to delay evaluation. This should be a non-negative integer. So, if the delay is set to 900 seconds (15 minutes), the monitor evaluation is during the last `5 minutes`, and the time is 7:00, the monitor evaluates data from 6:40 to 6:45. The maximum configurable evaluation delay is 86400 seconds (24 hours).
 
-## Notify your team
+## Configure notifications and automations
 
 Configure your notification messages to include the information you are most interested in. Specify which teams to send these alerts to as well as which attributes to trigger alerts for.
 
 ### Message
 
 Use this section to configure notifications to your team and configure how to send these alerts:
+
   - [Configure your notification with Template Variables][5]
-  - [Send notifications to your team through email, Slack, PagerDuty, etc.][6]
+  - [Send notifications to your team through email, Slack, or PagerDuty][6]
 
-  For more information on the configuration options for the notification message, see [Alerting Notifications][7].
+For more information on the configuration options for the notification message, see [Alerting Notifications][7].
 
-### Alert grouping
+### Add metadata
+
+<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations. See the <a href="/monitors/manage/">Manage Monitors documentation</a>.</div>
+
+1. Use the **Tags** dropdown to associate [tags][8] with your monitor.
+1. Use the **Teams** dropdown to associate [teams][9] with your monitor.
+1. Choose a **Priority**.
+
+### Set alert aggregation
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
@@ -298,20 +294,43 @@ When aggregating notifications in `Multi Alert` mode, the dimensions that are no
 
 **Note**: If your metric is only reporting by `host` with no `service` tag, it is not detected by the monitor. Metrics with both `host` and `service` tags are detected by the monitor.
 
-If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Attribute and tag variables][8] to learn how to reference tag values in the notification message.
+If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Attribute and tag variables][10] to learn how to reference tag values in the notification message.
 
 | Group by                       | Simple alert mode | Multi alert mode |
 |-------------------------------------|------------------------|-----------------------|
 | _(everything)_                      | One single group triggering one notification | N/A |
 | 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
 
-## Add metadata
+## Permissions
 
-<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations. See the <a href="/monitors/manage/">Manage Monitors documentation</a>.</div>
+All users can view all monitors, regardless of the role they are associated with. By default, only users attached to roles with the [Monitors Write permission][11] can edit monitors. [Datadog Admin Role and Datadog Standard Role][12] have the Monitors Write permission by default. If your organization uses [Custom Roles][13], other custom roles may have the Monitors Write permission. For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see the guide on [How to set up RBAC for Monitors][14].
 
-1. Use the **Tags** dropdown to associate [tags][9] with your monitor.
-1. Use the **Teams** dropdown to associate [teams][10] with your monitor.
-1. Choose a **Priority**.
+You can further restrict your monitor by specifying a list of [roles][15] allowed to edit it. The monitor's creator can always edit the monitor. Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
+
+**Note**: The limitations are applied both in the UI and API.
+
+### Granular access controls
+
+Use [granular access controls][16] to limit the roles that can edit a monitor:
+1. While editing or configuring a monitor, find the **Define permissions and audit notifications** section.
+  {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
+1. Click **Edit Access**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the monitor.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Done**.
+
+**Note:** To maintain your edit access to the monitor, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
+
+To restore general access to a monitor with restricted access, follow the steps below:
+1. While viewing a monitor, click the **More** dropdown menu.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
+
+Edit-restricted monitors display the roles that have Editor access at the top of the page.
 
 ## Further reading
 
@@ -322,8 +341,14 @@ If you configure tags or dimensions in your query, these values are available fo
 [3]: /monitors/configuration/?tab=thresholdalert#auto-resolve
 [4]: /monitors/configuration/?tabs=othermonitortypes#no-data
 [5]: /monitors/notify/variables/
-[6]: /monitors/notify/#notify-your-team
-[7]: /monitors/notify/#say-whats-happening
-[8]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
-[9]: /getting_started/tagging/
-[10]: /account_management/teams/
+[6]: /monitors/notify/#configure-notifications-and-automations
+[7]: /monitors/notify/
+[8]: /getting_started/tagging/
+[9]: /account_management/teams/
+[10]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
+[11]: /account_management/rbac/permissions/#monitors
+[12]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[13]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[14]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[15]: /account_management/rbac/
+[16]: /account_management/rbac/granular_access

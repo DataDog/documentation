@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/guides/logs/
+- /ja/en/logs
 - /ja/logs/logging_without_limits
 cascade:
   algolia:
@@ -32,7 +33,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: ブログ
   text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
-kind: Documentation
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
+  tag: ブログ
+  text: Datadog Cloud SIEM で 1Password を監視
+- link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
+  tag: ブログ
+  text: サブクエリを使用したログの動的なフィルタリングと相関付け
 title: ログ管理
 ---
 
@@ -44,19 +50,21 @@ Datadog ログ管理 (Datadog Logs または Logging とも呼ばれる) は、�
 
 Logging without Limits\* は、[ログエクスプローラー][1]でトラブルシューティングを合理化し、インフラストラクチャーの問題を迅速に評価および修正する力を提供します。また、直感的なアーカイブ機能により、監査や評価時にセキュリティチームや IT チームをサポートします。[Datadog Cloud SIEM][2] は、ログのインデックスを作成することなく、環境内のセキュリティ脅威を検出します。
 
+**注**: PCI 準拠の Datadog 組織のセットアップに関する情報については、[PCI DSS 準拠][3]を参照してください。
+
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
 </br>
 
 ## 収集
 
-ホスト、コンテナ、クラウドプロバイダーなどのソースから[ログをインジェスト][3]し、Datadog ログ管理を始めましょう。
+ホスト、コンテナ、クラウドプロバイダーなどのソースから[ログを取り込み][4]、Datadog ログ管理を始めましょう。
 
 ## 構成
 
-{{< img src="/logs/configure.png" alt="ログをすべて 1 か所で構成する" style="width:80%;">}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="ログの構成を一元管理" >}}
 
-ログをインジェストしたら、パイプラインやプロセッサですべてのログを処理して充実させ、インデックスでログ管理予算をコントロールし、インジェストしたログからメトリクスを生成し、[ログコンフィギュレーションオプション][4]でストレージに最適化したアーカイブでログを管理することができます。
+ログを取り込んだら、パイプラインやプロセッサですべてのログを処理してリッチ化し、インデックスでログ管理予算をコントロールし、取り込んだログからメトリクスを生成し、[ログ構成オプション][5]でストレージに最適化したアーカイブでログを管理することができます。
 
 ## Connect
 
@@ -64,8 +72,8 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
 
 ログをメトリクスやトレースに接続することで、観測可能性の柱を活用することができます。
 
-- [ログとトレースを接続する][5]ことで、アプリケーションを観察できるようになります。
-- [ログとメトリクスの関連付け][6]により、問題のコンテキストを把握し、サービス全体にマッピングすることができます。
+- [ログとトレースを接続する][6]ことで、アプリケーションの可観測性を高めます。
+- [ログとメトリクスの相関付け][7]により、問題のコンテキストを把握し、サービス全体にマッピングすることができます。
 
 ## 確認
 
@@ -73,11 +81,16 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
 
 {{< img src="/logs/explore.png" alt="取り込んだログを確認する" style="width:80%;">}}
 
-- [検索][7]: すべてのログを検索します。
-- [Live Tail][8]: 取り込んだログをすべての環境でリアルタイムに確認できます。
-- [分析][9]: インデックス付きログに対してログ分析を実行します。
-- [パターン][10]: インデックス付きログをクラスター化して、ログパターンを特定します。
-- [保存ビュー][11]: 保存ビューを使用してログエクスプローラーを自動構成します。
+- [検索][8]: すべてのログを検索します。
+- [Live Tail][9]: 取り込んだログをすべての環境でリアルタイムに確認できます。
+- [分析][10]: インデックス付きログに対してログ分析を実行します。
+- [パターン][11]: インデックス付きログをクラスター化して、ログパターンを特定します。
+- [保存ビュー][12]: 保存ビューを使用してログエクスプローラーを自動構成します。
+
+
+{{< learning-center-callout header="ラーニングセンターでログ管理入門をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
+  実際のクラウドコンピュートキャパシティと Datadog のトライアルアカウントを使用して、コストをかけずに学ぶことができます。今すぐ登録して、ログの収集、クエリ、分析、メトリクス、監視、処理、ストレージ、アクセス制御を学習しましょう。
+{{< /learning-center-callout >}}
 
 ## その他の参考資料
 
@@ -87,12 +100,13 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
 
 [1]: /ja/logs/explorer/
 [2]: /ja/security/cloud_siem/
-[3]: /ja/logs/log_collection/
-[4]: /ja/logs/log_configuration/
-[5]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[6]: /ja/logs/guide/correlate-logs-with-metrics/
-[7]: /ja/logs/explorer/search_syntax/
-[8]: /ja/logs/live_tail/
-[9]: /ja/logs/explorer/analytics/
-[10]: /ja/logs/explorer/patterns/
-[11]: /ja/logs/explorer/saved_views/
+[3]: /ja/data_security/pci_compliance/
+[4]: /ja/logs/log_collection/
+[5]: /ja/logs/log_configuration/
+[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[7]: /ja/logs/guide/correlate-logs-with-metrics/
+[8]: /ja/logs/explorer/search_syntax/
+[9]: /ja/logs/live_tail/
+[10]: /ja/logs/explorer/analytics/
+[11]: /ja/logs/explorer/patterns/
+[12]: /ja/logs/explorer/saved_views/

@@ -1,6 +1,6 @@
 ---
 title: Set up Orchestrator Explorer with DaemonSet
-kind: faq
+
 further_reading:
 - link: "/infrastructure/containers"
   tag: "Documentation"
@@ -100,8 +100,19 @@ This page contains instructions for setting up the Orchestrator Explorer using a
 3. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
 
     ```yaml
-    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-      value: "true"
+    containers:
+        - name: process-agent
+          env:
+          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+            value: "true"
+    ```
+    For Agent versions 7.51.0+, the orchestrator check runs on the Agent container instead of the Process Agent container. To configure the Agent container:
+    ```yaml
+    containers:
+        - name: agent
+          env:
+          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+            value: "true"
     ```
 
 4. (Optional) Set collectors under instances section to specify the resources to be collected. Create `orchestrator.yaml` in ConfigMap. Sample configuration:

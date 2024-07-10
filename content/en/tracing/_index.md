@@ -1,26 +1,10 @@
 ---
 title: APM
-kind: documentation
 description: Instrument your code to improve performance
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
-    text: "Check out the latest Datadog APM releases! (App login required)."
-  - link: "/tracing/guide/setting_primary_tags_to_scope/"
-    tag: "Documentation"
-    text: "Add primary and secondary tags to your traces"
-  - link: "/tracing/guide/add_span_md_and_graph_it/"
-    tag: "Documentation"
-    text: "Add custom tags to your spans to filter and group performance"
-  - link: "/tracing/guide/security/"
-    tag: "Documentation"
-    text: "Automatically scrub PII from your traces"
-  - link: "/tracing/metrics/metrics_namespace/"
-    tag: "Documentation"
-    text: "Learn about trace metrics and their tags"
-  - link: "/tracing/glossary/"
-    tag: "Documentation"
-    text: "Learn APM terminology and concepts"
+    text: "Check out the latest Datadog APM releases! (App login required)"
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
@@ -55,70 +39,60 @@ cascade:
 
 </br>
 
-Datadog Application Performance Monitoring (APM) gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues, and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, profiles, synthetic checks, network, processes, and infrastructure metrics across hosts, containers, proxies, and serverless functions. Navigate directly from investigating a slow trace to **identifying the specific line of code** causing performance bottlenecks with code hotspots.
+## Overview
+
+Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. With distributed tracing, out-of-the-box dashboards, and seamless correlation with other telemetry data, Datadog APM helps ensure the best possible performance and user experience for your applications.
 
 For an introduction to terminology used in Datadog APM, see [APM Terms and Concepts][1].
 
 ## Getting started
 
-As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers, or serverless functions takes just minutes.
+The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
-<div class="alert alert-info">
-<strong>Beta: Single Step APM Instrumentation</strong> - Enable APM instrumentation when you install the Datadog Agent to get started quickly with application performance monitoring. This option automatically instruments your services without you needing to modify the code. For more information, read <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>.
-</div>
+For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries. To learn more, read [Application Instrumentation][2].
 
-**Read [Application Instrumentation][2] to start using Datadog APM.**
+## Use cases
 
-Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], or using [automatic][17] or [custom instrumentation][18].
+Discover some ways Datadog APM can help support your use cases:
 
-## Control and manage data flowing into and being kept by Datadog
+| You want to...| How Datadog APM can help |
+| ----------- | ----------- |
+| Understand how requests flow through your system. | Use the [Trace Explorer][21] to query and visualize end-to-end traces across distributed services. |
+| Monitor service health and performance of individual services. | Use the [service][26] and [resource pages][28] to assess service health by analyzing performance metrics, tracking deployments, and identifying problematic resources. |
+| Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give context to your data for more comprehensive analysis. |
+| Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust ingestion configuration and sampling rates by service and resource. Use [Retention filters][7] to choose which spans to retain for 15 days. |
 
-{{< img src="tracing/apm_lifecycle/apm_lifecycle_0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="APM Lifecycle" >}}
+### Trace Explorer
 
-Traces start in your instrumented applications and flow into Datadog. For high-throughput services, you can view and control ingestion using [Ingestion Controls][6]. All ingested traces are available for live search and analytics for 15 minutes. You can use custom tag-based [retention filters][7] to keep exactly the traces that matter for your business for 15 days for search and analytics.
+The [Trace Explorer][21] allows you search and analyze your traces in real-time. Identify performance bottlenecks, troubleshoot errors, and pivot to related logs and metrics to understand the full context around any issue.
 
-{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion" style="width:100%;">}}
+{{< img src="/tracing/trace_explorer/trace_explorer.png" alt="Trace explorer view." style="width:100%;" >}}
 
-## Generate custom metrics from spans
+### Service page
 
-[Generate metrics][8] with 15-month retention from all ingested spans to create and monitor key business and performance indicators over time.
-
-{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Generate Custom Metrics from ingested spans" style="width:100%;">}}
-
-## Correlate traces with other telemetry
-
-[View your application logs][9] side-by-side with the trace for a single distributed request with automatic trace-id injection. [Link between real user sessions][10] and traces to see the exact traces that correspond to user experiences and reported issues. [Link simulated tests][11] to traces to find the root cause of failures across frontend, network and backend requests.
-
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
-
-## Explore live and indexed traces
-
-[Search your ingested traces][12] by any tag, live for 15 minutes. Analyze performance by any tag on any span during an outage to identify impacted users or transactions. View maps showing request flows and other visualizations to help you understand what your code is doing and where its performance can be improved.
-
-{{< img src="tracing/live_search/live-search.mp4" alt="Live Search List view" video="true" >}}
-
-## Gain deep insight into your services
-
-[Understand service dependencies][13] with an auto-generated service map from your traces alongside service performance metrics and monitor alert statuses.
-
-{{< img src="tracing/index/ServiceMapInspect.mp4" alt="Service Map" video=true style="width:100%;">}}
-
-[Monitor Service metrics][14] for requests, errors and latency percentiles. Analyze individual database queries or endpoints correlated with infrastructure.
-
-{{< img src="tracing/index/ServicePage.png" alt="Service Page" style="width:100%;">}}
-
-[Monitor service performance][15] and compare between versions for rolling, blue/green, shadow, or canary deployments.
+The [service page][26] helps you monitor service performance and [compare between versions during deployments][15].
 
 {{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
 
-## Profile your production code
+### Correlating traces with other telemetry
 
-[Improve application latency][16] and optimize compute resources with always-on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+Datadog APM integrates seamlessly with logs, real user monitoring (RUM), synthetic monitoring, and more:
 
-{{< img src="tracing/index/Profiling.png" alt="Profiling" style="width:100%;">}}
+- [View your application logs side-by-side with traces][9] to find logs for specific requests, services, or versions.
+- [Associate RUM sessions with backend traces][10] to understand how backend performance affects user experience.
+- [Associate synthetic tests with traces][11] to troubleshoot failures across frontend and backend requests.
 
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
 
-## Further Reading
+### Ingestion controls and retention filters
+
+Traces start in your instrumented applications and flow into Datadog.
+
+Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which spans are are stored.
+
+{{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flow of data through Datadog APM." style="width:100%;" >}}
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -131,7 +105,7 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/
 [9]: /tracing/other_telemetry/connect_logs_and_traces/
-[10]: /real_user_monitoring/connect_rum_and_traces
+[10]: /real_user_monitoring/platform/connect_rum_and_traces
 [11]: /synthetics/apm/
 [12]: /tracing/trace_explorer/#live-search-for-15-minutes
 [13]: /tracing/services/services_map/
@@ -140,3 +114,13 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [16]: /profiler/
 [17]: /tracing/trace_collection/automatic_instrumentation/
 [18]: /tracing/trace_collection/custom_instrumentation/
+[19]: /tracing/metrics/
+[20]: /tracing/other_telemetry/
+[21]: /tracing/trace_explorer/
+[22]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[23]: /agent/
+[24]: /tracing/metrics/metrics_namespace/
+[25]: /tracing/metrics/runtime_metrics/
+[26]: /tracing/services/service_page/
+[27]: /tracing/trace_collection/single-step-apm/
+[28]: /tracing/services/resource_page/

@@ -1,0 +1,56 @@
+{{- define "partials/api/openapi-code-python-get.html" -}}
+import http.client
+
+conn = http.client.HTTPSConnection("api.cloudcraft.co")
+payload = ''
+headers = {}
+conn.request("GET", "{{ .path }}", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+{{- end -}}
+
+{{- define "partials/api/openapi-code-python-delete.html" -}}
+import http.client
+
+conn = http.client.HTTPSConnection("api.cloudcraft.co")
+payload = ''
+headers = {}
+conn.request("DELETE", "{{ .path }}", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+{{- end -}}
+
+{{- define "partials/api/openapi-code-python-put.html" -}}
+import http.client
+
+conn = http.client.HTTPSConnection("api.cloudcraft.co")
+payload = "{\n    \"name\": \"My updated AWS Account\",\n    \"roleArn\": \"arn:aws:iam::1234567890:role/cloudcraft\"\n}\n"
+headers = {}
+conn.request("PUT", "{{ .path }}", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+{{- end -}}
+
+{{- define "partials/api/openapi-code-python-post.html" -}}
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("api.cloudcraft.co")
+payload = json.dumps({
+  {{ .payload }}
+})
+headers = {
+  'Content-Type': 'application/json'
+}
+conn.request("POST", "{{ .path }}", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+{{- end -}}
+
+{{- $p := printf "partials/api/openapi-code-python-%s.html" .method -}}
+{{- $pr := partial $p (dict "payload" .payload "path" .path) }}
+{{- highlight (trim $pr "\n\r") "python" -}}

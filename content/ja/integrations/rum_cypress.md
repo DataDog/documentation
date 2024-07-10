@@ -1,6 +1,7 @@
 ---
 app_id: rum-cypress
 app_uuid: a6c112b6-f3af-4f9e-bf25-e0f8d8d7bb5f
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -21,10 +22,9 @@ integration_id: rum-cypress
 integration_title: Cypress
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_cypress
-oauth: {}
 public_title: Cypress
 short_description: Datadog を使用したアプリケーションの Cypress テスト実行の監視
 supported_os:
@@ -46,6 +46,7 @@ tile:
   title: Cypress
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -58,7 +59,7 @@ Datadog [Cypress インテグレーション][1]により、CI/CD パイプラ�
 - リアルユーザーセッションの監視・キャプチャ・視覚化
 
 
-## セットアップ
+## 計画と使用
 
 Cypress テストと RUM & セッションリプレイのインテグレーションに関する詳細は、[CI Visibility-RUM インテグレーションドキュメント][2]を参照してください。
 
@@ -71,9 +72,9 @@ Cypress テストと RUM & セッションリプレイのインテグレーシ�
 
 アプリケーションは、自動的に Datadog にトレースを送信します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 CI Visibility-RUM インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -81,7 +82,7 @@ CI Visibility-RUM インテグレーションには、メトリクスは含ま�
 
 Cypress インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

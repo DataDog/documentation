@@ -1,6 +1,5 @@
 ---
 title: Query Value Widget
-kind: documentation
 widget_type: query_value
 description: "Display an aggregated value for a given metric query"
 aliases:
@@ -29,13 +28,22 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Log Events: See the [Log search documentation][3] to configure a log event query.
 2. Reduce the query values to a single value, calculated as the `avg`, `min`, `sum`, `max`, or `last` value of all data points in the specified timeframe.
 3. Choose the units and the formatting. Autoformat scales the dashboard for you based on the units.
-4. Optionally, configure a conditional format depending on the value displayed.
+4. Optionally, configure a conditional format depending on the value displayed. See [Visual Formatting Rules](#visual-formatting-rules) for more examples.
 5. Optionally, overlay a timeseries background:
     * Min to Max: A scale graph from minimum to maximum.
     * Line: A scale graph to include zero (0).
     * Bars: Shows discrete, periodic measurements.
 
 ### Options
+
+#### Visual formatting rules
+
+<div class="alert alert-info">Visual formatting rules should be based on the metric's raw value. If the metric base unit is in nanoseconds, but the Query Value autoformats to seconds, your conditional rules should be based on nanoseconds.</div>
+
+Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, internal servers must be updated to support cross origin requests to reference internal images.
+
+{{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Query value widget visual formatting rules with custom image background" style="width:90%;" >}}
+
 #### Context links
 
 [Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.

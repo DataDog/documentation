@@ -1,6 +1,5 @@
 ---
 title: Estimated Usage Metrics
-kind: documentation
 ---
 
 ## Overview
@@ -32,9 +31,10 @@ Estimated usage metrics are generally available for the following usage types:
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
 | Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | Total number of events truncated at ingestion. |
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |
+| Error Tracking Logs Events    | `datadog.estimated_usage.error_tracking.logs.events` | Volume of error logs ingested into Error Tracking. |
 | Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes` | Total ingestion of Cloud SIEM logs in bytes. |
 | APM Hosts                     | `datadog.estimated_usage.apm_hosts` | Unique APM hosts seen in last hour. Does not include Azure App Services hosts. |
-| APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` | Total number of indexed spans. |
+| APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters. |
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` | Volume of ingested spans in bytes. |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` | Total number of ingested spans. |
 | APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks` | Unique APM Fargate Tasks seen in last 5 minutes. |
@@ -61,7 +61,8 @@ Estimated usage metrics are generally available for the following usage types:
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices` | Unique IoT devices seen in the last hour. |
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
-
+| Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
+| Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 

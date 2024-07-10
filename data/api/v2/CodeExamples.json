@@ -96,6 +96,83 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "CreateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "ArchiveCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Archive case returns \"OK\" response"
+    }
+  ],
+  "AssignCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Assign case returns \"OK\" response"
+    }
+  ],
+  "CreateCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Create a case returns \"CREATED\" response"
+    }
+  ],
+  "UnarchiveCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Unarchive case returns \"OK\" response"
+    }
+  ],
+  "UnassignCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Unassign case returns \"OK\" response"
+    }
+  ],
+  "UpdatePriority": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case priority returns \"OK\" response"
+    }
+  ],
+  "UpdateStatus": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case status returns \"OK\" response"
+    }
+  ],
   "CreateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -122,20 +199,6 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
-    }
-  ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
@@ -271,6 +334,11 @@
     },
     {
       "group": "gcp_integration",
+      "suffix": "_194782945",
+      "description": "Create a new entry for your service account with cloud run revision filters enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "_4235664992",
       "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
     },
@@ -290,6 +358,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2241994060",
+      "description": "Update STS Service Account returns \"OK\" response with cloud run revision filters"
     },
     {
       "group": "gcp_integration",
@@ -477,6 +550,35 @@
       "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
+  "CreateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2184123765",
+      "description": "Create a Basic HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1091442807",
+      "description": "Create a Custom Header HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1288180912",
+      "description": "Create a Splunk custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_141236188",
+      "description": "Create an Elasticsearch custom destination returns \"OK\" response"
+    }
+  ],
+  "UpdateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "",
+      "description": "Update a custom destination returns \"OK\" response"
+    }
+  ],
   "CreateLogsMetric": [
     {
       "group": "logs_metrics",
@@ -585,6 +687,13 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "UpdateOrgConfig": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Update a specific Org Config returns \"OK\" response"
+    }
+  ],
   "CreatePowerpack": [
     {
       "group": "powerpack",
@@ -656,8 +765,8 @@
   "CreateRole": [
     {
       "group": "roles",
-      "suffix": "",
-      "description": "Create role returns \"OK\" response"
+      "suffix": "_3862893229",
+      "description": "Create role with a permission returns \"OK\" response"
     }
   ],
   "AddPermissionToRole": [
@@ -679,13 +788,6 @@
       "group": "roles",
       "suffix": "",
       "description": "Revoke permission returns \"OK\" response"
-    }
-  ],
-  "UpdateRole": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "Update a role returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [
@@ -746,6 +848,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a suppression rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3192265332",
+      "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [
@@ -767,6 +874,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "TestSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a rule returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -793,6 +907,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "ValidateSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Validate a detection rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [
@@ -885,6 +1006,13 @@
       "group": "service_definition",
       "suffix": "_2621709423",
       "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
+    }
+  ],
+  "CreateSLOReportJob": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Create a new SLO report returns \"OK\" response"
     }
   ],
   "CreateScorecardRule": [

@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Google Cloud SQL managed SQL Server
-kind: documentation
 description: Install and configure Database Monitoring for SQL Server managed on Google Cloud SQL
 further_reading:
 - link: "/integrations/sqlserver/"
@@ -10,22 +9,18 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 Complete the following steps to enable Database Monitoring with your database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
+2. [Install and configure the Agent](#install-and-configure-the-agent)
 3. [Install the Cloud SQL integration](#install-the-cloud-sql-integration)
 
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019, 2022
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -51,7 +46,7 @@ CREATE USER datadog FOR LOGIN datadog;
 
 This is required because Google Cloud SQL does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
 
-## Install the Agent
+## Install and configure the Agent
 
 Google Cloud does not grant direct host access, meaning the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
@@ -99,11 +94,11 @@ The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by 
 
 #### ODBC
 
-The recommended ODBC driver is [Microsoft ODBC Driver][8]. Ensure the driver is installed on the host where the Agent is running.
+The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7.51, ODBC Driver 18 for SQL Server is included in the agent for Linux. For Windows, ensure the driver is installed on the host where the Agent is running.
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
@@ -181,7 +176,7 @@ Replace the values to match your account and environment. See the [sample conf f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.51.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -192,7 +187,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<HOSTNAME>",
     "port": <SQL_PORT>,
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -227,35 +222,49 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
 
-### Command line with Helm
+### Helm
 
-Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        sqlserver.yaml: -|
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <HOSTNAME>
+            port: 1433
+            username: datadog
+            password: '<PASSWORD>'
+            connector: 'odbc'
+            driver: 'ODBC Driver 18 for SQL Server'
+            tags:  # Optional
+              - 'service:<CUSTOM_SERVICE>'
+              - 'env:<CUSTOM_ENV>'
+            gcp:
+              project_id: '<PROJECT_ID>'
+              instance_id: '<INSTANCE_ID>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <HOSTNAME>
-    port: 1433
-    username: datadog
-    password: "<PASSWORD>"
-    connector: "odbc"
-    driver: "FreeTDS"
-    tags:  # Optional
-      - "service:<CUSTOM_SERVICE>"
-      - "env:<CUSTOM_ENV>"
-    gcp:
-      project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with mounted files
 
@@ -271,7 +280,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -303,7 +312,7 @@ metadata:
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "gcp": {
             "project_id": "<PROJECT_ID>",

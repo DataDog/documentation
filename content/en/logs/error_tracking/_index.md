@@ -1,6 +1,5 @@
 ---
 title: Error Tracking for Logs
-kind: documentation
 description: Learn about Error Tracking for Log Management.
 is_beta: true
 further_reading:
@@ -20,18 +19,11 @@ further_reading:
 
 ## Overview
 
-It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging logs, you can minimize the impact of fatal errors on your browser, mobile, and backend services.
+{{< img src="logs/error_tracking/logs-error-tracking-explorer.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
-Once you have set up [Logs][2] for **Browser and Mobile** or **Backend** error tracking, the issue list populates with cards. Navigate to [**Logs** > **Error Tracking**][1] to view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your logs.
+{{% error-tracking-description %}}
 
-{{< img src="logs/error_tracking/homepage.png" alt="The Error Tracking Explorer for Logs displaying Java issues" style="width:100%;" >}}
-
-Error Tracking enables you to:
-
-- Set monitors on error tracking events such as high error volumes or new issues introduced.
-- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
-- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
-- Collect all the necessary context in one place to facilitate troubleshooting.
+Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [**Logs** > **Error Tracking**][1].
 
 ## Setup
 
@@ -42,17 +34,10 @@ Error Tracking for Logs processes properly configured error logs with stack trac
     {{< nextlink href="logs/error_tracking/backend" >}}Backend{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Investigate issues and start triaging
-
-An *issue* is a grouping of any number of errors based on a fingerprinting algorithm that groups certain error logs with required attributes like a stack trace.
-
-{{< img src="logs/error_tracking/sidepanel.png" alt="A sidepanel consisting of details of a log error" style="width:100%;" >}}
-
-Click on an issue to see seasonality patterns, a stack trace, and the error's distribution across `env` and `version` tags. The issue panel displays the first and last versions impacted with timestamps. 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/error-tracking
 [2]: /logs/log_collection
+[3]: /error_tracking/explorer

@@ -21,7 +21,7 @@
   },
   "dashboards": {
     "name": "Dashboards",
-    "description": "Interact with your dashboard lists through the API to make it easier to organize,\nfind, and share all of your dashboards with your team and organization."
+    "description": "Manage all your dashboards, as well as access to your shared dashboards, through the API. See the [Dashboards page](https://docs.datadoghq.com/dashboards/) for more information."
   },
   "downtimes": {
     "name": "Downtimes",
@@ -29,11 +29,11 @@
   },
   "embeddable-graphs": {
     "name": "Embeddable Graphs",
-    "description": "Interact with embeddable graphs through the API."
+    "description": "Manage embeddable graphs through the API. See [Embeddable Graphs with Template Variables](https://docs.datadoghq.com/dashboards/guide/embeddable-graphs-with-template-variables/) for more information."
   },
   "events": {
     "name": "Events",
-    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
+    "description": "The Event Management API allows you to programmatically post events to the Events Explorer\nand fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -41,7 +41,7 @@
   },
   "hosts": {
     "name": "Hosts",
-    "description": "Get information about your live hosts in Datadog."
+    "description": "Get information about your infrastructure hosts in Datadog, and mute or unmute any notifications from your hosts. See the [Infrastructure page](https://docs.datadoghq.com/infrastructure/) for more information."
   },
   "ip-ranges": {
     "name": "IP Ranges",
@@ -53,7 +53,7 @@
   },
   "logs": {
     "name": "Logs",
-    "description": "Search your logs and send them to your Datadog platform over HTTP."
+    "description": "Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information."
   },
   "logs-indexes": {
     "name": "Logs Indexes",
@@ -65,7 +65,7 @@
   },
   "metrics": {
     "name": "Metrics",
-    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   },
   "monitors": {
     "name": "Monitors",
@@ -89,19 +89,19 @@
   },
   "security-monitoring": {
     "name": "Security Monitoring",
-    "description": "Detection rules for generating signals and listing of generated\nsignals."
+    "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
   },
   "service-checks": {
     "name": "Service Checks",
-    "description": "The service check endpoint allows you to post check statuses for use with monitors.\nService check messages are limited to 500 characters. If a check is posted with a message\ncontaining more than 500 characters, only the first 500 characters are displayed. Messages\nare limited for checks with a Critical or Warning status, they are dropped for checks with\nan OK status.\n\n- [Read more about Service Check monitors.][1]\n- [Read more about Process Check monitors.][2]\n- [Read more about Network Check monitors.][3]\n- [Read more about Custom Check monitors.][4]\n- [Read more about Service Check and status codes.][5]\n\n[1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
+    "description": "The service check endpoint allows you to post check statuses for use with monitors.\nService check messages are limited to 500 characters. If a check is posted with a message\ncontaining more than 500 characters, only the first 500 characters are displayed. Messages\nare limited for checks with a Critical or Warning status, they are dropped for checks with\nan OK status.\n\n- [Read more about Service Check monitors][1].\n- [Read more about Process Check monitors][2].\n- [Read more about Network monitors][3].\n- [Read more about Custom Check monitors][4].\n- [Read more about Service Checks and status codes][5].\n\n[1]: https://docs.datadoghq.com/monitors/types/service_check/\n[2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
   },
   "service-dependencies": {
     "name": "Service Dependencies",
-    "description": "APM Service Map API. For more information, visit\nthe [services map documentation](https://docs.datadoghq.com/tracing/visualization/services_map/)."
+    "description": "APM Service Map API. For more information, visit\nthe [Service Map page](https://docs.datadoghq.com/tracing/visualization/services_map/)."
   },
   "service-level-objective-corrections": {
     "name": "Service Level Objective Corrections",
-    "description": "SLO Status Corrections allow you to prevent specific time periods from negatively impacting\nyour SLO’s status and error budget. You can use Status Corrections for various purposes, such\nas removing planned maintenance windows, non-business hours, or other time periods that do\nnot correspond to genuine issues."
+    "description": "SLO Status Corrections allow you to prevent specific time periods from negatively impacting\nyour SLO’s status and error budget. You can use Status Corrections for various purposes, such\nas removing planned maintenance windows, non-business hours, or other time periods that do\nnot correspond to genuine issues. See [SLO status corrections](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-status-corrections) for more information."
   },
   "service-level-objectives": {
     "name": "Service Level Objectives",
@@ -121,7 +121,7 @@
   },
   "tags": {
     "name": "Tags",
-    "description": "The tag endpoint allows you to assign tags to hosts,\nfor example: `role:database`. Those tags are applied to\nall metrics sent by the host. Refer to hosts by name\n(`yourhost.example.com`) when fetching and applying\ntags to a particular host.\n\nThe component of your infrastructure responsible for a tag is identified\nby a source. For example, some valid sources include nagios, hudson, jenkins,\nusers, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.\n\nRead more about tags on the dedicated\n[documentation page](https://docs.datadoghq.com/tagging)."
+    "description": "The tag endpoint allows you to assign tags to hosts,\nfor example: `role:database`. Those tags are applied to\nall metrics sent by the host. Refer to hosts by name\n(`yourhost.example.com`) when fetching and applying\ntags to a particular host.\n\nThe component of your infrastructure responsible for a tag is identified\nby a source. For example, some valid sources include nagios, hudson, jenkins,\nusers, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.\n\nRead more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/)."
   },
   "timeboards": {
     "name": "Timeboards",
@@ -129,7 +129,7 @@
   },
   "usage-metering": {
     "name": "Usage Metering",
-    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
+    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
   },
   "users": {
     "name": "Users",
@@ -137,6 +137,6 @@
   },
   "webhooks-integration": {
     "name": "Webhooks Integration",
-    "description": "Configure your Datadog-Webhooks integration directly through the Datadog API.\nFor more information about the Datadog-Webhooks integration,\nsee the [integration page](https://docs.datadoghq.com/integrations/webhooks)."
+    "description": "Configure your Datadog-Webhooks integration directly through the Datadog API.\nSee the [Webhooks integration page](https://docs.datadoghq.com/integrations/webhooks) for more information."
   }
 }

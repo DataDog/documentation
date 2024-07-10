@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/serverless-cold-start-traces/
   tag: ブログ
   text: コールドスタートトレーシングでサーバーレス関数のパフォーマンスを把握する
-kind: documentation
 title: AWS Lambda のためのサーバーレスモニタリング
 ---
 
@@ -32,7 +31,7 @@ Datadog の AWS Lambda のためのサーバーレスモニタリングは、Lam
 
 まずは、[インストール手順][1]に従って、サーバーレスアプリケーションからメトリクス、トレース、ログを収集します。
 
-## UDS の仕組み
+## 仕組み
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="AWS Lambda からの拡張メトリクスの収集" >}}
 

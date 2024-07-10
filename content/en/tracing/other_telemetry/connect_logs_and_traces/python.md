@@ -1,6 +1,5 @@
 ---
 title: Correlating Python Logs and Traces
-kind: documentation
 description: "Connect your Python logs and traces to correlate them in Datadog."
 code_lang: python
 type: multi-code-lang
@@ -89,7 +88,7 @@ If you are not using the standard library `logging` module, you can use the foll
 from ddtrace import tracer
 
 span = tracer.current_span()
-correlation_ids = (str((1 << 64) - 1 & trace_id), span.span_id) if span else (None, None)
+correlation_ids = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 ```
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
@@ -102,7 +101,7 @@ import structlog
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
     span = tracer.current_span()
-    trace_id, span_id = (str((1 << 64) - 1 & trace_id), span.span_id) if span else (None, None)
+    trace_id, span_id = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 
     # add ids to structlog event dictionary
     event_dict['dd.trace_id'] = str(trace_id or 0)

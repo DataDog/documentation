@@ -1,6 +1,5 @@
 ---
 title: Quick Graphs
-kind: documentation
 ---
 
 ## Overview
@@ -73,7 +72,7 @@ Click **Export** to save your work to a Dashboard or Notebook. You can always co
 [9]: /events/
 [10]: /continuous_integration/pipelines/
 [11]: /continuous_integration/tests/
-[12]: /security/misconfigurations/findings/
+[12]: /security/cloud_security_management/misconfigurations/findings/
 [13]: /dashboards/widgets/timeseries/
 [14]: /dashboards/widgets/top_list/
 [15]: /dashboards/widgets/query_value/

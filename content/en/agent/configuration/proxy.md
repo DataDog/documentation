@@ -1,6 +1,5 @@
 ---
 title: Agent Proxy Configuration
-kind: documentation
 aliases:
 - /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 - /agent/proxy
@@ -348,14 +347,14 @@ frontend processes-forwarder
 
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
-# If sending logs with use_http: true
+# If sending logs with force_use_http: true
 frontend logs_http_frontend
     bind *:3838
     mode http
     option tcplog
     default_backend datadog-logs-http
 
-# If sending logs with use_tcp: true
+# If sending logs with force_use_tcp: true
 # frontend logs_frontend
 #    bind *:10514
 #    mode tcp
@@ -402,8 +401,8 @@ frontend instrumentation_telemetry_data_frontend
     option tcplog
     default_backend datadog-instrumentations-telemetry
 
-# This declares the endpoint where your Agents connects for
-# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
+# This declares the endpoint where your Agents connect for
+# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.forwarder.dd_url")
 frontend network_devices_netflow_frontend
     bind *:3845
     mode http
@@ -417,6 +416,14 @@ frontend remote_configuration_frontend
     mode http
     option tcplog
     default_backend datadog-remote-configuration
+
+# This declares the endpoint where your Agents connect for
+# sending Network Path data (for example, the value of "network_path.forwarder.dd_url")
+frontend network_path_frontend
+    bind *:3847
+    mode http
+    option tcplog
+    default_backend datadog-network-path
 
 # This is the Datadog server. In effect, any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -530,6 +537,14 @@ backend datadog-remote-configuration
     server-template mothership 5 config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
+backend datadog-network-path
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 ##### HTTPS
@@ -614,14 +629,14 @@ frontend processes-forwarder
 
 # This declares the endpoint where your Agents connect for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
-# If sending logs with use_http: true
+# If sending logs with force_use_http: true
 frontend logs_http_frontend
     bind *:3838 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
     option tcplog
     default_backend datadog-logs-http
 
-# If sending logs with use_tcp: true
+# If sending logs with force_use_tcp: true
 # frontend logs_frontend
 #    bind *:10514 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
 #    mode tcp
@@ -670,7 +685,7 @@ frontend instrumentation_telemetry_data_frontend
     default_backend datadog-instrumentations-telemetry
 
 # This declares the endpoint where your Agents connect for
-# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
+# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.forwarder.dd_url")
 frontend network_devices_netflow_frontend
     bind *:3845 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
@@ -684,6 +699,14 @@ frontend remote_configuration_frontend
     mode http
     option tcplog
     default_backend datadog-remote-configuration
+
+# This declares the endpoint where your Agents connect for
+# sending Network Path data (for example, the value of "network_path.forwarder.dd_url")
+frontend network_path_frontend
+    bind *:3847 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
+    mode http
+    option tcplog
+    default_backend datadog-network-path
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -798,6 +821,13 @@ backend datadog-remote-configuration
     # Uncomment the following configuration for older HAProxy versions
     # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
 
+backend datadog-network-path
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 netpath-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
 ```
 
 **Note**: You can use `verify none` instead of `verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>` if you are unable to get the certificates on the proxy host, but be aware that HAProxy will not be able to verify Datadog's intake certificate in that case.
@@ -829,7 +859,7 @@ process_config:
     process_dd_url: <SCHEME>://haproxy.example.com:3837
 
 logs_config:
-    use_http: true
+    force_use_http: true
     logs_dd_url: haproxy.example.com:3838
     # Comment the line below to use encryption between the Agent and HAProxy
     logs_no_ssl: true
@@ -1006,7 +1036,7 @@ stream {
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3838; #listen for logs with use_http: true
+        listen 3838; #listen for logs with force_use_http: true
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
@@ -1052,6 +1082,12 @@ stream {
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass config.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3847; #listen for network path
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass netpath-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -1123,7 +1159,7 @@ stream {
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3838 ssl; #listen for logs with use_http: true
+        listen 3838 ssl; #listen for logs with force_use_http: true
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
@@ -1170,6 +1206,12 @@ stream {
         proxy_ssl on;
         proxy_pass config.{{< region-param key="dd_site" >}}:443;
     }
+    server {
+        listen 3847 ssl; #listen for network path
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass netpath-intake.{{< region-param key="dd_site" >}}:443;
+    }
 }
 ```
 
@@ -1197,7 +1239,7 @@ process_config:
     process_dd_url: <SCHEME>://nginx.example.com:3837
 
 logs_config:
-    use_http: true
+    force_use_http: true
     logs_dd_url: nginx.example.com:3838
     # Comment the line below to use encryption between the Agent and NGINX
     logs_no_ssl: true

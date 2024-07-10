@@ -1,6 +1,5 @@
 ---
 title: OpenTracing Instrumentation Setup
-kind: documentation
 type: multi-code-lang
 aliases:
 - /tracing/trace_collection/open_standards/

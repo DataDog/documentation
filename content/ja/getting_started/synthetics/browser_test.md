@@ -18,7 +18,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: Synthetic テストモニターについて
-kind: documentation
 title: ブラウザテストの概要
 ---
 
@@ -37,7 +36,7 @@ title: ブラウザテストの概要
 {{< img src="getting_started/synthetics/browser-test-1.png" alt="ユーザージャーニーをマッピングするブラウザテスト" style="width:100%;" >}}
 ### テストの詳細を構成する
 
-1. Datadog サイトで、左側のメニューにある **UX Monitoring** にカーソルを合わせ、**[Synthetic Tests][2]** を選択します。
+1. Datadog サイトで、左側のメニューから **Digital Experience** にカーソルを合わせ、**[Tests][2]** (**Synthetic Monitoring & Testing** の下) を選択します。
 2. 右上隅にある **New Test** > **[Browser Test][3]** をクリックします。
 3. ブラウザテストを定義します。
 
@@ -131,7 +130,7 @@ Datadog の [APM と Synthetic Monitoring のインテグレーション][14]を
 
 
 [1]: /ja/synthetics/browser_tests/
-[2]: https://app.datadoghq.com/synthetics/list
+[2]: https://app.datadoghq.com/synthetics/tests
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /ja/getting_started/synthetics/private_location
 [5]: /ja/continuous_testing/cicd_integrations

@@ -20,7 +20,7 @@ variables:
   DATADOG_SUBDOMAIN: 'dd-corpsite'
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
-  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab"
+  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab,pipeline_source:${CI_PIPELINE_SOURCE}"
   FF_USE_FASTZIP: "true"
   # These can be specified per job or per pipeline
   ARTIFACT_COMPRESSION_LEVEL: "fast"
@@ -119,7 +119,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-23395142
+  image: registry.ddbuild.io/ci/websites/webops-site-build:latest
   tags:
     - "arch:amd64"
   rules:
@@ -462,8 +462,8 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-25121683
-  tags: ["runner:docker"]
+  image: registry.ddbuild.io/ci/websites/pa11y:v33259941-f0dfbc91
+  tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
   variables:
@@ -561,6 +561,40 @@ set_redirect_metadata_live:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
+
+run_notranslate_tag:schedule:
+  <<: *base_template
+  stage: post-deploy
+  cache: []
+  dependencies:
+    - build_live
+  timeout: 4h
+  script:
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
+    - export transifex_api_key="$(get_secret 'transifex_api_key')"
+    - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true
+    - when: never
+
+# run_notranslate_tag:manual:
+#   <<: *base_template
+#   <<: *live_schedule_rules
+#   allow_failure: true
+#   stage: post-deploy
+#   timeout: 2h
+#   script:
+#     - export transifex_api_key="$(get_secret 'transifex_api_key')"
+#     - python3 ./local/bin/py/add_notranslate_tag.py
+#   rules:
+#     - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+#       when: never
+#     - if: $CI_COMMIT_TAG == null
+#       when: manual
 
 ####################################
 #                                  #

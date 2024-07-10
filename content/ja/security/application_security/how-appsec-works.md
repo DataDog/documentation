@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: ドキュメント
   text: Application Security Management を有効にする
-kind: documentation
 title: Datadog における Application Security Management の仕組み
 ---
 
@@ -39,20 +38,17 @@ APM はアプリケーションのトラフィックのサンプルを収集す�
 
 Datadog Threat Monitoring and Detection は、すべてのリクエストでクライアントの IP アドレスと手動で追加したユーザータグを収集することで、悪質な行為者を特定します。
 
-<div class="alert alert-info"><strong>ベータ版: 1 クリック有効化</strong><br>
-サービスが<a href="/agent/remote_config/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
+<div class="alert alert-info"><strong>1 クリック有効化</strong><br>サービスが<a href="/agent/remote_config/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
 
 ### 脆弱なサービスの特定
 
-Datadog [Application Vulnerability Management][5] は、オープンソースのソフトウェアライブラリに関連する様々な既知の脆弱性データソースと、Datadog のセキュリティリサーチチームから提供される情報を利用して、アプリケーションがランタイムに依存するライブラリとその潜在的脆弱性を照合し、改善策を提言します。
+Datadog [Software Composition Analysis][5] は、オープンソースのソフトウェアライブラリに関連する様々な既知の脆弱性データソースと、Datadog のセキュリティリサーチチームから提供される情報を利用して、アプリケーションがランタイムに依存するライブラリとその潜在的脆弱性を照合し、改善策を提言します。
 
 ## 互換性
 
 Datadog ASM を Datadog の構成と互換性を持たせるためには、APM を有効にし、[Datadog にトレースを送信する][6]必要があります。ASM は APM が使用する同じライブラリを使用するため、別のライブラリをデプロイして維持する必要はありません。Datadog ASM を有効にするための手順は、ランタイム言語によって異なります。[ASM の前提条件][7]で、お使いの言語がサポートされているかどうかを確認してください。
 
 ### サーバーレスモニタリング
-
-<div class="alert alert-info">AWS Lambda の ASM サポートはベータ版です。脅威の検出は Datadog の Lambda 拡張機能を利用して行われます。</div>
 
 Datadog の AWS Lambda 向け ASM は、関数を標的としている攻撃者を詳細に視覚化します。攻撃に関する豊富な情報を提供する分散型トレーシングにより、影響を評価し、脅威に効果的に対処できます。
 
@@ -126,7 +122,7 @@ Datadog ASM には、以下のカテゴリーを含むがこれに限らず、[�
 
 Datadog ASM には、オープンソース依存部分で検出された脆弱性について警告する検出機能が組み込まれています。その情報の詳細は、[Vulnerability Explorer][15] に表示され、重大度、影響を受けるサービス、潜在的に脆弱なインフラストラクチャー、および表面化したリスクを解決するための改善手順が特定されます。
 
-詳しくは、[Application Vulnerability Management][5] をお読みください。
+詳しくは、[Software Composition Analysis][5] をお読みください。
 
 ## API セキュリティ
 
@@ -146,7 +142,7 @@ Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意の�
 [2]: /ja/tracing/service_catalog/#security-view
 [3]: /ja/tracing/services/service_page/#security
 [4]: /ja/tracing/trace_explorer/trace_view/?tab=security#more-information
-[5]: /ja/security/application_security/risk_management/
+[5]: /ja/security/application_security/software_composition_analysis/
 [6]: /ja/tracing/trace_collection/
 [7]: /ja/security/application_security/enabling/#prerequisites
 [8]: /ja/security/application_security/enabling/serverless/
@@ -154,7 +150,7 @@ Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意の�
 [10]: /ja/tracing/configure_data_security/?tab=http
 [11]: /ja/security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[13]: /ja/security/default_rules/#cat-application-security
+[13]: /ja/security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /ja/security/cloud_siem/

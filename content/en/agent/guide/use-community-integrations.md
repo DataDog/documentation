@@ -1,6 +1,5 @@
 ---
-title: Use Community Integrations
-kind: guide
+title: Use Community and Marketplace Integrations
 aliases:
   - /agent/guide/community-integrations-installation-with-docker-agent
 further_reading:
@@ -22,8 +21,6 @@ For new users, download and install the latest version of the [Datadog Agent][2]
 
 ### Installation
 
-Choose your version of the Agent:
-
 {{< tabs >}}
 {{% tab "Agent v7.21+ / v6.21+" %}}
 
@@ -43,20 +40,25 @@ For Agent v7.21+ / v6.21+:
 [1]: /getting_started/integrations/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Docker" %}}
+{{% tab "Containerized" %}}
 
-The recommended way to use a community integration with the Docker Agent is to build the Agent with the integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` from integrations-extras.
+To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.
+
+Use the following Dockerfile to build a custom version of the Agent that includes the `<INTEGRATION_NAME>` from [integrations-extras][2]. If you are installing a Marketplace integration, the `<INTEGRATION_NAME>` is available in the configuration instructions.
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
 RUN datadog-agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-The `agent integration install` command run inside Docker issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
+The `datadog-agent integration install` command (run inside Docker) issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. You can ignore this warning.
 
-Use this new Agent image in combination with [Autodiscovery][1] to enable the `<INTEGRATION_NAME>`.
+If you are using Kubernetes, update your Helm chart or Datadog Operator configuration to pull your custom image.
+
+Use [Autodiscovery][1] to enable and configure the integration.
 
 [1]: /agent/autodiscovery/
+[2]: https://github.com/DataDog/integrations-extras
 {{% /tab %}}
 
 {{% tab "Agent earlier versions" %}}

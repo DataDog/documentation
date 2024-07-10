@@ -1,6 +1,5 @@
 ---
 title: Fleet Automation
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/agent/remote_config"
@@ -32,9 +31,7 @@ With the Fleet Automation platform, you can:
 - Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
 
-To access Fleet Automation, click **Integrations** > [**Fleet Automation**][1].
-
-Use the Fleet Automation page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
+Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
 - The Agent version
 - Whether the Agent has any unconfigured or misconfigured integrations
 - The services that the Agent is monitoring
@@ -62,7 +59,7 @@ Before you send a flare, make sure that Remote Configuration is [enabled](#confi
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
 ## Control access to Fleet Automation
 

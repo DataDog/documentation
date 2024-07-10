@@ -1,7 +1,5 @@
 ---
 title: Time Slice SLOs
-kind: documentation
-is_beta: true
 further_reading:
 - link: "service_management/service_level_objectives/"
   tag: "Documentation"
@@ -25,23 +23,24 @@ You can create a Time Slice SLO through the following ways:
 
 ### Create an SLO from the create page
 
-{{< img src="service_management/service_level_objectives/time_slice/create_and_configuration.png" alt="Configuration options to create a Time Slice SLO" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/time_slice/time-slice-creation.png" alt="Configuration options to create a Time Slice SLO" style="width:90%;" >}}
 
 1. Navigate to [**Service Management > SLOs**][1].
-1. Click **+ New SLO** to open up the Create SLO page.
-1. Select **By Time Slices** to define your SLo measurement. 
-1. Define your uptime condition by choosing a metric query, comparator and threshold. For example, to define uptime as whenever p95 latency is less than 1s. Alternatively, you can [import the uptime from a monitor](#import-from-a-monitor).
-1. Choose your timeframe and target
-1. Name and tag your SLO.
-1. Click **Create**.
+2. Click **+ New SLO** to open up the Create SLO page.
+3. Select **By Time Slices** to define your SLO measurement. 
+4. Define your uptime condition by choosing a metric query, comparator and threshold. For example, to define uptime as whenever p95 latency is less than 1s. Alternatively, you can [import the uptime from a monitor](#import-from-a-monitor).
+5. Configure your SLO to use 1 or 5 minute time slices to calculate uptime.
+6. Choose your timeframe and target
+7. Name and tag your SLO.
+8. Click **Create**.
 
 ### Export an existing monitor SLO
 
-<div class="alert alert-info">Only single metric monitor SLOs can be exported. Non-metric monitors or multi-monitor SLOs cannot be exported.</div>
+<div class="alert alert-info">Only single metric monitor-based SLOs can be exported. SLOs based on non-metric monitors or multiple monitors cannot be exported.</div>
 
 Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monitor SLO, click **Export to Time Slice SLO**.
 
-{{< img src="service_management/service_level_objectives/time_slice/export_monitor_slo.png" alt="On a Monitor-based SLO detail side panel, the button to Export to Time Slice is highlighted" style="width:90%;" >}}
+{{< img src="service_management/service_level_objectives/time_slice/monitor-time-slice-export.png" alt="On a Monitor-based SLO detail side panel, the button to Export to Time Slice is highlighted" style="width:90%;" >}}
 
 ### Import from a monitor
 
@@ -55,13 +54,23 @@ From the **Create or Edit SLO** page, under **Define your SLI**, click **Import 
 
 ## Uptime calculations
 
-To calculate the uptime percentage for a Time Slice SLOs, Datadog cuts the timeseries into equal-duration intervals, called "slices". The length of the interval is 5 minutes and not configurable. The space and time aggregation are determined by the metric query. For more information on time and space aggregation, see the [metrics][2] documentation. 
+To calculate the uptime percentage for a Time Slice SLOs, Datadog cuts the timeseries into equal-duration intervals, called "slices". The length of the interval configurable with options of 1 or 5 minutes: 
 
-For each slice, there is a single value for the timeseries, and the uptime condition (such as `value < 1`) is evaluated for each slice. If the condition is met, the slice is considered uptime, otherwise it is considered downtime.
+{{< img src="service_management/service_level_objectives/time_slice/time-slice-granularity.png" alt="Time Slice SLO detail panel of application latency uptime with groups" style="width:100%;" >}}
+
+The space and time aggregation are determined by the metric query. For more information on time and space aggregation, see the [metrics][2] documentation. 
+
+For each slice, there is a single value for the timeseries, and the uptime condition (such as `value < 1`) is evaluated for each slice. If the condition is met, the slice is considered uptime:
+
+{{< img src="service_management/service_level_objectives/time_slice/time-slice-good.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:50%;" >}}
+
+Otherwise, it is considered downtime:
+
+{{< img src="service_management/service_level_objectives/time_slice/time-slice-bad.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:50%;" >}}
+
+In the example below, there is a Time Slice SLO configured with 5-minute time slices, and exactly one point in the timeseries violates the uptime condition. In this case, the condition is that the p95 latency is less than or equal to 2.5 seconds. Since the total time period shown is 12 hours (720 minutes), and 715 minutes are considered uptime (720 min total time - 5 min downtime), the uptime percentage is 715/720 * 100 = 99.305%
 
 {{< img src="service_management/service_level_objectives/time_slice/uptime_latency.png" alt="Time Slice SLO detail panel showing application latency with one uptime violation" style="width:100%;" >}}
-
-For the above example, exactly one point in the timeseries violates the uptime condition (in this case, the condition is that the p95 latency is less than or equal to 2.5 seconds). Since the total time period shown is 12 hours (720 minutes), and 715 minutes are considered uptime (720 min total time - 5 min downtime), the uptime percentage is 715/720 * 100 = 99.305%
 
 ### Groups and overall uptime
 

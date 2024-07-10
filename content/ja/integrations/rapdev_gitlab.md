@@ -7,6 +7,7 @@ assets:
   dashboards:
     RapDev GitLab Overview: assets/dashboards/RapDevGitLabDashboard.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
       prefix: rapdev.gitlab.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10300
     source_type_name: RapDev GitLab
 author:
   homepage: https://www.rapdev.io
@@ -36,12 +38,11 @@ integration_id: rapdev-gitlab
 integration_title: GitLab
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_gitlab
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -67,6 +68,7 @@ tile:
   - Category::Cloud
   - Category::Metrics
   - Offering::Integration
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: GitLab のプロジェクト、アプリケーション、インスタンスを監視します。
   media:
@@ -85,6 +87,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -95,10 +98,10 @@ GitLab は、ソフトウェアの開発、セキュリティ、運用の機能�
 + インストールしたランナー
 + 合計および未解決の問題
 
-### ダッシュボード  
+### ライブラリ
 このインテグレーションは、**RapDev GitLab Dashboard** と呼ばれるすぐに使えるダッシュボードを提供します。これは、Datadog に送信されたデータを表示し、特定のプロジェクトやホストの検索をさらに絞り込むための環境変数が含まれています。
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 - サポート: support@rapdev.io
 - セールス: sales@rapdev.io

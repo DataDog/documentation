@@ -15,6 +15,7 @@ assets:
       prefix: catchpoint.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 132
     source_type_name: Catchpoint
 author:
   homepage: https://www.datadoghq.com
@@ -33,10 +34,9 @@ integration_id: catchpoint
 integration_title: Catchpoint
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: catchpoint
-oauth: {}
 public_title: Catchpoint
 short_description: Datadog 이벤트 스트림에 Catchpoint 알림을 발송하세요.
 supported_os: []
@@ -54,19 +54,16 @@ tile:
   title: Catchpoint
 ---
 
-
-
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
-Catchpoint는 최적의 사용자 경험을 제공하기 위한 강력한 기능을 가진 디지털 성능 분석 플랫폼입니다.
+Catchpoint는 디지털 성능 분석 플랫폼으로, 전체 디지털 에코시스템에 대해 완전하고 실행 가능한 인사이트와 가시성을 선사합니다.
 
-Catchpoint와 Datadog에서 다음을 수행할 수 있습니다.
+Catchpoint 통합을 통해 다음 작업을 실행할 수 있습니다.
 
--   이벤트 스트림에서 종합적인 알림 설정 
--   Catchpoint 포털의 분석 차트로 바로 연결되는 링크
--   간편한 필터링을 위한 알림 유형 태그 
-
-{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint 이벤트" popup="true">}}
+-   이벤트 스트림에서 종합적인 알림 설정
+-   Catchpoint 포털에서 분석 차트로 바로 연결되는 링크 액세스
+-   알림 유형 태그 설정으로 더욱 효과적인 이벤트 필터링
 
 ## 설정
 
@@ -76,48 +73,53 @@ Catchpoint와 Datadog에서 다음을 수행할 수 있습니다.
 
 ### 설정
 
-Catchpoint 알림를 스트림으로 가져오려면 Catchpoint 포털에 로그인한 후 _Settings -> API_로 이동합니다.
+이벤트 스트림으로 Catchpoint 알림을 보내려면, Catchpoint 포털레 로그인한 다음 _설정_>_API_로 이동합니다.
 
-1. Alerts API에서 Enable을 선택
+1. 알림 API에서 활성화를 선택합니다.
+
+   {{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint 이벤트" popup="true">}}
+
 2. Datadog 엔드포인트 URL을 입력합니다.
 
     ```text
     https://app.datadoghq.com/api/v1/events?api_key=<YOUR_DATADOG_API_KEY>
     ```
 
-   Datadog API 키는 Datadog 사이트에서 생성할 수 있습니다.
+   기존 Datadog API 키를 선택하거나 [통합 타일의 **설정** 탭][1]에서 API 키를 생성합니다.
 
-3. 상태를 Active로 설정
-4. 형식에 대한 템플릿 선택
-5. 새 템플릿 추가
+3. 상태를 활성으로 설정합니다.
+4. 형식에 대한 템플릿을 선택합니다.
+5. 새로운 템플릿을 추가합니다.
 6. 템플릿 이름(예: `DataDog`)을 입력하고 형식을 JSON으로 설정합니다.
 7. 다음 JSON 템플릿을 사용하여 저장합니다.
 
-```json
-{
-    "title": "${TestName} [${TestId}] - ${switch(${notificationLevelId},'0','WARNING','1','CRITICAL','3','OK')}",
-    "text": "${TestName} - http://portal.catchpoint.com/ui/Content/Charts/Performance.aspx?tList=${testId}&uts=${alertProcessingTimestampUtc}&z=&chartView=1",
-    "priority": "normal",
-    "tags": [
-        "alertType:${Switch(${AlertTypeId},'0', 'Unknown','2', 'Byte Length','3','Content Match','4', 'Host Failure','7', 'Timing','9', 'Test Failure', '10',Insight', '11','Javascript Failure', '12', 'Ping',13, 'Requests')}"
-    ],
-    "alert_type": "${switch(${notificationLevelId},'0','warning','1','error','3','success')}",
-    "source_type_name": "catchpoint"
-}
-```
+   ```json
+   {
+       "title": "${TestName} [${TestId}] - ${switch(${notificationLevelId},'0','WARNING','1','CRITICAL','3','OK')}",
+       "text": "${TestName} - http://portal.catchpoint.com/ui/Content/Charts/Performance.aspx?tList=${testId}&uts=${alertProcessingTimestampUtc}&z=&chartView=1",
+       "priority": "normal",
+       "tags": [
+           "alertType:${Switch(${AlertTypeId},'0', 'Unknown','2', 'Byte Length','3','Content Match','4', 'Host Failure','7', 'Timing','9', 'Test Failure', '10',Insight', '11','Javascript Failure', '12', 'Ping',13, 'Requests')}"
+       ],
+       "alert_type": "${switch(${notificationLevelId},'0','warning','1','error','3','success')}",
+       "source_type_name": "catchpoint"
+   }
+   ```
 
-설정 후 Catchpoint는 Datadog의 이벤트 스트림으로 직접 알림을 보냅니다.
-![s2][1]
+Catchpoint는 Datadog의 [이벤트 탐색기][2]에 직접 알림을 전송합니다.
 
+{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint 이벤트" popup="true">}}
 
-### 메트릭 설정
+### 메트릭 수집
 
-1. Test Data Webhook에서 API 키와 함께 Datadog API 엔드포인트 추가
-2. "Template" 선택
-3. 드롭다운에서 "Add New" 클릭
-4. 이름 입력
-5. 형식에서 "JSON" 선택
-6. 다음 JSON 템플릿을 붙여넣고 Save 클릭
+Datadog에서 Catchpoint 메트릭을 수신하려면 Catchpoint 포털에서 Test Data Webhook을 생성합니다.
+
+1. Test Data Webhook에서 API 키와 함께 Datadog API 엔드포인트를 추가합니다
+2. "템플릿"을 선택합니다.
+3. 드롭다운 메뉴에서 "새 항목 추가"를 클릭합니다.
+4. 이름을 입력합니다.
+5. 형식에서 "JSON"을 선택합니다.
+6. 다음 JSON 템플릿에 붙여넣기한 다음 "저장"을 클릭합니다.
 
 ```json
 {
@@ -819,24 +821,26 @@ Catchpoint 알림를 스트림으로 가져오려면 Catchpoint 포털에 로그
 }
 ```
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "catchpoint" >}}
 
 
-### 이벤트 
+### 이벤트
 
-Catchpoint 통합은 Catchpoint 이벤트를 Datadog 이벤트 스트림으로 푸시합니다.
+Catchpoint 이벤트가 [Catchpoint 대시보드][4]의 이벤트 스트림 위젯에 표시됩니다.
 
 ### 서비스 검사
 
 Catchpoint 통합에는 서비스 검사가 포함되어 있지 않습니다.
 
-## 문제 해결
+## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][3]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][5]에 문의하세요.
 
-[1]: images/configuration.png
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
-[3]: https://docs.datadoghq.com/ko/help/
+[1]: https://app.datadoghq.com/integrations/catchpoint
+[2]: https://docs.datadoghq.com/ko/service_management/events/
+[3]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
+[4]: https://app.datadoghq.com/dash/integration/32054/catchpoint-dashboard
+[5]: https://docs.datadoghq.com/ko/help/

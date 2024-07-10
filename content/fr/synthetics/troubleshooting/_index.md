@@ -10,7 +10,9 @@ further_reading:
 - link: /synthetics/api_tests/
   tag: Documentation
   text: Configurer un test API
-kind: documentation
+- link: /synthetics/private_locations/
+  tag: Documentation
+  text: Timeboards
 title: Dépannage de la surveillance Synthetic
 ---
 
@@ -30,15 +32,19 @@ Si vous observez un changement soudain ou une augmentation globale des [métriqu
 
 #### Le site Web ne se charge pas dans l'iframe
 
-Après avoir téléchargé l'[extension Datadog][4], vous ne parvenez pas à afficher votre site Web dans l'iframe en haut à droite de l'enregistreur de votre test Browser. Le message `Your website does not support being loaded through an iframe.` est affiché dans l'iframe. Cette erreur peut survenir lorsque certains réglages de votre application empêchent son ouverture dans l'iframe. Si c'est le cas, essayez d'ouvrir votre site Web dans une fenêtre contextuelle. Cliquez sur **Open in Popup** pour enregistrer votre parcours.
+Après avoir téléchargé l'[extension Datadog][4], vous ne parvenez pas à afficher votre site Web dans l'iframe sur la droite de l'enregistreur de votre test Browser. Le message `Your website does not support being loaded through an iframe.` est affiché dans l'iframe. Cette erreur peut survenir lorsque certains réglages de votre application empêchent son ouverture dans l'iframe. 
 
-#### Seulement certaines applications se chargent dans l'iframe
+Ou alors, si vous ne parvenez pas à vous connecter à votre site Web lorsque vous enregistrez du contenu dans l'enregistreur de l'iframe, il se peut qu'une requête de votre application soit bloquée.
+
+Essayez d'ouvrir votre site Web dans une fenêtre contextuelle en cliquant sur **Open in Popup** pour enregistrer votre parcours utilisateur.  
+
+#### Seules certaines applications se chargent dans l'iframe
 
 Cela signifie que les restrictions de vos applications et environnements diffèrent. Ainsi, certaines applications s'affichent correctement, tandis que d'autres ne sont pas visibles.
 
 #### Le message « We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup » s'affiche en haut de l'iframe
 
-Vous essayez très certainement d'enregistrer des étapes sur une page `http`. Or, seul les pages `https` sont prises en charge dans l'iframe de l'enregistreur. Pour commencer à enregistrer le contenu de votre page, ouvrez-la dans une fenêtre contextuelle ou modifiez son URL en prenant soin d'indiquer une adresse `https`.
+Vous essayez très certainement d'enregistrer des étapes sur une page `http`. Or, seules les pages `https` sont prises en charge dans l'iframe de l'enregistreur. Pour commencer à enregistrer le contenu de votre page, ouvrez-la dans une fenêtre contextuelle ou modifiez son URL en prenant soin d'indiquer une adresse `https`.
 
 {{< img src="synthetics/http_iframe.png" alt="HTTP dans un iframe" style="width:100%;" >}}
 
@@ -46,7 +52,7 @@ Vous essayez très certainement d'enregistrer des étapes sur une page `http`. O
 
 Après avoir téléchargé l'[extension Datadog][4], vous ne parvenez pas à afficher votre site Web dans l'iframe sur la droite de l'enregistreur de votre test Browser. En outre, vous ne pouvez enregistrer aucune étape, que vous ayez ouvert votre site Web dans l'iframe ou dans une fenêtre contextuelle :
 
-{{< img src="synthetics/recording_iframe.mp4" alt="Problèmes d'enregistrement concernant les étapes du test Browser" video="true" width="100%" >}}
+{{< img src="synthetics/recording_iframe.mp4" alt="Problèmes lors de l'enregistrement d'étapes du test Browser" video="true" width="100%" >}}
 
 Si c'est le cas, assurez-vous que l'[extension Datadog][5] dispose des autorisations de lecture et d'écriture de données pour les sites Web souhaités, en spécifiant votre site Web dans la section `On specific sites` ou en activant l'option `On all sites` :
 
@@ -66,7 +72,7 @@ Pour enregistrer vos étapes de connexion sans vous déconnecter de votre applic
 
 {{< img src="synthetics/incognito_mode.mp4" alt="Utiliser le mode navigation privée dans des tests Browser" video="true" width="100%" >}}
 
-L'option **Open popup in incognito mode** vous permet de démarrer l'enregistrement de votre test depuis l'URL de départ configurée et dans une session entièrement distincte de la session principale de votre navigateur.
+L'option **Open pop-up in incognito mode** vous permet de démarrer l'enregistrement de votre test depuis l'URL de départ configurée et dans une session entièrement distincte de la session principale de votre navigateur.
 
 Cette fenêtre contextuelle de navigation privée ignore toutes vos anciennes données de navigation, y compris les cookies et les données locales. Vous êtes ainsi automatiquement déconnecté de votre compte et pouvez enregistrer vos étapes de connexion comme si vous consultiez votre site pour la première fois.
 
@@ -131,21 +137,20 @@ Par défaut, les tests Synthetic ne procèdent à aucun [renvoi de notifications
 
 ## Emplacements privés
 
-### Les conteneurs d'emplacement privé font parfois l'objet d'une élimination `OOM`
-
-Les éliminations `Out Of Memory` des conteneurs d'emplacement privé sont généralement causées par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos conteneurs d'emplacement privé disposent de [suffisamment de ressources mémoire][13].
+{{< tabs >}}
+{{% tab "Common" %}}
 
 ### Les résultats de test Browser indiquent parfois des erreurs `Page crashed`
 
-Cela peut être causé par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos conteneurs d'emplacement privé disposent de [suffisamment de ressources mémoire][13].
+Cela peut être causé par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos workers d'emplacement privé disposent de [suffisamment de ressources mémoire][101].
 
 ### Les tests s'exécutent parfois lentement
 
-Cela peut être causé par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos conteneurs d'emplacement privé disposent de [suffisamment de ressources CPU][13].
+Cela peut être causé par un problème de saturation des ressources sur vos workers d'emplacements privés. Vérifiez que vos workers d'emplacement privé disposent de [suffisamment de ressources du processeur][101].
 
 ### Mes tests Browser prennent trop de temps à s'exécuter
 
-Vérifiez que vous ne rencontrez pas de [problèmes de mémoire insuffisante][14] avec vos déploiements d'emplacement privé. Si vous avez déjà essayé de dimensionner vos instances de conteneur en suivant les [conseils de dimensionnement][15], contactez l'[assistance Datadog][1].
+Vérifiez que vous ne rencontrez pas de [problèmes de mémoire insuffisante][102] avec vos déploiements d'emplacement privé. Si vous avez déjà essayé de dimensionner vos instances de workers en suivant les [conseils de dimensionnement][103], contactez l'[assistance Datadog][104].
 
 ### Les tests API exécutés à partir d'un emplacement privé génèrent des erreurs `TIMEOUT`
 
@@ -153,9 +158,62 @@ Ces erreurs peuvent indiquer que votre emplacement privé ne parvient pas à att
 
 {{< img src="synthetics/timeout.png" alt="Test API sur un emplacement privé avec une erreur d'expiration" style="width:70%;" >}}
 
+[101]: /fr/synthetics/private_locations/dimensioning
+[102]: https://docs.docker.com/config/containers/resource_constraints/
+[103]: /fr/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[104]: /fr/help/
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+### Les conteneurs d'emplacement privé font parfois l'objet d'une élimination `OOM`
+
+Les éliminations `Out Of Memory` des conteneurs d'emplacement privé sont généralement causées par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos conteneurs d'emplacement privé disposent de [suffisamment de ressources mémoire][101].
+
 ### L'erreur `invalid mount config for type "bind": source path must be a directory` s'affiche lors d'une tentative d'exécution d'un emplacement privé
 
-Cette erreur survient lorsque vous essayez de monter un fichier unique dans un conteneur Windows, ce qui n'est pas possible. Pour en savoir plus, consultez la [documentation Docker relative au volume de montage][16] (en anglais). Vérifiez que la source du montage lié correspond à un répertoire local.
+Cette erreur survient lorsque vous essayez de monter un fichier unique dans un conteneur Windows, ce qui n'est pas possible. Pour en savoir plus, consultez la [documentation Docker relative au volume de montage][102] (en anglais). Vérifiez que la source du montage lié correspond à un répertoire local.
+
+[101]: /fr/synthetics/private_locations#private-location-total-hardware-requirements
+[102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+### Redémarrer le service du worker dʼemplacament privé Synthetics sans redémarrage
+
+Tout d'abord, assurez-vous que vous avez installé lʼemplacement privé avec une configuration spécifiée au moment de l'installation. Vous pouvez utiliser une interface graphique ou Windows PowerShell pour redémarrer le service.
+
+#### Interface graphique
+
+1. Ouvrez le programme d'installation MSI et recherchez **Services** dans le menu **Start**.
+1. Lancez **Services** sur n'importe quel compte utilisateur.
+1. Cliquez sur **Services (Local)** et trouvez le site service appelé `Datadog Synthetics Private Location`.
+1. Cliquez avec le bouton droit de la souris sur le service trouvé à l'étape 2 et choisissez **Restart**.
+
+Le worker dʼemplacement privé Synthetics s'exécute désormais dans le compte **Local service**. Pour le confirmer, lancez le gestionnaire des tâches et recherchez le processus `synthetics-pl-worker` dans lʼonglet **Details**.
+
+#### PowerShell
+
+1. Lancez **Windows PowerShell** sur n'importe quel compte Windows qui a lʼautorisation d'exécuter des scripts PowerShell.
+1. Exécutez la commande suivante : `Restart-Service -Name “Datadog Synthetics Private Location”`.
+
+### Maintenir l'activité du Worker d'emplacement privé Synthetic
+
+Tout d'abord, assurez-vous que vous êtes connecté à l'ordinateur sur lequel le service Windows Emplacement privé Synthetics est installé et que vous disposez des autorisations nécessaires pour créer des tâches planifiées sur cet ordinateur.
+
+Si le worker dʼemplacement privé Synthetics tombe en panne, ajoutez une tâche planifiée dans Windows qui exécute un script PowerShell pour redémarrer l'application si elle cesse de fonctionner. Cela permet de s'assurer qu'un emplacement privé est redémarré après une panne. 
+
+Si vous avez fourni un fichier de configuration lors de l'installation de l'application, un service Windows appelé `Datadog Synthetics Private Location` démarre automatiquement après l'installation. Pour le vérifier, assurez-vous que vous pouvez voir le service fonctionner dans l'outil **Services**. Ce service Windows redémarre automatiquement lʼemplacement privé.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### On me demande un mot de passe pour sudo / On me demande un mot de passe pour l'utilisateur dog
+
+L'utilisateur de l'emplacement privé (`dog`) a besoin d'un accès `sudo` pour diverses raisons. Souvent, cet utilisateur se voit accorder certaines autorisations pour permettre un accès `sudo` lors du lancement de l'emplacement privé sur votre conteneur. Vérifiez si une politique en place restreint l'accès `sudo` de l'utilisateur `dog` ou empêche le conteneur de se lancer en tant qu'utilisateur `dog` (UID 501).
+
+En outre, à partir de la version `v1.27` de l'emplacement privé, Datadog tire parti de l'appel système `clone3`. Dans certaines anciennes versions des environnements d'exécution de conteneurs (comme les versions <20.10.10 de Docker), `clone3` n'est pas pris en charge par la politique `seccomp` par défaut. Vérifiez que la politique `seccomp` de votre environnement d'exécution de conteneur inclut `clone3`. Pour ce faire, vous pouvez mettre à jour la version du runtime utilisé, ajouter manuellement `clone3` à votre politique `seccomp`, ou définir le profil seccomp sur `unconfined`. Pour en savoir plus, consultez [la documentation de Docker dédiée à `seccomp`][13].
 
 ## Pour aller plus loin
 
@@ -173,7 +231,4 @@ Cette erreur survient lorsque vous essayez de monter un fichier unique dans un c
 [10]: /fr/synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /fr/synthetics/api_tests/?tab=httptest#notify-your-team
-[13]: /fr/synthetics/private_locations#private-location-total-hardware-requirements
-[14]: https://docs.docker.com/config/containers/resource_constraints/
-[15]: /fr/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
-[16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[13]: https://docs.docker.com/engine/security/seccomp/

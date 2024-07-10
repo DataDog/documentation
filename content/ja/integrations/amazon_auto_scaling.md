@@ -15,11 +15,11 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
 draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true
-integration_id: amazon-auto-scaling
+integration_id: ''
 integration_title: AWS Auto Scaling
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_auto_scaling
 public_title: Datadog-AWS Auto Scaling インテグレーション
@@ -27,6 +27,7 @@ short_description: Auto Scaling グループ内のインスタンスのステー
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 インスタンスを自動的に起動または終了するサービスです。
@@ -36,9 +37,9 @@ AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 イ�
 - `autoscaling_group` タグを使用して、Auto Scaling グループ内のホストの EC2 メトリクスを収集できます。
 - `autoscaling_group` タグと `autoscalinggroupname` タグを使用して、特定のグループに関する Auto Scaling メトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -58,7 +59,7 @@ AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 イ�
 
 4. [Datadog - AWS Auto Scaling インテグレーション][6]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -74,25 +75,25 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
     - [S3 バケットに手動でトリガーを追加][8]
     - [CloudWatch ロググループに手動トリガーを追加][9]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_auto_scaling" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 AWS Auto-Scaling インテグレーションには、EC2 インスタンスを起動および終了するためのイベントが含まれています。以下はイベントの例です。
 
 {{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="AWS Auto-Scaling イベント" >}}
 
-### サービスのチェック
+### ヘルプ
 
 AWS Auto-Scaling インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ASG メトリクスを Datadog に表示するには、まず、それらのメトリクスを AWS コンソールで有効にする必要があります。[ASG メトリクスを有効にする方法については、AWS のガイドを参照してください][11]。**注**: これらのメトリクスは、有効にされてから表示されるまでに多少時間がかかる場合があります。
 

@@ -1,11 +1,7 @@
 ---
 title: Troubleshoot Database Monitoring setup for MySQL
-kind: documentation
 description: Troubleshoot Database Monitoring setup
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring with MySQL, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
@@ -186,6 +182,8 @@ performance_schema_max_sql_text_length=4096
 ```
 
 ### Query activity is missing
+
+<div class="alert alert-warning">Query Activity and Wait Event collection are not supported for Flexible Server, as these features require MySQL settings that are not available on a Flexible Server host.</div>
 
 Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
 

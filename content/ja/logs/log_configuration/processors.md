@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-kind: documentation
 title: プロセッサー
 ---
 
@@ -754,6 +753,8 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
+
+**注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
 
 ## その他の参考資料
 

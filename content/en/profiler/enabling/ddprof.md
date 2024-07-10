@@ -1,6 +1,5 @@
 ---
 title: Enabling the Native Profiler for Compiled Languages
-kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
 code_lang_weight: 90
@@ -48,17 +47,19 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 ### Standalone
 
-1. Download the latest [`ddprof` release][2]. For example, here is one way to pull the `v0.10.1` release for an `amd64` (also known as `x86_64`) platform:
+1. Download the latest [`ddprof` release][2]. For example, here is one way to pull the latest release for an `amd64` (also known as `x86_64`) platform:
 
    ```bash
-   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
-   tar xvf ddprof-amd64-linux.tar.xz
+   curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
+   tar xvf ddprof-linux.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
 
    Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. The examples that follow assume `INSTALLATION_TARGET` is set to `./ddprof`.
 
-2. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
+   Use `arm64` instead of `amd64` for `aarch64` platform.
+
+3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
@@ -115,8 +116,8 @@ The library exposes a C API.
 1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
-   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
-   tar xvf ddprof-amd64-linux.tar.xz --directory /tmp
+   curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
+   tar xvf ddprof-linux.tar.xz --directory /tmp
    ```
 
 2. In your code, start the profiler using the `ddprof_start_profiling()` interface, defined in the `_dd_profiling.h_` header provided by the release. The profiler stops automatically when your program closes. To stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum block time of the function in milliseconds. Here is a standalone example (`profiler_demo.c`) in C:

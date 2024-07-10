@@ -1,6 +1,5 @@
 ---
 title: Instrumenting Go Serverless Applications
-kind: documentation
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
@@ -118,36 +117,43 @@ go get github.com/DataDog/datadog-lambda-go
 package main
 
 import (
-  "github.com/aws/aws-lambda-go/lambda"
-  "github.com/DataDog/datadog-lambda-go"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"context"
+	"net/http"
+	"time"
+
+	ddlambda "github.com/DataDog/datadog-lambda-go"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
-  // Wrap your lambda handler
-  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+	// Wrap your lambda handler
+	lambda.Start(ddlambda.WrapFunction(myHandler, nil))
 }
 
-func myHandler(ctx context.Context, event MyEvent) (string, error) {
-  // Trace an HTTP request
-  req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
-  client := http.Client{}
-  client = *httptrace.WrapClient(&client)
-  client.Do(req)
+func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, error) {
+	// Trace an HTTP request
+	req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+	client := http.Client{}
+	client = *httptrace.WrapClient(&client)
+	client.Do(req)
 
-  // Submit a custom metric
-  ddlambda.Metric(
-    "coffee_house.order_value", // Metric name
-    12.45, // Metric value
-    "product:latte", "order:online", // Associated tags
-  )
+	// Submit a custom metric
+	ddlambda.Metric(
+		"coffee_house.order_value",      // Metric name
+		12.45,                           // Metric value
+		"product:latte", "order:online", // Associated tags
+	)
 
-  // Create a custom span
-  s, _ := tracer.StartSpanFromContext(ctx, "child.span")
-  time.Sleep(100 * time.Millisecond)
-  s.Finish()
-  return "ok", nil
+	// Create a custom span
+	s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+	time.Sleep(100 * time.Millisecond)
+	s.Finish()
+	return "ok", nil
+}
+
 }
 ```
 

@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
   tag: ブログ
   text: サービスマップ（Datadog + Airbnb）を使用してコンテキストを作成
-kind: documentation
 title: サービスマップ
 ---
 
@@ -28,6 +27,10 @@ title: サービスマップ
 ## 使い方
 
 サービスマップでは、サービスとその正常性を概要的に確認できます。ノイズを除去し、問題のある領域を特定することができます。このビューから、Datadog で収集された他のテレメトリに直接アクセスすることも可能です。
+
+## サービスの依存関係の特定
+
+サービスマップは、異なる環境も含めたサービスの依存関係の全体像を提供します。例えば、サービスが `prod` 環境にしかデプロイされていなくても、マップは `staging` (および他の環境) のサービスとの接続を明らかにします。
 
 ## チームまたはアプリケーションによるグループ化
 

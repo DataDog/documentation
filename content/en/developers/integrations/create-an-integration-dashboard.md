@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Create an Integration Dashboard
 description: Learn how to create an integration dashboard.
 further_reading:
@@ -19,7 +18,7 @@ To create a Datadog integration, see [Create an Agent Integration][2].
 
 ### Create a dashboard
 
-In Datadog, navigate to [**Dashboards** > **Dashboard List**][12] and click **+ New Dashboard**. 
+In Datadog, from the [**Dashboard List**][12], click **+ New Dashboard**.
 
 {{< img src="dashboards/create_dashboard.png" alt="Create a dashboard for your integration" width="80%">}}
 
@@ -77,7 +76,7 @@ Find your dashboard on the [Dashboard List page][12]. Ensure logos render correc
 
 ## Follow dashboard best practices
 
-{{< img src="developers/create-an-integration-dashboard/dashboard-example.png" alt="An example of a Dashboard" width="100%">}}
+{{< img src="developers/create-an-integration-dashboard/dashboard_best_practices_example.png" alt="An example of a Dashboard" width="100%">}}
 
 An integration dashboard should adhere to the following visual style guidelines:
 

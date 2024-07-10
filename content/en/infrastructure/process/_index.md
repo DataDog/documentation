@@ -1,6 +1,5 @@
 ---
 title: Live Processes
-kind: documentation
 aliases:
     - /guides/process
     - /graphing/infrastructure/process/
@@ -12,7 +11,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Increase the retention of process data with metrics'
     - link: '/infrastructure/livecontainers'
-      tag: 'Graphing'
+      tag: "Documentation"
       text: 'Get real-time visibility of all of the containers across your environment'
     - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
       tag: 'Blog'
@@ -20,6 +19,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/process-level-data/
       tag: 'Blog'
       text: 'Troubleshoot faster with process-level app and network data'
+    - link: https://www.datadoghq.com/blog/watchdog-live-processes/
+      tag: 'Blog'
+      text: 'Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes'
 ---
 
 
@@ -29,7 +31,7 @@ Live Processes is included in the Enterprise plan. For all other plans, contact 
 
 ## Introduction
 
-Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+Datadog's Live Processes gives you real-time visibility into the processes running on your infrastructure. Use Live Processes to:
 
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level
@@ -70,7 +72,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 ```text
 -v /etc/passwd:/etc/passwd:ro
--e DD_PROCESS_AGENT_ENABLED=true
+-e DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true
 ```
 
 **Note**:
@@ -81,13 +83,59 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 [1]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
-In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
+Update your [datadog-values.yaml][1] file with the following process collection configuration:
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+```
+
+Then, upgrade your Helm chart:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+
+**Note**: Running the Agent as a container still allows you to collect host processes.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+In your `datadog-agent.yaml`, set `features.liveProcessCollection.enabled` to `true`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    liveProcessCollection:
+      enabled: true
+```
+
+{{% k8s-operator-redeploy %}}
+
+**Note**: Running the Agent as a container still allows you to collect host processes.
+
+{{% /tab %}}
+{{% tab "Kubernetes (Manual)" %}}
+
+In the `datadog-agent.yaml` manifest used to create the DaemonSet, add the following environmental variables, volume mount, and volume:
 
 ```yaml
  env:
-    - name: DD_PROCESS_AGENT_ENABLED
+    - name: DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED
       value: "true"
   volumeMounts:
     - name: passwd
@@ -99,29 +147,12 @@ In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the followi
       name: passwd
 ```
 
-See the standard [Daemonset installation][2] and the [Docker Agent][3] information pages for further documentation.
+See the standard [DaemonSet installation][1] and the [Docker Agent][2] information pages for further documentation.
 
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: /agent/kubernetes/
-[3]: /agent/docker/#run-the-docker-agent
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
-
-```yaml
-datadog:
-    # (...)
-    processAgent:
-        enabled: true
-        processCollection: true
-```
-
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[1]: /containers/guide/kubernetes_daemonset
+[2]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
@@ -272,12 +303,12 @@ datadog:
     processAgent:
         enabled: true
         processCollection: true
-    agents:
-        containers:
-            processAgent:
-                env:
-                - name: DD_STRIP_PROCESS_ARGS
-                  value: "true"
+agents:
+    containers:
+        processAgent:
+            env:
+            - name: DD_STRIP_PROCESS_ARGS
+              value: "true"
 ```
 
 {{% /tab %}}
@@ -409,8 +440,6 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-{{< img src="infrastructure/process/process_platform.mp4" alt="Processes across the Platform" video=true >}}
-
 ### Live containers
 
 Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
@@ -425,7 +454,7 @@ When you inspect a dependency in the [Network Analytics][11] page, you can view 
 
 ## Real-time monitoring
 
-While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+Processes are normally collected at 10s resolution. While actively working with the Live Processes page, metrics are collected at 2s resolution and displayed in real time, which is important for volatile metrics such as CPU. However, for historical context, metrics are ingested at the default 10s resolution.
 
 ## Additional information
 

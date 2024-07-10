@@ -1,6 +1,6 @@
 ---
 aliases:
-- developers/marketplace/offering
+- /developers/marketplace/offering
 description: Learn how to develop and publish an integration tile.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
@@ -18,11 +18,11 @@ This page walks Technology Partners through creating the tile that represents an
 
 ## Integration tiles
 
-The tile serves as a point of entry where customers can learn about your offering, see setup instructions, and install or purchase your offering to unlock out-of-the-box dashboards and additional assets. 
+The tile serves as a point of entry where customers can learn about your offering, see setup instructions, and install or purchase your offering to unlock out-of-the-box dashboards and additional assets.
 
 {{< img src="developers/integrations/marketplace_or_integrations_tile.png" alt="An expanded tile modal of an example offering on the Integrations or Marketplace page" style="width:100%" >}}
 
-* For any offerings that **do not use** the Datadog Agent—including API-based integrations, professional services listings, and software licenses—you only need to create a tile and submit the tile-related files in order to publish your offering. This is called a _tile-only-listing_. Tile-ony listings apply in situations where Datadog does not host any of the code associated with the API-based integrations, and the other supported offering types do not require any code. 
+* For any offerings that **do not use** the Datadog Agent—including API-based integrations, professional services listings, and software licenses—you only need to create a tile and submit the tile-related files in order to publish your offering. This is called a _tile-only-listing_. Tile-ony listings apply in situations where Datadog does not host any of the code associated with the API-based integrations, and the other supported offering types do not require any code.
 
 * For **Agent-based integrations**, you must create a tile, and additionally, submit all of your integration-related code (as well as your tile-related files) in one pull request. For more information, see [Create an Agent-based integration][27].
 
@@ -36,7 +36,7 @@ The tile serves as a point of entry where customers can learn about your offerin
 
 To build a tile on the [**Integrations** page][103]:
 
-<div class="alert alert-warning">If you have already gone through the steps to create an Agent integration and have built out the scaffolding, you can skip directly to <a href="#complete-the-necessary-integration-asset-files">completing the necessary integration asset files</a>. 
+<div class="alert alert-warning">If you have already gone through the steps to create an Agent integration and have built out the scaffolding, you can skip directly to <a href="#complete-the-necessary-integration-asset-files">completing the necessary integration asset files</a>.
 </div>
 
 1. Create a `dd` directory:
@@ -44,7 +44,7 @@ To build a tile on the [**Integrations** page][103]:
    ```shell
    mkdir $HOME/dd
    ```
-   
+
    The Datadog Development Toolkit expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
 
 2. Fork the [`integrations-extras` repository][102].
@@ -100,15 +100,15 @@ For Datadog API integrations that will be available out-of-the-box on the [Integ
 
 {{< img src="developers/integrations/marketplace_tile.png" alt="A tile representing an example offering on the Marketplace page" style="width:25%" >}}
 
-To build a tile on the [**Marketplace** page][104]: 
+To build a tile on the [**Marketplace** page][104]:
 
-<div class="alert alert-warning">If you have already gone through the steps to create an Agent integration and have built out the scaffolding, you can skip directly to <a href="#complete-the-necessary-integration-asset-files">completing the necessary integration asset files</a>. 
+<div class="alert alert-warning">If you have already gone through the steps to create an Agent integration and have built out the scaffolding, you can skip directly to <a href="#complete-the-necessary-integration-asset-files">completing the necessary integration asset files</a>.
 </div>
 
 1. See [Build a Marketplace Offering][102] to request access to the [Marketplace repository][101].
 
 1. Create a `dd` directory:
-   
+
    ```shell
    mkdir $HOME/dd
    ```
@@ -116,7 +116,7 @@ To build a tile on the [**Marketplace** page][104]:
    The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
 
 1. Once you have been granted access to the Marketplace repository, create the `dd` directory and clone the `marketplace` repository:
-   
+
    ```shell
    git clone git@github.com:DataDog/marketplace.git
    ```
@@ -191,6 +191,9 @@ Once you have created a `README.md` file, add the following sections as H2s (`##
 | Data Collected  | Specify the types of data collected by your integration (if applicable), including metrics, events, service checks, and logs. Metrics added to the `metadata.csv` file automatically appear in this tab. <br><br> If your offering does not provide any of this data, you do not need to add a Data Collected section. |
 | Support | Provide contact information that includes an email to your Support team, a link to your company's documentation or blog post, and additional help information in a bulleted list format. |
 
+When adding links to the `README.md` file, format them using [reference-style links][30]. For example, instead of embedding the URL directly in the text, write `see the [official Datadog documentation][1]` and define the link reference at the bottom of the file like `[1]: https://docs.datadoghq.com/`.
+
+For additional grammar and style advice, see also the [Datadog documentation contributors guidelines][31].
 ### Media carousel
 
 A media carousel of images and a video is displayed on each tile, allowing users to better understand the functionality and value of your offering through visual aids. To add a video to your tile, send a copy or a download link of your video to <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. The Marketplace team uploads the video and provides a `vimeo_link` that should be added to the `manifest.json` file.
@@ -255,8 +258,8 @@ ddev validate all <INTEGRATION_NAME>
 Complete the following steps:
 
 1. Commit all changes to your feature branch.
-2. Push your changes to the remote repository. 
-3. Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace`][18] or [`integrations-extras`][26] repository. 
+2. Push your changes to the remote repository.
+3. Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace`][18] or [`integrations-extras`][26] repository.
 
 After you've created your pull request, automatic checks run to verify that your pull request is in good shape and contains all the required content to be updated.
 
@@ -268,9 +271,9 @@ Once you have addressed the feedback and re-requested reviews, these reviewers a
 
 ## Troubleshoot errors
 
-Out-of-the-box integrations in the `integrations-extras` repository can run into validation errors when the forked repository is out of date with the origin. 
+Out-of-the-box integrations in the `integrations-extras` repository can run into validation errors when the forked repository is out of date with the origin.
 
-To resolve validation errors, update the forked repository on the GitHub web app: 
+To resolve validation errors, update the forked repository on the GitHub web app:
 
 1. In [GitHub][29], navigate to your forked `integrations-extras` repository.
 1. Click **Sync fork** and click **Update branch**.
@@ -326,3 +329,5 @@ Datadog offers GTM support for Marketplace listings only. To learn more about th
 [27]: https://docs.datadoghq.com/developers/integrations/agent_integration/
 [28]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
 [29]: https://github.com/
+[30]: https://www.markdownguide.org/basic-syntax/#reference-style-links
+[31]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md

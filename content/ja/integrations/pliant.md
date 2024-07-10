@@ -3,6 +3,7 @@ app_id: pliant
 app_uuid: 28fb0874-e3be-4171-819d-142f1c9dd3cc
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: pliant.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10102
     source_type_name: Pliant
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,7 +23,7 @@ author:
 categories:
 - 自動化
 - コンプライアンス
-- notification
+- notifications
 - orchestration
 - プロビジョニング
 dependencies:
@@ -33,10 +35,9 @@ integration_id: pliant
 integration_title: Pliant
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: pliant
-oauth: {}
 public_title: Pliant
 short_description: Pliant.io で IT プロセスを自動化
 supported_os:
@@ -48,7 +49,7 @@ tile:
   classifier_tags:
   - Category::Automation
   - カテゴリ::コンプライアンス
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Category::Provisioning
   - Supported OS::Linux
@@ -62,6 +63,7 @@ tile:
   title: Pliant
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -79,12 +81,12 @@ Pliant.io により、Datadog の通知をローコードの自動ワークフ�
 - ロードに応じてさらに VM またはコンテナノードをプロビジョン
 - ロードが低いときリソースの使用を停止
 
-## セットアップ
-### インストール
+## 計画と使用
+### インフラストラクチャーリスト
 
 Datadog の通知からトリガーするワークフローを作成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 #### Pliant
 
 1. **Pliant API キーを作成します** - Pliant にログインし、画面右上のユーザー名をクリックしてメニューを開きます。"API Keys" をクリックします。
@@ -161,21 +163,21 @@ https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_
 
 `@webhook-RestartHost` の受信者を追加して、このインテグレーションを Datadog 内の任意の通知に追加します。モニターでアラートがトリガーされると、Webhook が Pliant ワークフローをトリガー氏、入力変数が Datadog から Pliant へ送信されます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Pliant インテグレーションは、メトリクスを提供しません。
 
-### サービスのチェック
+### ヘルプ
 
 Pliant インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Pliant インテグレーションには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

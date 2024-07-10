@@ -5,6 +5,7 @@ assets:
   dashboards:
     TiDB Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: tidb_cluster
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10172
     source_type_name: TiDB
   logs:
     source: tidb
@@ -24,7 +26,7 @@ author:
   sales_email: xuyifan02@pingcap.com
   support_email: xuyifan02@pingcap.com
 categories:
-- data store
+- data stores
 - cloud
 - ログの収集
 dependencies:
@@ -36,10 +38,9 @@ integration_id: tidb
 integration_title: TiDB
 integration_version: 2.1.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tidb
-oauth: {}
 public_title: TiDB
 short_description: TiDB クラスター用インテグレーション
 supported_os:
@@ -52,7 +53,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Cloud
   - Category::Log Collection
   configuration: README.md#Setup
@@ -63,6 +64,7 @@ tile:
   title: TiDB
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -78,9 +80,9 @@ tile:
 > - このインテグレーションには TiDB 4.0 以降が必要です。 
 > - TiDB Cloud の場合は、[TiDB Cloud インテグレーション][2]をご覧ください。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 まず、[Datadog Agent をダウンロードして起動][3]します。
 
@@ -88,7 +90,7 @@ tile:
 
 `datadog-agent integration install -t datadog-tidb==<INTEGRATION_VERSION>` を実行します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 ##### メトリクスの収集
 
@@ -129,7 +131,7 @@ tile:
 
 3. [Agent を再起動します][6]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -197,23 +199,23 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `tidb` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "tidb" >}}
 
 
 > `metrics` コンフィギュレーションオプションを使用して TiDB クラスターから追加のメトリクスを収集することが可能です。
 
-### イベント
+### ヘルプ
 
 TiDB チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "tidb" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ### macOS で TiKV および TiFlash インスタンスに CPU とメモリのメトリクスがありません
 
@@ -236,7 +238,7 @@ Since there are many important metrics in a TiDB クラスターには多くの�
 
 [1]: https://docs.pingcap.com/tidb/stable
 [2]: https://docs.datadoghq.com/ja/integrations/tidb_cloud/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/tidb/datadog_checks/tidb/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent

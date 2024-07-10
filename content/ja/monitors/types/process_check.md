@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
 title: プロセスチェックモニター
 ---
 

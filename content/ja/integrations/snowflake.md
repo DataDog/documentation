@@ -37,10 +37,9 @@ integration_id: snowflake
 integration_title: Snowflake
 integration_version: 4.5.4
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: snowflake
-oauth: {}
 public_title: Snowflake
 short_description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
 supported_os:

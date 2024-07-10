@@ -3,11 +3,13 @@ app_id: pivotal-pks
 app_uuid: e8a08b96-bbca-4907-8cc8-b7c3abf2f443
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10034
     source_type_name: Pivotal PKS
 author:
   homepage: https://www.datadoghq.com
@@ -29,10 +31,9 @@ integration_id: pivotal-pks
 integration_title: Pivotal Container Service
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: pivotal_pks
-oauth: {}
 public_title: Pivotal Container Service
 short_description: Pivotal のエンタープライズレベル Kubernetes 製品
 supported_os:
@@ -56,13 +57,14 @@ tile:
   title: Pivotal Container Service
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このインテグレーションは、[Pivotal Container Service][1] クラスターを監視します。
 
-## セットアップ
+## 計画と使用
 
 Datadog はすでに Kubernetes とインテグレーションしているため、Pivotal Kubernetes Service (PKS) を監視するための準備が整っています。このインテグレーションと一緒に Datadog の[クラスターモニタリングタイル][2]を使用することで、クラスターの監視を行うことができます。
 
@@ -72,7 +74,7 @@ PKS 環境内の非ワーカーの各 VM に、Datadog Agent をインストー�
 
 PKS を監視するには、[Kubernetes][3] の Datadog インテグレーションをセットアップする必要があります。
 
-### ログの収集
+### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -83,9 +85,9 @@ DaemonSets を利用して、すべてのノードで [Datadog Agent を自動�
 
 環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][6]を参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://pivotal.io/platform/pivotal-container-service
 [2]: https://network.pivotal.io/products/datadog

@@ -1,7 +1,6 @@
 ---
 categories:
-- web
-ddtype: crawler
+- mobile
 dependencies: []
 description: Surveillez les crashs d'applications et recueillez des métriques détaillées
   sur les performances d'exécution.
@@ -13,7 +12,7 @@ integration_id: mparticle
 integration_title: mParticle
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: mparticle
 public_title: Intégration Datadog/mParticle
@@ -22,6 +21,7 @@ short_description: Surveillez les crashs d'applications et recueillez des métri
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 mParticle vous permet d'obtenir des données détaillées sur les performances d'exécution de vos applications mobiles. Le SDK mParticle recueille automatiquement des données de performances d'exécution détaillées telles que la charge CPU, l'empreinte mémoire et le niveau de batterie. Connectez mParticle à Datadog pour visualiser les informations suivantes en temps réel sur votre dashboard Datadog :
@@ -33,9 +33,9 @@ mParticle vous permet d'obtenir des données détaillées sur les performances d
 
 Pour en savoir plus sur mParticle, consultez [cet article de blog][1] et [la documentation][2] associée (en anglais).
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 1. Connectez-vous à votre [compte mParticle][3].
 2. Accédez à la page des services en cliquant sur l'icône en forme d'avion en papier dans la barre de navigation à gauche.
@@ -43,21 +43,21 @@ Pour en savoir plus sur mParticle, consultez [cet article de blog][1] et [la doc
 4. Saisissez votre [clé d'API Datadog][4] dans le volet des paramètres et cliquez sur Save.
 5. Activez le paramètre Status de façon à transmettre les données à Datadog.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 Consultez la [documentation mParticle][2] pour découvrir les métriques disponibles avec cette intégration.
 
-### Événements
+### Aide
 
 L'intégration mParticle n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration mParticle n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 

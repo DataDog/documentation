@@ -47,10 +47,9 @@ integration_id: tomcat
 integration_title: Tomcat
 integration_version: 1.11.2
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tomcat
-oauth: {}
 public_title: Tomcat
 short_description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
 supported_os:

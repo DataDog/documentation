@@ -1,6 +1,6 @@
 ---
 title: Events with a Custom Agent Check
-kind: guide
+
 aliases:
 - /events/agent/
 - /events/guides/agent

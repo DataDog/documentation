@@ -15,7 +15,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: モニター通知
-kind: documentation
 title: ダウンタイム
 ---
 
@@ -109,7 +108,7 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 **注**: RRULE で期間を指定する属性はサポートされません（例: `DTSTART`、`DTEND`、`DURATION`）。
 
-## 通知
+## Multistep API テスト
 ### メッセージの追加
 
 このダウンタイムについてチームに通知するメッセージをフィールドに入力します。標準のマークダウン形式および Datadog の `@-notification` 構文での入力が可能です。フォーマットオプションの詳細については、[通知ページ][9]を参照してください。

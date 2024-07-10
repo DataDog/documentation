@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Azure Database for MySQL
-kind: documentation
 description: Install and configure Database Monitoring for MySQL managed on Azure.
 further_reading:
 - link: "/integrations/mysql/"
@@ -9,17 +8,13 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following steps to enable Database Monitoring with your MySQL database:
 
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
+1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the Azure MySQL integration](#install-the-azure-mysql-integration)
 
 ## Before you begin
@@ -28,7 +23,7 @@ Supported MySQL versions
 : 5.7, or 8.0+
 
 Supported Azure MySQL deployment types
-: MySQL on Azure VMs, Single Server, Flexible Server
+: MySQL on Azure VMs, Single Server, Flexible Server (Query Activity and Wait Event collection are not supported for Flexible Server)
 
 Supported Agent versions
 : 7.36.1+
@@ -52,8 +47,6 @@ Configure the following in the [server parameters][3] and then **restart the ser
 | `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
 
 The agent also requires `performance_schema.events_statements_*` consumers to be set to `ON` to collect currently running queries. By default, Azure MySQL Database enables performance schema consumers so no additional configuration is required.
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 
 ## Grant the Agent access
 
@@ -108,7 +101,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-## Install the Agent
+## Install and configure the Agent
 
 To monitor Azure hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
@@ -209,30 +202,44 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration with static files mounted in the Cluster Agent container, or by using service annotations:
 
-### Command line with Helm
+### Helm
 
-Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        mysql.yaml: -|
+          cluster_check: true
+          init_config:
+            instances:
+              - dbm: true
+                host: '<AZURE_INSTANCE_ENDPOINT>'
+                port: 3306
+                username: datadog
+                password: '<UNIQUE_PASSWORD>'
+                azure:
+                  deployment_type: '<DEPLOYMENT_TYPE>'
+                  fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <INSTANCE_ADDRESS>
-    port: 3306
-    username: datadog
-    password: "<UNIQUEPASSWORD>"
-    azure:
-      deployment_type: "<DEPLOYMENT_TYPE>"
-      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with mounted files
 
@@ -324,7 +331,7 @@ If you have installed and configured the integrations and Agent as described, an
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.microsoft.com/en-us/azure/mysql/howto-server-parameters
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
@@ -333,3 +340,4 @@ If you have installed and configured the integrations and Agent as described, an
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql
 [9]: /database_monitoring/setup_mysql/troubleshooting
+[10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html

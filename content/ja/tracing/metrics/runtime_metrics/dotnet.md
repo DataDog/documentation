@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
   tag: GitHub
   text: Datadog を使用した .NET ランタイムメトリクスの監視
-kind: documentation
 title: .NET ランタイムメトリクス
 type: multi-code-lang
 ---
@@ -29,6 +28,7 @@ type: multi-code-lang
 - .NET 5
 - .NET 6
 - .NET 7
+- .NET 8
 
 ## 自動コンフィギュレーション
 
@@ -43,7 +43,9 @@ Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LO
 - **Kubernetes**: [DogstatsD ポートをホストポートにバインドする][4] _必要があります_。
 - **ECS**。[タスク定義で適切なフラグを設定します][5]。
 
-## 収集データ
+または、Agent は UDP トランスポートの代わりに Unix Domain Socket (UDS) を使用してメトリクスを取り込むこともできます。詳細については、[Unix Domain Socket 経由の DogStatsD][7] を参照してください。
+
+## リアルユーザーモニタリング
 
 以下のメトリクスは .NET メトリクスを有効にした後、デフォルトで収集されます。
 
@@ -73,3 +75,4 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 [4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
 [5]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30412/net-runtime-metrics
+[7]: /ja/developers/dogstatsd/unix_socket/

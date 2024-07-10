@@ -38,10 +38,9 @@ integration_id: yarn
 integration_title: Yarn
 integration_version: 4.3.2
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: yarn
-oauth: {}
 public_title: Yarn
 short_description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
 supported_os:

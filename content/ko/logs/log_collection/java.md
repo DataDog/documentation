@@ -16,7 +16,7 @@ further_reading:
   text: 로그 분석 실행하기
 - link: /tracing/other_telemetry/connect_logs_and_traces/java/
   tag: 설명서
-  text: 검색 구문
+  text: 로그 및 트레이스 연결
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: 로그 수집 트러블슈팅 가이드
@@ -24,9 +24,8 @@ further_reading:
   tag: 블로그
   text: 자바 로그를 수집, 커스터마이즈하고 표준화하는 방법
 - link: /glossary/#tail
-  tag: 설정
+  tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 설명서
 title: 자바(Java) 로그 수집
 ---
 
@@ -78,7 +77,9 @@ Log4j의 경우, Logback과 결합된 SLF4J 모듈 [log4j-over-slf4j][1]을 사�
       <version>6.6</version>
     </dependency>
     ```
-2. `logback.xml`에서 JSON 레이아웃을 사용해 파일 추가자를 설정하세요.
+2. `logback.xml`에서 JSON 레이아웃을 사용하는 추가자 설정:
+
+    파일:
 
     ```xml
     <configuration>
@@ -93,13 +94,31 @@ Log4j의 경우, Logback과 결합된 SLF4J 모듈 [log4j-over-slf4j][1]을 사�
     </configuration>
     ```
 
+    콘솔:
+
+    ```xml
+    <configuration>
+      <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
+      </appender>
+
+      <root>
+        <level value="DEBUG"/>
+          <appender-ref ref="CONSOLE"/>
+        </root>
+    </configuration>
+    ```
+
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
 Log4j 2는 JSON 레이아웃을 포함합니다.
 
-1. `log4j2.xml`에서 JSON 레이아웃을 사용하여 파일 추가자를 설정하세요.
+1. `log4j2.xml`에서 JSON 레이아웃을 사용하는 추가자 설정:
+
+   파일 추가자:
+
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <Configuration>
@@ -116,6 +135,28 @@ Log4j 2는 JSON 레이아웃을 포함합니다.
       </Loggers>
     </Configuration>
     ```
+
+   콘솔 추가자:
+
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration>
+
+        <Appenders>
+            <Console name="console" target="SYSTEM_OUT">
+                <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
+            </Console>
+        </Appenders>
+
+        <Loggers>
+            <Root level="INFO">
+                <AppenderRef ref="console"/>
+            </Root>
+
+        </Loggers>
+    </Configuration>
+    ```
+
 2. `pom.xml`에 JSON 레이아웃 종속성을 추가하세요.
     ```xml
     <dependency>
@@ -179,7 +220,7 @@ Logback에서 JSON 형식의 로그에 대한 [로그스태시(Logstash)-로그�
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-[공식 Tinylog 설명서][1]에 따라 파일에 대한 JSON 설정 아웃풋을 생성하세요.
+공식 [Tinylog 설명서][1]를 기반으로 JSON 작성자 설정을 생성하세요.
 
 
 `tinylog.properties` 파일에서 다음 형식을 사용하세요.

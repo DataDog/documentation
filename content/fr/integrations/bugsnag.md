@@ -1,8 +1,6 @@
 ---
 categories:
-- exceptions
-- notification
-ddtype: crawler
+- notifications
 dependencies: []
 description: Surveillez de manière centralisée les taux d'erreur au sein de vos applications.
 doc_link: https://docs.datadoghq.com/integrations/bugsnag/
@@ -13,7 +11,7 @@ integration_id: bugsnag
 integration_title: Bugsnag
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: bugsnag
 public_title: Intégration Datadog/Bugsnag
@@ -23,6 +21,7 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Bugsnag fournit aux équipes logicielles une plateforme de détection automatisée des crashs pour leurs applications Web et mobiles. Bugsnag enregistre automatiquement les erreurs en temps réel et envoie des alertes à leur sujet. Intégrez Bugsnag à Datadog pour recevoir des notifications d'erreur dans votre flux d'événements Datadog.
@@ -33,13 +32,13 @@ Utilisez cette intégration pour :
 - Être informé des pics de taux d'erreur pour un projet
 - Filtrer les notifications selon leur gravité et leur statut de lancement
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Aucune installation n'est requise.
 
-### Procédure à suivre
+### Dépannage de la solution Browser
 
 Pour intégrer Bugsnag à Datadog :
 
@@ -56,21 +55,21 @@ Pour intégrer Bugsnag à Datadog :
 7. Enregistrez vos réglages.
 8. Ajoutez plusieurs flux d'un même projet pour visualiser les événements d'erreur en fonction d'un autre ensemble de critères de notification.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 L'intégration Bugsnag n'inclut aucune métrique.
 
-### Événements
+### Aide
 
 L'intégration Bugsnag envoie les erreurs et les alertes Bugsnag configurées dans votre flux d'événements Datadog.
 
-### Checks de service
+### Aide
 
 L'intégration Bugsnag n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 

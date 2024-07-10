@@ -1,6 +1,5 @@
 ---
 title: Configuring the PHP Tracing Library
-kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -9,7 +8,7 @@ further_reading:
   tag: "Blog"
   text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Source code"
 - link: "/tracing/trace_collection/trace_context_propagation/php/"
   tag: "Documentation"
@@ -32,7 +31,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ### Apache
 
-For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -147,16 +146,23 @@ Enable the exception profile type. Added in version `0.92.0` and GA
 in version `0.96.0`.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
+`DD_PROFILING_EXCEPTION_MESSAGE_ENABLED`
+: **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
+**Default**: `0`<br>
+Enable the collection of exception messages with exception samples.<br><br>
+**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
+
 `DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
 : **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
 **Default**: `100`<br>
 Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` environment variable (`datadog.profiling.experimental_exception_sampling_distance` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
-`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
-: **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
-**Default**: `0`<br>
-Enable the experimental timeline profile type. Added in version `0.89.0`.
+`DD_PROFILING_TIMELINE_ENABLED`
+: **INI**: `datadog.profiling.timeline_enabled`. INI available since `0.98.0`.<br>
+**Default**: `1`<br>
+Enable the timeline profile type. Added in version `0.89.0`.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
@@ -178,6 +184,11 @@ The default app name.
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
+`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
+: **INI**: `datadog.trace.128_bit_traceid_generation_enabled`<br>
+**Default**: `true`<br>
+When true, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
 **Default**: `0`<br>
@@ -190,20 +201,10 @@ When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal for
 **Default**: `false`<br>
 When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the tracer sends uncaught exception metrics upon segfaults.
 
-`DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
-: **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
-**Default**: `5000`<br>
-IPC-based configurable circuit breaker retry time (in milliseconds).
-
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **INI**: `datadog.trace.agent_connect_timeout`<br>
 **Default**: `100`<br>
 The Agent connection timeout (in milliseconds).
-
-`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES`
-: **INI**: `datadog.trace.agent_max_consecutive_failures`<br>
-**Default**: `3`<br>
-IPC-based configurable circuit breaker max consecutive failures.
 
 `DD_TRACE_AGENT_PORT`
 : **INI**: `datadog.trace.agent_port`<br>
@@ -243,7 +244,17 @@ Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
 **Default**: `0`<br>
-Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
+Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` may be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files. Takes precedence over `DD_TRACE_LOG_LEVEL` if active.
+
+`DD_TRACE_LOG_LEVEL`
+: **INI**: `datadog.trace.log_level`<br>
+**Default**: `Error`<br>
+Sets a precise log level. The log level follows RUST_LOG conventions; accepted log levels are `error`, `warn`, `info`, `debug`, `trace` and `off`.
+
+`DD_TRACE_LOG_FILE`
+: **INI**: `datadog.trace.log_file`<br>
+**Default**: ``<br>
+Specifies a log file. If none is specified, logs go to the default PHP error location. To debug datadog-ipc-helper issues (for example, submission of telemetry), you must specify the log file.
 
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
@@ -352,6 +363,11 @@ The sampling rate for the traces, a number between `0.0` and `1.0`. The default 
 **Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
 
+`DD_TRACE_SAMPLING_RULES_FORMAT`
+: **INI**: `datadog.trace.sampling_rules_format`<br>
+**Default**: `glob`<br>
+Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
+
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
 **Default**: `0`<br>
@@ -429,7 +445,7 @@ Valid values are: `true` or `false`.<br>
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `tracecontext,Datadog`<br>
+**Default**: `Datadog,tracecontext`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
@@ -439,7 +455,7 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
+**Default**: `Datadog,tracecontext,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
@@ -454,14 +470,8 @@ A comma-separated list of WordPress action hooks to be instrumented. This featur
 
 `DD_TRACE_WORDPRESS_CALLBACKS`
 : **INI**: `datadog.trace.wordpress_callbacks`<br>
-**Default**: `false`<br>
+**Default**: `true` for PHP tracer >= v1.0<br>
 Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
-
-`DD_TRACE_WORDPRESS_ENHANCED_INTEGRAION`
-: **INI**: `datadog.trace.wordpress_enhanced_integration`<br>
-**Default**: `false`<br>
-Enables the enhanced WordPress integration. **This integration is in public beta**. Added in version `0.91.0`.
-
 
 `DD_DBM_PROPAGATION_MODE`
 : **INI**: `datadog.dbm_propagation_mode`<br>
@@ -515,8 +525,6 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 #### Map resource names to normalized URI
 
 <div class="alert alert-warning">
-<strong>Deprecation notice:</strong> As of version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a> the legacy setting <code>DD_TRACE_RESOURCE_URI_MAPPING</code> is deprecated. It still works for the foreseeable future but it is strongly encouraged that you use the new settings outlined in this paragraph to avoid issues when legacy support is removed.
-
 Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
 </div>
 
@@ -586,7 +594,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[3]: /tracing/setup/nginx/#nginx-and-fastcgi
+[3]: /tracing/trace_collection/proxy_setup/?tab=nginx
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/

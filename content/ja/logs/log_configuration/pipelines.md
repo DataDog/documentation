@@ -15,7 +15,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: ラーニングセンター
   text: ログ処理を極める
-kind: documentation
 title: パイプライン
 ---
 

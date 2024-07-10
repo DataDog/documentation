@@ -49,6 +49,7 @@ assets:
     RapDev Tripplite PDU Dashboard: assets/dashboards/rapdev_tripplite_pdu_dashboard.json
     RapDev iDRAC Dashboard: assets/dashboards/rapdev_idrac_dashboard.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -59,6 +60,7 @@ assets:
       prefix: snmp.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10122
     source_type_name: RapDev SNMP プロファイル
   monitors:
     Barracuda CPU Monitor: assets/monitors/rapdev_barracuda-cpu.json
@@ -71,7 +73,6 @@ assets:
     Printer Issue Monitor: assets/monitors/rapdev_printer_issue.json
     iDRAC Bios Status Monitor: assets/monitors/rapdev_idrac-biosstatus.json
     iDRAC CMOS Monitor: assets/monitors/rapdev_idrac-cmos.json
-    iDRAC Disk State Monitor: assets/monitors/rapdev_idrac-diskstate.json
     iDRAC Disk Status Monitor: assets/monitors/rapdev_idrac-diskstatus.json
     iDRAC Fan Status Monitor: assets/monitors/rapdev_idrac-fanstatus.json
     iDRAC LCD Status Monitor: assets/monitors/rapdev_idrac-lcdstatus.json
@@ -102,12 +103,11 @@ integration_id: rapdev-snmp-profiles
 integration_title: SNMP プロファイル
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev-snmp-profiles
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -133,6 +133,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: オートディスカバリーデバイスプロファイルによる SNMP デバイスへの観測性
   media:
@@ -164,6 +165,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 ## 概要
 
@@ -223,7 +225,7 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 | Steelhead    | Riverbed              | CX、EX        |
 | VMware       | ESXi                  | 6.x           |
 
-## サポート
+## Agent
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
  - メール: support@rapdev.io 

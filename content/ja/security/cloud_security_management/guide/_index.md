@@ -3,15 +3,12 @@ aliases:
 - /ja/security_platform/cloud_workload_security/guide/
 - /ja/security_platform/cloud_security_management/guide/
 disable_toc: true
-kind: ガイド
 title: Cloud Security Management ガイド
 ---
 
 
 {{< whatsnext desc="Cloud Security Management (CSM) ガイド" >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}Cloud Security Management のはじめの一歩{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/workflows" >}}Workflow Automation によるセキュリティワークフローの自動化{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/jira" >}}Cloud Security Management の問題に対する Jira 課題の作成{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats ガイド" >}}

@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: ドキュメント
   text: Node.js アプリケーションのインスツルメンテーション
-kind: documentation
 title: サーバーレスパッケージが大きすぎるエラーのトラブルシューティング
 ---
 
@@ -18,11 +17,11 @@ title: サーバーレスパッケージが大きすぎるエラーのトラブ�
 - 関数コードをインスツルメントする言語固有のライブラリと
 - 観測データを集計し、バッファリングし、Datadog のバックエンドに転送する拡張機能。
 
-AWS CLI コマンド [`aws lambda get-layer-version`][3] で Datadog Lambda レイヤーの内容やサイズを検査します。例えば、以下のコマンドを実行すると、_Datadog-Node16-x version 67_ と _Datadog-Extension version 19_ の Lambda レイヤーをダウンロードするリンクが得られ、圧縮されていないサイズ (合わせて約 30MB) を検査することが可能です。解凍サイズはレイヤーやバージョンによって異なります。以下の例のレイヤー名とバージョン番号は、アプリケーションで使用されているものに置き換えてください。
+AWS CLI コマンド [`aws lambda get-layer-version`][3] を使用して Datadog Lambda レイヤーの内容とサイズを確認します。例えば、以下のコマンドを実行すると、_Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} バージョン {{< latest-lambda-layer-version layer="node" >}} と _Datadog-Extension バージョン {{< latest-lambda-layer-version layer="extension" >}} の Lambda レイヤーをダウンロードするリンクが得られ、圧縮されていないサイズ (合わせて約 30MB) を確認することができます。解凍サイズはレイヤーやバージョンによって異なります。以下の例のレイヤー名とバージョン番号は、アプリケーションで使用されているものに置き換えてください。
 
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
   --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \

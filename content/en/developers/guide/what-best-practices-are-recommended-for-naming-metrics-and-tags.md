@@ -1,6 +1,6 @@
 ---
 title: What best practices are recommended for naming metrics and tags?
-kind: faq
+
 further_reading:
 - link: "/metrics/"
   tag: "Documentation"
@@ -41,7 +41,7 @@ As a best practice, Datadog recommends using unified service tagging when assign
 * May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
 * A trailing underscore is removed, whether if it originated from a converted character or if it was in the original tag value.
 * Contiguous underscores are reduced to a single underscore.
-* Tags can be up to 200 characters long and support Unicode.
+* Tags can be up to 200 characters long (including both key and value) and support Unicode. Additional characters beyond this limit are truncated.
 * Tags are converted to lowercase.
 * For optimal functionality, it is recommended to use the `key:value` syntax.
 

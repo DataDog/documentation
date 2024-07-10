@@ -1,6 +1,5 @@
 ---
 title: Unified Service Tagging
-kind: documentation
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
@@ -43,7 +42,7 @@ With these three tags, you can:
 | Language         | Minimum Tracer Version |
 |--------------|------------|
 | .NET    |  1.17.0+       |
-| C++    |  1.1.4+       |
+| C++    |  0.1.0+       |
 | Go         |  1.24.0+       |
 | Java   |  0.50.0+      |
 | Node    |  0.20.3+       |
@@ -291,7 +290,7 @@ Depending on how you build and deploy your services' binaries or executables, yo
 To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], [RUM resources][10], [Synthetics tests][11], [StatsD metrics][12], or system metrics, either:
 
 1. Export the environment variables in the command for your executable:
-   
+
    ```
    DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
    ```
@@ -319,25 +318,23 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
-   **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
-
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}
 
    {{% tab "RUM & Session Replay" %}}
 
-   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
+   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file.
 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
-[1]: /real_user_monitoring/connect_rum_and_traces/
-[2]: /real_user_monitoring/browser/#setup
+[1]: /real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /real_user_monitoring/browser/setup
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
 
-   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2]. 
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2].
 
    You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
 
@@ -420,7 +417,7 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /real_user_monitoring/connect_rum_and_traces/
+[10]: /real_user_monitoring/platform/connect_rum_and_traces/
 [11]: /getting_started/synthetics/
 [12]: /integrations/statsd/
 [13]: https://www.chef.io/

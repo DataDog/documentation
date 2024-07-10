@@ -12,7 +12,7 @@ further_reading:
 - link: /agent/docker/log/
   tag: 설명서
   text: Datadog Docker\u0008 로그 수집 설명서
-kind: guide
+
 title: Compose 및 Datadog Agent
 ---
 

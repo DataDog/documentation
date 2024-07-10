@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ドキュメント
   text: クロスプロダクト相関で容易にトラブルシューティング
-kind: documentation
 title: 関連するログがトレース ID パネルに表示されない
 ---
 
@@ -91,6 +90,8 @@ title: 関連するログがトレース ID パネルに表示されない
 ID が正しく挿入され、ログにリマップされると、トレースパネルでトレースと相関のあるログを見ることができます。
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ" style="width:90%;">}}
+
+**注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
 
 ## その他の参考資料
 

@@ -1,12 +1,7 @@
 ---
 title: Troubleshooting DBM Setup for SQL Server
-kind: documentation
 description: Troubleshoot Database Monitoring setup for SQL Server
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring with SQL Server, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
@@ -150,9 +145,9 @@ This is described in more detail [in the Microsoft documentation][7]
       adoprovider: MSOLEDBSQL
   ```
 
-#### Other Microsoft OLE DB Driver versions
+#### Other Microsoft OLE DB and ODBC driver versions
 
-If you are using a driver other than `MSOLEDBSQL` 2019, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the 2017 `ODBC` driver:
+If you are using an OLE DB driver other than `MSOLEDBSQL` 2019 or ODBC drivers, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the `ODBC` driver:
 
   ```yaml
   # this example uses SQL Server authentication
@@ -162,7 +157,7 @@ If you are using a driver other than `MSOLEDBSQL` 2019, this error can be resolv
       password: <DD_AGENT_PASSWORD>
       connection_string: "TrustServerCertificate=yes;"
       connector: odbc
-      driver: '{ODBC Driver 17 for SQL Server}'
+      driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
 ### SQL Server unable to connect 'SSL Security error (18)' {#ssl-security-error}
@@ -324,6 +319,38 @@ The `user` tag is available for Query Activity events and Database Load metrics.
 ### Why are there so many "CREATE PROCEDURE" queries?
 
 In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the Datadog agent.
+
+## Known limitations
+
+### SQL Server 2012
+
+The following metrics are not available for SQL Server 2012:
+
+- `sqlserver.files.read_io_stall_queued`
+- `sqlserver.files.write_io_stall_queued`
+- `sqlserver.ao.quorum_type`
+- `sqlserver.ao.quorum_state`
+- `sqlserver.ao.member.type`
+- `sqlserver.ao.member.state`
+- `sqlserver.ao.member.number_of_quorum_votes`
+- `sqlserver.ao.log_send_queue_size`
+- `sqlserver.ao.log_send_rate`
+- `sqlserver.ao.redo_queue_size`
+- `sqlserver.ao.redo_rate`
+- `sqlserver.ao.low_water_mark_for_ghosts`
+- `sqlserver.ao.filestream_send_rate`
+- `sqlserver.ao.replica_status`
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.fci.status`
+- `sqlserver.fci.is_current_owner`
+- `sqlserver.latches.latch_wait_time`
+
+### SQL Server 2014
+
+The following metrics are not available for SQL Server 2014:
+
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.latches.latch_wait_time`
 
 [1]: /database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication

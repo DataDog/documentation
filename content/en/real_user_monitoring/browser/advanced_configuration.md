@@ -1,6 +1,5 @@
 ---
 title: Advanced Configuration
-kind: documentation
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
@@ -87,7 +86,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
    <details open>
      <summary>Latest version</summary>
-   The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
+   The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
 
    {{< tabs >}}
    {{% tab "NPM" %}}
@@ -125,7 +124,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
    <details>
      <summary>before <code>v4.13.0</code></summary>
-   The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. No service or version can be specified.
+   The following example manually tracks the pageviews on the <code>checkout</code> page in a RUM application. No service or version can be specified.
 
    {{< tabs >}}
    {{% tab "NPM" %}}
@@ -397,9 +396,6 @@ The RUM Browser SDK ignores:
 - Modifications made to a RUM view event context
 
 ### Enrich RUM events with feature flags
-{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-<a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
-{{< /callout >}}
 
 You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
 
@@ -732,7 +728,70 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-For a sampled out session, all page views and associated telemetry for that session are not collected.
+For a sampled out session, all pageviews and associated telemetry for that session are not collected.
+
+## User tracking consent
+
+To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][18].
+
+The `trackingConsent` initialization parameter can be one of the following values:
+
+1. `"granted"`: The RUM Browser SDK starts collecting data and sends it to Datadog.
+2. `"not-granted"`: The RUM Browser SDK does not collect any data.
+
+To change the tracking consent value after the RUM Browser SDK is initialized, use the `setTrackingConsent()` API call. The RUM Browser SDK changes its behavior according to the new value:
+
+* when changed from `"granted"` to `"not-granted"`, the RUM session is stopped, data is no longer sent to Datadog.
+* when changed from `"not-granted"` to `"granted"`, a new RUM session is created if no previous session is active, and data collection resumes.
+
+This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during RUM Browser SDK initialization or by using `setTrackingConsent()`.
+
+When `setTrackingConsent()` is used before `init()`, the provided value takes precedence over the initialization parameter.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', function() {
+    datadogRum.setTrackingConsent('granted');
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        trackingConsent: 'not-granted'
+    });
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.setTrackingConsent('granted');
+    });
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.init({
+  ...,
+  trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_RUM && window.DD_RUM.setTrackingConsent('granted');
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Global context
 
@@ -942,7 +1001,7 @@ By default, global context and user context are stored in the current page memor
 
 To add them to all events of the session, they must be attached to every page.
 
-With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][18], allowing the following behaviors:
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][19], allowing the following behaviors:
 
 - Contexts are preserved after a full reload
 - Contexts are synchronized between tabs opened on the same origin
@@ -960,7 +1019,7 @@ However, this feature comes with some **limitations**:
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/browser/#setup
+[4]: /real_user_monitoring/browser/setup
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -974,4 +1033,5 @@ However, this feature comes with some **limitations**:
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
-[18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[18]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
+[19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage

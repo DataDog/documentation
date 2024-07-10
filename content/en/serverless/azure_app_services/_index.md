@@ -1,6 +1,5 @@
 ---
 title: Monitoring Azure App Service
-kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
 further_reading:
@@ -38,6 +37,7 @@ Datadog provides additional monitoring capabilities for the following Azure App 
 |----|---------|-----|----|--------------|
 |Windows|.NET|Function App & Web App|GA|[Windows .NET setup][7]|
 |Windows|Java|Web App|GA|[Windows Java setup][8]|
+|Windows|Node|Web App|GA|[Windows Node setup][13]|
 |Linux|.NET|Web App|GA|[Linux .NET setup][9]|
 |Linux|Node|Web App|GA|[Linux Node setup][9]|
 |Linux|PHP|Web App|GA|[Linux PHP setup][9]|
@@ -69,3 +69,4 @@ Capabilities:
 [10]: /serverless/azure_app_services/azure_app_services_linux?tab=java
 [11]: /developers/dogstatsd/
 [12]: /serverless/azure_app_services/azure_app_services_container
+[13]: /serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup

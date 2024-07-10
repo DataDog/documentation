@@ -1,6 +1,5 @@
 ---
 title: APM Terms and Concepts
-kind: documentation
 aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
@@ -42,6 +41,7 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
+| [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
 
 ## Services
 
@@ -89,6 +89,16 @@ A trace is used to track the time spent by an application processing a request a
 
 [Send 100% of traces][20] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
+## Instrumentation
+
+Instrumentation is the process of adding code to your application to capture and report observability data to Datadog, such as traces, metrics, and logs. Datadog provides instrumentation libraries for various programming languages and frameworks.
+
+You can automatically instrument your application when you install the Datadog Agent with [Single Step Instrumentation][24] or when you [manually add Datadog tracing libraries][25] to your code.
+
+You can use custom instrumentation by embedding tracing code directly into your application code. This allows you to programmatically create, modify, or delete traces to send to Datadog.
+
+To learn more, read [Application Instrumentation][26].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -103,9 +113,9 @@ A trace is used to track the time spent by an application processing a request a
 [9]: /tracing/manual_instrumentation/
 [10]: /tracing/opentracing/
 [11]: /tracing/other_telemetry/connect_logs_and_traces/
-[12]: /tracing/guide/add_span_md_and_graph_it/
+[12]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [13]: /tracing/metrics/runtime_metrics/
-[14]: /tracing/guide/add_span_md_and_graph_it/
+[14]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /tracing/metrics/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
 [17]: https://app.datadoghq.com/monitors#/create
@@ -115,3 +125,6 @@ A trace is used to track the time spent by an application processing a request a
 [21]: /glossary/#span
 [22]: /glossary/
 [23]: /monitors/types/apm/
+[24]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+[25]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[26]: /tracing/trace_collection/

@@ -1,6 +1,5 @@
 ---
 title: CoScreen Optimization and Troubleshooting
-kind: guide
 is_beta: false
 ---
 
@@ -45,11 +44,15 @@ To resolve this issue:
 
 {{< img src="coscreen/assign-to-none.png" alt="Screenshot of macOS dock. Right-clicking on the CoScreen brings up a menu, and hovering over 'Options' opens up a second menu. Under 'Assign To', the user has selected 'None.'" style="width:60%;" >}}
 
-### Troubleshooting on Windows 10
+### Troubleshooting on Windows
+
+#### How does CoScreen work with Windows administrator mode?
+
+If you run CoScreen in administrator mode and share an app that was also launched in administrator mode, all remote users are able to control the shared window. However, if you are running CoScreen in non-administrator mode and share an app that was launched in admin mode, then remote users cannot control that window.
 
 #### The CoScreen UI appears small
 
-If the CoScreen UI appears to be smaller than other apps on your Windows 10 computer, it is related to the scaling factor configured under display settings and how it interacts with CoScreen. You can decrease the scaling and resolution of your screen to improve the experience.
+If the CoScreen UI appears to be smaller than other apps on your Windows computer, it is related to the scaling factor configured under display settings and how it interacts with CoScreen. You can decrease the scaling and resolution of your screen to improve the experience.
 
 #### My voice is hard to understand, or sounds robotic
 

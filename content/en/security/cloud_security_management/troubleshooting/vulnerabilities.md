@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Cloud Security Management Vulnerabilities
-kind: documentation
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
@@ -18,26 +17,6 @@ further_reading:
 ## Overview
 
 If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
-
-## Confirm CSM Vulnerabilities is enabled
-
-Review the documentation for [configuring the Agent for vulnerability scanning][2] to ensure your hosts and containers are configured for Software Bill of Materials (SBOM) collection. Additionally, review the in-app [Cloud Security Management][3] instructions to confirm that all steps for the initial setup are complete.
-
-## Prerequisites
-
-Ensure all the prerequisites are met for CSM Vulnerabilities:
-
-| Component                | Version/Requirement                     |
-| ------------------------ | ----------------------------------------|
-| [Helm Chart][6]            | v3.49.6 or later (Kubernetes only)      |
-| [containerd][7]              | v1.5.6 or later (Kubernetes and hosts only)|</br>
-
-CSM Vulnerabilities is **not** available for the following environments:
-
-  - Windows
-  - AWS Fargate 
-  - CRI-O runtime
-  - podman runtime
 
 ## Error messages
 
@@ -84,5 +63,3 @@ The workaround for this issue is to set the configuration option `discard_unpack
 [2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
-[6]: /security/cloud_security_management/troubleshooting
-[7]: /containers/kubernetes/installation/?tab=helm

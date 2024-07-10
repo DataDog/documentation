@@ -6,7 +6,7 @@
 
     {{ range (where (where (where .Site.AllPages "Kind" "!=" "home") "Type" "!=" "api") "File.Path" "not in" $apiPagesWithoutTypeAPI) }}
         {{ $page := . }}
-        {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (not $page.Draft) (not (isset .Params "external_redirect")) }}
+        {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (not (in $page.RelPermalink "/faq")) (not $page.Draft) (not (isset .Params "external_redirect")) }}
             {{ $rel_path := "" }}
             {{ with $page.File }}
               {{ $rel_path = (print .Lang "/" .Path) }}

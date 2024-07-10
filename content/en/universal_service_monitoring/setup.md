@@ -1,10 +1,9 @@
 ---
 title: Setting up Universal Service Monitoring
-kind: Documentation
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
-  text: "Universal Service Monitoring"
+  text: "Learn about Universal Service Monitoring"
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
   tag: "Blog"
   text: "Golden signals in seconds with Universal Service Monitoring"
@@ -27,6 +26,9 @@ Supported application-layer protocols
 : HTTP<br/>
 HTTPS (OpenSSL)
 
+Known limitations
+: Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
+
 <div class="alert alert-info">
 Additional protocols and traffic encryption methods are supported in <a href="/universal_service_monitoring/additional_protocols/">private beta</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
 </div>
@@ -35,7 +37,7 @@ Additional protocols and traffic encryption methods are supported in <a href="/u
 
 - If on Linux:
     - Your service is running in a container.
-    - **Beta:** For non-containerized services see the [instructions here](#non-containerized-services-on-linux).
+    - **Beta:** For non-containerized services see the [instructions here](#additional-configuration).
 - If on Windows IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -68,7 +70,7 @@ providers:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-Datadog Operator v1.0.0 or greater is required. 
+Datadog Operator v1.0.0 or greater is required.
 
 To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
 
@@ -700,7 +702,7 @@ For optional HTTPS support, also add:
 
 If you use load balancers with your services, enable additional cloud integrations to allow Universal Service Monitoring to discover cloud-managed entities:
 
-1. Install the [AWS Integration][2] for visibility in AWS Load Balancer. 
+1. Install the [AWS Integration][2] for visibility in AWS Load Balancer.
 2. Enable ENI and EC2 metric collection.
 3. Add the following tags to each load balancer:
    ```conf
@@ -730,8 +732,11 @@ If you use load balancers with your services, enable additional cloud integratio
 
 {{< /tabs >}}
 
-### Non-containerized services on Linux
+## Additional configuration
 
+The following systems or services require additonal configuration:
+
+{{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
 </div>
@@ -759,6 +764,238 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
+
+{{< collapse-content title="Go TLS Monitoring" level="h4" >}}
+<div class="alert alert-info">
+Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
+</div>
+
+<strong>Note</strong>:
+<br>
+<ul role="list">
+  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach out to your account manager for details.</li>
+  <li>Requires Agent version 7.51 or greater.</li>
+</ul>
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  tls:
+    go:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_TLS_GO_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_TLS_GO_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}} 
+
+{{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in NodeJS.
+</div>
+
+Requires Agent version 7.54 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  tls:
+    nodejs:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_TLS_NODEJS_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_TLS_NODEJS_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}} 
+
+{{< collapse-content title="Istio Monitoring" level="h4" >}}
+
+Universal Service Monitoring is available to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs, HTTP/2, and gRPC traffic.
+
+Requires Agent version 7.50 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  tls:
+    istio:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}} 
+
+{{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
+Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
+
+<strong>Note</strong>:
+<br>
+<ul role="list">
+  <li>Requires Linux Kernel version 5.2 or later.</li>
+  <li>Requires Agent version 7.53 or greater.</li>
+</ul>
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enable_http2_monitoring: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING=true
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Kafka Monitoring (Private Beta)" level="h4" >}}
+
+<div class="alert alert-info">
+Kafka Monitoring is available in <strong>Private beta</strong>.
+</div>
+
+<strong>Note</strong>:
+<br>
+<ul role="list">
+  <li>Producers and consumers require Linux Kernel version 5.2 or later.</li>
+  <li>Producers and consumers must be interfacing with Kafka <strong>without</strong> TLS.</li>
+  <li>Requires Agent version 7.53 or greater.</li>
+</ul>
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  enable_kafka_monitoring: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+datadog:
+  ...
+  serviceMonitoring:
+    enabled: true
+
+agents:
+  ...
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}}
+
 
 ## Path exclusion and replacement
 

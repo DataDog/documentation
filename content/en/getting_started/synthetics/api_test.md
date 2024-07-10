@@ -1,6 +1,5 @@
 ---
 title: Getting Started with API Tests
-kind: documentation
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
@@ -43,7 +42,7 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 
 ### Define request
 
-1. In the Datadog site, hover over **UX Monitoring** and select **[Synthetic Tests][4]**.
+1. In the Datadog site, hover over **Digital Experience** and select **[Tests][4]** (under **Synthetic Monitoring & Testing**).
 2. Click **New Test** > **[New API test][5]**.
 3. Select the `HTTP` request type.
 4. Define your request:
@@ -210,7 +209,7 @@ With Datadog's [APM integration with Synthetic Monitoring][14], access the root 
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep
 [3]: /synthetics/api_tests/http_tests
-[4]: https://app.datadoghq.com/synthetics/list
+[4]: https://app.datadoghq.com/synthetics/tests
 [5]: https://app.datadoghq.com/synthetics/create
 [6]: /synthetics/settings/#global-variables
 [7]: /synthetics/api_tests/http_tests#variables

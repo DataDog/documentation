@@ -1,6 +1,5 @@
 ---
 title: Getting Started with AWS
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
@@ -25,7 +24,7 @@ further_reading:
       text: 'Monitor Amazon ECS Anywhere with Datadog'
     - link: '/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation'
       tag: 'Documentation'
-      text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
+      text: 'AWS CloudWatch Metric Streams with Amazon Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
       tag: 'Blog'
       text: 'Monitor your Graviton3-powered EC2 instances with Datadog'
@@ -69,6 +68,7 @@ Before getting started, ensure you have the following prerequisites:
     * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
+    * iam:TagRole
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
@@ -97,6 +97,7 @@ Before getting started, ensure you have the following prerequisites:
     * s3:PutBucketPolicy
     * s3:PutBucketPublicAccessBlock
     * s3:PutEncryptionConfiguration
+    * s3:PutLifecycleConfiguration
     * secretsmanager:CreateSecret
     * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
@@ -131,7 +132,7 @@ See the [Integrations page][13] for a full listing of the available sub-integrat
 
 There are two ways of sending AWS service logs to Datadog:
 
-- [Kinesis Firehose destination][10]: Use the Datadog destination in your Kinesis Firehose delivery stream to forward logs to Datadog. It is recommended to use this approach when sending logs from CloudWatch in a very high volume.
+- [Amazon Data Firehose destination][10]: Use the Datadog destination in your Amazon Data Firehose delivery stream to forward logs to Datadog. It is recommended to use this approach when sending logs from CloudWatch in a very high volume.
 - [Forwarder Lambda function][11]: Deploy the Datadog Forwarder Lambda function, which subscribes to S3 buckets or your CloudWatch log groups and forwards logs to Datadog. You **must** use this approach to send traces, enhanced metrics, or custom metrics from Lambda functions asynchronously through logs. Datadog also recommends you use this approach to sending logs from S3 or other resources that cannot directly stream data to Kinesis.
 
 Read the [Enable logging for your AWS service][14] section to get logs flowing for the most-used AWS services.
@@ -166,6 +167,10 @@ Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on 
 #### ECS with Fargate launch type
 
 Use the [Amazon ECS on AWS Fargate documentation][28] to run the Agent as a container in the same task definition as your application. **Note**: Datadog Agent version 6.1.1 or higher is needed to take full advantage of the Fargate integration.
+
+#### AWS Batch with Fargate orchestration type
+
+Use the [Amazon ECS on AWS Fargate for AWS Batch documentation][58] to run the Agent as a container in the same AWS Batch job definition as your application. **Note**: Datadog Agent version 6.1.1 or higher is needed to take full advantage of the Fargate integration.
 
 #### EKS
 
@@ -266,10 +271,10 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [51]: /security/default_rules/#cat-log-detection
 [52]: /security/cloud_siem/investigate_security_signals
 [53]: /security/notifications/rules/
-[54]: /security/misconfigurations/setup/
+[54]: /security/cloud_security_management/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/guide/aws-integration-troubleshooting/
-
+[58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 
 

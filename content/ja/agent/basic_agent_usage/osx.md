@@ -14,10 +14,9 @@ further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 os: osx
 platform: OS X
 title: macOS 用 Agent の基本的な使用方法
@@ -101,7 +100,64 @@ Agent の構成ファイルおよびフォルダーの場所
 {{% /tab %}}
 {{< /tabs >}}
 
-## トラブルシューティング
+## Agent のアンインストール
+
+{{< tabs >}}
+{{% tab "Agent v6 と v7" %}}
+**シングルユーザーインストール**
+
+Agent とすべての Agent 構成ファイルを削除するには
+1. トレイにある骨のアイコンで Datadog Agent を停止して閉じます。
+2. Datadog アプリケーションをアプリケーションフォルダからゴミ箱にドラッグします。
+3. 次のコマンドを実行します。
+    ```shell
+    sudo rm -rf /opt/datadog-agent
+    sudo rm -rf /usr/local/bin/datadog-agent
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+    launchctl remove com.datadoghq.agent
+    sudo rm -rf /var/log/datadog
+    ```
+4. マシンを再起動すると、変更が有効になります。
+
+**システム全体の LaunchDaemon のインストール**
+
+Agent とすべての Agent 構成ファイルを削除するには
+1. Datadog アプリケーションをアプリケーションフォルダからゴミ箱にドラッグします。
+2. 残りのファイルを削除するには、以下を実行します。
+    ```shell
+    sudo rm -rf /opt/datadog-agent
+    sudo rm -rf /usr/local/bin/datadog-agent
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+    sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
+    sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+    sudo rm -rf /var/log/datadog
+    ```
+3. マシンを再起動すると、変更が有効になります。
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+1. トレイにある骨のアイコンで Datadog Agent を停止して閉じます。
+2. Datadog アプリケーションをアプリケーションフォルダからゴミ箱にドラッグします。
+3. 次を実行します。
+
+```shell
+sudo rm -rf /opt/datadog-agent
+sudo rm -rf /usr/local/bin/datadog-agent
+sudo rm -rf ~/.datadog-agent/** # 壊れたシンボリックリンクを削除するため
+```
+
+オプションのインストールコマンドを実行して、Agent を起動時に実行させた場合は、以下を実行してアンインストールを終了してください。
+
+```shell
+sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
+sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+```
+
+> この方法では、Agent とすべての Agent コンフィグレーションファイルが削除されます。
+{{% /tab %}}
+{{< /tabs >}}
+
+## ヘルプ
 
 [Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
@@ -111,10 +167,10 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 詳細については、[埋め込み Agent へのパッケージの追加方法][3]の手順を参照してください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/mac
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=macos
 [2]: /ja/agent/troubleshooting/
 [3]: /ja/developers/guide/custom-python-package/

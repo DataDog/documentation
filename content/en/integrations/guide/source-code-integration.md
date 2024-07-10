@@ -1,6 +1,6 @@
 ---
 title: Datadog Source Code Integration
-kind: guide
+
 description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed git information into artifacts in your CI pipeline, and use the GitHub integration to generate inline code snippets."
 further_reading:
 - link: "/integrations/github/"
@@ -17,13 +17,19 @@ further_reading:
   text: "Learn about Serverless Monitoring"
 - link: "/tests/developer_workflows/"
   tag: "Documentation"
-  text: "Learn about CI Visibility"
+  text: "Learn about Test Visibility"
+- link: "/code_analysis/"
+  tag: "Documentation"
+  text: "Learn about Code Analysis"
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Learn about Application Security Monitoring"
 - link: "/logs/error_tracking/"
   tag: "Documentation"
   text: "Learn about Error Tracking for logs"
+- link: "https://www.datadoghq.com/blog/live-debugging/"
+  tag:  "Blog"
+  text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
 
 ## Overview
@@ -352,6 +358,7 @@ The source code integration supports the following Git providers:
 | GitLab SaaS (gitlab.com) | Yes | Yes |
 | GitLab self-managed | Yes | No |
 | Bitbucket | Yes | No |
+| Azure DevOps Services | Yes | No |
 | Azure DevOps Server | Yes | No |
 
 {{< tabs >}}
@@ -370,13 +377,48 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 [107]: /security/application_security/
 
 {{% /tab %}}
+{{% tab "GitLab" %}}
+
+<div class="alert alert-warning">
+Repositories from self-managed GitLab instances are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
+</div>
+
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command.
+
+When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+
+Run this command for every commit that you need to be synchronized with Datadog.
+
+If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**Application Security Monitoring**][7].
+
+### Validation
+
+To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
+
+You can expect to see the following output:
+
+```
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
+180 tracked file paths will be reported.
+✅  Handled in 0.077 seconds.
+```
+
+[1]: https://gitlab.com
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[3]: /logs/error_tracking/backend/?tab=serilog#setup
+[4]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
+[5]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[6]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
+[7]: /security/application_security/
+
+{{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
 <div class="alert alert-warning">
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry to your source code, you can upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
@@ -389,7 +431,7 @@ To ensure the data is being collected, run `datadog-ci git-metadata upload` in y
 You can expect to see the following output:
 
 ```
-Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:my-org/my-repository.git.
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
 ✅  Handled in 0.077 seconds.
 ```
@@ -454,19 +496,34 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
 
 {{% /tab %}}
-{{% tab "CI Visibility" %}}
+{{% tab "Test Visibility" %}}
 
-You can see links from failed test runs to their source repository in **CI Visibility**.
+You can see links from failed test runs to their source repository in **Test Visibility**.
 
-1. Navigate to [**CI** > **Test Runs**][101] and select a failed test run.
-2. Scroll down to the **Source Code** section and click the **View Code** button to open the test in its source code repository.
+1. Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select a failed test run.
+2. Click the **View on GitHub** button to open the test in its source code repository.
 
-{{< img src="integrations/guide/source_code_integration/ci-failed-test-blur.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
 
 For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [101]: https://app.datadoghq.com/ci/test-runs
 [102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
+
+{{% /tab %}}
+{{% tab "Code Analysis" %}}
+
+You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Analysis**.
+
+1. Navigate to [**Software Delivery** > **Code Analysis**][101] and select a repository.
+2. In the **Code Vulnerabilities** or **Code Quality** view, click on a code vulnerability or violation. In the **Details** section, click the **View Code** button to open the flagged code in its source code repository.
+
+{{< img src="integrations/guide/source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Analysis Code Vulnerabilities view" style="width:100%;">}}
+
+For more information, see the [Code Analysis documentation][102].
+
+[101]: https://app.datadoghq.com/ci/code-analysis
+[102]: /code_analysis/
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}

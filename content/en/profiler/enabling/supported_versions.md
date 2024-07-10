@@ -1,6 +1,5 @@
 ---
 title: Language and Library Versions for Profiler Features
-kind: documentation
 disable_sidebar: true
 further_reading:
 - link: "/profiler/enabling"
@@ -31,12 +30,12 @@ To collect profile types, use at least the minimum versions summarized in the fo
 
 | <div style="width:150px"><div>    | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
-| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.35+ | tracer&nbsp;1.23+ | tracer&nbsp;0.48+ | beta<br>tracer&nbsp;5.0.0,<br>4.24.0, 3.45.0 | tracer&nbsp;2.15+ | tracer&nbsp;0.71+  | beta<br>ddprof&nbsp;0.1+ |
+| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.35+ | tracer&nbsp;1.23+ | tracer&nbsp;0.48+ | beta<br>tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | tracer&nbsp;2.15+ | tracer&nbsp;0.71+  | beta<br>ddprof&nbsp;0.1+ |
 | {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | Python 3.7+ |       |       |       | .NET 5+<br>tracer&nbsp;2.31+ |  tracer&nbsp;0.96+  |       |
-| {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   | [JDK&nbsp;11+][17] | Python 3.6+<br>tracer&nbsp;0.50+ | tracer&nbsp;1.47+ | alpha<br>Ruby 2.7+<br>tracer&nbsp;1.19+ |       | beta<br>.NET 6+<br>tracer&nbsp;2.18+ | tracer&nbsp;0.88+ | beta<br>ddprof&nbsp;0.9.3 |
-| {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK&nbsp;11+][17] | Python 3.6+<br> tracer&nbsp;0.50+ | tracer&nbsp;1.23+ | alpha<br>Ruby 2.7+<br>tracer&nbsp;1.19+ | tracer&nbsp;0.23+ | beta<br>.NET 7+<br>tracer&nbsp;2.22+ |       | beta<br>ddprof&nbsp;0.15+ |
+| {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   | [JDK&nbsp;11+][17] | Python 3.6+<br>tracer&nbsp;0.50+ | tracer&nbsp;1.47+ | beta<br>Ruby 2.7+<br>tracer&nbsp;1.21.1+ |       | beta<br>.NET 6+<br>tracer&nbsp;2.18+ | tracer&nbsp;0.88+ | beta<br>ddprof&nbsp;0.9.3 |
+| {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK&nbsp;11+][17] | Python 3.6+<br> tracer&nbsp;0.50+ | tracer&nbsp;1.23+ | alpha<br>Ruby 2.7+<br>tracer&nbsp;1.21.1+ | tracer&nbsp;0.23+ | beta<br>.NET 7+<br>tracer&nbsp;2.22+ |       | beta<br>ddprof&nbsp;0.15+ |
 | {{< ci-details title="Wall time" >}}The elapsed time spent in each function/method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function/method is running.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.35+ |       | tracer&nbsp;0.48+ | tracer&nbsp;0.23+ | tracer&nbsp;2.7+ | tracer&nbsp;0.71+ |       |
-| {{< ci-details title="Locks" >}}The time each function/method spent waiting for and holding locks, and the number of times each function acquired a lock.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.45+ | tracer&nbsp;1.47+ |      |       | .NET 5+<br>tracer&nbsp;2.31+ |       |      |
+| {{< ci-details title="Locks" >}}The time each function/method spent waiting for and holding locks, and the number of times each function acquired a lock.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.45+ | tracer&nbsp;1.47+ |      |       | .NET 5+ and .NET Framework beta (requires Datadog Agent 7.51+)<br>tracer&nbsp;2.49+ |       |      |
 | {{< ci-details title="I/O" >}}The time each method spent reading from and writing to files and sockets.{{< /ci-details >}}   | [JDK&nbsp;8+][17] |       |       |       |       |       |       |       |
 
 
@@ -48,7 +47,7 @@ To access additional profiling features, use at least the minimum versions summa
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
 | {{< ci-details title="Code Hotspots" >}}Find specific lines of code related to performance issues. <a href="/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.44.0 | tracer&nbsp;1.37.0 | tracer&nbsp;0.48.0 | tracer&nbsp;5.0.0,<br>4.24.0, 3.45.0 | tracer&nbsp;2.7.0 | tracer&nbsp;0.71.0 |      |
 | {{< ci-details title="Endpoint Profiling" >}}Identify endpoints that are bottlenecks or responsible for heavy resource consumption. <a href="/profiler/connect_traces_and_profiles/#endpoint-profiling">Learn more</a>{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.54.0 | tracer&nbsp;1.37.0 | tracer&nbsp;0.52.0 | tracer&nbsp;5.0.0,<br>4.24.0, 3.45.0 | tracer&nbsp;2.15.0 | tracer&nbsp;0.79.0 |      |
-| {{< ci-details title="Timeline View" >}}Surface time-based patterns and work distribution over the period of a span. <a href="/profiler/connect_traces_and_profiles/#span-execution-timeline-view">Learn more</a>{{< /ci-details >}}   | beta |       | beta<br>tracer&nbsp;1.51.0 | beta<br>tracer&nbsp;1.15.0 | beta<br>tracer&nbsp;5.1.0,<br>4.25.0, 3.46.0 | beta<br>tracer&nbsp;2.30.0 | beta<br>tracer&nbsp;0.89.0 |      |
+| {{< ci-details title="Timeline View" >}}Surface time-based patterns and work distribution over the period of a span. <a href="/profiler/connect_traces_and_profiles/#span-execution-timeline-view">Learn more</a>{{< /ci-details >}}   | beta |       | beta<br>tracer&nbsp;1.51.0 | beta<br>tracer&nbsp;1.21.1 | beta<br>tracer&nbsp;5.11.0,<br>4.35.0, 3.56.0 | beta<br>tracer&nbsp;2.30.0 | beta<br>tracer&nbsp;0.89.0 |      |
 
 ## Further reading
 

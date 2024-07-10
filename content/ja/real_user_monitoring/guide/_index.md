@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: RUM & セッションリプレイガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
 ---
@@ -47,6 +46,9 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDK の非推奨ポリシー{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM Mobile SDK のアップグレード{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Mobile SDK の複数インスタンスの使用{{< /nextlink >}}
+ {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}モバイル RUM データのプロキシ{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}React Native の起動前にネイティブ SDK を初期化する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}ハイブリッド React Native アプリケーションを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="セッションリプレイ" >}}
@@ -56,4 +58,5 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}セッションリプレイとサードパーティツールの連携{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}ポストモーテムでの主要ツールとしてセッションリプレイを使用する{{< /nextlink >}}
     {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}セッションリプレイから Synthetic ブラウザテストを生成する{{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}セッションリプレイで Zendesk チケットを調査する{{< /nextlink >}}
 {{< /whatsnext >}}

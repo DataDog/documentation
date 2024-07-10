@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for AIX
-kind: documentation
 further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
@@ -11,10 +10,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
   tag: "Blog"
   text: "Monitor AIX with the Datadog Unix Agent"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 <div class="alert alert-info">
-The Datadog Unix Agent is being developed for specific system architectures, and is not the same as the Windows, Linux and MacOS Agents.
+The Datadog UNIX Agent is being developed for specific system architectures, and is not the same as the Windows, Linux, and MacOS Agents.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.

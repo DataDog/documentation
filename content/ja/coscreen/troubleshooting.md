@@ -1,8 +1,15 @@
 ---
 is_beta: false
-kind: ガイド
 title: CoScreen の最適化およびトラブルシューティング
 ---
+
+### CoScreen、Zoom、その他のツールで Bluetooth ヘッドセットのマイクを入力として使用すると、音質が低下するのはなぜですか？
+
+Bluetooth ヘッドセットを使用している場合、ヘッドセットのマイクがオーディオ入力デバイスとして選択されていると、再生品質が低下することがあります。CoScreen セッション中にオーディオを再生 (例えば、YouTube ビデオを再生) すると、このことに気づくかもしれません。これは、Bluetooth ヘッドセットが別の Bluetooth プロファイルの使用に切り替えたために起こる可能性があります。
+
+オーディオ再生のみの場合、Bluetooth ヘッドセットは通常 [A2DP プロファイル][2]を使用し、これは高音質に最適化されていますが、マイクの使用はサポートしていません。ヘッドセットマイクをオーディオ入力として選択すると (例えば、CoScreen セッションまたは Zoom 会議中)、ヘッドセットは別のプロファイル、通常は [HFP][3] または [HSP][4] に切り替わります。これはマイクの使用をサポートしていますが、音質は低下します。ほとんどの Bluetooth ヘッドセットは一度に 1 つのプロファイルしか使用できません。
+
+この問題を避けるには、ノートパソコンの内蔵マイクなど、別のオーディオ入力を使うことができます。高音質を取り戻すには、アプリケーションを再起動する必要があるかもしれません。
 
 ### 画面共有の品質やリモートコントロールのレイテンシーを最適化するにはどうすればよいですか？
 
@@ -37,11 +44,15 @@ UI がグレーアウトした参加フェーズで止まっているのに、"U
 
 {{< img src="coscreen/assign-to-none.png" alt="macOS のドックのスクリーンショット。CoScreen を右クリックするとメニューが表示され、'Options' にカーソルを合わせると、2 つ目のメニューが表示されます。'Assign To' で、ユーザーは 'None' を選択しています。" style="width:60%;" >}}
 
-### Windows 10 でのトラブルシューティング
+### Windows でのトラブルシューティング
+
+#### CoScreen は Windows の管理者モードでどのように動作しますか？
+
+CoScreen を管理者モードで実行し、同じく管理者モードで起動されたアプリを共有する場合、すべてのリモートユーザーは共有されたウィンドウを操作することができます。しかし、非管理者モードで CoScreen を実行し、管理者モードで起動されたアプリを共有する場合、リモートユーザーはそのウィンドウを操作できません。
 
 #### CoScreen の UI が小さく表示される
 
-Windows 10 コンピューターで CoScreen UI が他のアプリより小さく表示される場合、ディスプレイ設定で構成されたスケーリング係数と CoScreen との相互作用が関係しています。画面のスケーリングと解像度を下げることで、エクスペリエンスを改善することができます。
+Windows コンピューターで CoScreen UI が他のアプリより小さく表示される場合、ディスプレイ設定で構成されたスケーリング係数と CoScreen との相互作用が関係しています。画面のスケーリングと解像度を下げることで、エクスペリエンスを改善することができます。
 
 #### 私の声が聞き取りにくい、またはロボットみたいだ
 
@@ -50,3 +61,6 @@ Windows 10 コンピューターで CoScreen UI が他のアプリより小さ�
 {{< img src="coscreen/windows_screenshot.png" alt="Realtek Audio Console の Windows ダイアログのスクリーンショット。'Voice Recognition' のトグルはオフに設定されています。" style="width:70%;" >}}
 
 [1]: https://packetlosstest.com/
+[2]: https://www.bluetooth.com/specifications/specs/advanced-audio-distribution-profile-1-4/
+[3]: https://www.bluetooth.com/specifications/specs/hands-free-profile/
+[4]: https://www.bluetooth.com/specifications/specs/headset-profile-1-2/

@@ -1,6 +1,5 @@
 ---
 title: Access and Authentication
-kind: documentation
 description: Access and authentication for Workflow Automation
 aliases:
 - /workflows/access
@@ -9,6 +8,9 @@ algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 disable_toc: false
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
@@ -73,9 +75,11 @@ For more information on configuring credentials, see [Connections][6].
 
 Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][7].
 
+By default, the author of a workflow or connection is the only user who receives **Editor** access. The rest of the Datadog organization receives **Viewer** access to the workflow or connection.
+
 ### Restrict access on a specific connection
 
-Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**.
+Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : Can view the connection
@@ -102,7 +106,7 @@ Follow the steps below to modify the permissions on a specific connection:
 
 ### Restrict access on a specific workflow
 
-Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**.
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**. By default, only the author of the workflow receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : Can view the workflow
@@ -138,6 +142,8 @@ You can restrict access on a specific workflow either from the workflow list pag
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
+
 [1]: /account_management/audit_trail/#overview
 [2]: /account_management/org_settings/service_accounts/
 [3]: /account_management/rbac/
@@ -146,3 +152,4 @@ You can restrict access on a specific workflow either from the workflow list pag
 [6]: /service_management/workflows/connections/
 [7]: /account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow
+[9]: https://datadoghq.slack.com/

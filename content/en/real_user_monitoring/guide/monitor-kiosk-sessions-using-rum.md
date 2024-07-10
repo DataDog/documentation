@@ -1,9 +1,9 @@
 ---
 title: Monitor Kiosk Sessions Using RUM
-kind: guide
+
 description: Guide for monitoring kiosk sessions with RUM.
 further_reading:
-- link: '/real_user_monitoring/dashboards/'
+- link: '/real_user_monitoring/platform/dashboards/'
   tag: 'Documentation'
   text: 'RUM Dashboards'
 

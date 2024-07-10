@@ -1,21 +1,21 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application in a Container and an Agent on a Host
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -41,7 +41,7 @@ If you haven't installed a Datadog Agent on your machine, install one now.
 1. Go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
    {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
    {{< /code-block >}}
 
    To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
@@ -222,7 +222,7 @@ With the application running, send some curl requests to it:
 
 Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
 The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 

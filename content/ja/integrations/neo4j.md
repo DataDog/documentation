@@ -7,6 +7,7 @@ assets:
     Neo4j V5 Cluster Dashboard: assets/dashboards/Neo4j5ClusterDashboard.json
     Neo4j V5 Dashboard: assets/dashboards/Neo4j5DefaultDashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
       prefix: neo4j.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10202
     source_type_name: Neo4j
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -24,7 +26,7 @@ author:
   sales_email: support@neotechnology.com
   support_email: support@neotechnology.com
 categories:
-- data store
+- data stores
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md
 display_on_public_website: true
@@ -32,12 +34,11 @@ draft: false
 git_integration_title: neo4j
 integration_id: neo4j
 integration_title: Neo4j
-integration_version: 3.0.0
+integration_version: 3.0.3
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: neo4j
-oauth: {}
 public_title: Neo4j
 short_description: Neo4j のメトリクスを収集する
 supported_os:
@@ -50,7 +51,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   configuration: README.md#Setup
   description: Neo4j のメトリクスを収集する
   media:
@@ -65,6 +66,7 @@ tile:
   title: Neo4j
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -75,54 +77,60 @@ Neo4j メトリクスは、データベース管理者が Neo4j のデプロイ�
 
 このインテグレーションにより、すぐに使えるダッシュボードで Neo4j の重要なメトリクスを視覚化し、DBA が Neo4j データベースのトラブルシューティングと健全性のモニタリングを行えるようになります。
 
-### メトリクス
-{{< get-metrics-from-git "neo4j" >}}
-ホスト上で動作する Agent の場合。コンテナ環境では、これらの指示を適用するためのガイダンスとして、[オートディスカバリーインテグレーションテンプレート][5]を参照してください。
 
-### インストール
+## 計画と使用
+
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+
+### インフラストラクチャーリスト
 
 neo4j チェックをホストにインストールするには
 
-1. [Datadog Agent][6] をダウンロードしてインストールします。
+1. [Datadog Agent][3] をダウンロードしてインストールします。
 2. neo4j チェックをホストにインストールするには
 
    ```shell
    datadog-agent integration install -t datadog-neo4j==<INTEGRATION_VERSION>
    ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. neo4j のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `neo4j.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[neo4j.d/conf.yaml のサンプル][4]を参照してください。
 
 2. Datadog は、dogstatsd_stats_port と expvar_port をポート 5000 でリッスンしています。neo4j.conf ファイルで、server.discovery.listen_address と server.discovery.advertised_address を 5000 以外のポートを使用するように変更する必要があります。
 
-3. [Agent を再起動します][8]。
+3. [Agent を再起動します][5]。
 
 ### 検証
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `neo4j` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### サービスのチェック
+### データセキュリティ
+{{< get-metrics-from-git "neo4j" >}}
+
+
+### ヘルプ
 
 サービスチェック `neo4j.prometheus.health` はベースチェックで送信されます
 
-### イベント
+### ヘルプ
 
 Neo4j には、イベントは含まれません。
 
-## トラブルシューティング
+
+## ヘルプ
 
 ご不明な点は、[Neo4j サポート][10]までお問い合わせください。
 
 [1]: https://neo4j.com/
-[2]: https://neo4j.com/docs/operations-manual/4.4/monitoring/metrics/reference/
-[3]: https://neo4j.com/docs/operations-manual/5/monitoring/metrics/reference/
-[4]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
-[5]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/datadog_checks/neo4j/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/datadog_checks/neo4j/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://neo4j.com/docs/operations-manual/4.4/monitoring/metrics/reference/
+[8]: https://neo4j.com/docs/operations-manual/5/monitoring/metrics/reference/
+[9]: https://github.com/DataDog/integrations-extras/blob/master/neo4j/metadata.csv
 [10]: mailto:support@neo4j.com

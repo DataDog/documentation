@@ -1,6 +1,5 @@
 ---
 title: Tracing .NET Core Applications
-kind: documentation
 aliases:
   - /tracing/dotnet-core
   - /tracing/languages/dotnet-core
@@ -39,10 +38,10 @@ further_reading:
     tag: "Blog"
     text: "Optimize your .NET application performance with the Datadog Continuous Profiler"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Source code"
 ---
 
@@ -61,7 +60,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
 </div>
 
 <div class="alert alert-info">
@@ -115,8 +114,21 @@ To install the .NET Tracer machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt/datadog/createLogPath.sh`
 
+#### Chiseled containers
+
+To install the .NET Tracer in chiseled or distroless Docker images (without a shell), use the following Dockerfile commands:
+
+- Use `ADD` to put the tracer files in the container.
+- Use `COPY --chown=$APP_UID` with an empty folder as source to create the logs path.
+
+For example, in your Dockerfile:
+
+```dockerfile
+ADD datadog-dotnet-apm-<TRACER_VERSION>.tar.gz /opt/datadog/
+COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
+```
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -359,6 +371,8 @@ export DD_RUNTIME_METRICS_ENABLED=true
 # Start your application
 dotnet example.dll
 ```
+
+<div class="alert alert-info"> If you are using Alpine Linux, set the <code>CORECLR_PROFILER_PATH</code> environment variable to a path for musl based distributions: <code>linux-musl-x64/</code>.</div>
 
 #### Linux Docker container
 

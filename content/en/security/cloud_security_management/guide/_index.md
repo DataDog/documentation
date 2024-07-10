@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Guides
-kind: guide
 disable_toc: true
 aliases:
   - /security_platform/cloud_workload_security/guide/
@@ -10,11 +9,11 @@ aliases:
 
 {{< whatsnext desc="Cloud Security Management (CSM) Guides" >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security Management{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/workflows" >}}Automate Security Workflows with Workflow Automation{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/jira" >}}Create Jira Issues for Cloud Security Management Issues{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Management Agent Variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats Guides" >}}
+    {{< nextlink href="/security/cloud_security_management/guide/active-protection" >}}Proactively block crypto mining threats with Active Protection{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/tuning-rules" >}}Best Practices for Fine-Tuning CSM Threats Security Signals{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/custom-rules-guidelines" >}}Guidelines for Writing Custom Rules{{< /nextlink >}}
 {{< /whatsnext >}}

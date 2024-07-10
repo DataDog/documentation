@@ -1,6 +1,5 @@
 ---
 title: Configuring the .NET Core Tracing Library
-kind: documentation
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
@@ -24,10 +23,10 @@ further_reading:
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Source code"
   - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
     tag: "Blog"
@@ -124,7 +123,8 @@ The following configuration variables are available for both automatic and custo
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
-It can contain a Unix path to a socket by prefixing the path with `unix://`. <br>
+It can contain a Unix Domain Socket (UDS) path by prefixing the path with `unix://`. <br>
+Note that UDS is only supported on .NET Core 3.1 and above.<br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
 
 `DD_AGENT_HOST`
@@ -140,7 +140,7 @@ It can contain a Unix path to a socket by prefixing the path with `unix://`. <br
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
 Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
 For more information, see [Ingestion Mechanisms][11].<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI. 
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
@@ -225,14 +225,20 @@ The `from-key` value is specific to the integration type, and should exclude the
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
 
 `DD_TRACE_ENABLED`
 : **TracerSettings property**: `TraceEnabled`<br>
-Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` or `false`.<br>
+Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
 **Default**: `true`
+**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
 
 `DD_DBM_PROPAGATION_MODE`
 : Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
@@ -250,7 +256,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
 Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. 
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
@@ -326,3 +332,5 @@ The following configuration variables are for features that are available for us
 [15]: /tracing/configure_data_security#telemetry-collection
 [16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
+[18]: /tracing/trace_collection/otel_instrumentation/dotnet/
+[19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations

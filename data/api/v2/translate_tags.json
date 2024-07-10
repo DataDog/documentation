@@ -23,13 +23,17 @@
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
   },
+  "csm-threats": {
+    "name": "CSM Threats",
+    "description": "Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) for more information on setting up CSM Threats."
+  },
+  "case-management": {
+    "name": "Case Management",
+    "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management page](https://docs.datadoghq.com/cloud_cost_management/) for more information."
-  },
-  "cloud-workload-security": {
-    "name": "Cloud Workload Security",
-    "description": "Workload activity security rules for generating events using the Datadog security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/) for more information."
   },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
@@ -37,15 +41,15 @@
   },
   "confluent-cloud": {
     "name": "Confluent Cloud",
-    "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
+    "description": "Manage your Datadog Confluent Cloud integration accounts and account resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/) for more information."
   },
   "container-images": {
     "name": "Container Images",
-    "description": "The Container Images API allows you to query Container Image data for your organization."
+    "description": "The Container Images API allows you to query Container Image data for your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/) for more information."
   },
   "containers": {
     "name": "Containers",
-    "description": "The Containers API allows you to query container data for your organization."
+    "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
   },
   "dora-metrics": {
     "name": "DORA Metrics",
@@ -61,11 +65,11 @@
   },
   "events": {
     "name": "Events",
-    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
+    "description": "The Event Management API allows you to programmatically post events to the Events Explorer\nand fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information."
   },
   "fastly-integration": {
     "name": "Fastly Integration",
-    "description": "Configure your Datadog Fastly integration directly through the Datadog API."
+    "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -73,11 +77,11 @@
   },
   "ip-allowlist": {
     "name": "IP Allowlist",
-    "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support."
+    "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information."
   },
   "incident-services": {
     "name": "Incident Services",
-    "description": "Create, update, delete, and retrieve services which can be associated with incidents."
+    "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
   "incident-teams": {
     "name": "Incident Teams",
@@ -85,7 +89,7 @@
   },
   "incidents": {
     "name": "Incidents",
-    "description": "Manage incident response."
+    "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
   "key-management": {
     "name": "Key Management",
@@ -93,11 +97,15 @@
   },
   "logs": {
     "name": "Logs",
-    "description": "Search your logs and send them to your Datadog platform over HTTP."
+    "description": "Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information."
   },
   "logs-archives": {
     "name": "Logs Archives",
-    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in web UI."
+    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog."
+  },
+  "logs-custom-destinations": {
+    "name": "Logs Custom Destinations",
+    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\n**Note**: Log forwarding is not available for the Government (US1-FED) site. Contact your account representative for more information.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",
@@ -109,7 +117,7 @@
   },
   "metrics": {
     "name": "Metrics",
-    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   },
   "monitors": {
     "name": "Monitors",
@@ -117,7 +125,7 @@
   },
   "okta-integration": {
     "name": "Okta Integration",
-    "description": "Configure your Datadog Okta integration directly through the Datadog API."
+    "description": "Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/) directly through the Datadog API."
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
@@ -129,15 +137,15 @@
   },
   "powerpack": {
     "name": "Powerpack",
-    "description": "The powerpack endpoints allow you to:\n\n- Get a powerpack\n- Create a powerpack\n- Delete a powerpack\n- Get a list of all powerpacks\n\nThe Patch and Delete API methods can only be performed on a powerpack by\na user who has the powerpack create permission for that specific powerpack."
+    "description": "The Powerpack endpoints allow you to:\n\n- Get a Powerpack\n- Create a Powerpack\n- Delete a Powerpack\n- Get a list of all Powerpacks\n\nThe Patch and Delete API methods can only be performed on a Powerpack by\na user who has the powerpack create permission for that specific Powerpack.\n\nRead [Scale Graphing Expertise with Powerpacks](https://docs.datadoghq.com/dashboards/guide/powerpacks-best-practices/) for more information."
   },
   "processes": {
     "name": "Processes",
-    "description": "The processes API allows you to query processes data for your organization."
+    "description": "The processes API allows you to query processes data for your organization. See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/) for more information."
   },
   "rum": {
     "name": "RUM",
-    "description": "Search or aggregate your RUM events over HTTP."
+    "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
   "restriction-policies": {
     "name": "Restriction Policies",
@@ -149,23 +157,27 @@
   },
   "security-monitoring": {
     "name": "Security Monitoring",
-    "description": "Detection rules for generating signals and listing of generated\nsignals."
+    "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
   },
   "sensitive-data-scanner": {
     "name": "Sensitive Data Scanner",
-    "description": "Create, update, delete, and retrieve sensitive data scanner groups and rules."
+    "description": "Create, update, delete, and retrieve sensitive data scanner groups and rules. See the [Sensitive Data Scanner page](https://docs.datadoghq.com/sensitive_data_scanner/) for more information."
   },
   "service-accounts": {
     "name": "Service Accounts",
-    "description": "Create, edit, and disable service accounts."
+    "description": "Create, edit, and disable service accounts. See the [Service Accounts page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/) for more information."
   },
   "service-definition": {
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
   },
+  "service-level-objectives": {
+    "name": "Service Level Objectives",
+    "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(SLOs) are a key part of the site reliability engineering toolkit.\nSLOs provide a framework for defining clear targets around application performance,\nwhich ultimately help teams provide a consistent customer experience,\nbalance feature development with platform stability,\nand improve communication with internal and external users."
+  },
   "service-scorecards": {
     "name": "Service Scorecards",
-    "description": "API to create, update scorecard rules and outcomes.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+    "description": "API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "spans": {
     "name": "Spans",
@@ -173,7 +185,7 @@
   },
   "spans-metrics": {
     "name": "Spans Metrics",
-    "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization."
+    "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/) for more information."
   },
   "synthetics": {
     "name": "Synthetics",
@@ -181,11 +193,11 @@
   },
   "teams": {
     "name": "Teams",
-    "description": "View and manage teams within Datadog."
+    "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
   },
   "usage-metering": {
     "name": "Usage Metering",
-    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
+    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
   },
   "users": {
     "name": "Users",

@@ -1,6 +1,6 @@
 ---
 title: Azure Cloud Adoption Framework with Datadog
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
@@ -163,7 +163,7 @@ For more information about how to configure SLOs and exposing them to stakeholde
 [5]: /integrations/#cat-collaboration
 [6]: https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging#minimum-suggested-tags
 [7]: https://app.datadoghq.com/dashboard/lists/preset/3?q=azure
-[8]: /dashboards/#clone-dashboard
+[8]: /dashboards/configure/#configuration-actions
 [9]: /dashboards/template_variables/
 [10]: /monitors/notify/variables/?tab=is_alert#dynamic-handles
 [11]: https://app.datadoghq.com/account/settings/agent/latest

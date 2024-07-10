@@ -5,6 +5,7 @@ assets:
   dashboards:
     Buoyant Cloud: assets/dashboards/buoyant_cloud_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +16,9 @@ assets:
       prefix: buoyant_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10320
     source_type_name: Buoyant Cloud
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://buoyant.io/cloud
   name: Buoyant
@@ -34,10 +37,9 @@ integration_id: buoyant-cloud
 integration_title: Buoyant Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: buoyant_cloud
-oauth: {}
 public_title: Buoyant Cloud
 short_description: Buoyant Cloud は、お客様のクラスター上でフルマネージド Linkerd を提供します。
 supported_os:
@@ -87,19 +89,20 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 [Buoyant Cloud][1] は、Linkerd の健全性とデプロイメントを監視するために、お客様のクラスター上でフルマネージド Linkerd を提供します。このインテグレーションにより、Linkerd の健全性、ワークロードのトラフィック、ロールアウトのイベント、メトリクスを監視し、アラートを受け取ることができます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 このインテグレーションを使用するには、[Buoyant Cloud][1] にアカウントが必要です。また、Datadog マーケットプレイスで Buoyant Cloud にサインアップすることができます。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. タイルの **Connect Accounts** ボタンをクリックし、OAuth フローを完了します。
 2. [Buoyant Cloud Notifications][2] ページを参照します。
@@ -118,9 +121,9 @@ Buoyant Cloud がイベントを作成すると、Datadog の[イベントエク
 
 また、[API Keys ページ][6]でインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### イベント
+### ヘルプ
 
 Buoyant Cloud は Datadog に[イベント][3]を送信します。これには以下が含まれます。
 
@@ -130,11 +133,11 @@ Buoyant Cloud は Datadog に[イベント][3]を送信します。これには�
 - ワークロードロールアウト
 - 手動イベント
 
-### メトリクス
+### データセキュリティ
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][7] を参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 ヘルプが必要ですか？次のようなサポートを受けることができます。
 

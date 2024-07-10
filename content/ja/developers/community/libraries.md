@@ -3,7 +3,6 @@ aliases:
 - /ja/libraries/
 - /ja/developers/faq/monitoring-akka/
 - /ja/developers/libraries/
-kind: documentation
 title: ライブラリ
 ---
 
@@ -93,10 +92,6 @@ Heroku で PHP トレーサーやプロファイラーを使用するには、�
 
 * [SpeedCurve][66] によって保守されている [Heroku Datadog PHP Tracer and Profiler Buildpack][65]。
 
-### Jira
-
-Jira にデータをポーリングし、Datadog にメトリクスとしてアップロードするための[ツール][39]です。
-
 ### K6
 
 Load Impact が開発した負荷およびパフォーマンスの回帰テストツールである K6 は、[DogStatsD][1] を使用してテスト結果を Datadog に送信できます。この機能を有効にするには、[チュートリアル][40]を参照してください。
@@ -121,7 +116,6 @@ Datadog 通知を取り込む Moogsoft [リスナー][44]。
 
 ### OpenVPN
 
-* OpenVPN [帯域幅使用量][50]とアクティブな接続の数を Datadog に送信します。
 * OpenVPN [ライセンス情報][51]を Datadog に送信します。
 
 ### Phusion Passenger
@@ -135,7 +129,7 @@ Datadog 通知を取り込む Moogsoft [リスナー][44]。
 ### Pulumi
 Pulumi 用の Datadog [リソースプロバイダー][67]を使用すると、Datadog リソースを構成することができます。
 
-### SaltStack
+### Windows
 
 * [Datadog SaltStack Formula][56]
 * [Luca Cipriani][58] が作成した [Datadog SaltStack][57]。
@@ -199,7 +193,6 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://bitbucket.org/atlassian/jiradog/src/master/
 [40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
@@ -210,7 +203,6 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [47]: https://github.com/dailymotion/lua-resty-dogstatsd
 [48]: http://www.mediba.jp
 [49]: https://www.dailymotion.com/us
-[50]: https://github.com/byronwolfman/dd-openvpn
 [51]: https://github.com/denniswebb/datadog-openvpn
 [52]: https://github.com/Sjeanpierre/passenger-datadog-monitor
 [53]: https://github.com/Sjeanpierre

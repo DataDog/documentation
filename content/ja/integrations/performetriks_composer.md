@@ -20,12 +20,11 @@ integration_id: performetriks-composer
 integration_title: Composer によるインストール
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
-  eula: assets/Composer End User License Agreement.pdf
+  eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: performetriks_composer
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -69,6 +68,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -96,15 +96,11 @@ Composer では、モニタリングのコンフィギュレーションをコ�
 
 最近では、コードとしてのモニタリングが主流になっています。Composer を使えば、モニタリングの設定をコードリポジトリに保存し、変更を追跡して、既存または新しい Datadog 環境にこれらの設定をアップロードすることができます。
 
-
-詳しくは、[Composer Datadog 製品ガイド][1]をご覧ください。
-
-
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Performetriks にお問い合わせください。
 
-- メール: [composer@performetriks.com][3]
+- メール: [composer@performetriks.com][2]
 
 ### その他の参考資料
 
@@ -112,8 +108,9 @@ Composer では、モニタリングのコンフィギュレーションをコ�
 
 - [Datadog Marketplace の Performetriks の製品を使って Datadog の構成をコードとして保存・管理する][3]
 
-[1]: https://www.performetriks.com/composer-datadog-product-guide
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[2]: mailto:composer@performetriks.com
 [3]: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">こちらをクリック</a>してください。

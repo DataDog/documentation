@@ -1,14 +1,13 @@
 ---
 title: Agent Flare
-kind: documentation
 aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent Debug Mode"
 - link: "/agent/troubleshooting/agent_check_status/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Get the Status of an Agent Check"
 algolia:
   tags: ['agent flare']
@@ -18,7 +17,12 @@ algolia:
 <div class="alert alert-warning">Sending an Agent Flare is not supported for this site.</div>
 {{< /site-region >}}
 
-A flare allows you to send necessary troubleshooting information to the Datadog support team. You can send a flare from the Datadog site or using the Datadog Agent command line.
+A flare allows you to send necessary troubleshooting information to the Datadog support team.
+
+This page covers:
+- [Sending a flare using the `flare` command](#send-a-flare-using-the-flare-command).
+- [Sending a flare from the Datadog site](#send-a-flare-from-the-datadog-site) using Remote Configuration.
+- [Manual submission](#manual-submission).
 
 A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings.
 
@@ -30,9 +34,9 @@ To send a flare from the Datadog site, make sure you've enabled [Fleet Automatio
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
-## Send a flare from the Agent command line
+## Send a flare using the `flare` command
 
 Use the `flare` subcommand to send a flare. In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
 
@@ -50,7 +54,7 @@ If you don't have a case ID, enter your email address used to log in to Datadog 
 | macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Kubernetes | `kubectl exec -it <POD_NAME> -- agent flare <CASE_ID>`  |
+| Kubernetes | `kubectl exec -it <AGENT_POD_NAME> -- agent flare <CASE_ID>`  |
 | Fedora     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
@@ -61,7 +65,7 @@ If you don't have a case ID, enter your email address used to log in to Datadog 
 
 ## Dedicated containers
 
-When using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog Agent and Trace Agent are in separate containers, you will deploy an Agent Pod containing:
+When using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog Agent and Trace Agent are in separate containers, you deploy an Agent Pod containing:
 
 * One container with the Agent process (Agent + Log Agent)
 * One container with the process-agent process
@@ -104,7 +108,7 @@ kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 
 ## ECS Fargate
 
-When using ECS Fargate platform v1.4.0, ECS tasks and services can be configured to allow access to running Linux containers by enabling [Amazon ECS Exec][5]. Once configured, run the following command to send a flare:
+When using ECS Fargate platform v1.4.0, ECS tasks and services can be configured to allow access to running Linux containers by enabling [Amazon ECS Exec][5]. After enabling Amazon ECS exec, run the following command to send a flare:
 
 ```bash
 aws ecs execute-command --cluster <CLUSTER_NAME> \
@@ -114,7 +118,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
     --command "agent flare <CASE_ID>"
 ```
 
-**Note:** ECS Exec can only be enabled for new tasks. Existing tasks need to be recreated in order to use ECS Exec.
+**Note:** ECS Exec can only be enabled for new tasks. You must recreate existing tasks to use ECS Exec.
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
@@ -171,3 +175,4 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /agent/fleet_automation/
 [3]: /agent/remote_config#enabling-remote-configuration
+

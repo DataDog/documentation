@@ -1,7 +1,10 @@
 ---
 title: Connections
-kind: documentation
 description: Workflow connections
+further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
@@ -34,7 +37,7 @@ If the integration you need to set up is not listed above, set up connection cre
 
 ## Connection credentials
 
-Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation product.
+Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -77,7 +80,7 @@ Alternatively, add a connection from the workflow page:
 
 The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/workflows/new-connection2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
+{{< img src="service_management/new-connection.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 
@@ -100,19 +103,13 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 ## HTTP connection
 
-To connect to an arbitrary service, use the HTTP connection type, and choose from two authentication options:
-- Token-based authentication
-- A username and password combination
+To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
-### Create HTTP connection
+## Further reading
 
-1. Navigate to the [connections list][3].
-1. Select **New Connection**. A dialog box appears.
-1. Select **HTTP Connection**. The dialog box updates to show the HTTP connection parameters.
-1. Enter the **Base URL**.
-1. If appropriate, use the **Add +** buttons to add headers or URL parameters.
-1. Choose an connection type: **Token Auth** or **Basic Auth**. Enter the appropriate parameters.
-1. Click **Create** to save your HTTP connection.
+{{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
 
 [1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
@@ -121,3 +118,5 @@ To connect to an arbitrary service, use the HTTP connection type, and choose fro
 [6]: /integrations/
 [8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
+[10]: /service_management/workflows/actions/http/
+[11]: https://datadoghq.slack.com/

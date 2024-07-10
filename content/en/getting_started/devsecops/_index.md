@@ -1,18 +1,17 @@
 ---
 title: Getting Started with the DevSecOps Bundles
-kind: documentation
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
 
 ## APM DevSecOps
 
-The APM DevSecOps bundles combine [Application Performance Monitoring (APM)][4] with the [Application Vulnerability Management][1] capabilities of [Application Security Management (ASM)][2].
+The APM DevSecOps bundles combine [Application Performance Monitoring (APM)][4] with the [Software Composition Analysis][10] capabilities of [Application Security Management (ASM)][2].
 
 {{< tabs >}}
 {{% tab "APM DevSecOps" %}}
 
-APM DevSecOps includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][3] capabilities of [ASM][4].
+APM DevSecOps includes [APM][1], [Universal Service Monitoring][2], and the [Software Composition Analysis][3] capabilities of [ASM][4].
 
 ### Setup
 
@@ -21,9 +20,9 @@ To get started with APM DevSecOps, [install and configure the Datadog Agent][5] 
 - [APM][6]
 - [Universal Service Monitoring][7]
 
-After you install the Agent, enable ASM for your environment.
+After you install the Agent, enable SCA for your environment.
 
-- [Application Security Management][8]
+- [Software Composition Analysis][10]
 
 ### Next steps
 
@@ -31,7 +30,7 @@ Learn more about the features included with APM DevSecOps:
 
 - [APM Metrics][9]: Learn more about trace application metrics
 - [Universal Service Monitoring][2]: Gain visibility into your service health metrics
-- [Application Vulnerability Management][3]: Detect vulnerabilities in your service's open source dependencies
+- [Software Composition Analysis][3]: Detect vulnerabilities in your service's open source dependencies
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
@@ -42,11 +41,12 @@ Learn more about the features included with APM DevSecOps:
 [7]: /universal_service_monitoring/setup/
 [8]: /security/application_security/enabling/
 [9]: /tracing/metrics/
+[10]: /getting_started/application_security/vulnerability_management/
 
 {{% /tab %}}
 {{% tab "APM DevSecOps Pro" %}}
 
-APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], and the [Application Vulnerability Management][4] capabilities of [ASM][5].
+APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], and the [Software Composition Analysis][4] capabilities of [ASM][5].
 
 ### Setup
 
@@ -56,9 +56,9 @@ To get started with APM DevSecOps Pro, [install and configure the Datadog Agent]
 - [Universal Service Monitoring][8]
 - [Data Streams Monitoring][9]
 
-After you install the Agent, configure ASM for your environment.
+After you install the Agent, configure Software Composition Analysis for your environment.
 
-- [Application Security Management][10]
+- [Software Composition Analysis][10]
 
 #### Next steps
 
@@ -67,7 +67,7 @@ Learn more about the features included with APM DevSecOps Pro:
 - [APM Metrics][11]: Learn more about trace application metrics
 - [Universal Service Monitoring][2]: Gain visibility into your service health metrics
 - [Data Streams Monitoring][3]: Understand and manage your pipelines at scale
-- [Application Vulnerability Management][4]: Detect vulnerabilities in your service's open source dependencies
+- [Software Composition Analysis][4]: Detect vulnerabilities in your service's open source dependencies
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
@@ -78,13 +78,13 @@ Learn more about the features included with APM DevSecOps Pro:
 [7]: /tracing/trace_collection/
 [8]: /universal_service_monitoring/setup/
 [9]: /data_streams/#setup
-[10]: /security/application_security/enabling/
+[10]: /getting_started/application_security/vulnerability_management/
 [11]: /tracing/metrics/
 
 {{% /tab %}}
 {{% tab "APM DevSecOps Enterprise" %}}
 
-APM DevSecOps Enterprise includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], [Continuous Profiler][4], and the [Application Vulnerability Management][5] capabilities of [ASM][6].
+APM DevSecOps Enterprise includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], [Continuous Profiler][4], and the [Software Composition Analysis][5] capabilities of [ASM][6].
 
 ### Setup
 
@@ -97,7 +97,7 @@ To get started with APM DevSecOps Enterprise, [install and configure the Datadog
 
 After you install the Agent, configure ASM for your environment.
 
-- [Application Security Management][12]
+- [Application Security Management][14]
 
 ### Next steps
 
@@ -107,7 +107,7 @@ Learn more about the features included with APM DevSecOps Enterprise:
 - [Universal Service Monitoring][2]: Gain visibility into your service health metrics
 - [Data Streams Monitoring][3]: Understand and manage your pipelines at scale
 - [Continuous Profiler][4]: Optimize code performance in production
-- [Application Vulnerability Management][5]: Detect vulnerabilities in your service's open source dependencies
+- [Software Composition Analysis][5]: Detect vulnerabilities in your service's open source dependencies
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
@@ -122,6 +122,7 @@ Learn more about the features included with APM DevSecOps Enterprise:
 [11]: /profiler/enabling
 [12]: /security/application_security/enabling/
 [13]: /tracing/metrics/
+[14]: /getting_started/application_security/vulnerability_management/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -135,7 +136,7 @@ The Infrastructure DevSecOps bundles combine infrastructure monitoring with the 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [700+ out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [750+ out-of-the-box integrations][4].
 
 ### Setup
 
@@ -175,7 +176,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [700+ out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [750+ out-of-the-box integrations][5].
 
 ### Setup
 
@@ -228,3 +229,4 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 [2]: /security/application_security
 [3]: /security/cloud_security_management/
 [4]: /tracing
+[10]: /security/application_security/software_composition_analysis/

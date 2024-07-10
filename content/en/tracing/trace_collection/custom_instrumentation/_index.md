@@ -1,6 +1,5 @@
 ---
 title: Custom Instrumentation
-kind: documentation
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -36,9 +35,9 @@ Before you begin, make sure you've already [installed and configured the Agent][
 Follow the relevant documentation for your custom instrumentation approach to learn more:
 
 {{< tabs >}}
-{{% tab "Datadog libraries" %}}
+{{% tab "Datadog API" %}}
 
-Use Datadog tracing libraries to add custom instrumentation that allows you to programmatically create, modify, or delete traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding span tags.
+Use the Datadog API to add custom instrumentation that allows you to programmatically create, modify, or delete traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding span tags.
 
 {{< partial name="apm/apm-manual-instrumentation-custom.html" >}}
 
@@ -56,7 +55,7 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 {{% /tab %}}
 
-{{% tab "OpenTracing" %}}
+{{% tab "OpenTracing (legacy)" %}}
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
 
@@ -75,7 +74,7 @@ If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [2]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
 [3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
 [4]: /tracing/trace_collection/custom_instrumentation/opentracing/

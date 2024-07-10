@@ -14,7 +14,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: APM の理解を深めるためのインタラクティブなセッションに参加できます
-kind: documentation
 title: トレースの概要
 ---
 
@@ -41,7 +40,7 @@ vagrant ssh
 [Datadog API キー][7]を付加した [1 行のインストールコマンド][6]を使用して、Datadog Host Agent をインストールします。
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ### 検証
@@ -67,7 +66,7 @@ sudo datadog-agent status
 
 ### APM を有効にする
 
-最新バージョンの Agent v6 と v7 では、APM はデフォルトで有効化されています。これは、Agent の [`datadog.yaml` コンフィギュレーションファイル][11]で確認できます。
+Agent v6 と v7 の最新バージョンでは、APM がデフォルトで有効になっています。これは、Agent の [`datadog.yaml` コンフィギュレーションファイル][11]で確認できます。
 
 ```yaml
 # apm_config:
@@ -87,7 +86,7 @@ sudo datadog-agent status
 
 ### 環境名
 
-最高の体験になるよう、環境変数 `DD_ENV` を使用して、サービスのトレーサーを通じて `env` を構成することをお勧めします。
+最適な体験を得るために、環境変数 `DD_ENV` を使用して、サービスのトレーサーを通じて `env` を構成することをお勧めします。
 
 さらに、トレーサーでログの挿入が有効になっている場合、`env` はトレースとログ全体で一貫しています。これがどのように機能するかについては、[統合サービスタグ付け][12]を参照してください。
 
@@ -153,7 +152,7 @@ curl http://0.0.0.0:5050/
 hello world
 ```
 
-数分経過すると、Datadog の `hello` サービスの下にトレースが表示されます。[サービスページ][14]または[トレースの一覧][15]をご確認ください。
+数分経過すると、Datadog の `hello` サービスの下にトレースが表示されます。[サービスカタログ][14]または[トレースの一覧][15]をご確認ください。
 
 {{< img src="getting_started/tracing-services-list.png" alt="トレースサービス一覧" >}}
 
@@ -168,11 +167,11 @@ hello world
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /ja/agent/guide/agent-commands/#agent-information
+[8]: /ja/agent/configuration/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://app.datadoghq.com/apm/service-setup
-[11]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [12]: /ja/getting_started/tagging/unified_service_tagging
 [13]: /ja/tracing/guide/setting_primary_tags_to_scope/
-[14]: https://app.datadoghq.com/apm/services
+[14]: https://app.datadoghq.com/services
 [15]: https://app.datadoghq.com/apm/traces

@@ -1,6 +1,5 @@
 ---
 title: Error Tracking Monitor
-kind: documentation
 description: Learn about the Error Tracking monitor type.
 aliases :
   - /monitors/create/types/error_tracking/
@@ -27,6 +26,8 @@ further_reading:
 
 ## Overview
 
+Datadog Error Tracking automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
+
 With [Real User Monitoring][1], [APM][2], or [Logs][6] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs starts, when it has a high impact, and when it starts regressing.
 
 ## Create an Error Tracking monitor
@@ -37,7 +38,12 @@ To create an Error Tracking monitor in Datadog, navigate to [**Monitors** > **Ne
 
 ### Select the alerting condition
 
-Choose **Count** to alert on issues with a high number of errors and **New Issue** to alert on issues that occur for the first time.
+There are two types of alerting conditions you can configure your Error Tracking monitor with:
+
+| Alerting&nbsp;condition     | Description    | 
+| ---  | ----------- |
+|Count| Alert on issues with a high number of errors. For example, alert for your service whenever more than 500 occurrences of your error happen. |
+|New Issue| Triggers when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
 
 ### Define the search query
 
@@ -108,7 +114,7 @@ For more information about advanced alert options such as evaluation frequency, 
 
 To display triggering tags in the notification title, click **Include triggering tags in notification title**.
 
-For more information about the **Notify your team** and **Say what's happening** sections, see [Notifications][5].
+For more information about the **Configure notifications and automations** section, see [Notifications][5].
 
 ## Further Reading
 

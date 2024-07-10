@@ -1,5 +1,5 @@
 {{/*
-  This navigation is used on the left of the site when on the api, and is the main api documentation nav.
+  This navigation is used on the left of the site, and is the main documentation nav.
   Looking for the header nav? see website-modules
 */}}
 
@@ -32,7 +32,7 @@
                 <li class="nav-top-level {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
                 {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
-                    <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                    <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                         {{ if .Pre }}
                         {{ partial "icon" (dict "name" .Pre "size" "18px" )}}
                         {{ end }}
@@ -45,7 +45,7 @@
                         {{ range .Children }}
                             <li class="{{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }} {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
                                 {{ $url_without_anchor = (index (split .URL "#") 0) }}
-                                <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                                <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                                     {{ if .Pre }}
                                     {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}
                                     {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}
@@ -58,7 +58,7 @@
                                 {{ range .Children }}
                                     <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
                                         {{ $url_without_anchor = (index (split .URL "#") 0) }}
-                                        <a href="{{ .URL | relLangURL }}" data-type="{{- with site.GetPage .URL -}}{{- .Type -}}{{- end -}}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                                        <a href="{{ .URL | relLangURL }}" data-type="{{- with site.GetPage .URL -}}{{- .Type -}}{{- end -}}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                                             {{ if .Pre }}
                                             {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}
                                             {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}
@@ -66,12 +66,14 @@
                                             <span>{{ .Name }}</span>
                                         </a>
                                         {{ if .HasChildren }}
-                                            <ul class="list-unstyled sub-menu {{ if not (in (slice "automatic_instrumentation" "custom_instrumentation" "observability_pipelines_reference_processing_language" "observability_pipelines_vector_configuration") .Identifier) }}d-none{{ end }}">
+
+                                            <ul class="list-unstyled sub-menu {{ if not (in (slice "automatic_instrumentation" "custom_instrumentation" "observability_pipelines_reference_processing_language" "observability_pipelines_vector_configuration" "csm_setup_enterprise" "csm_setup_pro" "csm_setup_cloud_workload_security" "cspm_frameworks_benchmarks" "cspm_findings_explorer" "cws_workload_security_rules" "otel_integrations" "otel_collector_configuration" "rum_dashboards" "rum_session_replay_browser" "rum_session_replay_mobile" "pa_session_replay_mobile" "pa_session_replay_browser" "cloudcraft_api_aws_accounts" "cloudcraft_api_azure_accounts" "cloudcraft_api_blueprints" "cloudcraft_api_budgets" "cloudcraft_api_users" "appsec_enabling_single_step" "appsec_enabling_tracing_libraries" "synthetics_platform_dashboards" "synthetics_private_location" "synthetics_results_explorer" "ndm_netflow" "dashboards_ddsql_editor_reference") .Identifier) }}d-none{{ end }}">
+
                                             {{/*  LEVEL 4 */}}
                                             {{ range .Children }}
                                                 <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
                                                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
-                                                    <a data-name="{{- delimit (last 1 (split (strings.TrimSuffix "/" .URL) "/")) "" -}}" href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
+                                                    <a data-name="{{- delimit (last 1 (split (strings.TrimSuffix "/" .URL) "/")) "" -}}" href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                                                         {{ if .Pre }}
                                                         {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}
                                                         {{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}

@@ -1,6 +1,5 @@
 ---
 title: Tracing PHP Applications
-kind: documentation
 aliases:
 - /tracing/languages/php
 - /agent/apm/php/
@@ -15,16 +14,16 @@ type: multi-code-lang
 code_lang_weight: 40
 further_reading:
 - link: "/tracing/guide/trace-php-cli-scripts/"
-  tags: "Guide"
+  tag: "Guide"
   text: "Tracing PHP CLI Scripts"
 - link: "https://www.datadoghq.com/blog/monitor-php-performance/"
   tag: "Blog"
   text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Source code"
 - link: "https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md"
-  tag: "Github"
+  tag: "Source Code"
   text: "Contributing to the open source project"
 - link: "/tracing/glossary/"
   tag: "Documentation"
@@ -32,7 +31,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest PHP Tracer supports versions >= 5.4.x.
+The minimum PHP version requirement for the latest version of `dd-trace-php` is PHP 7. If you are using PHP 5, you can still use the PHP tracer up to version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 is EOL as of version 1.0 of the PHP library.
 
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
@@ -57,7 +56,7 @@ apk add libgcc
 Run the installer:
 
 ```shell
-# Full installation: APM + ASM + Profiling (Beta)
+# Full installation: APM + ASM + Profiling
 php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 
 # APM only
@@ -69,6 +68,10 @@ php datadog-setup.php --php-bin=all --enable-appsec
 # APM + Profiling (Beta)
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
+
+<div class="alert alert-danger">
+<strong>Note</strong>: Windows only supports APM. Do not use the <code>--enable-appsec</code> and <code>--enable-profiling</code> flags when tracing PHP applications on Windows.
+</div>
 
 This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
 

@@ -8,10 +8,8 @@ author:
   sales_email: sales@apptrail.com
   support_email: support@apptrail.com
 categories:
-- security
 - log collection
-- monitoring
-- alerting
+- security
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md
 display_on_public_website: true
@@ -21,27 +19,24 @@ integration_id: apptrail
 integration_title: Apptrail
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: apptrail
-oauth: {}
 public_title: Apptrail
 short_description: Surveiller et analyser tous vos logs d'audit SaaS et générer des
   alertes avec Apptrail
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
   - Category::Log Collection
-  - Category::Monitoring
-  - Category::Alerting
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Surveiller et analyser tous vos logs d'audit SaaS et générer des alertes
     avec Apptrail
@@ -81,6 +76,7 @@ tile:
   title: Apptrail
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -91,7 +87,7 @@ La fonctionnalité de flux d'événements d'audit d'Apptrail (les [_trails_][2])
 
 Grâce à l'intégration Datadog/Apptrail, vous pouvez exporter en continu et en temps réel vos logs d'audit SaaS depuis Apptrail vers Datadog. Vous pouvez analyser, archiver et surveiller vos logs d'audit SaaS sur la plateforme Datadog, et générer des alertes à ce sujet.
 
-## Configuration
+## Formule et utilisation
 
 Pour utiliser cette intégration, votre fournisseur de SaaS doit avoir activé la fonctionnalité Apptrail pour votre compte.
 
@@ -118,13 +114,13 @@ Pour visualiser vos logs d'audit Apptrail dans Datadog, procédez comme suit :
 
 Pour en savoir plus, consultez la [documentation Apptrail sur l'envoi de logs à Datadog][7] (en anglais).
 
-## Données collectées
+## Real User Monitoring
 
-### Collecte de logs
+### APM
 
 Les [trails][2] Apptrail avec une destination Datadog envoient en continu à Datadog tous les logs qui répondent aux [règles de trail][8] configurées. Pour vous familiariser avec le format des logs d'audit Apptrail, consultez la section [Format des événements][9] (en anglais).
 
-## Assistance
+## Agent
 
 Besoin d'aide ? Contactez l'[assistance Datadog][10] ou l'[assistance Apptrail][11].
 

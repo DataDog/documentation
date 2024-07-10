@@ -45,10 +45,9 @@ integration_id: activemq
 integration_title: ActiveMQ
 integration_version: 3.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: activemq
-oauth: {}
 public_title: ActiveMQ
 short_description: Recueillez des métriques sur les agents, les files d'attente, les
   producteurs, les consommateurs, et plus encore.

@@ -13,8 +13,8 @@ go.mod                    @DataDog/corpweb @DataDog/documentation
 go.sum                    @DataDog/corpweb @DataDog/documentation
 
 # SDK versions
-.github/workflows/bump_versions.yml   @DataDog/integrations-tools-and-libraries @DataDog/documentation
-/data/sdk_versions.json               @DataDog/integrations-tools-and-libraries @DataDog/documentation
+.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
+/data/sdk_versions.json               @DataDog/api-clients @DataDog/documentation
 
 # Serverless
 
@@ -77,6 +77,7 @@ content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/         
 content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/                            @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/                    @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/session_replay/mobile                 @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/android.md       @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/expo.md          @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/flutter.md       @Datadog/rum-mobile @DataDog/documentation
@@ -86,7 +87,7 @@ content/en/real_user_monitoring/error_tracking/reactnative.md   @Datadog/rum-mob
 # Browser SDK
 content/en/real_user_monitoring/browser/                        @Datadog/rum-browser @DataDog/documentation
 content/en/real_user_monitoring/guide/                          @Datadog/rum-browser @DataDog/documentation
-content/en/real_user_monitoring/session_replay/                 @Datadog/rum-browser @DataDog/documentation
+content/en/real_user_monitoring/session_replay/browser          @Datadog/rum-browser @DataDog/documentation
 content/en/logs/log_collection/javascript.md                    @Datadog/rum-browser @DataDog/documentation
 content/en/logs/error_tracking/browser_and_mobile.md            @Datadog/rum-browser @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-browser @DataDog/documentation
@@ -102,9 +103,10 @@ content/en/mobile_app_testing/*.md                              @Datadog/synthet
 
 # Software Delivery
 
-content/en/continuous_integration/tests/*.md          @Datadog/ci-app-libraries @Datadog/documentation
-content/en/continuous_integration/pipelines/*.md      @Datadog/ci-app-backend @Datadog/documentation
-content/en/static_analysis/*.md                       @Datadog/static-analysis @Datadog/documentation
-content/en/static_analysis/rules/_index.md            @Datadog/static-analysis @Datadog/documentation
-content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
-content/en/dora_metrics/_index.md                     @Datadog/ci-app-backend @Datadog/documentation
+content/en/tests/                                 @Datadog/ci-app-libraries @Datadog/documentation
+content/en/intelligent_test_runner/               @Datadog/ci-app-libraries @Datadog/documentation
+content/en/continuous_integration/                @Datadog/ci-app-backend @Datadog/documentation
+content/en/continuous_delivery/                   @Datadog/ci-app-backend @Datadog/documentation
+content/en/dora_metrics/                          @Datadog/ci-app-backend @Datadog/documentation
+content/en/code_analysis/                         @Datadog/static-analysis @Datadog/documentation
+content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation

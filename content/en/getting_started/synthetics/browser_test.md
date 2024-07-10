@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Browser Tests
-kind: documentation
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
@@ -38,7 +37,7 @@ The example below demonstrates the creation of a browser test that maps a user's
 {{< img src="getting_started/synthetics/browser-test-1.png" alt="Browser test mapping out a user journey" style="width:100%;" >}}
 ### Configure your test details
 
-1. In the Datadog site, hover over **UX Monitoring** in the left hand menu and select **[Synthetic Tests][2]**.
+1. In the Datadog site, hover over **Digital Experience** in the left hand menu and select **[Tests][2]** (under **Synthetic Monitoring & Testing**).
 2. In the top right corner, click **New Test** > **[Browser Test][3]**.
 3. Define your browser test:
 
@@ -112,7 +111,7 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 {{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true" >}}
 
-The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you receive an email notification when the test fails and recovers.
+The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Configure the monitor for this test** field, you receive an email notification when the test fails and recovers.
 
 ## Look at test results
 
@@ -132,7 +131,7 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 
 
 [1]: /synthetics/browser_tests/
-[2]: https://app.datadoghq.com/synthetics/list
+[2]: https://app.datadoghq.com/synthetics/tests
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /getting_started/synthetics/private_location
 [5]: /continuous_testing/cicd_integrations

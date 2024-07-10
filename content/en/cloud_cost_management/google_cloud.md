@@ -1,8 +1,5 @@
 ---
 title: Google Cloud
-kind: documentation
-is_beta: true
-private: true
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
@@ -17,72 +14,74 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Cloud Cost for Google Cloud is in private beta
-{{< /beta-callout >}}
 
 ## Overview
 
-To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost][14] billing export for your desired billing account. Additionally, the Google Cloud Platform Datadog Integration Service Account must have the [necessary permissions][13] configured to interact with Google Cloud Storage and BigQuery.
-
-[Contact Support][15] to sign up for private beta or for additional assistance.
+To use Google Cloud Cost Management in Datadog, follow these steps:
+1. Configure the [Google Cloud Platform Integration][12]
+2. Set up the [detailed usage cost export][13] with the necessary permissions (Google Service APIs, export project access, and BigQuery Dataset access)
+3. Create or select a [Google Cloud Storage bucket][15] with the necessary permissions (Bucket access)
 
 ## Setup
 
+### Configure the Google Cloud Platform integration
+Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
+If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
+
+<div class="alert alert-warning">
+The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
+To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the <strong>Limit Metric Collection Filters</strong> section of the integration page.
+</div>
+
+{{< img src="cloud_cost/gcp_integration_limit_metric_collection.png" alt="Limit metric collection filters section configured in the Google Cloud Platform integration page" >}}
+
 ### Enable detailed usage cost export
-<div class="alert alert-info"> <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage">Detailed Usage Cost</a> data includes resource-level cost data. </div>
+<div class="alert alert-info">
+The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage">detailed usage cost data</a> provides all the information included in the standard usage cost data, along with additional fields that provide granular, resource-level cost data.
+</div>
 
  1. Navigate to [Billing Export][1] under Google Cloud console *Billing*.
- 2. Enable the [Detailed Usage cost][2] export, (select or create a project and a BigQuery dataset).
- 3. Document the `billing account id` for the billing account where the export was configured, as well as the export `project id` and `dataset name`.
+ 2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
+ 3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
 
-### Create or select a Google Cloud Storage bucket
-  Use an existing GCS bucket or create a new one. Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to a `datadog_cloud_cost_detailed_usage_export` prefix in the selected bucket.
+{{< img src="cloud_cost/billing_export.png" alt="Google Cloud project and dataset info highlighted" >}}
 
-  **Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
+_Newly created BigQuery billing export datasets only contain the most recent two months of data. It can take a day or two for this data to backfill in BigQuery._
 
-### Configure the Google Cloud Platform integration
- 1. Navigate to [Setup & Configuration][3], and select an integrated Google Cloud Platform service account from the menu.
- 2. If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to add it.
- 3. Follow the instructions on the integration page to properly configure your Service Account being integrated.
+#### Enable Google Service APIs
+The following permissions allow Datadog to access and transfer the billing export into the storage bucket using a scheduled BigQuery query.
 
-<div class="alert alert-warning"> LEGACY project integrations are deprecated and not supported. </div>
+- Enable the [BigQuery API][5].
+  1. In the Google Cloud console, go to the project selector page and select your Google Cloud project.
+  2. Enable billing on your project for all transfers.
 
-Datadog Google Cloud Platform Integrations monitor the entire project when a related service account is integrated. Using a previously integrated project prevents monitoring resources in a new project. If your billing is associated with a non-integrated project, those resources are monitored.
+- Enable the [BigQuery Data Transfer Service][5].
+  1. Open the BigQuery Data Transfer API page in the API library.
+  2. From the dropdown menu, select the project that contains the service account.
+  3. Click the ENABLE button.
 
-**Note:** You can limit Metrics Collection per integration - this limits automatically monitoring resources in the project, but does not exclude data from Cloud Cost processing.
+  **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
 
-### Provide service account necessary permissions
-The following APIs and permissions enable Datadog to access your Detailed Usage billing export data and extract it in a useful format. This dumps data from BigQuery, where Google Cloud exports it, to your specified GCS bucket through a scheduled BigQuery query. The data is exported in a useful manner in your cloud storage bucket where it can then be processed by Datadog.
 
-#### **Enable necessary Google Service APIs**:
-[Enable BigQuery and BigQuery Data Transfer Service APIs][5] if not already enabled.
-
-**Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
-
-#### **Configure required bucket access**:
-[Add the service account as a principal on the GCS bucket resource][6] and assign a role with the following permissions:
-   * `storage.buckets.get`
-   * `storage.objects.create`
-   * `storage.objects.delete`
-   * `storage.objects.get`
-   * `storage.objects.list`
-
-  **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
-
-#### **Configure required export project access**:
-[Add the service account as a principal on the export dataset project resource][7] and assign a role with the following permissions:
+#### Configure export project access
+[Add the service account as a principal on the export dataset project resource][7]:
+1. Navigate to the IAM page in the Google Cloud console and select the export dataset project.
+2. Select the service account as a principal.
+3. Select a role with the following permissions to grant from the drop-down list:
   * `bigquery.jobs.create`
   * `bigquery.transfers.get`
   * `bigquery.transfers.update`
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.admin`.
 
-#### **Configure required export BigQuery dataset access**:
-[Add the service account as a principal on the export BigQuery dataset resource][8] and assign a role with the following permissions:
+#### Configure export BigQuery dataset access
+[Add the service account as a principal on the export BigQuery dataset resource][8]:
+1. In the Explorer pane on the BigQuery page, expand your project and select the export BigQuery dataset.
+2. Click **Sharing > Permissions** and then **add principal**.
+3. In the new principals field, enter the service account.
+4. Using the select a role list, assign a role with the following permissions:
   * `bigquery.datasets.get`
   * `bigquery.tables.create`
   * `bigquery.tables.delete`
@@ -95,27 +94,87 @@ The following APIs and permissions enable Datadog to access your Detailed Usage 
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.dataEditor`.
 
-#### (Optional) Configure required cross-project service authorization:
+### Create or select a Google Cloud Storage bucket
+Use an existing Google Cloud Storage bucket or create a new one.
+Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket and prefixed with `datadog_cloud_cost_detailed_usage_export`.
+
+**Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
+
+#### Configure bucket access
+[Add the service account as a principal on the GCS bucket resource][6]:
+1. Navigate to the Cloud Storage Buckets page in the Google Cloud console, and select your bucket.
+2. Select the permissions tab and click the **grant access** button.
+3. In the new principals field, enter the service account.
+4. Assign a role with the following permissions:
+   * `storage.buckets.get`
+   * `storage.objects.create`
+   * `storage.objects.delete`
+   * `storage.objects.get`
+   * `storage.objects.list`
+
+  **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
+
+### (Optional) Configure cross-project service authorization:
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
 
-[Trigger service agent creation][11] using the following values:
-  * ENDPOINT: `bigquerydatatransfer.googleapis.com`
-  * RESOURCE_TYPE: `project`
-  * RESOURCE_ID: export dataset project
+1. Trigger the service agent creation by following the [official documentation][11] using the following values:
+   * ENDPOINT: `bigquerydatatransfer.googleapis.com`
+   * RESOURCE_TYPE: `project`
+   * RESOURCE_ID: export dataset project</br></br>
 
-  This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
+     This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
 
-Add the BigQuery Data Transfer Service Account role created by the trigger as a principal on your Service Account resource with the `roles/iam.serviceAccountTokenCreator` role.
+
+2. Add the BigQuery Data Transfer Service Account role created by the trigger as a principal on your service account
+3. Assign it the `roles/iam.serviceAccountTokenCreator` role.
 
 ### Configure Cloud Costs
-Navigate to [Setup & Configuration][3] and follow the steps provided in-app.
+Continue to follow the steps indicated in [Setup & Configuration][3].
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
 | Cost Type | Description |
 | ----------| ----------------------------------|
-| `gcp.cost.usage_date` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
+| `gcp.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
+| `gcp.cost.amortized.shared.resources.allocated` | All of your Google Cloud Platform amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][14].|
+
+### Out-of-the-box tags
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data.
+
+The following out-of-the-box tags are available for filtering and grouping data:
+
+| Tag                          | Description       |
+| ---------------------------- | ----------------- |
+| `google_product`             | The Google service being billed.|
+| `google_cost_type`           | The type of charge covered by this item (for example, regular, tax, adjustment, or rounding error).|
+| `google_usage_type`          | The usage details of the item (for example, Standard Storage US).|
+| `google_location`            | The location associated with the item at the level of a multi-region, country, region, or zone.|
+| `google_region`              | The region associated with the item.|
+| `google_zone`                | The availability zone associated with the item.|
+| `google_pricing_usage_unit`  | The pricing unit used for calculating the usage cost (for example, gibibyte, tebibyte, or year).|
+| `google_is_unused_reservation`| Whether the usage was reserved but not used.|
+
+#### Cost and observability correlation
+
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top Google products to simplify correlating observability and cost metrics.
+
+For example, to view cost and utilization for each Cloud SQL database, you can make a table with `gcp.cost.amortized`, `gcp.cloudsql.database.cpu.utilization`, and `gcp.cloudsql.database.memory.utilization` (or any other Cloud SQL metric) and group by `database_id`. Or, to see Cloud Function usage and costs side by side, you can graph `gcp.cloudfunctions.function.execution_count` and `gcp.cost.amortized` grouped by `function_name`.
+
+The following out-of-the-box tags are available:
+| Google Product     | Tag(s)                        |
+| -------------------| ----------------------------- |
+| Compute Engine     | `instance_id`, `instance-type`|
+| Cloud Functions    | `function_name`               |
+| Cloud Run          | `job_name`, `service_name`    |
+| Cloud SQL          | `database_id`                 |
+| Cloud Spanner      | `instance_id`                 |
+| App Engine         | `module_id`                   |
+| BigQuery           | `project_id`, `dataset_id`    |
+| Kubernetes Engine  | `cluster_name`                |
+
+### Container allocation
+**Container allocation** metrics contain all of the same costs as the Google Cloud Platform metrics, but with additional breakdowns and insights for container workloads. See [Container Cost Allocation][14] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -132,6 +191,7 @@ You can visualize your ingested data using the following cost types:
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
 [12]: /integrations/google_cloud_platform/
-[13]: /cloud_cost_management/google_cloud/#provide-service-account-necessary-permissions
-[14]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
-[15]: https://docs.datadoghq.com/help/
+[13]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
+[14]: /cloud_cost_management/container_cost_allocation/
+[15]: /cloud_cost_management/google_cloud/#create-or-select-a-google-cloud-storage-bucket
+[16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage

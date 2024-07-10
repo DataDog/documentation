@@ -5,6 +5,7 @@ assets:
   dashboards:
     pgbouncer: assets/dashboards/pgbouncer_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
     - pgbouncer
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 118
     source_type_name: PGBouncer
   logs:
     source: pgbouncer
@@ -31,7 +33,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
@@ -40,12 +42,11 @@ draft: false
 git_integration_title: pgbouncer
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 4.4.2
+integration_version: 6.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: pgbouncer
-oauth: {}
 public_title: PGBouncer
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
 supported_os:
@@ -56,7 +57,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
   configuration: README.md#Setup
   description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
@@ -66,15 +67,16 @@ tile:
   title: PGBouncer
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 PgBouncer チェックは、接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックの監視を可能にします。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 PgBouncer チェックは [Datadog Agent][1] パッケージに含まれています。PgBouncer ノードに追加でインストールする必要はありません。
 
@@ -103,14 +105,14 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
    パスワードの入力を要求されたら、`userlist.txt` に追加したパスワードを入力します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -130,7 +132,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
 2. [Agent を再起動します][4]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -160,7 +162,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -170,11 +172,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| `<インテグレーション名>` | `pgbouncer`                                                                                            |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                          |
-| `<インスタンスコンフィギュレーション>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
+| `<INTEGRATION_NAME>` | `pgbouncer`                                                                                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                          |
+| `<INSTANCE_CONFIG>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -193,28 +195,28 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][2]し、Checks セクションで `pgbouncer` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "pgbouncer" >}}
 
 
 **注**: PgBouncer のバージョンによっては、すべてのメトリクスを使用できないことがあります。
 
-### イベント
+### ヘルプ
 
 PgBouncer チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "pgbouncer" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

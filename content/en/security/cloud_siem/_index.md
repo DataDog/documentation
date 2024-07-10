@@ -1,6 +1,5 @@
 ---
 title: Cloud SIEM
-kind: documentation
 aliases:
   - /security_monitoring/
   - /security_platform/cloud_siem/security_home/
@@ -25,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
   tag: "Blog"
   text: "Build sufficient security coverage for your cloud environment"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
 ---
 ## Overview
 
@@ -36,7 +38,7 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 
 ## Get started
 
-{{< whatsnext >}}
+{{< whatsnext desc="See the following documents to get started with Cloud SIEM:" >}}
   {{< nextlink href="/getting_started/cloud_siem/">}}Getting started with Cloud SIEM guide{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/">}}Configure AWS for Cloud SIEM{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/">}}Configure Google Cloud for Cloud SIEM{{< /nextlink >}}

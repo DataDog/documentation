@@ -3,11 +3,13 @@ app_id: amazon-eks
 app_uuid: abb8b86b-eeb7-4e38-b436-f4cbb09b4398
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10018
     source_type_name: Amazon EKS
 author:
   homepage: https://www.datadoghq.com
@@ -28,14 +30,13 @@ display_on_public_website: true
 draft: false
 git_integration_title: amazon_eks
 integration_id: amazon-eks
-integration_title: Amazon-EKS
+integration_title: Amazon EKS
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_eks
-oauth: {}
-public_title: Amazon-EKS
+public_title: Amazon EKS
 short_description: Amazon EKS は、AWS で Kubernetes を簡単に実行できるマネージド型サービスです
 supported_os:
 - linux
@@ -59,9 +60,10 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Amazon-EKS
+  title: Amazon EKS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![EKS ダッシュボード][1]
@@ -70,7 +72,7 @@ tile:
 
 Amazon Elastic Kubernetes Service (EKS) は、標準 Kubernetes 環境のデプロイとメンテナンスを部分的に自動化するためのマネージド型 Kubernetes サービスです。既存の Kubernetes アプリケーションを EKS に移行する場合、あるいは新しいクラスターをデプロイする場合も、Datadog は EKS 環境のリアルタイムの監視を支援します。
 
-## セットアップ
+## 計画と使用
 
 Datadog は既に Kubernetes や AWS と統合されているため、すぐに EKS を監視することができます。Kubernetes クラスターで実行中の Agent を EKS に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
 
@@ -88,7 +90,7 @@ EKS のモニタリングには、以下の Datadog インテグレーション�
 - [AWS][7]
 - [AWS EC2][8]
 
-### ログの収集
+### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -99,7 +101,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][11]を参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

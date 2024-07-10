@@ -1,6 +1,5 @@
 ---
 title: Libraries
-kind: documentation
 aliases:
    - /libraries/
    - /developers/faq/monitoring-akka/
@@ -92,10 +91,6 @@ Heroku emits dyno metrics through logs. To convert these logs into metrics and s
 To use the PHP tracer or profiler on Heroku, use the following buildpack.
 
 * [Heroku Datadog PHP Tracer and Profiler Buildpack][65] maintained by [SpeedCurve][66].
-
-### Jira
-
-A [tool][39] to poll data from Jira and upload it as metrics to Datadog.
 
 ### K6
 
@@ -198,8 +193,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://bitbucket.org/atlassian/jiradog/src/master/
-[40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd

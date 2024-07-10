@@ -1,13 +1,7 @@
 ---
 title: Connecting with Managed Authentication
-kind: guide
-algolia:
-  tags: ["Microsoft Entra ID", "Azure Managed Identity", "Azure AD", "Azure Active Directory"]
----
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
+---
 
 This guide assumes that you have configured [Database Monitoring][1].
 
@@ -43,7 +37,10 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
 
 
 1. Turn on IAM authentication on your [RDS][3] or [Aurora][4] instance.
-2. Create an IAM role, and then attach the following policy, replacing `<YOUR_IAM_ROLE>` with the IAM role information:
+2. Create an IAM policy for DB authentication. Replace `<YOUR_IAM_AUTH_DB_USER>` with the local database user in the IAM policy document:
+{{< tabs >}}
+{{% tab "RDS" %}}
+
 ```json
 {
    "Version": "2012-10-17",
@@ -54,7 +51,45 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
                "rds-db:connect"
            ],
            "Resource": [
-               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/<YOUR_IAM_ROLE>"
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
+           ]
+       }
+   ]
+}
+```
+
+For example, if you want to use the `datadog` user, use the following resource ARN:
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/datadog"
+           ]
+       }
+   ]
+}
+```
+{{% /tab %}}
+{{% tab "Aurora" %}}
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
            ]
        }
    ]
@@ -73,12 +108,14 @@ For example, if you wanted to use the `datadog` user, you would use the followin
                "rds-db:connect"
            ],
            "Resource": [
-               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/datadog"
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/datadog"
            ]
        }
    ]
 }
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 AWS also supports wildcards for specifying the resource, for example if you wanted to allow the `datadog` user to authenticate across all instances for an account add the following:
 
@@ -110,23 +147,113 @@ GRANT rds_iam TO datadog;
 4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
 
 
-5. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at EC2 launch time.
+{{< tabs >}}
+{{% tab "EC2" %}}
+
+5. Create an IAM role and attach the IAM policy created in step 2 to the role.
+
+```bash
+# Create an IAM role for EC2 instance
+# Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+# Attach the IAM policy to the IAM role
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+Attach the IAM role to the EC2 instance where the Agent is running. For more information, see [IAM roles for Amazon EC2][1].
+
+[1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+5. Create an IAM role and attach the IAM policy created in step 2 to the role.
+
+```bash
+# Create an IAM role for ECS task
+# Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+# Attach the IAM policy to the IAM role
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+In the ECS task definition, attach the IAM role to the task role where the Agent container is defined. For more information, see [IAM roles for Amazon ECS][1].
+
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+
+{{% /tab %}}
+{{% tab "EKS" %}}
+
+5. Create an IAM role and attach the IAM policy created in step 2 to the role.
+
+```bash
+# Create an IAM OIDC provider for your cluster
+# Replace `<YOUR_ESK_REGION>` and `<YOUR_ESK_CLUSTER>` with the region and name of your ESK cluster
+$ eksctl utils associate-iam-oidc-provider \
+  --region=<YOUR_ESK_REGION> \
+  --cluster=<YOUR_ESK_CLUSTER> \
+  --approve
+
+# Create a service account
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
+# Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account
+$ eksctl create iamserviceaccount \
+  --cluster <YOUR_ESK_CLUSTER> \
+  --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
+  --namespace <YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE> \
+  --attach-policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN> \
+  --override-existing-serviceaccounts \
+  --approve
+```
+
+Map the IAM role to the Kubernetes service account where the Agent is running. For more information, see [IAM roles for Amazon EKS service account][1].
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+
+{{% /tab %}}
+{{< /tabs >}}
 
 
-6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance:
+6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
 
 
 ```yaml
 instances:
-- dbm: true
- host: example-endpoint.us-east-2.rds.amazonaws.com
- port: 5432
- username: datadog
- aws:
-   instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
-   region: us-east-2
-   managed_authentication:
-    enabled: true
+  - host: example-endpoint.us-east-2.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+      region: us-east-2
+      managed_authentication:
+        enabled: true
 ```
 
 
@@ -192,22 +319,23 @@ SECURITY DEFINER
 ```
 
 
-5. Configure your instance config with the `managed_identity` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
+5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
 
 
 ```yaml
 instances:
- - host: example-flex-server.postgres.database.azure.com
-   dbm: true
-   username: "<IDENTITY_NAME>"
-   ssl: "require"
-   managed_identity:
-     client_id: "<CLIENT_ID>"
-     # Optionally set the scope from where to request the identity token
-     identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
-   azure:
-     deployment_type: flexible_server
-     fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+  - host: example-flex-server.postgres.database.azure.com
+    dbm: true
+    username: "<IDENTITY_NAME>"
+    ssl: "require"
+    azure:
+      deployment_type: flexible_server
+      fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
+        # Optionally set the scope from where to request the identity token
+        identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
 ```
 
 

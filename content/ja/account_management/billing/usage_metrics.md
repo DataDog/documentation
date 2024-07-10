@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: 推定使用量メトリクス
 ---
 
@@ -8,8 +7,8 @@ title: 推定使用量メトリクス
 Datadog は、現在の推定使用量をほぼリアルタイムで計算します。推定使用量メトリクスにより、次のことが可能になります。
 
 * 推定使用量をグラフ化します
-* 選択したしきい値に基づいて、推定使用量の付近のモニターを作成します
-* 使用量の急上昇または低下の即時アラートを取得します
+* 自身で選んだしきい値に基づいた推定使用量に関する[モニター][3]を作成します
+* 使用量の急増や減少に関する[モニターアラート][4]を受け取ります
 * コードの変更が使用量に及ぼす潜在的な影響をほぼリアルタイムで評価します
 
 **注**: これらの使用量メトリクスはあくまでも推定値であり、リアルタイムという性質上、請求対象の使用量に必ずしも一致しません。推定使用量と請求対象使用量には平均で 10〜20% の差があります。推定であるため、使用量が少ないと誤差の範囲はより大きくなります。
@@ -29,6 +28,9 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` | 過去 1 時間に確認された一意の取り込みカスタムメトリクス。 |
 | ログ取り込みバイト           | `datadog.estimated_usage.logs.ingested_bytes` | バイト単位のログの取り込みの合計。 |
 | ログ取り込みイベント          | `datadog.estimated_usage.logs.ingested_events` | 除外されたログを含む、取り込まれたイベントの総数。 |
+| ログのドロップ数               | `datadog.estimated_usage.logs.drop_count` | 取り込み中にドロップされたイベントの総数。 |
+| ログの切り捨て数          | `datadog.estimated_usage.logs.truncated_count` | 取り込み時に切り捨てられたイベントの総数。 |
+| ログの切り捨てバイト数          | `datadog.estimated_usage.logs.truncated_bytes` | 切り捨てられたイベントの量 (バイト単位)。 |
 | 分析ログ (セキュリティ)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes` | バイト単位の Cloud SIEM ログの取り込みの合計。 |
 | APM ホスト                     | `datadog.estimated_usage.apm_hosts` | 過去 1 時間に確認された一意の APM ホスト。Azure App Services ホストは含まれません。 |
 | APM インデックス化スパン             | `datadog.estimated_usage.apm.indexed_spans` | インデックス化スパンの総数。 |
@@ -57,6 +59,7 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | CI Visibility パイプラインのコミッター | `datadog.estimated_usage.ci_visibility.pipeline.committers` | (暦) 月累計の確認されたパイプラインコミッター。 |
 | CI Visibility テストのコミッター | `datadog.estimated_usage.ci_visibility.test.committers` | (暦) 月累計の確認されたテストコミッター。 |
 | IOT デバイス                   | `datadog.estimated_usage.iot.devices` | 過去 1 時間に確認された一意の IoT デバイス。 |
+| Observability Pipelines 取り込みバイト数 | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Observability Pipelines によって取り込まれたデータ量。 |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="メトリクス名" >}}
@@ -67,7 +70,7 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 
 {{< img src="account_management/billing/usage-metrics-03.png" alt="複数組織の使用" >}}
 
-## トラブルシューティング
+## ヘルプ
 
 技術的な質問については、[Datadog のサポートチーム][1]にお問い合わせください。
 
@@ -75,3 +78,5 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 
 [1]: /ja/help/
 [2]: mailto:success@datadoghq.com
+[3]: /ja/monitors/types/metric/?tab=threshold
+[4]: /ja/logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month

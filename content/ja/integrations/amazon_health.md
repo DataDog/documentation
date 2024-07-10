@@ -3,7 +3,7 @@ categories:
 - aws
 - cloud
 - log collection
-- notification
+- notifications
 dependencies: []
 description: AWS のサービス健全性イベントをほぼリアルタイムに監視。
 doc_link: https://docs.datadoghq.com/integrations/amazon_health
@@ -14,7 +14,7 @@ integration_id: amazon-health
 integration_title: AWS Health
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_health
 public_title: Datadog-AWS Health インテグレーション
@@ -22,6 +22,7 @@ short_description: AWS のサービス健全性を監視。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Health は、AWS のリソース、サービス、アカウントの状態をリアルタイムに可視化します。このインテグレーションを有効にすると、AWS Health サービスイベントが Datadog に表示されます。
@@ -30,9 +31,9 @@ AWS Health は、AWS のリソース、サービス、アカウントの状態�
 
 **注**: このインテグレーションは、AWS のビジネスサポートプランまたはエンタープライズサポートプランのお客様に対してのみ機能します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -48,23 +49,23 @@ AWS Health は、AWS のリソース、サービス、アカウントの状態�
 
 2. [Datadog - AWS Health インテグレーション][4]をインストールします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 AWS Health インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 AWS Health インテグレーションには、AWS Personal Health Dashboard にあるイベントが含まれています。これには、未解決の問題、スケジュール設定されたメンテナンス、アカウント通知などが含まれます。
 
-### サービスのチェック
+### ヘルプ
 
 AWS Health インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation

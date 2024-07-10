@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Application Security Management
-kind: documentation
 aliases:
   - /security_platform/application_security/troubleshooting
 further_reading:
@@ -540,9 +539,9 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang-wrapper >}}
 
 
-## No vulnerabilities detected by Application Vulnerability Management
+## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the Application Vulnerability Management Explorer. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Service Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
 
 ### Confirm ASM is enabled
 
@@ -564,6 +563,45 @@ See the Application Security [set up documentation][11] to validate you you are 
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
+## Disabling threat management and protection
+
+To disable threat management, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+
+If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do one of the following:
+* If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
+* If threat management was activated using [Remote Configuration][16], do the following: 
+  1. Go to [Services][15] (**ASM** > **Catalog** > **Services**).
+  2. Select **Threat Management in Monitoring Mode**.
+  3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  4. Click on a service.
+  5. In the service details, in **Threat Detection**, click **Deactivate**.
+
+<div class="alert alert-info">If threat management was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If threat management was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+
+* To disable threat management on your services in bulk, do the following: 
+  1. Go to [Services][15].
+  2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  3. Select the check boxes for the services where you want to disable threat detection.
+  4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
+
+## Disabling Software Composition Analysis
+
+To disable [Software Composition Analysis][14]:
+
+* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
+* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
+* To disable Software Composition Analysis using the `DD_APPSEC_SCA_ENABLED` environment variable, remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
+
+## Disabling Code Security
+
+To disable [Code Security][13] vulnerability detection, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps. 
+
+If no `DD_IAST_ENABLED=true` environment variable is set for your service, do the following:
+  1. Go to [Services][15].
+  2. Select **Code Security**.
+  3. Click on a service.
+  4. In the service details, in **Vulnerability Detection**, click **Deactivate**.
+  
 ## Need more help?
 
 If you continue to have issues with ASM, contact [Datadog support][1] with the following information:
@@ -586,3 +624,8 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
 [11]: /security/application_security/enabling/
+[12]: https://app.datadoghq.com/security/appsec/vm
+[13]: /security/application_security/code_security/
+[14]: /security/application_security/software_composition_analysis
+[15]: https://app.datadoghq.com/security/configuration/asm/services-config
+[16]: https://app.datadoghq.com/organization-settings/remote-config

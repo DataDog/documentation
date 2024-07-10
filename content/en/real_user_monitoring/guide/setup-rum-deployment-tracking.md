@@ -1,6 +1,6 @@
 ---
 title: Getting Started with RUM Deployment Tracking
-kind: guide
+
 description: Learn how to set up RUM to capture new releases, track your deployments, and analyze the performance in Datadog
 aliases:
 - /real_user_monitoring/guide/getting-started-rum-deployment-tracking/

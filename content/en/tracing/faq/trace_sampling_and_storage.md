@@ -1,6 +1,5 @@
 ---
 title: Trace Sampling and Storage
-kind: documentation
 is_beta: true
 aliases:
     - /tracing/faq/traces-sampling-and-storage/
@@ -377,7 +376,7 @@ Note that trace priority should be manually controlled only before any context p
 
 ## Trace storage
 
-Individual traces are stored for 15 days. This means that all **sampled** traces are retained for a period of 15 days and at the end of the 15th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `{{< region-param key="dd_full_site" >}}/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
+Individual traces are stored for 30 days. This means that all **sampled** traces are retained for a period of 30 days and at the end of the 30th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `{{< region-param key="dd_full_site" >}}/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID" >}}
 

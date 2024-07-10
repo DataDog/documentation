@@ -18,7 +18,6 @@ further_reading:
 - link: /continuous_testing/cicd_integrations
   tag: 설명서
   text: CI 파이프라인에서 신서틱 테스트 실행하는 방법 알아보기
-kind: 설명서
 title: 지속적 테스팅 시작하기
 ---
 {{< jqmath-vanilla >}}
@@ -91,7 +90,7 @@ title: 지속적 테스팅 시작하기
 * HTTP API 테스트와 브라우저 테스트를 실행하고 VS 코드 내에서 결과를 확인할 수 있습니다.
 * 관련 테스트를 동시에 실행하여 중요한 것만 테스트할 수 있습니다.
 
-{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
 
 ### VS 코드에서 테스트 실행
 
@@ -155,12 +154,12 @@ $$\text"병렬화 예측" = {\text"CI 배치 당 24개 테스트"* \text"소요 
 [4]: /ko/mobile_app_testing/
 [5]: /ko/synthetics/explorer?track=synbatch
 [6]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm
-[7]: /ko/developers/ide_integrations/
+[7]: /ko/developers/ide_plugins/
 [8]: https://datadoghq.com 
 [9]: /ko/getting_started/synthetics/browser_test/#create-a-browser-test
 [10]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
 [11]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
-[12]: /ko/developers/ide_integrations/vscode/
+[12]: /ko/developers/ide_plugins/vscode/
 [13]: /ko/getting_started/synthetics/private_location/
 [14]: /ko/continuous_testing/testing_tunnel/
 [15]: /ko/continuous_testing/explorer/?tab=testruns#create-a-search-query

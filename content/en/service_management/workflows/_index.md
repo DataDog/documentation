@@ -1,12 +1,14 @@
 ---
 title: Workflow Automation
-kind: documentation
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
@@ -40,7 +42,7 @@ Trigger your workflows from monitors, security signals, or dashboards, or trigge
 
 ## Workflows Overview dashboard
 
-The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to **Dashboards > Dashboards list** and search for `Workflows Overview`.
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][3] and search for `Workflows Overview`.
 
 {{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
 
@@ -56,5 +58,9 @@ Below are a few examples of workflows you can build:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][4].
+
 [1]: /service_management/workflows/actions_catalog/
 [2]: /workflows/build/#build-a-workflow-from-a-blueprint
+[3]: https://app.datadoghq.com/dashboard/lists
+[4]: https://datadoghq.slack.com/

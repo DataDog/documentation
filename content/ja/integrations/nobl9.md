@@ -3,6 +3,7 @@ app_id: nobl9
 app_uuid: 678f6805-2038-4705-80b3-de7cc143baef
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: nobl9.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10230
     source_type_name: Nobl9
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,7 +22,7 @@ author:
   support_email: support@nobl9.com
 categories:
 - メトリクス
-- notification
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md
 display_on_public_website: true
@@ -30,10 +32,9 @@ integration_id: nobl9
 integration_title: Nobl9
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: nobl9
-oauth: {}
 public_title: Nobl9
 short_description: Nobl9 は、SLI 収集、SLO 計算、エラーバジェットアラートを可能にします
 supported_os:
@@ -44,7 +45,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Metrics
-  - Category::Notification
+  - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -56,6 +57,7 @@ tile:
   title: Nobl9
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -79,7 +81,7 @@ Datadog Nobl9 との連携で、以下のことが可能になります。
 ### サービスヘルスダッシュボード
 ![サービスヘルスダッシュボード][4]
 
-## セットアップ
+## 計画と使用
 
 構成はすべて Nobl9 SLO Platform 上で行われます。
 
@@ -91,7 +93,7 @@ Datadog Nobl9 との連携で、以下のことが可能になります。
 
 Nobl9 プラットフォームでの SLO 作成の詳細については、Nobl9 の[ユーザーガイド][5]を参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 ヘルプが必要ですか？[Nobl9 サポート][6]または [Datadog サポート][7]にお問い合わせください。
 

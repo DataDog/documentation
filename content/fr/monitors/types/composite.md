@@ -14,7 +14,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Vérifier le statut de votre monitor
-kind: documentation
 title: Monitor composite
 ---
 
@@ -125,19 +124,21 @@ Prenons pour exemple un monitor composite qui utilise deux monitors individuels�
 | Monitor A   | Monitor B   | Condition   | Notify No Data   | Statut du monitor composite | Alerte déclenchée ? |
 |-------------|-------------|-------------|------------------|------------------|------------------|
 | Alert (T)   | Warn (T)    | `A && B`    |                  | Warn (T)         | {{< X >}}        |
-| Alert (T)   | Warn (T)    | `A \|\| B`    |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Warn (T)    | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | OK (F)      | `A && B`    |                  | OK (F)           |                  |
+| Alert (T)   | OK (F)      | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
 | Warn (T)    | OK (F)      | `A && B`    |                  | OK (F)           |                  |
-| Warn (T)    | OK (F)      | `A \|\| B`    |                  | Warn (T)         | {{< X >}}        |
+| Warn (T)    | OK (F)      | `A \|\| B`  |                  | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | Oui             | No Data (T)      | {{< X >}}        |
-| No Data (T) | Warn (T)    | `A \|\| B`    | Oui             | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | Oui             | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | Non            | Dernier statut connu       |                  |
-| No Data (T) | Warn (T)    | `A \|\| B`    | Non            | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | Non            | Warn (T)         | {{< X >}}        |
 | No Data (T) | OK (F)      | `A && B`    | Non            | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | Non            | Dernier statut connu       |                  |
+| No Data (T) | OK (F)      | `A \|\| B`  | Non            | Dernier statut connu       |                  |
 | No Data (T) | OK (F)      | `A && B`    | Oui             | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | Oui             | No Data (T)      | {{< X >}}        |
+| No Data (T) | OK (F)      | `A \|\| B`  | Oui             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A && B`    | Oui             | No Data (T)      | {{< X >}}        |
-| No Data (T) | No Data (T) | `A \|\| B`    | Oui             | No Data (T)      | {{< X >}}        |
+| No Data (T) | No Data (T) | `A \|\| B`  | Oui             | No Data (T)      | {{< X >}}        |
 
 **Remarque** : lorsque le paramètre `notify_no_data` d'un monitor composite est défini sur false, et que l'évaluation des sous-monitors devrait entraîner un statut `No Data` pour le monitor composite, ce dernier prend alors le dernier statut connu.
 

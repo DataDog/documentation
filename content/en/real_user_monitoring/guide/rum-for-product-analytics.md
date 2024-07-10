@@ -1,6 +1,6 @@
 ---
 title: Use RUM & Session Replay for Product Analytics
-kind: guide
+
 description: Learn how to use RUM & Session Replay to monitor trends in user behavior and feature adoption.
 further_reading:
 - link: '/real_user_monitoring/explorer/'
@@ -9,7 +9,7 @@ further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn how to visualize your RUM data'
-- link: '/real_user_monitoring/frustration_signals'
+- link: '/real_user_monitoring/browser/frustration_signals/'
   tag: 'Documentation'
   text: 'Learn about frustration signals'
 - link: '/real_user_monitoring/session_replay'
@@ -28,7 +28,7 @@ This guide discusses several use cases to enrich your RUM & Session Replay data 
 
 ## Setup
 
-Once you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
+After you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
 
 ## Monitor page traffic and feature usage
 
@@ -127,11 +127,11 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#enrich-user-sessions
 [4]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /real_user_monitoring/funnel_analysis/
+[6]: /product_analytics/journeys/funnel_analysis
 [7]: /real_user_monitoring/explorer/saved_views/
 [8]: /real_user_monitoring/explorer/export/
 [9]: /real_user_monitoring/error_tracking/
-[10]: /real_user_monitoring/frustration_signals/
-[11]: /real_user_monitoring/session_replay/
+[10]: /real_user_monitoring/browser/frustration_signals/
+[11]: /real_user_monitoring/session_replay/browser/
 [12]: /dashboards/guide/powerpacks-best-practices/
 [13]: https://app.datadoghq.com/dashboard/lists

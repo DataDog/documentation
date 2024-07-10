@@ -8,7 +8,6 @@ cascade:
     subcategory: メトリクスガイド
 description: メトリクスガイドのインデックス
 disable_toc: true
-kind: ガイド
 private: true
 title: メトリクスガイド
 ---
@@ -26,6 +25,6 @@ title: メトリクスガイド
     {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Terraform によるログとメトリクスの管理{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Metrics Without LimitsTM" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}Metrics Without LimitsTM - Metrics without LimitsTM を使ってカスタムメトリクスのボリュームとコストをどう制御するか学びましょう {{< /nextlink >}}
+{{< whatsnext desc="Metrics Without Limits™" >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}Metrics Without Limits™ - Metrics without Limits™ を使ってカスタムメトリクスのボリュームとコストをどう制御するか学びましょう {{< /nextlink >}}
 {{< /whatsnext >}}

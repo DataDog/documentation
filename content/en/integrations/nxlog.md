@@ -1,14 +1,14 @@
 ---
 title: NXLog
 name: nxlog
-kind: integration
+custom_kind: integration
 description: 'Configure NXLog to gather logs from your host, containers, & services.'
 short_description: 'Configure NXLog to gather logs from your host, containers, & services.'
 categories:
     - log collection
 doc_link: /integrations/nxlog/
 aliases:
-    - logs/log_collection/nxlog
+    - /logs/log_collection/nxlog
 has_logo: true
 integration_title: nxlog
 is_public: true

@@ -9,7 +9,6 @@ further_reading:
 - link: /continuous_integration/intelligent_test_runner
   tag: Documentation
   text: En savoir plus sur la fonctionnalité Intelligent Test Runner
-kind: documentation
 title: Dépannage de CI Visibility
 ---
 
@@ -48,10 +47,6 @@ La prise en charge des pipelines en cours d'exécution repose sur les données s
 #### Durée d'exécution maximale d'un pipeline
 
 L'exécution d'un pipeline peut conserver le statut `Running` pendant une durée maximale de trois jours. Passé ce délai, l'exécution du pipeline ne s'affiche plus dans CI Visibility. Si une exécution de pipeline se termine après trois jours, elle est affichée dans CI Visibility avec le statut final pertinent (`Success`, `Error`, `Canceled` ou `Skipped`) et la bonne durée.
-
-#### Vue des traces d'un pipeline affichant uniquement les données au niveau du pipeline
-
-Lorsqu'un pipeline est en cours d'exécution, le framegraph représentant le pipeline affiche uniquement la span au niveau du pipeline.
 
 ## Pour aller plus loin
 

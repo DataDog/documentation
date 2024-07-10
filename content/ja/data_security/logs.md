@@ -5,10 +5,12 @@ further_reading:
 - link: /data_security/
   tag: ドキュメント
   text: Datadog に送信されるデータの主要カテゴリを確認する
+- link: /data_security/pci_compliance/
+  tag: ドキュメント
+  text: PCI 準拠の Datadog 組織をセットアップする
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
-  tag: GitHub
+  tag: ブログ
   text: Datadog から PCI に準拠したログ管理と APM を発表
-kind: documentation
 title: ログ管理のデータセキュリティ
 ---
 
@@ -39,10 +41,10 @@ Datadog は、Datadog のログ管理サービスを介して保護対象医療�
 Datadog と BAA を締結されたお客様は、この機能をご利用いただけません。
 
 * チャットからサポートを求めることはできません。
-* Web インテグレーションを使用して、エクスプローラーからログ、セキュリティシグナル、またはトレースを[共有][5]することはできません。
+* Datadog エクスプローラーからログ、セキュリティシグナル、またはトレースを[共有][5]することはできません。
 * セキュリティルールでは、通知タイトルにトリガーとなるグループ化の値を含めることができません。
 * セキュリティルールにメッセージテンプレート変数を含めることはできません。
-* セキュリティルールは Webhook によって通知することができません。
+* セキュリティルールは Webhook を通じて通知することができません。
 
 ログ管理サービスが HIPAA の適用要件をどのように満たしているかについての質問がある場合は、アカウントマネージャーにお問い合わせください。HIPAA 対応のお客様は、特定の暗号化を実施するために、特定のエンドポイントを使用してログを送信する必要はありません。暗号化は、すべてのログ提出用エンドポイントで有効です。
 
@@ -56,24 +58,12 @@ Datadog と BAA を締結されたお客様は、この機能をご利用いた�
 
 Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Datadog 組織にログを送信することができます。PCI 準拠の Datadog 組織を設定するには、以下の手順に従います。
 
-1. [Datadog サポート][2]または[カスタマーサクセスマネージャー][3]に連絡し、組織を PCI 準拠の組織として構成するようリクエストします。
-2. Datadog サポートまたはカスタマーサクセスが組織が PCI DSS に準拠していることを確認した後、PCI 準拠の専用エンドポイント (`agent-http-intake-pci.logs.datadoghq.com`) にログを送信するように Agent コンフィギュレーションファイルを構成します。
-    ```
-    logs_config:
-      logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
-    ```
-    **注**: ポートを構成に含める必要があります。PCI コンプライアンスは HTTP でのログ転送のみを使用します。Agent を使用する場合は、[HTTP 転送を強制する][5]必要があります。
+{{% pci-logs %}}
 
-ログ管理サービスが PCI DSS の要件を適切に満たしているかどうかについてのご質問は、アカウントマネージャーまでお問い合わせください。
+詳しくは [PCI DSS 準拠][1]を参照してください。APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][1]を参照してください。
 
-APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][6]を参照してください。
-
-[1]: /ja/getting_started/site/
-[2]: /ja/help/
-[3]: mailto:success@datadoghq.com
-[4]: /ja/account_management/audit_trail/#setup
-[5]: /ja/agent/logs/log_transport/?tab=https#enforce-a-specific-transport
-[6]: /ja/tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
+[1]: /ja/data_security/pci_compliance/
+[2]: /ja/data_security/pci_compliance/?tab=apm
 
 {{< /site-region >}}
 

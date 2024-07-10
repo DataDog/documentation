@@ -1,7 +1,7 @@
 ---
 categories:
 - cloud
-- data store
+- data stores
 - google cloud
 - log collection
 dependencies: []
@@ -14,7 +14,7 @@ integration_id: google-cloudsql
 integration_title: Google Cloud SQL
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloudsql
 public_title: Datadog-Google Cloud SQL インテグレーション
@@ -22,6 +22,7 @@ short_description: パフォーマンス、健全性、レプリケーション�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Cloud SQL は、クラウド内の SQL データベースを簡単にセットアップ、保守、運用、管理できるようにするフルマネージド型のデータベースサービスです。
@@ -31,19 +32,19 @@ Google Cloud SQL からメトリクスを取得して、以下のことができ
 - Cloud SQL データベースのパフォーマンスを視覚化。
 - Cloud SQL データベースのパフォーマンスをアプリケーションと関連付け。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 #### メトリクスの収集
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-#### コンフィギュレーション
+#### ブラウザトラブルシューティング
 
 カスタム Cloud SQL ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
 
-#### ログの収集
+#### 収集データ
 
 {{< site-region region="us3" >}}
 
@@ -53,7 +54,7 @@ Google Cloud SQL からメトリクスを取得して、以下のことができ
 
 {{< site-region region="us,eu,gov" >}}
 
-Google Cloud SQL のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Cloud SQL のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
 これが完了したら、Google Cloud SQL のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
@@ -67,22 +68,22 @@ Google Cloud SQL のログは Google Cloud Logging により収集され、HTTP 
 
 {{< /site-region >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "google_cloudsql" >}}
 
 
-### イベント
+### ヘルプ
 
 Google Cloud SQL インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 **gcp.cloudsql.database.state**
 Cloud SQL インスタンスの現在のサービス状態。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -1,0 +1,35 @@
+.learning-center-callout {
+    border: #B37BFF solid 1px;
+    border-radius: 16px;
+    background-color: #F0E7FF;
+
+    .card-content {
+        @media(min-width: 768px) {
+            display: flex;
+            column-gap: 20px;
+        }
+        img {
+            min-height: 94px;
+            min-width: 166px;
+            object-fit: cover;
+
+            @media (min-width: 768px) {
+                height: 94px;
+            }
+        }
+    }
+    
+
+    a.btn {
+        height: 34px;
+        min-width: 100%;
+        width: auto;
+        padding-top: 8px;
+        background-color: #4300B0;
+        // background: linear-gradient(90deg,#2F24A7 0%,#B034B0 100%),linear-gradient(270deg,#A533AF 0%,#3725A8 100%);
+        border-radius: 4px;
+        @media (min-width: 768px) {
+            min-width: 138px;
+        }
+    }
+}

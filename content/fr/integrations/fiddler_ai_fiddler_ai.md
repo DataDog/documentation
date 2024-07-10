@@ -21,12 +21,11 @@ integration_id: fiddler-ai-license
 integration_title: Fiddler AI
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/fiddler-msa.pdf
 manifest_version: 2.0.0
 name: fiddler_ai_fiddler_ai
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

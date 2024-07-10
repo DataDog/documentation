@@ -1,6 +1,5 @@
 ---
 title: RUM Roku Channel Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/roku/
 code_lang: roku
@@ -11,8 +10,8 @@ further_reading:
   tag: Documentation
   text: RUM Roku Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: Github
-  text: dd-sdk-roku Source code
+  tag: "Source Code"
+  text: Source code for dd-sdk-roku
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
@@ -57,7 +56,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 ### Specify application details in Datadog
 
-1. Navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][3].
+1. Navigate to [**Digital Experience** > **Add an Application**][3].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][4].
 
@@ -176,6 +175,10 @@ end sub
 ```
 {{< /site-region >}}
 
+### Sample RUM sessions
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][9] as a percentage between 0 and 100. You can specify the rate with the `sessionSampleRate` parameter.
+
 ### Instrument the channel
 
 See [**Track RUM Resources**][8] to enable automatic tracking of all your resources, and [**Enrich user sessions**][9] to add custom global or user information to your events.
@@ -228,3 +231,4 @@ Whenever you perform an operation that might throw an exception, you can forward
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
+[10]: 

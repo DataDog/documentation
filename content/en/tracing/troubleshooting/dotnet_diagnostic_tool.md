@@ -1,19 +1,18 @@
 ---
 title: Using the .NET diagnostic tool for troubleshooting
-kind: documentation
 ---
 
-If after installing the .NET tracer your application does not produce traces as expected, run the diagnostic tool for basic troubleshooting. It can help you figure out issues with your setup such as missing environment variables, incomplete installation, or unreachable Agent.
+If your application does not produce traces as expected after installing the .NET tracer, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
 
-The diagnostic tool is bundled with the tracer since version 2.42.0. It's located in the tracer folder, and automatically added to the PATH to be invoked from anywhere.
+The diagnostic tool  `dd-dotnet` is bundled with the tracing library starting with version 2.42.0. It is located in the tracing library's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
 
-## Installing dd-trace
+## Installing `dd-trace`
 
-**This sections is for versions of the tracer older than 2.42.0.**
+**This section is for versions of the tracer older than 2.42.0.**
 
-Older versions of the tracer aren't shipped with dd-dotnet. Instead, you can install the dd-trace tool. The features and syntax are similar to dd-dotnet.
+Older versions of the tracer did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
 
-You can install dd-trace in one of the following ways:
+You can install `dd-trace` in one of the following ways:
 
 - Using the .NET SDK by running the command:
    ```
@@ -26,7 +25,7 @@ You can install dd-trace in one of the following ways:
  
 - Or by downloading [from the github release page][4].
 
-In the next sections, make sure to replace "dd-dotnet" with "dd-trace" when invoking the commands.
+When invoking the commands in the next sections, make sure to replace `dd-dotnet` with `dd-trace`.
 
 ## Process diagnostics 
 

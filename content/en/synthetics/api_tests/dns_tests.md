@@ -1,6 +1,5 @@
 ---
-title: DNS Tests
-kind: documentation
+title: DNS Testing
 description: Monitor resolvability and lookup times of your DNS records
 aliases:
   - /synthetics/dns_test
@@ -138,7 +137,7 @@ You can restrict access to a DNS test based on the roles in your organization. W
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

@@ -9,6 +9,7 @@ assets:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 624
     source_type_name: Stripe
 author:
   homepage: https://www.datadoghq.com
@@ -16,7 +17,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
 - ログの収集
 dependencies: []
 display_on_public_website: true
@@ -26,17 +26,15 @@ integration_id: stripe
 integration_title: Stripe
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: stripe
-oauth: {}
 public_title: Stripe
 short_description: Stripe からアカウントのイベント変更に関するログを受け取ることができます。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Web
   - Category::Log Collection
   configuration: README.md#Setup
   description: Stripe からアカウントのイベント変更に関するログを受け取ることができます。
@@ -46,15 +44,16 @@ tile:
   title: Stripe
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Datadog を Stripe アカウントと接続し、アカウント内のイベント変更に関するログを受信します。
+Stripe は、あらゆる規模のインターネットビジネス向けにオンライン決済処理と商取引ソリューションを提供する API スイートです。Datadog を Stripe アカウントに接続すると、アカウントのイベント変更に関するログを受け取ることができます。
 
-## セットアップ
+## 計画と使用
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
-#### ログ管理
+#### ワークフローの自動化
 
 1. Datadog の [Stripe インテグレーションタイル][1]の **Configuration** タブ内に生成された URL をコピーします。
 2. Stripe アカウントの [Webhooks][2] ページにアクセスします。
@@ -65,25 +64,25 @@ Datadog を Stripe アカウントと接続し、アカウント内のイベン�
 7. **Add endpoint** をクリックします。
 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Stripe インテグレーションには、メトリクスは含まれません。
 
-### ログ管理
+### ワークフローの自動化
 
 Stripe のイベントは、`stripe` ソースの下にログとして表示されます。
 
-### イベント
+### ヘルプ
 
 Stripe インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Stripe インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

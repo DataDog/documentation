@@ -1,6 +1,5 @@
 ---
 title: Database Monitoring
-kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
@@ -24,12 +23,6 @@ cascade:
     algolia:
         rank: 70
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
-{{< img src="database_monitoring/dbm-overview.png" alt="Database Monitoring" style="width:100%;">}}
-
 Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
 
 ## Getting started
@@ -58,7 +51,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ## Explore Datadog Database Monitoring
 
-Navigate to Database Monitoring by clicking **[APM > Databases][1]** in the UI.
+Navigate to [Database Monitoring][1] in Datadog.
 
 ### Dig into query performance metrics
 
@@ -103,6 +96,10 @@ On the [Databases page][1], you can assess the health and activity of your datab
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
 ## Further Reading
+
+{{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to identify inefficiencies and optimize your Postgres database.
+{{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

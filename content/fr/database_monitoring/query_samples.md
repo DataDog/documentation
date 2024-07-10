@@ -1,6 +1,5 @@
 ---
 title: Explorer des échantillons de requêtes
-kind: documentation
 description: Obtenir des informations sur les requêtes en cours d'exécution et identifier les singularités problématiques
 further_reading:
   - link: /database_monitoring/

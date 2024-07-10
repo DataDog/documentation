@@ -3,7 +3,7 @@ aliases:
 - /ja/integrations/awsdynamo/
 categories:
 - cloud
-- data store
+- data stores
 - aws
 - log collection
 dependencies: []
@@ -12,11 +12,11 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb/
 draft: false
 git_integration_title: amazon_dynamodb
 has_logo: true
-integration_id: amazon-dynamodb
+integration_id: ''
 integration_title: Amazon DynamoDB
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_dynamodb
 public_title: Datadog-Amazon DynamoDB インテグレーション
@@ -24,7 +24,8 @@ short_description: テーブルサイズ、読み取り/書き込み容量、リ
 version: '1.0'
 ---
 
-{{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="DynamoDB デフォルトダッシュボード" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="DynamoDB のデフォルトダッシュボード" popup="true">}}
 
 ## 概要
 
@@ -47,7 +48,7 @@ Amazon DynamoDB は、AWS ポートフォリオに含まれる、フルマネー
 
     詳細については、AWS ウェブサイト上の [DynamoDB ポリシー][4]を参照してください。
 
-3. [Datadog - AWS DynamoDB インテグレーション][5]をインストールします。
+3. [Datadog - Amazon DynamoDB インテグレーション][5]をインストールします。
 
 ### ログの収集
 
@@ -78,11 +79,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS DynamoDB インテグレーションには、イベントは含まれません。
+Amazon DynamoDB インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS DynamoDB インテグレーションには、サービスのチェック機能は含まれません。
+Amazon DynamoDB インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

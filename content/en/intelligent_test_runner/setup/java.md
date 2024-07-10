@@ -1,12 +1,11 @@
 ---
 title: Intelligent Test Runner for Java
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
 aliases:
-  - continuous_integration/intelligent_test_runner/java/
-  - continuous_integration/intelligent_test_runner/setup/java/
+  - /continuous_integration/intelligent_test_runner/java/
+  - /continuous_integration/intelligent_test_runner/setup/java/
 
 further_reading:
     - link: "/continuous_integration/tests"
@@ -26,6 +25,7 @@ The following test frameworks are supported:
 - TestNG >= 6.4
 - Spock >= 2.0
 - Cucumber >= 5.4.0
+- Karate >= 1.0.0
 - Scalatest >= 3.0.8
 
 ## Setup

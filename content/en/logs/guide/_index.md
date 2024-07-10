@@ -1,6 +1,6 @@
 ---
 title: Logs Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:
@@ -22,7 +22,7 @@ cascade:
 
 {{< whatsnext desc="Log Collection" >}}
     {{< nextlink href="/agent/logs/advanced_log_collection" >}}Advanced log collection configurations{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Kinesis Firehose Destination{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Amazon Data Firehose Destination{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Set up Datadog Lambda Forwarder{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
@@ -41,7 +41,7 @@ cascade:
     {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Use the Container Agent to Tail Logs from the Host{{< /nextlink >}}
     {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}Mechanisms to Ensure Logs are Not Lost{{< /nextlink >}}
     {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Send Logs from a Custom Log File with Heightened Read Permissions{{< /nextlink >}}   
-    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send AWS EKS Fargate Logs with Kinesis Data Firehose{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send Amazon EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -68,6 +68,7 @@ cascade:
     {{< nextlink href="logs/guide/logs-rbac" >}}How to set up RBAC for Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Learn more about RBAC permissions for Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}Delete Logs with Sensitive Data{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog Integrations" >}}

@@ -3,6 +3,7 @@ app_id: unifi-console
 app_uuid: 224a050d-7ed3-4e7a-ada6-410f61393fc0
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: unifi.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10298
     source_type_name: Unifi Console
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -29,10 +31,9 @@ integration_id: unifi-console
 integration_title: Unifi Console
 integration_version: 1.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: unifi_console
-oauth: {}
 public_title: Unifi Console
 short_description: Ce check recueille des métriques à partir du contrôleur Unifi.
 supported_os:
@@ -53,17 +54,18 @@ tile:
   title: Unifi Console
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
 
 Ce check permet de surveiller [Unifi Console][1] avec l'Agent Datadog.
 
-## Configuration
+## Formule et utilisation
 
 Le check Unifi n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 
-### Installation
+### Liste des infrastructures
 
 Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer le check Unifi sur votre host. Consultez la section [Utiliser les intégrations de la communauté][3] pour effectuer une installation avec l'Agent Docker ou avec des versions antérieures de l'Agent.
 
@@ -75,7 +77,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 2. Configurez votre intégration comme une [intégration][4] de base.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Modifiez le fichier `unifi_console.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Unifi. Consultez le [fichier d'exemple unifi_console.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
@@ -85,28 +87,28 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 [Lancez la sous-commande status de l'Agent][7] et cherchez `unifi_console` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "unifi_console" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Unifi Console n'inclut aucun événement.
 
-### Checks de service
+### Aide
 {{< get-service-checks-from-git "unifi_console" >}}
 
 
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 
 [1]: https://ui.com/consoles
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/fr/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/unifi_console/datadog_checks/unifi_console/data/conf.yaml.example

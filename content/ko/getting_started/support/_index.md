@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: 설명서
   text: Agent 트러블슈팅
-kind: 도움말
 title: Datadog 지원팀과 시작하기
 ---
 
@@ -17,7 +16,7 @@ title: Datadog 지원팀과 시작하기
 
 본 가이드에서는 지원 팀에 연락하는 모범 사례와 고객에게 적합한 방법을 결정하는 데 필요한 지침을 제공합니다.
 
-## 전제 조건
+## 필수 구성 요소
 
 문제를 빠르게 해결하려면 아래에 안내된 관련 정보와 리소스를 미리 준비해 주세요.
 

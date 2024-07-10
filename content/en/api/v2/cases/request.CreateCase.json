@@ -1,0 +1,24 @@
+{
+  "data": {
+    "attributes": {
+      "priority": "NOT_DEFINED",
+      "title": "Security breach investigation in 3dcc5b2ebf9bfb8f",
+      "type": "STANDARD"
+    },
+    "relationships": {
+      "assignee": {
+        "data": {
+          "id": "string",
+          "type": "user"
+        }
+      },
+      "project": {
+        "data": {
+          "id": "d4bbe1af-f36e-42f1-87c1-493ca35c320e",
+          "type": "project"
+        }
+      }
+    },
+    "type": "case"
+  }
+}

@@ -5,6 +5,7 @@ assets:
   dashboards:
     sosivio_overview.json: ./assets/dashboards/sosivio_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: sosivio.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10285
     source_type_name: Sosivio
 author:
   homepage: https://www.sosiv.io
@@ -25,7 +27,7 @@ categories:
 - コンテナ
 - kubernetes
 - ネットワーク
-- notification
+- notifications
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sosivio/README.md
@@ -36,10 +38,9 @@ integration_id: sosivio
 integration_title: Sosivio
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: sosivio
-oauth: {}
 public_title: Sosivio
 short_description: 手に入れるのは、データではなく答え。Kubernetes の予測型トラブルシューティング。
 supported_os:
@@ -51,7 +52,7 @@ tile:
   - Category::Containers
   - Category::Kubernetes
   - Category::Network
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Supported OS::Linux
   configuration: README.md#Setup
@@ -65,6 +66,7 @@ tile:
   title: Sosivio
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -73,7 +75,7 @@ Sosivio は、Kubernetes 環境とアプリケーションに特化して構築�
 
 Sosivio の Datadog インテグレーションにより、ユーザーは Sosivio の障害アラートを Datadog のダッシュボードで直接確認し、Sosivio UI に即座にリダイレクトして障害を修復できます (Sosivio Premium ライセンスが必要です)。また、Datadog のシグナルに Sosivio の根本原因を特定するためのコンテキストを追加することができます。
 
-## セットアップ
+## 計画と使用
 
 Sosivio のアカウントをお持ちでない方は、[アカウントを作成][1]し、弊社のウェブサイトから直接 Sosivio Premium の 4 週間の無料トライアルにお申し込みください (クレジットカードは必要ありません)。4 週間のトライアル終了後、ライセンスは Sosivio Community Version に変換され、永久に無料となります。アカウントのセットアップが完了したら、Datadog で Sosivio インテグレーションを使い始めることができます。
 
@@ -81,14 +83,14 @@ Sosivio のアカウントをお持ちでない方は、[アカウントを作�
 Sosivio は、製品に必要なすべてのコンポーネントを作成する 1 つのネームスペース ("sosivio" と表示) の下にインストールされます。
 
 
-### インストール
+### インフラストラクチャーリスト
 
 1. Sosivio Dashboard Configuration ページで、[Datadog API キー][2]と Datadog URL (デフォルトの datadoghq.com サイトでない場合) を追加してください。詳しくは、[Datadog サイト][3]を参照してください。
 2. **Install** をクリックします。
 
 詳細については、[Sosivio のドキュメント][4]を参照してください。
 
-## サポート
+## Agent
 
 ヘルプが必要ですか？[Datadog サポート][5]または [Sosivio][6]にご連絡ください。
 

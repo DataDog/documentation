@@ -1,13 +1,14 @@
 ---
-title: APM et profileur en continu avec la version 5 de l'Agent
-kind: guide
-private: true
 aliases:
-  - /fr/tracing/faq/agent-5-tracing-setup
+- /fr/tracing/faq/agent-5-tracing-setup
+
+private: true
+title: APM et profileur en continu avec la version 5 de l'Agent
 ---
+
 ## Débuter
 
-L'APM est disponible avec les versions 5.11+ de l'Agent Datadog via le processus d'installation en une étape pour les Agents Linux et Docker. Les utilisateurs de [Mac][1] et de [Windows][2] doivent effectuer une installation manuelle de l'Agent APM (aussi appelé Agent de trace) via un autre processus d'installation.
+APM est disponible avec les versions 5.11+ de l'Agent Datadog via la commande d'installation en une étape pour les Agents Linux et Docker. Les utilisateurs de [Mac][1] et de [Windows][2] doivent effectuer une installation manuelle de l'Agent APM (aussi appelé Agent de trace) via un autre processus d'installation.
 
 Pour activer l'Agent, ajoutez la ligne suivante dans le [fichier de configuration de votre Agent Datadog][3] :
 
@@ -72,8 +73,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [1]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
 [3]: /fr/agent/faq/where-is-the-configuration-file-for-the-agent/
-[4]: /fr/tracing/visualization/#trace-metrics
-[5]: https://app.datadoghq.com/account/settings#agent
+[4]: /fr/tracing/glossary/#trace-metrics
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /fr/tracing/docker/
 [8]: /fr/tracing/guide/send_traces_to_agent_by_api/

@@ -15,7 +15,7 @@ categories:
 - クラウド
 - コスト管理
 - マーケットプレイス
-- notification
+- notifications
 - orchestration
 - プロビジョニング
 dependencies: []
@@ -26,12 +26,11 @@ integration_id: sedai-sedai-license
 integration_title: Sedai
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: sedai_sedai
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -51,7 +50,7 @@ tile:
   - Category::Cloud
   - Category::Cost Management
   - Category::Marketplace
-  - Category::Notification
+  - Category::Notifications
   - Category::Orchestration
   - Category::Provisioning
   - Offering::Software License
@@ -88,6 +87,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 
 Sedai は、本番環境をプロアクティブに管理し、問題を防止して可用性、パフォーマンス、およびクラウドコストを改善する自律型クラウドプラットフォームです。SRE のためのインテリジェントな オートパイロットとして、Sedai は監視データを独自に検出、優先順位付け、分析し、しきい値なしに本番環境で安全かつ自律的に行動します。
@@ -102,7 +102,7 @@ Sedai は、本番環境をプロアクティブに管理し、問題を防止�
 
 * **プロアクティブアクション:** お客様に代わって本番稼動を安全に行い、リソースの可用性問題を回避し、常に最適な状態で稼動することを保証します。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Sedai にお問い合わせください。
 

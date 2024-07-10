@@ -1,6 +1,5 @@
 ---
 title: Service Map
-kind: documentation
 description: "The Service Map visualizes data that is being collected by Datadog APM."
 aliases:
   - /tracing/servicemap
@@ -28,6 +27,10 @@ The Service Map visualizes data collected by Datadog APM and RUM. Setup is not r
 ## Ways to use it
 
 The Service Map provides an overview of your services and their health. This cuts through the noise and isolates problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
+
+## Identifying a service's dependencies
+
+The service map provides a complete picture of a service's dependencies, including those in different environments. For example, even if your service is only deployed in environment `prod`, the map reveals its connections to services in `staging` (and other environments). 
 
 ## Grouping by Team or Application
 

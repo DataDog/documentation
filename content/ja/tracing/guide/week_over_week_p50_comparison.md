@@ -9,13 +9,9 @@ further_reading:
 - link: /tracing/guide/slowest_request_daily/
   tag: 3 分
   text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-- link: /tracing/guide/add_span_md_and_graph_it/
-  tag: 7 分
-  text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: サービスのレイテンシーを前週と比較する
 ---
 
@@ -50,7 +46,6 @@ Datadog APM を使用すると、サービスのレイテンシーのさまざ�
 **注**: 分析を行う際、このグラフをサービスビューから任意のダッシュボードにエクスポートし、カスタムメトリクス、ホストレベルの情報、ログなど、Datadog で生成された他のグラフと一緒にこのデータを表示することができます。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

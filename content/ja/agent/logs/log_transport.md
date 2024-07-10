@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: ドキュメント
   text: グローバルな処理ルール
-kind: ドキュメント
 title: Logs の Agent 転送
 ---
 
@@ -69,7 +68,7 @@ HTTP を使用して、次を上限として Agent がログのバッチを送�
 
 * 最大バッチサイズ: 1MB
 * ログ 1 つの最大サイズ: 256kB
-* 各バッチの最大ログ数: 200
+* 各バッチの最大ログ数: 1,000
 
 ### ログの圧縮
 
@@ -104,9 +103,9 @@ logs_config:
 
 ログを HTTPS 経由で送信する場合は、他のデータタイプと同じ[プロキシ設定セット][3]を使用して、ログを Web プロキシ経由で送信します。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 [2]: /ja/agent/basic_agent_usage/#agent-overhead
-[3]: /ja/agent/proxy/
+[3]: /ja/agent/configuration/proxy/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -115,21 +114,21 @@ TCP 転送を実行するには、Agent の[メインコンフィギュレーシ
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 環境変数を伴った形でログを送信するには、以下の構成を行ってください。
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 デフォルトでは、Datadog Agent は TLS で暗号化された TCP を介して、ログを Datadog に送信します。これを実施するには、外部へ送信できる通信 (Datadog US サイトではポート `10516`、Datadog EU サイトではポート `443`) が必要です 。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **注**:  SOCKS5 プロキシは 圧縮 HTTPS でまだサポートされていないため、[SOCKS5 プロキシ][2]サーバーのセットアップでは TCP 転送が実行されます。
 
 
-[1]: /ja/agent/guide/agent-commands/?tab=agentv6v7#service-status
+[1]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#service-status
 [2]: /ja/agent/logs/proxy/?tab=socks5

@@ -1,6 +1,5 @@
 ---
 title: Burn Rate Alerts
-kind: documentation
 description: "Use Monitors to alert off of the burn rate of an SLO"
 aliases:
 - /monitors/service_level_objectives/burn_rate/
@@ -11,9 +10,13 @@ aliases:
 
 SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO's 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
 
-**Note:** Burn rate alerts are only available for [metric-based SLOs][1] or for [monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+**Note:** Burn rate alerts are available for the following SLO types:
 
-{{< img src="service_management/service_level_objectives/burn_rate_alert_config.jpeg" alt="Burn rate alert configuration">}}
+- [Metric-based SLOs][1], 
+- [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
+- [Time Slice SLOs][7]
+
+{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
 
 ## How Burn Rate Alerts work
 
@@ -92,7 +95,7 @@ $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget c
    * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
    * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
-5. Add [Notification information][4] into the **Say what's happening** and **Notify your team** sections.
+5. Add [Notification information][4] into the **Configure notifications and automations** section.
 6. Click the **Save and Exit** button on the SLO configuration page.
 
 ### Examples
@@ -164,3 +167,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [4]: https://app.datadoghq.com/slo
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[7]: /service_management/service_level_objectives/time_slice

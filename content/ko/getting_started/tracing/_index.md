@@ -14,7 +14,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여해 애플리케이션 성능 모니터링(APM)에 대한 이해도를 향상하세요.
-kind: 설명서
 title: 트레이싱 시작하기
 ---
 
@@ -41,7 +40,7 @@ vagrant ssh
 호스트 상에 Datadog 에이전트를 설치하려면  [Datadog API 키][7]와 함께 업데이트된 [원라인 설치 명령어][6]를 사용하세요.
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ### 검증
@@ -67,7 +66,7 @@ sudo datadog-agent status
 
 ### 애플리케이션 성능 모니터링(APM) 활성화
 
-최신 버전의 에이전트 v6와 v7에서는 APM이 기본으로 활성화되어 있습니다. 에이전트의 [`datadog.yaml` 설정 파일][11]에서 확인할 수 있습니다.
+최신 버전 Agent v6 및 v7의 경우 애플리케이션 성능 모니터링(APM) 이 기본적으로 활성화되어 있습니다. Agent [`datadog.yaml` 설정 파일][11]에서 확인할 수 있습니다:
 
 ```yaml
 # apm_config:

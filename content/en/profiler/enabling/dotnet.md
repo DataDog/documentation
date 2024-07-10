@@ -1,6 +1,5 @@
 ---
 title: Enabling the .NET Profiler
-kind: Documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 60
@@ -62,7 +61,7 @@ The following profiling features are available in the following minimum versions
 | CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
 | Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
 | Allocations profiling     | beta, 2.18.0+                      | .NET 6+                                                                                  |
-| Lock Contention profiling | 2.31.0+                            | .NET 5+                                                                                  |
+| Lock Contention profiling | 2.49.0+                            | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 5+                           |
 | Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
 | [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
@@ -70,7 +69,7 @@ The following profiling features are available in the following minimum versions
 
 ## Installation
 
-If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
+Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
 
 Otherwise, install the profiler using the following steps, depending on your operating system.
 
@@ -100,7 +99,7 @@ To install the .NET Profiler machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && sudo /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -173,6 +172,25 @@ To install the .NET Profiler per-webapp:
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
+{{% /tab %}}
+
+{{% tab "Linux with Single Step Instrumentation" %}}
+
+1. With [Single Step Instrumentation][2], set the following required environment variables for automatic instrumentation to attach to your application:
+
+   ```
+   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+
+2. For standalone applications, manually restart the application as you normally would.
+
+3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
+[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}

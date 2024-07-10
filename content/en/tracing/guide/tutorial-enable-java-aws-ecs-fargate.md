@@ -1,21 +1,21 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application on Amazon ECS with Fargate
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -374,7 +374,7 @@ Redeploy the application and exercise the API:
 
 4. Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
    The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
@@ -431,4 +431,5 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
 [18]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#create-and-provide-a-secret-that-contains-your-datadog-api-and-app-keys
-[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html
+[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-profiles.html
+

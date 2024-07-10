@@ -5,6 +5,7 @@ assets:
   dashboards:
     NeoLoad Performance Testing: assets/dashboards/neoload_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: NeoLoad.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10317
     source_type_name: neoload
   logs: {}
 author:
@@ -33,10 +35,9 @@ integration_id: neoload
 integration_title: NeoLoad
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: integration
 manifest_version: 2.0.0
 name: neoload
-oauth: {}
 public_title: NeoLoad
 short_description: NeLoad 성능 테스트 결과 모니터링 및 분석
 supported_os:
@@ -46,7 +47,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Notification
+  - Category::Notifications
   - Category::Testing
   - Offering::Integration
   - Supported OS::Linux
@@ -63,6 +64,7 @@ tile:
   title: NeoLoad
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 개요
@@ -83,7 +85,7 @@ NeoLoad 구성과 관련한 자세한 지침을 보려면 [NeoLoad 설명서][3]
 Datadog에서 NeoLoad 통합을 설치해 기본 NeoLoad 대시보드를 대시보드 목록에 추가하세요.
 
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "neoload" >}}

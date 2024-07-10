@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Windows
-kind: documentation
 description: "Basic functionality of the Datadog Agent on the Windows platform."
 platform: Windows
 aliases:
@@ -21,21 +20,19 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Setup
 
-If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent documentation for [supported OS versions][2].
-
-For installation and configuration to the Datadog EU site, use the `SITE=` parameter. See the configuration variables table below.
+If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent Supported Platforms documentation for [supported OS versions][2].
 
 ### Installation
 
-Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+The core and APM/trace components of the Windows Agent run under the `ddagentuser` account, which is created at install time. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
-If installing the Datadog Agent on a domain environment, see the [installation requirements for the Agent][4].
-
-**Note**: There are special considerations for [domain controllers][5].
+See installation requirements and special considerations for installing the Datadog Agent on a [domain environment][4], [with a group policy][5], and more. 
 
 {{< tabs >}}
 {{% tab "GUI" %}}
@@ -44,7 +41,7 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
-2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
+2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
@@ -57,7 +54,8 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 To install the Agent with the command line:
 
 1. Download the [Datadog Agent installer][1].
-2. Run one of the following commands inside the directory where you downloaded the installer.
+2. Open Command or Powershell prompt as **Administrator**.
+3. Run one of the following commands inside the directory where you downloaded the installer.
 
 **Command prompt**
 
@@ -244,16 +242,12 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 
 **Note:** Enable WinRM to use the commands below.
 
-Use one of the following PowerShell commands to uninstall the Agent without rebooting:
-```powershell
-start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
-```
+Use the following PowerShell command to uninstall the Agent without rebooting:
 
-Using `/norestart`:
-
-```powershell
-start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
-```
+{{< code-block lang="powershell" >}}
+$productCode = (@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" -Recurse) | Where {$_.GetValue("DisplayName") -like "Datadog Agent" }).PSChildName
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', "$productCode", 'REBOOT=ReallySuppress')
+{{< /code-block >}}
 
 {{% /tab %}}
 
@@ -502,8 +496,8 @@ After configuration is complete, [restart the Agent][11].
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
-[4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers
+[4]: /agent/guide/windows-agent-ddagent-user/#installation-in-a-domain-environment
+[5]: /agent/guide/windows-agent-ddagent-user/#installation-with-group-policy
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration

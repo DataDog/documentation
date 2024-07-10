@@ -1,7 +1,7 @@
 announcement_banner:
-  desktop_message: DASH 2023 ラウンドアップでは、最新の製品や機能の発表をご覧いただけます
-  external_link: https://www.datadoghq.com/blog/dash-2023-new-feature-roundup/?utm_source=organic&utm_medium=display&utm_campaign=dg-organic-websites-ww-docs-announcement-announcement-roundup-202308dash
-  mobile_message: DASH 2023 ラウンドアップを読む
+  desktop_message: Datadogではじめる モダンなモニタリング
+  external_link: https://www.datadoghq.com/ja/free-datadog-trial/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-coreplatform-japan-docs-announcement-trial-freetrial-ja
+  mobile_message: Datadogではじめる モダンなモニタリング
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 exclude: []
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。

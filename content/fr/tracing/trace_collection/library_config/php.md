@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Utilisation avancée
-kind: documentation
 title: Configurer la bibliothèque de tracing PHP
 type: multi-code-lang
 ---

@@ -1,12 +1,11 @@
 ---
 title: Intelligent Test Runner for .NET
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 0
 aliases:
-  - continuous_integration/intelligent_test_runner/dotnet/
-  - continuous_integration/intelligent_test_runner/setup/dotnet/
+  - /continuous_integration/intelligent_test_runner/dotnet/
+  - /continuous_integration/intelligent_test_runner/setup/dotnet/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"

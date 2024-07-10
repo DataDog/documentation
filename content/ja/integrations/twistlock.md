@@ -5,6 +5,7 @@ assets:
   dashboards:
     Twistlock: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: twistlock.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10052
     source_type_name: Twistlock
   logs:
     source: twistlock
@@ -36,12 +38,11 @@ draft: false
 git_integration_title: twistlock
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
-integration_version: 3.2.0
+integration_version: 3.6.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: twistlock
-oauth: {}
 public_title: Prisma Cloud Compute Edition
 short_description: Twistlock はコンテナセキュリティスキャナ
 supported_os:
@@ -67,26 +68,27 @@ tile:
   title: Prisma Cloud Compute Edition
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 [Prisma Cloud Compute Edition][1] はセキュリティスキャナです。コンテナ、ホスト、パッケージをスキャンして、脆弱性やコンプライアンス問題を発見します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -97,7 +99,7 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 [1]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -107,11 +109,11 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 
 | パラメーター            | 値                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `twistlock`                                                                         |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                       |
-| `<インスタンスコンフィギュレーション>`  | `{"url":"http://%%host%%:8083", "username":"<ユーザー名>", "password": "<パスワード>"}` |
+| `<INTEGRATION_NAME>` | `twistlock`                                                                         |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                       |
+| `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8083", "username":"<ユーザー名>", "password": "<パスワード>"}` |
 
-###### Kubernetes
+###### ガイド
 
 Kubernetes を使用している場合は、デプロイ前に twistlock_console.yaml の replication controller セクションに構成を追加してください。
 
@@ -138,7 +140,7 @@ spec:
         name: twistlock-console
 ```
 
-##### ログの収集
+##### 収集データ
 
 
 {{< site-region region="us3" >}}
@@ -154,7 +156,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | -------------- | ------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "twistlock", "service": "twistlock"}` |
 
-###### Kubernetes
+###### ガイド
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[DaemonSet コンフィギュレーション][3]でこれを有効にします。
 
@@ -210,27 +212,27 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンド][3]を実行し、Checks セクションで `twistlock` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "twistlock" >}}
 
 
-### イベント
+### ヘルプ
 
 Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベントを送信します。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "twistlock" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 
 [1]: https://www.paloaltonetworks.com/prisma/cloud
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

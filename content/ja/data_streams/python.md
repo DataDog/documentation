@@ -6,7 +6,6 @@ further_reading:
 - link: /tracing/service_catalog/
   tag: Documentation
   text: サービスカタログ
-kind: documentation
 title: Data Streams Monitoring for Python のセットアップ
 ---
 

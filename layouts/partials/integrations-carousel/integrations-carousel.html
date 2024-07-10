@@ -1,5 +1,5 @@
-{{ $app_id := .Params.app_id | default "" }}
-{{ $media := .Params.tile.media | default slice}}
+{{ $media := .media }}
+{{ $app_id := .context.Params.app_id | default "" }}
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $is_scrollable_carousel := (gt $asset_len 3)}}
 {{ $carousel_item_vertical := newScratch }}

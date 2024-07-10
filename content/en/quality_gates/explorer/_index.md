@@ -1,7 +1,8 @@
 ---
 title: Quality Gates Explorer
-kind: documentation
 description: Learn about the Quality Gates Explorer for quality gates and rule executions.
+aliases:
+- /continuous_integration/quality_gates/
 further_reading:
   - link: "/quality_gates/"
     tag: "Documentation"
@@ -15,10 +16,6 @@ further_reading:
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
-
 ## Overview
 
 The Quality Gates Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) quality gates or rule executions at multiple levels using any tag.
@@ -26,7 +23,7 @@ The Quality Gates Explorer allows you to [search and filter](#search-and-filter)
 {{< tabs >}}
 {{% tab "Gates" %}}
 
-Navigate to [**CI** > **Quality Gate Executions**][101] to see your Quality Gates. 
+Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] to see your Quality Gates. 
   
 {{< img src="/quality_gates/explorer/gates.png" text="Quality Gate rules page" style="width:100%" >}}
 
@@ -52,7 +49,7 @@ Quality Gate data is available in dashboards and notebooks, enabling build engin
 {{% /tab %}}
 {{% tab "Rule Executions" %}}
 
-Navigate to [**CI** > **Quality Gate Executions**][101] to see your Quality Gate rule executions.
+Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] to see your Quality Gate rule executions.
 
 {{< img src="/quality_gates/explorer/rules.png" text="Quality Gates Rule Executions page" style="width:100%" >}}
 
@@ -102,7 +99,7 @@ Select a visualization type to visualize the outcomes of filters and aggregation
 
 ## Export
 
-Export your view in the [Quality Gates Explorer][4] to reuse it later or in different contexts.
+Export your view in the [Quality Gates Explorer][5] to reuse it later or in different contexts. For more information, see [Saved Views][4].
 
 ## Further reading
 
@@ -112,3 +109,4 @@ Export your view in the [Quality Gates Explorer][4] to reuse it later or in diff
 [2]: /quality_gates/explorer/search_syntax
 [3]: /quality_gates/explorer/facets
 [4]: /quality_gates/explorer/saved_views
+[5]: /quality_gates/explorer

@@ -5,6 +5,7 @@ app_id: rapdev-backup
 app_uuid: f0a2c15e-9c53-4645-aedc-5a28af130308
 assets:
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: rapdev.backup
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10194
     source_type_name: RapDev Backup
 author:
   homepage: https://www.rapdev.io
@@ -32,12 +34,11 @@ integration_id: rapdev-backup
 integration_title: Backup Automator
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_backup
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -67,27 +68,28 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 この Agent チェックの目的は、Datadog アカウントのダッシュボード、Synthetic テスト、モニター、ノートブックの zip バックアップを作成することです。そのバックアップは、ローカルマシン、またはサポートされている他のプラットフォーム (AWS、Azure、GitHub など) の 1 つに保存できます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 このインテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 このインテグレーションには、Agent が Datadog API と通信できる場合は `OK` を返すサービスチェック `rapdev.backup.can_connect` があり、それ以外の場合は `CRITICAL` を報告します。
 
-### イベント
+### ヘルプ
 
 このインテグレーションには、イベントは含まれません。
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io

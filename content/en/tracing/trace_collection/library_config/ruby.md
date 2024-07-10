@@ -1,12 +1,11 @@
 ---
 title: Configuring the Ruby Tracing Library
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb/"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Source code"
 - link: "/tracing/trace_collection/trace_context_propagation/ruby/"
   tag: "Documentation"

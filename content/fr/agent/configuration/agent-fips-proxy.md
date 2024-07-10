@@ -14,7 +14,9 @@ further_reading:
 - link: agent/configuration/proxy
   tag: Documentation
   text: Configuration de l'Agent pour un proxy
-kind: Guide
+- link: https://www.datadoghq.com/blog/datadog-fips-enabled-agent/
+  tag: Blog
+  text: Surveiller des workloads hautement régulés avec l'Agent FIPS de Datadog
 title: Conformité de Datadog à la norme FIPS
 ---
 
@@ -78,7 +80,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Définissez la variable d'environnement `DD_FIPS_MODE` pour installer le package FIPS avec l'Agent et configurer ce dernier de sorte qu'il utilise le proxy. Aucune autre étape de configuration n'est requise si vous utilisez cette méthode. Nous vous conseillons toutefois de [vérifier l'installation](#verifier-votre-installation).

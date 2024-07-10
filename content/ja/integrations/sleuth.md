@@ -3,6 +3,7 @@ app_id: sleuth
 app_uuid: 7923b3ef-2436-4315-bf2e-7631a6975886
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: sleuth.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10118
     source_type_name: Sleuth
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -33,10 +35,9 @@ integration_id: sleuth
 integration_title: Sleuth
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: sleuth
-oauth: {}
 public_title: Sleuth
 short_description: Sleuth Deployment Tracker
 supported_os:
@@ -61,11 +62,12 @@ tile:
   title: Sleuth
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Sleuth は、DevOps スタック全体でソフトウェアのデプロイを追跡できるようにするデプロイ追跡ツールです。Datadog インテグレーションにより、Sleuth は洞察に満ちた有意義で実用的なリアルタイムデータを提供し、コードに加えた変更の影響を明確に確認できるようにします。
 
-## セットアップ
+## 計画と使用
 
 Datadog インテグレーションを追加するには
 
@@ -84,11 +86,11 @@ Datadog インテグレーションを追加するには
 
 ![][3]
 
-### インストール
+### インフラストラクチャーリスト
 
 Datadog Sleuth インテグレーションは、Sleuth アカウントからのみインストールされます。Sleuth で Datadog API とアプリケーションキーを指定する以外に、Datadog アカウントから行う必要がある設定や追加の構成はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 - **Add metric** ドロップダウンをクリックし、受信した Datadog メトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
 
@@ -99,17 +101,17 @@ Datadog Sleuth インテグレーションは、Sleuth アカウントからの�
 コンフィギュレーションが完了すると、Sleuth はデプロイで Datadog メトリクスを表示します。Sleuth のデプロイカードでメトリクスがどのように伝達されるかについて詳しくは、[**ダッシュボード**][5]を参照してください。
 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Sleuth インテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Sleuth インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Sleuth インテグレーションには、イベントは含まれません。
 
@@ -120,7 +122,7 @@ Sleuth インテグレーションには、イベントは含まれません。
 
 Datadog インテグレーションが切断され、その組織内のプロジェクトで使用できなくなります。Datadog インテグレーションに加えたプロジェクトレベルの変更はすべて失われます。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、このインテグレーションの[メインテナー][6]までお問い合わせください。
 

@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Application Security Management
-kind: documentation
 aliases:
 - /security/security_monitoring/getting_started/
 further_reading:
@@ -16,9 +15,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
-- link: "/getting_started/application_security/vulnerability_management"
+- link: "/getting_started/application_security/software_composition_analysis"
   tag: "Guide"
-  text: "Getting Started with Application Vulnerability Management"
+  text: "Getting Started with Software Composition Analysis"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -33,13 +32,13 @@ This guide walks you through best practices for getting your team up and running
 ## Identify services that have security risk
 
 
-**Identify services vulnerable or exposed to attacks** that would benefit from ASM. Navigate to the [ASM Setup page][1] and select the services recommended there.
+**Identify services vulnerable or exposed to attacks** that would benefit from ASM. On the [**Service Catalog > Security page**,][1] view and select the services you wish to enable.
 
 {{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
 
 These security insights are detected from data reported by APM. The insights help prioritize your security efforts. ASM identifies, prioritizes, and helps remediate all security risks on your services.
 
-**Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog tracing library version. From the [APM Service Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
+**Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog tracing library version. From the [Security Service Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
 
 
 {{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Service Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
@@ -49,14 +48,17 @@ These security insights are detected from data reported by APM. The insights hel
 
 ### Enable ASM with in-app instructions
 
-Go to the [ASM Setup page][1] and follow the instructions to get started. This includes:
+On the [ASM landing page,][18] follow the instructions to get started. This includes:
 - Guided selection of services that would benefit from ASM.
 - Configuring your Datadog tracing libraries with an environment variable.
 - Restarting your services. </br>
 
-1. [Go to ASM][18] and click **Get Started with ASM**.
-2. Select services exposed to risk that are recommended by Datadog.
+1. Click **Get Started with ASM**.
+2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Code Security), and find and enable threat detection on your services (Threat Management).
 3. Follow the instructions to get started with ASM.
+
+   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
+
 
 ### Enable ASM with Remote Configuration
 #### Prerequisites:
@@ -101,7 +103,7 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/asm/services-setup/services-selection?services=recommended
+[1]: https://app.datadoghq.com/services?&lens=Security
 [2]: https://app.datadoghq.com/services?hostGroup=%2A&lens=Security
 [3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /security/application_security/how-appsec-works/
@@ -124,4 +126,5 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [21]: /agent/remote_config?tab=configurationyamlfile#setup
 [22]: https://app.datadoghq.com/security/configuration/reports
 [23]: https://app.datadoghq.com/security/configuration/notification-rules
+
 

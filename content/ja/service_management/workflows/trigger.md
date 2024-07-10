@@ -1,24 +1,31 @@
 ---
+algolia:
+  tags:
+  - ワークフロー
+  - tracing_otel_inst_java
+  - ワークフローの自動化
 aliases:
 - /ja/workflows/trigger
 disable_toc: false
 further_reading:
+- link: /getting_started/workflow_automation/
+  tag: Documentation
+  text: Workflow Automation を始める
 - link: /service_management/workflows/access/#service-accounts/
   tag: Documentation
   text: ワークフローのサービスアカウントについての詳細はこちら
-- link: dashboards
+- link: serverless_aws_lambda
   tag: Documentation
   text: ダッシュボードの設定についての詳細はこちら
-- link: security/explorer
+- link: /security
   tag: Documentation
   text: セキュリティシグナルの詳細はこちら
-- link: モニター
-  tag: Documentation
+- link: ノートブック
+  tag: ドキュメント
   text: モニターの詳細はこちら
 - link: /security/cloud_security_management/workflows
   tag: ドキュメント
   text: Workflow Automation によるセキュリティワークフローの自動化
-kind: documentation
 title: ワークフローをトリガーする
 ---
 
@@ -53,6 +60,16 @@ title: ワークフローをトリガーする
 1. **Execution parameters** の下で、ワークフロー入力にマッピングしたテンプレート変数が自動的に入力されます。マップされていない実行パラメーターの値を入力するか、必要であれば既存の値を編集します。
 1. ワークフローを実行するには、**Run** をクリックします。
 
+## ワークフローをワークフローからトリガーする
+
+**Trigger Workflow** アクションを使用すると、別のワークフローから子ワークフロー をトリガーすることができます。例えば、複雑な一連のステップをいくつかのワークフローで再利用する場合、すべてのワークフローでステップを再作成する必要はありません。その代わりに、新しいワークフローにステップを追加し、Trigger Workflow アクションを使用して他のワークフローでトリガーします。
+
+<div class="alert alert-info">請求上、子ワークフローのトリガーは新規ワークフローの実行として登録されます。</div>
+
+子ワークフローに[入力パラメーター][5]がある場合、これらのパラメーターは Trigger Workflow アクションの必須フィールドとして表示されます。以下の例では、子ワークフローの入力パラメーターとして `service_name` が設定されているため、**service_name** 入力パラメーターは必須となります。
+
+{{< img src="service_management/workflows/trigger-workflow-step.png" alt="子ワークフローでは、service-name 入力パラメーターが必須です" style="width:100%;" >}}
+
 ## ワークフローをモニターからトリガーする
 
 ワークフローをモニターからトリガーするには
@@ -63,13 +80,13 @@ title: ワークフローをトリガーする
 1. メッセージセクションに、ワークフローの完全なメンション名を追加します。
    - メンション名は `@workflow-` で始まる必要があります。例えば、`@workflow-my-workflow` のようになります。
    - ワークフローにトリガー変数を渡すには、カンマで区切ったリストで `@workflow-name(key=value, key=value)` という構文を使用します。例えば、`@workflow-my-workflow(name="Bits", alert_threshold=threshold)` のようになります。
-1. モニターを保存します。
+1. モニターを保存。
 
 {{< img src="service_management/workflows/monitor-trigger.png" alt="モニタートリガーをモニターのメッセージセクションに追加する" >}}
 
 モニターのしきい値に達するたびに、モニターはワークフローの実行をトリガーします。
 
-<div class="alert alert-info">スケジュールされたワークフローおよびトリガーされたワークフローは、公開されるまで自動的には実行されません。ワークフローを公開するには、ワークフローのページから <strong>Publish</strong> をクリックします。公開されたワークフローは、ワークフローの実行に基づいてコストが発生します。詳細は、<a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog の料金ページ</a>をご覧ください。</div>
+<div class="alert alert-info">スケジュールされたワークフローおよびトリガーされるワークフローは、公開されるまで自動的に実行されません。ワークフローを公開するには、ワークフローのページから <strong>Publish</strong> をクリックします。公開されたワークフローは、ワークフローの実行に基づいてコストが発生します。詳細は、<a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog の料金ページ</a>を参照してください。</div>
 
 ## ワークフローをセキュリティシグナルからトリガーする
 
@@ -83,11 +100,12 @@ title: ワークフローをトリガーする
 1. ワークフローキャンバスで、**Add an Automated Trigger** をクリックし、**@mention** を選択します。
 1. **@workflow-** の横に、トリガーのメンション名を入力します。メンション名は一意でなければなりません。
 1. ワークフローを保存します。
-1. [Setup & Configuration][3] ページから、ワークフローのトリガーとなる検出ルールを探すか、新しいルールを作成します。
+1. [Configuration][3] ページから、ワークフローのトリガーに使用したい通知ルールを見つけるか、新しいルールを作成します。
 1. **Recipient** セクションに、ワークフローの完全なメンション名を追加します。例えば、`@workflow-my-workflow` のようになります。
+1. 一意の通知名を追加します。
 1. **Save and Activate** をクリックします。
 
-{{< img src="service_management/workflows/notification-rule-trigger.png" alt="通知ルールの受信者セクションにワークフロー名を追加する" >}}
+{{< img src="service_management/workflows/notification-rule-trigger2.png" alt="通知ルールの受信者セクションにワークフロー名を追加する" >}}
 
 通知ルールが発動するたびに、ワークフローの実行がトリガーされます。
 
@@ -114,7 +132,7 @@ Cloud SIEM Security Signal のパネルから手動でワークフローを開�
 1. (オプション) ワークフローの説明を **Memo** フィールドに入力します。
 1. **Save** をクリックします。
 
-<div class="alert alert-info">スケジュールされたワークフローおよびトリガーされたワークフローは、公開されるまで自動的に実行されません。ワークフローを公開するには、ワークフローのページから <strong>Publish</strong> をクリックします。公開されたワークフローは、ワークフローの実行に基づいてコストが発生します。詳細は、<a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog の料金ページ</a>を参照してください。</div>
+<div class="alert alert-info">スケジュールされたワークフローおよびトリガーされるワークフローは、公開されるまで自動的に実行されません。ワークフローを公開するには、ワークフローのページから <strong>Publish</strong> をクリックします。公開されたワークフローは、ワークフローの実行に基づいてコストが発生します。詳細は、<a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog の料金ページ</a>を参照してください。</div>
 
 ## 実行履歴
 
@@ -126,11 +144,12 @@ Cloud SIEM Security Signal のパネルから手動でワークフローを開�
 
 ワークフローの最初の実行履歴には、過去のワークフロー実行のリストと各実行が成功したか失敗したかがパネルで表示されます。失敗には、失敗したワークフローステップへのリンクが含まれます。リスト内のワークフロー実行をクリックすることで、それを検査することができます。ワークフローキャンバスの任意の場所をクリックすることで、いつでも初期実行履歴に戻ることができます。
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /ja/security/cloud_security_management/workflows
+[5]: /ja/service_management/workflows/build/#input-parameters

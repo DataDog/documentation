@@ -1,42 +1,62 @@
 ---
 title: How to use Terraform to restrict the editing of a dashboard
-kind: guide
 aliases:
   - /dashboards/faq/how-to-use-terraform-to-restrict-dashboards
   - /dashboards/guide/how-to-use-terraform-to-restrict-dashboards
 ---
 
 
-## Introduction
+## Restricting a dashboard using the restricted_roles attribute
 
-Previously when you wanted to restrict editing of dashboards created and managed by [Terraform][1], you would use the `is_read_only` attribute to define that editing the dashboard is restricted to the creator or users with the Access Management (`user_access_manage`) permission in your organization. With the introduction of `restricted_roles`, you can list specific roles that can edit this dashboard within your organization.
+The `restricted_roles` attribute can be used to restrict editing of the dashboard to specific roles. The field takes a list of IDs of roles, and authorizes any associated users.
 
-## Restricting a dashboard
+Example usage:
 
-If you're already using `is_read_only` in your definition, this continues to work while your organizational users see and use the role list. To properly synchronize your Terraform definitions and the experience the Datadog application, complete the following steps:
+```hcl
+resource "datadog_dashboard" "example" {
+  title         = "Example dashboard"
+  restricted_roles = ["<role_id_1>", "<role_id_2>"]
+}
+```
 
-1. Update your Datadog Terraform provider to version 3.1.0 or above.
+**Note**: The `is_read_only` attribute is deprecated. It is recommended to use the `restricted_roles` attribute or restriction policies to manage access to your dashboards.
 
-2. Find the UUID of the roles that you want to restrict by either retrieving the UUID from the [Roles APIs][2] or Roles UI, or referring to role ID as defined in Terraform for [Terraform managed Roles][3].
+## Restricting a dashboard using a restriction policy
 
-3. Where you're using `is_read_only` in Dashboard definitions, replace them with `restricted_roles`:
+<div class="alert alert-warning">Restriction policies are in private beta. Contact <a href="/help/">Datadog Support</a> or your Customer Success Manager for access.</div>
 
-{{< img src="dashboards/guide/terraform_is_read_only_definition.png" alt="Read-only dashboards" style="width:80%;">}}
+[Restriction Policies][1] allow you to restrict the editing of dashboards and other resources to specific principals, including roles, teams, users, and service accounts.
 
-{{< img src="dashboards/guide/terraform_restricted_role_definition.png" alt="Dashboards restricted by roles" style="width:80%;">}}
+Example usage:
 
-## Common issues
+```hcl
+resource "datadog_dashboard" "example" {
+  title         = "Example dashboard"
+  # Do not use restricted_roles or is_read_only attributes
+}
 
-### `is_read_only` is still enabled for my dashboard
+resource "datadog_restriction_policy" "example" {
+ resource_id = "dashboard:${datadog_dashboard.example.id}"
+  bindings {
+     principals = ["org:<org_id>"]
+     relation = "viewer"
+  }
+  bindings {
+     principals = ["role:<role_id_1>", "role:<role_id_2>"]
+     relation = "editor"
+  }
+}
+```
 
-This configuration still works. Every Terraform run detects any changes to roles or read only and notify you if `is_read_only` is being changed.
+Role IDs can be retrieved from the [Roles API][2], [Roles UI][5], or by using the role ID defined in Terraform for [datadog_role][3] resources.
 
-### Terraform is warning that `is_read_only` has been removed
+Org ID can be obtained from the [GET /api/v2/current_user API][4] request. Find it in the `data.relationships.org.data.id` field. 
 
-This is because your browser converts the old permission flag to the newer and more advanced permissions scheme. If you update terraform to 3.1.0 or above, the new restricted roles fields is available.
 
-This change is an aesthetic change only, and doesn't change any functionality or security settings of the dashboard. When you re-apply your Terraform configuration, it replaces the change with the original `is_read_only` attribute.
 
-[1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard
+
+[1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/restriction_policy
 [2]: /api/latest/roles/#list-roles
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
+[4]: https://app.datadoghq.com/api/v2/current_user
+[5]: https://app.datadoghq.com/organization-settings/roles

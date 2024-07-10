@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self hosted Postgres
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted Postgres.
 further_reading:
 - link: "/integrations/postgres/"
@@ -8,10 +7,6 @@ further_reading:
   text: "Basic Postgres Integration"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
@@ -24,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 
 Prerequisites
 : Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
@@ -315,7 +310,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
-[2]: /agent/basic_agent_usage#agent-overhead
+[2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html

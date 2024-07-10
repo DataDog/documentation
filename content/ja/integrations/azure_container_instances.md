@@ -16,7 +16,7 @@ integration_id: azure-containerinstances
 integration_title: Microsoft Azure Container Instances
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_container_instances
 public_title: Datadog-Microsoft Azure Container Instances インテグレーション
@@ -24,33 +24,34 @@ short_description: Azure Container Instances のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Container Instances は、開発者が基底のインフラストラクチャーをプロビジョニングおよび管理する必要なくコンテナをデプロイできるサービスです。
 
 Datadog Azure インテグレーションを使用して Azure Container Instances からメトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_container_instances" >}}
 
 
-### イベント
+### ヘルプ
 
 Azure Container Instances インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure Container Instances インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

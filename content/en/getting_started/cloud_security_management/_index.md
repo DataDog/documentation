@@ -1,13 +1,12 @@
 ---
 title: Getting Started with Cloud Security Management
-kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
   text: "Cloud Security Management"
-- link: "/security/misconfigurations/custom_rules/schema/"
+- link: "/infrastructure/resource_catalog/schema/"
   tag: "Documentation"
-  text: "CSM Misconfigurations cloud resources schema"
+  text: "Cloud Resources Schema Reference"
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes with Datadog Workflows"
@@ -17,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detecting-leaked-credentials/"
   tag: "Blog"
   text: "How we detect and notify users about leaked Datadog credentials"
+- link: "https://www.datadoghq.com/blog/security-posture-csm/"
+  tag: "Blog"
+  text: "Report on changes to your security posture with Cloud Security Management"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
@@ -34,11 +36,11 @@ This guide walks you through best practices for getting your team up and running
 ## Phase 1: Deployment
 
 1. Install the [Datadog Agent (version 7.46 or above)][4].
-2. Enable CSM for for your cloud resources and infrastructure:
-    - **CSM Threats**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
-    - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
-    - **CSM Identity Risks**: Enable [AWS resource collection][26] and [Cloudtrail logs forwarding][27].
-    - **CSM Vulnerabilities**: [Container image scanning][23] and [host scanning][24] instructions for Kubernetes, ECS EC2 instances, and host-based installations.
+2. [Enable CSM for for your cloud resources and infrastructure][5]:
+    - **CSM Threats**: Kubernetes, Docker, and host-based installations.
+    - **CSM Misconfigurations**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
+    - **CSM Identity Risks**: Enable AWS resource collection and Cloudtrail logs forwarding.
+    - **CSM Vulnerabilities**: Container image scanning and host scanning instructions for Kubernetes, ECS EC2 instances, and host-based installations.
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
 4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
 5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
@@ -62,33 +64,24 @@ This guide walks you through best practices for getting your team up and running
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/
-[2]: /security/misconfigurations/
+[2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: /security/threats/setup/?tab=kuberneteshelm#configure-the-csm-threats-agent
-[6]: /security/threats/setup/?tab=docker#configure-the-csm-threats-agent
-[7]: /security/threats/setup/?tab=hostothers#configure-the-csm-threats-agent
-[8]: /security/misconfigurations/setup?tab=kubernetes
-[9]: /security/misconfigurations/setup?tab=docker
-[10]: /security/misconfigurations/setup?tab=aws
-[11]: /security/misconfigurations/setup?tab=azure
-[12]: /security/misconfigurations/setup?tab=googlecloud
+[5]: /security/cloud_security_management/setup
 [13]: https://app.datadoghq.com/security/csm
 [14]: /security/default_rules/#cat-cloud-security-management
-[15]: /security/misconfigurations/signals_explorer/
-[16]: /security/misconfigurations/findings/
+[15]: /security/cloud_security_management/misconfigurations/signals_explorer/
+[16]: /security/cloud_security_management/misconfigurations/findings/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
-[19]: /security/misconfigurations/custom_rules
+[19]: /security/cloud_security_management/misconfigurations/custom_rules
 [20]: /security/threats/agent_expressions
-[21]: /security/misconfigurations/frameworks_and_benchmarks
+[21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
-[23]: /security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities
-[24]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-csm-for-vulnerabilities
 [25]: https://app.datadoghq.com/containers/images
 [26]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [27]: /integrations/amazon_cloudtrail/#send-logs-to-datadog
-[28]: /security/identity_risks/
+[28]: /security/cloud_security_management/identity_risks/
 [29]: https://app.datadoghq.com/security/identities
 [30]: https://app.datadoghq.com/security/infra-vulnerability
 [31]: https://app.datadoghq.com/security/configuration/reports

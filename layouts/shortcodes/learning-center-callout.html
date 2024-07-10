@@ -1,0 +1,28 @@
+{{/*  
+    btn_title: string - title of the button
+    btn_url: string - url of the button
+    header: string - title of the callout
+    .Inner: string - content of the callout
+*/}}
+
+{{ $btn_title := .Get "btn_title" }}
+{{ $btn_url := .Get "btn_url" }}
+{{- $header := .Get "header" -}}
+<div class="card learning-center-callout mb-4">
+
+    <div class="card-body p-2 d-flex flex-column">
+        <div class="card-content">
+            <img class="img-fluid mb-2 mb-md-0" src="{{ .Site.Params.img_url}}images/learning-center-bits-logo-2.png" alt="learning center">
+            <div>
+                <h5 class="card-title text-black mt-0 mb-1">{{$header}}</h5>
+                <p class="card-text mb-2">{{.Inner}}</p>
+            </div>
+        </div>
+        <a href="{{ $btn_url }}"
+            target="_blank"
+            class="col-6 col-md-3 btn btn-primary pb-1 align-self-end d-flex flex-column justify-content-center"
+        >
+            {{ $btn_title | upper }}
+        </a>
+    </div>
+</div>

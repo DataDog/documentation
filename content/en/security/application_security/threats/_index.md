@@ -1,6 +1,5 @@
 ---
 title: Application Threat Management
-kind: documentation
 further_reading:
 - link: "/security/application_security/threats/add-user-info/"
   tag: "Documentation"
@@ -8,9 +7,9 @@ further_reading:
 - link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Configuring your ASM setup"
-- link: "/security/application_security/risk_management/"
+- link: "/security/application_security/software_composition_analysis/"
   tag: "Documentation"
-  text: "Application Vulnerability Management"
+  text: "Software Composition Analysis"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How ASM Works"

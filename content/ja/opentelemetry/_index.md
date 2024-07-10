@@ -32,7 +32,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/
   tag: ブログ
   text: Datadog APM で OTel インスツルメンテーションさ れたアプリのランタイムメトリクスを監視する
-kind: ドキュメント
 title: Datadog の OpenTelemetry
 ---
 
@@ -58,7 +57,7 @@ Datadog は、[W3C トレースコンテキスト規格][6]をサポートして
 
 [1]: https://opentelemetry.io/
 [2]: https://www.cncf.io/
-[3]: /ja/opentelemetry/otel_collector_datadog_exporter/
+[3]: /ja/opentelemetry/collector_exporter/
 [4]: /ja/opentelemetry/otlp_ingest_in_the_agent/
 [5]: /ja/tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/

@@ -6,112 +6,107 @@ further_reading:
 - link: dashboards/querying/#incident-management-analytics
   tag: Documentation
   text: インシデント管理分析
-kind: documentation
 title: インシデント詳細ページ
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog {{< region-param key="dd_site_name" >}} サイトでは、Incident Management はご利用いただけません。</div>
-{{< /site-region >}}
+## 概要
 
-Datadog のすべてのインシデントには、インシデントのプロパティフィールド、シグナル、タスク、ドキュメント、対応者、および通知を管理できる、独自のインシデント詳細ページがあります。インシデント詳細ページは、[新しいインシデントを作成][1]した後に利用できます。インシデント詳細ページには、主要なアクションにすばやくアクセスできるグローバルヘッダーがあり、ページの残りの部分は、タブを使用して関連するインシデントデータをグループ化する異なるセクションに分かれています。これらのセクションの最初は概要です。
+{{< img src="/service_management/incidents/incident_details/incident_overview_page.png" alt="Active SEV-4 インシデントのインシデント詳細ページ。" style="width:100%;">}}
+
+Datadog のすべてのインシデントには、インシデントのプロパティフィールド、シグナル、タスク、ドキュメント、対応者、および通知を管理できる独自の Incident Details ページがあります。Incident Details ページは、[新しいインシデントを作成][1]した後に利用できます。Incident Details ページには、キーアクションに素早くアクセスするためのグローバルヘッダーがあり、残りのページ本体は、関連するインシデントデータをグループ化するためのタブによって、異なるセクションに分かれています。最初のセクションは Overview です。
 
 ## グローバルヘッダー
 
-{{< img src="monitors/incidents/incident_global_header.jpeg" alt="インシデントグローバルヘッダー" style="width:80%;">}}
+グローバルヘッダーは、[Status and Severity][2] セレクタへのアクセス、および [Incident Integrations][3] へのリンクを提供します。Slack および Microsoft Teams のリンクについて、新しいインシデントごとに自動リンクを構成する方法の詳細については、[インシデントの設定][4]を参照してください。
 
-グローバルヘッダーは、[Status and Severity][2] セレクターへのアクセス、および [Incident Integrations][3] へのリンクを提供します。インシデントを解決済ステータスに移動すると、ヘッダーに[ポストモーテムテンプレート][4]を使用してポストモーテムノートブックを生成するオプションが表示されます。インシデント設定でポストモーテムテンプレートを構成し、ポストモーテムの構造とコンテンツを事前に定義します。
+インシデントを解決済みステータスに移動すると、[事後分析テンプレート][5]を使用して事後分析ノートブックを生成するオプションがヘッダーに表示されます。[Incident Settings][6] ページで事後分析テンプレートを構成して、事後分析の構造と内容を事前に定義します。
 
-## 概要セクション
+## インシデント詳細の概要セクション
 
-{{< img src="monitors/incidents/incident_overview.jpeg" alt="インシデント概要セクション" style="width:80%;">}}
+Overview セクションを使用して、インシデントのプロパティを指定し、顧客への影響を定義します。
 
-インシデントのプロパティを指定し、顧客への影響を定義するには、概要セクションを使用します。 
+デフォルトでは、すべてのインシデントには以下のプロパティがあります。
 
-デフォルトでは、すべてのインシデントが以下のプロパティを持ちます。
-
-* 根本原因
+* Root Cause
 * サービス
-* チーム
+* ヘルプ
 * 検出方法
-* サマリー
+* ダウンタイム
 
 プロパティは以下の 3 つのセクションに分かれています。
 
-* 何が起こったのか
-* なぜそうなったのか
-* 属性
+* 発生した事象
+* 発生原因
+* .NET コア
 
-[インシデント設定][5]では、Datadog のメトリクスタグから `<KEY>:<VALUE>` のペアを使用して追加のプロパティフィールドを追加したり、カスタムフィールドを作成したりします。インシデントのプロパティに値を割り当てると、[インシデントホームページ][6]でインシデントのサブセットを簡単に検索したり、[インシデント管理分析][7]を使用してクエリを形成することができます。また、プロパティフィールドを並べ替えたり、異なる見出しに移動したりすることで、最も重要なプロパティを目立つ場所に配置することができます。
+[Incident Settings][7] で、Datadog メトリクスタグから `<KEY>:<VALUE>` ペアを使用してプロパティフィールドを追加するか、カスタムフィールドを作成します。インシデントのプロパティに値を割り当てると、[Incident Homepage][8] でインシデントのサブセットを検索したり、[Incident Management Analytics][9] を使用する際にクエリを形成したりできます。プロパティフィールドを並べ替えたり、異なる見出しに移動させたりして、最も重要なプロパティを目立つ場所に配置することもできます。
 
-インシデントが顧客向けである場合、影響セクションで詳細を指定します。
+インシデントが顧客向けの場合は、Impact セクションで詳細を指定します。
 
 1. **Add** をクリックします。
 2. 影響の開始日時を指定します。
-3. 影響の終了日時を指定するか、影響がまだ進行中の場合は空白にします。
-4. 顧客への影響の性質を `Scope of impact` (影響の範囲) に記述します。
+3. 影響の終了日時を指定するか、影響が継続中の場合は空白のままにします。
+4. `Scope of impact` に顧客に対する影響の性質を記述します。
 5. **Save** をクリックします。
 
-プロパティフィールドを収容するだけでなく、概要セクションには、以下のような一目でわかるサマリーモジュールが用意されています。
+プロパティフィールドの他に、Overview セクションには以下のような一目でわかるサマリーモジュールがあります。
 
-1. *Condensed Timeline*: インシデントの状態が変化した時間、影響が開始された時間、影響が終了した時間を表示し、インシデントのライフサイクルの概要を表示します。
-2. *Latest Notifications*: インシデントに対して送信された最新の通知が表示され、[通知セクション](#notifications-section)の通知の全リストに素早くアクセスできます。
-3. *Pending Tasks*: 直近の未完了タスクを表示し、[修復セクション](#remediation-section)のタスクの全リストに素早くアクセスできます。
-4. *Responders*: 現在のインシデントコマンダーと、インシデントに割り当てられた残りの対応者のアバターが表示されます。
-5. *Recent timeline entries*: インシデントタイムラインの最新の 5 つのエントリを表示し、[タイムラインセクション](#timeline-section)全体を見るためのクイックアクセスを提供します。
+1. *Condensed Timeline*: インシデントのライフサイクルの概要を把握できるように、インシデントが状態を変更した時間、影響が開始した時間と終了した時間が表示されます。
+2. *Latest Notifications*: [Notification セクション](#notifications-section)にある通知の全リストに素早くアクセスできるように、インシデントに対して送信された最新の通知が表示されます。
+3. *Pending Tasks*: [Remediation セクション](#remediation-section)にあるタスクの全リストに素早くアクセスできるように、最新の未完了タスクが表示されます。
+4. *Responders*: 現在のインシデントコマンダーと、インシデントに割り当てられている残りの対応者のアバターが表示されます。
+5. *Recent timeline entries*: [Timeline セクション](#timeline-section)全体に素早くアクセスできるように、インシデントタイムラインの最新の 5 つのエントリが表示されます。
 
-## タイムラインセクション
+## Timeline セクション
 
-{{< img src="monitors/incidents/incident_timeline.jpeg" alt="インシデントタイムライン" style="width:80%;">}}
+{{< img src="/service_management/incidents/incident_details/incident_details_timeline.png" alt="インシデントにエスカレーションされたケースの進行を示すインシデントの詳細の Timeline ビュー" style="width:100%;">}}
 
-インシデントタイムラインは、インシデント中に行われた作業に関する主要な情報源です。アクションが実行されると、新しいセルが時系列にタイムラインに追加され、変更内容、変更者、変更時刻が記録されます。 
+Incident Timeline は、インシデント中に行われた作業の主な情報源です。アクションが実行されると、新しいセルが時系列でタイムラインに追加され、変更内容、変更者、変更時刻がキャプチャされます。
 
-### コンテンツタイプ
+### Content types
 
-各セルには、そのセルが含む情報の種類を示すコンテンツタイプがあります。
+各セルには、そのセルに含まれる情報の種類を示す独自のコンテンツタイプがあります。
 
-|  コンテンツタイプ      | 説明                                                                                            |
+|  Content type      | 説明                                                                                            |
 | ------------------ | ------------------------------------------------------------------------------------------------------ |
-| 対応者ノート     | インシデント対応者が手書きしたメモ。対応者ノートには次のサブタイプがあります。:<br>- *グラフ*: 対応者ノートには、1 つ以上の Datadog のグラフが含まれます<br>- *リンク*: 対応者ノートにはハイパーリンクが含まれています<br>- *コード*: 対応者ノートには、コードブロックのための Markdown 構文でラップされたテキストが含まれています
-| インシデントアップデート    | インシデントのプロパティ (ステータスや深刻度を含む) またはその影響に加えられたすべての変更。
-| インテグレーションアップデート | インシデント管理製品の[インテグレーション][3]を通して行われたすべての変更。
-| タスク               | インシデントの詳細ページの修復セクションにあるインシデントタスクに加えられたすべての変更。
-| 通知送信  | インシデント対応者から手動で通知が送信された場合のアップデート。
+| Responder note     | インシデント対応者が手動で書いたメモ。対応者メモには以下のサブタイプがあります。<br>- *Graph*: 対応者メモに 1 つ以上の Datadog グラフが含まれている<br>- *Link*: 対応者メモにハイパーリンクが含まれている<br>- *Code*: 対応者メモにコードブロックの Markdown 構文でラップされたテキストが含まれている
+| Incident update    | インシデントのプロパティ (ステータスや重大度を含む) やその影響に加えられた変更。
+| Integration update | Incident Management 製品の[インテグレーション][3]を通じて行われた変更。
+| Task               | Incident Details ページの Remediation セクションでインシデントタスクに加えられたすべての変更。
+| Notification sent  | インシデント対応者から手動通知が送信された場合の更新。
 
-インシデント詳細ページの異なるセクションを切り替えるためのタブのすぐ下にあるテキストボックスを使って、タイムラインに直接対応者ノートを追加します。作成時に対応者ノートのタイムスタンプをカスタマイズして、タイムラインの時系列で以前の時点に関連した重要な情報を取り込むことができます。自分が作成した対応者ノートについては、内容やタイムスタンプを編集したり、ノートを完全に削除したりすることができます。また、リンクを特定のセルにコピーして、チームメイトと共有することもできます。対応者ノートは、[Slack からタイムラインに追加][8]することができます。
+Incident Details ページのセクションを切り替えるタブのすぐ下にあるテキストボックスを使って、タイムラインに直接対応者メモを追加します。作成時の対応者メモのタイムスタンプをカスタマイズすることで、タイムラインの時系列で、以前の時点に関連する重要な情報をキャプチャすることができます。自分が作成した対応者メモについては、内容やタイムスタンプを編集したり、メモを完全に削除したりできます。また、特定のセルへのリンクをコピーして、チームメイトと共有することもできます。対応者メモは [Slack からタイムラインに追加][10]することができます。
 
-グラフセルについては、[組織設定][9]でグラフの共有 URL を有効にすると、グラフの定義が保存されます。グラフセルがタイムラインに追加されると、ダッシュボード、ノートブック、その他のページで見られるような完全なインタラクティブホーバーの状態が表示されます。タイムラインに追加されてから 24 時間経過すると、グラフは、グラフが表示していたものをキャプチャした静止画像に置き換えられます。これは、短いリテンションデータを表示しているグラフが、グラフ内のライブデータの有効期限が切れた後でも、バックアップ画像をキャプチャできるようにするためのものです。
+グラフセルに限り、[組織設定][11]で有効化されている場合、グラフの定義はグラフの共有 URL を用いて保存されます。タイムラインにグラフセルを追加すると、ダッシュボード、ノートブック、その他のページに見られる完全なインタラクティブホバー状態を備えています。タイムラインに追加されてから 24 時間後、グラフはグラフが表示していたものをキャプチャした静止イメージに置き換えられます。これにより、短期間保持されるデータを表示するグラフについても、グラフ内のライブデータが失効した後でもバックアップイメージが取得されることを保証します。
 
-デフォルトでは、タイムラインのセルは「古い順」にソートされますが、タイムラインの上部にあるボタンを使って「新しい順」に変更することができます。
+デフォルトでは、タイムラインのセルは `oldest first` (古い順) にソートされますが、タイムラインの一番上にあるボタンを使って `newest first` (新しい順) に変更することができます。
 
-## 修復セクション
+## Remediation セクション
 
-{{< img src="monitors/incidents/incident_remediation.jpeg" alt="インシデント修復セクション" style="width:80%;">}}
+インシデントの修復プロセスに関連するドキュメントやリソースを保存したり、修復プロセスの主要タスクを追跡するには、Remediation セクションを使用します。
 
-修復セクションは、インシデントの修復プロセスに関連するドキュメントやリソースを保存し、修復プロセスの主要なタスクを追跡するために使用します。
+ドキュメントを追加するには、ドキュメントの URL を貼り付け、素早くアクセスできるようにリンクに人間が読める名前を付けます。
 
-ドキュメントは、ドキュメントの URL を貼り付けて追加することができ、リンクには素早くアクセスできるように人間が読みやすい名前を付けることができます。
+インシデントタスクは、Datadog の [Slack インテグレーション][12]と同様に、Remediation セクションで直接作成することができます。
 
-インシデントタスクは、修復セクションで直接作成されるほか、Datadog の [Slack インテグレーション][10]を通して作成されます。 
+Remediation セクションの creation テキストボックスにタスクの説明を入力します。タスクを Datadog ユーザーに割り当てるには、説明テキストボックスに `@` と入力するか、タスク作成後に `Assignees` 列を使用します。インシデントタスクは複数の担当者を持つことができます。タスクの作成後、期限を割り当てることもできます。
 
-修復セクションから、作成テキストボックスにタスクの説明を入力します。Datadog ユーザーにタスクを割り当てるには、説明テキストボックスに `@` と入力するか、タスクの作成後に `Assignees` 列を使用します。インシデントタスクは、複数の担当者を持つことができます。タスクを作成した後、期限を割り当てることもできます。 
+異なるタスクの作業が終了すると、タスクの説明の左にあるチェックボックスをクリックすることで、個々のタスクに完了マークを付けることができます。タスクの数が多い場合は、キーワードで検索したり、完了したタスクを非表示にすることで絞り込むことができます。
 
-異なるタスクの作業が終了すると、タスクの説明の左側にあるチェックボックスをクリックして、個々のタスクに完了の印をつけることができます。タスクの数が多い場合は、キーワード検索で絞り込んだり、完了したタスクを非表示にしたりすることも可能です。
-
-## 対応チームセクション
+## Response Team セクション
 
 <div class="alert alert-warning">
-本機能は公開ベータ版です。
+これはオープンベータ版の機能です。
 </div>
 
-{{< img src="service_management/incidents/incident_response_team.png" alt="特定のインシデントに関するインシデント詳細ページの対応チームセクション" style="width:80%;">}}
+{{< img src="/service_management/incidents/incident_details/incident_response_team.png" alt="割り当てられたインシデントコマンダー、対応者、コミュニケーションリードを示すインシデント詳細対応チームセクション" style="width:100%;" >}}
 
 対応チームセクションでは、他のユーザーを追加し、インシデントの解決プロセスで実行するロールを割り当てることで、対応チームを編成することができます。Datadog が提供するデフォルトの対応者タイプは以下の 2 つです。
 
 1. `Incident Commander` - 対応チームのリーダーを務める責任者
 3. `Responder` - インシデントの調査やその根本的な問題の解決に積極的に貢献している人
 
-カスタムの対応者ロールを作成したい場合は、[Incident Settings の Responder Types][15] で行うことができます。これにより、カスタムの名前と説明で新しい対応者タイプを作成できます。また、対応者タイプが one person role か multi person role かを選択することも可能です。
+カスタムの対応者ロールを作成したい場合は、[Incident Settings の Responder Types][13] で行うことができます。これにより、カスタムの名前と説明で新しい対応者タイプを作成できます。また、対応者タイプが one person role か multi person role かを選択することも可能です。
 
 **注:** これらのロールは、[ロールベースのアクセス制御 (RBAC)][14] システムにおけるロールとは無関係です。RBAC のロールは、Datadog の特定の機能に対するユーザーのアクセス許可を制御します。インシデント管理における対応者タイプシステムは、いかなる点においてもユーザーのアクセス許可を変更するものではありません。それよりも、対応者をインシデントに招待し、対応プロセスにおいて文書化されたロールを付与することで可視性を高めることが目的です。
 
@@ -124,16 +119,17 @@ Datadog のすべてのインシデントには、インシデントのプロパ
 {{< img src="service_management/incidents/incident_notifications.jpeg" alt="インシデント通知" style="width:80%;">}}
 
 インシデントに対するすべてのステークホルダーからの通知は、通知セクションに集約されます。
-このページから直接、通知を手動で作成、下書きとして保存、送信することができます。当該インシデントの[通知ルール][11]によって送信された自動通知も、このセクションにリストされます。
+このページから直接、通知を手動で作成、下書きとして保存、送信することができます。当該インシデントの[通知ルール][15]によって送信された自動通知も、このセクションにリストされます。
 
 手動で通知を作成するには
 
 1. セクションの右上にある **+ New Notification** ボタンをクリックします。
 2. 希望する受信者を入力します。メール、Slack チャンネル、PagerDuty ハンドル、Webhook など、Datadog がサポートする通知ハンドルであれば、どれでもかまいません。
-3. [メッセージテンプレート][12]を選択します。
+3. [メッセージテンプレート][16]を選択します。
 4. Markdown とサポートされているインシデントテンプレート変数を使用して、必要に応じて通知のタイトルとメッセージを編集し、`{{` と入力します。
    - テンプレート変数は、インシデントのプロパティに基づきます。メッセージが送信される前に、すべてのテンプレート変数は、メッセージが送信されたときに利用可能な参照プロパティの対応する値で置き換えられます。
-5. 通知を送信するか、下書きとして保存します。
+5. メッセージのタイムゾーンをカスタマイズするには `{{incident.created}}` 変数を使います。このテンプレート変数はタイムゾーンを設定するオプションを表示します。
+6. 通知を送信するか、下書きとして保存します。
 
 通知セクションは、下書きリストと送信済みリストに分かれています。
 
@@ -148,7 +144,7 @@ Datadog のすべてのインシデントには、インシデントのプロパ
 
 ## はじめに
 
-[Incident Management 入門][13]ガイドのワークフロー例を実行してください。
+[Incident Management 入門][17]ガイドのワークフロー例を実行してください。
 
 ## その他の参考資料
 
@@ -157,15 +153,17 @@ Datadog のすべてのインシデントには、インシデントのプロパ
 [1]: /ja/service_management/incident_management/#creating-an-incident
 [2]: /ja/service_management/incident_management/#describing-the-incident
 [3]: /ja/service_management/incident_management/#integrations
-[4]: /ja/service_management/incident_management/incident_settings#postmortem-templates
-[5]: https://app.datadoghq.com/incidents/settings#Property-Fields
-[6]: https://app.datadoghq.com/incidents
-[7]: /ja/service_management/incident_management/analytics
-[8]: /ja/integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-[9]: https://app.datadoghq.com/organization-settings/public-sharing/settings
-[10]: /ja/integrations/slack/?tab=slackapplicationus#manage-incident-tasks
-[11]: /ja/service_management/incident_management/incident_settings#rules
-[12]: /ja/service_management/incident_management/incident_settings#message-templates
-[13]: /ja/getting_started/incident_management
+[4]: /ja/service_management/incident_management/incident_settings#integrations
+[5]: /ja/service_management/incident_management/incident_settings#postmortem-templates
+[6]: https://app.datadoghq.com/incidents/settings#Postmortems
+[7]: https://app.datadoghq.com/incidents/settings#Property-Fields
+[8]: https://app.datadoghq.com/incidents
+[9]: /ja/service_management/incident_management/analytics
+[10]: /ja/integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+[11]: https://app.datadoghq.com/organization-settings/public-sharing/settings
+[12]: /ja/integrations/slack/?tab=slackapplicationus#manage-incident-tasks
+[13]: /ja/service_management/incident_management/incident_settings/#responder-types
 [14]: /ja/account_management/rbac/?tab=datadogapplication
-[15]: /ja/service_management/incident_management/incident_settings/#responder-types
+[15]: /ja/service_management/incident_management/incident_settings#rules
+[16]: /ja/service_management/incident_management/incident_settings#message-templates
+[17]: /ja/getting_started/incident_management
