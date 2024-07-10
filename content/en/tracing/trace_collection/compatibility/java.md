@@ -238,6 +238,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 | Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
 |-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
+| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                                    | `cxf`                                          |
 | Datanucleus JDO     | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
 | GraphQL             | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
@@ -409,3 +410,4 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [5]: /tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
+[10]: /opentelemetry/interoperability/instrumentation_libraries/
