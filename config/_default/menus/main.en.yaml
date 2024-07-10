@@ -6050,7 +6050,7 @@ menu:
       identifier: account_management_saml_google
       parent: account_management_saml
       weight: 405
-    - name: NoPassword
+    - name: LastPass
       url: account_management/saml/lastpass/
       identifier: account_management_saml_lastpass
       parent: account_management_saml
