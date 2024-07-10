@@ -112,7 +112,7 @@ Add the workflow to your incident notification rule:
 1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
 1. Click **Save**.
 
-## Security Signal triggers
+## Security triggers
 
 You can trigger a workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel. Before you can add a workflow to a Security Signal, the workflow must have a security trigger.
 
