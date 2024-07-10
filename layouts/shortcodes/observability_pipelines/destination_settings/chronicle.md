@@ -10,5 +10,8 @@ To set up the Worker's Google Chronicle destination:
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 1. Select the appropriate **Log Type** in the dropdown menu.
 
+**Note**: Logs sent to the Google Chronicle destination must have ingestion labels. For example, if the logs are from a A10 load balancer, it must have the ingestion label `A10_LOAD_BALANCER`. See Google Cloud's [Support log types with a default parser][10003] for a list of available log types and their respective ingestion labels.
+
 [10001]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [10002]: /logs/log_configuration/archives
+[10003]: https://cloud.google.com/chronicle/docs/ingestion/parser-list/supported-default-parsers#with-default-parser
