@@ -6,8 +6,6 @@ aliases:
 - /static_analysis/rules
 is_beta: true
 type: static-analysis
-algolia:
-  tags: ["static analysis", "static analysis rules", "static analysis scans", "static application security testing", "SAST"]
 rulesets:
   csharp-best-practices:
     title: "Best Practices for C#"
