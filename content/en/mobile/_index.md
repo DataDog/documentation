@@ -1,7 +1,9 @@
 ---
 title: Datadog Mobile App
 aliases:
-- /mobile/
+- /service_management/mobile/
+algolia:
+  tags: ["Datadog mobile app", "mobile device"]
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

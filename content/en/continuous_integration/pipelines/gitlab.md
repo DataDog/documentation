@@ -189,9 +189,14 @@ These filters can also be applied through the facet panel on the left hand side 
 
 ### Correlate infrastructure metrics to jobs
 
-If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
-For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
-[registering a new runner][6]. For existing runners:
+If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them. Datadog infrastructure correlation is possible using different methods:
+
+#### Tagging runners with hostname
+
+The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job. This excludes executors that are autoscaling the infrastructure in order to run the job
+(such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
+
+For existing runners:
 
 {{< tabs >}}
 {{% tab "GitLab &gt;&equals; 15.8" %}}
@@ -207,8 +212,12 @@ through the UI by going to **Settings > CI/CD > Runners** and editing the approp
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
 view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
+#### Instance and Docker Autoscaler executors
 CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
 
+#### Other executors
+
+CI Visibility does not support Infrastructure metrics for other executors such as the Kubernetes executor.
 
 ### View error messages for pipeline failures
 

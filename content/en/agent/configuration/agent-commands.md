@@ -23,9 +23,6 @@ For Linux based systems where the <code>service</code> wrapper command is not av
 
 List of commands to start the Datadog Agent:
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
 | Platform   | Command                                                            |
 |------------|--------------------------------------------------------------------|
 | AIX        | `startsrc -s datadog-agent`                                        |
@@ -36,31 +33,9 @@ List of commands to start the Datadog Agent:
 | Source     | `sudo service datadog-agent start`                                 |
 | Windows    | See the [Windows Agent documentation][3].                          |
 
-[1]: /agent/
-[2]: /agent/docker/
-[3]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform | Command                                   |
-|----------|-------------------------------------------|
-| Linux    | `sudo service datadog-agent start`        |
-| Docker   | See the [Docker Agent documentation][1].  |
-| macOS    | `/usr/local/bin/datadog-agent start`      |
-| Source   | `sudo ~/.datadog-agent/bin/agent start`   |
-| Windows  | See the [Windows Agent documentation][2]. |
-
-[1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{< /tabs >}}
-
 ### Stop the Agent
 
 List of commands to stop the Datadog Agent:
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
@@ -70,32 +45,11 @@ List of commands to stop the Datadog Agent:
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
 | macOS      | `launchctl stop com.datadoghq.agent` *or* through the systray app                |
 | Source     | `sudo service datadog-agent stop`                                                |
-| Windows    | See the [Windows Agent documentation][2].                                        |
-
-[1]: /agent/
-[2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform | Command                                   |
-|----------|-------------------------------------------|
-| Linux    | `sudo service datadog-agent stop`         |
-| Docker   | See the [Docker Agent documentation][1].  |
-| macOS    | `/usr/local/bin/datadog-agent stop`       |
-| Source   | `sudo ~/.datadog-agent/bin/agent stop`    |
-| Windows  | See the [Windows Agent documentation][2]. |
-
-[1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{< /tabs >}}
+| Windows    | See the [Windows Agent documentation][3].                                        |
 
 ### Restart the Agent
 
 List of commands to restart the Datadog Agent:
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
@@ -106,33 +60,12 @@ List of commands to restart the Datadog Agent:
 | Source     | *unsupported Platform*                                                           |
 | Windows    | See the [Windows Agent documentation][3].                                        |
 
-[1]: /agent/
-[2]: /agent/docker/?tab=standard#setup
-[3]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform | Command                                   |
-|----------|-------------------------------------------|
-| Linux    | `sudo service datadog-agent restart`      |
-| Docker   | See the [Docker Agent documentation][1].  |
-| macOS    | `/usr/local/bin/datadog-agent restart`    |
-| Source   | `sudo ~/.datadog-agent/bin/agent restart` |
-| Windows  | See the [Windows Agent documentation][2]. |
-
-[1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Agent status and information
 
 ### Service status
 
 List of commands to display the status of the Datadog Agent:
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 | Platform        | Command                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
@@ -142,40 +75,12 @@ List of commands to display the status of the Datadog Agent:
 | Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
 | macOS           | `launchctl list com.datadoghq.agent` *or* through the systray app             |
 | Source          | `sudo service datadog-agent status`                                           |
-| Windows         | See the [Windows Agent documentation][2].                                     |
-
-
-[1]: /agent/
-[2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform        | Command                                                                  |
-|-----------------|--------------------------------------------------------------------------|
-| Linux           | `sudo service datadog-agent status`                                      |
-| Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent status` |
-| Kubernetes      | `kubectl exec -it <POD_NAME> -- /etc/init.d/datadog-agent status`        |
-| macOS           | `datadog-agent status`                                                   |
-| Source          | `sudo ~/.datadog-agent/bin/agent status`                                 |
-| Windows         | See the [Windows Agent documentation][1].                                |
-
-[1]: /agent/basic_agent_usage/windows/#status-and-information
-{{% /tab %}}
-{{% tab "Cluster Agent" %}}
-
-| Platform   | Command                        |
-|------------|--------------------------------|
-| Kubernetes | `datadog-cluster-agent status` |
-
-{{% /tab %}}
-{{< /tabs >}}
+| Windows         | See the [Windows Agent documentation][5].                                     |
+| Cluster Agent (Kubernetes) | `datadog-cluster-agent status`                                     |
 
 ### Agent information
 
 List of commands to display the status of your Datadog Agent and enabled integrations.
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 | Platform   | Command                                              |
 |------------|------------------------------------------------------|
@@ -183,9 +88,10 @@ List of commands to display the status of your Datadog Agent and enabled integra
 | Linux      | `sudo datadog-agent status`                          |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
 | Kubernetes | `kubectl exec -it <POD_NAME> -- agent status`        |
-| macOS      | `datadog-agent status` or through the [web GUI][1]   |
+| macOS      | `datadog-agent status` or through the [web GUI][4]   |
 | Source     | `sudo datadog-agent status`                          |
-| Windows    | See the [Windows Agent documentation][2].            |
+| Windows    | See the [Windows Agent documentation][5].            |
+| Cluster Agent (Kubernetes) | `datadog-cluster-agent status`       |
 
 A properly configured integration is displayed under **Running Checks** with no warnings or errors, as seen below:
 
@@ -201,48 +107,9 @@ Running Checks
     Average Execution Time : 0ms
 ```
 
-[1]: /agent/basic_agent_usage/#gui
-[2]: /agent/basic_agent_usage/windows/#status-and-information
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform   | Command                                                                |
-|------------|------------------------------------------------------------------------|
-| Linux      | `sudo service datadog-agent info`                                      |
-| Docker     | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent info` |
-| Kubernetes | `kubectl exec -it <POD_NAME> -- /etc/init.d/datadog-agent info`        |
-| macOS      | `datadog-agent info`                                                   |
-| Source     | `sudo ~/.datadog-agent/bin/info`                                       |
-| Windows    | See the [Windows Agent documentation][1].                              |
-
-A properly configured integration is displayed under **Checks** with no warnings or errors, as seen below:
-
-```text
-Checks
-======
- network
- -------
-   - instance #0 [OK]
-   - Collected 15 metrics, 0 events & 1 service check
-```
-
-[1]: /agent/basic_agent_usage/windows/#status-and-information
-{{% /tab %}}
-{{% tab "Cluster Agent" %}}
-
-| Platform   | Command                        |
-|------------|--------------------------------|
-| Kubernetes | `datadog-cluster-agent status` |
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Other commands
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
-The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
+The Agent command-line interface is sub-command based. To see the list of available sub-commands, run:
 ```shell
 <AGENT_BINARY> --help
 ```
@@ -260,10 +127,10 @@ Some options have flags and options detailed under `--help`. For example, use he
 | Subcommand        | Notes                                                                       |
 |-------------------|-----------------------------------------------------------------------------|
 | `check`           | Run the specified check.                                                    |
-| `config`          | [Runtime configuration management][1].                                      |
+| `config`          | [Runtime configuration management][6].                                      |
 | `configcheck`     | Print all configurations loaded & resolved of a running Agent.              |
 | `diagnose`        | Execute connectivity diagnosis on your system.                              |
-| `flare`           | [Collect a flare and send it to Datadog][2].                                |
+| `flare`           | [Collect a flare and send it to Datadog][7].                                |
 | `health`          | Print the current Agent health.                                             |
 | `help`            | Help about any command.                                                     |
 | `hostname`        | Print the hostname used by the Agent.                                       |
@@ -276,11 +143,14 @@ Some options have flags and options detailed under `--help`. For example, use he
 | `stopservice`     | Stop the Agent within the service control manager. Windows only.            |
 | `version`         | Print version info.                                                         |
 
-[1]: /agent/troubleshooting/config/
-[2]: /agent/troubleshooting/send_a_flare/
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/
+[2]: /agent/docker/
+[3]: /agent/basic_agent_usage/windows/
+[4]: /agent/basic_agent_usage/#gui
+[5]: /agent/basic_agent_usage/windows/#status-and-information
+[6]: /agent/troubleshooting/config/
+[7]: /agent/troubleshooting/send_a_flare/
