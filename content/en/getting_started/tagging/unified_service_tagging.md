@@ -71,6 +71,19 @@ To setup unified service tagging in a containerized environment:
 
 3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
+#### Automatic version tagging for containerized environments
+You can use the `version` tag to [monitor deployments][17] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][16].
+
+Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
+
+| Priority         | Version Value |
+|--------------|------------|
+| 1    |  {your version value}       |
+| 2   | {image_tag}_{git_commit_sha}       |
+| 3         |  {image_tag} or {git_commit_sha} if only one is available      |
+
+You need to install Datadog Agent Version 7.52.0 or greater and enable Git in the tracer to fully enable automatic version tagging. You can learn how to enable Git in the tracer by reading [Embed Git information in your build artifacts][18] 
+
 #### Configuration
 
 {{< tabs >}}
@@ -423,3 +436,6 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [13]: https://www.chef.io/
 [14]: https://www.ansible.com/
 [15]: /serverless/configuration/#connect-telemetry-using-tags
+[16]: /watchdog/faulty_deployment_detection/
+[17]: /tracing/services/deployment_tracking/
+[18]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
