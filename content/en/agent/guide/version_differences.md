@@ -1,5 +1,7 @@
 ---
 title: Agent Version differences
+aliases:
+- /agent/versions
 further_reading:
     - link: 'agent/versions/upgrade_to_agent_v7'
       tag: 'Documentation'

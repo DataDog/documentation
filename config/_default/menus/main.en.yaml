@@ -468,26 +468,11 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
-    - name: Versions
-      url: agent/versions
+    - name: Upgrade the Agent
+      url: agent/upgrade
       parent: agent
-      identifier: agent_versions
+      identifier: agent_upgrade
       weight: 9
-    - name: Upgrade to Agent v7
-      identifier: agent_versions_upgrade_to_agent_v7
-      url: agent/versions/upgrade_to_agent_v7/
-      parent: agent_versions
-      weight: 901
-    - name: Upgrade to Agent v6
-      identifier: agent_versions_upgrade_to_agent_v6
-      url: agent/versions/upgrade_to_agent_v6/
-      parent: agent_versions
-      weight: 902
-    - name: Upgrade Between Agent Minor Versions
-      identifier: agent_versions_upgrade_between_agent_minor_versions
-      url: agent/versions/upgrade_between_agent_minor_versions
-      parent: agent_versions
-      weight: 903
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
