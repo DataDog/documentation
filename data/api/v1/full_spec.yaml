@@ -14295,6 +14295,7 @@ components:
       required:
       - password
       - username
+      - type
       type: object
     SyntheticsBasicAuthDigestType:
       default: digest
@@ -14378,6 +14379,7 @@ components:
       - tokenApiAuthentication
       - clientId
       - clientSecret
+      - type
       type: object
     SyntheticsBasicAuthOauthClientType:
       default: oauth-client
@@ -14433,6 +14435,7 @@ components:
       - password
       - tokenApiAuthentication
       - username
+      - type
       type: object
     SyntheticsBasicAuthOauthROPType:
       default: oauth-rop
