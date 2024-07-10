@@ -217,8 +217,6 @@ cascade:
       name: Datadog Code Analysis
       url: https://www.datadoghq.com/code-analysis/
 
-  algolia:
-    tags: ['static analysis', 'static analysis rules', 'static analysis scans', 'static application security testing', 'SAST']
 further_reading:
   - link: "/code_analysis/"
     tag: "Documentation"
