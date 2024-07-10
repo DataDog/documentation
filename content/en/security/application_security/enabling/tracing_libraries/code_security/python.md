@@ -10,7 +10,7 @@ further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
       text: "Adding user information to traces"
-    - link: 'https://github.com/DataDog/dd-trace-dotnet'
+    - link: 'https://github.com/DataDog/dd-trace-py'
       tag: "Source Code"
       text: '.NET Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
