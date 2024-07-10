@@ -153,7 +153,7 @@ build_preview:
     - exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
     - make dependencies
     - make vector_data
-    # - make config
+    - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
     - build_site
