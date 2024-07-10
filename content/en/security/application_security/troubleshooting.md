@@ -419,13 +419,13 @@ If you don't see ASM threat information in the [Trace and Signals Explorer][1] f
    import logging
    logging.basicConfig(level=logging.DEBUG)
    ```
-
+  
    Then, run any HTTP call to the application. You should see the following log:
-
+  
    ```
    DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
    ```
-
+  
    If this log is not present, ASM is not running.
 
 2. Is the tracer working? Can you see relevant traces on the APM dashboard?
@@ -541,7 +541,7 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 
 ## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Service Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue.
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Service Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
 
 ### Confirm ASM is enabled
 
@@ -569,7 +569,7 @@ To disable threat management, remove the `DD_APPSEC_ENABLED=true` environment va
 
 If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do one of the following:
 * If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If threat management was activated using [Remote Configuration][16], do the following:
+* If threat management was activated using [Remote Configuration][16], do the following: 
   1. Go to [Services][15] (**ASM** > **Catalog** > **Services**).
   2. Select **Threat Management in Monitoring Mode**.
   3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
@@ -578,7 +578,7 @@ If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do 
 
 <div class="alert alert-info">If threat management was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If threat management was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
 
-* To disable threat management on your services in bulk, do the following:
+* To disable threat management on your services in bulk, do the following: 
   1. Go to [Services][15].
   2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   3. Select the check boxes for the services where you want to disable threat detection.
@@ -594,14 +594,14 @@ To disable [Software Composition Analysis][14]:
 
 ## Disabling Code Security
 
-To disable [Code Security][13] vulnerability detection, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
+To disable [Code Security][13] vulnerability detection, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps. 
 
 If no `DD_IAST_ENABLED=true` environment variable is set for your service, do the following:
   1. Go to [Services][15].
   2. Select **Code Security**.
   3. Click on a service.
   4. In the service details, in **Vulnerability Detection**, click **Deactivate**.
-
+  
 ## Some or all IAST/Custom Code vulnerabilities are not detected
 
 ### Confirm IAST is enabled
@@ -611,7 +611,7 @@ Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corres
 ### For Python+Flask, call the entrypoint patch function
 
 If you're running a Flask application ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`, see: [Flask integration documentation](https://ddtrace.readthedocs.io/en/stable/integrations.html#flask).
-
+  
 ## Need more help?
 
 If you continue to have issues with ASM, contact [Datadog support][1] with the following information:
