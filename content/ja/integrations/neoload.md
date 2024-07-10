@@ -5,6 +5,7 @@ assets:
   dashboards:
     NeoLoad Performance Testing: assets/dashboards/neoload_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: NeoLoad.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10317
     source_type_name: neoload
   logs: {}
 author:
@@ -22,7 +24,7 @@ author:
   sales_email: sales@tricentis.com
   support_email: support@tricentis.com
 categories:
-- notification
+- notifications
 - テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
@@ -33,10 +35,9 @@ integration_id: neoload
 integration_title: NeoLoad
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: neoload
-oauth: {}
 public_title: NeoLoad
 short_description: NeoLoad によるパフォーマンステスト結果のモニタリングと分析
 supported_os:
@@ -46,7 +47,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Notification
+  - Category::Notifications
   - Category::Testing
   - Offering::Integration
   - Supported OS::Linux
@@ -63,6 +64,7 @@ tile:
   title: NeoLoad
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,28 +76,28 @@ NeoLoad インテグレーションを使用すると、NeoLoad テストのパ�
 - アプリケーションの性能と NeoLoad の負荷試験メトリクスを関連付けることができます。
 - すぐに使えるダッシュボード [Metrics Explorer][2] を利用して、Datadog 内でスループット、エラー、パフォーマンスなどの NeoLoad メトリクスを分析し、可視化できます。
 
-## セットアップ
+## 計画と使用
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 NeoLoad の構成の詳細な手順については、[NeoLoad に関するドキュメント][3]に従ってください。NeoLoad バージョン 9.1 からは、NeoLoad 内にある Datadog Connector の **Push Counters** 構成で、どのメトリクスを送信するかを選択できるようになりました。
 
 デフォルトの NeoLoad ダッシュボードをダッシュボードリストに追加するには、Datadog で NeoLoad インテグレーションをインストールします。
 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "neoload" >}}
 
 
-### イベント
+### ヘルプ
 
 NeoLoad のパフォーマンステストイベントは、すべて [Datadog イベントエクスプローラー][5]に送信されます。
 NeoLoad は、テストの終了時と開始時に Datadog API  にイベントを送信します。
 このオプションは、NeoLoad の Datadog Connector の **Push Counters** 構成で設定します。NeoLoad 9.1 から利用可能です。
 
-## トラブルシューティング
+## ヘルプ
 
 ヘルプが必要ですか？[Datadog サポート][6]または [Tricentis NeoLoad サポート][7]にお問い合わせください。
 

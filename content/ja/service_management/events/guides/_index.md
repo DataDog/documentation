@@ -2,6 +2,7 @@
 aliases:
 - /ja/developers/events/
 - /ja/event/guides/
+- /ja/events/guides/
 cascade:
   algolia:
     category: ガイド
@@ -15,7 +16,6 @@ further_reading:
 - link: /monitors/types/event/
   tag: Documentation
   text: イベントモニター
-kind: documentation
 private: true
 title: イベントガイド
 ---

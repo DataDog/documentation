@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: finally ブロック内で break や continue を使用しない
 ---
 ## メタデータ
@@ -11,12 +10,14 @@ title: finally ブロック内で break や continue を使用しない
 
 **重大度:** 警告
 
-**カテゴリー:** デザイン
+**カテゴリー:** ベストプラクティス
 
 ## 説明
 `finally` ブロックの中で `return`、`break`、`continue` を使用すると、`try`、`else`、`except` ブロックでスローされた例外の伝播が停止し、return ステートメントは無視されます。
 
-詳しくは [Python 公式ドキュメント](https://docs.python.org/3/reference/compound_stmts.html#except)を参照してください。
+#### 詳細はこちら
+
+ - [Python 公式ドキュメント](https://docs.python.org/3/reference/compound_stmts.html#except)
 
 ## 非準拠コードの例
 ```python

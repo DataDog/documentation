@@ -1,25 +1,30 @@
 ---
-title: Utilisation de base de l'Agent pour AIX
-kind: documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
-  tag: Blog
+- link: /agent/basic_agent_usage/#architecture-de-l-agent
+  tag: Documentation
+  text: En savoir plus sur l'architecture de l'Agent
+- link: /agent/configuration/network#configurer-les-ports
+  tag: Documentation
+  text: Configurer les ports entrants
+- link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
+  tag: GitHub
   text: Surveiller AIX avec l'Agent Datadog Unix
+title: Utilisation de base de l'Agent pour AIX
 ---
 
 <div class="alert alert-info">
-L'Agent Datadog Unix est développé pour des architectures système spécifiques et diffère de l'Agent versions 5 et 6.
+L'Agent Datadog Unix est développé pour des architectures système spécifiques. Il diffère de l'Agent Windows, Linux et macOS.
 </div>
 
 Cette page décrit les processus d'installation et de configuration de l'Agent Datadog UNIX pour AIX.
 
-**Remarque :** l'Agent Datadog Unix prend actuellement en charge les versions suivantes d'AIX :
+**Remarque :** l'Agent Datadog Unix prend en charge PowerPC 8 et ultérieur ainsi que les versions suivantes d'AIX :
 
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
 * AIX 7.2 TL3 SP0+
 
-## Installation
+## Configurer l'Agent Datadog pour l'APM
 
 Un script d'installation ksh en une seule étape est fourni sur la [page de téléchargement de l'Agent][1] dans Datadog. Le script accepte les variables d'environnement suivantes :
 
@@ -36,13 +41,15 @@ Les liens de téléchargement des versions les plus récentes sont également di
 
 Le programme d'installation peut être exécuté comme suit (en mode root) :
 
-{{< code-block lang="bash" wrap="true" >}}
-installp -aXYgd ./datadog-unix-agent-<VEERSION>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
+{{< code-block lang="shell" wrap="true" >}}
+installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
 Cela permet d'installer l'Agent dans `/opt/datadog-agent`.
 
-Remarque : les logs d'installation de l'Agent se trouvent dans le fichier `dd-aix-install.log`. Pour désactiver l'enregistrement de ces logs, supprimez le paramètre `-e` de la commande d'installation.
+### Fichiers de log d'installation
+
+Les logs d'installation de l'Agent se trouvent dans le fichier `dd-aix-install.log`. Pour désactiver l'enregistrement de ces logs, supprimez le paramètre `-e dd-aix-install.log` de la commande d'installation.
 
 ## Commandes
 
@@ -57,19 +64,11 @@ Remarque : les logs d'installation de l'Agent se trouvent dans le fichier `dd-a
 
 ## Configuration
 
-Les fichiers et dossiers de configuration de l'Agent se trouvent dans :
-`/etc/datadog-agent/datadog.yaml`
-Toutefois, les fichiers de configuration sont récupérés dans l'ordre suivant (le premier fichier trouvé étant celui utilisé) :
+Les fichiers et dossiers de configuration de l'Agent sont situés dans `/etc/datadog-agent/datadog.yaml`.
 
-* `/etc/datadog-agent/datadog.yaml`
-* `./etc/datadog-agent/datadog.yaml`
-* `./datadog.yaml`
+Vous trouverez un exemple de fichier de configuration dans `/etc/datadog-agent/datadog.yaml.example`.
 
-Vous trouverez un exemple de fichier de configuration dans `/opt/datadog-agent/etc/datadog-agent`.
-
-Votre clé d'API Datadog doit généralement être spécifiée dans votre configuration. Pour envoyer vos métriques à l'instance européenne de Datadog, l'option de configuration `site` est disponible.
-
-Vous pouvez également remplacer `dd_url` manuellement, mais ce n'est normalement pas nécessaire.
+Votre clé d'API Datadog doit généralement être spécifiée dans votre configuration. Pour envoyer vos métriques à un autre site (par exemple, l'instance européenne de Datadog), l'option de configuration `site` est disponible.
 
 Selon la configuration de votre réseau, il se peut qu'un proxy doive être configuré.
 
@@ -78,14 +77,28 @@ Selon la configuration de votre réseau, il se peut qu'un proxy doive être conf
 
 ## Intégrations
 
-Intégrations supplémentaires disponibles :
+L'Agent Unix recueille des métriques système pour :
 
-* process
+* cpu
+* système de fichiers
+* iostat
+* chargement
+* mémoire
+* uptime
+* disque
+* réseau
+
+De plus, les intégrations suivantes peuvent être activées pour recueillir des métriques supplémentaires :
+
+* processus
 * lparstats
-* disk
-* network
+* [ibm_was (Websphere Application Server)][3]
 
-Pour activer les intégrations ci-dessus, copiez et modifiez les exemples de fichier de configuration fournis. Ils doivent se trouver dans `/etc/datadog-agent/conf.d`. Le nom du fichier de configuration YAML doit correspondre à celui de l'intégration : `/etc/datadog-agent/conf.d/<NOM_INTÉGRATION>.yaml` active l'intégration `<NOM_INTÉGRATION>` et définit sa configuration.
+Pour activer les intégrations ci-dessus, copiez et modifier les exemples de fichier de configuration fournis, qui se trouvent dans `/etc/datadog-agent/conf.d`. Le nom du fichier de configuration YAML doit correspondre à celui de l'intégration. Ainsi, `/etc/datadog-agent/conf.d/<NOM_INTÉGRATION>.d/conf.yaml` active l'intégration `<NOM_INTÉGRATION>` et définit sa configuration. Des exemples de fichier de configuration se trouve dans `/etc/datadog-agent/conf.d/<NOM_INTÉGRATION>.d/conf.yaml.example`.
+
+**Remarque** : certaines des métriques disponibles avec les intégrations pour l'Agent Unix ne sont pas les mêmes que celles pour l'Agent Linux, Windows et macOS. Bien qu'il soit possible de surveiller les processus et les métriques réseau avec l'Agent Unix, les fonctionnalités de surveillance des live processes et des performances réseau ne sont pas disponibles. Log Management n'est pas non plus disponible avec l'Agent Unix.
+
+<div class="alert alert-info">L'Agent Unix n'intègre pas le composant trace-agent. Par conséquent, le tracing avec APM et le profiling ne sont pas disponibles.</div>
 
 ## Exécution de DogStatsD
 
@@ -105,13 +118,13 @@ dogstatsd:                        # options de configuration de DogStatsD
 
 **Remarque :** DogStatsD ne fonctionne pas en tant que daemon et s'exécute au premier plan.
 
-Il est également possible d'exécuter l'Agent via le superviseur Python connu. L'utilisation de cette méthode pour gérer le daemon de l'Agent peut être préférable si vous connaissez bien l'outil. Il existe des entrées pour l'Agent et DogStatsD.
+Il est également possible d'exécuter l'Agent avec le superviseur Python connu. L'utilisation de cette méthode pour gérer le daemon de l'Agent peut être préférable si vous connaissez bien l'outil. Il existe des entrées pour l'Agent et DogStatsD.
 
-## Désinstaller
+## Désinstallation
 
 Pour supprimer un Agent installé, exécutez la commande `installp` suivante :
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
@@ -121,5 +134,6 @@ Remarque : les logs de désinstallation de l'Agent se trouvent dans le fichier 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aix
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
+[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

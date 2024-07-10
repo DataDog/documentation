@@ -5,22 +5,21 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
   text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-kind: documentation
 title: Ruby トレースコンテキストの伝搬
 type: multi-code-lang
 ---
 
 ### B3 ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][6] と [W3C (TraceParent)][7] のヘッダー抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのための [B3][6] と [W3C Trace Context][7] のヘッダー抽出と挿入をサポートしています。
 
 分散したヘッダーの挿入と抽出は、挿入および抽出スタイルを構成することで制御されます。次の 2 つのスタイルがサポートされています。
 
-- `Datadog`: Datadog スタイルヘッダー
-- `b3multi`: B3 複数ヘッダー
-- `b3`: B3 単一ヘッダー
-- `tracecontext`: W3C トレースコンテキスト
-- `none`: ノーオペレーション
+- Datadog: `Datadog`
+- B3 マルチヘッダー: `b3multi`
+- B3 シングルヘッダー: `b3`
+- W3C Trace Context: `tracecontext`
+- ノーオペレーション: `none`
 
 挿入スタイルは次を使って構成できます:
 

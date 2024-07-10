@@ -1,6 +1,5 @@
 ---
 title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
-kind: faq
 further_reading:
 - link: "/integrations/guide/jmx_integrations/"
   tag: "Documentation"
@@ -341,4 +340,4 @@ You can also check specific Agent version information with the Agent CLI `versio
 [3]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7322--6322
 [4]: /dashboards/#copy-import-or-export-dashboard-json
 [5]: /resources/json/agent-version-dashboard.json
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#other-commands
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#other-commands

@@ -1,6 +1,5 @@
 ---
 title: Scoping Downtime
-kind: Guide
 disable_toc: false
 further_reading:
 - link: "/monitors/downtimes"
@@ -38,9 +37,9 @@ In the downtime configuration, select **By Monitor Name** and search for the mon
 
 <div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations and tags assigned to the data you are querying.</div>
 
-Downtimes can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. Select `By Monitor Tags` and enter the monitor tags that you want to target. 
+Downtimes can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. Select `By Monitor Tags` and enter the monitor tags that you want to target.
 
-**Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` and `team:automations`.
+**Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` AND `team:automations`.
 
 ### Target all monitors
 
@@ -61,7 +60,7 @@ The examples in this guide show how the `Group scope` may be applied to monitors
 
 After the scheduled downtime begins, only alerts for the group `service:web-store` are muted for this monitor.
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Evaluation graph showing downtime for group service:web-store" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="Evaluation graph showing downtime for group service:web-store" style="width:90%;">}}
 
 This mutes any alerts that includes the tag `service:web-store`, for example:
 

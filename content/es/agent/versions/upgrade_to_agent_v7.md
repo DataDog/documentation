@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/guide/python-3/
   tag: Documentación
   text: Migra tus checks personalizados de Python 2 a Python 3
-kind: documentación
 title: Actualizar el Datadog Agent a la versión 7
 ---
 
@@ -31,9 +30,9 @@ El siguiente comando funciona en Amazon Linux, CentOS, Debian, Fedora, Red Hat, 
 
 **Nota**: Los enlaces a todas las versiones disponibles de Windows Installer se ofrecen [en formato JSON][3].
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://windows-agent.datadoghq.com/installers.json
+[3]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 

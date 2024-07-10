@@ -1,14 +1,14 @@
 ---
 title: Syslog-ng
 name: syslog_ng
-kind: integration
+custom_kind: integration
 description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
 short_description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
 categories:
     - log collection
 doc_link: /integrations/syslog_ng/
 aliases:
-    - logs/log_collection/syslog_ng
+    - /logs/log_collection/syslog_ng
 has_logo: true
 integration_title: syslog_ng
 is_public: true
@@ -24,6 +24,10 @@ integration_id: "syslog_ng"
 ## Overview
 
 Configure Syslog-ng to gather logs from your host, containers, & services.
+
+{{< site-region region="us3,ap1" >}}
+<div class="alert alert-warning">Log collection for <code>syslog-ng</code> is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Setup
 

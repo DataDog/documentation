@@ -5,19 +5,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
   text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-kind: documentation
 title: Node.js トレースコンテキストの伝搬
 type: multi-code-lang
 ---
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C (TraceParent)][6] のヘッダー抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C Trace Context][6] のヘッダー抽出と挿入をサポートしています。
 
 分散ヘッダーの挿入と抽出のスタイルを構成することができます。
 
 Node.js トレーサーは、以下のスタイルをサポートしています。
 
 - Datadog: `Datadog`
-- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
+- B3 マルチヘッダー: `b3multi` (`B3` エイリアスは非推奨)
 - W3C Trace Context: `tracecontext`
 - B3 シングルヘッダー: `B3 single header`
 

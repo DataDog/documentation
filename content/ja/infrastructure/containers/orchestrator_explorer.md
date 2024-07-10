@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: オーケストレータエクスプローラー
 ---
 
@@ -140,7 +139,7 @@ datadog:
 * データは一定の間隔で自動的に更新されます。ベータ版の更新間隔は変更される可能性があります。
 * 1000 以上のデプロイまたは ReplicaSets を持つクラスターでは、Cluster Agent からの CPU 使用率が上昇する場合があります。Helm チャートにはコンテナのスクラブを無効にするオプションがあります。詳細については、[Helm チャートリポジトリ][15]を参照してください。
 
-[1]: https://app.datadoghq.com/orchestration/overview/
+[1]: https://app.datadoghq.com/orchestration/overview
 [2]: /ja/infrastructure/containers/?tab=datadogoperator#setup
 
 [9]: /ja/logs

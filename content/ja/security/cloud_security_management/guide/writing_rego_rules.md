@@ -5,22 +5,21 @@ further_reading:
 - link: /security/default_rules
   tag: ドキュメント
   text: デフォルトの Posture Management クラウド構成検出ルールを調べる
-- link: /security/cspm/frameworks_and_benchmarks
+- link: /security/misconfigurations/frameworks_and_benchmarks
   tag: ガイド
   text: フレームワークおよび業界のベンチマークの詳細
 is_beta: true
-kind: ガイド
 title: Rego によるカスタムルールの作成
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-このサイトでは、クラウドセキュリティポスチャ管理は利用できません。
+CSM Misconfigurations は、選択したサイトではご利用いただけません。
 </div>
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true">}}
-カスタムルールの作成は、すべての CSPM のお客様が利用できるベータ版機能です。フィードバックやご質問は、<a href="/help">Datadog サポート</a>までご連絡ください。
+カスタムルールの作成は、すべての Cloud Security Management Misconfigurations (CSM Misconfigurations) のお客様が利用できるベータ版機能です。フィードバックやご質問は、<a href="/help">Datadog サポート</a>までご連絡ください。
 {{< /callout >}} 
 
 
@@ -30,7 +29,7 @@ Open Policy Agent (OPA) は、クラウドのセキュリティポスチャを�
 
 ## テンプレートモジュール
 
-ルールの定義は、[モジュール][3]の内部で定義された Rego [ポリシー][2]から始まります。Datadog CSPM では、以下のようなモジュールテンプレートを使用して、ルールの記述を簡素化しています。
+ルールの定義は、[モジュール][3]の内部で定義された Rego [ポリシー][2]から始まります。CSM Misconfigurations では、以下のようなモジュールテンプレートを使用して、ルールの記述を簡素化しています。
 
 ```python
 package datadog

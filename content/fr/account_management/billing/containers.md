@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Facturation des conteneurs
 ---
 
@@ -41,7 +40,7 @@ Les calculs de l'utilisation à la demande sont effectués en fonction du quota 
 
 **Les conteneurs de l'Agent Datadog sont-ils pris en compte dans le quota ?**
 
-Non.
+Non, les conteneurs de l'Agent Datadog ne sont pas pris en compte pour le calcul du quota de 5 (Pro) ou 10 (Entreprise) conteneurs.
 
 **Les conteneurs qui appartiennent à des pods bloqués en mode `CrashLoopBackoff` sont-ils pris en compte ?**
 

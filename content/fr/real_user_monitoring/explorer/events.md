@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Rechercher des événements
-kind: documentation
 title: Volet latéral des événements
 ---
 
@@ -25,7 +24,7 @@ Le volet latéral des événements affiche toutes les informations se rapportant
 
 Vous pouvez également faire glisser les poignées de sélection d'intervalle de la cascade pour agrandir une période précise et vous focaliser uniquement sur les événements pertinents.
 
-{{< img src="real_user_monitoring/explorer/events/events_side_panel.mp4" alt="Durées des événements et signaux mobiles" video="true" width="80%" >}}
+{{< img src="real_user_monitoring/explorer/events/events_side_panel-1.mp4" alt="Durées des événements et signaux mobiles essentiels" video="true" width="80%" >}}
 
 ## Attributs
 
@@ -38,4 +37,4 @@ La solution RUM recueille par défaut des informations de contexte. Vous pouvez 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /fr/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
+[2]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context

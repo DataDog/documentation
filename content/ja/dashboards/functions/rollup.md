@@ -1,12 +1,10 @@
 ---
 aliases:
 - /ja/graphing/functions/rollup/
-kind: documentation
 title: ロールアップ
 ---
 
-`.rollup()`
-`.rollup()` 関数は、すべてのメトリクスクエリでメトリクスのデータを本質的に集計するために用いられます。しかし、`.rollup()` 関数をクエリの末尾に追加することで、デフォルトをオーバーライドするカスタム[時間集計][1]を実行することができます。この関数では以下のことを定義できます。
+すべてのメトリクスクエリは本質的に集計されます。しかし、クエリの最後に `.rollup()` 関数を追加することで、デフォルトをオーバーライドしたカスタムの[時間集計][1]を行うことができます。この関数を使用すると、次のような定義を行うことができます。
 
 * rollup `<interval>`: データが集計される時間の間隔 ([クエリで強制されるロールアップの間隔より大きい場合](#rollup-interval-enforced-vs-custom))。
 * rollup `<aggregator>`: 指定されたロールアップの時間間隔の範囲におけるデータポイントの集計方法。
@@ -78,7 +76,7 @@ title: ロールアップ
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/dashboards/functions/#proceed-to-time-aggregation
+[1]: /ja/dashboards/functions/#add-a-function
 [2]: /ja/metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [4]: /ja/metrics/custom_metrics/type_modifiers/

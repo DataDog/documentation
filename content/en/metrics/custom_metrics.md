@@ -1,6 +1,5 @@
 ---
 title: Custom Metrics
-kind: documentation
 aliases:
   - /guides/metrics/
   - /metrictypes/
@@ -32,7 +31,7 @@ algolia:
 
 ## Overview
 
-If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a custom metric<sup>[(1)][2]</sup>. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
+If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a custom metric. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. Certain [standard integrations](#standard-integrations) can also potentially emit custom metrics. 
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
@@ -63,6 +62,10 @@ The following custom metric naming convention must be followed:
 
 **Note**: Metric names are case sensitive in Datadog.
 
+### Metric units
+
+Set metric units through [Metrics Summary][12] or set custom metric units with the [Unit override][13] feature in the graph editor of your visualizations. For more information, see the [Metrics Units][14] documentation.
+
 ## Submitting custom metrics
 
 {{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
@@ -73,19 +76,28 @@ The following custom metric naming convention must be followed:
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generate live process-based metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
-You can also use one of the [Datadog official and community contributed API and DogStatsD client libraries][12] to submit your custom metrics
+You can also use one of the [Datadog official and community contributed API and DogStatsD client libraries][15] to submit your custom metrics
 
 **Note**: There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
+
+## Standard integrations
+
+The following standard integrations can potentially emit custom metrics.
+
+| Type of integrations                           | Integrations                                                                       |
+|------------------------------------------------|------------------------------------------------------------------------------------|
+| Limited to 350 custom metrics by default.      | [ActiveMQ XML][16] / [Go-Expvar][17] / [Java-JMX][18]                              |
+| No default limit on custom metrics collection. | [Nagios][19] /[PDH Check][20] /[OpenMetrics][21] /[Windows performance counters][22] /[WMI][23] /[Prometheus][21] |
+| Can be configured to collect custom metrics.   | [MySQL][24] /[Oracle][25] /[Postgres][26] /[SQL Server][27]                        |
+| Custom metrics sent from cloud integrations    | [AWS][28]                                                                          |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-<br><sup>(1)</sup> *[Some integrations do emit custom metrics][2]*
 
 [1]: /integrations/
 [2]: /account_management/billing/custom_metrics/#standard-integrations
@@ -98,4 +110,20 @@ You can also use one of the [Datadog official and community contributed API and 
 [9]: /metrics/types/?tab=rate#metric-types
 [10]: /metrics/types/?tab=count#metric-types
 [11]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /developers/community/libraries/
+[12]: /metrics/summary/#metric-unit
+[13]: /dashboards/guide/unit-override/
+[14]: /metrics/units/
+[15]: /developers/community/libraries/
+[16]: /integrations/activemq/#activemq-xml-integration
+[17]: /integrations/go_expvar/
+[18]: /integrations/java/
+[19]: /integrations/nagios
+[20]: /integrations/pdh_check/
+[21]: /integrations/openmetrics/
+[22]: /integrations/windows_performance_counters/
+[23]: /integrations/wmi_check/
+[24]: /integrations/mysql/
+[25]: /integrations/oracle/
+[26]: /integrations/postgres/
+[27]: /integrations/sqlserver/
+[28]: /integrations/amazon_web_services/

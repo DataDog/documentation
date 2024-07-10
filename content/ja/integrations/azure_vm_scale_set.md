@@ -14,7 +14,7 @@ integration_id: azure-vm-scale-set
 integration_title: Microsoft Azure VM Scale Set
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_vm_scale_set
 public_title: Datadog-Microsoft Azure VM Scale Set インテグレーション
@@ -22,7 +22,8 @@ short_description: 受送信バイト数、ディスク操作数、CPU 使用率
 version: '1.0'
 ---
 
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="Azure VM Scale Set ダッシュボード" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="Azure VM スケールセットダッシュボード" popup="true">}}
 
 ## 概要
 
@@ -81,7 +82,7 @@ Azure Virtual Machine Scale Set インテグレーションには、サービス
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
-[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/#virtual-machine-agent
+[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent
 [3]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/#agent-installation
 [4]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
 [5]: https://docs.datadoghq.com/ja/integrations/win32_event_log/#log-collection

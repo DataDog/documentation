@@ -28,7 +28,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: Blog
   text: Monitoriza tus instancias EC2 impulsadas por Graviton3 con Datadog
-kind: documentación
 title: Empezando con AWS
 ---
 
@@ -49,33 +48,60 @@ Antes de empezar, asegúrate de que cumples los siguientes requisitos previos:
 1. Tienes una cuenta de [AWS][7]. Tu usuario de AWS necesita los siguientes permisos de IAM para poder ejecutar correctamente la plantilla de CloudFormation:
 
     * cloudformation:CreateStack
+    * cloudformation:CreateUploadBucket
+    * cloudformation:DeleteStack
+    * cloudformation:DescribeStacks
+    * cloudformation:DescribeStackEvents
+    * cloudformation:GetStackPolicy
+    * cloudformation:GetTemplateSummary
+    * cloudformation:ListStacks
+    * cloudformation:ListStackResources
     * ec2:DescribeSecurityGroups
     * ec2:DescribeSubnets
     * ec2:DescribeVpcs
     * iam:AttachRolePolicy
     * iam:CreatePolicy
     * iam:CreateRole
+    * iam:DeleteRole
+    * iam:DeleteRolePolicy
+    * iam:DetachRolePolicy
+    * iam:GetRole
+    * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
     * lambda:CreateFunction
+    * lambda:DeleteFunction
     * lambda:GetCodeSigningConfig
     * lambda:GetFunction
     * lambda:GetFunctionCodeSigningConfig
+    * lambda:GetLayerVersion
     * lambda:InvokeFunction
     * lambda:PutFunctionConcurrency
+    * lambda:RemovePermission
+    * lambda:TagResource
     * logs:CreateLogGroup
+    * logs:DeleteLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
+    * oam:ListSinks
+    * oam:ListAttachedLinks
     * s3:CreateBucket
+    * s3:DeleteBucket
+    * s3:DeleteBucketPolicy
+    * s3:GetEncryptionConfiguration
     * s3:GetObject
     * s3:GetObjectVersion
+    * s3:PutBucketPolicy
+    * s3:PutBucketPublicAccessBlock
+    * s3:PutEncryptionConfiguration
     * secretsmanager:CreateSecret
+    * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
-    * serverless:CreateCloudFormationTemplate
+    * serverlessrepo:CreateCloudFormationTemplate
 
 ## Configuración
 

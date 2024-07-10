@@ -3,7 +3,6 @@ aliases:
 - /fr/libraries/
 - /fr/developers/faq/monitoring-akka/
 - /fr/developers/libraries/
-kind: documentation
 title: Bibliothèques
 ---
 
@@ -84,7 +83,7 @@ Il s'agit d'une application [ESL de FreeSwitch][30] (rédigée par [WiMacTel][31
 
 ### Heroku
 
-Heroku émet des métriques dyno par l'intermédiaire de logs. Pour convertir ces logs en métriques et les envoyer à Datadog, utilisez l'un des drains de log suivants. Pour envoyer vos logs Heroku à Datadog, consultez la section [Recueillir des logs Heroku][35].
+Heroku émet des métriques dyno par l'intermédiaire de logs. Pour convertir ces logs en métriques et les envoyer à Datadog, utilisez l'un des drains de log suivants. Pour envoyer vos logs Heroku à Datadog, consultez la section [Recueillir des logs Heroku][34].
 
 * [Drain de logs Heroku pour Datadog][35] écrit en NodeJS par [Oz][36].
 * [Drain de logs Heroku pour Datadog][37] écrit en Go par [Apiary][38].

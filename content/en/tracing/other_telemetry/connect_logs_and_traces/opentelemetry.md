@@ -1,6 +1,5 @@
 ---
-title: Connect OpenTelemetry Traces and Logs
-kind: documentation
+title: Correlating OpenTelemetry Traces and Logs
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 code_lang: opentelemetry
 type: multi-code-lang
@@ -12,7 +11,7 @@ further_reading:
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -26,9 +25,7 @@ Connecting OpenTelemetry language SDK logs and traces within Datadog is similar 
 
 1. OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]). 
 
-2. OpenTelemetry Language SDKs lack the automatic trace-log correlation that Datadog SDKs offer, so it's necessary to manually patch your particular logging module or library with a processor that adds the aforementioned translated `TraceId` and `SpanId` as Log attributes marked `dd.trace_id` and `dd.span_id`, respectively. 
-
-3. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
+2. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
 
 See the following examples for language-specific information about how to correlate your OpenTelemetry traces and logs.
 
@@ -46,10 +43,13 @@ class CustomDatadogLogProcessor(object):
         # An example of adding datadog formatted trace context to logs
         # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129 
         current_span = trace.get_current_span()
+        if not current_span.is_recording():
+            return event_dict
 
-        if current_span is not None:
-            event_dict['dd.trace_id'] = str(current_span.context.trace_id & 0xFFFFFFFFFFFFFFFF)
-            event_dict['dd.span_id'] = str(current_span.context.span_id)
+        context = current_span.get_span_context() if current_span is not None else None
+        if context is not None:
+            event_dict["dd.trace_id"] = str(context.trace_id & 0xFFFFFFFFFFFFFFFF)
+            event_dict["dd.span_id"] = str(context.span_id)
 
         return event_dict        
 # ##########
@@ -171,18 +171,19 @@ String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
 String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-String spanIdValue = Span.current().getSpanContext().getSpanId();
-String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+String spanIdHexString = Span.current().getSpanContext().getSpanId();
 long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
 String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 
 logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
 ```
 
+See [Java Log Collection][4] on how to send your Java logs to Datadog.
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
 [2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
+[4]: /logs/log_collection/java/?tab=logback
 {{% /tab %}}
 
 {{% tab "PHP" %}}

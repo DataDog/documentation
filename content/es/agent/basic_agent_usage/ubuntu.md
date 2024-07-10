@@ -13,20 +13,19 @@ further_reading:
   text: Recopilar tus trazas
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentación
-  text: Obtén más información sobre la arquitectura del Agent
-- link: /agent/guide/network#configure-ports
+  text: Más información sobre la arquitectura del Agent
+- link: /agent/configuration/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 platform: Ubuntu
 title: Uso básico del Agent para Ubuntu
 ---
 
 ## Información general
 
-En esta página se describen las funciones básicas del Datadog Agent para Ubuntu. Si aún no has instalado el Agent, consulta las instrucciones en la documentación sobre la [integración del Datadog Agent][1].
+En esta página se describen las características básicas del Datadog Agent para Ubuntu. 
 
-Los paquetes están disponibles para arquitecturas Arm v8 y x86 de 64 bits. Para otras arquitecturas, utiliza la instalación de origen.
+Para instalar el Agent, consulta las [instrucciones de instalación][1]. Los paquetes se encuentran disponibles para arquitecturas Arm v8 y x86 de 64 bits. Para otras arquitecturas, utiliza la instalación de origen.
 
 **Nota**: Las versiones Ubuntu 14.04 y posteriores son compatibles con la arquitectura x86 de 64 bits. Las versiones Ubuntu 16.04 y posteriores son compatibles con la arquitectura Arm v8 de 64 bits.
 
@@ -100,21 +99,65 @@ Archivos de configuración para las [integraciones][1]:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Desinstalar el Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 y v7" %}}
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+Este comando borra el Agent, pero no elimina:
+
+* El archivo de configuración `datadog.yaml`
+* Los archivos que ha creado el usuario en la carpeta de configuración `/etc/datadog-agent`
+* Los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`
+* El usuario `dd-agent`
+* Archivos de log de Datadog
+
+Si también quieres eliminar estos elementos, ejecuta este comando después de eliminar el Agent:
+
+```shell
+sudo apt-get remove --purge datadog-agent -y
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+Este comando borra el Agent, pero no elimina:
+* El archivo de configuración `datadog.yaml`
+* Los archivos que ha creado el usuario en la carpeta de configuración `/etc/dd-agent`
+* Los archivos que ha creado el usuario en la carpeta `/opt/datadog-agent`
+* El usuario `dd-agent`
+* Archivos de log de Datadog
+
+Si también quieres eliminar estos elementos, ejecuta este comando después de eliminar el Agent:
+
+```shell
+sudo apt-get --purge remove datadog-agent -y
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Solucionar problemas
 
 Consulta la [documentación sobre cómo solucionar problemas del Agent][3].
 
 ## Trabajar con el Agent integrado
 
-El Agent tiene un entorno Python integrado en `/opt/datadog-agent/embedded/`. Los sistemas binarios comunes como `python` y `pip` se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
+El Agent tiene un entorno de Python integrado en `/opt/datadog-agent/embedded/`. Los archivos binarios comunes, como `python` y `pip`, se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
 
-Si deseas obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][4].
+Si quieres obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][4].
 
-
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [2]: /es/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /es/agent/troubleshooting/
 [4]: /es/developers/guide/custom-python-package/

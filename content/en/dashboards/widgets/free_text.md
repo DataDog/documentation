@@ -1,9 +1,9 @@
 ---
 title: Free Text Widget
-kind: documentation
+widget_type: free_text
 description: "Display text in a dashboard widget."
 aliases:
-    - /graphing/widgets/free_text/
+- /graphing/widgets/free_text/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -18,8 +18,6 @@ This is commonly used to state the overall purpose of the dashboard.
 
 ## Setup
 
-{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="Free Text Setup" style="width:80%;">}}
-
 ### Configuration
 
 1. Enter text to display.
@@ -27,9 +25,7 @@ This is commonly used to state the overall purpose of the dashboard.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the free text widget is:
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
 {{< dashboards-widgets-api >}}
 
@@ -38,5 +34,5 @@ The dedicated [widget JSON schema definition][3] for the free text widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/#screenboards
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

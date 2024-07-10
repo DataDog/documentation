@@ -9,17 +9,18 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Agent オートディスカバリーに含めるコンテナの管理
-kind: documentation
 title: オートディスカバリーコンテナ識別子
 ---
 
-オートディスカバリーコンテナ識別子、すなわち `ad_identifiers` を使用すると、オートディスカバリーコンフィギュレーションファイルテンプレートを特定のコンテナに適用できます。それには[コンテナイメージの短い名前](#short-image-container-identifiers)を使用する方法と、[カスタムなオートディスカバリーコンテナ識別子](#custom-autodiscovery-container-identifiers)を使用する方法があります。
+オートディスカバリーコンテナ識別子、すなわち `ad_identifiers` を使用すると、オートディスカバリー構成ファイルテンプレートを特定のコンテナに適用できます。それにはコンテナイメージの名前を使用する方法と、カスタムのオートディスカバリーコンテナ識別子を使用する方法があります。
 
-**注**: 他のコンフィギュレーションタイプ（key-value ストア、Docker ラベル、または Kubernetes ポッドアノテーション）の場合、インテグレーションのコンフィギュレーションテンプレートとコンテナとのマッチングには、key-value ストア、ラベル、またはアノテーションコンフィギュレーションに含まれる `<CONTAINER_IDENTIFIER>` が使用されます。
+カスタム構成ファイル内でオートディスカバリーコンフィギュレーションが定義されているとしても、 `env`、`service`、`version` をタグ付けする標準ラベルは併用できます。コンテナでこれらのラベルを構成する方法の詳細については、[統合サービスタグ付け][1]を参照してください。
 
-## ショートイメージによるコンテナ識別子
+**注**: key-value ストア、Docker ラベル、または Kubernetes ポッドアノテーションなどの他のコンフィギュレーションタイプでは、異なる方法を使用してインテグレーション構成テンプレートを対応するコンテナにマッチさせます。それらのコンフィギュレーションタイプの場合、インテグレーション構成テンプレートとコンテナ間のマッチングは、key-value ストア、ラベル、またはアノテーションに含まれる `<CONTAINER_IDENTIFIER>` に基づいて行われます。
 
-以下のオートディスカバリーコンフィギュレーションテンプレートを特定のコンテナに適用するために、`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` に**コンテナイメージの短い名前**を指定します。
+## コンテナイメージ名
+
+以下のオートディスカバリー構成テンプレートを特定のコンテナに適用するために、`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` に**コンテナイメージの短い名前**を指定します。
 
 ```yaml
 ad_identifiers:
@@ -32,7 +33,7 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-たとえば、以下の Apache オートディスカバリーコンフィギュレーションテンプレートを Agent に使用するとします。
+**例**: 以下の Apache オートディスカバリー構成テンプレートは、`httpd` という名前のコンテナイメージに適用されます。
 
 ```yaml
 ad_identifiers:
@@ -45,15 +46,9 @@ logs:
   service: webapp
 ```
 
-これにより、ホスト上の**すべての** `httpd` コンテナがマッチします。あるコンテナが `library/httpd:latest` で稼働し、別のコンテナが `<WHATEVER>/httpd:v2` で稼働しているとすると、Agent は上記のテンプレートを両方のコンテナに適用します。これはたとえば、コンテナイメージに `library/httpd:latest` ではなく `httpd` という短い名前を指定しているからです。
+これは、ホスト上の**すべての** `httpd` コンテナイメージにマッチします。1 つのコンテナで `foo/httpd:latest` が実行され、別のコンテナで `bar/httpd:v2` が実行されている場合、Agent は上記のテンプレートを両方のコンテナに適用します。
 
-オートディスカバリーコンテナ識別子に短いイメージの名前を指定すると、**Agent はその名前にマッチするイメージの中で、ソースが異なる、またはタグが異なるものを区別できません。**
-
-## 標準ラベルからタグを追加
-
-カスタム構成ファイル内でオートディスカバリーコンフィギュレーションが定義されているとしても、 `env`、`service`、`version` をタグ付けする標準ラベルは併用できます。
-
-既存のコンテナでこれらのラベルを構成する方法については、[統合サービスタグ付け][1]を参照してください。
+オートディスカバリーコンテナ識別子に短いイメージの名前を指定すると、Agent はその名前にマッチするイメージの中で、ソースが異なる、またはタグが異なるものを区別できません。
 
 ### 複数の識別子
 
@@ -67,41 +62,45 @@ ad_identifiers:
 
 ## カスタムなオートディスカバリーコンテナ識別子
 
-同じイメージを実行しているコンテナに異なるオートディスカバリーコンフィギュレーションテンプレートを適用するには、カスタムな値の `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` を使用し、それを `com.datadoghq.ad.check.id` ラベルで指定してコンテナを識別します。以下のコンフィギュレーションファイルを使用する場合、
+同じイメージを実行しているコンテナに異なるオートディスカバリー構成テンプレートを適用するには、`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` として提供するカスタム値を選択します。そして、このカスタム値を含むコンテナに、Docker ラベルまたは Kubernetes アノテーションを適用します。
+
+**例**: 以下の Apache オートディスカバリー構成テンプレートは、`foo` というカスタム名のコンテナイメージを指定します。
 
 ```yaml
 ad_identifiers:
-  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-
+  - foo
 init_config:
-  <INIT_CONFIG>
-
 instances:
-  <INSTANCES_CONFIG>
+  - apache_status_url: http://%%host%%/server-status?auto
+logs:
+  source: apache
+  service: webapp
 ```
 
-コンテナに対して有効にするには
+次に、Docker ラベルまたは Kubernetes アノテーションを適用して、コンテナを `foo` として識別します。
 
 {{< tabs >}}
-{{% tab "Docker" %}}
-このオートディスカバリー構成テンプレートを docker の特定のコンテナに適用するために、以下のラベルを追加します。
+{{% tab "Docker ラベル" %}}
 
 ```yaml
-com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+com.datadoghq.ad.check.id: foo
 ```
+
 **注**: `com.datadoghq.ad.check.id` ラベルはイメージの名前よりも優先されます。
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
-Kubernetes に以下のアノテーションを追加して、このオートディスカバリー構成を適用します (`<CONTAINER_IDENTIFIER>` はポッド内のコンテナ名です)。
+{{% tab "Kubernetes アノテーション" %}}
 
 ```text
 ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 ```
 
-**注**: このアノテーションは、バージョン `6.25.0` と `7.25.0` 以降にのみ適用されます。`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` ラベルはイメージ/名前より優先されます。
+`<CONTAINER_IDENTIFIER>` をポッド内のコンテナ名で置き換えます。
+
+**注**: Datadog Agent v6.25+ および v7.25 でサポートされています。`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` ラベルはイメージ名よりも優先されます。
 {{% /tab %}}
 {{< /tabs >}}
+
 
 ## その他の参考資料
 

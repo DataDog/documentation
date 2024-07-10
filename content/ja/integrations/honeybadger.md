@@ -1,39 +1,58 @@
 ---
+app_id: honeybadger
+app_uuid: 385c386e-6394-41f4-8c92-5944e6b203f5
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 130
+    source_type_name: Honeybadger
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- exceptions
+- event management
+- issue tracking
 dependencies: []
-description: イベントストリームで Honeybadger の例外を表示、検索、議論。
-doc_link: https://docs.datadoghq.com/integrations/honeybadger/
+display_on_public_website: true
 draft: false
 git_integration_title: honeybadger
-has_logo: true
 integration_id: honeybadger
 integration_title: Honeybadger
 integration_version: ''
 is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
+custom_kind: integration
+manifest_version: 2.0.0
 name: honeybadger
-public_title: Datadog-Honeybadger インテグレーション
+public_title: Honeybadger
 short_description: イベントストリームで Honeybadger の例外を表示、検索、議論。
-team: web-integrations
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Event Management
+  - Category::問題の追跡
+  configuration: README.md#Setup
+  description: イベントストリームで Honeybadger の例外を表示、検索、議論。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Honeybadger
 ---
 
-{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger のイベント" popup="true">}}
-
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Honeybadger を Datadog に接続して、以下のことができます。
+Honeybadger は例外とアップタイムを監視し、Web アプリをエラーフリーに保ちます。Honeybadger を Datadog に接続することで、Datadog のイベントストリームで Honeybadger のアラートを受け取ることができます。
 
-- ストリームでエラーをリアルタイムに確認できます。
-- グラフでエラーを検索できます。
-- エラーについてチームで議論できます。
-- とても便利です。
+## 計画と使用
 
-## セットアップ
-
-### インストール
+### インフラストラクチャーリスト
 
 Honeybadger からエラーをキャプチャするには、以下のようにします。
 
@@ -45,21 +64,21 @@ Honeybadger からエラーをキャプチャするには、以下のように�
 6. インテグレーションを保存します。
 7. [Honeybadger インテグレーションタイル][3]の **Install Integration** ボタンをクリックします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Honeybadger インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 Honeybadger インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Honeybadger インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

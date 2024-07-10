@@ -1,6 +1,5 @@
 ---
 title: Table Widget
-kind: documentation
 widget_type: "query_table"
 aliases:
 - /graphing/widgets/table/
@@ -72,7 +71,7 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 [5]: /profiler/profile_visualizations
 [6]: /security_monitoring/explorer/
 [7]: /dashboards/guide/apm-stats-graph
-[8]: /api/v1/dashboards/
+[8]: /api/latest/dashboards/
 [9]: /dashboards/graphing_json/widget_json/
 [10]: /dashboards/guide/context-links/
 [11]: /dashboards/querying/#advanced-graphing

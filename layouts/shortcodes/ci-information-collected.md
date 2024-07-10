@@ -1,6 +1,4 @@
-## Information collected
-
-When CI Visibility is enabled, the following data is collected from your project:
+When Test Visibility is enabled, the following data is collected from your project:
 
 * Test names and durations.
 * Predefined environment variables set by CI providers.

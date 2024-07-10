@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "600"
+    "other": "750"
   },
 
   "beta_sentence": {
@@ -57,6 +57,26 @@
 
   "event_stream_support_sentence": {
     "other": "The <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community program</a> is a network built by Datadog users for Datadog users to help each other find answers to questions or to share product tips and tricks."
+  },
+
+  "foundation_enablement_sentence": {
+    "other": "<a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">Sign up</a> for one of our live, expert led foundation enablement sessions on a variety of Datadog features and products."
+  },
+
+  "learning_center_sentence": {
+    "other": "Take a self-guided, <a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">hands-on course</a> to learn and practice key Datadog concepts."
+  },
+
+  "learning_resources": {
+    "other": "Learning Resources"
+  },
+
+  "learning_sentence": {
+    "other": "Enrich your knowledge in the Datadog platform through free learning resources."
+  },
+
+  "webinars_sentence": {
+    "other": "Attend upcoming or watch recorded <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">Datadog webinars</a> on a variety of product topics."
   },
 
   "agent_started_sentence": {
@@ -228,6 +248,18 @@
     "other": "contact us<br>on slack"
   },
 
+  "learning_center": {
+    "other": "datadog<br>learning center"
+  },
+
+  "foundation_enablement": {
+    "other": "join a live<br>enablement session"
+  },
+
+  "webinars": {
+    "other": "Datadog<br>webinars"
+  },
+
   "questions": {
     "other": "Questions?"
   },
@@ -319,5 +351,26 @@
   },
   "learn_more": {
     "other": "Learn More"
+  },
+  "personalized_demo" : {
+    "other": "Request a personalized demo"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
+  },
+  "legacy": {
+      "other": "Legacy"
+  },
+  "try_this_rule" : {
+    "other": "TRY THIS RULE"
+  },
+  "available_for": {
+    "other": "Available for"
   }
 }

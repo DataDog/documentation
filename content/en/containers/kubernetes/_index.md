@@ -1,13 +1,12 @@
 ---
 title: Kubernetes
-kind: documentation
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes
     - /tracing/kubernetes/
     - /tracing/setup/kubernetes
     - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-    - /integrations/faq/can-i-install-the-agent-on-my-Kubernetes-master-node-s/
+    - /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
     - /integrations/faq/docker-ecs-kubernetes-events/
     - /integrations/faq/container-integration-event/
     - /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
@@ -55,5 +54,5 @@ For information pertaining to the Datadog Cluster Agent, which provides a stream
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-legacy/
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
 [3]: /containers/cluster_agent/

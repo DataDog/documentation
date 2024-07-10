@@ -1,6 +1,5 @@
 ---
 title: Check Summary
-kind: documentation
 description: "See the list of all your checks reporting to Datadog."
 aliases:
 - /monitors/check_summary/

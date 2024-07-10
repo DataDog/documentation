@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Monitor
-kind: documentation
 description: "Monitor costs associated with cloud platforms."
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
@@ -15,6 +14,12 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
+  tag: "Blog"
+  text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
+  tag: "Blog"
+  text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
 ---
 
 ## Overview
@@ -61,9 +66,9 @@ If the cost monitor type is **Cost Changes**, you can trigger an alert when the 
 **Note**: For the **Percentage Change**, you can also filter out changes that are below a certain dollar threshold.
 Example: alert when there is a cost change above 5% for any change that is above $500
 
-## Notify your team
+## Configure notifications and automations
 
-For detailed instructions on the  **Notify your team** section, see the [Notifications][3] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
 ## Further Reading
 

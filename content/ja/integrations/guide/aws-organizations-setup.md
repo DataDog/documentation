@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-cloud-siem/
   tag: ブログ
   text: Datadog セキュリティモニタリングが新登場
-kind: ガイド
 title: AWS 組織向け AWS インテグレーションマルチアカウント設定
 ---
 
@@ -59,7 +58,7 @@ Datadog AWS インテグレーション構成ページから Template URL をコ
     - Datadog AWS インテグレーション構成ページで Datadog APP キーを選択し、StackSet の `DatadogAppKey` パラメーターに使用します。
 
     - *オプションで:*  
-       a. [Cloud Security Posture Management][5] (CSM Misconfigurations) を有効にして、クラウド環境、ホスト、コンテナをスキャンして、誤構成やセキュリティリスクを確認します。
+       a. [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) を有効にして、クラウド環境、ホスト、コンテナをスキャンし、誤構成やセキュリティリスクを検出します。
         b. AWS インフラストラクチャーを監視したくない場合は、メトリクス収集を無効にします。これは、[Cloud Cost Management][6] (CCM) または [CSM Misconfigurations][5] 固有のユースケースにのみ推奨されます。
 
 3. **StackSet オプションを構成する**
@@ -102,7 +101,7 @@ StackSet では、AWS アカウントでのログ転送は設定されません�
 [2]: /ja/integrations/amazon_web_services/#log-collection
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
 [4]: /ja/integrations/#cat-aws
-[5]: /ja/security/cspm/getting_started/
+[5]: /ja/security/misconfigurations/setup/
 [6]: https://docs.datadoghq.com/ja/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/

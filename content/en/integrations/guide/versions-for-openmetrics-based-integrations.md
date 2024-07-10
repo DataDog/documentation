@@ -1,6 +1,6 @@
 ---
 title: Latest and Legacy Versioning For OpenMetrics-based Integrations
-kind: guide
+
 description: Learn about the difference between the latest (V2) and legacy (V1) versions of OpenMetrics-based integrations.
 ---
 
@@ -16,7 +16,11 @@ Legacy
 
 ## Mode-dependent metrics
 
-Integrations with `latest` and `legacy` modes may produce a different subset of metrics, indicated in the documentation and in-app metric descriptions as OpenMetrics V2 (for latest) and OpenMetrics V1 (for legacy). When you look for metric names on the Datadog site or set up [dashboards][3] and [monitors][4], make sure to use metrics appropriate for your version of the integration.
+Integrations with `latest` and `legacy` modes may produce different subsets of metrics, indicated in the documentation and in-app metric descriptions as OpenMetrics V2 (`latest`) and OpenMetrics V1 (`legacy`). 
+
+In `latest` mode, metrics are submitted more accurately by default and behave closer to Prometheus metric types. For example, Prometheus metrics ending in  `_count` and `_sum` are submitted as `monotonic_count` by default.
+
+When you look for metric names on the Datadog site or set up [dashboards][3] and [monitors][4], make sure to use metrics appropriate for your version of the integration.
 
 ## OpenMetrics-based integration modes
 

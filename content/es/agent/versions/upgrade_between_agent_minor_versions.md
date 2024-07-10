@@ -2,7 +2,6 @@
 aliases:
 - /es/agent/faq/upgrade-between-agent-minor-versions
 - /es/agent/guide/upgrade-between-agent-minor-versions
-kind: documentación
 title: Actualizar entre versiones secundarias del Datadog Agent
 ---
 
@@ -15,19 +14,19 @@ El método recomendado para actualizar entre versiones secundarias del Agent 6 
 
 Actualizar a una versión secundaria concreta del Agent 6:
 
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
 Actualizar a la última versión secundaria del Agent 6:
 
-: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
+: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
 Actualizar a una versión secundaria concreta del Agent 7:
 
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 Actualizar a la última versión secundaria del Agent 7:
 
-: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
+: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -36,11 +35,11 @@ Descarga e instala el paquete de instalación de una versión concreta.
 
 URL para descargar una versión secundaria concreta del Agent 6:
 
-: `https://windows-agent.datadoghq.com/ddagent-cli-6.<minor_version>.<bugfix_version>.msi`
+: `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-6.<minor_version>.<bugfix_version>.msi`
 
 URL para descargar una versión secundaria concreta del Agent 7:
 
-: `https://windows-agent.datadoghq.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
+: `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
 
 {{% /tab %}}
 {{% tab "MacOS" %}}
@@ -49,11 +48,11 @@ URL para descargar una versión secundaria concreta del Agent 7:
 
 Comando para actualizar a la última versión secundaria del Agent 6:
 
-: `DD_AGENT_MAJOR_VERSION=6 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
+: `DD_AGENT_MAJOR_VERSION=6 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
 
 Comando para actualizar a la última versión secundaria del Agent 7:
 
-: `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
+: `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
 
 {{% /tab %}}
 {{< /tabs >}}

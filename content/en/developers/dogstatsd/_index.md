@@ -1,6 +1,5 @@
 ---
 title: DogStatsD
-kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
     - /guides/dogstatsd/
@@ -9,15 +8,15 @@ aliases:
     - /integrations/faq/dogstatsd-and-docker
     - /agent/kubernetes/dogstatsd
 further_reading:
+    - link: 'integrations/node'
+      tag: 'Documentation'
+      text: 'Enable DogStatsD for NodeJS through the NodeJS integration'
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Introduction to DogStatsD'
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
     - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
       tag: "Blog"
       text: "Monitor your Linux web apps on Azure App Service with Datadog"
@@ -81,9 +80,9 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 2. [Restart your Agent][3].
 
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /developers/dogstatsd/unix_socket/
-[3]: /agent/guide/agent-commands/
+[3]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Container Agent" %}}
 
@@ -114,42 +113,46 @@ Origin detection in non-Kubernetes environments is based on an extension of the 
 [1]: /developers/dogstatsd/unix_socket/
 [2]: /developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Datadog Operator" %}}
 
-To start collecting your StatsD metrics, you need to bind the DogStatsD port to a host port. You can also configure DogStatsD to use a [Unix domain socket][1].
+StatsD metrics collection is enabled by default on [Unix domain socket][1]. To start collecting your StatsD metrics over UDP, you need to activate the DogStatsD feature in the Operator settings.
 
-1. Add a `hostPort` to your `datadog-agent.yaml` manifest:
-
-    ```yaml
-    ports:
-        - containerPort: 8125
-          hostPort: 8125
-          name: dogstatsdport
-          protocol: UDP
-    ```
-
-     This enables your applications to send metrics with DogStatsD on port `8125` on whichever node they happen to be running.
-
-     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][2], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, see the Kubernetes documentation: [HostPort services do not work][3].
-     
-     **Note**: For an Operator deployment, configure the host port with `agent.config.hostPort`.
-
-2. Enable DogStatsD non local traffic to allow StatsD data collection, set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` in your `datadog-agent.yaml` manifest:
+1. Add `features.dogstatsd.hostPortConfig.enabled` to your `datadog-agent.yaml` manifest:
 
     ```yaml
-    - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-      value: 'true'
+    features:
+        dogstatsd:
+            hostPortConfig:
+                enabled: true
     ```
 
-     This allows collecting StatsD data from other containers than the one running the Agent.
+    This is an example `datadog-agent.yaml` manifest:
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        dogstatsd:
+          hostPortConfig:
+            enabled: true
+    ```
 
-3. Apply the change:
+    This enables the Agent to collect StatsD metrics over UDP on port `8125`.
+
+2. Apply the change:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-**Warning**: The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn't support `hostPorts`, so add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
+**Warning**: The `features.dogstatsd.hostPortConfig.hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. If your network plugin doesn't support `hostPorts`, so add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod does not start. Some Kubernetes installations do not allow this.
 
 ### Send StatsD metrics to the Agent
 
@@ -171,12 +174,19 @@ With this, any pod running your application is able to send DogStatsD metrics wi
 
 Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
 
+1. To activate origin detection, add the `global.originDetectionUnified.enabled` setting to your `datadog-agent.yaml` manifest:
+
+    ```yaml
+    global:
+        originDetectionUnified:
+            enabled: true
+    ```
+
 **Notes**: 
-
-* Origin detection with UDP uses the pod ID as the entity ID, so container-level tags are not emitted.
 * An alternative to UDP is [Unix Domain Sockets][5].
+* Origin detection with UDP can use the pod ID as the entity ID.
 
-To enable origin detection over UDP, add the following lines to your application manifest:
+To use pod ID as the entity ID, add the following lines to your application manifest:
 
 ```yaml
 env:
@@ -186,7 +196,7 @@ env:
               fieldPath: metadata.uid
 ```
 
-To set [tag cardinality][6] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` (default) or `orchestrator`.
+To set [tag cardinality][6] for the metrics collected using origin detection, set the setting `features.dogstatsd.tagCardinality` to either `low` (default), `orchestrator` or `high`.
 
 **Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][7].
 
@@ -535,12 +545,13 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Parameter     | Type            | Default     | Description                                                                                                                                                         |
-| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`        | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` environment variable.                                                  |
-| `port`        | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` environment variable.                                             |
-| `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`). This is only supported with Agent v6+.                                                  |
-| `global_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable. |
+| Parameter     | Type            | Default     | Description                                                                                                                                                                                          
+          |
+| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `host`        | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |
+| `port`        | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` environment variable.                                                          |
+| `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`). This is only supported with Agent v6+. If this is not set, the Agent looks at the `DD_DOGSTATSD_URL` environment variable. |
+| `global_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable.                                    |
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
@@ -561,7 +572,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -576,7 +587,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /metrics/custom_metrics/
-[6]: /events/guides/dogstatsd/
+[6]: /service_management/events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /developers/dogstatsd/datagram_shell/

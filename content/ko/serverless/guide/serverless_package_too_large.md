@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: 설명서
   text: Node.js 애플리케이션 계측
-kind: 설명서
 title: 서버리스 패키지가 너무 큰 오류 문제 해결
 ---
 
@@ -18,29 +17,29 @@ title: 서버리스 패키지가 너무 큰 오류 문제 해결
 - 함수 코드를 계측하는 언어별 라이브러리, 그리고
 - 관찰 가능한 데이터를 집계, 버퍼링 및 Datadog 백엔드로 전달하는 확장 프로그램입니다.
 
-AWS CLI 명령 [`aws lambda get-layer-version`][3]을 사용하여 Datadog Lambda 레이어의 내용 및 크기를 검사합니다. 예를 들어, 다음 명령을 실행하면 _Datadog-Node16-x version 67_ 및 _Datadog-Extension version 19_용 Lambd 레이어를 다운로드하고 압축되지 않은 크기 (합계 약 30MB)를 검사할 수 있는 링크가 제공됩니다. 압축되지 않은 크기는 레이어 및 버전에 따라 다릅니다. 다음 예제의 레이어 이름과 버전 번호를 애플리케이션에서 사용하는 레이어 이름과 버전 번호로 대체합니다:
+AWS CLI 명령 [`aws lambda get-layer-version`][3]을 사용하여 Datadog Lambda 레이어의 내용 및 크기를 검사합니다. 예를 들어, 다음 명령을 실행하면 _Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} version {{< latest-lambda-layer-version layer="node" >}} 및 _Datadog-Extension version {{< latest-lambda-layer-version layer="extension" >}}용 Lambd 레이어를 다운로드하고 압축되지 않은 크기 (합계 약 30MB)를 검사할 수 있는 링크가 제공됩니다. 압축되지 않은 크기는 레이어 및 버전에 따라 다릅니다. 다음 예제의 레이어 이름과 버전 번호를 애플리케이션에서 사용하는 레이어 이름과 버전 번호로 대체합니다:
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
-  --version-number 67
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
+  --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension \
-  --version-number 19
+  --version-number {{< latest-lambda-layer-version layer="extension" >}}
 ```
 {{< /site-region >}}
 
 {{< site-region region="ap1" >}}
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Node16-x \
-  --version-number 67
+  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
+  --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Extension \
-  --version-number 19
+  --version-number {{< latest-lambda-layer-version layer="extension" >}}
 ```
 {{< /site-region >}}
 

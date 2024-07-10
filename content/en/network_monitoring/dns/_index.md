@@ -1,6 +1,5 @@
 ---
 title: DNS Monitoring
-kind: documentation
 description: Diagnose and debug DNS server issues
 aliases:
     - /network_performance_monitoring/network_table
@@ -20,7 +19,7 @@ further_reading:
       text: 'Use DNS resolution to monitor cloud and external endpoints'
 ---
 
-{{< img src="network_performance_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
 
 <div class="alert alert-info">
 Upgrade to Agent version 7.33 or later to enable DNS monitoring.
@@ -46,7 +45,7 @@ Use the search bar at the top of the page to query for dependencies between a cl
 
 To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. In the default view, the client is automatically grouped by the most common tags. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
 
-{{< img src="network_performance_monitoring/dns_client_search.png" alt="The DNS monitoring page with client_service:ad-server entered into the search bar, pod_name entered for View clients as, and network.dns_query entered for View servers as" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_client_search.png" alt="The DNS monitoring page with client_service:ad-server entered into the search bar, pod_name entered for View clients as, and network.dns_query entered for View servers as" style="width:100%;">}}
 
 To refine your search to a particular DNS server, filter the search bar by using server tags. Configure your server display with one of the following options from the **Group by** dropdown menu:
 
@@ -58,11 +57,11 @@ To refine your search to a particular DNS server, filter the search bar by using
 
 This example shows all flows from pods in the production environment's availability zone to hosts receiving DNS requests:
 
-{{< img src="network_performance_monitoring/dns_query_example.png" alt="Query with client_availability_zone:us-central1-b and client_env: prod entered into the Search for field, pod_name selected in the View clients as dropdown, and host selected in the View servers as dropdown" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_query_example.png" alt="Query with client_availability_zone:us-central1-b and client_env: prod entered into the Search for field, pod_name selected in the View clients as dropdown, and host selected in the View servers as dropdown" style="width:100%;">}}
 
 ### Recommended queries
 
-{{< img src="network_performance_monitoring/recommended_queries_dns.png" alt="Recommended queries in the DNS monitoring page displaying the description of a query" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/recommended_queries_dns.png" alt="Recommended queries in the DNS monitoring page displaying the description of a query" style="width:100%;">}}
 
 There are three recommended queries at the top of the DNS page, similar to the [Network Analytics][4] page. These are static queries commonly used to investigate DNS health and view high-level DNS metrics. Use the recommended queries as a starting point to gain further insights into your DNS configuration and troubleshoot DNS issues. 
 
@@ -81,7 +80,7 @@ The following DNS metrics are available:
 | **DNS requests**         | The number of DNS requests made from the client.                                                                         |
 | **DNS requests / second** | The rate of DNS requests made by the client.                                                                             |
 | **DNS response time**    | The average response time of the DNS server to a request from the client.                                                |
-| **Timeouts**             | The number of timed out DNS requests from the client (displayed as a percentage of all DNS responses).                    |
+| **Timeouts**             | The number of timed out DNS requests from the client (displayed as a percentage of all DNS responses). <br  /><br />**Note**: These timeouts are a metric computed by NPM internally, and may not align with DNS timeouts reported from outside of NPM. They are not the same as the DNS timeouts reported by DNS clients or servers.                |
 | **Errors**               | The number of requests from the client that generated DNS error codes (displayed as a percentage of all DNS responses).   |
 | **SERVFAIL**             | The number of requests from the client that generated SERVFAIL (DNS server failed to respond) codes (displayed as a percentage of all DNS responses).   |
 | **NXDOMAIN**             | The number of requests from the client that generated NXDOMAIN (domain name does not exist) codes (displayed as a percentage of all DNS responses).   |
@@ -104,7 +103,7 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 * Application errors in the code on the client side
 * A high number of requests originating from a particular port or IP
 
-{{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_sidepanel.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
 
 ## Further Reading
 

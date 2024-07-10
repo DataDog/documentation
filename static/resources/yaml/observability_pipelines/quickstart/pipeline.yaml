@@ -34,6 +34,7 @@ sinks:
     inputs:
       - parse_syslog
     default_api_key: "${DD_API_KEY}"
+    site: "${DD_SITE}"
     compression: gzip
     ## We've omitted the buffer here to reduce friction when testing locally.
     ## Consider re-enabling and configuring before deploying to production environments.

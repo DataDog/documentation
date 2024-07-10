@@ -9,7 +9,6 @@ further_reading:
 - link: /security/cloud_siem/log_detection_rules/
   tag: Documentation
   text: 新しい検出ルールの作成
-kind: documentation
 title: Cloud SIEM の Azure 構成ガイド
 ---
 
@@ -19,8 +18,7 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 
 このガイドでは、Azure Platform のログから脅威の検出を開始できるように、Datadog にログを送信するための Microsoft Azure の構成を説明します。
 
-<div class="alert alert-info">Azure Native インテグレーション (Datadog の US3 サイトのお客様向け) には、ログ収集の設定手順が異なります。Azure Native インテグレーションを使用する場合は、Datadog サイトドロップダウンメニューで <strong>US3</strong> を選択し、<a href="https://docs.datadoghq.com/integrations/azure/?tab=manualinstallation#log-collection
-">Microsoft Azure ログ収集</a>の指示に従ってください。</div>
+<div class="alert alert-info">Azure Native インテグレーション (Datadog の US3 サイトのお客様向け) には、ログ収集の設定手順が異なります。Azure Native インテグレーションを使用する場合は、Datadog サイトドロップダウンメニューで <strong>US3</strong> を選択し、<a href="https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/">Microsoft Azure ログ収集</a>の指示に従ってください。</div>
 
 {{< tabs >}}
 {{% tab "自動インストール" %}}
@@ -39,7 +37,7 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 
 デプロイが正常に完了したら、[ログエクスプローラー][2]で検索クエリに `service:azure` と入力し、Azure のログを表示します。
 
-[1]: /ja/integrations/azure/#optional-parameters
+[1]: /ja/logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
 [2]: https://app.datadoghq.com/logs
 
 {{% /tab %}}

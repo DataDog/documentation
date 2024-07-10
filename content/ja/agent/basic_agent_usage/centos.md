@@ -14,21 +14,20 @@ further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: CentOS
-title: CentOS 用 Agent の基本的な使用方法
+title: CentOS、Rocky、Alma Linux の基本的な Agent の使い方
 ---
 
 ## 概要
 
-このページでは、CentOS 用 Datadog Agent の基本的な機能について説明します。Datadog Agent のインストールは、CentOs 用 [Agent のインストール手順][1]に従ってください。
+このページでは、CentOS とその派生製品である Rocky Linux と Alma Linux 用の Datadog Agent の基本的な機能について説明します。Datadog Agent のインストールは、CentOs 用 [Agent のインストール手順][1]に従ってください。
 
 64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
-**注**: CentOS 6 以降は、64 ビット x86 アーキテクチャでサポートされています。CentOS 8 以降は、64 ビット Arm v8 アーキテクチャでサポートされています。
+**注**: CentOS 6 以降は、64 ビット x86 アーキテクチャでサポートされています。CentOS/Rocky/Alma 8 以降は、64 ビット Arm v8 アーキテクチャでサポートされています。
 
 ## コマンド
 
@@ -116,7 +115,58 @@ Agent の構成ファイルおよびフォルダーの場所
 {{% /tab %}}
 {{< /tabs >}}
 
-## トラブルシューティング
+## Agent のアンインストール
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+このコマンドでは、Agent は削除されますが以下は削除されません。
+* `datadog.yaml` コンフィギュレーションファイル
+* `/etc/datadog-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
+* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
+* `dd-agent` ユーザー
+* Datadog ログファイル
+
+以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+このコマンドでは、Agent は削除されますが以下は削除されません。
+
+* `datadog.yaml` コンフィギュレーションファイル
+* `/etc/dd-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
+* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
+* `dd-agent` ユーザー
+* Datadog ログファイル
+
+以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## ヘルプ
 
 [Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
@@ -130,6 +180,6 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
 [2]: /ja/agent/troubleshooting/
 [3]: /ja/developers/guide/custom-python-package/

@@ -1,6 +1,5 @@
 ---
 title: Data intake
-kind: documentation
 description: "How data can be fed into Datadog and which prerequisites need to be met in your or your clients' environments."
 private: true
 ---
@@ -182,7 +181,7 @@ Now that you have data flowing into Datadog, it's time to focus on [delivering v
 [11]: /api/latest/events
 [12]: /api/latest/tracing/
 [13]: /developers/custom_checks/
-[14]: /events/guides/dogstatsd/
+[14]: /service_management/events/guides/dogstatsd/
 [15]: /metrics/custom_metrics/
 [16]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
 [17]: /api/latest/
@@ -194,8 +193,8 @@ Now that you have data flowing into Datadog, it's time to focus on [delivering v
 [23]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [24]: /serverless/serverless_tagging/?tab=serverlessframework#overview
 [25]: /infrastructure/livecontainers
-[26]: /agent/guide/network/
-[27]: /agent/proxy/
+[26]: /agent/configuration/network/
+[27]: /agent/configuration/proxy/
 [28]: https://www.datadoghq.com/blog/deploying-datadog-with-chef-roles/
 [29]: https://www.datadoghq.com/blog/monitor-puppet-datadog/
 [30]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/

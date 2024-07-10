@@ -1,11 +1,10 @@
 ---
 title: Ruby on Rails Log Collection
-kind: documentation
 aliases:
   - /logs/languages/ruby
 further_reading:
 - link: "https://github.com/roidrage/lograge"
-  tag: "Github"
+  tag: "Source Code"
   text: "Lograge Documentation"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
@@ -153,7 +152,7 @@ Once [log collection is enabled][3], do the following to set up [custom log coll
       logs:
         - type: file
           path: "<RUBY_LOG_FILE_PATH>.log"
-          service: ruby
+          service: <SERVICE_NAME>
           source: ruby
           sourcecategory: sourcecode
           ## Uncomment the following processing rule for multiline logs if they
@@ -205,10 +204,10 @@ The hash is converted into JSON and you can carry out analytics for `user` and `
 [2]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [3]: /agent/logs/?tab=tailfiles#activate-log-collection
 [4]: /agent/logs/?tab=tailfiles#custom-log-collection
-[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[6]: /agent/guide/agent-commands/#restart-the-agent
+[5]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[6]: /agent/configuration/agent-commands/#restart-the-agent
 [7]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
-[8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[8]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [9]: /logs/log_configuration/parsing
 [10]: /logs/explorer/
 [11]: /glossary/#tail

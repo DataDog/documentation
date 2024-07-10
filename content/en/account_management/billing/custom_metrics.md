@@ -1,15 +1,12 @@
 ---
 title: Custom Metrics Billing
-kind: documentation
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
-further_reading:
-  - link: "/observability_pipelines/guide/custom-metrics-governance"
-    tag: "Documentation"
-    text: "Use Observability Pipelines to govern custom metrics"
+algolia:
+  tags: ['custom metrics billing']
 ---
 
-If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
+If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]. Certain standard integrations can also potentially emit custom metrics. For more information, see [Custom metrics and standard integrations][14].
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
@@ -215,7 +212,7 @@ By default, the Agent generates five custom metrics for each of the original fou
 
 [1]: /metrics/types/?tab=histogram#metric-types
 [2]: /metrics/types/?tab=histogram#definition
-[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
@@ -302,26 +299,11 @@ These allocations are counted across your entire infrastructure. For example, if
 
 The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric. Contact [Sales][11] or your [Customer Success][12] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
-## Standard integrations
-
-The following standard integrations can potentially emit custom metrics.
-
-| Type of integrations                           | Integrations                                                                       |
-|------------------------------------------------|------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.      | [ActiveMQ XML][13] / [Go-Expvar][14] / [Java-JMX][15]                              |
-| No default limit on custom metrics collection. | [Nagios][16] /[PDH Check][17] /[OpenMetrics][18] /[Windows performance counters][19] /[WMI][20] /[Prometheus][21] |
-| Can be configured to collect custom metrics.   | [MySQL][22] /[Oracle][23] /[Postgres][24] /[SQL Server][25]                        |
-| Custom metrics sent from cloud integrations    | [AWS][26]                                                                          |
-
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][27].
+For technical questions, contact [Datadog support][13].
 
 For billing questions, contact your [Customer Success][12] Manager.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
@@ -335,18 +317,5 @@ For billing questions, contact your [Customer Success][12] Manager.
 [10]: https://app.datadoghq.com/metric/summary
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
-[13]: /integrations/activemq/#activemq-xml-integration
-[14]: /integrations/go_expvar/
-[15]: /integrations/java/
-[16]: /integrations/nagios/
-[17]: /integrations/pdh_check/
-[18]: /integrations/openmetrics/
-[19]: /integrations/windows_performance_counters/
-[20]: /integrations/wmi_check/
-[21]: /integrations/prometheus
-[22]: /integrations/mysql/
-[23]: /integrations/oracle/
-[24]: /integrations/postgres/
-[25]: /integrations/sqlserver/
-[26]: /integrations/amazon_web_services/
-[27]: /help/
+[13]: /help/
+[14]: /metrics/custom_metrics/#standard-integrations

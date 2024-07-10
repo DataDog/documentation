@@ -5,6 +5,7 @@ assets:
   dashboards:
     Hive Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: hive.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10062
     source_type_name: Hive
   logs:
     source: hive
@@ -24,7 +26,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hive/README.md
@@ -33,26 +34,24 @@ draft: false
 git_integration_title: hive
 integration_id: hive
 integration_title: Hive
-integration_version: 1.8.1
+integration_version: 1.10.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: hive
-oauth: {}
 public_title: Hive
 short_description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
   media: []
@@ -61,19 +60,20 @@ tile:
   title: Hive
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、[Hive][1] の Hive Metastore と HiveServer2 の 2 つを監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Hive チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 #### Hive のセットアップ
 
@@ -101,11 +101,11 @@ Hive チェックは [Datadog Agent][2] パッケージに含まれています�
    次に、HiveServer2 または Hive Metastore を再起動します。Hive Metastore と HiveServer2 で同じ JMX 接続を共有することはできません。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
@@ -113,12 +113,12 @@ Hive チェックは [Datadog Agent][2] パッケージに含まれています�
 
 1. Hive のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `hive.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hive.d/conf.yaml][1] を参照してください。
 
-    このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。以下で説明するコンフィギュレーションを編集することで、関心があるメトリクスを指定できます。
-    収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][2]で詳細な手順を参照してください。制限数以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][3]までお問い合わせください。
+    このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][2]に表示されます。以下で説明するコンフィギュレーションを編集することで、関心があるメトリクスを指定できます。
+    収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細な手順を参照してください。制限数以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][5]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -144,14 +144,15 @@ _Agent バージョン 6.0 以降で利用可能_
 
     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル hive.d/conf.yaml][1] を参照してください。
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/integrations/java/
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/integrations/java/
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -161,7 +162,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Datadog-Hive インテグレーションを使用してメトリクスを収集するには、[JMX を使用したオートディスカバリー][2]ガイドを参照してください。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -181,27 +182,27 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][4]し、Checks セクションで `Hive` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "hive" >}}
 
 
-### イベント
+### ヘルプ
 
 Hive チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "hive" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 [1]: https://cwiki.apache.org/confluence/display/Hive/Home
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-Metrics
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

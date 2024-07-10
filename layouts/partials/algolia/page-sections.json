@@ -46,7 +46,7 @@
               {{- if gt (len $c) 2 -}}
                   {{- $full_url := print $page.Permalink "#" ($section_header | anchorize) -}}
                   {{- $relpermalink := print $page.RelPermalink "#" ($section_header | anchorize) -}}
-                  {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" ($section_header | anchorize) "_" $i) -}}
+                  {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" ($section_header | anchorize) "_" $i "_" $order) -}}
                   {{- $hugo_context.Scratch.Add "algoliaindex" (
                       dict "objectID" $object_id
                       "title" $title
@@ -56,6 +56,7 @@
                       "content" $c
                       "type" $page.Type
                       "relpermalink" $relpermalink
+                      "distinct_base_url" $page.RelPermalink
                       "full_url" $full_url
                       "language" $page.Language.Lang
                       "category" $category

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Confluent Platform Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: confluent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10091
     source_type_name: Confluent Platform
   logs:
     source: confluent_platform
@@ -35,12 +37,11 @@ draft: false
 git_integration_title: confluent_platform
 integration_id: confluent-platform
 integration_title: Confluent Platform
-integration_version: 1.8.2
+integration_version: 1.10.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: confluent_platform
-oauth: {}
 public_title: Confluent Platform
 short_description: Confluent Platform のコンポーネントを監視する。
 supported_os:
@@ -62,6 +63,7 @@ tile:
   title: Confluent Platform
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -78,17 +80,17 @@ tile:
 - Streams
 - REST Proxy
 
-## セットアップ
+## 計画と使用
 
 
-### インストール
+### インフラストラクチャーリスト
 
 Confluent Platform チェックは [Datadog Agent][1] パッケージに含まれています。Confluent Platform コンポーネントサーバーに追加でインストールする必要はありません。
 
 **注**: このチェックはメトリクスを JMX を使用して収集するため、Agent が [jmxfetch][2] を実行できるように、各ノード上に JVM が必要です。Oracle 提供の JVM を使用することをお勧めします。
 
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `confluent_platform.d/conf.yaml` ファイルを編集し、Confluent Platform のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[confluent_platform.d/conf.yaml のサンプル][3]を参照してください。
 
@@ -111,7 +113,7 @@ Confluent Platform チェックは [Datadog Agent][1] パッケージに含ま�
 
 2. [Agent を再起動します][5]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -162,26 +164,26 @@ _Agent バージョン 6.0 以降で利用可能_
           status : OK
 ```
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "confluent_platform" >}}
 
 
-### イベント
+### ヘルプ
 
 Confluent Platform チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "confluent_platform" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/jmxfetch
 [3]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml

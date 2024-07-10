@@ -5,6 +5,7 @@ assets:
   dashboards:
     Hudi Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: hudi.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10217
     source_type_name: Hudi
   logs:
     source: hudi
@@ -31,7 +33,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-- 処理
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hudi/README.md
 display_on_public_website: true
@@ -39,26 +40,24 @@ draft: false
 git_integration_title: hudi
 integration_id: hudi
 integration_title: Hudi
-integration_version: 2.1.1
+integration_version: 2.3.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: hudi
-oauth: {}
 public_title: Hudi
 short_description: Hudi の構成に関するメトリックスを追跡します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Log Collection
-  - Category::Processing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Hudi の構成に関するメトリックスを追跡します。
   media: []
@@ -67,6 +66,7 @@ tile:
   title: Hudi
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -74,14 +74,14 @@ tile:
 このチェックは [Hudi][1] を監視しています。
 Hudi [バージョン][2] `0.10.0` 以降と互換性があります。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Hudi チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Hudi で [JMX Metrics Reporter][5] を[構成][4]します。
 
@@ -109,14 +109,14 @@ Hudi チェックは [Datadog Agent][3] パッケージに含まれています�
 
 [Agent の `status` サブコマンドを実行][11]し、Checks セクションで `hudi` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "hudi" >}}
 
 
 
-### ログの収集
+### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -159,22 +159,22 @@ _Agent バージョン 6.0 以降で利用可能_
            pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
            name: new_log_start_with_date
    ```
-### イベント
+### ヘルプ
 
 Hudi インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "hudi" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
 [1]: https://hudi.apache.org/
 [2]: https://github.com/apache/hudi/releases
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://hudi.apache.org/docs/configurations#Metrics-Configurations
 [5]: https://hudi.apache.org/docs/metrics/#jmxmetricsreporter
 [6]: https://github.com/DataDog/integrations-core/blob/master/hudi/datadog_checks/hudi/data/conf.yaml.example

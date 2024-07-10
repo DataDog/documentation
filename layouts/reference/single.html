@@ -1,7 +1,10 @@
 {{ define "main" }}
     <div class="row">
       <div class="col-12 order-1">
-          <h1 id="pagetitle">{{ .Title }}</h1>
+          <h1 id="pagetitle">
+            {{ if .Params.legacy }}({{i18n "legacy" | upper}}){{end}}
+            {{ .Title }}
+          </h1>
       </div>
       <div class="col-12">
           {{ partial "breadcrumbs.html" . }}
@@ -18,12 +21,12 @@
         <p>{{ $data.description2 | markdownify }}</p>
 
         <div class="tab-content">
-        <ul class="nav nav-tabs border-none response-toggle">
+        <ul class="nav nav-tabs border-none ps-0 response-toggle">
             <li class="nav-item">
-                <a class="nav-link mr-1 js-model-link active" href="#" data-bs-toggle="tab">Options</a>
+                <a class="nav-link me-1 js-model-link active" href="#" data-bs-toggle="tab">Options</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mr-1 js-example-link" href="#" data-bs-toggle="tab">Schema</a>
+                <a class="nav-link js-example-link" href="#" data-bs-toggle="tab">Schema</a>
             </li>
         </ul>
 
@@ -54,40 +57,17 @@
              <div class="code-snippet-wrapper">
                 <div class="code-snippet">
 
-                  <div class="example-accordion" id="{{ $data.metadata.logical_name | lower }}-accordion-parent">
+                  <div class="reference-schema" id="{{ $data.metadata.logical_name | lower }}">
                     <div class="card">
                       <div class="card-header p-0">
                         <h5 class="m-0">
-                          <button class="btn btn-link font-bold w-100 text-start" data-bs-toggle="collapse" data-bs-target="#{{ $data.metadata.logical_name | lower }}-example-simple" aria-expanded="true" type="button" aria-controls="{{ $data.metadata.logical_name | lower }}-example-simple">
-                            Simple
+                          <button class="btn btn-link font-bold w-100 text-start" type="button">
+                            YAML
                           </button>
                         </h5>
                       </div>
-                      <div id="{{ $data.metadata.logical_name | lower }}-example-simple" class="collapse show" data-bs-parent="#{{ $data.metadata.logical_name | lower }}-accordion-parent" style>
-                        <div class="card-body p-0 code-snippet">
-                            <div class="code-button-wrapper position-absolute">
-                                <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                            </div>
-                            {{ highlight $data.simple "yaml" "" }}
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header p-0">
-                        <h5 class="m-0">
-                          <button class="btn btn-link font-bold w-100 text-start" data-bs-toggle="collapse" data-bs-target="#{{ $data.metadata.logical_name | lower }}-example-advanced" aria-expanded="false" type="button" aria-controls="{{ $data.metadata.logical_name | lower }}-example-advanced">
-                            Advanced
-                          </button>
-                        </h5>
-                      </div>
-                      <div id="{{ $data.metadata.logical_name | lower }}-example-advanced" class="collapse" data-bs-parent="#{{ $data.metadata.logical_name | lower }}-accordion-parent" style>
-                        <div class="card-body p-0 code-snippet">
-                            <div class="code-button-wrapper position-absolute">
-                                <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                            </div>
-                            {{ highlight $data.advanced "yaml" "" }}
-                        </div>
+                      <div class="card-body p-0 append-copy-btn">
+                          {{ highlight $data.simple "yaml" "" }}
                       </div>
                     </div>
                   </div>

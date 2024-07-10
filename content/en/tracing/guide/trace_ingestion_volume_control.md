@@ -1,6 +1,6 @@
 ---
 title: Ingestion volume control with APM Distributed Tracing
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
@@ -22,7 +22,9 @@ With the ingestion control page, you have full visibility and complete control o
 
 If you decide to reduce the ingestion volume for certain services, the **request, error, and latency [metrics][3]** (known as RED metrics, for Requests, Errors, and Duration) remain 100% accurate, as they are being calculated based on 100% of the application's traffic, regardless of any sampling configuration. These metrics are included when purchasing Datadog APM. In order to make sure you have full visibility into your application's traffic, you can use these metrics to spot potential errors on a service or a resource, by creating dashboards, monitors, and SLOs.
 
-**Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data by default. Use the [Datadog Processor][17] to keep the metrics accuracy, while using collector-level sampling. See [Ingestion Sampling with OpenTelemetry][4] for more information.
+**Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data by default. See [Ingestion Sampling with OpenTelemetry][4] for more information.
+
+<div class="alert alert-info"><strong>Beta</strong>: Alternatively, use the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> to calculate APM metrics on unsampled data. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> for more information.</div>
 
 Trace data is very repetitive, which means trace samples to investigate any issues are still available with ingestion sampling. For high throughput services, there's usually no need for you to collect every single request - an important enough problem should always show symptoms in multiple traces. Ingestion controls helps you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
@@ -154,4 +156,3 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [16]: /tracing/legacy_app_analytics
-[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor

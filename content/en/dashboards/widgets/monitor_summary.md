@@ -1,10 +1,9 @@
 ---
 title: Monitor Summary Widget
-kind: documentation
 description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
 widget_type: "manage_status"
 aliases:
-    - /graphing/widgets/monitor_summary/
+- /graphing/widgets/monitor_summary/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -16,8 +15,6 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 {{< img src="dashboards/widgets/monitor_summary/monitor-summary-overview.png" alt="monitor summary" >}}
 
 ## Setup
-
-{{< img src="dashboards/widgets/monitor_summary/monitor-summary-setup.png" alt="monitor summary setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -71,19 +68,9 @@ Selecting the `Show triggered column` option filters the results to monitors or 
 
 {{< img src="dashboards/widgets/monitor_summary/monitor-summary.png" alt="display preferences" style="width:80%;">}}
 
-#### Title
-
-Display a custom title for your widget by checking the `Show a title` check box:
-
-{{< img src="dashboards/widgets/monitor_summary/widget_title.png" alt="widget title" style="width:80%;">}}
-
-You can optionally define the title's size and alignment.
-
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
-
-The dedicated [widget JSON schema definition][4] for the monitor summary widget is:
+This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
 
 {{< dashboards-widgets-api >}}
 
@@ -93,5 +80,5 @@ The dedicated [widget JSON schema definition][4] for the monitor summary widget 
 
 [1]: /monitors/manage/
 [2]: /monitors/manage/#grouped-results
-[3]: /api/v1/dashboards/
+[3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

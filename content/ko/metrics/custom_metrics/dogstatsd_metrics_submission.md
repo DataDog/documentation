@@ -13,7 +13,6 @@ further_reading:
 - link: /metrics/types/
   tag: 설명서
   text: Datadog 메트릭 유형
-kind: 설명서
 title: '메트릭 제출: DogStatsD'
 ---
 
@@ -43,8 +42,8 @@ StatsD는 메트릭만 허용하지만, DogStatsD는 세 가지 주요 Datadog �
 : COUNT 메트릭을 감소시키는 데 사용됩니다. Datadog에 `RATE` 유형으로 저장됩니다. 저장된 시계열의 각 값은 StatsD 플러시 기간 동안 메트릭 값의 시간 정규화된 델타입니다.
 
 `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 임의의 `Value`에서 COUNT 메트릭을 증가시키는 데 사용됩니다. Datadog에 `RATE` 유형으로 저장됩니다. 저장된 시계열의 각 값은 StatsD 플러시 기간 동안 메트릭 값의 시간 정규화된 델타입니다.
-:**참고:** `count`는 파이썬(Python)에서는 지원되지 않습니다.
+: 임의의 `Value`에서 COUNT 메트릭을 증가시키는 데 사용되며, Datadog에 `RATE` 유형으로 저장됩니다. 저장된 시계열의 각 값은 StatsD 플러시 기간 동안 메트릭 값의 시간 정규화된 델타입니다.
+: **참고:** `count`는 Python에서 지원되지 않습니다.
 
 **참고**: `COUNT` 유형 메트릭은 초당 단위를 보고하기 위해 플러시 간격 동안 정규화되므로 Datadog 내에서 십진수 값을 표시할 수 있습니다.
 
@@ -54,7 +53,7 @@ StatsD는 메트릭만 허용하지만, DogStatsD는 세 가지 주요 Datadog �
 
 다음 코드를 실행하여 DogStatsD `COUNT` 메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 기억하세요. 
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -203,30 +202,40 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' });
+tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 사용할 수 있습니다:
+위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 표시할 수 있습니다.
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="증가 감소" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
 
-값이 `COUNT`로 제출되기 때문에 Datadog에는 `RATE`로 저장됩니다. Datadog 내에서 원시 카운트를 가져오려면 [Cumulative Sum][3] 또는 [Integral][4] 함수와 같은 함수를 시리즈에 적용합니다:
+값은 `COUNT`로 제출되므로 Datadog에서 `RATE`로 저장됩니다. Datadog 내에서 원시 카운트를 얻으려면 [누적 합계][3] 또는 [적분][4] 함수와 같은 함수를 계열에 적용합니다:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Cumsum 증가 감소" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Cumsum을 사용한 Increment Decrement" >}}
 
-### 게이지
+### GAUGE
 
 `gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
 : Datadog에 `GAUGE` 유형으로 저장됩니다. 저장된 시계열의 각 값은 StatsD 플러시 기간 동안 메트릭에 대해 제출된 마지막 게이지 값입니다.
 
 #### 코드 예
 
-`GAUGE` 메트릭으로 저장된 `GAUGE` 메트릭을 Datadog에 내보냅니다. [메트릭 유형][5] 설명서에서 `GAUGE` 유형에 대해 자세히 알아보세요.
+`GAUGE` 메트릭으로 저장된 `GAUGE` 메트릭을 Datadog에 내보냅니다. [메트릭 유형][5] 문서에서 `GAUGE` 유형에 대해 자세히 알아보세요.
 
-다음 코드를 실행하여 DogStatsD `GAUGE` 메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 기억하세요. 
+다음 코드를 실행하여 DogStatsD `GAUGE` 메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 잊지 마세요.
 
-**참고:** 메트릭 제출 호출은 비동기식입니다. 메트릭이 제출되었는지 확인하려면, 프로그램이 종료되기 전에 `flush`를 호출하세요. 
+**참고:** 메트릭 제출 호출은 비동기식입니다. 메트릭이 제출되었는지 확인하려면 프로그램이 종료되기 전에 `flush`를 호출하세요.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -369,22 +378,36 @@ while (TRUE) {
 }
 ```
 {{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+let i = 0;
+while(true) {
+  i++;
+  tracer.dogstatsd.gauge('example_metric.gauge', i, { environment: 'dev' });
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-위의 코드 실행 후, 메트릭 데이터를 Datadog에서 그래프로 사용할 수 있습니다:
+위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 표시할 수 있습니다.
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="게이지" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
-### 설정(SET)
+### SET
 
 `set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Datadog에 `GAUGE` 유형으로 저장됩니다. 저장된 시계열의 각 값은 플러시 기간 동안 StatsD에 제출된 메트릭의 고유한 값의 개수입니다.
+: Datadog에 `GAUGE` 유형으로 저장됩니다. 저장된 시계열의 각 값은 플러시 기간 동안 메트릭에 대해 StatsD에 제출된 고유 값의 개수입니다.
 
 #### 코드 예
 
 `GAUGE` 메트릭으로 저장된 `SET` 메트릭을 Datadog에 내보냅니다.
 
-다음 코드를 실행하여 DogStatsD `SET`메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 기억하세요. 
+다음 코드를 실행하여 DogStatsD `SET`메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 잊지 마세요.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
@@ -532,26 +555,26 @@ while (TRUE) {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 사용할 수 있습니다:
+위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 표시할 수 있습니다.
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
-### 히스토그램(HISTOGRAM)
+### HISTOGRAM
 
 `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 여러 메트릭이 제출되므로, 저장된 메트릭 유형(`GAUGE`, `RATE`)은 메트릭에 따라 다릅니다. 자세한 내용은 [HISTOGRAM 메트릭 유형][6] 문서를 참조하세요.
+: 여러 메트릭이 제출되므로 저장되는 저장된 메트릭 유형(`GAUGE`,`RATE`)은 메트릭에 따라 달라집니다. 자세한 내용은 [HISTOGRAM 메트릭 유형][6] 문서를 참조하세요.
 
 #### 설정
 
-* [datadog.yaml 설정 파일][7]의 `histogram_aggregates` 파라미터를 사용하여 Datadog에 보낼 애그리게이션을 설정합니다. 기본적으로 `max`, `median`, `avg` 및 `count` 애그리게이션만 전송됩니다.
-* [datadog.yaml 설정 파일][7]의 `histogram_percentiles` 파라미터를 사용하여 Datadog에 보낼 백분위수 애그리게이션을 설정합니다. 기본적으로, `95pc` 백분위수만 전송됩니다.
+* [datadog.yaml 설정 파일][7]의 `histogram_aggregates` 파라미터를 사용하여 Datadog으로 보낼 집계를 설정합니다. 기본적으로 `max`, `median`, `avg` 및 `count` 집계만 전송됩니다.
+* [datadog.yaml 설정 파일][7]의 `histogram_percentiles` 파라미터를 사용하여 Datadog으로 보낼 백분위수 집계를 설정합니다. 기본적으로 `95pc` 백분위수만 전송됩니다.
 
 #### 코드 예
 
-`HISTOGRAM` 메트릭 유형은 DogStatsD에만 해당됩니다. `GAUGE` 및 `RATE` 메트릭으로 저장된`HISTOGRAM`메트릭을 Datadog에 내보냅니다. [메트릭 유형][6] 문서에서 `HISTOGRAM` 유형에 대해 자세히 알아보세요.
+`HISTOGRAM` 메트릭 유형은 DogStatsD에만 적용됩니다. `GAUGE` 및 `RATE` 메트릭으로 저장된 `HISTOGRAM` 메트릭을 Datadog에 내보냅니다. [메트릭 유형][6] 문서에서`HISTOGRAM` 유형에 대해 자세히 알아보세요.
 
 
-다음 코드를 실행하여 DogStatsD `HISTOGRAM` 메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 기억하세요. 
+다음 코드를 실행하여 DogStatsD `HISTOGRAM` 메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 잊지 마세요.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
@@ -698,20 +721,20 @@ while (TRUE) {
 |-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | 이 메트릭이 샘플링된 횟수 |
 | `example_metric.histogram.avg`          | 샘플링된 값의 평균           |
-| `example_metric.histogram.median`       | 샘플링된 값의 중간값                    |
+| `example_metric.histogram.median`       | 샘플링 값의 중앙값                    |
 | `example_metric.histogram.max`          | 최대 샘플링 값                    |
 | `example_metric.histogram.95percentile` | 95번째 백분위수 샘플링 값           |
 
-위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 사용할 수 있습니다:
+위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 표시할 수 있습니다.
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
 #### TIMER
 
-DogStatsD의 `TIMER` 메트릭 유형은 `HISTOGRAM` 메트릭 유형의 구현입니다 (표준 StatsD의 타이머와 혼동하지 말 것). 타이밍 데이터만 측정합니다. 예를 들어, 코드 섹션을 실행하는 데 걸리는 시간입니다.
+DogStatsD의 `TIMER` 메트릭 유형은 `HISTOGRAM` 메트릭 유형의 구현입니다(표준 StatsD의 타이머와 혼동하지 마세요). 이는 타이밍 데이터만 측정합니다(예: 코드 섹션을 실행하는 데 걸리는 시간).
 
-`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 여러 메트릭이 제출되기 때문에 저장된 메트릭 유형(`GAUGE`, `RATE`)은 메트릭에 따라 다릅니다. 자세한 내용은 [HISTOGRAM 메트릭 유형][6] 설명서를 참조하세요.
+`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+: 여러 메트릭이 제출되므로 저장되는 저장된 메트릭 유형(`GAUGE`,`RATE`)은 메트릭에 따라 달라집니다. 자세한 내용은 [HISTOGRAM 메트릭 유형][6] 문서를 참조하세요.
 
 ##### 설정
 
@@ -719,13 +742,13 @@ DogStatsD의 `TIMER` 메트릭 유형은 `HISTOGRAM` 메트릭 유형의 구현�
 
 ##### 코드 예
 
-`GAUGE` 및 `RATE` 메트릭으로 저장된 —`TIMER` 메트릭을 Datadog에 내보냅니다. [메트릭 유형][6] 문서에서 `HISTOGRAM` 유형에 대해 자세히 알아보세요. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 기억하세요. 
+`GAUGE` 및 `RATE` 메트릭으로 저장된 `TIMER` 메트릭을 Datadog에 내보냅니다. [메트릭 유형][6] 문서에서 `HISTOGRAM` 유형에 대해 자세히 알아보세요. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 잊지 마세요.
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
-파이썬(Python)에서, 타이머는 데코레이터로 생성됩니다.
+Python에서 타이머는 데코레이터로 생성됩니다.
 
 ```python
 from datadog import initialize, statsd
@@ -756,12 +779,12 @@ import random
 
 def my_function():
 
-  # First some stuff you don't want to time
+  # 시간을 측정하지 않는 사항들
   sleep(1)
 
-  # Now start the timer
+  # 타이머 시작
   with statsd.timed('example_metric.timer', tags=["environment:dev"]):
-    # do something to be measured
+    # 측정할 사항들
     sleep(random.randint(0, 10))
 
 while(1):
@@ -803,26 +826,26 @@ DogStatsD는 타이머 메트릭 데이터를 수신하면서, 렌더링 시간�
 |-------------------------------------|-----------------------------------------|
 | `example_metric.timer.count`        | 이 메트릭이 샘플링된 횟수 |
 | `example_metric.timer.avg`          | 샘플링된 값의 평균 시간      |
-| `example_metric.timer.median`       | 중앙값 샘플링 값                    |
+| `example_metric.timer.median`       | 샘플링 값의 중앙값                    |
 | `example_metric.timer.max`          | 최대 샘플링 값                    |
 | `example_metric.timer.95percentile` | 95번째 백분위수 샘플링 값           |
 
-DogStatsD는 `TIMER`를  `HISTOGRAM` 메트릭으로 취급합니다. `TIMER` 또는 `HISTOGRAM` 메트릭 유형을 사용하더라도 동일한 데이터를 Datadog에 전송합니다. 위의 코드를 실행한 후, 메트릭 데이터를 Datadog에서 그래프로 사용할 수 있습니다:
+DogStatsD는 `TIMER`를 `HISTOGRAM` 메트릭으로 간주합니다. `TIMER` 또는 `HISTOGRAM` 메트릭 유형 중 어떤 유형을 사용하더라도 동일한 데이터를 Datadog으로 보냅니다. 위의 코드를 실행한 후 Datadog에서 메트릭 데이터를 그래프로 표시할 수 있습니다.
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
-### 배포
+### DISTRIBUTION
 
 `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)`
-: Datadog에 `DISTRIBUTION` 유형으로 저장됩니다. 자세한 내용은 전용 [Distribution 설명서][8]를 참조하세요.
+: Datadog에서 `DISTRIBUTION` 유형으로 저장됩니다. [분포 문서][8]를 통해 자세한 내용을 확인하세요.
 
 #### 코드 예
 
-`DISTRIBUTION` 메트릭 유형은 DogStatsD에만 해당되며, `DISTRIBUTION` 메트릭으로 저장된 `DISTRIBUTION` 메트릭을 Datadog에 내보냅니다. [메트릭 유형][9] 문서에서 `DISTRIBUTION` 유형에 대해 자세히 알아보세요.
+`DISTRIBUTION` 메트릭 유형은 DogStatsD에만 적용됩니다. `DISTRIBUTION` 메트릭으로 저장된 `DISTRIBUTION` 메트릭을 Datadog에 내보냅니다. [메트릭 유형][9] 문서에서`DISTRIBUTION` 유형에 대해 자세히 알아보세요.
 
-다음 코드를 실행하여 DogStatsD `DISTRIBUTION` 메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 기억하세요. 
+다음 코드를 실행하여 DogStatsD `DISTRIBUTION` 메트릭을 Datadog에 제출합니다. 더 이상 필요하지 않을 때 클라이언트를 `flush`/`close` 하는 것을 잊지 마세요.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -959,30 +982,43 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+while(true) {
+  tracer.dogstatsd.distribution('example_metric.distribution', Math.random() * 20, { environment: 'dev' });
+  await new Promise(r => setTimeout(r, 2000));
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-위의 계측은 `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (중앙값), `75th percentile`, `90th percentile`, `95th percentile` 및 `99th percentile` 을 계산합니다. 분포는 업로드된 파일의 크기 또는 강의실 시험 점수와 같은 *모든* 유형의 값 분포를 측정하는 데 사용할 수 있습니다.
+위의 계측은 `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (중앙값), `75th percentile`, `90th percentile`, `95th percentile`, `99th percentile`을 계산합니다. 분포는 업로드된 파일의 크기, 강의실 시험 점수 등 *모든* 유형의 값 분포를 측정하는 데 사용할 수 있습니다.
 
 ## 메트릭 제출 옵션
 
-### 샘플 속도
+### 샘플링 속도
 
-일부 성능 집약적인 코드 경로에서는 UDP 패킷을 전송하는 오버헤드가 너무 클 수 있으므로, DogStatsD 클라이언트는 샘플링을 지원합니다(일정 비율의 시간 동안만 메트릭 전송). 이 기능은 많은 메트릭을 샘플링하고 DogStatsD 클라이언트가 DogStatsD 서버와 동일한 호스트에 있지 않은 경우에 유용합니다. 단점: 트래픽은 감소하지만 정확도와 세분성이 다소 떨어집니다.
+일부 성능 집약적 코드 경로에서 UDP 패킷 전송에 따른 오버헤드가 너무 클 수 있으므로 DogStatsD 클라이언트는 샘플링을 지원합니다(시간의 일정 비율만큼만 메트릭 전송). 이는 많은 메트릭을 샘플링하고 DogStatsD 클라이언트가 DogStatsD 서버와 동일한 호스트에 있지 않은 경우 유용합니다. 단, 트래픽이 줄어드는 대신 정확성과 세분성은 일부 손실될 수 있습니다.
 
-`1`의 샘플링 속도는 메트릭을 100% 전송하고 `0`의 샘플 속도는 메트릭을 0% 전송합니다.
+`1` 샘플링 속도는 메트릭을 100% 전송하는 반면, `0` 샘플링 속도는 메트릭을 0% 전송합니다.
 
-Datadog에 메트릭을 보내기 전에, DogStatsD는 `<SAMPLE_RATE>`를 사용하여 메트릭 유형에 따라 메트릭 값을 수정합니다(샘플링 없이 값을 추정하기 위함):
+Datadog에 메트릭을 전송하기 전에, DogStatsD는 `<SAMPLE_RATE>`를 사용하여 (샘플링 없이 값을 추정하기 위해) 메트릭 유형에 따라 메트릭 값을 수정합니다.
 
-| 메트릭 유형 | 샘플 속도 수정                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COUNT`     | 수신된 값에 (`1/<SAMPLE_RATE>`)를 곱합니다. 수신된 하나의 데이터 포인트에 대해 실제로 동일한 값으로 `1/<SAMPLE_RATE>`이 샘플링되었다고 가정하는 것이 합리적입니다. |
-| `GAUGE`     | 수정하지 않습니다. 받은 값은 그대로 유지됩니다.                                                                                                                               |
-| `SET`       | 수정하지 않습니다. 수신된 값은 그대로 유지됩니다.                                                                                                                               |
-| `HISTOGRAM` | `histogram.count` 통계는 COUNT 메트릭이며, 위에서 설명한 수정을 수신합니다. 다른 통계는 게이지 메트릭이며 "수정"되지 않습니다.                      |
+| 메트릭 종류    | 샘플링 속도 수정                                                                                                                                                          |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `COUNT`        | 수신된 값에 (`1/<SAMPLE_RATE>`)를 곱합니다. 수신된 하나의 데이터 포인트에 대해 실제 동일한 값으로 `1/<SAMPLE_RATE>`가 샘플링되었다고 가정하는 것이 좋습니다. |
+| `GAUGE`        | 수정하지 않습니다. 받은 값은 그대로 유지됩니다.                                                                                                                               |
+| `SET`          | 수정하지 않습니다. 받은 값은 그대로 유지됩니다.                                                                                                                               |
+| `HISTOGRAM`    | `histogram.count` 통계는 COUNT 메트릭이며 위에 설명된 수정 사항이 적용됩니다. 다른 통계는 게이지 메트릭이며 "수정"되지 않습니다.                      |
+| `DISTRIBUTION` | 수신된 값은 (`1/<SAMPLE_RATE>`) 횟수만큼 카운트됩니다. 수신된 하나의 데이터 포인트에 대해 `1/<SAMPLE_RATE>`가 실제로 동일한 값으로 샘플링되었다고 가정하는 것이 좋습니다. |
 
 #### 코드 예
 
-다음 코드는 시간의 절반만 포인트를 전송합니다:
+다음 코드는 절반의 시간만 포인트를 전송합니다.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -1027,13 +1063,13 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 ### 메트릭 태깅
 
-`tags` 파라미터를 사용하여 DogStatsD에 보내는 모든 메트릭에 태그를 추가하세요. 
+`tags` 파라미터를 사용하여 DogStatsD에 전송하는 모든 메트릭에 태그를 추가하세요. 
 
 #### 코드 예
 
 다음 코드는 `example_metric.increment` 메트릭에 `environment:dev` 및 `account:local` 태그만 추가합니다.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1079,11 +1115,17 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 #### 호스트 태그
 
-호스트 태그는 메트릭을 집계하는 Datadog 에이전트에 의해 자동으로 할당됩니다. 에이전트 호스트 이름과 일치하지 않는 호스트 태그와 함께 제출된 메트릭은 원래 호스트에 대한 래퍼런스를 잃습니다. 제출된 호스트 태그는 에이전트에 서 수집되었거나 설정된 모든 호스트 이름보다 우선합니다.
+호스트 태그는 메트릭을 집계하는 Datadog Agent에 의해 자동으로 할당됩니다. Agent 호스트 이름과 불일치하는 호스트 태그와 함께 제출된 메트릭은 원래 호스트에 대한 레퍼런스를 잃습니다. 제출된 호스트 태그는 Agent에서 수집하거나 설정한 모든 호스트 이름을 재정의합니다.
 
 ## 참고 자료
 
@@ -1095,6 +1137,6 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 [4]: /ko/dashboards/functions/arithmetic/#integral
 [5]: /ko/metrics/types/?tab=gauge#definition
 [6]: /ko/metrics/types/?tab=histogram#definition
-[7]: /ko/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /ko/metrics/distributions/
 [9]: /ko/metrics/types/?tab=distribution#definition

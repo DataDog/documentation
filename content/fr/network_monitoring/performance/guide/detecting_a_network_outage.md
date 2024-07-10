@@ -1,12 +1,11 @@
 ---
 aliases:
 - /fr/network_performance_monitoring/guide/detecting_a_network_outage/
-kind: guide
 title: Détecter une panne de réseau
 ---
 Les pannes de réseau se cachent souvent derrière des problèmes d'infrastructure, d'application ou de conteneur, ce qui les rend difficiles à détecter. Si vous n'avez pas de moyen de surveiller les performances de votre réseau régional ou de l'endpoint tiers que vous utilisez, détecter une panne sur un cloud tiers ou régional peut prendre jusqu'à plusieurs heures, et pourrait finir par affecter vos clients.
 
-Grâce à NPM (Network Performance Monitoring), les pannes de réseau sont détectées en quelques minutes. En analysant simultanément les données de flux réseau et les métriques, les traces, les logs et les métriques d'infrastructure, vous pouvez clairement savoir lorsque vous rencontrez une panne de réseau, et ainsi procéder par élimination (voir les étapes ci-dessous) pour trouver la source d'un problème sur le réseau.
+Grâce à NPM (Network Performance Monitoring), les pannes réseau sont détectées en quelques minutes. En analysant simultanément les données de flux réseau et les métriques, traces, logs et métriques d'infrastructure, vous pouvez clairement savoir lorsque vous rencontrez une panne de réseau, et ainsi procéder par élimination (voir les étapes ci-dessous) pour trouver la source d'un problème sur le réseau.
 
 ## Surcharge de trafic sur l'infrastructure sous-jacente
 

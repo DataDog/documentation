@@ -1,6 +1,6 @@
 ---
 title: Mapping Prometheus Metrics to Datadog Metrics
-kind: guide
+
 aliases:
   - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
@@ -29,13 +29,14 @@ For more information, see [OpenMetrics Metric Types][2] and [Datadog Metric Type
 
 {{< tabs >}}
 {{% tab "Latest Version" %}}
-### Gauge
 
-[Prometheus/OpenMetrics `gauge`][101] maps to Datadog's `gauge`.
 
-### Counter
-
-[Prometheus/OpenMetrics `counter`][102] maps to Datadog's `count`.
+| Metric Type | OpenMetrics | Datadog | 
+| --- | --- | --- |
+| [counter][110] | `counter` | `count` |
+| [gauge][111] | `gauge` | `gauge` |
+| [histogram][112] | `_count`, `_sum`, `_bucket` | The `_count`, `_sum`, and `_bucket` values of the histogram are each mapped to Datadog's `count` type and include a `.count`, `.sum`, and `.bucket` suffix, respectively. |
+| [summary][113] | `_count`, `_sum`, `_created` | The `_count` and `_sum` values are mapped to Datadog's `count` type and include a `.count` and `.sum` suffix in their name, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix. | 
 
 ### Histogram
 
@@ -58,6 +59,10 @@ For [Prometheus/OpenMetrics `summary`][107], `_count` and `_sum` values are mapp
 [107]: https://prometheus.io/docs/concepts/metric_types/#counter
 [108]: /metrics/distributions/
 [109]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+[110]: https://prometheus.io/docs/concepts/metric_types/#gauge
+[111]: https://prometheus.io/docs/concepts/metric_types/#counter
+[112]: /integrations/guide/prometheus-metrics/?tab=latestversion#histogram
+[113]: /integrations/guide/prometheus-metrics/?tab=latestversion#summary
 
 {{% /tab %}}
 {{% tab "Legacy Version" %}}
@@ -75,7 +80,7 @@ However, if the parameter `send_monotonic_counter` is `false`, then this metric 
 
 For [Prometheus/OpenMetrics `histogram`][104], the `_count` and `_sum` values of the histogram are each mapped to Datadog's `gauge` type and include a `.count` and `.sum` suffix in their name, respectively.
 
-If the `send_histogram_buckets` parameter is `true`, `_bucket` samples are sent to Datadog with a `.bucket` suffix, and are also mapped to Datadog's `gauge` by default.
+If the `send_histograms_buckets` parameter is `true`, `_bucket` samples are sent to Datadog with a `.bucket` suffix, and are also mapped to Datadog's `gauge` by default.
 
 Setting the `send_distribution_counts_as_monotonic` parameter to `true` causes the `_count` and `_bucket` metrics to be sent as type `count` instead. Setting `send_distribution_sums_as_monotonic` does the same for `_sum` metrics.
 
@@ -109,3 +114,4 @@ Setting the `send_distribution_counts_as_monotonic` parameter to `true` causes t
 [1]: /agent/kubernetes/prometheus/
 [2]: https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md#metric-types
 [3]: /metrics/types/
+

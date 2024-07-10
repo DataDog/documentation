@@ -22,10 +22,9 @@ integration_id: rum-android
 integration_title: Android
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_android
-oauth: {}
 public_title: Android
 short_description: Surveiller des applications Android et générer des métriques avec
   la solution RUM Datadog

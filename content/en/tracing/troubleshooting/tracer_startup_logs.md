@@ -1,6 +1,5 @@
 ---
 title: Tracer Startup Logs
-kind: Documentation
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -8,13 +7,13 @@ further_reading:
 ---
 ## Startup logs
 
-Tracer startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, or `DATADOG CONFIGURATION` to simplify searching within your logs.
+Tracer startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, `DATADOG ERROR`, or `DATADOG CONFIGURATION` to simplify searching within your logs.
 
 Some languages log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below. Some languages don't log diagnostics entries, also noted below.
 
 `CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an `agent_error` key, which indicates whether the Agent is reachable.
 
-`DIAGNOSTICS` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` log lines, confirm from the indicated log that settings and configurations are applied correctly.
+`DIAGNOSTICS` or `ERROR` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` or `ERROR` log lines, confirm from the indicated log that settings and configurations are applied correctly.
 
 If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
@@ -49,9 +48,11 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 
 **Note:** On Linux, you must create the logs directory before you enable debug mode.
 
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
-- `dotnet-tracer-native.log` contains the diagnostics logs, if any are generated.
+- `dotnet-tracer-native-{processName}-{processID}.log` contains the diagnostics logs, if any are generated.
 
 **Configuration:**
 
@@ -172,7 +173,7 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Startup logs are disabled by default starting in version 2.x of the tracer. They can enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
+Startup logs are disabled by default starting in version 2.x of the tracer. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
 
 **Configuration:**
 
@@ -233,10 +234,10 @@ W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 
 **Diagnostics:**
 
-The Ruby tracer prints a diagnostic line when the Agent cannot be reached.
+The Ruby tracer prints an error line when the Agent cannot be reached.
 
 ```text
-W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
+W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR - TRACER - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
 ```
 
 {{< /programming-lang >}}
@@ -244,10 +245,14 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 
 **Configuration:**
 
+The Ruby tracer prints a configuration line for each product (i.e. Profiling, Core, and Tracing).
+
 ```text
+I, [2023-08-16T18:09:01.972265 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
 
-{"agent_url":"http://localhost:8126","analytics_enabled":false,"analytics_sample_rate":null,"date":"2020-07-03T00:44:37+0000","dd_version":"","enabled":true,"env":"test-env","lang":"cpp","lang_version":"201402","operation_name_override":"","report_hostname":false,"sampling_rules":"[{\"sample_rate\": 1.0}]","service":"service_name","tags":{},"version":"v1.2.0"}
+I, [2023-08-16T18:09:01.972767 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2023-08-16T18:09:01+00:00","os_name":"aarch64-unknown-linux-gnu","version":"1.13.0","lang":"ruby","lang_version":"3.0.6","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.0.6","health_metrics_enabled":false}
 
+I, [2023-08-16T18:09:27.223143 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - TRACING - {"enabled":true,"agent_url":"http://agent:8126?timeout=30","analytics_enabled":false,"sample_rate":null,"sampling_rules":null,"integrations_loaded":"active_model_serializers@,aws@","partial_flushing_enabled":false,"priority_sampling_enabled":false,"integration_active_model_serializers_analytics_enabled":"false","integration_active_model_serializers_analytics_sample_rate":"1.0","integration_active_model_serializers_enabled":"true","integration_active_model_serializers_service_name":"","integration_aws_analytics_enabled":"false","integration_aws_analytics_sample_rate":"1.0","integration_aws_enabled":"true","integration_aws_service_name":"aws","integration_aws_peer_service":""}
 ```
 
 **Diagnostics:**

@@ -1,121 +1,144 @@
 guides:
-- desc: Datadog으로 데이터를 전송하는 호스트에서 이벤트와 메트릭을 수집하세요.
+- desc: Datadog으로 데이터를 전송하는 호스트에서 이벤트와 메트릭을 수집합니다.
   link: getting_started/agent/
   link_text: 에이전트 시작하기
   title: 에이전트 설치하기
-- desc: 기본으로 제공되는 600개 이상의 통합을 통해 메트릭, 트레이스, 로그를 수집하여 Datadog으로 전송하세요.
+- desc: 750개 이상의 내장 통합을 사용해 메트릭, 트레이스, 로그를 집계하여 Datadog로 전송하세요.
   link: getting_started/integrations/
   link_text: 통합 시작하기
   title: 통합 설정하기
-- desc: Datadog에서 수집한 데이터를 시각화하고 대시보드, 알림, 모니터 등을 생성하세요.
+- desc: Datadog에서 수집한 데이터를 시각화하고 대시보드, 알림, 모니터 등을 생성합니다.
   link: getting_started/application/
   link_text: Datadog 시작하기
   title: App에서 시작하기
 heading: Datadog에 오신 것을 환영합니다!
 nav_sections:
 - nav_section:
-  - name: 플랫폼
+  - name: 플랫폼 서비스
   - navtiles:
-    - desc: 데이터 수집 및 전송을 위한 Datadog 에이전트를 설치하고 설정하세요.
+    - desc: 데이터 수집 및 전송을 위한 Datadog 에이전트를 설치하고 설정합니다.
       icon: agent-fill
       link: agent/
       title: 에이전트
-    - desc: 애플리케이션, 서비스, 시스템에 관한 데이터를 수집하세요.
+    - desc: 애플리케이션, 서비스, 시스템에 관한 데이터를 수집합니다.
       icon: integrations
       link: integrations/
       title: 통합
-    - desc: OpenTelemetry 메트릭, 로그, 트레이스를 Datadog으로 전송하세요.
+    - desc: OpenTelemetry 메트릭, 로그, 트레이스를 Datadog으로 전송합니다.
       icon: open-telemetry
       link: opentelemetry/
       title: OpenTelemetry
-    - desc: 데이터를 시각화하고 분석하여 인사이트를 생성하세요.
+    - desc: 데이터를 시각화하고 분석하여 인사이트를 생성합니다.
       icon: dashboard
       link: dashboards/
       title: 대시보드
-    - desc: 호스트, 컨테이너, 프로세스 및 서버리스 기능을 추적하세요.
+    - desc: 모니터와 알림을 생성, 편집 및 관리합니다.
+      icon: monitor
+      link: monitors/
+      title: 모니터 및 알람
+    - desc: 애플리케이션 및 인프라스트럭처의 이상 징후를 감지하고 표면화합니다.
+      icon: watchdog
+      link: watchdog/
+      title: Datadog Watchdog
+    - desc: 모바일 기기에서 Datadog 알림,  인시던트 등을 확인합니다.
+      icon: mobile
+      link: mobile/
+      title: 모바일 애플리케이션
+    - desc: 위험 요소가 있는 조직의 인시던트 식별, 분석 및 완화
+      icon: incidents
+      link: 서비스_관리/인시던트_관리
+      title: '인시던트 관리 '
+    - desc: 애플리케이션 및 인프라스트럭처에서 중요한 변경 사항 및 알림을 추적합니다.
+      icon: events
+      link: events/
+      title: 이벤트
+    - desc: 기술 스택 전반에서 프로세스 자동화 및 오케스트레이션
+      icon: workflows
+      link: workflows
+      title: 워크플로 자동화
+- nav_section:
+  - name: 제품
+  - navtiles:
+    - desc: 호스트, 컨테이너, 프로세스 및 서버리스 기능을 추적합니다.
       icon: host-map
       link: infrastructure/
       title: 인프라스트럭처
-    - desc: 애플리케이션 및 인프라스트럭처에서 중요한 변경 사항 및 알림을 추적하세요.
-      icon: events
-      link: events/
-      title: '이벤트 '
-    - desc: 메트릭에 대한 배포를 탐색하고 생성하세요.
-      icon: metric
-      link: metrics/
-      title: 메트릭
-    - desc: 모니터와 알림을 생성, 편집 및 관리하세요.
-      icon: monitor
-      link: monitors/
-      title: 경고
-    - desc: 즉시 사용 가능한 성능 대시보드 및 분산된 트레이스를 탐색해 보세요.
+    - desc: 서버리스 애플리케이션의 성능 문제를 감지하고 해결합니다.
+      icon: serverless
+      link: serverless/
+      title: 서버리스
+    - desc: 태그가 지정된 개체를 통해 네트워크 트래픽에 대한 데이터를 수집하고 그래프로 표시합니다.
+      icon: network
+      link: network_monitoring/
+      title: 네트워크 모니터링
+    - desc: 통합된 관찰 가능성 및 비용 데이터로 클라우드 지출을 관리합니다.
+      icon: cloud-cost-management
+      link: cloud_cost_management/
+      title: 클라우드 비용 관리
+    - desc: 즉시 사용 가능한 성능 대시보드 및 분산된 트레이스를 탐색합니다.
       icon: apm
       link: tracing/
       title: APM
     - desc: 성능 스냅샷을 비교하고 병목 현상에 대해 자세히 살펴봅니다.
       icon: profiling-1
       link: profiler/
-      title: 지속적인 프로파일러
+      title: 지속적 프로파일러
+    - desc: 강화된 대시보드, 쿼리 메트릭 및 쿼리 샘플을 확인합니다.
+      icon: database-2
+      link: database_monitoring/
+      title: 데이터베이스 모니터링
+    - desc: 데이터 스트리밍 파이프라인의 성능 추적 및 개선
+      icon: datastreams-monitoring
+      link: data_streams/
+      title: 데이터 스트림 모니터링
+    - desc: 코드 변경 없이 서비스를 검색하고 매핑하며, 모니터링합니다.
+      icon: usm
+      link: universal_service_monitoring/
+      title: 범용 서비스 모니터링
+    - desc: 가동 시간을 보장하고, 지역적 문제를 제기하며, 애플리케이션 성능을 테스트합니다.
+      icon: synthetics
+      link: synthetics/
+      title: 합성 모니터링
+    - desc: 애플리케이션 사용자 경험을 수집하고 관찰 및 분석합니다.
+      icon: rum
+      link: real_user_monitoring/
+      title: 실제 사용자 모니터링(RUM)
+    - desc: 모바일 애플리케이션의 사용자 여정 및 비즈니스 거래 모니터링
+      icon: mobile
+      link: mobile_app_testing/
+      title: 모바일 애플리케이션 테스팅
+    - desc: CI/CD 제공 업체와 코딩 없는 통합 및 end-to-end 테스트를 수행합니다.
+      icon: continuous-testing
+      link: continuous_testing/
+      title: 지속적 테스트
+    - desc: CI 파이프라인의 상태 및 성능 모니터링
+      icon: ci
+      link: continuous_integration/
+      title: CI Visibility
+    - desc: 취약한 테스트를 감지하고 취약한 테스트를 기져오는 커밋 식별
+      icon: ci
+      link: tests/
+      title: Test Visibility
+    - desc: 위협, 취약성 및 오설정 탐지
+      icon: security-platform
+      link: security/
+      title: 보안
+    - desc: 메트릭에 대한 배포를 탐색하고 생성합니다.
+      icon: metric
+      link: metrics/
+      title: 메트릭
     - desc: 수집된 로그를 처리하고 모니터링 및 보관합니다.
       icon: log
       link: logs/
       title: 로그 관리
-    - desc: 애플리케이션 및 인프라스트럭처에서 위협과 잘못된 설정을 감지합니다.
-      icon: security-platform
-      link: security/
-      title: 보안
-    - desc: 가동 시간을 보장하고, 지역적 문제를 제기하며, 애플리케이션 성능을 테스트합니다.
-      icon: synthetics
-      link: synthetics/
-      title: Synthetic 모니터링
-    - desc: CI/CD 제공 업체와 코딩 없는 통합 및 end-to-end 테스트를 수행합니다.
-      icon: continuous-testing
-      link: continuous_testing/
-      title: 지속적인 테스트
-    - desc: 애플리케이션 사용자 경험을 수집하고 관찰 및 분석하세요.
-      icon: rum
-      link: real_user_monitoring/
-      title: 실제 사용자 모니터링
-    - desc: 태그가 지정된 개체 통해 네트워크 트래픽에 대한 데이터를 수집하고 그래프로 표시하세요.
-      icon: network
-      link: network_monitoring/
-      title: 네트워크 모니터링
-    - desc: 서버리스 애플리케이션의 성능 문제를 감지하고 해결합니다.
-      icon: serverless
-      link: serverless/
-      title: 서버리스
-    - desc: 모바일 기기에서 Datadog 알림,  인시던트 등을 확인합니다.
-      icon: mobile
-      link: mobile/
-      title: 모바일 애플리케이션
-    - desc: 애플리케이션 및 인프라스트럭처의 이상 징후를 감지하고 표면화합니다.
-      icon: watchdog
-      link: watchdog/
-      title: Datadog Watchdog
-    - desc: CI 파이프라인에 대한 테스트 메트릭, 빌드 결과 및 파이프라인 실행을 확인합니다.
-      icon: ci
-      link: continuous_integration/
-      title: CI 가시성
-    - desc: 통합된 관찰 가능성 및 비용 데이터로 클라우드 지출을 관리하세요.
-      icon: cloud-cost-management
-      link: cloud_cost_management/
-      title: 클라우드 비용 관리
-    - desc: 강화된 대시보드, 쿼리 메트릭 및 쿼리 샘플을 확인하세요.
-      icon: database-2
-      link: database_monitoring/
-      title: 데이터베이스 모니터링
     - desc: 텔레메트리 파이프라인을 관리하고 모니터링합니다.
       icon: pipelines
       link: observability_pipelines/
-      title: 관찰 가능성 파이프라인
-    - desc: 코드 변경 없이 서비스를 검색하고 매핑하며, 모니터링합니다.
-      icon: usm
-      link: universal_service_monitoring/
-      title: 유니버설 서비스 모니터링
+      title: 옵저버빌리티 파이프라인
 - nav_section:
-  - name: 설정
+  - name: 구성
   - navtiles:
-    - desc: Datadog API를 사용하세요.
+    - desc: Datadog API를 사용해 보세요.
       icon: api
       link: api/latest/
       title: API

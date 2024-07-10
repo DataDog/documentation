@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
   tag: blog
   text: バージョン履歴で Datadog ダッシュボードとノートブックに対する変更を追跡する
-kind: documentation
 title: ダッシュボードのバージョン履歴
 ---
 
@@ -23,9 +22,9 @@ title: ダッシュボードのバージョン履歴
 [監査証跡][1]を有効にすると、バージョン履歴が 30 日から 90 日に延長されます。監査証跡を有効にした後は、既存のすべてのダッシュボードで、30 ～ 90 日前の間に行われたすべての編集を見ることができます。
 
 ## バージョンの確認
-個別のダッシュボードから、ページ右上にあるバージョン履歴のアイコンをクリックすると、Version History サイドパネルが開きます。保持期間内に編集が行われていない場合、バージョン履歴アイコンは無効化された状態になります。
+個々のダッシュボードから、ページ右上の **Configure** をクリックし、**Version History** を選択します。保持期間内に編集がない場合、バージョン履歴は無効になります。
 
-{{< img src="/dashboards/guide/version_history/disabled_version_history_dashboards.png" alt="ダッシュボードでバージョン履歴アイコンが無効化されている様子" style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/configure_actions_version_history.png" alt="ダッシュボードの Configure Actions メニューで、バージョン履歴オプションを無効にした様子" style="width:50%;" >}}
 
 Version History サイドパネルでは、各バージョンごとに以下の情報を確認できます。
 - 変更を行った Datadog ユーザー

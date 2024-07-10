@@ -1,6 +1,5 @@
 ---
 title: CERTIFICATE_VERIFY_FAILED error
-kind: faq
 ---
 
 ### What happened?
@@ -71,7 +70,7 @@ Delete `datadog-cert.pem`. You can locate this file in:
   * 64-bit Windows: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`
   * 32-bit Windows: `C:\Program Files\Datadog\Datadog Agent\files\`
 
-Once the file is removed, restart the Datadog Service from the Windows Service Manager.
+After the file is removed, restart the Datadog Service from the Windows Service Manager.
 
 ### Fixing by upgrading to Agent 6 or 7
 
@@ -83,7 +82,7 @@ Datadog recommends keeping up to date and updating to the latest version of the 
 
 ### Encrypting traffic with SSL
 
-Encrypt the traffic with SSL even if you delete the certificate. The certificate is just a preset for the client to use and is not necessary to connect with SSL. Datadog Agent endpoints only accept SSL traffic.
+Encrypt the traffic with SSL even if you delete the certificate. The certificate is a preset for the client to use and is not necessary to connect with SSL. Datadog Agent endpoints only accept SSL traffic.
 
 ### Windows Agent 5.x configured to use a proxy or the curl http client
 
@@ -110,7 +109,7 @@ restart-service -Force datadogagent
   After `datadog.conf` has been updated, restart the Datadog Service from the Windows Service Manager.
 
 
-[1]: https://windows-agent.datadoghq.com/ddagent-cli-latest.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
 [2]: https://app.datadoghq.com/account/settings/agent/5?platform=overview
 [3]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
 [4]: /agent/versions/upgrade_to_agent_v6/?tab=linux

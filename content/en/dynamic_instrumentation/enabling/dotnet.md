@@ -1,9 +1,8 @@
 ---
 title: Enable Dynamic Instrumentation for .NET
-kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/dotnet/
-is_beta: true
+is_beta: false
 private: false
 code_lang: dotnet
 type: multi-code-lang
@@ -16,13 +15,17 @@ further_reading:
 
 Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version, and go directly to enabling Dynamic Instrumentation in step 4.
 
+## Prerequisites
+
+For a better experience, Datadog recommends enabling [autocomplete and search (open beta)][8].
+
 ## Installation
 
-1. Install or upgrade your Agent to version [7.44.0][2] or higher.
+1. Install or upgrade your Agent to version [7.45.0][7] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the .NET tracing libraries to version 2.32, by following the relevant instructions for [.NET Framework][2] or [.NET Core][3].
+3. Install or upgrade the .NET tracing libraries to version 2.54.0, by following the relevant instructions for [.NET Framework][2] or [.NET Core][3].
 
-   **Note**: Dynamic Instrumentation is available in the `dd-trace-dotnet` library in versions 2.32.0 and later.
+   **Note**: Dynamic Instrumentation is available in the `dd-trace-dotnet` library in versions 2.54.0 and later.
 
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
 5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
@@ -53,3 +56,5 @@ See [Dynamic Instrumentation][6] for information about setting snapshot and metr
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /dynamic_instrumentation/
+[7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[8]: /dynamic_instrumentation/symdb/

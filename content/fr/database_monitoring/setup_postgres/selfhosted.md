@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Intégation Postgres basique
-kind: documentation
 title: Configuration de Database Monitoring pour Postgres auto-hébergé
 ---
 
@@ -273,7 +272,7 @@ Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucun
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
        #    name: new_log_start_with_date
    ```
-   Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postgres.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+   Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple postgres.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 5. [Redémarrez l'Agent][10].
 
 ### Validation

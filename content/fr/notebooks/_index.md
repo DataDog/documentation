@@ -18,7 +18,6 @@ further_reading:
   tag: blog
   text: Automatiser les tâches de sécurité courantes et anticiper les menaces avec
     les workflows Datadog et Cloud SIEM
-kind: documentation
 title: Notebooks
 ---
 
@@ -85,7 +84,7 @@ Lorsqu'un utilisateur accède à l'URL d'une cellule spécifique, le notebook s'
 
 {{< img src="notebooks/notebook_list.png" alt="Liste de notebooks avec un aperçu des types de cellules du notebook sélectionné" style="width:100%;">}}
 
-La [liste des notebooks][1] vous permet de consulter et de rechercher les notebooks précédemment créés. Le nom, l'identité du créateur et la date de dernière modification de chaque notebook sont indiqués. Les notebooks sont regroupés en deux catégories :
+La [liste des notebooks][2] vous permet de consulter et de rechercher les notebooks précédemment créés. Le nom, l'identité du créateur et la date de dernière modification de chaque notebook sont indiqués. Les notebooks sont regroupés en plusieurs catégories :
 
 * **Your Notebooks** : les notebooks que vous avez créés.
 * **All Notebooks** : tous les notebooks de votre organisation.
@@ -131,7 +130,7 @@ Les notebooks peuvent être configurés de façon à prendre automatiquement des
 
 {{< img src="notebooks/cog_snapshots.png" alt="Option du menu des paramètres permettant d'activer les snapshots" style="width:100%;">}}
 
- Les notebooks pour lesquels la prise de snapshots automatique est activée enregistrent une image statique des graphiques avec un intervalle fixe (par exemple, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). Si un graphique est modifié, tant qu'il possède toujours un intervalle fixe, les snapshots sont mis à jour. Si vous appliquez une durée globale (par exemple, `Past 1 Hour`), les snapshots sont supprimés.
+ Les notebooks pour lesquels la prise de snapshots automatique est activée enregistrent une image statique des graphiques avec un intervalle fixe (par exemple, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). Si un graphique est modifié, tant qu'il possède toujours un intervalle fixe, les snapshots sont mis à jour. Si vous appliquez une durée globale (par exemple, `Past 1 Hour`), les snapshots sont supprimés.
 
  Vous pouvez afficher un aperçu du snapshot existant sur n'importe quel graphique avec un intervalle fixe. Pour ce faire, pendant que vous modifiez un graphique, passez le curseur sur l'icône en forme d'appareil photo.
 

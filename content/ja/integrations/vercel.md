@@ -35,10 +35,9 @@ integration_id: vercel
 integration_title: Vercel
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: vercel
-oauth: {}
 public_title: Vercel
 short_description: Vercel で実行中のサーバーレスアプリケーションを監視する
 supported_os:

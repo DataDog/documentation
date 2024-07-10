@@ -1,6 +1,5 @@
 ---
 title: Synthetic Monitoring Troubleshooting
-kind: documentation
 description: Troubleshoot common Synthetic Monitoring issues.
 further_reading:
 - link: "/synthetics/"
@@ -8,10 +7,13 @@ further_reading:
   text: "Manage your Synthetic tests"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
-  text: "Configure a Browser Test"
+  text: "Configure a browser test"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
-  text: "Configure an API Test"
+  text: "Configure an API test"
+- link: "/synthetics/private_locations/"
+  tag: "Documentation"
+  text: "Create a private location"
 ---
 
 ## Overview
@@ -108,6 +110,12 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 Automated browsers do not support emulating the CSS `pointer` media feature. Browser tests have `pointer: none` for all tests and devices (laptop, tablet, or mobile).
 
+### Resource duration
+
+#### A resource is of a longer duration than the actual step duration
+
+Long-loading resources may span across multiple steps. Within a test result's step, Datadog returns all resources initiated during that specific step. However, Datadog allows roughly 20 seconds for important network calls to finish. After this period, the synthetics worker proceeds to the subsequent step. The worker uses a hierarchy of timeouts, allowing it to balance speed and reliability. Because of this, Datadog does not advise using step duration to measure the speed or slowness of a web application. The step duration reflects the balanced time the worker needs to deliver a reliable result.
+
 ## API and browser tests
 
 ### Unauthorized errors
@@ -135,21 +143,20 @@ Synthetic tests by default do not [renotify][12]. This means that if you add you
 
 ## Private locations
 
-### My private location containers sometimes get killed `OOM`
-
-Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][13].
+{{< tabs >}}
+{{% tab "Common" %}}
 
 ### My browser test results sometimes show `Page crashed` errors
 
-This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][13].
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location workers are provisioned with [sufficient memory resources][101].
 
 ### My tests are sometimes slower to execute 
 
-This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][13].
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location workers are provisioned with [sufficient CPU resources][101].
 
 ### My browser tests are taking too long to run
 
-Confirm you are not seeing [out of memory issues][14] with your private location deployments. If you have tried scaling your container instances following the [dimensioning guidelines][15] already, reach out to [Datadog Support][1].
+Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
 
 ### `TIMEOUT` errors appear in API tests executed from my private location
 
@@ -157,9 +164,62 @@ This might mean your private location is unable to reach the endpoint your API t
 
 {{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
 
+[101]: /synthetics/private_locations/dimensioning
+[102]: https://docs.docker.com/config/containers/resource_constraints/
+[103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[104]: /help/
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+### My private location containers sometimes get killed `OOM`
+
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
+
 ### The `invalid mount config for type "bind": source path must be a directory` error appears when attempting to run a private location
 
-This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][16]. Ensure that the source of the bind mount is a local directory.
+This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][102]. Ensure that the source of the bind mount is a local directory.
+
+[101]: /synthetics/private_locations#private-location-total-hardware-requirements
+[102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+### Restart the Synthetics Private Location Worker service without a reboot
+
+First, ensure that you installed the private location with a configuration specified at installation time. You can either use a GUI or use Windows PowerShell to restart the service.
+
+#### GUI
+
+1. Open the MSI installer and search for **Services** in the **Start** menu.
+1. Start **Services** on any user account.
+1. Click **Services (Local)** and find the service called `Datadog Synthetics Private Location`.
+1. Right-click on the service found in Step 2 and choose **Restart**.
+
+The Synthetics Private Location Worker now runs under the **Local Service** account. To confirm this, launch Task Manager and look for the `synthetics-pl-worker` process on the **Details** tab.
+
+#### PowerShell
+
+1. Start **Windows PowerShell** on any Windows account that has the rights to execute PowerShell scripts.
+1. Run the following command: `Restart-Service -Name “Datadog Synthetics Private Location”`.
+
+### Keep the Synthetics Private Location Worker running
+
+First, ensure that you are logged in on the machine where the Synthetics Private Location Windows Service is installed, and you have the permissions to create scheduled tasks on the machine.
+
+If the Synthetics Private Location Worker crashes, add a scheduled task in Windows that runs a PowerShell script to restart the application if it stops running. This ensures that a private location is restarted after a crash. 
+
+If you provided a configuration file when installing the application, a Windows service called `Datadog Synthetics Private Location` starts automatically after installation. To verify this, ensure that you can see the service running in the **Services** tool. This Windows service restarts the private location automatically.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### I am being asked for a password for sudo/I am being asked for a password for the dog user
+
+The Private Location user (`dog`) requires `sudo` for various reasons. Typically, this user is granted certain permissions to allow `sudo` access in the process of launching the Private Location on your container. Confirm if you have a policy in place that restricts the `dog` user's ability to `sudo`, or prevents the container from launching as the `dog` user (UID 501).
+
+Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. Yo can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][13].
 
 ## Further reading
 
@@ -176,8 +236,5 @@ This occurs when you attempt to mount a single file in a Windows-based container
 [9]: /synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /synthetics/api_tests/?tab=httptest#notify-your-team
-[13]: /synthetics/private_locations#private-location-total-hardware-requirements
-[14]: https://docs.docker.com/config/containers/resource_constraints/
-[15]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
-[16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[12]: /synthetics/api_tests/?tab=httptest#configure-the-test-monitor
+[13]: https://docs.docker.com/engine/security/seccomp/

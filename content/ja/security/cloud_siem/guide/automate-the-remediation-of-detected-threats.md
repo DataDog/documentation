@@ -6,7 +6,6 @@ further_reading:
 - link: /security/explorer/
   tag: ドキュメント
   text: シグナルエクスプローラーでシグナルの調査を開始する
-kind: ガイド
 title: Webhooks で検出された脅威の修復を自動化する
 ---
 
@@ -22,7 +21,7 @@ title: Webhooks で検出された脅威の修復を自動化する
 
 {{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="クラウドプロバイダーの API に送信される Webhook の図" >}}
 
-一度構成すると、AWS ユーザーが AWS 環境内で不適切にリソースを構成した場合 (例: 過度に許可が設定されたセキュリティグループやユーザーロールなど)、Datadog ログ管理が関連するログを取り込み、セキュリティグループベースの検知ルールをトリガーします。このプロセスでは、Webhook の JSON ペイロードが指定された AWS API ゲートウェイの URL に自動的に送信され、問題のあるリソースを自動的に削除する AWS Lambda 関数が起動されます。
+一度構成すると、AWS ユーザーが AWS 環境内で不適切にリソースを構成した場合 (例: 過度に許可されたセキュリティグループやユーザーロールなど)、Datadog ログ管理が関連するログを取り込み、これがセキュリティグループベースの検出ルールをトリガーします。このプロセスは、Webhook の JSON ペイロードを指定された Amazon API Gateway の URL に自動的に送信し、それによって問題のあるリソースを自動的に削除する AWS Lambda 関数が起動されます。
 
 ## 不審な IP アドレスを禁止する
 
@@ -93,6 +92,6 @@ Datadog はセキュリティシグナルを生成し、違反行為だけでな
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /ja/security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#new-term
+[5]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#new-value
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
 [7]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

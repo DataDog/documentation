@@ -716,14 +716,22 @@ class Integrations:
         ## Formating all link as reference to avoid any corner cases
         ## Replace image filenames in markdown for marketplace iterations
         result = ''
-        if not marketplace:
+        display_on_public = True
+        source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
+
+        # Don't try to build markdown if display_on_public_website is False
+        if manifest_json and "/dogweb/" not in file_name:
+            if not manifest_json["display_on_public_website"]:
+                display_on_public = False
+        
+        if not marketplace and display_on_public:
             try:
-                result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
+                result = source_comment + format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
                 print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                 sys.exit(1)
-        else:
+        elif marketplace:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
@@ -740,7 +748,9 @@ class Integrations:
                 if not is_marketplace_integration_markdown_valid:
                     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
                 else:
-                    result = updated_markdown
+                    result = source_comment + updated_markdown
+        else:
+            print(f'Skipping markdown for: {file_name}')            
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:
@@ -791,22 +801,33 @@ class Integrations:
             collision_name = self.get_collision_alternate_name(file_name)
             print(f"{file_name} {collision_name}")
 
-        if metrics_exist:
-            result = re.sub(
-                self.regex_metrics,
-                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
-                % format(title if not exist_collision else collision_name),
-                result,
-                0,
-            )
-        if service_check_exist:
-            result = re.sub(
-                self.regex_service_check,
-                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
-                % format(title if not exist_collision else collision_name),
-                result,
-                0,
-            )
+        # if we have merged integrations upstream in the source repo
+        # there can be multiple instances of code we are trying to regex out which doesn't play nice
+        # lets split the file and apply it in chunks to avoid these issues
+        parts = result.split("## Data Collected")
+        new_parts = []
+        for part in parts:
+            if metrics_exist:
+                part = re.sub(
+                    self.regex_metrics,
+                    r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
+                    % format(title if not exist_collision else collision_name),
+                    part,
+                    0,
+                )
+            if service_check_exist:
+                part = re.sub(
+                    self.regex_service_check,
+                    r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
+                    % format(title if not exist_collision else collision_name),
+                    part,
+                    0,
+                )
+            new_parts.append(part)
+        if len(new_parts) == 1:
+            result = "".join(new_parts)
+        else:
+            result = "## Data Collected".join(new_parts)
 
         if not exist_already and no_integration_issue:
             out_name = self.content_integrations_dir + new_file_name
@@ -835,6 +856,7 @@ class Integrations:
                         new_file_name, result, dependencies, integration_id, integration_version, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
 
+                # write to content file
                 with open(out_name, "w", ) as out:
                     out.write(result)
 
@@ -877,7 +899,7 @@ class Integrations:
                 ]
                 item = matches[0] if len(matches) > 0 else []
             if item:
-                item["kind"] = "integration"
+                item["custom_kind"] = "integration"
                 item["integration_title"] = (
                     item
                     .get("public_title", "")
@@ -915,7 +937,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"custom_kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
@@ -1006,4 +1028,9 @@ class Integrations:
             manifest_json["name"] = manifest_json.get("name", name)
             if skipped_tags:
                 print(f'\x1b[33mWARNING\x1b[0m: Categories skipped on integration {manifest_json["name"]}, {skipped_tags}')
+
+        # temporary workaround until we can source integration data from APW
+        # https://datadoghq.atlassian.net/browse/WEB-4579
+        if 'oauth' in manifest_json.keys(): del manifest_json['oauth']
+
         return manifest_json

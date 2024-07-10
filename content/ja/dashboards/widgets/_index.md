@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: ドキュメント
   text: カスタムリンク
-kind: documentation
 title: ウィジェット
 ---
 
@@ -46,7 +45,11 @@ title: ウィジェット
 ### グループ
 {{< whatsnext desc="グループの下にウィジェットを表示します。 ">}}
     {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/placeholder_light_large.png">}} グループ{{< /nextlink >}}
+        img="dashboards/widgets/icons/group_default_light_large.svg">}} グループ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/powerpack"
+        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} パワーパック{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/split_graph"
+        img="dashboards/widgets/icons/group-split_light_small.svg">}} スプリットグラフ{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### アノテーションと埋め込み
@@ -77,6 +80,8 @@ title: ウィジェット
         img="dashboards/widgets/icons/check-status_light_large.png">}} チェックステータス{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" 
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} モニターサマリー{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/run_workflow" 
+img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### アーキテクチャ
@@ -91,10 +96,12 @@ title: ウィジェット
 
 ### パフォーマンスと信頼性
 {{< whatsnext desc="サイトの信頼性の視覚化: ">}}
+{{< nextlink href="/dashboards/widgets/profiling_flame_graph"
+        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} プロファイリングフレームグラフ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo" 
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} サービスレベル目標 (SLO) サマリー{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} サービスレベル目標 (SLO) リスト{{< /nextlink >}}
+        img="dashboards/widgets/icons/slo-list_light_large.png">}} サービスレベル目標 (SLO){{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 全画面
@@ -118,9 +125,32 @@ title: ウィジェット
 
 一般的なウィジェットのインラインデータとのインタラクションをカスタマイズするには、[カスタムリンク][2]を参照してください。
 
+## 単位のオーバーライド
+
+ウィジェットに表示される単位値をカスタマイズして、データにコンテキストを追加できます。その他のユースケースや情報については、[単位のオーバーライドで視覚化をカスタマイズする][3]を参照してください。
+- **Unit override**: 選択することで、「メモリ」ファミリーの単位が表示され、Datadog がデータに応じて適切なスケールを表示するようにします (メガバイトやギガバイトなど)。
+- **Unit and scale override**: 単位を単一のスケールに固定します (値に関係なくデータをメガバイトで表示)。
+- **Define custom units**: 完全にカスタマイズされた単位を定義します (一般的なカウントの代わりに「テスト」のような)。
+
+これは、データに単位を割り当てるための代替手段ではありません。
+{{< whatsnext desc="組織レベルでの単位設定: ">}}
+    {{< nextlink href="/metrics/units/">}} メトリクス単位の設定{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/facets/#units">}} イベントベースクエリの単位設定{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## グローバルタイムセレクター
+
+グローバルタイムセレクターを使うには、1 つ以上の時間ベースのウィジェットが `Global Time` を使うように設定されている必要があります。**Set display preferences** でウィジェットのエディターで選択するか、またはウィジェットを追加します (グローバルタイムはデフォルトの時間設定です)。
+
+グローバルタイムセレクターは、同一のダッシュボード上で `Global Time` オプションを使用するすべてのウィジェットに対して同一のタイムフレームを設定します。過去の移動ウィンドウ (例: `Past 1 Hour`、`Past 1 Day`) を選択するか、固定期間を選択します。固定期間は、`Select from calendar...` オプションを使用します。または、[カスタムタイムフレームを入力][11]します。移動ウィンドウを選択した場合、ウィジェットはタイムウィンドウに沿って移動します。
+
+グローバルタイムにリンクされていないウィジェットは、グローバルウィンドウに適用されたローカルタイムフレームに対応するデータを表示します。たとえば、グローバルタイムセレクターが 2019 年 1 月 1 日から 2019 年 1 月 2 日に設定されている場合、ローカルタイムフレームが `Past 1 Minute` に設定されているウィジェットには、2019 年 1 月 2 日の午後 11 時 59 分からの最後の 1 分が表示されます。
+
 ## ウィジェットのコピーと貼り付け
 
-ウィジェットを[ダッシュボード][3]、[ノートブック][4]、[APM サービス][5]、および [APM リソース][6]ページにコピーするには、`Ctrl + C`（Mac の場合は `Cmd + C`）を使用するか、共有アイコンを選択して "Copy" を選択します。
+<div class="alert alert-warning">この機能を使用するには、<a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> 権限</a>を持ち、Organization Settings で <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> を有効にする必要があります。</div>
+
+`Ctrl + C` (Mac の場合は `Cmd + C`) を使用するか、共有アイコンを選択して "Copy" を選択することで、ウィジェットは[ダッシュボード][4]、[ノートブック][5]、[APM サービス][6]、および [APM リソース][7]ページにコピーできます。
 
 コピーされたウィジェットは、次の場所で `Ctrl + V`（Mac の場合は `Cmd + V`）を使用して Datadog 内に貼り付けることができます。
 
@@ -139,15 +169,30 @@ title: ウィジェット
 
 **注**: これは、Datadog 内で共有する場合にのみ機能します。プレビュー画像は生成されません。
 
-## グラフのエクスポート
+## ウィジェットグラフ
 
-### PNG
+### エクスポート
 
-ウィジェットを PNG 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as PNG** を選択します。
+| 形式 | 手順            |
+| -----  | ----------------------- |
+| PNG    | ウィジェットを PNG 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as PNG** を選択します。 |
+| CSV    | 時系列、テーブル、またはトップリストウィジェットからデータを CSV 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as CSV** を選択します。|
 
-### CSV
+### グラフメニュー
 
-時系列、テーブル、またはトップリストウィジェットからデータを CSV 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as CSV** を選択します。
+ダッシュボードグラフをクリックするとオプションメニューが開きます。
+
+| オプション                 | 説明                                                        |
+|------------------------|--------------------------------------------------------------------|
+| スナップショットを送信          | グラフのスナップショットを作成および送信します。                          |
+| 相関関係のあるメトリクスを検索| APM サービス、インテグレーション、ダッシュボードの相関関係を検索します。 |
+| View in full screen    | グラフを[全画面モード][5]で表示します。                           |
+| カーソルをロック            | ページに配置されたカーソルをロックします。                              |
+| View related processes | グラフ参照範囲の[ライブプロセス][6]ページへジャンプします。         |
+| View related hosts     | グラフ参照範囲の[ホストマップ][7]ページへジャンプします。               |
+| View related logs      | グラフ参照範囲の[ログエクスプローラー][8]ページへジャンプします。           |
+| 関連トレースを表示    | グラフ参照範囲の[トレース][9]パネルに入力します。                 |
+| 関連プロファイルを表示  | グラフ参照範囲の[プロファイリング][10]ページへジャンプします。             |
 
 ## その他の参考資料
 
@@ -155,7 +200,12 @@ title: ウィジェット
 
 [1]: /ja/dashboards/widgets/timeseries/#full-screen
 [2]: /ja/dashboards/guide/context-links/
-[3]: /ja/dashboards/
-[4]: /ja/notebooks/
-[5]: /ja/tracing/services/service_page/
-[6]: /ja/tracing/services/resource_page/
+[3]: /ja/dashboards/guide/unit-override
+[4]: /ja/dashboards/
+[5]: /ja/notebooks/
+[6]: /ja/tracing/services/service_page/
+[7]: /ja/tracing/services/resource_page/
+[8]: /ja/logs/explorer/
+[9]: /ja/tracing/trace_explorer/
+[10]: /ja/profiler/profile_visualizations/
+[11]: /ja/dashboards/guide/custom_time_frames/

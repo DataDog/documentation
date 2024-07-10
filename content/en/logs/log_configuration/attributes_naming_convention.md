@@ -1,6 +1,5 @@
 ---
 title: Attributes and Aliasing
-kind: documentation
 description: 'Learn about attributes and how to support a naming convention'
 aliases:
   - /logs/processing/attributes_naming_convention/
@@ -57,7 +56,7 @@ Below is a list of reserved attributes that are automatically ingested with logs
 
 ## Standard attributes
 
-Log integrations natively rely on a [default set](#default-standard-attribute-list) of standard attributes.
+Log integrations natively rely on a [default set][9] of standard attributes.
 
 Admin users in your organization can curate the list:
 
@@ -83,198 +82,38 @@ The standard attribute panel appears when you add a new standard attribute or ed
 
 ### Default standard attribute list
 
-The default standard attribute list is split into the functional domains:
+See the full list of [Log Management Default Standard Attributes][9], which is split into the functional domains:
 
-- [Network/communications](#web-access)
-- [Geolocation](#geolocation)
-- [HTTP Requests](#http-requests)
-- [Source code](#source-code)
-- [Database](#database)
-- [Performance](#performance)
-- [User related attributes](#user-related-attributes)
-- [Syslog and log shippers](#syslog-and-log-shippers)
-- [DNS](#dns)
-- [Events](#events)
-
-#### Web Access
-
-The following attributes are related to the data used in network communication. All fields and metrics are prefixed by `network`.
-
-| **Fullname**               | **Type** | **Description**                                                                          |
-| :------------------------- | :------- | :--------------------------------------------------------------------------------------- |
-| `network.client.ip`        | `string` | The IP address of the client that initiated the TCP connection.                          |
-| `network.destination.ip`   | `string` | The IP address the client connected to.                                                  |
-| `network.client.port`      | `number` | The port of the client that initiated the connection.                                    |
-| `network.destination.port` | `number` | The TCP port the client connected to.                                                    |
-| `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
-| `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
-
-Typical integrations relying on these attributes include [Apache][4], [Varnish][9], [AWS ELB][10], [Nginx][11], [HAProxy][12], etc.
-
-#### Geolocation
-
-The following attributes are related to the geolocation of IP addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
-
-`network.client.geoip.country.name` 
-: Type: `string` <br> Name of the country. 
-
-`network.client.geoip.country.iso_code` 
-: Type: `string` <br> [ISO Code][13] of the country (for example, `US` for the United States, `FR` for France).
-
-`network.client.geoip.continent.code` 
-: Type: `string` <br> ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
-
-`network.client.geoip.continent.name`
-: Type: `string` <br> Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).
-
-`network.client.geoip.subdivision.name`
-: Type: `string` <br> Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
-
-`network.client.geoip.subdivision.iso_code`
-: Type: `string` <br> [ISO Code][13] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).
-
-`network.client.geoip.city.name`
-: Type: `string` <br> The name of the city (for example, `Paris`, `New York`).
-
-#### HTTP requests
-
-These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
-
-Typical integrations relying on these attributes include [Apache][4], Rails, [AWS CloudFront][10], web applications servers, and so forth.
-
-##### Common attributes
-
-| **Fullname**       | **Type** | **Description**                                                                                           |
-| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------- |
-| `http.url`         | `string` | The URL of the HTTP request.                                                                              |
-| `http.status_code` | `number` | The HTTP response status code.                                                                            |
-| `http.method`      | `string` | Indicates the desired action to be performed for a given resource.                                        |
-| `http.referer`     | `string` | HTTP header field that identifies the address of the webpage that linked to the resource being requested. |
-| `http.request_id`  | `string` | The ID of the HTTP request.                                                                               |
-| `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for more details](#user-agent-attributes).          |
-| `http.version`     | `string` | The version of HTTP used for the request.                                                                 |
-
-##### URL details attributes
-
-These attributes provide details about the parsed parts of the HTTP URL. They are generated by the [URL parser][14]. All attributes are prefixed by `http.url_details`.
-
-| **Fullname**                   | **Type** | **Description**                                                                         |
-| :----------------------------- | :------- | :-------------------------------------------------------------------------------------- |
-| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                          |
-| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                          |
-| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                          |
-| `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS).                                            |
-
-##### User-Agent attributes
-
-These attributes provide details about the meanings of user-agent attributes. They are generated by the [User-Agent parser][15]. All attributes are prefixed by `http.useragent_details`.
-
-| **Fullname**                            | **Type** | **Description**                                |
-| :-------------------------------------- | :------- | :--------------------------------------------- |
-| `http.useragent_details.os.family`      | `string` | The OS family reported by the User-Agent.      |
-| `http.useragent_details.browser.family` | `string` | The Browser Family reported by the User-Agent. |
-| `http.useragent_details.device.family`  | `string` | The Device family reported by the User-Agent.  |
-
-#### Source code
-
-These attributes are related to the data used when a log or an error is generated using a logger in a custom application. All attributes are prefixed either by `logger` or `error`.
-
-| **Fullname**         | **Type** | **Description**                                                  |
-| :------------------- | :------- | :--------------------------------------------------------------- |
-| `logger.name`        | `string` | The name of the logger.                                          |
-| `logger.thread_name` | `string` | The name of the current thread when the log is fired.            |
-| `logger.method_name` | `string` | The class method name.                                           |
-| `logger.version`     | `string` | The version of the logger.                                       |
-| `error.kind`         | `string` | The error type or kind (or code in some cases).                  |
-| `error.message`      | `string` | A concise, human-readable, one-line message explaining the event. |
-| `error.stack`        | `string` | The stack trace or the complementary information about the error. |
-
-Typical integrations relying on these attributes are _Java_, _NodeJs_, _.NET_, _Golang_, _Python_, and so on.
-
-#### Database
-
-Database related attributes are prefixed by `db`.
-
-`db.instance` 
-: Type: `string` <br> Database instance name. For example, in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`. 
-
-`db.statement`
-: Type: `string` <br> A database statement for the given database type. For example, for mySQL: `"SELECT * FROM wuser_table";` and for Redis: `"SET mykey 'WuValue'"`.
-
-`db.operation`
-: Type: `string` <br> The operation that was performed ("query", "update", "delete", and so on). 
-
-`db.user`
-: Type: `string` <br> User that performs the operation.
-
-Typical integrations relying on these attributes are [Cassandra][16], [MySQL][17], [RDS][18], [Elasticsearch][19], and so on.
-
-#### Performance
-
-Performance metrics attributes.
-
-| **Fullname** | **Type** | **Description**                                                                                   |
-| :----------- | :------- | :------------------------------------------------------------------------------------------------ |
-| `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, and so on. |
-
-Datadog advises you to [remap][20] any durations within your logs on this attribute since Datadog displays and uses it as a default [measure][1] for [trace search][21].
-
-#### User related attributes
-
-All attributes and measures are prefixed by `usr`.
-
-| **Fullname** | **Type** | **Description**         |
-| :----------- | :------- | :---------------------- |
-| `usr.id`     | `string` | The user identifier.    |
-| `usr.name`   | `string` | The user friendly name. |
-| `usr.email`  | `string` | The user email.         |
-
-#### Syslog and log shippers
-
-These attributes are related to the data added by a syslog or a log-shipper agent. All fields and metrics are prefixed by `syslog`.
-
-| **Fullname**       | **Type** | **Description**                                                               |
-| :----------------- | :------- | :---------------------------------------------------------------------------- |
-| `syslog.hostname`  | `string` | The hostname.                                                                  |
-| `syslog.appname`   | `string` | The application name. Generally remapped to the `service` reserved attribute. |
-| `syslog.severity`  | `number` | The log severity. Generally remapped to the `status` reserved attribute.      |
-| `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
-| `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
-
-Some integrations that rely on these are [Rsyslog][22], [NxLog][23], [Syslog-ng][24], [Fluentd][25], and [Logstash][26].
-
-#### DNS
-
-All attributes and measures are prefixed by `dns`.
-
-| **Fullname**         | **Type** | **Description**                                                           |
-| :------------------- | :------- | :------------------------------------------------------------------------ |
-| `dns.id`             | `string` | The DNS query identifier.                                                 |
-| `dns.question.name`  | `string` | The queried domain name.                                                  |
-| `dns.question.type`  | `string` | A [two octet code][27] which specifies the DNS question type.             |
-| `dns.question.class` | `string` | The class looked up by the DNS question (such as IP when using the internet). |
-| `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
-| `dns.answer.name`    | `string` | The IP address that the DNS answers with.                                 |
-| `dns.answer.type`    | `string` | A [two octet code][27] which specifies the DNS answer type.               |
-| `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
-| `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
-| `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
-
-#### Events
-
-All attributes are prefixed by `evt`.
-
-| **Fullname** | **Type** | **Description**                                                                       |
-|:--------------|:---------|:-------------------------------------------------------------------------------------|
-| `evt.name`    | `string` | The shared name across events generated by the same activity (for example, authentication). |
-| `evt.outcome` | `string` | The result of the event (for example, `success`, `failure`).                                 |
+- [Network/communications][10]
+  - These attributes are related to the data used in network communication. All fields and metrics are prefixed by `network`.
+- [Geolocation][11]
+  - These attributes are related to the geolocation of IP addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
+- [HTTP Requests][12]
+  - These attributes are related to data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
+  - Typical integrations relying on these attributes include [Apache][4], Rails, [AWS CloudFront][13], web applications servers, and so forth.
+  - URL details attributes are prefixed by `http.url_details`. These attributes provide details about the parsed parts of the HTTP URL. They are generated by the [URL parser][14].
+- [Source code][15]
+  - These attributes are related to data used when a log or an error is generated using a logger in a custom application. All attributes are prefixed either by `logger` or `error`.
+  - Typical integrations relying on these attributes are Java, NodeJs, .NET, Golang, Python, and so on.
+- [Database][16]
+  - Typical integrations relying on these attributes are [Cassandra][17], [MySQL][18], [RDS][19], [Elasticsearch][20], and so on.
+- [Performance][21]
+  - These attributes are related to performance metrics. Datadog recommends [remapping][22] any durations within your logs on this attribute since they are displayed and used as a default [measure][1] for [trace search][23].
+- [User related attributes][24]
+  - All attributes and measures are prefixed by `usr`.
+- [Syslog and log shippers][25]
+  - These attributes are related to the data added by a syslog or a log-shipper agent. All fields and metrics are prefixed by `syslog`.
+  - Integrations that rely on these include [Rsyslog][26], [NxLog][27], [Syslog-ng][28], [Fluentd][29], and [Logstash][30].
+- [DNS][31]
+  - All attributes and measures are prefixed by `dns`.
+- [Events][32]
+  - All attributes are prefixed by `evt`.
 
 ## Aliasing
 
 Creating an alias for a source attribute that maps to a destination attribute allows logs to carry both the source and destination attributes.
 
-Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][28] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
+Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][33] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
 
 **Additional details regarding aliasing**:
 
@@ -287,7 +126,7 @@ Users can interact with either the aliased (source) or standard (destination) fa
 - Attributes can only be aliased to standard attributes.
 - To respect the JSON structure of logs, it is not possible to have one standard attribute as the child of another (for example, `user` and `user.name` cannot both be standard attributes).
 
-See [Alias Facets][29] for additional information.
+See [Alias Facets][34] for additional information.
 
 ## Further Reading
 
@@ -301,24 +140,29 @@ See [Alias Facets][29] for additional information.
 [6]: /getting_started/tagging/unified_service_tagging/
 [7]: /logs/explorer/patterns/
 [8]: /tracing/other_telemetry/connect_logs_and_traces/
-[9]: /integrations/varnish/
-[10]: /integrations/amazon_elb/
-[11]: /integrations/nginx/
-[12]: /integrations/haproxy/
-[13]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[9]: /standard-attributes/?product=log+management
+[10]: /standard-attributes/?product=log+management&search=network
+[11]: /standard-attributes/?product=log+management&search=geolocation
+[12]: /standard-attributes/?search=http.&product=log+management
+[13]: /integrations/amazon_elb/
 [14]: /logs/log_configuration/processors/#url-parser
-[15]: /logs/log_configuration/processors/#user-agent-parser
-[16]: /integrations/cassandra/
-[17]: /integrations/mysql/
-[18]: /integrations/amazon_rds/
-[19]: /integrations/elastic/
-[20]: /logs/log_configuration/processors/#remapper
-[21]: /tracing/app_analytics/search/
-[22]: /integrations/rsyslog/
-[23]: /integrations/nxlog/
-[24]: /integrations/syslog_ng/
-[25]: /integrations/fluentd/
-[26]: /integrations/logstash/
-[27]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
-[28]: /logs/explorer/facets/#aliased-facets
-[29]: /logs/explorer/facets/#alias-facets
+[15]: /standard-attributes/?search=logger+error&product=log+management
+[16]: /standard-attributes/?search=db&product=log+management
+[17]: /integrations/cassandra/
+[18]: /integrations/mysql/
+[19]: /integrations/amazon_rds/
+[20]: /integrations/elastic/
+[21]: /standard-attributes/?search=duration&product=log+management
+[22]: /logs/log_configuration/processors/#remapper
+[23]: /tracing/app_analytics/search/
+[24]: /standard-attributes/?search=usr&product=log+management
+[25]: /standard-attributes/?search=syslog&product=log+management
+[26]: /integrations/rsyslog/
+[27]: /integrations/nxlog/
+[28]: integrations/syslog_ng/
+[29]: /integrations/fluentd/
+[30]: /integrations/logstash/
+[31]: /standard-attributes/?search=dns&product=log+management
+[32]: /standard-attributes/?search=evt&product=log+management
+[33]: /logs/explorer/facets/#aliased-facets
+[34]: /logs/explorer/facets/#alias-facets

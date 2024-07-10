@@ -1,6 +1,5 @@
 ---
 title: Ingestion Controls
-kind: documentation
 aliases:
     - /tracing/trace_ingestion/control_page
     - /tracing/trace_ingestion/ingestion_control_page
@@ -39,26 +38,18 @@ If the monthly usage is under `100%`, the projected ingested data fits in your [
 
 ## Managing ingestion for all services at the Agent level
 
-Before going into your services' ingestion configuration in tracing libraries, a share of the ingested volume is controllable from the Datadog Agent.
-
-Click **Manage Agent Ingestion** to get instructions for configuring the Agent sampling controls.
+Click **Remotely Configure Agent Ingestion** to manage ingestion sampling for your services globally. You can remotely configure Agent sampling parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent Level Configuration Modal" >}}
 
-You can control three ingestion mechanisms by configuring sampling in the Datadog Agent:
-- **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied in libraries, targeting 10 traces per second per Agent. The setting `DD_APM_MAX_TPS` allows you to change the target number of traces per second.
--  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces up to 10 traces per second per Agent. The setting `DD_APM_ERROR_TPS` allows you to change the target number of traces per second.
--  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces per second per Agent. This setting is disabled by default. The setting `DD_APM_ENABLE_RARE_SAMPLER` allows you to enable the collection of rare traces.
+Three ingestion sampling mechanisms are controllable from the Datadog Agent:
+- **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied for your services, targeting **10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_MAX_TPS` locally at the Agent level.
+-  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces **up to 10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_ERROR_TPS` locally at the Agent level.
+-  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces **up to 5 traces per second per Agent**. This setting is disabled by default. Enable the collection of rare traces in Datadog, or set `DD_APM_ENABLE_RARE_SAMPLER` locally at the Agent level.
+
+With remote configuration, you don't have to restart the Agent to update these parameters. Click `Apply` to save the configuration changes, and the new configuration takes effect immediately.
 
 **Note**: The `Other Ingestion Reasons` (gray) section of the pie chart represents other ingestion reasons which _are not configurable_ at the Datadog Agent level.
-
-### Remotely configure Agent ingestion settings
-
-<div class="alert alert-warning"> Remote configuration for ingestion configuration is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
-
-You can remotely configure these parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
-
-With remote configuration, you can change parameters without having to restart the Agent. Click `Apply` to save the configuration changes, and the new configuration takes effect immediately.
 
 **Note**: Remotely configured parameters take precedence over local configurations such as environment variables and `datadog.yaml` configuration.
 
@@ -136,6 +127,8 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 **Note**: You need to upgrade the Agent to v6.34 or v7.34 for the version information to be reported.
 
 ### Configure the service ingestion rate
+
+<div class="alert alert-info"><strong>Remotely configured sampling rules are in Beta</strong>. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a> to be able to dynamically set this configuration from the Datadog UI without having to redeploy your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling">Resource-based sampling guide</a> to get started.</div>
 
 Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 

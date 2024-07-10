@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/docker/data_collected
-kind: 설명서
 title: 수집된 도커 데이터
 ---
 
@@ -45,7 +44,7 @@ title: 수집된 도커 데이터
 
 {{< get-metrics-from-git "containerd" >}}
 
-### 이벤트 
+### 이벤트
 
 컨테이너형 검사는 이벤트를 수집할 수 있습니다. `filters`를 사용하여 관련 이벤트를 선택합니다. 자세한 내용은 샘플 [`containerd.d/conf.yaml`][1]을 참조하세요.
 

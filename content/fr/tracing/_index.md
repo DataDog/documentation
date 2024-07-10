@@ -50,7 +50,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive pour maîtriser la solution APM
-kind: documentation
 title: APM
 ---
 
@@ -80,19 +79,19 @@ Ajoutez la bibliothèque de tracing Datadog pour votre environnement et langage,
 
 Les traces sont créées dans vos applications instrumentées et sont transmises à Datadog. Dans le cas de services caractérisés par un débit élevé, vous pouvez visualiser et contrôler l'ingestion à l'aide des [paramètres d'ingestion][6]. Toutes les traces ingérées peuvent être utilisées afin de rechercher et d'analyser des données en temps réel sur une durée de 15 minutes. Vous pouvez utiliser des [filtres de rétention][7] personnalisés basés sur des tags afin de conserver uniquement les traces pertinentes pour votre entreprise. Ainsi, vous pourrez rechercher et analyser ces traces pendant 15 jours.
 
-{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Rétention et ingestion des traces"  style="width:100%;">}}
+{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Rétention et ingestion des traces" style="width:100%;">}}
 
 ## Générer des métriques custom à partir de spans
 
 [Générez des métriques][8] avec une période de rétention de 15 mois à partir de l'ensemble des spans ingérées, afin de créer des indicateurs de performance et d'activité clés et de surveiller leur évolution.
 
-{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Générer des métriques custom à partir des spans ingérées"  style="width:100%;">}}
+{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Générer des métriques custom à partir des spans ingérées" style="width:100%;">}}
 
 ## Associer des traces à d'autres données de télémétrie
 
 [Visualisez vos logs d'application][9] en même temps que la trace associée pour une requête distribuée spécifique grâce à l'injection automatique de l'ID de trace. [Associez vos sessions][10] à vos traces pour visualiser les traces spécifiques qui correspondent aux expériences utilisateur ainsi qu'aux problèmes signalés. [Associez les tests simulés][11] aux traces pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Associer vos logs à vos traces"  style="width:100%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Associer vos logs à vos traces" style="width:100%;">}}
 
 ## Explorer des requêtes en temps réel et des requêtes indexées
 
@@ -118,7 +117,7 @@ Les traces sont créées dans vos applications instrumentées et sont transmises
 
 [Améliorez la latence des applications][16] et optimisez les ressources de calcul avec le profiling continu en production. Vous pourrez ainsi identifier les lignes de code qui sollicitent le plus le processeur, la mémoire et l'E/S.
 
-{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+{{< img src="tracing/index/Profiling.png" alt="Profiling" style="width:100%;">}}
 
 
 ## Pour aller plus loin

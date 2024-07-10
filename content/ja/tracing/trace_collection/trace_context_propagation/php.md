@@ -5,20 +5,19 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
   text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-kind: documentation
 title: PHP トレースコンテキストの伝搬
 type: multi-code-lang
 ---
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][7] と [W3C][10] のヘッダー抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのための [B3][7] と [W3C Trace Context][10] のヘッダー抽出と挿入をサポートしています。
 
 分散ヘッダーの挿入と抽出のスタイルを構成することができます。
 
 PHP トレーサーは、以下のスタイルをサポートしています。
 
 - Datadog: `Datadog`
-- W3C: `tracecontext`
-- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
+- W3C Trace Context: `tracecontext`
+- B3 マルチヘッダー: `b3multi` (`B3` エイリアスは非推奨)
 - B3 シングルヘッダー: `B3 single header`
 
 以下の環境変数を使用して、PHP トレーシングライブラリの挿入および抽出のスタイルを構成することができます。例:

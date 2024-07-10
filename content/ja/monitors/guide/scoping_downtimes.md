@@ -7,7 +7,6 @@ further_reading:
 - link: /monitors/guide/suppress-alert-with-downtimes
   tag: ガイド
   text: Downtimes API と UI によるアラートの抑制
-kind: ガイド
 title: ダウンタイムスケジュールのスコープ
 ---
 
@@ -28,7 +27,7 @@ title: ダウンタイムスケジュールのスコープ
 
 3. スケジュールされたダウンタイムが始まり、このモニターではグループ `service:web-store` のアラートのみがミュートされます。
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
 
 4. 複数のグループ (たとえば、`service:synthesizer` や `service:consul` など) でダウンタイムをスケジュールするには、グループごとに追加のダウンタイムを作成できます。
 

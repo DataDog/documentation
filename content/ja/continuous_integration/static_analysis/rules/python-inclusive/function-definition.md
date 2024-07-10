@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 表現に問題がないか関数名をチェックする
 ---
 ## メタデータ
@@ -32,6 +31,9 @@ def foo_blacklist():
 ```python
 # 大文字と小文字が混在している場合でも、blacklist という名前を使用しないでください
 def BlaCKliSt_NaMeS():
+    pass
+
+def wHiTeLisT_NaMeS():
     pass
 ```
 

@@ -3,176 +3,30 @@ aliases:
 - /ja/events/stream/
 - /ja/events/explorer/
 further_reading:
-- link: /api/v1/events/
+- link: /api/latest/events/
   tag: Documentation
   text: Datadog イベント API
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: ブログ
   text: Datadog イベントの改善によるトラブルシューティングの迅速化
-kind: documentation
 title: イベントエクスプローラー
 ---
 
-{{< img src="service_management/events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
+{{< img src="service_management/events/events-explorer.mp4" alt="イベントを属性でソートし、分析結果を調べる" video=true >}}
 
-イベントエクスプローラーには、コードのデプロイ、サービスの状態、コンフィギュレーションの変更、アラートのモニタリングなど、インフラストラクチャーとサービスによって生成された最新のイベントが表示されます。
+イベントエクスプローラーを使用して、Datadog に流入するイベントを集計・表示します。イベントを属性でグループ化またはフィルタリングし、イベント分析でグラフィカルに表現します。クエリ構文を使用して、ブール演算子やワイルドカード演算子を使用してイベントをフィルタリングします。
 
-## エクスプローラーの操作
-
-{{< img src="service_management/events/explorer/navigate.png" alt="イベントエクスプローラーの操作方法" style="width:100%;" >}}
-
-イベントエクスプローラーには、デフォルトですべてのイベントタイプが表示されます。ファセットまたは検索クエリでイベントをフィルタリングできます。
-
-### イベントのサイドパネル
-
-{{< img src="service_management/events/explorer/side-panel.mp4" alt="イベントエクスプローラーの行をクリックすると、イベントサイドパネルが開きます" style="width:100%;" video=true >}}
-
-イベントエクスプローラーの行をクリックして、イベントサイドパネルを開きます。このパネルには、イベントに関連付けられたタグとメッセージが表示されます。
-
-### 属性タブ
-
-{{< img src="service_management/events/explorer/event-attribute.png" alt="Event Attributes タブの例" style="width:100%;" >}}
-
-サイドパネルの attributes タブには、イベント属性が JSON として一覧表示されます。属性をクリックして、既存のクエリに追加または除外するか、この属性の列を追加します。
-
-イベント属性は、処理パイプラインを使用して、取り込み時に正規化または強化できます。
-
-## オプション
-
-イベントエクスプローラーをカスタマイズするには、**Options** をクリックします。
-
-- 表示される列を調整します。
-- コンパクトから拡張までリスト密度を選択します。
-- 絶対タイムスタンプまたは相対タイムスタンプを表示します。絶対タイムスタンプは、イベントの時刻を UTC で表示します (たとえば、`Aug 11 15:58.08.000`)。相対タイムスタンプには、イベントからの経過時間が表示されます (たとえば、`20 seconds ago` (20 秒前))。
-- 結果のタグを表示または非表示にします。
-- 上部のタイムライングラフを表示または非表示にします。
-
-## タイムレンジ
-
-タイムフレームセレクターは、エクスプローラーまたは分析に表示されるイベントの時間範囲を制御し、検索バーの下にタイムラインの範囲を設定します。
-
-タイムフレームドロップダウンからプリセット範囲を選択するか、カスタム時間範囲を入力して、時間範囲を変更します。
-
-すべての検索パラメーターが URL に含まれているため、URL を共有することでビューを共有できます。
-
-## 検索構文
-
-イベント検索では、[ログ検索構文][1]を使用します。
-
-ログ検索と同様に、イベント検索では次のことが許可されます。
-
-- `AND`、`OR`、`-` 演算子
-- ワイルドカード
-- エスケープ文字
-- `key:value` でタグとファセットを検索する
-- `@` プレフィックスで属性内を検索する
-
-クエリの例:
-
-`source:(github OR chef)`
-: GitHub または Chef からのイベントを表示します。
-
-`host:(i-0ade23e6 AND db.myapp.com)`
-: `i-0ade23e6` および `db.myapp.com` からのイベントを表示します。
-
-`service:kafka`
-: `kafka` サービスからのイベントを表示します。
-
-`status:error`
-: `error` ステータスのイベントを表示します (サポートされるステータス: `error`、`warning`、`info`、`ok`)。
-
-`availability-zone:us-east-1a`
-: `us-east-1a` AWS アベイラビリティーゾーン (AZ) でイベントを表示します。
-
-`container_id:foo*`
-: ID が `foo` で始まるすべてのコンテナからのイベントを表示します。
-
-`@evt.name:foo`
-: 属性 `evt.name` が `foo` と等しいイベントを表示します。
-
-詳細については、[ログ検索構文][1]を参照してください。
-
-### ファセット
-
-Datadog は、イベント属性を、イベントエクスプローラーのファセットサイドパネル、分析、モニターからアクセスできるファセットとしてインデックス付けします。
-
-ファセットには、1 つの属性またはタグの個別メンバーが表示されると共に、表示されたイベントの数などの基本的な分析が提供されます。ファセットを使用すると、特定の属性に基づきデータセットの絞り込みや切り口の切り替えができます。絞り込むには、表示する値を選択します。
-
-{{< img src="service_management/events/explorer/facets-location.png" alt="ファセットサイドパネル" style="width:100%;" >}}
-
-### ファセットの作成
-
-ファセットを作成するには、左側のサイドパネルにある “Add a facet” ボタンを使用します。
-
-ファセットを追加すると、この属性の値がすべての新しいビューに保存され、検索バーとファセットのサイドパネルで使用できるようになります。また、イベントモニターやグラフウィジェットでグループ化するためにも使用できます。
-
-### 予約済み属性
-
-このリストでは、イベントとともに自動的に取り込まれる予約属性について説明します。
-
-| 属性 | 説明                                                                                                                                                                                                                                |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `host`    | メトリクスで定義された送信元ホストの名前。Datadog で一致したホストから、対応するホストタグが自動的に取得され、イベントに適用されます。Agent では、この値が自動的に設定されます。                          |
-| `source`  | これは、インテグレーション名、またはイベントの生成元に対応します。インテグレーション名と一致する場合、対応するパーサーとファセットが自動的にインストールされます。たとえば、`nginx`、`postgresql` などです。 |
-| `status`  | これは、イベントのレベルまたは重大度に対応します。      |
-| `service` | イベントを生成するアプリケーションまたはサービスの名前。 |
-| `message` | デフォルトでは、Datadog は `message` 属性の値をイベントエントリーの本文として取り込みます。 |   
-
-予約属性と同じキーを持つタグを検索するには、`tags` 検索構文を使用します。 
-例: `tags:("status:<status>")`
-
-予約属性と同じキーを持つタグにファセットを作成するには
-1. [リマッパープロセッサー][2]を使って、タグを別のタグや属性にリマップすることができます。
-2. 新しいタグ/属性に[ファセット][3]を作成します。
-
-## 通知
-
-Datadog は、API によって投稿されたときに、イベントのメッセージの `@notifications` をサポートします。例:
-
-`@all`
-: オーガニゼーションの全メンバーに通知を送信します。
-
-`@test@example.com`
-: 電子メールを `test@example.com` に送信します。
-
-`@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>`
-: 指定した Slack チャンネルに、イベントやグラフを投稿します。
-
-`@webhook`
-: Webhook をアラートまたはトリガーします。[Webhooks に関するブログ記事][4]を参照してください。
-
-詳細については、[通知][5]を参照してください。
-
-## イベント分析
-
-イベント分析は、トラブルシューティングと監視のためのビュー、データ集計、グループ化機能でイベントエクスプローラーページを拡張します。次を制御することができます。
-
-- 分析するビューセットをフィルタリングするクエリ
-- データのグループ化に使用するディメンション
-- 集計やグループ化を可視化する方法
-
-分析ビジュアライゼーションをエクスポートして、ダッシュボードまたはノートブックにウィジェットを作成できます。
-
-### 分析クエリの構築
-
-クエリを使用して、イベント分析に何を表示するかを制御できます。
-
-1. グラフ化する属性またはタグを選択し、ファセットとして追加します。ファセットをグラフ化すると、変数の一意のカウントが表示されます。
-    {{< img src="service_management/events/explorer/facet-to-graph.png" alt="グラフ化できるファセットのリストを表示します。" style="width:100%;" >}}
-2. ファセットを使用してグラフをグループ化します。ここで使用できるようにするには、ファセットとして属性を追加する必要があります。
-    {{< img src="service_management/events/explorer/split-graph.png" alt="データをグループ化できるファセットのリストを表示します。" style="width:100%;" >}}
-3. グラフの時間間隔を選択します。グローバルタイムフレームを変更すると、使用可能なタイムステップ値のリストが変更されます。結果は、時系列、表、またはトップリストとして表示できます。
-    {{< img src="service_management/events/explorer/time-interval.png" alt="デフォルトの 5 秒を含む、可能な時間間隔のリストを表示します。" style="width:100%;" >}}
-4. 選択したメジャーに応じて、上位と下位のどちらの値を表示するかを選択します。
-    {{< img src="service_management/events/explorer/display-values.png" alt="値を上から表示するか下から表示するかを選択します。" style="width:100%;" >}}
+{{< whatsnext desc="Features of the Events Explorer:" >}}
+    {{< nextlink href="/service_management/events/explorer/searching" >}}検索{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/navigate" >}}エクスプローラーの操作{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/customization" >}}カスタマイズ{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/facets" >}}ファセット{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/attributes" >}}属性{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/notifications" >}}通知の送信{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/analytics" >}}分析{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/saved_views" >}}保存ビュー{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: /ja/logs/explorer/search_syntax/
-[2]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#remapper
-[3]: /ja/service_management/events/explorer/#create-a-facet
-[4]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[5]: /ja/monitors/notify/

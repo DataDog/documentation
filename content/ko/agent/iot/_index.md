@@ -2,8 +2,7 @@
 further_reading:
 - link: /getting_started/agent/
   tag: 설명서
-  text: Agent를 이용해 시작하기
-kind: 설명서
+  text: Agent 시작하기
 title: IoT Agent
 ---
 
@@ -26,7 +25,7 @@ IoT Agent에는 다음과 같은 시스템 점검이 포함됩니다. IoT 기기
 - 임베디드 [DogStatsD][6] 서버를 사용하는 커스텀 메트릭 수집
 - [테일 파일][7], [TCP/UDP][8], [journald][9]를 사용하는 로그 수집
 
-IoT Agent는 파이썬(Python) 명령해석기(Interpreter)와 표준 Agent와 사전 패키지화된 기타 통합을 포함하지 않습니다. 또한 APM의 트레이스, 라이브 프로세스 모니터링, 네트워크 퍼포먼스 모니터링도 지원하지 않습니다.
+IoT Agent에는 표준 Agent와 함께 사전 패키징된 Python 인터프리터 및 기타 통합 기능이 포함되어 있지 않습니다. 또한 APM, 실시간 프로세스 모니터링 또는 네트워크 성능 모니터링에 대한 추적도 지원하지 않습니다.
 
 ## 구성
 
@@ -52,7 +51,7 @@ IoT Agent는 x64, arm64(ARMv8), ARMv7 아키텍처에서 실행 중인 Linux 기
 사용 중인 운영 체제와 칩셋 아키텍처에 적합한 IoT Agent를 자동으로 다운로드하여 설치하려면 다음 명령어를 사용하세요.
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 #### 수동
@@ -74,8 +73,10 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. 우분투(Ubuntu) 14 이하 또는 데비안(Debian) 8 이하 버전을 실행 중이라면 키링을 `/etc/apt/trusted.gpg.d`로 복사하세요.
@@ -85,23 +86,23 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
    ```
 
 4. `apt`를 업데이트하고 IoT Agent를 설치합니다.
-    ```bash
+    ```shell
     sudo apt-get update
     sudo apt-get install datadog-iot-agent datadog-signing-keys
     ```
 
 5. 설정 샘플을 복사하고, 적절한 API 키를 지정합니다.
-    ```bash
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 6. Datadog 사이트를 {{< region-param key="dd_site" code="true" >}}로 설정합니다. 기본 설정은 `datadoghq.com`입니다.
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 7. IoT Agent 시작하기:
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
@@ -119,6 +120,8 @@ RPM 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
@@ -131,23 +134,23 @@ RPM 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명
     - ARMv7 - `https://yum.datadoghq.com/stable/7/armv7hl/`
 
 2. 로컬 Yum 저장소를 업데이트하고 Agent를 설치하세요.
-    ```
+    ```shell
     sudo yum makecache
     sudo yum install datadog-iot-agent
     ```
 
 3. 설정 샘플을 복사하고, 적절한 API 키를 지정합니다.
-    ```
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 4. Datadog 사이트를 {{< region-param key="dd_site" code="true" >}}로 설정합니다. 기본은 `datadoghq.com`입니다.
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 5. IoT Agent 시작하기:
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 

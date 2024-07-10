@@ -6,13 +6,17 @@ dependencies: []
 description: Google Workspace Alert Center からログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/google_workspace_alert_center/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/google-workspace-monitoring
+  tag: ブログ
+  text: Datadog を使用して Google Workspace を監視する
 git_integration_title: google_workspace_alert_center
 has_logo: true
 integration_id: ''
 integration_title: Google Workspace Alert Center
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_workspace_alert_center
 public_title: Google Workspace Alert Center
@@ -21,6 +25,7 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Alert Center は、Google Workspace 全体にわたる重要なセキュリティ関連の通知、アラート、アクションの包括的なビューを提供します。Google Workspace Alert Center を Datadog と統合すると、次のことが可能になります。
@@ -29,9 +34,9 @@ Alert Center は、Google Workspace 全体にわたる重要なセキュリテ�
 - Google Workspace ドメインの[イベント][3]に[モニター][2]を設定する。
 - Datadogの[セキュリティプラットフォーム][4]を活用して、Google Workspace ドメインに対する脅威を監視および検知する。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Datadog Google Workspace Alert Center インテグレーションは、サービスアカウントを使用して Google と Datadog の間の API 接続を作成します。以下では、サービスアカウントを作成し、Datadog にサービスアカウント認証情報を提供して、自動的に API 呼び出しを開始するための手順を説明します。
 
@@ -47,7 +52,7 @@ Datadog Google Workspace Alert Center インテグレーションは、サービ
 
 複数のプロジェクトを監視する場合は、上記のプロセスを繰り返して、複数のサービスアカウントを使用できます。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 プロジェクトごとにカスタムタグを指定することもできます。これらのタグは、Datadog 内のそのプロジェクトのすべてのログイベントに追加されます。
 
@@ -55,29 +60,33 @@ Datadog Google Workspace Alert Center インテグレーションは、サービ
 
 ソース `google.workspace.alert.center` の下に[ログ][1]が入るまで、少なくとも 5 分待ちます。ご使用の環境で Alert Center のアラートが頻繁に生成されない場合は、さらに長く待機する必要があります。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 この Google Workspace Alert Center には、メトリクスデータは含まれません。
 
-### イベント
+### ヘルプ
 
 ログイベントの一覧については、[Google Workspace Alert Center のドキュメント][7]を参照してください。
 
-### サービスのチェック
+### ヘルプ
 
 Google Workspace Alert Center インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/
 [2]: /ja/monitors/monitor_types/
 [3]: /ja/events/
 [4]: /ja/security_platform/
 [5]: https://developers.google.com/identity/protocols/oauth2/service-account
-[6]: http://app.datadoghq.comhttps://app.datadoghq.com/account/settings#integrations/google-workspace-alert-center
+[6]: http://app.datadoghq.com/integrations/google-workspace-alert-center
 [7]: https://support.google.com/a/answer/9104586?hl=en&ref_topic=9105077
 [8]: https://docs.datadoghq.com/ja/help/

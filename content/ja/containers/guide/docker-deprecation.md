@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/guide/docker-deprecation
-kind: documentation
 title: Kubernetes における Docker の廃止
 ---
 

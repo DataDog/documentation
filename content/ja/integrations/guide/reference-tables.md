@@ -6,11 +6,16 @@ beta: true
 further_reading:
 - link: /logs/log_configuration/processors
   tag: ドキュメント
-  text: ログの処理方法について
-- link: /logs/log_configuration/parsing
+  text: ルックアッププロセッサを使用して、リファレンステーブルからログをリッチ化する
+- link: /logs/explorer/analytics/#filter-logs-based-on-reference-tables
   tag: ドキュメント
-  text: パースの詳細
-kind: ガイド
+  text: リファレンステーブルに基づくログのフィルター
+- link: /cloud_cost_management/tag_pipelines/#map-multiple-tags
+  tag: ドキュメント
+  text: リファレンステーブルを使用して、コストデータに複数のタグを追加する
+- link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
+  tag: ブログ
+  text: リファレンステーブルを使用してログにさらにコンテキストを追加する
 title: リファレンステーブルでカスタムメタデータを追加する
 ---
 
@@ -29,7 +34,7 @@ title: リファレンステーブルでカスタムメタデータを追加す�
 
 リファレンステーブルの名前と列のヘッダーは、以下の命名規則で検証され、必要に応じて自動的に更新または正規化されます。
 
-| 規則の例     | 正規化 |
+| ルール     | 正規化 |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | 名前とヘッダーは重複できません。                                          | 重複した名前は列挙されます。例えば、`fileid` が名前として 2 回使用された場合、最初のインスタンスは `fileid1` に、2 番目のインスタンスは `fileid2` になります。名前またはヘッダーを列挙した際に、56 文字を超える場合は拒否され、名前を変更する必要があります。 |
 | 名前とヘッダーに大文字を含めることはできません。                               | 大文字で書かれた名前は、小文字に変換されます。この変換の結果、名前が重複することがありますが、その場合は列挙されます。例えば、`Fileid` と `FileID` は両方とも `fileid` となり、それぞれ `fileid1` と `fileid2` に列挙されます。 |
@@ -49,11 +54,11 @@ title: リファレンステーブルでカスタムメタデータを追加す�
 
 **注**: CSV の手動アップロードは、4MB までのファイルをサポートしています。
 
-{{< /tabs >}}
+{{% /tab %}}
 
-{{% tab "AWS S3" %}}
+{{% tab "Amazon S3" %}}
 
-リファレンステーブルは、AWS S3 バケットから CSV ファイルを自動的にプルして、データを最新の状態に保つことができます。インテグレーションでは、S3 で CSV ファイルへの変更が検索され、ファイルが更新されると、リファレンステーブルが新しいデータに置き換えられます。これにより、初期リファレンステーブルが構成されると、S3 API を使用した API 更新も可能になります。
+リファレンステーブルは、Amazon S3 バケットから CSV ファイルを自動的にプルして、データを最新の状態に保つことができます。インテグレーションでは、S3 で CSV ファイルへの変更が検索され、ファイルが更新されると、リファレンステーブルが新しいデータに置き換えられます。これにより、初期リファレンステーブルが構成されると、S3 API を使用した API 更新も可能になります。
 
 S3 からリファレンステーブルを更新するために、Datadog は [AWS インテグレーション][1]用に構成した AWS アカウントの IAM ロールを使用します。このロールをまだ作成していない場合は、[こちらの手順][2]で作成してください。このロールがリファレンステーブルを更新できるようにするには、次のアクセス許可ステートメントを IAM ポリシーに追加します。バケット名は、環境に合わせて編集します。
 
@@ -80,15 +85,15 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 ```
 ### テーブルを定義する
 
-**New Reference Table +** をクリックしてから、名前を追加し、AWS S3 を選択し、すべてのフィールドに入力し、インポートをクリックして、ルックアップのプライマリキーを定義します。
+**New Reference Table +** をクリックしてから、名前を追加し、Amazon S3 を選択し、すべてのフィールドに入力し、インポートをクリックして、ルックアップのプライマリキーを定義します。
 
-{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="AWS S3 タイルを選択し、AWS Account、Bucket、Path のデータを記入した upload your data セクション" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="Amazon S3 タイルを選択し、AWS Account、Bucket、Path のデータを記入した upload your data セクション" style="width:100%;">}}
 
 **注**: S3 バケットからのアップロードは、200MB までのファイルをサポートしています。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#installation
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Azure ストレージ" %}}
 
@@ -108,11 +113,36 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 **注**: クラウドオブジェクトストレージからのアップロードは、200MB までのファイルをサポートしています。
 
-
 [1]: https://app.datadoghq.com/integrations/azure
 [2]: /ja/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
 [4]: /ja/integrations/azure/
+
+{{% /tab %}}
+
+{{% tab "Google Cloud ストレージ" %}}
+
+1. Datadog で Google Cloud インテグレーションをセットアップしていない場合、またはレガシー Google プロジェクト ID ファイル (レガシープロジェクトであることは GCP インテグレーションタイルに表示されています) を使用している場合は、[Google Cloud Platform インテグレーション][1]のセットアップ手順に従ってください。これには、[Google Cloud サービスアカウント][2]を作成する必要があります。
+
+1. Google Cloud コンソールから、**Cloud Storage** ページに移動します。
+
+1. アクセス権を与えたいバケットを見つけてクリックします。
+
+1. **Permissions** タブをクリックします。"View By Principals" の下にある **Grant Access** ボタンをクリックします。
+
+1. 表示されるウィンドウで、"New principals" フィールドの下に、ステップ 1 で作成して GCP タイルに追加したサービスアカウントのメールアドレスを入力します。"Assign roles" の下で、**Storage Object Viewer** ロールを選択します。**Save** をクリックします。
+
+
+{{< img src="integrations/guide/reference-tables/grant_access.png" alt="アクセスを許可する構成を示す Google Cloud コンソール" style="width:100%;" >}}
+
+ロールの確認と割り当てが完了したら、Google Cloud からリファレンステーブルにインポートすることができます。Datadog で構成が更新されるまで、数分かかる場合があります。
+
+{{< img src="integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="新しいリファレンステーブルを作成する際に、データのアップロードまたはインポートで GCP ストレージを選択します" style="width:100%;" >}}
+
+**注**: クラウドオブジェクトストレージからのアップロードは、200MB までのファイルをサポートしています。
+
+[1]: /ja/integrations/google_cloud_platform/#setup
+[2]: /ja/integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -141,7 +171,7 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 [監査証跡][2]または[変更イベント][3]でリファレンステーブルのアクティビティを監視することができます。特定のリファレンステーブルの監査証跡と変更イベントを表示するには、そのテーブルを選択し、**Update Config** の隣にある設定アイコンをクリックします。監査証跡を表示するには、組織の管理権限が必要です。
 
-### Audit Trail
+### 監査証跡
 
 リファレンステーブルの監査証跡を使用して、ユーザーをトリガーとするアクションを追跡することができます。監査証跡イベントは、ユーザーが最初に CSV ファイルをアップロードまたはインポートしたとき、またはユーザーがリファレンステーブルを作成、変更、または削除したときに送信されます。
 

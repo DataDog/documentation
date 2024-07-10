@@ -1,10 +1,9 @@
 ---
 title: React Native Log Collection
-kind: documentation
 description: Collect logs from your React Native Mobile applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-reactnative Source code
 - link: logs/explorer
   tag: Documentation
@@ -21,9 +20,11 @@ Send logs to Datadog from your React Native Mobile applications with [Datadog's 
 
 ## Setup
 
-1. To install with NPM, run:
+1. Install the `@datadog/mobile-react-native` package
 
-   ```sh
+To install with NPM, run:
+
+```sh
    npm install @datadog/mobile-react-native
 ```
 
@@ -33,7 +34,7 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-native
 ```
 
-Install the added pod:
+Then install the added pod:
 
 ```sh
 (cd ios && pod install)

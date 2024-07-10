@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/guide/python-3/
   tag: ドキュメント
   text: Python 2  から Python 3 へカスタムチェックを移行する
-kind: documentation
 title: Datadog Agent v7 へのアップグレード
 ---
 
@@ -31,9 +30,9 @@ Agent をバージョン 6 からバージョン 7 にアップグレードす�
 
 **注**: Windows インストーラーの利用可能な全バージョンのリンクは、[JSON 形式で提供されています][3]。
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://windows-agent.datadoghq.com/installers.json
+[3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 

@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "600"
+    "other": "750"
   },
 
   "beta_sentence": {
@@ -57,6 +57,26 @@
 
   "event_stream_support_sentence": {
     "other": "<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community プログラム</a>は、Datadog ユーザーが Datadog ユーザーのために構築したネットワークで、お互いに質問の答えを見つけたり、製品のヒントやトリックを共有したりすることができます。"
+  },
+
+  "foundation_enablement_sentence": {
+    "other": "Datadog の様々な機能や製品について、専門家による基礎知識習得のためのライブセッションに<a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">お申し込み</a>ください。"
+  },
+
+  "learning_center_sentence": {
+    "other": "セルフガイドの<a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">ハンズオンコース</a>では、Datadog のキーコンセプトを学び、実践することができます。"
+  },
+
+  "learning_resources": {
+    "other": "学習リソース"
+  },
+
+  "learning_sentence": {
+    "other": "無料の学習リソースで Datadog プラットフォームの知識を深めることができます。"
+  },
+
+  "webinars_sentence": {
+    "other": "様々な製品トピックに関する <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">Datadog のウェビナー</a>に参加したり、録画したウェビナーを視聴することができます。"
   },
 
   "agent_started_sentence": {
@@ -228,6 +248,18 @@
     "other": "Slack で<br>連絡"
   },
 
+  "learning_center": {
+    "other": "datadog<br>ラーニングセンター"
+  },
+
+  "foundation_enablement": {
+    "other": "知識習得のライブ<br>セッションに参加"
+  },
+
+  "webinars": {
+    "other": "Datadog<br>ウェビナー"
+  },
+
   "questions": {
     "other": "ご質問は"
   },
@@ -319,5 +351,26 @@
   },
   "learn_more": {
     "other": "詳細はこちら"
+  },
+  "personalized_demo" : {
+    "other": "個別デモのリクエスト"
+  },
+  "configuration_management" : {
+    "other": "構成管理"
+  },
+  "cloud_and_container" : {
+    "other": "クラウドとコンテナ"
+  },
+  "source" : {
+    "other": "ソース"
+  },
+  "legacy": {
+      "other": "レガシー"
+  },
+  "try_this_rule" : {
+    "other": "このルールを試す"
+  },
+  "available_for": {
+    "other": "次で利用可能"
   }
 }

@@ -36,10 +36,9 @@ integration_id: teradata
 integration_title: Teradata
 integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: teradata
-oauth: {}
 public_title: Teradata
 short_description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
 supported_os:

@@ -1,9 +1,12 @@
 ---
 title: Interpolation and the Fill Modifier
-kind: faq
 aliases:
     - /graphing/faq/interpolation-the-fill-modifier-explained
     - /dashboards/faq/interpolation-the-fill-modifier-explained
+further_reading:
+- link: "/dashboards/functions/interpolation/"
+  tag: "Documentation"
+  text: "Learn more about Interpolation Functions"
 ---
 
 {{< img src="metrics/guide/graph_fill_example.png" alt="Fill() function in the graph options" style="width:100%;" >}}
@@ -49,7 +52,7 @@ Interpolation is not performed for multi-part queries, for example: `avg:system.
 
 ## How to control interpolation?
 
-The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][1].
+The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][1], with the exception of Gauge type metrics. See [Metric Type Modifiers][2] for more information.
 
 The `.fill()` modifier controls interpolation parameters:
 
@@ -74,4 +77,9 @@ Linear interpolation is a great fit for metrics reported on a steady basis from 
 
 Null prevents graphs from displaying interpolated values 5 min after the last real value.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /metrics/types/
+[2]: /metrics/custom_metrics/type_modifiers/?tab=gauge#in-application-modifiers

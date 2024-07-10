@@ -1,6 +1,5 @@
 ---
 title: DogStatsD のデータ集計
-kind: documentation
 description: DogStatsD サーバーがデータを集計してから Datadog に送信することについて説明します
 aliases:
   - /ja/developers/faq/data-aggregation-with-dogstatsd-threadstats
@@ -11,9 +10,6 @@ further_reading:
   - link: developers/libraries
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-    tag: GitHub
-    text: DogStatsD ソースコード
 ---
 Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機能を追加して実装します。DogStatsD を使用すると、アプリケーションコードのメトリクス送信や監視を、コードをブロックせずに行うことができます。データはアプリケーションから UDP を通じてローカルの（Datadog Agent に組み込まれた） [DogStatsD サーバー][2]に送信され、そこで集計されてから、Datadog の API エンドポイントに送られます。[DogStatsD のセットアップについてはこちらを参照してください][2]。
 

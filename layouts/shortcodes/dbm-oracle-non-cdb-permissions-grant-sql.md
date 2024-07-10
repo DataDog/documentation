@@ -1,0 +1,37 @@
+```SQL
+grant create session to datadog ;
+grant select on v_$session to datadog ;
+grant select on v_$database to datadog ;
+grant select on v_$containers to datadog;
+grant select on v_$sqlstats to datadog ;
+grant select on v_$instance to datadog ;
+grant select on dba_feature_usage_statistics to datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V_$PROCESS to datadog ;
+grant select on V_$SESSION to datadog ;
+grant select on V_$CON_SYSMETRIC to datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to datadog ;
+grant select on CDB_TABLESPACES to datadog ;
+grant select on V_$SQLCOMMAND to datadog ;
+grant select on V_$DATAFILE to datadog ;
+grant select on V_$SYSMETRIC to datadog ;
+grant select on V_$SGAINFO to datadog ;
+grant select on V_$PDBS to datadog ;
+grant select on CDB_SERVICES to datadog ;
+grant select on V_$OSSTAT to datadog ;
+grant select on V_$PARAMETER to datadog ;
+grant select on V_$SQLSTATS to datadog ;
+grant select on V_$CONTAINERS to datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V_$SQL to datadog ;
+grant select on V_$PGASTAT to datadog ;
+grant select on v_$asm_diskgroup to datadog ;
+grant select on v_$rsrcmgrmetric to datadog ;
+grant select on v_$dataguard_config to datadog ;
+grant select on v_$dataguard_stats to datadog ;
+grant select on v_$transaction to datadog;
+grant select on v_$locked_object to datadog;
+grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
+```

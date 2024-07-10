@@ -3,6 +3,7 @@ app_id: aws-pricing
 app_uuid: 74fb11c5-4dea-4b17-acac-2c2453ea6331
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: aws.pricing.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10085
     source_type_name: AWS Pricing
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -31,10 +33,9 @@ integration_id: aws-pricing
 integration_title: AWS Pricing
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: aws_pricing
-oauth: {}
 public_title: AWS Pricing
 short_description: サービスの AWS Pricing 情報をレートコードごとに収集
 supported_os:
@@ -58,17 +59,18 @@ tile:
   title: AWS Pricing
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 このチェックは、[AWS から公開されている][1]料金情報を取得して、Datadog 内でリソース使用のコスト測定を容易にします。
 
-## セットアップ
+## 計画と使用
 
 AWS Pricing チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い AWS Pricing チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -80,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い AWS Pricing �
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. AWS Pricing データの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `aws_pricing.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、サンプル [aws_pricing.d/conf.yaml][5] を参照してください。
 
@@ -90,27 +92,27 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い AWS Pricing �
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `aws_pricing` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "aws_pricing" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS Pricing には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "aws_pricing" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://aws.amazon.com/pricing/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/datadog_checks/aws_pricing/data/conf.yaml.example

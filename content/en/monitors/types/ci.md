@@ -1,6 +1,5 @@
 ---
 title: CI Monitor
-kind: documentation
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/
@@ -141,7 +140,7 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 #### Samples and breaching values top list
 
@@ -191,24 +190,25 @@ A test run is marked as `flaky` if it exhibits flakiness within the same commit 
 
 A test run is marked as `new flaky` if that particular test has not been detected to be flaky within the same branch or default branch. Only the first test run that is detected as new flaky is marked with the `is_new_flaky` tag (regardless of the number of retries).
 
-For more information on flaky tests, see the [flaky test management guide][6].
-
 {{< img src="ci/flaky_test_monitor.png" alt="CI flaky test monitor" style="width:100%;">}}
+
+For more information, see [Search and Manage CI Tests][6].
 
 ### Maintain code coverage percentage
 [Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time.
 
 {{< img src="ci/codecoveragepct_monitor_light.png" alt="CI flaky test monitor" style="width:100%;">}}
 
+For more information, see [Code Coverage][7].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
 [3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
-[5]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
-[6]: https://docs.datadoghq.com/continuous_integration/guides/flaky_test_management/
+[5]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: /continuous_integration/search/#new-flaky-tests
+[7]: /continuous_integration/tests/code_coverage

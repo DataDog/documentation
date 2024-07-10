@@ -1,22 +1,23 @@
 /* eslint-disable no-underscore-dangle */
-
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
 import { updateQueryParameter, deleteQueryParameter, getQueryParameterByName } from '../helpers/browser';
+import { scrollTop } from '../helpers/scrollTop';
+import { triggerEvent } from '../helpers/triggerEvent';
 
 export function initializeIntegrations() {
     let finderState = 0; // closed
     let popupClosed = true;
     const container = document.querySelector('[data-ref="container"]');
 
-    $(window).on('focus', function() {
+    window.addEventListener('focus', () => {
         if (finderState && container) {
             container.classList.remove('find');
             finderState = 0;
         }
     });
 
-    Mousetrap.bind(['command+f', 'control+f'], function() {
+    Mousetrap.bind(['command+f', 'control+f'], function () {
         if (!finderState && container) {
             container.classList.add('find');
             finderState = 1;
@@ -27,7 +28,7 @@ export function initializeIntegrations() {
     const ref = document.querySelector('.integration-popper-button');
     const pop = document.getElementById('integration-popper');
     if (ref && pop) {
-        ref.addEventListener('click', function() {
+        ref.addEventListener('click', function () {
             pop.style.display = pop.style.display === 'none' ? 'block' : 'none';
             return false;
         });
@@ -36,9 +37,7 @@ export function initializeIntegrations() {
     const mobileDropDown = document.querySelector('#dropdownMenuLink');
     const controls = document.querySelector('[data-ref="controls"]');
     let filters = null;
-    const mobilecontrols = document.querySelector(
-        '[data-ref="mobilecontrols"]'
-    );
+    const mobilecontrols = document.querySelector('[data-ref="mobilecontrols"]');
     let mobilefilters = null;
     const search = document.querySelector('[data-ref="search"]');
     const items = window.integrations;
@@ -57,7 +56,7 @@ export function initializeIntegrations() {
             duration: 150
         },
         selectors: {
-            target: '[data-ref="item"]' // Query targets with an attribute selector to keep our JS and styling classes seperate
+            target: '[data-ref="item"]' // Query targets with an attribute selector to keep our JS and styling classes separate
         },
         load: {
             dataset: items // As we have pre-rendered targets, we must "prime" MixItUp with their underlying data
@@ -67,13 +66,13 @@ export function initializeIntegrations() {
         }
     };
 
-    if (parseInt($(window).width()) <= 575) {
+    if (parseInt(window.innerWidth) <= 575) {
         config['animation']['enable'] = false;
     }
 
     const mixer = mixitup(container, config);
 
-    controls.addEventListener('click', function(e) {
+    controls.addEventListener('click', function (e) {
         handleButtonClick(e.target, filters);
 
         if (e.target.dataset.filter && e.target.dataset.filter !== 'all') {
@@ -81,35 +80,31 @@ export function initializeIntegrations() {
         }
 
         // trigger same active on mobile
-        const mobileBtn = controls.querySelector(
-            `[data-filter="${e.target.getAttribute('data-filter')}"]`
-        );
+        const mobileBtn = controls.querySelector(`[data-filter="${e.target.getAttribute('data-filter')}"]`);
         activateButton(mobileBtn, mobilefilters);
     });
 
-    mobilecontrols.addEventListener('click', function(e) {
+    mobilecontrols.addEventListener('click', function (e) {
         e.stopPropagation();
         handleButtonClick(e.target, mobilefilters);
 
         // trigger same active on desktop
-        const desktopBtn = controls.querySelector(
-            `[data-filter="${e.target.getAttribute('data-filter')}"]`
-        );
+        const desktopBtn = controls.querySelector(`[data-filter="${e.target.getAttribute('data-filter')}"]`);
 
         activateButton(desktopBtn, filters);
 
         pop.style.display = 'none';
-        $(window).scrollTop(0);
+        scrollTop(window, 0);
     });
 
     let searchTimer;
 
-    search.addEventListener('input', function(e) {
+    search.addEventListener('input', function (e) {
         const allBtn = controls.querySelector('[data-filter="all"]');
 
         // search only executes after user is finished typing
         clearTimeout(searchTimer);
-        searchTimer = setTimeout(function() {
+        searchTimer = setTimeout(function () {
             activateButton(allBtn, filters);
             updateData(e.target.value.toLowerCase(), true);
 
@@ -119,10 +114,7 @@ export function initializeIntegrations() {
 
             updateQueryParameter('q', e.target.value.toLowerCase());
 
-            if (
-                e.target.value.length > 0 &&
-                window._DATADOG_SYNTHETICS_BROWSER === undefined
-            ) {
+            if (e.target.value.length > 0 && window._DATADOG_SYNTHETICS_BROWSER === undefined) {
                 window.DD_LOGS.logger.log(
                     'Integrations Search',
                     {
@@ -145,9 +137,7 @@ export function initializeIntegrations() {
         if (activeButton && siblings) {
             for (i = 0; i < siblings.length; i++) {
                 button = siblings[i];
-                button.classList[button === activeButton ? 'add' : 'remove'](
-                    'active'
-                );
+                button.classList[button === activeButton ? 'add' : 'remove']('active');
             }
             mobileDropDown.textContent = activeButton.textContent;
         }
@@ -157,11 +147,7 @@ export function initializeIntegrations() {
         // clear the search input
         search.value = '';
         // If button is already active, or an operation is in progress, ignore the click
-        if (
-            button.classList.contains('active') ||
-            !button.getAttribute('data-filter')
-        )
-            return;
+        if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
         const filter = button.getAttribute('data-filter');
         if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
@@ -189,26 +175,17 @@ export function initializeIntegrations() {
             const item = window.integrations[i];
             const domitem = document.getElementById(`mixid_${item.id}`);
             const int = domitem.querySelector('.integration');
-            if (
-                filter === 'all' ||
-                filter === '#all' ||
-                (isSearch && !filter)
-            ) {
+            if (filter === 'all' || filter === '#all' || (isSearch && !filter)) {
                 if (!isSafari) {
                     int.classList.remove('dimmer');
                 }
                 show.push(item);
             } else {
                 const name = item.name ? item.name.toLowerCase() : '';
-                const publicTitle = item.public_title
-                    ? item.public_title.toLowerCase()
-                    : '';
+                const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
 
                 if (
-                    (filter &&
-                        isSearch &&
-                        (name.includes(filter) ||
-                            publicTitle.includes(filter))) ||
+                    (filter && isSearch && (name.includes(filter) || publicTitle.includes(filter))) ||
                     (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
                 ) {
                     if (!isSafari) {
@@ -225,31 +202,21 @@ export function initializeIntegrations() {
         }
 
         const mixerItems = [].concat(show, hide);
-        mixer.dataset(mixerItems).then(function() {
+        mixer.dataset(mixerItems).then(function () {
             if (isSafari) {
                 for (let i = 0; i < window.integrations.length; i++) {
                     const item = window.integrations[i];
                     const domitem = document.getElementById(`mixid_${item.id}`);
                     const int = domitem.querySelector('.integration');
-                    if (
-                        filter === 'all' ||
-                        filter === '#all' ||
-                        (isSearch && !filter)
-                    ) {
+                    if (filter === 'all' || filter === '#all' || (isSearch && !filter)) {
                         int.classList.remove('dimmer');
                     } else {
                         const name = item.name ? item.name.toLowerCase() : '';
-                        const publicTitle = item.public_title
-                            ? item.public_title.toLowerCase()
-                            : '';
+                        const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
 
                         if (
-                            (filter &&
-                                isSearch &&
-                                (name.includes(filter) ||
-                                    publicTitle.includes(filter))) ||
-                            (!isSearch &&
-                                item.tags.indexOf(filter.substr(1)) !== -1)
+                            (filter && isSearch && (name.includes(filter) || publicTitle.includes(filter))) ||
+                            (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
                         ) {
                             int.classList.remove('dimmer');
                         } else {
@@ -295,57 +262,50 @@ export function initializeIntegrations() {
                 );
             }
         }
-    }
+    };
 
     // Set controls the active controls on startup
     activateButton(controls.querySelector('[data-filter="all"]'), filters);
-    activateButton(
-        mobilecontrols.querySelector('[data-filter="all"]'),
-        mobilefilters
-    );
+    activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
 
     handleQueryParamFilter();
 
-    $(window).on('hashchange', function() {
+    window.addEventListener('hashchange', () => {
         let currentCat = '';
         if (window.location.href.indexOf('#') > -1) {
-            currentCat = window.location.href.substring(
-                window.location.href.indexOf('#')
-            );
+            currentCat = window.location.href.substring(window.location.href.indexOf('#'));
         }
-        const currentSelected = $('.controls .active').attr('href');
+        const currentSelected = document.querySelector('.controls .active')?.getAttribute('href');
+
         if (currentCat && currentSelected) {
             if (currentCat !== currentSelected) {
-                $(`a[href="${currentCat}"]`)
-                    .get(0)
-                    .click();
+                document.querySelector(`a[href="${currentCat}"]`)?.click();
             }
         }
         if (currentCat === '') {
-            activateButton(
-                controls.querySelector('[data-filter="all"]'),
-                filters
-            );
-            activateButton(
-                mobilecontrols.querySelector('[data-filter="all"]'),
-                mobilefilters
-            );
+            activateButton(controls.querySelector('[data-filter="all"]'), filters);
+            activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
             updateData('all', false);
         }
     });
 
     if (window.location.href.indexOf('#') > -1) {
-        $(window).trigger('hashchange');
+        triggerEvent(window, 'hashchange');
     }
-    $('.integration-row').on('mouseover', '.integration', {}, function () {
-        $('.integration-row .integration').removeClass('hover');
 
-        if (window.innerWidth >= 576) {
-            $(this).addClass('hover');
-        }
-    });
+    const integrationTiles = document.querySelectorAll('.integration-row .integration');
 
-    $('.integration-row').on('mouseout', '.integration', {}, function () {
-        $(this).removeClass('hover');
+    integrationTiles.forEach((integration) => {
+        integration.addEventListener('mouseover', () => {
+            integration.classList.remove('hover');
+
+            if (window.innerWidth >= 576) {
+                integration.classList.add('hover');
+            }
+        });
+
+        integration.addEventListener('mouseout', () => {
+            integration.classList.remove('hover');
+        });
     });
 }

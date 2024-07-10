@@ -1,0 +1,20 @@
+{
+  "data": {
+    "attributes": {
+      "mute": {
+        "expiration_date": 1778721573794,
+        "muted": true,
+        "reason": "ACCEPTED_RISK"
+      }
+    },
+    "id": "dbe5f567-192b-4404-b908-29b70e1c9f76",
+    "meta": {
+      "findings": [
+        {
+          "finding_id": "ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw=="
+        }
+      ]
+    },
+    "type": "finding"
+  }
+}

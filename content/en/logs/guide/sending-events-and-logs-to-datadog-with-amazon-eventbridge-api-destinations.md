@@ -1,11 +1,15 @@
 ---
 title: Sending Events and Logs to Datadog with Amazon EventBridge API Destinations
-kind: guide
+
 further_reading:
 - link: "https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog"
   tag: "Blog"
   text: "AWS Blog with example API destination use cases"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The Datadog for Government site does not support Amazon EventBridge.</div>
+{{< /site-region >}}
 
 Amazon EventBridge is a serverless event bus that enables you to build event-driven applications. EventBridge can integrate with your AWS services, but the API destinations feature lets you push and pull data from outside of AWS using APIs. This guide gives steps for sending your events and logs from EventBridge to Datadog. For more information about pushing your events from Datadog to EventBridge, [see the EventBridge integration docs][1].
 

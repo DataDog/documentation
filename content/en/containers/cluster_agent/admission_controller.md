@@ -1,12 +1,14 @@
 ---
 title: Datadog Admission Controller
-kind: documentation
 aliases:
 - /agent/cluster_agent/admission_controller
 further_reading:
 - link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
+- link: "/containers/troubleshooting/admission-controller"
+  tag: "Documentation"
+  text: "Troubleshooting the Admission Controller"
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
   text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
@@ -26,11 +28,11 @@ Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more deta
 
 ## Configuration
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 To enable the Admission Controller for the Datadog Operator, set the parameter `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration:
 
-{{< code-block lang="yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-agent.yaml" disable_copy="false" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -48,7 +50,7 @@ Starting from Helm chart v2.35.0, Datadog Admission controller is activated by d
 
 To enable the Admission Controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
 
-{{< code-block lang="yaml" filename="values.yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml" disable_copy="false" >}}
 #(...)
 clusterAgent:
   #(...)
@@ -179,19 +181,13 @@ Possible options:
 |--------------------|-------------------------------------------------------------------------------------------------------------------|
 | `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                                                        |
 | `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable (available with Kubernetes v1.22+)|
-| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path |
+| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path. Inject URL to use to connect the Datadog Agent for DogStatsD metrics in `DD_DOGSTATSD_URL`.  |
 
 **Note**: Pod-specific mode takes precedence over the global mode defined at the Admission Controller level.
 
-#### Notes
+## Troubleshooting
 
-- The Admission Controller needs to be deployed and configured before the creation of new application Pods. It cannot update Pods that already exist.
-- To disable the Admission Controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
-- By using the Datadog Admission Controller, users can skip configuring the application Pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
-- Private clusters need specific networking rules because Datadog's Admission Controller webhook receives requests on port `443` and directs to a service on port `8000`:
-    - In a GKE private cluster, you need to [add a firewall rule for the control plane][4]. By default, the network for the cluster should have a firewall rule named `gke-<CLUSTER_NAME>-master`. This rule's source filters match the cluster's control plane address range. Edit this firewall rule to allow ingress to the TCP port `8000`.
-    - In an EKS private cluster, you need to [add an inbound rule for the node security group][5], where the Datadog Cluster Agent is located. Edit this rule to allow TCP port `8000` with the `Source` referencing the cluster security group (automatically created by AWS corresponding to the EKS control plane).
-
+See [Admission Controller Troubleshooting][6].
 
 ## Further Reading
 
@@ -202,3 +198,4 @@ Possible options:
 [3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 [5]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
+[6]: /containers/troubleshooting/admission-controller

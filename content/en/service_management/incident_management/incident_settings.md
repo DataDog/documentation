@@ -1,6 +1,5 @@
 ---
 title: Incident Settings
-kind: documentation
 description: Configure and customize your Incident Management experience
 aliases:
 - /monitors/incident_management/notification_rules
@@ -73,10 +72,6 @@ You can move any property field into a different table or reorder them in the sa
 
 #### Custom property fields and required fields
 
-<div class="alert alert-warning">
-This feature is in open beta.
-</div>
-
 In addition to the five default fields and the fields based on metric tags, you can also create custom property fields and mark them as required at the creation of an incident. There are four kinds of custom fields you can create:
 
 1. *Single-Select*: A dropdown field that can only have one value assigned at a time per incident. Values can be predefined in-line from the UI or by uploading values through a CSV file.
@@ -111,29 +106,28 @@ To create a custom responder type:
 
 ### Integrations
 
-{{< img src="/service_management/incidents/incident_settings/incident_settings_slack_teams.png" alt="Incident Setting pages showing options for enabling Slack or Microsoft Teams" style="width:80%;" >}}
+The integrations settings provide additional configurations for the Incident Management features of [Slack ][13] and [Microsoft Teams][14]. Navigate to [**Incidents > Settings** and select **Integrations**][15].
 
-The integrations settings provide additional configurations for the Incident Management features of the [Slack ][13] and [Microsoft Teams][14]. 
+Toggle the option to **Automatically create a channel for each new incident** to enable the following:
+- Automatic Slack or Microsoft Teams channel creation for every new incident and the name template for those channels.
+- Incident updates channel.
 
-#### Slack and Microsoft Teams settings
+Configure either of these settings to use any Slack or Microsoft Teams workspace you have set up in your organization's [integration tile][16]. The *incident updates channel* sends a message whenever an incident is declared or changes status, severity, or incident commander.
 
-There are two settings to configure:
+#### Channel name template options
+<div class="alert alert-info">Datadog recommends you keep your prefix short as Slack enforces an 80 character limit in channel names. </div>
 
-1. Enabling automatic Slack or Microsoft Teams channel creation for every new incident and the name template for those channels.
-2. Enabling the incident updates channel.
+Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward. By default, dedicated incident channels use `incident-{public_id}` as their name template. Add additional title options to add clarity to slack channels:
+- The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes. 
+- Click the **Incident ID** checkbox to prevent duplicate channel names. 
+- Click the **Title of Incident** checkbox to enable the Datadog Slack App to automatically rename the channel if an incident's title changes.
 
-You can configure either of these settings to use any Slack or Microsoft Teams workspace you have configured in your organization's [integration tile][15].
+#### Slack features
 
-By default, dedicated incident channels use `incident-{public_id}` as their name template. 
-
-The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes. Datadog recommends you keep your prefix short as Slack enforces an 80 character limit in channel names. Aside from `{public_id}`, you can also add `{date_created}` and `{title}` as variables in the channel name template. 
-
-**Notes:**
-- Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward.
-- If you choose to uncheck `{public_id}`, there is a chance two incidents will have duplicate channel names. In this case, the Datadog Slack App automatically appends a random lowercase letter or number to the end of your channel name to prevent the channel creation process from failing. 
-- If you choose to check `{title}`, the Datadog Slack App automatically renames the channel if an incident's title changes.
-
-The incident updates channel sends a message whenever an incident is declared or changes status, severity, or incident commander.
+The following features are available to use with the Incident Management Slack integration. Enable or configure these options in **[Service Management > Incidents > Settings > Integrations][15]**.
+- Mirror Slack channel messages, to import and retain all slack conversations in the incident timeline. **Note**: This counts every slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
+- You can also automatically add [team members][6] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
+- Automatically archive a slack channel after a certain amount of time.
 
 ## Notifications
 
@@ -168,7 +162,7 @@ To configure a new notification rule:
 2. Under **For incidents matching...**, select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty, and a notification rule triggers for any incident.
 3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][18]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][19] for this option to appear.
 4. **With Template**: Select the desired message template you want the notification rule to use.
-5. **Renotify on updates to**: Choose which incident properties trigger renotifications. Whenever one or more of the selected properties changes, a new notification is sent. Note that you cannot renotify on properties that are already in your filters (see step 2, above).
+5. **Renotify on updates to**: Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change. **Note**: properties already in your filters (see step 2) are automatically included in these rules.
 6. Click **Save**
 
 You can perform the following operations to manage your notification rules.
@@ -210,8 +204,8 @@ To create a postmortem template:
 [12]: /account_management/rbac/?tab=datadogapplication#pagetitle
 [13]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [14]: /integrations/microsoft_teams/#datadog-incident-management-in-microsoft-teams
-[15]: https://app.datadoghq.com/account/settings#integrations
-[16]: /service_management/incident_management/incident_details/#global-header
+[15]: https://app.datadoghq.com/incidents/settings#Integrations
+[16]: https://app.datadoghq.com/account/settings#integrations
 [17]: /service_management/incident_management/incident_details/#notifications-section
-[18]: /monitors/notifications/?tab=is_alert#notify-your-team
-[19]: /service_management/mobile/
+[18]: /monitors/notifications/?tab=is_alert#configure-notifications-and-automations
+[19]: /mobile/

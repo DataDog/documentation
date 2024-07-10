@@ -1,6 +1,6 @@
 ---
 title: Upload JavaScript Source Maps
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
   tag: 'Documentation'
@@ -8,6 +8,9 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
+- link: 'https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps'
+  tag: 'Source Code'
+  text: 'Sourcemaps command reference'
 ---
 
 ## Overview
@@ -18,7 +21,16 @@ If your front-end JavaScript source code is minified, upload your source maps to
 
 ## Instrument your code
 
-Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. Also, ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **200 MB** for US1 or EU1 sites, or **50 MB** for other sites.
+Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. 
+
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300** MB.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50** MB.
+{{< /site-region >}}
+</div>
 
 See the following configurations for popular JavaScript bundlers.
 
@@ -75,7 +87,14 @@ See the following example:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 200 MB for US1 or EU1 sites (50 MB for other sites)</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.</div>
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **300** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **50** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+</div>
 
 ## Upload your source maps
 
@@ -150,6 +169,6 @@ On the other hand, an unminified stack trace provides you with all the context y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters
+[2]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

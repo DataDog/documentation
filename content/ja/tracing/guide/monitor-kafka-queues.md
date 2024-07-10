@@ -9,7 +9,6 @@ further_reading:
 - link: /data_streams/
   tags: ドキュメント
   text: データストリーム モニタリング
-kind: ガイド
 title: Kafka キューの監視
 ---
 

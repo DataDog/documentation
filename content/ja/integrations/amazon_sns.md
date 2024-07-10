@@ -3,7 +3,7 @@ aliases:
 - /ja/integrations/awssns/
 categories:
 - cloud
-- notification
+- notifications
 - aws
 - log collection
 dependencies: []
@@ -12,11 +12,11 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_sns/
 draft: false
 git_integration_title: amazon_sns
 has_logo: true
-integration_id: amazon-sns
+integration_id: ''
 integration_title: Amazon Simple Notification Service (SNS)
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Datadog-Amazon Simple Notification Service (SNS) インテグレーション
@@ -24,6 +24,7 @@ short_description: Amazon SNS メッセージを Datadog に、Datadog アラー
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS ダッシュボード" popup="true">}}
 
 ## 概要
@@ -63,14 +64,14 @@ Datadog Event Stream の SNS メッセージは、`HTTPS` と `Email` の両方�
 Datadog Event Explorer で SNS メッセージを `HTTPS` で受信するには
 
 1. SNS マネジメントコンソールの **Topics** セクションで、目的のトピックを選択し、**Create Subscription** をクリックします。
-2. プロトコルとして `HTTPS` を選択し、以下の Webhook URL を入力します。
+2. プロトコルとして `HTTPS` を選択し、`<API_KEY>` を有効な Datadog API キーの値に置き換えて、以下の Webhook URL を入力します。
 
     ```text
     ## Datadog US site
-    https://app.datadoghq.com/intake/webhook/sns?api_key=<API KEY>
+    https://app.datadoghq.com/intake/webhook/sns?api_key=<API_KEY>
 
     ## Datadog EU site
-    https://app.datadoghq.eu/intake/webhook/sns?api_key=<API KEY>
+    https://app.datadoghq.eu/intake/webhook/sns?api_key=<API_KEY>
     ```
 
 3. **Enable raw message delivery** のチェックは外したままにします。
@@ -115,7 +116,7 @@ Amazon SNS インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-Datadog では、Datadog から GovCloud または 中国のトピックへの SNS 通知をサポートしていません。
+Datadog では、Datadog から中国のトピックへの SNS 通知をサポートしていません。
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

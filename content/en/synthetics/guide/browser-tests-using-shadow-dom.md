@@ -1,6 +1,6 @@
 ---
-title: Using Shadow DOM In Your Browser Tests
-kind: guide
+title: Run Tests On Applications Using A Shadow DOM
+
 further_reading:
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'

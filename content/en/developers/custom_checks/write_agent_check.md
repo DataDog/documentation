@@ -1,9 +1,9 @@
 ---
 title: Writing a Custom Agent Check
-kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
     - /agent/faq/agent-5-custom-agent-check/
+    - /developers/write_agent_check/
 further_reading:
 - link: "/developers/"
   tag: "Documentation"
@@ -32,7 +32,8 @@ init_config:
 instances:
   [{}]
 {{< /code-block >}}
-4. Create a new check file in the `checks.d` directory. Name the file `custom_checkvalue.py`.
+4. Create a check file in the `checks.d` directory. Name the file `custom_checkvalue.py`.
+   <div class="alert alert-info">The names of the configuration and check files must match. If your check is called `custom_checkvalue.py`, your configuration file *must* be named `custom_checkvalue.yaml`.</div> 
 5. Edit the file to include the following:
    {{< code-block lang="python" filename="checks.d/custom_checkvalue.py" >}}
 from checks import AgentCheck
@@ -42,7 +43,7 @@ class HelloCheck(AgentCheck):
 {{< /code-block >}}
 6. [Restart the Agent][3]. Within a minute, you should see a new metric show up in the [Metric Summary][4] called `hello.world`.
 
-**Note**: The names of the configuration and check files must match. If your check is called `custom_checkvalue.py`, your configuration file *must* be named `custom_checkvalue.yaml`.
+The python check file must be readable and executable by the Agent user.
 
 ### Results
 
@@ -171,8 +172,8 @@ class HelloCheck(AgentCheck):
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/guide/agent-configuration-files#agent-configuration-directory
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[2]: /agent/configuration/agent-configuration-files#agent-configuration-directory
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: https://app.datadoghq.com/metric/summary
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output
+[5]: https://github.com/DataDog/integrations-core/blob/9414403b361e583e8f1ebcdee2f006c384c61045/datadog_checks_base/datadog_checks/base/utils/subprocess_output.py#L22
 [6]: /dashboards/

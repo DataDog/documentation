@@ -15,6 +15,46 @@ if(!input || !output) {
   process.exit(1);
 }
 
+// reading cue.json export
+let s = fs.readFileSync('integrations_data/extracted/vector/cue.json', 'utf8');
+let d = JSON.parse(s);
+
+// write out vrl errors from cue
+fs.writeFileSync(
+    './data/reference/errors.json',
+    safeJsonStringify(d["remap"]["errors"], null, 2),
+    'utf8'
+);
+
+// write out vrl functions from cue
+const funcsdata = {};
+Object.entries(d["remap"])
+  .filter(([key, value]) => ["functions"].includes(key))
+  .forEach(([key, value]) => {
+    //console.log(key, value);
+    Object.entries(value).forEach(([itemKey, itemValue]) => {
+      //console.log(itemKey, itemValue["category"]);
+      if(!funcsdata.hasOwnProperty(itemValue["category"])) {
+        funcsdata[itemValue["category"]] = [];
+      }
+      itemValue["examples"].map((ex) => {
+        ex["return"] = JSON.stringify(ex["return"]);
+        return ex;
+      })
+      funcsdata[itemValue["category"]].push(itemValue);
+    });
+  }
+);
+fs.writeFileSync(
+    './data/reference/functions.json',
+    safeJsonStringify(funcsdata, null, 2),
+    'utf8'
+);
+
+if (!fs.existsSync(input)) {
+    // just exist silently for now
+    process.exit(0);
+}
 let fileString = fs.readFileSync(input, 'utf8');
 fileString = fileString.replace('  "$ref": "#/definitions/vector::config::builder::ConfigBuilder",', '');
 let fileData = JSON.parse(fileString);

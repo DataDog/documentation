@@ -1,9 +1,9 @@
 ---
 title: Treemap Widget
-kind: documentation
+widget_type: treemap
 description: "Graph proportions of one or more datasets"
 aliases:
-    - /graphing/widgets/treemap/
+- /graphing/widgets/treemap/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -13,7 +13,7 @@ further_reading:
   text: "Pie Chart Widget"
 ---
 
-The treemap widget allows you to display proportions of one or datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
+The treemap widget allows you to display proportions of one or more datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
 
 {{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="A treemap widget with unique page views stemming from the Real User Monitoring (RUM) dataset are shown at both the country and browser level. The outer groups - distinguished by color - shows the user's country.">}}
 
@@ -44,25 +44,23 @@ To filter and focus on a single category, hover over the outer portion of the ca
 
 ### Accessing the context menu
 
-To access the context menu, first hover over an individual category: this can be a nested category, or group - such as **Canada**, or **Canada > Chrome** in the following example. This reveals a vertical ellipsis button in the top right corner. When clicked, the context menu appears.
+To access the context menu, first hover over an individual category: this can be a nested category, or group - such as **Canada**, or **Canada > Edge** in the following example. This reveals a dropdown button in the top right corner. When clicked, the context menu appears.
 
-{{< img src="dashboards/widgets/treemap/context_menu.png" alt="The triple ellipsis button is revealed when hovering over a category">}}
+{{< img src="dashboards/widgets/treemap/context_menu_dropdown.png" alt="The dropdown arrow button is revealed when hovering over a category">}}
 
 ### Full-screen
 
 Viewing the treemap widget in full-screen reveals the standard set of [full-screen options][5].
 
-## API
-
-This widget can be used with the [Dashboards API][6].
-
-The dedicated [widget JSON schema definition][7] for the treemap widget is:
-
-{{< dashboards-widgets-api >}}
-
 ## Pie chart widget
 
 Like the treemap widget, the [pie chart widget][8] can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, and the treemap displays nested rectangles.
+
+## API
+
+This widget can be used with the **[Dashboards API][6]**. See the following table for the [widget JSON schema definition][7]:
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 

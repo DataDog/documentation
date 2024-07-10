@@ -1,10 +1,9 @@
 ---
 title: Flutter Log Collection
-kind: documentation
 description: Collect Logs data from your Flutter projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-flutter Source code
 - link: logs/explorer/
   tag: Documentation
@@ -22,28 +21,35 @@ Send logs to Datadog from your Flutter applications with [Datadog's flutter plug
 
 To initialize the Datadog Flutter SDK for Logs, see [Setup][2].
 
-Once you have initialized the Datadog Flutter SDK with a `LoggingConfiguration` parameter, use the default instance of `logs` to send logs to Datadog.
+Once you have initialized the Datadog Flutter SDK with a `LoggingConfiguration` parameter, you can create a `DatadogLogger` and send logs to Datadog.
 
 ```dart
-DatadogSdk.instance.logs?.debug("A debug message.");
-DatadogSdk.instance.logs?.info("Some relevant information?");
-DatadogSdk.instance.logs?.warn("An important warning…");
-DatadogSdk.instance.logs?.error("An error was met!");
+final logConfiguration = DatadogLoggerConfiguration(
+  remoteLogThreshold: LogLevel.debug,
+  networkInfoEnabled: true,
+);
+final logger = DatadogSdk.instance.logs?.createLogger(logConfiguration);
+
+logger?.debug("A debug message.");
+logger?.info("Some relevant information?");
+logger?.warn("An important warning…");
+logger?.error("An error was met!");
 ```
 
-You can create additional loggers using the `createLogger` method:
+You can create additional loggers with different services and names using the `createLogger` method as well:
 
 ```dart
-final myLogger = DatadogSdk.instance.createLogger(
-  LoggingConfiguration({
-    loggerName: 'Additional logger'
-  })
+final myLogger = DatadogSdk.instance.logs?.createLogger(
+  DatadogLoggerConfiguration(
+    service: 'com.example.custom_service',
+    name: 'Additional logger'
+  )
 );
 
-myLogger.info('Info from my additional logger.');
+myLogger?.info('Info from my additional logger.');
 ```
 
-For more information about available logging options, see the [LoggingConfiguration class documentation][3].
+For more information about available logging options, see the [DatadogLoggerConfiguration class documentation][3].
 
 ## Manage tags
 
@@ -51,7 +57,7 @@ Tags set on loggers are local to each logger.
 
 ### Add tags
 
-Use the `DdLogs.addTag` method to add tags to all logs sent by a specific logger:
+Use the `DatadogLogger.addTag` method to add tags to all logs sent by a specific logger:
 
 ```dart
 // This adds a "build_configuration:debug" tag
@@ -60,7 +66,7 @@ logger.addTag("build_configuration", "debug")
 
 ### Remove tags
 
-Use the `DdLogs.removeTag` method to remove tags from all logs sent by a specific logger:
+Use the `DatadogLogger.removeTag` method to remove tags from all logs sent by a specific logger:
 
 ```dart
 // This removes any tag that starts with "build_configuration"
@@ -86,7 +92,7 @@ By default, the following attributes are added to all logs sent by a logger:
 
 ### Add attributes
 
-Use the `DdLogs.addAttribute` method to add a custom attribute to all logs sent by a specific logger:
+Use the `DatadogLogger.addAttribute` method to add a custom attribute to all logs sent by a specific logger:
 
 ```dart
 logger.addAttribute("user-status", "unregistered")
@@ -96,11 +102,49 @@ The `value` can be most types supported by the [`StandardMessageCodec` class][5]
 
 ### Remove attributes
 
-Use the `DdLogs.removeAttribute` method to remove a custom attribute from all logs sent by a specific logger:
+Use the `DatadogLogger.removeAttribute` method to remove a custom attribute from all logs sent by a specific logger:
 
 ```dart
 // This removes the attribute "user-status" from all logs sent moving forward.
 logger.removeAttribute("user-status")
+```
+
+## Customizing log output
+
+By default, for debug builds, `DatadogLogger`s print all logs to the Flutter console in the format:
+```
+[{level}] message
+```
+
+This can be customized by setting a `DatadogLoggerConfiguration.customConsoleLogFunction`. To filter logs below a certain level, set this to `simpleConsolePrintForLevel`:
+
+```dart
+final config = DatadogLoggerConfiguration(
+  // Other configuration options...
+  customConsoleLogFunction: simpleConsolePrintForLevel(LogLevel.warn),
+);
+```
+
+You can also forward Datadog logs to other log packages, such as [logger][6], by supplying a custom function:
+
+```dart
+var Logger logger;
+void customDatadogLog(LogLevel level,
+  String message,
+  String? errorMessage,
+  String? errorKind,
+  StackTrace? stackTrace,
+  Map<String, Object?> attributes,) {
+    // Assuming you have a Logger and custom level mapping function:
+    logger.log(mapLogLevels(level), message, error: errorKind, stackTrace: stackTrace);
+}
+
+final datadogLogger = DatadogSdk.instance.logs?.createLogger(
+  DatadogLoggerConfiguration(
+    // Other configuration options...
+    customConsoleLogFunction: simpleConsolePrintForLevel(LogLevel.warn),
+  );
+);
 ```
 
 ## Further reading
@@ -109,7 +153,8 @@ logger.removeAttribute("user-status")
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: /real_user_monitoring/flutter/setup
-[3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/LoggingConfiguration-class.html
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
+[3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogLoggerConfiguration-class.html
 [4]: /getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html
+[6]: https://pub.dev/packages/logger

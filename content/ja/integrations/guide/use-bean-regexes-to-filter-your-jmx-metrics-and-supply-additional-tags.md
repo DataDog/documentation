@@ -8,7 +8,6 @@ further_reading:
 - link: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
   tag: Documentation
   text: jConsole の JMX データを表示し、収集するように jmx.yaml をセットアップするには
-kind: ガイド
 title: Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する
 ---
 

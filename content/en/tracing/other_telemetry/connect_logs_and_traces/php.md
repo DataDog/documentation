@@ -1,6 +1,5 @@
 ---
-title: Connecting PHP Logs and Traces
-kind: documentation
+title: Correlating PHP Logs and Traces
 description: 'Connect your PHP logs and traces to correlate them in Datadog.'
 aliases:
   - /tracing/connect_logs_and_traces/php
@@ -95,7 +94,7 @@ The PHP tracer replaces the placeholders with the corresponding values. For exam
 ## Manual injection
 
 <div class="alert alert-warning">
-Note that the function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
+<strong>Note:</strong> The function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> and returns decimal trace identifiers.
 </div>
 
 To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
@@ -106,77 +105,74 @@ For instance, you would append those two attributes to your logs with:
 
 ```php
   <?php
-  $context = \DDTrace\current_context();
   $append = sprintf(
       ' [dd.trace_id=%s dd.span_id=%s]',
-      $context['trace_id'],
-      $context['span_id']
+      \DDTrace\logs_correlation_trace_id(),
+      \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
 ?>
 ```
 
-If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1:
+If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1, add the following configuration:
 
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $context = \DDTrace\current_context();
       $record['message'] .= sprintf(
           ' [dd.trace_id=%s dd.span_id=%s]',
-          $context['trace_id'],
-          $context['span_id']
+          \DDTrace\logs_correlation_trace_id(),
+          \dd_trace_peek_span_id()
       );
       return $record;
   });
 ?>
 ```
 
-For monolog v2:
+For monolog v2, add the following configuration:
 
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $context = \DDTrace\current_context();
       return $record->with(message: $record['message'] . sprintf(
           ' [dd.trace_id=%s dd.span_id=%s]',
-          $context['trace_id'],
-          $context['span_id']
+          \DDTrace\logs_correlation_trace_id(),
+          \dd_trace_peek_span_id()
       ));
     });
   ?>
 ```
 
-For monolog v3:
+If your application uses JSON logs format, you can add a first-level key `dd` that contains the `trace_id` and `span_id`, instead of appending `trace_id` and `span_id` to the log message:
 
 ```php
 <?php
-  $logger->pushProcessor(function ($record) {
-        $context = \DDTrace\current_context();
-        $record->extra['dd'] = [
-            'trace_id' => $context['trace_id'],
-            'span_id'  => $context['span_id'],
-        ];
-        return $record;
-    });
-?>
-```
-
-If your application uses json logs format instead of appending trace_id and span_id to the log message you can add first-level key "dd" containing these ids:
-
-```php
-<?php
-  $context = \DDTrace\current_context();
   $logger->pushProcessor(function ($record) use ($context) {
       $record['dd'] = [
-          'trace_id' => $context['trace_id'],
-          'span_id'  => $context['span_id'],
+          'trace_id' => \DDTrace\logs_correlation_trace_id(),
+          'span_id'  => \dd_trace_peek_span_id()
       ];
 
       return $record;
   });
 ?>
 ```
+
+For monolog v3, add the following configuration:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+        $record->extra['dd'] = [
+            'trace_id' => \DDTrace\logs_correlation_trace_id(),
+            'span_id'  => \dd_trace_peek_span_id()
+        ];
+        return $record;
+    });
+?>
+```
+
+If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] and add `extra.dd.trace_id` to the **Trace Id Attributes** field.
 
 ## Further Reading
 
@@ -189,3 +185,4 @@ If your application uses json logs format instead of appending trace_id and span
 [5]: https://github.com/laminas/laminas-log
 [6]: /getting_started/tagging/unified_service_tagging
 [7]: /logs/log_configuration/pipelines
+[8]: https://app.datadoghq.com/logs/pipelines/remapping

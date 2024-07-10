@@ -15,7 +15,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive pour optimiser votre gestion des logs
-kind: documentation
 title: Débuter avec les logs
 ---
 
@@ -123,7 +122,7 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 
 * [Meilleures pratiques pour la solution Log Management][22]
 * Explorer en détail la fonctionnalité [Logging without Limits*][23]
-* Gérer les données de log sensibles avec les [réglages RBAC][23]
+* Gérer les données de log sensibles avec les [réglages RBAC][24]
 
 ## Pour aller plus loin
 

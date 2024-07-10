@@ -3,7 +3,6 @@ aliases:
 - /ja/synthetics/cicd_integrations/circleci_orb
 dependencies:
 - https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md
-kind: documentation
 title: Continuous Testing と CircleCI Orb
 ---
 ## 概要
@@ -32,7 +31,7 @@ CircleCI コマンド orb は [datadog-ci][1] をインストールし、`datado
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.6.0
 
 jobs:
   e2e-tests:
@@ -56,7 +55,7 @@ workflows:
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.6.0
 
 jobs:
   e2e-tests:
@@ -82,7 +81,7 @@ Synthetic テストをトリガーするパイプラインの別の例につい�
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.6.0
 
 jobs:
   e2e-tests:
@@ -104,7 +103,7 @@ workflows:
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.6.0
 
 jobs:
   e2e-tests:
@@ -148,16 +147,17 @@ CircleCI パイプラインの `pollingTimeout` をカスタマイズするな�
 | `files`                   | 文字列       | `{,!(node_modules)/**/}*.synthetics.json` | Synthetic テストのコンフィギュレーションファイルを検出するためのグロブパターン。                                                                                                                                                        |
 | `junit_report`            | 文字列       | _なし_                                    | JUnit レポートを生成したい場合のファイル名。                                                                                                                                                |
 | `locations`               | 文字列       | _[テストファイル][18]の値_              | テストが実行される場所をオーバーライドするための、セミコロンで区切られた場所の文字列。                                                                                                                 |
+| `polling_timeout`         | 数値       | _30 分_                              | アクションがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。                                    |
 | `public_ids`              | 文字列       | _[テストファイル][18]の値_              | トリガーしたい Synthetic テストの公開 ID をカンマで区切った文字列。                                                                                                                           |
 | `site`                    | 文字列       | `datadoghq.com`                           | データ送信先となる [Datadog のサイト][17]。環境変数 `DD_SITE` が設定されている場合は、そちらが優先されます。                                                                                                  |
 | `subdomain`               | 文字列       | `app`                                     | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。                                                                                                                                    |
 | `test_search_query`       | 文字列       | _なし_                                    | 検索クエリに対応するテストをトリガーします。                                                                                                                                                              |
-| `tunnel`                  | boolean      | `false`                                   | Continuous Testing Tunnel を使用してテストをトリガーします。                                                                                                                                                         |
+| `tunnel`                  | ブール値      | `false`                                   | Continuous Testing Tunnel を使用してテストをトリガーします。                                                                                                                                                         |
 | `variables`               | 文字列       | _なし_                                    | テストに変数を注入するための Key-Value ペア。`KEY=VALUE` という形式である必要があります。                                                                                                                    |
 
-`pollingTimeout` などのパラメーターのカスタマイズや、CircleCI パイプラインの追加オプションについては、[Continuous Testing と CI/CD インテグレーション構成][12]を参照してください。
+CircleCI パイプラインの追加オプションについては、[Continuous Testing と CI/CD インテグレーション構成][12]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 お役に立つドキュメント、リンクや記事:
 

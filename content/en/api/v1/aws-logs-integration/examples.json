@@ -144,7 +144,7 @@
           "errors": [
             {
               "code": "no_such_config",
-              "message": "AWS account 12345 has no lambda config to update"
+              "message": "AWS account 12345 has no Lambda config to update"
             }
           ],
           "status": "created"
@@ -284,7 +284,7 @@
           "errors": [
             {
               "code": "no_such_config",
-              "message": "AWS account 12345 has no lambda config to update"
+              "message": "AWS account 12345 has no Lambda config to update"
             }
           ],
           "status": "created"

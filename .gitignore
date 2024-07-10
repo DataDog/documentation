@@ -22,16 +22,9 @@ content/en/api/tsconfig.json
 # Ignoring all automated content
 temp
 
-# Developers/integrations
-content/en/developers/integrations/_index.md
-content/en/developers/integrations/create_an_integration.md
-content/en/developers/integrations/create_a_tile.md
-content/en/developers/integrations/develop_an_offering.md
-content/en/developers/integrations/*.md
-content/en/developers/datadog_apps.md
-content/en/developers/integrations/api_integration.md
-content/en/developers/integrations/agent_integration.md
-content/en/developers/integrations/log_integration.md
+# Developers/ui_extensions
+content/en/developers/ui_extensions.md
+content/en/developers/faq/ui_extensions.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
@@ -39,9 +32,15 @@ content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
+content/en/agent/guide/ansible_standalone_role.md
 
 # Tracing
+content/en/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby.md
 content/en/tracing/trace_collection/dd_libraries/ruby.md
+content/en/tracing/trace_collection/compatibility/ruby.md
+content/en/tracing/trace_collection/dd_libraries/ruby_v1.md
+content/en/tracing/trace_collection/compatibility/ruby_v1.md
+content/en/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby_v1.md
 
 # Log collection
 content/en/logs/guide/forwarder.md
@@ -52,11 +51,11 @@ package-lock.json
 # Ignoring all integrations file
 content/en/integrations/*.md
 data/integrations/
+layouts/shortcodes/integration_categories.md
 content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/_index.md
 !content/en/integrations/cloudcheckr.md
 !content/en/integrations/kubernetes.md
-!content/en/integrations/kubernetes_state_core.md
 !content/en/integrations/rss.md
 !content/en/integrations/system.md
 !content/en/integrations/tcp_rtt.md
@@ -80,11 +79,22 @@ content/en/security/threats/agent_expressions.md
 content/en/security/threats/backend.md
 content/en/security_platform/
 
+# security threat detection
+content/en/security/threats/backend_linux.md
+content/en/security/threats/backend_windows.md
+content/en/security/threats/linux_expressions.md
+content/en/security/threats/windows_expressions.md
+
 # cspm cloud resource schemas
 content/en/security/cspm/custom_rules/*.md
 content/en/security/misconfigurations/custom_rules/*.md
 !content/en/security/misconfigurations/custom_rules/_index.md
 !content/en/security/misconfigurationspm/custom_rules/schema.md
+content/en/infrastructure/resource_catalog/*.md
+!content/en/infrastructure/resource_catalog/schema.md
+!content/en/infrastructure/resource_catalog/_index.md
+
+
 
 # compliance rules
 content/en/compliance_monitoring/default_rules/*.md
@@ -100,12 +110,24 @@ content/en/continuous_testing/cicd_integrations/configuration.md
 content/en/continuous_testing/cicd_integrations/github_actions.md
 content/en/continuous_testing/cicd_integrations/circleci_orb.md
 content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
+content/en/continuous_testing/cicd_integrations/bitrise_upload.md
+content/en/continuous_testing/cicd_integrations/bitrise_run.md
 
-# Static Analysis
+# Code Analysis
+content/en/code_analysis/static_analysis/github_actions.md
+content/en/code_analysis/software_composition_analysis/github_actions.md
+content/en/code_analysis/static_analysis/circleci_orbs.md
+content/en/code_analysis/static_analysis_rules/*
+!content/en/code_analysis/static_analysis_rules/_index.md
+
+# Let's keep these so we don't accidentally re-add them to repo
 content/en/continuous_integration/static_analysis/github_actions.md
 content/en/continuous_integration/static_analysis/circleci_orbs.md
 content/en/continuous_integration/static_analysis/rules/
-!content/en/continuous_integration/static_analysis/rules/_index.md
+content/en/static_analysis/github_actions.md
+content/en/static_analysis/circleci_orbs.md
+content/en/static_analysis/rules/
+
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md

@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/remote-configuration-for-datadog/
   tag: ブログ
   text: リモート構成で Datadog コンポーネントにリアルタイムの更新を適用
-kind: documentation
 title: リモート構成
 ---
 
@@ -72,7 +71,7 @@ Datadog Agent でリモート構成を有効にすると、設定されている
 
 <div class="alert alert-info">デフォルト Agent ルールのリモート構成はベータ版です。</div>
 
-<div class="alert alert-info">カスタムルールのリモート構成は非公開ベータ版です。この<a href="https://docs.google.com/forms/d/18hwf0-4AXYzKcQR0AIT1JxhaMFLw90YaDXBaUgdxKLM/prefill">フォーム</a>にご記入の上、アクセスをリクエストしてください。</div>
+<div class="alert alert-info">カスタムルールのリモート構成は非公開ベータ版です。この<a href="https://docs.google.com/forms/d/e/1FAIpQLSe5Emr7y_Jg3ShcC44HlYtalxKgHUocFAz8dq87xSkjfeALTg/viewform">フォーム</a>にご記入の上、アクセスをリクエストしてください。</div>
 
 - **自動デフォルト Agent ルールアップデート**: 新しい Agent の検出や機能強化がリリースされると、Datadog が管理しているデフォルトの Agent ルールを自動的に受信し、更新します。詳しくは、[Cloud Workload Security の設定][3]をご覧ください。
 - **カスタム Agent ルールの自動デプロイ**: カスタム Agent ルールを指定したホスト (すべてのホストまたは定義したホストのサブセット) に自動的にデプロイします。

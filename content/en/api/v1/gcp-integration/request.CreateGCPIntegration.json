@@ -1,0 +1,19 @@
+{
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "client_email": "252bf553ef04b351@example.com",
+  "client_id": "163662907116366290710",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL",
+  "host_filters": "key:value,filter:example",
+  "cloud_run_revision_filters": [
+    "dr:dre"
+  ],
+  "is_cspm_enabled": true,
+  "is_security_command_center_enabled": true,
+  "private_key": "private_key",
+  "private_key_id": "123456789abcdefghi123456789abcdefghijklm",
+  "project_id": "datadog-apitest",
+  "resource_collection_enabled": true,
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "type": "service_account"
+}

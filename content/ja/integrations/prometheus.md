@@ -24,12 +24,11 @@ draft: false
 git_integration_title: prometheus
 integration_id: prometheus
 integration_title: Prometheus (レガシー)
-integration_version: 3.4.0
+integration_version: 3.5.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: prometheus
-oauth: {}
 public_title: Prometheus (レガシー)
 short_description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
 supported_os:
@@ -154,7 +153,7 @@ sudo systemctl restart prometheus.service alertmanager.service
 [1]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [2]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus?tab=docker#configuration
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.datadoghq.com/ja/help/

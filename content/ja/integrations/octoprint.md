@@ -5,6 +5,7 @@ assets:
   dashboards:
     OctoPrint Overview: assets/dashboards/octoprint_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: octoprint.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10201
     source_type_name: OctoPrint
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,9 +24,9 @@ author:
   sales_email: gwaldo@gmail.com
   support_email: gwaldo@gmail.com
 categories:
-- web
-- orchestration
+- developer tools
 - ログの収集
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_on_public_website: true
@@ -34,10 +36,9 @@ integration_id: octoprint
 integration_title: Datadog OctoPrint
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: octoprint
-oauth: {}
 public_title: Datadog OctoPrint
 short_description: 3D プリンターを管理する Web インターフェイス、OctoPrint を監視
 supported_os:
@@ -45,10 +46,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Category::Web
-  - Category::Orchestration
+  - Category::Developer Tools
   - Category::Log Collection
+  - Category::Orchestration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: 3D プリンターを管理する Web インターフェイス、OctoPrint を監視
   media: []
@@ -57,17 +58,18 @@ tile:
   title: Datadog OctoPrint
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [OctoPrint][1] を監視します。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 以下を実行して OctoPrint チェックをホストにインストールするには
 
@@ -89,7 +91,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSIO
  `datadog-agent integration install -w
  path/to/octoprint/dist/datadog_octoprint*.whl`.
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. OctoPrint の Web インターフェースから、Datadog で使用する API キーを作成します。作成したキーは Settings --> Application Keys に表示されます。
 
@@ -101,7 +103,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSIO
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `octoprint` を探します。
 
-### ログ管理
+### ワークフローの自動化
 
 デフォルトでは、このインテグレーションは、Raspberry Pi から OctoPrint  を実行するように予め構成された [OctoPi][8] イメージを使うことを想定しています。
 
@@ -127,29 +129,29 @@ OctoPrint は独自のログ形式（オブジェクト形式ではない）を�
 
 詳細については、[Datadog ログ処理ドキュメント][9]を参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "octoprint" >}}
 
 
-### イベント
+### ヘルプ
 
 OctoPrint には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "octoprint" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://octoprint.org/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/developers/integrations/python/
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-extras/blob/master/octoprint/datadog_checks/octoprint/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

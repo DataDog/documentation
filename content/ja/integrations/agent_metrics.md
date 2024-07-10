@@ -1,90 +1,103 @@
 ---
+app_id: datadog-agent
+app_uuid: 4af17310-84ad-4bac-b05d-85917bc378cb
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
-categories:
-  - monitoring
-creates_events: false
-ddtype: check
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: datadog.agent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Agent メトリクス
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories: []
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md'
-display_name: Agent メトリクス
+- https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: agent_metrics
-guid: 032333e3-5272-4044-90d5-a05997667513
 integration_id: datadog-agent
 integration_title: Agent メトリクス
+integration_version: ''
 is_public: true
-kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: datadog.agent.
-metric_to_check: datadog.agent.collector.cpu.used
+custom_kind: integration
+manifest_version: 2.0.0
 name: agent_metrics
-public_title: Datadog-Agent メトリクスインテグレーション
+public_title: Agent メトリクス
 short_description: agent_metrics の説明。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: agent_metrics の説明。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Agent メトリクス
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+
+
 ## 概要
 
-Agent Metrics サービスからメトリクスをリアルタイムに取得して、以下のことができます。
+Datadog Agent から内部メトリクスを取得し、Datadog で視覚化やモニターを作成します。
 
-- `agent_metrics` の状態を視覚化および監視できます。
-- `agent_metrics` のフェイルオーバーとイベントの通知を受けることができます。
+**注:** このインテグレーションによって収集されるメトリクスのリストは、マイナーな Agent のバージョン間で変更される可能性があります。そのような変更は、Agent の変更履歴に記載されない場合があります。
 
-**注**: Agent v6 では、新しい内部アーキテクチャを利用するために、Agent Metrics チェックは Go で書き直されています。このチェックは引き続きメンテナンスされていますが、**メジャーバージョン 6 より前の Agent でのみ動作します**。
+## 計画と使用
 
-Agent v6 以降で Agent メトリクスを収集するには、Agent にパッケージ化されている [`agent_stats.yaml` 構成ファイル][2]と [Go-expvar チェック][1]を使用してください。
+### インフラストラクチャーリスト
 
-## セットアップ
+[go_expvar][1] チェックに基づく Agent Metrics インテグレーションは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### インストール
+### ブラウザトラブルシューティング
 
-Agent Metrics チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダ内の [`go_expvar.d/agent_stats.yaml.example`][3] ファイルの名前を `go_expvar.d/agent_stats.yaml` に変更します。
 
-### コンフィギュレーション
-
-1. サーバーとポートを指定し、監視するマスターを設定するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `agent_metrics.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル agent_metrics.d/conf.yaml][5] を参照してください。
-
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][5]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `agent_metrics` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションの `go_expvar` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-収集されたすべてのデータは、Agent v5 でのみ使用できます。
+### データセキュリティ
 
-### メトリクス
-{{< get-metrics-from-git "agent_metrics" >}}
+Agent Metrics インテグレーションは、[`agent_stats.yaml.example`][3] で定義されたメトリクスを収集します。
 
+### ヘルプ
 
-### イベント
+Agent Metrics インテグレーションには、イベントは含まれません。
 
-Agent Metrics チェックには、イベントは含まれません。
+### ヘルプ
 
-### サービスのチェック
+Agent Metrics インテグレーションには、サービスのチェック機能は含まれません。
 
-Agent Metrics チェックには、サービスのチェック機能は含まれません。
+## ヘルプ
 
-## トラブルシューティング
-
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/go_expvar/
-[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/go_expvar.d/agent_stats.yaml.example
-[3]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/go_expvar.d/agent_stats.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/agent-v5/agent_metrics/datadog_checks/agent_metrics/data/conf.yaml.default
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/agent_metrics/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/

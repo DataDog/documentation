@@ -5,6 +5,7 @@ assets:
   dashboards:
     Kubernetes Metrics Server - Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: kube_metrics_server.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10061
     source_type_name: Kube メトリクスサーバー
 author:
   homepage: https://www.datadoghq.com
@@ -32,12 +34,11 @@ draft: false
 git_integration_title: kube_metrics_server
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
-integration_version: 3.0.1
+integration_version: 3.3.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: kube_metrics_server
-oauth: {}
 public_title: Kubernetes Metrics Server
 short_description: Kubernetes Metrics Server の監視
 supported_os:
@@ -61,26 +62,27 @@ tile:
   title: Kubernetes Metrics Server
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Kubernetes Control Plane によって使用されるコンポーネントである [Kube_metrics_server][1] v0.3.0+ を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. kube_metrics_server のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_metrics_server.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_metrics_server.d/conf.yaml][1] を参照してください。
 
@@ -89,7 +91,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -97,15 +99,15 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 
 | パラメーター            | 値                                                |
 | -------------------- | ---------------------------------------------------- |
-| `<インテグレーション名>` | `kube_metrics_server `                                         |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                        |
-| `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "https://%%host%%:443/metrics"}` |
+| `<INTEGRATION_NAME>` | `kube_metrics_server `                                         |
+| `<INIT_CONFIG>`      | 空白または `{}`                                        |
+| `<INSTANCE_CONFIG>`  | `{"prometheus_url": "https://%%host%%:443/metrics"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### SSL
+#### 収集データ
 
 エンドポイントが保護されている場合、追加の構成が必要です。
 
@@ -119,28 +121,28 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 
 [Agent の status サブコマンドを実行][4]し、Checks セクションで `kube_metrics_server` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "kube_metrics_server" >}}
 
 
-### イベント
+### ヘルプ
 
 kube_metrics_server には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "kube_metrics_server" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

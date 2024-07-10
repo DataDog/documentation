@@ -16,7 +16,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: ドキュメント
   text: Datadog でインデックス化するログの量を制御する
-kind: documentation
 title: パース
 ---
 
@@ -335,7 +334,7 @@ rule %{data::keyvalue("=","/:")}
 | key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString の例**: 複数の引用文字列が定義されると、デフォルトの挙動が定義された引用文字に置き換えられます。
-`quotingStr` で指定されている値にかかわらず、キーと値は引用文字列が使用されていなくても常に入力と一致します。 引用文字列が使用されている場合、引用符内の文字列がすべて抽出されるため、`characterWhiteList` は無視されます。
+`quotingStr` で指定されている値にかかわらず、キーと値は引用文字列が使用されていなくても常に入力と一致します。 引用文字列が使用されている場合、引用符内の文字列がすべて抽出されるため、`characterAllowList` は無視されます。
 
 **ログ:**
 
@@ -478,7 +477,7 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 **ログの例**
 
 ```text
-ユーザー [John, Oliver, Marc, Tom] がデータベースに追加されました
+Users [John, Oliver, Marc, Tom] have been added to the database
 ```
 
 **規則の例**
@@ -492,13 +491,13 @@ myParsingRule Users %{data:users:array("[]",",")} have been added to the databas
 **ログの例**
 
 ```text
-ユーザー {John-Oliver-Marc-Tom} がデータベースに追加されました
+Users {John-Oliver-Marc-Tom} have been added to the database
 ```
 
 **規則の例**
 
 ```text
-myParsingRule ユーザー %{data:users:array("{}","-")} がデータベースに追加されました
+myParsingRule Users %{data:users:array("{}","-")} have been added to the database
 ```
 
 **`subRuleOrFilter` を使用したルール**:

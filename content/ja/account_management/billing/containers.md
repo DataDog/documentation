@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: コンテナの請求
 ---
 
@@ -41,7 +40,7 @@ Fargate は同時に発生するタスクの数に基づいて課金されます
 
 **Datadog Agent コンテナは割り当てに対してカウントされますか？**
 
-いいえ。
+いいえ。Datadog Agent コンテナは、5 (Pro ティア) または 10 (Enterprise ティア) の割り当てにはカウントされません。
 
 **`CrashLoopBackoff` が常時発生しているポッドに属するコンテナはカウントされるのでしょうか？**
 

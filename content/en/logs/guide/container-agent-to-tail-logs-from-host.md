@@ -1,6 +1,6 @@
 ---
 title: Use the Container Agent to Tail Logs from the Host
-kind: guide
+
 aliases:
   - /logs/faq/how-to-tail-logs-from-host-using-a-container-agent
 further_reading:
@@ -165,4 +165,4 @@ Logs Agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

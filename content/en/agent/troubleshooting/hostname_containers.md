@@ -1,6 +1,5 @@
 ---
 title: Hostname Detection in Containers
-kind: documentation
 ---
 
 Many features in Datadog rely on the Agent to provide an accurate hostname for monitored hosts. While this is straightforward when the Agent runs directly on a host, the hostname resolution process is different when the Agent runs in a containerized environment.
@@ -54,23 +53,11 @@ This prevents the Agent from connecting to the Kubelet API through HTTPS, becaus
 You can disable TLS verification by using dedicated parameters or by setting the `DD_KUBELET_TLS_VERIFY` variable for **all containers** in the Agent manifest:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  kubelet:
-    tlsVerify: false
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -81,13 +68,24 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Manifest" %}}
+{{% tab "Helm" %}}
 
-`DaemonSet` manifest:
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  kubelet:
+    tlsVerify: false
+```
+
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+
+DaemonSet manifest:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -119,26 +117,11 @@ Use this solution only in the unlikely event that you **explicitly** don't want 
 In this case you can use the downward API to set `DD_HOSTNAME`:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  env:
-    - name: DD_HOSTNAME
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -153,13 +136,27 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Manifest" %}}
+{{% tab "Helm" %}}
 
-`DaemonSet` manifest
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  env:
+    - name: DD_HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+```
+
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+
+DaemonSet manifest:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -177,7 +174,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## AWS ECS and Docker VM hostname errors
+## Amazon ECS and Docker VM hostname errors
 
 When the Agent runs in Docker on a cloud provider, a hostname error usually means that the Agent cannot access at least one of:
 * Container runtime API
@@ -188,7 +185,7 @@ When the Agent runs in Docker on a cloud provider, a hostname error usually mean
 Allow the Agent to connect to the Docker socket:
 
 {{< tabs >}}
-{{% tab "AWS ECS on EC2" %}}
+{{% tab "Amazon ECS on EC2" %}}
 
 Make sure the Docker socket is mounted in your [task definition][1].
 

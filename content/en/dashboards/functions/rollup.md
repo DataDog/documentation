@@ -1,15 +1,17 @@
 ---
 title: Rollup
-kind: documentation
 aliases:
     - /graphing/functions/rollup/
 ---
 
-`.rollup()`
-The `.rollup()` function is used to aggregate your metrics data inherently in every metrics query. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
+Every metric query is inherently aggregated. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
+
+To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
+
+{{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 
 **Note**: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time and space. See the documentation on [rollup for distributions with percentiles][2] to learn more.
 
@@ -40,7 +42,7 @@ Applying the `moving_rollup()` function to a query allows you to combine points 
 
 ## Rollup interval: enforced vs custom
 
-When graphing, Datadog imposes a limit on the number of points per graph. To respect this limit, Datadog rolls up data points automatically with the `avg` method, effectively displaying the average of all data points within a time interval for a given metric. This default time interval varies depending on how the data is being visualized. See the following chart to reference these default time intervals:
+When graphing, Datadog sets a limit on the number of points per timeseries. To retain visual clarity, a series can have up to 1500 points. To respect this limit, Datadog rolls up datapoints automatically, defaulting to the `avg` method, effectively displaying the average of all datapoints within a time interval for a given metric. The default rollup time interval varies depending on how the data is visualized. See the following chart to reference these default time intervals:
 
 | Timeframe           | Rollup Interval, Line Graph | Rollup Interval, Bar Graph | Rollup Interval, API |
 |---------------------|-----------------------------|----------------------------|----------------------|
@@ -49,15 +51,25 @@ When graphing, Datadog imposes a limit on the number of points per graph. To res
 | The past day        | 5m                          | 20m                        | 5m                   |
 | The past two days     | 10m                         | 30m                        | 10m                  |
 | The past week       | 1hr                         | 2hr                        | 1hr                  |
-| The past month      | 2hr                         | 12hr                       | 4hr                  |
+| The past month      | 4hr                         | 12hr                       | 4hr                  |
 
-A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and the time interval to rollup. However, if a custom `.rollup()` function is applied and uses a smaller time interval than the Datadog limit, the Datadog limit is used instead while still using the specified rollup method. For example, if you're requesting `.rollup(20)` for a month-long window, data is returned at a rollup greater than 20 seconds in order to prevent returning more than allotted number of points.
+A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and optionally the time interval to rollup. Using this function, you can set the rollup time interval to a different value than the defaults, up to a limit of 1500 points. This supports up to one point per minute over a day.
 
 **Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets the rollup method used to `sum` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
 
   {{< img src="dashboards/functions/rollup/as_count_dropdown.png" alt="as_count" style="width:100%;">}}
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
+
+## Rollup with calendar aligned queries 
+
+{{< img src="dashboards/functions/rollup/calendar_aligned_queries.png" alt="calendar_aligned_queries" style="width:100%;" >}}
+
+You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries. This feature allows you the flexibility to define:
+
+* Calendar aligned monthly queries with adjustable start date and timezones. For example, you can compare your monthly client errors for February and December of last year.
+* Weekly rollups with adjustable start date and timezones. For example, see how many weekly transactions are open (if your week starts on Mondays).
+* Daily rollups with adjustable start time and timezones. For example, see how many events of interest occurred on the current day (if your day begins at midnight Pacific Time).
 
 ## Rollups in monitors
 

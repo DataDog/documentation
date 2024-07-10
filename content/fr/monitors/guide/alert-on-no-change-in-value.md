@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-kind: guide
+
 title: Alerte en cas d'absence de changement d'une valeur
 ---
 
@@ -20,9 +20,9 @@ Appliquez ensuite la fonction abs() pour obtenir la valeur absolue de ces deltas
 
 * `abs(diff(avg:system.mem.free{*}))`
 
-Ces fonctions peuvent être appliquées à votre requête dans l'interface, via le bouton +.
+Ces fonctions peuvent être appliquées à votre requête dans l'interface.
 
-{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors"  >}}
+{{< img src="monitors/guide/alert_value_difference.png" alt="Appliquer une fonction diff via Icône Sigma > Rate > Value difference" >}}
 
 Vous pouvez également saisir manuellement une requête complexe depuis l'interface de modification de monitor de l'onglet Source (ou l'appliquer par programmation via l'[API][1] (voir l'image ci-dessous).
 
@@ -36,9 +36,9 @@ Cette configuration déclenchera un événement d'alerte si la valeur n'enregist
 
 D'autres [conditions et options d'alerte][2] peuvent être définies selon vos préférences. Voici un exemple de configuration du monitor depuis l'interface :
 
-{{< img src="monitors/faq/zero_alert.png" alt="zero_alert"  >}}
+{{< img src="monitors/faq/zero_alert.png" alt="zero_alert" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/api/
-[2]: /fr/monitors/create/configuration/
+[2]: /fr/monitors/configuration/

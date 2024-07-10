@@ -1,6 +1,6 @@
 ---
 title: AWS Integration Multi-Account setup for AWS Organizations
-kind: guide
+
 description: "Steps for setting up the Datadog AWS Integration for an AWS Organization"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/"
@@ -60,7 +60,7 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
     - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
     - *Optionally:*  
-        a. Enable [Cloud Security Posture Management][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
+        a. Enable [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
         b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [CSM Misconfigurations][5] specific use cases.
 
 3. **Configure StackSet options**  
@@ -103,7 +103,7 @@ To uninstall the AWS integration from all AWS accounts and regions in an Organiz
 [2]: /integrations/amazon_web_services/#log-collection
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
 [4]: /integrations/#cat-aws
-[5]: /security/misconfigurations/setup/
+[5]: /security/cloud_security_management/setup/
 [6]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
 [8]: https://docs.datadoghq.com/integrations/amazon_web_services/

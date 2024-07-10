@@ -1,27 +1,27 @@
 ---
+aliases:
+- /fr/integrations/tcprtt
+categories:
+- network
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
+integration_id: tcp-rtt
 integration_title: TCP RTT
-name: tcp_rtt
-kind: integration
-newhlevel: true
 is_public: true
+custom_kind: integration
+name: tcp_rtt
+newhlevel: true
 public_title: Intégration Datadog/TCP RTT
 short_description: Surveillez la connectivité TCP vers les hosts à distance.
-categories:
-  - network
-ddtype: check
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
-integration_id: tcp-rtt
-aliases:
-  - /fr/integrations/tcprtt
 ---
+
 ## Présentation
 
 Le check TCP RTT transmet les délais d'aller-retour entre le host de l'Agent et tout host avec lequel il communique. Ce check est passif et ne transmet que les durées RTT pour les paquets envoyés et reçus à l'extérieur du check. Le check n'envoie aucun paquet.
 
 Ce check est uniquement fourni avec les paquets 64 bits DEB et RPM de l'Agent v5 de Datadog. Pour d'autres versions de l'Agent, consultez [la section relative à l'utilisation de Datadog avec go-metro][1] (en anglais) afin de découvrir comment créer le binaire go-metro.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -77,7 +77,7 @@ instances:
 
 Pour vérifier que le check fonctionne correctement, assurez-vous que les métriques `system.net.tcp.rtt` s'affichent dans l'interface Datadog. En outre, si vous exécutez `sudo /etc/init.d/datadog-agent status`, le message suivant devrait s'afficher :
 
-```shell
+```bash
 datadog-agent.service - "Datadog Agent"
   Loaded: loaded (/lib/...datadog-agent.service; enabled; vendor preset: enabled)
   Active: active (running) since Thu 2016-03-31 20:35:27 UTC; 42min ago

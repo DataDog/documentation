@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/agent/kubernetes/host_setup
+- /ja/agent/kubernetes/apm
 further_reading:
 - link: /agent/kubernetes/log/
   tag: ドキュメント
@@ -17,7 +18,6 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: documentation
 title: Kubernetes APM - トレース収集
 ---
 

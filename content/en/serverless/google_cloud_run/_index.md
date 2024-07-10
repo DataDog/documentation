@@ -1,6 +1,5 @@
 ---
 title: Google Cloud Run
-kind: documentation
 further_reading:
 
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
@@ -23,7 +22,7 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 ### Dockerfile
 
-Datadog publishes new releases of the serverless-init container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
 | ------------ | ------ | -------------- |
@@ -31,385 +30,57 @@ Datadog publishes new releases of the serverless-init container image to Google�
 
 Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
-* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking changes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
+* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
-<div class="alert alert-info">
-The latest tag of /serverless-init will be applied to Beta9 through 9/1/2023 to provide additional time for Azure Container App Beta users to adjust to a breaking change in 1.0
-</div>
+## How `serverless-init` works
 
-* `latest`, `latest-apline`: use these to follow the latest version release, which may include breaking changes
+The `serverless-init` application wraps your process and executes it as a subprocess. It starts a DogStatsD listener for metrics and a Trace Agent listener for traces. It collects logs by wrapping the stdout/stderr streams of your application. After bootstrapping, serverless-init then launches your command as a subprocess.
+
+To get full instrumentation, ensure you are calling `datadog-init` as the first command that runs inside your Docker container. You can do this through by setting it as the entrypoint, or by setting it as the first argument in CMD.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
 
-Add the following instructions and arguments to your Dockerfile.
+{{% svl-init-nodejs %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
-ENV DD_SERVICE=datadog-demo-run-nodejs
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
-```
-
-#### Explanation
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Copy the Datadog Node.JS tracer into your Docker image. 
-
-   ```
-   COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
-   ```
-
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
-
-3. (Optional) Add Datadog tags.
-
-   ```
-   ENV DD_SERVICE=datadog-demo-run-nodejs
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
-
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
-   ```
-   CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
-   ```
-
-[1]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Add the following instructions and arguments to your Dockerfile.
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN pip install --target /dd_tracer/python/ ddtrace
-ENV DD_SERVICE=datadog-demo-run-python
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
-```
+{{% svl-init-python %}}
 
-#### Explanation
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Install the Datadog Python tracer. 
-   ```
-   RUN pip install --target /dd_tracer/python/ ddtrace
-   ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
-
-3. (Optional) Add Datadog tags.
-   ```
-   ENV DD_SERVICE=datadog-demo-run-python
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. Execute your binary application wrapped in the entrypoint, launched by the Datadog trace library. Adapt this line to your needs.
-   ```
-   CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
-   ```
-
-[1]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-Add the following instructions and arguments to your Dockerfile.
+{{% svl-init-java %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
-ENV DD_SERVICE=datadog-demo-run-java
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["./mvnw", "spring-boot:run"]
-```
-
-#### Explanation
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Add the Datadog Java tracer to your Docker image. 
-   ```
-   ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
-   ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
-
-3. (Optional) Add Datadog tags.
-   ```
-   ENV DD_SERVICE=datadog-demo-run-java
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
-   ```
-   CMD ["./mvnw", "spring-boot:run"]
-   ```
-
-[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-[Manually install][1] the Go tracer before you deploy your application. Add the following instructions and arguments to your Dockerfile:
+{{% svl-init-go %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ENTRYPOINT ["/app/datadog-init"]
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-CMD ["/path/to/your-go-binary"]
-```
-
-#### Explanation
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Change the entrypoint to wrap your application into the Datadog `serverless-init` process:
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-3. (Optional) Add Datadog tags.
-   ```
-   ENV DD_SERVICE=datadog-demo-run-go
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
-   ```
-   CMD ["/path/to/your-go-binary"]
-   ```
-
-#### Orchestrion
-
-**Note**: [Orchestrion][2] is a tool for automatically instrumenting Go code, which is currently in Private Beta. With Orchestrion, it is possible to instrument your Go applications through Dockerfile. If you are interested in participating in the Beta or providing feedback on Orchestrion, please open a Github issue or reach out to support. 
-
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN go install github.com/datadog/orchestrion@latest
-RUN orchestrion -w ./
-RUN go mod tidy
-ENTRYPOINT ["/app/datadog-init"]
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-CMD ["/path/to/your-go-binary"]
-```
-
-[1]: /tracing/trace_collection/library_config/go/ 
-[2]: https://github.com/DataDog/orchestrion
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Add the following instructions and arguments to your Dockerfile.
+{{% svl-init-dotnet %}}
 
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
-ENV DD_SERVICE=datadog-demo-run-dotnet
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["dotnet", "helloworld.dll"]
-```
-
-#### Explanation
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Copy the Datadog .NET tracer into your Docker image.
-   ```
-   COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
-   ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
-
-3. (Optional) Add Datadog tags.
-   ```
-   ENV DD_SERVICE=datadog-demo-run-dotnet
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Change the entrypoint to wrap your application into the Datadog `serverless-init` process.
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
-   ```
-   CMD ["dotnet", "helloworld.dll"]
-   ```
-
-[1]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-[Manually install][1] the Ruby tracer before you deploy your application. See the [example application][2].
-
-Add the following instructions and arguments to your Dockerfile.
-
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ENV DD_SERVICE=datadog-demo-run-ruby
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["rails", "server", "-b", "0.0.0.0"]
-```
-
-#### Explanation
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. (Optional) add Datadog tags
-   ```
-   ENV DD_SERVICE=datadog-demo-run-ruby
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-3. This environment variable is needed for trace propagation to work properly in Cloud Run. Ensure that you set this variable for all Datadog-instrumented downstream services.
-   ```
-   ENV DD_TRACE_PROPAGATION_STYLE=datadog
-   ```
-
-4. Change the entrypoint to wrap your application into the Datadog `serverless-init` process.
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
-   ```
-   CMD ["rails", "server", "-b", "0.0.0.0"]
-   ```
-
-
-[1]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
-[2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
+{{% svl-init-ruby %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Add the following instructions and arguments to your Dockerfile.
-```
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
-RUN php /datadog-setup.php --php-bin=all
-ENV DD_SERVICE=datadog-demo-run-ruby
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
+{{% svl-init-php %}}
 
-# use the following for an apache and mod_php based image
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
-EXPOSE 8080
-CMD ["apache2-foreground"]
-
-# use the following for an nginx and php-fpm based image
-RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
-EXPOSE 8080
-CMD php-fpm; nginx -g daemon off;
-```
-
-**Note**: The `datadog-init` ENTRYPOINT wraps your process and collects logs from it. To get logs working properly, ensure that your Apache, NGINX, or PHP processes are writing output to `stdout`.
-
-#### Explanation
-
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Copy and install the Datadog PHP tracer.
-   ```
-   ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
-   RUN php /datadog-setup.php --php-bin=all
-   ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
-
-3. (Optional) Add Datadog tags.
-   ```
-   ENV DD_SERVICE=datadog-demo-run-ruby
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-4. Change the entrypoint to wrap your application into the Datadog serverless-init process
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-5. Execute your application.
-   
-   Use the following for an apache and mod_php based image:
-   ```
-   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
-   EXPOSE 8080
-   CMD ["apache2-foreground"]
-   ```
-
-   Use the following for an nginx and php-fpm based image:
-   ```
-   RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
-   EXPOSE 8080
-   CMD php-fpm; nginx -g daemon off;
-   ```
-
-[1]: /tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ### Buildpack
 
-[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. 
+[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile.
 
 First, manually install your tracer:
 - [Node.JS][14]
@@ -437,10 +108,11 @@ Once the container is built and pushed to your registry, the last step is to set
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
+- `DD_TRACE_PROPAGATION_STYLE`: Set this to `datadog` to use context propagation and log trace correlation.
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-This command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
+The following command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
 
 ```
 shell
@@ -449,6 +121,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
+  --update-env-vars=DD_TRACE_PROPAGATION_STYLE='datadog' \
 ```
 
 ## Results
@@ -478,10 +151,9 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
 | `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
 
-
 ## Troubleshooting
 
-This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you may need to add the following command to your Dockerfile to include certificates.
+This integration depends on your runtime having a full SSL implementation. If you are using a slim image, you may need to add the following command to your Dockerfile to include certificates.
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
@@ -504,7 +176,7 @@ RUN apt-get update && apt-get install -y ca-certificates
 [9]: /metrics/distributions/
 [10]: /metrics/#time-and-space-aggregation
 [11]: https://cloud.google.com/run/docs/configuring/secrets
-[12]: /tracing/trace_collection/library_config/go/ 
+[12]: /tracing/trace_collection/library_config/go/
 [13]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 [14]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 [15]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application

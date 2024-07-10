@@ -9,7 +9,6 @@ further_reading:
 - link: /continuous_integration/setup_pipelines/jenkins/
   tag: ドキュメント
   text: Jenkins パイプラインでトレースを設定する
-kind: documentation
 title: Jenkins
 ---
 

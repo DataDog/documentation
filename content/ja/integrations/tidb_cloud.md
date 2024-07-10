@@ -5,6 +5,7 @@ assets:
   dashboards:
     TiDB Cloud Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: tidb_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10247
     source_type_name: TiDB Cloud
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,7 +24,7 @@ author:
   support_email: xuyifan02@pingcap.com
 categories:
 - cloud
-- data store
+- data stores
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md
 display_on_public_website: true
@@ -32,10 +34,9 @@ integration_id: tidb-cloud
 integration_title: TiDB Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: tidb_cloud
-oauth: {}
 public_title: TiDB Cloud
 short_description: Datadog による TiDB Cloud クラスターのモニタリング
 supported_os:
@@ -49,7 +50,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Cloud
-  - Category::Data Store
+  - Category::Data Stores
   configuration: README.md#Setup
   description: Datadog による TiDB Cloud クラスターのモニタリング
   media: []
@@ -58,6 +59,7 @@ tile:
   title: TiDB Cloud
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -70,29 +72,29 @@ TiDB Cloud と Datadog のインテグレーションを使用して、TiDB Clou
 >
 > - オンプレミスの TiDB クラスターについては、[TiDB インテグレーション][2]を参照してください。
 
-## セットアップ
+## 計画と使用
 
 クラスターに対して TiDB Cloud と Datadog のインテグレーションを設定するには、Datadog API キーとリージョンを TiDB Cloud に提供します。
 
 TiDB Cloud プロジェクトの Datadog インテグレーションを構成するには、[TiDB Cloud Preferences][3] を参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "tidb_cloud" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 TiDB Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 TiDB Cloud インテグレーションには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://tidbcloud.com
 [2]: https://docs.datadoghq.com/ja/integrations/tidb/

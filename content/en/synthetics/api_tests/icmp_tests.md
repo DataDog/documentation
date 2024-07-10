@@ -1,6 +1,5 @@
 ---
-title: ICMP Tests
-kind: documentation
+title: ICMP Testing
 description: Monitor the availability of your hosts and diagnose network issues.
 aliases:
   - /synthetics/icmp_test
@@ -41,7 +40,7 @@ After choosing to create an `ICMP` test, define your test's request.
 2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
 4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
@@ -120,7 +119,7 @@ You can restrict access to an ICMP test based on the roles in your organization.
 [1]: /synthetics/private_locations
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
-[4]: /monitors/notify/#notify-your-team
+[4]: /monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
 [6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [7]: /synthetics/guide/synthetic-test-monitors

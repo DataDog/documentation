@@ -10,7 +10,6 @@ further_reading:
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
-kind: documentation
 title: メトリクスの概要
 ---
 
@@ -48,7 +47,8 @@ title: メトリクスの概要
 
 * **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
 
-{{< img src="metrics/summary/bulkconfig.mp4" alt="一括メトリクスタグコンフィギュレーション" video=true style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="一括メトリクスタグ構成" video="true" style="width:100%;" >}}
+
 
 ## メトリクスの詳細サイドパネル
 
@@ -132,10 +132,10 @@ Datadog にカスタムメトリクスを送信する際、グラフのメトリ
 
 [タグ付けに関する詳しい説明][5]。
 
-## Metrics without LimitsTM
-Metrics without LimitsTM は、Agent やコードレベルの変更を必要とせずに、カスタムメトリクスのサイズを制御できます。
+## Metrics without Limits™
+Metrics without Limits™ は、Agent やコードレベルの変更を必要とせずに、カスタムメトリクスのサイズを制御できます。
 
-**注:** Metrics without LimitsTM は、カスタムメトリクスでのみ利用可能です。
+**注:** Metrics without Limits™ は、カスタムメトリクスでのみ利用可能です。
 
 タグの構成は、メトリクスのタグ一括構成ボタン、またはメトリクスの詳細サイドパネルの **Manage Tags** ボタンで行えます。
 
@@ -143,18 +143,19 @@ Metrics without LimitsTM は、Agent やコードレベルの変更を必要と�
 
 1. **Metrics Summary** テーブルでカスタムディストリビューションのメトリクス名をクリックし、メトリクス詳細のサイドパネルを開きます。
 2. **Manage Tags** ボタンをクリックして、タグコンフィギュレーションモーダルを開きます。
-3. **Custom...** タブをクリックすると、クエリで使用できるようにするタグをカスタマイズすることができます。タグコンフィギュレーションは、保持したいタグの_許可リスト_です。
-4. **Save** を選択する前に、カーディナリティ推定機能で提案した許可リストの効果をプレビューします。
 
-**注**: 許可リストベースのタグのカスタマイズでは、タグの除外はサポートされていません。`!` で始まるタグは追加できません。また、カーディナリティ推定機能では、メトリクスが 48 時間より古いことが要求されます。
+3. **Include tags...** または **Exclude tags...** を選択して、クエリに含めるタグまたは除外するタグをカスタマイズします。タグ構成の詳細については、[Metrics without Limits][10] ドキュメントを参照してください。
+4. **Save** を選択する前に、カーディナリティ推定機能を用いて提案されたタグ構成の効果をプレビューします。
+
+**注**: カーディナリティ推定機能では、メトリクスが 48 時間より古い必要があります。
 
 ### クエリ可能なタグ 
 
-メトリクスが Metrics without LimitsTM で構成されると、どのタグが Queryable のままか、つまり _Indexed Custom Metrics_ のボリュームに寄与するタグを表示することができます。また、_Ingested Custom Metrics_ のボリュームに寄与する、最初に送信されインジェストされたすべてのタグにトグルバックすることができます。
+メトリクスが Metrics without Limits™ で構成されると、どのタグが Queryable のままか、つまり _Indexed Custom Metrics_ のボリュームに寄与するタグを表示することができます。また、_Ingested Custom Metrics_ のボリュームに寄与する、最初に送信されインジェストされたすべてのタグにトグルバックすることができます。
 
 ### アドバンスドモードでの集計によるメトリクスの最適化
 
-カウント、ゲージ、レートの各メトリクスタイプのカスタムメトリクスでは、Metrics without LimitsTM のアドバンスモードでオプションで追加の集計を含めることにより、メトリクスの構成をさらに洗練させることができます。デフォルトでは、Datadog は、構成されたメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて最も頻繁にクエリされる集計の組み合わせを以下に示すように保存します。
+カウント、ゲージ、レートの各メトリクスタイプのカスタムメトリクスでは、Metrics without Limits™ のアドバンスモードでオプションで追加の集計を含めることにより、メトリクスの構成をさらに洗練させることができます。デフォルトでは、Datadog は、構成されたメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて最も頻繁にクエリされる集計の組み合わせを以下に示すように保存します。
 
 - 構成されたカウント/レートは `SUM` の時間/空間集計でクエリ可能です
 - 構成されたゲージは `AVG` の時間/空間集計ででクエリ可能です
@@ -169,7 +170,7 @@ Metrics without LimitsTM は、Agent やコードレベルの変更を必要と�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]:/ja/metrics/metrics-without-limits
+[10]: /ja/metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /ja/metrics/explorer/
 [3]: /ja/dashboards/

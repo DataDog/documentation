@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: ログの処理方法
-kind: documentation
 title: Datadog の Lambda 関数で AWS サービスのログを送信する
 ---
 
@@ -31,21 +30,21 @@ S3 バケットまたは CloudWatch ロググループにログを生成する A
 
 | AWS サービス                        | AWS サービス ログを有効にする                                                                    | AWS ログを Datadog に送信する                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][3]                  | [AWS API Gateway ログを有効にする][4]                                                               | [手動][5]および[自動](#automatically-set-up-triggers)ログコレクション。                                                |
-| [Cloudfront][6]                   | [AWS Cloudfront ログを有効にする][7]                                                                | [手動][8]および[自動](#automatically-set-up-triggers)ログコレクション。  |
-| [Cloudtrail][9]                   | [AWS Cloudtrail ログを有効にする][9]                                                                | [手動][10]ログコレクション。AWS CloudTrail for Cloud SIEM を設定する場合は、AWS Configuration for Cloud SIEM[11] を参照してください。                                                  |
-| [DynamoDB][12]                     | [AWS DynamoDB ログを有効にする][13]                                                                  | [手動][14]ログコレクション。                                                 |
+| [API Gateway][3]                  | [Amazon API Gateway ログを有効にする][4]                                                               | [手動][5]および[自動](#automatically-set-up-triggers)ログコレクション。                                                |
+| [Cloudfront][6]                   | [Amazon CloudFront ログを有効にする][7]                                                                | [手動][8]および[自動](#automatically-set-up-triggers)ログコレクション。  |
+| [CloudTrail][9]                   | [AWS CloudTrail ログを有効にする][9]                                                                | [手動][10]ログコレクション。AWS CloudTrail for Cloud SIEM を設定する場合は、AWS Configuration for Cloud SIEM[11] を参照してください。                                                  |
+| [DynamoDB][12]                     | [Amazon DynamoDB ログを有効にする][13]                                                                  | [手動][14]ログコレクション。                                                 |
 | [EC2][15]                          | `-`                                                                                             | [Datadog Agent][15] を使用してログを Datadog に送信します。                    |
 | [ECS][16]                          | `-`                                                                                             | [docker Agent を使用してログを収集します][17]。                              |
-| [Elastic Load Balancing (ELB)][18] | [AWS ELB ログを有効にする][19]                                                                       | [手動][20]および[自動](#automatically-set-up-triggers)ログコレクション。  |
+| [Elastic Load Balancing (ELB)][18] | [Amazon ELB ログを有効にする][19]                                                                       | [手動][20]および[自動](#automatically-set-up-triggers)ログコレクション。  |
 | [Lambda][21]                       | `-`                                                                                             | [手動][22]および[自動](#automatically-set-up-triggers)ログコレクション。 |
-| [RDS][23]                         | [AWS RDS ログを有効にします][24]                                                                      | [手動][25]ログコレクション。                                                |
-| [Route 53][26]                    | [AWS Route 53 ログを有効にする][27]                                                                 | [手動][28]ログコレクション。                                                |
-| [S3][29]                          | [AWS S3 ログを有効にする][30]                                                                       | [手動][31]および[自動](#automatically-set-up-triggers)ログコレクション。 |
+| [RDS][23]                         | [Amazon RDS ログを有効にする][24]                                                                      | [手動][25]ログコレクション。                                                |
+| [Route 53][26]                    | [Amazon Route 53 ログを有効にする][27]                                                                 | [手動][28]ログコレクション。                                                |
+| [S3][29]                          | [Amazon S3 ログを有効にする][30]                                                                       | [手動][31]および[自動](#automatically-set-up-triggers)ログコレクション。 |
 | [SNS][32]                         | SNS はログを提供しませんが、SNS サービスに送信されるログとイベントを処理することができます。 | [手動][33]ログコレクション。                                                |
-| [RedShift][34]                    | [AWS Redshift ログを有効にします][35]                                                                 | [手動][36]および[自動](#automatically-set-up-triggers)ログコレクション。 |
+| [RedShift][34]                    | [Amazon Redshift ログを有効にする][35]                                                                 | [手動][36]および[自動](#automatically-set-up-triggers)ログコレクション。 |
 | [Verified Access][37]             | [Verified Access ログを有効にする][38]                                                              | [手動][39]ログコレクション。                                                |
-| [VPC][40]                         | [AWS VPC ログを有効にする][41]                                                                      | [手動][42]ログコレクション。                                                |
+| [VPC][40]                         | [Amazon VPC ログを有効にする][41]                                                                      | [手動][42]ログコレクション。                                                |
 
 ## トリガーの設定
 
@@ -69,7 +68,7 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
 | Redshift ログ                   | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
 | S3 アクセスログ                  | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
 
-**注**: `SubscriptionFilter` は自動作成されません。
+**注**: [サブスクリプション フィルター][48]は、DatadogForwarder によって自動的に作成されません。ロググループで直接作成してください。
 
 1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
 2. [Datadog と AWS のインテグレーション][43]に使用する IAM ロールのポリシーに、次のアクセス許可があることを確認します。この許可の使用方法については、以下に説明されています。
@@ -281,9 +280,9 @@ Lambda 関数から送信されるログからメールや IP アドレスをス
 [34]: /ja/integrations/amazon_redshift/
 [35]: /ja/integrations/amazon_redshift/#enable-aws-redshift-logging
 [36]: /ja/integrations/amazon_redshift/#log-collection
-[37]: /ja/integrations/amazon_verified_access/
-[38]: /ja/integrations/amazon_verified_access/#enable-verified-access-logs
-[39]: /ja/integrations/amazon_verified_access/#log-collection
+[37]: /ja/integrations/aws_verified_access/
+[38]: /ja/integrations/aws_verified_access/#enable-verified-access-logs
+[39]: /ja/integrations/aws_verified_access/#log-collection
 [40]: /ja/integrations/amazon_vpc/
 [41]: /ja/integrations/amazon_vpc/#enable-vpc-flow-log-logging
 [42]: /ja/integrations/amazon_vpc/#log-collection
@@ -292,3 +291,4 @@ Lambda 関数から送信されるログからメールや IP アドレスをス
 [45]: https://app.datadoghq.com/logs
 [46]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
 [47]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[48]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters

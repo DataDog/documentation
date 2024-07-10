@@ -2,57 +2,91 @@ platforms:
   - name: aix
     link: "agent/basic_agent_usage/aix/"
     image: "platform_aix.png"
+    category: "Linux"
+  - name: almalinux
+    link: "agent/basic_agent_usage/centos/"
+    image: "platform_almalinux.png"
+    category: "Linux"
   - name: amazonlinux
     link: "agent/basic_agent_usage/amazonlinux/"
     image: "platform_amazonlinux.png"
+    category: "Linux"
   - name: ansible
     link: "agent/basic_agent_usage/ansible/"
     image: "platform_ansible.png"
+    category: "configuration_management"
   - name: centos
     link: "agent/basic_agent_usage/centos/"
     image: "platform_centos.png"
+    category: "Linux"
   - name: chef
     link: "agent/basic_agent_usage/chef/"
     image: "platform_chef.png"
+    category: "configuration_management"
   - name: deb
     link: "agent/basic_agent_usage/deb/"
     image: "platform_debian.png"
+    category: "Linux"
   - name: docker
     link: "agent/docker/"
     image: "platform_docker.png"
+    category: "cloud_and_container"
   - name: fedora
     link: "agent/basic_agent_usage/fedora/"
     image: "platform_fedora.png"
+    category: "Linux"
   - name: heroku
     link: "agent/basic_agent_usage/heroku/"
     image: "platform_heroku.png"
+    category: "cloud_and_container"
   - name: kubernetes
     link: "agent/kubernetes/"
     image: "platform_kubernetes.png"
+    category: "cloud_and_container"
   - name: osx
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macosx.png"
+    category: "macOS"
+  - name: Oracle
+    link: "agent/basic_agent_usage/oracle/"
+    image: "platform_oracle.png"
+    category: "Linux"  
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
     image: "platform_puppet.png"
+    category: "configuration_management"
   - name: redhat
     link: "agent/basic_agent_usage/redhat/"
     image: "platform_redhat.png"
+    category: "Linux"
+  - name: rockylinux
+    link: "agent/basic_agent_usage/centos/"
+    image: "platform_rockylinux.png"
+    category: "Linux"
   - name: salt
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
+    category: "configuration_management"
   - name: suse
     link: "agent/basic_agent_usage/suse/"
     image: "platform_suse.png"
+    category: "Linux"
   - name: ubuntu
     link: "agent/basic_agent_usage/ubuntu/"
     image: "platform_ubuntu.png"
+    category: "Linux"
   - name: windows
     link: "agent/basic_agent_usage/windows/"
     image: "platform_windows.png"
+    category: "Windows"
+  - name: sccm
+    link: "agent/basic_agent_usage/sccm/"
+    image: "platform_sccm.png"
+    category: "Windows"
   - name: source
     link: "agent/basic_agent_usage/source/"
     image: "platform_fromsource.png"
+    category: "source"
 gs:
   - name: osx
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=macos"
@@ -75,6 +109,12 @@ gs:
   - name: redhat
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
     image: "platform_redhat.png"
+  - name: rockylinux
+    link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
+    image: "platform_rockylinux.png"
+  - name: almalinux
+    link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
+    image: "platform_almalinux.png"
   - name: fedora
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=fedora"
     image: "platform_fedora.png"

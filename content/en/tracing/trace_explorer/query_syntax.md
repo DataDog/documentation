@@ -1,8 +1,8 @@
 ---
 title: Query Syntax
-kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
+ - /tracing/search_syntax/
  - /tracing/trace_search_analytics/
  - /tracing/trace_search/
  - /tracing/search
@@ -25,9 +25,9 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -308,7 +308,7 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [9]: /tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /tracing/glossary/#trace
 [11]: /monitors/types/apm/
-[12]: /dashboards/#timeboards
+[12]: /dashboards/#get-started
 [13]: /help/
 [14]: /tracing/glossary/#indexed-span
 [15]: /dashboards/

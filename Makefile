@@ -1,6 +1,8 @@
 # make
 SHELL = /bin/bash
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs
+# MAKEFLAGS := --jobs=$(shell nproc)
+# MAKEFLAGS += --output-sync --no-print-directory
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -23,9 +25,6 @@ include $(CONFIG_FILE)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
-
-#DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/\(.*\)\/manifest.json/\1\/manifest.deref.json/')
-DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/.*\/\(.*\)\/manifest.json/data\/workflows\/\1.json/')
 
 # Set defaults when no makefile.config or missing entries
 # Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
@@ -93,39 +92,48 @@ find-int: hugpython ## Find the source for an integration (downloads/updates int
 node_modules: package.json yarn.lock
 	@yarn install --immutable
 
+source-dd-source:
+	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
+
 # All the requirements for a full build
-dependencies: clean hugpython all-examples data/permissions.json update_pre_build node_modules
-	@make placeholders
-	@make derefs
+dependencies: clean source-dd-source
+	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders derefs
 
 # make directories
 data/workflows/:
 	mkdir -p $@
 
 # dereference any source jsonschema files
-derefs: $(DEREFS)
+derefs: $(patsubst integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json, data/workflows/%.json, $(wildcard integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/*/manifest.json))
 
-.SECONDEXPANSION:
-$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
+data/workflows/%.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json node_modules | data/workflows/
 	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
-data/permissions.json:
+data/permissions.json: hugpython
 	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
 
+integrations_data/extracted/vector:
+	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
+
+# builds cue.json for vector
+vector_data: integrations_data/extracted/vector
+	@cue export $(shell find integrations_data/extracted/vector -type f -name "*.cue") > integrations_data/extracted/vector/cue.json; \
+	node ./assets/scripts/reference-process.js
+
 # only build placeholders in ci
-placeholders:
+placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.14246916-py2.py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.37052508-py3-none-any.whl; \
 	fi
 
-update_pre_build:
+update_pre_build: hugpython
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
 
 # Only to be run during deployment
@@ -192,3 +200,34 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
+
+
+# Function that will clone a repo or sparse clone a repo
+# If the dir already exists it will attempt to update it instead
+#
+# Arguments
+# 1 = dir name to clone to
+# 2 = https repo url
+# 3 = Branch name
+# 4 = whether this is a sparse checkout or not
+# 5 = sparse files/dirs to include other than cone root files
+define source_repo
+	@if $(4) ; then \
+		if [ -d ./integrations_data/extracted/$(1) ]; then \
+			git -C ./integrations_data/extracted/$(1) checkout $(3); \
+		else \
+			rm -rf ./integrations_data/extracted/$(1); \
+			git clone --branch $(3) --depth 1 --filter=blob:none --no-checkout $(2) ./integrations_data/extracted/$(1); \
+			cd ./integrations_data/extracted/$(1); \
+			git sparse-checkout init --cone; \
+			git sparse-checkout set $(5); \
+			git checkout $(3); \
+		fi \
+	else \
+		if [ -d ./integrations_data/extracted/$(1) ]; then \
+			git -C ./integrations_data/extracted/$(1) pull --ff-only; \
+		else \
+			git clone --branch $(3) --depth 1 --filter=blob:none $(2) ./integrations_data/extracted/$(1); \
+		fi \
+	fi
+endef

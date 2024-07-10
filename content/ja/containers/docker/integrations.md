@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/docker/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: documentation
 title: Docker インテグレーションオートディスカバリー
 ---
 
@@ -47,7 +46,7 @@ title: Docker インテグレーションオートディスカバリー
 * [Agent 内にマウントされたコンフィギュレーションファイル](?tab=file#configuration)
 * [Key-Value ストア](?tab=keyvaluestore#configuration)
 
-**注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。これらのインテグレーションでオートディスカバリーを有効にするには、ポッドで公式の Prometheus エクスポーターを使用し、次に Agent でオートディスカバリーを使用してポッドを見つけ、エンドポイントをクエリします。
+**注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。これらのインテグレーションでオートディスカバリーを有効にするには、コンテナで公式の Prometheus エクスポーターを使用し、次に Agent でオートディスカバリーを使用してコンテナを見つけ、エンドポイントをクエリします。
 
 ## コンフィギュレーション
 

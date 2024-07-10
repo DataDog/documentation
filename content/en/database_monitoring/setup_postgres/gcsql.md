@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Google Cloud SQL managed Postgres
-kind: documentation
 description: Install and configure Database Monitoring for Postgres managed on Google Cloud SQL.
 further_reading:
 - link: "/integrations/postgres/"
@@ -8,23 +7,19 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
 
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
+1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the Cloud SQL Integration](#install-the-cloud-sql-integration)
 
 ## Before you begin
 
 Supported PostgreSQL versions
-: 10, 11, 12, 13, 14
+: 10, 11, 12, 13, 14, 15
 
 Supported Agent versions
 : 7.36.1+
@@ -34,7 +29,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -45,7 +40,7 @@ Configure the following [parameters][3] in [Database flags][4] and then **restar
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `all` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
@@ -128,9 +123,9 @@ psql -h localhost -U datadog postgres -A \
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
 
-## Install the Agent
+## Install and configure the Agent
 
-To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configured to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
+To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -159,9 +154,9 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
 See the [Postgres integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[4]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[4]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -214,7 +209,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 [1]: /agent/docker/integrations/?tab=docker
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[3]: /agent/guide/secrets-management
+[3]: /agent/configuration/secrets-management
 [4]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -223,31 +218,51 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
-### Command line with Helm
+### Helm
 
-Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        postgres.yaml: -|
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <INSTANCE_ADDRESS>
+            port: 5432
+            username: datadog
+            password: '<UNIQUE_PASSWORD>'
+            gcp:
+              project_id: '<PROJECT_ID>'
+              instance_id: '<INSTANCE_ID>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterChecksRunner.enabled=true' \
-  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <INSTANCE_ADDRESS>
-    port: 5432
-    username: datadog
-    password: "<UNIQUEPASSWORD>"
-    gcp:
-      project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+    For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+
+    ```yaml
+    pg_stat_statements_view: datadog.pg_stat_statements()
+    pg_stat_activity_view: datadog.pg_stat_activity()
+    ```
+
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with mounted files
 
@@ -315,7 +330,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[5]: /agent/guide/secrets-management
+[5]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -337,7 +352,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://cloud.google.com/sql/docs/postgres/flags
@@ -345,7 +360,7 @@ If you have installed and configured the integrations and Agent as described and
 [6]: /integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
 [8]: https://app.datadoghq.com/account/settings/agent/latest
-[9]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: /agent/configuration/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/google_cloudsql
 [12]: /database_monitoring/troubleshooting/?tab=postgres

@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: ブログ
   text: Datadog で Azure App Service 上の Linux Web アプリを監視する
-kind: documentation
 title: Azure App Service - Linux コード
 ---
 ## 概要
@@ -29,6 +28,7 @@ title: Azure App Service - Linux コード
 - `DD_SITE` は Datadog サイト[パラメーター][2]です。サイトは {{< region-param key="dd_site" code="true" >}} です。この値のデフォルトは `datadoghq.com` です。
 - `DD_SERVICE` はこのプログラムで使用するサービス名です。デフォルトは `package.json` の名前フィールドの値です。
 - `DD_START_APP` はアプリケーションの起動に使用するコマンドです。例えば、`node ./bin/www` です (Tomcat で動作するアプリケーションでは不要です)。
+- `DD_PROFILING_ENABLED` (オプション) .NET 固有の [Continuous Profiler][15] を有効にします。
 
 ### 起動コマンドを特定する
 
@@ -38,15 +38,16 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 
 | ランタイム   | `DD_START_APP` 値の例                                                               | 説明                                                                                                                                                                                                                        |
 |-----------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Node.js   | `node ./bin/www`                                                                           | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します                                                                                                                                                                   |
-| .NET コア | `dotnet datadog-demo.dll`                                                                  | デフォルトで Web アプリ名を使用する `.dll` ファイルを実行します。<br /><br />**注**: コマンドの `.dll` ファイル名は、`.dll` ファイルのファイル名と一致する必要があります。場合によっては、Web アプリと一致しないことがあります。         |
-| PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します                                                                                                                                                                           |
+| Node.js   | `node ./bin/www`                                                                           | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します。                                                                                                                                                                   |
+| .NET Core | `dotnet datadog-demo.dll`                                                                  | デフォルトで Web アプリ名を使用する `.dll` ファイルを実行します。<br /><br /> **注**: コマンドの `.dll` ファイル名は `.dll` ファイルのファイル名と一致する必要があります。場合によっては、これは Web アプリとは一致しないことがあります。         |
+| PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します。                                                                                                                                                                           |
 | Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | カスタム[起動スクリプト][13]。この例では、Django アプリを起動するための Gunicorn コマンドを示します。                                                                                                                                      |
 | Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | アプリを起動するためのコマンドです。Tomcat で動作するアプリケーションでは不要です。                                                                                                                                                                                                  |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
 [13]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-php?pivots=platform-linux#customize-start-up
+[15]: /ja/profiler/enabling/dotnet/?tab=azureappservice
 
 
 **注**: 新しい設定を保存すると、アプリケーションは再起動します。
@@ -58,7 +59,7 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 **General settings** で、**Startup Command** のフィールドに以下を追加します。
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.3.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.7.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service の構成: Azure UI の Settings の Configuration セクションにある、Stack の設定です。スタック、メジャーバージョン、マイナーバージョンのフィールドの下には、上記の curl コマンドで入力される Startup Command フィールドがあります。" style="width:100%;" >}}

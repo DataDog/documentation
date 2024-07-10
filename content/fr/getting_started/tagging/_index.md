@@ -20,7 +20,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases&
   text: Participer à une session interactive sur le tagging efficace avec Datadog
-kind: documentation
 title: Débuter avec les tags
 ---
 
@@ -32,12 +31,12 @@ Les tags relient différents types de données dans Datadog. Grâce à certaines
 
 | Clé de tag   | Fonctionnalité                                                            |
 | --------- | --------------------------------------------------------------------- |
-| `host`    | Corrélation entre des métriques, des traces, des processus et des logs              |
-| `device`  | Séparation de métriques, traces, processus et logs selon un appareil ou un disque |
+| `host`    | Corrélation entre des métriques, des traces, des processus et des logs.              |
+| `device`  | Séparation de métriques, traces, processus et logs selon un appareil ou un disque. |
 | `source`  | Filtrage de spans et création automatisée de pipelines pour la solution Log Management     |
-| `service` | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs |
-| `env`     | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs |
-| `version` | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs |
+| `service` | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs. |
+| `env`     | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs. |
+| `version` | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs. |
 
 Datadog vous conseille d'étudier les données des conteneurs, machines virtuelles et de l'infrastructure cloud dans leur ensemble, au niveau des services. Par exemple, consultez l'utilisation du processeur d'un ensemble de hosts qui représentent un service, plutôt que d'analyser l'utilisation distincte d'un serveur A ou d'un serveur B.
 
@@ -96,18 +95,18 @@ Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous ass
 | -------------------- | ------------------------------------------------------------------------------------------------ |
 | [Événements][10]         | Filtrer le flux d'événements                                                                          |
 | [Dashboards][11]     | Filtrer et regrouper des métriques dans des graphiques                                                               |
-| [Infrastructure][12] | Filtrer et regrouper des données sur les vues de la hostmap, de la liste d'infrastructures, des live containers et des live processes |
-| [Monitors][13]       | Créer et gérer des monitors ou gérer des downtimes                                             |
+| [Infrastructure][12] | Filtrer et regrouper des données sur les vues de la hostmap, de la liste d'infrastructures, des live containers et des live processes. |
+| [Monitors][13]       | Créer et gérer des monitors ou gérer des downtimes.                                             |
 | [Métriques][14]        | Filtrer et regrouper des données avec le Metrics Explorer                                                        |
-| [Intégrations][15]   | Définir des limites facultatives pour AWS, Google Cloud et Azure                                        |
+| [Intégrations][15]   | Définir des limites facultatives pour AWS, Google Cloud et Azure.                                        |
 | [APM][16]            | Filtrer des services, traces et profils ou accéder à d'autres sections avec la Service Map           |
 | [RUM et Session Replay][17] | Filtrer des recherches d'événements, des analyses, des patterns, des replays et des problèmes avec le RUM Explorer        |
 | [Synthetics][18]     | Filtrer et regrouper des tests Synthetic ou des tests s'exécutant dans des pipelines CI avec le CI Results Explorer   |
 | [Notebooks][19]      | Filtrer et regrouper des métriques dans des graphiques                                                               |
-| [Logs][20]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines                                |
+| [Logs][20]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines.                                |
 | [SLO][21]           | Rechercher des SLO ainsi que des SLO groupés basés sur des métriques ou sur des monitors                       |
-| [Outils de développement][22]     | Récupérer des informations ou configurer différentes sections dans l'IU avec l'API                                 |
-| [Facturation][23]        | Obtenir des informations sur votre utilisation de Datadog en choisissant jusqu'à trois tags, tels que `env`, `team`, et `account_id` |
+| [Outils de développement][22]     | Récupérer des informations ou configurer différentes sections dans l'interface avec l'API.                                 |
+| [Facturation][23]        | Obtenir des informations sur votre utilisation de Datadog en choisissant jusqu'à trois tags, tels que `env`, `team`, et `account_id`. |
 
 Pour en savoir plus, consultez la section [Utiliser les tags][1].
 ## Pour aller plus loin

@@ -1,13 +1,7 @@
 ---
-title: Configuration avancée de Database Monitoring pour MySQL
-kind: documentation
 description: Configuration avancée de Database Monitoring pour MySQL
-
+title: Configuration avancée de Database Monitoring pour MySQL
 ---
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
-
 
 ## Tronquer `events_statements_summary_by_digest`
 
@@ -35,13 +29,13 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-Dans ce cas, utilisez l'option `quantize_sql_tables` pour surveiller ces requêtes en tant que requêtes normalisées uniques. Toutes les métriques associées à ces requêtes seront alors regroupées dans une seule requête :
+Dans ce cas, utilisez l'option `replace_digits` pour surveiller ces requêtes sous la forme d'une seule requête normalisée. Toutes les métriques associées à ces requêtes seront alors regroupées dans une seule requête :
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Ajoutez l'option `quantize_sql_tables` à la configuration de l'instance de votre base de données dans l'Agent Datadog :
+Ajoutez l'option `replace_digits` à la configuration de l'instance de votre base de données dans l'Agent Datadog :
 
 ```yaml
 init_config:
@@ -49,7 +43,7 @@ init_config:
 instances:
   - dbm: true
     ...
-    quantize_sql_tables: true
+    replace_digits: true
 ```
 
 ## Augmenter le taux d'échantillonnage

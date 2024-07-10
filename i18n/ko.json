@@ -1,0 +1,335 @@
+{
+  "integration_count": {
+    "other": "750"
+  },
+
+  "beta_sentence": {
+    "other": "Beta - For support or to report any issues, contact"
+  },
+
+  "additional_sentence": {
+    "other": "Additional helpful documentation, links, and articles"
+  },
+
+  "apiaccount_sentence1": {
+    "other": "Make sure you replace the API and/or APP key below"
+  },
+
+  "apiaccount_sentence2": {
+    "other": "with the ones for your account"
+  },
+
+  "install_agent_sentence": {
+    "other": "데이터 수집을 위한 Agent 설치 & 설정"
+  },
+
+  "integrations_sentence": {
+    "other": "Gather data from all of your systems, apps, & services"
+  },
+
+  "graphing_sentence": {
+    "other": "Visualize your data to<br> gain insight"
+  },
+
+  "alerting_sentence": {
+    "other": "Create & manage your <br> monitors & notifications"
+  },
+
+  "apm_sentence": {
+    "other": "Instrument your code <br> to improve performance"
+  },
+
+  "developer_tools_sentence": {
+    "other": "Collect custom metrics <br> &amp; create new integration"
+  },
+
+  "help_sentence": {
+    "other": "Our friendly, knowledgeable solutions engineers are here to help!"
+  },
+
+  "email_support_sentence": {
+    "other": "You can contact our Support Team by visiting <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog's Support Website</a>. (all sites). <br><br> For details on how to log into the Support Website, see <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\"> Access Your Support Ticket</a>."
+  },
+
+  "live_chat_support_sentence": {
+    "other": "Chat with the Datadog Support Team Monday through Friday from 10:00 to 19:00 ET (Eastern Time) using in-app chat."
+  },
+
+  "event_stream_support_sentence": {
+    "other": "The <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community program</a> is a network built by Datadog users for Datadog users to help each other find answers to questions or to share product tips and tricks."
+  },
+
+  "agent_started_sentence": {
+    "other": "에이전트를 사용하려면 플랫폼을 선택합니다."
+  },
+
+  "choose_a_platform": {
+    "other": "Choose A Platform"
+  },
+
+  "get_started_datadog": {
+    "other": "Get Started with Datadog"
+  },
+
+  "all": {
+    "other": "전체"
+  },
+
+  "free_trial": {
+    "other": "무료 시험판"
+  },
+
+  "agent_check": {
+    "other": "Agent Check"
+  },
+
+  "statsd_check": {
+    "other": "StatsD Check"
+  },
+
+  "crawler": {
+    "other": "Crawler"
+  },
+
+  "library_check": {
+    "other": "Library"
+  },
+
+  "terms": {
+    "other": "Terms"
+  },
+
+  "privacy": {
+    "other": "개인정보보호"
+  },
+
+  "cookies": {
+    "other": "Cookies"
+  },
+
+  "toc": {
+    "other": "Table of Contents"
+  },
+
+  "get_started_free": {
+    "other": "무료로 시작하세요"
+  },
+
+  "get_started_free_short": {
+    "other": "무료 가입"
+  },
+
+  "documentation_search": {
+    "other": "Documentation Search"
+  },
+
+  "guides": {
+    "one": "길라잡이",
+    "other": "가이드"
+  },
+
+  "tags": {
+    "one": "태그",
+    "other": "태그"
+  },
+
+  "language": {
+    "one": "언어",
+    "other": "언어"
+  },
+
+  "library": {
+    "one":  "Library",
+    "other": "라이브러리"
+  },
+
+  "official": {
+    "other": "Official"
+  },
+
+  "api": {
+    "other": "API"
+  },
+
+  "docs": {
+    "other": "문서"
+  },
+
+  "home": {
+    "other": "비고"
+  },
+
+  "datadog_docs": {
+    "other": "Datadog Docs"
+  },
+
+  "datadog_api": {
+    "other": "Datadog API"
+  },
+
+  "dogstatsd": {
+    "other": "DogStatsD"
+  },
+
+  "author": {
+    "other": "Author"
+  },
+
+  "notes": {
+    "other": "비고"
+  },
+
+  "agent": {
+    "other": "Agent"
+  },
+
+  "integrations": {
+    "one": "integration",
+    "other": "통합"
+  },
+
+  "graphing": {
+    "other": "그래프화"
+  },
+
+  "alerting": {
+    "other": "경고"
+  },
+
+  "apm_tracing": {
+    "other": "APM (Tracing)"
+  },
+
+  "developer_tools": {
+    "other": "Developer tools"
+  },
+
+  "contact_us": {
+    "other": "문의하기"
+  },
+
+  "status_page": {
+    "other": "Status Page"
+  },
+
+  "ops_twitter": {
+    "other": "Ops Twitter"
+  },
+
+  "platform": {
+    "other": "Datadog Support<br>Platform"
+  },
+
+  "live_chat": {
+    "other": "live chat with<br>our support team"
+  },
+
+  "event_stream_messaging": {
+    "other": "contact us<br>on slack"
+  },
+
+  "questions": {
+    "other": "Questions?"
+  },
+
+  "search": {
+    "other": "검색"
+  },
+
+  "type": {
+    "other": "유형"
+  },
+  "feel_free_contribute": {
+    "other": "Feel free to Contribute"
+  },
+  "mistake_in_docs": {
+    "other": "Mistake in the Docs"
+  },
+  "groups_return_to_": {
+    "other": "Back to"
+  },
+  "table_of_contents_heading": {
+    "other": "On this Page"
+  },
+  "edit": {
+    "other": "편집"
+  },
+  "overview": {
+    "other": "개요"
+  },
+  "arguments": {
+    "other": "인수"
+  },
+  "path_parameters": {
+    "other": "Path Parameters"
+  },
+  "query_strings": {
+    "other": "Query Strings"
+  },
+  "header_parameters": {
+    "other": "Header Parameters"
+  },
+  "request": {
+    "other": "요청"
+  },
+  "model": {
+    "other": "모델"
+  },
+  "example": {
+    "other": "예시"
+  },
+  "copy": {
+    "other": "Copy"
+  },
+  "response": {
+    "other": "응답"
+  },
+  "code_example": {
+    "other": "Code Example"
+  },
+  "name": {
+    "other": "이름"
+  },
+  "description": {
+    "other": "설명"
+  },
+  "field": {
+    "other": "항목"
+  },
+  "product": {
+    "other": "제품"
+  },
+  "blog": {
+    "other": "블로그"
+  },
+  "about": {
+    "other": "소개"
+  },
+  "footer_blurb_heading": {
+    "other": "찾으시는 정보가 없나요?"
+  },
+  "footer_blurb_desc": {
+    "other": "데이터독 서포트 엔지니어링팀이 도와드리겠습니다."
+  },
+  "integration_version": {
+    "other": "Integration version"
+  },
+  "beta_check":{
+    "other": "Beta"
+  },
+  "learn_more": {
+    "other": "자세히 보기"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
+  },
+  "try_this_rule" : {
+    "other": "TRY THIS RULE"
+  }
+}

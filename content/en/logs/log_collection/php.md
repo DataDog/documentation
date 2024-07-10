@@ -1,6 +1,5 @@
 ---
 title: PHP Log Collection
-kind: documentation
 aliases:
   - /logs/languages/php
 further_reading:
@@ -191,8 +190,8 @@ instances:
 logs:
 
   - type: file
-    path: "/path/to/your/php/application-json.log"
-    service: "<SERVICE_NAME>"
+    path: "<path_to_your_php_application_json>.log"
+    service: "<service_name>"
     source: php
     sourcecategory: sourcecode
 ```
@@ -552,5 +551,5 @@ Add the following:
 [10]: https://symfony.com/
 [11]: /agent/logs/?tab=tailfiles#activate-log-collection
 [12]: /agent/logs/?tab=tailfiles#custom-log-collection
-[13]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[13]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [14]: /glossary/#tail

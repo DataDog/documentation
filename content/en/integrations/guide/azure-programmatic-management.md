@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Programmatic Management Guide
-kind: guide
+
 description: "Steps for programmatically managing the Azure integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
@@ -12,17 +12,15 @@ further_reading:
 
  This guide demonstrates how to programmatically manage the Azure integration with Datadog, as well as other Azure resources such as the Datadog Agent VM extension. This enables you to manage observability across multiple accounts at once.
 
-**All sites**: All Datadog sites can use the steps on this page to complete the App Registration credential process for Azure metric collection and the Event Hub setup for sending Azure Platform Logs.
+**All sites**: All [Datadog sites][3] can use the steps on this page to complete the App Registration credential process for Azure metric collection and the Event Hub setup for sending Azure Platform Logs.
 
-**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][14] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding.
+**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][14] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding. See the [Managing the Azure Native Integration guide][1] for more information.
 
 ## Datadog Azure integration
 
-The standard Azure integration process uses an app registration credential process for implementing metric collection, and an Event Hub setup for sending Azure Platform Logs. If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
+The standard Azure integration uses an app registration credential process for implementing metric collection, and an Azure Event Hub setup for sending Azure Platform Logs. Create the app registration in Azure before integrating Datadog with your Azure environment, and configure it with the **Monitoring Reader** permission for Datadog to monitor the provided scope (subscriptions or management groups). If you don't already have an app registration created, see [Integrating through the Azure Portal][6] or [Integrating through the Azure CLI][4] for setup instructions.
 
-If your Datadog account is hosted on any other [Datadog site][3], use the standard [Azure integration][5] to collect monitoring data from your Azure environment.
-
-If you prefer to use CLI, see the [Azure CLI for Datadog][2].
+**Note**: You can assign read permissions at the management group level when creating the app registration in Azure, to monitor multiple subscriptions and have new subscriptions in the management group automatically monitored.
 
 ### Terraform
 
@@ -31,8 +29,8 @@ Follow these steps to deploy the integration through [Terraform][13].
 1. Configure the [Datadog Terraform provider][15] to interact with the Datadog API through a Terraform configuration.
 
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
-    * `azure_tenant_name`: Your Azure Active Directory ID.
-    * `client_id`: Your Azure web application secret key.
+    * `tenant_name`: Your Azure Active Directory ID.
+    * `client_id`: Your Azure application (client) ID.
     * `client_secret`: Your Azure web application secret key.
 
    See the [Datadog Azure integration resource][17] page in the Terraform registry for further example usage and the full list of optional parameters, as well as additional Datadog resources.
@@ -133,12 +131,12 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 {{< partial name="whats-next/whats-next.html" >}}
 
 
+[1]: https://docs.datadoghq.com/integrations/guide/azure-portal/
 [2]: https://learn.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
 [3]: /getting_started/site/
-[4]: /integrations/guide/azure-portal/
+[4]: /integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-cli
 [5]: /integrations/azure/
-[6]: /agent/basic_agent_usage/ansible/
-[7]: /integrations/azure_container_service/
+[6]: /integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-portal
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
 [11]: https://app.datadoghq.com/account/settings/agent/latest
@@ -146,8 +144,7 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [13]: https://www.terraform.io
 [14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[16]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /logs/guide/azure-logging-guide
 [19]: https://app.datadoghq.com/monitors/recommended
-[20]: /monitors/notify/#notify-your-team
+[20]: /monitors/notify/#configure-notifications-and-automations

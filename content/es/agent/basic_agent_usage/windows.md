@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/guide/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 platform: Windows
 title: Uso básico del Agent para Windows
 ---
@@ -42,13 +41,13 @@ Para instalar el Datadog Agent en un entorno de dominio, consulta los [requisito
 
 1. Descarga el [instalador del Datadog Agent][1] para instalar la última versión del Agent.
 
-   <div class="alert alert-info">Si necesitas instalar una versión específica del Agent, consulta la <a href="https://windows-agent.datadoghq.com/installers.json">lista de instaladores</a>.</div>
+   <div class="alert alert-info">Si necesitas instalar una versión específica del Agent, consulta la <a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">lista de instaladores</a>.</div>
 
 2. Abre `datadog-agent-7-latest.amd64.msi` y ejecuta el instalador (como **Administrador**).
 3. Sigue las indicaciones, acepta el acuerdo de licencia e introduce tu [clave de API de Datadog][2].
 4. Cuando termines la instalación, tendrás opción de iniciar el Datadog Agent Manager.
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
@@ -104,7 +103,7 @@ Todos los elementos de la configuración se añaden a la línea de comandos como
 
 **Nota**: Si se encuentra un `datadog.yaml` válido y tiene una clave de API configurada, ese archivo tendrá prioridad sobre todas las opciones de la línea de comandos especificadas.
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: /es/agent/proxy/
 [3]: /es/agent/faq/windows-agent-ddagent-user/
 [4]: /es/network_monitoring/performance
@@ -116,7 +115,7 @@ El Agent 7 solo es compatible con Python 3. Antes de actualizarlo, confirma qu
 Si vas a actualizarte a partir de una versión del Datadog Agent anterior a la 5.12.0, primero debes pasarte a una versión más reciente del Agent 5 (igual o posterior a la 5.12.0, pero anterior a la 6.0.0) usando el [instalador EXE][2] y, luego, actualizar el Datadog Agent a una versión igual o posterior a la 6.
 
 [1]: /es/agent/guide/python-3/
-[2]: https://windows-agent.datadoghq.com/ddagent-cli-latest.exe
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
 {{% /tab %}}
 {{< /tabs >}}
 

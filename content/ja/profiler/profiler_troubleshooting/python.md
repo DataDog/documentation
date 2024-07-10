@@ -1,11 +1,10 @@
 ---
-code_lang: php
+code_lang: python
 code_lang_weight: 20
 further_reading:
 - link: /tracing/troubleshooting
   tag: Documentation
   text: APM トラブルシューティング
-kind: Documentation
 title: Python プロファイラーのトラブルシューティング
 type: multi-code-lang
 ---

@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#regles-globales-de-traitement
   tag: Documentation
   text: Règles globales de traitement
-kind: documentation
 title: Collecte de logs de l'Agent de host
 ---
 
@@ -67,7 +66,7 @@ logs:
 
 Sous **Windows**, utilisez le chemin `<LETTRE_LECTEUR>:\<CHEMIN_FICHIER_LOG>\<NOM_FICHIER_LOG>.log` et vérifiez que l'utilisateur `ddagentuser` est autorisé à lire et modifier le fichier de log.
 
-[1]: /fr/agent/guide/agent-configuration-files/
+[1]: /fr/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "TCP/UDP" %}}
@@ -88,7 +87,7 @@ Depuis la version 7.31.0 de l'Agent, la connexion TCP reste ouverte indéfinime
 
 **Remarque** : l'Agent prend en charge les logs aux formats brut, JSON et Syslog. Si vous envoyez des logs en lot, séparez vos logs par des caractères de saut de ligne.
 
-[1]: /fr/agent/guide/agent-configuration-files/
+[1]: /fr/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -102,7 +101,7 @@ logs:
 
 Consultez la documentation relative à l'[intégration journald][2] pour obtenir des instructions de configuration spécifiques aux environnements conteneurisés et en savoir plus sur le filtrage des unités.
 
-[1]: /fr/agent/guide/agent-configuration-files/
+[1]: /fr/agent/configuration/agent-configuration-files/
 [2]: /fr/integrations/journald/
 {{% /tab %}}
 {{% tab "Événements Windows" %}}
@@ -162,7 +161,7 @@ Liste complète des paramètres disponibles pour la collecte de logs :
 | `exclude_paths`  | Non       | Si `type` est défini sur **file**, et si `path` contient un caractère wildcard, permet de définir les fichiers qui doivent être exclus de la collecte de logs. Disponible depuis la version 6.18 de l'Agent.                                                                                                                                                                            |
 | `exclude_units`  | Non       | Si `type` est défini sur **journald**, il s'agit de la liste des unités journald spécifiques à exclure.                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | Non       | L'attribut utilisé pour définir la catégorie à laquelle appartient un attribut source, par exemple : `source:postgres, sourcecategory:database` ou `source: apache, sourcecategory: http_web_access`.                                                                                                                                                                                                                              |
-| `start_position` | Non       | Si `type` est défini sur **file**, définissez la position à partir de laquelle l'Agent débute la lecture du fichier. Valeurs autorisées : `beginning` et `end`. Valeur par défaut : `end`. Si `path` contient un caractère wildcard, `beginning` n'est pas pris en charge. _Paramètre ajouté avec la version 6.19/7.19 de l'Agent_.                                                                                                            |
+| `start_position` | Non       | Si `type` est défini sur **file**, définissez la position à partir de laquelle l'Agent débute la lecture du fichier. Valeurs autorisées : `beginning` et `end`. Valeur par défaut : `end`. Si `path` contient un caractère wildcard, `beginning` n'est pas pris en charge. _Paramètre ajouté avec la version 6.19/7.19 de l'Agent_.<br/><br/>Si `type` est défini sur **journald**, définissez la position à partir de laquelle l'Agent débute la lecture du journal. Valeurs autorisées : `beginning`, `end`, `forceBeginning` et `forceEnd`. Valeur par défaut : `end`. Avec les options `force`, l'Agent ignore le curseur stocké sur le disque et commence systématiquement la lecture à partir du début ou de la fin du journal. _Paramètre ajouté avec la version 7.38 de l'Agent_                                                                                                          |
 | `encoding`       | Non       | Si `type` est défini sur **file**, ce paramètre permet de définir le format d'encodage que l'Agent doit utiliser pour lire le fichier. Définissez sa valeur sur `utf-16-le` pour UTF-16 Little Endian et sur `utf-16-be` pour UTF-16 Big Endian, ou sur `shift-jis` pour Shift JIS. Si vous définissez une autre valeur, l'Agent lit le fichier au format UTF-8. _Les valeurs `utf-16-le` et `utf-16be` sont disponibles depuis les versions v6.23/v7.23 de l'Agent, et la valeur `shift-jis` est disponible depuis les versions v6.34/v7.34 de l'Agent._                                                                                      |
 | `tags`           | Non       | La liste des tags à ajouter à chaque log recueilli ([en savoir plus sur le tagging][11]).                                                                                                                                                                                                                                                                             |
 
@@ -173,10 +172,10 @@ Liste complète des paramètres disponibles pour la collecte de logs :
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /fr/agent/kubernetes/log/
 [3]: /fr/agent/docker/log/
-[4]: /fr/agent/guide/agent-configuration-files/
+[4]: /fr/agent/configuration/agent-configuration-files/
 [5]: /fr/agent/logs/log_transport/
-[6]: /fr/agent/guide/agent-commands/#restart-the-agent
-[7]: /fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: /fr/agent/configuration/agent-commands/#restart-the-agent
+[7]: /fr/agent/configuration/agent-commands/#agent-status-and-information
 [8]: /fr/tracing/
 [9]: /fr/getting_started/tagging/unified_service_tagging
 [10]: /fr/metrics/custom_metrics/#overview

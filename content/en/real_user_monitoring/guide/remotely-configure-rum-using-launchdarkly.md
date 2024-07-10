@@ -1,6 +1,6 @@
 ---
 title: Remotely configure RUM using LaunchDarkly
-kind: guide
+
 beta: false
 private: true
 description: Learn how to set up RUM with LaunchDarkly to remotely configure RUM sampling.
@@ -115,13 +115,13 @@ datadogRum.init(RUM_configuration_object)
 ```
 
 ## Embed LaunchDarkly's controls to configure RUM directly in your Dashboards
-If you want to change your RUM configuration directly in your Datadog application, you can embed the LaunchDarkly UI into Datadog and switch your feature flag on/off. The feature flags are set up so you can keep them off, with the default values. When you want to have higher fidelity data, you can turn on your feature flag and the values you set for the ON variation will be used for the RUM initialization.
+If you want to change your RUM configuration directly in your Datadog application, you can embed the LaunchDarkly UI into Datadog and switch your feature flag on/off. The feature flags are set up so you can keep them off, with the default values. When you want to have higher fidelity data, you can turn on your feature flag and the values you set for the ON variation are used for the RUM initialization.
 
-LaunchDarkly's Datadog App integration embeds the feature flag management UI as a dashboard widget. You can use this widget to toggle feature flags without ever leaving Datadog. You can embed the LaunchDarkly widget within a new or existing dashboard that displays key metrics. If there is an incident or spike in errors, you can quickly toggle the feature flag for your RUM configuration from within Datadog to begin sampling more data and ensuring your teams have access to the information they need to address and resolve your issue.
+LaunchDarkly's Datadog App integration embeds the feature flag management UI as a dashboard widget. You can use this widget to toggle feature flags without ever leaving Datadog. You can embed the LaunchDarkly widget within a new or existing dashboard that displays key metrics. If there is an incident or spike in errors, you can toggle the feature flag for your RUM configuration from within Datadog to begin sampling more data and ensuring your teams have access to the information they need to address and resolve your issue.
 
 {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/datadog-launchdarkly-ui-widget.png" alt="Datadog and LaunchDarkly UI Integration Widget" style="width:100%;">}}
 
-If you need to change the values that you originally set for your configuration, you can update your flag within LaunchDarkly at any time. After you save your changes, all new flag evaluations will have your updated values.
+If you need to change the values that you originally set for your configuration, you can update your flag within LaunchDarkly at any time. After you save your changes, all new flag evaluations have your updated values.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

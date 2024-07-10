@@ -1,6 +1,5 @@
 ---
 title: How to set up RBAC for Monitors
-kind: guide
 further_reading:
 - link: "/account_management/rbac/permissions/#monitors"
   tag: "Documentation"
@@ -8,7 +7,7 @@ further_reading:
 - link: "/api/latest/monitors/#create-a-monitor"
   tag: "Documentation"
   text: "Learn more about creating restricted monitors via API"
-- link: "/monitors/notify/#permissions"
+- link: "/monitors/configuration/#permissions"
   tag: "Documentation"
   text: "Learn more about creating restricted monitors via the UI"
 ---
@@ -36,7 +35,7 @@ For more information about default and custom roles, how to create custom roles,
 
 For more information, see [Monitors Permissions][1].
 
-[1]: /monitors/notify/#permissions
+[1]: /monitors/configuration/#permissions
 {{% /tab %}}
 
 {{% tab "API" %}}
@@ -128,15 +127,13 @@ Before Datadog released the feature allowing restriction of monitor editing to s
 
 {{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor" style="width:70%;">}}
 
-Locked monitors are deprecated. Datadog recommends using the role restriction option, which gives you more flexibility to define the users allowed to edit monitors.
-
-Your organization may have existing locked monitors. Datadog still supports locked monitors. Editing of locked monitors is restricted to users with the [Datadog Admin Role][2] and the monitor's creator.
+Locked monitors are deprecated and are no longer supported. Instead, use the role restriction option, which gives you more flexibility to define which users are allowed to edit monitors.
 
 The sections below describe how to migrate from the locked mechanism to restricted roles, depending on the way you manage your monitors.
 
 ### API
 
-Although deprecated, the `locked` parameter corresponding to the above mentioned locked mechanism is still supported. This means you can progressively update the definition of your monitors managed through API or Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
+The `locked` parameter corresponding to the above mentioned locking mechanism is no longer supported. This means you must update the definition of your monitors managed through API or Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
 
 For more information on how to update your monitors' definitions, see [Edit a monitor API endpoint][3] and [Monitor API Options][4].
 

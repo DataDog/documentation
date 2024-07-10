@@ -1,6 +1,5 @@
 ---
-title: HTTP Tests
-kind: documentation
+title: HTTP Testing
 description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
   - /synthetics/http_test
@@ -49,7 +48,7 @@ After choosing to create an `HTTP` test, define your test's request.
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
-
+   * **HTTP version**: Select `HTTP/1.1 only`, `HTTP/2 only`, or `HTTP/2 fallback to HTTP/1.1`.
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
    * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Timeout**: Specify the amount of time in seconds before the test times out.
@@ -70,8 +69,8 @@ After choosing to create an `HTTP` test, define your test's request.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
-     For "Single Chunk" transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.  
+     For "Single Chunk" transfer requests to Amazon S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).  
    
    {{% /tab %}}
@@ -84,9 +83,11 @@ After choosing to create an `HTTP` test, define your test's request.
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
-
+   * **Body type**: Select the type of the request body (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * **Request body**: Add the content of your HTTP request body.
+       * The request body is limited to a maximum size of 50 kilobytes for `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
+       * The request body is limited to one file of 3 megabytes for `application/octet-stream`.
+       * The request body is limited to three files of 3 megabytes each for `multipart/form-data`.  
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
@@ -110,7 +111,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
 3. **Name** your HTTP test.
 
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
    {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
 
@@ -180,6 +181,9 @@ The most common errors include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
+`Error performing HTTP/2 request`
+: The request could not be performed. See the dedicated [error][16] page for more information.
+
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
 
@@ -219,7 +223,7 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /monitors/notify/#notify-your-team
+[7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors
@@ -228,3 +232,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role
+[16]: /synthetics/api_tests/errors/#http-errors

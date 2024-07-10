@@ -1,8 +1,6 @@
 ---
 title: Online Archives
-kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
-is_beta: true
 private: true
 further_reading:
 - link: "/logs/log_configuration/indexes/#indexes-filters"
@@ -14,6 +12,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/online-archives-datadog/"
   tag: "Blog"
   text: "Historical log analysis and investigation with Online Archives"
+algolia:
+  tags: ['online archives']
 ---
 
 <div class="alert alert-warning">

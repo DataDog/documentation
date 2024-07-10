@@ -1,10 +1,10 @@
 ---
-title: Utilisation de base de l'Agent Kubernetes dans l'Agent v5
-kind: guide
-private: true
 aliases:
-  - /fr/agent/faq/agent-5-kubernetes-basic-agent-usage
+- /fr/agent/faq/agent-5-kubernetes-basic-agent-usage
+private: true
+title: Utilisation de base de l'Agent Kubernetes dans l'Agent v5
 ---
+
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard Kubernetes" >}}
 
 <div class="alert alert-warning">
@@ -16,7 +16,7 @@ L'Agent Datadog v5 est pris en charge jusqu'à la version 1.8 de Kubernetes. Po
 Recueillez des métriques de Kubernetes en temps réel pour :
 
 * Visualiser et surveiller les états de Kubernetes
-* Être informé des failovers et des événements de Kubernetes
+* Être informé des failovers et des événements Kubernetes
 
 Pour Kubernetes, il est recommandé d'exécuter l'[Agent dans un DaemonSet][1]. Vous pouvez utiliser une [image Docker][2] comprenant les intégrations Docker et Kubernetes activées.
 
@@ -39,7 +39,6 @@ Si le RBAC est activé dans votre environnement Kubernetes, découvrez comment c
 ```yaml
 
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: dd-agent
 spec:
@@ -152,7 +151,6 @@ Pour exécuter kube-state-metrics, créez un fichier `kube-state-metrics.yaml` a
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: Deployment
 metadata:
   name: kube-state-metrics
 spec:
@@ -177,7 +175,6 @@ spec:
             cpu: 200m
 ---
 apiVersion: v1
-kind: Service
 metadata:
   annotations:
     prometheus.io/scrape: 'true'
@@ -220,9 +217,9 @@ Pour vérifier que l'Agent Datadog s'exécute dans votre environnement en tant q
 kubectl get daemonset
 ```
 
-Si l'Agent est déployé, une sortie similaire au texte ci-dessous s'affiche. Les valeurs **desired** et **current** correspondent au nombre de nœuds exécutés dans votre cluster.
+Si l'Agent est déployé, vous recevez une sortie similaire au texte ci-dessous. Les valeurs **desired** et **current** correspondent au nombre de nœuds exécutés dans votre cluster.
 
-```shell
+```bash
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
 dd-agent   3         3         <none>          11h
 ```
@@ -231,7 +228,7 @@ dd-agent   3         3         <none>          11h
 
 [Lancez la sous-commande info de l'Agent][11] et cherchez `kubernetes_state` dans la section Checks :
 
-```shell
+```bash
 Checks
 ======
     kubernetes_state
@@ -257,7 +254,6 @@ Si vous utilisez un pod `dd-agent` pour chaque nœud de travail Kubernetes, vous
 ```yaml
 
 apiVersion: v1
-kind: Pod
 metadata:
   annotations:
     service-discovery.datadoghq.com/kubedns.check_names: '["kube_dns"]'
@@ -274,7 +270,7 @@ metadata:
 
 [Lancez la sous-commande info de l'Agent][11] et cherchez `kube_dns` dans la section Checks :
 
-```shell
+```bash
 Checks
 ======
     kube_dns
@@ -293,7 +289,7 @@ Checks
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: /fr/getting_started/agent/autodiscovery/
 [10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
-[11]: /fr/agent/guide/agent-commands/#agent-status-and-information
+[11]: /fr/agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics
 [13]: https://quay.io/coreos/kube-state-metrics
 [14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example

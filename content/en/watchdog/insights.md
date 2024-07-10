@@ -1,6 +1,5 @@
 ---
 title: Watchdog Insights
-kind: documentation
 description: View anomalies and outliers that match your search query with Watchdog Insights.
 further_reading:
 - link: "/logs/explorer/watchdog_insights/"
@@ -19,77 +18,231 @@ further_reading:
 
 ## Overview
 
-Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. As you navigate the Datadog UI, Watchdog Insights displays a filtered and sorted-by-priority list of anomalies matching your active search query.
-
 Investigating an incident requires trial and error. Drawing from their experience, engineers familiar with a particular area know where to first look for potential problems. Using Watchdog Insights allows all engineers, including less experienced ones, to pay attention to the most important data and accelerate their incident investigations.
 
-### Types of anomalies
+Throughout most of Datadog, Watchdog returns two types of insights:
 
-Each insight highlights one outlier or anomaly affecting a subset of users. Depending on the product area, Watchdog Insights displays different types of anomalies. Examples include, but are not limited to, the following:
-- Error and latency outliers in logs, traces, and RUM views
-- Spike in error logs
-- New error logs
-- Deadlocked threads
-- High percentage of unready Kubernetes pods
+- **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
+- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).  Outliers are dynamically calculated on the data matching the active query and the time frame.
 
-### Prioritization
+{{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
-Watchdog sorts insights based on a combination of factors to place the most important insight at the beginning of the list. The factors that Watchdog takes into account can include the following:
-- State (ongoing versus resolved)
-- Status (warning, error, or critical)
-- Start time
-- Anomaly type
+## Explore insights
 
-## Usage
+The Watchdog Insights carousel sits near the top of the following product pages:
 
-{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights banner on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" >}}
+- [Log explorer][1]
+- APM:
+    - [Trace Explorer][2]
+    - [Service Page][3]
+    - [Resource Page][4]
+    - [Database Explorer][5]
+    - [Profile Explorer][6]
+- Infrastructure:
+    - [Processes Explorer][7]
+    - [Serverless Explorer][8]
+    - [Kubernetes Explorer][9]
+- [Real User Monitoring (RUM) Explorer][10]
+- [Error Tracking issue side panel][13]
 
-The Watchdog Insights banner sits near the top of each page. Expand the banner for an overview. The highest priority insights appear on the left. If Watchdog cannot find any issues, the banner is gray.
+Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
-### Filter on Insight
-
-To refine your current view to match a Watchdog Insight, hover over the top right corner of an insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
-
-### Side panel
+{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights carousel on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" style="width:100%;">}}
 
 Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
 
-{{< img src="watchdog/log_explorer_watchdog_insights_panel.png" alt="The Watchdog Insights side panel view within Logs Explorer. The top area shows a bar graph of error statuses over time. One Log Anomaly card is visible with the title 'New error logs were detected on service:web-store'" >}}
+Every outlier comes with embedded interactions and a side panel with troubleshooting information. Each Insight's interactions and side panel vary based on the Watchdog Insight type.
 
-### Detailed view
+### Filter on Insight query
 
-For a detailed view of an insight, click on the individual card. The full side panel opens from the right.
+To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+**Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
 
-{{< img src="watchdog/profiler_watchdog_insight.png" alt="A Watchdog Insights full side panel view, with the title 'Lock Pressure is high in service:product-recommendation'" >}}
+{{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
-To share an insight in one click, click the **Copy Link** button on the full side panel. Your clipboard populates with the query that produced the insight.
+### Share an outlier
 
-## Explore Watchdog Insights
+To share a given outlier, click on it in the insight panel to open the details side panel. Click the **Copy Link** button at the top of the details panel:
 
-You can find Watchdog Insights in four product areas: [Infrastructure][1], [APM][2], [Log Management][3], and [RUM][4].
+{{< img src="watchdog/share-outlier.png" alt="Outlier side panel showing how to copy the link" style="width:80%;">}}
 
-### Infrastructure
+The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
 
-#### Live Containers
+## Outlier types
 
-Watchdog Insights appear in the Kubernetes Explorer tab in [Live Containers][5].
+{{< tabs >}}
+{{% tab "Log Management" %}}
 
-1. In the left navigation, hover over **Infrastructure**.
-2. Click **Kubernetes**.
-3. Select the **Explorer** tab at the top of the page.
-4. Choose one of the Kubernetes resource types in the **Select Resources** box.
-5. A list of your Kubernetes resources appears, with the Watchdog Insights panel at the top.
+### Error outliers
 
-#### Live Processes
+Error outliers display fields such as [faceted tags or attributes][1] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root causes of problems.
 
-Watchdog Insights appear in [Live Processes][12].
+Typical examples of error outliers include `env:staging`, `docker_image:acme:3.1`, and `http.useragent_details.browser.family:curl`.
 
-1. In the left navigation, hover over **Infrastructure**.
-2. Click **Processes**.
+In the banner card view, you can see:
 
-A list of your Processes and associated data appears, with the Watchdog Insights panel at the top. 
+  * The field name
+  * The proportion of errors and overall logs that the field contributes to
 
-#### Serverless
+{{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 73.3% of total errors and a blue bar with 8.31% of total errors" style="width:50%;" >}}
+
+In the full side panel view, you can see:
+
+  * The timeseries of error logs that contain the field
+  * Tags that are often associated with the error logs
+  * A comprehensive list of [log patterns][2]
+
+{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
+
+[1]: /logs/explorer/facets/
+[2]: /logs/explorer/analytics/patterns
+{{% /tab %}}
+{{% tab "APM" %}}
+
+APM outliers are available on all APM pages where the Watchdog Insights carousel is available:
+ - [Trace Explorer](/tracing/trace_explorer/?tab=listview)
+ - [Service Page](/tracing/services/service_page/)
+ - [Resource Page](/tracing/services/resource_page/)
+
+### Error outliers
+
+Error outliers display fields such as tags containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
+
+Typical examples of error outliers include `env:staging`, `availability_zone:us-east-1a`, `cluster_name:chinook`, and `version:v123456`.
+
+In the banner card view, you can see:
+
+  * The field name
+  * The proportion of errors and overall traces that the field contributes to
+
+{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 24.2% of total errors and a blue bar with 12.1% of total errors" style="width:30%;" >}}
+
+In the full side panel view, you can see:
+
+  * The timeseries of error traces that contain the field
+  * Tags that are often associated with the error traces
+  * A comprehensive list of related Error Tracking Issues and failing spans
+
+{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
+
+### Latency outliers
+
+Latency outliers display fields such as tags that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of APM spans.
+
+Latency outliers are computed for the span duration.
+
+In the banner card view, you can see:
+
+* The field name
+* The latency distribution for spans containing the tag and the baseline for the rest of the data
+* A percentile of interest latency value for the outlier tag and the difference with the baseline for the rest of the data
+
+{{< img src="tracing/trace_explorer/watchdog_insights/latency_outliers_s_card.png" alt="Latency Outlier banner card" style="width:30%;" >}}
+
+In the full side panel, you can see a latency distribution graph for the tag and the baseline. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of APM events that contain the field.
+
+{{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
+
+{{% /tab %}}
+{{% tab "Profiling" %}}
+
+### Lock contention outlier
+
+In the banner card view, you can see:
+
+  * The name of the impacted service
+  * The number of threads impacted
+  * The potential CPU savings (and estimated cost savings)
+    
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
+
+In the full side panel, you can see instructions on how to resolve the lock contention:
+
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to address the Lock Contention outlier" style="width:100%;">}}
+
+### Garbage collection outlier
+
+In the banner card view, you can see:
+
+  * The name of the impacted service
+  * The amount of CPU time used to perform garbage collection
+
+{{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="Profiling insight on Garbage Collection" style="width:30%;">}}
+
+In the full side panel, you can see instructions on how to better configure garbage collection to free up some CPU time:
+
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to address the Garbage Collection outlier" style="width:100%;">}}
+
+### Regex compilation outlier
+
+In the banner card view, you can see:
+
+  * The name of the impacted service
+  * The amount of CPU time spent on compiling regexes
+
+{{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="Profiling insight on Regex Compilation" style="width:30%;">}}
+
+In the full side panel, you can see instructions on how to improve regex compilation time, as well as examples of functions within your code that could be improved:
+
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to address the Regex Compilation outlier" style="width:100%;">}}
+
+{{% /tab %}}
+{{% tab "Databases" %}}
+
+For Database Monitoring, Watchdog surfaces insights on the following metrics:
+
+- `CPU`
+- `Commits `
+- `IO`
+- `Background`
+- `Concurrency`
+- `Idle`
+
+Find the databases impacted by one or multiple outliers by using the Insight carousel.
+
+{{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:100%;">}}
+
+An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened. 
+
+{{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:100%;">}}
+
+{{% /tab %}}
+{{% tab "RUM" %}}
+
+### Error outlier
+
+Error outliers display fields such as [faceted tags or attributes][3] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root causes of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
+
+In the banner card view, you can see:
+
+* The field name
+* The proportion of total errors and overall RUM events that the field contributes to
+* Related tags
+
+In the full side panel, you can see a timeseries graph about the total number of RUM errors with the field, along with impact pie charts and a list of RUM events that contain the field.
+
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Error Outlier full side panel" style="width:100%;" >}}
+
+### Latency outlier
+
+Latency outliers display fields such as [faceted tags or attributes][1] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
+
+Latency outliers are computed for [Core Web Vitals][2] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][3]. For more information, see [Monitoring Page Performance][2].
+
+In the banner card view, you can see:
+
+* The field name
+* The performance metric value containing the field and the baseline for the rest of the data
+
+In the full side panel, you can see a timeseries graph about the performance metric. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field.
+
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
+
+[1]: /real_user_monitoring/explorer/search/#facets
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+{{% /tab %}}
+{{% tab "Serverless" %}}
 
 For serverless infrastructures, Watchdog surfaces the following insights:
 
@@ -101,48 +254,45 @@ For serverless infrastructures, Watchdog surfaces the following insights:
 - `Init Duration Up/Down`
 - `Runtime Duration Up/Down`
 
-### APM
+Find the serverless functions impacted by one or multiple outliers by using the Insights carousel.
 
-Watchdog Insights appear on several pages within APM:
-- [Trace Explorer][6]
-- [Continuous Profiler][7]
-- [Service Page][8]
-- [Resource Page][9]
+{{< img src="watchdog/side_panel_serverless_facet_insights.png" alt="Facet to filter the Serverless Functions with insights" style="width:30%;">}}
 
-### Log Management
+An overlay is then set on the function, with pink pills highlighting the different insights and giving more information about what happened.
 
-To locate Watchdog Insights in the Log Management UI, take the following steps:
-1. In the left navigation, hover over **Logs**.
-2. Click **Search**.
+{{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:100%;">}}
 
-The pink Watchdog Insights banner appears in the middle of your screen, above your logs.
+[1]: /serverless/guide/serverless_warnings/#errors
+{{% /tab %}}
+{{% tab "Processes" %}}
 
-For more information, see [Watchdog Insights for Logs][10].
+For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
 
-### RUM
+[1]: /watchdog/#overview
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
-To locate Watchdog Insights in the RUM UI, take the following steps:
-1. In the left navigation, hover over **UX Monitoring**.
-2. Click **Sessions & Replays**.
-3. At the top of the page, the **In** dropdown shows that you are in the **Sessions** level. Change the dropdown option to **Views**.
+For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kubernetes anomalies][1] for the current context of the Kubernetes Explorer.
 
-The pink Watchdog Insights banner appears in the middle of your screen, above your views.
+[1]: /watchdog/#overview
+{{% /tab %}}
+{{< /tabs >}}
 
-For more information, see [Watchdog Insights for RUM][11].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/orchestration/overview/pod
-[2]: https://app.datadoghq.com/apm/home
-[3]: https://app.datadoghq.com/logs
-[4]: https://app.datadoghq.com/rum/explorer
-[5]: /infrastructure/livecontainers/#kubernetes-resources-view
-[6]: /tracing/trace_explorer/
-[7]: /tracing/profiler/
-[8]: /tracing/services/service_page/
-[9]: /tracing/services/resource_page/
-[10]: /logs/explorer/watchdog_insights/
-[11]: /real_user_monitoring/explorer/watchdog_insights/
-[12]: /infrastructure/process
+[1]: https://app.datadoghq.com/logs
+[2]: https://app.datadoghq.com/apm/traces
+[3]: /tracing/services/service_page/
+[4]: /tracing/services/resource_page/
+[5]: https://app.datadoghq.com/databases/list
+[6]: https://app.datadoghq.com/profiling/search
+[7]: https://app.datadoghq.com/process
+[8]: https://app.datadoghq.com/functions
+[9]: https://app.datadoghq.com/orchestration/overview/pod
+[10]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
+[11]: /watchdog/#overview
+[12]: https://app.datadoghq.com/watchdog
+[13]: https://app.datadoghq.com/rum/error-tracking

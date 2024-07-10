@@ -33,10 +33,9 @@ integration_id: system
 integration_title: Nfsstat
 integration_version: 1.11.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: nfsstat
-oauth: {}
 public_title: Nfsstat
 short_description: nfsstat récupère des métriques nfsiostat-sysstat.
 supported_os:

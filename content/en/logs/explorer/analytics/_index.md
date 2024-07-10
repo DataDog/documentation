@@ -1,6 +1,5 @@
 ---
 title: Log Analytics
-kind: documentation
 description: 'Group queried logs into fields, patterns, and transactions, and create multiple search queries, formulas, and functions for in-depth analysis.'
 aliases:
     - /logs/explorer/group
@@ -25,7 +24,7 @@ further_reading:
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. 
 
 {{< whatsnext desc="In order to expose this information, you can group your logs into:" >}}
-    {{< nextlink href="logs/explorer/analytics/#fields" >}}Fields{{< /nextlink >}}
+    {{< nextlink href="logs/explorer/analytics/#group-logs-by-fields" >}}Fields{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/patterns" >}}Patterns{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/transactions" >}}Transactions{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -40,15 +39,15 @@ Aggregations are supported for **indexed logs only**. If you need to perform agg
 
 ## Group logs by fields
 
-When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the value of one or multiple log facets. 
+When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the query search values. 
 
 On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
-- **unique count** of coded values for a facet per group
-- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a facet per group
+- **count of unique coded values** for a query search value per group (shown in the UI as `count unique of`)
+- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a query search value per group
 
-Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
+Individual logs with multiple query search values belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
 ### Visualize log groups
 
@@ -100,21 +99,11 @@ Apply a formula on one or multiple queries by clicking on the `+ Add` button nex
 
 {{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="The query editor with a formula dividing query A by query B" style="width:100%;" >}}
 
-To apply formulas with multiple queries, all queries must be grouped by the same facet. In the example above, both queries are grouped by `Webstore Store Name`.
+To apply formulas with multiple queries, all queries must be grouped by the same query search value. In the example above, both queries are grouped by `Webstore Store Name`.
 
 You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][12] on the proportion of error logs in all logs to compare current data with data from one week before:
 
 {{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="The query editor showing a formula with the week before timeshift function applied to it" style="width:100%;" >}}
-
-## Filter logs based on Reference Tables
-
-<div class="alert alert-warning">Reference Tables and the feature to filter logs based on Reference Tables are in beta. There is a limit of 100 Reference Tables per account and a limit of 1000 rows in a Reference Table.</div>
-
-Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][17] guide.
-
-To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a threat intel reference table:
-
-{{< img src="/logs/explorer/group/reference_tables_logs.png" alt="The Datadog log explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ## Further reading
 
@@ -136,4 +125,3 @@ To apply a query filter with Reference Tables, click on the `+ Add` button next 
 [14]: /dashboards/functions/smoothing
 [15]: /dashboards/functions/rollup
 [16]: /dashboards/functions/exclusion
-[17]: /integrations/guide/reference-tables/?tab=manualupload

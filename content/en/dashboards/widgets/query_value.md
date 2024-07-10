@@ -1,9 +1,9 @@
 ---
 title: Query Value Widget
-kind: documentation
+widget_type: query_value
 description: "Display an aggregated value for a given metric query"
 aliases:
-    - /graphing/widgets/query_value/
+- /graphing/widgets/query_value/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -28,7 +28,7 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Log Events: See the [Log search documentation][3] to configure a log event query.
 2. Reduce the query values to a single value, calculated as the `avg`, `min`, `sum`, `max`, or `last` value of all data points in the specified timeframe.
 3. Choose the units and the formatting. Autoformat scales the dashboard for you based on the units.
-4. Optionally, configure a conditional format depending on the value displayed.
+4. Optionally, configure a conditional format depending on the value displayed. See [Visual Formatting Rules](#visual-formatting-rules) for more examples.
 5. Optionally, overlay a timeseries background:
     * Min to Max: A scale graph from minimum to maximum.
     * Line: A scale graph to include zero (0).
@@ -36,23 +36,25 @@ The widget can display the latest value reported, or an aggregate computed from 
 
 ### Options
 
+#### Visual formatting rules
+
+<div class="alert alert-info">Visual formatting rules should be based on the metric's raw value. If the metric base unit is in nanoseconds, but the Query Value autoformats to seconds, your conditional rules should be based on nanoseconds.</div>
+
+Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, internal servers must be updated to support cross origin requests to reference internal images.
+
+{{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Query value widget visual formatting rules with custom image background" style="width:90%;" >}}
+
+#### Context links
+
+[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+
 #### Global time
 
-On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
+Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
-
-The dedicated [widget JSON schema definition][5] for the query value widget is:
+This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
 
 {{< dashboards-widgets-api >}}
 
@@ -63,5 +65,6 @@ The dedicated [widget JSON schema definition][5] for the query value widget is:
 [1]: /dashboards/querying/#overview
 [2]: /tracing/trace_explorer/query_syntax/#search-bar
 [3]: /logs/search_syntax/
-[4]: /api/v1/dashboards/
-[5]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/guide/context-links/
+[5]: /api/latest/dashboards/
+[6]: /dashboards/graphing_json/widget_json/

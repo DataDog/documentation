@@ -1,6 +1,6 @@
 ---
 title: Migrating to the New Events Features
-kind: guide
+
 aliases:
 - /events/guides/migrating_from_stream_to_explorer
 - /events/guides/migrating_to_new_events_features
@@ -196,8 +196,8 @@ Legacy Event Monitors do not support cardinality rollup.
 
 
 [1]: /service_management/events/explorer
-[2]: /service_management/events/explorer/#event-analytics
-[3]: /service_management/events/#generate-custom-metrics-from-events
+[2]: /service_management/events/explorer/analytics
+[3]: service_management/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [5]: /service_management/events/guides/new_events_sources/
 [6]: /help/

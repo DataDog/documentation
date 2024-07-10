@@ -1,6 +1,5 @@
 ---
 title: Incident Management
-kind: documentation
 description: Create and manage incidents
 aliases:
 - /monitors/incident_management/
@@ -24,10 +23,6 @@ further_reading:
     tag: "blog"
     text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
-{{< /site-region >}}
 
 Any event that may lead to a disruption in your organization's services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog's Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 
@@ -166,7 +161,7 @@ Assessment fields are the metadata and context that you can define per incident.
     * Datadog overrides APM service names in favor of the manually uploaded list.
     * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
     * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM.
-* **Teams**: Choose from the [teams][9] defined in your organization. It is not necessary to upload a list of teams from a CSV file. 
+* **Teams**: Choose from the [teams][9] defined in your organization. It is not necessary to upload a list of teams from a CSV file.
 
 ## Data collected
 
@@ -188,6 +183,8 @@ In addition to integrating with [Slack][7], Incident Management also integrates 
 - [PagerDuty][13] and [OpsGenie][14] to send incident notifications to your on-call engineers.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
+- [Statuspage][19] to create and update Statuspage incidents.
+- [ServiceNow][20] to create a ServiceNow ticket for an incident.
 
 ## Ready to try it out?
 
@@ -215,3 +212,5 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [16]: /integrations/webhooks/
 [17]: /integrations/webhooks/#sending-sms-through-twilio
 [18]: /getting_started/incident_management
+[19]: /integrations/statuspage/
+[20]: /integrations/servicenow/

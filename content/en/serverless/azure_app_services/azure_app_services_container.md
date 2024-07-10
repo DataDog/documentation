@@ -1,6 +1,5 @@
 ---
-title: Azure App Service - Linux Container
-kind: documentation
+title: Instrument Azure App Service - Linux Containers
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -9,9 +8,12 @@ further_reading:
   tag: "Documentation"
   text: "Azure App Service Environment"
 ---
+
 ## Overview
 
-This instrumentation method provides the following additional monitoring capabilities for Containerized Linux Azure App Service workloads:
+<div class="alert alert-info">To instrument your Azure App Service containers with a sidecar, see <a href="/serverless/guide/azure_app_service_linux_sidecar">Instrument Azure App Service - Sidecar Pattern</a>.</div>
+
+This instrumentation method uses `serverless-init` and provides the following additional monitoring capabilities for containerized Linux Azure App Service workloads:
 
 - Fully distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
@@ -19,170 +21,107 @@ This instrumentation method provides the following additional monitoring capabil
 - `Trace_ID` injection into application logs.
 - Support for submitting custom metrics using [DogStatsD][1].
 
-## Setup
 ### Prerequisites
-Make sure you have a [Datadog API Key][1] and are using a programming language [supported by a Datadog tracing library][2].
 
-[1]: /account_management/api-app-keys/#api-keys
-[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
 
-### Instrument your application
+## Instrument your application
 
-#### Install Agent with Dockerfile
+### Dockerfile
 
-{{< programming-lang-wrapper langs="nodejs,python,go,java" >}}
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
+
+| dockerhub.io | gcr.io | public.ecr.aws |
+| ---- | ---- | ---- |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+
+Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
+
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
+* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
+* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
+
+{{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
 
-Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# install the Datadog js tracing library, either here or in package.json
-npm i dd-trace@2.2.0
-
-# enable the Datadog tracing library
-ENV NODE_OPTIONS="--require dd-trace/init"
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint
-CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
-
-```
-
-#### Install tracing library
-
-Tracing should work with the Dockerfile in the previous step. You can alternatively follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces.
-
-[Sample code for a sample Node.js application][1].
-
-[1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/nodejs/express
-[2]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+{{% svl-init-nodejs %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# install the python tracing library here or in requirements.txt
-RUN pip install --no-cache-dir ddtrace==1.7.3
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint
-CMD ["ddtrace-run", "python", "app.py"]
-```
-
-#### Install tracing library
-
-Tracing should work with the Dockerfile in the previous step. You can alternatively follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces.
-
-[Sample code for a sample Python application][1].
-
-[1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/python/flask
-[2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
-
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-
-Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint
-CMD ["/path/to/your-go-binary"]
-```
-
-#### Install tracing library
-
-Follow [these instructions][2] to install and configure the Go tracing library in your application to capture and submit traces.
-
-[Sample code for a sample Go application][1].
-
-[1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/go
-[2]: /tracing/trace_collection/dd_libraries/go/?tab=containers#instrument-your-application
+{{% svl-init-python %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
+{{% svl-init-java %}}
 
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
-# install the java tracing library
-ADD https://dtdg.co/latest-java-tracer dd-java-agent.jar
+{{% svl-init-go %}}
 
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
 
-# execute your binary application wrapped in the entrypoint
-CMD ["java", "-javaagent:dd-java-agent.jar", "-jar", "app.jar"]
-```
+{{% svl-init-dotnet %}}
 
-#### Install tracing library
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-The Dockerfile in the previous step installs and configures the Java tracing library in your application to capture and submit traces.
-Tracing should work with the Dockerfile in the previous step. Alternatively, see [Tracing Java Applications - Instrument your application][2].
+{{% svl-init-ruby %}}
 
-[Sample code for a sample Java application][1].
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
-[1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/java/springboot
-[2]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
-
+{{% svl-init-php %}}
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Configure your application
+### 2. Configure your application
 
-To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
+- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
+- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
 
-{{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
+For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-- `DD_API_KEY` is your Datadog API key, used to send data to your Datadog account.
-- `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
-- `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
+### 3. Results
 
-**Note**: The application restarts when new settings are saved. These settings can alternatively be included in the Dockerfile. The only downside being the need to redeploy the application rather than updating the setting and restarting.
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
 
-### Results
+## Deployment
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure -> Serverless** to see your serverless metrics and traces.
+{{% aas-workflow-linux %}}
 
 ## Additional configurations
 
-### Viewing traces
+- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
-When new Application Settings are saved, Azure restarts the application. After the application restarts, you can view traces by searching for the service name (`DD_SERVICE`) in the [APM Service page][4] of Datadog.
+- **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-### Logs
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-If you use the [Azure integration][6], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+- **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
 
-### Custom metrics
+Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration.
 
-To enable custom metrics for your application with DogStatsD, add `DD_CUSTOM_METRICS_ENABLED` and set it as `true` in your Application Settings.
+### Environment Variables
 
-To configure your application to submit metrics, follow the appropriate steps for your runtime.
-
-- [Node][5]
-- [Python][11]
-- [Go][12]
+| Variable | Description |
+| -------- | ----------- |
+|`DD_API_KEY`| [Datadog API Key][6] - **Required**|
+| `DD_SITE` | [Datadog site][4] - **Required** |
+| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
+| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
+| `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
+| `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
+| `DD_ENV`          | See [Unified Service Tagging][5].                                       |
+| `DD_SOURCE`       | See [Unified Service Tagging][5].                                       |
+| `DD_TAGS`         | See [Unified Service Tagging][5].                                       |
 
 ## Troubleshooting
 
@@ -196,12 +135,20 @@ Share the content of the **Log stream** with [Datadog Support][14].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
-[2]: /getting_started/site/#access-the-datadog-site
-[3]: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
-[4]: /tracing/services/service_page/
-[5]: https://github.com/brightcove/hot-shots
-[6]: /integrations/azure/#log-collection
-[11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python#setup
-[12]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=go#setup
-[14]: /help
+
+[1]: /integrations/azure/#log-collection
+[2]: /tracing/trace_collection/library_config
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /getting_started/site/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /account_management/api-app-keys/
+[7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
+[8]: /metrics/distributions/
+[9]: /metrics/#time-and-space-aggregation
+[10]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[11]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[12]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[13]: /tracing/other_telemetry/connect_logs_and_traces/php
+[14]: /tracing/other_telemetry/connect_logs_and_traces/python
+[15]: /tracing/other_telemetry/connect_logs_and_traces/go
+[16]: /tracing/other_telemetry/connect_logs_and_traces/ruby

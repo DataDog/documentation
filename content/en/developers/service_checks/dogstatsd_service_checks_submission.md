@@ -1,6 +1,5 @@
 ---
 title: "Service Checks Submission: DogStatsD"
-kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 further_reading:
 - link: "/developers/dogstatsd/"
@@ -9,9 +8,6 @@ further_reading:
 - link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
-- link: "https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd"
-  tag: "GitHub"
-  text: "DogStatsD source code"
 ---
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for service checks with code examples.

@@ -1,0 +1,104 @@
+name: Validate Filenames
+
+on: [pull_request]
+
+# Stop the current running job if a new push is made to the PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  run_static_asset_validation:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Get list of added static files
+        id: getfile
+        run: |
+          echo $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} static | xargs) > files.txt
+          
+      - name: Validate filenames
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let changedFiles = fs.readFileSync('files.txt', 'utf8').trim();
+            changedFiles = changedFiles.match(/[^ ]+(?: [^ ]+)*?(?= [^ ]+\/[^ ]+|$)/g);
+            let invalidFiles = [];
+
+            // if changedFiles is null, exit early
+            if (!changedFiles) {
+              console.log('No files to validate');
+              process.exit(0);
+            }
+            
+            for (const file of changedFiles) {
+              const filename = file.split('/').pop();
+
+              // only run if a file name is not a combination of lowercase letters, numbers, hyphens, and underscores
+              if (!/^[a-z0-9]+([-_][a-z0-9]+)*\.[a-z0-9]+$/.test(filename)) {
+                const baseName = filename.substring(0, filename.lastIndexOf('.'));
+                const extension = filename.substring(filename.lastIndexOf('.'));
+                let suggestedName = baseName.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/ /g, '-') + extension;
+
+                // In the event that a file name is the same and just needs lowercase conversion, add a number
+                if (suggestedName === filename.toLowerCase()) {
+                  const splitSuggestedName = suggestedName.substring(0, suggestedName.lastIndexOf('.')).split('-')
+                  let lastPart = splitSuggestedName.pop();
+                  
+                  // if the end of the file name is a number, increment it
+                  if (!isNaN(lastPart)) {
+                    lastPart = (Number(lastPart) + 1).toString();
+                  } else {
+                    lastPart = lastPart + '-1';
+                  }
+                  
+                  suggestedName = splitSuggestedName.join('-') + '-' + lastPart + extension;
+                }
+
+                invalidFiles.push(`**Original:** ${filename}\n**Suggested:** ${suggestedName}\n`);
+              }
+            }
+            
+            // Write invalid files to a file
+            fs.writeFileSync('invalid_files.txt', invalidFiles.join('\n'));
+        id: validation
+
+      - name: Check if there are invalid files
+        id: check
+        run: |
+          if [[ -s invalid_files.txt ]]; then 
+            cat invalid_files.txt
+            echo "HAS_INVALID_FILES=true" >> $GITHUB_OUTPUT
+          else 
+            echo "HAS_INVALID_FILES=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post comment with suggestions
+        uses: actions/github-script@v7
+        if: ${{ steps.check.outputs.HAS_INVALID_FILES == 'true' }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const invalidFiles = fs.readFileSync('invalid_files.txt', 'utf8');
+            const body = `## :warning: Invalid File Name(s) \n\n File name(s) should have no spaces or capital letters, and should be separated by a hyphen "-" or underscore "_" \n The following file(s) have invalid name(s). Please update your file name(s) to these suggested changes:\n\n${invalidFiles}`;
+        
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+        env:
+          INVALID_FILES: ${{ steps.validation.outputs.invalid_files }}
+            
+      - name: Fail workflow if invalid files exist
+        if: ${{ steps.check.outputs.HAS_INVALID_FILES == 'true' }}
+        run: exit 1 

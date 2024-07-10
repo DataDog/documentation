@@ -1,9 +1,9 @@
 ---
-title: Opérations arithmétiques
-kind: documentation
 aliases:
-  - /fr/graphing/functions/arithmetic/
+- /fr/graphing/functions/arithmetic/
+title: Opérations arithmétiques
 ---
+
 ## Valeur absolue
 
 | Fonction | Description                             | Exemple                 |
@@ -56,6 +56,12 @@ Si une métrique `const_1{*}` est une constante de valeur `1`, alors `cumsum(con
 
 {{< img src="dashboards/functions/arithmetic/cumsum.png" alt="Fonction somme cumulée avec valeur absolue" style="width:80%;">}}
 
+## Somme cumulée dans les monitors
+
+La somme cumulée doit être évitée dans les requêtes de monitor, car sa fonction est visuelle. Lorsqu'elle est utilisée dans une requête dashboard ou notebook, les points reflètent les valeurs basées sur la période sélectionnée. Cela ne sʼapplique pas bien dans une requête monitor, car le monitor ne sait pas quelle période utiliser.
+
+Au lieu de cela, configurez [des périodes cumulées][1] dans votre période d'évaluation monitor.
+
 ## Intégrale
 
 | Fonction     | Description                       | Exemple                             |
@@ -80,3 +86,5 @@ Si une métrique `const_1{*}` est une constante de valeur `1`, alors `cumsum(con
     {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /fr/monitors/configuration/?tab=thresholdalert#cumulative-time-windows

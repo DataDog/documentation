@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: ラーニングセンター
   text: ダッシュボードをより効果的に活用する
-kind: documentation
 title: クエリ
 ---
 
@@ -77,9 +76,9 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 手動でデータをロールアップするには、[rollup 関数][11]を使用します。シグマのアイコンをクリックして関数を追加し、ドロップダウンメニューから `rollup` を選択します。次に、データを集計する方法と間隔 (秒) を選択します。
 
-このクエリにより、1 分のバケットでマシン全体の合計空きディスク容量の平均値を平均でロールアップしたことを表す 1  本の線を作成します。
+このクエリは、全マシンにわたる利用可能なディスクスペースの平均値を 1 分間隔で集計し、それを表す単一のラインを作成します。
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="シグマ追加関数アイコンをハイライトする system.disk.free メトリクスのロールアップ例" style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="マシン全体の system.disk.free メトリクスのロールアップ例" style="width:100%;">}}
 
 JSON ビューに切り替えると、以下のようなクエリが表示されます。
 
@@ -230,7 +229,7 @@ status:error / status:info
 [9]: /ja/metrics/#time-aggregation
 [10]: /ja/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /ja/dashboards/functions/rollup/
-[12]: /ja/dashboards/functions/#apply-functions-optional
+[12]: /ja/dashboards/functions/#function-types
 [13]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /ja/logs/explorer/search_syntax/
 [15]: /ja/dashboards/widgets/timeseries/#event-overlay

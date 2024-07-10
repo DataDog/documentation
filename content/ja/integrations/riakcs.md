@@ -34,12 +34,11 @@ draft: false
 git_integration_title: riakcs
 integration_id: riak-cs
 integration_title: Riak CS
-integration_version: 2.9.0
+integration_version: 2.10.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: riakcs
-oauth: {}
 public_title: Riak CS
 short_description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
 supported_os:
@@ -139,7 +138,7 @@ RiakCS チェックには、イベントは含まれません。
 - [Riak CS のパフォーマンスと可用性を監視][11]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riakcs/images/riakcs_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/riakcs/datadog_checks/riakcs/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

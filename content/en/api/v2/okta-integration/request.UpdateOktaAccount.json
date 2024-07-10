@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "auth_method": "oauth",
+      "domain": "https://example.okta.com/",
+      "client_id": "client_id",
+      "client_secret": "client_secret"
+    },
+    "type": "okta-accounts"
+  }
+}

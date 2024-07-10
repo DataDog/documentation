@@ -1,6 +1,5 @@
 ---
 title: User Monitoring and Protection
-kind: documentation
 aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
@@ -21,13 +20,17 @@ Instrument your services and track user activity to detect and block bad actors.
 
 [Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
+<div class="alert alert-info">
+<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+</div>
+
 The custom user activity for which out-of-the-box detection rules are available are as follow:
 
 | Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
-| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
-| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
+| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]               |
+| `users.login.failure`  | User ID and `usr.exists` are mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]  |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
@@ -74,7 +77,7 @@ Blocking
     .blockIfMatch();
 ```
 
-[1]: /tracing/trace_collection/compatibility/java/#setup
+[1]: /tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -309,9 +312,9 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // this is where you get User based on userId/password credentials
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
         Map<String, String> metadata = new HashMap<>();
         metadata.put("email", user.getEmail());
@@ -334,15 +337,19 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // this is where you get User based on userId/password credentials
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
         // if function returns null - user doesn't exist
         boolean userExists = (user != null);
+        String userId = null;
         Map<String, String> metadata = new HashMap<>();
         if (userExists != null) {
+            userId = getUserId(userName)
             metadata.put("email", user.getEmail());
+        } else {
+            userId = user.getEmail();
         }
 
         // track user authentication error events
@@ -414,6 +421,7 @@ using Datadog.Trace.AppSec;
 
 void OnLogonFailure(string userId, bool userExists, ...)
 {
+    // If no userId can be provided, any unique user identifier (username, email...) may be used
     // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
@@ -463,7 +471,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
   userdata := /* optional extra user data */
 
-  // Track login success
+  // Track login success, replace `my-uid` by a unique identifier of the user (such as numeric, username, and email)
   if appsec.TrackUserLoginSuccessEvent(r.Context(), "my-uid", metadata, userdata) != nil {
     // The given user id is blocked and the handler should be aborted asap.
     // The blocking response will be sent by the appsec middleware.
@@ -479,6 +487,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
   metadata := /* optional extra event metadata */ 
+  // Replace `my-uid` by a unique identifier of the user (numeric, username, email...)
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
 ```
@@ -514,6 +523,7 @@ Traces containing login success/failure events can be queried using the followin
 require 'datadog/kit/appsec/events'
 
 trace = Datadog::Tracing.active_trace
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' })
 ```
 {{% /tab %}}
@@ -523,10 +533,12 @@ Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id'
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
-# if the user id exists
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+
+# if the user exists
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true)
 
-# if the user id doesn't exist
+# if the user doesn't exist
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false)
 ```
 {{% /tab %}}
@@ -561,6 +573,8 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Login failure" %}}
 ```php
 <?php
+// If no numeric userId is available, you may use any unique string as userId instead (username, email...)
+// Make sure that the value is unique per user (and not per attacker/IP)
 \datadog\appsec\track_user_login_failure_event($id, $exists, ['email' => $email])
 ?>
 ```
@@ -590,7 +604,7 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-  id: 'user-id', // id is mandatory
+  id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
   email: 'user@email.com' // other fields are optional
 }
 const metadata = { custom: 'value' } // optional metadata with arbitrary fields
@@ -605,7 +619,7 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 const tracer = require('dd-trace')
 
 // in a controller:
-const userId = 'user-id'
+const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
 const userExists = true // if the user login exists in database for example
 const metadata = { custom: 'value' } // optional metadata with arbitrary fields
 
@@ -658,6 +672,7 @@ from ddtrace import tracer
 metadata = {"custom": "customvalue"}
 # exists indicates if the failed login user exists in the system
 exists = False
+# if no numeric userId is available, any unique identifier will do (username, email...)
 track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
 {{% /tab %}}
@@ -667,7 +682,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
-metadata = {"usr.id": "12345"}
+metadata = {"usr.id": "userid"}
 event_name = "users.signup"
 track_custom_event(tracer, event_name, metadata)
 ```
@@ -678,6 +693,50 @@ track_custom_event(tracer, event_name, metadata)
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
+
+### Tracking business logic information without modifying the code
+
+If your service has ASM enabled and [Remote Configuraton][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
+
+To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
+
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
+
+This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to ASM. If you don't need the condition, you may set a broad condition to match everything.
+
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
+
+Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
+
+
+[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
+
+## Automatic user activity event tracking
+
+When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
+
+The events that can be automatically detected are:
+
+- `users.login.success`
+- `users.login.failure`
+- `users.signup`
+
+### Automatic user activity event tracking mode
+
+Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+
+In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+
+In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+
+## Disabling automatic user activity event tracking
+
+If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
 ## Further Reading
 
@@ -691,3 +750,6 @@ track_custom_event(tracer, event_name, metadata)
 [8]: /security/default_rules/bl-account-deletion-ratelimit/
 [9]: /security/default_rules/bl-password-reset/
 [10]: /security/default_rules/bl-payment-failures/
+[11]: https://guid.one/guid
+[12]: /security/default_rules/appsec-ato-bf/
+[13]: /security/default_rules/distributed-ato-ua-asn/

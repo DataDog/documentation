@@ -31,7 +31,7 @@ transforms:
   ## steps with tags set up. Datadog recommends these tag assignments.
   ## They show which data has been moved over to OP and what still needs
   ## to be moved.
-  LOGS_YOUR_STEPS:
+  logs_enrich:
     type: remap
     inputs:
       - logs_remove_wrong_level
@@ -73,6 +73,7 @@ sinks:
     inputs:
       - logs_finish_ddtags
     default_api_key: "${DD_API_KEY}"
+    site: "${DD_SITE}"
     compression: gzip
     buffer:
        type: disk
@@ -82,6 +83,7 @@ sinks:
     inputs:
       - metrics_add_dd_tags
     default_api_key: "${DD_API_KEY}"
+    site: "${DD_SITE}"
     buffer:
       type: disk
       max_size: 51539607552

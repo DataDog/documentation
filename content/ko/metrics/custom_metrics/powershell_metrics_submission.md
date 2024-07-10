@@ -4,7 +4,6 @@ aliases:
 - /ko/developers/faq/submitting-metrics-via-powershell
 - /ko/developers/metrics/powershell_metrics_submission/
 - /ko/metrics/powershell_metrics_submission
-kind: 설명서
 title: '메트릭 제출: PowerShell'
 ---
 

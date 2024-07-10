@@ -13,7 +13,7 @@ integration_id: azure-dbformariadb
 integration_title: Microsoft Azure DB for MariaDB
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_db_for_mariadb
 public_title: Datadog-Microsoft Azure DB for MariaDB インテグレーション

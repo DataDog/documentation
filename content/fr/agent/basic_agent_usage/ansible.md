@@ -1,7 +1,6 @@
 ---
 dependencies:
   - https://github.com/DataDog/ansible-datadog/blob/main/README.md
-kind: documentation
 title: Ansible
 ---
 Le rôle Ansible pour Datadog permet d'installer et de configurer l'Agent et les intégrations Datadog. La version `4` du rôle installe l'Agent Datadog v7 par défaut.
@@ -298,8 +297,8 @@ Lorsque la variable `datadog_windows_download_url` n'est pas définie, le packag
 
 | # | URL par défaut du package MSI Windows                                                  |
 |---|----------------------------------------------------------------------------------|
-| 6 | https://windows-agent.datadoghq.com/datadog-agent-6-latest.amd64.msi |
-| 7 | https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi |
+| 6 | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi |
+| 7 | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi |
 
 Pour remplacer le comportement par défaut, définissez cette variable sur autre chose qu'une chaîne vide.
 

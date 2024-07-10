@@ -1,11 +1,10 @@
 ---
 title: Azure Configuration Guide for Cloud SIEM
-kind: documentation
 further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
-- link: "/security/explorer/"
+- link: "/security/cloud_siem/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
 - link: "/security/cloud_siem/log_detection_rules/"
@@ -19,8 +18,7 @@ Cloud SIEM applies detection rules to all processed logs in Datadog to detect th
 
 This guide walks you through configuring Microsoft Azure to send logs to Datadog so that you can start detecting threats on your Azure Platform logs.
 
-<div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/integrations/azure/?tab=manualinstallation#log-collection
-">Microsoft Azure log collection</a>. </div>
+<div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/">Microsoft Azure log collection</a>. </div>
 
 {{< tabs >}}
 {{% tab "Automated Installation" %}}

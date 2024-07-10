@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
   tag: ブログ
   text: 根本原因の自動分析
-kind: documentation
 title: Watchdog RCA
 ---
 
@@ -39,7 +38,7 @@ Watchdog は、4 種類の根本原因をサポートしています。
 
 * APM Deployment Tracking で取得されたバージョンの変更
 * APM でインスツルメントされたサービスのヒット率メトリクスで取得されたトラフィックの増加
-* AWS EC2 のインテグレーションメトリクスで取得された AWS インスタンスの障害
+* Amazon EC2 のインテグレーションメトリクスでキャプチャされた AWS インスタンスの障害
 * Datadog Agent のシステムメトリクスで取得されたディスク容量の不足
 
 Watchdog は、レイテンシーの増加や新たなエラーなど、アプリケーションパフォーマンスの低下をインシデントの根本原因として分類することはありません。Datadog では、アプリケーションパフォーマンスの低下という初期症状を、以下に示すように**重大な障害**と呼んでいます。

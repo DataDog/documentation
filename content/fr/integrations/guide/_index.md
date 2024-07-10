@@ -5,7 +5,7 @@ cascade:
     rank: 20
     subcategory: Guides sur les intégrations
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides sur les intégrations
 ---
@@ -26,8 +26,7 @@ title: Guides sur les intégrations
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag=" kafka" >}}Échec de la récupération du stub RMIServer par l'Agent{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag=" network" >}}Envoyer des métriques de host TCP/UDP à l'API Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}OID compatibles et couramment utilisés pour SNMP{{< /nextlink >}} 
-    {{< nextlink href="integrations/guide/pivotal-cloud-foundry-manual-setup" tag=" pivotal cloud foundry" >}}Configuration manuelle de Pivotal Cloud Foundry{{< /nextlink >}}     
-{{< /whatsnext >}}
+    {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}Gestion des versions pour les intégrations basées sur OpenMetrics{{< /nextlink >}} {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Configuration manuelle de Pivotal Cloud Foundry{{< /nextlink >}} {{< /whatsnext >}}
 
 {{< whatsnext desc="Guides AWS :" >}}
     {{< nextlink href="getting_started/integrations/aws/" tag=" AWS" >}}Configuration automatique de l'intégration AWS avec CloudFormation{{< /nextlink >}}
@@ -44,12 +43,17 @@ title: Guides sur les intégrations
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Guides Azure :" >}}
-    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Utilisation du Cloud Adoption Framework Azure avec Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Métriques Count et Status d'Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Guide de configuration manuelle d'Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Guide de configuration manuelle de l'intégration native Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Guide de gestion programmatique de l'intégration Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Guide de gestion programmatique de l'intégration native Azure{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Gestion de l'intégration native Azure{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Dépannage d'Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Utilisation du Cloud Adoption Framework Azure avec Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Dépannage Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Architecture et configuration d'Azure{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Statut et métriques count Azure{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}Les métriques des machines virtuelles Azure n'apparaissent pas dans l'application{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Machines virtuelles Azure hors tension dans la liste des infrastructures{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Machines virtuelles Azure hors ligne dans la liste des infrastructures{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Commandes pour installer l'extension Datadog/Azure{{< /nextlink >}}
 {{< /whatsnext >}}
 

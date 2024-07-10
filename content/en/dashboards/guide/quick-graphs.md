@@ -1,11 +1,6 @@
 ---
 title: Quick Graphs
-kind: documentation
 ---
-
-<div class="alert alert-warning">
-    Quick Graph is currently in beta.
-</div>
 
 ## Overview
 
@@ -73,11 +68,11 @@ Click **Export** to save your work to a Dashboard or Notebook. You can always co
 [5]: /logs/explorer/
 [6]: /tracing/trace_explorer/
 [7]: /real_user_monitoring/explorer/search/
-[8]: /security/explorer/
+[8]: /security/
 [9]: /events/
 [10]: /continuous_integration/pipelines/
 [11]: /continuous_integration/tests/
-[12]: /security/misconfigurations/findings/
+[12]: /security/cloud_security_management/misconfigurations/findings/
 [13]: /dashboards/widgets/timeseries/
 [14]: /dashboards/widgets/top_list/
 [15]: /dashboards/widgets/query_value/

@@ -1,6 +1,5 @@
 ---
 title: Log Facets
-kind: documentation
 description: 'Log Facets and Facet Panel'
 aliases:
     - /logs/facets
@@ -114,9 +113,17 @@ Hiding facets is specific to your own troubleshooting context and does not impac
 
 ### Group facets
 
-Facets are grouped into meaningful themes, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see how to [manage facets](#manage-facets)) is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
+Facets are grouped into meaningful themes to ease navigation in the facet list. Assigning or reassigning a group for a facet only affects the display in the facet list and has no impact on search and analytics capabilities.
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
+
+To group facets:
+
+1. Click the cog for the facet.
+2. Select **Edit facet**.
+3. Click the **Advanced options** section to expand it.
+4. In the **Group** field, enter the name of the group that you want the facet to be in.
+5. Click **Update**.
 
 ### Filter facets
 
@@ -158,7 +165,7 @@ As a matter of good practice, always consider using an existing facet rather tha
 
 To create a facet on an array of JSON objects, first use a [grok parser][29] to extract the attribute and then create a facet for that attribute.
 
-**Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
+**Note**: Once a facet is created, its content is populated **for all new logs**. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
 #### Log side panel
 

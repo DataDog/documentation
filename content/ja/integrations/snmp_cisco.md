@@ -28,10 +28,9 @@ integration_id: snmp-cisco
 integration_title: Cisco
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_cisco
-oauth: {}
 public_title: Cisco
 short_description: Cisco ネットワークデバイスから SNMP メトリクスを収集
 supported_os:

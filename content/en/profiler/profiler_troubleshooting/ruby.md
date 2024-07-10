@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the Ruby Profiler
-kind: Documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40
@@ -14,22 +13,8 @@ further_reading:
 
 If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
-- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Operating system type and version (for example, Ubuntu Linux 22.04)
 - Runtime type, version, and vendor (for example, Ruby 2.7.3)
-
-## Application triggers "stack level too deep (SystemStackError)" errors
-
-This issue is not expected to happen since [`dd-trace-rb` version `0.54.0`][3].
-If you're still running into it, [open a support ticket][2] taking care to include the full backtrace leading to the error.
-
-Prior to version `0.54.0`, the profiler needed to instrument the Ruby VM to track thread creation, which clashed
-with similar instrumentation from other gems.
-
-If you're using any of the below gems:
-
-* `rollbar`: Ensure you're using version 3.1.2 or newer.
-* `logging`: Disable `logging`'s thread context inheritance by setting the `LOGGING_INHERIT_CONTEXT` environment
-  variable to `false`.
 
 ## Missing profiles for Resque jobs
 
@@ -69,9 +54,9 @@ Rarely, native extensions or libraries called by them may have missing or incorr
 The following incompatibilities are known:
 * Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
 * [Using the `rugged` gem.][10]
-* [Using the `passenger` gem/Phusion Passenger web server][11] (Auto-detected starting from 1.13.0 or later).
+* Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
 
-In these cases, the profiler automatically detects the incompatibility and applies a workaround.
+In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
 
 If you encounter failures or errors from Ruby gems that use native extensions other than those listed above, you can manually enable the "no signals" workaround, which avoids the use of `SIGPROF` signals.
 To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
@@ -87,6 +72,22 @@ end
 Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
 
+## Segmentation faults in `gc_finalize_deferred` in Ruby versions 2.6 to 3.2
+
+A workaround for this issue is automatically applied since [`dd-trace-rb` version 1.21.0][3]. Datadog recommends upgrading to this version or later to fix this issue.
+
+Prior to version 1.21.0, in rare situations the profiler could trigger [Ruby VM Bug #19991][12] that manifests itself as a "Segmentation fault" with a crash stack trace including the `gc_finalize_deferred` function.
+
+This bug has been fixed for Ruby 3.3 and above. For older Ruby versions (and prior to dd-trace-rb 1.21.0), you can use the "no signals" workaround to resolve this issue.
+
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.no_signals_workaround_enabled = true
+end
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -94,7 +95,7 @@ Doing this enables Datadog to add them to the auto-detection list, and to work w
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
+[3]: https://github.com/datadog/dd-trace-rb/releases/tag/v1.21.0
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 [6]: https://bugs.ruby-lang.org/issues/18073
@@ -103,3 +104,4 @@ Doing this enables Datadog to add them to the auto-detection list, and to work w
 [9]: https://bugs.mysql.com/bug.php?id=83109
 [10]: https://github.com/DataDog/dd-trace-rb/issues/2721
 [11]: https://github.com/DataDog/dd-trace-rb/issues/2976
+[12]: https://bugs.ruby-lang.org/issues/19991

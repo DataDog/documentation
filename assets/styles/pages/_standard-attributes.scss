@@ -1,0 +1,64 @@
+.standard-attributes-main{
+
+    #standard-attributes-nav {
+        position: sticky;
+        top: 95px;
+        align-self: flex-start;
+        z-index: 2;
+        background-color: white;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        .filters-standard-attributes button {
+            height: 40px;
+            i{
+                color: $brand-primary;
+                position: relative;
+                top: 4px;
+            }
+            &:hover, &.active{
+                i{
+                    color: white;
+                }
+            }
+        }
+        .search-standard-attributes input {
+            padding: 9px 8px;
+            border-radius: 4px;
+            border: $gray-light 1px solid; 
+            &:focus {
+                outline: transparent;
+                box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+                border: 1px solid transparent;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        .table-wrapper {
+            overflow-x: unset;
+            
+            table {
+                table-layout: fixed;
+    
+                thead > tr {
+                    th:nth-child(1) {
+                        width: 8%;
+                    }
+    
+                    th:nth-child(2) {
+                        width: 14%;
+                    }
+    
+                    th:nth-child(3) {
+                        width: 30%;
+                    }
+    
+                    th:nth-child(4) {
+                        width: 8%;
+                    }
+                }
+            }
+        }
+    }
+}

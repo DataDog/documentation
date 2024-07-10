@@ -20,12 +20,11 @@ integration_id: rapdev-dashboard-widget-pack
 integration_title: ダッシュボードウィジェットパック
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_dashboard_widget_pack
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

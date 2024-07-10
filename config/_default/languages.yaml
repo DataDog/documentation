@@ -9,10 +9,13 @@ en:
       - Redirects
     page:
       - HTML
-      
+
 fr:
   languageName: "Français"
   weight: 2
 ja:
   languageName: "日本語"
   weight: 3
+ko:
+  languageName: "한국어"
+  weight: 4

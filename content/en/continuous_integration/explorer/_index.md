@@ -1,14 +1,10 @@
 ---
 title: Continuous Integration Visibility Explorer
-kind: documentation
-description: Learn about the CI Visibility Explorer for test runs and pipeline executions.
+description: Learn how to search and filter your pipeline executions in the CI Visibility Explorer.
 further_reading:
   - link: "/continuous_integration/pipelines/"
     tag: "Documentation"
     text: "Explore pipeline data to resolve build problems"
-  - link: "/continuous_integration/tests/"
-    tag: "Documentation"
-    text: "Explore test data to find and fix problem tests"
   - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
     tag: "Blog"
     text: "Configure pipeline alerts with Datadog CI monitors"
@@ -16,92 +12,46 @@ further_reading:
 
 ## Overview
 
-The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs or pipeline executions at multiple levels using any tag.
+The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) pipeline executions at multiple levels using any tag.
 
-{{< tabs >}}
-{{% tab "Test Runs" %}}
-
-Navigate to [**CI** > **Test Runs**][101] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. 
-  
-{{< img src="/continuous_integration/test_runs.png" text="Test Runs page" style="width:100%" >}}
-
-The **Test** panel on the left lists default facets you can use to search for your tests.
-
-| Facet            | Description                                                            |
-|------------------|------------------------------------------------------------------------|
-| Test Status      | The test status: `Passed` or `Failed`.                                 |
-| Duration         | Length of time for the test to complete.                               |
-| Test Service     | The test service instrumented with CI Visibility.                      |
-| Test Name        | The name of the test.                                                  |
-| Test Suite       | The name of the service.                                               |
-| Flaky            | Whether or not a test is a flaky test: `true` or `false`.              |
-| Has Parameters   | Whether or not a test has parameters: `true` or `false`.               |
-| Known Flaky      | Whether or not a test is known to be flaky: `true` or `false`.         |
-| Language         | The language of the service.                                           |
-| New Flaky        | Whether or not this flaky test has occurred before: `true` or `false`. |
-| Test Code Owners | The team name of the service codeowners.                               |
-| Test Fingerprint | The fingerprint of the test.                                           |
-| Test Framework   | The framework of the test.                                             |
-| Test Full Name   | The full name of the test.                                             |
-| Test Module      | The module of the test.                                                |
-| Test Traits      | The traits of the test such as `category:flaky`.                       |
-| Test Type        | The type of the test such as `test`.                                   |
-
-You can filter by test level: session, module, suite, and test run. Each test level represents a different level of aggregation of tests.
-
-{{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
-
-### Sessions
-Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
-
-For JUnit report uploads there is 1 session per report file uploaded.
-
-### Module
-The definition of module changes slightly per language:
-
-* In .NET, a test module groups every test that is run under the same [unit test project][104].
-* In Swift, a test module groups every test that is run for a given bundle.
-* In JavaScript, the test modules map one-to-one to test sessions.
-* In Java, a test module groups every test that is run by the same Maven Surefire/Failsafe or Gradle Test task execution.
-* In JUnit report uploads, the test modules map one-to-one to test sessions.
-
-An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][105].
-
-### Suite
-A test suite is a group of tests exercising the same unit of code.
-
-An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][106].
-
-Test run data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
-
-[101]: https://app.datadoghq.com/ci/test-runs
-[102]: https://app.datadoghq.com/dashboard/lists
-[103]: https://app.datadoghq.com/notebook/list
-[104]: https://learn.microsoft.com/en-us/visualstudio/test/create-a-unit-test-project?view=vs-2022#to-create-a-unit-test-project
-[105]: https://github.com/realm/SwiftLint/blob/7738f0c0a5990201ca6556bdb2f13f8e67b5191d/Package.swift#L71
-[106]: https://github.com/DataDog/datadog-ci/blob/6de6ea3bbffa57d8576422535061ca35c759feb6/src/commands/junit/__tests__/upload.test.ts
-
-{{% /tab %}}
-{{% tab "Pipeline Executions" %}}
-
-Navigate to [**CI** > **Pipeline Executions**][101] to see your CI pipeline execution results across the following levels: **Pipeline**, **Stage**, **Job**, **Step**, and **Command**.
+Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][5] to see your CI pipeline execution results across the following levels: **Pipeline**, **Stage**, **Job**, **Step**, and **Command**.
 
 {{< img src="/continuous_integration/pipeline_executions.png" text="CI Pipeline Executions page" style="width:100%" >}}
 
-The **CI** panel on the left lists default facets you can use to search for your tests.
+## Default CI facets
 
-| Facet           | Description                                                   |
-|-----------------|---------------------------------------------------------------|
-| CI Status       | The pipeline status: `Success` or `Failure`.                  |
-| Duration        | Length of time for the pipeline to execute.                   |
-| Pipeline ID     | The ID of the pipeline.                                       |
-| CI Provider     | The name of the CI provider.                                  |
-| Node Labels     | The labels of the node.                                       |
-| Node Name       | The name of the node.                                         |
-| Partial Retry   | Whether or not a partial retry is enabled: `true` or `false`. |
-| Pipeline Number | The number of the pipeline.                                   |
-| Pipeline URL    | The URL of the pipeline.                                      |
-| Queue time      | Length of time for the pipeline wait for the queue.           |
+The **CI** panel on the left lists default facets you can use to search for your pipeline executions.
+
+| Facet | Description |
+|---|---|
+| CI Status | The status of the CI execution: `Success` , `Failure`, or `Canceled`. |
+| CI Instance | The instance name of the CI provider. |
+| Duration | Length of time for the pipeline to execute. |
+| Pipeline ID | The ID of the pipeline. |
+| CI Provider | The name of the CI provider. |
+| Node Labels | The labels of the node. |
+| Node Name | The name of the node. |
+| Partial Pipeline | Refers to CI pipeline executions that include retries, manual approvals, or other incomplete sequences. |
+| Partial Retry | Indicates whether the CI execution was a retry of a previous execution. |
+| Manually Triggered | Indicates whether the CI execution was manually triggered. |
+| Parameters | The user-defined parameters when a pipeline or job triggers. |
+| Pipeline Number | The number of the pipeline. |
+| Pipeline URL | The URL of the pipeline. |
+| Queue Time | The total duration a job or task spent waiting in the CI queue before execution. |
+| Deployment | The GitLab environment deployed with a CI pipeline. |
+| Deployment Action | The action taken within GitLab's deployed environment. |
+| Command Name | The user-defined identifier for a specific command within the CI pipeline. |
+| Command | The command line that was run to generate the custom pipeline span. |
+| Downstream Pipeline | Indicates if this pipeline is downstream of another pipeline. |
+| Upstream Pipeline ID | Identifier for the pipeline execution that precedes and triggers the current pipeline. |
+| Step Name | The name assigned to a specific step within a CI pipeline. |
+| Error Domain | The type of error for a CI execution such as a provider, user, or unknown. |
+| Run time | The total duration spent executing the CI pipeline. |
+| Wait time | The total time spent waiting for manual approval within a CI execution. |
+| Is Deployment | Indicates whether a job within the pipeline initiated a deployment. |
+| Contains Deployment | Indicates whether the pipeline includes any jobs that trigger a deployment. |
+
+For more information about common facets that you can use as part of your search query in the CI Visibility Explorer, see [Pipeline Execution Facets][3]. 
 
 ## Pipeline executions details and traces
 
@@ -111,42 +61,31 @@ Below are three graphs that visualize the durations of your most active pipeline
 
 {{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs for Duration, Errored, and Executions" style="width:100%;">}}
 
-Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
+Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details view).
 
-
-CI pipeline data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
-
-[101]: https://app.datadoghq.com/ci/pipeline-executions
-[102]: https://app.datadoghq.com/dashboard/lists
-[103]: https://app.datadoghq.com/notebook/list
-[104]: https://app.datadoghq.com/ci/pipeline-executions
-[105]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-
-{{% /tab %}}
-{{< /tabs >}}
+CI pipeline data is available in [dashboards][6] and [notebooks][7], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
 ## Search and filter
 
-You can narrow down, broaden, or shift your focus on a subset of test runs or pipeline executions by clicking on the facets to the left or writing your own custom query in the search bar. When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left.
+You can narrow down, broaden, or shift your focus on a subset of pipeline executions by clicking on the facets to the left or writing your own custom query in the search bar. When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left.
 
-- To learn how to search for tests and pipelines, see [Search and Manage][1].
+- To learn how to search for pipelines, see [Search and Manage][1].
 - To learn how to create queries, see [Search Syntax][2].
 
 ## Analyze
 
-Group your queried test runs or pipeline executions into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. By using [facets][3], which you do not need to create to search for attributes, you can accomplish the following actions:
+Group your queried pipeline executions into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. By using [facets][3], which you do not need to create to search for attributes, you can accomplish the following actions:
 
 - Search and keep track of the progress of tests running in a CI/CD pipeline.
 - Investigate every CI/CD job execution to identify and troubleshoot failing test runs.
-- Identify flaky tests to fix.
 
 ## Visualize
 
-Select a visualization type to visualize the outcomes of your filters and aggregations and better understand your test runs or pipeline executions. For example, you can view your test results in a list to organize your test data into columns, or in a timeseries graph to measure your pipeline data over time.
+Select a visualization type to visualize the outcomes of your filters and aggregations and better understand your pipeline executions. For example, you can view your pipeline executions in a list to organize your pipeline data into columns, or in a [timeseries graph][8] to measure your pipeline data over time.
 
 ## Export
 
-Export your view in the CI Visibility Explorer to reuse it later or in different contexts.
+[Export your view][4] in the CI Visibility Explorer to reuse it later or in different contexts.
 
 ## Further reading
 
@@ -155,3 +94,8 @@ Export your view in the CI Visibility Explorer to reuse it later or in different
 [1]: /continuous_integration/search
 [2]: /continuous_integration/explorer/search_syntax
 [3]: /continuous_integration/explorer/facets
+[4]: /continuous_integration/explorer/saved_views
+[5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://app.datadoghq.com/dashboard/lists
+[7]: https://app.datadoghq.com/notebook/list
+[8]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries

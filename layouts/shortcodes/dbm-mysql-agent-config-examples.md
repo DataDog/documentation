@@ -6,16 +6,16 @@ In these cases, Datadog recommends limiting the number of instances per Agent to
 init_config:
 instances:
   - dbm: true
-    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    host: example-service-primary.example-host.com
     port: 3306
     username: datadog
     password: '<PASSWORD>'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
-    host: products–replica-1.us-east-1.rds.amazonaws.com
+    host: example-service-replica-1.example-host.com
     port: 3306
     username: datadog
     password: '<PASSWORD>'
@@ -24,9 +24,9 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
-    host: products–replica-2.us-east-1.rds.amazonaws.com
+    host: example-service-replica-2.example-host.com
     port: 3306
     username: datadog
     password: '<PASSWORD>'
@@ -35,12 +35,12 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
     [...]
 ```
 
 ### Storing passwords securely
-While it is possible to declare passwords directly in the Agent configuration files, it is a more secure practice to encrypt and store database credentials elsewhere using secret management software such as [Vault](https://www.vaultproject.io/). The Agent is able to read these credentials using the `ENC[]` syntax. Review the [secrets management documentation](/agent/guide/secrets-management/) for the required setup to store these credentials. The following example shows how to declare and use those credentials:
+While it is possible to declare passwords directly in the Agent configuration files, it is a more secure practice to encrypt and store database credentials elsewhere using secret management software such as [Vault](https://www.vaultproject.io/). The Agent is able to read these credentials using the `ENC[]` syntax. Review the [secrets management documentation](/agent/configuration/secrets-management/) for the required setup to store these credentials. The following example shows how to declare and use those credentials:
 ```yaml
 init_config:
 instances:
@@ -85,11 +85,11 @@ instances:
     port: 5000
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: products-primary
+    reported_hostname: example-service-primary
   - dbm: true
     host: localhost
     port: 5001
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: products-replica-1
+    reported_hostname: example-service-replica-1
 ```

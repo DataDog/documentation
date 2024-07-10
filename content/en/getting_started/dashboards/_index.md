@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Dashboards
-kind: documentation
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"
@@ -49,7 +48,7 @@ Dashboards can also help you track down persistent problems and fix them. _Troub
 
 Datadog provides many out-of-the-box dashboards for features and integrations. For the infrastructure you monitor, check out the out-of-the-box dashboards that are provided with Datadog:
 
-1. Go to **Dashboards > Dashboards list** and search for the name of an integration you have added, for example `Redis`, or a feature you use, such as `RUM`. 
+1. In Datadog, go to the [Dashboards List page][2] and search for the name of an integration you have added. For example, `Redis`, or a feature you use, such as `RUM`. 
 2. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
 3. Explore the links in the out-of-the-box dashboard's title dropdown to find more information about how people are using them.
 
@@ -57,8 +56,8 @@ Datadog provides many out-of-the-box dashboards for features and integrations. F
 
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
-1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the export icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
-  {{< img src="/getting_started/dashboards/clone_dashboard.png" alt="Clone dashboard option in the dropdown menu" style="width:100%;" >}}
+1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Configuration Actions menu (the Configure button on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
+  {{< img src="getting_started/dashboards/configure_clone_dashboard.png" alt="Clone dashboard option in the Configuration Actions menu" style="width:100%;" >}}
 2. Edit the clone by opening it and clicking **Edit widgets**. 
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
@@ -67,19 +66,19 @@ A common way to start a dashboard is by encountering a similar dashboard already
 
 ## Learn more about metrics
 
-Through integrations, Datadog collects [metrics][2] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][3] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
+Through integrations, Datadog collects [metrics][3] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][4] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
 
-For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][4] section of the AWS S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
+For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][5] section of the Amazon S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
 
 ## Add widgets and refine what they show
 
-After you've selected a few metrics to add to your dashboard, experiment with various [widget types][5], [queries][6], [functions][7], and [aggregation approaches][8], to display the data in ways that best answer the questions you have. 
+After you've selected a few metrics to add to your dashboard, experiment with various [widget types][6], [queries][7], [functions][8], and [aggregation approaches][9], to display the data in ways that best answer the questions you have. 
 
-By specifying Template variables, you can make one dashboard answer questions for a selection of scenarios. For example, you can create a time graph that shows latency metrics for whichever data center geography the user selects from the dashboard's variables dropdown, or for all of them together. For more information, see [Template Variables][9].
+By specifying Template variables, you can make one dashboard answer questions for a selection of scenarios. For example, you can create a time graph that shows latency metrics for whichever data center geography the user selects from the dashboard's variables dropdown, or for all of them together. For more information, see [Template Variables][10].
 
-You can make graphs easier to read by adjusting Y-axis ranges, colors, or legends, or by adding markers and event overlays. See the [Dashboards documentation][10] for all the ways you can customize and refine [timeseries][11] and [other widgets][5].
+You can make graphs easier to read by adjusting Y-axis ranges, colors, or legends, or by adding markers and event overlays. See the [Dashboards documentation][11] for all the ways you can customize and refine [timeseries][12] and [other widgets][6].
 
-For more details and examples of these techniques, sign up for the online learning course [Building Better Dashboards][12].
+For more details and examples of these techniques, sign up for the online learning course [Building Better Dashboards][13].
 
 ## Try out other widgets
 
@@ -92,10 +91,10 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
  - **Tables**: Show lists of metrics grouped by tag keys.
  - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
  - **Host map**: Show a diagram of, for example, the hosts in your infrastructure with colors that show status of their integrations or services.
- - **Service Level Objectives (SLO)**: Show team performance against goals with an SLO summary widget, and group it additional widgets that show details for SLI metrics.
+ - **Service Level Objectives (SLO)**: Show team performance against goals with an SLO widget, and group it additional widgets that show details for SLI metrics.
  - **Distributions**: Show, for example, a histogram of number of different types of events in a containerized environment, the number of critical errors in each service, website flow (number of users getting to page 2, page 3, page 4), or latency percentile buckets.
 
-See [Widgets][5] for more information and examples of setting up these graphs.
+See [Widgets][6] for more information and examples of setting up these graphs.
 
 ## Organize, link, and analyze
 
@@ -107,23 +106,23 @@ There are two ways to create links from a dashboard to any target URL:
  - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for analyzing data or taking corrective action. 
      {{< img src="getting_started/dashboards/opening_custom_link.mp4" alt="Opening a custom link" video=true >}}
 
-## What's next 
+## What's next
 
 ### Share your dashboards outside of the Datadog site
 
-Click **Configure Public URL** in a dashboard's export menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account. For more information, see [Sharing Dashboards][13].
+Click **Configure Public URL** in a dashboard's export menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account. For more information, see [Sharing Dashboards][14].
 
-Integrate with your team communications by using the [Slack integration][14] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
+Integrate with your team communications by using the [Slack integration][15] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
 
 ### Create multiple dashboards quickly
 
 Every dashboard has a JSON representation that you can copy or export from the Settings menu. Each widget on the dashboard also has a JSON definition, which you can see and edit by opening the widget editor (pencil icon) and clicking the JSON tab under **Graph your data**.
 
-Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][15], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
+Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][16], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
 
 ### View Dashboards from the Datadog Mobile App
 
-View your dashboards on your mobile device with the [Datadog Mobile App][16], available on the [Apple App Store][17] and [Google Play Store][18]. 
+View your dashboards on your mobile device with the [Datadog Mobile App][17], available on the [Apple App Store][18] and [Google Play Store][19]. 
 
 The mobile app enables you to view and search all of the dashboards that you have access to in your Datadog organization, and filter them using the same template variables used in the Datadog web app.
 
@@ -134,20 +133,21 @@ The mobile app enables you to view and search all of the dashboards that you hav
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/
-[2]: /metrics/introduction/
-[3]: /metrics/explorer/
-[4]: /integrations/amazon_s3/#data-collected
-[5]: /dashboards/widgets/
-[6]: /dashboards/querying/
-[7]: /dashboards/functions/
-[8]: /metrics/distributions/
-[9]: /dashboards/template_variables/
-[10]: /dashboards/
-[11]: /dashboards/widgets/timeseries/
-[12]: https://learn.datadoghq.com/courses/building-better-dashboards/
-[13]: /dashboards/sharing/
-[14]: /integrations/slack/
-[15]: /api/v1/dashboards/
-[16]: /service_management/mobile/
-[17]: https://apps.apple.com/app/datadog/id1391380318
-[18]: https://play.google.com/store/apps/details?id=com.datadog.app
+[2]: https://app.datadoghq.com/dashboard/lists
+[3]: /metrics/introduction/
+[4]: /metrics/explorer/
+[5]: /integrations/amazon_s3/#data-collected
+[6]: /dashboards/widgets/
+[7]: /dashboards/querying/
+[8]: /dashboards/functions/
+[9]: /metrics/distributions/
+[10]: /dashboards/template_variables/
+[11]: /dashboards/
+[12]: /dashboards/widgets/timeseries/
+[13]: https://learn.datadoghq.com/courses/building-better-dashboards/
+[14]: /dashboards/sharing/
+[15]: /integrations/slack/
+[16]: /api/v1/dashboards/
+[17]: /mobile/
+[18]: https://apps.apple.com/app/datadog/id1391380318
+[19]: https://play.google.com/store/apps/details?id=com.datadog.app

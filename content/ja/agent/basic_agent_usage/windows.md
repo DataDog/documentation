@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/guide/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: Windows
 title: Windows 用 Agent の基本的な使用方法
 ---
@@ -42,13 +41,13 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 
 1. [Datadog Agent インストーラー][1]をダウンロードし、最新バージョンの Agent をインストールします。
 
-   <div class="alert alert-info">特定のバージョンの Agent をインストールする必要がある場合は、<a href="https://windows-agent.datadoghq.com/installers.json">インストーラーリスト</a>を参照してください。</div>
+   <div class="alert alert-info">特定のバージョンの Agent をインストールする必要がある場合は、<a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">インストーラーリスト</a>を参照してください。</div>
 
 2. `datadog-agent-7-latest.amd64.msi` を開き、インストーラーを (**管理者**として) 実行します。
 3. プロンプトに従ってライセンス契約に同意し、[Datadog API キー][2]を入力します。
 4. インストールが終了したら、オプションから Datadog Agent Manager を起動できます。
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
@@ -105,7 +104,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 **注**: 有効な `datadog.yaml` が見つかり、API キーが設定されている場合は、そのファイルが、指定されているすべてのコマンドラインオプションより優先されます。
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: /ja/agent/proxy/
 [3]: /ja/agent/faq/windows-agent-ddagent-user/
 [4]: /ja/network_monitoring/performance
@@ -117,7 +116,7 @@ Agent 7 は Python 3 のみをサポートします。アップグレードす�
 < 5.12.0 の Datadog Agent バージョンからアップグレードする場合は、最初に [EXE インストーラー][2]を使用して Agent 5 のより新しいバージョン（>= 5.12.0 だが < 6.0.0）にアップグレードしてから、 Datadog Agent バージョン >= 6 にアップグレードします。
 
 [1]: /ja/agent/guide/python-3/
-[2]: https://windows-agent.datadoghq.com/ddagent-cli-latest.exe
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
 {{% /tab %}}
 {{< /tabs >}}
 

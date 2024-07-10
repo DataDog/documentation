@@ -20,7 +20,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: documentation
 title: Node.js ログ収集
 ---
 
@@ -121,12 +120,12 @@ init_config:
 
 instances:
 
-##Log section
+##Log セクション
 logs:
 
   - type: file
-    path: "<ファイル名パス>.log"
-    service: nodejs
+    path: "<FILE_NAME_PATH>.log"
+    service: <SERVICE_NAME>
     source: nodejs
     sourcecategory: sourcecode
 ```

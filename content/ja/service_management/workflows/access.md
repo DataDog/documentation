@@ -1,34 +1,36 @@
 ---
+algolia:
+  tags:
+  - ワークフロー
+  - tracing_otel_inst_java
+  - ワークフローの自動化
 aliases:
 - /ja/workflows/access
 - /ja/workflows/service_accounts
 description: Workflow Automation へのアクセスおよび認証
 disable_toc: false
 further_reading:
+- link: /getting_started/workflow_automation/
+  tag: Documentation
+  text: Workflow Automation を始める
 - link: /integrations/
   tag: Documentation
   text: インテグレーションについて
-- link: /service_management/service_management/workflows/actions_catalog
-  tag: Documentation
+- link: /service_management/workflows/actions_catalog
+  tag: ドキュメント
   text: ワークフローアクションの一覧を見る
-kind: documentation
 title: アクセス・認証
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
+{{< /site-region >}}
 
 ワークフローとそのコンポーネントへのアクセスや認証を制御するツールがいくつかあります。
 
 ## ワークフロー ID
 
 ワークフローは、ワークフローの所有者、またはワークフローに関連するサービスアカウントの ID を使用して実行することができます。デフォルトでは、ワークフローはその作成者の Datadog ユーザー ID を使用します。
-
-### ワークフローの所有権を主張する
-
-<div class="alert alert-info">ワークフローの所有権を主張するには、Datadog のユーザーがワークフローの接続に必要なロールと権限を持っている必要があります。</div>
-
-
-1. 歯車 (**Settings**) アイコンをクリックします。
-1. **Take ownership of workflow** を選択します。このオプションは、ワークフローの所有者でない場合のみ表示されます。
-1. ワークフローの所有権を取得するには、**Confirm** をクリックします。
 
 ### サービスアカウントを使用する
 
@@ -70,30 +72,30 @@ title: アクセス・認証
 - インテグレーションタイルで構成された資格情報および権限
 - 接続の資格情報
 
-資格情報の構成については、[接続][7]を参照してください。
+資格情報の構成については、[接続][6]を参照してください。
 
 ## ワークフロー権限
 
-[ロールベースのアクセス制御 (RBAC)][3] を使用して、ワークフローと接続へのアクセスを制御します。ワークフローや接続に適用される権限の一覧は、[Datadog のロール権限][10]を参照してください。
+[ロールベースのアクセス制御 (RBAC)][3] を使用して、ワークフローと接続へのアクセスを制御します。ワークフローや接続に適用される権限の一覧は、[Datadog のロール権限][7]を参照してください。
 
-### 接続の利用を制限する
+### 特定の接続へのアクセスを制限する
 
 各接続に権限を設定して、変更を制限したり、使用を制限したりします。詳細な権限には、**Viewer**、*Resolver**、*Editor** があります。
 
 Viewer
-: 表示が可能
+: 接続の表示が可能
 
 Resolver
-: 解決と表示が可能
+: 接続の解決、表示が可能
 
 Editor
-: 編集、解決、表示が可能
+: 接続の編集、解決、表示が可能
 
 接続の解決には、ステップに割り当てられた接続オブジェクトを取得し、それに関連するシークレットを取得することが含まれます。
 
 特定の接続の権限を変更するには、以下の手順に従います。
 
-1. [Workflow Automation ページ][9]に移動します。
+1. [Workflow Automation ページ][8]に移動します。
 1. 右上の **Connections** をクリックします。接続の一覧が表示されます。
 1. 詳細な権限を設定したい接続にカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
 1. 南京錠 (** Permissions**) のアイコンをクリックします。
@@ -101,7 +103,41 @@ Editor
 1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
 1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
 1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
+
+### 特定のワークフローへのアクセスを制限する
+
+各ワークフローに権限を設定し、ワークフローの変更や使用を制限します。詳細な権限には、**Viewer**、**Runner**、*Editor** があります。
+
+Viewer
+: ワークフローの表示が可能
+
+Runner
+: ワークフローの実行、表示が可能
+
+Editor
+: ワークフローの編集、実行、表示が可能
+
+特定のワークフローへのアクセスは、ワークフローリストページまたはワークフローを編集中のキャンバスから制限できます。
+
+**ワークフローリストページからの権限の制限**
+1. [Workflow Automation ページ][8]に移動します。
+1. 詳細な権限を設定したいワークフローにカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
+1. 南京錠 (** Permissions**) のアイコンをクリックします。
+1. **Restrict Access** を選択します。
+1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
+1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
+1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
+1. **Save** をクリックします。
+
+**ワークフローエディターからの権限の制限**
+1. ワークフローエディターで歯車 (**Settings**) アイコンをクリックします。
+1. ドロップダウンから、**Edit Permissions** を選択します。
+1. **Restrict Access** を選択します。
+1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
+1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
+1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
+1. **Save** をクリックします。
 
 ## その他の参考資料
 
@@ -112,8 +148,6 @@ Editor
 [3]: /ja/account_management/rbac/
 [4]: /ja/service_management/workflows/trigger/
 [5]: /ja/service_management/workflows/actions_catalog/
-[6]: /ja/integrations/
-[7]: /ja/service_management/workflows/connections/
-[8]: /ja/service_management/workflows/actions_catalog/generic_actions/
-[9]: https://app.datadoghq.com/workflow
-[10]: /ja/account_management/rbac/permissions/#workflows
+[6]: /ja/service_management/workflows/connections/
+[7]: /ja/account_management/rbac/permissions/#workflow-automation
+[8]: https://app.datadoghq.com/workflow

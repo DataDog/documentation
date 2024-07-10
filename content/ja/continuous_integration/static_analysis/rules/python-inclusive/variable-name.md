@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 表現に問題がないか変数名をチェックする
 ---
 ## メタデータ
@@ -25,8 +24,14 @@ title: 表現に問題がないか変数名をチェックする
 
 ## 非準拠コードの例
 ```python
-# 禁止された名前、allowlist を提案します
+# 禁止された名前、許可リストを提案します
 whitelist = "foo"
+names_whitelist = "bla";
+
+names_blacklist = "bla";
+
+addr_master_ip = "5.4.3.8";
+addr_slave_ip = "1.2.3.4";
 ```
 
 ## 準拠コードの例

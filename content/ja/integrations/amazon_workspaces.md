@@ -11,11 +11,11 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_workspaces/
 draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
-integration_id: amazon-workspaces
+integration_id: ''
 integration_title: Amazon WorkSpaces
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_workspaces
 public_title: Datadog-Amazon WorkSpaces インテグレーション
@@ -23,15 +23,16 @@ short_description: 失敗した接続、セッションのレイテンシー、�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon WorkSpaces は、AWS クラウド上で実行されるフルマネージド型のセキュアなデスクトップコンピューティングサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての Amazon WorkSpaces メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
@@ -40,7 +41,7 @@ Amazon WorkSpaces は、AWS クラウド上で実行されるフルマネージ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `WorkSpaces` が有効になっていることを確認します。
 2. [Datadog - Amazon WorkSpaces インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -56,23 +57,23 @@ Amazon WorkSpaces から S3 バケットまたは CloudWatch のいずれかに�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_workspaces" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 Amazon WorkSpaces インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon WorkSpaces インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

@@ -1,31 +1,32 @@
 ---
-title: Fluent Bit
-name: fluentbit
-kind: インテグレーション
-description: Fluent Bit を構成し、ログデータを複数ソースから収集してパースし、転送します。
-short_description: ログデータを複数ソースから収集してパースし、転送します。
 categories:
-  - ログの収集
-doc_link: /integrations/fluentbit/
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
+description: Fluent Bit を構成し、ログデータを複数ソースから収集してパースし、転送します。
+doc_link: /integrations/fluentbit/
+further_reading:
+- link: https://www.datadoghq.com/blog/fluentbit-integration-announcement/
+  tag: ブログ
+  text: Datadog と Fluent Bit を使用してログを一元管理する
 has_logo: true
+integration_id: fluentbit
 integration_title: Fluent Bit
 is_public: true
+custom_kind: integration
+name: fluentbit
 public_title: Datadog-Fluent Bit インテグレーション
-further_reading:
-  - link: https://www.datadoghq.com/blog/fluentbit-integration-announcement/
-    tag: ブログ
-    text: Datadog と Fluent Bit を使用してログを一元管理する
-integration_id: fluentbit
+short_description: ログデータを複数ソースから収集してパースし、転送します。
+title: Fluent Bit
 ---
+
 ## 概要
 
 Fluent Bit を構成して、ログデータを複数の異なるソースから収集してパースし、Datadog に転送して監視します。Fluent Bit のメモリサイズは小さい (最大 450 KB) ため、コンテナ化されたサービスや埋め込み Linux システムなど、制約のあるリソース環境でログを収集するために使用できます。[Datadog の Fluent Bit アウトプットプラグイン][1]は Fluent Bit v1.3.0 以降に対応しています。
 
 ## セットアップ
 
-下記の手順に従ってホストで Fluent Bit を構成します。AWS ECS の場合は、[ECS Fluent Bit と FireLens][2]を参照してください。
+下記の手順に従ってホストで Fluent Bit を構成します。Amazon ECS の場合は、[ECS Fluent Bit と FireLens][2] を参照してください。
 
 ### ログの収集
 
@@ -40,7 +41,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 | キー            | 説明                                                                                                              | デフォルト                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | ホスト           | _必須_ - ログの送信先となる Datadog サーバー。                                                         | {{< region-param key="http_endpoint" code="true" >}} |
-| TLS            | _必須_ - エンドツーエンドの安全な通信のためのセキュリティプロトコル。Datadog ではこれを `on` に設定するよう推奨しています。              | `off`                                                                       |
+| TLS            | _必須_ - エンドツーエンドの安全な通信のためのセキュリティプロトコル。この設定は `on` に設定する必要があります。              | `off`                                                                       |
 | apikey         | _必須_ - [Datadog API キー][4]。                                                                                  |                                                                             |
 | 圧縮       | _推奨_ - ペイロードを GZIP 形式で圧縮します。Datadog はこれを `gzip` と設定することをサポートおよび推奨します。           |                                                                             |
 | dd_service     | _推奨_ - ログを生成するサービス (アプリケーションまたはデータベース) の名前。人間が解読可能であること。 |                                                                             |
@@ -74,13 +75,13 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.fluentbit.io/manual/output/datadog
-[2]: /ja/integrations/ecs_fargate/#fluent-bit-and-firelens
+[2]: /ja/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 [3]: https://app.datadoghq.com/signup
 [4]: /ja/account_management/api-app-keys/
 [5]: https://app.datadoghq.com/logs/activation
 [6]: https://docs.fluentbit.io/manual/installation/sources/build-and-install
 [7]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
-[8]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/configuration-file
+[8]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/configuration-file
 [9]: https://app.datadoghq.com/logs
 [10]: /ja/getting_started/tagging/
 [11]: /ja/help/

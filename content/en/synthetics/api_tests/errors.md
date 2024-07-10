@@ -1,6 +1,5 @@
 ---
-title: API Test Errors
-kind: documentation
+title: API Testing Errors
 description: Detailed description of API test errors
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -13,6 +12,9 @@ further_reading:
   tag: "Documentation"
   text: "Configure a Browser Test"
 ---
+## HTTP errors
+
+The message `Error performing HTTP/2 request` may occur when a remote server's HTTP support is inconsistent. For example, suppose you run a test that reaches an endpoint on a server that supports HTTP 2. On the next run, if the test comes across the same endpoint on a server that only has HTTP 1.1 support, the test fails to establish an HTTP 2 connection and returns an error. In this scenario, switching to HTTP/1.1 prevents the error.
 
 ## SSL errors
 

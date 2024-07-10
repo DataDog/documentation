@@ -18,7 +18,6 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
-kind: documentation
 title: Application Security Management を始める
 ---
 
@@ -76,7 +75,7 @@ ASM を有効にすると、アプリケーションの脆弱性を即座に識�
 2. **攻撃の検証**: テスト検出ルールをトリガーする攻撃パターンを送信します。ターミナルから以下のスクリプトを実行します。
 
   {{< code-block lang="sh" >}}
-  for ((i=1;i<=200;i++)); do
+  for ((i=1;i<=250;i++)); do
   # 既存サービスのルートをターゲットにする
   curl https://your-application-url/<EXISTING ROUTE> -A
   'dd-test-scanner-log';

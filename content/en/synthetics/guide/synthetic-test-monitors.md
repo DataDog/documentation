@@ -1,6 +1,6 @@
 ---
-title: Using Synthetic Test Monitors
-kind: guide
+title: Use Synthetic Test Monitors
+
 description: Learn about Synthetic monitors created with your Synthetic tests. 
 further_reading:
 - link: "/monitors/manage/"

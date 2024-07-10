@@ -1,6 +1,6 @@
 ---
 title: Developer Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:
@@ -24,4 +24,5 @@ cascade:
     {{< nextlink href="developers/guide/dogwrap">}}Call commands and generate events from their results.{{< /nextlink >}}
     {{< nextlink href="developers/guide/query-data-to-a-text-file-step-by-step">}}Query data to a text file, step by step{{< /nextlink >}}
     {{< nextlink href="developers/guide/custom-python-package">}}Adding a custom Python package to the Agent{{< /nextlink >}}
+    {{< nextlink href="developers/guide/legacy">}}Create an Agent check for Datadog Agent v5{{< /nextlink >}}
 {{< /whatsnext >}}

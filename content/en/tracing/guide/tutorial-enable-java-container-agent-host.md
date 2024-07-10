@@ -1,21 +1,21 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application in a Container and an Agent on a Host
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -125,7 +125,7 @@ Now that you have a working Java application, configure it to enable tracing.
 1. Add the Java tracing package to your project. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -222,7 +222,7 @@ With the application running, send some curl requests to it:
 
 Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
 The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
@@ -339,7 +339,7 @@ The sample project includes a second application called `calendar` that returns 
 
 1. Configure the calendar app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -434,7 +434,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/java/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[14]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /agent/configuration/agent-configuration-files/?tab=agentv6v7
 [16]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: /tracing/trace_collection/library_config/java/

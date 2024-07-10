@@ -1,6 +1,5 @@
 ---
 title: Endpoint Checks with Autodiscovery
-kind: documentation
 aliases:
     - /agent/autodiscovery/endpointchecks
     - /agent/autodiscovery/endpointschecks
@@ -12,7 +11,7 @@ further_reading:
     - link: '/containers/cluster_agent/clusterchecks/'
       tag: 'Documentation'
       text: 'Cluster Checks'
-    - link: '/containers/cluster_agent/troubleshooting#endpoint-checks'
+    - link: '/containers/troubleshooting/cluster-and-endpoint-checks'
       tag: 'Documentation'
       text: 'Troubleshooting Endpoint Checks'
 
@@ -81,7 +80,7 @@ By design, endpoint checks are dispatched to Agents that run on the same node as
 ## Set up endpoint check dispatching
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `features.clusterChecks.enabled` configuration key:
 ```yaml
@@ -161,7 +160,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 [Restart the Agent][2] to apply the configuration change.
 
 [1]: /agent/cluster_agent/clusterchecks/
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -177,6 +176,30 @@ In Cluster Agent v1.18.0+, you can use `advanced_ad_identifiers` and [Autodiscov
 To perform an [HTTP check][9] against the endpoints of a Kubernetes service,
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Use the `spec.override.clusterAgent.extraConfd.configDataMap` section to define your check configuration:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            advanced_ad_identifiers:
+              - kube_endpoints:
+                  name: "<ENDPOINTS_NAME>"
+                  namespace: "<ENDPOINTS_NAMESPACE>"
+            cluster_check: true
+            init_config:
+            instances:
+              - url: "http://%%host%%"
+                name: "<EXAMPLE_NAME>"
+```
+
+{{% /tab %}}
 {{% tab "Helm" %}}
 Use the `clusterAgent.confd` field to define your check configuration:
 

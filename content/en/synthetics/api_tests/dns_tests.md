@@ -1,6 +1,5 @@
 ---
-title: DNS Tests
-kind: documentation
+title: DNS Testing
 description: Monitor resolvability and lookup times of your DNS records
 aliases:
   - /synthetics/dns_test
@@ -45,7 +44,7 @@ After choosing to create a `DNS` test, define your test's request.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. Specify the amount of time in seconds before the test times out (optional).
 5. **Name** your DNS test.
-6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
 {{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 
@@ -138,7 +137,7 @@ You can restrict access to a DNS test based on the roles in your organization. W
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Monitor Alerts
-kind: guide
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/"
   tag: "Guide"
@@ -81,6 +80,8 @@ If you suspect that notifications are not being properly delivered, check the it
 
 If you are using multiple `@opsgenie-[...]` notifications in your monitor, we send those notifications with the same alias to Opsgenie.
 Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

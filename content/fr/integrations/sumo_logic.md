@@ -2,9 +2,7 @@
 aliases:
 - /fr/integrations/sumologic/
 categories:
-- monitoring
-- notification
-ddtype: crawler
+- notifications
 dependencies: []
 description: Envoyez des logs Sumo Logic à Datadog et des notifications Datadog à
   Sumo Logic.
@@ -16,7 +14,7 @@ integration_id: ''
 integration_title: Sumo Logic
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: sumo_logic
 public_title: Intégration Datadog/Sumo Logic
@@ -25,13 +23,14 @@ short_description: Envoyez des logs Sumo Logic à Datadog et des notifications 
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Datadog s'intègre à Sumo Logic de deux façons : vous pouvez transférer des données de log Sumo Logic vers votre flux d'événements Datadog, ou utiliser Sumo Logic en tant que canal de notification pour vos alertes et événements Datadog. En d'autres termes, chaque service peut transmettre des informations à l'autre.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 #### Datadog vers Sumo Logic
 
@@ -64,4 +63,4 @@ Datadog s'intègre à Sumo Logic de deux façons : vous pouvez transférer des
 9. Dans Sumo Logic, enregistrez la recherche de votre choix et choisissez de planifier la recherche.
 10. Sélectionnez la valeur Webhook pour **Alert Type**. Choisissez votre nouvelle connexion Datadog dans la liste des webhooks. Vous pouvez personnaliser la charge utile et modifier la condition de l'alerte dans le champ **Alert Condition** de façon à envoyer une notification uniquement lorsque le nombre de résultats est supérieur à 0. {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="Collection hébergée" popup="true">}}
 
-[1]: https://app.datadoghq.com/account/settings#integrations/sumo_logic
+[1]: https://app.datadoghq.com/integrations/sumo_logic

@@ -1,6 +1,5 @@
 ---
 title: Infrastructure
-kind: documentation
 aliases:
   - /graphing/infrastructure/
 further_reading:
@@ -11,9 +10,23 @@ further_reading:
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to power up your Infrastructure monitoring'
 cascade:
-    algolia:
-        rank: 70
+- _target:
+    path: /infrastructure/resource_catalog/aws_iam_user.md
+  aliases:
+    - /security/cspm/custom_rules/aws_iam_user/
+- _target:
+    path: /infrastructure/**/*
+  algolia:
+    rank: 70
 ---
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}
+
+## Overview
+
+Infrastructure monitoring includes core Datadog features that visualize, monitor, and measure the performance of your hosts, containers, and processes.
+
+## Components
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/infrastructure/list" >}}<u>Infrastructure List</u> - See a list of all your hosts monitored by Datadog.{{< /nextlink >}}

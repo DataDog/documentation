@@ -1,6 +1,5 @@
 ---
 title: Search Logs
-kind: documentation
 description: 'Filter logs to narrow down, broaden, or shift your focus on the subset of logs of current interest.'
 aliases:
     - /logs/search
@@ -84,7 +83,7 @@ Toggle the button to the right of the search bar to search in raw mode, where sy
 
 {{< img src="logs/explorer/search/log_raw_search_mode.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query in raw search mode" style="width:100%;">}}
 
-You can interact with the search bar with your mouse, as well as by using keyboard commands. For example, use `CMD-A` for selecting text, `CMD-C` for copying text, `CMD-X for cutting text, and `CMD-V for pasting text.
+You can interact with the search bar with your mouse, as well as by using keyboard commands. For example, use `CMD-A` for selecting text, `CMD-C` for copying text, `CMD-X` for cutting text, and `CMD-V` for pasting text.
 
 ## Further Reading
 

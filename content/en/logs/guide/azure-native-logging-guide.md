@@ -1,6 +1,5 @@
 ---
 title: Send Azure Logs with the Datadog Resource
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -24,6 +23,8 @@ Use this guide to set up and manage logging directly from your Azure subscriptio
 Provide insight into the operations on your resources at the [control plane][1]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
 
 To send activity logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the activity logs are sent to Datadog.
+
+<div class="alert alert-warning">When log collection is enabled, the Datadog resource automatically modifies the logging configurations of <a href="https://learn.microsoft.com/azure/app-service/">App Services</a>. Azure triggers a <strong>restart</strong> for App Services when their logging configurations change.</div>
 
 ## Azure resource logs 
 

@@ -1,29 +1,29 @@
 ---
 title: Autodiscovery Container Identifiers
-kind: documentation
 aliases:
  - /agent/autodiscovery/ad_identifiers
  - /agent/guide/ad_identifiers
 further_reading:
-- link: "/agent/kubernetes/integrations/"
+- link: "/containers/kubernetes/integrations/"
   tag: "Documentation"
-  text: "Create and load an Autodiscovery Integration Template"
+  text: "Configure integrations with Autodiscovery on Kubernetes"
+- link: "/containers/docker/integrations/"
+  tag: "Documentation"
+  text: "Configure integrations with Autodiscovery on Docker"
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
 
-Autodiscovery container identifiers, or `ad_identifiers`, allow you to apply an Autodiscovery configuration file template to a given container, either by using the [container short image](#short-image-container-identifiers) or with a [custom Autodiscovery container identifier](#custom-autodiscovery-container-identifiers).
+This document explains how to apply an [Autodiscovery][1] configuration template to a specific container. The `ad_identifiers` parameter can match a container image name or a custom identifier.
 
-**Note**: For other configuration types—key-value stores, Docker labels, or Kubernetes pod annotations—the matching between an integration configuration template and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the key-value stores, labels, or annotations configuration.
+## Container image name
 
-## Short image container identifiers
-
-To apply the following Autodiscovery configuration template to a given container, use the **container short image** name as the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
+To apply the following Autodiscovery configuration template to a given container, replace `<AUTODISCOVERY_IDENTIFIER>` with the [short][2] container image name:
 
 ```yaml
 ad_identifiers:
-  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+  <AUTODISCOVERY_IDENTIFIER>
 
 init_config:
   <INIT_CONFIG>
@@ -32,7 +32,7 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-For example, the following Apache Autodiscovery configuration template can be used by the Agent:
+**Example**: The following Apache Autodiscovery configuration template applies to a container image named `httpd`:
 
 ```yaml
 ad_identifiers:
@@ -45,15 +45,9 @@ logs:
   service: webapp
 ```
 
-This matches **ANY** `httpd` container image on your host. Suppose you have one container running `library/httpd:latest` and another running `<WHATEVER>/httpd:v2`. The Agent applies the above template to both containers since you have to provide short names for container images, for example: `httpd`, NOT `library/httpd:latest`.
+This matches **any** `httpd` container image on your host. If you have one container running `foo/httpd:latest` and another running `bar/httpd:v2`, the Agent applies the above template to both containers.
 
-When using short image names as Autodiscovery container identifiers, **the Agent cannot distinguish between identically named images from different sources or with different tags**.
-
-## Adding tags from standard labels
-
-Even if Autodiscovery configuration is defined within a custom configuration file, the standard labels for tagging `env`, `service`, and `version` can be used in conjunction.
-
-See [Unified Service Tagging][1] for more information on how to configure these labels on your containers.
+When using short image names as Autodiscovery container identifiers, the Agent cannot distinguish between identically named images from different sources or with different tags.
 
 ### Multiple identifiers
 
@@ -65,46 +59,58 @@ ad_identifiers:
   - my-custom-httpd-image
 ```
 
+This matches **any** container images on your host that match `httpd` **or** `my-custom-httpd-image`.
+
 ## Custom Autodiscovery container identifiers
 
-To apply different Autodiscovery configuration templates to containers running the same image, use a custom value `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` and apply it with the `com.datadoghq.ad.check.id` label to identify your container. Using the following configuration file:
+If you want to apply different configuration templates to containers running the same image, use custom container identifiers. 
 
-```yaml
-ad_identifiers:
-  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+1. Supply a custom container identifier to your container using a Docker label or Kubernetes annotation.
 
-init_config:
-  <INIT_CONFIG>
+   **Example**: 
+   Apply a Docker label or Kubernetes annotation to identify your container as `foo`:
 
-instances:
-  <INSTANCES_CONFIG>
-```
+   {{< tabs >}}
+   {{% tab "Docker label" %}}
 
-To enable it for a container:
+   ```yaml
+   LABEL com.datadoghq.ad.check.id="foo"
+   ```
 
-{{< tabs >}}
-{{% tab "Docker" %}}
-Add the following label to apply this Autodiscovery configuration template to a specific container for docker.
+   **Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image name.
 
-```yaml
-com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-```
-**Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image/name.
+   {{% /tab %}}
+   {{% tab "Kubernetes annotation" %}}
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-Add the following annotation in Kubernetes to apply this Autodiscovery configuration where `<CONTAINER_IDENTIFIER>` is the container name within the pod.
+   ```text
+   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: 'foo'
+   ```
 
-```text
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-```
+   Replace `<CONTAINER_IDENTIFIER>` with the container name within the pod.
 
-**Note**: This annotations is only application from version `6.25.0` and `7.25.0` onwards. The `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` label takes precedence over the image/name.
-{{% /tab %}}
-{{< /tabs >}}
+   **Note**: Supported in Datadog Agent v6.25+ and v7.25. The `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` label takes precedence over the image name.
+   {{% /tab %}}
+   {{< /tabs >}}
+
+2. Reference this custom value in your Autodiscovery configuration template.
+
+   **Example**: 
+   The following Apache Autodiscovery configuration template designates a container image with the custom name `foo`:
+
+   ```yaml
+   ad_identifiers:
+     - foo
+   init_config:
+   instances:
+     - apache_status_url: http://%%host%%/server-status?auto
+   logs:
+     source: apache
+     service: webapp
+   ```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /getting_started/containers/autodiscovery
+[2]: /glossary/#short-image

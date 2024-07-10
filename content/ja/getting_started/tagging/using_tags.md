@@ -12,7 +12,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags/
   tag: ドキュメント
   text: タグの割り当て方法
-kind: ドキュメント
 title: タグの使用方法
 ---
 
@@ -145,9 +144,9 @@ title: タグの使用方法
 
 ## メトリクス
 
-[Metrics Explorer][8] でタグを使用して、複数のタグでメトリクスを絞り込むか、タグ キー別に複数のグラフを表示します。以下の例は、`service:coffee-house` のメトリクスのグラフを作成し、`host` ごとに 1 つのグラフを表示します。
+[Metrics Explorer][8] でタグを使用して、複数のタグでメトリクスを絞り込むか、タグ キー別に複数のグラフを表示します。以下の例は、`service:web-store` のメトリクスのグラフを作成します。
 
-{{< img src="tagging/using_tags/metricsexplorertags.png" alt="モニターの管理タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/metrics_explorer.png" alt="個々のタグにスコープされたメトリクスグラフ" style="width:80%;">}}
 
 ## インテグレーション
 

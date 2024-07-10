@@ -5,8 +5,7 @@ aliases:
 - /ja/integrations/datadog_checks_dev/
 - /ja/guides/new_integration/
 - /ja/developers/integrations/new_check_howto/
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/agent_integration.md
+description: Datadog Agent インテグレーションを開発し、公開する方法をご紹介します。
 further_reading:
 - link: /developers/integrations/create_a_tile/
   tag: Documentation
@@ -17,7 +16,6 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Datadog プラットフォームで開発する方法について
-kind: documentation
 title: Agent インテグレーションの作成
 ---
 ## 概要
@@ -26,7 +24,7 @@ title: Agent インテグレーションの作成
 
 ## Agent ベースのインテグレーション
 
-Agent ベースのインテグレーションでは、[Datadog Agent][17] を使用して、開発者が書いたチェックを介してデータを送信します。チェックは、[メトリクス][23]、[イベント][24]、[サービスチェック][25]を顧客の Datadog アカウントに送信できます。Agent 自体も同様に[ログ][26]を送信することができますが、これはチェックの外側で構成されます。
+Agent ベースのインテグレーションでは、[Datadog Agent][17] を使用して、開発者が書いたチェックを介してデータを送信します。チェックは、[メトリクス][34]、[イベント][18]、[サービスチェック][25]を顧客の Datadog アカウントに送信できます。Agent 自体も同様に[ログ][26]を送信することができますが、これはチェックの外側で構成されます。
 
 これらのインテグレーションの実装コードは、Datadog がホスティングしています。Agent インテグレーションは、ローカルエリアネットワーク (LAN) や仮想プライベートクラウド (VPC) に存在するシステムまたはアプリケーションからデータを収集するのに最適な方法です。Agent インテグレーションの作成では、ソリューションを Python ホイール (`.whl`) として公開およびデプロイする必要があります。
 
@@ -463,7 +461,7 @@ Agent ベースのインテグレーションを作成したら、インテグ�
 [15]: /ja/developers/integrations/check_references/#service-check-file
 [16]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [17]: https://docs.datadoghq.com/ja/agent/
-[18]: https://docs.datadoghq.com/ja/events/
+[18]: https://docs.datadoghq.com/ja/service_management/events/
 [19]: https://desktop.github.com/
 [20]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
 [21]: https://github.com/Datadog/integrations-extras
@@ -479,3 +477,4 @@ Agent ベースのインテグレーションを作成したら、インテグ�
 [31]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
 [32]: https://partners.datadoghq.com/
 [33]: https://docs.datadoghq.com/ja/developers/integrations/check_references/
+[34]: https://docs.datadoghq.com/ja/metrics/

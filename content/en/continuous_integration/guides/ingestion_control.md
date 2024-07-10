@@ -1,21 +1,20 @@
 ---
-title: Ingestion Control for CI Visibility
-kind: guide
-description: Learn how to define condition(s) by which to exclude specific events from being processed by CI Visibility
+title: Set Ingestion Control for CI Visibility
+description: Learn how to define condition(s) by which to exclude specific events from being processed by CI Visibility.
 further_reading:
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"
     text: "Streamline your CI testing with Datadog Intelligent Test Runner"
-  - link: "https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility"
-    tag: "Pricing"
-    text: "See CI Visibility pricing"
+  - link: "/continuous_integration/pipelines"
+    tag: "Documentation"
+    text: "Learn about Pipeline Visibility"
 ---
-
-## Overview
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
+
+## Overview
 
 Exclusion filters provide fine-grained control over your CI Visibility budget by allowing you to define one or more conditions by which to exclude specific events from being processed by Datadog.
 

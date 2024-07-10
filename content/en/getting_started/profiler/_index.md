@@ -1,9 +1,9 @@
 ---
 title: Getting Started with the Continuous Profiler
-kind: documentation
 aliases:
     - /tracing/profiling/intro_to_profiling
     - /tracing/profiler/intro_to_profiling
+    - /tracing/profiler/getting_started
 further_reading:
     - link: '/profiler/'
       tag: 'Documentation'
@@ -17,6 +17,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tag: 'Blog'
       text: "How we optimized our Akka application using Datadog's Continuous Profiler"
+    - link: 'https://www.datadoghq.com/blog/request-latency-profiling/'
+      tag: 'Blog'
+      text: 'Understanding Request Latency with Profiling'
 ---
 
 Profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler, it can be confusing.

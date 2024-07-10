@@ -10,40 +10,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: '3.10'
-    - run: pip install Mako
+    - run: pip install Mako docutils
 
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v23
+      uses: tj-actions/changed-files@v42
       with:
         include_all_old_new_renamed_files: true
 
     - name: Generate links
       env:
         branch: ${{ github.head_ref }}
+        DELETED_FILES: ${{ steps.changed_files.outputs.deleted_files }}
+        RENAMED_FILES: ${{ steps.changed_files.outputs.renamed_files }}
+        MODIFIED_FILES: ${{ steps.changed_files.outputs.modified_files }}
+        ADDED_FILES: ${{ steps.changed_files.outputs.added_files }}
       id: comment_body
       run: |
-        python local/bin/py/preview_links.py --deleted='${{ steps.changed_files.outputs.deleted_files }}' \
-        --renamed='${{ steps.changed_files.outputs.renamed_files }}' \
-        --modified='${{ steps.changed_files.outputs.modified_files }}' \
-        --added='${{ steps.changed_files.outputs.added_files }}'
+        python local/bin/py/preview_links.py --deleted="${DELETED_FILES}" \
+        --renamed="${RENAMED_FILES}" \
+        --modified="${MODIFIED_FILES}" \
+        --added="${ADDED_FILES}"
 
     - name: Render template
       id: template
-      uses: chuhlomin/render-template@v1.6
+      uses: chuhlomin/render-template@v1.9
       with:
         template: .github/preview-links-template.md
 
     - name: Find existing comment
-      uses: peter-evans/find-comment@v2.1.0
+      uses: peter-evans/find-comment@v3.1.0
       id: find_comment
       with:
         issue-number: ${{ github.event.pull_request.number }}
@@ -51,7 +55,7 @@ jobs:
         body-includes: "Preview links ("
 
     - name: Post comment
-      uses: peter-evans/create-or-update-comment@v2.1.0
+      uses: peter-evans/create-or-update-comment@v4.0.0
       with:
         issue-number: ${{ github.event.pull_request.number }}
         comment-id: ${{ steps.find_comment.outputs.comment-id }}

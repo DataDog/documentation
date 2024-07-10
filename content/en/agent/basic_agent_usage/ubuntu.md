@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Ubuntu
-kind: documentation
 platform: Ubuntu
 aliases:
     - /guides/basic_agent_usage/ubuntu/
@@ -17,16 +16,18 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Ubuntu. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Ubuntu. 
 
-Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+To install the Agent, see the [installation instructions][1]. Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
 **Note**: Ubuntu 14.04 and above are supported on the 64-bit x86 architecture. Ubuntu 16.04 and above are supported on the 64-bit Arm v8 architecture.
 
@@ -99,6 +100,51 @@ Configuration files for [Integrations][1]:
 [1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
+
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo apt-get remove --purge datadog-agent -y
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo apt-get --purge remove datadog-agent -y
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% apm-ssi-uninstall-linux %}}
 
 ## Troubleshooting
 

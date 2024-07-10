@@ -5,6 +5,7 @@ assets:
   dashboards:
     Datadog Cluster Agent - Overview: assets/dashboards/datadog_cluster_agent_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: datadog.cluster_agent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10108
     source_type_name: Datadog Cluster Agent
 author:
   homepage: https://www.datadoghq.com
@@ -30,12 +32,11 @@ draft: false
 git_integration_title: datadog_cluster_agent
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
-integration_version: 2.6.2
+integration_version: 3.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: datadog_cluster_agent
-oauth: {}
 public_title: Datadog Cluster Agent
 short_description: Datadog Cluster Agent のメトリクスを追跡
 supported_os:
@@ -57,22 +58,23 @@ tile:
   title: Datadog Cluster Agent
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Datadog Cluster Agent][1] を監視します。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 Datadog-Cluster-Agent チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. datadog_cluster_agent のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `datadog_cluster_agent.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル datadog_cluster_agent.d/conf.yaml][3] を参照してください。
 
@@ -82,21 +84,21 @@ Datadog-Cluster-Agent チェックは [Datadog Agent][2] パッケージに含�
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `datadog_cluster_agent` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "datadog_cluster_agent" >}}
 
 
-### イベント
+### ヘルプ
 
 Datadog_Cluster_Agent インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "datadog_cluster_agent" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

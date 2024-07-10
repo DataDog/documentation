@@ -1,6 +1,5 @@
 ---
 title: Tracer Debug Logs
-kind: Documentation
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -32,7 +31,28 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 The steps for enabling debug mode in the Datadog Python Tracer depends on the version of the tracer your application is using. Choose the scenario that applies:
 
-### Scenario 1: ddtrace version 1.3.2 or higher
+### Scenario 1: ddtrace version 2.x and higher
+
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
+
+2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` to the filename of that log file, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
+   By default, the file size is 15728640 bytes (about 15MB), and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
+
+**Note:** If the application uses the root logger and changes log level to `DEBUG`, debug tracer logs are enabled. If you want to override this behavior, override the `ddtrace` logger as follows:
+
+```
+import logging
+
+# root logger configuration
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+
+# override the ddtrace configuration to WARNING log level
+logging.getLogger("ddtrace").setLevel(logging.WARNING)
+```
+
+
+### Scenario 2: ddtrace version 1.3.2 to <2.x
 
 1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
@@ -42,19 +62,19 @@ The steps for enabling debug mode in the Datadog Python Tracer depends on the ve
 3. To route logs to the console, for **Python 2** applications, configure `logging.basicConfig()` or similar. Logs are automatically sent to the console for **Python 3** applications.
 
 
-### Scenario 2: ddtrace version 1.0.x to 1.2.x
+### Scenario 3: ddtrace version 1.0.x to 1.2.x
 
 1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
 2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
 
-### Scenario 3: ddtrace version 0.x
+### Scenario 4: ddtrace version 0.x
 
 1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
 2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
 
-### Scenario 4: Configuring debug logging in the application code with the standard logging library
+### Scenario 5: Configuring debug logging in the application code with the standard logging library
 
 For any version of ddtrace, rather than setting the `DD_TRACE_DEBUG` tracer environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
 
@@ -94,7 +114,8 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
-To enable debug mode for the Datadog Go Tracer, enable the debug mode during the `Start` config:
+To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
+or enable the debug mode during the `Start` config:
 
 ```go
 package main
@@ -103,6 +124,27 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
     tracer.Start(tracer.WithDebugMode(true))
+    defer tracer.Stop()
+}
+```
+
+#### Abandoned span logs
+
+The Datadog Go Tracer also supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10m`), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. Abandoned span logs appear at the Info level.
+
+You can also enable debugging abandoned spans during the `Start` config:
+
+```go
+package main
+
+import (
+  "time"
+
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(tracer.WithDebugSpansMode(10 * time.Minute))
     defer tracer.Stop()
 }
 ```
@@ -176,6 +218,8 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+
 For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
 
 There are two types of logs that are created in these paths:
@@ -191,6 +235,22 @@ There are two types of logs that are created in these paths:
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
+There are two options to route debug tracer logs to a file.
+
+**Option 1:**
+
+With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug tracer logs:
+
+- **Environment variable**: `DD_TRACE_LOG_FILE`
+
+- **INI**: `datadog.trace.log_file`
+
+**Notes**:
+  - For details about where to set `DD_TRACE_LOG_FILE`, review [Configuring the PHP Tracing Library][2].
+  - If `DD_TRACE_LOG_FILE` is not specified, logs go to the default PHP error location (See **Option 2** for more details).
+
+**Option 2:**
+
 You can specify where PHP should put `error_log` messages either at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
 If you are using an Apache server, use the `ErrorLog` directive.
@@ -199,6 +259,7 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 
 
 [1]: https://www.php-fig.org/psr/psr-3
+[2]: /tracing/trace_collection/library_config/php/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -206,10 +267,9 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 The release binary libraries are all compiled with debug symbols added to the optimized release. You can use GDB or LLDB to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
 
 ```bash
-cd .build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-make
-make install
+cmake -B .build -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake --build .build -j
+cmake --install .build
 ```
 
 {{< /programming-lang >}}
@@ -389,26 +449,26 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{< programming-lang lang="php" >}}
 
+**Loading an integration:**
 
-**Generating a span:**
+Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive.
 
 ```text
-[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
 ```
 
+**Span information:**
 
-
-**Attempt to send a trace to the Agent:**
+Available starting in 0.98.0:
 
 ```text
-[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [span] Encoding span <SPAN ID>: trace_id=<TRACE ID>, name='wpdb.query', service='wordpress', resource: '<RESOURCE NAME>', type 'sql' with tags: component='wordpress'; and metrics: -
 ```
 
-
-**Trace successfully sent to the Agent:**
+**Attempting to send traces:**
 
 ```text
-[Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [info] Flushing trace of size 56 to send-queue for http://datadog-agent:8126
 ```
 
 

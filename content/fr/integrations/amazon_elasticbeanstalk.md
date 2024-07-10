@@ -19,11 +19,11 @@ further_reading:
   text: Déployer Datadog sur AWS Elastic Beanstalk
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
-integration_id: amazon-elastic-beanstalk
+integration_id: ''
 integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elasticbeanstalk
 public_title: Intégration Datadog/AWS Elastic Beanstalk
@@ -31,31 +31,32 @@ short_description: Surveillez des métriques clés d'AWS Elastic Beanstalk.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 AWS Elastic Beanstalk est un service simple à prendre en main permettant de déployer et de mettre à l'échelle des applications et services Web développés avec Java, .NET, PHP, Node.js, Python, Ruby, Go et Docker sur des serveurs couramment utilisés, comme Apache, Nginx, Passenger et IIS.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord l'[intégration Amazon Web Services][1]. Pour recevoir des métriques Elastic Beanstalk, vous devez [activer la création de rapports d'intégrité améliorée][2] pour votre environnement et configurer ce dernier de façon à ce qu'il [publie des métriques de santé améliorées sur CloudWatch][3].
 
 **Remarque** : ces paramètres augmentent les frais relatifs à vos métriques custom CloudWatch.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
-### Events
+### Aide
 
 L'intégration AWS Elastic Beanstalk n'inclut aucun événement.
 
-### Service Checks
+### Aide
 
 L'intégration AWS Elastic Beanstalk n'inclut aucun check de service.
 
@@ -143,7 +144,7 @@ Pour une configuration sur un conteneur Docker unique, installez l'Agent Datadog
 5. Imposez une version spécifique de l'Agent en définissant `DD_AGENT_VERSION` dans `option_settings`. Ainsi, tous les hosts exécuteront la même version de l'Agent.
 6. Déployez votre application avec la [console Elastic Beanstalk][6], [l'interface de ligne de commande EB][7] ou [l'interface de ligne de commande AWS][8].
 
-Vous pouvez ajouter des paramètres d'Agent supplémentaires dans `/etc/datadog-agent/datadog.yaml`. 
+Vous pouvez ajouter des paramètres d'Agent supplémentaires dans `/etc/datadog-agent/datadog.yaml`.
 
 Par exemple, pour activer la surveillance des live processes, définissez ce qui suit :
 
@@ -156,7 +157,7 @@ process_config:
 
 Pour activer le tracing pour des conteneurs Docker uniques :
 
-1. Modifiez la section `/etc/datadog-agent/datadog.yaml` dans le fichier `99datadog.config` en spécifiant `apm_non_local_traffic`, avec le format suivant :
+1. Modifiez la section `/etc/datadog-agent/datadog.yaml` du fichier `99datadog.config` en ajoutant `apm_non_local_traffic` avec le format suivant :
 
     ```
     apm_config:
@@ -164,11 +165,11 @@ Pour activer le tracing pour des conteneurs Docker uniques :
       apm_non_local_traffic: "true"
     ```
 
-2. Configurez les bibliothèques de tracing de manière à faire passer les traces par l'[IP de passerelle du pont][9], qui correspond par défaut à `172.17.0.1` à l'intérieur du conteneur d'application. Si vous n'êtes pas sûr qu'il s'agit de l'IP de passerelle, exécutez la commande `docker inspect <id conteneur>` pour le vérifier.
+2. Configurez les bibliothèques de tracing de manière à faire passer les traces par l'[IP de passerelle du pont][9], qui correspond par défaut à `172.17.0.1` à l'intérieur du conteneur d'application. Si vous n'êtes pas sûr de l'IP de passerelle, exécutez la commande `docker inspect <id conteneur>` pour la vérifier.
 
 Pour tous les langages, définissez la variable d'environnement `DD_AGENT_HOST` sur l'IP de passerelle. Pour les langages ci-dessous, vous pouvez également définir le nom du host par programmation comme suit :
 
-##### Python
+##### Collecte d'erreurs du navigateur
 
 ```python
 from ddtrace import tracer
@@ -176,7 +177,7 @@ from ddtrace import tracer
 tracer.configure(hostname="172.17.0.1")
 ```
 
-##### Node.js
+##### .NET
 
 ```javascript
 const tracer = require('dd-trace');
@@ -184,7 +185,7 @@ const tracer = require('dd-trace');
 tracer.init({ hostname: "172.17.0.1" });
 ```
 
-##### Ruby
+##### Modifier des données et leur contexte
 
 ```ruby
 require 'ddtrace'
@@ -194,7 +195,7 @@ Datadog.configure do |c|
 end
 ```
 
-##### Go
+##### Données collectées
 
 ```go
 package main
@@ -310,7 +311,7 @@ L'exemple de code suivant correspond à un `Dockerrun.aws.json` déclarant l'Age
 
 Une fois la définition du conteneur prête, envoyez-la à Elastic Beanstalk. Pour obtenir des instructions précises, consultez [Environnements Docker multi-conteneurs][4] dans la documentation AWS Elastic Beanstalk.
 
-#### DogStatsD
+#### Aide
 
 Pour recueillir des métriques custom depuis le conteneur de votre application en utilisant DogStatsD dans l'[environnement Docker à conteneurs multiples][4], ajoutez les éléments suivants à votre fichier `Dockerrun.aws.json` :
 
@@ -400,7 +401,7 @@ Vous trouverez un exemple ci-dessous :
 
 ```
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 

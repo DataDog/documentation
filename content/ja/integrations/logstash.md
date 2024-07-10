@@ -3,6 +3,7 @@ app_id: logstash
 app_uuid: efcb18d9-2789-4481-bd4b-ff5a4c058dc3
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: logstash.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10016
     source_type_name: Logstash
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -30,10 +32,9 @@ integration_id: logstash
 integration_title: Logstash
 integration_version: 1.1.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: logstash
-oauth: {}
 public_title: Logstash
 short_description: Logstash インスタンスからランタイムメトリクスを収集して監視
 supported_os:
@@ -55,23 +56,28 @@ tile:
   title: Logstash
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
-Logstash サービスからメトリクスをリアルタイムに取得して、以下のことができます。
+Logstash からメトリクスをリアルタイムに取得して、以下のことができます。
 
 - Logstash の状態を視覚化および監視できます。
 - Logstash のイベントに関する通知を受けることができます。
 
-## セットアップ
+## 計画と使用
+
+### インフラストラクチャーリスト
 
 Logstash チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+{{< tabs >}}
+{{% tab "ホスト" %}}
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Logstash チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2
-]をご参照ください。
+#### メトリクスベース SLO
+
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Logstash チェックをホストにインストールします。それ以前のバージョンの Agent については、[コミュニティインテグレーションの使用][1]を参照してください。
 
 1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
@@ -79,43 +85,90 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Logstash チ�
    datadog-agent integration install -t datadog-logstash==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
+2. コアの[インテグレーション][2]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+[1]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[2]: https://docs.datadoghq.com/ja/getting_started/integrations/
+{{% /tab %}}
+{{% tab "コンテナ化" %}}
 
-1. Logstash の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `logstash.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル logstash.d/conf.yaml][5] を参照してください。
+#### コンテナ化
 
-2. [Agent を再起動します][6]。
+以下の Dockerfile を使用して、Logstash インテグレーションを含むカスタム Datadog Agent イメージを構築します。
+
+```dockerfile
+FROM gcr.io/datadoghq/agent:latest
+RUN datadog-agent integration install -r -t datadog-logstash==<INTEGRATION_VERSION>
+```
+
+Kubernetes を使用している場合は、Datadog Operator または Helm チャートの構成を更新して、このカスタム Datadog Agent イメージをプルします。
+
+詳しくは[コミュニティインテグレーションの使用][1]を参照してください。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
+### ブラウザトラブルシューティング
 
 #### メトリクスの収集
 
-[Logstash メトリクス](#metrics)の収集を開始するには、`conf.yaml` ファイルに次の構成設定を追加します。
+{{< tabs >}}
+{{% tab "ホスト" %}}
 
-```yaml
-init_config:
+##### メトリクスベース SLO
 
-instances:
-  # Logstash がモニタリング API を提供する URL。
-  # これは Logstash に関するさまざまなランタイムメトリクスを取得するために使用されます。
-  #
-  - url: http://localhost:9600
-```
+1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `logstash.d/conf.yaml` ファイルを編集します。
 
-サーバーとポートを指定するように構成します。
+   ```yaml
+   init_config:
 
-使用可能なすべてのコンフィギュレーションオプションについては、[サンプル conf.yaml][5] を参照してください。
+   instances:
+     # The URL where Logstash provides its monitoring API.
+     # This will be used to fetch various runtime metrics about Logstash.
+     #
+     - url: http://localhost:9600
+   ```
 
-最後に、[Agent を再起動][7]すると、Datadog への Logstash メトリクスの送信が開始されます。
+   使用可能なすべての構成オプションの詳細については、[サンプル logstash.d/conf.yaml][2] を参照してください。
 
-#### ログの収集
+2. [Agent を再起動します][3]。
 
-Datadog には、Datadog プラットフォームへのログの送信を処理する、Logstash 用の[出力プラグイン][8]があります。
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "コンテナ化" %}}
+
+##### コンテナ化
+
+コンテナ環境では、以下のパラメーターを指定したオートディスカバリーテンプレートを使用します。
+
+| パラメーター            | 値                                |
+| -------------------- | ------------------------------------ |
+| `<INTEGRATION_NAME>` | `logstash`                           |
+| `<INIT_CONFIG>`      | 空白または `{}`                        |
+| `<INSTANCE_CONFIG>`  | `{"server": "http://%%host%%:9600"}` |
+
+このテンプレートの適用方法については、[Docker インテグレーション][1]または [Kubernetes インテグレーション][2]を参照してください。
+
+使用可能なすべての構成オプションの詳細については、[サンプル logstash.d/conf.yaml][3] を参照してください。
+
+[1]: https://docs.datadoghq.com/ja/containers/docker/integrations
+[2]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/
+[3]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
+{{% /tab %}}
+{{< /tabs >}}
+
+#### 収集データ
+
+Datadog には、Datadog プラットフォームへのログの送信を処理する、Logstash 用の[出力プラグイン][2]があります。
 
 このプラグインをインストールするには、次のコマンドを実行します。
 
 - `logstash-plugin install logstash-output-datadog_logs`
 
-次に、[Datadog API キー][9]を使用して `datadog_logs` プラグインを構成します。
+次に、[Datadog API キー][3]を使用して `datadog_logs` プラグインを構成します。
 
 ```conf
 output {
@@ -132,7 +185,7 @@ output {
 - `use_compression`: 圧縮は HTTP にのみ利用できます。これを `false` に設定すると無効化されます (デフォルトは `true`)。
 - `compression_level`: HTTP の圧縮レベルを 1 ～ 9 の範囲で設定します。最大値は 9 となります (デフォルトは `6`)。
 
-以下の追加パラメーターを使用すると、[プロキシ][10]を通過するために、使用するエンドポイントを変更できます。
+以下の追加パラメーターを使用すると、[プロキシ][4]を通過するために、使用するエンドポイントを変更できます。
 
 - `host`: ログを Datadog に直接転送しない場合のプロキシのエンドポイント (デフォルト値は `http-intake.logs.datadoghq.com`)。
 - `port`: ログを Datadog に直接転送しない場合のプロキシのポート (デフォルト値は `80`)
@@ -153,7 +206,7 @@ output {
 
 ##### ログへのメタデータの追加
 
-Datadog でログを最大限活用するには、ログにホスト名やソースなどの適切なメタデータを関連付けることが重要です。デフォルトでは、Datadog のデフォルトの[予約済み属性の再マップ][11]により、ホスト名とタイムスタンプが適切に再マップされます。確実にサービスを正しく再マップするには、その属性値をサービス再マップリストに追加します。
+Datadog でログを最大限活用するには、ログにホスト名やソースなどの適切なメタデータを関連付けることが重要です。デフォルトでは、Datadog のデフォルトの[予約済み属性の再マップ][5]により、ホスト名とタイムスタンプが適切に再マップされます。確実にサービスを正しく再マップするには、その属性値をサービス再マップリストに追加します。
 
 ##### ソース
 
@@ -169,11 +222,11 @@ filter {
  }
 ```
 
-これにより、Datadog で[インテグレーション自動セットアップ][12]がトリガーされます。
+これにより、Datadog で[インテグレーション自動セットアップ][6]がトリガーされます。
 
 ##### カスタムタグ
 
-[インフラストラクチャーリスト][14]に一致するホスト名があれば、[ホストタグ][13]がログに自動的に設定されます。ログにカスタムタグを追加する場合は、`ddtags` 属性を使用します。
+[インフラストラクチャーリスト][8]に一致するホスト名があれば、[ホストタグ][7]がログに自動的に設定されます。ログにカスタムタグを追加する場合は、`ddtags` 属性を使用します。
 
 ```conf
 filter {
@@ -187,15 +240,15 @@ filter {
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][15]し、Checks セクションで `logstash` を探します。
+[Agent の `status` サブコマンドを実行][9]し、Checks セクションで `logstash` を探します。
 
 ## 互換性
 
 Logstash チェックは、Logstash バージョン 5.x、6.x および 7.x と互換性があります。また、Logstash 6.0 で導入された新しいマルチパイプラインメトリクスにも対応します。Logstash バージョン 5.6.15、6.3.0 および 7.0.0 でテスト済みです。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "logstash" >}}
 
 
@@ -220,24 +273,16 @@ Logstash チェックには、イベントは含まれません。
 
 `conf.yaml` 内の `url` が正しいかどうかを確認してください。
 
-それでも解決できない場合は、[Datadog のサポートチーム][18]までお問合せください。
+それでも解決できない場合は、[Datadog のサポートチーム][10]までお問い合わせください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[3]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-extras/blob/master/logstash/datadog_checks/logstash/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
-[8]: https://github.com/DataDog/logstash-output-datadog_logs
-[9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://docs.datadoghq.com/ja/agent/proxy/#proxy-for-logs
-[11]: /ja/logs/#edit-reserved-attributes
-[12]: /ja/logs/processing/#integration-pipelines
-[13]: /ja/getting_started/tagging/assigning_tags
-[14]: https://app.datadoghq.com/infrastructure
-[15]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[16]: https://github.com/DataDog/integrations-extras/blob/master/logstash/metadata.csv
-[17]: https://github.com/DataDog/integrations-extras/blob/master/logstash/assets/service_checks.json
-[18]: http://docs.datadoghq.com/help
+[1]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://github.com/DataDog/logstash-output-datadog_logs
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://docs.datadoghq.com/ja/agent/proxy/#proxy-for-logs
+[5]: /ja/logs/#edit-reserved-attributes
+[6]: /ja/logs/processing/#integration-pipelines
+[7]: /ja/getting_started/tagging/assigning_tags
+[8]: https://app.datadoghq.com/infrastructure
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[10]: http://docs.datadoghq.com/help

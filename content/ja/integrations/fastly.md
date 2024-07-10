@@ -15,6 +15,7 @@ assets:
       prefix: fastly.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 57
     source_type_name: Fastly
   monitors:
     '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json
@@ -30,7 +31,6 @@ categories:
 - caching
 - log collection
 - metrics
-- web
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,12 +39,11 @@ integration_id: fastly
 integration_title: Fastly
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: fastly
-oauth: {}
 public_title: Fastly
-short_description: ファイルをキャッシュすることで、Web ページの読み込みを早くするコンテンツ配信ネットワーク
+short_description: Fastly のキーメトリクスを Datadog の他のメトリクスと関連付けて表示します。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -52,28 +51,30 @@ tile:
   - Category::キャッシュ
   - Category::ログの収集
   - Category::Metrics
-  - Category::Web
   configuration: README.md#Setup
-  description: ファイルをキャッシュすることで、Web ページの読み込みを早くするコンテンツ配信ネットワーク
+  description: Fastly のキーメトリクスを Datadog の他のメトリクスと関連付けて表示します。
   media: []
   overview: README.md#Overview
   support: README.md#Troubleshooting
   title: Fastly
 ---
 
-{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+{{< img src="integrations/fastly/fastly_dashboard.png" alt="キャッシュヒット率、成功率、その他のメトリクスを表示する Fastly ダッシュボード" popup="true">}}
 
 ## 概要
 
-Fastly に接続して、Fastly のキーメトリクス (キャッシュカバレッジ、ヘッダーサイズなど) を Datadog の他のメトリクスと関連付けて表示できます。
+Fastly を Datadog に接続して、Fastly のキーメトリクス (キャッシュカバレッジ、ヘッダーサイズなど) を Datadog の他のメトリクスと関連付けて表示できます。
 
-## セットアップ
+このインテグレーションには、即座に使用可能なモニターとダッシュボードが含まれており、それによってメトリクスを総合的に表示し、Fastly メトリクスと関連ログとの間で比較し、メトリクスがユーザー定義のしきい値を超えたり異常な振る舞いを示したりした際に通知するモニターを作成することが可能です。
 
-### インストール
+## 計画と使用
+
+### インフラストラクチャーリスト
 
 必要なインストール手順はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 #### メトリクスの収集
 
@@ -85,7 +86,10 @@ ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</co
 
 1 つのアカウントで複数のサービス ID を使用している場合は、各行に API トークンを入力します。
 
-#### ログの収集
+アカウント名はアカウントの整理に使用されるものであり、データ取り込みプロセスには使用されません。
+
+#### 収集データ
+
 
 {{< site-region region="us3" >}}
 
@@ -93,7 +97,9 @@ ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</co
 
 {{< /site-region >}}
 
-{{< site-region region="us,eu,gov" >}}
+
+
+{{< site-region region="us,us5,eu,gov" >}}
 
 Fastly ログを Datadog に転送するように Datadog エンドポイントを構成します。`Datadog` または `Datadog (via Syslog)` エンドポイントを選択できます。Syslog 経由でログをより確実に配信するには、`Datadog` エンドポイントをお勧めします。
 
@@ -138,24 +144,34 @@ Fastly ログを Datadog に転送するように Datadog エンドポイント�
 
 {{< /site-region >}}
 
-## 収集データ
 
-### メトリクス
+## リアルユーザーモニタリング
+
+### データセキュリティ
 {{< get-metrics-from-git "fastly" >}}
 
 
-### イベント
+### ヘルプ
 
 Fastly インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Fastly インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
+## その他の参考資料
+
+- [Datadog を使用した Fastly パフォーマンスの監視][4]
+- [Terraform による Fastly アカウントの作成と管理][5]
+- [Terraform による Fastly サービスの作成と管理][6]
 
 [1]: https://app.datadoghq.com/account/settings#integrations/fastly
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help/
+[4]: https://www.datadoghq.com/blog/monitor-fastly-performance-metrics/
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_account
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_service

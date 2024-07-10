@@ -6,7 +6,6 @@ aliases:
 - /ja/account_management/faq/how-do-i-reset-my-application-keys/
 - /ja/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /ja/account_management/faq/api-app-key-management/
-kind: documentation
 title: API キーとアプリケーションキー
 ---
 
@@ -33,15 +32,15 @@ API キーは組織に固有で、Datadog Agent でメトリクスとイベン�
 
 ## クライアントトークン
 
-セキュリティ上の理由から、API キーを使用してブラウザーからデータを送信することはできません。JavaScript キーでクライアント側に公開されるためです。その代わり、Webブラウザやその他のクライアントは、クライアントトークンを使用して Datadog にデータを送信します。
+セキュリティ上の理由から、API キーはクライアント側で公開されるため、ブラウザ、モバイル、TV アプリからのデータ送信には使用できません。その代わりに、エンドユーザー向けアプリケーションでは、クライアントトークンを使用して Datadog にデータを送信します。
 
 以下の例を含む、いくつかのタイプのクライアントが、クライアントトークンを必要とするデータを送信します。
-- [Web ブラウザのログコレクター][6]がログを送信する。
+- [Web ブラウザ][6]、[Android][12]、[iOS][13]、[React Native][14]、[Flutter][15]、[Roku][16] のログコレクターがログを送信します。
 - [リアルユーザーモニタリング][7]アプリケーションがイベントとログを送信する。
 
 クライアントトークンは、組織に固有のものです。クライアントトークンを管理するには、**Organization Settings** に移動し、**Client Tokens** タブをクリックします。
 
-**注:** クライアントトークンを作成したユーザーが非アクティブ化されても、クライアントトークンはアクティブなままです。
+**注**: クライアントトークンを作成したユーザーが非アクティブ化されても、クライアントトークンはアクティブなままです。
 
 ## API キーまたはクライアントトークンを追加する
 
@@ -133,3 +132,8 @@ API キーが定められた上限の 50 を超えて必要な場合は、上限
 [9]: /ja/api/latest/service-accounts/
 [10]: /ja/help/
 [11]: /ja/account_management/org_settings/service_accounts/
+[12]: /ja/logs/log_collection/android/
+[13]: /ja/logs/log_collection/ios/
+[14]: /ja/logs/log_collection/reactnative/
+[15]: /ja/logs/log_collection/flutter/
+[16]: /ja/logs/log_collection/roku/

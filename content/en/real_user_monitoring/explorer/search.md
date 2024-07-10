@@ -1,6 +1,5 @@
 ---
 title: Search RUM Events
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/explorer/group/"
   tag: "Documentation"
@@ -29,7 +28,7 @@ While RUM automatically captures events, you can also capture your own events. A
 
 To search through your RUM events, select an event type from the dropdown menu to the left of the search bar. 
 
-{{< img src="real_user_monitoring/explorer/search/rum_explorer_search-3.png" alt="RUM Explorer" style="width:100%;">}}
+{{< img src="real_user_monitoring/explorer/search/rum-explorer-search-4.png" alt="RUM Explorer" style="width:100%;">}}
 
 ## Search query
 
@@ -51,7 +50,7 @@ While most automatically collected attributes are indexed and faceted, your cust
 
 A facet displays all distinct members of an attribute or tag and provides basic analytics, such as the number of RUM events represented. Facets allow you to pivot or filter your datasets based on a given attribute. Selecting a value applies a filter in the search bar.
 
-{{< img src="real_user_monitoring/explorer/rum_facet-2.png" alt="List of facets to the left of the events list" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/rum-facet-3.png" alt="List of facets to the left of the events list" style="width:90%;">}}
 
 To create a facet, find and click on an attribute in the [event side panel][7]. This creates a section of attributes for the values in the side panel, such as "Country subdivision".
 
@@ -59,7 +58,7 @@ To create a facet, find and click on an attribute in the [event side panel][7]. 
 
 You can also take metadata from a session and turn it into a facet (Virginia, for example) by clicking **+ Add** from the left side panel, then entering or selecting a path to the facet.
 
-{{< img src="real_user_monitoring/explorer/create-facet-1.png" alt="Create a facet using the +Add button from the facet list" style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="Create a facet using the +Add button from the facet list" style="width:40%;">}}
 
 You can click **Advanced options** to customize the facet further, such as providing a different display name, type, group, or description.
 

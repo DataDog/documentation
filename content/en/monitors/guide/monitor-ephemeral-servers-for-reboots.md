@@ -1,6 +1,5 @@
 ---
 title: Monitor ephemeral servers for reboots
-kind: guide
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

@@ -23,12 +23,11 @@ integration_id: firefly-license
 integration_title: Firefly
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: firefly_license
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -76,6 +75,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -94,7 +94,7 @@ Infrastructure-as-Code と実際のクラウドの状態に差異がある場合
 ### ポリシー違反の検出と修正
 Firefly の統合ポリシーエンジンにより、危険な構成ミスやコストのかかる使用不足を発見し、カスタムポリシーと既成ポリシーの両方でポリシー違反のアラートを受け取ることができます。
 
-## サポート
+## Agent
 何か質問はありますか？メール [contact@gofirefly.io][1] またはアプリ内チャットをご利用ください。
 
 [1]: mailto:contact@gofirefly.io

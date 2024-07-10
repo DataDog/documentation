@@ -1,16 +1,18 @@
 ---
 title: Notes and Links Widget
-kind: documentation
+widget_type: note
 description: "Display text in a dashboard widget."
 aliases:
-    - /graphing/widgets/note/
+- /graphing/widgets/note/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Learn how to build dashboards using JSON"
 ---
 
-The **Notes & Links** widget is similar to the [free text widget][1] but contains more formatting and display options.
+The **Notes & Links** widget is similar to the [free text widget][1] but contains more formatting and display options. 
+
+**Note**: The Notes & Links widget does not support inline HTML.
 
 ## Setup
 
@@ -32,9 +34,8 @@ In this example, `$env.value` updates the value of a link to the selected enviro
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
-The dedicated [widget JSON schema definition][3] for the note widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -43,5 +44,5 @@ The dedicated [widget JSON schema definition][3] for the note widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/free_text/
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

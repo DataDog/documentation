@@ -1,13 +1,13 @@
 ---
 title: Sinatra
 name: Sinatra
-kind: integration
+custom_kind: integration
 description: 'Gather Sinatra application logs.'
 short_description: 'Gather Sinatra application logs.'
 categories:
     - log collection
 aliases:
-    - logs/log_collection/nxlog
+    - /logs/log_collection/nxlog
 has_logo: true
 integration_title: Sinatra
 is_public: true

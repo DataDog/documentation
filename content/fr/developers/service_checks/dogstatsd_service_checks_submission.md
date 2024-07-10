@@ -1,6 +1,5 @@
 ---
 title: "Envoi de checks de service\_: DogStatsD"
-kind: documentation
 description: Présentation des fonctionnalités de DogStatsD, y compris des types de données et du tagging.
 further_reading:
   - link: /developers/dogstatsd/
@@ -9,9 +8,6 @@ further_reading:
   - link: /developers/community/libraries/
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-    tag: GitHub
-    text: Code source de DogStatsD
 ---
 Si StatsD n'accepte que les métriques, DogStatsD prend en charge les trois principaux types de données Datadog : métriques, événements et checks de service. Cette section propose des cas d'utilisation typiques des checks de service, accompagnés d'exemples de code.
 

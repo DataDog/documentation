@@ -1,4 +1,25 @@
 {
+  "CreateApmRetentionFilter": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Create a retention filter returns \"OK\" response"
+    }
+  ],
+  "ReorderApmRetentionFilters": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Re-order retention filters returns \"OK\" response"
+    }
+  ],
+  "UpdateApmRetentionFilter": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Update a retention filter returns \"OK\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -75,18 +96,109 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
-      "group": "cloud_workload_security",
+      "group": "csm_threats",
       "suffix": "",
       "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
+  "UpdateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
   "UpdateCloudWorkloadSecurityAgentRule": [
     {
-      "group": "cloud_workload_security",
+      "group": "csm_threats",
       "suffix": "",
       "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "ArchiveCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Archive case returns \"OK\" response"
+    }
+  ],
+  "AssignCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Assign case returns \"OK\" response"
+    }
+  ],
+  "CreateCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Create a case returns \"CREATED\" response"
+    }
+  ],
+  "UnarchiveCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Unarchive case returns \"OK\" response"
+    }
+  ],
+  "UnassignCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Unassign case returns \"OK\" response"
+    }
+  ],
+  "UpdatePriority": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case priority returns \"OK\" response"
+    }
+  ],
+  "UpdateStatus": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case status returns \"OK\" response"
+    }
+  ],
+  "CreateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "CreateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management Azure configs returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
@@ -115,6 +227,20 @@
       "group": "confluent_cloud",
       "suffix": "",
       "description": "Update Confluent account returns \"OK\" response"
+    }
+  ],
+  "CreateDORADeployment": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
@@ -200,6 +326,31 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Create a new entry for your service account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_109518525",
+      "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_194782945",
+      "description": "Create a new entry for your service account with cloud run revision filters enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_4235664992",
+      "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_130557025",
+      "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2597004741",
+      "description": "Create a new entry for your service account with security command center enabled returns \"OK\" response"
     }
   ],
   "UpdateGCPSTSAccount": [
@@ -207,6 +358,16 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2241994060",
+      "description": "Update STS Service Account returns \"OK\" response with cloud run revision filters"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_3205636354",
+      "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
     }
   ],
   "UpdateIPAllowlist": [
@@ -313,13 +474,13 @@
   "CreateCurrentUserApplicationKey": [
     {
       "group": "key_management",
-      "suffix": "_1999509896",
-      "description": "Create an Application key for current user returns \"Created\" response"
+      "suffix": "_3383369233",
+      "description": "Create an Application key with scopes for current user returns \"Created\" response"
     },
     {
       "group": "key_management",
-      "suffix": "_3383369233",
-      "description": "Create an Application key with scopes for current user returns \"Created\" response"
+      "suffix": "",
+      "description": "Create an application key for current user returns \"Created\" response"
     }
   ],
   "UpdateAPIKey": [
@@ -387,6 +548,35 @@
       "group": "logs",
       "suffix": "",
       "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    }
+  ],
+  "CreateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2184123765",
+      "description": "Create a Basic HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1091442807",
+      "description": "Create a Custom Header HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1288180912",
+      "description": "Create a Splunk custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_141236188",
+      "description": "Create an Elasticsearch custom destination returns \"OK\" response"
+    }
+  ],
+  "UpdateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "",
+      "description": "Update a custom destination returns \"OK\" response"
     }
   ],
   "CreateLogsMetric": [
@@ -469,6 +659,20 @@
       "description": "Edit a monitor configuration policy returns \"OK\" response"
     }
   ],
+  "CreateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Add Okta account returns \"OK\" response"
+    }
+  ],
+  "UpdateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Update Okta account returns \"OK\" response"
+    }
+  ],
   "CreateOpsgenieService": [
     {
       "group": "opsgenie_integration",
@@ -481,6 +685,27 @@
       "group": "opsgenie_integration",
       "suffix": "",
       "description": "Update a single service object returns \"OK\" response"
+    }
+  ],
+  "UpdateOrgConfig": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Update a specific Org Config returns \"OK\" response"
+    }
+  ],
+  "CreatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Create a new powerpack returns \"OK\" response"
+    }
+  ],
+  "UpdatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Update a powerpack returns \"OK\" response"
     }
   ],
   "AggregateRUMEvents": [
@@ -540,8 +765,8 @@
   "CreateRole": [
     {
       "group": "roles",
-      "suffix": "",
-      "description": "Create role returns \"OK\" response"
+      "suffix": "_3862893229",
+      "description": "Create role with a permission returns \"OK\" response"
     }
   ],
   "AddPermissionToRole": [
@@ -563,13 +788,6 @@
       "group": "roles",
       "suffix": "",
       "description": "Revoke permission returns \"OK\" response"
-    }
-  ],
-  "UpdateRole": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "Update a role returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [
@@ -599,6 +817,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_3367706049",
+      "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
@@ -620,6 +843,18 @@
       "description": "Create a security filter returns \"OK\" response"
     }
   ],
+  "CreateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a suppression rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3192265332",
+      "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
+    }
+  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
@@ -634,11 +869,18 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "UpdateFinding": [
+  "MuteFindings": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Mute or unmute a finding returns \"OK\" response"
+      "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "TestSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a rule returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -658,6 +900,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "ValidateSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Validate a detection rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [
@@ -719,8 +975,8 @@
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_1761876297",
-      "description": "Create an app key for this service account returns \"Created\" response"
+      "suffix": "",
+      "description": "Create an application key for this service account returns \"Created\" response"
     },
     {
       "group": "service_accounts",
@@ -731,8 +987,8 @@
   "UpdateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_768415790",
-      "description": "Edit an app key owned by this service account returns \"OK\" response"
+      "suffix": "",
+      "description": "Edit an application key for this service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [
@@ -745,6 +1001,32 @@
       "group": "service_definition",
       "suffix": "_2619874414",
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
+    },
+    {
+      "group": "service_definition",
+      "suffix": "_2621709423",
+      "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
+    }
+  ],
+  "CreateSLOReportJob": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Create a new SLO report returns \"OK\" response"
+    }
+  ],
+  "CreateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
   "AggregateSpans": [
@@ -783,8 +1065,8 @@
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",
-      "suffix": "_2850884405",
-      "description": "Save on demand concurrency cap"
+      "suffix": "",
+      "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
   "CreateTeamLink": [
@@ -799,6 +1081,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Create a team returns \"CREATED\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_252121814",
+      "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
   "UpdateTeamLink": [

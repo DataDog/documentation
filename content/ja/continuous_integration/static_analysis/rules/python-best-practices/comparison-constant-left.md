@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 比較では、変数はそのままにしておかなければならない
 ---
 ## メタデータ
@@ -35,4 +34,8 @@ if i >= 1:
 if 0 < nextSx <= len(subject):
     px = nextPx
     sx = nextSx
+
+if 1 in ctx:
+  print("foo")
+
 ```

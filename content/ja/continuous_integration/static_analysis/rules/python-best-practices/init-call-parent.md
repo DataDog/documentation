@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: super() を使って親コンストラクタを呼び出す
 ---
 ## メタデータ
@@ -11,7 +10,7 @@ title: super() を使って親コンストラクタを呼び出す
 
 **重大度:** 警告
 
-**カテゴリー:** デザイン
+**カテゴリー:** ベストプラクティス
 
 ## 説明
 親コンストラクタを呼び出すには、親オブジェクトを直接呼び出すのではなく、`super()` を呼び出す必要があります。
@@ -24,6 +23,16 @@ class Class(Parent):
 ```
 
 ## 準拠コードの例
+```python
+# 親が複数あり、どの親コンストラクタを使用するか
+# 正確に知る必要があります
+class DummyCIVisibilityWriter(DummyWriterMixin, CIVisibilityWriter):
+    def __init__(self, *args, **kwargs):
+        CIVisibilityWriter.__init__(self, *args, **kwargs)
+        DummyWriterMixin.__init__(self, *args, **kwargs)
+        self._encoded = None
+```
+
 ```python
 class Class(Parent):
     def foo(self):

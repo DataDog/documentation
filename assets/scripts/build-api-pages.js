@@ -17,10 +17,10 @@ const supportedLangs = ['en'];
 const updateMenu = (specData, specs, languages) => {
 
   languages.forEach((language) => {
-    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
+    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/api.${language}.yaml`, 'utf8'));
 
   // filter out auto generated menu items so we just have hardcoded ones
-  const newMenuArray = (currentMenuYaml[`api`] || []).filter((entry => !entry.hasOwnProperty("generated")));
+  const newMenuArray = (currentMenuYaml['menu']['api'] || []).filter((entry => !entry.hasOwnProperty("generated")));
 
   specData.forEach((apiYaml, index) => {
     const apiVersion = specs[index].split('/')[3];
@@ -90,12 +90,12 @@ const updateMenu = (specData, specs, languages) => {
 
 
   // generate new yaml menu
-  currentMenuYaml[`api`] = newMenuArray;
+  currentMenuYaml['menu']['api'] = newMenuArray;
   const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
 
   // save new yaml menu
-  fs.writeFileSync(`./config/_default/menus/menus.${language}.yaml`, newMenuYaml, 'utf8');
-  console.log(`successfully updated ./config/_default/menus/menus.${language}.yaml`);
+  fs.writeFileSync(`./config/_default/menus/api.${language}.yaml`, newMenuYaml, 'utf8');
+  console.log(`successfully updated ./config/_default/menus/api.${language}.yaml`);
   })
 
 
@@ -201,7 +201,7 @@ const getSchema = (content) => {
   const contentTypeKeys = Object.keys(content);
   const [firstContentType] = contentTypeKeys;
   contentTypeKeys.forEach((key) => {
-    if(key.startsWith("application/json") || key.startsWith("text/json")) {
+    if(key.startsWith("application/json") || key.startsWith("text/json") || key.startsWith("multipart/form-data")) {
       return content[key].schema;
     }
   });
@@ -914,6 +914,8 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
 
   const actions = {};
   Object.keys(deref.paths)
+    // Ignore extensions since they're not paths.
+    .filter((path) => !path.startsWith("x-"))
     .forEach((path) => {
       Object.entries(deref.paths[path]).forEach(([actionKey, action]) => {
         const item = {
@@ -927,6 +929,8 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
             item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
           } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
             item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
+          } else if(action.requestBody.content && action.requestBody.content["multipart/form-data"]) {
+            item['request_schema_description'] = action.requestBody.content["multipart/form-data"].schema.description || '';
           }
         }
         /*

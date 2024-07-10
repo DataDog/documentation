@@ -30,7 +30,7 @@ export default {
         us5: 'US5',
         eu: 'EU',
         ap1: 'AP1',
-        gov: 'Government'
+        gov: 'US1-FED'
     },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
@@ -164,5 +164,107 @@ export default {
       eu: 'browser-intake-datadoghq.eu',
       ap1: 'browser-intake-ap1-datadoghq.com',
       gov: 'browser-intake-ddog-gov.com'
-    }
+    },
+    aws_region: {
+      us: 'us-east-1',
+      us3: 'N/A',
+      us5: 'N/A',
+      eu: 'N/A',
+      ap1: 'ap-northeast-1',
+      gov: 'N/A'
+    },
+    aws_private_link_api_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-008cd79a7a09e0a1e',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_containers_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03ffd8d552f0d957d',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_logs_agent_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-03e139d1f2766685b',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_logs_user_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-08799aabff1cfd8a3',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_metrics_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_process_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0e86b29a0dc2c8a26',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_profiling_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0d598057ecde10596',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_traces_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_dbm_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_remote_config_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    ip_ranges_url: {
+      us: 'http://ip-ranges.datadoghq.com',
+      us3: 'http://ip-ranges.us3.datadoghq.com',
+      us5: 'http://ip-ranges.us5.datadoghq.com',
+      eu: 'http://ip-ranges.datadoghq.eu',
+      ap1: 'http://ip-ranges.ap1.datadoghq.com',
+      gov: 'http://ip-ranges.ddog-gov.com'
+    },
+    otlp_trace_endpoint: {
+     us: `https://trace.agent.datadoghq.com/api/v0.2/traces`,
+     us3: `https://trace.agent.us3.datadoghq.com/api/v0.2/traces`,
+     us5: `https://trace.agent.us5.datadoghq.com/api/v0.2/traces`,
+     eu: `https://trace.agent.datadoghq.eu/api/v0.2/traces`
+    }  
 };

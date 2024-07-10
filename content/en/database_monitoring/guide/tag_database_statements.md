@@ -1,10 +1,7 @@
 ---
 title: Tagging SQL Statements
-kind: guide
+
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This guide assumes that you have configured [Database Monitoring][1].
 
@@ -13,7 +10,7 @@ This guide assumes that you have configured [Database Monitoring][1].
 ## Before you begin
 
 Supported databases
-: postgres, mysql, sqlserver
+: Postgres, MySQL, SQL Server
 
 Supported Agent versions
 : 7.36.1+
@@ -27,6 +24,11 @@ Using any database API supporting execution of SQL statements, add a comment in 
 
 ```sql
 /*key='val'*/ SELECT * from FOO
+```
+
+Separate multiple tags with commas:
+```sql
+/*key1='val1',key2='val2'*/ SELECT * from FOO
 ```
 
 Full example:
@@ -52,7 +54,7 @@ func main() {
 
 ## Explore the tags in DBM
 
-On the [**DBM > Samples**][4] page, filter the **Explain Plans** and **Query Samples** views by custom tag.
+On the [Samples page][4], filter the **Explain Plans** and **Query Samples** views by custom tag.
 
 {{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="Filter explain plans by custom tag.">}}
 
@@ -67,4 +69,4 @@ When you select a query, the custom tags are shown on the **Sample Details** pag
 [1]: /database_monitoring/#getting-started
 [2]: https://google.github.io/sqlcommenter
 [3]: https://github.com/basecamp/marginalia
-[4]: /database_monitoring/query_samples/
+[4]: https://app.datadoghq.com/databases/samples

@@ -14,10 +14,9 @@ further_reading:
 - link: developers/libraries
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: Code source de DogStatsD
-kind: documentation
+- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
+  tag: Blog
+  text: Surveiller vos applications Web Linux sur Azure App Service avec Datadog
 title: DogStatsD
 ---
 
@@ -26,7 +25,7 @@ La meilleure façon d'intégrer vos métriques custom d'application à Datadog c
 - Type de métrique histogram
 - Checks de service
 - Événements
-- Tagging
+- Tags
 
 Vous pouvez utiliser n'importe quel client StatsD conforme avec DogStatsD et l'Agent. Cependant, les [extensions Datadog](#decouvrir-dogstatsd) ne sont pas incluses.
 
@@ -38,6 +37,8 @@ DogStatsD est disponible sur Docker Hub et GCR :
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
+<div class="alert alert-warning">Docker Hub est soumis à des limites de pull d'images. Si vous n'êtes pas client Docker Hub, Datadog vous recommande de mettre à jour la configuration de votre Agent Datadog et de votre Agent de cluster afin de récupérer les images à partir de GCR ou ECR. Pour connaître la marche à suivre, consultez la section <a href="/agent/guide/changing_container_registry">Modifier votre registre de conteneurs</a>.</div>
+
 ## Fonctionnement
 
 DogStatsD accepte les [métriques custom][5], les [événements][6] et les [checks de service][7] par le biais du protocole UDP. Il les agrège et les transmet régulièrement à Datadog.
@@ -48,7 +49,7 @@ Grâce au protocole UDP, votre application peut envoyer des métriques à DogSta
 
 Lorsque DogStatsD reçoit des données, il agrège de nombreux points de données pour chaque métrique au sein d'un seul point de données, sur une période correspondant à l'_intervalle de transmission_. Par défaut, l'intervalle de transmission de DogStatsD dure 10 secondes.
 
-## Configuration
+## Implémentation
 
 DogStatsD est activé par défaut sur le port UDP `8125` à partir de la version 6 de l'Agent. Si vous ne devez pas changer ce port, passez directement à la [configuration de DogStatsD dans votre code](#code).
 
@@ -99,7 +100,16 @@ docker run -d --cgroupns host \
 
 Si vous devez modifier le port utilisé pour recueillir des métriques StatsD, utilisez la variable d'environnement `DD_DOGSTATSD_PORT="<NOUVEAU_PORT_DOGSTATSD>`. Vous pouvez également configurer DogStatsD de façon à utiliser un [socket de domaine Unix][1] :
 
+#### Détection de l'origine via UDP
+
+La détection de l'origine est prise en charge à partir de l'Agent 6.10.0. Elle permet à DogStatsD de détecter la provenance des métriques de conteneur et de taguer automatiquement les métriques. Lorsque ce mode est activé, toutes les métriques transmises via UDP reçoivent les mêmes tags de pod que les métriques Autodiscovery.
+
+La détection de l'origine dans les environnements non basés sur Kubernetes fait appel à une extension du protocole DogStatsD dans le [Datagramme et interface système][2]. Pour activer cette fonctionnalité dans l'Agent, définissez la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` sur `true`.
+
+**Remarque** : la détection de l'origine n'est pas prise en charge pour les environnements Fargate.
+
 [1]: /fr/developers/dogstatsd/unix_socket/
+[2]: /fr/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -119,7 +129,7 @@ Pour commencer à recueillir vos métriques StatsD, vous devez lier le port DogS
 
      **Remarque** : la fonction `hostPort` requiert un fournisseur réseau qui respecte la [spécification CNI][2], tel que Calico, Canal ou Flannel. Pour obtenir davantage d'informations, et notamment pour trouver une solution pour les fournisseurs réseau ne respectant pas la spécification CNI, consultez la section [Services HostPort non fonctionnels][3] de la documentation Kubernetes (en anglais).
 
-    **Remarque** : pour un déploiement d'Operator, configurez le port du host à l'aide de `agent.config.hostPort`.
+     **Remarque** : pour un déploiement d'Operator, configurez le port du host à l'aide de `agent.config.hostPort`.
 
 2. Activez le trafic DogStatsD non local pour permettre la collecte de données StatsD en définissant `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` sur `true` dans votre manifeste `datadog-agent.yaml` :
 
@@ -152,7 +162,7 @@ env:
 
 Grâce à ce manifeste, un pod exécutant votre application peut transmettre des métriques DogStatsD avec le port `8125` sur `$DD_AGENT_HOST`.
 
-**Remarque** : Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des attributs. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment unifier votre environnement, consultez la section [Tagging de service unifié][8].
+**Remarque** : Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des attributs. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment unifier votre environnement, consultez la section [Tagging de service unifié][4].
 
 #### Détection de l'origine via UDP
 
@@ -161,7 +171,7 @@ La détection de l'origine est prise en charge par l'Agent 6.10.0 et les versio
 **Remarques** : 
 
 * La détection de l'origine via UDP utilise l'ID de pod en tant qu'ID d'entité. Les tags au niveau des conteneurs ne sont donc pas émis.
-* Comme alternative à UDP, vous pouvez utiliser des [sockets de domaine Unix][4].
+* Comme alternative à UDP, vous pouvez utiliser des [sockets de domaine Unix][5].
 
 Pour activer la détection de l'origine via UDP, ajoutez les lignes suivantes au manifeste de votre application :
 
@@ -173,16 +183,17 @@ env:
               fieldPath: metadata.uid
 ```
 
-Pour définir la [cardinalité des tags][5] pour les métriques recueillies avec la détection de l'origine, définissez la variable d'environnement `DD_DOGSTATSD_TAG_CARDINALITY` sur `low` (valeur par défaut) ou `orchestrator`.
+Pour définir la [cardinalité des tags][6] pour les métriques recueillies avec la détection de l'origine, définissez la variable d'environnement `DD_DOGSTATSD_TAG_CARDINALITY` sur `low` (valeur par défaut) ou `orchestrator`.
 
-**Remarque :** pour UDP, les tags `pod_name` ne sont pas ajoutés par défaut afin d'éviter la création d'un nombre excessif de [métriques custom][6].
+**Remarque** :; pour UDP, les tags `pod_name` ne sont pas ajoutés par défaut afin d'éviter la création d'un nombre excessif de [métriques custom][7].
 
 [1]: /fr/developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-[4]: /fr/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
-[5]: /fr/getting_started/tagging/assigning_tags/#environment-variables
-[6]: /fr/metrics/custom_metrics/
+[4]: /fr/getting_started/tagging/unified_service_tagging
+[5]: /fr/developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
+[6]: /fr/getting_started/tagging/assigning_tags/#environment-variables
+[7]: /fr/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -265,7 +276,7 @@ Le client Java StatsD Datadog est distribué avec Maven Central et peut être [t
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>3.0.0</version>
+    <version>4.2.1</version>
 </dependency>
 ```
 
@@ -293,8 +304,11 @@ Vous pouvez également dupliquer manuellement le référentiel disponible sur [g
 
 {{< programming-lang lang=".NET" >}}
 
-- Récupérez le [package depuis NuGet][1] et installez-le.
+Installez le package directement via l'interface de ligne de commande Nuget ou récupérez [le PackageReference depuis NuGet][1] :
 
+```shell
+dotnet add package DogStatsD-CSharp-Client
+```
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
@@ -415,7 +429,6 @@ Configurez la classe DogStatsD :
 
 ```csharp
 // Le code se trouve sous l'espace de nommage StatsdClient
-using StatsdClient;
 
 // ...
 
@@ -427,7 +440,8 @@ var dogstatsdConfig = new StatsdConfig
 
 using (var dogStatsdService = new DogStatsdService())
 {
-    dogStatsdService.Configure(dogstatsdConfig);
+    if (!dogStatsdService.Configure(dogstatsdConfig))
+        throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     // ...
 } // Transmettre les métriques pas encore envoyées
 ```
@@ -459,7 +473,7 @@ Pour obtenir la liste complète des paramètres facultatifs disponibles pour `da
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-| Paramètre       | Type            | Valeur par défaut     | Description                                                                                                    |
+| Paramètre       | Type            | Valeur par défaut     | Rôle                                                                                                    |
 | --------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `host`          | Chaîne          | `localhost` | Le host de votre serveur DogStatsD.                                                                             |
 | `port`          | Nombre entier         | `8125`      | Le port de votre serveur DogStatsD.                                                                             |
@@ -477,7 +491,7 @@ Pour obtenir la liste complète des paramètres facultatifs, consultez le [réf�
 
 Le client Go dispose de plusieurs options pour la configuration du comportement de votre client.
 
-| Paramètre                     | Type            | Description                                                                  |
+| Paramètre                     | Type            | Rôle                                                                  |
 | ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
 | `WithNamespace()`             | Chaîne          | Permet de configurer un espace de nommage à ajouter devant le nom de chaque métrique, événement et check de service.  |
 | `WithTags()`                  | Liste de chaînes | Les tags globaux à appliquer à toutes les métriques, à tous les événements et à tous les checks de service.               |
@@ -491,7 +505,7 @@ Pour découvrir toutes les options disponibles, consultez la [documentation Data
 
 Depuis la version 2.10.0, il est conseillé d'instancier le client avec NonBlockingStatsDClientBuilder. Vous pouvez utiliser les méthodes de builder suivantes pour définir les paramètres du client.
 
-| Méthode de builder                               | Type           | Valeur par défaut   | Description                                                                         |
+| Méthode de builder                               | Type           | Valeur par défaut   | Rôle                                                                         |
 | -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
 | `prefix(String val)`                         | Chaîne         | null      | Préfixe à appliquer à toutes les métriques, à tous les événements et à tous les checks de service.                     |
 | `hostname(String val)`                       | Chaîne         | localhost | Hostname du serveur StatsD ciblé.                                        |
@@ -516,7 +530,7 @@ Pour en savoir plus, recherchez le [package][1] DogStatsD Java pour les classes 
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Paramètre     | Type            | Valeur par défaut     | Description                                                                                                                                                         |
+| Paramètre     | Type            | Valeur par défaut     | Rôle                                                                                                                                                         |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `host`        | Chaîne          | `localhost` | Host de votre serveur DogStatsD. S'il n'est pas défini, l'Agent utilise la variable d'environnement `DD_AGENT_HOST`.                                                  |
 | `port`        | Nombre entier         | `8125`      | Port de votre serveur DogStatsD. S'il n'est pas défini, l'Agent utilise la variable d'environnement `DD_DOGSTATSD_PORT`.                                             |
@@ -526,7 +540,7 @@ Pour en savoir plus, recherchez le [package][1] DogStatsD Java pour les classes 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-| Paramètre          | Type            | Valeur par défaut     | Description                                                          |
+| Paramètre          | Type            | Valeur par défaut     | Rôle                                                          |
 | ------------------ | --------------- | ----------- | -------------------------------------------------------------------- |
 | `StatsdServerName` | Chaîne          | `localhost` | Hostname du serveur StatsD ciblé.                         |
 | `StatsdPort`       | Nombre entier         | `8125`      | Port du serveur StatsD ciblé.                              |
@@ -542,18 +556,22 @@ DogStatsD et StatsD sont assez semblables. Toutefois, DogStatsD comprend des fon
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Envoyer des métriques à Datadog avec DogStatsD{{< /nextlink >}}
-{{< nextlink href="/events/guides/dogstatsd/" >}}Envoyer des événements à Datadog avec DogStatsD{{< /nextlink >}}
+{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}Envoyer des événements à Datadog avec DogStatsD{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Envoyer des checks de service à Datadog avec DogStatsD{{< /nextlink >}}
 {{< /whatsnext >}}
 
 Si vous souhaitez approfondir vos connaissances sur le format des datagrammes utilisé par DogStatsD, ou concevoir votre propre bibliothèque Datadog, consultez la section relative au [datagramme et à l'interface système][9], qui décrit également comment envoyer des métriques et des événements directement depuis la ligne de commande.
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/etsy/statsd
 [2]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /fr/metrics/custom_metrics/
-[6]: /fr/events/guides/dogstatsd/
+[6]: /fr/service_management/events/guides/dogstatsd/
 [7]: /fr/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /fr/getting_started/tagging/unified_service_tagging
 [9]: /fr/developers/dogstatsd/datagram_shell/

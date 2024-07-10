@@ -1,6 +1,5 @@
 ---
 title: Enabling the .NET Profiler
-kind: Documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 60
@@ -25,6 +24,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
 Supported operating systems for .NET Framework
 : Windows 10<br/>
 Windows Server starting from version 2012
@@ -35,14 +36,15 @@ Windows 10<br/>
 Windows Server starting from version 2012
 
 Serverless
-: Azure App Services - public beta (webapps only, functions are not supported)
+: Azure App Service Windows and Linux - Web Apps only, Function Apps are not supported
 
 Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
 .NET Core 2.1, 3.1<br/>
 .NET 5<br/>
 .NET 6<br/>
-.NET 7
+.NET 7<br/>
+.NET 8
 
 <div class="alert alert-warning">
   <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
@@ -53,21 +55,21 @@ Supported languages
 
 The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
 
-|      Feature         | Required `dd-trace-dotnet` version      | Required .NET Runtime versions        |
-|----------------------|-----------------------------------------|---------------------------------------|
-| Wall time profiling        | 2.7.0+                     |All supported runtime versions.      |
-| CPU profiling        | 2.15.0+                       | All supported runtime versions.      |
-| Exceptions profiling        | 2.31.0+                       | All supported runtime versions.      |
-| Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
-| Lock Contention profiling        | 2.31.0+                       | .NET 5+      |
-| Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
-| [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
-| [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
-| Timeline            | 2.30.0+                       | All supported runtime versions (except .NET 5+ required for garbage collection details).     |
+| Feature                   | Required `dd-trace-dotnet` version | Required .NET Runtime versions                                                           |
+|---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
+| Wall time profiling       | 2.7.0+                             | All supported runtime versions.                                                          |
+| CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
+| Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
+| Allocations profiling     | beta, 2.18.0+                      | .NET 6+                                                                                  |
+| Lock Contention profiling | 2.49.0+                            | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 5+                           |
+| Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
+| [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
+| [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
+| Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 
 ## Installation
 
-If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
+Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
 
 Otherwise, install the profiler using the following steps, depending on your operating system.
 
@@ -97,7 +99,7 @@ To install the .NET Profiler machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && sudo /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -127,16 +129,17 @@ To install the .NET Profiler per-application:
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
-{{% tab "Azure App Service (public beta)" %}}
+{{% tab "Azure App Service" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Only webapps are supported. Functions are not supported.
+  <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
 </div>
 
 To install the .NET Profiler per-webapp:
-1. Install the Azure App Service [Datadog APM Extension][1] to your webapp.
+1. Install the Azure App Service Datadog APM Extension [for Windows][1] or use the [Linux setup][2] for your webapp.
 
-[1]: /serverless/azure_app_services/?tab=net#installation
+[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -169,6 +172,25 @@ To install the .NET Profiler per-webapp:
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
+{{% /tab %}}
+
+{{% tab "Linux with Single Step Instrumentation" %}}
+
+1. With [Single Step Instrumentation][2], set the following required environment variables for automatic instrumentation to attach to your application:
+
+   ```
+   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+
+2. For standalone applications, manually restart the application as you normally would.
+
+3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
+[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
@@ -359,11 +381,12 @@ To install the .NET Profiler per-webapp:
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
-{{% tab "Azure App Service (public beta)" %}}
+{{% tab "Azure App Service" %}}
 
-2. Follow these [installation guidelines][1] to set `DD_PROFILING_ENABLED:true` to enable the profiler
+2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
 
-[1]: /serverless/azure_app_services/?tab=net#installation
+[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -413,3 +436,4 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

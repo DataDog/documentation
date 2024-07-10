@@ -1,6 +1,5 @@
 ---
 title: Introduction to Integrations
-kind: documentation
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
@@ -29,6 +28,10 @@ You can also build a [custom check][10] to define and send metrics to Datadog fr
 ## Setting up an integration
 
 The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12]. For more information on installing or managing these integrations, see the [integrations management guide][14].
+
+### Permissions
+
+The `manage_integrations` permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
 
 ### API and application keys
 
@@ -184,7 +187,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/
@@ -227,3 +230,4 @@ tagging
 [42]: /metrics/
 [43]: /metrics/custom_metrics/
 [44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /account_management/rbac/permissions/#integrations

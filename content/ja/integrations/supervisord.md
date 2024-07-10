@@ -36,12 +36,11 @@ draft: false
 git_integration_title: supervisord
 integration_id: supervisord
 integration_title: Supervisord
-integration_version: 2.4.0
+integration_version: 2.5.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: supervisord
-oauth: {}
 public_title: Supervisord
 short_description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
 supported_os:
@@ -159,7 +158,7 @@ instances:
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `<インテグレーション名>` | `supervisord`                                                                                                      |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                      |
-| `<インスタンスコンフィギュレーション>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "user":"<USERNAME>", "pass":"<PASSWORD>"}` |
+| `<インスタンスコンフィギュレーション>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "username":"<USERNAME>", "password":"<PASSWORD>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -217,7 +216,7 @@ Supervisor チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

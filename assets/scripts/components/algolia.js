@@ -7,6 +7,12 @@ import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
 import { debounce } from '../utils/debounce';
 
+const { env } = document.documentElement.dataset;
+const pageLanguage = getPageLanguage();
+const algoliaConfig = getConfig(env).algoliaConfig;
+const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
+let indexName = algoliaConfig.index;
+
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
 
@@ -18,22 +24,39 @@ function getPageLanguage() {
     return 'en';
 }
 
-function sendSearchRumAction(searchQuery, clickthroughLink = '') {
+function sendSearchRumAction(searchQuery, clickthroughLink = '', clickedLinkPosition = -1) {
     if (window.DD_RUM && window._DATADOG_SYNTHETICS_BROWSER === undefined && searchQuery !== '') {
-        window.DD_RUM.addAction('userSearch', {
+        const userSearchData = {
             query: searchQuery.toLowerCase(),
             page: window.location.pathname,
-            lang: getPageLanguage(),
-            clickthroughLink
-        });
+            lang: getPageLanguage()
+        }
+
+        if (clickthroughLink) {
+            userSearchData.clickthroughLink = clickthroughLink
+        }
+
+        if (clickedLinkPosition >= 0) {
+            userSearchData.clickPosition = clickedLinkPosition
+        }
+
+        window.DD_RUM.addAction('userSearch', userSearchData)
     }
 }
 
-const { env } = document.documentElement.dataset;
-const pageLanguage = getPageLanguage();
-const algoliaConfig = getConfig(env).algoliaConfig;
-const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
-let indexName = algoliaConfig.index;
+const getSearchResultClickPosition = (clickedTargetHref, hitsArray, numberOfHitsPerPage, currentPage) => {
+    let clickedTargetRelPermalink = clickedTargetHref
+
+    if (env === 'preview') {
+        const commitRef = document.documentElement.dataset.commitRef
+        clickedTargetRelPermalink = clickedTargetRelPermalink.replace(`/${commitRef}`, '')
+    }
+
+    const { pathname, hash } = new URL(clickedTargetRelPermalink)
+    const relPath = `${pathname}${hash}`
+    const clickedSearchResultIndexOnPage = hitsArray.findIndex(hit => hit.relpermalink == relPath)
+    return clickedSearchResultIndexOnPage + (currentPage * numberOfHitsPerPage)
+}
 
 function loadInstantSearch(currentPageWasAsyncLoaded) {
     const searchBoxContainerContainer = document.querySelector('.searchbox-container');
@@ -210,9 +233,17 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
                 do {
                     if (target.href) {
-                        sendSearchRumAction(search.helper.state.query, target.href);
+                        const hitsArray = search.helper.lastResults.hits
+                        const page = search.helper.state.page
+                        const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page)
+                        sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
                         window.history.pushState({}, '', target.href);
-                        window.location.reload();
+
+                        if (e.metaKey || e.ctrlKey) {
+                            window.open(target.href, "_blank")
+                        } else {
+                            window.location.reload()
+                        }
                     }
 
                     target = target.parentNode;
@@ -235,9 +266,12 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
             const handleResizeDebounced = debounce(handleResize, 500, false);
 
-            window.addEventListener('resize', handleResizeDebounced);
-
             handleResizeDebounced();
+            
+            // Bugfix for disappearing android keyboard on search input focus/autoresizing
+            if (!navigator.userAgent.toLowerCase().match(/android/i)) {
+                window.addEventListener('resize', handleResizeDebounced);
+            } 
         }
     }
 }

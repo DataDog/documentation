@@ -3,7 +3,6 @@ aliases:
 - /ja/synthetics/cicd_integrations/github_actions
 dependencies:
 - https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
-kind: documentation
 title: Continuous Testing と CI GitHub アクション
 ---
 ## 概要
@@ -32,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.16.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -50,7 +49,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.16.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -73,7 +72,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.16.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -91,7 +90,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.16.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -112,7 +111,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.16.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}

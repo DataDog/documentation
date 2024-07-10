@@ -1,6 +1,5 @@
 ---
 title: Cost Details
-kind: documentation
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/billing/"
   tag: "Documentation"
@@ -15,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Estimated Cost Summary and Cost Chargebacks help you understand your estimated month-to-date and historical Datadog costs.
+Cost Summary and Cost Chargebacks help you understand your estimated month-to-date, projected end-of-month, and historical Datadog costs.
 
 You can break down your costs by sub-organization and by product to:
 - Allocate costs according to their source
@@ -23,23 +22,33 @@ You can break down your costs by sub-organization and by product to:
 
 ### Permissions
 
-To view the Estimated Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
+To view the Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
 
-Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Estimated Cost Summary and Cost Chargebacks data.
+Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Cost Summary and Cost Chargebacks data.
 
 ## Cost summary
 
 Use the cost summary to:
-- View estimated month-to-date costs
-- View cost trends within the month
+- View estimated month-to-date and projected end-of-month costs
+- View historical costs
 - Filter and group costs by product or sub-organization
+- View month-over-month % and $ cost changes
+- View cost trends within the month
 - View cumulative day-over-day costs
 
-### Estimated Cost Summary (parent organization)
+### Projected Costs (parent organization)
 
-The cost summary functionality changes according to whether you use Datadog as a single organization or a multi-organization. As a multi-organization, you can view estimated costs for the parent organization and each sub-organization. 
+Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
 
-{{< img src="account_management/plan_and_usage/cost_details/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
+### Cost Summary (parent organization)
+
+The cost summary functionality changes according to your Datadog usage as a single organization or a multi-organization. As a multi-organization, you can view estimated, projected, and historical costs for the parent organization and each sub-organization. 
+
+{{< img src="account_management/plan_and_usage/multiorg-current-month-historical-costs.png" alt="Screenshot of the current month's Cost Summary for a parent organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
+
+View historical costs by toggling to previous months.
+
+{{< img src="account_management/plan_and_usage/multiorg-prior-month-historical-costs.png" alt="Screenshot of a previous month's Cost Summary for a parent organization, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -47,21 +56,24 @@ The cost summary functionality changes according to whether you use Datadog as a
 
 #### View and filter
 
-Use the search facets at the left to filter the cost by **Products** or by **Sub-Orgs**. Use the **Over Time** tab to see how the cumulative day-over-day costs have changed.
+Use the search facets at the left to filter the cost by **Products** or by **Sub-Orgs**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
 
 #### Download
 
-To download the data as a comma separated value file, click **Download as CSV**.
+To download the data as a comma separated value file, click **Download as CSV**. Data is available for the current month and pre-defined prior months. Use the `Cost Type` field to distinguish between the records:
+- **Projected**: Data is available for the current month.
+- **Estimated MTD**: Data is available from the first of the month to the current date. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
+- **Historical**: Data is available after month close, which is approximately 16 days after the end of the month.
+  
+To query estimated cost data through the API, see [Get estimated cost across your account][3]. To query projected cost data through the API, see [Get projected cost across your account][6].
 
-See [Get estimated cost across your account][3] to query estimated cost data through the API.
-
-### Estimated Cost Summary (sub-organization)
+### Cost Summary (sub-organization)
 
 <div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
-{{< img src="account_management/plan_and_usage/sub-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a sub-organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
+{{< img src="account_management/plan_and_usage/suborg-cost-trends.png" alt="Screenshot of the current month's Cost Summary for a sub-organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes.">}}
 
 1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -69,19 +81,21 @@ As a sub-organization, you can view the costs for your organization only. This r
 
 #### View and filter
 
-Use the search facets at the left to filter the cost by **Products**. Use the **Over Time** tab to see how the cumulative day-over-day costs have changed.
+Use the search facets at the left to filter the cost by **Products**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
 
 #### Download
 
 To download the data as a comma separated value file, click **Download as CSV**.
-
-See [Get estimated cost across your account][3] to query estimated cost data through the API.
 
 ## Cost chargebacks
 
 Use the cost chargebacks to:
 - View estimated month-to-date and historical costs for multi-organizations
 - Attribute costs to each sub-organization
+
+Cost chargebacks are derived by:
+- Calculating the sub-organization usage ratio. This is done by dividing usage per sub-organization by the total parent organization usage.
+- Applying the sub-organization usage ratio against the parent organization costs, providing the cost chargebacks per sub-organization.
 
 ### Historical cost chargebacks
 
@@ -123,7 +137,7 @@ Your estimated month-to-date Datadog bill varies throughout the month. The type 
 
 ### Percentile and average usage billing
 
-Products billed by the maximum count (high-water mark) of the lower 99 percent of usage for the month include infrastructure hosts and APM hosts. Products billed by the average over the month include custom metrics and Fargate tasks. For these two types of products, expect their costs to remain relatively stable throughout the month. However, they are still subject to cost changes if there is a significant spike in usage.
+Products billed by the maximum count (high-water mark) of the lower 99 percent of usage for the month include infrastructure hosts and APM hosts. Products billed by the average over the month include custom metrics and Fargate tasks. For these two types of products, expect their costs to remain relatively stable throughout the month. However, they are still subject to cost changes if there is a significant spike or drop in usage.
 
 ### Sum of usage billing
 
@@ -138,3 +152,4 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [3]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
+[6]: /api/latest/usage-metering/#get-projected-cost-across-your-account

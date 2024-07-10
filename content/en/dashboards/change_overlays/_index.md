@@ -1,6 +1,5 @@
 ---
 title: Change Overlays
-kind: documentation
 description: Overlay your change events on graphs to correlate performance anomalies with changes in your application
 further_reading:
 - link: "/tracing/services/deployment_tracking/"
@@ -18,47 +17,36 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-rum-deployment-tracking/"
   tag: "Blog"
   text: "Troubleshoot faulty frontend deployments with Deployment Tracking in RUM"
-
-
+- link: "https://www.datadoghq.com/blog/change-overlays/"
+  tag: "Blog"
+  text: "Quickly spot and revert faulty deployments with Change Overlays"
 ---
 <div class="alert alert-warning">
-    Change Overlays is in private beta.
+    Change Overlays is in beta.
 </div>
 
 
 ## Overview
 
-As teams iterate quickly, deploy code, and continually make changes to their applications and services, it can be difficult to find the exact change that caused a spike in errors, an increase in latency, or slower page load times. Change overlays enable you to identify when a recent change is causing performance issues within your application or services and help you identify the source of the problem.
+As teams iterate, deploy code, and continually make changes to their applications and services, it can be difficult to find the exact change that caused a spike in errors, an increase in latency, or slower page load times. Use Change overlays to identify when a recent change is causing performance issues within your application or services and find the source of the problem.
 
-{{< img src="dashboards/change_overlays/change_overlays.mp4" alt="Change overlays on graphs in a Dashboard" video="true" style="width:75%;">}}
-
-By viewing the moment a change occurred in the context of your Datadog observability data, you can pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays supports [APM service deployments][1].
-
+View the moment a change occurs in the context of your Datadog observability data to pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays supports [APM service deployments][1].
 
 ## Overlay changes on graphs
 
-To get started, click the **Overlays** button in the upper right corner of your dashboard. 
+To get started, click **Show Overlays** in the upper right corner of your dashboard. 
 
-{{< img src="dashboards/change_overlays/overlays_button_dashboard.png" alt="Overlays button on dashboards" style="width:75%;">}}
+{{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
 Overlays automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1]. 
 
 Click on any event overlay to open a side panel with more information and [analyze the impact of your change](#analyze-the-impact-of-your-change).
 
-
 ### Show faulty deploys
-
 Use the toggle in the overlays panel to only show [faulty deployments][2] that could be impacting your metrics.
-
-{{< img src="dashboards/change_overlays/faulty_deployments_toggle.png" alt="Faulty Deployments toggle" style="width:75%;">}}
-
 
 ### Override automatic detection
 Override the automatic service detection by using the search bar to find the service of interest. 
-
-{{< img src="dashboards/change_overlays/service_selector.png" alt="Service selector override" style="width:75%;">}}
-
-
 
 ## Analyze the impact of your change
 Click on any overlay on your graph to open a change analysis page, allowing you to understand the status and impact of you change.

@@ -1,6 +1,5 @@
 ---
 title: Agent Rate Limits
-kind: Documentation
 aliases:
   - /tracing/troubleshooting/apm_rate_limits
 ---

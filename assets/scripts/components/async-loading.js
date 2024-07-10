@@ -1,6 +1,7 @@
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
 import { redirectToRegion, hideTOCItems } from '../region-redirects';
+import { initCopyCode } from './copy-code';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
@@ -13,11 +14,18 @@ const { gaTag } = configDocs[env];
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
-    window.scroll(0, 0);
+    window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
 
     let mainContent = document.getElementById('mainContent');
 
-    if (mainContent) {
+    // temp workaround for integrations page https://datadoghq.atlassian.net/browse/WEB-5018
+    let isIntegrations = document.querySelector('.integrations')
+
+    if (mainContent && !isIntegrations) {
         const currentTOC = document.querySelector('.js-toc-container');
 
         const httpRequest = new XMLHttpRequest();
@@ -228,7 +236,8 @@ function loadPage(newUrl) {
             redirectCodeLang();
             toggleMultiCodeLangNav(pageCodeLang);
             hideTOCItems(true)
-
+            initCopyCode()
+            
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
 

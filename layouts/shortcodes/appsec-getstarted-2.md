@@ -2,7 +2,7 @@
    
 1.  **To see Application Security Management threat detection in action, send known attack patterns to your application**. For example, trigger the [Security Scanner Detected][203] rule by running a file that contains the following curl script:
     <div>
-    <pre><code>for ((i=1;i<=200;i++)); <br>do<br># Target existing service’s routes<br>curl https://your-application-url/existing-route -A Arachni/v1.0;<br># Target non existing service’s routes<br>curl https://your-application-url/non-existing-route -A Arachni/v1.0;<br>done</code></pre></div>
+    <pre><code>for ((i=1;i<=250;i++)); <br>do<br># Target existing service’s routes<br>curl https://your-application-url/existing-route -A Arachni/v1.0;<br># Target non existing service’s routes<br>curl https://your-application-url/non-existing-route -A Arachni/v1.0;<br>done</code></pre></div>
 
     A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][201] in Datadog**.
 

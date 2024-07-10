@@ -1,12 +1,11 @@
 ---
 further_reading:
-- link: /security/cspm
+- link: /security/misconfigurations
   tag: ドキュメント
-  text: Cloud Security Posture Management
+  text: CSM Misconfigurations で誤構成の追跡を開始
 - link: /security/default_rules/#cat-cloud-security-management
   tag: ドキュメント
   text: すぐに使える検出ルール
-kind: ガイド
 title: Datadog がリソースの公開状況を判断する方法
 ---
 
@@ -16,7 +15,7 @@ Datadog は、クラウドリソース間の関係をマッピングするグラ
 
 ## リソース依存関係グラフ
 
-下の図は、他のリソースが公開されているかどうかを判断するために、関連リソースがどのように使用されるかを示しています。たとえば、S3 の公開バケットに格納されている Cloudtrail Trail は、それ自体が公開されています。リソースが別のリソースが原因で公開されている場合、その関係性が CSPM リソース関係性グラフに示されます。
+下の図は、他のリソースが公開されているかどうかを判断するために、関連リソースがどのように使用されるかを示しています。たとえば、S3 の公開バケットに格納されている CloudTrail トレイルは、それ自体が公開されています。リソースが別のリソースが原因で公開されている場合、その関係性が Cloud Security Management Misconfigurations リソース関係性グラフに示されます。
 
 この図は、リソース同士の相関関係から公開状況を判断する際の参考にしてください。
 
@@ -53,13 +52,13 @@ Datadog は、クラウドリソース間の関係をマッピングするグラ
 
 詳細については、[Amazon S3 ストレージへのパブリックアクセスをブロックする][2]を参照してください。
 
-### Amazon Cloudtrail トレイル
+### AWS CloudTrail トレイル
 
 次の場合、[Cloudtrail トレイル][3] (`aws_cloudtrail_trail`) は公開されていると判断されます。
 
 | **条件** | **説明** |
 |--------------|-----------------|
-|トレイルの `s3_bucket_name` に、公開されていると判断される S3 バケットが設定されている。 |Cloudtrail トレイルは、S3 バケットに送信されるログファイルです。トレイルが S3 の公開バケットに格納される場合、トレイルも公開されます。 |
+|トレイルの `s3_bucket_name` に、公開されていると判断される S3 バケットが設定されている。 |CloudTrail トレイルは、S3 バケットに送信されるログファイルです。トレイルが S3 の公開バケットに格納される場合、トレイルも公開されます。 |
 
 ### Amazon VPC サブネット
 

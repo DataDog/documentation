@@ -4,7 +4,6 @@ further_reading:
 - link: /containers/troubleshooting/duplicate_hosts
   tag: Documentation
   text: AWS (EC2 または EKS) 上の Kubernetes によるホストの重複
-kind: documentation
 title: コンテナのトラブルシューティング
 ---
 
@@ -32,7 +31,7 @@ Agent のリリース更新や変更の詳細については、Datadog の[リ�
 
 以下が正しいことを確認します。
 
-- メトリクスエンドポイントは公開され、Agent がアクセスできるようになっている。
+- メトリクスエンドポイントは露出しており、Agent が到達できる状態になっている。
 
 - Agent がエンドポイントにアクセスするのを妨げるようなプロキシやファイアウォールは存在しない。
 

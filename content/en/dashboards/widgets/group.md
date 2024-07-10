@@ -1,6 +1,6 @@
 ---
 title: Group Widget
-kind: documentation
+widget_type: group
 description: "Group your widgets together in a dashboard widget."
 aliases:
 - /graphing/widgets/group/
@@ -26,9 +26,7 @@ The groups widget allows you to keep similar graphs together on your dashboard. 
 ## API
 <div class="alert alert-info">Screenboard widgets cannot be placed in groups. </a></div>
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the change widget is:
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
 {{< dashboards-widgets-api >}}
 
@@ -36,6 +34,6 @@ The dedicated [widget JSON schema definition][3] for the change widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#timeboards
-[2]: /api/v1/dashboards/
+[1]: /dashboards/#get-started
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

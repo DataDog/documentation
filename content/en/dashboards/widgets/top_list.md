@@ -1,6 +1,5 @@
 ---
 title: Top List Widget
-kind: documentation
 widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/
@@ -16,42 +15,42 @@ further_reading:
   text: "Context Links"
 ---
 
-The top list visualization enables you to display a list of Tag values like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc:
-
-{{< img src="dashboards/widgets/toplist/toplist_w_colors.png" alt="Top List widget with conditional visual formatting rules" >}}
+The top list visualization enables you to display a list of tag values with the most or least of any metric or event value, such as highest consumers of CPU, hosts with the least disk space, or cloud products with the highest costs.
 
 ## Setup
 
-{{< img src="dashboards/widgets/toplist/toplist_config.png" alt="Top List setup showing Visual Formatting Rules" style="width:80%;">}}
+{{< img src="dashboards/widgets/toplist/top_list_graph_display.png" alt="Configuration options for graph display highlighting Stacked, Relative display mode, and Visual Formatting Rules" style="width:100%;" >}}
 
 ### Configuration
 
 1. Choose the data to graph:
     * Metric: See the [querying][1] documentation to configure a metric query.
-    * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
-    * Log Events: See the [Log search documentation][3] to configure a log event query.
+    * Non-metric data sources: See the [Trace search documentation][2] or [Log search documentation][3] to configure an event query.
 
-2. Optional: configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. Add [context links][6] to connect data visualizations across Datadog.
+2. Optional: see additional [graph display](#graph-display) configurations. 
 
 ### Options
+
+#### Graph display
+
+Configure the optional Display Mode features to add context to your top list visualization.
+
+* Display multiple stacked groups to show a break down of each dimension in your query. **Stacked** is enabled by default. You can switch to **Flat**.
+* Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode to show the raw count of data you are querying.</br>
+   **Note**: Relative display is only available for count data, such as count metrics or log events.
+* Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. 
+
+#### Context links
+
+[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
 
 #### Global time
 
 On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
-
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
-
-The dedicated [widget JSON schema definition][5] for the top list widget is:
+This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
 
 {{< dashboards-widgets-api >}}
 
@@ -62,6 +61,6 @@ The dedicated [widget JSON schema definition][5] for the top list widget is:
 [1]: /dashboards/querying/
 [2]: /tracing/trace_explorer/query_syntax/#search-bar
 [3]: /logs/search_syntax/
-[4]: /api/v1/dashboards/
-[5]: /dashboards/graphing_json/widget_json/
-[6]: /dashboards/guide/context-links
+[4]: /dashboards/guide/context-links
+[5]: /api/latest/dashboards/
+[6]: /dashboards/graphing_json/widget_json/

@@ -1,11 +1,9 @@
 ---
+algolia:
+  tags:
+  - カスタムメトリクスの請求
 aliases:
 - /ja/integrations/faq/what-standard-integrations-emit-custom-metrics/
-further_reading:
-- link: /observability_pipelines/guide/custom-metrics-governance
-  tag: ドキュメント
-  text: 観測可能性パイプラインを使用したカスタムメトリクスの管理
-kind: documentation
 title: カスタムメトリクスの課金
 ---
 
@@ -215,7 +213,7 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 [1]: /ja/metrics/types/?tab=histogram#metric-types
 [2]: /ja/metrics/types/?tab=histogram#definition
-[3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
@@ -236,7 +234,7 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 この表は、パーセンタイル集計をディストリビューションメトリクスに追加した場合の効果をまとめたものです。
 
-| メトリクス                                                                                   | 課金対象となるカスタムメトリクスの数 |
+| ガイド                                                                                   | 課金対象となるカスタムメトリクスの数 |
 |-------------------------------------------------------------------------------------------|-----------------------------------|
 | ベースラインディストリビューションからのカスタムメトリクスの数 (count、sum、min、max、avg)         | `5*(tag value combinations)`      |
 | パーセンタイル集計（p50、p75、p90、p95、p99）を含むカスタムメトリクスの数 | `5*(tag value combinations)`      |
@@ -306,22 +304,18 @@ Datadog では、料金プランごとに一定数の**インジェスト**お�
 
 以下の標準インテグレーションでは、カスタムメトリクスを生成することができます。
 
-| インテグレーションの種類                           | インテグレーション                                                                       |
+| インテグレーションの種類                           | ヘルプ                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
 | デフォルトで上限 350 個のカスタムメトリクス。      | [ActiveMQ XML][13] / [Go-Expvar][14] / [Java-JMX][15]                              |
 | カスタムメトリクスの収集では既定の上限なし。 | [Nagios][16] /[PDH チェック][17] /[OpenMetrics][18] /[Windows パフォーマンスカウンター][19] /[WMI][20] /[Prometheus][21] |
 | カスタムメトリクス収集の構成が可能。   | [MySQL][22] /[Oracle][23] /[Postgres][24] /[SQL Server][25]                        |
 | クラウドインテグレーションから送信されたカスタムメトリクス    | [AWS][26]                                                                          |
 
-## トラブルシューティング
+## ヘルプ
 
 技術的な質問については、[Datadog のサポートチーム][27]にお問い合わせください。
 
 課金に関するご質問は、[カスタマーサクセス][12]マネージャーにお問い合わせください。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/
 [2]: /ja/metrics/custom_metrics/

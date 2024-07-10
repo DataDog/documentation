@@ -48,10 +48,9 @@ integration_id: rabbitmq
 integration_title: RabbitMQ
 integration_version: 4.1.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: rabbitmq
-oauth: {}
 public_title: RabbitMQ
 short_description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
 supported_os:

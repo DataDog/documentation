@@ -3,7 +3,7 @@ further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: Documentation
   text: Buildpack Heroku Datadog
-kind: guide
+
 private: true
 title: Configurer Heroku Postgres pour la solution Database Monitoring
 ---
@@ -44,7 +44,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 
 Créez la fonction suivante dans la base de données :
 
-```SQL
+```
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
    l_query TEXT,
    OUT explain JSON
@@ -67,7 +67,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-Enfin, on configure l'Agent Datadog pour activer le check Postgres à l'aide des nouveaux identifiants :
+Enfin, il ne reste plus qu'à configurer l'Agent Datadog pour activer le check Postgres à l'aide des nouveaux identifiants :
 
 ```shell
 # Vérifiez que vous êtes dans le répertoire racine de votre application
@@ -93,7 +93,7 @@ instances:
 
 À l'aide de la variable d'environnement créée lorsque vous avez associé l'identifiant `datadog` à l'application (dans l'exemple ci-dessous, il s'agit de `HEROKU_POSTGRESQL_PINK_URL`), ajoutez le contenu suivant au [script de pré-exécution][5] pour remplacer ces valeurs avant de lancer l'Agent Datadog :
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnement de l'application Heroku
@@ -112,7 +112,7 @@ fi
 Effectuez le déploiement sur Heroku :
 
 ```shell
-# Déployer sur Heroku 
+# Déployer sur Heroku
 git add .
 git commit -m "Activation de l'intégration postgres"
 git push heroku main

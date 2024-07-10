@@ -1,6 +1,5 @@
 ---
 title: Advanced setup for Datadog Operator
-kind: guide
 aliases:
  - /agent/guide/operator-advanced
 further_reading:
@@ -41,7 +40,6 @@ Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
 * [Manifest with Logs, APM, process, and metrics collection enabled.][4]
 * [Manifest with Logs, APM, and metrics collection enabled.][5]
-* [Manifest with Logs and metrics collection enabled.][6]
 * [Manifest with APM and metrics collection enabled.][7]
 * [Manifest with Cluster Agent.][8]
 * [Manifest with tolerations.][9]
@@ -138,9 +136,8 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-all.yaml
-[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs-apm.yaml
-[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-apm.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-logs-apm.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-apm-hostport.yaml
 [8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-clusteragent.yaml
 [9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-tolerations.yaml
 [10]: https://app.datadoghq.com/organization-settings/api-keys

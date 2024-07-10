@@ -7,7 +7,6 @@ aliases:
 - /ja/security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ja/security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ja/security/guide/how-to-setup-security-filters-using-security-monitoring-api/
-kind: ガイド
 title: Cloud SIEM API によるセキュリティフィルター
 ---
 
@@ -121,7 +120,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ### カスタムフィルターを作成する
 
-分析を明示的に指定されたログに制限するために、カスタムセキュリティフィルターを作成することもできます。たとえば、`source:cloudtrail` のみに一致するフィルターを使用して AWS Cloudtrail からのログを分析することを選択できます。
+分析を明示的に指定されたログに制限するために、カスタムセキュリティフィルターを作成することもできます。たとえば、`source:cloudtrail` のみに一致するフィルターを使用して AWS CloudTrail からのログを分析することを選択できます。
 
 **API call:**
 

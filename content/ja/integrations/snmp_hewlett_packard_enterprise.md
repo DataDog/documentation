@@ -28,10 +28,9 @@ integration_id: snmp-hewlett-packard-enterprise
 integration_title: Hewlett-Packard Enterprise
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_hewlett_packard_enterprise
-oauth: {}
 public_title: Hewlett-Packard Enterprise
 short_description: Hewlett-Packard Enterprise のネットワークデバイスから SNMP メトリクスを収集します。
 supported_os:

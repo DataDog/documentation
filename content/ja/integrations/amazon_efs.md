@@ -4,7 +4,7 @@ aliases:
 categories:
 - aws
 - cloud
-- data store
+- data stores
 - log collection
 - os & system
 dependencies: []
@@ -13,11 +13,11 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_efs/
 draft: false
 git_integration_title: amazon_efs
 has_logo: true
-integration_id: amazon-efs
+integration_id: ''
 integration_title: Amazon Elastic File System
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_efs
 public_title: Datadog-Amazon Elastic File System インテグレーション
@@ -25,15 +25,16 @@ short_description: Amazon Elastic Filesystem のキーメトリクスを追跡�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon EFS は、AWS Lambda 関数または Amazon EC2 インスタンスと共に使用されるシンプルでスケーラブルなファイルストレージです。
 
 Datadog のすべての EFS メトリクスを収集するには、このインテグレーションを有効にします。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -47,9 +48,9 @@ Datadog のすべての EFS メトリクスを収集するには、このイン�
 
     詳細については、AWS ウェブサイト上の [EFS ポリシー][4]を参照してください。
 
-3. [Datadog - AWS EFS インテグレーション][5]をインストールします。
+3. [Datadog - Amazon EFS インテグレーション][5]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -74,23 +75,23 @@ Amazon EFS から S3 バケットまたは CloudWatch のいずれかにログ�
 
     - `elasticfilesystem:DescribeAccessPoints`: Lambda 関数に接続された有効な EFS を一覧表示します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_efs" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 AWS Elastic File System インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS Elastic File System インテグレーションには、サービスのチェックは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

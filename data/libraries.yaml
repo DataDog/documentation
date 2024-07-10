@@ -82,7 +82,6 @@ Classic:
       official: true
       api: true
       authors: Datadog
-      notes: Client library in beta and subject to change.
     - name: godspeed
       link: https://github.com/theckman/godspeed
       dogstatsd: true
@@ -112,7 +111,6 @@ Classic:
       official: true
       api: true
       authors: Datadog
-      notes: Client library in beta and subject to change.
     - name: Lassie
       link: https://github.com/bazaarvoice/lassie
       api: true
@@ -231,6 +229,17 @@ Classic:
       official: true
       dogstatsd: true
       authors: Datadog
+  - Rust:
+    - name: cadence
+      link: https://docs.rs/cadence/latest/cadence/
+      official: false
+      dogstatsd: true
+      authors: Nick Pillitteri
+    - name: metrics-exporter-statsd
+      link: https://docs.rs/metrics-exporter-statsd/latest/metrics_exporter_statsd/
+      official: false
+      dogstatsd: true
+      authors: GitHub
   - Scala:
     - name: datadog-scala
       link: https://github.com/gphat/datadog-scala
@@ -264,6 +273,11 @@ Classic:
       api: true
       authors: Jacob Aronoff
 Tracing:
+  - C++:
+    - name: dd-trace-cpp
+      link: https://github.com/DataDog/dd-trace-cpp
+      official: true
+      authors: Datadog
   - .NET:
     - name: dd-trace-dotnet
       link: https://github.com/DataDog/dd-trace-dotnet
@@ -274,6 +288,11 @@ Tracing:
       link: https://github.com/neuecc/DatadogSharp
       notes: Also supports DogStatsD.
       authors: Yoshifumi Kawai
+  - Rust/C++/C:
+    - name: ddprof
+      link: https://github.com/DataDog/ddprof
+      authors: Datadog
+      notes: A profiler for compiled languages.
   - Elixir:
     - name: spandex
       link: https://github.com/zachdaniel/spandex
@@ -283,7 +302,7 @@ Tracing:
       link: https://github.com/DataDog/dd-trace-go
       official: true
       authors: Datadog
-      notes: Go package 'tracer'.
+      notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1'.
     - name: dd-go-opentracing
       link: https://github.com/gchaincl/dd-go-opentracing
       authors: Gustavo Chaín

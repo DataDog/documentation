@@ -1,10 +1,9 @@
 ---
 title: Android Log Collection
-kind: documentation
 description: Collect logs from your Android applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-android Source code
 - link: logs/explorer
   tag: Documentation
@@ -23,7 +22,7 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
 
 ## Setup
 
-1. Add the Gradle dependency by declaring the library as a dependency in the module-level `build.gradle` file:
+1. Add the Gradle dependency by declaring the library as a dependency in the module-level `build.gradle` file. Make sure to replace `x.x.x` in the following example with the latest version of [dd-sdk-android-logs][2].
 
     ```groovy
     dependencies {
@@ -31,11 +30,11 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
     }
     ```
 
-2. Initialize Datadog SDK with your application context, tracking consent, as well as the [Datadog client token][2]. For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the Datadog SDK, as they would be exposed client-side in the Android application APK byte code.
+2. Initialize Datadog SDK with your application context, tracking consent, as well as the [Datadog client token][3]. For security reasons, you must use a client token; you cannot use [Datadog API keys][4] to configure the Datadog SDK, as they would be exposed client-side in the Android application APK byte code.
 
-   The `APP_VARIANT_NAME` specifies the variant of the application that generates data. This is required in the initialization credentials; use your `BuildConfig.FLAVOR` value or an empty string if you do not have variants. The appropriate ProGuard `mapping.txt` file will be automatically uploaded at build time, allowing you to view de-obfuscated error stack traces. For more information, see [Android Crash Reporting and Error Tracking][6].
+   The `APP_VARIANT_NAME` specifies the variant of the application that generates data. This is required in the initialization credentials; use your `BuildConfig.FLAVOR` value or an empty string if you do not have variants. The appropriate ProGuard `mapping.txt` file will be automatically uploaded at build time, allowing you to view de-obfuscated error stack traces. For more information, see [Android Crash Reporting and Error Tracking][5].
 
-   For more information about setting up a client token, see the [client token documentation][2].
+   For more information about setting up a client token, see the [client token documentation][3].
 
    {{< site-region region="us" >}}
    {{< tabs >}}
@@ -411,7 +410,7 @@ The following methods in `Logger.Builder` can be used when initializing the logg
 | Method                           | Description                                                                                                                                                                                                                                                             |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `setNetworkInfoEnabled(true)`    | Add the `network.client.connectivity` attribute to all logs. The data logged by default is `connectivity` (`Wifi`, `3G`, `4G`...) and `carrier_name` (`AT&T - US`). `carrier_name` is only available for Android API level 28+.                                     |
-| `setService(<SERVICE_NAME>)` | Set `<SERVICE_NAME>` as value for the `service` [standard attribute][4] attached to all logs sent to Datadog.                                                                                                                                                           |
+| `setService(<SERVICE_NAME>)` | Set `<SERVICE_NAME>` as value for the `service` [standard attribute][6] attached to all logs sent to Datadog.                                                                                                                                                           |
 | `setLogcatLogsEnabled(true)`     | Set to `true` to use Logcat as a logger.                                                                                                                                                                                                                                  |
 | `setBundleWithTraceEnabled(true)`| Set to `true` (default) to bundle the logs with the active trace in your application. This parameter lets you display all the logs sent during a specific trace by using the Datadog dashboard.                                                        |
 | `setBundleWithRumEnabled(true)`| Set to `true` (default) to bundle the logs with the current RUM context in your application. This parameter lets you display all the logs sent while a specific View is active by using the Datadog RUM Explorer.                                                        |
@@ -448,7 +447,7 @@ Use the `removeTagsWithKey("<TAG_KEY>")` function to remove tags from all logs s
 logger.removeTagsWithKey("build_type")
 ```
 
-For more information, see [Getting Started with Tags][5].
+For more information, see [Getting Started with Tags][7].
 
 #### Global attributes
 
@@ -491,23 +490,24 @@ This means that even if users open your application while being offline, no data
 
 The data on disk will automatically be discarded if it gets too old to ensure the SDK does not use too much disk space.
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][7], meaning that on most devices this data cannot be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][8], meaning that on most devices this data cannot be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
 
 ## Extensions
 
 ### Timber
 
-If your existing codebase is using Timber, you can forward all those logs to Datadog automatically by using the [dedicated library][8].
+If your existing codebase is using Timber, you can forward all those logs to Datadog automatically by using the [dedicated library][9].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-logs
-[2]: /account_management/api-app-keys/#client-tokens
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /logs/processing/attributes_naming_convention/
-[5]: /getting_started/tagging/
-[6]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
-[7]: https://source.android.com/security/app-sandbox
-[8]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-timber
+[2]: https://github.com/DataDog/dd-sdk-android/blob/develop/CHANGELOG.md
+[3]: /account_management/api-app-keys/#client-tokens
+[4]: /account_management/api-app-keys/#api-keys
+[5]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[6]: /logs/processing/attributes_naming_convention/
+[7]: /getting_started/tagging/
+[8]: https://source.android.com/security/app-sandbox
+[9]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-timber

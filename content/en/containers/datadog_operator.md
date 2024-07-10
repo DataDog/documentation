@@ -1,6 +1,5 @@
 ---
 title: Datadog Operator
-kind: documentation
 aliases:
   - /agent/kubernetes/operator_configuration
   - /containers/kubernetes/operator_configuration
@@ -9,10 +8,10 @@ further_reading:
     tag: 'guide'
     text: 'Getting Started with the Datadog Operator'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Advanced Installation'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Configuration'
 ---
 

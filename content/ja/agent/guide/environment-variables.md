@@ -9,10 +9,9 @@ further_reading:
 - link: /logs/log_collection/#container-log-collection
   tag: ドキュメント
   text: コンテナログの収集
-- link: /agent/proxy/#environment-variables
+- link: /agent/configuration/proxy/#environment-variables
   tag: ドキュメント
   text: プロキシ環境変数
-kind: ガイド
 title: Agent 環境変数
 ---
 
@@ -67,7 +66,7 @@ Datadog では、タグを付ける際のベストプラクティスとして、
   - **APM Trace Agent**
 
       - [Docker APM Agent の環境変数][5]
-      - [trace-agent env.go][6]
+      - [trace-agent config/apm.go][6]
       - 例
 
           ```yaml
@@ -80,25 +79,42 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 
   - **ライブプロセスエージェント**
 
-      - [process-agent config.go][7]
+      - [process-agent config/process.go][7]
       - 例
 
           ```yaml
              process_config:
-                 enabled: true
+                 process_collection:
+                     enabled: true
                  process_dd_url: https://process.datadoghq.com
-             # DD_PROCESS_AGENT_ENABLED=true
+             # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
              # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
           ```
+
+## systemd ユニットでの環境変数の使用
+
+systemd を使ってサービスを管理するオペレーティングシステムでは、環境変数 (グローバル: 例えば、`/etc/environment`、またはセッションベース: 例えば、`export VAR=value`) は通常、そのように構成されていない限りサービスで利用できません。詳しくは [systemd Exec マニュアルページ][8]を参照してください。
+
+Datadog Agent 7.45 から、Datadog Agent サービス (`datadog-agent.service` ユニット) は、オプションで環境変数の割り当てをファイル (`<ETC_DIR>/environment`) からロードできるようになりました。
+
+1. `/etc/datadog-agent/environment` が存在しない場合は作成します。
+2. 改行で区切られた環境変数の割り当てを定義します。例:
+  ```
+  GODEBUG=x509ignoreCN=0,x509sha1=1
+  DD_HOSTNAME=myhost.local
+  DD_TAGS=env:dev service:foo
+  ```
+3. 変更を有効にするためにサービスを再起動する
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: /ja/agent/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[3]: /ja/agent/configuration/proxy/#environment-variables
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go
 [5]: https://docs.datadoghq.com/ja/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env_test.go
-[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go
+[8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment

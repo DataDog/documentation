@@ -1,6 +1,5 @@
 ---
 title: Querying
-kind: documentation
 aliases:
   - /graphing/using_graphs/
 description: Query your data to gain insight
@@ -77,9 +76,9 @@ In practice, metrics are collected by the Agent every 15-20 seconds. So one day'
 
 To manually rollup the data, use the [rollup function][11]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
 
-This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 1 min buckets:
+This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one minute buckets:
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="rollup example of system.disk.free metric highlighting sigma add function icon" style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="rollup example of the system.disk.free metric across all machines" style="width:100%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -138,7 +137,7 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][12].
 
-Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
+Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
@@ -173,6 +172,23 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
+
+#### Minimum or Maximum between two queries
+Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.  
+
+```text
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+```
+
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
+
+Additionally, you can also calculate the maximum (or minimum) between two queries on different products. Here is another example using the `min` operator to find the minimum between logs with error statuses and warning statuses.
+
+```text
+min(status:error, status:warn)
+```
+
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
 ### Create an alias
 

@@ -2,12 +2,7 @@
 title: Use the Datadog Agent for Log Collection Only
 aliases:
   - /logs/faq/how-to-set-up-only-logs
-kind: documentation
 ---
-
-<div class="alert alert-danger">
-To setup log collection without infrastructure metrics, you have to disable certain payloads. This results in the potential loss of metadata and tags on the logs you are collecting. Datadog does not recommend this. For more information about the impact of this configuration, contact <a href="/help/">Datadog Support</a>.
-</div>
 
 To disable payloads, you must be running Agent v6.4+. This disables metric data submission so that hosts stop showing up in Datadog. Follow these steps:
 
@@ -28,9 +23,9 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 3. [Configure the Agent to collect Logs][2].
 4. [Restart the Agent][3].
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /logs/log_collection/
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 

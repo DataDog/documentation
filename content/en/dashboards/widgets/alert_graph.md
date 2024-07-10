@@ -1,6 +1,6 @@
 ---
 title: Alert Graph Widget
-kind: documentation
+widget_type: alert_graph
 description: "Graph the current status of any monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_graph/
@@ -14,7 +14,7 @@ Alert graphs are timeseries graphs showing the current status of most monitors d
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Alert Graph" >}}
 
-This widget is supported for metric, anomaly, outlier, forecast, APM, and integration monitors.
+This widget is supported in default scheduled query alert monitors such as metric, anomaly, outlier, forecast, APM, and integration.
 
 ## Setup
 
@@ -28,9 +28,7 @@ This widget is supported for metric, anomaly, outlier, forecast, APM, and integr
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
-
-The dedicated [widget JSON schema definition][2] for the alert graph widget is:
+This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
 
 {{< dashboards-widgets-api >}}
 

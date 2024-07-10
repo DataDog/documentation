@@ -1,6 +1,5 @@
 ---
-title: Connecting Java Logs and Traces
-kind: documentation
+title: Correlating Java Logs and Traces
 description: 'Connect your Java logs and traces to correlate them in Datadog.'
 code_lang: java
 type: multi-code-lang
@@ -29,7 +28,9 @@ Ensure log collection is configured. See [Java Log Collection][1] for Log4j, Log
 
 Starting in version 0.74.0, the Java tracer automatically injects trace correlation identifiers into JSON formatted logs. For earlier versions, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`. Full configuration details can be found on the [Java tracer configuration][2] page.
 
-**Note**: If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][3].
+**Notes**:
+- Automatic injection of trace correlation is available for Log4j2, Log4j, or SLF4J and Logback.
+- If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][3].
 
 <div class="alert alert-info"><strong>Beta</strong>: Starting in version 1.18.3, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
 
@@ -74,6 +75,25 @@ try {
 } finally {
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
+}
+```
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+```java
+import org.tinylog.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
+
+// There must be spans started and active before this block.
+try {
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
+
+// Log something
+
+} finally {
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
 }
 ```
 {{% /tab %}}

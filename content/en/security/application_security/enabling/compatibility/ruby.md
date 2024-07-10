@@ -1,34 +1,36 @@
 ---
 title: Ruby Compatibility Requirements
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
 ---
 
-## ASM capabilities support
+## Application Security capabilities support
 
-The following ASM capabilities are supported in the Ruby library, for the specified tracer version:
+The following application security capabilities are supported in the Ruby library, for the specified tracer version:
 
-| ASM capability                   | Minimum Ruby tracer version |
+| Application Security capability  | Minimum Ruby tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
-| Vulnerability Management for Open Source Software (OSS) | 1.11.0 |
-| Vulnerability Management for Code-level (beta) | not supported |
+| Customize response to blocked requests | 1.15.0 |
+| Software Composition Analysis (SCA) | 1.11.0 |
+| Code Security        | not supported |
+| Automatic user activity event tracking | 1.14.0 |
+| API Security | 1.15.0 |
 
-The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
+The minimum tracer version to get all supported application security capabilities for Ruby is 1.15.0.
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---   |   ---             |           ----        |
-| Docker | {{< X >}}  |  |
-| Kubernetes | {{< X >}}  | | 
-| AWS ECS | {{< X >}}  | |
-| AWS Fargate | {{< X >}}  | |
-| AWS Lambda |  | | 
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                |                               |
+| Kubernetes  | {{< X >}}                |                               |
+| Amazon ECS  | {{< X >}}                |                               |
+| AWS Fargate | {{< X >}}                |                               |
+| AWS Lambda  |                          |                               |
 
 ## Language and framework compatibility
 
@@ -48,8 +50,8 @@ These are supported on the following architectures:
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### ASM Capability Notes
-- **Vulnerability Management for Code** is not supported
+##### Application Security Capability Notes
+- **Code Security** is not supported
 
 | Framework                | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- |
@@ -73,8 +75,8 @@ These are supported on the following architectures:
 - Distributed tracing through your applications
 - Request-based blocking
 
-##### ASM Capability Notes
-- **Vulnerability Management for Code-level** is not supported
+##### Application Security Capability Notes
+- **Code Security** is not supported
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -91,9 +93,9 @@ These are supported on the following architectures:
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### ASM Capability Notes
-- **Vulnerability Management for Code-level** is not supported
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below. 
+##### Application Security Capability Notes
+- **Code Security** is not supported
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -105,6 +107,16 @@ These are supported on the following architectures:
 | Sequel        | {{< X >}} |   {{< X >}}    |
 | Elasticsearch     | {{< X >}} |   {{< X >}}    |
 
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Minimum Framework Version   |
+|-------------------| --------------------------- |
+| Devise            | 3.2.1
 
 [1]: /tracing/trace_collection/compatibility/ruby/
 [2]: https://www.ruby-lang.org/

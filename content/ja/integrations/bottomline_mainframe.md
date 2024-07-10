@@ -11,7 +11,7 @@ author:
   support_email: partner.cfrm@bottomline.com
   vendor_id: bottomline
 categories:
-- mainframe
+- mainframes
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -21,12 +21,11 @@ integration_id: bottomline-mainframe
 integration_title: Bottomline Record and Replay
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: bottomline_mainframe
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -44,7 +43,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Mainframe
+  - Category::Mainframes
   - Category::Marketplace
   - Offering::Software License
   - Supported OS::Linux
@@ -68,6 +67,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -81,7 +81,7 @@ Datadog Marketplace から Bottomline のライセンスを購入すると、す
 - Mainframe ユーザー: ユーザーセッションを記録、再生し、ユーザーがセッションで何を行ったかについての情報をログに記録します。
 - Mainframe: ユーザーのレスポンスタイム、リソースのレスポンスタイム。
 
-## サポート
+## Agent
 サポートや機能のリクエストは、[Bottomline](mailto:partner.cfrm@bottomline.com) にお問い合わせください。
 
 [1]: https://www.bottomline.com/

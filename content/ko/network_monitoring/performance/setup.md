@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: 블로그
   text: Datadog NPM는 콘술 네트워킹을 지원합니다.
-kind: 설명서
 title: 네트워크 성능 모니터링 설정
 ---
 
@@ -58,6 +57,8 @@ Datadog 네트워크 성능 모니터링은 macOS 플랫폼을 지원하지 않�
 
 NPM은 [도커(Docker)][5], [쿠버네티스(Kubernetes)][6], [ECS][7], 기타 컨테이너 기술을 지원하여, 컨테이너화 및 오케스트레이션된 환경의 아키텍처와 성능을 시각화할 수 있도록 도와드립니다. Datadog의 컨테이너 통합을 사용하면 `container_name`, `task_name`, `kube_service` 등의 즉시 사용 가능한 태그로 컨테이너, 작업, 포드, 클러스터, 배포와 같은 유용한 엔티티별로 트래픽을 집계할 수 있습니다.
 
+NPM은 GKE(Google Kubernetes Engine) Autopilot에 대해 지원되지 않습니다.
+
 ### 네트워크 라우팅 툴
 
 #### Istio
@@ -88,7 +89,7 @@ Datadog으로 Istio 환경을 모니터링하는 방법에 대해 자세히 살�
 - Chef 12.7+: [Datadog 셰프 레시피][12]를 참조하세요.
 - Ansible 2.6+: [Datadog Ansible 역할][13]을 참조하세요.
 
-## 구성
+## 설정
 
 해당 툴의 중점과 강점은 네트워크 엔드포인트 간 트래픽을 분석하고 네트워크 종속성을 매핑하는 것이므로, 이러한 성능을 극대화하려면 인프라스트럭처 내 중요 하위 집합과 **최소 2개 호스트**에 설치할 것을 권장합니다.
 
@@ -99,7 +100,7 @@ Datadog 에이전트로 네트워크 성능 모니터링 기능을 사용하도�
 
 1. **6.14+ 이전 버전 에이전트를 사용하는 경우**에는 먼저 [실시간 프로세스 수집][1]을 활성화하세요. 그렇지 않은 경우에는 이 단계를 건너뜁니다.
 
-2. 시스템 프로브 예제 구성을 복사합니다.
+2. 시스템 프로브 예제 설정을 복사합니다:
 
     ```shell
     sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
@@ -124,13 +125,13 @@ Datadog 에이전트로 네트워크 성능 모니터링 기능을 사용하도�
 
     **참고**: 시스템에서 `systemctl` 명령을 사용할 수 없는 경우, `sudo service datadog-agent-sysprobe start`명령을 대신 실행합니다. 그 다음 `datadog-agent` 시작 전에, 부팅 시 시작되도록 설정합니다.
 
-5. [Agent를 다시 시작합니다][2].
+5. [에이전트를 다시 시작합니다][2].
 
     ```shell
     sudo systemctl restart datadog-agent
     ```
 
-   **참고**: `systemctl` 명령이 시스템에서 사용 불가할 경우, 다음 명령을 대신 실행합니다:`sudo service datadog-agent restart`
+   **참고**: `systemctl` 명령이 시스템에서 제공되지 않으면 대신 다음 명령(`sudo service datadog-agent restart`)을 실행합니다.
 
 ### SELinux 지원 시스템
 
@@ -163,7 +164,7 @@ SELinux가 활성화된 다른 시스템에서 네트워크 성능 모니터링 
     restorecon -v /opt/datadog-agent/embedded/bin/system-probe
     ```
 
-5. [Agent를 다시 시작합니다][2].
+5. [에이전트를 다시 시작합니다][2].
 
 **참고**: 이 지침을 사용하려면 시스템에 대부분의 표준 배포판(우분투(Ubuntu), 데비안(Debian), RHEL, CentOS, SUSE)에서 사용할 수 있는 SELinux 유틸리티(`checkmodule`, `semodule`, `semodule_package`, `semanage`,`restorecon`)가 설치되어 있어야 합니다. 설치 방법에 대한 자세한 내용을 확인하려면 사용 중인 배포판을 확인하세요.
 
@@ -171,7 +172,7 @@ SELinux가 활성화된 다른 시스템에서 네트워크 성능 모니터링 
 
 
 [1]: /ko/infrastructure/process/?tab=linuxwindows#installation
-[2]: /ko/agent/guide/agent-commands/#restart-the-agent
+[2]: /ko/agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -190,7 +191,7 @@ Windows 호스트용 네트워크 성능 모니터링을 활성화하려면 다�
     network_config:
         enabled: true
     ```
-3. [Agent를 다시 시작합니다][2].
+3. [에이전트를 다시 시작합니다][2].
 
     PowerShell (`powershell.exe`)의 경우:
     ```shell
@@ -204,9 +205,9 @@ Windows 호스트용 네트워크 성능 모니터링을 활성화하려면 다�
 
 
 [1]: /ko/agent/basic_agent_usage/windows/?tab=commandline
-[2]: /ko/agent/guide/agent-commands/#restart-the-agent
+[2]: /ko/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "쿠버네티스(Kubernetes)" %}}
+{{% tab "Kubernetes" %}}
 
 Helm으로 쿠버네티스(Kubernetes)용 네트워크 성능 모니터링을 활성화하려면 다음을 추가합니다.
 
@@ -222,7 +223,7 @@ Helm을 사용하지 않는다면 처음부터 쿠버네티스(Kubernetes)에서
 1. [datadog-agent.yaml 매니페스트][2] 템플릿을 다운로드하세요.
 2. `<DATADOG_API_KEY>`를 [Datadog API 키][3]로 교체합니다.
 3. 옵션 - **Datadog 사이트 설정**. Datadog EU 사이트를 사용한다면, `datadog-agent.yaml` 매니페스트에서 `DD_SITE` 환경 변수를 `datadoghq.eu`로 설정합니다.
-4. 다음 명령으로 **데몬셋을 배포**합니다:
+4. 명령어와 함께 **데몬셋을 배포합니다**:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
@@ -354,12 +355,11 @@ Helm을 사용하지 않는다면 처음부터 쿠버네티스(Kubernetes)에서
 {{% tab "Operator" %}}
 <div class="alert alert-warning">Datadog 오퍼레이터는 일반적으로 `1.0.0` 버전과 함께 사용할 수 있으며, DatadogAgent 커스텀 리소스의 `v2alpha1`버전을 조정합니다.</div>
 
-[Datadog Operator][1]는 쿠버네티스나 OpenShift에 Datadog Agent를 배포하는 방법입니다. 커스텀 리소스(Custom Resource) 상태에서 배포 상황, 건전성, 오류를 보고하고 고급 설정 옵션을 지원해 설정 오류가 발생할 위험을 줄여줍니다.
+[Datadog 오퍼레이터][1]는 쿠버네티스와 OpenShift에 Datadog 에이전트를 배포하는 방법입니다. 커스텀 리소스 상태에서 배포 상황, 상태, 오류를 보고하고 고급 설정 옵션을 통해 오류 발생 위험을 줄입니다.
 
 오퍼레이터에서 네트워크 성능 모니터링 기능을 사용하도록 구성하려면 다음과 같이 설정하세요.
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
@@ -372,7 +372,7 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "도커(Docker)" %}}
+{{% tab "Docker" %}}
 
 도커(Docker)에서 네트워크 성능 모니터링 기능을 사용하도록 구성하려면 컨테이너 에이전트를 시작할 때 다음 설정을 활용하세요.
 
@@ -405,35 +405,34 @@ gcr.io/datadoghq/agent:latest
 ```
 version: '3'
 services:
-  ..
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
-       DD_PROCESS_AGENT_ENABLED=true
-       DD_API_KEY=<DATADOG_API_KEY>
+      - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /sys/kernel/debug:/sys/kernel/debug
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
     cap_add:
-    - SYS_ADMIN
-    - SYS_RESOURCE
-    - SYS_PTRACE
-    - NET_ADMIN
-    - NET_BROADCAST
-    - NET_RAW
-    - IPC_LOCK
-    - CHOWN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     security_opt:
-    - apparmor:unconfined
+      - apparmor:unconfined
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-AWS ECS에서 설정하려면 [AWS ECS][1] 문서 페이지를 참조합니다.
+ Amazon ECS를 설정하려면 [Amazon ECS][1] 설명서 페이지를 참조하세요.
 
 
 [1]: /ko/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
@@ -451,7 +450,7 @@ AWS ECS에서 설정하려면 [AWS ECS][1] 문서 페이지를 참조합니다.
 
   [1]: /integrations/azure
   [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
+  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 

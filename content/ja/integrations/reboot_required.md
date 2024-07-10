@@ -30,10 +30,9 @@ integration_id: reboot-required
 integration_title: Reboot Required
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: reboot_required
-oauth: {}
 public_title: Reboot Required
 short_description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
 supported_os:

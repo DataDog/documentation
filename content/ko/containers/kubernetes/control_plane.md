@@ -20,7 +20,6 @@ further_reading:
 - link: /agent/kubernetes/tag
   tag: 설명서
   text: 컨테이너에서 내보내는 모든 데이터에 태그 할당
-kind: 설명서
 title: 쿠버네티스 컨트롤 플레인 모니터링
 ---
 
@@ -631,7 +630,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### Kubernetes 서비스를 추가하여 자동 탐지 검사 설정 
+### Kubernetes 서비스를 추가하여 자동 탐지 검사 설정
 
 헤드리스 쿠버네티스 서비스를 추가하여 검사 설정을 정의함으로써 Datadog 에이전트는 `pushprox` 포드를 목표로 삼고 메트릭을 수집할 수 있습니다.
 

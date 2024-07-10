@@ -86,10 +86,7 @@
       </h5>
     </div>
     <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">
-      <div class="card-body p-0 code-snippet">
-        <div class="code-button-wrapper position-absolute">
-            <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-        </div>
+      <div class="card-body p-0 append-copy-btn">
         {{ highlight $body $lang.syntax "" }}
       </div>
     </div>
@@ -136,38 +133,39 @@
                         <div class="code-button-wrapper position-absolute">
                             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                         </div>
+
+                        {{/* Do not change indent of html below as it will change the indentation of the curl code block. CURL code examples dont use `highlight` hugo function */}}
                         <pre class="chroma">
-  {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
-  <code class="language-fallback" data-lang="fallback">
-  {{- with $endpoint.action.requestBody -}}
-      {{- with .content -}}
-          {{- range $contentType, $requestBody := . -}}
-              {{- with $requestBody.examples -}}
-                  {{- range $exampleId, $exampleDefinition := . -}}
-                      {{- $exampleValue := "" }}
-                      {{- with $exampleDefinition.externalValue -}}
-                        {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
-                          {{- $exampleValue = .Content }}
-                        {{- end -}}
-                      {{- else -}}
-                        {{- $exampleValue = $exampleDefinition.value -}}
-                        {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
-                            {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
-                        {{- end -}}
-                      {{- end -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
-                  {{- end -}}
-              {{- else -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
-              {{- end -}}
-          {{- end -}}
-      {{- end -}}
-  {{- else -}}
-{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
-  {{- end -}}
-  </code>
-  {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
+                          <code class="language-fallback" data-lang="fallback">
+                          {{- with $endpoint.action.requestBody -}}
+                              {{- with .content -}}
+                                  {{- range $contentType, $requestBody := . -}}
+                                      {{- with $requestBody.examples -}}
+                                          {{- range $exampleId, $exampleDefinition := . -}}
+                                            {{- $exampleValue := "" }}
+                                            {{- with $exampleDefinition.externalValue -}}
+                                              {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
+                                                {{- $exampleValue = .Content }}
+                                              {{- end -}}
+                                            {{- else -}}
+                                              {{- $exampleValue = $exampleDefinition.value -}}
+                                              {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json") (hasPrefix $contentType "multipart/form-data")) -}}
+                                                  {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                                              {{- end -}}
+                                            {{- end -}}
+                                            {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                          {{- end -}}
+                                      {{- else -}}
+                                        {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                      {{- end -}}
+                                  {{- end -}}
+                              {{- end -}}
+                          {{- else -}}
+                            {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                          {{- end -}}
+                          </code>
                         </pre>
+                        {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
 
                       </div>
                     </div>
@@ -181,45 +179,51 @@
 
           {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
             <div class="card">
-            <div class="card-header p-0">
-              <h5 class="m-0">
-                <button class="btn btn-link font-bold" disabled>
-                  {{ $endpoint.action.summary }}
-                </button>
-              </h5>
-            </div>
-            <pre class="chroma">
-{{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
-<code class="language-fallback" data-lang="fallback">
-{{- with $endpoint.action.requestBody -}}
-    {{- with .content -}}
-        {{- range $contentType, $requestBody := . -}}
-            {{- with $requestBody.examples -}}
-                {{- range $exampleId, $exampleDefinition := . -}}
-                    {{- $exampleValue := "" }}
-                    {{- with $exampleDefinition.externalValue -}}
-                      {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
-                        {{- $exampleValue = .Content }}
+              <div class="card-header p-0">
+                <h5 class="m-0">
+                  <button class="btn btn-link font-bold" disabled>
+                    {{ $endpoint.action.summary }}
+                  </button>
+                </h5>
+              </div>
+              <div class="card-body p-0 code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                    <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                </div>
+
+                {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
+                <pre class="chroma">
+                  <code class="language-fallback" data-lang="fallback">
+                  {{- with $endpoint.action.requestBody -}}
+                      {{- with .content -}}
+                          {{- range $contentType, $requestBody := . -}}
+                              {{- with $requestBody.examples -}}
+                                  {{- range $exampleId, $exampleDefinition := . -}}
+                                      {{- $exampleValue := "" }}
+                                      {{- with $exampleDefinition.externalValue -}}
+                                        {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
+                                          {{- $exampleValue = .Content }}
+                                        {{- end -}}
+                                      {{- else -}}
+                                        {{- $exampleValue = $exampleDefinition.value -}}
+                                        {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json") (hasPrefix $contentType "multipart/form-data")) -}}
+                                            {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                                        {{- end -}}
+                                      {{- end -}}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                                  {{- end -}}
+                              {{- else -}}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                              {{- end -}}
+                          {{- end -}}
                       {{- end -}}
-                    {{- else -}}
-                      {{- $exampleValue = $exampleDefinition.value -}}
-                      {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
-                          {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
-                      {{- end -}}
-                    {{- end -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
-                {{- end -}}
-            {{- else -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- else -}}
-{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
-{{- end -}}
-</code>
-{{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
-           </pre>
+                  {{- else -}}
+                  {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{- end -}}
+                  </code>
+                </pre>
+                {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
+              </div>
             </div>
           {{ end }}
       </div>
@@ -228,40 +232,40 @@
 
 <!-- Go, Python, Ruby, Typescript, Java etc. -->
 {{ with (index $codeExampleLookup $operationid) }}
-    {{ $items := . }}
-    {{ $s := newScratch }}
-    {{ range $k, $lang := $context.Site.Params.code_languages }}
-      {{ $newItems := slice }}
-      {{ $file_extension := $k }}
-      {{ $count := 0 }}
-      {{ range $i, $item := $items }}
-        {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
-        {{ with $resourcePage.Resources.Match $fileStr }}
-          {{ with . }}
-            {{ $newItems = $newItems | append $item }}
-            {{ $count = add $count 1 }}
-          {{ end }}
+  {{ $items := . }}
+  {{ $s := newScratch }}
+  {{ range $k, $lang := $context.Site.Params.code_languages }}
+    {{ $newItems := slice }}
+    {{ $file_extension := $k }}
+    {{ $count := 0 }}
+    {{ range $i, $item := $items }}
+      {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
+      {{ with $resourcePage.Resources.Match $fileStr }}
+        {{ with . }}
+          {{ $newItems = $newItems | append $item }}
+          {{ $count = add $count 1 }}
         {{ end }}
       {{ end }}
-      {{ $s.SetInMap "itemCounts" $lang.name $count }}
-      {{ $s.SetInMap "items" $lang.name $newItems }}
     {{ end }}
+    {{ $s.SetInMap "itemCounts" $lang.name $count }}
+    {{ $s.SetInMap "items" $lang.name $newItems }}
+  {{ end }}
 
-    {{ range $k, $lang := $context.Site.Params.code_languages }}
-      {{ $file_extension := $k }}
-      {{ $numOfCodeExamples := (index ($s.Get "itemCounts") $lang.name) }}
-      {{ $myItems := (index ($s.Get "items") $lang.name) }}
-      {{ if gt $numOfCodeExamples 0 }}
-      <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
-        {{ if gt $numOfCodeExamples 1 }}<div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">{{ end }}
-          {{ range $i, $item := $myItems | first 3 }}
-              {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
-              {{ with $resourcePage.Resources.Match $fileStr }}
-                  {{ range . }}
-                    {{ if gt $numOfCodeExamples 1 }}
-                      {{ partial "accordion-card" (dict "count" $i "item" $item "body" .Content "lang" $lang "operationid" $operationid "version" $version ) }}
-                    {{ else }}
-                      <div class="card">
+  {{ range $k, $lang := $context.Site.Params.code_languages }}
+    {{ $file_extension := $k }}
+    {{ $numOfCodeExamples := (index ($s.Get "itemCounts") $lang.name) }}
+    {{ $myItems := (index ($s.Get "items") $lang.name) }}
+    {{ if gt $numOfCodeExamples 0 }}
+    <div class="code-snippet-wrapper js-code-block append-copy-btn" data-code-lang-block="{{ $lang.name }}">
+      {{ if gt $numOfCodeExamples 1 }}<div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">{{ end }}
+        {{ range $i, $item := $myItems | first 3 }}
+            {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
+            {{ with $resourcePage.Resources.Match $fileStr }}
+                {{ range . }}
+                  {{ if gt $numOfCodeExamples 1 }}
+                    {{ partial "accordion-card" (dict "count" $i "item" $item "body" .Content "lang" $lang "operationid" $operationid "version" $version ) }}
+                  {{ else }}
+                    <div class="card">
                       <div class="card-header p-0">
                         <h5 class="m-0">
                           <button class="btn btn-link collapsed font-bold" disabled>
@@ -269,21 +273,20 @@
                           </button>
                         </h5>
                       </div>
-                      {{ highlight .Content $lang.syntax "" }}
-                      </div>
-                    {{ end }}
+                    </div>
+                    {{ highlight .Content $lang.syntax "" }}
                   {{ end }}
-              {{ end }}
-          {{ end }}
-        {{ if gt $numOfCodeExamples 1 }}</div>{{ end }}
-        {{ if ne $lang.extension "sh" }}
-            {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
+                {{ end }}
+            {{ end }}
         {{ end }}
-      </div>
+      {{ if gt $numOfCodeExamples 1 }}</div>{{ end }}
+      {{ if ne $lang.extension "sh" }}
+          {{ partial "code-example-instructions" (dict "context" $context "lang" $lang "endpoint" $endpoint "securitySchemes" $securitySchemes) }}
       {{ end }}
+    </div>
     {{ end }}
+  {{ end }}
 {{ else }}
-
   <!-- if its not multiple examples then just output -->
   {{ with $resourcePage.Resources.Match (printf "%s%s" $operationid ".*" ) }}
     {{ range . }}
@@ -292,16 +295,15 @@
         {{ $lang := index $context.Site.Params.code_languages $file_extension }}
         {{ if ne $file_extension "sh"}}
           <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                  <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-              </div>
-              <div class="card-header p-0">
-                <h5 class="m-0">
-                  <button class="btn btn-link collapsed font-bold" disabled>
-                    {{ $endpoint.action.summary }}
-                  </button>
-                </h5>
+            <div class="append-copy-btn">
+              <div class="card">
+                <div class="card-header p-0">
+                  <h5 class="m-0">
+                    <button class="btn btn-link collapsed font-bold" disabled>
+                      {{ $endpoint.action.summary }}
+                    </button>
+                  </h5>
+                </div>
               </div>
               {{ highlight $file_content $lang.syntax "" }}
             </div>

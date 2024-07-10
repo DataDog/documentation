@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/java/
   tag: Documentation
   text: ヘッダーを使ったトレースコンテキストの伝搬
-kind: documentation
 title: Java トレーシングライブラリの構成
 type: multi-code-lang
 ---
@@ -156,6 +155,16 @@ Datadog Agent とのネットワークインタラクションのタイムアウ
 **デフォルト**: `false`<br>
 `true` に設定すると、db スパンにインスタンス名がサービス名として割り当てられます
 
+`dd.trace.elasticsearch.body.enabled`
+: **環境変数**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
+**デフォルト**: `false`<br>
+`true` に設定すると、Elasticsearch と OpenSearch のスパンに body が追加されます。
+
+`dd.trace.elasticsearch.params.enabled`
+: **環境変数**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
+**デフォルト**: `true`<br>
+`true` に設定すると、Elasticsearch と OpenSearch のスパンに query string パラメーターが追加されます。
+
 `dd.trace.health.metrics.enabled`
 : **環境変数**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
 **デフォルト**: `true`<br>
@@ -174,44 +183,49 @@ Datadog Agent とのネットワークインタラクションのタイムアウ
 `dd.http.client.tag.query-string`
 : **環境変数**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **デフォルト**: `false`<br>
-`true` に設定すると、クエリ文字列パラメーターとフラグメントがウェブクライアントスパンに追加されます
+`true` に設定すると、クエリ文字列パラメーターとフラグメントが Web クライアントスパンに追加されます
 
 `dd.http.client.error.statuses`
 : **環境変数**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
 **デフォルト**: `400-499`<br>
-許容可能なエラーの範囲。デフォルトで 4xx エラーは HTTP クライアントのエラーとしてレポートされます。このコンフィギュレーションはこれをオーバーライドします。例: `dd.http.client.error.statuses=400-403,405,410-499`
+許容可能なエラーの範囲。デフォルトで 4xx エラーは HTTP クライアントのエラーとしてレポートされます。この構成はこれをオーバーライドします。例: `dd.http.client.error.statuses=400-403,405,410-499`
 
 `dd.http.server.error.statuses`
 : **環境変数**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
 **デフォルト**: `500-599`<br>
-許容可能なエラーの範囲。デフォルトで 5xx ステータスコードは HTTP サーバーのエラーとしてレポートされます。このコンフィギュレーションはこれをオーバーライドします。例: `dd.http.server.error.statuses=500,502-599`
+許容可能なエラーの範囲。デフォルトで 5xx ステータスコードは HTTP サーバーのエラーとしてレポートされます。この構成はこれをオーバーライドします。例: `dd.http.server.error.statuses=500,502-599`
 
 `dd.http.server.tag.query-string`
 : **環境変数**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
 **デフォルト**: `true`<br>
-`true` に設定すると、クエリ文字列パラメーターとフラグメントがウェブサーバースパンに追加されます
+`true` に設定すると、クエリ文字列パラメーターとフラグメントが Web サーバースパンに追加されます
+
+`dd.http.server.route-based-naming`
+: **環境変数**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
+**デフォルト**: `true`<br>
+`false` に設定すると、http フレームワークのルートはリソース名に使用されません。_この場合、変更されるとリソース名と派生メトリクスが変更される可能性があります。_
 
 `dd.trace.enabled`
 : **環境変数**: `DD_TRACE_ENABLED`<br>
 **デフォルト**: `true`<br>
-`false` トレースエージェントが無効の時
+`false` の場合、トレース Agent は無効になります。
 
 `dd.jmxfetch.enabled`
 : **環境変数**: `DD_JMXFETCH_ENABLED`<br>
 **デフォルト**: `true`<br>
-Java トレースエージェントによる JMX メトリクスの収集を有効にします。
+Java トレース Agent による JMX メトリクスの収集を有効にします。
 
 `dd.jmxfetch.config.dir`
 : **環境変数**: `DD_JMXFETCH_CONFIG_DIR`<br>
 **デフォルト**: `null`<br>
 **例**: `/path/to/directory/etc/conf.d`<br>
-JMX メトリクスコレクションの追加構成ディレクトリ。Java エージェントは `yaml` ファイルの `instance` セクションの `jvm_direct:true` を探してコンフィギュレーションを変更します。
+JMX メトリクスコレクションの追加構成ディレクトリ。Java Agent は `yaml` ファイルの `instance` セクションの `jvm_direct:true` を探して構成を変更します。
 
 `dd.jmxfetch.config`
 : **環境変数**: `DD_JMXFETCH_CONFIG`<br>
 **デフォルト**: `null`<br>
 **例**: `path/to/file/conf.yaml,other/path/to/file/conf.yaml`<br>
-JMX メトリクスコレクションの追加メトリクス構成ファイル。Java エージェントは `yaml` ファイルの `instance` セクションの `jvm_direct:true` を探してコンフィギュレーションを変更します。
+JMX メトリクスコレクションの追加メトリクスコンフィギュレーションファイル。Java Agent は `yaml` ファイルの `instance` セクションの `jvm_direct:true` を探して構成を変更します。
 
 `dd.jmxfetch.check-period`
 : **環境変数**: `DD_JMXFETCH_CHECK_PERIOD`<br>
@@ -241,7 +255,7 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 `dd.integration.opentracing.enabled`
 : **環境変数**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
 **デフォルト**: `true`<br>
-デフォルトで、トレーシングクライアントは GlobalTracer がロードされており、トレーサーを動的に登録しているかどうかを検知します。これを false に設定すると、OpenTracing 上のトレーサーの依存関係がすべて消去されます。
+デフォルトで、トレーシングクライアントは GlobalTracer がロードされており、トレーサーを動的に登録しているかどうかを検出します。これを false に設定すると、OpenTracing 上のトレーサーの依存関係がすべて消去されます。
 
 `dd.hystrix.tags.enabled`
 : **環境変数**: `DD_HYSTRIX_TAGS_ENABLED`<br>
@@ -341,11 +355,11 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
 ```
 
-これで、DB インスタンス 1 である `webappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
+これで、DB インスタンス 1 である `webappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます。
 
 {{< img src="tracing/setup/java/split_by_instance_1.png" alt="インスタンス 1" >}}
 
-これで、DB インスタンス 2 である `secondwebappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
+これで、DB インスタンス 2 である `secondwebappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます。
 
 {{< img src="tracing/setup/java/split_by_instance_2.png" alt="インスタンス 2" >}}
 
@@ -402,7 +416,7 @@ instances:
 JMX フェッチを使った Java メトリクス収集についての詳細は [Java インテグレーションドキュメント][12]を参照してください。
 ### ヘッダーの抽出と挿入
 
-有効な値と以下のコンフィギュレーションオプションの使用に関する情報については、[Java トレースコンテキストの伝播][13]を参照してください。
+有効な値と以下の構成オプションの使用に関する情報については、[Java トレースコンテキストの伝播][13]を参照してください。
 
 `dd.trace.propagation.style.inject`
 : **環境変数**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -437,6 +451,16 @@ JMX フェッチを使った Java メトリクス収集についての詳細は 
 **デフォルト**: `datadog`<br>
 分散型トレーシングの伝播データの抽出を試みるヘッダーフォーマットのカンマ区切りのリスト。完全で有効なヘッダーを持つ最初のフォーマットが、トレースを継続するために定義するために使用されます。<br>
 バージョン 1.9.0 以降、非推奨
+
+### 試験機能
+
+以下の構成オプションは現在利用可能な機能向けですが、今後のリリースで変更される場合があります。
+
+`dd.integration.opentelemetry.experimental.enabled`
+: **環境変数**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
+**デフォルト**: `false`<br>
+OpenTelemetry の試験機能を有効にします。この設定を有効にすると、Datadog Trace Agent によって支えられた OpenTelemetry トレーシング API を使用できます。<br>
+バージョン 1.10.0 以降で利用可能
 
 ## その他の参考資料
 

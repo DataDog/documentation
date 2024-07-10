@@ -2,7 +2,7 @@
 categories:
 - AWS
 - クラウド
-- data store
+- data stores
 - ログの収集
 dependencies: []
 description: Amazon S3 Storage Lens の主要なメトリクスを追跡します。
@@ -14,11 +14,11 @@ further_reading:
   text: Amazon S3 Storage Lens メトリクスによる S3 ストレージの監視と最適化
 git_integration_title: amazon_s3_storage_lens
 has_logo: true
-integration_id: amazon-s3-storage-lens
+integration_id: ''
 integration_title: Amazon S3 Storage Lens
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_s3_storage_lens
 public_title: Datadog-Amazon S3 Storage Lens インテグレーション
@@ -26,15 +26,16 @@ short_description: Amazon S3 Storage Lens の主要なメトリクスを追跡�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon S3 Storage Lens は、Amazon S3 ストレージ全体の使用状況とアクティビティを一望できるビューを提供します。S3 Storage Lens を使用して、組織全体でどれだけのストレージがあるか、またはどれが最も急速に成長しているバケットとプレフィックスかを見つけるなど、要約した洞察を生成することができます。ストレージメトリクスの異常値を特定し、ドリルダウンして使用量やアクティビティのスパイクの原因をさらに調査します。
 
 このインテグレーションを有効にすると、Datadog にすべての S3 Storage Lens メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -46,21 +47,21 @@ Amazon S3 Storage Lens は、Amazon S3 ストレージ全体の使用状況と�
 
 **注:** S3 Storage Lens のメトリクスはデイリーメトリクスであり、1 日 1 回 CloudWatch に公開されます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_s3_storage_lens" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon S3 Storage Lens インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon S3 Storage Lens インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

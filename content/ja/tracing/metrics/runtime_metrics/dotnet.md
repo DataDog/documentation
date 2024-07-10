@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
   tag: GitHub
   text: Datadog を使用した .NET ランタイムメトリクスの監視
-kind: documentation
 title: .NET ランタイムメトリクス
 type: multi-code-lang
 ---
@@ -29,12 +28,13 @@ type: multi-code-lang
 - .NET 5
 - .NET 6
 - .NET 7
+- .NET 8
 
 ## 自動コンフィギュレーション
 
 `DD_RUNTIME_METRICS_ENABLED=true` 環境変数を使用して、.NET Tracer 1.23.0+ でランタイムメトリクス収集を有効にします。
 
-ランタイムメトリクスを .NET サービスと相関して表示します。Datadog の[サービス詳細画面][1]を参照してください。
+ランタイムメトリクスを .NET サービスと相関して表示します。Datadog の[サービスカタログ][1]を参照してください。
 
 初期設定では、アプリケーションからのランタイムメトリクスは、ポート `8125` を介して DogStatsD と共に Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][2]を確認してください。
 
@@ -43,7 +43,9 @@ Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LO
 - **Kubernetes**: [DogstatsD ポートをホストポートにバインドする][4] _必要があります_。
 - **ECS**。[タスク定義で適切なフラグを設定します][5]。
 
-## 収集データ
+または、Agent は UDP トランスポートの代わりに Unix Domain Socket (UDS) を使用してメトリクスを取り込むこともできます。詳細については、[Unix Domain Socket 経由の DogStatsD][7] を参照してください。
+
+## リアルユーザーモニタリング
 
 以下のメトリクスは .NET メトリクスを有効にした後、デフォルトで収集されます。
 
@@ -63,13 +65,14 @@ IIS アプリケーションプールは、ユーザーのリストに表示さ�
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: /ja/developers/dogstatsd/#setup
 [3]: /ja/agent/docker/#dogstatsd-custom-metrics
 [4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
 [5]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30412/net-runtime-metrics
+[7]: /ja/developers/dogstatsd/unix_socket/

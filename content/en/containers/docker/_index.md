@@ -1,6 +1,5 @@
 ---
 title: Docker Agent for Docker, containerd, and Podman
-kind: documentation
 aliases:
   - /guides/basic_agent_usage/docker/
   - /agent/docker
@@ -150,7 +149,7 @@ The Agent's [main configuration file][13] is `datadog.yaml`. For the Docker Agen
 | `DD_DD_URL`          | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_URL` (6.36+/7.36+)            | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks), the `collector-queue` component may fall behind and fail the health check. You can increase the number of runners to run checks in parallel. |
-| `DD_APM_ENABLED`             | Enables trace collection. Defaults to `true`. Fore more information about additional trace collection environment variables, see [Tracing Docker Applications][14].   |
+| `DD_APM_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about additional trace collection environment variables, see [Tracing Docker Applications][14].   |
 | `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` | In some environments, the initial logs from hosts might not include the correct tags. If you're missing tags on new hosts in your logs, include this environment variable and set it to `"10m"`.|
 
 ### Proxy settings
@@ -169,11 +168,11 @@ For more information about proxy settings, see the [Agent v6 Proxy documentation
 
 Optional collection Agents are disabled by default for security or performance reasons. Use these environment variables to enable them:
 
-| Env Variable               | Description                                                                                                                                                                                                                                                      |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers][16].       |
-| `DD_LOGS_ENABLED`          | Enable [log collection][17] with the Logs Agent.                                                                                                                                                                                                                 |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][18] and the [live container view][19] are disabled. |
+| Env Variable                                   | Description                                                                                                                                                   |
+|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_APM_NON_LOCAL_TRAFFIC`                     | Allow non-local traffic when [tracing from other containers][16].                                                                                             |
+| `DD_LOGS_ENABLED`                              | Enable [log collection][17] with the Logs Agent.                                                                                                              |
+| `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. |
 
 ### DogStatsD (custom metrics)
 
@@ -229,14 +228,21 @@ Additional examples are available on the [Container Discover Management][25] pag
 
 **Note**: When using containerd, it's possible to ignore containers by namespace using `DD_CONTAINERD_NAMESPACES` and `DD_CONTAINERD_EXCLUDE_NAMESPACES`. Both are a space-separated list of namespaces. When `DD_CONTAINERD_NAMESPACES` is set, the agent reports data for the containers that belong to a namespace present in the list. When `DD_CONTAINERD_EXCLUDE_NAMESPACES` is set, the agent reports data for all the containers except the ones that belong to a namespace of the list.
 
+### Autodiscovery
+
+| Env Variable                 | Description                                                                                                                                                                           |
+|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_LISTENERS`               | Autodiscovery listeners to run.                                                                                                                                                       |
+| `DD_EXTRA_LISTENERS`         | Additional Autodiscovery listeners to run. They are added in addition to the variables defined in the `listeners` section of the `datadog.yaml` configuration file.                   |
+| `DD_CONFIG_PROVIDERS`        | The providers the Agent should call to collect checks configurations. The default provider is `docker`. The Docker provider handles templates embedded in container labels. |
+| `DD_EXTRA_CONFIG_PROVIDERS`  | Additional Autodiscovery configuration providers to use. They are added in addition to the variables defined in the `config_providers` section of the `datadog.yaml` configuration file. |
+
 ### Misc
 
 | Env Variable                        | Description                                                                                                                                                     |
 |-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"`. This is no longer needed since Agent v7.35.0. |
 | `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                                                                             |
-
-You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 
 ## Commands
 
@@ -274,6 +280,10 @@ Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise retur
 **datadog.agent.check_status**: <br>
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
+## Uninstall Single Step APM Instrumentation
+
+If you installed the Datadog Docker Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][33] to uninstall APM Instrumentation.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -286,13 +296,13 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
 [8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
-[9]: /agent/basic_agent_usage/#supported-os-versions
+[9]: /agent/supported_platforms/?tab=cloudandcontainers
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: /agent/guide/compose-and-the-datadog-agent/
 [12]: /agent/docker/integrations/
-[13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[13]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [14]: /agent/docker/apm/
-[15]: /agent/proxy/#agent-v6
+[15]: /agent/configuration/proxy/#agent-v6
 [16]: /agent/docker/apm/#tracing-from-other-containers
 [17]: /agent/docker/log/
 [18]: /infrastructure/process/
@@ -301,12 +311,13 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [21]: /developers/dogstatsd/unix_socket/
 [22]: /getting_started/tagging/unified_service_tagging/
 [23]: /agent/docker/tag/
-[24]: /agent/guide/secrets-management/?tab=linux
+[24]: /agent/configuration/secrets-management/?tab=linux
 [25]: /agent/guide/autodiscovery-management/
-[26]: /agent/guide/agent-commands/
+[26]: /agent/configuration/agent-commands/
 [27]: /integrations/container/
 [28]: /integrations/system/#metrics
 [29]: /integrations/disk/#metrics
 [30]: /agent/docker/data_collected/#metrics
 [31]: /integrations/network/#metrics
 [32]: /integrations/ntp/#metrics
+[33]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure

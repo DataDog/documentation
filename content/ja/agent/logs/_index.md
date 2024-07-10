@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: ドキュメント
   text: グローバルな処理ルール
-kind: documentation
 title: ホスト Agent ログの収集
 ---
 
@@ -65,9 +64,9 @@ logs:
     source: "<SOURCE>"
 ```
 
-Windows では、パス `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
+Windows では、パス `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{< /tabs >}}
 
 {{% tab "TCP/UDP" %}}
@@ -88,7 +87,7 @@ Agent バージョン 7.31.0 以降では、TCP 接続はアイドル状態で�
 
 **注**: Agent は、単純文字列、JSON、および Syslog 形式のログをサポートします。複数のログを一度に送信する場合は、改行文字を使用してログを区切ってください。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -102,7 +101,7 @@ logs:
 
 コンテナ化環境およびユニットフィルタリングの設定については、[journald インテグレーション][2]に関するドキュメントを参照してください。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 [2]: /ja/integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
@@ -162,7 +161,7 @@ logs:
 | `exclude_paths`  | ✕       | `type` が **file** で、`path` にワイルドカード文字が含まれている場合、ログ収集から除外する必要がある一致するファイルをリストします。6.18 以降の Agent バージョンで使用できます。                                                                                                                                                                            |
 | `exclude_units`  | ✕       | `type` が **journald** の場合、対象としない journald ユニットのリスト。                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | ✕       | ソース属性が属するカテゴリーの定義に使用される属性。たとえば、source:postgres、sourcecategory:database`、`source: apache, sourcecategory: http_web_access` です。                                                                                                                                                                                                                              |
-| `start_position` | ✕       | `type` が **file** の場合、Agent がファイルの読み取りを開始する位置を設定します。有効な値は `beginning` と `end` です (デフォルト: `end`)。`path` にワイルドカード文字が含まれている場合、`beginning` はサポートされません。_Agent v6.19/v7.19 に追加されました_                                                                                                            |
+| `start_position` | ✕       | `type` が **file** の場合、Agent がファイルの読み込みを開始する位置を設定します。有効な値は `beginning` と `end` (デフォルトは `end`) です。`path` にワイルドカード文字が含まれている場合、`beginning` はサポートされません。_Agent v6.19/v7.19 で追加されました_<br/><br/>`type` が **journald** の場合、Agent がジャーナルの読み込みを開始する位置を設定します。有効な値は `beginning`、`end`、`forceBeginning`、`forceEnd` です (デフォルトは `end`)。`force` オプションを指定すると、Agent はディスクに保存されているカーソルを無視し、開始時に常にジャーナルの先頭または末尾から読み込みます。_Agent v7.38 で追加されました_                                                                                                          |
 | `encoding`       | ✕       | `type` が **file** の場合、Agent がファイルを読み込む際のエンコーディングを設定します。UTF-16 リトルエンディアン の場合は `utf-16-le` に、UTF-16 ビッグエンディアンの場合は `utf-16-be` に、Shift JIS の場合は `shift-jis` に設定します。その他の値に設定すると、Agent はファイルを UTF-8 形式で読み込みます。_`utf-16-le` および `utf-16be` は Agent v6.23/v7.23 の、`shift-jis` は Agent v6.34/v7.34 の追加機能です_                                                                                      |
 | `tags`           | ✕       | 収集される各ログに追加するタグのリスト ([タグ付けの詳細はこちら][11])。                                                                                                                                                                                                                                                                             |
 
@@ -173,10 +172,10 @@ logs:
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/kubernetes/log/
 [3]: /ja/agent/docker/log/
-[4]: /ja/agent/guide/agent-configuration-files/
+[4]: /ja/agent/configuration/agent-configuration-files/
 [5]: /ja/agent/logs/log_transport/
-[6]: /ja/agent/guide/agent-commands/#restart-the-agent
-[7]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [8]: /ja/tracing/
 [9]: /ja/getting_started/tagging/unified_service_tagging
 [10]: /ja/metrics/custom_metrics/#overview

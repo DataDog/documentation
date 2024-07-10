@@ -9,7 +9,6 @@ further_reading:
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
-kind: documentation
 title: メトリクスエクスプローラー
 ---
 
@@ -44,9 +43,9 @@ title: メトリクスエクスプローラー
 
 **注**: これらのオプションは、選択したメトリクスのタイプによって変わります。
 
-### 関数
+### 関数と数式
 
-関数ボタンを使って、オプションで関数をクエリに追加することができます。すべての関数が、すべてのメトリクスタイプで利用できるわけではありません。
+関数ボタンを使って、オプションで関数をクエリに追加することができます。すべての関数が、すべてのメトリクスタイプで利用できるわけではありません。詳しくは[クエリ][6]のドキュメントをご覧ください。
 
 ### エクスポート
 
@@ -61,3 +60,4 @@ title: メトリクスエクスプローラー
 [3]: /ja/dashboards/#screenboards
 [4]: /ja/dashboards/#timeboards
 [5]: /ja/metrics/introduction/#space-aggregation
+[6]: https://docs.datadoghq.com/ja/dashboards/querying/#advanced-graphing

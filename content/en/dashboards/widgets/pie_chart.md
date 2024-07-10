@@ -1,6 +1,6 @@
 ---
 title: Pie Chart Widget
-kind: documentation
+widget_type: "sunburst"
 description: "Graph proportions of one or more datasets."
 further_reading:
 - link: "/dashboards/graphing_json/"
@@ -59,15 +59,20 @@ Viewing the pie chart widget in full-screen reveals the standard set of [full-sc
 
 ## API
 
-This widget can be used with the [Dashboards API][6].
+This widget can be used with the **[Dashboards API][6]**. See the following table for the [widget JSON schema definition][7]:
+
+<div class="alert alert-info">The widget type for Pie Chart is <strong>sunburst</strong>.</div>
+
+{{< dashboards-widgets-api >}}
 
 ## Treemap widget
 
-Like the pie chart widget, the [treemap][7] can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, and the treemap displays nested rectangles.
+Like the pie chart widget, the [treemap][8] can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, and the treemap displays nested rectangles.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /dashboards/querying
 [2]: /logs/explorer/search_syntax/
@@ -75,4 +80,5 @@ Like the pie chart widget, the [treemap][7] can also be used to display nested p
 [4]: /dashboards/guide/context-links/
 [5]: /dashboards/widgets/#full-screen
 [6]: /api/latest/dashboards/
-[7]: /dashboards/widgets/treemap/
+[7]: /dashboards/graphing_json/widget_json/
+[8]: /dashboards/widgets/treemap/

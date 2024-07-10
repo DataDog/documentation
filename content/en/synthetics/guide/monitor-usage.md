@@ -1,6 +1,6 @@
 ---
-title: Using Estimated Usage Metrics
-kind: guide
+title: Use Estimated Usage Metrics
+
 description: Learn about estimated usage metrics generated from your Synthetic tests.
 further_reading:
 - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'

@@ -7,284 +7,216 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
   text: オートディスカバリーのインテグレーションテンプレートの作成とロード
-kind: ガイド
 title: コンテナディスカバリー管理
 ---
 
-Datadog Agent は、利用可能なすべてのコンテナを自動検出する設定になっています。検出パラメーターを制限したりデータの収集をコンテナのサブセットのみに制限するには、それぞれのコンフィギュレーションで取り扱いを設定します。
+デフォルトで、Datadog Agent は、利用可能なすべてのコンテナを自動的に検出する設定になっています。検出パラメーターを制限したりデータの収集をコンテナのサブセットのみに制限するには、それぞれのコンフィギュレーションで取り扱いを設定します。
 
 **注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けず、常にすべてのコンテナを対象とします。
 
-Agent をホスト上のバイナリとして実行する場合は、[Agent](?tab=agent) タブの説明に従ってオートディスカバリー境界を構成してください。Agent をコンテナとして実行する場合は、[コンテナ化 Agent](?tab=containerizedagent) タブの説明に従ってオートディスカバリー境界を構成してください。
-
-## コンテナを除外する
-
-`name`、`image`、`kube_namespace` に基づく除外ルールで Agent のオートディスカバリー境界からのコンテナを除外し、そこから **NO DATA** を集めます。コンテナと除外ルールが一致すると、最初に包含ルールに一致しない限り含まれることはありません。
-
-**注**: 除外条件は正規表現をサポートし、スペース区切り文字列のリストとして定義されます。
-
-**注**: 各コンテナを除外するには、`name:.*`、`image:.*`、`kube_namespace:.*` を使用できます。`name:`、`image:`、または `kube_namespace:` のプレフィックスなしで `.*` を構成しても機能しません。
+## 環境変数
+Agent をコンテナとして実行する場合は、[Containerized Agent](?tab=containerizedagent) タブの指示を使用します。Agent をホスト上のバイナリとして実行する場合は、[Host Agent](?tab=hostagent) タブの指示を使用します。
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-**Agent v7.20 以降**でオートディスカバリーから**画像** `<IMAGE_NAME>` を持つ任意の Docker コンテナを削除し、**ログとメトリクス**を除外するには、Datadog Agent に以下の環境変数を追加してください。
+**Agent v7.20+** では、以下の環境変数を使用して、イメージ、名前、または Kubernetes ネームスペースによってコンテナを除外します。除外されたコンテナからはログとメトリクスが収集されません。
 
-```bash
-DD_CONTAINER_EXCLUDE = "image:<IMAGE_NAME>"
-```
+| 環境変数 | 説明 |
+| ------------ | ----------- |
+| `DD_CONTAINER_EXCLUDE` | 除外するコンテナのブロックリスト。 |
+| `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスが除外されるコンテナのブロックリスト。 |
+| `DD_CONTAINER_EXCLUDE_LOGS` | ログが除外されるコンテナのブロックリスト。 |
+| `DD_CONTAINER_INCLUDE` | 含めるコンテナの許可リスト。 |
+| `DD_CONTAINER_INCLUDE_METRICS` | メトリクスが含まれるコンテナの許可リスト。 |
+| `DD_CONTAINER_INCLUDE_LOGS` | ログが含まれるコンテナの許可リスト。 |
 
-たとえば、以下のコンフィギュレーションは Docker Cloud にあるこれらのコンテナを除外するように Agent に指示します。
-
-```bash
-DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
-```
-
-正規表現 `DD_CONTAINER_EXCLUDE = "image:dockercloud/.*"` を使用してすべてのコンテナを無視することもできます。
-
-**Agent v7.19 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
-
-```bash
-DD_AC_EXCLUDE = "image:<IMAGE_NAME>"
-```
-
-上記の通り、以下のコンフィギュレーションは Docker Cloud にあるこれらのコンテナを除外するように Agent に指示します。
-
-```bash
-DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
-```
-
-**注**: `DD_AC_EXCLUDE` は **Agent v7.20 以降では推奨されません**。
-
-**Agent v7.20 以降**でオートディスカバリーから**名前** `<NAME>` を持つ任意の Docker コンテナを削除し、**ログとメトリクス**を除外するには、Datadog Agent に以下の環境変数を追加してください。
-
-```bash
-DD_CONTAINER_EXCLUDE = "name:<NAME>"
-```
-
-たとえば、除外ルールを使用して、Agentコンテナそのものを除外します。
-
-```bash
-DD_CONTAINER_EXCLUDE = "name:dd-agent"
-```
-
-**Agent v7.19 以前**でオートディスカバリーから**名前**`<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
-
-```bash
-DD_AC_EXCLUDE = "name:<NAME>"
-```
-
-たとえば、除外ルールを使用して、Agentコンテナそのものを除外します。
-
-```bash
-DD_AC_EXCLUDE = "name:dd-agent"
-```
-
-**Agent v7.20 以降**では、除外条件を使い**ログのみまたはメトリクスのみ**を除外することもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナからログを除外するには、次の環境変数を Datadog Agent に追加します。
-
-```bash
-DD_CONTAINER_EXCLUDE_LOGS = "image:<IMAGE_NAME>"
-```
-
-同様に、メトリクスを除外するには、
-
-```bash
-DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME>"
-```
-
-Kubernetes で、ネームスペース`<ネームスペース>` 内のすべての Pod コンテナをオートディスカバリーから削除するには、Datadog Agent に以下の環境変数を追加します。
-
-```bash
-DD_CONTAINER_EXCLUDE = "kube_namespace:<NAMESPACE>"
-```
+**Agent <=v7.19** では、環境変数 `DD_AC_INCLUDE` と `DD_AC_EXCLUDE` を使用して、イメージまたは名前でコンテナを含めたり除外したりできます。これらの環境変数は、それ以降の Agent のバージョンでは非推奨です。
 
 {{% /tab %}}
-{{% tab "Agent" %}}
+{{% tab "ホスト Agent" %}}
 
-オートディスカバリーから画像`<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
+| 環境変数 | 説明 |
+| ------------ | ----------- |
+| `container_exclude` | 除外するコンテナのブロックリスト。 |
+| `container_exclude_metrics` | メトリクスが除外されるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
+| `container_exclude_logs` | ログが除外されるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
+| `container_include` | 含めるコンテナのブロックリスト。 |
+| `container_include_metrics` | メトリクスが含まれるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
+| `container_include_logs` | ログが含まれるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
 
-```yaml
-container_exclude: [image:<IMAGE_NAME>]
-```
-
-オートディスカバリーから名前`<NAME>`を持つ特定のDockerコンテナを削除するには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
-
-```yaml
-container_exclude: [name:<NAME>]
-```
-
-**Agent v7.20 以降**では、除外条件を使いログのみまたはメトリクスのみを除外することもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナからログを除外するには、次の環境変数を Datadog Agent に追加します。
-
-```bash
-container_exclude_logs: [image:<IMAGE_NAME>]
-```
-
-同様に、**Agent v7.20 以降**でメトリクスを除外するには、
-
-```bash
-container_exclude_metrics: [image:<IMAGE_NAME>]
-```
-
-Kubernetes で、ネームスペース`<ネームスペース>` 内のすべての Pod コンテナをオートディスカバリーから削除するには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
-
-```yaml
-container_exclude: [kube_namespace:<NAMESPACE>]
-```
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: Kubernetes を使用する場合、マニフェスト`.spec.containers[0].name` にあるべきなのはコンテナ`<NAME>` です。
+## 使用方法
 
-## コンテナを対象に含める
-
-`name` または `image` に基づく包含ルールで` Agent のオートディスカバリー境界からのコンテナを含め、そのコンテナから**のみ**のデータを集めます。コンテナと包含ルールが一致すると、常にオートディスカバリー境界に含まれることになります。
-
-**注**: 包含ルールは正規表現をサポートし、スペース区切り文字列のリストとして定義されます。
+### 値の定義
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
+それぞれの包含または除外は、スペースで区切られた正規表現文字列のリストとして定義されます。コンテナの名前 (`name`)、イメージ名 (`image`)、Kubernetes ネームスペース (`kube_namespace`) に基づいて、コンテナを包含または除外できます。
 
-**Agent v7.20 以降**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+#### 例
+`dd-agent` という名前のコンテナを除外するには
 
-```bash
-DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
+```
+DD_CONTAINER_EXCLUDE = "name:^dd-agent$"
 ```
 
-**Agent v7.19 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>` を持つ特定の Docker コンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+イメージ名が `dockercloud/network-daemon` と `dockercloud/logrotate` の 2 つのコンテナを除外するには
 
-```bash
-DD_AC_INCLUDE = "image:<IMAGE_NAME>"
+```
+DD_CONTAINER_EXCLUDE = "image:^dockercloud/network-daemon$ image:^dockercloud/logrotate$"
 ```
 
-**注**: `DD_AC_INCLUDE` は **Agent v7.20 以降では推奨されません**。
+すべてのコンテナを除外するには
 
-**Agent v7.20 以降**でオートディスカバリーから**名前** `<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
-
-```bash
-DD_CONTAINER_INCLUDE = "name:<NAME>"
+```
+DD_CONTAINER_EXCLUDE = "name:.*"
 ```
 
-例えば、`ubuntu` や `debian` のイメージだけを監視したい場合は、まず他のイメージをすべて除外し、次に含めるイメージを指定します。
+また、`image:.*` または `kube_namespace:.*` を使用することもできます。`name:`、`image:`、`kube_namespace:` のプレフィックスを付けずに `.*` を構成しても動作しません。
+{{% /tab %}}
+{{% tab "Host Agent" %}}
+それぞれの包含または除外は、スペースで区切られた正規表現文字列のリストとして定義されます。コンテナの名前 (`name`)、イメージ名 (`image`)、Kubernetes ネームスペース (`kube_namespace`) に基づいて、コンテナを包含または除外できます。
 
-```bash
+#### 例
+`dd-agent` という名前のコンテナを除外するには
+
+```
+container_exclude: [name:^dd-agent$]
+```
+
+イメージ名が `dockercloud/network-daemon` と `dockercloud/logrotate` の 2 つのコンテナを除外するには
+
+```
+container_exclude: [image:^dockercloud/network-daemon$ image:^dockercloud/logrotate$]
+```
+
+すべてのコンテナを除外するには
+
+```
+container_exclude: [name:.*]
+```
+
+また、`image:.*` または `kube_namespace:.*` を使用することもできます。`name:`、`image:`、`kube_namespace:` のプレフィックスを付けずに `.*` を構成しても動作しません。
+{{% /tab %}}
+{{< /tabs >}}
+### 包含動作と除外動作
+
+{{< tabs >}}
+{{% tab "Containerized Agent" %}}
+包含は除外よりも優先されます。例えば、`ubuntu` や `debian` のイメージだけを監視したい場合は、まず他のイメージをすべて除外してから、どのイメージを含めるかを指定します。
+
+```
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
 ```
 
-同様に、`nginx` イメージだけを監視したい場合は、まず他のイメージをすべて除外し、それから含めるイメージを指定します。
-```bash
-DD_CONTAINER_EXCLUDE="image:.*"
-DD_CONTAINER_INCLUDE="image:nginx"
+カテゴリーをまたがる包含/除外ルールを混在させることはできません。例えば、イメージ名 `foo` を持つコンテナを含めて、イメージ名 `bar` を持つコンテナのメトリクスのみを除外したい場合、以下のようにすると**不十分**です。
+
+```
+DD_CONTAINER_EXCLUDE_METRICS = "image:^bar$"
+DD_CONTAINER_INCLUDE = "image:^foo$"
 ```
 
-**Agent v7.19 以前**でオートディスカバリーから**名前** `<IMAGE_NAME>` を持つ特定の Docker コンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+代わりに、以下を使用します。
 
-```bash
-DD_AC_INCLUDE = "name:<NAME>"
+```
+DD_CONTAINER_EXCLUDE_METRICS = "image:^bar$"
+DD_CONTAINER_INCLUDE_METRICS = "image:^foo$"
+DD_CONTAINER_INCLUDE_LOGS = "image:^foo$"
 ```
 
-前回同様、`ubuntu` や `debian` のイメージだけを監視したい場合は、まず他のイメージをすべて除外し、次に含めるイメージを指定します。
+グローバルリストと選択リスト (ログとメトリクス) の間には相互作用はありません。つまり、コンテナをグローバルに除外して (`DD_CONTAINER_EXCLUDE`)、そのコンテナを `DD_CONTAINER_INCLUDE_LOGS` と `DD_CONTAINER_INCLUDE_METRICS` で含めることはできません。
 
-```bash
-DD_AC_EXCLUDE = "image:.*"
-DD_AC_INCLUDE = "image:ubuntu image:debian"
+{{% /tab %}}
+{{% tab "Host Agent" %}}
+包含は除外よりも優先されます。例えば、`ubuntu` や `debian` のイメージだけを監視したい場合は、まず他のイメージをすべて除外してから、どのイメージを含めるかを指定します。
+
+```
+container_exclude: [image:.*]
+container_include: [image:ubuntu image:debian]
 ```
 
-**Agent v7.20 以降**では、包含条件を使いログのみまたはメトリクスのみを含めることもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナのログを含めるには、次の環境変数を Datadog Agent に追加します。
+カテゴリーをまたがる包含/除外ルールを混在させることはできません。例えば、イメージ名 `foo` を持つコンテナを含めて、イメージ名 `bar` を持つコンテナのメトリクスのみを除外したい場合、以下のようにすると**不十分**です。
 
-```bash
-DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME>"
+```
+container_exclude_metrics: [image:^bar$]
+container_include: [image:^foo$]
 ```
 
-同様に、メトリクスを含めるには、
+代わりに、以下を使用します。
 
-```bash
-DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME>"
+```
+container_exclude_metrics: [image:^bar$]
+container_include_metrics: [image:^foo$]
+container_include_logs: [image:^foo$]
 ```
 
-Kubernetes で、ネームスペース`<ネームスペース>` 内のすべての Pod コンテナをオートディスカバリーに含めるには、Datadog Agent に以下の環境変数を追加します。
+グローバルリストと選択リスト (ログとメトリクス) の間には相互作用はありません。つまり、コンテナをグローバルに除外して (`container_exclude`)、そのコンテナを `container_include_logs` と `container_include_metrics` で含めることはできません。
+{{% /tab %}}
+{{< /tabs >}}
 
-```bash
-DD_CONTAINER_INCLUDE = "kube_namespace:<NAMESPACE>"
+### 環境変数を設定する
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Datadog Operator で、これらの環境変数を `spec.override.nodeAgent.env` の下に設定します。
+
+##### 例
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  override:
+    nodeAgent:
+    env:
+      - name: DD_CONTAINER_EXCLUDE
+        value: "image:<IMAGE_NAME>"
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Helm チャートの `datadog.containerExclude`、`datadog.containerInclude`、`datadog.containerExcludeLogs`、`datadog.containerIncludeLogs`、`datadog.containerExcludeMetrics`、`datadog.containerIncludeMetrics` にスペース区切りの文字列を指定します。また、`excludePauseContainer` を `true` または `false` に設定することもできます。
+
+##### 例
+
+```yaml
+datadog:
+  containerExclude: "image:<IMAGE_NAME_1> image:<IMAGE_NAME_2>"
+  containerInclude: "image:<IMAGE_NAME_3> image:<IMAGE_NAME_4>"
+  excludePauseContainer: true
 ```
 
 {{% /tab %}}
-{{% tab "Agent" %}}
-
-オートディスカバリーから画像`<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
-
-```yaml
-container_include: [image:<IMAGE_NAME>]
-```
-
-オートディスカバリーから名前`<NAME>`を持つ特定のDockerコンテナを含めるには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
-
-```yaml
-container_include: [name:<NAME>]
-```
-
-**Agent v7.20 以降**では、包含条件を使いログのみまたはメトリクスのみを含めることもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナのログを含めるには、次の環境変数を Datadog Agent に追加します。
-
-```bash
-container_include_logs: [image:<IMAGE_NAME>]
-```
-
-同様に、メトリクスを含めるには、
-
-```bash
-container_include_metrics: [image:<IMAGE_NAME>]
-```
-
-Kubernetes で、ネームスペース <ネームスペース> 内のすべての Pod コンテナをオートディスカバリーに含めるには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
-
-```yaml
-container_include: [kube_namespace:<NAMESPACE>]
-```
+{{% tab "Host Agent" %}}
+[Agent の `datadog.yaml` コンフィグレーションファイル][1]に環境変数を設定します。
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
-
-**注**: Kubernetes を使用する場合、マニフェスト`.spec.containers[0].name` にあるべきなのはコンテナ`<NAME>` です。
-
-## 包含動作と除外動作
-
-規則がグローバルであるかメトリクスやログのみに適用されるかにかかわらず、常に包含動作が優先されます。
-
-クロスカテゴリーの包含/除外規則を混在させることはできません。たとえば、画像名 `<IMAGE_NAME_1>` のコンテナを含め、画像名 `<IMAGE_NAME_2>` のコンテナからメトリクスのみを除外する際、以下のようにします。
-
-{{< tabs >}}
-{{% tab "Containerized Agent" %}}
-```bash
-DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME_1>"
-DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME_1>"
-DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME_2>"
-```
-
-つまり、`DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME_1>"` の設定だけでは不十分です
-
-{{% /tab %}}
-{{% tab "Agent" %}}
-```yaml
-container_include_metrics: [image:<IMAGE_NAME_1>]
-container_include_logs: [image:<IMAGE_NAME_1>]
-container_exclude_metrics: [image:<IMAGE_NAME_2>]
-```
-
-つまり、`container_include: [image:<IMAGE_NAME_1>]` の設定だけでは不十分です。
-{{% /tab %}}
-{{< /tabs >}}
-
-グローバルリストと選択（ログとメトリクス）リストの間に相互関係はありません。つまり、コンテナをグローバルに除外してから `container_include_logs` と `container_include_metrics` で含めることはできません。
 
 ## Pause コンテナ
 
 Datadog Agent は、デフォルトで Kubernetes や OpenShift の Pause コンテナを除外しますが、除外コンテナのようなコンテナ数にはカウントされます。
 
-この動作を無効にし、オートディスカバリー境界に Pause コンテナに含めるには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]で `exclude_pause_container` パラメーターを `false` に設定するか、Agent 環境変数 `DD_EXCLUDE_PAUSE_CONTAINER="false"` を使用します。
+この動作を無効にし、一時停止コンテナをオートディスカバリーの境界に含めるには
 
+{{< tabs >}}
+{{% tab "Containerized Agent" %}}
+`DD_EXCLUDE_PAUSE_CONTAINER` を `false` に設定します。
+{{% /tab %}}
+{{% tab "Host Agent" %}}
+`exclude_pause_container` を `false` に設定します。
+{{% /tab %}}
+{{< /tabs >}}
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

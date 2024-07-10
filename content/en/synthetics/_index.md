@@ -1,6 +1,5 @@
 ---
-title: Synthetic Monitoring
-kind: documentation
+title: Synthetic Testing and Monitoring
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
 disable_sidebar: true
 aliases:
@@ -18,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring static web applications"
+- link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
+  tag: "Blog"
+  text: "Improve your API test coverage with Datadog Synthetic Monitoring"
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
@@ -78,13 +80,19 @@ Use the [integration between Synthetic tests and APM traces][16] to find the roo
 
 Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetic dashboards][17]. 
 
-{{< img src="synthetics/test_summary_dashboard.png" alt="Test Summary Dashboard" style="width:100%;">}}
+{{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing Summary Dashboard" style="width:100%;">}}
 
-## Use the Synthetic Monitoring & Continuous Testing Explorer
+## Use the Synthetic Monitoring & Testing Results Explorer
 
 Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+
+## Track testing coverage
+
+Optimize your test suite by [ensuring that your application's most critical workflows are being tested][22].
+
+{{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
@@ -116,3 +124,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [19]: /getting_started/synthetics/private_location
 [20]: /continuous_testing/explorer/
 [21]: /mobile_testing
+[22]: /synthetics/test_coverage

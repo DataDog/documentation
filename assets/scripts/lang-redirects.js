@@ -7,8 +7,8 @@ const ignoredPaths = [];
 
 /* eslint-enable no-unused-vars */
 
-const allowedLanguages = ['en', 'ja', 'fr'];
-const redirectLanguages = ['ja', 'fr'];
+const allowedLanguages = ['en', 'ja', 'fr', 'ko'];
+const redirectLanguages = ['ja', 'fr', 'ko'];
 const enabledSubdomains = [
 	'www',
 	'docs',

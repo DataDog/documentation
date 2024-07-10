@@ -2,7 +2,6 @@
 aliases:
 - /ja/agent/faq/upgrade-between-agent-minor-versions
 - /ja/agent/guide/upgrade-between-agent-minor-versions
-kind: documentation
 title: Datadog Agent マイナーバージョン間でのアップグレード
 ---
 
@@ -15,19 +14,19 @@ Agent 6 と 7 のマイナーバージョン間のアップグレードは、`in
 
 所定の Agent 6 マイナーバージョンにアップグレードします。
 
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
 最新の Agent 6 マイナーバージョンにアップグレードします。
 
-: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
+: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
 所定の Agent 7 マイナーバージョンにアップグレードします。
 
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 最新の Agent 7 マイナーバージョンにアップグレードします。
 
-: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
+: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -36,11 +35,11 @@ Agent 6 と 7 のマイナーバージョン間のアップグレードは、`in
 
 特定の Agent 6 マイナーバージョンをダウンロードするための URL:
 
-: `https://windows-agent.datadoghq.com/ddagent-cli-6.<minor_version>.<bugfix_version>.msi`
+: `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-6.<minor_version>.<bugfix_version>.msi`
 
 特定の Agent 7 マイナーバージョンをダウンロードするための URL:
 
-: `https://windows-agent.datadoghq.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
+: `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
 
 {{% /tab %}}
 {{% tab "MacOS" %}}
@@ -49,11 +48,11 @@ Agent 6 と 7 のマイナーバージョン間のアップグレードは、`in
 
 最新の Agent 6 マイナーバージョンにアップグレードするためのコマンド:
 
-: `DD_AGENT_MAJOR_VERSION=6 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
+: `DD_AGENT_MAJOR_VERSION=6 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
 
 最新の Agent 7 マイナーバージョンにアップグレードするためのコマンド:
 
-: `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
+: `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
 
 {{% /tab %}}
 {{< /tabs >}}

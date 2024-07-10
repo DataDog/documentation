@@ -2,7 +2,6 @@
 aliases:
 - /fr/serverless/real-time-enhanced-metrics
 - /fr/serverless/real_time_enhanced_metrics
-kind: documentation
 title: Métriques Lambda optimisées
 ---
 
@@ -12,7 +11,7 @@ title: Métriques Lambda optimisées
 
 Par défaut, Datadog génère des métriques Lambda optimisées à partir de votre runtime Lambda. Ces métriques offrent une faible latence, une granularité de plusieurs secondes et des métadonnées détaillées pour les démarrages à froid et les tags personnalisés.
 
-Les métriques Lambda optimisées vous offrent des informations plus détaillées que les [métriques Lambda][1] activées par défaut avec l'intégration AWS Lambda. Ces métriques sont identifiables par l'espace de nommage `aws.lambda.enhanced.*`. Nous vous recommandons de les utiliser pour définir des monitors en temps réel afin de surveiller la santé de votre application sans serveur.
+Les métriques Lambda optimisées vous offrent des informations plus détaillées que les [métriques Lambda][1] activées par défaut avec l'intégration AWS Lambda. Ces métriques sont identifiables par l'espace de nommage `aws.lambda.enhanced.*`. Nous vous recommandons de les utiliser pour définir des monitors en temps réel afin de surveiller la santé de votre application sans serveur.
 
 ### Métriques Lambda optimisées transmises en temps réel
 
@@ -25,16 +24,16 @@ Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Ell
 `aws.lambda.enhanced.errors`
 : Mesure le nombre d'invocations ayant échoué en raison d'erreurs dans la fonction.
 
-`aws.lambda.enhanced.max_memory_used` 
+`aws.lambda.enhanced.max_memory_used`
 : Mesure la quantité de mémoire maximale (en Mo) utilisée par la fonction.
 
 `aws.lambda.enhanced.duration`
 : Mesure le nombre de secondes écoulées entre le moment où le code de la fonction commence à s'exécuter suite à une invocation et l'arrêt de son exécution.
 
-`aws.lambda.enhanced.billed_duration` 
-: Mesure la durée facturée de l'exécution de la fonction (incréments de 100 ms).
+`aws.lambda.enhanced.billed_duration`
+: Mesure la durée facturée de l'exécution de la fonction (incréments de 100 ms).
 
-`aws.lambda.enhanced.init_duration` 
+`aws.lambda.enhanced.init_duration`
 : Mesure la durée d'initialisation d'une fonction (en secondes) lors d'un démarrage à froid.
 
 `aws.lambda.enhanced.runtime_duration`
@@ -52,7 +51,7 @@ Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Ell
 `aws.lambda.enhanced.produced_bytes`
 : Mesure le nombre d'octets renvoyés par une fonction.
 
-`aws.lambda.enhanced.estimated_cost`  
+`aws.lambda.enhanced.estimated_cost`
 : Mesure le coût total estimé de l'invocation de la fonction (en dollars).
 
 `aws.lambda.enhanced.timeouts`

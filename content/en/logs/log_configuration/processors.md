@@ -1,6 +1,5 @@
 ---
 title: Processors
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/processors/
@@ -105,7 +104,7 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 * Log events can be submitted up to 18 hours in the past and two hours in the future.
 * As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
-* If multiple log date remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+* If multiple log date remapper processors are applied to a given log within the pipeline, the last one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -158,18 +157,18 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **w** (case-insensitive) map to **warning (4)**
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
-* Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
+* Strings beginning with **d**, **t**, **v**, **trace**, or **verbose** (case-insensitive) map to **debug (7)**
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-**Note**: If multiple log status remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple log status remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 Define the log status remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/severity_remapper_processor.png" alt="Log severity remapping" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Log severity remapping" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -201,7 +200,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log status rem
 
 The service remapper processor assigns one or more attributes to your logs as the official service.
 
-**Note**: If multiple service remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple service remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -244,7 +243,7 @@ Use the log message remapper processor to define one or more attributes as the o
 
 To define message attributes, first use the [string builder processor](#string-builder-processor) to create a new string attribute for each of the attributes you want to use. Then, use the log message remapper to remap the string attributes as the message.
 
-**Note**: If multiple log message remapper processors are applied to a given log, only the first one (according to the pipeline order) is taken into account.
+**Note**: If multiple log message remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -476,14 +475,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following category proce
 
 Use the arithmetic processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula. This remaps different time attributes with different units into a single attribute, or compute operations on attributes within the same log.
 
-A arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
+An arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
 
 By default, a calculation is skipped if an attribute is missing. Select *Replace missing attribute by 0* to automatically populate missing attribute values with 0 to ensure that the calculation is done.
 
 **Notes**:
 
 * An attribute may be listed as missing if it is not found in the log attributes, or if it cannot be converted to a number.
-* The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
+* When using the operator `-`, add spaces around it because attribute names like `start-time` may contain dashes. For example, the following formula must include spaces around the `-` operator: `(end-time - start-time) / 1000`.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 * If you need to scale a unit of measure, use the scale filter.
@@ -754,6 +753,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
 
 ## Further Reading
 

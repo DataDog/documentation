@@ -24,12 +24,11 @@ integration_id: komodor-komodor
 integration_title: Komodor
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
-  eula: assets/Terms of Use.pdf
+  eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: komodor_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -81,6 +80,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -89,7 +89,7 @@ Komodor は、K8s スタック全体の変更を追跡し、その波及効果�
 
 Datadog マーケットプレイスでのご提供には、Komodor プラットフォームへのアクセスが含まれています。すでに Komodor をご利用で、インスタンスを Datadog に接続する必要があるお客様は、[インテグレーションをセットアップ][1]してください。
 
-## サポート
+## Agent
 Komodor では、お客様の成功に必要なツールと情報の提供をお約束します。そのため、必要なときに必要なサポートを受けられるよう、以下のとおり複数の方法をご用意しています。Komodor アプリケーション内（右下のお問い合わせボタン）からメッセージを送信、ドキュメントで必要な情報を見つける、あるいは [support@komodor.com](mailto:support@komodor.com) までメールを送信しサポートチケットを作成してください。
 
 

@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentation
   text: Upgrade vers l'Agent v7
-kind: guide
 title: Gestion des versions de Python
 ---
 
@@ -109,7 +108,6 @@ Si vous avez précédemment imposé la version d'une image :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -126,14 +124,13 @@ Ou si vous utilisez `image.name` :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
   global:
     credentials:
-      apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
   override:
     # ...
     nodeAgent:
@@ -153,7 +150,6 @@ Si vous avez activé le déploiement d'exécuteurs de checks de cluster, imposez
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -177,7 +173,6 @@ Si vous devez utiliser une image JMX de l'Agent, vous pouvez la définir sans ut
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -209,7 +204,6 @@ Par exemple, si votre ancienne image a pour valeur `gcr.io/datadoghq/agent:6.33.
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:
@@ -224,7 +218,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:

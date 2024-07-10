@@ -1,6 +1,5 @@
 ---
 title: Send Metrics from OpenTelemetry to Datadog
-kind: documentation
 aliases:
 - /metrics/open_telemetry/
 further_reading:
@@ -22,9 +21,9 @@ To send OpenTelemetry metrics to Datadog, you have two options: the Datadog Agen
 
 If your applications and services are instrumented with [OpenTelemetry][4] libraries, you can choose between two paths for getting the metrics data to the Datadog backend:
 
-1. [Send traces to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][5], or
+1. [Send metrics to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][5], or
 
-2. [Ingest traces with the Datadog Agent, which collects them for Datadog][6].
+2. [Ingest metrics with the Datadog Agent, which collects them for Datadog][6].
 
 Read [OpenTelemetry][7] for more information.
 

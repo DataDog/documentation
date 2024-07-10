@@ -40,10 +40,9 @@ integration_id: sonarqube
 integration_title: SonarQube
 integration_version: 2.2.5
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: sonarqube
-oauth: {}
 public_title: SonarQube
 short_description: SonarQube のサーバーとプロジェクトを監視します。
 supported_os:

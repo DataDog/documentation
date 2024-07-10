@@ -25,7 +25,8 @@
       {{ end }}
 
       <li>
-          <a href="#{{ $h_id }}">{{ $h_title }}</a>
+        {{/* href values are encoded here. we are decoding the uri in table-of-contents.js   */}}
+        <a href="#{{ $h_id }}">{{ $h_title | safeHTML }}</a>
 
       {{ $prev_h_level = $h_level }}
     {{ end }}

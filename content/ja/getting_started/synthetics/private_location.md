@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/private_locations
   tag: ドキュメント
   text: プライベートロケーションの詳細
-kind: documentation
 title: プライベートロケーションの概要
 ---
 
@@ -48,19 +47,20 @@ Windows プライベートロケーションベータ版への追加をご希望
 
 2. Datadog サイトで **[UX Monitoring][5]** にカーソルを合わせ、**Settings** > **Private Locations** の順に選択します。
 3. **Add Private Location** をクリックします。
-4. プライベートロケーションの詳細を入力します。`Name` と `API key` フィールドのみ必須です。Windows 用のプライベートロケーションを構成する場合は、**This is a Windows Private Location** を選択します。
+4. プライベートロケーションの詳細を入力します。`Name` と `API key` フィールドのみが必須です。
 5. **Save Location and Generate Configuration File** をクリックして、ワーカーのプライベートロケーションと関連付けられたコンフィギュレーションファイルを生成します。
 6. プライベートロケーションをインストールした場所によっては、コンフィギュレーションファイルに追加のパラメーターを入力する必要があります。
     - プロキシをご利用の場合は、URL を`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` のように入力します。
     - 予約した IP をブロックする場合は、**Block reserved IPs** を切り替えて、IP 範囲を入力します。
 
-   詳しくは、[プライベートロケーションの構成オプション][6]、[プライベートロケーションからの Synthetic テストの実行][7]をご覧ください。
+    詳しくは、[プライベートロケーションの構成オプション][6]、[プライベートロケーションからの Synthetic テストの実行][7]をご覧ください。
+
 7. プライベートロケーションコンフィギュレーションファイルをコピーして、作業ディレクトリに貼り付けます。
 
     **注**: コンフィギュレーションファイルには、プライベートロケーションの認証、テストコンフィギュレーションの復号、テスト結果の暗号といった秘密情報が含まれています。Datadog は秘密情報を保存しないため、**プライベートロケーション**作成フォームを離れる前に、これらの情報をローカルに保存してください。**プライベートロケーションにワーカーをさらに追加するには、この秘密情報を再度参照できる必要があります。**
 8. 準備ができたら、**View Installation Instructions** をクリックします。
 9. プライベートロケーションワーカーを実行したい環境に応じて、インストール手順に従います。
-10. 例えば Docker を使う場合、Docker の `run` コマンドとコンフィギュレーションファイルを使って、ワーカーをスタンドアロンコンテナとして起動します。
+10. Docker を使っている場合、Docker の `run` コマンドとコンフィギュレーションファイルを使って、ワーカーをスタンドアロンコンテナとして起動します。
 
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
@@ -82,6 +82,9 @@ Windows プライベートロケーションベータ版への追加をご希望
     2022-02-28 16:20:04 [info]: Fetching 10 messages from queue - 10 slots available
     ```
 12. 内部エンドポイントのテストが完了したら、**OK** をクリックします。
+
+
+
 ## プライベートロケーションで Synthetics テストを実行する
 
 管理ロケーションのように、新しいプライベートロケーションを Synthetics テストで使用します。

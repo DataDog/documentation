@@ -1,6 +1,6 @@
 ---
 title: Serverless Warnings
-kind: guide
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
@@ -94,6 +94,12 @@ No invocation in the selected time range used more than 10% of the allocated mem
 
 **Resolution:** Consider decreasing the amount of allocated memory on your Lambda function. Note that this may affect your AWS bill.
 
+### Threats detected
+
+Attack attempts were detected targeting the serverless application. 
+
+**Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -108,3 +114,4 @@ No invocation in the selected time range used more than 10% of the allocated mem
 [8]: https://www.datadoghq.com/blog/monitor-aws-lambda-provisioned-concurrency/
 [9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [10]: /integrations/amazon_lambda/#metrics
+[11]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY

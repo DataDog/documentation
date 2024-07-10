@@ -1,6 +1,6 @@
 ---
 title: Enrich And Control Browser RUM Data With beforeSend
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. 
+The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog.
 
 Intercepting the RUM events allows you to:
 
@@ -64,8 +64,9 @@ datadogRum.init({
     beforeSend: (event, context) => {
         // collect a RUM resource's response headers
         if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context = {...event.context, responseHeaders: context.response.headers}
+            event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
+        return true
     },
     ...
 });
@@ -271,7 +272,7 @@ The following tabs show the information contained in the `beforeSend` event and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#modify-the-content-of-a-rum-event
+[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
 [2]: /real_user_monitoring/browser/data_collected/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Event

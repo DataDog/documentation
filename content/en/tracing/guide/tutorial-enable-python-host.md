@@ -1,21 +1,21 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application on the Same Host as the Datadog Agent
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-py
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -64,17 +64,15 @@ git clone https://github.com/DataDog/apm-tutorial-python.git
 
 Setup, configure, and install Python dependencies for the sample using either Poetry or pip. Run one of the following:
 
-{{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
 
 ```shell
 poetry install
 ```
 
-{{< /tab >}}
-
-{{< tab "pip" >}}
+{{% /tab %}}
+{{% tab "pip" %}}
 
 ```shell
 python -m venv .venv
@@ -82,15 +80,28 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 Start the application by running:
 
-{{< code-block lang="shell" >}}
+{{% tabs %}}
+{{% tab "Poetry" %}}
+
+```shell
+poetry run python -m notes_app.app
+```
+
+{{% /tab %}}
+
+{{% tab "pip" %}}
+
+```shell
 python -m notes_app.app
-{{< /code-block >}}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 The sample `notes_app` application is a basic REST API that stores data in an in-memory database. Open another terminal and use `curl` to send a few API requests:
 
@@ -121,9 +132,8 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 
 Next, install the tracing library by using Poetry or pip (minimum version 18). From your `apm-tutorial-python` directory, run:
 
-{{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
 
 ```shell
 poetry add ddtrace
@@ -131,24 +141,39 @@ poetry install
 
 ```
 
-{{< /tab >}}
-
-{{< tab "pip" >}}
+{{% /tab %}}
+{{% tab "pip" %}}
 
 ```shell
 pip install ddtrace
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Launch the Python application with automatic instrumentation
 
 To start generating and collecting traces, restart the sample application in a slightly different way than previously. Run:
 
-{{< code-block lang="shell" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
- ddtrace-run python -m notes_app.app{{< /code-block >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
+
+```shell
+DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ poetry run ddtrace-run python -m notes_app.app
+
+```
+
+{{% /tab %}}
+{{% tab "pip" %}}
+
+```shell
+DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ ddtrace-run python -m notes_app.app
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
 
@@ -229,15 +254,30 @@ The sample project includes a second application called `calendar_app` that retu
 
 1. Start the calendar application by running:
 
-   {{< code-block lang="shell" >}}
+   {{< tabs >}}
+   {{% tab "Poetry" %}}
+
+   ```shell
+   DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+   poetry run ddtrace-run python -m calendar_app.app
+
+   ```
+
+   {{% /tab %}}
+   {{% tab "pip" %}}
+
+   ```shell
    DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
    ddtrace-run python -m calendar_app.app
-   {{< /code-block >}}
+   ```
+   
+   {{% /tab %}}
+   {{< /tabs >}}
 
 2. Send a POST request with the `add_date` parameter:
 
-`curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
-: `(2, hello_again with date 2022-11-06)`
+   `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
+   : `(2, hello_again with date 2022-11-06)`
 
 
 3. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
@@ -249,7 +289,7 @@ The sample project includes a second application called `calendar_app` that retu
 You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
 
 1. Open `notes_app/notes_logic.py`.
-2. Add the following import
+2. Add the following import:
 
    ```python
    from ddtrace import tracer

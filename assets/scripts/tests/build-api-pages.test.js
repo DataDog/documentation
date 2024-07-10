@@ -55,7 +55,7 @@ describe(`getSchema`, () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should return the the first object', () => {
+  it('should return the first object', () => {
     const expected = {
       "description": "This is a test",
       "properties": {

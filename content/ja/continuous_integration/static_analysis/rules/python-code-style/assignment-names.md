@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 変数名は snake_case を使用しなければならない
 ---
 ## メタデータ
@@ -30,6 +29,10 @@ firstVariable, secondVariable = functioncall()
 ```
 
 ## 準拠コードの例
+```python
+hello = 1
+```
+
 ```python
 fooBAr = foobar()
 ```

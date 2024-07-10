@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
   tag: Blog
   text: Meilleures pratiques concernant le tagging des monitors
-kind: documentation
 title: Gérer les monitors
 ---
 
@@ -34,7 +33,7 @@ Une fois votre recherche terminée, sélectionnez le ou les monitors à modifier
 | Mute       | [Désactive][3] les monitors sélectionnés pendant l'une des durées suivantes : `1h`, `4h`, `12h`, `1d`, `1w`, ou `Forever`. |
 | Unmute     | Réactive les monitors sélectionnés s'ils sont désactivés.                                 |
 | Resolve    | [Résout][4] l'alerte pour les monitors sélectionnés.                                |
-| Supprimer     | Supprime définitivement les monitors sélectionnés.                                        |
+| Supprimer     | Supprime les monitors sélectionnés.                                                    |
 | Edit Tags  | Modifier les tags de monitor pour les monitors sélectionnés.                                 |
 | Edit Teams | Modifier les [équipes][5] pour les monitors sélectionnés.                                  |
 

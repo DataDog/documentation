@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: SQL ステートメントのタグ付け
 ---
 {{< site-region region="gov" >}}
@@ -13,7 +12,7 @@ title: SQL ステートメントのタグ付け
 ## はじめに
 
 対応データベース
-: postgres、mysql、sqlserver
+: Postgres、MySQL、SQL Server
 
 サポート対象の Agent バージョン
 : 7.36.1+

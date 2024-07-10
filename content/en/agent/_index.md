@@ -1,7 +1,6 @@
 ---
 title: Agent
-kind: documentation
-description: Install & configure the Agent to collect data
+description: Install and configure the Agent to collect data
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -23,11 +22,15 @@ aliases:
   - /agent/faq/install-core-extra
   - /logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
   - /agent/faq/the-datadog-agent-for-logs-or-traces-only
-algolia:
-  tags: ['agent']
 cascade:
-    algolia:
-        rank: 70
+- _target:
+    path: /agent/basic_agent_usage/chef.md
+  tags: ['uninstall']
+- _target:
+    path: /infrastructure/**/*
+  algolia:
+    tags: ['agent']
+    rank: 80
 ---
 
 <div class="alert alert-info">
@@ -65,7 +68,7 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
   {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: Install and configure the Datadog Agent with Amazon ECS on AWS Fargate{{< /nextlink >}}
   {{< nextlink href="/agent/iot">}}<u>IoT</u>: Install and configure the Datadog IoT Agent, a version of the Datadog Agent optimized for monitoring IoT devices and embedded applications.{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>Log Collection</u>: Enable and configure log collection in the Datadog Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/proxy">}}<u>Proxy</u>: If your network configuration restricts outbound traffic, use a proxy for Agent traffic.{{< /nextlink >}}
+  {{< nextlink href="/agent/configuration/proxy">}}<u>Proxy</u>: If your network configuration restricts outbound traffic, use a proxy for Agent traffic.{{< /nextlink >}}
   {{< nextlink href="/agent/versions/">}}<u>Versions</u>: Agent 7 is the latest major version of the Datadog Agent. Learn about changes between major Agent versions and how to upgrade.{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using the Agent.{{< /nextlink >}}

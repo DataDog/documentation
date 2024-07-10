@@ -5,6 +5,7 @@ assets:
   dashboards:
     mapreduce: assets/dashboards/mapreduce_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: mapreduce.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 133
     source_type_name: MapReduce
   logs:
     source: mapreduce
@@ -24,7 +26,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
@@ -33,26 +34,24 @@ draft: false
 git_integration_title: mapreduce
 integration_id: mapreduce
 integration_title: Map Reduce
-integration_version: 3.2.0
+integration_version: 4.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: mapreduce
-oauth: {}
 public_title: Map Reduce
 short_description: マップのステータスと期間を監視し、タスクを削減。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::処理
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: マップのステータスと期間を監視し、タスクを削減。
   media: []
@@ -61,6 +60,7 @@ tile:
   title: Map Reduce
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![MapReduce ダッシュボード][1]
@@ -72,26 +72,26 @@ mapreduce サービスからメトリクスをリアルタイムに取得して�
 - mapreduce の状態を視覚化および監視できます。
 - mapreduce のフェイルオーバーとイベントの通知を受けることができます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Mapreduce チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mapreduce.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル mapreduce.d/conf.yaml][2] を参照してください。
 
 2. [Agent を再起動します][3]。
 
-##### ログの収集
+##### 収集データ
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -120,7 +120,7 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 [2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -128,11 +128,11 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 | パラメーター            | 値                                                                                         |
 | -------------------- | --------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `mapreduce`                                                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                 |
-| `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
+| `<INTEGRATION_NAME>` | `mapreduce`                                                                                   |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                 |
+| `<INSTANCE_CONFIG>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -152,21 +152,21 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "mapreduce", "service": "<SERVICE_NAM
 
 [Agent の status サブコマンド][3]を実行し、Checks セクションで `mapreduce` を検索します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "mapreduce" >}}
 
 
-### イベント
+### ヘルプ
 
 Mapreduce チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "mapreduce" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
@@ -179,7 +179,7 @@ Mapreduce チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mapreduce/images/mapreduce_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/hadoop-architecture-overview

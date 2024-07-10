@@ -1,88 +1,79 @@
 ---
-description: 분석을 어디에서 시작하고 후속 진행해야 하는지 인사이트를 얻어보세요
+description: Watchdog Insights로 RUM 애플리케이션의 이슈를 자세히 파악해 보세요.
 further_reading:
-- link: /real_user_monitoring/explorer/search/
-  tag: 설명서
-  text: RUM Explorer의 검색법을 자세히 알아보세요
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: 블로그
-  text: RUM으로 Core Web Vital을 모니터링하세요
+  text: RUM으로 Core Web Vitals 모니터링
 - link: https://www.datadoghq.com/blog/datadog-mobile-rum/
   tag: 블로그
   text: Datadog Mobile RUM으로 모바일 사용자 경험을 개선하세요
-kind: 설명서
-title: Watchdog Insights for RUM
+- link: /watchdog/insights
+  tag: 설명서
+  text: Watchdog Insights에 대해 알아보기
+- link: /real_user_monitoring/explorer/search/
+  tag: 설명서
+  text: RUM 탐색기에서 검색하는 방법 알아보기
+title: RUM을 위한 Watchdog Insights
 ---
 
 ## 개요
 
-Datadog Real User Monitoring(RUM)은 RUM Explorer의 컨텍스트 인사이트와 관련하여 문제의 근본 원인을 파악하는 데 도움이 되는 Watchdog Insights를 제공합니다. Watchdog Insights는 서브셋에 영향을 주는 아웃라이어(outlier)와 성능의 병목 현상이 발생할 수 있는 부분을 파악하여 사용자의 전문 지식과 능력을 보완해줍니다.
+Datadog 실제 사용자 모니터링(RUM)은 RUM 탐색기에서 상황별 인사이트를 통해 문제의 근본 원인을 탐색하는 데 도움이 되는 Watchdog Insights를 제공합니다. Watchdog Insights는 사용자 하위 집합에 영향을 미치는 이상값과 잠재적인 성능 병목 현상을 추천하여 사용자의 전문 지식과 직관을 보완합니다.
 
-이번 가이드에서는 Watchdog Insights를 이용해 `view.url_host:www.shopist.io`에 배포된 애플리케이션 인스턴스가 지정된 기간(예: 과거 1일)에 대부분의 오류를 일으켰다는 사실을 파악하는 사례를 보여드리겠습니다.
+자세한 내용은 [Watchdog Insights][1]를 참조하세요.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
+## 수집된 인사이트 탐색
 
-## 내비게이션
+분홍색 Watchdog Insights 배너가 [RUM 탐색기][2]에 나타나 일정 기간 동안의 검색 쿼리에 대한 인사이트를 표시합니다. 이 예는 Watchdog Insights가 주어진 시간 범위(예: 지난 하루)에 특정 양의 오류를 발생시킨 `view.url_host:www.shopist.io`의 배포된 애플리케이션 인스턴스에서 문제를 표시하는 방법을 보여줍니다.
 
-Watchdog Insights 배너는 **RUM Explorer 결과** 페이지에 표시되며 현재 쿼리와 관련된 인사이트를 보여줍니다.
+{{< img src="real_user_monitoring/explorer/watchdog_insights/overview.png" alt="RUM 탐색기의 Watchdog Insights 배너 카드" style="width:100%;" >}}
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/banner_collapsed.png" alt="Watchdog Insights 배너(숨김 상태)" style="width:100%;" >}}
+[error](#error-outliers) 또는 [latency outlier](#latency-outliers)를 클릭하여 사이드 패널에 포함된 시각화와 상호 작용하고 영향을 받은 이벤트 목록에서 보기를 찾습니다. **View all**을 클릭하여 사이드 패널에서 모든 미해결 오류 이상값을 확인할 수 있습니다.
 
-모든 인사이트의 개요를 보려면 Watchdog Insight 배너를 확장하세요.
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card-3.png" alt="RUM 탐색기의 오류 이상값 배너 카드 및 사이드 패널 카드 보기" style="width:100%;" >}}
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/banner_expanded.png" alt="Watchdog Insights 배너(확장 상태)" style="width:100%;" >}}
+배너에 있는 카드 위에 마우스를 올려놓고 **Filter on Insight**를 클릭하여 비정상적인 인사이트 행동을 검색 쿼리에 추가합니다. 예를 들어, 특정 보기 경로 또는 `North America`와 같은 특정 대륙으로 범위를 좁힐 수 있습니다.
 
-전체 Watchdog Insight 패널에 액세스하려면 **View all**을 클릭하세요.
+**View in Analytics**를 클릭하여 `Group into fields` 공식을 자동으로 설정하고 검색 쿼리 아래에서 `Visualize as` 유형을 선택하여 카드의 이상값 동작을 반영합니다. 예를 들어, 검색 공식에서 `synthetics.test_id`를 사용하여 Synthetic 테스트에서 비정상적으로 높은 오류율에 대한 시계열 그래프를 만들어 모니터 또는 대시보드로 내보낼 수 있습니다.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/side_panel.png" alt="Watchdog Insights 사이드 패널" style="width:100%;" >}}
+## 오류 이상값
 
-모든 인사이트에는 인터랙션이 임베딩되며, 트러블슈팅 정보가 기재된 사이드 패널이 포함되어 있습니다. 인사이트 인터랙션과 사이드 패널은 [Watchdog Insights 유형](#collections)에 따라 달라집니다.
-
-## 컬렉션
-
-### 오류 아웃라이어(outlier)
-
-하나의 인사이트 유형에는 현재 쿼리에 일치하는 오류 특성을 포함하는 [패싯 태그 또는 속성][1] 등의 항목을 표시하는 오류 아웃라이어(outlier)가 있습니다. 오류 간에 통계적으로 과대평가된 `key:value` 쌍은 문제의 근본 원인을 파악하도록 돕는 힌트가 됩니다.
-
-일반적인 오류 아웃라이어(outlier)의 예시로는 `env:staging`, `version:1234`, `browser.name:Chrome`이 있습니다.
-
-**배너 카드** 및 **사이드 패널 카드** 화면에서 다음을 볼 수 있습니다.
-
-* 항목 이름.
-* 항목으로 인하여 발생한 오류와 전체적인 RUM 이벤트의 비율.
-
-{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card.png" alt="오류 아웃라이어 배너 카드와 사이드 패널 카드 화면" style="width:100%;" >}}
-
-**풀 사이드 패널**에서 항목과 RUM 오류의 시계열을 확인할 수 있습니다.
-
-{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel.png" alt="오류 아웃라이어 풀 사이드 패널" style="width:100%;" >}}
-
-### 레이턴시 아웃라이어
-
-다른 유형의 인사이트로는 성능의 병목과 관련되며 현재 쿼리와 일치하는 [패싯 태그 또는 속성][1] 등의 항목을 표시하는 레이턴시 아웃라이어가 있습니다. 기준(베이스라인)보다 성능이 낮은 `key:value` 쌍은 실제 사용자의 서브셋 사이에서 발생한 성능 병목 현상을 알아보는 힌트가 됩니다.
-
-레이턴시 아웃라이어는 First Contentful Paint, First Input Delay, Cumulative Layout Shift 등의 [Core Web Vitals][2] 및 [Loading Time][3]에 대하여 계산합니다.
+오류 이상값은 현재 검색 쿼리와 일치하는 오류의 특성을 포함하는 [패싯 태그 또는 속성][3]과 같은 필드를 표시합니다. 오류들 중에서 통계적으로 과도하게 나타나는 `key:value`쌍은 문제의 근본 원인에 대한 힌트를 제공할 수 있습니다. 오류 이상값의 대표적인 예로는 `env:staging`, `version:1234` `browser.name:Chrome`이 있습니다.
 
 **배너 카드** 화면에서 다음을 볼 수 있습니다.
 
-* 항목 이름.
-* 항목과 잔여 데이터의 베이스라인을 포함하는 퍼포먼스 메트릭 값.
+* 필드 이름
+* 필드가 기여하는 총 오류 및 전체 RUM 이벤트의 비율
+* 관련된 태그
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_s_card.png" alt="레이턴시 아웃라이어 배너 카드 화면" style="width:100%;" >}}
+**전체 사이드 패널**에는 해당 필드를 포함하는 총 RUM 오류 수에 대한 시계열 그래프와 영향도를 나타내는 원형 차트 및 필드가 포함된 RUM 이벤트 목록이 표시됩니다.
 
-**사이드 패널 카드** 화면에서 항목의 퍼포먼스 메트릭 시계열과 잔여 데이터의 베이스라인을 확인할 수 있습니다.
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_l_card.png" alt="레이턴시 아웃라이어 사이드 패널 화면" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Error Outlier 전체 사이드 패널" style="width:100%;" >}}
 
-**풀 사이드 패널** 화면에서 항목을 포함하는 RUM 이벤트 목록을 조회 가능합니다. [퍼포먼스 워터폴][4]에서는 성능 관련 문제의 근본 원인을 찾을 수 있습니다.
+## 레이턴시 이상값
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel.png" alt="레이턴시 아웃라이어 풀 사이드 패널 화면" style="width:100%;" >}}
+레이턴시 시간 이상값은 현재 검색 쿼리와 일치하는 성능 병목 현상과 관련된 [패싯 태그 또는 속성][3]과 같은 필드를 표시합니다. 기준선보다 성능이 나쁜 `key:value` 쌍은 실제 사용자 하위 집합의 성능 병목 현상에 대한 힌트를 제공할 수 있습니다.
+
+지연 이상값은 First Contentful Paint, First Input Delay, Cumulative Layout Shift와 같은 [Core Web Vitals][4], 그리고 [Loading Time][5]에 대해 계산됩니다. 자세한 내용은 [모니터링 페이지 성능][4]을 참조하세요.
+
+**배너 카드** 화면에서 다음을 볼 수 있습니다.
+
+* 필드 이름
+* 나머지 데이터에 대한 필드 및 기준선을 포함하는 성능 메트릭 값
+
+**전체 사이드 패널**에서 `p50`, `p75`, `p99`, 및 `max`의 증분값을 X축으로 하는  성능 메트릭에 대한 시계열 그래프와 해당 필드를 포함하는 RUM 이벤트 목록을 볼 수 있습니다.
+
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="지연 이상값 전체 사이드 패널 보기" style="width:100%;" >}}
+
+이 시계열 그래프에서 성능 문제의 근본 원인을 조사할 수 있습니다.
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/logs/explorer/facets/
-[2]: /ko/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[3]: /ko/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
-[4]: /ko/real_user_monitoring/explorer/?tab=facets#event-side-panel
+[1]: /ko/watchdog/insights/
+[2]: /ko/real_user_monitoring/explorer
+[3]: /ko/real_user_monitoring/explorer/search/#facets
+[4]: /ko/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[5]: /ko/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa

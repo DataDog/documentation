@@ -1,6 +1,5 @@
 ---
 title: Utilisation de base de l'Agent pour Windows
-kind: documentation
 description: Fonctionnalités de base de l'Agent Datadog sur la plateforme Windows.
 platform: Windows
 aliases:
@@ -38,7 +37,7 @@ Si vous installez l'Agent Datadog dans un environnement de domaine, consultez le
 3. Suivez les instructions à l'écran, acceptez l'accord de licence et entrez votre [clé d'API Datadog][2].
 4. Une fois l'installation terminée, le programme vous propose de lancer Datadog Agent Manager.
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Ligne de commande" %}}
@@ -93,7 +92,7 @@ Chaque élément de configuration est ajouté en tant que propriété dans la li
 
 **Remarque** : si un fichier `datadog.yaml` valide est trouvé et qu'une clé d'API y est configurée, ce fichier est prioritaire sur toutes les options de ligne de commande spécifiées.
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: /fr/agent/proxy/
 [3]: /fr/agent/faq/windows-agent-ddagent-user/
 [4]: /fr/network_monitoring/performance
@@ -105,7 +104,7 @@ L'Agent 7 prend uniquement en charge Python 3. Avant d'effectuer une mise à n
 Si vous utilisez une version < 5.12.0 de l'Agent Datadog, procédez d'abord à la mise à niveau vers une version plus récente de l'Agent 5 (>= 5.12.0, mais < 6.0.0) à l'aide du [fichier d'installation EXE][2], puis effectuez la mise à niveau vers une version >= 6 de l'Agent Datadog.
 
 [1]: /fr/agent/guide/python-3/
-[2]: https://windows-agent.datadoghq.com/ddagent-cli-latest.exe
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
 {{% /tab %}}
 {{< /tabs >}}
 

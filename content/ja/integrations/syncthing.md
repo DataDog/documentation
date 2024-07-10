@@ -5,6 +5,7 @@ assets:
   dashboards:
     Syncthing Overview: assets/dashboards/syncthing_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: syncthing.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10276
     source_type_name: Syncthing
   monitors:
     '[Syncthing] Device not connected': assets/monitors/syncthing_device_not_connected.json
@@ -40,10 +42,9 @@ integration_id: syncthing
 integration_title: Syncthing
 integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: syncthing
-oauth: {}
 public_title: Syncthing
 short_description: Syncthing インスタンスからの全体的な統計情報を追跡
 supported_os:
@@ -66,17 +67,18 @@ tile:
   title: Syncthing
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 Syncthing は、2 台以上のコンピュータ間でファイルをリアルタイムに同期させます。このインテグレーションにより、Datadog を使用して [Syncthing][1] を監視することができます。
 
-## セットアップ
+## 計画と使用
 
 Syncthing チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent で Syncthing チェックをインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -88,7 +90,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Syncthing の[メトリクス](#metrics) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `syncthing.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル syncthing.d/conf.yaml][6] を参照してください。
 
@@ -98,27 +100,27 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 [Agent の status サブコマンド][8]を実行し、Checks セクションで `syncthing` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "syncthing" >}}
 
 
-### イベント
+### ヘルプ
 
 Syncthing には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "syncthing" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 
 [1]: https://syncthing.net/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

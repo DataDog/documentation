@@ -3,6 +3,7 @@ app_id: zabbix
 app_uuid: 9b7022c4-95c7-4872-83b6-7eaba2cc9d88
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,7 +14,8 @@ assets:
       prefix: zabbix.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: Zabbix
+    source_type_id: 10166
+    source_type_name: Zabbix (コミュニティバージョン)
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
@@ -30,10 +32,9 @@ integration_id: zabbix
 integration_title: zabbix
 integration_version: 1.1.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: zabbix
-oauth: {}
 public_title: zabbix
 short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
 supported_os:
@@ -55,6 +56,7 @@ tile:
   title: zabbix
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -64,11 +66,11 @@ Zabbix に接続して
 - Datadog Agent を介して [Zabbix][1] を監視します。
 - Zabbix アラートを Datadog に送信して、アラートを Datadog イベントストリームのイベントとして表示します。
 
-## セットアップ
+## 計画と使用
 
 Zabbix チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -80,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Zabbix サーバーのタイムゾーンが UTC に設定されていることを確認してください。Zabbix のタイムゾーンの詳細については、[Zabbix ドキュメント][5]を参照してください。
 
@@ -152,27 +154,27 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 [Agent のステータスサブコマンド][8]を実行し、Checks セクションで `zabbix` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "zabbix" >}}
 
 
-### イベント
+### ヘルプ
 
 Zabbix アラートは Datadog イベントストリームのイベントとして収集されます。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "zabbix" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 
 [1]: https://www.zabbix.com/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://www.zabbix.com/documentation/current/en/manual/web_interface/time_zone

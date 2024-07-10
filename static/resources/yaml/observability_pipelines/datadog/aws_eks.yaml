@@ -55,7 +55,6 @@ service:
     ## to keep things within the availability zone, which kube-proxy might change.
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
 
-
 ## Buffering
 ## This creates an EBS drive that can be used for buffers, which
 ## must then be configured in the sinks themselves.
@@ -74,6 +73,8 @@ persistence:
 ## getting started with OP. It sets up data proxying and provides hooks
 ## for your own processing steps.
 pipelineConfig:
+  ## SOURCES: Data sources that Observability Pipelines Worker collects data from.
+  ## For a Datadog use case, we will receive data from the Datadog agent.
   sources:
     datadog_agent:
       address: 0.0.0.0:8282
@@ -148,6 +149,7 @@ pipelineConfig:
       inputs:
         - logs_finish_ddtags
       default_api_key: "${DD_API_KEY}"
+      site: "${DD_SITE}"
       compression: gzip
       buffer:
          type: disk
@@ -157,6 +159,7 @@ pipelineConfig:
       inputs:
         - metrics_add_dd_tags
       default_api_key: "${DD_API_KEY}"
+      site: "${DD_SITE}"
       buffer:
         type: disk
         max_size: 42949672959
