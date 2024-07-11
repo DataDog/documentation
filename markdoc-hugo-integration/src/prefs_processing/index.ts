@@ -1,7 +1,7 @@
 import { PageDataManifestSchema } from './schemas/pageDataManifest';
 import { PageDataManifest } from './schemas/pageDataManifest';
 import { PagePrefsConfig } from './schemas/yaml/frontMatter';
-import { PagePref, PagePrefs, PagePrefsSchema } from './schemas/pagePrefs';
+import { PagePref, PagePrefs } from './schemas/pagePrefs';
 import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
 
 // TODO: Run some validations only in development mode

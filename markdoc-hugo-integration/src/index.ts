@@ -3,6 +3,7 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { PrefOptionsConfig, PrefOptionsConfigSchema } from './prefs_processing/schemas/yaml/prefOptions';
 import { SitewidePrefIdsConfig, SitewidePrefIdsConfigSchema } from './prefs_processing/schemas/yaml/sitewidePrefs';
+import { Frontmatter, FrontmatterSchema } from './prefs_processing/schemas/yaml/frontMatter';
 import MarkdocStaticCompiler, { Node } from 'markdoc-static-compiler';
 
 const DEBUG_PATH = __dirname + '/../debug';
@@ -30,16 +31,30 @@ export class MarkdocToHugoCompiler {
   // Compile all detected Markdoc files to Hugo-compatible HTML
   compile() {
     for (const markdocFile of this.markdocFiles) {
+      console.log(`\n\nCompiling ${markdocFile}`);
       const markdocStr = fs.readFileSync(markdocFile, 'utf8');
       const ast = MarkdocStaticCompiler.parse(markdocStr);
-      // write the file to the debug folder
-      fs.writeFileSync(`${DEBUG_PATH}/${path.basename(markdocFile)}.json`, JSON.stringify(ast, null, 2));
+      // create the debug folder if it doesn't exist
+      if (!fs.existsSync(DEBUG_PATH)) {
+        fs.mkdirSync(DEBUG_PATH);
+      }
+      // write ast to DEBUG_PATH
+      fs.writeFileSync(`${DEBUG_PATH}/asts.${path.basename(markdocFile)}.json`, JSON.stringify(ast, null, 2));
+
+      // write frontmatter tag to DEBUG_PATH
+      const frontmatter = yaml.load(ast.attributes.frontmatter) as Frontmatter;
+      fs.writeFileSync(
+        `${DEBUG_PATH}/frontmatter.${path.basename(markdocFile)}.json`,
+        JSON.stringify(frontmatter, null, 2) || '__EMPTY__'
+      );
+      FrontmatterSchema.parse(frontmatter);
+
+      // write partial path detection to DEBUG_PATH
       const partialPaths = this.#extractPartialPaths(ast);
       fs.writeFileSync(
-        `${DEBUG_PATH}/${path.basename(markdocFile)}.partialPaths.json`,
+        `${DEBUG_PATH}/partialPathDetection.${path.basename(markdocFile)}.json`,
         JSON.stringify(partialPaths, null, 2)
       );
-      console.log(JSON.stringify(ast, null, 2));
     }
   }
 
