@@ -12,7 +12,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/host_metrics.png" alt="OpenTelemetry host metrics dashboard" style="width:100%;" >}}
 
-To collect system metrics such as CPU, disk, and memory usage, enable the [host metrics receiver][1] in your Datadog Exporter. 
+To collect system metrics such as CPU, disk, and memory usage, enable the [host metrics receiver][1] in your Collector. 
 
 For more information, including supported operating systems, see the OpenTelemetry project documentation for the [host metrics receiver][1].
 

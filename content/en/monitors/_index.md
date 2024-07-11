@@ -75,7 +75,6 @@ Monitors and alerts are essential tools for ensuring the reliability, performanc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/monitors/recommended
 [2]: /monitors/notify
 [3]: /monitors/downtimes
@@ -85,3 +84,4 @@ Monitors and alerts are essential tools for ensuring the reliability, performanc
 [7]: /monitors/downtimes/?tab=bymonitorname
 [8]: /monitors/manage
 [9]: /monitors/quality/
+
