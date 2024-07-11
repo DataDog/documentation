@@ -6,6 +6,7 @@ further_reading:
 - link: /integrations/
   tag: Documentation
   text: Afficher la liste des intégrations Datadog
+kind: documentation
 title: Présentation des intégrations
 ---
 
@@ -28,6 +29,10 @@ Vous pouvez aussi créer un [check custom][10] pour définir et envoyer des mét
 ## Configurer une intégration
 
 Le package de l'Agent Datadog inclut les intégrations officiellement prises en charge par Datadog dans [integrations-core][11]. Pour utiliser ces intégrations, téléchargez l'Agent Datadog. Les intégrations développées par la communauté se trouvent dans [integrations-extras][12]. Pour en savoir plus sur l'installation ou la gestion de ces intégrations, consultez le [guide de gestion des intégrations][14].
+
+### Autorisations
+
+L'autorisation `manage_integrations` est requise pour interagir avec un carré dʼintégration. Consultez la section relative aux [rôles RBAC][45] pour en savoir plus.
 
 ### Clés d'API et d'application
 
@@ -183,7 +188,7 @@ Tags
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/integrations/new_check_howto/
+[1]: /fr/developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /fr/integrations/slack/
 [4]: /fr/integrations/amazon_web_services/
@@ -226,3 +231,4 @@ Tags
 [42]: /fr/metrics/
 [43]: /fr/metrics/custom_metrics/
 [44]: /fr/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /fr/account_management/rbac/permissions/#integrations
