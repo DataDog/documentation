@@ -307,7 +307,7 @@ Grant this role access to the index in [Configuration page][1].
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles" style="width:75%;" >}}
 
 
-[1]: https://app.datadoghq.com/logs/indexes
+[1]: https://app.datadoghq.com/logs/pipelines/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 
