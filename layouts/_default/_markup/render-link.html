@@ -1,6 +1,6 @@
 {{- $link := .Destination }}
 {{- if and (eq hugo.Environment "preview") (hasPrefix $link "/resources") -}}
-{{- $branch_name := (print $dot.Site.Params.branch "/") -}}
+{{- $branch_name := (print site.Params.branch "/") -}}
 {{- $link = replace $link $branch_name "" 1 -}}
 {{- end -}}
 <a href="{{ $link | safeURL }}">{{ .Text | safeHTML }}</a>
