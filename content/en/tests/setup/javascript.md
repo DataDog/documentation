@@ -505,7 +505,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 ### Adding custom tags or measures to tests
 
-This is not supported yet in Vitest.
+Not supported.
 
 {{% /tab %}}
 
