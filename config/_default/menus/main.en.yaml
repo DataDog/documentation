@@ -3448,21 +3448,26 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_gcsql
       weight: 304
+    - name: AlloyDB
+      url: database_monitoring/setup_postgres/alloydb
+      parent: dbm_setup_postgres
+      identifier: dbm_setup_postgres_alloydb
+      weight: 305
     - name: Azure
       url: database_monitoring/setup_postgres/azure
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
-      weight: 305
+      weight: 306
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 306
+      weight: 307
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 307
+      weight: 308
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
