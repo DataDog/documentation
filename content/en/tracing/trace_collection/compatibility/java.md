@@ -373,10 +373,10 @@ Older native-image buildpack versions expose the following option: `USE_NATIVE_I
 When this option is `false`, exceptions like the following can occur:
 
 ```text
-Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
-com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
-No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
-as this class should be initialized at image runtime. To see how this object got 
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError:
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException:
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap
+as this class should be initialized at image runtime. To see how this object got
 instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
 ```
 
@@ -410,4 +410,4 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [5]: /tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
-[10]: /opentelemetry/interoperability/instrumentation_libraries/
+[10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
