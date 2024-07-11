@@ -50,9 +50,9 @@ Security Inbox also takes the following detected risks into consideration when d
 
 Security Inbox ranks issues by considering the severity of a finding first, followed by the number of correlated risks, and then the number of impacted resources and services.
 
-- Severity (Critical, High, Medium, and Low): Severity is determined by the [Datadog Security Scoring Framework][10] for cloud misconfigurations and identity risks, and by CVSS 3.1 for vulnerabilities.
-- Number of detected risks: When two findings have the same severity, the one with a greater number of detected risks is given higher priority.
-- Number of impacted resources and services: If two findings share both the same severity and the same number of detected risks, the finding that impacts a greater number of resources and services is prioritized higher.
+- **Severity (Critical, High, Medium, and Low)**: Severity is determined by the [Datadog Security Scoring Framework][10] for cloud misconfigurations and identity risks, and by CVSS 3.1 for vulnerabilities.
+- **Number of detected risks**: When two findings have the same severity, the one with a greater number of detected risks is given higher priority.
+- **Number of impacted resources and services**: If two findings share both the same severity and the same number of detected risks, the finding that impacts a greater number of resources and services is prioritized higher.
 
 **Note**: The type of finding, detected risk, or impacted resource does not influence prioritization.
 
