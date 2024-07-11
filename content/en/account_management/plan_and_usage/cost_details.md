@@ -47,7 +47,7 @@ The cost summary functionality changes according to your Datadog usage as a sing
 
 View historical costs by toggling back to previous months or use the date dropdown to view costs over 1,3, 6 or 12 months.
 
-{{< img src="account_management/plan_and_usage/multiorg-prior-month-historical-costs.png" alt="Screenshot of a previous month's Cost Summary for a parent organization, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
+{{< img src="static/images/account_management/plan_and_usage/parent-org-multi-month-cost-changes.png" alt="Screenshot of a parent organization's historical costs over a three month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -77,7 +77,7 @@ As a sub-organization, you can view the costs for your organization only. This r
 
 View historical costs by toggling back to previous months or use the date dropdown to view costs over 1,3, 6 or 12 months.
 
-{{< img src="account_management/plan_and_usage/suborg-cost-trends.png" alt="Screenshot of the current month's Cost Summary for a sub-organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes.">}}
+{{< img src="static/images/account_management/plan_and_usage/suborg-multi-month-cost-changes.png" alt="Screenshot of a sub organization's historical costs over a six month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
