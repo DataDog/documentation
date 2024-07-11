@@ -17583,6 +17583,18 @@ components:
       required:
       - status
       type: object
+    SecurityMonitoringRuleConvertPayload:
+      description: Convert a rule from JSON to Terraform.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRulePayload'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRulePayload'
+    SecurityMonitoringRuleConvertResponse:
+      description: Result of the convert rule request containing Terraform content.
+      properties:
+        terraformContent:
+          description: Terraform string as a result of converting the rule from JSON.
+          type: string
+      type: object
     SecurityMonitoringRuleCreatePayload:
       description: Create a new rule.
       oneOf:
@@ -35176,6 +35188,50 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/convert:
+    post:
+      description: 'Convert a rule that doesn''t (yet) exist from JSON to Terraform
+        for datadog provider
+
+        resource datadog_security_monitoring_rule.'
+      operationId: ConvertSecurityMonitoringRuleFromJSONToTerraform
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleConvertPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleConvertResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Convert a rule from JSON to Terraform
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This feature is in private beta. Reach out to support
+        to request access.'
   /api/v2/security_monitoring/rules/test:
     post:
       description: Test a rule.
@@ -35348,6 +35404,42 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/convert:
+    get:
+      description: 'Convert an existing rule from JSON to Terraform for datadog provider
+
+        resource datadog_security_monitoring_rule.'
+      operationId: ConvertExistingSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleConvertResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Convert an existing rule from JSON to Terraform
+      tags:
+      - Security Monitoring
+      x-menu-order: 11
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This feature is in private beta. Reach out to support
+        to request access.'
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: Test an existing rule.
@@ -35467,7 +35559,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 12
+      x-menu-order: 14
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -35511,7 +35603,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 13
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
