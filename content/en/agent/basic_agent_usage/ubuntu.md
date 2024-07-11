@@ -51,8 +51,6 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 * On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
 * On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
-[Learn more about Service lifecycle commands][2]
-
 ## Configuration
 
 The configuration files and folders for the Agent are located in:

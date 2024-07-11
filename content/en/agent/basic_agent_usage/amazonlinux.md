@@ -61,6 +61,11 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo datadog-agent --help`                            |
 | Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
+**Note**: If the `service` wrapper is not available on your system, use:
+
+* On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
+* On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
+
 ## Configuration
 
 The configuration files and folders for the Agent are located in:
@@ -73,7 +78,6 @@ Configuration files for [Integrations][4]:
 
 ## Uninstall the Agent
 
-To uninstall the Agent, run the following command:
 
 ```shell
 sudo yum remove datadog-agent
