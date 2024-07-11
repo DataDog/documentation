@@ -43,9 +43,7 @@
   <div class="container container__content h-100 pt-1">
     <div class="row h-100">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
-        {{ if .File }}
           {{ partial "sidenav/main-sidenav.html" . }}
-        {{ end }}
       </div>
       <div class="col-12 col-lg-9 main">
         {{ block "main" . }}{{ end }}
