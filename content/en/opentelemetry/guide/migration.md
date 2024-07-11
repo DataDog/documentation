@@ -38,7 +38,9 @@ receivers:
   otlp:
     protocols:
       http:
+        endpoint: 0.0.0.0:4318
       grpc:
+        endpoint: 0.0.0.0:4317
 processors:
   batch:
 exporters:
@@ -60,7 +62,9 @@ receivers:
   otlp:
     protocols:
       http:
+        endpoint: 0.0.0.0:4318
       grpc:
+        endpoint: 0.0.0.0:4317
 processors:
   batch:
 connectors:
