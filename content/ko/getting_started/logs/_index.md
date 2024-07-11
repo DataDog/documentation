@@ -122,7 +122,7 @@ Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 
 ### 가이드
 
 * [로그 관리 모범 사례][22]
-* [제한없는 로그 수집*][23]에 대해 더 알아보기
+* [제한없는 로그 수집(Logging without Limits*)][23]에 대해 더 알아보기
 * [RBAC 설정][24]으로 민감한 로그 데이터 관리하기
 
 ## 참고 자료
@@ -130,7 +130,7 @@ Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*제한없는 로그 수집(Logging without Limits)은 Datadog, Inc.의 상표입니다.
+*제한없는 로그 수집(Logging without Limits™)은 Datadog, Inc.의 상표입니다.
 
 [1]: https://www.datadoghq.com
 [2]: /ko/tracing/other_telemetry/connect_logs_and_traces/
