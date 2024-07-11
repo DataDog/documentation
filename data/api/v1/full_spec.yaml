@@ -14295,6 +14295,7 @@ components:
       required:
       - password
       - username
+      - type
       type: object
     SyntheticsBasicAuthDigestType:
       default: digest
@@ -14378,6 +14379,7 @@ components:
       - tokenApiAuthentication
       - clientId
       - clientSecret
+      - type
       type: object
     SyntheticsBasicAuthOauthClientType:
       default: oauth-client
@@ -14433,6 +14435,7 @@ components:
       - password
       - tokenApiAuthentication
       - username
+      - type
       type: object
     SyntheticsBasicAuthOauthROPType:
       default: oauth-rop
@@ -16143,6 +16146,14 @@ components:
           type: boolean
         disableCsp:
           description: Disable Content Security Policy for browser tests.
+          type: boolean
+        enableProfiling:
+          description: Enable profiling for browser tests.
+          type: boolean
+        enableSecurityTesting:
+          deprecated: true
+          description: Enable security testing for browser tests. Security testing
+            is not available anymore. This field is deprecated and won't be used.
           type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
