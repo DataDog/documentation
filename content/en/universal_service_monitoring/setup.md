@@ -771,7 +771,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< collapse-content title="Non-IIS service discovery on Windows" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor non IIS services running on a Windows machines.
+Universal Service Monitoring is available in <strong>beta</strong> to monitor non IIS services running on Windows environments.
 </div>
 
 Requires Agent version 7.42 or greater.
