@@ -35,8 +35,8 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Development</strong></p></td>
         <td>
         <ul>
-        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li></ul>
-        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li>
+        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li></ul>
         </td>
     </tr>
     <tr>
