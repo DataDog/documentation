@@ -46,6 +46,16 @@ Security Inbox also takes the following detected risks into consideration when d
 - **Exploit available**: Vulnerabilities with public exploits available carry elevated risks. The availability of a public exploit is verified with different exploit databases, such as [cisa.gov][7], [exploit-db.com][8], and [nvd.nist.gov][9].
 - **In production**: Vulnerabilities in production environments carry elevated risks. The environment is computed from the `env` tag.
 
+## How Security Inbox prioritization works
+
+Security Inbox ranks issues by considering the severity of a finding first, followed by the number of correlated risks, and then the number of impacted resources and services.
+
+- Severity (Critical, High, Medium, and Low): Severity is determined by the [Datadog Security Scoring Framework][10] for cloud misconfigurations and identity risks, and by CVSS 3.1 for vulnerabilities.
+- Number of detected risks: When two findings have the same severity, the one with a greater number of detected risks is given higher priority.
+- Number of impacted resources and services: If two findings share both the same severity and the same number of detected risks, the finding that impacts a greater number of resources and services is prioritized higher.
+
+**Note**: The type of finding, detected risk, or impacted resource does not influence prioritization.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -59,3 +69,4 @@ Security Inbox also takes the following detected risks into consideration when d
 [7]: https://www.cisa.gov/
 [8]: https://www.exploit-db.com/
 [9]: https://nvd.nist.gov/
+[10]: /security/cloud_security_management/severity_scoring/#csm-severity-scoring-framework
