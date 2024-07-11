@@ -1,6 +1,6 @@
 ---
 title: Testing Multiple Environments
-description: Learn how to use Continuous Testing to reuse the same Synthetics scenarios against multiple environments.
+description: Learn how to use Continuous Testing to reuse the same Synthetic test scenarios against multiple environments.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -25,10 +25,10 @@ A Synthetic browser test starts the test scenario by navigating to a starting UR
 
 {{< img src="continuous_testing/starting_url_substitution.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
 
-When triggering a CI test, the `startUrl` field allows you to overwrite the first URL that a browser test navigates to or the URL used by an HTTP test request. You can specify this option through the global configuration file, the Synthetic Monitoring configuration files (`*.synthetics.json`), or the command line flag `--start-url`.
+When triggering a CI test, the `startURL` field allows you to overwrite the first URL that a browser test navigates to or the URL used by an HTTP test request. You can specify this option through the global configuration file, the Synthetic Monitoring configuration files (`*.synthetics.json`), or the command line flag `--override startURL=<STARTURL>`.
 
-```
-datadog-ci synthetics run-tests --public-id <public-id> --start-url "https://staging.my-app.com"
+```shell
+datadog-ci synthetics run-tests --public-id <public-id> --override startURL="https://staging.my-app.com"
 ```
 
 
@@ -44,7 +44,7 @@ This field expects a string containing two parts, separated by a pipe character 
 
 A simple example looks like the following:
 
-```
+```shell
 https://prod.my-app.com/(.*)|https://staging.my-app.com/$1
 ```
 
