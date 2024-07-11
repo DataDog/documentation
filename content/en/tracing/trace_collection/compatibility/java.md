@@ -228,7 +228,7 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation   | To Enable 									                             |
 |-------------------|-------------------------------------------------|
-| JDBC-Datasource		 | `- System Property: `-Ddd.integration.jdbc-datasource.enabled=true`<br /> - Environment Variable: `DD_INTEGRATION_JDBC_DATASOURCE_ENABLED=true` |
+| JDBC-Datasource		 | - System Property: `-Ddd.integration.jdbc-datasource.enabled=true`<br /> - Environment Variable: `DD_INTEGRATION_JDBC_DATASOURCE_ENABLED=true` |
 
 Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
