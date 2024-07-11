@@ -1,10 +1,21 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
-import { PrefOptionsConfig, PrefOptionsConfigSchema } from './prefs_processing/schemas/yaml/prefOptions';
-import { SitewidePrefIdsConfig, SitewidePrefIdsConfigSchema } from './prefs_processing/schemas/yaml/sitewidePrefs';
-import { Frontmatter, FrontmatterSchema } from './prefs_processing/schemas/yaml/frontMatter';
+import {
+  PrefOptionsConfig,
+  PrefOptionsConfigSchema
+} from './prefs_processing/schemas/yaml/prefOptions';
+import {
+  SitewidePrefIdsConfig,
+  SitewidePrefIdsConfigSchema
+} from './prefs_processing/schemas/yaml/sitewidePrefs';
+import {
+  Frontmatter,
+  FrontmatterSchema
+} from './prefs_processing/schemas/yaml/frontMatter';
 import MarkdocStaticCompiler, { Node } from 'markdoc-static-compiler';
+import { PagePrefs } from './prefs_processing/schemas/pagePrefs';
+import { GLOBAL_PLACEHOLDER_REGEX } from './prefs_processing/schemas/regexes';
 
 const DEBUG_PATH = __dirname + '/../debug';
 
@@ -21,11 +32,22 @@ export class MarkdocToHugoCompiler {
     partialsDir: string;
   }) {
     // ingest the pref options sets
-    this.prefOptionsConfig = this.#loadPrefOptionsFromYaml(p.prefOptionsConfigDir);
-    // ingest sitewide preference names
-    this.sitewidePrefNames = this.#loadValidSitewidePrefNames(p.sitewidePrefsFilepath);
-    // register markdoc files
+    this.prefOptionsConfig = this.#loadPrefOptionsFromYaml(
+      p.prefOptionsConfigDir
+    );
+
+    // ingest the list of valid sitewide preference names
+    this.sitewidePrefNames = this.#loadValidSitewidePrefNames(
+      p.sitewidePrefsFilepath
+    );
+
+    // scan the provided content directory for markdoc files
     this.markdocFiles = findInDir(p.contentDir, /\.mdoc$/);
+
+    // create the debug folder if it doesn't exist
+    if (!fs.existsSync(DEBUG_PATH)) {
+      fs.mkdirSync(DEBUG_PATH);
+    }
   }
 
   // Compile all detected Markdoc files to Hugo-compatible HTML
@@ -34,12 +56,12 @@ export class MarkdocToHugoCompiler {
       console.log(`\n\nCompiling ${markdocFile}`);
       const markdocStr = fs.readFileSync(markdocFile, 'utf8');
       const ast = MarkdocStaticCompiler.parse(markdocStr);
-      // create the debug folder if it doesn't exist
-      if (!fs.existsSync(DEBUG_PATH)) {
-        fs.mkdirSync(DEBUG_PATH);
-      }
+
       // write ast to DEBUG_PATH
-      fs.writeFileSync(`${DEBUG_PATH}/asts.${path.basename(markdocFile)}.json`, JSON.stringify(ast, null, 2));
+      fs.writeFileSync(
+        `${DEBUG_PATH}/asts.${path.basename(markdocFile)}.json`,
+        JSON.stringify(ast, null, 2)
+      );
 
       // write frontmatter tag to DEBUG_PATH
       const frontmatter = yaml.load(ast.attributes.frontmatter) as Frontmatter;
@@ -48,6 +70,17 @@ export class MarkdocToHugoCompiler {
         JSON.stringify(frontmatter, null, 2) || '__EMPTY__'
       );
       FrontmatterSchema.parse(frontmatter);
+
+      // combine the options sets with the frontmatter preferences
+      // to yield a set of complete page preferences objects
+      const defaultValuesByPrefId = this.#getDefaultValuesByPrefId(
+        frontmatter,
+        this.prefOptionsConfig
+      );
+      fs.writeFileSync(
+        `${DEBUG_PATH}/defaultValues.${path.basename(markdocFile)}.json`,
+        JSON.stringify(defaultValuesByPrefId, null, 2)
+      );
 
       // write partial path detection to DEBUG_PATH
       const partialPaths = this.#extractPartialPaths(ast);
@@ -58,11 +91,46 @@ export class MarkdocToHugoCompiler {
     }
   }
 
+  #getDefaultValuesByPrefId(
+    frontmatter: Frontmatter,
+    prefOptionsConfig: PrefOptionsConfig
+  ): Record<string, string> {
+    if (!frontmatter.page_preferences) {
+      return {};
+    }
+    const defaultValuesByPrefId: Record<string, string> = {};
+
+    for (const fmPrefConfig of frontmatter.page_preferences) {
+      // replace placeholders
+      let optionsSetId = fmPrefConfig.options_source;
+      optionsSetId = optionsSetId.replace(
+        GLOBAL_PLACEHOLDER_REGEX,
+        (_match: string, placeholder: string) => {
+          const value = defaultValuesByPrefId[placeholder.toLowerCase()];
+          if (!value) {
+            throw new Error(
+              `The placeholder <${placeholder}> is invalid. Make sure that '${placeholder}' is spelled correctly, and that the '${placeholder.toLowerCase()}' parameter is defined in the page_preferences list before it is referenced as <${placeholder}>.`
+            );
+          }
+          return value;
+        }
+      );
+
+      defaultValuesByPrefId[fmPrefConfig.identifier] =
+        fmPrefConfig.default_value ||
+        prefOptionsConfig[optionsSetId].find((option) => option.default)!
+          .identifier;
+    }
+
+    return defaultValuesByPrefId;
+  }
+
   #extractPartialPaths(node: Node): string[] {
     let partialPaths: string[] = [];
     if (node.tag === 'partial') {
       const filePathAnnotations = node.annotations.filter(
-        (annotation) => annotation.name === 'file' && annotation.type === 'attribute'
+        (annotation) =>
+          annotation.name === 'file' && annotation.type === 'attribute'
       );
       if (!filePathAnnotations) {
         throw new Error('Partial tag must have a file attribute');
@@ -91,10 +159,14 @@ export class MarkdocToHugoCompiler {
 
     filenames.forEach((filename) => {
       const prefOptionsConfig = this.#loadPrefsYamlFromStr(filename);
-      for (const [optionsListId, optionsList] of Object.entries(prefOptionsConfig)) {
+      for (const [optionsListId, optionsList] of Object.entries(
+        prefOptionsConfig
+      )) {
         // validate that this ID has not already been used
         if (prefOptions[optionsListId]) {
-          throw new Error(`Duplicate options list ID '${optionsListId}' found in file ${filename}`);
+          throw new Error(
+            `Duplicate options list ID '${optionsListId}' found in file ${filename}`
+          );
         }
         prefOptions[optionsListId] = optionsList;
       }

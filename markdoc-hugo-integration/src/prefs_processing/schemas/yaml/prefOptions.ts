@@ -3,9 +3,9 @@ import { SNAKE_CASE_REGEX } from '../regexes';
 
 const PrefOptionSchema = z
   .object({
-    display_name: z.union([z.number(), z.string()]),
+    display_name: z.string(),
     default: z.boolean().optional(),
-    identifier: z.union([z.number(), z.string().regex(SNAKE_CASE_REGEX)])
+    identifier: z.string().regex(SNAKE_CASE_REGEX)
   })
   .strict();
 

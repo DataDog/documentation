@@ -7,7 +7,8 @@ module.exports = {
         {
             files: '*.ts',
             options: {
-                tabWidth: 2
+                tabWidth: 2,
+                printWidth: 90
             }
         }
     ]
