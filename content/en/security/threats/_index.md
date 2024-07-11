@@ -9,10 +9,6 @@ aliases:
   - /security/threats/runtime_anomaly_detection
 ---
 
-{{< youtube id=RPILU7A76Pc loading=lazy >}}
-
-<br>
-
 ## Overview
 
 Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
