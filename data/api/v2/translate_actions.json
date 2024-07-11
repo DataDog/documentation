@@ -1293,6 +1293,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
+    "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "summary": "Convert a rule from JSON to Terraform",
+    "request_description": "",
+    "request_schema_description": "Convert a rule from JSON to Terraform."
+  },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
     "summary": "Test a rule",
@@ -1318,6 +1324,10 @@
     "summary": "Update an existing rule",
     "request_description": "",
     "request_schema_description": "Update an existing rule."
+  },
+  "ConvertExistingSecurityMonitoringRule": {
+    "description": "Convert an existing rule from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "summary": "Convert an existing rule from JSON to Terraform"
   },
   "TestExistingSecurityMonitoringRule": {
     "description": "Test an existing rule.",

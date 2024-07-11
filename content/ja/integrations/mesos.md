@@ -4,7 +4,7 @@ aliases:
 - /ja/integrations/mesos_slave/
 integration_title: Mesos
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 short_description: クラスターリソースの使用状況、マスターおよびスレーブの数、タスクのステータスなどを追跡します。
 ---
 

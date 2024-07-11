@@ -26,10 +26,6 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
-</div>
-
 ## Compatibility
 
 Supported test frameworks:
@@ -41,6 +37,7 @@ Supported test frameworks:
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
+| Vitest | >= 1.16.0 | Supported from `dd-trace>=4.42.0` and `dd-trace>=5.18.0` |
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, or Babel are supported out-of-the-box.
 
@@ -49,17 +46,28 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
 To report test results to Datadog, you need to configure the Datadog JavaScript library:
 
 {{< tabs >}}
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{% tab "Github Actions" %}}
+You can use the dedicated [Datadog Test Visibility Github Action][1] to enable Test Visibility.
+If you do so, the rest of the setup steps below can be skipped.
 
+[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+{{% /tab %}}
+
+{{% tab "Jenkins" %}}
+You can use [UI-based configuration][1] to enable Test Visibility for your jobs and pipelines.
+If you do so, the rest of the setup steps below can be skipped.
+
+[1]: /continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
+{{% /tab %}}
+
+
+{{% tab "Other cloud CI provider" %}}
 <div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
-
 {{% ci-agentless %}}
 
 {{% /tab %}}
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
+{{% tab "On-Premises CI Provider" %}}
 {{% ci-agent %}}
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -478,6 +486,29 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [11]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
+{{% tab "Vitest" %}}
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+
+```bash
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+```
+
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" jest"
+  }
+}
+{{< /code-block >}}
+
+### Adding custom tags or measures to tests
+
+Not supported.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### How to fix "Cannot find module 'dd-trace/ci/init'" errors
@@ -595,7 +626,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
   <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
@@ -708,7 +739,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=c
 [Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
 If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][12].
 
