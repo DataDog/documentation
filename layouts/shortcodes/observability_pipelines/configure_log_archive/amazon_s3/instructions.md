@@ -1,7 +1,3 @@
-## Configure a Log Archive
-
-If you already have a Datadog Log Archive configured, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
-
 ### Create an Amazon S3 bucket
 
 1. Navigate to [Amazon S3 buckets][401].
