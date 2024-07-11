@@ -1,6 +1,5 @@
 ---
 title: Billing and usage reporting
-kind: documentation
 description: "Monitoring individual client and aggregate usage of the Datadog platform in multi-organization account setups."
 private: true
 ---

@@ -14,7 +14,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: ドキュメント
   text: ログのパースに関する問題を調査する方法
-kind: ガイド
 title: ログが警告やエラーの情報ステータスを表示する
 ---
 

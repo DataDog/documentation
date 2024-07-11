@@ -5,7 +5,7 @@ hdfs:
   remove_header: false
   fm:
     is_public: true
-    kind: integration
+    custom_kind: integration
     integration_title: Hdfs
     short_description: Track cluster disk usage, volume failures, dead DataNodes,
       and more.
@@ -18,7 +18,7 @@ mesos:
     - "/integrations/mesos_master/"
     - "/integrations/mesos_slave/"
     is_public: true
-    kind: integration
+    custom_kind: integration
     integration_title: Mesos
     short_description: Track cluster resource usage, master and slave counts, tasks
       statuses, and more.

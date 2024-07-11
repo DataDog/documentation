@@ -1,6 +1,5 @@
 ---
 title: Configuring the .NET Framework Tracing Library
-kind: documentation
 code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70

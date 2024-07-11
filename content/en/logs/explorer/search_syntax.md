@@ -1,6 +1,5 @@
 ---
 title: Log Search Syntax
-kind: documentation
 description: "Search through all of your logs."
 aliases:
     - /logs/search-syntax

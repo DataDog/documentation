@@ -82,7 +82,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Al establecer la variable de entorno `DD_FIPS_MODE`, se instala el paquete de FIPS junto con el Agent y se configura el Agent para que utilice el proxy. Si utilizas este método, la configuración ha terminado, pero deberías [verificar la instalación](#verify-your-installation).

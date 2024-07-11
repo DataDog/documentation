@@ -13,7 +13,6 @@ further_reading:
 - link: /logs/log_configuration/archives
   tag: Documentation
   text: Archives de logs
-kind: documentation
 title: Flex Logs
 ---
 

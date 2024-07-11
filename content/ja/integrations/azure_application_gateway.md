@@ -14,7 +14,7 @@ integration_id: azure-applicationgateway
 integration_title: Microsoft Azure Application Gateway
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_application_gateway
 public_title: Datadog-Microsoft Azure Application Gateway インテグレーション

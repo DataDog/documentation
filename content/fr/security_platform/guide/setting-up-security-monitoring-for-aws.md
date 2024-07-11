@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Configurer Cloud SIEM pour AWS
 ---
 

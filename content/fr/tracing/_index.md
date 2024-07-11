@@ -50,7 +50,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive pour maîtriser la solution APM
-kind: documentation
 title: APM
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Oracle Autonomous Database
-kind: documentation
 description: Install and configure Database Monitoring for Oracle Autonomous Database
 further_reading:
 - link: "/integrations/oracle/"

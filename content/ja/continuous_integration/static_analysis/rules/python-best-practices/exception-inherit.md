@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 例外がベース例外を継承するようにする
 ---
 ## メタデータ

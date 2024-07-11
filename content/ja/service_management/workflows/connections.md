@@ -4,7 +4,6 @@ aliases:
 - /ja/workflows/setup
 description: ワークフロー接続
 disable_toc: false
-kind: documentation
 title: 接続
 ---
 

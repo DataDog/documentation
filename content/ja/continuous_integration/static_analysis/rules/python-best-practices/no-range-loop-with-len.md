@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: range(len(<array>)) で for i を使用しない
 ---
 ## メタデータ

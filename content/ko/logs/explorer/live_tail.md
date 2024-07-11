@@ -13,7 +13,6 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: 설명서
   text: 로그 목록 보기
-kind: 설명서
 title: 라이브 테일
 ---
 

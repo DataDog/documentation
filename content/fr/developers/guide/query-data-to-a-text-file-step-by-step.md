@@ -1,6 +1,6 @@
 ---
 title: Guide pour interroger vos données et les enregistrer dans un fichier texte
-kind: guide
+
 aliases:
   - /fr/developers/faq/query-data-to-a-text-file-step-by-step
 ---

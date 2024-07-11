@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: 설명서
   text: 오류 추적 모니터 만들기
-kind: 설명서
 title: 백엔드 서비스 오류 추적
 ---
 

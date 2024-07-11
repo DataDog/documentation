@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/logs/faq/how-to-set-up-only-logs
-kind: documentation
 title: Datadog Agent をログ収集のみに使用
 ---
 

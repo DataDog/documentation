@@ -1,7 +1,6 @@
 ---
 description: Surveillez l'utilisation de la plateforme Datadog par vos différents
   clients et l'utilisation globale avec un compte multi-organisations.
-kind: documentation
 private: true
 title: Données d'utilisation et de facturation
 ---

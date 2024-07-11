@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: ix보다는 iloc 또는 loc 선호
 ---
 ## 메타데이터

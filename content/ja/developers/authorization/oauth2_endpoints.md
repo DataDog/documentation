@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/
   tag: Documentation
   text: OAuth2 認可について
-kind: documentation
 title: OAuth2 認可エンドポイントリファレンス
 ---
 {{< callout btn_hidden="true" >}}

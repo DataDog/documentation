@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/monitors/faq/comment-exporter-un-historique-d-alertes
-kind: guide
+
 title: Exporter des alertes de monitor au format CSV
 ---
 

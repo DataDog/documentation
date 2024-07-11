@@ -15,7 +15,6 @@ further_reading:
 - link: /integrations/github
   tag: 설명서
   text: Datadog GitHub 통합
-kind: 설명서
 title: AWS Lambda용 서버리스 모니터링 구성
 ---
 
