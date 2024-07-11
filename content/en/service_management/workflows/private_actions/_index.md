@@ -1,6 +1,5 @@
 ---
 title: Private Actions
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "service_management/app_builder/connections"

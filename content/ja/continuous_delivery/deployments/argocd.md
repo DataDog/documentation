@@ -8,7 +8,6 @@ further_reading:
   tag: ドキュメント
   text: デプロイメント実行をクエリして視覚化する方法
 is_beta: true
-kind: ドキュメント
 title: Argo CD デプロイメントの監視
 ---
 

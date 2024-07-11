@@ -1,6 +1,6 @@
 ---
 title: Serverless Warnings
-kind: guide
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"

@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Control Plane Monitoring
-kind: documentation
 aliases:
 - /agent/kubernetes/control_plane
 further_reading:

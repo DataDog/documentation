@@ -1,6 +1,6 @@
 ---
 title: Integration Setup for ECS Fargate
-kind: faq
+
 further_reading:
 - link: "/integrations/ecs_fargate/"
   tag: "Documentation"

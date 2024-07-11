@@ -1,6 +1,5 @@
 ---
 title: Getting Started with AWS
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'

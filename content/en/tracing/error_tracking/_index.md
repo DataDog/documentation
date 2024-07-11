@@ -1,6 +1,5 @@
 ---
 title: Error Tracking for Backend Services
-kind: documentation
 description: Learn how to search and manage errors collected from your backend services.
 further_reading:
 - link: "https://www.datadoghq.com/blog/service-page/"

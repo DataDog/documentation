@@ -9,7 +9,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar una caída del sistema para silenciar un monitor
-kind: guía
 title: Ajuste de las alertas de Faltante de datos para los monitores de métrica
 ---
 

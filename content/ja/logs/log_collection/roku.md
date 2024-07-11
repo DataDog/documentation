@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer
   tag: Documentation
   text: ログの調査方法
-kind: documentation
 title: Roku ログ収集
 ---
 

@@ -23,7 +23,6 @@ further_reading:
   tag: Documentation
   text: Assigner des tags à toutes les données émises par un conteneur, un pod ou
     un nœud
-kind: documentation
 title: Installer l'Agent Datadog sur Kubernetes
 ---
 

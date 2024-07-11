@@ -38,7 +38,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/
   tag: 블로그
   text: Datadog Service Catalog를 사용한 엔드투엔드 서비스 소유권 모범 사례
-kind: 설명서
 title: Datadog 서비스 카탈로그
 ---
 

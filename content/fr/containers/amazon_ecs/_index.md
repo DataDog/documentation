@@ -21,7 +21,6 @@ further_reading:
   tag: blog
   text: Analysez vos dépenses liées à Kubernetes et ECS avec la solution Cloud Cost
     Management de Datadog
-kind: documentation
 title: Amazon ECS
 ---
 

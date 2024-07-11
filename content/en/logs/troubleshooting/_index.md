@@ -1,6 +1,5 @@
 ---
 title: Logs Troubleshooting
-kind: documentation
 ---
 
 If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.

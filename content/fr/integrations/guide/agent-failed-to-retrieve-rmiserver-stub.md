@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Échec de la récupération du stub RMIServer par l'Agent
 ---
 

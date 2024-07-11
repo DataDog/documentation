@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
   tag: Blog
   text: Más información sobre Autodiscovery
-kind: documentación
 title: Etiquetado de servicios unificado
 ---
 

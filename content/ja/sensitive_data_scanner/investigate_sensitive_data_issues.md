@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: ブログ
   text: 機密データスキャナーで、機密データの問題を大規模に発見し、トリアージし、修復する
-kind: ドキュメント
 title: 機密データ問題を調査する
 ---
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: 설명서
   text: 트러블슈팅
-kind: 설명서
 title: DBM 설정 아키텍처
 ---
 {{< site-region region="gov" >}}

@@ -1,6 +1,5 @@
 ---
 title: Workflow Logic
-kind: documentation
 disable_toc: false
 type: workflows
 is_beta: false

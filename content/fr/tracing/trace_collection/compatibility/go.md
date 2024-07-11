@@ -9,7 +9,6 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/go
   tag: Documentation
   text: Instrumenter votre application
-kind: documentation
 title: Exigences de compatibilité Go
 type: multi-code-lang
 ---

@@ -840,6 +840,8 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
+        metrics_config:
+          $ref: '#/components/schemas/AzureAccountMetricsConfig'
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -864,6 +866,27 @@ components:
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
+    AzureAccountMetricsConfig:
+      description: 'Dictionary containing the key `excluded_resource_providers` which
+        has to be a list of Microsoft Azure Resource Provider names.
+
+        This feature is currently being beta tested.
+
+        In order to enable all resource providers for metric collection, pass:
+
+        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
+        for `excluded_resource_providers`).'
+      properties:
+        excluded_resource_providers:
+          description: List of Microsoft Azure Resource Providers to exclude from
+            metric collection.
+          example:
+          - Microsoft.Sql
+          - Microsoft.Cdn
+          items:
+            type: string
+          type: array
+      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1116,6 +1139,17 @@ components:
           type: string
       readOnly: true
       type: object
+    CrossOrgUuids:
+      description: The source organization UUID for cross organization queries. Feature
+        in Private Beta.
+      example:
+      - 6434abde-xxxx-yyyy-zzzz-da7ad0900001
+      items:
+        description: The source organization UUID.
+        example: 6434abde-xxxx-yyyy-zzzz-da7ad0900001
+        type: string
+      maxItems: 1
+      type: array
     Dashboard:
       description: "A dashboard is Datadog\u2019s tool for visually tracking, analyzing,
         and displaying\nkey performance metrics, which enable you to monitor the health
@@ -2618,6 +2652,8 @@ components:
     FormulaAndFunctionApmDependencyStatsQueryDefinition:
       description: A formula and functions APM dependency stats query.
       properties:
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsDataSource'
         env:
@@ -2705,6 +2741,8 @@ components:
     FormulaAndFunctionApmResourceStatsQueryDefinition:
       description: APM resource stats query using formulas and functions.
       properties:
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsDataSource'
         env:
@@ -2770,6 +2808,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/WidgetAggregator'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionCloudCostDataSource'
         name:
@@ -2820,6 +2860,8 @@ components:
       properties:
         compute:
           $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionCompute'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
         group_by:
@@ -2976,6 +3018,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionMetricDataSource'
         name:
@@ -3006,6 +3050,8 @@ components:
       properties:
         aggregator:
           $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDataSource'
         is_normalized_cpu:
@@ -3113,6 +3159,8 @@ components:
           description: Additional filters applied to the SLO query.
           example: host:host_a,env:prod
           type: string
+        cross_org_uuids:
+          $ref: '#/components/schemas/CrossOrgUuids'
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionSLODataSource'
         group_mode:
@@ -6714,8 +6762,6 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
           nullable: true
           type: integer
         query:
@@ -6907,6 +6953,7 @@ components:
       - logs
       - spans
       - database_queries
+      - network_performance_queries
       example: rum
       type: string
       x-enum-varnames:
@@ -6918,6 +6965,7 @@ components:
       - LOGS
       - SPANS
       - DATABASE_QUERIES
+      - NETWORK_PERFORMANCE_QUERIES
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -7741,6 +7789,7 @@ components:
       - ci-tests alert
       - error-tracking alert
       - database-monitoring alert
+      - network-performance alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -7761,6 +7810,7 @@ components:
       - CI_TESTS_ALERT
       - ERROR_TRACKING_ALERT
       - DATABASE_MONITORING_ALERT
+      - NETWORK_PERFORMANCE_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -7804,8 +7854,7 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
@@ -13597,60 +13646,11 @@ components:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
-      description: The steps used in a Synthetic multistep API test.
-      properties:
-        allowFailure:
-          description: Determines whether or not to continue with test if this step
-            fails.
-          type: boolean
-        assertions:
-          default: []
-          description: Array of assertions used for the test.
-          example:
-          - operator: lessThan
-            target: 1000
-            type: responseTime
-          items:
-            $ref: '#/components/schemas/SyntheticsAssertion'
-          type: array
-        extractedValues:
-          description: Array of values to parse and save as variables from the response.
-          items:
-            $ref: '#/components/schemas/SyntheticsParsingOptions'
-          type: array
-        isCritical:
-          description: 'Determines whether or not to consider the entire test as failed
-            if this step fails.
-
-            Can be used only if `allowFailure` is `true`.'
-          type: boolean
-        name:
-          description: The name of the step.
-          example: Example step name
-          type: string
-        request:
-          $ref: '#/components/schemas/SyntheticsTestRequest'
-        retry:
-          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
-        subtype:
-          $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
-      required:
-      - assertions
-      - request
-      - name
-      - subtype
+      description: The steps used in a Synthetic multi-step API test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAPITestStep'
+      - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
       type: object
-    SyntheticsAPIStepSubtype:
-      description: The subtype of the Synthetic multistep API test step, currently
-        only supporting `http`.
-      enum:
-      - http
-      - grpc
-      example: http
-      type: string
-      x-enum-varnames:
-      - HTTP
-      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -13839,6 +13839,60 @@ components:
         timings:
           $ref: '#/components/schemas/SyntheticsTiming'
       type: object
+    SyntheticsAPITestStep:
+      description: The Test step used in a Synthetic multi-step API test.
+      properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        extractedValues:
+          description: Array of values to parse and save as variables from the response.
+          items:
+            $ref: '#/components/schemas/SyntheticsParsingOptions'
+          type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPITestStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
+      type: object
+    SyntheticsAPITestStepSubtype:
+      description: The subtype of the Synthetic multi-step API test step.
+      enum:
+      - http
+      - grpc
+      example: http
+      type: string
+      x-enum-varnames:
+      - HTTP
+      - GRPC
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -13848,6 +13902,36 @@ components:
       type: string
       x-enum-varnames:
       - API
+    SyntheticsAPIWaitStep:
+      description: The Wait step used in a Synthetic multi-step API test.
+      properties:
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPIWaitStepSubtype'
+        value:
+          description: 'The time to wait in seconds. Minimum value: 0. Maximum value:
+            180.'
+          example: 5
+          format: int32
+          maximum: 180
+          minimum: 0
+          type: integer
+      required:
+      - name
+      - subtype
+      - value
+      type: object
+    SyntheticsAPIWaitStepSubtype:
+      description: The subtype of the Synthetic multi-step API wait step.
+      enum:
+      - wait
+      example: wait
+      type: string
+      x-enum-varnames:
+      - WAIT
     SyntheticsApiTestFailureCode:
       description: Error code that can be returned by a Synthetic test.
       enum:
@@ -15112,6 +15196,13 @@ components:
 
         to delete.'
       properties:
+        force_delete_dependencies:
+          description: 'Delete the Synthetic test even if it''s referenced by other
+            resources
+
+            (for example, SLOs and composite monitors).'
+          example: false
+          type: boolean
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
           example: []
@@ -16052,6 +16143,14 @@ components:
           type: boolean
         disableCsp:
           description: Disable Content Security Policy for browser tests.
+          type: boolean
+        enableProfiling:
+          description: Enable profiling for browser tests.
+          type: boolean
+        enableSecurityTesting:
+          deprecated: true
+          description: Enable security testing for browser tests. Security testing
+            is not available anymore. This field is deprecated and won't be used.
           type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
@@ -24918,7 +25017,9 @@ paths:
         required: false
         schema:
           type: string
-      - description: Host result to start search from.
+      - description: Specify the starting point for the host search results. For example,
+          if you set `count` to 100 and the first 100 results have already been returned,
+          you can set `start` to `101` to get the next 100 results.
         in: query
         name: start
         required: false
@@ -26017,8 +26118,9 @@ paths:
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"tenant_name\":
-              \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
+              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
+              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-undo:
@@ -28057,6 +28159,8 @@ paths:
 
         - database-monitoring: `database-monitoring alert`
 
+        - network-performance: `network-performance alert`
+
 
         **Notes**:
 
@@ -28353,6 +28457,28 @@ paths:
 
 
         Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
+
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **Network Performance Alert Query**
+
+
+        Example: `network-performance(query).rollup(rollup_method[, measure]).last(time_window)
         operator #`
 
 

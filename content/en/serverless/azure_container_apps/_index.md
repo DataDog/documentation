@@ -1,6 +1,5 @@
 ---
 title: Azure Container Apps
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/azure-container-apps/'
       tag: 'Blog'

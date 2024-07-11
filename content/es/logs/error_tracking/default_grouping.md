@@ -1,6 +1,5 @@
 ---
 description: Comprender cómo se agrupan los errores en incidencias.
-kind: documentación
 title: Agrupación predeterminada
 ---
 

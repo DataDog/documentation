@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Surveillance des métriques arithmétiques et creuses
 ---
 

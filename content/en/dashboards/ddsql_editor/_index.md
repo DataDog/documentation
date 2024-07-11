@@ -1,6 +1,5 @@
 ---
 title: DDSQL Editor
-kind: documentation
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

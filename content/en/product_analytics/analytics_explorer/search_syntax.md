@@ -1,6 +1,5 @@
 ---
 title: Search Syntax
-kind: documentation
 further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"

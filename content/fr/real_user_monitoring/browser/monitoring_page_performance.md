@@ -19,7 +19,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: En savoir plus sur les dashboards RUM
-kind: documentation
 title: Surveillance des performances de pages
 ---
 

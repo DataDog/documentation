@@ -5,7 +5,6 @@ further_reading:
   tag: Blog
   text: Datadog presenta los servicios Log Management y APM de Datadog que cumplen
     con el PCI
-kind: Documentation
 title: Cumplimiento del estándar PCI DSS
 ---
 
