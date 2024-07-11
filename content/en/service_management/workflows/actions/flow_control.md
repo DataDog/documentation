@@ -30,7 +30,7 @@ You can branch the execution path of your workflow based on the evaluation of on
 
 The **Sleep** action pauses the execution of the workflow for a specified duration. Select a predefined duration from the **Duration** drop-down, or enter a custom variable in seconds.
 
-## Iteration
+## For loop
 
 The **For loop** action allows you to execute a set of actions iteratively for each item in a given input list. For loops accept an input list of up to 2000 items. You can perform many different operations within a for loop, including configuring error paths for individual iterations that fail.
 
