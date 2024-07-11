@@ -19,14 +19,14 @@ algolia:
 
 ## Overview
 
-[Datadog Code Analysis][1] allows you to identify and resolve code quality issues and security vulnerabilities directly in Datadog or in your CI pipelines before deployment, ensuring a robust production build. 
+[Datadog Code Analysis][1] allows you to identify and resolve code quality issues and security vulnerabilities before deploying to production, ensuring safe and clean code throughout the software development lifecycle. 
 
 {{< img src="/code_analysis/repositories.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
 
 Code Analysis offers a comprehensive suite of tools, including [Static Analysis][2] and [Software Composition Analysis][3], to improve overall software delivery.
 
-* Static Analysis directly scans your repositories for bugs and performance issues, and suggests fixes to prevent these issues from impacting production. 
-* Software Composition Analysis checks your imported open source libraries for known security vulnerabilities, securing your applications from external threats. To view all vulnerabilities found in repositories and at runtime consolidated together, see the [Application Security documentation][4].
+* Static Analysis (SAST) scans your repositories for quality and security issues in first-party code, and suggests fixes to prevent these issues from impacting production.
+* Software Composition Analysis (SCA) scans your codebase for imported open source libraries, helping you manage your dependencies and secure your applications from external threats.
 
 By using [`datadog-ci`][5], you can integrate analyses from other providers into your development workflow, allowing you to send Static Analysis and SCA results directly to Datadog. You can access the latest scan results for each repository on the [**Repositories** page][6] to effectively monitor and enhance code health across all branches.
 
@@ -219,7 +219,7 @@ Once you’ve configured these scripts, run an analysis of your repository on th
 
 ## Run Static Analysis in an IDE
 
-Install the [Datadog IDE plugins][7] to run Static Analysis scans and see results directly in your code editor. You can detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
+Install the [Datadog IDE plugins][7] to run Static Analysis scans locally and see results directly in your code editor. You can detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
 
 To start running Static Analysis scans in your IDE, see the respective documentation for your code editor of choice.
 
@@ -227,13 +227,6 @@ To start running Static Analysis scans in your IDE, see the respective documenta
 
 </br>
 
-## Use Code Analysis data
-
-Explore data collected by Code Analysis about severity violations, most common violations, and violations over time by category to enhance code quality, strengthen security measures, and maintain high coding standards across projects.
-
-{{< img src="/getting_started/code_analysis/dashboard.png" alt="An OOTB dashboard displaying an overview of your Static Analysis results in Datadog." style="width:100%" >}}
-
-You can create [dashboards][8] to visualize your code analysis metrics, or use an [out-of-the-box dashboard][9] that includes widgets populated with data collected by Code Analysis to help you identify areas of improvement with usage patterns and trends.
 
 ## Enable Code Analysis comments in GitHub pull requests
 
@@ -320,7 +313,6 @@ Click on a service to access information about CI pipelines from Pipeline Visibi
 [5]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://app.datadoghq.com/ci/code-analysis
 [7]: /code_analysis/ide_plugins
-[8]: /dashboards/
 [9]: https://app.datadoghq.com/dash/integration/31166/software-delivery---static-analysis-overview
 [10]: /code_analysis/static_analysis/github_actions/
 [11]: /code_analysis/github_pull_requests/#update-an-existing-github-app
