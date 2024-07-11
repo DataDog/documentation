@@ -17,7 +17,7 @@ Use the toolbar to configure and customize the component. The following options 
 - **Name**: Give the NACL a name.
 - **Shape**: Select a shape for the component.
 - **Padding**: Increase or decrease the amount of space inside the component.
-- **Rules**: Add, edit, or remove inbound and outbound rules for the NACL.
+- **Rules**: View inbound and outbound rules for the NACL.
 
 ## API
 
