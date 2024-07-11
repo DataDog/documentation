@@ -12,12 +12,12 @@ Use the Network ACL component to visualize network access control lists from you
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Visibility**. Toggle the visibility of the component on the diagram.
-- **Color**. Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Name**. Give the NACL a name.
-- **Shape**. Select a shape for the component.
-- **Padding**. Increase or decrease the amount of space inside the component.
-- **Rules**. Add, edit, or remove inbound and outbound rules for the NACL.
+- **Visibility**: Toggle the visibility of the component on the diagram.
+- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- **Name**: Give the NACL a name.
+- **Shape**: Select a shape for the component.
+- **Padding**: Increase or decrease the amount of space inside the component.
+- **Rules**: Add, edit, or remove inbound and outbound rules for the NACL.
 
 ## API
 
@@ -88,7 +88,7 @@ The following is an example JSON of a Network ACL component:
 
 - **type: string**: The type of component.
 - **id: string**: A unique identifier for the component consisting of the string `acl-` followed by a random 17-character alphanumeric string.
-- **arn: string**: The globally unique identifier for the component within AWS, known as [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+- **arn: string**: The globally unique identifier for the component within AWS, known as [Amazon Resource Names][2].
 - **region: string**: The AWS region for the component. All global regions are supported except `cn-` regions.
 - **visible: boolean**: If `false`, the component becomes semi-transparent on the diagram. Defaults to `true`.
 - **name: string**: The name for the NACL.
@@ -116,3 +116,4 @@ The following is an example JSON of a Network ACL component:
 - **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
 [1]: /cloudcraft/api/
+[2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
