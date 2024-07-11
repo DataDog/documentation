@@ -12,7 +12,7 @@ Live diagrams provide real-time representation of your AWS or Azure infrastructu
 
 - **Automatic updates**: The diagram reflects changes in your infrastructure when you access it.
 - **Real-time accuracy**: Ensures your diagram always represents the current state of your cloud infrastructure.
-- **Read-only**: Prevents accidental modifications to your infrastructure layout.
+- **Live filtering**: Allows you to focus on specific components or services by applying filters.
 
 ## Snapshot diagrams
 
@@ -31,7 +31,7 @@ Snapshot diagrams offer a static view of your infrastructure that you can modify
 
 ### Editing capabilities
 
-- **Live diagrams**: Read-only prevents modifications to the diagram.
+- **Live diagrams**: Limited editing options, such as filtering and grouping components.
 - **Snapshot diagrams**: Allow full editing of the layout and design.
 
 ### Transitioning between diagram types
