@@ -25,12 +25,12 @@ This provides observability for libraries not originally covered by Datadog SDKs
 | Language | Minimum version required |
 |----------|--------------------------|
 | Java     | v1.35.0                  |
-| Go       |                          |
 | Python   | v2.10.0                  |
 | Ruby     | v2.1.0                   |
-| Node.js  |                          |
-| PHP      |                          |
-| .NET     |                          |
+| Go       | TBA                      |
+| Node.js  | TBA                      |
+| PHP      | TBA                      |
+| .NET     | TBA                      |
 
 {{< tabs >}}
 
@@ -80,7 +80,7 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 {{% /tab %}}
 
-{{% tab "Python" %}}
+<!-- {{% tab "Python" %}}
 
 ## Compatibility requirements
 
@@ -88,19 +88,9 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 ## Configuration
 
-{{% /tab %}}
+{{% /tab %}} -->
 
-{{% tab "Ruby" %}}
-
-## Compatibility requirements
-
-## Getting started
-
-## Configuration
-
-{{% /tab %}}
-
-{{% tab "Go" %}}
+<!-- {{% tab "Ruby" %}}
 
 ## Compatibility requirements
 
@@ -108,19 +98,9 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 ## Configuration
 
-{{% /tab %}}
+{{% /tab %}} -->
 
-{{% tab "NodeJS" %}}
-
-## Compatibility requirements
-
-## Getting started
-
-## Configuration
-
-{{% /tab %}}
-
-{{% tab "PHP" %}}
+<!-- {{% tab "Go" %}}
 
 ## Compatibility requirements
 
@@ -128,9 +108,9 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 ## Configuration
 
-{{% /tab %}}
+{{% /tab %}} -->
 
-{{% tab ".NET" %}}
+<!-- {{% tab "NodeJS" %}}
 
 ## Compatibility requirements
 
@@ -138,7 +118,27 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 ## Configuration
 
-{{% /tab %}}
+{{% /tab %}} -->
+
+<!-- {{% tab "PHP" %}}
+
+## Compatibility requirements
+
+## Getting started
+
+## Configuration
+
+{{% /tab %}} -->
+
+<!-- {{% tab ".NET" %}}
+
+## Compatibility requirements
+
+## Getting started
+
+## Configuration
+
+{{% /tab %}} -->
 
 {{< /tabs >}}
 
