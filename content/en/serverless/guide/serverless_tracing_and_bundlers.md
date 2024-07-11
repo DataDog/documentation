@@ -126,6 +126,78 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     module.exports = [nodeExternalsPlugin()]
     ```
 
+## AWS CDK & esbuild
+
+The `NodeJsFunction` construct in the AWS CDK uses esbuild. The default configuration is not compatible with Datadog's tracing libraries. The CDK allows you to override the default configuration and provide a custom esbuild file to support bundling and the Datadog tracing libraries:
+
+1. Follow the installation instructions for Node.js and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
+2. Remove datadog-lambda-js and dd-trace from your package.json and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
+3. Create an `esbuild` file for each of your Lambda functions. A seperate `esbuild` file is required per Lambda function so that each entry point can be specified seperately. Notice the `entryPoint` and `outfile` properties. For example, if you had a second Lambda function in your project named `producer`, then the entry point would be `./functions/producer.ts` and the outfile would be `/out/producer/index.js`
+
+    **buildConsumer.js**
+    ```
+    const ddPlugin = require('dd-trace/esbuild')
+    const esbuild = require('esbuild')
+    
+    esbuild.build({
+      entryPoints: ['./functions/consumer.ts'],
+      outfile: 'out/consumer/index.js',
+      plugins: [ddPlugin],
+      // Other esbuild configuration
+      external: [
+        // esbuild cannot bundle native modules
+        '@datadog/native-metrics',
+    
+        // required if you use profiling
+        '@datadog/pprof',
+    
+        // required if you use Datadog security features
+        '@datadog/native-appsec',
+        '@datadog/native-iast-taint-tracking',
+        '@datadog/native-iast-rewriter',
+    
+        // required if you encounter graphql errors during the build step
+        'graphql/language/visitor',
+        'graphql/language/printer',
+        'graphql/utilities',
+        '@aws-sdk/client-sqs'
+      ]
+    }).catch((err) => {
+      console.error(err)
+      process.exit(1)
+    })
+    ```
+
+4. When defining your `NodeJsFunction` in the CDK, use the `Code.fromCustomCommand` function to specify the path to your custom esbuild file and an output folder. For each seperate Lambda function, specify the individual `esbuild` file defined in step 3. The output folder should match the folder of the `outfile` in your `esbuild` file.
+
+    **lambdaFunction.ts**
+    ```
+    // This path will likely be different for each individual Lambda function
+    const pathToBuildFile = '../functions/buildConsumer.js';
+    
+    // Ensure the files for each Lambda function are generated into their own directory
+    const pathToOutputFolder = '../out/consumer/';
+    
+    const code = Code.fromCustomCommand(
+      pathToOutputFolder,
+      ['node', pathToBuildFile],
+    );
+    
+    const consumerLambdaFunction = new NodejsFunction(this, props.functionName, {
+      runtime: Runtime.NODEJS_20_X,
+      code: code,
+      handler: 'index.handler',
+      memorySize: 512,
+      bundling: {
+        platform: 'node',
+        esbuildArgs: {
+          "--bundle": "true"
+        },
+        target: 'node20'
+      }
+    });
+    ```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
