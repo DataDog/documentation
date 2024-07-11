@@ -188,7 +188,7 @@ Datadog Audit Trail allows you to send out audit analytics views as routinely sc
 
 To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
 
-**Note**: Exporting to a schedule report is not available in the **List** view.
+**Note**: The **List** view does not have the option to export to a scheduled report.
 
 {{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
 
