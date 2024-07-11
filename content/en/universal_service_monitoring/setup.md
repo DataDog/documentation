@@ -734,7 +734,7 @@ If you use load balancers with your services, enable additional cloud integratio
 
 ## Additional configuration
 
-The following systems or services require additonal configuration:
+The following systems or services require additional configuration:
 
 {{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
@@ -764,7 +764,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
@@ -812,7 +812,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
 
@@ -856,7 +856,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Istio Monitoring" level="h4" >}}
 
@@ -898,7 +898,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
