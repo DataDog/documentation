@@ -68,10 +68,7 @@ This permission can be assigned either globally or restricted to a subset of ind
 {{% tab "UI" %}}
 
 1. Remove the global permission on the role.
-2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
-
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters" style="width:75%;" >}}
-
+2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field.
 
 [1]: /logs/log_configuration/indexes/
 {{% /tab %}}
