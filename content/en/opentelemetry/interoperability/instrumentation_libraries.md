@@ -26,8 +26,8 @@ This provides observability for libraries not originally covered by Datadog SDKs
 |----------|--------------------------|
 | Java     | v1.35.0                  |
 | Go       |                          |
-| Python   |                          |
-| Ruby     |                          |
+| Python   |  v2.10.0                |
+| Ruby     |    v2.1.0                   |
 | Node.js  |                          |
 | PHP      |                          |
 | .NET     |                          |
