@@ -1,11 +1,12 @@
+{{- /*  We need to replace preview branchname due to issue in the new hugo appending it twice */ -}}
+{{- /*  Do not add extra empty lines or spaces to this render hook. will cause a space to render after anchor */ -}}
 {{- $dot := .context -}}
 
 {{- with resources.Get .src -}}
 {{- $full_permalink := ( . | resources.Fingerprint "md5").RelPermalink }}
 
-{{- $p := (print $dot.Site.Params.branch "/") -}}
-{{- $full_permalink = replace $full_permalink $p ""}}
-
+{{- $branch_name := (print $dot.Site.Params.branch "/") -}}
+{{- $full_permalink = replace $full_permalink $branch_name ""}}
 
 {{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $full_permalink -}}
 {{- end -}}

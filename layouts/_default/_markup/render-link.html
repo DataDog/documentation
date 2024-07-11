@@ -1,0 +1,8 @@
+{{- $link := .Destination }}
+{{- if and (eq hugo.Environment "preview") (hasPrefix $link "/resources") -}}
+{{- $branch_name := (print $dot.Site.Params.branch "/") -}}
+{{- $link = replace $link $branch_name "" 1 -}}
+{{- end -}}
+<a href="{{ $link | safeURL }}">{{ .Text | safeHTML }}</a>
+{{- /*  Do not add extra empty lines or spaces to this render hook. will cause a space to render after anchor */ -}}
+{{- /*  We need to replace preview branchname due to issue in the new hugo appending it twice */ -}}
