@@ -9,7 +9,7 @@ traffic_light_color_options:
 
 primary_color_options:
   - display_name: Red
-    identifier: reds
+    identifier: red
   - display_name: Yellow
     identifier: yellow
   - display_name: Blue
