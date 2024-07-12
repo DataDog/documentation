@@ -8,7 +8,7 @@ further_reading:
     text: 'Datadog and Kubernetes'
 ---
 
-<div class="alert alert-info"> Starting with v0.1.9 Datadog Operator add-on supports automatic Agent sidecar injection in pods scheduled on Fargate instances. See <a href="https://docs.datadoghq.com/integrations/eks_fargate/?tab=datadogoperator#admission-controller-using-datadog-operator">this guide</a> for more details.
+<div class="alert alert-info">Starting with v0.1.9, the Datadog Operator add-on supports automatic Agent sidecar injection in pods scheduled on Fargate instances. See <a href="https://docs.datadoghq.com/integrations/eks_fargate/?tab=datadogoperator#admission-controller-using-datadog-operator">this guide</a> for more details.
 </div>
 
 
