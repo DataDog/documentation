@@ -49,6 +49,12 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
+### MongoDB
+
+<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+{{< partial name="dbm/dbm-setup-mongodb" >}}
+<p></p>
+
 ## Explore Datadog Database Monitoring
 
 Navigate to [Database Monitoring][1] in Datadog.
