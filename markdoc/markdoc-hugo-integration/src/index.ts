@@ -14,6 +14,7 @@ import {
   loadPrefOptionsFromDir,
   loadSitewidePrefsConfigFromFile
 } from './helpers/configIngestion';
+import { parseMarkdocFile } from './helpers/compilation';
 
 const DEBUG_PATH = __dirname + '/../debug';
 
@@ -22,6 +23,7 @@ export class MarkdocToHugoCompiler {
   sitewidePrefNames: string[] = [];
   markdocFiles: string[] = [];
   compiledFiles: string[] = [];
+  partialsDir: string;
 
   constructor(p: {
     sitewidePrefsFilepath: string;
@@ -38,6 +40,8 @@ export class MarkdocToHugoCompiler {
     // scan the provided content directory for markdoc files
     this.markdocFiles = findInDir(p.contentDir, /\.mdoc$/);
 
+    this.partialsDir = p.partialsDir;
+
     // create the debug folder if it doesn't exist
     if (!fs.existsSync(DEBUG_PATH)) {
       fs.mkdirSync(DEBUG_PATH);
@@ -49,21 +53,7 @@ export class MarkdocToHugoCompiler {
     for (const markdocFile of this.markdocFiles) {
       console.log(`\n\nCompiling ${markdocFile}`);
       const markdocStr = fs.readFileSync(markdocFile, 'utf8');
-      const ast = MarkdocStaticCompiler.parse(markdocStr);
-
-      // write ast to DEBUG_PATH
-      fs.writeFileSync(
-        `${DEBUG_PATH}/asts.${path.basename(markdocFile)}.json`,
-        JSON.stringify(ast, null, 2)
-      );
-
-      // write frontmatter tag to DEBUG_PATH
-      const frontmatter = yaml.load(ast.attributes.frontmatter) as Frontmatter;
-      fs.writeFileSync(
-        `${DEBUG_PATH}/frontmatter.${path.basename(markdocFile)}.json`,
-        JSON.stringify(frontmatter, null, 2) || '__EMPTY__'
-      );
-      FrontmatterSchema.parse(frontmatter);
+      const { ast, frontmatter } = parseMarkdocFile(markdocFile, this.partialsDir);
 
       // verify that all possible placeholder values
       // yield an existing options set

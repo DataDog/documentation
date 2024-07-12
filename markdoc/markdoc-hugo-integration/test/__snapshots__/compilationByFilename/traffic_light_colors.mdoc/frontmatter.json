@@ -1,0 +1,15 @@
+{
+  "title": "The Colors of the Common Traffic Light",
+  "page_preferences": [
+    {
+      "display_name": "Color",
+      "identifier": "color",
+      "options_source": "traffic_light_color_options"
+    },
+    {
+      "display_name": "Item",
+      "identifier": "item",
+      "options_source": "<COLOR>_item_options"
+    }
+  ]
+}
