@@ -6,7 +6,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/apm-request-flow-map-datadog
   tag: 블로그
   text: 요청 플로우 맵에 대해 자세히 알아보기
-title: 요청 플로우 맵
+kind: 설명서
+title: 요청 흐름 맵
 ---
 
 {{< img src="tracing/live_search_and_analytics/request_flow_map/Overview.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="요청 플로우 맵" >}}
@@ -41,18 +42,17 @@ _요청 플로우 맵_(_Request flow maps_)으로 Datadog 애플리케이션 성
 
 - 특정 HTTP 요청에 해당하는 [리소스][6]를 검색합니다.
 
-- [섀도우 배포][7] 또는 [커스텀 스팬(span) 태그][8]로 설정한 기능 플래그를 사용한다면 맵을 활용하여 요청 간 레이턴시를 비교해 보세요. 잠재적 코드 변경이 배포 버전의 레이턴시에 어떤 영향을 미치는지 확인하여 [배포 추적][9]을 사전 프로덕션 단계에서 보완할 수 있는 뛰어난 기능입니다.
+- [섀도우 배포][7] 또는 커스텀 스팬(span) 태그로 설정된 기능 플래그를 사용하는 경우 맵을 사용하여 요청 간 지연 시간을 비교하세요. 이는 잠재적인 코드 변경이 배포된 버전의 지연 시간에 어떤 영향을 미치는지 관찰하기 위해 [배포 추적][9]을 프로덕션 이전 단계에서 보완할 수 있는 훌륭한 기능입니다.
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/tracing/visualization/services_map/
+[1]: /ko/tracing/services/services_map/
 [2]: /ko/tracing/trace_explorer/
-[3]: /ko/tracing/trace_ingestion/ingestion_controls
-[4]: /ko/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[3]: /ko/tracing/trace_pipeline/ingestion_controls
+[4]: /ko/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [5]: https://app.datadoghq.com/apm/flow-map
-[6]: /ko/tracing/visualization/#resources
-[7]: /ko/tracing/deployment_tracking/#shadow-deploys
-[8]: /ko/tracing/guide/add_span_md_and_graph_it/
-[9]: /ko/tracing/deployment_tracking/
+[6]: /ko/tracing/glossary/#resources
+[7]: /ko/tracing/services/deployment_tracking/#shadow-deploys
+[9]: /ko/tracing/services/deployment_tracking/
