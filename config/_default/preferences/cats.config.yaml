@@ -1,8 +1,0 @@
-cat_breed_options:
-  - id: mutt
-    display_name: Mutt
-    default: true
-  - id: sphynx
-    display_name: Sphynx
-  - id: maine_coon
-    display_name: Maine Coon
