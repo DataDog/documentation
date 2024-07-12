@@ -30,32 +30,24 @@ You can branch the execution path of your workflow based on the evaluation of on
 
 The **Sleep** action pauses the execution of the workflow for a specified duration. Select a predefined duration from the **Duration** drop-down, or enter a custom variable in seconds.
 
-## Iteration
+## For loop
 
-The **For each** action allows you to execute a specific action iteratively for each element in a given input list. It enables you to automate repetitive tasks by applying the same action to multiple items within a list.
+The **For loop** action allows you to execute a set of actions iteratively for each item in a given input list. For loops accept an input list of up to 2000 items. You can perform many different operations within a for loop, including configuring error paths for individual iterations that fail.
 
-{{< img src="service_management/workflows/iteration.png" alt="An example of an interation step." style="width:100%;" >}}
+In the example below, a for loop iterates over a list of incidents and sends a Slack message for any incident that is more than a week old.
 
-The action is made up of the For each step and an inner step that you intend to perform iteratively. The output of a For each step is an array of outputs from the inner step.
+{{< img src="service_management/workflows/iteration2.png" alt="A workflow with a for loop. The loop iterates over a list of incidents and sends a message to a slack channel if the incident is more than a week old." style="width:100%;" >}}
 
-For example, using For each together with a CloudFlare action, you can iterate over and block a list of IP addresses. In this scenario, you add the list of IP addresses as an **Input list** in the For each step. Next, add a CloudFlare action as an inner step and configure it to block the current value in the iteration loop. When the workflow runs, the CloudFlare step repeats for each value in the list, accessing the current IP value and blocking it.
-
-To configure a **For each** iteration:
+To add a for loop to your workflow:
 1. Click the plus (**+**) icon on your workflow canvas to open the [action catalog][1].
-1. Search for and select the **For each** step.
-1. To select an inner action to repeat, drag an existing step from your canvas into the **For each** step, or click the plus (**+**) icon inside the **For each** step and make a selection from the action catalog.
-1. Click the **For each** step and enter an **Input list** for the step to iterate over.
-1. Toggle **Continue on error** if you want the action to continue down the list of remaining values when an error is encountered.
-1. Configure the inner action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
-1. **Save** and **Run** the action.
+1. Search for and select the **For loop** step.
+1. Click the loop step and enter an **Input list** for the step to iterate over. You can enter a custom list or use a workflow variable.
+1. Inside the loop frame, click the (**+**) icon to add a step to the loop.
+1. Configure the looped action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
+1. Add and configure any additional steps you need to loop.
+1. **Save** and **Publish** the workflow.
 
-When a run completes, the workflow enters **Debug** mode. Select the For each step to see:
-* The output of each iteration.
-* The number of completed and failed iterations.
-
-You can delete the inner step by:
-- Clicking the inner step and selecting **Delete**
-- Clicking the For each step and selecting **Clear**
+When a run completes, the workflow enters **Debug** mode. Select a step within the loop to see a list of **All**, **Failed**, or **Successful** iterations for that step. Select an iteration to see the output or the error message.
 
 ## Further Reading
 
