@@ -1,0 +1,12 @@
+[
+  {
+    "validation": "regex",
+    "code": "invalid_string",
+    "message": "Invalid",
+    "path": [
+      "primary_color_options",
+      0,
+      "identifier"
+    ]
+  }
+]

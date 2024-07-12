@@ -1,22 +1,16 @@
 import { MarkdocToHugoCompiler } from '../../src';
 import { describe, test, expect } from 'vitest';
+import { SNAPSHOTS_DIR, VALID_EXAMPLE_SITE_DIR } from '../constants';
 
-const TEST_SITE_DIR = __dirname + '/../test_site';
-const SNAPSHOTS_DIR = __dirname + '/../__snapshots__';
+const siteDir = VALID_EXAMPLE_SITE_DIR;
 
 describe('MarkdocToHugoCompiler', () => {
   const compiler = new MarkdocToHugoCompiler({
-    prefOptionsConfigDir: TEST_SITE_DIR + '/preferences_config/options',
+    prefOptionsConfigDir: siteDir + '/preferences_config/options',
     sitewidePrefsFilepath:
-      TEST_SITE_DIR + '/preferences_config/sitewide_preferences.yaml',
-    contentDir: TEST_SITE_DIR + '/content',
-    partialsDir: TEST_SITE_DIR + '/partials'
-  });
-
-  test('ingests pref options', () => {
-    expect(
-      JSON.stringify(compiler.prefOptionsConfig, null, 2)
-    ).toMatchFileSnapshot(`${SNAPSHOTS_DIR}/prefOptionsConfig.snap.json`);
+      siteDir + '/preferences_config/sitewide_preferences.yaml',
+    contentDir: siteDir + '/content',
+    partialsDir: siteDir + '/partials'
   });
 
   test('ingests sitewide pref names', () => {

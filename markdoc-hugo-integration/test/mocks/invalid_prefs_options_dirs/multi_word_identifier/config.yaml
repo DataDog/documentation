@@ -1,0 +1,18 @@
+# This options set has a multi-word identifier for the red option
+primary_color_options:
+  - display_name: Red
+    identifier: the color red
+  - display_name: Yellow
+    identifier: yellow
+  - display_name: Blue
+    identifier: blue
+    default: true
+
+traffic_light_color_options:
+  - display_name: Red
+    identifier: red
+  - display_name: Yellow
+    identifier: yellow
+  - display_name: Green
+    identifier: green
+    default: true

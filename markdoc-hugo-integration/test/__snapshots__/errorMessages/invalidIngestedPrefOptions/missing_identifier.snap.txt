@@ -1,0 +1,13 @@
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "primary_color_options",
+      0,
+      "identifier"
+    ],
+    "message": "Required"
+  }
+]
