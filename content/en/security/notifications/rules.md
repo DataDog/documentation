@@ -38,7 +38,7 @@ To create a notification rule, you define the logic for when the notification ru
 As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Preview of matching results** panel. This can be useful in determining if the notification rule is too specific or broad.
 
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
-1. Specify a **Name** for the notification rule.
+1. Enter a **Name** for the notification rule.
 1. Select the source type for the notification rule:
     - A vulnerability represents a potential security flaw in your infrastructure.
     - A threat (signal) represents suspicious activity that poses an active threat against your infrastructure.
