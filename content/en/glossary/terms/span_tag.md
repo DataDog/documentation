@@ -1,7 +1,5 @@
 ---
 title: span tag
-synonyms:
-  - span attribute
 core_product:
   - apm
 ---
