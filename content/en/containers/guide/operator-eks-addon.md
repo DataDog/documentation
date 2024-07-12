@@ -8,6 +8,10 @@ further_reading:
     text: 'Datadog and Kubernetes'
 ---
 
+<div class="alert alert-info"> Starting with v0.1.9 Datadog Operator add-on supports automatic Agent sidecar injection in pods scheduled on Fargate instances. See <a href="https://docs.datadoghq.com/integrations/eks_fargate/?tab=datadogoperator#admission-controller-using-datadog-operator">this guide</a> for more details.
+</div>
+
+
 You can install the Datadog Agent on an Amazon EKS cluster by installing the [Datadog Operator](/containers/datadog_operator)
 as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and applying the `DatadogAgent` manifest.
 
