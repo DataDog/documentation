@@ -354,7 +354,7 @@ Datadog::Lambda.configure_apm do |c|
 end
 
 def handler(event:, context:)
-    # Aplica el envoltorio de Datadog
+    # Aplica la envoltura de Datadog
     Datadog::Lambda::wrap(event, context) do
         # Añade etiquetas personalizadas al tramo de la función de Lambda,
         # NO funciona si el rastreo de X-Ray está habilitado
