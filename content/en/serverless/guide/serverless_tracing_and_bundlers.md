@@ -131,11 +131,11 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
 The `NodeJsFunction` construct in the AWS CDK uses esbuild. The default configuration is not compatible with Datadog's tracing libraries. The CDK allows you to override the default configuration and provide a custom esbuild file to support bundling and the Datadog tracing libraries:
 
 1. Follow the installation instructions for Node.js and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
-2. Remove datadog-lambda-js and dd-trace from your package.json and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
+2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda Layer.
 3. Create an `esbuild` file for each of your Lambda functions. A seperate `esbuild` file is required per Lambda function so that each entry point can be specified seperately. Notice the `entryPoint` and `outfile` properties. For example, if you had a second Lambda function in your project named `producer`, then the entry point would be `./functions/producer.ts` and the outfile would be `/out/producer/index.js`
 
     **buildConsumer.js**
-    ```
+    ```javascript
     const ddPlugin = require('dd-trace/esbuild')
     const esbuild = require('esbuild')
     
@@ -168,10 +168,10 @@ The `NodeJsFunction` construct in the AWS CDK uses esbuild. The default configur
     })
     ```
 
-4. When defining your `NodeJsFunction` in the CDK, use the `Code.fromCustomCommand` function to specify the path to your custom esbuild file and an output folder. For each seperate Lambda function, specify the individual `esbuild` file defined in step 3. The output folder should match the folder of the `outfile` in your `esbuild` file.
+4. When defining your `NodeJsFunction` in the CDK, use the `Code.fromCustomCommand` function to specify the path to your custom `esbuild` file and an output folder. For each separate Lambda function, specify the individual `esbuild` file defined in step three. The output folder should match the folder of the `outfile` in your `esbuild` file.
 
     **lambdaFunction.ts**
-    ```
+    ```typescript
     // This path will likely be different for each individual Lambda function
     const pathToBuildFile = '../functions/buildConsumer.js';
     
