@@ -20,6 +20,15 @@ Both OpenTelemetry and Datadog provide automatic instrumentations as part of the
 Datadog SDKs support adding [instrumentation libraries](https://opentelemetry.io/docs/concepts/instrumentation/libraries/) from OpenTelemetry to their existing automatic instrumentations.
 This provides observability for libraries not originally covered by Datadog SDKs without needing to change SDKs.
 
+## Prerequisites
+
+Before adding OpenTelemetry instrumentation libraries set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+
+<div class="alert alert-warning">
+When replacing an existing Datadog instrumentation with its OpenTelemetry equivalent, remember to disable the
+Datadog instrumentation to avoid duplicate spans in the trace.
+</div>
+
 ## Language support
 
 | Language | Minimum version required |
@@ -38,8 +47,6 @@ This provides observability for libraries not originally covered by Datadog SDKs
 
 ## Compatibility requirements
 
-
-
 Each instrumentation should be packaged as an OpenTelemetry [extension](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md).
 The SDK also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main)
 build, for example the [CFX instrumentation jar](https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0).
@@ -50,7 +57,7 @@ build, for example the [CFX instrumentation jar](https://search.maven.org/search
 
 To use an OpenTelemetry instrumentation with the Datadog SDK for Java:
 1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to true
-2. Download (or build) the OpenTelemetry instrumentation as an extension jar
+2. Download the OpenTelemetry instrumentation as an extension jar
 3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to
    the path to the extension jar
 
