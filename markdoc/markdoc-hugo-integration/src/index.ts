@@ -6,8 +6,8 @@ import {
   SitewidePrefIdsConfig,
   SitewidePrefIdsConfigSchema
 } from './schemas/yaml/sitewidePrefs';
-import { Frontmatter, FrontmatterSchema } from './schemas/yaml/frontMatter';
-import MarkdocStaticCompiler, { Node } from 'markdoc-static-compiler';
+import { Frontmatter } from './schemas/yaml/frontMatter';
+import { Node } from 'markdoc-static-compiler';
 import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
 import { validatePlaceholders } from './helpers/frontmatterValidation';
 import {
@@ -51,8 +51,6 @@ export class MarkdocToHugoCompiler {
   // Compile all detected Markdoc files to Hugo-compatible HTML
   compile() {
     for (const markdocFile of this.markdocFiles) {
-      console.log(`\n\nCompiling ${markdocFile}`);
-      const markdocStr = fs.readFileSync(markdocFile, 'utf8');
       const { ast, frontmatter } = parseMarkdocFile(markdocFile, this.partialsDir);
 
       // verify that all possible placeholder values
