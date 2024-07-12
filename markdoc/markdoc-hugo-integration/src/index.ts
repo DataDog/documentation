@@ -51,7 +51,20 @@ export class MarkdocToHugoCompiler {
   // Compile all detected Markdoc files to Hugo-compatible HTML
   compile() {
     for (const markdocFile of this.markdocFiles) {
-      const { ast, frontmatter } = parseMarkdocFile(markdocFile, this.partialsDir);
+      const { ast, frontmatter, partials, errorReports } = parseMarkdocFile(
+        markdocFile,
+        this.partialsDir
+      );
+
+      if (errorReports.length > 0) {
+        console.error(`Errors found in ${markdocFile}`);
+        errorReports.forEach((report) => {
+          console.error(
+            `  - ${report.error.message} at line(s) ${report.lines.join(', ')}`
+          );
+        });
+        throw new Error('Errors found in Markdoc file');
+      }
 
       // verify that all possible placeholder values
       // yield an existing options set
@@ -65,13 +78,6 @@ export class MarkdocToHugoCompiler {
       fs.writeFileSync(
         `${DEBUG_PATH}/defaultValues.${path.basename(markdocFile)}.json`,
         JSON.stringify(defaultValuesByPrefId, null, 2)
-      );
-
-      // build the renderable tree
-      const partialPaths = this.#extractPartialPaths(ast);
-      fs.writeFileSync(
-        `${DEBUG_PATH}/partialPathDetection.${path.basename(markdocFile)}.json`,
-        JSON.stringify(partialPaths, null, 2)
       );
     }
   }
@@ -107,29 +113,6 @@ export class MarkdocToHugoCompiler {
     }
 
     return defaultValuesByPrefId;
-  }
-
-  #extractPartialPaths(node: Node): string[] {
-    let partialPaths: string[] = [];
-    if (node.tag === 'partial') {
-      const filePathAnnotations = node.annotations.filter(
-        (annotation) => annotation.name === 'file' && annotation.type === 'attribute'
-      );
-      if (!filePathAnnotations) {
-        throw new Error('Partial tag must have a file attribute');
-      } else if (filePathAnnotations.length !== 1) {
-        throw new Error('Partial tag must have exactly one file attribute');
-      } else if (!filePathAnnotations[0].value) {
-        throw new Error('Partial tag file attribute must have a value');
-      }
-      partialPaths.push(filePathAnnotations[0].value);
-    }
-    if (node.children.length) {
-      for (const child of node.children) {
-        partialPaths = partialPaths.concat(this.#extractPartialPaths(child));
-      }
-    }
-    return partialPaths;
   }
 
   watch() {

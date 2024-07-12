@@ -1,0 +1,26 @@
+[
+  {
+    "error": {
+      "id": "missing-closing",
+      "level": "critical",
+      "message": "Node 'if' is missing closing"
+    },
+    "lines": [
+      6,
+      7
+    ],
+    "file": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid_markdoc_files/missing_closing_tag.mdoc"
+  },
+  {
+    "error": {
+      "id": "missing-closing",
+      "level": "critical",
+      "message": "Node 'if' is missing closing"
+    },
+    "lines": [
+      9,
+      10
+    ],
+    "file": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid_markdoc_files/missing_closing_tag.mdoc"
+  }
+]
