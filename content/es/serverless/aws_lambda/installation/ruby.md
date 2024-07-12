@@ -370,7 +370,7 @@ def handler(event:, context:)
         # Envía una métrica personalizada
         Datadog::Lambda.metric(
           'coffee_house.order_value', # el nombre de la métrica
-          12.45, # metric value
+          12.45, # el valor de la métrica
           time: Time.now.utc, # opcional, debe estar dentro de los últimos 20 min
           "product":"latte", # etiqueta
           "order":"online" # otra etiqueta
