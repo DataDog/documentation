@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "npm run build; vitest run",
+        "test": "npm run build; vitest run --coverage",
         "build-markdoc-integration": "rimraf ./dist && npx tsc",
         "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle --minify > ./dist/markdoc-client-renderer.min.js",
         "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle > ./dist/markdoc-client-renderer.js",
@@ -11,15 +11,16 @@
     },
     "dependencies": {
         "js-yaml": "^4.1.0",
-        "rimraf": "^5.0.5",
         "markdoc-static-compiler": "file:../markdoc-static-compiler",
+        "rimraf": "^5.0.5",
         "zod": "^3.22.4"
     },
     "devDependencies": {
         "@types/js-yaml": "^4.0.9",
         "@types/node": "^20.11.30",
-        "typescript": "^5.4.3",
+        "@vitest/coverage-v8": "^2.0.2",
         "esbuild": "0.20.2",
-        "vitest": "^1.6.0"
+        "typescript": "^5.4.3",
+        "vitest": "^2.0.2"
     }
 }

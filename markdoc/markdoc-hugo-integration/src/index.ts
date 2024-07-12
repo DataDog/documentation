@@ -1,19 +1,19 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
-import { PrefOptionsConfig } from './prefs_processing/schemas/yaml/prefOptions';
+import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import {
   SitewidePrefIdsConfig,
   SitewidePrefIdsConfigSchema
-} from './prefs_processing/schemas/yaml/sitewidePrefs';
-import {
-  Frontmatter,
-  FrontmatterSchema
-} from './prefs_processing/schemas/yaml/frontMatter';
+} from './schemas/yaml/sitewidePrefs';
+import { Frontmatter, FrontmatterSchema } from './schemas/yaml/frontMatter';
 import MarkdocStaticCompiler, { Node } from 'markdoc-static-compiler';
-import { GLOBAL_PLACEHOLDER_REGEX } from './prefs_processing/schemas/regexes';
+import { GLOBAL_PLACEHOLDER_REGEX } from './schemas/regexes';
 import { validatePlaceholders } from './helpers/frontmatterValidation';
-import { loadPrefOptionsFromDir } from './helpers/configIngestion';
+import {
+  loadPrefOptionsFromDir,
+  loadSitewidePrefsConfigFromFile
+} from './helpers/configIngestion';
 
 const DEBUG_PATH = __dirname + '/../debug';
 
@@ -33,9 +33,7 @@ export class MarkdocToHugoCompiler {
     this.prefOptionsConfig = loadPrefOptionsFromDir(p.prefOptionsConfigDir);
 
     // ingest the list of valid sitewide preference names
-    this.sitewidePrefNames = this.#loadValidSitewidePrefNames(
-      p.sitewidePrefsFilepath
-    );
+    this.sitewidePrefNames = loadSitewidePrefsConfigFromFile(p.sitewidePrefsFilepath);
 
     // scan the provided content directory for markdoc files
     this.markdocFiles = findInDir(p.contentDir, /\.mdoc$/);
@@ -117,8 +115,7 @@ export class MarkdocToHugoCompiler {
 
       defaultValuesByPrefId[fmPrefConfig.identifier] =
         fmPrefConfig.default_value ||
-        prefOptionsConfig[optionsSetId].find((option) => option.default)!
-          .identifier;
+        prefOptionsConfig[optionsSetId].find((option) => option.default)!.identifier;
     }
 
     return defaultValuesByPrefId;
@@ -128,8 +125,7 @@ export class MarkdocToHugoCompiler {
     let partialPaths: string[] = [];
     if (node.tag === 'partial') {
       const filePathAnnotations = node.annotations.filter(
-        (annotation) =>
-          annotation.name === 'file' && annotation.type === 'attribute'
+        (annotation) => annotation.name === 'file' && annotation.type === 'attribute'
       );
       if (!filePathAnnotations) {
         throw new Error('Partial tag must have a file attribute');

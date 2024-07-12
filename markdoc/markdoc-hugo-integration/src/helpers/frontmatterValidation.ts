@@ -1,9 +1,6 @@
-import { Frontmatter } from '../prefs_processing/schemas/yaml/frontMatter';
-import { PrefOptionsConfig } from '../prefs_processing/schemas/yaml/prefOptions';
-import {
-  GLOBAL_PLACEHOLDER_REGEX,
-  PLACEHOLDER_REGEX
-} from '../prefs_processing/schemas/regexes';
+import { Frontmatter } from '../schemas/yaml/frontMatter';
+import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
+import { GLOBAL_PLACEHOLDER_REGEX, PLACEHOLDER_REGEX } from '../schemas/regexes';
 
 export function validatePlaceholders(
   frontmatter: Frontmatter,
@@ -58,13 +55,11 @@ export function validatePlaceholders(
           `Invalid options_source found in page_preferences: ${fmPrefConfig.options_source}`
         );
       }
-      validValuesByOptionsSetId[fmPrefConfig.options_source] =
-        prefOptionsConfig[fmPrefConfig.options_source].map(
-          (option) => option.identifier
-        );
+      validValuesByOptionsSetId[fmPrefConfig.options_source] = prefOptionsConfig[
+        fmPrefConfig.options_source
+      ].map((option) => option.identifier);
 
-      optionsSetIdsByPrefId[fmPrefConfig.identifier] =
-        fmPrefConfig.options_source;
+      optionsSetIdsByPrefId[fmPrefConfig.identifier] = fmPrefConfig.options_source;
       continue;
     }
 
@@ -93,9 +88,7 @@ export function validatePlaceholders(
           loopOver(arr.slice(1), str + (str === '' ? '' : '_') + v, final)
         );
       } else {
-        arr[0].forEach((v: string) =>
-          final.push(str + (str === '' ? '' : '_') + v)
-        );
+        arr[0].forEach((v: string) => final.push(str + (str === '' ? '' : '_') + v));
       }
       return final;
     };

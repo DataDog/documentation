@@ -7,16 +7,15 @@ const siteDir = VALID_EXAMPLE_SITE_DIR;
 describe('MarkdocToHugoCompiler', () => {
   const compiler = new MarkdocToHugoCompiler({
     prefOptionsConfigDir: siteDir + '/preferences_config/options',
-    sitewidePrefsFilepath:
-      siteDir + '/preferences_config/sitewide_preferences.yaml',
+    sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
     contentDir: siteDir + '/content',
     partialsDir: siteDir + '/partials'
   });
 
   test('ingests sitewide pref names', () => {
-    expect(
-      JSON.stringify(compiler.sitewidePrefNames, null, 2)
-    ).toMatchFileSnapshot(`${SNAPSHOTS_DIR}/sitewidePrefNames.snap.json`);
+    expect(JSON.stringify(compiler.sitewidePrefNames, null, 2)).toMatchFileSnapshot(
+      `${SNAPSHOTS_DIR}/sitewidePrefNames.snap.json`
+    );
   });
 
   test('detects Markdoc files', () => {
