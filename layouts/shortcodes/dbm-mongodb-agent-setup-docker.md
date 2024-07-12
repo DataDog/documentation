@@ -8,7 +8,7 @@ Add the configuration details for the MongoDB check from the previous step in th
 
 ```shell
 export DD_API_KEY=<DD_API_KEY>
-export DD_AGENT_VERSION=7.55.0-dbm-mongo-1.0
+export DD_AGENT_VERSION=7.56.0-dbm-mongo-1.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -19,13 +19,15 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
         "hosts": ["<HOST>:<PORT>"],
         "username": "datadog",
         "password": "<UNIQUE_PASSWORD>",
-        "database": "<DATABASE>",
         "options": {
           "authSource": "admin"
         },
         "dbm": true,
         "cluster_name": "<MONGO_CLUSTER_NAME>",
-        "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>"
+        "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>",
+        "database_autodiscovery": {
+          "enabled": true
+        }
       }]
     }
   }' \
