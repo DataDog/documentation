@@ -35,7 +35,16 @@ Security notification rules play a key role in keeping your team informed of iss
 
 To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes.
 
-As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
+As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Preview of matching results** panel. This can be useful in determining if the notification rule is too specific or broad.
+
+1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
+1. Specify a **Name** for the notification rule.
+1. Select the source type for the notification rule:
+    - A vulnerability represents a potential security flaw in your infrastructure.
+    - A threat (signal) represents suspicious activity that poses an active threat against your infrastructure.
+1. ...
+1. Click **Save**.
+
 
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
 2. Under **Source Types**, select the detection rule types you want to include in the notification rule.
