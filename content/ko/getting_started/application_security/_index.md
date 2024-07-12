@@ -14,12 +14,13 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여하여 보안 및 위협 탐지를 강화하세요.
-- link: /getting_started/application_security/vulnerability_management
+- link: /getting_started/application_security/software_composition_analysis
   tag: 가이드
-  text: 애플리케이션 취약성 관리 시작하기
+  text: 소프트웨어 구성 요소 분석 시작하기
 - link: https://securitylabs.datadoghq.com/
   tag: 보안 연구소
   text: Datadog의 보안 연구, 보고서, 팁 및 동영상
+kind: 설명서
 title: 애플리케이션 보안 관리 시작하기
 ---
 
@@ -32,13 +33,13 @@ Datadog 애플리케이션 보안 관리(ASM)는 운영 중인 웹 애플리케�
 ## 보안 위험이 있는 서비스 식별
 
 
-**ASM에게 이로운 공격에 취약하거나 노출된 서비스**를 파악하고 [ASM 설치 페이지][1]로 이동하여 권장 서비스를 선택합니다.
+ASM을 활용할 수 있는 **취약하거나 공격에 노출된 서비스를 식별합니다**. 그런 다음 [**Service Catalog > Security 페이지**][1]에서 사용하려는 서비스를 선택합니다.
 
-{{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="취약점을 표시하고 의심스러운 요청 열을 기준으로 정렬된 ASM 서비스 페이지 보기." style="width:100%;" >}}
 
 이러한 보안 인사이트는 APM에 의해 보고된 데이터에서 감지됩니다. 이러한 인사이트는 보안을 우선순위로 정하는 데 도움이 됩니다. ASM은 서비스에 대한 모든 보안 위험을 파악하고 우선순위를 지정하여 해결하는 데 도움이 됩니다.
 
-**참고**: 취약성이나 의심스러운 요청이 보고되지 않으면 서비스가 최신 Datadog 추적 라이브러리 버전을 사용하고 있는지 확인하세요. [애플리케이션 성능 모니터링(APM) 서비스 카탈로그][2]에서 서비스의 사이드 패널을 열고 **추적 설정**을 확인하세요.
+**참고**: 취약점이나 의심스러운 요청이 보고되지 않은 경우 서비스가 최신 Datadog 추적 라이브러리 버전을 사용하고 있는지 확인하세요. [Security Service Catalog][2]에서 서비스의 사이드 패널을 열고 **Tracing Configuration**을 살펴보세요.
 
 
 {{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Service Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
@@ -48,14 +49,17 @@ Datadog 애플리케이션 보안 관리(ASM)는 운영 중인 웹 애플리케�
 
 ### 인앱 지침으로 ASM 사용
 
-[ASM 설치페이지][1]로 이동하여 지침서에 따라 시작합니다. 여기에는 다음이 포함됩니다:
+[ASM 랜딩 페이지][18]의 지침에 따라 시작하세요. 여기에는 다음이 포함됩니다.
 - ASM의 혜택을 받을 수 있는 서비스를 안내합니다.
 - 환경 변수로 Datadog 추적 라이브러리를 설정합니다.
 - 서비스를 재시작합니다.</br>
 
-1. [ASM으로 이동][18]하여 **Get Started with ASM**을 클릭합니다.
-2. Datadog이 권장하는 위험에 노출된 서비스를 선택합니다.
+1. **Get Started with ASM**을 클릭합니다.
+2. **Get Started** 를 선택하면 오픈 소스 라이브러리의 취약성을 감지하고(Software Composition Analysis), 코드 수준 취약성을 찾아 수정하며 (Code Security), 서비스에서 위협 감지를 찾아 활성화할 수 있습니다(Threat Management).
 3. 지침에 따라 ASM을 시작합니다.
+
+   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis 설정 페이지" style="width:100%;" >}}
+
 
 ### 원격 설정으로 ASM 사용
 #### 요구 사항:
@@ -100,7 +104,7 @@ ASM이 활성화되면 애플리케이션 취약성을 즉시 파악하고 서�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/asm/services-setup/services-selection?services=recommended
+[1]: https://app.datadoghq.com/services?&lens=Security
 [2]: https://app.datadoghq.com/services?hostGroup=%2A&lens=Security
 [3]: /ko/security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /ko/security/application_security/how-appsec-works/
