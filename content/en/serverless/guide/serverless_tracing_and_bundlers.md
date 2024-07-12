@@ -198,6 +198,41 @@ The `NodeJsFunction` construct in the AWS CDK uses esbuild. The default configur
     });
     ```
 
+## AWS CDK with JS
+
+If you deploy NodeJS Lambda functions using the `NodeJsFunction` construct, but aren't using `esbuild` or Typescript you can still use Datadog to observe your serverless applications.
+
+1. Follow the installation instructions for Node.js and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
+2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda Layer.
+3. Use the `NodejsFunction` construct in the CDK. Ensure you set the `entry` property to be the path to the `Javascript` file containing your Lambda function handler, the `depsLockFilePath` to the path to your lock file for the package manager you are using and the `bundling.commandHooks.beforeBundling` to ensure all dependencies are installed.
+   
+   **lambdaFunction.ts**
+    ```typescript    
+    const nodeFunction = new NodejsFunction(this, "test", {
+      runtime: Runtime.NODEJS_20_X,
+      entry: './functions/consumer/index.js', // The Javascript file for your Lambda function handler
+      handler: 'handler',
+      depsLockFilePath: './package-lock.json', // The path to the lock file for your respective package manager (npm, yarn etc)
+      bundling: {
+        commandHooks: {
+          beforeBundling(inputDir: string, outputDir: string) {
+            return [
+              `cd ${inputDir}`,
+              'npm install', // Ensure all dependencies are installed before your Javascript file is zipped and deployed
+            ]
+          },
+          beforeInstall() {
+            return []
+          },
+          afterBundling() {
+            return []
+          }
+        },
+        externalModules: ['@aws-sdk/client-dynamodb'] // The AWS SDK is included as part of the NodeJS Lambda runtime
+      }
+    });
+    ```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
