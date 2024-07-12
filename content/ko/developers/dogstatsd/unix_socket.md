@@ -9,6 +9,7 @@ further_reading:
 - link: developers/libraries
   tag: 설명서
   text: 공식 및 커뮤니티에서 생성한 API 및 DogStatsD 클라이언트 라이브러리
+kind: 설명서
 title: 유닉스 도메인 소켓을 통한 DogStatsD
 ---
 
@@ -24,12 +25,12 @@ UDP는 `localhost`에서 잘 작동하지만 컨테이너화된 환경에서는 
 
 유닉스 도메인 소켓은 연결을 설정하기 위해 `IP:port` 페어을 사용하는 대신 플레이스홀더 소켓 파일을 사용합니다. 연결이 열리면 데이터는 UDP 트랜스포트와 동일한 [데이터그램 형식][1]으로 전송됩니다. 에이전트가 다시 시작되면 기존 소켓이 삭제되고 새 소켓으로 대체됩니다. 클라이언트 라이브러리는 이 변경 사항을 감지하고 새 소켓에 원활하게 연결합니다.
 
-**참조**:
+**참고**:
 
 * 설계상 UDS 트래픽은 호스트에 로컬이므로, 메트릭을 전송하는 모든 호스트에서 Datadog 에이전트가 실행되어야 합니다.
 * Windows에서는 UDS가 지원되지 않습니다.
 
-## 구성
+## 설정
 
 유닉스 도메인 소켓으로 DogStatsD를 설정하려면 `dogstatsd_socket` 매개 변수를 통해 DogStatsD 서버를 활성화합니다. 그런 다음 코드에서 [DogStatsD 클라이언트](#dogstatsd-client-configuration)를 설정합니다.
 
@@ -38,23 +39,32 @@ UDP는 `localhost`에서 잘 작동하지만 컨테이너화된 환경에서는 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. [에이전트의 기본 설정 파일][1]을 편집하여 `dogstatsd_socket`를 DogStatsD가 수신 소켓을 생성하는 경로로 설정합니다:
+1. 리스닝 소켓으로 사용할 DogStatsD 소켓 파일을 생성합니다. 예를 들면 다음과 같습니다.
+   ```shell
+   sudo mkdir -p /var/run/datadog/
+   ```
+1. `dd-agent` 사용자에게 다음 소켓 파일 읽기 및 쓰기 권한이 있는지 확인하세요.
+   ```shell
+   sudo chown dd-agent:dd-agent /var/run/datadog/
+   ```
+1. 다음 [에이전트의 기본 설정 파일][1]을 편집합니다.
+   1. `use_dogstatsd`를 `true`로 설정합니다.
+   1. `dogstatsd_socket`를 DogStatsD가 리스닝 소켓을 생성하는 경로로 설정합니다.
 
-    ```yaml
-    ## @param dogstatsd_socket - string - optional - default: ""
-    ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
-    ## Set to a valid and existing filesystem path to enable.
-    #
-    dogstatsd_socket: '/var/run/datadog/dsd.socket'
-    ```
+      ```yaml
+      ## @param dogstatsd_socket - string - optional - default: ""
+      ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
+      ## Set to a valid and existing filesystem path to enable.
+      #
+      dogstatsd_socket: '/var/run/datadog/dsd.socket'
+      ```
+1. [에이전트를 재시작합니다][2].
 
-2. [에이전트를 재시작합니다][2].
 
-
-[1]: /ko/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ko/agent/guide/agent-commands/
+[1]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /ko/agent/configuration/agent-commands/
 {{% /tab %}}
-{{% tab "도커(Docker)" %}}
+{{% tab "Docker" %}}
 
 1. 에이전트 컨테이너에서 `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` 환경 변수를 사용하여 소켓 경로를 설정합니다.
 
@@ -131,7 +141,7 @@ UDP는 `localhost`에서 잘 작동하지만 컨테이너화된 환경에서는 
               readOnly: true
         ```
 
-      **참고**: 애플리케이션 컨테이너에 소켓에 대한 쓰기 권한이 필요한 경우 `readOnly: true`를 제거합니다.
+      **참고**: 애플리케이션 컨테이너에서 소켓에 대한 쓰기 권한이 필요한 경우 `readOnly: true`를 제거합니다.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -185,11 +195,11 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 3. [에이전트를 재시작합니다][3].
 
 
-[1]: /ko/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /ko/getting_started/tagging/assigning_tags/#environment-variables
-[3]: /ko/agent/guide/agent-commands/
+[3]: /ko/agent/configuration/agent-commands/
 {{% /tab %}}
-{{% tab "도커(Docker)" %}}
+{{% tab "Docker" %}}
 
 1. 에이전트 컨테이너에 `DD_DOGSTATSD_ORIGIN_DETECTION=true` 환경 변수를 설정합니다.
 
@@ -280,9 +290,9 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 | 언어 | 라이브러리                              |
 | -------- | ------------------------------------ |
 | Golang   | [DataDog/datadog-go][3]              |
-| Java     | [DataDog/java-dogstatsd-client][4]   |
+| 자바(Java)     | [DataDog/java-dogstatsd-client][4]   |
 | 파이썬(Python)   | [DataDog/datadogpy][5]               |
-| Ruby     | [DataDog/dogstatsd-ruby][6]          |
+| 루비(Ruby)     | [DataDog/dogstatsd-ruby][6]          |
 | PHP      | [DataDog/php-datadogstatsd][7]       |
 | C#       | [DataDog/dogstatsd-csharp-client][8] |
 
