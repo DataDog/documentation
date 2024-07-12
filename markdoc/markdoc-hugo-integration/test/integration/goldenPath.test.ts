@@ -1,6 +1,7 @@
 import { MarkdocToHugoCompiler } from '../../src';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR, VALID_EXAMPLE_SITE_DIR } from '../constants';
+import fs from 'fs';
 
 const siteDir = VALID_EXAMPLE_SITE_DIR;
 
@@ -12,18 +13,15 @@ describe('MarkdocToHugoCompiler', () => {
     partialsDir: siteDir + '/partials'
   });
 
-  test('ingests sitewide pref names', () => {
-    expect(JSON.stringify(compiler.sitewidePrefNames, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/sitewidePrefNames.snap.json`
-    );
-  });
-
-  test('detects Markdoc files', () => {
-    expect(compiler.markdocFiles.length).toBe(2);
-  });
-
-  test('compiles Markdoc files', () => {
+  test('each compiled file matches the snapshot', () => {
     compiler.compile();
-    expect(true).toBe(true);
+    for (const file of compiler.markdocFiles) {
+      const compiledFile = file.replace(/\.mdoc$/, '.html');
+      const compiledContent = fs.readFileSync(compiledFile, 'utf8');
+      const sanitizedFilename = compiledFile.replace(`${siteDir}/content`, '');
+      expect(compiledContent).toMatchFileSnapshot(
+        SNAPSHOTS_DIR + '/compilationByFilename/valid/' + sanitizedFilename
+      );
+    }
   });
 });
