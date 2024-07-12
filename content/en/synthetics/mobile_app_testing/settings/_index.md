@@ -1,6 +1,5 @@
 ---
 title: Mobile Application Testing Settings
-kind: documentation
 is_beta: true
 aliases:
 - /mobile_testing/settings
@@ -14,14 +13,6 @@ further_reading:
   text: "Run your Synthetic tests in a CI pipeline"
 ---
 {{< jqmath-vanilla >}}
-
-{{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
@@ -68,6 +59,8 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 {{< /tabs >}}
 
 To edit or delete a mobile application, hover over a mobile application in the **Mobile Applications List** and click on the respective icon.
+
+**Note**: Mobile Application Testing does not provide full support for Flutter applications.
 
 ## Manage application versions
 

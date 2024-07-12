@@ -1,6 +1,5 @@
 ---
 title: Tracking User Actions
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
@@ -32,7 +31,7 @@ You can accomplish the following objectives:
 
 The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained in your pages may be included to identify elements that a user interacted with.
 
-To control which information is sent to Datadog, [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
+To control which information is sent to Datadog, you can [mask action names with privacy options][6], [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
 
 ## Track user interactions
 
@@ -124,3 +123,4 @@ For more information, see [Send Custom Actions][5].
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /real_user_monitoring/guide/send-rum-custom-actions
+[6]: /real_user_monitoring/session_replay/privacy_options#mask-action-names

@@ -1,6 +1,6 @@
 ---
 title: Datadog Data Collection, Resolution, and Retention
-kind: guide
+
 disable_sidebar: true
 aliases:
   - /developers/faq/data-collection-resolution-retention/
@@ -8,7 +8,7 @@ algolia:
   tags: ['data retention']
 ---
 
-Find below a summary of Datadog data collection, resolution, and retention:
+Find below a summary of Datadog data [collection][6], [resolution][5], and retention:
 
 | Product category                    | Source                                           | Collection Methods                                                                                                                    | Collection interval                                                                            | Minimum Resolution    | Default Retention                                                                                                              |
 |-------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------|
@@ -63,3 +63,5 @@ Find below a summary of Datadog data collection, resolution, and retention:
 [2]: /integrations/guide/cloud-metric-delay/#faster-metrics
 [3]: /continuous_testing/cicd_integrations#use-the-api
 [4]: /continuous_testing/cicd_integrations#use-the-cli
+[5]: /glossary/#minimum-resolution
+[6]: /glossary/#collection-interval

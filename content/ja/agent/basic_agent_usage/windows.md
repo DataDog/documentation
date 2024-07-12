@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/guide/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: Windows
 title: Windows 用 Agent の基本的な使用方法
 ---
@@ -434,7 +433,7 @@ process_config:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-[2]: /ja/agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
+[2]: /ja/agent/supported_platforms/?tab=windows
 [3]: /ja/agent/faq/windows-agent-ddagent-user/
 [4]: /ja/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /ja/agent/faq/windows-agent-ddagent-user/#domain-controllers

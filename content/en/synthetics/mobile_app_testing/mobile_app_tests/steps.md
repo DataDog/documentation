@@ -1,6 +1,5 @@
 ---
 title: Mobile App Testing Steps
-kind: documentation
 description: Learn how to automatically record and manually set steps in a mobile test recording.
 aliases:
 - /mobile_testing/mobile_app_tests/steps
@@ -13,14 +12,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about advanced options in mobile tests"
 ---
-
-{{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>

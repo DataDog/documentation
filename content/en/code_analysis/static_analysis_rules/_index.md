@@ -1,13 +1,11 @@
 ---
 title: Static Analysis Rules
-kind: documentation
 description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
 is_beta: true
 type: static-analysis
-
 rulesets:
   csharp-best-practices:
     title: "Best Practices for C#"
@@ -218,7 +216,6 @@ cascade:
     link:
       name: Datadog Code Analysis
       url: https://www.datadoghq.com/code-analysis/
-
 
 further_reading:
   - link: "/code_analysis/"

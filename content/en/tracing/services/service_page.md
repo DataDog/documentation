@@ -1,6 +1,5 @@
 ---
 title: Service Page
-kind: documentation
 aliases:
 - /tracing/visualization/service/
 further_reading:
@@ -26,7 +25,7 @@ algolia:
   tags: ['service page']
 ---
 
-{{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:100%;">}}
+{{< img src="tracing/visualization/service/overview_service_page_1.png" alt="Detailed service page" style="width:100%;">}}
 
 ## Overview
 
@@ -41,14 +40,14 @@ Consult on this page:
 * [Dependencies](#dependencies)
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
-* [Additional tabs](#additional-tabs)
+* [Additional sections](#additional-sections)
     *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
- 
+
 ## Service health
 
-{{< callout header="Opt in to the private beta!" url="https://docs.google.com/forms/d/1KsC7DPKBJ3K0wP67fK50JhRRX-CseP4FUrFrOvCYbQM/viewform?edit_requested=true" >}}
+{{< callout header="Opt in to the private beta!" url="https://www.datadoghq.com/private-beta/service-health/" >}}
   Service health is in private beta. To request access, complete the form.
-{{< /callout >}} 
+{{< /callout >}}
 
 The **Service Health** panel provides a real-time summary of service signals to help you understand if a service needs your attention.
 
@@ -64,16 +63,16 @@ To access service health:
 
 The Service Health panel displays the status of your service as *Ok*, *Warning*, or *Alert* if at least one of the following conditions is met:
 
-|   Status    |                         Condition                          |   
+|   Status    |                         Condition                          |
 |-------------|------------------------------------------------------------|
-|  **Alert**  | **Monitors**: <br>- A non-muted alerting P1 monitor is triggered.<br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |  
+|  **Alert**  | **Monitors**: <br>- A non-muted alerting P1 monitor is triggered.<br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |
 | **Warning** | **Monitors**: <br>- A non-muted alerting P2 monitor is triggered.<br>- A non-muted warning P1 monitor is triggered.<br>- A non-muted warning monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is in a stable state.<br><br>**Watchdog Insights**: <br>- An ongoing log anomaly alert is active.<br><br>**Error Tracking Issues**: <br>- A new issue (within 48 hours) requires review. |                                                                                                                                                                                                   |
 |   **Ok**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
 
 ## Service monitor
 
 The Service monitor panel surfaces active Monitors and Synthetics tests linked to your service.
-Datadog also proposes a list of monitors depending on your service type: 
+Datadog also proposes a list of monitors depending on your service type:
 
 {{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" style="width:90%;">}}
 
@@ -83,13 +82,13 @@ Enable them directly or create your own [APM monitors][3].
 
 ## Watchdog Insights
 
-The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Logs Explorer][19]. 
+The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Logs Explorer][19].
 
-{{< img src="tracing/visualization/service/cross-product-insight.jpg" alt="Watchdog Insights" style="width:100%;">}}
+{{< img src="tracing/visualization/service/cross_product_insight_1.jpg" alt="Watchdog Insights" style="width:100%;">}}
 
 Click on an insight to see more details, such as the time frame of the insight, related logs or traces, and suggested next steps.
 
-{{< img src="tracing/visualization/service/watchdog-details.jpg" alt="Watchdog Insights details" style="width:100%;">}}
+{{< img src="tracing/visualization/service/watchdog_details_1.jpg" alt="Watchdog Insights details" style="width:100%;">}}
 
 ## Summary cards
 
@@ -120,9 +119,9 @@ Datadog provides [out-of-the-box graphs][8] for any given Service:
 * Dependency Map:
     * The **Dependency Map** showing upstream and downstream services.
 * **Sub-services**: When there are multiple services involved, a fourth graph (in the same toggle option as the Dependency Map) breaks down your **%of time spent** of your service by *services* or *type*.
-    
+
     This represents the relative time spent by traces in downstream services from the current service to the other *services* or *type*.
-    
+
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 [Watchdog][7] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
 
@@ -136,11 +135,11 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 ## Resources
 
-See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1]. 
+See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1].
 
 Below, there's a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
-{{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources" style="width:100%;">}}
+{{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 
 Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the **Resources** list and compare resources in a service. To view the full resource page, click **Open Full Page**.
 
@@ -159,7 +158,7 @@ Choose what to display in your resources list:
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-## Additional Tabs
+## Additional sections
 
 ### Deployments
 A service configured with version tags will show versions in the Deployment tab. The version section shows all versions of the service that were active during the selected time interval, with active versions at the top.
@@ -182,7 +181,7 @@ You can add columns to or remove columns from this overview table and your selec
 * Total number of Errors.
 * Latency measured by p50, p75, p90, p95, p99, or max.
 
-{{< img src="tracing/visualization/service/deployments.png" alt="Deployments" style="width:90%;">}}
+{{< img src="tracing/visualization/service/deployments_1.png" alt="Deployments" style="width:90%;">}}
 
 Read more about Deployments [on the service page][12].
 
@@ -191,38 +190,38 @@ View issues on your service, which are similar errors aggregated together to tur
 
 This tab has overview graphs that show which resources have the most issues and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
-{{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking tab" style="width:90%;">}}
+{{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking tab" style="width:90%;">}}
 
 ### Security
 Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
 
-The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user). 
+The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user).
 
 The next section of the panel lists all the vulnerabilities and signals concerning the service. Click on a security vulnerability to open a side panel with relevant details to investigate further and remediate the vulnerability. Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
 
-{{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
+{{< img src="tracing/visualization/service/security_tab_1.jpg" alt="Security" style="width:90%;">}}
 
 ### Databases
 View the list of downstream database dependencies identified by Database Monitoring and identify latency or load outliers.
 [Learn more about connecting DBM and APM][21].
 
-{{< img src="tracing/visualization/service/databases_tab.png" alt="Databases" style="width:90%;">}}
+{{< img src="tracing/visualization/service/databases_tab_1.png" alt="Databases" style="width:90%;">}}
 
 ### Infrastructure
-If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance. 
+If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance.
 
 {{< img src="tracing/visualization/service/infra_pods.png" alt="Kubernetes Pods" style="width:90%;">}}
 
 The Kubernetes Metrics section contains a high level summary of your infrastructure health for the selected time period, and includes CPU, Memory, Network, and Disk metrics.
 
-{{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes Metrics" style="width:90%;">}}
+{{< img src="tracing/visualization/service/infra_metrics_1.png" alt="Kubernetes Metrics" style="width:90%;">}}
 
 For non-Kubernetes environments (such as host-based installation), see the [Unified Service Tagging documentation][13].
 
 ### Runtime Metrics
 If runtime metrics are enabled in the tracing client, you'll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][14].
 
-{{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics" style="width:90%;">}}
+{{< img src="tracing/visualization/service/runtime_metrics_1.png" alt="Runtime Metrics" style="width:90%;">}}
 
 ### Profiling
 You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service.
@@ -235,23 +234,23 @@ In this example, you can see how latency is linked to a lock contention increase
 Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
 ```
 
-{{< img src="profiler/apm_service_page_pivot_to_contention_comparison.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
 ### Traces
 View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
-{{< img src="tracing/visualization/service/traces.png" alt="Traces" style="width:90%;">}}
+{{< img src="tracing/visualization/service/traces_1.png" alt="Traces" style="width:90%;">}}
 
 ### Log patterns
 View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log patterns][17].
 
-{{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns" style="width:90%;">}}
+{{< img src="tracing/visualization/service/log_patterns_1.png" alt="Log patterns" style="width:90%;">}}
 
 ### Costs
 Visualize the cost associate with your service's infrastructure used in the Costs tab.
 [Learn More about Cloud Cost Management][22].
 
-{{< img src="tracing/visualization/service/costs_tab.png" alt="Costs" style="width:90%;">}}
+{{< img src="tracing/visualization/service/costs_tab_1.png" alt="Costs" style="width:90%;">}}
 
 ## Further Reading
 

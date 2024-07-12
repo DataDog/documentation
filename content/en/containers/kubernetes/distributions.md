@@ -1,6 +1,5 @@
 ---
 title: Kubernetes distributions
-kind: documentation
 aliases:
 - /agent/kubernetes/distributions
 further_reading:
@@ -47,24 +46,9 @@ No specific configuration is required.
 If you are using AWS Bottlerocket OS on your nodes, add the following to enable container monitoring (`containerd` check):
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-    value: "containerd"
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-In an EKS cluster, you can install the Operator using [Helm][5] or as an [EKS add-on][6].
+In an EKS cluster, you can install the Operator using [Helm][1] or as an [EKS add-on][2].
 
 The configuration below is meant to work with either setup (Helm or EKS add-on) when the Agent is installed in the same namespace as the Datadog Operator.
 
@@ -91,7 +75,26 @@ spec:
         name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
+[1]:/containers/kubernetes/installation/?tab=datadogoperator
+[2]: /agent/guide/operator-eks-addon
+
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  criSocketPath: /run/dockershim.sock
+  env:
+    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+      value: "containerd"
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Azure Kubernetes Service (AKS) {#AKS}
@@ -99,27 +102,7 @@ spec:
 AKS requires a specific configuration for the `Kubelet` integration due to how AKS has setup the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  # Required as of Agent 7.35. See Kubelet Certificate note below.
-  kubelet:
-    tlsVerify: false
-
-providers:
-  aks:
-    enabled: true
-```
-
-The `providers.aks.enabled` option sets the necessary environment variable `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` for you.
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -148,6 +131,27 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  # Required as of Agent 7.35. See Kubelet Certificate note below.
+  kubelet:
+    tlsVerify: false
+
+providers:
+  aks:
+    enabled: true
+```
+
+The `providers.aks.enabled` option sets the necessary environment variable `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` for you.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERIFY=false` for you to deactivate verification of the server certificate.
@@ -159,29 +163,7 @@ There is a known issue with the format of the AKS Kubelet certificate in older n
 If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  # Requires supported node image version
-  kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-
-providers:
-  aks:
-    enabled: true
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -210,6 +192,28 @@ spec:
           env:
             - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
               value: "true"
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  # Requires supported node image version
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+
+providers:
+  aks:
+    enabled: true
 ```
 
 {{% /tab %}}
@@ -242,7 +246,7 @@ Datadog recommends that you specify resource limits for the Agent container. Aut
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Custom `values.yaml`:
+Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -340,42 +344,7 @@ OpenShift comes with hardened security by default (SELinux, SecurityContextConst
 This configuration supports OpenShift 3.11 and OpenShift 4, but works best with OpenShift 4.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  criSocketPath: /var/run/crio/crio.sock
-  # Depending on your DNS/SSL setup, it might not be possible to verify the Kubelet cert properly
-  # If you have proper CA, you can switch it to true
-  kubelet:
-    tlsVerify: false
-agents:
-  podSecurity:
-    securityContextConstraints:
-      create: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/master
-    operator: Exists
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/infra
-    operator: Exists
-clusterAgent:
-  podSecurity:
-    securityContextConstraints:
-      create: true
-kube-state-metrics:
-  securityContext:
-    enabled: false
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 When using the Datadog Operator in OpenShift, it is recommended that you install it through OperatorHub or RedHat Marketplace.
 The configuration below is meant to work with this setup (due to SCC/ServiceAccount setup), when the
@@ -447,38 +416,52 @@ spec:
 **Note**: The nodeAgent Security Context override is necessary for Log Collection and APM Trace Collection with the `/var/run/datadog/apm/apm.socket` socket. If these features are not enabled, you can omit this override.
 
 {{% /tab %}}
-{{< /tabs >}}
-
-## Rancher {#Rancher}
-
-Rancher installations are close to vanilla Kubernetes, requiring only some minor configuration:
-- Tolerations are required to schedule the Node Agent on `controlplane` and `etcd` nodes
-- Cluster name should be set as it cannot be retrieved automatically from cloud provider
-
-{{< tabs >}}
 {{% tab "Helm" %}}
 
-Custom `values.yaml`:
+Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   clusterName: <CLUSTER_NAME>
+  criSocketPath: /var/run/crio/crio.sock
+  # Depending on your DNS/SSL setup, it might not be possible to verify the Kubelet cert properly
+  # If you have proper CA, you can switch it to true
   kubelet:
     tlsVerify: false
 agents:
+  podSecurity:
+    securityContextConstraints:
+      create: true
   tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/master
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/infra
+      operator: Exists
+clusterAgent:
+  podSecurity:
+    securityContextConstraints:
+      create: true
+kube-state-metrics:
+  securityContext:
+    enabled: false
 ```
 
 {{% /tab %}}
-{{% tab "Operator" %}}
+
+{{< /tabs >}}
+
+## Rancher {#Rancher}
+
+Rancher installations are similar to vanilla Kubernetes installations, requiring only some minor configuration:
+- Tolerations are required to schedule the Node Agent on `controlplane` and `etcd` nodes.
+- The cluster name should be set as it cannot be retrieved automatically from the cloud provider.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -532,6 +515,29 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Oracle Container Engine for Kubernetes (OKE) {#OKE}
@@ -541,22 +547,7 @@ No specific configuration is required.
 To enable container monitoring, add the following (`containerd` check):
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-    value: "containerd"
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -584,10 +575,26 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  criSocketPath: /run/dockershim.sock
+  env:
+    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+      value: "containerd"
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-More `values.yaml` examples can be found in the [Helm chart repository][3]
-More `DatadogAgent` examples can be found in the [Datadog Operator repository][4]
+More `datadog-values.yaml` examples can be found in the [Helm chart repository][3].
+More `datadog-agent.yaml` examples can be found in the [Datadog Operator repository][4].
 
 ## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 
@@ -595,31 +602,7 @@ TKG requires some small configuration changes, shown below. For example, setting
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Custom `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  kubelet:
-    # Set tlsVerify to false since the Kubelet certificates are self-signed
-    tlsVerify: false
-  # Disable the `kube-state-metrics` dependency chart installation.
-  kubeStateMetricsEnabled: false
-  # Enable the new `kubernetes_state_core` check.
-  kubeStateMetricsCore:
-    enabled: true
-# Add a toleration so that the agent can be scheduled on the control plane nodes.
-agents:
-  tolerations:
-    - key: node-role.kubernetes.io/master
-      effect: NoSchedule
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -652,6 +635,31 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    # Set tlsVerify to false since the Kubelet certificates are self-signed
+    tlsVerify: false
+  # Disable the `kube-state-metrics` dependency chart installation.
+  kubeStateMetricsEnabled: false
+  # Enable the new `kubernetes_state_core` check.
+  kubeStateMetricsCore:
+    enabled: true
+# Add a toleration so that the agent can be scheduled on the control plane nodes.
+agents:
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      effect: NoSchedule
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 

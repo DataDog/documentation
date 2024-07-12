@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a CircleCI Workflow
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/circleci
 further_reading:
@@ -24,7 +23,7 @@ further_reading:
 
 ## Overview
 
-[CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale. 
+[CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale.
 
 Set up tracing on CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
 
@@ -89,6 +88,8 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 ### Enable log collection
 
 The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog.
+
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
 
 To install and configure this integration, follow the [CircleCI setup guide][11].
 

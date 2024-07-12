@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Guide d'utilisation avancée du tagging unifié
 ---
 

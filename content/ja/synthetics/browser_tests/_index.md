@@ -22,7 +22,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Terraform による Synthetic ブラウザテストの作成と管理
-kind: ドキュメント
 title: ブラウザテスト
 ---
 

@@ -2,7 +2,6 @@
 aliases:
 - /ko/graphing/widgets/event_timeline/
 description: 이벤트 스트림 타임라인을 위젯에 표시합니다.
-kind: 설명서
 private: true
 title: 이벤트 타임라인 위젯
 ---

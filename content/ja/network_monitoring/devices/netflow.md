@@ -10,7 +10,6 @@ further_reading:
   tag: ブログ
   text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
 is_beta: true
-kind: documentation
 title: NetFlow Monitoring
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Serverless Monitoring for AWS Step Functions
-kind: documentation
 ---
 
 ## I cannot see any traces

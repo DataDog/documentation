@@ -13,7 +13,6 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentation
   text: ブラウザテストを作成する
-kind: ガイド
 title: 推定使用量メトリクスを使用する
 ---
 

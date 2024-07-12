@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/faq/content_security_policy/
   tag: 설명서
   text: 콘텐츠 보안 정책
-kind: 설명서
 title: 트러블슈팅
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a GitLab Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
@@ -29,6 +28,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
+| [Running pipelines][25] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Partial retries][20] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][21] | Manual steps | View manually triggered pipelines. |
 | [Queue time][22] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -36,9 +36,10 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
-| [Parameters][17] | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
+| Parameters | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
 | [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
+| [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
 
 The following GitLab versions are supported:
 
@@ -188,9 +189,14 @@ These filters can also be applied through the facet panel on the left hand side 
 
 ### Correlate infrastructure metrics to jobs
 
-If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
-For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
-[registering a new runner][6]. For existing runners:
+If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them. Datadog infrastructure correlation is possible using different methods:
+
+#### Tagging runners with hostname
+
+The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job. This excludes executors that are autoscaling the infrastructure in order to run the job
+(such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
+
+For existing runners:
 
 {{< tabs >}}
 {{% tab "GitLab &gt;&equals; 15.8" %}}
@@ -206,8 +212,12 @@ through the UI by going to **Settings > CI/CD > Runners** and editing the approp
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
 view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
+#### Instance and Docker Autoscaler executors
 CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
 
+#### Other executors
+
+CI Visibility does not support Infrastructure metrics for other executors such as the Kubernetes executor.
 
 ### View error messages for pipeline failures
 
@@ -264,6 +274,8 @@ The following GitLab versions support collecting job logs:
 * GitLab >= 14.8 (self-hosted) by enabling the `datadog_integration_logs_collection` feature flag
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
+
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations</a>.</div>
 
 Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
@@ -329,3 +341,5 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [21]: /glossary/#manual-step
 [22]: /glossary/#queue-time
 [23]: /glossary/#approval-wait-time
+[24]: /glossary/#pipeline-execution-time
+[25]: /glossary/#running-pipeline

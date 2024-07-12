@@ -7,7 +7,7 @@ further_reading:
   tag: Blog
   text: Utiliser la solution Session Replay de Datadog pour visualiser en temps réel
     les parcours utilisateur
-kind: guide
+
 title: Mettre à jour le SDK RUM Browser
 ---
 

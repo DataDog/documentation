@@ -1,6 +1,5 @@
 ---
 title: Burn Rate Alerts
-kind: documentation
 description: "Use Monitors to alert off of the burn rate of an SLO"
 aliases:
 - /monitors/service_level_objectives/burn_rate/

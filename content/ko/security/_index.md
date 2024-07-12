@@ -53,7 +53,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadogs-approach-devsecops/
   tag: 블로그
   text: DevSecOps에 대한 Datadog 접근 방식
-kind: 설명서
 title: Datadog 보안
 ---
 

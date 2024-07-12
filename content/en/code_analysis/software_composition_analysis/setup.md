@@ -1,6 +1,5 @@
 ---
 title: Setting Up Software Composition Analysis
-kind: documentation
 description: Learn how to set up Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 is_beta: true
 further_reading:
@@ -19,6 +18,8 @@ further_reading:
 - link: "/code_analysis/static_analysis/"
   tag: "Documentation"
   text: "Learn about Static Analysis"
+algolia:
+  tags: ['software composition analysis', 'software composition analysis rules', 'library vulnerabilities', 'SCA']
 ---
 
 {{% site-region region="gov" %}}

@@ -1,6 +1,5 @@
 ---
 title: Getting Started with AWS
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
@@ -69,6 +68,7 @@ Before getting started, ensure you have the following prerequisites:
     * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
+    * iam:TagRole
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
@@ -97,6 +97,7 @@ Before getting started, ensure you have the following prerequisites:
     * s3:PutBucketPolicy
     * s3:PutBucketPublicAccessBlock
     * s3:PutEncryptionConfiguration
+    * s3:PutLifecycleConfiguration
     * secretsmanager:CreateSecret
     * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue

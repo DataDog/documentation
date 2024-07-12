@@ -1,6 +1,5 @@
 ---
 title: Static Analysis Setup
-kind: documentation
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
@@ -13,6 +12,8 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
+algolia:
+  tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
 ---
 
 {{% site-region region="gov" %}}

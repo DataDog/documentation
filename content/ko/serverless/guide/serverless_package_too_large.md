@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: 설명서
   text: Node.js 애플리케이션 계측
-kind: 설명서
 title: 서버리스 패키지가 너무 큰 오류 문제 해결
 ---
 

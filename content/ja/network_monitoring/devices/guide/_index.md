@@ -1,6 +1,5 @@
 ---
 title: NDM ガイド
-kind: ガイド
 private: true
 disable_sidebar: true
 aliases:

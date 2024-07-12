@@ -1,6 +1,5 @@
 ---
 title: Deployment  Tracking
-kind: documentation
 description: 'Use Datadog to track your deployments through version tags'
 aliases:
     - /tracing/version_tracking

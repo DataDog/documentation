@@ -1,6 +1,6 @@
 ---
 title: Datadog Source Code Integration
-kind: guide
+
 description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed git information into artifacts in your CI pipeline, and use the GitHub integration to generate inline code snippets."
 further_reading:
 - link: "/integrations/github/"
@@ -27,6 +27,9 @@ further_reading:
 - link: "/logs/error_tracking/"
   tag: "Documentation"
   text: "Learn about Error Tracking for logs"
+- link: "https://www.datadoghq.com/blog/live-debugging/"
+  tag:  "Blog"
+  text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
 
 ## Overview
@@ -355,6 +358,7 @@ The source code integration supports the following Git providers:
 | GitLab SaaS (gitlab.com) | Yes | Yes |
 | GitLab self-managed | Yes | No |
 | Bitbucket | Yes | No |
+| Azure DevOps Services | Yes | No |
 | Azure DevOps Server | Yes | No |
 
 {{< tabs >}}

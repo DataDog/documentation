@@ -1,6 +1,5 @@
 ---
 title: Downtimes
-kind: documentation
 description: "Schedule downtimes for your Datadog monitors to prevent alerts during specific time periods"
 aliases:
 - /monitors/notify/downtimes/

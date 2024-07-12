@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/guide/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 platform: Windows
 title: Uso básico del Agent para Windows
 ---

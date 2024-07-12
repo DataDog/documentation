@@ -1,6 +1,6 @@
 ---
 title: Collect Heroku logs
-kind: guide
+
 ---
 
 Heroku provides 3 types of logs:

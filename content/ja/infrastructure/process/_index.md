@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/process-level-data/
   tag: ブログ
   text: プロセスレベルのアプリとネットワークデータを使用して、より迅速にトラブルシューティングを行います
-kind: documentation
 title: ライブプロセス
 ---
 

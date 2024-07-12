@@ -18,7 +18,6 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: ドキュメント
   text: Datadog で CSP 違反の検出と集計を行う
-kind: documentation
 title: Session Replay
 ---
 
@@ -66,7 +65,7 @@ Extended Retention はいつでも無効にできます。セッションリプ�
 
 自分の再生履歴を見るには、プレイリストの [My Watch History][7] をご覧ください。
 
-## VS コード
+## プレイリスト
 
 セッションリプレイのプレイリストを作成して、気づいたパターンで整理することができます。[セッションリプレイプレイリスト][8]について詳しくはこちらをご覧ください。
 

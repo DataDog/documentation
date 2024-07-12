@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: モニター通知の設定
-kind: ガイド
 title: 値に変化がない場合のアラート
 ---
 

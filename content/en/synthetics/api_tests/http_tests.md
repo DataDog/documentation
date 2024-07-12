@@ -1,6 +1,5 @@
 ---
 title: HTTP Testing
-kind: documentation
 description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
   - /synthetics/http_test

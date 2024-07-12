@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 変数名が読めるようにする
 ---
 ## メタデータ

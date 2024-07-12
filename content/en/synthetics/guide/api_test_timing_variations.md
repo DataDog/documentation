@@ -1,6 +1,5 @@
 ---
 title: Understand API Test Timings And Troubleshoot Variations
-kind: documentation
 description: Understand API test timings and troubleshoot their variations.
 aliases:
 - /synthetics/api_test_timing_variations

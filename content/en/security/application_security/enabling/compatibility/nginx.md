@@ -1,23 +1,22 @@
 ---
 title: Nginx Compatibility Requirements
-kind: documentation
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## ASM capabilities support
+## Application Security capabilities support
 
-The following ASM capabilities are supported in the nginx integration, for the
+The following application security capabilities are supported in the nginx integration, for the
 specified tracer version:
 
-| ASM capability                         | Minimum nginx module version |
+| Application Security capability        | Minimum nginx module version |
 |----------------------------------------|------------------------------|
 | Threat Detection                       | 1.2.0                        |
 | Threat Protection                      | 1.2.0                        |
 | Customize response to blocked requests | 1.2.0                        |
 | Software Composition Analysis (SCA)    | not applicable               |
-| Code Security (beta)                   | not applicable               |
+| Code Security                          | not applicable               |
 | Automatic user activity event tracking | not supported                |
 | API Security                           | not supported                |
 

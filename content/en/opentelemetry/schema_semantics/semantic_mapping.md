@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Semantic Conventions and Datadog Conventions
-kind: documentation
 aliases:
 - /opentelemetry/guide/semantic_mapping/
 further_reading:
@@ -17,7 +16,7 @@ further_reading:
 
 OpenTelemetry makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
 
-### Unified Service Tagging
+### Unified service tagging
 
 | OpenTelemetry convention | Datadog convention |
 | --- | --- |
@@ -140,5 +139,5 @@ Enabling this option adds both the OpenTelemetry resource attributes and the Dat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/concepts/semantic-conventions/
-[2]: /getting_started/tagging/unified_service_tagging
+[2]: /getting_started/tagging/unified_service_tagging#opentelemetry
 [3]: https://opentelemetry.io/docs/specs/semconv/resource/container/

@@ -10,7 +10,6 @@ further_reading:
 - link: synthetics/settings/?tab=specifyvalue#global-variables
   tag: Documentation
   text: グローバル変数について
-kind: ガイド
 title: ブラウザテストでパスキー (FIDO2) を使用する
 ---
 

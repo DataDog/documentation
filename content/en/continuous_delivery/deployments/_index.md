@@ -1,6 +1,5 @@
 ---
 title: CD Visibility in Datadog
-kind: documentation
 further_reading:
 - link: "/continuous_delivery/search"
   tag: "Documentation"

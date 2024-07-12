@@ -1,6 +1,5 @@
 ---
 title: Tracing Java Applications
-kind: documentation
 aliases:
     - /tracing/java
     - /tracing/languages/java
@@ -103,18 +102,41 @@ For more information, see the [Spring Boot documentation][1].
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Open your Tomcat startup script file, for example `setenv.sh` on Linux, and add:
+#### Linux
 
+To enable tracing when running Tomcat on Linux:
+
+1. Open your Tomcat startup script file, for example `setenv.sh`.
+2. Add the following to `setenv.sh`:
+   ```text
+   CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+   ```
+
+#### Windows (Tomcat as a Windows service)
+
+To enable tracing when running Tomcat as a Windows service:
+
+1. Open a Command Prompt.
+1. Run the following command to update your Tomcat service configuration:
+    ```shell
+    tomcat8 //US//<SERVICE_NAME> --Environment="CATALINA_OPTS=%CATALINA_OPTS% -javaagent:\"c:\path\to\dd-java-agent.jar\""
+    ```
+   Replace `<SERVICE_NAME>` with the name of your Tomcat service and replace the path to `dd-java-agent.jar`.
+1. Restart your Tomcat service for changes to take effect.
+
+#### Windows (Tomcat with environment setup script)
+
+To enable tracing when running Tomcat with an environment setup script:
+
+1. Create `setenv.bat` in the `./bin` directory of the Tomcat project folder, if it doesn't already exist.
+1. Add the following to `setenv.bat`:
+   ```text
+   set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+   ```
+If the previous step doesn't work, try adding the following instead:
 ```text
-CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
-
-Or on Windows, `setenv.bat`:
-
-```text
-set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
-```
-If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}

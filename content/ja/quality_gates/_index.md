@@ -14,7 +14,6 @@ further_reading:
   tag: ドキュメント
   text: 監査証跡について
 is_beta: true
-kind: ドキュメント
 title: クエリメトリクスの確認
 ---
 

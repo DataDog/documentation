@@ -1,6 +1,5 @@
 ---
 title: What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?
-kind: guide
 aliases:
     - /graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
     - /dashboards/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph

@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Autodiscovery
-kind: documentation
 aliases:
  - /agent/autodiscovery/basic_autodiscovery
  - /getting_started/agent/autodiscovery

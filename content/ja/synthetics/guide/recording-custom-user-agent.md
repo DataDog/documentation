@@ -1,6 +1,5 @@
 ---
 title: カスタムユーザーエージェントで手順を記録
-kind: documentation
 description: カスタムユーザーエージェント文字列でブラウザテストの手順を記録
 further_reading:
   - link: /synthetics/browser_tests/actions

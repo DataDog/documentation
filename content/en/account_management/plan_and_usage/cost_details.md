@@ -1,6 +1,5 @@
 ---
 title: Cost Details
-kind: documentation
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/billing/"
   tag: "Documentation"
@@ -15,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Cost Summary and Cost Chargebacks help you understand your estimated month-to-date, projected end-of-month, and historical Datadog costs.
+Cost Summary and Cost Chargebacks help you understand your estimated month-to-date, projected end-of-month, and historical Datadog costs. Cost data is available for the past 15 months.
 
 You can break down your costs by sub-organization and by product to:
 - Allocate costs according to their source
@@ -23,9 +22,8 @@ You can break down your costs by sub-organization and by product to:
 
 ### Permissions
 
-To view the Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
+Roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Cost Summary and Cost Chargebacks data. Users with the Datadog Admin role have these permissions by default.
 
-Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Cost Summary and Cost Chargebacks data.
 
 ## Cost summary
 
@@ -47,9 +45,9 @@ The cost summary functionality changes according to your Datadog usage as a sing
 
 {{< img src="account_management/plan_and_usage/multiorg-current-month-historical-costs.png" alt="Screenshot of the current month's Cost Summary for a parent organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
-View historical costs by toggling to previous months.
+View historical costs by toggling back to previous months, or use the date dropdown to view costs over 1,3, 6 or 12 months.
 
-{{< img src="account_management/plan_and_usage/multiorg-prior-month-historical-costs.png" alt="Screenshot of a previous month's Cost Summary for a parent organization, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
+{{< img src="account_management/plan_and_usage/parent-org-multi-month-cost-changes.png" alt="Screenshot of a parent organization's historical costs over a three month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -57,7 +55,8 @@ View historical costs by toggling to previous months.
 
 #### View and filter
 
-Use the search facets at the left to filter the cost by **Products** or by **Sub-Orgs**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
+Use the search facets at the left to filter the cost by **Products**, **Sub-Orgs** or **Cost Breakdown**. Use the Daily Cost tab to see how the cumulative day-over-day costs have changed within the current month. 
+
 
 #### Download
 
@@ -76,13 +75,17 @@ As a sub-organization, you can view the costs for your organization only. This r
 
 {{< img src="account_management/plan_and_usage/suborg-cost-trends.png" alt="Screenshot of the current month's Cost Summary for a sub-organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes.">}}
 
+View historical costs by toggling back to previous months, or use the date dropdown to view costs over 1,3, 6 or 12 months.
+
+{{< img src="account_management/plan_and_usage/suborg-multi-month-cost-changes.png" alt="Screenshot of a sub organization's historical costs over a six month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
+
 1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
 1. Ensure the **Overall** tab is selected.
 
 #### View and filter
 
-Use the search facets at the left to filter the cost by **Products**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
+Use the search facets at the left to filter the cost by **Products** or **Cost Breakdown**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
 
 #### Download
 

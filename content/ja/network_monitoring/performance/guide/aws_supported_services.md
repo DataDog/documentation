@@ -1,6 +1,5 @@
 ---
 title: NPM AWS でサポートされるデバイス
-kind: ガイド
 npm_provider: AWS
 further_reading:
   - link: "https://www.datadoghq.com/blog/network-performance-monitoring"

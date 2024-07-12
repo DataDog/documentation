@@ -1,6 +1,5 @@
 ---
 title: Network Traffic
-kind: guide
 aliases:
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
@@ -48,6 +47,9 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
+
+[Network Path][14]
+: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Orchestrator][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -464,3 +466,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [11]: /getting_started/site/
 [12]: /agent/troubleshooting/send_a_flare
 [13]: /infrastructure/containers/container_images
+[14]: /network_monitoring/network_path/

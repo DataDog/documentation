@@ -1,6 +1,5 @@
 ---
 title: Watchdog Insights
-kind: documentation
 description: View anomalies and outliers that match your search query with Watchdog Insights.
 further_reading:
 - link: "/logs/explorer/watchdog_insights/"
@@ -58,6 +57,7 @@ Every outlier comes with embedded interactions and a side panel with troubleshoo
 ### Filter on Insight query
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+**Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 

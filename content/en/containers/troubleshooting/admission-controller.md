@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Admission Controller
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"

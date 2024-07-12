@@ -1,6 +1,5 @@
 ---
 title: Python Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/python
     - /tracing/manual_instrumentation/python

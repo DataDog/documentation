@@ -1,6 +1,5 @@
 ---
 title: Configuring PagerDuty for DORA Metrics
-kind: documentation
 description: Learn how to configure PagerDuty as a data source for DORA Metrics incidents.
 is_beta: true
 further_reading:
@@ -59,10 +58,15 @@ When an incident event is received for a specific [PagerDuty service][3], Datado
 
 The matching algorithm works in the following scenarios:
 
-1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog team name. For more information on setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][6].
-2. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog service name and team retrieved from Service Catalog.
-3. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the corresponding Datadog team name.
-4. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog team name.
+1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog:
+   - If the incident service URL matches a single Datadog service, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
+   - If the incident service URL matches multiple Datadog services, the incident metrics and events are emitted with the Datadog team name.
+   
+For more information about setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][6].
+
+2. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog, the incident metrics and events are emitted with the Datadog service name and team retrieved from the Service Catalog.
+3. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the corresponding Datadog team name.
+4. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the Datadog team name.
 
 ## Further Reading
 

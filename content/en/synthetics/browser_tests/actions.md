@@ -1,6 +1,5 @@
 ---
 title: Browser Testing Steps
-kind: documentation
 description: Learn how to automatically record and manually set steps in a browser test recording.
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
@@ -19,7 +18,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3] automatically detects and records steps on your website.
+Once you click **Start Recording**, the [Datadog browser test recorder extension][3], available for Chrome and Edge browsers, automatically detects and records steps on your website.
 
 ### Click
 

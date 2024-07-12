@@ -1,6 +1,5 @@
 ---
 title: Mobile Application Testing and Monitoring
-kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
 aliases:
 - /mobile_testing
@@ -22,14 +21,6 @@ cascade:
   algolia:
     tags: ['mobile_testing']
 ---
-
-{{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>

@@ -1,6 +1,5 @@
 ---
 title: Reduce alert flapping
-kind: guide
 further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"

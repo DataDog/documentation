@@ -14,7 +14,6 @@ further_reading:
 - link: https://datadoghq.com/blog/
   tag: 블로그
   text: 새로운 Datadog 제품 및 기능, 통합 등에 대해 알아보기
-kind: 설명서
 title: 시작하기
 ---
 

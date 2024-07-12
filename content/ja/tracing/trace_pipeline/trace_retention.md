@@ -13,7 +13,6 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
-kind: documentation
 title: トレースの保持
 ---
 

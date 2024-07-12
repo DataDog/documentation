@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/configuration/#migrate-to-the-datadog-lambda-extension
   tag: 설명서
   text: Datadog Lambda 확장으로 이전
-kind: 가이드
 title: Datadog Lambda 확장으로 이전 결정
 ---
 
@@ -38,7 +37,7 @@ Datadog Lambda 확장은 Datadog 포워더와 달리 다음과 같은 장점을 
 
 ## Datadog Lambda 확장으로 이전
 
-Datadog 포워더에서 Datadog Lambda 확장으로 이전하려면 [서버리스 설정 설명서][5]를 참조하세요.
+Datadog Forwarder에서 Datadog Lambda Extension으로 마이그레이션하려면 [서버리스 구성 문서][5]를 참조하세요.
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
