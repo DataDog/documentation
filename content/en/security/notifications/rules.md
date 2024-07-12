@@ -58,7 +58,7 @@ To enable or disable a notification rule, toggle the switch on the notification 
 
 ### Edit a notification rule
 
-To edit a notification rule, click the notification rule card. After you finish making your changes, click **Save and Activate**.
+To edit a notification rule, click the notification rule card. After you finish making your changes, click **Save**.
 
 ### Clone a notification rule
 
