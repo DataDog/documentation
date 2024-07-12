@@ -343,7 +343,7 @@ Tracing:
       link: https://github.com/DataDog/dd-trace-rb
       official: true
       authors: Datadog
-      notes: gem is called 'ddtrace'.
+      notes: gem is called 'datadog'.
     - name: ddtrace-rb-method-wrapper
       link: https://github.com/brandfolder/ddtrace-rb-method-wrapper
       authors: Brandfolder
