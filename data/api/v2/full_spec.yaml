@@ -33772,12 +33772,6 @@ paths:
         schema:
           default: name
           type: string
-      - description: Filter all users by the given string. Defaults to no filtering.
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
       responses:
         '200':
           content:
