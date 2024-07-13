@@ -39,6 +39,72 @@ If you only want to collect logs, especially from many Lambda functions, it make
 ## Migrate to the Datadog Lambda Extension
 
 To migrate from the Datadog Forwarder to the Datadog Lambda Extension, see the [Serverless configuration documentation][5].
+
+## Reduce cold start duration with the new optimized version of the Datadog Extension (Beta)
+
+Version X of the Datadog Extension optionally uses an optimized version of the Datadog Extension which can significantly reduce the cold start duration in your instrumented Lambda functions.
+
+Today, the following features are supported in version X. Note that some addiitonal features of the Datadog Agent or Tracing libraries may not be supported. To ask a question, report an bug or feature request, please [create an issue] [] in the Datadog Lambda Extension Repository with the label `'version/next'`.
+
+<table>
+    <caption>Supported Features in Optimized Extension</caption>
+    <thead>
+        <tr>
+            <th>Runtime</th>
+            <th>Enhanced Metrics</th>
+            <th>Logs</th>
+            <th>Traces</th>
+            <th>Application Security</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Node</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>⚒️</td>
+        </tr>
+        <tr>
+            <td>Python</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>⚒️</td>
+        </tr>
+        <tr>
+            <td>Java</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>⚒️</td>
+            <td>⚒️</td>
+        </tr>
+        <tr>
+            <td>.NET</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>⚒️</td>
+            <td>⚒️</td>
+        </tr>
+        <tr>
+            <td>Ruby</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>⚒️</td>
+            <td>⚒️</td>
+        </tr>
+        <tr>
+            <td>Go</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>⚒️</td>
+            <td>⚒️</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -48,3 +114,4 @@ To migrate from the Datadog Forwarder to the Datadog Lambda Extension, see the [
 [3]: /logs/guide/forwarder/
 [4]: /serverless/libraries_integrations/extension/#overhead
 [5]: /serverless/configuration/#migrate-to-the-datadog-lambda-extension
+[6]: https://github.com/DataDog/datadog-lambda-extension/issues
