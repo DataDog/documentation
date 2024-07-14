@@ -6,6 +6,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: 설명서
   text: 이벤트에 시각화 적용
+kind: 설명서
 title: RUM 이벤트 검색
 ---
 
@@ -28,7 +29,7 @@ RUM은 이벤트를 자동으로 캡처하지만, 자신의 이벤트를 캡처�
 
 RUM 이벤트를 검색하려면 검색창의 왼쪽에 있는 드롭다운 메뉴에서 이벤트 유형을 선택합니다.
 
-{{< img src="real_user_monitoring/explorer/search/rum_explorer_search-3.png" alt="RUM Explorer" style="width:100%;">}}
+{{< img src="real_user_monitoring/explorer/search/rum-explorer-search-4.png" alt="RUM Explorer" style="width:100%;">}}
 
 ## 쿼리 검색
 
@@ -50,7 +51,7 @@ RUM 이벤트 검색 및 시간 프레임 사용에 대한 자세한 내용은 [
 
 패싯은 속성 또는 태그의 모든 고유 멤버를 표시하고 표시된 RUM 이벤트 수와 같은 기본 분석을 제공합니다. 패싯을 사용하면 주어진 속성을 기반으로 데이터 집합을 피벗하거나 필터링할 수 있습니다. 값을 선택하면 검색창에 필터가 적용됩니다.
 
-{{< img src="real_user_monitoring/explorer/rum_facet-2.png" alt="이벤트 목록 왼쪽에 있는 패싯 목록" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/rum-facet-3.png" alt="이벤트 목록 좌측 패싯 목록" style="width:90%;">}}
 
 패싯을 만들려면 [이벤트 사이드 패널][7]에서 속성을 찾은 후 클릭합니다. 그러면 "Country subdivision"과 같은 사이드 패널의 값에 대한 속성 섹션이 생성됩니다.
 
@@ -58,7 +59,7 @@ RUM 이벤트 검색 및 시간 프레임 사용에 대한 자세한 내용은 [
 
 또한 좌측 패널에서 **+ Add**를 클릭한 다음 패싯 경로를 입력하거나 선택하여 세션에서 메타데이터를 가져오고 패싯(예: 버지니아)으로 변환할 수 있습니다.
 
-{{< img src="real_user_monitoring/explorer/create-facet-1.png" alt="패싯 목록에서 +추가 버튼을 사용하여 패싯을 만듭니다." style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="패싯 목록에서 +Add 버튼을 사용해 패싯 생성" style="width:40%;">}}
 
 ***Advanced options**를 클릭하여 다른 표시 이름, 유형, 그룹 또는 설명을 제공하는 등의 방식으로 패싯을 사용자 지정할 수 있습니다.
 
