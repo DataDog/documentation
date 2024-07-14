@@ -12,6 +12,7 @@ further_reading:
 - link: /monitors
   tag: 설명서
   text: 모니터에 대해 알아보기
+kind: 설명서
 title: RUM 이벤트 및 그래프 내보내기
 ---
 
@@ -23,7 +24,7 @@ title: RUM 이벤트 및 그래프 내보내기
 
 [RUM 탐색기][2]에서 집계된 검색 쿼리 및 시각화 그래프를 복사, 내보내기 또는 다운로드할 수 있습니다.
 
-{{< img src="real_user_monitoring/explorer/export/rum_explorer_export-4.png" alt="RUM 탐색기 오른쪽 모서리에 있는 내보내기 버튼" width="100%" >}}
+{{< img src="real_user_monitoring/explorer/export/rum-explorer-export-5.png" alt="RUM Explorer 우측 코너에 있는 내보내기 버튼" width="100%" >}}
 
 오른쪽 모서리에 있는 **More** 버튼을 클릭하고 드롭다운 메뉴에서 옵션을 선택합니다:
 
