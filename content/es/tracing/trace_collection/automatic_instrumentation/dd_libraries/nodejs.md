@@ -67,7 +67,7 @@ Cuando utilices un transpilador como TypeScript, Webpack, Babel u otros, importa
 const tracer = require('dd-trace').init();
 ```
 
-##### TypeScript y bundlers
+##### TypeScript y bundlers (empaquetadores)
 
 Para TypeScript y bundlers compatibles con la sintaxis EcmaScript Module, inicializa el rastreador en un archivo separado para mantener el orden de carga correcto.
 
@@ -119,11 +119,11 @@ node --import dd-trace/register.js entrypoint.js
 
 Los bundlers rastrean todas las llamadas `require()` que una aplicación realiza a los archivos del disco. Sustituye las llamadas `require()` por código personalizado y combina todos los JavaScript resultantes en un archivo "empaquetado". Cuando se carga un módulo incorporado, como `require('fs')`, esa llamada puede seguir siendo la misma en el paquete resultante.
 
-Las herramientas APM como `dd-trace` dejan de funcionar en este punto. Pueden seguir interceptando las llamadas a módulos incorporados, pero no interceptan las llamadas a bibliotecas de terceros. Esto significa que cuando agrupas una aplicación `dd-trace` utilizando un bundler, es probable que capture información sobre el acceso al disco (a través de `fs`) y las solicitudes HTTP salientes (a través de `http`), pero que omita las llamadas a bibliotecas de terceros. Por ejemplo:
+Las herramientas APM como `dd-trace` dejan de funcionar en este punto. Pueden seguir interceptando las llamadas a módulos incorporados, pero no interceptan las llamadas a bibliotecas de terceros. Esto significa que cuando empaquetas una aplicación `dd-trace` utilizando un bundler, es probable que capture información sobre el acceso al disco (a través de `fs`) y las solicitudes HTTP salientes (a través de `http`), pero que omita las llamadas a bibliotecas de terceros. Por ejemplo:
 - Extracción de información entrante de rutas de solicitudes para el marco de trabajo `express`. 
 - Muestra qué consulta se ejecuta para el cliente de base de datos `mysql`.
 
-Una solución común es tratar como "externos" al empaquetador todos los módulos de terceros que APM necesita para la instrumentación. Con esta configuración, los módulos instrumentados permanecen en el disco y continúan siendo cargados con `require()`, mientras que los módulos no instrumentados se empaquetan. Sin embargo, esto resulta en una compilación con muchos archivos extraños y comienza a hacer fracasar el propósito de la agrupación.
+Una solución común es tratar como "externos" al bundler todos los módulos de terceros que APM necesita para la instrumentación. Con esta configuración, los módulos instrumentados permanecen en el disco y continúan siendo cargados con `require()`, mientras que los módulos no instrumentados se empaquetan. Sin embargo, esto resulta en una compilación con muchos archivos extraños y comienza a hacer fracasar el propósito de la agrupación.
 
 Datadog recomienda disponer de complementos de bundler personalizados. Estos complementos son capaces de dar instrucciones al bundler sobre cómo comportarse, inyectar código intermediario e interceptar las llamadas "traducidas" a `require()`. Como resultado, se incluyen más paquetes en el archivo empaquetado JavaScript. 
 
