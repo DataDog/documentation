@@ -3,6 +3,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: 설명서
   text: 이벤트 검색
+kind: 설명서
 title: 저장된 보기
 ---
 
@@ -29,8 +30,8 @@ title: 저장된 보기
 
 - 사용자가 만든 커스텀 저장된 보기. 조직의 모든 사람이 편집할 수 있으며 보기를 만든 사용자의 아바타가 표시됩니다. **Save**를 클릭하여 RUM 탐색기의 현재 콘텐츠에서 저장된 보기를 사용자 지정할 수 있습니다.
 - 저장된 보기 템플릿은 RUM 탐색기에서 미리 정의된 즉시 사용 가능한 저장된 보기입니다. 이러한 템플릿을 사용하여 Datadog 아바타로 저장된 보기를 만들 수 있습니다. 템플릿에 액세스하려면 저장된 보기 목록의 맨 아래로 스크롤합니다.
-</br>
-  {{< img src="real_user_monitoring/explorer/rum-saved-views.png" alt="실제 사용자 모니터링 왼쪽에 있는 탭을 클릭하여 저장된 보기에 액세스합니다." width="50%" >}}
+<br /><br />
+  {{< img src="real_user_monitoring/explorer/rum-saved-views-2.png" alt="실제 사용자 모니터링 좌측 탭을 클릭해 저장된 보기로 액세스" width="90%" >}}
 
 다음을 수행할 수 있습니다.
 
