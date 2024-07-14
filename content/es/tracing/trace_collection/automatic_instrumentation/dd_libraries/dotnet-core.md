@@ -49,7 +49,7 @@ type: lenguaje de código múltiple
 
 ### Tiempos de ejecución .NET Core compatibles
 
-El rastreador .NET es compatible con la instrumentación en .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7 y .NET 8.
+El rastreador de .NET es compatible con la instrumentación en .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7 y .NET 8.
 
 Para ver una lista completa de las compatibilidades de la arquitectura de la biblioteca y del procesador de Datadog .NET Core (incluyendo las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
 
@@ -79,7 +79,7 @@ Antes de empezar, asegúrate de haber [instalado y configurado el Agent][12].
 
 Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
-Puedes instalar el rastreador .NET de Datadog en toda la máquina para que se instrumenten todos los servicios de la máquina, o puedes instalarlo aplicación por aplicación para que los desarrolladores gestionen la instrumentación a través de las dependencias de la aplicación. Para ver más instrucciones sobre la instalación en toda la máquina, haz clic en la pestaña de Windows o Linux. Para ver más instrucciones sobre la instalación aplicación por aplicación, haz clic en la pestaña de NuGet.
+Puedes instalar el rastreador de .NET de Datadog en toda la máquina para que se instrumenten todos los servicios de la máquina, o puedes instalarlo aplicación por aplicación para que los desarrolladores gestionen la instrumentación a través de las dependencias de la aplicación. Para ver más instrucciones sobre la instalación en toda la máquina, haz clic en la pestaña de Windows o Linux. Para ver más instrucciones sobre la instalación aplicación por aplicación, haz clic en la pestaña de NuGet.
 
 {{< tabs >}}
 
@@ -248,7 +248,7 @@ Tu configuración de la instrumentación personalizada depende de tu instrumenta
 Para utilizar la instrumentación personalizada en tu aplicación .NET:
 
 1. Añade el [paquete NuGet][1] `Datadog.Trace` a tu aplicación.
-2. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
+2. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos (spans).
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
@@ -317,21 +317,21 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 
 #### IIS
 
-Una vez instalado el MSI, no es necesaria ninguna configuración adicional para instrumentar tus sitios IIS automáticamente. Sigue los siguientes pasos para configurar variables de entorno adicionales, heredadas por todos los sitios IIS:
+Una vez instalado el MSI, no es necesaria ninguna configuración adicional para instrumentar tus sitios de IIS automáticamente. Sigue los siguientes pasos para configurar variables de entorno adicionales, heredadas por todos los sitios de IIS:
 
 1. Abre el Editor de registro, busca el valor de cadenas múltiples llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\WAS` y añade las variables de entorno, una por cada línea. Por ejemplo, para añadir la inyección de logs y métricas de tiempos de ejecución, añade las siguientes líneas a los datos de valor:
    ```text
    DD_LOGS_INJECTION=true
    DD_RUNTIME_METRICS_ENABLED=true
    ```
-2. Ejecuta los siguientes comandos para reiniciar IIS:
+2. Ejecuta los siguientes comandos para reiniciar los IIS:
    ```cmd
    net stop /y was
    net start w3svc
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Uso del Editor de registro para crear variables de entorno para todos los sitios IIS" >}}
+{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Uso del Editor de registro para crear variables de entorno para todos los sitios de IIS" >}}
 
 #### Aplicaciones de consola
 
