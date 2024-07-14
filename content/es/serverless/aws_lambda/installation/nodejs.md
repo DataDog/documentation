@@ -404,7 +404,7 @@ const sleep = tracer.wrap('sleep', (ms) => {
 });
 
 exports.handler = async (event) => {
-    // añade etiquetas al tramo de la función de Lambda,
+    // añade etiquetas personalizadas al tramo de la función de Lambda,
     // NO funciona si el rastreo de X-Ray está habilitado
     const span = tracer.scope().active();
     span.setTag('customer_id', '123456');
@@ -418,7 +418,7 @@ exports.handler = async (event) => {
 
     // envía una métrica personalizada
     sendDistributionMetric(
-        'coffee_house.order_value', // metric name
+        'coffee_house.order_value', // el nombre de la métrica
         12.45, // el valor de la métrica
         'product:latte', // una etiqueta
         'order:online' // otra etiqueta
