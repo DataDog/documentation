@@ -3,6 +3,7 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: 설명서
   text: Node.js 애플리케이션 계측
+kind: 설명서
 title: 서버리스 패키지가 너무 큰 오류 문제 해결
 ---
 
@@ -17,42 +18,27 @@ title: 서버리스 패키지가 너무 큰 오류 문제 해결
 - 함수 코드를 계측하는 언어별 라이브러리, 그리고
 - 관찰 가능한 데이터를 집계, 버퍼링 및 Datadog 백엔드로 전달하는 확장 프로그램입니다.
 
-AWS CLI 명령 [`aws lambda get-layer-version`][3]을 사용하여 Datadog Lambda 레이어의 내용 및 크기를 검사합니다. 예를 들어, 다음 명령을 실행하면 _Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} version {{< latest-lambda-layer-version layer="node" >}} 및 _Datadog-Extension version {{< latest-lambda-layer-version layer="extension" >}}용 Lambd 레이어를 다운로드하고 압축되지 않은 크기 (합계 약 30MB)를 검사할 수 있는 링크가 제공됩니다. 압축되지 않은 크기는 레이어 및 버전에 따라 다릅니다. 다음 예제의 레이어 이름과 버전 번호를 애플리케이션에서 사용하는 레이어 이름과 버전 번호로 대체합니다:
+AWS CLI 명령 [`aws lambda get-layer-version`][3]을 사용하여 Datadog 람다 레이어의 콘텐츠와 크기를 검사합니다. 예를 들어 다음 명령을 실행하면 _Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} 버전 {{< latest-lambda-layer-version layer="node" >}} 및 _Datadog-Extension 버전 {{< latest-lambda-layer-version layer="extension" >}}에 대한 람다(Lambda) 레이어를 다운로드하고 압축되지 않은 크기(약 30MB 합산)를 검사할 수 있는 링크가 표시됩니다. 압축되지 않은 크기는 레이어와 버전에 따라 다릅니다. 다음 예제의 레이어 이름과 버전 번호를 애플리케이션에서 사용하는 레이어 이름과 버전 번호로 바꾸세요:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
-aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
+AWS lambda get-layer-version \
+  --layer-name arn:AWS:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
   --version-number {{< latest-lambda-layer-version layer="node" >}}
 
-aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension \
+AWS lambda get-layer-version \
+  --layer-name arn:AWS:lambda:us-east-1:464622532012:layer:Datadog-Extension \
   --version-number {{< latest-lambda-layer-version layer="extension" >}}
 ```
-{{< /site-region >}}
 
-{{< site-region region="ap1" >}}
-```
-aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
-  --version-number {{< latest-lambda-layer-version layer="node" >}}
-
-aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Extension \
-  --version-number {{< latest-lambda-layer-version layer="extension" >}}
-```
-{{< /site-region >}}
-
-
-Datadog Lambda 레이어 외에도 함수에 추가되었거나 (추가될) 다른 Lambda 레이어도 검사합니다. [서버리스 프레임워크][4]를 사용하는 경우, `deploy` 또는 `package` 명령을 실행한 후 숨겨진 `.serverless`폴더에서 CloudFormation 템플릿을 찾을 수 있으며, `Layers` 섹션에서 Lambda 레이어 목록을 찾을 수 있습니다.
+Datadog 람다 레이어 외에도 기능/함수에 추가된(또는 추가될) 다른 람다 레이어도 검사하세요. 서버리스 프레임워크][4]를 사용하는 경우, `deploy` 또는 `package` 명령을 실행한 후 숨겨진 `.serverless` 폴더에서 CloudFormation 템플릿을, `Layers` 섹션에서 람다 레이어 목록을 찾을 수 있습니다.
 
 ## 패키지
 
 함수 배포 패키지에는 필요 없는 큰 파일이나 코드가 포함될 수 있습니다. 서버리스 프레임워크를 사용하는 경우 `deploy` 또는 `package` 명령을 실행한 후 숨겨진 `.serverless` 폴더에서 배포 패키지(`.zip` 파일)을 찾을 수 있습니다.
 
-배포 패키지와 레이의 크기 합계가 제한을 초과하지 않는 경우 확인을 위해 AWS 지원팀에 문의하세요. 전체 크기가 제한을 초과하는 경우 배포 패키지를 검사하고 런타임에 필요하지 않은 대용량 파일은 [package][5] 옵션을 사용하여 제외하세요.
+배포 크기( 패키지 )와 레이어의 합이 한도를 초과하지 않는 경우 AWS 지원팀에 문의하여 조사를 요청하세요. 총 크기가 한도를 초과하는 경우 배포 패키지를 검사하고 [패키지][5] 옵션을 사용하여 런타임에 필요하지 않은 대용량 파일을 제외하세요.
 
-## 의존
+## 종속성
 
 Datadog Lambda 레이어는 계측 라이브러리를 패키지화하여 Lambda 실행 환경에서 사용할 수 있기 때문에`datadog-lambda-js` 및 `dd-trace`를 `package.json`에서 종속성으로 지정할 필요가 _없습니다_. 로컬 빌드 또는 테스트에 Datadog 라이브러리가 필요한 경우 배포 패키지에서 제외되도록 `devDependencies`로 지정합니다. 마찬가지로 `serverless-plugin-datadog`는 개발에만 필요하며 `devDependencies` 아래에 지정해야 합니다.
 
