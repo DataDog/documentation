@@ -47,17 +47,25 @@ Datadog instrumentation to avoid duplicate spans in the trace.
 
 ## Compatibility requirements
 
-Each instrumentation should be packaged as an OpenTelemetry [extension](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md).
-The SDK also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main)
+The Datadog SDK for Java supports library instrumentations written using OpenTelemetry's [instrumentation API](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation-api/src/main/java/io/opentelemetry/instrumentation/api/instrumenter)
+and `javaagent` [extension API](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/javaagent-extension-api/src/main/java/io/opentelemetry/javaagent/extension/instrumentation).
+
+Each instrumentation must be packaged as an OpenTelemetry [extension](https://opentelemetry.io/docs/zero-code/java/agent/extensions/) in its own jar.
+OpenTelemetry provide an [example extension project](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md)
+that provides a custom [instrumentation for Servlet 3 classes](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/src/main/java/com/example/javaagent/instrumentation/DemoServlet3InstrumentationModule.java).
+
+The Datadog SDK for Java also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main)
 build, for example the [CFX instrumentation jar](https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0).
 
-**Note**: Use of OpenTelemetry incubator APIs is not currently supported.
+<div class="alert alert-warning">
+Use of OpenTelemetry incubator APIs is not currently supported.
+</div>
 
 ## Getting started
 
 To use an OpenTelemetry instrumentation with the Datadog SDK for Java:
-1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to true
-2. Download the OpenTelemetry instrumentation as an extension jar
+1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`
+2. Copy the OpenTelemetry extension jar containing the instrumentation to the same container as the application
 3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to
    the path to the extension jar
 
