@@ -20,7 +20,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glosario
   text: Entrada de glosario para "tail" (cola)
-kind: documentación
 title: Recopilación de logs de Ruby on Rails
 ---
 

@@ -3,7 +3,6 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentación
   text: Aprende a explorar tus logs
-kind: documentation
 title: Enviar logs de Azure con el recurso de Datadog
 ---
 

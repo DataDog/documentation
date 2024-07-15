@@ -1,6 +1,5 @@
 ---
 title: Send an Agent 5 flare on Windows
-kind: Guide
 disable_toc: false
 ---
 

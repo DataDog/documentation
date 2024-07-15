@@ -21,7 +21,7 @@
 
   {{ partialCached "css.html" . }}
 
-  {{- if ne $.Params.disable_opengraph_meta_tags true -}}
+  {{- if and (ne $.Params.disable_opengraph_meta_tags true) .File -}}
   {{- partial "meta.html" . -}}
   {{- end -}}
 </head>
