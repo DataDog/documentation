@@ -14,11 +14,11 @@ aliases:
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
-    path: /integrations/akamai_datastream_2.md
+    path: /integrations/akamai_datastream_2
   aliases:
     - /integrations/akamai_datastream
 - _target:
-    path: /integrations/azure.md
+    path: /integrations/azure
   algolia:
     rank: 80
     category: Documentation
