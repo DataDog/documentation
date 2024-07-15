@@ -21,4 +21,4 @@ Cloud Security Management Vulnerabilities supports vulnerability scanning for ho
 | Photon OS                | 1.0, 2.0, 3.0, 4.0                                  | tndf/yum/rpm            |
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg                |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg                |
-| Windows                  | Windows server 2016                                 | Windows Package Manager |
+| Windows                  | Windows server 2016, 2019, 2022                     | Windows Package Manager |
