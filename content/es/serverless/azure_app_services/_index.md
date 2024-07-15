@@ -55,7 +55,7 @@ Capacidades:
 - Inyección de `Trace_ID` en los logs de aplicación.
 - Métricas personalizadas con [DogStatsD][11].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
