@@ -5,6 +5,7 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: Documentation
   text: Trace Explorer
+kind: documentation
 title: Visualisations de spans
 ---
 

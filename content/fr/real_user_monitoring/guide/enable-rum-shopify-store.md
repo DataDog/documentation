@@ -6,6 +6,7 @@ further_reading:
 - link: /real_user_monitoring/guide/alerting-with-conversion-rates/
   tag: Documentation
   text: Alertes avec des taux de conversion
+kind: guide
 title: Activer la solution RUM pour votre boutique Shopify
 ---
 

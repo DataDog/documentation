@@ -1,5 +1,6 @@
 ---
 title: Agent 6 Configuration Files
+kind: Guide
 disable_toc: false
 ---
 

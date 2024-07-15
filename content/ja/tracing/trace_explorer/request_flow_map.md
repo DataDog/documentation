@@ -6,6 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/apm-request-flow-map-datadog
   tag: ブログ
   text: リクエストフローマップについて
+kind: documentation
 title: リクエストフローマップ
 ---
 

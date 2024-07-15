@@ -1,4 +1,5 @@
 ---
+kind: documentación
 title: Solucionar problemas de logs
 ---
 

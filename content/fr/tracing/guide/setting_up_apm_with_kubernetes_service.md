@@ -6,6 +6,7 @@ further_reading:
 - link: /containers/cluster_agent/admission_controller
   tag: Documentation
   text: Contrôleur d'admission
+kind: guide
 title: Configuration de lʼAPM avec le service Kubernetes
 ---
 
