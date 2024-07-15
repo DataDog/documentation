@@ -55,9 +55,9 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 <div class="alert alert-warning">The compute sizes available for US3, US5, AP1, US1-FED are XS and S.</div>
 
 - Extra small (XS)
-- Large (L)
-- Medium (M)
 - Small (S)
+- Medium (M)
+- Large (L)
 
 Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the CPU, number of concurrent queries, and the maximum limit on how many logs can be scanned per query
 
@@ -125,8 +125,8 @@ If you select one of the scalable compute options for Flex Logs (for example, XS
 
 **Notes**:
 - Only compute options on your contract are made available. If Flex Logs is not in your contract, select between the XS and S compute options.
-- The compute instance can be upgraded at any time.
-- The compute instance can be downgraded once per 15 days.
+- A compute instance can be upgraded at any time.
+- A compute instance can be downgraded once per 15 days.
 
 ## Configure storage tiers
 
@@ -143,10 +143,10 @@ Configure Flex Tier in the [Logs Index Configuration][2] page:
 **Notes**:
 - If both are selected, logs are stored in the Standard Tier until the end of the configured retention period before they are stored in the Flex Tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
 - Adding the Standard Tier to a Flex index applies to new logs, not pre-existing logs in the Flex index.
-- If you are already indexing logs, adding the Flex Tier extends the retention of all logs currently stored and the new logs that are going into that index.
-- If you want to remove Standard Indexing and add the Flex Tier, make the changes with one update action.
+- If you are already indexing logs, adding the Flex Tier extends the retention of all logs currently stored in the index and the new logs that are going into the index.
+- If you want to remove Standard Indexing and add the Flex Tier, make the changes and save it as one action.
 - If you remove Standard Indexing, the logs are no longer queryable in monitors or in Watchdog Insights.
-- If you add back Standard Indexing to an index that only has Flex Tier, only the new logs are stored in Standard Indexing.
+- If you add back Standard Indexing to an index that only has Flex Tier, only the new logs going into the index are stored in Standard Indexing.
 
 ## Search Flex indexes
 
@@ -156,9 +156,9 @@ In the Log Explorer, toggle the **Include Flex Logs** option to include Flex Tie
 
 [Search][3] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
 
-You can add queries to dashboards, but make sure to consider these dashboard queries when you choose your compute size.
+You can add Flex Log queries to dashboards, but make sure to consider these dashboard queries when you choose your compute size.
 
-Monitor queries are not supported for Flex Logs.
+**Note**: Monitor queries are not supported for Flex Logs.
 
 ## Additional information
 
@@ -197,15 +197,15 @@ The following list is an example of log sources that are potentially good candid
 - **Caching examples**
   - Varnish, Memcached, and Redis.
 
-### Flex Logs for multiple-organization setup
+### Flex Logs for multiple-organization accounts
 
-FOr each organization in which you want Flex Logs, you must enable a compute instance for each organization. Compute instances cannot be shared across child-organizations.
+For each organization in which you want Flex Logs, you must enable a compute instance for each organization. Compute instances cannot be shared across organizations.
 
-Datadog recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, for these organizations Datadog recommends using Standard Indexing for shorter retentions and Flex Logs Starter for longer retentions.
+Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations Datadog recommends using Standard Indexing for shorter retentions and Flex Logs Starter for longer retentions.
 
 ### When the compute limit is reached
 
-When your organization reaches the compute limit in terms of concurrent queries, you many experience slower queries because queries retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, an error message says that the Flex Logs compute capacity is constrained and you should contact your admin.
+When your organization reaches the compute limit in terms of concurrent queries, you many experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
 
 ## Further reading
 
