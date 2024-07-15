@@ -1,6 +1,5 @@
 ---
 title: Split Logs for the Splunk HTTP Event Collector (HEC)
-kind: document
 disable_toc: false
 ---
 
@@ -8,7 +7,7 @@ disable_toc: false
 
 Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker and then to different destinations based on your use case.
 
-{{< img src="observability_pipelines/use_cases/split_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+{{% observability_pipelines/use_case_images/split_logs %}}
 
 This document walks you through the following setup steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -55,6 +54,31 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/sumo_logic %}}
 
 {{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/destination_settings/syslog %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_settings/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/destination_settings/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -71,9 +95,19 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/filter %}}
 
 {{% /tab %}}
+{{% tab "Edit fields" %}}
+
+{{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
 {{% tab "Sample" %}}
 
 {{% observability_pipelines/processors/sample %}}
+
+{{% /tab %}}
+{{% tab "Grok Parser" %}}
+
+{{% observability_pipelines/processors/grok_parser %}}
 
 {{% /tab %}}
 {{% tab "Quota" %}}
@@ -81,19 +115,34 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/quota %}}
 
 {{% /tab %}}
+{{% tab "Reduce" %}}
+
+{{% observability_pipelines/processors/reduce %}}
+
+{{% /tab %}}
 {{% tab "Dedupe" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
-{{% tab "Edit fields" %}}
-
-{{% observability_pipelines/processors/remap %}}
-
-{{% /tab %}}
 {{% tab "Sensitive Data Scanner" %}}
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
+
+{{% /tab %}}
+{{% tab "Add hostname" %}}
+
+{{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Parse JSON" %}}
+
+{{% observability_pipelines/processors/parse_json %}}
+
+{{% /tab %}}
+{{% tab "Enrichment table" %}}
+
+{{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -116,6 +165,31 @@ Enter the following information based on your selected logs destinations.
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/destination_env_vars/syslog %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
 {{< /tabs >}}

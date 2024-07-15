@@ -38,7 +38,7 @@ integration_id: tidb
 integration_title: TiDB
 integration_version: 2.1.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tidb
 public_title: TiDB

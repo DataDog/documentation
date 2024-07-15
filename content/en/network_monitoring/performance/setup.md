@@ -1,6 +1,5 @@
 ---
 title: Network Performance Monitoring Setup
-kind: documentation
 description: Collect your Network Data with the Agent.
 aliases:
     - /network_performance_monitoring/installation/
@@ -210,14 +209,23 @@ To enable Network Performance Monitoring for Windows hosts:
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable Network Performance Monitoring with Kubernetes using Helm, add:
+To enable Network Performance Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
+**Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
   ```
-to your values.yaml. **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
+
+**Note**: If you receive a permissions error when configuring NPM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
+
+  ```yaml
+  agents:
+    podSecurity:
+      apparmor:
+        enabled: true
+  ```
 
 If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
 
@@ -352,6 +360,7 @@ If you already have the [Agent running with a manifest][4]:
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
 <div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
@@ -361,7 +370,6 @@ If you already have the [Agent running with a manifest][4]:
 To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
@@ -454,7 +462,7 @@ For additional information around these capabilities, see [Cloud service enhance
 
 <div class="alert alert-warning">Failed Connections are in private beta. To start seeing <a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">failed connection metrics</a>, reach out to your Datadog representative and request access.</div>
 
-To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/system-probe.yaml` file.
+To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/system-probe.yaml` file (`C:\ProgramData\Datadog\system-probe.yaml` for Windows).
 
 ```yaml
 network_config:   # use system_probe_config for Agent versions older than 7.24.1

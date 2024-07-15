@@ -22,7 +22,6 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: 설명서
   text: 오류 추적 모니터 만들기
-kind: 설명서
 title: 웹 및 모바일 애플리케이션에 대한 오류 추적
 ---
 

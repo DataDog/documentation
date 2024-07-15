@@ -1,6 +1,5 @@
 ---
 title: Setup Data Streams Monitoring for Go
-kind: documentation
 ---
 
 ### Prerequisites

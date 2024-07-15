@@ -10,8 +10,6 @@ LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 ## Overview
 
 The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see [Auto Instrumentation][13].
@@ -74,7 +72,6 @@ LLMObs.enable(
   api_key="<YOUR_DATADOG_API_KEY>",
   site="<YOUR_DATADOG_SITE>",
   agentless_enabled=True,
-  integrations_enabled=True,
 )
 {{< /code-block >}}
 

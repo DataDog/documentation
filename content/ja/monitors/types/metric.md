@@ -17,7 +17,6 @@ further_reading:
 - link: /monitors/guide/change-alert
   tag: ドキュメント
   text: 変化アラートモニターのトラブルシューティング
-kind: documentation
 title: メトリクスモニター
 ---
 

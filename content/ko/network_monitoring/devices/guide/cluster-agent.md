@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/clusterchecks
   tag: 설명서
   text: 클러스터 점검
-kind: 가이드
 title: 클러스터 Agent로 네트워크 기기 모니터링
 ---
 

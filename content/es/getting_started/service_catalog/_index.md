@@ -15,7 +15,6 @@ further_reading:
 - link: /service_catalog/scorecards
   tag: Documentación
   text: Python
-kind: documentation
 title: Empezando con el catálogo de servicio
 ---
 

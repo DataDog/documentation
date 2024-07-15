@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/clusterchecks
   tag: Documentation
   text: クラスターチェック
-kind: ガイド
 title: Cluster Agent のネットワークデバイスモニタリング
 ---
 

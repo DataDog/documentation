@@ -110,7 +110,7 @@ Learn how to access and control [Synthetic Monitoring Settings][13].
 
 ### Safety Center
 
-The **Safety Center** page contains security alerts, warnings, and recommendations to review in your organization. You can also set **Security Contacts** to receive security notifications for your organization by clicking **Configuration**, entering up to two email addresses, then clicking the **Save** button.
+The [**Safety Center**][14] page contains security alerts, warnings, and recommendations to review in your organization.
 
 ### Public sharing
 
@@ -118,7 +118,7 @@ The **Public Sharing** tab contains lists of shared dashboards and shared graphs
 
 ### OAuth Apps
 
-The [**OAuth Apps**][14] page allows you to view or manage OAuth applications in your organization.
+The [**OAuth Apps**][15] page allows you to view or manage OAuth applications in your organization.
 
 ## Compliance
 
@@ -161,4 +161,5 @@ You can choose to set your organization homepage to a Dashboard List or an indiv
 [11]: /account_management/api-app-keys/#client-tokens
 [12]: /service_management/events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview
-[14]: /account_management/org_settings/oauth_apps
+[14]: /account_management/safety_center
+[15]: /account_management/org_settings/oauth_apps

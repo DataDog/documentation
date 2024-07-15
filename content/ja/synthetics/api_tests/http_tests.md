@@ -31,7 +31,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: ドキュメント
   text: Synthetic テストモニターについて
-kind: documentation
 title: HTTP テスト
 ---
 ## 概要

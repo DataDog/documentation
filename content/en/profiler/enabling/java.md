@@ -1,6 +1,5 @@
 ---
 title: Enabling the Java Profiler
-kind: Documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -111,7 +110,6 @@ java \
     -Ddd.env=<YOUR_ENVIRONMENT> \
     -Ddd.version=<YOUR_VERSION> \
     -Ddd.profiling.enabled=true \
-    -XX:FlightRecorderOptions=stackdepth=256 \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
@@ -125,7 +123,6 @@ export DD_VERSION=<YOUR_VERSION>
 export DD_PROFILING_ENABLED=true
 java \
     -javaagent:dd-java-agent.jar \
-    -XX:FlightRecorderOptions=stackdepth=256 \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
@@ -253,7 +250,7 @@ or:
 {{% tab "Datadog Profiler" %}}
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
-In dd-java-agent earlier than v1.28.0 it is **disabled** by default. The allocation profiler relies on JVMTI APIs which could crash before OpenJDK 21.0.3 and is disabled on older JDK versions. Enable it 
+In dd-java-agent earlier than v1.28.0 it is **disabled** by default. The allocation profiler relies on JVMTI APIs which could crash before OpenJDK 21.0.3 and is disabled on older JDK versions. Enable it
 with:
 
 ```

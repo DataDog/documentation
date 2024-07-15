@@ -11,7 +11,6 @@ further_reading:
 - link: profiler/profiler_troubleshooting/ddprof
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
-kind: ドキュメント
 title: コンパイル済み言語のネイティブプロファイラーを有効にする
 type: multi-code-lang
 ---

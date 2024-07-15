@@ -1,6 +1,6 @@
 ---
 title: Trace an LLM Application
-kind: guide
+
 aliases:
     - /tracing/llm_observability/trace_an_llm_application
 ---
@@ -9,8 +9,6 @@ aliases:
 LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
-
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
 ## Overview
 
@@ -37,7 +35,7 @@ To trace an LLM application:
     - Learn more about spans in the [Core Concepts][17] guide.
     - For additional examples and detailed usage, see the [Quickstart][8] and the [SDK documentation][9].
     - You can [nest spans](#nesting-spans) to create more useful traces.
-4. [Annotate your spans](#annotating-spans) with input data, output data, metadata (such as `temperature`), metrics (such as `prompt_tokens`), and key-value tags (such as `version:1.0.0`).
+4. [Annotate your spans](#annotating-spans) with input data, output data, metadata (such as `temperature`), metrics (such as `input_tokens`), and key-value tags (such as `version:1.0.0`).
 5. Optionally, add [advanced tracing features](#advanced-tracing), such as user sessions.
 6. Run your LLM application. 
     - If you used the command-line setup method, the command to run your application should use `ddtrace-run`, as described in [those instructions][6].
@@ -132,7 +130,7 @@ def process_message():
         input_data="<ARGUMENT>",
         output_data="<OUTPUT>",
         metadata={},
-        metrics={"prompt_tokens": 15, "completion_tokens": 24},
+        metrics={"input_tokens": 15, "output_tokens": 24},
         tags={},
     )
     return
@@ -151,7 +149,7 @@ def process_message():
             input_data="<ARGUMENT>",
             output_data="<OUTPUT>",
             metadata={},
-            metrics={"prompt_tokens": 15, "completion_tokens": 24},
+            metrics={"input_tokens": 15, "output_tokens": 24},
             tags={},
         )
     return

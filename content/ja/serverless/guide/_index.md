@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: サーバーレスモニタリングガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: サーバーレスモニタリングガイド
 ---

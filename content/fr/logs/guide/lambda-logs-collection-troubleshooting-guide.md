@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Guide de dépannage pour la collecte de logs de la fonction Lambda
 ---
 

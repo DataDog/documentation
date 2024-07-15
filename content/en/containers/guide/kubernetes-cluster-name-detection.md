@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Cluster Name Automatic Detection
-kind: documentation
 aliases:
   - /agent/faq/kubernetes-cluster-name-detection
   - /agent/guide/kubernetes-cluster-name-detection

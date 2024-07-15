@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the Ruby Profiler
-kind: Documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40
@@ -45,9 +44,9 @@ Datadog.configure do |c|
 end
 ```
 
-## Unexpected failures or errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
+## Unexpected failures or errors from Ruby gems that use native extensions
 
-Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
+The Ruby profiler gathers data by sending `SIGPROF` UNIX signals to Ruby applications, enabling finer-grained data gathering.
 
 Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][8].
 Rarely, native extensions or libraries called by them may have missing or incorrect error handling for the `EINTR` error code.
@@ -56,6 +55,7 @@ The following incompatibilities are known:
 * Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
 * [Using the `rugged` gem.][10]
 * Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
+* [Some APIs in the `Dir` class][13]
 
 In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
 
@@ -67,8 +67,6 @@ Datadog.configure do |c|
   c.profiling.advanced.no_signals_workaround_enabled = true
 end
 ```
-
-**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
 
 Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
@@ -106,3 +104,4 @@ end
 [10]: https://github.com/DataDog/dd-trace-rb/issues/2721
 [11]: https://github.com/DataDog/dd-trace-rb/issues/2976
 [12]: https://bugs.ruby-lang.org/issues/19991
+[13]: https://github.com/DataDog/dd-trace-rb/issues/3450

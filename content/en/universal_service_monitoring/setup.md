@@ -1,6 +1,5 @@
 ---
 title: Setting up Universal Service Monitoring
-kind: Documentation
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
@@ -39,8 +38,11 @@ Additional protocols and traffic encryption methods are supported in <a href="/u
 - If on Linux:
     - Your service is running in a container.
     - **Beta:** For non-containerized services see the [instructions here](#additional-configuration).
-- If on Windows IIS:
+- If on Windows
+  - IIS:
     - Your service is running on a virtual machine.
+  - Non-IIS:
+    - **Beta:** For non-IIS services see the [instructions here](#additional-configuration).
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
@@ -735,7 +737,7 @@ If you use load balancers with your services, enable additional cloud integratio
 
 ## Additional configuration
 
-The following systems or services require additonal configuration due to limited or beta support:
+The following systems or services require additional configuration:
 
 {{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
@@ -765,7 +767,37 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
+
+{{< collapse-content title="Non-IIS service discovery on Windows" level="h4" >}}
+<div class="alert alert-info">
+Universal Service Monitoring is available in <strong>beta</strong> to monitor non IIS services running on Windows environments.
+</div>
+
+Requires Agent version 7.42 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}}
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
@@ -813,7 +845,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
 
@@ -857,7 +889,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Istio Monitoring" level="h4" >}}
 
@@ -899,7 +931,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.

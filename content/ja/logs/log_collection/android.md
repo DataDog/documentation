@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer
   tag: ドキュメント
   text: ログの調査方法
-kind: ドキュメント
 title: Android ログの収集
 ---
 
@@ -25,7 +24,7 @@ title: Android ログの収集
 
     ```conf
     dependencies {
-        implementation "com.datadoghq:dd-sdk-android:x.x.x"
+        implementation "com.datadoghq:dd-sdk-android-logs:x.x.x"
     }
     ```
 

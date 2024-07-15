@@ -1,6 +1,5 @@
 ---
 title: Flex Logs
-kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 aliases:
   - /logs/log_configuration/flex_log/

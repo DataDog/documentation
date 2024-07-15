@@ -10,7 +10,7 @@ further_reading:
   tag: Documentation
   text: Log Management
 integration_id: apigee
-kind: Guide
+
 name: apigee
 short_description: Recueillir des logs Apigee
 title: Apigee

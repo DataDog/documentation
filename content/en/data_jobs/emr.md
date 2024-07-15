@@ -1,6 +1,5 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
-kind: documentation
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -24,8 +23,8 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 ### Store your Datadog API key in AWS Secrets Manager
 1. Take note of your [Datadog API key][1].
-1. In [AWS Secrets Manager][2], choose **Store a new secret**. 
-   - Under **Secret type**, select **Other type of secret**. 
+1. In [AWS Secrets Manager][2], choose **Store a new secret**.
+   - Under **Secret type**, select **Other type of secret**.
    - Under **Key/value pairs**, add your Datadog API key as a key-value pair, where the key is `dd_api_key`.
       {{< img src="data_jobs/emr/key_value.png" alt="AWS Secrets Manager, Store a new secret. A section titled 'Key/value pairs'. On the left, a text box containing 'dd_api_key'. On the right, a text box containing a redacted API key." style="width:80%;" >}}
    - Then, click **Next**.
@@ -38,15 +37,15 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
 
-1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script. 
+1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script.
 
    ```shell
    #!/bin/bash
 
    # Set required parameter DD_SITE
    DD_SITE={{< region-param key="dd_site" code="true" >}}
-   
-   # Set required parameter DD_API_KEY with Datadog API key. 
+
+   # Set required parameter DD_API_KEY with Datadog API key.
    # The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
    SECRET_NAME=datadog/dd_api_key
@@ -61,7 +60,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 
    ```
 
-   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.2.0.sh` to use the last stable version.
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.3.1.sh` to use the last stable version.
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
@@ -75,12 +74,12 @@ When your cluster is created, this bootstrap action installs the Datadog Agent a
 
 1. In your [Amazon EMR console][4], open the summary page for your newly created cluster. Take note of your cluster's **IAM role for instance profile**.
 
-   Alternatively, you can also find this value by running: 
+   Alternatively, you can also find this value by running:
    ```shell
    aws emr describe-cluster --cluster-id <YOUR_CLUSTER_ID>
    ```
    Look for `Ec2InstanceAttributes.IamInstanceProfile` in the output.
-1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
+1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
 1. Click on the instance profile you saw in the previous step.
 1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
 1. On the **Specify permissions** page, find the **Select a service** section. Under **Service**, select **Secrets Manager**.

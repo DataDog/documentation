@@ -1,6 +1,5 @@
 ---
 title: Configuring the .NET Core Tracing Library
-kind: documentation
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60

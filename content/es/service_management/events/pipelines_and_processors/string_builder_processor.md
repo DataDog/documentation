@@ -1,5 +1,4 @@
 ---
-kind: Documentación
 title: Procesador de generación de cadenas
 ---
 

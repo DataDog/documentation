@@ -1,6 +1,6 @@
 ---
 title: Monitoring HCP Consul with Datadog
-kind: guide
+
 further_reading:
   - link: "/integrations/consul/"
     tag: "Documentation"

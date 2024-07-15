@@ -1,6 +1,5 @@
 ---
 title: Configuring the Ruby Tracing Library
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30

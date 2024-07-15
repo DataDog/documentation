@@ -45,7 +45,9 @@
       "count": 2,
       "interval": 10
     },
-    "tick_every": 300
+    "tick_every": 300,
+    "enableProfiling": true,
+    "enableSecurityTesting": true
   },
   "tags": [
     "testing:browser"

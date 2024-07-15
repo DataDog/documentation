@@ -20,7 +20,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Datadog を使った効果的なタグ付けに関するインタラクティブなセッションに参加できます
-kind: ドキュメント
 title: タグの使用を開始する
 ---
 

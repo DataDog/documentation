@@ -1,6 +1,6 @@
 ---
 title: Serverless Monitoring Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:
@@ -21,7 +21,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure App Service and Container Apps" >}}
-    {{< nextlink href="/serverless/guide/azure_app_service_linux_serverless_init" >}}Instrumenting Linux containers on Azure App Service using serverless-init{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Instrumenting Linux containers on Azure App Service using Azure Sidecar{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Install using the Datadog Forwarder

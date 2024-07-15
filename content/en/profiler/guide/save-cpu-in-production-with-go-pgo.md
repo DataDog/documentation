@@ -1,6 +1,5 @@
 ---
 title: Go - Save up to 14% CPU in Production with Profile-Guided Optimization
-kind: guide
 further_reading:
 - link: "/profiler"
   tag: "Documentation"
@@ -58,6 +57,7 @@ The `pgo` tag was implemented in dd-trace-go 1.61.0, so any profiles prior to th
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://tip.golang.org/doc/go1.21
 [2]: /profiler/enabling/go
 [3]: https://github.com/golang/go/issues/65532

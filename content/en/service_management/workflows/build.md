@@ -1,6 +1,5 @@
 ---
 title: Build workflows
-kind: documentation
 disable_toc: false
 aliases:
 - /workflows/build
@@ -42,10 +41,6 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 ## Create a workflow with AI
-
-{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
-AI functionality for Workflow Automation is in private beta.
-{{< /callout >}}
 
 If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
@@ -156,6 +151,27 @@ Source object variables are properties of the triggering event that are resolved
 All the variables of the Source object are visible in the Context Variables tab.
 
 {{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
+
+## Workflow notifications
+
+You can configure your workflow to send you a notification on success or failure. The following integrations are supported:
+- Slack
+- Microsoft Teams
+- PagerDuty
+- Email
+
+To add a notification:
+1. In the workflow configuration panel, scroll down to the **Notifications** section.
+1. To add a notification if the workflow succeeds:
+   1. Click the plus (`+`) icon next to **Notify on success**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
+1. To add a notification if the workflow fails:
+   1. Click the plus (`+`) icon next to **Notify on failure**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
 
 ## Error handling
 

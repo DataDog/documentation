@@ -1,6 +1,5 @@
 ---
 title: Nginx Compatibility Requirements
-kind: documentation
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 40
@@ -17,7 +16,7 @@ specified tracer version:
 | Threat Protection                      | 1.2.0                        |
 | Customize response to blocked requests | 1.2.0                        |
 | Software Composition Analysis (SCA)    | not applicable               |
-| Code Security (beta)                   | not applicable               |
+| Code Security                          | not applicable               |
 | Automatic user activity event tracking | not supported                |
 | API Security                           | not supported                |
 

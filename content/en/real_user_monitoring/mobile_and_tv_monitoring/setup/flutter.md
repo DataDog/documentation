@@ -1,6 +1,5 @@
 ---
 title: RUM Flutter Monitoring Setup
-kind: documentation
 description: Collect RUM data from your Flutter projects.
 aliases:
     - /real_user_monitoring/flutter/
