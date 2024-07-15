@@ -30,7 +30,7 @@ products:
 
 Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Notification rules can span across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
-{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
+{{< img src="security/notification-rules-overview.png" alt="Notification Rules overview page" style="width:100%;" >}}
 
 ## Create notification rules
 
