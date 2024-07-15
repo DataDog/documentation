@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -292,7 +292,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
               title: Continuous Testing and Bitrise
-      
+
       - repo_name: synthetics-test-automation-bitrise-step-run-tests
         contents:
         - action: pull-and-push-file
@@ -636,3 +636,14 @@
               front_matters:
                 dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
                 title: (Legacy) Ruby Compatibility Requirements
+
+      - repo_name: semantic-core
+        contents:
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - "generated/domains/documentation/opentelemetry/otel-sem-http-table.md"
+            options:
+              base_path: ""
+              dest_path: "/layouts/shortcodes/"
+              file_name: "otel-sem-http-table.md"

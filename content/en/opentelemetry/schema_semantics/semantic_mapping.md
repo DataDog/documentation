@@ -35,7 +35,7 @@ For more information, see [Unified Service Tagging][2].
 | `container.image.name` | `image_name` |
 | `container.image.tag` | `image_tag` |
 
-Read more about [Containers semantic conventions in the OpenTelemetry documentation][3]. 
+Read more about [Containers semantic conventions in the OpenTelemetry documentation][3].
 
 Additional cloud provider-specific attributes are also mapped.
 
@@ -85,21 +85,7 @@ Additional cloud provider-specific attributes are also mapped.
 
 ### HTTP
 
-| OpenTelemetry convention | Datadog convention |
-| --- | --- |
-| `client.address` | `http.client_ip` |
-| `http.response.body.size` | `http.response.content_length` |
-| `http.response.header.<header-name>` | `http.response.headers.<header-name>` |
-| `http.response.status_code` | `http.status_code` |
-| `http.request.body.size` | `http.request.content_length` |
-| `http.request.header.referrer` | `http.referrer` |
-| `http.request.header.<header-name>` | `http.request.headers.<header-name>` |
-| `http.request.method` | `http.method` |
-| `http.route` | `http.route` |
-| `network.protocol.version` | `http.version` |
-| `server.address` | `http.server_name` |
-| `url.full` | `http.url` |
-| `user_agent.original` | `http.useragent` |
+{{% otel-sem-http-table %}}
 
 ## Metrics attribute mapping
 

@@ -146,6 +146,9 @@ data/workflows/
 # semantic tag colors
 layouts/shortcodes/semantic-color.md
 
+# semantic-core
+layouts/shortcodes/otel-sem-http-table.md
+
 # Runtime data
 pids
 *.pid
