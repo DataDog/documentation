@@ -7,10 +7,9 @@
 1. Do not add a retention policy because the most recent data needs to be rewritten in some rare cases (typically a timeout case).
 1. Click **Create**.
 
-### Create a service account to allow Workers to write to the bucket
+### Allow the Observability Pipeline Worker to write to the bucket
 
-1. Create a Google Cloud Storage [service account][9092].
-1. Follow these [instructions][9093] to create a service account key and download the JSON service account key file. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`.
+To authenticate the Observability Pipelines Worker for Google Cloud Storage, contact your Google Security Operations representative for a Google Developer Service Account Credential. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`. See [Getting API authentication credential][9092] for more information.
 
 ### Connect the storage bucket to Datadog Log Archives
 
@@ -29,8 +28,7 @@
 See the [Log Archives documentation][9096] for additional information.
 
 [9091]: https://console.cloud.google.com/storage
-[9092]: https://cloud.google.com/docs/authentication#service-accounts
-[9093]: https://cloud.google.com/iam/docs/keys-create-delete#creating
+[9092]: https://cloud.google.com/chronicle/docs/reference/ingestion-api#getting_api_authentication_credentials
 [9094]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [9095]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [9096]: /logs/log_configuration/archives
