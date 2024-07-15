@@ -142,7 +142,6 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/config.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/config.yaml"; \
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
-
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################
