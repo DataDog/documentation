@@ -23,7 +23,7 @@ This document walks through the following steps:
 
 If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
 
-You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][2], [Google Cloud Platform][4], and [Azure integration][3] documentation for more information.
+You need to have the Datadog integration for your cloud provider installed to set up Datadog Log Archive. See [AWS integration][1], [Google Cloud Platform][2], and [Azure integration][3] documentation for more information.
 
 {{% collapse-content title="Amazon S3" level="h4" %}}
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
@@ -68,7 +68,7 @@ You need to have the Datadog integration for your cloud provider installed to se
 
 ## Set up Observability Pipelines
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [Observability Pipelines][4].
 1. Select the **Archive Logs** template to create a new pipeline.
 1. Select **Splunk HEC** as the source.
 
@@ -299,7 +299,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% observability_pipelines/log_source_configuration/splunk_hec %}}
 
-[1]: https://app.datadoghq.com/observability-pipelines
-[2]: /integrations/amazon_web_services/#setup
+[1]: /integrations/amazon_web_services/#setup
+[2]: /integrations/google_cloud_platform/#setup
 [3]: /integrations/azure/#setup
-[4]: /integrations/google_cloud_platform/#setup
+[4]: https://app.datadoghq.com/observability-pipelines
