@@ -11,7 +11,7 @@ import MarkdocStaticCompiler from 'markdoc-static-compiler';
 import { findInDir } from './helpers/filesystem';
 import prettier from 'prettier';
 
-export class MarkdocToHugoCompiler {
+export class MarkdocHugoIntegration {
   prefOptionsConfig: PrefOptionsConfig;
   sitewidePrefNames: string[] = [];
   markdocFiles: string[] = [];
