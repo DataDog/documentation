@@ -78,7 +78,7 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 | :----       | :-------                                                             | :---------                  |
 | `ewma_20()` | Compute the exponentially weighted moving average over a span of 20. | `ewma_20(<METRIC_NAME>{*})` |
 
-Note: The span value is the number of data points. So `ewma_20()` uses the last 20 data points to calculate the average.
+Note: The span value is weighted average age of the series. So `ewma_20()` is comparable to a 20-day rolling average.
 
 Example:
 
