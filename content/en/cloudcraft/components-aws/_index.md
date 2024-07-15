@@ -6,6 +6,7 @@ title: "AWS Components"
     {{< nextlink href="cloudcraft/components-aws/region">}}Region{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/vpc">}}VPC{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/security-group">}}Security group{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/network-acl">}}Network ACL{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/subnet">}}Subnet{{< /nextlink >}}
 {{< /whatsnext >}}
 
