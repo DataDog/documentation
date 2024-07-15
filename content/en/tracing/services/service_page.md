@@ -100,32 +100,46 @@ Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you 
 
 ## Out-of-the-box graphs
 
-Datadog provides [out-of-the-box graphs][8] for any given Service:
-
-* Requests - Choose to display:
-    *  The **Total amount of requests and errors**
-    *  The amount of **Requests and errors per second**
-* Latency - Choose to display:
-    * The **Latency** by Version
-    * The **Latency** by Percentile (Avg/p75/p90/p95/p99/p99.9/Max latency of your traced requests) as a timeseries
-    * The **Historical Latency** to compare the Latency distribution with the day and week before
-    * The **Latency Distribution** over the selected timeframe
-    * The **Latency** by Error to evaluate the latency impact of an error on traced requests
-    * The **Apdex score** for web services; [learn more about Apdex][9]
-* Error - Choose to display:
-    * The **Total amount of errors**
-    * The amount of **Errors per second**
-    * The **% Error Rate**
-* Dependency Map:
-    * The **Dependency Map** showing upstream and downstream services.
-* **Sub-services**: When there are multiple services involved, a fourth graph (in the same toggle option as the Dependency Map) breaks down your **%of time spent** of your service by *services* or *type*.
-
-    This represents the relative time spent by traces in downstream services from the current service to the other *services* or *type*.
-
-    **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
-[Watchdog][7] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
+Datadog provides [out-of-the-box graphs][8] for any given service. Use the dropdown above each graph to change the displayed information.
 
 {{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs" style="width:100%;">}}
+
+### Requests and Errors
+
+The **Requests and Errors** graph displays the total number of requests (hits) and errors over time. Using the dropdown menu, you can also view:
+
+- **Requests by Version**: Breakdown of requests across different service versions.
+- **Requests per Second by Version**: The rate of requests for each version.
+- **Requests and Errors Per Second**: The rate of requests (hits) and errors per second.
+
+### Errors
+
+The **Errors** graph displays the total count of errors over time. Using the dropdown menu, you can also view:
+
+- **Errors by Version**: The error counts for each service version side by side.
+- **Errors per Second by Version**: The error rate (errors per second) for each service version over time.
+- **Errors per Second**: The overall error rate for the service, per second.
+- **% Error Rate by Version**: The percentage of requests resulting in errors for each service version.
+- **% Error Rate**: The overall error rate for the service, as a percentage.
+
+### Latency
+
+The **Latency** graph displays the latency percentiles as a timeseries. Using the dropdown menu, you can also view:
+
+- **Latency by Version**: Latency broken down by service version.
+- **Historical Latency**: Comparison of the current latency distribution with the previous day and week.
+- **Latency Distribution**: The distribution of latencies over the selected time frame.
+- **Latency by Error**: The latency of requests over time, segmented by whether the requests resulted in errors.
+- **Apdex** (Application Performance Index): The [Apdex][9] score over time.
+
+### Avg Time per Request
+
+For services involving multiple downstream services, a fourth graph breaks down the average [execution time][24] spent per request. Using the dropdown menu, you can also view:
+
+- **Total Time Spent**: The cumulative time spent in each downstream service over time.
+- **% of Time Spent**: The percentage of time spent in each downstream service relative to the total time.
+
+For services like Postgres or Redis, which are final operations that do not call other services, there is no sub-services graph.[Watchdog][7] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If an anomaly is detected, an overlay appears on the graph. Clicking the Watchdog icon provides more details in a side panel.
 
 ### Export
 
@@ -278,3 +292,4 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/
 [23]: https://app.datadoghq.com/services
+[24]: /glossary/#execution-time
