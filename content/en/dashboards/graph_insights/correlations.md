@@ -2,6 +2,7 @@
 title: Metric Correlations
 aliases:
     - /graphing/correlations/
+    - /dashboards/correlations/
 further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
@@ -23,7 +24,7 @@ further_reading:
 
 Metric Correlations can help you find potential root causes for an observed issue by searching for other metrics that exhibited irregular behavior around the same time. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics.
 
-## Search
+## Find correlated metrics
 
 You can start your metric correlations exploration from any of your dashboards, notebooks, APM, Watchdog alerts, or monitor status pages.
 
@@ -38,17 +39,15 @@ Correlations *tries* to automatically detect the area of interest (anomalous beh
 
 **Note**: Correlation searches are available for a single metric. For graphs with multiple metrics, select the series of interest. From a full-screen graph, select one series on the graph legend, then click the **Correlations** tab.
 
-### Edit
+## Customize your search
 
 You can customize the default search parameters of correlations. From a full-screen graph, on the *Correlations* tab, click the **Edit Search** button, or click directly on the graph.
 
-* Click and drag on the graph to set the timeframe for your correlations search. If an area is already selected (pink box), you can move or resize the selection.
-* Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
-* `Auto-select` or `Custom select` from specific categories. For custom metrics, at least one selection is required.
-* Custom metrics is the only category not selected by default. Choose metric namespaces or single metrics to search correlations upon.
-* Use the tag filter box to scope the search by a tag.
-
-### Results
+1. Click and drag on the graph to set the timeframe for your correlations search. 
+1. Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
+1. Select `Auto-select` or `Custom select` from specific categories. For custom metrics, at least one selection is required.
+   * Custom metrics is the only category not selected by default. Choose metric namespaces or single metrics to search correlations upon.
+1. Use the tag filter box to scope the search by a tag.
 
 A list of search results is displayed below the search graph with the following:
 
@@ -59,7 +58,7 @@ A list of search results is displayed below the search graph with the following:
 
 {{< img src="dashboards/correlations/search_results.png" alt="Search results" style="width:80%;">}}
 
-As results load, you can explore the details without waiting for all results. When the search is finished, the message "Search completed!" appears.
+As results load, you can explore the details without waiting for all results. 
 
 ## Investigate
 

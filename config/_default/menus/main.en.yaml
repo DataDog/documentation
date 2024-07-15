@@ -1271,11 +1271,21 @@ menu:
       url: dashboards/functions/beta/
       parent: dashboards_functions
       weight: 512
-    - name: Correlations
-      identifier: dashboards_correlations
-      url: dashboards/correlations/
+    - name: Graph Insights
+      identifier: dashboards_graph_insights
+      url: dashboards/graph_insights
       parent: dashboards
       weight: 6
+    - name: Metric Correlations
+      identifier: dashboards_correlations
+      url: dashboards/graph_insights/correlations/
+      parent: dashboards_graph_insights
+      weight: 601
+    - name: Watchdog Explains
+      identifier: dashboards_watchdog_explains
+      url: dashboards/graph_insights/watchdog_explains/
+      parent: dashboards_graph_insights
+      weight: 602
     - name: Template Variables
       url: dashboards/template_variables/
       parent: dashboards

@@ -68,6 +68,14 @@ To share a given outlier, click on it in the insight panel to open the details s
 
 The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
 
+## Explore graph insights with Watchdog explains
+
+Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. Watchdog Explains analyzes high-level trends such as latency, error rates, or request count evolution to detect critical signals. Upon observing a spike in these graphs, Watchdog Explains helps you investigate the immediate questions:
+- What is the source of the spike?
+- Does this anomaly affect everyone or is an isolated incident?
+
+For more information, see the [Watchdog Explains][2] documentation.
+
 ## Outlier types
 
 {{< tabs >}}
