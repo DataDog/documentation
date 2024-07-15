@@ -74,7 +74,7 @@ Datadog collects various types of data to provide insights into application perf
 - What is the source of the spike?
 - Does this anomaly affect everyone or is an isolated incident?
 
-For more information, see the [Watchdog Explains][2] documentation.
+For more information, see the [Watchdog Explains][14] documentation.
 
 ## Outlier types
 
@@ -304,3 +304,4 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
+[14]: dashboards/graph_insights/watchdog_explains
