@@ -84,9 +84,9 @@ To set bootstrap options, do one of the following:
 
 ## Referencing files in Kubernetes
 
-If you are referencing files (for example, `credentials.json` for Google Cloud Storage or TLS certificates for sources) in Kubernetes, you need to use `volumeMounts[*].subPath` to mount files from `configMap` or `secret`.
+If you are referencing files in Kubernetes for Google Cloud Storage authentication, TLS certificates for certain sources, or an enrichment table processor, you need to use `volumeMounts[*].subPath` to mount files from `configMap` or `secret`.
 
-For example, if you are have a `secret` defined as:
+For example, if you have a `secret` defined as:
 
 ```
 apiVersion: v1
@@ -118,7 +118,7 @@ extraVolumeMounts:
     subPath: credentials2.json
 ```
 
-**Note**: If you override  the`datadog.dataDir` parameter, you need to override the `mountPath` as well.
+**Note**: If you override the`datadog.dataDir` parameter, you need to override the `mountPath` as well.
 
 ## Further reading
 
