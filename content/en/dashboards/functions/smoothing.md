@@ -28,7 +28,7 @@ The `autosmooth()` function cannot be used in monitors. Being that the span is c
 | :----      | :-------                                                            | :---------                 |
 | `ewma_3()` | Compute the exponentially weighted moving average over a span of 3. | `ewma_3(<METRIC_NAME>{*})` |
 
-Note: The span value is weighted average age of the series. So `ewma_3()` is comparable to a 3-day rolling average.
+Note: The span value is twice the weighted average age of the series. So `ewma_3()` is comparable to a 3-day rolling average.
 
 Example:
 
@@ -42,7 +42,7 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 | :----      | :-------                                                            | :---------                 |
 | `ewma_5()` | Compute the exponentially weighted moving average over a span of 5. | `ewma_5(<METRIC_NAME>{*})` |
 
-Note: The span value is weighted average age of the series. So `ewma_5()` is comparable to a 5-day rolling average.
+Note: The span value is twice the weighted average age of the series. So `ewma_5()` is comparable to a 5-day rolling average.
 
 Example:
 
@@ -56,7 +56,7 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 | :----      | :-------                                                            | :---------                 |
 | `ewma_7()` | Compute the exponentially weighted moving average over a span of 7. | `ewma_7(<METRIC_NAME>{*})` |
 
-Note: The span value is weighted average age of the series. So `ewma_7()` is comparable to a 7-day rolling average.
+Note: The span value is twice the weighted average age of the series. So `ewma_7()` is comparable to a 7-day rolling average.
 
 ### Ewma 10
 
@@ -64,7 +64,7 @@ Note: The span value is weighted average age of the series. So `ewma_7()` is com
 | :----       | :-------                                                             | :---------                  |
 | `ewma_10()` | Compute the exponentially weighted moving average over a span of 10. | `ewma_10(<METRIC_NAME>{*})` |
 
-Note: The span value is weighted average age of the series. So `ewma_10()` is comparable to a 10-day rolling average.
+Note: The span value is twice the weighted average age of the series. So `ewma_10()` is comparable to a 10-day rolling average.
 
 Example:
 
@@ -78,7 +78,7 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 | :----       | :-------                                                             | :---------                  |
 | `ewma_20()` | Compute the exponentially weighted moving average over a span of 20. | `ewma_20(<METRIC_NAME>{*})` |
 
-Note: The span value is weighted average age of the series. So `ewma_20()` is comparable to a 20-day rolling average.
+Note: The span value is twice the weighted average age of the series. So `ewma_20()` is comparable to a 20-day rolling average.
 
 Example:
 
