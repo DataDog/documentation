@@ -26,7 +26,7 @@ title: Rastreo de aplicaciones Python
 type: lenguaje de código múltiple
 ---
 ## Requisitos de compatibilidad
-Para consultar la lista completa de compatibilidades de versiones Python y de marcos de Datadog (incluyendo las versiones heredadas y de mantenimiento), consulta la página de [requisitos de compatibilidad][1].
+Para ver la lista completa de compatibilidad de versiones Python y de marcos de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta la página de [requisitos de compatibilidad][1].
 
 ## Para empezar
 
