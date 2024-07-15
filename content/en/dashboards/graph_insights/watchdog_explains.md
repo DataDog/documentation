@@ -1,5 +1,5 @@
 ---
-title: Metric Correlations
+title: Watchdog Explains
 aliases:
     - /graphing/correlations/
     - /dashboards/correlations/
@@ -13,11 +13,9 @@ further_reading:
 
 <div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
 
-
 Watchdog Explains is an investigation assitant that guides you to the root cause of anomalies on any timeseries graph. 
 
 In Datadog, an investigation typically starts with graphs, then branches out into investigating individual assets. Watchdog Explains makes investigations more efficient by automatically showing which individual tags account for a given spike. This allows you to narrow in directly on problematic areas of your infrastructure or software stack.
-
 
 ## How does it work?
 
