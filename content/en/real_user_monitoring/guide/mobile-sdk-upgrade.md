@@ -143,7 +143,7 @@ let package = Package(
   <summary>CocoaPods</summary>
 
   ```ruby
-  pod 'DatadogCore'
+  pod 'DatadogCore', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :commit => '<COMMIT_HASH>' # Example hash: '312e7c2f43'
   pod 'DatadogLogs'
   pod 'DatadogTrace'
   pod 'DatadogSessionReplay'

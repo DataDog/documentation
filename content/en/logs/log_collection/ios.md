@@ -28,9 +28,9 @@ The `dd-sdk-ios` library supports all versions of iOS 11 or later.
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
 
-You can use [CocoaPods][6] to install `dd-sdk-ios`:
+You can use [CocoaPods][6] to install `dd-sdk-ios`. For security reasons, use the Git provider and the hash of a specific commit:
 ```
-pod 'DatadogCore'
+pod 'DatadogCore', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :commit => '<COMMIT_HASH>' # Example hash: '312e7c2f43'
 pod 'DatadogLogs'
 ```
 
