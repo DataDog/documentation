@@ -26,6 +26,7 @@ The following table summarizes the scope of coverage available relative to each 
 | Kubernetes Cluster              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
 | Docker Host                     | {{< X >}}             |             |                     |                    |                        |
 | Linux Host                      | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    | {{< X >}}              |
+| Windows Host                    |                       | {{< X >}}   | beta                |                    |                        |
 | Docker Container                |                       | {{< X >}}   |                     |                    |                        |
 | Container Image                 |                       |             | {{< X >}}           |                    | {{< X >}}              |
 | IAM in AWS Account              |                       |             |                     | {{< X >}}          |                        |
