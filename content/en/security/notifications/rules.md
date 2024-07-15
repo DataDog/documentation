@@ -7,6 +7,7 @@ aliases:
   - /security_platform/notifications/rules/
   - /security/notification_profiles/
   - /security/notification_rules/
+  - /security/upcoming_changes_notification_rules/
 further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"
@@ -33,31 +34,22 @@ Security notification rules play a key role in keeping your team informed of iss
 
 ## Create notification rules
 
-To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes.
+To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes. If the notification rule matches the specified conditions, the resulting notification includes details about the matched notification rule in the notification footer.
 
-As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Preview of matching results** panel. This can be useful in determining if the notification rule is too specific or broad.
+<div class="alert alert-info">As you configure the rule, a preview of issues matching the notification rule conditions appears on the <strong>Preview of Matching Results</strong> panel. This can be useful in determining if the notification rule is too specific or broad.</div>
 
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
 1. Enter a **Name** for the notification rule.
 1. Select the source type for the notification rule:
-    - A vulnerability represents a potential security flaw in your infrastructure.
-    - A threat (signal) represents suspicious activity that poses an active threat against your infrastructure.
-1. ...
+    - **Vulnerability**: A potential security flaw in your infrastructure.
+    - **Signal**: Suspicious activity that poses an active threat against your infrastructure.
+1. Select one or more severity levels.
+1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
+1. Click **Add Recipient**.
+1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
 1. Click **Save**.
 
-
-1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
-2. Under **Source Types**, select the detection rule types you want to include in the notification rule.
-3. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
-4. Under **Rule Criteria**, select one or more severity levels.
-5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
-6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
-7. Enter a name for the notification rule.
-8. Click **Save and Activate**.
-
-{{< img src="security/notification-profiles-setup3.png" alt="Setup of a notification rule" style="width:100%;" >}}
-
-If the notification rule matches the specified conditions, the resulting notification includes details about the matched notification rule in the notification footer.
+{{< img src="security/notification-rules-setup.png" alt="Setup page for creating a notification rule" style="width:100%;" >}}
 
 ## Manage notification rules
 
