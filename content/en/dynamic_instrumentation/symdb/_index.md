@@ -1,5 +1,6 @@
 ---
 title: Autocomplete and Search
+kind: documentation
 is_beta: true
 private: false
 further_reading:

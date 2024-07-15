@@ -20,6 +20,7 @@ further_reading:
   tag: Blog
   text: Uso de consultas con notación de CIDR para filtrar tus logs de tráfico de
     red
+kind: documentación
 title: Atributos y alias
 ---
 

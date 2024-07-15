@@ -7,6 +7,7 @@ further_reading:
 - link: /real_user_monitoring/browser/
   tag: Documentation
   text: En savoir plus sur la surveillance Browser RUM
+kind: guide
 title: Mettre à jour votre configuration pour RUM Browser et l'échantillonnage de
   RUM Browser et Session Replay
 ---

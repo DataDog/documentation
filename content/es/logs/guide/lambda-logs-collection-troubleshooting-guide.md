@@ -4,6 +4,7 @@ further_reading:
   tag: Blog
   text: Ampliación de las capacidades de extensión Lambda de Datadog con la API de
     telemetría de AWS Lambda
+kind: documentación
 title: Guía para la resolución de problemas de recopilación de logs de la función
   Lambda
 ---

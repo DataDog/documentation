@@ -25,6 +25,7 @@ further_reading:
   text: サービス、リソース、トレースの詳細
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   text: Datadog および OpenTelemetry のイニシアティブのイニシアティブについて
+kind: ドキュメント
 title: Datadog ライブラリを使ったカスタムインスツルメンテーション
 type: multi-code-lang
 ---

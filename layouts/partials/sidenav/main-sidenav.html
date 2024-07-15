@@ -9,8 +9,7 @@
                 load searchbar if not on search results page, else
                 append the searchbar asynchronously (async-loading.js)
             */}}
-
-            {{ if and $dot.File (ne $dot.File.Path "search.md") }}
+            {{ if ne $dot.File.Path "search.md" }}
             {{ partial "search.html" . }}
             {{ else }}
             <div id="async-searchbar-mount"></div>

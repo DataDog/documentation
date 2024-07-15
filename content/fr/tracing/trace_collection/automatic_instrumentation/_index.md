@@ -6,6 +6,7 @@ further_reading:
 - link: /tracing/glossary/
   tag: Documentation
   text: Termes et concepts d'APM
+kind: documentation
 title: Instrumentation automatique
 ---
 

@@ -6,6 +6,7 @@ further_reading:
 - link: /tracing/service_catalog/setup/
   tag: Documentación
   text: Configuración del Catálogo de servicios
+kind: documentación
 title: Solucionar problemas del Catálogo de servicios
 ---
 

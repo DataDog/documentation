@@ -4,6 +4,7 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: ドキュメント
   text: 機密データスキャナーの設定
+kind: ドキュメント
 title: 正規表現の構文
 ---
 
