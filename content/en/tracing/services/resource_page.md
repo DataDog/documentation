@@ -30,24 +30,11 @@ A resource is a particular action for a given [service][1] (typically an individ
 
 ## Out-of-the-box graphs
 
-Datadog provides out-of-the-box graphs for any given resource:
-
-* Requests - Choose to display:
-    *  The **Total amount of requests**
-    *  The amount of **Requests per second**
-* Latency -  Choose to display:
-    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests
-* Error - Choose to display:
-    * The **Total amount of errors**
-    * The amount of **Errors per second**
-    * The **% Error Rate**
-* Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
-
-    This represents the total/relative/average time spent by [traces][3] from the current service to the other *services* or *type*.
-
-    **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
+Datadog provides out-of-the-box graphs for any given resource. Use the dropdown above each graph to change the displayed information.
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out-of-the-box resource graphs showing requests per second, latency, total errors, and percent time spent per service" style="width:90%;">}}
+
+{{% apm-ootb-graphs %}}
 
 ### Export to dashboard
 
@@ -65,11 +52,11 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 ## Dependency Map with Navigator
 
-You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map Navigator, you can see the flow of services, with spans that go through a specific resource ( endpoint, database query, etc.) end-to-end, along with their request counts. 
+You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map Navigator, you can see the flow of services, with spans that go through a specific resource ( endpoint, database query, etc.) end-to-end, along with their request counts.
 
-This map is based on a sample of ingested spans; the sample is drawn by a fixed sampling algorithm that considers the structure of traces. The sampling algorithm is not configurable and is not impacted by ingestion control. 
+This map is based on a sample of ingested spans; the sample is drawn by a fixed sampling algorithm that considers the structure of traces. The sampling algorithm is not configurable and is not impacted by ingestion control.
 
-The dependency map is only available for resources containing service entry spans. 
+The dependency map is only available for resources containing service entry spans.
 
 {{< img src="tracing/visualization/resource/dependency-map-navigator-cropped.png" alt="A dependency map for a resource, with a list of service dependencies and flow diagram of requests from service to service" style="width:100%;" >}}
 
