@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: サービスのレイテンシーを前週と比較する
 ---
 

@@ -27,9 +27,9 @@ There are four supported versions of the schema:
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
 - V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience.
 - V2.2 supports user annotation and overwriting auto-detected service type and languages using the fields `type` and `languages`. It also adds support for associating CI pipelines with a service using the field `ci-pipeline-fingerprints`. This version also includes less restrictive validation logic for `contact.type` and `link.type`, so users should expect fewer warnings while submitting YAML.
-- V3.0 adds a `kind` field that supports schemas for additional component types including applications, internal and external libraries, queues, and datastores. Any components within an `application` implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through Distributed Tracing and Universal Service Monitoring.
+- V3.0 adds a `kind` field that supports schemas for additional component types including systems, queues, and datastores. Any components within a `system` implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through distributed tracing and Universal Service Monitoring. In v3.0, `application` is replaced with `system`.
 
-For more information about the latest updates, see the schemas on GitHub.
+For more information about the latest updates, see the [schemas][2] on GitHub.
 
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
@@ -37,20 +37,27 @@ For more information about the latest updates, see the schemas on GitHub.
 ### Metadata Schema v3.0 (beta) 
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][1].
 
+{{< callout type="info" header="Change to Field Name in the v3.0 Schema" btn_hidden="true" >}}
+For beta customers using v3.0, <code>application</code> has been replaced with <code>system</code> in the documentation to match the updated public schema terminology. 
+{{< /callout >}}
+
 #### New features in v3.0
 ##### Expanded data model
-v3.0 supports multiple kinds of entities. You can organize your systems using various components such as applications, services, queues, and datastores.
+v3.0 supports multiple kinds of entities. You can organize your systems using various components such as systems, services, queues, and datastores.
+
+##### Multi-ownership 
+You can assign multiple owners to any objects defined through the v3.0 schema to specify multiple points of contact.
 
 ##### Enhanced relationship mapping
-With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected application topology to ensure a complete overview of how components interact within your applications.
+With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
 
-##### Inheritance of application metadata
-Components within an application automatically inherit the application's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
+##### Inheritance of system metadata
+Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
 
-#### Example YAML for `kind:application`
+#### Example YAML for `kind:system`
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
-kind: application
+kind: system
 metadata:
   name: myapp
   namespace: default
@@ -119,13 +126,13 @@ datadog:
       - fp2
 {{< /code-block >}}
 
-#### Specify common components that are part of multiple applications
-If a single component is part of multiple applications, you must specify that component in the YAML for each application. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
+#### Specify common components that are part of multiple systems
+If a single component is part of multiple systems, you must specify that component in the YAML for each system. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
-For the postgres fleet (`managed-postgres`), specify a definition for `kind:application`:
+For the postgres fleet (`managed-postgres`), specify a definition for `kind:system`:
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
-kind: application
+kind: system
 spec:
   components:
     - datastore:orders-postgres
@@ -136,11 +143,11 @@ metadata:
   owner: db-team
 {{< /code-block >}}
 
-For the web application (`shopping-cart`), declare a separate definition for `kind:application`:
+For the web application (`shopping-cart`), declare a separate definition for `kind:system`:
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 
 apiVersion: v3
-kind: application
+kind: system
 spec:
   lifecycle: production
   tier: critical
@@ -189,8 +196,8 @@ The `inheritFrom` field instructs the ingestion pipeline to inherit metadata fro
 Note: The entity reference only applies to an entity from the same YAML file. 
 
 ##### Implicit Inheritance 
-Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the application that they belong to under the following conditions:
-- There is only one application defined in the YAML file.
+Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the system that they belong to under the following conditions:
+- There is only one system defined in the YAML file.
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 #### v3.0 API endpoints (alpha)
@@ -204,7 +211,7 @@ curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>' \
 --data-raw '
 apiVersion: v3
-kind: application
+kind: system
 metadata:
   name: shopping-cart-app
   tags:
@@ -288,3 +295,4 @@ URL Parameter: `ref <kind>:<name>`
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[2]: https://github.com/DataDog/schema/tree/main/service-catalog

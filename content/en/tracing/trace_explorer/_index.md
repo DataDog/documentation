@@ -130,7 +130,7 @@ All spans indexed by custom retention filters or the intelligent retention filte
 
 From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
 
-**Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards, notebooks, and from trace analytics monitor evaluations. For more information, see [Trace Retention][4].
+**Note**: Spans indexed by the intelligent retention filter are excluded from APM trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 
 [1]: /dashboards/widgets/timeseries/
 [2]: /monitors/types/apm/?tab=analytics

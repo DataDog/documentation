@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
   text: RUM エクスプローラーで RUM データを視覚化する
-kind: ガイド
 private: true
 title: LaunchDarkly を使用した RUM のリモート構成
 ---

@@ -5411,6 +5411,12 @@ components:
     CostByOrgAttributes:
       description: Cost attributes data.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         charges:
           description: List of charges data reported for the requested month.
           items:
@@ -15132,7 +15138,8 @@ components:
           type: integer
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
         updated_at:
@@ -15175,7 +15182,8 @@ components:
           type: string
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
       required:
@@ -15248,7 +15256,8 @@ components:
           type: integer
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
         updated_at:
@@ -15318,7 +15327,8 @@ components:
           type: string
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
       type: object
@@ -17578,6 +17588,18 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
       required:
       - status
+      type: object
+    SecurityMonitoringRuleConvertPayload:
+      description: Convert a rule from JSON to Terraform.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRulePayload'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRulePayload'
+    SecurityMonitoringRuleConvertResponse:
+      description: Result of the convert rule request containing Terraform content.
+      properties:
+        terraformContent:
+          description: Terraform string as a result of converting the rule from JSON.
+          type: string
       type: object
     SecurityMonitoringRuleCreatePayload:
       description: Create a new rule.
@@ -32243,11 +32265,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - org_management
       summary: Update a specific Org Config
       tags:
       - Organizations
@@ -35172,6 +35189,50 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/convert:
+    post:
+      description: 'Convert a rule that doesn''t (yet) exist from JSON to Terraform
+        for datadog provider
+
+        resource datadog_security_monitoring_rule.'
+      operationId: ConvertSecurityMonitoringRuleFromJSONToTerraform
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleConvertPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleConvertResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Convert a rule from JSON to Terraform
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This feature is in private beta. Reach out to support
+        to request access.'
   /api/v2/security_monitoring/rules/test:
     post:
       description: Test a rule.
@@ -35344,6 +35405,42 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/convert:
+    get:
+      description: 'Convert an existing rule from JSON to Terraform for datadog provider
+
+        resource datadog_security_monitoring_rule.'
+      operationId: ConvertExistingSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleConvertResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Convert an existing rule from JSON to Terraform
+      tags:
+      - Security Monitoring
+      x-menu-order: 11
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This feature is in private beta. Reach out to support
+        to request access.'
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: Test an existing rule.
@@ -35463,7 +35560,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 12
+      x-menu-order: 14
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -35507,7 +35604,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 13
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -38393,6 +38490,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -39295,6 +39401,88 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  x-merge-override:
+    /api/v2/apicatalog/api: true
+    /api/v2/apm/config/metrics: true
+    /api/v2/apm/config/metrics/{metric_id}: true
+    /api/v2/apm/config/retention-filters: true
+    /api/v2/apm/config/retention-filters-execution-order: true
+    /api/v2/apm/config/retention-filters/{filter_id}: true
+    /api/v2/audit/events: true
+    /api/v2/audit/events/search: true
+    /api/v2/cost/aws_related_accounts: true
+    /api/v2/cost_by_tag/active_billing_dimensions: true
+    /api/v2/cost_by_tag/monthly_cost_attribution: true
+    /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards: true
+    /api/v2/downtime: true
+    /api/v2/integration/gcp/sts_delegate: true
+    /api/v2/integrations/fastly/accounts/{account_id}/services: true
+    /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}: true
+    /api/v2/ip_allowlist: true
+    /api/v2/logs/analytics/aggregate: true
+    /api/v2/logs/config/archive-order: true
+    /api/v2/logs/config/archives: true
+    /api/v2/logs/config/archives/{archive_id}: true
+    /api/v2/logs/config/archives/{archive_id}/readers: true
+    /api/v2/logs/config/custom-destinations: true
+    /api/v2/logs/config/custom-destinations/{custom_destination_id}: true
+    /api/v2/logs/config/metrics/{metric_id}: true
+    /api/v2/logs/config/restriction_queries: true
+    /api/v2/logs/config/restriction_queries/role/{role_id}: true
+    /api/v2/logs/config/restriction_queries/user/{user_id}: true
+    /api/v2/logs/config/restriction_queries/{restriction_query_id}: true
+    /api/v2/logs/config/restriction_queries/{restriction_query_id}/roles: true
+    /api/v2/logs/events: true
+    /api/v2/logs/events/search: true
+    /api/v2/metrics: true
+    /api/v2/metrics/{metric_name}/active-configurations: true
+    /api/v2/metrics/{metric_name}/all-tags: true
+    /api/v2/metrics/{metric_name}/tags: true
+    /api/v2/metrics/{metric_name}/volumes: true
+    /api/v2/monitor/policy: true
+    /api/v2/monitor/policy/{policy_id}: true
+    /api/v2/monitor/{monitor_id}/downtime_matches: true
+    /api/v2/org_configs/{org_config_name}: true
+    /api/v2/query/scalar: true
+    /api/v2/query/timeseries: true
+    /api/v2/security/cloud_workload/policy/download: true
+    /api/v2/security_monitoring/cloud_workload_security/agent_rules: true
+    /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}: true
+    /api/v2/security_monitoring/configuration/security_filters: true
+    /api/v2/security_monitoring/configuration/security_filters/{security_filter_id}: true
+    /api/v2/security_monitoring/configuration/suppressions: true
+    /api/v2/security_monitoring/configuration/suppressions/{suppression_id}: true
+    /api/v2/security_monitoring/rules: true
+    /api/v2/security_monitoring/rules/test: true
+    /api/v2/security_monitoring/rules/validation: true
+    /api/v2/security_monitoring/rules/{rule_id}: true
+    /api/v2/security_monitoring/rules/{rule_id}/test: true
+    /api/v2/security_monitoring/signals: true
+    /api/v2/security_monitoring/signals/search: true
+    /api/v2/security_monitoring/signals/{signal_id}: true
+    /api/v2/security_monitoring/signals/{signal_id}/assignee: true
+    /api/v2/security_monitoring/signals/{signal_id}/incidents: true
+    /api/v2/security_monitoring/signals/{signal_id}/state: true
+    /api/v2/sensitive-data-scanner/config: true
+    /api/v2/sensitive-data-scanner/config/groups: true
+    /api/v2/sensitive-data-scanner/config/rules: true
+    /api/v2/sensitive-data-scanner/config/standard-patterns: true
+    /api/v2/service_accounts: true
+    /api/v2/services: true
+    /api/v2/services/definitions: true
+    /api/v2/services/{service_id}: true
+    /api/v2/team/{team_id}/permission-settings: true
+    /api/v2/team/{team_id}/permission-settings/{action}: true
+    /api/v2/teams: true
+    /api/v2/teams/{team_id}: true
+    /api/v2/usage/application_security: true
+    /api/v2/usage/cost_by_org: true
+    /api/v2/usage/estimated_cost: true
+    /api/v2/usage/historical_cost: true
+    /api/v2/usage/hourly_usage: true
+    /api/v2/usage/lambda_traced_invocations: true
+    /api/v2/usage/observability_pipelines: true
+    /api/v2/usage/projected_cost: true
 security:
 - apiKeyAuth: []
   appKeyAuth: []

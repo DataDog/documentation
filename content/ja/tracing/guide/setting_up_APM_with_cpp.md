@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/trace_collection/dd_libraries/cpp/
   tag: ドキュメント
   text: C++ によるトレースアプリケーションの詳細
-kind: ガイド
 title: C++ による APM の設定
 ---
 

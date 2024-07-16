@@ -1,6 +1,6 @@
 #### Filter query syntax
 
-Each processor has a corresponding filter query in their fields. **Note**: Processors only process logs that match their filter query.
+Each processor has a corresponding filter query in their fields. Processors only process logs that match their filter query. And for all processors except the filter processor, logs that do not match the query are sent to the next step of the pipeline. For the filter processor, logs that do not match the query are dropped.
 
 For any attribute, tag, or `key:value` pair that is not a [reserved attribute][4001], your query must start with `@`. Conversely, to filter reserved attributes, you do not need to append `@` in front of your filter query.
 

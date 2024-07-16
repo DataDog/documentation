@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/tracing/faq/agent-5-tracing-setup
-kind: ガイド
 private: true
 title: APM & Continuous Profiler と Agent v5
 ---

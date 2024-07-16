@@ -26,9 +26,25 @@ If the default setup overhead is not acceptable, you can use the profiler with m
 
 To use the minimal configuration ensure you have `dd-java-agent` version `0.70.0` then change your service invocation to the following:
 
-```
+```shell
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
+
+## Modify the maximum stack depth for collected stack traces
+
+If the default maximum stack depth of 512 is not sufficient for your use case, or it is causing performance issues,
+you can increase it by setting the `dd.profiling.stackdepth` system property.
+
+For example, to decrease the maximum stack depth to 256, start your service with the following JVM setting:
+
+```shell
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
+
+The same limit will be used for data collected by JFR and the Datadog profiler.
+
+**Note**: If the `-XX:FlightRecorderOptions=stackdepth=<stack-depth>` JVM argument is provided, the maximum stack depth set via the
+`dd.profiling.stackdepth` system property will be ignored in the data collected by JFR, for technical reasons.
 
 ## Increase profiler information granularity
 
@@ -39,7 +55,7 @@ If you want more granularity in your profiling data, you can specify the `compre
 
 To use the comprehensive configuration ensure you have `dd-trace-java` version `0.70.0` then change your service invocation to the following:
 
-```
+```shell
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
@@ -130,7 +146,7 @@ If your vendor is not on the list, [open a support ticket][2], as other vendors 
 Override templates let you specify profiling properties to override. However, the default settings are balanced for a good tradeoff between overhead and data density that cover most use cases. To use an override file, perform the following steps:
 
 1. Create an override file in a directory accessible by `dd-java-agent` at service invocation:
-    ```
+    ```shell
     touch dd-profiler-overrides.jfp
     ```
 
@@ -144,7 +160,7 @@ Override templates let you specify profiling properties to override. However, th
 
 3. When running your application with `dd-java-agent`, your service invocation must point to the override file with `-Ddd.profiling.jfr-template-override-file=</path/to/override.jfp>`, for example:
 
-    ```
+    ```shell
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 

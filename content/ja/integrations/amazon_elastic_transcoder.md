@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Amazon Elastic Transcoder
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elastic_transcoder
 public_title: Datadog-Amazon Elastic Transcoder インテグレーション

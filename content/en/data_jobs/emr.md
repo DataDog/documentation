@@ -23,8 +23,8 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 ### Store your Datadog API key in AWS Secrets Manager (Recommended)
 1. Take note of your [Datadog API key][1].
-1. In [AWS Secrets Manager][2], choose **Store a new secret**. 
-   - Under **Secret type**, select **Other type of secret**. 
+1. In [AWS Secrets Manager][2], choose **Store a new secret**.
+   - Under **Secret type**, select **Other type of secret**.
    - Under **Key/value pairs**, add your Datadog API key as a key-value pair, where the key is `dd_api_key`.
       {{< img src="data_jobs/emr/key_value.png" alt="AWS Secrets Manager, Store a new secret. A section titled 'Key/value pairs'. On the left, a text box containing 'dd_api_key'. On the right, a text box containing a redacted API key." style="width:80%;" >}}
    - Then, click **Next**.
@@ -83,15 +83,15 @@ Take note of the name of the IAM role you plan to use as the instance profile fo
 
 When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
 
-1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script. 
+1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script.
 
    ```shell
    #!/bin/bash
 
    # Set required parameter DD_SITE
    DD_SITE={{< region-param key="dd_site" code="true" >}}
-   
-   # Set required parameter DD_API_KEY with Datadog API key. 
+
+   # Set required parameter DD_API_KEY with Datadog API key.
    # The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
    # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
    SECRET_NAME=datadog/dd_api_key

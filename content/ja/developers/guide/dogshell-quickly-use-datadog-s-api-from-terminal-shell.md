@@ -2,7 +2,6 @@
 aliases:
 - /ja/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
 description: ターミナルまたはシェルから Datadog API を使用
-kind: ガイド
 title: Dogshell
 ---
 

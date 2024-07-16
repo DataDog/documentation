@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/amazon_web_services/
   tag: インテグレーション
   text: AWS インテグレーション
-kind: ガイド
 title: AWS インテグレーションのトラブルシューティング
 ---
 

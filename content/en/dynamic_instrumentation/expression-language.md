@@ -5,7 +5,7 @@ private: false
 
 ## Overview
 
-The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators. 
+The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
 
 For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
 
@@ -22,6 +22,8 @@ Generally, the Expression Language supports:
 It does **not** support:
 * Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
 * Other native programming language syntax beyond what is described on this page.
+
+Try the [autocomplete and search open beta][6] for an improved user experience using the Expression Language.
 
 The following sections summarize the variables and operations that the Dynamic Instrumentation Expression Language supports.
 
@@ -64,3 +66,4 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 [3]: /metrics/types/?tab=histogram#metric-types
 [4]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[6]: /dynamic_instrumentation/symdb/

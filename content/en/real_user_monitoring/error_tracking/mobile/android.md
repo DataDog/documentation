@@ -34,9 +34,27 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 1. Add the latest version of the [RUM Android SDK][4] to your Gradle dependencies.
 2. Configure your application's `env` and `variant` when [initializing the SDK][5].
-3. Run the Gradle task to upload your Proguard/R8 mapping file to Datadog in order to access deobfuscated stack traces. 
+3. Run the Gradle tasks to upload your Proguard/R8 mapping file and NDK symbol files to Datadog to access deobfuscated stack traces. 
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
+
+### Add NDK crash reporting
+
+Your Android application may be running native code (C/C++) for performance or code reusability reasons. In order to enable NDK crash reporting, use the Datadog NDK plugin. 
+
+1. Add the Gradle dependency by declaring the library as a dependency in your `build.gradle` file:
+
+   ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-ndk:x.x.x" 
+        //(...)
+    }
+   ```
+2. Enable NDK crash collection after initializing the RUM SDK.
+
+    ``` kotlin
+    NdkCrashReports.enable()
+    ```
 
 ### Add ANR reporting
 
@@ -103,6 +121,11 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    ./gradlew uploadMappingRelease
    ```
 
+5. If running native code, run the NDK symbol upload task:
+   ```bash
+   ./gradlew uploadNdkSymbolFilesRelease
+   ```
+
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
 
@@ -132,6 +155,11 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    
    ```bash
    ./gradlew uploadMappingRelease
+   ```
+   
+5. If running native code, run the NDK symbol upload task:
+   ```bash
+   ./gradlew uploadNdkSymbolFilesRelease
    ```
 
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
