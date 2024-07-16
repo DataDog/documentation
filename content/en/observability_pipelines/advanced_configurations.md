@@ -84,7 +84,7 @@ To set bootstrap options, do one of the following:
 
 ## Referencing files in Kubernetes
 
-If you are referencing files in Kubernetes for Google Cloud Storage authentication, TLS certificates for certain sources, or an enrichment table processor, you need to use `volumeMounts[*].subPath` to mount files from `configMap` or `secret`.
+If you are referencing files in Kubernetes for Google Cloud Storage authentication, TLS certificates for certain sources, or an enrichment table processor, you need to use `volumeMounts[*].subPath` to mount files from a `configMap` or `secret`.
 
 For example, if you have a `secret` defined as:
 
