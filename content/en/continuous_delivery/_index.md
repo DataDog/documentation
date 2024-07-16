@@ -41,7 +41,7 @@ Deployment Visibility helps you monitor deployments across CD environments by tr
 
 ## Increase efficiency through seamless integrations
 
-Datadog integrates with [CI providers][4] and CD providers like [ArgoCD][5] to collect metrics and track the execution performance and results of your deployments.
+Datadog integrates with [CI providers][4] and CD providers like [Argo CD][5] to collect metrics and track the execution performance and results of your deployments.
 
 {{< partial name="continuous_delivery/cd-getting-started.html" >}}
 
