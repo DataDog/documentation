@@ -24809,9 +24809,10 @@ paths:
         **Note**: When a snapshot is created, there is some delay before it is available.'
       operationId: GetGraphSnapshot
       parameters:
-      - description: The metric query.
+      - description: The metric query. Either `metric_query` or `graph_def` is required.
         in: query
         name: metric_query
+        required: true
         schema:
           type: string
       - description: The POSIX timestamp of the start of the query in seconds.
