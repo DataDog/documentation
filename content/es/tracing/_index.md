@@ -67,7 +67,7 @@ Descubre algunas formas en que Datadog APM puede apoyar tus casos de uso:
 | Comprende cómo fluyen las solicitudes a través del sistema. | Utiliza [Trace Explorer][21] para consultar y visualizar trazas (traces) de extremo a extremo a través de servicios distribuidos. |
 | Monitoriza el estado y el rendimiento de servicios individuales. | Utiliza el [servicio][26] y las [páginas de recursos][28] para evaluar el estado del servicio analizando métricas de rendimiento, realizando un seguimiento de las implementaciones e identificando los recursos problemáticos. |
 | Correlaciona trazas (traces) con DBM, RUM, logs, sintéticos y perfiles. | [Correlaciona los datos de APM con otros datos de telemetría][20] para contextualizar los datos y realizar un análisis más exhaustivo. |
-| Controla el flujo de datos en Datadog. | Utiliza los [controles de ingestión][6] para ajustar la configuración de la ingestión y las frecuencias de muestreo por servicio y recurso. Utiliza los [filtros de retención][7] para elegir qué tramos (spans) se retendrán durante 15 días. |
+| Controla el flujo de datos en Datadog. | Utiliza los [controles de ingesta][6] para ajustar la configuración de la ingesta y las frecuencias de muestreo por servicio y recurso. Utiliza los [filtros de retención][7] para elegir qué tramos (spans) se retendrán durante 15 días. |
 
 ### Trace Explorer
 
@@ -91,11 +91,11 @@ Datadog APM se integra perfectamente con logs, Real User Monitoring (RUM), monit
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Conectar logs y trazas (traces)" style="width:100%;">}}
 
-### Controles de ingestión y filtros de retención
+### Controles de ingesta y filtros de retención
 
 Las trazas (traces) comienzan en las aplicaciones instrumentadas y fluyen hacia Datadog.
 
-Datadog APM proporciona herramientas para gestionar el volumen y la retención de los datos de trazas (traces). Utiliza los [controles de ingestión][6] para ajustar las frecuencias de muestreo y los [filtros de retención][7] a fin de controlar qué tramos (spans) se almacenan.
+Datadog APM proporciona herramientas para gestionar el volumen y la retención de los datos de trazas (traces). Utiliza los [controles de ingesta][6] para ajustar las frecuencias de muestreo y los [filtros de retención][7] a fin de controlar qué tramos (spans) se almacenan.
 
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flujo de datos a través de Datadog APM." style="width:100%;" >}}
 
