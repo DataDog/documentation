@@ -26,6 +26,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-lambda-functions-distributed-tracing/
   tag: Blog
   text: Rastreo distribuido en tiempo real para funciones de Lambda de .NET
+kind: documentación
 title: Rastreo distribuido con aplicaciones serverless de AWS Lambda
 ---
 

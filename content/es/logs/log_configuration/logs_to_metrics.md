@@ -15,6 +15,7 @@ further_reading:
   tag: Blog
   text: Uso de consultas con notación de CIDR para filtrar tus logs de tráfico de
     red
+kind: documentación
 title: Generar métricas a partir de logs consumidos
 ---
 

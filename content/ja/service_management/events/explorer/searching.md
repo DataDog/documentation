@@ -3,6 +3,7 @@ further_reading:
 - link: logs/explorer/search_syntax
   tag: ドキュメント
   text: ログ検索構文
+kind: ドキュメント
 title: 検索構文
 ---
 

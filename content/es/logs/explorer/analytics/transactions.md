@@ -7,6 +7,7 @@ further_reading:
 - link: logs/explorer/analytics
   tag: Documentación
   text: Aprender a analizar tus logs
+kind: documentación
 title: Agrupación de logs en transacciones
 ---
 

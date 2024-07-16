@@ -10,6 +10,7 @@ further_reading:
 - link: /synthetics/metrics/
   tag: Documentation
   text: En savoir plus sur les métriques de la surveillance Synthetic
+kind: guide
 title: Utiliser des monitors de test Synthetic
 ---
 

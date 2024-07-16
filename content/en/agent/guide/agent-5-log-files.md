@@ -1,5 +1,6 @@
 ---
 title: Agent 5 Log Files
+kind: Guide
 disable_toc: false
 ---
 

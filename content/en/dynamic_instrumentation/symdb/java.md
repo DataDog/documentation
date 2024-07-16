@@ -1,5 +1,6 @@
 ---
 title: Enable Autocomplete and Search for Java
+kind: Documentation
 is_beta: true
 private: false
 code_lang: java

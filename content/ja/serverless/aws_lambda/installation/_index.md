@@ -9,6 +9,7 @@ further_reading:
 - link: /integrations/amazon_lambda/
   tag: ドキュメント
   text: AWS Lambda インテグレーション
+kind: ドキュメント
 title: AWS Lambda のためのサーバーレスモニタリングのインストール
 ---
 

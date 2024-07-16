@@ -19,6 +19,7 @@ further_reading:
   tag: Guide
   text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
     produits.
+kind: documentation
 title: Mettre en corrélation vos logs PHP avec vos traces
 type: multi-code-lang
 ---

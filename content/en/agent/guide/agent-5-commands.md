@@ -1,5 +1,6 @@
 ---
 title: Agent 5 Commands
+kind: Guide
 disable_toc: false
 ---
 

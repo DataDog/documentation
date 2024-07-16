@@ -47,6 +47,14 @@ components:
       required:
       - errors
       type: object
+    APISuccessResponseSchema:
+      description: A JSON object containing the success message
+      properties:
+        success:
+          description: Message.
+          example: Embed 00000000000 successfully enabled.
+          type: string
+      type: object
     AWSAccount:
       description: Returns the AWS account associated with this integration.
       properties:
@@ -6953,7 +6961,7 @@ components:
       - logs
       - spans
       - database_queries
-      - network_performance_queries
+      - network
       example: rum
       type: string
       x-enum-varnames:
@@ -6965,7 +6973,7 @@ components:
       - LOGS
       - SPANS
       - DATABASE_QUERIES
-      - NETWORK_PERFORMANCE_QUERIES
+      - NETWORK
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -17498,6 +17506,12 @@ components:
     UsageBillableSummaryHour:
       description: Response with monthly summary of data billed by Datadog.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         billing_plan:
           description: The billing plan.
           type: string
@@ -24736,13 +24750,7 @@ paths:
           content:
             application/json:
               schema:
-                description: A JSON containing the success message
-                properties:
-                  success:
-                    description: Message.
-                    example: Embed 00000000000 successfully enabled.
-                    type: string
-                type: object
+                $ref: '#/components/schemas/APISuccessResponseSchema'
           description: OK
         '403':
           content:
@@ -24780,13 +24788,7 @@ paths:
           content:
             application/json:
               schema:
-                description: A JSON containing the success message
-                properties:
-                  success:
-                    description: Message.
-                    example: Embed 0000000000000 successfully revoked.
-                    type: string
-                type: object
+                $ref: '#/components/schemas/APISuccessResponseSchema'
           description: OK
         '403':
           content:
@@ -33504,6 +33506,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:

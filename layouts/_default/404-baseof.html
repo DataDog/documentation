@@ -20,8 +20,8 @@
 
   {{ partialCached "css.html" . }}
 
-  {{- if and (ne $.Params.disable_opengraph_meta_tags true) (.File) -}}
-    {{- partial "meta.html" . -}}
+  {{- if ne $.Params.disable_opengraph_meta_tags true -}}
+  {{- partial "meta.html" . -}}
   {{- end -}}
 
 </head>
@@ -43,7 +43,7 @@
   <div class="container container__content h-100 pt-1">
     <div class="row h-100">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
-          {{ partial "sidenav/main-sidenav.html" . }}
+        {{ partial "sidenav/main-sidenav.html" . }}
       </div>
       <div class="col-12 col-lg-9 main">
         {{ block "main" . }}{{ end }}

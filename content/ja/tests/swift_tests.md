@@ -11,6 +11,7 @@ further_reading:
 - link: /real_user_monitoring/ios
   tag: ドキュメント
   text: RUM iOS と tvOS のモニタリングについて
+kind: ドキュメント
 title: RUM による Swift テストのインスツルメント
 ---
 
