@@ -2,7 +2,7 @@
 aliases:
 - /es/tracing/compatibility_requirements/php
 - /es/tracing/setup_overview/compatibility_requirements/php
-code_lang: PHP
+code_lang: php
 code_lang_weight: 50
 description: 'Requisitos de compatibilidad del rastreador de PHP '
 further_reading:
