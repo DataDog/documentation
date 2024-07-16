@@ -1,12 +1,12 @@
 import { describe, test, expect } from 'vitest';
-import { parseMarkdocFile } from '../../../src/helpers/compilation';
-import { findInDir } from '../../../src/helpers/filesystem';
+import { parseMarkdocFile } from '../../../../src/helpers/compilation';
+import { findInDir } from '../../../../src/helpers/filesystem';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   SNAPSHOTS_DIR,
   MOCKS_DIR
-} from '../../constants';
+} from '../../../constants';
 
 describe('parseMarkdocFile processes valid input', () => {
   const markdocFiles = findInDir(VALID_CONTENT_DIR, /\.mdoc$/);

@@ -1,4 +1,8 @@
-import MarkdocStaticCompiler, { Node, ValidationError } from 'markdoc-static-compiler';
+import MarkdocStaticCompiler, {
+  Node,
+  ValidationError,
+  RenderableTreeNodes
+} from 'markdoc-static-compiler';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
@@ -102,4 +106,62 @@ export function extractErrors(p: { node: Node; file: string }): ParsingErrorRepo
     }
   }
   return errors;
+}
+
+/**
+ * Collect all variable identifiers referenced in the markup.
+ * (The markup must first be parsed into a renderable tree.)
+ */
+export function collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
+  let variableIdentifiers: string[] = [];
+
+  if (!node) return variableIdentifiers;
+
+  if (Array.isArray(node)) {
+    node.forEach((n) => {
+      const identifiers = collectVarIdsFromTree(n);
+      variableIdentifiers = variableIdentifiers.concat(identifiers);
+    });
+  }
+
+  if (typeof node !== 'object') return variableIdentifiers;
+
+  if ('children' in node && node.children) {
+    const identifiers = collectVarIdsFromTree(node.children);
+    variableIdentifiers = variableIdentifiers.concat(identifiers);
+  }
+
+  if ('parameters' in node && node.parameters) {
+    const identifiers = collectVarIdsFromTree(Object.values(node.parameters));
+    variableIdentifiers = variableIdentifiers.concat(identifiers);
+  }
+
+  if (typeof node === 'object' && '$$mdtype' in node && node.$$mdtype === 'Variable') {
+    // @ts-ignore, TODO:
+    //
+    // This only works if we assume that the variable path is one level deep,
+    // which is what we're supporting for now. In other words, there cannot be a variable
+    // like `$user.database.version` in the markup -- no nested data is allowed,
+    // just variables like `$database`, and `$database_version`.
+    //
+    // We may wind up needing to support nested data because we may need to
+    // group all pref variables under a parent $prefs object or similar.
+    variableIdentifiers.push(node.path?.join('.'));
+  }
+
+  if (
+    typeof node === 'object' &&
+    '$$mdtype' in node &&
+    node.$$mdtype === 'Tag' &&
+    'if' in node
+  ) {
+    const identifiers = collectVarIdsFromTree(
+      // @ts-ignore
+      node.if
+    );
+    variableIdentifiers = variableIdentifiers.concat(identifiers);
+  }
+
+  // return the unique identifiers
+  return Array.from(new Set(variableIdentifiers));
 }
