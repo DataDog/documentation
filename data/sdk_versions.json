@@ -21,7 +21,7 @@
   },
   {
     "client": "datadog-api-client-rust",
-    "version": "0.1.3"
+    "version": "kevinzou/examples_rename"
   },
   {
     "client": "integrations-core",

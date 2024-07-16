@@ -64,6 +64,12 @@ code_languages:
     syntax: typescript
     command: tsc
     example_file: example.ts
+  'rs':
+    extension: rs
+    name: rust
+    syntax: rust
+    command: rustc
+    example_file: example.rs
 
 code_language_ids:
     android: Android

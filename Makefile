@@ -181,7 +181,7 @@ examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)):
 examples/$(patsubst datadog-api-client-%,%,$(1)): examples/$(1) examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1))
 	-find examples/$(1)/examples -iname \*.py -exec mv {} {}beta \;
 	-find examples/$(1)/examples -iname \*.rb -exec mv {} {}beta \;
-	-find examples/$(1)/examples -maxdepth 1 -iname \*.rs -exec sh -c 'echo {} && mkdir -p `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1" | xargs dirname` && mv {} `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1"`' \;
+	-find examples/$(1)/examples -maxdepth 1 -iname \*.rs -exec sh -c 'mkdir -p `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1" | xargs dirname` && mv {} `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1"`' \;
 	-cp -Rn examples/$(1)/examples/v* ./content/en/api
 endef
 

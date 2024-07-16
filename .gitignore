@@ -17,6 +17,7 @@ content/en/api/**/*.java
 content/en/api/**/*.pybeta
 content/en/api/**/*.rbbeta
 content/en/api/**/*.ts
+content/en/api/**/*.rs
 content/en/api/tsconfig.json
 
 # Ignoring all automated content
