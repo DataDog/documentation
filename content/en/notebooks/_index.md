@@ -12,9 +12,6 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
-- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
-  tag: "blog"
-  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 cascade:
     algolia:
         rank: 70
@@ -77,6 +74,40 @@ To copy the URL for a specific cell, click the cell's **Share** menu and select 
 
 When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
+## Add images to notebooks
+
+<div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
+
+You can add images to your notebook using either the [image cell](#image-cell) or the [Markdown editor](#markdown-editor).
+
+### Image cell
+
+This approach places the image in a separate cell from your text, and provides options for resizing, aligning, and captioning the image. Images uploaded by the image cell are hosted by Datadog.
+
+To add an image, click the **Image** cell option in the **Add New Cell** menu. 
+
+{{< img src="notebooks/image_cell.png" alt="Image cell in the Add New Cell menu of cells" style="width:70%;" >}}
+
+You can use any of the following options to upload an image to be hosted by Datadog:
+- Drop an image file into the upload area
+- Click **Choose File** and locate the image in your file directory
+- Paste a publicly accessible URL for the image
+
+Click the icons on the cell action tray to adjust the size, alignment, add a caption for the image cell, or view the image in full screen mode.
+
+{{< img src="notebooks/notebooks_image_edit_action_tray.png" alt="Image cell action tray to adjust image alignment and add a caption" style="width:70%;" >}}
+
+### Markdown editor
+
+This approach places the image inline with your text, but does not provide options for resizing the image.
+
+Enter the edit mode on any Markdown cell and use any of the following options to add the image:
+- Drop an image file into the text cell area.
+- Copy and paste the image directly into the text cell area.
+- Hyperlink an external image using the image widget in the header or by referencing the [official Markdown guide][2]. **Note**: This option does not upload the image to be hosted by Datadog. 
+
+You can preview the image in the Preview tab before saving it to your notebook.
+
 ## Notebook List
 
 {{< img src="notebooks/notebook_list.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
@@ -90,10 +121,10 @@ The [Notebook List][1] allows you to view and search previously created notebook
 Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
 ## Template gallery
-From the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+From the [Template Gallery][3], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Version history
-From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][3].
+From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][4].
 
 ## Notebook configuration
 
@@ -135,7 +166,7 @@ To share a version of your notebook with snapshots, from the cog menu, click **V
 
 ### Template variables
 
-Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][4].
+Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
 ### Cell configuration
 
@@ -159,26 +190,31 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 
 #### Types of content
 
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][6].
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][6], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][7].
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
 
-* [Timeseries][7]
-* [Top List][8]
-* [Table][9]
-* [Heatmap][10]
-* [Distribution][11]
-* [List][12]
-* [Query value][13]
-* [Funnel][14]
-* [Pie][15]
-* [SLO][16]
+* [Text][8]
+* [Images](#add-images-to-cells)
+* [Timeseries][9]
+* [Top List][10]
+* [Table][11]
+* [Query Value][12]
+* [Heatmap][13]
+* [Distribution][14]
+* [List][15]
+* [Profiling Flame Graph][16]
+* [Funnel][17]
+* [Pie][18]
+* [Treemap][16]
+* [Geomap][19]
+* [SLO][20]
 
 ### Limit edit access
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][17] that may edit a particular notebook:
+Use granular access controls to limit the [roles][21] that may edit a particular notebook:
 1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
@@ -201,19 +237,23 @@ To restore general access to a notebook with restricted access, follow the steps
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
-[3]: /notebooks/guide/version_history
-[4]: /dashboards/template_variables/
-[5]: https://daringfireball.net/projects/markdown/
-[6]: https://mermaid.js.org/
-[7]: /dashboards/widgets/timeseries/
-[8]: /dashboards/widgets/top_list/
-[9]: /dashboards/widgets/table/
-[10]: /dashboards/widgets/heatmap/
-[11]: /dashboards/widgets/distribution/
-[12]: /dashboards/widgets/list/
-[13]: /dashboards/widgets/query_value/
-[14]: /dashboards/widgets/funnel/
-[15]: /dashboards/widgets/pie_chart/
-[16]: /dashboards/widgets/slo/
-[17]: /account_management/rbac/
+[2]: https://www.markdownguide.org/basic-syntax/#images-1
+[3]: https://app.datadoghq.com/notebook/template-gallery
+[4]: /notebooks/guide/version_history
+[5]: /dashboards/template_variables/
+[6]: https://daringfireball.net/projects/markdown/
+[7]: https://mermaid.js.org/
+[8]: /dashboards/widgets/free_text/
+[9]: /dashboards/widgets/timeseries/
+[10]: /dashboards/widgets/top_list/
+[11]: /dashboards/widgets/table/
+[12]: /dashboards/widgets/query_value/
+[13]: /dashboards/widgets/heatmap/
+[14]: /dashboards/widgets/distribution/
+[15]: /dashboards/widgets/list/
+[16]: /dashboards/widgets/treemap/
+[17]: /dashboards/widgets/funnel/
+[18]: /dashboards/widgets/pie_chart/
+[19]: /dashboards/widgets/geomap/
+[20]: /dashboards/widgets/slo/
+[21]: /account_management/rbac/

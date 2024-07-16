@@ -238,12 +238,20 @@ To manually track RUM Views, provide a `view key`, `view name`, and `action name
 DdRum.startView('<view-key>', 'View Name', {}, Date.now());
 //…
 DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
+```
 
-// Track RUM Actions manually
+### Manually track RUM Actions
+You can manually track RUM actions:
+
+```javascript
 DdRum.addAction(RumActionType.TAP, 'action name', {}, Date.now());
-// Or in case of continuous action
+```
+
+To track a continuous action:
+
+```javascript
 DdRum.startAction(RumActionType.TAP, 'action name', {}, Date.now());
-// To stop action above
+//...
 DdRum.stopAction({}, Date.now());
 ```
 
@@ -259,7 +267,7 @@ You can manually track RUM resources:
 
 ```javascript
 DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
-//…
+//...
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 ```
 

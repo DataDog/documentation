@@ -51,11 +51,47 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
 
     ## @param reported_database_hostname - string - optional
-    ## Set the reported database hostname for the connected MongoDB instance. 
-    ## This value overrides the MongoDB hostname detected by 
+    ## Set the reported database hostname for the connected MongoDB instance.
+    ## This value overrides the MongoDB hostname detected by
     ## the Agent from the MongoDB admin command serverStatus.host.
     #
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
+
+    ## @param database_autodiscovery - mapping - optional
+    ## Enable database autodiscovery to automatically collect metrics from all your MongoDB databases.
+    #
+    database_autodiscovery:
+      ## @param enabled - boolean - required
+      ## Enable database autodiscovery.
+      #
+      enabled: true
+
+      ## @param include - list of strings - optional
+      ## List of databases to include in the autodiscovery. Use regular expressions to match multiple databases.
+      ## For example, to include all databases starting with "mydb", use "^mydb.*".
+      ## By default, include is set to ".*" and all databases are included.
+      #
+      include:
+        - "^mydb.*"
+
+      ## @param exclude - list of strings - optional
+      ## List of databases to exclude from the autodiscovery. Use regular expressions to match multiple databases.
+      ## For example, to exclude all databases starting with "mydb", use "^mydb.*".
+      ## When the exclude list conflicts with include list, the exclude list takes precedence.
+      #
+      exclude:
+        - "^mydb2.*"
+        - "admin$"
+
+      ## @param max_databases - integer - optional
+      ## Maximum number of databases to collect metrics from. The default value is 100.
+      #
+      max_databases: 100
+
+      ## @param refresh_interval - integer - optional
+      ## Interval in seconds to refresh the list of databases. The default value is 600 seconds.
+      #
+      refresh_interval: 600
 ```
 
 Refer to the Replica Set configuration for an example configuration for connecting to members in each shard and the config server.
@@ -77,12 +113,13 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection", "jumbo_chunks"]
+    database_autodiscovery:
+      enabled: true
   ## Shard1
   - hosts:
       - <HOST_SHARD1_1>:<PORT>  # Primary node
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     tls: true
@@ -90,13 +127,13 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
-    collections: []
     collections_indexes_stats: true
+    database_autodiscovery:
+      enabled: true
   - hosts:
       - <HOST_SHARD1_2>:<PORT>  # Secondary node
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     tls: true
@@ -104,13 +141,13 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
-    collections: []
     collections_indexes_stats: true
+    database_autodiscovery:
+      enabled: true
   - hosts:
       - <HOST_SHARD1_3>:<PORT>  # Secondary node
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     tls: true
@@ -118,14 +155,14 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
-    collections: []
     collections_indexes_stats: true
+    database_autodiscovery:
+      enabled: true
   ## Shard 2
   - hosts:
       - <HOST_SHARD2_1>:<PORT>  # Primary node
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     tls: true
@@ -133,13 +170,13 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
-    collections: []
     collections_indexes_stats: true
+    database_autodiscovery:
+      enabled: true
   - hosts:
       - <HOST_SHARD2_2>:<PORT>  # Secondary node
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     tls: true
@@ -147,13 +184,13 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
-    collections: []
     collections_indexes_stats: true
+    database_autodiscovery:
+      enabled: true
   - hosts:
       - <HOST_SHARD2_3>:<PORT>  # Secondary node
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     tls: true
@@ -161,8 +198,9 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
-    collections: []
     collections_indexes_stats: true
+    database_autodiscovery:
+      enabled: true
   ## Config server
   - hosts:
       - <HOST_CONFIG_1>:<PORT>  # Primary node

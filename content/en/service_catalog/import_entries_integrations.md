@@ -18,9 +18,7 @@ further_reading:
   text: "Import Backstage YAML files into Datadog"
 ---
 
-## Import data from other sources
-
-### Backstage 
+## Backstage 
 
 {{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
@@ -42,7 +40,7 @@ Upon import, the following occurs:
 - `spec.system` gets mapped to `application`
 - Other `spec` values get mapped to custom tags
 
-### ServiceNow
+## ServiceNow
 
 You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][2].
 

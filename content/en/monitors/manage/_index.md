@@ -71,7 +71,7 @@ Monitor tags are independent of tags sent by the Agent or integrations. Add up t
 [3]: /monitors/manage/status/#mute
 [4]: /monitors/manage/status/#resolve
 [5]: /account_management/teams/
-[6]: /service_management/mobile/#monitors
+[6]: /mobile/#monitors
 [7]: https://apps.apple.com/app/datadog/id1391380318
 [8]: https://play.google.com/store/apps/details?id=com.datadog.app
 [9]: https://app.datadoghq.com/monitors/triggered
