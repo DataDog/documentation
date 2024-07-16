@@ -40,7 +40,7 @@ function postMetric($metric,$tags) {
 $app_key = "<DATADOG_APPLICATION_KEY>" #provide your valid app key
 $api_key = "<DATADOG_API_KEY>" #provide your valid api key
 $url_base = "https://app.datadoghq.com/"
-$url_signature = "api/v1/series"
+$url_signature = "api/latest/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
 $tags = "[env:test]" #optional parameter
 
