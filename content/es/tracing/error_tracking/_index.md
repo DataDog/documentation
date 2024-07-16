@@ -10,7 +10,7 @@ further_reading:
     de errores, los SLOs y más
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentación
-  text: Más información sobre el explorador de trazas
+  text: Más información sobre Trace Explorer
 - link: /tracing/error_tracking/explorer
   tag: Documentación
   text: Más información sobre Error Tracking Explorer
