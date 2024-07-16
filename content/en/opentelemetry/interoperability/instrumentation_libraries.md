@@ -36,7 +36,7 @@ Datadog instrumentation to avoid duplicate spans in the trace.
 | Java     | v1.35.0                  |
 | Python   | v2.10.0                  |
 | Ruby     | v2.1.0                   |
-| Go       | TBA                      |
+| Go       | v1.67.0                  |
 | Node.js  | TBA                      |
 | PHP      | TBA                      |
 | .NET     | TBA                      |
@@ -115,15 +115,61 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 {{% /tab %}} -->
 
-<!-- {{% tab "Go" %}}
+{{% tab "Go" %}}
 
 ## Compatibility requirements
 
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API](https://github.com/open-telemetry/opentelemetry-go/tree/main/trace). This includes the [opentelemetry-go-contrib/instrumentation](https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation) libraries, however, anything that relies on metrics or logs exporters is not supported at this time.
+
 ## Getting started
+
+Set up the Datadog trace provider and configure Opentelemetry to use the Datadog trace provider as per the Imports and Setup instructions listed in the [Go Custom Instrumentation using OpenTelemetry API guide](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports).
+
+Then, follow the instructions of your chosen opentelemetry-go-contrib library to instrument your service.
+
+Example:
+```
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/otel"
+)
+
+func main() {
+	// register tracer
+	provider := ddotel.NewTracerProvider(ddtracer.WithDebugMode(true))
+	defer provider.Shutdown()
+	otel.SetTracerProvider(provider)
+
+	// // custom span
+	// ctx, sp := tracer.Start(context.Background(), "span_name")
+	// sp.SetAttributes(attribute.String(ext.ResourceName, "test.json"))
+	// var s specialString
+	// ctx = context.WithValue(ctx, s, "value")
+	// yourCode(ctx)
+	// sp.End()
+	var mux http.ServeMux
+	mux.Handle("/hello", http.HandlerFunc(hello))
+	http.HandleFunc("/hello", hello)
+	log.Fatal(http.ListenAndServe(":8080", otelhttp.NewHandler(&mux, "server")))
+}
+
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "hello\n")
+}
+```
 
 ## Configuration
 
-{{% /tab %}} -->
+No additional configuration is required.
+
+{{% /tab %}}
 
 <!-- {{% tab "NodeJS" %}}
 
