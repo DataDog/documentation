@@ -1,11 +1,7 @@
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import { validatePlaceholders } from './helpers/frontmatterValidation';
-import {
-  parseMarkdocFile,
-  ParsingErrorReport,
-  buildRenderableTree
-} from './helpers/compilation';
+import { FileParser, ParsingErrorReport } from './FileParser';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
 import { findInDir } from './helpers/filesystem';
 import prettier from 'prettier';
@@ -47,7 +43,7 @@ export class MarkdocHugoIntegration {
    */
   compile() {
     for (const markdocFile of this.markdocFiles) {
-      const { ast, frontmatter, partials, errorReports } = parseMarkdocFile(
+      const { ast, frontmatter, partials, errorReports } = FileParser.parseMdocFile(
         markdocFile,
         this.partialsDir
       );
@@ -76,7 +72,7 @@ export class MarkdocHugoIntegration {
 
       // build the renderable tree and write the file to HTML
       try {
-        const renderableTree = buildRenderableTree({
+        const renderableTree = FileParser.buildRenderableTree({
           ast,
           partials,
           frontmatter,

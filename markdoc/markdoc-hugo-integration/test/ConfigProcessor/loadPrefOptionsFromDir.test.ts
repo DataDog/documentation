@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { VALID_PREF_OPTIONS_DIR, SNAPSHOTS_DIR, MOCKS_DIR } from '../../constants';
-import { ConfigProcessor } from '../../../src/ConfigProcessor';
+import { VALID_PREF_OPTIONS_DIR, SNAPSHOTS_DIR, MOCKS_DIR } from '../constants';
+import { ConfigProcessor } from '../../src/ConfigProcessor';
 
 const INVALID_PREF_MOCKS_DIR = `${MOCKS_DIR}/invalid/prefs_options_dirs`;
 

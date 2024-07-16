@@ -1,20 +1,19 @@
 import { describe, test, expect } from 'vitest';
-import { parseMarkdocFile } from '../../../../src/helpers/compilation';
-import { findInDir } from '../../../../src/helpers/filesystem';
+import { FileParser } from '../../src/FileParser';
+import { findInDir } from '../../src/helpers/filesystem';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   SNAPSHOTS_DIR,
   MOCKS_DIR
-} from '../../../constants';
-import MarkdocStaticCompiler from 'markdoc-static-compiler';
+} from '../constants';
 
 describe('parseMarkdocFile processes valid input', () => {
   const markdocFiles = findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
 
   markdocFiles.forEach((markdocFile) => {
     const sanitizedMarkdocFilename = markdocFile.replace(VALID_CONTENT_DIR, '');
-    const { ast, frontmatter, partials, errorReports } = parseMarkdocFile(
+    const { ast, frontmatter, partials, errorReports } = FileParser.parseMdocFile(
       markdocFile,
       VALID_PARTIALS_DIR
     );
@@ -53,7 +52,7 @@ describe('parseMarkdocFile processes invalid input', () => {
 
   invalidMarkdocFiles.forEach((markdocFile) => {
     const sanitizedMarkdocFilename = markdocFile.replace(invalidMarkupDir, '');
-    const { ast, frontmatter, partials, errorReports } = parseMarkdocFile(
+    const { ast, frontmatter, partials, errorReports } = FileParser.parseMdocFile(
       markdocFile,
       VALID_PARTIALS_DIR
     );

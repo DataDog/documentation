@@ -1,16 +1,13 @@
 import { describe, test, expect } from 'vitest';
-import {
-  parseMarkdocFile,
-  collectVarIdsFromTree
-} from '../../../../src/helpers/compilation';
-import { findInDir } from '../../../../src/helpers/filesystem';
+import { FileParser } from '../../src/FileParser';
+import { findInDir } from '../../src/helpers/filesystem';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   SNAPSHOTS_DIR,
   VALID_PREF_OPTIONS_DIR
-} from '../../../constants';
-import { ConfigProcessor } from '../../../../src/ConfigProcessor';
+} from '../constants';
+import { ConfigProcessor } from '../../src/ConfigProcessor';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
 
 describe('collectVarIdsFromTree', () => {
@@ -19,7 +16,7 @@ describe('collectVarIdsFromTree', () => {
   markdocFiles.forEach((markdocFile) => {
     const sanitizedMarkdocFilename = markdocFile.replace(VALID_CONTENT_DIR, '');
 
-    const { ast, frontmatter, partials, errorReports } = parseMarkdocFile(
+    const { ast, frontmatter, partials, errorReports } = FileParser.parseMdocFile(
       markdocFile,
       VALID_PARTIALS_DIR
     );
@@ -38,7 +35,7 @@ describe('collectVarIdsFromTree', () => {
     });
 
     test(`it can collect the variables for ${sanitizedMarkdocFilename}`, () => {
-      const varIds = collectVarIdsFromTree(renderableTree);
+      const varIds = FileParser.collectVarIdsFromTree(renderableTree);
       expect(JSON.stringify(varIds, null, 2)).toMatchFileSnapshot(
         `${SNAPSHOTS_DIR}/compilationByFilename/valid/${sanitizedMarkdocFilename}/referencedVarIds.snap.json`
       );

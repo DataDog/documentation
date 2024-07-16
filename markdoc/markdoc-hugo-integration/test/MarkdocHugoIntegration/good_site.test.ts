@@ -1,6 +1,6 @@
-import { MarkdocHugoIntegration } from '../../../src';
+import { MarkdocHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
-import { SNAPSHOTS_DIR, VALID_EXAMPLE_SITE_DIR } from '../../constants';
+import { SNAPSHOTS_DIR, VALID_EXAMPLE_SITE_DIR } from '../constants';
 import fs from 'fs';
 
 const siteDir = VALID_EXAMPLE_SITE_DIR;

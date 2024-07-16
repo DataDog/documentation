@@ -1,0 +1,25 @@
+primary_color_options:
+  - display_name: Red
+    identifier: red
+  - display_name: Yellow
+    identifier: yellow
+  - display_name: Blue
+    identifier: blue
+    default: true
+
+rainbow_color_options:
+  - display_name: Red
+    identifier: red
+  - display_name: Orange
+    identifier: orange
+  - display_name: Yellow
+    identifier: yellow
+  - display_name: Green
+    identifier: green
+  - display_name: Blue
+    identifier: blue
+  - display_name: Indigo
+    identifier: indigo
+  - display_name: Violet
+    identifier: violet
+    default: true

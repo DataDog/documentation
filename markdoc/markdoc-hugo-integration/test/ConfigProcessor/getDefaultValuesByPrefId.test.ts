@@ -1,10 +1,10 @@
 import { describe, test, expect } from 'vitest';
-import { ConfigProcessor } from '../../../src/ConfigProcessor';
+import { ConfigProcessor } from '../../src/ConfigProcessor';
 import {
   PrefOptionsConfig,
   PrefOptionsConfigSchema
-} from '../../../src/schemas/yaml/prefOptions';
-import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
+} from '../../src/schemas/yaml/prefOptions';
+import { Frontmatter, FrontmatterSchema } from '../../src/schemas/yaml/frontMatter';
 
 describe('getDefaultValuesByPrefId', () => {
   const prefOptions: PrefOptionsConfig = {

@@ -1,8 +1,0 @@
-primary_color_options:
-  - display_name: Red
-    identifier: red
-  - display_name: Yellow
-    identifier: yellow
-  - display_name: Blue
-    identifier: blue
-    default: true
