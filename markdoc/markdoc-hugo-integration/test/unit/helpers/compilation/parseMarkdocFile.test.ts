@@ -47,7 +47,7 @@ describe('parseMarkdocFile processes valid input', () => {
 });
 
 describe('parseMarkdocFile processes invalid input', () => {
-  const invalidMarkupDir = MOCKS_DIR + '/invalid_markdoc_files';
+  const invalidMarkupDir = MOCKS_DIR + '/invalid/markdoc_files';
   const invalidMarkdocFiles = findInDir(invalidMarkupDir, /\.mdoc$/);
 
   invalidMarkdocFiles.forEach((markdocFile) => {

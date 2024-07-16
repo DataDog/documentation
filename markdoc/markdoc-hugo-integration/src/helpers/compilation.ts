@@ -8,11 +8,11 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
 
-interface ParsingErrorReport {
+export type ParsingErrorReport = {
   error: ValidationError;
   file: string;
   lines: number[];
-}
+};
 
 /**
  * Parse a Markdoc file and return its AST, frontmatter, partials,

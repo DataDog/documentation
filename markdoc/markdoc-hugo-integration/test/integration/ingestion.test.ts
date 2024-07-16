@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { VALID_PREF_OPTIONS_DIR, SNAPSHOTS_DIR, MOCKS_DIR } from '../constants';
 import { loadPrefOptionsFromDir } from '../../src/helpers/configIngestion';
 
-const INVALID_PREF_MOCKS_DIR = `${MOCKS_DIR}/invalid_prefs_options_dirs`;
+const INVALID_PREF_MOCKS_DIR = `${MOCKS_DIR}/invalid/prefs_options_dirs`;
 
 describe('Config ingestion', () => {
   test('Valid prefs options can be ingested', () => {
