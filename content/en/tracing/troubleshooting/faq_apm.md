@@ -23,7 +23,7 @@ If you experience unexpected behavior while using the APM product, the steps on 
 
 ## Trace metric related issues
 
-{{% collapse-content title="There are more traces in the Trace Explorer page than in other parts of Datadog even when scoped to the same query" level="h4" %}}
+{{% collapse-content title="There are more traces in the Trace Explorer page than in other parts of Datadog" level="h4" %}}
 
 This is an expected behavior <strong> if </strong> you do not have [custom retention filters][4]. 
 
@@ -42,7 +42,9 @@ The custom retention filter allows you to decide which spans are indexed and ret
 
 
 
-{{% collapse-content title="The trace metrics value is different from the custom span-based metrics value" level="h4" %}} </strong>[Trace metrics][6] </strong> are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. The trace metrics namespace is formatted as: `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
+{{% collapse-content title="The trace metrics value is different from the custom span-based metrics value" level="h4" %}} 
+
+</strong>[Trace metrics][6] </strong> are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. The trace metrics namespace is formatted as: `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
 
 [Custom span-based metrics][7] are generated based on your ingested spans which is dependent on your [trace ingestion sampling][8]. If your ingesting 50% of your traces, your custom span-based metrics will be based on the 50% ingested spans.
 
@@ -53,23 +55,6 @@ To have the value of the trace metric and the value of the custom span-based met
 Metric names must follow the [metric naming convention][15]. Metric names that start with `trace.*` are not permitted and will not be saved. 
 
 </div>
-
-{{% /collapse-content %}} 
-
-
-
-{{% collapse-content title="The trace metrics are skewed or not reporting correctly" level="h4" %}}
-
-If your trace metrics are not reporting as you'd expect in the Datadog platform, there is a possibility that you are exceeding Datadog's volume guidelines:
-
-For a given 40 minute interval, Datadog accepts the following combinations:
-- 1000 unique `environments` and `service` combinations
-- 30 unique `second primary tag values` per environment
-- 100 unique `operation names` per environment and service
-- 1000 unique `resources` per environment, service, and operation name
-- 30 unique `versions` per environment and service
-
-If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
 
 {{% /collapse-content %}} 
 
@@ -109,42 +94,28 @@ Spikes in data ingestion and indexing can be a result of multiple things(share s
 
 
 
-
-<!-- (should I combine this into one section?)- it may be easy to see as multiple sections, but happy to combine since it is the smae issue-->
-
-{{% collapse-content title="Some of my resources are missing from the Datadog platform" level="h4" %}}
-
-If you are missing some of your resources that you expected to see in the Datadog platform, your are probably exceeding Datadog's [Data Volume Guidelines][5]:
-
-For a given 40 minute interval, Datadog accepts the following combinations:
-- 1000 unique `environments` and `service` combinations
-- 30 unique `second primary tag values` per environment
-- 100 unique `operation names` per environment and service
-- 1000 unique `resources` per environment, service, and operation name
-- 30 unique `versions` per environment and service
-
-If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
-
-{{% /collapse-content %}} 
-
-
-
-{{% collapse-content title=" Some of my resources are missing from the service page but they are reporting traces " level="h4" %}}
-
-If you are seeing traces from your service in the  but are not able to find this service on the [Service Catalog page][14] , you might be exceeding our [Data Volume Guidelines][5]
-
-For a given 40 minute interval, Datadog accepts the following combinations:
-- 1000 unique `environments` and `service` combinations
-- 30 unique `second primary tag values` per environment
-- 100 unique `operation names` per environment and service
-- 1000 unique `resources` per environment, service, and operation name
-- 30 unique `versions` per environment and service
-
-If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
-
-{{% /collapse-content %}} 
-
 <br>
+
+## Data volumes related issues
+<!-- see the data volume issues above and copy them here. -->
+If you encounter issues related to the following, there is a possibility that you are exceeding Datadog's volume guidelines:
+- your trace metrics are not reporting as you would expect in the Datadog platform
+- you are missing some of your resources that you expected to see in the Datadog platform
+- you are seeing traces from your service but are not able to find this service on the [Service Catalog page][14]
+
+{{% collapse-content title="Data Volumes Guidelines" level="h4" %}}
+
+
+For a given 40 minute interval, Datadog accepts the following combinations:
+- 1000 unique `environments` and `service` combinations
+- 30 unique `second primary tag values` per environment
+- 100 unique `operation names` per environment and service
+- 1000 unique `resources` per environment, service, and operation name
+- 30 unique `versions` per environment and service
+
+If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
+
+{{% /collapse-content %}} 
 
 ## Further Reading
 
