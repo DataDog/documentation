@@ -1,25 +1,20 @@
-import MarkdocStaticCompiler, { Node, RenderableTreeNodes } from '../../markdoc-static-compiler/dist';
+import MarkdocStaticCompiler, {
+  Node,
+  RenderableTreeNodes
+} from '../../markdoc-static-compiler/dist';
 import fs from 'fs';
 import yaml from 'js-yaml';
-import {
-  PageVariable,
-  BooleanVariable,
-  StringVariable,
-  NumberVariable,
-  Frontmatter,
-  FrontmatterSchema,
-  GlobalVariableConfig
-} from './oldSchemas';
+import { PageVariable, StringVariable, GlobalVariableConfig } from './oldSchemas';
+import { Frontmatter, FrontmatterSchema } from './schemas/yaml/frontMatter';
 
 export class FileRenderer {
   ast: Node;
   globalVariableConfig: GlobalVariableConfig;
   renderableTree: RenderableTreeNodes;
-  content: string; // html
-  chooser: string; // html
+  content: string; // html string
+  chooser: string; // html string
   frontmatter: Frontmatter;
   pageVarDefinitions: Record<string, PageVariable>;
-  debug = false;
 
   constructor(p: { path: string; config: GlobalVariableConfig }) {
     this.globalVariableConfig = p.config;
@@ -32,16 +27,14 @@ export class FileRenderer {
       : { title: '' };
     this.frontmatter = FrontmatterSchema.parse(frontmatterYaml);
 
-    if (this.frontmatter.title === 'DebugIt') {
-      this.debug = true;
-    }
-
     const defaultVariableValues = this.getGlobalDefaultValues();
     this.renderableTree = MarkdocStaticCompiler.transform(this.ast, {
       variables: defaultVariableValues
     });
 
-    const referencedVariableIdentifiers = this.collectVariableIdentifiers(this.renderableTree);
+    const referencedVariableIdentifiers = this.collectVariableIdentifiers(
+      this.renderableTree
+    );
 
     this.pageVarDefinitions = {};
     const pageVariableConfig = { ...this.globalVariableConfig };
@@ -90,7 +83,12 @@ export class FileRenderer {
       variableIdentifiers.push(node.path?.join('.'));
     }
 
-    if (typeof node === 'object' && '$$mdtype' in node && node.$$mdtype === 'Tag' && 'if' in node) {
+    if (
+      typeof node === 'object' &&
+      '$$mdtype' in node &&
+      node.$$mdtype === 'Tag' &&
+      'if' in node
+    ) {
       const identifiers = this.collectVariableIdentifiers(
         // @ts-ignore
         node.if
@@ -131,25 +129,10 @@ export class FileRenderer {
         return '';
       }
       const variableDef = config[identifier];
-      if (variableDef.type === 'boolean') {
-        return this.buildBooleanSelectorHtml({ ...variableDef, identifier });
-      } else if (variableDef.type === 'string') {
-        return this.buildStringSelectorHtml({ ...variableDef, identifier });
-      } else if (variableDef.type === 'number') {
-        return this.buildNumberSelectorHtml({ ...variableDef, identifier });
-      }
+      return this.buildStringSelectorHtml({ ...variableDef, identifier });
     });
 
     return html.join('');
-  }
-
-  buildBooleanSelectorHtml(variable: BooleanVariable) {
-    return `
-        <div>
-          <label>${variable.displayName}</label>
-          <input type="checkbox" ${variable.default && 'checked'} />
-        </div>
-      `;
   }
 
   buildStringSelectorHtml(variable: StringVariable) {
@@ -157,7 +140,9 @@ export class FileRenderer {
     return `
         <div style="display: inline-block; vertical-align: top; margin-right: 1em;">
           <label>${variable.displayName}</label>
-          <select onchange="handleValueChange('${variable.identifier}', this.options[this.selectedIndex].value)">
+          <select onchange="handleValueChange('${
+            variable.identifier
+          }', this.options[this.selectedIndex].value)">
             ${variable.options.map((v) => {
               const selected = v === defaults[variable.identifier] ? 'selected' : '';
               return `<option value="${v}" ${selected}>${v}</option>`;
@@ -165,25 +150,5 @@ export class FileRenderer {
           </select>
         </div>
       `;
-  }
-
-  buildNumberSelectorHtml(variable: NumberVariable) {
-    if (variable.options.type === 'range') {
-      return `
-          <div>
-            <label>${variable.displayName}</label>
-            <input type="number" value="${variable.default}" min="${variable.options.data.min}" max="${variable.options.data.max}" />
-          </div>
-        `;
-    } else {
-      return `
-          <div>
-            <label>${variable.displayName}</label>
-            <select>
-              ${variable.options.data.map((v) => `<option>${v}</option>`)}
-            </select>
-          </div>
-        `;
-    }
   }
 }
