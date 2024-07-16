@@ -19,7 +19,7 @@ further_reading:
 
 While information from individual logs can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search for logs in the [Log Explorer][5] and display them as timeseries, top lists, tree maps, pie charts, or tables.
 
-Log Explorer search consists of a time range and a search query, mixing `key:value` and full-text search. 
+Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6]. 
 
 ## Search query
 
@@ -27,7 +27,7 @@ For example, to filter on logs produced by a web store service, with an error st
 
 {{< img src="logs/explorer/search_filter.png" alt="Create a search query in the Log Explorer that filters for error logs of rejected payments for a web store service" style="width:100%;" >}}
 
-[Indexed Logs][1] support both full-text search and `key:value` search queries.
+[Indexed Logs][1] support both [full-text search][6] and `key:value` search queries.
 
 **Note**: `key:value` queries **do not** require that you [declare a facet][2] beforehand.
 
@@ -94,3 +94,4 @@ You can interact with the search bar with your mouse, as well as by using keyboa
 [3]: /logs/search-syntax
 [4]: /dashboards/guide/custom_time_frames
 [5]: /logs/explorer/
+[6]: https://en.wikipedia.org/wiki/Full-text_search
