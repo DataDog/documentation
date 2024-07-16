@@ -21,7 +21,7 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 1. [Grant API access to your EMR EC2 instance profile](#grant-api-access-to-your-emr-ec2-instance-profile).
 1. [Specify service tagging per Spark application](#specify-service-tagging-per-spark-application).
 
-### Store your Datadog API key in AWS Secrets Manager
+### Store your Datadog API key in AWS Secrets Manager (Recommended)
 1. Take note of your [Datadog API key][1].
 1. In [AWS Secrets Manager][2], choose **Store a new secret**. 
    - Under **Secret type**, select **Other type of secret**. 
@@ -32,6 +32,52 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 1. On the **Configure rotation** page, you can optionally turn on [automatic rotation][3]. Then, click **Next**.
 1. On the **Review** page, review your secret details. Then, click **Store**.
 1. In AWS Secrets Manager, open the secret you created. Take note of the **Secret ARN**.
+
+### Grant permissions to EMR EC2 instance profile
+EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches, follow [the offical guide][11] to prepare this role based on your application's need to interact with other AWS services. The following permssions are additional permissions required for Data Jobs Monitoring.
+
+#### Permissions to get secret value using AWS Secret Management (Recommended)
+1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
+1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
+1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
+1. On the **Specify permissions** page, find the **Select a service** section. Under **Service**, select **Secrets Manager**.
+   {{< img src="data_jobs/emr/specify_permissions.png" alt="AWS IAM console, Specify Permissions page." style="width:80%;" >}}
+   - Then, under **Actions allowed**, select `GetSecretValue`. This is a **Read** action.
+   - Under **Resources**, select **Specific**. Then, next to **Secret**, click on **Add ARNs** and add the ARN of the secret you created in the first step on this page.
+   - Click **Next**.
+1. On the next page, give your policy a name. Then, click **Create policy**.
+
+#### Permissions to describe cluster
+You can skip this step if you are using the default role **EMR_EC2_DefaultRole** for cluster EC2 instances and its associated AWS default managed policy, **AmazonElasticMapReduceforEC2Role**.
+
+1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
+1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
+1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
+1. On the **Specify permissions** page, toggle on the **JSON** tab.
+   - Then, copy and paste the following policy into the **Policy editor**
+   ```json
+   {
+      "Version": "2012-10-17",
+      "Statement": [
+         {
+            "Effect": "Allow",
+            "Action": [
+               "elasticmapreduce:ListBootstrapActions",
+               "elasticmapreduce:ListInstanceFleets",
+               "elasticmapreduce:DescribeCluster",
+               "elasticmapreduce:ListInstanceGroups"
+            ],
+            "Resource": [
+               "*"
+            ]
+         }
+      ]
+   }
+   ```
+   - Click **Next**.
+1. On the next page, give your policy a name. Then, click **Create policy**.
+
+Take note of the name of the IAM role you plan to use as the instance profile for your EMR cluster. 
 
 ### Create and configure your EMR cluster
 
@@ -60,7 +106,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 
    ```
 
-   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.2.0.sh` to use the last stable version.
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.4.0.sh` to use the last stable version.
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
@@ -68,27 +114,9 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    - For **Script location**, enter the path to where you stored the init script in S3.
    - Click **Add bootstrap action**.
 
+1. On the **Create Cluster** page, find the **Identity and Access Management (IAM) roles** section. Choose the instance profile you modified in the last 
+
 When your cluster is created, this bootstrap action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
-
-### Grant API access to your EMR EC2 instance profile
-
-1. In your [Amazon EMR console][4], open the summary page for your newly created cluster. Take note of your cluster's **IAM role for instance profile**.
-
-   Alternatively, you can also find this value by running: 
-   ```shell
-   aws emr describe-cluster --cluster-id <YOUR_CLUSTER_ID>
-   ```
-   Look for `Ec2InstanceAttributes.IamInstanceProfile` in the output.
-1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
-1. Click on the instance profile you saw in the previous step.
-1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
-1. On the **Specify permissions** page, find the **Select a service** section. Under **Service**, select **Secrets Manager**.
-   {{< img src="data_jobs/emr/specify_permissions.png" alt="AWS IAM console, Specify Permissions page." style="width:80%;" >}}
-   - Then, under **Actions allowed**, select `GetSecretValue`. This is a **Read** action.
-   - Under **Resources**, select **Specific**. Then, next to **Secret**, click on **Add ARNs** and add the ARN of the secret you created in the first step on this page.
-   - Click **Next**.
-1. On the next page, give your policy a name. Then, click **Create policy**.
-
 
 ### Specify service tagging per Spark application
 
@@ -126,3 +154,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html
+[11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-role-for-ec2.html
