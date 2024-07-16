@@ -12,7 +12,7 @@ further_reading:
 ---
 
 ## Overview
-Datadog is pleased to invite you to test the new standalone frontend Error Tracking experience. This product is in active development, please expect it to evolve with your usage and please be sure to let us know if you have any thoughts as you make use of it.
+Datadog is pleased to invite you to test the new standalone frontend Error Tracking experience. This standalone product captures errors automatically and provides a detailed timeline of steps a user took leading up to the error, simplifying the process to reproduce and resolve errors quickly. This product is in active development, please expect it to evolve with your usage and please be sure to let us know if you have any thoughts as you make use of it.
 
 ## Setup
 Note: You can ignore any references to the RUM product while we are in Alpha & Beta.
