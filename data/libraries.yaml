@@ -240,6 +240,11 @@ Classic:
       official: false
       dogstatsd: true
       authors: GitHub
+    - name: datadog-api-client
+      link: https://github.com/DataDog/datadog-api-client-ruby
+      official: true
+      api: true
+      authors: Datadog
   - Scala:
     - name: datadog-scala
       link: https://github.com/gphat/datadog-scala

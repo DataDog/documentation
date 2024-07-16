@@ -20,6 +20,10 @@
     "version": "v1.26.0"
   },
   {
+    "client": "datadog-api-client-rust",
+    "version": "0.1.3"
+  },
+  {
     "client": "integrations-core",
     "version": "ddev-v9.1.0"
   }

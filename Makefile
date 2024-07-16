@@ -24,7 +24,7 @@ include $(CONFIG_FILE)
 # API Code Examples
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
-EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
+EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript datadog-api-client-rust
 
 # Set defaults when no makefile.config or missing entries
 # Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
@@ -181,6 +181,7 @@ examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)):
 examples/$(patsubst datadog-api-client-%,%,$(1)): examples/$(1) examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1))
 	-find examples/$(1)/examples -iname \*.py -exec mv {} {}beta \;
 	-find examples/$(1)/examples -iname \*.rb -exec mv {} {}beta \;
+	-find examples/$(1)/examples -maxdepth 1 -iname \*.rs -exec sh -c 'echo {} && mkdir -p `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1" | xargs dirname` && mv {} `echo {} | sed "s/\_/\//2" | sed "s/\_/\//1"`' \;
 	-cp -Rn examples/$(1)/examples/v* ./content/en/api
 endef
 

@@ -25,6 +25,7 @@ jobs:
               'datadog-api-client-python',
               'datadog-api-client-ruby',
               'datadog-api-client-typescript',
+              'datadog-api-client-rust',
               'integrations-core'
             ]
             const versions = await Promise.all(clients.map(async (repo) => {
