@@ -30,8 +30,6 @@ For more information, see the [Go PGO documentation][4].
 
 PGO is a standard Go compiler option that you can use by manually downloading profiles from Datadog. Datadog built a tool, `datadog-pgo` to help you enable PGO on all services, using the latest and most representative profiles.
 
-<div class="alert alert-warning"><code>datadog-pgo</code> is in public beta.</div>
-
 To enable PGO using the `datadog-pgo` tool:
 
 1. Create a dedicated API key and an application key scoped to at least `continuous_profiler_pgo_read` as described in [API and Application Keys][5].
