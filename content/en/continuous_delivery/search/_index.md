@@ -1,5 +1,5 @@
 ---
-title: Search and Manage Deployments 
+title: Search and Manage Deployments
 description: Learn how to search and manage your deployments.
 further_reading:
 - link: "/continuous_delivery/explorer"
@@ -15,39 +15,36 @@ further_reading:
 CD Visibility is in private beta. To request access, complete the form.
 {{< /callout >}}
 
-## Overview
+## Deployments
 
-The [**Deployments** page][1] is useful for developers who want to keep an eye on the deployments for their environments.
+To see an overview of your deployments, navigate to [**Software Delivery** > **CD Visibility** > **Deployments**][1].
 
-{{< img src="/continuous_delivery/search/deployments.png" text="The Deployments page in Datadog" style="width:100%" >}}
+The [**Deployments** page][1] shows stats aggregated by services and environments over the selected time frame, as well as the status of the latest deployment execution. Use this page to see all your service deployments and get a view of their health.
+The metrics shown include the number of executions and failures, the failure rate, the median duration, and the 95th percentile duration. This information reveals which deployments have a higher probability of failure and which deployments are taking the most time to be executed. The effect of the latest changes can be seen by checking the status, revision and time of the last deployment result.
 
-Access high-level accumulation and trends, including:
+<div class="alert alert-info">Deployments without services configured and partial deployment executions are excluded from the statistics aggregation of the Deployments page. You can search for these deployments in the Deployment Executions page: <code>@deployment.partial_deployment:* OR -@deployment.service:*</code>.</div>
 
-- An overview of the health of the whole environment, with aggregated stats for deployment executions.
+{{< img src="/continuous_delivery/search/deployments_2.png" text="The Deployments page in Datadog" style="width:100%" >}}
+
+If you have different ways of deploying a service to an environment, you can expand the deployment rows to see stats further filtered by deployment name.
+
+The **Deployment** page provides you high-level information, including:
+
+- An overview of the health of the different services and environments, with aggregated stats.
 - A window for spotting and fixing immediate, urgent issues like broken deployments in production.
-- How each deployment was executed, over time, and with what results and trends.
+- How each service deployment was executed, over time, and with what results and trends.
 
-## Search for deployments
+## Deployment details
 
-To see your deployments, navigate to [**Software Delivery** > **CD Visibility** > **Deployments**][1].
+Click into a specific service deployment to see the **Deployment Details** page, which provides views of the data for the service deployment you selected over a specified time frame.
 
-The **Deployments** page shows aggregate stats for deployments over the selected time frame, as well as the status of the latest deployment execution. Use this page to see all your deployments and get a view of their health. The Deployments page shows metrics for your environments.
+{{< img src="continuous_delivery/search/deployments_page_2.png" alt="Deployment page for a single deployment" style="width:100%;">}}
 
-Metrics shown include the number of executions and failures, the failure rate, the median duration, and the 95th percentile duration. This information reveals which deployments are high-usage and potentially high resource consumers. The last deployment result, duration, and last status shows you the effect of the latest changes.
+Get insights on the selected service deployment such as the number of successful and failed deployments over time, the average deployment duration, number of rollbacks, and the failure rate. The bottom part of the page shows a table with the deployment executions for the service, based on the environment filter selected.
 
-<div class="alert alert-info">Partial deployment executions are excluded from the statistics aggregation to avoid incorrect measures. You can use the Partial Deployment facet to search for these deployments: <code>@deployment.partial_deployment:*</code>.</div>
+## Deployment executions
 
-You can filter the page by deployment name to see the deployments you're most concerned with. Click on a deployment that is slow or failing to dig into details that show what commit might have introduced the failure.
-
-## Deployment details and executions
-
-Click into a specific deployment to see the **Deployment**page, which provides views of the data for the deployment you selected over a specified time frame.
-
-{{< img src="continuous_delivery/search/deployments_page.png" alt="Deployment page for a single deployment" style="width:100%;">}}
-
-Get insights on the selected deployment such as the number of successful and failed deployments over time, the average deployment duration, number of rollbacks, and the failure rate. There are also summary tables for deployment executions so you can sort them in terms of name, environment, duration, or rollback status.
-
-The deployment executions list shows all the times that a deployment ran during the selected time frame, for the selected environment. Use the facets on the left side to filter the list to the deployment execution you want to see, and click on an execution to see additional details on the Deployment Details side panel.
+The [**Deployment Executions** page][2] shows all the times that a deployment ran during the selected time frame. Use the facets on the left side to filter the list of deployment executions, and click on an execution to see additional details on the Deployment Execution Details side panel.
 
 {{< img src="continuous_delivery/search/details_side_panel.png" alt="Deployment Details side panel on the Deployments page" style="width:100%;">}}
 
@@ -56,3 +53,4 @@ The deployment executions list shows all the times that a deployment ran during 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/deployments
+[2]: https://app.datadoghq.com/ci/deployments/executions
