@@ -6,7 +6,7 @@ aliases:
 - /ko/agent/faq/the-datadog-agent-for-logs-or-traces-only
 cascade:
 - _target:
-    path: /agent/basic_agent_usage/chef.md
+    path: /agent/basic_agent_usage/chef/
   tags:
   - 설치 제거
 - _target:

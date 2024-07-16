@@ -6,7 +6,7 @@ aliases:
 - /fr/agent/faq/the-datadog-agent-for-logs-or-traces-only
 cascade:
 - _target:
-    path: /agent/basic_agent_usage/chef.md
+    path: /agent/basic_agent_usage/chef/
   tags:
   - uninstall
 - _target:
