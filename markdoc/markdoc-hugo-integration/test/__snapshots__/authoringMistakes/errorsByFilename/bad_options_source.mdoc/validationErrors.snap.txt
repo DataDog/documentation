@@ -1,1 +1,0 @@
-Invalid options_source could be populated by the placeholders in <COLOR>_object_options: An options source with the ID 'red_object_options' does not exist.

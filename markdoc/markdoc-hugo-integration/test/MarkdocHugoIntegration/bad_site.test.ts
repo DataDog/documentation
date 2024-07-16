@@ -1,9 +1,9 @@
-import { MarkdocHugoIntegration } from '../../../src';
+import { MarkdocHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
-import { SNAPSHOTS_DIR, AUTHORING_MISTAKES_SITE_DIR } from '../../constants';
-import { findInDir } from '../../../src/helpers/filesystem';
+import { SNAPSHOTS_DIR, BAD_SITE_DIR } from '../constants';
+import { findInDir } from '../../src/helpers/filesystem';
 
-const siteDir = AUTHORING_MISTAKES_SITE_DIR;
+const siteDir = BAD_SITE_DIR;
 const contentDir = siteDir + '/content';
 const markupFiles = findInDir(contentDir, /\.mdoc$/);
 

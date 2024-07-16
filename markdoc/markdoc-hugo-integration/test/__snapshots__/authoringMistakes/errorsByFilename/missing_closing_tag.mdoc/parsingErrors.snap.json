@@ -9,7 +9,7 @@
       6,
       7
     ],
-    "file": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid/markdoc_files/missing_closing_tag.mdoc"
+    "file": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid/bad_site/content/missing_closing_tag.mdoc"
   },
   {
     "error": {
@@ -21,6 +21,6 @@
       9,
       10
     ],
-    "file": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid/markdoc_files/missing_closing_tag.mdoc"
+    "file": "/Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid/bad_site/content/missing_closing_tag.mdoc"
   }
 ]
