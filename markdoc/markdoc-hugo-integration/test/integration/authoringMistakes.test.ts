@@ -22,15 +22,15 @@ describe('MarkdocHugoIntegration', () => {
   // sanitize the file paths so snapshots are consistent across machines
   const errorReports = { ...parsingErrorReportsByFilePath };
   Object.keys(errorReports).forEach((filePath) => {
-    const sanitizedFilePath = filePath.replace(siteDir, '');
+    const sanitizedFilePath = filePath.replace(contentDir, '');
     errorReports[sanitizedFilePath] = errorReports[filePath];
     delete errorReports[filePath];
   });
 
   const errors = { ...validationErrorsByFilePath };
   Object.keys(errors).forEach((filePath) => {
-    const sanitizedFilePath = filePath.replace(siteDir, '');
-    errors[sanitizedFilePath] = errors[filePath].replace(siteDir, '');
+    const sanitizedFilePath = filePath.replace(contentDir, '');
+    errors[sanitizedFilePath] = errors[filePath].replace(contentDir, '');
     delete errors[filePath];
   });
 
@@ -39,7 +39,7 @@ describe('MarkdocHugoIntegration', () => {
   });
 
   markupFiles.forEach((markupFile) => {
-    const sanitizedFilename = markupFile.replace(siteDir, '');
+    const sanitizedFilename = markupFile.replace(contentDir, '');
     const parsingErrorReports = parsingErrorReportsByFilePath[markupFile];
     const validationError = validationErrorsByFilePath[markupFile];
 

@@ -9,7 +9,8 @@ import {
 import {
   parseMarkdocFile,
   collectVarIdsFromTree,
-  ParsingErrorReport
+  ParsingErrorReport,
+  buildRenderableTree
 } from './helpers/compilation';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
 import { findInDir } from './helpers/filesystem';
@@ -74,37 +75,30 @@ export class MarkdocHugoIntegration {
         continue;
       }
 
-      // derive the default value of each preference
-      const defaultValsByPrefId = getDefaultValuesByPrefId(
-        frontmatter,
-        this.prefOptionsConfig
-      );
+      // build the renderable tree and write the file to HTML
+      try {
+        const renderableTree = buildRenderableTree({
+          ast,
+          partials,
+          frontmatter,
+          prefOptionsConfig: this.prefOptionsConfig
+        });
 
-      const renderableTree = MarkdocStaticCompiler.transform(ast, {
-        variables: defaultValsByPrefId,
-        partials
-      });
-
-      // ensure that all variable ids appearing
-      // in the renderable tree are valid page pref ids
-      const referencedVarIds = collectVarIdsFromTree(renderableTree);
-      const pagePrefIds = Object.keys(defaultValsByPrefId);
-      const invalidVarIds = referencedVarIds.filter((id) => !pagePrefIds.includes(id));
-
-      if (invalidVarIds.length > 0) {
-        this.validationErrorsByFilePath[
-          markdocFile
-        ] = `Invalid variable IDs found in Markdoc file ${markdocFile}: ${invalidVarIds}`;
-        continue;
+        const html = MarkdocStaticCompiler.renderers.html(renderableTree);
+        const styledHtml = `<style>.markdoc__hidden { background-color: lightgray; }</style>${html}`;
+        fs.writeFileSync(
+          markdocFile.replace(/\.mdoc$/, '.html'),
+          prettier.format(styledHtml, { parser: 'html' })
+        );
+      } catch (e) {
+        if (e instanceof Error) {
+          this.validationErrorsByFilePath[markdocFile] = e.message;
+        } else if (typeof e === 'string') {
+          this.validationErrorsByFilePath[markdocFile] = e;
+        } else {
+          this.validationErrorsByFilePath[markdocFile] = JSON.stringify(e);
+        }
       }
-
-      // write the file to HTML
-      const html = MarkdocStaticCompiler.renderers.html(renderableTree);
-      const styledHtml = `<style>.markdoc__hidden { background-color: lightgray; }</style>${html}`;
-      fs.writeFileSync(
-        markdocFile.replace(/\.mdoc$/, '.html'),
-        prettier.format(styledHtml, { parser: 'html' })
-      );
     }
 
     return {

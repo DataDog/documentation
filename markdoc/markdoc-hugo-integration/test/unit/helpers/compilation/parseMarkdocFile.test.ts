@@ -7,6 +7,7 @@ import {
   SNAPSHOTS_DIR,
   MOCKS_DIR
 } from '../../../constants';
+import MarkdocStaticCompiler from 'markdoc-static-compiler';
 
 describe('parseMarkdocFile processes valid input', () => {
   const markdocFiles = findInDir(VALID_CONTENT_DIR, /\.mdoc$/);

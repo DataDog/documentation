@@ -1,12 +1,15 @@
 import MarkdocStaticCompiler, {
   Node,
   ValidationError,
-  RenderableTreeNodes
+  RenderableTreeNodes,
+  RenderableTreeNode
 } from 'markdoc-static-compiler';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
+import { getDefaultValuesByPrefId } from './configIngestion';
+import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 
 export type ParsingErrorReport = {
   error: ValidationError;
@@ -164,4 +167,35 @@ export function collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
 
   // return the unique identifiers
   return Array.from(new Set(variableIdentifiers));
+}
+
+export function buildRenderableTree(p: {
+  frontmatter: Frontmatter;
+  prefOptionsConfig: PrefOptionsConfig;
+  partials: Record<string, Node>;
+  ast: Node;
+}): RenderableTreeNode {
+  const defaultValsByPrefId = getDefaultValuesByPrefId(
+    p.frontmatter,
+    p.prefOptionsConfig
+  );
+
+  const renderableTree = MarkdocStaticCompiler.transform(p.ast, {
+    variables: defaultValsByPrefId,
+    partials: p.partials
+  });
+
+  // ensure that all variable ids appearing
+  // in the renderable tree are valid page pref ids
+  const referencedVarIds = collectVarIdsFromTree(renderableTree);
+  const pagePrefIds = Object.keys(defaultValsByPrefId);
+  const invalidVarIds = referencedVarIds.filter((id) => !pagePrefIds.includes(id));
+
+  if (invalidVarIds.length > 0) {
+    throw new Error(
+      `Invalid reference found in markup: ${invalidVarIds} is not a valid identifier.`
+    );
+  }
+
+  return renderableTree;
 }
