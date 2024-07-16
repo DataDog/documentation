@@ -19,7 +19,7 @@ further_reading:
 
 While information from individual logs can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search for logs in the [Log Explorer][5] and display them as timeseries, top lists, tree maps, pie charts, or tables.
 
-Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6]. 
+Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].  **Note**: Full-text search supports searching texts in logs.  It utilizes n-gram and morphemic analysis. If precision is required, search with `key:value`.
 
 ## Search query
 
