@@ -18,6 +18,7 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: Synthetic テストモニターについて
+kind: documentation
 title: ブラウザテストの概要
 ---
 
@@ -110,7 +111,7 @@ Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレー
 
 {{< img src="getting_started/synthetics/record-test.mp4" alt="テストステップを記録する" video="true" >}}
 
-サンプル Web サイトは定期的にエラーをスローし、意図的に失敗を引き起こします。**Notify your team** フィールドにメールアドレスを含めると、テストが失敗して回復したときにメール通知が届きます。
+サンプル Web サイトは定期的にエラーを発生させ、意図的に失敗します。**Configure the monitor for this test** フィールドにメールアドレスを入力すると、テストが失敗したときや回復したときにメール通知が届きます。
 
 ## テスト結果を確認する
 
