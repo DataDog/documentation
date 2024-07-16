@@ -11,10 +11,6 @@ title: セルフホストの Oracle のデータベースモニタリングの�
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-このページで説明されている機能はベータ版です。フィードバックやリクエストについては、カスタマーサクセスマネージャーにお問い合わせください。
-</div>
-
 データベースモニタリングは、クエリサンプルを公開することで、Oracle データベースを深く可視化し、さまざまなワークロードをプロファイリングして問題を診断します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
@@ -69,6 +65,15 @@ grant select on V_$CONTAINERS to c##datadog ;
 grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
 grant select on V_$SQL to c##datadog ;
 grant select on V_$PGASTAT to c##datadog ;
+grant select on v_$asm_diskgroup to c##datadog ;
+grant select on v_$rsrcmgrmetric to c##datadog ;
+grant select on v_$dataguard_config to c##datadog ;
+grant select on v_$dataguard_stats to c##datadog ;
+grant select on v_$transaction to c##datadog;
+grant select on v_$locked_object to c##datadog;
+grant select on dba_objects to c##datadog;
+grant select on cdb_data_files to c##datadog;
+grant select on dba_data_files to c##datadog;
 ```
 
 プラグ可能データベース (PDB) 上で実行するカスタムクエリを構成した場合は、`C##DATADOG` ユーザーに `set container` 権限を付与する必要があります。
@@ -153,8 +158,8 @@ FROM
   x$ksuse s,
   x$kslwt w,
   x$ksled e,
-  v$sqlstats sq,
-  v$sqlstats sq_prev,
+  v$sql sq,
+  v$sql sq_prev,
   v$containers c,
   v$sqlcommand comm
 WHERE
@@ -164,9 +169,9 @@ WHERE
   AND s.indx = w.kslwtsid
   AND w.kslwtevt = e.indx
   AND s.ksusesqi = sq.sql_id(+)
-  AND s.ksusesph = sq.plan_hash_value(+)
+  AND decode(s.ksusesch, 65535, TO_NUMBER(NULL), s.ksusesch) = sq.child_number(+)
   AND s.ksusepsi = sq_prev.sql_id(+)
-  AND s.ksusepha = sq_prev.plan_hash_value(+)
+  AND decode(s.ksusepch, 65535, TO_NUMBER(NULL), s.ksusepch) = sq_prev.child_number(+)
   AND s.con_id = c.con_id(+)
   AND s.ksuudoct = comm.command_type(+)
 ;
@@ -178,7 +183,9 @@ GRANT SELECT ON dd_session TO c##datadog ;
 
 Oracle テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
-Oracle Agent のコンフィギュレーションファイル `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][2]を参照してください。
+Oracle Agent のコンフィギュレーションファイル `/etc/datadog-agent/conf.d/oracle.d/conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][2]を参照してください。
+
+注意: `v7.53.0` 以前のDatadog Agentでは、設定ディレクトリが `oracle-dbm.d` となります。
 
 ```yaml
 init_config:
@@ -210,7 +217,7 @@ Agent は、root マルチテナントコンテナデータベース (CDB) に�
 [Agent の status サブコマンドを実行][5]し、**Checks** セクションで `oracle-dbm` を探します。Datadog の[ダッシュボード][7]と[データベース][6]のページに移動して開始します。
 
 [1]: /ja/database_monitoring/setup_oracle/#install-agent
-[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: /ja/agent/guide/agent-commands/#agent-status-and-information
