@@ -1,0 +1,1 @@
+Invalid variable IDs found in Markdoc file /Users/jen.gilbert/go/src/github.com/DataDog/documentation/markdoc/markdoc-hugo-integration/test/mocks/invalid/site_with_authoring_mistakes/content/bad_variable_id.mdoc: colour

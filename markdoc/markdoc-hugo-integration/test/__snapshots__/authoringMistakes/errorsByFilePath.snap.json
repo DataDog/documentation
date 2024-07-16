@@ -1,4 +1,0 @@
-{
-  "/content/bad_options_source.mdoc": "Invalid options_source could be populated by the placeholders in <COLOR>_object_options: An options source with the ID 'red_object_options' does not exist.",
-  "/content/bad_variable_id.mdoc": "Invalid variable IDs found in Markdoc file /content/bad_variable_id.mdoc: colour"
-}

@@ -14,8 +14,25 @@ describe('MarkdocHugoIntegration', () => {
     contentDir: contentDir,
     partialsDir: siteDir + '/partials'
   });
+
+  // compile the bad files
   const { hasErrors, parsingErrorReportsByFilePath, validationErrorsByFilePath } =
     integration.compile();
+
+  // sanitize the file paths so snapshots are consistent across machines
+  const errorReports = { ...parsingErrorReportsByFilePath };
+  Object.keys(errorReports).forEach((filePath) => {
+    const sanitizedFilePath = filePath.replace(siteDir, '');
+    errorReports[sanitizedFilePath] = errorReports[filePath];
+    delete errorReports[filePath];
+  });
+
+  const errors = { ...validationErrorsByFilePath };
+  Object.keys(errors).forEach((filePath) => {
+    const sanitizedFilePath = filePath.replace(siteDir, '');
+    errors[sanitizedFilePath] = errors[filePath].replace(siteDir, '');
+    delete errors[filePath];
+  });
 
   test('the compilation should return false', () => {
     expect(hasErrors).toBe(true);
@@ -24,36 +41,28 @@ describe('MarkdocHugoIntegration', () => {
   markupFiles.forEach((markupFile) => {
     const sanitizedFilename = markupFile.replace(siteDir, '');
     const parsingErrorReports = parsingErrorReportsByFilePath[markupFile];
-    const validationErrors = validationErrorsByFilePath[markupFile];
+    const validationError = validationErrorsByFilePath[markupFile];
 
-    const fileHasError = !!parsingErrorReports || !!validationErrors;
+    const fileHasError = !!parsingErrorReports || !!validationError;
 
     test(`the file ${sanitizedFilename} should have errors`, () => {
       expect(fileHasError).toBe(true);
     });
-  });
 
-  test('the error reports match the snapshot', () => {
-    const errorReports = { ...parsingErrorReportsByFilePath };
-    Object.keys(errorReports).forEach((filePath) => {
-      const sanitizedFilePath = filePath.replace(siteDir, '');
-      errorReports[sanitizedFilePath] = errorReports[filePath];
-      delete errorReports[filePath];
-    });
-    expect(JSON.stringify(errorReports, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/authoringMistakes/errorReportsByFilePath.snap.json`
-    );
-  });
+    if (parsingErrorReports) {
+      test(`the parsing error reports for ${sanitizedFilename} match the snapshot`, () => {
+        expect(JSON.stringify(parsingErrorReports, null, 2)).toMatchFileSnapshot(
+          `${SNAPSHOTS_DIR}/authoringMistakes/errorsByFilename/${sanitizedFilename}/parsingErrors.snap.json`
+        );
+      });
+    }
 
-  test('the errors match the snapshot', () => {
-    const errors = { ...validationErrorsByFilePath };
-    Object.keys(errors).forEach((filePath) => {
-      const sanitizedFilePath = filePath.replace(siteDir, '');
-      errors[sanitizedFilePath] = errors[filePath].replace(siteDir, '');
-      delete errors[filePath];
-    });
-    expect(JSON.stringify(errors, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/authoringMistakes/errorsByFilePath.snap.json`
-    );
+    if (validationError) {
+      test(`the validation error for ${sanitizedFilename} matches the snapshot`, () => {
+        expect(validationError).toMatchFileSnapshot(
+          `${SNAPSHOTS_DIR}/authoringMistakes/errorsByFilename/${sanitizedFilename}/validationErrors.snap.txt`
+        );
+      });
+    }
   });
 });
