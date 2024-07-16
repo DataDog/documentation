@@ -28,7 +28,7 @@ products:
 
 ## Overview
 
-Notifications allow you to keep your team informed when a security signal is generated. A security signal is generated when at least one case defined in a [detection rule][2] is matched over a given period of time.
+Notifications allow you to keep your team informed when a vulnerability or security signal is detected. Vulnerabilities and security signals are generated when at least one case defined in a [detection rule][2] is matched over a given period of time.
 
 ## Notification types
 
@@ -44,7 +44,7 @@ Use the **Say what's happening** section to customize the notification message u
 
 ### Notification rules
 
-Notification rules allow you to set general alerting preferences that span across multiple detection rules and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
+Notification rules allow you to set general alerting preferences that span across multiple detection rules, vulnerabilities, and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
 ## Notification channels
 
