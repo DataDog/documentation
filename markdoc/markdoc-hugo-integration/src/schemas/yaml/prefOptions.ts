@@ -1,6 +1,10 @@
 import { z } from 'zod';
 import { SNAKE_CASE_REGEX } from '../regexes';
 
+/**
+ * An option for a preference,
+ * as defined in the preference options configuration files.
+ */
 const PrefOptionSchema = z
   .object({
     display_name: z.string(),
@@ -11,8 +15,8 @@ const PrefOptionSchema = z
 
 /**
  * Preference options schema:
- * Validates the parsed YAML ingested from
- * the preference options configuration files.
+ * Validates the options YAML ingested from
+ * configuration files.
  */
 export const PrefOptionsConfigSchema = z.record(
   z
@@ -31,4 +35,8 @@ export const PrefOptionsConfigSchema = z.record(
     })
 );
 
+/**
+ * The validated preference options configuration
+ * ingested from YAML files.
+ */
 export type PrefOptionsConfig = z.infer<typeof PrefOptionsConfigSchema>;
