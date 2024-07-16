@@ -114,7 +114,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    - For **Script location**, enter the path to where you stored the init script in S3.
    - Click **Add bootstrap action**.
 
-1. On the **Create Cluster** page, find the **Identity and Access Management (IAM) roles** section. Choose the instance profile you modified in the last 
+1. On the **Create Cluster** page, find the **Identity and Access Management (IAM) roles** section. For **instance profile** dropdown, select the IAM role you have granted permissions in [Grant permissions to EMR EC2 instance profile](#grant-permissions-to-emr-ec2-instance-profile).
 
 When your cluster is created, this bootstrap action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 
