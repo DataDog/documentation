@@ -1925,26 +1925,31 @@ menu:
       parent: error_tracking
       identifier: error_tracking_suspect_commits
       weight: 6
+    - name: Dynamic Sampling
+      url: error_tracking/dynamic_sampling
+      parent: error_tracking
+      identifier: error_tracking_dynamic_sampling
+      weight: 7
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 7
+      weight: 8
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 8
+      weight: 9
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
-      weight: 9
+      weight: 10
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 10
+      weight: 11
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
