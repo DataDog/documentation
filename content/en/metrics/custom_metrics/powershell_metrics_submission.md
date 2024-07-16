@@ -108,7 +108,7 @@ $http_request.responseText
 
     $http_method = "POST"
 
-    $url_signature = "api/v1/tags/hosts/$host_name"
+    $url_signature = "api/latest/tags/hosts/$host_name"
 
     $parameters = "{
     `"tags`" : [`"environment:production`", `"role:webserver`"]
@@ -131,7 +131,7 @@ $http_request.responseText
     ```powershell
     $http_method = "POST"
 
-    $url_signature = "api/v1/series"
+    $url_signature = "api/latest/series"
 
     $currenttime = (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
 
@@ -152,6 +152,6 @@ $http_request.responseText
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[4]: /api/v1/hosts/
-[5]: /api/v1/metrics/
+[4]: /api/latest/hosts/
+[5]: /api/latest/metrics/
 [6]: https://github.com/ncracker/dd_metric
