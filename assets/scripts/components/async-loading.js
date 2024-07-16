@@ -12,13 +12,15 @@ import { loadInstantSearch } from './algolia';
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
-function loadPage(newUrl) {
-    // scroll to top of page on new page load
-    window.scroll({
-        top: 0,
-        left: 0,
-        behavior: "instant"
-    });
+function loadPage(newUrl, hashCheck = true) {
+    if (hashCheck) {
+        // only scroll to the top of the page if no conditions are fulfilled from datadog-docs.js ln 411-417
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "instant"
+        })
+    }
 
     let mainContent = document.getElementById('mainContent');
 

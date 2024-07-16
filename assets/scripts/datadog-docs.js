@@ -406,12 +406,21 @@ function replaceURL(inputUrl) {
     }
     return inputUrl.replace('https://www.docs.datadoghq.com', thisurl);
 }
+let hashChangeCheck = false;
+
+window.addEventListener('hashchange', (e) => {
+    const newHash = e.newURL.split('#')[1];
+    const oldHash = e.oldURL.split('#')[1];
+    if (window.location.hash && ((!oldHash && newHash) || ((newHash && oldHash) && (newHash === oldHash)))) {
+        hashChangeCheck = true;
+    }
+})
 
 window.addEventListener(
     'popstate',
     function (event) {
         setMobileNav();
-        loadPage(window.location.href);
+        loadPage(window.location.href, !hashChangeCheck);
         closeNav();
         getPathElement();
     }
