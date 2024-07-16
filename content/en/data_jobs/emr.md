@@ -48,7 +48,7 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
 1. On the next page, give your policy a name. Then, click **Create policy**.
 
 #### Permissions to describe cluster
-You can skip this step if you are using the default role **EMR_EC2_DefaultRole** for cluster EC2 instances and its associated AWS default managed policy, **AmazonElasticMapReduceforEC2Role**.
+Only do this step if you are NOT using the default role **EMR_EC2_DefaultRole** for cluster EC2 instances and its associated AWS default managed policy, **AmazonElasticMapReduceforEC2Role**.
 
 1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
 1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
