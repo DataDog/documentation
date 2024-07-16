@@ -8,7 +8,7 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
-import { getDefaultValuesByPrefId } from './configIngestion';
+import { ConfigProcessor } from '../ConfigProcessor';
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 
 export type ParsingErrorReport = {
@@ -175,7 +175,7 @@ export function buildRenderableTree(p: {
   partials: Record<string, Node>;
   ast: Node;
 }): RenderableTreeNode {
-  const defaultValsByPrefId = getDefaultValuesByPrefId(
+  const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
     p.frontmatter,
     p.prefOptionsConfig
   );

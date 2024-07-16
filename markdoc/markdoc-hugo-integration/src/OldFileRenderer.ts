@@ -1,7 +1,7 @@
 import MarkdocStaticCompiler, {
   Node,
   RenderableTreeNodes
-} from '../../markdoc-static-compiler/dist';
+} from 'markdoc-static-compiler';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import { PageVariable, StringVariable, GlobalVariableConfig } from './oldSchemas';

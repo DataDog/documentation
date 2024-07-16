@@ -10,10 +10,7 @@ import {
   SNAPSHOTS_DIR,
   VALID_PREF_OPTIONS_DIR
 } from '../../../constants';
-import {
-  getDefaultValuesByPrefId,
-  loadPrefOptionsFromDir
-} from '../../../../src/helpers/configIngestion';
+import { ConfigProcessor } from '../../../../src/ConfigProcessor';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
 
 describe('collectVarIdsFromTree', () => {
@@ -27,9 +24,13 @@ describe('collectVarIdsFromTree', () => {
       VALID_PARTIALS_DIR
     );
 
-    const prefOptionsConfig = loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
+    const prefOptionsConfig =
+      ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
 
-    const defaultValsByPrefId = getDefaultValuesByPrefId(frontmatter, prefOptionsConfig);
+    const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+      frontmatter,
+      prefOptionsConfig
+    );
 
     const renderableTree = MarkdocStaticCompiler.transform(ast, {
       variables: defaultValsByPrefId,

@@ -2,19 +2,14 @@ import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import { validatePlaceholders } from './helpers/frontmatterValidation';
 import {
-  loadPrefOptionsFromDir,
-  loadSitewidePrefsConfigFromFile,
-  getDefaultValuesByPrefId
-} from './helpers/configIngestion';
-import {
   parseMarkdocFile,
-  collectVarIdsFromTree,
   ParsingErrorReport,
   buildRenderableTree
 } from './helpers/compilation';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
 import { findInDir } from './helpers/filesystem';
 import prettier from 'prettier';
+import { ConfigProcessor } from './ConfigProcessor';
 
 export class MarkdocHugoIntegration {
   prefOptionsConfig: PrefOptionsConfig;
@@ -37,8 +32,12 @@ export class MarkdocHugoIntegration {
     contentDir: string;
     partialsDir: string;
   }) {
-    this.prefOptionsConfig = loadPrefOptionsFromDir(p.prefOptionsConfigDir);
-    this.sitewidePrefNames = loadSitewidePrefsConfigFromFile(p.sitewidePrefsFilepath);
+    this.prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
+      p.prefOptionsConfigDir
+    );
+    this.sitewidePrefNames = ConfigProcessor.loadSitewidePrefsConfigFromFile(
+      p.sitewidePrefsFilepath
+    );
     this.markdocFiles = findInDir(p.contentDir, /\.mdoc$/);
     this.partialsDir = p.partialsDir;
   }

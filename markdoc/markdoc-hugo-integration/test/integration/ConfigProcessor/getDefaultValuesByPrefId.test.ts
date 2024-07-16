@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { getDefaultValuesByPrefId } from '../../../src/helpers/configIngestion';
+import { ConfigProcessor } from '../../../src/ConfigProcessor';
 import {
   PrefOptionsConfig,
   PrefOptionsConfigSchema
@@ -66,7 +66,10 @@ describe('getDefaultValuesByPrefId', () => {
   FrontmatterSchema.parse(frontmatter);
 
   test('correctly derives the default values for each preference', () => {
-    const defaultValuesByPrefId = getDefaultValuesByPrefId(frontmatter, prefOptions);
+    const defaultValuesByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
+      frontmatter,
+      prefOptions
+    );
     expect(defaultValuesByPrefId).toEqual({
       color: 'blue',
       finish: 'eggshell',

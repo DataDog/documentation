@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { FileRenderer } from './FileRenderer';
+import { FileRenderer } from './OldFileRenderer';
 import { GlobalVariableConfig, GlobalVariableConfigSchema } from './oldSchemas';
 import yaml from 'js-yaml';
 
@@ -31,7 +31,10 @@ function compileFiles(dir: string, globalVariableConfig: GlobalVariableConfig) {
   });
 }
 
-function renderMdocToStaticHtml(mdocFilePath: string, globalVariableConfig: GlobalVariableConfig = {}) {
+function renderMdocToStaticHtml(
+  mdocFilePath: string,
+  globalVariableConfig: GlobalVariableConfig = {}
+) {
   const fileRenderer = new FileRenderer({
     path: mdocFilePath,
     config: globalVariableConfig
