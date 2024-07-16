@@ -20,9 +20,8 @@
   </p>
   <p>
     Anything with a NO in front of it should have a dark background (to indicate
-    that it has been given the
-    <code>markdoc__hidden</code>
-    class, and would be hidden in a real document).
+    that it has been given the <code>markdoc__hidden</code> class, and would be
+    hidden in a real document).
   </p>
   <p>
     For easier checking, each section has its YESes at the top, and NOs at the
@@ -30,225 +29,134 @@
   </p>
   <h2>Variable values</h2>
   <ul>
-    <li>
-      <code>test_string</code>
-      : Datadog
-    </li>
-    <li>
-      <code>always_true</code>
-      : true
-    </li>
-    <li>
-      <code>always_false</code>
-      : false
-    </li>
+    <li><code>test_string</code>: Datadog</li>
+    <li><code>always_true</code>: true</li>
+    <li><code>always_false</code>: false</li>
   </ul>
   <h2>Dynamic variables test</h2>
-  <h2>
-    <code>equals</code>
-    test
-  </h2>
+  <h2><code>equals</code> test</h2>
+  <div>
+    <p>YES: Display if <code>equals($always_true, true)</code>.</p>
+  </div>
   <div>
     <p>
-      YES: Display if
-      <code>equals($always_true, true)</code>
-      .
+      YES: Display if <code>equals($test_string, &quot;Datadog&quot;)</code>.
     </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>NO: Display if <code>equals($always_false, true)</code>.</p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>NO: Display if <code>equals($test_string, &quot;Hello&quot;)</code>.</p>
+  </div>
+  <h2><code>default</code> test</h2>
+  <div>
+    <p>YES: Display if <code>default($notDefined, true)</code>.</p>
+  </div>
+  <div>
+    <p>YES: Display if <code>default($always_true, false)</code>.</p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>NO: Display if <code>default($notDefined, false)</code>.</p>
+  </div>
+  <h2><code>or</code> test</h2>
+  <div>
+    <p>YES: Display if <code>or($always_true, $always_false)</code>.</p>
   </div>
   <div>
     <p>
       YES: Display if
-      <code>equals($test_string, &quot;Datadog&quot;)</code>
-      .
+      <code
+        >or(equals($test_string, &quot;Hello&quot;), equals($test_string,
+        &quot;Datadog&quot;))</code
+      >.
     </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>NO: Display if <code>or($missingVarOne, $missingVarTwo)</code>.</p>
+  </div>
+  <h2><code>and</code> test</h2>
+  <div>
+    <p>YES: Display if <code>and($always_true, $always_true)</code>.</p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>NO: Display if <code>and($always_true, $always_false)</code>.</p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>equals($always_false, true)</code>
-      .
+      <code
+        >and(equals($test_string, &quot;Hello&quot;), equals($test_string,
+        &quot;Datadog&quot;))</code
+      >.
     </p>
+  </div>
+  <h2><code>not</code> test</h2>
+  <div>
+    <p>YES: Display if <code>not($always_false)</code>.</p>
+  </div>
+  <div>
+    <p>
+      YES: Display if <code>not(equals($test_string, &quot;Hello&quot;))</code>.
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>NO: Display if <code>not($always_true)</code>.</p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>equals($test_string, &quot;Hello&quot;)</code>
-      .
-    </p>
-  </div>
-  <h2>
-    <code>default</code>
-    test
-  </h2>
-  <div>
-    <p>
-      YES: Display if
-      <code>default($notDefined, true)</code>
-      .
-    </p>
-  </div>
-  <div>
-    <p>
-      YES: Display if
-      <code>default($always_true, false)</code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>default($notDefined, false)</code>
-      .
-    </p>
-  </div>
-  <h2>
-    <code>or</code>
-    test
-  </h2>
-  <div>
-    <p>
-      YES: Display if
-      <code>or($always_true, $always_false)</code>
-      .
-    </p>
-  </div>
-  <div>
-    <p>
-      YES: Display if
-      <code>
-        or(equals($test_string, &quot;Hello&quot;), equals($test_string,
-        &quot;Datadog&quot;))
-      </code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>or($missingVarOne, $missingVarTwo)</code>
-      .
-    </p>
-  </div>
-  <h2>
-    <code>and</code>
-    test
-  </h2>
-  <div>
-    <p>
-      YES: Display if
-      <code>and($always_true, $always_true)</code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>and($always_true, $always_false)</code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>
-        and(equals($test_string, &quot;Hello&quot;), equals($test_string,
-        &quot;Datadog&quot;))
-      </code>
-      .
-    </p>
-  </div>
-  <h2>
-    <code>not</code>
-    test
-  </h2>
-  <div>
-    <p>
-      YES: Display if
-      <code>not($always_false)</code>
-      .
-    </p>
-  </div>
-  <div>
-    <p>
-      YES: Display if
-      <code>not(equals($test_string, &quot;Hello&quot;))</code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>not($always_true)</code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>not(equals($test_string, &quot;Datadog&quot;))</code>
-      .
+      <code>not(equals($test_string, &quot;Datadog&quot;))</code>.
     </p>
   </div>
   <h2>Nested functions</h2>
   <div>
     <p>
-      YES: Display if
-      <code>or(not($always_false), not($always_true))</code>
-      .
+      YES: Display if <code>or(not($always_false), not($always_true))</code>.
     </p>
   </div>
   <div>
     <p>
       YES: Display if
-      <code>
-        or(equals($test_string, &quot;Datadog&quot;), equals($test_string,
-        &quot;Hello&quot;))
-      </code>
-      .
+      <code
+        >or(equals($test_string, &quot;Datadog&quot;), equals($test_string,
+        &quot;Hello&quot;))</code
+      >.
     </p>
   </div>
   <div>
     <p>
       YES: Display if
-      <code>
-        and(or(not($always_false), not($always_true)), or(not($always_false),
-        not($always_true)))
-      </code>
-      .
+      <code
+        >and(or(not($always_false), not($always_true)), or(not($always_false),
+        not($always_true)))</code
+      >.
     </p>
   </div>
   <div>
+    <p>YES: Display if <code>equals(not($always_false), true)</code>.</p>
+  </div>
+  <div class="markdoc__hidden">
     <p>
-      YES: Display if
-      <code>equals(not($always_false), true)</code>
-      .
+      NO: Display if
+      <code
+        >and(and($always_false, not($always_true)), or(not($always_false),
+        not($always_true)))</code
+      >.
+    </p>
+  </div>
+  <div class="markdoc__hidden">
+    <p>
+      NO: Display if <code>and(not($always_false), not($always_true))</code>.
     </p>
   </div>
   <div class="markdoc__hidden">
     <p>
       NO: Display if
-      <code>
-        and(and($always_false, not($always_true)), or(not($always_false),
-        not($always_true)))
-      </code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>and(not($always_false), not($always_true))</code>
-      .
-    </p>
-  </div>
-  <div class="markdoc__hidden">
-    <p>
-      NO: Display if
-      <code>
-        and(equals($test_string, &quot;Datadog&quot;), equals($test_string,
-        &quot;Hello&quot;))
-      </code>
-      .
+      <code
+        >and(equals($test_string, &quot;Datadog&quot;), equals($test_string,
+        &quot;Hello&quot;))</code
+      >.
     </p>
   </div>
 </article>

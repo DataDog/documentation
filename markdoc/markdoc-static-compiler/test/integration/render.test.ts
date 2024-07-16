@@ -52,16 +52,19 @@ describe('rendering stages', () => {
 
   // format the HTML with prettier
   const formattedHtml = prettier.format(htmlWithStyles, {
-    parser: 'html',
-    htmlWhitespaceSensitivity: 'ignore'
+    parser: 'html'
   });
 
   test('ast', () => {
-    expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot('../__snapshots__/ast.snap.json');
+    expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
+      '../__snapshots__/ast.snap.json'
+    );
   });
 
   test('renderableTree', () => {
-    expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot('../__snapshots__/renderableTree.snap.json');
+    expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
+      '../__snapshots__/renderableTree.snap.json'
+    );
   });
 
   test('renderedHtml', () => {
