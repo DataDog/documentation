@@ -249,7 +249,7 @@ export DD_TRACE_STARTUP_LOGS=true
 
 ### Output
 
-When startup logs are enabled, the tracer will output configuration and diagnostic information.
+When startup logs are enabled, the tracer outputs configuration and diagnostic information.
 
 **Configuration:**
 
