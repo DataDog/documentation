@@ -2,28 +2,28 @@
 title: Datadog Forwarder を使用した Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
 
-## 概要
+## Overview
 
 <div class="alert alert-warning">
-Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/nodejs">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
+If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/nodejs">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
-## 前提条件
+## Prerequisites
 
-[Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
+The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-## コンフィギュレーション
+## Configuration
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを修正し、新しいデプロイを必要とせずにインスツルメンテーションを可能にします。Datadog のサーバーレスモニタリングをすばやく開始するための最適な方法です。
+The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-CI/CD パイプラインにコマンドを追加してすべてのサーバーレスアプリケーションにインスツルメンテーションを有効化することも可能です。Datadog CLI コマンドによる変更が上書きされないよう、通常のサーバーレスアプリケーションのデプロイ*後*にコマンドを実行します。
+You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command *after* your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
 
 ### Install
 
-NPM または Yarn を使用して Datadog CLI をインストールします。
+Install the Datadog CLI with NPM or Yarn:
 
 ```sh
 # NPM
@@ -33,29 +33,29 @@ npm install -g @datadog/datadog-ci
 yarn global add @datadog/datadog-ci
 ```
 
-### インスツルメントする
+### Instrument
 
-関数をインスツルメントするには、[AWS 資格情報][1]を使用して次のコマンドを実行します。
+To instrument the function, run the following command with your [AWS credentials][1].
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder <forwarder_arn>
 ```
 
-関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
-- `<functionname>` と `<another_functionname>` を Lambda 関数名に置き換えます。
-- `<aws_region>` を AWS リージョン名に置き換えます。
-- `<layer_version>` を目的のバージョンの Datadog Lambda ライブラリに置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="node" >}}` です。
-- `<forwarder_arn>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+To fill in the placeholders:
+- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+- Replace `<aws_region>` with the AWS region name.
+- Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
+- Replace `<forwarder_arn>` with the Forwarder ARN (see the [Forwarder documentation][2]).
 
-例:
+For example:
 
 ```sh
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
 ```
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog CLI でインスツルメントするには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can instrument it with the Datadog CLI.
 
-[CLI のドキュメント][4]に詳細と追加のパラメーターがあります。
+More information and additional parameters can be found in the [CLI documentation][4].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
@@ -65,30 +65,30 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-[Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][6]に追加する必要があります。
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][6] before you install the Datadog Serverless Plugin.
 
-Datadog サーバーレスプラグインをインストールして構成するには、次の手順に従います。
+To install and configure the Datadog Serverless Plugin, follow these steps:
 
-1. Datadog サーバーレスプラグインをインストールします。
+1. Install the Datadog Serverless Plugin:
     ```
     yarn add --dev serverless-plugin-datadog
     ```
-2. `serverless.yml` に以下を追加します。
+2. In your `serverless.yml`, add the following:
     ```
     plugins:
       - serverless-plugin-datadog
     ```
-3. `serverless.yml` に、以下のセクションも追加します。
+3. In your `serverless.yml`, also add the following section:
     ```
     custom:
       datadog:
         forwarderArn: # The Datadog Forwarder ARN goes here.
     ```
-   Datadog Forwarder ARN またはインストールの詳細については、[こちら][2]を参照してください。追加の設定については、[プラグインのドキュメント][1]を参照してください。
+    More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
 
-**注**: Lambda 関数が Datadog のトレーシングライブラリと　[Webpack][5] を同時に使用している場合は、これらの[追加のコンフィギュレーションステップ][4]に従ってください。
+**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
@@ -98,11 +98,11 @@ Datadog サーバーレスプラグインをインストールして構成する
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-[Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to add the Datadog Lambda library to your functions using layers, and configure your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
 
 ### Install
 
-[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに一度だけマクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
+Run the following command with your [AWS credentials][3] to deploy a CloudFormation stack that installs the macro AWS resource. You only need to install the macro once for a given region in your account. Replace `create-stack` with `update-stack` to update the macro to the latest version.
 
 ```sh
 aws cloudformation create-stack \
@@ -111,11 +111,11 @@ aws cloudformation create-stack \
   --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
 ```
 
-マクロが表示され、使用を開始できます。
+The macro is now deployed and ready to use.
 
-### インスツルメントする
+### Instrument
 
-`template.yml` で、SAM の `AWS::Serverless` 変換の**後に**、`Transform` セクションの下に以下を追加します。
+In your `template.yml`, add the following under the `Transform` section, **after** the `AWS::Serverless` transform for SAM.
 
 ```yaml
 Transform:
@@ -125,17 +125,17 @@ Transform:
       stackName: !Ref "AWS::StackName"
       nodeLayerVersion: "{{< latest-lambda-layer-version layer="node" >}}"
       forwarderArn: "<FORWARDER_ARN>"
-      service: "<SERVICE>" # オプション
-      env: "<ENV>" # オプション
+      service: "<SERVICE>" # Optional
+      env: "<ENV>" # Optional
 ```
 
-関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
-- `<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
-- `<SERVICE>` と `<ENV>` をサービスと環境の値に置き換えます。
+To fill in the placeholders:
+- Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
+- Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][4]に追加する必要があります。
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can use the macro.
 
-[マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
+More information and additional parameters can be found in the [macro documentation][1].
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
@@ -144,15 +144,15 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-以下を行うことで、[Datadog CDK コンストラクト][1]でサーバーレスアプリケーションからのメトリクス、トレース、ログの収集を自動的に構成できます。
+The [Datadog CDK Constructs][1] automatically configure ingestion of metrics, traces, and logs from your serverless applications by:
 
-- Python および Node.js Lambda 関数用に Datadog Lambda ライブラリをインストールし構成。
-- Lambda 関数からのトレースおよびカスタムメトリクスの収集を有効化。
-- Datadog Forwarder から Lambda 関数ロググループへのサブスクリプションを管理。
+- Installing and configuring the Datadog Lambda library for your Python and Node.js Lambda functions.
+- Enabling the collection of traces and custom metrics from your Lambda functions.
+- Managing subscriptions from the Datadog Forwarder to your Lambda function log groups.
 
 ### Install
 
-CDK プロジェクトで以下の Yarn または NPM コマンドを実行し、Datadog CDK Constructs ライブラリをインストールします。
+Run the following Yarn or NPM command in your CDK project to install the Datadog CDK Constructs library:
 
 ```sh
 #Yarn
@@ -162,9 +162,9 @@ yarn add --dev datadog-cdk-constructs
 npm install datadog-cdk-constructs --save-dev
 ```
 
-### インスツルメントする
+### Instrument
 
-関数をインスツルメントするには、AWS CDK アプリで `datadog-cdk-construct` モジュールをインポートして、以下のコンフィギュレーションを追加します (この例では TypeScript ですが、他の言語でも使用する場合も同様です)。
+To instrument the function, import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations (this example is TypeScript, but usage in other languages is similar):
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
@@ -176,22 +176,22 @@ class CdkStack extends cdk.Stack {
     const datadog = new Datadog(this, "Datadog", {
       nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
-      service: "<SERVICE>",  // オプション
-      env: "<ENV>",  // オプション
+      service: "<SERVICE>",  // Optional
+      env: "<ENV>",  // Optional
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
 }
 ```
 
-関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+To fill in the placeholders:
 
-- `<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
-- `<SERVICE>` と `<ENV>` をサービスと環境の値に置き換えます。
+- Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
+- Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can use the macro.
 
-さらに詳しい情報や、追加パラメーターについては、[Datadog CDK NPM ページ][1]をご覧ください。
+More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
@@ -202,7 +202,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 
 ### Install
 
-Lambda 関数をコンテナイメージとしてデプロイする場合は、Datadog Lambda ライブラリをレイヤーとして使用できません。代わりに、Datadog Lambda ライブラリを、イメージ内の関数の依存関係としてインストールする必要があります。Datadog トレーシングを使用している場合は、`dd-trace` もインストールする必要があります。
+If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a layer. Instead, you must install the Datadog Lambda Library as a dependency of your function within the image. If you are using Datadog tracing, you must also install `dd-trace`.
 
 **NPM**:
 
@@ -216,25 +216,25 @@ npm install --save datadog-lambda-js dd-trace
 yarn add datadog-lambda-js dd-trace
 ```
 
-**注**: `datadog-lambda-js` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、`datadog-lambda-js v0.5.0` は、レイヤーバージョン 5 のコンテンツに一致します。
+**Note**: The minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
 
-### 構成
+### Configure
 
-以下の手順に従って、関数を構成します。
+Follow these steps to configure the function:
 
-1. イメージの `CMD` 値を `node_modules/datadog-lambda-js/dist/handler.handler` に設定します。AWS で設定するか、Dockerfile 内で直接設定します。**注**: 両方の値を設定した場合、AWS で設定した値が Dockerfile 内の値をオーバーライドします。
-2. AWS で以下の環境変数を設定します。
-  - 元のハンドラーに `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
-  - `DD_TRACE_ENABLED` を `true` に設定します。
-  - `DD_FLUSH_TO_LOG` を `true` に設定します。
-3. オプションで、関数に `service` および `env` タグを適切な値とともに追加します。
+1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. **Note**: The value set in AWS overrides the value in the Dockerfile if you set both.
+2. Set the following environment variables in AWS:
+  - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+  - Set `DD_TRACE_ENABLED` to `true`.
+  - Set `DD_FLUSH_TO_LOG` to `true`.
+3. Optionally add `service` and `env` tags with appropriate values to your function.
 
-### サブスクライブ
+### Subscribe
 
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
+Subscribe the Datadog Forwarder Lambda function to each of your functions' log groups in order to send metrics, traces, and logs to Datadog.
 
-1. [まだの場合は、Datadog Forwarder をインストールします][1]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][2]。
+1. [Install the Datadog Forwarder if you haven't][1].
+2. [Subscribe the Datadog Forwarder to your function's log groups][2].
 
 
 [1]: https://docs.datadoghq.com/ja/serverless/forwarder/
@@ -244,32 +244,32 @@ yarn add datadog-lambda-js dd-trace
 
 ### Install
 
-Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケージとしてインポートすることができます。
+The Datadog Lambda Library can be imported as a layer or JavaScript package.
 
-`datadog-lambda-js` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、datadog-lambda-js v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致します。
+The minor version of the `datadog-lambda-js` package always matches the layer version. For example, datadog-lambda-js v0.5.0 matches the content of layer version 5.
 
-#### レイヤーの使用
+#### Using the layer
 
-以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][8]します。
+[Configure the layers][8] for your Lambda function using the ARN in the following format.
 
 ```
-# us、us3、us5、eu リージョンの場合
+# For us,us3,us5,eu, and ap1 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
-# 米国政府リージョンの場合
+# For us-gov regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 
 ```
 
-利用可能な `RUNTIME` オプションは {{< latest-lambda-layer-version layer="node-versions" >}} です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
+The available `RUNTIME` options are: {{< latest-lambda-layer-version layer="node-versions" >}}. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][2]に追加する必要があります。
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2] before you can add the Datadog Lambda library as a layer.
 
-#### パッケージの使用
+#### Using the package
 
 **NPM**:
 
@@ -283,26 +283,26 @@ npm install --save datadog-lambda-js
 yarn add datadog-lambda-js
 ```
 
-[最新リリース][3]を参照。
+See the [latest release][3].
 
-### 構成
+### Configure
 
-以下の手順に従って、関数を構成します。
+Follow these steps to configure the function:
 
-1. 関数のハンドラーを、レイヤーを使用する場合は `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` に、パッケージを使用する場合は `node_modules/datadog-lambda-js/dist/handler.handler` に設定します。
-2. 元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
-3. 環境変数 `DD_TRACE_ENABLED` を `true` に設定します。
-4. 環境変数 `DD_FLUSH_TO_LOG` を `true` に設定します。
-5. オプションで、関数に `service` および `env` タグを適切な値とともに追加します。
+1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
+2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
+5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
-**注**: Lambda 関数が Datadog のトレーシングライブラリと　[Webpack][5] を同時に使用している場合は、これらの[追加のコンフィギュレーションステップ][4]に従ってください。
+**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
 
-### サブスクライブ
+### Subscribe
 
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups, in order to send metrics, traces, and logs to Datadog.
 
-1. [まだの場合は、Datadog Forwarder をインストールします][6]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][7]。
+1. [Install the Datadog Forwarder if you haven't][6].
+2. [Subscribe the Datadog Forwarder to your function's log groups][7].
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
@@ -316,55 +316,55 @@ yarn add datadog-lambda-js
 {{% /tab %}}
 {{< /tabs >}}
 
-### タグ
+### Tag
 
-オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][2]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
+Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
 
-## 確認
+## Explore
 
-以上の方法で関数を構成すると、[Serverless Homepage][3] でメトリクス、ログ、トレースを確認できるようになります。
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][3].
 
-## カスタムビジネスロジックの監視
+## Monitor custom business logic
 
-カスタムメトリクスまたはスパンの送信をご希望の場合は、以下のコード例をご参照ください。
+If you would like to submit a custom metric or span, see the sample code below:
 
 ```javascript
 const { sendDistributionMetric, sendDistributionMetricWithDate } = require("datadog-lambda-js");
 const tracer = require("dd-trace");
 
-// "sleep" という名前のカスタムスパンを送信します
+// submit a custom span named "sleep"
 const sleep = tracer.wrap("sleep", (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
-  // Lambda 関数スパンにカスタムタグを追加します
-  // X-Ray トレーシングが有効になっている場合は機能しません
+  // add custom tags to the lambda function span,
+  // does NOT work when X-Ray tracing is enabled
   const span = tracer.scope().active();
   span.setTag('customer_id', '123456');
 
   await sleep(100);
 
-  // カスタムスパンを送信します
+  // submit a custom span
   const sandwich = tracer.trace('hello.world', () => {
     console.log('Hello, World!');
   });
 
-  // カスタムメトリクスを送信します
+  // submit a custom metric
   sendDistributionMetric(
-    "coffee_house.order_value", // メトリクス名
-    12.45, // メトリクス値
-    "product:latte", // タグ
-    "order:online", // タグ
+    "coffee_house.order_value", // metric name
+    12.45, // metric value
+    "product:latte", // tag
+    "order:online", // another tag
   );
 
-  // タイムスタンプ付きのカスタムメトリクスを送信します
+  // submit a custom metric with timestamp
   sendDistributionMetricWithDate(
-    "coffee_house.order_value", // メトリクス名
-    12.45, // メトリクス値
-    new Date(Date.now()), // 日付、過去 20 分以内である必要があります
-    "product:latte", // タグ
-    "order:online", // タグ
+    "coffee_house.order_value", // metric name
+    12.45, // metric value
+    new Date(Date.now()), // date, must be within last 20 mins
+    "product:latte", // tag
+    "order:online", // another tag
   );
 
   const response = {
@@ -375,9 +375,9 @@ exports.handler = async (event) => {
 };
 ```
 
-カスタムメトリクス送信の詳細については、[Serverless Custom Metrics][4] を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][5]の Datadog APM ドキュメントを参照してください。
+For more information on custom metric submission, see [Serverless Custom Metrics][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

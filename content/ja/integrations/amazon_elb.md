@@ -28,6 +28,7 @@ categories:
 - aws
 - metrics
 - cloud
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -36,7 +37,6 @@ integration_id: amazon-elb
 integration_title: Amazon Elastic Load Balancing
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_elb
 public_title: Amazon Elastic Load Balancing
@@ -67,9 +67,9 @@ Datadog は、AWS が提供する 3 種類の Elastic Load Balancer (Application
 
 注: このインテグレーションでは、'ec2:describe**' と 'elasticloadbalancing:describe*' の権限が完全に有効になっている必要があります。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -78,21 +78,21 @@ Datadog は、AWS が提供する 3 種類の Elastic Load Balancer (Application
 1. [AWS インテグレーションページ][2]で、`ApplicationELB`、`ELB`、`NetworkELB` が `Metric Collection` タブで有効になっていることを確認します。
 2. [Datadog - Amazon ELB インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_elb" >}}
 
 
-### ヘルプ
+### Events
 
 Amazon Elastic Load Balancing インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon Elastic Load Balancing インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

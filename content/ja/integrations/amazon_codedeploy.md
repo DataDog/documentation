@@ -8,8 +8,9 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
+custom_kind: integration
 dependencies: []
-description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
+description: See deployments as they happen and track how long they take.
 doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
 draft: false
 git_integration_title: amazon_codedeploy
@@ -18,7 +19,6 @@ integration_id: amazon-codedeploy
 integration_title: AWS CodeDeploy
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_codedeploy
 public_title: Datadog-AWS CodeDeploy インテグレーション
@@ -26,7 +26,8 @@ short_description: 行われているデプロイをリアルタイムで表示�
 version: '1.0'
 ---
 
-{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy デフォルトダッシュボード" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy のデフォルトダッシュボード" popup="true">}}
 
 ## 概要
 

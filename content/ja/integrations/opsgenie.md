@@ -2,24 +2,24 @@
 categories:
 - collaboration
 - notifications
+custom_kind: integration
 dependencies: []
-description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
+description: Use OpsGenie as a notification channel in Datadog alerts and events.
 doc_link: https://docs.datadoghq.com/integrations/opsgenie/
 draft: false
 further_reading:
 - link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#opsgenie-integration
-  tag: ブログ
-  text: サービスカタログとのインテグレーションを利用する
+  tag: Blog
+  text: Using Integrations with Service Catalog
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_opsgenie_service_object
   tag: Terraform
-  text: Terraform による Opsgenie サービスオブジェクトの作成と管理
+  text: Create and manage Opsgenie service objects with Terraform
 git_integration_title: opsgenie
 has_logo: true
 integration_id: ''
 integration_title: OpsGenie
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: opsgenie
 public_title: Datadog-OpsGenie インテグレーション
@@ -35,9 +35,9 @@ version: '1.0'
 - スナップショットを取得して作成
 - メトリクスアラートがトリガーされたときに作成
 
-## 計画と使用
+## Setup
 
-### ブラウザトラブルシューティング
+### Configuration
 
 #### Opsgenie で Datadog インテグレーションを作成する
 
@@ -58,21 +58,21 @@ version: '1.0'
 3. Datadog インテグレーションごとに提供されたキー (Opsgenie で作成される) を「**Opsgenie API Key**」フィールドに貼り付け、**Service Name** にサービス名を入力します。
    {{< img src="integrations/opsgenie/datadog-add-opsgenie-api-key.png" alt="Datadog で Opsgenie キーを追加" popup="true">}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Opsgenie インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### Events
 
 Opsgenie インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Opsgenie インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

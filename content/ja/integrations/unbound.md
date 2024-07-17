@@ -23,6 +23,7 @@ author:
 categories:
 - キャッシュ
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: unbound
 integration_title: Unbound
 integration_version: 1.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: unbound
 public_title: Unbound
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: unbound メトリクスを収集する Datadog インテグレーション
   media: []
@@ -60,59 +61,59 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Unbound][1] を監視します。
+This check monitors [Unbound][1] through the Datadog Agent.
 
-unbound サービスからメトリクスをリアルタイムに取得して、以下のことができます。
+Get metrics from unbound service in real time to:
 
-- unbound の状態を視覚化して監視します。
+- Visualize and monitor unbound states
 
-## 計画と使用
+## Setup
 
-Unbound チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Unbound check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Unbound check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-unbound==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `unbound.d/conf.yaml` ファイルを編集して、
-   unbound メトリクスの収集を開始します。
-    使用可能なすべての構成オプションの詳細については、[サンプル unbound.d/conf.yaml][5] を参照してください。
+1. Edit the `unbound.d/conf.yaml` file, in the `conf.d/` folder at the root of
+   your Agent's configuration directory to start collecting unbound metrics. See
+   the [sample unbound.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `unbound` を探します。
+[Run the Agent's status subcommand][7] and look for `unbound` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "unbound" >}}
 
 
-### ヘルプ
+### Events
 
-Unbound チェックには、イベントは含まれません。
+The Unbound check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "unbound" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://nlnetlabs.nl/documentation/unbound/unbound-control/

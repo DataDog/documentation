@@ -13,9 +13,10 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- モニター
-- slos
+- metrics
+- alerting
 - コスト管理
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -24,7 +25,6 @@ integration_id: rapdev-usage-tracker
 integration_title: Usage Tracker
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rapdev_usage_tracker
 pricing:

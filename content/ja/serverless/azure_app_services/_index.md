@@ -17,6 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services
   tag: 料金
   text: Azure App Service APM 価格設定
+kind: documentation
 title: Azure App Service のモニタリング
 ---
 
@@ -36,12 +37,15 @@ Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure
 | OS | ランタイム |アプリタイプ|ステータス|Documentation| 
 |----|---------|-----|----|--------------|
 |Windows|.NET|関数アプリと Web アプリ|GA|[Windows .NET のセットアップ][7]|
-|Windows|Java|関数アプリと Web アプリ|beta|[Windows Java のセットアップ][8]|
-|Linux|.NET|Web アプリ|GA|[Linux .NET のセットアップ][9]|
-|Linux|Node|Web アプリ|GA|[Linux Node のセットアップ][9]|
-|Linux|PHP|Web アプリ|GA|[Linux PHP のセットアップ][9]|
-|Linux|Java|Web アプリ|GA|[Linux Java のセットアップ][10]|
-|Linux|Python|Web アプリ|GA|[Linux Python のセットアップ][9]|
+|Windows|Java|Web アプリ|GA|[Windows Java のセットアップ][8]|
+|Windows|Node|Web アプリ|GA|[Windows Node setup][13]|
+|Linux|.NET|Web アプリ|GA|[Linux .NET setup][9]|
+|Linux|Node|Web アプリ|GA|[Linux Node setup][9]|
+|Linux|PHP|Web アプリ|GA|[Linux PHP setup][9]|
+|Linux|Java|Web アプリ|GA|[Linux Java setup][10]|
+|Linux|Python|Web アプリ|GA|[Linux Python setup][9]|
+|Linux|コンテナ|Web アプリ|GA|[Linux Container の設定][12]|
+
 
 機能:
 - 自動インスツルメンテーションを用いた完全分散型 APM トレーシング
@@ -65,3 +69,5 @@ Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure
 [9]: /ja/serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython
 [10]: /ja/serverless/azure_app_services/azure_app_services_linux?tab=java
 [11]: /ja/developers/dogstatsd/
+[12]: /ja/serverless/azure_app_services/azure_app_services_container
+[13]: /ja/serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup

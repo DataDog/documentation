@@ -5,8 +5,9 @@ categories:
 - aws
 - cloud
 - log collection
+custom_kind: integration
 dependencies: []
-description: Amazon Kinesis のキーメトリクスを追跡。
+description: Track key Amazon Kinesis metrics.
 doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis/
 draft: false
 git_integration_title: amazon_kinesis
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: Amazon Kinesis
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_kinesis
 public_title: Datadog-Amazon Kinesis インテグレーション
@@ -30,9 +30,9 @@ Amazon Kinesis は、膨大な分散型データストリームをリアルタ�
 
 このインテグレーションを有効にすると、すべての Kinesis メトリクスが Datadog に表示され、カスタム Kinesis タグが収集されます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
@@ -68,23 +68,23 @@ AWS Firehose コンソールで Amazon Data 配信ストリームを設定する
     - [S3 バケットに手動トリガーを追加][9]
     - [CloudWatch ロググループに手動トリガーを追加][10]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_kinesis" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### Events
 
 Amazon Kinesis インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon Kinesis インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

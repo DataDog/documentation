@@ -30,6 +30,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - configuration & deployment
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
 display_on_public_website: true
@@ -39,7 +40,6 @@ integration_id: nomad
 integration_title: Nomad
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nomad
 public_title: Nomad
@@ -55,8 +55,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
+  description: Easily Schedule and Deploy Applications at Any Scale
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -66,26 +67,26 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-![Nomad ダッシュボード][1]
+![Nomad Dashboard][1]
 
-## 概要
+## Overview
 
-Nomad クラスターからメトリクスを収集して、以下のことができます。
+Gather metrics from your Nomad clusters to:
 
-- クラスターのパフォーマンスを視覚化および監視できます。
-- クラスターの健全性と可用性に関するアラートを生成できます。
+- Visualize and monitor cluster performance
+- Alert on cluster health and availability
 
-推奨されるモニターを使用して、さまざまな Nomad イベントに関する通知を受け取ることができます。
+Recommended monitors are available to get notified on different Nomad events.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Nomad は、メトリクスを DogStatsD を通じて Datadog に送信します。Nomad インテグレーションを有効にするには、各クライアントおよびサーバーホストに [Datadog Agent をインストール][2]します。
+Nomad emits metrics to Datadog through DogStatsD. To enable the Nomad integration, [install the Datadog Agent][2] on each client and server host.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Datadog Agent がインストールされたら、クライアントとサーバーの Nomad 構成に Telemetry スタンザを追加します。
+Once the Datadog Agent is installed, add a Telemetry stanza to the Nomad configuration for your clients and servers:
 
 ```conf
 telemetry {
@@ -97,25 +98,25 @@ telemetry {
 }
 ```
 
-次に、各ホストで Nomad エージェントをリロードまたは再起動します。これで、Nomad のメトリクスが Datadog アカウントに収集されるようになります。
+Next, reload or restart the Nomad agent on each host. You should start to see Nomad metrics flowing to your Datadog account.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "nomad" >}}
 
 
-### ヘルプ
+### Events
 
-Nomad チェックには、イベントは含まれません。
+The Nomad check does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Nomad チェックには、サービスのチェック機能は含まれません。
+The Nomad check does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/nomad/images/dashboard_overview.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest

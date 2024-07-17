@@ -6,8 +6,9 @@ categories:
 - data stores
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
-description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。
+description: Track snapshot age, IOPS, read/write times, and more.
 doc_link: https://docs.datadoghq.com/integrations/amazon_ebs/
 draft: false
 git_integration_title: amazon_ebs
@@ -16,7 +17,6 @@ integration_id: ''
 integration_title: Amazon Elastic Block Store
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_ebs
 public_title: Datadog-Amazon Elastic Block Store インテグレーション
@@ -31,9 +31,9 @@ Amazon EBS は、AWS Cloud 内の Amazon EC2 インスタンスと共に使用�
 
 このインテグレーションを有効にすると、Datadog にすべての EBS メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -60,23 +60,23 @@ Amazon EBS から S3 バケットまたは CloudWatch のいずれかにログ�
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_ebs" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### Events
 
 Amazon EBS インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon EBS インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

@@ -5,6 +5,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies: []
 description: Azure ExpressRoute のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
@@ -15,7 +16,6 @@ integration_id: azure-expressroute
 integration_title: Microsoft Azure ExpressRoute
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_express_route
 public_title: Datadog-Microsoft Azure ExpressRoute インテグレーション
@@ -30,27 +30,27 @@ Azure ExpressRoute サービスを使用すると、接続プロバイダーか�
 
 Datadog Azure インテグレーションを使用すると、Azure ExpressRoute からメトリクスを収集できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_express_route" >}}
 
 
-### ヘルプ
+### Events
 
 Azure ExpressRoute インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Azure ExpressRoute インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

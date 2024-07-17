@@ -1,34 +1,43 @@
 ---
+further_reading:
+- link: account_management/multi_organization/
+  tag: Documentation
+  text: Managing Multiple-Organization Accounts
 title: オーガニゼーションの切り替え
 ---
 
-複数の Datadog オーガニゼーションに所属している場合、ナビゲーションバーの左下にあるオーガニゼーションスイッチャーを使用すると、オーガニゼーションを切り替えることができます。**Personal Settings** の **Organizations** タブを使用して、すべてのオーガニゼーションを表示し、切り替えることもできます。
+複数の Datadog 組織に所属している場合、ナビゲーションバーの左下にある組織スイッチャーを使用すると、組織を切り替えることができます。**Personal Settings** の [**Organizations** ページ][1]から、すべての組織を表示し、切り替えることもできます。
 
-{{< img src="account_management/org_switching.png" alt="組織の切り替えを行う 2 つの方法" style="width:70%;" >}}
+{{< img src="account_management/org_switching_062024.png" alt="組織の切り替えを行う 2 つの方法" style="width:90%;" >}}
 
-セキュリティ上、切り替え先のオーガニゼーションに対する有効なセッションが必要です。アクティブなセッションがない場合は、ユーザー名およびパスワードまたは SAML を使用して認証を行うように求められます。
+For security purposes, you must have a valid session for each org you switch to. In cases where you don't have an active session, you are asked to authenticate with a username and password or SAML.
 
-1. **混合認証アプローチ**: SAML とユーザー名およびパスワード認証の両方を設定している場合は、一方でログインしてすべてにアクセスできるのではなく、オーガニゼーションが必要とするタイプ (ユーザー名およびパスワードまたは SAML) でログインする必要があります。
+1. **Mixed auth approaches**: In cases where you have both SAML and username and password authentication, you must log in with the type required by the organization (username and password or SAML) as opposed to logging into one and getting access to all.
 
-2. **SAML 限定**: オーガニゼーションが [SAML 限定][1]として設定されている場合、ユーザーは SAML で認証する必要があります。オーガニゼーションを切り替えるたびに再認証を行う必要があります。IdP はセッションを永続化するため、通常はリダイレクトされます。
+2. **SAML 限定**: 組織が [SAML 限定][2]として設定されている場合、ユーザーは SAML で認証する必要があります。組織を切り替えるたびに再認証を行う必要があります。IdP はセッションを永続化するため、通常はリダイレクトされます。
 
-## マルチオーガニゼーションユーザーのパスワードリセット
+## Resetting passwords for multi-org users
 
-マルチオーガニゼーションユーザーごとに固有のパスワードがオーガニゼーションに共有されます。パスワードをリセットすると、あなたが所属するオーガニゼーションにも影響が生じます。
+A password is shared across organizations for each multi-org user. If you reset your password, the reset affects all the organizations you belong to.
 
-**注**: 同じパスワードを 2 回使用することはできません。
+**Note**: You cannot use the same password twice.
 
-## トラブルシューティング
+## Troubleshooting
 
-問題が発生してログインできない場合は、次のことを試してください。
+If you encounter a problem and cannot log in, try the following:
 
-1. これまで必要なかった場合でも、パスワードを再入力またはリセットします。
+1. Re-enter or reset your password, even if you haven't needed to in the past.
 
-2. 他のチームメンバーがユーザー名およびパスワードでログインできるかどうかを確認します。できる場合は、手順 1 を試します。できない場合は、手順 3 を試します。
+2. Check with another team member to see if they can log in with their username and password. If yes, see step 1. If not, see step 3.
 
-3. このアカウントでユーザー名およびパスワード、SAML、Google OAuth のどれが必要かをチームの管理メンバーに確認して、正しい方法を使用します。
+3. Confirm with an admin member of your team if this account requires a username and password, SAML, or Google OAuth to ensure you're using the correct approach.
 
-上記のトラブルシューティングで問題が解決しない場合は、[Datadog のサポートチーム][2]に連絡して、本来の動作とこれまでに試した内容をお知らせください。
+上記のトラブルシューティングで問題が解決しない場合は、[Datadog のサポートチーム][3]に連絡して、本来の動作とこれまでに試した内容をお知らせください。
 
-[1]: /ja/account_management/saml/#saml-strict
-[2]: /ja/help/
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/personal-settings/organizations
+[2]: /ja/account_management/saml/#saml-strict
+[3]: /ja/help/

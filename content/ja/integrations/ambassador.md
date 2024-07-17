@@ -25,6 +25,7 @@ categories:
 - containers
 - kubernetes
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: ambassador
 integration_title: Ambassador API Gateway
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ambassador
 public_title: Ambassador API Gateway
@@ -53,8 +53,10 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
+  description: Ambassador is an open source, Kubernetes-native API Gateway built on
+    Envoy
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -64,19 +66,19 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Ambassador][1] からリアルタイムにメトリクスを取得すると、以下のことができます。
+Get metrics from [Ambassador][1] in real time to:
 
-- マイクロサービスのパフォーマンスを視覚化できます。
+- Visualize the performance of your microservices
 
-- Ambassador を使用してカナリアロールアウトを行うことができるため、サービスの新しいバージョンの影響を把握できます。
+- Understand the impact of new versions of your services as you use Ambassador to do a canary rollout
 
-![スナップショット][2]
+![snapshot][2]
 
-## 計画と使用
+## Setup
 
-Agent Daemonset で DogStatsD を有効にし、Ambassador ポッドで次の環境変数を設定します。
+Enable DogStatsD on your Agent Daemonset, and set the following environment variable on your Ambassador pod:
 
 ```
 name: STATSD_HOST
@@ -85,29 +87,29 @@ valueFrom:
     fieldPath: status.hostIP
 ```
 
-この設定では、StatsD メトリクスがホストの IP に送信され、トラフィックが Agent ポート 8125 にリダイレクトされます。
+With this setup, StatsD metrics are sent to the IP of the host, which redirects traffic to the Agent port 8125.
 
-詳しくは、[StatsD による Envoy 統計][3]をご覧ください。
+See [Envoy statistics with StatsD][3] for more information.
 
-Ambassador から Datadog APM へトレースデータを送信することも可能です。詳しくは、[Datadog による分散型トレース][4]をご参照ください。
+You can also send tracing data from Ambassador to Datadog APM. See [Distributed Tracing with Datadog][4] for more information.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "ambassador" >}}
 
 
-### ヘルプ
+### Events
 
-Ambassador チェックには、イベントは含まれません。
+The Ambassador check does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Ambassador チェックには、サービスのチェック機能は含まれません。
+The Ambassador check does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
 [1]: https://www.getambassador.io
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ambassador/images/upstream-req-time.png

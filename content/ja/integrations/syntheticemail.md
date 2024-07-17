@@ -31,6 +31,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: rapdev-syntheticemail
 integration_title: Synthetic Email
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

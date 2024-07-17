@@ -28,6 +28,7 @@ categories:
 - メトリクス
 - data stores
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -36,7 +37,6 @@ integration_id: pinecone
 integration_title: Pinecone
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pinecone
 public_title: Pinecone
@@ -75,41 +75,41 @@ tile:
 
 - **使用量やレイテンシーにおける予期せぬスパイクの発見とトリアージ:** Pinecone の Datadog ダッシュボードで、使用量やレイテンシーの異常をすばやく視覚化します。メトリクスを時系列で表示することで、傾向の理解を深め、スパイクの重大度を判断します。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 1. [Pinecone アカウント][1]にログインします。
 2. **API Keys** タブに移動します。
 3. API キーを作成します。
 4. 作成した API キーをクリップボードにコピーします。
 
-### ブラウザトラブルシューティング
+### Configuration
 
 1. Datadog の [Pinecone インテグレーションタイル][2]内のコンフィギュレーションタブに移動します。
 2. プロジェクト ID を入力します。
 3. API キーをクリップボードにコピーした際に表示される、環境を入力します。
 4. コピーした API キーを入力します。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "pinecone" >}}
 
 
-### ワークフローの自動化
+### Logs
 
 Pinecone には、収集ログは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Pinecone には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### Events
 
 Pinecone には、イベントは含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

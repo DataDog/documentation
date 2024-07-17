@@ -30,15 +30,15 @@ categories:
 - aws
 - metrics
 - cloud
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
 git_integration_title: amazon_api_gateway
 integration_id: amazon-api-gateway
-integration_title: Amazon API Gateway
+integration_title: Amazon Api Gateway
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_api_gateway
 public_title: Amazon API Gateway インテグレーション
@@ -65,9 +65,9 @@ Amazon API Gateway は、開発者があらゆる規模で API の作成、公�
 
 このインテグレーションを有効にすると、Datadog にすべての API Gateway メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、セットアップします。
 
@@ -123,22 +123,22 @@ API Gateway ログを有効にするには
 
 完了したら、[Logs ページ][6]に移動し、ログの検索を開始します。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 
-### ヘルプ
+### Events
 
 Amazon API Gateway インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon API Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

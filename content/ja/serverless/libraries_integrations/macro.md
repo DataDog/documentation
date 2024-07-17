@@ -3,6 +3,7 @@ aliases:
 - /ja/serverless/serverless_integrations/macro/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
+kind: documentation
 title: Datadog のサーバーレスマクロ
 ---
 ![build_serverless](https://github.com/DataDog/datadog-cloudformation-macro/workflows/build_serverless/badge.svg)
@@ -151,7 +152,7 @@ aws cloudformation update-stack \
 
 このマクロにより CloudFormation テンプレートが変更され、[Node.js][2]、[Python][1]、[.NET][9]、および [Java][10] 用の Lambda レイヤーを関数にアタッチすることで Datadog Lambda ライブラリがインストールされます。そして、コードの変更を必要とせずに、Lambda ライブラリを初期化する置換ハンドラーへリダイレクトされます。
 
-## ヘルプ
+## Troubleshooting
 
 ### デバッグログ
 
@@ -206,7 +207,7 @@ Resources:
 
 このエラーは、コマンドを実行する IAM ユーザーに `lambda:InvokeFunction` 権限がない場合に発生する可能性があります。そのユーザーの IAM ロールに権限を追加してください。
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 

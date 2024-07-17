@@ -15,6 +15,7 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボードについて
+kind: documentation
 title: ユーザーアクションの追跡
 ---
 
@@ -32,7 +33,7 @@ title: ユーザーアクションの追跡
 
 初期化パラメーター `trackUserInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。つまり、ページに含まれている機密データと非公開データは、ユーザーによってやり取りされた要素を特定するために含まれる場合があります。
 
-Datadog に送信する情報を制御するには、[アクション名を手動で設定する](#declare-a-name-for-click-actions)か、[Datadog Browser SDK for RUM でグローバルスクラビングルールを実装する][1]必要があります。
+To control which information is sent to Datadog, you can [mask action names with privacy options][6], [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][1].
 
 ## ユーザーインタラクションの追跡
 
@@ -101,13 +102,21 @@ Datadog Browser SDK for RUM は、クリックアクションの命名にさま�
 
 両方の属性が要素に存在する場合、`data-dd-action-name` が優先されます。
 
-## カスタムアクションの送信
+### How action names are computed
 
-ユーザーインタラクションのコレクションを拡張するには、`addAction` API を使用してカスタムアクションを送信します。これらのカスタムアクションは、ユーザージャーニー中に発生したイベントに関連する情報を送信します。
+The Datadog Browser SDK uses different strategies to compute click action names:
 
-詳しくは、[カスタムアクションの送信][5]をご覧ください。
+1. If the `data-dd-action-name` attribute or a custom attribute (as explained above) is explicitly set by the user on the clicked element (or one of its parents), its value is used as the action name.
 
-## その他の参考資料
+2. If `data-dd-action-name` attribute or its equivalent is not set, depending on the element type, the sdk uses other attributes such as `label`, `placeholder`, `aria-label` from the element or its parents to construct the action name. If none of these attributes is found, the sdk uses the inner text as name for the action.
+
+## Send custom actions
+
+To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.
+
+For more information, see [Send Custom Actions][5].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -116,3 +125,4 @@ Datadog Browser SDK for RUM は、クリックアクションの命名にさま�
 [3]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /ja/real_user_monitoring/guide/send-rum-custom-actions
+[6]: /ja/real_user_monitoring/session_replay/privacy_options#mask-action-names

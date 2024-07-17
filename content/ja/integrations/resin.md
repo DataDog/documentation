@@ -23,6 +23,7 @@ author:
   support_email: brent@bmontague.com
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: resin
 integration_title: Resin
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: resin
 public_title: Resin
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Resin 内のスレッドプールと接続プールの設定を追跡
   media: []
@@ -59,19 +60,19 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Resin][1] を監視します。
+This check monitors [Resin][1] through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Resin チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Resin check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. 以下の JVM 引数を追加して [Resin のデフォルトサーバー][3]を構成し、JMX を有効にします。
+1. Configure the [resin default server][3] to enable JMX by adding the following JVM arguments:
 
 ```
 <server-default>
@@ -80,23 +81,23 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 </server-default>
 ```
 
-2. Resin のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `resin.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[resin.d/conf.yaml の例][2] を参照してください。
+2. Edit the `resin.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your resin performance data. See the [resin.d/conf.yaml example][2] for all available configuration options.
 
-3. [Agent を再起動します][4]。
+3. [Restart the Agent][4].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `resin` を探します。
+[Run the Agent's status subcommand][5] and look for `resin` under the Checks section.
 
-### 収集データ
+### Log collection
 
-Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][6]を参照し、コンフィギュレーションファイルの場所を調べてください。
+Enable logs collection for Datadog Agent in `/etc/datadog-agent/datadog.yaml` on Linux platforms. On other platforms, see the [Agent Configuration Files guide][6] for the location of your configuration file:
 
 ```yaml
 logs_enabled: true
 ```
 
-- ログの収集を開始するには、次のコンフィギュレーションブロックを `resin.d/conf.yaml` ファイルに対して有効化します。
+- Enable this configuration block to your `resin.d/conf.yaml` file to start collecting Logs:
     ```yaml
     logs:
       - type: file
@@ -104,23 +105,23 @@ logs_enabled: true
         source: resin
     ```
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "resin" >}}
 
 
-### ヘルプ
+### Events
 
-Resin には、イベントは含まれません。
+Resin does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "resin" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
 
 [1]: https://caucho.com/

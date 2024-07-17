@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Elastic Transcoder のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_elastic_transcoder/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Amazon Elastic Transcoder
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elastic_transcoder
 public_title: Datadog-Amazon Elastic Transcoder インテグレーション
@@ -28,9 +28,9 @@ Amazon Elastic Transcoder を使用すると、Amazon S3 に保存したメデ�
 
 このインテグレーションを有効にすると、Datadog にすべての Elastic Transcoder メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -55,21 +55,21 @@ Amazon Elastic Transcoder から S3 バケットまたは CloudWatch のいず�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_elastic_transcoder" >}}
 
 
-### ヘルプ
+### Events
 
 Amazon Elastic Transcoder インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon Elastic Transcoder インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

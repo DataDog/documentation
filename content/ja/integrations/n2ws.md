@@ -28,6 +28,7 @@ author:
   support_email: eliad.eini@n2ws.com
 categories:
 - cloud
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
 display_on_public_website: true
@@ -37,7 +38,6 @@ integration_id: n2ws
 integration_title: N2WS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: n2ws
 public_title: N2WS
@@ -53,6 +53,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Cloud
+  - Offering::Integration
   configuration: README.md#Setup
   description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
   media: []
@@ -64,80 +65,80 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
 
-N2WS として知られる N2WS Backup & Recovery (CPM) は、Amazon Web Services (AWS) および Microsoft Azure 向けのエンタープライズクラスのバックアップ、リカバリ、およびディザスタリカバリソリューションです。N2WS は、クラウドネイティブテクノロジー (スナップショット) を使用して、AWS および Azure のバックアップや復元機能を提供します。
+N2WS Backup & Recovery (CPM), known as N2WS, is an enterprise-class backup, recovery, and disaster recovery solution for Amazon Web Services (AWS) and Microsoft Azure. N2WS uses cloud native technologies (snapshots) to provide backup and restore capabilities in AWS and Azure.
 
-N2WS Backup and Recovery インスタンスは、Datadog のモニタリングサービスを使用したバックアップのモニタリング、ディザスタリカバリ、S3 へのコピー、アラートなどをサポートします。
-このインテグレーションにより、ユーザーは N2WS Backup and Recovery ダッシュボードのメトリクスを監視、分析できます。
+Your N2WS Backup and Recovery instance supports the monitoring of backups, disaster recovery, copy to S3, alerts,
+and more with Datadog's monitoring service. This integration allows users to monitor and analyze the N2WS Backup and Recovery Dashboard metrics.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-1.  [Python インテグレーション][1]をインストールします。
+1.  Install the [Python integration][1].
 
-2.  N2WS インスタンスで Datadog のサポートを有効にします。
-    - SSH を使用して N2WS Backup and Recovery インスタンスに接続します。
-    - 下記の行を `/cpmdata/conf/cpmserver.cfg` に追加します。このアクションを実行するには、`sudo` 権限が必要になる場合があります。
+2.  Enable support for Datadog on your N2WS instance:
+    - Connect to your N2WS Backup and Recovery instance with SSH.
+    - Add the lines below to `/cpmdata/conf/cpmserver.cfg`. You might need `sudo` privileges to perform this action.
         ```
         [external_monitoring]
         enabled=True
         ```
-    - `service apache2 restart` を実行します
+    - Run `service apache2 restart`
 
-3.  N2WS インスタンスに Datadog Agent をインストールします。
-    - Datadog にログインし、Integrations -> Agent -> Ubuntu に移動します
-    - Agent の one-step install コマンドをコピーします。
-    - SSH を使用して N2WS Backup and Recovery インスタンスに接続し、コマンドを実行します。このアクションを実行するには、`sudo` 権限が必要になる場合があります。
+3.  Install the Datadog Agent on your N2WS Instance.
+    - Login to Datadog and go to Integrations -> Agent -> Ubuntu
+    - Copy the Agent one-step install command.
+    - Connect to your N2WS Backup and Recovery Instance with SSH and run the command. You may require `sudo` privileges to perform this action.
 
-4.  Datadog ダッシュボードメトリクスを設定します。
-    - [**Metrics** -> **Explorer**][2] に移動します
+4.  Set up Datadog dashboard metrics:
+    - Go to [**Metrics** -> **Explorer**][2]
 
-    **Graph**: リストからメトリクスを選択します。すべての N2WS メトリクスは、文字列 `cpm_metric` で始まります。
+    **Graph**: Select your metric from the list. All N2WS metrics begin with the string `cpm_metric`.
 
-    **Over**: リストからデータを選択します。すべての N2WS ユーザーのデータは、文字列 `cpm:user:<user-name>` で始まります。
-              特定のユーザーまたは N2WS インスタンス全体を選択できます。
+    **Over**: Select data from the list. All N2WS users' data begins with the string `cpm:user:<user-name>`.
+              You can select either a specific user or the entire N2WS instance.
 
 
-5.  N2WS ダッシュボードを取得します
-    - [Datadog インテグレーション][3]で、`N2WS` タイルを検索してインストールします。
-    - 5 つのダッシュボードがアカウントにインストールされます。
-    `N2WSBackup&Recovery-Graphicalversion`、`N2WSBackup&Recovery-Graphicalversion-areas`、`N2WSBackup&Recovery-EntitiesSpecificDashboard` (N2WS Backup & Recovery v3.2.1 用)
-    **注**: これらのダッシュボードは、AWS ユーザーのみ利用可能です。
-    `N2WSBackup&Recovery-EntitiesSpecificDashboardV4.1`、`N2WSBackup&Recovery-GraphicalVersionV4.1` (N2WS Backup & Recovery v4.1 用)
+5.  Get N2WS dashboards
+    - In [Datadog Integrations][3], search for the `N2WS` tile and install it.
+    - Five dashboards are installed in your account:
+    `N2WSBackup&Recovery-Graphicalversion`, `N2WSBackup&Recovery-Graphicalversion-areas` and `N2WSBackup&Recovery-EntitiesSpecificDashboard` for N2WS Backup & Recovery v3.2.1
+    **Note**: These dashboards are only available for AWS users.
+    `N2WSBackup&Recovery-EntitiesSpecificDashboardV4.1` and `N2WSBackup&Recovery-GraphicalVersionV4.1` for N2WS Backup & Recovery v4.1
 
-    また、[N2WS から JSON テンプレートをインポートする][4]ことでダッシュボードを作成することも可能です。
+    Alternatively, you can [import JSON templates from N2WS][4] to create your dashboards.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-Datadog は、N2WS Backup & Recovery バックアップに関する以下のデータを収集します。
+Datadog collects the following data about N2WS Backup & Recovery backups:
 
-- 各タイプのスナップショット数
-- 成功したバックアップ (AWS のみ)
-- 失敗したバックアップ (AWS のみ)
-- 一部成功したバックアップ (AWS のみ)
-- 任意のタイプの保護されたリソース
-- ボリューム容量に関するデータ（AWS のみ）、アラートなど
+- The number of snapshots of each type
+- Successful backups (AWS only)
+- Failed backups (AWS only)
+- Partially successful backups (AWS only)
+- Protected resources from any type
+- Data about volume capacity (AWS only), alerts, etc.
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "n2ws" >}}
 
 
-### ヘルプ
+### Events
 
-Datadog では、すべての N2WS Backup & Recovery ホストからアラートメッセージを収集します。
+Datadog collects alert messages from all N2WS Backup & Recovery hosts.
 
-### ヘルプ
+### Service Checks
 
-N2WS Backup & Recovery インテグレーションには、サービスのチェック機能は含まれません。
+The N2WS Backup & Recovery integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-- [N2WS ユーザーガイドとドキュメント][6]
-- [N2WS サポート][7]
-- [Datadog サポート][8]
+- [N2WS user guide and documentation][6]
+- [N2WS support][7]
+- [Datadog support][8]
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/python

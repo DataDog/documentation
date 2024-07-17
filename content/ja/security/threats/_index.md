@@ -4,56 +4,65 @@ aliases:
 - /ja/security/cloud_workload_security/
 - /ja/security/cloud_workload_security/agent_expressions
 - /ja/security/cloud_workload_security/backend/
+- /ja/security/threats/security_profiles
+- /ja/security/threats/runtime_anomaly_detection
 title: Cloud Security Management Threats
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management はサポートされていません。</div>
-{{< /site-region >}}
+Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
-Cloud Security Management Threats (CSM Threats) は、環境全体のファイル、ネットワーク、プロセスアクティビティを監視し、インフラストラクチャーに対する脅威をリアルタイムで検出します。Datadog プラットフォームの一部として、CSM Threats のリアルタイム脅威検出をメトリクス、ログ、トレース、その他のテレメトリーと組み合わせることで、ワークロードに対する潜在的な攻撃を取り巻く完全なコンテキストを確認することができます。
+## Detect threats to your production workloads in real-time
 
-## 本番ワークロードへの脅威をリアルタイムで検出する
+Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Network Performance Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
 
-カーネルレベルでファイルやプロセスのアクティビティを監視し、Amazon EC2 インスタンス、Docker コンテナ、Kubernetes クラスターなどのインフラストラクチャーへの脅威を検出します。CSM Threats を[ネットワークパフォーマンスモニタリング][9]と組み合わせ、ワークロードが侵害される前にネットワークレベルで疑わしいアクティビティを検出します。
+CSM Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for CSM Threats:
 
-CSM Threats では、Datadog Agent を使用して環境を監視しています。まだ Datadog Agent をセットアップしていない場合は、[サポートされている OS][1] 上で [Agent のセットアップから始めてください][2]。Datadog Agent が CSM Threats に使用する監視は 4 種類あります。
+1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
+2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
+3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
+4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-1. **プロセス実行監視**により、ホストやコンテナ上の悪意のあるアクティビティのプロセス実行をリアルタイムで監視します。
-2. **ファイル整合性監視**により、ホストやコンテナ上の主要なファイルやディレクトリの変更をリアルタイムに監視します。
-3. **DNS アクティビティ監視**により、ホストやコンテナ上の悪意あるアクティビティをネットワークトラフィックでリアルタイムに監視します。
-4. **カーネルアクティビティ監視**により、プロセスのハイジャックやコンテナのブレイクアウトなど、カーネル層への攻撃をリアルタイムに監視します。
+{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
-{{< img src="security/csm/csm_overview.png" alt="Cloud Security Management 概要の Security Inbox には、優先的に修復すべきセキュリティ問題のリストが表示されます" width="100%">}}
+## Proactively block threats with Active Protection
 
-## すぐに使える検出ルールとカスタム検出ルールの管理
+By default, all OOTB Agent crypto mining threat detection rules are enabled and actively monitoring for threats.
 
-CSM Threats には、セキュリティ専門家チームによってメンテナンスされている、すぐに使える 50 以上の検出ルールが用意されています。このルールは、最も重要なリスクを顕在化させるので、すぐに修正するための措置を取ることができます。Agent 式ルールは分析のために収集されるワークロードのアクティビティを定義し、一方でバックエンド検出ルールはアクティビティを分析し、攻撃者の技術やその他のリスクのある行動パターンを特定します。
+[Active Protection][10] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
 
-[リモート構成][7]を使用して、新規および更新されたルールを Agent に自動的にデプロイします。各ルールがプロセス、ネットワーク、ファイルのアクティビティをどのように監視するかを定義することで[ルールをカスタマイズ][5]し、[カスタムルールを作成][6]し、新しいシグナルに対する[リアルタイム通知を設定](#set-up-realtime-notifications)することができます。
+## Manage out-of-the-box and custom detection rules
 
-{{< img src="security/cws/threats_detection_rules.png" alt="Datadog アプリの CSM Threats 検出ルール" width="100%">}}
+CSM Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
 
-## リアルタイム通知の設定
+Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
-環境内で脅威が検出されると[リアルタイムで通知を送信][3]し、チームはリスクを軽減するためのアクションを起こすことができます。通知は、[Slack、メール、PagerDuty、Webhook など][4]に送ることができます。
+{{< img src="security/cws/threats_detection_rules.png" alt="CSM Threats detection rules in the Datadog app" width="100%">}}
 
-テンプレート変数と Markdown を使用して、[通知メッセージをカスタマイズ][5]できます。既存の通知ルールの編集、無効化、削除、または新しいルールの作成、重大度やルールタイプに基づいた通知トリガー時のカスタムロジックの定義が可能です。
+## Set up real-time notifications
 
-## セキュリティシグナルの調査と修復
+[Send real-time notifications][3] when a threat is detected in your environment, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][4].
 
-[Threats Explorer][8] で、セキュリティシグナルを調査し、トリアージします。影響を受けたファイルやプロセス、関連するシグナルやログ、改善手順に関する詳細情報を表示します。
+Use template variables and Markdown to [customize notification messages][5]. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
 
-{{< img src="security/cws/threats_page.png" alt="CSM Threats ページ" width="100%">}}
+## Investigate and remediate security signals
 
-## はじめに
+Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+
+{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
+
+Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in private beta. Fill out the form to request access.
+{{< /callout >}}
+
+## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/threats/setup">}}セットアップとコンフィギュレーションを完了する{{< /nextlink >}}
-  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}CSM Threats の Datadog ロール権限{{< /nextlink >}}
-  {{< nextlink href="/security/threats/workload_security_rules">}}CSM Threats 検出ルールについて{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-workload-security">}}すぐに使える CSM Threats 検出ルールの利用を開始する{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Cloud Security Management の概要{{< /nextlink >}}
+  {{< nextlink href="/security/threats/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Threats{{< /nextlink >}}
+  {{< nextlink href="/security/threats/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box CSM Threats detection rules{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /ja/security/threats/setup/?tab=kuberneteshelm#prerequisites
@@ -65,3 +74,4 @@ CSM Threats には、セキュリティ専門家チームによってメンテ�
 [7]: /ja/security/threats/setup
 [8]: /ja/security/threats/security_signals
 [9]: /ja/network_monitoring/performance/
+[10]: /ja/security/cloud_security_management/guide/active-protection

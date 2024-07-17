@@ -33,6 +33,7 @@ author:
 categories:
 - コラボレーション
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/syncthing/README.md
 display_on_public_website: true
@@ -42,7 +43,6 @@ integration_id: syncthing
 integration_title: Syncthing
 integration_version: 1.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: syncthing
 public_title: Syncthing
@@ -59,6 +59,7 @@ tile:
   - Category::Collaboration
   - Category::Security
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Syncthing インスタンスからの全体的な統計情報を追跡
   media: []
@@ -70,53 +71,53 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Syncthing は、2 台以上のコンピュータ間でファイルをリアルタイムに同期させます。このインテグレーションにより、Datadog を使用して [Syncthing][1] を監視することができます。
+Syncthing synchronizes files between two or more computers in real time. This integration allows you to monitor [Syncthing][1] using Datadog.
 
-## 計画と使用
+## Setup
 
-Syncthing チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Syncthing check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent で Syncthing チェックをインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Syncthing check on your host. See [Use Community Integrations][3] to install the Syncthing check with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-syncthing==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Syncthing の[メトリクス](#metrics) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `syncthing.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル syncthing.d/conf.yaml][6] を参照してください。
+1. Edit the `syncthing.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Syncthing [metrics](#metrics). See the [sample syncthing.d/conf.yaml][6] for all available configuration options.
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7]
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][8]を実行し、Checks セクションで `syncthing` を探します。
+Run the [Agent's status subcommand][8] and look for `syncthing` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "syncthing" >}}
 
 
-### ヘルプ
+### Events
 
-Syncthing には、イベントは含まれません。
+Syncthing does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "syncthing" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
 
 [1]: https://syncthing.net/

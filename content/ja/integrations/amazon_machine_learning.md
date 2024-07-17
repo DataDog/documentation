@@ -6,21 +6,21 @@ categories:
 - aws
 - log collection
 - ai/ml
+custom_kind: integration
 dependencies: []
-description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
+description: Track prediction counts and failures from AWS Machine Learning.
 doc_link: https://docs.datadoghq.com/integrations/amazon_machine_learning/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/
-  tag: ブログ
-  text: 本番環境で ML モデルを監視するためのベストプラクティス
+  tag: Blog
+  text: Best practices for monitoring ML models in production
 git_integration_title: amazon_machine_learning
 has_logo: true
 integration_id: ''
 integration_title: Amazon Machine Learning
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_machine_learning
 public_title: Datadog-Amazon Machine Learning インテグレーション
@@ -62,7 +62,7 @@ AWS Machine Learning から S3 バケットまたは CloudWatch のいずれか�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## データ収集
+## Data Collected
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_machine_learning" >}}

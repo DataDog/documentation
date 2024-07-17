@@ -24,6 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - metrics
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,7 +33,6 @@ integration_id: amazon-es
 integration_title: Amazon OpenSearch Service
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_es
 public_title: Amazon OpenSearch Service
@@ -59,9 +59,9 @@ Amazon OpenSearch Service は、AWS Cloud における OpenSearch クラスタ�
 
 注: このインテグレーションでは、'es:ListTags'、'es:ListDomainNames'、'es:DescribeElasticsearchDomains' の権限が完全に有効になっている必要があります。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -70,21 +70,21 @@ Amazon OpenSearch Service は、AWS Cloud における OpenSearch クラスタ�
 1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `ES` が有効になっていることを確認します。
 2. [Datadog - Amazon OpenSearch Service インテグレーション][4]をインストールします。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_es" >}}
 
 
-### ヘルプ
+### Events
 
 Amazon OpenSearch Service インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon OpenSearch Service インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

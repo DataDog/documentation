@@ -1,21 +1,21 @@
 ---
 categories:
 - Collaboration
+custom_kind: integration
 dependencies: []
-description: 選択した Datadog のアラートとグラフをチームの Campfire チャンネルに送信。
+description: Send selected Datadog alerts and graphs to your team's Campfire channel.
 doc_link: https://docs.datadoghq.com/integrations/campfire/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/solve-performance-problems-faster-with-campfire-and-datadog/
-  tag: ブログ
-  text: Campfire と Datadog によるパフォーマンス問題の迅速な解決
+  tag: Blog
+  text: Solve performance problems faster with Campfire and Datadog
 git_integration_title: campfire
 has_logo: true
 integration_id: ''
 integration_title: Campfire
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: campfire
 public_title: Datadog-Campfire インテグレーション
@@ -34,27 +34,27 @@ Campfire インテグレーションにより、以下のことが可能にな�
 - ストリームでポストが行われたときに通知を受けることができます。
 - メトリクスアラートがトリガーされたときに通知を受けることができます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Basecamp アカウント][2]でサインインします。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Campfire インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### Events
 
 Campfire インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Campfire インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

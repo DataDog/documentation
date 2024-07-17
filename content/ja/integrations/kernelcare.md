@@ -24,6 +24,7 @@ author:
 categories:
 - OS & システム
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: kernelcare
 integration_title: KernelCare
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: kernelcare
 public_title: KernelCare
@@ -50,6 +50,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
   media: []
@@ -61,55 +62,55 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[KernelCare][1] は、Linux カーネルの脆弱性に対して、再起動することなく自動的にセキュリティパッチを適用するライブパッチシステムです。過去 6 年、Dell やZoom を始めとする企業の 50 万台以上のサーバーで利用されています。RHEL、CentOS、Amazon Linux、Ubuntu など主要な Linux ディストリビューションで動作し、一般的な脆弱性スキャナー、クラウドモニタリングツール、パッチ管理ソリューションと相互運用します。
+[KernelCare][1] is a live patching system that automatically applies security patches to Linux kernel vulnerabilities, with no reboots. It's used on over 500,000 servers, and has been used to patch servers running for 6+ years for Dell, Zoom, and other enterprise companies. It works with all major Linux distributions, such as RHEL, CentOS, Amazon Linux, and Ubuntu, and interoperates with common vulnerability scanners, cloud monitoring tools, and patch management solutions.
 
-このインテグレーションにより、Datadog Agent を介して KernelCare メトリクスを転送できます。
+This integration allows you to forward the Kernelcare metrics through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-Kernelcare チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Kernelcare check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Kernelcare check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-kernelcare==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][5]を参照してください。
+1. Edit the `kernelcare.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your kernelcare performance data. See the [sample kernelcare.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][7]を実行し、Checks セクションで `kernelcare` を探します。
+Run the [Agent's status subcommand][7] and look for `kernelcare` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "kernelcare" >}}
 
 
-### ヘルプ
+### Events
 
-Kernelcare インテグレーションには、イベントは含まれません。
+The Kernelcare integration does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "kernelcare" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://www.kernelcare.com

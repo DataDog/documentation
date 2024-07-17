@@ -3,6 +3,7 @@ aliases: []
 categories:
 - クラウド
 - azure
+custom_kind: integration
 dependencies: []
 description: 主要な Azure Arc メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_arc/
@@ -17,7 +18,6 @@ integration_id: azure-arc
 integration_title: Microsoft Azure Arc
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_arc
 public_title: Datadog-Microsoft Azure Arc インテグレーション
@@ -39,27 +39,27 @@ Azure Arc インテグレーションを使用すると、以下のことが可�
 
 また、Datadog 拡張機能を使用して、Datadog Agent を Arc サーバーに構成およびデプロイすることができます。このオプションの詳細については、[Datadog VM 拡張機能][1]ページをお読みください。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_arc" >}}
 
 
-### ヘルプ
+### Events
 
 Azure Arc インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Azure Arc インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

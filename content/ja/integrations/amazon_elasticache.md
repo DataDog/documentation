@@ -8,8 +8,9 @@ categories:
 - cloud
 - configuration & deployment
 - log collection
+custom_kind: integration
 dependencies: []
-description: Amazon ElasicCache のキーメトリクスを追跡。
+description: Track key Amazon ElasicCache metrics.
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
 draft: false
 git_integration_title: amazon_elasticache
@@ -18,7 +19,6 @@ integration_id: ''
 integration_title: Amazon ElastiCache
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elasticache
 public_title: Datadog-Amazon ElastiCache インテグレーション
@@ -104,25 +104,25 @@ instances:
 
 {{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache とキャッシュメトリクス" >}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_elasticache" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### Events
 
 Amazon ElastiCache インテグレーションには、クラスター、キャッシュセキュリティグループ、およびキャッシュパラメーターグループのイベントが含まれています。以下はイベントの例です。
 
 {{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon Elasticache イベント" >}}
 
-### ヘルプ
+### Service Checks
 
 Amazon ElastiCache インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

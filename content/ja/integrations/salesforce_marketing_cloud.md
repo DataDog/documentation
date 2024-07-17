@@ -2,6 +2,7 @@
 categories:
 - クラウド
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Salesforce Marketing Cloud
 doc_link: https://docs.datadoghq.com/integrations/salesforce_marketing_cloud/
@@ -12,7 +13,6 @@ integration_id: ''
 integration_title: Salesforce Marketing Cloud
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: salesforce_marketing_cloud
 public_title: Salesforce Marketing Cloud
@@ -28,13 +28,13 @@ Salesforce Marketing Cloud は、モバイル、ソーシャル、オンライ�
 
 Salesforce Marketing Cloud と Datadog のインテグレーションは、[Datadog Logs][1] を使用してログの表示とパースを行うために使われます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### Configuration
 
 Salesforce Marketing Cloud から Datadog にイベントを送信するように構成するためには、Salesforce Marketing Cloud Setup ページでコールバック URL を作成し、サブスクリプションを作成する必要があります。
 
@@ -61,21 +61,21 @@ Salesforce Marketing Cloud から Datadog にイベントを送信するよう�
 3. 受信したいイベントをすべて選択し、フィルターを追加します。
 4. **Subscribe** をクリックします。イベントが Datadog に送信されます。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Salesforce Marketing Cloud インテグレーションには、メトリクスは含まれません。
 
-### ワークフローの自動化
+### Logs
 
 Salesforce Marketing Cloud インテグレーションでは、[サブスクリプション設定](#subscription-setup)で選択したイベントからログイベントが収集されます。
 
-### ヘルプ
+### Service Checks
 
 Salesforce Marketing Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

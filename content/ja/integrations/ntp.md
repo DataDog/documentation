@@ -20,6 +20,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: ntp
 integration_title: NTP
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ntp
 public_title: NTP
@@ -45,8 +45,9 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
-  description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
+  description: Get alerts when your hosts drift out of sync with your chosen NTP server.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -56,56 +57,58 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Network Time Protocol (NTP) インテグレーションはデフォルトで有効になっており、NTP サーバーとの時間オフセットを 15 分ごとに報告します。ローカル Agent の時間が Datadog サービスや監視対象の他のホストと 15 秒以上ずれていると、以下の問題が発生する可能性があります。
+The Network Time Protocol (NTP) integration is enabled by default and reports the time offset from an ntp server every 15 minutes. When the local Agent's time is more than 15 seconds off from the Datadog service and other hosts you are monitoring, you may experience:
 
-- 不正なアラートのトリガー
-- メトリクスの遅延
-- メトリクスのグラフの途切れ
+- Incorrect alert triggers
+- Metric delays
+- Gaps in graphs of metrics
 
-デフォルトでは、Agent が実行されているクラウドプロバイダーがチェックにより検出され、可能な場合はそのクラウドプロバイダーのプライベート NTP サーバーが使用されます。クラウドプロバイダーが検出されない場合は、Agent で以下の NTP サーバーをデフォルトとします。
+By default, the check detects which cloud provider the Agent is running on and uses the private
+NTP server of that cloud provider, if available. If no cloud provider is detected, the agent will
+default to the NTP servers below:
 
 - `0.datadog.pool.ntp.org`
 - `1.datadog.pool.ntp.org`
 - `2.datadog.pool.ntp.org`
 - `3.datadog.pool.ntp.org`
 
-**注:** NTP リクエストはプロキシ設定に対応していません。
+**Note:** NTP requests do not support proxy settings.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-NTP チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The NTP check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
-### 構成
+### Configuration
 
-Agent はデフォルトで  NTP チェックを有効にします。チェックを自分で構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーで `ntp.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ntp.d/conf.yaml][3] を参照してください。
+The Agent enables the NTP check by default. To configure the check yourself, edit the file `ntp.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample ntp.d/conf.yaml][3] for all available configuration options.
 
-**注**: Datadog-NTP チェックのコンフィギュレーションファイルを編集する場合は、 [Agent を再起動][4]してコンフィギュレーションの変更を有効にします。
+**Note**: If you edit the Datadog-NTP check configuration file, [restart the Agent][4] to effect any configuration changes.
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `ntp` を探します。
+[Run the Agent's `status` subcommand][5] and look for `ntp` under the Checks section.
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "ntp" >}}
 
 
-### イベント
+### Events
 
-NTP チェックには、イベントは含まれません。
+The NTP check does not include any events.
 
-### サービスチェック
+### Service Checks
 {{< get-service-checks-from-git "ntp" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

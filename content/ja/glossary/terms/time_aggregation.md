@@ -1,4 +1,6 @@
 ---
+core_product:
+- metrics
 synonyms:
 - rollup
 title: 時間集計

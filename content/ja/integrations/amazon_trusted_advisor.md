@@ -5,6 +5,7 @@ categories:
 - コスト管理
 - ログの収集
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 description: AWS Trusted Advisor のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: AWS Trusted Advisor
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_trusted_advisor
 public_title: Datadog-AWS Trusted Advisor インテグレーション
@@ -36,9 +36,9 @@ AWS Trusted Advisor は、AWS ベストプラクティスに従ってリソー�
 
 **注**: このインテグレーションは、AWS のビジネスサポートプランまたはエンタープライズサポートプランのお客様に対してのみ機能します。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -64,17 +64,17 @@ AWS Trusted Advisor から S3 バケットまたは CloudWatch のいずれか�
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_trusted_advisor" >}}
 
 
-### ヘルプ
+### Events
 
 AWS Trusted Advisor インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 AWS Trusted Advisor インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -88,7 +88,7 @@ AWS Trusted Advisor インテグレーションダッシュボードにデータ
 
 Datadog Trusted Advisor ダッシュボードは、[AWS Trusted Advisor チェック][9]一式にアクセスする必要があります。AWS は、アップグレードされた AWS サポートプランでのみ、これらを利用できるようにしています。AWS プランにフルアクセスが含まれていることを確認してください。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

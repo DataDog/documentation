@@ -9,63 +9,66 @@ categories:
 - log collection
 - network
 - notifications
+custom_kind: integration
 dependencies: []
-description: インスタンスや多数の Azure サービスからメトリクスを収集
+description: Collect metrics from instances and many, many Azure services.
 doc_link: https://docs.datadoghq.com/integrations/azure/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
-  tag: ブログ
-  text: Datadog サーバーレスビューで Azure App Service を見通す
+  tag: Blog
+  text: Explore Azure App Service with the Datadog Serverless view
 - link: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/
-  tag: ブログ
-  text: Microsoft Azure VM の監視方法
+  tag: Blog
+  text: How to Monitor Microsoft Azure VMs
 - link: https://www.datadoghq.com/blog/monitor-azure-arm-vms-datadog/
-  tag: ブログ
-  text: Ampere Altra Arm ベースの CPU を搭載した Microsoft Azure VM を Datadog で監視する？
+  tag: Blog
+  text: Monitor your Microsoft Azure VMs featuring Ampere Altra Arm-based CPUs with
+    Datadog?
 - link: https://www.datadoghq.com/blog/monitoring-azure-platform-logs/
-  tag: ブログ
-  text: Microsoft Azure プラットフォームログをモニタリングするためのベストプラクティス
+  tag: Blog
+  text: Best practices for monitoring Microsoft Azure platform logs
 - link: https://www.datadoghq.com/blog/azure-service-health-monitoring-datadog/
-  tag: ブログ
-  text: Azure Service の健全性イベントを Datadog で監視
+  tag: Blog
+  text: Monitor Azure Service Health events with Datadog
 - link: https://www.datadoghq.com/blog/azure-container-apps/
-  tag: ブログ
-  text: Datadog で Azure コンテナアプリを監視する
+  tag: Blog
+  text: Monitor Azure Container Apps with Datadog
 - link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
-  tag: ブログ
-  text: Datadog CI Visibility で Azure Pipelines を監視する
+  tag: Blog
+  text: Monitor Azure Pipelines with Datadog CI Visibility
 - link: https://www.datadoghq.com/blog/azure-government-monitoring-datadog/
-  tag: ブログ
-  text: Datadog で Azure Government を監視する
+  tag: Blog
+  text: Monitor Azure Government with Datadog
 - link: https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/
-  tag: ブログ
-  text: Datadog でエンタープライズ規模の Azure 環境の監視を数分で可能にします
+  tag: Blog
+  text: Enable monitoring for enterprise-scale Azure environments in minutes with
+    Datadog
 - link: https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/
   tag: Documentation
-  text: Azure インテグレーションアーキテクチャと構成
+  text: Azure Integration Architecture and Configuration
 - link: https://docs.datadoghq.com/integrations/guide/azure-portal/
   tag: Documentation
-  text: Azure ポータルの Datadog
+  text: Datadog in the Azure Portal
 - link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: Documentation
-  text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
+  text: Why should I install the Datadog Agent on my cloud instances?
 - link: https://www.datadoghq.com/blog/monitor-azure-openai-with-datadog/
-  tag: ブログ
-  text: Datadog で Azure OpenAI を監視する
+  tag: Blog
+  text: Monitor Azure OpenAI with Datadog
 - link: https://www.datadoghq.com/blog/datadog-aks-cluster-extension/
-  tag: ブログ
-  text: Datadog AKS クラスター拡張機能で Azure コンテナ監視を効率化する
+  tag: Blog
+  text: Streamline Azure container monitoring with the Datadog AKS cluster extension
 - link: https://www.datadoghq.com/blog/azure-integration-configuration/
-  tag: ブログ
-  text: すべての Azure インテグレーションの可観測性構成を 1 か所で微調整できます
+  tag: Blog
+  text: Fine-tune observability configurations for all your Azure integrations in
+    one place
 git_integration_title: azure
 has_logo: true
 integration_id: azure
 integration_title: Microsoft Azure
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 monitors:
   '[Azure App Gateway] Backend Hosts': assets/monitors/app_gateway_backend_hosts.json
@@ -117,7 +120,7 @@ Microsoft Azure に接続すると、以下のことができます。
 Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。詳細は、<a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Azure のステータスとカウントメトリクス</a>をご覧ください。
 </div>
 
-| Datadog クリップボード                     | 説明                                                                                               |
+| Integration                     | 説明                                                                                               |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|
 | [Analysis Services][2]          | クラウドでデータモデルを提供するサービス                                                         |
 | [API Management][3]             | API を公開、セキュリティ保護、変換、管理、監視するサービス                                      |
@@ -165,7 +168,7 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 | [Virtual Machine Scale Set][48] | 同一の VM をセットでデプロイ、管理、オートスケーリング。                                                     |
 | [Virtual Network][49]           | Azure リソースがお互いと、インターネットと、オープンプレミスネットワークと、安全に通信できるようにします。    |
 
-## 計画と使用
+## Setup
 
 ### 自動
 
@@ -191,27 +194,27 @@ Azure ログを Datadog に送信する手順については、[Azure ログを 
 _US3:_  
 サブスクリプションレベル、Azure リソース、Azure Active Directory のログを Datadog に送信する手順については、[Datadog リソースで Azure ログを送信する][55]ガイドを参照してください。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 すべての標準 Azure Monitor メトリクスと[一意の Datadog 生成メトリクス][56]。
 
 詳しいメトリクス一覧については、[概要セクション](#overview)で該当する Azure サービスを選択してください。
 
-### ヘルプ
+### Events
 
 Azure インテグレーションは、自動的に Azure サービス健全性イベントを収集します。これを Datadog で表示するには、[イベントエクスプローラー][57]に移動し、`Azure Service Health` ネームスペースをフィルタリングします。 
 
-### ヘルプ
+### Service Checks
 
 Azure インテグレーションには、サービスのチェック機能は含まれません。
 
-### Lambda のトレースされた起動の 1 時間単位使用量の取得
+### Tags
 
 Azure インテグレーションのメトリクス、イベント、およびサービスチェックは、Azure 環境で定義されているタグに加えて、次のタグを受け取ります。
 
-| Datadog クリップボード                             | ネームスペース                                   | Datadog タグキー                                                                                                                                                                                                 |
+| Integration                             | ネームスペース                                   | Datadog タグキー                                                                                                                                                                                                 |
 |-----------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | すべての Azure インテグレーション                  | All                                         | `cloud_provider`、`region`、`kind`、`type`、`name`、`resource_group`、`tenant_name`、`subscription_name`、`subscription_id`、`status`（該当する場合）                                                            |
 | Azure VM インテグレーション                   | `azure.vm.*`                                | `host`、`size`、`operating_system`、`availability_zone`                                                                                                                                                          |
@@ -221,7 +224,7 @@ Azure インテグレーションのメトリクス、イベント、および�
 | Azure Load Balancer                     | `azure.network_loadbalancers.*`             | `sku_name`                                                                                                                                                                                                       |
 | Azure Usage and Quota                   | `azure.usage.*`                             | `usage_category`、`usage_name`                                                                                                                                                                                   |
 
-## ヘルプ
+## Troubleshooting
 
 [Azure トラブルシューティング][58]ガイドをご参照ください。
 

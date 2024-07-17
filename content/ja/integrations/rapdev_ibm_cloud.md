@@ -39,6 +39,7 @@ categories:
 - incident-teams
 - プロビジョニング
 - オーケストレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -47,7 +48,6 @@ integration_id: rapdev-ibm-cloud
 integration_title: IBM Cloud
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

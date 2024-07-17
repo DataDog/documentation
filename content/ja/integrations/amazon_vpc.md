@@ -5,6 +5,7 @@ categories:
 - クラウド
 - ログの収集
 - ネットワーク
+custom_kind: integration
 dependencies: []
 description: Amazon VPC ログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: Amazon VPC
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_vpc
 public_title: Datadog-Amazon VPC インテグレーション
@@ -32,9 +32,9 @@ version: '1.0'
 
 Amazon Virtual Private Cloud (Amazon VPC) を使用すると、仮想ネットワーク内で AWS リソースを起動できます。VPC フローログは、VPC 内のネットワークインターフェイスを行き来する IP トラフィックに関する情報をキャプチャできる機能です。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -88,23 +88,23 @@ S3 バケットまたは CloudWatch のロググループを保存先として�
 
 AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][8]を参照してください。
 
-## Datadog Operator
+## Data collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_vpc" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### Events
 
 Amazon VPC インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon VPC インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

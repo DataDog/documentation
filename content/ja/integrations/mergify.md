@@ -25,6 +25,7 @@ author:
   support_email: support@mergify.com
 categories:
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mergify/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: mergify
 integration_title: Mergify
 integration_version: 1.0.2
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: mergify
 public_title: Mergify
@@ -51,6 +51,7 @@ tile:
   - Supported OS::macOS
   - Submitted Data Type::Metrics
   - Category::Developer Tools
+  - Offering::Integration
   configuration: README.md#Setup
   description: Mergify マージキュー統計のインテグレーション
   media: []
@@ -62,57 +63,61 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このインテグレーションは、[Mergify][1] で構成された各リポジトリのマージキュー長を監視し、Mergify のグローバル可用性を追跡します。メトリクスを Datadog アカウントに送信することで、異常アラート用のモニターをセットアップし、マージキューのパフォーマンスを分析することができます。この Datadog インテグレーションを使用して、Mergify サービスの可用性を意識し、開発ワークフローを最適化することができます。
+This integration monitors merge queue length for each configured repository in
+[Mergify][1] and tracks Mergify's global availability. By sending metrics to your
+Datadog account, you can set up monitors for anomaly alerts and analyze merge
+queue performance. You can maintain awareness of Mergify service availability
+and optimize your development workflow using this Datadog integration.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-#### リリースから
+#### From release
 
-`datadog-agent integration install -t datadog-mergify==<INTEGRATION_VERSION>` を実行します。
+Run `datadog-agent integration install -t datadog-mergify==<INTEGRATION_VERSION>`.
 
-#### ソースから
+#### From source
 
-Mergify チェックをホストにインストールするには
+To install the Mergify check on your host:
 
-1. マシンに[開発ツール][2]をインストールします。
+1. Install the [developer tool][2] on any machine.
 
-2. `ddev release build mergify` を実行してパッケージをビルドします。
+2. Run `ddev release build mergify` to build the package.
 
-3. [Datadog Agent をダウンロードします][3]。
+3. [Download the Datadog Agent][3].
 
-4. ビルドの成果物を Agent をインストール済みのホストにアップロードし、以下を実行します。
- `datadog-agent integration install -w
+4. Upload the build artifact to any host with an Agent and
+ run `datadog-agent integration install -w
  path/to/mergify/dist/<ARTIFACT_NAME>.whl`.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Mergify の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `mergify.d/conf.yaml` ファイルを編集します。
+1. Edit the `mergify.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your Mergify [metrics](#metrics).
 
-   使用可能なすべての構成オプションの詳細については、サンプル [mergify.d/conf.yaml.example][5] ファイルを参照してください。
+   See the sample [mergify.d/conf.yaml.example][5] file for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][7]を実行し、Checks セクションで `mergify` を探します。
+Run the [Agent's status subcommand][7] and look for `mergify` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "mergify" >}}
 
 
-### ヘルプ
+### Events
 
-Mergify には、イベントは含まれません。
+Mergify does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Mergify サポート][1]までお問い合わせください。
+Need help? Contact [Mergify support][1].
 
 [1]: https://mergify.com
 [2]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#configure-the-developer-tool

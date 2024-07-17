@@ -4,6 +4,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Keyspaces の主要なメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_keyspaces/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: Amazon Keyspaces (Apache Cassandra 用)
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_keyspaces
 public_title: Datadog-Amazon Keyspaces (Apache Cassandra 用) インテグレーション
@@ -29,9 +29,9 @@ Amazon Keyspaces (Apache Cassandra 用) は、スケーラブルで可用性の�
 
 このインテグレーションを有効にすると、Datadog にすべての Keyspaces メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -40,21 +40,21 @@ Amazon Keyspaces (Apache Cassandra 用) は、スケーラブルで可用性の�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Cassandra` が有効になっていることを確認します。
 2. [Datadog - Amazon Keyspaces (Apache Cassandra 用) インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_keyspaces" >}}
 
 
-### ヘルプ
+### Events
 
 Amazon Keyspaces インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon Keyspaces インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

@@ -1,4 +1,7 @@
 ---
+core_product:
+- metrics
+- alerts
 title: スコープ
 ---
 スコープでは、タグを使ってクエリをフィルタリングします。

@@ -3,6 +3,7 @@ app_id: reboot-required
 app_uuid: 673a1136-68ad-46f4-ba6f-4203df10db6a
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: 再起動が必要です。
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10209
     source_type_name: Reboot required
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
 categories:
 - developer tools
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
 display_on_public_website: true
@@ -30,7 +33,6 @@ integration_id: reboot-required
 integration_title: Reboot Required
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: reboot_required
 public_title: Reboot Required
@@ -43,73 +45,75 @@ tile:
   - Category::Developer Tools
   - Category::OS とシステム
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
-  description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
+  description: Monitor systems that require a reboot after software update
   media: []
   overview: README.md#Overview
   support: README.md#Support
   title: Reboot Required
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-パッケージを自動インストールするように構成された Linux システムが、自動的に再起動するようには構成されていない場合があります (手動で再起動時間を設定する方がよい場合もあります)。このチェックは、再起動が適切なタイミングで実行されない場合に、アラートを発行できるようにします。
+Linux systems that are configured to autoinstall packages may not be configured to autoreboot (it may be desirable to time this manually). This check enables alerts to be fired in the case where reboots are not performed in a timely manner.
 
-## セットアップ
+## Setup
 
-Reboot Required チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Reboot Required check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### インストール
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Reboot Required チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Reboot Required check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-reboot_required==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][3].
 
-### コンフィギュレーション
+### Configuration
 
-1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `reboot_required.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル reboot_required.d/conf.yaml][5] を参照してください。
+1. Edit the `reboot_required.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4]. See the [sample reboot_required.d/conf.yaml][5] for all available configuration options.
 
-2. エージェントの dd-agent (Datadog Agent を実行するユーザー) が書き込み可能なディレクトリを、このチェックで使用するために作成します。デフォルトの `/var/run/dd-agent` が理想的です。以下のスニペットで十分です。
+2. Make sure you create a dd-agent (user that runs the Datadog agent) writable directory for the agent, and used by this check. The default of `/var/run/dd-agent` is ideal. The snippet below should suffice.
 
    ```shell
    sudo mkdir /var/run/dd-agent
    sudo chown dd-agent:dd-agent /var/run/dd-agent
    ```
 
-3. [Agent を再起動します][6]。
+3. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションの `reboot_required` を探します。
+[Run the Agent's `status` subcommand][7] and look for `reboot_required` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-メトリクスは収集されません。
+No metrics are collected.
 
-### イベント
+### Events
 
-reboot_required チェックには、イベントは含まれません。
+The reboot_required check does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "reboot_required" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

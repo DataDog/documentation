@@ -38,6 +38,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -46,7 +47,6 @@ integration_id: rapdev-nutanix
 integration_title: Nutanix
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -102,21 +102,21 @@ tile:
 ## 概要
 Nutanix インテグレーションではストレージ、CPU 使用量、読み取り/書き込み IOPS、および Nutanix Clusters 内のその他のメトリクスを監視し、お使いの環境が常に最適なパフォーマンスで稼働しているかどうかを確認することができます。インテグレーションは 4 つのダッシュボードで構成されており、Nutanix Clusters を俯瞰的に可視化するとともに、潜在的なパフォーマンスの劣化をピンポイントかつ詳細に表示します。また、Nutanix インテグレーションには、ストレージの使用率やデータ重複除去といった、Nutanix 環境の総合的なパフォーマンス維持に欠かせない主要なメトリクスの監視機能も搭載されています。
 
-### ログ管理
+### Monitors
 
 1. Nutanix Cluster ストレージ使用率
 2. Nutanix Cluster CPU 使用率
 3. Nutanix Cluster データ重複除去率
 4. Nutanix Cluster データ圧縮率
 
-### ライブラリ
+### Dashboards
 
-RapDev Nutanix 概要
-RapDev Nutanix Clusters
-RapDev Nutanix ホスト & ディスク
-RapDev Nutanix VM
+1. RapDev Nutanix Overview
+2. RapDev Nutanix Clusters
+3. RapDev Nutanix Hosts and Disks
+4. RapDev Nutanix VMs
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - メール: support@rapdev.io

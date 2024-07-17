@@ -37,6 +37,7 @@ categories:
 - data stores
 - マーケットプレイス
 - sap
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -45,7 +46,6 @@ integration_id: rapdev-maxdb
 integration_title: MaxDB
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -100,7 +100,7 @@ tile:
 
 MaxDB インテグレーションは MaxDB インスタンスのデータ、ログ領域、ボリューム、キャッシュ、セッション、ロック、その他のメトリクスを監視し、データベースが正常に稼働していることを確認します。このインテグレーションで利用可能なダッシュボードは、データベースおよびデータベースホストでフィルタリングすることができます。MaxDB インテグレーションにはまた、データベースの総合的な健全性に関連する共通のメトリクスのモニターも搭載されています。
 
-### ログ管理
+### Monitors
 1. MaxDB 接続チェック
 2. MaxDB ステート
 3. MaxDB データボリューム使用量

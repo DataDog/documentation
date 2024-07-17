@@ -1,8 +1,9 @@
 ---
 categories:
 - cloud
+custom_kind: integration
 dependencies: []
-description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
+description: Track actors and dispatcher events for Akka-based applications
 doc_link: https://docs.datadoghq.com/integrations/lightbendrp/
 draft: false
 git_integration_title: lightbendrp
@@ -11,7 +12,6 @@ integration_id: lightbendrp
 integration_title: Lightbend
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: lightbendrp
 public_title: Datadog-Lightbend インテグレーション

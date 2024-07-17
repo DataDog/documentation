@@ -29,6 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
 display_on_public_website: true
@@ -36,9 +37,8 @@ draft: false
 git_integration_title: active_directory
 integration_id: active-directory
 integration_title: Active Directory
-integration_version: 2.1.0
+integration_version: 2.1.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: active_directory
 public_title: Active Directory
@@ -50,8 +50,9 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS とシステム
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Microsoft Active Directory のメトリクスを収集してグラフ化
+  description: Collect and graph Microsoft Active Directory metrics
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -61,49 +62,49 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Microsoft Active Directory からメトリクスを取得して、パフォーマンスを視覚化および監視します。
+Get metrics from Microsoft Active Directory to visualize and monitor its performances.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent の Active Directory チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Agent's Active Directory check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
-Datadog Agent をドメイン環境にインストールするには、[Agent のインストール要件][2]を参照してください。
+If installing the Datadog Agent on a domain environment, see [the installation requirements for the Agent][2]
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### メトリクスの収集
+#### Metric collection
 
-1. Active Directory のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `active_directory.d/conf.yaml` ファイルを編集します。デフォルトのセットアップでは、ローカルホストのメトリクスが収集されます。使用可能なすべての構成オプションについては、[サンプル active_directory.d/conf.yaml][4] を参照してください。
+1. Edit the `active_directory.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][3] to start collecting your Active Directory performance data. The default setup should already collect metrics for the localhost. See the [sample active_directory.d/conf.yaml][4] for all available configuration options.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5]
 
-**注**: このチェックのバージョン 1.13.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][6]を参照してください。
+**Note**: Versions 1.13.0 or later of this check use a new implementation for metric collection, which requires Python 3. For hosts that are unable to use Python 3, or if you would like to use a legacy version of this check, refer to the following [config][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションの `active_directory` を探します。
+[Run the Agent's status subcommand][7] and look for `active_directory` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "active_directory" >}}
 
 
-### ヘルプ
+### Events
 
-Active Directory チェックには、イベントは含まれません。
+The Active Directory check does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Active Directory チェックには、サービスのチェック機能は含まれません。
+The Active Directory check does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment

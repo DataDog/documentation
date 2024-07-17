@@ -12,7 +12,7 @@ further_reading:
   tag: ドキュメント
   text: Service Definition API によるサービスの登録
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-  tag: インテグレーション
+  tag: External Site
   text: Terraform によるサービス定義の作成と管理
 - link: /tracing/service_catalog/guides/understanding-service-configuration
   tag: ガイド
@@ -38,6 +38,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/
   tag: ブログ
   text: Datadog サービスカタログを使ったエンドツーエンドのサービス所有権管理のベストプラクティス
+kind: ドキュメント
 title: Datadog サービスカタログ
 ---
 

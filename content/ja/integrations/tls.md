@@ -26,6 +26,7 @@ author:
 categories:
 - developer tools
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
 display_on_public_website: true
@@ -33,9 +34,8 @@ draft: false
 git_integration_title: tls
 integration_id: tls
 integration_title: TLS
-integration_version: 2.16.1
+integration_version: 2.18.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: tls
 public_title: TLS
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
   media: []
@@ -63,77 +64,77 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、[TLS][1] プロトコルバージョン、証明書の有効期限と有効性などを監視します。
+This check monitors [TLS][1] protocol versions, certificate expiration and validity, etc.
 
-**注**:
+**Notes**:
 
-1. TCP のみがサポートされています。
-2. リーフ/エンドユーザー証明書のみが検証されます (中間証明書およびルート証明書は検証されません)。
+1. Only TCP is supported.
+2. Only leaf / end user certificates are verified (not intermediate and root certificates).
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-TLS チェックは [Datadog Agent][2] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The TLS check is included in the [Datadog Agent][2] package.
+No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-1. TLS データの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `tls.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル tls.d/conf.yaml][1] を参照してください。
+1. Edit the `tls.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your TLS data. See the [sample tls.d/conf.yaml][1] for all available configuration options.
 
-2. [Agent を再起動します][2]。
+2. [Restart the Agent][2].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/tls/datadog_checks/tls/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                  |
+| Parameter            | Value                                  |
 | -------------------- | -------------------------------------- |
 | `<INTEGRATION_NAME>` | `tls`                                  |
-| `<INIT_CONFIG>`      | 空白または `{}`                          |
+| `<INIT_CONFIG>`      | blank or `{}`                          |
 | `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "port":"443"}` |
 
-**注**: よく知られた信頼できる CA からのものではない内部証明書を使用している場合、特定のメトリクスが Datadog にレポートされない場合があります。インテグレーションテンプレートで `tls_verify: false` を使用して、このインスタンスのすべてのメトリクスをレポートします。
+**Note**: If you are using internal certificates that are not from a well-known, trusted CA, certain metrics may not report to Datadog. Use `tls_verify: false` in your integration template to report all metrics in this instance.
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `tls` を探します。
+[Run the Agent's status subcommand][3] and look for `tls` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "tls" >}}
 
 
-### ヘルプ
+### Events
 
-TLS には、イベントは含まれません。
+TLS does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "tls" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 
 

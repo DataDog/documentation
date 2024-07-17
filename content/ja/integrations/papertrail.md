@@ -18,6 +18,7 @@ author:
 categories:
 - event management
 - notifications
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,7 +27,6 @@ integration_id: papertrail
 integration_title: Papertrail
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: papertrail
 public_title: Papertrail
@@ -55,9 +55,9 @@ Papertrail と Datadog を使用して、以下のことができます。
 - 自由形式のログデータをすぐに使用できるメトリクスに変換できます。
 - 運用情報のサイロ化を避けることができます。ログ由来のメトリクスをアプリ/システムレベルのメトリクスと共に表示し、相互に関連付けることができます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 Papertrail からのメトリクスをキャプチャするには、以下のようにします。
 
@@ -74,25 +74,25 @@ Papertrail からのメトリクスをキャプチャするには、以下のよ
 
 Papertrail が、選択された間隔で Datadog を更新します。
 
-### ブラウザトラブルシューティング
+### Configuration
 
 このインテグレーションに構成手順は必要ありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Papertrail インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### Events
 
 Papertrail インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Papertrail インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

@@ -1,15 +1,16 @@
 ---
 categories:
 - configuration & deployment
+custom_kind: integration
 dependencies:
 - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
-description: Jenkins のメトリクス、イベント、サービスチェックを自動転送 to Datadog.
+description: Automatically forward your Jenkins metrics, events, and service checks
+  to Datadog.
 doc_link: https://docs.datadoghq.com/integrations/jenkins/
 git_integration_title: jenkins
 has_logo: true
 integration_title: Jenkins
 is_public: true
-custom_kind: integration
 name: jenkins
 public_title: Datadog-Jenkins インテグレーション
 short_description: Jenkins のメトリクス、イベント、サービスを自動転送 checks to Datadog.
@@ -223,8 +224,8 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 | 内容              | 説明                                                                                                                                                                                                                                 | 環境変数                          |
 |----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
 | ホスト名                   | Datadog に送信されるすべてのイベントで使用するホスト名。                                                                                                                                                                                           | `DATADOG_JENKINS_PLUGIN_HOSTNAME`             |
-| 除外されるジョブ              | 監視対象から除外したいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`                                                                                                      | `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
-| 含まれるジョブ              | 監視対象に含めたいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`                                                                                                          | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
+| 除外されるジョブ              | A comma-separated list of regex used to exclude job names from monitoring, for example: `susans-job,johns-.*,prod_folder/prod_release`. This setting affects all aspects of the plugin: events, metrics, logs, CI visibility.               |  `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
+| 含まれるジョブ              | A comma-separated list of regex used to include job names for monitoring, for example: `susans-job,johns-.*,prod_folder/prod_release`. This setting affects all aspects of the plugin: events, metrics, logs, CI visibility.                | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
 | グローバルタグファイル            | タグのカンマ区切りリストを含むワークスペースファイルへのパスです (パイプラインのジョブとは互換不能) 。                                                                                                                                   | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAG_FILE`      |
 | グローバルタグ                | すべてのメトリクス、イベント、サービスチェックを適用するためのカンマ区切りのリストです。タグにはマスターの jenkins インスタンスで定義される環境変数を含めることができます。　                                                                                                                                                          | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
 | グローバルジョブタグ            | ジョブとそのジョブに適用するタグのリストを照合するための正規表現を記載したカンマ区切りリストです。タグにはマスターの jenkins インスタンスで定義される環境変数を含めることができます。**注**: タグで `$` 記号を用いて正規表現に一致したグループを参照することができます。例: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3` | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
@@ -237,7 +238,7 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 
 各ジョブのコンフィギュレーションページでは、次のようなカスタマイズが可能です。
 
-| PHP                         | 説明                                                                                                                                                                                           |
+| Customization                         | 説明                                                                                                                                                                                           |
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | カスタムタグ                           | ジョブワークスペースの `File` から設定 (パイプラインのジョブではサポートされていません) するか、コンフィギュレーションページのテキスト `Properties` から直接設定します。設定が完了すると、この内容で `Global Job Tags` が上書きされます。 |
 | ソース管理のイベントを送信 | イベントおよびメトリクスの `Source Control Management Events Type` を送信します (デフォルトで有効) 。                                                                                                         |
@@ -292,11 +293,11 @@ datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: [
 
 Test Visibility は、Datadog の別製品であり、別途請求されることにご留意ください。
 
-## Datadog Operator
+## Data collected
 
 このプラグインは以下の[イベント](#events)、[メトリクス](#metrics)、[サービスチェック](#service-checks)を収集します。
 
-### ヘルプ
+### Events
 
 #### デフォルトのイベントタイプ
 
@@ -347,7 +348,7 @@ Test Visibility は、Datadog の別製品であり、別途請求されるこ�
 
 注: [ジョブのカスタマイズ](#job-customization)セクションで言及されているように、`SCMCheckout` イベントを送信するためのジョブ固有のトグルがあります。`SCMCheckout` イベントがグローバルに除外されている場合、このトグルは無効です。
 
-### データセキュリティ
+### Metrics
 
 | メトリクス名                            | 説明                                                                                            | デフォルトのタグ                                                               |
 |----------------------------------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|

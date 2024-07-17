@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10124
     source_type_name: MarkLogic
-  logs:
-    source: marklogic
   monitors:
     Marklogic high load: assets/monitors/marklogic_high_load.json
     Marklogic long requests: assets/monitors/marklogic_long_requests.json
@@ -36,6 +34,7 @@ author:
 categories:
 - data stores
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
 display_on_public_website: true
@@ -43,9 +42,8 @@ draft: false
 git_integration_title: marklogic
 integration_id: marklogic
 integration_title: MarkLogic
-integration_version: 4.2.0
+integration_version: 4.2.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: marklogic
 public_title: MarkLogic
@@ -62,6 +60,7 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
   media: []
@@ -73,45 +72,45 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックでは、Datadog Agent を通じて [MarkLogic][1] を監視します。MarkLogic Server は、運用データおよび分析データのためのデータハブとして設計されたマルチモデルデータベースです。
+This check monitors [MarkLogic][1] through the Datadog Agent. MarkLogic Server is a multi-model database designed to be a data hub for operational and analytical data.
 
-## 計画と使用
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インフラストラクチャーリスト
+### Installation
 
-MarkLogic チェックは [Datadog Agent][3] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The MarkLogic check is included in the [Datadog Agent][3] package.
+No additional installation is needed on your server.
 
-#### MarkLogic の準備
+#### Prepare MarkLogic
 
-API または Admin インターフェイスで、Datadog Agent に [`manage-user`][4] ロール権限が最小限のユーザーを作成します。
-`enable_health_service_checks` コンフィギュレーションを使用する予定の場合は、Datadog MarkLogic ユーザーにu少なくとも [`manage-admin`][5] ロールを付与します。
+Using the API or the Admin interface, create a user for the Datadog Agent with the [`manage-user`][4] role permissions at minimum.
+If you plan to use the `enable_health_service_checks` configuration, give the Datadog MarkLogic user at least the [`manage-admin`][5] role.
 
-##### ヘルプ
+##### API
 
-1. 特定の値でこのリクエストを調整し、Datadog ユーザーを作成します。
+1. Create the Datadog user by modifying this request with your specific values:
     ```shell
     curl -X POST --anyauth --user <ADMIN_USER>:<ADMIN_PASSWORD> -i -H "Content-Type: application/json" -d '{"user-name": "<USER>", "password": "<PASSWORD>", "roles": {"role": "manage-user"}}' http://<HOSTNAME>:8002/manage/v2/users
     ```
-    適切な `<ADMIN_USER>` と `<ADMIN_PASSWORD>` を使用し、Datadog Agent で使用するユーザー名とパスワードを `<USER>` および `<PASSWORD>` に置き換えます。
-   詳細は、MarkLogic のドキュメント [POST /manage/v2/users][6] を参照してください。
+    Use the correct `<ADMIN_USER>` and `<ADMIN_PASSWORD>`, and replace `<USER>` and `<PASSWORD>` with the username and password that the Datadog Agent uses.
+    For more details, see the MarkLogic documentation: [POST /manage/v2/users][6].
 
-2. 作成したユーザーが必要なアクセス許可を持っているかを確認するには
+2. To verify the user was created with enough permissions:
     ```shell
     curl -X GET --anyauth --user <USER>:<PASSWORD> -i http://<HOSTNAME>:8002/manage/v2
     ```
 
-##### Admin インターフェイス
+##### Admin interface
 
-1. 監理者アカウントで QConsole にログインします。デフォルトで、QConsole は `http://<HOSTNAME>:8000/qconsole` で使用可能です。
+1. Log into the QConsole with an admin account. By default, the QConsole is available at `http://<HOSTNAME>:8000/qconsole`.
 
-2. データベースに `Security`、クエリタイプに `XQuery` を選択します。
+2. Select `Security` as Database and `XQuery` as query type.
 
-3. このクエリを実行し、Datadog Agent で使用するユーザーとパスワードを `<USER>` と `<PASSWORD>` に置き換えます。
+3. Run this query, replacing `<USER>` and `<PASSWORD>` with the ones that the Datadog Agent uses:
     ```
     xquery version "1.0-ml";
     import module namespace sec="http://marklogic.com/xdmp/security" at 
@@ -126,29 +125,29 @@ API または Admin インターフェイスで、Datadog Agent に [`manage-use
         ("http://marklogic.com/dev_modules"))
 
     ```
-   詳細は、MarkLogic のドキュメント [sec:create-user][7] を参照してください。
+   For more details, see the MarkLogic documentation: [sec:create-user][7].
 
-4. 作成されたユーザーに十分な権限があることを確認するには、`<USER>` および `<PASSWORD>` を使用して `http://<HOSTNAME>:8002` (デフォルトポート) で認証します。
+4. To verify that the user was created with enough permissions, use `<USER>` and `<PASSWORD>` to authenticate at `http://<HOSTNAME>:8002` (default port).
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### メトリクスベース SLO
+#### Host
 
-1. MarkLogic のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `marklogic.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル `marklogic.d/conf.yaml` ファイル][8]を参照してください。コンフィグファイルのユーザー関連の設定については、作成した Datadog Agent ユーザーを使用します。
+1. Edit the `marklogic.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your MarkLogic performance data. See the [sample `marklogic.d/conf.yaml` file][8] for all available configuration options. For user-related settings in the config file, use the Datadog Agent user you created.
 
-2. [Agent を再起動します][9]。
+2. [Restart the Agent][9].
 
-#### 収集データ
+#### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. MarkLogic のログの収集を開始するには、次の構成ブロックを `marklogic.d/conf.yaml` ファイルに追加します。
+2. Add this configuration block to your `marklogic.d/conf.yaml` file to start collecting your MarkLogic logs:
 
    ```yaml
      logs:
@@ -160,31 +159,31 @@ _Agent バージョン 6.0 以降で利用可能_
          source: marklogic
    ```
 
-    `path` の値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル  `marklogic.d/conf.yaml` ファイル][8]を参照してください。
+    Change the `path` value and configure it for your environment. See the [sample `marklogic.d/conf.yaml` file][8] for all available configuration options.
 
-3. [Agent を再起動します][9]。
+3. [Restart the Agent][9].
 
-### 検証
+### Validation
 
-[Agent のステータスサブコマンドを実行][10]し、Checks セクションで `marklogic` を探します。
+Run the [Agent's status subcommand][10] and look for `marklogic` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "marklogic" >}}
 
 
-### ヘルプ
+### Events
 
-MarkLogic には、イベントは含まれません。
+MarkLogic does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "marklogic" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+Need help? Contact [Datadog support][13].
 
 
 [1]: https://www.marklogic.com

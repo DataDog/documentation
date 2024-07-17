@@ -1,4 +1,5 @@
 ---
+kind: documentation
 title: サーバーレス用語集
 ---
 

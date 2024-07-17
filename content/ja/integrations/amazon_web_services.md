@@ -10,24 +10,24 @@ categories:
 - cloud
 - iot
 - log collection
+custom_kind: integration
 dependencies: []
-description: AWS サービスを Datadog と統合。
+description: Integrate your AWS services with Datadog.
 doc_link: https://docs.datadoghq.com/integrations/amazon_web_services/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/
-  tag: ブログ
-  text: Datadog で AWS コントロールプレーン API の使用量メトリクスを監視する
+  tag: Blog
+  text: Monitor AWS control plane API usage metrics in Datadog
 - link: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
-  tag: ブログ
-  text: AWS re:Invent 2022 のハイライト
+  tag: Blog
+  text: Highlights from AWS re:Invent 2022
 git_integration_title: amazon_web_services
 has_logo: true
 integration_id: amazon-web-services
 integration_title: AWS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_web_services
 public_title: Datadog-AWS インテグレーション
@@ -51,7 +51,7 @@ AWS インテグレーションをすぐに使い始めるには、[AWS スタ�
 
 Datadog の Amazon Web Services インテグレーションは、[90 以上の AWS サービス][3]のログ、イベント、[CloudWatch からの全メトリクス][2]を収集します。
 
-## 計画と使用
+## Setup
 
 以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、イベント、タグ、ログを収集します。
 
@@ -114,7 +114,7 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 ### Cloud Security Management
 
-#### 計画と使用
+#### Setup
 
 お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][16]を完了させます。Cloud Security Management が有効化されていることを適宜ご確認ください。
 
@@ -122,20 +122,11 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 既存の AWS インテグレーションに Cloud Security Management を追加するには、以下の手順でリソース収集を有効にしてください。
 
-1. 自動**または**手動手順で Datadog IAM ロールに必要な権限を提供します。
-
-   **自動** - CloudFormation テンプレートを更新します。
-   a. CloudFormation コンソールで Datadog インテグレーションのインストールに使用した主要なスタックを探し、`Update` を選択します。
-   b. `Replace current template` を選択します。
-   c. `Amazon S3 URL` を選択して `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml` を入力し、`Next` をクリックします。
-   d. `CloudSecurityPostureManagementPermissions` を `true` に設定し、`Next` をクリックします。`Review` ページに到達するまでその他の既存のパラメーターは変更しないでください。ここで変更点をプレビューおよび確認します。
-   e. 下部にある 2 つの確認ボックスをオンにし、`Update stack` をクリックします。
-
-   **手動** - [AWS が管理する `SecurityAudit` ポリシー][17]を Datadog AWS IAM ロールに関連付けます。このポリシーは [AWS コンソール][17]にあります。
+1. Datadog の AWS IAM ロールに、AWS が管理している `SecurityAudit` ポリシーをアタッチして、Datadog の IAM ロールに必要な権限を付与します。このポリシーは [AWS コンソール][17]にあります。
 
 2. [Datadog AWS インテグレーションページ][18]で、以下の手順で設定を完了させます。または、[Update an AWS Integration][8] API エンドポイントを利用することも可能です。
 
-   1. リソース収集を有効化したい AWS アカウントをクリックします。
+   1. リソース収集を有効化したい AWS アカウントを選択します。
    2. そのアカウントの **Resource collection** タブに移動し、`Cloud Security Posture Management Collection` を有効にします。
    3. ページの右下にある `Save` をクリックします。
 
@@ -146,21 +137,21 @@ AWS CloudWatch アラームを Datadog イベントエクスプローラーに�
 - アラームポーリング: アラームポーリングは AWS インテグレーションですぐに使用でき、[DescribeAlarmHistory][19] API を介してメトリクスアラームをフェッチします。この方法に従うと、イベントソース `Amazon Web Services` の下にアラームが分類されます。**注**: クローラーは複合アラームを収集しません。
 - SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントエクスプローラー内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][20]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_web_services" >}}
 
 
-### ヘルプ
+### イベント
 
 AWS からのイベントは、AWS サービス単位で収集されます。収集されるイベントの詳細については、[お使いの AWS サービスのドキュメント][3]を参照してください。
 
-### Lambda のトレースされた起動の 1 時間単位使用量の取得
+### タグ
 
 AWS インテグレーションにより以下のタグが収集されます。**注**: 一部のタグは、特定のメトリクスにのみ表示されます。
 
-| Datadog クリップボード            | Datadog タグキー                                                                                                                                                                                              |
+| インテグレーション            | Datadog タグキー                                                                                                                                                                                              |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | All                    | `region`                                                                                                                                                                                                      |
 | [API Gateway][22]      | `apiid`、apiname`、`method`、`resource`、`stage`                                                                                                                                                             |
@@ -203,11 +194,11 @@ AWS インテグレーションにより以下のタグが収集されます。*
 | [VPC][59]              | `nategatewayid`、`vpnid`、`tunnelipaddress`                                                                                                                                                                   |
 | [WorkSpaces][60]       | `directoryid`、`workspaceid`                                                                                                                                                                                  |
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "amazon_web_services" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 AWS インテグレーションに関する問題解決は、[AWS インテグレーションのトラブルシューティングガイド][62]をご参照ください。
 

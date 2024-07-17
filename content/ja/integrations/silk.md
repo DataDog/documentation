@@ -5,6 +5,7 @@ assets:
   dashboards:
     Silk - Overview: assets/dashboards/silk_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,9 +16,10 @@ assets:
       prefix: silk.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10250
     source_type_name: Silk
   monitors:
-    Latency high: assets/recommended_monitors/latency_high.json
+    Latency high: assets/monitors/latency_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -25,8 +27,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
-- data store
+- data stores
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/silk/README.md
 display_on_public_website: true
@@ -34,9 +37,8 @@ draft: false
 git_integration_title: silk
 integration_id: silk
 integration_title: Silk
-integration_version: 1.2.3
+integration_version: 2.2.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: silk
 public_title: Silk
@@ -52,8 +54,9 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Cloud
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Provisioning
+  - Offering::Integration
   configuration: README.md#Setup
   description: Silk のパフォーマンスとシステム統計情報を監視します。
   media: []
@@ -62,40 +65,41 @@ tile:
   title: Silk
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Silk][1] を監視します。
+This check monitors [Silk][1] through the Datadog Agent.
 
-## セットアップ
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インストール
+### Installation
 
-Silk チェックは [Datadog Agent][3] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The Silk check is included in the [Datadog Agent][3] package.
+No additional installation is needed on your server.
 
-### コンフィギュレーション
+### Configuration
 
-1. Silk のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `silk.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル silk.d/conf.yaml][4] を参照してください。
+1. Edit the `silk.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Silk performance data. See the [sample silk.d/conf.yaml][4] for all available configuration options.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `silk` を探します。
+[Run the Agent's status subcommand][6] and look for `silk` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "silk" >}}
 
 
-### イベント
+### Events
 
-Silk インテグレーションは、Silk サーバーから発信されるイベントを記録します。イベントレベルは以下のようにマッピングされます。
+The Silk integration records events emitted by the Silk server. The event levels are mapped as the following:
 
 | Silk                      | Datadog                            |
 |---------------------------|------------------------------------|
@@ -105,18 +109,18 @@ Silk インテグレーションは、Silk サーバーから発信されるイ�
 | `CRITICAL`                | `error`                            |
 
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "silk" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
 
 [1]: https://silk.us/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/silk/datadog_checks/silk/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

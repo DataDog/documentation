@@ -10,90 +10,96 @@ further_reading:
 title: サーバーレスの警告
 ---
 
-Datadog は、エラーとパフォーマンスの問題を解決するための提案を自動的に生成し、サーバーレスアプリケーションのコストを最適化します。
+Datadog automatically generates suggestions to resolve errors and performance problems and optimizes cost for your serverless applications.
 
-[Watchdog for Serverless][1] が提供するインサイトに加え、Datadog Serverless Monitoring は、関数に関する多くの問題を検出し、**警告**を作成します。
+In addition to the insights provided by [Watchdog for Serverless][1], Datadog Serverless Monitoring detects a number of issues regarding your functions and creates **warnings**.
 
 
-## セットアップ
+## Setup
 
-Datadog は、AWS CloudWatch メトリクス、Datadog 拡張 AWS Lambda メトリクス、[Lambda `REPORT` ログライン][2]を使用して、警告を提案します。これらを設定するには、
+Datadog uses AWS CloudWatch metrics, Datadog enhanced AWS Lambda metrics, and [Lambda `REPORT` log lines][2] to suggest warnings to you. To set these up,
 
- 1. [Amazon Web Services][3] インテグレーションをセットアップします。
- 2. [Datadog Forwarder][4] を設定し、Lambda の `REPORT` ログが Datadog でインデックスに登録されていることを確認します。
- 3. 関数に対して[拡張 Lambda メトリクス][5]を有効にします。
+ 1. Set up the [Amazon Web Services][3] integration.
+ 2. Set up the [Datadog Forwarder][4] and ensure your Lambda `REPORT` logs are indexed in Datadog.
+ 3. Enable [Enhanced Lambda Metrics][5] for your functions.
 
-**注**: Datadog は、[AWS インテグレーション][3]を設定した後、すぐに [High Errors](#high-errors)、[High Duration](#high-duration)、[Throttled](#throttles)、[High Iterator Age](#high-iterator-age) 警告を生成します。個々の呼び出しで生成されたものを含む他のすべての警告には、[Datadog Forwarder][4] と[拡張 Lambda メトリクス][5]が必要です。
+**Note**: Datadog generates [High Errors](#high-errors), [High Duration](#high-duration), [Throttled](#throttles), and [High Iterator Age](#high-iterator-age) warnings out of the box after setting up the [AWS integration][3]. All other warnings, including those generated on individual invocations, require the [Datadog Forwarder][4] and [Enhanced Lambda Metrics][5].
 
-## 生成された警告
+## Generated warnings
 
-### エラー
+### Errors
 
-関数の呼び出しの 1% 以上が、選択した時間範囲のエラーでした。
+More than 1% of the function's invocations were errors in the selected time range.
 
-**解決策:** 関数のログを調べ、[Deployment Tracking][6] で最近のコードまたはコンフィギュレーションの変更を確認するか、[分散型トレーシング][7]でマイクロサービス全体の障害を探します。
+**Resolution:** Examine the function's logs, check for recent code or configuration changes with [Deployment Tracking][6], or look for failures across microservices with [distributed tracing][7].
 
-### エラー率が高い
+### High errors
 
-関数の呼び出しの 10% 以上が、選択した時間範囲のエラーでした。
+More than 10% of the function's invocations were errors in the selected time range.
 
-**解決策:** 関数のログを調べ、[Deployment Tracking][6] で最近のコードまたはコンフィギュレーションの変更を確認するか、[分散型トレーシング][7]でマイクロサービス全体の障害を探します。
+**Resolution:** Examine the function's logs, check for recent code or configuration changes with [Deployment Tracking][6], or look for failures across microservices with [distributed tracing][7].
 
-### メモリ使用率が高い
+### High memory usage
 
-選択した時間範囲内の少なくとも 1 回の呼び出しで、割り当てられたメモリの 95% 以上が使用されました。
+At least one invocation in the selected time range used over 95% of the allocated memory.
 
-[分散型トレーシング][7]は、メモリ制限が低い Lambda 関数と、過剰なメモリを使用しているアプリケーションの一部を特定するのに役立ちます。
+[Distributed tracing][7] can help you pinpoint Lambda functions with low memory limits and parts of your application using excessive amounts of memory.
 
-**解決策:** 構成された最大メモリに近い値を使用する Lambda 関数は、Lambda ランタイムによって強制終了されるリスクがあり、ユーザー向けのエラーが発生します。関数に構成されているメモリの量を増やすことを検討してください。これは AWS の請求に影響する可能性があることに注意してください。
+**Resolution:** Lambda functions using close to their maximum configured memory are at risk of being killed by the Lambda runtime, resulting in user-facing errors. Consider increasing the amount of configured memory on your function. Note that this could affect your AWS bill.
 
-### 継続時間が長い
+### High duration
 
-選択した時間範囲内の少なくとも 1 回の呼び出しが、構成されたタイムアウトの 95% を超えました。
+At least one invocation in the selected time range exceeded 95% of the configured timeout.
 
-[分散型トレーシング][7]は、アプリケーションの遅い API 呼び出しを特定するのに役立ちます。
+[Distributed tracing][7] can help you pinpoint slow API calls in your application.
 
-**解決策:** 構成されたタイムアウトに近い時間実行されている Lambda 関数は、Lambda ランタイムによって強制終了されるリスクがあります。これにより、着信リクエストへの応答が遅くなったり失敗したりする可能性があります。関数にさらに実行時間が必要になると予想される場合は、構成されたタイムアウトを増やすことを検討してください。これは AWS の請求に影響する可能性があることに注意してください。
+**Resolution:** Lambda functions running for close to their configured timeout are at risk of being killed by the Lambda runtime. This could lead to slow or failed responses to incoming requests. Consider increasing the configured timeout if you expect your function to need more execution time. Note that this could affect your AWS bill.
 
-### コールドスタート
+### Cold starts
 
-関数の呼び出しの 1% 以上が、選択した時間範囲でのコールドスタートでした。
+More than 1% of the function's invocations were cold starts in the selected time range.
 
-Datadog の[拡張メトリクス][5]および[分散型トレーシング][7]は、今日のアプリケーションに対するコールドスタートの影響を理解するのに役立ちます。
+Datadog's [enhanced metrics][5] and [distributed tracing][7] can help you understand the impact of cold starts on your applications today.
 
-**解決策:** コールドスタートは、サーバーレスアプリケーションがトラフィックの突然の増加を受信したときに発生し、関数が以前に非アクティブだったとき、または比較的一定数のリクエストを受信していたときに発生する可能性があります。ユーザーは、コールドスタートを遅い応答時間または遅延として認識する場合があります。コールドスタートに先行するには、影響を受ける Lambda 関数で[プロビジョニングされた同時実行][8]を有効にすることを検討してください。これは AWS の請求に影響する可能性があることに注意してください。
+**Resolution:** Cold starts occur when your serverless applications receive sudden increases in traffic, and can occur when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. To get ahead of cold starts, consider enabling [provisioned concurrency][8] on your impacted Lambda functions. Note that this could affect your AWS bill.
 
-### メモリ不足
+### Out of memory
 
-選択した時間範囲内の少なくとも 1 回の呼び出しでメモリが不足しました。
+At least one invocation in the selected time range ran out of memory.
 
-**解決策:** 割り当てられた量を超えるメモリを使用する Lambda 関数は、Lambda ランタイムによって強制終了される可能性があります。ユーザーにとって、これはアプリケーションへのリクエストの失敗のように見える場合があります。[分散型トレーシング][7]は、過剰な量のメモリを使用してアプリケーションの一部を特定するのに役立ちます。Lambda 関数が使用できるメモリの量を増やすことを検討してください。
+**Resolution:** Lambda functions that use more than their allotted amount of memory can be killed by the Lambda runtime. To users, this may look like failed requests to your application. [Distributed tracing][7] can help you pinpoint parts of your application using excessive amounts of memory. Consider increasing the amount of memory your Lambda function is allowed to use.
 
 ### Timeouts
 
-選択した時間範囲内の少なくとも 1 回の呼び出しがタイムアウトしました。これは、関数が設定されたタイムアウトまたはグローバル Lambda タイムアウトより長く実行された場合に発生します。
+At least one invocation in the selected time range timed out. This occurs when your function runs for longer than the configured timeout or the global Lambda timeout.
 
-**解決策:** [分散型トレーシング][7]は、API やその他のマイクロサービスへの遅いリクエストを特定するのに役立ちます。関数のタイムアウトを増やすことも検討できます。これは AWS の請求に影響する可能性があることに注意してください。
+**Resolution:** [Distributed tracing][7] can help you pinpoint slow requests to APIs and other microservices. You can also consider increasing the timeout of your function. Note that this could affect your AWS bill.
 
 ### Throttles
 
-選択した時間範囲での呼び出しの 10% 以上が抑制されました。サーバーレス Lambda アプリケーションが適切な[同時実行性][9]なしで高レベルのトラフィックを受信すると、抑制が発生します。
+More than 10% of invocations in the selected time range were throttled. Throttling occurs when your serverless Lambda applications receive high levels of traffic without adequate [concurrency][9].
 
-**解決策:** [Lambda 同時実行メトリクス][10]を確認し、`aws.lambda.concurrent_executions.maximum` が AWS アカウントの同時実行レベルに近づいているかどうかを確認します。その場合は、予約済みの同時実行を構成するか、AWS にサービスクォータの増加をリクエストしてください。これは AWS の請求に影響する可能性があることに注意してください。
+**Resolution:** Check your [Lambda concurrency metrics][10] and confirm if `aws.lambda.concurrent_executions.maximum` is approaching your AWS account concurrency level. If so, consider configuring reserved concurrency, or request a service quota increase from AWS. Note that this may affect your AWS bill.
 
-### イテレータ経過時間が長い
+### High iterator age
 
-関数のイテレータが 2 時間以上経過していました。イテレータの経過時間は、ストリームから処理されたレコードの各バッチの最後のレコードの経過時間を測定します。この値が増加すると、関数がデータを十分に高速に処理できないことを意味します。
+The function's iterator was older than two hours. Iterator age measures the age of the last record for each batch of records processed from a stream. When this value increases, it means your function cannot process data fast enough.
 
-**解決策:** [分散型トレーシング][7]を有効にして、関数に大量のデータがストリーミングされている理由を特定します。関数が読み取るストリームのシャード数とバッチサイズを増やすことも検討できます。
+**Resolution:** Enable [distributed tracing][7] to isolate why your function has so much data being streamed to it. You can also consider increasing the shard count and batch size of the stream your function reads from.
 
-### オーバープロビジョン
+### Over provisioned
 
-選択した時間範囲で、割り当てられたメモリの 10% を超える呼び出しは使用されませんでした。これは、関数に必要以上の請求可能なリソースが割り当てられていることを意味します。
+No invocation in the selected time range used more than 10% of the allocated memory. This means your function has more billable resources allocated to it than it may need.
 
-**解決策:** Lambda 関数に割り当てられるメモリの量を減らすことを検討してください。これは AWS の請求に影響する可能性があることに注意してください。
+**Resolution:** Consider decreasing the amount of allocated memory on your Lambda function. Note that this may affect your AWS bill.
 
-## その他の参考資料
+### Threats detected
+
+Attack attempts were detected targeting the serverless application. 
+
+**Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -107,3 +113,4 @@ Datadog の[拡張メトリクス][5]および[分散型トレーシング][7]�
 [8]: https://www.datadoghq.com/blog/monitor-aws-lambda-provisioned-concurrency/
 [9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [10]: /ja/integrations/amazon_lambda/#metrics
+[11]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY

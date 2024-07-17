@@ -22,6 +22,7 @@ author:
   support_email: namrata.deshpande4@gmail.com
 categories:
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: sortdb
 integration_title: Sortdb
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sortdb
 public_title: Sortdb
@@ -47,6 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: sortdb の監視を Datadog がサポート
   media: []
@@ -58,57 +59,57 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Sortdb][1] サービスからメトリクスをリアルタイムに取得して、以下のことができます。
+Get metrics from [Sortdb][1] service in real time to:
 
-- Sortdb 統計を可視化および監視できます。
-- Sortdb フェイルオーバーに関する通知を受けることができます。
-- 複数インスタンスの健全性をチェックし、統計を取得します。
+- Visualize and monitor Sortdb stats.
+- Be notified about Sortdb failovers.
+- Check health of and get stats from multiple instances
 
-## 計画と使用
+## Setup
 
-Sortdb チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Sortdb check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sortdb チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Sortdb check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-sortdb==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Sortdb の[メトリクス](#メトリクスの収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `sortdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sortdb.d/conf.yaml][6] を参照してください。
+1. Edit the `sortdb.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Sortdb [metrics](#metric-collection). See the [sample sortdb.d/conf.yaml][6] for all available configuration options.
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `sortdb` を探します。
+[Run the Agent's status subcommand][8] and look for `sortdb` under the Checks section.
 
-## 互換性
+## Compatibility
 
-SortDB チェックは、すべての主要プラットフォームと互換性があります。
+The SortDB check is compatible with all major platforms.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][9] を参照してください。
+See [metadata.csv][9] for a list of metrics provided by this integration.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "sortdb" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-SortDB チェックには、イベントは含まれません。
+The SortDB check does not include any events.
 
 
 [1]: https://github.com/jehiah/sortdb

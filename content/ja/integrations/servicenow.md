@@ -4,21 +4,21 @@ categories:
 - incidents
 - issue tracking
 - notifications
+custom_kind: integration
 dependencies: []
-description: Datadog アラートからチケットを自動的に生成および更新
+description: Have your Datadog alerts automatically generate and update tickets.
 doc_link: https://docs.datadoghq.com/integrations/servicenow/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/
-  tag: ブログ
-  text: Datadog アラートからの ServiceNow チケットの作成
+  tag: Blog
+  text: Create ServiceNow tickets from Datadog alerts
 git_integration_title: servicenow
 has_logo: true
 integration_id: ''
 integration_title: ServiceNow
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: servicenow
 public_title: Datadog-ServiceNow インテグレーション
@@ -49,7 +49,7 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 ### Datadog で ServiceNow タイルを構成する
 
 1. Datadog で、Integrations ページの [ServiceNow インテグレーションタイル][2]に移動します。
-2. `Add New Instance` をクリックします。
+2. **Add New Instance** をクリックします。
 3. ServiceNow ドメインのサブドメインであるインスタンス名、`<インスタンス>.service-now.com` を追加します。
 4. ServiceNow インスタンスのユーザー名とパスワードを追加します。
 
@@ -61,7 +61,7 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 
 ### Datadog 用サービスグラフコネクタ
 
-[Datadog 用サービスグラフコネクタ][3]により、Datadog によって検出された新しいリソースの CMDB に、サーバーとデータベースの構成アイテム (CI) が自動的に入力されます。サービスグラフコネクタは ServiceNow [ストア][4]から入手可能です。
+[Observability - Datadog 用サービスグラフコネクタ][3]により、Datadog によって検出された新しいリソースの CMDB に、サーバーとデータベースの構成アイテム (CI) が自動的に入力されます。サービスグラフコネクタは ServiceNow [ストア][4]から入手可能です。
 
 コンフィギュレーションについては、サービスグラフコネクタのガイドに記載されたセットアップ手順に従ってください。
 
@@ -96,7 +96,7 @@ Datadog の[イベントエクスプローラー][5]で、検索クエリを `so
 
 {{< img src="integrations/servicenow/ingestion-progress.jpg" alt="取り込み実行中のスクリーンショット" >}}
 
-#### ヘルプ
+#### Troubleshooting
 
 ホストのタグ付けが正しく機能するためには、以下のことがシステムで正しいことを確認してください。
 
@@ -115,7 +115,7 @@ Datadog の[イベントエクスプローラー][5]で、検索クエリを `so
 
 サービス取り込みを使用すると、ServiceNow CMDB から Datadog [サービスカタログ][6]にサービスを取り込むことができます。
 
-#### 計画と使用
+#### Setup
 
 サービスデータの取り込みを有効にするには
 1. ServiceNow インスタンスで、サービスカタログを充実させたいすべてのサービスを返す [Query Builder][7] クエリを構成します。
@@ -131,7 +131,7 @@ Datadog にサービスデータが反映されるのは、クエリのスケジ
 
 {{< img src="integrations/servicenow/service-metadata.jpg" alt="ServiceNow から入力されたメタデータを示す Service Configuration パネルのスクリーンショット" >}}
 
-#### ヘルプ
+#### Troubleshooting
 
 サービスの取り込みが正しく機能するためには、以下のことがシステムで正しいことを確認してください。
 
@@ -140,18 +140,29 @@ Datadog にサービスデータが反映されるのは、クエリのスケジ
 - Query Builder クエリで構成されるすべての CI には **1** ラベルが必要です。これにより、パーサーがサポートしない重複した CI を作成していないことを確認できます。
 
 ## ITOM と ITSM のセットアップ
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management インテグレーションは、{{< region-param key=dd_datacenter code="true" >}} サイトではサポートされていません。
+</div>
+{{% /site-region %}}
 
-Datadog インテグレーションを @-mentions と Case Management に使用するには、以下の手順に従ってください。
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Incident Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
+
+Datadog インテグレーションをモニター、Case Management、および Incident Management に使用するには、以下の手順に従ってください。
 
 1. [最新の Datadog Update Set のインストール](#install-the-datadog-update-set)
-2. [Datadog アカウントのアクセス許可の設定](#permissions)
-3. [ITOM と ITSM で使用するための Datadog の構成](#configuring-datadog-for-use-with-itom-and-itsm-modules)
+2. [Datadog 用の正しい権限を持つ ServiceNow アカウントの作成](#create-a-servicenow-account-with-correct-permissions-for-datadog)
+3. [ITOM と ITSM で使用するための Datadog アプリケーションの構成](#configure-datadog-applications-for-use-with-itom-and-itsm-modules)
 
 ### Datadog Update Set のインストール
 
-最新のアップデートセットはこちらからダウンロードしてください: [`Datadog-Snow_Update_Set_v2.4.3.xml`][9]
+Download the latest Update Set here: [`Datadog-Snow_Update_Set_v2.5.2.xml`][9]
 
-**注**: Case Management とのインテグレーションは、v2.4.0 以降でのみサポートされています。
+**注**: Case Management とのインテグレーションは、v2.4.0 以降でのみサポートされています。Incident Management とのインテグレーションおよび Case Management との双方向同期は、v2.5.0 以降でのみサポートされます。
 
 ServiceNow で以下を実行します。
 
@@ -159,32 +170,47 @@ ServiceNow で以下を実行します。
 2. XML ファイルをインポートすると、Update Set の状態が `Loaded` になります。Update Set の名前をクリックして、変更をプレビューします。
 3. Update Set をプレビューしてエラーがないことを確認したら、**Commit Update Set** を選択してアプリケーションをお使いのシステムにマージします。
 
-セットアップ完了後、ServiceNow のナビゲーションメニューで **Datadog** を検索し、4 つのテーブルにアクセスします。
-- `Datadog Incident`
-- `Datadog Event`
-- `Datadog Case Incident`
-- `Datadog Case Event`
+セットアップ完了後、ServiceNow のナビゲーションメニューで **Datadog** を検索し、5 つのテーブルと双方向同期セットアップ用の構成ページにアクセスします。
+- `Configuration`
+- `Datadog Incidents ITSM`
+- `Datadog Cases ITOM` (旧称: `Datadog Case Event`)
+- `Datadog Cases ITSM` (旧称: `Datadog Case Incident`)
+- `Datadog Monitors ITOM` (旧称: `Datadog Event`)
+- `Datadog Monitors ITSM` (旧称: `Datadog Incident`)
 
-### ヘルプ
 
-インポートテーブルにアクセスして変換マップを適用するには、ServiceNow ユーザーに次のロールが必要です。
+### Datadog の適切な権限を持つ ServiceNow アカウントを作成
 
-- `x_datad_datadog.user`
-- `import_set_loader`
+インテグレーションを使用するには、ServiceNow ユーザー (例えば、ユーザー名 “datadog”) を作成し、次のすべてのロールを割り当てます。
+
+- `x_datad_datadog.user` および
+- `import_set_loader` および
 - `import_transformer`
 
-**Incident** テーブルまたは **Event** テーブルに直接通知を送信する場合、ServiceNow ユーザーは以下のロールが必要です。
+#### ITOM および ITSM モジュールへのモニター通知の直接送信
+ITOM モジュールの **Event** テーブルまたは ITSM モジュールの **Incident** テーブルに直接通知を送信する場合、ServiceNow ユーザーは以下のロールがどちらも必要です。
 
-- `x_datad_datadog.user`
-- `ITIL`
-- `evt_mgmt_integration` 
+- `ITIL` および
+- `evt_mgmt_integration`
 
-### ITOM および ITSM モジュールで使用するために Datadog を構成する
+#### Datadog Case Management との双方向同期
+解決のためにインシデントの状態を同期する場合、ServiceNow ユーザーは次のロールのいずれかが必要です。
+
+- `ITIL` または
+- `list_updater` または
+- `sn_incident_write`
+
+クローズのためにインシデントの状態を同期する場合、ServiceNow ユーザーは以下のロールが必要です。
+- `ITIL_admin`
+
+**注**: この ServiceNow ユーザーが ServiceNow のチケットに対して行った手動更新は、Datadog に同期されません。
+
+### ITOM および ITSM モジュールで使用するために Datadog アプリケーションを構成する
 **注**: 以下のステップを完了する前に、Datadog インテグレーションページで ServiceNow タイルをセットアップする必要があります。
 
 Datadog で `@servicenow-<INSTANCE_NAME>` を使用した Monitor Notifications の場合、ServiceNow タイルで通知を送信する中間テーブルを選択します。
 
-1. Monitor Notifications ドロップダウンから、通知用のテーブルを選択します。
+1. ServiceNow インテグレーションタイルの Monitor Notifications ドロップダウンから、モニター通知が書き込まれるテーブルを選択します。
 2. インテグレーションが正しくセットアップされているかを検証するには、モニターまたはイベント通知に `@servicenow-<INSTANCE_NAME>` を追加します。未加工のデータが中間テーブルの行に挿入され、作成したマッピングと変換で指定されている ServiceNow テーブルに転送されます。
 3. ServiceNow で[変換マップを使用](#customize-data-with-transform-maps)して、テーブルに送信されるデータのフォーマットをカスタマイズします。
 4. Datadog 変数またはカスタム文字列を使用して、通知ペイロードをカスタマイズします。
@@ -195,16 +221,36 @@ Datadog の Case Management を使用している場合、ServiceNow タイル�
 2. インテグレーションが正しくセットアップされていることを確認するには、Datadog の Case Management に移動し、Create ServiceNow Incident を選択します。インスタンスとオプションの割り当てグループを選択し、Create をクリックします。
 3. ServiceNow で[変換マップを使用](#customize-data-with-transform-maps)して、テーブルに送信されるデータのフォーマットをカスタマイズします。
 
-**注**: `Datadog Case Event` テーブルは更新用にセットアップされていません。このバージョンでは `Datadog Case Incident` テーブルの使用を推奨します。
+**注**: `Datadog Cases ITOM` テーブルは更新用にセットアップされていません。このバージョンでは `Datadog Cases ITSM` テーブルの使用を推奨します。
 
-{{< img src="integrations/servicenow/servicenow-itxm-tile-setup.png" alt="モニター通知とケース管理を備えた ServiceNow インテグレーションタイルのインスタンス" >}}
+{{< img src="integrations/servicenow/servicenow-itxm-tile-setup-2024.png" alt="モニター通知、カスタム通知ペイロード、ケース管理を備えた ServiceNow インテグレーションタイルのインスタンス" >}}
 
-### 変換マップを使用してデータをカスタマイズする
+#### 状態とコメントを Case Management と双方向に同期
 
-**Datadog Incident** および **Datadog Case Incident** テーブルは、変換マップを使用して Datadog レコードを ServiceNow インシデントに変換します。
-同様に、**Datadog Event** および **Datadog Case Event** は、Datadog レコードを ServiceNow イベントに変換します。
+ServiceNow での編集によって Datadog の関連するケースが更新されるようにするには、`x_datad_datadog.user` ロールと `admin` ロールを持つ ServiceNow ユーザーが、ServiceNow で **ITOM/ITSM Integration for Datadog** アプリのインストール設定を構成する必要があります。
 
-## ヘルプ
+1. 左上の **All** をクリックし、フィルターに `ITOM/ITSM Integration for Datadog` と入力し、フィルターリストに表示される **Configuration** リンクをクリックして、**ITOM/ITSM Integration for Datadog** アプリの構成設定ページに移動します。
+1. Datadog データセンターサイトを選択します。
+1. **Organization Settings** にある Datadog API キーを **API Key** フィールドに貼り付けます。
+1. **Organization Settings** にある Datadog Service Account Application Key を **Application Key** フィールドに貼り付けます。
+1. Enabled チェックボックスをチェックし、構成の変更を保存します。
+
+ServiceNow のインストール設定を構成した後、Datadog Case Management に戻り、[インテグレーションを構成][10]します。
+
+**注**: このセットアップでは、ユーザーの Application Key ではなく、Service Account Application Key を使用することが重要です。ユーザーの Application Key は、ユーザーのアカウント権限に紐付けられます。ユーザーの権限が減少したり、ユーザーが非アクティブになったりすると、ServiceNow と Datadog 間の双方向同期が停止します。 Service Account Application Key は、個々のユーザーには紐付けられないので、双方向同期がユーザーアカウントの変更によって影響を受けることはありません。
+
+{{< img src="integration/servicenow/datadog_sync_configuration.png" alt="ServiceNow の変更を Datadog で同期するための ServiceNow の構成設定" >}}
+
+#### 変換マップによるモニター通知データのカスタマイズ
+
+**Datadog Monitors ITSM** および **Datadog Cases ITSM** テーブルは、変換マップを使用して Datadog レコードを ServiceNow インシデントに変換します。
+同様に、**Datadog Monitors ITOM** および **Datadog Cases ITOM** は、Datadog レコードを ServiceNow イベントに変換します。
+
+**Datadog Monitors ITOM** および **Datadog Monitors ITSM** テーブルでは、変換マップを使用して、Datadog レコードをそれぞれ ServiceNow イベントおよびインシデントに変換します。Datadog 構成タイルで通知ペイロードをカスタマイズし、ServiceNow で変換マップを拡張することで、これらのテーブルの ServiceNow イベントとインシデント情報をカスタマイズすることができます。
+
+**注**: **Datadog Cases ITOM** および **Datadog Cases ITSM** テーブルも同様に変換マップを使用しますが、Datadog ケースのペイロードはカスタマイズできないため、変換マップのカスタマイズは Case Management で使用することは推奨されません。
+
+## トラブルシューティング
 
 ServiceNow のテーブルにイベントが表示されず、代わりに
 
@@ -221,7 +267,7 @@ ServiceNow のテーブルにイベントが表示されず、代わりに
 
   ServiceNow ユーザーは、インポートテーブルにアクセスできるように、`rest_service` および `x_datad_datadog.user` ロールが必要です。インシデントテーブルまたはイベントテーブルのいずれかに直接通知を送信する従来の方法を使用している場合は、`itil` および `evt_mgmt_integration` のアクセス許可が必要です。
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問い合わせください。
 
 ## ナレッジベース
 
@@ -247,7 +293,7 @@ ServiceNow が Datadog アカウントに接続されると、受信したアラ
 
 ### インシデント優先度のフィールドマッピング
 
-ServiceNow インシデントの `priority` フィールドは読み取り専用で、[優先度ルックアップ規則][11]を使用してのみ更新することができます。
+ServiceNow インシデントの `priority` フィールドは読み取り専用で、[優先度ルックアップ規則][12]を使用してのみ更新することができます。
 
 ServiceNow のインシデント優先度を計算するために、モニターで `Impact` と `Urgency` を定義します。
 
@@ -261,7 +307,7 @@ ServiceNow のインシデント優先度を計算するために、モニター
 
 ### カスタムマッピングの定義
 
-テーブルの 1 つ、例えば **Datadog Incident Tables** をクリックし、レコードの一番下までスクロールすると、関連付けられている変換マップへのリンクが表示されます。
+テーブルの 1 つ、例えば **Datadog Monitors ITSM Tables** をクリックし、レコードの一番下までスクロールすると、関連付けられている変換マップへのリンクが表示されます。
 
 ### マッピングの確認
 
@@ -275,7 +321,7 @@ ServiceNow のインシデント優先度を計算するために、モニター
 
 **注**:
 
-- ソースは、選択したインポートセットテーブル (ここでは、Datadog Incident Tables)、ターゲットは、イベントが格納される実際のインシデントテーブル (またはイベントテーブル) です。
+- ソースは、選択したインポートセットテーブル (ここでは、Datadog Monitors ITSM Tables)、ターゲットは、イベントが格納される実際のインシデントテーブル (またはイベントテーブル) です。
 - フィールドマッピングは、レコードの下部にあります。いくつかの基本的なマッピングが含まれています。ここで、含めるフィールドを選択したり、形式を定義したり、ServiceNow インスタンス内のターゲットフィールドを選択したりします。
 
 ### 新しいフィールドマッピングの追加
@@ -292,7 +338,7 @@ ServiceNow のインシデント優先度を計算するために、モニター
 
 {{< img src="integrations/servicenow/servicenow-script-example.png" alt="servicenow インテグレーション" >}}
 
-**注:** インテグレーションタイルのカスタムフィールドをマッピングする場合、Datadog イベントマップとインシデント変換マップのいずれかに次のマッピングスクリプトを使用できます。この例では、フィールド `my_field` がインテグレーションタイルのカスタムフィールドとして定義されています。
+**注:** インテグレーションタイルのカスタムフィールドをマッピングする場合、Datadog Monitors ITSM マップと ITSM Transform マップのいずれかに次のマッピングスクリプトを使用できます。この例では、フィールド `my_field` がインテグレーションタイルのカスタムフィールドとして定義されています。
 ```
 answer = (function transformEntry(source)
 {
@@ -317,12 +363,13 @@ answer = (function transformEntry(source)
 
 [1]: https://www.servicenow.com/community/now-platform-articles/servicenow-versions-release/ta-p/2312014
 [2]: https://app.datadoghq.com/integrations/servicenow
-[3]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/26b85b762f6a1010b6a0d49df699b6fe
+[3]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/c877cb86687e0050f8774bfad236c950/1.2.1
 [4]: https://store.servicenow.com/
 [5]: https://app.datadoghq.com/event/explorer
 [6]: https://docs.datadoghq.com/ja/tracing/service_catalog/
 [7]: https://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/configuration-management/task/use-cmdb-query-builder.html
 [8]: https://docs.datadoghq.com/ja/tracing/service_catalog/adding_metadata/
-[9]: https://docs.datadoghq.com/resources/xml/Datadog-Snow_Update_Set_v2.4.3.xml
-[10]: https://docs.datadoghq.com/ja/help/
-[11]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
+[9]: https://docs.datadoghq.com/resources/xml/Datadog-Snow_Update_Set_v2.5.2.xml
+[10]: https://docs.datadoghq.com/ja/service_management/case_management/settings#servicenow
+[11]: https://docs.datadoghq.com/ja/help/
+[12]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html

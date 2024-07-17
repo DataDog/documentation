@@ -5,11 +5,13 @@ assets:
   dashboards:
     TypingDNA ActiveLock: assets/dashboards/TypingDNAActiveLock.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10339
     source_type_name: TypingDNA ActiveLock
 author:
   homepage: https://www.typingdna.com/contact
@@ -19,6 +21,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/typingdna_activelock/README.md
 display_on_public_website: true
@@ -28,7 +31,6 @@ integration_id: typingdna-activelock
 integration_title: TypingDNA ActiveLock
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: typingdna_activelock
 public_title: TypingDNA ActiveLock
@@ -55,6 +57,7 @@ tile:
   title: TypingDNA ActiveLock
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 
@@ -67,9 +70,9 @@ tile:
 Datadog でデータを視覚化するためには、カスタム ActiveLock アプリを構成してインストールする必要があります。これは、会社のすべてのコンピューターに同じようにインストールします。
 
 
-## セットアップ
+## Setup
 
-### コンフィギュレーション
+### Configuration
 
 Datadog API キーを生成するには
 
@@ -93,13 +96,13 @@ Datadog で ActiveLock のログを見るには、[ログエクスプローラ�
 ダッシュボードにアクセスするには、[ダッシュボードリスト][7]に移動して、**TypingDNA ActiveLock** ダッシュボードを検索します。
 
 
-## 収集データ
+## Data Collected
 
-### ログの収集
+### 収集データ
 
 TypingDNA ActiveLock のログは、各アプリケーションから直接 Datadog に収集され送信されます。
 
-## トラブルシューティング
+## Troubleshooting
 
 ヘルプが必要ですか？[Datadog][8] または [TypingDNA サポート][5]にご連絡ください。
 

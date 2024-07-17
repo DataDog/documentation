@@ -18,6 +18,7 @@ categories:
 - notifications
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,7 +27,6 @@ integration_id: sedai-sedai-license
 integration_title: Sedai
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -82,37 +82,40 @@ tile:
     image_url: images/sedai_7.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/autonomous-cloud-management-aws-lambda-sedai-datadog/
   support: README.md#Support
   title: Sedai
   uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
-## 概要
+## Overview
 
-Sedai は、本番環境をプロアクティブに管理し、問題を防止して可用性、パフォーマンス、およびクラウドコストを改善する自律型クラウドプラットフォームです。SRE のためのインテリジェントな オートパイロットとして、Sedai は監視データを独自に検出、優先順位付け、分析し、しきい値なしに本番環境で安全かつ自律的に行動します。
+Sedai is an autonomous cloud platform that proactively manages production environments to prevent issues and improve availability, performance, and cloud costs. As an intelligent autopilot for SREs, Sedai independently detects, prioritizes, and analyzes monitoring data to safely and autonomously act in production without thresholds.
 
-ソフトウェアライセンスと Datadog インテグレーションを組み合わせることで、Sedai が本番環境で自律的に実行するアクションについて、Datadog で通知を受け取ることができます。
+Pair our software license with our Datadog integration to receive notifications in Datadog about actions that Sedai autonomously executes in your production environments.
 
-### UDS の仕組み
+### How it works
 
-* **エージェントレス:** クラウドアカウントにシームレスに接続し、本番環境を自動的に検知・把握します。
+* **Agentless:** Seamlessly connects to your cloud accounts and automatically discovers and understands production environments.
 
-* **構成不要:** Datadog API に簡単に接続し、メトリクス動作をインテリジェントに識別し、優先順位をつけて学習します。
+* **Configuration-free:** Easily connects to Datadog API and intelligently identifies, prioritizes and learns metric behavior.
 
-* **プロアクティブアクション:** お客様に代わって本番稼動を安全に行い、リソースの可用性問題を回避し、常に最適な状態で稼動することを保証します。
+* **Proactive actions:** Safely acts in production on your behalf to ensure that resources avoid availability issues and run optimally at all times.
 
-## Agent
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Sedai にお問い合わせください。
+For support or feature requests, contact Sedai through the following channel:
 
-- メール: [support@sedai.io][5]
+- Email: [support@sedai.io][5]
 
-### その他の参考資料
+### Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Sedai と Datadog で AWS Lambda のデプロイを自律的に最適化][6]
+- [Autonomously optimize AWS Lambda deployments with Sedai and Datadog][6]
 
 [1]: mailto:support@sedai.io
 [2]: https://app.datadoghq.com/integrations/sedai
@@ -121,4 +124,4 @@ Sedai は、本番環境をプロアクティブに管理し、問題を防止�
 [5]: mailto:support@sedai.io
 [6]: https://www.datadoghq.com/blog/autonomous-cloud-management-aws-lambda-sedai-datadog/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/sedai-sedai-license" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/sedai-sedai-license" target="_blank">Click Here</a> to purchase this application.

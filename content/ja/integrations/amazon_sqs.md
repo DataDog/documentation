@@ -27,6 +27,7 @@ categories:
 - metrics
 - cloud
 - log collection
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,7 +36,6 @@ integration_id: amazon-sqs
 integration_title: Amazon SQS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_sqs
 public_title: Amazon SQS
@@ -64,9 +64,9 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 このインテグレーションを有効にすると、Datadog にすべての SQS メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -100,9 +100,9 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 トリガーが追加されたら、[Datadog ログエクスプローラー][8]を使用してログを確認します。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_sqs" >}}
 
 

@@ -21,6 +21,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_check_point/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: snmp-check-point
 integration_title: Check Point
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_check_point
 public_title: Check Point
@@ -48,10 +48,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Check Point のネットワークデバイスから SNMP メトリクスを収集します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: Check Point
 ---
@@ -59,31 +63,31 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Check Point は、ネットワークセキュリティをはじめとする IT セキュリティのためのソフトウェアおよびハードウェア製品を提供している企業です。
+Check Point is a provider of software and hardware products for IT security, including network security.
 
-Check Point とのインテグレーションを構成し、Check Point ファイアウォールなどのデバイスから SNMP メトリクスを収集します。
+Configure the Check Point integration and collect SNMP metrics from devices such as Check Point firewalls.
 
-## 計画と使用
+## Setup
 
-SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][1]のドキュメントを参照してください。
+To install and configure the SNMP integration, see the [Network Device Monitoring][1] documentation.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-監視対象となるメトリクスの詳細については、[収集される SNMP データ][2]のセクションを参照してください。
+For details of monitored metrics see the [SNMP Data Collected][2] section.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-* [Datadog での SNMP モニタリング][4]
+* [Monitor SNMP with Datadog][4]
 
 
 

@@ -1,29 +1,30 @@
 ---
 code_lang: サーバーレス
 code_lang_weight: 90
+kind: documentation
 title: サーバーレス互換性要件
 type: multi-code-lang
 ---
 
-ASM は以下のプラットフォームとライブラリに対してサーバーレス機能を提供します。
+Application Security provides serverless capability for the following platforms and libraries:
 
 {{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
-## APM に Datadog Agent を構成する
+## AWS Lambda
 **注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
 
 |タイプ               | Threat Detection  |  Software Composition Analysis (SCA)  | コードセキュリティ     |
 | ---       |   ---                     |           ----                    |           ----                            |
-| テスト結果          | {{< X >}}             |                               |                       |
-| ステップの高度なオプション      | {{< X >}}             |                                   |                       |
+| Java          | {{< X >}}             |                               |                       |
+| .NET      | {{< X >}}             |                                   |                       |
 | Node      | {{< X >}}             | beta                          |                       |
-| ブラウザテスト    | {{< X >}}             | beta                          |                       |
-| 構成      | {{< X >}}             |                               |                       |
-| ディメンショニング       |                   |                           |                       |
-| プライベートロケーション        | {{< X >}}             |                           |                       |
+| Python    | {{< X >}}             | beta                          |                       |
+| Ruby      | {{< X >}}             |                               |                       |
+| PHP       |                   |                           |                       |
+| Go        | {{< X >}}             |                           |                       |
 
 ### 対応するトリガータイプ
-ASM Threat Detection は、HTTP リクエストを関数の入力としてのみサポートします。これは、攻撃者がサーバーレスアプリケーションを悪用する可能性が最も高いチャンネルだからです。HTTP リクエストは通常、次のような AWS サービスからやってきます。
+Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
 - API Gateway v1 (Rest API)
 - API Gateway v2 (HTTP API)
@@ -51,37 +52,37 @@ Go
 : 
 
 
-## Kubernetes Resource Utilization
+## Google Cloud Run
 
-<div class="alert alert-info">ASM サーバーレスの Google Cloud Run サポートはベータ版です</a>。</div>
+<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in beta</a>.</div>
 
 **注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
 
-|タイプ               | Threat Detection  |  OSS の脆弱性管理 | コードレベルの脆弱性管理   |
+|タイプ               | Threat Detection  |  Software Composition Analysis    | Code Security     |
 | ---       |   ---                     |           ----                    |           ----                            |
-| テスト結果          | beta          | beta                              |                       |
-| モニタリング      | beta          | beta                                  |                       |
+| Java          | beta          | beta                              |                       |
+| .NET      | beta          | beta                                  |                       |
 | Node      | beta          | beta                          |                       |
-| プライベートロケーション    | beta          | beta                          |                       |
-| ステップの記録      | beta          |  beta                             |                       |
-| テスト結果       |             |                         |                       |
-| ブラウザテスト        | beta          | beta                          |                       |
+| Python    | beta          | beta                          |                       |
+| Ruby      | beta          |  beta                             |                       |
+| PHP       |             |                         |                       |
+| Go        | beta          | beta                          |                       |
 
 
-## インフラストラクチャーリスト
+## Azure App Service
 
-サポートされるのは *Web アプリケーション*のみです。Azure 関数は、ASM ではサポートされていません。
+Only *web applications* are supported. Azure Functions are not supported.
 
 **注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
 
-|タイプ       | OS                 |Threat Detection  |  OSS の脆弱性管理  | コードレベルの脆弱性管理  |
+|タイプ       | OS                 |Threat Detection  |  Software Composition Analysis     | Code Security    |
 |-----------|--------------------|------------------|------------------------------------|------------------------------------------|
-| GRPC      | Windows、Linux     | {{< X >}}        | {{< X >}}                          | beta                                     |
-| モニタリング      | Windows、Linux     | {{< X >}}        | {{< X >}}                          |                                          |
+| Java      | Windows、Linux     | {{< X >}}        | {{< X >}}                          | beta                                     |
+| .NET      | Windows、Linux     | {{< X >}}        | {{< X >}}                          |                                          |
 | Node      | Linux              | {{< X >}}        | {{< X >}}                          | beta                                     |
-| プライベートロケーション    | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
-| ステップの記録      | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
-| テスト結果       | Linux              |                  | {{< X >}}                          |                                          |
+| Python    | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
+| Ruby      | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
+| PHP       | Linux              |                  | {{< X >}}                          |                                          |
 
 
 [1]: /ja/serverless/distributed_tracing/

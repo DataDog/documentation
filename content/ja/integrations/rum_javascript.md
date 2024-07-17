@@ -11,6 +11,7 @@ categories:
 - 言語
 - メトリクス
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: rum-javascript
 integration_title: JavaScript
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rum_javascript
 public_title: JavaScript
@@ -34,6 +34,7 @@ tile:
   - Category::Metrics
   - Category::Tracing
   - Supported OS::Any
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
   media: []
@@ -45,60 +46,60 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Datadog [JavaScript インテグレーション][1]で、JavaScript コンポーネントのパフォーマンス問題を迅速に解決します。
+With the Datadog [JavaScript integration][1], resolve performance issues quickly in JavaScript components by:
 
-- サーバーの応答速度が遅い、レンダーブロックするリソース、コンポーネント内のエラーなど、パフォーマンスボトルネックの根本原因をデバッグ
-- JavaScript のパフォーマンスデータをユーザージャーニー、サーバーサイドへの AJAX コール、ログと自動的に相関付け
-- JavaScript の重要なパフォーマンスメトリクス (Core Web Vitals など)がしきい値を下回り、ユーザーエクスペリエンスが低下した場合にエンジニアリングチームにアラートを発信
-
-
-JavaScript アプリケーションをエンドツーエンドで監視します。
-
-- スタック全体におけるユーザージャーニーを追跡、視覚化
-- ロードタイムが遅くなる根本的な原因をデバッグ。JavaScript のコード、ネットワークパフォーマンス、または基礎的なインフラストラクチャーの問題である可能性があります。
-- ユーザー ID、電子メール、名前などの属性で、すべてのユーザーセッションを分析し、コンテキストを作成
-- フロントエンドとバックエンドの開発チームのために、フルスタックモニタリングを 1 つのプラットフォームで実現
+- Debugging the root cause of performance bottlenecks, such as a slow server response time, render-blocking resource, or error inside a component
+- Automatically correlating JavaScript performance data with user journeys, AJAX calls to the server side, and logs
+- Alerting your engineering teams when crucial performance metrics for JavaScript (such as Core Web Vitals) fall below a threshold that results in a poor user experience
 
 
-## 計画と使用
+Monitor your JavaScript applications from end-to-end by:
 
-### RUM イベントの収集
+- Tracking and visualizing user journeys across your entire stack
+- Debugging the root cause of slow load times, which may be an issue with your JavaScript code, network performance, or underlying infrastructure 
+- Analyzing and contextualizing every user session with attributes such as user ID, email, name, and more
+- Unifying full-stack monitoring in one platform for frontend and backend development teams
 
-アプリケーションからリアルユーザーモニタリングのイベント収集を開始するには、[ブラウザモニタリング][2]を参照してください。
 
-### トレースの収集
+## Setup
 
-JavaScript アプリケーションのトレースを Datadog に送信し始めるには、[RUM とトレースの接続][3]をご覧ください。
+### Collect RUM events 
 
-### ログの収集
+To start collecting Real User Monitoring events from your application, see [Browser Monitoring][2]. 
 
-JavaScript アプリケーションのログを Datadog に転送し始めるには、[ブラウザログ収集][4]をご覧ください。
+### Collect traces 
 
-## リアルユーザーモニタリング
+To start sending your JavaScript application's traces to Datadog, see [Connect RUM and Traces][3].
 
-### データセキュリティ
+### Collect logs 
 
-JavaScript インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][5]を参照してください。
+To start forwarding your JavaScript application's logs to Datadog, see [Browser Log Collection][4].
 
-### イベント
+## Data Collected
 
-イベントや属性の詳細については、[RUM ブラウザデータ収集][6]を参照してください。
+### Metrics
 
-### サービスチェック
+The JavaScript integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][5].
 
-JavaScript インテグレーションには、サービスのチェック機能は含まれません。
+### Events 
 
-## ヘルプ
+For more information about events and attributes, see [RUM Browser Data Collected][6]. 
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+### Service Checks 
 
-## その他の参考資料 
+The JavaScript integration does not include any service checks.
 
-お役に立つドキュメント、リンクや記事:
+## Troubleshooting
 
-- [ブラウザモニタリング][2]
+Need help? Contact [Datadog Support][7]. 
+
+## Further Reading 
+
+Additional helpful documentation, links, and articles: 
+
+- [Browser Monitoring][2]
 
 
 

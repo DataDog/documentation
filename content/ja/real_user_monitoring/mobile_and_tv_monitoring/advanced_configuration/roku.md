@@ -5,8 +5,8 @@ code_lang: roku
 code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku ソースコード
+  tag: Source Code
+  text: Source code for dd-sdk-roku
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
@@ -14,22 +14,22 @@ title: RUM Roku の高度な構成
 type: multi-code-lang
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
+<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[Roku RUM セットアップドキュメント][2]を参照してください。
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Roku RUM setup documentation][2]. 
 
-## RUM リソースの追跡
+## Track RUM Resources
 
 ### `roUrlTransfer`
 
-`roUrlTransfer` ノードで直接行われたネットワークリクエストは追跡する必要があります。
+Network requests made directly with a `roUrlTransfer` node must be tracked. 
 
-*同期リクエスト*の場合は、Datadog の `datadogroku_DdUrlTransfer` ラッパーを使用して、リソースを自動的に追跡することができます。このラッパーは `roUrlTransfer` コンポーネントのほとんどの機能をサポートしていますが、非同期ネットワーク呼び出しに関連するものはサポートしていません。
+For *synchronous requests*, you can use Datadog's `datadogroku_DdUrlTransfer` wrapper to track the resource automatically. This wrapper supports most features of the `roUrlTransfer` component, but does not support anything related to async network calls.
 
-例えば、`GetToString` の呼び出しを行う方法を紹介します。
+For example, here's how to do a `GetToString` call:
 
 ```brightscript
     ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
@@ -39,7 +39,7 @@ type: multi-code-lang
     result = ddUrlTransfer.GetToString()
 ```
 
-*非同期リクエスト*の場合、自動インスツルメンテーションはサポートされていません。リソースを手動で追跡する必要があります。次のコードスニペットは、リクエストを RUM リソースとして報告する方法を示しています。
+For *asynchronous requests*, automatic instrumentation is not supported. You need to track the resource manually. The following code snippet shows how to report the request as a RUM Resource:
 
 ```brightscript
 sub performRequest()
@@ -80,9 +80,9 @@ sub performRequest()
 end sub
 ```
 
-### リソースのストリーミング
+### Streaming resources
 
-`Video` や `Audio` ノードを使用してメディアをストリーミングする場合、以下のように受信したすべての `roSystemLogEvent` を Datadog に転送することができます。
+Whenever you use a `Video` or an `Audio` node to stream media, you can forward all `roSystemLogEvent` you receive to Datadog as follows: 
 
 ```brightscript 
     sysLog = CreateObject("roSystemLog")
@@ -98,36 +98,36 @@ end sub
     end while
 ```
 
-## ユーザーセッションの充実
+## Enrich user sessions
 
-RUM でインスツルメンテーションされたチャンネルは、カスタムイベントを追跡することによって、ユーザーのセッション情報をさらにリッチ化し、収集される属性をより細かく制御することができます。
+After your Roku channel is instrumented with RUM, you can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
-RUM Roku SDK により自動的に取得されるデフォルトの RUM 属性に加えて、カスタム属性などのコンテキスト情報を RUM イベントに追加し、Datadog 内の可観測性を強化することも可能です。カスタム属性により、コードレベルの情報 (バックエンドサービス、セッションタイムライン、エラーログ、ネットワークの状態など) を利用して、観察されたユーザー行動 (カート内の金額、マーチャントティア、広告キャンペーンなど) をフィルターしてグループ化することができます。
+In addition to the default RUM attributes captured by the RUM Roku SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, or network health).
 
-### ユーザーを特定する
+### Identifying your users
 
-RUM セッションにユーザー情報を追加すると、次のことが簡単になります。
-* 特定のユーザーのジャーニーをたどります。
-* エラーの影響を最も受けているユーザーを把握します。
-* 最も重要なユーザーのパフォーマンスを監視します。
+Adding user information to your RUM sessions makes it easy to:
+* Follow the journey of a given user.
+* Know which users are the most impacted by errors.
+* Monitor performance for your most important users.
 
-以下の属性は**任意**ですが、**少なくとも 1 つ**提供する必要があります。
+The following attributes are **optional**, but you should provide **at least one** of them:
 
-| 属性 | タイプ   | 説明                                                                                              |
+| Attribute | Type   | Description                                                                                              |
 | --------- | ------ | -------------------------------------------------------------------------------------------------------- |
-| id        | 文字列 | 一意のユーザー識別子。                                                                                  |
-| name      | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
-| email     | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
+| id        | String | Unique user identifier.                                                                                  |
+| name      | String | User friendly name, displayed by default in the RUM UI.                                                  |
+| email     | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
-ユーザーセッションを特定するには、SDK を初期化した後などに、`datadogUserInfo` グローバルフィールドを使用します。
+To identify user sessions, use the `datadogUserInfo` global field, after initializing the SDK, for example:
 
 ```brightscript
     m.global.setField("datadogUserInfo", { id: 42, name: "Abcd Efg", email: "abcd.efg@example.com"})
 ```
 
-### カスタムグローバル属性の追跡
+### Track custom global attributes
 
-SDK により自動的に取得されるデフォルトの属性に加えて、カスタム属性などのコンテキスト情報をログと RUM イベントに追加し、Datadog 内の可観測性を強化することも可能です。カスタム属性により、コードレベルの情報 (バックエンドサービス、セッションタイムライン、エラーログ、ネットワークの状態など) を利用して、観察されたユーザー行動 (カート内の金額、マーチャントティア、広告キャンペーンなど) をフィルターしてグループ化することができます。
+In addition to the default attributes captured by the SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your Logs and RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (for example by cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
 ```brightscript
     m.global.setField("datadogContext", { foo: "Some value", bar: 123})
@@ -137,6 +137,6 @@ SDK により自動的に取得されるデフォルトの属性に加えて、�
 [2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

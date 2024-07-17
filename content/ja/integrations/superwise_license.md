@@ -15,6 +15,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -23,7 +24,6 @@ integration_id: superwise-license
 integration_title: Superwise モデル観測性
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -70,6 +70,11 @@ tile:
     image_url: images/4_4.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
+  - resource_type: documentation
+    url: https://docs.superwise.ai
   support: README.md#Support
   title: Superwise モデル観測性
   uninstallation: README.md#Uninstallation
@@ -78,26 +83,26 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
-Superwise は、企業が本番環境の機械学習 (ML) モデルの健全性を監視し、推論ストリーム全体におけるモデルのパフォーマンスと整合性の問題を迅速に検出することを支援します。Superwise は、モデルメトリクスの自動較正、イベントの分析、異常の関連付けを行うため、ML エンジニアリングチームや実務者は、いつ、どこで、なぜモデルが誤動作しているかを簡単に確認でき、問題がビジネス成果に影響を与える前に解決する時間を短縮することができます。
+## Overview
+Superwise helps businesses monitor Machine Learning (ML) model health in production to quickly detect issues with model performance and integrity across the inference stream. Superwise auto-calibrates model metrics, analyzes events, and correlates anomalies so ML engineering teams and practitioners can easily see where, when, and why models are misbehaving and accelerate time to resolution before issues impact business outcomes.
 
 
-Superwise のモデル観測性プラットフォームにより、本番用 ML をあらゆる規模で監視することができます。Datadog Marketplace を通じて Superwise のサブスクリプションを購入すると、モデル数無制限の 14 日間無料トライアルが提供されます。トライアル終了後は、最初の 3 モデルは永久に無料です。また、Superwise の料金は使用ベースなので、いつでも監視の規模を拡大または縮小することができます。詳細については、[sales@superwise.ai][1] までお問い合わせください。
+The Superwise model observability platform lets you monitor your production ML at any scale. When you purchase a subscription to Superwise through the Datadog Marketplace, you'll receive a 14 day free trial for an unlimited amount of models. After the trial expires, your first 3 models are free forever, and you can scale your monitoring up or down with Superwise's usage-based pricing at any time. For more information, contact [sales@superwise.ai][1].
 
-このタイルでは、Superwise のサブスクリプションを購入することができます。既に Superwise のアカウントをお持ちの場合は、[Superwise インテグレーションタイル][2]をクリックして Superwise Datadog インテグレーションをセットアップします。
+On this tile, you can purchase a subscription to Superwise. If you already have a Superwise account, click on the [Superwise Integration tile][2] to set up the Superwise Datadog integration.    
 
-Superwise のインテグレーションにより、Datadog ユーザーは既存の Datadog ワークフロー内で ML モデルを総合的に監視し、Superwise のメトリクスとインシデントを含めることで観測性を高め、モデルの問題をより深く調査することができます。Superwise ユーザーは、ビジネスにとって重要なカスタムメトリクスを Superwise 内で監視するように構成し、その情報を Datadog に送信して、あらゆるユースケースに対して観測性を拡張することができます。
+With the Superwise integration, Datadog users are able to monitor their ML models holistically within their existing Datadog workflow and enrich their observability to include Superwise metrics and incidents for more investigations of model issues. Superwise users can configure any custom metric that is important to the business to monitor within Superwise and send the information to Datadog to extend their observability for any use case. 
 
-## Agent
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Superwise にお問い合わせください。
+For support or feature requests, reach out to Superwise through the following channel:
 
-- メール: [support@superwise.ai][3]
+- Email: [support@superwise.ai][3]
 
-### その他の参考資料
+### Further Reading
 
-- [Datadog Marketplace の Superwise の製品を使ってモデルパフォーマンスを監視する][4]
-- [Superwise ドキュメント][5]
+- [Monitor model performance with Superwise’s offering in the Datadog Marketplace][4]
+- [Superwise Documentation][5]
 
 [1]: mailto:sales@superwise.ai
 [2]: https://app.datadoghq.com/integrations/superwise
@@ -105,4 +110,4 @@ Superwise のインテグレーションにより、Datadog ユーザーは既�
 [4]: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
 [5]: https://docs.superwise.ai
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/superwise-license" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/superwise-license" target="_blank">Click Here</a> to purchase this application.

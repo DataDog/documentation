@@ -23,6 +23,7 @@ author:
 categories:
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neutrona/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: neutrona
 integration_title: Neutrona
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: neutrona
 public_title: Neutrona
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Neutrona Telemetry
   media: []
@@ -60,56 +61,56 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Azure (ExpressRoute) への [Neutrona][1] クラウド接続サービスを監視します。
+This check monitors [Neutrona][1] cloud connectivity services to:
 
 - Azure (ExpressRoute)
 
-## 計画と使用
+## Setup
 
-Neutrona チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Neutrona check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Neutrona check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-neutrona==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Neutrona の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `neutrona.d/conf.yaml` ファイルを編集します。
-   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル neutrona.d/conf.yaml][6] を参照してください。
+1. Edit the `neutrona.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Neutrona [metrics](#metrics).
+   See the [sample neutrona.d/conf.yaml][6] for all available configuration options.
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7]
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `neutrona` を探します。
+[Run the Agent's status subcommand][8] and look for `neutrona` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "neutrona" >}}
 
 
-### ヘルプ
+### Service Checks
 
-現時点で、Neutrona には、サービスのチェック機能は含まれません。
+Neutrona does not include any service checks at this time.
 
-### ヘルプ
+### Events
 
-現時点で、Neutrona には、イベントは含まれません。
+Neutrona does not include any events at this time.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 [1]: https://telemetry.neutrona.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest

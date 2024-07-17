@@ -22,6 +22,7 @@ categories:
 - ログの収集
 - ネットワーク
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: pivotal-pks
 integration_title: Pivotal Container Service
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pivotal_pks
 public_title: Pivotal Container Service
@@ -49,6 +49,7 @@ tile:
   - Category::Orchestration
   - Supported OS::Linux
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pivotal のエンタープライズレベル Kubernetes 製品
   media: []
@@ -60,34 +61,34 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このインテグレーションは、[Pivotal Container Service][1] クラスターを監視します。
+This integration monitors [Pivotal Container Service][1] clusters.
 
-## 計画と使用
+## Setup
 
-Datadog はすでに Kubernetes とインテグレーションしているため、Pivotal Kubernetes Service (PKS) を監視するための準備が整っています。このインテグレーションと一緒に Datadog の[クラスターモニタリングタイル][2]を使用することで、クラスターの監視を行うことができます。
+Since Datadog already integrates with Kubernetes, it is ready-made to monitor Pivotal Kubernetes Service (PKS). You can use the Datadog [Cluster Monitoring tile][2] along with this integration to monitor your cluster.
 
-PKS 環境内の非ワーカーの各 VM に、Datadog Agent をインストールします。Pivotal Application Service (PAS) がインストールされていない環境では、タイルの `Resource Config` セクションを選択し、`datadog-firehose-nozzle` の `instances` を `0` に設定します。
+Install the Datadog Agent on each non-worker VM in your PKS environment. In environments without Pivotal Application Service (PAS) installed, select the `Resource Config` section of the tile and set `instances` of the `datadog-firehose-nozzle` to `0`.
 
-### メトリクスの収集
+### Metric collection
 
-PKS を監視するには、[Kubernetes][3] の Datadog インテグレーションをセットアップする必要があります。
+Monitoring PKS requires that you set up the Datadog integration for [Kubernetes][3].
 
-### 収集データ
+### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-セットアップは Kubernetes の場合とまったく同じです。
-すべてのコンテナからのログ収集を開始するには、Datadog Agent の[環境変数][4]を使用します。
+The setup is exactly the same as for Kubernetes.
+To start collecting logs from all your containers, use your Datadog Agent [environment variables][4].
 
-DaemonSets を利用して、すべてのノードで [Datadog Agent を自動的にデプロイ][5]することもできます。
+You can also take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][5].
 
-環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][6]を参照してください。
+Follow the [container log collection steps][6] to learn more about those environment variables and discover more advanced setup options.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
 [1]: https://pivotal.io/platform/pivotal-container-service
 [2]: https://network.pivotal.io/products/datadog

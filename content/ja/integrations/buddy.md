@@ -24,6 +24,7 @@ categories:
 - automation
 - developer tools
 - event management
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: buddy
 integration_title: Buddy
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: buddy
 public_title: Buddy
@@ -51,8 +51,10 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
+  description: One-click delivery automation with working website previews for web
+    developers.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -62,58 +64,58 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
-Buddy は、Web サイトやアプリケーションのビルド、テスト、デプロイに使用できる継続的インテグレーション自動化プラットフォームです。
+## Overview
+Buddy is a continuous integration automation platform that can be used to build, test, and deploy web sites and applications. 
 
-Buddy インテグレーションにより、以下のことが可能になります。
+The Buddy integration enables you to:
 
-- Buddy のデプロイメントに関するイベントを Datadog に送信できます。
-- デプロイの詳細を Datadog のメトリクスと関連付けることができます。
-- パイプラインのパフォーマンススパイクの原因を検出できます。
+- Send events about your Buddy deployments to Datadog.
+- Correlate deployment details with your Datadog metrics.
+- Detect sources of performance spikes in your pipelines.
 
-![Datadog インテグレーション][1]
+![datadog-integration][1]
 
-## 計画と使用
+## Setup
 
-- Datadog のアカウント設定で、[Integrations -> APIs][2] に移動し、**API キー**トークンをコピーします。
+- In your Datadog account settings go to [Integrations -> APIs][2] and copy the **API Key** token.
 
-- [Buddy アカウントにサインイン][3]し、追跡したいデプロイメントアクションを含むパイプラインに移動します。
+- [Sign in to your Buddy account][3] and go to the pipeline with the deployment action that you want to track.
 
-- パイプラインの末尾にあるプラス記号をクリックし、**Notifications** セクションで **Datadog** を選択します。
+- Click the plus at the end of the pipeline and select **Datadog** in the **Notifications** section.
 
-- Datadog アカウントの名前を入力し、コピーした API キーを貼り付けます。
+- Enter the name of your Datadog account and paste the API key that you copied.
 
-- [Buddy のパラメーター][4]を使用して、送信されるイベントとコンテンツのタイトルを定義します。次に例を示します。
+- Use [Buddy parameters][4] to define the title of the event and content sent, for example:
 
 ```text
-# イベントタイトル
+# Event title
 ${'${execution.pipeline.name} execution #${execution.id}'}
 
-# コンテンツ
+# Content
 ${'${execution.to_revision.revision} - ${execution.to_revision.message}'}
 ```
 
-- 準備ができたら、**Add action** をクリックしてパイプラインを実行します。すべての成功したデプロイについて、Buddy から Datadog にイベントが送信されます。
+- When ready, click **Add action** and run the pipeline. On every successful deployment, Buddy sends an event to Datadog:
 
-![スナップショット][5]
+![snapshot][5]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Buddy チェックには、メトリクスは含まれません。
+The Buddy check does not include any metrics.
 
-### ヘルプ
+### Events
 
-すべての Buddy デプロイイベントが [Datadog のイベントストリーム][6]に送信されます。
+All Buddy deployment events are sent to your [Datadog Event Stream][6]
 
-### ヘルプ
+### Service Checks
 
-Buddy チェックには、サービスのチェック機能は含まれません。
+The Buddy check does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/buddy/images/datadog-integration.png
 [2]: https://app.datadoghq.com/organization-settings/api-keys

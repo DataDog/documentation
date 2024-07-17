@@ -6,6 +6,7 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Node.js アプリケーションのインスツルメンテーション
+kind: documentation
 title: Node.js Lambda トレースとバンドラーの互換性
 ---
 
@@ -31,7 +32,14 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
         rules: [
           {
             // Provided by the Datadog Lambda layer and the Lambda Runtime.
-            exclude: ['/aws-sdk/', '/datadog-lambda-js/', '/dd-trace/'],
+            exclude: [
+              // AWS SDK v3
+              /^@aws-sdk.*/,
+              // AWS SDK v2
+              /aws-sdk/,
+              /datadog-lambda-js/,
+              /dd-trace/
+            ],
           }
         ]
       },
@@ -49,6 +57,9 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
         includeModules:
           # ... your existing configuration for includeModules
           forceExclude:
+            # @aws-sdk for the AWS SDK v3
+            - @aws-sdk
+            # aws-sdk for the AWS SDK v2
             - aws-sdk
             - datadog-lambda-js
             - dd-trace
@@ -64,6 +75,9 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
     custom:
       webpack:
         forceExclude:
+          # @aws-sdk for the AWS SDK v3
+          - @aws-sdk
+          # aws-sdk for the AWS SDK v2
           - aws-sdk
           - datadog-lambda-js
           - dd-trace
@@ -95,7 +109,9 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
     custom:
       esbuild:
         exclude: 
-          # aws-sdk is needed because it is the default value for `exclude`
+          # @aws-sdk for the AWS SDK v3
+          - @aws-sdk
+          # aws-sdk for the AWS SDK v2
           - aws-sdk
           - datadog-lambda-js
           - dd-trace

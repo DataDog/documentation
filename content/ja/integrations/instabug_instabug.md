@@ -12,6 +12,7 @@ author:
   vendor_id: instabug
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -20,7 +21,6 @@ integration_id: instabug-instabug
 integration_title: Instabug
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -67,6 +67,9 @@ tile:
     image_url: images/instabug-releases.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.instabug.com
   support: README.md#Support
   title: Instabug
   uninstallation: README.md#Uninstallation
@@ -75,37 +78,37 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
-Instabug により、モバイルアプリケーションのチームは、開発ライフサイクル全体を通じて、安定性、パフォーマンス、機能開発のバランスをとることができます。軽量な SDK をベースにした Instabug は、独自のインサイトを提供し、モバイルチームが自信を持ってリリースし、キーパフォーマンスメトリクスを調整し、エンドユーザーに影響を与える前に重要な問題を特定し解決できるようにします。
+## Overview
+Instabug allows mobile application teams to balance stability, performance, and feature development throughout the entire development lifecycle. Based on a lightweight SDK, Instabug provides a unique set of insights enabling mobile teams to release with confidence, align on key performance metrics, identify and resolve critical issues before they impact end users.
 
-Instabug を使えば、チームの可視性を高め、優れたモバイルアプリ体験を一貫して提供することができます。
+With Instabug, extend your team’s visibility and consistently deliver a superior mobile app experience.
 
-### リリース中心
-モバイルのパフォーマンスを追跡し、バージョンの採用、安定性、パフォーマンスを比較します。問題をすばやく特定し、リリースごとに問題を監視し、回帰した問題を効率的に解決します。
+### Release Centered
+Track your mobile performance and compare version adoption, stability, and performance. Quickly identify issues, monitor issues by release, and resolve regressed issues efficiently.
 
-### 統合されたパフォーマンスモニタリング
-クラッシュのないセッションにとどまらず、画面遷移の遅れ、ネットワークエラー、致命的なアプリのハングアップ、OOM クラッシュなどの問題をモニタリングしながら、単一のアプリケーションパフォーマンスメトリクスを中心にチームをまとめます。
+### Unified Performance Monitoring
+Align your team around a single application performance metric while monitoring issues beyond crash free sessions, such as slow screen transitions, network errors, fatal app hangs, OOM crashes, and more.
 
-### 包括的なデバッグ
-ログ、スクリーンショット、デバイスの詳細へのアクセスにすぐに使えるので、ユーザーが影響を受ける前に、アプリケーションのライフサイクルを通じてパフォーマンス、品質、安定性の問題を素早く特定できます。
+### Comprehensive Debugging
+Quickly identify performance, quality, or stability issues throughout the application's lifecycle before users are impacted by accessing logs, screenshots, device details, all out-of-the-box.
 
-### 設計段階からのセキュリティ
-機密性の高いビューをオーバーレイで隠し、レポートから個人情報を除外することで、ユーザーのプライバシーを保護します。Instabug は GDPR に完全に準拠しています。
+### Secure by Design
+Protect the privacy of your users by hiding sensitive views with an overlay and excluding personal information from your reports. Instabug is fully GDPR compliant.
 
-### シームレスなインテグレーション
-Jira、GitHub、Slack などのインテグレーションで、ワークフローを同期させます。
+### Seamless Integrations
+Sync your workflow with integrations including Jira, GitHub, Slack, and more.
 
-## サポート
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Instabug にお問い合わせください。
+For support or feature requests, contact Instabug through the following channel:
 
-- メール: [contactus@instabug.com][2]
+- Email: [contactus@instabug.com][2]
 
-### その他の参考資料
+### Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Instabug ドキュメント][4]
+- [Instabug Documentation][4]
 
 [1]: https://dashboard.instabug.com/signup
 [2]: mailto:contactus@instabug.com
@@ -113,4 +116,4 @@ Jira、GitHub、Slack などのインテグレーションで、ワークフロ�
 [4]: https://docs.instabug.com
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/instabug-instabug" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/instabug-instabug" target="_blank">Click Here</a> to purchase this application.

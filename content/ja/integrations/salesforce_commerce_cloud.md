@@ -18,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,7 +27,6 @@ integration_id: salesforce-commerce-cloud
 integration_title: Salesforce Commerce Cloud
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
 public_title: Salesforce Commerce Cloud
@@ -49,13 +49,13 @@ tile:
 
 Salesforce Commerce Cloud は、マルチテナント型のクラウドベースのコマースプラットフォームです。Salesforce Commerce Cloud と Datadog をインテグレーションし、[Datadog Logs][1] を使ってログを表示・パースします。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### Configuration
 
 Datadog がログデータをインポートするためのアクセスを Salesforce Commerce Cloud に許可するよう構成するには、API クライアントを作成する必要があります。そして、その API クライアントを Datadog に登録します。
 
@@ -94,21 +94,21 @@ Datadog がログデータをインポートするためのアクセスを Sales
 
 SFCC Log Center は、Datadog とは異なるログデータを表現します。例えば、大きなスタックトレースを持ついくつかのエラーログは、SFCC Log Center では 2 つのログイベントに分割され、Datadog ではスタックトレースの詳細が省略されます。この結果、2 つのシステム間でログイベントの総カウントに不一致が生じます。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Salesforce Commerce Cloud インテグレーションには、メトリクスは含まれません。
 
-### ワークフローの自動化
+### Logs
 
 Salesforce Commerce Cloud インテグレーションは、Commerce Cloud インスタンスへの webdav 接続を介してログを収集します。
 
-### ヘルプ
+### Service Checks
 
 Salesforce Commerce Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

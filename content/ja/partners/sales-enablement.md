@@ -3,77 +3,78 @@ description: Datadog のセールスエンジニアリングプロセスをリ�
 private: true
 title: パートナーセールスイネーブルメントガイド
 ---
-Datadog パートナーネットワークでは、パートナー向けに多くのリソースを提供しています。これは、セールスエンジニア、ソリューションアーキテクト、テクニカルアカウントマネージャーなど、パートナー組織で Datadog の販売に技術的な側面から関わっている人向けのトレーニングの案内です。
+The Datadog Partner Network provides many resources for partners. This is a guide to training for Sales Engineers, Solution Architects, Technical Account Managers and anyone who is involved in the technical aspects of Datadog sales at a partner organization.
 
-## Datadog の基礎知識
+## Datadog basics
 
-まず、[パートナーポータル][1]にアクセスします。ログインして、**Training** をクリックします。Sales Certification の下にある、**Get started today** をクリックします。
+First, head over to the [Partner Portal][1]. Log in and click **Training**. Under Sales Certification, click **Get started today**.
 
 {{<img src="partners/portal_sales_go.png" alt="Partner Portal Sales Certification" style="max-width:734px">}}
 
-このコースでは、商機に取り組むために必要な基本的なことを学びます。
+This course walks you through the basics you need to work with your opportunity.
 
-コースでは、以下のことを支援します。
+The course helps you to:
 
-- Datadog とは何か、どのように考えるかを以下のモジュールで理解します。
-    -  モニタリングの紹介
-    -  製品分野と使用例
-    -  製品デモ
+- Understand what Datadog is and how to think about it with these modules:
+    -  Intro to Monitoring
+    -  Product Areas and Use Cases
+    -  Product Demo
 
-- Datadog と相性の良い商機を以下で見極めます。
-    -  差別化要因の紹介
-    -  技術的適合性を示す 7 つのサイン
+- Identify an opportunity that's a good fit for Datadog with:
+    -  Intro to differentiators
+    -  7 signs of technical fit
 
-- 以下で様々なオーディエンスにメッセージを明確に伝える準備をします。
-    -  顧客とペルソナ
-    -  エレベーターピッチトレーニング
+- Get ready to articulate the message to different audiences with:
+    -  Customers and Personas
+    -  Elevator pitch training
 
-## 技術デモ
+## Technical demo
 
-Datadog 販売認定を取得し、Datadog の基礎知識を身につけたら、デモ認定を取得しましょう。
+Once you have completed the Datadog Sales Certification and are familiar with the Datadog basics, you should get your Demo Certification.
 
-準備ができましたら、partner-support@datadoghq.com にお問い合わせの上、Datadog デモの配信に使用する DPN デモ組織への招待状をお受け取りください。招待状が届いたら、<a href="https://partners.datadoghq.com/" target="_blank">パートナーポータル</a>に進んでください。
+When you are ready, contact partner-support@datadoghq.com to receive an invitation to the DPN Demo org used for delivering the Datadog demo. After you've received your invitation, proceed to the 
+<a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>.
 
 {{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="max-width: 367px">}}
 
-このハンズオンビデオコースでは、Datadog のコア製品のテクニカルデモを提供する方法を学びます。さらに、Datadog の観測可能性へのアプローチと統一されたコラボレーションプラットフォームについて理解することができます。
+This hands-on video course teaches you to deliver a technical demo of core Datadog products. It further helps you understand Datadog's approach to observability and its unified collaborative platform.
 
-## 価値証明
+## Proof of value
 
-技術デモを行った後、顧客と一緒に価値証明のための初期ソリューションを開発します。この準備のために、Datadog 技術認定を取得します。
+After giving a technical demo, you'll work with the customer to develop an initial proof of value solution. To prepare for this, obtain the Datadog Technical Certification.
 
 {{<img src="partners/portal_tech_go.png" alt="Partner Portal Technical Certification" style="max-width:367px">}}
 
-このコースでは、
-- Datadog のコア製品に隠された基本を説明します
-- 各製品の市場でのポジショニングに対処します
-- カスタマーサクセスを説明します
-- 個々の製品の位置づけを明確にすることができます
+This course:
+- Explains the basics behind Datadog core products
+- Addresses the market positioning of each product
+- Describes customer success 
+- Helps you position individual product offerings
 
-価値証明のエンゲージメントを成功に導くには、より深い製品知識が必要です。Datadog ラーニングセンターが提供する [Datadog 基礎ラーニングパス][2]で始めましょう。ラーニングセンターのコースにはハンズオンラボが含まれており、Datadog の仕組みに関する技術的な理解を深めることができます。
+To guide a customer through a successful proof of value engagement, you need deeper product knowledge. Get started with the [Datadog Fundamentals Learning Path][2] offered by the Datadog Learning Center. The Learning Center courses include hands-on labs and deepen your technical understanding of how Datadog works.
 
-## 料金
+## Pricing
 
-見積もりを完成させるためには、価格設定の基本が必要です。
+In order to complete your quote, you need pricing basics.
 
-- [Datadog の価格設定][3]では、Datadog における測定単位や測定方法など、価格設定の作業方法について説明しています。
-- [顧客プラン][4]では、エンドユーザーの標準的な価格オプションの詳細について説明します。
-- 最後に、提供される割引を理解するために、パートナーポータルの価格設定タブをチェックしてください。
+- [Datadog's pricing][3] describes how pricing works, including the units of measurement and the metering approach at Datadog.
+- [Customer plans][4] provides details about standard end-customer pricing options.
+- Finally, to understand discounts offered, check out the Partner Portal pricing tab:
 
 {{<img src="partners/portal_pricing_go.png" alt="Partner Portal Pricing Info" style="max-width:734px">}}
 
-## Datadog のセールスエンジニアリングプロセス
+## The Datadog sales engineering process
 
-上記の推奨トレーニングを受講された方は、Datadog のセールスエンジニアリングプロセスを実施する準備が整っています。
+If you have gone through the recommended training outlined above, you're ready to conduct the Datadog sales engineering process:
 
-- 商機を特定する
-- 商機を見極める
-- 商機を登録する
-- 技術デモ
-- 価値証明
-- 構成、価格、見積もり
+- Identify Opportunity
+- Qualify Opportunity
+- Register Opportunity
+- Technical Demo
+- Proof of Value
+- Configure, Price, Quote
 
-ご質問は、partner-support@datadoghq.com までご連絡ください。
+Should you have any questions during your journey, contact partner-support@datadoghq.com 
 
 [1]: https://partners.datadoghq.com/
 [2]: https://learn.datadoghq.com/bundles/dd-fundamentals

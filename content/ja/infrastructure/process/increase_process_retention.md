@@ -14,6 +14,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: ブログ
   text: Kubernetes のワークロードをライトサイジングするための実践的なヒント
+kind: documentation
 title: プロセスの保持を増やす
 ---
 

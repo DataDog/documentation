@@ -31,6 +31,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: moogsoft
 integration_title: Moogsoft
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

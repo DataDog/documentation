@@ -27,6 +27,7 @@ categories:
 - インシデント
 - notifications
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: amixr
 integration_title: Amixr
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amixr
 public_title: Amixr
@@ -57,6 +57,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
   media: []
@@ -68,68 +69,68 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Slack インテグレーションを活用して Amixr でアラートを管理することができます。
+Use Amixr to manage alerts with a Slack integration:
 
-- Datadog からのアラートとその他イベントの収集・分析
-- Google カレンダー連携または Slack 内でのオンコールローテーションのセットアップ
-- 自動エスカレーションチェーンの構成
-- 電話および SMS でのアラート受信
-- GitOps でのインシデント管理のオーケストレーション
+- Collect & analyze alerts and other events from Datadog
+- Set up on-call rotations with Google calendar or in Slack
+- Configure automatic escalation chains
+- Receive alerts with phone calls and SMS
+- Orchestrate incident management with GitOps
 
 ![Amixr_Interface][1]
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-サーバーに追加でインストールする必要はありません。
+No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Amixr で構成する場合:
+In Amixr:
 
-1. *Settings > Connect New Monitorings > Datadog > How to connect* の順に開きます
-2. Datadog の Webhook URL をコピーします
+1. Go to *Settings > Connect New Monitorings > Datadog > How to connect*
+2. Copy Datadog webhook URL
 
-Datadog で以下をコピーします。
+In Datadog:
 
-1. サイドバーから **Integrations** ページを開きます。
-2. 検索バーで **webhook** を検索します。
-3. インテグレーションの名前を入力します。例: `amixr-alerts-prod`
-4. 上記ステップで確認した Webhook URL を貼り付けます。
-5. Save ボタンをクリックします。
+1. Navigate to the **Integrations** page from the sidebar.
+2. Search for **webhook** in the search bar.
+3. Enter a name for the integration, for example: `amixr-alerts-prod`.
+4. Paste the webhook URL from the above step.
+5. Click the save button.
 
-### 検証
+### Validation
 
-Datadog で以下をコピーします。
+In Datadog:
 
-1. サイドバーから **Events** ページを開きます。
-2. `@webhook-<インテグレーション名><任意の名前をここに入力>` と入力します。例: `@webhook-amixr-alerts-prod test alert`
-3. Post ボタンをクリックします。
+1. Navigate to the **Events** page from the sidebar.
+2. Type `@webhook-<integration name><YOUR TEXT HERE>`, for example: `@webhook-amixr-alerts-prod test alert`.
+3. Click the post button.
 
-Amixr で構成する場合:
+In Amixr:
 
-1. サイドバーから **Incidents** を開いて、アラートを受信したかを確認します。
+1. Navigate to **Incidents** from the sidebar to check if the alert was received.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Amixr インテグレーションには、メトリクスは含まれません。
+The Amixr integration does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-Amixr インテグレーションには、サービスのチェック機能は含まれません。
+The Amixr integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-Amixr インテグレーションには、イベントは含まれません。
+The Amixr integration does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Amixr のサポートチーム][2]までお問合せください。
+Need help? Contact [Amixr support][2].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/amixr/images/amixr-interface.png
 [2]: https://amixr.io/support/

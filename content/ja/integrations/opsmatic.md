@@ -1,8 +1,9 @@
 ---
 categories:
 - notifications
+custom_kind: integration
 dependencies: []
-description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
+description: See Opsmatic alerts and acknowledge them from your Datadog event stream.
 doc_link: https://docs.datadoghq.com/integrations/opsmatic/
 draft: false
 git_integration_title: opsmatic
@@ -11,7 +12,6 @@ integration_id: opsmatic
 integration_title: Opsmatic
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: opsmatic
 public_title: Datadog-Opsmatic インテグレーション
@@ -27,9 +27,9 @@ Opsmatic を Datadog に接続して、以下のことができます。
 - 重大な変更に迅速に気付くことができます。
 - すべてのホストのライブ状態と履歴を完全に視覚化できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 Opsmatic のイベントを DataDog のストリームに表示するには、以下のようにします。
 
@@ -38,25 +38,25 @@ Opsmatic のイベントを DataDog のストリームに表示するには、�
 
 詳細については、[Opsmatic の Web サイトでガイド][1]を参照してください。
 
-### ブラウザトラブルシューティング
+### Configuration
 
 Opsmatic インテグレーションタイルで **Install Integration** ボタンをクリックします。このインテグレーションの構成手順を行う必要があります。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Opsmatic インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### Events
 
 Opsmatic インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Opsmatic インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

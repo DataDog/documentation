@@ -37,6 +37,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - metrics
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_on_public_website: true
@@ -44,9 +45,8 @@ draft: false
 git_integration_title: php_fpm
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 3.3.0
+integration_version: 3.3.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: php_fpm
 public_title: PHP FPM
@@ -62,8 +62,9 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
+  description: Monitor process states, slow requests, and accepted requests.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -73,30 +74,30 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![PHP 概要][1]
+![PHP overview][1]
 
-## 概要
+## Overview
 
-PHP-FPM チェックは、FPM プールの状態を監視し、リクエストパフォーマンスを追跡します。
+The PHP-FPM check monitors the state of your FPM pool and tracks request performance.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The PHP-FPM check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `php_fpm.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[php_fpm.d/conf.yaml のサンプル][2]を参照してください。
+1. Edit the `php_fpm.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample php_fpm.d/conf.yaml][2] for all available configuration options:
 
    ```yaml
    init_config:
@@ -136,29 +137,29 @@ PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれていま�
        ping_reply: pong
    ```
 
-2. [Agent を再起動します][3]。
+2. [Restart the Agent][3].
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                                                                                                    |
+| Parameter            | Value                                                                                                                    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `<INTEGRATION_NAME>` | `php_fpm`                                                                                                                |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                            |
+| `<INIT_CONFIG>`      | blank or `{}`                                                                                                            |
 | `<INSTANCE_CONFIG>`  | `{"status_url":"http://%%host%%/status", "ping_url":"http://%%host%%/ping", "use_fastcgi": false, "ping_reply": "pong"}` |
 
-#### 追加情報
+#### Extras
 
-##### 複数のプール
+##### Multiple pools
 
-Kubernetes で実行されている場合は、同じプロキシサーバー、共通のシナリオを使用して複数の PHP-FPM プールを監視することができます。それには、別の PHP-FPM インスタンスを指すようにサーバーのルートを変更します。以下に NGINX コンフィギュレーションの例を示します。
+It is possible to monitor multiple PHP-FPM pools using the same proxy server, a common scenario when running on Kubernetes. To do so, modify your server's routes to point to different PHP-FPM instances. Here is an example NGINX configuration:
 
 ```text
 server {
@@ -168,58 +169,58 @@ server {
         access_log off;
         fastcgi_pass instance1_ip:instance1_port;
         include fastcgi_params;
-        fastcgi_param スクリプトのファイル名 $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
 
     location ~ ^/(status2|ping2)$ {
         access_log off;
         fastcgi_pass instance2_ip:instance2_port;
         include fastcgi_params;
-        fastcgi_param スクリプトのファイル名 $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
 }
 ```
 
-規模が大きいためにこの方法で手間がかかりすぎる場合は、`use_fastcgi` を `true` に設定して、チェックがプロキシサーバーをバイパスし、FastCGI を使用して直接 PHP-FPM と通信するようにします。`status_url` または `ping_url` からポート番号が省略された場合、デフォルトのポートは `9000` です。
+If you find this approach too tedious at scale, setting `use_fastcgi` to `true` instructs the check to bypass any proxy servers and communicate directly with PHP-FPM using FastCGI. The default port is `9000` for when omitted from `status_url` or `ping_url`.
 
-##### Unix ソケット
+##### Unix sockets
 
-PHP-FPM インストールが Unix ソケットを使用する場合、`status_url` と `ping_url` に対して以下の構文を使用して、`use_fastcgi` を有効にする必要があります。
+If your PHP-FPM installation uses unix sockets, you have to use the below syntax for `status_url`, `ping_url` and enable `use_fastcgi`:
 
-| パラメーター     | 値                             |
+| Parameter     | Value                             |
 | ------------- | --------------------------------- |
-| `status_url`  | `unix:///<ファイル_パス>.sock/status` |
-| `ping_url`    | `unix:///<ファイル_パス>.sock/ping`   |
+| `status_url`  | `unix:///<FILE_PATH>.sock/status` |
+| `ping_url`    | `unix:///<FILE_PATH>.sock/ping`   |
 | `ping_reply`  | `pong`                            |
 | `use_fastcgi` | `true`                            |
 
-**注**: オートディスカバリーを使用する場合、個別のコンテナ/タスク/ポッドで稼働する Agent は、FPM プールの Unix ソケットファイルにアクセスできません。アクセスするためには、Agent をサイドカーとして実行する必要があります。
+**Note**: With Autodiscovery, if the Agent runs in a separate container/task/pod, it doesn't have access to the Unix sockets file of your FPM pool. It order to address this, run the Agent as a sidecar.
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `php_fpm` を探します。
+[Run the Agent's `status` subcommand][3] and look for `php_fpm` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "php_fpm" >}}
 
 
-### ヘルプ
+### Events
 
-PHP-FPM チェックには、イベントは含まれません。
+The PHP-FPM check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "php_fpm" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 
 

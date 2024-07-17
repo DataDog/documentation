@@ -9,21 +9,21 @@ categories:
 - log collection
 - network
 - provisioning
+custom_kind: integration
 dependencies: []
 description: AWS Elastic Beanstalk のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk
-  tag: ブログ
-  text: AWS Elastic Beanstalk への Datadog のデプロイ
+  tag: Blog
+  text: Deploy Datadog on AWS Elastic Beanstalk
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
 integration_id: ''
 integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elasticbeanstalk
 public_title: Datadog-AWS Elastic Beanstalk インテグレーション
@@ -36,27 +36,27 @@ version: '1.0'
 
 AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣れたサーバーで、Java、.NET、PHP、Node.js、Python、Ruby、Go、および Docker を使用して開発された Web アプリケーションやサービスをデプロイおよびスケーリングするための使いやすいサービスです。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 まだ行っていない場合は、まず [Amazon Web Services インテグレーション][1]をセットアップします。Elastic Beanstalk メトリクスを受信するには、ご使用の環境で[拡張ヘルスレポート機能を有効][2]にし、[拡張ヘルスメトリクスを CloudWatch に公開][3]するように環境を構成する必要があります。
 
 **注**: これらの設定により、CloudWatch カスタムメトリクス料金が加算されます。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### Events
 
 AWS Elastic Beanstalk インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 AWS Elastic Beanstalk インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -169,7 +169,7 @@ process_config:
 
 すべての言語で、環境変数 `DD_AGENT_HOST` をゲートウェイ IP に設定します。または、以下の言語の場合、次を使用してプログラムでホスト名を設定します。
 
-##### ブラウザエラーの収集
+##### Python
 
 ```python
 from ddtrace import tracer
@@ -177,7 +177,7 @@ from ddtrace import tracer
 tracer.configure(hostname="172.17.0.1")
 ```
 
-##### .NET
+##### Node.js
 
 ```javascript
 const tracer = require('dd-trace');
@@ -185,7 +185,7 @@ const tracer = require('dd-trace');
 tracer.init({ hostname: "172.17.0.1" });
 ```
 
-##### データとコンテキストの変更
+##### Ruby
 
 ```ruby
 require 'ddtrace'
@@ -195,7 +195,7 @@ Datadog.configure do |c|
 end
 ```
 
-##### 収集データ
+##### Go
 
 ```go
 package main
@@ -401,7 +401,7 @@ func main() {
 
 ```
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

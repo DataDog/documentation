@@ -4,166 +4,168 @@ private: true
 title: データの取り込み
 ---
 
-下地ができたので、いよいよ Datadog にデータを取り込みます。
+You've laid the groundwork, and it's time to start getting data into Datadog.
 
-当初、このフェーズの目的は、あなたやクライアントにすぐに価値を提供するためのデータを集めることであるべきです。しかし、長期的には、以下のような質問をすることで、常に環境の変化を評価する継続的なプロセスであると考えるべきです。
-- あなたやクライアントは、新しいテクノロジーを採用しましたか？
-- あなたやクライアントは、新しいプロセスを導入しましたか？
-- Datadog は、あなたが使うことができる新しい製品機能を導入しましたか？
+Initially, the objective of this phase should be to gather data to provide immediate value to you or your clients. However, in the long run, you should consider this an ongoing process where you constantly assess changes to your environment by asking the following questions:
+- Have you or your clients employed a new technology?
+- Have you or your clients introduced a new process?
+- Has Datadog introduced a new product feature that you can use?
 
-これらの質問を定期的に検討し、必要なテレメトリーがすべて Datadog に取り込まれていることを確認します。
+Consider these questions regularly to ensure that all necessary telemetry is being ingested into Datadog.
 
-## インテグレーション
+## Integrations
 
-インテグレーションを通じて、クライアントに即座に価値を提供することができます。Datadog は、幅広いテクノロジーからメトリクスやログを収集する {{< translate key="integration_count" >}} のインテグレーションを提供しています。
+You can provide immediate value to your clients through integrations. Datadog offers {{< translate key="integration_count" >}} integrations, which collect metrics and logs from a wide array of technologies.
 
-インテグレーションには、大きく分けて 3 つのカテゴリーがあります。
-- クラウドサービスインテグレーション
-- Datadog Agent と Agent ベースのインテグレーション
-- API / ライブラリインテグレーションとカスタムチェック
+There are three main categories of integrations:
+- Cloud service integrations
+- The Datadog Agent & Agent-based integrations
+- APIs / library integrations & custom checks
 
-インテグレーションの種類については、[インテグレーションの紹介][1]を参照してください。
+For more information on the different types of integrations, see [Introduction to Integrations][1].
 
-## クラウドサービスインテグレーション
+## Cloud service integrations
 
-クラウドサービスや「クローラー」ベースのインテグレーションは、認証された接続を使用して、API を使用してクラウドサービスからインフラストラクチャー情報、メトリクス、ログ、およびイベントを収集します。
+Cloud service or "crawler" based integrations use an authenticated connection to gather infrastructure information, metrics, logs, and events from a cloud service using an API.
 
-クラウドサービスインテグレーションは、通常数分で設定でき、メトリクスやイベントが Datadog に流れ込むため、すぐに価値を発揮します。
+Setting up a cloud service integration usually only takes a few minutes and delivers immediate value with metrics and events flowing into Datadog.
 
-**注**: クラウドサービスインテグレーションは、大量のデータを生成するため、Datadog とクラウドプロバイダーの両方から請求の影響を受ける可能性があります。
+**Note**: Cloud service integrations can generate large volumes of data which can have billing effects from both Datadog and the cloud provider.
 
-ほとんどのシナリオにおいて、インフラストラクチャーや、特にこれらの環境で実行されているアプリケーションを完全に理解するためには、クラウドサービスインテグレーションを使用するだけでは不十分であることに注意してください。Datadog では、クラウドサービスインテグレーションに加え、あらゆるデータ収集手段を活用することを推奨しています。
+Be aware that in most scenarios, using a cloud service integration will not be sufficient to get a full understanding of the infrastructure and especially the applications that are running in these environments. Datadog recommends leveraging all means of data collection in addition to cloud service integrations.
 
-クラウド環境のモニタリングについて、詳しくはこちらをご覧ください。
-- [クラウドの監視][2] (電子書籍)
-- [AWS クラウドモニタリング入門][3] (ブログ)
-- [Cloud クラウドモニタリング入門][4] (ブログ)
-- [Azure クラウドモニタリング入門][5] (ブログ)
+To learn more about monitoring cloud environments, see:
+- [Monitoring the Cloud][2] (eBook)
+- [Introduction to AWS Cloud Monitoring][3] (Blog)
+- [Introduction to Google Cloud Monitoring][4] (Blog)
+- [Introduction to Azure Cloud Monitoring][5] (Blog)
 
-## Datadog Agent と Agent ベースのインテグレーション
+## The Datadog Agent and Agent-based integrations
 
-Datadog Agent は、ホスト上で動作し、Datadog に送信するイベントやメトリクスを収集するソフトウェアです。Agent は、一般的に使用されている全てのプラットフォームで利用可能です。Agent 自体は、実行中のホストに関する多くのメトリクス (CPU、メモリ、ディスク、ネットワークメトリクスなど) を収集できますが、Agent の本当の強みはそのインテグレーションにあります。
+The Datadog Agent is software that runs on hosts and collects events and metrics to send to Datadog. The Agent is available for all commonly used platforms. While the Agent itself can collect a number of metrics about the host it is running on (such as CPU, memory, disk, and network metrics) the real strength of the Agent is its integrations.
 
-Agent ベースのインテグレーションにより、Agent は、ホスト上で直接、またはホスト上で実行されているコンテナで実行されているアプリケーションやテクノロジーからメトリクス、ログ、トレース、およびイベントを収集することができます。
+Agent-based integrations allow the Agent to collect metrics, logs, traces,
+and events from applications and technologies running either directly on
+the host or in containers running on the host.
 
-インテグレーションと Datadog Agent について、詳しくはこちらをご覧ください。
-- [Datadog インテグレーション一覧][6]
-- [Datadog Agent][7]
-- [Agent の概要][8]
+For more information on integrations and the Datadog Agent, see:
+- [List of Datadog Integrations][6]
+- [The Datadog Agent][7]
+- [Getting Started with the Agent][8]
 
-## API / ライブラリインテグレーションとカスタムチェック
+## APIs / library integrations and custom checks
 
-Datadog はスケーラビリティと拡張機能に重点を置いており、以下のような状況でプラットフォームを拡張するための API や SDK をいくつか提供しています。
-- IoT デバイスなどでは、セキュリティなどの制約により Agent をインストールできない場合がある。
-- Datadog Agent とそのインテグレーションが持つ機能が、技術や要件をカバーしていない。
+Datadog focuses on scalability and extensibility, and offers several APIs and SDKs to extend the platform in situations where:
+- Installing the Agent might not be possible due to security or other restrictions, for example on IoT devices.
+- The capabilities of the Datadog Agent and its integrations do not cover a technology or requirement.
 
-このような場合、API を使用することで、クライアントの観測可能性プラットフォームに関連するテレメトリーをキャプチャすることができます。
+In these cases, using APIs enables you to capture relevant telemetry into the observability platform for your clients.
 
-サービスプロバイダーとして最も関心の高い API は、次の 3 つでしょう。
-- データ取り込みのための公開 API
-- カスタムチェック
-- Agent 上のデータ取り込みのためのローカル API
+There are three key API areas that would be of most interest to you as a service provider:
+- Public APIs for data ingestion
+- Custom checks
+- Local APIs for data ingestion on the Agent
 
-### データ取り込みのための公開 API
+### Public APIs for data ingestion
 
-クラウドサービスインテグレーションや Agent を利用できない、あるいは利用したくない場合、以下の API を利用するとデータ取り込みに便利です。
+In cases where using cloud service integrations or the Agent is not possible or desired, the following APIs can be helpful for data intake:
 
-- ログは、Datadog の[ログ取り込みエンドポイント][9]に直接転送することが可能です。
-- メトリクスは、Datadog の[メトリクス API][10] に直接転送することが可能です。
-- イベントは、Datadog の[イベント API][11] に直接転送することが可能です。
-- トレースは、Datadog の[トレース/スパン API][12] に直接転送することが可能です。
+- Logs can be forwarded directly to Datadog's [log ingestion endpoint][9].
+- Metrics can be forwarded directly to Datadog's [metrics API][10].
+- Events can be forwarded directly to Datadog's [events API][11].
+- Traces can be forwarded directly to Datadog's [trace/span API][12].
 
-### カスタムチェック
+### Custom checks
 
-Datadog は {{< translate key="integration_count" >}} のインテグレーションを提供していますが、クライアントは、既存のどのインテグレーションでもカバーできないカスタムアプリケーションを実行している場合があります。これらのアプリケーションを監視するために、クライアントは Agent を使用してカスタムチェックを実行することができます。
+While Datadog offers {{< translate key="integration_count" >}} integrations, your client might run a custom application that cannot be covered with any of the existing integrations. To monitor these applications, your clients can use the Agent to execute custom checks.
 
-詳しくは、[カスタムチェック][13]をご覧ください。
+For more information, see [Custom Checks][13].
 
-### Agent 上のデータ取り込みのためのローカル API
+### Local APIs for data ingestion on the Agent
 
-Datadog Agent には、メトリクス集計サービスである DogStatsD がバンドルされており、UDP を使用してデータを受け付けます。DogStatsD は、カスタムチェックがユースケースに合わず、アプリケーションのための既存のインテグレーションがない場合の良い代替手段です。例えば、cron ジョブからイベントとメトリクスデータを収集するために DogStatsD を使うことができますが、おそらくそのジョブは独自のログファイルを持っていないでしょう。
+The Datadog Agent comes bundled with DogStatsD, a metrics aggregation service, which accepts data using UDP. DogStatsD is a good alternative if a custom check does not suit your use case, and there are no existing integrations for the application. For example, you can use DogStatsD to collect events and metrics data from a cron job, which probably does not have its own log files.
 
-DogStatsD のエンドポイントを使用するか、Datadog のクライアントライブラリを使用して DogStatsD へのメトリクスやイベントの送信を容易にすることができます。
+You can either use the DogStatsD endpoints, or use a Datadog client library to facilitate the submission of metrics and events to DogStatsD.
 
-詳しくは、こちらをご覧ください。
-- [イベントの送信][14]
-- [カスタムメトリクスの送信][15]
-- [ライブラリ][16]
-- [API リファレンス][17]
+For more information, see:
+- [Submit Events][14]
+- [Submit Custom Metrics][15]
+- [Libraries][16]
+- [API Reference][17]
 
-## タグ付け戦略
+## Tagging strategy
 
-Datadog の全機能を利用するためには、優れたタグ付け戦略が不可欠です。
+A good tagging strategy is vital if you want to ensure that you and your clients benefit from all of Datadog's features.
 
-タグはデータに付けられるラベルで、Datadog 全体でデータのフィルタリング、グループ化、相関付けを行うことができます。タグは、Datadog の異なるテレメトリータイプを結合し、メトリクス、トレース、ログ間の相関とアクションの呼び出しを可能にします。これは、予約されたタグキーで実現されます。
+Tags are labels attached to your data that enable you to filter, group, and correlate your data throughout Datadog. Tagging binds different telemetry types in Datadog, allowing for correlation and calls to action between metrics, traces, and logs. This is accomplished with reserved tag keys.
 
-一貫したタグ付け戦略を事前に設定することで、Datadog の実装を成功させ、最終的にクライアントの価値実現を高めることができます。
+Setting a consistent tagging strategy upfront paves the way to a successful Datadog implementation and ultimately increases value realization for your clients.
 
-タグ付けを考える際には、以下のような点に配慮してください。
-- **テクノロジー**: チーム間やクライアント間で、同じ技術の使用状況を比較することができます。
-- **環境**: テスト環境、本番環境、その他の環境間のパフォーマンスを比較することができます。
-- **場所**: 特定のデータセンターやクラウドサービスプロバイダーのアベイラビリティゾーンに関連する問題を理解することができます。
-- **ビジネスサービス**: 技術に関係なく、ビジネスサービスの構成要素をフィルターにかけることができます。
-- **役割**: ビジネスサービスにおいて、エンティティがどのような役割を担っているかを把握することができます。
-- **責任**: 担当チームがすべてのリソースをフィルターできるようにし、他のユーザーやチームが特定のサービスを担当するチームを識別できるようにします。
+When thinking about tagging, take into consideration the following factors:
+- **Technology**: Allows you to compare the use of the same technology between teams or clients.
+- **Environment**: Allows you to compare the performance between test, production, and other environments.
+- **Location**: Allows you to understand issues related to specific data centers or cloud service provider availability zones.
+- **Business Service**: Allows you and your clients to filter the building blocks of a business service, regardless of technology.
+- **Role**: Allows you to understand which role an entity plays in a business service.
+- **Responsibility**: Allows the responsible team to filter all of their resources and enables other users and teams to identify which team is responsible for a certain service.
 
-[タグ入門][18]を読んで、成功するための準備をしましょう。
+To set yourself up for success, read [Getting Started with Tags][18].
 
-タグ付けとタグ付け戦略について、詳しくはこちらをご覧ください。
-- インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス][19] (ブログ)
-- [タグ付けのベストプラクティス][20] (トレーニング)
-- [統合サービスタグ付け][21]
-- [Kubernetes タグ抽出][22]
-- [AWS タグ付け][23] (AWS ドキュメント)
-- [サーバーレスタグ付け][24]
-- [ライブコンテナタグ付け][25]
+For more information on tagging and tagging strategy, see:
+- [Best practices for tagging your infrastructure and applications][19] (Blog)
+- [Tagging Best Practices][20] (Training)
+- [Unified Service Tagging][21]
+- [Kubernetes Tag Extraction][22]
+- [AWS Tagging][23] (AWS Documentation)
+- [Serverless Tagging][24]
+- [Live Container Tagging][25]
 
-## Agent のロールアウト
+## Agent rollout
 
-ここでは、Agent を展開するための主なフェーズを紹介します。
-- Agent デプロイのための前提条件
-- 既存インフラストラクチャーへの Agent の初期デプロイ
-- 新インフラストラクチャーのプロビジョニング
-- 継続的なプロビジョニングプロセスの監視
+Here are the key phases for rolling out the Agent:
+- Prerequisites for Agent deployment
+- Initial Agent deployment to the existing infrastructure
+- Provisioning of new infrastructure
+- Monitoring the continuous provisioning processes
 
-### Agent デプロイのための前提条件
+### Prerequisites for Agent deployment
 
-プラットフォームやオペレーティングシステムによっては、Agent の前提条件が異なる場合があります。これらの要件については、[Agent の公式ドキュメント][7]を参照してください。
+Depending on the platform and operating system, there might be different prerequisites for the Agent. See [the official Agent documentation][7] to familiarize yourself with those requirements.
 
-どのプラットフォームでも Agent の主な前提条件は、ネットワーク接続性です。トラフィックは常に Agent から Datadog へ開始されます。Datadog から Agent に戻るセッションが開始されることはありません。稀なケースを除き、インバウンド接続 (ローカルファイアウォールによる制限) は、Agent のデプロイには関係ありません。
+The main prerequisite for the Agent on any platform is network connectivity. Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent. Except in rare cases, inbound connectivity (limited through local firewalls) is not a factor for Agent deployments.
 
-Agent が正常に動作するためには、443/tcp 上の SSL で Datadog サービスにトラフィックを送信する機能が必要です。Agent が使用するポートの全リストは、[ネットワークトラフィック][26]を参照してください。
+To work properly, the Agent requires the ability to send traffic to the Datadog service over SSL over 443/tcp. For a full list of ports used by the Agent, see [Network Traffic][26].
 
-状況によっては、Agent のバージョン固有のエンドポイントがメンテナンスの問題を引き起こすことがありますが、その場合、Datadog はバージョンに依存しないエンドポイントを提供することができます。バージョンに依存しないエンドポイントが必要な場合は、Datadog のサポートにお問い合わせください。
+In some circumstances, Agent version-specific endpoints can cause maintenance problems, in which case Datadog can provide a version-agnostic endpoint. If you need a version-agnostic endpoint, contact Datadog support.
 
-#### Agent プロキシ
+#### Agent proxy
 
-多くのクライアント環境では、Agent から Datadog への直接接続を開始することは不可能であるか、または希望されません。接続を可能にするために、Datadog は Agent のトラフィックをプロキシするいくつかの異なるオプションを提供しています。
+In many client environments, opening direct connectivity from the Agent to Datadog is not possible or desired. To enable connectivity, Datadog offers a few different options to proxy the Agent traffic.
 
-詳しくは、[Agent プロキシの構成][27]をご覧ください。
+For more information, see [Agent Proxy Configuration][27].
 
-### Agent のデプロイ、アップグレード、構成
+### Agent deployment, upgrade, and configuration
 
-Datadog Agent を自社やクライアントのインフラストラクチャーにデプロイするには、様々な方法があります。ほとんどのサービスプロバイダーは、すでに構成管理ツールを導入しているため、Agent の展開には既存のツールを使用するのがよいでしょう。
+There are various ways to deploy the Datadog Agent to your own and your client's infrastructure. As most service providers already have a configuration management tool in place, it is a good practice to use the existing tool for Agent rollout.
 
-Datadog Agent を構成管理ツールで管理する例をご紹介します。
-- [Chef を使用した Datadog Agent のデプロイ][28] (ブログ)
-- [Puppet + Datadog: システムの自動化 + 監視][7] (ブログ)
-- [CloudFormation を使用した Datadog のデプロイと構成][29] (ブログ)
-- [Ansible を使って Datadog の構成を自動化する方法][30] (ビデオ)
-- [Ansible のダイナミックインベントリを使って AWS ホストに Datadog Agent をデプロイする方法][31] (ブログ)
+Here are some examples of how to manage your Datadog Agent with configuration management tools:
+- [Deploying Datadog Agents with Chef][28] (Blog)
+- [Puppet + Datadog: Automate + monitor your systems][7] (Blog)
+- [Deploying and Configuring Datadog with CloudFormation][29] (Blog)
+- [How to Use Ansible to Automate Datadog Configuration][30] (Video)
+- [How to deploy the Datadog Agent on AWS hosts with Ansible dynamic inventories][31] (Blog)
 
-Datadog のリポジトリを使用する予定がない場合は、常に[パブリック GitHub リポジトリ][32]で最新の Agent のリリースを見つけることができます。デプロイ前に Agent パッケージの[ディストリビューションチャンネルを確認][33]することをお勧めします。
+If you don't plan on using Datadog's repositories, you can always find the latest Agent releases in the [public GitHub repository][32]. It is recommended that you [verify the distribution channel][33] of Agent packages before deployment.
 
-### 継続的なプロビジョニングプロセスの監視
+### Monitoring the continuous provisioning processes
 
-Datadog のデプロイには構成管理ツールを使用することが望ましいですが、Datadog を活用してこれらのツールの適切な運用を監視することも可能です。以下はその例です。
-- [システムに現状を聞く: Datadog を使って Chef を監視する][34] (ブログ)
-- [Ansible + Datadog: 自動化を監視し、監視を自動化する][35] (ブログ)
+While it is a good practice to use configuration management tools for deploying Datadog, you can also leverage Datadog to monitor proper operation of these tools. Here are some examples:
+- [Ask your systems what's going on: monitor Chef with Datadog][34] (Blog)
+- [Ansible + Datadog: Monitor your automation, automate your monitoring][35] (Blog)
 
-## 次のステップ
+## What's next?
 
-Datadog にデータが流れ込んだら、次はクライアントに[価値を提供する][36]ことに集中する時です。
+Now that you have data flowing into Datadog, it's time to focus on [delivering value][36] to your clients.
 
 
 [1]: /ja/getting_started/integrations/
@@ -179,7 +181,7 @@ Datadog にデータが流れ込んだら、次はクライアントに[価値�
 [11]: /ja/api/latest/events
 [12]: /ja/api/latest/tracing/
 [13]: /ja/developers/custom_checks/
-[14]: /ja/events/guides/dogstatsd/
+[14]: /ja/service_management/events/guides/dogstatsd/
 [15]: /ja/metrics/custom_metrics/
 [16]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [17]: /ja/api/latest/
@@ -191,8 +193,8 @@ Datadog にデータが流れ込んだら、次はクライアントに[価値�
 [23]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [24]: /ja/serverless/serverless_tagging/?tab=serverlessframework#overview
 [25]: /ja/infrastructure/livecontainers
-[26]: /ja/agent/guide/network/
-[27]: /ja/agent/proxy/
+[26]: /ja/agent/configuration/network/
+[27]: /ja/agent/configuration/proxy/
 [28]: https://www.datadoghq.com/blog/deploying-datadog-with-chef-roles/
 [29]: https://www.datadoghq.com/blog/monitor-puppet-datadog/
 [30]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/

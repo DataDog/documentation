@@ -2,8 +2,9 @@
 categories:
 - provisioning
 - configuration & deployment
+custom_kind: integration
 dependencies: []
-description: Puppet の実行を追跡。失敗、成功、大きな変更を把握。
+description: 'Track Puppet runs: know when they fail, succeed, or make big changes.'
 doc_link: https://docs.datadoghq.com/integrations/puppet/
 draft: false
 git_integration_title: puppet
@@ -12,7 +13,6 @@ integration_id: puppet
 integration_title: Puppet
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: puppet
 public_title: Datadog-Puppet インテグレーション
@@ -29,27 +29,27 @@ Puppet を Datadog に接続して、以下のことができます。
 - すべてのサーバーで Puppet のキーパフォーマンスメトリクスを追跡できます。
 - 失敗した Puppet の実行をすばやく特定してチームで議論できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 Puppet で Datadog Agent をインストールするには、GitHub の [Datadog Puppet Agent リポジトリ][1]を参照してください。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "puppet" >}}
 
 
-### ヘルプ
+### Events
 
 Puppet インテグレーションには、失敗、成功、変更された、および変更されていないリソースに関するステータスイベントが含まれます。
 
-### ヘルプ
+### Service Checks
 
 Puppet インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

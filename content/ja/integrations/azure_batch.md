@@ -3,8 +3,9 @@ categories:
 - cloud
 - configuration & deployment
 - azure
+custom_kind: integration
 dependencies: []
-description: Azure Batch Service のキーメトリクスを追跡。
+description: Track key Azure Batch Service metrics.
 doc_link: https://docs.datadoghq.com/integrations/azure_batch/
 draft: false
 git_integration_title: azure_batch
@@ -13,7 +14,6 @@ integration_id: azure-batch
 integration_title: Microsoft Azure Batch
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_batch
 public_title: Datadog-Microsoft Azure Batch インテグレーション
@@ -29,27 +29,27 @@ Azure Batch Service は、Azure アプリケーション用のマネージド型
 - Batch アカウントのパフォーマンスを視覚化。
 - Batch アカウントのパフォーマンスをアプリケーションと関連付け。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_batch" >}}
 
 
-### ヘルプ
+### Events
 
 Azure Batch Service インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Azure Batch Service インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -9,28 +9,32 @@ private: true
 title: サーバーレスモニタリングガイド
 ---
 
-## 一般的なサーバーレスガイド
+## General serverless guides
 
 {{< whatsnext desc="サーバーレスアプリケーションを監視するためのベストプラクティス" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Lambda 関数を呼び出すリソースの詳細な視覚化{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_warnings" >}}サーバーレスの警告{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tagging" >}}サーバーレスのタグ付け{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent 構成{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/opentelemetry" >}}サーバーレスと OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Datadog Forwarder を使ったインストール
-
-{{< whatsnext desc="Datadog Forwarder を使用して監視するように以前に設定されたアプリケーションのインストール手順" >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Datadog Forwarder を使った Node.js サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Datadog Forwarder を使った Python サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Datadog Forwarder を使った Java サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Datadog Forwarder を使った Go サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_dotnet" >}}Datadog Forwarder を使った .NET サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/extension_motivation" >}}Datadog Lambda 拡張機能への移行を決定する{{< /nextlink >}}
+{{< whatsnext desc="Azure App Service と Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Azure Sidecar を使用した Azure App Service 上の Linux コンテナのインスツルメンテーション{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## インストール時のトラブルシューティング
+## Install using the Datadog Forwarder
+
+{{< whatsnext desc="Installation instructions for applications previously set up to be monitored using the Datadog Forwarder" >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Instrumenting Node.js Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Instrumenting Python Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Instrumenting Java Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Instrumenting Go Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_dotnet" >}}Instrumenting .NET Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/extension_motivation" >}}Deciding to migrate to the Datadog Lambda Extension{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Troubleshoot your installation
 
 {{< whatsnext desc="インストール時のよくある問題とトラブルシューティングのヒント" >}}
     {{< nextlink href="/serverless/troubleshooting" >}}サーバーレスモニタリングのトラブルシューティング{{< /nextlink >}}

@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: AWS Elemental MediaConnect のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediaconnect/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: AWS Elemental MediaConnect
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mediaconnect
 public_title: Datadog-AWS Elemental MediaConnect インテグレーション
@@ -28,9 +28,9 @@ AWS Elemental MediaConnect は、ライブビデオのトランスポートサ�
 
 このインテグレーションを有効にすると、Datadog にすべての Elemental MediaConnect メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -55,21 +55,21 @@ AWS Elemental MediaConnect から S3 バケットまたは CloudWatch のいず�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_mediaconnect" >}}
 
 
-### ヘルプ
+### Events
 
 AWS Elemental MediaConnect インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 AWS Elemental MediaConnect インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

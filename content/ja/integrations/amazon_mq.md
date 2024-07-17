@@ -5,21 +5,21 @@ categories:
 - cloud
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
-description: AWS MQ のキーメトリクスを追跡。
+description: Track key AWS MQ metrics.
 doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog
-  tag: ブログ
-  text: Datadog で Amazon MQ のメトリクスを監視
+  tag: Blog
+  text: Monitor Amazon MQ metrics with Datadog
 git_integration_title: amazon_mq
 has_logo: true
 integration_id: ''
 integration_title: Amazon MQ
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mq
 public_title: Datadog-Amazon MQ インテグレーション
@@ -34,9 +34,9 @@ Amazon MQ は、クラウドでメッセージブローカーを容易にセッ�
 
 このインテグレーションを有効にすると、すべての Amazon MQ メトリクスを Datadog に表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -62,23 +62,23 @@ Amazon MQ から S3 バケットまたは CloudWatch のいずれかにログを
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_mq" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### Events
 
 AWS Amazon MQ インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 AWS Amazon MQ インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

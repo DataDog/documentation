@@ -16,6 +16,7 @@ further_reading:
 - link: /monitors/types/event/
   tag: Documentation
   text: イベントモニター
+kind: documentation
 private: true
 title: イベントガイド
 ---
@@ -29,8 +30,12 @@ title: イベントガイド
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="イベントには必ずタグを付けてください。">}}
-{{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}イベントへのタグ付けのベストプラクティス{{< /nextlink >}}
+{{< whatsnext desc="Ensure your events are tagged:">}}
+    {{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}Best Practices for Tagging Events{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Learn more about Event Management use cases:">}}
+    {{< nextlink href="/service_management/events/guides/usage" >}}Use cases for events{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="その他のガイド:">}}

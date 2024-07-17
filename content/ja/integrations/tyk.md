@@ -29,6 +29,7 @@ author:
   support_email: yaara@tyk.io
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: tyk
 integration_title: Tyk
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: tyk
 public_title: Tyk
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: resp-code、api、path、oauth などで細分化された、時間に関する統計付きでリクエストを追跡
   media: []
@@ -65,49 +66,49 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Datadog で、エラー応答時間、所要時間、レイテンシーを収集、表示して、[Tyk][1] における API トラフィックのパフォーマンスを監視し、API または消費者の問題を理解できます。
+Datadog can collect and display errors, response time, duration, latency, as well as monitor the performance of API traffic in [Tyk][1] to discover issues in your APIs or consumers.
 
-Tyk には、[Tyk API ゲートウェイ][2]からメトリクスを収集する Datadog インテグレーションが組み込まれています。
+Tyk has a built-in Datadog integration that collects metrics from [Tyk API gateway][2].
 
-Tyk API ゲートウェイでは、処理されるすべてのトラフィックが記録され、その情報を Datadog に送信してその関連ダッシュボードを構築します。
+Tyk API gateway records all the traffic that it's processing. It sends that information to Datadog and builds dashboards around it.
 
-### UDS の仕組み
+### How it works
 
-[Tyk pump][3] は、アプリケーションのカスタムメトリクスを書き込み、Datadog Agent にバンドルされたメトリクス集計サービスである [DogStatsD][4] へ送信することで Datadog に送信します。DogStatsD は、`Tyk-gateway` で使用されるヒストグラムメトリクスタイプを含む Datadog 固有の拡張機能を追加する StatsD プロトコルを実装します。
+[Tyk pump][3] writes custom application metrics and sends them into Datadog by sending them to [DogStatsD][4], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the StatsD protocol which adds a few Datadog-specific extensions including the Histogram metric type, that is in use by `Tyk-gateway`.
 
-`Tyk-gateway` は `Tyk-pump` を使用して、生成した分析を Datadog へ送信します。
+`Tyk-gateway` uses `Tyk-pump` to send the analytics it generated to Datadog.
 
-Datadog Agent の実行中、DogstatsD は `Tyk-pump` から `request_time` メトリクスをリクエストごとにリアルタイムで取得するため、API の使用状況を理解し、さまざまなパラメーター別（日付、バージョン、リターンコード、メソッドなど）に柔軟に集計できます。
+When running the Datadog Agent, DogstatsD gets the `request_time` metric from `Tyk-pump` in real time, per request, so you can understand the usage of your APIs and get the flexibility of aggregating by various parameters such as date, version, returned code, method etc.
 
-カスタムメトリクス Tyk は、タイプ [DD_HISTOGRAM_AGGREGATES][5] を使用しています。
+The custom metric Tyk is using is of type [DD_HISTOGRAM_AGGREGATES][5].
 
-## 計画と使用
+## Setup
 
-Tyk インテグレーションは `tyk-pump` パッケージに含まれており、`pump.conf`age でコンフィギュレーションを設定するだけです（Tyk プラットフォームから何もインストールする必要はありません）。
+Tyk's integration is included in the `tyk-pump` package, so you only need to set configuration in the `pump.conf` (and there's no need to install anything on your Tyk platform).
 
-### インストール
+### Installation
 
-#### インフラストラクチャーリスト
+#### Installation
 
-このインテグレーションに必要なのは、実行中の Tyk インストールのみです。[Tyk セルフマネージド][6] または [Tyk OSS][7] をインストールできます。両オプションに、`tyk-pump` が含まれています。
+For this integration you need to have a running Tyk installation. You can install [Tyk self managed][6] or [Tyk OSS][7]. Both options include the `tyk-pump`.
 
-#### Datadog Agent のインストール
+#### Install Datadog Agent
 
-ご使用の環境に [Datadog Agent][8] をインストールします。
+Install the [Datadog Agent][8] in your environment.
 
-Datadog [Agent][9] は、K8s クラスター、Docker コンテナ、Mac など、`Tyk pump` がアクセスできる環境であれば、どのような方法でも実行可能です。
+Run the Datadog [Agent][9] in your K8s cluster, as a Docker container, on your Mac, or any way as long as `Tyk pump` is able to access it.
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][10]のガイドをご参照ください。変更の適用を検証するには、[Agent の status サブコマンドを実行][11]します。
+For containerized environments, see the [Autodiscovery Integration Templates][10] for more guidance. To validate that the changes are applied, [run the Agent's status subcommands][11]
 
 
-### ブラウザトラブルシューティング
+### Configuration
 
 #### Tyk-pump
-Datadog pump を設定するには、pump README の [DogstatsD セクション][12]に記載された手順に従います。
+To set a Datadog pump follow the instructions in [the DogstatsD section][12] of the pump README.
 
-以下は、`pump.conf` の Datadog pump コンフィギュレーション例です。
+The following is an example of Datadog pump configuration in `pump.conf`:
 
 ``` json
 pump.conf:
@@ -137,65 +138,65 @@ pump.conf:
     },
 ```
 
-これは、1 つのコマンドでフル Tyk プラットフォームをスピンアップし、Datadog の例を含むすぐに使用できる例を提供するオープンソースプロジェクトである [Tyk デモ][14]プロジェクトから採用した[例][13]です。このインテグレーションを実行するには、`up.sh analytics-datadog` を使用します。
+This [example][13] was taken from [Tyk-demo][14] project, an open source project that spins up a full Tyk platform in one command and offers ready-made examples, including the Datadog example. To run this integration, use `up.sh analytics-datadog`.
 
-#### Datadog Agent の設定
+#### Setup Datadog Agent
 
-Tyk インテグレーションでは、Datadog Agent にバンドルされたメトリクス集計サービスの [DogstatsD][15] を使用します。DogStatsD は `StatsD` プロトコルを実装し、Datadog 固有の拡張機能を追加します。Tyk は `Histogram メトリクスタイプ`を使用しています。
+Tyk's integration uses [DogstatsD][15]. It is a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the `StatsD` protocol and adds a few Datadog-specific extensions. Tyk is using `Histogram metric type`.
 
-ご使用の環境で、以下の Datadog および DogStatsD 環境変数を設定します。
+Set up the following Datadog and DogStatsD environment variables in your environment:
 
-| DD 環境変数 | 値 | 説明 |
+| DD Environment variable | Value | Description |
 |---------------------------|-------------|------|
-| DD_API_KEY | {ご使用の-datadog-api-キー} | Datadog Agent の DD ポータルへの接続用。API キーは、[アカウント設定][16]で確認できます。 |
-| DD_ENV |    tyk-demo-env   |   環境名を設定します。 |
-| DD_DOGSTATSD_TAGS | "env:tyk-demo" |  この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。 |
-| DD_LOGS_ENABLED | true | Datadog Agent でのログ収集を有効にします。 |
-| DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL | true | コンテナからログを収集します。 |
-| DD_DOGSTATSD_SOCKET | /var/run/docker.sock | リスニングする Unix ソケットのパス。Docker Compose はこのパスをマウントします。 |
-| DD_DOGSTATSD_ORIGIN_DETECTION | true | Unix ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。 |
-| DD_DOGSTATSD_NON_LOCAL_TRAFFIC | true | 他のコンテナからの DogStatsD パケットをリスニングします (カスタムメトリクスの送信に必要)。 |
-| DD_AGENT_HOST | dd-agent | Docker のエージェントホスト名。 |
-| DD_AC_EXCLUDE | redis | Datadog Redis チェックを除外します。(オプション) |
-| DD_CONTAINER_EXCLUDE | true | Datadog Agent の Docker チェックを除外します。 |
+| DD_API_KEY | {your-datadog-api-key} | For the Datadog Agent to connect the DD portal. Your API key can be found in [Account Settings][16]. |
+| DD_ENV |    tyk-demo-env   |   Sets the environment name. |
+| DD_DOGSTATSD_TAGS | "env:tyk-demo" |  Additional tags to append to all metrics, events, and service checks received by this DogStatsD server. |
+| DD_LOGS_ENABLED | true | Enables log collection for the Datadog Agent. |
+| DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL | true | Collects logs from containers. |
+| DD_DOGSTATSD_SOCKET | /var/run/docker.sock | Path to the Unix socket to listen to. Docker compose mounts this path. |
+| DD_DOGSTATSD_ORIGIN_DETECTION | true | Enables container detection and tagging for Unix socket metrics. |
+| DD_DOGSTATSD_NON_LOCAL_TRAFFIC | true | Listens for DogStatsD packets from other containers. (Required to send custom metrics). |
+| DD_AGENT_HOST | dd-agent | Name of the agent host in Docker. |
+| DD_AC_EXCLUDE | redis | Excludes Datadog redis checks. (Optional) |
+| DD_CONTAINER_EXCLUDE | true | Excludes docker checks for the Datadog Agent. |
 
-上記に記載された環境変数を設定後、Agent を [DogstatsD][17] でセットアップします。
+After setting environment variables listed above, set up the agent [with DogstatsD][17].
 
-設定後、[Agent を再起動します][18]。
+[Restart the Agent][18] after setup.
 
-### 検証
+### Validation
 
-ダッシュボードを作成または[サンプル][19]をインポートし、ウィジェットを追加します。**metric** オプションの **Graph your data** で、`dogstatsd.namespace` のコンフィグ `pump.conf` の pump に選択したネームスペースを入力します。
+Create a dashboard or import [the sample][19] and add a widget. In the section **Graph your data** under the **metric** option, start typing the namespace you chose for the pump in the config `pump.conf` under `dogstatsd.namespace`.
 
-上の例では、`tyk` です。入力を始めると、利用可能なすべてのメトリクスが表示されます。
+In the example above, it's `tyk`. Once you start typing, all the available metrics are displayed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "tyk" >}}
 
 
-### ライブラリ
+### Dashboards
 
-Datadog では、API サービスおよびその消費に関する統計データを表示するダッシュボードを作成できます。
+With Datadog, you can create dashboards that display statistics about your API services and their consumption.
 
-そのようなダッシュボードの例がこちらです。
+Here's an example for such a dashboard:
 
-![Tyk 分析ダッシュボードの例][21]
+![Tyk Analytics dashboard example][21]
 
-**注: 上記のダッシュボードを[インポート][19]して、自身のダッシュボードの例またはベースラインとして使用できます。**
+**Note: You can [import][19] the above dashboard and use it as an example or baseline for your own dashboard.**
 
-### ヘルプ
+### Events
 
-Tyk インテグレーションには、イベントは含まれません。
+The Tyk integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Tyk インテグレーションには、サービスのチェック機能は含まれません。
+The Tyk integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][22]までお問い合わせください。
+Need help? Contact [Datadog support][22].
 
 [1]: https://tyk.io/
 [2]: https://github.com/TykTechnologies/tyk

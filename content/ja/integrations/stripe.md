@@ -18,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -26,7 +27,6 @@ integration_id: stripe
 integration_title: Stripe
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: stripe
 public_title: Stripe
@@ -49,11 +49,11 @@ tile:
 
 Stripe は、あらゆる規模のインターネットビジネス向けにオンライン決済処理と商取引ソリューションを提供する API スイートです。Datadog を Stripe アカウントに接続すると、アカウントのイベント変更に関するログを受け取ることができます。
 
-## 計画と使用
+## Setup
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### ワークフローの自動化
+#### Logs
 
 1. Datadog の [Stripe インテグレーションタイル][1]の **Configuration** タブ内に生成された URL をコピーします。
 2. Stripe アカウントの [Webhooks][2] ページにアクセスします。
@@ -64,25 +64,25 @@ Stripe は、あらゆる規模のインターネットビジネス向けにオ�
 7. **Add endpoint** をクリックします。
 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Stripe インテグレーションには、メトリクスは含まれません。
 
-### ワークフローの自動化
+### Logs
 
 Stripe のイベントは、`stripe` ソースの下にログとして表示されます。
 
-### ヘルプ
+### Events
 
 Stripe インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Stripe インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

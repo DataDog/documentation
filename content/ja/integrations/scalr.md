@@ -5,6 +5,7 @@ assets:
   dashboards:
     Scalr Overview Dashboard: assets/dashboards/scalr_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,7 +16,8 @@ assets:
       prefix: scalr.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: Scalr
+    source_type_id: 10312
+    source_type_name: Scalr (Community Version)
 author:
   homepage: https://scalr.com
   name: Scalr
@@ -25,6 +27,7 @@ categories:
 - 自動化
 - 構成 & デプロイ
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md
 display_on_public_website: true
@@ -34,7 +37,6 @@ integration_id: scalr
 integration_title: Scalr
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: scalr
 public_title: Scalr
@@ -60,66 +62,72 @@ tile:
     image_url: images/scalr_dashboard.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.scalr.com
+  - resource_type: documentation
+    url: https://docs.scalr.com/en/latest/integrations.html#datadog
   support: README.md#Support
   title: Scalr
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Scalr は、テラフォームの運用を分散化するための制御、可視化、柔軟性を一箇所で提供するテラフォームクラウドの代替品です。
+Scalr is a terraform cloud alternative that provides you with the controls, visibility, and flexibility to decentralize your terraform operations in one place.
 
-Scalr [インテグレーション][1]は、キューの実行、キューの状態、環境数、ワークスペース数など、詳細な分析とレポートのための Terraform ラン実行[イベント][2]の詳細とメトリクスを送ります。これらのメトリクスはすぐに使えるダッシュボードで視覚化され、デプロイメントと他のインフラストラクチャーの変更の関連付けや、Terraform パイプライン内のトレンドの追跡に役立ちます。
+The Scalr [integration][1] sends Terraform run execution [event][2] details and metrics for in-depth analysis and reporting such as queue runs, queue state, the number of environments, and workspace count. These metrics are visualized in their out-of-the-box dashboard to help correlate deployments with other infrastructure changes and to track trends within your Terraform pipeline.
 
-## セットアップ
-Scalr インテグレーションは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+## Setup
+The Scalr integration is not included in the [Datadog Agent][3] package, so you need to install it.
 
-### インストール
+### Installation
 
-Datadog Agent v7.21 または v6.21 以降の場合、以下の手順に従ってホストに Scalr インテグレーションをインストールします。Datadog Agent 以前のバージョンでインストールする場合は、[コミュニティインテグレーションを利用する][4]を参照してください。
+For the Datadog Agent v7.21 or v6.21 and later, follow these instructions to install the Scalr integration on your host. See [Use Community Integrations][4] to install it with the Docker Agent or earlier versions of the Datadog Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-scalr==1.0.0
    ```
 
-2. Agent ベースの[インテグレーション][5]と同様にインテグレーションを構成します。
+2. Configure your integration similar to an Agent-based [integration][5].
 
-### コンフィギュレーション
+### Configuration
 
-1. [Scalr のメトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `scalr.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル scalr.d/conf.yaml][7] を参照してください。
+1. Edit the `scalr.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][6] to start collecting your [Scalr metrics](#metrics). See the [sample scalr.d/conf.yaml][7] for all available configuration options.
 
-2. [Agent を再起動します][8]。
+2. [Restart the Agent][8].
 
-### 検証
+### Validation
 
-[Agent のステータスサブコマンド][9]を実行し、Checks セクションで `scalr` を探します。
+Run the [Agent's status subcommand][9] and look for `scalr` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "scalr" >}}
 
 
-### イベント
+### Events
 
-Scalr は、実行結果をイベントとして[イベントエクスプローラー][12]に送信します。
+Scalr sends run execution results as an event to the [Events Explorer][12].
 
-## トラブルシューティング
+## Troubleshooting
 
-ヘルプが必要ですか？[Datadog サポート][13]または [Scalr サポート][14]にお問い合わせください。
+Need help? Contact [Datadog support][13] or [Scalr support][14].
 
+## Further Reading
 
-
-- [Scalr の顧客向けドキュメント][15]
-- [Scalr Datadog インテグレーションドキュメント][16]
+- [Scalr customer documentation][15]
+- [Scalr Datadog integration documentation][16]
 
 
 [1]: https://docs.scalr.com/en/latest/integrations.html
 [2]: https://docs.datadoghq.com/ja/events/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [5]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

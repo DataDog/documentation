@@ -24,6 +24,7 @@ author:
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: php-opcache
 integration_title: PHP OPcache
 integration_version: 0.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: php_opcache
 public_title: PHP OPcache
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: PHP OPcache バイトコードキャッシュシステムを監視します。
   media: []
@@ -59,40 +60,40 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [PHP OPcache][1] を監視します。
+This check monitors [PHP OPcache][1] through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インフラストラクチャーリスト
+### Installation
 
-`php_opcache` チェックをホストにインストールするには
+To install the `php_opcache` check on your host:
 
 
-1. [開発ツールキット][3]をインストールします。
- どのマシンでも。
+1. Install the [developer toolkit][3].
+ on any machine.
 
-2. `ddev -e release build php_opcache` を実行してパッケージをビルドします。
+2. Run `ddev -e release build php_opcache` to build the package.
 
-3. [Datadog Agent をダウンロードします][4]。
+3. [Download the Datadog Agent][4].
 
-4. ビルドの成果物を Agent をインストール済みのホストにアップロードし、以下を実行します。
- `datadog-agent integration install -w
+4. Upload the build artifact to any host with an Agent and
+ run `datadog-agent integration install -w
  path/to/php_opcache/dist/<ARTIFACT_NAME>.whl`.
 
 #### OPcache
 
-OPcache はデフォルトでメトリクスを公開しないため、このインテグレーションには、次の場所にあるメトリクスエクスポーターが含まれます。
+OPcache does not expose metrics by default so this integration includes a metric exporter, located here:
 
 ```
 /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php
 ```
-Datadog [integrations-extras][5] リポジトリからエクスポーターをダウンロードできます。
+You can download the exporter from the Datadog [integrations-extras][5] repository.
 
-Agent を[構成する](#configuration) とき、このファイル名でエクスポーターを直接参照するか、Web サーバーで Agent のエイリアスを構成できます。たとえば、Apache を使用している場合、Web サーバーコンフィギュレーションファイルのエイリアスは次のようになります。
+When [configuring](#configuration) your Agent, reference the exporter directly by this file name, or configure an alias for it on your web server. For example, if you're using Apache, the alias in the web server configuration file would look like this:
 
 ```
 Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php
@@ -102,36 +103,36 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 </Location>
 ```
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. `php_opcache` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_opcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル `php_opcache.d/conf.yaml` ファイル][6]を参照してください。
+1. Edit the `php_opcache.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your `php_opcache` performance data. See the [sample `php_opcache.d/conf.yaml` file][6] for all available configuration options.
     ```
     instances
       - url: http://localhost/opcache-status
     ```
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションの `php_opcache` を探します。
+[Run the Agent's status subcommand][8] and look for `php_opcache` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "php_opcache" >}}
 
 
-### ヘルプ
+### Events
 
-PHP OPcache インテグレーションには、イベントは含まれません。
+The PHP OPcache integration does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "php_opcache" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
 
 [1]: https://www.php.net/manual/en/book.opcache.php

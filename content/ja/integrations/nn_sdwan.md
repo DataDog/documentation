@@ -31,6 +31,7 @@ author:
 categories:
 - ネットワーク
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
 display_on_public_website: true
@@ -40,7 +41,6 @@ integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
 integration_version: 1.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nn_sdwan
 public_title: Netnology Cisco SD-WAN
@@ -57,6 +57,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cisco SDWAN Controller Metric Exporter
   media: []
@@ -68,55 +69,57 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、[Netnology][1] が提供する SD-WAN プラットフォームを使用して、Datadog Agent を通じて Cisco SD-WAN コントローラを監視します。このチェックにより、ユーザーは複数の Cisco SD-WAN コントローラのネットワークの健全性とパフォーマンスを同時に監視することができます。収集した情報は、ダッシュボードの集計や構成されたモニター/アラートの通知に使用できます。
+This check monitors Cisco SD-WAN controllers through the Datadog Agent using an SD-WAN platform provided by [Netnology][1]. The
+check enables users to monitor the network health and performance of multiple Cisco SD-WAN controllers simultaneously. Collected
+information can then be used for aggregated dashboarding and notifications on configured monitors/alerts.
 
-現在、SD-WAN コントローラのターゲットとしてサポートされているのは、Cisco vManage デバイスのみです。
+Currently, only Cisco vManage devices are supported as SD-WAN controller targets.
 
-## 計画と使用
+## Setup
 
-Netnology Cisco SD-WAN インテグレーションは [Datadog Agent][2] パッケージに含まれていないため、手動でインストールする必要があります。
+The Netnology Cisco SD-WAN integration is not included in the [Datadog Agent][2] package, so you need to install it manually.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ``` bash
    datadog-agent integration install -t nn_sdwan==1.0.1
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Cisco SD-WAN のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nn_sdwan.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nn_sdwan.d/conf.yaml][5] を参照してください。
+1. Edit the `nn_sdwan.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Cisco SD-WAN performance data. See [sample nn_sdwan.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `nn_sdwan` を探します。
+[Run the Agent's status subcommand][7] and look for `nn_sdwan` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "nn_sdwan" >}}
 
 
-### ヘルプ
+### Events
 
-Netnology Cisco SD-WAN インテグレーションには、イベントは含まれません。
+The Netnology Cisco SD-WAN integration does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "nn_sdwan" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://netnology.io

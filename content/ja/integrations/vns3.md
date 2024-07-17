@@ -3,6 +3,7 @@ app_id: vns3
 app_uuid: f6ffc9ae-a65d-41e4-8abd-c7194fc39a9a
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: vns3.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10005
     source_type_name: VNS3
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,6 +24,7 @@ categories:
 - cloud
 - network
 - security
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md
 display_on_public_website: true
@@ -31,7 +34,6 @@ integration_id: vns3
 integration_title: VNS3
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: vns3
 public_title: VNS3
@@ -49,55 +51,57 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: アプリケーションの接続とセキュリティのためのクラウドネットワークアプライアンス。
+  description: Cloud network appliance for application connectivity and security.
   media: []
   overview: README.md#Overview
   support: README.md#Support
   title: VNS3
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-VNS3 トポロジーの IPSec エンドポイント/トンネル、VNS3 ピア、オーバーレイクライアントに関する状態情報を取得します。
+Get state information regarding your VNS3 topology's IPSec endpoints/tunnels, VNS3 Peers, and overlay clients.
 
-- ピアリングリンクのステータスチェック
+- Peering links Status Check:
 
-  ![ピアリング][1]
+  ![peering][1]
 
-- オーバーレイクライアントのステータスチェック
+- Overlay Clients Status Check:
 
-  ![クライアント][2]
+  ![clients][2]
 
-- IPSec トンネルのステータスチェック
+- IPSec tunnels Status Check:
 
-  ![IPSec][3]
+  ![ipsec][3]
 
-## セットアップ
+## Setup
 
-### コンフィギュレーション
+### Configuration
 
-メトリクスを取得するには、Cohesive Networks の Datadog コンテナをデプロイし、VNS3 ファイアウォールを設定し、コンテナを構成します。詳細は、[Cohesive Networks のガイド][4]または[ビデオ][5]を参照してください。
+To capture metrics, deploy Cohesive Networks' Datadog container, set up the VNS3 firewall, and configure the container. For more details, see the [Cohesive Networks guide][4] or watch the [video][5].
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "vns3" >}}
 
 
-### イベント
+### Events
 
-VNS3 チェックには、イベントは含まれません。
+The VNS3 check does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-VNS3 チェックには、サービスのチェック機能は含まれません。
+The VNS3 check does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+Need help? Contact [Datadog support][7].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/vns3/images/peering.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/vns3/images/clients.png

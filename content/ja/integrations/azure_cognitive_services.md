@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Cognitive Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cognitive_services/
@@ -14,7 +15,6 @@ integration_id: azure-cognitiveservices
 integration_title: Microsoft Azure Cognitive Services
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_cognitive_services
 public_title: Datadog-Microsoft Azure Cognitive Services インテグレーション
@@ -29,27 +29,27 @@ Azure Cognitive Services は、開発者に AI やデータサイエンスに関
 
 Datadog Azure インテグレーションを使用して、Azure Cognitive Services からメトリクスを収集できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_cognitive_services" >}}
 
 
-### ヘルプ
+### Events
 
 Azure Cognitive Services インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Azure Cognitive Services インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

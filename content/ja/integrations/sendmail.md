@@ -23,6 +23,7 @@ author:
 categories:
 - メトリクス
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: sendmail
 integration_title: Sendmail
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sendmail
 public_title: Sendmail
@@ -45,6 +45,7 @@ tile:
   - Category::Metrics
   - Category::Network
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: メールキューを監視する Sendmail インテグレーション
   media: []
@@ -56,53 +57,53 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Sendmail][1] を監視します。
+This check monitors [Sendmail][1] through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-Sendmail チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Sendmail check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Sendmail check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-sendmail==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. sendmail のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sendmail.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sendmail.d/conf.yaml][5] を参照してください。
+1. Edit the `sendmail.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your sendmail performance data. See the [sample sendmail.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `sendmail` を探します。
+[Run the Agent's status subcommand][7] and look for `sendmail` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "sendmail" >}}
 
 
-### ヘルプ
+### Events
 
-Sendmail には、イベントは含まれません。
+Sendmail does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "sendmail" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://www.proofpoint.com/us/open-source-email-solution

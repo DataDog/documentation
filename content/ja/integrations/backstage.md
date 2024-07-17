@@ -22,6 +22,7 @@ author:
   support_email: oss@roadie.io
 categories:
 - developer tools
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/backstage/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: backstage
 integration_title: Backstage
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: backstage
 public_title: Backstage
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog のダッシュボードとグラフを Backstage インスタンスに埋め込むことができます。
   media: []
@@ -58,24 +59,24 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Backstage][1] は、デベロッパーポータルを構築するためのオープンプラットフォームです。このインテグレーションにより、Datadog のグラフやダッシュボードを Backstage インスタンスに埋め込むことができるようになります。
+[Backstage][1] is an open platform for building Developer Portals. This integration enables you to embed Datadog graphs and dashboards into your Backstage instance.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-1. Datadog プラグインを Backstage にインストールします。
+1. Install the Datadog plugin into Backstage:
 
 ```shell
 cd packages/app
 yarn add @roadiehq/backstage-plugin-datadog
 ```
 
-2. Backstage Overview タブに Datadog プラグインウィジェットを追加します。詳しくは、[詳細説明][2]を参照してください。
-3. Datadog ダッシュボードの[公開 URL][3] を検索または作成します。
-4. プラグインのメタデータにダッシュボードの URL を追加します。
+2. Add the Datadog plugin widget to your Backstage Overview tab. See the [detailed instructions][2] for more information.
+3. Find or create the [public URL][3] for your Datadog dashboard. 
+4. Add the dashboard URL to the plugin's metadata:
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
@@ -88,27 +89,27 @@ metadata:
     datadoghq.com/dashboard-url: <DATADOGURL>
 ```
 
-### 検証
+### Verification
 
-Backstage インスタンスの Overview タブを開き、Datadog のダッシュボードやグラフが期待通りにレンダリングされることを確認します。
+Open your Backstage instance Overview tab to confirm your Datadog dashboard or graph is rendered as expected.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Backstage インテグレーションには、メトリクスは含まれません。
+The Backstage integration does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-Backstage インテグレーションには、サービスのチェック機能は含まれません。
+The Backstage integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-Backstage インテグレーションには、イベントは含まれません。
+The Backstage integration does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-サポートが必要な場合は、[Backstage Community][4] にお問い合わせください。
+Need help? Reach out to the [Backstage Community][4].
 
 [1]: https://backstage.io
 [2]: https://roadie.io/backstage/plugins/datadog/

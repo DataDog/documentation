@@ -1,8 +1,9 @@
 ---
 categories:
 - notifications
+custom_kind: integration
 dependencies: []
-description: 複数のアプリケーションのエラー率を一元的に追跡。
+description: Centrally track error rates across your applications.
 doc_link: https://docs.datadoghq.com/integrations/bugsnag/
 draft: false
 git_integration_title: bugsnag
@@ -11,7 +12,6 @@ integration_id: bugsnag
 integration_title: Bugsnag
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: bugsnag
 public_title: Datadog-Bugsnag インテグレーション
@@ -31,13 +31,13 @@ Bugsnag は、Web およびモバイルアプリケーション用の自動ク�
 - プロジェクトのエラー率が急上昇したときに通知を受けることができます。
 - 重大度やリリース段階で通知を絞り込むことができます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 インストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### Configuration
 
 Bugsnag を Datadog と統合するには、以下の手順に従います。
 
@@ -54,21 +54,21 @@ Bugsnag を Datadog と統合するには、以下の手順に従います。
 7. 設定を保存します。
 8. 別の通知条件セットに基づいてエラーイベントを表示するには、同じプロジェクトからのストリームを追加します。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Bugsnag インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### Events
 
 Bugsnag インテグレーションは、設定された Bugsnag のエラーとアラートを Datadog のイベントストリームにプッシュします。
 
-### ヘルプ
+### Service Checks
 
 Bugsnag インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

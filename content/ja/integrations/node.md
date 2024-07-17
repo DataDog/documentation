@@ -5,24 +5,24 @@ categories:
 - languages
 - log collection
 - tracing
+custom_kind: integration
 dependencies: []
-description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
+description: Send custom metrics from your Node.js services via DogStatsD or our API.
 doc_link: https://docs.datadoghq.com/integrations/nodejs/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/node-logging-best-practices/
-  tag: ブログ
-  text: Node.js ログを収集、カスタマイズ、一元化する方法
+  tag: Blog
+  text: How to collect, customize, and centralize Node.js logs
 - link: https://www.datadoghq.com/blog/node-monitoring-apm/
-  tag: ブログ
-  text: Datadog APM と分散型トレーシングを使用した Node.js の監視。
+  tag: Blog
+  text: Node.js monitoring with Datadog APM and distributed tracing
 git_integration_title: node
 has_logo: true
 integration_id: node
 integration_title: NodeJS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: node
 public_title: Datadog-NodeJS インテグレーション
@@ -35,7 +35,7 @@ version: '1.0'
 
 Node.js インテグレーションを利用して、Node.js アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
-## 計画と使用
+## Setup
 
 ### メトリクスの収集
 
@@ -85,7 +85,7 @@ _Agent v6.0 以上で使用可能_
 
 [Node.js プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

@@ -27,6 +27,7 @@ categories:
 - developer tools
 - ログの収集
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: octoprint
 integration_title: Datadog OctoPrint
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: octoprint
 public_title: Datadog OctoPrint
@@ -50,6 +50,7 @@ tile:
   - Category::Log Collection
   - Category::Orchestration
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: 3D プリンターを管理する Web インターフェイス、OctoPrint を監視
   media: []
@@ -61,91 +62,91 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [OctoPrint][1] を監視します。
+This check monitors [OctoPrint][1] through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インフラストラクチャーリスト
+### Installation
 
-以下を実行して OctoPrint チェックをホストにインストールするには
+To install the OctoPrint check on your host by running:
 
 ```shell
 sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSION>
 ```
 
-**注**: このページの一番上に `VERSION` が記載されています。
+**Note**: The `VERSION` is listed at the top of this page.
 
-#### ソースからインストール (オプション)
+#### Install from source (optional)
 
-1. マシンに[開発ツールキット][3]をインストールします。
+1. Install the [developer toolkit][3] on any machine.
 
-2. `ddev release build octoprint` を実行してパッケージをビルドします。
+2. Run `ddev release build octoprint` to build the package.
 
-3. [Datadog Agent をダウンロードします][4]。
+3. [Download the Datadog Agent][4].
 
-4. ビルドの成果物を Agent をインストール済みのホストにアップロードし、以下を実行します。
- `datadog-agent integration install -w
+4. Upload the build artifact to any host with an Agent and
+ run `datadog-agent integration install -w
  path/to/octoprint/dist/datadog_octoprint*.whl`.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. OctoPrint の Web インターフェースから、Datadog で使用する API キーを作成します。作成したキーは Settings --> Application Keys に表示されます。
+1. From the OctoPrint web interface, create an API key for use with Datadog. This can be found within Settings --> Application Keys.
 
-2. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `octoprint.d/conf.yaml` ファイルを編集します。OctoPrint API キーを `octo_api_key` の値として貼り付けます。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル octoprint.d/conf.yaml][5]を参照してください。
+2. Edit the `octoprint.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory. Paste the OctoPrint API key as the value for `octo_api_key`. See the [sample octoprint.d/conf.yaml][5] for all available configuration options.
 
-3. [Agent を再起動します][6]。
+3. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `octoprint` を探します。
+[Run the Agent's status subcommand][7] and look for `octoprint` under the Checks section.
 
-### ワークフローの自動化
+### Logs
 
-デフォルトでは、このインテグレーションは、Raspberry Pi から OctoPrint  を実行するように予め構成された [OctoPi][8] イメージを使うことを想定しています。
+By default this integration assumes that you are using the [OctoPi][8] image that is pre-configured to run OctoPrint from a Raspberry Pi.
 
-デフォルトでで収集するログ（およびデフォルトの場所）は、次のとおりです。
+The logs that it collects by default (and their default locations) are:
 
-- OctoPrint アプリログ: `/home/pi/.octoprint/logs`
-- OctoPrint Webcam ログ: `/var/log/webcamd.log`
-- HA プロキシログ: `/var/log/haproxy.log`
+- OctoPrint App log: `/home/pi/.octoprint/logs`
+- OctoPrint Webcam log: `/var/log/webcamd.log`
+- HA Proxy log: `/var/log/haproxy.log`
 
-これらの一部またはすべてを変更したり削除したりするには、インテグレーションの `conf.yaml` ファイルを変更します。
+Any or all of these may be changed or removed by modifying the integration's `conf.yaml` file.
 
-#### ログ処理
+#### Log processing
 
-OctoPrint は独自のログ形式（オブジェクト形式ではない）を使用します。ログを活用するにはパース規則を使用してログ処理パイプラインを作成します。たとえば、
+OctoPrint uses its own log format (not an object format). To make use of the logs, create a log processing pipeline with some parsing rules, for example:
 
-1. メインパイプライン: "OctoPrint"
-    1. サブパイプライン 1: "OctoPrint 印刷ジョブ"
-        1. Grok パーサー規則:
+1. Main Pipeline: "OctoPrint"
+    1. Sub Pipeline 1: "OctoPrint Print Job"
+        1. Grok parser rule:
             - `OctoPrint_Print_Job %{date("yyyy-MM-dd HH:mm:ss,SSS"):date}\s+-\s+%{notSpace:source}\s+-\s+%{word:level}\s+-\s+Print\s+job\s+%{notSpace:job_status}\s+-\s+%{data::keyvalue(":"," ,")}`
-    1. サブパイプライン 2: "一般的な OctoPrint ログ"
-        1. Grok パーサー規則:
+    1. Sub Pipeline 2: "General OctoPrint Log"
+        1. Grok parser rule:
             - `General_OctoPrint_Log %{date("yyyy-MM-dd HH:mm:ss,SSS"):date}\s+-\s+%{notSpace:source}\s+-\s+%{word:level}\s+-\s+%{data:message}`
 
-詳細については、[Datadog ログ処理ドキュメント][9]を参照してください。
+For more information, see the [Datadog Log Processing documentation][9].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "octoprint" >}}
 
 
-### ヘルプ
+### Events
 
-OctoPrint には、イベントは含まれません。
+OctoPrint does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "octoprint" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+Need help? Contact [Datadog support][12].
 
 
 [1]: https://octoprint.org/

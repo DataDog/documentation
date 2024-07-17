@@ -3,6 +3,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: ブログ
   text: Datadog で Azure App Service 上の Linux Web アプリを監視する
+kind: documentation
 title: Azure App Service - Linux コード
 ---
 ## 概要
@@ -59,7 +60,7 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 **General settings** で、**Startup Command** のフィールドに以下を追加します。
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.7.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.10.6/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service の構成: Azure UI の Settings の Configuration セクションにある、Stack の設定です。スタック、メジャーバージョン、マイナーバージョンのフィールドの下には、上記の curl コマンドで入力される Startup Command フィールドがあります。" style="width:100%;" >}}
@@ -93,7 +94,11 @@ DogStatsD でアプリケーションのカスタムメトリクスを有効に�
 - [PHP][10]
 - [Python][11]
 
-## トラブルシューティング
+## Deployment
+
+{{% aas-workflow-linux %}}
+
+## Troubleshooting
 
 トレースやカスタムメトリクスデータを期待通りに受信できない場合は、**App Service logs** を有効にしてデバッグログを受信してください。
 

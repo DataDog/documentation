@@ -17,6 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: ブログ
   text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
+kind: documentation
 title: Azure App Service - Windows コード
 ---
 
@@ -54,6 +55,8 @@ Datadog の Azure App Service 向け拡張機能は、追加モニタリング�
     - .NET Core 3.1
     - .NET 5
     - .NET 6
+    - .NET 7
+    - .NET 8
 
 4. Datadog では、機能の最適なパフォーマンス、安定性、そして可用性を確保するため、拡張機能の最新バージョンへの定期的な更新を推奨しています。初期インストールおよびその後の更新を正常に完了するには、ウェブアプリを一度完全に停止する必要があります。
 
@@ -70,7 +73,7 @@ v2.3.0 以降、.NET 拡張機能はセマンティックバージョニング�
 - 拡張機能 `2.3.101` は Tracer v`2.3.1` を使用します
 - 拡張機能 `2.3.200` は Tracer v`2.3.2` を使用します
 
-### インストール
+### Installation
 
 1. Web アプリや関数を監視するために [Azure インテグレーション][1]を構成します。Datadog で対応する `azure.app_services.count` または `azure.functions.count` メトリクスが表示されることを確認し、正しく設定されていることを確認します。**注**: このステップは、メトリクス/トレースの相関、関数トレースパネル表示、および Azure App Services で Datadog を使用する際の全体的なエクスペリエンスを向上させるために重要です。
 
@@ -87,7 +90,8 @@ v2.3.0 以降、.NET 拡張機能はセマンティックバージョニング�
     - トレースとカスタム統計をグループ化するには `DD_ENV` を設定します。
     - `DD_SERVICE` を設定してサービス名を指定します（デフォルトはアプリ名）。
     - アプリからのアプリケーションログと相関するよう `DD_LOGS_INJECTION:true` を設定します。
-    - .NET [Continuous Profiler][5] (公開ベータ版) を有効にするには、`DD_PROFILING_ENABLED:true` を設定します。
+    - .NET [Continuous Profiler][5] を有効にするには、`DD_PROFILING_ENABLED:true` を設定します。
+    - [Application Security][15] を有効にするには、`DD_APPSEC_ENABLED:true` を設定します。
     - [任意のコンフィギュレーション変数][6]の全リストをご参照ください。
 6. **Save** をクリック（アプリケーションが再起動します）。
 7. <div class="alert alert-warning">[必須] <u>Stop</u> をクリックしてアプリケーションを停止します。</div>
@@ -116,7 +120,7 @@ Azure App Service でカスタムメトリクスおよびチェックを書き�
 1. [DogStatsD NuGet パッケージ][10]を Visual Studio プロジェクトに追加します。
 2. アプリケーション内で DogStatsD を初期化し、カスタムメトリクスを作成します。
 3. Azure App Service にコードをデプロイします。
-4. Datadog App Service 拡張機能をインストールします。
+4. If you have not already, install the Datadog App Service extension.
 
 **注**: [標準的な DogStatsD コンフィグプロセス][11]とは異なり、DogStatsD のコンフィギュレーションを開始するのにポートやサーバー名の設定は必要ありません。Azure App Service にはアンビエント環境変数があり、メトリクスの送信条件を決定します（DogStatsD クライアントには v6.0.0 以上が必要）。
 
@@ -147,7 +151,7 @@ DogStatsd.Increment("sample.startup");
 [2]: /ja/tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /ja/profiler/
+[5]: /ja/profiler/enabling/dotnet/?tab=azureappservice
 [6]: /ja/tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [7]: /ja/logs/log_collection/csharp/#agentless-logging-with-apm
 [8]: /ja/logs/log_collection/csharp/#agentless-logging-with-serilog-sink
@@ -157,6 +161,7 @@ DogStatsd.Increment("sample.startup");
 [12]: /ja/metrics/
 [13]: /ja/integrations/guide/azure-portal/#app-service-extension
 [14]: /ja/integrations/guide/azure-portal/
+[15]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework#azure-app-service
 {{% /tab %}}
 {{% tab "Java" %}}
 ### 要件
@@ -171,7 +176,7 @@ DogStatsd.Increment("sample.startup");
 
 4. Datadog では、機能の最適なパフォーマンス、安定性、そして可用性を確保するため、拡張機能の最新バージョンへの定期的な更新を推奨しています。初期インストールおよびその後の更新を正常に完了するには、ウェブアプリを一度完全に停止する必要があります。
 
-### インストール
+### Installation
 
 1. Web アプリや関数を監視するために [Azure インテグレーション][1]を構成します。Datadog で対応する `azure.app_service.count` または `azure.functions.count` メトリクスが表示されることを確認し、正しく設定されていることを確認します。**注**: このステップは、メトリクス/トレースの相関関係、機能的なトレース・パネル表示、Datadog サイトでの様々な壊れたユーザー体験の回避のために重要です。
 
@@ -210,7 +215,7 @@ Azure App Service の拡張機能には、[DogStatsD][7] (Datadog のメトリ�
 1. [DogStatsD クライアント][8]をプロジェクトに追加します。
 2. アプリケーション内で DogStatsD を初期化し、カスタムメトリクスを作成します。
 3. サポートされている Azure ウェブアプリにコードをデプロイします。
-4. Datadog App Service 拡張機能をインストールします。
+4. If you have not already, install the Datadog App Service extension.
 
 **注**: [標準的な DogStatsD コンフィグプロセス][9]とは異なり、DogStatsD のコンフィギュレーションを開始するのにポートやサーバー名の設定は必要ありません。Azure App Service にはアンビエント環境変数があり、メトリクスの送信条件を決定します（DogStatsD クライアントには v6.0.0 以上が必要）。
 
@@ -232,11 +237,93 @@ client.Increment("sample.startup");
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /ja/tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
-[6]: /ja/logs/log_collection/csharp/?tab=serilog#agentless-logging
+[6]: /ja/logs/log_collection/java/?tab=log4j#agentless-logging
 [7]: /ja/developers/dogstatsd
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
 [9]: /ja/developers/dogstatsd/?tab=java#code
 [10]: /ja/metrics/
+{{% /tab %}}
+{{% tab "Node.js" %}}
+### 要件
+
+If you haven't already, set up the [Datadog-Azure integration][1] first.
+
+Datadog's Azure App Service Node.js extension supports Azure App Service Web Apps. Function Apps are not supported.
+
+### Installation
+
+1. Configure the [Datadog-Azure integration][1] to monitor your Azure Web App. To verify, check that your Web App is counted in the `azure.app_service.count` metric in Datadog. 
+
+2. [Azure Portal][3] を開き、Datadog でインスツルメントする Azure Web App のダッシュボードに移動します。
+
+3. On the **Configuration** page, go to the **Application settings** tab. Select **+ New application setting**.
+
+4. Add your [Datadog API key][4] as the value of an application setting with the name `DD_API_KEY`.
+   {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="api key page" >}}
+
+   Optionally, you can set further environment variables as application settings. These variables include:
+   - `DD_SITE`: {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`)
+   - `DD_ENV`: Your environment name
+   - `DD_SERVICE`: Your service name (defaults to your Web App name)
+   - `DD_RUNTIME_METRICS_ENABLED`: `true` to enable runtime metrics
+   - `DD_APPSEC_ENABLED`: `true` to enable [Application Security Management][11]
+
+   See the full list of [optional configuration settings][5].
+6. Select **Save**. This restarts your application.
+7. **Stop** your application.
+
+   <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
+8. On the **Extensions** page, select the **Node Datadog APM** extension.
+9. Accept the legal terms, select **OK**, and wait for the installation to complete. 
+10. **Start** your application.
+    {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="起動" >}}
+
+### Azure Web Apps からのアプリケーションロギング
+
+Azure App Service のアプリケーションから Datadog にログを送信するには、アプリから Datadog に直接ログをストリーミングする必要があります。この方法でログを送信すると、トレース ID の挿入が可能になり、Datadog でログとトレースの紐付けができるようになります。
+
+To configure application logging for Node.js in Azure App Service, see [Agentless logging with Node.js][6].
+
+<div class="alert alert-info">Azure resource logs do not include trace ID. <br/><br/>Trace ID injection occurs inside your application. Azure resource logs are generated by Azure in the management plane, and therefore do not include the trace ID.</div>
+
+### DogStatsD を使用したカスタムメトリクス
+
+Datadog's Azure App Service Node.js extension includes an instance of [DogStatsD][7], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps.
+
+この環境でカスタムメトリクスおよびチェックを書き込むことは、Datadog Agent が実行されている標準ホスト上のアプリケーションでそれを実行するプロセスと同様です。拡張機能を使用して Azure App Service から Datadog へカスタムメトリクスを送信するには、以下を実行します。
+
+1. [Initialize DogStatsD and write custom metrics][12] in your application.
+1. Deploy your code to a supported Azure Web App.
+1. If you have not already, install Datadog's Azure App Service Node.js extension.
+
+<div class="alert alert-info">You do not need to install a Node.js DogStatsD client, as it is included in the Node.js tracer (<code>dd-trace</code>) packaged in the Azure App Service extension.</div>
+
+To send metrics, use this code:
+
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' });
+tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
+```
+
+<div class="alert alert-info">Datadog's Node.js tracer, <code>dd-trace</code>, is packaged in the Azure App Services extension. It is automatically appended to the <code>NODE_PATH</code>.<br/><br/> <strong>You do not need to add</strong> <code>dd-trace</code> <strong>as a dependency in</strong> <code>package.json</code>. Explicitly adding <code>dd-trace</code> as a dependency may override the version provided by the extension. For local testing, reference the <a href="https://github.com/DataDog/datadog-aas-extension/releases">release notes</a> to find the appropriate version of the Node.js tracer for your version of the Azure App Service extension.</div>
+
+[カスタムメトリクス][10]に関する詳細を参照してください。
+
+[1]: /ja/integrations/azure
+[2]: /ja/tracing/setup/java/
+[3]: https://portal.azure.com/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /ja/tracing/trace_collection/library_config/nodejs/#configuration-settings
+[6]: /ja/logs/log_collection/nodejs/?tab=winston30#agentless-logging
+[7]: /ja/developers/dogstatsd
+[8]: https://github.com/brightcove/hot-shots
+[9]: /ja/developers/dogstatsd/?tab=java#code
+[10]: /ja/metrics/
+[11]: /ja/security/application_security/enabling/nodejs/
+[12]: /ja/developers/dogstatsd/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -353,7 +440,11 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 {{% /tab %}}
 {{< /tabs >}}
 
-## トラブルシューティング
+## Deployment
+
+{{% aas-workflow-windows %}}
+
+## Troubleshooting
 
 ### サーバーレスビューでアプリの設定ミスが確認された場合、またはトレースに対応するメトリクスが見つからない場合
 

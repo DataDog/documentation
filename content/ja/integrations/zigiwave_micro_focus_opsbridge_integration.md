@@ -17,6 +17,7 @@ categories:
 - インシデント
 - マーケットプレイス
 - メトリクス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -25,7 +26,6 @@ integration_id: zigiwave-micro-focus-opsbridge-integration
 integration_title: OpsBridge
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -53,6 +53,7 @@ tile:
   - Submitted Data Type::Metrics
   - Submitted Data Type::Events
   - Submitted Data Type::Incidents
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog と OpsBridge のノーコードインテグレーション
   media:
@@ -81,31 +82,46 @@ tile:
 
 
 
-## 概要
+## Overview
 
-ZigiOps は、最も柔軟でコード不要のインテグレーションプラットフォームです。ZigiOps 製品は、お客様のビジネスが IT 環境における問題をこれまで以上に迅速に特定し、報告し、解決することを支援します。ZigiOps をソフトウェアエコシステムに統合することで、ITSM、ITOM、DevOps のための一般的な企業向けソフトウェアツール (Jira、ServiceNow、VMware vROps、Micro Focus Ops Bridge、BMC、チャーウェル、スプランク、その他) に接続することが可能です。
+ZigiOps is the most flexible, no-code integration platform. The ZigiOps product
+helps your businesses identify, report, and resolve issues in your IT 
+environments faster than ever. Integrate ZigiOps into your software ecosystem to connect to popular enterprise 
+software tools for ITSM, ITOM, and DevOps: Jira, ServiceNow, VMware 
+vROps, Micro Focus Ops Bridge, BMC, Cherwell, Splunk, and more.
 
-### ZigiOps による Datadog – Micro Focus OBM インテグレーション
+### Datadog – Micro Focus OBM Integration with ZigiOps
 
-ZigiWave Datadog - OpsBridge のインテグレーションにより、OpsBridge からインシデントを抽出し、Datadog に入力することができます。ZigiOps は、インシデントの概要、検出方法、深刻度、ステータスなど、すべてのフィールドを同期します。このインテグレーションは双方向なので、Datadog または OpsBridge のいずれかに更新があると、ZigiOps は自動的にその更新を関連システムに送信します。
+With the ZigiWave Datadog - OpsBridge integration, you can extract incidents from OpsBridge and populate them in Datadog. ZigiOps syncs all fields such as the incident summary, detection method, severity, status, and more. This integration is bi-directional so whenever there is an update in either Datadog or OpsBridge, ZigiOps will automatically send that update to the relevant system.
 
 
-Datadog オートディスカバリーは、OpsBridge データベースにないものの、監視が必要なホストを検出します。ZigiOps は、ホスト情報を取得して OpsBridge RTSM にレポートし、Datadog からのデータでトポロジー情報をリッチ化します。トポロジーは、ZigiOps による定期的なチェックで最新に保たれます。
+Datadog Autodiscovery finds hosts that are not in
+the OpsBridge database but need to be monitored. ZigiOps takes the host 
+information and reports it to OpsBridge RTSM, enriching the topology 
+information with data from Datadog. The topology is kept up-to-date with 
+regular checks by ZigiOps.
 
-ZigiOps は、Datadog のイベントを収集し、イベントとして OpsBridge に報告します。
-このプラットフォームは、メトリクスやトポロジーなど、関連するホストの詳細をすべて同期します。
+ZigiOps collects Datadog events and reports them to OpsBridge as events.
+The platform syncs all related host details such as metrics, topology, and more.
 
-ZigiOps は Datadog のメトリクスを収集し、関連するホスト情報とともに MF Operations Connector にレポートします。これらのメトリクスは、OpsBridge Performance Perspective からアクセスでき、ダッシュボードの構築に使用することができます。
+ZigiOps collects Datadog metrics and reports them, along with related host information, to the MF Operations 
+Connector. These metrics can then be 
+accessed by the OpsBridge Performance Perspective and used for 
+building dashboards. 
 
-このインテグレーションにより、IT 運用チームは OpsBridge インフラストラクチャーを俯瞰的に把握し、問題が現実の問題となる前に検出できるようになります。
+This integration will give your IT Operations team a bird’s eye view of
+your OpsBridge infrastructure and help detect issues before they become real 
+problems.
 
-### トポロジー、メトリクス、イベント、インシデント
+### Topology, Metrics, Events, Incidents
 
-ZigiOps では、Datadog - Micro Focus OBM インテグレーションの 4 つのユースケースに対して、完全にカスタマイズ可能なインテグレーションテンプレートを提供しています。このテンプレートにより、ユーザーはデータの流れを素早く確認し始めることができます。ユーザーは、テンプレートで提供されるデータマッピングとフィルターを、ユースケースに合わせて変更することができます。現在利用できるテンプレートは、OpsBridge イベント - Datadog インシデント、Datadog イベント - OpsBridge イベント、Datadog メトリクス - OBM メトリクス、Datadog ホスト - OBM トポロジーです。ユースケースがこれらのテンプレートのどれにも当てはまらない場合、ゼロから独自のインテグレーションを作成することもできます。インテグレーションコンサルタントが、その方法を指導します。
+ZigiOps offers fully customizable integration templates for four use cases of the Datadog – Micro Focus OBM integration. The templates help users to quickly start to begin seeing data flow. Users can modify data mappings and filters provided by the templates to fit their use case. We currently have these templates available: OpsBridge events - Datadog incidents, Datadog events - OpsBridge events,  Datadog metrics - OBM metrics, and Datadog hosts - OBM topology. If your use case doesn’t fit any of those templates, you can also create your own integration from scratch. Integration consultants will guide you along the way.
 
-## Agent
+## Support
 
-ZigiWave は、ユーザーの皆様に最高のカスタマーエクスペリエンスを提供することに専念しています。 既存ユーザーの方は、support.zigiwave.com からチケットを送信していただくか、弊社チームまでメール (support@zigiwave.com) をお送りください。
+ZigiWave is dedicated to providing the best customer experience 
+for our users.  If you are an existing user, you can submit a ticket from 
+support.zigiwave.com or email our team at support@zigiwave.com. 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/zigiwave-micro-focus-opsbridge-integration" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/zigiwave-micro-focus-opsbridge-integration" target="_blank">Click Here</a> to purchase this application.

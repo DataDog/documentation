@@ -3,6 +3,7 @@ app_id: oom-kill
 app_uuid: 7546b270-2efe-4a59-8f94-3447df2db801
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: oom_kill.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10293
     source_type_name: OOM Killer
 author:
   homepage: https://www.datadoghq.com
@@ -20,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md
 display_on_public_website: true
@@ -29,7 +32,6 @@ integration_id: oom-kill
 integration_title: OOM Killer
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: oom_kill
 public_title: OOM Killer
@@ -41,6 +43,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::OS & System
+  - Offering::Integration
   configuration: README.md#Setup
   description: システムまたはcgroupによる OOM killer プロセスの追跡。
   media: []
@@ -49,77 +52,78 @@ tile:
   title: OOM Killer
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent およびシステムプローブを通じて、OOM（メモリ不足）の強制終了プロセスというカーネルを監視します。
+This check monitors the kernel OOM (out of memory) kill process through the Datadog Agent and the System Probe.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-OOM Killer チェックは [Datadog Agent][1] パッケージに含まれています。システムプローブに実装された eBPF プログラムに依存します。
+The OOM Kill check is included in the [Datadog Agent][1] package. It relies on an eBPF program implemented in the System Probe.
 
-システムプローブにより使用される eBPF プログラムはランタイムでコンパイルされ、適切なカーネルヘッダーへのアクセスを必要とします。
+The eBPF program used by the System Probe is compiled at runtime and requires you to have access to the proper kernel headers.
 
-Debian 系のディストリビューションでは、以下のようにカーネルヘッダーをインストールします。
+On Debian-like distributions, install the kernel headers like this:
 ```sh
 apt install -y linux-headers-$(uname -r)
 ```
 
-RHEL 系のディストリビューションでは、以下のようにカーネルヘッダーをインストールします。
+On RHEL-like distributions, install the kernel headers like this:
 ```sh
 yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: OOM Kill チェックが動作するためには カーネルバージョン 4.11 以降が必要です。
-また、Windows およびバージョン 8 よりも前の CentOS/RHEL はサポートされません。
+**Note**: Kernel version 4.9 or later is required for the OOM Kill check to work.
+In addition, Windows and CentOS/RHEL versions earlier than 8 are not supported.
 
-### コンフィギュレーション
+### Configuration
 
-1. Agent のコンフィギュレーションディレクトリのルートにある `system-probe.yaml` フォルダーで、以下のコンフィギュレーションを追加します。
+1. In the `system-probe.yaml` file at the root of your Agent's configuration directory, add the following configuration:
 
     ```yaml
     system_probe_config:
         enable_oom_kill: true
     ```
 
-2. OOM Kill メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `oom_kill.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[oom_kill.d/conf.yaml の例][2]を参照してください。
+2. Ensure that the `oom_kill.d/conf.yaml` file is present in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your OOM Kill metrics. See the [example oom_kill.d/conf.yaml][2] for all available configuration options.
 
-3. [Agent を再起動します][3]。
+3. [Restart the Agent][3].
 
-### Docker でのコンフィギュレーション
+### Configuration with Docker
 
-上記に従い `system-probe.yaml` および `oom_kill.d/conf.yaml` をマウントすることに加え、以下の構成を行います。
+In addition to mounting `system-probe.yaml` and `oom_kill.d/conf.yaml` as described above, do the following configuration:
 
-1. 以下のボリュームを Agent コンテナにマウントします。
+1. Mount the following volumes to the Agent container:
 
     ```
-    -v /sys/kernel/debug:/sys/kernel/debug 
-    -v /lib/modules:/lib/modules 
+    -v /sys/kernel/debug:/sys/kernel/debug
+    -v /lib/modules:/lib/modules
     -v /usr/src:/usr/src
     ```
 
-2. BPF の動作を有効にするために、以下の権限を追加します。
+2. Add the following permission to enable BPF operations:
 
     ```
     --privileged
     ```
 
-   カーネルバージョン 5.8 からは、`--privileged` パラメーターを `--cap-add CAP_BPF` に置き換えることができます。 
+    From kernel version 5.8, the `--privileged` parameter can be replaces by `--cap-add CAP_BPF`.
 
-*注**: Docker Swarm では `--privileged` モードはサポートされていません。
+**Note**: `--privileged` mode is not supported in Docker swarm.
 
 
-### Helm のインテグレーション
+### Configuration with Helm
 
-[Datadog Helm チャート][4]を使用し、`values.yaml` ファイルで `datadog.systemProbe` と `datadog.systemProbe.enableOOMKill` のパラメータが有効であることを確認します。
+With the [Datadog Helm chart][4], ensure that the `datadog.systemProbe` and `datadog.systemProbe.enableOOMKill` parameters are enabled in the `values.yaml` file.
 
-### Operator (v1.0.0+) による構成
+### Configuration with the Operator (v1.0.0+)
 
-DatadogAgent マニフェストで `features.oomKill.enabled` パラメーターを設定します。
+Set the `features.oomKill.enabled` parameter in the DatadogAgent manifest:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -131,7 +135,7 @@ spec:
       enabled: true
 ```
 
-**注**: COS (Container Optimized OS) を使用する場合は、ノード Agent で `src` ボリュームをオーバーライドしてください。
+**Note**: When using COS (Container Optimized OS), override the `src` volume in the node Agent:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -143,37 +147,37 @@ spec:
       enabled: true
   override:
     nodeAgent:
-      volumes: 
+      volumes:
       - emptyDir: {}
         name: src
 ```
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `oom_kill` を探します。
+[Run the Agent's status subcommand][5] and look for `oom_kill` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "oom_kill" >}}
 
 
-### サービスのチェック
+### Service Checks
 
-OOM Killer チェックには、サービスのチェック機能は含まれません。
+The OOM Kill check does not include any service checks.
 
-### イベント
+### Events
 
-OOM Killer チェックでは、強制終了されたプロセス ID とプロセス名、そしてトリガーしたプロセス ID とプロセス名を含む、各 OOM Killer のイベントが送信されます。
+The OOM Kill check submits an event for each OOM Kill that includes the killed process ID and name, as well as the triggering process ID and name.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://github.com/helm/charts/tree/master/stable/datadog
+[4]: https://github.com/DataDog/helm-charts
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
 [7]: https://docs.datadoghq.com/ja/help/

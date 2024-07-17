@@ -3,12 +3,14 @@ app_id: windows-performance-counters
 app_uuid: ec86de4d-a080-4160-8b0a-b937bbea08e9
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10241
     source_type_name: Windows パフォーマンスカウンター
 author:
   homepage: https://www.datadoghq.com
@@ -18,6 +20,7 @@ author:
 categories:
 - iot
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_performance_counters/README.md
 display_on_public_website: true
@@ -25,9 +28,8 @@ draft: false
 git_integration_title: windows_performance_counters
 integration_id: windows-performance-counters
 integration_title: Windows パフォーマンスカウンター
-integration_version: 1.5.0
+integration_version: 2.1.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: windows_performance_counters
 public_title: Windows パフォーマンスカウンター
@@ -38,65 +40,75 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Windows
-  - Category::IOT
+  - Category::IoT
   - Category::OS & System
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows OS のパフォーマンスカウンターを監視します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/windows-performance-counters-datadog/
   support: README.md#Support
   title: Windows パフォーマンスカウンター
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Windows パフォーマンスカウンター][1]を監視します。
+This check monitors [Windows performance counters][1] through the Datadog Agent.
 
-**注:** Agent バージョン 7.33.0 は最小サポートバージョンです。
+**Note:** Agent version 7.33.0 is the minimum supported version.
 
-## セットアップ
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インストール
+### Installation
 
-Windows パフォーマンスカウンターチェックは [Datadog Agent][3] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The Windows performance counters check is included in the [Datadog Agent][3] package.
+No additional installation is needed on your server.
 
-### コンフィギュレーション
+### Configuration
 
-1. windows_performance_counters のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `windows_performance_counters.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル windows_performance_counters.d/conf.yaml][4] を参照してください。
+1. Edit the `windows_performance_counters.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your windows_performance_counters performance data. See the [sample windows_performance_counters.d/conf.yaml][4] for all available configuration options.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `windows_performance_counters` を探します。
+[Run the Agent's status subcommand][6] and look for `windows_performance_counters` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-Windows パフォーマンスカウンターチェックにより収集されたすべてのメトリクスは、[カスタムメトリクス][7]として Datadog に送信できますが、これはお客様への[請求][8]に影響します。
+All metrics collected by the Windows performance counters check are forwarded to Datadog as [custom metrics][7], which may impact your [billing][8].
 
-### イベント
+### Events
 
-Windows パフォーマンスカウンターインテグレーションには、イベントは含まれません。
+The Windows performance counters integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "windows_performance_counters" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
+## Further Reading
+
+Additional helpful documentation, links, and articles:
+
+- [Monitor Windows Performance Counters with Datadog][11]
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/perfctrs/about-performance-counters
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/windows_performance_counters/datadog_checks/windows_performance_counters/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
@@ -104,3 +116,4 @@ Windows パフォーマンスカウンターインテグレーションには、
 [8]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [9]: https://github.com/DataDog/integrations-core/blob/master/windows_performance_counters/assets/service_checks.json
 [10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/windows-performance-counters-datadog/

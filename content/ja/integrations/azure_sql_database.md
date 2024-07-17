@@ -4,8 +4,9 @@ categories:
 - data stores
 - caching
 - azure
+custom_kind: integration
 dependencies: []
-description: Azure SQL Database の主要メトリクスを追跡。
+description: Track key Azure SQL Database metrics.
 doc_link: https://docs.datadoghq.com/integrations/azure_sql_database/
 draft: false
 git_integration_title: azure_sql_database
@@ -14,7 +15,6 @@ integration_id: azure-sql-database
 integration_title: Microsoft Azure SQL Database
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_sql_database
 public_title: Datadog-Microsoft Azure SQL Database インテグレーション
@@ -32,27 +32,27 @@ Azure SQL Database からメトリクスを取得すると、以下のことが�
 - SQL Database のパフォーマンスを視覚化。
 - SQL Database のパフォーマンスをアプリケーションと関連付け。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_sql_database" >}}
 
 
-### ヘルプ
+### Events
 
 Azure SQL Database インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Azure SQL Database インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

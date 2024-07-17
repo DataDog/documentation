@@ -3,30 +3,30 @@ categories:
 - collaboration
 - incidents
 - notifications
+custom_kind: integration
 dependencies: []
-description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
+description: Generate PagerDuty alerts from Datadog metrics and events.
 doc_link: https://docs.datadoghq.com/integrations/pagerduty/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/mobile-incident-management-datadog/
-  tag: ブログ
-  text: Datadog モバイルアプリで外出先からインシデントを管理
+  tag: Blog
+  text: Manage incidents on the go with the Datadog mobile app
 - link: https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/
-  tag: ブログ
-  text: Datadog で PagerDuty を安全にデプロイする方法
+  tag: Blog
+  text: How PagerDuty deploys safely with Datadog
 - link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration
-  tag: ブログ
-  text: サービスカタログとのインテグレーションを利用する
+  tag: Blog
+  text: Using Integrations with Service Catalog
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty
   tag: Terraform
-  text: Terraform による Datadog Pagerduty インテグレーションの作成と管理
+  text: Create and manage the Datadog Pagerduty integration with Terraform
 git_integration_title: pagerduty
 has_logo: true
 integration_id: ''
 integration_title: PagerDuty
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: pagerduty
 public_title: Datadog-PagerDuty インテグレーション
@@ -36,7 +36,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PagerDuty インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。<b>注</b>: 監視通知を PagerDuty に送信することは可能です。</div>
+<div class="alert alert-warning">The Datadog PagerDuty integration has limited support in the Datadog for Government site. Service Catalog integration and auto-resolution from Incident Management and Workflow Automation are not supported.</div>
 {{< /site-region >}}
 
 ## 概要
@@ -47,7 +47,7 @@ PagerDuty を Datadog に接続して、以下のことができます。
 - インシデントやエスカレーションの発生時に、それらをストリームに表示できます。
 - 誰がオンコールかのリマインダーを毎日取得できます。
 
-## 計画と使用
+## Setup
 
 Pagerduty の [Datadog インテグレーションガイド][1]を参照してください。
 
@@ -55,21 +55,21 @@ Pagerduty の [Datadog インテグレーションガイド][1]を参照して�
 PagerDuty を統合したら、Datadog のカスタム PagerDuty インシデントトレンドを確認できます。
 {{< /site-region >}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 PagerDuty インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### Events
 
 PagerDuty のトリガーされた/解決されたイベントは[イベントエクスプローラー][2]に表示されます。
 
-### ヘルプ
+### Service Checks
 
 PagerDuty インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ### 特定の PagerDuty サービスに通知を送信する
 

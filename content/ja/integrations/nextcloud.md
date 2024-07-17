@@ -22,6 +22,7 @@ author:
   support_email: emeric.planet@gmail.com
 categories:
 - コラボレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: nextcloud
 integration_title: Nextcloud
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nextcloud
 public_title: Nextcloud
@@ -47,6 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Collaboration
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nextcloud インスタンスからの総合的な統計を追跡
   media: []
@@ -58,53 +59,53 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは [Nextcloud][1] を監視します。
+This check monitors [Nextcloud][1].
 
-## 計画と使用
+## Setup
 
-Nextcloud チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Nextcloud check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Nextcloud check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-nextcloud==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Nextcloud の[メトリクス](#メトリクス) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `nextcloud.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nextcloud.d/conf.yaml][6] を参照してください。
+1. Edit the `nextcloud.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Nextcloud [metrics](#metrics). See the [sample nextcloud.d/conf.yaml][6] for all available configuration options.
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7]
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][8]を実行し、Checks セクションで `nextcloud` を探します。
+Run the [Agent's status subcommand][8] and look for `nextcloud` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "nextcloud" >}}
 
 
-### ヘルプ
+### Events
 
-Nextcloud には、イベントは含まれません。
+Nextcloud does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "nextcloud" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
 
 [1]: https://nextcloud.com

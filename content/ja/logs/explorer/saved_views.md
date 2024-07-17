@@ -1,14 +1,16 @@
 ---
-title: 保存ビュー
 description: 保存ビューを使用してログエクスプローラーを自動構成する
 further_reading:
-  - link: logs/explorer/analytics
-    tag: Documentation
-    text: ログ分析の実行
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
+- link: logs/explorer/analytics
+  tag: Documentation
+  text: ログ分析の実行
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+kind: documentation
+title: 保存ビュー
 ---
+
 ## 概要
 
 効率的にトラブルシューティングするには、原因などを探索できるようデータが適切な**スコープ**にあること、有意義な情報を表面化できるようデータに**表示オプション**へのアクセスがあること、そして分析に利用できる関連**[ファセット][1]**がリストアップされていること、が必要です。

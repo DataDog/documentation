@@ -21,16 +21,16 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_on_public_website: true
 draft: false
-git_integration_title: ネットワーク
-integration_id: システム
+git_integration_title: network
+integration_id: system
 integration_title: Network
 integration_version: 3.3.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ネットワーク
 public_title: Network
@@ -46,8 +46,10 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
+  - Offering::Integration
   configuration: README.md#Setup
-  description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
+  description: Track bytes and packets in/out, connection states, round trip times,
+    and more.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -57,21 +59,21 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Network ダッシュボード][1]
+![Network Dashboard][1]
 
-## 概要
+## Overview
 
-ネットワークチェックは、ホストオペレーティングシステムから TCP/IP 統計を収集します。
+The network check collects TCP/IP stats from the host operating system.
 
-## セットアップ
+## Setup
 
-以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
+Follow the instructions below to install and configure this check for an Agent running on a host.
 
-### インストール
+### Installation
 
-ネットワークチェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The network check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your server.
 
-このインテグレーションを使用してメトリクスを収集するには、ホストで conntrack モジュールがアクティブにされていることを確認します。アクティブにされていない場合は、次のコマンドを実行します。
+To collect metrics with this integration, make sure the conntrack module is activated on your host. If it's not the case, run:
 
 ```shell
 sudo modprobe nf_conntrack
@@ -79,19 +81,19 @@ sudo modprobe nf_conntrack_ipv4
 sudo modprobe nf_conntrack_ipv6
 ```
 
-*注*: Agent イメージに conntrack バイナリをインストールする必要がある場合があります。
+*Note*: You may need to install the conntrack binary in the Agent image.
 
-### 構成
+### Configuration
 
-1. Agent はデフォルトでネットワークチェックを有効にしますが、チェックを自分で構成する場合は、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `network.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル network.d/conf.yaml][4] を参照してください。
+1. The Agent enables the network check by default, but if you want to configure the check yourself, edit file `network.d/conf.yaml`, in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. See the [sample network.d/conf.yaml][4] for all available configuration options.
 
-2. [Agent を再起動][5]すると、構成の変更が有効になります。
+2. [Restart the Agent][5] to effect any configuration changes.
 
-**注**:
+**Note**:
 
-一部の conntrack メトリクスを取得するには、特権的なアクセスで conntrack を実行する必要があります。
+Some conntrack metrics require running conntrack with privileged access to be retrieved.
 
-Linux: それには、次の sudoers ルールを構成します。
+Linux: Configure the following sudoers rule for this to work:
 
 ```shell
 dd-agent ALL=NOPASSWD: /usr/sbin/conntrack -S
@@ -99,25 +101,25 @@ dd-agent ALL=NOPASSWD: /usr/sbin/conntrack -S
 
 #### Kubernetes  
 
-Conntrack メトリクスは、Kubernetes v1.11 未満の場合はデフォルトで、Kubernetes v1.11 以上の場合は `host` ネットワークモードを使用している場合に使用できます。
+Conntrack metrics are available by default in Kubernetes < v1.11 or when using the `host` networking mode in Kubernetes v1.11+.  
 
-[AWS ENA メトリクス][6]を収集するために
+In order to collect [AWS ENA metrics][6]:
 
-- `network` チェックを更新して、`collect_aws_ena_metrics: true` で AWS ENA メトリクスの収集を有効にします。
-- Agent コンテナを更新して、`host` ネットワークモードを使用するようにし、`NET_ADMIN` 機能を追加します。
+- Update `network` check to enable collection of AWS ENA metrics with `collect_aws_ena_metrics: true`.
+- Update Agent containers to use `host` network mode and add `NET_ADMIN` capabilities. 
 
-Datadog [Helm Chart][7] のデプロイでは、チャートの値を以下で更新します。
+For Datadog [Helm Chart][7] deployment, update chart values with:
 
 ```yaml
 datadog:
- # ネットワークチェックのために AWS ENA のメトリクス収集を有効にします
+ # Enable AWS ENA metrics collection for network check
  confd:
    network.yaml: |-
      init_config:
      instances:
        - collect_aws_ena_metrics: true
 
-# Agent コンテナが NET_ADMIN 機能を持つホストネットワークを使用するようにします
+# Have agent containers use host network with NET_ADMIN capability
 agents:
   useHostNetwork: true
   containers:
@@ -129,7 +131,7 @@ agents:
 
 ```
 
-DaemonSet を使用して手動でデプロイされた Agent には、`datadog` DaemonSet パッチを適用します。
+For Agents manually deployed with DaemonSet, apply `datadog` DaemonSet patch:
 
 ```yaml
 spec:
@@ -150,35 +152,35 @@ spec:
               - NET_ADMIN
 ```
 
-**注**: `hostNetwork: true` がすべてのコンテナに適用されるため、DaemonSet の他のコンテナ用に `hostPort: 8125` を追加する必要があるかもしれません。
+**Note**: You may need to add `hostPort: 8125` for other containers in the DaemonSet as `hostNetwork: true` will apply to all containers.
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][8]し、Checks セクションで `network` を探します。
+[Run the Agent's `status` subcommand][8] and look for `network` under the Checks section.
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "network" >}}
 
 
-**注**: `system.net.conntrack` メトリクスは Agent v6.12 以降で使用できます。詳細については、[CHANGELOG][10] を参照してください。
+**Note**: `system.net.conntrack` metrics are available with Agent v6.12+. See the [CHANGELOG][10] for details.
 
-### イベント
+### Events
 
-ネットワークチェックには、イベントは含まれません。
+The Network check does not include any events.
 
-### サービスチェック
+### Service Checks
 
-ネットワークチェックには、サービスのチェック機能は含まれません。
+The Network check does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-- [Datadog API への TCP/UDP ホストメトリクスの送信][11]
+- [Send TCP/UDP host metrics to the Datadog API][11]
 
-## その他の参考資料
+## Further Reading
 
-- [HTTP チェックでネットワークモニターを構築][12]
+- [Build a network monitor on an HTTP check][12]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/network/images/netdashboard.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest

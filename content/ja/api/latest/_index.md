@@ -46,7 +46,7 @@ API を試すには [![Postman で実行][3]](https://god.gw.postman.com/run-col
 {{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
-#### インフラストラクチャーリスト
+#### Installation
 Maven - この依存関係をプロジェクトの POM に追加します。
 ```xml
 <dependency>
@@ -62,7 +62,7 @@ Gradle - この依存関係をプロジェクトのビルドファイルに追�
 compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}"
 ```
 
-#### ガイド
+#### Usage
 
 ```java
 import com.datadog.api.client.ApiClient;
@@ -122,55 +122,55 @@ application {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python-legacy" >}}
-#### インフラストラクチャーリスト
+#### Installation
 ```sh
 pip install datadog
 ```
-#### ガイド
+#### Usage
 ```python
 import datadog
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-#### インフラストラクチャーリスト
+#### Installation
 ```console
 pip3 install datadog-api-client
 ```
-#### ガイド
+#### Usage
 ```python
 import datadog_api_client
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby-legacy" >}}
-#### インフラストラクチャーリスト
+#### Installation
 ```sh
 gem install dogapi
 ```
-#### ガイド
+#### Usage
 ```ruby
 require 'dogapi'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-#### インフラストラクチャーリスト
+#### Installation
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
-#### ガイド
+#### Usage
 ```ruby
 require 'datadog_api_client'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-#### インフラストラクチャーリスト
+#### Installation
 ```sh
 go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
-#### ガイド
+#### Usage
 ```go
 import (
         "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
@@ -181,7 +181,7 @@ import (
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}
-#### インフラストラクチャーリスト
+#### Installation
 パッケージは [@datadog/datadog-api-client][1] の下にあり、NPM または Yarn を介してインストールできます。
 
 ```js
@@ -192,7 +192,7 @@ npm install @datadog/datadog-api-client
 yarn add @datadog/datadog-api-client
 ```
 
-#### ガイド
+#### Usage
 ```js
 import { <VERSION> } from 'datadog-api-client';
 ```

@@ -5,8 +5,9 @@ categories:
 - aws
 - cloud
 - log collection
+custom_kind: integration
 dependencies: []
-description: Amazon Data Firehose のキーメトリクスを追跡。
+description: Track key Amazon Data Firehose metrics.
 doc_link: https://docs.datadoghq.com/integrations/amazon_firehose/
 draft: false
 git_integration_title: amazon_firehose
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: Amazon Data Firehose
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_firehose
 public_title: Datadog-Amazon Data Firehose インテグレーション
@@ -32,9 +32,9 @@ Amazon Data Firehose は、AWS にストリーミングデータをロードす�
 
 **注**: Amazon Data Firehose は、以前は Amazon Kinesis Data Firehose と呼ばれていました。詳しくは、[AWS の最新情報][1]の記事をご覧ください。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -59,23 +59,23 @@ Amazon Data Firehose から S3 バケットまたは CloudWatch のいずれか�
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_firehose" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### Events
 
 Amazon Data Firehose インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon Data Firehose インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

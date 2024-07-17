@@ -21,6 +21,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_netapp/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: snmp-netapp
 integration_title: NetApp
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_netapp
 public_title: NetApp
@@ -48,10 +48,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: NetApp ネットワークデバイスから SNMP メトリクスを収集
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: NetApp
 ---
@@ -59,32 +63,32 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-NetApp はクラウドデータ管理とデータサービスを専門とする企業で、データやアプリケーションを管理するためのクラウドデータサービスをオンラインと物理サーバーの両方で提供しています。
+NetApp is a cloud data management and data services company that offers online and physical cloud data services to manage data and applications.
 
-監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
+For details of monitored metrics, see the [SNMP Data Collected][1] section.
 
-## 計画と使用
+## Setup
 
-SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
+To install and configure the SNMP integration, see the [Network Device Monitoring][2] documentation.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
+For details of monitored metrics, see the [SNMP Data Collected][1] section.
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-* [Datadog での SNMP モニタリング][4]
+* [Monitor SNMP with Datadog][4]
 
 
 

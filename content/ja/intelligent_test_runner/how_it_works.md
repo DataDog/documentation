@@ -12,6 +12,7 @@ further_reading:
 - link: /tests
   tag: ドキュメント
   text: Test Visibility について
+kind: ドキュメント
 title: Datadog における Intelligent Test Runner の仕組み
 ---
 

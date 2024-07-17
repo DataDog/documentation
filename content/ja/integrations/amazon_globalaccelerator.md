@@ -17,13 +17,14 @@ assets:
     source_type_name: Amazon GlobalAccelerator
 author:
   homepage: https://www.datadoghq.com
-  name: Ruby
+  name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
 - AWS
-- モニター
+- metrics
 - クラウド
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,7 +33,6 @@ integration_id: amazon-globalaccelerator
 integration_title: Amazon Global Accelerator
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_globalaccelerator
 public_title: Amazon Global Accelerator
@@ -72,7 +72,7 @@ AWS Global Accelerator は、ローカルおよびグローバルユーザー向
 2. [Datadog - Amazon Global Accelerator インテグレーション][3]をインストールします。
 
 
-## データ収集
+## Data Collected
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_globalaccelerator" >}}

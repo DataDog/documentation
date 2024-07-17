@@ -17,77 +17,77 @@ further_reading:
 title: ログ用に RBAC を設定する方法
 ---
 
-## 概要
+## Overview
 
-ログには、[スクラブ][1]されるか組織内の権限のあるユーザーのみがアクセスできる**機密データ**が含まれている場合があります。また、コンフィギュレーションと予算管理に関する限り、ユーザーが**互いに干渉しない**ようにユーザーをセグメント化することもできます。
+Logs might contain **sensitive information** that could either get [scrubbed][1] or be accessible only to authorized users of your organization. You may also wish to segment your users so that they **don't interfere with one another** as far as configuration and budget control is concerned.
 
-このガイドでは、ユーザーが準拠した方法でログとログ機能にアクセスするための、カスタマイズされた Datadog ロールを開発する方法を紹介します。
+This guide provides a methodology in developing customized Datadog roles that allows users to access logs and log features in a compliant manner.
 
-### 複数のチーム
+### Multiple teams
 
-組織が複数のチームで構成されていると想定します。その 1 つが **ACME** (Applicative Component Making Errors) チームで、そのメンバーはトラブルシューティングと監査の目的で ACME Logs を処理します。
+Assume that your organization consists of multiple teams. One of these is the **ACME** (Applicative Component Making Errors) team, whose members deal with ACME Logs for troubleshooting and auditing purposes.
 
-このガイドでは、ACME チームに次の 2 つのカテゴリのユーザーがいることも前提としています。
+This guide also assumes that you have two categories of users in the ACME Team:
 
-* **`ACME Admin`**: ACME ログ収集、パイプライン、除外フィルターを担当するユーザーのロール。
-* **`ACME User`** : ユーザーが ACME ログにアクセスし、このログからモニターまたはダッシュボードを作成するためのロール。
+* **`ACME Admin`**: A role for users in charge of ACME log collection, pipelines, and exclusion filters.
+* **`ACME User`** : A role for users to access ACME logs, as well as to create monitors or dashboards out of these logs.
 
-**注**: このガイドは、シンプル化のために 1 つの ACME ロール (ACME 管理者と ACME ユーザーの両方からのアクセス許可を集中させる) に適合させることも、より詳細なアクセス許可のためにより多くのロールに適合させることもできます。
+**Note**: You can adapt this guide for one single ACME Role (concentrating permissions from both ACME Admins and ACME Users) for the sake of simplicity, or more roles for the sake of more granular permissions.
 
-このガイドは ACME チームに焦点を当てていますが、セットアップは組織内の他のすべてのチームに複製できます。ACME チームのメンバーは、組織全体の他のチームのメンバーになることも**可能**です。Datadog ではアクセス許可は付加的であり、マルチチームユーザーは、所属先のすべてのチームから継承されたアクセス許可の結合から利益を得ることができます。
+Although this guide focuses on the ACME Team, your setup is replicable to every other team in your organization. Members of the ACME team **can** also be members of other teams across your organization. Permissions are additive in Datadog, and multi-team users can benefit from the union of permissions inherited from every  team they belong to.
 
-### Datadog 管理者のロール
+### The role of Datadog admin
 
-このガイドでは、Datadog 管理者が ACME チームメンバーが (他のチームログに干渉することなく) ログを操作するための安全なプレイグラウンドをセットアップし、これらのログへのアクセスを ACME ユーザーのみに制限する方法について説明します。
+This guide explains how you, as a Datadog Admin, can set up a safe playground for ACME team members to interact with their logs (without interfering with other team logs) while also restricting access to these logs only to ACME Users.
 
-**注**: このガイドを適応させて、ACME 管理者が Datadog 管理者でもあると見なすことができます。
+**Note**: You can adapt this guide to consider that ACME Admins are also Datadog Admins.
 
-このガイドでは、以下について説明します。
+This guide explores the following:
 
-1. 管理者の[前提条件](#prerequisites)。
-2. ACME チームの**ロールの設定**と**メンバーの割り当て**: [ロールを設定する](#set-up-roles)。
-3. 制限クエリを使用した、Datadog アプリケーション全体の**ログへのアクセスの制限**: [ログへのアクセスを制限する](#restrict-access-to-logs)。
-4. **ログアセット** (つまり、パイプライン、インデックス、アーカイブ) のアクセス許可の構成: [ログアセットへのアクセスを制限する](#restrict-access-to-log-assets)。
+1. [Prerequisites](#prerequisites) for Admins.
+2. **Setting up roles** for the ACME team and **assigning members**: [Set up roles](#set-up-roles).
+3. **Limiting access to logs** all across a Datadog application with restriction queries: [Restrict access to logs](#restrict-access-to-logs).
+4. Configuring permissions on **Log Assets** (namely pipelines, indexes, and archives): [Restrict access to log assets](#restrict-access-to-log-assets).
 
-## 前提条件
+## Prerequisites
 
-### 受信ログにタグを付ける
+### Tag incoming logs
 
-ACME の受信ログに `team:acme` タグを付けます。これは、ログが Datadog を通過するときにログをトリアージするのに役立ちます。
+Tag ACME incoming logs with a `team:acme` tag. This is useful for triaging your logs as they flow through Datadog.
 
-{{< img src="logs/guide/rbac/team_tag.png" alt="ログにチームタグを適用する" style="width:60%;">}}
+{{< img src="logs/guide/rbac/team_tag.png" alt="Apply a team tag to your logs" style="width:60%;">}}
 
-たとえば、Docker ログコレクションのコンテキストでは、[タグとしての Docker ラベル][2]を持つそのコンテナから流れるログに `team:acme` タグをアタッチします。より一般的な概要については、[タグ付けセクション][3]を参照してください。
+For example, in the context of Docker Log Collection, attach the `team:acme` tag to logs flowing from that container with [Docker labels as tags][2]. Refer to the [Tagging Section][3] for a more general overview.
 
-### Datadog 管理者としてログインする
+### Log in as a Datadog Admin
 
-このガイドのその他のアクションを実行するには、ユーザーアカウントに Datadog Admin または同等のロールが必要です。以下の権限が必要になります。
+To execute the remaining actions in this guide, your user account requires the Datadog Admin role or similar. You need the following permissions:
 
-* ロールを作成し、ユーザーをロールに割り当てるためのアクセス許可。
-* [ログパイプライン][4]、[ログインデックス][5]、[ログアーカイブ][6]を作成するためのアクセス許可。
-* API を介してこれらのオペレーションを実行する場合は、[ログコンフィギュレーション API][7] を介して操作するためのアクセス許可。
+* Permissions to create roles and assign users to roles.
+* Permissions to create [Log Pipelines][4], [Log Indexes][5], and [Log Archives][6].
+* If you wish to perform those operations through the API, permissions to interact through the [Log Configuration API][7].
 
-[Users list][8] で、これらすべてのアクセス許可があることを確認してください。不足しているものがある場合は、Datadog 管理者ユーザーに設定を依頼してください。
-
-
-### API キーとアプリキーを取得する
-
-**注**: このセクションは、管理者ユーザーからの API キーとアプリケーションキーが必要な Datadog API を使用する場合にのみ必要です。
-
-API キーとアプリキーは、[Datadog アカウント API キーページ][9]で入手できます。詳細については、ドキュメントの [API キーとアプリキー][10]セクションをご覧ください。
-
-使用するアプリキーが、自分のユーザーまたは同様のアクセス許可を持つユーザーにアタッチされていることを確認してください。
-
-{{< img src="logs/guide/rbac/app-api_keys.png" alt="API キーとアプリキーを確認" style="width:60%;">}}
-
-このガイドをとおして、`<DATADOG_API_KEY>` および `<DATADOG_APP_KEY>` はそれぞれご使用中の Datadog API キーおよび Datadog アプリケーションキーに置き換えて進めてください。このガイドでは、`CURL` を備えた端末があることも前提としています。
+Check in the [Users list][8] that you have all these permissions. If you are missing any, ask a Datadog Admin user to set them for you.
 
 
-### アクセス許可 ID を取得する
+### Get an API key and an app key
 
-**注**: このセクションは、Datadog API を使用して RBAC をセットアップする場合にのみ必要です。
+**Note**: This section is only required if you intend on using the Datadog API, for which you need an API key and an application key from an Admin user.
 
-[Permissions API][11] を使用して、既存のすべてのアクセス許可のリストを取得します。答えは、次のような一連のアクセス許可です (`logs_read_data` アクセス許可には `<PERMISSION_ID>` `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb` があり、そのアクセス許可について知っておく必要があるのはこれだけです)。
+API keys and app keys are available in your [Datadog account API key page][9]. More details available in the [API and app keys][10] section of the documentation.
+
+Make sure that the app key you use is attached to your own user, or to a user who has similar permissions.
+
+{{< img src="logs/guide/rbac/app-api_keys.png" alt="Check API and APP Keys" style="width:60%;">}}
+
+Throughout this guide, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively. This guide also assumes that you have a terminal with `CURL`.
+
+
+### Get permission IDs
+
+**Note**: This section is only required if you intend on using the Datadog API to set up RBAC.
+
+Use the [Permissions API][11] to get the list of all existing permissions. The answer is an array of permissions such as the one below (the `logs_read_data` permission has the `<PERMISSION_ID>` `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb`, which is all you need to know about that permission).
 
 ```bash
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
@@ -107,26 +107,26 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
 [...]
 ```
 
-**注**: アクセス許可 ID は、使用している Datadog サイト (Datadog US、Datadog EU など) によって異なります。
+**Note**: The permission IDs change depending on the Datadog site (Datadog US, Datadog EU, etc.) you are using.
 
-## ロールを設定する
-このセクションでは、`ACME Admin` と `ACME User` の 2 つのロールを作成する方法、両方のロールに最小限のログアクセス許可を付与する方法 (このガイドの後半で拡張)、ユーザーにどちらかのロールを割り当てる方法について説明します。
+## Set up roles
+This section explains how to create two roles, `ACME Admin` and `ACME User`; how to grant both roles minimal log permissions (extended later on in this guide); and how to assign users either role.
 
-### ロールを作成
+### Create a role
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Datadog オーガニゼーションの設定の [Groups Section][1] で、Role タブの Add Role ボタンを使用して、新しい `ACME Admin` と `ACME User` のロールを作成します。
+In the [Groups Section][1] of Datadog Organization Settings, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User`roles.
 
-{{< img src="logs/guide/rbac/add_role.png" alt="新しいロールを追加する" style="width:60%;">}}
+{{< img src="logs/guide/rbac/add_role.png" alt="Add a new role" style="width:60%;">}}
 
-新しいロールを作成する場合
+When creating a new role:
 
-* 標準アクセスで作成します。
-* Read Index Data と Live Tail のアクセス許可を付与します。これらは、安全に有効にできる[レガシーアクセス許可][2]です。
+* Create with Standard Access.
+* Grant Read Index Data and Live Tail permissions—these are [legacy permissions][2] that you can safely enable.
 
-ロールの作成の詳細については、[アカウントの管理][3]セクションを参照してください。
+More information on creating roles is available in the [Account Management][3] section.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -135,9 +135,9 @@ Datadog オーガニゼーションの設定の [Groups Section][1] で、Role �
 {{% /tab %}}
 {{% tab "API" %}}
 
-`ACME Admin` と `ACME User` のロールについて、次の手順を繰り返します。
+Repeat the following steps for `ACME Admin` and `ACME User` roles:
 
-1. ロールがまだ存在しない場合は、[Role Creation API][1] でロールを作成します。次の例では、`dcf7c550-99cb-11ea-93e6-376cebac897c` がロール ID です。
+1. If the role does not already exist, create the role with [Role Creation API][1]. In the following example, `dcf7c550-99cb-11ea-93e6-376cebac897c` is the role ID.
 
 ```bash
 curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "ACME Admin"}}}'
@@ -151,7 +151,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: applicat
 [...]
 ```
 
-2. **または**、ロールがすでに存在する場合は、[Role List API][2] を使用してそのロール ID を取得します。
+2. **Alternatively**, if the role already exists, use the [Role List API][2] to get its Role ID.
 
 ``` bash
 curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0&sort=name&filter=ACME" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"'
@@ -165,21 +165,21 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0
 [...]
 ```
 
-3. ロールの既存のアクセス許可を確認します (新しく作成されたロールの Read Monitors と Read Dashboards のみが必要です)。
+3. Check the existing permissions for the role (it should only have Read Monitors and Read Dashboards for newly created roles).
 
 ``` bash
 curl -X GET "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 
 ```
 
-3. [Grant Permissions API][3] を使用して、`standard`、`logs_read_index_data`、`logs_live_tail` アクセス許可をロールに割り当てます。対応する ID を取得するには、[アクセス許可 ID を取得する](#get-permission-ids)セクションを参照してください。
+3. Assign the `standard`, `logs_read_index_data`, and `logs_live_tail` permissions to the role using to the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get corresponding IDs.
 
 ``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
 
-4. **必要に応じて**、[Revoke Permissions API][4] を使用して他のすべてのログアクセス許可を取り消します。
+4. **If needed**, revoke all other log permissions with the [Revoke Permissions API][4].
 
 ``` bash
 curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
@@ -193,24 +193,24 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H
 {{% /tab %}}
 {{< /tabs >}}
 
-### ユーザーをロールにアタッチする
+### Attach a user to a role
 
-ロールがアクセス許可で構成されたので、これらのロールをユーザーに割り当てます。
+Now that your roles are configured with their permissions, assign these roles to your users.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Datadog の [Team Section][1] で、User タブに移動します。ユーザーを選択し、すでに割り当てられている可能性のあるロールに加えて、`ACME Admin` または `ACME User` のロールを割り当てます。ユーザー管理の詳細については、[アカウントの管理][2]セクションをご覧ください。
+In the [Team Section][1] of Datadog, go to the User tab. Pick a user and assign them either the `ACME Admin` or `ACME User` role, in addition to any roles they may already be assigned. More details on user management are available in the [Account Management][2] section.
 
-{{< img src="logs/guide/rbac/assign_user.png" alt="グリッドビューで招待を削除" style="width:60%;">}}
-{{< img src="logs/guide/rbac/assign_user2.png" alt="グリッドビューで招待を削除" style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user.png" alt="Delete invite on the grid view" style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user2.png" alt="Delete invite on the grid view" style="width:60%;">}}
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /ja/account_management/users/
 {{% /tab %}}
 {{% tab "API" %}}
 
-[List Users API][1] を使用して、`ACME Admin` または `ACME User` ロールのいずれかに割り当てるユーザーのユーザー ID を取得します。この API はページ区切りされているため、たとえば、ユーザーの姓をクエリパラメーターとして使用して、結果をフィルタリングする必要がある場合があります。次の例では、ユーザー ID は `1581e993-eba0-11e9-a77a-7b9b056a262c` です。
+Using the [List Users API][1], get the user ID of the user you want to assign to either the `ACME Admin` or the `ACME User` role. As this API is paginated, you might need to filter results, using—for instance—the last name of the user as a query parameter. In the following example, the user ID is `1581e993-eba0-11e9-a77a-7b9b056a262c`.
 
 ``` bash
 curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0&sort=name&filter=smith" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
@@ -228,17 +228,17 @@ curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0
 [...]
 ```
 
-**ユーザーを ACME ロールにアタッチする**
+**Attach users to ACME roles**
 
-ユーザーごとに、[Assign Role API][2] を使用して、これをこのロールに追加します。
+For each user, use the [Assign Role API][2] to add this them to this role.
 
 ``` bash
 curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
-**デフォルトのロールからユーザーを削除する**
+**Remove users from default roles**
 
-ユーザーがすでにロールとその ID を持っているかどうかを確認します。これらのユーザーからデフォルトの Datadog ロールを削除したい場合があります。これは、付与したくないユーザーに追加のアクセス許可を付与する可能性があるためです。
+Check if the user already has roles and their IDs. You might want to remove default Datadog roles from these users, as they may grant additional permissions to the user you do not wish to grant.
 
 ``` bash
 curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
@@ -249,36 +249,36 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Cont
 {{% /tab %}}
 {{< /tabs >}}
 
-## ログへのアクセスを制限する
+## Restrict access to logs
 
-このセクションでは、ACME チームメンバー (`ACME Admin` と `ACME User` の両方のメンバー) に `team:acme` ログへのアクセスを付与する (`team:acme` ログのみ) 方法について説明します。制限クエリでスコープされた [Log Read Data][12] アクセス許可を使用します。
+This section explains how to grant ACME Team members (both `ACME Admin` and `ACME User` members) access to `team:acme` logs—and only `team:acme` logs. It uses the [Log Read Data][12] permission scoped with Restriction Queries.
 
-粒度を最大限に高め、メンテナンスを容易にするために推奨されるのは、アクセスできるログを増やすために ACME ユーザーのアクセスを拡張**しない**ことです。他のロールを同じ `team:acme` 制限クエリに制限するよりも、各ユーザーが個別にアクセスする必要があるものに基づいて、ユーザーを複数のロールに割り当てることを検討してください。
+As a good practice for maximum granularity and easier maintenance, you should **not** extend the permissions of ACME Users to access more logs. Do not restrict other roles to the same `team:acme` restriction query. Instead, consider assigning users to multiple roles based on what each of them, individually, needs to access.
 
-このセクションでは、次の方法について詳しく説明します。
+This section details how to:
 
-1. `team:acme` 制限クエリを作成する。
-2. その制限クエリを ACME ロールにアタッチする。
+1. Create a `team:acme` restriction query.
+2. Attach that restriction query to ACME roles.
 
-**注**: ロールには、制限クエリを **1 つだけ**アタッチできます。制限クエリをロールにアタッチすると、このロールにすでにアタッチされている制限クエリがすべて削除されます。
+**Note**: Roles can have **no more than one** restriction query attached. If you attach a restriction query to a role, it removes any restriction queries already attached to this role.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Datadog アプリで [Data Access ページ][1]を使用して、以下を実行します。
+Use the [Data Access page][1] in the Datadog App to:
 
-* `team:acme` 制限クエリを作成する。
-* `ACME Admin` および `ACME User` ロールを制限クエリに割り当てます。
+* Create a `team:acme` restriction query.
+* Assign `ACME Admin` and `ACME User` roles to that restriction query.
 
-{{< img src="logs/guide/rbac/restriction_queries.png" alt="ログへのアクセスを制限" style="width:60%;">}}
+{{< img src="logs/guide/rbac/restriction_queries.png" alt="Restrict access to logs" style="width:60%;">}}
 
-詳細については、[`logs_read_data` アクセス許可セクション][1]を参照してください。
+Refer to the [`logs_read_data` permission section][1] for more information.
 
 [1]: https://app.datadoghq.com/logs/pipelines/data-access
 {{% /tab %}}
 {{% tab "API" %}}
 
-[Create Restriction Query API][1] を使用して、新しい制限クエリを作成します。制限クエリ ID (次の例では `76b2c0e6-98fa-11ea-93e6-775bd9258d59`) を追跡します。
+Use the [Create Restriction Query API][1] to create a new restriction query. Keep track of the restriction Query ID (`76b2c0e6-98fa-11ea-93e6-775bd9258d59` in the following example).
 
 ``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "team:acme"}}}'
@@ -299,23 +299,23 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" 
 
 ```
 
-次に、[Restriction Query API][2] を使用して、前の制限クエリを ACME ロールにアタッチします。`ACME Admin` および `ACME User` ロール ID を使用してこの操作を繰り返します。
+Next, attach the previous restriction query to ACME roles with the [Restriction Query API][2]. Repeat this operation with `ACME Admin` and `ACME User` role IDs.
 
 ``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "<ROLE_ID>"}}'
 ```
 
-最後に、[Grant Permissions API][3] を使用してロールの `logs_read_data` アクセス許可を有効にします。[アクセス許可 ID を取得する](#get-permission-ids)セクションを参照して、このアクセス許可に対応する ID を取得してください。
+Finally, enable the `logs_read_data` permissions on the role using the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get the corresponding ID for this permission.
 
 ``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
 
-オプションで、セットアップが適切に行われていることを確認します。
+Optionally, confirm that the set up is properly done:
 
-* [Get Roles API][4] を使用して、クエリにアタッチされているロールのリストを取得します。結果には `ACME Admin` と `ACME User` のみが表示されます。
-* 逆に、[Get Limitation Query API][5] を使用して、いずれかのロールに制限クエリをアタッチします。`team:acme` 制限クエリが表示されます。
+* Get the list of roles attached to the query with the [Get Roles API][4]. You should see only `ACME Admin` and `ACME User` in the results.
+* Conversely, getting the restriction query attached to either role with the [Get Restriction Query API][5]. You should see the `team:acme` restriction query.
 
 
 [1]: /ja/api/v2/logs-restriction-queries/#create-a-restriction-query
@@ -327,54 +327,54 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 {{< /tabs >}}
 
 
-## ログアセットへのアクセスを制限する
+## Restrict access to log assets
 
-このセクションでは、`ACME Admin` ロールメンバーに ACME ログアセット (つまり、ログパイプライン、ログインデックス、ログアーカイブ) を操作するためのアクセス許可を付与する方法について詳しく説明します。
+This section details how to grant `ACME Admin` role members the permission to interact with ACME Log Assets (namely Log Pipelines, Log Indexes, and Log Archives).
 
-これにより、次のことが保証されます。
+This ensures that:
 
-* `ACME Admin` メンバー (`ACME Admin` メンバーのみ) が、ACME ログアセットを操作できる。
-* `ACME Admin` と `ACME User` のどちらのメンバーも、他のチームのアセットに干渉できない。
-* `ACME Admin` と `ACME User` のどちらのメンバーも、どのログがアセットに流れ込むか、予算制限、[ログアクセス制限ルール](#restrict-access-to-logs)などの上位レベルの「管理者」コンフィギュレーションに干渉できない。
+* `ACME Admin` members (and only `ACME Admin` members) can interact with ACME Log Assets.
+* Neither `ACME Admin` nor `ACME User` members can interfere with assets from other teams.
+* Neither `ACME Admin` nor `ACME User` members can interfere with higher level "Admin" configurations, such as which logs flow into their assets, budget limitations, or [Log Access Restriction rules](#restrict-access-to-logs).
 
 
-粒度を最大限に高め、メンテナンスを容易にするために推奨されるのは、ACME ログアセットを編集するアクセス許可を他のロールに付与**しない**ことです。代わりに、(一部の) ユーザーを対象の他のロールから `ACME Admin` ロールにも追加することを検討してください。
+As a good practice for maximum granularity and easier maintainability, you should **not** grant other roles the permission to edit the ACME Log Assets. Instead, consider adding (some) users from those other roles to the `ACME Admin` role as well.
 
-### ログパイプライン
+### Log pipelines
 
-`team:acme` ログ用に 1 つの[パイプライン][13]を作成します。[Write Processor][14] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこの ACME「ルート」パイプラインに**スコープ**します。
+Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][14] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
 
-{{< img src="logs/guide/rbac/pipelines.png" alt="ACME パイプライン" style="width:60%;">}}
+{{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline" style="width:60%;">}}
 
-### ログインデックス
+### Log indexes
 
-`team:acme` ログ用に 1 つまたは複数の[インデックス][15]を作成します。ACME チームがきめ細かい予算管理を必要とする場合、複数のインデックスが役立つ場合があります (たとえば、保持が異なるインデックス、またはクオータが異なるインデックス)。[Write Exclusion Filters][16] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこれらの ACME インデックスに**スコープ**します。
+Create one or multiple [indexes][15] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][16] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
 
-{{< img src="logs/guide/rbac/indexes.png" alt="ACME インデックス" style="width:60%;">}}
+{{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes" style="width:60%;">}}
 
-### ログアーカイブ
+### Log archives
 
-#### アーカイブを読み取る
+#### Read archives
 
-`team:acme` ログ用に 1 つまたは複数の[アーカイブ][17]を作成します。[Read Archives][18] アクセス許可を `ACME Admin` のメンバーに割り当てますが、その ACME アーカイブに**スコープ**します。
+Create one or multiple [archives][17] for `team:acme` logs. Assign the [Read Archives][18] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s).
 
-{{< img src="logs/guide/rbac/archives.png" alt="ACME アーカイブ" style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="ACME Archives" style="width:60%;">}}
 
-ログに応じてライフサイクルポリシーが異なる場合、複数のアーカイブが役立つ場合があります (たとえば、本番ログとステージングログ)。一度に複数のアーカイブで複数のリハイドレートをトリガーできますが、リハイドレートは一度に 1 つのアーカイブに対してのみ機能することを目的としていることに注意してください。
+Multiple archives can be useful if you have different lifecycle policies depending on logs (for instance, for production and staging logs). Keep in mind that rehydration is intended to work for only one archive at a time, though you can trigger multiple rehydrations on multiple archives at once.
 
-#### 履歴ビューを書き込む
+#### Write historical views
 
-`ACME Admin` のメンバーに [Write Historical View][19] アクセス許可を割り当てます。このアクセス許可は、リハイドレートを実行する能力を付与します。
+Assign the [Write Historical View][19] permission to members of `ACME Admin`. This permission grants the ability to perform rehydrations.
 
-**オプションで**、ログアーカイブを設定して、そのアーカイブからリハイドレートされたすべてのログに、アーカイブにタグがあるかどうかに関係なく、最終的に `team:acme` タグが付けられるようにします。[このオプション][20]を使用すると、既存の制限ポリシーとの整合性を確保できるだけでなく、Datadog に流れないログや Datadog でインデックス付けされていないログに対応する非推奨の制限を安全に削除できます。
+**Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether or not they had the tag in the archive. [This option][20] enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
 
-{{< img src="logs/guide/rbac/archives.png" alt="リハイドレートの ACME タグ" style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration" style="width:60%;">}}
 
-**注**: [Legacy Read Index Data Permission][21] を使用する**場合**、`ACME Admin` ロールと一緒に `ACME User` ロールを ACME アーカイブに追加してください。`ACME User` ロールメンバーにはリハイドレートを実行するアクセス許可がないため、これによって機密性の高いアクセス許可が付与されることはありません。ただし、これにより、Read Index Data アクセス許可が結果の履歴ビューに自動的にスコープされるため、コンテンツにアクセスできます。
+**Note**: **If** you use the [Legacy Read Index Data Permission][21], add the `ACME User` role to ACME archive(s) alongside the `ACME Admin` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
 
-{{< img src="logs/guide/rbac/rehydration_index.png" alt="リハイドレートインデックスアクセス許可" style="width:60%;">}}
+{{< img src="logs/guide/rbac/rehydration_index.png" alt="Rehydration Index Permission" style="width:60%;">}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

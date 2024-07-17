@@ -20,6 +20,7 @@ author:
 categories:
 - notifications
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_aruba/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: snmp-aruba
 integration_title: Aruba
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_aruba
 public_title: Aruba
@@ -46,10 +46,14 @@ tile:
   - Supported OS::macOS
   - Category::Notifications
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: Aruba ネットワークデバイスから SNMP メトリクスを収集します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: Aruba
 ---
@@ -57,35 +61,40 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Aruba Networks は Hewlett Packard Enterprise のワイヤレスネットワーキングの子会社で、有線、ワイヤレス、SD-WAN ソリューションを提供しています。Aruba インテグレーションを構成し、Aruba スイッチやアクセスポイントなどのデバイスから SNMP メトリクスを収集します。
+Aruba Networks is a wireless networking subsidiary of Hewlett Packard Enterprise and provides wired, wireless, and SD-WAN solutions. Configure the Aruba integration and collect SNMP metrics from devices such as Aruba switches and access points.
 
-監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
+For details of monitored metrics, see the [SNMP Data Collected][1] section.
 
-## セットアップ
+## Setup
 
-SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
+To install and configure the SNMP integration, see the [Network Device Monitoring][2] documentation.
 
-## データ収集
+## Vendor profiles
 
-### メトリクス
+Specific supported vendor profiles for this integration can be found on the [network vendors][3] page.
 
-監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
+## Data Collected
 
-## トラブルシューティング
+### Metrics
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+For details of monitored metrics see the [SNMP Data Collected][1] section.
 
-## その他の参考資料
+## Troubleshooting
 
-お役に立つドキュメント、リンクや記事:
+Need help? Contact [Datadog support][4].
 
-* [Datadog での SNMP モニタリング][4]
+## Further Reading
+
+Additional helpful documentation, links, and articles:
+
+* [Monitor SNMP with Datadog][5]
 
 
 
 [1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data
 [2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

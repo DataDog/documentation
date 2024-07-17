@@ -24,6 +24,7 @@ categories:
 - AWS
 - cloud
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: appkeeper
 integration_title: AppKeeper
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: appkeeper
 public_title: AppKeeper
@@ -49,6 +49,7 @@ tile:
   - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
   media: []
@@ -60,58 +61,58 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-SIOS AppKeeper は、Datadog から通知を受信すると、失敗した Amazon EC2 サービスを自動的に再起動し、費用のかかる手動介入の必要性を排除します。Datadog がアラートをトリガーすると、AppKeeper Recovery API を使って EC2 サービスを再起動します。
+SIOS AppKeeper automatically restarts failed Amazon EC2 services when notifications are received from Datadog, removing the need for expensive manual intervention. When Datadog triggers an alert, it restarts the EC2 service using the AppKeeper Recovery API.
 
-## 計画と使用
+## Setup
 
-### SIOS AppKeeper API キーを取得する
+### Get the SIOS AppKeeper API key
 
-AppKeeper GUI から SIOS AppKeeper API キーを取得します。
+Get the SIOS AppKeeper API key from AppKeeper GUI.
 
-1. **Account Information** をクリックし、モーダルダイアログを開きます。
-2. **Get Token** をクリックします。
-3. トークンをコピーします。
+1. Click **Account Information**, and open the modal dialog.
+2. Click **Get Token**.
+3. Copy the token.
 
-![スナップショット][1]
+![snapshot][1]
 
-### Webhooks インテグレーションをインストールして構成する
+### Install and configure the Webhooks integration
 
-1. Datadog サイトで、[Webhooks インテグレーション][2]に移動し、インテグレーションをインストールします。
-2. **Configuration** タブを選択します。
-3. **Webhooks** ヘッダーの下で、**New** をクリックします。
-4. 次の URL を入力します: "https://api.appkeeper.sios.com/v2/integration/{AWS_account_ID}/actions/recover"
-5. **Payload** セクションに監視インスタンスの `id` と `name` の名前を入力します。
-3. AppKeeper API トークンを **Custom Headers** セクションに登録します。
+1. On the Datadog site, navigate to the [Webhooks integration][2] and install the integration.
+2. Select the **Configuration** tab.
+3. Under the **Webhooks** header, click **New**.
+4. Enter the following URL: "https://api.appkeeper.sios.com/v2/integration/{AWS_account_ID}/actions/recover"
+5. Enter the `id` and name of `name` for the monitoring instance in the **Payload** section.
+3. Register the AppKeeper API token in the **Custom Headers** section.
 
-![スナップショット][3]
+![snapshot][3]
 
-### Datadog モニタリングと統合する
+### Integrate with Datadog monitoring
 
-1. 新しい Datadog [Synthetic テスト][4]を作成します。右上隅にある **New Test** をクリックします。
-2. **Define requests** ステップで、監視する URL を入力します。
-3. **Define assertions** ステップで、**New Assertion** をクリックし、パラメータ When `status code` is `200` を追加します。これにより、ステータスコードが 200 ではない場合にアラートがトリガーされます。リクエストで別のステータスに基づく通知が必要な場合は、200 を使用するステータスコードに置き換えてください。
-4. もう一度 **New Assertion** をクリックして、2 番目のパラメータセット And `response time` is less than `2000` ms を追加します。これにより、応答時間が 2000ms より長い場合にアラートがトリガーされます。これより長いまたは短い期間が必要な場合は、`2000` を使用する期間に置き換えてください。
-5. **Notify your team** ステップで、`@webhook-name_of_the_webhook` の形式で Webhook を追加します。通知のメッセージを含めます。**注**: このステップの **renotify if the monitor has not been resolved** (モニターが解決されていない場合に再通知) 設定の最小監視間隔は `Every 10 Minutes` です。**Never** に設定すると、Webhook が AppKeeper のリカバリ API を呼び出すことが禁止されます。
+1. Create a new Datadog [Synthetic test][4]. Click **New Test** in the top right corner.
+2. In the **Define requests** step, enter the URL you want to monitor.
+3. In the **Define assertions** step, click **New Assertion** and add the following parameters: When `status code` is `200`. This triggers an alert when the status code is **not** 200. If the request requires notification based on a different status, replace 200 with your status code.
+4. Click **New Assertion** again and add a second set of parameters: And `response time` is less than `2000` ms. This triggers an alert when the response time is longer than 2000ms. If you require a longer or shorter duration, replace `2000` with your duration.
+5. In the **Notify your team** step, add the webhook, formatted as `@webhook-name_of_the_webhook`. Include a message for the notification. **Note**: The minimum monitoring interval for the **renotify if the monitor has not been resolved** setting in this step is `Every 10 Minutes`. Setting to **Never** inhibits the webhook to call on AppKeeper's recovery API.
 
-![スナップショット][5]
+![snapshot][5]
 
-AppKeeper によるリカバリ結果は、AppKeeper の GUI にリストアップされます。
+Results of recoveries by AppKeeper are listed in AppKeeper's GUI.
 
-![スナップショット][6]
+![snapshot][6]
 
-詳細については、[AppKeeper のインテグレーションドキュメント][7]を参照してください。
+For more information see the [AppKeeper's Integration documentation][7].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][8] を参照してください。
+See [metadata.csv][8] for a list of metrics provided by this integration.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token.jpg
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks

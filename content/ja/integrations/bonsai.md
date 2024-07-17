@@ -22,6 +22,7 @@ author:
   support_email: dev@onemorecloud.com
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: bonsai
 integration_title: Bonsai
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: bonsai
 public_title: Bonsai
@@ -45,6 +45,7 @@ tile:
   - Supported OS::Linux
   - Category::Metrics
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: 'Bonsai: マネージド型 Elasticsearch'
   media: []
@@ -56,65 +57,65 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Bonsai クラスターのリクエストレベルのメトリクスを追跡すると、以下のことができます。
+Track request level metrics for your Bonsai clusters to:
 
-- クラスターのパフォーマンスを視覚化できます。
-- 検索のパフォーマンスをアプリケーションのパフォーマンスと関連付けることができます。
-- アラートを生成できます。
+- Visualize the performance of your clusters
+- Correlate search performance with application performance
+- Create alerts
 
-![スナップショット][1]
+![snapshot][1]
 
-## 計画と使用
+## Setup
 
-クラスターを Datadog と統合するには、API キーを bonsai アプリに送信する必要があります。
+Integrating your cluster with Datadog requires submitting your API key to the bonsai app.
 
-### API キーを取得する
+### Acquire API key
 
-Datadog で、[Integrations --> API][2] に移動して、API キーをコピーします。
+In Datadog, navigate to [Integrations --> API][2] and copy your API Key.
 
-![スナップショット][3]
+![snapshot][3]
 
-### API キーを送信する
+### Submit API key
 
-[Bonsai --> Clusters][4] に移動し、統合するクラスターをクリックします。Manage タブに移動し、ページ最下部までスクロールします。
+Navigate to [Bonsai --> Clusters][4] and click the cluster you want to integrate. Navigate to the Manage tab and scroll to the bottom of the page.
 
-"Datadog Integration" セクションで API キーを貼り付け、"Activate Datadog" をクリックします。
+Under the "Datadog Integration" section paste your API key and click "Activate Datadog".
 
-![スナップショット][5]
+![snapshot][5]
 
-### 検証する
+### Verify
 
-キーが有効であれば、インテグレーションが Active として表示されます。
+If your key is valid, you should see the integration as active.
 
-![スナップショット][6]
+![snapshot][6]
 
-数分以内に、Datadog のダッシュボードでリクエストメトリクスを使用できるようになります。
+Within a few minutes, request metrics are available in your Datadog dashboard.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "bonsai" >}}
 
 
-メトリクスはクラスターごとにタグ付けされるため、クラスターに基づいて分割できます。タグは次のようになります。
+Metrics are tagged for each cluster, so you can segment based on clusters. The tags look like:
 
 ```text
 cluster:my-cluster-slug
 ```
 
-### ヘルプ
+### Events
 
-Bonsai インテグレーションには、イベントは含まれません。
+The Bonsai integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Bonsai インテグレーションには、サービスのチェック機能は含まれません。
+The Bonsai integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog Support][8].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png

@@ -1,4 +1,6 @@
 ---
+core_product:
+- metrics
 title: count
 ---
 "Count" は、ある時間間隔に送信されたすべての値を加算するメトリクスタイプです。

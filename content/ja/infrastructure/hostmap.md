@@ -5,11 +5,12 @@ aliases:
 - /ja/guides/hostmap
 further_reading:
 - link: /infrastructure/livecontainers/
-  tag: グラフ
+  tag: Documentation
   text: 環境内のすべてのコンテナのリアルタイム表示
 - link: /infrastructure/process/
-  tag: グラフ
+  tag: Documentation
   text: システムのあらゆるレベルの事象の把握
+kind: documentation
 title: ホストとコンテナマップ
 ---
 

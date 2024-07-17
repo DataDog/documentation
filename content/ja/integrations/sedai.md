@@ -29,6 +29,7 @@ categories:
 - notifications
 - orchestration
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: sedai
 integration_title: Sedai
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sedai
 public_title: Sedai
@@ -59,6 +59,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
   media: []
@@ -68,47 +69,47 @@ tile:
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-Sedai は、本番環境をプロアクティブに管理し、問題を防止して可用性、パフォーマンス、およびクラウドコストを改善する自律型クラウドプラットフォームです。SRE のためのインテリジェントな オートパイロットとして、Sedai は監視データを独自に検出、優先順位付け、分析し、しきい値なしに本番環境で安全かつ自律的に行動します。
+Sedai is an autonomous cloud platform that proactively manages production environments to prevent issues and improve availability, performance, and cloud costs. As an intelligent autopilot for SREs, Sedai independently detects, prioritizes, and analyzes monitoring data to safely and autonomously act in production without thresholds.
 
-このインテグレーションを有効にすると、Sedai が本番環境で自律的に実行するアクションについて、Datadog で通知を受け取ることができます。
+Enable this integration to receive notifications in Datadog about actions that Sedai autonomously executes in your production environments.
 
-### オートディスカバリーの動作
+### How it Works
 
-* **エージェントレス:** クラウドアカウントにシームレスに接続し、本番環境を自動的に検知・把握します。
+* **Agentless:** Seamlessly connects to your cloud accounts and automatically discovers and understands production environments.
 
-* **構成不要:** Datadog API に簡単に接続し、メトリクス動作をインテリジェントに識別し、優先順位をつけて学習します。
+* **Configuration-free:** Easily connects to Datadog API and intelligently identifies, prioritizes and learns metric behavior.
 
-* **プロアクティブアクション:** お客様に代わって本番稼動を安全に行い、リソースの可用性問題を回避し、常に最適な状態で稼動することを保証します。
+* **Proactive Actions:** Safely acts in production on your behalf to ensure that resources avoid availability issues and run optimally at all times.
 
-## 計画と使用
+## Setup
 
-Sedai で、
+In Sedai:
 
-1. Settings > Notifications > Add Integration > Datadog アイコンに移動します
+1. Navigate to Settings > Notifications > Add Integration > Datadog Icon
 
-   ![Datadog インテグレーションの追加][1]
+   ![Add Datadog Integration][1]
 
-2. Datadog アカウントのニックネームと API キーを入力します。インテグレーションを有効化し、テストします。
+2. Enter a nickname and the API key for your Datadog account. Enable and test the integration.
 
-   ![Datadog API キーの設定][2]
+   ![Setup Datadog API Key][2]
 
-3. テストが正常に行われたことを確認したら、Save をクリックします。
+3. Once the test is verified to be working, click Save.
 
-   ![動作中の Datadog インテグレーションの保存][3]
+   ![Save Working Datadog Integration][3]
 
-4. Settings > Notifications で、Datadog に送信する[通知を選択][4]します。
+4. Under Settings > Notifications, [select which notifications][4] you want to send to Datadog. 
 
-   ![Datadog 通知の有効化][5]
+   ![Enable Datadog Notifications][5]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-このインテグレーションは、Datadog にイベントを送信します。
+This integration sends events into Datadog.
 
-## Agent
+## Support
 
-このインテグレーションに関するサポートは、[Datadog サポート][6]にお問い合わせください。
+For help with this integration, contact [Datadog support][6].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sedai/images/DataDog_Notification_Integration.png

@@ -12,6 +12,7 @@ author:
   vendor_id: performetriks
 categories:
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -20,7 +21,6 @@ integration_id: performetriks-composer
 integration_title: Composer によるインストール
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -63,6 +63,9 @@ tile:
     image_url: images/composer3.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
   support: README.md#Support
   title: Composer によるインストール
   uninstallation: README.md#Uninstallation
@@ -71,46 +74,46 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
-Performetriks Composer は、Datadog 環境全体のコンフィギュレーションを管理することができるツールです。Composer は、Datadog のコンフィギュレーションを文書化して保存したり、Datadog 環境でのコンフィギュレーションエラーを発見して解決するための迅速かつ容易な方法を提供します。
+## Overview
+Performetriks Composer is a tool that allows you to manage your entire Datadog environment configuration. Composer provides a quick, easy way to document and store your Datadog configuration, as well as find and resolve configuration errors in your Datadog environment.
 
-### Composer の使用例
+### Composer Use Cases
 
-**Datadog のコンフィギュレーションをバックアップ**
+**Backup Datadog configuration**
 
-Datadog の環境がいくつあっても、Composer を使えば、すべてのコンフィギュレーションアイテムのバックアップを作成することができます。アドホックにバックアップを開始することも、CI/CD パイプラインからバックアップを完全に自動化することも可能です。
+No matter how many Datadog environments you have, Composer allows you to create backups of all your configuration items. You can start a backup ad-hoc or entirely automate a backup from a CI/CD pipeline.
 
-**ソフトウェアコンフィギュレーション管理システムへのチェックイン**
+**Check in to software configuration management systems**
 
-Composer では、モニタリングのコンフィギュレーションをコードとして管理し、そのコードをリポジトリにチェックすることで、すべてのモニタリング設定の記録を確保することができます。
+Composer allows you to manage your monitoring configurations as code and check that code into a repository, ensuring that there is a record of all monitoring settings.
 
-**変更点を探す**
+**Find changes**
 
-複数の管理者が Datadog 環境を管理する場合、設定が調整されたときに全員が知っており、同意していることを確認する必要があります。Composer は、常にバックアップが利用可能であることを保証し、管理者が最新の変更を検出できるようにすることで、このプロセスを簡素化します。
+If several admins manage your Datadog environment, they need to ensure that everyone knows and agrees when any settings are adjusted. Composer simplifies this process by ensuring there is always a backup available, allowing admins to detect the most recent changes.
 
-**コンフィギュレーションの復元**
+**Restore your configuration**
 
-モニタリングコンフィギュレーションのエラーを発見するのは困難ですが、Composer はこのプロセスを劇的に簡素化します。作成されたバックアップから最新の Datadog のコンフィギュレーションを選択し、数秒以内にミスを元に戻すことができます。
+Errors in monitoring configuration can be difficult to spot, but Composer simplifies this process dramatically. Select your most recent Datadog configuration from the created backup and undo your mistakes within seconds.
 
-**コンフィギュレーションのアップロード**
+**Upload your configuration**
 
-最近では、コードとしてのモニタリングが主流になっています。Composer を使えば、モニタリングの設定をコードリポジトリに保存し、変更を追跡して、既存または新しい Datadog 環境にこれらの設定をアップロードすることができます。
+It's all about monitoring as code these days. Composer allows your team to store monitoring settings in your code repositories, track changes, and upload these settings to existing or new Datadog environments.
 
-## Agent
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Performetriks にお問い合わせください。
+For support or feature requests, contact Performetriks through the following channel:
 
-- メール: [composer@performetriks.com][2]
+- Email: [composer@performetriks.com][2]
 
-### その他の参考資料
+### Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog Marketplace の Performetriks の製品を使って Datadog の構成をコードとして保存・管理する][3]
+- [Store and manage Datadog configurations as code with Performetriks’ offering in the Datadog Marketplace][3]
 
 [1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [2]: mailto:composer@performetriks.com
 [3]: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">Click Here</a> to purchase this application.

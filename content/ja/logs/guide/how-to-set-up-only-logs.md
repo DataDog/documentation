@@ -1,12 +1,9 @@
 ---
 aliases:
 - /ja/logs/faq/how-to-set-up-only-logs
+kind: documentation
 title: Datadog Agent をログ収集のみに使用
 ---
-
-<div class="alert alert-danger">
-インフラストラクチャーメトリクスなしのログ収集をセットアップするには、一部のペイロードを無効にする必要があります。結果として、収集しているログのメタデータおよびタグが失われる場合があるため、Datadog ではこれを推奨しません。このコンフィギュレーションについて、詳しくは <a href="/help/">Datadog サポート</a>までお問い合わせください。
-</div>
 
 ペイロードを無効にするには、Agent v6.4 以降を実行している必要があります。これにより、メトリクスデータの送信が無効になり、ホストが Datadog に表示されなくなります。以下のステップを実行してください。
 
@@ -27,9 +24,9 @@ title: Datadog Agent をログ収集のみに使用
 3. [Agent を構成してログを収集][2]します。
 4. [Agent を再起動します][3]。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 [2]: /ja/logs/log_collection/
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 

@@ -7,42 +7,42 @@ title: Amazon EventBridge API 宛先でイベントおよびログを Datadog �
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
+<div class="alert alert-warning">The Datadog for Government site does not support Amazon EventBridge.</div>
 {{< /site-region >}}
 
-Amazon EventBridge は、イベント駆動型アプリケーションの構築を可能にするサーバーレスイベントバスです。 EventBridge は AWS サービスと統合可能ですが、API 宛先機能を利用すると、API を使用して AWS 外からのデータをプッシュ/プルできます。このガイドでは、EventBridge から Datadog へイベントおよびログを送信する方法を解説します。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーション文書][1]をご参照ください。
+Amazon EventBridge is a serverless event bus that enables you to build event-driven applications. EventBridge can integrate with your AWS services, but the API destinations feature lets you push and pull data from outside of AWS using APIs. This guide gives steps for sending your events and logs from EventBridge to Datadog. For more information about pushing your events from Datadog to EventBridge, [see the EventBridge integration docs][1].
 
-## 計画と使用
+## Setup
 
-始めるには、[Datadog アカウント][2]と [API キー][3]、[Amazon Eventbridge API 宛先][4]へのアクセスが必要です。
+Before you begin, you need a [Datadog account][2], with [an API key][3], and you need access to [Amazon Eventbridge API destinations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. [Amazon の API 宛先を作成][5]文書のステップに従い、Datadog を API 宛先として追加します。
-    - キー名として `DD-API-KEY`、[Datadog API キー][3]を値として、API キー認証を使用します。
-    - 宛先エンドポイントには、ログの場合 `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs`、イベントの場合は `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` を使用して、HTTP メソッドとして `POST` を設定します。ログとイベントの違いに関する詳細は、[データ関連リスクの低減][8]を参照してください。
-    - イベントエンドポイントを利用する場合、API Destination 接続の `body.field` パラメータに `title` と `text` を含める必要があります。これらは、イベントエンドポイントに `POST` するために必要な値です。詳しくは、[イベントのポストのドキュメント][9]を参照してください。
-2. 宛先をセットアップしたら、Amazon のドキュメントを参照して [EventBridge 作成ルール][10]を作成して、Datadog をあて先として設定します。
-3. Datadog を宛先としてルールをセットアップしたら、イベントを EventBridge にポストしてトリガーします。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーションのドキュメント][1]をご参照ください。たとえば、アカウントで[オブジェクトを S3 バケットへアップロード][11]してテストイベントをトリガーするには、以下の AWS CloudShell コマンドを使用します。
+1. Follow the steps in the [Amazon Create an API destination docs][5] to add Datadog as an API destination.
+    - Use API key authorization, with `DD-API-KEY` as your key name and your [Datadog API key][3] as the value.
+    - For your destination endpoint, use `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs` for logs and `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see [Reducing Data Related Risks][8].
+    - If you are utilizing the events endpoint, you need to include a `title` and `text` as `body.field` parameters in the API Destination connection. These are required values to `POST` to the events endpoint. For more information, see the [Post an event documentation][9].
+2. Once you have set up the destination, see the Amazon documentation to [create an EventBridge rule][10], where you set Datadog as your destination.
+3. Once you have set up the rule with Datadog as the destination, trigger an event by posting an event to EventBridge. For more information about pushing events to EventBridge from Datadog, see the [EventBridge integration documentation][1]. For example, to trigger a test event by [uploading the objects to an S3 bucket][11] in your account, use this AWS CloudShell command:
 
     ```bash
     echo "test" > testfile.txt
     aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
     ```
-4. およそ 5 分後、イベントとログが送信されると、Datadog の[ログコンソール][12]または[イベントエクスプローラー][13]（送信先となっているエンドポイントに基づき ます）でデータが利用可能になります。
+4. Once events and logs are sending, after about five minutes, the data is available in the Datadog [Logs Console][12] or [Events Explorer][13], depending on which endpoint you are sending them to.
 
-## ヘルプ
+## Troubleshooting
 
-Datadog に送信されたペイロードの詳細を確認し、API エンドポイントのレスポンスを表示するには、Amazon SQS キューをセットアップします。
-1. [Amazon SQS][14] にキューを作成します。
-2. [構成](#configuration)セクションで作成した [EventBridge ルール][15]に移動します。
-3. **Targets** タブを選択し、**Edit** をクリックします。
-4. **Additional settings** セクションを展開します。
-4. *Dead-letter queue* セクションで、**Select an Amazon SQS queue in current AWS account to use as dead-letter queue** (デッドレターキューとして使用する、現在の AWS アカウントの Amazon SQS キューを選択する) を選択します。
-5. 先ほど作成した SQS キューを選択します。
-6. ルールを更新します。
+To see more details about the payloads sent to Datadog and to view the response of the API endpoints, set up an Amazon SQS queue:  
+1. Create a queue in [Amazon SQS][14].
+2. Go to the [EventBridge rule][15] that you created in the [Configuration](#configuration) section.
+3. Select the **Targets** tab and click **Edit**.
+4. Expand the **Additional settings** section. 
+4. In the *Dead-letter queue* section, choose **Select an Amazon SQS queue in the current AWS account to use as the dead-letter queue**.
+5. Select the SQS queue that you just created.
+6. Update the rule.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

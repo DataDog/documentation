@@ -7,208 +7,208 @@ aliases:
 title: カスタムメトリクスの課金
 ---
 
-メトリクスが [{{< translate key="integration_count" >}} 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスは[カスタムメトリクス][2]<sup>[(1)](#標準インテグレーション)</sup>とみなされます。
+If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]. Certain standard integrations can also potentially emit custom metrics. For more information, see [Custom metrics and standard integrations][14].
 
-**カスタムメトリクスは、メトリクス名とタグ値 (ホストタグを含む) の組み合わせにより、一意に識別されます**。一般に、[DogStatsD][3] または[カスタム Agent チェック][4]を使用して送信されるメトリクスはすべて、カスタムメトリクスとなります。
+**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
-カスタムメトリクスの月間請求対象数 (使用量ページに反映) は、ある月の各時間のすべての個別カスタムメトリクスを合計し、それを月の時間数で割って月間平均値を算出します。
+Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
 
-Metrics without LimitsTM のユーザーは、インジェストおよびインデックスされたカスタムメトリクスの月間課金量を Usage ページで確認できます。インジェストおよびインデックスされたカスタムメトリクスと [Metrics without LimitsTM][5] について詳しくはこちら。
+Metrics without LimitsTM users see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and [Metrics without LimitsTM][5]. 
 
-## カスタムメトリクスの数え方
+## Counting custom metrics
 
-特定のメトリクス名に関連付けられたカスタムメトリクスの数は、メトリクスの[送信タイプ][6]により異なります。次のシナリオを使って、カスタムメトリクスの数え方をいくつかご紹介します。
+The number of custom metrics associated with a particular metric name depends on its metric [submission type][6]. Below are examples of how to count your custom metrics based on the following scenario below:
 
-エンドポイントリクエストのレイテンシーを測定する 2 つのホスト (`host:A` と `host:B`) から、`request.Latency` というメトリクスを送信しているとします。このメトリクスを 2 つのタグキーと共に送信します。
+Suppose you're submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measures the latency of your endpoint requests. You're submitting this metric with two tag keys:
 
-- `endpoint` の値は `endpoint:X` または `endpoint:Y` とします。
-- `status` の値は `status:200` または `status:400` とします。
+- `endpoint`, which has the value `endpoint:X` or `endpoint:Y`.
+- `status`, which has the value `status:200` or `status:400`.
 
-下記に示すように、データの `endpoint:X` は両ホストでサポートされていますが、`host:B` でのみ失敗するとします。また、`endpoint:Y` へのリクエストは常に成功し、`host:B` でのみ表示されます。
+Assume that in your data, `endpoint:X` is supported by both hosts, but fails only on `host:B`. Also assume that requests to `endpoint:Y` are always successful and only appear on `host:B` as shown below:
 
-{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="リクエストのレイテンシー" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" style="width:80%;">}}
 
 {{< tabs >}}
 {{% tab "Count, Rate"%}}
 
-[COUNT][1] と [RATE][2] のカスタムメトリクスの数は、同じロジックで計算されます。
+The number of custom metrics from [COUNT][1] and [RATE][2] is calculated with the same logic.
 
-このタグスキームで RATE メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
+The number of unique tag value combinations submitted for a RATE metric with this tagging scheme is **four**:
 
-- `host:A`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:400`
-- `host:B`、`endpoint:Y`、`status:200`
+- `host:A`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:400`
+- `host:B`, `endpoint:Y`, `status:200`
 
-これにより、`request.Latency` では **4 つのカスタムメトリクス**が報告されます。
+This results in `request.Latency` reporting **four custom metrics**. 
 
-### タグ追加の影響
+### Effect of adding tags
 
-タグを追加してもカスタムメトリクスが増えるとは**限りません**。カスタムメトリクス数は、一般的に、最小粒度または最も詳細なタグに対応します。例えば、米国の気温を測定しており、国と地域ごとに `temperature` メトリクスでタグ付けしたとします。その場合、次のように Datadog に送信します。
+Adding tags **may not** result in more custom metrics. Your count of custom metrics usually scales with the most granular or detailed tag. Suppose you are measuring temperature in the US, and you have tagged your `temperature` metric by country and region. You submit the following to Datadog:
 
-| メトリクス名   | タグ値                         |
+| Metric Name   | Tag Values                         |
 |---------------|------------------------------------|
-| `temperature` | `country:USA`、`region: Northeast` |
-| `temperature` | `country:USA`、`region: Southeast` |
+| `temperature` | `country:USA`, `region: Northeast` |
+| `temperature` | `country:USA`, `region: Southeast` |
 
-3 つの値 `NYC`、`Miami`、`Orlando`  を持つ `city` という タグを追加するとします。 このタグを追加すると、以下の表に示すように、より詳細でより粒度の小さい情報をデータセットに加えることになるため、カスタムメトリクスの数が増えます。
+Suppose you wanted to add the tag `city` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag increases the number of custom metrics as it provides more detail and granularity to your dataset as shown below:
 
-| メトリクス名   | タグ値                                          |
+| Metric Name   | Tag Values                                          |
 |---------------|-----------------------------------------------------|
-| `temperature` | `country:USA`、`region: Northeast`、`city: NYC`     |
-| `temperature` | `country:USA`、`region: Southeast`、`city: Orlando` |
-| `temperature` | `country:USA`、`region: Southeast`、`city: Miami`   |
+| `temperature` | `country:USA`, `region: Northeast`, `city: NYC`     |
+| `temperature` | `country:USA`, `region: Southeast`, `city: Orlando` |
+| `temperature` | `country:USA`, `region: Southeast`, `city: Miami`   |
 
-`temperature` から報告されるカスタムメトリクス数は、最小粒度のタグ `city` に対応します。
+The count of custom metrics reporting from `temperature` scales with the most granular tag, `city`.
 
-temperature メトリクスを `state` メトリクス (`NY` と `Florida` の 2 つの値を持つ) でタグ付けするとします。この場合、`country`、`region`、`state`、`city` で temperature をタグ付けしていることになります。state タグを追加しても、データセットにすでに存在する city タグの粒度レベルは変わりません。
+Suppose you also wanted to tag your temperature metric by `state` (which has two values: `NY` and `Florida`). This means you are tagging temperature by the tags: `country`, `region`, `state`, and `city`. Adding the state tag doesn't increase the level of granularity already present in your dataset provided by the city tag.
 
-Florida の気温を入手するには、次のようにカスタムメトリクスの組み合わせを変更します。
+To obtain the temperature in Florida, you can recombine the custom metrics of:
 
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**注**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
+**Note**: Reordering tag values doesn't add uniqueness. The following combinations are the same custom metric:
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-### Metrics without LimitsTM でタグと集計を構成する
+### Configure tags and aggregations with Metrics without LimitsTM
 
-カスタムメトリクスのボリュームは、[Metrics without LimitsTM][3] を使用してタグと集計を構成することによって影響を受ける可能性があります。Metrics without LimitsTM は、インジェストコストとインデキシングコストを切り離すので、Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能に残しておきたいタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量は、インデックスを作成した残りのデータ量とは異なるため、Usage ページと Metrics Summary ページには 2 つの異なるボリュームが表示されます。
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without LimitsTM][3]. Metrics without LimitsTM decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
 
-- **Ingested Custom Metrics**: インジェストされたすべてのタグに基づくカスタムメトリクスの元となる量 (コード経由で送信されます)。
-- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく) 
+- **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without LimitsTM configurations) 
 
-**注: 構成されたメトリクスのみが、Ingested custom metrics ボリュームに寄与します。**Metrics without LimitsTM でメトリクスが構成されていない場合、そのインデックスされたカスタムメトリクスボリュームに対してのみ課金されます。
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without LimitsTM, you're only charged for its indexed custom metrics volume.
 
-#### インジェストされたカスタムメトリクスとインデックスされたカスタムメトリクスは、いつ課金されるのですか？
-Metrics without LimitsTM で構成されていないメトリクスについては、インデックスされたカスタムメトリクスの代金をお支払いいただきます。
+#### When are you charged for ingested vs indexed custom metrics?
+For metrics not configured with Metrics without LimitsTM, you pay for indexed custom metrics.
 
-|                                      | インデックスされたカスタムメトリクス<br>(1 時間あたりの月平均カスタムメトリクス数ベース)                                        |
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| アカウントの割り当て                    | - Pro: 1 ホストあたり 100 のインデックスされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインデックスされたカスタムメトリクス                             |
-| 使用量がアカウントの割り当てを超える | アカウントの割り当てを超えるインデックスされたカスタムメトリクス 100 個ごとに、現在の契約で指定された金額をお支払いいただきます。 |
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構成されている) の場合、インジェストされたカスタムメトリクスとインデックスされたカスタムメトリクスに対してお支払いいただきます。
+For metrics configured with Metrics without LimitsTM (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-|                                      | Ingested Custom Metrics                                                                           | インデックスされたカスタムメトリクス                                                                                                        |
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| アカウントの割り当て                    | - Pro: 1 ホストあたり 100 のインジェストされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインジェストされたカスタムメトリクス | - Pro: 1 ホストあたり 100 のインデックスされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインデックスされたカスタムメトリクス                               |
-| 使用量がアカウントの割り当てを超える | カスタムメトリクスを 100 個インジェストするごとに、アカウントの割り当てを超える場合は、0.10 ドルをお支払いいただきます。                   | アカウントの割り当てを超えるインデックスされたカスタムメトリクス 100 個ごとに、現在の契約で指定された金額をお支払いいただきます。 |
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-Metrics without LimitsTM を使って、`endpoint` と `status` のタグだけを残して `request.Latency` メトリクスのサイズを小さくしたいとします。その結果、以下の 3 つの一意のタグの組み合わせになります。
+Suppose you wanted to use Metrics without LimitsTM to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
 
-- `endpoint:X`、`status:200`
-- `endpoint:X`、`status:400`
-- `endpoint:Y`、`status:200`
+- `endpoint:X`, `status:200`
+- `endpoint:X`, `status:400`
+- `endpoint:Y`, `status:200`
 
-タグ構成の結果、`request.Latency` は合計で **3 つのインデックスされたカスタムメトリクス**を報告しています。このメトリクスに送信されたオリジナルのタグに基づくと、`request.Latency` のオリジナルの**インジェストされた**カスタムメトリクス量は、**4 個のインジェストされたカスタムメトリクス**となります。
+As a result of the tag configuration, `request.Latency` reporting a total of **3 indexed custom metrics** . Based on the original tags sent on this metric, the original **ingested** custom metrics volume of `request.Latency` is **4 ingested custom metrics**.
 
-デフォルトでは、Datadog は、構成したメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて、最も頻繁にクエリされる集計の組み合わせを保存します。
+By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query.
 
-- 構成されたカウント/レートは `SUM` の時間/空間集計でクエリ可能です
+- Configured counts/rates are queryable with time/space aggregations of `SUM`
 
-クエリにとって価値がある場合は、より多くの集計にオプトインできます。インデックスされたカスタムメトリクスの数は、有効な集計の数に比例します。
+You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations. 
 
-[Metrics without LimitsTM][3] の詳細についてはこちらをご覧ください。
+Learn more about [Metrics without LimitsTM][3].
 
 [1]: /ja/metrics/types/?tab=count#metric-types
 [2]: /ja/metrics/types/?tab=rate#metric-types
 [3]: /ja/metrics/metrics-without-limits
 {{% /tab %}}
 {{% tab "Gauge" %}}
-このタグスキームで GAUGE メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
+The number of unique tag value combinations submitted for a GAUGE metric with this tagging scheme is **four**:
 
-- `host:A`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:400`
-- `host:B`、`endpoint:Y`、`status:200`
+- `host:A`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:400`
+- `host:B`, `endpoint:Y`, `status:200`
 
-これにより、`request.Latency` では **4 つのカスタムメトリクス**が報告されます。
+This results in `request.Latency` reporting **four custom metrics**. 
 
-### タグ追加の影響
+### Effect of adding tags
 
-タグを追加してもカスタムメトリクスが増えるとは**限りません**。カスタムメトリクス数は、一般的に、最小粒度または最も詳細なタグに対応します。例えば、米国の気温を測定しており、国と地域ごとに `temperature` メトリクスでタグ付けしたとします。その場合、次のように Datadog に送信します。
+Adding tags **may not** result in more custom metrics. Your count of custom metrics usually scales with the most granular or detailed tag. Suppose you are measuring temperature in the US, and you have tagged your `temperature` metric by country and region. You submit the following to Datadog:
 
-| メトリクス名   | タグ値                         |
+| Metric Name   | Tag Values                         |
 |---------------|------------------------------------|
-| `temperature` | `country:USA`、`region: Northeast` |
-| `temperature` | `country:USA`、`region: Southeast` |
+| `temperature` | `country:USA`, `region: Northeast` |
+| `temperature` | `country:USA`, `region: Southeast` |
 
-3 つの値 `NYC`、`Miami`、`Orlando`  を持つ `city` という タグを追加するとします。 このタグを追加すると、以下の表に示すように、より詳細でより粒度の小さい情報をデータセットに加えることになるため、カスタムメトリクスの数が増えます。
+Suppose you wanted to add the tag `city` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag increases the number of custom metrics as it provides more detail and granularity to your dataset as shown below:
 
-| メトリクス名   | タグ値                                          |
+| Metric Name   | Tag Values                                          |
 |---------------|-----------------------------------------------------|
-| `temperature` | `country:USA`、`region: Northeast`、`city: NYC`     |
-| `temperature` | `country:USA`、`region: Southeast`、`city: Orlando` |
-| `temperature` | `country:USA`、`region: Southeast`、`city: Miami`   |
+| `temperature` | `country:USA`, `region: Northeast`, `city: NYC`     |
+| `temperature` | `country:USA`, `region: Southeast`, `city: Orlando` |
+| `temperature` | `country:USA`, `region: Southeast`, `city: Miami`   |
 
-`temperature` から報告されるカスタムメトリクス数は、最小粒度のタグ `city` に対応します。
+The count of custom metrics reporting from `temperature` scales with the most granular tag, `city`.
 
-temperature メトリクスを `state` メトリクス (`NY` と `Florida` の 2 つの値を持つ) でタグ付けするとします。この場合、`country`、`region`、`state`、`city` で temperature をタグ付けしていることになります。state タグを追加しても、データセットにすでに存在する city タグの粒度レベルは変わりません。
+Suppose you also wanted to tag your temperature metric by `state` (which has two values: `NY` and `Florida`). This means you are tagging temperature by `country`, `region`, `state`, and `city`. Adding the state tag doesn't increase the level of granularity already present in your dataset provided by the city tag.
 
-Florida の気温を入手するには、次のようにカスタムメトリクスの組み合わせを変更します。
+To obtain the temperature in Florida, you can recombine the custom metrics of:
 
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**注**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
+**Note**: Reordering tag values doesn't add uniqueness. The following combinations are the same custom metric:
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-### Metrics without LimitsTM でタグと集計を構成する
+### Configure tags and aggregations with Metrics without LimitsTM
 
-カスタムメトリクスのボリュームは、[Metrics without LimitsTM][4] を使用してタグと集計を構成することによって影響を受ける可能性があります。Metrics without LimitsTM は、インジェストコストとインデキシングコストを切り離すので、Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能に残しておきたいタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量は、インデックスを作成した残りのデータ量とは異なるため、Usage ページと Metrics Summary ページには 2 つの異なるボリュームが表示されます。
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without LimitsTM][4]. Metrics without LimitsTM decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
 
-- **Ingested Custom Metrics**: インジェストされたすべてのタグに基づくカスタムメトリクスの元となる量 (コード経由で送信されます)。
-- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく) 
+- **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without LimitsTM configurations) 
 
-**注: 構成されたメトリクスのみが、Ingested custom metrics ボリュームに寄与します。**Metrics without LimitsTM でメトリクスが構成されていない場合、そのインデックスされたカスタムメトリクスボリュームに対してのみ課金されます。
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without LimitsTM, you're only charged for its indexed custom metrics volume.
 
-#### インジェストされたカスタムメトリクスとインデックスされたカスタムメトリクスは、いつ課金されるのですか？
-Metrics without LimitsTM で構成されていないメトリクスについては、インデックスされたカスタムメトリクスの代金をお支払いいただきます。
+#### When are you charged for ingested vs indexed custom metrics?
+For metrics not configured with Metrics without LimitsTM, you pay for for indexed custom metrics.
 
-|                                      | インデックスされたカスタムメトリクス<br>(1 時間あたりの月平均カスタムメトリクス数ベース)                                        |
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| アカウントの割り当て                    | - Pro: 1 ホストあたり 100 のインデックスされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインデックスされたカスタムメトリクス                             |
-| 使用量がアカウントの割り当てを超える | アカウントの割り当てを超えるインデックスされたカスタムメトリクス 100 個ごとに、現在の契約で指定された金額をお支払いいただきます。 |
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構成されている) の場合、インジェストされたカスタムメトリクスとインデックスされたカスタムメトリクスに対してお支払いいただきます。
+For metrics configured with Metrics without LimitsTM (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-|                                      | Ingested Custom Metrics                                                                           | インデックスされたカスタムメトリクス                                                                                                        |
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| アカウントの割り当て                    | - Pro: 1 ホストあたり 100 のインジェストされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインジェストされたカスタムメトリクス | - Pro: 1 ホストあたり 100 のインデックスされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインデックスされたカスタムメトリクス                               |
-| 使用量がアカウントの割り当てを超える | カスタムメトリクスを 100 個インジェストするごとに、アカウントの割り当てを超える場合は、0.10 ドルをお支払いいただきます。                   | アカウントの割り当てを超えるインデックスされたカスタムメトリクス 100 個ごとに、現在の契約で指定された金額をお支払いいただきます。 |
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-デフォルトでは、Datadog は、構成したメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて、最も頻繁にクエリされる集計の組み合わせを以下のように保存します。
+By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
-- 構成されたゲージは `AVG/AVG` の時間/空間集計ででクエリ可能です
+- Configured gauges are queryable in time/space aggregations of `AVG/AVG` 
 
-クエリにとって価値がある場合は、より多くの集計にオプトインできます。インデックスされたカスタムメトリクスの数は、有効な集計の数に比例します。
+You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations.
 
-[Metrics without LimitsTM][1] の詳細についてはこちらをご覧ください。
+Learn more about [Metrics without LimitsTM][1].
 
 [1]: /ja/metrics/metrics-without-limits
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-**HISTOGRAM メトリクスは、一意のメトリクス名とタグ値の組み合わせごとに 5 つのカスタムメトリクスをデフォルトで生成し、Agent 側の `max`、`median`、`avg`、`95pc`、`count` の集計をサポートします。詳細については、[HISTOGRAM メトリクスタイプ][1]をご参照ください。
+**A HISTOGRAM metric generates by default five custom metrics for each unique combination of metric name and tag values** to support the Agent-side aggregations `max`, `median`, `avg`, `95pc`, and `count`. [Learn more about HISTOGRAM metric type][1].
 
-このタグスキームで HISTOGRAM メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
+The number of unique tag value combinations submitted for a HISTOGRAM metric with this tagging scheme is **four**:
 
-- `host:A`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:400`
-- `host:B`、`endpoint:Y`、`status:200`
+- `host:A`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:400`
+- `host:B`, `endpoint:Y`, `status:200`
 
-デフォルトでは、Agent は元の 4 つのタグ値の組み合わせそれぞれに 5 つのカスタムメトリクスを生成して、`avg`、`count`、`median`、`95percentile`、`max` の [Agent 側の各集計を有効にします][2]。結果的に、`request.Latency` から報告される**カスタムメトリクスの総数は 4×*5 = 20** になります。
+By default, the Agent generates five custom metrics for each of the original four unique tag value combinations to account [for each Agent-side aggregations enabled][2]: `avg`, `count`, `median`, `95percentile`, and `max`. Consequently, `request.Latency` reports a total of **4\*5 = 20 custom metrics**.
 
-**注意**: HISTOGRAM メトリクスに集計を追加すると、個別のカスタムメトリクスの報告数が増えます。集計を削除すると、カスタムメトリクスの報告数が減ります。
+**Note**: Adding aggregations to your HISTOGRAM metrics increases the number of distinct custom metrics reported. Removing aggregations decreases the number of custom metrics reported.
 
-- どの集計を Datadog に送信するかは、[datadog.yaml 構成ファイル][3]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の集計だけが Datadog に送信されます。必要に応じて `sum` および `min` も利用できます。
-- Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][3]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、パーセンタイル順位が 95 の `95percentile` だけが Datadog に送信されます。
+- Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][3]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog. `sum` and `min` are also available if desired.
+- Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][3]. By default, only the `95percentile`, 95th percentile, is sent out to Datadog.
 
 
 [1]: /ja/metrics/types/?tab=histogram#metric-types
@@ -217,105 +217,94 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
-**DISTRIBUTION メトリクスは、一意のメトリクス名とタグ値の組み合わせごとに 5 つのカスタムメトリクスをデフォルトで生成し**、値の全体的な分布を表示します。これら 5 つのカスタムメトリクスは、サーバー側の `count`、`sum`、`min`、`max`、`avg` の集計をサポートします。詳細については、[DISTRIBUTION メトリクスタイプ][1]をご参照ください。
+**A DISTRIBUTION metric generates by default five custom metrics for each unique combination of metric name and tag values** to represent the global statistical distribution of values. These five custom metrics represent server-side aggregations of `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
 
-このタグスキームで分布メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
+The number of unique tag value combinations submitted for a DISTRIBUTION metric with this tagging scheme is **four**.
 
-- `host:A`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:200`
-- `host:B`、`endpoint:X`、`status:400`
-- `host:B`、`endpoint:Y`、`status:200`
+- `host:A`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:400`
+- `host:B`, `endpoint:Y`, `status:200`
 
-[DISTRIBUTION メトリクス][1]のカスタムメトリクス数は、メトリクス名とタグ値の一意の組み合わせ数に 5 を掛けた数になります。結果として、`request.Latency` から報告される**カスタムメトリクスの総数は 5×*4 = 20** になります。
+The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. This results in `request.Latency` reporting a total of **5\*4 = 20 custom metrics**.
 
-##### パーセンタイル集計の追加
+##### Adding percentile aggregations
 
-パーセンタイル集計 (`p50`、`p75`、`p90`、`p95`、`p99`) をディストリビューションメトリクスに含めることができます。これら追加のパーセンタイル集計を含めることで、メトリクス名とタグ値の一意の組み合わせ数に 5 を掛けた数字になります。(**5\*4 = 20 カスタムメトリクス**)。そのため、パーセンタイル集計付きのこのディストリビューションメトリクスから送信されるカスタムメトリクスは、次のとおりです。**2 * (5\*4) = 40 カスタムメトリクス** 。
+You can include percentile aggregations (`p50`, `p75`, `p90`, `p95`, and `p99`) on your distribution metric. Including these additional percentile aggregations results in an additional volume of five times the unique combination of metric name and tag values (**5\*4 = 20 custom metrics**). Therefore the total number of custom metrics emitted from this distribution metric with percentile aggregations is **2 * (5\*4) = 40 custom metrics** .
 
-この表は、パーセンタイル集計をディストリビューションメトリクスに追加した場合の効果をまとめたものです。
+This table summarizes the effect of adding percentile aggregations to any distribution metric. 
 
-| ガイド                                                                                   | 課金対象となるカスタムメトリクスの数 |
+| Metrics                                                                                   | Number of Billable Custom Metrics |
 |-------------------------------------------------------------------------------------------|-----------------------------------|
-| ベースラインディストリビューションからのカスタムメトリクスの数 (count、sum、min、max、avg)         | `5*(tag value combinations)`      |
-| パーセンタイル集計（p50、p75、p90、p95、p99）を含むカスタムメトリクスの数 | `5*(tag value combinations)`      |
-| 合計                                                                                     | `2*5(tag value combinations)`     |
+| Number of custom metrics from a baseline distribution (count, sum, min, max, avg)         | `5*(tag value combinations)`      |
+| Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99) | `5*(tag value combinations)`      |
+| Total                                                                                     | `2*5(tag value combinations)`     |
 
-### Metrics without LimitsTM でタグを構成する
+### Configure tags with Metrics without LimitsTM
 
-カスタムメトリクスのボリュームは、[Metrics without LimitsTM][2] を使用してタグと集計を構成することによって影響を受ける可能性があります。Metrics without LimitsTM は、インジェストコストとインデキシングコストを切り離すので、Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能に残しておきたいタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量は、インデックスを作成した残りのデータ量とは異なるため、Usage ページと Metrics Summary ページには 2 つの異なるボリュームが表示されます。
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without LimitsTM][2]. Metrics without LimitsTM decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
 
-- **Ingested Custom Metrics**: インジェストされたすべてのタグに基づくカスタムメトリクスの元となる量 (コード経由で送信されます)。
-- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく) 
+- **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without LimitsTM configurations) 
 
-**注: 構成されたメトリクスのみが、Ingested custom metrics ボリュームに寄与します。**Metrics without LimitsTM でメトリクスが構成されていない場合、そのインデックスされたカスタムメトリクスボリュームに対してのみ課金されます。
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without LimitsTM, you're only charged for its indexed custom metrics volume.
 
-#### インジェストされたカスタムメトリクスとインデックスされたカスタムメトリクスは、いつ課金されるのですか？
-Metrics without LimitsTM で構成されていないメトリクスについては、インデックスされたカスタムメトリクスの代金をお支払いいただきます。
+#### When are you charged for ingested vs indexed custom metrics?
+For metrics not configured with Metrics without LimitsTM, you pay for for indexed custom metrics.
 
-|                                      | インデックスされたカスタムメトリクス<br>(1 時間あたりの月平均カスタムメトリクス数ベース)                                        |
+|                                      | Indexed Custom Metrics<br>(based on monthly average number of Custom Metrics per hour)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| アカウントの割り当て                    | - Pro: 1 ホストあたり 100 のインデックスされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインデックスされたカスタムメトリクス                             |
-| 使用量がアカウントの割り当てを超える | アカウントの割り当てを超えるインデックスされたカスタムメトリクス 100 個ごとに、現在の契約で指定された金額をお支払いいただきます。 |
+| Account allotment                    | - Pro: 100 indexed Custom Metrics per host <br>- Enterprise: 200 indexed Custom Metrics per host                             |
+| Usage greater than account allotment | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構成されている) の場合、インジェストされたカスタムメトリクスとインデックスされたカスタムメトリクスに対してお支払いいただきます。
+For metrics configured with Metrics without LimitsTM (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
 
-|                                      | Ingested Custom Metrics                                                                           | インデックスされたカスタムメトリクス                                                                                                        |
+|                                      | Ingested Custom Metrics                                                                           | Indexed Custom Metrics                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| アカウントの割り当て                    | - Pro: 1 ホストあたり 100 のインジェストされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインジェストされたカスタムメトリクス | - Pro: 1 ホストあたり 100 のインデックスされたカスタムメトリクス <br>- Enterprise: 1 ホストあたり 200 のインデックスされたカスタムメトリクス                               |
-| 使用量がアカウントの割り当てを超える | カスタムメトリクスを 100 個インジェストするごとに、アカウントの割り当てを超える場合は、0.10 ドルをお支払いいただきます。                   | アカウントの割り当てを超えるインデックスされたカスタムメトリクス 100 個ごとに、現在の契約で指定された金額をお支払いいただきます。 |
+| Account Allotment                    | - Pro: 100 ingested Custom Metrics per host<br>- Enterprise: 200 ingested Custom Metrics per host | - Pro: 100 indexed Custom Metrics per host<br>- Enterprise: 200 indexed Custom Metrics per host                               |
+| Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-`request.Latency` メトリクスに関連付けられた `endpoint` タグと `status` タグのみを維持すると、結果として次の 3 つのタグの組み合わせができます。
+Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
 
-- `endpoint:X`、`status:200`
-- `endpoint:X`、`status:400`
-- `endpoint:Y`、`status:200`
+- `endpoint:X`, `status:200`
+- `endpoint:X`, `status:400`
+- `endpoint:Y`, `status:200`
 
-[DISTRIBUTION メトリクス][1]からのカスタムメトリクスの数は、メトリクス名とタグ値の一意の組み合わせの 5 倍となります。タグのカスタマイズの結果、`request.Latency` は合計 **5\*3 = 15 個のインデックスされたカスタムメトリクス**を報告しています。このメトリクスで送信されたオリジナルのタグに基づくと、`request.Latency` のオリジナルの**インジェストされた**カスタムメトリクス量は、**20 個のインジェストされたカスタムメトリクス**となります。
+The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 indexed custom metrics**. Based on the original tags sent on this metric, the original **ingested** custom metrics volume of `request.Latency` is **20 ingested custom metrics**.
 
-[Metrics without LimitsTM][2] の詳細についてはこちらをご覧ください。
+Learn more about [Metrics without LimitsTM][2].
 
 [1]: /ja/metrics/types/?tab=distribution#definition
 [2]: /ja/metrics/metrics-without-limits
 {{% /tab %}}
 {{< /tabs >}}
 
-## カスタムメトリクスの追跡
+## Tracking custom metrics
 
-管理者ユーザー ([Datadog Admin ロール][7]を持つユーザー) は、1 時間あたりの**インジェスト**および**インデックス**されたカスタムメトリクスの月平均数を確認することができます。また、カスタムメトリクスのトップテーブルでは、[使用量の詳細ページ][8]で**インデックスされた**カスタムメトリクスの平均数を一覧で確認できます。詳細については、[使用量の詳細][9]のドキュメントを参照してください。
+Administrative users (those with [Datadog Admin roles][7]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics on the [usage details page][8]. See the [Usage Details][9] documentation for more information.
 
-特定のメトリクス名のカスタムメトリクスの数をよりリアルタイムに追跡するには、[Metrics Summary ページ][10]でメトリクス名をクリックします。メトリクスの詳細サイドパネルで、**インジェストされた**カスタムメトリクスと**インデックスされた**カスタムメトリクスの数を確認することができます。
-{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary サイドパネル" style="width:80%;">}}
+For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][10]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
+{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary sidepanel" style="width:80%;">}}
 
 
-## 割り当て
+## Allocation
 
-Datadog では、料金プランごとに一定数の**インジェスト**および**インデックス**されたカスタムメトリクスが割り当てられています。
+You are allocated a certain number of **ingested** and **indexed** custom metrics based on your Datadog pricing plan:
 
-- Pro: 1 ホストあたり 100 のインジェストされたカスタムメトリクスと、1 ホストあたり 100 のインデックスされたカスタムメトリクス
-- Enterprise: 1 ホストあたり 200 のインジェストされたカスタムメトリクスと、1 ホストあたり 200 のインデックスされたカスタムメトリクス
+- Pro: 100 ingested custom metrics per host and 100 indexed custom metrics per host
+- Enterprise: 200 ingested custom metrics per host and 200 indexed custom metrics per host
 
-割り当ては、インフラストラクチャー全体でカウントされます。たとえば、プロプランを利用しており、3 ホスト分のライセンスを取得している場合、300 個のインデックスされたカスタムメトリクスが割り当てられます。300 個のインデックスされたカスタムメトリクスは、ホストごとに均等に振り分けることも、1 つのホストでのみ使用することもできます。例として、割り当てられたカスタムメトリクス数を超えないシナリオを下記に示しています。
+These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 indexed custom metrics are allocated. The 300 indexed custom metrics can be divided equally across each host, or all 300 indexed metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
-{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="カスタムメトリクスの割り当て" >}}
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics" >}}
 
-課金されるインデックスされたカスタムメトリクスの数は、特定の月の (有料ホストすべての) カスタムメトリクスの 1 時間当たりの平均に基づきます。Metrics without LimitsTM を使用してメトリクスを構成した場合のみ、インジェストされたカスタムメトリクスの請求対象数が増加します。アカウントのカスタムメトリクスについてのご相談や、カスタムメトリクスパッケージの追加購入については、[セールス][11]チームまたは担当の[カスタマーサクセス][12]マネージャーまでお問い合わせください。
+The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without LimitsTM to configure your metric. Contact [Sales][11] or your [Customer Success][12] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
-## 標準インテグレーション
+## Troubleshooting
 
-以下の標準インテグレーションでは、カスタムメトリクスを生成することができます。
+For technical questions, contact [Datadog support][13].
 
-| インテグレーションの種類                           | ヘルプ                                                                       |
-|------------------------------------------------|------------------------------------------------------------------------------------|
-| デフォルトで上限 350 個のカスタムメトリクス。      | [ActiveMQ XML][13] / [Go-Expvar][14] / [Java-JMX][15]                              |
-| カスタムメトリクスの収集では既定の上限なし。 | [Nagios][16] /[PDH チェック][17] /[OpenMetrics][18] /[Windows パフォーマンスカウンター][19] /[WMI][20] /[Prometheus][21] |
-| カスタムメトリクス収集の構成が可能。   | [MySQL][22] /[Oracle][23] /[Postgres][24] /[SQL Server][25]                        |
-| クラウドインテグレーションから送信されたカスタムメトリクス    | [AWS][26]                                                                          |
-
-## ヘルプ
-
-技術的な質問については、[Datadog のサポートチーム][27]にお問い合わせください。
-
-課金に関するご質問は、[カスタマーサクセス][12]マネージャーにお問い合わせください。
+For billing questions, contact your [Customer Success][12] Manager.
 
 [1]: /ja/integrations/
 [2]: /ja/metrics/custom_metrics/
@@ -329,18 +318,5 @@ Datadog では、料金プランごとに一定数の**インジェスト**お�
 [10]: https://app.datadoghq.com/metric/summary
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
-[13]: /ja/integrations/activemq/#activemq-xml-integration
-[14]: /ja/integrations/go_expvar/
-[15]: /ja/integrations/java/
-[16]: /ja/integrations/nagios/
-[17]: /ja/integrations/pdh_check/
-[18]: /ja/integrations/openmetrics/
-[19]: /ja/integrations/windows_performance_counters/
-[20]: /ja/integrations/wmi_check/
-[21]: /ja/integrations/prometheus
-[22]: /ja/integrations/mysql/
-[23]: /ja/integrations/oracle/
-[24]: /ja/integrations/postgres/
-[25]: /ja/integrations/sqlserver/
-[26]: /ja/integrations/amazon_web_services/
-[27]: /ja/help/
+[13]: /ja/help/
+[14]: /ja/metrics/custom_metrics/#standard-integrations

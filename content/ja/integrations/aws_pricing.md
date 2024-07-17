@@ -24,6 +24,7 @@ categories:
 - aws
 - cloud
 - コスト管理
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: aws-pricing
 integration_title: AWS Pricing
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: aws_pricing
 public_title: AWS Pricing
@@ -51,6 +51,7 @@ tile:
   - Category::AWS
   - Category::Cloud
   - Category::Cost Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: サービスの AWS Pricing 情報をレートコードごとに収集
   media: []
@@ -62,53 +63,53 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、[AWS から公開されている][1]料金情報を取得して、Datadog 内でリソース使用のコスト測定を容易にします。
+This check pulls pricing information [published by AWS][1] to make it easier to measure cost of resource utilization within Datadog.
 
-## 計画と使用
+## Setup
 
-AWS Pricing チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The AWS Pricing check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い AWS Pricing チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the AWS Pricing check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-aws_pricing==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. AWS Pricing データの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `aws_pricing.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、サンプル [aws_pricing.d/conf.yaml][5] を参照してください。
+1. Edit the `aws_pricing.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting AWS pricing data. See the sample [aws_pricing.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `aws_pricing` を探します。
+[Run the Agent's status subcommand][7] and look for `aws_pricing` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "aws_pricing" >}}
 
 
-### ヘルプ
+### Events
 
-AWS Pricing には、イベントは含まれません。
+AWS Pricing does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "aws_pricing" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://aws.amazon.com/pricing/

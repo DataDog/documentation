@@ -30,6 +30,7 @@ categories:
 - マーケットプレイス
 - orchestration
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ integration_id: prophetstor-federatorai-license
 integration_title: ProphetStor Federator.ai
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -101,15 +101,17 @@ tile:
 
 ## 概要
 
-[ProphetStor Federator.ai][1] は AI ベースのソリューションで、企業が Kubernetes 上のアプリケーションのリソースを管理、最適化、オートスケールする手助けをします。Federator.ai は高度な機械学習アルゴリズムでアプリケーションのワークロードを予測することで、ベストなタイミングで適切な量のリソースをスケーリングし、アプリケーションのパフォーマンスを最適化します。
+[ProphetStor Federator.ai][1] は、Kubernetes と仮想マシン (VM) クラスターの計算リソース管理を強化するために設計された AI ベースのソリューションです。IT 運用の全体的な可観測性、特にマルチテナントの大規模言語モデル (LLM) のトレーニングを含むことで、ミッションクリティカルなアプリケーションのリソース、ネームスペース、ノード、クラスターを効率的に割り当て、最小限のリソース消費で KPI を効果的に達成できます。
 
-* Kubernetes クラスター内のコンテナ化されたアプリケーションと VMware クラスター内の VM の AI ベースのワークロード予測
-* ワークロード予測、アプリケーション、Kubernetes などの関連するメトリクスに基づくリソースの提案
-* アプリケーションコンテナの自動スケーリング
-* Kubernetes クラスターと VM クラスターのワークロード予測に基づくマルチクラウドのコスト分析と提案
+* Kubernetes クラスター内のコンテナ化されたアプリケーション、ならびに VMware クラスター、Amazon Web Services (AWS) Elastic Compute Cloud (EC2)、Azure Virtual Machine、Google Compute Engine 内の VM における AI ベースのワークロード予測
+* Intelligent resource recommendations from application-aware workload predictions produced by AI engines after digesting the operational metrics
+* 一般的な Kubernetes アプリケーションのコントローラー / ネームスペース向け CPU / メモリーの自動プロビジョニング
+* Kubernetes アプリケーションコンテナ、Kafka Consumer Group、NGINX Ingress アップストリームサービスのオートスケーリング
+* Optimal MultiCloud cost analysis and recommendations based on workload predictions for Kubernetes clusters and VM clusters
 * クラスター、Kubernetes アプリケーション、VM、Kubernetes ネームスペースの提案に基づく実際のコストと潜在的な節約
+* パフォーマンスの妥協なしに行えるマルチテナント LLM トレーニングの可観測性と実行可能なリソース最適化
 
-ProphetStor Federator.ai ライセンスを使用すると、AI ベースのソリューションを適用して、Kubernetes コンテナ、ネームスペース、クラスターノードのリソース使用量を追跡および予測し、コストのかかるオーバープロビジョニングやパフォーマンスに影響を与えるアンダープロビジョニングを防ぐための適切な提案を作成できます。Federator.ai は、アプリケーションのワークロード予測を利用して、適切なタイミングでアプリケーションコンテナを自動スケーリングし、Kubernetes HPA または [Datadog Watermark Pod Autoscaling (WPA)][3] を介して適切な数のコンテナレプリカでパフォーマンスを最適化します。
+[ProphetStor Federator.ai][1] provides full-stack observability through its APIs integrated with Datadog Agents, from application-level workloads, including LLM training, to cluster-level resource consumption. This integration fosters a dynamic loop between live monitoring and predictive analytics, continuously improving resource management, optimizing costs, and ensuring efficient application operation. With a ProphetStor Federator.ai license, you can apply an AI-based solution to track and predict the resource usages of Kubernetes containers, namespaces, and cluster nodes to make the right recommendations to prevent costly over-provisioning or performance-impacting under-provisioning. Utilizing application workload predictions, Federator.ai auto-scales application containers at the right time and optimizes performance with the right number of container replicas through Kubernetes HPA or [Datadog Watermark Pod Autoscaling (WPA)][3].
 
 この Federator.ai ライセンスとは別に、すぐに使用できるダッシュボードと推奨モニターを備えた公式の [Datadog インテグレーション][9]を利用できます。Federator.ai の詳細については、[ProphetStor Federator.ai 機能デモ][2]ビデオをご覧ください。
 

@@ -1,36 +1,40 @@
 ---
 code_lang: java
 code_lang_weight: 0
+kind: documentation
 title: Java 互換性要件
 type: multi-code-lang
 ---
 
-## ASM の機能
+## Application Security capabilities
 
-Java ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
+The following application security capabilities are supported in the Java library, for the specified tracer version:
 
-| ASM の機能                   | Java トレーサーの最小バージョン |
+| Application Security capability  | Java トレーサーの最小バージョン |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
+| API Security | 1.31.0 |
 | Threat Protection| 1.9.0 |
-| オープンソースソフトウェア (OSS) の脆弱性管理 | 1.1.4 |
-| コードレベルの脆弱性管理 (ベータ版) | 1.15.0|
+| ブロックされたリクエストへの対応をカスタマイズする | 1.11.0 |
+| Software Composition Analysis (SCA) | 1.1.4 |
+| Code Security  | 1.15.0|
+| ユーザーアクティビティイベントの自動追跡 | 1.20.0 |
 
-Java でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 1.15.0 です。
+The minimum tracer version to get all supported application security capabilities for Java is 1.31.0.
 
-**注**: Threat Protection では、[リモート構成][2]を有効にする必要があり、これは記載のトレーサーの最小バージョンに含まれています。
+**注**: Threat Protection を使用するには、[リモート構成][2]を有効にする必要があり、これはリストされている最小トレーサーバージョンに含まれています。
 
 ### サポートされるデプロイメントタイプ
-|タイプ           | Threat Detection のサポート |  OSS の脆弱性管理のサポート |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |   
-| Azure App Service | {{< X >}}     | {{< X >}}                 |
+| タイプ              | Threat Detection のサポート | Software Composition Analysis |
+|-------------------|--------------------------|-------------------------------|
+| Docker            | {{< X >}}                | {{< X >}}                     |
+| Kubernetes        | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda        | {{< X >}}                |                               |
+| Azure App Service | {{< X >}}                | {{< X >}}                     |
 
-**注**: Azure App Service は **Web アプリケーションでのみ**サポートされています。ASM は Azure Functions をサポートしていません。
+**Note**: Azure App Service is supported for **web applications only**. Application Security doesn't support Azure Functions.
 
 ## 言語とフレームワークの互換性
 
@@ -55,13 +59,13 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 - HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
 - アプリケーション内の攻撃フローを確認するための分散型トレーシング
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- **Vulnerability Management for Code-level** がご利用のフレームワークをサポートしていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、Cookie without HttpOnly Flag、Cookie without SameSite Flag の脆弱性は検知します。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 
-| フレームワーク                  | バージョン   | Threat Detection のサポートの有無 | Threat Detection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
+| フレームワーク                  | Versions   | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 |Code Security? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -83,15 +87,15 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 **ネットワーキングのトレーシングでは以下の確認が可能です**
 
-- アプリケーションの分散トレーシング
+- アプリケーションの分散型トレーシング
 - リクエストベースのブロッキング
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- **Vulnerability Management for Code-level** がご利用のフレームワークをサポートしていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、Cookie without HttpOnly Flag、Cookie without SameSite Flag の脆弱性は検知されます。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| フレームワーク                | バージョン    | Threat Detection のサポートの有無 | Threat Detection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
+| フレームワーク                | Versions    | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 | Code Security? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Apache HTTP クライアント       | 4.0+        |  {{< X >}} |  |  |
 | gRPC                     | 1.5+        |  {{< X >}} |  |  |
@@ -114,12 +118,12 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 - クエリ情報 (サニタイジングされたクエリ文字列など)
 - エラーとスタックトレースの取得
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
-- ご利用のフレームワークが下記でサポートされていない場合、**Vulnerability Management for Code-level** は SQL インジェクションの脆弱性を検知しませんが、[こちら][3]に挙げられている残りの脆弱性タイプは依然として検知します。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- **Threat Protection** は HTTP リクエスト (入力) レイヤーでも機能し、そのため下表に掲載されていないデータベースでもデフォルトで機能します。
+- If your framework is not supported below, **Code Security** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
-| データベース                | バージョン | Threat Detection のサポートの有無 |  Vulnerability Management for Code-level のサポートの有無 |
+| データベース                | Versions | Threat Detection のサポートの有無 |  Code Security? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
 | Aerospike               | 4.0+     |  {{< X >}} |   |
 | Couchbase               | 2.0+     |  {{< X >}} |   |
@@ -142,7 +146,18 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 <div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
 
+### User Authentication Frameworks の互換性
+
+**User Authentication Frameworks へのインテグレーションは以下を提供します。**
+
+- ユーザー ID を含むユーザーログインイベント
+- ユーザーログインイベントのアカウント乗っ取り検出モニタリング
+
+| フレームワーク         | フレームワークの最小バージョン |
+|-------------------|---------------------------|
+| Spring Security   | 5.5+                      |
+
 
 [1]: /ja/tracing/trace_collection/compatibility/java/
 [2]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[3]: security/application_security/vulnerability_management/#detect-custom-code-vulnerabilities
+[3]: /ja/security/application_security/vulnerability_management/#manage-code-level-vulnerabilities

@@ -33,6 +33,7 @@ author:
 categories:
 - ai/ml
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md
 display_on_public_website: true
@@ -42,7 +43,6 @@ integration_id: airbyte
 integration_title: Airbyte
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: airbyte
 public_title: Airbyte
@@ -60,6 +60,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Submitted Data Type::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Airbyte のデプロイの状態を監視します。
   media: []
@@ -71,20 +72,20 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは [Airbyte][1] を監視します。メトリクスは [DogStatsD][2] を通じて Datadog に送信されます。
+This check monitors [Airbyte][1]. Metrics are sent to Datadog through [DogStatsD][2].
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Airbyte インテグレーションを適切に動作させるには、以下のステップをすべて実施する必要があります。ステップを開始する前に、StatsD/DogStatsD マッピング機能が含まれる [Datadog Agent][3] (バージョン `>=6.17` または `>=7.17`) をインストールしてください。
+All steps below are needed for the Airbyte integration to work properly. Before you begin, [install the Datadog Agent][3] version `>=6.17` or `>=7.17`, which includes the StatsD/DogStatsD mapping feature.
 
-### 構成
+### Configuration
 
-1. [Datadogにメトリクスを送信する][4]ように Airbyte デプロイを構成します。
-2. [Datadog Agent メインコンフィギュレーションファイル][5] `datadog.yaml` に以下の構成を追加して更新します。
+1. Configure your Airbyte deployment [to send metrics to Datadog][4].
+2. Update the [Datadog Agent main configuration file][5] `datadog.yaml` by adding the following configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
@@ -146,25 +147,25 @@ dogstatsd_mapper_profiles:
         name: "airbyte.cron.jobs_run"
 ```
 
-3. Agent と Airbyte を[再起動][6]します。
+3. [Restart the Agent][6] and Airbyte.
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "airbyte" >}}
 
 
-### サービスチェック
+### Service Checks
 
-Airbyte チェックには、サービスのチェック機能は含まれません。
+The Airbyte check does not include any service checks.
 
-### イベント
+### Events
 
-Airbyte チェックには、イベントは含まれません。
+The Airbyte check does not include any events.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 [1]: https://airbyte.com/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd

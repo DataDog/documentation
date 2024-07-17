@@ -1,4 +1,6 @@
 ---
+core_product:
+- metrics
 title: gauge
 ---
 ゲージは、インターバルの間に報告された最後の値を取るメトリクスタイプです。

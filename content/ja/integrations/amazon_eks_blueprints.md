@@ -3,11 +3,13 @@ app_id: amazon-eks-blueprints
 app_uuid: 4c0828d6-0c41-47d0-aa20-c174773e2bda
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10268
     source_type_name: amazon_eks_blueprints
 author:
   homepage: https://www.datadoghq.com
@@ -19,6 +21,7 @@ categories:
 - 構成 & デプロイ
 - コンテナ
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md
 display_on_public_website: true
@@ -28,7 +31,6 @@ integration_id: amazon-eks-blueprints
 integration_title: Datadog Blueprints アドオン
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_eks_blueprints
 public_title: Datadog Blueprints アドオン
@@ -47,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合します。
   media: []
@@ -55,27 +58,28 @@ tile:
   title: Datadog Blueprints アドオン
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Amazon Elastic Kubernetes Service (EKS) は、あらゆる標準的な Kubernetes 環境のデプロイとメンテナンスの特定の側面を自動化する、マネージド Kubernetes サービスです。
+Amazon Elastic Kubernetes Service (EKS) is a managed Kubernetes service that automates certain aspects of deployment and maintenance for any standard Kubernetes environment. 
 
-Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合するフレームワークです。
+Amazon EKS Blueprints is a framework that consolidates cluster configuration and deployment tools.
 
-Datadog Blueprints アドオンでは、Blueprints を使用して Amazon EKS に Datadog Agent をデプロイします。
+The Datadog Blueprints add-on uses Blueprints to deploy the Datadog Agent on Amazon EKS.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
 ```
 npm install @datadog/datadog-eks-blueprints-addon
 ```
 
-### 使用方法
+### Usage
 
-#### 既存の Kubernetes シークレットを使用する
+#### Using an existing Kubernetes secret
 
 ```js
 import * as cdk from 'aws-cdk-lib';
@@ -84,8 +88,8 @@ import { DatadogAddOn } from '@datadog/datadog-eks-blueprints-addon';
 const app = new cdk.App();
 const addOns: Array<blueprints.ClusterAddOn> = [
     new DatadogAddOn({
-        // Datadog API キーを保持する Kubernetes シークレット
-        // この値は secret オブジェクトの `api-key` キーで設定する必要があります。
+        // Kubernetes secret holding Datadog API key
+        // The value should be set with the `api-key` key in the secret object.
         apiKeyExistingSecret: '<secret name>'
     })
 ];
@@ -95,14 +99,14 @@ const props = { env: { account, region } }
 new blueprints.EksBlueprint(app, { id: '<eks cluster name>', addOns}, props)
 ```
 
-#### AWS Secrets Manager の使用
-AWS Secrets Manager を使用して、Datadog API キーを保存します。
+#### Using AWS Secrets Manager
+Store your Datadog API key using AWS Secrets Manager:
 
 ```
 aws secretsmanager create-secret --name <secret name> --secret-string <api_key> --region <aws region>
 ```
 
-`apiKeyAWSSecret` で事前に作成したシークレットを参照します。
+Refer to the previously created secret with `apiKeyAWSSecret`.
 
 ```js
 import * as cdk from 'aws-cdk-lib';
@@ -120,43 +124,43 @@ const props = { env: { account, region } }
 new blueprints.EksBlueprint(app, { id: '<eks cluster name>', addOns}, props)
 ```
 
-### 構成
+### Configuation
 
-#### オプション
+#### Options
 
-| オプション                  |説明                                          | デフォルト                       |
+| Option                  |Description                                          | Default                       |
 |-------------------------|-----------------------------------------------------|-------------------------------|
-| `apiKey`                | Datadog API キー                                | ""                            |
-| `appKey`                | Datadog アプリキー                                | ""                            |
-| `apiKeyExistingSecret`  | API キーを保存している既存の Kubernetes Secret      | ""                            |
-| `appKeyExistingSecret`  | アプリキーを保存している既存の Kubernetes Secret      | ""                            |
-| `apiKeyAWSSecret`       | API キーを保存している AWS Secrets Manager の Secret   | ""                            |
-| `appKeyAWSSecret`       | アプリキーを保存している AWS Secrets Manager の Secret   | ""                            |
-| `namespace`             | Datadog Agent をインストールするためのネームスペース              | "デフォルト"                     |
-| `version`               | Datadog Helm チャートのバージョン                   | "2.28.13"                     |
-| `release`               | Helm のリリース名                            | "datadog"                     |
-| `repository`            | Helm チャートのリポジトリ                        | "https://helm.datadoghq.com"  |
-| `values`                | チャートに渡される構成値。[オプションを参照してください][1]。 | {}                            |
+| `apiKey`                | Your Datadog API key                                | ""                            |
+| `appKey`                | Your Datadog app key                                | ""                            |
+| `apiKeyExistingSecret`  | Existing Kubernetes Secret storing the API key      | ""                            |
+| `appKeyExistingSecret`  | Existing Kubernetes Secret storing the app key      | ""                            |
+| `apiKeyAWSSecret`       | Secret in AWS Secrets Manager storing the API key   | ""                            |
+| `appKeyAWSSecret`       | Secret in AWS Secrets Manager storing the app key   | ""                            |
+| `namespace`             | Namespace to install the Datadog Agent              | "default"                     |
+| `version`               | Version of the Datadog Helm chart                   | "2.28.13"                     |
+| `release`               | Name of the Helm release                            | "datadog"                     |
+| `repository`            | Repository of the Helm chart                        | "https://helm.datadoghq.com"  |
+| `values`                | Configuration values passed to the chart. [See options][1]. | {}                            |
 
 
-すべての Agent の構成オプションについては、[Datadog Helm チャート][1]を参照してください。これらの値は `values` オプションを使用して渡すことができます。
+See the [Datadog Helm chart][1] for all Agent configuration options. You can then pass these values using the `values` option.
 
-### メトリクスの収集
+### Metric collection
 
-EKS を監視するには、以下の Datadog インテグレーションのいずれかを設定する必要があります。
+Monitoring EKS requires that you set up one of the following Datadog integrations:
 
 - [Kubernetes][2]
 - [AWS][3]
 - [AWS EC2][4]
 
-[ELB][5] など、EKS で実行している他の AWS サービスのインテグレーション設定も行ってください。
+Also set up the integrations for any other AWS services that you are running with EKS, such as [ELB][5].
 
-## 収集データ
+## Data Collected
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
 [1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#all-configuration-options
 [2]: https://docs.datadoghq.com/ja/integrations/kubernetes/

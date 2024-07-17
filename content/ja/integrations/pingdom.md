@@ -1,8 +1,10 @@
 ---
 categories:
 - notifications
+custom_kind: integration
 dependencies: []
-description: レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。
+description: Manage and migrate existing configuration of legacy Pingdom monitoring
+  endpoints.
 doc_link: https://docs.datadoghq.com/integrations/pingdom/
 draft: false
 git_integration_title: pingdom
@@ -11,7 +13,6 @@ integration_id: ''
 integration_title: Pingdom Legacy API (V2.1)
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: pingdom
 public_title: Datadog-Pingdom Legacy API (V2.1) インテグレーション
@@ -37,25 +38,25 @@ Datadog は、Pingdom Web サイトで構成されているすべてのサイト
 メトリクスのインポートは、Starter レベル以上の Pingdom ユーザーで行うことができます。
 </div>
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 1. Pingdom インテグレーションタイルを開きます。
 2. Pingdom アカウントのユーザー名とパスワードを入力します (チームアカウントがある場合は、ご自身の認証情報を使用し、チェックの取得元のアカウントを指定できます)。
 3. 一部のチェックをオフにして無視したり、生成されるイベントにタグを追加することもできます。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "pingdom" >}}
 
 
-### ヘルプ
+### Events
 
 Pingdom インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Pingdom インテグレーションは、トランザクションチェックを取得し、それをサービスチェックとしてレポートします。
 
@@ -68,7 +69,7 @@ Pingdom インテグレーションは、トランザクションチェックを
 | `WARNING`      | `unconfirmed_down`  |
 | `UNKNOWN`      | `unknown`、`paused` |
 
-## ヘルプ
+## Troubleshooting
 
 ### ユーザー名またはパスワードの更新時にエラーが発生する
 

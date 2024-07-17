@@ -1,4 +1,5 @@
 ---
+kind: documentation
 title: Docker ログ収集のトラブルシューティングガイド
 ---
 

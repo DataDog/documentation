@@ -28,6 +28,7 @@ categories:
 - インシデント
 - notifications
 - ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/insightfinder/README.md
 display_on_public_website: true
@@ -37,7 +38,6 @@ integration_id: insightfinder
 integration_title: InsightFinder
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: insightfinder
 public_title: InsightFinder
@@ -57,6 +57,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: InsightFinder で DataDog からデータを統合して分析
   media: []
@@ -68,22 +69,22 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[InsightFinder][1] AIOps で、ユーザーに影響が出る前にシステムおよびアプリケーションの問題を特定できます。教師なし機械学習を利用する InsightFinder は、イベント、ログ、メトリクス、そして変化から継続的に学習し、異常検知、インシデント予測、そして機能停止の修復をします。
+[InsightFinder][1] AIOps identifies system and application issues before they impact users. Powered by unsupervised machine learning, InsightFinder continuously learns from events, logs, metrics, and changes to detect anomalies, predict incidents, and remediate outages.
 
-この双方向インテグレーションは、高度な AIOps 機能を提供します。InsightFinder は、標準的な API を通じて Datadog からデータを取り込み、ビジネスに影響が及ぶ前に異常なイベントを発見します。これらの異常なイベントに対するアラートを Datadog に送信し、チームに通知することができます。
+This bidirectional integration provides advanced AIOps capabilities. InsightFinder ingests data from Datadog through standard APIs and finds anomalous events before your business is impacted. Alerts for these anomalous events can then be sent into Datadog to notify your team.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-InsightFinder のインテグレーションを構成してデータを送信するには、[InsightFinder-Datadog インテグレーション][2]を参照してください。Datadog [API キーおよびアプリケーションキー][3]が必要です。
+To configure the integration and send data to InsightFinder, see the [InsightFinder-Datadog Integration][2]. You need a Datadog [API key and application key][3].
 
 
-## Agent
+## Support
 
-[Datadog サポート][4]にお問い合わせいただくか、[InsightFinder サポート][5]にメールしてください。
+Contact [Datadog support][4] or email [InsightFinder support][5].
 
 
 [1]: https://insightfinder.com/

@@ -3,7 +3,8 @@ further_reading:
 - link: /quality_gates/explorer/search_syntax/
   tag: ドキュメント
   text: 検索クエリの作成方法
-title: パフォーマンス
+kind: ドキュメント
+title: Saved Views
 ---
 
 {{< site-region region="gov" >}}

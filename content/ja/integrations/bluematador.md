@@ -23,6 +23,7 @@ author:
 categories:
 - アラート設定
 - 自動化
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: blue-matador
 integration_title: Blue Matador
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: bluematador
 public_title: Blue Matador
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
   media: []
@@ -60,41 +61,41 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Blue Matador の Datadog インテグレーションを使用すると、Blue Matador イベントを Datadog のイベントストリームに送信することができます。
+Blue Matador's Datadog integration allows you to send Blue Matador events to the event stream in Datadog.
 
 ![eventstream_from_blue_matador][1]
 
-既存のダッシュボードを拡張したり、Datadog で収集するメトリクスと関連付けたりするために使用できます。
+You can use it to enhance your existing dashboards or to correlate with metrics you're collecting in Datadog.
 
 ![dashboard][2]
 
-Blue Matador で監視し、Datadog にインポートできるイベントやメトリクスの一覧については、Blue Matador の[モニターのページ][3]を参照してください。
+For a full list of events and metrics that Blue Matador monitors and that you can import into Datadog, see their [monitors page][3].
 
-## 計画と使用
+## Setup
 
-Blue Matador のイベントを Datadog にインポートするには、[Datadog API キー][4]を使用して、新しい通知メソッドを Blue Matador に作成します。
+To get Blue Matador events into Datadog, use a [Datadog API key][4] to create a new notification method in Blue Matador.
 
-**注**: 既に存在しているイベントは Datadog にインポートされず、新しいイベントが発生するとインポートされます。
+**Note**: Already existing events are not imported into Datadog, but new events appear as they occur.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Blue Matador インテグレーションには、メトリクスは含まれません。
+The Blue Matador integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-すべてのイベントが Datadog のイベントストリームに送信されます。
+All events are sent to the Datadog event stream.
 
-### ヘルプ
+### Service Checks
 
-Blue Matador インテグレーションには、サービスのチェック機能は含まれません。
+The Blue Matador integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、このインテグレーションの[メインテナー][5]までお問い合わせください。
+Need help? Contact the [maintainer][5] of this integration.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bluematador/images/eventstream.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bluematador/images/dashboard.png

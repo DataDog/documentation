@@ -23,6 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - notifications
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -31,7 +32,6 @@ integration_id: new-relic
 integration_title: New Relic
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: new_relic
 public_title: New Relic

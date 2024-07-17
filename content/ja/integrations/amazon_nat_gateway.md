@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: AWS NAT Gateway のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_nat_gateway/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: AWS NAT Gateway
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_nat_gateway
 public_title: Datadog-AWS NAT Gateway インテグレーション
@@ -28,9 +28,9 @@ AWS NAT Gateway を使用すると、プライベートサブネットのイン�
 
 このインテグレーションを有効にすると、Datadog にすべての NAT Gateway メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -55,21 +55,21 @@ AWS NAT Gateway から S3 バケットまたは CloudWatch のいずれかにロ
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_nat_gateway" >}}
 
 
-### ヘルプ
+### Events
 
 AWS NAT Gateway インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 AWS NAT Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

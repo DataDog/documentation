@@ -32,6 +32,7 @@ author:
 categories:
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
 display_on_public_website: true
@@ -39,9 +40,8 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 4.2.0
+integration_version: 4.2.2
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: avi_vantage
 public_title: Avi Vantage
@@ -58,6 +58,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Avi Vantage インスタンスの健全性とパフォーマンスを監視。
   media: []
@@ -69,42 +70,42 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Avi Vantage][1] を監視します。
+This check monitors [Avi Vantage][1] through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インフラストラクチャーリスト
+### Installation
 
-Avi Vantage チェックは [Datadog Agent][3] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The Avi Vantage check is included in the [Datadog Agent][3] package.
+No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. avi_vantage のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `avi_vantage.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル avi_vantage.d/conf.yaml][4] を参照してください。
+1. Edit the `avi_vantage.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your avi_vantage performance data. See the [sample avi_vantage.d/conf.yaml][4] for all available configuration options.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションの `avi_vantage` を探します。
+[Run the Agent's status subcommand][6] and look for `avi_vantage` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "avi_vantage" >}}
 
 
-### ヘルプ
+### Events
 
-Avi Vantage には、イベントは含まれません。
+Avi Vantage does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
 [1]: https://avinetworks.com/why-avi/multi-cloud-load-balancing/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/

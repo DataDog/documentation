@@ -8,6 +8,7 @@ further_reading:
   tag: ドキュメント
   text: エラートラッキングエクスプローラーについて
 is_beta: true
+kind: documentation
 title: バックエンドエラーの追跡
 ---
 
@@ -27,7 +28,14 @@ Datadog でまだログを収集していない場合は、[ログドキュメ�
 
 #### エラー追跡の属性
 
-Datadog 内には、専用の UI 表示を持つ特定の属性があります。エラー追跡でこれらの関数を有効にするには、以下の属性名を使用します。
+エラー追跡を有効にするには、ログに以下の両方が含まれている必要があります。
+
+- `error.type` または `error.stack` フィールドのいずれか
+- a status level of `ERROR`, `CRITICAL`, `ALERT`, or `EMERGENCY`
+
+以下に挙げる残りの属性はオプションですが、これらがあればエラーのグループ分けが向上します。
+
+特定の属性には、Datadog 内で専用の UI 表示があります。エラー追跡でこれらの機能を有効にするには、以下の属性名を使用します。
 
 | 属性            | 説明                                                             |
 |----------------------|-------------------------------------------------------------------------|
@@ -215,13 +223,33 @@ try {
 }
 ```
 
-### Python
+### PHP
 
-#### ロギング
+#### Monolog (JSON)
 
-Python のログ収集を設定していない場合は、[Python ログ収集ドキュメント][6]を参照してください。ログに `source:python` というタグが付けられていることを確認してください。
+If you have not set up log collection for PHP, see the [PHP Log Collection documentation][12].
 
 キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+
+```php
+try {
+    // ...
+} catch (\Exception $e) {
+    $logger->error('An error occurred', [
+        'error.message' => $e->getMessage(),
+        'error.kind' => get_class($e),
+        'error.stack' => $e->getTraceAsString(),
+    ]);
+}
+```
+
+### Python
+
+#### Logging
+
+If you have not setup log collection for Python, see the [Python Log Collection documentation][6]. Ensure your logs are tagged with `source:python`.
+
+To log a caught exception yourself, you may optionally use:
 
 ```python
 try:
@@ -232,11 +260,11 @@ except:
 
 ### Ruby on Rails
 
-#### カスタムロガーフォーマッター
+#### Custom logger formatter
 
-Ruby on Rails のログ収集の設定をしていない場合は、[Ruby on Rails ログ収集ドキュメント][7]を参照してください。
+If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7].
 
-手動でエラーを記録するには、JSON を使ってフォーマッターを作成し、例外値を正しいフィールドにマッピングします。
+To manually log an error, create a formatter using JSON and map the exception values to the correct fields:
 
 ```ruby
 require 'json'
@@ -267,30 +295,30 @@ class JsonWithErrorFieldFormatter < ::Logger::Formatter
 end
 ```
 
-そして、それをロガーで使用します。
+And use it in your logger:
 ```ruby
 logger = Logger.new(STDOUT)
 logger.formatter = JsonWithErrorFieldFormatter.new
 ```
 
-**Lograge** を使用する場合は、フォーマットされたエラーログを送信するように設定することもできます。
+If you use **Lograge**, you can also set it up to send formatted error logs:
 ``` ruby
 Rails.application.configure do
-    jsonLogger = Logger.new(STDOUT) # STDOUT または Agent の構成に応じたファイル
+    jsonLogger = Logger.new(STDOUT) # STDOUT or file depending on your agent configuration
     jsonLogger.formatter = JsonWithErrorFieldFormatter.new
 
-    # Rails のデフォルトの TaggedLogging ロガーを json フォーマッター付きの新規ロガーに置き換えます。
-    # TaggedLogging はより複雑な json 形式のメッセージと互換性がありません
+    # Replacing Rails default TaggedLogging logger with a new one with the json formatter.
+    # TaggedLogging is incompatible with more complex json format messages
     config.logger = jsonLogger
 
-    # Lograge の構成
+    # Lograge config
     config.lograge.enabled = true
     config.lograge.formatter = Lograge::Formatters::Raw.new
 
-    # ログの着色を無効にします
+    # Disables log coloration
     config.colorize_logging = false
 
-    # 例外のロギングを正しいフィールドに構成します
+    # Configure logging of exceptions to the correct fields
     config.lograge.custom_options = lambda do |event|
         if event.payload[:exception_object]
             return {
@@ -306,7 +334,7 @@ Rails.application.configure do
     end
 end
 ```
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -321,3 +349,4 @@ end
 [9]: https://app.datadoghq.com/source-code/setup/apm
 [10]: /ja/logs/log_collection/
 [11]: /ja/logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /ja/logs/log_collection/php/

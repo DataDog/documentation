@@ -15,6 +15,7 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボード
+kind: documentation
 title: ブラウザエラーの収集
 ---
 ## 概要
@@ -220,7 +221,7 @@ class ErrorBoundary extends React.Component {
 {{< /tabs >}}
 
 
-## ヘルプ
+## Troubleshooting
 
 ### スクリプトエラー
 

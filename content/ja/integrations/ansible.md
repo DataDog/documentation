@@ -5,8 +5,9 @@ categories:
 - log collection
 - orchestration
 - provisioning
+custom_kind: integration
 dependencies: []
-description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
+description: Track failed tasks and see playbook runs in your event stream.
 doc_link: https://docs.datadoghq.com/integrations/ansible/
 draft: false
 git_integration_title: ansible
@@ -15,7 +16,6 @@ integration_id: ansible
 integration_title: Ansible
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: ansible
 public_title: Datadog-Ansible インテグレーション

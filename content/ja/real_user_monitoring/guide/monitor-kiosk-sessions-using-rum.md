@@ -7,20 +7,20 @@ further_reading:
 title: RUM を使用したキオスクセッションの監視
 ---
 
-## 概要
-ファストフードの注文機や航空会社のチェックイン端末のようなキオスクアプリケーションは、多くの場合、複数のユーザーに連続してサービスを提供します。そのため、自動的なセッションの有効期限 (15 分間の非アクティブや合計 4 時間など) を待つのではなく、ユーザーのアクションに基づいてセッションの終了をトリガーすることは、各ユーザーの正確なセッションデータとメトリクスを収集するために不可欠です。Datadog RUM SDK を使用すると、この機能を使用してセッション追跡を改善することができます。
+## Overview
+Kiosk applications, such as fast food order machines and airline check-in terminals, often serve multiple users in quick succession. For that reason, triggering the end of a session based on a user action instead of waiting for an automatic session expiration (such as 15 minutes of inactivity or 4 hours total duration) is vital for collecting accurate session data and metrics for each user. With Datadog RUM SDKs, you can use this capability for an improved session tracking experience.
 
-## ユーザーがインタラクションを終了するときは `stopSession()` を使用する
+## Use `stopSession()` when users end their interaction
 
-SDK の `stopSession()` メソッドを使用して、ホーム画面に戻るときやログアウトするときのように、ユーザーがアプリケーションとのインタラクションを終了したときにセッションを停止します。新しいセッションは、ユーザーがアプリケーションを再び操作するか、新しいビューが開始されるとすぐに作成されます (モバイルのみ)。
+Use the SDK `stopSession()` method to stop the session when the user finishes their interaction with the application, like when returning to the home screen or logging out. A new session is created as soon as a user interacts with the application again or when a new View is started (mobile only).
 
-セッション内でユーザーが特定されている場合、`stopSession()` を呼び出して新しくセッションを開始した後に、ユーザー情報をクリアしたい場合があるかもしれません。アプリケーションのフレームワークに応じたドキュメントを参照してください: [ブラウザ][1]、[iOS][2]、[Android][3]、[Flutter][4]、[React Native][5]
+If a user is identified within the session, you may want to clear user information after calling `stopSession()` to start afresh. See documentation based on your application's framework: [Browser][1], [iOS][2], [Android][3], [Flutter][4], [React Native][5].
 
-### ブラウザ
+### Browser
 
-この機能を使用するには、RUM ブラウザ SDK バージョン >= v4.37.0 が必要です。インストール手順は[こちら][6]をご覧ください。
+This feature requires RUM Browser SDK version >= v4.37.0. See installation instructions [here][6]. 
 
-`stopSession()` メソッドはインストール方法によって異なります。
+The `stopSession()` method differs depending on your installation method.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -49,18 +49,18 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-アプリケーションが**複数のブラウザタブ**で開いている場合、RUM セッションを停止すると、すべてのタブでセッションが終了します。
+If the application is open in **multiple browser tabs**, stopping the RUM session ends the session in all tabs.
 
-アプリケーションが **Logs SDK** を使用している場合、RUM セッションを停止するとログセッションも終了します。
+If the application is using the **Logs SDK**, stopping the RUM session ends the Logs session as well.
 
 ### Mobile
 
-`stopSession()` メソッドはモバイル SDK フレームワークによって異なります。
+The `stopSession()` method differs depending on your mobile SDK framework.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-この機能を使用するには、RUM iOS SDK バージョン >= 1.18.0 が必要です。インストール手順は[こちら][1]をご覧ください。
+This feature requires RUM iOS SDK version >= 1.18.0. See installation instructions [here][1]. 
 
 ```swift
 // SDK v1
@@ -75,7 +75,7 @@ RUMMonitor.shared().stopSession()
 {{% /tab %}}
 {{% tab "Android" %}}
 
-この機能を使用するには、RUM Android SDK バージョン >= 1.19.0 が必要です。インストール手順は[こちら][1]をご覧ください。
+This feature requires RUM Android SDK version >= 1.19.0. See installation instructions [here][1]. 
 
 ```kotlin
 GlobalRum.get().stopSession()
@@ -86,7 +86,7 @@ GlobalRum.get().stopSession()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-この機能を使用するには、RUM Flutter SDK バージョン >= 1.4.0 が必要です。インストール手順は[こちら][1]をご覧ください。
+This feature requires RUM Flutter SDK version >= 1.4.0. See installation instructions [here][1].
 
 ```dart
 DatadogSdk.instance.rum?.stopSession();
@@ -97,7 +97,7 @@ DatadogSdk.instance.rum?.stopSession();
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-この機能を使用するには、RUM React Native SDK バージョン >= 1.6.0 が必要です。インストール手順は[こちら][1]をご覧ください。
+This feature requires RUM React Native SDK version >= 1.6.0. See installation instructions [here][1].
 
 ```javascript
 DdRum.stopSession()
@@ -108,7 +108,7 @@ DdRum.stopSession()
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

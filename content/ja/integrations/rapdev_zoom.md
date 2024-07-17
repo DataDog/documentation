@@ -40,6 +40,7 @@ categories:
 - マーケットプレイス
 - クラウド
 - コラボレーション
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,7 +49,6 @@ integration_id: rapdev-zoom
 integration_title: Zoom
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -110,12 +110,12 @@ tile:
 
 Zoom インテグレーションにより、ミーティング、Rooms、ユーザー、ネットワーク分析、そしてジオロケーションの概要を監視することで、世界中のあらゆる場所で勤務する従業員に最適な利用体験を提供することができます。インテグレーションには、完全カスタマイズが可能な 4 つのダッシュボードが事前構築されており、重要な情報を表面化できます。さらに、エンジニア、IT責任者、マネージャー、そして管理職レベルのすべてのユーザーに普遍的に利用価値のあるビジュアルを提供するよう設計されています。
 
-### ログ管理
+### Monitors
 
 1. Zoom Room に問題があります
 2. Zoom Room のコンポーネントに問題があります
 
-### ライブラリ
+### Dashboards
 
 1. RapDev Zoom ミーティング概要
 2. RapDev Zoom Rooms ダッシュボード

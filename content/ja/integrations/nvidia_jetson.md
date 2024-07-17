@@ -24,6 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - iot
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: nvidia-jetson
 integration_title: Nvidia Jetson
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nvidia_jetson
 public_title: Nvidia Jetson
@@ -45,6 +45,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::IoT
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nvidia Jetson ボードに関するメトリクスを収集します
   media: []
@@ -56,37 +57,37 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは [Nvidia Jetson][1] ボードを監視します。
-`tegrastats` から収集されたメトリクスを報告します。
+This check monitors an [Nvidia Jetson][1] board.
+It reports the metrics collected from `tegrastats`.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The Nvidia Jetson check is included in the [Datadog Agent][2] package.
+No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーに `jetson.d/conf.yaml` ファイルを作成して、
-   Jetson パフォーマンスデータの収集を開始します。 
-   使用可能なすべての構成オプションの詳細については、[サンプル jetson.d/conf.yaml.example][3] を参照してください。
+1. Create a `jetson.d/conf.yaml` file in the `conf.d/` folder at the root of your
+   Agent's configuration directory to start collecting your Jetson performance data.
+   See the [sample jetson.d/conf.yaml.example][3] for all available configuration options.
 
-2. [Agent を再起動します][4]。
+2. [Restart the Agent][4].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][5]を実行し、Checks セクションで `jetson` を探します。
+Run the [Agent's status subcommand][5] and look for `jetson` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "nvidia_jetson" >}}
 
 
-以下は、`use_sudo` が true に設定される場合にのみ報告されるメトリクスです。
+Some metrics are reported only if `use_sudo` is set to true:
 - `nvidia.jetson.iram.used`
 - `nvidia.jetson.iram.total`
 - `nvidia.jetson.iram.lfb`
@@ -94,17 +95,17 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 - `nvidia.jetson.gpu.freq`
 - `nvidia.jetson.cpu.freq`
 
-### ヘルプ
+### Service Checks
 
-Nvidia Jetson インテグレーションには、サービスのチェック機能は含まれません。
+The Nvidia Jetson integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-Nvidia Jetson インテグレーションには、イベントは含まれません。
+The Nvidia Jetson integration does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
 [1]: https://developer.nvidia.com/embedded-computing
 [2]: https://app.datadoghq.com/account/settings/agent/latest

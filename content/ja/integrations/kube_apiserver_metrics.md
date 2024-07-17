@@ -26,6 +26,7 @@ author:
 categories:
 - コンテナ
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
 display_on_public_website: true
@@ -33,9 +34,8 @@ draft: false
 git_integration_title: kube_apiserver_metrics
 integration_id: kube-apiserver-metrics
 integration_title: Kubernetes API サーバーメトリクス
-integration_version: 4.3.0
+integration_version: 4.3.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: kube_apiserver_metrics
 public_title: Kubernetes API サーバーメトリクス
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Kubernetes APIServer からメトリクスを収集
   media: []
@@ -63,23 +64,23 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Kubernetes API Server ダッシュボード][1]
+![Kubernetes API Server dashboard][1]
 
-## 概要
+## Overview
 
-このチェックは [Kube_apiserver_metrics][2] を監視します。
+This check monitors [Kube_apiserver_metrics][2].
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Kube_apiserver_metrics チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
+The Kube_apiserver_metrics check is included in the [Datadog Agent][3] package, so you do not need to install anything else on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-kube_apiserver_metrics チェックを実行する主な使用例としては、クラスターレベルのチェックがあります。
-詳細については、[クラスターレベルのチェック][4]に関するドキュメントを参照してください。
-apiserver のサービスに、次のように注釈を付けることができます。
+The main use case to run the kube_apiserver_metrics check is as a Cluster Level Check.
+See the documentation for [Cluster Level Checks][4].
+You can annotate the service of your apiserver with the following:
 
 ```yaml
 annotations:
@@ -89,36 +90,36 @@ annotations:
     '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-これで、Datadog Cluster Agent は、各エンドポイントのチェックを Datadog Agent にスケジューリングします。
+Then the Datadog Cluster Agent schedules the check(s) for each endpoint onto Datadog Agent(s). 
 
-このチェックは、エンドポイントを直接 `kube_apiserver_metrics.d/conf.yaml` ファイルで構成することによって実行することもできます。このファイルは、[Agent のコンフィギュレーションディレクトリ][5]のルートの `conf.d/` フォルダー内にあります。
-静的コンフィギュレーションファイルまたは ConfigMap を使用してクラスターチェックを構成する場合、[コンフィギュレーションファイル][6]に `cluster_check: true` を追加する必要があります。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル kube_apiserver_metrics.d/conf.yaml][7] を参照してください。
+You can also run the check by configuring the endpoints directly in the `kube_apiserver_metrics.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][5].
+You must add `cluster_check: true` to your [configuration file][6] when using a static configuration file or ConfigMap to configure cluster checks. See the [sample kube_apiserver_metrics.d/conf.yaml][7] for all available configuration options.
 
-チェックを実行する Agent は、デフォルトで、APIServer に対する認証に使用するサービスアカウントのベアラートークンを取得しようとします。RBAC を使用していない場合は、`bearer_token_auth` を `false` に設定してください。
+By default the Agent running the check tries to get the service account bearer token to authenticate against the APIServer. If you are not using RBACs, set `bearer_token_auth` to `false`.
 
-最後に、Datadog Agent をマスターノードで実行する場合は、[オートディスカバリー][8]に依存してチェックをスケジューリングできます。公式イメージ `registry.k8s.io/kube-apiserver` を使用している場合、自動的に行われます。
+Finally, if you run the Datadog Agent on the master nodes, you can rely on [Autodiscovery][8] to schedule the check. It is automatic if you are running the official image `registry.k8s.io/kube-apiserver`.
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `kube_apiserver_metrics` を探します。
+[Run the Agent's status subcommand][9] and look for `kube_apiserver_metrics` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 
-### ヘルプ
+### Service Checks
 
-Kube_apiserver_metrics には、サービスのチェック機能は含まれません。
+Kube_apiserver_metrics does not include any service checks.
 
-### ヘルプ
+### Events
 
-Kube_apiserver_metrics には、イベントは含まれません。
+Kube_apiserver_metrics does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_apiserver_metrics/images/screenshot.png
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver

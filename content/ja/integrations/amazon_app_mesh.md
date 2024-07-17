@@ -6,6 +6,7 @@ categories:
 - ネットワーク
 - トレーシング
 creates_events: false
+custom_kind: integration
 dependencies: []
 description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
 display_name: AWS App Mesh
@@ -20,7 +21,6 @@ integration_id: amazon-app-mesh
 integration_title: AWS App Mesh
 integration_version: ''
 is_public: true
-custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: envoy.
@@ -41,7 +41,7 @@ supported_os:
 [AWS App Mesh][1] は、Amazon ECS Fargate クラスターや AWS EKS クラスターで実行するマイクロサービスにアプリケーションレベルのネットワーキングを提供するサービスメッシュです。
 
 
-## 計画と使用
+## Setup
 
 {{< tabs >}}
 {{% tab "EKS" %}}
@@ -223,21 +223,21 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 メトリクス一覧については、[Envoy インテグレーション][2]をご参照ください。
 
-### ヘルプ
+### Events
 
 AWS  App Mesh インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 AWS App Mesh インテグレーションには、サービスチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

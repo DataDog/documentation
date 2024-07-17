@@ -8,6 +8,7 @@ further_reading:
   tag: ドキュメント
   text: バックエンドサービスのエラー追跡について
 is_beta: true
+kind: ドキュメント
 private: true
 title: Manage Data Collection
 ---

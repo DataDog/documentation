@@ -22,6 +22,7 @@ further_reading:
 - link: /logs/log_configuration/attributes_naming_convention
   tag: ドキュメント
   text: Datadog 標準属性
+kind: ドキュメント
 title: 収集された RUM ブラウザデータ
 ---
 
@@ -46,264 +47,177 @@ RUM ブラウザ SDK は、メトリクスと属性が関連付けられたイ�
 
 ## デフォルト属性
 
-これらの各イベントタイプには、デフォルトで次の属性が付加されています。したがって、照会される RUM イベントタイプに関係なくそれらを使用できます。
+See a complete list of [Standard Attributes][1] for RUM Browser. By default, the attributes are attached to each event type, so you can use them regardless of the RUM event type being queried.
 
-### コア
+## Event-specific metrics and attributes
 
-| 属性名   | タイプ   | 説明                 |
-|------------------|--------|-----------------------------|
-| `type`     | 文字列 | イベントのタイプ (`view` や `resource` など)。             |
-| `application.id` | 文字列 | RUM アプリケーションを作成する際に生成される Datadog アプリケーション ID。 |
-| `application.name` | 文字列 | Datadog アプリケーションの名前。 |
-| `service`     | 文字列 | サービスとは、ブラウザアプリケーションで特定の機能を提供するチームによって構築された一連のページを指します。Web ページをサービスに割り当てるには、[手動ビュー追跡][1]を使用します。             |
+### Session metrics
 
-### ビュー属性
-
-RUM アクション、エラー、リソース、ロングタスクのイベントには、収集時のアクティブな RUM ビューイベントに関する情報が含まれています。
-
-| 属性名                 | タイプ   | 説明                                                                                                    |
-|--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `view.id`                      | 文字列 | ページビューごとにランダムに生成された ID。                                                                      |
-| `view.loading_type`                     | 文字列 | ページ読み込みのタイプ: `initial_load` または `route_change`。詳細については、[シングルページアプリケーションサポートドキュメント][2]を参照してください。|
-| `view.referrer`                | 文字列 | 現在リクエストされているページへのリンクがたどられた前のウェブページの URL。               |
-| `view.url`                     | 文字列 | ビューの URL。                                                                                                  |
-| `view.url_hash`                     | 文字列 | URL のハッシュ部分。|
-| `view.url_host`        | 文字列 | URL のホスト部分。                                                                                |
-| `view.url_path`        | 文字列 | URL のパス部分。                                                                                 |
-| `view.url_path_group`  | 文字列 | 同様の URL に対して生成された自動 URL グループ。( `/dashboard/123` と `/dashboard/456` に対する `/dashboard/?`　など)。 |
-| `view.url_query` | オブジェクト | クエリパラメーターの key/value 属性として分解された、URL のクエリ文字列部分。                        |
-| `view.url_scheme` | オブジェクト | URL のスキーム部分。                        |
-
-### デバイス
-
-以下のデバイス関連属性は、Datadog により収集されるすべてのイベントに自動的にアタッチされます。
-
-| 属性名                           | タイプ   | 説明                                     |
-|------------------------------------------|--------|-------------------------------------------------|
-| `device.type`       | 文字列 | デバイスによって報告されたデバイスタイプ (User-Agent HTTP ヘッダー)。      |
-| `device.brand`  | 文字列 | デバイスによって報告されたデバイスブランド (User-Agent HTTP ヘッダー)。  |
-| `device.model`   | 文字列 | デバイスによって報告されたデバイスモデル (User-Agent HTTP ヘッダー)。   |
-| `device.name` | 文字列 | デバイスによって報告されたデバイス名 (User-Agent HTTP ヘッダー)。 |
-
-### 接続性
-
-以下のネットワーク関連属性は、Datadog により収集されるすべてのイベントに自動的にアタッチされます。
-
-| 属性名                       | タイプ   | 説明                                                                                                               |
-|--------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
-| `connectivity.status`                | 文字列 | デバイスのネットワーク到達可能性の状態 (`connected` または `not connected`)。                                       |
-| `connectivity.interfaces`            | array  | 利用可能なネットワークインターフェースのリスト (`bluetooth`、`cellular`、`ethernet`、または `wifi` など)。                   |
-| `connectivity.effective_type`        | 文字列 | [効果的な接続タイプ][18]、測定されたネットワークパフォーマンスを反映 (`slow-2g`、`2g`、`3g`、または `4g`)。 |
-
-
-### オペレーティングシステム
-
-以下の OS 関連属性は、Datadog により収集されるすべてのイベントに自動的にアタッチされます。
-
-| 属性名                           | タイプ   | 説明                                     |
-|------------------------------------------|--------|-------------------------------------------------|
-| `os.name`       | 文字列 | デバイスによって報告された OS 名 (User-Agent HTTP ヘッダー)。       |
-| `os.version`  | 文字列 | デバイスによって報告された OS バージョン (User-Agent HTTP ヘッダー)。  |
-| `os.version_major`   | 文字列 | デバイスによって報告された OS バージョンメジャー (User-Agent HTTP ヘッダー)。   |
-
-### 地理的位置
-
-次の属性は、IP アドレスの地理的位置に関連しています。
-
-| 完全名                                    | タイプ   | 説明                                                                                                                          |
-|:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
-| `geo.country`         | 文字列 | 国名。                                                                                                                  |
-| `geo.country_iso_code`     | 文字列 | 国の [ISO コード][3] (米国は `US`、フランスは `FR` など)。                                                  |
-| `geo.country_subdivision`     | 文字列 | その国で最大規模の地方区分 (米国は `California` 州、フランスは `Sarthe` 県など)。 |
-| `geo.continent_code`       | 文字列 | 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、`OC`)。                                                                 |
-| `geo.continent`       | 文字列 | 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antarctica`、`South America`、`Oceania`)。                    |
-| `geo.city`            | 文字列 | 都市名 (`Paris`、`New York` など)。                                                                                   |
-
-**注**: デフォルトでは、Datadog はクライアントの IP アドレスを保存します。ユーザーデータの自動収集を管理する方法については、[リアルユーザーモニタリングデータセキュリティ][4]で詳しく説明しています。
-
-### ユーザー属性
-
-デフォルトの属性に加えて、[ユーザーセッションを識別][5]することで、すべての RUM イベントタイプにユーザー関連データを追加できます。これにより、特定のユーザーの移動を追跡し、エラーの影響を最も受けているユーザーを特定し、最も重要なユーザーのパフォーマンスを監視できます。
-
-### 機能フラグ属性
-
-
-[RUM イベントデータを機能フラグでリッチ化する][6]ことで、パフォーマンスモニタリングにさらなるコンテキストと可視性を得ることができます。これにより、どのユーザーに特定のユーザーエクスペリエンスが表示され、それがユーザーのパフォーマンスに悪影響を及ぼしているかどうかを判断することができます。
-
-## イベント固有のメトリクスと属性
-
-### セッションメトリクス
-
-| メトリクス  | タイプ   | 説明                |
+| Metric  | Type   | Description                |
 |------------|--------|----------------------------|
-| `session.time_spent` | 数値 (ns) | ユーザーセッションの期間。 |
-| `session.view.count`        | 数値      | このセッションで収集されたすべてのビューの数。 |
-| `session.error.count`      | 数値      | このセッションで収集されたすべてのエラーの数。  |
-| `session.resource.count`         | 数値      | このセッションで収集されたすべてのリソースの数。 |
-| `session.action.count`      | 数値      | このセッションで収集されたすべてのアクションの数。 |
-| `session.long_task.count`      | 数値      | このセッションで収集されたすべてのロングタスクの数。 |
+| `session.time_spent` | number (ns) | Duration of the user session. |
+| `session.view.count`        | number      | Count of all views collected for this session. |
+| `session.error.count`      | number      | Count of all errors collected for this session.  |
+| `session.resource.count`         | number      | Count of all resources collected for this session. |
+| `session.action.count`      | number      | Count of all actions collected for this session. |
+| `session.long_task.count`      | number      | Count of all long tasks collected for this session. |
 
-### セッション属性
+### Session attributes
 
-| 属性名                 | タイプ   | 説明                                                                                                    |
+| Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `session.id`                      | 文字列 | セッションごとにランダムに生成された ID。                                                                      |
-| `session.ip`                      | 文字列 | クライアントの IP アドレス。この属性の収集を停止したい場合は、[アプリケーションの詳細][7]で設定を変更してください。                                                                       |
-| `session.is_active`                      | ブール値 | セッションが現在アクティビティであるかどうかを示します。セッションは、4 時間のアクティビティまたは 15 分の非アクティブの後に終了します。                                                                     |
-| `session.type`                     | 文字列 | セッションのタイプ: `user` または `synthetics`。[Synthetic モニタリングブラウザテスト][8]のセッションは請求から除外されます。 |
-| `session.referrer`                | 文字列 | 現在リクエストされているページにリンクされた前のウェブページの URL。 |
-| `session.initial_view.id`        | 文字列 | ユーザーによって生成された最初の RUM ビューの ID。 |
-| `session.initial_view.url_host`        | 文字列 | URL のホスト部分。 |
-| `session.initial_view.url_path`        | 文字列 | URL のパス部分。 |
-| `session.initial_view.url_path_group`  | 文字列 | 同様の URL に対して生成された自動 URL グループ。( `/dashboard/123` と `/dashboard/456` に対する `/dashboard/?`　など)。 |
-| `session.initial_view.url_query` | オブジェクト | クエリパラメーターの key/value 属性として分解された、URL のクエリ文字列部分。 |
-| `session.initial_view.url_scheme` | オブジェクト | URL のスキーム部分。 |
-| `session.last_view.id`        | 文字列 | ユーザーによって生成された最後の RUM ビューの ID。 |
-| `session.last_view.url_host`        | 文字列 | URL のホスト部分。 |
-| `session.last_view.url_path`        | 文字列 | URL のパス部分。 |
-| `session.last_view.url_path_group`  | 文字列 | 同様の URL に対して生成された自動 URL グループ。( `/dashboard/123` と `/dashboard/456` に対する `/dashboard/?`　など)。 |
-| `session.last_view.url_query` | オブジェクト | クエリパラメーターの key/value 属性として分解された、URL のクエリ文字列部分。 |
-| `session.last_view.url_scheme` | オブジェクト | URL のスキーム部分。 |
+| `session.id`                      | 文字列 | Randomly generated ID for each session.                                                                      |
+| `session.ip`                      | 文字列 | Client IP address. If you want to stop collecting this attribute, change the setting in your [application details][2].                                                                       |
+| `session.is_active`                      | boolean | Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity.                                                                     |
+| `session.type`                     | 文字列 | The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests][3] are excluded from billing. |
+| `session.referrer`                | 文字列 | The URL of the previous web page from which a link to the currently requested page was followed. |
+| `session.initial_view.id`        | 文字列 | The ID of the first RUM view generated by the user. |
+| `session.initial_view.url_host`        | string | The host part of the URL. |
+| `session.initial_view.url_path`        | string | The path part of the URL. |
+| `session.initial_view.url_path_group`  | string | The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`). |
+| `session.initial_view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `session.initial_view.url_scheme` | object | The scheme part of the URL. |
+| `session.last_view.id`        | string | The ID of the last RUM view generated by the user. |
+| `session.last_view.url_host`        | string | The host part of the URL. |
+| `session.last_view.url_path`        | string | The path part of the URL. |
+| `session.last_view.url_path_group`  | string | The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`). |
+| `session.last_view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
-### ビュータイミングメトリクス
+### View timing metrics
 
-**注**: ビュータイミングメトリクスには、バックグラウンドでページを開いている時間が含まれます。
+**Note**: View timing metrics include time that a page is open in the background.
 
-| 属性                       | タイプ        | 説明                                                                                                                                                                                                           |
+| Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `view.time_spent`               | 数値 (ns) | 現在のビューで過ごした時間。                                                                                                                                                                                       |
-| `view.first_byte`               | 数値 (ns) | ビューの 1 バイト目を受信した時点までの経過時間。                                                                                                |
-| `view.largest_contentful_paint` | 数値 (ns) | ビューポート内の最大の DOM オブジェクト (画面に表示される) がレンダリングされるページ読み込みの時間。                                                                                                |
-| `view.largest_contentful_paint_target_selector` | 文字列 (CSS セレクタ) | 最大のコンテンツ描画に対応する要素の CSS セレクタ。                                                                                     |
-| `view.first_input_delay`        | 数値 (ns) | ユーザーがページを最初に操作してからブラウザが応答するまでの経過時間。                                                                                                                             |
-| `view.first_input_delay_target_selector`      | 文字列 (CSS セレクタ) | ユーザーが最初に操作した要素の CSS セレクタ。                                                                                                                |
-| `view.interaction_to_next_paint`| 数値 (ns) | ユーザーがページを操作してから次の描画までの最長の所要時間。                                                                                                                              |
-| `view.interaction_to_next_paint_target_selector`| 文字列 (CSS セレクタ) | 次の描画までの最長のインタラクションに関連する要素の CSS セレクタ。                                                                                                          |
-| `view.cumulative_layout_shift`  | 数値      | 動的に読み込まれるコンテンツ (サードパーティの広告など) による予期しないページ移動を定量化します。`0` はシフトが発生していないことを意味します。                                                                               |
-| `view.cumulative_layout_shift_target_selector`  | 文字列 (CSS セレクタ) | ページの CLS に最も影響を与えるシフトした要素の CSS セレクタ。                                           |
-| `view.loading_time`             | 数値 (ns) | ページの準備が整い、ネットワークリクエストまたは DOM ミューテーションが現在発生していない状態になるまでの時間。[詳しくはページパフォーマンスの監視をご覧ください][9]。                                                                             |
-| `view.first_contentful_paint`   | 数値 (ns) | ブラウザによりテキスト、画像（背景画像を含む）、白以外のキャンバス、または SVG が最初にレンダリングする時間。ブラウザのレンダリングの詳細については、[w3c 定義][10]を参照してください。                               |
-| `view.dom_interactive`          | 数値 (ns) | パーサーによりメインドキュメントの作業が終了するまでの時間。[MDN ドキュメントの詳細][11]。                                                                                                         |
-| `view.dom_content_loaded`       | 数値 (ns) | 読み込みイベントが発生し、最初の HTML ドキュメントがレンダリング以外のブロッキングスタイルシート、画像、サブフレームの読み込み完了を待たずに完全に読み込まれ解析されるまでの時間。[MDN ドキュメントの詳細][12]。 |
-| `view.dom_complete`             | 数値 (ns) | ページとすべてのサブリソースの準備が整うまでの時間。ユーザーのためにローディングスピナーの回転が停止した状態。[詳細は MDN ドキュメントを参照してください][13]。                                                                       |
-| `view.load_event`               | 数値 (ns) | ページが完全に読み込まれたことを示す読み込みイベントが発生するまでの時間。通常は追加のアプリケーションロジックのトリガー。[MDN ドキュメントの詳細][14]。                                                                             |
-| `view.error.count`              | 数値      | このビューについて収集されたすべてのエラーの数。                                                                                                                                                                          |
-| `view.long_task.count`          | 数値      | このビューについて収集されたすべてのロングタスクの数。                                                                                                                                                                      |
-| `view.resource.count`           | 数値      | このビューについて収集されたすべてのリソースの数。                                                                                                                                                                       |
-| `view.action.count`             | 数値      | このビューについて収集されたすべてのアクションの数。                                                                                                                                                                         |
+| `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
+| `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
+| `view.largest_contentful_paint` | number (ns) | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered.                                                                                                |
+| `view.largest_contentful_paint_target_selector` | string (CSS selector) | CSS Selector of the element corresponding to the largest contentful paint.                                                                                     |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                             |
+| `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
+| `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
+| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
+| `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where `0` means that no shifts are happening.                                                                               |
+| `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
+| `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][4].                                                                             |
+| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][5].                               |
+| `view.dom_interactive`          | number (ns) | Time until the parser finishes its work on the main document. [More info from the MDN documentation][6].                                                                                                         |
+| `view.dom_content_loaded`       | number (ns) | Time until the load event is fired and the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][7]. |
+| `view.dom_complete`             | number (ns) | Time until the page and all of the subresources are ready. The loading spinner has stopped spinning for the user. [More info from the MDN documentation][8].                                                                       |
+| `view.load_event`               | number (ns) | Time until the load event is fired, indicating the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][9].                                                                             |
+| `view.error.count`              | number      | Count of all errors collected for this view.                                                                                                                                                                          |
+| `view.long_task.count`          | number      | Count of all long tasks collected for this view.                                                                                                                                                                      |
+| `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                       |
+| `view.action.count`             | number      | Count of all actions collected for this view.                                                                                                                                                                         |
 
-### リソースタイミングメトリクス
+### Resource timing metrics
 
-アプリケーションリソースのロードについて、ネットワークの詳細なタイミングデータが、[Performance Resource Timing API][15] を使用して収集されます。
+Detailed network timing data for the loading of an application's resources are collected with the [Performance Resource Timing API][10].
 
-| メトリクス                              | タイプ           | 説明                                                                                                                               |
+| Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | 数値         | リソースのロードにかかった全時間。                                                                                                   |
-| `resource.size`                | 数値（バイト） | リソースのサイズ。                                                                                                                            |
-| `resource.connect.duration`    | 数値 (ns)    | サーバーへの接続が確立されるまでにかかった時間 (connectEnd - connectStart)。                                                            |
-| `resource.ssl.duration`        | 数値 (ns)    | TLS ハンドシェイクにかかった時間。最後のリクエストが HTTPS 経由ではなかった場合、このメトリクスは収集されません (connectEnd - secureConnectionStart)。 |
-| `resource.dns.duration`        | 数値 (ns)    | 最後のリクエストの DNS 名が解決されるまでにかかった時間 (domainLookupEnd - domainLookupStart)。                                               |
-| `resource.redirect.duration`   | 数値 (ns)    | 後続の HTTP リクエストにかかった時間 (redirectEnd - redirectStart)。                                                                      |
-| `resource.first_byte.duration` | 数値 (ns)    | 応答の最初のバイトを受信するまでにかかった時間 (responseStart - RequestStart)。                                           |
-| `resource.download.duration`   | 数値 (ns)    | 応答のダウンロードにかかった時間 (responseEnd - responseStart)。                                                                         |
+| `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
+| `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
+| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart). |
+| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).                                               |
+| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                                                                      |
+| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart).                                           |
+| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart).                                                                         |
 
-### リソースの属性
+### Resource attributes
 
-| 属性                  | タイプ   | 説明                                                                                          |
+| Attribute                  | Type   | Description                                                                                          |
 |----------------------------|--------|------------------------------------------------------------------------------------------------------|
-| `resource.type`            | 文字列 | 収集されるリソースのタイプ (`css`、`javascript`、`media`、`XHR`、または `image` など)。 |
-| `resource.method`          | 文字列 | HTTP メソッド (`POST` または `GET` など)。                                                       |
-| `resource.status_code`     | 数値 | 応答ステータスコード (fetch/XHR リソースにのみ適用)。                                   |
-| `resource.url`             | 文字列 | リソースの URL。                                                                                    |
-| `resource.url_host`        | 文字列 | URL のホスト部分。                                                                            |
-| `resource.url_path`        | 文字列 | URL のパス部分。                                                                            |
-| `resource.url_query`       | オブジェクト | クエリパラメーターの key/value 属性として分解された、URL のクエリ文字列部分。                   |
-| `resource.url_scheme`      | 文字列 | URL のプロトコル名 (HTTP または HTTPS)。                                                        |
-| `resource.provider.name`   | 文字列 | リソースプロバイダー名。デフォルトは `unknown` となります。                                                    |
-| `resource.provider.domain` | 文字列 | リソースプロバイダーのドメイン。                                                                        |
-| `resource.provider.type`   | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、または `analytics` など)。                |
+| `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`). |
+| `resource.method`          | string | The HTTP method (for example `POST` or `GET`).                                                       |
+| `resource.status_code`     | number | The response status code (available for fetch/XHR resources only).                                   |
+| `resource.url`             | string | The resource URL.                                                                                    |
+| `resource.url_host`        | string | The host part of the URL.                                                                            |
+| `resource.url_path`        | string | The path part of the URL.                                                                            |
+| `resource.url_query`       | object | The query string parts of the URL decomposed as query params key/value attributes.                   |
+| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                                        |
+| `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                                    |
+| `resource.provider.domain` | string | The resource provider domain.                                                                        |
+| `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
 
-### ロングタスクタイミングメトリクス
+### Long task timing metrics
 
-| メトリクス  | タイプ   | 説明                |
+| Metric  | Type   | Description                |
 |------------|--------|----------------------------|
-| `long_task.duration` | 数値 | ロングタスクの時間。 |
+| `long_task.duration` | number | Duration of the long task. |
 
-### エラー属性
+### Error attributes
 
-| 属性       | タイプ   | 説明                                                       |
+| Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | 文字列 | エラーの発生元 (`console` など)。[エラーソース][19]を参照してください。   |
-| `error.type`    | 文字列 | エラーのタイプ (場合によってはエラーコード)。                   |
-| `error.message` | 文字列 | イベントについて簡潔にわかりやすく説明する 1 行メッセージ。 |
-| `error.stack`   | 文字列 | スタックトレースまたはエラーに関する補足情報。     |
+| `error.source`  | string | Where the error originates from (for example, `console`). See [Error sources][11].   |
+| `error.type`    | string | The error type (or error code in some cases).                   |
+| `error.message` | string | A concise, human-readable, one-line message explaining the event. |
+| `error.stack`   | string | The stack trace or complementary information about the error.     |
 
-#### ソースエラー
+#### Source errors
 
-ソースエラーには、エラーに関するコードレベルの情報が含まれます。エラーの種類に関する詳細は、 [MDN ドキュメント][15]を参照してください。
+Source errors include code-level information about the error. For more information about different error types, see the [MDN documentation][12].
 
-| 属性       | タイプ   | 説明                                                       |
+| Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.type`    | 文字列 | エラーのタイプ (場合によってはエラーコード)。                   |
+| `error.type`    | string | The error type (or error code in some cases).                   |
 
-### アクションタイミングメトリクス
+### Action timing metrics
 
-| メトリクス    | タイプ   | 説明              |
+| Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `action.loading_time` | 数値 (ns) | アクションのロード時間。[ユーザーアクション追跡のドキュメント][16]で計算方法を確認してください。 |
-| `action.long_task.count`        | 数値      | このアクションについて収集されたすべてのロングタスクの数。 |
-| `action.resource.count`         | 数値      | このアクションについて収集されたすべてのリソースの数。 |
-| `action.error.count`      | 数値      | このアクションについて収集されたすべてのエラーの数。|
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [Tracking User Actions documentation][13]. |
+| `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
+| `action.resource.count`         | number      | Count of all resources collected for this action. |
+| `action.error.count`      | number      | Count of all errors collected for this action.|
 
-### アクションの属性
+### Action attributes
 
-| 属性    | タイプ   | 説明              |
+| Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `action.id` | 文字列 | ユーザーアクションの UUID。 |
-| `action.type` | 文字列 | ユーザーアクションのタイプ。[カスタムユーザーアクション][17]の場合、`custom` に設定されます。 |
-| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。 |
-| `action.name` | 文字列 | 作成されたユーザーフレンドリーな名称 (`Click on #checkout` など)。[カスタムユーザーアクション][17]の場合は、API コールで提供されたアクション名。 |
+| `action.id` | string | UUID of the user action. |
+| `action.type` | string | Type of the user action. For [Custom User Actions][14], it is set to `custom`. |
+| `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
+| `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For [Custom User Actions][14], the action name given in the API call. |
 
-### フラストレーションシグナルフィールド
+### Frustration signals fields
 
-| フィールド                | タイプ   | 説明                                                   |
+| Field                | Type   | Description                                                   |
 |-------------------------------|--------|---------------------------------------------------------------|
-| `session.frustration.count`     | 数値 | 1 つのセッションに関連するすべてのフラストレーションシグナルの数。 |
-| `view.frustration.count`        | 数値 | 1 つのビューに関連するすべてのフラストレーションシグナルの数。    |
-| `action.frustration.type:dead_click`  | 文字列 | RUM ブラウザ SDK で検出されたデッドクリック。              |
-| `action.frustration.type:rage_click`  | 文字列 | RUM ブラウザ SDK で検出されたレイジークリック。              |
-| `action.frustration.type:error_click` | 文字列 | RUM ブラウザ SDK で検出されたエラークリック。             |
+| `session.frustration.count`     | number | Count of all frustration signals associated with one session. |
+| `view.frustration.count`        | number | Count of all frustration signals associated with one view.    |
+| `action.frustration.type:dead_click`  | string | The dead clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:rage_click`  | string | The rage clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:error_click` | string | The error clicks detected by the RUM Browser SDK.             |
 
-### UTM 属性
+### UTM attributes
 
-| フィールド                | タイプ   | 説明                                                   |
+| Field                | Type   | Description                                                   |
 |-------------------------------|--------|---------------------------------------------------------------|
-| `view.url_query.utm_source`     | 文字列 | トラフィックのソースを追跡する URL のパラメーター。 |
-| `view.url_query.utm_medium`        | 文字列 | トラフィックの発信元チャンネルを追跡する URL のパラメーター。    |
-| `view.url_query.utm_campaign`  | 文字列 | そのビューに関連付けられた特定のマーケティングキャンペーンを識別する URL のパラメーター。              |
-| `view.url_query.utm_content`  | 文字列 | マーケティングキャンペーン内でユーザーがクリックした特定の要素を特定する URL 内のパラメーター。           |
-| `view.url_query.utm_term` | 文字列 | ユーザーが特定のキャンペーンをトリガーするために検索したキーワードを追跡する URL のパラメーター。             |
+| `view.url_query.utm_source`     | string | The parameter in the URL tracking the source of traffic. |
+| `view.url_query.utm_medium`        | string | The parameter in the URL tracking the channel where the traffic is coming from.    |
+| `view.url_query.utm_campaign`  | string | The paramter in the URL identifying the specific marketing campaign tied to that view.              |
+| `view.url_query.utm_content`  | string | The paramter in the URL identifying the specific element a user clicked within a marketing campaign.           |
+| `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
-[3]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[4]: /ja/data_security/real_user_monitoring/#ip-address
-[5]: /ja/real_user_monitoring/browser/advanced_configuration/#user-sessions
-[6]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection
-[7]: /ja/data_security/real_user_monitoring/#ip-address
-[8]: /ja/synthetics/browser_tests/
-[9]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
-[10]: https://www.w3.org/TR/paint-timing/#sec-terminology
-[11]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-[13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-[14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[16]: /ja/real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
-[17]: /ja/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
-[18]: https://developer.mozilla.org/en-US/docs/Glossary/Effective_connection_type
-[19]: /ja/real_user_monitoring/browser/collecting_browser_errors#error-sources
+[1]: /ja/standard-attributes/?product=browser
+[2]: /ja/data_security/real_user_monitoring/#ip-address
+[3]: /ja/synthetics/browser_tests/
+[4]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[5]: https://www.w3.org/TR/paint-timing/#sec-terminology
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+[8]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[11]: /ja/real_user_monitoring/browser/collecting_browser_errors#error-sources
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[13]: /ja/real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
+[14]: /ja/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions

@@ -25,6 +25,7 @@ author:
 categories:
 - cloud
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: tidb-cloud
 integration_title: TiDB Cloud
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: tidb_cloud
 public_title: TiDB Cloud
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Windows
   - Category::Cloud
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog による TiDB Cloud クラスターのモニタリング
   media: []
@@ -62,39 +63,39 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[TiDB Cloud][1] は、オープンソースデータベースである TiDB のフルマネージドクラウドサービスです。
+[TiDB Cloud][1] is a fully managed cloud service of TiDB, an open-source database.
 
-TiDB Cloud と Datadog のインテグレーションを使用して、TiDB Cloud クラスターから Datadog にメトリクスをエクスポートします。
+Use the TiDB Cloud Datadog integration to export metrics from TiDB Cloud clusters to Datadog.
 
-> **注:**
+> **Note:**
 >
-> - オンプレミスの TiDB クラスターについては、[TiDB インテグレーション][2]を参照してください。
+> - For TiDB clusters on premises, see the [TiDB Integration][2].
 
-## 計画と使用
+## Setup
 
-クラスターに対して TiDB Cloud と Datadog のインテグレーションを設定するには、Datadog API キーとリージョンを TiDB Cloud に提供します。
+To set up the TiDB Cloud Datadog integration for your cluster, provide a Datadog API key and region to TiDB Cloud.
 
-TiDB Cloud プロジェクトの Datadog インテグレーションを構成するには、[TiDB Cloud Preferences][3] を参照してください。
+See [TiDB Cloud Preferences][3] to configure the Datadog integration for your TiDB Cloud project.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "tidb_cloud" >}}
 
 
-### ヘルプ
+### Service Checks
 
-TiDB Cloud インテグレーションには、サービスのチェック機能は含まれません。
+The TiDB Cloud integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-TiDB Cloud インテグレーションには、イベントは含まれません。
+The TiDB Cloud integration does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://tidbcloud.com
 [2]: https://docs.datadoghq.com/ja/integrations/tidb/

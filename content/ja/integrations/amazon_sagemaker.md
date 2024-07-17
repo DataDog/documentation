@@ -5,6 +5,7 @@ categories:
 - クラウド
 - ログの収集
 - ai/ml
+custom_kind: integration
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_sagemaker/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: Amazon SageMaker
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sagemaker
 public_title: Datadog-Amazon SageMaker インテグレーション
@@ -34,9 +34,9 @@ Amazon SageMaker は、フルマネージド型の機械学習サービスです
 
 このインテグレーションを有効にすると、Datadog にすべての SageMaker メトリクスを表示できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -61,17 +61,17 @@ Amazon SageMaker から S3 バケットまたは CloudWatch のいずれかに�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_sagemaker" >}}
 
 
-### ヘルプ
+### Events
 
 Amazon SageMaker インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Amazon SageMaker インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -95,7 +95,7 @@ Datadog は、SageMaker のエンドポイントとジョブ向けにすぐに�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

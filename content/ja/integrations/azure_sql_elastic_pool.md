@@ -4,8 +4,9 @@ categories:
 - cloud
 - data stores
 - provisioning
+custom_kind: integration
 dependencies: []
-description: Azure SQL Elastic Pool の主要メトリクスを追跡。
+description: Track key Azure SQL Elastic Pool metrics.
 doc_link: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/
 draft: false
 git_integration_title: azure_sql_elastic_pool
@@ -14,7 +15,6 @@ integration_id: azure-sql-elastic-pool
 integration_title: Microsoft Azure SQL Elastic Pool
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_sql_elastic_pool
 public_title: Datadog-Microsoft Azure SQL Elastic Pool インテグレーション
@@ -32,27 +32,27 @@ Azure SQL Elastic Pool からメトリクスを取得すると、以下のこと
 - SQL Elastic Pool のパフォーマンスを視覚化。
 - SQL Elastic Pool のパフォーマンスをアプリケーションと関連付け。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_sql_elastic_pool" >}}
 
 
-### ヘルプ
+### Events
 
 Azure SQL Elastic Pool インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Azure SQL Elastic Pool インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

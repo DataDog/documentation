@@ -36,7 +36,7 @@ integration_id: nerdvision
 integration_title: NerdVision
 integration_version: ''
 is_public: true
-custom_kind: integration
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -117,22 +117,22 @@ NerdVision はアプリケーションにトレースポイントをインスト
 Datadog ダッシュボードはコード内でトレースポイントがトリガーされる際の重要なインサイトを提供します。
 このデータを活用してデバッグのホットスポットを特定することができます。
 
-### ヘルプ
+### Events
 
 トリガーされる各トレースポイントは、適切なタグと NerdVision でデータを閲覧できるリンクを含むイベントとして Datadog に送信されます。
 トレースポイントを利用して、トレースポイントがトリガーされるフレームでアクティブなスタック全体および変数を
 収集することができます。
 
-### ワークフローの自動化
+### Logs
 
 動的なロギングにより、コードのどの箇所にでも新しいログメッセージを挿入し、欠けていたデータを追加することができます。
 トリガーされるそれぞれのログメッセージは、NerdVision で処理されてからすぐに Datadog と同期されます。
 
-### データセキュリティ
+### Metrics
 
 NerdVision はオンラインクライアントおよびトレースポイントのトリガー向けにメトリクスを生成します。
 
-### ヘルプ
+### Service Checks
 
 NerdVision には、サービスのチェック機能は含まれません。
 

@@ -28,6 +28,7 @@ author:
 categories:
 - ログの収集
 - メッセージキュー
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
 display_on_public_website: true
@@ -37,7 +38,6 @@ integration_id: redpanda
 integration_title: Redpanda
 integration_version: 2.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: redpanda
 public_title: Redpanda
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
   media: []
@@ -64,36 +65,36 @@ tile:
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
-## 概要
+## Overview
 
-Redpanda は、ミッションクリティカルなワークロードのための Kafka API 互換のストリーミングプラットフォームです。
+Redpanda is a Kafka API-compatible streaming platform for mission-critical workloads.
 
-Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示したり、特定のユーザーニーズに基づいて追加のメトリクスグループを追加することができます。
+Connect Datadog with [Redpanda][1] to view key metrics and add additional metric groups based on specific user needs.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-1. [Datadog Agent をダウンロードして起動][2]します。
-2. Redpanda インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][3]を参照してください。
+1. [Download and launch the Datadog Agent][2].
+2. Manually install the Redpanda integration. See [Use Community Integrations][3] for more details based on the environment.
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-redpanda==<INTEGRATION_VERSION>` を実行します。
+To configure this check for an Agent running on a host, run `datadog-agent integration install -t datadog-redpanda==<INTEGRATION_VERSION>`.
 
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境では、Docker Agent とこのインテグレーションを使用する最善の方法は、Redpanda インテグレーションをインストールした Agent をビルドすることです。
+For containerized environments, the best way to use this integration with the Docker Agent is to build the Agent with the Redpanda integration installed. 
 
-Agent のアップデート版をビルドするには
+To build an updated version of the Agent:
 
-1. 以下の Dockerfile を使用します。
+1. Use the following Dockerfile:
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
@@ -103,9 +104,9 @@ ARG INTEGRATION_VERSION=2.0.0
 RUN agent integration install -r -t datadog-redpanda==${INTEGRATION_VERSION}
 ```
 
-2. イメージをビルドし、プライベート Docker レジストリにプッシュします。
+2. Build the image and push it to your private Docker registry.
 
-3. Datadog Agent コンテナイメージをアップグレードします。Helm チャートを使用している場合は、`values.yaml` ファイルの `agents.image` セクションを変更して、デフォルトの Agent イメージを置き換えます。
+3. Upgrade the Datadog Agent container image. If you are using a Helm chart, modify the `agents.image` section in the `values.yaml` file to replace the default agent image:
 
 ```yaml
 agents:
@@ -115,7 +116,7 @@ agents:
     repository: <YOUR_PRIVATE_REPOSITORY>/<AGENT_NAME>
 ```
 
-4. 新しい `values.yaml` ファイルを使用して Agent をアップグレードします。
+4. Use the new `values.yaml` file to upgrade the Agent:
 
 ```shell
 helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
@@ -124,37 +125,37 @@ helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-##### メトリクスの収集
+##### Metric collection
 
-Redpanda のパフォーマンスデータの収集を開始するには
+To start collecting your Redpanda performance data:
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `redpanda.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[redpanda.d/conf.yaml.example][2] のサンプルファイルを参照してください。
+1. Edit the `redpanda.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the sample [redpanda.d/conf.yaml.example][2] file for all available configuration options.
 
-2. [Agent を再起動します][3]。
+2. [Restart the Agent][3].
 
-##### 収集データ
+##### Log collection
 
-デフォルトでは、Datadog Agent でログを収集することは無効になっています。ログ収集は、Agent v6.0+ で利用可能です。
+By default, collecting logs is disabled in the Datadog Agent. Log collection is available for Agent v6.0+.
 
-1. ログを有効にするには、`datadog.yaml` ファイルに以下を追加します。
+1. To enable logs, add the following in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. `dd-agent` ユーザーが `systemd-journal` グループのメンバであることを確認してください。
+2. Make sure `dd-agent` user is member of `systemd-journal` group, if not, run following command as root:
    ```
    usermod -a -G systemd-journal dd-agent
    ```
 
-3. Redpanda のログの収集を開始するには、`redpanda.d/conf.yaml` ファイルに以下を追加します。
+3. Add the following in your `redpanda.d/conf.yaml` file to start collecting your Redpanda logs:
 
    ```yaml
     logs:
@@ -166,23 +167,23 @@ Redpanda のパフォーマンスデータの収集を開始するには
 [2]: https://github.com/DataDog/integrations-extras/blob/master/redpanda/datadog_checks/redpanda/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-##### メトリクスの収集
+##### Metric collection
 
-コンテナ環境では、Datadog Agent イメージに Redpanda チェックが統合された後、オートディスカバリーがデフォルトで構成されます。
+For containerized environments, Autodiscovery is configured by default after the Redpanda check integrates in the Datadog Agent image.
 
-メトリクスは、Datadog のサーバーに自動的に収集されます。詳細は、[オートディスカバリーインテグレーションテンプレート][1]を参照してください。
+Metrics are automatically collected in Datadog's server. For more information, see [Autodiscovery Integration Templates][1].
 
-##### 収集データ
+##### Log collection
 
-デフォルトでは、Datadog Agent でログ収集は無効になっています。ログ収集は、Agent v6.0+ で利用可能です。
+By default, log collection is disabled in the Datadog Agent. Log collection is available for Agent v6.0+.
 
-ログを有効にするには、[Kubernetes ログ収集][2]を参照してください。
+To enable logs, see [Kubernetes Log Collection][2].
 
-| パラメーター      | 値                                                  |
+| Parameter      | Value                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "redpanda", "service": "redpanda_cluster"}` |
 
@@ -191,27 +192,27 @@ Redpanda のパフォーマンスデータの収集を開始するには
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent のステータスサブコマンドを実行][4]し、Checks セクションで `redpanda` を探します。
+[Run the Agent's status subcommand][4] and look for `redpanda` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "redpanda" >}}
 
 
-### ヘルプ
+### Events
 
-Redpanda インテグレーションには、イベントは含まれません。
+The Redpanda integration does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "redpanda" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 
 [1]: https://redpanda.com

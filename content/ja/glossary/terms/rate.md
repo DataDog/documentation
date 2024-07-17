@@ -1,4 +1,6 @@
 ---
+core_product:
+- metrics
 title: rate
 ---
 レートは、カウントを時間間隔の長さで割ったメトリクスタイプです。

@@ -5,6 +5,7 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: ドキュメント
   text: Node.js アプリケーションのインスツルメンテーション
+kind: documentation
 title: Node.js Lambda トレースと Webpack の互換性
 ---
 

@@ -3,6 +3,7 @@ aliases:
 - /ja/logs/log_collection/rsyslog
 categories:
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 description: Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集
@@ -11,7 +12,6 @@ has_logo: true
 integration_id: rsyslog
 integration_title: rsyslog
 is_public: true
-custom_kind: integration
 name: rsyslog
 public_title: Datadog-Rsyslog インテグレーション
 short_description: Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集
@@ -73,7 +73,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
@@ -208,7 +208,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
@@ -345,7 +345,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```

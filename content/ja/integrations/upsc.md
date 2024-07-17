@@ -3,6 +3,7 @@ app_id: upsc
 app_uuid: 4681a41f-efdc-4d22-b573-06e101b9cf24
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: upsc.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10211
     source_type_name: UPSC
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
 display_on_public_website: true
@@ -29,7 +32,6 @@ integration_id: upsc
 integration_title: UPSC
 integration_version: 1.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: upsc
 public_title: UPSC
@@ -41,68 +43,70 @@ tile:
   classifier_tags:
   - Category::OS とシステム
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
-  description: UPS バッテリーの UPSC 統計コレクター
+  description: UPSC stats collector for UPS batteries
   media: []
   overview: README.md#Overview
   support: README.md#Support
   title: UPSC
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-UPSC を通じて UPSD サービスからメトリクスをリアルタイムに取得すると、以下のことができます。
+Get metrics from UPSD service through UPSC in real time to:
 
-- UPS バッテリーの健全性と状態を視覚化および監視できます。
-- UPS のフェイルオーバーとイベントの通知を受けることができます。
+- Visualize and monitor UPS battery health and states
+- Be notified about UPS failovers and events.
 
-## セットアップ
+## Setup
 
-UPSC チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The UPSC check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### インストール
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い UPSC チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the UPSC check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-upsc==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][3].
 
-### コンフィギュレーション
+### Configuration
 
-1. UPSC の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `upsc.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル upsc.d/conf.yaml][5] を参照してください。
+1. Edit the `upsc.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your UPSC [metrics](#metrics). See the [sample upsc.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6]
 
-## 検証
+## Validation
 
-[Agent の status サブコマンド][7]を実行し、Checks セクションで `upsc` を探します。
+Run the [Agent's status subcommand][7] and look for `upsc` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "upsc" >}}
 
 
-### イベント
+### Events
 
-UPSC チェックには、イベントは含まれません。
+The UPSC check does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-UPSC チェックには、サービスのチェック機能は含まれません。
+The UPSC check does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

@@ -23,6 +23,7 @@ author:
 categories:
 - event management
 - ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: logz-io
 integration_title: Logz.io
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: logzio
 public_title: Logz.io
@@ -49,8 +49,9 @@ tile:
   - Category::Event Management
   - Category::AI/ML
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: サービスとしての AI 駆動型 ELK
+  description: AI-Powered ELK as a Service
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -60,48 +61,48 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Logz.io は、ログ、メトリクス、トレースを収集・分析する統合 SaaS プラットフォームです。このプラットフォームには、トラブルシューティングの改善、応答時間の短縮、コスト管理を支援する AI 機能が含まれています。
+Logz.io is a unified SaaS platform that collects and analyzes logs, metrics, and traces. The platform includes AI features to improve troubleshooting, reduce response time, and help you manage costs.
 
-このインテグレーションにより、以下のことが可能になります。
+This integration allows you to
 
-- Logz.io のアラートを Datadog でリアルタイムに表示
+- View real-time Logz.io alerts in Datadog
 
 ![import_alert_from_logz][1]
 
-- アラートイベントをダッシュボードに組み込んで、メトリクスとの相関関係を識別
+- Incorporate alert events into a dashboard to identify correlations with metrics
 
 ![dashboard][2]
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-次の手順に従って Datadog にアラートをインポートします。
+Import your alerts into Datadog with the following steps:
 
-1. [Datadog API キー][3]を使用して、Logz.io に新しいアラートエンドポイントを作成します。
-2. Logz.io で、特定のクエリに対する新しいアラートを作成します。
+1. Use a [Datadog API key][3] to create a new alert endpoint in Logz.io.
+2. Create a new alert in Logz.io for a specific query.
 
-より詳細な設定方法は、[Logz.io と Datadog によるログ相関][4]をご覧ください。
+For a more detailed setup description, see [Log Correlation with Logz.io and Datadog][4].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Logz.io チェックには、メトリクスは含まれません。
+The Logz.io check does not include any metrics.
 
-### ヘルプ
+### Events
 
-Logz.io チェックには、イベントは含まれません。
+The Logz.io check does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Logz.io チェックには、サービスのチェック機能は含まれません。
+The Logz.io check does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/logzio/images/import_alert_from_logz.jpg
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/logzio/images/dashboard.png

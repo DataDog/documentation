@@ -11,6 +11,7 @@ categories:
 - メトリクス
 - モバイル
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_ios/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: rum-ios
 integration_title: iOS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rum_ios
 public_title: iOS
@@ -34,6 +34,7 @@ tile:
   - Category::Mobile
   - Category::Tracing
   - Supported OS::iOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した iOS アプリケーションの監視とメトリクス生成
   media: []
@@ -45,63 +46,63 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Datadog [iOS インテグレーション][1]を利用することで、問題のトリアージに費やす時間を減らし、より多くの時間を新機能のリリースに費やすことができるようになります。
+With the Datadog [iOS integration][1], you can spend less time triaging issues and more time releasing new features by:
 
-- サードパーティライブラリ、ネットワークリクエスト、大容量メディアファイルにおけるパフォーマンス低下やアプリケーションクラッシュの根本的な原因をデバッグ
-- アプリケーションの応答性向上、サービスレベルインジケータ (SLI) の設定、すぐに使えるダッシュボード、リアルタイムメトリクス、難読化されたクラッシュレポートによる問題の診断
-- 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
+- Debugging the root cause of slow performance issues and application crashes in third-party libraries, network requests, or large media files 
+- Improving application responsiveness, setting up service level indicators (SLIs), and diagnosing issues with out-of-the-box dashboards, real-time metrics, and deobfuscated crash reports 
+- Intelligently grouping high-volume application errors into a manageable set of unique issues
 
-ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。
+Correlate the impact of the user experience on your business by:
 
-- ビジネス KPI を達成するために、デモグラフィック、バージョンリリース、または任意のカスタム属性による画面エンゲージメントなど、重要なモバイルユーザーエクスペリエンスデータを分析
-- すべてのユーザージャーニーを、ID、セルラーアクティビティ、リファーラル URL などのセッションイベントや属性のタイムラインと自動的に相関付け
-- カスタマイズ可能なアナリティクスと地理的マップによりユーザー行動傾向を把握
+- Analyzing critical mobile user experience data such as screen engagement by demographics, version releases, or any custom attributes, to reach your business KPIs 
+- Automatically correlating every user journey with a timeline of session events and attributes including ID, cellular activity, referral URL, and more 
+- Understanding user behavior trends with customizable analytics and geographical maps
 
-iOS アプリケーションのエンドツーエンドの健全性を監視します。
+Monitor the end-to-end health of your iOS application by: 
 
-- ユーザーエクスペリエンスデータからバックエンドトレース、ランタイムメトリクス、ログに視点を移し、問題を調査する際の完全なコンテクストを提供
-- クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
-- フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
+- Pivoting from your user experience data to backend traces, runtime metrics, and logs for the complete context when investigating issues 
+- Debugging crashes faster by unifying client-side and server-side metrics, traces, and logs
+- Unifying full-stack monitoring in a single platform for frontend and backend teams
 
-## 計画と使用
+## Setup
 
-### RUM イベントの収集
+### Collect RUM events 
 
-アプリケーションからリアルユーザーモニタリングのイベント収集を開始するには、[iOS と tvOS のモニタリング][2]を参照してください。
+To start collecting Real User Monitoring events from your application, see [iOS and tvOS Monitoring][2]. 
 
-### トレースの収集
+### Collect traces 
 
-iOS アプリケーションのトレースを Datadog に送信し始めるには、[iOS トレース収集][3]をご覧ください。また、[RUM とトレースの接続][4]することもできます。
+To start sending your iOS application's traces to Datadog, see [iOS Trace Collection][3]. Additionally, you can [Connect RUM and Traces][4].
 
-### ログの収集
+### Collect logs 
 
-iOS アプリケーションのログを Datadog に転送し始めるには、[iOS ログ収集][5]をご覧ください。
+To start forwarding your iOS application's logs to Datadog, see [iOS Log Collection][5].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-iOS インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][6]を参照してください。
+The iOS integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][6].
 
-### イベント
+### Events 
 
-イベントや属性の詳細については、[RUM iOS データ収集][7]を参照してください。
+For more information about events and attributes, see [RUM iOS Data Collected][7]. 
 
-### サービスチェック
+### Service Checks 
 
-iOS インテグレーションには、サービスのチェック機能は含まれません。
+The iOS integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+Need help? Contact [Datadog Support][8]. 
 
-## その他の参考資料 
+## Further Reading 
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles: 
 
-- [iOS と tvOS のモニタリング][9]
+- [iOS and tvOS Monitoring][9]
 
 
 [1]: https://app.datadoghq.com/integrations/rum-ios

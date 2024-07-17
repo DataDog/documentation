@@ -29,6 +29,7 @@ categories:
 - ai/ml
 - 開発ツール
 - コスト管理
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/langchain/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: langchain
 integration_title: LangChain
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: langchain
 public_title: LangChain
@@ -59,6 +59,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 'LangChain の使用を最適化します: プロンプトサンプリング、パフォーマンスとコストのメトリクス。'
   media: []
@@ -70,15 +71,15 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Datadog のメトリクス、APM、ログを使用して、[LangChain][1] Python ライブラリのリクエストから、コストの見積もり、プロンプトとコンプリーションのサンプリング、エラー追跡、パフォーマンスメトリクスなどを取得します。
+Get cost estimation, prompt and completion sampling, error tracking, performance metrics, and more out of [LangChain][1] Python library requests using Datadog metrics, APM, and logs.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-1. Datadog Agent で APM と StatsD を有効化します。例えば、Docker で:
+1. Enable APM and StatsD in your Datadog Agent. For example, in Docker:
 
 ```
 docker run -d --cgroupns host \
@@ -94,61 +95,61 @@ docker run -d --cgroupns host \
               gcr.io/datadoghq/agent:latest
 ```
 
-2. Datadog APM Python ライブラリをインストールします。
+2. Install the Datadog APM Python library.
 
 ```
 pip install ddtrace>=1.17
 ```
 
 
-3. LangChain Python アプリケーションのコマンドに `ddtrace-run` のプレフィックスを付けます。
+3. Prefix your LangChain Python application command with `ddtrace-run`.
 
 ```
 DD_SERVICE="my-service" DD_ENV="staging" DD_API_KEY=<DATADOG_API_KEY> ddtrace-run python <your-app>.py
 ```
 
-**注**: Agent がデフォルト以外のホスト名やポートを使用している場合、`DD_AGENT_HOST`、`DD_TRACE_AGENT_PORT`、`DD_DOGSTATSD_PORT` も必ず設定してください。
+**Note**: If the Agent is using a non-default hostname or port, be sure to also set `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT`, or `DD_DOGSTATSD_PORT`.
 
-より高度な使い方については、[APM Python ライブラリドキュメント][2]を参照してください。
-
-
-### 構成
-
-利用可能なすべての構成オプションについては、[APM Python ライブラリドキュメント][3]を参照してください。
+See the [APM Python library documentation][2] for more advanced usage.
 
 
-#### ログプロンプトとコンプリーションサンプリング
+### Configuration
 
-ログのプロンプトとコンプリーションサンプリングを有効にするには、環境変数 `DD_LANGCHAIN_LOGS_ENABLED=1` を設定します。デフォルトでは、トレースされたリクエストの 10% がプロンプトとコンプリーションを含むログを出力します。
-
-ログのサンプルレートを調整するには、[APM ライブラリのドキュメント][3]を参照してください。
-
-**注**: ログを送信するには、`ddtrace-run` を実行する際に `DD_API_KEY` を指定する必要があります。
+See the [APM Python library documentation][3] for all the available configuration options.
 
 
-### 検証
+#### Log Prompt & Completion Sampling
 
-APM Python ライブラリを使用して Agent と通信できることを確認します。
+To enable log prompt and completion sampling, set the `DD_LANGCHAIN_LOGS_ENABLED=1` environment variable. By default, 10% of traced requests will emit logs containing the prompts and completions.
+
+To adjust the log sample rate, see the [APM library documentation][3].
+
+**Note**: Logs submission requires `DD_API_KEY` to be specified when running `ddtrace-run`.
+
+
+### Validation
+
+Validate that the APM Python library can communicate with your Agent using:
 
 ```
 ddtrace-run --info
 ```
 
-次の出力が表示されるはずです。
+You should see the following output:
 
 ```
     Agent error: None
 ```
 
-#### デバッグロギング
+#### Debug Logging
 
-`ddtrace-run` に `--debug` フラグを渡すと、デバッグロギングが有効になります。
+Pass the `--debug` flag to `ddtrace-run` to enable debug logging.
 
 ```
 ddtrace-run --debug
 ```
 
-データ送信時のエラーを表示します。
+This displays any errors sending data:
 
 ```
 ERROR:ddtrace.internal.writer.writer:failed to send, dropping 1 traces to intake at http://localhost:8126/v0.5/traces after 3 retries ([Errno 61] Connection refused)
@@ -156,24 +157,24 @@ WARNING:ddtrace.vendor.dogstatsd:Error submitting packet: [Errno 61] Connection 
 DEBUG:ddtrace.contrib._trace_utils_llm.py:sent 2 logs to 'http-intake.logs.datadoghq.com'
 ```
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "langchain" >}}
 
 
-### イベント
+### Events
 
-LangChain インテグレーションには、イベントは含まれません。
+The LangChain integration does not include any events.
 
-### サービスチェック
+### Service Checks
 
-LangChain インテグレーションには、サービスのチェック機能は含まれません。
+The LangChain integration does not include any service checks.
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 
 [1]: https://docs.langchain.com/docs/

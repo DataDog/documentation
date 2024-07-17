@@ -2,6 +2,7 @@
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Recovery Service Vault のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_recovery_service_vault/
@@ -12,7 +13,6 @@ integration_id: ''
 integration_title: Azure Recovery Service Vault
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_recovery_service_vault
 public_title: Datadog-Azure Recovery Service Vault インテグレーション
@@ -27,27 +27,27 @@ Azure Recovery Service Vault インテグレーションは、Microsoft Azure �
 
 Datadog Azure インテグレーションは、Azure Recovery Service Vault からメトリクスを収集できますが、ご使用の VM に Datadog Agent をインストールすることを[お勧めします][1]。組織が Datadog の US3 サイトを利用しており、Azure で Datadog リソースを構成している場合、[Azure Native インテグレーション手動セットアップガイド][2]の指示に従ってください。**すべてのサイト**は、[Azure インテグレーション手動セットアップガイド][3]または [Azure プログラム管理ガイド][4]の手順を使用できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 [Microsoft Azure インテグレーション][5]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_recovery_service_vault" >}}
 
 
-### ヘルプ
+### Events
 
 Azure Recovery Service Vault インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### Service Checks
 
 Azure Recovery Service Vault インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

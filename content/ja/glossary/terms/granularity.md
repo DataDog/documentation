@@ -1,6 +1,7 @@
 ---
 core_product:
 - dashboards
+- metrics
 title: 粒度
 ---
 粒度とは、データを収集したり、グラフに表示したりする頻度のことです。

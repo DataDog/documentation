@@ -3,8 +3,9 @@ categories:
 - collaboration
 - developer tools
 - issue tracking
+custom_kind: integration
 dependencies: []
-description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。
+description: View, search on, and discuss Redmine updates in your Datadog event stream.
 doc_link: https://docs.datadoghq.com/integrations/redmine/
 draft: false
 git_integration_title: redmine
@@ -13,7 +14,6 @@ integration_id: redmine
 integration_title: Redmine
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: redmine
 public_title: Datadog-Redmine インテグレーション
@@ -32,27 +32,27 @@ Redmine はオープンソースのプロジェクト管理 Web アプリケー�
 
 Redmine 構成に必要な項目は、目的のアクティビティフィードの完全な URL です。複数の URL を追加できます。
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
 インテグレーションを構成するには、[Redmine インテグレーションタイル][1]を参照してください。
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 Redmine インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### Events
 
 作成された問題はすべて Datadog 内でイベントとして表示されます。インテグレーションをインストールして構成した後、[Events Explorer][2] で `source:redmine` を検索すると、Redmine のアクティビティフィードで問題を確認することができます。
 
-### ヘルプ
+### Service Checks
 
 Redmine インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## Troubleshooting
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

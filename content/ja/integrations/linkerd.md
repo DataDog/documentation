@@ -30,6 +30,7 @@ author:
 categories:
 - configuration & deployment
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md
 display_on_public_website: true
@@ -37,9 +38,8 @@ draft: false
 git_integration_title: linkerd
 integration_id: linkerd
 integration_title: Linkerd
-integration_version: 4.2.0
+integration_version: 4.2.2
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: linkerd
 public_title: Linkerd
@@ -56,8 +56,9 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: linkerd からメトリクスを取得してサービス健全性を監視
+  description: Monitor your services health with metrics from linkerd.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -67,81 +68,81 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-[Linkerd][1] は、CNCF のステータスを持つ、軽量かつ強力なオープンソースのサービスメッシュです。Linkerd は、安全で信頼性が高く、観測可能なクラウドネイティブアプリケーションを作成するために必要なツールを提供します。最小限の構成で、アプリケーションを変更することなく、Linkerd は、
-- 相互 TLS を使用して、すべてのクラスター上の TCP 通信を透過的に保護します。
-- レイテンシーを考慮したロードバランシング、リクエストの再試行、タイムアウト、ブルーグリーンデプロイメントを追加し、アプリケーションの回復力を維持します。
-- メッシュ化された各ワークロードの成功率、レイテンシー、リクエスト量を追跡することにより、プラットフォームの健全性を評価します。
+[Linkerd][1] is a light but powerful open-source service mesh with CNCF graduated status. It provides the tools you need to write secure, reliable, observable cloud-native applications. With minimal configuration and no application changes, Linkerd:
+- Uses mutual TLS to transparently secure all on-cluster TCP communication. 
+- Adds latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your applications resilient.
+- Provides platform health metrics by tracking success rates, latencies, and request volumes for every meshed workload.
 
-このインテグレーションは、アプリケーションの成功率、レイテンシー、飽和状態など、Linkerd のメトリクスを Datadog に送信します。
+This integration sends your Linkerd metrics to Datadog, including application success rates, latency, and saturation.
 
 
-## 計画と使用
+## Setup
 
-この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][2]を参照してください。
+This OpenMetrics-based integration has a latest mode (enabled by setting `openmetrics_endpoint` to point to the target endpoint) and a legacy mode (enabled by setting `prometheus_url` instead). To get all the most up-to-date features, Datadog recommends enabling the latest mode. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][2].
 
-`[OpenMetrics V1]` または `[OpenMetrics V2]` とマークされたメトリクスは、Linkerd インテグレーションの対応するモードを使用した場合にのみ利用できます。マークされていないメトリクスは、すべてのモードで収集されます。
+Metrics marked as `[OpenMetrics V1]` or `[OpenMetrics V2]` are only available using the corresponding mode of the Linkerd integration. Metrics not marked are collected by all modes.
 
-### インフラストラクチャーリスト
+### Installation
 
-Linkerd チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Linkerd check is included in the [Datadog Agent][3] package, so you don't need to install anything else on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `linkerd.d/conf.yaml` ファイルを編集します。
-   最新の OpenMetrics チェック例を使用した利用可能なすべての構成オプションについては、[`linkerd.d/conf.yaml` のサンプル][2]を参照してください。以前にこのインテグレーションを実装したことがある場合は、[レガシー例][3]を参照してください。
+1. Edit the `linkerd.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1].
+   See the [sample `linkerd.d/conf.yaml`][2] for all available configuration options using the latest OpenMetrics check example. If you previously implemented this integration, see the [legacy example][3].
 
-2. [Agent を再起動します][4]。
+2. [Restart the Agent][4].
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
 ##### Linkerd v1
 
-| パラメーター            | 値                                                                       |
+| Parameter            | Value                                                                       |
 | -------------------- | --------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `linkerd`                                                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                               |
+| `<INIT_CONFIG>`      | blank or `{}`                                                               |
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:9990/admin/metrics/prometheus"}` |
 
-**注**: これは新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][2]を参照してください。
+ **Note**: This is a new default OpenMetrics check example. If you previously implemented this integration, see the [legacy example][2].
 
 ##### Linkerd v2
 
-| パラメーター            | 値                                                                       |
+| Parameter            | Value                                                                       |
 | -------------------- | --------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `linkerd`                                                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                               |
+| `<INIT_CONFIG>`      | blank or `{}`                                                               |
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:4191/metrics"}`                  |
 
-**注**: これは新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][2]を参照してください。
+   **Note**: This is a new default OpenMetrics check example. If you previously implemented this integration, see the [legacy example][2].
 
 
-##### 収集データ
+##### Log collection
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][3].
 
-| パラメーター      | 値                                                |
+| Parameter      | Value                                                |
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "linkerd", "service": "<SERVICE_NAME>"}` |
 
-データプレーンログの冗長性を高めるには、[プロキシログレベルの変更][4]を参照してください。
+To increase the verbosity of the data plane logs, see [Modifying the Proxy Log Level][4].
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
@@ -150,40 +151,40 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][4]を実行し、Checks セクションで `linkerd` を探します。
+Run the [Agent's status subcommand][4] and look for `linkerd` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][5] を参照してください。
+See [metadata.csv][5] for a list of metrics provided by this integration.
 
-Linkerd v1 については、メトリクスの説明は [finagle メトリクスガイド][6]、Linkerd が公開するメトリクスの例は[こちらの gist][7] を参照してください。
+For Linkerd v1, see the [finagle metrics guide][6] for metric descriptions and [this gist][7] for an example of metrics exposed by Linkerd.
 
-Linkerd は Prometheus ベースのインテグレーションです。Linkerd の構成によっては、一部のメトリクスが Linkerd によって公開されない場合があります。cURL の出力にメトリクスが存在しない場合、Datadog Agent はその特定のメトリクスを収集することができません。
+Linkerd is a Prometheus-based integration. Depending on your Linkerd configuration, some metrics might not be exposed by Linkerd. If any metric is not present in the cURL output, the Datadog Agent is unable to collect that particular metric.
 
-現在の構成で公開されるメトリクスをリストするには、次のコマンドを実行します。
+To list the metrics exposed by your current configuration, run:
 
 ```bash
 curl <linkerd_prometheus_endpoint>
 ```
 
-ここで、`linkerd_prometheus_endpoint` は Linkerd Prometheus エンドポイントです (`linkerd.yaml` 内の `prometheus_url` 構成キーと同じ値を使用する必要があります)。
+Where `linkerd_prometheus_endpoint` is the Linkerd Prometheus endpoint (you should use the same value as the `prometheus_url` config key in your `linkerd.yaml`)
 
-デフォルトで提供されないメトリクスを使用する必要がある場合は、`linkerd.yaml` にエントリを追加します。
+If you need to use a metric that is not provided by default, you can add an entry to `linkerd.yaml`.
 
-詳しくは[デフォルト構成][8]の例を参照してください。
+For more information, see the examples in the [default configuration][8].
 
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "linkerd" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
 
 

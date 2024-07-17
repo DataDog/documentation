@@ -24,6 +24,12 @@ further_reading:
 - link: /security/notifications/variables/
   tag: ドキュメント
   text: セキュリティ通知変数について
+- link: https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/
+  tag: ブログ
+  text: Datadog Cloud SIEM で Cloudflare Zero Trust を監視
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
+  tag: ブログ
+  text: Datadog Cloud SIEM で 1Password を監視
 title: ログ検出ルール
 type: documentation
 ---
@@ -71,15 +77,9 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。 通常、グループ化はエンティティ (ユーザーや IP など) です。グループ化は、[クエリを結合する](#joining-queries)ためにも使用されます。
 
-別のクエリを追加する場合は Add Query ボタンをクリックします。
+クエリを追加するには、**Add Query** をクリックします。
 
-**注**: このクエリはすべての Datadog イベントと、インデックス作成を必要としない取り込み済みログに適用されます。
-
-## 抑制クエリで良性アクティビティを除外する
-
-**Only generate a signal if there is a match** フィールドでは、クエリを入力することで、値が一致したときのみトリガーが発生するようにするオプションがあります。
-
-**This rule will not generate a signal if there is a match** (このルールは、一致するものがある場合、シグナルを生成しない) フィールドには、抑制クエリを入力するオプションがあり、値が一致した場合にトリガーが生成されないようにすることができます。例えば、`john.doe`というユーザーがシグナルをトリガーしているが、そのアクションは良性であり、このユーザーからシグナルをトリガーさせたくない場合、`@user.username: john.doe` を除外するログクエリを入力します。
+**注**: このクエリは、すべての取り込みログに適用されます。
 
 #### クエリを結合する
 
@@ -93,7 +93,7 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 検出ルールケースは、グループ化の値に基づいてこれらのクエリを結合します。一致するケースと値が同じでなければならないため、グループ化属性には通常同じ属性が設定されます。グループ化の値が存在しない場合、ケースが一致することはありません。セキュリティシグナルはケースが一致した場合のみ、一意のグループ化値に対して生成されます。
 
-{{< img src="security/security_monitoring/detection_rules/set_rule_case3.png" alt="failed_login が 5 以上、successful_login が 0 以上の場合、重大度の高いシグナルをトリガーするように設定されたセットルールケースセクション" style="width:55%;" >}}
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="failed_login が 5 を超え、successful_login が 0 を超える場合に、高重大度のシグナルをトリガーするように設定されたルールケースセクション" style="width:90%;" >}}
 
 以下の例は、同じ `@usr.name` で 5 回を超えてログインに失敗した場合、および 1 回ログインに成功した場合のケースです。この場合、最初のケースに一致した場合はセキュリティシグナルが生成されます。
 
@@ -108,7 +108,7 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 同じロジックを使用して、[ログエクスプローラー検索][1]で検索クエリを構築します。各クエリには ASCII の小文字でラベルが付与されます。クエリ名を ASCII 文字から変更する場合は、鉛筆アイコンをクリックします。
 
-**注**: このクエリはすべての Datadog イベントと、インデックス作成を必要としない取り込み済みログに適用されます。
+**注**: このクエリは、すべての取り込みログに適用されます。
 
 #### 学習済みの値
 
@@ -120,16 +120,12 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 また、1 つのクエリで複数の値を使用して、ユーザーやエンティティを識別することができます。例えば、ユーザーが新しいデバイスからサインインしたときや、今までサインインしたことのない国からサインインしたときに検出したい場合は、`device_id` と `country_name` を **Detect new value** に追加します。
 
-## 抑制クエリで良性アクティビティを除外する
-
-**Only generate a signal if there is a match** フィールドでは、クエリを入力することで、値が一致したときのみトリガーが発生するようにするオプションがあります。
-
-**This rule will not generate a signal if there is a match** (このルールは、一致するものがある場合、シグナルを生成しない) フィールドには、抑制クエリを入力するオプションがあり、値が一致した場合にトリガーが生成されないようにすることができます。例えば、`john.doe`というユーザーがシグナルをトリガーしているが、そのアクションは良性であり、このユーザーからシグナルをトリガーさせたくない場合、`@user.username: john.doe` を除外するログクエリを入力します。
-
 [1]: /ja/logs/search_syntax/
 {{% /tab %}}
 
 {{% tab "異常" %}}
+
+### 検索クエリ
 
 ログエクスプローラーでの検索と同じロジックを使用して検索クエリを作成します。
 
@@ -137,7 +133,7 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 異常検出は、`group by` 属性が過去にどのような振る舞いをしたかを検査します。group by 属性が初めて見られ (例えば、ある IP が初めてシステムと通信したとき)、異常である場合、異常検出アルゴリズムには判断材料となる過去のデータがないため、セキュリティシグナルは生成されません。
 
-**注**: このクエリはすべての Datadog イベントと、インデックス作成を必要としない取り込み済みログに適用されます。
+**注**: このクエリは、すべての取り込みログに適用されます。
 
 {{% /tab %}}
 
@@ -163,21 +159,28 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 不可能移動の行動をすべて Datadog に検出させたい場合は、チェックボックスをクリックしないでください。
 
-## 抑制クエリで良性アクティビティを除外する
-
-**Only generate a signal if there is a match** フィールドでは、クエリを入力することで、値が一致したときのみトリガーが発生するようにするオプションがあります。
-
-**This rule will not generate a signal if there is a match** (このルールは、一致するものがある場合、シグナルを生成しない) フィールドには、抑制クエリを入力するオプションがあり、値が一致した場合にトリガーが生成されないようにすることができます。例えば、`john.doe`というユーザーがシグナルをトリガーしているが、そのアクションは良性であり、このユーザーからシグナルをトリガーさせたくない場合、`@user.username: john.doe` を除外するログクエリを入力します。
-
 [1]: /ja/logs/search_syntax/
 [2]: /ja/logs/log_configuration/processors#geoip-parser
+{{% /tab %}}
+
+{{% tab "サードパーティ" %}}
+
+### Root クエリ
+
+[ログエクスプローラー検索][1]と同じロジックを使用して検索クエリを構築します。各新規属性の定義されたトリガーは、24 時間のロールアップ期間にわたってその属性の新規値ごとにシグナルを生成します。
+
+クエリを追加するには、**Add Query** をクリックします。
+
+**注**: このクエリは、すべての取り込みログに適用されます。
+
+[1]: /ja/logs/search_syntax/
 {{% /tab %}}
 {{< /tabs >}}
 
 ## ルールケースを設定する
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{% tab "しきい値" %}}
 
 ### トリガー
 
@@ -185,9 +188,9 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 例 (クエリ A が発生し、次にクエリ B が発生した場合) のシグナルをトリガーしたい場合は、**Create rules cases with Then operator** を有効にしてください。`then` 演算子は、1 つのルールケースにのみ使用できます。
 
-すべてのルールケースは、case ステートメントとして評価されます。したがって、最初にマッチしたケースがシグナルを生成します。ルールケースをクリックしてドラッグすると、その順序を操作することができます。ルールケースの例として、`a > 3` があります。
+すべてのルールケースは case ステートメントとして評価されます。したがって、ケースの順序は、最初にマッチしたケースがシグナルを生成するため、どの通知を送信するかに影響します。ルールケースをクリックしてドラッグすると、順序を変更できます。
 
-ルールケースには、過去に定義されたクエリのイベント数に基づいてシグナルを生成すべきかを判断するための論理演算 (`>、>=、&&、||`) が含まれます。ここで ASCII 小文字の [クエリラベル](#define-a-search-query)が参照されます。
+ルールケースには、過去に定義されたクエリのイベント数に基づいてシグナルを生成すべきかを判断するための論理演算 (`>、>=、&&、||`) が含まれます。ここで ASCII 小文字の [クエリラベル](#define-a-search-query)が参照されます。クエリ `a` のルールケースの例は `a > 3` です。
 
 **注**: クエリラベルは演算子に先行しなければなりません。たとえば、`a > 3` は使用できますが、`3 < a` は許容されません。
 
@@ -256,6 +259,24 @@ Datadog は、データの季節性を自動的に検出し、異常と判断さ
 {{% security-rule-time-windows %}}
 
 {{% /tab %}}
+
+{{% tab "サードパーティ" %}}
+
+### トリガー
+
+すべてのルールケースは case ステートメントとして評価されます。したがって、ケースの順序は、最初にマッチしたケースがシグナルを生成するため、どの通知を送信するかに影響します。ルールケースをクリックしてドラッグすると、順序を変更できます。
+
+ルールケースには、過去に定義されたクエリのイベント数に基づいてシグナルを生成すべきかを判断するための論理演算 (`>、>=、&&、||`) が含まれます。ここで ASCII 小文字の [クエリラベル](#define-a-search-query)が参照されます。クエリ `a` のルールケースの例は `a > 3` です。
+
+**注**: クエリラベルは演算子に先行しなければなりません。たとえば、`a > 3` は使用できますが、`3 < a` は許容されません。
+
+### 重大度および通知
+
+{{% security-rule-severity-notification %}}
+
+ケースを追加する場合は、**Add Case** をクリックします。
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 非本番重大度の低減
@@ -279,6 +300,12 @@ Datadog は、データの季節性を自動的に検出し、異常と判断さ
 
 **注**: `security` タグはセキュリティシグナルの分類に用いられる特殊なタグです。`attack`、`threat-intel`、`compliance`、`anomaly`、`data-leak` など他のタグの使用を推奨します。
 
+## 抑制ルール
+
+Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
+
+Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
+
 ## ルール非推奨
 
 すべてのすぐに使える検出ルールの定期的な監査を行い、忠実なシグナル品質を維持します。非推奨のルールは、改良されたルールに置き換えられます。
@@ -295,4 +322,4 @@ Datadog は、データの季節性を自動的に検出し、異常と判断さ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
-[2]: /ja/security/detection_rules/#rule-and-generated-signal-options
+[2]: /ja/security/detection_rules/#clone-a-rule

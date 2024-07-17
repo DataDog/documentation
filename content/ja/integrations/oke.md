@@ -21,6 +21,7 @@ categories:
 - kubernetes
 - oracle
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
 display_on_public_website: true
@@ -30,7 +31,6 @@ integration_id: oke
 integration_title: Oracle Container Engine for Kubernetes
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: oke
 public_title: Oracle Container Engine for Kubernetes
@@ -49,10 +49,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
   support: README.md#Support
   title: Oracle Container Engine for Kubernetes
 ---
@@ -60,24 +64,24 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) は、Oracle Cloud 上でコンテナ化されたアプリケーションをデプロイして実行するための、フルマネージド Kubernetes サービスです。Datadog は、OKE によって管理される Kubernetes クラスターに対する包括的な可視性を提供します。Datadog のインテグレーションを有効にすると、Kubernetes インフラストラクチャーの表示、ライブ・プロセスの監視、すべてのポッドとコンテナからの主要メトリクスの追跡を 1 箇所で行うことができます。
+Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) is a fully-managed Kubernetes service for deploying and running your containerized applications on Oracle Cloud. Datadog provides you with comprehensive visibility to your Kubernetes clusters managed by OKE. Once you have enabled your Datadog integration, you can view your Kubernetes infrastructure, monitor live processes, and track key metrics from all of your pods and containers in one place.
 
-## 計画と使用
+## Setup
 
-Datadog は既に Kubernetes と統合されているため、すぐに OKE を監視することができます。Kubernetes クラスターで実行中の Agent を OKE に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
+Because Datadog already integrates with Kubernetes, it is ready-made to monitor OKE. If you're running the Agent in a Kubernetes cluster and plan to migrate to OKE, you can continue monitoring your cluster with Datadog.
 
-さらに、OKE ノードプールもサポートされています。
+Additionally, OKE node pools are supported.
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
-## その他の参考資料
+## Further Reading
 
-- [Datadog を使用した OKE の監視方法][2]
+- [How to monitor OKE with Datadog][2]
 
 [1]: https://docs.datadoghq.com/ja/help/
 [2]: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
