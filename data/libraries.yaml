@@ -240,7 +240,7 @@ Classic:
       official: false
       dogstatsd: true
       authors: GitHub
-    - name: datadog-api-client
+    - name: datadog-api-client-rust
       link: https://github.com/DataDog/datadog-api-client-rust
       official: true
       api: true

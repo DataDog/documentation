@@ -17,3 +17,6 @@ languages:
   'java':
     extension: java
     pygments_name: java
+  'rs':
+    extension: rs
+    pygments_name: rust
