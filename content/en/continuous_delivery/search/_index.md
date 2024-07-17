@@ -32,7 +32,7 @@ The **Deployment** page provides you high-level information, including:
 
 - An overview of the health of the different services and environments, with aggregated stats.
 - A window for spotting and fixing immediate, urgent issues like broken deployments in production.
-- How each service deployment was executed, over time, and with what results and trends.
+- How each service deployment was executed, over time, and the results and trends.
 
 ## Deployment details
 
