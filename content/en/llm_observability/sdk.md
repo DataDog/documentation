@@ -108,7 +108,7 @@ LLMObs.enable(
 
 Enable LLM Observability in a serverless environmant by using the [Datadog-Python and Datadog-Extension layers][14].
 
-Please specify `DD_LLMOBS_ENABLED` in your environment for these serverless layers to properly instrument and flush traces from your serverless application, for both auto-instrumented and manual instrumentation use cases.
+In order for these serverless layers to properly instrument and flush traces from your serverless application, specify `DD_LLMOBS_ENABLED` in your environment. This applies to both manual and auto-instrumented use cases.
 
 #### Flushing in serverless environments
 
