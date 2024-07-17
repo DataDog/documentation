@@ -42,7 +42,7 @@ Sets the service name<br>
 `OTEL_LOG_LEVEL`
 : ****Datadog convention****: `DD_LOG_LEVEL`<br>
 Log level used by the SDK logger<br>
-**Notes**: A log level of debug will also map to `DD_TRACE_DEBUG=true`<br>
+**Notes**: A log level of debug also maps to `DD_TRACE_DEBUG=true`<br>
 In the Node.js & PHP SDKs this maps to `DD_TRACE_LOG_LEVEL` <br>
 In the Go SDK only mapped values between `OTEL_LOG_LEVEL` & `DD_TRACE_DEBUG` are supported:<br>
   - `info`|`false`
@@ -52,13 +52,13 @@ In the Go SDK only mapped values between `OTEL_LOG_LEVEL` & `DD_TRACE_DEBUG` are
 `OTEL_PROPAGATORS`
 : ****Datadog convention****: `DD_TRACE_PROPAGATION_STYLE`<br>
 Propagators to be used as a comma-separated list<br>
-**Notes**: the only supported values for most Datadog SDKs are `tracecontext`, `b3`, `b3multi`, `none`, `datadog`. `xray` is also supported for the Java SDK<br>
+**Notes**: The only supported values for most Datadog SDKs are `tracecontext`, `b3`, `b3multi`, `none`, `datadog`. `xray` is also supported for the Java SDK<br>
 Values MUST be deduplicated in order to register a `Propagator` only once<br>
 
 `OTEL_TRACES_SAMPLER & OTEL_TRACES_SAMPLER_ARG`
 : ****Datadog convention****: `DD_TRACE_SAMPLE_RATE`<br>
 `OTEL_TRACES_SAMPLER`: Sampler to be used for traces & `OTEL_TRACES_SAMPLER_ARG`: String value to be used as the sampler argument<br>
-**Notes**: The specified value will only be used if `OTEL_TRACES_SAMPLER` is set. Each Sampler type defines its own expected input, if any. Invalid or unrecognized input MUST be logged and MUST be otherwise ignored, i.e. the implementation MUST behave as if `OTEL_TRACES_SAMPLER_ARG` is not set<br>
+**Notes**: The specified value is only used if `OTEL_TRACES_SAMPLER` is set. Each Sampler type defines its own expected input, if any. Invalid or unrecognized input MUST be logged and MUST be otherwise ignored. In such cases, the implementation MUST behave as if `OTEL_TRACES_SAMPLER_ARG` is not set<br>
 Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
   - `parentbased_always_on`|`1.0`
   - `parentbased_always_off`|`0.0`
@@ -70,7 +70,7 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
 `OTEL_TRACES_EXPORTER`
 : ****Datadog convention****: `DD_TRACE_ENABLED=false` <br>
 Trace exporter to be used<br>
-**Notes**: only a value of `none` is accepted<br>
+**Notes**: Only a value of `none` is accepted<br>
 
 `OTEL_METRICS_EXPORTER`
 : ****Datadog convention****: `DD_RUNTIME_METRICS_ENABLED=false` <br>
@@ -80,7 +80,7 @@ Metrics exporter to be used<br>
 `OTEL_RESOURCE_ATTRIBUTES`
 : ****Datadog convention****: `DD_TAGS` <br>
 Key-value pairs to be used as resource attributes. See [Resource semantic conventions][11] for details<br>
-**Notes**: Only the first 10 key-value pairs will be used, the subsequent values will be dropped<br>
+**Notes**: Only the first 10 key-value pairs are used; the subsequent values are dropped<br>
 `deployment.environment` maps to the `DD_ENV` environment variable<br>
 `service.name` maps to the `DD_SERVICE` environment variable<br>
 `service.version` maps to the `DD_VERSION` environment variable<br>
@@ -111,31 +111,31 @@ Set to `false` to disable all instrumentation in the agent<br>
 `OTEL_JAVAAGENT_CONFIGURATION_FILE`
 : ****Datadog convention****: `DD_TRACE_CONFIG` <br>
 Path to valid Java properties file which contains the agent configuration<br>
-**Notes**: when OTEL_JAVAAGENT_CONFIGURATION_FILE and DD_TRACE_CONFIG are both set we apply the configuration from both files. This is an exception to the usual rule where the Datadog setting overrides the OTel one<br>
+**Notes**: When OTEL_JAVAAGENT_CONFIGURATION_FILE and DD_TRACE_CONFIG are both set we apply the configuration from both files. This is an exception to the usual rule where the Datadog setting overrides the OTel one<br>
 
 `OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_REQUEST_HEADERS`
 : ****Datadog convention****: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
-A comma-separated list of HTTP header names. HTTP client instrumentations will capture HTTP request header values for all configured header names<br>
+A comma-separated list of HTTP header names. HTTP client instrumentations capture HTTP request header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.request.header.<header-name>` rather than the Datadog convention of `http.request.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_RESPONSE_HEADERS`
 : ****Datadog convention****: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
-A comma-separated list of HTTP header names. HTTP client instrumentations will capture HTTP response header values for all configured header names<br>
+A comma-separated list of HTTP header names. HTTP client instrumentations capture HTTP response header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.response.header.<header-name>` rather than the Datadog convention of `http.response.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_REQUEST_HEADERS`
 : ****Datadog convention****: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
-A comma-separated list of HTTP header names. HTTP server instrumentations will capture HTTP request header values for all configured header names<br>
+A comma-separated list of HTTP header names. HTTP server instrumentations capture HTTP request header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.request.header.<header-name>` rather than the Datadog convention of `http.request.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_RESPONSE_HEADERS`
 : ****Datadog convention****: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
-A comma-separated list of HTTP header names. HTTP server instrumentations will capture HTTP response header values for all configured header names<br>
+A comma-separated list of HTTP header names. HTTP server instrumentations capture HTTP response header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.response.header.<header-name>` rather than the Datadog convention of `http.response.headers.<header-name>`<br>
 
 `OTEL_JAVAAGENT_EXTENSIONS`
 : ****Datadog convention****: `DD_TRACE_EXTENSIONS_PATH` <br>
-A comma-separated list of paths to extension jar files, or folders containing jar files. If pointing to a folder, every jar file in that folder will be treated as a separate, independent extension. <br>
+A comma-separated list of paths to extension jar files, or folders containing jar files. If pointing to a folder, every jar file in that folder is treated as a separate, independent extension. <br>
 
 ## Further Reading
 
