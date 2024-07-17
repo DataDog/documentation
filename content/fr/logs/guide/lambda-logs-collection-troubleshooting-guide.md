@@ -1,4 +1,10 @@
 ---
+further_reading:
+- link: https://www.datadoghq.com/blog/aws-lambda-telemetry-api/
+  tag: Blog
+  text: Enrichissement des fonctionnalités de l'extension Lambda Datadog grâce à l'API
+    AWS Lambda Telemetry
+kind: documentation
 title: Guide de dépannage pour la collecte de logs de la fonction Lambda
 ---
 
@@ -21,19 +27,19 @@ Si vous ne voyez aucun log transmis depuis une fonction Lambda du Forwarder Data
 
 2. Cliquez sur l'onglet Monitoring.
 
-    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Onglet Monitoring"  style="width:80%;" >}}
+    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Onglet Monitoring" style="width:80%;" >}}
 
 3. L'onglet Monitoring comporte une série de graphiques qui indiquent les informations suivantes sur votre fonction Lambda :
     * Les invocations
     * Les erreurs
-    * Les logs
+    * logs
 
 4. Si vous ne voyez aucun point de données dans le graphique **Invocations**, il est possible que les déclencheurs que vous avez définis pour votre fonction posent problème. Consultez la section [Gérer vos déclencheurs de fonction](#gerer-vos-declencheurs-de-fonction) un peu plus bas. Pour analyser vos invocations Lambda sans utiliser l'onglet Monitoring, reportez-vous à la section [Visualiser des métriques Lambda dans Datadog](#visualiser-des-metriques-lambda-dans-datadog).
 5. Si vous voyez des points de données dans le graphique « Error count and success rate », [consultez les logs de la fonction Lambda](#consulter-les-logs-de-la-fonction-lambda) pour accéder aux messages d'erreur signalés.
 
 ### Visualiser des métriques Lambda dans Datadog
 
-Si vous avez activé les métriques Lambda AWS, vous pouvez visualiser les métriques relatives aux invocations et aux erreurs Lambda dans Datadog. Les métriques suivantes portent toutes le tag `functionname` :
+Si vous avez activé les métriques AWS Lambda, vous pouvez visualiser les métriques relatives aux invocations et aux erreurs Lambda dans Datadog. Les métriques suivantes portent toutes le tag `functionname` :
 
 | Métrique                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
@@ -43,7 +49,7 @@ Si vous avez activé les métriques Lambda AWS, vous pouvez visualiser les métr
 | `aws.lambda.duration.maximum` | Durée maximale d'exécution (en millisecondes) de la fonction Lambda  |
 | `aws.lambda.throttles`        | Nombre de tentatives d'invocations inachevées en raison d'un taux d'invocation dépassant les limites client |
 
-Pour en savoir plus sur ces métriques AWS Lambda et en découvrir d'autres, consultez la rubrique relative aux [métriques Amazon Lambda][6].
+Pour en savoir plus sur ces métriques AWS Lambda et en découvrir d'autres, consultez la rubrique relative aux [métriques AWS Lambda][6].
 
 ### Gérer vos déclencheurs de fonction
 
@@ -76,13 +82,18 @@ Pour le groupe de logs CloudWatch, vous pouvez utiliser les métriques suivantes
 
 1. Depuis l'onglet Monitoring, cliquez sur **View logs in Cloudwatch**.
 
-{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Logs Lambda dans Cloudwatch"  style="width:80%;" >}}
+{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Logs Lambda dans Cloudwatch" style="width:80%;" >}}
 
 2. Recherchez le flux de logs le plus récent.
 
 3. Trouvez-vous des erreurs ? Essayez de rechercher « ?ERROR ?Error ?error ».
 
 4. Définissez la variable d'environnement « DD_LOG_LEVEL » sur « debug » au niveau de la fonction Lambda du Forwarder afin d'activer le debugging complémentaire des logs pertinents. N'oubliez pas de désactiver ces logs une fois le debugging terminé, car ils sont très détaillés.
+
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://docs.datadoghq.com/fr/help
