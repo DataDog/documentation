@@ -2399,18 +2399,18 @@ El rastreo es compatible con los siguientes formatos de trazas distribuidas:
 
  - `Datadog`
  - `tracecontext`: [Contexto de traza W3C](https://www.w3.org/TR/trace-context/)
- - `b3multi`: [Encabezados múltiples B3](https://github.com/openzipkin/b3-propagation#multiple-headers)
- - `b3`: [Encabezado único B3](https://github.com/openzipkin/b3-propagation#single-header)
+ - `b3multi`: [Cabeceras múltiples B3](https://github.com/openzipkin/b3-propagation#multiple-headers)
+ - `b3`: [Cabecera única B3](https://github.com/openzipkin/b3-propagation#single-header)
  - `none`: No-op.
 
 Puedes habilitar/deshabilitar el uso de estos formatos a través de `Datadog.configure`:
 
 ```ruby
 Datadog.configure do |c|
-  # Lista de formatos de encabezados que se deben extraer
+  # Lista de formatos de cabeceras que se deben extraer
   c.tracing.distributed_tracing.propagation_extract_style = [ 'tracecontext', 'Datadog', 'b3' ]
 
-  # Lista de formatos de encabezados que se deben inyectar
+  # Lista de formatos de cabeceras que se deben inyectar
   c.tracing.distributed_tracing.propagation_inject_style = [ 'tracecontext', 'Datadog' ]
 end
 ```
@@ -2444,7 +2444,7 @@ En el cliente:
 
 ```ruby
 Datadog::Tracing.trace('web.call') do |span, trace|
-  # Inyecta encabezados de trazas en encabezados de solicitudes (`env` debe ser un Hash)
+  # Inyecta cabeceras de trazas en cabeceras de solicitudes (`env` debe ser un Hash)
   Datadog::Tracing::Propagation::HTTP.inject!(trace.to_digest, env)
 end
 ```
@@ -2463,7 +2463,7 @@ end
 
 Las trazas que se originan en solicitudes HTTP pueden configurarse para incluir el tiempo que pasan en la cola de un servidor web de frontend o de equilibrador de carga antes de que la solicitud llegue a la aplicación de Ruby.
 
-Esta función está deshabilitada por defecto. Para activarla, debes añadir un encabezado `X-Request-Start` o `X-Queue-Start` desde tu servidor web (es decir, Nginx) antes de activar la función de cola de solicitudes. A continuación, se muestra un ejemplo de configuración de Nginx:
+Esta función está deshabilitada por defecto. Para activarla, debes añadir una cabecera `X-Request-Start` o `X-Queue-Start` desde tu servidor web (es decir, Nginx) antes de activar la función de cola de solicitudes. A continuación, se muestra un ejemplo de configuración de Nginx:
 
 ```
 # /etc/nginx/conf.d/ruby_service.conf
@@ -2844,7 +2844,7 @@ Para realizar un análisis, consulta [este problema](https://github.com/DataDog/
 
 <!---->
 
-[etiquetas de encabezados]: https://docs.datadoghq.com/tracing/configure_data_security/#collect-headers
+[etiquetas de cabeceras]: https://docs.datadoghq.com/tracing/configure_data_security/#collect-headers
 [1]: https://docs.datadoghq.com/es/tracing/trace_collection/compatibility/ruby/
 [2]: https://docs.datadoghq.com/es/tracing/trace_collection/compatibility/ruby#integrations
 [3]: https://docs.datadoghq.com/es/tracing/trace_collection/compatibility/ruby#ci-visibility-integrations
