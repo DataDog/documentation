@@ -19,7 +19,7 @@ further_reading:
     text: "Manage API performance, security, and ownership with Datadog API Catalog"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
-    text: "Join an interactive session to boost your APM understanding"  
+    text: "Join an interactive session to boost your APM understanding"
 
 aliases:
   - /tracing/faq/terminology
@@ -50,6 +50,8 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
 For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries. To learn more, read [Application Instrumentation][2].
+
+<div class="alert alert-info">If you're new to Datadog APM, read <a href="https://google.com">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 
 ## Use cases
 
@@ -88,7 +90,7 @@ Datadog APM integrates seamlessly with logs, real user monitoring (RUM), synthet
 
 Traces start in your instrumented applications and flow into Datadog.
 
-Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which spans are are stored.
+Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which spans are stored.
 
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flow of data through Datadog APM." style="width:100%;" >}}
 
@@ -124,3 +126,4 @@ Datadog APM provides tools to manage the volume and retention of your trace data
 [26]: /tracing/services/service_page/
 [27]: /tracing/trace_collection/single-step-apm/
 [28]: /tracing/services/resource_page/
+[29]: /getting_started/tracing/
