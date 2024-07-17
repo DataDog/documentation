@@ -466,7 +466,7 @@ Es probable que no tengas configurada la integración de Azure para monitorizar 
 
 3. Si el problema no se resuelve, prueba con desinstalar la extensión y volver a instalarla (esto también garantiza que se ejecute la última versión).
 
-**Nota**: Para agilizar la proceso de investigación de errores de la aplicación con el equipo de asistencia, configura `DD_TRACE_DEBUG:true` y añade el contenido del directorio de logs de Datadog (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) a tu correo electrónico.
+**Nota**: Para agilizar el proceso de investigación de errores de la aplicación con el equipo de asistencia, configura `DD_TRACE_DEBUG:true` y añade el contenido del directorio de logs de Datadog (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) a tu correo electrónico.
 
 ¿Necesitas más ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
