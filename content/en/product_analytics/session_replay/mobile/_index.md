@@ -8,4 +8,4 @@ further_reading:
       text: Session Replay
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/mobile/_index.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/mobile" >}}
