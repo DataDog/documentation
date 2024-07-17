@@ -123,6 +123,10 @@
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
   },
+  "network-device-monitoring": {
+    "name": "Network Device Monitoring",
+    "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
+  },
   "okta-integration": {
     "name": "Okta Integration",
     "description": "Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/) directly through the Datadog API."
