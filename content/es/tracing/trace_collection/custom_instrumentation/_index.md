@@ -4,10 +4,10 @@ algolia:
   - Instrumentación personalizada de APM
 further_reading:
 - link: tracing/guide/instrument_custom_method
-  text: Instrumenta un método personalizado para obtener una visibilidad profunda
+  text: Instrumentar un método personalizado para obtener una visibilidad profunda
     de tu lógica de negocio
 - link: tracing/connect_logs_and_traces
-  text: Conecta tu logs y trazas juntos
+  text: Conectar tu logs y trazas juntos
 - link: tracing/visualization/
   text: Explora tus servicios, recursos y trazas
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
