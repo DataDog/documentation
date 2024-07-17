@@ -101,9 +101,11 @@ To disable auto configuration integration(s) with the Operator, add the `DD_IGNO
 ```yaml
   override:
     nodeAgent:
-      env:
-        - name: DD_IGNORE_AUTOCONF
-          value: "redisdb istio"
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
 ```
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
