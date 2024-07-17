@@ -14,7 +14,7 @@ cascade:
     path: /integrations/akamai_datastream_2
     lang: ko
   aliases:
-  - /integrations/akamai_datastream
+  - ko/integrations/akamai_datastream
 - _target:
     path: /integrations/azure
     lang: ko
@@ -73,73 +73,73 @@ cascade:
     tags:
     - event viewer
   aliases:
-  - /integrations/eventviewer/
+  - ko/integrations/eventviewer/
 - _target:
     path: /integrations/lambdatest_license
     lang: ko
   aliases:
-  - /integrations/lambdatest_software_license/
+  - ko/integrations/lambdatest_software_license/
 - _target:
     path: /integrations/mongo
     lang: ko
   aliases:
-  - /integrations/mongodb/
+  - ko/integrations/mongodb/
 - _target:
     path: /integrations/rapdev_validator
     lang: ko
   aliases:
-  - /integrations/rapdev_dashboard_widget_pack/
+  - ko/integrations/rapdev_dashboard_widget_pack/
 - _target:
     path: /integrations/wmi_check
     lang: ko
   aliases:
-  - /integrations/wmi/
+  - ko/integrations/wmi/
 - _target:
     path: /integrations/jfrog_platform_self_hosted
     lang: ko
   aliases:
-  - /integrations/jfrog_platform/
+  - ko/integrations/jfrog_platform/
 - _target:
     path: /integrations/komodor_license
     lang: ko
   aliases:
-  - /integrations/komodor_komodor/
+  - ko/integrations/komodor_komodor/
 - _target:
     path: /integrations/stormforge_license
     lang: ko
   aliases:
-  - /integrations/stormforge_stormforge_license/
+  - ko/integrations/stormforge_stormforge_license/
 - _target:
     path: /integrations/feed
     lang: ko
   aliases:
-  - /integrations/rss/
+  - ko/integrations/rss/
 - _target:
     path: /integrations/java
     lang: ko
   aliases:
-  - /agent/faq/jmx_integrations/
-  - /agent/faq/docker-jmx/
+  - ko/agent/faq/jmx_integrations/
+  - ko/agent/faq/docker-jmx/
 - _target:
     path: /integrations/amazon_elb
     lang: ko
   aliases:
-  - /integrations/awselb
+  - ko/integrations/awselb
 - _target:
     path: /integrations/elastic
     lang: ko
   aliases:
-  - /integrations/awses
+  - ko/integrations/awses
 - _target:
     path: /integrations/amazon_s3
     lang: ko
   aliases:
-  - /integrations/awss3
+  - ko/integrations/awss3
 - _target:
     path: /integrations/snowflake_web
     lang: ko
   aliases:
-  - /integrations/snowflake/
+  - ko/integrations/snowflake/
 description: 모든 시스템, 앱, 서비스에서 데이터를 수집하세요.
 disable_sidebar: true
 custom_kind: 설명서
