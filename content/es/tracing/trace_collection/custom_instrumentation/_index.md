@@ -25,7 +25,7 @@ La instrumentación personalizada implica incrustar el código de rastreo direct
 
 Algunas situaciones en las que podrías utilizar la instrumentación personalizada incluyen las siguientes:
 
-- Recopilar datos de observabilidad del código personalizado con lógica de negocio única o compleja.
+- Recopilar datos de observabilidad del código personalizado con una lógica de negocio única o compleja.
 - Proporcionar una visibilidad y un contexto más profundos en tramos (spans), incluido añadir etiquetas (tags) de tramos][1].
 - Monitorizar con precisión secuencias específicas de operaciones o interacciones de usuario que requieren un control específico.
 - Eliminar tramos no deseados de trazas (traces).
