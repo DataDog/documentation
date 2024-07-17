@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentation
   text: Configurer des options avancées pour les étapes
-kind: documentation
 title: Utiliser la vérification d'e-mails dans des tests Browser
 ---
 
