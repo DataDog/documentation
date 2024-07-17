@@ -9,7 +9,7 @@
 
 ### Allow the Observability Pipeline Worker to write to the bucket
 
-To authenticate the Observability Pipelines Worker for Google Cloud Storage, contact your Google Security Operations representative for a Google Developer Service Account Credential. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`. See [Getting API authentication credential][9092] for more information.
+To authenticate the Observability Pipelines Worker for Google Cloud Storage, contact your Google Security Operations representative for a Google Developer Service Account Credential. This credential is a JSON file and must be placed under `DD_OP_DATA_DIR/config`. See [Getting API authentication credential][9092] for more information.
 
 ### Connect the storage bucket to Datadog Log Archives
 

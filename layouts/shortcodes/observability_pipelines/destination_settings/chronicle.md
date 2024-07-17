@@ -1,4 +1,4 @@
-To authenticate the Observability Pipelines Worker for Google Chronicle, contact your Google Security Operations representative for a Google Developer Service Account Credential. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`. See [Getting API authentication credential][10001] for more information.
+To authenticate the Observability Pipelines Worker for Google Chronicle, contact your Google Security Operations representative for a Google Developer Service Account Credential. This credential is a JSON file and must be placed under `DD_OP_DATA_DIR/config`. See [Getting API authentication credential][10001] for more information.
 
 To set up the Worker's Google Chronicle destination:
 
