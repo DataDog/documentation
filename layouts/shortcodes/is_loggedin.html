@@ -11,7 +11,9 @@ x-data="{
         .then(data => {
             console.log('Loggedin?',data);
             this.showContent = data.user_status;
-        })
+        }).catch(error => {
+            console.error('ERROR:', error);
+        });
 
     }
 }"
