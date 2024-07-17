@@ -5,7 +5,7 @@ disable_toc: true
 
 ## Overview
 
-Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
+Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
 
  - Aggregated iOS crash dashboards and attributes
  - Symbolicated iOS crash reports
