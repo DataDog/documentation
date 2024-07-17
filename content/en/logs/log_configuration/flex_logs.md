@@ -173,13 +173,13 @@ The following list is an example of log sources that are potentially good candid
 | CDN services                           | Akamai, Cloudflare, Fastly, CloudFront                                                     |
 | DNS services                           | Route53, Cloudflare, Akamai (Edge), NS1                                                    |
 | Firewall logs and Firewall appliances  | AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, FortiNet   |
-| Cloud network services                 | AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN         |
+| Cloud network services                 | Amazon VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN      |
 | Loadbalancers                          | AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX                                       |
 | Artifact repository management         | JFrog Artifactory, Archiva, Sonatype Nexus                                                 |
 | Identity services and tools            | Cisco ISE, Okta, OneLogin, Workday User Activity Logs                                      |
-| Audit logs                             | Cloud Provider Audit Logs (e.g., CloudTrail), Kubernetes audit, Microsoft 365 audit        |
+| Audit logs                             | Cloud Provider Audit Logs (for example, CloudTrail), Kubernetes audit, Microsoft 365 audit |
 | Physical network appliances            | Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda                                   |
-| Network Flow logs                      | Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs                                              |
+| Network Flow logs                      | Cisco NetFlow, IPFIX, sFlow, Amazon VPC FlowLogs                                           |
 | VPN services                           | AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard                 |
 | CI/CD services and tools               | GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline              |
 | Service mesh                           | Anthos, Istio, proxyv2, consul, Linkerd, Kong                                              |
@@ -192,7 +192,7 @@ The following list is an example of log sources that are potentially good candid
 - **Firewall logs and Firewall appliances examples**
   - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, and FortiNet.
 - **Cloud network services (VPC, Gateways, NAT, and WAN) examples**
-  - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
+  - Amazon VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
 - **Loadbalancers examples**
   - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, and NGINX.
 - **Artifact repository management examples**
@@ -204,7 +204,7 @@ The following list is an example of log sources that are potentially good candid
 - **Physical network appliances examples**
   - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, and Barracuda.
 - **Network Flow logs examples**
-  - Cisco NetFlow, IPFIX, sFlow, and AWS VPC FlowLogs.
+  - Cisco NetFlow, IPFIX, sFlow, and Amazon VPC FlowLogs.
 - **VPN services examples**
   - AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, and WireGuard.
 - **CI/CD services and tools examples**
