@@ -1,6 +1,5 @@
 ---
 title: Agent 6 Commands
-kind: Guide
 disable_toc: false
 ---
 
