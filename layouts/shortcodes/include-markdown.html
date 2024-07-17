@@ -1,9 +1,9 @@
-{{- $file := .Get 0 -}}
+{{- $page := .Get 0 -}}
+{{- $page = replace $page "content/en/" "" -}}
+{{- $page = replace $page ".md" "" -}}
 
-{{- if fileExists $file -}}
-    {{- with .Site.GetPage $file -}}
-        {{ .Content }}
-    {{- end -}}
+{{- with .Site.GetPage $page -}}
+    {{ .Content }}
 {{- else -}}
-    {{ printf "File %s not found" $file }}
+    {{ errorf "[include-markdown shortcode] Page %s not found" $page }}
 {{- end -}}

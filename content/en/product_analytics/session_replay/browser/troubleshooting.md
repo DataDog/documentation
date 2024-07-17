@@ -13,4 +13,4 @@ further_reading:
   text: 'Detect and aggregate CSP violations with Datadog'
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/browser/troubleshooting.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/browser/troubleshooting" >}}

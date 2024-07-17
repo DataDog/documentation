@@ -22,4 +22,4 @@ further_reading:
   text: "Consult your monitor status"
 ---
 
-{{< include-markdown "content/en/monitors/types/cloud_cost.md" >}}
+{{< include-markdown "monitors/types/cloud_cost" >}}
