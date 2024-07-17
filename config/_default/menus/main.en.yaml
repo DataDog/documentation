@@ -468,26 +468,11 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
-    - name: Versions
-      url: agent/versions
+    - name: Upgrade the Agent
+      url: agent/upgrade
       parent: agent
-      identifier: agent_versions
+      identifier: agent_upgrade
       weight: 9
-    - name: Upgrade to Agent v7
-      identifier: agent_versions_upgrade_to_agent_v7
-      url: agent/versions/upgrade_to_agent_v7/
-      parent: agent_versions
-      weight: 901
-    - name: Upgrade to Agent v6
-      identifier: agent_versions_upgrade_to_agent_v6
-      url: agent/versions/upgrade_to_agent_v6/
-      parent: agent_versions
-      weight: 902
-    - name: Upgrade Between Agent Minor Versions
-      identifier: agent_versions_upgrade_between_agent_minor_versions
-      url: agent/versions/upgrade_between_agent_minor_versions
-      parent: agent_versions
-      weight: 903
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -1930,36 +1915,41 @@ menu:
       parent: error_tracking
       identifier: error_tracking_default_grouping
       weight: 4
+    - name: Monitors
+      url: error_tracking/monitors
+      parent: error_tracking
+      identifier: error_tracking_monitors
+      weight: 5
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 5
+      weight: 6
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 6
+      weight: 7
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 7
+      weight: 8
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 8
+      weight: 9
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
-      weight: 9
+      weight: 10
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 10
+      weight: 11
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -3221,21 +3211,26 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
       weight: 1004
+    - name: Monitors
+      url: tracing/error_tracking/monitors
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_monitors
+      weight: 1005
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1005
+      weight: 1006
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1005
+      weight: 1007
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
-      weight: 1006
+      weight: 1008
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4209,215 +4204,215 @@ menu:
       identifier: observability_pipelines
       parent: log_management_heading
       weight: 10000
-    - name: Setup
-      url: observability_pipelines/setup_opw/
-      parent: observability_pipelines
-      identifier: observability_pipelines_setup_opw
-      weight: 1
     - name: Log Volume Control
       url: observability_pipelines/log_volume_control/
       parent: observability_pipelines
       identifier: observability_pipelines_log_volume_control
-      weight: 2
+      weight: 1
     - name: Datadog Agent
       url: observability_pipelines/log_volume_control/datadog_agent/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_datadog_agent
-      weight: 2001
+      weight: 101
     - name: Fluent
       url: observability_pipelines/log_volume_control/fluent/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_fluent
-      weight: 2002
+      weight: 102
     - name: HTTP Client
       url: observability_pipelines/log_volume_control/http_client/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_http_client
-      weight: 2003
+      weight: 103
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/log_volume_control/splunk_hec/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_hec
-      weight: 2004
+      weight: 104
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/log_volume_control/splunk_tcp/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_tcp
-      weight: 2005
+      weight: 105
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/log_volume_control/sumo_logic_hosted_collector/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
-      weight: 2006
+      weight: 106
     - name: Syslog
       url: observability_pipelines/log_volume_control/syslog/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_syslog
-      weight: 2007
+      weight: 107
     - name: Dual Ship Logs
       url: observability_pipelines/dual_ship_logs/
       parent: observability_pipelines
       identifier: observability_pipelines_dual_ship_logs
-      weight: 3
+      weight: 2
     - name: Datadog Agent
       url: observability_pipelines/dual_ship_logs/datadog_agent/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_datadog_agent
-      weight: 3001
+      weight: 201
     - name: Fluent
       url: observability_pipelines/dual_ship_logs/fluent/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_fluent
-      weight: 3002
+      weight: 202
     - name: HTTP Client
       url: observability_pipelines/dual_ship_logs/http_client/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_http_client
-      weight: 3003
+      weight: 203
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/dual_ship_logs/splunk_hec/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_hec
-      weight: 3004
+      weight: 204
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/dual_ship_logs/splunk_tcp/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_tcp
-      weight: 3005
+      weight: 205
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
-      weight: 3006
+      weight: 206
     - name: Syslog
       url: observability_pipelines/dual_ship_logs/syslog/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_syslog
-      weight: 3007
+      weight: 207
     - name: Archive Logs
       url: observability_pipelines/archive_logs/
       parent: observability_pipelines
       identifier: observability_pipelines_archive_logs
-      weight: 4
+      weight: 3
     - name: Datadog Agent
       url: observability_pipelines/archive_logs/datadog_agent/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_datadog_agent
-      weight: 4001
+      weight: 301
     - name: Fluent
       url: observability_pipelines/archive_logs/fluent/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_fluent
-      weight: 4002
+      weight: 302
     - name: HTTP Client
       url: observability_pipelines/archive_logs/http_client/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_http_client
-      weight: 4003
+      weight: 303
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/archive_logs/splunk_hec/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_splunk_hec
-      weight: 4004
+      weight: 304
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/archive_logs/splunk_tcp/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_splunk_tcp
-      weight: 4005
+      weight: 305
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/archive_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_sumo_logic_hosted_collector
-      weight: 4006
+      weight: 306
     - name: Syslog
       url: observability_pipelines/archive_logs/syslog/
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_syslog
-      weight: 4007
+      weight: 307
     - name: Split Logs
       url: observability_pipelines/split_logs/
       parent: observability_pipelines
       identifier: observability_pipelines_split_logs
-      weight: 5
+      weight: 4
     - name: Datadog Agent
       url: observability_pipelines/split_logs/datadog_agent/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_datadog_agent
-      weight: 5001
+      weight: 401
     - name: Fluent
       url: observability_pipelines/split_logs/fluent/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_fluent
-      weight: 5002
+      weight: 402
     - name: HTTP Client
       url: observability_pipelines/split_logs/http_client/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_http_client
-      weight: 5003
+      weight: 403
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/split_logs/splunk_hec/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_splunk_hec
-      weight: 5004
+      weight: 404
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/split_logs/splunk_tcp/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_splunk_tcp
-      weight: 5005
+      weight: 405
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/split_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_sumo_logic_hosted_collector
-      weight: 5006
+      weight: 406
     - name: Syslog
       url: observability_pipelines/split_logs/syslog/
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_syslog
-      weight: 5007
+      weight: 407
     - name: Sensitive Data Redaction
       url: observability_pipelines/sensitive_data_redaction/
       parent: observability_pipelines
       identifier: observability_pipelines_sensitive_data_redaction
-      weight: 6
+      weight: 5
     - name: Datadog Agent
       url: observability_pipelines/sensitive_data_redaction/datadog_agent/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_datadog_agent
-      weight: 6001
+      weight: 501
     - name: Fluent
       url: observability_pipelines/sensitive_data_redaction/fluent/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_fluent
-      weight: 6002
+      weight: 502
     - name: HTTP Client
       url: observability_pipelines/sensitive_data_redaction/http_client/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_http_client
-      weight: 6003
+      weight: 503
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/sensitive_data_redaction/splunk_hec/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_splunk_hec
-      weight: 6004
+      weight: 504
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/sensitive_data_redaction/splunk_tcp/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_splunk_tcp
-      weight: 6005
+      weight: 505
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_sumo_logic_hosted_collector
-      weight: 6006
+      weight: 506
     - name: Syslog
       url: observability_pipelines/sensitive_data_redaction/syslog/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_syslog
-      weight: 6007
+      weight: 507
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
       identifier: observability_pipelines_update_existing_pipelines
+      weight: 6
+    - name: Advanced Configurations
+      url: observability_pipelines/advanced_configurations/
+      parent: observability_pipelines
+      identifier: observability_pipelines_advanced_configurations
       weight: 7
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
@@ -4696,16 +4691,26 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
       weight: 707
+    - name: Dynamic Sampling
+      url: logs/error_tracking/dynamic_sampling
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_dynamic_sampling
+      weight: 708
+    - name: Monitors
+      url: logs/error_tracking/monitors
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_monitors
+      weight: 709
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 708
+      weight: 710
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_troubleshooting
-      weight: 709
+      weight: 711
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5818,16 +5823,21 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
       weight: 806
+    - name: Monitors
+      url: real_user_monitoring/error_tracking/monitors
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_monitors
+      weight: 807
     - name: Identify Suspect Commits
       url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
-      weight: 807
+      weight: 808
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
-      weight: 808
+      weight: 809
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
@@ -6050,7 +6060,7 @@ menu:
       identifier: account_management_saml_google
       parent: account_management_saml
       weight: 405
-    - name: NoPassword
+    - name: LastPass
       url: account_management/saml/lastpass/
       identifier: account_management_saml_lastpass
       parent: account_management_saml

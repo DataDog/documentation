@@ -4,15 +4,15 @@ algolia:
   - api
 cascade:
 - _target:
-    path: /api/latest/downtimes/_index.md
+    path: /api/latest/downtimes
   aliases:
   - /api/latest/downtimes/s
 - _target:
-    path: /api/latest/ci-visibility-pipelines/_index.md
+    path: /api/latest/ci-visibility-pipelines
   aliases:
   - /api/latest/ci-visibility
 - _target:
-    path: /api/latest/dashboards/_index.md
+    path: /api/latest/dashboards
   aliases:
   - /api/screenboards/
 external_redirect: /api/latest/

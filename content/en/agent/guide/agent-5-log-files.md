@@ -1,6 +1,5 @@
 ---
 title: Agent 5 Log Files
-kind: Guide
 disable_toc: false
 ---
 
@@ -20,6 +19,8 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 | Windows Server 2003, XP or older     | `C:\Documents and Settings\All Users\Application Data\Datadog\logs\` |
 | SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
 | Source build                         | `~/.datadog-agent/supervisord/logs/`                                 |
+
+**Note**: For Windows Server 2008, Vista, and newer systems, the Agent logs are located in `C:\ProgramData\Datadog\logs`. `ProgramData` is a hidden folder.
 
 ## Agent log files
 

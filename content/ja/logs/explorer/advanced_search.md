@@ -10,7 +10,6 @@ further_reading:
 - link: /logs/explorer/saved_views/
   tag: ドキュメント
   text: 保存ビューについて
-kind: ドキュメント
 title: 高度な検索
 ---
 
