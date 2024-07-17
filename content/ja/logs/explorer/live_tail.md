@@ -13,6 +13,7 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: ドキュメント
   text: ログのリストビュー
+kind: documentation
 title: Live Tail
 ---
 
@@ -24,11 +25,11 @@ Live Tail を使用すると、インフラストラクチャー内のどこか�
 
 ## Live Tail ビュー
 
-[ログエクスプローラー][3]でタイムレンジの Live Tail オプションを選択し、ログが Datadog に取り込まれる際にログのクエリを実行します。
+[ログエクスプローラー][3]でタイムレンジの Live Tail オプションを選択し、ログが Datadog に取り込まれる際にログのクエリを実行します。クエリの詳細については、[ログ検索構文][4]を参照してください。
 
 {{< img src="logs/explorer/live_tail/livetail.mp4" alt="Live Tail のログ出力" video=true style="width:100%;" >}}
 
-インデックスされたログのクエリは[ログエクスプローラー][3]で行われますが、Live Tail 内のクエリでは事前に[ファセットを宣言][4]する必要は*ありません*。
+インデックスされたログのクエリは[ログエクスプローラー][3]で行われますが、Live Tail 内のクエリでは事前に[ファセットを宣言][5]する必要は*ありません*。
 
 **注**: 可読性を確保するため、クエリに一致する流入ログが多すぎる場合は Live Tail 出力のサンプリングが行われます。サンプリングは均一かつランダムに適用されるため、Live Tail ログは統計的に実際のログスループットを表すものとなります。流入するそれぞれのログを可視化する必要がある場合は、検索フィルターを追加してクエリのスコープを絞ります。
 
@@ -39,4 +40,5 @@ Live Tail を使用すると、インフラストラクチャー内のどこか�
 [1]: /ja/logs/indexes#exclusion-filters
 [2]: /ja/logs/log_configuration/pipelines
 [3]: /ja/logs/explorer
-[4]: /ja/logs/explorer/facets/
+[4]: /ja/logs/explorer/search_syntax/
+[5]: /ja/logs/explorer/facets/
