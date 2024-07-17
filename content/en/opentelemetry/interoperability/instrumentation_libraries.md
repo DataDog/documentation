@@ -147,7 +147,7 @@ func main() {
 	defer provider.Shutdown()
 	otel.SetTracerProvider(provider)
 
-	// configure the server with otelhttp instrumentation: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp
+	// configure the server with otelhttp instrumentation as you normally would using opentelemetry: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp
 	var mux http.ServeMux
 	mux.Handle("/hello", http.HandlerFunc(hello))
 	http.HandleFunc("/hello", hello)
