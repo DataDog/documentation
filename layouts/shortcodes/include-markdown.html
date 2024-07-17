@@ -1,6 +1,4 @@
 {{- $page := .Get 0 -}}
-{{- $page = replace $page "content/en/" "" -}}
-{{- $page = replace $page ".md" "" -}}
 
 {{- with .Site.GetPage $page -}}
     {{ .Content }}
