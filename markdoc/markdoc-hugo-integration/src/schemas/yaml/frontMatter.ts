@@ -4,12 +4,6 @@ import { SNAKE_CASE_REGEX, PREF_OPTIONS_ID_REGEX } from './../regexes';
 /**
  * The configuration of an individual page preference,
  * as defined in the front matter of a document.
- *
- * @example
- * display_name: Color
- * identifier: color
- * options_source: primary_color_options
- * default_value: blue  # optional override
  */
 export const PagePrefConfigSchema = z
   .object({
@@ -23,6 +17,14 @@ export const PagePrefConfigSchema = z
 /**
  * The configuration of an individual page preference,
  * as defined in the front matter of a document.
+ *
+ * @example
+ * {
+ *   display_name: "Database",
+ *   identifier: "database",
+ *   options_source: "dbm_database_options",
+ *   default_value: "postgres" // optional override
+ * }
  */
 export type PagePrefConfig = z.infer<typeof PagePrefConfigSchema>;
 
@@ -73,7 +75,30 @@ export const FrontmatterSchema = z.object({
 });
 
 /**
- * The front matter of a document required for Markdoc
- * (other keys are allowed but ignored by Markdoc).
+ * The front matter of a document required by the integration
+ * (additional keys are allowed in the front matter YAML,
+ * but are ignored by the integration).
+ *
+ * @example
+ * {
+ *   title: "Decorative Painting Tips",
+ *   page_preferences: [
+ *     {
+ *       display_name: "Color",
+ *       identifier: "color",
+ *       options_source: "color_options"
+ *     },
+ *     {
+ *       display_name: "Finish",
+ *       identifier: "finish",
+ *       options_source: "paint_finish_options"
+ *     },
+ *     {
+ *       display_name: "Paint color",
+ *       identifier: "paint_color",
+ *       options_source: "<FINISH>_<COLOR>_paint_options"
+ *     }
+ *   ]
+ * }
  */
 export type Frontmatter = z.infer<typeof FrontmatterSchema>;

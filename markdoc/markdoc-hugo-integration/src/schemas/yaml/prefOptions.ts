@@ -4,6 +4,11 @@ import { SNAKE_CASE_REGEX } from '../regexes';
 /**
  * An option for a preference,
  * as defined in the preference options configuration files.
+ *
+ * @example
+ * display_name: Postgres
+ * identifier: postgres
+ * default: true
  */
 const PrefOptionSchema = z
   .object({
@@ -14,9 +19,8 @@ const PrefOptionSchema = z
   .strict();
 
 /**
- * Preference options schema:
- * Validates the options YAML ingested from
- * configuration files.
+ * The validated preference options configuration
+ * ingested from YAML files.
  */
 export const PrefOptionsConfigSchema = z.record(
   z
@@ -38,5 +42,19 @@ export const PrefOptionsConfigSchema = z.record(
 /**
  * The validated preference options configuration
  * ingested from YAML files.
+ *
+ * @example
+ * {
+ *  primary_color_options: [
+ *   { identifier: 'red', display_name: 'Red', default: true },
+ *   { identifier: 'blue', display_name: 'Blue' },
+ *   { identifier: 'yellow', display_name: 'Yellow' }
+ *  ],
+ *  traffic_light_color_options: [
+ *   { identifier: 'red', display_name: 'Red', default: true },
+ *   { identifier: 'green', display_name: 'Green' },
+ *   { identifier: 'yellow', display_name: 'Yellow' }
+ *  ],
+ * }
  */
 export type PrefOptionsConfig = z.infer<typeof PrefOptionsConfigSchema>;
