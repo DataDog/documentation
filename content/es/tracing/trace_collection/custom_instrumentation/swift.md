@@ -14,7 +14,7 @@ title: Instrumentación personaizada para Swift
 
 Datadog brinda soporte técnico para la instrumentación personalizada para aplicaciones Swift cuando se utiliza el [OpenTelemetry SDK][1].
 
-## Lectura adicional
+## Leer más
 
 {{< nombre parcial="whats-next/whats-next.html" >}}
 
