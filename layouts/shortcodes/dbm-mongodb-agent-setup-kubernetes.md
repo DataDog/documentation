@@ -21,12 +21,13 @@ instances:
       - <HOST>:<PORT>
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     dbm: true
     cluster_name: <MONGO_CLUSTER_NAME>
-    reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>"\
+    database_autodiscovery:
+      enabled: true
+    reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>" \
   datadog/datadog
 ```
 
@@ -42,12 +43,13 @@ instances:
       - <HOST>:<PORT>
     username: datadog
     password: <UNIQUE_PASSWORD>
-    database: <DATABASE>
     options:
       authSource: admin
     dbm: true
     cluster_name: <MONGO_CLUSTER_NAME>
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
+    database_autodiscovery:
+      enabled: true
 ```
 
 ### Configure with Kubernetes service annotations
@@ -69,12 +71,14 @@ metadata:
           "hosts": ["<HOST>:<PORT>"],
           "username": "datadog",
           "password": "<UNIQUE_PASSWORD>",
-          "database": "<DATABASE>",
           "options": {
             "authSource": "admin"
           },
           "dbm": true,
           "cluster_name": "<MONGO_CLUSTER_NAME>",
+          "database_autodiscovery": {
+            "enabled": true
+          },
           "reported_database_hostname": "<DATABASE_HOSTNAME_OVERRIDE>"
         }]
       }

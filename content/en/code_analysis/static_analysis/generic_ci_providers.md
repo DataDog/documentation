@@ -6,6 +6,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
   text: "Monitor all your CI pipelines with Datadog"
+algolia:
+  tags: ['static analysis', 'ci pipeline', 'SAST']
 ---
 
 {{% site-region region="gov" %}}

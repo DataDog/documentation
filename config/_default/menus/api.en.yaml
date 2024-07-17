@@ -2196,7 +2196,7 @@ menu:
         operationids:
           - SearchSecurityMonitoringSignals
         unstable: []
-        order: 11
+        order: 13
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -2208,7 +2208,7 @@ menu:
         operationids:
           - ListSecurityMonitoringSignals
         unstable: []
-        order: 12
+        order: 14
     - name: Test an existing rule
       url: '#test-an-existing-rule'
       identifier: security-monitoring-test-an-existing-rule
@@ -2221,6 +2221,19 @@ menu:
           - TestExistingSecurityMonitoringRule
         unstable: []
         order: 8
+    - name: Convert an existing rule from JSON to Terraform
+      url: '#convert-an-existing-rule-from-json-to-terraform'
+      identifier: security-monitoring-convert-an-existing-rule-from-json-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertExistingSecurityMonitoringRule
+        unstable:
+          - v2
+        order: 11
     - name: Update an existing rule
       url: '#update-an-existing-rule'
       identifier: security-monitoring-update-an-existing-rule
@@ -2281,6 +2294,19 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 9
+    - name: Convert a rule from JSON to Terraform
+      url: '#convert-a-rule-from-json-to-terraform'
+      identifier: security-monitoring-convert-a-rule-from-json-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertSecurityMonitoringRuleFromJSONToTerraform
+        unstable:
+          - v2
+        order: 12
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
