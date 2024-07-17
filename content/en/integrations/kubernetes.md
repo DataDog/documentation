@@ -37,6 +37,7 @@ further_reading:
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
+{{< is_loggedin >}}
 ## Overview
 
 Get metrics and logs from Kubernetes in real time to:
