@@ -202,7 +202,7 @@ import { <VERSION> } from 'datadog-api-client';
 
 {{< programming-lang lang="rust" >}}
 #### Installation
-Run `cargo add datadog-api-client` or add the following to `Cargo.toml` under `[dependencies]`:
+Run `cargo add datadog-api-client`, or add the following to `Cargo.toml` under `[dependencies]`:
 
 ```
 datadog-api-client = "0"
