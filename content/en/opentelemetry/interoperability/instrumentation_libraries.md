@@ -159,6 +159,8 @@ func hello(w http.ResponseWriter, req *http.Request) {
 }
 ```
 
+{{< img src="opentelemetry/interoperability/go-otel-dropin-support.png" alt="go-dd-otelhttp">}}
+
 ## Configuration
 
 No additional configuration is required.
