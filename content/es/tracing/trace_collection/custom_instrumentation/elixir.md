@@ -14,7 +14,7 @@ title: Instrumentación personalizada para Elixir
 
 Datadog brinda soporte técnico para la instrumentación personalizada para aplicaciones Elixir cuando utilizas el [OpenTelemetry SDK][1].
 
-## Lectura adicional
+## Leer más
 
 {{< nombre parcial="whats-next/whats-next.html" >}}
 
