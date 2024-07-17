@@ -17,10 +17,19 @@ export type ParsingErrorReport = {
   lines: number[];
 };
 
+/**
+ * A module responsible for parsing Markdoc files into data structures
+ * such as ASTs and RenderableTreeNodes,
+ * extracting any validation errors encountered during parsing.
+ */
 export class FileParser {
   /**
    * Parse a Markdoc file and return its AST, frontmatter, partials,
    * and any validation errors encountered during parsing.
+   *
+   * @param markdocFile The path to the Markdoc file.
+   * @param partialsDir The directory containing any partials required by the Markdoc file.
+   * @returns An object containing the AST, frontmatter, partial ASTs by filepath, and any errors.
    */
   static parseMdocFile(markdocFile: string, partialsDir: string) {
     const markdocStr = fs.readFileSync(markdocFile, 'utf8');
@@ -49,6 +58,10 @@ export class FileParser {
 
   /**
    * Recursively build the ASTs of all partials required by the given AST.
+   *
+   * @param ast An AST node.
+   * @param partialsDir The directory containing any partials required by the AST.
+   * @returns An object containing the partial ASTs by filepath, and any errors.
    */
   private static buildPartialASTs(
     ast: Node,
@@ -74,8 +87,11 @@ export class FileParser {
   }
 
   /**
-   * Scan an AST for references to partial files,
+   * Recursively scan an AST for references to partial files,
    * and return a list of the paths to those partial files.
+   *
+   * @param node An AST node.
+   * @returns A list of partial file paths.
    */
   private static extractPartialPaths(node: Node): string[] {
     let partialPaths: string[] = [];
@@ -102,6 +118,9 @@ export class FileParser {
 
   /**
    * Extract all validation errors from an AST.
+   *
+   * @param p An object containing the AST node and the file path.
+   * @returns A list of parsing error reports.
    */
   private static extractErrors(p: { node: Node; file: string }): ParsingErrorReport[] {
     let errors: ParsingErrorReport[] = [];
@@ -121,6 +140,9 @@ export class FileParser {
   /**
    * Collect all variable identifiers referenced in the markup.
    * (The markup must first be parsed into a renderable tree.)
+   *
+   * @param node A renderable tree.
+   * @returns A list of variable identifiers found in the tree.
    */
   static collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
     let variableIdentifiers: string[] = [];
@@ -176,6 +198,14 @@ export class FileParser {
     return Array.from(new Set(variableIdentifiers));
   }
 
+  /**
+   * Build a renderable tree from the AST, frontmatter, partials, and default values.
+   * The renderable tree is used to render HTML output at compile time,
+   * and when the end user changes a content preference setting.
+   *
+   * @param p An object containing the data required to build a renderable tree.
+   * @returns A renderable tree.
+   */
   static buildRenderableTree(p: {
     frontmatter: Frontmatter;
     prefOptionsConfig: PrefOptionsConfig;

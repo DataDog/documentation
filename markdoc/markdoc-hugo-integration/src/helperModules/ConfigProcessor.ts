@@ -17,9 +17,12 @@ import { PLACEHOLDER_REGEX } from '../schemas/regexes';
  */
 export class ConfigProcessor {
   /**
-   * When given a directory that contains YAML files of preference options,
-   * load all of the preference options into a single object,
-   * and validate the object as a whole.
+   * Load all of the preference options files in a directory
+   * into a single object, and validate the object as a whole.
+   * For example, duplicate options set IDs are not allowed.
+   *
+   * @param dir The directory containing the preference options YAML files.
+   * @returns A PrefOptionsConfig object.
    */
   static loadPrefOptionsFromDir(dir: string): PrefOptionsConfig {
     const filenames = FileManager.findInDir(dir, /\.ya?ml$/);
@@ -42,12 +45,19 @@ export class ConfigProcessor {
     return prefOptions;
   }
 
+  /**
+   * Load a preference options configuration from a YAML file.
+   *
+   * @param yamlFile The path to a YAML file containing preference options.
+   * @returns A PrefOptionsConfig object.
+   */
   static loadPrefsYamlFromStr(yamlFile: string): PrefOptionsConfig {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
-    const parsedYaml = yaml.load(yamlFileContent) as PrefOptionsConfig;
+    const parsedYaml = yaml.load(yamlFileContent);
     return PrefOptionsConfigSchema.parse(parsedYaml);
   }
 
+  // TODO: Not in use yet, old demo code.
   static loadSitewidePrefsConfigFromFile(yamlFile: string): string[] {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent) as SitewidePrefIdsConfig;
@@ -61,6 +71,9 @@ export class ConfigProcessor {
    *
    * This is useful for rendering the default version of a page,
    * before the user has interacted with any preference controls.
+   *
+   * @param {Frontmatter} frontmatter A Frontmatter object.
+   * @param {PrefOptionsConfig} prefOptionsConfig A PrefOptionsConfig object.
    */
   static getDefaultValuesByPrefId(
     frontmatter: Frontmatter,
@@ -99,6 +112,10 @@ export class ConfigProcessor {
    * Verify that all placeholders refer to valid pref IDs,
    * and that all potential options sources generated
    * by those placeholders are valid.
+   *
+   * @param frontmatter A Frontmatter object, parsed from the front matter of an .mdoc file.
+   * @param prefOptionsConfig A PrefOptionsConfig object, parsed
+   * from the preference options YAML files.
    */
   static validatePlaceholders(
     frontmatter: Frontmatter,
@@ -174,6 +191,8 @@ export class ConfigProcessor {
    * For example, if there is a <COLOR> placeholder, there must
    * also be a page pref with the identifier 'color', and it must
    * have been defined in the frontmatter before the placeholder is referenced.
+   *
+   * @param frontmatter A Frontmatter object.
    */
   static validatePlaceholderReferences(frontmatter: Frontmatter): void {
     if (!frontmatter.page_preferences) {
@@ -209,11 +228,17 @@ export class ConfigProcessor {
   }
 
   /**
-   * When given arrays of segments, such as
-   * [['red', 'blue'], ['gloss', 'matte'], ['paint'], ['options']],
-   * generate all possible combinations of the segments in snake_case,
-   * such as ['red_gloss_paint_options', 'red_matte_paint_options',
-   * 'blue_gloss_paint_options', 'blue_matte_paint_options'].
+   * When given arrays of the segments of a potential snake_case string,
+   * generate all possible combinations of the segments in snake_case.
+   *
+   * @param {any[]} arr An array of arrays of strings. Each array represents
+   * a set of possible values for a segment of a snake_case string.
+   * @returns {string[]} An array of all possible snake_case combinations.
+   *
+   * @example
+   * const segments = [['red', 'blue'], ['gloss', 'matte'], ['paint'], ['options']];
+   * ConfigProcessor.buildSnakeCaseCombinations(segments);
+   * // returns ['red_gloss_paint_options', 'red_matte_paint_options', 'blue_gloss_paint_options', 'blue_matte_paint_options']
    */
   static buildSnakeCaseCombinations(arr: any[], str: string = '', final: any[] = []) {
     if (arr.length > 1) {
