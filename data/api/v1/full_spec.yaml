@@ -3194,10 +3194,12 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
       enum:
