@@ -104,7 +104,7 @@ datadog-ci git-metadata upload
 datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff-aware <...other-options...>
 ```
 
-**Note:** When a diff-aware scan cannot be completed, the fallback will be to scan the entire directory.
+**Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
 ## Further Reading
 
