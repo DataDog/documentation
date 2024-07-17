@@ -2032,12 +2032,38 @@ menu:
       parent: incidents
       identifier: incidents_guide
       weight: 10
+    - name: On-Call
+      url: service_management/on-call/
+      pre: incidents
+      parent: service_management_heading
+      identifier: oncall
+      weight: 30000
+    - name: Teams
+      url: service_management/on-call/teams/
+      parent: oncall
+      identifier: oncall_teams
+      weight: 1
+    - name: Escalation Policies
+      url: service_management/on-call/escalation_policies/
+      parent: oncall
+      identifier: oncall_escalation_policies
+      weight: 2
+    - name: Schedules
+      url: service_management/on-call/schedules/
+      parent: oncall
+      identifier: oncall_schedules
+      weight: 3
+    - name: Profile Settings
+      url: service_management/on-call/profile_settings/
+      parent: oncall
+      identifier: oncall_profile_settings
+      weight: 4
     - name: Event Management
       url: service_management/events/
       pre: events
       identifier: events
       parent: service_management_heading
-      weight: 30000
+      weight: 40000
     - name: Ingest Events
       url: service_management/events/ingest/
       identifier: event_ingest
@@ -2168,7 +2194,7 @@ menu:
       pre: case-management
       parent: service_management_heading
       identifier: case_management
-      weight: 40000
+      weight: 50000
     - name: Projects
       url: service_management/case_management/projects
       parent: case_management
