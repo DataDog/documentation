@@ -6,7 +6,7 @@ cascade:
     path: /infrastructure/resource_catalog/aws_iam_user
     lang: ko
   aliases:
-  - ko/security/cspm/custom_rules/aws_iam_user/
+  - /ko/security/cspm/custom_rules/aws_iam_user/
 - _target:
     path: /infrastructure/**/*
     lang: ko

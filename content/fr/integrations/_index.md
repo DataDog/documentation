@@ -14,7 +14,7 @@ cascade:
     path: /integrations/akamai_datastream_2
     lang: fr
   aliases:
-  - fr/integrations/akamai_datastream
+  - /fr/integrations/akamai_datastream
 - _target:
     path: /integrations/azure
     lang: fr
@@ -73,73 +73,73 @@ cascade:
     tags:
     - event viewer
   aliases:
-  - fr/integrations/eventviewer/
+  - /fr/integrations/eventviewer/
 - _target:
     path: /integrations/lambdatest_license
     lang: fr
   aliases:
-  - fr/integrations/lambdatest_software_license/
+  - /fr/integrations/lambdatest_software_license/
 - _target:
     path: /integrations/mongo
     lang: fr
   aliases:
-  - fr/integrations/mongodb/
+  - /fr/integrations/mongodb/
 - _target:
     path: /integrations/rapdev_validator
     lang: fr
   aliases:
-  - fr/integrations/rapdev_dashboard_widget_pack/
+  - /fr/integrations/rapdev_dashboard_widget_pack/
 - _target:
     path: /integrations/wmi_check
     lang: fr
   aliases:
-  - fr/integrations/wmi/
+  - /fr/integrations/wmi/
 - _target:
     path: /integrations/jfrog_platform_self_hosted
     lang: fr
   aliases:
-  - /integrations/jfrog_platform/
+  - /fr/integrations/jfrog_platform/
 - _target:
     path: /integrations/komodor_license
     lang: fr
   aliases:
-  - fr/integrations/komodor_komodor/
+  - /fr/integrations/komodor_komodor/
 - _target:
     path: /integrations/stormforge_license
     lang: fr
   aliases:
-  - /integrations/stormforge_stormforge_license/
+  - /fr/integrations/stormforge_stormforge_license/
 - _target:
     path: /integrations/feed
     lang: fr
   aliases:
-  - fr/integrations/rss/
+  - /fr/integrations/rss/
 - _target:
     path: /integrations/java
     lang: fr
   aliases:
-  - fr/agent/faq/jmx_integrations/
-  - fr/agent/faq/docker-jmx/
+  - /fr/agent/faq/jmx_integrations/
+  - /fr/agent/faq/docker-jmx/
 - _target:
     path: /integrations/amazon_elb
     lang: fr
   aliases:
-  - fr/integrations/awselb
+  - /fr/integrations/awselb
 - _target:
     path: /integrations/elastic
     lang: fr
   aliases:
-  - fr/integrations/awses
+  - /fr/integrations/awses
 - _target:
     path: /integrations/amazon_s3
     lang: fr
   aliases:
-  - /integrations/awss3
+  - /fr/integrations/awss3
 - _target:
     path: /integrations/snowflake_web
     lang: fr
   aliases:
-  - fr/integrations/snowflake/
+  - /fr/integrations/snowflake/
 description: Rassembler des données de tous vos systèmes, toutes vos applications
   et tous vos services
 disable_sidebar: true
