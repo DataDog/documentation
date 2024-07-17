@@ -23,7 +23,7 @@ If you experience unexpected behavior while using the APM product, the steps on 
 
 ## Trace metric related issues
 
-{{% collapse-content title="There are more traces in the Trace Explorer page than on the Monitor's page" level="h4" %}}
+{{% collapse-content title="There are more traces on the Trace Explorer page than on the Monitor's page" level="h4" %}}
 
 This is an expected behavior <strong> if </strong> you do not have [custom retention filters][4]. 
 
@@ -82,7 +82,7 @@ To have the service names merged into one, you can use one(1) of these two optio
 
 
 
-{{% collapse-content title="There is an unexpected increase in ingested/indexed spans in the Plan and Usage page" level="h4" %}}
+{{% collapse-content title="There is an unexpected increase in ingested/indexed spans on the Plan and Usage page" level="h4" %}}
 
 Spikes in data ingestion and indexing can be a result of multiple things(share some reasons.. from reasonX to reasonY). To dive into what specifically might be causing this increase, use the [estimated usage metrics][11]:
 
