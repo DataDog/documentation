@@ -40,30 +40,18 @@ Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
 
 Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support](/help/).
 
-### Specify application details in the UI
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
-2. Choose `Unity` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
-
-To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][2].
-
-### Sample RUM sessions
-
-You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
-
 ### Installing
 
-1. Install [External Dependency Manager for Unity (EDM4U)][3]. This can be done using [Open UPM][4].
+1. Install [External Dependency Manager for Unity (EDM4U)](https://github.com/googlesamples/unity-jar-resolver). This can be done using [Open UPM](https://openupm.com/packages/com.google.external-dependency-manager/).
 
-2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][5].
+2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package](https://github.com/DataDog/unity-package).  The package url is `https://github.com/DataDog/unity-package.git`.
 
-3. Configure your project to use [Gradle templates][6], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
+> [!NOTE]
+> Datadog plans on adding support for Open UPM after Beta.
 
-4. In the iOS setting for External Dependency Manager (**Assets** > **External Dependency Manager** > **iOS Resolver** > **Settings**), disable the **Link frameworks statically** option and ensure that **Allow the same pod to be in multiple targets** is enabled.
+4. Configure your project to use [Gradle templates](https://docs.unity3d.com/Manual/gradle-templates.html), and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
-5. If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following block in the `dependencies` block in your `mainTemplate.gradle`:
+5. If you build and receive `Duplicate class` errors (common in Unity 2022.x) add the following block in the `dependencies` block in your `mainTemplate.gradle`:
 
    ```groovy
    constraints {
@@ -73,11 +61,47 @@ You can control the data your application sends to Datadog RUM during instrument
    }
    ```
 
-5. After adding the Datadog Unity SDK, configure Datadog from your Project Settings:
+### Specify application details in the UI
 
-    1. Enable Datadog and RUM
-    2. Copy your `Client Token` and `Application Id` into the fields in the settings window.
-    3. Verify that your `Site` is correct.
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
+2. Choose `Unity` as the application type.
+3. Provide an application name to generate a unique Datadog application ID and client token.
+4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
+
+To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][2].
+
+### Specify Datadog settings in the Unity UI
+
+After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your `Project Settings` and click on the `Datadog` section on the right hand side. You will see the following screen:
+
+{{<img src="real_user_monitoring/unity/datadog-setup-ui.png">}}
+
+The following parameters are available:
+
+| Parameter | Required? | Description |
+| --------- | --------- | ----------- |
+| Enable Datadog | No | Whether Datadog should be enabled. Disabling Datadog will cause any of the Datadog APIs to fail, throw exceptions, or return `null` from any calls, and will only stop the SDK from sending any information. |
+| Output Symbol Files | No | This option will enable output of symbol files for Datadog symbolication and file / line mapping features in Datadog Error tracking. |
+| Client Token | Yes | Your client token created for your application on Datadog's website. |
+| Env | No | The name of the environment for your application. Defaults to "prod" |
+| Datadog Site | Yes | The site you send your data to. |
+| Custom Endpoint | No | A custom endpoint or proxy to send Datadog data through. Mostly used for debugging. |
+| Batch Size | Yes | Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the SDK (small batches mean more requests, but each request becomes smaller in size). |
+| Upload Frequency | Yes | Sets the preferred frequency of uploading data to Datadog. |
+| Batch Processing Level | Yes | Defines the maximum amount of batches processed sequentially without a delay within one reading/uploading cycle. |
+| Enable Crash Reporting | No | Enables crash reporting in the RUM SDK. |
+| Forward Unity Logs | No | Whether to forward logs made from Unity's `Debug.Log` calls to Datadog's default logger. |
+| Remote Log Threshold | Yes | The level at which the default logger will foward logs to Datadog. Below this level will not be sent. |
+| Enable RUM | No | Whether to enable sending data from Datadog's Real User Monitoring APIs |
+| Enable Automatic Scene Tracking | No | Whether or not Datadog should automatically track new View's by interceping Unity's `SceneManager` loading |
+| RUM Applicaiton Id | Yes (If RUM is enabled) | The RUM Application ID created for your application on Datadog's website. |
+| Session Sample Rate | Yes | The percentage of sessions that will sent to Datadog. Between 0 and 100. |
+| Trace Sample Rate | Yes | The percentage of distributed traces that will be sent to Datadog. Between 0 and 100. |
+| First Party Hosts | No | To enable distributed tracing, you must specify which hosts are considered "first party" and will have trace information injected. |
+
+### Sample RUM sessions
+
+You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
 
 ## Using Datadog
 
@@ -119,7 +143,7 @@ You can also create additional loggers for more fine grained control of threshol
 ```cs
 var logger = DatadogSdk.Instance.CreateLogger(new DatadogLoggingOptions()
 {
-    SendNetworkInfo = true,
+    NetworkInfoEnabled = true,
     DatadogReportingThreshold = DdLogLevel.Debug,
 });
 logger.Info("Hello from Unity!");
@@ -137,6 +161,17 @@ logger.Debug("Hello with attributes", new()
     },
 });
 ```
+
+The following parameters are available when creating a new logger:
+
+| Parameter | Description | Default |
+| --------- | ----------- | ------- |
+| `Service` | The name of the service to associate with this logger. | The application's service name.
+| `Name` | The name of the logger | None |
+| `NetworkInfoEnabled` | Whether to bundle information about the user's network state with each log. | `false` |
+| `BundleWithRumEnabled` | Whether to bundle RUM session information with each log. | `true` |
+| `RemoteSampleRate` | The percentage of logs from this logger to send logs to Datadog, as a whole percent. | `100` |
+| `RemoteLogThreshold` | The threshold above which logs should be sent to Datadog. | `DdLogLevel.Debug` |
 
 ### Real User Monitoring (RUM)
 
