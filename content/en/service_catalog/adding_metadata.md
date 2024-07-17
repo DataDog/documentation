@@ -398,7 +398,7 @@ If the service has not been assigned any service definition metadata, or if the 
 
 ### Store and edit service definitions in GitHub
 
-Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
+Configure the [GitHub integration][17] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
 
 To install the GitHub integration, navigate to the [integration tile][7] and click **Link GitHub Account** in the **Repo Configuration** tab. 
 
@@ -427,6 +427,14 @@ For more information, see the [Datadog Provider documentation][9].
 As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider][12]. 
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
+
+## IDE Plugins
+
+Datadog provides a [JSON Schema][17] for service definitions so that when you are editing a service definition in a [supporting IDE][18], features such as autocomplete and validation are provided. The [JSON schema for Datadog service definitions][19] is registered with the open source [Schema Store][18].
+
+The plugin supports the new v3.0 schema and includes information that will tell your IDEs which filenames it applies to—specifically, the files entity.datadog.yaml, entity.datadog.yml, and entity.datadog.json to quickly and accurately complete your entity definition file without referencing documentation. In the example below, the IDE automatically creates keys as you fill out the entity definition.
+
+{{< img src="tracing/service_catalog/service_catalog_ide.mp4" video=true alt="Using the IDE plugin to atucomplete and validate definitions" style="width:100%;" >}}
 
 ## Build custom extensions 
 
@@ -468,4 +476,6 @@ extensions:
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [15]: https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json
 [16]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
-
+[17]: http://json-schema.org/
+[18]: https://www.schemastore.org/json/
+[19]: https://raw.githubusercontent.com/DataDog/schema/main/service-catalog/version.schema.json
