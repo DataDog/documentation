@@ -15,7 +15,7 @@ further_reading:
   text: Learn about Error Tracking
 - link: https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/
   tag: Blog
-  text: RUM now offers React Native Crash Reporting and Error Tracking
+  text: Datadog now offers React Native Crash Reporting and Error Tracking
 
 ---
 
@@ -33,7 +33,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the RUM React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native RUM setup documentation][3].
+If you have not set up the React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native setup documentation][3].
 
 ### Add Crash Reporting
 
@@ -43,7 +43,7 @@ Update your initialization snippet to enable native JavaScript crash reporting:
 const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
+    '<APPLICATION_ID>',
     true,
     true,
     true // enable JavaScript crash reporting
@@ -120,7 +120,7 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 ## Test your implementation
 
-To verify your React Native Crash Reporting and Error Tracking configuration, you need to issue an error in your RUM application and confirm that the error appears in Datadog.
+To verify your React Native Crash Reporting and Error Tracking configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 
