@@ -1,6 +1,9 @@
 ---
 title: Software Templates
 further_reading:
+- link: "https://www.datadoghq.com/blog/golden-path-software-templates-datadog-app-builder-workflows/"
+  tag: "Blog"
+  text: "Create golden paths for engineering teams"
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate incidents faster with App Builder"
@@ -48,7 +51,7 @@ To use software templates in Datadog, create a git repository with the desired t
    - Navigate to **Service Mgmt** > **App Builder**, and select your app. Fill out the template form, and click the submit button.
    - Track the success of the workflow templating process in [Workflow Automation][3].
 
-  {{< img src="tracing/service_catalog/templating-app.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
+  {{< img src="tracing/service_catalog/software_templating_gallery.png" alt="Manage software templates through App Builder" style="width:100%;" >}}
 
 ### Find Service Catalog actions
 To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][7]. Filter for the actions you need:
