@@ -23,20 +23,22 @@ If you experience unexpected behavior while using the APM product, the steps on 
 
 ## Trace metric related issues
 
-{{% collapse-content title="There are more traces in the Trace Explorer page than in other parts of Datadog" level="h4" %}}
+{{% collapse-content title="The Trace Explorer page shows more traces than the monitor's page" level="h4" %}}
 
 This is an expected behavior <strong> if </strong> you do not have [custom retention filters][4]. 
 
 The [Trace Explorer][12] page allows you to search all ingested or indexed spans using any tag on any span. As such you can easily query on any of your traces on the Trace Explorer page. 
 
-Datadog has some [retention filters][13] that are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces.
-After spans have been ingested, they are retained by
-- the [Datadog intelligent filter][2] by default, 
-- the [1% flat sampling][3] by default, 
+ After spans have been ingested, they are retained by the [Datadog intelligent filter][2] by default. Datadog has other[retention filters][13] that are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces.
 
-However, in order to use use these traces outside of the trace explorer page, you need to set the [custom retention filters][4]. (what is the reasoning behind this? is it because of the sheer volume?)
+In order to use these traces in your monitors, however, you need to set the [custom retention filters][4].
 
-The custom retention filter allows you to decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. You can also set a percentage of spans matching each filter to be retained. These indexed traces can then be searched in other parts of the Datadog platform. 
+The custom retention filter allows you to decide which spans are indexed and [retained][16] by creating, modifying, and disabling additional filters based on tags. You can also set a percentage of spans matching each filter to be retained. These indexed traces can then be used in your monitors. 
+
+| PRODUCT | SPAN SOURCE |
+| ------- | ------------ |
+| Monitors     | Spans from custom retention filters |
+| Other products <br> <i> (Dashboard, Notebook etc.)</i> | Spans from custom retention filters + Datadog intelligent filter |
 
 {{% /collapse-content %}} 
 
@@ -135,3 +137,4 @@ If you need to accommodate larger volumes, contact [Datadog support][1] with you
 [13]: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters
 [14]: https://app.datadoghq.com/services
 [15]: https://docs.datadoghq.com/metrics/#naming-metrics 
+[16]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/
