@@ -15,7 +15,7 @@ type: multi-code-lang
 
 ## Versiones
 
-La blblioteca cliente de APM de Python sigue una [política de control de versiones][1] en la cual se especifica el nivel de soporte técnico para las diferentes versiones de la biblioteca y el tiempo de ejecución de Python.
+La biblioteca cliente de APM de Python sigue una [política de control de versiones][1] en la cual se especifica el nivel de soporte técnico para las diferentes versiones de la biblioteca y el tiempo de ejecución de Python.
 
 Se admiten dos ramificaciones de versiones:
 
