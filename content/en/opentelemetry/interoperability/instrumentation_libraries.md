@@ -119,11 +119,11 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 ## Compatibility requirements
 
-The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API](https://github.com/open-telemetry/opentelemetry-go/tree/main/trace). This includes the [opentelemetry-go-contrib/instrumentation](https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation) libraries, however, anything that relies on metrics or logs exporters is not supported at this time.
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][1]. This includes the [opentelemetry-go-contrib/instrumentation][2] libraries, however, anything that relies on metrics or logs exporters is not supported at this time.
 
 ## Getting started
 
-Set up the Datadog trace provider and configure Opentelemetry to use the Datadog trace provider as per the Imports and Setup instructions listed in the [Go Custom Instrumentation using OpenTelemetry API guide](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports).
+Set up the Datadog trace provider and configure Opentelemetry to use the Datadog trace provider as per the Imports and Setup instructions listed in the [Go Custom Instrumentation using OpenTelemetry API guide][3].
 
 Then, follow the instructions of your chosen opentelemetry-go-contrib library to instrument your service.
 
@@ -202,3 +202,7 @@ No additional configuration is required.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
+[2]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
+[3]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
