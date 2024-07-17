@@ -81,9 +81,9 @@ PHP APM es compatible con las siguientes arquitecturas:
 
 #### Compatibilidad con marcos web
 
-Por defecto, Datadog **soporta todos los marcos web PHP** desde el primer momento, ya sea con instrumentación al nivel de los marcos o con rastreo web genérico.
+Por defecto, Datadog **soporta todos los marcos web de PHP** desde el primer momento, ya sea con instrumentación al nivel del marco o con rastreo web genérico.
 
-La instrumentación al nivel del marco incluye el rastreo de métodos internos y etiquetado de marcos específicos.
+La instrumentación al nivel del marco incluye el rastreo de métodos internos y el etiquetado de marcos específicos.
 
 El rastreo web genérico incluye un tramo (span) `web.request` para rastrear la latencia y los errores que se originan en la llamada, además de tramos para las <txprotected>bibliotecas</txprotected> con soporte técnico - por ejemplo: base de datos y clientes HTTP.
 
