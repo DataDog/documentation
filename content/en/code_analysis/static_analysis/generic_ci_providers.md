@@ -97,14 +97,14 @@ Diff-aware scanning is a feature that enables Datadog Static Analysis to only sc
 2. Add a call to `datadog-ci git-metadata upload` before invoking the static analyzer. This command ensures that Git metadata is available to the Datadog backend. Git metadata is required to calculate the number of files to analyze.
 3. Ensure that the datadog-static-analyzer is invoked with the flag `--diff-aware`.
 
-Example of commands sequence:
+Example of commands sequence (these commands must be invoked in your Git repository):
 ```bash
 datadog-ci git-metadata upload
 
-datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –diff-aware <...other-options...>
+datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff-aware <...other-options...>
 ```
 
-**Note:** These commands must be invoked in your Git repository.
+**Note:** When a diff-aware scan cannot be completed, the fallback will be to scan the entire directory.
 
 ## Further Reading
 
