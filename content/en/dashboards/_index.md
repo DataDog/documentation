@@ -111,7 +111,7 @@ View your dashboards in a mobile-friendly format with the Datadog Mobile App, av
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/mobile/
+[1]: /mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists
