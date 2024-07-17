@@ -27,7 +27,8 @@ further_reading:
       text: 'Ruby SDK Configuration'
 ---
 
-Datadog SDKs support the following OpenTelemetry configuration options, allowing you to use OpenTelemetry environment variables to configure Datadog tracing for your applications.
+Datadog SDKs implement the OpenTelemetry Tracing APIs, allowing you to use OpenTelemetry environment variables to configure Datadog tracing for your applications. Replace the OpenTelemetry SDK with the Datadog SDK in your application to receive traces and additional Datadog telemetry with minimal changes to your existing configuration.
+This page describes the OpenTelemetry SDK options Datadog supports.
 
 <div class="alert alert-info">If both Datadog and OpenTelemetry environment variables are set, Datadog takes precedence. Datadog defaults also override OpenTelemetry defaults. See the relevant <a href="/tracing/trace_collection/library_config/">SDK Configuration page</a> for default values and more information.</div>
 
