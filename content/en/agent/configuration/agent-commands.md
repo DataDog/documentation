@@ -56,7 +56,7 @@ List of commands to restart the Datadog Agent:
 | Linux      | See the [Agent documentation][1] for your OS.                                    |
 | Docker     | Use the [installation command][2].                                               |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
-| macOS      | run `stop` then `start`, *or* through the systray app                            |
+| macOS      | Stop and then start the Agent with:<br>`launchctl stop com.datadoghq.agent`<br>`launchctl start com.datadoghq.agent`<br>Or use the systray app |
 | Source     | *unsupported Platform*                                                           |
 | Windows    | See the [Windows Agent documentation][3].                                        |
 

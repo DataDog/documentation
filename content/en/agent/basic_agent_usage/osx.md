@@ -47,7 +47,7 @@ In Agent v6 and v7, the `launchctl` service manager provided by the operating sy
 |------------------------------------|------------------------------------------------------|
 | Start Agent as a service           | `launchctl start com.datadoghq.agent` or systray app |
 | Stop Agent running as a service    | `launchctl stop com.datadoghq.agent` or systray app  |
-| Restart Agent running as a service | _run `stop` then `start`_ or systray app             |
+| Restart Agent running as a service | Stop and then start the Agent with:<br>`launchctl stop com.datadoghq.agent`<br>`launchctl start com.datadoghq.agent`<br>Or use the systray app |
 | Status of Agent service            | `launchctl list com.datadoghq.agent` or systray app  |
 | Status page of running Agent       | `datadog-agent status` or web GUI                    |
 | Send flare                         | `datadog-agent flare` or web GUI                     |
