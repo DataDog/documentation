@@ -11,7 +11,7 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
  - Symbolicated iOS crash reports
  - Trend analysis with iOS error tracking
 
-In order to symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
+To symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -91,7 +91,7 @@ By default, app hangs reporting is **disabled**, but you can enable it and set y
 
 App hangs are reported through the iOS SDK (not through [Logs][4]).
 
-When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. There are two types of hangs:
+When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a _hang_ in [**Error Tracking**][1]. There are two types of hangs:
 
 - **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking.
 
@@ -139,7 +139,7 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 ### Add watchdog terminations reporting
 
-In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These Watchdog Terminations are fatal and not recoverable (more details in the official [Apple documentation][12]).
+In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These watchdog terminations are fatal and not recoverable (more details in the official [Apple documentation][12]).
 
 By default, watchdog terminations reporting is **disabled**, but you can enable it by using the `trackWatchdogTerminations` initialization parameter.
 
@@ -303,9 +303,6 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
 **Note:** Error Tracking supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create

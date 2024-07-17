@@ -1,5 +1,5 @@
 ---
-title: Frontend Error Tracking Private Alpha
+title: Frontend Error Tracking
 is_beta: true
 private: true
 further_reading:
@@ -11,7 +11,7 @@ further_reading:
     text: 'Error Tracking Issue States and Workflows'
 ---
 {{< callout url="#" btn_hidden="true" header="false">}}
-  Datadog is pleased to invite you to test the new standalone frontend Error Tracking experience. This product is in active development, please expect it to evolve with your usage and please be sure to let us know if you have any thoughts as you make use of it.
+  Datadog's standalone frontend Error Tracking experience is in private alpha. This product is in active development and may evolve with your usage.
 {{< /callout >}} 
 
 ## Overview
@@ -26,7 +26,7 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise
 - Set monitors on error tracking events, such as high error volume or new issues
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they occur
-- **NEW**: See a detailed timeline of steps a user took leading up to the error, simplifying the process to reproduce and resolve errors quickly
+- See a detailed timeline of steps a user took leading up to the error, simplifying the process to reproduce and resolve errors quickly
 
 ## Setup
 {{< whatsnext desc="To get started with Datadog Error Tracking, see the corresponding documentation:" >}}
