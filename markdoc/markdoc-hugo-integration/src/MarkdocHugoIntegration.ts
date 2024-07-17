@@ -1,11 +1,10 @@
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import { validatePlaceholders } from './helpers/frontmatterValidation';
-import { FileParser, ParsingErrorReport } from './FileParser';
+import { FileParser, ParsingErrorReport } from './helperModules/FileParser';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
-import { findInDir } from './helpers/filesystem';
+import { FileManager } from './helperModules/FileManager';
 import prettier from 'prettier';
-import { ConfigProcessor } from './ConfigProcessor';
+import { ConfigProcessor } from './helperModules/ConfigProcessor';
 
 export class MarkdocHugoIntegration {
   prefOptionsConfig: PrefOptionsConfig;
@@ -34,7 +33,7 @@ export class MarkdocHugoIntegration {
     this.sitewidePrefNames = ConfigProcessor.loadSitewidePrefsConfigFromFile(
       p.sitewidePrefsFilepath
     );
-    this.markdocFiles = findInDir(p.contentDir, /\.mdoc$/);
+    this.markdocFiles = FileManager.findInDir(p.contentDir, /\.mdoc$/);
     this.partialsDir = p.partialsDir;
   }
 
@@ -58,7 +57,7 @@ export class MarkdocHugoIntegration {
       // verify that all possible placeholder values
       // yield an existing options set
       try {
-        validatePlaceholders(frontmatter, this.prefOptionsConfig);
+        ConfigProcessor.validatePlaceholders(frontmatter, this.prefOptionsConfig);
       } catch (e) {
         if (e instanceof Error) {
           this.validationErrorsByFilePath[markdocFile] = e.message;

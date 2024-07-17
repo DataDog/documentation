@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "npm run build; vitest run --coverage",
+        "test": "npm run build; vitest run --coverage --reporter=verbose",
         "build-markdoc-integration": "rimraf ./dist && npx tsc",
         "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle --minify > ./dist/markdoc-client-renderer.min.js",
         "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle > ./dist/markdoc-client-renderer.js",
