@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/log_collection/javascript
   tag: Documentation
   text: Collecte de logs à partir des navigateurs
-kind: guide
 title: Conseils pour l'utilisation des outils de développement du navigateur
 ---
 

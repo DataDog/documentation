@@ -7,4 +7,4 @@ further_reading:
       text: Browser Session Replay
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/browser/developer_tools.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/browser/developer_tools" >}}
