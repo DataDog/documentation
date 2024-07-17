@@ -135,7 +135,7 @@ span.set_error(false);
 
 ## Propagar el contexto con extracción e inserción de cabeceras
 
-Puedes configurar la propagación del contexto para trazas (traces) distribuidas insertando y extrayendo cabeceras. Lee [Propagación del contexto de trazas][5] para obtener información.
+Puedes configurar la propagación del contexto para trazas distribuidas insertando y extrayendo cabeceras. Lee [Propagación del contexto de trazas][5] para obtener información.
 
 ## Filtrado de recursos
 
