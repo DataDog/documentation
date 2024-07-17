@@ -20,6 +20,7 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 To enable listening for SNMP Traps, add the following to `datadog.yaml`:
 
 ```yaml
+logs_enabled: true # Traps are forwarded as logs and can be found in the logs explorer with a `source:snmp-traps` query.
 network_devices:
   namespace: <NAMESPACE> # optional, defaults to "default".
   snmp_traps:
