@@ -1,0 +1,21 @@
+<div 
+x-data="{ 
+    showContent: null, 
+    getItem () {
+        const apiUrl = window.document.URL === 'docs.datadoghq.com'
+            ? 'https://www.datadoghq.com/locate'
+            : 'https://corpsite-staging.datadoghq.com/locate';
+
+        fetch(apiUrl, {credentials: 'include'})
+        .then(response => response.json())
+        .then(data => {
+            console.log('Loggedin?',data);
+            this.showContent = data.user_status;
+        })
+
+    }
+}"
+x-init="getItem"
+>
+    <span x-show="showContent" class="wow">WOWW</span>
+</div>
