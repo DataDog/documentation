@@ -19,9 +19,10 @@ further_reading:
 - link: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
   tag: faq
   text: Configuration d'intégration pour ECS Fargate
-- link: /agent/guide/secrets-management/
+- link: /agent/configuration/secrets-management/
   tag: Documentation
   text: Gestion des secrets
+kind: documentation
 title: Fonction Autodiscovery de l'Agent
 ---
 
@@ -134,6 +135,10 @@ La liste complète des fonctionnalités détectées automatiquement est disponib
 Une fois la fonction Autodiscovery activée, l'Agent Datadog essaie automatiquement de l'utiliser pour plusieurs [services][3], notamment Apache et Redis, en se basant sur les fichiers de configuration Autodiscovery par défaut.
 
 Vous pouvez définir un modèle d'intégration de plusieurs façons : avec des annotations de pod Kubernetes, des étiquettes Docker, un fichier de configuration monté sur l'Agent, une ConfigMap ou encore des stockages key/value. Consultez la section [Modèles d'intégration Autodiscovery][4] pour en savoir plus.
+
+### Remarques
+
+Si vous utilisez la fonctionnalité Autodiscovery et qu'une application est déployée dans un nouveau nœud, il est possible que les métriques ne s'affichent pas de suite dans Datadog. En effet, lorsque vous basculez vers un nouveau nœud, l'Agent Datadog met du temps à recueillir les métadonnées de votre application.
 
 ## Pour aller plus loin
 
