@@ -1915,36 +1915,41 @@ menu:
       parent: error_tracking
       identifier: error_tracking_default_grouping
       weight: 4
+    - name: Monitors
+      url: error_tracking/monitors
+      parent: error_tracking
+      identifier: error_tracking_monitors
+      weight: 5
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 5
+      weight: 6
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 6
+      weight: 7
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 7
+      weight: 8
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 8
+      weight: 9
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
-      weight: 9
+      weight: 10
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 10
+      weight: 11
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -3206,21 +3211,26 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
       weight: 1004
+    - name: Monitors
+      url: tracing/error_tracking/monitors
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_monitors
+      weight: 1005
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1005
+      weight: 1006
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1005
+      weight: 1007
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_troubleshooting
-      weight: 1006
+      weight: 1008
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4686,16 +4696,21 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_dynamic_sampling
       weight: 708
+    - name: Monitors
+      url: logs/error_tracking/monitors
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_monitors
+      weight: 709
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 709
+      weight: 710
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_troubleshooting
-      weight: 710
+      weight: 711
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5808,16 +5823,21 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
       weight: 806
+    - name: Monitors
+      url: real_user_monitoring/error_tracking/monitors
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_monitors
+      weight: 807
     - name: Identify Suspect Commits
       url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
-      weight: 807
+      weight: 808
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
-      weight: 808
+      weight: 809
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
