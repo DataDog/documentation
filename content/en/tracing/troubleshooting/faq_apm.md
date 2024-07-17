@@ -23,13 +23,13 @@ If you experience unexpected behavior while using the APM product, the steps on 
 
 ## Trace metric related issues
 
-{{% collapse-content title="The Trace Explorer page shows more traces than the monitor's page" level="h4" %}}
+{{% collapse-content title="There are more traces in the Trace Explorer page than on the Monitor's page" level="h4" %}}
 
 This is an expected behavior <strong> if </strong> you do not have [custom retention filters][4]. 
 
 The [Trace Explorer][12] page allows you to search all ingested or indexed spans using any tag on any span. As such you can easily query on any of your traces on the Trace Explorer page. 
 
- After spans have been ingested, they are retained by the [Datadog intelligent filter][2] by default. Datadog has other[retention filters][13] that are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces.
+ After spans have been ingested, they are retained by the [Datadog intelligent filter][2] by default. Datadog has other [retention filters][13] that are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces.
 
 In order to use these traces in your monitors, however, you need to set the [custom retention filters][4].
 
@@ -48,7 +48,7 @@ The custom retention filter allows you to decide which spans are indexed and [re
 
 </strong>[Trace metrics][6] </strong> are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. The trace metrics namespace is formatted as: `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
 
-[Custom span-based metrics][7] are generated based on your ingested spans which is dependent on your [trace ingestion sampling][8]. If your ingesting 50% of your traces, your custom span-based metrics will be based on the 50% ingested spans.
+[Custom span-based metrics][7] are generated based on your ingested spans which is dependent on your [trace ingestion sampling][8]. If you are ingesting 50% of your traces, your custom span-based metrics will be based on the 50% ingested spans.
 
 To have the value of the trace metric and the value of the custom span-based metric be the same, you would need to make sure you have a 100% ingestion rate configured for your application/service. 
 
