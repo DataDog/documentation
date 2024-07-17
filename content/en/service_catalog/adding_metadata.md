@@ -398,7 +398,7 @@ If the service has not been assigned any service definition metadata, or if the 
 
 ### Store and edit service definitions in GitHub
 
-Configure the [GitHub integration][17] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
+Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
 
 To install the GitHub integration, navigate to the [integration tile][7] and click **Link GitHub Account** in the **Repo Configuration** tab. 
 
