@@ -22,9 +22,9 @@ title: Instrumentación personalizada de C++ utilizando la API de Datadog
 Si aún no has leído las instrucciones de configuración, empieza por las <a href="https://docs.datadoghq.com/tracing/setup/cpp/">Instrucciones de configuración de C++</a>.
 </div>
 
-## Creación de tramos
+## Crear tramos
 
-Para Instrumentar manualmente un método:
+Para instrumentar manualmente un método:
 
 ```cpp
 {
@@ -46,7 +46,7 @@ Para Instrumentar manualmente un método:
 
 ## Añadir etiquetas
 
-Añade [etiquetas (tags) de tramos][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación en Datadog. Las etiquetas de tramos se aplican a tus trazas (traces) entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel de comercio, el importe del pago o el ID de usuario.
+Añade [etiquetas (tags) de tramos][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación en Datadog. Las etiquetas de tramos se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel de comercio, el importe del pago o el ID de usuario.
 
 Nota que algunas etiquetas de Datadog son necesarias para el [etiquetado de servicio unificado][3].
 
@@ -78,7 +78,7 @@ auto span2 = tracer.create_span(opts);
 Para configurar etiquetas en todos tus tramos, configura la variable de entorno `DD_TAGS` como una lista de pares de `key:value` separados por comas.
 
 ```
-exporta DD_TAGS=team:apm-proxy,key:value
+export DD_TAGS=team:apm-proxy,key:value
 ```
 
 ### Manualmente
