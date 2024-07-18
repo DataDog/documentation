@@ -30,7 +30,7 @@ Datadog instrumentation to avoid duplicate spans in the trace.
 </div>
 
 <div class="alert alert-info">
-Setting `DD_TRACE_OTEL_ENABLED=true` is not required when using the Datadog SDK for Go.
+DD_TRACE_OTEL_ENABLED is not required when using the Datadog SDK for Go.
 </div>
 
 ## Language support
