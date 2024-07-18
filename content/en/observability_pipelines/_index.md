@@ -66,7 +66,9 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
     - [Sensitive data redaction][6]
 1. Enable monitors.
 
-See [Advanced Configurations][7] for bootstrapping options and for details on setting up the Worker with Kubernetes.
+See [Set Up Pipelines][7] for more information.
+
+See [Advanced Configurations][8] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 ## Further Reading
 
@@ -78,4 +80,5 @@ See [Advanced Configurations][7] for bootstrapping options and for details on se
 [4]: /observability_pipelines/split_logs/
 [5]: /observability_pipelines/archive_logs/
 [6]: /observability_pipelines/sensitive_data_redaction/
-[7]: /observability_pipelines/setup_opw/
+[7]: /observability_pipelines/set_up_pipelines/
+[8]: /observability_pipelines/setup_opw/
