@@ -9,8 +9,5 @@ renderSegments:
 # Exclude all non-English languages
 segments:
   english:
-    excludes:
-    - lang: fr
-    - lang: ja
-    - lang: ko
-    - lang: es
+    includes:
+    - lang: en

@@ -3,26 +3,24 @@ buildfuture: true
 builddrafts: true
 enableGitInfo: true
 
-# Comment out locally to build all languages
+# can also be CLI flag
 renderSegments:
   - integrations
 
 # Exclude all non-English languages
 segments:
   english:
-    excludes:
-    - lang: fr
-    - lang: ja
-    - lang: ko
-    - lang: es
+    includes:
+    - lang: en
   integrations:
-    excludes:
-    - lang: fr
-    - lang: ja
-    - lang: ko
-    - lang: es
     includes:
     - path: '{/integrations,/integrations/**}'
+      lang: en
+  api:
+    includes:
+    - path: '{/api,/api/**}'
+      lang: en
+
 
 deployment:
     order:
