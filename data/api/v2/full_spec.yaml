@@ -26490,6 +26490,7 @@ paths:
         type: idempotent
   /api/v2/cost/aws_related_accounts:
     get:
+      deprecated: true
       description: List the AWS accounts in an organization by calling 'organizations:ListAccounts'
         from the specified management account.
       operationId: ListAWSRelatedAccounts
