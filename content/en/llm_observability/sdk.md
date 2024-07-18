@@ -72,7 +72,6 @@ LLMObs.enable(
   api_key="<YOUR_DATADOG_API_KEY>",
   site="<YOUR_DATADOG_SITE>",
   agentless_enabled=True,
-  integrations_enabled=True,
 )
 {{< /code-block >}}
 

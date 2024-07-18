@@ -11,7 +11,8 @@ fields_to_translate = [
     'desc',
     'description',
     'link_text',
-    'category'
+    'category',
+    'heading'
 ]
 string_collection_ids = [
     'o:datadog:p:documentation_loc:r:config__default_menus_main_en_yaml',

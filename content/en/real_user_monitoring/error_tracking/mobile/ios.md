@@ -27,7 +27,7 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
  - Symbolicated iOS crash reports
  - Trend analysis with iOS error tracking
 
-In order to symbolicate your stack traces, find and upload your .dSYM files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
+In order to symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -103,7 +103,7 @@ CrashReporting.enable()
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See the [dedicated section][5] for more guidance on what to set this value to.
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold][5] for more guidance on what to set this value to.
 
 App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
@@ -134,7 +134,7 @@ To enable app hang monitoring:
    )
    ```
 
-3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See the [following section][5] for more guidance on what to set this value to.
+3. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Configure the app hang threshold][5] for more guidance on what to set this value to.
 
    Make sure you follow the steps below to get [deobfuscated stack traces][6].
 
@@ -162,135 +162,135 @@ If all these prerequisites are met, then create a new [Timeseries widget][18] on
 
 {{< img src="real_user_monitoring/error_tracking/json-tab.png" alt="The modal to edit the configuration of a widget, with the JSON tab open" style="width:60%;" >}}
 
-<details>
-  <summary>JSON snippet of the hang rate widget</summary>
-  
-  ```json
-  {
-      "title": "Hang Rate",
-      "type": "timeseries",
-      "requests": [
-          {
-              "formulas": [
-                  {
-                      "number_format": {
-                          "unit": {
-                              "type": "custom_unit_label",
-                              "label": "seconds/hour"
-                          }
-                      },
-                      "formula": "(query2 * 3600000000000) / query1"
-                  }
-              ],
-              "queries": [
-                  {
-                      "name": "query2",
-                      "data_source": "rum",
-                      "search": {
-                          "query": "@type:error @error.category:\"App Hang\" @freeze.duration:>=250000000 @session.type:user"
-                      },
-                      "indexes": [
-                          "*"
-                      ],
-                      "group_by": [
-                          {
-                              "facet": "@application.name",
-                              "limit": 10,
-                              "sort": {
-                                  "aggregation": "sum",
-                                  "order": "desc",
-                                  "metric": "@freeze.duration"
-                              },
-                              "should_exclude_missing": true
-                          },
-                          {
-                              "facet": "version",
-                              "limit": 10,
-                              "sort": {
-                                  "aggregation": "sum",
-                                  "order": "desc",
-                                  "metric": "@freeze.duration"
-                              },
-                              "should_exclude_missing": true
-                          }
-                      ],
-                      "compute": {
-                          "aggregation": "sum",
-                          "metric": "@freeze.duration",
-                          "interval": 3600000
-                      },
-                      "storage": "hot"
-                  },
-                  {
-                      "name": "query1",
-                      "data_source": "rum",
-                      "search": {
-                          "query": "@type:session @session.type:user"
-                      },
-                      "indexes": [
-                          "*"
-                      ],
-                      "group_by": [
-                          {
-                              "facet": "@application.name",
-                              "limit": 10,
-                              "sort": {
-                                  "aggregation": "sum",
-                                  "order": "desc",
-                                  "metric": "@session.time_spent"
-                              },
-                              "should_exclude_missing": true
-                          },
-                          {
-                              "facet": "version",
-                              "limit": 10,
-                              "sort": {
-                                  "aggregation": "sum",
-                                  "order": "desc",
-                                  "metric": "@session.time_spent"
-                              },
-                              "should_exclude_missing": true
-                          }
-                      ],
-                      "compute": {
-                          "aggregation": "sum",
-                          "metric": "@session.time_spent",
-                          "interval": 3600000
-                      },
-                      "storage": "hot"
-                  }
-              ],
-              "response_format": "timeseries",
-              "style": {
-                  "palette": "dog_classic",
-                  "order_by": "values",
-                  "line_type": "solid",
-                  "line_width": "normal"
-              },
-              "display_type": "line"
-          }
-      ],
-      "yaxis": {
-          "include_zero": true,
-          "scale": "sqrt"
-      },
-      "markers": [
-          {
-              "value": "y > 12000000000",
-              "display_type": "error dashed"
-          },
-          {
-              "value": "6000000000 < y < 12000000000",
-              "display_type": "warning dashed"
-          },
-          {
-              "value": "0 < y < 6000000000",
-              "display_type": "ok dashed"
-          }
-      ]
-  }
-  ```
-</details>
+{{% collapse-content title="JSON snippet of the hang rate widget" level="h5" %}}
+
+```json
+{
+    "title": "Hang Rate",
+    "type": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "number_format": {
+                        "unit": {
+                            "type": "custom_unit_label",
+                            "label": "seconds/hour"
+                        }
+                    },
+                    "formula": "(query2 * 3600000000000) / query1"
+                }
+            ],
+            "queries": [
+                {
+                    "name": "query2",
+                    "data_source": "rum",
+                    "search": {
+                        "query": "@type:error @error.category:\"App Hang\" @freeze.duration:>=250000000 @session.type:user"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "group_by": [
+                        {
+                            "facet": "@application.name",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@freeze.duration"
+                            },
+                            "should_exclude_missing": true
+                        },
+                        {
+                            "facet": "version",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@freeze.duration"
+                            },
+                            "should_exclude_missing": true
+                        }
+                    ],
+                    "compute": {
+                        "aggregation": "sum",
+                        "metric": "@freeze.duration",
+                        "interval": 3600000
+                    },
+                    "storage": "hot"
+                },
+                {
+                    "name": "query1",
+                    "data_source": "rum",
+                    "search": {
+                        "query": "@type:session @session.type:user"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "group_by": [
+                        {
+                            "facet": "@application.name",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@session.time_spent"
+                            },
+                            "should_exclude_missing": true
+                        },
+                        {
+                            "facet": "version",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@session.time_spent"
+                            },
+                            "should_exclude_missing": true
+                        }
+                    ],
+                    "compute": {
+                        "aggregation": "sum",
+                        "metric": "@session.time_spent",
+                        "interval": 3600000
+                    },
+                    "storage": "hot"
+                }
+            ],
+            "response_format": "timeseries",
+            "style": {
+                "palette": "dog_classic",
+                "order_by": "values",
+                "line_type": "solid",
+                "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+    ],
+    "yaxis": {
+        "include_zero": true,
+        "scale": "sqrt"
+    },
+    "markers": [
+        {
+            "value": "y > 12000000000",
+            "display_type": "error dashed"
+        },
+        {
+            "value": "6000000000 < y < 12000000000",
+            "display_type": "warning dashed"
+        },
+        {
+            "value": "0 < y < 6000000000",
+            "display_type": "ok dashed"
+        }
+    ]
+}
+```
+
+{{% /collapse-content %}} 
 
 #### Disable app hang monitoring
 
@@ -298,13 +298,13 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 ### Add watchdog terminations reporting
 
-In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU, memory, etc. These Watchdog Terminations are fatal and not recoverable (more details in the official [Apple documentation][12]).
+In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These Watchdog Terminations are fatal and not recoverable (more details in the official [Apple documentation][12]).
 
 By default, watchdog terminations reporting is **disabled**, but you can enable it by using the `trackWatchdogTerminations` initialization parameter.
 
 Watchdog terminations are reported through the RUM iOS SDK only (not through [Logs][4]).
 
-When enabled, a watchdog termination will be reported and attached to the previous RUM Session on the next application launch, based on heuristics:
+When enabled, a watchdog termination is reported and attached to the previous RUM Session on the next application launch, based on heuristics:
 
 - The application was not upgraded in the meantime,
 
@@ -337,7 +337,7 @@ To enable watchdog terminations reporting:
 
 #### Troubleshoot watchdog terminations
 
-When an application is terminated by the iOS Watchdog, it doesn’t get any termination signal. As a result of this lack of a termination signal, watchdog terminations do not contain any stack trace. To troubleshoot watchdog terminations, we recommend looking at the [vitals][14] of the parent RUM View (CPU Ticks, Memory).
+When an application is terminated by the iOS Watchdog, it doesn't get any termination signal. As a result of this lack of a termination signal, watchdog terminations do not contain any stack trace. To troubleshoot watchdog terminations, Datadog recommends looking at the [vitals][14] of the parent RUM View (CPU Ticks, Memory).
 
 #### Disable watchdog terminations reporting
 

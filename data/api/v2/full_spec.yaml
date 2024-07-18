@@ -5411,6 +5411,12 @@ components:
     CostByOrgAttributes:
       description: Cost attributes data.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         charges:
           description: List of charges data reported for the requested month.
           items:
@@ -6594,6 +6600,129 @@ components:
       type: string
       x-enum-varnames:
       - DETAILED_FINDING
+    DeviceAttributes:
+      description: The device attributes
+      properties:
+        description:
+          description: The device description
+          example: a device monitored with NDM
+          type: string
+        device_type:
+          description: The device type
+          example: other
+          type: string
+        integration:
+          description: The device integration
+          example: snmp
+          type: string
+        interface_statuses:
+          $ref: '#/components/schemas/DeviceAttributesInterfaceStatuses'
+        ip_address:
+          description: The device IP address
+          example: 1.2.3.4
+          type: string
+        location:
+          description: The device location
+          example: paris
+          type: string
+        model:
+          description: The device model
+          example: xx-123
+          type: string
+        name:
+          description: The device name
+          example: example device
+          type: string
+        os_hostname:
+          description: The device OS hostname
+          type: string
+        os_name:
+          description: The device OS name
+          example: example OS
+          type: string
+        os_version:
+          description: The device OS version
+          example: 1.0.2
+          type: string
+        ping_status:
+          description: The device ping status
+          example: unmonitored
+          type: string
+        product_name:
+          description: The device product name
+          example: example device
+          type: string
+        serial_number:
+          description: The device serial number
+          example: X12345
+          type: string
+        status:
+          description: The device SNMP status
+          example: ok
+          type: string
+        subnet:
+          description: The device subnet
+          example: 1.2.3.4/24
+          type: string
+        sys_object_id:
+          description: The device `sys_object_id`
+          example: 1.3.6.1.4.1.99999
+          type: string
+        tags:
+          description: The list of device tags
+          example:
+          - device_ip:1.2.3.4
+          - device_id:example:1.2.3.4
+          items:
+            type: string
+          type: array
+        vendor:
+          description: The device vendor
+          example: example vendor
+          type: string
+        version:
+          description: The device version
+          example: 1.2.3
+          type: string
+      type: object
+    DeviceAttributesInterfaceStatuses:
+      description: Count of the device interfaces by status
+      example:
+        down: 1
+        'off': 2
+        up: 12
+        warning: 5
+      properties:
+        down:
+          description: The number of interfaces that are down
+          format: int64
+          type: integer
+        'off':
+          description: The number of interfaces that are off
+          format: int64
+          type: integer
+        up:
+          description: The number of interfaces that are up
+          format: int64
+          type: integer
+        warning:
+          description: The number of interfaces that are in a warning state
+          format: int64
+          type: integer
+      type: object
+    DevicesListData:
+      description: The devices list data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeviceAttributes'
+        id:
+          description: The device ID
+          example: example:1.2.3.4
+          type: string
+        type:
+          description: The type of the resource. The value should always be device.
+          type: string
+      type: object
     DowntimeCreateRequest:
       description: Request for creating a downtime.
       properties:
@@ -8326,6 +8455,109 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GetDeviceAttributes:
+      description: The device attributes
+      properties:
+        description:
+          description: A description of the device.
+          example: a device monitored with NDM
+          type: string
+        device_type:
+          description: The type of the device.
+          example: other
+          type: string
+        integration:
+          description: The integration of the device.
+          example: snmp
+          type: string
+        ip_address:
+          description: The IP address of the device.
+          example: 1.2.3.4
+          type: string
+        location:
+          description: The location of the device.
+          example: paris
+          type: string
+        model:
+          description: The model of the device.
+          example: xx-123
+          type: string
+        name:
+          description: The name of the device.
+          example: example device
+          type: string
+        os_hostname:
+          description: The operating system hostname of the device.
+          example: 1.0.2
+          type: string
+        os_name:
+          description: The operating system name of the device.
+          example: example OS
+          type: string
+        os_version:
+          description: The operating system version of the device.
+          example: 1.0.2
+          type: string
+        ping_status:
+          description: The ping status of the device.
+          example: unmonitored
+          type: string
+        product_name:
+          description: The product name of the device.
+          example: example device
+          type: string
+        serial_number:
+          description: The serial number of the device.
+          example: X12345
+          type: string
+        status:
+          description: The status of the device.
+          example: ok
+          type: string
+        subnet:
+          description: The subnet of the device.
+          example: 1.2.3.4/24
+          type: string
+        sys_object_id:
+          description: The device `sys_object_id`.
+          example: 1.3.6.1.4.1.99999
+          type: string
+        tags:
+          description: A list of tags associated with the device.
+          example:
+          - device_ip:1.2.3.4
+          - device_id:example:1.2.3.4
+          items:
+            type: string
+          type: array
+        vendor:
+          description: The vendor of the device.
+          example: example vendor
+          type: string
+        version:
+          description: The version of the device.
+          example: 1.2.3
+          type: string
+      type: object
+    GetDeviceData:
+      description: Get device response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetDeviceAttributes'
+        id:
+          description: The device ID
+          example: example:1.2.3.4
+          type: string
+        type:
+          description: The type of the resource. The value should always be device.
+          type: string
+      type: object
+    GetDeviceResponse:
+      description: The `GetDevice` operation's response.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetDeviceData'
+      type: object
     GetFindingResponse:
       description: The expected response schema when getting a finding.
       properties:
@@ -8333,6 +8565,28 @@ components:
           $ref: '#/components/schemas/DetailedFinding'
       required:
       - data
+      type: object
+    GetInterfacesData:
+      description: The interfaces list data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/InterfaceAttributes'
+        id:
+          description: The interface ID
+          example: example:1.2.3.4:99
+          type: string
+        type:
+          description: The type of the resource. The value should always be interface.
+          type: string
+      type: object
+    GetInterfacesResponse:
+      description: The `GetInterfaces` operation's response.
+      properties:
+        data:
+          description: Get Interfaces response
+          items:
+            $ref: '#/components/schemas/GetInterfacesData'
+          type: array
       type: object
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
@@ -10499,6 +10753,47 @@ components:
             type: string
           type: array
       type: object
+    InterfaceAttributes:
+      description: The interface attributes
+      properties:
+        alias:
+          description: The interface alias
+          example: interface_0
+          type: string
+        description:
+          description: The interface description
+          example: a network interface
+          type: string
+        index:
+          description: The interface index
+          example: 0
+          format: int64
+          type: integer
+        mac_address:
+          description: The interface MAC address
+          example: 00:00:00:00:00:00
+          type: string
+        name:
+          description: The interface name
+          example: if0
+          type: string
+        status:
+          $ref: '#/components/schemas/InterfaceAttributesStatus'
+      type: object
+    InterfaceAttributesStatus:
+      description: The interface status
+      enum:
+      - up
+      - down
+      - warning
+      - 'off'
+      example: up
+      type: string
+      x-enum-varnames:
+      - UP
+      - DOWN
+      - WARNING
+      - 'OFF'
     JSONAPIErrorItem:
       description: API error response body
       properties:
@@ -10659,6 +10954,32 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ApplicationKeyResponseMeta'
+      type: object
+    ListDevicesResponse:
+      description: List devices response.
+      properties:
+        data:
+          description: The list devices response data.
+          items:
+            $ref: '#/components/schemas/DevicesListData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListDevicesResponseMetadata'
+      type: object
+    ListDevicesResponseMetadata:
+      description: Object describing meta attributes of response.
+      properties:
+        page:
+          $ref: '#/components/schemas/ListDevicesResponseMetadataPage'
+      type: object
+    ListDevicesResponseMetadataPage:
+      description: Pagination object.
+      properties:
+        total_filtered_count:
+          description: Total count of devices matched by the filter.
+          example: 1
+          format: int64
+          type: integer
       type: object
     ListDowntimesResponse:
       description: Response for retrieving all downtimes.
@@ -15132,7 +15453,8 @@ components:
           type: integer
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
         updated_at:
@@ -15175,7 +15497,8 @@ components:
           type: string
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
       required:
@@ -15248,7 +15571,8 @@ components:
           type: integer
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
         updated_at:
@@ -15318,7 +15642,8 @@ components:
           type: string
         type:
           description: Type of the RUM application. Supported values are `browser`,
-            `ios`, `android`, `react-native`, `flutter`.
+            `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`,
+            `kotlin-multiplatform`.
           example: browser
           type: string
       type: object
@@ -17578,6 +17903,18 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
       required:
       - status
+      type: object
+    SecurityMonitoringRuleConvertPayload:
+      description: Convert a rule from JSON to Terraform.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRulePayload'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRulePayload'
+    SecurityMonitoringRuleConvertResponse:
+      description: Result of the convert rule request containing Terraform content.
+      properties:
+        terraformContent:
+          description: Terraform string as a result of converting the rule from JSON.
+          type: string
       type: object
     SecurityMonitoringRuleCreatePayload:
       description: Create a new rule.
@@ -32155,6 +32492,120 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/ndm/devices:
+    get:
+      description: Get the list of devices.
+      operationId: ListDevices
+      parameters:
+      - description: The page number to fetch.
+        example: 0
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The number of devices to return per page.
+        example: 10
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The field to sort the devices by.
+        example: status
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: Filter devices by tag.
+        example: status:ok
+        in: query
+        name: filter[tag]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDevicesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the list of devices
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 1
+      x-undo:
+        type: safe
+  /api/v2/ndm/devices/{device_id}:
+    get:
+      description: Get the device details.
+      operationId: GetDevice
+      parameters:
+      - description: The id of the device to fetch.
+        example: example:1.2.3.4
+        in: path
+        name: device_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeviceResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the device details
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/ndm/interfaces:
+    get:
+      description: Get the list of interfaces of the device.
+      operationId: GetInterfaces
+      parameters:
+      - description: The ID of the device to get interfaces from.
+        example: example:1.2.3.4
+        in: query
+        name: device_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInterfacesResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the list of interfaces of the device
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -32243,11 +32694,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - org_management
       summary: Update a specific Org Config
       tags:
       - Organizations
@@ -35172,6 +35618,50 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/convert:
+    post:
+      description: 'Convert a rule that doesn''t (yet) exist from JSON to Terraform
+        for datadog provider
+
+        resource datadog_security_monitoring_rule.'
+      operationId: ConvertSecurityMonitoringRuleFromJSONToTerraform
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleConvertPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleConvertResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Convert a rule from JSON to Terraform
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This feature is in private beta. Reach out to support
+        to request access.'
   /api/v2/security_monitoring/rules/test:
     post:
       description: Test a rule.
@@ -35344,6 +35834,42 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/convert:
+    get:
+      description: 'Convert an existing rule from JSON to Terraform for datadog provider
+
+        resource datadog_security_monitoring_rule.'
+      operationId: ConvertExistingSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleConvertResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Convert an existing rule from JSON to Terraform
+      tags:
+      - Security Monitoring
+      x-menu-order: 11
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This feature is in private beta. Reach out to support
+        to request access.'
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: Test an existing rule.
@@ -35463,7 +35989,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 12
+      x-menu-order: 14
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -35507,7 +36033,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 13
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -38393,6 +38919,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -39295,6 +39830,88 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  x-merge-override:
+    /api/v2/apicatalog/api: true
+    /api/v2/apm/config/metrics: true
+    /api/v2/apm/config/metrics/{metric_id}: true
+    /api/v2/apm/config/retention-filters: true
+    /api/v2/apm/config/retention-filters-execution-order: true
+    /api/v2/apm/config/retention-filters/{filter_id}: true
+    /api/v2/audit/events: true
+    /api/v2/audit/events/search: true
+    /api/v2/cost/aws_related_accounts: true
+    /api/v2/cost_by_tag/active_billing_dimensions: true
+    /api/v2/cost_by_tag/monthly_cost_attribution: true
+    /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards: true
+    /api/v2/downtime: true
+    /api/v2/integration/gcp/sts_delegate: true
+    /api/v2/integrations/fastly/accounts/{account_id}/services: true
+    /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}: true
+    /api/v2/ip_allowlist: true
+    /api/v2/logs/analytics/aggregate: true
+    /api/v2/logs/config/archive-order: true
+    /api/v2/logs/config/archives: true
+    /api/v2/logs/config/archives/{archive_id}: true
+    /api/v2/logs/config/archives/{archive_id}/readers: true
+    /api/v2/logs/config/custom-destinations: true
+    /api/v2/logs/config/custom-destinations/{custom_destination_id}: true
+    /api/v2/logs/config/metrics/{metric_id}: true
+    /api/v2/logs/config/restriction_queries: true
+    /api/v2/logs/config/restriction_queries/role/{role_id}: true
+    /api/v2/logs/config/restriction_queries/user/{user_id}: true
+    /api/v2/logs/config/restriction_queries/{restriction_query_id}: true
+    /api/v2/logs/config/restriction_queries/{restriction_query_id}/roles: true
+    /api/v2/logs/events: true
+    /api/v2/logs/events/search: true
+    /api/v2/metrics: true
+    /api/v2/metrics/{metric_name}/active-configurations: true
+    /api/v2/metrics/{metric_name}/all-tags: true
+    /api/v2/metrics/{metric_name}/tags: true
+    /api/v2/metrics/{metric_name}/volumes: true
+    /api/v2/monitor/policy: true
+    /api/v2/monitor/policy/{policy_id}: true
+    /api/v2/monitor/{monitor_id}/downtime_matches: true
+    /api/v2/org_configs/{org_config_name}: true
+    /api/v2/query/scalar: true
+    /api/v2/query/timeseries: true
+    /api/v2/security/cloud_workload/policy/download: true
+    /api/v2/security_monitoring/cloud_workload_security/agent_rules: true
+    /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}: true
+    /api/v2/security_monitoring/configuration/security_filters: true
+    /api/v2/security_monitoring/configuration/security_filters/{security_filter_id}: true
+    /api/v2/security_monitoring/configuration/suppressions: true
+    /api/v2/security_monitoring/configuration/suppressions/{suppression_id}: true
+    /api/v2/security_monitoring/rules: true
+    /api/v2/security_monitoring/rules/test: true
+    /api/v2/security_monitoring/rules/validation: true
+    /api/v2/security_monitoring/rules/{rule_id}: true
+    /api/v2/security_monitoring/rules/{rule_id}/test: true
+    /api/v2/security_monitoring/signals: true
+    /api/v2/security_monitoring/signals/search: true
+    /api/v2/security_monitoring/signals/{signal_id}: true
+    /api/v2/security_monitoring/signals/{signal_id}/assignee: true
+    /api/v2/security_monitoring/signals/{signal_id}/incidents: true
+    /api/v2/security_monitoring/signals/{signal_id}/state: true
+    /api/v2/sensitive-data-scanner/config: true
+    /api/v2/sensitive-data-scanner/config/groups: true
+    /api/v2/sensitive-data-scanner/config/rules: true
+    /api/v2/sensitive-data-scanner/config/standard-patterns: true
+    /api/v2/service_accounts: true
+    /api/v2/services: true
+    /api/v2/services/definitions: true
+    /api/v2/services/{service_id}: true
+    /api/v2/team/{team_id}/permission-settings: true
+    /api/v2/team/{team_id}/permission-settings/{action}: true
+    /api/v2/teams: true
+    /api/v2/teams/{team_id}: true
+    /api/v2/usage/application_security: true
+    /api/v2/usage/cost_by_org: true
+    /api/v2/usage/estimated_cost: true
+    /api/v2/usage/historical_cost: true
+    /api/v2/usage/hourly_usage: true
+    /api/v2/usage/lambda_traced_invocations: true
+    /api/v2/usage/observability_pipelines: true
+    /api/v2/usage/projected_cost: true
 security:
 - apiKeyAuth: []
   appKeyAuth: []
@@ -39557,6 +40174,10 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
+- description: The Network Device Monitoring API allows you to fetch devices and interfaces
+    and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
+    for more information.
+  name: Network Device Monitoring
 - description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
     directly through the Datadog API.
   name: Okta Integration

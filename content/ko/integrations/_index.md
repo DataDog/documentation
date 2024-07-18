@@ -11,11 +11,11 @@ aliases:
 - /ko/integrations/shoreline_software_license/
 cascade:
 - _target:
-    path: /integrations/akamai_datastream_2.md
+    path: /integrations/akamai_datastream_2
   aliases:
   - /integrations/akamai_datastream
 - _target:
-    path: /integrations/azure.md
+    path: /integrations/azure
   algolia:
     category: 설명서
     rank: 80
@@ -24,7 +24,7 @@ cascade:
     - azure
     - microsoft azure
 - _target:
-    path: /integrations/kubernetes_state_core.md
+    path: /integrations/kubernetes_state_core
   algolia:
     category: 설명서
     rank: 60
@@ -32,7 +32,7 @@ cascade:
     tags:
     - ksm
 - _target:
-    path: /integrations/google_cloud_platform.md
+    path: /integrations/google_cloud_platform
   algolia:
     category: 설명서
     rank: 80
@@ -41,7 +41,7 @@ cascade:
     - gcp
     - google cloud platform
 - _target:
-    path: /integrations/amazon_web_services.md
+    path: /integrations/amazon_web_services
   algolia:
     category: 설명서
     rank: 80
@@ -50,7 +50,7 @@ cascade:
     - aws
     - amazon web services
 - _target:
-    path: /integrations/eks_fargate.md
+    path: /integrations/eks_fargate
   algolia:
     category: 설명서
     rank: 60
@@ -58,7 +58,7 @@ cascade:
     tags:
     - eks logging
 - _target:
-    path: /integrations/win32_event_log.md
+    path: /integrations/win32_event_log
   algolia:
     category: 설명서
     rank: 60
@@ -68,56 +68,56 @@ cascade:
   aliases:
   - /integrations/eventviewer/
 - _target:
-    path: /integrations/lambdatest_license.md
+    path: /integrations/lambdatest_license
   aliases:
   - /integrations/lambdatest_software_license/
 - _target:
-    path: /integrations/mongo.md
+    path: /integrations/mongo
   aliases:
   - /integrations/mongodb/
 - _target:
-    path: /integrations/rapdev_validator.md
+    path: /integrations/rapdev_validator
   aliases:
   - /integrations/rapdev_dashboard_widget_pack/
 - _target:
-    path: /integrations/wmi_check.md
+    path: /integrations/wmi_check
   aliases:
   - /integrations/wmi/
 - _target:
-    path: /integrations/jfrog_platform_self_hosted.md
+    path: /integrations/jfrog_platform_self_hosted
   aliases:
   - /integrations/jfrog_platform/
 - _target:
-    path: /integrations/komodor_license.md
+    path: /integrations/komodor_license
   aliases:
   - /integrations/komodor_komodor/
 - _target:
-    path: /integrations/stormforge_license.md
+    path: /integrations/stormforge_license
   aliases:
   - /integrations/stormforge_stormforge_license/
 - _target:
-    path: /integrations/feed.md
+    path: /integrations/feed
   aliases:
   - /integrations/rss/
 - _target:
-    path: /integrations/java.md
+    path: /integrations/java
   aliases:
   - /agent/faq/jmx_integrations/
   - /agent/faq/docker-jmx/
 - _target:
-    path: /integrations/amazon_elb.md
+    path: /integrations/amazon_elb
   aliases:
   - /integrations/awselb
 - _target:
-    path: /integrations/elastic.md
+    path: /integrations/elastic
   aliases:
   - /integrations/awses
 - _target:
-    path: /integrations/amazon_s3.md
+    path: /integrations/amazon_s3
   aliases:
   - /integrations/awss3
 - _target:
-    path: /integrations/snowflake_web.md
+    path: /integrations/snowflake_web
   aliases:
   - /integrations/snowflake/
 description: 모든 시스템, 앱, 서비스에서 데이터를 수집하세요.

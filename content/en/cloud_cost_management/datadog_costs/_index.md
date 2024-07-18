@@ -52,7 +52,7 @@ To see costs on the [**Usage & Cost** page][4], see the [Cost Details documentat
 
 Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [**Plan and Usage** page][4] because Plan and Usage costs are cumulative and are prorated monthly. Only Cloud Cost Management provides a daily calculation.
 
-Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source. You can create dashboards to monitor your daily costs, identify trends, and optimize resource usage.
+Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Costs** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}} 
 
