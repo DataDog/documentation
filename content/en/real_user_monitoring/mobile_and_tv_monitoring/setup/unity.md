@@ -80,7 +80,7 @@ The following parameters are available:
 
 | Parameter | Required? | Description |
 | --------- | --------- | ----------- |
-| Enable Datadog | No | Whether Datadog should be enabled. Disabling Datadog will cause any of the Datadog APIs to fail, throw exceptions, or return `null` from any calls, and will only stop the SDK from sending any information. |
+| Enable Datadog | No | Whether Datadog should be enabled. Disabling Datadog will not cause any of the Datadog APIs to fail, throw exceptions, or return `null` from any calls, and will only stop the SDK from sending any information. |
 | Output Symbol Files | No | This option will enable output of symbol files for Datadog symbolication and file / line mapping features in Datadog Error tracking. |
 | Client Token | Yes | Your client token created for your application on Datadog's website. |
 | Env | No | The name of the environment for your application. Defaults to "prod" |
