@@ -19,7 +19,7 @@ Después de configurar la biblioteca de rastreo con tu código y de configurar e
 
 Todas las opciones de configuración anteriores tienen propiedades del sistema y variables de entorno equivalentes.
 Si se define el mismo tipo de clave para ambas, la configuración de propiedades del sistema tiene prioridad.
-Las propiedades del sistema se pueden establecer como marcas JVM.
+Las propiedades del sistema se pueden establecer como marcas de máquinas virtuales Java.
 
 ### Conversión entre propiedades del sistema y variables de entorno 
 A menos que se indique lo contrario, puedes convertir entre propiedades del sistema y variables de entorno utilizando las siguientes transformaciones:
@@ -29,7 +29,7 @@ A menos que se indique lo contrario, puedes convertir entre propiedades del sist
 - Para definir una variable de entorno como propiedad del sistema, escribe el nombre de la variable en minúsculas y sustituye `_` por `.`
   Por ejemplo, `DD_TAGS` se convierte en `dd.tags`.
 
-**Nota**: Cuando utilices las propiedades del sistema del rastreador Java, enumera las propiedades antes de `-jar`. Esto asegura que las propiedades serán leídas como opciones JVM.
+**Nota**: Cuando utilices las propiedades del sistema del rastreador Java, enumera las propiedades antes de `-jar`. Esto asegura que las propiedades serán leídas como opciones de máquinas virtuales Java.
 
 ## Opciones de configuración
 
@@ -119,21 +119,21 @@ Número máximo de tramos a muestrear por segundo, por proceso, cuando se config
 **Por defecto**: `null`<br>
 **Ejemplo**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Acepta un mapa de claves de cabecera que no distinguen mayúsculas/minúsculas para nombres de etiquetas y aplica automáticamente valores de cabecera coincidentes como etiquetas en trazas. También acepta entradas sin un nombre de etiqueta especificado, que se asignan automáticamente a etiquetas con el formato `http.request.headers.<header-name>`.<br>
-Disponible desde la versión 0.96.0.
+Disponible a partir de la versión 0.96.0.
 
 `dd.trace.response_header.tags`
 : **Variable de entorno**: `DD_TRACE_RESPONSE_HEADER_TAGS`<br>
 **Por defecto**: `null`<br>
 **Ejemplo**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Acepta un mapa de claves de cabecera que no distinguen mayúsculas/minúsculas para nombres de etiquetas y aplica automáticamente valores de cabecera coincidentes como etiquetas en trazas. También acepta entradas sin un nombre de etiqueta especificado, que se asignan automáticamente a etiquetas con el formato `http.response.headers.<header-name>`.<br>
-Disponible desde la versión 0.96.0.
+Disponible a partir de la versión 0.96.0.
 
 `dd.trace.header.baggage`
 : **Variable de entorno**: `DD_TRACE_HEADER_BAGGAGE`<br>
 **Por defecto**: `null`<br>
 **Ejemplo**: `CASE-insensitive-Header:my-baggage-name,User-ID:userId,My-Header-And-Baggage-Name`<br>
 Acepta un mapa de claves de cabecera que no distinguen mayúsculas/minúsculas a claves de equipaje y aplica automáticamente los valores de cabecera de solicitud coincidentes como equipaje en trazas. En la propagación se aplica la asignación inversa: el equipaje se asigna a las cabeceras.<br>
-Disponible desde la versión 1.3.0.
+Disponible a partir de la versión 1.3.0.
 
 `dd.trace.annotations`
 : **Variable de entorno**: `DD_TRACE_ANNOTATIONS`<br>
@@ -150,7 +150,7 @@ Una lista de anotaciones de métodos para tratar como `@Trace`.
 : **Variable de entorno**: `DD_TRACE_CLASSES_EXCLUDE`<br>
 **Por defecto**: `null`<br>
 **Ejemplo**: `package.ClassName,package.ClassName$Nested,package.Foo*,package.other.*`<br>
-Una lista de clases completamente cualificadas (que pueden terminar con un comodín para denotar un prefijo) que serán ignoradas (no modificadas) por el rastreador. Debe utilizar la representación interna JVM para los nombres (por ejemplo package.ClassName$Nested y no package.ClassName.Nested).
+Una lista de clases completamente cualificadas (que pueden terminar con un comodín para denotar un prefijo) que serán ignoradas (no modificadas) por el rastreador. Debe utilizar la representación interna de máquinas virtuales Java para los nombres (por ejemplo package.ClassName$Nested y no package.ClassName.Nested).
 
 `dd.trace.partial.flush.min.spans`
 : **Variable de entorno**: `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`<br>
@@ -465,13 +465,13 @@ Para obtener información sobre los valores válidos y el uso de las siguientes 
 : **Variable de entorno**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
 **Por defecto**: `datadog,tracecontext`<br>
 Una lista separada por comas de formatos de cabecera a incluir para propagar trazas distribuidas entre servicios.<br>
-Disponible desde la versión 1.9.0
+Disponible a partir de la versión 1.9.0
 
 `dd.trace.propagation.style.extract`
 : **Variable de entorno**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
 **Por defecto**: `datadog,tracecontext`<br>
 Una lista separada por comas de formatos de cabecera de los que se intentará extraer datos de propagación de rastreo distribuidos. El primer formato encontrado con cabeceras completas y válidas se utiliza para definir la traza y continuar.<br>
-Disponible desde la versión 1.9.0
+Disponible a partir de la versión 1.9.0
 
 `dd.trace.propagation.style`
 : **Variable de entorno**: `DD_TRACE_PROPAGATION_STYLE`<br>
