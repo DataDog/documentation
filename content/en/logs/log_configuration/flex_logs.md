@@ -166,53 +166,20 @@ You can add Flex Log queries to dashboards, but make sure to consider these dash
 
 The following list is an example of log sources that are potentially good candidates for sending logs directly to the Flex Tier, therefore not going to Standard Indexing first. This is not an exhaustive list and is meant to give you an idea about the types of logs that are suitable for this configuration. Other log sources (for example, application logs) can still be sent to the Flex Tier after going to Standard indexing first for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources could vary, and that is important to consider when making the decision to skip Standard Indexing.
 
-**Note**: These examples are just a sample for each category. There are many more services, tools, and technologies available for each category that you might want to send to the Flex Tier.
+**Note**: These examples are just a sample for each category. There are many more catagories, and services, tools, and technologies available for each category that you might want to send directly to the Flex Tier.
 
 | Technology                             | Examples                                                                                   |
 |----------------------------------------|--------------------------------------------------------------------------------------------|
 | CDN services                           | Akamai, Cloudflare, Fastly, CloudFront                                                     |
 | DNS services                           | Route53, Cloudflare, Akamai (Edge), NS1                                                    |
-| Firewall logs and Firewall appliances  | AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, FortiNet   |
-| Cloud network services                 | Amazon VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN      |
+| Network services                       | Web Application Firewall, Amazon VPC Flow Logs, AWS ELB, pfSense, Tailscale, WireGuard     |
+| Physical network appliances            | Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda                                   |
 | Loadbalancers                          | AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX                                       |
 | Artifact repository management         | JFrog Artifactory, Archiva, Sonatype Nexus                                                 |
 | Identity services and tools            | Cisco ISE, Okta, OneLogin, Workday User Activity Logs                                      |
-| Audit logs                             | Cloud Provider Audit Logs (for example, CloudTrail), Kubernetes audit, Microsoft 365 audit |
-| Physical network appliances            | Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda                                   |
-| Network Flow logs                      | Cisco NetFlow, IPFIX, sFlow, Amazon VPC FlowLogs                                           |
-| VPN services                           | AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard                 |
+| Audit logs                             | Amazon Cloudtrail, Kubernetes audit logs, Microsoft 365 audit                              |
 | CI/CD services and tools               | GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline              |
 | Service mesh                           | Anthos, Istio, proxyv2, consul, Linkerd, Kong                                              |
-| Caching                                | Varnish, Memcached, Redis                                                                  |
-
-- **CDN services examples**
-  - Akamai, Cloudflare, Fastly, and CloudFront.
-- **DNS services examples**
-  - Route53, Cloudflare, Akamai (Edge),and NS1.
-- **Firewall logs and Firewall appliances examples**
-  - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, and FortiNet.
-- **Cloud network services (VPC, Gateways, NAT, and WAN) examples**
-  - Amazon VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
-- **Loadbalancers examples**
-  - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, and NGINX.
-- **Artifact repository management examples**
-  - [JFrog Artifactory][4], Archiva, Sonatype Nexus
-- **Identity services and tools examples**
-  - Cisco ISE, Okta, OneLogin, and Workday User Activity Logs.
-- **Audit logs examples**
-  - Cloud Provider Audit Logs (for example, CloudTrail), Kubernetes audit, and Microsoft 365 audit.
-- **Physical network appliances examples**
-  - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, and Barracuda.
-- **Network Flow logs examples**
-  - Cisco NetFlow, IPFIX, sFlow, and Amazon VPC FlowLogs.
-- **VPN services examples**
-  - AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, and WireGuard.
-- **CI/CD services and tools examples**
-  - GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, and AWS CodePipeline.
-- **Service mesh examples**
-  - Anthos, Istio, proxyv2, consul, Linkerd, and Kong.
-- **Caching examples**
-  - Varnish, Memcached, and Redis.
 
 ### Flex Logs for multiple-organization accounts
 
