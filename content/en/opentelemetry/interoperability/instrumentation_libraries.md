@@ -40,7 +40,7 @@ Setting `DD_TRACE_OTEL_ENABLED=true` is not required when using the Datadog SDK 
 | Java     | v1.35.0                  |
 | Python   | v2.10.0                  |
 | Ruby     | v2.1.0                   |
-| Go       | -                        |
+| Go       | v1.65.0                  |
 | Node.js  | -                        |
 | PHP      | -                        |
 | .NET     | v2.53.0                  |
