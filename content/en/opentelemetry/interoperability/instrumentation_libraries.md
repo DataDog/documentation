@@ -91,6 +91,15 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 |---------------------|----------|-------------------------------------------------|-----------------------|
 | Apache CXF (Jax-WS) | 3.0+     | [opentelemetry-javaagent-jaxws-2.0-cxf-3.0][10] | `cxf`                 |
 
+[4]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation-api/src/main/java/io/opentelemetry/instrumentation/api/instrumenter/
+[5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/javaagent-extension-api/src/main/java/io/opentelemetry/javaagent/extension/instrumentation/
+[6]: https://opentelemetry.io/docs/zero-code/java/agent/extensions/
+[7]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md
+[8]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/src/main/java/com/example/javaagent/instrumentation/DemoServlet3InstrumentationModule.java
+[9]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/
+[10]: https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0
+[11]: https://opentelemetry.io/docs/zero-code/java/agent/configuration/
+
 {{% /tab %}}
 
 <!-- {{% tab "Python" %}}
@@ -162,11 +171,3 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/automatic_instrumentation/
 [3]: https://opentelemetry.io/docs/concepts/instrumentation/libraries/
-[4]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation-api/src/main/java/io/opentelemetry/instrumentation/api/instrumenter/
-[5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/javaagent-extension-api/src/main/java/io/opentelemetry/javaagent/extension/instrumentation/
-[6]: https://opentelemetry.io/docs/zero-code/java/agent/extensions/
-[7]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md
-[8]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/src/main/java/com/example/javaagent/instrumentation/DemoServlet3InstrumentationModule.java
-[9]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/
-[10]: https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0
-[11]: https://opentelemetry.io/docs/zero-code/java/agent/configuration/
