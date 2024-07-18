@@ -22,7 +22,7 @@ This provides observability for libraries not originally covered by Datadog SDKs
 
 ## Prerequisites
 
-Before adding OpenTelemetry instrumentation libraries set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+Before adding OpenTelemetry instrumentation libraries, set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
 <div class="alert alert-warning">
 When replacing an existing Datadog instrumentation with its OpenTelemetry equivalent, remember to disable the
