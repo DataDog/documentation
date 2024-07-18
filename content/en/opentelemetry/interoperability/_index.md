@@ -17,6 +17,7 @@ Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive
     {{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/trace_context_propagation/" >}}W3C Trace Context Propagation{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/interoperability/api_support" >}}OpenTelemetry API Support{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/interoperability/instrumentation_libraries/" >}}OpenTelemetry Instrumentation Libraries{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/platform/connect_rum_and_traces/" >}}Correlate RUM and Traces{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/interoperability/environment_variable_support" >}}Configure Datadog SDKs Using OTel Environment Variables {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/interoperability/environment_variable_support" >}}Configure Datadog SDKs Using OTEL Environment Variables {{< /nextlink >}}
