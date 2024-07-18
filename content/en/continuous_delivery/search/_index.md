@@ -22,7 +22,7 @@ To see an overview of your deployments, navigate to [**Software Delivery** > **C
 The [**Deployments** page][1] shows stats aggregated by services and environments over the selected time frame, as well as the status of the latest deployment execution. Use this page to see all your service deployments and get a view of their health.
 The metrics shown include the number of executions and failures, the failure rate, the median duration, and the 95th percentile duration. This information reveals which deployments have a higher probability of failure and which deployments are taking the most time to be executed. The effect of the latest changes can be seen by checking the status, revision and time of the last deployment result.
 
-<div class="alert alert-info">Deployments without services configured and partial deployment executions are excluded from the statistics aggregation of the Deployments page. You can search for these deployments in the Deployment Executions page: <code>@deployment.partial_deployment:* OR -@deployment.service:*</code>.</div>
+<div class="alert alert-info">Deployments with no services configured and partial deployment executions are excluded from the statistics aggregation of the Deployments page. You can search for these deployments in the Deployment Executions page: <code>@deployment.partial_deployment:* OR -@deployment.service:*</code>.</div>
 
 {{< img src="/continuous_delivery/search/deployments_2.png" text="The Deployments page in Datadog" style="width:100%" >}}
 
