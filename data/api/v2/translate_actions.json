@@ -961,6 +961,18 @@
     "description": "Get all active downtimes for the specified monitor.",
     "summary": "Get active downtimes for a monitor"
   },
+  "ListDevices": {
+    "description": "Get the list of devices.",
+    "summary": "Get the list of devices"
+  },
+  "GetDevice": {
+    "description": "Get the device details.",
+    "summary": "Get the device details"
+  },
+  "GetInterfaces": {
+    "description": "Get the list of interfaces of the device.",
+    "summary": "Get the list of interfaces of the device"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
