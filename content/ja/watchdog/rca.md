@@ -6,6 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
   tag: ブログ
   text: 根本原因の自動分析
+kind: documentation
 title: Watchdog RCA
 ---
 
@@ -26,7 +27,7 @@ Watchdog RCA は、分析に際して以下のデータソースを考慮しま�
 
 ## Watchdog Root Cause Analysis の要素
 
-{{< img src="watchdog/rca/root_cause.png" alt="根本原因、重大な障害、影響を示す Watchdog Root Cause Analysis">}}
+{{< img src="watchdog/rca/root_cause_cropped.png" alt="根本原因、重大な障害、影響を示す Watchdog Root Cause Analysis">}}
 
 Watchdog Root Cause Analysis には、根本原因、重大な障害、影響という 3 つの要素が含まれます。
 
