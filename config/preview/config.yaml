@@ -22,7 +22,7 @@ segments:
     - lang: ko
     - lang: es
     includes:
-    - path: '{/integrations, /integrations/**/}'
+    - path: '{/integrations,/integrations/**}'
 
 deployment:
     order:
