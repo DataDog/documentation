@@ -15,7 +15,7 @@ title: 라이브러리 규칙
   {{< nextlink href="/sensitive_data_scanner/library_rules#credit-cards-and-banking">}}신용카드 및 뱅킹{{< /nextlink >}}
   {{< nextlink href="/sensitive_data_scanner/library_rules#personal-identifiable-information-pii">}}개인식별정보(PII){{< /nextlink >}}
   {{< nextlink href="/sensitive_data_scanner/library_rules#네트워크-and-device-information">}}네트워크 및 장치 정보{{< /nextlink >}}
-{< /whatsnext >}}
+{{< /whatsnext >}}
 
 이러한 규칙은 Datadog에서도 확인할 수 있습니다:
 

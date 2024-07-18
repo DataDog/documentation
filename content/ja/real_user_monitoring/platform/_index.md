@@ -4,7 +4,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
   text: RUM エクスプローラーについて
-kind: ドキュメント
 title: プラットフォーム
 ---
 
