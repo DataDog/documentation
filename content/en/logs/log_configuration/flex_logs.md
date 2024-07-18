@@ -172,14 +172,14 @@ The following list is an example of log sources that are potentially good candid
 |----------------------------------------|--------------------------------------------------------------------------------------------|
 | CDN services                           | Akamai, Cloudflare, Fastly, CloudFront                                                     |
 | DNS services                           | Route53, Cloudflare, Akamai (Edge), NS1                                                    |
-| Network services                       | Web Application Firewall, Amazon VPC Flow Logs, AWS ELB, pfSense, Tailscale, WireGuard     |
-| Physical network appliances            | Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda                                   |
+| Network services                       | Web Application Firewall, Amazon VPC Flow Logs, AWS ELB, pfSense, Tailscale                |
+| Network appliances                     | Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda                                   |
 | Loadbalancers                          | AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX                                       |
-| Artifact repository management         | JFrog Artifactory, Archiva, Sonatype Nexus                                                 |
-| Identity services and tools            | Cisco ISE, Okta, OneLogin, Workday User Activity Logs                                      |
+| Artifact management                    | JFrog Artifactory, Archiva, Sonatype Nexus                                                 |
+| Identity services                      | Cisco ISE, Okta, OneLogin, Workday User Activity Logs                                      |
 | Audit logs                             | Amazon Cloudtrail, Kubernetes audit logs, Microsoft 365 audit                              |
-| CI/CD services and tools               | GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline              |
-| Service mesh                           | Anthos, Istio, proxyv2, consul, Linkerd, Kong                                              |
+| CI/CD services                         | GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline              |
+| Service meshes                         | Anthos, Istio, proxyv2, consul, Linkerd, Kong                                              |
 
 ### Flex Logs for multiple-organization accounts
 
