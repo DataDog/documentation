@@ -5,7 +5,7 @@ enableGitInfo: true
 
 # can also be CLI flag
 renderSegments:
-  - integrations
+  - english
 
 # Exclude all non-English languages
 segments:
