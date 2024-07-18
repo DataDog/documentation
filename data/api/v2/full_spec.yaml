@@ -17942,6 +17942,7 @@ components:
       - impossible_travel
       - hardcoded
       - third_party
+      - anomaly_threshold
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -17950,6 +17951,7 @@ components:
       - IMPOSSIBLE_TRAVEL
       - HARDCODED
       - THIRD_PARTY
+      - ANOMALY_THRESHOLD
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
