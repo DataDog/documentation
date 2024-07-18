@@ -13,11 +13,11 @@ algolia:
   tags: ['otel instrumentation']
 ---
 
-[Instrumentation](/tracing/trace_collection/) is the process of adding code to your application to capture and report observability data.
-[Automatic instrumentation](/tracing/trace_collection/automatic_instrumentation/) is a way to instrument applications and libraries without directly modifying their source code.
+[Instrumentation][1] is the process of adding code to your application to capture and report observability data.
+[Automatic instrumentation][2] is a way to instrument applications and libraries without directly modifying their source code.
 Both OpenTelemetry and Datadog provide automatic instrumentations as part of their SDKs.
 
-Datadog SDKs support adding [instrumentation libraries](https://opentelemetry.io/docs/concepts/instrumentation/libraries/) from OpenTelemetry to their existing automatic instrumentations.
+Datadog SDKs support adding [instrumentation libraries][3] from OpenTelemetry to their existing automatic instrumentations.
 This provides observability for libraries not originally covered by Datadog SDKs without needing to change SDKs.
 
 ## Prerequisites
@@ -47,15 +47,14 @@ Datadog instrumentation to avoid duplicate spans in the trace.
 
 ## Compatibility requirements
 
-The Datadog SDK for Java supports library instrumentations written using OpenTelemetry's [instrumentation API](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation-api/src/main/java/io/opentelemetry/instrumentation/api/instrumenter)
-and `javaagent` [extension API](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/javaagent-extension-api/src/main/java/io/opentelemetry/javaagent/extension/instrumentation).
+The Datadog SDK for Java supports library instrumentations written using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
 
-Each instrumentation must be packaged as an OpenTelemetry [extension](https://opentelemetry.io/docs/zero-code/java/agent/extensions/) in its own jar.
-OpenTelemetry provide an [example extension project](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md)
-that provides a custom [instrumentation for Servlet 3 classes](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/src/main/java/com/example/javaagent/instrumentation/DemoServlet3InstrumentationModule.java).
+Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own jar.
 
-The Datadog SDK for Java also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main)
-build, for example the [CFX instrumentation jar](https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0).
+OpenTelemetry provide an [example extension project][7] that provides a custom [instrumentation for Servlet 3 classes][8].
+
+The Datadog SDK for Java also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
+build, for example the [CFX instrumentation jar][10].
 
 <div class="alert alert-warning">
 Use of OpenTelemetry incubator APIs is not currently supported.
@@ -84,13 +83,13 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 **Default**: `false`<br>
 A comma-separated list of paths to extension jar files or folders containing extension jar files.
 
-OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/java/agent/configuration/) page describes additional properties that are also recognized by the Datadog SDK.
+OpenTelemetry's [Agent Configuration][11] page describes additional properties that are also recognized by the Datadog SDK.
 
 ## Verified OpenTelemetry extensions
 
-| Framework           | Versions | OpenTelemetry Extension                                                                                                    | Instrumentation Names |
-|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------|-----------------------|
-| Apache CXF (Jax-WS) | 3.0+     | [opentelemetry-javaagent-jaxws-2.0-cxf-3.0](https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0) | `cxf`                 |
+| Framework           | Versions | OpenTelemetry Extension                         | Instrumentation Names |
+|---------------------|----------|-------------------------------------------------|-----------------------|
+| Apache CXF (Jax-WS) | 3.0+     | [opentelemetry-javaagent-jaxws-2.0-cxf-3.0][10] | `cxf`                 |
 
 {{% /tab %}}
 
@@ -159,3 +158,15 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_collection/
+[2]: /tracing/trace_collection/automatic_instrumentation/
+[3]: https://opentelemetry.io/docs/concepts/instrumentation/libraries/
+[4]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation-api/src/main/java/io/opentelemetry/instrumentation/api/instrumenter/
+[5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/javaagent-extension-api/src/main/java/io/opentelemetry/javaagent/extension/instrumentation/
+[6]: https://opentelemetry.io/docs/zero-code/java/agent/extensions/
+[7]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/README.md
+[8]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/examples/extension/src/main/java/com/example/javaagent/instrumentation/DemoServlet3InstrumentationModule.java
+[9]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/
+[10]: https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0
+[11]: https://opentelemetry.io/docs/zero-code/java/agent/configuration/
