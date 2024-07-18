@@ -7,10 +7,12 @@ aliases:
 cascade:
 - _target:
     path: /agent/basic_agent_usage/chef
+    lang: fr
   tags:
   - uninstall
 - _target:
     path: /infrastructure/**/*
+    lang: fr
   algolia:
     rank: 80
     tags:

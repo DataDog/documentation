@@ -12,10 +12,12 @@ further_reading:
 cascade:
 - _target:
     path: /infrastructure/resource_catalog/aws_iam_user
+    lang: en
   aliases:
     - /security/cspm/custom_rules/aws_iam_user/
 - _target:
     path: /infrastructure/**/*
+    lang: en
   algolia:
     rank: 70
 ---
