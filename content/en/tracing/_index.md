@@ -126,4 +126,3 @@ Datadog APM provides tools to manage the volume and retention of your trace data
 [26]: /tracing/services/service_page/
 [27]: /tracing/trace_collection/single-step-apm/
 [28]: /tracing/services/resource_page/
-[29]: /getting_started/tracing/
