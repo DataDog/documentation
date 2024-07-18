@@ -128,7 +128,7 @@ Set up the Datadog trace provider and configure Opentelemetry to use the Datadog
 Then, follow the instructions of your chosen opentelemetry-go-contrib library to instrument your service.
 
 Example:
-```
+```go
 import (
 	"fmt"
 	"log"
