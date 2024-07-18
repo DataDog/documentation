@@ -33,7 +33,7 @@ DatadogSdk.Instance.SetSdkVerbosity(CoreLoggerLevel.Debug);
 
 This causes the SDK to output additional information about what it's doing and what errors it's encountering, which may help you and Datadog Support narrow down your issue.
 
-## SDK not sending data
+## The SDK is not sending data
 
 If you're not seeing any data in Datadog:
 
