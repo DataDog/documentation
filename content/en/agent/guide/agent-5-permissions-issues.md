@@ -69,7 +69,7 @@ This occurs when processes being monitored by the process check runs under a dif
 
 Try updating to the [latest version of the Agent][8] and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
-**NOTE**: It is not recommended to run the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way, but it isn't recommended to run the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][9].
+<div class="alert alert-info">Running a process daemon as <code>root</code> is not best practice on Linux. The Agent is open source and may be audited via the <a href="https://github.com/DataDog/dd-agent">GitHub repository.</a></div>
 
 1. [Stop the Agent][1]
 
@@ -94,6 +94,5 @@ See the following GitHub issues for more information and other potential methods
 [6]: /help/
 [7]: /integrations/process/
 [8]: /agent/guide/upgrade/
-[9]: https://github.com/DataDog/dd-agent
 [11]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [12]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
