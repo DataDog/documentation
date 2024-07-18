@@ -168,18 +168,18 @@ The following list is an example of log sources that are potentially good candid
 
 **Note**: These examples are a sample for each category. There are many more catagories, and services, tools, and technologies that you may want to send directly to the Flex Tier.
 
-| Technology                             | Examples                                                                                   |
-|----------------------------------------|--------------------------------------------------------------------------------------------|
-| CDN services                           | Akamai, Cloudflare, Fastly, CloudFront                                                     |
-| DNS services                           | Route53, Cloudflare, Akamai (Edge), NS1                                                    |
-| Network services                       | Web Application Firewall, Amazon VPC Flow Logs, AWS ELB, pfSense, Tailscale                |
-| Network appliances                     | Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda                                   |
-| Loadbalancers                          | AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX                                       |
-| Artifact management                    | JFrog Artifactory, Archiva, Sonatype Nexus                                                 |
-| Identity services                      | Cisco ISE, Okta, OneLogin, Workday User Activity Logs                                      |
-| Audit logs                             | Amazon Cloudtrail, Kubernetes audit logs, Microsoft 365 audit                              |
-| CI/CD services                         | GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline              |
-| Service meshes                         | Anthos, Istio, proxyv2, consul, Linkerd, Kong                                              |
+| Technology            | Examples                                                                                   |
+|-----------------------|--------------------------------------------------------------------------------------------|
+| Artifact management   | JFrog Artifactory, Archiva, Sonatype Nexus                                                 |
+| Audit logs            | Amazon Cloudtrail, Kubernetes audit logs, Microsoft 365 audit                              |
+| CDN services          | Akamai, Cloudflare, Fastly, CloudFront                                                     |
+| CI/CD services        | GitLab, GitHub Actions, Argo CD, Jenkins, CircleCI, TeamCity                                |
+| DNS services          | Route53, Cloudflare, Akamai (Edge), NS1                                                    |
+| Identity services     | Cisco ISE, Okta, OneLogin, Workday User Activity Logs                                      |
+| Loadbalancers         | AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX                                       |
+| Network appliances    | Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda                                   |
+| Network services      | WAF, Amazon VPC Flow Logs, AWS ELB, pfSense, Tailscale                                     |
+| Service meshes        | Anthos, Istio, proxyv2, consul, Linkerd, Kong                                              |
 
 ### Flex Logs for multiple-organization accounts
 
