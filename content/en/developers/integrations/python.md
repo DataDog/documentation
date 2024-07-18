@@ -103,7 +103,7 @@ You have 2 options to install the `ddev` CLI.
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. Download the file using the `curl` command. The -L option allows for redirects, and the -o option specifies the file name to which the downloaded package is written.. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
+1. Download the file using the `curl` command. The -L option allows for redirects, and the -o option specifies the file name to which the downloaded package is written. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
    ```shell
    curl -L -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```
