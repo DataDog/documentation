@@ -64,10 +64,9 @@ Use of OpenTelemetry incubator APIs is not currently supported.
 ## Getting started
 
 To use an OpenTelemetry instrumentation with the Datadog SDK for Java:
-1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`
-2. Copy the OpenTelemetry extension jar containing the instrumentation to the same container as the application
-3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to
-   the path to the extension jar
+1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+2. Copy the OpenTelemetry extension jar containing the instrumentation to the same container as the application.
+3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the path to the extension jar.
 
 ## Configuration
 
@@ -83,11 +82,11 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 `otel.javaagent.extensions`
 : **Environment Variable**: `OTEL_JAVAAGENT_EXTENSIONS`<br>
 **Default**: `false`<br>
-A comma-separated list of paths to extension jar files, or folders containing extension jar files.
+A comma-separated list of paths to extension jar files or folders containing extension jar files.
 
-OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/java/agent/configuration/) page describes additional properties which are also recognized by the Datadog SDK.
+OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/java/agent/configuration/) page describes additional properties that are also recognized by the Datadog SDK.
 
-## Verified OpenTelemetry Extensions
+## Verified OpenTelemetry extensions
 
 | Framework           | Versions | OpenTelemetry Extension                                                                                                    | Instrumentation Names |
 |---------------------|----------|----------------------------------------------------------------------------------------------------------------------------|-----------------------|
