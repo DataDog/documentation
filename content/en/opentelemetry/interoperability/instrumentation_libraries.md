@@ -36,10 +36,10 @@ Datadog instrumentation to avoid duplicate spans in the trace.
 | Java     | v1.35.0                  |
 | Python   | v2.10.0                  |
 | Ruby     | v2.1.0                   |
-| Go       | TBA                      |
-| Node.js  | TBA                      |
-| PHP      | TBA                      |
-| .NET     | TBA                      |
+| Go       | -                        |
+| Node.js  | -                        |
+| PHP      | -                        |
+| .NET     | -                        |
 
 {{< tabs >}}
 
