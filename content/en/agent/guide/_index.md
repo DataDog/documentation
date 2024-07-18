@@ -20,6 +20,7 @@ cascade:
 {{< whatsnext desc="Windows guides:" >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
     {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
+    {{< nextlink href="agent/guide/windows-flare-agent-5" >}}Send an Agent 5 flare on Windows{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud infrastructure guides:" >}}
@@ -60,4 +61,5 @@ cascade:
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
+    {{< nextlink href="agent/guide/windows-flare-agent-5" >}}Send an Agent 5 flare on Windows{{< /nextlink >}}
 {{< /whatsnext >}}

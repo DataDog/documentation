@@ -24,7 +24,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 
     ```conf
     dependencies {
-        implementation "com.datadoghq:dd-sdk-android:x.x.x"
+        implementation "com.datadoghq:dd-sdk-android-logs:x.x.x"
     }
     ```
 

@@ -3,10 +3,6 @@ title: Configuring Database Monitoring for Amazon Aurora DB Clusters
 
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Autodiscovery for Aurora clusters is a beta feature. If you have any feedback about this feature, contact support at support@datadoghq.com.
-{{< /beta-callout >}}
-
 This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
 
 ## Before you begin

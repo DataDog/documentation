@@ -6,54 +6,42 @@ aliases:
   - /agent/versions/upgrade_between_agent_minor_versions/
 ---
 
-## Upgrade between minor versions of Agent 6 and 7
+## Upgrade between minor versions of the Agent
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The recommended way to upgrade between minor versions of Agent 6 and 7 is to use the `install_script_agent6.sh` and `install_script_agent7.sh` scripts. The following commands work on all supported Linux distributions.
+The recommended way to upgrade between minor versions of the Agent is to use the `install_script_agent7.sh` script. The following commands work on all supported Linux distributions.
 
-Upgrading to a given Agent 6 minor version:
+Upgrading to a given Agent minor version:
 
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 
-Upgrading to the latest Agent 6 minor version:
+Upgrading to the latest Agent minor version:
 
-: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
-
-Upgrading to a given Agent 7 minor version:
-
-: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
-
-Upgrading to the latest Agent 7 minor version:
-
-: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
+: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
 Download and install the specific version's installation package.
 
-URL to download a specific Agent 6 minor version:
-
-: `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-6.<minor_version>.<bugfix_version>.msi`
-
-URL to download a specific Agent 7 minor version
+URL to download a specific Agent minor version
 
 : `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
 
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-**Note**: It is not possible to upgrade to a specific minor version.
+The recommended way to upgrade between minor version of the Agent is to use the `install_mac_os.sh` script. The following commands work on all supported MacOS versions.
 
-Command to upgrade to the latest Agent 6 minor version:
+Upgrading to a given Agent minor version:
 
-: `DD_AGENT_MAJOR_VERSION=6 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
 
-Command to upgrade to the latest Agent 7 minor version:
+Upgrading to the latest Agent minor version:
 
-: `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
+: `bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"`
 
 {{% /tab %}}
 {{< /tabs >}}
