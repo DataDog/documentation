@@ -14,28 +14,28 @@ algolia:
 ---
 
 [Instrumentation][1] is the process of adding code to your application to capture and report observability data.
-[Automatic instrumentation][2] is a way to instrument applications and libraries without directly modifying their source code.
-Both OpenTelemetry and Datadog provide automatic instrumentations as part of their SDKs.
+[Automatic instrumentation][2] is a way to instrument applications and libraries without modifying their source code.
+Both OpenTelemetry and Datadog provide automatic instrumentation in their SDKs.
 
-Datadog SDKs support adding [instrumentation libraries][3] from OpenTelemetry to their existing automatic instrumentations.
-This provides observability for libraries not originally covered by Datadog SDKs without needing to change SDKs.
+Datadog SDKs support adding [OpenTelemetry instrumentation libraries][3] to their existing automatic instrumentation.
+This provides observability for libraries not covered by Datadog SDKs without changing SDKs.
 
 ## Prerequisites
 
 Before adding OpenTelemetry instrumentation libraries, set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
 <div class="alert alert-warning">
-When replacing an existing Datadog instrumentation with its OpenTelemetry equivalent, remember to disable the
+When replacing a Datadog instrumentation with its OpenTelemetry equivalent, disable the
 Datadog instrumentation to avoid duplicate spans in the trace.
 </div>
 
 <div class="alert alert-info">
-DD_TRACE_OTEL_ENABLED is not required when using the Datadog SDK for Go.
+<code>DD_TRACE_OTEL_ENABLED</code> is not required for the Datadog Go SDK.
 </div>
 
 ## Language support
 
-| Language | Minimum version required |
+| Language | Minimum version          |
 |----------|--------------------------|
 | Java     | 1.35.0                   |
 | Python   | 2.10.0                   |
@@ -51,31 +51,32 @@ DD_TRACE_OTEL_ENABLED is not required when using the Datadog SDK for Go.
 
 ## Compatibility requirements
 
-The Datadog SDK for Java supports library instrumentations written using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
+The Datadog Java SDK supports library instrumentations using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
 
-Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own jar.
+Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own JAR.
 
-OpenTelemetry has an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
+OpenTelemetry provides an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
 
-The Datadog SDK for Java also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
-build, for example the [CFX instrumentation jar][10].
+The Datadog SDK for Java also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
+build, for example the [CFX instrumentation JAR][10].
 
 <div class="alert alert-warning">
-Use of OpenTelemetry incubator APIs is not currently supported.
+OpenTelemetry incubator APIs are not supported.
 </div>
 
 ## Getting started
 
-To use an OpenTelemetry instrumentation with the Datadog SDK for Java:
+To use an OpenTelemetry instrumentation with the Datadog Java SDK:
+
 1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
-2. Copy the OpenTelemetry extension jar containing the instrumentation to the same container as the application.
-3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the path to the extension jar.
+2. Copy the OpenTelemetry extension JAR containing the instrumentation to the same container as the application.
+3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the extension JAR path.
 
 ## Configuration
 
-All configuration options below have system property and environment variable equivalents.
-If the same key type is set for both, the system property configuration takes priority.
-System properties should be set as JVM flags.
+The following configuration options have system property and environment variable equivalents.
+If the same key type is set for both, the system property takes priority.
+Set system properties as JVM flags.
 
 `dd.trace.otel.enabled`
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
@@ -85,7 +86,7 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 `otel.javaagent.extensions`
 : **Environment Variable**: `OTEL_JAVAAGENT_EXTENSIONS`<br>
 **Default**: `false`<br>
-A comma-separated list of paths to extension jar files or folders containing extension jar files.
+A comma-separated list of paths to extension JAR files or folders containing extension JAR files.
 
 OpenTelemetry's [Agent Configuration][11] page describes additional properties that are also recognized by the Datadog SDK.
 
