@@ -16,7 +16,7 @@ El Apdex es una medida numérica de la satisfacción del usuario con el rendimie
 * 0 = ningún usuario satisfecho
 * 1 = todos los usuarios satisfechos
 
-Para definir tu Apdex, necesitas ser administrador de la cuenta de Datadog. En primer lugar, define un umbral de tiempo, **T**, que separe los tiempos de respuesta satisfactorios de los insatisfactorios de el servicio o la aplicación web. Con un umbral, puedes definir tres categorías:
+Para definir tu Apdex, necesitas ser administrador de la cuenta de Datadog. En primer lugar, define un umbral de tiempo, **T**, que separe los tiempos de respuesta satisfactorios de los insatisfactorios del servicio o la aplicación web. Con un umbral, puedes definir tres categorías:
 
 * Las solicitudes satisfechas tienen un tiempo de respuesta inferior a **T**.
 * Las solicitudes toleradas tienen un tiempo de respuesta igual o superior a **T** e inferior o igual a **4T**.
@@ -53,7 +53,7 @@ Para visualizar el servicio o la aplicación web del Apdex:
 
 ## Mostrar el Apdex en el Catálogo de servicios
 
-Para visualizar las puntiaciones del Apdex en el [Catálogo de servicios][2], selecciónalo en el menú de configuración situado en la esquina superior derecha de la página:
+Para visualizar las puntuaciones del Apdex en el [Catálogo de servicios][2], selecciónalo en el menú de configuración situado en la esquina superior derecha de la página:
 
 {{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service Catalog" >}}
 
