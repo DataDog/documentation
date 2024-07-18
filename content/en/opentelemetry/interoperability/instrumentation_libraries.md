@@ -29,6 +29,10 @@ When replacing an existing Datadog instrumentation with its OpenTelemetry equiva
 Datadog instrumentation to avoid duplicate spans in the trace.
 </div>
 
+<div class="alert alert-info">
+Setting `DD_TRACE_OTEL_ENABLED=true` is not required when using the Datadog SDK for Go.
+</div>
+
 ## Language support
 
 | Language | Minimum version required |
