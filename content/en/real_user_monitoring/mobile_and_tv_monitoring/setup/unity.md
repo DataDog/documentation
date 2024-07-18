@@ -19,9 +19,6 @@ further_reading:
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
-  tag: Blog
-  text: Monitor Flutter application performance with Datadog Mobile RUM
 
 ---
 ## Overview
@@ -72,7 +69,7 @@ To ensure the safety of your data, you must use a client token. For more informa
 
 ### Specify Datadog settings in the Unity UI
 
-After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your `Project Settings` and click on the `Datadog` section on the right hand side. You will see the following screen:
+After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your `Project Settings` and click on the `Datadog` section on the left hand side. You will see the following screen:
 
 {{<img src="real_user_monitoring/unity/datadog-setup-ui.png">}}
 
