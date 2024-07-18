@@ -41,7 +41,7 @@ DD_TRACE_OTEL_ENABLED is not required when using the Datadog SDK for Go.
 | Python   | 2.10.0                   |
 | Ruby     | 2.1.0                    |
 | Go       | 1.65.0                   |
-| Node.js  | -                        |
+| Node.js  | 4.3.0                    |
 | PHP      | 0.94.0                   |
 | .NET     | 2.53.0                   |
 
