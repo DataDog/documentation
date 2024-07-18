@@ -119,7 +119,7 @@ OpenTelemetry's [Agent Configuration](https://opentelemetry.io/docs/zero-code/ja
 
 ## Compatibility requirements
 
-The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][1], including the [`opentelemetry-go-contrib/instrumentation`][2] libraries, but it does not support any integration that relies on metrics or logs exporters.
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][1], including the [`opentelemetry-go-contrib/instrumentation`][2] libraries, but it does not support integrations that rely on metrics or logs exporters.
 
 ## Getting started
 
