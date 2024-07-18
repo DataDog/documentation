@@ -1,7 +1,7 @@
 ---
 aliases:
 - /es/tracing/error_tracking/executional_context
-- /es/rastreo/rastreo_error/repetición_ejecución/
+- /es/tracing/error_tracking/execution_replay/
 description: Conoce más sobre Exception Replay para el seguimiento de errores.
 further_reading:
 - link: /monitors/types/error_tracking
