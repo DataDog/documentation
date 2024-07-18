@@ -3,6 +3,27 @@ buildfuture: true
 builddrafts: true
 enableGitInfo: true
 
+# Comment out locally to build all languages
+renderSegments:
+  - integrations
+
+# Exclude all non-English languages
+segments:
+  english:
+    excludes:
+    - lang: fr
+    - lang: ja
+    - lang: ko
+    - lang: es
+  integrations:
+    excludes:
+    - lang: fr
+    - lang: ja
+    - lang: ko
+    - lang: es
+    includes:
+    - path: '{/integrations, /integrations/**/}'
+
 deployment:
     order:
       - ".woff2$"
