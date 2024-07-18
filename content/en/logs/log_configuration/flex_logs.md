@@ -166,7 +166,7 @@ You can add Flex Log queries to dashboards, but make sure to consider these dash
 
 The following list is an example of log sources that are potentially good candidates for sending logs directly to the Flex Tier, therefore not going to Standard Indexing first. This is not an exhaustive list and is meant to give you an idea about the types of logs that are suitable for this configuration. Other log sources (for example, application logs) can still be sent to the Flex Tier after going to Standard indexing first for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources could vary, and that is important to consider when making the decision to skip Standard Indexing.
 
-**Note**: These examples are just a sample for each category. There are many more catagories, and services, tools, and technologies available for each category that you might want to send directly to the Flex Tier.
+**Note**: These examples are a sample for each category. There are many more catagories, and services, tools, and technologies that you may want to send directly to the Flex Tier.
 
 | Technology                             | Examples                                                                                   |
 |----------------------------------------|--------------------------------------------------------------------------------------------|
