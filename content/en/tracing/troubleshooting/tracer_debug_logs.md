@@ -6,7 +6,7 @@ further_reading:
   text: "Troubleshooting APM Connection Errors"
 ---
 
-## Automated debug logs
+## Automated debug log collection
 
 <div class="alert alert-warning">Automated debug logs are supported for Node.js and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">manual debug log collection</a> instead.</div>
 
