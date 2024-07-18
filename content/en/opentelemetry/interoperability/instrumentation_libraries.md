@@ -36,7 +36,7 @@ Datadog instrumentation to avoid duplicate spans in the trace.
 | Java     | v1.35.0                  |
 | Python   | v2.10.0                  |
 | Ruby     | v2.1.0                   |
-| Go       | v1.67.0                  |
+| Go       | v1.65.0 (Span event support planned for v1.67.0)|
 | Node.js  | TBA                      |
 | PHP      | TBA                      |
 | .NET     | TBA                      |
