@@ -51,7 +51,7 @@ The Datadog SDK for Java supports library instrumentations written using OpenTel
 
 Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own jar.
 
-OpenTelemetry provide an [example extension project][7] that provides a custom [instrumentation for Servlet 3 classes][8].
+OpenTelemetry has an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
 
 The Datadog SDK for Java also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
 build, for example the [CFX instrumentation jar][10].
