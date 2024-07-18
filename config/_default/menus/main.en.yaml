@@ -704,16 +704,21 @@ menu:
       identifier: otel_instrumentation
       parent: otel_interoperability
       weight: 603
+    - name: OpenTelemetry Instrumentation Libraries
+      url: /opentelemetry/interoperability/instrumentation_libraries/
+      identifier: otel_instrumentation_libraries
+      parent: otel_interoperability
+      weight: 604
     - name: Correlate RUM and Traces
       url: /real_user_monitoring/platform/connect_rum_and_traces/#opentelemetry-support
       identifier: otel_rum
       parent: otel_interoperability
-      weight: 604
+      weight: 605
     - name: Correlate Logs and Traces
       url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
       identifier: otel_logs
       parent: otel_interoperability
-      weight: 605
+      weight: 606
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
