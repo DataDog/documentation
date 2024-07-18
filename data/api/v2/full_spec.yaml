@@ -8766,6 +8766,12 @@ components:
       description: Attributes of hourly usage for a product family for an org for
         a time period.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         measurements:
           description: List of the measured usage values for the product family for
             the org for the time period.
@@ -39087,6 +39093,15 @@ paths:
       - description: Include child org usage in the response. Defaults to false.
         in: query
         name: filter[include_descendants]
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to false.
+        in: query
+        name: filter[include_connected_accounts]
         required: false
         schema:
           default: false
