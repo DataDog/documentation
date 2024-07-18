@@ -64,7 +64,7 @@ build, for example the [CFX instrumentation JAR][10].
 OpenTelemetry incubator APIs are not supported.
 </div>
 
-## Getting started
+## Setup
 
 To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 
@@ -111,7 +111,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -121,7 +121,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -131,7 +131,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -141,7 +141,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -151,7 +151,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -161,7 +161,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
