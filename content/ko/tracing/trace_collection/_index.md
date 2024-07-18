@@ -15,7 +15,6 @@ further_reading:
 - link: tracing/trace_collection/compatibility
   tag: 설명서
   text: 호환성 요구사항
-kind: 설명서
 title: 애플리케이션 계측
 ---
 

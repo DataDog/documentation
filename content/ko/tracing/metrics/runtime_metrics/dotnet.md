@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
   tag: 블로그
   text: Datadog를 통한 .NET 런타임 메트릭 모니터링
-kind: 설명서
 title: .NET 런타임 메트릭
 type: multi-code-lang
 ---

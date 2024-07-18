@@ -7,7 +7,6 @@ further_reading:
 - link: logs/processing/pipelines
   tag: Documentation
   text: Pipelines de traitement de logs
-kind: Documentation
 title: Attributs réservés
 ---
 

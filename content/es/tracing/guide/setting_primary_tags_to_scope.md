@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/glossary/
   tag: Documentación
   text: Explora tus servicios, recursos y trazas
-kind: documentación
 title: Configurar etiquetas (tags) primarias como contexto
 ---
 

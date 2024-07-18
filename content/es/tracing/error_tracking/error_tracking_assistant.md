@@ -9,7 +9,6 @@ further_reading:
   tag: Documentación
   text: Más información sobre el seguimiento de errores para los servicios de backend
 is_beta: true
-kind: documentación
 private: true
 title: Asistente de seguimiento de errores
 ---

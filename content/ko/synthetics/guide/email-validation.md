@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: 설명서
   text: 단계 고급 옵션 설정하기
-kind: 설명서
 title: 브라우저 테스트 중 이메일 인증 사용
 ---
 

@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   tag: 블로그
   text: Datadog 및 OpenTelemetry 이니셔티브에 대해 자세히 알아보기
-kind: documentation
 title: OpenTelemetry API를 사용한 커스텀 계측
 type: multi-code-lang
 ---

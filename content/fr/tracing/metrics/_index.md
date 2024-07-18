@@ -12,7 +12,6 @@ further_reading:
 - link: monitors/
   tag: Documentation
   text: Créer et gérer des monitors pour informer vos équipes dès que nécessaire
-kind: documentation
 title: Métriques APM
 ---
 

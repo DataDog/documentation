@@ -18,7 +18,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Guía
   text: Facilita la solución de problemas con una correlación entre productos.
-kind: documentación
 title: Correlación de trazas y logs de OpenTelemetry
 type: multi-code-lang
 ---

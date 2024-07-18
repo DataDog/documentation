@@ -11,7 +11,6 @@ further_reading:
 - link: /real_user_monitoring/ios
   tag: 설명서
   text: RUM iOS 및 tvOS 모니터링에 대해 자세히 알아보기
-kind: documentation
 title: RUM을 사용하여 Swift 테스트 계측하기
 ---
 

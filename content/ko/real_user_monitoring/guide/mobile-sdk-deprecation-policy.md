@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/guide/mobile-sdk-upgrade
   tag: 설명서
   text: Datadog 모바일 SDK 업그레이드
-kind: 설명서
 title: RUM 모바일 SDK 지원 중단 정책
 ---
 

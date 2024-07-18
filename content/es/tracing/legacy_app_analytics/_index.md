@@ -3,7 +3,6 @@ aliases:
 - /es/tracing/visualization/search/
 - /es/tracing/trace_search_and_analytics/
 - /es/tracing/advanced_usage/
-kind: documentación
 title: Aplicación Analytics
 ---
 

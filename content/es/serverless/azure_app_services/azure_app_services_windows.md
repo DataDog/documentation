@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: Blog
   text: Desplegar las aplicaciones de ASP.NET Core en Azure App Service
-kind: documentación
 title: 'Azure App Service: código de Windows'
 ---
 

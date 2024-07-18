@@ -22,7 +22,6 @@ further_reading:
 - link: /agent/configuration/secrets-management/
   tag: Documentation
   text: Gestion des secrets
-kind: documentation
 title: Fonction Autodiscovery de l'Agent
 ---
 

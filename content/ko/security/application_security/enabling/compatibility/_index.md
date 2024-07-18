@@ -6,7 +6,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: 설명서
   text: Datadog에서 애플리케이션 보안 관리가 작동하는 방법
-kind: 설명서
 title: 호환성 요구 사항
 type: multi-code-lang
 ---

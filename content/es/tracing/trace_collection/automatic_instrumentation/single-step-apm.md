@@ -6,7 +6,6 @@ further_reading:
   tag: Documentación
   text: Habilitar métricas de tiempo de ejecución
 is_beta: true
-kind: documentación
 title: Instrumentación de un solo paso APM (Beta)
 ---
 ## Información general

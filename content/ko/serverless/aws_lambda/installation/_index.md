@@ -9,7 +9,6 @@ further_reading:
 - link: /integrations/amazon_lambda/
   tag: 설명서
   text: AWS Lambda 통합
-kind: 설명서
 title: AWS Lambda용 서버리스 모니터링 설치
 ---
 

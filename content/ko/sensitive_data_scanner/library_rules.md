@@ -3,7 +3,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: 설명서
   text: 민감한 데이터 스캐너 설정
-kind: documentation
 title: 라이브러리 규칙
 ---
 

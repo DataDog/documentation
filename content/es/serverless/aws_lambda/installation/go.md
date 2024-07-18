@@ -12,7 +12,6 @@ further_reading:
 - link: serverless/custom_metrics/
   tag: Documentación
   text: Envío de métricas personalizadas desde aplicaciones serverless
-kind: documentation
 title: Instrumentación de aplicaciones serverless de Go
 ---
 

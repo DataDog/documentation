@@ -7,7 +7,6 @@ further_reading:
 - link: /quality_gates/explorer/facets
   tag: 설명서
   text: 패싯에 대해 자세히 알아보기
-kind: 설명서
 title: 품질 게이트(Quality Gates) 탐색기 검색 구문
 ---
 

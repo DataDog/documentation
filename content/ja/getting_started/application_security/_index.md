@@ -20,7 +20,6 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
-kind: documentation
 title: Application Security Management を始める
 ---
 

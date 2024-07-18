@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentación
   text: Explora tus servicios, recursos y trazas
-kind: documentación
 title: Instrumentación personalizada de C++ utilizando la API de Datadog
 ---
 

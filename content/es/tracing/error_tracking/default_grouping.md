@@ -1,6 +1,5 @@
 ---
 description: Comprenda cómo se agrupan los errores en problemas.
-kind: documentación
 title: Agrupación por defecto
 ---
 

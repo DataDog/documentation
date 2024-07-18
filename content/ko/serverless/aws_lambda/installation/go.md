@@ -12,7 +12,6 @@ further_reading:
 - link: serverless/custom_metrics/
   tag: 설명서
   text: 서버리스 애플리케이션용 커스텀 메트릭 제출하기
-kind: 설명서
 title: Go 서버리스 애플리케이션 계측하기
 ---
 

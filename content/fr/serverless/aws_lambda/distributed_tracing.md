@@ -25,7 +25,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-lambda-functions-distributed-tracing/
   tag: Blog
   text: Tracing distribué en temps réel pour des fonctions Lambda .NET
-kind: documentation
 title: Tracing distribué avec des applications sans serveur AWS Lambda
 ---
 

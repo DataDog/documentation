@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
   tag: ブログ
   text: シングルページアプリケーションの監視を開始
-kind: documentation
 title: RUM エクスプローラー
 ---
 

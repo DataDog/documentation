@@ -13,7 +13,6 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentación
   text: Explorar tus servicios, recursos y trazas
-kind: documentación
 title: Rastreo de aplicaciones de iOS
 type: lenguaje de código múltiple
 ---

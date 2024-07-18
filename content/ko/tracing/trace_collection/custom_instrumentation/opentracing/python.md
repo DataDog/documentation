@@ -6,7 +6,6 @@ aliases:
 code_lang: 파이썬(Python)
 code_lang_weight: 10
 description: 파이썬(Python)용 OpenTracing 계측
-kind: 설명서
 title: 파이썬(Python) OpenTracing 계측
 type: multi-code-lang
 ---

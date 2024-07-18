@@ -4,7 +4,6 @@ further_reading:
 - link: security/detection_rules/
   tag: Documentation
   text: En savoir plus sur les règles de détection
-kind: documentation
 products:
 - icon: cloud-security-management
   name: Cloud SIEM

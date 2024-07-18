@@ -8,7 +8,6 @@ further_reading:
 - link: /opentelemetry/guide/otel_api_tracing_interoperability
   tag: 설명서
   text: OpenTelemetry API 상호 운용성 및 Datadog의 계측된 트레이스
-kind: 설명서
 title: Java 트레이스 컨텍스트 전파
 type: multi-code-lang
 ---

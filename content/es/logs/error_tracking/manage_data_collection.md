@@ -8,7 +8,6 @@ further_reading:
   tag: Documentación
   text: Más información sobre el rastreo de errores para servicios de backend
 is_beta: true
-kind: documentación
 private: true
 title: Gestionar recopilación de datos
 ---

@@ -9,7 +9,6 @@ further_reading:
   tag: Documentación
   text: Más información sobre Error Tracking Explorer
 is_beta: true
-kind: documentación
 title: Rastrear errores de backend
 ---
 

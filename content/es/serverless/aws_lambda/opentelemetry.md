@@ -3,7 +3,6 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentación
   text: OpenTelemetry en Datadog
-kind: documentación
 title: AWS Lambda y OpenTelemetry
 ---
 

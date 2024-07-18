@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   tag: Blog
   text: Más información sobre Datadog y la iniciativa de OpenTelemetry
-kind: documentación
 title: Instrumentación personalizada con la API de OpenTelemetry
 type: multi-code-lang
 ---

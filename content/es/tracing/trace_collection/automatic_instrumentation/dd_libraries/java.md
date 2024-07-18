@@ -16,7 +16,6 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentación
   text: Explorar tus servicios, recursos y trazas (traces)
-kind: documentación
 title: Rastreo de aplicaciones Java
 type: lenguaje de código múltiple
 ---

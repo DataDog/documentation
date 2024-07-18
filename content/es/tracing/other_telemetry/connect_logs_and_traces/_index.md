@@ -6,7 +6,6 @@ aliases:
 - /es/tracing/advanced/connect_logs_and_traces/
 - /es/tracing/connect_logs_and_traces/
 description: Conecta tus logs y trazas (traces) para correlacionarlos en Datadog.
-kind: documentación
 title: Correlacionar logs y trazas
 type: multi-code-lang
 ---

@@ -6,7 +6,6 @@ aliases:
 code_lang: php
 code_lang_weight: 50
 description: PHP용 OpenTracing 계측
-kind: 설명서
 title: PHP OpenTracing 계측
 type: multi-code-lang
 ---

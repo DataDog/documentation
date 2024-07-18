@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: 블로그
   text: 개선된 Datadog 이벤트로 더 빠르게 문제 해결
-kind: 설명서
 title: 이벤트 익스플로러
 ---
 

@@ -20,7 +20,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: 가이드
   text: 제품 간 상관관계를 활용한 쉬운 트러블슈팅
-kind: 설명서
 title: 파이썬(Python) 로그 및 트레이스 상호연결
 type: multi-code-lang
 ---

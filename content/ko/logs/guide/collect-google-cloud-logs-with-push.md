@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: 설명서
   text: 로그 처리 방법 알아보기
-kind: 설명서
 title: Pub/Sub Push 구독으로 Google Cloud 로그 수집
 ---
 

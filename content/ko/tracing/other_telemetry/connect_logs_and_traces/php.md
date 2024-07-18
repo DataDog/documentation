@@ -17,7 +17,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: 길라잡이
   text: 제품 간 상관관계를 활용한 쉬운 트러블슈팅
-kind: 설명서
 title: PHP 로그와 트레이스 상호 연결
 type: multi-code-lang
 ---

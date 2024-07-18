@@ -7,7 +7,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: 블로그
   text: DBM과 애플리케이션 성능 모니터링(APM) 원격 분석을 원활하게 상호 연결하여 엔드투엔드 쿼리 성능을 이해합니다.
-kind: 설명서
 title: 애플리케이션 성능 모니터링(APM) 데이터와 기타 텔레메트리 상호 연결
 ---
 

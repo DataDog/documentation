@@ -6,7 +6,6 @@ aliases:
 code_lang: ruby
 code_lang_weight: 20
 description: ' Instrumentación de OpenTracing para Ruby'
-kind: documentación
 title: Instrumentación de Ruby OpenTracing
 type: multi-code-lang
 ---

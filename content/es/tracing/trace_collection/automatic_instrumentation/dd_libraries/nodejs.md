@@ -24,7 +24,6 @@ further_reading:
 - link: tracing/
   tag: Documentación
   text: Uso avanzado
-kind: documentación
 title: Rastreo de aplicaciones de Node.js
 type: lenguaje de código múltiple
 ---

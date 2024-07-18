@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: 모바일 및 TV 모니터링 설정
 type: multi-code-lang
 ---

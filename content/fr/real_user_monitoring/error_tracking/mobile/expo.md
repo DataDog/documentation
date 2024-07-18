@@ -17,7 +17,6 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: Visualiser les données de suivi des erreurs dans le RUM Explorer
-kind: documentation
 title: Rapports de crash et suivi des erreurs pour Expo
 type: multi-code-lang
 ---

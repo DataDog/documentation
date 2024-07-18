@@ -26,7 +26,6 @@ further_reading:
 - link: /tracing/glossary/
   tag: Documentación
   text: Explorar tus servicios, recursos y trazas (traces)
-kind: documentation
 title: Rastreo de aplicaciones PHP
 type: lenguaje de código múltiple
 ---

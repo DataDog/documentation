@@ -13,7 +13,6 @@ further_reading:
 - link: /data_security/pci_compliance/
   tag: Documentación
   text: Establecer una organización de Datadog que cumpla con el estándar PCI
-kind: documentación
 title: Seguridad de datos
 ---
 ## Información general

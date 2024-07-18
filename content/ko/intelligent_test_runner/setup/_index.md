@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/continuous_integration/intelligent_test_runner/setup/
-kind: 설명서
 title: Intelligent Test Runner 구성
 type: multi-code-lang
 ---

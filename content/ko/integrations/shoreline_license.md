@@ -21,7 +21,6 @@ integration_id: shoreline-software-license
 integration_title: Shoreline.io
 integration_version: ''
 is_public: true
-kind: 통합
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

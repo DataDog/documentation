@@ -3,7 +3,6 @@ further_reading:
 - link: logs/explorer/search_syntax
   tag: 설명서
   text: 로그 검색 구문
-kind: 설명서
 title: 구문 검색
 ---
 

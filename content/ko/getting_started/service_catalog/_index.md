@@ -15,7 +15,6 @@ further_reading:
 - link: /service_catalog/scorecards
   tag: 설명서
   text: 서비스 스코어카드
-kind: documentation
 title: 서비스 카탈로그 시작하기
 ---
 

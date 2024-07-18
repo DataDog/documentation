@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/continuous_integration/tests/setup/
-kind: documentation
 title: 테스트 가시성 설정
 type: multi-code-lang
 ---

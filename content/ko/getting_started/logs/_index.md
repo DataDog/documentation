@@ -15,7 +15,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여하여 로그 관리를 최적화하세요.
-kind: 설명서
 title: 로그 시작하기
 ---
 

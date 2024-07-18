@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Ignorar los recursos no deseados en APM
 ---
 

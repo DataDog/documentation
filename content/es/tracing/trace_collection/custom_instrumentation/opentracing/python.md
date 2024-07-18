@@ -6,7 +6,6 @@ aliases:
 code_lang: python
 code_lang_weight: 10
 description: ' Instrumentación de OpenTracing para Python'
-kind: documentación
 title: Instrumentación de Python OpenTracing
 type: multi-code-lang
 ---

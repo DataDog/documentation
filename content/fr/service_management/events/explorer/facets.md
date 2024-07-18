@@ -3,7 +3,6 @@ further_reading:
 - link: service_management/events/explorer/attributes
   tag: Documentation
   text: En savoir plus sur les attributs réservés
-kind: Documentation
 title: Facettes
 ---
 

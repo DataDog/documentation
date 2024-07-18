@@ -6,7 +6,6 @@ aliases:
 code_lang: php
 code_lang_weight: 50
 description: ' Instrumentación de OpenTracing para PHP'
-kind: documentación
 title: Instrumentación de PHP OpenTracing
 type: multi-code-lang
 ---

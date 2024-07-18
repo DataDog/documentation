@@ -6,7 +6,6 @@ aliases:
 code_lang: go
 code_lang_weight: 30
 description: ' Instrumentación de OpenTracing para Go'
-kind: documentación
 title: Instrumentación de Go OpenTracing
 type: multi-code-lang
 ---

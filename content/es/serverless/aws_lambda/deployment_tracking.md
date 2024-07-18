@@ -8,7 +8,6 @@ further_reading:
 - link: /serverless/serverless_tagging
   tag: Documentación
   text: Etiquetado serverless
-kind: documentación
 title: Seguimiento del despliegue de aplicaciones serverless de AWS Lambda
 ---
 

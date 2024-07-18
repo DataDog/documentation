@@ -10,7 +10,6 @@ further_reading:
 - link: /logs/explorer/saved_views/
   tag: 설명서
   text: 저장된 보기에 대해 알아보기
-kind: 설명서
 title: 고급 검색
 ---
 

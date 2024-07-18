@@ -46,7 +46,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet
   tag: Código fuente
   text: Código fuente
-kind: documentación
 title: Rastreo de aplicaciones .NET Framework
 type: lenguaje de código múltiple
 ---

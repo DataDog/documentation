@@ -6,7 +6,6 @@ aliases:
 code_lang: nodejs
 code_lang_weight: 40
 description: ' Instrumentación de OpenTracing para Node.js'
-kind: documentación
 title: Instrumentación de Node.js OpenTracing
 type: multi-code-lang
 ---

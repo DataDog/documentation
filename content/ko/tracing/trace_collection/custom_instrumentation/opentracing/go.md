@@ -6,7 +6,6 @@ aliases:
 code_lang: go
 code_lang_weight: 30
 description: 'Go용 OpenTracing 계측 '
-kind: 설명서
 title: Go OpenTracing 계측
 type: multi-code-lang
 ---

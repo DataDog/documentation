@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/serverless-cold-start-traces/
   tag: 블로그
   text: 콜드 스타트 추적으로 서버리스 함수 성능 이해하기
-kind: 설명서
 title: AWS Lambda용 서버리스 모니터링
 ---
 

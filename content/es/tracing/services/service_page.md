@@ -24,7 +24,6 @@ further_reading:
   tag: Blog
   text: Disfruta de visibilidad sobre riesgos, vulnerabilidades y ataques con  APM
     Security View
-kind: documentación
 title: Página de servicios
 ---
 

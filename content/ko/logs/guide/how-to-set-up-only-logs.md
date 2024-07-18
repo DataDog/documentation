@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/logs/faq/how-to-set-up-only-logs
-kind: 설명서
 title: Datadog 에이전트를 로그 수집용으로만 사용
 ---
 

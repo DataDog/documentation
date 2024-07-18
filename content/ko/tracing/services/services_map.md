@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
   tag: 블로그
   text: 서비스 맵(Datadog + Airbnb)을 통해 컨텍스트 생성하기
-kind: 설명서
 title: 서비스 맵
 ---
 

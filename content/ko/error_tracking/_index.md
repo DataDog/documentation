@@ -1,6 +1,5 @@
 ---
 disable_toc: false
-kind: documentation
 title: 오류 추적
 ---
 

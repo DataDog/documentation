@@ -10,7 +10,6 @@ further_reading:
 - link: monitors/
   tag: 설명서
   text: 중요할 때 팀에게 알림을 보낼 수 있도록 모니터 생성 및 관리
-kind: 설명서
 title: APM 메트릭
 ---
 

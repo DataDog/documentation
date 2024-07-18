@@ -7,7 +7,6 @@ further_reading:
 - link: logs/processing/pipelines
   tag: 설명서
   text: 처리 파이프라인 로그
-kind: 설명서
 title: 예약된 속성
 ---
 

@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: 승인되지 않은 서버리스 레이어 오류 트러블슈팅
 ---
 이 가이드는 배포 오류 `not authorized to perform: lambda:GetLayerVersion on resource` 를 해결하는 데 도움이 됩니다. 이 오류는 일반적으로 Datadog 람다 라이브러리 레이어 또는 Datadog 확장 레이어에서 나타납니다.

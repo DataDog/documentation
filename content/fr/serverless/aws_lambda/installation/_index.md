@@ -9,7 +9,6 @@ further_reading:
 - link: /integrations/amazon_lambda/
   tag: Documentation
   text: Intégration AWS Lambda
-kind: documentation
 title: Installer la surveillance sans serveur pour AWS Lambda
 ---
 

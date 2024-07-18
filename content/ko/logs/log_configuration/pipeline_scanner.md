@@ -10,7 +10,6 @@ further_reading:
 - link: /logs/log_configuration/processors/
   tag: 설명서
   text: 로그 프로세서에 대해 자세히 알아보기
-kind: documentation
 title: 파이프라인 스캐너
 ---
 

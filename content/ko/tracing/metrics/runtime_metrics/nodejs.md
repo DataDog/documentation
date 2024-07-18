@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/glossary/
   tag: 설명서
   text: 서비스, 리소스 및 트레이스 탐색
-kind: 설명서
 title: Node.js 런타임 메트릭
 type: multi-code-lang
 ---

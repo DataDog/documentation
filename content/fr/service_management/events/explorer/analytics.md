@@ -1,5 +1,4 @@
 ---
-kind: Documentation
 title: Analyses
 ---
 

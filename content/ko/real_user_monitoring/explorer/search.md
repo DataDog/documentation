@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: 설명서
   text: 이벤트에 시각화 적용
-kind: 설명서
 title: RUM 이벤트 검색
 ---
 

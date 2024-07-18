@@ -12,7 +12,6 @@ further_reading:
 - link: tracing/app_analytics
   tag: Documentación
   text: Utiliza la versión como una dimensión en tus consultas a App Analytics
-kind: documentación
 title: Rastreo de despliegue
 ---
 ## La etiqueta de versión

@@ -2,7 +2,6 @@
 aliases:
 - /es/tracing/serverless_functions/enable_aws_xray/
 description: Rastrea tus funciones de Lambda con AWS X-Ray
-kind: documentación
 title: Activar el rastreo de AWS X-Ray
 ---
 ## Activar AWS X-Ray

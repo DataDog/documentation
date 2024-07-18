@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: 블로그
   text: 민감 데이터 스캐너를 사용하여 규모에 따라 민감한 데이터 문제를 식별, 분류 및 해결하세요.
-kind: documentation
 title: 민감한 데이터 문제 조사
 ---
 

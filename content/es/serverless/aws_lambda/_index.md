@@ -26,7 +26,6 @@ further_reading:
   tag: Blog
   text: Comprender el rendimiento de las funciones serverless con rastreo de arranque
     en frío
-kind: documentación
 title: Serverless Monitoring para AWS Lambda
 ---
 

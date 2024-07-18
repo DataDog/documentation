@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Configuración de la biblioteca de rastreo de Datadog
 type: multi-code-lang
 ---

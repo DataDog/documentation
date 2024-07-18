@@ -14,7 +14,6 @@ further_reading:
   tag: Documentación
   text: Interoperabilidad de la API de OpenTelemetry e instrumentación de trazas de
     Datadog
-kind: documentación
 title: Instrumentación personalizada de Node.js con la API de OpenTelemetry
 type: multi-code-lang
 ---

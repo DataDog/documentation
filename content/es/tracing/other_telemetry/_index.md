@@ -9,7 +9,6 @@ further_reading:
   tag: Blog
   text: Correlaciona sin problemas los datos de telemetría de DBM y APM para comprender
     el rendimiento de las consultas de extremo a extremo
-kind: documentación
 title: Correlacionar los datos de APM con otros datos de telemetría
 ---
 

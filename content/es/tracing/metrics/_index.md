@@ -12,7 +12,6 @@ further_reading:
 - link: monitores/
   tag: Documentación
   text: Crea y gestiona monitores para notificar a tus equipos cuando sea importante.
-kind: documentación
 title: Métricas de APM
 ---
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /serverless/guide/#troubleshoot-your-installation
   tag: 설명서
   text: 일반적인 문제 트러블슈팅
-kind: 설명서
 title: AWS Lambda 모니터링 트러블슈팅
 ---
 

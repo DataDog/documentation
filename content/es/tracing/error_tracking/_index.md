@@ -17,7 +17,6 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: Documentación
   text: Crear un monitor de seguimiento de errores
-kind: documentación
 title: Seguimiento de errores para servicios de backend
 ---
 

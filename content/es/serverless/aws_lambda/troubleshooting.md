@@ -10,7 +10,6 @@ further_reading:
 - link: /serverless/guide/#troubleshoot-your-installation
   tag: Documentación
   text: Solucionar problemas comunes
-kind: documentación
 title: Solucionar problemas relacionados con la monitorización de AWS Lambda
 ---
 

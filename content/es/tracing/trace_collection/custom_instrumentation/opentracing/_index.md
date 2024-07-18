@@ -5,7 +5,6 @@ algolia:
 aliases:
 - /es/tracing/trace_collection/open_standards/
 - /es/tracing/trace_collection/opentracing/
-kind: documentación
 title: Configuración de la instrumentación de OpenTracing
 type: multi-code-lang
 ---

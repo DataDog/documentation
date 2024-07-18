@@ -12,12 +12,11 @@ further_reading:
   tag: 설명서
   text: CI Visibility 문제 해결
 is_beta: true
-kind: documentation
 title: Swift를 위한 Intelligent Test Runner
 type: multi-code-lang
 ---
 
-{< callout url="#" btn_hidden="true" >}}Swift용 인텔리전트 테스트 러너가 베타 버전으로 출시되었습니다.{{< /callout >}}
+{{< callout url="#" btn_hidden="true" >}}Swift용 인텔리전트 테스트 러너가 베타 버전으로 출시되었습니다.{{< /callout >}}
 
 ## 호환성
 

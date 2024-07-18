@@ -3,7 +3,6 @@ aliases:
 - /ko/security_platform/cspm/custom_rules/schema
 - /ko/security/cspm/custom_rules/schema
 - /ko/security/misconfigurations/custom_rules/schema/
-kind: documentation
 list_section:
   AWS: AWS 리소스 유형에 관한 자세한 정보를 보려면 다음 페이지를 참고하세요.
   Azure: Azure 리소스 유형에 관한 자세한 정보를 보려면 다음 페이지를 참고하세요.

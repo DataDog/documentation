@@ -6,7 +6,6 @@ further_reading:
 - link: /tracing/glossary/
   tag: 설명서
   text: APM 용어 및 개념
-kind: 설명서
 title: 자동 계측
 ---
 

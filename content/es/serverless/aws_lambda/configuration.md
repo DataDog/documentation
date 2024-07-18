@@ -16,7 +16,6 @@ further_reading:
 - link: /integrations/github
   tag: Documentación
   text: Integración de GitHub para Datadog
-kind: documentación
 title: Configurar la monitorización serverless para AWS Lambda
 ---
 

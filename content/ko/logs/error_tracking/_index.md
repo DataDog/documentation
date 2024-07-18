@@ -14,7 +14,6 @@ further_reading:
   tag: 설명서
   text: 오류 추적 모니터 만들기
 is_beta: true
-kind: 설명서
 title: 로그 오류 추적
 ---
 

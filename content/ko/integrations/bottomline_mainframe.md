@@ -21,7 +21,6 @@ integration_id: bottomline-mainframe
 integration_title: Bottomline 기록 및 재생
 integration_version: ''
 is_public: true
-kind: 통합
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

@@ -57,7 +57,6 @@ integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
 integration_version: ''
 is_public: true
-kind: 통합
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

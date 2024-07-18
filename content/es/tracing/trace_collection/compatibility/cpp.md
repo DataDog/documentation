@@ -9,7 +9,6 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/cpp
   tag: Documentación
   text: Instrumentar tu aplicación
-kind: documentación
 title: Requisitos de compatibilidad de C++
 type: multi-code-lang
 ---

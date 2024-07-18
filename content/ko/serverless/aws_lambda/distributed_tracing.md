@@ -25,7 +25,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-lambda-functions-distributed-tracing/
   tag: 블로그
   text: .NET Lambda 함수에 대한 실시간 분산 트레이싱
-kind: 설명서
 title: AWS Lambda 서버리스 애플리케이션을 통한 분산 트레이싱
 ---
 

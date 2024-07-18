@@ -6,7 +6,6 @@ further_reading:
 - link: /tests
   tag: 설명서
   text: 테스트 가시화에 대해 알아보기
-kind: documentation
 title: 컨테이너에서 테스트
 ---
 

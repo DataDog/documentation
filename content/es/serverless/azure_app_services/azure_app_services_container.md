@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/azure_app_service_environment/
   tag: Documentación
   text: Entorno de Azure App Service
-kind: documentation
 title: 'Instrumentar Azure App Service: contenedores de Linux'
 ---
 

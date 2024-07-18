@@ -9,7 +9,6 @@ further_reading:
 - link: /integrations/amazon_lambda/
   tag: Documentación
   text: Integración de AWS Lambda
-kind: documentación
 title: Instalar Serverless Monitoring para AWS Lambda
 ---
 

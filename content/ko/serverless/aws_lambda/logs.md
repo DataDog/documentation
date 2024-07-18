@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: AWS Lambda에서 로그 수집
 ---
 

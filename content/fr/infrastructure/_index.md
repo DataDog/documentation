@@ -19,7 +19,6 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive pour booster la surveillance de votre
     infrastructure
-kind: documentation
 title: Infrastructure
 ---
 

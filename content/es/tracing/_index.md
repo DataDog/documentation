@@ -38,7 +38,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Establecer las bases
   text: Participa en una sesión interactiva para mejorar tu comprensión de APM
-kind: documentación
 title: APM
 ---
 

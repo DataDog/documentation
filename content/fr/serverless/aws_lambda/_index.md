@@ -28,7 +28,6 @@ further_reading:
   tag: Blog
   text: Comprendre les performances des fonctions sans serveur avec le tracing des
     démarrages à froid
-kind: documentation
 title: Surveillance sans serveur pour AWS Lambda
 ---
 

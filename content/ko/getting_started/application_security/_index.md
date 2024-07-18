@@ -20,7 +20,6 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: 보안 연구소
   text: Datadog의 보안 연구, 보고서, 팁 및 동영상
-kind: 설명서
 title: 애플리케이션 보안 관리 시작하기
 ---
 

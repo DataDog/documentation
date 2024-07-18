@@ -4,7 +4,6 @@ aliases:
 - /es/tracing/runtime_metrics/
 description: Obtén información adicional sobre el rendimiento de una aplicación con
   las métricas de tiempo de ejecución asociadas a tus trazas (traces).
-kind: documentación
 title: Métricas de tiempo de ejecución
 type: multi-code-lang
 ---

@@ -4,7 +4,6 @@ aliases:
 - /es/serverless/enhanced_lambda_metrics
 - /es/serverless/real-time-enhanced-metrics
 - /es/serverless/real_time_enhanced_metrics
-kind: documentación
 title: Métricas de AWS Lambda
 ---
 

@@ -19,7 +19,6 @@ further_reading:
 - link: /tracing/
   tag: Documentación
   text: Uso avanzado
-kind: documentación
 title: Rastreo de de aplicaciones C++
 type: lenguaje de código múltiple
 ---

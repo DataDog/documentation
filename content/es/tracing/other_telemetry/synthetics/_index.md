@@ -10,7 +10,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Guía
   text: Facilita la solución de problemas gracias a la correlación entre productos.
-kind: documentación
 title: APM con Synthetics
 ---
 

@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
   tag: Blog
   text: Monitoriza aplicaciones contenedorizados de ASP.NET Core
-kind: documentación
 title: Requisitos de compatibilidad de .NET y .NET Core
 type: multi-code-lang
 ---

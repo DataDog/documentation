@@ -6,7 +6,6 @@ aliases:
 code_lang: java
 code_lang_weight: 0
 description: ' Instrumentación de OpenTracing para Java'
-kind: documentación
 title: Instrumentación de Java OpenTracing
 type: multi-code-lang
 ---
