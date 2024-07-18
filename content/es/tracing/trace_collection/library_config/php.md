@@ -331,17 +331,17 @@ Deshabilita la creación de un tramo `laravel.queue.process` adicional y se basa
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 : **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
 **Por defecto**: `null`<br>
-CSV de expresiones regulares (regex) que identifica fragmentos de ruta correspondientes a los ID (consulta [Asignar nombres de recursos a URI normalizada](#map-resource-names-to-normalized-uri)).
+CSV de expresiones regulares (regex) que identifica fragmentos de ruta correspondientes a los ID (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`
 : **INI**: `datadog.trace.resource_uri_mapping_incoming`<br>
 **Por defecto**: `null`<br>
-CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes entrantes (consulta [Asignar nombres de recursos a URI normalizada](#map-resource-names-to-normalized-uri)).
+CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes entrantes (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 : **INI**: `datadog.trace.resource_uri_mapping_outgoing`<br>
 **Predeterminado**: `null`<br>
-CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes salientes (consulta [Asignar nombres de recursos a URI normalizada](#map-resource-names-to-normalized-uri)).
+CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes salientes (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
@@ -390,7 +390,7 @@ Para obtener más información, consulta [Mecanismos de consumo][6].<br>
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
 **Por defecto**: `1`<br>
-Habilitar las URL como nombres de recursos (consulta [Asignar nombres de recursos a URI normalizadas](#map-resource-names-to-normalized-uri)).
+Habilitar las URL como nombres de recursos (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
@@ -419,7 +419,7 @@ Una lista separada por comas de los campos de datos HTTP POST que se recopilará
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
 **Por defecto**: `*`<br>
-Una lista separada por comas de los parámetros de consulta que se recopilarán como parte delURI del recurso. Configúrala como vacía, para evitar la recopilación de parámetros, o como `*`, para recopilar todos los parámetros. Añadido en la versión `0.74.0`.
+Una lista separada por comas de los parámetros de consulta que se recopilarán como parte del URI del recurso. Configúrala como vacía, para evitar la recopilación de parámetros, o como `*`, para recopilar todos los parámetros. Añadido en la versión `0.74.0`.
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **INI**: `datadog.trace.client_ip_enabled`<br>
