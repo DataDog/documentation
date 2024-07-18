@@ -104,17 +104,11 @@ LLMObs.enable(
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
-### Serverless setup
+### AWS Lambda setup
 
-Enable LLM Observability in a serverless environmant by using the [Datadog-Python and Datadog-Extension layers][14].
+Follow the setup instructions for the [Datadog-Python and Datadog-Extension][14] layers and LLM Observability will be automatically enabled.
 
 In order for these serverless layers to properly instrument and flush traces from your serverless application, specify `DD_LLMOBS_ENABLED` in your environment. This applies to both manual and auto-instrumented use cases.
-
-#### Flushing in serverless environments
-
-Flusing from serverless functions is handled automatically when using the latest versions of the `Datadog-Python` and `Datadog-Extension` layers.
-
-Otherwise, `LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
 #### Application naming guidelines
 
@@ -575,6 +569,10 @@ def separate_task(workflow_span):
     workflow_span.finish()
     return
 {{< /code-block >}}
+
+#### Force flushing in serverless environments
+
+`LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
 ### Tracing multiple applications
 
