@@ -165,6 +165,10 @@ func hello(w http.ResponseWriter, req *http.Request) {
 
 No additional configuration is required.
 
+[1]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
+[2]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
+[3]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
+
 {{% /tab %}}
 
 <!-- {{% tab "NodeJS" %}}
@@ -202,7 +206,3 @@ No additional configuration is required.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
-[2]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
-[3]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
