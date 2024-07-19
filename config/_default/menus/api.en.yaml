@@ -2231,8 +2231,7 @@ menu:
           - v2
         operationids:
           - ConvertExistingSecurityMonitoringRule
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Update an existing rule
       url: '#update-an-existing-rule'
@@ -2304,8 +2303,7 @@ menu:
           - v2
         operationids:
           - ConvertSecurityMonitoringRuleFromJSONToTerraform
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Create a detection rule
       url: '#create-a-detection-rule'

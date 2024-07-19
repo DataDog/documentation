@@ -35683,8 +35683,6 @@ paths:
       x-menu-order: 12
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This feature is in private beta. Reach out to support
-        to request access.'
   /api/v2/security_monitoring/rules/test:
     post:
       description: Test a rule.
@@ -35891,8 +35889,6 @@ paths:
       x-menu-order: 11
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This feature is in private beta. Reach out to support
-        to request access.'
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: Test an existing rule.
