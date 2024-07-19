@@ -26,7 +26,7 @@ export type ParsingErrorReport = {
  * An object representing a parsed Markdoc file,
  * including the ASTs of any partials referenced in the file.
  */
-interface ParsedFile {
+export interface ParsedFile {
   ast: Node;
   frontmatter: Frontmatter;
   partials: Record<string, Node>;
@@ -219,23 +219,21 @@ export class FileParser {
    * The renderable tree is used to render HTML output at compile time,
    * and when the end user changes a content preference setting.
    *
-   * @param p An object containing the data required to build a renderable tree.
+   * @param p A ParsedFile object and a PrefOptionsConfig object.
    * @returns A renderable tree.
    */
   static buildRenderableTree(p: {
-    frontmatter: Frontmatter;
+    parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
-    partials: Record<string, Node>;
-    ast: Node;
   }): RenderableTreeNode {
     const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
-      p.frontmatter,
+      p.parsedFile.frontmatter,
       p.prefOptionsConfig
     );
 
-    const renderableTree = MarkdocStaticCompiler.transform(p.ast, {
+    const renderableTree = MarkdocStaticCompiler.transform(p.parsedFile.ast, {
       variables: defaultValsByPrefId,
-      partials: p.partials
+      partials: p.parsedFile.partials
     });
 
     // ensure that all variable ids appearing

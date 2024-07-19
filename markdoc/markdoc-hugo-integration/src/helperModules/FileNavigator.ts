@@ -5,7 +5,7 @@ import path from 'path';
  * A module of static helper functions
  * for working with files and directories.
  */
-export class FileManager {
+export class FileNavigator {
   /**
    * Find all files in a directory that match a given regular expression.
    *

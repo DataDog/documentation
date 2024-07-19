@@ -1,10 +1,9 @@
 import fs from 'fs';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import { FileParser, ParsingErrorReport } from './helperModules/FileParser';
-import MarkdocStaticCompiler from 'markdoc-static-compiler';
-import { FileManager } from './helperModules/FileManager';
-import prettier from 'prettier';
+import { FileNavigator } from './helperModules/FileNavigator';
 import { ConfigProcessor } from './helperModules/ConfigProcessor';
+import { HtmlBuilder } from './helperModules/HtmlBuilder';
 
 export class MarkdocHugoIntegration {
   prefOptionsConfig: PrefOptionsConfig;
@@ -33,7 +32,7 @@ export class MarkdocHugoIntegration {
     this.sitewidePrefNames = ConfigProcessor.loadSitewidePrefsConfigFromFile(
       p.sitewidePrefsFilepath
     );
-    this.markdocFiles = FileManager.findInDir(p.contentDir, /\.mdoc$/);
+    this.markdocFiles = FileNavigator.findInDir(p.contentDir, /\.mdoc$/);
     this.partialsDir = p.partialsDir;
   }
 
@@ -42,22 +41,22 @@ export class MarkdocHugoIntegration {
    */
   compile() {
     for (const markdocFile of this.markdocFiles) {
-      const { ast, frontmatter, partials, errorReports } = FileParser.parseMdocFile(
-        markdocFile,
-        this.partialsDir
-      );
+      const parsedFile = FileParser.parseMdocFile(markdocFile, this.partialsDir);
 
       // if the file has errors, log the errors for later output
       // and continue to the next file
-      if (errorReports.length > 0) {
-        this.parsingErrorReportsByFilePath[markdocFile] = errorReports;
+      if (parsedFile.errorReports.length > 0) {
+        this.parsingErrorReportsByFilePath[markdocFile] = parsedFile.errorReports;
         continue;
       }
 
       // verify that all possible placeholder values
       // yield an existing options set
       try {
-        ConfigProcessor.validatePlaceholders(frontmatter, this.prefOptionsConfig);
+        ConfigProcessor.validatePlaceholders(
+          parsedFile.frontmatter,
+          this.prefOptionsConfig
+        );
       } catch (e) {
         if (e instanceof Error) {
           this.validationErrorsByFilePath[markdocFile] = e.message;
@@ -71,19 +70,11 @@ export class MarkdocHugoIntegration {
 
       // build the renderable tree and write the file to HTML
       try {
-        const renderableTree = FileParser.buildRenderableTree({
-          ast,
-          partials,
-          frontmatter,
+        const html = HtmlBuilder.buildHtml({
+          parsedFile,
           prefOptionsConfig: this.prefOptionsConfig
         });
-
-        const html = MarkdocStaticCompiler.renderers.html(renderableTree);
-        const styledHtml = `<style>.markdoc__hidden { background-color: lightgray; }</style>${html}`;
-        fs.writeFileSync(
-          markdocFile.replace(/\.mdoc$/, '.html'),
-          prettier.format(styledHtml, { parser: 'html' })
-        );
+        fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.html'), html);
       } catch (e) {
         if (e instanceof Error) {
           this.validationErrorsByFilePath[markdocFile] = e.message;

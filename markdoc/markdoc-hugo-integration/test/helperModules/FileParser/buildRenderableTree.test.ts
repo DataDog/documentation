@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { FileParser } from '../../../src/helperModules/FileParser';
-import { FileManager } from '../../../src/helperModules/FileManager';
+import { FileNavigator } from '../../../src/helperModules/FileNavigator';
 import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {
   VALID_CONTENT_DIR,
@@ -10,22 +10,17 @@ import {
 } from '../../config/constants';
 
 describe('FileParser.buildRenderableTree', () => {
-  const markdocFiles = FileManager.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
+  const markdocFiles = FileNavigator.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
   const prefOptionsConfig =
     ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
 
   markdocFiles.forEach((markdocFile) => {
     const sanitizedMarkdocFilename = markdocFile.replace(VALID_CONTENT_DIR, '');
 
-    const { ast, frontmatter, partials, errorReports } = FileParser.parseMdocFile(
-      markdocFile,
-      VALID_PARTIALS_DIR
-    );
+    const parsedFile = FileParser.parseMdocFile(markdocFile, VALID_PARTIALS_DIR);
 
     const renderableTree = FileParser.buildRenderableTree({
-      ast,
-      frontmatter,
-      partials,
+      parsedFile,
       prefOptionsConfig
     });
 

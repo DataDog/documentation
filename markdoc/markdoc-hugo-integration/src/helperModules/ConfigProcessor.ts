@@ -1,5 +1,5 @@
 import { PrefOptionsConfig, PrefOptionsConfigSchema } from '../schemas/yaml/prefOptions';
-import { FileManager } from './FileManager';
+import { FileNavigator } from './FileNavigator';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { Frontmatter } from '../schemas/yaml/frontMatter';
 import fs from 'fs';
@@ -25,7 +25,7 @@ export class ConfigProcessor {
    * @returns A read-only PrefOptionsConfig object.
    */
   static loadPrefOptionsFromDir(dir: string): Readonly<PrefOptionsConfig> {
-    const filenames = FileManager.findInDir(dir, /\.ya?ml$/);
+    const filenames = FileNavigator.findInDir(dir, /\.ya?ml$/);
     const prefOptions: PrefOptionsConfig = {};
 
     filenames.forEach((filename) => {

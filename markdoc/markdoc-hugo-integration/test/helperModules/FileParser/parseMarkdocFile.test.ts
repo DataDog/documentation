@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { FileParser } from '../../../src/helperModules/FileParser';
-import { FileManager } from '../../../src/helperModules/FileManager';
+import { FileNavigator } from '../../../src/helperModules/FileNavigator';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -8,7 +8,7 @@ import {
 } from '../../config/constants';
 
 describe('FileParse.parseMdocFile', () => {
-  const markdocFiles = FileManager.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
+  const markdocFiles = FileNavigator.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
 
   markdocFiles.forEach((markdocFile) => {
     const sanitizedMarkdocFilename = markdocFile.replace(VALID_CONTENT_DIR, '');

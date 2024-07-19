@@ -1,12 +1,12 @@
 import { MarkdocHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR, INVALID_SITE_DIR } from '../config/constants';
-import { FileManager } from '../../src/helperModules/FileManager';
+import { FileNavigator } from '../../src/helperModules/FileNavigator';
 import { error } from 'console';
 
 const siteDir = INVALID_SITE_DIR;
 const contentDir = siteDir + '/content';
-const markupFiles = FileManager.findInDir(contentDir, /\.mdoc$/);
+const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc$/);
 
 describe('MarkdocHugoIntegration', () => {
   const integration = new MarkdocHugoIntegration({

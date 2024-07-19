@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { FileParser } from '../../../src/helperModules/FileParser';
-import { FileManager } from '../../../src/helperModules/FileManager';
+import { FileNavigator } from '../../../src/helperModules/FileNavigator';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -11,7 +11,7 @@ import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import MarkdocStaticCompiler from 'markdoc-static-compiler';
 
 describe('FileParser.collectVarIdsFromTree', () => {
-  const markdocFiles = FileManager.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
+  const markdocFiles = FileNavigator.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
 
   markdocFiles.forEach((markdocFile) => {
     const sanitizedMarkdocFilename = markdocFile.replace(VALID_CONTENT_DIR, '');
