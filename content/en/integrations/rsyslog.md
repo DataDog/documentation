@@ -34,6 +34,11 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 {{< tabs >}}
 
 {{% tab "Ubuntu and Debian" %}}
+
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">The <code>omhttp</code> module is required for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). This module is not installed by default on Ubunto and Debian.</div>
+{{< /site-region >}}
+
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
