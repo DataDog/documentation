@@ -714,7 +714,7 @@ Por defecto, todas las solicitudes se rastrean y se envían al Datadog Agent.
 
 Para cambiar el comportamiento predeterminado del módulo, utiliza las directivas `Datadog*` descritas en la [documentación de la API][3] del módulo de Datadog.
 
-Por ejemplo, la siguiente configuración define el nombre del servicio en `my-service` y la frecuencia de muestreo al 10%:
+Por ejemplo, la siguiente configuración define el nombre del servicio en `my-service` y la frecuencia de muestreo en 10%:
 
 ```nginx
 LoadModule datadog_module modules/mod_datadog.so
