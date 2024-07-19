@@ -1,5 +1,5 @@
 ---
-title: Setting up CloudTrail Logs for Cloud Security Management
+title: Setting up AWS CloudTrail Logs for Cloud Security Management
 ---
 
 Use the following instructions to enable CloudTrail Logs forwarding for Identity Risks (CIEM). When you enable CloudTrail logs forwarding, you get additional insights based on the actual usage (or non-usage) of resources in your infrastructure, for example, users and roles with significant gaps between provisioned and used permissions.

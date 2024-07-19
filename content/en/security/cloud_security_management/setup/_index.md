@@ -33,7 +33,7 @@ Datadog provides a guided workflow for setting up [Cloud Security Management (CS
 
 {{< img src="security/csm/setup/features_selection_new_user.png" alt="CSM Features page" width="100%">}} 
 
-After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Compliance Scanning**, only the **Cloud accounts** and **Hosts and containers** sections are displayed.
+After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Compliance Scanning**, only the **Cloud Accounts** and **Hosts and Containers** sections are displayed.
 
 The following table shows which sections appear on the Setup page for each feature.
 
@@ -51,7 +51,7 @@ The following table shows which sections appear on the Setup page for each featu
         <ul style="font-size: 16px;">
           <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud Integrations</a></li>
           <li><a href="/security/cloud_security_management/setup/agent">Hosts and Containers</a></li>
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">AWS CloudTrail Logs</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
           <li><a href="/security/cloud_security_management/setup/source_code_integrations">Source Code Integrations</a></li>
         </ul>
       </td>
@@ -66,10 +66,10 @@ The following table shows which sections appear on the Setup page for each featu
       </td>
     </tr>
     <tr>
-      <td>Identity Risks (CIEM)</td>
+      <td>Identity Risks (CIEM)<br><em>*Requires Misconfigurations</em></td>
       <td>
         <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">AWS CloudTrail Logs</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
         </ul>
       </td>
     </tr>
@@ -95,7 +95,7 @@ The following table shows which sections appear on the Setup page for each featu
       <td>AWS CloudTrail Logs</td>
       <td>
         <ul style="font-size: 16px;">
-          <li>Requires Cloud SIEM</li>
+          <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
         </ul>
       </td>
     </tr>
