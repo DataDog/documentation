@@ -47,7 +47,7 @@ Log level used by the SDK logger<br>
 In the Node.js & PHP SDKs this maps to `DD_TRACE_LOG_LEVEL` <br>
 In the Go SDK only mapped values between `OTEL_LOG_LEVEL` & `DD_TRACE_DEBUG` are supported:<br>
   - `info`|`false`
-  - `debug`|`true`
+  - `debug`|`true`<br>
 **Not Supported In**: Python, .NET, Ruby, and Go SDKs<br>
 
 `OTEL_PROPAGATORS`
