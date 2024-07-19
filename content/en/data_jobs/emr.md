@@ -41,6 +41,7 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
 <div class="alert alert-warning">
 These permissions are <strong>required</strong> if you are using AWS Secrets Manager.
 </div>
+
 1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
 1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
 1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
