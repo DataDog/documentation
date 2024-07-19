@@ -1,6 +1,5 @@
 ---
 title: Calculated Fields
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/logs/explorer/calculated_fields/expression_language"
