@@ -15,7 +15,7 @@ Con APM, el **consumo** y la **retención** de trazas son totalmente personaliza
 
 ## Mecanismos de consumo
 
-Configura el rastreo para obtener una visibilidad de extremo a extremo de tus aplicaciones con la [configuración de consumo][2] específica. Asegúrate de capturar trazas completas, incluidas todas las trazas de errores y de alta latencia para no perderse nunca los problemas de rendimiento, como una interrupción de la aplicación o una falta de respuesta de un servicio.
+Configura el rastreo para obtener una visibilidad de extremo a extremo de tus aplicaciones con la [configuración de consumo][2] específica. Asegúrate de capturar trazas completas, incluidas todas las trazas de errores y de alta latencia para no perderte nunca los problemas de rendimiento, como una interrupción de la aplicación o una falta de respuesta de un servicio.
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_setup.png" style="width:80%;" alt="Configuración del servicio" >}}
 
