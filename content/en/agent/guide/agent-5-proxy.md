@@ -1135,10 +1135,6 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 
 [1]: https://app.datadoghq.com/infrastructure#overview
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /agent/configuration/agent-fips-proxy
 [2]: /agent/guide/agent-5-commands
 [3]: http://www.squid-cache.org/

@@ -57,10 +57,6 @@ The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 
 **Note**: When setting the log level to `'OFF'` in the configuration file quotes are mandatory to prevent the value for being improperly parsed. Quotes are optional for other log levels.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /agent/guide/agent-5-configuration-files/
 [2]: /agent/guide/agent-5-commands/
 [3]: /agent/guide/agent-5-log-files/

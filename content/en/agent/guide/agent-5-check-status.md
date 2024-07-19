@@ -75,10 +75,6 @@ If the Agent failed to start, and no further information is provided, use the fo
 sudo journalctl -u dd-agent.service
 ```
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /integrations/
 [2]: /help
 [3]: /agent/guide/agent-5-flare/

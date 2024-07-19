@@ -82,10 +82,6 @@ See the following GitHub issues for more information and other potential methods
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /agent/guide/agent-5-commands/
 [2]: /agent/guide/agent-5-log-files/
 [3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
