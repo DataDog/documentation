@@ -47,14 +47,6 @@ components:
       required:
       - errors
       type: object
-    APISuccessResponseSchema:
-      description: A JSON object containing the success message
-      properties:
-        success:
-          description: Message.
-          example: Embed 00000000000 successfully enabled.
-          type: string
-      type: object
     AWSAccount:
       description: Returns the AWS account associated with this integration.
       properties:
@@ -2329,6 +2321,14 @@ components:
             $ref: '#/components/schemas/EmbeddableGraph'
           type: array
       type: object
+    EnableEmbeddableGraphResponseSchema:
+      description: A JSON object containing the success message
+      properties:
+        success:
+          description: Message.
+          example: Embed 00000000000 successfully enabled.
+          type: string
+      type: object
     Event:
       description: Object representing an event.
       properties:
@@ -3194,10 +3194,12 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
       enum:
@@ -24632,10 +24634,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all embeds
       tags:
       - Embeddable Graphs
@@ -24724,10 +24722,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get specific embed
       tags:
       - Embeddable Graphs
@@ -24750,7 +24744,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APISuccessResponseSchema'
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -24788,7 +24782,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APISuccessResponseSchema'
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -25854,10 +25848,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Check that an AWS Lambda Function exists
       tags:
       - AWS Logs Integration
@@ -28129,8 +28119,6 @@ paths:
         - composite: `composite`
 
         - custom: `service check`
-
-        - event: `event alert`
 
         - forecast: `query alert`
 

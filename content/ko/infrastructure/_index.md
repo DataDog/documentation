@@ -3,11 +3,13 @@ aliases:
 - /ko/graphing/infrastructure/
 cascade:
 - _target:
-    path: /infrastructure/resource_catalog/aws_iam_user.md
+    path: /infrastructure/resource_catalog/aws_iam_user
+    lang: ko
   aliases:
-  - /security/cspm/custom_rules/aws_iam_user/
+  - /ko/security/cspm/custom_rules/aws_iam_user/
 - _target:
     path: /infrastructure/**/*
+    lang: ko
   algolia:
     rank: 70
 further_reading:

@@ -12,6 +12,8 @@
 1. Create a Google Cloud Storage [service account][9092].
 1. Follow these [instructions][9093] to create a service account key and download the JSON service account key file. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`.
 
+**Note**: If you are installing the Worker in Kubernetes, see [Referencing files in Kubernetes][9097] for information on how to reference the credentials file.
+
 ### Connect the storage bucket to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][9094].
@@ -34,3 +36,4 @@ See the [Log Archives documentation][9096] for additional information.
 [9094]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [9095]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [9096]: /logs/log_configuration/archives
+[9097]: /observability_pipelines/advanced_configurations/#referencing-files-in-kubernetes
