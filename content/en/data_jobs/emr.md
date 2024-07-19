@@ -34,9 +34,13 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 1. In AWS Secrets Manager, open the secret you created. Take note of the **Secret ARN**.
 
 ### Grant permissions to EMR EC2 instance profile
-EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches, follow [the offical guide][11] to prepare this role based on your application's need to interact with other AWS services. The following additional permssions may be required for Data Jobs Monitoring.
+EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches. Follow [the Amazon guide][11] to prepare this role based on your application's need to interact with other AWS services. The following additional permissions may be required for Data Jobs Monitoring.
 
-#### Permissions to get secret value using AWS Secret Management (required if using Secrets Manager)
+#### Permissions to get secret value using AWS Secrets Manager
+
+<div class="alert alert-warning">
+These permissions are <strong>required</strong> if you are using AWS Secrets Manager.
+</div>
 1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
 1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
 1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
@@ -47,7 +51,11 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
    - Click **Next**.
 1. On the next page, give your policy a name. Then, click **Create policy**.
 
-#### Permissions to describe cluster (required if NOT using the default role EMR_EC2_DefaultRole)
+#### Permissions to describe cluster
+
+<div class="alert alert-warning">
+These permissions are <strong>required</strong> if you are <strong>NOT</strong> using the default role, <code>EMR_EC2_DefaultRole</code>.
+</div>
 
 1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
 1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
@@ -105,7 +113,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 
    ```
 
-   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.4.0.sh` to use the last stable version.
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.4.0.sh` to use the last stable version.
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
