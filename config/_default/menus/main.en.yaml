@@ -4414,21 +4414,61 @@ menu:
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_syslog
       weight: 507
+    - name: Log Enrichment
+      url: observability_pipelines/log_enrichment/
+      parent: observability_pipelines
+      identifier: observability_pipelines_log_enrichment
+      weight: 6
+    - name: Datadog Agent
+      url: observability_pipelines/log_enrichment/datadog_agent/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_datadog_agent
+      weight: 601
+    - name: Fluent
+      url: observability_pipelines/log_enrichment/fluent/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_fluent
+      weight: 602
+    - name: HTTP Client
+      url: observability_pipelines/log_enrichment/http_client/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_http_client
+      weight: 603
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/log_enrichment/splunk_hec/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_splunk_hec
+      weight: 604
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/log_enrichment/splunk_tcp/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_splunk_tcp
+      weight: 605
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/log_enrichment/sumo_logic_hosted_collector/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_sumo_logic_hosted_collector
+      weight: 606
+    - name: Syslog
+      url: observability_pipelines/log_enrichment/syslog/
+      parent: observability_pipelines_log_enrichment
+      identifier: observability_pipelines_log_enrichment_syslog
+      weight: 607
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
       identifier: observability_pipelines_update_existing_pipelines
-      weight: 6
+      weight: 7
     - name: Advanced Configurations
       url: observability_pipelines/advanced_configurations/
       parent: observability_pipelines
       identifier: observability_pipelines_advanced_configurations
-      weight: 7
+      weight: 8
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 8
+      weight: 9
     - name: Log Management
       url: logs/
       pre: log
