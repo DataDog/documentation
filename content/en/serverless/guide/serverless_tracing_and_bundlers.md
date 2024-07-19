@@ -128,11 +128,11 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
 
 ## AWS CDK
 
-If you deploy NodeJS Lambda functions using the `NodeJsFunction` construct, but aren't using `esbuild` or Typescript you can still use Datadog to observe your serverless applications.
+If you deploy Node.js Lambda functions using the `NodeJsFunction` construct, but aren't using `esbuild` or Typescript, you can still use Datadog to observe your serverless applications.
 
 1. Follow the installation instructions for Node.js and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
 2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda Layer.
-3. Use the `NodejsFunction` construct in the CDK. Ensure you set the `entry` property to be the path to the file containing your Lambda function handler, the `depsLockFilePath` to the path to your lock file for the package manager you are using and the `bundling.commandHooks.beforeBundling` to ensure all dependencies are installed.
+3. Use the `NodejsFunction` construct in the CDK. Ensure you set the `entry` property to be the path to the file containing your Lambda function handler, the `depsLockFilePath` to the path to your lock file for the package manager you are using, and the `bundling.commandHooks.beforeBundling` to ensure all dependencies are installed.
    
    **lambdaFunction.ts**
     ```typescript    
