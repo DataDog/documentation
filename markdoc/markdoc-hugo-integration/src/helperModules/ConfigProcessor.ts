@@ -109,6 +109,8 @@ export class ConfigProcessor {
   }
 
   /**
+   * Narrow a PrefOptionsConfig object to only include the options
+   * that are relevant to a specific page, based on the page's frontmatter.
    * Verify that all placeholders refer to valid pref IDs,
    * and that all potential options sources generated
    * by those placeholders are valid.
@@ -117,12 +119,14 @@ export class ConfigProcessor {
    * @param prefOptionsConfig A PrefOptionsConfig object, parsed
    * from the preference options YAML files.
    */
-  static validatePlaceholders(
+  static buildPrefOptionsConfigForPage(
     frontmatter: Frontmatter,
     prefOptionsConfig: PrefOptionsConfig
-  ): void {
+  ): Readonly<PrefOptionsConfig> {
+    const prefOptionsConfigForPage: PrefOptionsConfig = {};
+
     if (!frontmatter.page_preferences) {
-      return;
+      return prefOptionsConfigForPage;
     }
 
     this.validatePlaceholderReferences(frontmatter);
@@ -150,6 +154,11 @@ export class ConfigProcessor {
         ].map((option) => option.identifier);
 
         optionsSetIdsByPrefId[fmPrefConfig.identifier] = fmPrefConfig.options_source;
+
+        // add this options source to the prefOptionsConfigForPage object
+        prefOptionsConfigForPage[fmPrefConfig.options_source] =
+          prefOptionsConfig[fmPrefConfig.options_source];
+
         continue;
       }
 
@@ -181,8 +190,14 @@ export class ConfigProcessor {
         validValuesByOptionsSetId[potentialOptionsSetId] = prefOptionsConfig[
           potentialOptionsSetId
         ].map((option) => option.identifier);
+
+        // add this options source to the prefOptionsConfigForPage object
+        prefOptionsConfigForPage[potentialOptionsSetId] =
+          prefOptionsConfig[potentialOptionsSetId];
       }
     }
+
+    return prefOptionsConfigForPage;
   }
 
   /**

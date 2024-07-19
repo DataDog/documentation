@@ -1,8 +1,0 @@
-Unexpected closing tag "option". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags (16:82)
-[0m [90m 14 |[39m       [33m<[39m[33mdiv[39m[33m>[39m[0m
-[0m [90m 15 |[39m         [33m<[39m[33mdiv[39m[33m>[39m[0m
-[0m[31m[1m>[22m[39m[90m 16 |[39m           [33m<[39m[33mdiv[39m [36mclass[39m[33m=[39m[32m"option-pill "[39m onclick[33m=[39m[32m"handleValueChange('color', red)"[39m[33m>[39m[33mRed[39m[33m<[39m[33m/[39m[33moption[39m[33m>[39m[33m,[39m[33m<[39m[33mdiv[39m [36mclass[39m[33m=[39m[32m"option-pill "[39m onclick[33m=[39m[32m"handleValueChange('color', yellow)"[39m[33m>[39m[33mYellow[39m[33m<[39m[33m/[39m[33moption[39m[33m>[39m[33m,[39m[33m<[39m[33mdiv[39m [36mclass[39m[33m=[39m[32m"option-pill selected"[39m onclick[33m=[39m[32m"handleValueChange('color', blue)"[39m[33m>[39m[33mBlue[39m[33m<[39m[33m/[39m[33moption[39m[33m>[39m[0m
-[0m [90m    |[39m                                                                                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
-[0m [90m 17 |[39m         [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
-[0m [90m 18 |[39m       [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m[0m
-[0m [90m 19 |[39m     [0m

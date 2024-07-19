@@ -6,7 +6,7 @@ import {
 } from '../../../src/schemas/yaml/prefOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
-describe('ConfigProcessor.validatePlaceholders', () => {
+describe('ConfigProcessor.buildPrefOptionsConfigForPage', () => {
   const prefOptions: PrefOptionsConfig = {
     color_options: [
       { identifier: 'blue', display_name: 'Blue', default: true },
@@ -67,7 +67,7 @@ describe('ConfigProcessor.validatePlaceholders', () => {
 
   test('processes valid frontmatter placeholders without errors', () => {
     expect(() =>
-      ConfigProcessor.validatePlaceholders(frontmatter, prefOptions)
+      ConfigProcessor.buildPrefOptionsConfigForPage(frontmatter, prefOptions)
     ).not.toThrow();
   });
 
@@ -94,7 +94,7 @@ describe('ConfigProcessor.validatePlaceholders', () => {
       ]
     };
     expect(() =>
-      ConfigProcessor.validatePlaceholders(invalidFrontmatter, prefOptions)
+      ConfigProcessor.buildPrefOptionsConfigForPage(invalidFrontmatter, prefOptions)
     ).toThrowError(
       `Placeholder <COLOUR> does not refer to a valid page preference identifier. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_preferences list before it is referenced in <COLOUR>.`
     );
@@ -103,7 +103,7 @@ describe('ConfigProcessor.validatePlaceholders', () => {
   test('throws an error when a placeholder-derived options set does not exist', () => {
     const { gloss_red_paint_options, ...invalidPrefOptions } = prefOptions;
     expect(() =>
-      ConfigProcessor.validatePlaceholders(frontmatter, invalidPrefOptions)
+      ConfigProcessor.buildPrefOptionsConfigForPage(frontmatter, invalidPrefOptions)
     ).toThrowError(
       `Invalid options_source could be populated by the placeholders in <FINISH>_<COLOR>_paint_options: An options source with the ID 'gloss_red_paint_options' does not exist.`
     );

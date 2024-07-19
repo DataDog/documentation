@@ -20,14 +20,19 @@ describe('HtmlBuilder.build', () => {
 
     const parsedFile = FileParser.parseMdocFile(markdocFile, VALID_PARTIALS_DIR);
 
+    const prefOptionsConfigForPage = ConfigProcessor.buildPrefOptionsConfigForPage(
+      parsedFile.frontmatter,
+      prefOptionsConfig
+    );
+
     const html = HtmlBuilder.build({
       parsedFile,
-      prefOptionsConfig
+      prefOptionsConfig: prefOptionsConfigForPage
     });
 
     test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
       expect(html).toMatchFileSnapshot(
-        `${SNAPSHOTS_DIR}/HtmlBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
+        `${SNAPSHOTS_DIR}/helperModules/HtmlBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
       );
     });
   });

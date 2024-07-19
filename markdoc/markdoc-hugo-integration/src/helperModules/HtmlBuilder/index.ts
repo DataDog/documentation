@@ -18,6 +18,10 @@ const pageTemplate = fs.readFileSync(
   'utf8'
 );
 
+Handlebars.registerHelper('stringify', function (obj) {
+  return JSON.stringify(obj, null, 2);
+});
+
 export class HtmlBuilder {
   /**
    * Build the HTML output for a given parsed .mdoc file.
@@ -56,7 +60,10 @@ export class HtmlBuilder {
 
     const content = `${chooser}${pageContent}`;
     const html = Handlebars.compile(pageTemplate, { noEscape: true })({
-      content
+      content,
+      renderableTree,
+      prefOptionsConfig: p.prefOptionsConfig,
+      pagePrefsConfig: p.parsedFile.frontmatter.page_preferences || []
     });
 
     const formattedHtml = prettier.format(html, { parser: 'html' });

@@ -50,10 +50,12 @@ export class MarkdocHugoIntegration {
         continue;
       }
 
+      let prefOptionsConfigForPage: PrefOptionsConfig;
+
       // verify that all possible placeholder values
       // yield an existing options set
       try {
-        ConfigProcessor.validatePlaceholders(
+        prefOptionsConfigForPage = ConfigProcessor.buildPrefOptionsConfigForPage(
           parsedFile.frontmatter,
           this.prefOptionsConfig
         );
@@ -68,11 +70,11 @@ export class MarkdocHugoIntegration {
         continue;
       }
 
-      // build the renderable tree and write the file to HTML
+      // build the HTMl string and write it to file
       try {
         const html = HtmlBuilder.build({
           parsedFile,
-          prefOptionsConfig: this.prefOptionsConfig
+          prefOptionsConfig: prefOptionsConfigForPage
         });
         fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.html'), html);
       } catch (e) {
