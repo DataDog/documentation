@@ -7,9 +7,18 @@ import MarkdocStaticCompiler, {
 } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
-import { PageDataManifest, PageDataManifestSchema } from '../schemas/pageDataManifest';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
+
+const valueChangeHandlerScript = `
+<script>
+    function handleValueChange(varName, newValue) {
+      console.log('handleValueChange called');
+      console.log('varName:', varName);
+      console.log('newValue:', newValue);
+    }
+</script>
+`;
 
 export class HtmlBuilder {
   static build(p: {
@@ -27,7 +36,9 @@ export class HtmlBuilder {
       defaultValsByPrefId
     });
 
+    // Build the chooser HTML, if any
     const frontmatter = p.parsedFile.frontmatter;
+
     let chooser = '';
     if (frontmatter.page_preferences) {
       const resolvedPrefs = this.resolvePagePrefs({
@@ -38,9 +49,13 @@ export class HtmlBuilder {
       chooser = this.buildPagePrefsChooserHtml(resolvedPrefs);
     }
 
+    // Build the page content HTML
     const content = MarkdocStaticCompiler.renderers.html(renderableTree);
+
+    // Add debugging styles
     const styles = `<style>.markdoc__hidden { background-color: lightgray; }</style>`;
-    const html = `${styles}${chooser}${content}`;
+
+    const html = `${valueChangeHandlerScript}${styles}${chooser}${content}`;
 
     const formattedHtml = prettier.format(html, { parser: 'html' });
     return formattedHtml;
