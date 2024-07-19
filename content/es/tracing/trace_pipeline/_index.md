@@ -3,7 +3,7 @@ aliases:
 - /es/tracing/ingestion/
 - /es/tracing/trace_ingestion/
 - /es/tracing/trace_retention_and_ingestion/
-description: 'Aprenda a controlar el consumo de tramos (spans) '
+description: 'Aprende a controlar el consumo de tramos (spans) '
 title: El pipeline de trazas
 ---
 
