@@ -34,7 +34,7 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 1. In AWS Secrets Manager, open the secret you created. Take note of the **Secret ARN**.
 
 ### Grant permissions to EMR EC2 instance profile
-EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches, follow [the offical guide][11] to prepare this role based on your application's need to interact with other AWS services. The following permssions are additional permissions required for Data Jobs Monitoring.
+EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches, follow [the offical guide][11] to prepare this role based on your application's need to interact with other AWS services. The following additional permssions may be required for Data Jobs Monitoring.
 
 #### Permissions to get secret value using AWS Secret Management (Recommended)
 1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
