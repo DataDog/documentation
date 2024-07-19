@@ -1,66 +1,61 @@
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .collapsible-section {
-    border: 1px solid #D4BDFB;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    overflow: hidden;
+  border: 1px solid #D4BDFB;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
 }
 
-.collapsible-header {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    cursor: pointer;
-    outline: none;
-    background-color: #ffffff00;
-    transition: background-color 0.3s;
+.collapsible-section .collapsible-header {
+  display: flex;
+  align-items: center;
+  padding: 8px; /* Reverted to original 8px padding */
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: background-color 0.3s;
 }
 
-.collapsible-header:hover { 
-    background-color: #eae2f8;
+.collapsible-section .collapsible-header:hover {
+  background-color: #eae2f8;
 }
 
-.collapsible-section[open] .collapsible-header {
-    background-color: #632DA6;
-    color: white;
+.collapsible-section.open .collapsible-header {
+  background-color: #632DA6;
+  color: white;
 }
 
-.collapsible-section[open] .header-text-inner {
-    color: white;
+.collapsible-section .icon-chevron-right {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px; /* Adjusted to match original layout */
+  transition: transform 0.3s;
 }
 
-.header-text-inner {
-    margin: 0;
-    line-height: 1.5;
-    font-weight: bold;
+.collapsible-section.open .icon-chevron-right {
+  transform: rotate(90deg);
 }
 
-.header-content {
-    display: flex;
-    align-items: center;
+.collapsible-section .header-text {
+  font-size: 1.17em; /* Adjust if needed to match your h3 size */
+  font-weight: bold;
 }
 
-.header-icon {
-    margin-right: 8px;
-    display: flex;
-    align-items: center;
+.collapsible-section .collapsible-content {
+  display: none;
+  padding: 16px;
 }
 
-.icon-chevron-right {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s;
-    fill: currentColor;
-}
-
-.collapsible-section[open] .icon-chevron-right {
-    transform: rotate(90deg);
-}
-
-.header-text {
-    display: flex;
-    align-items: center;
-}
-
-.collapsible-content {
-    padding: 16px;
+.collapsible-section.open .collapsible-content {
+  display: block;
 }
