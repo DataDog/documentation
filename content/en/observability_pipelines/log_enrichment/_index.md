@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-TKTK
+Use the Log Enrichment Template to enrich and transform your logs with Observability Pipelines's processors before sending them to its destination.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 

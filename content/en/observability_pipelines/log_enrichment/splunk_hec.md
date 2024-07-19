@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your Datadog Agent to send logs to the Observability Pipelines Worker and enrich your logs before routing them to different destinations.
+Configure your Datadog Agent to send logs to the Observability Pipelines Worker and enrich and transform your logs before routing them to its destination.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 
