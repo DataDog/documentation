@@ -35,13 +35,17 @@ This causes the SDK to output additional information about what it's doing and w
 
 ## The SDK is not sending data
 
+<div class="alert alert-info">Datadog does not support sending data from the Unity Editor, only from iOS and Android simulators, emulators, and devices.</div>
+
 If you're not seeing any data in Datadog:
 
-1. Make sure you are running your app on an iOS or Android simulator, emulator, or device, and not from the editor. Datadog does not support sending data from the Unity Editor, only from iOS and Android simulators, emulators, and devices.
+1. Make sure you are running your app on an iOS or Android simulator, emulator, or device, and not from the editor.
 2. Check that you have set the `TrackingConsent` as part of your initialization. Tracking consent is set to `TrackingConsent.Pending` during initialization,
 and needs to be set to `TrackingConsent.Granted` before Datadog sends any information.
 
    {{< code-block lang="cs" >}}
 DatadogSdk.Instance.SetTrackingConsent(TrackingConsent.Granted);
 {{< /code-block >}}
+
+[1]: /help
 
