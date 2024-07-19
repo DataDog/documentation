@@ -70,7 +70,7 @@ export class MarkdocHugoIntegration {
 
       // build the renderable tree and write the file to HTML
       try {
-        const html = HtmlBuilder.buildHtml({
+        const html = HtmlBuilder.build({
           parsedFile,
           prefOptionsConfig: this.prefOptionsConfig
         });

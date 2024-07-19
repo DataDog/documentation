@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const StringVariableSchema = z
+export const PagePrefSchema = z
   .object({
     identifier: z.string(),
     displayName: z.string(),
@@ -9,14 +9,12 @@ export const StringVariableSchema = z
   })
   .strict();
 
-export type StringVariable = z.infer<typeof StringVariableSchema>;
+export type PagePref = z.infer<typeof PagePrefSchema>;
 
-export const PageVariableSchema = StringVariableSchema;
-
-export type PageVariable = z.infer<typeof PageVariableSchema>;
-
+/*
 export const GlobalVariableConfigSchema = z.record(
   StringVariableSchema.omit({ identifier: true })
 );
 
 export type GlobalVariableConfig = z.infer<typeof GlobalVariableConfigSchema>;
+*/

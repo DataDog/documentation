@@ -1,5 +1,5 @@
 // Where all test snapshots should be stored
-export const SNAPSHOTS_DIR = __dirname + '/__snapshots__';
+export const SNAPSHOTS_DIR = __dirname + '/../__snapshots__';
 
 // Where all mock data should be stored
 export const MOCKS_DIR = __dirname + '/mocks';

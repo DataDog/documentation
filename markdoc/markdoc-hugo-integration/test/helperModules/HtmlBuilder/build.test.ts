@@ -1,5 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { FileParser } from '../../../src/helperModules/FileParser';
+import { HtmlBuilder } from '../../../src/helperModules/HtmlBuilder';
 import { FileNavigator } from '../../../src/helperModules/FileNavigator';
 import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {
@@ -9,7 +10,7 @@ import {
   SNAPSHOTS_DIR
 } from '../../config/constants';
 
-describe('FileParser.buildRenderableTree', () => {
+describe('HtmlBuilder.build', () => {
   const markdocFiles = FileNavigator.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
   const prefOptionsConfig =
     ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
@@ -19,15 +20,14 @@ describe('FileParser.buildRenderableTree', () => {
 
     const parsedFile = FileParser.parseMdocFile(markdocFile, VALID_PARTIALS_DIR);
 
-    const renderableTree = FileParser.buildRenderableTree({
+    const html = HtmlBuilder.build({
       parsedFile,
       prefOptionsConfig
     });
 
-    test(`creates a renderable tree for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
-      expect(renderableTree).toBeDefined();
-      expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-        `${SNAPSHOTS_DIR}/validSite/${sanitizedMarkdocFilename}/renderableTree.snap.json`
+    test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
+      expect(html).toMatchFileSnapshot(
+        `${SNAPSHOTS_DIR}/HtmlBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
       );
     });
   });

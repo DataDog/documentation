@@ -3,38 +3,62 @@
     background-color: lightgray;
   }
 </style>
+<div style="display: inline-block; vertical-align: top; margin-right: 1em">
+  <label>Color</label>
+  <select
+    onchange="handleValueChange('color', this.options[this.selectedIndex].value)"
+  >
+    <option value="red">Red</option>
+    ,
+    <option value="yellow">Yellow</option>
+    ,
+    <option value="green" selected>Green</option>
+  </select>
+</div>
+
+<div style="display: inline-block; vertical-align: top; margin-right: 1em">
+  <label>Item</label>
+  <select
+    onchange="handleValueChange('item', this.options[this.selectedIndex].value)"
+  >
+    <option value="grass" selected>Grass</option>
+    ,
+    <option value="emerald">Emerald</option>
+    ,
+    <option value="lime">Lime</option>
+    ,
+    <option value="frog">Frog</option>
+  </select>
+</div>
 <article>
   <p>
-    This test page explores everyday items that are blue, yellow, or red --
-    which also happen to be the primary colors of the color wheel. If this seems
-    contrived and odd, that's only because test pages are often both of those
-    things.
+    This test page explores everyday items that are green, yellow, or red --
+    which also happen to be the colors of the common traffic light. If this
+    seems contrived and odd, that's only because test pages are often both of
+    those things.
   </p>
-  <h2>sky: Your blue item of choice</h2>
+  <h2>grass: Your green item of choice</h2>
   <div>
-    <div class="markdoc__hidden">
-      <p>
-        The ocean is a large body of saltwater. It covers about 70% of the
-        Earth's surface.
-      </p>
-    </div>
     <div>
       <p>
-        The sky is the atmosphere as seen from the Earth's surface. It appears
-        blue during the day.
+        Grass is a very common lawn plant. Alternatives to grass include clover
+        and moss.
       </p>
     </div>
     <div class="markdoc__hidden">
       <p>
-        Jeans are a type of clothing. They're often made from denim and are
-        known for their durability.
+        Emeralds are a type of gemstone. They're not known for being very
+        durable.
       </p>
     </div>
     <div class="markdoc__hidden">
       <p>
-        Blueberries are a type of fruit. They're often eaten raw or used in
-        baking.
+        Limes are a type of citrus fruit. They're often used in drinks and
+        cooking.
       </p>
+    </div>
+    <div class="markdoc__hidden">
+      <p>Frogs are amphibians. They're known for their jumping abilities.</p>
     </div>
   </div>
   <div class="markdoc__hidden">

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PagePrefsSchema } from './pagePrefs';
+import { ResolvedPagePrefsSchema } from './resolvedPagePrefs';
 
 /**
  * PageDataManifest schema:
@@ -13,10 +13,10 @@ import { PagePrefsSchema } from './pagePrefs';
  */
 
 export const PageDataManifestSchema = z.object({
-  resolvedUrl: z.string().url(),
+  // resolvedUrl: z.string().url(),
   valuesByParamName: z.record(z.string()),
   selectionDisplayTextByParamName: z.record(z.string()),
-  pagePrefs: PagePrefsSchema,
+  pagePrefs: ResolvedPagePrefsSchema,
   paramToVarMapping: z.record(z.string())
 });
 

@@ -12,29 +12,29 @@ import { SNAKE_CASE_REGEX } from './regexes';
  * display the name of the preference on the page, and so on.
  */
 
-export const PagePrefOptionSchema = z
+export const ResolvedPagePrefOptionSchema = z
   .object({
     // The value of the option, to be used in routes and params
     id: z.string().regex(SNAKE_CASE_REGEX),
     // The display name of the option in the UI
-    display_name: z.string()
+    displayName: z.string()
   })
   .strict();
 
-export type PagePrefOption = z.infer<typeof PagePrefOptionSchema>;
+export type ResolvedPagePrefOption = z.infer<typeof ResolvedPagePrefOptionSchema>;
 
-export const PagePrefSchema = z
+export const ResolvedPagePrefSchema = z
   .object({
     // The unique ID of the variable
-    id: z.string().regex(SNAKE_CASE_REGEX),
+    identifier: z.string().regex(SNAKE_CASE_REGEX),
     // The display name of the preference in the UI
-    display_name: z.string(),
-    default_value: z.string().regex(SNAKE_CASE_REGEX),
-    options: z.array(PagePrefOptionSchema)
+    displayName: z.string(),
+    defaultValue: z.string().regex(SNAKE_CASE_REGEX),
+    options: z.array(ResolvedPagePrefOptionSchema)
   })
   .strict();
 
-export type PagePref = z.infer<typeof PagePrefSchema>;
+export type ResolvedPagePref = z.infer<typeof ResolvedPagePrefSchema>;
 
-export const PagePrefsSchema = z.record(PagePrefSchema);
-export type PagePrefs = z.infer<typeof PagePrefsSchema>;
+export const ResolvedPagePrefsSchema = z.record(ResolvedPagePrefSchema);
+export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;
