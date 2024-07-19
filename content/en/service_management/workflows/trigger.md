@@ -154,10 +154,6 @@ For additional examples of security workflows you can automate, see [Automate Se
 
 ## API triggers
 
-{{< callout btn_hidden="true" header="false" >}}
-API triggers are in private beta.
-{{< /callout >}}
-
 Triggering a workflow using an API call requires an [API key][8] and an [application key][9] with the `workflows_run` scope. For information on adding a scope to an application key, see [Scopes][10].
 
 <div class="alert alert-info">Unscoped keys do not include the <code>workflows_run</code> scope by default. Ensure that you're following security best practice and use an application key with the minimum scopes needed to perform the desired task.</div>

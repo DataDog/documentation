@@ -59,7 +59,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Role created or deleted][7] | A role is created or deleted in the org. | `@evt.name:"Access Management" @asset.type:role @action:(created OR deleted)` |
 | [Role access request][8] | A user created, responded to, or deleted an access request for a role, and the value of the access request. | `@evt.name:"Access Management" @asset.type:role_request` |
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
-| [Password][9] | A user modified or reset their password in the org. Password reset events are delivered to all orgs that user is active in, even if the org does not have password authentication configured. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
+| [Password][9] | A user modified their password in the org. Password update events are delivered to all orgs that user is active in, even if the org does not have password authentication configured.| `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Restriction policy][10] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 | [Email update (Support)][11] | A user's email was updated by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:modified` |
 | [User invite (Support)][12] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:created` |
