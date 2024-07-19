@@ -1,24 +1,22 @@
-import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
-import { ParsedFile } from './FileParser';
-import { ConfigProcessor } from './ConfigProcessor';
+import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
+import { ParsedFile } from '../FileParser';
+import { ConfigProcessor } from '../ConfigProcessor';
 import MarkdocStaticCompiler, {
   RenderableTreeNodes,
   RenderableTreeNode
 } from 'markdoc-static-compiler';
 import prettier from 'prettier';
-import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
-import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
+import { ResolvedPagePrefs, ResolvedPagePref } from '../../schemas/resolvedPagePrefs';
+import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
+import { PagePrefsConfig } from '../../schemas/yaml/frontMatter';
+import fs from 'fs';
+import path from 'path';
+import Handlebars from 'handlebars';
 
-const valueChangeHandlerScript = `
-<script>
-    function handleValueChange(varName, newValue) {
-      console.log('handleValueChange called');
-      console.log('varName:', varName);
-      console.log('newValue:', newValue);
-    }
-</script>
-`;
+const pageTemplate = fs.readFileSync(
+  path.resolve(__dirname, 'templates/page.html'),
+  'utf8'
+);
 
 export class HtmlBuilder {
   /**
@@ -54,16 +52,12 @@ export class HtmlBuilder {
     }
 
     // Build the page content HTML
-    const content = MarkdocStaticCompiler.renderers.html(renderableTree);
+    const pageContent = MarkdocStaticCompiler.renderers.html(renderableTree);
 
-    // Add debugging styles
-    const styles = `<style>
-    .option-pill { display: inline-block; padding: 0.5em; margin-right: 0.5em; margin-bottom: 10px; border: 1px solid lightgray; cursor: pointer; }
-    .option-pill.selected { background-color: lightblue; }
-    .markdoc__hidden { background-color: lightgray; }
-    </style>`;
-
-    const html = `${valueChangeHandlerScript}${styles}${chooser}${content}`;
+    const content = `${chooser}${pageContent}`;
+    const html = Handlebars.compile(pageTemplate, { noEscape: true })({
+      content
+    });
 
     const formattedHtml = prettier.format(html, { parser: 'html' });
     return formattedHtml;
