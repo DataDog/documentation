@@ -5152,7 +5152,7 @@ menu:
       weight: 700
     - name: Using Single Step Instrumentation
       url: security/application_security/threats/single_step/
-      parent: appsec_threats
+      parent: appsec_threats_management_setup
       identifier: appsec_threats_setup_using_single_step
       weight: 702
     - name: Using Datadog Tracing Libraries
