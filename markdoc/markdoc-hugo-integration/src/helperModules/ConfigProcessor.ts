@@ -257,15 +257,17 @@ export class ConfigProcessor {
    */
   static buildSnakeCaseCombinations(arr: any[], str: string = '', final: any[] = []) {
     if (arr.length > 1) {
-      arr[0].forEach((v: string) =>
+      arr[0].forEach((segment: string) =>
         this.buildSnakeCaseCombinations(
           arr.slice(1),
-          str + (str === '' ? '' : '_') + v,
+          str + (str === '' ? '' : '_') + segment,
           final
         )
       );
     } else {
-      arr[0].forEach((v: string) => final.push(str + (str === '' ? '' : '_') + v));
+      arr[0].forEach((segment: string) =>
+        final.push(str + (str === '' ? '' : '_') + segment)
+      );
     }
     return final;
   }

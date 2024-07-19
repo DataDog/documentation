@@ -1,18 +1,7 @@
 import { z } from 'zod';
 import { SNAKE_CASE_REGEX } from './regexes';
 
-/**
- * PagePref schemas:
- * These define what a page preference object looks like,
- * including the default value of the preference,
- * options for the preference, and so on.
- * The data in this object is derived from several sources,
- * such as front matter and the relevant configuration files.
- * This object is used to populate menu options in the UI,
- * display the name of the preference on the page, and so on.
- */
-
-export const ResolvedPagePrefOptionSchema = z
+const ResolvedPagePrefOptionSchema = z
   .object({
     // The value of the option, to be used in routes and params
     id: z.string().regex(SNAKE_CASE_REGEX),
@@ -20,8 +9,6 @@ export const ResolvedPagePrefOptionSchema = z
     displayName: z.string()
   })
   .strict();
-
-export type ResolvedPagePrefOption = z.infer<typeof ResolvedPagePrefOptionSchema>;
 
 export const ResolvedPagePrefSchema = z
   .object({
@@ -34,7 +21,32 @@ export const ResolvedPagePrefSchema = z
   })
   .strict();
 
+/**
+ * A ResolvedPagePref object represents all of the available data
+ * for a single page preference. Page prefs are resolved by
+ * combining the frontmatter, configured options, and default or user-selected values
+ * in order to populate an object that has a current value,
+ * correctly populated options based on any placeholders that were
+ * used in the frontmatter, and so on.
+ *
+ * @example
+ * {
+ *   identifier: 'category',
+ *   displayName: 'Category',
+ *   defaultValue: 'all',
+ *   options: [
+ *     { id: 'all', displayName: 'All' },
+ *     { id: 'news', displayName: 'News' },
+ *     { id: 'events', displayName: 'Events' }
+ *   ]
+ * }
+ */
 export type ResolvedPagePref = z.infer<typeof ResolvedPagePrefSchema>;
 
 export const ResolvedPagePrefsSchema = z.record(ResolvedPagePrefSchema);
+
+/**
+ * A collection of ResolvedPagePref objects, indexed by their
+ * unique identifiers.
+ */
 export type ResolvedPagePrefs = z.infer<typeof ResolvedPagePrefsSchema>;
