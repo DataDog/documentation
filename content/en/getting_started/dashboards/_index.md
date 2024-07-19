@@ -148,6 +148,6 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [14]: /dashboards/sharing/
 [15]: /integrations/slack/
 [16]: /api/v1/dashboards/
-[17]: /service_management/mobile/
+[17]: /mobile/
 [18]: https://apps.apple.com/app/datadog/id1391380318
 [19]: https://play.google.com/store/apps/details?id=com.datadog.app
