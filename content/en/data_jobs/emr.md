@@ -16,7 +16,7 @@ further_reading:
 
 Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
-1. [Store your Datadog API key](#store-your-datadog-api-key-in-aws-secrets-manager) in AWS Secrets Manager (Recommended).
+1. [Store your Datadog API key](#store-your-datadog-api-key-in-aws-secrets-manager-recommended) in AWS Secrets Manager (Recommended).
 1. [Grant permissions to EMR EC2 instance profile](#grant-permissions-to-emr-ec2-instance-profile).
 1. [Create and configure your EMR cluster](#create-and-configure-your-emr-cluster).
 1. [Specify service tagging per Spark application](#specify-service-tagging-per-spark-application).
