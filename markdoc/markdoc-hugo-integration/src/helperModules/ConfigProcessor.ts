@@ -22,9 +22,9 @@ export class ConfigProcessor {
    * For example, duplicate options set IDs are not allowed.
    *
    * @param dir The directory containing the preference options YAML files.
-   * @returns A PrefOptionsConfig object.
+   * @returns A read-only PrefOptionsConfig object.
    */
-  static loadPrefOptionsFromDir(dir: string): PrefOptionsConfig {
+  static loadPrefOptionsFromDir(dir: string): Readonly<PrefOptionsConfig> {
     const filenames = FileManager.findInDir(dir, /\.ya?ml$/);
     const prefOptions: PrefOptionsConfig = {};
 
@@ -49,9 +49,9 @@ export class ConfigProcessor {
    * Load a preference options configuration from a YAML file.
    *
    * @param yamlFile The path to a YAML file containing preference options.
-   * @returns A PrefOptionsConfig object.
+   * @returns A read-only PrefOptionsConfig object.
    */
-  static loadPrefsYamlFromStr(yamlFile: string): PrefOptionsConfig {
+  static loadPrefsYamlFromStr(yamlFile: string): Readonly<PrefOptionsConfig> {
     const yamlFileContent = fs.readFileSync(yamlFile, 'utf8');
     const parsedYaml = yaml.load(yamlFileContent);
     return PrefOptionsConfigSchema.parse(parsedYaml);

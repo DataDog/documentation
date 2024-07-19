@@ -17,6 +17,13 @@ export type ParsingErrorReport = {
   lines: number[];
 };
 
+interface ParsedFile {
+  ast: Node;
+  frontmatter: Frontmatter;
+  partials: Record<string, Node>;
+  errorReports: ParsingErrorReport[];
+}
+
 /**
  * A module responsible for parsing Markdoc files into data structures
  * such as ASTs and RenderableTreeNodes,
@@ -29,9 +36,9 @@ export class FileParser {
    *
    * @param markdocFile The path to the Markdoc file.
    * @param partialsDir The directory containing any partials required by the Markdoc file.
-   * @returns An object containing the AST, frontmatter, partial ASTs by filepath, and any errors.
+   * @returns A read-only ParsedFile object.
    */
-  static parseMdocFile(markdocFile: string, partialsDir: string) {
+  static parseMdocFile(markdocFile: string, partialsDir: string): Readonly<ParsedFile> {
     const markdocStr = fs.readFileSync(markdocFile, 'utf8');
     const ast = MarkdocStaticCompiler.parse(markdocStr);
 
