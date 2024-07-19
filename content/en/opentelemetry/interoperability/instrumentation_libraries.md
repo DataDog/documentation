@@ -135,10 +135,10 @@ The Datadog SDK for Go supports library instrumentations written using the [Open
 
 ## Setup
 
-To set up the Datadog trace provider and configure Opentelemetry to use the Datadog trace provider, perform the following steps:
+To use Opentelemetry integrations with the Datadog tracing library, perform the following steps:
 
  1. Follow the steps in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][3] page.
-1. Follow the instructions for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
+ 2. Follow the instructions for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
 
 The following is an example instrumenting the net/http library with the Datadog Tracer and Opentelemetry's net/http integration:
 ```go
