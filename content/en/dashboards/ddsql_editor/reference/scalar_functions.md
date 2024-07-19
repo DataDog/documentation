@@ -87,6 +87,17 @@ These functions return one value per row.
 |------|-------------|-------------|
 | sqrt(numeric *n*) | numeric | Calculates the square root of *n*. |
 
+## Array functions and operators
+| Name | Return type | Description |
+|------|-------------|-------------|
+| array_length(array *a*) | integer | Returns the length of the array *a* for each row. |
+| array_contains(array *a*, expr *e*) | boolean | Returns true if the value the expr *e* evaluates to is in the array *a* for each row. |
+| array_cat(array *a*, array *b*) | array | Returns a new array containing the combined elements from array *a* and array *b*.  |
+| array_append(array *a*, expr *e*) | array | Returns a new array that includes all the original elements of the input array followed by the appended element. |
+| string_to_array(text *s*, delimiter, [,nullString]) | array | Returns an array of substrings obtained by splitting the input string *s*, using the specified delimiter. The third argument, nullString, is optional and specifies substrings that are replaced with `NULL`. |
+| array_to_string(array *a*, delimiter, [,nullString]) | string | Concatenates array elements using supplied delimiter and optional null string. |
+| unnest(array *a*) | variable | Returns each element in the array <strong>as a separate row</strong>. The return type is the element type of the array.<br>`unnest` can only be used in the `SELECT` clause of a query. If other columns are `SELECT`ed with unnest, the value at each row in the table is repeated at each “output” row with each unnested elements. If multiple columns are being unnested, all the unnested columns are  "zipped up" together, with `NULL` filling in the “output” values for shorter arrays. |
+
 ## Date/time functions and operators
 
 ### date_trunc
@@ -94,7 +105,7 @@ These functions return one value per row.
 |------|-------------|-------------|
 | date_trunc(string *precision*, timestamp *t*) | timestamp | Truncates the timestamp to the chosen *precision* ("second", "minute", "hour", "day", "week", "month", or "year"). |
 
-### Conditional expressions
+## Conditional expressions
 
 ### coalesce
 | Name | Return type | Description |
@@ -106,4 +117,12 @@ These functions return one value per row.
 |------|-------------|-------------|
 | nullif(expr *x*, expr *y*) | variable | Returns `NULL` if both arguments are equal. Otherwise, returns *x*. |
 
+## JSON Functions and Operators
+
+### json_extract_path_text
+| Name | Return type | Description |
+|------|-------------|-------------|
+| json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in json as text, defined by the path, equivalent behavior as the [postgres function of the same name][2]. For example, `json_extract_path_text(col, ‘forest', ‘0')` returns the 0th element in a JSON array under the key forest in for each JSON object/row in `col`.|
+
 [1]: https://pkg.go.dev/regexp/syntax
+[2]: https://www.postgresql.org/docs/current/functions-json.html
