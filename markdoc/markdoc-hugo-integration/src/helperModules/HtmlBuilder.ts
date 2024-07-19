@@ -21,6 +21,10 @@ const valueChangeHandlerScript = `
 `;
 
 export class HtmlBuilder {
+  /**
+   * Build the HTML output for a given parsed .mdoc file.
+   * This HTML output can be processed by Hugo to generate a static page.
+   */
   static build(p: {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
@@ -53,7 +57,11 @@ export class HtmlBuilder {
     const content = MarkdocStaticCompiler.renderers.html(renderableTree);
 
     // Add debugging styles
-    const styles = `<style>.markdoc__hidden { background-color: lightgray; }</style>`;
+    const styles = `<style>
+    .option-pill { display: inline-block; padding: 0.5em; margin-right: 0.5em; margin-bottom: 10px; border: 1px solid lightgray; cursor: pointer; }
+    .option-pill.selected { background-color: lightblue; }
+    .markdoc__hidden { background-color: lightgray; }
+    </style>`;
 
     const html = `${valueChangeHandlerScript}${styles}${chooser}${content}`;
 
@@ -199,25 +207,37 @@ export class HtmlBuilder {
     return resolvedPagePrefs;
   }
 
+  /**
+   * Build the chooser HTML for the page preferences.
+   */
   static buildPagePrefsChooserHtml(
     resolvedPagePrefs: ResolvedPagePrefs,
     valuesByPrefId: Record<string, string> = {}
   ) {
-    return Object.keys(resolvedPagePrefs)
-      .map((prefId) => {
-        const resolvedPagePref = resolvedPagePrefs[prefId];
-        return this.buildPrefSelectorHtml({
-          resolvedPagePref,
-          currentValue: valuesByPrefId[prefId] || resolvedPagePref.defaultValue
-        });
-      })
-      .join('');
+    let html = '';
+    html += '<div>';
+    Object.keys(resolvedPagePrefs).forEach((prefId) => {
+      const resolvedPagePref = resolvedPagePrefs[prefId];
+      html += `<div>${resolvedPagePref.displayName}</div>`;
+      html += this.buildPrefSelectorHtml({
+        resolvedPagePref,
+        currentValue: valuesByPrefId[prefId] || resolvedPagePref.defaultValue
+      });
+    });
+    html += '</div>';
+    html += '<hr>';
+    return html;
   }
 
+  /**
+   * Build a single preference selector HTML element.
+   */
   static buildPrefSelectorHtml(p: {
     resolvedPagePref: ResolvedPagePref;
     currentValue: string;
   }) {
+    /*
+    // dropdown version
     return `
         <div style="display: inline-block; vertical-align: top; margin-right: 1em;">
           <label>${p.resolvedPagePref.displayName}</label>
@@ -231,5 +251,20 @@ export class HtmlBuilder {
           </select>
         </div>
       `;
+    */
+
+    // pill version
+    return `
+      <div>
+        <div>
+          ${p.resolvedPagePref.options
+            .map((option) => {
+              const selected = option.id === p.currentValue ? 'selected' : '';
+              return `<div class="option-pill ${selected}" onclick="handleValueChange('${p.resolvedPagePref.identifier}', '${option.id}')">${option.displayName}</div>`;
+            })
+            .join('')}
+        </div>
+      </div>
+    `;
   }
 }

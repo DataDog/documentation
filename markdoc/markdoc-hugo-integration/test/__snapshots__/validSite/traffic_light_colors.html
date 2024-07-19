@@ -6,37 +6,61 @@
   }
 </script>
 <style>
+  .option-pill {
+    display: inline-block;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    cursor: pointer;
+  }
+  .option-pill.selected {
+    background-color: lightblue;
+  }
   .markdoc__hidden {
     background-color: lightgray;
   }
 </style>
-<div style="display: inline-block; vertical-align: top; margin-right: 1em">
-  <label>Color</label>
-  <select
-    onchange="handleValueChange('color', this.options[this.selectedIndex].value)"
-  >
-    <option value="red">Red</option>
-    ,
-    <option value="yellow">Yellow</option>
-    ,
-    <option value="green" selected>Green</option>
-  </select>
+<div>
+  <div>Color</div>
+  <div>
+    <div>
+      <div class="option-pill" onclick="handleValueChange('color', 'red')">
+        Red
+      </div>
+      <div class="option-pill" onclick="handleValueChange('color', 'yellow')">
+        Yellow
+      </div>
+      <div
+        class="option-pill selected"
+        onclick="handleValueChange('color', 'green')"
+      >
+        Green
+      </div>
+    </div>
+  </div>
+  <div>Item</div>
+  <div>
+    <div>
+      <div
+        class="option-pill selected"
+        onclick="handleValueChange('item', 'grass')"
+      >
+        Grass
+      </div>
+      <div class="option-pill" onclick="handleValueChange('item', 'emerald')">
+        Emerald
+      </div>
+      <div class="option-pill" onclick="handleValueChange('item', 'lime')">
+        Lime
+      </div>
+      <div class="option-pill" onclick="handleValueChange('item', 'frog')">
+        Frog
+      </div>
+    </div>
+  </div>
 </div>
-
-<div style="display: inline-block; vertical-align: top; margin-right: 1em">
-  <label>Item</label>
-  <select
-    onchange="handleValueChange('item', this.options[this.selectedIndex].value)"
-  >
-    <option value="grass" selected>Grass</option>
-    ,
-    <option value="emerald">Emerald</option>
-    ,
-    <option value="lime">Lime</option>
-    ,
-    <option value="frog">Frog</option>
-  </select>
-</div>
+<hr />
 <article>
   <p>
     This test page explores everyday items that are green, yellow, or red --
