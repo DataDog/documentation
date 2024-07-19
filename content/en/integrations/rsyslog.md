@@ -29,6 +29,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 ### Log collection
 
 #### Rsyslog version >=8
+<div class="alert alert-info"> From <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">version 8.1.5</a> Rsyslog recommends inotify mode. Traditionally, imfile used polling mode, which is much more resource-intense (and slower) than inotify mode. </div>
 
 {{< tabs >}}
 
