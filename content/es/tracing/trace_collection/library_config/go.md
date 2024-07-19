@@ -77,12 +77,12 @@ Anula el puerto por defecto del Trace Agent para el envío de métricas de DogSt
 : **Por defecto**: `nil`<br>
 Una matriz JSON de objetos. Cada objeto debe tener una `"sample_rate"`. Los campos `"name"`,`"service"`, `"resource"` y `"tags"` son opcionales. El valor de `"sample_rate"` debe estar comprendido entre `0.0` y `1.0` (inclusive). Las reglas se aplican en el orden configurado para determinar la frecuencia de muestreo de la traza.
 
-<div class="alert alert-info">La compatibilidad con el muestreo por recurso y etiquetas está en fase beta.</div>
+<div class="alert alert-info">La compatibilidad con el muestreo por recurso y etiquetas (tags) está en fase beta.</div>
 
 Para obtener más información, consulta [Mecanismos de consumo][4].<br>
 **Ejemplos:**<br>
   - Configura la frecuencia de muestreo en 20%: `'[{"sample_rate": 0.2}]'`.
-  - Configura la frecuencia de muestreo en 10% para servicios que comienzan por 'a' y para el nombre del tramo que comienza por 'b', y configura la frecuencia de muestreo en 20% para todos los demás servicios: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
+  - Configura la frecuencia de muestreo en 10% para servicios que comienzan por 'a' y para el nombre del tramo (span) que comienza por 'b', y configura la frecuencia de muestreo en 20% para todos los demás servicios: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
   - Configura la frecuencia de muestreo en 40% para servicios que tienen el nombre de recurso`HTTP GET`: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
   - Configura la frecuencia de muestreo en 100% para servicios que tienen una etiqueta `tier` con el valor `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
 
