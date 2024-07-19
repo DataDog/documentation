@@ -45,6 +45,9 @@ For beta customers using v3.0, <code>application</code> has been replaced with <
 ##### Expanded data model
 v3.0 supports multiple kinds of entities. You can organize your systems using various components such as systems, services, queues, and datastores.
 
+##### Multi-ownership 
+You can assign multiple owners to any objects defined through the v3.0 schema to specify multiple points of contact.
+
 ##### Enhanced relationship mapping
 With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
 
