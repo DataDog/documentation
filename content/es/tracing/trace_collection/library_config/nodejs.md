@@ -48,7 +48,7 @@ El número de versión de la aplicación.
 `DD_TAGS`
 : **Configuración**: `tags`<br>
 **Por defecto**: `{}`<br>
-Configura etiquetas (tags) globales que se aplican a todos tramos y métricas de tiempo de ejecución. Cuando se pasa como una variable de entorno, el formato es `key:value,key:value`. Cuando se define mediante programación, el formato es `tracer.init({ tags: { foo: 'bar' } })`.
+Configura etiquetas (tags) globales que se aplican a todos tramos (spans) y métricas de tiempo de ejecución. Cuando se pasa como una variable de entorno, el formato es `key:value,key:value`. Cuando se define mediante programación, el formato es `tracer.init({ tags: { foo: 'bar' } })`.
 
 `DD_TRACE_HEADER_TAGS`
 : **Configuración**: `headerTags` <br>
@@ -104,7 +104,7 @@ Habilita la inyección automática de los ID de rastreo en logs para bibliotecas
 
 `DD_TRACE_SAMPLE_RATE`
 : **Configuración**: `sampleRate`<br>
-**Por defecto**: Defiere la decisión al Agent.<br>
+**Por defecto**: Otorga la decisión al Agent.<br>
 Controla la frecuencia de muestreo del consumo (entre 0,0 y 1,0) entre el Agent y el backend.
 
 `DD_TRACE_RATE_LIMIT`
@@ -115,7 +115,7 @@ El número máximo de trazas por segundo por instancia de servicio.<br>
 `DD_TRACE_SAMPLING_RULES`
 : **Configuración**: `samplingRules`<br>
 **Por defecto**: `[]`<br>
-Reglas de muestreo que se aplicarán al muestreo prioritario. Una matriz JSON de objetos. Cada objeto debe tener un valor `sample_rate` comprendido entre 0,0 y 1,0 (inclusive). Cada regla tiene los campos de `name` y de `service` opcionales, que son cadenas de expresiones regulares (regex) que se comparan con el `service` y el `name` de una traza. Las reglas se aplican en el orden configurado para determinar la frecuencia de muestreo de la traza. Si se omite, el rastreador pasa al Agent para definir dinámicamente la frecuencia de muestreo en todas las trazas.
+Reglas de muestreo que se aplicarán al muestreo prioritario. Una matriz JSON de objetos. Cada objeto debe tener un valor `sample_rate` comprendido entre 0,0 y 1,0 (inclusive). Cada regla tiene los campos de `name` y de `service` opcionales, que son cadenas de expresiones regulares (regex) que se comparan con el `service` y el `name` de una traza. Las reglas se aplican en el orden configurado para determinar la frecuencia de muestreo de la traza. Si se omite, el rastreador determina que el Agent defina dinámicamente la frecuencia de muestreo en todas las trazas.
 
 `DD_SPAN_SAMPLING_RULES`
 : **Configuración**: `spanSamplingRules`<br>
