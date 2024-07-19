@@ -47,14 +47,6 @@ components:
       required:
       - errors
       type: object
-    APISuccessResponseSchema:
-      description: A JSON object containing the success message
-      properties:
-        success:
-          description: Message.
-          example: Embed 00000000000 successfully enabled.
-          type: string
-      type: object
     AWSAccount:
       description: Returns the AWS account associated with this integration.
       properties:
@@ -2328,6 +2320,14 @@ components:
           items:
             $ref: '#/components/schemas/EmbeddableGraph'
           type: array
+      type: object
+    EnableEmbeddableGraphResponseSchema:
+      description: A JSON object containing the success message
+      properties:
+        success:
+          description: Message.
+          example: Embed 00000000000 successfully enabled.
+          type: string
       type: object
     Event:
       description: Object representing an event.
@@ -24744,7 +24744,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APISuccessResponseSchema'
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -24782,7 +24782,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APISuccessResponseSchema'
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
