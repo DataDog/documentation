@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: En savoir plus sur le RUM Explorer
-kind: documentation
 title: Dashboards RUM
 ---
 

@@ -24,7 +24,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: Código fuente
   text: Ejemplos de códigos de .NET
-kind: documentación
 title: Instrumentación personalizada de .NET utilizando la API de Datadog
 type: multi-code-lang
 ---

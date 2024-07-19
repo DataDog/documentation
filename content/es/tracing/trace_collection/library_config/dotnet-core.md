@@ -29,7 +29,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: Blog
   text: Implementa las aplicaciones de ASP.NET Core en Azure App Service
-kind: documentación
 title: Configuración de la biblioteca de rastreo de .NET Core
 type: multi-code-lang
 ---

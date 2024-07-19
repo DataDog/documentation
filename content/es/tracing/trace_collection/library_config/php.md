@@ -17,7 +17,6 @@ further_reading:
 - link: /tracing/
   tag: Documentación
   text: Uso avanzado
-kind: documentación
 title: Configuración del rastreo de bibliotecas PHP
 type: lenguaje de código múltiple
 ---

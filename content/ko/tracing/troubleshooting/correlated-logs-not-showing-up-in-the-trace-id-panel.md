@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: 설명서
   text: 제품 간 상호 연결을 활용한 쉬운 트러블슈팅
-kind: 설명서
 title: 상호 연결된 로그가 트레이스 ID 패널에 표시되지 않는 경우
 ---
 

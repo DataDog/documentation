@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors
   tag: Documentation
   text: En savoir plus sur les monitors
-kind: documentation
 title: Exporter des événements et des graphiques RUM
 ---
 

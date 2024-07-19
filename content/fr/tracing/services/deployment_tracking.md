@@ -10,7 +10,6 @@ further_reading:
 - link: tracing/app_analytics
   tag: Documentation
   text: Utiliser la version en tant que dimension dans vos requêtes App Analytics
-kind: documentation
 title: Suivi des déploiements
 ---
 ## Tag « version »

@@ -53,7 +53,6 @@ further_reading:
 - link: https://github.com/DataDog/httpd-datadog
   tag: Código fuente
   text: Módulo Datadog para el servidor HTTP Apache
-kind: documentación
 title: Rastreo de un proxy
 ---
 

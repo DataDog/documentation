@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentation
   text: Rechercher des événements
-kind: documentation
 title: Vues enregistrées
 ---
 

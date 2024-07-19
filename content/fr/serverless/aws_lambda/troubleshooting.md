@@ -10,7 +10,6 @@ further_reading:
 - link: /serverless/guide/#troubleshoot-your-installation
   tag: Documentation
   text: Résoudre les problèmes courants
-kind: documentation
 title: Dépannage de la surveillance AWS Lambda
 ---
 
