@@ -126,7 +126,7 @@ Para utilizar el [Etiquetado unificado de servicios][4], configura los siguiente
 
 `DD_ENV`
 : **Propiedad TracerSettings**: `Environment`<br>
-Si se especifica, añade la etiqueta `env` con el valor especificado a todos los tramos generados. Añadido en la versión 1.17.0.
+Si se especifica, añade la etiqueta (tag) `env` con el valor especificado a todos los tramos generados. Añadido en la versión 1.17.0.
 
 `DD_SERVICE`
 : **Propiedad TracerSettings**: `ServiceName`<br>
