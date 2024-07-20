@@ -42,6 +42,8 @@ See the setup examples for the following logging libraries:
 
 *The [Python logger][6] has an `extra` parameter for adding custom attributes. Use `DJANGO_DATADOG_LOGGER_EXTRA_INCLUDE` to specify a regex that matches the name of the loggers for which you want to add the `extra` parameter.
 
+**Note**: If you're looking to temporarily disable logs for a single process--such as performing maintenance--set the environment variable `DD_INSTRUMENTATION_TELEMETRY_ENABLED=false`.
+
 ## Configure the Datadog Agent
 
 Once [log collection][7] is enabled, set up [custom log collection][8] to tail your log files and send them to Datadog by doing the following:
