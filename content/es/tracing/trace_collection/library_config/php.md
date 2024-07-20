@@ -262,7 +262,7 @@ Especifica un archivo de log. Si no se especifica ninguno, los logs van a la loc
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
 **Por defecto**: `1`<br>
-Indica si se rastrea o no un proceso bifurcado. Configúralo como `1`, para rastrear procesos bifurcados, o como `0`, para deshabilitar el rastreo en procesos bifurcados. Si se configura como `0`, puedes volver a habilitar manualmente el rastreo de un proceso en código con `ini_set("datadog.trace.enabled", "1");`, pero este será presentado como una traza nueva. Las trazas de procesos bifurcados se muestran como trazas enteras distribuidas sólo si `DD_TRACE_FORKED_PROCESS` y `DD_DISTRIBUTED_TRACING` están configurados como `1` (activos).
+Indica si se rastrea un proceso bifurcado. Configúralo como `1`, para rastrear procesos bifurcados, o como `0`, para deshabilitar el rastreo en procesos bifurcados. Si se configura como `0`, puedes volver a habilitar manualmente el rastreo de un proceso en código con `ini_set("datadog.trace.enabled", "1");`, pero este será presentado como una traza nueva. Las trazas de procesos bifurcados se muestran como trazas enteras distribuidas sólo si `DD_TRACE_FORKED_PROCESS` y `DD_DISTRIBUTED_TRACING` están configurados como `1` (activos).
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
