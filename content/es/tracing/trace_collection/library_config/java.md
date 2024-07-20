@@ -7,7 +7,7 @@ further_reading:
   text: Código fuente APM de Java para Datadog
 - link: tracing/glossary/
   tag: Documentación
-  text: Explorar tus servicios, recursos y trazas
+  text: Explorar tus servicios, recursos y trazas (traces)
 - link: /tracing/trace_collection/trace_context_propagation/java/
   tag: Documentación
   text: Propagación del contexto de rastreo utilizando cabeceras
