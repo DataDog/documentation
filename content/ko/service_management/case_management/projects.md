@@ -3,7 +3,7 @@ disable_toc: false
 further_reading:
 - link: service_management/case_management/create_case
   tag: 설명서
-  text: 사례 생성
+  text: 케이스 생성하기
 kind: documentation
 title: 프로젝트
 ---
@@ -12,7 +12,7 @@ title: 프로젝트
 
 프로젝트는 일련의 케이스를 보유하는 컨테이너 개체입니다. 팀, 서비스, 이니셔티브 등 조직에 적합한 그룹을 중심으로 작업을 구성하세요. 각 프로젝트의 케이스는 서로 분리되어 있어 관련 사항에 집중할 수 있습니다.
 
-## 프로젝트 생성
+## 프로젝트 생성하기
 
 {{< img src="service_management/case_management/projects/projects_create_a_project_cropped.png" alt="Case management Settings에서 새 프로젝트 페이지 생성" style="width:100%;" >}}
 
