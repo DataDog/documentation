@@ -14,12 +14,12 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentación
   text: Métricas de uso
-title: Controles de consumo
+title: Controles del consumo
 ---
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Reglas para el muestreo del consumo" >}}
 
-Los controles de consumo afectan a qué trazas (traces) envían tus aplicaciones a Datadog. Las [métricas de APM][1] siempre se calculan basándose en todas las trazas y no se ven afectadas por los controles de consumo.
+Los controles del consumo afectan a qué trazas (traces) envían tus aplicaciones a Datadog. Las [métricas de APM][1] siempre se calculan basándose en todas las trazas y no se ven afectadas por los controles del consumo.
 
 La página de control del consumo proporciona visibilidad al nivel del Agent y de las <txprotected>bibliotecas</txprotected> de rastreo en la configuración del consumo de tus aplicaciones y servicios. Desde la [página de configuración del control del consumo][2], puedes:
 - Obtener visibilidad de tu configuración del consumo al nivel del servicio y ajustar las frecuencias de muestreo de trazas para obtener servicios de alto rendimiento servicios.
