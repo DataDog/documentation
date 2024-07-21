@@ -140,7 +140,7 @@ Para especificar que se envíe un porcentaje específico del tráfico de un serv
 2. Selecciona el lenguaje del servicio.
 3. Selecciona el porcentaje de consumo deseado.
 4. Aplica la configuración apropiada generada a partir de estas elecciones al servicio indicado y vuelve a desplegar el servicio. **Nota**: El valor del nombre del servicio distingue entre mayúsculas y minúsculas. Debe coincidir con las mayúsculas y minúsculas de tu nombre del servicio.
-5. Confirma en la Página de control del consumo que se ha aplicado tu nuevo porcentaje mirando la columna de Desglose del tráfico, en la que se muestra la frecuencia de muestreo aplicada. El motivo del consumo del servicio aparece como `ingestion_reason:rule`.
+5. Confirma en la Página de control del consumo que se haya aplicado tu nuevo porcentaje mirando la columna de Desglose del tráfico, en la cual se muestra la frecuencia de muestreo aplicada. El motivo del consumo del servicio aparece como `ingestion_reason:rule`.
 
 
 ## Leer más
