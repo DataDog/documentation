@@ -32,7 +32,7 @@ Lenguajes compatibles:
 
 | Lenguaje | Versión | Notas |
 |---|---|---|
-| Swift |  v5.2 o anterior | Si estás utilizando Swift Concurrency, necesitas Xcode v13.2 o anterior para la representación precisa de tramos de tareas asíncronas. |
+| Swift |  v5.2 o anterior | Si estás utilizando Swift Concurrency, necesitas Xcode v13.2 o anterior para la representación precisa de tramos (spans) de tareas asíncronas. |
 | Objective-C | v2.0 o anterior | |
 
 Plataformas compatibles:
@@ -183,7 +183,7 @@ Configura todas estas variables en tu objetivo de test:
 **Recomendado**: `$(SRCROOT)`<br/>
 **Ejemplo**: `/Users/ci/source/MyApp`
 
-Para obtener más información sobre las etiquetas reservadas `service` y `env`, consulta  [Etiquetado unificado de servicios][8].
+Para obtener más información sobre las etiquetas (tags) reservadas `service` y `env`, consulta  [Etiquetado unificado de servicios][8].
 
 Además, configura el sitio Datadog para utilizar el sitio ({{< region-param key="dd_site_name" >}}) seleccionado:
 
