@@ -102,7 +102,7 @@ The Session Replay is recorded through the Browser SDK, then the Mobile SDK hand
 
 To instrument your consolidated web and native views Session Replay for Android:
 
-1. Ensure you are using version [`2.8.0`[2]] or higher of the Android SDK.
+1. Ensure you are using version [`2.8.0`][2] or higher of the Android SDK.
 2. Enable [webview tracking][3] for your mobile application.
 3. Enable [Session Replay][4] for your web application.
 4. Enable [Session Replay][5] for your mobile application.
@@ -118,7 +118,7 @@ To instrument your consolidated web and native views Session Replay for Android:
 
 To instrument your consolidated web and native views Session Replay for iOS:
 
-1. Ensure you are using version [2.13.0][1] or higher of the iOS SDK.
+1. Ensure you are using version [`2.13.0`][1] or higher of the iOS SDK.
 2. Enable [webview tracking][2] for your mobile application.
 3. Enable [Session Replay][3] for your web application.
 4. Enable [Session Replay][4] for your mobile application.
@@ -191,7 +191,7 @@ If everything is fine, following logs should appear in the Xcode debug console i
 
 ### Privacy options
 
-See [Privacy Options][4].
+See [Privacy Options][2].
 
 
 
@@ -199,5 +199,5 @@ See [Privacy Options][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[4]: /real_user_monitoring/session_replay/mobile/privacy_options
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+[2]: /real_user_monitoring/session_replay/mobile/privacy_options
