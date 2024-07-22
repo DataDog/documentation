@@ -508,9 +508,10 @@ If the Datadog Agent is configured to use a non-default StatsD hostname or port,
 : **INI**: `datadog.openai.span_char_limit`<br>
 **Default**: `128`<br>
 Configure the maximum number of characters for the following data within span tags:
-- Prompt inputs and completions
-- Message inputs and completions
-- Embedding inputs
+
+  - Prompt inputs and completions
+  - Message inputs and completions
+  - Embedding inputs
 
 Text exceeding the maximum number of characters is truncated to the character limit and has `...` appended to the end.
 
