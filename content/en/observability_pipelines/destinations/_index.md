@@ -7,14 +7,16 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
+## Overview
+
 Use the Observability Pipelines Worker to send your logs to different destinations.
 
-Select and set up your destinations when you build a pipeline in the UI. The general steps for setting up a pipeline:
+Select and set up your destinations when you build a pipeline in the UI. This is step 4 in the process:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a template.
-1. Select your source.
-1. Select your destinations.
+1. Select and set up your source.
+1. Select and set up your destinations.
 1. Set up you processors.
 1. Install the Observability Pipelines Worker.
 

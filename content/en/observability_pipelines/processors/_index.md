@@ -9,14 +9,14 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
-Use Observability Pipelines's processors to parse, structure, and enrich your logs. All [processors][3] are available for all templates. Set up your processors in the Observability Pipelines UI after you have selected a template, source, and destinations.
+## Overview
 
-The general steps for setting up a pipeline are:
+Use Observability Pipelines's processors to parse, structure, and enrich your logs. All processors are available for all templates. Set up your processors in the Observability Pipelines UI after you have selected a template, source, and destinations. This is step 5 in the process:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a template.
-1. Select your source.
-1. Select your destinations.
+1. Select and set up your source.
+1. Select and set up your destinations.
 1. Set up you processors.
 1. Install the Observability Pipelines Worker.
 1. Enable monitors for your pipeline.
@@ -25,7 +25,9 @@ The general steps for setting up a pipeline are:
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{< whatsnext desc="These are the available Observability Pipelines processors:" >}}
+## Processors
+
+{{< whatsnext desc="Configure each processor's settings in the pipeline UI. These are the available processors:" >}}
     {{< nextlink href="observability_pipelines/processors/#add-hostname" >}}Add hostname{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#edit-fields" >}}Edit fields{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#enrichment-table" >}}enrichment_table{{< /nextlink >}}

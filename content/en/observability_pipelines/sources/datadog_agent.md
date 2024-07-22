@@ -9,7 +9,7 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
-Use Observability Pipelines's Datadog Agent source to receive and process logs from the Datadog Agent and then send them to your destinations.
+Use Observability Pipelines's Datadog Agent source to receive logs from the Datadog Agent. To set up this source, follow the instructions in [Set up Pipelines][1].
 
 ### Prerequisites
 
@@ -22,3 +22,5 @@ Use Observability Pipelines's Datadog Agent source to receive and process logs f
 ### Connect the Datadog Agent to the Observability Pipelines Worker
 
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
+
+[1]: /observability_pipelines/set_up_pipelines/
