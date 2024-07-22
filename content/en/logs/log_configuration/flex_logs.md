@@ -136,12 +136,37 @@ Configure Flex Tier in the [Logs Index Configuration][2] page:
 
 {{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Options for the Flex tier storage within the index configuration" style="width:100%;" >}}
 
-**Notes**:
-- If both tiers are selected, logs are stored in the Standard Tier until the end of the configured retention period before they are stored in the Flex Tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
-- Adding the Standard Tier to a Flex index applies to new logs, not pre-existing logs in the Flex index.
-- Adding a Flex Tier to a Standard Tier-only index extends the retention of all logs currently stored in the index and the new logs that are going into the index.
-- To remove Standard Indexing and add the Flex Tier, make the changes and save it as one action. If you remove Standard Indexing, the logs are no longer queryable in monitors or in Watchdog Insights.
-- If you add back Standard Indexing to an index that only has Flex Tier, only the new logs going into the index are stored in Standard Indexing.
+**Note**: If both tiers are selected, logs are stored in the Standard Tier until the end of the configured retention period before they are stored in the Flex Tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
+
+<table>
+  <tr align="center">
+    <td colspan="2"><strong>Existing Index Configuration</strong></td>
+    <td rowspan="2"><strong>I want to&hellip;&nbsp;</strong></td>
+    <td rowspan="2"><strong>Final Result</strong></td>
+  </tr>
+<tr align="center">
+  <td><strong>Standard Tier</strong></td>
+  <td><strong>Flex Tier</strong></td>
+</tr>
+<tr>
+  <td align="center">Enabled</td>
+  <td align="center">Disabled</td>
+  <td>Enable Flex Tier.</td>
+  <td>The retention for both pre-existing and new logs are extended.</td>
+</tr>
+<tr>
+  <td align="center">Disabled</td>
+  <td align="center">Enabled</td>
+  <td>Enable Standard Tier.</td>
+  <td>Pre-existing logs in Flex Tier are not changed. New logs are retained in the Standard and Flex Tiers.</td>
+</tr>
+<tr>
+  <td align="center">Enabled</td>
+  <td align="center">Disabled</td>
+  <td>Enable Flex Tier and remove Standard Tier.</td>
+  <td>Logs are no longer queryable in monitors or in Watchdog Insights.</td>
+</tr>
+</table>
 
 ## Search Flex Logs tier
 
