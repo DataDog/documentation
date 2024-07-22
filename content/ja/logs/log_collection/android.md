@@ -24,7 +24,7 @@ title: Android ログの収集
 
     ```conf
     dependencies {
-        implementation "com.datadoghq:dd-sdk-android:x.x.x"
+        implementation "com.datadoghq:dd-sdk-android-logs:x.x.x"
     }
     ```
 

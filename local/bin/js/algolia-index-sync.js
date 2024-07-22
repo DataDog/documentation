@@ -94,6 +94,16 @@ const updateSynonyms = (index) => {
             objectID: 'ksm',
             type: 'synonym',
             synonyms: ['ksm', 'ksm core', 'kubernetes state metrics']
+        },
+        {
+            objectID: 'sast',
+            type: 'synonym',
+            synonyms: ['sast', 'static analysis', 'static application security testing']
+        },
+        {
+            objectID: 'sca',
+            type: 'synonym',
+            synonyms: ['sca', 'software composition analysis']
         }
     ];
 

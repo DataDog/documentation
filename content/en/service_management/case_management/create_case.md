@@ -40,7 +40,7 @@ Configure the following products to automatically create cases:
 | ------  | ----------- | 
 | Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Configure notifications and automations** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`. |
 | Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create cases.   |
-| Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the workflow handle to the desired resources.|
+| Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
 
 ## API
 
@@ -57,3 +57,4 @@ Create a case through the [API endpoint][5].
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /api/latest/case-management/#create-a-case
+[6]: /service_management/workflows/trigger/
