@@ -25,13 +25,19 @@ jobs:
               'datadog-api-client-python',
               'datadog-api-client-ruby',
               'datadog-api-client-typescript',
+              'synthetics-worker',
               'integrations-core'
             ]
             const versions = await Promise.all(clients.map(async (repo) => {
               const releases = await github.rest.repos.listReleases({
                 owner: 'DataDog',
                 repo: repo
-              })
+              })  
+              if (client === 'synthetics-worker') {
+                const regex = /^(?:(?:[0-9]*)[.](?:[0-9]*)[.](?:[0-9]*))$/;
+                // synthetics-worker must match semver
+                return { client: repo, version: releases.data.find(value => regex.test(value))}
+              }
               return {client: repo, version: releases.data[0]["tag_name"]}
             }))
             console.log(versions)
