@@ -233,7 +233,7 @@ Datadog::CI.active_test&.set_tag("test_owner", "my_team")
 # ...
 ```
 
-Para crear filtros o campos `group by` para estas etiquetas, primero debes crear facetas. Para obtener más información sobre cómo añadir etiquetas, consulta la sección [Añadir etiquetas (tags)][2] en la documentación de instrumentación personalizada de Ruby.
+Para crear filtros o campos `group by` para estas etiquetas, primero debes crear facetas. Para obtener más información sobre cómo añadir etiquetas, consulta la sección [Añadir etiquetas][2] en la documentación de instrumentación personalizada de Ruby.
 
 ### Añadir medidas personalizadas a los tests
 
@@ -242,9 +242,9 @@ Además de las etiquetas, también puedes añadir medidas personalizadas a tus t
 ```Ruby
 require "datadog/ci"
 
-# dentro de su prueba
+# dentro de tu test
 Datadog::CI.active_test&.set_metric("memory_allocations", 16)
-# la prueba continúa normalmente
+# el test continúa normalmente
 # ...
 ```
 
@@ -301,7 +301,7 @@ También puedes habilitar la instrumentación automática en `test_helper/spec_h
 require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
-**Nota**: En modo CI, estas trazas se envían a CI Visibility y **no** aparecen en Datadog APM .
+**Nota**: En modo CI, estas trazas (traces) se envían a CI Visibility y **no** aparecen en Datadog APM .
 
 Para ver la lista de todos los métodos de instrumentación disponibles, consulta la [documentación sobre rastreo][6].
 
@@ -347,7 +347,7 @@ end
 
 ## Uso de la API de tests manuales
 
-Si utilizas RSpec, Minitest o Cucumber, **no utilices la API de tests manuales**, ya que CI Visibility los instrumenta automáticamente y envía los resultados a Datadog. La API de tests manuales es **incompatible** con los marcos para pruebas que ya son compatibles.
+Si utilizas RSpec, Minitest o Cucumber, **no utilices la API de tests manuales**, ya que CI Visibility los instrumenta automáticamente y envía los resultados a Datadog. La API de tests manuales es **incompatible** con los marcos para tests que ya son compatibles.
 
 Utiliza la API de tests manuales sólo si utilizas un marco de tests no compatible o si tienes un mecanismo de test diferente.
 Toda la documentación de la API pública está disponible en el [sitio YARD][8].
