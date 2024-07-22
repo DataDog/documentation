@@ -1,0 +1,17 @@
+<% chooserPrefs.forEach(chooserPref) => { %>
+<div class="markdoc_pref__container">
+    <div class="markdoc-pref__label"><%- chooserPref.displayName %></div>
+    <div>
+        <div>
+            <% chooserPref.options.forEach(option => { %>
+            <div
+                class="markdoc-pref__pill <%= option.id === selectedValues[chooserPref.id] ? 'selected' : '' %>"
+                onclick="handleValueChange('<%- chooserPref.id %>', '<%- option.id %>')"
+            >
+                <%- option.displayName %>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+<% }); %>
