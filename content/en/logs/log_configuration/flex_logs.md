@@ -85,10 +85,6 @@ The number of logs stored in the Flex tier has the largest impact on the size ne
 | Large (L)                                 | 500 billion - 1 trillion |
 | Contact your [Customer Success Manager][7]| 1T+                      |
 
-**Note**: The recommended number of users is not the number of concurrent queries. However, it is more likely for queries to run concurrently as the number of users increases. Therefore, the available concurrency is higher for queries run on larger compute instances than on smaller instances.
-
-Queries that push the limits of the concurrency of a compute tier, slows down the return of the query results and can also cause other concurrent queries to slow down. See the [When the compute limit is reached](#when-the-compute-limit-is-reached) section.
-
 Compute tiers are billed at a flat rate. See the [pricing page][6] for more information.
 
 ## Enable and disable Flex Logs
@@ -107,7 +103,7 @@ To enable Flex Logs:
 1. Navigate to the [Flex Logs Control][5] page.
 1. Select **Compute Type**.
     - Datadog recommends the **Starter** compute size for organizations with less than 10B logs stored.
-    - Datadog recommends the scalable compute options (For example, XS, S, M, and L) for organizations with greater than 10B logs stored.
+    - Datadog recommends the scalable compute options (For example, XS, S, M, and L) for organizations with greater than 10B (or 2-3B per month) of logs stored.
 1. Select the compute size you want. See [Determine the compute size that you need](#determine-the-compute-size-that-you-need) for more information.
 1. Click **Enable Flex Logs**.
 
@@ -148,7 +144,7 @@ Configure Flex Tier in the [Logs Index Configuration][2] page:
 - If you remove Standard Indexing, the logs are no longer queryable in monitors or in Watchdog Insights.
 - If you add back Standard Indexing to an index that only has Flex Tier, only the new logs going into the index are stored in Standard Indexing.
 
-## Search Flex indexes
+## Search Flex Logs tier
 
 {{< img src="logs/log_configuration/flex_logging/flex_toggle_explorer.png" alt="Enable Flex Logging on the Log Explorer page by toggling the option" style="width:100%;" >}}
 
