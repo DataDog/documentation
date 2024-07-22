@@ -18,6 +18,9 @@ further_reading:
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
+    - link: '/real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking'
+      tag: Documentation
+      text: Web View Tracking
 ---
 
 ## Setup
@@ -90,7 +93,7 @@ To set up Mobile Session Replay for iOS:
 
 ## Web view instrumentation
 
-You can record the entire user journey across both web and native views on iOS or Android and watch it in a single Session Replay.
+You can record the entire user journey across both [web and native views][1] on iOS or Android and watch it in a single Session Replay.
 
 The Session Replay is recorded through the Browser SDK, then the Mobile SDK handles the batching and uploading of the webview recording.
 
@@ -99,15 +102,16 @@ The Session Replay is recorded through the Browser SDK, then the Mobile SDK hand
 
 To instrument your consolidated web and native views Session Replay for Android:
 
-1. Ensure you are using version [2.8.0[1]] or higher of the Android SDK.
-2. Enable [webview tracking][2] for your mobile application.
-3. Enable [Session Replay][3] for your web application.
-4. Enable [Session Replay][4] for your mobile application.
+1. Ensure you are using version [`2.8.0`[2]] or higher of the Android SDK.
+2. Enable [webview tracking][3] for your mobile application.
+3. Enable [Session Replay][4] for your web application.
+4. Enable [Session Replay][5] for your mobile application.
 
-[1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=android#instrument-your-web-views
-[3]: /real_user_monitoring/session_replay/browser/#setup
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/
+[2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=android#instrument-your-web-views
+[4]: /real_user_monitoring/session_replay/browser/#setup
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
