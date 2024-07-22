@@ -22,7 +22,7 @@ This guide provides an overview of the terminology and its implications.
 
 ## What is an APM SDK?
 
-An APM SDK is a language-specific library that allows you to instrument your application for application performance monitoring. Datadog offers APM SDKs for various programming languages, including but not limited to:
+An APM SDK is a language-specific library that allows you to instrument your application for application performance monitoring. Datadog offers APM SDKs for various programming languages, including:
 
 | Language   | SDK                  |
 |------------|----------------------|
