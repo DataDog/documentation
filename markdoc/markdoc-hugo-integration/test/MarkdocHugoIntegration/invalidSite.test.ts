@@ -11,9 +11,10 @@ const markupFiles = FileNavigator.findInDir(contentDir, /\.mdoc$/);
 describe('MarkdocHugoIntegration', () => {
   const integration = new MarkdocHugoIntegration({
     prefOptionsConfigDir: siteDir + '/preferences_config/options',
-    sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
+    // sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
     contentDir: contentDir,
-    partialsDir: siteDir + '/partials'
+    partialsDir: siteDir + '/partials',
+    standaloneMode: true
   });
 
   // compile the bad files

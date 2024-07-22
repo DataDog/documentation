@@ -8,9 +8,10 @@ const siteDir = VALID_SITE_DIR;
 describe('MarkdocHugoIntegration', () => {
   const compiler = new MarkdocHugoIntegration({
     prefOptionsConfigDir: siteDir + '/preferences_config/options',
-    sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
+    // sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
     contentDir: siteDir + '/content',
-    partialsDir: siteDir + '/partials'
+    partialsDir: siteDir + '/partials',
+    standaloneMode: true
   });
 
   test('each compiled file matches the snapshot', () => {

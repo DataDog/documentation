@@ -15,6 +15,8 @@ export class MarkdocHugoIntegration {
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
   // All other errors caught during compilation
   validationErrorsByFilePath: Record<string, string> = {};
+  // Whether to create a self-contained HTML file (useful for testing)
+  standaloneMode: boolean;
 
   /**
    * Ingest the available configuration files
@@ -25,7 +27,9 @@ export class MarkdocHugoIntegration {
     prefOptionsConfigDir: string;
     contentDir: string;
     partialsDir: string;
+    standaloneMode?: boolean;
   }) {
+    this.standaloneMode = p.standaloneMode || false;
     this.prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
       p.prefOptionsConfigDir
     );
@@ -78,7 +82,17 @@ export class MarkdocHugoIntegration {
           parsedFile,
           prefOptionsConfig: prefOptionsConfigForPage
         });
-        fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.html'), html);
+
+        // if in standalone mode, build an HTML file
+        if (this.standaloneMode) {
+          console.log('Building HTML file');
+          fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.html'), html);
+          // otherwise, build a "Markdown" file (just HTML with frontmatter)
+        } else {
+          console.log('Building Markdown file');
+          const markdown = `---\n---\n${html}`;
+          fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.md'), markdown);
+        }
       } catch (e) {
         if (e instanceof Error) {
           this.validationErrorsByFilePath[markdocFile] = e.message;
