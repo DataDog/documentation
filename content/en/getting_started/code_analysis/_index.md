@@ -274,7 +274,7 @@ You can access suggested fixes directly from the results to improve code quality
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
 
-You can use the following out-of-the-box facets to create a search query for identifying and addressing security risks in third-party libraries in the **Library Vulnerabilities** tab or looking at your library inventory in the **Library Catalog** tab.
+You can use the following out-of-the-box facets to create a search query for identifying and addressing security risks in third-party libraries in the **Library Vulnerabilities** tab or reviewing your library inventory in the **Library Catalog** tab.
 
 | Facet Name         | Description                                                    |
 |--------------------|----------------------------------------------------------------|
