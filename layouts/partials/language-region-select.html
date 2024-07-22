@@ -1,4 +1,13 @@
-<div class="language-region-select-container d-flex flex-lg-column">
+<div 
+x-data="{
+  changeLang (item) {
+    // get the current URL and add on the lang_pref query param
+    window.location.href = `${window.location.href.split('?')[0]}?lang_pref=${item.dataset.langPref}`;
+  }
+}"
+class="language-region-select-container d-flex flex-lg-column">
+  <p>{{.Permalink}}</p>
+  <p>{{.Language.Lang}}</p>
   <div class="language-select-container">
     <p class="text-uppercase">Language</p>
     <div class="dropdown bootstrap-dropdown-custom">
@@ -8,15 +17,15 @@
         <div class="chevron chevron-up d-none"></div>
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+        <span @click="changeLang($el)" class="dropdown-item" data-lang-pref="{{.Language.Lang}}">{{ .Language.LanguageName }}</span>
 
         <!-- Manually adding English option to non-English sites -->
         {{ if ne .Sites.First .Site }}
-          <a class="dropdown-item" href="{{ replace .Permalink (printf "/%s/" .Language.Lang) "/" }}?lang_pref=en">English</a>
+          <span @click="changeLang($el)" class="dropdown-item" data-lang-pref="en">English</span>
         {{ end }}
 
         {{ range where .Translations "Language.Lang" "!=" "en" }}
-          <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+          <span @click="changeLang($el)" class="dropdown-item" data-lang-pref="{{.Language.Lang}}">{{ .Language.LanguageName }}</span>
         {{ end }}
       </div>
     </div>

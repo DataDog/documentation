@@ -19,6 +19,12 @@ const enabledSubdomains = [
 ];
 const cookiePath = '/';
 
+/**
+ * Parses the current URL query params and returns them as an object.
+ * @returns {Object} an object with the query parameters as keys and their values as values.
+ * @example
+ * // returns { lang: 'fr', tab: 'node' }
+ */
 export const getUrlVars = () => {
 	const vars = {};
 	const href = window.location.href.replace(window.location.hash, '');
@@ -28,7 +34,11 @@ export const getUrlVars = () => {
     return vars;
 }
 
-// All query parameters should be retained with the exception of 'lang_pref', which we don't want being indexed/crawled.
+/**
+ * All query parameters should be retained with the exception of 'lang_pref', which we don't want being indexed/crawled.
+ * @param {Object} params object containing query parameters
+ * @returns new query string with lang_pref removed
+ */
 export const getQueryString = (params) => {
 	if (Object.prototype.hasOwnProperty.call(params, 'lang_pref')) {
 		delete params.lang_pref;
@@ -39,6 +49,13 @@ export const getQueryString = (params) => {
 	return queryString.length > 0 ? `?${queryString}` : '';
 }
 
+/**
+ * Handles language based redirects.
+ * Check the URL for the following:
+ * 1. Builds and sends Lang Redirect info to Datadog Logs
+ * 2. Adjusts the URL based on the preview path
+ * 3. If lang_pref is in the URL, set the cookie and redirect
+ */
 export function handleLanguageBasedRedirects() {
 	const params = getUrlVars();
 	const thisUrl = new URL(window.location.href);
@@ -53,7 +70,8 @@ export function handleLanguageBasedRedirects() {
 
 	const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1);
 
-	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
+	/* 
+		Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
 		instead of being appended to the end
 		ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
 	*/
@@ -103,7 +121,7 @@ export function handleLanguageBasedRedirects() {
 				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }${getQueryString(params)}`.replace(/\/+/g,'/');
 
 				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
-
+				
 				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 
 				window.location.replace( dest );
