@@ -3,12 +3,12 @@ null
 ...
 ---
 
-Con el fin de instrumentar invocaciones individuales para las funciones de Lambda de Python y Node.js, la biblioteca Lambda de Datadog necesita envolver tu función de controlador de Lambda. Esto se consigue al definir el controlador de tu función como la función de controlador de Datadog, como `datadog_lambda.handler.handler`, y al configurar la variable de entorno `DD_LAMBDA_HANDLER` con tu función de controlador original de modo que el controlador de Datadog la llame.
+Con el fin de instrumentar invocaciones individuales para las funciones de Lambda de Python y Node.js, la biblioteca Lambda de Datadog necesita envolver tu función de controlador de Lambda. Esto lo consigues al definir el controlador de tu función como la función de controlador de Datadog, como `datadog_lambda.handler.handler`, y al configurar la variable de entorno `DD_LAMBDA_HANDLER` con tu función de controlador original de modo que el controlador de Datadog la llame.
 
 **Nota**: Si la configuración de tu función de Lambda no es compatible con la redirección del controlador de Datadog, puedes aplicar la envoltura de Datadog en el código de tu función en su lugar.
 
 1. Sigue las instrucciones de instalación del método **Custom** (Personalizado) para [Python][1] o [Node.js][2] para instalar Datadog Serverless Monitoring.
-2. Omite el paso para configurar el controlador de la función.
+2. Omite el paso para configurar la función de controlador.
 3. Omite el paso para definir la variable de entorno `DD_LAMBDA_HANDLER`.
 4. Aplica la envoltura de Datadog en el código de tu función:
     ```python
