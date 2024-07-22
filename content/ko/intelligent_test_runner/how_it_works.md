@@ -12,7 +12,6 @@ further_reading:
 - link: /tests
   tag: 설명서
   text: 테스트 가시성에 대해 알아보기
-kind: 설명서
 title: Datadog 지능형 테스트 러너(Intelligent Test Runner) 작동법
 ---
 

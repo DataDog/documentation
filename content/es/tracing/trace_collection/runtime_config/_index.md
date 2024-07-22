@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/remote_config/
   tag: Documentación
   text: Configuración remota
-kind: documentación
 title: Configuración en tiempo de ejecución
 ---
 
@@ -42,7 +41,7 @@ En este ejemplo, puedes ver que la inyección de logs está habilitada para el e
 
 Puedes saber cuándo se han aplicado correctamente los cambios de configuración consultando el texto **X Applied***. En este ejemplo, la configuración se ha aplicado correctamente a las dos instancias.
 
-## Opciones de configuración compatibles 
+## Opciones de configuración compatibles
 
 Las siguientes opciones son compatibles con la configuración en tiempo de ejecución. Para cada lenguaje, se indica la versión de rastreador necesaria:
 

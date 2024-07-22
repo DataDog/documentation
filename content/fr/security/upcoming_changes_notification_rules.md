@@ -7,7 +7,6 @@ further_reading:
   tag: Documentation
   text: Règles de notification
 is_beta: true
-kind: documentation
 title: Changements à venir dans les règles des notifications de sécurité
 ---
 
@@ -72,6 +71,6 @@ Pour migrer les notifications qui sont configurées pour des règles de détecti
 [1]: /fr/security/notifications/rules/
 [2]: /fr/security/misconfigurations
 [3]: https://app.datadoghq.com/security/configuration/compliance/rules
-[4]: /fr/security/cloud_security_management/ 
+[4]: /fr/security/cloud_security_management/
 [5]: /fr/security/application_security/
 [6]: /fr/security/cloud_siem/

@@ -26,7 +26,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective
   tag: 外部サイト
   text: Terraform で SLO を作成・管理する
-kind: documentation
 title: サービスレベル目標（SLO）
 ---
 
@@ -245,7 +244,7 @@ SLO 詳細の "Audit History" タブを使用して、個々の SLO のすべて
 
 ## SLO ウィジェット
 
-{{< learning-center-callout header=“ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url=“https://learn.datadoghq.com/courses/dashboards-slos">}}
+{{< learning-center-callout header="ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/dashboards-slos" >}}
 実際のクラウドコンピューティング容量と Datadog トライアルアカウントで、コストをかけずに学ぶことができます。今すぐ登録して、SLO を追跡するダッシュボード構築の詳細をご覧ください。
 {{< /learning-center-callout >}}
 
@@ -307,7 +306,7 @@ UI で SLO ステータス修正にアクセスするには
 
 SLO カレンダービューは、[SLO ステータスページ][2]で利用できます。右上隅で、"Primary" ビューから "Weekly" または "Monthly" ビューに切り替えると、12 か月分の SLO ステータスの履歴データが表示されます。カレンダービューは、メトリクスベースの SLO およびタイムスライス SLO に対応しています。
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO カレンダービュー” >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO カレンダービュー" >}}
 
 ## SLO CSV エクスポート
 
@@ -322,7 +321,7 @@ SLO CSV エクスポート機能は、「週間」または「月間」カレン
 - SLO ターゲット
 - 過去の SLO ステータス値
 
-{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO カレンダービュー” >}}
+{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO カレンダービュー" >}}
 
 CSV エクスポートで使用できるタイムウィンドウは次のとおりです。
 

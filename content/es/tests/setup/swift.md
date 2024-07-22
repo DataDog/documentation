@@ -15,7 +15,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: Documentación
   text: Solucionar problemas de CI Visibility
-kind: documentación
 title: Tests Swift
 type: lenguaje de código múltiple
 ---
@@ -115,7 +114,7 @@ end
 
 Si utilizas GitHub, puedes utilizar la [acción para tests de Swift][1] del Marketplace de GitHub para configurar y ejecutar tus tests automáticamente. Por defecto, es posible omitir el resto de la configuración descrita en esta página (excepto la configuración de la acción misma), aunque puedes utilizar las variables de entorno de configuración para deshabilitar o configurar funcionalidades adicionales.
 
-En comparación con otros métodos, como la vinculación de Cocoapods and Framework, puede que la opción de la acción para tests de Swift presente una configuración y una ejecución menos flexibles, pero no requiere cambios de código. 
+En comparación con otros métodos, como la vinculación de Cocoapods and Framework, puede que la opción de la acción para tests de Swift presente una configuración y una ejecución menos flexibles, pero no requiere cambios de código.
 
 [1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
 {{% /tab %}}

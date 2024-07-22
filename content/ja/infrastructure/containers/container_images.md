@@ -12,7 +12,6 @@ further_reading:
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities/
   tag: ドキュメント
   text: Cloud Security Management Vulnerabilities のトラブルシューティング
-kind: ドキュメント
 title: コンテナイメージビュー
 ---
 

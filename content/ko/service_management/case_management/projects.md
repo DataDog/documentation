@@ -4,7 +4,6 @@ further_reading:
 - link: service_management/case_management/create_case
   tag: 설명서
   text: 케이스 생성하기
-kind: documentation
 title: 프로젝트
 ---
 
@@ -18,7 +17,7 @@ title: 프로젝트
 
 프로젝트를 생성하려면:
 1. Projects 보기에서 **New Project**를 선택하거나 왼쪽 탐색 모음에서 *Your Projects* 옆에 있는 **+** 아이콘을 클릭합니다.
-1. 프로젝트 이름과 키를 입력하세요. 프로젝트 키의 길이는 1~10자 사이여야 하며 변경할 수 없습니다. 케이스 ID 번호 앞에는 문자 조합이 붙습니다(예: `NOC-123`). 
+1. 프로젝트 이름과 키를 입력하세요. 프로젝트 키의 길이는 1~10자 사이여야 하며 변경할 수 없습니다. 케이스 ID 번호 앞에는 문자 조합이 붙습니다(예: `NOC-123`).
 1. **Create Project**를 클릭합니다.
 
 프로젝트를 생성한 후 한 명 이상의 사용자 또는 Datadog 팀을 구성원으로 추가합니다. 구성원으로 속해 있는 프로젝트는 왼쪽 탐색 모음의 **Your Projects** 섹션에 표시됩니다.

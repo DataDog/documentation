@@ -13,7 +13,6 @@ further_reading:
 - link: /opentelemetry/guide/otel_api_tracing_interoperability
   tag: Documentación
   text: Interoperabilidad de la API de OpenTelemetry con trazas de Datadog instrumentadas
-kind: documentación
 title: Propagación del contexto de rastreo
 type: lenguaje de código múltiple
 ---

@@ -14,7 +14,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric
   tag: Sitio externo
   text: Crear y administrar métricas en función de tramos con Terraform
-kind: documentación
 title: Generar métricas a partir de tramos
 ---
 

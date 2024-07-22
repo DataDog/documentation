@@ -10,7 +10,6 @@ further_reading:
 - link: https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md
   tag: Github
   text: Modèle de programmation
-kind: documentation
 title: Extensions de l'interface Datadog
 ---
 ## Que sont les extensions de l'interface Datadog
@@ -68,7 +67,7 @@ Il se peut que vous remarquiez une erreur <strong>HandshakeTimeoutError</strong>
 1. Pour pouvoir ajouter votre App à un dashboard, vous devez d'abord l'activer en cliquant sur **UI Extensions**.
    <img style="max-width:80%" alt="Bouton Enable UI Extensions de l'interface de modification d'App" src="https://user-images.githubusercontent.com/17037651/163401958-153f6c80-d7ba-4b47-a40d-1cf08913602d.png">
 
-   Une fois cette vue chargée, cliquez sur le bouton **Enable UI Extensions**. 
+   Une fois cette vue chargée, cliquez sur le bouton **Enable UI Extensions**.
 
 1. Une fois que vous avez accès à d'autres options pour votre application, modifiez les options **Root URL** et **Debug Mode Root URL** pour qu'elles correspondent à la version `localhost` du widget que vous utilisez. Le chemin du contrôleur principal est `/widget`. Ces valeurs d'URL changeront au fur et à mesure que vous construirez votre application et que vous commencerez à l'héberger sur votre propre infrastructure.
 

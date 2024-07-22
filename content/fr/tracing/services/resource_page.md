@@ -18,7 +18,6 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentation
   text: Apprendre à lire une trace Datadog
-kind: documentation
 title: Page Ressource
 ---
 

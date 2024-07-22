@@ -10,7 +10,6 @@ further_reading:
   tag: Documentación
   text: Interoperabilidad de la API de OpenTelemetry e instrumentación de trazas de
     Datadog
-kind: documentación
 title: Propagación del contexto de rastreo de Java
 type: multi-code-lang
 ---

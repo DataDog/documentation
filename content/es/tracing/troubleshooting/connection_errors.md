@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
-kind: Documentación
 title: Errores de conexión de APM
 ---
 

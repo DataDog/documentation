@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Métricas personalizadas de aplicaciones serverless de AWS Lambda
 ---
 

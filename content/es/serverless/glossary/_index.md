@@ -1,9 +1,8 @@
 ---
-kind: documentación
 title: Glosario de Serverless
 ---
 
-Este glosario se centra en términos y conceptos específicos de arquitecturas serverless, proveedores de plataformas en la nube y monitorización de Datadog Serverless. 
+Este glosario se centra en términos y conceptos específicos de arquitecturas serverless, proveedores de plataformas en la nube y monitorización de Datadog Serverless.
 
 ### Conceptos serverless generales
 
@@ -18,7 +17,7 @@ Este glosario se centra en términos y conceptos específicos de arquitecturas s
 
 ## Conceptos específicos de la nube
 
-Datadog Serverless ofrece monitorización para aplicaciones serverless en varios entornos de nube. 
+Datadog Serverless ofrece monitorización para aplicaciones serverless en varios entornos de nube.
 
 {{< tabs >}}
 {{% tab "AWS Lambda" %}}

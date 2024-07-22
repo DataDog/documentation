@@ -24,7 +24,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: En savoir plus sur les monitors de test Synthetic
-kind: documentation
 title: Débuter avec les tests API
 ---
 
@@ -103,7 +102,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 Indiquez un message dans votre alerte et ajoutez les adresses e-mail auxquelles vous souhaitez envoyer des alertes. Vous pouvez également utiliser des [intégrations de notification][10], comme Slack, PagerDuty, Microsoft Teams ou encore des webhooks. Pour déclencher une alerte Synthetic avec ces outils, vous devez auparavant configurer l'[intégration correspondante][11].
 
-Lorsque vous êtes prêt à enregistrer votre configuration de test et votre monitor, cliquez sur **Create**. 
+Lorsque vous êtes prêt à enregistrer votre configuration de test et votre monitor, cliquez sur **Create**.
 
 ## Créer un test API à plusieurs étapes
 
@@ -125,9 +124,9 @@ Pour créer un test API à plusieurs étapes, cliquez sur **New Test** > **[Mul
 
 ### Création d'un panier
 
-1. Dans **Define steps**, cliquez sur **Create Your First Step**. 
+1. Dans **Define steps**, cliquez sur **Create Your First Step**.
 2. Attribuez un nom à votre étape, par exemple `Création d'un panier`.
-3. Indiquez la méthode HTTP et l'URL à interroger. Saisissez par exemple `POST` et `https://api.shopist.io/carts`. 
+3. Indiquez la méthode HTTP et l'URL à interroger. Saisissez par exemple `POST` et `https://api.shopist.io/carts`.
 4. Cliquez sur **Test URL**. Cela crée un panier dans le backend de l'application Shopist.
 5. Conservez les assertions par défaut ou modifiez-les.
 6. Vous avez également la possibilité de définir des paramètres d'exécution.
@@ -178,7 +177,7 @@ Pour créer un test API à plusieurs étapes, cliquez sur **New Test** > **[Mul
         "quantity": 1
       },
       "cart_id": "{{ CART_ID }}"
-    } 
+    }
     {{< /code-block >}}
 
 5. Cliquez sur **Test URL**. Cela ajoute le produit extrait lors de l'étape 2 au panier créé lors de l'étape 1 et renvoie une URL de paiement.

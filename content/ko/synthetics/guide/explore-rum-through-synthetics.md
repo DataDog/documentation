@@ -9,7 +9,6 @@ further_reading:
 - link: /synthetics/settings/
   tag: 설명서
   text: 신서틱(Synthetic) 모니터링 설정
-kind: 설명서
 title: Synthetics의 RUM 기능 미리보기 살펴보기
 ---
 

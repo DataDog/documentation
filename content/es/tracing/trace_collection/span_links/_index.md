@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/custom_instrumentation/
   tag: Documentación
   text: Instrumentación personalizada con bibliotecas de Datadog
-kind: documentación
 title: Vínculos de tramos
 ---
 
@@ -20,7 +19,7 @@ title: Vínculos de tramos
 Los vínculos de tramos son un [concepto de OpenTelemetry][5] y una parte de la [API de rastreo OpenTelemetry][2]. Datadog admite vínculos de tramos para:
 
 - Aplicaciones instrumentadas con [SDK de OpenTelemetry][6].
-- Aplicaciones instrumentadas con bibliotecas cliente de Datadog utilizando la API OpenTelemetry.  
+- Aplicaciones instrumentadas con bibliotecas cliente de Datadog utilizando la API OpenTelemetry.
   **Nota**: Esta versión beta sólo es compatible con la [biblioteca cliente PHP][1].
 
 Los vínculos de tramos correlacionan uno o más tramos que estén causalmente relacionados pero no tengan una relación típica elemento principal-secundario. Estos vínculos pueden correlacionar tramos dentro de una misma traza o entre diferentes trazas.

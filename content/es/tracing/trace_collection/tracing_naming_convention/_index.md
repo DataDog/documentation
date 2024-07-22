@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentación
   text: Aprender a explorar tus trazas
-kind: documentación
 title: Semántica de etiquetas de tramo
 ---
 

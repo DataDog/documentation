@@ -3,7 +3,6 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: ログの調査方法
-kind: documentation
 title: Azure ログを Datadog に送信
 ---
 
@@ -49,7 +48,7 @@ Datadog は、Azure から Datadog へログを送信するのに Agent また�
 
 {{< code-block lang="powershell" filename="アクティビティログステップ 2" >}}
 
-./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+./activity_logs_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID>
 
 {{< /code-block >}}
 
@@ -74,7 +73,7 @@ Azure プラットフォームのログ (リソースログを含む) を送信�
 
    {{< code-block lang="powershell" filename="プラットフォームログステップ 2" >}}
 
-   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID>
 
    {{< /code-block >}}
 

@@ -1,6 +1,5 @@
 ---
 disable_toc: true
-kind: 설명서
 title: 단일 단계 계측을 사용하여 ASM 활성화
 ---
 

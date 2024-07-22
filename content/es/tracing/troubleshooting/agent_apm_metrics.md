@@ -2,7 +2,6 @@
 aliases:
 - /es/agent/faq/agent-apm-metrics/
 - /es/tracing/send_traces/agent-apm-metrics/
-kind: Documentación
 title: Métricas de APM enviadas por el Datadog Agent
 ---
 
@@ -156,7 +155,7 @@ Porcentaje de la cola ocupado.
 
 `datadog.trace_agent.stats_writer.retries`
 : **Tipo**: Count<br>
-Número de reintentos en caso de fallo en la API de Datadog 
+Número de reintentos en caso de fallo en la API de Datadog
 
 `datadog.trace_agent.stats_writer.splits`
 : **Tipo**: Count<br>
