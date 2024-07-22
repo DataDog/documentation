@@ -180,7 +180,7 @@ This means that even if users open your application while being offline, no data
 
 The data on disk will automatically be discarded if it gets too old to ensure the SDK doesn't use too much disk space.
 
-## Custom Error Fingerprint
+## Custom error fingerprint
 
 Starting from v2.4.2, you can add a custom fingerprint to the error logs by using the `fingerprint` argument:
 
