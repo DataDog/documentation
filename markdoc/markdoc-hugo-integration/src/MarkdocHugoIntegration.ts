@@ -7,7 +7,7 @@ import { HtmlBuilder } from './helperModules/HtmlBuilder';
 
 export class MarkdocHugoIntegration {
   prefOptionsConfig: PrefOptionsConfig;
-  sitewidePrefNames: string[] = [];
+  // sitewidePrefNames: string[] = [];
   markdocFiles: string[] = [];
   partialsDir: string;
   // Errors from the AST parsing process,
@@ -21,7 +21,7 @@ export class MarkdocHugoIntegration {
    * and scan the content directory for Markdoc files.
    */
   constructor(p: {
-    sitewidePrefsFilepath: string;
+    // sitewidePrefsFilepath: string;
     prefOptionsConfigDir: string;
     contentDir: string;
     partialsDir: string;
@@ -29,9 +29,11 @@ export class MarkdocHugoIntegration {
     this.prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
       p.prefOptionsConfigDir
     );
+    /*
     this.sitewidePrefNames = ConfigProcessor.loadSitewidePrefsConfigFromFile(
       p.sitewidePrefsFilepath
     );
+    */
     this.markdocFiles = FileNavigator.findInDir(p.contentDir, /\.mdoc$/);
     this.partialsDir = p.partialsDir;
   }

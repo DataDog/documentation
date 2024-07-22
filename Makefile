@@ -52,6 +52,12 @@ clean:  ## Clean generated files placed in the hugo site
 	@git clean -Xf ./data
 	@git clean -Xf ./static/images/marketplace
 
+# compile .mdoc files to HTML
+# so Hugo can include them in the site
+compile-markdoc:
+	@echo "Compiling .mdoc files to HTML";
+	@node ./markdoc/build.js;
+
 # if .dockerenv exists we are running from inside a docker container
 # if node_modules was generated in docker when using local or vice versa
 # then generate new node_modules first to avoid binary incompatibilities
@@ -68,10 +74,12 @@ server:
 
 # Download all dependencies and run the site
 start: dependencies ## Build and run docs including external content.
+	@make compile-markdoc
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make compile-markdoc
 	@make server
 
 start-docker: clean  ## Build and run docs including external content via docker
