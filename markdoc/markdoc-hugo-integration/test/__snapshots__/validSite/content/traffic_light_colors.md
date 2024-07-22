@@ -2,19 +2,33 @@
 title: The Colors of the Common Traffic Light
 ---
 <style>
-  .option-pill {
+  .markdoc__hidden {
+    background-color: lightgray;
+  }
+  .markdoc-pref__pill {
     display: inline-block;
-    padding: 0.5em;
-    margin-right: 0.5em;
+    padding: 5px 10px;
+    margin-right: 6px;
     margin-bottom: 10px;
     border: 1px solid lightgray;
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
   }
-  .option-pill.selected {
-    background-color: lightblue;
+  .markdoc-pref__pill.selected {
+    color: white;
+    background-color: #632ca6;
+    border-color: #632ca6;
   }
-  .markdoc__hidden {
-    background-color: lightgray;
+  .markdoc-pref__label {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+  .markdoc-pref__container {
+    display: inline-block;
+    margin-right: 25px;
   }
 </style>
 <script>
@@ -25,40 +39,59 @@ title: The Colors of the Common Traffic Light
   }
 </script>
 <div>
-  <div>Color</div>
-  <div>
+  <div class="markdoc-pref__container">
+    <div class="markdoc-pref__label">Color</div>
     <div>
-      <div class="option-pill" onclick="handleValueChange('color', 'red')">
-        Red
-      </div>
-      <div class="option-pill" onclick="handleValueChange('color', 'yellow')">
-        Yellow
-      </div>
-      <div
-        class="option-pill selected"
-        onclick="handleValueChange('color', 'green')"
-      >
-        Green
+      <div>
+        <div
+          class="markdoc-pref__pill"
+          onclick="handleValueChange('color', 'red')"
+        >
+          Red
+        </div>
+        <div
+          class="markdoc-pref__pill"
+          onclick="handleValueChange('color', 'yellow')"
+        >
+          Yellow
+        </div>
+        <div
+          class="markdoc-pref__pill selected"
+          onclick="handleValueChange('color', 'green')"
+        >
+          Green
+        </div>
       </div>
     </div>
   </div>
-  <div>Item</div>
-  <div>
+  <div class="markdoc-pref__container">
+    <div class="markdoc-pref__label">Item</div>
     <div>
-      <div
-        class="option-pill selected"
-        onclick="handleValueChange('item', 'grass')"
-      >
-        Grass
-      </div>
-      <div class="option-pill" onclick="handleValueChange('item', 'emerald')">
-        Emerald
-      </div>
-      <div class="option-pill" onclick="handleValueChange('item', 'lime')">
-        Lime
-      </div>
-      <div class="option-pill" onclick="handleValueChange('item', 'frog')">
-        Frog
+      <div>
+        <div
+          class="markdoc-pref__pill selected"
+          onclick="handleValueChange('item', 'grass')"
+        >
+          Grass
+        </div>
+        <div
+          class="markdoc-pref__pill"
+          onclick="handleValueChange('item', 'emerald')"
+        >
+          Emerald
+        </div>
+        <div
+          class="markdoc-pref__pill"
+          onclick="handleValueChange('item', 'lime')"
+        >
+          Lime
+        </div>
+        <div
+          class="markdoc-pref__pill"
+          onclick="handleValueChange('item', 'frog')"
+        >
+          Frog
+        </div>
       </div>
     </div>
   </div>

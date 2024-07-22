@@ -215,11 +215,13 @@ export class HtmlBuilder {
     html += '<div>';
     Object.keys(resolvedPagePrefs).forEach((prefId) => {
       const resolvedPagePref = resolvedPagePrefs[prefId];
-      html += `<div>${resolvedPagePref.displayName}</div>`;
+      html += `<div class='markdoc-pref__container'>`;
+      html += `<div class='markdoc-pref__label'>${resolvedPagePref.displayName}</div>`;
       html += this.buildPrefSelectorHtml({
         resolvedPagePref,
         currentValue: valuesByPrefId[prefId] || resolvedPagePref.defaultValue
       });
+      html += '</div>';
     });
     html += '</div>';
     html += '<hr>';
@@ -257,7 +259,7 @@ export class HtmlBuilder {
           ${p.resolvedPagePref.options
             .map((option) => {
               const selected = option.id === p.currentValue ? 'selected' : '';
-              return `<div class="option-pill ${selected}" onclick="handleValueChange('${p.resolvedPagePref.identifier}', '${option.id}')">${option.displayName}</div>`;
+              return `<div class="markdoc-pref__pill ${selected}" onclick="handleValueChange('${p.resolvedPagePref.identifier}', '${option.id}')">${option.displayName}</div>`;
             })
             .join('')}
         </div>
