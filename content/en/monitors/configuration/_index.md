@@ -75,7 +75,7 @@ A cumulative time window has a fixed starting point and expands over time. Monit
 - `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][3] by using the `current day` time window and letting it start at 2:00pm UTC.
 - `Current month`: Looks back at the current month starting on a configurable day of the month at a configurable hour and minute. This option represents a month-to-date time window and is only available for metric monitors.
 
-{{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
+{{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
 
 A cumulative time window is reset after its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am.
 
