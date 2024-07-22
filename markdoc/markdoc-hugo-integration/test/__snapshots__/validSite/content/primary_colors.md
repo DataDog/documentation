@@ -1,4 +1,5 @@
 ---
+title: The Primary Colors of the Color Wheel
 ---
 <style>
   .option-pill {

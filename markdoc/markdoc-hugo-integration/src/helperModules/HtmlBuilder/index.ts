@@ -11,16 +11,12 @@ import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
 import { PagePrefsConfig } from '../../schemas/yaml/frontMatter';
 import fs from 'fs';
 import path from 'path';
-import Handlebars from 'handlebars';
+import ejs from 'ejs';
 
 const pageTemplate = fs.readFileSync(
-  path.resolve(__dirname, 'templates/page.html'),
+  path.resolve(__dirname, 'templates/page.html.ejs'),
   'utf8'
 );
-
-Handlebars.registerHelper('stringify', function (obj) {
-  return JSON.stringify(obj, null, 2);
-});
 
 export class HtmlBuilder {
   /**
@@ -59,7 +55,7 @@ export class HtmlBuilder {
     const pageContent = MarkdocStaticCompiler.renderers.html(renderableTree);
 
     const content = `${chooser}${pageContent}`;
-    const html = Handlebars.compile(pageTemplate, { noEscape: true })({
+    const html = ejs.render(pageTemplate, {
       content,
       renderableTree,
       prefOptionsConfig: p.prefOptionsConfig,

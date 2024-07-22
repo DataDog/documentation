@@ -21,14 +21,14 @@
         console.log('newValue:', newValue);
     }
 </script>
-{{content}}
+<%- content %>
 <script>
     const renderableTree =
-    {{stringify renderableTree}};
+    <%- JSON.stringify(renderableTree, null, 2) %>;
 
     const pagePrefsConfig =
-    {{stringify pagePrefsConfig}};
+    <%- JSON.stringify(pagePrefsConfig, null, 2) %>;
 
     const prefOptionsConfig =
-    {{stringify prefOptionsConfig}};
+    <%- JSON.stringify(prefOptionsConfig, null, 2) %>;
 </script>

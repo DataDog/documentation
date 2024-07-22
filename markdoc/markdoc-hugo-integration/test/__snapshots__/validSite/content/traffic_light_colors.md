@@ -1,4 +1,5 @@
 ---
+title: The Colors of the Common Traffic Light
 ---
 <style>
   .option-pill {

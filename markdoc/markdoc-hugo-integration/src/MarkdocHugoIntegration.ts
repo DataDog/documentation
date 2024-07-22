@@ -88,7 +88,7 @@ export class MarkdocHugoIntegration {
           fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.html'), html);
           // otherwise, build a "Markdown" file (just HTML with frontmatter)
         } else {
-          const markdown = `---\n---\n${html}`;
+          const markdown = `---\ntitle: ${parsedFile.frontmatter.title}\n---\n${html}`;
           fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.md'), markdown);
         }
       } catch (e) {
