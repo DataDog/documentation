@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/"
   tag: "Blog"
   text: "Creating context with service maps (Datadog + Airbnb)"
+- link: "https://www.datadoghq.com/blog/reduce-alert-storms-datadog/"
+  tag: "Blog"
+  text: "Five techniques for reducing alert storms"
 ---
 
 The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.

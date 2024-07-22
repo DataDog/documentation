@@ -5,6 +5,10 @@ aliases:
     - /developers/service_checks/visualize-your-service-check-in-the-datadog-ui
     - /guides/services_checks/
     - /monitors/guide/visualize-your-service-check-in-the-datadog-ui
+further_reading:
+- link: "https://www.datadoghq.com/blog/reduce-alert-storms-datadog/"
+  tag: "Blog"
+  text: "Five techniques for reducing alert storms"
 ---
 
 ## Overview
@@ -73,6 +77,10 @@ In this form, you can:
 - **Define permissions and audit notifications**: Edit access permissions for your monitor and set audit notifications.
 
 For more information on creating a service check, see [Service Check Monitor][5].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard

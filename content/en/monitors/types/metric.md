@@ -18,6 +18,9 @@ further_reading:
 - link: "/monitors/types/change-alert"
   tag: "Documentation"
   text: "Troubleshoot change alert monitors"
+- link: "https://www.datadoghq.com/blog/reduce-alert-storms-datadog/"
+  tag: "Blog"
+  text: "Five techniques for reducing alert storms"
 ---
 
 ## Overview

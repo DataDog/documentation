@@ -14,6 +14,9 @@ further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshoot common Datadog Application Security Management issues"
+- link: "https://www.datadoghq.com/blog/detect-ssrf-attacks/"
+  tag: "Blog"
+  text: "Detect SSRF attacks in cloud applications and APIs"
 ---
 
 ## Overview
