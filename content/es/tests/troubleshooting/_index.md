@@ -29,11 +29,11 @@ Los siguientes aspectos hacen que un informe de test JUnit sea incorrecto:
 
 Si puedes ver los datos de los resultados de los tests en la pestaña **Test Runs** (Ejecuciones de tests), pero no en la pestaña **Tests**, es probable que falten metadatos de Git (repositorio, confirmación o rama). Para confirmar que este es el caso, abre una ejecución de test en la sección [**Ejecuciones de tests**][4] y comprueba que no hay `git.repository_url`, `git.commit.sha` o `git.branch`. Si estas etiquetas (tags) no están rellenadas, no se muestra nada en la sección [**Tests**][5].
 
-1. Los rastreadores utilizan primero las variables de entorno, si las hay, configuradas por el proveedor CI para recopilar información Git. Para ver una lista de las variables de entorno que el rastreador intenta leer para cada proveedor CI compatible, consulta la [ejecución de tests dentro de un contenedor][7]. Como mínimo, esto rellena el repositorio, el hash de confirmación y la información de la rama.
-2. A continuación, los rastreadores obtienen los metadatos de Git utilizando la carpeta local `.git`, si está presente, mediante la ejecución de comandos `git`. Esto rellena todos los campos de metadatos Git, incluyendo el mensaje de confirmación, el autor y la información del autor de la confirmación. Asegúrate de que la carpeta `.git` está presente y que el binario `git` está instalado y en `$PATH`. Esta información se utiliza para rellenar los atributos no detectados en el paso anterior.
-3. También puedes proporcionar información Git manualmente utilizando variables de entorno, que anulan la información detectada por cualquiera de los pasos anteriores.
+1. Los rastreadores utilizan primero las variables de entorno, si las hay, configuradas por el proveedor CI para recopilar información de Git. Para ver una lista de las variables de entorno que el rastreador intenta leer para cada proveedor CI compatible, consulta la [ejecución de tests dentro de un contenedor][7]. Como mínimo, esto rellena el repositorio, el hash de confirmación y la información de la rama.
+2. A continuación, los rastreadores obtienen los metadatos de Git utilizando la carpeta local `.git`, si está presente, mediante la ejecución de comandos `git`. Esto rellena todos los campos de metadatos de Git, incluyendo el mensaje de confirmación, el autor y la información del autor de la confirmación. Asegúrate de que la carpeta `.git` está presente y que el binario `git` está instalado y en `$PATH`. Esta información se utiliza para rellenar los atributos no detectados en el paso anterior.
+3. También puedes proporcionar información de Git manualmente utilizando variables de entorno, que anulan la información detectada por cualquiera de los pasos anteriores.
 
-   Las variables de entorno admitidas para proporcionar información Git son:
+   Las variables de entorno admitidas para proporcionar información de Git son:
 
    `DD_GIT_REPOSITORY_URL` **(Obligatorio)**
    : La URL del repositorio donde se almacena el código. Se admiten tanto URL HTTP como SSH.<br/>
@@ -48,7 +48,7 @@ Si puedes ver los datos de los resultados de los tests en la pestaña **Test Run
    **Ejemplo**: `develop`
 
    `DD_GIT_TAG`
-   : La etiqueta Git a la que se realizan tests (si corresponde). Déjala vacía si se proporciona información de ramas.<br/>
+   : La etiqueta de Git a la que se realizan tests (si corresponde). Déjala vacía si se proporciona información de ramas.<br/>
    **Ejemplo**: `1.0.1`
 
    `DD_GIT_COMMIT_MESSAGE`
@@ -79,7 +79,7 @@ Si puedes ver los datos de los resultados de los tests en la pestaña **Test Run
    : La fecha de confirmación del autor de la confirmación en formato ISO 8601.<br/>
    **Ejemplo**: `2021-03-12T16:00:28Z`
 
-4. Si no se encuentras ninguna variable de entorno del proveedor CI, los resultados de los tests se envían sin metadatos Git.
+4. Si no se encuentras ninguna variable de entorno del proveedor CI, los resultados de los tests se envían sin metadatos de Git.
 
 ### El tiempo total del test está vacío
 Si no puedes ver el tiempo total del test, es probable que la visibilidad a nivel del conjunto de tests no esté habilitada. Para confirmar, comprueba si tu lenguaje es compatible con la visibilidad a nivel del conjunto de tests en [Características admitidas][14]. Si la visibilidad a nivel del conjunto de tests es compatible, actualiza tu rastreador a la última versión.
@@ -104,7 +104,7 @@ Si los números son más bajos de lo esperado, es probable que la biblioteca o l
 
 1. Si estás cargando archivos de informes de tests JUnit:
     1. Si estás ejecutando los mismos tests en entornos con diferentes configuraciones, [asegúrate de que estás definiendo esas etiquetas de configuración durante la carga][10].
-    2. Si estás ejecutando tests parametrizados, es muy probable que el informe de JUnit no tenga esa información. [Prueba a utilizar una biblioteca nativa para informar de los datos de los tests][3].
+    2. Si estás ejecutando tests parametrizados, es muy probable que el informe JUnit no tenga esa información. [Prueba a utilizar una biblioteca nativa para informar de los datos de los tests][3].
 2. Si sigues sin ver resultados esperados, [ponte en contacto con el servicio de asistencia][2] para recibir ayuda y solucionar el problema.
 
 ### Los números aprobados/fallados/omitidos son diferentes de los esperados
@@ -147,7 +147,7 @@ Otros síntomas del mismo problema son:
 
 Es probable que la [configuración del caso de test][13] sea inestable porque uno o varios de los parámetros del test no son deterministas (por ejemplo, incluyen la fecha actual o un número aleatorio).
 
-La mejor forma de solucionar este problema es asegurarse de que los parámetros de test son los mismos en todos los tests.
+La mejor forma de solucionar este problema es asegurarse de que los parámetros de test son los mismos en todas las ejecuciones de tests.
 
 ## Leer más
 
