@@ -488,6 +488,42 @@ The `'full'` option enables connection between database spans with database quer
 **Default**: `true`<br>
 Datadog may collect [environmental and diagnostic information about your system][16] to improve the product. When false, this telemetry data will not be collected.
 
+`DD_OPENAI_SERVICE`
+: **INI**: `datadog.openai.service`<br>
+**Default**: `DD_SERVICE`<br>
+The service name reported by default for OpenAI requests.
+
+`DD_OPENAI_LOGS_ENABLED` (beta)
+: **INI**: `datadog.openai.logs_enabled`<br>
+**Default**: `false`<br>
+Enable collection of prompts and completions as logs. You can adjust the rate of prompts and completions collected using the sample rate configuration described below.
+
+`DD_OPENAI_METRICS_ENABLED`
+: **INI**: `datadog.openai.metrics_enabled`<br>
+**Default**: `true`<br>
+Enable collection of OpenAI metrics.<br>
+If the Datadog Agent is configured to use a non-default StatsD hostname or port, use `DD_DOGSTATSD_URL` to configure the OpenAI metrics collection.
+
+`DD_OPENAI_SPAN_CHAR_LIMIT` (beta)
+: **INI**: `datadog.openai.span_char_limit`<br>
+**Default**: `128`<br>
+Configure the maximum number of characters for the following data within span tags:
+- Prompt inputs and completions
+- Message inputs and completions
+- Embedding inputs
+
+Text exceeding the maximum number of characters is truncated to the character limit and has `...` appended to the end.
+
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+: **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
+**Default**: `1.0`<br>
+Configure the sample rate for the collection of prompts and completions as span tags.
+
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+: **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
+**Default**: `0.1`<br>
+Configure the sample rate for the collection of prompts and completions as logs.
+
 #### Integration names
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
@@ -495,7 +531,7 @@ The table below specifies the default service names for each integration. Change
 Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
 | Integration   | Service Name    |
-| ------------- | --------------- |
+|---------------| --------------- |
 | AMQP          | `amqp`          |
 | CakePHP       | `cakephp`       |
 | CodeIgniter   | `codeigniter`   |
@@ -513,6 +549,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | MongoDB       | `mongodb`       |
 | Mysqli        | `mysqli`        |
 | Nette         | `nette`         |
+| OpenAI        | `openai`        |
 | PCNTL         | `pcntl`         |
 | PDO           | `pdo`           |
 | PhpRedis      | `phpredis`      |
