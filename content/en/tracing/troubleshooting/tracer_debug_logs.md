@@ -24,7 +24,7 @@ The data collected varies by language. See [Data collected](#data-collected).
 
 ### Send a flare
 
-To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote configuration][5] on the Agent.
+To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote Configuration][5] on the Agent.
 
 {{% remote-flare %}}
 
