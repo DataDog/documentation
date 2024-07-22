@@ -228,6 +228,8 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Connect the Datadog Agent to the Observability Pipelines Worker
+
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

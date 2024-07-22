@@ -2231,8 +2231,7 @@ menu:
           - v2
         operationids:
           - ConvertExistingSecurityMonitoringRule
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Update an existing rule
       url: '#update-an-existing-rule'
@@ -2304,8 +2303,7 @@ menu:
           - v2
         operationids:
           - ConvertSecurityMonitoringRuleFromJSONToTerraform
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Create a detection rule
       url: '#create-a-detection-rule'
@@ -6108,6 +6106,46 @@ menu:
           - ListRestrictionQueries
         unstable:
           - v2
+        order: 1
+    - name: Network Device Monitoring
+      url: /api/latest/network-device-monitoring/
+      identifier: network-device-monitoring
+      generated: true
+    - name: Get the list of interfaces of the device
+      url: '#get-the-list-of-interfaces-of-the-device'
+      identifier: network-device-monitoring-get-the-list-of-interfaces-of-the-device
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInterfaces
+        unstable: []
+        order: 3
+    - name: Get the device details
+      url: '#get-the-device-details'
+      identifier: network-device-monitoring-get-the-device-details
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDevice
+        unstable: []
+        order: 2
+    - name: Get the list of devices
+      url: '#get-the-list-of-devices'
+      identifier: network-device-monitoring-get-the-list-of-devices
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDevices
+        unstable: []
         order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/

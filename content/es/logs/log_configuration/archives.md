@@ -17,7 +17,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentación
   text: Más información sobre Logging without Limits*
-kind: documentación
 title: Archivos de log
 ---
 

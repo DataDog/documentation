@@ -69,8 +69,6 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 
 ### Enable FIM and Registry Monitoring
 
-<div class="alert alert-warning">File Integrity Monitoring (FIM) and Registry Monitoring is in beta and should not be enabled on production workloads.</div>
-
 1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
     - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
 1. In `C:\ProgramData\Datadog\system-probe.yaml`, set the `fim_enabled` flag:<br><br>

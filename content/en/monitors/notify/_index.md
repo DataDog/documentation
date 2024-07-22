@@ -68,14 +68,13 @@ If a notification channel is set, you can route notifications to a specific Team
 {{% notifications-integrations %}}
 
 ### Workflows
-You can trigger a [workflow automation][7] or create a new workflow from a monitor.
+You can trigger a [workflow automation][7] or create a new workflow from a monitor. Before you add a workflow to a monitor, add a monitor trigger to the workflow.
 
 **To add an existing workflow to a monitor**:
-1. In the message section, add the full workflow mention name:
-   - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
-   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname=host.name)`
+1. Click **Add Workflow** and search for it in the drop-down menu.
+1. Alternatively, in the message section, add the full workflow mention name. The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`.
 
-1. Alternatively, click **Add Workflow** and search for it in the drop-down menu.
+To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname=host.name)`.
 
 For more information on triggering a workflow, see [Trigger a workflow][8].
 
