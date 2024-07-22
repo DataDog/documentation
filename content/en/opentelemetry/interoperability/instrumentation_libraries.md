@@ -140,7 +140,8 @@ To use Opentelemetry integrations with the Datadog tracing library, perform the 
  1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][3] page.
  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
 
-The following is an example instrumenting the net/http library with the Datadog Tracer and Opentelemetry's net/http integration:
+The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
+
 ```go
 import (
 	"fmt"
