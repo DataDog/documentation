@@ -55,6 +55,11 @@ menu:
       url: markdoc_testing/traffic_light_colors/
       parent: markdoc_testing
       weight: 2
+    - name: Styles Scratchpad
+      identifier: markdoc_testing_styles_scratchpad
+      url: markdoc_testing/styles_scratchpad/
+      parent: markdoc_testing
+      weight: 3
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/
