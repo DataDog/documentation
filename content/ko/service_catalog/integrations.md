@@ -11,7 +11,6 @@ further_reading:
 - link: /integrations/pagerduty/
   tag: 설명서
   text: PagerDuty 통합에 대해 자세히 알아보기
-kind: 설명서
 title: 서비스 카탈로그를 통한 통합 사용
 ---
 {{% site-region region="gov" %}}

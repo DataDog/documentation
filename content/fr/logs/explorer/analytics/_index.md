@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
   tag: Blog
   text: Ajoutez plus de contexte à vos logs avec les tables de référence
-kind: documentation
 title: Analyse de logs
 ---
 

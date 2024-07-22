@@ -18,7 +18,6 @@ further_reading:
 - link: /continuous_testing/cicd_integrations
   tag: 설명서
   text: Continuous Testing 및 CI/CD에 대해 알아보기
-kind: 설명서
 title: 지속적 테스팅 시작하기
 ---
 {{< jqmath-vanilla >}}

@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/types/event/
   tag: Documentation
   text: Monitors d'événement
-kind: documentation
 private: true
 title: Guides sur les événements
 ---

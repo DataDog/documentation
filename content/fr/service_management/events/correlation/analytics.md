@@ -3,7 +3,6 @@ further_reading:
 - link: service_management/events/correlation/
   tag: Documentation
   text: En savoir plus sur la corrélation d'événements
-kind: Documentation
 title: Analyses à partir de cas et d'événements
 ---
 
