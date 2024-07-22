@@ -74,9 +74,11 @@ spec:
 
   override:
     nodeAgent:
-      env: 
-        name: DD_IGNORE_AUTOCONF
-        value: redisdb istio
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
 ```
 
 Then, apply the new configuration.
