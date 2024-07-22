@@ -12,8 +12,6 @@ further_reading:
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
 
-The data collected varies by language. See [Data collected](#data-collected).
-
 ### Prerequisites
 
 - [Remote Configuration][3] must be enabled.
