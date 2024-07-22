@@ -127,15 +127,63 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 {{% /tab %}} -->
 
-<!-- {{% tab "Go" %}}
+{{% tab "Go" %}}
 
 ## Compatibility requirements
 
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][1], including the [`opentelemetry-go-contrib/instrumentation`][2] libraries, but it does not support integrations that rely on metrics or logs exporters.
+
 ## Setup
+
+To use Opentelemetry integrations with the Datadog tracing library, perform the following steps:
+
+ 1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][3] page.
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
+
+The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
+
+```go
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/otel"
+)
+
+func main() {
+	// register tracer
+	provider := ddotel.NewTracerProvider(ddtracer.WithDebugMode(true))
+	defer provider.Shutdown()
+	otel.SetTracerProvider(provider)
+
+	// configure the server with otelhttp instrumentation as you normally would using opentelemetry: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp
+	var mux http.ServeMux
+	mux.Handle("/hello", http.HandlerFunc(hello))
+	http.HandleFunc("/hello", hello)
+	log.Fatal(http.ListenAndServe(":8080", otelhttp.NewHandler(&mux, "server")))
+}
+
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "hello\n")
+}
+```
+
+{{< img src="opentelemetry/interoperability/go-otel-dropin-support.png" alt="go-dd-otelhttp">}}
 
 ## Configuration
 
-{{% /tab %}} -->
+No additional configuration is required.
+
+[1]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
+[2]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
+[3]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
+
+{{% /tab %}}
 
 <!-- {{% tab "NodeJS" %}}
 
