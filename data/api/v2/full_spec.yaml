@@ -22570,6 +22570,7 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
+          format: url
           type: string
       required:
       - label
@@ -29703,6 +29704,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: safe
+    x-merge-override:
+      patch: true
   /api/v2/integrations/okta/accounts:
     get:
       description: List Okta accounts.
