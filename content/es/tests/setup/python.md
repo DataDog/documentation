@@ -216,11 +216,11 @@ Los complementos para `pytest` que alteran la ejecución de los tests pueden pro
 
 ### Paralelización
 
-Los complementos que introducen paralelización en `pytest` (como [`pytest-xdist`][1] o [`pytest-forked`][2]) crean un evento de sesión para cada instancia paralelizada. Se pueden crear varios módulos o conjuntos de eventos, si los tests del mismo paquete o módulo se ejecutan en diferentes procesos.
+Los complementos que introducen una paralelización en `pytest` (como [`pytest-xdist`][1] o [`pytest-forked`][2]) crean un evento de sesión para cada instancia paralelizada. Se pueden crear varios módulos o conjuntos de eventos, si los tests del mismo paquete o módulo se ejecutan en diferentes procesos.
 
 El número total de eventos de test (y su corrección) no se ven afectados. Los eventos de sesión individual, módulo o conjunto pueden tener resultados incoherentes con otros eventos de la misma ejecución de `pytest`.
 
-### Pedidos de tests
+### Solicitudes de tests
 
 Los complementos que cambian el orden de ejecución de los tests (como [`pytest-randomly`][3]) pueden crear varios eventos de módulo o conjunto. La duración y los resultados de los eventos de módulo o conjunto también pueden ser incoherentes con los resultados informados por `pytest`.
 
