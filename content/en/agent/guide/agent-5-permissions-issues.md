@@ -2,7 +2,7 @@
 title: Agent 5 Permission Issues
 ---
 
-The Agent needs a specific set of permission in order to collect your data on your host, find below the most common permission issues and how to solve them.
+The Agent needs a specific set of permissions in order to collect your data on your host, find the most common permission issues below and how to solve them.
 
 ## Agent logging permission issues
 
@@ -69,7 +69,7 @@ This occurs when processes being monitored by the process check runs under a dif
 
 Try updating to the [latest version of the Agent][8] and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
-<div class="alert alert-info">Running a process daemon as <code>root</code> is not best practice on Linux. The Agent is open source and may be audited via the <a href="https://github.com/DataDog/dd-agent">GitHub repository.</a></div>
+<div class="alert alert-info">Running a process daemon as <code>root</code> is not best practice on Linux. The Agent is open source and may be audited through the <a href="https://github.com/DataDog/dd-agent">GitHub repository.</a></div>
 
 1. [Stop the Agent][1]
 

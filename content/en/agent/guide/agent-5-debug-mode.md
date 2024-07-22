@@ -17,13 +17,13 @@ To enable the Agent full debug mode:
 
 ## Containerized Agent
 
-When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) which causes the container to be killed by Docker. Use supervisor to restart a containerized Agent:
+When run in a container, the Agent cannot be restarted with `service datadog-agent restart` (or similar) which causes the container to be killed by Docker. Use supervisor to restart a containerized Agent:
 
 ```text
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
 
-The following commands enable debug logging, restart the Agent, wait 60 seconds, then send a flare, in that order:
+With the following commands, enable debug logging, restart the Agent, wait 60 seconds, then send a flare, in that order:
 
 ```shell
 sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
@@ -55,7 +55,7 @@ The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 | `'DEBUG'`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |
 | `'TRACE'`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |
 
-**Note**: When setting the log level to `'OFF'` in the configuration file quotes are mandatory to prevent the value for being improperly parsed. Quotes are optional for other log levels.
+**Note**: When setting the log level to `'OFF'` in the configuration file, quotes are mandatory to prevent the value from being improperly parsed. Quotes are optional for other log levels.
 
 [1]: /agent/guide/agent-5-configuration-files/
 [2]: /agent/guide/agent-5-commands/

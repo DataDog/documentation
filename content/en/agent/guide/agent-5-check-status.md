@@ -7,9 +7,9 @@ This page covers troubleshooting an Agent Check on Agent 5. For information on t
 
 If you are experiencing issues with an Agent Check, use these commands to get more troubleshooting information.
 
-**Note**: Replace `<CHECK_NAME>` in the examples below with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][1] to confirm the Agent check name.
-
-**Note**: To temporarily disable a service check while troubleshooting, rename `/conf.d/<CHECK_NAME>.d/conf.yaml` to something other than the `.yaml` or `.yml` file extension, such as `conf.yaml.disable`.
+**Notes**: 
+- Replace `<CHECK_NAME>` in the examples below with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][1] to confirm the Agent check name.
+- To temporarily disable a service check while troubleshooting, rename `/conf.d/<CHECK_NAME>.d/conf.yaml` to something other than the `.yaml` or `.yml` file extension, such as `conf.yaml.disable`.
 
 ## Linux
 
@@ -34,7 +34,7 @@ If your issue continues, [reach out to the Datadog support team][2] with a [flar
 {{< tabs >}}
 {{% tab "Agent v<=5.11" %}}
 
-The Agent install includes a file called `shell.exe` in your `Program Files` directory for the Datadog Agent. This file can be used to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, run the following in shell.exe:
+The Agent install includes a file called `shell.exe` in your `Program Files` directory for the Datadog Agent. This file can be used to run Python within the Agent environment. After your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, run the following in shell.exe:
 
 ```python
 from checks import run_check
@@ -69,7 +69,7 @@ The following command shows the status of the Datadog Agent.
 sudo systemctl status dd-agent
 ```
 
-If the Agent failed to start, and no further information is provided, use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
+If the Agent fails to start, and no further information is provided, use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
 
 ```shell
 sudo journalctl -u dd-agent.service
