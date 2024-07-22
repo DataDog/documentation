@@ -1,6 +1,6 @@
 ---
 kind: documentación
-title: Glosario serverless
+title: Glosario de Serverless
 ---
 
 Este glosario se centra en términos y conceptos específicos de arquitecturas serverless, proveedores de plataformas en la nube y monitorización de Datadog Serverless. 
@@ -23,7 +23,7 @@ Datadog Serverless ofrece monitorización para aplicaciones serverless en varios
 {{< tabs >}}
 {{% tab "AWS Lambda" %}}
 
-AWS Lambda es la plataforma de FaaS de Amazon Web Services. Consulta la [documentación de AWS Lambda][1] para obtener más detalles.
+AWS Lambda es la plataforma de FaaS de Amazon Web Services. Consulta la [documentación de AWS Lambda][1] para obtener más información.
 
 | Concepto                         | Descripción                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -81,7 +81,7 @@ AWS Lambda es la plataforma de FaaS de Amazon Web Services. Consulta la [documen
 {{% /tab %}}
 {{% tab "Azure Functions" %}}
 
-Azure Functions es la plataforma de FaaS de Microsoft Azure. Consulta la [documentación de Microsoft Azure Functions][1] para obtener más detalles.
+Azure Functions es la plataforma de FaaS de Microsoft Azure. Consulta la [documentación de Microsoft Azure Functions][1] para obtener más información.
 
 | Concepto                         | Descripción                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
