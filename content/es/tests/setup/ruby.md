@@ -84,7 +84,7 @@ gem "datadog-ci", "~> 1.0", group: :test
 
 La integración RSpec rastrea todas las ejecuciones de ejemplos de grupos y ejemplos, cuando se utiliza el marco para tests `rspec`.
 
-Para activar tu integración, añade lo siguiente alarchivo `spec_helper.rb`:
+Para activar tu integración, añade lo siguiente al archivo `spec_helper.rb`:
 
 ```ruby
 require "rspec"
@@ -287,7 +287,7 @@ Para ello, configura la instrumentación adicional en tu bloque `configure`:
 ```ruby
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    #  ... configuraciones e instrumentación ci aquí ...
+    #  ... configuraciones e instrumentación CI aquí ...
     c.tracing.instrument :redis
     c.tracing.instrument :pg
     # ... cualquier otra instrumentación compatible con el gem de Datadog ...
