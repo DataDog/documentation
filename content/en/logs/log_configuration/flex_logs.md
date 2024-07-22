@@ -35,7 +35,7 @@ Some example use cases for Flex storage include:
 
 Datadog Log Management provides the following solutions:
 
-- Standard Indexing for logs that you need to query frequently and only need to be retained short-term, such as application logs.
+- Standard Indexing for logs that need to be queried frequently and retained short term, such as application logs.
 - Flex Logs for logs that need to be retained long-term, but sometimes need to be queried urgently, such as security, transaction, and network logs.
 - Archiving for logs that are infrequently queried and need to be stored long-term, such as audit and configuration logs.
 
@@ -126,7 +126,7 @@ If you select one of the scalable compute options for Flex Logs (for example, XS
 
 ## Configure storage tiers
 
-Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex logs.
+Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex Logs.
 
 Configure Flex Tier in the [Logs Index Configuration][2] page:
 
@@ -137,11 +137,10 @@ Configure Flex Tier in the [Logs Index Configuration][2] page:
 {{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Options for the Flex tier storage within the index configuration" style="width:100%;" >}}
 
 **Notes**:
-- If both are selected, logs are stored in the Standard Tier until the end of the configured retention period before they are stored in the Flex Tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
+- If both tiers are selected, logs are stored in the Standard Tier until the end of the configured retention period before they are stored in the Flex Tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
 - Adding the Standard Tier to a Flex index applies to new logs, not pre-existing logs in the Flex index.
-- If you are already indexing logs, adding the Flex Tier extends the retention of all logs currently stored in the index and the new logs that are going into the index.
-- If you want to remove Standard Indexing and add the Flex Tier, make the changes and save it as one action.
-- If you remove Standard Indexing, the logs are no longer queryable in monitors or in Watchdog Insights.
+- Adding a Flex Tier to a Standard Tier-only index extends the retention of all logs currently stored in the index and the new logs that are going into the index.
+- To remove Standard Indexing and add the Flex Tier, make the changes and save it as one action. If you remove Standard Indexing, the logs are no longer queryable in monitors or in Watchdog Insights.
 - If you add back Standard Indexing to an index that only has Flex Tier, only the new logs going into the index are stored in Standard Indexing.
 
 ## Search Flex Logs tier
@@ -160,9 +159,9 @@ You can add Flex Log queries to dashboards, but make sure to consider these dash
 
 ### Potential sources for sending directly to Flex Logs
 
-The following list is an example of log sources that are potentially good candidates for sending logs directly to the Flex Tier, therefore not going to Standard Indexing first. This is not an exhaustive list and is meant to give you an idea about the types of logs that are suitable for this configuration. Other log sources (for example, application logs) can still be sent to the Flex Tier after going to Standard indexing first for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources could vary, and that is important to consider when making the decision to skip Standard Indexing.
+The following list is an example of log sources that are good candidates for sending logs directly to the Flex Tier, without being stored in Standard Indexing first. This is not an exhaustive list and is meant to give you an idea about the types of logs that are suitable for this configuration. Other log sources (for example, application logs) can still be sent to the Flex Tier after going to Standard Indexing first for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources could vary, which is important to consider when making the decision to skip Standard Indexing.
 
-**Note**: These examples are a sample for each category. There are many more catagories, and services, tools, and technologies that you may want to send directly to the Flex Tier.
+**Note**: These examples are a sample for each category. There are many more categories, and services, tools, and technologies that you may want to send directly to the Flex Tier.
 
 | Technology            | Examples                                                                                   |
 |-----------------------|--------------------------------------------------------------------------------------------|
@@ -179,9 +178,9 @@ The following list is an example of log sources that are potentially good candid
 
 ### Flex Logs for multiple-organization accounts
 
-For each organization in which you want Flex Logs, you must enable a compute instance for each organization. Compute instances cannot be shared across organizations.
+For each organization in which you want Flex Logs, you must enable a compute size per organization. Compute sizes cannot be shared across organizations.
 
-Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations Datadog recommends using Standard Indexing for shorter retentions and Flex Logs Starter for longer retentions.
+Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
 
 ### When the compute limit is reached
 
