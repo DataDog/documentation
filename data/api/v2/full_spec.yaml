@@ -705,7 +705,7 @@ components:
         created_by:
           $ref: '#/components/schemas/RelationshipToUser'
         modified_by:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
       type: object
     APIKeyResponse:
       description: Response for retrieving an API key.
@@ -1405,6 +1405,15 @@ components:
         team:
           $ref: '#/components/schemas/RelationshipToTeam'
       type: object
+    AuthNMappingResourceType:
+      description: The type of resource being mapped to.
+      enum:
+      - role
+      - team
+      type: string
+      x-enum-varnames:
+      - ROLE
+      - TEAM
     AuthNMappingResponse:
       description: AuthN Mapping response from the API.
       properties:
@@ -25037,6 +25046,11 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter by mapping resource type. Defaults to "role" if not specified.
+        in: query
+        name: resource_type
+        schema:
+          $ref: '#/components/schemas/AuthNMappingResourceType'
       responses:
         '200':
           content:
@@ -35669,8 +35683,6 @@ paths:
       x-menu-order: 12
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This feature is in private beta. Reach out to support
-        to request access.'
   /api/v2/security_monitoring/rules/test:
     post:
       description: Test a rule.
@@ -35877,8 +35889,6 @@ paths:
       x-menu-order: 11
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This feature is in private beta. Reach out to support
-        to request access.'
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: Test an existing rule.

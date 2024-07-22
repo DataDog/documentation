@@ -58,7 +58,7 @@ To create a monitor programmatically, see the [Datadog API][7] or [community mai
 
 {{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
 
-Set up [Monitor Notifications][11] when creating monitors to keep your team informed of issues. Route the notifications to the correct people,  include [workflow automations][17], [cases][18], and [Datadog team handles][19], leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][12] to mute alerts during application maintenance.
+Set up [Monitor Notifications][11] when creating monitors to keep your team informed of issues. Route the notifications to the correct people, include [workflow automations][17], [cases][18], and [Datadog team handles][19], leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][12] to mute alerts during application maintenance.
 
 ## Manage monitors
 
