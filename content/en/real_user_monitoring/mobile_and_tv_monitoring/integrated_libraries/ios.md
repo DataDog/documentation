@@ -15,3 +15,38 @@ further_reading:
 ---
 
 This page lists integrated libraries you can use for iOS and tvOS applications.
+
+## Alamofire
+
+Starting from version `2.5.0`, the RUM iOS SDK can automatically track [Alamofire][1] requests.
+
+1. Configure RUM monitoring by following the [Setup][2] guide.
+2. Enable `URLSessionInstrumentation` for `Alamofire.SessionDelegate`:
+
+```swift
+import Alamofire
+import DatadogRUM
+
+URLSessionInstrumentation.enable(with: .init(delegateClass: SessionDelegate.self))
+```
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to "Automatically track network requests" in the [Advanced Configuration][4] documentation.
+
+## Apollo GraphQL
+
+Starting from version `2.5.0`, the RUM iOS SDK can automatically track [Apollo GraphQL][3] requests.
+
+1. Configure RUM monitoring by following the [Setup][2] guide.
+2. Enable `URLSessionInstrumentation` for `Apollo.URLSessionClient`:
+
+```swift
+import Apollo
+import DatadogRUM
+
+URLSessionInstrumentation.enable(with: .init(delegateClass: URLSessionClient.self))
+```
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to "Automatically track network requests" in the [Advanced Configuration][4] documentation.
+
+[1]: https://github.com/Alamofire/Alamofire
+[2]: real_user_monitoring/mobile_and_tv_monitoring/setup/ios/
+[3]: https://github.com/apollographql/apollo-ios
+[4]: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/
