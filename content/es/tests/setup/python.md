@@ -197,7 +197,7 @@ Para obtener más información sobre las etiquetas reservadas `service` y `env`,
 La siguiente variable de entorno puede utilizarse para configurar el localización del Datadog Agent:
 
 `DD_TRACE_AGENT_URL`
-: La URL del Datadog Agent URL para recopilar trazas con el formato `http://hostname:port`.<br/>
+: La URL del Datadog Agent URL para recopilar trazas (traces) con el formato `http://hostname:port`.<br/>
 **Por defecto**: `http://localhost:8126`
 
 También puedes utilizar todas las demás opciones de [configuración del Datadog Tracer][3].
