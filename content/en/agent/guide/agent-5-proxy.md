@@ -1,33 +1,19 @@
 ---
-title: Agent Proxy Configuration
-aliases:
-- /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
-- /agent/proxy
-further_reading:
-- link: "/logs/"
-  tag: "Documentation"
-  text: "Collect your logs"
-- link: "/infrastructure/process/"
-  tag: "Documentation"
-  text: "Collect your processes"
-- link: "/tracing/"
-  tag: "Documentation"
-  text: "Collect your traces and profiles"
-- link: "/agent/configuration/agent-fips-proxy"
-  tag: "Documentation"
-  text: "Datadog FIPS Compliance"
-algolia:
-  tags: ['agent proxy']
+title: Agent 5 proxy configuration
+disable_toc: false
 ---
 
 ## Overview
+
+This page covers proxy configuration for Agent 5. For information on the latest version of the Agent, see [Agent Proxy Configuration][1].
 
 If your network configuration restricted outbound traffic, proxy all Agent traffic through one or several hosts that have more permissive outbound policies.
 
 A few options are available to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the Internet.
 
-1. Using a web proxy, such as Squid or Microsoft Web Proxy, that is already deployed to your network
-2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
+1. Using a web proxy, such as Squid or Microsoft Web Proxy, that is already deployed to your network.
+2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy).
+3. Using the Agent as a proxy for up to 16 Agents per proxy. **Using the Agent as a proxy only supported on Agent 5**.
 
 ## FIPS compliance
 
@@ -39,90 +25,19 @@ For specific information regarding Squid, see the [Squid](#squid) section of thi
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
-Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file. The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
-
 <div class="alert alert-warning">
-If log collection is enabled, make sure that a specific transport is <a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">enforced</a>.
-The recommended setup is to use HTTPS. In that case, the <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics is used to proxy logs.
-If you are using TCP transport, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
+The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
 </div>
 
-Setting an HTTP proxy for all `https` requests:
+Edit the `datadog.conf` file with your proxy information:
 
-```yaml
-proxy:
-    https: "http://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>"
+```text
+# If you need a proxy to connect to the Internet, provide the settings here
+proxy_host: my-proxy.example.com
+proxy_port: 3128
+proxy_user: my_user
+proxy_password: my_password
 ```
-
-Note: When setting up an HTTP proxy for `https` requests, the actual communication between the Agent and Datadog is encrypted end-to-end with TLS and cannot be decrypted by the proxy. The only unencrypted communication is the `HTTP CONNECT` request that's made between the Agent and the proxy to establish the initial TCP connection between the Agent and Datadog. As such, when using a proxy for `https` requests, there is no need to use an HTTPS proxy in order to have encrypted communication between the Agent and Datadog.
-
-Setting an HTTPS proxy for both `https` and `http` requests:
-
-```yaml
-proxy:
-    https: "https://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>"
-    http: "https://<SSL_PROXY_SERVER_FOR_HTTP>:<PORT>"
-```
-
-Setting a `<USERNAME>` and `<PASSWORD>` to contact the proxy server for both `https` and `http` requests:
-
-```yaml
-proxy:
-    https: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
-    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTP>:<PORT>"
-```
-
-Using the `no_proxy` list to specify hosts that must bypass the proxy:
-
-```yaml
-proxy:
-    https: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>"
-    http: "http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTP>:<PORT>"
-    no_proxy:
-      - host1
-      - host2
-```
-
-**Note**: All integrations that make HTTP(S) requests default back to proxy settings defined in `datadog.yaml` configuration file if none are specified at the integration level. If this is undesired, set `skip_proxy` to true or `use_agent_proxy` to false in every instance config or in the `init_config` fallback for your integration.
-
-##### NO_PROXY accepted values
-
-By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). It is recommended to enable `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules (below) used for Agent integrations.
-
-```yaml
-no_proxy_nonexact_match: true
-```
-
-The following rules apply to Agent integrations (and the whole Agent when `no_proxy_nonexact_match` is enabled):
-* A domain name matches that name and all subdomains, for example:
-  - `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
-  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
-* A domain name with a leading "." matches subdomains only, for example:
-  - `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
-* A CIDR range matches an IP address within the subnet, for example:
-  - `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
-* An exact IP address, for example:
-  - `169.254.169.254`
-* A hostname, for example:
-  - `webserver1`
-
-#### Environment variables
-
-Starting with Agent v6.4, you can set your proxy settings through environment variables:
-
-* `DD_PROXY_HTTPS`: Sets a proxy server for `https` requests.
-* `DD_PROXY_HTTP`: Sets a proxy server for `http` requests.
-* `DD_PROXY_NO_PROXY`: Sets a list of hosts that should bypass the proxy. The list is space-separated.
-
-Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value, for example: ``DD_PROXY_HTTP=""``, the Agent uses the empty values instead of lower-precedence options.
-
-On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every requests from integrations, including orchestrators like Docker, ECS, and Kubernetes.
-
-The Agent uses the following values in order of precedence:
-
-1. `DD_PROXY_HTTPS`, `DD_PROXY_HTTP`, and `DD_PROXY_NO_PROXY` environment variables
-2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
-3. Values inside `datadog.yaml`
 
 Do not forget to [restart the Agent][2] for the new settings to take effect.
 
@@ -190,12 +105,11 @@ net start squid
 
 ##### Datadog Agent configuration
 
-Modify the Agent's configuration file (`datadog.yaml`) to include the following:
+Modify the Agent's configuration file (`datadog.conf`) to include the following:
 
-```yaml
-proxy:
-  http: http://127.0.0.1:3128
-  https: http://127.0.0.1:3128
+```conf
+proxy_host: 127.0.0.1
+proxy_port: 3128
 ```
 
 After saving these changes, [restart the Agent][2].
@@ -803,72 +717,50 @@ If you are using older version of HAProxy, you have to reload or restart HAProxy
 
 #### Datadog Agent configuration
 
-Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
-This `dd_url` setting can be found in the `datadog.yaml` file.
-
-`dd_url: <SCHEME>://haproxy.example.com:3834`
-
-Replace `<SCHEME>` with `https` if you previously chose the HAProxy HTTPS configuration, or with `http` if you did not choose HTTPS.
-
-To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
-
-```yaml
-apm_config:
-    apm_dd_url: <SCHEME>://haproxy.example.com:3835
-    profiling_dd_url: <SCHEME>://haproxy.example.com:3836/api/v2/profile
-    telemetry:
-        dd_url: <SCHEME>://haproxy.example.com:3843
-
-process_config:
-    process_dd_url: <SCHEME>://haproxy.example.com:3837
-
-logs_config:
-    force_use_http: true
-    logs_dd_url: haproxy.example.com:3838
-    # Comment the line below to use encryption between the Agent and HAProxy
-    logs_no_ssl: true
-
-database_monitoring:
-    metrics:
-        logs_dd_url: haproxy.example.com:3839
-        # Comment the line below to use encryption between the Agent and HAProxy
-        logs_no_ssl: true
-    activity:
-        logs_dd_url: haproxy.example.com:3839
-        # Comment the line below to use encryption between the Agent and HAProxy
-        logs_no_ssl: true
-    samples:
-        logs_dd_url: haproxy.example.com:3840
-        # Comment the line below to use encryption between the Agent and HAProxy
-        logs_no_ssl: true
-
-network_devices:
-    metadata:
-        logs_dd_url: haproxy.example.com:3841
-        # Comment the line below to use encryption between the Agent and HAProxy
-        logs_no_ssl: true
-    snmp_traps:
-        forwarder:
-            logs_dd_url: haproxy.example.com:3842
-            # Comment the line below to use encryption between the Agent and HAProxy
-            logs_no_ssl: true
-    netflow:
-        forwarder:
-            logs_dd_url: haproxy.example.com:3845
-            # Comment the line below to use encryption between the Agent and HAProxy
-            logs_no_ssl: true
-
-remote_configuration:
-    rc_dd_url: haproxy.example.com:3846
-    # Comment the line below to use encryption between the Agent and HAProxy
-    no_tls: true
-```
-
 When using encryption between the Agent and HAProxy, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
 With this option set to `true`, the Agent skips the certificate validation step and does not verify the identity of the proxy, but the communication is still encrypted with SSL/TLS.
 
 ```yaml
 skip_ssl_validation: true
+```
+
+Finally [restart the Agent][2].
+
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][4].
+
+Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
+This `dd_url` setting can be found in the `datadog.conf` file.
+
+`dd_url: http://haproxy.example.com:3834`
+
+To send traces or processes through the proxy, setup the following in the `datadog.conf` file:
+
+```conf
+[trace.api]
+endpoint = http://haproxy.example.com:3835
+
+[process.api]
+endpoint = http://haproxy.example.com:3837
+```
+
+Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
+
+* `/etc/dd-agent/supervisor_ddagent.conf` on Debian-based systems
+* `/etc/dd-agent/supervisor.conf` on Red Hat-based systems
+* `/opt/local/datadog/supervisord/supervisord.conf` on SmartOS
+* `/usr/local/etc/datadog/supervisord/supervisord.conf` on FreeBSD
+* `~/.datadog-agent/supervisord/supervisord.conf` on macOS
+
+Assuming that the supervisor file is found at `<SUP_FILE>`
+
+```bash
+sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
+```
+
+For the Windows Agent, edit your configuration file `datadog.conf` and add this option:
+
+```conf
+skip_ssl_validation: yes
 ```
 
 Finally [restart the Agent][2].
@@ -1016,7 +908,6 @@ stream {
 ```
 
 ##### HTTPS
-
 
 This configuration adds SSL/TLS encryption on communication between the Agent and NGINX. Replace `<PATH_TO_PROXY_CERTIFICATE>` with the path to the proxy public certificate and `<PATH_TO_PROXY_CERTIFICATE_KEY>` with the path to the private key.
 
@@ -1213,12 +1104,39 @@ skip_ssl_validation: true
 
 When sending logs over TCP, see [TCP Proxy for Logs][9].
 
-## Further Reading
+## Datadog Agent
 
-{{< partial name="whats-next/whats-next.html" >}}
+It is recommended to use an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of **Agent v5** to serve as a proxy.
+
+1. Designate one node **running datadog-agent** as the proxy.
+    In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
+
+2. Verify SSL connectivity on `proxy-node`:
+
+    ```shell
+    curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
+    ```
+
+3. Allow non-local traffic on `proxy-node` by changing the following line in `datadog.conf`.
+     `# non_local_traffic: no` should read `non_local_traffic: yes`.
+
+4. Make sure `proxy-node` can be reached from the other nodes over port 17123. Start the Agent on the `proxy-node` and run on the other nodes:
+
+    `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
+
+5. Update non-proxy nodes to forward to `proxy-node`. Change the following line in `datadog.conf` from:
+
+    `dd_url: https://app.datadoghq.com`
+    to
+    `dd_url: http://proxy-node:17123`
+
+6. Verify on the [Infrastructure page][1] that all nodes report data to Datadog.
+
+
+[1]: https://app.datadoghq.com/infrastructure#overview
 
 [1]: /agent/configuration/agent-fips-proxy
-[2]: /agent/configuration/agent-commands/
+[2]: /agent/guide/agent-5-commands
 [3]: http://www.squid-cache.org/
 [4]: https://app.datadoghq.com/infrastructure
 [5]: http://haproxy.1wt.eu

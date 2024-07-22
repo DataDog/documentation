@@ -34,7 +34,7 @@ To send a flare from the Datadog site, make sure you've enabled [Fleet Automatio
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:70%;" >}}
 
 ## Send a flare using the `flare` command
 
@@ -45,7 +45,7 @@ If you don't have a case ID, enter your email address used to log in to Datadog 
 **Confirm the upload of the archive to immediately send it to Datadog support**.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{% tab "Agent" %}}
 
 | Platform   | Command                                                 |
 |------------|---------------------------------------------------------|
@@ -125,26 +125,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 [3]: /agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform   | Command                                                                 |
-|------------|-------------------------------------------------------------------------|
-| Docker     | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    |
-| macOS      | `datadog-agent flare <CASE_ID>`                                         |
-| CentOS     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Debian     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Kubernetes | `kubectl exec <POD_NAME> -it /etc/init.d/datadog-agent flare <CASE_ID>` |
-| Fedora     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Redhat     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| SUSE       | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Source     | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
-| Windows    | Consult the dedicated [Windows documentation][1]                        |
-
-**Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][2].
-
-[1]: /agent/basic_agent_usage/windows/#agent-v5
-[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 {{% /tab %}}
 
 {{% tab "Cluster Agent" %}}

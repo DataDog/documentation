@@ -1,19 +1,8 @@
 ---
-title: Permission Issues
-aliases:
-  - /agent/faq/how-to-solve-permission-denied-errors
-  - /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
-  - /agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
-further_reading:
-- link: "/agent/troubleshooting/debug_mode/"
-  tag: "Documentation"
-  text: "Agent Debug Mode"
-- link: "/agent/troubleshooting/send_a_flare/"
-  tag: "Documentation"
-  text: "Send an Agent Flare"
+title: Agent 5 Permission Issues
 ---
 
-The Agent needs a specific set of permission in order to collect your data on your host, find below the most common permission issues and how to solve them.
+The Agent needs a specific set of permissions in order to collect your data on your host, find the most common permission issues below and how to solve them.
 
 ## Agent logging permission issues
 
@@ -78,42 +67,28 @@ After making this change, the [Agent Start command][5] should successfully be ab
 If you enabled the [process check][7] in the Agent running on a Linux OS you may notice that the `system.processes.open_file_descriptors` metric is not collected or reported by default.
 This occurs when processes being monitored by the process check runs under a different user than the Agent user: `dd-agent`. In fact, `dd-agent` user doesn't have full access to all files in `/proc`, which is where the Agent looks to collect data for this metric.
 
-Enable the `try_sudo` option (available since Agent 6.3) in the process check configuration and add the appropriate `sudoers` rules:
+Try updating to the [latest version of the Agent][8] and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
-```text
-dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
-```
+<div class="alert alert-info">Running a process daemon as <code>root</code> is not best practice on Linux. The Agent is open source and may be audited through the <a href="https://github.com/DataDog/dd-agent">GitHub repository.</a></div>
 
-This allows the process check to use `sudo` to execute the `ls` command but only to the list of contents of the path `/proc/*/fd/`.
+1. [Stop the Agent][1]
 
-If you see this line in the Datadog `error.log` file: `sudo: sorry, you must have a tty to run sudo`, you should use `visudo` to comment out the line `Default requiretty` in your sudoers file.
+2. Open `/etc/dd-agent/supervisor.conf` and replace `dd-agent` with `root` on [line 20][11] and [line 30][12]. Do this again if you upgrade or reinstall the Agent.
 
-### Run Agent as root
-
-If you are unable to use `try_sudo`, you can run the Agent as `root` as a workaround.
-
-<div class="alert alert-info">Running a process daemon as <code>root</code> is not best practice on Linux. The Agent is open source and may be audited via the <a href="https://github.com/DataDog/datadog-agent">GitHub repository.</a></div>
-
-To run the Agent as `root`:
-1. [Stop the Agent][9]
-2. Open `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` and change the `user` attribute under `[Service]`
-3. [Start the Agent][10]
+3. [Start the Agent][1]
 
 See the following GitHub issues for more information and other potential methods of capturing this metric on Linux machines.
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /agent/configuration/agent-commands/
-[2]: /agent/configuration/agent-log-files/
+[1]: /agent/guide/agent-5-commands/
+[2]: /agent/guide/agent-5-log-files/
 [3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
 [4]: /agent/faq/network/
-[5]: /agent/configuration/agent-commands/#start-the-agent
+[5]: /agent/configuration/agent-5-commands/#start-the-agent
 [6]: /help/
 [7]: /integrations/process/
-[9]: /agent/configuration/agent-commands/#stop-the-agent
-[10]: /agent/configuration/agent-commands/#start-the-agent
+[8]: /agent/guide/upgrade/
+[11]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
+[12]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
