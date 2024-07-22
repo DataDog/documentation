@@ -30,9 +30,13 @@ Ensure [Test Visibility][1] is configured for your test runs.
 ### Compatibility
 
 * dd-trace-java >= 1.34.0
+* dd-trace-js >= v5.19.0 and dd-trace-js >= v4.43.0
 
 ### Configuration
 
+{{< tabs >}}
+
+{{% tab "Java" %}}
 After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][2].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
@@ -43,21 +47,33 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_ONLY_KNOWN_FLAKES` - if this environment variable is set to `true`, only the test cases that Test Visibility considers [flaky][3] are retried.
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - can be set to any non-negative number to change the maximum number of retries per test case.
 
+{{% /tab %}}
+
+{{% tab "Javascript" %}}
+After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][2].
+
+{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+
+The default behavior of the feature is to retry any failing test case up to 5 times.
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Explore results in the Test Visibility Explorer
 
-You can query the retried tests in the [Test Visibility Explorer][4]: they have the `@test.is_retry` tag set to `true` (some of them may also have the `@test.is_new` set to `true`, which indicates they have been retried by the [Early Flakiness Detection][5] feature).
+You can query the retried tests in the [Test Visibility Explorer][2]: they have the `@test.is_retry` tag set to `true` (some of them may also have the `@test.is_new` set to `true`, which indicates they have been retried by the [Early Flakiness Detection][3] feature).
 
 ## Troubleshooting
 
-If you suspect there are any issues with Auto Test Retries, navigate to the [Test Service Settings page][2], look for your test service, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
+If you suspect there are any issues with Auto Test Retries, navigate to the [Test Service Settings page][4], look for your test service, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/setup/
-[2]: https://app.datadoghq.com/ci/settings/test-service
-[3]: /tests/guides/flaky_test_management/
-[4]: /tests/explorer/
-[5]: /tests/early_flake_detection
 
+[1]: /tests/setup/
+[2]: /tests/explorer/
+[3]: /tests/early_flake_detection
+[4]: https://app.datadoghq.com/ci/settings/test-service
