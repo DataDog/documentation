@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/cpp/
   tag: Documentación
   text: Propagación del contexto de rastreo
-kind: documentación
 title: Configuración de la biblioteca de rastreo de C++
 type: multi-code-lang
 ---
