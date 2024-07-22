@@ -16,7 +16,7 @@ The data collected varies by language. See [Data collected](#data-collected).
 
 ### Prerequisites
 
-- [Remote configuration][3] must be enabled.
+- [Remote Configuration][3] must be enabled.
 - Your API key must be configured for Remote Configuration.
 - You must have a supported tracer version:
   - Node.js: `5.15.0` or greater, or `4.39.0` or greater
