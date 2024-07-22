@@ -17,22 +17,24 @@ further_reading:
 - link: /tracing/
   tag: Documentación
   text: Uso avanzado
-kind: documentación
-title: Configuración del rastreo de bibliotecas PHP
+- link: /opentelemetry/interoperability/environment_variable_support
+  tag: Documentación
+  text: Configuraciones de variables de entorno de OpenTelemetry
+title: Configuración del rastreo de bibliotecas de PHP
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado unificado de servicios][1].
+Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][1].
 
 El rastreador PHP puede configurarse mediante variables de entorno y parámetros INI.
 
 Los parámetros INI pueden configurarse globalmente, por ejemplo, en el archivo `php.ini`, o para un servidor web o host virtual específicos.
 
-**Nota**: Si utilizas la instrumentación automática del código (estrategia recomendada), ten en cuenta que el código de instrumentación se ejecuta antes que cualquier código de usuario. Como resultado, las variables de entorno y los parámetros INI que se indican a continuación deben configurarse a nivel de servidor y estar disponibles para el tiempo de ejecución PHP, antes de que se ejecute cualquier código de usuario. Por ejemplo, los archivos `putenv()` y `.env` no funcionan.
+**Nota**: Si utilizas la instrumentación automática del código (estrategia recomendada), ten en cuenta que el código de instrumentación se ejecuta antes que cualquier código de usuario. Como resultado, las variables de entorno y los parámetros INI que se indican a continuación deben configurarse a nivel del servidor y estar disponibles para el tiempo de ejecución PHP, antes de que se ejecute cualquier código de usuario. Por ejemplo, los archivos `putenv()` y `.env` no funcionan.
 
 ### Apache
 
-Para Apache con php-fpm, utiliza la directiva `env` en tu archivo de configuración`www.conf` para configurar el rastreador PHP, por ejemplo:
+Para Apache con php-fpm, utiliza la directiva `env` de tu archivo de configuración`www.conf`, para configurar el rastreador PHP, por ejemplo:
 
 ```
 ; Ejemplo de transferencia de la variable de entorno de host SOME_ENV
@@ -45,22 +47,22 @@ env[DD_SERVICE] = my-app
 php_value datadog.service my-app
 ```
 
-También puedes utilizar [`SetEnv`][2] desde la configuración del servidor, el host virtual host, el directorio o el archivo `.htaccess`.
+También puedes utilizar [`SetEnv`][2] en la configuración del servidor, el host virtual host, el directorio o el archivo `.htaccess`.
 
 ``text
-# En la configuración de un host virtual como una variable de entorno 
+# En la configuración de un host virtual como variable de entorno 
 SetEnv DD_TRACE_DEBUG 1
-# En la configuración de un host virtual como una configuración INI
+# En la configuración de un host virtual como parámetro INI
 php_value Datadog.servicio my-app
 ```
 
 ### NGINX y PHP-FPM
 
 <div class="alert alert-warning">
-<strong>Nota:</strong> PHP-FPM no admite el valor <code>false</code> en las directivas <code>env[...]</code>. Utiliza <code>1</code> en lugar de <code>true</code> y <code>0</code> en lugar de <code>false</code>.
+<strong>Nota:</strong> PHP-FPM no admite el valor <code>falso</code> en las directivas <code>env[...]</code>. Utiliza <code>1</code> en lugar de <code>verdadero</code> y <code>0</code> en lugar de <code>false</code>.
 </div>
 
-Para NGINX, utiliza la directiva `env` en el archivo `www.conf` de php-fpm, por ejemplo:
+Para NGINX, utiliza la directiva `env` del archivo `www.conf` de php-fpm, por ejemplo:
 
 ```
 ; Ejemplo de transferencia de la variable de entorno de host SOME_ENV
@@ -85,27 +87,27 @@ DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 
 ### Configuración de la variable de entorno
 
-La siguiente tabla lista las variables de entorno para configurar el rastreo, los parámetros INI correspondientes (si están disponibles) y los valores predeterminados.
+La siguiente tabla presenta las variables de entorno para configurar el rastreo, los parámetros INI correspondientes (si están disponibles) y los valores predeterminados.
 
 `DD_AGENT_HOST`
 : **INI**: `datadog.agent_host`<br>
 **Por defecto**: `localhost` <br>
-Nombre del host del Agent.
+Nombre del host Agent.
 
 `DD_AUTOFINISH_SPANS`
 : **INI**: `datadog.autofinish_spans`<br>
 **Por defecto**: `0`<br>
-Si los tramos se terminan o no automáticamente cuando se vacía el rastreador.
+Si los tramos se terminan automáticamente cuando se vacía el rastreador.
 
 `DD_DISTRIBUTED_TRACING`
 : **INI**: `datadog.distributed_tracing`<br>
 **Por defecto**: `1`<br>
-Si se habilita o no el rastreo distribuido.
+Si se habilita el rastreo distribuido.
 
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **Por defecto**: `null`<br>
-Define el entorno de una aplicación, por ejemplo: `prod`, `pre-prod`, `stage`. A partir de la versión `0.90.0`, los cambios en `datadog.version` en tiempo de ejecución a través de `ini_set` también se aplican al tramo raíz actual.
+Define el entorno de una aplicación, por ejemplo: `prod`, `pre-prod`, `stage`. A partir de la versión `0.90.0`, los cambios en `datadog.version` en tiempo de ejecución a través de `ini_set` también se aplican al tramo (span) raíz actual.
 
 `DD_LOGS_INJECTION`
 : **INI**: `datadog.logs_injection`<br>
@@ -119,26 +121,26 @@ Para obtener más información, consulta la [documentación de correlación en l
 Habilita el generador de perfiles de Datadog. Añadido en la versión `0.69.0`. Consulta [Habilitar el generador de perfiles PHP][4]. Para la versión `0.81.0` y anteriores era `0` por defecto.
 
 `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED`
-: **INI**: `datadog.profiling.endpoint_collection_enabled`. INI disponible desde `0.82.0`.<br>
+: **INI**: `datadog.profiling.endpoint_collection_enabled`. INI disponible a partir de `0.82.0`.<br>
 **Por defecto**: `1`<br>
-Si se habilita o no la recopilación de datos del endpoint en los perfiles. Añadido en la versión `0.79.0`.
+Si se habilita la recopilación de datos del endpoint en los perfiles. Añadido en la versión `0.79.0`.
 
 `DD_PROFILING_ALLOCATION_ENABLED`
-: **INI**: `datadog.profiling.allocation_enabled`. INI disponible desde `0.88.0`.<br>
+: **INI**: `datadog.profiling.allocation_enabled`. INI disponible a partir de `0.88.0`.<br>
 **Por defecto**: `1`<br>
-Habilita el tipo de perfil de tamaño de asignación y de bytes de asignación. Añadido en la versión `0.88.0`. Cuando se detecta un JIT activo, la generación de perfiles de asignación se desactiva para la versión PHP `8.0.0` -`8.1.20` y `8.2.0`-`8.2.7` debido a una limitación del ZendEngine.<br>
+Habilita el tipo de perfil de tamaño de asignación y bytes de asignación. Añadido en la versión `0.88.0`. Cuando se detecta un JIT activo, la generación de perfiles de asignación se desactiva para la versión PHP `8.0.0` -`8.1.20` y `8.2.0`-`8.2.7`, debido a una limitación del ZendEngine.<br>
 **Nota**: Esto sustituye a la variable de entorno `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` (parámetro INI`datadog.profiling.experimental_allocation_enabled`), que estaba disponible a partir de `0.84`. Si ambas están configuradas, ésta tiene prioridad.
 
 `DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
 : **INI**: `datadog.profiling.experimental_features_enabled`. INI disponible a partir de `0.96.0`.<br>
 **Por defecto**: `0`<br>
 Habilita todas las características experimentales.<br>
-**Nota**: Esta configuración anula las configuraciones más específicas y, si está activada, la activación de otros parámetros de configuración experimentales no tendrá ningún efecto.
+**Nota**: Esta configuración anula las configuraciones más específicas y, si está habilitada, la activación de otros parámetros de configuración experimentales no tendrá ningún efecto.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI disponible a partir de `0.82.0`.<br>
 **Por defecto**: `1`<br>
-Habilita el tipo de perfil de CPU experimental. Añadido en la versión `0.69.0`. Para la versión `0.76` y anteriores era `0` por defecto.
+Habilita el tipo de perfil de CPU experimental. Añadido en la versión `0.69.0`. Para la versión `0.76` y anteriores era `0`.
 
 `DD_PROFILING_EXCEPTION_ENABLED`
 : **INI**: `datadog.profiling.exception_enabled`. INI disponible a partir de `0.96.0`.<br>
@@ -151,7 +153,7 @@ en la versión `0.96.0`.<br><br>
 : **INI**: `datadog.profiling.exception_message_enabled`. INI disponible a partir de `0.98.0`.<br>
 **Por defecto**: `0`<br>
 Habilita la recopilación de mensajes de excepción con muestras de excepción.<br><br>
-**Nota**: Ten en cuenta que tus mensajes de excepción pueden contener PII (Información de identificación personal), que es la razón por la que este parámetro está desactivado por defecto.
+**Nota**: Ten en cuenta que tus mensajes de excepción pueden contener PII (Información de identificación personal), que es la razón por la que este parámetro está deshabilitado por defecto.
 
 `DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
 : **INI**: `datadog.profiling.exception_sampling_distance`. INI disponible a partir de `0.96.0`.<br>
@@ -163,17 +165,17 @@ Configura la distancia de muestreo para las excepciones. Cuanto mayor sea la dis
 : **INI**: `datadog.profiling.timeline_enabled`. INI disponible a partir de `0.98.0`.<br>
 **Por defecto**:  `1`<br>
 Habilita el tipo de perfil de línea de tiempo. Añadido en la versión `0.89.0`.<br><br>
-**Nota**: Esto sustituye a la variable de entorno`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` (parámetro INI`datadog.profiling.experimental_timeline_enabled`), que estaba disponible a partir de `0.89` (por defecto `0`). Si ambas están activadas, ésta tiene prioridad.
+**Nota**: Sustituye a la variable de entorno`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` (parámetro INI`datadog.profiling.experimental_timeline_enabled`), que estaba disponible a partir de `0.89` (por defecto `0`). Si ambas están activadas, ésta tiene prioridad.
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI disponible a partir de `0.82.0`.<br>
 **Por defecto**: `off`<br>
-Define el nivel de log del generador de perfiles. Los valores aceptables son `off`, `error`, `warn`, `info`, `debug` y `trace`. Los logs del generador de perfiles se escriben en el flujo de error estándar del proceso. Añadido en la versión `0.69.0`.
+Define el nivel de log del generador de perfiles. Los valores aceptables son `off`, `error`, `warn`, `info`, `debug` y `trace`. Los logs del generador de perfiles se escriben en el flujo (flow) de error estándar del proceso. Añadido en la versión `0.69.0`.
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
 **Por defecto**: `1`<br>
-Si se activa o no el muestreo prioritario.
+Si se habilita el muestreo prioritario.
 
 `DD_SERVICE`
 : **INI**: `datadog.service`<br>
@@ -188,19 +190,19 @@ Cambia el nombre por defecto de una integración APM. Cambia el nombre de una o 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_generation_enabled`<br>
 **Por defecto**: `true`<br>
-Cuando es true (verdadero), el rastreador genera ID de rastreo de 128 bits y codifica ID de rastreo como 32 caracteres hexadecimales en minúsculas con cero relleno.
+Cuando es verdadero, el rastreador genera los ID de rastreo de 128 bits y codifica los ID de rastreo como 32 caracteres hexadecimales en minúsculas con cero relleno.
 
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
 **Por defecto**: `0`<br>
 Habilita la impresión del ID completo de rastreo de 128 bits formateando los ID de rastreo para la correlación con logs.
-Cuando es false (falso) (por defecto), sólo se imprimen los 64 bits inferiores del ID de rastreo, formateados como un número entero. Esto significa que si el ID de rastreo es de sólo 64 bits, se imprime el ID completo.
-Cuando es true (verdadero), el ID de rastreo se imprime como ID de rastreo de 128 bits completo en formato hexadecimal. Este es el caso incluso si el ID sólo tiene 64 bits.
+Cuando es falso (por defecto), sólo se imprimen los 64 bits inferiores del ID de rastreo, formateados como un número entero. Esto significa que si el ID de rastreo es de sólo 64 bits, se imprime el ID completo.
+Cuando es verdadero, el ID de rastreo se imprime como ID de rastreo de 128 bits completo en formato hexadecimal. Este es el caso, incluso si el ID sólo tiene 64 bits.
 
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
 **Por defecto**: `false`<br>
-Cuando está habilitado, el rastreador envía estadísticas a DogStatsD. Además, cuando `sigaction` está disponible en el momento de la compilación, el rastreador envía métricas de excepción no capturadas en caso de fallos de segmentación.
+Cuando está habilitado, el rastreador envía estadísticas a DogStatsD. Además, cuando `sigaction` está disponible en el momento de la compilación, el rastreador envía métricas de excepción no capturadas, en caso de fallos de segmentación.
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **INI**: `datadog.trace.agent_connect_timeout`<br>
@@ -210,7 +212,7 @@ El tiempo de espera de conexión del Agent (en milisegundos).
 `DD_TRACE_AGENT_PORT`
 : **INI**: `datadog.trace.agent_port`<br>
 **Por defecto**: `8126`<br>
-El número de puerto de Agent. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor por defecto `8126`, entonces `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
+El número de puerto del Agent. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor predeterminado `8126`, `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
 
 `DD_TRACE_AGENT_TIMEOUT`
 : **INI**: `datadog.trace.agent_timeout`<br>
@@ -220,7 +222,7 @@ El tiempo de espera de transferencia de solicitudes del Agent (en milisegundos).
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **Por defecto**: `null`<br>
-La URL del Agent tiene prioridad sobre `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT`. Por ejemplo: `https://localhost:8126`. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor por defecto `8126`, entonces `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
+La URL del Agent tiene prioridad sobre `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT`. Por ejemplo: `https://localhost:8126`. Si la [configuración del Agent][13] define `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor predeterminado `8126`, `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
 
 `DD_DOGSTATSD_URL`
 : **INI**: `datadog.dogstatsd_url`<br>
@@ -235,7 +237,7 @@ El puerto utilizado para conectarse a DogStatsD, utilizado en combinación con `
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Por defecto**: `0`<br>
-Descarga automática del rastreador cuando todos los tramos están cerrados. Se configura en `1` junto con `DD_TRACE_GENERATE_ROOT_SPAN=0` para rastrear [procesos de ejecución prolongada][14].
+Descarga automáticamente el rastreador cuando todos los tramos están cerrados. Se configura en `1` junto con `DD_TRACE_GENERATE_ROOT_SPAN=0` para rastrear [procesos de ejecución prolongada][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
@@ -260,7 +262,7 @@ Especifica un archivo de log. Si no se especifica ninguno, los logs van a la loc
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
 **Por defecto**: `1`<br>
-Indica si se rastrea o no un proceso bifurcado. Configúralo como `1`, para rastrear procesos bifurcados, o como `0`, para deshabilitar el rastreo en procesos bifurcados. Si se configura como `0`, puedes volver a habilitar manualmente el rastreo de un proceso en código con `ini_set("datadog.trace.enabled", "1");`, pero este será presentado como una traza fresca. Las trazas de procesos bifurcados se muestran como trazas enteras distribuidas sólo si `DD_TRACE_FORKED_PROCESS` y `DD_DISTRIBUTED_TRACING` están configurados como `1` (activos).
+Indica si se rastrea un proceso bifurcado. Configúralo como `1`, para rastrear procesos bifurcados, o como `0`, para deshabilitar el rastreo en procesos bifurcados. Si se configura como `0`, puedes volver a habilitar manualmente el rastreo de un proceso en código con `ini_set("datadog.trace.enabled", "1");`, pero este será presentado como una traza nueva. Las trazas de procesos bifurcados se muestran como trazas enteras distribuidas sólo si `DD_TRACE_FORKED_PROCESS` y `DD_DISTRIBUTED_TRACING` están configurados como `1` (activos).
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
@@ -270,27 +272,27 @@ Habilita el rastreador globalmente.
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
 **Por defecto**: `1`<br>
-Genera automáticamente un tramo de nivel superior. Configúralo como `0` junto con `DD_TRACE_AUTO_FLUSH_ENABLED=1` para rastrear [procesos de ejecución prolongada][14].
+Genera automáticamente un tramo de nivel superior. Configúralo como `0`, junto con `DD_TRACE_AUTO_FLUSH_ENABLED=1`, para rastrear [procesos de ejecución prolongada][14].
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
 **Por defecto**: `null`<br>
-Etiquetas para definir en todos los tramos, por ejemplo: `key1:value1,key2:value2`.
+Etiquetas (tags) para configurar en todos los tramos. Por ejemplo: `key1:value1,key2:value2`.
 
 `DD_TRACE_HEADER_TAGS`
 : **INI**: `datadog.trace.header_tags`<br>
 **Por defecto**: `null`<br>
-CSV de nombres de cabeceras que se reportan en el tramo raíz como etiquetas.
+CSV de nombres de cabeceras que se informan en el tramo raíz como etiquetas.
 
 `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
 : **INI**: `datadog.trace.db_client_split_by_instance`<br>
 **Por defecto**: `0`<br>
-Define el nombre servicio de las solicitudes HTTP como `pdo-<hostname>`. Por ejemplo, una llamada `PDO->query()` a una base de datos host `datadoghq.com` tiene el nombre de servicio `pdo-datadoghq.com`, en lugar del nombre de servicio por defecto `pdo` .
+Define el nombre de servicio de las solicitudes HTTP como `pdo-<hostname>`. Por ejemplo, una llamada `PDO->query()` al host de una base de datos `datadoghq.com` tiene el nombre de servicio `pdo-datadoghq.com`, en lugar del nombre de servicio por defecto `pdo` .
 
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
 : **INI**: `datadog.trace.http_client_split_by_domain`<br>
 **Por defecto**: `0`<br>
-Define el nombre de servicio de las solicitudes HTTP como `host-<hostname>`, por ejemplo una llamada `curl_exec()` a `https://datadoghq.com` tiene el nombre de servicio `host-datadoghq.com`, en lugar del nombre de servicio por defecto `curl`.
+Define el nombre de servicio de las solicitudes HTTP como `host-<hostname>`. Por ejemplo, una llamada `curl_exec()` a `https://datadoghq.com` tiene el nombre de servicio `host-datadoghq.com`, en lugar del nombre de servicio por defecto `curl`.
 
 `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
 : **INI**: `datadog.trace.redis_client_split_by_host`<br>
@@ -300,7 +302,7 @@ Define el nombre de servicio de las operaciones de clientes Redis como `redis-<h
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
 **Por defecto**: `1`<br>
-Habilita o deshabilita un integración. Todas las integraciones están habilitadas por defecto (consulta [nombres de integraciones](#integration-names)).
+Habilita o deshabilita una integración. Todas las integraciones están habilitadas por defecto. (Consulta [Nombres de integraciones](#integration-names)).
 
 `DD_TRACE_MEASURE_COMPILE_TIME`
 : **INI**: `datadog.trace.measure_compile_time`<br>
@@ -311,7 +313,7 @@ Registra el tiempo de compilación de la solicitud (en milisegundos) en el tramo
 : **INI**: `datadog.trace.remove_autoinstrumentation_orphans`<br>
 **Por defecto**: `false`<br>
 Elimina automáticamente tramos huérfanos generados mediante instrumentación automática. Actualmente, esto sólo se aplica a algunas llamadas de Redis y Laravel utilizadas en el contexto de Laravel Horizon. Añadido en la versión `0.88.0`.<br><br>
-**Nota:** Estos tramos huérfanos se vacían pero no se registran en la traza. Además, las trazas de tramo único específicas que se eliminan con esta opción de configuración son:
+**Nota:** Estos tramos huérfanos se descargan, pero no se registran en la traza. Además, las trazas de tramo único específicas que se eliminan con esta opción de configuración son:
   - `laravel.event.handle`
   - `laravel.provider.load`
   - `Predis.Client.__construct`
@@ -331,38 +333,38 @@ Deshabilita la creación de un tramo `laravel.queue.process` adicional y se basa
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 : **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
 **Por defecto**: `null`<br>
-CSV de expresiones regulares (regex) que identifica fragmentos de ruta correspondientes a los ID (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
+CSV de expresiones regulares (regex) que identifica fragmentos de ruta correspondientes a los ID. (Consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`
 : **INI**: `datadog.trace.resource_uri_mapping_incoming`<br>
 **Por defecto**: `null`<br>
-CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes entrantes (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
+CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes entrantes. (Consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 : **INI**: `datadog.trace.resource_uri_mapping_outgoing`<br>
-**Predeterminado**: `null`<br>
-CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes salientes (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
+**Por defecto**: `null`<br>
+CSV de asignaciones a URI para normalizar la nomenclatura de los recursos para las solicitudes salientes. (Consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
 **Por defecto**: `0`<br>
-Funciona para Linux. Configúralo como `true` para mantener las capacidades en los threads de fondo de Datadog cuando cambies el ID de usuario efectivo. Esta opción no afecta a la mayoría de las configuraciones, pero algunos módulos (hasta la fecha, Datadog sólo tiene conocimiento de que el [mod-ruid2 de Apache][5]) pueden invocar `setuid()` o llamadas al sistema similares, provocando caídas o deficiencias de funcionalidad al perder capacidades.<br><br>
+Funciona para Linux. Configúralo como `true` para conservar las capacidades en los threads en segundo plano de Datadog cuando cambies el ID de usuario efectivo. Esta opción no afecta a la mayoría de las configuraciones, pero algunos módulos (hasta la fecha, Datadog sólo tiene conocimiento de que el [mod-ruid2 de Apache][5]) pueden invocar `setuid()` o llamadas al sistema similares, provocando caídas o deficiencias de funcionalidad al perder capacidades.<br><br>
 **Nota:** Habilitar esta opción puede comprometer la seguridad. Esta opción, por sí sola, no supone un riesgo para la seguridad. Sin embargo, un atacante capaz de explotar una vulnerabilidad en PHP o en el servidor web podría ser capaz de escalar privilegios con relativa facilidad, si el servidor web o PHP se iniciaran con capacidades completas, ya que los threads en segundo plano conservarían sus capacidades originales. Datadog recomienda restringir las capacidades del servidor web a través de la utilidad `setcap`.
 
 `DD_HTTP_SERVER_ROUTE_BASED_NAMING`
 : **INI**: `datadog.http_server_route_based_naming`<br>
 **Por defecto**: `true`<br>
-Habilita la asignación de nombres basada en rutas para las solicitudes del servidor HTTP. Configúralo como `true` para utilizar el formato de nombres de recurso del tramo raíz específico de la integración. Cuando es `false`, en su lugar se utilizan el método y la ruta HTTP. Añadido en la versión `0.89.0`.
+Habilita la asignación de nombres basada en rutas para las solicitudes del servidor HTTP. Configúralo como `true` para utilizar el formato de nombres de recurso del tramo raíz específico de la integración. Cuando es `false`, se utilizan el método y la ruta HTTP. Añadido en la versión `0.89.0`.
 
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
 **Por defecto**: `-1`<br>
-La frecuencia de muestreo para trazas, un número entre `0.0` y `1.0`. El valor por defecto `-1` difiere el control del muestreo al Datadog Agent.
+La frecuencia de muestreo para trazas, un número entre `0.0` y `1.0`. El valor por defecto `-1` delega el control del muestreo al Datadog Agent.
 
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
 **Por defecto**: `null`<br>
-Una cadena codificada en JSON para configurar la frecuencia de muestreo. Por ejemplo: Configura la frecuencia de muestreo en 20%: `'[{"sample_rate": 0.2}]'`. Configura la frecuencia de muestreo en 10% para los servicios que empiezan por 'a' y los nombres de tramos que empiezan por 'b', y configura la frecuencia de muestreo en 20% para todos los demás servicios: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (consulta [nombres de integraciones](#integration-names)). El objeto JSON **debe** ir rodeado de comillas simples (`'`) para evitar problemas con el escape del carácter de comillas dobles (`"`). La coincidencia de servicios tiene en cuenta `DD_SERVICE_MAPPING` (a partir de la versión `0.90.0`). El nombre y el servicio deben ser una expresión regular válida. Las reglas que no son expresiones regulares válidas se ignoran.
+Una cadena codificada en JSON para configurar la frecuencia de muestreo. Por ejemplo: Configura la frecuencia de muestreo en 20%: `'[{"sample_rate": 0.2}]'`. Configura la frecuencia de muestreo en 10% para los servicios que empiezan por 'a' y los nombres de tramos que empiezan por 'b', y configura la frecuencia de muestreo en 20% para todos los demás servicios: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`. (Consulta [Nombres de integraciones](#integration-names)). El objeto JSON **debe** ir rodeado de comillas simples (`'`) para evitar problemas con el escape del carácter de comillas dobles (`"`). La coincidencia de servicios tiene en cuenta `DD_SERVICE_MAPPING` (a partir de la versión `0.90.0`). El nombre y el servicio deben ser una expresión regular válida. Las reglas que no son expresiones regulares válidas se ignoran.
 
 `DD_TRACE_SAMPLING_RULES_FORMAT`
 : **INI**: `datadog.trace.sampling_rules_format`<br>
@@ -377,25 +379,25 @@ Número máximo de tramos para muestrear por segundo. Todos los procesos en un g
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`<br>
 **Por defecto**: `1000`<br>
-El número máximo de tramos que se generan dentro de una traza. Si se alcanza el número máximo de tramos, ya no se generan tramos. Si se aumenta el límite, la cantidad de memoria utilizada por una traza pendiente aumentará y podría alcanzar la cantidad máxima de memoria permitida PHP. La cantidad máxima de memoria permitida puede aumentarse con el parámetro de sistema INI PHP `memory_limit`.
+El número máximo de tramos que se generan en una traza. Si se alcanza el número máximo de tramos, ya no se generan tramos. Si se aumenta el límite, la cantidad de memoria utilizada por una traza pendiente aumentará y podría alcanzar la cantidad máxima de memoria permitida PHP. La cantidad máxima de memoria permitida puede aumentarse con el parámetro de sistema INI PHP `memory_limit`.
 
 `DD_SPAN_SAMPLING_RULES`
 : **INI**: `datadog.span_sampling_rules`<br>
 **Por defecto**: `null`<br>
 Una cadena codificada JSON para configurar la frecuencia de muestreo. Las reglas se aplican en el orden configurado para determinar la frecuencia de muestreo del tramo. El valor de `sample_rate` debe estar comprendido entre 0,0 y 1,0 (inclusive). <br>
-**Por ejemplo: Configura la frecuencia de muestreo de tramos en 50% para el servicio 'my-service' y el nombre de operación 'http.request', para hasta 50 trazas por segundo: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. El objeto JSON **debe** ir rodeado de comillas simples (`'`) para evitar problemas con el escape del carácter de comillas dobles (`"`).<br>
+**Por ejemplo: Configura la frecuencia de muestreo de tramos en 50% para el servicio 'my-service' y el nombre de operación 'http.request', hasta 50 trazas por segundo: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. El objeto JSON **debe** ir rodeado de comillas simples (`'`) para evitar problemas con el escape del carácter de comillas dobles (`"`).<br>
 Para obtener más información, consulta [Mecanismos de consumo][6].<br>
 
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
 **Por defecto**: `1`<br>
-Habilitar las URL como nombres de recursos (consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
+Habilita las URL como nombres de recursos. (Consulta [Asignar nombres de recursos a URI normalizados](#map-resource-names-to-normalized-uri)).
 
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
 **Por defecto**: `null`<br>
-Define la versión de una aplicación en trazas y logs, por ejemplo: `1.2.3`, `6c44da20`, `2020.02.13`. A partir de la versión `0.90.0`, los cambios en `datadog.version` en tiempo de ejecución a través de `ini_set` también se aplican al tramo raíz actual.
+Define la versión de una aplicación en trazas y logs, por ejemplo: `1.2.3`, `6c44da20`, `2020.02.13`. A partir de la versión `0.90.0`, los cambios en `datadog.version` en tiempo de ejecución, a través de `ini_set`, también se aplican al tramo raíz actual.
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
@@ -429,7 +431,7 @@ Habilita la recopilación de IP del lado del cliente. Añadido en la versión `0
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
 **Por defecto**: `null`<br>
-La cabecera IP a utilizar para la recopilación de IP del cliente, por ejemplo: `x-forwarded-for`. Añadido en la versión `0.84.0` (`0.76.0` cuando se utiliza ASM).
+La cabecera de IP para utilizar en la recopilación de IP del cliente, por ejemplo: `x-forwarded-for`. Añadido en la versión `0.84.0` (`0.76.0`, cuando se utiliza ASM).
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
@@ -437,17 +439,17 @@ La cabecera IP a utilizar para la recopilación de IP del cliente, por ejemplo: 
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
-Expresión regular utilizada para ofuscar la cadena de consulta incluida como parte de la URL. Esta expresión también se utiliza en el proceso para ocultar datos HTTP POST. Añadido en la versión `0.76.0`.
+Expresión regular utilizada para ofuscar la cadena de consultas incluida como parte de la URL. Esta expresión también se utiliza en el proceso para ocultar datos HTTP POST. Añadido en la versión `0.76.0`.
 
 `DD_TRACE_OTEL_ENABLED`
-: Habilita o deshabilita el rastreo basado en OpenTelemetry, para la instrumentación [personalizada][18] y también [automática][19]. <br>
+: Habilita o deshabilita el rastreo basado en OpenTelemetry, tanto para la instrumentación [personalizada][18] como para la instrumentación [automática][19]. <br>
 Los valores válidos son: `true` o `false`.<br>
 **Por defecto**: `false`
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
 **Por defecto**: `Datadog,tracecontext`<br>
-Estilos de propagación a utilizar al inyectar cabeceras de rastreo. Si se utilizan varios estilos, sepáralos con comas. Los estilos compatibles son:
+Estilos de propagación para utilizar al inyectar cabeceras de rastreo. Si se utilizan varios estilos, sepáralos con comas. Los estilos compatibles son:
 
   - [tracecontext][10]
   - [b3multi][7]
@@ -457,7 +459,7 @@ Estilos de propagación a utilizar al inyectar cabeceras de rastreo. Si se utili
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
 **Por defecto**: `Datadog,tracecontext,b3multi,B3 single header`<br>
-Estilos de propagación a utilizar al extraer cabeceras de rastreo. Si se utilizan varios estilos, sepáralos con comas. Los estilos compatibles son:
+Estilos de propagación para utilizar al extraer cabeceras de rastreo. Si se utilizan varios estilos, sepáralos con comas. Los estilos compatibles son:
 
   - [tracecontext][10]
   - [b3multi][7]
@@ -467,7 +469,7 @@ Estilos de propagación a utilizar al extraer cabeceras de rastreo. Si se utiliz
 `DD_TRACE_WORDPRESS_ADDITIONAL_ACTIONS`
 : **INI**: `datadog.trace.wordpress_additional_actions`<br>
 **Por defecto**: `null`<br>
-Una lista separada por comas de los ganchos de acción de WordPress a instrumentar. Esta función sólo está disponible cuando `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` está habilitada. Añadido en la versión `0.91.0`.
+Una lista separada por comas de los ganchos de acción de WordPress que se van a instrumentar. Esta función sólo está disponible cuando `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` está habilitada. Añadido en la versión `0.91.0`.
 
 `DD_TRACE_WORDPRESS_CALLBACKS`
 : **INI**: `datadog.trace.wordpress_callbacks`<br>
@@ -477,7 +479,7 @@ Habilita las retrollamadas de instrumentación de los ganchos de acción de Word
 `DD_DBM_PROPAGATION_MODE`
 : **INI**: `datadog.dbm_propagation_mode`<br>
 **Por defecto**: `'disabled'`<br>
-Habilita la conexión entre los datos enviados desde APM y el producto Database Monitoring cuando se configura como `'service'` o `'full'`.<br>
+Habilita la conexión entre los datos enviados desde APM y el producto Database Monitoring, cuando se configura como `'service'` o `'full'`.<br>
 La opción `'service'` permite la conexión entre servicios DBM y APM. Disponible para Postgres, MySQL y SQLServer.<br>
 La opción `'full'` permite la conexión entre tramos de bases de datos y eventos de consultas de bases de datos. Disponible para Postgres y MySQL.<br>
 
@@ -490,7 +492,7 @@ Datadog puede recopilar [información del entorno y de diagnóstico de tu sistem
 
 La siguiente tabla especifica los nombres de servicios por defecto para cada integración. Cambia los nombres de servicios con `DD_SERVICE_MAPPING`.
 
-Utiliza el nombre al definir una configuración específica de la integración como, `DD_TRACE_<INTEGRATION>_ENABLED`. Por ejemplo: Laravel es `DD_TRACE_LARAVEL_ENABLED`.
+Al definir la configuración específica de una integración, utiliza el nombre, como por ejemplo `DD_TRACE_<INTEGRATION>_ENABLED`. Por ejemplo: Laravel es `DD_TRACE_LARAVEL_ENABLED`.
 
 | Integración   | Nombre de servicio    |
 | ------------- | --------------- |
@@ -526,10 +528,10 @@ Utiliza el nombre al definir una configuración específica de la integración c
 #### Asignar nombres de recursos a URI normalizados
 
 <div class="alert alert-warning">
-Ten en cuenta que configurar cualquiera de los siguientes: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, y <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> optará por el nuevo enfoque de normalización de recursos y cualquier valor en <code>DD_TRACE_RESOURCE_URI_MAPPING</code> será ignorado.
+Ten en cuenta que al configurar cualquiera de los siguientes: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> y <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> se optará por el nuevo enfoque de normalización de recursos y cualquier valor en <code>DD_TRACE_RESOURCE_URI_MAPPING</code> será ignorado.
 </div>
 
-Para el servidor HTTP y las integraciones de clientes, la URL se utiliza para formar el nombre de recurso de la traza con el formato `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, con la cadena de consulta eliminada de la URL. Esto permite una mejor visibilidad en cualquier marco personalizado que no se instrumente automáticamente mediante la normalización de las URL y la agrupación de endpoints genéricos en un solo recurso.
+Para el servidor HTTP y las integraciones de clientes, la URL se utiliza para crear el nombre de recurso de la traza con el formato `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, con la cadena de consultas eliminada de la URL. Esto permite una mejor visibilidad en cualquier marco personalizado que no se instrumente automáticamente mediante la normalización de las URL y la agrupación de endpoints genéricos bajo un solo recurso.
 
 | Solicitud HTTP                       | Nombre del recurso |
 | :--------------------------------- | :------------ |
@@ -558,10 +560,10 @@ Hay algunos casos que no están cubiertos por la normalización automática que 
 | `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
 | `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
 
-Hay dos clases de escenarios que no están cubiertos por la normalización automática:
+Existen dos clases de escenarios que no están cubiertos por la normalización automática:
 
-  - El fragmento de ruta a normalizar tiene un patrón reproducible y puede estar presente en cualquier parte de la URL, por ejemplo `id<number>` en el ejemplo anterior. Este escenario está cubierto por la siguiente configuración `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`.
-  - El fragmento de ruta puede ser cualquier cosa y el fragmento de ruta anterior indica que se debe normalizar un valor. Por ejemplo, `/cities/new-york` nos indica que `new-york` debe normalizarse, ya que es el nombre de una ciudad. Este escenario está cubierto por los parámetros `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` y `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` para las solicitudes entrantes y salientes respectivamente.
+  - El fragmento de ruta que se va a normalizar tiene un patrón reproducible y puede estar presente en cualquier parte de la URL. Por ejemplo `id<number>`, en el caso anterior. Este escenario está cubierto por la siguiente configuración `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`.
+  - El fragmento de ruta puede ser cualquier cosa y el fragmento de ruta anterior indica que se debe normalizar un valor. Por ejemplo, `/cities/new-york` nos indica que `new-york` debe normalizarse, ya que es el nombre de una ciudad. Este escenario está cubierto por los parámetros `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` y `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` para las solicitudes entrantes y salientes, respectivamente.
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
@@ -571,15 +573,15 @@ Esta configuración es un CSV de una o más expresiones regulares que se aplican
 | :--------------------------- | :-------- | :--------------------------- |
 | `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
 
-Ten en cuenta que como el formato de esta variable es un CSV, el carácter coma `,` no está escapado y no puede utilizarse en sus expresiones regulares.
+Ten en cuenta que como el formato de esta variable es un CSV, el carácter coma `,` no está escapado y no puedes utilizarlo en tus expresiones regulares.
 
 ###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` y `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
-Esta configuración es un CSV de patrones que pueden contener el comodín `*`. Por ejemplo, añadir el patrón `cities/*` significa que cada vez que se encuentre el fragmento `cities` al analizar una URL, el siguiente fragmento, si lo hay, se sustituirá por `?`. Los patrones se aplican a cualquier profundidad, por lo que la aplicación de la siguiente regla normalizará `/cities/new-york` y también `/nested/cities/new-york` en la tabla anterior.
+Esta configuración es un CSV de patrones que pueden contener el comodín `*`. Por ejemplo, añadir el patrón `cities/*` significa que cada vez que se encuentre el fragmento `cities` al analizar una URL, el siguiente fragmento, si lo hay, se sustituirá por `?`. Los patrones se aplican a cualquier nivel, por lo que la aplicación de la siguiente regla normalizará `/cities/new-york` y también `/nested/cities/new-york` en la tabla anterior.
 
 Los patrones pueden aplicarse a una parte de un fragmento específico. Por ejemplo `path/*-fix` normalizaría la URL `/some/path/changing-fix/nested` a `/some/path/?-fix/nested`
 
-Ten en cuenta que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` sólo se aplica a las solicitudes entrantes (por ejemplo, los marcos web), mientras que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` sólo se aplica a las solicitudes salientes (por ejemplo, las solicitudes `curl` y `guzzle` ).
+Ten en cuenta que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` sólo se aplica a las solicitudes entrantes (por ejemplo, los marcos web), mientras que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` sólo se aplica a las solicitudes salientes (por ejemplo, las solicitudes `curl` y `guzzle`).
 
 ### Restricciones `open_basedir`
 
@@ -588,7 +590,7 @@ Cuando la aplicación se ejecuta en un contenedor Docker, la ruta `/proc/self` t
 
 ### Extracción e inyección de cabeceras
 
-Lea [Propagación del contexto de rastreo][11] para obtener información sobre cómo configurar la biblioteca de rastreo PHP para extraer e inyectar cabeceras para propagar el contexto de rastreo distribuido.
+Consulta [Propagación del contexto de rastreo][11] para obtener información sobre cómo configurar la biblioteca de rastreo PHP para extraer e inyectar cabeceras para propagar el contexto de rastreo distribuido.
 ## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -611,3 +613,4 @@ Lea [Propagación del contexto de rastreo][11] para obtener información sobre c
 [17]: /es/tracing/other_telemetry/connect_logs_and_traces/php
 [18]: /es/tracing/trace_collection/otel_instrumentation/php/
 [19]: /es/tracing/trace_collection/compatibility/php/
+[20]: /es/opentelemetry/interoperability/environment_variable_support
