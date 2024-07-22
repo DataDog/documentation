@@ -141,8 +141,8 @@ Configure Flex Tier in the [Logs Index Configuration][2] page:
 <table>
   <tr align="center">
     <td colspan="2"><strong>Existing Index Configuration</strong></td>
-    <td rowspan="2"><strong>I want to&hellip;&nbsp;</strong></td>
-    <td rowspan="2"><strong>Final Result</strong></td>
+    <td rowspan="2"><strong>Action</strong></td>
+    <td rowspan="2"><strong>Result</strong></td>
   </tr>
 <tr align="center">
   <td><strong>Standard Tier</strong></td>
