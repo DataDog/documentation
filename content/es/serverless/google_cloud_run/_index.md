@@ -33,7 +33,7 @@ Las imágenes se etiquetan en función del control de versiones semántico, y ca
 
 La aplicación `serverless-init` envuelve tu proceso y lo ejecuta como un subproceso. Inicia un agente de escucha de DogStatsD para las métricas y un agente de escucha de Trace Agent para las trazas (traces). Envuelve los flujos stdout/stderr de tu aplicación para recuperar los logs. Después del arranque, serverless-init lanza tu comando como un subproceso.
 
-Para obtener una instrumentación completa, asegúrate de estar llamando a `datadog-init` como el primer comando que se ejecuta dentro de tu contenedor de Docker. Puedes hacerlo configurando datadog-init como el punto de entrada o como el primer argumento en el CMD.
+Para obtener una instrumentación completa, asegúrate de llamar a `datadog-init` como el primer comando que se ejecuta dentro de tu contenedor de Docker. Puedes hacerlo si configuras datadog-init como el punto de entrada o como el primer argumento en el CMD.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
