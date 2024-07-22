@@ -27,7 +27,7 @@ Use Observability Pipelines's processors to parse, structure, and enrich your lo
 
 ## Processors
 
-{{< whatsnext desc="Configure each processor's settings in the pipeline UI. These are the available processors:" >}}
+{{< whatsnext desc="Set up each processor in the pipeline UI. These are the available processors:" >}}
     {{< nextlink href="observability_pipelines/processors/#add-hostname" >}}Add hostname{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#edit-fields" >}}Edit fields{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/#enrichment-table" >}}enrichment_table{{< /nextlink >}}
