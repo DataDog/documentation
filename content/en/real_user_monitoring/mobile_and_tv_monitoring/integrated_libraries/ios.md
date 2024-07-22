@@ -47,6 +47,6 @@ URLSessionInstrumentation.enable(with: .init(delegateClass: URLSessionClient.sel
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to "Automatically track network requests" in the [Advanced Configuration][4] documentation.
 
 [1]: https://github.com/Alamofire/Alamofire
-[2]: real_user_monitoring/mobile_and_tv_monitoring/setup/ios/
+[2]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/
 [3]: https://github.com/apollographql/apollo-ios
-[4]: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/
+[4]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/#automatically-track-network-requests
