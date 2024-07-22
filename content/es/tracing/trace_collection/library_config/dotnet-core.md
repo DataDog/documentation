@@ -1,43 +1,13 @@
 ---
-code_lang: dotnet-core
-code_lang_weight: 60
-further_reading:
-- link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-  tag: Documentación
-  text: Conectar logs de aplicaciones .NET a trazas
-- link: /tracing/metrics/runtime_metrics/dotnet/
-  tag: Documentación
-  text: Métricas de tiempo de ejecución
-- link: /tracing/trace_collection/trace_context_propagation/dotnet/
-  tag: Documentación
-  text: Propagación del contexto de rastreo
-- link: /serverless/azure_app_services/
-  tag: Documentación
-  text: Extensión del Servicio de Microsoft Azure App
-- link: /tracing/glossary/
-  tag: Documentación
-  text: Explora tus servicios, recursos y trazas
-- link: https://www.datadoghq.com/blog/net-monitoring-apm/
-  tag: Blog
-  text: Monitorizando .NET con Datadog APM y rastreo distribuido
-- link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
-  tag: Código fuente
-  text: Ejemplos de una instrumentación personalizada
-- link: https://github.com/DataDog/dd-trace-dotnet
-  tag: Código fuente
-  text: Código fuente
-- link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
-  tag: Blog
-  text: Implementa las aplicaciones de ASP.NET Core en Azure App Service
-title: Configuración de la biblioteca de rastreo de .NET Core
-type: multi-code-lang
+null
+...
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][4].
+Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [Etiquetado de servicios unificado][4].
 
 {{< img src="tracing/dotnet/dotnet_core_configuration.png" alt="Establecer precedencia de la configuración del rastreador de .NET Core" style="width:100%" >}}
 
-Puede establecer la configuración en el rastreador de .NET con cualquiera de los siguientes métodos:
+Puedes definir parámetros de configuración en el rastreador de .NET utilizando cualquiera de los siguientes métodos:
 
 {{< tabs >}}
 
@@ -148,7 +118,7 @@ Para más información, consulta [Mecanismos de ingesta][11].<br><br>
 Una matriz de objetos JSON. Cada objeto debe tener una `sample_rate`. Los campos `name` y `service` son opcionales. El valor `sample_rate` debe estar comprendido entre `0.0` y `1.0` (ambos inclusive). Las reglas se aplican en el orden configurado para determinar la frecuencia de muestreo de la traza.
 Para más información, consulta [Mecanismos de ingesta][11].<br>
 **Ejemplos:**<br>
-  - Ajusta la frecuencia de muestreo al 20%: `[{"sample_rate": 0.2}]`
+  - Configura la frecuencia de muestreo en 20%: `[{"sample_rate": 0.2}]`
   - Ajusta la frecuencia de muestreo al 10% para servicios que empiece por 'a' y nombre de tramo 'b' y fija la frecuencia de muestreo en 20% para todos los demás servicios: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]`
 
 `DD_TRACE_RATE_LIMIT`
@@ -334,3 +304,4 @@ Las siguientes variables de configuración corresponden a funciones que están d
 [17]: https://app.datadoghq.com/services
 [18]: /es/tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /es/tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
+[20]: /es/opentelemetry/interoperability/environment_variable_support
