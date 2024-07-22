@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/log_collection/javascript/
   tag: Documentation
   text: Découvrir comment utiliser le SDK Browser Datadog pour les logs
-kind: documentation
 title: Surveillance Browser avec RUM
 ---
 

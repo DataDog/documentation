@@ -1,6 +1,5 @@
 ---
 title: TCP Testing
-kind: documentation
 description: Simulate TCP connections on your hosts
 aliases:
   - /synthetics/tcp_test

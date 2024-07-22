@@ -1,6 +1,6 @@
 ---
 title: Monitor An Application That Requires Authentication With Browser Testing
-kind: guide
+
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 aliases:
   - /synthetics/guide/app-that-requires-login

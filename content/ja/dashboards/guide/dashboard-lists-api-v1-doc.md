@@ -2,7 +2,6 @@
 aliases:
 - /ja/graphing/faq/dashboard-lists-api-doc
 - /ja/graphing/guide/dashboard-lists-api-v1-doc
-kind: ガイド
 title: ダッシュボードリスト API (v1)
 ---
 

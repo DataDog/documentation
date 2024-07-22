@@ -1,6 +1,6 @@
 ---
 title: Resource-based sampling
-kind: Guide
+
 disable_toc: false
 private: true
 further_reading:
@@ -12,7 +12,7 @@ further_reading:
   text: "Ingestion Control Page"
 ---
 
-{{< callout url="https://forms.gle/WCG57yTCG27BCBB67" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Request access to the beta!" >}}
 Remotely configured sampling rules are in Beta. To request access, complete the form.
 {{< /callout >}}
 
@@ -34,11 +34,11 @@ Language  | Minimum version required
 ----------|--------------------------
 Java      | [v1.34.0][5]
 Go        | [v1.64.0][6]
-Python    | _Coming soon_
-Ruby      | _Coming soon_
-Node.js   | _Coming soon_
+Python    | [v.2.9.0][10]
+Ruby      | [v2.0.0][11]
+Node.js   | [v5.16.0][12]
 PHP       | _Coming soon_
-.NET      | _Coming soon_
+.NET      | [v.2.53.2][13]
 C++       | _Coming soon_
 
 ## See sampling rates by resource in the Ingestion Control page
@@ -75,8 +75,12 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
 [3]: /agent/remote_config
 [4]: /account_management/rbac/permissions/
-[5]: github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
-[6]: github.com/DataDog/dd-trace-go/releases/tag/v1.63.1
+[5]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
+[6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1
 [7]: /tracing/trace_pipeline/ingestion_mechanisms#in-tracing-libraries-user-defined-rules
 [8]: /tracing/trace_pipeline/ingestion_mechanisms#in-the-agent
 [9]: /tracing/trace_explorer/#live-search-for-15-minutes
+[10]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0
+[11]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0
+[12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
+[13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.53.2

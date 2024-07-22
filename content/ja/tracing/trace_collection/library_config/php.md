@@ -17,7 +17,6 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: 高度な使用方法
-kind: documentation
 title: PHP トレーシングライブラリの構成
 type: multi-code-lang
 ---

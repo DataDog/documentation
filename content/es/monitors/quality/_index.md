@@ -7,7 +7,6 @@ further_reading:
 - link: /monitors/
   tag: Documentación
   text: Más información sobre monitores Datadog
-kind: Documentación
 title: Monitor Quality
 ---
 

@@ -4,7 +4,6 @@ further_reading:
 - link: https://www.samltool.com/online_tools.php
   tag: 개발 툴
   text: 개발자 SAML 툴로 어서션 식별하기
-kind: 설명서
 title: SAML 트러블슈팅
 ---
 

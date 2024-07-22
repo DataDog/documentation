@@ -8,7 +8,6 @@ further_reading:
 - link: tracing/trace_explorer/search
   tag: Documentation
   text: スパンを検索する
-kind: documentation
 title: トレースエクスプローラー
 ---
 

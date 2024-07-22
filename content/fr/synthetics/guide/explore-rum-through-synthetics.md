@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/settings/
   tag: Documentation
   text: Paramètres de la surveillance Synthetic
-kind: documentation
 title: Explorer vos données RUM et Session Replay dans Synthetics
 ---
 

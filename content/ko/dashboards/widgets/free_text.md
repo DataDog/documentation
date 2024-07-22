@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
-kind: 설명서
 title: 자유 텍스트 위젯
 widget_type: free_text
 ---

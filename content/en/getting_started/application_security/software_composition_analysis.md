@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Software Composition Analysis
-kind: documentation
 aliases:
 - /getting_started/application_security/vulnerability_management
 further_reading:
@@ -22,6 +21,9 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://www.datadoghq.com/blog/sca-supply-chain-security/"
+  tag: "Blog"
+  text: "Beyond vulnerabilities, towards a holistic approach to securing the software supply chain"
 ---
 
 

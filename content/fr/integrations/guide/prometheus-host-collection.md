@@ -1,6 +1,5 @@
 ---
 title: Collecte de métriques Prometheus et OpenMetrics à partir d'un host
-kind: documentation
 further_reading:
   - link: logs/log_collection
     tag: Documentation

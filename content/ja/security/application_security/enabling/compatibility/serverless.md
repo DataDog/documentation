@@ -1,7 +1,6 @@
 ---
 code_lang: サーバーレス
 code_lang_weight: 90
-kind: documentation
 title: サーバーレス互換性要件
 type: multi-code-lang
 ---

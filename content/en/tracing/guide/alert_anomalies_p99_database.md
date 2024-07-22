@@ -1,6 +1,6 @@
 ---
 title: Alert on anomalous p99 latency of a database service
-kind: guide
+
 further_reading:
 - link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"

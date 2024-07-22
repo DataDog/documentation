@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Availability Zone コンポーネント
 ---
 ## 概要

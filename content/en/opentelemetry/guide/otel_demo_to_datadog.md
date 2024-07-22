@@ -1,6 +1,5 @@
 ---
 title: Sending Data from the OpenTelemetry Demo to Datadog
-kind: guide
 further_reading:
 - link: "/service_catalog/"
   tag: "Documentation"

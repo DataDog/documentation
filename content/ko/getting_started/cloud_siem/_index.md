@@ -38,7 +38,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/content-packs/
   tag: 블로그
   text: Cloud SIEM Content Packs로 보안 로그를 쉽게 수집하고 모니터링하세요.
-kind: 설명서
 title: Cloud SIEM 시작하기
 ---
 

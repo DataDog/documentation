@@ -25,7 +25,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 送信 - API
   text: 用語集の "tail" の項目
-kind: documentation
 title: ログ収集の高度な構成
 ---
 
@@ -103,7 +102,6 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -224,7 +222,6 @@ Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテー�
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -316,7 +313,6 @@ Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテー�
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -419,7 +415,6 @@ Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテー�
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -524,7 +519,6 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:

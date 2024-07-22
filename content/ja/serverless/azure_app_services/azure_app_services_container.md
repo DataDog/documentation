@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/azure_app_service_environment/
   tag: Documentation
   text: Azure App Service Environment
-kind: documentation
 title: Azure App Service - Linux コンテナ
 ---
 ## 概要

@@ -1,6 +1,6 @@
 ---
 title: Integrate Jira with Datadog Incident Management
-kind: Guide
+
 disable_toc: false
 further_reading:
 - link: "integrations/jira/"

@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md
-kind: documentation
 title: Puppet
 ---
 このモジュールは、Datadog Agent をインストールし、Puppet レポートを Datadog に送信します。

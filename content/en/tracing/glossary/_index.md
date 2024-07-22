@@ -1,6 +1,5 @@
 ---
 title: APM Terms and Concepts
-kind: documentation
 aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
@@ -40,6 +39,7 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
@@ -81,6 +81,12 @@ Each resource has its own [Resource page][7] with [trace metrics][15] scoped to 
 A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans. During the lifetime of the request, you can see distributed calls across services (because a [trace-id is injected/extracted through HTTP headers][8]), [automatically instrumented libraries][3], and [manual instrumentation][9] using open-source tools like [OpenTracing][10] in the flame graph view. In the Trace View page, each trace collects information that connects it to other parts of the platform, including [connecting logs to traces][11], [adding tags to spans][12], and [collecting runtime metrics][13].
 
 {{< img src="tracing/visualization/trace_view.png" alt="trace view" >}}
+
+## Trace context propagation
+
+Trace context propagation is the method of passing trace identifiers between services in a distributed system. It enables Datadog to stitch together individual spans from different services into a single distributed trace. Trace context propagation works by injecting identifiers, such as the trace ID and parent span ID, into HTTP headers as the request flows through the system. The downstream service then extracts these identifiers and continues the trace. This allows the Datadog to reconstruct the full path of a request across multiple services.
+
+For more information, see the [propagating the trace context][27] for your application's language.
 
 ## Retention filters
 
@@ -129,3 +135,4 @@ To learn more, read [Application Instrumentation][26].
 [24]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
 [25]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [26]: /tracing/trace_collection/
+[27]: /tracing/trace_collection/trace_context_propagation

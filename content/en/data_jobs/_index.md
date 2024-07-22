@@ -1,16 +1,11 @@
 ---
 title: Data Jobs Monitoring
-kind: documentation
 further_reading:
     - link: '/data_streams'
       tag: 'Documentation'
       text: 'Data Streams Monitoring'
 
 ---
-
-{{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
-Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
 
 {{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}
 

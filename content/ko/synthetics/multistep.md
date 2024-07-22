@@ -19,7 +19,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: 테라폼
   text: Terraform으로 Synthetic 다단계 API 테스트 생성 및 관리
-kind: 설명서
 title: 다단계 API 테스트
 ---
 

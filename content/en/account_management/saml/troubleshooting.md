@@ -1,6 +1,5 @@
 ---
 title: SAML Troubleshooting
-kind: documentation
 description: Troubleshoot SAML issues for your Datadog account
 further_reading:
 - link: "https://www.samltool.com/online_tools.php"

@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner for Ruby
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20

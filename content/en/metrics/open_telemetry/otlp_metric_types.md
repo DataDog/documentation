@@ -1,6 +1,5 @@
 ---
 title: OTLP Metrics Types
-kind: documentation
 further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'

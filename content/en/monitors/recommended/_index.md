@@ -1,6 +1,5 @@
 ---
 title: Recommended Monitors
-kind: Documentation
 further_reading:
 - link: https://app.datadoghq.com/monitors/recommended?q=&only_installed=true&p=1
   tag: "App"

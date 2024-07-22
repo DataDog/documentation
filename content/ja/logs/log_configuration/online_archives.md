@@ -11,7 +11,6 @@ further_reading:
   tag: ブログ
   text: Online Archives による履歴ログ解析・調査
 is_beta: true
-kind: documentation
 private: true
 title: Online Archives
 ---

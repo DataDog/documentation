@@ -9,7 +9,7 @@ git_integration_title: jenkins
 has_logo: true
 integration_title: Jenkins
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: jenkins
 public_title: Datadog-Jenkins インテグレーション
 short_description: Jenkins のメトリクス、イベント、サービスを自動転送 checks to Datadog.

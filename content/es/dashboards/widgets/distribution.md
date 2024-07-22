@@ -19,7 +19,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentación
   text: Consulta
-kind: documentación
 title: Widget de distribución
 widget_type: distribución
 ---

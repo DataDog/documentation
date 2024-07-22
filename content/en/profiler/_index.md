@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler
-kind: Documentation
 aliases:
     - /tracing/profiling/
     - /tracing/profiler/

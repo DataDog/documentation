@@ -1,6 +1,5 @@
 ---
 title: RUM & Session Replay
-kind: documentation
 description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
 disable_sidebar: true
 aliases:
@@ -100,7 +99,6 @@ The following table shows which RUM capabilities are supported on each platform:
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
-| Heatmaps | {{< X >}} |  |  |  |  |  |  |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains

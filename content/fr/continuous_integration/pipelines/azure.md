@@ -12,7 +12,6 @@ further_reading:
   tag: Documentation
   text: Gagner en visibilité sur les pipelines en ajoutant des tags et des métriques
     personnalisés
-kind: documentation
 title: Configurer le tracing sur un pipeline Azure
 ---
 

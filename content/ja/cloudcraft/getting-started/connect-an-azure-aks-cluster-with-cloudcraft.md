@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Azure AKS クラスターを Cloudcraft に接続する
 ---
 

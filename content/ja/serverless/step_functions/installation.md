@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/amazon_lambda/
   tag: ドキュメント
   text: AWS Lambda インテグレーション
-kind: documentation
 title: AWS Step Functions のサーバーレスモニタリングのインストール
 ---
 

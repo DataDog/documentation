@@ -17,7 +17,6 @@ further_reading:
   tag: ドキュメント
   text: カスタムコストに関する洞察を得る
 is_beta: true
-kind: ドキュメント
 private: true
 title: SaaS コストインテグレーション
 ---

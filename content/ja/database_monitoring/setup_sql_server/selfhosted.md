@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
   tag: ブログ
   text: Datadog Database Monitoring で AlwaysOn のアベイラビリティグループを監視する
-kind: documentation
 title: セルフホスト SQL Server のデータベースモニタリングの設定
 ---
 

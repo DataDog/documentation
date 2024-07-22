@@ -3,7 +3,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: Documentation
   text: Configurer le scanner de données sensibles
-kind: documentation
 title: Règles de bibliothèque
 ---
 

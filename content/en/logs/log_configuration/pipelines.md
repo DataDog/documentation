@@ -1,6 +1,5 @@
 ---
 title: Pipelines
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/pipelines/

@@ -1,6 +1,5 @@
 ---
 title: Incident Details Page
-kind: documentation
 description: Manage the context and work for an incident
 aliases:
 - /monitors/incident_management/incident_details

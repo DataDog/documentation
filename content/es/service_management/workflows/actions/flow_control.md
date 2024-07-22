@@ -16,7 +16,6 @@ further_reading:
   tag: Documentación
   text: Más información sobre integraciones
 is_beta: false
-kind: documentation
 title: Lógica del flujo de trabajo
 type: rastreo
 ---

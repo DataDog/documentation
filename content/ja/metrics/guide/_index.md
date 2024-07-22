@@ -8,7 +8,6 @@ cascade:
     subcategory: メトリクスガイド
 description: メトリクスガイドのインデックス
 disable_toc: true
-kind: ガイド
 private: true
 title: メトリクスガイド
 ---

@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/org_settings/
   tag: Documentación
   text: Más información sobre los parámetros de organización
-kind: documentación
 title: Aplicaciones de OAuth
 ---
 ## Información general

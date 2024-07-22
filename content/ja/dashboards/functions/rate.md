@@ -5,7 +5,6 @@ further_reading:
 - link: /monitors/guide/alert-on-no-change-in-value/
   tag: ドキュメント
   text: 値に変化がない場合のアラート
-kind: documentation
 title: レート
 ---
 

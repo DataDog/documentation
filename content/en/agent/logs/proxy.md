@@ -1,6 +1,5 @@
 ---
 title: TCP Agent proxy for logs
-kind: documentation
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

@@ -1,6 +1,5 @@
 ---
 description: Postgres のデータベースモニタリングセットアップのトラブルシューティング
-kind: documentation
 title: Postgres 用 DBM セットアップのトラブルシューティング
 ---
 

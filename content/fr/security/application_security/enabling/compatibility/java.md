@@ -1,7 +1,6 @@
 ---
 code_lang: java
 code_lang_weight: 0
-kind: documentation
 title: Exigences de compatibilité Java
 type: multi-code-lang
 ---

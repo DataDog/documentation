@@ -1,6 +1,5 @@
 ---
 title: RUM Unity Monitoring Setup
-kind: documentation
 is_beta: true
 private: true
 description: Collect RUM data from your Unity Mobile projects.

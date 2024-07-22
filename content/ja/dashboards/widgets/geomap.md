@@ -8,7 +8,6 @@ further_reading:
 - link: /notebooks/
   tag: Documentation
   text: ノートブック
-kind: documentation
 title: ジオマップ ウィジェット
 widget_type: ジオマップ
 ---

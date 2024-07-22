@@ -17,7 +17,6 @@ further_reading:
 - link: /account_management/org_settings/cross_org_visibility
   tag: Documentación
   text: Visibilidad entre organizaciones
-kind: documentación
 title: Gestión de cuentas de varias organizaciones
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: SLO Alerts
-kind: documentation
 aliases :
   - /monitors/create/types/slo/
 further_reading:

@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/configuration/dual-shipping/
   tag: Guide
   text: Transmission multiple
-kind: documentation
 title: Débuter avec les sites Datadog
 ---
 

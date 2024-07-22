@@ -15,7 +15,6 @@ further_reading:
 - link: /synthetics/identify_synthetics_bots
   tag: Documentation
   text: Apprendre à identifier les bots Synthetic pour les tests API
-kind: documentation
 title: Débuter avec les tests Browser
 ---
 

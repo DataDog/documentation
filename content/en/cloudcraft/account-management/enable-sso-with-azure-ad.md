@@ -1,6 +1,5 @@
 ---
 title: Enable SSO with Azure AD
-kind: guide
 ---
 
 Enabling Single Sign-On (SSO) with Azure AD as your identity provider allows you to simplify authentication and login access to Cloudcraft.

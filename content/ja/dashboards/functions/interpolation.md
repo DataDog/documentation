@@ -8,7 +8,6 @@ further_reading:
 - link: /metrics/guide/interpolation-the-fill-modifier-explained/
   tag: ドキュメント
   text: 補間とフィル修飾子
-kind: documentation
 title: 補間
 ---
 

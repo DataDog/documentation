@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/
   tag: Documentación
   text: Recopilar tus trazas
-kind: documentación
 title: Proxy TCP del Agent para el envío de logs
 ---
 

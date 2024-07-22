@@ -17,7 +17,6 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Découvrir comment développer sur la plateforme Datadog
-kind: documentation
 title: Créer une intégration
 ---
 ## Présentation

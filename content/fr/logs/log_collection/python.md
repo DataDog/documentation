@@ -17,7 +17,6 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: Guide de dépannage pour la collecte de logs
-kind: documentation
 title: Collecte de logs avec Python
 ---
 

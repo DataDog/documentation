@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/agent/faq/windows-agent-ddagent-user/
-kind: guide
 title: Utilisateur de l'Agent Datadog pour Windows
 ---
 

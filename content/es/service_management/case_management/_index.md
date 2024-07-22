@@ -17,7 +17,6 @@ further_reading:
   tag: Blog
   text: Descubrir, clasificar y corregir los problemas de datos confidenciales a escala
     con Sensitive Data Scanner
-kind: documentation
 title: Case Management
 ---
 

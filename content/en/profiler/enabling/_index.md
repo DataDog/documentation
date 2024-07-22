@@ -1,6 +1,5 @@
 ---
 title: Enabling the Profiler
-kind: Documentation
 type: multi-code-lang
 aliases:
   - /tracing/faq/profiling_migration/

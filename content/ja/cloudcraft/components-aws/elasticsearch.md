@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Elasticsearch コンポーネント
 ---
 ## 概要

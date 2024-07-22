@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-recommended-monitors/
   tag: ブログ
   text: AWS の推奨モニターであらかじめ構成されたアラートを有効にする
-kind: documentation
 title: ログ管理
 ---
 

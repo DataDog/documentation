@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: 블로그
   text: Datadog NPM는 콘술 네트워킹을 지원합니다.
-kind: 설명서
 title: 네트워크 성능 모니터링 설정
 ---
 
@@ -361,7 +360,6 @@ Helm을 사용하지 않는다면 처음부터 쿠버네티스(Kubernetes)에서
 오퍼레이터에서 네트워크 성능 모니터링 기능을 사용하도록 구성하려면 다음과 같이 설정하세요.
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder

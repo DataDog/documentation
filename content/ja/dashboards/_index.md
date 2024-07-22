@@ -36,7 +36,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: ダッシュボードで視覚化を改善するためのインタラクティブセッションにご参加ください
-kind: documentation
 title: ダッシュボード
 ---
 

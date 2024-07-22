@@ -18,7 +18,6 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: ドキュメント
   text: Datadog で CSP 違反の検出と集計を行う
-kind: documentation
 title: Session Replay
 ---
 

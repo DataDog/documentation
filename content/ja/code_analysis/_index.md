@@ -17,7 +17,6 @@ further_reading:
   tag: ドキュメント
   text: Software Composition Analysis について
 is_beta: true
-kind: ドキュメント
 title: コード分析
 ---
 

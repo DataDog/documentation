@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery with JMX
-kind: guide
 aliases:
   - /agent/guide/autodiscovery-with-jmx
 further_reading:

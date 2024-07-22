@@ -1,6 +1,5 @@
 ---
 title: Managing Multiple-Organization Accounts
-kind: documentation
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
@@ -94,7 +93,7 @@ If you already created the child organization and are locked out, following the 
 
 ## Multi-org usage
 
-The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username on the bottom left corner and navigating to **Plan & Usage** > **Usage**.
+The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username on the bottom left corner and navigating to [**Plan & Usage** > **Usage & Cost**][11].
 
 The Usage page shows the aggregate usage of the parent-organization and all its child-organizations. There are two tabs on the Usage page:
 
@@ -131,15 +130,13 @@ This data can be downloaded as a CSV file.
 
 On the **Individual Organizations** usage tab, you can view the usage of your child organizations in absolute units or as a percentage of total usage.
 
-{{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
-
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][11] of a child-organization, you can click on the child-organization's name.
+To view the [Usage Details][12] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][12] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][13] page. Admins can hover over their username at the bottom left, then navigate to: [**Plan & Usage > Usage Attribution**][14].
 
 When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -169,5 +166,7 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [8]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [9]: /monitors/manage/
 [10]: /account_management/saml/
-[11]: /account_management/plan_and_usage/usage_details/
-[12]: /account_management/billing/usage_attribution/
+[11]: https://app.datadoghq.com/billing/usage?cost_summary
+[12]: /account_management/plan_and_usage/usage_details/
+[13]: /account_management/billing/usage_attribution/
+[14]: https://app.datadoghq.com/billing/usage-attribution

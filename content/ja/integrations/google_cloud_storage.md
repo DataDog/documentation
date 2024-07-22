@@ -14,7 +14,7 @@ integration_id: google-cloud-storage
 integration_title: Google Storage
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_storage
 public_title: Datadog-Google Storage インテグレーション

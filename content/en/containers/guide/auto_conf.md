@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery Auto-Configuration
-kind: guide
 aliases:
  - /agent/autodiscovery/auto_conf
  - /agent/faq/auto_conf
@@ -8,13 +7,13 @@ aliases:
 further_reading:
 - link: "/containers/kubernetes/integrations/"
   tag: "Documentation"
-  text: "Kubernetes and Integrations"
+  text: "Configure integrations with Autodiscovery on Kubernetes"
 - link: "/containers/docker/integrations/"
   tag: "Documentation"
-  text: "Docker and Integrations"
-- link: "/agent/guide/autodiscovery-management/"
+  text: "Configure integrations with Autodiscovery on Docker"
+- link: "/containers/guide/container-discovery-management/"
   tag: "Documentation"
-  text: "Autodiscovery Management"
+  text: "Container Discovery Management"
 algolia:
   tags: ['auto conf','ignore auto conf', 'autoconf','ignore autoconf']
 ---
@@ -75,9 +74,11 @@ spec:
 
   override:
     nodeAgent:
-      env: 
-        name: DD_IGNORE_AUTOCONF
-        value: redisdb istio
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
 ```
 
 Then, apply the new configuration.
@@ -102,9 +103,11 @@ To disable auto configuration integration(s) with the Operator, add the `DD_IGNO
 ```yaml
   override:
     nodeAgent:
-      env:
-        - name: DD_IGNORE_AUTOCONF
-          value: "redisdb istio"
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
 ```
 {{% /tab %}}
 {{% tab "DaemonSet" %}}

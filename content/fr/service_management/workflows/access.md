@@ -11,7 +11,6 @@ further_reading:
 - link: /service_management/service_management/workflows/actions_catalog
   tag: Documentation
   text: Consulter la liste des actions de workflow
-kind: documentation
 title: Accès et authentification
 ---
 

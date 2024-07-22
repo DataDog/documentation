@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/request-latency-profiling/
   tag: Blog
   text: Comprender la latencia de las peticiones mediante la generación de perfiles
-kind: documentación
 title: Empezando con el Continuous Profiler
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Ingest Amazon S3 Logs with the Observability Pipelines Worker
-kind: guide
 aliases:
   - /observability_pipelines/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker/
 further_reading:

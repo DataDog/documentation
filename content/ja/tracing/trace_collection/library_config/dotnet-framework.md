@@ -32,7 +32,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet
   tag: GitHub
   text: ソースコード
-kind: documentation
 title: .NET Framework トレーシングライブラリの構成
 type: multi-code-lang
 ---

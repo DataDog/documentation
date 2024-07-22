@@ -1,6 +1,5 @@
 ---
 title: Web View Tracking
-kind: documentation
 aliases:
   - /real_user_monitoring/android/web_view_tracking
   - /real_user_monitoring/ios/web_view_tracking

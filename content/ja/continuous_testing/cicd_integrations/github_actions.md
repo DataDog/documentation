@@ -3,7 +3,6 @@ aliases:
 - /ja/synthetics/cicd_integrations/github_actions
 dependencies:
 - https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
-kind: documentation
 title: Continuous Testing と CI GitHub アクション
 ---
 ## 概要

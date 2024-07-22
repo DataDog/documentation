@@ -1,7 +1,6 @@
 ---
 aliases:
 - /developers/integrations/oauth_for_data_integrations/
-kind: documentation
 title: OAuth for Integrations
 description: Use OAuth to authenticate integrations.
 ---

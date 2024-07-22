@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: APM で不要なリソースを無視する
 ---
 

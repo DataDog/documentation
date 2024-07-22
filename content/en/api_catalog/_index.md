@@ -1,6 +1,5 @@
 ---
 title: Datadog API Catalog
-kind: documentation
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"

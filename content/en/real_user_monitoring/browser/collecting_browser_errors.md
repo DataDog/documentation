@@ -1,6 +1,5 @@
 ---
 title: Collecting Browser Errors
-kind: documentation
 further_reading:
   - link: "/real_user_monitoring/error_tracking/"
     tag: Documentation

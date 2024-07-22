@@ -1,7 +1,6 @@
 ---
 dependencies:
   - https://github.com/DataDog/ansible-datadog/blob/main/README.md
-kind: documentation
 title: Ansible
 ---
 Le rôle Ansible pour Datadog permet d'installer et de configurer l'Agent et les intégrations Datadog. La version `4` du rôle installe l'Agent Datadog v7 par défaut.

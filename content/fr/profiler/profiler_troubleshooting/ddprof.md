@@ -5,7 +5,6 @@ further_reading:
 - link: /tracing/troubleshooting
   tag: Documentation
   text: Dépannage de l'APM
-kind: Documentation
 title: Dépannage du profileur natif pour les langages compilés
 type: multi-code-lang
 ---

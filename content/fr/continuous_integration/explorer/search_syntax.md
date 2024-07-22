@@ -7,7 +7,6 @@ further_reading:
 - link: /continuous_integration/explorer/facets
   tag: Documentation
   text: En savoir plus sur les facettes
-kind: documentation
 title: Syntaxe de recherche de CI Visibility Explorer
 ---
 

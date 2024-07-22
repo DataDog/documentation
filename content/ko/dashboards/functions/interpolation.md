@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/interpolation/
-kind: 설명서
 title: 보간
 ---
 

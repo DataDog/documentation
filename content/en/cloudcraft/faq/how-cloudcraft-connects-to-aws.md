@@ -1,6 +1,5 @@
 ---
 title: How does Cloudcraft connect to my AWS account?
-kind: faq
 ---
 
 Cloudcraft uses cross-account roles to access your AWS account, which is considered [the secure way to access your AWS environment][1] by AWS themselves. Because of this, you must create a secure read-only role in your AWS account that is specific to Cloudcraft and can easily be revoked at any time.

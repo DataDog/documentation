@@ -1,6 +1,5 @@
 ---
 title: Kubernetes log collection
-kind: documentation
 aliases:
   - /agent/kubernetes/log
 further_reading:

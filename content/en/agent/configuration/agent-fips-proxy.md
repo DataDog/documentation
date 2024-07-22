@@ -1,6 +1,5 @@
 ---
 title: Datadog FIPS Compliance
-kind: Guide
 disable_toc: false
 alias:
 - /agent/guide/agent-fips-proxy
@@ -76,7 +75,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Setting the `DD_FIPS_MODE` environment variable installs the FIPS package along with the Agent, and configures the Agent to use the proxy. There are no additional configuration steps if you're using this method, but you should [verify the installation](#verify-your-installation).

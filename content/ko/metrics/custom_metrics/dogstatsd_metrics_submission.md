@@ -13,7 +13,6 @@ further_reading:
 - link: /metrics/types/
   tag: 설명서
   text: Datadog 메트릭 유형
-kind: 설명서
 title: '메트릭 제출: DogStatsD'
 ---
 

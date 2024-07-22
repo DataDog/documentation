@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/widgets/treemap/
   tag: ドキュメント
   text: ツリーマップウィジェット
-kind: documentation
 title: 円グラフウィジェット
 ---
 

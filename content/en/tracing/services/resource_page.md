@@ -1,6 +1,5 @@
 ---
 title: Resource Page
-kind: documentation
 aliases:
 - /tracing/visualization/resource/
 further_reading:

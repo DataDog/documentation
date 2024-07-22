@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Mobile Session Replay
-kind: documentation
 description: How to troubleshoot Mobile Session Replay.
 aliases:
 further_reading:

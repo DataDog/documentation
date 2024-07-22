@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
   tag: 블로그
   text: Datadog 데이터베이스 모니터링으로 AlwaysOn 가용성 그룹 모니터링
-kind: 설명서
 title: 자체 호스팅 SQL Server에 데이터베이스 모니터링 설정
 ---
 

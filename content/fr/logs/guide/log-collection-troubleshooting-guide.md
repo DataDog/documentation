@@ -15,7 +15,7 @@ further_reading:
   tag: Guide
   text: Pourquoi mes logs s'affichent avec un statut Info même lorsqu'il s'agit d'un
     avertissement ou d'une erreur ?
-kind: guide
+
 title: Guide de dépannage pour la collecte de logs
 ---
 

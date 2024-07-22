@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/faq/agent-5-kubernetes-basic-agent-usage
-kind: ガイド
 private: true
 title: Agent v5 と Kubernetes での基本的な Agent の利用方法
 ---
@@ -40,7 +39,6 @@ Kubernetes で RBAC が有効になっている場合は、[Datadog-Kubernetes �
 ```yaml
 
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: dd-agent
 spec:
@@ -153,7 +151,6 @@ kube-state-metrics を実行するには、次のマニフェストを使用し�
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: Deployment
 metadata:
   name: kube-state-metrics
 spec:
@@ -178,7 +175,6 @@ spec:
             cpu: 200m
 ---
 apiVersion: v1
-kind: Service
 metadata:
   annotations:
     prometheus.io/scrape: 'true'
@@ -258,7 +254,6 @@ Kubernetes ワーカーノードごとに 1 つの `dd-agent` ポッドを使用
 ```yaml
 
 apiVersion: v1
-kind: Pod
 metadata:
   annotations:
     service-discovery.datadoghq.com/kubedns.check_names: '["kube_dns"]'

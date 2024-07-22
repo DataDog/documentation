@@ -13,7 +13,6 @@ further_reading:
 - link: /metrics/types/
   tag: ドキュメント
   text: Datadog メトリクスタイプ
-kind: documentation
 title: 'メトリクスの送信: DogStatsD'
 ---
 

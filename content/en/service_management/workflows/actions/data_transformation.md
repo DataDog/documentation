@@ -1,6 +1,5 @@
 ---
 title: Data Transformation
-kind: Documentation
 disable_toc: false
 ---
 

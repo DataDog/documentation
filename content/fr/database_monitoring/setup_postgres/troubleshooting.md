@@ -1,6 +1,5 @@
 ---
 description: Dépannage de la solution Database Monitoring pour Postgres
-kind: documentation
 title: Dépannage de la solution Database Monitoring pour Postgres
 ---
 {{< site-region region="gov" >}}

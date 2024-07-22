@@ -22,7 +22,6 @@ further_reading:
 - link: /logs/log_configuration/attributes_naming_convention
   tag: Documentation
   text: Attributs standard Datadog
-kind: documentation
 title: Données RUM recueillies (Browser)
 ---
 

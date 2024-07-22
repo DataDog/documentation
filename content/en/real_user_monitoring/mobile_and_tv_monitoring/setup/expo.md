@@ -1,6 +1,5 @@
 ---
 title: RUM Expo Setup
-kind: documentation
 description: Monitor your React Native projects using Expo and Expo Go with Datadog.
 aliases:
     - /real_user_monitoring/reactnative/expo/

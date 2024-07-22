@@ -14,7 +14,6 @@ further_reading:
 - link: /watchdog/
   tag: 설명서
   text: Watchdog
-kind: 설명서
 title: 메트릭 상관관계
 ---
 

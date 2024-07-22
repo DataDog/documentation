@@ -30,7 +30,7 @@ integration_id: kubelet
 integration_title: Kubelet
 integration_version: 7.13.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: kubelet
 public_title: Kubelet

@@ -1,6 +1,5 @@
 ---
 title: Migrate to OpenTelemetry Collector version 0.95.0+
-kind: guide
 aliases:
 - /opentelemetry/guide/switch_from_processor_to_connector
 ---

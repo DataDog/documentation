@@ -12,7 +12,6 @@ further_reading:
 - link: /developers/integrations/oauth_for_integrations/
   tag: Documentation
   text: OAuth を使ったインテグレーションについて
-kind: ドキュメント
 title: インテグレーションアセットリファレンス
 ---
 ## 概要

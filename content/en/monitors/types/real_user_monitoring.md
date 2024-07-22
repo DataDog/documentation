@@ -1,6 +1,5 @@
 ---
 title: Real User Monitoring Monitor
-kind: documentation
 aliases:
 - /monitors/monitor_types/real_user_monitoring
 - /monitors/create/types/real_user_monitoring/

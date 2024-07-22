@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Tags
-kind: documentation
 description: 'Learn how to assign and use tags in Datadog.'
 aliases:
     - /getting_started/getting_started_with_tags

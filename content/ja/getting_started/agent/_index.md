@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: よくあるご質問
   text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
-kind: documentation
 title: Agent の概要
 ---
 
@@ -105,7 +104,7 @@ Datadog UI で [Agent Installation ページ][18]に移動し、**Ubuntu** を�
 Ubuntu の 1 行インストールコマンドの例:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [Agent Installation ページ][18]を使用して、お使いのオペレーティングシステムの最新のインストール手順を参照してください。

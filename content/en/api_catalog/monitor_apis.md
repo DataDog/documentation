@@ -1,6 +1,5 @@
 ---
 title: Monitoring APIs
-kind: documentation
 is_beta: true
 further_reading:
 - link: "/tracing/api_catalog/get_started/"

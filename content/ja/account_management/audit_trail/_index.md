@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/audit-trail-best-practices/
   tag: ブログ
   text: 監査証跡で重要な Datadog のアセットと構成を監視する
-kind: documentation
 title: Datadog Audit Trail（監査証跡）
 ---
 

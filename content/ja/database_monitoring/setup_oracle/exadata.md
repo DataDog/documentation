@@ -5,7 +5,6 @@ further_reading:
   tag: Documentation
   text: Basic Oracle インテグレーション
 is_beta: true
-kind: documentation
 private: true
 title: Oracle Exadata のデータベースモニタリングの設定
 ---

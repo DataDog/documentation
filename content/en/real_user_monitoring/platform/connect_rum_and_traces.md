@@ -1,6 +1,5 @@
 ---
 title: Connect RUM and Traces
-kind: documentation
 aliases:
 - /real_user_monitoring/connect_rum_and_traces
 further_reading:

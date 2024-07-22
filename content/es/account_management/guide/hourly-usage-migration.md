@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación
   text: Planificación y ajustes de uso
-kind: guía
 title: Migrar de la versión 1 de las APIs de uso por hora a la versión 2
 ---
 

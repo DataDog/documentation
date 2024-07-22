@@ -8,7 +8,6 @@ further_reading:
 - link: dashboards/guide/maintain-relevant-dashboards
   tag: Guía
   text: Prácticas recomendadas para mantener los dashboards relevantes
-kind: Documentación
 title: Lista de dashboards
 ---
 

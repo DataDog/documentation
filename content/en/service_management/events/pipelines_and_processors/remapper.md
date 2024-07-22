@@ -1,6 +1,5 @@
 ---
 title: Remapper
-kind: Documentation
 
 ---
 

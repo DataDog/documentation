@@ -1,6 +1,5 @@
 ---
 title: Upcoming Changes to Security Notification Rules
-kind: documentation
 is_beta: true
 further_reading:
 - link: "/security/notifications/rules/"

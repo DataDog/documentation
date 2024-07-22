@@ -147,7 +147,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   # ポート 6062 での競合を回避
   echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
@@ -229,7 +229,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 
@@ -275,7 +275,7 @@ else
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールする
   # バージョン 7.40 以上で Agent が失敗しないように、datadog.yaml でホスト名を明確に構成する
   # 変更については https://github.com/DataDog/datadog-agent/issues/14152 をご覧ください
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 fi
@@ -346,7 +346,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   # ポート 6062 での競合を回避
   echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
@@ -426,7 +426,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 
@@ -472,7 +472,7 @@ else
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールする
   # バージョン 7.40 以上で Agent が失敗しないように、datadog.yaml でホスト名を明確に構成する
   # 変更については https://github.com/DataDog/datadog-agent/issues/14152 をご覧ください
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 fi

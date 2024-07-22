@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: 서버리스 모니터링 지침
 disable_toc: true
-kind: 지침
 private: true
 title: 서버리스 모니터링 지침
 ---

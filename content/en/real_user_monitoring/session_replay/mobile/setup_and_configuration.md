@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay Setup and Configuration
-kind: documentation
 description: Setting up and configuring Mobile Session Replay.
 aliases:
 further_reading:

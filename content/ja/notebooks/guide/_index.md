@@ -1,7 +1,6 @@
 ---
 description: ノートブックガイドのインデックス
 disable_toc: true
-kind: ガイド
 private: true
 title: ノートブックガイド
 ---

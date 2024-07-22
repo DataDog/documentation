@@ -13,7 +13,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: 설명서
   text: 위젯
-kind: 도움말
 title: JSON으로 그래프화하기
 ---
 

@@ -5,7 +5,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-kind: ガイド
 title: アラートのバタつきを抑える
 ---
 

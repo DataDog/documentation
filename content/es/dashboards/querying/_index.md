@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Centro de aprendizaje
   text: Crear dashboards mejores
-kind: documentación
 title: Consulta
 ---
 

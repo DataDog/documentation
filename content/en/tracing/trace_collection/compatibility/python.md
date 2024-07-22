@@ -1,6 +1,5 @@
 ---
 title: Python Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Python tracer'
 aliases:
   - /tracing/compatibility_requirements/python

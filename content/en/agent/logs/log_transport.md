@@ -1,6 +1,5 @@
 ---
 title: Agent Transport for Logs
-kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "agent/logs/advanced_log_collection/#filter-logs"
@@ -49,7 +48,7 @@ To enforce HTTPS transport with Agent versions v6.14+/v7.14+ , update the Agent'
 ```yaml
 logs_enabled: true
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 To send logs with environment variables, configure the following:

@@ -1,6 +1,5 @@
 ---
 description: Zoom을 Datadog에 연결해 팀 협업 지원
-kind: 설명서
 private: true
 title: Zoom 통합
 ---

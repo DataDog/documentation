@@ -1,6 +1,5 @@
 ---
 title: Tracing a Proxy
-kind: documentation
 further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
@@ -394,6 +393,8 @@ http {
   valueFrom:
     fieldRef:
       fieldPath: status.hostIP
+- name: OTEL_EXPORTER_OTLP_ENDPOINT
+  value: "http://$(HOST_IP):4318"
 ```
 
 Next, enable OpenTelemetry instrumentation for the controller. Create or edit a ConfigMap with the following details:
@@ -406,9 +407,8 @@ metadata:
   namespace: ingress-nginx
 data:
   enable-opentelemetry: "true"
-  otlp-collector-host: $HOST_IP
+  otel-sampler: AlwaysOn
   # Defaults
-  # otlp-collector-port: 4317
   # otel-service-name: "nginx"
   # otel-sampler-ratio: 0.01
 ```

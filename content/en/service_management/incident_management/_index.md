@@ -1,6 +1,5 @@
 ---
 title: Incident Management
-kind: documentation
 description: Create and manage incidents
 aliases:
 - /monitors/incident_management/

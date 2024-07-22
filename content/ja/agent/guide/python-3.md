@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/guide/agent-v6-python-3/
   tag: ドキュメント
   text: Datadog Agent v6 で Python 3 を使用する
-kind: ガイド
 title: Python 3 カスタムチェックの移行
 ---
 

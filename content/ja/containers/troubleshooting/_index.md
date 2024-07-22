@@ -4,7 +4,6 @@ further_reading:
 - link: /containers/troubleshooting/duplicate_hosts
   tag: Documentation
   text: AWS (EC2 または EKS) 上の Kubernetes によるホストの重複
-kind: documentation
 title: コンテナのトラブルシューティング
 ---
 

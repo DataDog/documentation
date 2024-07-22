@@ -1,6 +1,5 @@
 ---
 title: Connect an Amazon EKS Cluster with Cloudcraft
-kind: documentation
 ---
 
 By scanning your Amazon EKS clusters, Cloudcraft allows you to generate system architecture diagrams to help visualize your deployed workloads and pods.
@@ -64,7 +63,6 @@ Enter the following multi-line command to create the ClusterRoleBinding and gran
 ```
 cat << EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
 metadata:
   name: cloudcraft-view-only
 subjects:

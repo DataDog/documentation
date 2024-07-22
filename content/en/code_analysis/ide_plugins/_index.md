@@ -1,12 +1,13 @@
 ---
 title: Datadog IDE Plugins for Code Analysis
-kind: documentation
 description: Learn how to set up Datadog IDE plugins for enhanced code analysis and quality assurance in your development environment.
 disable_toc: false
 further_reading:
 - link: "/developers/ide_plugins"
   tag: "Documentation"
   text: "Learn about Datadog IDE Plugins"
+algolia:
+  tags: ['code analysis', 'datadog code analysis', 'static analysis', 'ide plugins', 'SAST']
 ---
 
 ## Overview

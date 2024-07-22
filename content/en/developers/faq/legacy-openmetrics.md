@@ -1,6 +1,5 @@
 ---
 title: Custom Legacy OpenMetrics Check
-kind: documentation
 further_reading:
 - link: "/agent/kubernetes/prometheus/"
   tag: "Documentation"

@@ -12,7 +12,6 @@ further_reading:
 - link: /containers/cluster_agent/clusterchecks/
   tag: Documentación
   text: Checks de clúster (Cluster Checks)
-kind: documentación
 title: Cluster Check Runners
 ---
 

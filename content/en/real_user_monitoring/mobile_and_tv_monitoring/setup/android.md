@@ -1,6 +1,5 @@
 ---
 title: RUM Android and Android TV Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/android/
 code_lang: android

@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing
   tag: Tarification
   text: Tarification Datadog
-kind: documentation
 title: Tarification
 ---
 

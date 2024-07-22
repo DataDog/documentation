@@ -1,6 +1,5 @@
 ---
 title: Rollup Update for Distribution Metrics with Percentiles?
-kind: faq
 is_beta: false
 ---
 **This FAQ is useful for users who query percentiles on distributions over a given timeframe, or users who want to query percentiles for specific intervals within a given timeframe.**

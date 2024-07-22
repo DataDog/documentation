@@ -1,6 +1,5 @@
 ---
 title: Service Level Objectives
-kind: documentation
 description: "Track the status of your SLOs"
 aliases:
 - /monitors/monitor_uptime_widget/

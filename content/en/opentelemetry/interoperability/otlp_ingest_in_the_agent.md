@@ -1,6 +1,5 @@
 ---
 title: OTLP Ingestion by the Datadog Agent
-kind: documentation
 aliases:
   - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
   - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
@@ -262,5 +261,5 @@ env:
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [10]: /opentelemetry/runtime_metrics/

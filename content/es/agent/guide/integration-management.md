@@ -2,7 +2,6 @@
 algolia:
   tags:
   - Gestión de integraciones
-kind: guía
 title: Gestión de integraciones
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Setting up Oracle
-kind: documentation
 description: Setting up Database Monitoring on an Oracle database
 disable_sidebar: true
 ---

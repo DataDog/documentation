@@ -3,7 +3,6 @@ further_reading:
 - link: /dashboards/widgets
   tag: 설명서
   text: 대시보드 위젯 목록
-kind: 가이드
 title: 컨텍스트 링크
 ---
 

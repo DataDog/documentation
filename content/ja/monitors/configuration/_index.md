@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: モニターステータス
-kind: documentation
 title: モニターの構成
 ---
 

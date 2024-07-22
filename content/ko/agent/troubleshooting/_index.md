@@ -27,7 +27,6 @@ further_reading:
 - link: /agent/troubleshooting/high_memory_usage/
   tag: 설명서
   text: CPU 또는 메모리 사용량이 높을 경우
-kind: 설명서
 title: 에이전트 트러블슈팅
 ---
 

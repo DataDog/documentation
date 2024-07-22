@@ -1,6 +1,5 @@
 ---
 title: Ingestion Sampling with OpenTelemetry
-kind: documentation
 aliases:
   - /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
@@ -124,6 +123,14 @@ Use the [APM Estimated Usage dashboard][13] and the `datadog.estimated_usage.apm
 
 If the ingestion volume is higher than expected, consider adjusting your sampling rates.
 
+## Unified service tagging
+
+When sending data from OpenTelemetry to Datadog, it's important to tie trace data together with unified service tagging.
+
+Setting unified service tags ensures that traces are accurately linked to their corresponding services and environments. This prevents hosts from being misattributed, which can lead to unexpected increases in usage and costs.
+
+For more information, see [Unified Service Tagging][18].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -145,3 +152,4 @@ If the ingestion volume is higher than expected, consider adjusting your samplin
 [15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
 [16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
 [17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids
+[18]: /getting_started/tagging/unified_service_tagging/#opentelemetry

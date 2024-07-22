@@ -7,7 +7,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: ドキュメント
   text: よくある問題のトラブルシューティング
-kind: documentation
 title: Azure SQL Server のデータベースモニタリングの設定
 ---
 

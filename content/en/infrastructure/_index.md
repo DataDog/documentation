@@ -1,6 +1,5 @@
 ---
 title: Infrastructure
-kind: documentation
 aliases:
   - /graphing/infrastructure/
 further_reading:
@@ -12,11 +11,13 @@ further_reading:
     text: 'Join an interactive session to power up your Infrastructure monitoring'
 cascade:
 - _target:
-    path: /infrastructure/resource_catalog/aws_iam_user.md
+    path: /infrastructure/resource_catalog/aws_iam_user
+    lang: en
   aliases:
     - /security/cspm/custom_rules/aws_iam_user/
 - _target:
     path: /infrastructure/**/*
+    lang: en
   algolia:
     rank: 70
 ---

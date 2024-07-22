@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: 설명서
   text: RUM 탐색기에 대해 자세히 알아보기
-kind: 가이드
 title: RUM Explorer에서 봇 파악하기
 ---
 

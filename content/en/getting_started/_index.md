@@ -1,6 +1,5 @@
 ---
 title: Getting Started
-kind: documentation
 disable_sidebar: true
 aliases:
     - /overview
@@ -12,6 +11,9 @@ further_reading:
     - link: 'https://datadoghq.com/blog/'
       tag: 'Blog'
       text: 'Learn about new Datadog products and features, integrations, and more'
+    - link: 'https://app.datadoghq.com/help/quick_start'
+      tag: 'App'
+      text: 'Explore the Quick Start Guide'
 cascade:
     algolia:
         rank: 50
@@ -33,8 +35,8 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Development</strong></p></td>
         <td>
         <ul>
-        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li>
-        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li></ul>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li>
+        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li></ul>
         </td>
     </tr>
     <tr>
@@ -112,13 +114,13 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
-{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
 {{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Run end-to-end Synthetic tests in your CI pipelines and IDEs.{{< /nextlink >}}
+{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
 {{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: Discover best practices for getting your team up and running with ASM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: Discover best practices for getting your team up and running with CSM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
-{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
+{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
 {{< /whatsnext >}}

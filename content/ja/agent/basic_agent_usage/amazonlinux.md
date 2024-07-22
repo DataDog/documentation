@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: Amazon Linux
 title: Amazon Linux 用 Agent の基本的な使用方法
 ---

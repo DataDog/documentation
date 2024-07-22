@@ -1,6 +1,5 @@
 ---
 title: Configuration
-kind: documentation
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/management/"
   tag: "External Site"

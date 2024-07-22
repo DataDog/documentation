@@ -1,6 +1,5 @@
 ---
 title: "ElastiCache Component"
-kind: documentation
 ---
 ## Overview
 

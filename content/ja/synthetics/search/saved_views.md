@@ -3,7 +3,6 @@ further_reading:
 - link: /synthetics/search/
   tag: ドキュメント
   text: Synthetic テストを検索・管理する方法を説明します
-kind: documentation
 title: 保存ビュー
 ---
 

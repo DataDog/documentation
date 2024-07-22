@@ -4,7 +4,6 @@ further_reading:
 - link: https://www.samltool.com/online_tools.php
   tag: 開発ツール
   text: 開発者用 SAML ツールでアサーションを識別する
-kind: documentation
 title: SAML トラブルシューティング
 ---
 

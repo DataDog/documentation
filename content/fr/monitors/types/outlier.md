@@ -15,7 +15,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Consulter le statut de votre monitor
-kind: documentation
 title: Monitor outlier
 ---
 

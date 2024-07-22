@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing
   tag: Precios
   text: Precios de Datadog
-kind: documentación
 title: Precios
 ---
 

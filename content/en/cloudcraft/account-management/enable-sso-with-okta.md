@@ -1,6 +1,5 @@
 ---
 title: Enable SSO with Okta
-kind: guide
 ---
 
 Enabling Single Sign-On (SSO) with Okta as your identity provider allows you to simplify authentication and login access to Cloudcraft.

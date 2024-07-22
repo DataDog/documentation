@@ -9,7 +9,6 @@ further_reading:
 - link: /security/cloud_security_management/workflows/
   tag: ドキュメント
   text: セキュリティワークフローの自動化
-kind: ドキュメント
 title: Workflow Automation を始める
 ---
 

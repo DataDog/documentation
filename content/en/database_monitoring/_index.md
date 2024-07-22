@@ -1,6 +1,5 @@
 ---
 title: Database Monitoring
-kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
@@ -28,7 +27,7 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, and **SQL Server**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server** and **MongoDB**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
 ### Postgres
 
@@ -48,6 +47,12 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 ### SQL Server
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
+<p></p>
+
+### MongoDB
+
+<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+{{< partial name="dbm/dbm-setup-mongodb" >}}
 <p></p>
 
 ## Explore Datadog Database Monitoring

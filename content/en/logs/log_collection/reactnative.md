@@ -1,6 +1,5 @@
 ---
 title: React Native Log Collection
-kind: documentation
 description: Collect logs from your React Native Mobile applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative

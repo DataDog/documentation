@@ -1,6 +1,5 @@
 ---
 title: Agent Flare
-kind: documentation
 aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
@@ -28,6 +27,14 @@ This page covers:
 A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings.
 
 The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
+
+## Send a flare from the Datadog site
+
+To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][2] and [Remote configuration][3] on the Agent.
+
+{{% remote-flare %}}
+
+{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
 ## Send a flare using the `flare` command
 
@@ -149,14 +156,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send a flare from the Datadog site
-
-To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][2] and [Remote configuration][3] on the Agent.
-
-{{% remote-flare %}}
-
-{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
 ## Manual submission
 

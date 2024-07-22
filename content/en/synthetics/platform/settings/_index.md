@@ -1,6 +1,5 @@
 ---
 title: Synthetic Testing and Monitoring Settings
-kind: documentation
 aliases:
 - /synthetics/settings
 further_reading:

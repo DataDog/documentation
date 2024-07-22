@@ -12,7 +12,6 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: Documentation
   text: En savoir plus sur la vue Log Explorer
-kind: documentation
 title: Watchdog Insights pour les logs
 ---
 

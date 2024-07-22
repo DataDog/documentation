@@ -1,6 +1,5 @@
 ---
 title: Continuous Integration Visibility
-kind: documentation
 aliases:
   - /ci
 further_reading:

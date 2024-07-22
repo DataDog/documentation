@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: Appliquer des visualisations sur vos événements
-kind: documentation
 title: Rechercher des événements RUM
 ---
 
