@@ -15,7 +15,7 @@ Create a `values.yaml` file with the following content:
 datadog:
   agents:
     image:
-      tag: 7.56.0-dbm-mongo-1.1
+      tag: 7.56.0-dbm-mongo-1.3
   registry: datadog/agent
   apiKeyExistingSecret: datadog-secret
 

@@ -18,7 +18,7 @@ OS、国、コードバージョンなど、ユーザーとそのアプリケー
 
 ## イベントのサイドパネル
 
-[RUM エクスプローラー][1]でイベントサイドパネルを開くには、**List** 視覚化タイプのテーブルの行をクリックします。または、**Show related events** をクリックした後に表示されるサイドパネルのリスト内をクリックします。
+[RUM エクスプローラー][1]でイベントサイドパネルを開くには、**List** 可視化タイプのテーブル行をクリックします。
 
 イベントサイドパネルには、RUM のイベントに関連するすべての情報が表示されます。ウォーターフォールは、関連するリソース、エラー、ビュー、アクションを表示し、エラーが発生したイベントやロード時間が長すぎるイベントをタイムライン形式で可視化します (ビューミニマップ)。
 
@@ -37,4 +37,4 @@ RUM は、デフォルトでコンテキスト情報を収集します。また�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
