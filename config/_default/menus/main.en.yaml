@@ -38,7 +38,23 @@ menu:
       url: getting_started/
       pre: hex-ringed
       parent: essentials_heading
+      weight: 20000
+    - name: Markdoc Testing
+      identifier: markdoc_testing
+      url: markdoc_testing/
+      pre: hex-ringed
+      parent: essentials_heading
       weight: 10000
+    - name: Primary Colors
+      identifier: markdoc_testing_primary_colors
+      url: markdoc_testing/primary_colors/
+      parent: markdoc_testing
+      weight: 1
+    - name: Traffic Light Colors
+      identifier: markdoc_testing_traffic_light_colors
+      url: markdoc_testing/traffic_light_colors/
+      parent: markdoc_testing
+      weight: 2
     - name: Datadog
       identifier: getting_started_datadog
       url: getting_started/application/

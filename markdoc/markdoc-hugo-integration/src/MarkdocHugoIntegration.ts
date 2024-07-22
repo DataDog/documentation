@@ -85,11 +85,9 @@ export class MarkdocHugoIntegration {
 
         // if in standalone mode, build an HTML file
         if (this.standaloneMode) {
-          console.log('Building HTML file');
           fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.html'), html);
           // otherwise, build a "Markdown" file (just HTML with frontmatter)
         } else {
-          console.log('Building Markdown file');
           const markdown = `---\n---\n${html}`;
           fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.md'), markdown);
         }

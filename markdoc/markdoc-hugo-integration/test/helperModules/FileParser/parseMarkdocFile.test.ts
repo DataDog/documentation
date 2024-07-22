@@ -20,21 +20,21 @@ describe('FileParse.parseMdocFile', () => {
     test(`creates an AST for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
       expect(ast).toBeDefined();
       expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
-        `${SNAPSHOTS_DIR}/validSite/${sanitizedMarkdocFilename}/ast.snap.json`
+        `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/ast.snap.json`
       );
     });
 
     test(`creates frontmatter for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
       expect(frontmatter).toBeDefined();
       expect(JSON.stringify(frontmatter, null, 2)).toMatchFileSnapshot(
-        `${SNAPSHOTS_DIR}/validSite/${sanitizedMarkdocFilename}/frontmatter.snap.json`
+        `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/frontmatter.snap.json`
       );
     });
 
     test(`creates partials for ${sanitizedMarkdocFilename} that match the snapshot`, () => {
       expect(partials).toBeDefined();
       expect(JSON.stringify(partials, null, 2)).toMatchFileSnapshot(
-        `${SNAPSHOTS_DIR}/validSite/${sanitizedMarkdocFilename}/partials.snap.json`
+        `${SNAPSHOTS_DIR}/validSite/compilationStepsByFilename/${sanitizedMarkdocFilename}/partials.snap.json`
       );
     });
 

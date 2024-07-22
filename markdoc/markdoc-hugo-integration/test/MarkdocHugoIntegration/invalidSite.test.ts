@@ -13,8 +13,7 @@ describe('MarkdocHugoIntegration', () => {
     prefOptionsConfigDir: siteDir + '/preferences_config/options',
     // sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
     contentDir: contentDir,
-    partialsDir: siteDir + '/partials',
-    standaloneMode: true
+    partialsDir: siteDir + '/partials'
   });
 
   // compile the bad files
