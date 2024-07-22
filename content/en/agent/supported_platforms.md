@@ -246,8 +246,8 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   <tr>
     <td>2016</td>
     <td></td>
-    <td><= 6.50.0</td>
-    <td><= 7.50.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
     <td></td>
   </tr>
   <tr>
@@ -275,8 +275,8 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   <tr>
     <td>10</td>
     <td></td>
-    <td><= 6.50.0</td>
-    <td><= 7.50.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
     <td></td>
   </tr>
   <tr>
