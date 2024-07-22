@@ -24,13 +24,25 @@ This provides observability for libraries not covered by Datadog SDKs without ch
 
 Before adding OpenTelemetry instrumentation libraries, set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
+Datadog SDKs provide an implementation of the OpenTelemetry API that submits spans to the Datadog Agent using Datadog Span Exporters. To use the OpenTelemetry
+Instramentations with Datadog SDKs ensure a Datadog Agent is configured.
+
 <div class="alert alert-warning">
 When replacing a Datadog instrumentation with its OpenTelemetry equivalent, disable the
 Datadog instrumentation to avoid duplicate spans in the trace.
 </div>
 
+<div class="alert alert-warning">
+Datadog SDKs implement the OpenTelemetry API by overriding the default implementations in the OpenTelemetry SDK. Using operations only supported by 
+OpenTelemetry SDK are not supported (ex: SpanProcessors, OTLP Trace Exporters).
+</div>
+
+<div class="alert alert-warning">
+Datadog SDKs do not support OpenTelemetry Metrics and Logs APIs. To use OpenTelemetry Logs and Metrics apis use [OTLP Ingest][12].
+</div>
+
 <div class="alert alert-info">
-<code>DD_TRACE_OTEL_ENABLED</code> is not required for the Datadog Go SDK.
+<code>DD_TRACE_OTEL_ENABLED</code> is not required for the Datadog Go and Ruby SDKs.
 </div>
 
 ## Language support
@@ -107,15 +119,33 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 {{% /tab %}}
 
-<!-- {{% tab "Python" %}}
+{{% tab "Python" %}}
 
 ## Compatibility requirements
 
+The Datadog Python SDK supports library instrumentations using OpenTelemetry's [instrumentation API][13].
+
+OpenTelemetry provides an [example][14] for instrumenting a sample application.
+
 ## Setup
+
+To use an OpenTelemetry instrumentation with the Datadog Python SDK:
+
+1. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+2. Ensure a Datadog Agent is configured to accept traces from your [application][15].
 
 ## Configuration
 
-{{% /tab %}} -->
+**Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
+**Default**: `false`<br>
+Must be set to `true` to enable use of OpenTelemetry instrumentations.
+
+
+[13]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/v1.16.0/instrumentation
+[14]: https://opentelemetry.io/docs/zero-code/python/example/
+[15]: /getting_started/tracing/#set-up-datadog-apm
+
+{{% /tab %}}
 
 <!-- {{% tab "Ruby" %}}
 
@@ -176,3 +206,4 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/automatic_instrumentation/
 [3]: https://opentelemetry.io/docs/concepts/instrumentation/libraries/
+[12]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
