@@ -13,7 +13,6 @@ further_reading:
   tag: ドキュメント
   text: スパンクエリ構文
 is_beta: true
-kind: ドキュメント
 title: データセキュリティ
 ---
 

@@ -32,7 +32,7 @@ integration_id: portworx
 integration_title: Portworx
 integration_version: 1.1.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: portworx
 public_title: Portworx

@@ -47,7 +47,7 @@ integration_id: tomcat
 integration_title: Tomcat
 integration_version: 1.11.2
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tomcat
 public_title: Tomcat

@@ -50,7 +50,7 @@ integration_id: kafka
 integration_title: Kafka
 integration_version: 2.15.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: kafka
 public_title: Kafka

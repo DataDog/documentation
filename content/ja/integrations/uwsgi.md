@@ -11,7 +11,7 @@ has_logo: true
 integration_id: uwsgi
 integration_title: uWSGI
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: uwsgi
 public_title: Datadog-uWSGI インテグレーション
 short_description: ログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡できます。

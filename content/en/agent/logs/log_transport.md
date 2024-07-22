@@ -48,7 +48,7 @@ To enforce HTTPS transport with Agent versions v6.14+/v7.14+ , update the Agent'
 ```yaml
 logs_enabled: true
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 To send logs with environment variables, configure the following:

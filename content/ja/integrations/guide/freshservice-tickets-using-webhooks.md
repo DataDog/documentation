@@ -1,6 +1,5 @@
 ---
 title: Webhooks を使用した Freshservice チケット
-kind: ガイド
 author: Trevor Veralrud
 further_reading:
   - link: /integrations/webhooks/

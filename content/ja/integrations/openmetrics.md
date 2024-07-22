@@ -28,7 +28,7 @@ integration_id: openmetrics
 integration_title: OpenMetrics
 integration_version: 4.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: openmetrics
 public_title: OpenMetrics

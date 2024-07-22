@@ -47,7 +47,7 @@ integration_id: mongodb
 integration_title: MongoDB
 integration_version: 6.4.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: mongo
 public_title: MongoDB

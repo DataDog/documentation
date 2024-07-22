@@ -200,13 +200,59 @@ This data is also available in dashboards and notebooks, enabling precise querie
 NetFlow's sampling rate is taken into account in the computation of bytes and packets by default. The displayed values for bytes and packets are computed with the sampling rate applied.
 Additionally, you can query for **Bytes (Adjusted) (@adjusted_bytes)** and **Packets (Adjusted) (@adjusted_packets)** in dashboards and notebooks to visualize them.
 
-To visualize the real data sent by your devices, you can query for **Bytes (Sampled) (@bytes)** and **Packets (Sampled) (@packets)** in dashboards and notebooks.
+To visualize the raw bytes/packets (sampled) sent by your devices, you can query for **Bytes (Sampled) (@bytes)** and **Packets (Sampled) (@packets)** in dashboards and notebooks.
 
 ## Retention
 
-NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention. 
+NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention.
 
 <div class="alert alert-danger">To retain NetFlow data for longer periods of time, contact your account representative.</div>
+
+## Troubleshooting
+
+### NetFlow packet drops
+NetFlow packet drops can occur when there are a high number of NetFlow packets per second, typically greater than 50,000. The following steps can help identify and mitigate NetFlow packet drops:
+
+#### Identifying packet drops
+
+Use the `netstat -s` command to see if there are any dropped UDP packets:
+
+```bash
+    netstat -s
+  ```
+
+#### Mitigation steps
+1. Increase the Number of NetFlow Listeners
+
+  Increase the number of NetFlow listeners by using a configuration similar to the following:
+  Datadog recommends setting the number of workers to match the number of CPU cores in your system:
+
+```yaml
+      netflow:
+        enabled: true
+        listeners:
+          - flow_type: netflow9
+            port: 2055
+            workers: 4 # 4 CPUs
+```
+
+2. Increase UDP Queue Length (Linux only)
+
+  Adjusting your system's UDP queue length can help accommodate the higher volume of NetFlow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
+
+```bash
+    sudo sysctl -w net.core.rmem_max=26214400
+    sudo sysctl -w net.core.rmem_default=26214400
+```
+
+3. Persisting the configuration (Linux only)
+
+  To make these changes permanent, add the following lines to your `/etc/sysctl.conf` file:
+
+```bash
+    net.core.rmem_max=26214400
+    net.core.rmem_default=26214400
+```
 
 ## Further Reading
 

@@ -47,18 +47,50 @@ To opt in, Datadog recommends you adjust your:
 
 ### Datadog Agent configuration
 
-Requirements:
-- Datadog Agent version >= [7.50.3][4].
+#### Datadog Agent 7.55.1 and higher
 
-Set the following environment variables in your Datadog Agent launch configuration:
+From Datadog Agent version >= [7.55.1][9], update your `datadog.yaml` configuration file with the following:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
+
+apm_config:
+  compute_stats_by_span_kind: true
+  peer_tags_aggregation: true
+
+{{< /code-block >}}
+
+Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+
+{{< code-block collapsible="true" lang="yaml" >}}
+
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_PEER_TAGS_AGGREGATION=true
+
+{{< /code-block >}}
+
+#### Datadog Agent version between 7.50.3 and 7.54.1
+
+If you use a Datadog Agent version >= [7.50.3][4] and <= 7.54.1, update your `datadog.yaml` configuration file with the following:
+
+{{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
+
+apm_config:
+  compute_stats_by_span_kind: true
+  peer_tags_aggregation: true
+  peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+
+{{< /code-block >}}
+
+Alternatively, configure this by setting the following environment variables in your Datadog Agent launch configuration:
+
+{{< code-block collapsible="true" lang="yaml" >}}
 
 DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
 DD_APM_PEER_TAGS_AGGREGATION=true
 DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
 
 {{< /code-block >}}
+
 
 #### Helm 
 Include the same set of environment variables in your `values.yaml` [file][8].
@@ -250,3 +282,4 @@ And these target similar service names, update those items to use the global def
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
 [8]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L517-L538 
+[9]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1

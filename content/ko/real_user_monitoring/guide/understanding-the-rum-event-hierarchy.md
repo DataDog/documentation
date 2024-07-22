@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: 설명서
   text: RUM 데이터 가시화에 대해 알아보기
-kind: 가이드
 title: RUM 이벤트 계층 이해
 ---
 

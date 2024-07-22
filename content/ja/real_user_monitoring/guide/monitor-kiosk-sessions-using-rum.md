@@ -4,7 +4,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: ドキュメント
   text: RUM ダッシュボード
-kind: ガイド
 title: RUM を使用したキオスクセッションの監視
 ---
 

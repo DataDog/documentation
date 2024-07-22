@@ -34,7 +34,7 @@ integration_id: ambassador
 integration_title: Ambassador API Gateway
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ambassador
 public_title: Ambassador API Gateway

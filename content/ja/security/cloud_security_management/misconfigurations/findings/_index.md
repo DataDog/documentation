@@ -11,7 +11,6 @@ further_reading:
 - link: security/cspm/frameworks_and_benchmarks
   tag: ドキュメント
   text: フレームワークおよび業界のベンチマークの詳細
-kind: ドキュメント
 title: 誤構成を探索する
 ---
 

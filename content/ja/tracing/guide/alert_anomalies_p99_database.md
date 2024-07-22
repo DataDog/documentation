@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: データベースサービスの異常な p99 レイテンシーに関するアラート
 ---
 

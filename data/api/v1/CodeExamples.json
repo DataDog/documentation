@@ -748,14 +748,12 @@
       "description": "Create a global variable from test returns \"OK\" response"
     }
   ],
-  "CreatePrivateLocation": [
+  "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
-      "suffix": "",
-      "description": "Create a private location returns \"OK\" response"
-    }
-  ],
-  "CreateSyntheticsAPITest": [
+      "suffix": "_1717840259",
+      "description": "Create a multi-step api test with every type of basicAuth returns \"OK - Returns the created test details.\" response"
+    },
     {
       "group": "synthetics",
       "suffix": "_1402674167",
@@ -800,6 +798,13 @@
       "group": "synthetics",
       "suffix": "_1279271422",
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
+    }
+  ],
+  "CreatePrivateLocation": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a private location returns \"OK\" response"
     }
   ],
   "UpdateAPITest": [
