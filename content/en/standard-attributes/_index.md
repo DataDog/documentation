@@ -1510,6 +1510,7 @@ attributes:
     description: The version of HTTP used for the request.
     product_source:
       - icon-apm
+      - icon-log
     type: string
     domain: HTTP requests
   - name: http.method
