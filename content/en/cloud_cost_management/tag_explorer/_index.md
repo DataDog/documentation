@@ -1,6 +1,5 @@
 ---
 title: Tag Explorer
-kind: documentation
 description: Search and manage all cost-related tags, including those from your bills, with insights into their sources.
 further_reading:
 - link: "/cloud_cost_management/"
@@ -84,7 +83,7 @@ For Confluent Cloud tags, select **Confluent Cloud** from the dropdown menu on t
 {{% /tab %}}
 {{% tab "Databricks" %}}
 
-<div class="alert alert-warning">Databricks costs are in private beta.</div>
+<div class="alert alert-warning">Databricks costs are in public beta.</div>
 
 For Databricks tags, select **Databricks** from the dropdown menu on the top right corner.
 
@@ -102,7 +101,7 @@ For Fastly tags, select **Fastly** from the dropdown menu on the top right corne
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">MongoDB costs are in private beta.</div>
+<div class="alert alert-warning">MongoDB costs are in public beta.</div>
 
 For MongoDB tags, select **MongoDB** from the dropdown menu on the top right corner.
 
