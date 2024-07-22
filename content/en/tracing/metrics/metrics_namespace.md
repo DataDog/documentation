@@ -73,7 +73,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the latency distribution for all services, resources, and versions across different environments and second primary tags.<br>
 **Metric type:** [DISTRIBUTION][6].<br>
-**Tags:** `env`, `service`, `resource`, `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
+**Tags:** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [the second primary tag][4].
 
 ### Errors
 
@@ -95,7 +95,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any HTTP or web-based APM service.<br>
 **Description:** Measures the [Apdex][10] score for each web service.<br>
 **Metric type:** [GAUGE][7].<br>
-**Tags:** `env`, `service`, `resource` / `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource` / `resource_name`, `synthetics`, and [the second primary tag][4].
 
 ### Duration
 

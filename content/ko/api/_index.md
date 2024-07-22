@@ -4,17 +4,20 @@ algolia:
   - api
 cascade:
 - _target:
-    path: /api/latest/downtimes/_index.md
+    path: /api/latest/downtimes
+    lang: ko
   aliases:
-  - /api/latest/downtimes/s
+  - /ko/api/latest/downtimes/s
 - _target:
-    path: /api/latest/ci-visibility-pipelines/_index.md
+    path: /api/latest/ci-visibility-pipelines
+    lang: ko
   aliases:
-  - /api/latest/ci-visibility
+  - /ko/api/latest/ci-visibility
 - _target:
-    path: /api/latest/dashboards/_index.md
+    path: /api/latest/dashboards
+    lang: ko
   aliases:
-  - /api/screenboards/
+  - /ko/api/screenboards/
 external_redirect: /api/latest/
 title: API 참조
 type: api

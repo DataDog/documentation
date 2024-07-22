@@ -12,6 +12,8 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
+algolia:
+  tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 ---
 
 {{% site-region region="gov" %}}
