@@ -56,7 +56,7 @@ Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and clic
 {{< tabs >}}
 {{% tab "Databricks" %}}
 
-<div class="alert alert-warning">The Databricks SaaS Cost integration is in private beta.</div>
+<div class="alert alert-warning">The Databricks SaaS Cost integration is in public beta.</div>
 
 1. Navigate to the [Databricks integration tile][101] in Datadog and click **Add Account**.
 2. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
@@ -89,7 +89,7 @@ Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud C
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">The MongoDB SaaS Cost integration is in private beta.</div>
+<div class="alert alert-warning">The MongoDB SaaS Cost integration is in public beta.</div>
 
 1. [Create an API token][101] in MongoDB with `Organization Member` permissions, and add `Organization Read Only` permissions for cluster resource tags.
 2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
@@ -196,7 +196,7 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-<div class="alert alert-warning">The Twilio SaaS Cost integration is in private beta.</div>
+<div class="alert alert-warning">The Twilio SaaS Cost integration is in public beta.</div>
 
 1. Navigate to the [Twilio integration tile][101] in Datadog and click **Add Account**.
 2. Under the **Resources** section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.
