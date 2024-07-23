@@ -2321,6 +2321,14 @@ components:
             $ref: '#/components/schemas/EmbeddableGraph'
           type: array
       type: object
+    EnableEmbeddableGraphResponseSchema:
+      description: A JSON object containing the success message
+      properties:
+        success:
+          description: Message.
+          example: Embed 00000000000 successfully enabled.
+          type: string
+      type: object
     Event:
       description: Object representing an event.
       properties:
@@ -2966,6 +2974,7 @@ components:
       - events
       - ci_tests
       - ci_pipelines
+      - incident_analytics
       example: logs
       type: string
       x-enum-varnames:
@@ -2979,6 +2988,7 @@ components:
       - EVENTS
       - CI_TESTS
       - CI_PIPELINES
+      - INCIDENT_ANALYTICS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -3186,10 +3196,12 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
       enum:
@@ -4870,6 +4882,7 @@ components:
       - logs_pattern_stream
       - logs_transaction_stream
       - event_stream
+      - rum_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4884,6 +4897,7 @@ components:
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
+      - RUM_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -6953,7 +6967,7 @@ components:
       - logs
       - spans
       - database_queries
-      - network_performance_queries
+      - network
       example: rum
       type: string
       x-enum-varnames:
@@ -6965,7 +6979,7 @@ components:
       - LOGS
       - SPANS
       - DATABASE_QUERIES
-      - NETWORK_PERFORMANCE_QUERIES
+      - NETWORK
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -14295,6 +14309,7 @@ components:
       required:
       - password
       - username
+      - type
       type: object
     SyntheticsBasicAuthDigestType:
       default: digest
@@ -14378,6 +14393,7 @@ components:
       - tokenApiAuthentication
       - clientId
       - clientSecret
+      - type
       type: object
     SyntheticsBasicAuthOauthClientType:
       default: oauth-client
@@ -14433,6 +14449,7 @@ components:
       - password
       - tokenApiAuthentication
       - username
+      - type
       type: object
     SyntheticsBasicAuthOauthROPType:
       default: oauth-rop
@@ -16144,6 +16161,14 @@ components:
         disableCsp:
           description: Disable Content Security Policy for browser tests.
           type: boolean
+        enableProfiling:
+          description: Enable profiling for browser tests.
+          type: boolean
+        enableSecurityTesting:
+          deprecated: true
+          description: Enable security testing for browser tests. Security testing
+            is not available anymore. This field is deprecated and won't be used.
+          type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
@@ -17487,6 +17512,12 @@ components:
     UsageBillableSummaryHour:
       description: Response with monthly summary of data billed by Datadog.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         billing_plan:
           description: The billing plan.
           type: string
@@ -19543,6 +19574,12 @@ components:
       description: Global hourly report of all data billed by Datadog for a given
         organization.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public id.
+          type: string
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours
             in the current date for the given org.
@@ -24607,10 +24644,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all embeds
       tags:
       - Embeddable Graphs
@@ -24699,10 +24732,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get specific embed
       tags:
       - Embeddable Graphs
@@ -24725,13 +24754,7 @@ paths:
           content:
             application/json:
               schema:
-                description: A JSON containing the success message
-                properties:
-                  success:
-                    description: Message.
-                    example: Embed 00000000000 successfully enabled.
-                    type: string
-                type: object
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -24769,13 +24792,7 @@ paths:
           content:
             application/json:
               schema:
-                description: A JSON containing the success message
-                properties:
-                  success:
-                    description: Message.
-                    example: Embed 0000000000000 successfully revoked.
-                    type: string
-                type: object
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -25009,7 +25026,9 @@ paths:
         required: false
         schema:
           type: string
-      - description: Host result to start search from.
+      - description: Specify the starting point for the host search results. For example,
+          if you set `count` to 100 and the first 100 results have already been returned,
+          you can set `start` to `101` to get the next 100 results.
         in: query
         name: start
         required: false
@@ -25839,10 +25858,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Check that an AWS Lambda Function exists
       tags:
       - AWS Logs Integration
@@ -28114,8 +28129,6 @@ paths:
         - composite: `composite`
 
         - custom: `service check`
-
-        - event: `event alert`
 
         - forecast: `query alert`
 
@@ -33491,6 +33504,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -35120,6 +35142,15 @@ paths:
         name: include_org_details
         required: false
         schema:
+          type: boolean
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
           type: boolean
       responses:
         '200':
