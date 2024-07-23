@@ -430,7 +430,7 @@ This GitHub Action allows you to register your services with the Service Catalog
 
 ## IDE Plugins
 
-Datadog provides a [JSON Schema][17] for service definitions so that when you are editing a service definition in a [supporting IDE][18], features such as autocomplete and validation are provided. The [JSON schema for Datadog service definitions][19] is registered with the open source [Schema Store][18].
+Datadog provides a [JSON Schema][17] for service definitions so you can use features like autocomplete and validation when editing a service definition in a [supported IDE][18]. The [JSON Schema for Datadog service definitions][19] is registered with the open source [Schema Store][18].
 
 The plugin supports the new v3.0 schema and includes information that will tell your IDEs which filenames it applies to—specifically, the files entity.datadog.yaml, entity.datadog.yml, and entity.datadog.json to quickly and accurately complete your entity definition file without referencing documentation. In the example below, the IDE automatically creates keys as you fill out the entity definition.
 
