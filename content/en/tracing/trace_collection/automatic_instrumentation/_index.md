@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Automatic instrumentation allows you to create spans automatically for your application. It allows you to capture observability data from a wide range of standard operations and popular frameworks with minimal manual intervention. You can automatically instrument your application when you install the Datadog Agent with [Single Step Instrumentation][5] or when you [manually add Datadog tracing libraries][6] to your code.
+Automatic instrumentation allows you to create spans automatically for your application. It allows you to capture observability data from a wide range of standard operations and popular frameworks with minimal manual intervention. You can automatically instrument your application when you install the Datadog Agent with [Single Step Instrumentation][5] or when you [manually add APM SDKs][6] to your code.
 
 ## Use cases
 
@@ -35,12 +35,12 @@ To get started, read the [Single Step Instrumentation][1] documentation.
 
 {{% /tab %}}
 
-{{% tab "Datadog libraries" %}}
+{{% tab "Datadog SDKs" %}}
 
 To automatically instrument your application with Datadog libraries:
 
 1. [Install and configure the Agent](#install-and-configure-the-agent).
-2. [Add the Datadog tracing library to your code](#instrument-your-application).
+2. [Add the APM SDK to your code](#instrument-your-application).
 
 ### Install and configure the Agent
 
@@ -87,7 +87,7 @@ For other environments, see the [Integrations][14] documentation for that enviro
 
 ### Instrument your application
 
-Set up your application to send traces using one of the following official Datadog tracing libraries:
+Set up your application to send traces using one of the following official APM SDKs:
 
 {{< partial name="apm/apm-languages.html" >}}
 

@@ -1,5 +1,5 @@
 ---
-title: Add the Datadog Tracing Library
+title: Add the APM SDK
 type: multi-code-lang
 aliases:
     - /tracing/languages
@@ -8,7 +8,7 @@ aliases:
     - /tracing/trace_collection/dd_libraries/
 ---
 
-Set up your application to send [traces][1] using one of the following official Datadog tracing libraries:
+Set up your application to send [traces][1] using one of the following official APM SDKs:
 
 {{< partial name="apm/apm-compatibility.html" >}}
 
