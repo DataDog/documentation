@@ -127,3 +127,4 @@ The following standard integrations can potentially emit custom metrics.
 [26]: /integrations/postgres/
 [27]: /integrations/sqlserver/
 [28]: /integrations/amazon_web_services/
+git 
