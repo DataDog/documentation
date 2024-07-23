@@ -35,9 +35,9 @@ Custom metrics help you track your application KPIs: number of visitors, average
 
 The following are also considered custom metrics:
 - In general, any metric submitted through [DogStatsD][3] or through a [custom Agent Check][4]
-- Metrics that are not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1]
-- Metrics submitted by Marketplace integrations
+- Metrics submitted by [Marketplace integrations][29]
 - Certain [standard integrations](#standard-integrations) can potentially emit custom metrics
+- Metrics submitted from an integration that is not one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1]. **Note**: Marketplace integrations emit custom metrics.
 
 **Note**: Users with the Datadog Admin role or `usage_read` permission can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
 
@@ -131,3 +131,4 @@ The following standard integrations can potentially emit custom metrics.
 [26]: /integrations/postgres/
 [27]: /integrations/sqlserver/
 [28]: /integrations/amazon_web_services/
+[29]: /integrations/#cat-marketplace
