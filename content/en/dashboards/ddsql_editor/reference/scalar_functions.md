@@ -44,7 +44,7 @@ These functions return one value per row.
 | array_append(array *a*, expr *e*) | array | Returns a new array that includes all the original elements of the input array followed by the appended element. |
 | string_to_array(text *s*, delimiter, [,nullString]) | array | Returns an array of substrings obtained by splitting the input string *s*, using the specified delimiter. The third argument, nullString, is optional and specifies substrings that are replaced with `NULL`. |
 | array_to_string(array *a*, delimiter, [,nullString]) | string | Concatenates array elements using supplied delimiter and optional null string. |
-| unnest(array *a*) | variable | Returns each element in the array <strong>as a separate row</strong>. The return type is the element type of the array.<br>`unnest` can only be used in the `SELECT` clause of a query. If other columns are `SELECT`ed with unnest, the value at each row in the table is repeated at each "output" row with each unnested elements. If multiple columns are being unnested, all the unnested columns are  "zipped up" together, with `NULL` filling in the "output" values for shorter arrays. |
+| unnest(array *a*) | variable | Returns each element in the array <strong>as a separate row</strong>. The return type is the element type of the array.<br>`unnest` can only be used in the `SELECT` clause of a query. If other columns are `SELECT`ed with unnest, the value at each row in the table is repeated at each "output" row with each unnested elements. If multiple columns are being unnested, all the unnested columns are "zipped up" together, with `NULL` filling in the "output" values for shorter arrays. |
 
 ## Date/time functions and operators
 
