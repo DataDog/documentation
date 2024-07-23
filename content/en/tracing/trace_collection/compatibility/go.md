@@ -1,6 +1,6 @@
 ---
 title: Go Compatibility Requirements
-description: 'Compatibility Requirements for the Go tracer'
+description: 'Compatibility Requirements for the Go APM SDK'
 aliases:
   - /tracing/compatibility_requirements/go
   - /tracing/setup_overview/compatibility_requirements/go
@@ -17,18 +17,18 @@ further_reading:
 
 The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.
 
-The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][3]. Older versions may function, but no support is provided by default. For special requests, [contact support][4]. 
+The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][3]. Older versions may function, but no support is provided by default. For special requests, [contact support][4].
 
 ### Requirements
 
 - Datadog Agent v5.21.1+.
-- [Add and initialize the Datadog Go tracer][77] before configuring integrations.
+- [Add and initialize the Datadog Go APM SDK][77] before configuring integrations.
 
 ### Integrations
 
 #### Framework compatibility
 
-Integrate the Go tracer with the following list of web frameworks using one of the following helper packages.
+Integrate the Go APM SDK with the following list of web frameworks using one of the following helper packages.
 
 **Note**: The [integrations documentation][5] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
@@ -45,7 +45,7 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 
 #### Library compatibility
 
-The Go tracer includes support for the following data stores and libraries.
+The Go APM SDK includes support for the following data stores and libraries.
 
 | Library                 | Support Type    | Examples and Documentation                                                      |
 |-------------------------|-----------------|---------------------------------------------------------------------------------|
