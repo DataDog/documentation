@@ -19,7 +19,7 @@ further_reading:
 {{% otel-custom-instrumentation-lang %}}
 
 ## Imports
- 
+
 Import the following packages to setup the Datadog trace provider and use cases demonstrated below:
 
 ```go
@@ -76,7 +76,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
    ```go
    otel.SetTracerProvider(provider)
    ```
-   
+
 7. Run your application.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
@@ -96,10 +96,10 @@ span.SetAttributes(attribute.String(ext.ResourceName, "test.json"))
 
 ### Adding tags globally to all spans
 
-Add tags to all spans by configuring the tracer with the `WithGlobalTag` option:
+Add tags to all spans by configuring the APM SDK with the `WithGlobalTag` option:
 
 ```go
-// Here we can leverage the Datadog tracer options by passing them into the 
+// Here we can leverage the Datadog tracer options by passing them into the
 // NewTracerProvider function.
 provider := ddotel.NewTracerProvider(
 	ddtracer.WithGlobalTag("datacenter", "us-1"),
@@ -126,7 +126,7 @@ ctx, span := t.Start(context.Background(), "span_name")
 // Set an error on a span with 'span.SetAttributes'.
 span.SetAttributes(attribute.String(ext.ErrorMsg, "error_message"))
 
-// ALternatively, it is possible to set an error on a span via end span options. 
+// ALternatively, it is possible to set an error on a span via end span options.
 EndOptions(sp, tracer.WithError(errors.New("persisted_option")))
 sp.End()
 

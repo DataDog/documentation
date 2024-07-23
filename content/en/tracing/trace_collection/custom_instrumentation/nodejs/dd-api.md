@@ -72,7 +72,7 @@ span.addTags({
 
 {{% tab "Globally" %}}
 
-You can add tags to every span by configuring them directly on the tracer, either with with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
+You can add tags to every span by configuring them directly on the APM SDK, either with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
 
 ```javascript
 // equivalent to DD_TAGS=foo:bar,baz:qux

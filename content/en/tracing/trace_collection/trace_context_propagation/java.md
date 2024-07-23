@@ -13,11 +13,11 @@ further_reading:
 ---
 
 
-The Datadog APM Tracer supports [B3][13] and [W3C Trace Context][14] header extraction and injection for distributed tracing.
+The Datadog APM SDK supports [B3][13] and [W3C Trace Context][14] header extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
-The Java Tracer supports the following styles:
+The Java APM SDK supports the following styles:
 
 - Datadog: `datadog`
 - B3 Multi Header: `b3multi` (`b3` alias is deprecated)
@@ -40,7 +40,7 @@ The value of the property or environment variable is a comma (or space) separate
 
 When multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured, using the first successful extracted value. If later valid trace contexts are found, they are terminated and appended as span links. Moreover, if the `tracecontext` style is enabled, W3C Tracestate is propagated if W3C Traceparent matches the extracted context.
 
-For reference details about the context propagation settings and other configuration, read [Java Tracing Library Configuration][1].
+For reference details about the context propagation settings and other configuration, read [Java APM SDK Configuration][1].
 
 ## Further Reading
 

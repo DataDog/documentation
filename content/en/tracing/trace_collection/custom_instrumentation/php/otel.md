@@ -26,9 +26,9 @@ To configure OpenTelemetry to use the Datadog trace provider:
   ```php
   composer require open-telemetry/sdk
   ```
-2. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][5]. 
+2. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][5].
 
-3. Install the [Datadog PHP tracing library][6].
+3. Install the [Datadog PHP APM SDK][6].
 
 4. Set `DD_TRACE_OTEL_ENABLED` to `true`.
 
@@ -63,7 +63,7 @@ $span = $tracer->spanBuilder('mySpan')->startSpan();
 
 throw new \Exception('Oops!');
 
-// 'mySpan' will be flagged as erroneous and have 
+// 'mySpan' will be flagged as erroneous and have
 // the stack trace and exception message attached as tags
 ```
 

@@ -27,7 +27,7 @@ This page details describes use cases for adding and customizing observability w
 
 ## Requirements
 
-Make sure you require the appropriate gem for your [Ruby tracer version][8]:
+Make sure you require the appropriate gem for your [Ruby APM SDK version][8]:
 
 - For v2.x, require the `datadog` gem:
   ```ruby
@@ -49,7 +49,7 @@ Add custom tags to your spans corresponding to any dynamic value within your app
 
 #### Active spans
 
-Access the current active [span][1] from any method within your code. 
+Access the current active [span][1] from any method within your code.
 
 **Note**: If the method is called and there is no active span, `active_span` is `nil`.
 
@@ -91,7 +91,7 @@ end
 
 ### Adding tags globally to all spans
 
-Add [tags][1] to all [spans][2] by configuring the tracer with the `tags` option:
+Add [tags][1] to all [spans][2] by configuring the APM SDK with the `tags` option:
 
 ```ruby
 Datadog.configure do |c|
@@ -259,7 +259,7 @@ Datadog::Tracing.before_flush do |trace|
   trace.spans.each do |span|
     originalPrice = span.get_tag('order.price'))
     discount = span.get_tag('order.discount'))
-    
+
     # Set a tag from a calculation from other tags
     if (originalPrice != nil && discount != nil)
       span.set_tag('order.value', originalPrice - discount)

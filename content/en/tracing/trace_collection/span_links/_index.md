@@ -19,7 +19,7 @@ further_reading:
 Span links are an [OpenTelemetry concept][5] and a part of the [OpenTelemetry Tracing API][2]. Datadog supports span links for:
 
 - Applications instrumented with [OpenTelemetry SDKs][6].
-- Applications instrumented with Datadog client libraries using the OpenTelemetry API.  
+- Applications instrumented with Datadog client libraries using the OpenTelemetry API.
   **Note**: This beta release only supports the [PHP client library][1].
 
 Span links correlate one or more spans together that are causally related but don't have a typical parent-child relationship. These links may correlate spans within the same trace or across different traces.
@@ -53,7 +53,7 @@ If your application is instrumented with:
 
 Agent v7.52.0 or greater is required to generate span links using [Datadog tracing libraries][7]. Support for span links was introduced in the following releases:
 
-| Language  | Minimum tracing library version |
+| Language  | Minimum APM SDK version         |
 |-----------|---------------------------------|
 | C++/Proxy | Not yet supported               |
 | Go        | 1.61.0                          |

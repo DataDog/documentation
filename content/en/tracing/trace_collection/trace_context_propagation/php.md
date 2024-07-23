@@ -12,27 +12,27 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-The Datadog APM Tracer supports [B3][7] and [W3C Trace Context][10] headers extraction and injection for distributed tracing.
+The Datadog APM SDK supports [B3][7] and [W3C Trace Context][10] headers extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
-The PHP Tracer supports the following styles:
+The PHP APM SDK supports the following styles:
 
 - Datadog: `datadog`
 - W3C Trace Context: `tracecontext`
 - B3 Multi Header: `b3multi` (`B3` alias is deprecated)
 - B3 Single Header: `B3 single header`
 
-You can use the following environment variables to configure the PHP tracing library injection and extraction styles. For instance:
+You can use the following environment variables to configure the PHP APM SDK injection and extraction styles. For instance:
 
 - `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,tracecontext,B3 single header`
 - `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,tracecontext,B3 single header`
 
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `datadog,tracecontext` (for PHP tracer versions prior to v0.98.0, the default setting is `tracecontext,Datadog`).
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `datadog,tracecontext` (for PHP APM SDK versions prior to v0.98.0, the default setting is `tracecontext,Datadog`).
 
 If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-When a new PHP script is launched, the tracer automatically checks for the presence of Datadog headers for distributed tracing:
+When a new PHP script is launched, the APM SDK automatically checks for the presence of Datadog headers for distributed tracing:
 - `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
 - `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
 - `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
@@ -76,7 +76,7 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 
 ## RabbitMQ
 
-Although the PHP tracer supports automatic tracing of the `php-amqplib/php-amqplib` library starting with version **0.87.0**, there are some known cases where your distributed trace can be disconnected. Most notably, when reading messages from a distributed queue using the `basic_get` method while not already in a trace, you would need to add a custom trace surrounding a `basic_get` call and the corresponding message processing.
+Although the PHP APM SDK supports automatic tracing of the `php-amqplib/php-amqplib` library starting with version **0.87.0**, there are some known cases where your distributed trace can be disconnected. Most notably, when reading messages from a distributed queue using the `basic_get` method while not already in a trace, you would need to add a custom trace surrounding a `basic_get` call and the corresponding message processing.
 
 Here is an example:
 

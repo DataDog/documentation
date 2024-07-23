@@ -1,5 +1,5 @@
 ---
-title: Configuring the PHP Tracing Library
+title: Configuring the PHP APM SDK
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -24,9 +24,9 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the APM SDK with your code and configure the Agent to collect APM data, optionally configure the APM SDK as desired, including setting up [Unified Service Tagging][1].
 
-The PHP tracer can be configured using environment variables and INI settings.
+The PHP APM SDK can be configured using environment variables and INI settings.
 
 INI settings can be configured globally, for example, in the `php.ini` file, or for a specific web server or virtual host.
 
@@ -34,7 +34,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ### Apache
 
-For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP APM SDK, for example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -97,7 +97,7 @@ The Agent host name.
 `DD_AUTOFINISH_SPANS`
 : **INI**: `datadog.autofinish_spans`<br>
 **Default**: `0`<br>
-Whether spans are automatically finished when the tracer is flushed.
+Whether spans are automatically finished when the APM SDK is flushed.
 
 `DD_DISTRIBUTED_TRACING`
 : **INI**: `datadog.distributed_tracing`<br>
@@ -190,7 +190,7 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_generation_enabled`<br>
 **Default**: `true`<br>
-When true, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+When true, the APM SDK generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
 
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
@@ -202,7 +202,7 @@ When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal for
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
 **Default**: `false`<br>
-When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the tracer sends uncaught exception metrics upon segfaults.
+When enabled, the APM SDK sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the APM SDK sends uncaught exception metrics upon segfaults.
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **INI**: `datadog.trace.agent_connect_timeout`<br>
@@ -237,7 +237,7 @@ The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
-Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
+Automatically flush the APM SDK when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
@@ -267,7 +267,7 @@ Indicates whether to trace a forked process. Set to `1` to trace forked processe
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
 **Default**: `1`<br>
-Enable the tracer globally.
+Enable the APM SDK globally.
 
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
@@ -473,7 +473,7 @@ A comma-separated list of WordPress action hooks to be instrumented. This featur
 
 `DD_TRACE_WORDPRESS_CALLBACKS`
 : **INI**: `datadog.trace.wordpress_callbacks`<br>
-**Default**: `true` for PHP tracer >= v1.0<br>
+**Default**: `true` for PHP APM SDK >= v1.0<br>
 Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
 
 `DD_DBM_PROPAGATION_MODE`
@@ -590,7 +590,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ### Headers extraction and injection
 
-Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
+Read [Trace Context Propagation][11] for information about configuring the PHP APM SDK to extract and inject headers for propagating distributed trace context.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

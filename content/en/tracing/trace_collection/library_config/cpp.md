@@ -20,7 +20,7 @@ After you set up the tracing library with your code and configure the Agent to c
 It is recommended to use `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` to set `env`, `service` and `version` for your services. Refer to the [Unified Service Tagging][1] docummentation recommendations on which value to set for environment variables.
 
 ## Environment variables
-To configure the tracer using environment variables, set the variables before launching the instrumented application.
+To configure the APM SDK using environment variables, set the variables before launching the instrumented application.
 
 `DD_SERVICE`
 : **Since**: v0.1.0 <br>
@@ -121,13 +121,13 @@ Adds the `hostname` tag with the result of `gethostname`.
 `DD_TRACE_STARTUP_LOGS`
 : **Since**: 0.1.0 <br>
 **Default**: `true` <br>
-Log the tracer configuration once the tracer is fully initialized. <br>
+Log the APM SDK configuration once the SDK is fully initialized. <br>
 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **Since**: 0.1.6 <br>
 **Default**: `true` <br>
-If `true`, the tracer will generate 128-bit trace IDs. <br>
-If `false`, the tracer will generate legacy 64-bit trace IDs.
+If `true`, the APM SDK generates 128-bit trace IDs. <br>
+If `false`, the APM SDK generates legacy 64-bit trace IDs.
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Since**: 0.1.12 <br>
@@ -137,7 +137,7 @@ Datadog may collect [environmental and diagnostic information about your system]
 `DD_REMOTE_CONFIGURATION_ENABLED`
 : **Since**: 0.2.0 <br>
 **Default**: `true` <br>
-Enable the capability that allows to remotely configure and change the behavior of the tracer. <br>
+Enable the capability that allows to remotely configure and change the behavior of the APM SDK. <br>
 When `false` this feature is disabled. <br>
 For more information, see [Remote Configuration][5].
 

@@ -28,7 +28,7 @@ further_reading:
 </div>
 
 ## Compatibility requirements
-The C++ tracing library requires C++17 toolchain to build. For a full list of Datadog's tracing library compatiblity requirements and processor architecture support, visit the [Compatibility Requirements][3] page.
+The C++ APM SDK requires C++17 toolchain to build. For a full list of Datadog's APM SDK compatiblity requirements and processor architecture support, visit the [Compatibility Requirements][3] page.
 
 ## Getting started
 Before you begin, make sure you have already [installed and configured the Agent][6].
@@ -192,7 +192,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
+If needed, configure the APM SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
 
 ## Further Reading
 

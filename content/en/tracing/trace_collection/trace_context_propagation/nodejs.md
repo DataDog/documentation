@@ -12,11 +12,11 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-The Datadog APM Tracer supports [B3][5] and [W3C Trace Context][6] header extraction and injection for distributed tracing.
+The Datadog APM SDK supports [B3][5] and [W3C Trace Context][6] header extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
-The Node.js Tracer supports the following styles:
+The Node.js SDK supports the following styles:
 
 - Datadog: `datadog`
 - B3 Multi Header: `b3multi` (`B3` alias is deprecated)
@@ -25,7 +25,7 @@ The Node.js Tracer supports the following styles:
 
 The default setting for both injection and extraction style is `datadog,tracecontext`.
 
-For more information about the context propagation settings, read [Node.js Tracing Library Configuration][1].
+For more information about the context propagation settings, read [Node.js APM SDK Configuration][1].
 
 ## Further Reading
 

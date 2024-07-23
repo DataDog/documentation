@@ -285,8 +285,8 @@ To configure your sampling rate with `DD_TRACE_SAMPLING_RULES`, use one of the f
   <strong>Note:</strong> The variables <code>DD_AGENT_HOST</code>, <code>DD_TRACE_AGENT_PORT</code> and <code>DD_TRACE_AGENT_URL</code> do not apply to Envoy, as the address of the Datadog Agent is configured using the <code>cluster</code> settings.
 </div>
 
-The available [environment variables][2] depend on the version of the C++ tracer embedded in Envoy.
-The version of the C++ tracer can be found in the logs, indicated by the line starting with "DATADOG TRACER CONFIGURATION".
+The available [environment variables][2] depend on the version of the C++ APM SDK embedded in Envoy.
+The version of the C++ APM SDK can be found in the logs, indicated by the line starting with "DATADOG TRACER CONFIGURATION".
 
 [1]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [2]: /tracing/setup/cpp/#environment-variables

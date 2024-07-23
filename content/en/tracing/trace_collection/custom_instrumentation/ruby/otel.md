@@ -28,8 +28,8 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                               | Support notes                       |
 |---------------------------------------|--------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [Datadog and W3C Trace Context header formats][9] are enabled by default. | 
-| [Span processors][2]                  | Unsupported                                          | 
+| [OpenTelemetry Context propagation][1]         | [Datadog and W3C Trace Context header formats][9] are enabled by default. |
+| [Span processors][2]                  | Unsupported                                          |
 | [Span Exporters][3]                   | Unsupported                                            |
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through [custom logging][10]. |
 | Trace/span [ID generators][4]         | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].     |
@@ -54,7 +54,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
     require 'datadog/opentelemetry'
     ```
 
-1. Add a configuration block to your application where you can activate integrations and change tracer settings. Without additional configuration here, only code you have instrumented with OpenTelemetry is traced:
+1. Add a configuration block to your application where you can activate integrations and change APM SDK settings. Without additional configuration here, only code you have instrumented with OpenTelemetry is traced:
 
     ```ruby
     Datadog.configure do |c|

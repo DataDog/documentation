@@ -1,5 +1,5 @@
 ---
-title: Configuring the Java Tracing Library
+title: Configuring the Java APM SDK
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -18,7 +18,7 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the APM SDK with your code and configure the Agent to collect APM data, optionally configure the APM SDK as desired, including setting up [Unified Service Tagging][1].
 
 All configuration options below have system property and environment variable equivalents.
 If the same key type is set for both, the system property configuration takes priority.
@@ -32,7 +32,7 @@ Unless otherwise stated, you can convert between system properties and environme
 - To set an environment variable as a system property, lowercase the variable name and replace `_` with `.`
   For example, `DD_TAGS` becomes `dd.tags`.
 
-**Note**: When using the Java tracer's system properties, list the properties before `-jar`. This ensures the properties are read in as JVM options.
+**Note**: When using the Java APM SDK's system properties, list the properties before `-jar`. This ensures the properties are read in as JVM options.
 
 ## Configuration options
 
@@ -154,7 +154,7 @@ List of class/interface and methods to trace. Similar to adding `@Trace`, but wi
 : **Environment Variable**: `DD_TRACE_CLASSES_EXCLUDE`<br>
 **Default**: `null`<br>
 **Example**: `package.ClassName,package.ClassName$Nested,package.Foo*,package.other.*`<br>
-A list of fully qualified classes (that may end with a wildcard to denote a prefix) which will be ignored (not modified) by the tracer. Must use the jvm internal representation for names (eg package.ClassName$Nested and not package.ClassName.Nested)
+A list of fully qualified classes (that may end with a wildcard to denote a prefix) which will be ignored (not modified) by the APM SDK. Must use the jvm internal representation for names (eg package.ClassName$Nested and not package.ClassName.Nested)
 
 `dd.trace.partial.flush.min.spans`
 : **Environment Variable**: `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`<br>
@@ -190,7 +190,7 @@ When set to `true`, the query string parameters are added to Elasticsearch and O
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
 **Default**: `true`<br>
-When set to `true` sends tracer health metrics
+When set to `true` sends APM SDK health metrics
 
 `dd.trace.health.metrics.statsd.host`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_STATSD_HOST`<br>
@@ -282,7 +282,7 @@ A regex to redact sensitive data from incoming requests' query string reported i
 `dd.integration.opentracing.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
 **Default**: `true`<br>
-By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
+By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers an APM SDK into it. By turning this to false, this removes any APM SDK dependency on OpenTracing.
 
 `dd.hystrix.tags.enabled`
 : **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>
@@ -307,17 +307,17 @@ When `true`, user principal is collected. Available for versions 0.61+.
 `dd.instrumentation.telemetry.enabled`
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+When `true`, the APM SDK collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+When `true`, the APM SDK generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
 
 `dd.trace.128.bit.traceid.logging.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
 **Default**: `false`<br>
-When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
+When `true`, the APM SDK injects 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the APM SDK always injects Trace IDs as decimal numbers.
 
 `dd.trace.otel.enabled`
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
