@@ -104,7 +104,7 @@ You can include all credentials in a single file or store each credential in a s
 
 {{% collapse-content title="Single file example" level="p" %}}
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/creds/jenkins_creds.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, all three credentials are stored in a single file. Replace `USERNAME`, `TOKEN`, and `DOMAIN` with your username, token, and domain.
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
 {
