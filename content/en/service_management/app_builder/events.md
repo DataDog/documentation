@@ -33,10 +33,10 @@ setIsOpen
 : Sets the stat us of a modal to open or closed based on the boolean value that you provide.
 
 setSelectedRow
-: Sets
+: Sets the `selectedRow` property of the table component to the row that you specify.
 
 setPageIndex
-: Sets
+: Sets the `pageIndex` property of the table component to the page that you specify. Works with the server side pagination type.
 
 To see what state functions are available for a given component, see [Components][1].
 
