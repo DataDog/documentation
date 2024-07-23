@@ -32,7 +32,7 @@ The PostgreSQL connection accepts the following credentials:
 | `password` | Yes | The password to use if the server demands password authentication. <br><br>For more information, see [the official PostGreSQL documentation][104]. |
 | `database` | Yes | The database name. For more information, see [the official PostGreSQL documentation][105]. |
 | `sslmode` | Yes | This option determines whether or with what priority a secure SSL TCP/IP connection is negotiated with the server.<br><br>Available options are `require` and `disable`.<br><br>For more information, see [the official PostGreSQL documentation][106]. |
-| `applicationName` | No | The name of the application connecting to the PostGreSQL server For more information, see [the official PostGreSQL documentation][107]. |
+| `applicationName` | No | The name of the application connecting to the PostGreSQL server. For more information, see [the official PostGreSQL documentation][107]. |
 | `searchPath` | No | Set a schema search path. For more information, see [the official PostGreSQL documentation][108]. |
 
 Include all credentials in a single file.
