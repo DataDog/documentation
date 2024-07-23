@@ -25,7 +25,7 @@ further_reading:
 
 ## Compatibility requirements
 
-The Go Tracer requires Go `1.18+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The Go APM SDK requires Go `1.18+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Getting started
 
@@ -37,7 +37,7 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+If needed, configure the APM SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
 For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 
