@@ -218,10 +218,10 @@ function loadPage(newUrl) {
 
             const pathName = new URL(newUrl).pathname;
 
-            document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((item) => {
-                // Replace language dropdown hrefs with new URL when laoding pages asynchronously
-                // ensures the correct path is used for the language dropdown.
-                const newURL = item.href.replace(item.pathname, pathName); 
+            document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((ddItem) => {
+                // Replace language dropdown-item hrefs with newURL when loading pages asynchronously (selecting the left nav menu items)
+                // ensures correct path is used for language dropdown-item.
+                const newURL = ddItem.href.replace(ddItem.pathname, pathName); 
                 item.setAttribute('href', newURL);
             })
 
