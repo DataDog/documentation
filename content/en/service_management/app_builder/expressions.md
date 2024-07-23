@@ -32,7 +32,7 @@ You can view the available properties and values for a component in the followin
 - **Inspect Data**: Provides properties and values for a specific component or query in your app.
 - The **Admin Console**: The **Data** tab of the **Admin Console** provides properties and values for all components and queries in your app.
 
-{{% collapse-content title="App State" level="h3" %}}
+{{% collapse-content title="App State" level="h4" %}}
 To access **App State**:
 1. Click **App Properties** in the left side-panel.
 1. Scroll down to the **App State** section.
@@ -40,7 +40,7 @@ To access **App State**:
 {{< img src="service_management/app_builder/app-state.png" alt="The App State section in App Properties" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inspect Data" level="h3" %}}
+{{% collapse-content title="Inspect Data" level="h4" %}}
 To access **Inspect Data**:
 1. Click on the query or component you want to inspect.
 1. Scroll down to the **Inspect Data** section.
@@ -48,7 +48,7 @@ To access **Inspect Data**:
 {{< img src="service_management/app_builder/inspect-data.png" alt="The App State section in App Properties" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Admin Console" level="h3" %}}
+{{% collapse-content title="Admin Console" level="h4" %}}
 To access the **Admin Console**:
 1. Click on the cog (**Settings**) icon and select **Admin Console**.
 1. Click **Data**.
@@ -78,6 +78,13 @@ For example, if your app has a button that uses the content from a text componen
 The text component is invisible and the button is disabled unless both text input fields have content.
 
 {{< img src="service_management/app_builder/is-disabled.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
+
+You can also disable a component based on the app context, such as the team that the user is on.
+
+For example, you can enable a component only for users who are in the Product Management team:
+1. Click the button component on your canvas.
+1. Click the code editor symbol (**</>**) next to the **Is Disabled** property.
+1. Add the expression `${global.user.teams[0].name == 'Product Management'}`.
 
 ### Disable a component while loading
 
