@@ -4229,10 +4229,10 @@ menu:
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_fluent
       weight: 102
-    - name: HTTP Client
-      url: observability_pipelines/log_volume_control/http_client/
-      parent: observability_pipelines_log_volume_control
-      identifier: observability_pipelines_log_volume_control_http_client
+    # - name: HTTP Client
+    #   url: observability_pipelines/log_volume_control/http_client/
+    #   parent: observability_pipelines_log_volume_control
+    #   identifier: observability_pipelines_log_volume_control_http_client
       weight: 103
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/log_volume_control/splunk_hec/
@@ -4269,10 +4269,10 @@ menu:
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_fluent
       weight: 202
-    - name: HTTP Client
-      url: observability_pipelines/dual_ship_logs/http_client/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_http_client
+    # - name: HTTP Client
+    #   url: observability_pipelines/dual_ship_logs/http_client/
+    #   parent: observability_pipelines_dual_ship_logs
+    #   identifier: observability_pipelines_dual_ship_logs_http_client
       weight: 203
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/dual_ship_logs/splunk_hec/
@@ -4309,10 +4309,10 @@ menu:
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_fluent
       weight: 302
-    - name: HTTP Client
-      url: observability_pipelines/archive_logs/http_client/
-      parent: observability_pipelines_archive_logs
-      identifier: observability_pipelines_archive_logs_http_client
+    # - name: HTTP Client
+    #   url: observability_pipelines/archive_logs/http_client/
+    #   parent: observability_pipelines_archive_logs
+    #   identifier: observability_pipelines_archive_logs_http_client
       weight: 303
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/archive_logs/splunk_hec/
@@ -4349,10 +4349,10 @@ menu:
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_fluent
       weight: 402
-    - name: HTTP Client
-      url: observability_pipelines/split_logs/http_client/
-      parent: observability_pipelines_split_logs
-      identifier: observability_pipelines_split_logs_http_client
+    # - name: HTTP Client
+    #   url: observability_pipelines/split_logs/http_client/
+    #   parent: observability_pipelines_split_logs
+    #   identifier: observability_pipelines_split_logs_http_client
       weight: 403
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/split_logs/splunk_hec/
@@ -4389,10 +4389,10 @@ menu:
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_fluent
       weight: 502
-    - name: HTTP Client
-      url: observability_pipelines/sensitive_data_redaction/http_client/
-      parent: observability_pipelines_sensitive_data_redaction
-      identifier: observability_pipelines_sensitive_data_redaction_http_client
+    # - name: HTTP Client
+    #   url: observability_pipelines/sensitive_data_redaction/http_client/
+    #   parent: observability_pipelines_sensitive_data_redaction
+    #   identifier: observability_pipelines_sensitive_data_redaction_http_client
       weight: 503
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/sensitive_data_redaction/splunk_hec/

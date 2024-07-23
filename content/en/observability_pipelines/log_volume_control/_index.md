@@ -1,6 +1,8 @@
 ---
 title: Log Volume Control
 disable_toc: false
+aliases:
+    - /observability_pipelines/log_volume_control/http_client/
 ---
 
 ## Overview
@@ -18,8 +20,7 @@ As your infrastructure and applications grow, so does your log volume and the co
 Select a log source to get started:
 
 - [Datadog Agent][1]
-- [Fluentd or Fluent Bit][2]
-- [HTTP Client][3]
+- [Fluentd or Fluent Bit][2]<!-- - [HTTP Client][3] -->
 - [Splunk HTTP Event Collector (HEC)][4]
 - [Splunk Heavy and Universal Forwarders (TCP)][5]
 - [Sumo Logic Hosted Collector][6]
@@ -27,7 +28,7 @@ Select a log source to get started:
 
 [1]: /observability_pipelines/log_volume_control/datadog_agent
 [2]: /observability_pipelines/log_volume_control/fluent
-[3]: /observability_pipelines/log_volume_control/http_client
+<!-- [3]: /observability_pipelines/log_volume_control/http_client -->
 [4]: /observability_pipelines/log_volume_control/splunk_hec
 [5]: /observability_pipelines/log_volume_control/splunk_tcp
 [6]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector

@@ -1,6 +1,8 @@
 ---
 title: Sensitive Data Redaction
 disable_toc: false
+aliases:
+    - /observability_pipelines/sensitive_data_redaction/http_client/
 ---
 
 ## Overview
@@ -14,8 +16,7 @@ Use the Observability Pipelines Worker to identify, tag, and optionally redact o
 Select a log source to get started:
 
 - [Datadog Agent][1]
-- [Fluentd or Fluent Bit][2]
-- [HTTP Client][3]
+- [Fluentd or Fluent Bit][2]<!-- - [HTTP Client][3] -->
 - [Splunk HTTP Event Collector (HEC)][4]
 - [Splunk Heavy and Universal Forwarders (TCP)][5]
 - [Sumo Logic Hosted Collector][6]
@@ -23,7 +24,7 @@ Select a log source to get started:
 
 [1]: /observability_pipelines/sensitive_data_redaction/datadog_agent
 [2]: /observability_pipelines/sensitive_data_redaction/fluent
-[3]: /observability_pipelines/sensitive_data_redaction/http_client
+<!-- [3]: /observability_pipelines/sensitive_data_redaction/http_client -->
 [4]: /observability_pipelines/sensitive_data_redaction/splunk_hec
 [5]: /observability_pipelines/sensitive_data_redaction/splunk_tcp
 [6]: /observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector
