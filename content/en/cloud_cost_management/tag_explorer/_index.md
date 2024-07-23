@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-[Cloud Cost Management][1] detects the sources for all of your cost-related tags, allowing you to search and manage tags for breaking down costs, including [custom costs][4], [Datadog costs][5], and [SaaS cost integrations][6]. 
-
-{{< img src="cloud_cost/tag_explorer/dropdown.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
+[Cloud Cost Management][1] detects the sources for all of your cost-related tags, allowing you to search and manage tags for breaking down costs, including [Custom costs][4], [Datadog costs][5], and [SaaS cost integrations][6]. 
 
 Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag, in addition to those managed through [Tag Pipelines][3]. [Tag Pipelines][3] allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic. 
+
+{{< img src="cloud_cost/tag_explorer/dropdown.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 ## Setup
 
@@ -133,15 +133,6 @@ For Snowflake tags, select **Snowflake** from the dropdown menu on the top right
 For Twilio tags, select **Twilio** from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/twilio.png" alt="Search through the list of your Twilio cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Custom" %}}
-
-<div class="alert alert-warning">Custom Cost is in public beta.</div>
-
-For custom tags, select **Custom** from the dropdown menu on the top right corner.
-
-{{< img src="cloud_cost/tag_explorer/custom.png" alt="Search through the list of your custom cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
