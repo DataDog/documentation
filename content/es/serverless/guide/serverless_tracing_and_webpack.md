@@ -29,7 +29,7 @@ Las bibliotecas de rastreo de Datadog (`dd-trace`) son conocidas por no ser comp
     };
     ```
 
-4. Si utilizas `serverless-webpack` y tienes la opción `includeModules` definida como cualquier valor distinto de `false`, serverless-webpack automáticamente [empaqueta módulos externos en node_modules][5]. Por lo tanto, debes forzar la exclusión de `datadog-lambda-js` y `dd-trace`. Omite este paso si no utilizas `serverless-webpack` o no tienes la opción `includeModules` en serverless.yml.
+4. Si utilizas `serverless-webpack` y tienes la opción `includeModules` definida como cualquier valor distinto de `false`, serverless-webpack automáticamente [empaqueta módulos externos en node_modules][5]. Por lo tanto, debes forzar la exclusión de `datadog-lambda-js` y `dd-trace`. Omite este paso si no utilizas `serverless-webpack` o no tienes la opción `includeModules` en tu archivo serverless.yml.
 
     **serverless.yml**
 
