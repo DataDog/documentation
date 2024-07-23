@@ -36,7 +36,7 @@ Before you begin, make sure you have already [installed and configured the Agent
 ## Instrument your application
 
 Here is an example application that can be used for testing `dd-trace-cpp`.
-This application creates a tracer instance with the default settings and generates a trace with two spans, which is reported under the service name `my-service`.
+This application creates an APM SDK instance with the default settings and generates a trace with two spans, which is reported under the service name `my-service`.
 
 ```cpp
 // tracer_example.cpp
