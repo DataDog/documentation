@@ -39,6 +39,7 @@ export class HtmlBuilder {
   static build(p: {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
+    standaloneMode: boolean;
   }): string {
     const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
       p.parsedFile.frontmatter,
@@ -96,7 +97,12 @@ export class HtmlBuilder {
       </html>
     `;
 
-    const formattedHtml = prettier.format(standaloneHtml, { parser: 'html' });
+    let formattedHtml;
+    if (p.standaloneMode) {
+      formattedHtml = prettier.format(standaloneHtml, { parser: 'html' });
+    } else {
+      formattedHtml = prettier.format(html, { parser: 'html' });
+    }
     return formattedHtml;
   }
 

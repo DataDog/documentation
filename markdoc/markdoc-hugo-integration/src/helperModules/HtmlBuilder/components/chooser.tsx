@@ -5,6 +5,10 @@ export interface ChooserProps {
   valsByPrefId: Record<string, string>;
 }
 
+/**
+ * The chooser component. Only used in initial compilation,
+ * not re-rendering on the client side.
+ */
 export const Chooser = (props: ChooserProps) => {
   return (
     <div id="chooser">
@@ -12,12 +16,13 @@ export const Chooser = (props: ChooserProps) => {
         const resolvedPref = props.resolvedPagePrefs[prefId];
         const currentValue = props.valsByPrefId[prefId] || resolvedPref.defaultValue;
         return (
-          <div className="markdoc-pref__container">
+          <div key={prefId} className="markdoc-pref__container">
             <div className="markdoc-pref__label">{resolvedPref.displayName}</div>
             {resolvedPref.options.map((option) => {
               const selected = option.id === currentValue ? 'selected' : '';
               return (
                 <div
+                  key={option.id}
                   className={`markdoc-pref__pill ${selected}`}
                   data-pref-id={resolvedPref.identifier}
                   data-option-id={option.id}
@@ -33,3 +38,8 @@ export const Chooser = (props: ChooserProps) => {
     </div>
   );
 };
+
+/**
+ * Rerender the chooser component incrementally.
+ */
+export const rerenderChooser = () => {};

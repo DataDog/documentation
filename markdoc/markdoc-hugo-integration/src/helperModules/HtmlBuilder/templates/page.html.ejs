@@ -3,28 +3,20 @@
 <script>
     let selectedValsByPrefId =
     <%- JSON.stringify(defaultValsByPrefId, null, 2) %>;
-
     const renderableTree =
     <%- JSON.stringify(renderableTree, null, 2) %>;
-
     const pagePrefsConfig =
     <%- JSON.stringify(pagePrefsConfig, null, 2) %>;
-
     const prefOptionsConfig =
     <%- JSON.stringify(prefOptionsConfig, null, 2) %>;
-
     const contentDiv = document.getElementById('content');
-
     function handleValueChange(e) {
         const node = e.target;
         const prefId = node.getAttribute('data-pref-id');
         const optionId = node.getAttribute('data-option-id');
-
         selectedValsByPrefId[prefId] = optionId;
         MarkdocClientRenderer(renderableTree, contentDiv, { variables: selectedValsByPrefId });
     }
-
-    // add event listeners to all elements with the class markdoc-pref__pill
     const prefPills = document.getElementsByClassName('markdoc-pref__pill');
     for (let i = 0; i < prefPills.length; i++) {
         prefPills[i].addEventListener('click', handleValueChange);

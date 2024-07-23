@@ -42,6 +42,16 @@ export class MarkdocHugoIntegration {
     this.partialsDir = p.partialsDir;
   }
 
+  buildAssetsPartial() {
+    const styles = HtmlBuilder.getStylesStr();
+    const script = HtmlBuilder.getClientRendererScriptStr();
+    const partial = `
+      <style>${styles}</style>
+      <script>${script}</script>
+    `;
+    return partial;
+  }
+
   /**
    * Compile all detected Markdoc files to HTML.
    */
@@ -80,7 +90,8 @@ export class MarkdocHugoIntegration {
       try {
         const html = HtmlBuilder.build({
           parsedFile,
-          prefOptionsConfig: prefOptionsConfigForPage
+          prefOptionsConfig: prefOptionsConfigForPage,
+          standaloneMode: this.standaloneMode
         });
 
         // if in standalone mode, build an HTML file
