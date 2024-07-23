@@ -70,7 +70,7 @@ In this dashboard, you can find information about:
 
 ## APM Ingestion Reasons dashboard
 
-The [APM Ingestion Reasons dashboard][6] provides insights on each source of ingestion volume. Each ingestion usage metric is tagged with an `ingestion_reason` dimension, so you can see which configuration options (Datadog Agent configuration or tracing library configuration) and products (such as RUM or Synthetic Testing) are generating the most APM data.
+The [APM Ingestion Reasons dashboard][6] provides insights on each source of ingestion volume. Each ingestion usage metric is tagged with an `ingestion_reason` dimension, so you can see which configuration options (Datadog Agent configuration or APM SDK configuration) and products (such as RUM or Synthetic Testing) are generating the most APM data.
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_ingestion_reasons.png" style="width:100%;" alt="APM Ingestion Reasons Dashboard" >}}
 

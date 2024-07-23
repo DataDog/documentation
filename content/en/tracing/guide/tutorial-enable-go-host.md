@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Go Application on the Same Host as the 
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional APM SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed APM SDK setup instructions
 - link: /tracing/trace_collection/compatibility/go/
   tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
@@ -19,7 +19,7 @@ further_reading:
   text: Ingestion mechanisms
 - link: https://github.com/DataDog/dd-trace-Go
   tag: "Source Code"
-  text: Tracing library open source code repository
+  text: APM SDK open source code repository
 ---
 
 ## Overview
@@ -99,7 +99,7 @@ Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 {{< /code-block >}}
 
-Now that the tracing library has been added to `go.mod`, enable tracing support.
+Now that the APM SDK has been added to `go.mod`, enable tracing support.
 
 Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
@@ -197,7 +197,7 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-You can configure the tracing library to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+You can configure the APM SDK to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
 {{< code-block lang="go" filename="Makefile" disable_copy="true" collapsible="true" >}}
 run: build
@@ -206,7 +206,7 @@ run: build
 
 <div class="alert alert-warning">The <code>Makefile</code> also sets the <code>DD_TRACE_SAMPLE_RATE</code> environment variable to <code>1</code>, which represents a 100% sample rate. A 100% sample rate ensures that all requests to the notes service are sent to the Datadog backend for analysis and display for the purposes of this tutorial. In an actual production or high-volume environment, you wouldn't specify this high of a rate. Setting a high sample rate with this variable in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
 
-For more information on available configuration options, see [Configuring the Go Tracing Library][14].
+For more information on available configuration options, see [Configuring the Go APM SDK][14].
 
 ### Use automatic tracing libraries
 

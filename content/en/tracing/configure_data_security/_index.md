@@ -16,15 +16,15 @@ further_reading:
 ---
 ## Overview
 
-Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog.
+Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the APM SDK to remediate sensitive data at collection before traces are sent to Datadog.
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
 ### Personal information in trace data
 
-Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users. 
+Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
 
-The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed. 
+The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed.
 
 | Category            | Description                                                                                                            |
 |:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
@@ -36,7 +36,7 @@ The table below describes the personal data categories collected by the automati
 | URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
 | URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
 
-The table below describes the default behavior of each language tracing library with regard to whether a data category is collected and whether it is obfuscated by default.
+The table below describes the default behavior of each language APM SDK with regard to whether a data category is collected and whether it is obfuscated by default.
 
 {{% tabs %}}
 
@@ -571,7 +571,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 ### HTTP
 
 Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
-    
+
 #### Redact query strings
 
 The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
@@ -586,7 +586,7 @@ To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variabl
 DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
 ```
 
-### Processing 
+### Processing
 
 Some tracing libraries provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
 

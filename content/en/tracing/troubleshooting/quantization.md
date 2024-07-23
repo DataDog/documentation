@@ -9,7 +9,7 @@ further_reading:
     text: Replace tags in spans
   - link: /tracing/trace_collection/library_config/
     tag: Documentation
-    text: Tracing Library Configuration
+    text: APM SDK Configuration
 ---
 
 ## Overview

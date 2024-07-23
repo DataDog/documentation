@@ -42,7 +42,7 @@ Count-based [**Trace analytics**][6] monitors are impacted as well. Check if you
 
 ## Assess your services' ingestion configuration
 
-To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and tracing library configuration.
+To assess the current state of applications' instrumentation, leverage the [Trace Ingestion Control page][1] that provides detailed information on agent and APM SDK configuration.
 
 ### Understanding if you are within your monthly ingestion allocation
 
@@ -90,7 +90,7 @@ By configuring sampling rates for a few high-throughput services, most of the "e
 
 Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
 
-If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the tracing library level.
+If the main reason for most of the ingestion volume is head-based sampling (`auto` or `rule`), the volume can be configured by setting a sampling rule at the APM SDK level.
 
 Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
 

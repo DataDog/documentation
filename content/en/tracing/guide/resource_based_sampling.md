@@ -26,9 +26,9 @@ Remote configuration allows you to dynamically set ingestion [sampling rates by 
 - [Remote Configuration][3]  enabled for your Agent.
 - `APM Remote Configuration Write` [permissions][4]. If you don’t have these permissions, ask your Datadog admin to update your permissions from your organization settings.
 
-### Tracing library version
+### APM SDK version
 
-Find below the minimum tracing library version required for the feature:
+Find below the minimum APM SDK version required for the feature:
 
 Language  | Minimum version required
 ----------|--------------------------
@@ -48,14 +48,14 @@ To see configured sampling rates by resource, navigate to the Ingestion controls
 {{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
 
 - The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
-- The `Configuration` column surfaces where the resource sampling rate is being applied from: 
+- The `Configuration` column surfaces where the resource sampling rate is being applied from:
   - `Automatic` if the [default head-based sampling mechanism][8] from the Agent applies.
-  - `Local Configured` if a [sampling rule][7] was set locally in the tracing library.
+  - `Local Configured` if a [sampling rule][7] was set locally in the APM SDK.
   - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules](#remotely-configure-sampling-rules-for-the-service).
 
 ## Remotely configure sampling rules for the service
 
-To configure sampling rates for the service by resource name: 
+To configure sampling rates for the service by resource name:
 1. Click **Manage Ingestion rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
    {{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
 1. Click **Add new rule** to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.

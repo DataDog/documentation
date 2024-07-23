@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Java Application and Datadog Agent in C
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional APM SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed APM SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -16,7 +16,7 @@ further_reading:
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
   tag: "Source Code"
-  text: Tracing library open source code repository
+  text: APM SDK open source code repository
 ---
 
 ## Overview
@@ -185,7 +185,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
 
 ## Launch the containers to see automatic tracing
 
-Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
+Now that the APM SDK is installed, restart your application and start receiving traces. Run the following commands:
 
 ```
 docker-compose -f all-docker-compose.yaml build notes
@@ -234,7 +234,7 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java APM SDK uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java APM SDK so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 

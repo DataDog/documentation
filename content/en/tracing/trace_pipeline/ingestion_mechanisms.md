@@ -34,7 +34,7 @@ Because the decision is made at the beginning of the trace and then conveyed to 
 
 You can set sampling rates for head-based sampling in two places:
 - At the **[Agent](#in-the-agent)** level (default)
-- At the **[Tracing Library](#in-tracing-libraries-user-defined-rules)** level: any tracing library mechanism overrides the Agent setup.
+- At the **[APM SDK](#in-tracing-libraries-user-defined-rules)** level: any APM SDK mechanism overrides the Agent setup.
 
 ### In the Agent
 `ingestion_reason: auto`
@@ -64,7 +64,7 @@ All the spans from a trace sampled using the Datadog Agent [automatically comput
 ### In tracing libraries: user-defined rules
 `ingestion_reason: rule`
 
-For more granular control, use tracing library sampling configuration options:
+For more granular control, use APM SDK sampling configuration options:
 - Set a specific **sampling rate to apply to the root of the trace**, by service, and/or resource name, overriding the Agent's [default mechanism](#in-the-agent).
 - Set a **rate limit** on the number of ingested traces per second. The default rate limit is 100 traces per second per service instance (when using the Agent [default mechanism](#in-the-agent), the rate limiter is ignored).
 
@@ -102,7 +102,7 @@ Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT`
 
 **Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
-Read more about sampling controls in the [Java tracing library documentation][2].
+Read more about sampling controls in the [Java APM SDK documentation][2].
 
 [1]: /tracing/guide/resource_based_sampling
 [2]: /tracing/trace_collection/dd_libraries/java
@@ -121,7 +121,7 @@ Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT`
 
 **Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
-Read more about sampling controls in the [Python tracing library documentation][2].
+Read more about sampling controls in the [Python APM SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.8.0
 [2]: /tracing/trace_collection/dd_libraries/python
@@ -138,7 +138,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [Ruby tracing library documentation][1].
+Read more about sampling controls in the [Ruby APM SDK documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
@@ -165,7 +165,7 @@ Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT`
 
 **Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
-Read more about sampling controls in the [Go tracing library documentation][1].
+Read more about sampling controls in the [Go APM SDK documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
 [2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
@@ -191,7 +191,7 @@ tracer.init({
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [Node.js tracing library documentation][1].
+Read more about sampling controls in the [Node.js APM SDK documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
@@ -205,7 +205,7 @@ export DD_TRACE_SAMPLE_RATE=0.1
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
-Read more about sampling controls in the [PHP tracing library documentation][1].
+Read more about sampling controls in the [PHP APM SDK documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
@@ -241,7 +241,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [.NET tracing library documentation][1].\
+Read more about sampling controls in the [.NET APM SDK documentation][1].\
 Read more about [configuring environment variables for .NET][2].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
@@ -249,7 +249,7 @@ Read more about [configuring environment variables for .NET][2].
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: All the spans from a trace sampled using a tracing library configuration are tagged with the ingestion reason `rule`. Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][5] Configuration column.
+**Note**: All the spans from a trace sampled using a APM SDK configuration are tagged with the ingestion reason `rule`. Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][5] Configuration column.
 
 ## Error and rare traces
 
@@ -276,7 +276,7 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 **Notes**:
 1. Set the parameter to `0` to disable the error sampler.
 2. The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no guarantee that the complete trace is sent to Datadog.
-3. By default, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under the error sampler.
+3. By default, spans dropped by APM SDK rules or custom logic such as `manual.drop` are **excluded** under the error sampler.
 
 #### Datadog Agent 7.42.0 and higher
 
@@ -286,7 +286,7 @@ The error sampling is remotely configurable if you're using the Agent version [7
 
 #### Datadog Agent 6/7.41.0 and higher
 
-To override the default behavior so that spans dropped by the tracing library rules or custom logic such as `manual.drop` are **included** by the error sampler, enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Datadog Agent (or the dedicated Trace Agent container within the Datadog Agent pod in Kubernetes).
+To override the default behavior so that spans dropped by the APM SDK rules or custom logic such as `manual.drop` are **included** by the error sampler, enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Datadog Agent (or the dedicated Trace Agent container within the Datadog Agent pod in Kubernetes).
 
 
 #### Datadog Agent 6/7.33 to 6/7.40.x
@@ -311,7 +311,7 @@ The rare sampling rate is remotely configurable if you're using the Agent versio
 
 By default, the rare sampler is **not enabled**.
 
-**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under this sampler.
+**Note**: When **enabled**, spans dropped by APM SDK rules or custom logic such as `manual.drop` are **excluded** under this sampler.
 
 To configure the rare sampler, update the `apm_config.enable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_ENABLE_RARE_SAMPLER`:
 
@@ -320,7 +320,7 @@ To configure the rare sampler, update the `apm_config.enable_rare_sampler` setti
 @env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-To evaluate spans dropped by tracing library rules or custom logic such as `manual.drop`,
+To evaluate spans dropped by APM SDK rules or custom logic such as `manual.drop`,
  enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Trace Agent.
 
 
@@ -328,7 +328,7 @@ To evaluate spans dropped by tracing library rules or custom logic such as `manu
 
 By default, the rare sampler is enabled.
 
-**Note**: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.drop` **are excluded** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
+**Note**: When **enabled**, spans dropped by APM SDK rules or custom logic such as `manual.drop` **are excluded** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
 
 To change the default rare sampler settings, update the `apm_config.disable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_DISABLE_RARE_SAMPLER`:
 
@@ -340,7 +340,7 @@ To change the default rare sampler settings, update the `apm_config.disable_rare
 ## Force keep and drop
 `ingestion_reason: manual`
 
-The head-based sampling mechanism can be overridden at the tracing library level. For example, if you need to monitor a critical transaction, you can force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, you can force the trace to be dropped.
+The head-based sampling mechanism can be overridden at the APM SDK level. For example, if you need to monitor a critical transaction, you can force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, you can force the trace to be dropped.
 
 - Set Manual Keep on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
 
@@ -648,7 +648,7 @@ This feature is available for Datadog Agent v[7.40.0][19]+.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-Starting in tracing library [version 1.7.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+Starting in APM SDK [version 1.7.0][1], for Java applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
 For example, to collect 100% of the spans from the service named `my-service`, for the operation `http.request`, up to 50 spans per second:
 
@@ -656,7 +656,7 @@ For example, to collect 100% of the spans from the service named `my-service`, f
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Read more about sampling controls in the [Java tracing library documentation][2].
+Read more about sampling controls in the [Java APM SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
 [2]: /tracing/trace_collection/dd_libraries/java
@@ -671,7 +671,7 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 ```
 
 
-Read more about sampling controls in the [Python tracing library documentation][2].
+Read more about sampling controls in the [Python APM SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
 [2]: /tracing/trace_collection/dd_libraries/python
@@ -685,7 +685,7 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Read more about sampling controls in the [Ruby tracing library documentation][2].
+Read more about sampling controls in the [Ruby APM SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.5.0
 [2]: /tracing/trace_collection/dd_libraries/ruby#sampling
@@ -706,7 +706,7 @@ For example, to collect `100%` of the spans from the service for the resource `P
 @env DD_SPAN_SAMPLING_RULES=[{"resource": "POST /api/create_issue", "tags": { "priority":"high" }, "sample_rate":1.0}]
 ```
 
-Read more about sampling controls in the [Go tracing library documentation][2].
+Read more about sampling controls in the [Go APM SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
 [2]: /tracing/trace_collection/dd_libraries/go
@@ -721,7 +721,7 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Read more about sampling controls in the [Node.js tracing library documentation][1].
+Read more about sampling controls in the [Node.js APM SDK documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
@@ -734,7 +734,7 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Read more about sampling controls in the [PHP tracing library documentation][2].
+Read more about sampling controls in the [PHP APM SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.77.0
 [2]: /tracing/trace_collection/dd_libraries/php
@@ -759,7 +759,7 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 @env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
 ```
 
-Read more about sampling controls in the [.NET tracing library documentation][2].
+Read more about sampling controls in the [.NET APM SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.18.0
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core

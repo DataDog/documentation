@@ -9,7 +9,7 @@ In Datadog APM, the `host` tag correlates spans and traces to infrastructure mon
 
 ## Datadog Agent vs. Tracer hostname
 
-The **Agent host** is the host on which the Datadog Agent is running. The **Tracer host** is the host on which the application instrumented with the tracing library is running.
+The **Agent host** is the host on which the Datadog Agent is running. The **Tracer host** is the host on which the application instrumented with the APM SDK is running.
 
 The Agent host and the Tracer host may differ based on how you deploy the Datadog Agent on your infrastructure:
 
@@ -37,7 +37,7 @@ Python | - | `DD_TRACE_REPORT_HOSTNAME`
 PHP | `datadog.trace.report_hostname` | `DD_TRACE_REPORT_HOSTNAME`
 Java |  `dd.trace.report-hostname` | `DD_TRACE_REPORT_HOSTNAME`
 
-### When does APM use host information? 
+### When does APM use host information?
 
 APM uses host information when you create [retention filters][2], generate [metrics from spans][3], or create [sensitive data scanner rules][4] using host tag filters in queries. For example, host tag filters like `availability-zone` and `cluster-name` are enriched from the Datadog Agent host information.
 

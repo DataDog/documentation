@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Python Application on the Same Host as 
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional APM SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed APM SDK setup instructions
 - link: /tracing/trace_collection/compatibility/python/
   tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
@@ -16,7 +16,7 @@ further_reading:
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-py
   tag: "Source Code"
-  text: Tracing library open source code repository
+  text: APM SDK open source code repository
 ---
 
 ## Overview
@@ -33,7 +33,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 - A Datadog account and [organization API key][3]
 - Git
-- Python that meets the [tracing library requirements][4]
+- Python that meets the [APM SDK requirements][4]
 
 ## Install the Agent
 
@@ -45,7 +45,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
-If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
+If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [APM SDK developer docs][7].
 
 Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
@@ -130,7 +130,7 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 
 ## Install Datadog tracing
 
-Next, install the tracing library by using Poetry or pip (minimum version 18). From your `apm-tutorial-python` directory, run:
+Next, install the APM SDK by using Poetry or pip (minimum version 18). From your `apm-tutorial-python` directory, run:
 
 {{< tabs >}}
 {{% tab "Poetry" %}}
@@ -270,7 +270,7 @@ The sample project includes a second application called `calendar_app` that retu
    DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
    ddtrace-run python -m calendar_app.app
    ```
-   
+
    {{% /tab %}}
    {{< /tabs >}}
 

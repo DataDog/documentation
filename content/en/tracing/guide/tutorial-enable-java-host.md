@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Java Application on the Same Host as th
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional APM SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed APM SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -16,7 +16,7 @@ further_reading:
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
   tag: "Source Code"
-  text: Tracing library open source code repository
+  text: APM SDK open source code repository
 ---
 
 ## Overview
@@ -149,7 +149,7 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 
 ## Install Datadog tracing
 
-Next, download the Java tracing library (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
+Next, download the Java APM SDK (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
 
 {{< code-block lang="sh" >}}
 curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -240,7 +240,7 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java APM SDK uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java APM SDK so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 In addition to the `javaagent` flag, which enables the Java Agent, the launch commands specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
 

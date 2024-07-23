@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Java Application with the Admission Con
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional APM SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed APM SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -16,7 +16,7 @@ further_reading:
   text: Manually configuring traces and spans
 - link: https://github.com/DataDog/dd-trace-java
   tag: "Source Code"
-  text: Tracing library open source code repository
+  text: APM SDK open source code repository
 - link: /containers/cluster_agent/troubleshooting/
   tag: "Documentation"
   text: Troubleshooting the Datadog Cluster Agent
@@ -53,7 +53,7 @@ git clone https://github.com/DataDog/springblog.git
 
 The repository contains a multi-service Java application pre-configured to be run within Docker and Kubernetes. The sample app is a basic Spring app using REST.
 
-## Start and run the sample application 
+## Start and run the sample application
 
 1. Switch to to the `/k8s` subdirectory in the springblog repo:
    {{< code-block lang="shell" >}}
@@ -75,7 +75,7 @@ kubectl get pods{{< /code-block >}}
     springfront-797b78d6db-p5c84               1/1     Terminating   0               2m41s
     ```
 
-    The service is started and listens on port 8080. It exposes an `/upstream` endpoint. 
+    The service is started and listens on port 8080. It exposes an `/upstream` endpoint.
 
 4. Check that communication takes place by running the following curl command:
    {{< code-block lang="shell" >}}
@@ -95,7 +95,7 @@ After you have your application working, instrument it using the Datadog Admissi
 3. [Annotate][7] your pod for library injection.
 4. [Label][8] your pod to instruct the Datadog Admission controller to mutate the pod.
 
-There's no need to add the tracing library because it's automatically injected. You don't need to redeploy your app yet. This section of the tutorial steps you through the process of adding Datadog variables and deploying a new image or version of your app.
+There's no need to add the APM SDK because it's automatically injected. You don't need to redeploy your app yet. This section of the tutorial steps you through the process of adding Datadog variables and deploying a new image or version of your app.
 
 1. From the `k8s` subdirectory, use the following command to install the Datadog Cluster Agent, specifying the `values-with-lib-inj.yaml` config file and your [Datadog API key](/account_management/api-app-keys/):
    {{< code-block lang="shell" >}}
@@ -122,12 +122,12 @@ labels:
   tags.datadoghq.com/service: "springfront"
   tags.datadoghq.com/version: "12"{{< /code-block >}}
 
-4. Configure the Datadog Admission Controller to inject a Java tracing library to the app container by adding the following annotation to the pod:
+4. Configure the Datadog Admission Controller to inject a Java APM SDK to the app container by adding the following annotation to the pod:
    {{< code-block lang="yaml" >}}
 annotations:
   admission.datadoghq.com/java-lib.version: "latest"{{< /code-block >}}
 
-    This annotation specifies the latest version of the Java tracing library. You can also reference a specific version of the library, such as `"v1.5.0"`.
+    This annotation specifies the latest version of the Java APM SDK. You can also reference a specific version of the library, such as `"v1.5.0"`.
 
     The final pod definition should look like the excerpt below. See also the full [YAML file][10] in the sample repo. The instructions you added to instrument the app are highlighted:
 
@@ -219,7 +219,7 @@ kubectl describe pod springfront{{< /code-block >}}
     /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qvmtk (ro)
     ```
 
-8. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example::
+8. Verify that the Datadog APM SDK is injected into the pod by checking the pod logs. For example::
    {{< code-block lang="shell" >}}
 kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 
