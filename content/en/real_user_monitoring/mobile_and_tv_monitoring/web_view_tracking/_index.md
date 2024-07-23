@@ -29,8 +29,6 @@ You can perform the following:
 
 You can also record the entire user journey across both web and native views on iOS or Android and watch it in a single Session Replay. Learn how to [instrument consolidated browser and mobile web views][1].
 
-**Note:** When Web View Tracking is enabled, Browser Session Replay is disabled, no matter how the Browser SDK is configured.
-
 ## Setup
 
 ### Prerequisites
