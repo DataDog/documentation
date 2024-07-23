@@ -29,13 +29,30 @@ Code Analysis is in public beta.
 ## Overview
 Set up Datadog Static Analysis in-app [here][1].
 
-To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory and specify which rulesets you want to apply and where for your programming language(s).
+## Select where to run Static Analysis scans
+### Scan in CI/CD pipelines
+Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
 
-{{< img src="code_analysis/static_analysis/apply_python_rulesets.png" alt="Copy and paste the Code Quality and Security rulesets from the available options for Python on the Code Analysis Setup page" style="width:100%;">}} 
+{{< whatsnext desc="See the documentation for information about the following integrations:">}}
+    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
+{{< /whatsnext >}}
 
-Select one or multiple programming languages and choose which rulesets you want to copy and use on the [Code Analysis Setup page][1]. 
+## Select your source code management provider
+Datadog Static Analysis supports all source code management providers, with native support for GitHub.
+### Set up the GitHub integration 
+If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see code snippets in-app and enable [pull request comments][11].
 
-## Customizing your configuration
+When installing a GitHub App, the following permissions are required to enable certain features:
+
+- `Content: Read`, which allows you to see code snippets displayed in Datadog
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
+
+### Other source code management providers
+If you are using another source code management provider, configure Static Analysis to run in your CI/CD pipelines via the datadog-ci CLI tool and [upload the results][12] to Datadog.
+
+## Customize your configuration
 By default, Datadog Static Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.
 
 You can include the following **global** options in the `static-analysis.datadog.yml` file:
@@ -205,26 +222,7 @@ my_foo = 1
 myBar = 2
 ```
 
-## Set up the GitHub integration 
-
-You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI. 
-
-When installing a GitHub App, the following permissions are required to enable certain features:
-
-- `Content: Read`, which allows you to see code snippets displayed in Datadog
-- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
-
-## Configure your CI/CD provider
-
-Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8] and checks your code against Datadog's default rulesets. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
-
-{{< whatsnext desc="See the documentation for information about the following integrations:">}}
-    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Upload third-party static analysis results to Datadog
+## Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
   SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
@@ -263,3 +261,4 @@ To upload a SARIF report:
 [9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [10]: /integrations/guide/source-code-integration
 [11]: /code_analysis/github_pull_requests/
+[12]: /setup#upload-third-party-static-analysis-results-to-datadog
