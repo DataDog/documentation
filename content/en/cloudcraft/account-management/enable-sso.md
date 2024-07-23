@@ -7,15 +7,14 @@ Enabling Single Sign-On (SSO) for your account allows you to simplify authentica
 Cloudcraft supports SSO via three methods:
 
 - **Datadog SSO:** Available for all users of Cloudcraft, including Free accounts. Datadog SSO does not require any additional setup for new accounts, simply select **Sign in with Datadog** on Cloudcraft's signup or login pages. For existing accounts, [reach out to support][1] to enable this feature.
-- **Google/G Suite SSO:** Available for all users of Cloudcraft, including Free and Pro accounts. Google Sign In does not require any additional setup, simply select **Sign in with Google** on Cloudcraft's signup or login pages.
-- **SAML Enterprise SSO:** Available for Cloudcraft Enterprise accounts, SAML SSO federates with your organization's existing identity provider, allowing your users to log in with their existing accounts and for your organization to centrally manage who has access to the application.
+- **Google/G Suite SSO:** Available for all users of Cloudcraft, including Free accounts. Google SSO does not require any additional setup, simply select **Sign in with Google** on Cloudcraft's signup or login pages.
+- **SAML SSO:** Available for Cloudcraft Pro and Enterprise accounts, SAML SSO federates with your organization's existing identity provider, allowing your users to log in with their existing accounts and for your organization to centrally manage who has access to the application.
 
-This article is all about SAML Enterprise SSO and how to set it up in your account.
+This article is all about SAML SSO and how to set it up in your account.
 
 ## Setting up SAML/SSO
 
-<div class="alert alert-info">The SAML Enterprise SSO feature is only available for the Enterprise plan, and can only be configured by the account owner.
-</div>
+<div class="alert alert-info">The SAML SSO feature can only be configured by the account owner.</div>
 
 1. Navigate to **User** > **Security & SSO**.
 2. Next, register Cloudcraft as a new application with your SAML identity provider. For detailed instructions, see the following articles:
