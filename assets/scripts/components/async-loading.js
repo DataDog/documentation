@@ -222,7 +222,7 @@ function loadPage(newUrl) {
                 // Replace language dropdown-item hrefs with newURL when loading pages asynchronously (selecting the left nav menu items)
                 // ensures correct path is used for language dropdown-item.
                 const newURL = ddItem.href.replace(ddItem.pathname, pathName); 
-                item.setAttribute('href', newURL);
+                ddItem.setAttribute('href', newURL);
             })
 
             // sets query params if code tabs are present
