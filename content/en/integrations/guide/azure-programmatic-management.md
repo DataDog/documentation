@@ -93,7 +93,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   type_handler_version = "2.0"
    settings = <<SETTINGS
   {
-    "site":"<DATADOG_SITE>"
+    "site":"https://{{< region-param key="http_endpoint" code="true" >}}"
   }
   SETTINGS
    protected_settings = <<PROTECTED_SETTINGS
@@ -114,7 +114,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   type_handler_version = "2.0"
    settings = <<SETTINGS
   {
-    "site":"<DATADOG_SITE>"
+    "site":"https://{{< region-param key="http_endpoint" code="true" >}}"
   }
   SETTINGS
    protected_settings = <<PROTECTED_SETTINGS
