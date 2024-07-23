@@ -112,7 +112,7 @@ Automatic instrumentation captures:
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
+If needed, configure the APM SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
 
 ## Tracing short- and long-running CLI scripts
 
