@@ -13478,6 +13478,7 @@
     <style>
       .markdoc__hidden {
         background-color: lightgray;
+        /* display: none; */
       }
       .markdoc-pref__pill {
         display: inline-block;
@@ -13661,7 +13662,6 @@
         color: "blue",
         item: "sky",
       };
-
       const renderableTree = {
         $$mdtype: "Tag",
         name: "article",
@@ -14122,7 +14122,6 @@
           },
         ],
       };
-
       const pagePrefsConfig = [
         {
           display_name: "Color",
@@ -14135,7 +14134,6 @@
           options_source: "blue_item_options",
         },
       ];
-
       const prefOptionsConfig = {
         primary_color_options: [
           {
@@ -14210,21 +14208,17 @@
           },
         ],
       };
-
       const contentDiv = document.getElementById("content");
-
+      const chooserDiv = document.getElementById("chooser");
       function handleValueChange(e) {
         const node = e.target;
         const prefId = node.getAttribute("data-pref-id");
         const optionId = node.getAttribute("data-option-id");
-
         selectedValsByPrefId[prefId] = optionId;
         MarkdocClientRenderer(renderableTree, contentDiv, {
           variables: selectedValsByPrefId,
         });
       }
-
-      // add event listeners to all elements with the class markdoc-pref__pill
       const prefPills = document.getElementsByClassName("markdoc-pref__pill");
       for (let i = 0; i < prefPills.length; i++) {
         prefPills[i].addEventListener("click", handleValueChange);
