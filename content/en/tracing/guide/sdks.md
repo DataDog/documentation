@@ -48,12 +48,12 @@ Datadog uses "APM SDK" for the following reasons:
 
 The terminology update does not affect the functionality of Datadog's APM tools. You can continue using them as before without any required actions on your part. Whenever you encounter "APM SDK" in Datadog documentation, app, or communications, be aware that it refers to what was previously called tracing libraries or tracers.
 
-## Datadog API vs. SDK
+## API vs. SDK
 
 APIs provide a standardized interface for instrumenting your applications to collect telemetry data.
 
-- **Datadog API**: The interface that defines how to instrument your application. It provides methods and classes for creating spans, adding tags, and managing traces. For more information, read [Custom Instrumentation][9] using the Datadog API or OpenTelemetry API.
-- **Datadog SDK**: The implementation of the Datadog API. It includes all the logic for processing, managing, and sending telemetry data to the Datadog Agent. For more information, read [Add the APM SDK][10].
+- **API**: The interface that defines how to instrument your application. It provides methods and classes for creating spans, adding tags, and managing traces. For more information, read [Custom Instrumentation][9] using the Datadog API or OpenTelemetry API.
+- **SDK**: The implementation of the API. It includes all the logic for processing, managing, and sending telemetry data to the Datadog Agent. For more information, read [Add the APM SDK][10].
 
 <div class="alert alert-info">Datadog SDKs also support using the <a href="/opentelemetry/interoperability/instrumentation_libraries">OpenTelemetry tracing APIs</a> to instrument your applications.</div>
 
