@@ -250,10 +250,6 @@ To upload a SARIF report:
 
 ## Diff-aware scanning
 
-<div class="alert alert-warning">
-  Diff-aware scanning for Static Analysis is in public beta.
-</div>
-
 Diff-aware scanning enables Datadog's static analyzer to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
 
 1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline.
