@@ -31,7 +31,7 @@ Datadog provides a guided workflow for setting up [Cloud Security Management (CS
 1. On the [Features][11] page, select the features you want to enable.
 1. Click **Start Using Cloud Security Management** and confirm your selections.
 
-{{< img src="security/csm/setup/features_selection_new_user.png" alt="CSM Features page" width="100%">}} 
+{{< img src="security/csm/setup/features_selection_new_user2.png" alt="CSM Features page" width="100%">}} 
 
 After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Compliance Scanning**, only the **Cloud Accounts** and **Hosts and Containers** sections are displayed.
 
