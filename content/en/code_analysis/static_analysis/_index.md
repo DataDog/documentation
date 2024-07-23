@@ -45,9 +45,11 @@ Static Analysis supports scanning for poor coding practices and security vulnera
 
 {{< partial name="code_analysis/languages-getting-started.html" >}}
 
+Set up Datadog Static Analysis in-app [here][1], or follow [setup documentation here][9].
+
 </br> 
 
-## Integrate Static Analysis in your software development lifecycle
+## Integrate Static Analysis into your software development lifecycle
 
 ### CI providers
 {{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of your choice. See the documentation for information about the following integrations:">}}
@@ -126,3 +128,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case
 [8]: https://docs.datadoghq.com/code_analysis/static_analysis/setup/#add-a-static-analysis-yaml-file-to-your-project
+[9]: /code_analysis/static_analysis/setup
