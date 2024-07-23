@@ -2,7 +2,7 @@
 
 Some Datadog products leverage information about how your AWS resources (such as S3 buckets, RDS snapshots, and CloudFront distributions) are configured. Datadog collects this information by making read-only API calls to your AWS account.
 
-### AWS Security Audit Policy
+### AWS SecurityAudit Policy
 
 To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection" target="_blank">resource collection</a>, you must attach AWS's managed <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">SecurityAudit Policy</a> to your Datadog IAM role.
 For the most **complete** security coverage that Datadog can provide, Datadog recommends also attaching the following **read permissions** to the IAM role:
