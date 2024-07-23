@@ -20,7 +20,7 @@ For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button
 
 ### State functions
 
-App Builder provides functions for some types of app state changes with specific components.
+App Builder provides functions for some types of app state changes on specific components.
 
 setIsChecked
 : Sets the value of a set of checkboxes to the array of boolean value that you provide.<br>
