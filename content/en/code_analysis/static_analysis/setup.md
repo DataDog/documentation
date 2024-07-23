@@ -30,7 +30,7 @@ Code Analysis is in public beta.
 Set up Datadog Static Analysis in-app [here][1].
 
 ## Select where to run Static Analysis scans
-### Scan in CI/CD pipelines
+### Scan in CI pipelines
 Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
@@ -50,7 +50,8 @@ When installing a GitHub App, the following permissions are required to enable c
 - `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
 
 ### Other source code management providers
-If you are using another source code management provider, configure Static Analysis to run in your CI/CD pipelines via the datadog-ci CLI tool and [upload the results][12] to Datadog.
+If you are using another source code management provider, configure Static Analysis to run in your CI pipelines via the datadog-ci CLI tool and [upload the results][12] to Datadog.
+You **must** run an analysis of your repository on the default branch before results can begin appearing in the Code Analysis page.
 
 ## Customize your configuration
 By default, Datadog Static Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.
@@ -246,6 +247,27 @@ To upload a SARIF report:
    ```bash
    datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
    ```
+
+## Diff-aware scanning
+
+<div class="alert alert-warning">
+  Diff-aware scanning for Static Analysis is in public beta.
+</div>
+
+Diff-aware scanning enables Datadog's static analyzer to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
+
+1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline.
+2. Add a call to `datadog-ci git-metadata upload` before invoking the static analyzer. This command ensures that Git metadata is available to the Datadog backend. Git metadata is required to calculate the number of files to analyze.
+3. Ensure that the datadog-static-analyzer is invoked with the flag `--diff-aware`.
+
+Example of commands sequence (these commands must be invoked in your Git repository):
+```bash
+datadog-ci git-metadata upload
+
+datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff-aware <...other-options...>
+```
+
+**Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
 ## Further Reading
 
