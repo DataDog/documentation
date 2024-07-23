@@ -70,13 +70,7 @@ To delete or duplicate a component, select the component and click the three dot
 
 For a list of available UI components and their properties, see [Components][9].
 
-#### Events
-
-UI components can trigger reactions on an **Event**. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component event can trigger a reaction on a page change or table row click event.
-
-An event can set the state of a UI component, open or close a modal, trigger another query, or even run custom JavaScript.
-
-For example, the [GitHub PR summarizer][4] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
+UI components can trigger reactions on an [Event][11].
 
 ### Queries
 
