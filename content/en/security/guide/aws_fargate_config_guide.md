@@ -423,7 +423,7 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
 [16]: /security/application_security/enabling/compatibility/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /security/application_security/enabling/tracing_libraries/code_security/java/
-[19]: /security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
-[20]: /security/application_security/enabling/tracing_libraries/code_security/nodejs
+[18]: /security/application_security/code_security/setup/java/
+[19]: /security/application_security/code_security/setup/dotnet/
+[20]: /security/application_security/code_security/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
