@@ -21,15 +21,15 @@ title: Mecanismos de ingesta
 
 Son varios los mecanismos responsables de decidir si los tramos (spans) generados por tus aplicaciones se envían a Datadog (_tramos ingeridos_). La lógica de estos mecanismos está en las [bibliotecas de rastreo][1] y en el Datadog Agent. Según la configuración, el tráfico generado por los servicios instrumentados puede ingerirse de forma total o parcial.
 
-A cada tramo consumido, se le adjunta un **motivo de consumo** único en referencia a uno de los mecanismos que se describen en esta página. Las [métricas de uso][2] `datadog.estimated_usage.apm.ingested_bytes` y `datadog.estimated_usage.apm.ingested_spans` tienen la etiqueta `ingestion_reason`.
+A cada tramo consumido, se le adjunta un **motivo de ingesta** único en referencia a uno de los mecanismos que se describen en esta página. Las [métricas de uso][2] `datadog.estimated_usage.apm.ingested_bytes` y `datadog.estimated_usage.apm.ingested_spans` tienen la etiqueta (tag) `ingestion_reason`.
 
-Utiliza el [Dashboard de motivos de consumo][3] para investigar todos los motivos de consumo en contexto. Obtén información general sobre el volumen atribuido a cada mecanismo para identificar rápidamente las opciones de configuración pertinentes.
+Utiliza el [Dashboard de motivos de ingesta][3] para investigar todos los motivos de ingesta en contexto. Obtén información general sobre el volumen atribuido a cada mecanismo para identificar rápidamente las opciones de configuración pertinentes.
 
-## Head-based sampling (muestreo basado en la fase inicial)
+## Muestreo basado en la fase inicial
 
-El mecanismo de muestreo que se usa por defecto se denomina _head-based sampling (muestreo basado en la fase inicial)_. La decisión sobre si se conserva o se descarta la traza se toma en el momento preciso en el que esta comienza, al inicio del [tramo raíz][4]. Luego, se propaga la decisión a los demás servicios como parte del contexto de solicitud, por ejemplo, como un encabezado de solicitud HTTP.
+El mecanismo de muestreo que se usa por defecto se denomina _head-based sampling_ (muestreo basado en la fase inicial). La decisión sobre si se conserva o se descarta la traza se toma en el momento preciso en el que esta comienza, al inicio del [tramo raíz][4]. Luego, se propaga la decisión a los demás servicios como parte del contexto de la solicitud, por ejemplo, como un encabezado de la solicitud HTTP.
 
-Como la decisión se toma al comienzo de la traza y, luego, se transmite a todas las partes de la misma, existe la garantía de que la traza se conservará o descartará en su totalidad.
+Como la decisión se toma al comienzo de la traza y, luego, se transmite a todas las partes de esta, existe la garantía de que se conservará o descartará la traza completa.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestro basado en la fase inicial" style="width:100%;" >}}
 
@@ -46,11 +46,11 @@ Por ejemplo, si el servicio `A` tiene más tráfico que el servicio `B`, el Agen
 
 #### Configuración remota
 
-La configuración de la frecuencia de muestreo en el Agent se puede configurar de forma remota si utilizas el Agent versión [7.42.0][20] o superior. Para empezar, configura [Configuración remota][23] y, a continuación, configura el parámetro `ingestion_reason` desde la [Página de control del consumo][5]. La configuración remota te permite cambiar el parámetro sin tener que reiniciar el Agent. La configuración remota tiene prioridad sobre las configuraciones locales, incluidas las variables de entorno y la configuración de `datadog.yaml`.
+La configuración de la frecuencia de muestreo en el Agent se puede configurar de forma remota si utilizas el Agent versión [7.42.0][20] o superior. Para empezar, configura [Configuración remota][23] y, a continuación, configura el parámetro `ingestion_reason` desde la [Página de control de la ingesta][5]. La configuración remota te permite cambiar el parámetro sin tener que reiniciar el Agent. La configuración remota tiene prioridad sobre las configuraciones locales, incluidas las variables de entorno y la configuración de `datadog.yaml`.
 
 #### Configuración local
 
-Define el objetivo de trazas por segundo del Agent en su archivo de configuración principal (`datadog.yaml`) o a modo de variable de entorno:
+Define el objetivo de trazas por segundo del Agent en su archivo principal de la configuración (`datadog.yaml`) o a modo de variable de entorno:
 ```
 @param max_traces_per_second - integer - optional - default: 10
 @env DD_APM_MAX_TPS - integer - optional - default: 10
@@ -60,24 +60,24 @@ Define el objetivo de trazas por segundo del Agent en su archivo de configuraci�
 - La frecuencia de muestreo de trazas por segundo configurada en el Agent solo se aplica a las bibliotecas de rastreo de Datadog. No tiene ningún efecto en otras bibliotecas de rastreo como OpenTelemetry SDK.
 - El máximo de trazas por segundo es un objetivo, no un valor fijo. En realidad, fluctúa en función de los picos de tráfico y otros factores.
 
-Todos los tramos de una traza muestreada utilizando el Datadog Agent [frecuencias de muestreo calculadas automáticamente](#in-the-Agent) se etiquetan con el motivo del consumo `auto`. La etiqueta (tag) del `ingestion_reason` también se configura en las [métricas de uso][2]. Los servicios que utilizan el mecanismo por defecto del Datadog Agent se etiquetan como `Automatic` en la columna de configuración de la [Página de control del consumo][5].
+Todos los tramos de una traza muestreada utilizando el Datadog Agent [frecuencias de muestreo calculadas automáticamente](#in-the-Agent) se etiquetan con el motivo de la ingesta `auto`. La etiqueta del `ingestion_reason` también se configura en las [métricas de uso][2]. Los servicios que utilizan el mecanismo por defecto del Datadog Agent se etiquetan como `Automatic` en la columna de configuración de la [Página de control de la ingesta][5].
 
 ### En las bibliotecas de rastreo: reglas definidas por el usuario
 `ingestion_reason: rule`
 
 Para llevar a cabo un control más pormenorizado, utiliza las opciones de configuración de muestreo de la biblioteca de rastreo:
 - Configura una **frecuencia de muestreo específica que se aplicará a la raíz del rastreo**, por servicio y/o nombre del recurso, sustituyendo el [mecanismo por defecto] del Agent(#in-the-Agent).
-- Configura un **límite de frecuencia** para restringir el número de trazas consumidas por segundo. El límite de la frecuencia por defecto es de 100 trazas por segundo por instancia de servicio (cuando se utiliza el [mecanismo por defecto](#in-the-agent) del Agent, se omite el limitador de frecuencia).
+- Configura un **límite de frecuencia** para restringir el número de trazas ingeridas por segundo. El límite de la frecuencia por defecto es de 100 trazas por segundo por instancia de servicio (cuando se utiliza el [mecanismo por defecto](#in-the-agent) del Agent, se omite el limitador de frecuencia).
 
 **Nota**: Las reglas de muestreo son también controles de muestreo basado en la fase inicial. Si el tráfico para un servicio es superior al máximo configurado de trazas por segundo, entonces las trazas se descartan en la raíz. No se crean trazas incompletas.
 
-La configuración puede configurarse en función de las variables de entorno o directamente en el código:
+La configuración se puede definir a través de las variables de entorno o directamente en el código:
 
 {{< tabs >}}
 {{% tab "Java" %}}
 **Configuración remota**
 
-<div class="alert alert-info">Las<strong>reglas de muestreo basadas en los recursos están en Beta</strong>: A partir de la versión <a href="https://github.com/Datadog/dd-rastrear-Java/releases/etiquetar/v1.34.0">1.34.0</a>, para las aplicaciones Java, se pueden configurar frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#Configurar-the-servicio-ingestion-rate">Página de control de consumo</a>. Solicita acceso a esta función a través de este <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">vínculo</a><a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/"></a>.</div>
+<div class="alert alert-info">Las<strong>reglas de muestreo basadas en los recursos están en Beta</strong>: A partir de la versión <a href="https://github.com/Datadog/dd-rastrear-Java/releases/etiquetar/v1.34.0">1.34.0</a>, para las aplicaciones Java, se pueden configurar frecuencias de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#Configurar-the-servicio-ingestion-rate">Página de control de ingesta</a>. Solicita acceso a esta función a través de este <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">vínculo</a><a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/"></a>.</div>
 
 Para obtener más información sobre cómo configurar remotamente las frecuencias de muestreo por servicio y por recurso, consulta [Guía de muestreo basado en los recursos][1].
 
@@ -99,7 +99,7 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /chec
 
 El valor del nombre del servicio distingue entre mayúsculas y minúsculas y debe coincidir con el nombre real de servicio.
 
-Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia del servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
+Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia del servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
 
 **Nota**: El uso de `DD_TRACE_SAMPLE_RATE` está obsoleto. Utiliza `DD_TRACE_SAMPLING_RULES` en su lugar. Por ejemplo, si ya has establecido `DD_TRACE_SAMPLE_RATE` en `0.1`, establece`DD_TRACE_SAMPLING_RULES` en `[{"sample_rate":0.1}]` en su lugar.
 
@@ -118,7 +118,7 @@ Por ejemplo, para capturar el 100 % de las trazas para el recurso `GET /checkou
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource": "GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
-Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia de servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
+Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia de servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
 
 **Nota**: El uso de `DD_TRACE_SAMPLE_RATE` está obsoleto. Utiliza `DD_TRACE_SAMPLING_RULES` en su lugar. Por ejemplo, si ya has establecido `DD_TRACE_SAMPLE_RATE` en `0.1`, establece `DD_TRACE_SAMPLING_RULES` en `[{"sample_rate":0.1}]` en su lugar.
 
@@ -146,7 +146,7 @@ Obtén más información sobre los controles de muestreo en la [documentación a
 {{% tab "Go" %}}
 **Configuración remota**
 
-<div class="alert alert-info">Las<strong>reglas de muestreo basadas en los recursos están en Beta</strong>: A partir de la versión <a href="https://github.com/Datadog/dd-rastrear-go/releases/etiquetar/v1.63.1">1.63.1</a>, para las aplicaciones Go, establece tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#Configurar-the-servicio-ingestion-rate">Página de control de consumo</a>. Solicita acceso a esta función a través de este <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">vínculo</a> <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/"></a>.</div>
+<div class="alert alert-info">Las<strong>reglas de muestreo basadas en los recursos están en Beta</strong>: A partir de la versión <a href="https://github.com/Datadog/dd-rastrear-go/releases/etiquetar/v1.63.1">1.63.1</a>, para las aplicaciones Go, establece tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#Configurar-the-servicio-ingestion-rate">Página de control de la ingesta</a>. Solicita acceso a esta función a través de este <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">vínculo</a> <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/"></a>.</div>
 
 Más información sobre cómo configurar remotamente frecuencias de muestreo por servicio y por recurso en este [artículo][3].
 
@@ -175,14 +175,14 @@ Obtén más información sobre los controles de muestreo en la [documentación d
 {{% tab "Node.js" %}}
 Para las aplicaciones Node.js, configura una frecuencia de muestreo global en la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`.
 
-También puedes configurar las frecuencias de muestreo por servicio. Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % para el resto de trazas:
+También puedes configurar las frecuencias de muestreo por servicio. Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % para el resto de las trazas:
 
 ```javascript
 tracer.init({
-    consumo: {
-        muestreador: {
+    ingestion: {
+        sampler: {
             sampleRate: 0.1,
-            reglas: [
+            rules: [
                 { sampleRate: 0.5, service: 'my-service' }
             ]
         }
@@ -243,18 +243,18 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 Define la variable de entorno `DD_TRACE_RATE_LIMIT` en un número de trazas por segundo por instancia de servicio para configurar un límite de frecuencia. Si no se define ningún valor `DD_TRACE_RATE_LIMIT`, se aplicará un límite de 100 trazas por segundo.
 
 Lee más acerca de los controles de muestreo en la [documentación de bibliotecas de rastreo de .NET][1].\
-Más información sobre la [configuración de variables entorno para .NET][2].
+Más información sobre la [configuración de variables de entorno para .NET][2].
 
 [1]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
 [2]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core?tab=registryeditor#configuring-process-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
-**Nota**: Todos los tramos de una traza muestreada utilizando una configuración de biblioteca de rastreo se etiquetan con el motivo de consumo `rule`. <txprotected>Los servicios </txprotected> configurados con reglas de muestreo definidas por el usuario se marcan como `Configured` en la columna de configuración de la [Página de control del consumo][5].
+**Nota**: Todos los tramos de una traza muestreada utilizando una configuración de biblioteca de rastreo se etiquetan con el motivo de la ingesta `rule`. <txprotected>Los servicios </txprotected> configurados con reglas de muestreo definidas por el usuario se marcan como `Configured` en la columna de configuración de la [Página de control de la ingesta][5].
 
 ## Trazas con errores o poco frecuentes
 
-Para las trazas que no se capturan a través del muestreo basado en la fase inicial, existen dos mecanismos de muestreo adicionales del Datadog Agent para asegurar la conservación y el consumo de trazas críticas y diversas. Estos dos muestreadores conservan un conjunto diverso de trazas locales (conjuntos de tramos del mismo host) mediante la captura de todas las combinaciones de un conjunto predeterminado de etiquetas:
+Para las trazas que no se capturan a través del muestreo basado en la fase inicial, existen dos mecanismos de muestreo adicionales del Datadog Agent para asegurar la conservación y la ingesta de trazas críticas y diversas. Estos dos muestreadores conservan un conjunto diverso de trazas locales (conjuntos de tramos del mismo host) mediante la captura de todas las combinaciones de un conjunto predeterminado de etiquetas:
 
 - **Trazas con errores**: Es importante muestrear los errores, dado que así se pueden observar los posibles errores del sistema.
 - **Trazas poco frecuentes**: Muestrear las trazas poco frecuentes te permite mantener la visibilidad sobre la totalidad del sistema, puesto que te aseguras de que los servicios y recursos con poco tráfico se sigan monitorizando.
@@ -264,7 +264,7 @@ Para las trazas que no se capturan a través del muestreo basado en la fase inic
 ### Trazas con errores
 `ingestion_reason: error`
 
-El muestreador de trazas con errores captura fragmentos de trazas que contienen tramos con errores no capturados por el muestreo basado en la fase inicial. Puedes capturar hasta 10 trazas con errores por segundo (por Agent). Esto garantiza una visibilidad completa de los errores cuando la frecuencia del muestreo basado en la fase inicial es baja.
+El muestreador de trazas con errores captura fragmentos de trazas que contienen tramos con errores no capturados mediante el muestreo basado en la fase inicial. Puedes capturar hasta 10 trazas con errores por segundo (por Agent). Esto garantiza una visibilidad completa de los errores cuando la frecuencia del muestreo basado en la fase inicial es baja.
 
 Con el Agent 7.33 y sus versiones posteriores, puedes configurar el muestreador de errores en el archivo principal de configuración del Agent (`datadog.yaml`) o con las variables de entorno:
 ```
@@ -281,9 +281,9 @@ Con el Agent 7.33 y sus versiones posteriores, puedes configurar el muestreador
 
 #### Datadog Agent 7.42.0 y superior
 
-<div class="alert alert-warning"> Esta función está actualmente en fase Beta. Ponte en contacto con el <a href="https://www.datadoghq.com/support/">servicio de asistencia de Datadog </a> para solicitar acceso a esta funcionalidad.</div>
+<div class="alert alert-warning"> Esta función está actualmente en Beta. Ponte en contacto con el <a href="https://www.datadoghq.com/support/">servicio de asistencia de Datadog </a> para solicitar acceso a esta funcionalidad.</div>
 
-El muestreo de errores se puede configurar de forma remota si utilizas el Agent versión [7.42.0][20] o superior. Sigue la [documentación][21] para habilitar la configuración remota en tus Agents. Con la configuración remota, puedes habilitar la recopilación de tramos poco frecuentes sin tener que reiniciar el Datadog Agent .
+El muestreo de errores se puede configurar de forma remota si utilizas el Agent versión [7.42.0][20] o superior. Sigue la [documentación][21] para habilitar la configuración remota en tus Agents. Con la configuración remota, puedes habilitar la recopilación de tramos poco frecuentes sin tener que reiniciar el Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 y superior
 
@@ -314,7 +314,7 @@ Por defecto, el muestreador de trazas poco frecuentes está **no activado**.
 
 **Nota: Cuando se **habilita**, los tramos descartados a través de las reglas de la biblioteca de rastreo o la lógica personalizada como `manual.drop` se **excluyen** en este muestreador.
 
-Para configurar el muestreador de trazas poco frecuentes, actualiza la configuración `apm_config.enable_rare_sampler` en el archivo principal de configuración del Agent (`datadog.yaml`) o con la variable de entorno `DD_APM_ENABLE_RARE_SAMPLER` :
+Para configurar el muestreador de trazas poco frecuentes, actualiza la configuración `apm_config.enable_rare_sampler` en el archivo principal de la configuración del Agent (`datadog.yaml`) o con la variable de entorno `DD_APM_ENABLE_RARE_SAMPLER` :
 
 ```
 @params apm_config.enable_rare_sampler - boolean - optional - default: false
@@ -331,7 +331,7 @@ Por defecto, el muestreador de trazas poco frecuentes está activado.
 
 **Nota: Cuando **está activado**, los tramos descartados a través de las reglas de la biblioteca de rastreo o la lógica personalizada como `manual.drop` **están excluidos** en este muestreador. Para incluir estos tramos en esta lógica, actualiza al Datadog Agent 6.41.0/7.41.0 o superior.
 
-Para cambiar la configuración por defecto del muestreador de trazas poco frecuentes, actualiza la configuración `apm_config.disable_rare_sampler` en el archivo principal de configuración del Agent (`datadog.yaml`) o con la variable entorno `DD_APM_DISABLE_RARE_SAMPLER` :
+Para cambiar la configuración por defecto del muestreador de trazas poco frecuentes, actualiza la configuración `apm_config.disable_rare_sampler` en el archivo principal de la configuración del Agent (`datadog.yaml`) o con la variable entorno `DD_APM_DISABLE_RARE_SAMPLER` :
 
 ```
 @params apm_config.disable_rare_sampler - boolean - optional - default: false
@@ -341,7 +341,7 @@ Para cambiar la configuración por defecto del muestreador de trazas poco frecue
 ## Forzar la conservación y el descarte
 `ingestion_reason: manual`
 
-El mecanismo muestreo basado en la fase inicial se puede sustituir en la biblioteca de rastreo. Por ejemplo, si necesitas monitorizar una transacción crítica, puedes forzar la conservación de la traza asociada. Por otro lado, también puedes forzar el descarte de la traza en caso de que contenga información repetitiva o innecesaria, como los checks de estado.
+El mecanismo de muestreo basado en la fase inicial se puede sustituir en la biblioteca de rastreo. Por ejemplo, si necesitas monitorizar una transacción crítica, puedes forzar la conservación de la traza asociada. Por otro lado, también puedes forzar el descarte de la traza en caso de que contenga información repetitiva o innecesaria, como los checks de estado.
 
 - Configura Manual Keep en un tramo para indicar que se deben consumir este y todos los tramos secundarios. El rastreo resultante puede aparecer incompleto en la interfaz de usuario si el tramo en cuestión no es el tramo raíz de la traza.
 
