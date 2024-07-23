@@ -1,8 +1,6 @@
 ---
 title: Split Logs for HTTP Client
 disable_toc: false
-aliases:
-    - /observability_pipelines/split_logs/http_client/
 private: true
 ---
 
