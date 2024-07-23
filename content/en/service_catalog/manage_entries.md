@@ -22,7 +22,7 @@ further_reading:
 
 Datadog Service Catalog is pre-populated with entries detected through [APM][2], eBPF-based autodiscovery with [Universal Service Monitoring][1], and RUM applications.
 
-With APM, Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn’t been instrumented yet. These uninstrumented dependencies are categorized as separate *services* today. With the new [inferred entities experience][7], you can filter Service Catalog entries by entity type, such as database, queue, or third-party API. 
+With APM, Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn't been instrumented yet. These uninstrumented dependencies are categorized as separate *services*. With the new [inferred entities experience][7], you can filter Service Catalog entries by entity type, such as database, queue, or third-party API. 
 
 ## Enrich auto-detected services with metadata 
 To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the beta program for [schema 3.0][3] by [submitting a request][4].
