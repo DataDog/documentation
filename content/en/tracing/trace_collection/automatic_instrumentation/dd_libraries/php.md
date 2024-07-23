@@ -31,7 +31,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The minimum PHP version requirement for the latest version of `dd-trace-php` is PHP 7. If you are using PHP 5, you can still use the PHP tracer up to version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 is EOL as of version 1.0 of the PHP library.
+The minimum PHP version requirement for the latest version of `dd-trace-php` is PHP 7. If you are using PHP 5, you can still use the PHP APM SDK up to version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 is EOL as of version 1.0 of the PHP library.
 
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
@@ -91,7 +91,7 @@ If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS
 
 <div class="alert alert-warning">
 <strong>SELinux:</strong>
-If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
+If the httpd SELinux policies are configured on the host, functionality of the APM SDK may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
 
 `allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
 
@@ -101,7 +101,7 @@ If the httpd SELinux policies are configured on the host, functionality of the t
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
-Datadog supports all web frameworks out of the box. Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods to trace them. The PHP tracer supports automatic instrumentation for several libraries.
+Datadog supports all web frameworks out of the box. Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods to trace them. The PHP APM SDK supports automatic instrumentation for several libraries.
 
 Automatic instrumentation captures:
 
@@ -120,7 +120,7 @@ Additional steps are required for instrumenting CLI scripts. Read [Trace PHP CLI
 
 ## Upgrading
 
-To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
+To upgrade the PHP APM SDK, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
 
 Once the installation is completed restart PHP (PHP-FPM or the Apache SAPI).
 
@@ -128,7 +128,7 @@ Once the installation is completed restart PHP (PHP-FPM or the Apache SAPI).
 
 ## Removing
 
-To remove the PHP tracer:
+To remove the PHP APM SDK:
 
 1. For php-fpm, stop the php-fpm service, otherwise stop the Apache web server.
 2. Unlink files `98-ddtrace.ini` and `99-ddtrace-custom.ini` from your php configuration folder.
@@ -138,7 +138,7 @@ To remove the PHP tracer:
 
 ## Troubleshooting an application crash
 
-In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump or a Valgrind trace and contact Datadog support.
+In the unusual event of an application crash caused by the PHP APM SDK, typically because of a segmentation fault, the best thing to do is obtain a core dump or a Valgrind trace and contact Datadog support.
 
 ### Install debug symbols
 
