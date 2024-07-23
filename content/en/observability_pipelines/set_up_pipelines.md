@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Set up your pipelines and its [sources][2], [processors][3], [destinations][4] in the Observability Pipelines UI. The general steps for setting up a pipeline are:
+Set up your pipelines and its [sources][2], [processors][3], [destinations][4] in the Observability Pipelines UI. The general setup steps are:
 
 1. Navigate to [Observability Pipelines][1]
 1. Select a template:

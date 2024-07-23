@@ -57,14 +57,20 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 ## Get started
 
+To set up a pipeline:
+
 1. Navigate to [Observability Pipelines][1].
-1. Select a use case:
+1. Select a template:
     - [Log volume control][2]
     - [Dual ship logs][3]
     - [Split logs][4]
     - [Archive logs to Datadog Archives][5]
     - [Sensitive data redaction][6]
-1. Enable monitors.
+1. Select and set up your source.
+1. Select and set up your destinations.
+1. Set up you processors.
+1. Install the Observability Pipelines Worker.
+1. Enable monitors for your pipeline.
 
 See [Set Up Pipelines][7] for more information.
 
