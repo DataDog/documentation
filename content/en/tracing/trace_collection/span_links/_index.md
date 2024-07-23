@@ -12,8 +12,6 @@ further_reading:
       text: 'Custom Instrumentation with Datadog Libraries'
 ---
 
-<div class="alert alert-info">Span link support is in beta.</a></div>
-
 ## Overview
 
 Span links are an [OpenTelemetry concept][5] and a part of the [OpenTelemetry Tracing API][2]. Datadog supports span links for:
