@@ -636,7 +636,7 @@ span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_D
 La conservación manual de las trazas debe realizarse antes de la propagación del contexto. Si se mantiene después de la propagación del contexto, el sistema no puede asegurar que se mantenga la traza completa en todos los servicios. La conservación de la traza manual se configura en la ubicación del cliente del rastreo, por lo que la ubicación del Agent o del servidor todavía puede descartar la traza de acuerdo con las reglas de muestreo.
 
 
-## Únicos tramos
+## Tramos únicos
 `ingestion_reason: single_span`
 
 Si necesitas muestrear un tramo específico, pero no necesitas que esté disponible la traza completa, las bibliotecas de rastreo te permiten establecer una frecuencia de muestreo que se configurará para un único tramo.
