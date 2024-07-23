@@ -4,11 +4,12 @@
     "description": "",
     "scripts": {
         "test": "npm run build; vitest run --coverage --reporter=verbose",
-        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets",
-        "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle --minify > ./dist/markdoc-client-renderer.min.js",
-        "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle > ./dist/markdoc-client-renderer.js",
+        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets && npm run copy-templates",
+        "build-prod-renderer": "npx esbuild ./src/helperModules/HtmlBuilder/assets/markdoc-client-renderer.js --bundle --minify > ./src/helperModules/HtmlBuilder/assets/markdoc-client-renderer.min.js",
+        "build-dev-renderer": "npx esbuild ./src/helperModules/HtmlBuilder/assets/markdoc-client-renderer.js --bundle > ./dist/helperModules/HtmlBuilder/assets/markdoc-client-renderer.js",
         "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer",
-        "copy-assets": "cp -r ./src/helperModules/HtmlBuilder/templates ./dist/helperModules/HtmlBuilder/templates"
+        "copy-templates": "cp -r ./src/helperModules/HtmlBuilder/templates ./dist/helperModules/HtmlBuilder/templates",
+        "copy-assets": "cp -r ./src/helperModules/HtmlBuilder/assets ./dist/helperModules/HtmlBuilder/assets"
     },
     "dependencies": {
         "ejs": "^3.1.10",

@@ -18,6 +18,8 @@ const pageTemplate = fs.readFileSync(
   'utf8'
 );
 
+const styles = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
+
 export class HtmlBuilder {
   /**
    * Build the HTML output for a given parsed .mdoc file.
@@ -52,9 +54,8 @@ export class HtmlBuilder {
     }
 
     // Build the page content HTML
-    const pageContent = MarkdocStaticCompiler.renderers.html(renderableTree);
-
-    const content = `${chooser}${pageContent}`;
+    const document = MarkdocStaticCompiler.renderers.html(renderableTree);
+    const content = `${chooser}${document}`;
     const html = ejs.render(pageTemplate, {
       content,
       renderableTree,
@@ -62,7 +63,14 @@ export class HtmlBuilder {
       pagePrefsConfig: p.parsedFile.frontmatter.page_preferences || []
     });
 
-    const formattedHtml = prettier.format(html, { parser: 'html' });
+    const styledHtml = `
+      <style>
+        ${styles}
+      </style>
+      ${html}
+    `;
+
+    const formattedHtml = prettier.format(styledHtml, { parser: 'html' });
     return formattedHtml;
   }
 
