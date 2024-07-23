@@ -79,6 +79,13 @@ The text component is invisible and the button is disabled unless both text inpu
 
 {{< img src="service_management/app_builder/is-disabled.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
 
+You can also disable a component based on the app context, such as the team that the user is on.
+
+For example, you can enable a component only for users who are in the Product Management team:
+1. Click the button component on your canvas.
+1. Click the code editor symbol (**</>**) next to the **Is Disabled** property.
+1. Add the expression `${global.user.teams[0].name == 'Product Management'}`.
+
 ### Disable a component while loading
 
 Another common use case is disabling a component while a query is in a loading state. In the [EC2 Instance Manager blueprint][3], the `instanceType` select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
