@@ -132,7 +132,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
      features:
        apm:
          instrumentation:
-           enabled: true  
+           enabled: true
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -142,7 +142,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
@@ -179,7 +179,7 @@ To enable Single Step Instrumentation with Helm:
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -214,7 +214,7 @@ DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KE
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
-Available versions are listed in tracer source repositories for each language:
+Available versions are listed in SDK source repositories for each language:
 
 - [Java][8] (`java`)
 - [Node.js][9] (`js`)
@@ -246,7 +246,7 @@ DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https:/
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
-Available versions are listed in tracer source repositories for each language:
+Available versions are listed in SDK source repositories for each language:
 
 - [Java][8] (`java`)
 - [Node.js][9] (`js`)
@@ -280,7 +280,7 @@ To enable instrumentation for specific namespaces, add `enabledNamespaces` confi
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          enabledNamespaces: # Add namespaces to instrument
            - default
            - applications
@@ -292,7 +292,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          disabledNamespaces: # Add namespaces to not instrument
            - default
            - applications
@@ -351,7 +351,7 @@ To automatically instrument applications in specific pods, add the appropriate l
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
-Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
+Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and SDK source repositories for each language:
 
 - [Java][31]
 - [Node.js][32]
