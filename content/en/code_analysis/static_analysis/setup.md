@@ -27,14 +27,16 @@ Code Analysis is in public beta.
 {{< /callout >}}
 
 ## Overview
+Set up Datadog Static Analysis in-app [here][1].
 
-To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory and specify which rulesets you want to include for your programming language(s).
+To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory and specify which rulesets you want to apply and where for your programming language(s).
 
 {{< img src="code_analysis/static_analysis/apply_python_rulesets.png" alt="Copy and paste the Code Quality and Security rulesets from the available options for Python on the Code Analysis Setup page" style="width:100%;">}} 
 
 Select one or multiple programming languages and choose which rulesets you want to copy and use on the [Code Analysis Setup page][1]. 
 
-## Add a Static Analysis YAML file to your project
+## Customizing your configuration
+By default, Datadog Static Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.
 
 You can include the following **global** options in the `static-analysis.datadog.yml` file:
 
@@ -113,7 +115,7 @@ ignore:
   - "**/*.file"
 ```
 
-For example, you can use the following:
+Example configuration file:
 
 ```yaml
 rulesets:
@@ -156,6 +158,51 @@ ignore:
   - "lib/third_party"
   - "**/*.generated.py"
   - "**/*.pb.py"
+```
+
+### Ignoring violations
+#### Ignore for a repository
+Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
+
+```
+rulesets:
+  - javascript-express:
+    rules:
+      reduce-server-fingerprinting:
+        ignore: "**"
+```
+
+#### Ignore for a file or directory
+Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see [Static Analysis Setup][5].
+
+```
+rulesets:
+  - javascript-express:
+    rules:
+      reduce-server-fingerprinting:
+        ignore: "ad-server/src/app.js"
+```
+
+#### Ignore for a specific instance
+
+To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
+
+```python
+#no-dd-sa
+foo = 1
+bar = 2
+```
+
+You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specify the name of the rule you wish to ignore in place of `<rule-name>` using this template: 
+
+`no-dd-sa:<rule-name>`
+
+For example, in the following JavaScript code snippet, the line `my_foo = 1` is analyzed by all rules except for the `javascript-code-style/assignment-name` rule, which tells the developer to use [camelCase][6] instead of [snake_case][7].
+
+```javascript
+// no-dd-sa:javascript-code-style/assignment-name
+my_foo = 1
+myBar = 2
 ```
 
 ## Set up the GitHub integration 

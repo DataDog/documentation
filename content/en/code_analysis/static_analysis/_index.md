@@ -109,52 +109,6 @@ The two types of fixes are distinguished visually in the UI with different label
 ### Customizing your configuration
 See [this page][8] to learn how to customize how Static Analyis is configured in your repositories.
 
-### Ignoring violations
-
-#### Ignore for a repository
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
-
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore: "**"
-```
-
-#### Ignore for a file or directory
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see [Static Analysis Setup][5].
-
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore: "ad-server/src/app.js"
-```
-
-#### Ignore for a specific instance
-
-To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
-
-```python
-#no-dd-sa
-foo = 1
-bar = 2
-```
-
-You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specify the name of the rule you wish to ignore in place of `<rule-name>` using this template: 
-
-`no-dd-sa:<rule-name>`
-
-For example, in the following JavaScript code snippet, the line `my_foo = 1` is analyzed by all rules except for the `javascript-code-style/assignment-name` rule, which tells the developer to use [camelCase][6] instead of [snake_case][7].
-
-```javascript
-// no-dd-sa:javascript-code-style/assignment-name
-my_foo = 1
-myBar = 2
-```
-
 ### Reporting false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
 
