@@ -49,7 +49,7 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7, and .NET 8.
+The .NET APM SDK supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7, and .NET 8.
 
 For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
@@ -60,7 +60,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 <div class="alert alert-info">
@@ -71,25 +71,25 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 
 Before you begin, make sure you've already [installed and configured the Agent][12].
 
-1. [Install the tracer.](#install-the-tracer)
-2. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
+1. [Install the APM SDK.](#install-the-apm-sdk)
+2. [Enable the APM SDK for your service.](#enable-the-apm-sdk-for-your-service)
 3. [View your live data.](#view-your-live-data)
 
-### Install the tracer
+### Install the APM SDK
 
 After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
 
-You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
+You can install the Datadog .NET APM SDK machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-To install the .NET Tracer machine-wide:
+To install the .NET APM SDK machine-wide:
 
-1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET APM SDK MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
-2. Run the .NET Tracer MSI installer with administrator privileges.
+2. Run the .NET APM SDK MSI installer with administrator privileges.
 
 You can also script the MSI setup by running the following in PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
@@ -98,11 +98,11 @@ You can also script the MSI setup by running the following in PowerShell: `Start
 
 {{% tab "Linux" %}}
 
-To install the .NET Tracer machine-wide:
+To install the .NET APM SDK machine-wide:
 
-1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
+1. Download the latest [.NET APM SDK package][1] that supports your operating system and architecture.
 
-2. Run one of the following commands to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
+2. Run one of the following commands to install the package and create the .NET SDK log directory `/var/log/datadog/dotnet` with the appropriate permissions:
 
    Debian or Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
@@ -118,9 +118,9 @@ To install the .NET Tracer machine-wide:
 
 #### Chiseled containers
 
-To install the .NET Tracer in chiseled or distroless Docker images (without a shell), use the following Dockerfile commands:
+To install the .NET APM SDK in chiseled or distroless Docker images (without a shell), use the following Dockerfile commands:
 
-- Use `ADD` to put the tracer files in the container.
+- Use `ADD` to put the APM SDK files in the container.
 - Use `COPY --chown=$APP_UID` with an empty folder as source to create the logs path.
 
 For example, in your Dockerfile:
@@ -139,7 +139,7 @@ COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
   <strong>Note:</strong> This installation does not instrument applications running in IIS. For applications running in IIS, follow the Windows machine-wide installation process.
 </div>
 
-To install the .NET Tracer per-application:
+To install the .NET APM SDK per-application:
 
 1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
@@ -148,9 +148,9 @@ To install the .NET Tracer per-application:
 
 {{< /tabs >}}
 
-### Enable the tracer for your service
+### Enable the APM SDK for your service
 
-To enable the .NET Tracer for your service, set the required environment variables and restart the application.
+To enable the .NET APM SDK for your service, set the required environment variables and restart the application.
 
 For information about the different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
 
@@ -160,7 +160,7 @@ For information about the different methods for setting environment variables, s
 
 #### Internet Information Services (IIS)
 
-1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
+1. The .NET APM SDK MSI installer adds all required environment variables. There are no environment variables you need to configure.
 
    <div class="alert alert-warning">
      <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
@@ -175,13 +175,13 @@ For information about the different methods for setting environment variables, s
    ```
 
    <div class="alert alert-warning">
-     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
+     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the APM SDK. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
 #### Services not in IIS
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
+<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the APM SDK using the MSI.</div>
 
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
@@ -221,7 +221,7 @@ Docker examples are also available in the [repository][2].
 
 ### View your live data
 
-After enabling the .NET Tracer for your service:
+After enabling the .NET APM SDK for your service:
 
 1. Restart your service.
 
@@ -248,7 +248,7 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 To use custom instrumentation in your .NET application:
 
 1. Add the `Datadog.Trace` [NuGet package][1] to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+2. In your application code, access the global APM SDK through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
@@ -262,7 +262,7 @@ To use custom instrumentation in your .NET application:
 
 To use custom instrumentation in your .NET application:
 1. Add the `Datadog.Trace` [NuGet package][1] to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+2. In your application code, access the global APM SDK through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
@@ -272,7 +272,7 @@ To use custom instrumentation in your .NET application:
 
 To use custom instrumentation in your .NET application:
 
-1. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+1. In your application code, access the global APM SDK through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 {{% /tab %}}
 
@@ -282,13 +282,13 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 ## Configuring process environment variables
 
-To attach automatic instrumentation to your service, you must set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
+To attach automatic instrumentation to your service, you must set the required environment variables before starting the application. See [Enable the APM SDK for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET APM SDK installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
 ### Windows
 
 #### Windows services
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
+<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the APM SDK using the MSI.</div>
 
 {{< tabs >}}
 
@@ -340,7 +340,7 @@ To automatically instrument a console application, set the environment variables
 ```bat
 rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
-rem Unless v2.14.0+ and you installed the tracer with the MSI
+rem Unless v2.14.0+ and you installed the SDK with the MSI
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Set additional Datadog environment variables
