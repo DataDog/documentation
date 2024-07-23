@@ -20,7 +20,7 @@ title: Buscar logs
 
 Aunque la información de logs individualmente puede ser útil visualizada como una lista, a veces se puede acceder a información valiosa a través de la agregación. Para acceder a esta información, busca logs en el [Log Explorer][5] y visualízalos como series temporales, listas principales, mapas de árbol, gráficos circulares o tablas.
 
-La búsqueda de Log Explorer consta de un rango temporal y una consulta de búsqueda, mezclando la búsqueda de `key:value` y texto completo.
+La búsqueda de Log Explorer consta de un rango temporal y una consulta de búsqueda, combinando la búsqueda de `key:value` y texto completo.
 
 ## Consulta de búsqueda
 
@@ -28,7 +28,7 @@ Por ejemplo, para filtrar en logs producidos por un servicio de tienda web, con 
 
 {{< img src="logs/explorer/search_filter.png" alt="Crear una consulta de búsqueda en el Log Explorer que filtre los logs de error de pagos rechazados de un servicio de tienda web" style="width:100%;" >}}
 
-[Los logs indexados][1] admiten tanto consultas de texto completo como búsquedas de `key:value`.
+Los [logs indexados][1] admiten tanto consultas de texto completo como búsquedas de `key:value`.
 
 **Nota**: Las consultas a `key:value` **no** requieren que se [declare una faceta][2] de antemano.
 
@@ -39,11 +39,11 @@ Utiliza la función de autocompletar de la barra de búsqueda para completar tu 
 - Tus búsquedas recientes (no se muestran las búsquedas recientes de otros usuarios)
 - Vistas guardadas
 
-{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="La barra de búsqueda de logs muestra service: como la consulta, y el remitente, el balance, el servidor de avisos y la VPC como opciones a autocompletar" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="La barra de búsqueda de logs muestra el servicio: como consulta y el remitente, el balance, el servidor de avisos y la VPC como opciones a autocompletar" style="width:80%;">}}
 
 ### Facetas y valores de autocompletar
 
-La barra de búsqueda autosugiere facetas en función de lo que introduzcas en la barra de búsqueda. Estas facetas se muestran en el mismo orden en el que aparecen en el [panel de facetas][5]. Si una faceta tiene un nombre definido, se muestra a la derecha del menú desplegable. Las facetas que no están configuradas para mostrarse en el panel de facetas no se autosugieren para una búsqueda.
+La barra de búsqueda sugiere automáticamente facetas en función de lo que escribas. Estas facetas se muestran en el mismo orden en el que aparecen en el [panel de facetas][5]. Si una faceta tiene un nombre definido, se muestra a la derecha del desplegable. Las facetas que no están configuradas para mostrarse en el panel de facetas no se autosugieren para una búsqueda.
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="La barra de búsqueda de logs que muestra `network` como la consulta y las facetas @network.bytes_written, @network.client.ip y @network.interface como opciones a autocompletar" style="width:80%;">}}
 
