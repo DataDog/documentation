@@ -10,6 +10,7 @@
     const prefOptionsConfig =
     <%- JSON.stringify(prefOptionsConfig, null, 2) %>;
     const contentDiv = document.getElementById('content');
+    const chooserDiv = document.getElementById('chooser');
     function handleValueChange(e) {
         const node = e.target;
         const prefId = node.getAttribute('data-pref-id');

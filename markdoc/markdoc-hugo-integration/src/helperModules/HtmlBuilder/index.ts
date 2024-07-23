@@ -12,7 +12,7 @@ import { PagePrefsConfig } from '../../schemas/yaml/frontMatter';
 import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
-import { Chooser, ChooserProps } from './components/chooser';
+import { Chooser, ChooserProps, rerenderChooser } from './components/chooser';
 import { renderToString } from 'react-dom/server';
 
 const pageTemplate = fs.readFileSync(
@@ -250,5 +250,9 @@ export class HtmlBuilder {
     });
 
     return resolvedPagePrefs;
+  }
+
+  static rerenderChooser(p: { chooserProps: ChooserProps; elementToPatch: Element }) {
+    rerenderChooser(p);
   }
 }

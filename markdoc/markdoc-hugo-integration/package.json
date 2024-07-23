@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "ejs": "^3.1.10",
+        "incremental-dom": "^0.7.0",
         "js-yaml": "^4.1.0",
         "markdoc-static-compiler": "file:../markdoc-static-compiler",
         "react": "^18.3.1",

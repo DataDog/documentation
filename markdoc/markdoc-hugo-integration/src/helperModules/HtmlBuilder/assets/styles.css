@@ -1,5 +1,6 @@
 .markdoc__hidden {
     background-color: lightgray;
+    /* display: none; */
 }
 .markdoc-pref__pill {
     display: inline-block;

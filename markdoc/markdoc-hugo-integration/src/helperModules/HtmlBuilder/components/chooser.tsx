@@ -1,4 +1,12 @@
 import { ResolvedPagePrefs } from '../../../schemas/resolvedPagePrefs';
+import {
+  elementOpen,
+  elementClose,
+  elementVoid,
+  text,
+  patch,
+  attr
+} from 'incremental-dom';
 
 export interface ChooserProps {
   resolvedPagePrefs: ResolvedPagePrefs;
@@ -40,6 +48,47 @@ export const Chooser = (props: ChooserProps) => {
 };
 
 /**
- * Rerender the chooser component incrementally.
+ * Patch an existing element with the incrementally rendered chooser component.
  */
-export const rerenderChooser = () => {};
+export const rerenderChooser = (p: {
+  chooserProps: ChooserProps;
+  elementToPatch: Element;
+}) => {
+  patch(p.elementToPatch, () => renderChooserIncrementally(p.chooserProps));
+};
+
+/**
+ * Render the chooser component incrementally.
+ */
+const renderChooserIncrementally = (props: ChooserProps) => {
+  elementOpen('div', null, ['id', 'chooser']);
+  Object.keys(props.resolvedPagePrefs).forEach((prefId) => {
+    const resolvedPref = props.resolvedPagePrefs[prefId];
+    const currentValue = props.valsByPrefId[prefId] || resolvedPref.defaultValue;
+    elementOpen('div', null, ['class', 'markdoc-pref__container']);
+    elementOpen('div', null, ['class', 'markdoc-pref__label']);
+    text(resolvedPref.displayName);
+    elementClose('div');
+    resolvedPref.options.forEach((option) => {
+      const selected = option.id === currentValue ? 'selected' : '';
+      elementOpen(
+        'div',
+        null,
+        [
+          'key',
+          option.id,
+          'class',
+          `markdoc-pref__pill ${selected}`,
+          'data-pref-id',
+          resolvedPref.identifier,
+          'data-option-id',
+          option.id
+        ],
+        []
+      );
+      text(option.displayName);
+      elementClose('div');
+    });
+    elementClose('div');
+  });
+};
