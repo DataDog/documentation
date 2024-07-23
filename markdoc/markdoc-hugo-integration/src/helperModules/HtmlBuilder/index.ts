@@ -18,7 +18,12 @@ const pageTemplate = fs.readFileSync(
   'utf8'
 );
 
-const styles = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
+const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
+
+const clientRendererScriptStr = fs.readFileSync(
+  path.resolve(__dirname, 'assets/markdoc-client-renderer.js'),
+  'utf8'
+);
 
 export class HtmlBuilder {
   /**
@@ -54,24 +59,43 @@ export class HtmlBuilder {
     }
 
     // Build the page content HTML
-    const document = MarkdocStaticCompiler.renderers.html(renderableTree);
-    const content = `${chooser}${document}`;
+    const content = MarkdocStaticCompiler.renderers.html(renderableTree);
     const html = ejs.render(pageTemplate, {
       content,
+      chooser,
       renderableTree,
+      defaultValsByPrefId,
       prefOptionsConfig: p.prefOptionsConfig,
       pagePrefsConfig: p.parsedFile.frontmatter.page_preferences || []
     });
 
-    const styledHtml = `
-      <style>
-        ${styles}
-      </style>
-      ${html}
+    const standaloneHtml = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script>
+            ${this.getClientRendererScriptStr()}
+          </script>
+          <style>
+            ${this.getStylesStr()}
+          </style>
+        </head>
+        <body>
+          ${html}
+        </body>
+      </html>
     `;
 
-    const formattedHtml = prettier.format(styledHtml, { parser: 'html' });
+    const formattedHtml = prettier.format(standaloneHtml, { parser: 'html' });
     return formattedHtml;
+  }
+
+  static getStylesStr() {
+    return stylesStr;
+  }
+
+  static getClientRendererScriptStr() {
+    return clientRendererScriptStr;
   }
 
   /**

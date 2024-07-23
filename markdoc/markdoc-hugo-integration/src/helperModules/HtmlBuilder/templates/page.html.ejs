@@ -1,12 +1,9 @@
+<div id="chooser"><%- chooser %></div>
+<div id="content"><%- content %></div>
 <script>
-    function handleValueChange(varName, newValue) {
-        console.log('handleValueChange called');
-        console.log('varName:', varName);
-        console.log('newValue:', newValue);
-    }
-</script>
-<%- content %>
-<script>
+    let selectedValsByPrefId =
+    <%- JSON.stringify(defaultValsByPrefId, null, 2) %>;
+
     const renderableTree =
     <%- JSON.stringify(renderableTree, null, 2) %>;
 
@@ -15,4 +12,11 @@
 
     const prefOptionsConfig =
     <%- JSON.stringify(prefOptionsConfig, null, 2) %>;
+
+    const contentDiv = document.getElementById('content');
+
+    function handleValueChange(varName, newValue) {
+      selectedValsByPrefId[varName] = newValue;
+      MarkdocClientRenderer(renderableTree, contentDiv, { variables: selectedValsByPrefId });
+    }
 </script>
