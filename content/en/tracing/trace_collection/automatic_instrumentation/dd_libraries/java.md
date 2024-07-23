@@ -21,7 +21,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
+The latest Java APM SDK supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
 For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
@@ -31,11 +31,11 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 ### Instrument your application
 
-After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
+After you install and configure your Datadog Agent, the next step is to add the APM SDK directly in the application to instrument it. Read more about [compatibility information][1].
 
 To begin tracing your applications:
 
-1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
+1. Download `dd-java-agent.jar` that contains the latest APM SDK class files, to a folder that is accessible by your Datadog user:
 
 {{< tabs >}}
 {{% tab "Wget" %}}
@@ -82,7 +82,7 @@ To begin tracing your applications:
 Additional [configuration options](#configuration) are described below.
 
 
-### Add the Java Tracer to the JVM
+### Add the Java APM SDK to the JVM
 
 Use the documentation for your application server to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
@@ -229,7 +229,7 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
+If needed, configure the APM SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
 
 ## Further Reading
 
