@@ -68,7 +68,7 @@ For example, if you want a text component to be visible only when two text input
 
 ### Disable a component conditionally
 
-Similar to visibility, you can disable a component unless conditions are met by other components in your app.
+Similar to visibility, you can disable a component unless conditions are met by other aspects of your app, such as other components or the app context.
 
 #### Disable a component based on visibility
 
@@ -81,7 +81,7 @@ The text component is invisible and the button is disabled unless both text inpu
 
 {{< img src="service_management/app_builder/is-disabled.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
 
-#### Disable a component based on app context
+#### Disable a component based on the app context
 
 You can also disable a component based on the app context, such as the team that the user is on.
 
