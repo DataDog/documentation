@@ -101,6 +101,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
     "DATADOG_API_KEY": "<DATADOG_API_KEY>"
   }
   PROTECTED_SETTINGS
+}
 ```
 {{% /tab %}}
 {{% tab "Linux" %}}
