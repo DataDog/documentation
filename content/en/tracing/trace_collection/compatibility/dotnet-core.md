@@ -1,6 +1,6 @@
 ---
 title: .NET and .NET Core Compatibility Requirements
-description: 'Compatibility Requirements for the .NET Tracer'
+description: 'Compatibility Requirements for the .NET APM SDK'
 aliases:
   - /tracing/compatibility_requirements/dotnet-core
   - /tracing/setup_overview/compatibility_requirements/dotnet-core
@@ -20,13 +20,13 @@ further_reading:
 ---
 
 
-The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
+The Datadog .NET APM SDK supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
 
-The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
+The .NET APM SDK is open source. For more information, see the [.NET APM SDK repository][1].
 
 ## Supported .NET and .NET Core runtimes
 
-The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
+The .NET APM SDK supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
 | .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
@@ -44,7 +44,7 @@ Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle
 
 ## Supported processor architectures
 
-The .NET Tracer supports automatic instrumentation on the following architectures:
+The .NET APM SDK supports automatic instrumentation on the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
@@ -56,7 +56,7 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 
 ## Integrations
 
-The [latest version of the .NET Tracer][4] can automatically instrument the following libraries:
+The [latest version of the .NET APM SDK][4] can automatically instrument the following libraries:
 
 | Framework or library            | NuGet package                                                                                        | Integration Name     |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
@@ -94,7 +94,7 @@ Don't see the library you're looking for? First, check if the library produces o
 
 ## OpenTelemetry based integrations
 
-Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet expliciitly tested).
+Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET APM SDK automatically resurfaces traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet explicitly tested).
 
 | Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
 | ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
