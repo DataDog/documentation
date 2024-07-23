@@ -1,6 +1,7 @@
 ---
 title: Dual Ship Logs for HTTP Client
 disable_toc: false
+private: true
 ---
 
 ## Overview

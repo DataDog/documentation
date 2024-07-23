@@ -1,6 +1,7 @@
 ---
 title: Log Volume Control for HTTP Client
 disable_toc: false
+private: true
 ---
 
 ## Overview

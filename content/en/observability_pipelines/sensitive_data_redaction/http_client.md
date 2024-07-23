@@ -1,6 +1,7 @@
 ---
 title: Sensitive Data Redaction for HTTP Client
 disable_toc: false
+private: true
 ---
 
 ## Overview
