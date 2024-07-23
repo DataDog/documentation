@@ -1,12 +1,12 @@
 ---
 title: (Legacy) PHP Compatibility Requirements
-description: 'Compatibility Requirements for the PHP tracer'
+description: 'Compatibility Requirements for the PHP APM SDK'
 further_reading:
     - link: 'tracing/trace_collection/dd_libraries/php'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
-<div class="alert alert-warning">This documentation is for the PHP tracer v0.x. If you are looking for the PHP tracer v1.x documentation, see the latest <a href="/tracing/trace_collection/compatibility/php/">PHP Compatibility Requirements
+<div class="alert alert-warning">This documentation is for the PHP APM SDK v0.x. If you are looking for the PHP APM SDK v1.x documentation, see the latest <a href="/tracing/trace_collection/compatibility/php/">PHP Compatibility Requirements
 </a> documentation.</div>
 
 ## Runtime support policy for PHP APM
@@ -98,7 +98,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | FuelPHP        | 1.1                                     | PHP 7+                     | Generic web tracing             |
 | Laminas        |                                         | All supported PHP versions | Framework-level instrumentation |
 | Laravel        | 4.2, 5.x, 6.x                           | All supported PHP versions | Framework-level instrumentation |
-| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
+| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (SDK `0.52.0+`)    | All supported PHP versions | Framework-level instrumentation |
 | Lumen          | 5.2+                                    | All supported PHP versions | Framework-level instrumentation |
 | Magento        | 1                                       | All supported PHP versions | Generic web tracing             |
 | Magento        | 2                                       | PHP 7+                     | Framework-level instrumentation |
@@ -112,7 +112,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 1.12, 1.21                              | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 2.x                                     | All supported PHP versions | Generic web tracing             |
 
-Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the APM SDK.
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
@@ -170,7 +170,7 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
 
-If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the APM SDK is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP APM SDK uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
 ## Further Reading
 

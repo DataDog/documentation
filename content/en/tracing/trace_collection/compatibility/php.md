@@ -1,6 +1,6 @@
 ---
 title: PHP Compatibility Requirements
-description: 'Compatibility Requirements for the PHP tracer'
+description: 'Compatibility Requirements for the PHP APM SDK'
 aliases:
   - /tracing/compatibility_requirements/php
   - /tracing/setup_overview/compatibility_requirements/php
@@ -12,7 +12,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
-<div class="alert alert-info">This documentation is for the PHP tracer v1.x. If you are looking for the PHP tracer v0.x documentation, see the legacy <a href="/tracing/trace_collection/compatibility/php_v0/">PHP Compatibility Requirements
+<div class="alert alert-info">This documentation is for the PHP APM SDK v1.x. If you are looking for the PHP APM SDK v0.x documentation, see the legacy <a href="/tracing/trace_collection/compatibility/php_v0/">PHP Compatibility Requirements
 </a> documentation.</div>
 
 ## Runtime support policy for PHP APM
@@ -39,7 +39,7 @@ PHP APM supports the following PHP versions (both ZTS and NTS):
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-PHP 5.x is not supported starting version 1.0.0. If you are using PHP 5, you can still use the PHP tracer up to version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0">0.99</a>.
+PHP 5.x is not supported starting version 1.0.0. If you are using PHP 5, you can still use the PHP APM SDK up to version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0">0.99</a>.
 <br>
 If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
 <br>
@@ -107,7 +107,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | FuelPHP        | 1.1                                     | All supported PHP versions  | Generic web tracing             |
 | Laminas        |                                         | All supported PHP versions  | Framework-level instrumentation |
 | Laravel        | 4.2, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
-| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (tracer `0.52.0+`) | All supported PHP versions  | Framework-level instrumentation |
+| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (SDK `0.52.0+`)    | All supported PHP versions  | Framework-level instrumentation |
 | Lumen          | 5.2+                                    | All supported PHP versions  | Framework-level instrumentation |
 | Magento        | 1                                       | All supported PHP versions  | Generic web tracing             |
 | Magento        | 2                                       | All supported PHP versions  | Framework-level instrumentation |
@@ -121,7 +121,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 1.12, 1.21                              | All supported PHP versions  | Framework-level instrumentation |
 | Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
-Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the APM SDK.
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
@@ -180,7 +180,7 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
 
-If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the APM SDK is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP APM SDK uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
 ## Further Reading
 
