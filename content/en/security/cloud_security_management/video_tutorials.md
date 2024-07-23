@@ -10,7 +10,7 @@ further_reading:
 
 Learn how to identify and remediate your top cloud security risks using Datadog's Cloud Security Management (CSM).
 
-{{< youtube id=fVcp2W7zqwg?rel=0 loading=lazy >}}
+{{< youtube id=fVcp2W7zqwg loading=lazy >}}
 
 <br>
 
@@ -18,7 +18,7 @@ Learn how to identify and remediate your top cloud security risks using Datadog'
 
 Learn how to detect and respond to workload threats using CSM Threats.
 
-{{< youtube id=RPILU7A76Pc?rel=0 loading=lazy >}}
+{{< youtube id=RPILU7A76Pc loading=lazy >}}
 
 <br>
 
@@ -26,7 +26,7 @@ Learn how to detect and respond to workload threats using CSM Threats.
 
 Learn how to detect and remediate container and host vulnerabilities using CSM Vulnerabilities.
 
-{{< youtube id=9A-WaQFSWo8?rel=0 loading=lazy >}}
+{{< youtube id=9A-WaQFSWo8 loading=lazy >}}
 
 <br>
 
@@ -34,7 +34,7 @@ Learn how to detect and remediate container and host vulnerabilities using CSM V
 
 Learn how to detect and remediate infrastructure misconfigurations using CSM Misconfigurations.
 
-{{< youtube id=L2E8D5q1rRY?rel=0 loading=lazy >}}
+{{< youtube id=L2E8D5q1rRY loading=lazy >}}
 
 <br>
 
@@ -42,7 +42,7 @@ Learn how to detect and remediate infrastructure misconfigurations using CSM Mis
 
 Learn how to detect and remediate identity and access management (IAM) risks using CSM Identity Risks.
 
-{{< youtube id=fho9qYHfMe8?rel=0 loading=lazy >}}
+{{< youtube id=fho9qYHfMe8 loading=lazy >}}
 
 <br>
 
