@@ -218,8 +218,14 @@ function loadPage(newUrl) {
 
             const pathName = new URL(newUrl).pathname;
 
-            // sets query params if code tabs are present
+            document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((item) => {
+                // Replace language dropdown hrefs with new URL when laoding pages asynchronously
+                // ensures the correct path is used for the language dropdown.
+                const newURL = item.href.replace(item.pathname, pathName); 
+                item.setAttribute('href', newURL);
+            })
 
+            // sets query params if code tabs are present
             initCodeTabs();
 
             const regionSelector = document.querySelector('.js-region-select');
