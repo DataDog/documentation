@@ -12,6 +12,8 @@ import { PagePrefsConfig } from '../../schemas/yaml/frontMatter';
 import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
+import { Chooser, ChooserProps } from './components/chooser';
+import { renderToString } from 'react-dom/server';
 
 const pageTemplate = fs.readFileSync(
   path.resolve(__dirname, 'templates/page.html.ejs'),
@@ -26,6 +28,10 @@ const clientRendererScriptStr = fs.readFileSync(
 );
 
 export class HtmlBuilder {
+  static getChooserHtml(props: ChooserProps) {
+    return renderToString(Chooser(props));
+  }
+
   /**
    * Build the HTML output for a given parsed .mdoc file.
    * This HTML output can be processed by Hugo to generate a static page.
@@ -49,13 +55,17 @@ export class HtmlBuilder {
     const frontmatter = p.parsedFile.frontmatter;
 
     let chooser = '';
+
     if (frontmatter.page_preferences) {
       const resolvedPrefs = this.resolvePagePrefs({
         pagePrefsConfig: frontmatter.page_preferences,
         prefOptionsConfig: p.prefOptionsConfig,
         valsByPrefId: defaultValsByPrefId
       });
-      chooser = this.buildPagePrefsChooserHtml(resolvedPrefs);
+      chooser = this.getChooserHtml({
+        resolvedPagePrefs: resolvedPrefs,
+        valsByPrefId: defaultValsByPrefId
+      });
     }
 
     // Build the page content HTML
@@ -234,68 +244,5 @@ export class HtmlBuilder {
     });
 
     return resolvedPagePrefs;
-  }
-
-  /**
-   * Build the chooser HTML for the page preferences.
-   */
-  static buildPagePrefsChooserHtml(
-    resolvedPagePrefs: ResolvedPagePrefs,
-    valuesByPrefId: Record<string, string> = {}
-  ) {
-    let html = '';
-    html += '<div>';
-    Object.keys(resolvedPagePrefs).forEach((prefId) => {
-      const resolvedPagePref = resolvedPagePrefs[prefId];
-      html += `<div class='markdoc-pref__container'>`;
-      html += `<div class='markdoc-pref__label'>${resolvedPagePref.displayName}</div>`;
-      html += this.buildPrefSelectorHtml({
-        resolvedPagePref,
-        currentValue: valuesByPrefId[prefId] || resolvedPagePref.defaultValue
-      });
-      html += '</div>';
-    });
-    html += '</div>';
-    html += '<hr>';
-    return html;
-  }
-
-  /**
-   * Build a single preference selector HTML element.
-   */
-  static buildPrefSelectorHtml(p: {
-    resolvedPagePref: ResolvedPagePref;
-    currentValue: string;
-  }) {
-    /*
-    // dropdown version
-    return `
-        <div style="display: inline-block; vertical-align: top; margin-right: 1em;">
-          <label>${p.resolvedPagePref.displayName}</label>
-          <select onchange="handleValueChange('${
-            p.resolvedPagePref.identifier
-          }', this.options[this.selectedIndex].value)">
-            ${p.resolvedPagePref.options.map((option) => {
-              const selected = option.id === p.currentValue ? 'selected' : '';
-              return `<option value="${option.id}" ${selected}>${option.displayName}</option>`;
-            })}
-          </select>
-        </div>
-      `;
-    */
-
-    // pill version
-    return `
-      <div>
-        <div>
-          ${p.resolvedPagePref.options
-            .map((option) => {
-              const selected = option.id === p.currentValue ? 'selected' : '';
-              return `<div class="markdoc-pref__pill ${selected}" onclick="handleValueChange('${p.resolvedPagePref.identifier}', '${option.id}')">${option.displayName}</div>`;
-            })
-            .join('')}
-        </div>
-      </div>
-    `;
   }
 }

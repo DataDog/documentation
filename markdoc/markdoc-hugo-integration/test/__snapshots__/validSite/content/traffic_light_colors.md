@@ -13510,66 +13510,65 @@ title: The Colors of the Common Traffic Light
     </style>
   </head>
   <body>
-    <div id="chooser">
-      <div>
+    <div>
+      <div id="chooser">
         <div class="markdoc-pref__container">
           <div class="markdoc-pref__label">Color</div>
-          <div>
-            <div>
-              <div
-                class="markdoc-pref__pill"
-                onclick="handleValueChange('color', 'red')"
-              >
-                Red
-              </div>
-              <div
-                class="markdoc-pref__pill"
-                onclick="handleValueChange('color', 'yellow')"
-              >
-                Yellow
-              </div>
-              <div
-                class="markdoc-pref__pill selected"
-                onclick="handleValueChange('color', 'green')"
-              >
-                Green
-              </div>
-            </div>
+          <div
+            class="markdoc-pref__pill"
+            data-pref-id="color"
+            data-option-id="red"
+          >
+            Red
+          </div>
+          <div
+            class="markdoc-pref__pill"
+            data-pref-id="color"
+            data-option-id="yellow"
+          >
+            Yellow
+          </div>
+          <div
+            class="markdoc-pref__pill selected"
+            data-pref-id="color"
+            data-option-id="green"
+          >
+            Green
           </div>
         </div>
         <div class="markdoc-pref__container">
           <div class="markdoc-pref__label">Item</div>
-          <div>
-            <div>
-              <div
-                class="markdoc-pref__pill selected"
-                onclick="handleValueChange('item', 'grass')"
-              >
-                Grass
-              </div>
-              <div
-                class="markdoc-pref__pill"
-                onclick="handleValueChange('item', 'emerald')"
-              >
-                Emerald
-              </div>
-              <div
-                class="markdoc-pref__pill"
-                onclick="handleValueChange('item', 'lime')"
-              >
-                Lime
-              </div>
-              <div
-                class="markdoc-pref__pill"
-                onclick="handleValueChange('item', 'frog')"
-              >
-                Frog
-              </div>
-            </div>
+          <div
+            class="markdoc-pref__pill selected"
+            data-pref-id="item"
+            data-option-id="grass"
+          >
+            Grass
+          </div>
+          <div
+            class="markdoc-pref__pill"
+            data-pref-id="item"
+            data-option-id="emerald"
+          >
+            Emerald
+          </div>
+          <div
+            class="markdoc-pref__pill"
+            data-pref-id="item"
+            data-option-id="lime"
+          >
+            Lime
+          </div>
+          <div
+            class="markdoc-pref__pill"
+            data-pref-id="item"
+            data-option-id="frog"
+          >
+            Frog
           </div>
         </div>
+        <hr />
       </div>
-      <hr />
     </div>
     <div id="content">
       <article>
@@ -14216,11 +14215,21 @@ title: The Colors of the Common Traffic Light
 
       const contentDiv = document.getElementById("content");
 
-      function handleValueChange(varName, newValue) {
-        selectedValsByPrefId[varName] = newValue;
+      function handleValueChange(e) {
+        const node = e.target;
+        const prefId = node.getAttribute("data-pref-id");
+        const optionId = node.getAttribute("data-option-id");
+
+        selectedValsByPrefId[prefId] = optionId;
         MarkdocClientRenderer(renderableTree, contentDiv, {
           variables: selectedValsByPrefId,
         });
+      }
+
+      // add event listeners to all elements with the class markdoc-pref__pill
+      const prefPills = document.getElementsByClassName("markdoc-pref__pill");
+      for (let i = 0; i < prefPills.length; i++) {
+        prefPills[i].addEventListener("click", handleValueChange);
       }
     </script>
   </body>

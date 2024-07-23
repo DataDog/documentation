@@ -15,6 +15,8 @@
         "ejs": "^3.1.10",
         "js-yaml": "^4.1.0",
         "markdoc-static-compiler": "file:../markdoc-static-compiler",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
         "rimraf": "^5.0.5",
         "zod": "^3.22.4"
     },
@@ -22,6 +24,8 @@
         "@types/ejs": "^3.1.5",
         "@types/js-yaml": "^4.0.9",
         "@types/node": "^20.11.30",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
         "@vitest/coverage-v8": "^2.0.2",
         "esbuild": "0.20.2",
         "typescript": "^5.4.3",
