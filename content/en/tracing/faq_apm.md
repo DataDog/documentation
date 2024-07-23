@@ -100,9 +100,9 @@ Spikes in data ingestion and indexing can be a result of multiple things(share s
 
 ## Data volumes related issues
 If you encounter issues related to the following, there is a possibility that you are exceeding [Datadog's volume guidelines][5]:
-- your trace metrics are not reporting as you would expect in the Datadog platform
-- you are missing some of your resources that you expected to see in the Datadog platform
-- you are seeing traces from your service but are not able to find this service on the [Service Catalog page][14]
+- Your trace metrics are not reporting as you would expect in the Datadog platform
+- You are missing some of your resources that you expected to see in the Datadog platform
+- You are seeing traces from your service but are not able to find this service on the [Service Catalog page][14]
 
 {{% collapse-content title="Data Volume Guidelines" level="h4" %}}
 
