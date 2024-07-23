@@ -1,6 +1,6 @@
 ---
 title: Node.js Compatibility Requirements
-description: 'Compatibility Requirements for the Node.js tracer'
+description: 'Compatibility Requirements for the Node.js APM SDK'
 aliases:
   - /tracing/compatibility_requirements/nodejs
   - /tracing/setup_overview/compatibility_requirements/nodejs
@@ -82,7 +82,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | See note on Complex framework usage.<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
+| [next][18]              | `>=9.5`  | Fully supported | See note on Complex framework usage.<br /><br />The APM SDK supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use APM SDK versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
@@ -90,9 +90,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file (`app.js`).
 
-Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
+Loading the Datadog APM SDK early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
 
-To load the tracer before the framework, use one of the following methods:
+To load the APM SDK before the framework, use one of the following methods:
 
 Prefix all commands you run with an environment variable:
 
