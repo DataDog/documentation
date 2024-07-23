@@ -136,7 +136,9 @@ Configure Flex Tier in the [Logs Index Configuration][2] page:
 
 {{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Options for the Flex tier storage within the index configuration" style="width:100%;" >}}
 
-**Note**: If both tiers are selected, logs are stored in the Standard Tier until the end of the configured retention period before they are stored in the Flex Tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
+**Note**: If both tiers are selected, logs are stored in the Standard Tier until the end of the configured retention period, before they are stored in the Flex Tier. For example, if you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days: logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days.
+
+The following table explains the impact of adding or removing different storage tiers to an index.
 
 <table>
   <tr align="center">
