@@ -1,0 +1,3 @@
+# Ignore .md files compiled from Markdoc
+markdoc_testing/primary_colors.md
+markdoc_testing/traffic_light_colors.md

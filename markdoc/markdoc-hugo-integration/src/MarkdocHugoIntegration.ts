@@ -17,6 +17,8 @@ export class MarkdocHugoIntegration {
   validationErrorsByFilePath: Record<string, string> = {};
   // Whether to create a self-contained HTML file (useful for testing)
   standaloneMode: boolean;
+  private compiledFiles: string[] = [];
+  contentDir: string;
 
   /**
    * Ingest the available configuration files
@@ -29,6 +31,7 @@ export class MarkdocHugoIntegration {
     partialsDir: string;
     standaloneMode?: boolean;
   }) {
+    this.contentDir = p.contentDir;
     this.standaloneMode = p.standaloneMode || false;
     this.prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
       p.prefOptionsConfigDir
@@ -56,6 +59,7 @@ export class MarkdocHugoIntegration {
    * Compile all detected Markdoc files to HTML.
    */
   compile() {
+    this.compiledFiles = [];
     for (const markdocFile of this.markdocFiles) {
       const parsedFile = FileParser.parseMdocFile(markdocFile, this.partialsDir);
 
@@ -94,14 +98,19 @@ export class MarkdocHugoIntegration {
           standaloneMode: this.standaloneMode
         });
 
+        let compiledFilename: string;
+
         // if in standalone mode, build an HTML file
         if (this.standaloneMode) {
-          fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.html'), html);
+          compiledFilename = markdocFile.replace(/\.mdoc$/, '.html');
+          fs.writeFileSync(compiledFilename, html);
           // otherwise, build a "Markdown" file (just HTML with frontmatter)
         } else {
           const markdown = `---\ntitle: ${parsedFile.frontmatter.title}\n---\n${html}`;
-          fs.writeFileSync(markdocFile.replace(/\.mdoc$/, '.md'), markdown);
+          compiledFilename = markdocFile.replace(/\.mdoc$/, '.md');
+          fs.writeFileSync(compiledFilename, markdown);
         }
+        this.compiledFiles.push(compiledFilename);
       } catch (e) {
         if (e instanceof Error) {
           this.validationErrorsByFilePath[markdocFile] = e.message;
@@ -116,7 +125,8 @@ export class MarkdocHugoIntegration {
     return {
       hasErrors: this.hasErrors(),
       parsingErrorReportsByFilePath: this.parsingErrorReportsByFilePath,
-      validationErrorsByFilePath: this.validationErrorsByFilePath
+      validationErrorsByFilePath: this.validationErrorsByFilePath,
+      compiledFiles: this.compiledFiles
     };
   }
 
