@@ -60,32 +60,14 @@ These functions return one value per row.
 | coalesce(expr *x*, *y*, ...) | variable | Returns the first non-null expression. |
 | nullif(expr *x*, expr *y*) | variable | Returns `NULL` if both arguments are equal. Otherwise, returns *x*. |
 
-## JSON Functions and Operators
+## JSON functions and operators
 
-| Name | Return type | Description |
-|------|-------------|-------------|
-| json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in json as text, defined by the path, equivalent behavior as the [postgres function of the same name][2]. See the examples below. |
+| Name | Return type | Description | 
+|------|-------------|-------------| 
+| json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in json as text, defined by the path, equivalent behavior as the [postgres function of the same name][2]. For example, `json_extract_path_text(col, ‘forest')` returns the value of key forest for each JSON object in `col`. See the example below for a JSON array syntax.|
 
-### Examples
-<details>
-  <summary>JSON</summary>
-  Return the value under the key <i>forest</i> in each JSON object in <i>col</i>.
-
-```json
-{
-"forest": "trees"
-}
-
-```
-```
-json_extract_path_text(col, ‘forest')
-```
-
-</details>
-
-<details>
-  <summary>JSON Array</summary>
-  Return the 0th element in a JSON array under the key <i>forest</i> in each JSON object or row in <i>col</i>.
+### JSON array
+  Return the 0th element in a JSON array under the key `forest` in each JSON object or row in `col`.
 
 ```json
 [{
@@ -97,18 +79,6 @@ json_extract_path_text(col, ‘forest')
 ```
 json_extract_path_text(col, ‘forest', ‘0')
 ```
-
-</details>
-
-<details>
-  <summary>Events Tables</summary>
-  To extract nested fields/JSON in events tables, reference the entire path in double quotes as the column name instead of using this function.
-
-```
-SELECT "git.commit.sha" FROM spans WHERE …
-```
-
-</details>
 
 
 [1]: https://pkg.go.dev/regexp/syntax
