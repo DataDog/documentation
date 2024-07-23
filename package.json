@@ -14,6 +14,7 @@
         "build:preview": "yarn run build:hugo:preview",
         "build:hugo": "./node_modules/.bin/hugo -d ./public -s ./ --minify --logLevel info",
         "build:hugo:preview": "yarn run build:hugo -D -F --environment preview",
+        "build:hugo:preview:api": "yarn run build:hugo -D -F --environment preview --renderSegments api",
         "build:hugo:live": "yarn run build:hugo -D -F --environment live",
         "build:live": "yarn run build:hugo:live",
         "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes 0 --workers 100 --logLevel info",

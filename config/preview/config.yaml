@@ -4,8 +4,8 @@ builddrafts: true
 enableGitInfo: true
 
 # can also be CLI flag
-renderSegments:
-  - english
+# renderSegments:
+#   - english
 
 # Exclude all non-English languages
 segments:
