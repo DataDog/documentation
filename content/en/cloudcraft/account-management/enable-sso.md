@@ -24,7 +24,7 @@ This article is all about SAML SSO and how to set it up in your account.
     - [Enable SSO With a Generic Identity Provider][4]
 3. Find the necessary details to create a new application with the identity provider in the same window.
 
-{{< img src="cloudcraft/account-management/enable-sso/service-provider-details.png" alt="Image provider metadata modal" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/account-management/enable-sso/service-provider-details.png" alt="Cloudcraft SAML service provider integration settings." responsive="true" style="width:100%;">}}
 
 4. After creating the application, return to Cloudcraft and upload the metadata file from the identity provider.
 5. Select the **SAML Single Sign-On is enabled** option.
