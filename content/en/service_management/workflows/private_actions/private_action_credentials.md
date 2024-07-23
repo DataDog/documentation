@@ -79,7 +79,7 @@ In the runner's connection, specify the location of the credential file on the p
 }
 {{< /code-block >}}
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. Your PostgreSQL connection points to the same path for all credentials. In this example, the credential file is stored at `etc/dd-action-runner/creds/creds.pgpass` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. Your PostgreSQL connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/creds/creds.pgpass` on the runner.
 
 {{< img src="service_management/private-runner-creds1.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/creds.pgpass'" style="width:80%;" >}}
 
