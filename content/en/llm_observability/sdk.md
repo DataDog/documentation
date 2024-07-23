@@ -106,9 +106,9 @@ LLMObs.enable(
 
 ### AWS Lambda setup
 
-Follow the setup instructions for the [Datadog-Python and Datadog-Extension][14] layers and LLM Observability will be automatically enabled.
+Enable LLM Observability by specifying the required environment variables in [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS lambda layers. 
 
-In order for these serverless layers to properly instrument and flush traces from your serverless application, specify `DD_LLMOBS_ENABLED` in your environment. This applies to both manual and auto-instrumented use cases.
+**Note**: Using the `Datadog-Python` and `Datadog-Extension` layers automatically turns on all LLM Observability integrations, and force flushes spans at the end of the lambda.
 
 #### Application naming guidelines
 
