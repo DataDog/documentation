@@ -27,7 +27,7 @@ The PostgreSQL connection accepts the following credentials:
 |  Credential    | Required    | Description |
 | -------------  | ----------- | ----------- |
 | `host` | Yes | The name of the host to connect to. For more information, see [the official PostGreSQL documentation][101]. |
-| `port` | Yes | The port number to connect to at the server host, or socket file name extension for Unix-domain connections. For more information, see [the official PostGreSQL documentation][102]. |
+| `port` | Yes | The port number to connect to at the server host, or socket filename extension for UNIX-domain connections. For more information, see [the official PostGreSQL documentation][102]. |
 | `user` | Yes | The PostgreSQL user name to connect as.<br><br>For more information, see [the official PostGreSQL documentation][103]. |
 | `password` | Yes | The password to use if the server demands password authentication. <br><br>For more information, see [the official PostGreSQL documentation][104]. |
 | `database` | Yes | The database name. For more information, see [the official PostGreSQL documentation][105]. |
