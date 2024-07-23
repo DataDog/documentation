@@ -11,7 +11,6 @@ aliases:
     {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security Management{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security 
     Management Agent Variables{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/videos" >}}Cloud Security Management Video Walkthroughs{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats Guides" >}}

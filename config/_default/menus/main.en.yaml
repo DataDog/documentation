@@ -5049,11 +5049,16 @@ menu:
       parent: csm
       identifier: csm_guides
       weight: 11
+    - name: Video Tutorials
+      url: security/cloud_security_management/video_tutorials/
+      parent: csm
+      identifier: csm_video_tutorials
+      weight: 12
     - name: Troubleshooting
       url: security/cloud_security_management/troubleshooting/
       parent: csm
       identifier: csm_troubleshooting
-      weight: 12
+      weight: 13
     - name: Threats
       url: security/cloud_security_management/troubleshooting/threats/
       parent: csm_troubleshooting

@@ -52,10 +52,6 @@ cascade:
         subcategory: Cloud Security Management
 ---
 
-{{< youtube id=fVcp2W7zqwg loading=lazy >}}
-
-<br>
-
 ## Overview
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
