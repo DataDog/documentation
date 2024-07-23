@@ -343,9 +343,9 @@ Para cambiar la configuración por defecto del muestreador de trazas poco frecue
 
 El mecanismo de muestreo basado en la fase inicial se puede sustituir en la biblioteca de rastreo. Por ejemplo, si necesitas monitorizar una transacción crítica, puedes forzar la conservación de la traza asociada. Por otro lado, también puedes forzar el descarte de la traza en caso de que contenga información repetitiva o innecesaria, como los checks de estado.
 
-- Configura Manual Keep en un tramo para indicar que se deben consumir este y todos los tramos secundarios. El rastreo resultante puede aparecer incompleto en la interfaz de usuario si el tramo en cuestión no es el tramo raíz de la traza.
+- Configura Manual Keep en un tramo para indicar que se deben ingerir este y todos los tramos secundarios. El rastreo resultante puede aparecer incompleto en la interfaz de usuario si el tramo en cuestión no es el tramo raíz de la traza.
 
-- Configura Manual Drop en un tramo para asegurarte de que **no** se consuma ningún tramo secundario. Los [muestreadores de trazas con errores y poco frecuentes](#error-and-rare-traces) se ignorarán en el Agent.
+- Configura Manual Drop en un tramo para asegurarte de que **no** se ingiera ningún tramo secundario. Los [muestreadores de trazas con errores y poco frecuentes](#error-and-rare-traces) se ignorarán en el Agent.
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -363,7 +363,7 @@ public class MyClass {
     public static void myMethod() {
         // grab the active span out of the traced method
         Span span = GlobalTracer.get().activeSpan();
-        // Always keep the trace
+        // Siempre conserva la traza
         span.setTag(DDTags.MANUAL_KEEP, true);
         // method impl follows
     }
@@ -383,7 +383,7 @@ public class MyClass {
     public static void myMethod() {
         // grab the active span out of the traced method
         Span span = GlobalTracer.get().activeSpan();
-        // Always Drop the trace
+        // Siempre descarta la traza
         span.setTag(DDTags.MANUAL_DROP, true);
         // method impl follows
     }
@@ -402,7 +402,7 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-    # Always Keep the Trace
+    # Siempre conserva la traza
     span.set_tag(MANUAL_KEEP_KEY)
     # method impl follows
 ```
