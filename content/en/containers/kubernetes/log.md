@@ -22,17 +22,17 @@ further_reading:
 
 This page discusses collecting logs from Kubernetes log files.
 
-When your containerized applications write their logs to standard output and error (`stdout`/`stderr`) the container runtime and Kubernetes automatically manage the logs for you. The default pattern is that [Kubernetes stores these log streams as files][13] on the host in the `/var/log/pods` folder and subfolders for each pod and container. 
+When your containerized applications write their logs to standard output and error (`stdout`/`stderr`) the container runtime and Kubernetes automatically manage the logs for you. The default pattern is that [Kubernetes stores these log streams as files][13] on the host in the `/var/log/pods` folder and subfolders for each Pod and container.
 
-The Datadog Agent can collect these Kubernetes log files for these containers using our standard instructions below. This option scales well for the ephemeral nature of the pods Kubernetes creates, as well being resource efficient. Datadog recommends this method for log collection in Kubernetes. 
+The Datadog Agent can collect these Kubernetes log files for these containers using our standard instructions below. This option scales well for the ephemeral nature of the Pods Kubernetes creates, as well as being resource efficient. Datadog recommends this method for log collection in Kubernetes.
 
-Alternatively the Datadog Agent can also collect logs by repeated requests to the Docker API through the Docker socket. However, this requires that Docker is the container runtime for your Kubernetes cluster. Generally this is more resource intensive than the log file method. To see how to collect logs using the Docker socket, see [Log collection with Docker socket][1]. If your containerized applications are writing to log files stored in the container, this can complicate log collection. See the section for [log collection from a file](#TBD).
+Alternatively the Datadog Agent can also collect logs by repeated requests to the Docker API through the Docker socket. However, this requires Docker as the container runtime for your Kubernetes cluster. Generally this is also more resource intensive than the log file method. To see how to collect logs using the Docker socket, see [Log collection with Docker socket][1]. If your containerized applications are writing to log files stored in the container, this can complicate log collection. See the section for [log collection from a file](#from-a-container-local-log-file).
 
 ## Setup
 
 ### Log collection
 
-Before you start collecting application logs, ensure that you are running the Datadog Agent in your Kubernetes cluster. 
+Before you start collecting application logs, ensure that you are running the Datadog Agent in your Kubernetes cluster.
 
 To configure log collection manually in the DaemonSet, see [DaemonSet Log Collection][9]. Otherwise, follow the instructions below:
 
@@ -63,9 +63,9 @@ Then apply the new configuration:
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-See the sample [manifest with logs and metrics collection enabled][1] for a complete example. You can set `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+See the sample [manifest with logs, metrics, and APM collection enabled][1] for an additional example. You can set `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-logs-apm.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-logs-apm.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -143,54 +143,53 @@ When running an unprivileged installation, the Agent needs to be able to read lo
 <br/><br/>
 If you are using the containerd runtime, the log files in <code>/var/log/pods</code> are readable by members of the <code>root</code> group. With the above instructions, the Agent runs with the <code>root</code> group. No action is required.
 <br/><br/>
-If you are using the Docker runtime, the log files in <code>/var/log/pods</code> are symbolic links to <code>/var/lib/docker/containers</code>, which is traversable only by the <code>root</code> user. Consequently, with the Docker runtime, it is not possible for a non-<code>root</code> Agent to read logs in <code>/var/log/pods</code>. The Docker socket must be mounted in the Agent container, so that it can get pod logs through the Docker daemon.
+If you are using the Docker runtime, the log files in <code>/var/log/pods</code> are symbolic links to <code>/var/lib/docker/containers</code>, which is traversable only by the <code>root</code> user. Consequently, with the Docker runtime, it is not possible for a non-<code>root</code> Agent to read logs in <code>/var/log/pods</code>. The Docker socket must be mounted in the Agent container, so that it can get Pod logs through the Docker daemon.
 <br/><br/>
 To collect logs from <code>/var/log/pods</code> when the Docker socket is mounted, set the environment variable <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (or <code>logs_config.k8s_container_use_file</code> in <code>datadog.yaml</code>) to <code>true</code>. This forces the Agent to use file collection mode.
 </div>
 
 ## Log discovery
 
-The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datadog Operator or Helm). This DaemonSet schedules one replica of the Agent pod on each node of the cluster. Each Agent pod is then responsible for reporting the logs of the other pods and containers on its respective node. When the "Container Collect All" feature is enabled the Agent reports the logs from every discovered container with a default set of tags.
+The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datadog Operator or Helm). This DaemonSet schedules one replica of the Agent Pod on each node of the cluster. Each Agent Pod is then responsible for reporting the logs of the other Pods and containers on its respective node. When the "Container Collect All" feature is enabled the Agent reports the logs from every discovered container with a default set of tags.
 
 ### Filtering
 
-It is possible to manage which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs if desired. This generally is done by either configurations passed to the Datadog Agent to control what it pulls, or, configurations on the Kubernetes pod to exclude more explicitly.
+It is possible to manage which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs if desired. This generally is done by either configurations passed to the Datadog Agent to control what it pulls, or, configurations on the Kubernetes Pod to exclude it more explicitly.
 
-See the [Container Discovery Management][8] to learn more. 
+See the [Container Discovery Management][8] to learn more.
 
 ### Tagging
 
-The Datadog Agent tags the logs from the Kubernetes containers with the default [Kubernetes tags][14] as well as any custom extracted tags. When "Container Collect All" is enabled the Agent reports the logs for a container with a `source` and `service` tag matching the `short_image` of the container image. For example, the logs from a container using the `gcr.io/datadoghq/agent:latest` image would have `agent` as the `source`, `service` and `short_image` tag value. 
+The Datadog Agent tags the logs from the Kubernetes containers with the default [Kubernetes tags][14] as well as any custom extracted tags. When "Container Collect All" is enabled the Agent reports the logs for a container with a `source` and `service` tag matching the container short image name. For example, the logs from a container using the `gcr.io/owner/example-image:latest` container image would have `example-image` as the `source`, `service`, and `short_image` tag value.
 
-The `service` tag can also be set by the [Unified Service Tagging][4] pod label `tags.datadoghq.com/service: "<SERVICE>"`. For more information about `source` and `service` attributes, see [Reserved Attributes][11].
+The `service` tag can also be set by the [Unified Service Tagging][4] Pod label `tags.datadoghq.com/service: "<SERVICE>"`. For more information about `source` and `service` attributes, see [Reserved Attributes][11].
 
-The `source` tag can be important for your logs, as the [out of box log pipelines][15] are filtered using this tag. However, these pipelines can be completely customized as desired. You can see the steps in the Integration Logs section below for customizing the tags on your logs further. 
+The `source` tag can be important for your logs, as the [out of box log pipelines][15] are filtered using this tag. However, these pipelines can be completely customized as desired. You can see the steps in the [Integration Logs](#integration-logs) section below for customizing the tags on your logs further.
 
 ## Integration logs
 
-[Autodiscovery][10] enables you to use templates to configure log collection (and other capabilities) on containers.
+[Autodiscovery][10] enables you to use templates to configure log collection (and other capabilities) on containers. This can be used to enable log collection, customize tagging, and add advanced collection rules. To configure log collection for an integration with Autodiscovery you can either:
 
-To configure log collection for an integration with Autodiscovery, use the following parameter:
+- Specify a log configuration as Autodiscovery Annotations on a given Pod, to configure the rules for a given container *(Recommended)*
+- Specify a log configuration as a configuration file, to configure the rules for each matching container by image
 
-| Parameter            | Required | Description                                                                                       |
-|----------------------|----------|---------------------------------------------------------------------------------------------------|
-| `<LOG_CONFIG>`       | No       | For Agent v6.5+, configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>` |
-
-The schema for `<LOG_CONFIG>` depends on the integration. You can find this schema in each integration's `conf.yaml.example` file.
+At minimum these log configurations require a `source` and `service` tag. You may want to match the `source` tag to one of our [out of box log pipelines][15] to help automatically enrich your logs. You can also find a [library of pipelines available to you in app][16].
 
 ### Autodiscovery annotations
 
-With Autodiscovery, the Agent automatically searches all pod annotations for integration templates.
+With Autodiscovery, the Agent automatically searches all Pod annotations for integration templates.
 
-To apply a specific configuration to a given container, Autodiscovery identifies containers by name, **not** image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. 
+To apply a specific configuration to a given container, add the annotation `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` to your Pod with the JSON formatted log configuration. 
+
+**Note:** Autodiscovery annotations identify containers by name, **not** image. It tries to match `<CONTAINER_IDENTIFIER>` to the `.spec.containers[i].name`, not `.spec.containers[i].image`.
 
 <div class="alert alert-info">
-If you define your Kubernetes pods <i>directly</i> (with <code>kind:Pod</code>), add each pod's annotations in its <code>metadata</code> section, as shown in the following sections.
+If you define your Kubernetes Pods <i>directly</i> (with <code>kind:Pod</code>), add each Pod's annotations in its <code>metadata</code> section, as shown in the following section.
 <br/><br/>
-If you define your Kubernetes pods <i>indirectly</i> (with replication controllers, ReplicaSets, or deployments), add pod annotations under <code>.spec.template.metadata</code>.</div>
+If you define your Kubernetes Pods <i>indirectly</i> (with replication controllers, ReplicaSets, or Deployments), add Pod annotations to the Pod template under <code>.spec.template.metadata</code>.</div>
 
 #### Configure a single container
-To configure log collection for a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod:
+To configure log collection for a given `<CONTAINER_IDENTIFIER>` within your Pod, add the following annotations to your Pod:
 
 ```yaml
 apiVersion: v1
@@ -207,8 +206,35 @@ spec:
 # (...)
 ```
 
+#### Example log Autodiscovery Annotations
+
+The following Pod annotation defines the integration template for an example container. It was defined within the Pod template's annotations, rather than on the Deployment itself. This log configuration sets all the logs from the `app` container with the tags `source:java`, `service:example-app`, and the extra tag `foo:bar`.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+  labels:
+    app: example-app
+spec:
+  selector:
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app
+      annotations:
+        ad.datadoghq.com/app.logs: '[{"source":"java", "service":"example-app", "tags":["foo:bar"]}]'
+    spec:
+      containers:
+        - name: app
+          image: owner/example-image:latest
+```
+
 #### Configure two different containers
-To apply two different integration templates to two different containers within your pod, `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>`, add the following annotations to your pod:
+To apply two different integration templates to two different containers within your Pod, `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>`, add the following annotations to your Pod:
 
 ```yaml
 apiVersion: v1
@@ -228,48 +254,56 @@ spec:
 # (...)
 ```
 
-#### Example Datadog-Redis integration
-
-The following pod annotation defines the integration template for Redis containers. It tags all logs with `source` and `service` attributes, including custom tags:
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: redis
-  annotations:
-    ad.datadoghq.com/redis.checks: |
-      {
-        "redisdb": {
-          "init_config": {},
-          "instances": [
-            {
-              "host": "%%host%%",
-              "port":"6379",
-              "password":"%%env_REDIS_PASSWORD%%"
-            }
-          ]
-        }
-      }  
-    ad.datadoghq.com/redis.logs: '[{"source": "redis","service": "<YOUR_APP_NAME>","tags": ["env:prod"]}]'
-  labels:
-    name: redis
-spec:
-  containers:
-    - name: redis
-      image: redis:latest
-      ports:
-        - containerPort: 6379
-```
-
 ### Autodiscovery configuration files
+You can provide the Datadog Agent configuration files to have it run a specified integration when it discovers a container using the matching image identifier. This can allow you to create a generic log configuration that applies to a set of container images.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-TODO
+You can customize logs collection per integration with an override in the `override.nodeAgent.extraConfd.configDataMap`. This method creates the ConfigMap and mounts the desired configuration file onto the Agent container.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            ad_identifiers:
+            - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+        
+            logs:
+            - source: example-source
+              service: example-service
+```
+
+The `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` should match the container short image name that you want this to apply towards. See the sample manifest [with ConfigMap mapping][1] for an additional example.
+
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-extraconfd.yaml
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-TODO
+You can customize logs collection per integration within `datadog.confd`. This method creates the ConfigMap and mounts the desired configuration file onto the Agent container.
+
+```yaml
+datadog:
+  #(...)
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+      - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+      
+      logs:
+      - source: example-source
+        service: example-service
+```
+
+The `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` should match the container short image name that you want this to apply towards.
+
 {{% /tab %}}
 
 {{% tab "Key-value store" %}}
@@ -284,7 +318,7 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example, `redis` OR `redis:latest`.
 
-Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources. 
+Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources.
 
 To use a key-value store, configure it in the Agent `datadog.yaml` configuration file and mount this file inside the containerized Agent. Alternatively, pass your key-value store as environment variables to the containerized Agent.
 
@@ -350,11 +384,13 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 * [Scrub sensitive data from your logs][6].
 * [Proceed to multi-line aggregation][7].
 
-### From a file configured in an annotation
+### From a container local log file
 
-Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection. However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-These file paths are **relative** to the Agent. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
+However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+
+These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 
 For example, you can do this with a shared `hostPath` volume. The Pod below is emitting logs into the file `/var/log/example/app.log`. This is done in the `/var/log/example` directory, where a volume and volumeMount have set this as a `hostPath`.
 
@@ -403,7 +439,11 @@ The equivalent volume and volumeMount path need to be set in the Agent container
     # (...)
 ```
 
-**Note:** When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container and a file are needed it should be explicitly enabled in the annotation. For example:
+**Note:** This strategy can work for a given pod, but can become cumbersome with multiple apps using this strategy, as well run into issues if multiple replicas are using the same log path. If possible, Datadog recommends taking advantage of the [Autodiscovery template variable][17] `%%kube_pod_name%%`. For example you can set your `path` to reference this like `"path": "/var/log/example/%%kube_pod_name%%/app.log"`.
+
+Your application pod then need to write its log files with respect to this new path as well. You can use the [Downward API][18] to help your application determine its Pod name.
+
+**Note:** When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container output streams and file are needed it should be explicitly enabled in the annotation. For example:
 
 ```yaml
 ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
@@ -423,11 +463,11 @@ By default the Agent looks every 5 seconds for new containers.
 
 For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
 
-#### Missing tags on new containers or pods
+#### Missing tags on new containers or Pods
 
-When sending logs to Datadog from newly created containers or pods, the Datadog Agent's internal tagger may not yet have the related container/pod tags. As a result, tags may be missing from these logs.
+When sending logs to Datadog from newly created containers or Pods, the Datadog Agent's internal tagger may not yet have the related container/pod tags. As a result, tags may be missing from these logs.
 
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to configure a duration (in seconds) for the Datadog Agent to wait before it begins to send logs from newly created containers and pods. The default value is `0`.
+To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to configure a duration (in seconds) for the Datadog Agent to wait before it begins to send logs from newly created containers and Pods. The default value is `0`.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -455,9 +495,9 @@ datadog:
 
 Host-level tags are those seen in the infrastructure list for a given host, and are sourced from either a cloud provider or the Datadog Agent. Common host-level tags include `kube_cluster_name`, `region`, `instance-type`, and `autoscaling-group`.
 
-When sending logs to Datadog from a newly created host or node, it can take a few minutes for host-level tags to be [inherited][12]. As a result, host-level tags may be missing from these logs. 
+When sending logs to Datadog from a newly created host or node, it can take a few minutes for host-level tags to be [inherited][12]. As a result, host-level tags may be missing from these logs.
 
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` to configure a duration (in minutes). For this duration, the Datadog Agent to manually attaches the host-level tags that it knows about to each sent log. After this duration, the Agent reverts to relying on tag inheritance at intake.
+To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` to configure a duration (in minutes). For this duration, the Datadog Agent manually attaches the host-level tags that it knows about to each sent log. After this duration, the Agent reverts to relying on tag inheritance at intake.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -480,10 +520,6 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Logs have the wrong host 
-
-TODO
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -503,3 +539,6 @@ TODO
 [13]: https://kubernetes.io/docs/concepts/cluster-administration/logging/#log-location-node
 [14]: /containers/kubernetes/tag
 [15]: /logs/log_configuration/pipelines/?tab=source#integration-pipelines
+[16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[17]: /containers/guide/template_variables/
+[18]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
