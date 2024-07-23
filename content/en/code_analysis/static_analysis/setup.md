@@ -33,7 +33,7 @@ Set up Datadog Static Analysis in-app [here][1].
 ### Scan in CI pipelines
 Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
 
-{{< whatsnext desc="See the documentation for information about the following integrations:">}}
+{{< whatsnext desc="See instructions based on your CI provider:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
