@@ -2,24 +2,24 @@
 aliases:
 - /es/tracing/trace_ingestion/mechanisms
 description: Información general sobre los mecanismos del rastreador y el Agent que
-  controlan el consumo de trazas (traces).
+  controlan la ingesta de trazas (traces).
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentación
-  text: Controles del consumo
+  text: Controles de la ingesta
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentación
   text: Retención de trazas
 - link: /tracing/trace_pipeline/métricas/
   tag: Documentación
   text: Métricas de uso
-title: Mecanismos de consumo
+title: Mecanismos de ingesta
 ---
 
-{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Reglas para el muestro del consumo" >}}
+{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Reglas para el muestro de la ingesta" >}}
 
 
-Son varios los mecanismos responsables de decidir si los tramos (spans) generados por tus aplicaciones se envían a Datadog (_tramos consumidos_). La lógica de estos mecanismos está en las [bibliotecas de rastreo][1] y en el Datadog Agent. Según cuál sea la configuración, el tráfico generado por los servicios instrumentados puede consumirse de forma total o parcial.
+Son varios los mecanismos responsables de decidir si los tramos (spans) generados por tus aplicaciones se envían a Datadog (_tramos ingeridos_). La lógica de estos mecanismos está en las [bibliotecas de rastreo][1] y en el Datadog Agent. Según la configuración, el tráfico generado por los servicios instrumentados puede ingerirse de forma total o parcial.
 
 A cada tramo consumido, se le adjunta un **motivo de consumo** único en referencia a uno de los mecanismos que se describen en esta página. Las [métricas de uso][2] `datadog.estimated_usage.apm.ingested_bytes` y `datadog.estimated_usage.apm.ingested_spans` tienen la etiqueta `ingestion_reason`.
 
