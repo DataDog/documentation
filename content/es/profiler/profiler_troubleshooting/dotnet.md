@@ -60,7 +60,7 @@ Si has configurado el generador de perfiles y no ves perfiles en la página de b
 
    5. Comprueba los otros códigos HTTP para ver si contienen errores, como 403, debido a una clave de API inválida.
 
-4. Sólo para los perfiles de CPU o Wall Time faltantes, comprueba que el gestor de señales de Datadog para el recorrido del stack tecnológico no ha sido reemplazado:
+4. Sólo para los perfiles CPU o Wall Time faltantes, comprueba que el gestor de señales de Datadog para el recorrido del stack tecnológico no ha sido reemplazado:
 
    1. Abre el archivo de logs `DD-DotNet-Profiler-Native-<Application Name>-<pid>` en la carpeta `/var/log/datadog`.
 
@@ -68,9 +68,9 @@ Si has configurado el generador de perfiles y no ves perfiles en la página de b
       - `Profiler signal handler was replaced again. It will not be restored: the profiler is disabled.`
       - `Fail to restore profiler signal handler.`
 
-   3. Si uno de estos mensajes está presente, significa que el código de la aplicación o un código de terceros está reinstalando repetidamente su propio gestor de señales encima del gestor de señales de Datadog. Para evitar más conflictos, se deshabilitan los generadores de perfiles de CPU y Wall Time.
+   3. Si uno de estos mensajes está presente, significa que el código de la aplicación o un código de terceros está reinstalando repetidamente su propio gestor de señales encima del gestor de señales de Datadog. Para evitar más conflictos, se deshabilitan los generadores de perfiles CPU y Wall Time.
 
-   Ten en cuenta que puede aparecer el siguiente mensaje, pero este no afecta a la generación de perfiles de Datadog: `Profiler signal handler has been replaced. Restoring it.` Esto sólo indica que el gestor de señales de Datadog se vuelve a instalar cuando se sobrescribe.
+   Ten en cuenta que puede aparecer el siguiente mensaje, pero este no afecta a la generación de perfiles Datadog: `Profiler signal handler has been replaced. Restoring it.` Esto sólo indica que el gestor de señales de Datadog se vuelve a instalar cuando se sobrescribe.
 
 [1]: /es/profiler/enabling/dotnet/?tab=linux#configuration
 
