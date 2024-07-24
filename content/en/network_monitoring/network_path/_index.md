@@ -28,13 +28,11 @@ Network Path illustrates the route that network traffic follows from its origin 
 
 **Note**: [Network Performance Monitoring][2] must be enabled to use Network Path functionality.
 
-**Note**: Network Path works running traceroutes that send either TCP or UDP packets to running applications.
-
 {{< img src="network_performance_monitoring/network_path/network_path_default_view_2.png" alt="The Network Path default view, sorting by Datacenter and Un-Grouped Destination" >}}
 
 ## How it works
 
-Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to its destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list.
+Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to its destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. Network Path automatically sends either TCP or UDP packets to running applications.
 
 The following diagram depicts the typical flow of a network path from a source (Host) to its destination.
 
