@@ -44,7 +44,7 @@ These functions return one value per row.
 | array_append(array *a*, expr *e*) | array | Returns a new array that includes all the original elements of the input array followed by the appended element. |
 | string_to_array(text *s*, delimiter, [,nullString]) | array | Returns an array of substrings obtained by splitting the input string *s*, using the specified delimiter. The third argument, nullString, is optional and specifies substrings that are replaced with `NULL`. |
 | array_to_string(array *a*, delimiter, [,nullString]) | string | Concatenates array elements using supplied delimiter and optional null string. |
-| unnest(array *a*) | variable | Returns each element in the array <strong>as a separate row</strong>. The return type is the element type of the array.<br>`unnest` can only be used in the `SELECT` clause of a query. If other columns are `SELECT`ed with unnest, the value at each row in the table is repeated at each "output" row with each unnested elements. If multiple columns are being unnested, all the unnested columns are "zipped up" together, with `NULL` filling in the "output" values for shorter arrays. |
+| unnest(array *a*) | variable | Returns each element in the array <strong>as a separate row</strong>. The return type is the element type of the array.<br>`unnest` can only be used in the `SELECT` clause of a query. If other columns are `SELECT`ed with unnest, the value at each row in the table is repeated at each output row with each unnested element. If multiple columns are being unnested, all the unnested columns are zipped up together, with `NULL` filling in the output values for shorter arrays. |
 
 ## Date/time functions and operators
 
@@ -64,7 +64,7 @@ These functions return one value per row.
 
 | Name | Return type | Description | 
 |------|-------------|-------------| 
-| json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in json as text, defined by the path, equivalent behavior as the [postgres function of the same name][2]. For example, `json_extract_path_text(col, ‘forest')` returns the value of key forest for each JSON object in `col`. See the example below for a JSON array syntax.|
+| json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in JSON as text, defined by the path. Its behavior is equivalent to the [postgres function with the same name][2]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
 
 ### JSON array
   Return the 0th element in a JSON array under the key `forest` in each JSON object or row in `col`.
