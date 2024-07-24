@@ -34,7 +34,7 @@ Las actividades personalizadas del usuario para las cuales se dispone de reglas 
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Creación de cuentas excesivas desde una IP][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [Eliminación de cuentas excesivas desde una IP][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Intentos de restablecimiento de contraseña por la fuerza bruta][9]                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [Excesivas faltas de pago desde una PI][10]                                                                                                        |
+| `payment.failure`      | Ninguno                                                 | [Excesivas faltas de pago desde una PI][10]                                                                                                        |
 
 ## Añadir información de usuarios autenticados a trazas y habilitar la capacidad de bloqueo de usuarios
 
