@@ -36,7 +36,7 @@ Code Analysis is in public beta.
 
 Software Composition Analysis (SCA) scans open source libraries imported into repositories through package managers such as `npm` for [known vulnerabilities][1], and creates a catalog of libraries used across your repositories that identifies risky licenses, end-of-life libraries, and vulnerabilities to ensure a high quality, secure codebase.
 
-SCA scans can be run directly through Datadog or in your CI pipelines via [Code Analysis][3] to detect library vulnerabilities before they reach production. Datadog also offers runtime detection via [Datadog Application Security][1].
+SCA scans can be run directly through Datadog or in your CI pipelines using [Code Analysis][3] to detect library vulnerabilities before they reach production. Datadog also offers runtime detection through [Datadog Application Security][1].
 
 ## Set up Software Composition Analysis
 SCA supports scanning for libraries in the following languages and technologies:
