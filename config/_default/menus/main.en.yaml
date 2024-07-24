@@ -2856,46 +2856,51 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
       weight: 6
+    - name: Multisource Querying
+      url: cloud_cost_management/multisource_querying
+      parent: cloud_cost
+      identifier: cloud_cost_multisource_querying
+      weight: 7
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
-      weight: 7
-    - name: Search Tags
+      weight: 8
+    - name: Tag Explorer
       url: cloud_cost_management/tag_explorer
       parent: cloud_cost
       identifier: cloud_cost_tag_explorer
-      weight: 8
+      weight: 9
     - name: Container Cost Allocation
       url: cloud_cost_management/container_cost_allocation
       parent: cloud_cost
       identifier: cloud_cost_container_cost_allocation
-      weight: 9
+      weight: 10
     - name: AWS
       url: cloud_cost_management/container_cost_allocation/?tab=aws
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
-      weight: 901
+      weight: 1001
     - name: Azure
       url: cloud_cost_management/container_cost_allocation/?tab=azure
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_azure
-      weight: 902
+      weight: 1002
     - name: Google Cloud
       url: cloud_cost_management/container_cost_allocation/?tab=google
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_google
-      weight: 903
+      weight: 1003
     - name: Cost Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 10
+      weight: 11
     - name: Cost Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 11
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
