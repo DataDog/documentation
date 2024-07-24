@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to configure either static or dynamic paths depending on your needs. Dynamic paths are automatically generated when enabled, while static paths let you specify the endpoint to test.
+Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to configure either static or dynamic paths depending on your needs. Dynamic paths are automatically created once you enable them, and with static path configuration, you are able to define the endpoint you want to test.
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ Setting up Network Path involves configuring your Linux environment to monitor a
      enabled: true
    ```
 
-2.  Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
+2. Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
 
     ```yaml
     network_path:
@@ -81,9 +81,9 @@ Setting up Network Path involves configuring your Linux environment to monitor a
      enabled: true
    ```
 
-2.  Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file: 
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` file: 
 
-```yaml
+   ```yaml
    init_config:
      min_collection_interval: 60 # in seconds, default 60 seconds
    instances:
@@ -103,44 +103,44 @@ Setting up Network Path involves configuring your Linux environment to monitor a
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
-  ```
+    ```
  
-For full configuration details, see the following:
+   For full configuration details, see the following:
 
-```yaml
-  init_config:
+   ```yaml
+   init_config:
     ## @param min_collection_interval - int - optional - default:60
-    ## Interval between each traceroute runs for each destination.
-    # min_collection_interval: <interval_in_seconds>
+     ## Interval between each traceroute runs for each destination.
+     # min_collection_interval: <interval_in_seconds>
 
-  instances:
-    ## @param hostname - string - required
-    ## Hostname or IP of the destination endpoint to monitor.
-    ## Traceroute will be run against this endpoint with a sequence of different TTL.
-    #
-    - hostname: <HOSTNAME_OR_IP>
+   instances:
+     ## @param hostname - string - required
+     ## Hostname or IP of the destination endpoint to monitor.
+     ## Traceroute will be run against this endpoint with a sequence of different TTL.
+     #
+     - hostname: <HOSTNAME_OR_IP>
   
-    ## @param port - uint16 - optional - default:<RANDOM PORT>
-    ## The port of the destination endpoint.
-    ## By default, the port is random.
-    #
-    # port: <PORT>
+     ## @param port - uint16 - optional - default:<RANDOM PORT>
+     ## The port of the destination endpoint.
+     ## By default, the port is random.
+     #
+     # port: <PORT>
 
-    ## @param max_ttl - uint8 - optional - default:30
-    ## The maximum traceroute TTL used during path collection.
-    #
-    # max_ttl: 30
+     ## @param max_ttl - uint8 - optional - default:30
+     ## The maximum traceroute TTL used during path collection.
+     #
+     # max_ttl: 30
   
-    ## @param timeout - uint32 - optional - default:3000
-    ## The timeout of traceroute network calls.
-    ## The timeout is in millisecond.
-    #
-    # timeout: 3000
+     ## @param timeout - uint32 - optional - default:3000
+     ## The timeout of traceroute network calls.
+     ## The timeout is in millisecond.
+     #
+     # timeout: 3000
   
-    ## @param min_collection_interval - int - optional - default:60
-    ## Interval between each traceroute runs for each destination.
-    # min_collection_interval: <interval_in_seconds>
-```
+     ## @param min_collection_interval - int - optional - default:60
+     ## Interval between each traceroute runs for each destination.
+     # min_collection_interval: <interval_in_seconds>
+   ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
