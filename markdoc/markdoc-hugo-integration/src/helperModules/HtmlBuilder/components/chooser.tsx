@@ -8,21 +8,16 @@ import {
   attr
 } from 'incremental-dom';
 
-export interface ChooserProps {
-  resolvedPagePrefs: ResolvedPagePrefs;
-  valsByPrefId: Record<string, string>;
-}
-
 /**
  * The chooser component. Only used in initial compilation,
  * not re-rendering on the client side.
  */
-export const Chooser = (props: ChooserProps) => {
+export const Chooser = (resolvedPagePrefs: ResolvedPagePrefs) => {
   return (
     <div>
-      {Object.keys(props.resolvedPagePrefs).map((prefId) => {
-        const resolvedPref = props.resolvedPagePrefs[prefId];
-        const currentValue = props.valsByPrefId[prefId] || resolvedPref.defaultValue;
+      {Object.keys(resolvedPagePrefs).map((prefId) => {
+        const resolvedPref = resolvedPagePrefs[prefId];
+        const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
         return (
           <div key={prefId} className="markdoc-pref__container">
             <div className="markdoc-pref__label">{resolvedPref.displayName}</div>
@@ -51,35 +46,30 @@ export const Chooser = (props: ChooserProps) => {
  * Patch an existing element with the incrementally rendered chooser component.
  */
 export const rerenderChooser = (p: {
-  chooserProps: ChooserProps;
+  resolvedPagePrefs: ResolvedPagePrefs;
   elementToPatch: Element;
 }) => {
-  const node = patch(p.elementToPatch, () => renderChooserIncrementally(p.chooserProps));
+  const node = patch(p.elementToPatch, () =>
+    renderChooserIncrementally(p.resolvedPagePrefs)
+  );
   return node;
 };
 
 /**
  * Render the chooser component incrementally.
  */
-const renderChooserIncrementally = (props: ChooserProps) => {
-  console.log('Rendering the chooser incrementally');
+const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
   elementOpen('div', null);
-  Object.keys(props.resolvedPagePrefs).forEach((prefId) => {
-    const resolvedPref = props.resolvedPagePrefs[prefId];
-    const currentValue = props.valsByPrefId[prefId] || resolvedPref.defaultValue;
-    console.log('Current value is');
-    console.log(currentValue);
-
+  Object.keys(resolvedPagePrefs).forEach((prefId) => {
+    const resolvedPref = resolvedPagePrefs[prefId];
+    const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
     elementOpen('div', null, ['class', 'markdoc-pref__container']);
     elementOpen('div', null, ['class', 'markdoc-pref__label']);
     text(resolvedPref.displayName);
     elementClose('div');
     resolvedPref.options.forEach((option) => {
-      console.log('Option is');
-      console.log(option);
       const selected = option.id === currentValue ? 'selected' : '';
-      console.log('Selected is');
-      console.log(selected);
+      text(' ');
       elementOpen(
         'div',
         null,
@@ -94,8 +84,11 @@ const renderChooserIncrementally = (props: ChooserProps) => {
         'class',
         `markdoc-pref__pill ${selected}`
       );
+      text(' ');
       text(option.displayName);
+      text(' ');
       elementClose('div');
+      text(' ');
     });
     elementClose('div');
   });

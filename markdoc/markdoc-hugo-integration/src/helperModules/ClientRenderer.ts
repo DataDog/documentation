@@ -1,5 +1,5 @@
 import { RenderableTreeNodes } from 'markdoc-static-compiler';
-import { ChooserProps, rerenderChooser } from './HtmlBuilder/components/chooser';
+import { rerenderChooser } from './HtmlBuilder/components/chooser';
 import { SharedRenderer } from './SharedRenderer';
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
@@ -51,10 +51,7 @@ export class ClientRenderer {
       console.log('From handleValueChange: No optionId found');
       return;
     }
-    console.log(`From handleValueChange: Setting ${prefId} to ${optionId}`);
     this.selectedValsByPrefId[prefId] = optionId;
-    console.log(`From handleValueChange: New selectedValsByPrefId`);
-    console.log(this.selectedValsByPrefId);
     this.rerender();
   }
 
@@ -84,8 +81,6 @@ export class ClientRenderer {
     selectedValsByPrefId?: Record<string, string>;
     renderableTree?: RenderableTreeNodes;
   }) {
-    console.log('From client renderer: Configuring client renderer');
-    // this.renderableTree = p.renderableTree;
     this.prefOptionsConfig = p.prefOptionsConfig;
     this.pagePrefsConfig = p.pagePrefsConfig;
     this.chooserElement = p.chooserElement;
@@ -102,22 +97,22 @@ export class ClientRenderer {
       );
     }
 
-    console.log(`From rerender function, selected vals are`);
-    console.log(this.selectedValsByPrefId);
-
     const resolvedPagePrefs = SharedRenderer.resolvePagePrefs({
       pagePrefsConfig: this.pagePrefsConfig,
       prefOptionsConfig: this.prefOptionsConfig!,
       valsByPrefId: this.selectedValsByPrefId
     });
 
-    const chooserProps = { resolvedPagePrefs, valsByPrefId: this.selectedValsByPrefId };
+    Object.keys(resolvedPagePrefs).forEach((resolvedPrefId) => {
+      const resolvedPref = resolvedPagePrefs[resolvedPrefId];
+      this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
+    });
+
     const newChooserNode = rerenderChooser({
-      chooserProps,
+      resolvedPagePrefs,
       elementToPatch: this.chooserElement
     });
-    console.log('Rerendered chooser node');
-    console.log(newChooserNode);
+
     MarkdocStaticCompiler.renderers.incremental(
       this.renderableTree,
       this.contentElement,

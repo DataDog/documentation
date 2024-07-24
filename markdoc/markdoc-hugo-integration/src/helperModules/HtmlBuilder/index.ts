@@ -223,9 +223,12 @@ export class HtmlBuilder {
     const resolvedPagePrefs: ResolvedPagePrefs = {};
 
     p.pagePrefsConfig.forEach((prefConfig) => {
+      // Make a copy, so the placeholders in the original pref config
+      // stay intact for future resolutions
+      const prefConfigDup = { ...prefConfig };
       // Replace any placeholder in the options source with the default value
-      if (GLOBAL_PLACEHOLDER_REGEX.test(prefConfig.options_source)) {
-        prefConfig.options_source = prefConfig.options_source.replace(
+      if (GLOBAL_PLACEHOLDER_REGEX.test(prefConfigDup.options_source)) {
+        prefConfigDup.options_source = prefConfigDup.options_source.replace(
           GLOBAL_PLACEHOLDER_REGEX,
           (_match: string, placeholder: string) => {
             return p.valsByPrefId[placeholder.toLowerCase()];
@@ -234,19 +237,20 @@ export class HtmlBuilder {
       }
 
       const resolvedPref: ResolvedPagePref = {
-        identifier: prefConfig.identifier,
-        displayName: prefConfig.display_name,
+        identifier: prefConfigDup.identifier,
+        displayName: prefConfigDup.display_name,
         defaultValue:
-          prefConfig.default_value ||
-          p.prefOptionsConfig[prefConfig.options_source].find((option) => option.default)!
-            .identifier,
-        options: p.prefOptionsConfig[prefConfig.options_source].map((option) => ({
+          prefConfigDup.default_value ||
+          p.prefOptionsConfig[prefConfigDup.options_source].find(
+            (option) => option.default
+          )!.identifier,
+        options: p.prefOptionsConfig[prefConfigDup.options_source].map((option) => ({
           id: option.identifier,
           displayName: option.display_name
         }))
       };
 
-      resolvedPagePrefs[prefConfig.identifier] = resolvedPref;
+      resolvedPagePrefs[prefConfigDup.identifier] = resolvedPref;
     });
 
     return resolvedPagePrefs;

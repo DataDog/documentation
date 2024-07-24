@@ -17,7 +17,8 @@ export const ResolvedPagePrefSchema = z
     // The display name of the preference in the UI
     displayName: z.string(),
     defaultValue: z.string().regex(SNAKE_CASE_REGEX),
-    options: z.array(ResolvedPagePrefOptionSchema)
+    options: z.array(ResolvedPagePrefOptionSchema),
+    currentValue: z.string().regex(SNAKE_CASE_REGEX)
   })
   .strict();
 

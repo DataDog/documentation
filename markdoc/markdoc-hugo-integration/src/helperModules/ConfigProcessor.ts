@@ -86,8 +86,8 @@ export class ConfigProcessor {
 
     for (const fmPrefConfig of frontmatter.page_preferences) {
       // replace placeholders
-      let optionsSetId = fmPrefConfig.options_source;
-      optionsSetId = optionsSetId.replace(
+      const optionsSetId = fmPrefConfig.options_source;
+      const resolvedOptionsSetId = optionsSetId.replace(
         GLOBAL_PLACEHOLDER_REGEX,
         (_match: string, placeholder: string) => {
           const value = defaultValuesByPrefId[placeholder.toLowerCase()];
@@ -102,7 +102,8 @@ export class ConfigProcessor {
 
       defaultValuesByPrefId[fmPrefConfig.identifier] =
         fmPrefConfig.default_value ||
-        prefOptionsConfig[optionsSetId].find((option) => option.default)!.identifier;
+        prefOptionsConfig[resolvedOptionsSetId].find((option) => option.default)!
+          .identifier;
     }
 
     return defaultValuesByPrefId;
