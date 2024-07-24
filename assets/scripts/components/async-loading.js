@@ -221,9 +221,13 @@ function loadPage(newUrl) {
             document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((ddItem) => {
                 // Replace language dropdown-item hrefs with newURL when loading pages asynchronously (selecting the left nav menu items)
                 // ensures correct path is used for language dropdown-item.
-                const noLangPath = pathName.slice(3);
-                const cutIdx = ddItem.dataset.lang !== 'en' ? 3 : 0;
+
+                const commitRefLen = document.documentElement.dataset.commitRef.length; // adjust for preview env / branch name in path
+                const ddItemLangLen = ddItem.dataset.lang.length + 1;
+                const noLangPath = pathName.slice(commitRefLen + ddItemLangLen);
+                const cutIdx = ddItem.dataset.lang !== 'en' ? (commitRefLen + ddItemLangLen) : 0;
                 const newURL = ddItem.href.replace(ddItem.pathname.slice(cutIdx), noLangPath); 
+                
                 ddItem.setAttribute('href', newURL);
             })
 
