@@ -143,32 +143,6 @@ metadata:
     dd_customtags: "region:us1-east, team:backend"
 ```
 
-## Correlate deployments with CI pipelines
-
-If Argo CD deployments are triggered from a CI pipeline, you may correlate the deployment execution and the pipeline,
-allowing to check the associated deployments to a pipeline and the pipeline that triggered a deployment from Datadog.
-
-In this moment, not all the setups are supported. To be able to make the correlation your setup has to be similar to this:
-
-{{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
-
-**Note**: does not make changes to the configuration repository with `git commit`, and as such is incompatible with this setup.
-
-If your setup is similar to the one described above, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][14] for additional details:
-
-```yaml
-- job: JobToUpdateConfigurationRepository
-  run: |
-    # Update the configuration files
-    ...
-    git commit
-    # Correlate the deployment with the CI pipeline
-    datadog-ci deployment correlate --provider argocd
-    git push
-```
-
-**Note**: the code snippet above is an example. Adapt it to your CI provider syntax as necessary.
-
 ## Tag an Argo CD application deploying multiple services
 
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
@@ -199,6 +173,41 @@ metadata:
 ## Visualize deployments in Datadog
 
 The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+
+
+## Correlate deployments with CI pipelines
+
+If Argo CD deployments are triggered from a CI pipeline, you may correlate the deployment execution and the pipeline,
+allowing to check the associated deployments to a pipeline and the pipeline that triggered a deployment from Datadog. See the [section below](#visualize-correlated-pipelines-and-deployments) to see how the visualization looks in Datadog.
+
+In this moment, not all the setups are supported. To be able to make the correlation your setup needs to make changes to the repository Argo CD is monitoring using `git commit` in your CI. The following diagram represents an example of this kind of setup:
+
+{{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
+
+If your setup is similar to the one described above, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][14] for additional details:
+
+```yaml
+- job: JobToUpdateConfigurationRepository
+  run: |
+    # Update the configuration files
+    ...
+    git commit
+    # Correlate the deployment with the CI pipeline
+    datadog-ci deployment correlate --provider argocd
+    git push
+```
+
+**Note**: the code snippet above is an example. Adapt it to your CI provider syntax as necessary.
+
+### Visualize correlated pipelines and deployments
+
+Once the [setup mentioned above](#correlate-deployments-with-ci-pipelines) is completed, the deployment executions will contain a new tab called "Pipeline" from which you will be able to see the pipeline trace and navigate to CI visibility by clicking on "View full pipeline" button at the top:
+
+{{< img src="cd-ci-correlation-pipeline-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
+
+On the other hand, from CI Visibility, pipelines that contain deployments will have a new tab called "Deployments":
+
+{{< img src="cd-ci-correlation-deployments-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
 
 ## Troubleshooting
 
