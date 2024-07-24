@@ -43,7 +43,7 @@ Use the dependency map to visualize service-to-service communication and gain in
 
 To opt in, Datadog recommends you adjust your:
 - [Datadog Agent](#datadog-agent-configuration) (or [OpenTelemetry collector](#opentelemetry-collector)) configuration
-- [APM APM SDKs](#apm-tracing-libary-configuration) configuration
+- [APM SDKs](#apm-tracing-libary-configuration) configuration
 
 ### Datadog Agent configuration
 

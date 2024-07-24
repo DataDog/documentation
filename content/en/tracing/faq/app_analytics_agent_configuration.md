@@ -14,7 +14,7 @@ Migrate to <a href="/tracing/trace_pipeline"> Trace Retention and Ingestion </a>
 
 [App Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
-* Configure your APM APM SDK to emit the relevant analytics from your services—either [automatically][2] or [manually][3].
+* Configure your APM SDK to emit the relevant analytics from your services—either [automatically][2] or [manually][3].
 * Configure the Datadog Agent to emit the relevant analytics from your services (instructions below).
 
 **Note**: To enable App Analytics with the Agent, [services][1] must be already flowing into Datadog.
