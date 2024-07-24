@@ -36,6 +36,12 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
 
+### Automatic Compile-Time Instrumentation (Developer Preview)
+
+Instead of manually instrumentiing your apps with the [Integrations][1], you can use [orchestrion][6] to automatically add instrumentation to your application, including its dependencies and the Go standard library, at compile-time. This ensures maximum instrumentation coverage in your app, and moves instrumentation code out of the way, so you can focus on your application logic.
+
+Follow the instructions listed on the [orchestrion documentation][6]
+
 ## Configuration
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
@@ -51,3 +57,4 @@ For configuration instructions and details about using the API, see the Datadog 
 [3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[6]: /tracing/trace_collection/automatic_instrumentation/compile_time/go/
