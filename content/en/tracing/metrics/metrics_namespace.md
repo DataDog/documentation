@@ -119,7 +119,7 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
-## Sampling Impact on Trace Metrics
+## Sampling impact on trace metrics
 
 In most cases, trace metrics are calculated based on all application traffic. However, with certain trace ingestion sampling configurations, the metrics will represent only a subset of all requests:
 
