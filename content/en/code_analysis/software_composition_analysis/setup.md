@@ -43,7 +43,7 @@ SCA scans can be run directly on Datadog's infrastructure. Get started in-app [h
 ### Scan in CI pipelines
 SCA can be run in your CI pipelines using the [`datadog-ci` CLI][5]. Configure your [Datadog API and application keys][3] and run SCA jobs in the respective CI provider.
 
-{{< whatsnext desc="See instructions based on your CI provider:">}}
+{{< whatsnext desc="See the documentation for your CI provider:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
