@@ -5,5 +5,5 @@
    - HTTP/S endpoint authentication username and password.
    - Stored as the environment variables: `DD_OP_SOURCE_HTTP_CLIENT_USERNAME` and `DD_OP_SOURCE_HTTP_CLIENT_PASSWORD`.
 - If you are using bearer authorization:
-   - HTTP/S endpoint bearer token
-   -  Stored as the environment variable: `DD_OP_SOURCE_HTTP_CLIENT_BEARER_TOKEN`
+   - HTTP/S endpoint bearer token.
+   -  Stored as the environment variable: `DD_OP_SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
