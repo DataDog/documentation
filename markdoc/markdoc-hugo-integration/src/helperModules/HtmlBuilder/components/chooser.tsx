@@ -73,16 +73,15 @@ const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
       elementOpen(
         'div',
         null,
-        [
-          'key',
-          `${prefId}-${option.id}`,
-          'data-pref-id',
-          resolvedPref.identifier,
-          'data-option-id',
-          option.id
-        ],
+        [],
+        'key',
+        `${prefId}-${option.id}`,
         'class',
-        `markdoc-pref__pill ${selected}`
+        `markdoc-pref__pill ${selected}`,
+        'data-pref-id',
+        resolvedPref.identifier,
+        'data-option-id',
+        option.id
       );
       text(' ');
       text(option.displayName);

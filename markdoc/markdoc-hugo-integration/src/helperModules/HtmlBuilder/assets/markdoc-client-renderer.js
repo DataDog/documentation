@@ -3634,14 +3634,7 @@
           resolvedPref.options.forEach((option) => {
             const selected = option.id === currentValue ? "selected" : "";
             (0, incremental_dom_1.text)(" ");
-            (0, incremental_dom_1.elementOpen)("div", null, [
-              "key",
-              `${prefId}-${option.id}`,
-              "data-pref-id",
-              resolvedPref.identifier,
-              "data-option-id",
-              option.id
-            ], "class", `markdoc-pref__pill ${selected}`);
+            (0, incremental_dom_1.elementOpen)("div", null, [], "key", `${prefId}-${option.id}`, "class", `markdoc-pref__pill ${selected}`, "data-pref-id", resolvedPref.identifier, "data-option-id", option.id);
             (0, incremental_dom_1.text)(" ");
             (0, incremental_dom_1.text)(option.displayName);
             (0, incremental_dom_1.text)(" ");
@@ -3694,8 +3687,10 @@
             const defaultValue = prefConfigDup.default_value || p.prefOptionsConfig[prefConfigDup.options_source].find((option) => option.default).identifier;
             const possibleValues = p.prefOptionsConfig[prefConfigDup.options_source].map((option) => option.identifier);
             let currentValue = p.valsByPrefId[prefConfigDup.identifier];
+            console.log(`current value for '${prefConfigDup.identifier}': ${currentValue}`);
             if (currentValue && !possibleValues.includes(currentValue)) {
               currentValue = defaultValue;
+              console.log(`current value is not valid, using default value of '${defaultValue}' instead`);
             }
             const resolvedPref = {
               identifier: prefConfigDup.identifier,
@@ -13257,7 +13252,10 @@
             console.log("From handleValueChange: No optionId found");
             return;
           }
+          console.log(`from handleValueChange, prefId is ${prefId} and optionId is ${optionId}`);
           this.selectedValsByPrefId[prefId] = optionId;
+          console.log("from handleValueChange, selectedValsByPrefId is now");
+          console.log(this.selectedValsByPrefId);
           this.rerender();
         }
         addChooserEventListeners(chooserNode) {
@@ -13298,6 +13296,8 @@
             const resolvedPref = resolvedPagePrefs[resolvedPrefId];
             this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
           });
+          console.log("after pref resolution, selected values are now");
+          console.log(this.selectedValsByPrefId);
           const newChooserNode = (0, chooser_1.rerenderChooser)({
             resolvedPagePrefs,
             elementToPatch: this.chooserElement

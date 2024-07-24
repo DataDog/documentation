@@ -51,7 +51,12 @@ export class ClientRenderer {
       console.log('From handleValueChange: No optionId found');
       return;
     }
+    console.log(
+      `from handleValueChange, prefId is ${prefId} and optionId is ${optionId}`
+    );
     this.selectedValsByPrefId[prefId] = optionId;
+    console.log('from handleValueChange, selectedValsByPrefId is now');
+    console.log(this.selectedValsByPrefId);
     this.rerender();
   }
 
@@ -107,6 +112,9 @@ export class ClientRenderer {
       const resolvedPref = resolvedPagePrefs[resolvedPrefId];
       this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
     });
+
+    console.log('after pref resolution, selected values are now');
+    console.log(this.selectedValsByPrefId);
 
     const newChooserNode = rerenderChooser({
       resolvedPagePrefs,

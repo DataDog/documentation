@@ -56,8 +56,12 @@ export class SharedRenderer {
         (option) => option.identifier
       );
       let currentValue = p.valsByPrefId[prefConfigDup.identifier];
+      console.log(`current value for '${prefConfigDup.identifier}': ${currentValue}`);
       if (currentValue && !possibleValues.includes(currentValue)) {
         currentValue = defaultValue;
+        console.log(
+          `current value is not valid, using default value of '${defaultValue}' instead`
+        );
       }
 
       // Add the resolved pref to the returned object
