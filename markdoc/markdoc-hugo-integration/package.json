@@ -4,10 +4,10 @@
     "description": "",
     "scripts": {
         "test": "npm run build; vitest run --coverage --reporter=verbose",
-        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets && npm run copy-templates",
+        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-templates",
         "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle --minify > ./src/helperModules/HtmlBuilder/assets/markdoc-client-renderer.min.js",
         "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle > ./src/helperModules/HtmlBuilder/assets/markdoc-client-renderer.js",
-        "build": " npm run build-dev-renderer && npm run build-prod-renderer && npm run build-markdoc-integration",
+        "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer && npm run copy-assets",
         "copy-templates": "cp -r ./src/helperModules/HtmlBuilder/templates ./dist/helperModules/HtmlBuilder/templates",
         "copy-assets": "cp -r ./src/helperModules/HtmlBuilder/assets ./dist/helperModules/HtmlBuilder/assets"
     },

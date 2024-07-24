@@ -1,4 +1,4 @@
-<div><%- chooser %></div>
+<div id="chooser"><%- chooser %></div>
 <div id="content"><%- content %></div>
 <script>
     let selectedValsByPrefId =
@@ -9,17 +9,15 @@
     <%- JSON.stringify(pagePrefsConfig, null, 2) %>;
     const prefOptionsConfig =
     <%- JSON.stringify(prefOptionsConfig, null, 2) %>;
-    const contentDiv = document.getElementById('content');
-    const chooserDiv = document.getElementById('chooser');
-    function handleValueChange(e) {
-        const node = e.target;
-        const prefId = node.getAttribute('data-pref-id');
-        const optionId = node.getAttribute('data-option-id');
-        selectedValsByPrefId[prefId] = optionId;
-        MarkdocClientRenderer(renderableTree, contentDiv, { variables: selectedValsByPrefId });
-    }
-    const prefPills = document.getElementsByClassName('markdoc-pref__pill');
-    for (let i = 0; i < prefPills.length; i++) {
-        prefPills[i].addEventListener('click', handleValueChange);
-    }
+    const contentElement = document.getElementById('content');
+    const chooserElement = document.getElementById('chooser');
+    console.log("from page: configuring client renderer ...");
+    clientRenderer.configure({
+        pagePrefsConfig,
+        prefOptionsConfig,
+        chooserElement,
+        contentElement,
+        selectedValsByPrefId,
+        renderableTree
+    });
 </script>

@@ -1,4 +1,3 @@
-import { ChooserProps, rerenderChooser } from './HtmlBuilder/components/chooser';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
 import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
@@ -15,10 +14,6 @@ import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
  * for the client.
  */
 export class SharedRenderer {
-  static rerenderChooser(p: { chooserProps: ChooserProps; elementToPatch: Element }) {
-    rerenderChooser(p);
-  }
-
   /**
    * Resolve the page preferences object that is used
    * to populate the content filtering UI (AKA the chooser),
@@ -29,10 +24,13 @@ export class SharedRenderer {
     prefOptionsConfig: PrefOptionsConfig;
     valsByPrefId: Record<string, string>;
   }): ResolvedPagePrefs {
+    console.log('Resolving page prefs');
     const resolvedPagePrefs: ResolvedPagePrefs = {};
 
     p.pagePrefsConfig.forEach((prefConfig) => {
-      // Replace any placeholder in the options source with the default value
+      console.log('options source: ', prefConfig.options_source);
+      // Replace any placeholder in the options source with the selected value,
+      // or the default value
       if (GLOBAL_PLACEHOLDER_REGEX.test(prefConfig.options_source)) {
         prefConfig.options_source = prefConfig.options_source.replace(
           GLOBAL_PLACEHOLDER_REGEX,
@@ -41,6 +39,7 @@ export class SharedRenderer {
           }
         );
       }
+      console.log('options source after replacement: ', prefConfig.options_source);
 
       const resolvedPref: ResolvedPagePref = {
         identifier: prefConfig.identifier,
@@ -56,6 +55,7 @@ export class SharedRenderer {
       };
 
       resolvedPagePrefs[prefConfig.identifier] = resolvedPref;
+      console.log('Resolved pref: ', resolvedPref);
     });
 
     return resolvedPagePrefs;

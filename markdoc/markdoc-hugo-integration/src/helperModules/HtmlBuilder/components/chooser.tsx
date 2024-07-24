@@ -19,7 +19,7 @@ export interface ChooserProps {
  */
 export const Chooser = (props: ChooserProps) => {
   return (
-    <div id="chooser">
+    <div>
       {Object.keys(props.resolvedPagePrefs).map((prefId) => {
         const resolvedPref = props.resolvedPagePrefs[prefId];
         const currentValue = props.valsByPrefId[prefId] || resolvedPref.defaultValue;
@@ -54,41 +54,51 @@ export const rerenderChooser = (p: {
   chooserProps: ChooserProps;
   elementToPatch: Element;
 }) => {
-  patch(p.elementToPatch, () => renderChooserIncrementally(p.chooserProps));
+  const node = patch(p.elementToPatch, () => renderChooserIncrementally(p.chooserProps));
+  return node;
 };
 
 /**
  * Render the chooser component incrementally.
  */
 const renderChooserIncrementally = (props: ChooserProps) => {
-  elementOpen('div', null, ['id', 'chooser']);
+  console.log('Rendering the chooser incrementally');
+  elementOpen('div', null);
   Object.keys(props.resolvedPagePrefs).forEach((prefId) => {
     const resolvedPref = props.resolvedPagePrefs[prefId];
     const currentValue = props.valsByPrefId[prefId] || resolvedPref.defaultValue;
+    console.log('Current value is');
+    console.log(currentValue);
+
     elementOpen('div', null, ['class', 'markdoc-pref__container']);
     elementOpen('div', null, ['class', 'markdoc-pref__label']);
     text(resolvedPref.displayName);
     elementClose('div');
     resolvedPref.options.forEach((option) => {
+      console.log('Option is');
+      console.log(option);
       const selected = option.id === currentValue ? 'selected' : '';
+      console.log('Selected is');
+      console.log(selected);
       elementOpen(
         'div',
         null,
         [
           'key',
-          option.id,
-          'class',
-          `markdoc-pref__pill ${selected}`,
+          `${prefId}-${option.id}`,
           'data-pref-id',
           resolvedPref.identifier,
           'data-option-id',
           option.id
         ],
-        []
+        'class',
+        `markdoc-pref__pill ${selected}`
       );
       text(option.displayName);
       elementClose('div');
     });
     elementClose('div');
   });
+  elementVoid('hr');
+  elementClose('div');
 };
