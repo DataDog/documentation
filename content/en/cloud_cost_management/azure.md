@@ -162,6 +162,8 @@ You can visualize your ingested data using the following cost types:
 
 Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [usage cost report][9] and make it easier to discover and understand cost data.
 
+| Tag Name                         | Tag Description       |
+| ---------------------------- | ----------------- |
 | `accountname` | The name of the account associated with the line item. |
 | `accountownerid` | The ID of the owner associated with the line item. |
 | `billingaccountid` | The ID of the billing account associated with the line item. |
