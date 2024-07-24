@@ -112,7 +112,7 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 
 ## Compatibility requirements
 
-The Datadog Python SDK supports library instrumentations using OpenTelemetry's [instrumentation API][13].
+The Datadog Python SDK supports library [instrumentations][13] using the Opentelemetry Python Trace API.
 
 OpenTelemetry provides an [example][14] for instrumenting a sample application.
 
@@ -135,7 +135,7 @@ To use Opentelemetry integrations with the Datadog Python SDK, perform the follo
 
 ## Compatibility requirements
 
-The Datadog Ruby SDK supports library instrumentations using OpenTelemetry's [instrumentation API][18].
+The Datadog Ruby SDK supports library [instrumentations][18] using the Opentelemetry Ruby Trace API.
 
 OpenTelemetry provides an [example][19] for instrumenting a sample application.
 
@@ -148,7 +148,7 @@ To use Opentelemetry integrations with the the Datadog Ruby SDK, perform the fol
  3. Ensure a Datadog Agent is configured to accept traces from your [application][16].
 
 [18]: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation#opentelemetry-instrumentation-libraries
-[19]: https://opentelemetry.io/docs/zero-code/python/example/
+[19]: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/35ddf66f9c42a228298ef1c9f333abb65d6ddc45/instrumentation/faraday/example
 [20]: /tracing/trace_collection/custom_instrumentation/ruby/otel/#configuring-opentelemetry-to-use-the-datadog-tracing-library
 
 
@@ -158,7 +158,7 @@ To use Opentelemetry integrations with the the Datadog Ruby SDK, perform the fol
 
 ## Compatibility requirements
 
-The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][20], including the [`opentelemetry-go-contrib/instrumentation`][21] libraries, but it does not support integrations that rely on metrics or logs exporters.
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][20], including the [`opentelemetry-go-contrib/instrumentation`][21] libraries.
 
 ## Setup
 
@@ -166,6 +166,7 @@ To use Opentelemetry integrations with the the Datadog Ruby SDK, perform the fol
 
  1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][22] page.
  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
+ 3. Ensure a Datadog Agent is configured to accept traces from your [application][16].
 
 The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
 
