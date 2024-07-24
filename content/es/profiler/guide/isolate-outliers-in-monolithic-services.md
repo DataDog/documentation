@@ -39,7 +39,7 @@ El gráfico actualizado revela que hay un pico intermitente de uso de CPU en el 
 
 ## Aislar el impacto de los endpoints
 
-Para determinar la causa del aumento del uso de la CPU cada vez que se llama a `GET /store_history`, examina el gráfico de llama de perfiles para este endpoint durante uno de los picos. Selecciona un intervalo de tiempo en el que `GET /store_history` muestre un mayor uso de la CPU y delimita la página de perfiles a ese intervalo de tiempo. A continuación, cambia a la visualización **Gráfico de llamas** para ver qué métodos utilizan la CPU en ese momento:
+Para determinar la causa del aumento del uso de CPU cada vez que se llama a `GET /store_history`, examina el gráfico de llamas de perfiles para este endpoint durante uno de los picos. Selecciona un intervalo de tiempo en el que `GET /store_history` muestre un mayor uso de CPU y delimita la página de perfiles a ese intervalo de tiempo. A continuación, cambia a la visualización **Gráfico de llamas** para ver qué métodos utilizan CPU en ese momento:
 
 {{< img src="profiler/guide-monolithic-outliers/4-outliers-monolith-flame-graph-2.png" alt="Descripción de tu imagen" style="width:100%;" >}}
 
@@ -49,15 +49,15 @@ Dado que estás investigando el uso de recursos por solicitud, cambia también e
 
 ## Comparación de gráficos de llamas
 
-Con el gráfico mostrando los datos para la hora y el endpoint correctos, deberías tener suficientes datos para determinar qué está causando el pico en la utilización de la CPU. Si todavía no tienes seguridad, puedes comparar el gráfico de llamas del pico con un momento en que el uso era más aceptable.
+Con el gráfico mostrando los datos para la hora y el endpoint correctos, deberías tener suficientes datos para determinar qué está causando el pico en el uso de CPU. Si todavía no tienes seguridad, puedes comparar el gráfico de llamas del pico con un momento en que el uso era más aceptable.
 
 Para ver si hay diferencias en los métodos que utilizan mucho tiempo de CPU entre un pico y un uso normal, haz clic en **Compare** (Comparar) (junto al campo de búsqueda) y selecciona `Previous 15 minutes`. Se abrirá la vista de comparación. 
 
-La vista muestra dos gráficos, denominados **A** y **B**, cada uno de los cuales representa un intervalo de tiempo de utilización de la CPU por llamada a `GET /store_history`. Ajusta el selector de tiempo para **A** de modo que se aplique a un periodo con baja utilización de CPU por llamada:
+La vista muestra dos gráficos, denominados **A** y **B**, cada uno de los cuales representa un intervalo de tiempo de uso de CPU por llamada a `GET /store_history`. Ajusta el selector de tiempo para **A** de modo que se aplique a un periodo con bajo uso de CPU por llamada:
 
 {{< img src="profiler/guide-monolithic-outliers/5-outliers-monolith-compare-flame-graphs-2.png" alt="Descripción de tu imagen" style="width:100%;" >}}
 
-La comparación revela los diferentes métodos que causan la utilización de la CPU durante el pico (intervalo de tiempo **B**), que no se utilizan durante el uso normal de la CPU (intervalo de tiempo **A**). Como se muestra en la imagen anterior, `Product.loadAssets(int)` está causando los picos.
+La comparación revela los diferentes métodos que causan el uso de CPU durante el pico (intervalo de tiempo **B**), que no se utilizan durante el uso normal de CPU (intervalo de tiempo **A**). Como se muestra en la imagen anterior, `Product.loadAssets(int)` está causando los picos.
 
 Para solucionar el problema, optimiza el método. Si observas el código del método, la firma es `Product(int id, String name, boolean shouldLoadAssets)` y no necesitas cargar recursos para la respuesta al endpoint `GET /store_history`. Esto implica que hay un error más arriba en el stack tecnológico de llamadas que indica incorrectamente al constructor `Product` que cargue recursos.
 
