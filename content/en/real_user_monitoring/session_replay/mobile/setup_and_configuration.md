@@ -100,7 +100,7 @@ The Session Replay is recorded through the Browser SDK, then the Mobile SDK hand
 {{< tabs >}}
 {{% tab "Android" %}}
 
-To instrument your consolidated web and native views Session Replay for Android:
+To instrument your consolidated web and native Session Replay views for Android:
 
 1. Ensure you are using version [`2.8.0`][2] or higher of the Android SDK.
 2. Enable [webview tracking][3] for your mobile application.
@@ -116,7 +116,7 @@ To instrument your consolidated web and native views Session Replay for Android:
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-To instrument your consolidated web and native views Session Replay for iOS:
+To instrument your consolidated web and native Session Replay views for iOS:
 
 1. Ensure you are using version [`2.13.0`][1] or higher of the iOS SDK.
 2. Enable [webview tracking][2] for your mobile application.
@@ -134,7 +134,7 @@ To instrument your consolidated web and native views Session Replay for iOS:
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
-Sample rate is a required parameter in Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 means no replays are be recorded and 100 means all RUM sessions contain replay.
+Sample rate is a required parameter in Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 means no replays are recorded and 100 means all RUM sessions contain replay.
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
