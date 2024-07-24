@@ -30,7 +30,7 @@ Para obtener información sobre qué funciones de ASM están disponibles para fu
 Configurar ASM para AWS Lambda implica:
 
 1. Identificar las funciones vulnerables o susceptibles de sufrir ataques, que más se beneficiarían con ASM. Encuéntralas en [la pestaña Seguridad de tu Catálogo de servicios][1].
-2. Configurar la instrumentación ASM utilizando la [CLI de Datadog](https://docs.datadoghq.com/serverless/serverless_integrations/cli), el [kit de desarrollo en la nube (CDK) de AWS](https://github.com/DataDog/datadog-cdk-constructs), el [complemento del marco serverless de Datadog][6], o manualmente, utilizando las capas de rastreo de Datadog.
+2. Configurar la instrumentación ASM utilizando la [CLI de Datadog](https://docs.datadoghq.com/serverless/serverless_integrations/cli), el [kit de desarrollo en la nube (CDK) AWS](https://github.com/DataDog/datadog-cdk-constructs), el [complemento del marco serverless de Datadog][6], o manualmente, utilizando las capas de rastreo de Datadog.
 3. Activar señales de seguridad en tu aplicación y observar cómo Datadog muestra la información resultante.
 
 ### Requisitos previos
@@ -145,7 +145,7 @@ La CLI de Datadog modifica las configuraciones de la función Lambda existentes 
 {{% /tab %}}
 {{% tab "Kit de desarrollo en la nube (CDK) de AWS" %}}
 
-El [Constructo CDK Datadog][1] instala automáticamente Datadog en tus funciones utilizando capas Lambda y configura tus funciones para enviar métricas, trazas (traces) y logs a Datadog a través de la extensión Lambda de Datadog.
+El [Constructo CDK Datadog][1] instala automáticamente Datadog en tus funciones utilizando capas Lambda y configura tus funciones para enviar métricas, trazas y logs a Datadog a través de la extensión Lambda de Datadog.
 
 1. Instala la biblioteca del constructo CDK Datadog:
 
@@ -383,7 +383,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
    Si instalas la biblioteca del rastreador Datadog directamente en tu aplicación, como se indica en las [instrucciones de instrumentación manual del rastreador][1], omite este paso.
 
-3. (Opcional) Añade etiquetas de Datadog.
+3. (Opcional) Añade etiquetas (tags) de Datadog.
 
    ```dockerfile
    ENV DD_SERVICE=datadog-demo-run-nodejs
