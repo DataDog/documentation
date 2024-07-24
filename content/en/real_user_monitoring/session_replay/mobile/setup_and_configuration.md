@@ -105,13 +105,12 @@ To instrument your consolidated web and native Session Replay views for Android:
 1. Ensure you are using version [`2.8.0`][2] or higher of the Android SDK.
 2. Enable [webview tracking][3] for your mobile application.
 3. Enable [Session Replay][4] for your web application.
-4. Enable [Session Replay][5] for your mobile application.
+4. Enable Session Replay for your mobile application.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/
 [2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=android#instrument-your-web-views
 [4]: /real_user_monitoring/session_replay/browser/#setup
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -121,12 +120,11 @@ To instrument your consolidated web and native Session Replay views for iOS:
 1. Ensure you are using version [`2.13.0`][1] or higher of the iOS SDK.
 2. Enable [webview tracking][2] for your mobile application.
 3. Enable [Session Replay][3] for your web application.
-4. Enable [Session Replay][4] for your mobile application.
+4. Enable Session Replay for your mobile application.
 
 [1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=ios#instrument-your-web-views
 [3]: /real_user_monitoring/session_replay/browser/#setup
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios
 
 {{% /tab %}}
 {{< /tabs >}}
