@@ -102,7 +102,7 @@ Attack attempts were detected targeting the serverless application.
 
 ### Provisioned concurrency
 
- The function's provisioned concurrency utilization was below 60%. According to AWS, provisioned concurrency is best optimized for cost when utilization is consistently greater than 60%.
+The function's provisioned concurrency utilization was below 60%. According to AWS, provisioned concurrency is best optimized for cost when utilization is consistently greater than 60%.
 
 **Resolution:** Consider decreasing the amount of configured provisioned concurrency for your function.
 
