@@ -24,6 +24,10 @@ further_reading:
     text: "Join an interactive session on better visualizations with Dashboards"  
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
+  Explore and register for Foundation Enablement sessions. Learn to customize your dashboards using our vast library of visualizations and easy-to-use drag-and-drop Dashboard builder. Enable your team's success by easily sharing data with stakeholders via reports, public URLs, and notebooks.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 The key to getting started with dashboards is knowing what kind of questions you ask yourself regularly. What are common issues your customers face? When a problem occurs, what questions help you find a solution? 

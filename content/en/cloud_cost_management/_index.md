@@ -33,6 +33,11 @@ cascade:
 <div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+
+{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
+  Explore your cloud provider costs correlated with your real-time telemetry data to gain actionable insights and alerts on where your cloud costs are coming from, how they are changing, and where to find potential optimizations.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Cloud Cost Management provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify inefficiencies.

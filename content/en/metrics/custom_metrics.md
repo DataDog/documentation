@@ -29,6 +29,10 @@ algolia:
   tags: ['custom metrics']
 ---
 
+{{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  Explore and register for Foundation Enablement sessions for Custom Metrics. Learn how custom metrics help you track your application KPIs, such as the number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. 
