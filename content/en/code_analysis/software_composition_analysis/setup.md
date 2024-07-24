@@ -60,7 +60,7 @@ When installing a GitHub App, the following permissions are required to enable c
 
 ### Other source code management providers
 If you are using another source code management provider, configure SCA to run in your CI pipelines via the datadog-ci CLI tool and [upload the results][8] to Datadog.
-You **must** run an analysis of your repository on the default branch before results can begin appearing in the Code Analysis page.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Analysis** page.
 
 ## Further Reading
 
