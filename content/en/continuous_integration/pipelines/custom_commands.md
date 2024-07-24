@@ -20,7 +20,7 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in Github Actions [see section below](#trace-a-command-in-github-actions)
+- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in GitHub Actions [see section below](#trace-a-command-in-github-actions)
 - GitLab (SaaS or self-hosted >= 14.1) with datadog-ci CLI >= 2.40.
 - Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
@@ -108,7 +108,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Trace a command in Github Actions
+## Trace a command in GitHub Actions
 
 If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]),
 the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:

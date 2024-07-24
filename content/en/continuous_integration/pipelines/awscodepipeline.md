@@ -119,7 +119,7 @@ The AWS CodePipeline integration supports correlating **CodeBuild** actions with
 
 ### Add the pipeline execution ID as an environment variable
 
-The pipeline execution ID is an identifier Datadog needs to uniquely identify a pipeline. This is needed for correlating pipelines with tests, custom tags and custom commands:
+The pipeline execution ID is an identifier Datadog needs to uniquely identify a pipeline execution. This is needed for correlating pipelines with tests and custom commands:
 
 1. In the AWS Console, go to your pipeline configuration and click **Edit**
 2. Go to the stage containing the AWS CodeBuild action, click **Edit Stage**, and then edit the relevant action.
