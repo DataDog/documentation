@@ -2856,7 +2856,7 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
       weight: 7
-    - name: Search Tags
+    - name: Tag Explorer
       url: cloud_cost_management/tag_explorer
       parent: cloud_cost
       identifier: cloud_cost_tag_explorer
