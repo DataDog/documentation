@@ -108,6 +108,10 @@ Including metric partitions or grouping variables in service names instead of ap
 
  For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
 
+### Missing error message and stack trace
+
+Some traces that exhibit an error status, where the Errors tab of a trace will show a message reading 'Missing error message and stack trace' rather than an exception. A span is only expected to contain this information when an unhandled exception is traced. If an exception is handled in a try/catch block, `error.msg`, `error.type`, and `error.stack` span tags are not populated. If desired, these tags can be populated with [Custom Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/?tab=datadogapi) code. It's also possible for spans to be given an error status without encountering an unhandled exception based on HTTP status code (400-599), this is a case where the same message is expected.
+
 ## Troubleshooting data requested by Datadog Support
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
