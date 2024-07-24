@@ -106,7 +106,7 @@ LLMObs.enable(
 
 ### AWS Lambda setup
 
-Enable LLM Observability by specifying the required environment variables in [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS lambda layers. 
+Enable LLM Observability by specifying the required environment variables in your [command line setup](#command-line-setup) and following the setup instructions for the [Datadog-Python and Datadog-Extension][14] AWS Lambda layers. 
 
 **Note**: Using the `Datadog-Python` and `Datadog-Extension` layers automatically turns on all LLM Observability integrations, and force flushes spans at the end of the Lambda function.
 
