@@ -38,7 +38,7 @@ To set up Datadog Software Composition Analysis, navigate to [**Software Deliver
 
 ## Select where to run Software Composition Analysis scans
 ### Scan with Datadog-hosted scanning
-SCA scans can be run directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page].
+SCA scans can be run directly on Datadog's infrastructure. To get started, navigate to the [**Code Analysis** page][6].
 
 ### Scan in CI pipelines
 SCA can be run in your CI pipelines using the [`datadog-ci` CLI][5]. Configure your [Datadog API and application keys][3] and run SCA jobs in the respective CI provider.
@@ -55,11 +55,11 @@ If GitHub is your source code management provider, you must configure a GitHub A
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
-- `Content: Read`, which allows you to see code snippets displayed in Datadog
-- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
+- `Content: Read`, which allows you to see code snippets displayed in Datadog.
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11].
 
 ### Other source code management providers
-If you are using another source code management provider, configure SCA to run in your CI pipelines via the datadog-ci CLI tool and [upload the results][8] to Datadog.
+If you are using another source code management provider, configure SCA to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results][8] to Datadog.
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Analysis** page.
 
 ## Further Reading
@@ -73,4 +73,7 @@ You **must** run an analysis of your repository on the default branch before res
 [5]: https://github.com/DataDog/datadog-ci
 [6]: https://app.datadoghq.com/ci/code-analysis
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[8]: /setup#upload-third-party-static-analysis-results-to-datadog
+[8]: /code_analysis/software_composition_analysis/generic_ci_providers/
+[9]: /integrations/github
+[10]: /integrations/guide/source-code-integration
+[11]: /code_analysis/github_pull_requests/
