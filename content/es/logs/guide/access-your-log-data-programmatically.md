@@ -1,6 +1,15 @@
 ---
-null
-...
+further_reading:
+- link: /logs/explorer/
+  tag: Documentación
+  text: Más información sobre el Log Explorer
+- link: /logs/explorer/
+  tag: Documentación
+  text: Más información sobre la Sintaxis de búsqueda
+- link: /logs/search_syntax/
+  tag: Documentación
+  text: Más información sobre la sintaxis para la API de Búsqueda de logs
+title: Accede mediante programación a los datos de log con la API de Búsqueda de logs
 ---
 
 
@@ -28,7 +37,7 @@ En esta guía se tratan los siguientes ejemplos:
 
 Para recuperar todos los eventos de log dentro de un periodo específico, utiliza la siguiente [Sintaxis de búsqueda][5] para completar la llamada a la API.
 
-`from` indica el `start time` y `to` indica el `end time` para los datos del log. `query` indica la consulta de búsqueda que debe ejecutarse.
+`from` indica `start time` y `to` indica `end time` para los datos del log. `query` indica la consulta de búsqueda que debe ejecutarse.
 
 **Llamada a la API:**
 
