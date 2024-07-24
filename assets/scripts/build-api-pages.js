@@ -45,7 +45,9 @@ const updateMenu = (specData, specs, languages) => {
       // just get this sections data
       Object.keys(apiYaml.paths)
         .filter((path) => isTagMatch(apiYaml.paths[path], tag.name))
-        .map((path) => Object.values(apiYaml.paths[path]))
+        .map((path) => Object.entries(apiYaml.paths[path])
+            .filter(([key, values]) => !key.startsWith("x-"))
+            .map(([key, values]) => values))
         .reduce((obj, item) => ([...obj, ...item]), [])
         .forEach((action) => {
 
@@ -156,7 +158,8 @@ const createResources = (apiYaml, deref, apiVersion) => {
 
     // build example json for request and each response
     data.forEach((actionObj) => {
-      Object.entries(actionObj).forEach(([actionKey, action]) => {
+      Object.entries(actionObj)
+        .filter(([actionKey, action]) => !actionKey.startsWith("x-")).forEach(([actionKey, action]) => {
 
         // request
         let request;
@@ -917,36 +920,38 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
     // Ignore extensions since they're not paths.
     .filter((path) => !path.startsWith("x-"))
     .forEach((path) => {
-      Object.entries(deref.paths[path]).forEach(([actionKey, action]) => {
-        const item = {
-          description: action.description,
-          summary: action.summary,
-          // responses: {}
-        }
-        if (action.requestBody) {
-          item['request_description'] = action.requestBody.description || '';
-          if (action.requestBody.content && action.requestBody.content["application/json"]) {
-            item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
-          } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
-            item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
-          } else if(action.requestBody.content && action.requestBody.content["multipart/form-data"]) {
-            item['request_schema_description'] = action.requestBody.content["multipart/form-data"].schema.description || '';
+      Object.entries(deref.paths[path])
+        .filter(([actionKey, action]) => !actionKey.startsWith("x-"))
+        .forEach(([actionKey, action]) => {
+          const item = {
+            description: action.description,
+            summary: action.summary,
+            // responses: {}
           }
-        }
-        /*
-        if (action.responses) {
-          Object.entries(action.responses).forEach(([responseKey, resp]) => {
-            const respObj = {
-              description: resp.description
+          if (action.requestBody) {
+            item['request_description'] = action.requestBody.description || '';
+            if (action.requestBody.content && action.requestBody.content["application/json"]) {
+              item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
+            } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
+              item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
+            } else if(action.requestBody.content && action.requestBody.content["multipart/form-data"]) {
+              item['request_schema_description'] = action.requestBody.content["multipart/form-data"].schema.description || '';
             }
-            if (resp.content && resp.content["application/json"] && resp.content["application/json"].schema && resp.content["application/json"].schema.description) {
-              respObj["schema_description"] = resp.content["application/json"].schema.description;
-            }
-            item['responses'][responseKey] = respObj;
-          });
-        } */
-        actions[action.operationId] = item;
-      });
+          }
+          /*
+          if (action.responses) {
+            Object.entries(action.responses).forEach(([responseKey, resp]) => {
+              const respObj = {
+                description: resp.description
+              }
+              if (resp.content && resp.content["application/json"] && resp.content["application/json"].schema && resp.content["application/json"].schema.description) {
+                respObj["schema_description"] = resp.content["application/json"].schema.description;
+              }
+              item['responses'][responseKey] = respObj;
+            });
+          } */
+          actions[action.operationId] = item;
+        });
     });
   const actionsFilePath = `./data/api/${apiVersion}/translate_actions.json`;
   fs.writeFileSync(actionsFilePath, safeJsonStringify(actions, null, 2), 'utf8');

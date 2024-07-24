@@ -15,28 +15,62 @@ further_reading:
   tag: Documentation
   text: Apprendre à explorer vos logs
 - link: /logs/faq/log-collection-troubleshooting-guide/
-  tag: FAQ
+  tag: Documentation
   text: Guide de dépannage pour la collecte de logs
+- link: /glossary/#tail
+  tag: Glossaire
+  text: Entrée du glossaire pour le terme « tail »
 title: Collecte de logs avec Python
 ---
 
 ## Présentation
 
-Utilisez votre logger Python préféré pour écrire des logs dans un fichier sur votre host. Surveillez ensuite le fichier avec l'Agent Datadog pour envoyer vos logs vers Datadog.
+Pour envoyer vos logs Python à Datadog, configurez un logger Python afin d'activer la journalisation au sein d'un fichier sur un host, puis [suivez][12] ce fichier avec l'Agent Datadog.
 
 ## Configurer votre logger
 
-Les logs Python sont assez complexes à gérer, principalement à cause des tracebacks. Ils sont divisés en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine.
-Pour répondre à ce cas de figure, nous vous conseillons d'utiliser un formateur JSON lors de l'écriture des logs afin de :
+Les logs Python peuvent être complexes à gérer à cause des tracebacks. Les tracebacks entraînent la division des logs en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine. Pour y remédier, Datadog vous recommande d'utiliser un formateur JSON lors de l'écriture des logs afin de :
 
-* Garantir que chaque paramètre stack_trace est correctement associé au bon log
+* Garantir que chaque stack trace est correctement incorporée au bon log
 * Vous assurer que tous les attributs d'un événement de log sont correctement extraits (gravité, nom du logger, nom du thread, etc.)
 
 Vous trouverez ci-dessous des exemples de configuration pour les bibliothèques de journalisation suivantes :
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
-* [django-datadog-logger][3]
+* [django-datadog-logger][3]*
+
+* Le [logger Python][6] possède un paramètre `extra` supplémentaire permettant d'ajouter des attributs personnalisés. Utilisez `DJANGO_DATADOG_LOGGER_EXTRA_INCLUDE` pour spécifier une expression régulière qui renvoie le nom des loggers pour lesquels vous souhaitez ajouter le paramètre `extra`.
+
+## Configurer l'Agent Datadog
+
+Une fois la [collecte de logs activée][7], procédez comme suit pour configurer la [collecte de logs personnalisée][8] afin de suivre vos fichiers de logs et de les transmettre à Datadog :
+
+1. Créez un dossier `python.d/` dans le répertoire de configuration `conf.d/` de l'Agent.
+2. Créez un fichier `conf.yaml` dans le répertoire `conf.d/python.d/` avec le contenu suivant :
+    ```yaml
+    init_config:
+
+    instances:
+
+    ##Log section
+    logs:
+
+      - type: file
+        path: "<PATH_TO_PYTHON_LOG>.log"
+        service: "<SERVICE_NAME>"
+        source: python
+        sourcecategory: sourcecode
+        # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+        #log_processing_rules:
+        #  - type: multi_line
+        #    name: new_log_start_with_date
+        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
+3. [Redémarrez l'Agent][5].
+4. Lancez la [sous-commande status de l'Agent][9] et cherchez `python` dans la section `Checks` pour vérifier que les logs sont bien transmis à Datadog.
+
+Si les logs sont au format JSON, Datadog [parse automatiquement les messages de log][10] pour extraire les attributs. Utilisez le [Log Explorer][11] pour visualiser et dépanner vos logs.
 
 ## Associer votre service à l'ensemble des logs et traces
 
@@ -50,111 +84,60 @@ Une fois cette opération terminée, le log doit avoir le format suivant :
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] – Il s'agit d'un exemple
 ```
 
-[Configurez ensuite l'Agent Datadog](#configurer-l-agent-datadog) de façon à collecter les logs Python à partir du fichier.
-
-### Écrire les logs dans un fichier
-
-{{< tabs >}}
-{{% tab "JSON-log-formatter" %}}
-
-Exemple d'utilisation avec [JSON-log-formatter][1] :
-
-```python
-import logging
-
-import json_log_formatter
-
-formatter = json_log_formatter.JSONFormatter()
-
-json_handler = logging.FileHandler(filename='/var/log/mon-log.json')
-json_handler.setFormatter(formatter)
-
-logger = logging.getLogger('my_json')
-logger.addHandler(json_handler)
-logger.setLevel(logging.INFO)
-
-logger.info('Sign up', extra={'referral_code': '52d6ce'})
-```
-
-Le fichier de log comprend l'entrée de log suivante (sur une ligne) :
+Si les logs sont au format JSON, les valeurs des traces sont automatiquement extraites tant qu'elles se trouvent au premier niveau ou au sein de blocs `extra` ou `record.extra` de premier niveau. Vous trouverez ci-dessous des exemples de log JSON valides pour lesquels les valeurs des traces sont automatiquement parsées.
 
 ```json
 {
-  "message": "Sign up",
-  "time": "2015-09-01T06:06:26.524448",
-  "referral_code": "52d6ce"
+  "message":"Hello from the private method",
+  "dd.trace_id":"18287620314539322434",
+  "dd.span_id":"8440638443344356350",
+  "dd.env":"dev",
+  "dd.service":"logs",
+  "dd.version":"1.0.0"
 }
 ```
-
-[1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
-{{% /tab %}}
-{{% tab "Python-json-logger" %}}
-
-Exemple d'utilisation avec [Python-json-logger][1] :
-
-```python
-import logging
-from pythonjsonlogger import jsonlogger
-
-logger = logging.getLogger()
-
-logHandler = logging.FileHandler(filename='/var/log/my-log.json')
-formatter = jsonlogger.JsonFormatter()
-logHandler.setFormatter(formatter)
-logger.addHandler(logHandler)
-logger.setLevel(logging.INFO)
-
-logger.info('Sign up', extra={'referral_code': '52d6ce'})
-```
-
-Le fichier de log comprend l'entrée de log suivante (sur une ligne) :
 
 ```json
 {
-  "message": "Sign up",
-  "referral_code": "52d6ce"
+  "message":"Hello from the private method",
+  "extra":{
+    "dd.trace_id":"18287620314539322434",
+    "dd.span_id":"8440638443344356350",
+    "dd.env":"dev",
+    "dd.service":"logs",
+    "dd.version":"1.0.0"
+  }
 }
 ```
 
-Pour en savoir plus sur la configuration du handler, consultez la documentation [Python-json-logger][2].
-
-[1]: https://github.com/madzak/python-json-logger
-[2]: https://github.com/madzak/python-json-logger#customizing-fields
-{{% /tab %}}
-{{< /tabs >}}
-
-### Configurer l'Agent Datadog
-
-Créez un fichier `conf.yaml` dans le répertoire `conf.d/python.d/` de l'Agent avec le contenu suivant :
-
-```yaml
-init_config:
-
-instances:
-
-##Section des logs
-logs:
-
-  - type: file
-    path: "<CHEMIN_VERS_LOG_PYTHON>.log"
-    service: "<VOTRE_APPLICATION>"
-    source: python
-    sourcecategory: sourcecode
-    # Si des logs multiligne commencent par la date au format aaaa-mm-jj, supprimer la mise en commentaire de la règle de traitement suivante
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+```json
+{
+"message":"Hello from the private method",
+  "record":{
+    "extra":{
+      "dd.trace_id":"1734396609740561719",
+      "dd.span_id":"17877262712156101004",
+      "dd.env":"dev",
+      "dd.service":"logs",
+      "dd.version":"1.0.0"
+    }
+  }
+}
 ```
-
-[Redémarrez l'Agent][5] pour prendre en compte les changements de configuration.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
+[1]: https://pypi.python.org/pypi/JSON-log-formatter/
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
-[4]: /fr/tracing/connect_logs_and_traces/python
-[5]: /fr/agent/guide/agent-commands/
+[4]: /fr/tracing/other_telemetry/connect_logs_and_traces/python
+[5]: /fr/agent/configuration/agent-commands/
+[6]: https://docs.python.org/3/library/logging.html#logging
+[7]: /fr/agent/logs/?tab=tailfiles#activate-log-collection
+[8]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
+[9]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[10]: /fr/logs/log_configuration/parsing/
+[11]: /fr/logs/explorer/#overview
+[12]: /fr/glossary/#tail
