@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: false
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -82,7 +82,7 @@
         contents:
 
         - action: integrations
-          branch: docs8515/add-resource-collection-shortcode
+          branch: prod
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
