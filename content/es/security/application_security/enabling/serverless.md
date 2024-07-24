@@ -143,11 +143,11 @@ La CLI de Datadog modifica las configuraciones de la función Lambda existentes 
 [2]: https://docs.datadoghq.com/es/serverless/serverless_integrations/cli
 
 {{% /tab %}}
-{{% tab "Kit de desarrollo en la nube (CDK) de AWS" %}}
+{{% tab "CDK AWS" %}}
 
-El [Constructo CDK Datadog][1] instala automáticamente Datadog en tus funciones utilizando capas Lambda y configura tus funciones para enviar métricas, trazas y logs a Datadog a través de la extensión Lambda de Datadog.
+El [Constructo del CDK Datadog][1] instala automáticamente Datadog en tus funciones utilizando capas Lambda y configura tus funciones para enviar métricas, trazas y logs a Datadog a través de la extensión Lambda de Datadog.
 
-1. Instala la biblioteca del constructo CDK Datadog:
+1. Instala la biblioteca del constructo del CDK Datadog:
 
     ```sh
     # For AWS CDK v1
@@ -179,7 +179,7 @@ El [Constructo CDK Datadog][1] instala automáticamente Datadog en tus funciones
 
    Para rellenar los parámetros:
     - Sustituye `<DATADOG_SITE>` por {{< region-param key="dd_site" code="true" >}} [Asegúrate de haber seleccionado el SITE (Sitio) correcto a la derecha].
-    - Sustituye `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS donde se almacena de forma segura tu [clave de API de Datadog][2]. La clave debe almacenarse como una cadena de texto sin formato (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para realizar tests rápidos, puedes utilizar `apiKey` y configurar la clave de API de Datadog utilizando texto sin formato.
+    - Sustituye `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto AWS donde se almacena de forma segura tu [clave de API de Datadog][2]. La clave debe almacenarse como una cadena de texto sin formato (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para realizar tests rápidos, puedes utilizar `apiKey` y configurar la clave de API de Datadog utilizando texto sin formato.
 
     Para obtener más información y parámetros adicionales, consulta la [documentación del CDK de Datadog][1].
 
@@ -416,7 +416,7 @@ ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/nodejs/bin/node", "/path/to/your/app.js"]
 {{< /highlight >}}
 
-Si necesitas que tu punto de entrada también se instrumente, puedes intercambiar tu punto de entrada y tus argumentos CMD. Para obtener más información, consulta [Cómo funciona `serverless-init` ](#how-serverless-init-works).
+Si necesitas que tu punto de entrada también se instrumente, puedes intercambiar tu punto de entrada y tus argumentos CMD. Para obtener más información, consulta [Cómo funciona `serverless-init`](#how-serverless-init-works).
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -492,7 +492,7 @@ ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 {{< /highlight >}}
 
-Si necesitas que tu punto de entrada también se instrumente, puedes intercambiar tu punto de entrada y tus argumentos CMD. Para obtener más información, consulta [Cómo funciona `serverless-init` ](#how-serverless-init-works).
+Si necesitas que tu punto de entrada también se instrumente, puedes intercambiar tu punto de entrada y tus argumentos CMD. Para obtener más información, consulta [Cómo funciona `serverless-init`](#how-serverless-init-works).
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
