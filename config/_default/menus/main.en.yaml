@@ -234,16 +234,21 @@ menu:
       url: getting_started/intelligent_test_runner/
       parent: getting_started
       weight: 27
+    - name: Code Analysis
+      identifier: getting_started_code_analysis
+      url: getting_started/code_analysis/
+      parent: getting_started
+      weight: 28
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
       parent: getting_started
-      weight: 28
+      weight: 29
     - name: Support
       identifier: getting_started_support
       url: getting_started/support/
       parent: getting_started
-      weight: 29
+      weight: 30
     - name: Glossary
       url: glossary/
       pre: features
