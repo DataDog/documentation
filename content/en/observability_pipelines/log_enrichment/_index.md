@@ -19,10 +19,10 @@ Select a source to get started:
 - [Sumo Logic Hosted Collector][6]
 - [Rsyslog or Syslog-ng][7]
 
-[1]: /observability_pipelines/dual_ship_logs/datadog_agent
-[2]: /observability_pipelines/dual_ship_logs/fluent
-[3]: /observability_pipelines/dual_ship_logs/http_client
-[4]: /observability_pipelines/dual_ship_logs/splunk_hec
-[5]: /observability_pipelines/dual_ship_logs/splunk_tcp
-[6]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
-[7]: /observability_pipelines/dual_ship_logs/syslog
+[1]: /observability_pipelines/log_enrichment/datadog_agent
+[2]: /observability_pipelines/log_enrichment/fluent
+[3]: /observability_pipelines/log_enrichment/http_client
+[4]: /observability_pipelines/log_enrichment/splunk_hec
+[5]: /observability_pipelines/log_enrichment/splunk_tcp
+[6]: /observability_pipelines/log_enrichment/sumo_logic_hosted_collector
+[7]: /observability_pipelines/log_enrichment/syslog
