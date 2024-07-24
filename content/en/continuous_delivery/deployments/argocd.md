@@ -201,7 +201,7 @@ If your setup is similar to the one described above, run the `datadog-ci deploym
 
 ### Visualize correlated pipelines and deployments
 
-Once the [setup mentioned above](#correlate-deployments-with-ci-pipelines) is completed, the deployment executions will contain a new tab called "Pipeline" from which you will be able to see the pipeline trace and navigate to CI visibility by clicking on "View full pipeline" button at the top:
+Once the [setup mentioned above](#correlate-deployments-with-ci-pipelines) is completed, the deployment executions panel contains a new tab called "Pipeline" from which the pipeline trace is visible. From this tab, we can navigate to CI visibility by clicking on "View full pipeline" button at the top:
 
 {{< img src="ci/cd-ci-correlation-pipeline-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
 
