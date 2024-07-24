@@ -1,11 +1,10 @@
 ---
-null
-...
+title: Actualizar la instrumentación de funciones de Lambda para Java
 ---
 
 Este documento contiene instrucciones para actualizar la instrumentación de Datadog de Lambda para Java. Si es la primera vez que configuras la instrumentación, sigue las [instrucciones de instalación de Lambda para Java][1] en su lugar.
 
-Las capas de Lambda de Datadog `dd-trace-java:5` y `Datadog-Extension:25` introducen los siguientes cambios en la proceso de configuración de la instrumentación en las funciones de Lambda para Java:
+Las capas de Lambda de Datadog `dd-trace-java:5` y `Datadog-Extension:25` introducen los siguientes cambios en el proceso de configuración de la instrumentación en las funciones de Lambda para Java:
 
 1. La biblioteca [datadog-lambda-java][2] está obsoleta y no es necesaria.
 2. No es necesario realizar cambios en el código (como la envoltura `DDLambda`), excepto en el caso de la instrumentación personalizada.
