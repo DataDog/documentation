@@ -1,10 +1,10 @@
-## AWS IAM Permissions
+## AWS IAM permissions
 
 AWS IAM permissions enable Datadog to collect metrics, tags, EventBridge events, and other data necessary to monitor your AWS environment.
 
 To correctly set up the AWS Integration, you must attach the relevant IAM policies to the **Datadog AWS Integration IAM Role** in your AWS account.
 
-### AWS Integration IAM Policy
+### AWS integration IAM policy
 
 The set of permissions necessary to use all the integrations for individual AWS services.
 
