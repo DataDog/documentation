@@ -1,12 +1,5 @@
 import { ResolvedPagePrefs } from '../../../schemas/resolvedPagePrefs';
-import {
-  elementOpen,
-  elementClose,
-  elementVoid,
-  text,
-  patch,
-  attr
-} from 'incremental-dom';
+import { elementOpen, elementClose, elementVoid, text, patch } from 'incremental-dom';
 
 /**
  * The chooser component. Only used in initial compilation,
@@ -64,9 +57,11 @@ const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
     const resolvedPref = resolvedPagePrefs[prefId];
     const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
     elementOpen('div', null, ['class', 'markdoc-pref__container']);
+    // Render the label
     elementOpen('div', null, ['class', 'markdoc-pref__label']);
     text(resolvedPref.displayName);
     elementClose('div');
+    // Render each option pill
     resolvedPref.options.forEach((option) => {
       const selected = option.id === currentValue ? 'selected' : '';
       text(' ');

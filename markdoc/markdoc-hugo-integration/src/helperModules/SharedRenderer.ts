@@ -1,6 +1,7 @@
+import { resolve } from 'path';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
-import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
+import { PagePrefsConfig, PagePrefConfig } from '../schemas/yaml/frontMatter';
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 
 /**
@@ -27,25 +28,14 @@ export class SharedRenderer {
     const resolvedPagePrefs: ResolvedPagePrefs = {};
 
     p.pagePrefsConfig.forEach((prefConfig) => {
-      // Make a copy in order to preserve the placeholders
-      // for future use
-      const prefConfigDup = { ...prefConfig };
+      // If the options source contains a placeholder, resolve it
+      const prefConfigDup = this.resolvePrefOptionsSource({
+        pagePrefConfig: prefConfig,
+        valsByPrefId: p.valsByPrefId
+      });
 
-      // Replace any placeholder in the options source with the selected value,
-      // or the default value
-      if (GLOBAL_PLACEHOLDER_REGEX.test(prefConfigDup.options_source)) {
-        // Resolve the options source
-        prefConfigDup.options_source = prefConfigDup.options_source.replace(
-          GLOBAL_PLACEHOLDER_REGEX,
-          (_match: string, placeholder: string) => {
-            return p.valsByPrefId[placeholder.toLowerCase()];
-          }
-        );
-      }
-
-      // Resolve the updated value for the preference.
-      // If the current value is no longer valid,
-      // use the default value instead.
+      // Update the value for the preference,
+      // if the current value is no longer valid after placeholder resolution
       const defaultValue =
         prefConfigDup.default_value ||
         p.prefOptionsConfig[prefConfigDup.options_source].find(
@@ -56,12 +46,8 @@ export class SharedRenderer {
         (option) => option.identifier
       );
       let currentValue = p.valsByPrefId[prefConfigDup.identifier];
-      console.log(`current value for '${prefConfigDup.identifier}': ${currentValue}`);
       if (currentValue && !possibleValues.includes(currentValue)) {
         currentValue = defaultValue;
-        console.log(
-          `current value is not valid, using default value of '${defaultValue}' instead`
-        );
       }
 
       // Add the resolved pref to the returned object
@@ -80,5 +66,36 @@ export class SharedRenderer {
     });
 
     return resolvedPagePrefs;
+  }
+
+  /**
+   * Resolve any placeholders in the options source of a page preference.
+   * For example, if the options source is "<COLOR>_<FINISH>_paint_options",
+   * and the values of the dependencies are { color: 'red', finish: 'gloss' },
+   * the resolved options source would be "red_gloss_paint_options".
+   *
+   * @param p The page preference configuration object and the selected values by preference ID.
+   * @returns A copy of the page preference configuration object with any placeholders in the options source resolved.
+   */
+  static resolvePrefOptionsSource(p: {
+    pagePrefConfig: PagePrefConfig;
+    valsByPrefId: Record<string, string>;
+  }) {
+    // Make a copy in order to preserve the placeholders
+    // for future use
+    const prefConfigDup = { ...p.pagePrefConfig };
+
+    // Replace any placeholder in the options source with the selected value
+    if (GLOBAL_PLACEHOLDER_REGEX.test(prefConfigDup.options_source)) {
+      // Resolve the options source
+      prefConfigDup.options_source = prefConfigDup.options_source.replace(
+        GLOBAL_PLACEHOLDER_REGEX,
+        (_match: string, placeholder: string) => {
+          return p.valsByPrefId[placeholder.toLowerCase()];
+        }
+      );
+    }
+
+    return prefConfigDup;
   }
 }

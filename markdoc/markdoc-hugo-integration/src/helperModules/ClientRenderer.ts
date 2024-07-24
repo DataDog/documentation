@@ -24,6 +24,7 @@ export class ClientRenderer {
   private chooserElement?: Element;
   private contentElement?: Element;
   private selectedValsByPrefId: Record<string, string> = {};
+  private prefPills: Array<Element> = [];
 
   private constructor() {}
 
@@ -35,7 +36,13 @@ export class ClientRenderer {
     return ClientRenderer.#instance;
   }
 
-  handleValueChange(e: Event) {
+  /**
+   * When the user changes a preference value,
+   * update the selected values data,
+   * and rerender the chooser and page content.
+   */
+  handlePrefSelectionChange(e: Event) {
+    console.log('Handling pref selection change');
     const node = e.target;
     if (!(node instanceof Element)) {
       console.log('From handleValueChange: Node is not an Element');
@@ -51,34 +58,28 @@ export class ClientRenderer {
       console.log('From handleValueChange: No optionId found');
       return;
     }
-    console.log(
-      `from handleValueChange, prefId is ${prefId} and optionId is ${optionId}`
-    );
     this.selectedValsByPrefId[prefId] = optionId;
-    console.log('from handleValueChange, selectedValsByPrefId is now');
-    console.log(this.selectedValsByPrefId);
     this.rerender();
   }
 
   addChooserEventListeners(chooserNode?: HTMLElement) {
-    const prefPills = document.getElementsByClassName('markdoc-pref__pill');
-    for (let i = 0; i < prefPills.length; i++) {
-      prefPills[i].removeEventListener('click', this.handleValueChange.bind(this));
-      if (!chooserNode) {
-        prefPills[i].addEventListener('click', this.handleValueChange.bind(this));
-      }
-    }
+    let prefPills;
     if (!chooserNode) {
-      return;
+      prefPills = document.getElementsByClassName('markdoc-pref__pill');
+    } else {
+      prefPills = chooserNode.getElementsByClassName('markdoc-pref__pill');
     }
-    const newPrefPills = chooserNode.getElementsByClassName('markdoc-pref__pill');
-    for (let i = 0; i < newPrefPills.length; i++) {
-      newPrefPills[i].addEventListener('click', this.handleValueChange.bind(this));
+    for (let i = 0; i < prefPills.length; i++) {
+      if (this.prefPills.includes(prefPills[i])) {
+        continue;
+      } else {
+        this.prefPills.push(prefPills[i]);
+        prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
+      }
     }
   }
 
   configure(p: {
-    // renderableTree: RenderableTreeNodes;
     prefOptionsConfig: PrefOptionsConfig;
     pagePrefsConfig: PagePrefsConfig;
     chooserElement: Element;
@@ -92,6 +93,7 @@ export class ClientRenderer {
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.contentElement = p.contentElement;
     this.renderableTree = p.renderableTree;
+
     this.addChooserEventListeners();
   }
 
@@ -102,30 +104,37 @@ export class ClientRenderer {
       );
     }
 
+    /**
+     * Re-resolve the page prefs, since a newly selected value
+     * can have a cascading impact on the interpolated placeholder values,
+     * and thus the valid options for each preference.
+     */
     const resolvedPagePrefs = SharedRenderer.resolvePagePrefs({
       pagePrefsConfig: this.pagePrefsConfig,
       prefOptionsConfig: this.prefOptionsConfig!,
       valsByPrefId: this.selectedValsByPrefId
     });
 
+    /**
+     * Update the selected values to align with the resolved prefs,
+     * in case any previously selected values
+     * have become invalid and been overridden by defaults.
+     */
     Object.keys(resolvedPagePrefs).forEach((resolvedPrefId) => {
       const resolvedPref = resolvedPagePrefs[resolvedPrefId];
       this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
     });
 
-    console.log('after pref resolution, selected values are now');
-    console.log(this.selectedValsByPrefId);
-
     const newChooserNode = rerenderChooser({
       resolvedPagePrefs,
       elementToPatch: this.chooserElement
     });
+    this.addChooserEventListeners(newChooserNode as HTMLElement);
 
     MarkdocStaticCompiler.renderers.incremental(
       this.renderableTree,
       this.contentElement,
       { variables: this.selectedValsByPrefId }
     );
-    this.addChooserEventListeners(newChooserNode as HTMLElement);
   }
 }

@@ -3678,19 +3678,15 @@
         static resolvePagePrefs(p) {
           const resolvedPagePrefs = {};
           p.pagePrefsConfig.forEach((prefConfig) => {
-            const prefConfigDup = Object.assign({}, prefConfig);
-            if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(prefConfigDup.options_source)) {
-              prefConfigDup.options_source = prefConfigDup.options_source.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
-                return p.valsByPrefId[placeholder.toLowerCase()];
-              });
-            }
+            const prefConfigDup = this.resolvePrefOptionsSource({
+              pagePrefConfig: prefConfig,
+              valsByPrefId: p.valsByPrefId
+            });
             const defaultValue = prefConfigDup.default_value || p.prefOptionsConfig[prefConfigDup.options_source].find((option) => option.default).identifier;
             const possibleValues = p.prefOptionsConfig[prefConfigDup.options_source].map((option) => option.identifier);
             let currentValue = p.valsByPrefId[prefConfigDup.identifier];
-            console.log(`current value for '${prefConfigDup.identifier}': ${currentValue}`);
             if (currentValue && !possibleValues.includes(currentValue)) {
               currentValue = defaultValue;
-              console.log(`current value is not valid, using default value of '${defaultValue}' instead`);
             }
             const resolvedPref = {
               identifier: prefConfigDup.identifier,
@@ -3705,6 +3701,24 @@
             resolvedPagePrefs[prefConfigDup.identifier] = resolvedPref;
           });
           return resolvedPagePrefs;
+        }
+        /**
+         * Resolve any placeholders in the options source of a page preference.
+         * For example, if the options source is "<COLOR>_<FINISH>_paint_options",
+         * and the values of the dependencies are { color: 'red', finish: 'gloss' },
+         * the resolved options source would be "red_gloss_paint_options".
+         *
+         * @param p The page preference configuration object and the selected values by preference ID.
+         * @returns A copy of the page preference configuration object with any placeholders in the options source resolved.
+         */
+        static resolvePrefOptionsSource(p) {
+          const prefConfigDup = Object.assign({}, p.pagePrefConfig);
+          if (regexes_1.GLOBAL_PLACEHOLDER_REGEX.test(prefConfigDup.options_source)) {
+            prefConfigDup.options_source = prefConfigDup.options_source.replace(regexes_1.GLOBAL_PLACEHOLDER_REGEX, (_match, placeholder) => {
+              return p.valsByPrefId[placeholder.toLowerCase()];
+            });
+          }
+          return prefConfigDup;
         }
       };
       exports.SharedRenderer = SharedRenderer;
@@ -13229,6 +13243,7 @@
       var ClientRenderer2 = class {
         constructor() {
           this.selectedValsByPrefId = {};
+          this.prefPills = [];
         }
         static get instance() {
           if (!__classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance)) {
@@ -13236,7 +13251,13 @@
           }
           return __classPrivateFieldGet(_a, _a, "f", _ClientRenderer_instance);
         }
-        handleValueChange(e) {
+        /**
+         * When the user changes a preference value,
+         * update the selected values data,
+         * and rerender the chooser and page content.
+         */
+        handlePrefSelectionChange(e) {
+          console.log("Handling pref selection change");
           const node = e.target;
           if (!(node instanceof Element)) {
             console.log("From handleValueChange: Node is not an Element");
@@ -13252,26 +13273,23 @@
             console.log("From handleValueChange: No optionId found");
             return;
           }
-          console.log(`from handleValueChange, prefId is ${prefId} and optionId is ${optionId}`);
           this.selectedValsByPrefId[prefId] = optionId;
-          console.log("from handleValueChange, selectedValsByPrefId is now");
-          console.log(this.selectedValsByPrefId);
           this.rerender();
         }
         addChooserEventListeners(chooserNode) {
-          const prefPills = document.getElementsByClassName("markdoc-pref__pill");
-          for (let i = 0; i < prefPills.length; i++) {
-            prefPills[i].removeEventListener("click", this.handleValueChange.bind(this));
-            if (!chooserNode) {
-              prefPills[i].addEventListener("click", this.handleValueChange.bind(this));
-            }
-          }
+          let prefPills;
           if (!chooserNode) {
-            return;
+            prefPills = document.getElementsByClassName("markdoc-pref__pill");
+          } else {
+            prefPills = chooserNode.getElementsByClassName("markdoc-pref__pill");
           }
-          const newPrefPills = chooserNode.getElementsByClassName("markdoc-pref__pill");
-          for (let i = 0; i < newPrefPills.length; i++) {
-            newPrefPills[i].addEventListener("click", this.handleValueChange.bind(this));
+          for (let i = 0; i < prefPills.length; i++) {
+            if (this.prefPills.includes(prefPills[i])) {
+              continue;
+            } else {
+              this.prefPills.push(prefPills[i]);
+              prefPills[i].addEventListener("click", (e) => this.handlePrefSelectionChange(e));
+            }
           }
         }
         configure(p) {
@@ -13296,14 +13314,12 @@
             const resolvedPref = resolvedPagePrefs[resolvedPrefId];
             this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
           });
-          console.log("after pref resolution, selected values are now");
-          console.log(this.selectedValsByPrefId);
           const newChooserNode = (0, chooser_1.rerenderChooser)({
             resolvedPagePrefs,
             elementToPatch: this.chooserElement
           });
-          markdoc_static_compiler_1.default.renderers.incremental(this.renderableTree, this.contentElement, { variables: this.selectedValsByPrefId });
           this.addChooserEventListeners(newChooserNode);
+          markdoc_static_compiler_1.default.renderers.incremental(this.renderableTree, this.contentElement, { variables: this.selectedValsByPrefId });
         }
       };
       exports.ClientRenderer = ClientRenderer2;
