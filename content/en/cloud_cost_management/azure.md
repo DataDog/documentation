@@ -188,7 +188,7 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `InvoiceId` | The unique document ID listed on the invoice PDF. |
 | `invoicesectionid` | The ID of the MCA invoice section. |
 | `invoicesectionname` | The name of the EA department. |
-| `isazurecrediteligible` | true if the charge is eligible to be paid for using Azure credits. |
+| `isazurecrediteligible` | `true` if the charge is eligible to be paid for using Azure credits. |
 | `location` | The data center location where the resource is running. |
 | `metercategory` | The top level service that this usage belongs to (such as `Networking`). |
 | `meterid` | The unique ID for the meter. |
@@ -214,11 +214,11 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `resourcelocation` | The data center location where the resource is running (such as `westus2`). |
 | `resourcename` | The name of the resource. Not all charges come from deployed resources. |
 | ResourceType |  |
-| `servicefamily` | The service family that the service belongs to (such as `Compute`). Tag `consumedservice` has deeper insights on infrastructure types. |
+| `servicefamily` | The service family that the service belongs to (such as `Compute`). The tag `consumedservice` has deeper insights on infrastructure types. |
 | `ServicePeriodEndDate` | The termination date of the Azure service period. |
 | `ServicePeriodStartDate` | The start date the Azure service period. |
-| `subscriptionid` | The ID for the Azure subscription. |
-| `subscriptionname` | The name for the Azure subscription. |
+| `subscriptionid` | The ID of the Azure subscription. |
+| `subscriptionname` | The name of the Azure subscription. |
 | `term` | Describes the duration or term of the Savings Plan in months (such as `12`). |
 | `unitofmeasure` | The unit of measure for billing for the service. For example, compute services are billed per hour. |
 

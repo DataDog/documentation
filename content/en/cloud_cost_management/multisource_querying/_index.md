@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of needing to build multiple queries for each provider.
+After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
 
 Use Multisource Querying to build cost views, understand the total cost of service ownership, and alert on cost changes and trends across the [**Analytics** page][6], [dashboards][7], [notebooks][8], and [cost monitors][9].
 
@@ -32,11 +32,11 @@ To use Multisource Querying, ensure you meet the following requirements:
 
 ## Query your cost data
 
-You can select multiple providers in the `Provider` field on the [**Analytics** page][6].
+You can select multiple providers in the **Provider** field on the [**Analytics** page][6].
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Analytics page" style="width:40%;" >}}
 
-Dropdown filters like `Provider` maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
+Dropdown filters like **Provider** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
 
 {{< img src="cloud_cost/multisource_querying/filters.png" alt="The Service and Team filters highlighted below the search query on the Cloud Cost Analytics page" style="width:100%;" >}}
 
@@ -46,7 +46,7 @@ Usage Charges Only
 : Examine costs impacted by engineering teams, excluding credits, fees, and taxes.
 
 Complete Days Only
-: Exclude the past two days of cost data that are incomplete.
+: Exclude the past two days of cost data, which are incomplete.
 
 Total Cost
 : Filter the data to view costs within a specific cost range.
@@ -98,11 +98,11 @@ The following FOCUS tags are available in Cloud Cost Management:
 | Tag Name | Tag Description |
 |---|---|
 | `providername` | The name of the entity that made the resources or services available for purchase. |
-| `servicename` | An offering that can be purchased from a provider (e.g., cloud virtual machine, SaaS database, professional services from a systems integrator). |
+| `servicename` | An offering that can be purchased from a provider (for example, cloud virtual machine, SaaS database, professional services from a systems integrator). |
 | `billingaccountid` | The identifier assigned to a billing account by the provider. |
 | `billingaccountname` | The display name assigned to a billing account. |
-| `subaccountid` | An ID assigned to a grouping of resources or services, often used to manage access and/or cost. |
-| `subaccountname` | A name assigned to a grouping of resources or services, often used to manage access and/or cost. |
+| `subaccountid` | An ID assigned to a grouping of resources or services, often used to manage access or cost. |
+| `subaccountname` | A name assigned to a grouping of resources or services, often used to manage access or cost. |
 | `regionname` | The name of an isolated geographic area where a resource is provisioned or a service is provided. |
 | `availabilityzone` | A provider-assigned identifier for a physically separated and isolated area within a region that provides high availability and fault tolerance. |
 | `pricingunit` | Provider-specified measurement unit for determining unit prices, indicating how the provider rates measured usage and purchase quantities after applying pricing rules like block pricing. |

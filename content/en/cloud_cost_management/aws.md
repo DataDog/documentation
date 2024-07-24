@@ -281,8 +281,8 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `bill/bill_type` | The type of bill that this report covers (such as `Purchase`). |
 | `bill/invoicing_entity` | The AWS entity that issues the invoice. |
 | `bill/payer_account_id` | The account ID of the paying account. For an organization in AWS Organizations, this is the account ID of the management account. |
-| `is_aws_ec2_compute_savings_plan` | true for line items that represent EC2 Compute usage, paid for using a Savings Plan. |
-| `line_item/currency_code` | The currency that this line item is shown in (USD by default). |
+| `is_aws_ec2_compute_savings_plan` | `true` for line items that represent EC2 Compute usage, paid for using a Savings Plan. |
+| `line_item/currency_code` | The currency that this line item is shown in (`USD` by default). |
 | `line_item/legal_entity` | The provider of your AWS services. |
 | `line_item/line_item_type` | The type of charge covered by the line item (such as `Credit`). |
 | `line_item/operation` | The specific AWS operation covered by the line item (such as `RunInstances`). |
@@ -297,7 +297,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `pricing/unit` | The pricing unit that AWS used for calculating the usage cost (such as `Hours`). |
 | `reservation/availability_zone` | The Availability Zone of the resource associated with the line item (such as `us-east-1`). |
 | `reservation/modification_status` | Shows whether the RI lease was modified or unaltered (such as `Manual`). |
-| `reservation/reservation_arn` | The ARN of the RI that the line item benefitted from. |
+| `reservation/reservation_arn` | The ARN of the RI that the line item benefited from. |
 | `reservation/subscription_id` | The unique ID that maps the line item with the associated offer. |
 | `savings_plan/instance_type_family` | The instance family that is associated with the specified usage (such as `m4`). |
 | `savings_plan/offering_type` | The type of Savings Plan purchased (such as `ComputeSavingsPlans`). |
