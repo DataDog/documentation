@@ -24,7 +24,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][2] or see the [Flutter setup documentation][3].
+If you have not set up the Datadog Flutter SDK for yet, follow the [in-app setup instructions][2] or see the [Flutter setup documentation][3].
 
 ### Add Dart error tracking
 
@@ -118,7 +118,7 @@ Source maps and dSYM files are limited to **500** MB each.
 
 ## Test your implementation
 
-To verify your Flutter Crash Reporting and Error Tracking configuration, issue an error in your RUM application and confirm that the error appears in Datadog.
+To verify your Flutter Crash Reporting and Error Tracking configuration, issue an error in your application and confirm that the error appears in Datadog.
 
 1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
 2. Execute code containing an error or crash. For example:
