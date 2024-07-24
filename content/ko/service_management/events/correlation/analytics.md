@@ -1,6 +1,9 @@
 ---
-null
-...
+further_reading:
+- link: service_management/events/correlation/
+  tag: 설명서
+  text: 이벤트 상관관계
+title: 케이스 및 이벤트 분석
 ---
 
 ## 개요
