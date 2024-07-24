@@ -14,7 +14,7 @@ integration_id: google-cloud-alloydb
 integration_title: Google AlloyDB
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_alloydb
 public_title: Datadog-Google AlloyDB インテグレーション

@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
   tag: ブログ
   text: オートディスカバリーの詳細
-kind: ドキュメント
 title: 統合サービスタグ付け
 ---
 

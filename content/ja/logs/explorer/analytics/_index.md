@@ -13,7 +13,6 @@ further_reading:
 - link: /logs/explorer/export
   tag: Documentation
   text: ログエクスプローラーのビューをエクスポート
-kind: documentation
 title: ログ分析
 ---
 

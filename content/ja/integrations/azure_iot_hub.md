@@ -14,7 +14,7 @@ integration_id: azure-iot-hub
 integration_title: Microsoft Azure IOT Hub
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_iot_hub
 public_title: Datadog-Microsoft Azure IOT Hub インテグレーション

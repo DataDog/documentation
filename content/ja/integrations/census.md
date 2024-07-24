@@ -19,6 +19,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10336
     source_type_name: Census
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.getcensus.com/
   name: Census
@@ -35,7 +36,7 @@ integration_id: census
 integration_title: Census
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: census
 public_title: Census

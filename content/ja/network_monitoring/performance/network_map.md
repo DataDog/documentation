@@ -15,7 +15,6 @@ further_reading:
 - link: /network_monitoring/performance/setup
   tag: Documentation
   text: Datadog Agent を使用したネットワークデータの収集。
-kind: documentation
 title: ネットワークマップ
 ---
 

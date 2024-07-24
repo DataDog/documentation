@@ -31,7 +31,7 @@ integration_id: flume
 integration_title: flume
 integration_version: 0.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: flume
 public_title: flume
@@ -90,9 +90,9 @@ export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.
    。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル `flume.d/conf.yaml`][6] ファイルを参照してください。
 
-   このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。
+   このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、ステータス出力に表示されます。
    以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
-   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][7]で詳細な手順を参照してください。
+   収集するメトリクスのカスタマイズの詳細については、[JMX Checks のドキュメント][7]を参照してください。
    制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 3. [Agent を再起動します][9]

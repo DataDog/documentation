@@ -1,7 +1,6 @@
 ---
 code_lang: dotnet
 code_lang_weight: 10
-kind: documentation
 title: .NET 互換性要件
 type: multi-code-lang
 ---

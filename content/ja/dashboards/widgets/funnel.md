@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: GitHub
   text: ファネル分析により、主要なユーザーフローを理解し、最適化する
-kind: documentation
 title: ファネルウィジェット
 ---
 

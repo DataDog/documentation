@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: ブログ
   text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
-kind: documentation
 title: Azure App Service - Windows コード
 ---
 

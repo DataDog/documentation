@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: AWS Certificate Manager
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_certificate_manager
 public_title: Datadog-AWS Certificate Manager インテグレーション

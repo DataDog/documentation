@@ -37,7 +37,7 @@ integration_id: ambari
 integration_title: Ambari
 integration_version: 4.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ambari
 public_title: Ambari

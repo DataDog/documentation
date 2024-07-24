@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/log_configuration/pipelines
   tag: ドキュメント
   text: ログパイプラインについて
-kind: documentation
 title: カスタム宛先へのログの転送
 ---
 

@@ -31,7 +31,7 @@ integration_id: onelogin
 integration_title: OneLogin
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: onelogin
 public_title: OneLogin

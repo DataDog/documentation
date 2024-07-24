@@ -10,7 +10,7 @@ further_reading:
 - link: /tracing/trace_collection/dd_libraries/
   tag: Documentation
   text: Ajouter la bibliothèque de tracing Datadog
-kind: Guide
+
 private: true
 title: Nouvelle page Service et services déduits
 ---

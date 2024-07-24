@@ -1,13 +1,12 @@
 ---
 title: OpenTelemetry Collector Datadog Exporter
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
 description: 'Send OpenTelemetry data to the OpenTelemetry collector and Datadog exporter'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
@@ -185,7 +184,6 @@ In containerized environments, applications write logs to `stdout` or `stderr`. 
 
 ```
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: otel-agent
   labels:
@@ -592,16 +590,10 @@ To use the OpenTelemetry Operator:
 If you are using the Datadog Exporter to also send OpenTelemetry traces to Datadog, use the `trace_parser` operator to extract the `trace_id` from each trace and add it to the associated logs. Datadog automatically correlates the related logs and traces. See [Connect OpenTelemetry Traces and Logs][18] for more information.
 
 {{< img src="logs/log_collection/logs_traces_correlation.png" alt="The trace panel showing a list of logs correlated with the trace" style="width:70%;">}}
-### Host name resolution
 
-The host name that OpenTelemetry signals are tagged with is obtained based on the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+### Hostname resolution
 
-1. From [resource attributes][19], for example `host.name` (many others are supported).
-2. The `hostname` field in the exporter configuration.
-3. Cloud provider API.
-4. Kubernetes host name.
-5. Fully qualified domain name.
-6. Operating system host name.
+See [Mapping OpenTelemetry Semantic Conventions to Hostnames][28] to understand how the hostname is resolved.
 
 ## Deployment-based limitations
 
@@ -686,3 +678,4 @@ The minimum required OpenTelemetry Collector version that supports this feature 
 [25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
 [26]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=service#service-attribute
 [27]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
+[28]: /opentelemetry/schema_semantics/hostname/

@@ -1,21 +1,8 @@
 ### Set up the Datadog Google Cloud Platform integration
 
-The Datadog Google Cloud Platform integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf.
+The Datadog Google Cloud Platform integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf. For step-by-step instructions, see [Create your Google Cloud service account][12].
 
 **Note**: [Google Cloud billing][4], the [Cloud Monitoring API][5], the [Compute Engine API][6], and the [Cloud Asset API][7] must all be enabled for the projects you wish to monitor.
-
-#### Google Cloud
-
-1. Navigate to the [**Google Cloud Credentials** page][8] for the Google Cloud project where you would like to set up the Datadog integration.
-2. Click **Create credentials** and select **Service account**.
-3. Give the service account a unique name and click **Create and Continue**.
-4. Add the following roles to the service account, then click **Continue**:
-    - Compute Viewer
-    - Monitoring Viewer
-    - Cloud Asset Viewer
-5. Select the service account at the bottom of the page.
-6. On the **Keys** tab, click **New Key**, then select **Create new key**.
-7. Select **JSON** and click **Create** to download the JSON key.
 
 #### Datadog
 
@@ -41,7 +28,7 @@ Use one of the following methods to enable CSM for your Google Cloud projects:
 #### Google Cloud Platform integration page
 
 1. On the [**Google Cloud Platform Integration** page][10], select a Google Cloud project.
-2. Under **Resource Collection**, select the **Enable Cloud Security Posture Management** checkbox.
+2. Under **Resource Collection**, select **Enable Cloud Security Management**.
 3. Click **Save**.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
@@ -54,3 +41,4 @@ Use one of the following methods to enable CSM for your Google Cloud projects:
 [9]: https://app.datadoghq.com/integrations/google-cloud-platform
 [10]: https://app.datadoghq.com/integrations/google-cloud-platform
 [11]: /security/cloud_security_management/guide/resource_evaluation_filters
+[12]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account

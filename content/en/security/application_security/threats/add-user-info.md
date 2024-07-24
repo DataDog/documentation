@@ -1,6 +1,5 @@
 ---
 title: User Monitoring and Protection
-kind: documentation
 aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
@@ -30,8 +29,8 @@ The custom user activity for which out-of-the-box detection rules are available 
 | Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
-| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
-| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
+| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]               |
+| `users.login.failure`  | User ID and `usr.exists` are mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]  |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
@@ -78,7 +77,7 @@ Blocking
     .blockIfMatch();
 ```
 
-[1]: /tracing/trace_collection/compatibility/java/#setup
+[1]: /tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -313,9 +312,9 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // this is where you get User based on userId/password credentials
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
         Map<String, String> metadata = new HashMap<>();
         metadata.put("email", user.getEmail());
@@ -338,15 +337,19 @@ import datadog.trace.api.GlobalTracer;
 
 public class LoginController {
 
-    private User doLogin(String userId, String password) {
-        // this is where you get User based on userId/password credentials
-        User user = checkLogin(userId, password);
+    private User doLogin(String userName, String password) {
+        // this is where you get User based on userName/password credentials
+        User user = checkLogin(userName, password);
 
         // if function returns null - user doesn't exist
         boolean userExists = (user != null);
+        String userId = null;
         Map<String, String> metadata = new HashMap<>();
         if (userExists != null) {
+            userId = getUserId(userName)
             metadata.put("email", user.getEmail());
+        } else {
+            userId = user.getEmail();
         }
 
         // track user authentication error events
@@ -418,6 +421,7 @@ using Datadog.Trace.AppSec;
 
 void OnLogonFailure(string userId, bool userExists, ...)
 {
+    // If no userId can be provided, any unique user identifier (username, email...) may be used
     // metadata is optional
     var metadata = new Dictionary<string, string>()
     {
@@ -467,7 +471,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
   userdata := /* optional extra user data */
 
-  // Track login success
+  // Track login success, replace `my-uid` by a unique identifier of the user (such as numeric, username, and email)
   if appsec.TrackUserLoginSuccessEvent(r.Context(), "my-uid", metadata, userdata) != nil {
     // The given user id is blocked and the handler should be aborted asap.
     // The blocking response will be sent by the appsec middleware.
@@ -483,6 +487,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
   metadata := /* optional extra event metadata */ 
+  // Replace `my-uid` by a unique identifier of the user (numeric, username, email...)
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
 ```
@@ -518,6 +523,7 @@ Traces containing login success/failure events can be queried using the followin
 require 'datadog/kit/appsec/events'
 
 trace = Datadog::Tracing.active_trace
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id' })
 ```
 {{% /tab %}}
@@ -527,10 +533,12 @@ Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id'
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
-# if the user id exists
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
+
+# if the user exists
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true)
 
-# if the user id doesn't exist
+# if the user doesn't exist
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false)
 ```
 {{% /tab %}}
@@ -565,6 +573,8 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Login failure" %}}
 ```php
 <?php
+// If no numeric userId is available, you may use any unique string as userId instead (username, email...)
+// Make sure that the value is unique per user (and not per attacker/IP)
 \datadog\appsec\track_user_login_failure_event($id, $exists, ['email' => $email])
 ?>
 ```
@@ -594,7 +604,7 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-  id: 'user-id', // id is mandatory
+  id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
   email: 'user@email.com' // other fields are optional
 }
 const metadata = { custom: 'value' } // optional metadata with arbitrary fields
@@ -609,7 +619,7 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 const tracer = require('dd-trace')
 
 // in a controller:
-const userId = 'user-id'
+const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
 const userExists = true // if the user login exists in database for example
 const metadata = { custom: 'value' } // optional metadata with arbitrary fields
 
@@ -662,6 +672,7 @@ from ddtrace import tracer
 metadata = {"custom": "customvalue"}
 # exists indicates if the failed login user exists in the system
 exists = False
+# if no numeric userId is available, any unique identifier will do (username, email...)
 track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
 {{% /tab %}}
@@ -671,7 +682,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
-metadata = {"usr.id": "12345"}
+metadata = {"usr.id": "userid"}
 event_name = "users.signup"
 track_custom_event(tracer, event_name, metadata)
 ```
@@ -740,3 +751,5 @@ If you wish to disable the detection of these events, you should set the environ
 [9]: /security/default_rules/bl-password-reset/
 [10]: /security/default_rules/bl-payment-failures/
 [11]: https://guid.one/guid
+[12]: /security/default_rules/appsec-ato-bf/
+[13]: /security/default_rules/distributed-ato-ua-asn/

@@ -1,13 +1,13 @@
 ---
 title: Integrate Jira with Datadog Incident Management
-kind: Guide
+
 disable_toc: false
 further_reading:
 - link: "integrations/jira/"
   tag: "Documentation"
   text: "Install the Jira Integration"
 - link: "https://app.datadoghq.com/integrations/jira"
-  tag: "In-App"
+  tag: "App"
   text: "In-app Jira integration tile"
 
 ---

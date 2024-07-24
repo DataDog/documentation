@@ -5,7 +5,6 @@ further_reading:
 - link: agent/kubernetes/log
   tag: Documentation
   text: Datadog と Kubernetes
-kind: ガイド
 title: Datadog Operator の高度なセットアップ
 ---
 

@@ -11,7 +11,7 @@ has_logo: true
 integration_id: nxlog
 integration_title: nxlog
 is_public: true
-kind: integration
+custom_kind: integration
 name: nxlog
 public_title: Datadog-NXlog 통합
 short_description: 호스트, 컨테이너, 서비스에서 로그를 수집하도록 NXLog를 설정하세요.

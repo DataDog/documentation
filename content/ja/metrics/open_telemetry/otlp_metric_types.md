@@ -11,7 +11,6 @@ further_reading:
 - link: /opentelemetry/guide/otlp_delta_temporality/
   tag: ガイド
   text: OpenTelemetry によるデルタ一時性メトリクスの生成
-kind: documentation
 title: OTLP メトリクスタイプ
 ---
 

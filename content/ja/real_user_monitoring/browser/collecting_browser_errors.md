@@ -15,7 +15,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボード
-kind: documentation
 title: ブラウザエラーの収集
 ---
 ## 概要
@@ -61,7 +60,7 @@ addError(
 );
 {{< /code-block >}}
 
-**注**: [エラー追跡][4]機能は、ソースを `custom` または `source` に設定し、スタックトレースを含むエラーを処理します。その他のソース (`console` など) で送られたか、ブラウザ拡張機能で送られたエラーは、エラー追跡では処理されません。
+**注**: [Error Tracking][4] 機能は、ソースを `custom`、`source` または `report` に設定し、スタックトレースを含むエラーを処理します。その他のソース (`console` など) で送られたか、ブラウザ拡張機能で送られたエラーは、エラー追跡では処理されません。
 
 {{< tabs >}}
 {{% tab "NPM" %}}

@@ -1,10 +1,8 @@
 ---
 categories:
-- cloud
-- data store
-- caching
 - azure
-ddtype: crawler
+- caching
+- cloud
 dependencies: []
 description: Surveillez les hits, miss, expulsions, clients connectés, et plus encore.
 doc_link: https://docs.datadoghq.com/integrations/azure_redis_cache/
@@ -15,7 +13,7 @@ integration_id: azure-redis-cache
 integration_title: Microsoft Azure Redis Cache
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_redis_cache
 public_title: Intégration Datadog/Microsoft Azure Redis Cache
@@ -24,6 +22,7 @@ short_description: Surveillez les hits, miss, expulsions, clients connectés, et
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Redis Cache est un cache de données géré pour vos applications Azure.
@@ -33,27 +32,27 @@ Recueillez des métriques d'Azure Redis Cache pour :
 - Visualiser les performances de vos caches Redis
 - Corréler les performances de vos caches Redis avec vos applications
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_redis_cache" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure Redis Cache n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Redis Cache n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

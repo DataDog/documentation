@@ -1,6 +1,5 @@
 ---
 title: Customize monitor evaluation frequencies
-kind: Guide
 disable_toc: false
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-frequency"

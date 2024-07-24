@@ -25,7 +25,8 @@ Datadog uses the [OAuth 2.0 (OAuth2) Authorization Framework][1] to allow users 
 An OAuth2 client is the component of an application that enables users to authorize the application access to Datadog resources on the user's behalf. OAuth2 defines two types of clients: public and [confidential][3]. 
 
 Public Clients
-: Typically used for browser-based applications and are not capable of storing confidential information. Examples of public clients include OAuth clients for [UI Extensions][4]. 
+: Typically used for browser-based applications and are not capable of storing confidential information.
+<!--Examples of public clients include OAuth clients for [UI Extensions][4]. -->
 
 Confidential Clients
 : Capable of storing sensitive data and requires an additional `client_secret` to make authorization requests. OAuth clients for integrations are confidential clients. 

@@ -1,7 +1,6 @@
 ---
 code_lang: python
 code_lang_weight: 50
-kind: documentation
 title: Python 互換性要件
 type: multi-code-lang
 ---

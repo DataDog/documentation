@@ -22,7 +22,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: ドキュメント
   text: ダッシュボードのウィジェットについて
-kind: documentation
 title: テンプレート変数
 ---
 

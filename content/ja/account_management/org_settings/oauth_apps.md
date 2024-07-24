@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/org_settings/
   tag: ドキュメント
   text: オーガニゼーションの設定について
-kind: documentation
 title: OAuth Apps
 ---
 ## 概要

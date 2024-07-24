@@ -1,6 +1,5 @@
 ---
 title: "Subnet Component"
-kind: documentation
 ---
 
 ## Overview

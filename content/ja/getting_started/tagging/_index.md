@@ -20,7 +20,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Datadog を使った効果的なタグ付けに関するインタラクティブなセッションに参加できます
-kind: ドキュメント
 title: タグの使用を開始する
 ---
 
@@ -102,7 +101,7 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 | [インテグレーション][15]   | AWS、Google Cloud、Azure のメトリクスをオプションで制限。                                        |
 | [APM][16]            | サービス、トレース、プロファイルをフィルターにかける。サービスマップを使って他のエリアに移動する。           |
 | [RUM & セッションリプレイ][17] | RUM エクスプローラーで、イベント検索、分析、パターン、リプレイ、問題をフィルターにかける。        |
-| [Synthetic Monitoring & Continuous Testing][18]     | Synthetic Monitoring & Continuous Testing Explorer を使用して、Synthetic テストや CI パイプラインで実行中のテストをフィルタリングおよびグループ化します。   |
+| [Synthetic Monitoring & Continuous Testing][18]     | Synthetic Monitoring & Testing Results Explorer を使用して、Synthetic テストや CI パイプラインで実行中のテストをフィルタリングおよびグループ化します。   |
 | [ノートブック][19]      | グラフでのメトリクスの絞り込みおよびグループ化。                                                               |
 | [ログ][20]           | ログ検索、分析、パターン、Live Tail、パイプラインの絞り込み。                                |
 | [SLO][21]           | SLO、グループ化されたメトリクスベース SLO、グループ化されたモニターベース SLO の検索。                       |

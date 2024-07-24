@@ -2,7 +2,6 @@
 aliases:
 - /ko/agent/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
 - /ko/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
-kind: guide
 title: 내 Google CloudSQL에서 dd-agent mysql 검사를 설정할 수 있나요?
 ---
 

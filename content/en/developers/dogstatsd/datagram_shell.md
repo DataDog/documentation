@@ -1,6 +1,5 @@
 ---
 title: Datagram Format and Shell Usage
-kind: documentation
 description: Overview of the datagram format used by DogStatsD as well as (advanced) shell usage.
 aliases:
     - /developers/dogstatsd/data_types/
@@ -105,7 +104,7 @@ The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 | `<TITLE_UTF8_LENGTH>`                | Yes      | The length (in bytes) of the UTF-8-encoded `<TITLE>`                                                                              |
 | `<TEXT_UTF8_LENGTH>`                 | Yes      | The length (in bytes) of the UTF-8-encoded `<TEXT>`                                                                               |
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
-| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
+| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. Defaults to the Datadog Agent instance.                                                                               |
 | `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
 | `p:<PRIORITY>`                       | No       | Set to `normal` or `low`. Default `normal`.                                                                            |
 | `s:<SOURCE_TYPE_NAME>`               | No       | Add a source type to the event. No default.                                                                            |

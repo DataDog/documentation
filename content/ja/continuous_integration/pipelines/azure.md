@@ -11,7 +11,6 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_tags_and_metrics/
   tag: Documentation
   text: カスタムタグとメトリクスを追加してパイプラインの可視性を拡張する
-kind: documentation
 title: Azure パイプラインでトレースを設定する
 ---
 

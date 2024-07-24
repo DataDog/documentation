@@ -9,7 +9,6 @@ further_reading:
 - link: synthetics/settings/?tab=specifyvalue#global-variables
   tag: ドキュメント
   text: グローバル変数について
-kind: ガイド
 title: ブラウザテストにおいて、多要素認証 (MFA) に時間ベースのワンタイムパスワード (TOTP) を使用する
 ---
 

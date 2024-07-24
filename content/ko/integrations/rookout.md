@@ -30,7 +30,7 @@ integration_id: rookout
 integration_title: Rookout 라이브 디버깅
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: integration
 manifest_version: 2.0.0
 name: rookout
 oauth: {}

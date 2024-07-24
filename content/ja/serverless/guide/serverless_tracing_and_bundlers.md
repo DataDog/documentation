@@ -6,7 +6,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Node.js アプリケーションのインスツルメンテーション
-kind: documentation
 title: Node.js Lambda トレースとバンドラーの互換性
 ---
 

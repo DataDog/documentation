@@ -1,7 +1,7 @@
 ---
 title: "Fluent\_Bit"
 name: fluentbit
-kind: integration
+custom_kind: integration
 description: "Configurez Fluent\_Bit pour recueillir, analyser et transmettre des données de log provenant de plusieurs sources."
 short_description: Recueillez, analysez et transmettez des données de log provenant de plusieurs sources.
 categories:

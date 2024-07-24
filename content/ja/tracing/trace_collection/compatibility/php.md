@@ -9,7 +9,6 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/php
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
-kind: documentation
 title: PHP 互換性要件
 type: multi-code-lang
 ---

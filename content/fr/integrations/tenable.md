@@ -22,7 +22,7 @@ guid: 303a1ba9-5136-4d23-9785-e36ea0d6caab
 integration_id: tenable
 integration_title: Tenable Nessus
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: tenable.

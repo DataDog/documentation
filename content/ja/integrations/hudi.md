@@ -42,7 +42,7 @@ integration_id: hudi
 integration_title: Hudi
 integration_version: 2.3.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: hudi
 public_title: Hudi

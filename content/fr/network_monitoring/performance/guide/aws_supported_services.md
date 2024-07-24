@@ -1,6 +1,5 @@
 ---
 title: Services AWS pris en charge par NPM
-kind: guide
 npm_provider: aws
 further_reading:
   - link: "https://www.datadoghq.com/blog/network-performance-monitoring"

@@ -36,7 +36,7 @@ integration_id: cert-manager
 integration_title: cert-manager
 integration_version: 4.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cert_manager
 public_title: cert-manager

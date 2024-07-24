@@ -4,13 +4,8 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
 title: Azure Database for MySQL のデータベースモニタリングの設定
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
@@ -313,7 +308,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 Azure からより包括的なデータベースメトリクスを収集するには、[MySQL インテグレーション][8]をインストールします (オプション)。
 
-## ヘルプ
+## トラブルシューティング
 
 インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][9]を参照してください。
 

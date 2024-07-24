@@ -24,7 +24,6 @@ further_reading:
 - link: /code_analysis/software_composition_analysis/
   tag: ドキュメント
   text: CI パイプラインで Software Composition Analysis をセットアップする
-kind: ドキュメント
 title: Software Composition Analysis
 ---
 

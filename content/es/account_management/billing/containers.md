@@ -1,11 +1,10 @@
 ---
-kind: documentación
 title: Facturación de contenedores
 ---
 
 ## Información general
 
-Los contenedores son compatibles con los planes Pro y Enterprise. En función del plan que tengas, puedes monitorizar 5 o 10 contenedores gratis por cada licencia de host. El recuento de contenedores se calcula haciendo un promedio de toda tu infraestructura.
+Los contenedores son compatibles con los planes Pro y Enterprise. En función del plan que tengas, puedes monitorizar 5 o 10 contenedores gratis por cada licencia de host. El count de contenedores se calcula haciendo un promedio de toda tu infraestructura.
 
 Los contenedores adicionales se facturan con un [coste extra][1] por contenedor y hora. Además, se pueden adquirir contenedores de prepago. Ponte en contacto con [Ventas][2] o con tu [asesor de clientes][3] para informarte sobre los contenedores para tu cuenta.
 
@@ -41,7 +40,7 @@ Los cálculos del uso bajo demanda se realizan utilizando la cuota basada en el 
 
 **¿Los contenedores del Datadog Agent cuentan para la asignación?**
 
-No.
+No, los contenedores de Datadog Agent no cuentan para tu asignación de 5 (nivel Pro) o 10 (nivel Enterprise).
 
 **¿Se contabilizan los contenedores pertenecientes a pods en `CrashLoopBackoff` constante?**
 

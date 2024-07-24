@@ -1,6 +1,5 @@
 ---
 title: Metric Correlations
-kind: documentation
 aliases:
     - /graphing/correlations/
 further_reading:

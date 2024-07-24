@@ -3,220 +3,74 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-container-apps/
   tag: GitHub
   text: Container Apps サービスからのトレース、ログ、カスタムメトリクスの収集
-kind: documentation
 title: Azure Container Apps
 ---
 
 ## 概要
 Azure Container Apps は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Azure インテグレーション][1]を通して Container Apps のモニタリングとログ収集を提供しています。また、Datadog は現在ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Container Apps アプリケーションをインスツルメントするソリューションも提供しています。
 
-  <div class="alert alert-warning">この機能はベータ版です。標準的なサポートチャンネルを通じてフィードバックを提供することができます。ベータ期間中は、Container Apps モニタリングと APM トレースは直接費用なしで利用できます。既存の APM のお客様は、スパンの取り込みとボリュームのコストが増加する可能性があります。</div>
-
-## はじめに
-
 ### 前提条件
 
 [Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
 
-### 1. アプリケーションのインスツルメンテーション
+## アプリケーションをインスツルメントする
 
-{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
-{{< programming-lang lang="go" >}}
+アプリケーションをインスツルメンテーションするには、[Dockerfile](#dockerfile) と[ビルドパック](#buildpack)の 2 つの方法があります。
 
-#### Dockerfile で Agent をインストールする
+### Dockerfile
 
-Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントすることができます。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+Datadog は、serverless-init コンテナイメージの新しいリリースを Google の gcr.io、AWS の ECR、および Docker Hub に公開しています。
 
-```
-# Datadog `serverless-init` を Docker イメージにコピーします
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+| hub.docker.com | gcr.io | public.ecr.aws |
+| ---- | ---- | ---- |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
-# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
-ENTRYPOINT ["/app/datadog-init"]
+イメージはセマンティックバージョニングに基づいてタグ付けされ、新しいバージョンごとに 3 つの関連タグが付与されます。
 
-# オプションで Datadog のタグを追加します
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
+* `1`、`1-alpine`: 重大な変更を加えることなく、最新のマイナーリリースを追跡するために使用します。
+* `1.x.x`、`1.x.x-alpine`: ライブラリの正確なバージョンにピン留めするために使用します。
+* `latest`、`latest-alpine`: 重大な変更が含まれる可能性がある最新のバージョンリリースに従う場合、これらを使用します
 
-# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
-CMD ["/path/to/your-go-binary"]
-```
+## `serverless-init` の動作
 
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Go トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+`serverless-init` アプリケーションはプロセスをラップし、サブプロセスとしてこれを実行します。このアプリケーションはメトリクス用の DogStatsD リスナーとトレース用の Trace Agent リスナーを起動します。アプリケーションの stdout/stderr ストリームをラップすることでログを収集します。ブートストラップの後、serverless-init はサブプロセスとしてコマンドを起動します。
 
+完全なインスツルメンテーションを得るには、Docker コンテナ内で実行する最初のコマンドとして `datadog-init` を呼び出していることを確認します。これを行うには、エントリーポイントとして設定するか、CMD の最初の引数として設定します。
 
-[シンプルな Go アプリケーションのサンプルコード][1]。
+{{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
+{{< programming-lang lang="nodejs" >}}
 
-
-[1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /ja/tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
+{{% svl-init-nodejs %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-#### Dockerfile で Agent をインストールする
-
-Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
-
-```
-# Datadog `serverless-init` を Docker イメージにコピーします
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# python トレーシングライブラリをこちらか requirements.txt でインストールします
-RUN pip install --no-cache-dir ddtrace==1.7.3
-
-# オプションで Datadog のタグを追加します
-ENV DD_SERVICE=datadog-demo-run-python
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
-ENTRYPOINT ["/app/datadog-init"]
-
-# Datadog トレースライブラリによって起動されるエントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
-CMD ["ddtrace-run", "python", "app.py"]
-```
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Python トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-[シンプルな Python アプリケーションのサンプルコード][1]。
-
-[1]: https://github.com/DataDog/crpb/tree/main/python
-[2]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
-
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-
-#### Dockerfile で Agent をインストールする
-
-Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
-
-```
-# Datadog `serverless-init` を Docker イメージにコピーします
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# Datadog js トレーシングライブラリをこちらか package.json でインストールします
-
-npm i dd-trace@2.2.0
-
-# enable the Datadog tracing library
-ENV NODE_OPTIONS="--require dd-trace/init"
-
-# オプションで Datadog のタグを追加します
-ENV DD_SERVICE=datadog-demo-run-nodejs
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
-ENTRYPOINT ["/app/datadog-init"]
-
-# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
-CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
-
-```
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Node トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-[シンプルな Node.js アプリケーションのサンプルコード][1]。
-
-[1]: https://github.com/DataDog/crpb/tree/main/js
-[2]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+{{% svl-init-python %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-#### Dockerfile で Agent をインストールする
+{{% svl-init-java %}}
 
-Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
-```
-# Datadog `serverless-init`  を Docker イメージにコピーします
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# オプションで Datadog のタグを追加します
-ENV DD_SERVICE=datadog-demo-run-java
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
-ENTRYPOINT ["/app/datadog-init"]
-
-# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
-CMD ["./mvnw", "spring-boot:run"]
-
-```
-
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Java トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-[シンプルな Java アプリケーションのサンプルコード][1]。
-
-[1]: https://github.com/DataDog/crpb/tree/main/java
-[2]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+{{% svl-init-go %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-#### Dockerfile で Agent をインストールする
-
-Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
-
-```
-# Datadog `serverless-init`  を Docker イメージにコピーします
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# オプションで Datadog のタグを追加します
-ENV DD_SERVICE=datadog-demo-run-dotnet
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
-ENTRYPOINT ["/app/datadog-init"]
-
-# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
-CMD ["dotnet", "helloworld.dll"]
-
-```
-
-#### トレーシングライブラリをインストールする
-指示に従って、[.NET Core トレーシングライブラリ][1]と [.NET Framework トレーシングライブラリ][2]のインストールと構成を行います。
-
-[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
-[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+{{% svl-init-dotnet %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-#### Dockerfile で Agent をインストールする
+{{% svl-init-ruby %}}
 
-Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
-```
-# Datadog `serverless-init`  を Docker イメージにコピーします
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# オプションで Datadog のタグを追加します
-ENV DD_SERVICE=datadog-demo-run-ruby
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
-ENTRYPOINT ["/app/datadog-init"]
-
-# エントリポイントにラップされたバイナリアプリケーションを実行します。
-CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更してください)
-```
-
-#### トレーシングライブラリをインストールする
-
-[以下の手順][2]に従って、アプリケーションに Ruby トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-[シンプルな Ruby アプリケーションのサンプルコード][1]。
-
-[1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
-[2]: /ja/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+{{% svl-init-php %}}
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -226,7 +80,10 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更し�
 コンテナが構築され、レジストリにプッシュされたら、最後の手順として Datadog Agent 用に必要な環境変数を設定します。
 - `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Azure シークレット][7]に設定する必要があります。
 - `DD_SITE`: Datadog のエンドポイントと Web サイト。このページの右側で自分のサイトを選択します。あなたのサイトは {{< region-param key="dd_site" code="true" >}} です。
-- `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします
+- **`DD_AZURE_SUBSCRIPTION_ID`**: コンテナアプリリソースに関連付けられた Azure サブスクリプション ID (必須)。
+- **`DD_AZURE_RESOURCE_GROUP`**: コンテナアプリリソースに関連付けられた Azure リソースグループ (必須)。
+
+- `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします。
 
 環境変数とその機能の詳細については、[追加の構成](#additional-configurations)を参照してください。
 
@@ -254,6 +111,10 @@ az containerapp up \
 
 - **カスタムメトリクス:** [DogStatsd クライアント][3]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][8]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][9]の両方で `avg` を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
 
+- **トレースサンプリング:** サーバーレスアプリケーションの APM トレースリクエストサンプリングレートを管理するには、関数の DD_TRACE_SAMPLE_RATE 環境変数を 0.000 (コンテナアプリのリクエストをトレースしない) から 1.000 (すべてのコンテナアプリのリクエストをトレースする) の間の値に設定します。
+
+メトリクスは、アプリケーションの 100% のトラフィックに基づいて計算され、どのようなサンプリング構成であっても正確な値を維持します。
+
 ### 環境変数
 
 | 変数 | 説明 |
@@ -261,13 +122,15 @@ az containerapp up \
 |`DD_API_KEY`| [Datadog API キー][6] - **必須**|
 | `DD_SITE` | [Datadog サイト][4] - **必須** |
 | `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
+| `DD_LOGS_INJECTION`| true の場合、[Java][10]、[Node.js][11]、[.NET][12]、および [PHP][13] でサポートされているロガーのトレースデータですべてのログをリッチ化します。[Python][14]、[Go][15]、[Ruby][16] については追加のドキュメントを参照してください。 |
+| `DD_TRACE_SAMPLE_RATE`|  トレース取り込みのサンプルレート `0.0` と `1.0` をコントロールします|
 | `DD_SERVICE`      | [統合サービスタグ付け][5]を参照してください。                                       |
 | `DD_VERSION`      | [統合サービスタグ付け][5]を参照してください。                                       |
 | `DD_ENV`          | [統合サービスタグ付け][5]を参照してください。                                       |
 | `DD_SOURCE`       | [統合サービスタグ付け][5]を参照してください。                                       |
 | `DD_TAGS`         | [統合サービスタグ付け][5]を参照してください。                                       |
 
-## トラブルシューティング
+## ヘルプ
 
 このインテグレーションは、お使いのランタイムが完全な SSL を実装しているかどうかに依存します。Node の slim イメージを使用している場合、証明書を含めるために Dockerfile に次のコマンドを追加する必要があるかもしれません。
 
@@ -289,3 +152,10 @@ RUN apt-get update && apt-get install -y ca-certificates
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
 [8]: /ja/metrics/distributions/
 [9]: /ja/metrics/#time-and-space-aggregation
+[10]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[11]: /ja/tracing/other_telemetry/connect_logs_and_traces/nodejs
+[12]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[13]: /ja/tracing/other_telemetry/connect_logs_and_traces/php
+[14]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
+[15]: /ja/tracing/other_telemetry/connect_logs_and_traces/go
+[16]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby

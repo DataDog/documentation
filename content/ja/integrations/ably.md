@@ -23,6 +23,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10340
     source_type_name: Ably
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://ably.com
   name: Ably
@@ -40,7 +41,7 @@ integration_id: ably
 integration_title: Ably
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ably
 public_title: Ably

@@ -5,7 +5,6 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_commands/
   tag: ドキュメント
   text: トラブルシューティング CI
-kind: documentation
 title: パイプライントレースへのカスタムコマンドの追加
 ---
 

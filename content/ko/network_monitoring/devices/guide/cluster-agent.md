@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/clusterchecks
   tag: 설명서
   text: 클러스터 점검
-kind: 가이드
 title: 클러스터 Agent로 네트워크 기기 모니터링
 ---
 
@@ -43,7 +42,7 @@ Agent의 자동탐지와 DCA를 병용하면 확장이 가능해져, 많은 기�
 datadog:
   ## @param apiKey - string - required
   ## Agent를 실행하기 전에 이 내용을 Datadog API 키로 설정하세요.
-  ## ref: https://app.datadoghq.com/account/settings#agent/kubernetes
+  ## ref: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
   #
   apiKey: <DATADOG_API_KEY>
 

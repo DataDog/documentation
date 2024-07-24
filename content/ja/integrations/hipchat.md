@@ -1,6 +1,7 @@
 ---
 categories:
-- Collaboration
+- collaboration
+- notifications
 dependencies: []
 description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
 doc_link: https://docs.datadoghq.com/integrations/hipchat/
@@ -11,7 +12,7 @@ integration_id: ''
 integration_title: HipChat
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: hipchat
 public_title: Datadog-HipChat インテグレーション
@@ -19,6 +20,7 @@ short_description: Datadog のアラートとグラフをチームの Hipchat �
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat グラフ" popup="true">}}
 
 ## 概要
@@ -72,5 +74,5 @@ Hipchat インテグレーションには、サービスのチェック機能は
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://www.hipchat.com/admin/api
-[2]: https://app.datadoghq.com/account/settings#integrations/hipchat
+[2]: https://app.datadoghq.com/integrations/hipchat
 [3]: https://docs.datadoghq.com/ja/help/

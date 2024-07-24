@@ -1,6 +1,5 @@
 ---
 title: Error Tracking Monitor
-kind: documentation
 description: Learn about the Error Tracking monitor type.
 aliases :
   - /monitors/create/types/error_tracking/
@@ -115,7 +114,7 @@ For more information about advanced alert options such as evaluation frequency, 
 
 To display triggering tags in the notification title, click **Include triggering tags in notification title**.
 
-For more information about the **Notify your team** and **Say what's happening** sections, see [Notifications][5].
+For more information about the **Configure notifications and automations** section, see [Notifications][5].
 
 ## Further Reading
 

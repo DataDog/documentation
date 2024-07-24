@@ -3,20 +3,22 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentación
   text: Uso básico del Agent
-kind: documentación
-title: Empezando con la monitorización serverless
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva para saber más sobre monitorización serverless.
+title: Empezando con AWS Lambda Serverless Monitoring
 ---
 
 ## Información general
 
-_Serverless_ es un modelo en el que los desarrolladores crean y ejecutan aplicaciones y servicios mediante un proveedor de soluciones en la nube en lugar de gestionar la infraestructura ellos mismos. La [monitorización serverless][10] de Datadog recopila métricas, logs y trazas (traces) de tu infraestructura serverless, lo que te permite supervisar el estado y el rendimiento de tu aplicación.
+_Serverless_ es un modelo en el que los desarrolladores crean y ejecutan aplicaciones y servicios mediante un proveedor de soluciones en la nube en lugar de gestionar la infraestructura ellos mismos. La [monitorización serverless][1] de Datadog recopila métricas, logs y trazas (traces) de tu infraestructura serverless, lo que te permite supervisar el estado y el rendimiento de tu aplicación.
 
-Esta guía utiliza una [aplicación de muestreo][1] serverless que puedes iniciar con un solo clic. Esta aplicación tiene monitorización serverless preconfigurada. Sigue esta guía para entender cómo puedes solucionar problemas en tu aplicación de muestreo y qué tipo de visibilidad te ofrece la monitorización serverless.
+Esta guía utiliza una [aplicación de muestreo][2] serverless que puedes iniciar con un solo clic. Esta aplicación tiene monitorización serverless preconfigurada. Sigue esta guía para entender cómo puedes solucionar problemas en tu aplicación de muestreo y qué tipo de visibilidad te ofrece la monitorización serverless.
 
 ### Instala la aplicación de muestreo
 
-1. [Inicia el stack de CloudFormation][9]. Este enlace te lleva a la página **Create stack** (Crear stack) en CloudFormation.
-2. Introduce tu [clave de API de Datadog][12] y el [sitio de Datadog][13] ({{< region-param key="dd_site" code="true" >}}). 
+1. [Inicia el stack de CloudFormation][3]. Este enlace te lleva a la página **Create stack** (Crear stack) en CloudFormation.
+2. Introduce tu [clave de API de Datadog][4] y [sitio de Datadog][5] ({{< region-param key="dd_site" code="true" >}}). 
 
   {{< img src="getting_started/serverless/aws_create_stack.png" alt="Primer plano de dos funciones" style="width:80%;">}}
 
@@ -47,7 +49,7 @@ def handler(event, context):
     }
 ```
 
-Puedes [ver las funciones de tu aplicación de muestreo en la vista Serverless][11].
+Puedes [ver tus funciones de la aplicación de muestra en Serverless View][6].
 
 {{< img src="getting_started/serverless/dd_serverless_view.png" alt="Monitorización serverless: vista Serverless, una página de navegador" style="width:80%;">}}
 
@@ -60,16 +62,16 @@ Si has invocado tu aplicación de muestreo al menos una vez, verás `datadog-sam
 {{< img src="getting_started/serverless/functions_view.png" alt="Primer plano de dos funciones" style="width:80%;">}}
 
 ### Información sobre Serverless
-En la vista Serverless, la última columna a la derecha se llama **Insights** (Información). Datadog resalta automáticamente los posibles problemas de tus aplicaciones serverless, como [errores importantes][3] y [largas duraciones][4], y estos problemas aparecen en la columna Insights.
+En la vista Serverless, la última columna a la derecha se llama **Insights** (Información). Datadog resalta automáticamente los posibles problemas de tus aplicaciones serverless, como [errores importantes][7] y [largas duraciones][8], y estos problemas aparecen en la columna Insights.
 
-Es probable que Datadog haya detectado un [arranque en frío][5] en tu aplicación de muestreo serverless. Los arranques en frío ocurren cuando la aplicación serverless recibe un aumento repentino del tráfico. Esto puede ocurrir si la función recibía anteriormente una cantidad relativamente constante de solicitudes y de repente empieza a recibir más o, como sucede en este caso, si se invoca por primera vez una función que estaba previamente inactiva.
+Es probable que Datadog haya detectado un [arranque en frío][9] en tu aplicación de muestreo serverless. Los arranques en frío ocurren cuando la aplicación serverless recibe un aumento repentino del tráfico. Esto puede ocurrir si la función recibía anteriormente una cantidad relativamente constante de solicitudes y de repente empieza a recibir más o, como sucede en este caso, si se invoca por primera vez una función que estaba previamente inactiva.
 
 ## Crea un error para investigarlo
 
 Puedes causar un error intencionadamente al editar la `datadog-sample-entry-function` en el stack de la aplicación de muestreo.
 
 ```python
-  # Entry Lambda Function Code
+  # Introducción del código de función lambda
   def handler(event, context):
 
     raise Exception('Genera un error.')
@@ -89,13 +91,13 @@ Haz clic en tu función para ver más detalles sobre las invocaciones y desplieg
 
 {{< img src="getting_started/serverless/details_error.png" alt="Primer plano de dos funciones" style="width:80%;">}}
 
-Como se muestra arriba, la vista detallada incluye tres gráficos. Puedes configurarlos para que muestren cualquier métrica disponible. De forma predeterminada, muestran tres [métricas Lambda mejoradas][7]: invocaciones, errores y duración.
+Como se muestra arriba, la vista detallada incluye tres gráficos. Puedes configurarlos para que muestren cualquier métrica disponible. De forma predeterminada, muestran tres [métricas Lambda mejoradas][10]: invocaciones, errores y duración.
 
-Datadog genera métricas Lambda mejoradas y predefinidas con baja latencia, precisión de varios segundos y metadatos detallados para los arranques en frío y las etiquetas (tags) personalizadas. También puedes ver el [dashboard de métricas Lambda mejoradas][8] de manera predeterminada.
+Datadog genera métricas Lambda mejoradas y predefinidas con baja latencia, precisión de varios segundos y metadatos detallados para los arranques en frío y las etiquetas (tags) personalizadas. También puedes ver el [dashboard de métricas Lambda mejoradas][11] de manera predeterminada.
 
 
 ### Invocaciones
-La pestaña **Invocations** (Invocaciones) muestra las invocaciones recientes de tu función.
+La pestaña **Invocations** (Invocaciones) muestra las invocaciones recientes de tu función. 
 
 Cada invocación está asociada a una traza. Haz clic en **Open Trace** (Abrir traza) para ver la traza correspondiente a cada invocación:
 
@@ -126,19 +128,18 @@ La aplicación de muestreo serverless tiene los logs activados por defecto. Pued
 
 {{< img src="getting_started/serverless/dd_logs_view.png" alt="Primer plano de dos funciones" style="width:80%;">}}
 
-Puedes filtrar estos logs para solo mostrar los errores. También puedes verlos en el [Log Explorer] (Navegador de logs)[6].
+Puedes filtrar estos logs para ver solo los errores, o verlos en el [Log Explorer][12].
 
 
-[1]: https://github.com/DataDog/serverless-sample-app
-[2]: https://docs.datadoghq.com/es/serverless/libraries_integrations/extension/#tagging
-[3]: https://docs.datadoghq.com/es/serverless/guide/insights/#high-errors
-[4]: https://docs.datadoghq.com/es/serverless/guide/insights/#high-duration
-[5]: https://docs.datadoghq.com/es/serverless/guide/insights/#cold-starts
-[6]: https://docs.datadoghq.com/es/logs/explorer/
-[7]: https://docs.datadoghq.com/es/serverless/enhanced_lambda_metrics
-[8]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
-[9]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
-[10]: /es/serverless
-[11]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
-[12]: https://app.datadoghq.com/organization-settings/api-keys
-[13]: https://docs.datadoghq.com/es/getting_started/site
+[1]: /es/serverless
+[2]: https://github.com/DataDog/serverless-sample-app
+[3]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://docs.datadoghq.com/es/getting_started/site
+[6]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
+[7]: https://docs.datadoghq.com/es/serverless/guide/insights/#high-errors
+[8]: https://docs.datadoghq.com/es/serverless/guide/insights/#high-duration
+[9]: https://docs.datadoghq.com/es/serverless/guide/insights/#cold-starts
+[10]: https://docs.datadoghq.com/es/serverless/enhanced_lambda_metrics
+[11]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
+[12]: https://docs.datadoghq.com/es/logs/explorer/

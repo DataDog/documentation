@@ -4,7 +4,6 @@ aliases:
 - /fr/developers/faq/submitting-metrics-via-powershell
 - /fr/developers/metrics/powershell_metrics_submission/
 - /fr/metrics/powershell_metrics_submission
-kind: documentation
 title: 'Envoi de métriques : PowerShell'
 ---
 

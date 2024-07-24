@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the DevSecOps Bundles
-kind: documentation
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
@@ -137,7 +136,7 @@ The Infrastructure DevSecOps bundles combine infrastructure monitoring with the 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [700+ out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [750+ out-of-the-box integrations][4].
 
 ### Setup
 
@@ -177,7 +176,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [700+ out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [750+ out-of-the-box integrations][5].
 
 ### Setup
 

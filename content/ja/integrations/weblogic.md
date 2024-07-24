@@ -43,7 +43,7 @@ integration_id: weblogic
 integration_title: WebLogic
 integration_version: 1.3.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: weblogic
 public_title: WebLogic

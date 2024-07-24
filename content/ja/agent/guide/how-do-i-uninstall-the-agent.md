@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: ドキュメント
   text: Alma Linux
-kind: ガイド
 title: Agent のアンインストール
 ---
 

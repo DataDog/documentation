@@ -11,7 +11,6 @@ further_reading:
 - link: /synthetics/multistep
   tag: Documentación
   text: Crear un test de API multipaso
-kind: guía
 title: Ejecutar tests de API simples y API multipaso en aplicaciones que requieren
   autenticación
 ---

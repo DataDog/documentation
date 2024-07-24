@@ -5,6 +5,7 @@ assets:
   dashboards:
     Containers: assets/dashboards/containers.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: container.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10242
     source_type_name: Container
 author:
   homepage: https://www.datadoghq.com
@@ -22,6 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
 display_on_public_website: true
@@ -31,7 +34,7 @@ integration_id: container
 integration_title: Container
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: container
 public_title: Container
@@ -42,9 +45,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Containers
   configuration: README.md#Setup
   description: Surveillez toutes vos métriques de conteneur avec Datadog.
   media: []
@@ -53,6 +57,7 @@ tile:
   title: Container
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
@@ -61,9 +66,9 @@ Ce check transmet un ensemble de métriques relatives aux conteneurs en cours d'
 
 **REMARQUE** : le check `container` diffère du check `containerd`. Les checks `container` envoient des métriques standard pour tous les conteneurs détectés sur le système, quel que soit le runtime du conteneur. Le check `containerd` est dédié au runtime `containerd` et publie des métriques dans l'espace de nommage `containerd.*`.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Container est un check de base de l'Agent Datadog. Il est automatiquement activé tant qu'un runtime de conteneur pris en charge est détecté. Selon votre environnement, vous devrez potentiellement configurer l'accès aux runtimes de conteneur pris en charge (Docker, containerd).
 
@@ -71,7 +76,7 @@ Container est un check de base de l'Agent Datadog. Il est automatiquement activ�
 
 Pour que le check `container` s'active automatiquement, vous devez monter certains dossiers. Cette opération est gérée par le chart Helm officiel et l'Operator Datadog, en respectant la documentation pertinente de Kubernetes, Docker, ECS et ECS Fargate.
 
-### Configuration
+### Dépannage de la solution Browser
 
 Le check `container` n'expose aucun paramètre de configuration spécifique. Pour personnaliser les champs communs ou forcer l'activation du check `container`, procédez comme suit :
 
@@ -85,13 +90,13 @@ Le check `container` peut recueillir des métriques relatives au processeur, à 
 
 [Lancez la sous-commande `status` de l'Agent][1] et cherchez `container` dans la section **Checks**.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 Consultez [metadata.csv][2] pour découvrir la liste complète des métriques fournies par cette intégration.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

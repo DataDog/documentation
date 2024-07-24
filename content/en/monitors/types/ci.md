@@ -1,6 +1,5 @@
 ---
 title: CI Monitor
-kind: documentation
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/
@@ -141,7 +140,7 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 #### Samples and breaching values top list
 

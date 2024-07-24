@@ -1,7 +1,6 @@
 ---
 code_lang: php
 code_lang_weight: 40
-kind: documentation
 title: PHP 互換性要件
 type: multi-code-lang
 ---

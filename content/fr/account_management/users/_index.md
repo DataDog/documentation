@@ -1,6 +1,5 @@
 ---
 title: Gestion des utilisateurs
-kind: documentation
 description: Ajoutez ou supprimez des utilisateurs et modifiez leurs rôles.
 aliases:
   - /fr/account_management/team/

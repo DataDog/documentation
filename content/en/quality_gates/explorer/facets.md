@@ -1,6 +1,5 @@
 ---
 title: Quality Gates or Rule Execution Facets
-kind: documentation
 description: Learn about facets in the Quality Gates Explorer.
 further_reading:
 - link: 'quality_gates/explorer/'
@@ -30,7 +29,7 @@ The [Quality Gates Explorer][4] includes out-of-the-box facets such as `Status` 
 {{< tabs >}}
 {{% tab "Gates" %}}
 
-Navigate to [**CI** > **Quality Gate Executions**][101] and select **Gates** to access the list of [Quality Gates facets][102].
+Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] and select **Gates** to access the list of [Quality Gates facets][102].
 
 {{< img src="quality_gates/explorer/facets_gates.png" text="Facets list for gates on the Quality Gates Explorer" style="width:100%" >}}
 
@@ -40,7 +39,7 @@ Navigate to [**CI** > **Quality Gate Executions**][101] and select **Gates** to 
 {{% /tab %}}
 {{% tab "Rules" %}}
 
-Navigate to [**CI** > **Quality Gate Executions**][101] and select **Rules** to access the list of [Quality Gates facets][102].
+Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] and select **Rules** to access the list of [Quality Gates facets][102].
 
 {{< img src="quality_gates/explorer/facets_rules.png" text="Facets list for rules on the Quality Gates Explorer" style="width:100%" >}}
 

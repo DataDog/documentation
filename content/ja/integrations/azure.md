@@ -56,13 +56,16 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-aks-cluster-extension/
   tag: ブログ
   text: Datadog AKS クラスター拡張機能で Azure コンテナ監視を効率化する
+- link: https://www.datadoghq.com/blog/azure-integration-configuration/
+  tag: ブログ
+  text: すべての Azure インテグレーションの可観測性構成を 1 か所で微調整できます
 git_integration_title: azure
 has_logo: true
 integration_id: azure
 integration_title: Microsoft Azure
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   '[Azure App Gateway] Backend Hosts': assets/monitors/app_gateway_backend_hosts.json

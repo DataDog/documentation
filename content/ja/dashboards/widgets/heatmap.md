@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/visualize-behavior-datadog-heatmaps/
   tag: ブログ
   text: Datadog Heatmaps でユーザー行動を視覚化する
-kind: documentation
 title: ヒートマップウィジェット
 widget_type: ヒートマップ
 ---

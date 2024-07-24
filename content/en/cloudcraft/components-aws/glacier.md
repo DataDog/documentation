@@ -1,6 +1,5 @@
 ---
 title: "Glacier Component"
-kind: documentation
 ---
 ## Overview
 

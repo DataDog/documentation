@@ -1,6 +1,5 @@
 ---
 title: Estimated Usage Metrics
-kind: documentation
 ---
 
 ## Overview
@@ -35,7 +34,7 @@ Estimated usage metrics are generally available for the following usage types:
 | Error Tracking Logs Events    | `datadog.estimated_usage.error_tracking.logs.events` | Volume of error logs ingested into Error Tracking. |
 | Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes` | Total ingestion of Cloud SIEM logs in bytes. |
 | APM Hosts                     | `datadog.estimated_usage.apm_hosts` | Unique APM hosts seen in last hour. Does not include Azure App Services hosts. |
-| APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` | Total number of indexed spans. |
+| APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters. |
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` | Volume of ingested spans in bytes. |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` | Total number of ingested spans. |
 | APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks` | Unique APM Fargate Tasks seen in last 5 minutes. |

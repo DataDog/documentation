@@ -18,7 +18,7 @@ integration_id: redis-sentinel
 integration_title: Redis Sentinel
 integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: '@krasnoukhov'
 manifest_version: 1.0.0
 metric_prefix: redis.

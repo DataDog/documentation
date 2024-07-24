@@ -1,6 +1,5 @@
 ---
 title: C# Log Collection
-kind: documentation
 aliases:
   - /logs/languages/csharp
 further_reading:

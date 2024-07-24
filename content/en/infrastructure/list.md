@@ -1,6 +1,5 @@
 ---
 title: Infrastructure List
-kind: documentation
 aliases:
   - /hostnames
   - /graphing/infrastructure/list/
@@ -18,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags.
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list.
 
 ## Hosts
 
@@ -155,4 +154,4 @@ for host in infra['rows']:
 [7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-
+[10]: https://app.datadoghq.com/infrastructure

@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Diagnostics simplifiés grâce à la mise en corrélation entre produits
 ---
 

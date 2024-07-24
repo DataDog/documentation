@@ -1,6 +1,5 @@
 ---
 title: Network Performance Monitoring
-kind: documentation
 description: Explore metrics for point to point communication on your infrastructure.
 aliases:
   - /monitors/network_flow_monitors/
@@ -28,6 +27,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/npm-story-centric-ux/"
   tag: "Blog"
   text: "Quickstart network investigations with NPM's story-centric UX"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
 algolia:
   tags: ['npm', 'network performance monitoring']
 ---
@@ -45,10 +47,13 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 
 NPM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
 
+Additionally, [Network path][5], a feature of NPM, is available in private beta, which allows you to see hop-by-hop traffic in your network.
+
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
+    {{< nextlink href="monitors/types/network_performance/" >}}<u>Recommended Monitors</u>: Configure recommended NPM monitors.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
@@ -59,3 +64,4 @@ NPM makes it simple to monitor complex networks with built in support for Linux 
 [2]: https://app.datadoghq.com/network/map
 [3]: https://www.datadoghq.com/blog/npm-windows-support/
 [4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[5]: /network_monitoring/network_path/

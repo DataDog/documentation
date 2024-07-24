@@ -3,7 +3,6 @@ aliases:
 - /es/developers/faq/using-postman-with-datadog-apis
 - /es/getting_started/using-postman-with-datadog-apis
 - /es/developers/guide/using-postman-with-datadog-apis
-kind: documentación
 title: Utilización de Postman con las API de Datadog
 ---
 

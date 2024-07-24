@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/guide/podman-support-with-docker-integration
-kind: documentation
 title: Podman コンテナランタイムとの Docker インテグレーションの使用
 ---
 

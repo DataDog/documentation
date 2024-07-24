@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/proxy/
   tag: ドキュメント
   text: プロキシの詳細
-kind: ガイド
 title: インターネット接続が制限されているサーバーへの Agent のインストール
 ---
 

@@ -23,7 +23,6 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: ドキュメント
   text: ブラウザテストを構成する方法を学ぶ
-kind: documentation
 title: Continuous Testing と CI/CD
 ---
 

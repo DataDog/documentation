@@ -5,7 +5,6 @@ further_reading:
 - link: /monitors/types/metric/
   tag: ドキュメント
   text: メトリクスモニター
-kind: ガイド
 title: 回復しきい値
 ---
 

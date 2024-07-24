@@ -8,7 +8,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: グラフクエリの構築方法について
-kind: documentation
 title: テーブルウィジェット
 widget_type: query_table
 ---

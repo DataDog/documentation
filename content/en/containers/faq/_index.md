@@ -1,6 +1,5 @@
 ---
 title: Containers FAQ
-kind: faq
 cascade: 
   - private: true
 disable_sidebar: true

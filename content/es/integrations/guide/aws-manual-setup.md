@@ -37,7 +37,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: Blog
   text: Prácticas recomendadas para el etiquetado de tu infraestructura y aplicaciones
-kind: guía
 title: Guía de configuración manual de AWS
 ---
 

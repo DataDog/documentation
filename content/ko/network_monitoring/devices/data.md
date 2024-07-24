@@ -1,13 +1,21 @@
 ---
 aliases:
 - /ko/network_performance_monitoring/devices/data/
-kind: 설명서
+disable_toc: true
 title: 수집된 NDM 데이터
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
 {{< /site-region >}}
+
+## 이벤트
+
+네트워크 장치 모니터링에는 이벤트가 포함되지 않습니다.
+
+## 서비스 검사
+
+{{< get-service-checks-from-git "snmp" >}}
 
 ## 메트릭
 
@@ -16,12 +24,5 @@ title: 수집된 NDM 데이터
 
 {{< get-metrics-from-git "snmp" >}}
 
-## 이벤트 
-
-네트워크 장치 모니터링에는 이벤트가 포함되지 않습니다.
-
-## 서비스 검사
-
-{{< get-service-checks-from-git "snmp" >}}
 
 [1]: http://oidref.com

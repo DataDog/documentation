@@ -10,7 +10,6 @@ further_reading:
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
-kind: documentation
 title: メトリクスの概要
 ---
 

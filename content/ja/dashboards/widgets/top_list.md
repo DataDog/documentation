@@ -11,7 +11,6 @@ further_reading:
 - link: /dashboards/guide/context-links/#overview/
   tag: Documentation
   text: コンテキストリンク
-kind: documentation
 title: トップリストウィジェット
 widget_type: toplist
 ---

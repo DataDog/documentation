@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: AWS AppSync
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_appsync
 public_title: Datadog-AWS AppSync インテグレーション

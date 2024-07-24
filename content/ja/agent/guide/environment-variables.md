@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/configuration/proxy/#environment-variables
   tag: ドキュメント
   text: プロキシ環境変数
-kind: ガイド
 title: Agent 環境変数
 ---
 

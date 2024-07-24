@@ -4,7 +4,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/amazon_web_services/
   tag: Intégration
   text: Intégration AWS
-kind: guide
+
 title: Dépannage de l'intégration AWS
 ---
 
@@ -58,26 +58,39 @@ Lors de l'installation de l'Agent sur un host AWS, il est possible que des hosts
 
 ### Métadonnées EC2 avec IMDS v2
 
-Dans la [configuration de votre Agent][5], si le paramètre `ec2_prefer_imdsv2` est défini sur `true` (valeur par défaut : `false`), l'Agent demande des métadonnées EC2 à l'aide de Service des métadonnées d'instance Version 2 (IMDSv2), qui offre un meilleur niveau de sécurité en ce qui concerne l'accès aux métadonnées. Dans certaines situations, une configuration supplémentaire peut être requise dans AWS. Par exemple, il est parfois nécessaire d'utiliser un Agent conteneurisé sur une instance EC2 standard. Consultez la rubrique [Passer à l'utilisation de Service des métadonnées d'instance Version 2][6] pour en savoir plus.
+Dans certaines situations, la configuration du [IMDSv2][5] d'EC2 empêche à lʼAgent d'accéder aux métadonnées, ce qui le conduit à se rabattre sur le fournisseur de nom d'hôte `os` au lieu de `aws`, comme le montre la sortie de `agent status`.
 
 Dans les environnements conteneurisés, il est possible que l'endpoint de métadonnées EC2 soit verrouillé, en raison de l'attribution de rôles/identifiants IAM aux pods s'exécutant dans le cluster Kubernetes. Ces opérations sont généralement réalisées par les outils `Kube2IAM` et `kiam`. Pour corriger ce problème, modifiez votre configuration `Kube2IAM` ou `kiam` de façon à autoriser l'accès à cet endpoint.
 
+L'API AWS permet de désactiver IMDSv1, que lʼAgent utilise par défaut. Si tel est le cas, mais si IMDSv2 est activé et accessible, définissez le paramètre `ec2_prefer_imdsv2` sur `true` (`false` par défaut) dans la [configuration de votre Agent][6]. Consultez la documentation [Transition to using Instance Metadata service Version 2][7] (en anglais) pour en savoir plus.
+
+IMDSv2, dans sa configuration par défaut, refuse les connexions dont le nombre de sauts IP est supérieur à un, c'est-à-dire les connexions qui sont passées par une adresse IP de passerelle. Cela peut poser des problèmes lorsque lʼAgent est exécuté dans un conteneur avec un réseau autre que celui du host, car le runtime fait passer le trafic du conteneur par une adresse IP de passerelle virtuelle. Cette situation est fréquente dans les déploiements dʼECS. Les options suivantes peuvent remédier à ce problème :
+
+ * [Augmenter le nombre maximal de sauts pour atteindre au moins `2`][8]. Cela peut avoir des conséquences sur la sécurité des données stockées dans l'IMDS, car cela permet à des conteneurs autres que lʼAgent d'accéder également à ces données. 
+ * Utiliser le hostname détecté par cloud-init, en [définissant `providers.eks.ec2.useHostnameFromFile` sur true][9].
+ * Exécuter lʼAgent dans l'espace de nommage UTS du host, en [attribuant la valeur true à `agents.useHostNetwork`][10].
+
+
 ## Tags
 
-### Hosts conservant des tags AWS après la suppression de l'intégration AWS EC2
+### Hosts conservant des tags AWS après la suppression de l'intégration Amazon EC2
 
 L'intégration AWS vous permet de recueillir des données depuis CloudWatch. Vous pouvez également installer l'Agent Datadog directement sur chaque instance EC2, afin de récupérer les données et les tags. Si vous utilisez ces deux approches pour recueillir des données, le backend de Datadog fusionne les données provenant de l'intégration et de l'Agent Datadog au sein d'un unique objet host.
 
-Si vous avez supprimé l'intégration AWS, mais que vous continuez à exécuter l'Agent Datadog sur vos instances EC2, les hosts de votre compte Datadog possèdent toujours les anciens tags de host qui étaient recueillis depuis AWS. Ce comportement est intentionnel ; cela n'indique pas que l'intégration AWS ou AWS EC2 est toujours activée.
+Si vous avez supprimé l'intégration AWS, mais que vous continuez à exécuter l'Agent Datadog sur vos instances EC2, les hosts de votre compte Datadog possèdent toujours les anciens tags de host qui étaient recueillis depuis AWS. Ce comportement est intentionnel ; cela n'indique pas que l'intégration AWS ou Amazon EC2 est toujours activée.
 
 Pour vérifier si l'intégration est activée, consultez la rubrique Apps Running du host en question depuis la liste d'infrastructures. Sinon, consultez la synthèse des métriques et créez un notebook basé sur votre host.
 
-Si vous souhaitez supprimer définitivement les tags de host AWS d'un host, utilisez l'[endpoint Remove host tags][7].
+Si vous souhaitez supprimer définitivement les tags de host AWS d'un host, utilisez l'[endpoint de l'API Remove host tags][11].
 
 [1]: /fr/integrations/amazon_web_services/
-[2]: /fr/integrations/faq/error-datadog-not-authorized-sts-assume-role/#pagetitle
+[2]: /fr/integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
 [3]: /fr/agent/
 [4]: /fr/help/
-[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
-[6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
-[7]: /fr/api/latest/tags/#remove-host-tags
+[5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
+[8]: https://docs.aws.amazon.com/cli/latest/reference/ec2/modify-instance-metadata-options.html
+[9]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L1683-L1688
+[10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
+[11]: /fr/api/latest/tags/#remove-host-tags

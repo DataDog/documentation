@@ -17,7 +17,7 @@ integration_id: twenty-forty-eight
 integration_title: Twenty Forty Eight
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: twenty_forty_eight
 public_title: Twenty Forty Eight
@@ -44,6 +44,7 @@ tile:
   title: Twenty Forty Eight
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -54,13 +55,13 @@ Twenty Forty Eight est un jeu amusant qui peut être ajouté à vos dashboards D
 
 Cliquez sur le widget pour activer l'app, puis utilisez les **touches fléchées** de votre clavier pour déplacer les carrés. Les carrés qui possèdent le même nombre **fusionnent** lorsqu'ils entrent en contact. Ajoutez-les pour atteindre 2 048 et des valeurs encore plus élevées !
 
-## Configuration
+## Formule et utilisation
 
 1. Depuis votre compte Datadog, accédez à Dashboards. Sélectionnez le dashboard auquel vous souhaitez ajouter le jeu ou [créez un dashboard][2].
 
 2. Depuis le dashboard, cliquez sur **+ Add Widgets** à droite du titre. Faites défiler vers la droite afin de parcourir les widgets, puis faites glisser le widget **Twenty Forty Eight** à l'emplacement souhaité sur votre dashboard.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

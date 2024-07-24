@@ -3,7 +3,6 @@ aliases:
 - /ko/developers/amazon_cloudformation/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
-kind: 설명서
 title: Datadog-Amazon CloudFormation
 ---
 [AWS CloudFormation][1]은 환경에 있는 모든 AWS 리소스를 한 번에 설명, 설정 및 프로비저닝할 수 있는 템플릿을 제공합니다. Datadog-AWS CloudFormation 리소스를 통해 지원되는 Datadog 리소스와 상호 작용하고, 모든 Datadog 데이터센터에 리소스를 전송하고, Datadog 리소스가 있는 모든 지역에 비공개로 확장 프로그램을 등록할 수 있습니다.
@@ -44,6 +43,7 @@ title: Datadog-Amazon CloudFormation
     }
   }
   ```
+   미국 외 계정을 사용하는 경우 `ApiURL`를 지정합니다(기본값은 `https://api.datadoghq.com`). 예를 들어 EU 계정에 `https://api.datadoghq.eu`를 사용합니다.
 
 7. 리소스를 설정한 후 활성화된 Datadog 리소스를 포함하는 [AWS 스택을 생성][3]합니다.
 
@@ -51,7 +51,9 @@ title: Datadog-Amazon CloudFormation
 
 ## AWS 명령줄 인터페이스
 
-시작 방법:
+시작하기:
+
+1. `<RESOURCE_DIR>/resource-role.yaml` 파일을 기반으로 CloudFormation 리소스에 대한 실행 역할을 생성합니다.
 
 1. 터미널에서 [aws-cli 도구][2]를 사용해 Datadog 리소스를 등록합니다.
 
@@ -60,10 +62,11 @@ title: Datadog-Amazon CloudFormation
         --region "<REGION>" \
         --type RESOURCE \
         --type-name "<DATADOG_RESOURCE_NAME>" \
-        --schema-handler-package "<LINK_TO_S3>"
+        --schema-handler-package "<LINK_TO_S3>" \
+        --execution-role-arn "<ROLE_ARN_FROM_STEP_1>"
     ```
 
-2. 터미널에서 다음을 실행해 새롭게 등록된 리소스 버전을 확인합니다.
+1. 터미널에서 다음을 실행해 새롭게 등록된 리소스 버전을 확인합니다.
 
     ```shell
     aws cloudformation list-type-versions \
@@ -72,7 +75,7 @@ title: Datadog-Amazon CloudFormation
     --type-name "<DATADOG_RESOURCE_NAME>"
     ```
 
-3. 터미널에서 다음을 실행하여 새롭게 등록된 이 버전을 `default`로 설정합니다.
+1. 터미널에서 다음을 실행하여 새롭게 등록된 이 버전을 `default`로 설정합니다.
 
     ```shell
     aws cloudformation set-type-default-version \
@@ -90,7 +93,7 @@ title: Datadog-Amazon CloudFormation
       * [사용 가능한 리소스 섹션](#resources-available)를 참조합니다. 섹션은 지원되는 최신 S3 링크 사례로 연결됩니다.
     * `VERSION_ID`: `2`단계의 명령으로 반환된 리소스의 기본 버전입니다.
 
-4. 터미널에서 다음을 실행하여 새롭게 등록된 리소스 설정을 구성합니다.
+1. 터미널에서 다음을 실행하여 새롭게 등록된 리소스 설정을 구성합니다.
 
     ```shell
     aws cloudformation set-type-configuration \
@@ -99,7 +102,7 @@ title: Datadog-Amazon CloudFormation
         --configuration '{"DatadogCredentials": {"ApiKey": "{{resolve:secretsmanager:MySecret:SecretString:SecretAPIKey}}", "ApplicationKey": "{{resolve:secretsmanager:MySecret:SecretString:SecretAppKey}}"}}'
     ```
 
-5. AWS 계정에서 등록된 Datadog 리소스를 포함하는 [AWS 스택을 생성][3]합니다.
+1. AWS 계정에서 등록된 Datadog 리소스를 포함하는 [AWS 스택을 생성][3]합니다.
 
 사용 가능한 명령 및 워크플로에 대한 자세한 정보는 공식 [AWS 설명서][4]를 참조하세요.
 
@@ -107,14 +110,15 @@ title: Datadog-Amazon CloudFormation
 
 다음 Datadog 리소스는 AWS 계정에 등록할 수 있습니다. 적합한 설명서를 참고해 설정하는 방법을 확인하세요.
 
-| 리소스                | 이름                              | 설명                                             | 폴더                          | S3 패키지 링크              |
-|-------------------------|-----------------------------------|---------------------------------------------------------|---------------------------------|-------------------------------|
-| 대시보드              | `Datadog::Dashboards::Dashboard`  | [Datadog 대시 보드 생성, 업데이트 및 삭제][5]      | `datadog-dashboards-dashboard`  | [스키마 핸들러 버전][6]  |
-| Datadog-AWS 통합 | `Datadog::Integrations::AWS`      | [Datadog-Amazon Web Service 통합 관리][7] | `datadog-integrations-aws`      | [스키마 핸들러 버전][8]  |
-| 모니터링                | `Datadog::Monitors::Monitor`      | [Datadog 모니터 생성, 업데이트 및 삭제][9]        | `datadog-monitors-monitor`      | [스키마 핸들러 버전][10] |
-| 다운타임<br>               | `Datadog::Monitors::Downtime`     | [모니터에 대한 다운타임 활성화 또는 비활성화][11]     | `datadog-monitors-downtime`     | [스키마 핸들러 버전][12] |
-| 사용자                    | `Datadog::IAM::User`              | Datadog 사용자 생성 및 관리][13]                  | `datadog-iam-user`              | [스키마 핸들러 버전][14] |
-| SLO                    | `Datadog::SLOs::SLO`              | [Datadog SLO 생성 및 관리][19]                    | `datadog-slos-slo`              | [스키마 핸들러 버전][20] |
+| 리소스                | 이름                                  | 설명                                             | 폴더                              | S3 패키지 링크              |
+|---------------------------|---------------------------------------|---------------------------------------------------------|-------------------------------------|-------------------------------|
+| 대시보드                 | `Datadog::Dashboards::Dashboard`      | [Datadog 대시 보드 생성, 업데이트 및 삭제][5]      | `datadog-dashboards-dashboard`      | [스키마 핸들러 버전][6]  |
+| Datadog-AWS 통합   | `Datadog::Integrations::AWS`          | [Datadog-Amazon Web Service 통합 관리][7] | `datadog-integrations-aws`          | [스키마 핸들러 버전][8]  |
+| 모니터                   | `Datadog::Monitors::Monitor`          | [Datadog 모니터 생성, 업데이트 및 삭제][9]        | `datadog-monitors-monitor`          | [스키마 핸들러 버전][10] |
+| 다운타임(**더 이상 사용되지 않음**) | `Datadog::Monitors::Downtime`         | [모니터에 대한 다운타임 활성화 또는 비활성화][11]     | `datadog-monitors-downtime`         | [스키마 핸들러 버전][12] |
+| 다운타임 스케줄         | `Datadog::Monitors::DowntimeSchedule` | [Datadog 다운타임 예약][21]                        | `datadog-monitors-downtimeschedule` | [스키마 핸들러 버전][22] |
+| 사용자                      | `Datadog::IAM::User`                  | [Datadog 사용자 생성 및 관리][13]                   | `datadog-iam-user`                  | [스키마 핸들러 버전][14] |
+| SLO                       | `Datadog::SLOs::SLO`                  | [Datadog SLO 생성 및 관리][19]                     | `datadog-slos-slo`                  | [스키마 핸들러 버전][20] |
 
 ## 지원되는 지역
 
@@ -165,3 +169,5 @@ Datadog-Amazon CloudFormation 리소스는 다음 지역에서 CloudFormation �
 [18]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager
 [19]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-slos-slo-handler
 [20]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-slos-slo-handler/CHANGELOG.md
+[21]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-downtimeschedule-handler
+[22]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-monitors-downtimeschedule-handler/CHANGELOG.md

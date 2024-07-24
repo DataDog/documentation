@@ -5,6 +5,7 @@ assets:
   dashboards:
     Apache APISIX Dashboard: assets/dashboards/apache-apisix_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -20,6 +21,7 @@ assets:
       prefix: apisix.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10244
     source_type_name: Apache APISIX
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -38,7 +40,7 @@ integration_id: apache-apisix
 integration_title: Apache APISIX
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: apache-apisix
 public_title: Apache APISIX
@@ -63,6 +65,7 @@ tile:
   title: Apache APISIX
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -71,13 +74,13 @@ Apache APISIX est une passerelle API dynamique, haute performance et en temps r
 
 Le [plug-in Datadog/APISIX][1] transmet ses métriques custom au serveur DogStatsD et est fourni avec l'Agent Datadog via la connexion UDP. DogStatsD est une implémentation du protocole StatsD. Ce composant recueille les métriques custom pour l'Agent [Apache APISIX][2], les agrège au sein d'un unique point de données, puis envoie ce point au serveur Datadog configuré.
 
-## Implémentation
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Suivez les instructions de configuration ci-dessous.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Si vous utilisez déjà Datadog et que vous avez installé l'Agent Datadog, assurez-vous que votre pare-feu autorise le port 8125/UDP. Vérifiez par exemple que l'Agent Apache APISIX parvient à atteindre le port 8125 de l'Agent Datadog. Si c'est bien le cas, passez directement à l'étape 3.
 
@@ -146,17 +149,17 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 
 [Lancez la sous-commande status de l'Agent][6] et cherchez `apisix` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "apache-apisix" >}}
 
 
-### Événements
+### Aide
 
 Le check Apache APISIX n'inclut aucun événement.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 

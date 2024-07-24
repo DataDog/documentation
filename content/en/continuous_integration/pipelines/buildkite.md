@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a Buildkite Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/buildkite
 further_reading:
@@ -9,7 +8,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and measures"
@@ -19,21 +18,25 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Partial pipelines**: View [partially retried][5] and downstream pipeline executions
+[Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
 
-- **Infrastructure metric correlation**: Correlate jobs to [infrastructure host metrics][8] for Buildkite agents
+Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle. 
 
-- **Manual steps**: View manually triggered pipelines
+### Compatibility
 
-- **Queue time**: View amount of time pipeline jobs sit in the queue before processing
-
-- **Custom tags and measures at runtime**: Configure [custom tags][6] and measures at runtime
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
+| [Manual steps][12] | Manual steps | View manually triggered pipelines. |
+| [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
 
 ## Configure the Datadog integration
 
-The steps to activate the Datadog integration for [Buildkite][1] are:
+To set up the Datadog integration for [Buildkite][1]:
 
 1. Go to **Settings > Notification Services** in Buildkite and click add a **Datadog Pipeline Visibility** integration.
 2. Fill in the form with the following information:
@@ -91,9 +94,9 @@ In this example, you can use the value of `binary_size` to plot the change in th
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after the pipelines finish.
+The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ### Correlate infrastructure metrics to jobs
 
@@ -102,7 +105,7 @@ For this feature to work, install the [Datadog Agent][7] in the hosts running th
 
 ### View partial and downstream pipelines
 
-In the **Pipeline Executions** page, you can use the filters below in the search bar:
+On the **Executions** page, you can use the filters below in the search bar:
 
 `Downstream Pipeline`
 : Possible values: `true`, `false`
@@ -126,7 +129,12 @@ These filters can also be applied through the facet panel on the left hand side 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
-[6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[5]: /continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
+[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [7]: /agent/
 [8]: /continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs
+[9]: /glossary/#partial-retry
+[10]: /glossary/#custom-tag
+[11]: /glossary/#custom-measure
+[12]: /glossary/#manual-step
+[13]: /glossary/#queue-time

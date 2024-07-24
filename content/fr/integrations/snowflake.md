@@ -24,7 +24,7 @@ guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake
 integration_title: Snowflake
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: snowflake.

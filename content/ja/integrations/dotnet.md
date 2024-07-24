@@ -12,7 +12,7 @@ integration_id: dotnet
 integration_title: .NET
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: dotnet
 public_title: Datadog-.NET インテグレーション
@@ -41,6 +41,10 @@ _Agent v6.0 以上で使用可能_
 
 ログを Datadog に転送するには、[.NET ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
 
+### プロファイルの収集
+
+[.NET プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
+
 ## リアルユーザーモニタリング
 
 ### データセキュリティ
@@ -57,7 +61,7 @@ _Agent v6.0 以上で使用可能_
 
 ## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -66,4 +70,5 @@ _Agent v6.0 以上で使用可能_
 [1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=net
 [2]: https://docs.datadoghq.com/ja/tracing/setup/dotnet/
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/csharp/
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/dotnet/
+[5]: https://docs.datadoghq.com/ja/help/

@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/
   tag: 블로그
   text: Datadog 에이전트 메트릭 파이프라인의 성능 향상
-kind: 설명서
 title: 에이전트 기본 사용법
 ---
 

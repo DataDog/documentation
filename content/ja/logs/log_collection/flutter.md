@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-kind: documentation
 title: Flutter ログ収集
 ---
 [Datadog の flutter プラグイン][1]を使用すると、Flutter アプリケーションから Datadog へログを送信すると共に、次の機能を利用できます。

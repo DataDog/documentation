@@ -13,7 +13,7 @@ integration_id: azure-table-storage
 integration_title: Microsoft Azure Table Storage
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_table_storage
 public_title: Datadog-Microsoft Azure Table Storage インテグレーション

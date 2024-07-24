@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: モニターの管理
-kind: documentation
 title: 変数
 ---
 

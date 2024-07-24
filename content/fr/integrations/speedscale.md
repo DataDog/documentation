@@ -5,6 +5,7 @@ assets:
   dashboards:
     speedscale: assets/dashboards/SpeedscaleOverview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: speedscale.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10271
     source_type_name: Speedscale
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,8 +23,8 @@ author:
   sales_email: support@speedscale.com
   support_email: support@speedscale.com
 categories:
-- automation
 - containers
+- kubernetes
 - orchestration
 - testing
 dependencies:
@@ -34,25 +36,25 @@ integration_id: speedscale
 integration_title: Speedscale
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: speedscale
 public_title: Speedscale
 short_description: Publiez les résultats d'analyses de trafic Speedscale sur Datadog.
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Automation
   - Category::Containers
+  - Category::Kubernetes
   - Category::Orchestration
   - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Publiez les résultats d'analyses de trafic Speedscale sur Datadog.
   media: []
@@ -61,13 +63,14 @@ tile:
   title: Speedscale
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## Présentation
 
 Cette intégration vous permet de publier les résultats d'analyses de trafic [Speedscale][1] sur la plateforme Datadog. Vous pouvez ainsi étudier simultanément vos données d'observabilité avec les résultats d'une analyse Speedscale précise, afin de déterminer plus facilement la cause à l'origine de vos lenteurs. Identifiez et corrigez des problèmes de performance potentiels avant qu'ils n'impactent vos environnements de production grâce à l'intégration Datadog/Speedscale.
 
-## Configuration
+## Formule et utilisation
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Pour utiliser cette intégration, vous avez besoin d'une [clé d'API][2] Datadog afin d'envoyer des événements à Datadog.
 
@@ -93,21 +96,21 @@ Cette intégration vous permet de publier les résultats d'analyses de trafic [S
 
 Consultez le [flux d'événements][2] Datadog pour passer en revue votre rapport exporté.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 Speedscale n'inclut aucune métrique.
 
-### Checks de service
+### Aide
 
 Speedscale n'inclut aucun check de service.
 
-### Événements
+### Aide
 
 L'intégration Speedscale envoie des événements à votre [flux d'événements Datadog][3] à la fin d'une analyse de trafic. Vous pouvez ainsi déterminer plus facilement l'incidence du trafic sur vos métriques.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 

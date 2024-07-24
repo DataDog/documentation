@@ -22,7 +22,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 설명서
 title: 고급 로그 수집 설정
 ---
 
@@ -100,7 +99,6 @@ Docker 환경의 경우 **필터링할 로그를 보내는 컨테이너**에서 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -221,7 +219,6 @@ Kubernetes 환경인 경우, 포드에서 포드 어노테이션인 `ad.datadogh
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -313,7 +310,6 @@ Kubernetes 환경인 경우, 포드에서 포드 어노테이션인 `ad.datadogh
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -416,7 +412,6 @@ Kubernetes 환경인 경우, 포드에서 포드 어노테이션인 `ad.datadogh
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -521,7 +516,6 @@ Docker 환경인 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 �
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:

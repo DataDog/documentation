@@ -1,12 +1,11 @@
 ---
 aliases:
-  - /fr/integrations/azure_streamanalytics
+- /fr/integrations/azure_streamanalytics
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
-description: "Surveillez des métriques clés d'Azure\_Stream\_Analytics."
+description: Surveillez des métriques clés d'Azure Stream Analytics.
 doc_link: https://docs.datadoghq.com/integrations/azure_stream_analytics/
 draft: false
 git_integration_title: azure_stream_analytics
@@ -15,40 +14,42 @@ integration_id: azure-streamanalytics
 integration_title: Microsoft Azure Stream Analytics
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_stream_analytics
-public_title: "Intégration Datadog/Microsoft Azure\_Stream\_Analytics"
-short_description: "Surveillez des métriques clés d'Azure\_Stream\_Analytics."
+public_title: Intégration Datadog/Microsoft Azure Stream Analytics
+short_description: Surveillez des métriques clés d'Azure Stream Analytics.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Stream Analytics est un moteur de traitement d'événements conçu pour analyser d'importants volumes de données diffusées à partir d'appareils.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Stream Analytics.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_stream_analytics" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure Stream Analytics n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Stream Analytics n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

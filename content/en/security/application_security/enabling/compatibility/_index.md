@@ -1,6 +1,5 @@
 ---
 title: Compatibility Requirements
-kind: documentation
 type: multi-code-lang
 further_reading:
 - link: "/security/application_security/troubleshooting"

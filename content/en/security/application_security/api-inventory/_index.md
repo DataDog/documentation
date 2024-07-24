@@ -1,9 +1,10 @@
 ---
 title: API Security Inventory
-kind: documentation
+further_reading:
+- link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
+  tag: "Blog"
+  text: "Mitigate the primary risks to API security"
 ---
-
-<div class="alert alert-info">API Security Inventory is in beta.</div>
 
 ## Overview
 
@@ -108,6 +109,10 @@ This risk is determined by [Software Composition Analysis][3] for the service ho
 ## Performance impact
 
 By default, API Security Inventory evaluates every tenth request (10% sample rate).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /security/application_security/threats/

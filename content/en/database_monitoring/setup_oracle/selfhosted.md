@@ -1,194 +1,124 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted Oracle
-kind: documentation
 description: Install and configure Database Monitoring for Self-Hosted Oracle
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
   text: "Basic Oracle Integration"
-
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
+{{% dbm-oracle-definition %}}
 
-Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
+The Agent collects telemetry directly from the database by logging in as a read-only user.
 
-<div class="alert alert-danger">
-Before completing the steps below, verify that you have met <a href="/database_monitoring/setup_oracle/?tab=linux#prerequisites">the prerequisites</a> for Database Monitoring.
-</div>
+## Before you begin
 
-## Agent database user setup
+{{% dbm-supported-oracle-versions %}}
 
-The Datadog Agent requires read-only access to the database server to collect samples.
+{{% dbm-supported-oracle-agent-version %}}
 
-{{< tabs >}}
-{{% tab "Multi-tenant" %}}
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][6]).
 
-### Create user
+Proxies, load balancers, and connection poolers
+: The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. Each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
-If you installed the legacy Oracle integration, skip this step because the user already exists. You must, however, execute the subsequent steps.
+Data security considerations
+: See [Sensitive information][5] for information about what data the Agent collects from your databases and how to ensure it is secure.
+
+## Setup
+
+Complete the following to enable Database Monitoring with your Oracle database:
+
+1. [Create the Datadog user](#create-the-datadog-user)
+1. [Grant the user access to the database](#grant-the-user-access-to-the-database)
+1. [Create a view](#create-a-view)
+1. [Install the Agent](#install-the-agent)
+1. [Configure the Agent](#configure-the-agent)
+1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+1. [Validate the setup](#validate-the-setup)
+
+### Create the Datadog user
+
+If you already have the legacy Oracle integration installed, skip this step, because the user already exists.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
+{{< tabs >}}
+{{% tab "Multi-tenant" %}}
 ```SQL
 CREATE USER c##datadog IDENTIFIED BY &password CONTAINER = ALL ;
 
 ALTER USER c##datadog SET CONTAINER_DATA=ALL CONTAINER=CURRENT;
 ```
+{{% /tab %}}
 
-### Grant permissions
+{{% tab "Non-CDB" %}}
+```SQL
+CREATE USER datadog IDENTIFIED BY &password ;
+```
+{{% /tab %}}
+
+{{% tab "Oracle 11" %}}
+```SQL
+CREATE USER datadog IDENTIFIED BY &password ;
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Grant the user access to the database
 
 Log on as `sysdba`, and grant the following permissions:
 
-```SQL
-grant create session to c##datadog ;
-grant select on v_$session to c##datadog ;
-grant select on v_$database to c##datadog ;
-grant select on v_$containers to c##datadog;
-grant select on v_$sqlstats to c##datadog ;
-grant select on v_$instance to c##datadog ;
-grant select on dba_feature_usage_statistics to c##datadog ;
-grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
-grant select on V_$PROCESS to c##datadog ;
-grant select on V_$SESSION to c##datadog ;
-grant select on V_$CON_SYSMETRIC to c##datadog ;
-grant select on CDB_TABLESPACE_USAGE_METRICS to c##datadog ;
-grant select on CDB_TABLESPACES to c##datadog ;
-grant select on V_$SQLCOMMAND to c##datadog ;
-grant select on V_$DATAFILE to c##datadog ;
-grant select on V_$SYSMETRIC to c##datadog ;
-grant select on V_$SGAINFO to c##datadog ;
-grant select on V_$PDBS to c##datadog ;
-grant select on CDB_SERVICES to c##datadog ;
-grant select on V_$OSSTAT to c##datadog ;
-grant select on V_$PARAMETER to c##datadog ;
-grant select on V_$SQLSTATS to c##datadog ;
-grant select on V_$CONTAINERS to c##datadog ;
-grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
-grant select on V_$SQL to c##datadog ;
-grant select on V_$PGASTAT to c##datadog ;
-grant select on v_$asm_diskgroup to c##datadog ;
-grant select on v_$rsrcmgrmetric to c##datadog ;
-grant select on v_$dataguard_config to c##datadog ;
-grant select on v_$dataguard_stats to c##datadog ;
-grant select on v_$transaction to c##datadog;
-grant select on v_$locked_object to c##datadog;
-grant select on dba_objects to c##datadog;
-grant select on cdb_data_files to c##datadog;
-grant select on dba_data_files to c##datadog;
-```
+{{< tabs >}}
 
-If you conifgured custom queries that run on a pluggable database (PDB), you must grant `set container` privilege to the `C##DATADOG` user:
+{{% tab "Multi-tenant" %}}
+{{% dbm-oracle-multitenant-permissions-grant-sql %}}
+{{% /tab %}}
 
-```SQL
-connect / as sysdba
-alter session set container = your_pdb ;
-grant set container to c##datadog ;
-```
+{{% tab "Non-CDB" %}}
+{{% dbm-oracle-non-cdb-permissions-grant-sql %}}
+{{% /tab %}}
 
-### Create view
+{{% tab "Oracle 11" %}}
+{{% dbm-oracle-11-permissions-grant-sql %}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Create a view
 
 Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Agent user access to it:
 
-```SQL
-CREATE OR REPLACE VIEW dd_session AS
-SELECT /*+ push_pred(sq) push_pred(sq_prev) */
-  s.indx as sid,
-  s.ksuseser as serial#,
-  s.ksuudlna as username,
-  DECODE(BITAND(s.ksuseidl, 9), 1, 'ACTIVE', 0, DECODE(BITAND(s.ksuseflg, 4096), 0, 'INACTIVE', 'CACHED'), 'KILLED') as status,
-  s.ksuseunm as osuser,
-  s.ksusepid as process,
-  s.ksusemnm as machine,
-  s.ksusemnp as port,
-  s.ksusepnm as program,
-  DECODE(BITAND(s.ksuseflg, 19), 17, 'BACKGROUND', 1, 'USER', 2, 'RECURSIVE', '?') as type,
-  s.ksusesqi as sql_id,
-  sq.force_matching_signature as force_matching_signature,
-  s.ksusesph as sql_plan_hash_value,
-  s.ksusesesta as sql_exec_start,
-  s.ksusesql as sql_address,
-  CASE WHEN BITAND(s.ksusstmbv, POWER(2, 04)) = POWER(2, 04) THEN 'Y' ELSE 'N' END as in_parse,
-  CASE WHEN BITAND(s.ksusstmbv, POWER(2, 07)) = POWER(2, 07) THEN 'Y' ELSE 'N' END as in_hard_parse,
-  s.ksusepsi as prev_sql_id,
-  s.ksusepha as prev_sql_plan_hash_value,
-  s.ksusepesta as prev_sql_exec_start,
-  sq_prev.force_matching_signature as prev_force_matching_signature,
-  s.ksusepsq as prev_sql_address,
-  s.ksuseapp as module,
-    s.ksuseact as action,
-    s.ksusecli as client_info,
-    s.ksuseltm as logon_time,
-    s.ksuseclid as client_identifier,
-    s.ksusstmbv as op_flags,
-    decode(s.ksuseblocker,
-        4294967295, 'UNKNOWN', 4294967294, 'UNKNOWN', 4294967293, 'UNKNOWN', 4294967292, 'NO HOLDER', 4294967291, 'NOT IN WAIT',
-        'VALID'
-    ) as blocking_session_status,
-    DECODE(s.ksuseblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL),
-        4294967292, TO_NUMBER(NULL), 4294967291, TO_NUMBER(NULL), BITAND(s.ksuseblocker, 2147418112) / 65536
-    ) as blocking_instance,
-    DECODE(s.ksuseblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL),
-        4294967292, TO_NUMBER(NULL), 4294967291, TO_NUMBER(NULL), BITAND(s.ksuseblocker, 65535)
-    ) as blocking_session,
-    DECODE(s.ksusefblocker,
-        4294967295, 'UNKNOWN', 4294967294, 'UNKNOWN', 4294967293, 'UNKNOWN', 4294967292, 'NO HOLDER', 4294967291, 'NOT IN WAIT', 'VALID'
-    ) as final_blocking_session_status,
-    DECODE(s.ksusefblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL), 4294967292, TO_NUMBER(NULL),
-        4294967291, TO_NUMBER(NULL), BITAND(s.ksusefblocker, 2147418112) / 65536
-    ) as final_blocking_instance,
-    DECODE(s.ksusefblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL), 4294967292, TO_NUMBER(NULL),
-        4294967291, TO_NUMBER(NULL), BITAND(s.ksusefblocker, 65535)
-    ) as final_blocking_session,
-    DECODE(w.kslwtinwait,
-        1, 'WAITING', decode(bitand(w.kslwtflags, 256), 0, 'WAITED UNKNOWN TIME',
-        decode(round(w.kslwtstime / 10000), 0, 'WAITED SHORT TIME', 'WAITED KNOWN TIME'))
-    ) as STATE,
-    e.kslednam as event,
-    e.ksledclass as wait_class,
-    w.kslwtstime as wait_time_micro,
-    c.name as pdb_name,
-    sq.sql_text as sql_text,
-    sq.sql_fulltext as sql_fulltext,
-    sq_prev.sql_fulltext as prev_sql_fulltext,
-    comm.command_name
-FROM
-  x$ksuse s,
-  x$kslwt w,
-  x$ksled e,
-  v$sql sq,
-  v$sql sq_prev,
-  v$containers c,
-  v$sqlcommand comm
-WHERE
-  BITAND(s.ksspaflg, 1) != 0
-  AND BITAND(s.ksuseflg, 1) != 0
-  AND s.inst_id = USERENV('Instance')
-  AND s.indx = w.kslwtsid
-  AND w.kslwtevt = e.indx
-  AND s.ksusesqi = sq.sql_id(+)
-  AND decode(s.ksusesch, 65535, TO_NUMBER(NULL), s.ksusesch) = sq.child_number(+)
-  AND s.ksusepsi = sq_prev.sql_id(+)
-  AND decode(s.ksusepch, 65535, TO_NUMBER(NULL), s.ksusepch) = sq_prev.child_number(+)
-  AND s.con_id = c.con_id(+)
-  AND s.ksuudoct = comm.command_type(+)
-;
+{{< tabs >}}
 
-GRANT SELECT ON dd_session TO c##datadog ;
-```
+{{% tab "Multi-tenant" %}}
+{{% dbm-multitenant-view-create-sql %}}
+{{% /tab %}}
+
+{{% tab "Non-CDB" %}}
+{{% dbm-non-cdb-view-create-sql %}}
+{{% /tab %}}
+
+{{% tab "Oracle 11" %}}
+{{% dbm-oracle-11-view-create-sql %}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Install the Agent
+
+For installation steps, see the [Agent installation instructions][1].
 
 ### Configure the Agent
 
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
+Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
 
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
+**Note:** The configuration subdirectory for the Agent releases below `7.53.0` is `oracle-dbm.d`.
 
+{{< tabs >}}
+{{% tab "Multi-tenant" %}}
 ```yaml
 init_config:
 instances:
@@ -211,388 +141,49 @@ instances:
 ```
 
 The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
-
-Once all Agent configuration is complete, [restart the Datadog Agent][4].
-
-[1]: /database_monitoring/setup_oracle/#install-agent
-[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
-[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-
 {{% /tab %}}
 
 {{% tab "Non-CDB" %}}
-
-### Create user
-
-If you installed the legacy Oracle integration, skip this step because the user already exists. You must, however, execute the subsequent steps.
-
-Create a read-only login to connect to your server and grant the required permissions:
-
-```SQL
-CREATE USER datadog IDENTIFIED BY &password ;
-```
-
-### Grant permissions
-
-Log on as `sysdba`, and grant the following permissions:
-
-```SQL
-grant create session to datadog ;
-grant select on v_$session to datadog ;
-grant select on v_$database to datadog ;
-grant select on v_$containers to datadog;
-grant select on v_$sqlstats to datadog ;
-grant select on v_$instance to datadog ;
-grant select on dba_feature_usage_statistics to datadog ;
-grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
-grant select on V_$PROCESS to datadog ;
-grant select on V_$SESSION to datadog ;
-grant select on V_$CON_SYSMETRIC to datadog ;
-grant select on CDB_TABLESPACE_USAGE_METRICS to datadog ;
-grant select on CDB_TABLESPACES to datadog ;
-grant select on V_$SQLCOMMAND to datadog ;
-grant select on V_$DATAFILE to datadog ;
-grant select on V_$SYSMETRIC to datadog ;
-grant select on V_$SGAINFO to datadog ;
-grant select on V_$PDBS to datadog ;
-grant select on CDB_SERVICES to datadog ;
-grant select on V_$OSSTAT to datadog ;
-grant select on V_$PARAMETER to datadog ;
-grant select on V_$SQLSTATS to datadog ;
-grant select on V_$CONTAINERS to datadog ;
-grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
-grant select on V_$SQL to datadog ;
-grant select on V_$PGASTAT to datadog ;
-grant select on v_$asm_diskgroup to datadog ;
-grant select on v_$rsrcmgrmetric to datadog ;
-grant select on v_$dataguard_config to datadog ;
-grant select on v_$dataguard_stats to datadog ;
-grant select on v_$transaction to datadog;
-grant select on v_$locked_object to datadog;
-grant select on dba_objects to datadog;
-grant select on cdb_data_files to datadog;
-grant select on dba_data_files to datadog;
-```
-
-### Create view
-
-Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Agent user access to it:
-
-```SQL
-CREATE OR REPLACE VIEW dd_session AS
-SELECT /*+ push_pred(sq) push_pred(sq_prev) */
-  s.indx as sid,
-  s.ksuseser as serial#,
-  s.ksuudlna as username,
-  DECODE(BITAND(s.ksuseidl, 9), 1, 'ACTIVE', 0, DECODE(BITAND(s.ksuseflg, 4096), 0, 'INACTIVE', 'CACHED'), 'KILLED') as status,
-  s.ksuseunm as osuser,
-  s.ksusepid as process,
-  s.ksusemnm as machine,
-  s.ksusemnp as port,
-  s.ksusepnm as program,
-  DECODE(BITAND(s.ksuseflg, 19), 17, 'BACKGROUND', 1, 'USER', 2, 'RECURSIVE', '?') as type,
-  s.ksusesqi as sql_id,
-  sq.force_matching_signature as force_matching_signature,
-  s.ksusesph as sql_plan_hash_value,
-  s.ksusesesta as sql_exec_start,
-  s.ksusesql as sql_address,
-  CASE WHEN BITAND(s.ksusstmbv, POWER(2, 04)) = POWER(2, 04) THEN 'Y' ELSE 'N' END as in_parse,
-  CASE WHEN BITAND(s.ksusstmbv, POWER(2, 07)) = POWER(2, 07) THEN 'Y' ELSE 'N' END as in_hard_parse,
-  s.ksusepsi as prev_sql_id,
-  s.ksusepha as prev_sql_plan_hash_value,
-  s.ksusepesta as prev_sql_exec_start,
-  sq_prev.force_matching_signature as prev_force_matching_signature,
-  s.ksusepsq as prev_sql_address,
-  s.ksuseapp as module,
-    s.ksuseact as action,
-    s.ksusecli as client_info,
-    s.ksuseltm as logon_time,
-    s.ksuseclid as client_identifier,
-    s.ksusstmbv as op_flags,
-    decode(s.ksuseblocker,
-        4294967295, 'UNKNOWN', 4294967294, 'UNKNOWN', 4294967293, 'UNKNOWN', 4294967292, 'NO HOLDER', 4294967291, 'NOT IN WAIT',
-        'VALID'
-    ) as blocking_session_status,
-    DECODE(s.ksuseblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL),
-        4294967292, TO_NUMBER(NULL), 4294967291, TO_NUMBER(NULL), BITAND(s.ksuseblocker, 2147418112) / 65536
-    ) as blocking_instance,
-    DECODE(s.ksuseblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL),
-        4294967292, TO_NUMBER(NULL), 4294967291, TO_NUMBER(NULL), BITAND(s.ksuseblocker, 65535)
-    ) as blocking_session,
-    DECODE(s.ksusefblocker,
-        4294967295, 'UNKNOWN', 4294967294, 'UNKNOWN', 4294967293, 'UNKNOWN', 4294967292, 'NO HOLDER', 4294967291, 'NOT IN WAIT', 'VALID'
-    ) as final_blocking_session_status,
-    DECODE(s.ksusefblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL), 4294967292, TO_NUMBER(NULL),
-        4294967291, TO_NUMBER(NULL), BITAND(s.ksusefblocker, 2147418112) / 65536
-    ) as final_blocking_instance,
-    DECODE(s.ksusefblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL), 4294967292, TO_NUMBER(NULL),
-        4294967291, TO_NUMBER(NULL), BITAND(s.ksusefblocker, 65535)
-    ) as final_blocking_session,
-    DECODE(w.kslwtinwait,
-        1, 'WAITING', decode(bitand(w.kslwtflags, 256), 0, 'WAITED UNKNOWN TIME',
-        decode(round(w.kslwtstime / 10000), 0, 'WAITED SHORT TIME', 'WAITED KNOWN TIME'))
-    ) as STATE,
-    e.kslednam as event,
-    e.ksledclass as wait_class,
-    w.kslwtstime as wait_time_micro,
-    c.name as pdb_name,
-    sq.sql_text as sql_text,
-    sq.sql_fulltext as sql_fulltext,
-    sq_prev.sql_fulltext as prev_sql_fulltext,
-    comm.command_name
-FROM
-  x$ksuse s,
-  x$kslwt w,
-  x$ksled e,
-  v$sql sq,
-  v$sql sq_prev,
-  v$containers c,
-  v$sqlcommand comm
-WHERE
-  BITAND(s.ksspaflg, 1) != 0
-  AND BITAND(s.ksuseflg, 1) != 0
-  AND s.inst_id = USERENV('Instance')
-  AND s.indx = w.kslwtsid
-  AND w.kslwtevt = e.indx
-  AND s.ksusesqi = sq.sql_id(+)
-  AND decode(s.ksusesch, 65535, TO_NUMBER(NULL), s.ksusesch) = sq.child_number(+)
-  AND s.ksusepsi = sq_prev.sql_id(+)
-  AND decode(s.ksusepch, 65535, TO_NUMBER(NULL), s.ksusepch) = sq_prev.child_number(+)
-  AND s.con_id = c.con_id(+)
-  AND s.ksuudoct = comm.command_type(+)
-;
-
-GRANT SELECT ON dd_session TO datadog ;
-```
-### Configure the Agent
-
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
-
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
-
-```yaml
-init_config:
-instances:
-  - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle DB service name
-    username: 'datadog'
-    password: '<PASSWORD>'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-  - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle DB service name
-    username: 'datadog'
-    password: '<PASSWORD>'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-```
-
-Once all Agent configuration is complete, [restart the Datadog Agent][4].
-
-[1]: /database_monitoring/setup_oracle/#install-agent
-[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
-[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-
+{{% dbm-oracle-selfhosted-config %}}
 {{% /tab %}}
 
 {{% tab "Oracle 11" %}}
-
-### Create user
-
-If you installed the legacy Oracle integration, skip this step because the user already exists. You must, however, execute the subsequent steps.
-
-Create a read-only login to connect to your server and grant the required permissions:
-
-```SQL
-CREATE USER datadog IDENTIFIED BY &password ;
-```
-
-### Grant permissions
-
-Log on as `sysdba`, and grant the following permissions:
-
-```SQL
-grant create session to datadog ;
-grant select on v_$session to datadog ;
-grant select on v_$database to datadog ;
-grant select on v_$sqlstats to datadog ;
-grant select on v_$instance to datadog ;
-grant select on dba_feature_usage_statistics to datadog ;
-grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
-grant select on V_$PROCESS to datadog ;
-grant select on V_$SESSION to datadog ;
-grant select on V_$SQLCOMMAND to datadog ;
-grant select on V_$DATAFILE to datadog ;
-grant select on V_$SYSMETRIC to datadog ;
-grant select on V_$SGAINFO to datadog ;
-grant select on V_$OSSTAT to datadog ;
-grant select on V_$PARAMETER to datadog ;
-grant select on V_$SQLSTATS to datadog ;
-grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
-grant select on V_$SQL to datadog ;
-grant select on V_$PGASTAT to datadog ;
-grant select on dba_tablespace_usage_metrics to datadog ;
-grant select on dba_tablespaces to datadog ;
-grant select on v_$asm_diskgroup to datadog ;
-grant select on v_$rsrcmgrmetric to datadog ;
-grant select on v_$dataguard_config to datadog ;
-grant select on v_$dataguard_stats to datadog ;
-```
-
-### Create view
-
-Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Agent user access to it:
-
-```SQL
-CREATE OR REPLACE VIEW dd_session AS
-SELECT /*+ push_pred(sq) push_pred(sq_prev) */
-  s.indx as sid,
-  s.ksuseser as serial#,
-  s.ksuudlna as username,
-  DECODE(BITAND(s.ksuseidl, 9), 1, 'ACTIVE', 0, DECODE(BITAND(s.ksuseflg, 4096), 0, 'INACTIVE', 'CACHED'), 'KILLED') as status,
-  s.ksuseunm as osuser,
-  s.ksusepid as process,
-  s.ksusemnm as machine,
-  s.ksusemnp as port,
-  s.ksusepnm as program,
-  DECODE(BITAND(s.ksuseflg, 19), 17, 'BACKGROUND', 1, 'USER', 2, 'RECURSIVE', '?') as type,
-  s.ksusesqi as sql_id,
-  sq.force_matching_signature as force_matching_signature,
-  s.ksusesph as sql_plan_hash_value,
-  s.ksusesesta as sql_exec_start,
-  s.ksusesql as sql_address,
-  CASE WHEN BITAND(s.ksusstmbv, POWER(2, 04)) = POWER(2, 04) THEN 'Y' ELSE 'N' END as in_parse,
-  CASE WHEN BITAND(s.ksusstmbv, POWER(2, 07)) = POWER(2, 07) THEN 'Y' ELSE 'N' END as in_hard_parse,
-  s.ksusepsi as prev_sql_id,
-  s.ksusepha as prev_sql_plan_hash_value,
-  s.ksusepesta as prev_sql_exec_start,
-  sq_prev.force_matching_signature as prev_force_matching_signature,
-  s.ksusepsq as prev_sql_address,
-  s.ksuseapp as module,
-    s.ksuseact as action,
-    s.ksusecli as client_info,
-    s.ksuseltm as logon_time,
-    s.ksuseclid as client_identifier,
-    s.ksusstmbv as op_flags,
-    decode(s.ksuseblocker,
-        4294967295, 'UNKNOWN', 4294967294, 'UNKNOWN', 4294967293, 'UNKNOWN', 4294967292, 'NO HOLDER', 4294967291, 'NOT IN WAIT',
-        'VALID'
-    ) as blocking_session_status,
-    DECODE(s.ksuseblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL),
-        4294967292, TO_NUMBER(NULL), 4294967291, TO_NUMBER(NULL), BITAND(s.ksuseblocker, 2147418112) / 65536
-    ) as blocking_instance,
-    DECODE(s.ksuseblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL),
-        4294967292, TO_NUMBER(NULL), 4294967291, TO_NUMBER(NULL), BITAND(s.ksuseblocker, 65535)
-    ) as blocking_session,
-    DECODE(s.ksusefblocker,
-        4294967295, 'UNKNOWN', 4294967294, 'UNKNOWN', 4294967293, 'UNKNOWN', 4294967292, 'NO HOLDER', 4294967291, 'NOT IN WAIT', 'VALID'
-    ) as final_blocking_session_status,
-    DECODE(s.ksusefblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL), 4294967292, TO_NUMBER(NULL),
-        4294967291, TO_NUMBER(NULL), BITAND(s.ksusefblocker, 2147418112) / 65536
-    ) as final_blocking_instance,
-    DECODE(s.ksusefblocker,
-        4294967295, TO_NUMBER(NULL), 4294967294, TO_NUMBER(NULL), 4294967293, TO_NUMBER(NULL), 4294967292, TO_NUMBER(NULL),
-        4294967291, TO_NUMBER(NULL), BITAND(s.ksusefblocker, 65535)
-    ) as final_blocking_session,
-    DECODE(w.kslwtinwait,
-        1, 'WAITING', decode(bitand(w.kslwtflags, 256), 0, 'WAITED UNKNOWN TIME',
-        decode(round(w.kslwtstime / 10000), 0, 'WAITED SHORT TIME', 'WAITED KNOWN TIME'))
-    ) as STATE,
-    e.kslednam as event,
-    e.ksledclass as wait_class,
-    w.kslwtstime as wait_time_micro,
-    sq.sql_text as sql_text,
-    sq.sql_fulltext as sql_fulltext,
-    sq_prev.sql_fulltext as prev_sql_fulltext,
-    comm.command_name
-FROM
-  x$ksuse s,
-  x$kslwt w,
-  x$ksled e,
-  v$sql sq,
-  v$sql sq_prev,
-  v$sqlcommand comm
-WHERE
-  BITAND(s.ksspaflg, 1) != 0
-  AND BITAND(s.ksuseflg, 1) != 0
-  AND s.inst_id = USERENV('Instance')
-  AND s.indx = w.kslwtsid
-  AND w.kslwtevt = e.indx
-  AND s.ksusesqi = sq.sql_id(+)
-  AND decode(s.ksusesch, 65535, TO_NUMBER(NULL), s.ksusesch) = sq.child_number(+)
-  AND s.ksusepsi = sq_prev.sql_id(+)
-  AND decode(s.ksusepch, 65535, TO_NUMBER(NULL), s.ksusepch) = sq_prev.child_number(+)
-  AND s.ksuudoct = comm.command_type(+)
-;
-
-GRANT SELECT ON dd_session TO datadog ;
-```
-### Configure the Agent
-
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
-
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
-
-```yaml
-init_config:
-instances:
-  - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle DB service name
-    username: 'datadog'
-    password: '<PASSWORD>'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-  - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle DB service name
-    username: 'datadog'
-    password: '<PASSWORD>'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-```
-
-Once all Agent configuration is complete, [restart the Datadog Agent][4].
-
-[1]: /database_monitoring/setup_oracle/#install-the-agent
-[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
-[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% dbm-oracle-selfhosted-config %}}
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
-### Validate
+Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
-[Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][7] and [Databases][6] page in Datadog to get started.
+### Install or verify the Oracle integration
+
+#### First-time installations
+
+On the Integrations page in Datadog, install the [Oracle integration][7] for your organization. This installs an [Oracle dashboard][2] in your account that can be used to monitor the performance of your Oracle databases.
+
+#### Existing installations
+
+{{% dbm-existing-oracle-integration-setup %}}
+
+### Validate the setup
+
+[Run the Agent's status subcommand][8] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][2] and [Databases][3] page in Datadog to get started.
 
 ## Custom queries
 
-Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][11] to learn more about the configuration options available.
+Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][4] to learn more about the configuration options available.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /database_monitoring/setup_oracle/#install-agent
-[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[5]: /agent/configuration/agent-commands/#agent-status-and-information
-[6]: https://app.datadoghq.com/databases
-[7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
-[11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
+[3]: https://app.datadoghq.com/databases
+[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
+[5]: /database_monitoring/data_collected/#sensitive-information
+[6]: /database_monitoring/agent_integration_overhead/?tab=oracle
+[7]: https://app.datadoghq.com/integrations/oracle
+[8]: /agent/configuration/agent-commands/#agent-status-and-information
+[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 
 ## Further reading
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /security/application_security/risk_management/
   tag: Documentation
   text: Application Vulnerability Management
-kind: documentation
 title: ASM の用語と概念
 ---
 

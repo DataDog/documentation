@@ -6,7 +6,6 @@ further_reading:
 - link: /profiler/compare_profiles/
   tag: ドキュメント
   text: プロファイルの比較
-kind: ガイド
 title: モノリシックサービスで外れ値を隔離する
 ---
 

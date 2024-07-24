@@ -1,13 +1,11 @@
 ---
 aliases:
 - /fr/security/application_security/getting_started/serverless
-code_lang: serverless
-code_lang_weight: 90
 further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: Fonctionnement d'Application Security
-- link: /security/default_rules/#cat-application-security
+- link: /security/default_rules/?category=cat-application-security
   tag: Documentation
   text: Règles Application Security Management prêtes à l'emploi
 - link: /security/application_security/troubleshooting
@@ -16,9 +14,11 @@ further_reading:
 - link: /security/application_security/threats/
   tag: Documentation
   text: Application Threat Management
-kind: documentation
+- link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
+  tag: Blog
+  text: La plateforme de sécurité Datadog propose davantage de fonctionnalités de
+    conformité et de protection contre les menaces pour Google Cloud
 title: Activer ASM pour la surveillance sans serveur
-type: multi-code-lang
 ---
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
@@ -207,7 +207,7 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
           ```
           Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Python37`, `Python38` et `Python39`.
 
-   - **Node**
+   - **Nœud**
        ``` sh
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
@@ -272,7 +272,7 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
           Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Voici la liste des options disponibles pour `RUNTIME` : {{< latest-lambda-layer-version layer="python-versions" >}}.
 .
 
-   - **Node**
+   - **Nœud**
        ``` sh
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
@@ -340,11 +340,11 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
 {{% /tab %}}
 {{< /tabs >}}
 
-## Envoi - Powershell
+## Google Cloud Run
 
 <div class="alert alert-info">La prise en charge de Google Cloud par ASM est disponible en version bêta.</a></div>
 
-### Fonctionnement de `serverless-init`
+### Comment fonctionne `serverless-init`
 
 L'application `serverless-init` utilise un wrapper pour incorporer votre processus et l'exécute en tant que sous-processus. Elle initie un écouteur DogStatsD pour les métriques ainsi qu'un écouteur d'Agent de trace pour les traces. Elle recueille les logs en utilisant un wrapper pour incorporer les flux stdout/stderr de votre application. Une fois le bootstrap terminé, `serverless-init` exécute votre commande en tant que sous-processus.
 
@@ -369,19 +369,19 @@ CMD ["/nodejs/bin/node", "/chemin/vers/votre/application.js"]
 
 #### Explication
 
-1. Copiez `serverless-init` Datadog et collez-le dans votre image Docker.
+1. Copiez le fichier `serverless-init` de Datadog dans votre image Docker.
 
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copiez le traceur Node.JS Datadog et collez-le dans votre image Docker.
+2. Copiez le fichier traceur Node.JS de Datadog dans votre image Docker.
 
    ```dockerfile
    COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
    ```
 
-   Si vous installez directement la bibliothèque de traceur Datadog dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation de traceur manuelle][1], ignorez cette étape.
+   Si vous installez la bibliothèque de traceurs de Datadog directement dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation manuelle du traceur][1], ignorez cette étape.
 
 3. (Facultatif) Ajoutez des tags Datadog.
 
@@ -392,19 +392,19 @@ CMD ["/nodejs/bin/node", "/chemin/vers/votre/application.js"]
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Modifiez le point d'entrée afin d'intégrer votre application au processus `serverless-init` Datadog à l'aide d'un wrapper.
-   **Remarque** : si un point d'entrée est déjà défini au sein de votre Dockerfile, consultez la section [Autre configuration possible)(#alt-node).
+4. Modifiez le point d'entrée pour envelopper votre application dans le processus `serverless-init` de Datadog.
+   **Remarque** : si vous avez déjà défini un point d'entrée dans votre fichier Docker, consultez la section relative à la [configuration alternative](#alt-node).
 
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. Exécutez votre application binaire incorporée au sein du point d'entrée. Adaptez cette ligne en fonction de vos besoins.
+5. Exécutez votre application binaire incorporée au point d'entrée. Adaptez cette ligne à vos besoins.
    ```dockerfile
    CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ```
-#### Autre configuration possible {#alt-node}
-Si un point d'entrée est déjà défini au sein de votre Dockerfile, vous avez également la possibilité de modifier l'argument CMD.
+#### Configuration alternative {#alt-node}
+Si vous avez déjà défini un point d'entrée dans votre fichier Docker, vous pouvez choisir de modifier lʼargument CMD.
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -416,7 +416,7 @@ ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/nodejs/bin/node", "/chemin/vers/votre/application.js"]
 {{< /highlight >}}
 
-Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez intervertir votre point d'entrée et vos arguments CMD. Pour en savoir plus, consultez la section [Fonctionnement de `serverless-init`](#fonctionnement-de-serverless-init).
+Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez préférer lʼéchanger avec les arguments CMD. Pour en savoir plus, consultez la section [Comment `serverless-init` fonctionne](#comment-serverless-init-fonctionne).
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -429,14 +429,14 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/chemin/vers/votre/application.js"]
 {{< /highlight >}}
 
-Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'argument, vous obtiendrez une instrumentation complète.
+Tant que votre commande à exécuter est transmise en tant qu'argument à `datadog-init`, vous bénéficierez d'une instrumentation complète.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Ajoutez les instructions et arguments suivants à votre Dockerfile.
+Ajoutez les instructions et arguments suivants à votre fichier Docker.
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 RUN pip install --target /dd_tracer/python/ ddtrace
@@ -450,16 +450,16 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 
 #### Explication
 
-1. Copiez `serverless-init` Datadog et collez-le dans votre image Docker.
+1. Copiez le fichier `serverless-init` de Datadog dans votre image Docker.
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Installez le traceur Python Datadog.
+2. Installez le traceur Python de Datadog.
    ```dockerfile
    RUN pip install --target /dd_tracer/python/ ddtrace
    ```
-   Si vous installez directement la bibliothèque de traceur Datadog dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation de traceur manuelle][1], ignorez cette étape.
+   Si vous installez la bibliothèque de traceurs de Datadog directement dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation manuelle du traceur][1], ignorez cette étape.
 
 3. (Facultatif) Ajoutez des tags Datadog.
    ```dockerfile
@@ -469,18 +469,18 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Modifiez le point d'entrée afin d'intégrer votre application au processus `serverless-init` Datadog à l'aide d'un wrapper.
-   **Remarque** : si un point d'entrée est déjà défini au sein de votre Dockerfile, consultez la section [Autre configuration possible)(#alt-python).
+4. Modifiez le point d'entrée pour envelopper votre application dans le processus `serverless-init` de Datadog.
+   **Remarque** : si vous avez déjà défini un point d'entrée dans votre fichier Docker, consultez la section relative à la [configuration alternative](#alt-python).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. Exécutez votre application binaire incorporée au sein du point d'entrée et lancée par la bibliothèque de traceur Datadog. Adaptez cette ligne en fonction de vos besoins.
+5. Exécutez votre application binaire incorporée au point d'entrée, lancée par la bibliothèque de traces de Datadog. Adaptez cette ligne à vos besoins.
    ```dockerfile
    CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ```
-#### Autre configuration possible {#alt-python}
-Si un point d'entrée est déjà défini au sein de votre Dockerfile, vous avez également la possibilité de modifier l'argument CMD.
+#### Configuration alternative {#alt-python}
+Si vous avez déjà défini un point d'entrée dans votre fichier Docker, vous pouvez choisir de modifier lʼargument CMD.
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -492,7 +492,7 @@ ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 {{< /highlight >}}
 
-Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez intervertir votre point d'entrée et vos arguments CMD. Pour en savoir plus, consultez la section [Fonctionnement de `serverless-init`](#fonctionnement-de-serverless-init).
+Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez préférer lʼéchanger avec les arguments CMD. Pour en savoir plus, consultez la section [Comment `serverless-init` fonctionne](#comment-serverless-init-fonctionne).
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -505,14 +505,14 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 {{< /highlight >}}
 
-Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'argument, vous obtiendrez une instrumentation complète.
+Tant que votre commande à exécuter est transmise en tant qu'argument à `datadog-init`, vous bénéficierez d'une instrumentation complète.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Ajoutez les instructions et arguments suivants à votre Dockerfile.
+Ajoutez les instructions et arguments suivants à votre fichier Docker.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -526,16 +526,16 @@ CMD ["./mvnw", "spring-boot:run"]
 ```
 #### Explication
 
-1. Copiez `serverless-init` Datadog et collez-le dans votre image Docker.
+1. Copiez le fichier `serverless-init` de Datadog dans votre image Docker.
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Ajoutez le traceur Java Datadog à votre image Docker.
+2. Ajoutez le fichier traceur Java de Datadog dans votre image Docker.
    ```dockerfile
    ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
    ```
-   Si vous installez directement la bibliothèque de traceur Datadog dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation de traceur manuelle][1], ignorez cette étape.
+   Si vous installez la bibliothèque de traceurs de Datadog directement dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation manuelle du traceur][1], ignorez cette étape.
 
 3. (Facultatif) Ajoutez des tags Datadog.
    ```dockerfile
@@ -545,19 +545,19 @@ CMD ["./mvnw", "spring-boot:run"]
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Modifiez le point d'entrée afin d'intégrer votre application au processus `serverless-init` Datadog à l'aide d'un wrapper.
-   **Remarque** : si un point d'entrée est déjà défini au sein de votre Dockerfile, consultez la section [Autre configuration possible)(#alt-java).
+4. Modifiez le point d'entrée pour incorporer votre application au processus `serverless-init` de Datadog.
+   **Remarque** : si vous avez déjà défini un point d'entrée dans votre fichier Docker, consultez la section relative à la [configuration alternative](#alt-java).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. Exécutez votre application binaire incorporée au sein du point d'entrée. Adaptez cette ligne en fonction de vos besoins.
+5. Exécutez votre application binaire incorporée au point d'entrée. Adaptez cette ligne à vos besoins.
    ```dockerfile
    CMD ["./mvnw", "spring-boot:run"]
    ```
 
-#### Autre configuration possible {#alt-java}
-Si un point d'entrée est déjà défini au sein de votre Dockerfile, vous avez également la possibilité de modifier l'argument CMD.
+#### Configuration alternative {#alt-java}
+Si vous avez déjà défini un point d'entrée dans votre fichier Docker, vous pouvez choisir de modifier lʼargument CMD.
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -569,7 +569,7 @@ ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "./mvnw", "spring-boot:run"]
 {{< /highlight >}}
 
-Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez intervertir votre point d'entrée et vos arguments CMD. Pour en savoir plus, consultez la section [Fonctionnement de `serverless-init`](#fonctionnement-de-serverless-init).
+Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez préférer lʼéchanger avec les arguments CMD. Pour en savoir plus, consultez la section [Comment `serverless-init` fonctionne](#comment-serverless-init-fonctionne).
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -582,7 +582,7 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "./mvnw", "spring-boot:run"]
 {{< /highlight >}}
 
-Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'argument, vous obtiendrez une instrumentation complète.
+Tant que votre commande à exécuter est transmise en tant qu'argument à `datadog-init`, vous bénéficierez d'une instrumentation complète.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 
@@ -602,13 +602,13 @@ ENV DD_APPSEC_ENABLED=1
 
 #### Explication
 
-1. Copiez `serverless-init` Datadog et collez-le dans votre image Docker.
+1. Copiez le fichier `serverless-init` de Datadog dans votre image Docker.
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-4. Modifiez le point d'entrée afin d'intégrer votre application au processus `serverless-init` Datadog à l'aide d'un wrapper.
-   **Remarque** : si un point d'entrée est déjà défini au sein de votre Dockerfile, consultez la section [Autre configuration possible)(#alt-go).
+4. Modifiez le point d'entrée pour incorporer votre application au processus `serverless-init` de Datadog.
+   **Remarque** : si vous avez déjà défini un point d'entrée dans votre fichier Docker, consultez la section relative à la [configuration alternative](#alt-go).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
@@ -621,13 +621,13 @@ ENV DD_APPSEC_ENABLED=1
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Exécutez votre application binaire incorporée au sein du point d'entrée. Adaptez cette ligne en fonction de vos besoins.
+4. Exécutez votre application binaire incorporée au point d'entrée. Adaptez cette ligne à vos besoins.
    ```dockerfile
    CMD ["/path/to/your-go-binary"]
    ```
 
-#### Autre configuration possible {#alt-go}
-Si un point d'entrée est déjà défini au sein de votre Dockerfile, vous avez également la possibilité de modifier l'argument CMD.
+#### Configuration alternative {#alt-go}
+Si vous avez déjà défini un point d'entrée dans votre fichier Docker, vous pouvez choisir de modifier lʼargument CMD.
 
 {{< highlight dockerfile "hl_lines=6" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -638,7 +638,7 @@ ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/chemin/vers/votre-binaire-go"]
 {{< /highlight >}}
 
-Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez intervertir votre point d'entrée et vos arguments CMD. Pour en savoir plus, consultez la section [Fonctionnement de `serverless-init`](#fonctionnement-de-serverless-init).
+Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez préférer lʼéchanger avec les arguments CMD. Pour en savoir plus, consultez la section [Comment `serverless-init` fonctionne](#comment-serverless-init-fonctionne).
 
 {{< highlight dockerfile "hl_lines=6-7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -650,14 +650,14 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "/chemin/vers/votre-binaire-go"]
 {{< /highlight >}}
 
-Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'argument, vous obtiendrez une instrumentation complète.
+Tant que votre commande à exécuter est transmise en tant qu'argument à `datadog-init`, vous bénéficierez d'une instrumentation complète.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/go
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Ajoutez les instructions et arguments suivants à votre Dockerfile.
+Ajoutez les instructions et arguments suivants à votre fichier Docker.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -672,16 +672,16 @@ CMD ["dotnet", "helloworld.dll"]
 
 #### Explication
 
-1. Copiez `serverless-init` Datadog et collez-le dans votre image Docker.
+1. Copiez le fichier `serverless-init` de Datadog dans votre image Docker.
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copiez le traceur .NET Datadog et collez-le dans votre image Docker.
+2. Copiez le fichier traceur .NET de Datadog dans votre image Docker.
    ```dockerfile
    COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
    ```
-   Si vous installez directement la bibliothèque de traceur Datadog dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation de traceur manuelle][1], ignorez cette étape.
+   Si vous installez la bibliothèque de traceurs de Datadog directement dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation manuelle du traceur][1], ignorez cette étape.
 
 3. (Facultatif) Ajoutez des tags Datadog.
    ```dockerfile
@@ -691,18 +691,18 @@ CMD ["dotnet", "helloworld.dll"]
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Modifiez le point d'entrée afin d'intégrer votre application au processus `serverless-init` Datadog à l'aide d'un wrapper.
-   **Remarque** : si un point d'entrée est déjà défini au sein de votre Dockerfile, consultez la section [Autre configuration possible)(#alt-dotnet).
+4. Modifiez le point d'entrée pour incorporer votre application au processus `serverless-init` de Datadog.
+   **Remarque** : si vous avez déjà défini un point d'entrée dans votre fichier Docker, consultez la section relative à la [configuration alternative](#alt-dotnet).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. Exécutez votre application binaire incorporée au sein du point d'entrée. Adaptez cette ligne en fonction de vos besoins.
+5. Exécutez votre application binaire incorporée au point d'entrée. Adaptez cette ligne à vos besoins.
    ```dockerfile
    CMD ["dotnet", "helloworld.dll"]
    ```
-#### Autre configuration possible {#alt-dotnet}
-Si un point d'entrée est déjà défini au sein de votre Dockerfile, vous avez également la possibilité de modifier l'argument CMD.
+#### Configuration alternative {#alt-dotnet}
+Si vous avez déjà défini un point d'entrée dans votre fichier Docker, vous pouvez choisir de modifier lʼargument CMD.
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -714,7 +714,7 @@ ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "dotnet", "helloworld.dll"]
 {{< /highlight >}}
 
-Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez intervertir votre point d'entrée et vos arguments CMD. Pour en savoir plus, consultez la section [Fonctionnement de `serverless-init`](#fonctionnement-de-serverless-init).
+Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez préférer lʼéchanger avec les arguments CMD. Pour en savoir plus, consultez la section [Comment `serverless-init` fonctionne](#comment-serverless-init-fonctionne).
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -727,16 +727,16 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "dotnet", "helloworld.dll"]
 {{< /highlight >}}
 
-Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'argument, vous obtiendrez une instrumentation complète.
+Tant que votre commande à exécuter est transmise en tant qu'argument à `datadog-init`, vous bénéficierez d'une instrumentation complète.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-[Effectuez une installation manuelle][1] du traceur Ruby avant de déployer votre application. Consultez l'[exemple d'application][2].
+[Installez manuellement][1] le traceur Ruby avant de déployer votre application. Référez-vous à l'[exemple d'application][2].
 
-Ajoutez les instructions et arguments suivants à votre Dockerfile.
+Ajoutez les instructions et arguments suivants à votre fichier Docker.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -751,7 +751,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 
 #### Explication
 
-1. Copiez `serverless-init` Datadog et collez-le dans votre image Docker.
+1. Copiez le fichier `serverless-init` de Datadog dans votre image Docker.
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
@@ -764,23 +764,23 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
    ENV DD_VERSION=1
    ```
 
-3. Cette variable d'environnement est requise pour le bon fonctionnement de la propagation des traces dans Cloud Run. Pensez à bien définir cette variable pour tous les services en aval instrumentés par Datadog.
+3. Cette variable dʼenvironnement est nécessaire pour que la propagation des traces fonctionne correctement dans Cloud Run. Veillez à définir cette variable pour tous les services en aval instrumentés par Datadog.
    ```dockerfile
    ENV DD_TRACE_PROPAGATION_STYLE=datadog
    ```
 
-4. Modifiez le point d'entrée afin d'intégrer votre application au processus `serverless-init` Datadog à l'aide d'un wrapper.
-   **Remarque** : si un point d'entrée est déjà défini au sein de votre Dockerfile, consultez la section [Autre configuration possible)(#alt-ruby).
+4. Modifiez le point d'entrée pour incorporer votre application au processus `serverless-init` de Datadog.
+   **Remarque** : si vous avez déjà défini un point d'entrée dans votre fichier Docker, consultez la section relative à la [configuration alternative](#alt-ruby).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
-5. Exécutez votre application binaire incorporée au sein du point d'entrée. Adaptez cette ligne en fonction de vos besoins.
+5. Exécutez votre application binaire incorporée au point d'entrée. Adaptez cette ligne à vos besoins.
    ```dockerfile
    CMD ["rails", "server", "-b", "0.0.0.0"]
    ```
-#### Autre configuration possible {#alt-ruby}
-Si un point d'entrée est déjà défini au sein de votre Dockerfile, vous avez également la possibilité de modifier l'argument CMD.
+#### Configuration alternative {#alt-ruby}
+Si vous avez déjà défini un point d'entrée dans votre fichier Docker, vous pouvez choisir de modifier lʼargument CMD.
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -792,7 +792,7 @@ ENV DD_TRACE_PROPAGATION_STYLE=datadog
 CMD ["/app/datadog-init", "rails", "server", "-b", "0.0.0.0"]
 {{< /highlight >}}
 
-Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez intervertir votre point d'entrée et vos arguments CMD. Pour en savoir plus, consultez la section [Fonctionnement de `serverless-init`](#fonctionnement-de-serverless-init).
+Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez préférer lʼéchanger avec les arguments CMD. Pour en savoir plus, consultez la section [Comment `serverless-init` fonctionne](#comment-serverless-init-fonctionne).
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -805,7 +805,7 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "rails", "server", "-b", "0.0.0.0"]
 {{< /highlight >}}
 
-Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'argument, vous obtiendrez une instrumentation complète.
+Tant que votre commande à exécuter est transmise en tant qu'argument à `datadog-init`, vous bénéficierez d'une instrumentation complète.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
 [2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
@@ -813,7 +813,7 @@ Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Ajoutez les instructions et arguments suivants à votre Dockerfile.
+Ajoutez les instructions et arguments suivants à votre fichier Docker.
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
@@ -823,33 +823,33 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 
-# utiliser la commande suivante pour une image basée sur Apache et sur mod_php
+# use the following for an Apache and mod_php based image
 RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["apache2-foreground"]
 
-# utiliser la commande suivante pour une image basée sur Nginx et sur php-fpm
+# use the following for an Nginx and php-fpm based image
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 EXPOSE 8080
 CMD php-fpm; nginx -g daemon off;
 ```
 
-**Remarque** : le point d'entrée `datadog-init` intègre votre processus à l'aide d'un wrapper et recueille les logs à partir de celui-ci. Pour garantir le bon fonctionnement des logs, assurez-vous que vos processus Apache, Nginx ou PHP écrivent le résultat vers `stdout`.
+**Remarque** : le point d'entrée `datadog-init` incorpore votre processus et collecte des logs à partir de celui-ci. Pour que les logs fonctionnent correctement, assurez-vous que vos processus Apache, Nginx ou PHP écrivent leurs sorties dans `stdout`.
 
 #### Explication
 
 
-1. Copiez `serverless-init` Datadog et collez-le dans votre image Docker.
+1. Copiez le fichier `serverless-init` de Datadog dans votre image Docker.
    ```dockerfile
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copiez et installez le traceur PHP Datadog.
+2. Copiez et installez le traceur PHP de Datadog.
    ```dockerfile
    ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
    RUN php /datadog-setup.php --php-bin=all
    ```
-   Si vous installez directement la bibliothèque de traceur Datadog dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation de traceur manuelle][1], ignorez cette étape.
+   Si vous installez la bibliothèque de traceurs de Datadog directement dans votre application, comme indiqué dans les [instructions relatives à l'instrumentation manuelle du traceur][1], ignorez cette étape.
 
 3. (Facultatif) Ajoutez des tags Datadog.
    ```dockerfile
@@ -858,29 +858,29 @@ CMD php-fpm; nginx -g daemon off;
    ENV DD_VERSION=1
    ```
 
-4. Modifiez le point d'entrée afin d'intégrer votre application au processus `serverless-init` Datadog à l'aide d'un wrapper.
-   **Remarque** : si un point d'entrée est déjà défini au sein de votre Dockerfile, consultez la section [Autre configuration possible)(#alt-php).
+4. Modifiez le point d'entrée pour incorporer votre application au processus `serverless-init` de Datadog.
+   **Remarque** : si vous avez déjà défini un point d'entrée dans votre fichier Docker, consultez la section relative à la [configuration alternative](#alt-php).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
 5. Exécutez votre application.
 
-   Utilisez la commande suivante pour une image basée sur Apache et mod_php :
+   Utilisez ce qui suit pour une image basée sur Apache et mod_php :
    ```dockerfile
    RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
    EXPOSE 8080
    CMD ["apache2-foreground"]
    ```
 
-   Utilisez la commande suivante pour une image basée sur Nginx et php-fpm :
+   Utilisez ce qui suit pour une image basée sur Nginx et php-fpm :
    ```dockerfile
    RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
    EXPOSE 8080
    CMD php-fpm; nginx -g daemon off;
    ```
-#### Autre configuration possible {#alt-php}
-Si un point d'entrée est déjà défini au sein de votre Dockerfile et que vous utilisez une image basée sur Apache et mod_php, vous avez également la possibilité de modifier l'argument CMD.
+#### Configuration alternative {#alt-php}
+Si vous avez déjà défini un point d'entrée dans votre fichier Docker, et si vous utilisez une image basée sur Apache et mod_php, vous pouvez choisir de modifier lʼargument CMD.
 
 {{< highlight dockerfile "hl_lines=9" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -894,7 +894,7 @@ EXPOSE 8080
 CMD ["/app/datadog-init", "apache2-foreground"]
 {{< /highlight >}}
 
-Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez intervertir votre point d'entrée et vos arguments CMD. Pour en savoir plus, consultez la section [Fonctionnement de `serverless-init`](#fonctionnement-de-serverless-init).
+Si vous souhaitez que votre point d'entrée soit également instrumenté, vous pouvez préférer lʼéchanger avec les arguments CMD. Pour en savoir plus, consultez la section [Comment `serverless-init` fonctionne](#comment-serverless-init-fonctionne).
 
 {{< highlight dockerfile "hl_lines=7 12 17" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -905,18 +905,18 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 
-# utiliser la commande suivante pour une image basée sur Apache et mod_php
+# Utilisez ce qui suit pour une image basée sur Apache et mod_php :
 RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["your_entrypoint.sh", "apache2-foreground"]
 
-# utiliser la commande suivante pour une image basée sur Nginx et php-fpm
+# Utilisez ce qui suit pour une image basée sur Nginx et php-fpm :
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 EXPOSE 8080
 CMD your_entrypoint.sh php-fpm; your_entrypoint.sh nginx -g daemon off;
 {{< /highlight >}}
 
-Tant que votre commande à exécuter est transmise à `datadog-init` en tant qu'argument, vous obtiendrez une instrumentation complète.
+Tant que votre commande à exécuter est transmise en tant qu'argument à `datadog-init`, vous bénéficierez d'une instrumentation complète.
 
 [1]: /fr/tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
 
@@ -944,12 +944,12 @@ Pour les applications Azure App Service Web Linux qui ont été développées à
 
 Définissez les valeurs ci-dessous dans la variable d'environnement `DD_START_APP`. Les exemples ci-dessous s'appliquent à l'application `datadog-demo`, le cas échéant.
 
-| Runtime   | Exemple de valeur `DD_START_APP`                                                               | Description                                                                                                                                                                                                                        |
+| Runtime   | Exemple de valeur `DD_START_APP`                                                               | Rôle                                                                                                                                                                                                                        |
 |-----------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| .NET   | `node ./bin/www`                                                                           | Exécute le [fichier de configuration Node PM2][12] ou votre fichier de script.                                                                                                                                                                   |
+| Node.js   | `node ./bin/www`                                                                           | Exécute le [fichier de configuration Node PM2][12] ou votre fichier de script.                                                                                                                                                                   |
 | .NET Core | `dotnet datadog-demo.dll`                                                                  | Exécute un fichier `.dll` qui reprend le nom de votre application Web par défaut. <br /><br /> **Remarque** : le nom du fichier `.dll` indiqué dans la commande doit correspondre au nom de votre fichier `.dll`. Dans certaines situations, ce nom est différent de celui de votre application Web;         |
 | PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Copie le secret à l'emplacement pertinent et lance l'application.                                                                                                                                                                           |
-| Collecte d'erreurs du navigateur    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | [Script de lancement][13] personnalisé. Cet exemple repose sur une commande Gunicorn permettant de lancer une application Django.                                                                                                                                      |
+| Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | [Script de lancement][13] personnalisé. Cet exemple repose sur une commande Gunicorn permettant de lancer une application Django.                                                                                                                                      |
 | Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | La commande permettant de lancer votre application. Elle n'est pas requise pour les applications exécutées dans Tomcat.                                                                                                                                                                                                  |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
@@ -985,13 +985,11 @@ Téléchargez le fichier [`datadog_wrapper`][8] depuis la page des versions, pui
 
 ## Tester la détection des menaces
 
-Pour voir la détection des menaces Application Security Management en action, envoyez des patterns d'attaque connus sur votre application. Par exemple, envoyez un en-tête HTTP avec la valeur `acunetix-product` pour déclencher une tentative d'[attaque par analyse des vulnérabilités][5] :
+Pour voir la détection des menaces Application Security Management en action, envoyez des patterns d'attaque connus sur votre application. Par exemple, envoyez une requête avec lʼen-tête de lʼAgent de lʼutilisateur avec la valeur `dd-test-scanner-log` pour déclencher une tentative d'[attaque par analyse des vulnérabilités][5] :
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://url-de-votre-fonction/route-existante
+   curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```
 Quelques minutes après avoir activé votre application et envoyé les patterns d'attaque, **des informations sur les menaces s'affichent dans l'[Application Signals Explorer][3]**.
-
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="La page des détails des signaux de sécurité, avec des tags, des métriques, des suggestions d'étapes à suivre, ainsi que les adresses IP malveillantes associées à une menace." style="width:100%;" >}}
 
 ## Pour aller plus loin
 

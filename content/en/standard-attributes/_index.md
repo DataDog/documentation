@@ -1605,7 +1605,7 @@ attributes:
     description: The name of the primary table that the operation is acting upon, including the database name (if applicable).
     product_source:
       - icon-apm
-    type: number
+    type: string
     domain: Database spans
     
   - name: db.row_count

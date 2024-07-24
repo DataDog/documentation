@@ -11,33 +11,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: ブログ
   text: Datadog Container Monitoring のコンテナイメージによるトラブルシューティングワークフローの強化
-kind: ドキュメント
 title: Cloud Security Management Vulnerabilities のトラブルシューティング
 ---
 
 ## 概要
 
 Cloud Security Management (CSM) Vulnerabilities に関する問題が発生した場合は、以下のトラブルシューティングガイドラインを使用してください。さらにサポートが必要な場合は、[Datadog サポート][1]にお問い合わせください。
-
-## CSM Vulnerabilities が有効になっていることを確認する
-
-[Agent を脆弱性スキャン用に構成する][2]ためのドキュメントを確認し、ホストとコンテナがソフトウェア部品表 (SBOM) の収集用に構成されていることを確認してください。さらに、アプリ内の [Cloud Security Management][3] の説明を確認し、初期セットアップのすべての手順が完了していることを確認してください。
-
-## 前提条件
-
-CSM Vulnerabilities の前提条件がすべて満たされていることを確認します。
-
-| コンポーネント                | バージョン/要件                     |
-| ------------------------ | ----------------------------------------|
-| [Helm Chart][6]            | v3.49.6 以降 (Kubernetes のみ)      |
-| [containerd][7]              | v1.5.6 以降 (Kubernetes とホストのみ)|</br>
-
-CSM Vulnerabilities は以下の環境では**利用できません**。
-
-  - ログの収集
-  - AWS Fargate 
-  - CRI-O ランタイム
-  - podman ランタイム
 
 ## エラーメッセージ
 
@@ -84,5 +63,3 @@ ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 
 [2]: /ja/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
-[6]: /ja/security/cloud_security_management/troubleshooting
-[7]: /ja/containers/kubernetes/installation/?tab=helm

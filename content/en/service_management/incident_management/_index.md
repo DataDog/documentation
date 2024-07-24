@@ -1,6 +1,5 @@
 ---
 title: Incident Management
-kind: documentation
 description: Create and manage incidents
 aliases:
 - /monitors/incident_management/
@@ -185,6 +184,7 @@ In addition to integrating with [Slack][7], Incident Management also integrates 
 - [Jira][15] to create a Jira ticket for an incident.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Statuspage][19] to create and update Statuspage incidents.
+- [ServiceNow][20] to create a ServiceNow ticket for an incident.
 
 ## Ready to try it out?
 
@@ -213,3 +213,4 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [17]: /integrations/webhooks/#sending-sms-through-twilio
 [18]: /getting_started/incident_management
 [19]: /integrations/statuspage/
+[20]: /integrations/servicenow/

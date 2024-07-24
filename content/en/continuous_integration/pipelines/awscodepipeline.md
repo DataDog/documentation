@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a AWS CodePipeline Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/codepipeline
 further_reading:
@@ -9,7 +8,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/"
       tag: "Blog"
       text: "Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility"
@@ -19,13 +18,28 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Partial pipelines**: View partially retried executions
+[AWS CodePipeline][1] is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates.
+
+Set up tracing on AWS CodePipeline to collect data about pipeline executions, analyze performance bottlenecks or operational issues, and monitor your deployment workflows.
+
+### Compatibility
+
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
+| *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#enable-log-correlation). |
+| [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
+
+*AWS CodePipeline running pipelines don't have Git information until they have finished.\
+**AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
 
 ## Configure the Datadog integration
 
 To set up the integration between [AWS CodePipeline][1] and Datadog CI Visibility, create two AWS resources:
+
 1. [API Destination][2]: an HTTP endpoint pointing to Datadog's intake.
 2. [AWS EventBridge Rule][3]: a rule that forwards CodePipeline events to the API Destination.
 
@@ -59,11 +73,11 @@ For more information about monitoring pipeline events, see the [official AWS gui
    }
    ```
    The JSON above sets up the integration for all of your pipelines. To restrict the set of pipelines,
-   follow the [Only monitor specific pipelines][6] section below.
+   follow the [Only monitor specific pipelines][7] section below.
 6. Click **Next**.
 7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination**
 and select the API destination that you have created in the previous step. Alternatively, you can also create the API destination
-by following the steps outlined in the [Create the API Destination][7] section.
+by following the steps outlined in the [Create the API Destination][6] section.
 8. Under **Headers Parameters**, click **Add header parameter**. Input `DD-CI-PROVIDER-AWSCODEPIPELINE` as the key and `true` as the value.
 9. Choose **Create a new role for this specific resource** (or use an existing one).
 10. Review that the information is correct and create the rule.
@@ -99,17 +113,25 @@ Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.Pipe
 
 The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. For more information on working with variables, see the [official AWS guide][10].
 
+### Enable log correlation
+
+The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see the [AWS log forwarding guide][16].
+
+<div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
+
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the <code>source:codebuild</code> and <code>sourcecategory:aws</code> tags.</div>
+
+<div class="alert alert-info"><strong>Note</strong>: Job log collection is not available for <a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI-compliant organizations.</a></div>
+
 ## Visualize pipeline data in Datadog
 
-View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after the pipelines finish.
+View your data on the [**CI Pipeline List**][11] and [**Executions**][12] pages after the pipelines finish.
 
-**Note**: The Pipelines page only shows data for the [default branch][13] of each repository.
+The **CI Pipeline List** page shows data for only the [default branch][13] of each repository.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
 
 [1]: https://aws.amazon.com/codepipeline/
 [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
@@ -124,3 +146,8 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [11]: https://app.datadoghq.com/ci/pipelines
 [12]: https://app.datadoghq.com/ci/pipeline-executions
 [13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
+[14]: /glossary/#partial-retry
+[15]: /glossary/#running-pipeline
+[16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[17]: /glossary/#approval-wait-time
+

@@ -1,6 +1,5 @@
 ---
 title: RUM Explorer
-kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
@@ -47,7 +46,7 @@ To start creating queries and using facets, see [Search Syntax][3].
 
 Select a visualization for your filters and aggregations that displays your RUM events in a helpful perspective for you to uncover decisive information. 
 
-For example, you can view RUM events in a list, organize RUM data into columns, and see RUM data in a timeseries graph that displays your RUM metrics data over time. 
+For example, you can view RUM events in a list, organize RUM data into columns, and see RUM data in a timeseries graph that displays your RUM telemetry over time. 
 
 To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualizations][4].
 

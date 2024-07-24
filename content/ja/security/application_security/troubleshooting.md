@@ -14,7 +14,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog における Application Security Management の仕組み
-kind: documentation
 title: Application Security Management のトラブルシューティング
 ---
 

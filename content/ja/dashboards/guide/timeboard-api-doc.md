@@ -2,7 +2,6 @@
 aliases:
 - /ja/graphing/faq/timeboard-api-doc
 - /ja/graphing/guide/timeboard-api-doc
-kind: ガイド
 title: タイムボード API
 ---
 

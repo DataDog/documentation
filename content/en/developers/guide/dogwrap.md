@@ -1,7 +1,7 @@
 ---
 title: Dogwrap
 description: "Call commands and generate events from their results with Dogwrap"
-kind: guide
+
 aliases:
 - /developers/faq/can-i-call-scripts-and-generate-events-from-their-results
 - /dashboards/faq/how-do-i-track-cron-jobs

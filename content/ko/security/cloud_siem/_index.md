@@ -23,7 +23,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
   tag: 블로그
   text: 클라우드 환경에 대한 충분한 보안 커버리지 구축
-kind: 설명서
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석에 대한 DNS 모니터링
 title: Cloud SIEM
 ---
 ## 개요
@@ -36,14 +38,14 @@ Datadog Cloud SIEM(보안 정보 및 이벤트 관리)은 개발자, 운영 및 
 
 ## 시작하기
 
-{{< whatsnext >}}
-  {{< nextlink href="/getting_started/cloud_siem/">}}Cloud SIEM 가이드로 시작하기{{< /nextlink >}}
-  {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/">}}Cloud SIEM용 AWS 설정하기{{< /nextlink >}}
-  {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/">}}Cloud SIEM용 Google Cloud 설정하기{{< /nextlink >}}
-  {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/">}}Cloud SIEM용 Azure 설정하기{{< /nextlink >}}
-  {{< nextlink href="/integrations/">}}특정 통합을 검색하여 로그 수집을 설정하기{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules#cat-cloud-siem-log-detection">}}즉시 사용 가능한 Cloud SIEM 탐지 규칙 사용하기{{< /nextlink >}}
-  {{< nextlink href="/security/detection_rules">}}Create your own custom detection rules{{< /nextlink >}}
+{{< whatsnext desc="Cloud SIEM을 시작하려면 다음 문서를 참조하세요:" >}}
+  {{< nextlink href="/getting_started/cloud_siem/">}}Cloud SIEM 시작을 위한 가이드{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/">}}Cloud SIEM을 위한 AWS 설정{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/">}}Cloud SIEM을 위한 Google Cloud 설정{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/">}}Cloud SIEM을 위한 Azure 설정{{< /nextlink >}}
+  {{< nextlink href="/integrations/">}}특정 통합을 검색하여 로그 수집 설정{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules#cat-cloud-siem-log-detection">}}기본 Cloud SIEM 감지 규칙 사용{{< /nextlink >}}
+  {{< nextlink href="/security/detection_rules">}}나만의 맞춤형 감지 규칙 만들기{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

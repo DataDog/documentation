@@ -1,6 +1,5 @@
 ---
 title: 正規表現を使用した NDM タグ
-kind: ガイド
 aliases:
   - /ja/network_performance_monitoring/devices/guide/tags-with-regex/
 further_reading:

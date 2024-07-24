@@ -21,7 +21,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대시보드를 통해 보다 나은 시각화를 위한 대화형 세션 참여
-kind: 설명서
 title: 대시보드 시작하기
 ---
 
@@ -49,7 +48,7 @@ title: 대시보드 시작하기
 
 Datadog는 바로 사용 가능한 기능 및 통합용 대시보드를 다양하게 지원합니다. 모니터링하는 인프라스트럭처가 있는 경우 Datadog의 바로 사용 가능한 대시보드를 살펴보세요.
 
-1. **Dashboards > Dashboards list**로 이동해 추가한 통합의 이름을 검색합니다(예: `Redis`). 또는 `RUM` 등의 사용하는 기능 이름을 찾아보세요. 
+1. Datadog에서 [대시보드 목록 페이지][2]로 이동한 다음 추가한 통합 이름을 검색합니다. 예를 들어 `Redis` 또는 `RUM` 등 사용하는 기능이 될 수 있습니다.
 2. 검색 결과에서 *Preset*이라고 표시된 대시보드를 찾아 원하는 답이 표시된 그래프가 있는지 확인합니다.
 3. 즉시 사용 가능한 대시보드의 제목 드롭다운 메뉴에서 링크를 탐색하여 자세한 활용 방법을 찾아보세요.
 
@@ -67,19 +66,19 @@ Datadog는 바로 사용 가능한 기능 및 통합용 대시보드를 다양�
 
 ## 메트릭 자세히 알아보기
 
-Datadog는 통합을 통해 인프라스트럭처와 애플리케이션에서 [메트릭][2]을 수집합니다. 수집된 메트릭은 통합의 README 파일에 기록됩니다. [메트릭 익스플로러][3]나 대시보드를 만들 때 메트릭이 있는데 해당 메트릭에 관해 알고 싶으면 통합 문서에서 찾아볼 수 있습니다.
+통합을 통해 Datadog는 인프라스트럭처 및 애플리케이션에서 [메트릭][3]을 수집합니다. 수집된 메트릭은 통합의 README 파일에 기록됩니다. [메트릭 탐색기][4]에서 메트릭을 발견했거나 대시보드에서 생성하여 해당 메트릭이 어떤 메트릭인지 알아보려면 통합 설명서에서 찾아보세요.
 
-예를 들어, 메트릭 `aws.s3.first_byte_latency`의 시간 그래프를 보고 있다고 합시다. 해당 설명을 보려면 Amazon S3 통합 README의 [수집된 데이터][4] 섹션으로 이동합니다. `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
+예를 들어, `aws.s3.first_byte_latency` 메트릭의 시간 그래프를 보고 있다고 가정합니다. Amazon S3 통합 README의 [수집된 데이터][5] 섹션으로 이동하여 이 설명을 확인합니다. `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
 
 ## 위젯 추가 및 표시 방법 설정
 
-대시보드에 추가할 메트릭을 선택했다면 다양한 [위젯 유형][5], [쿼리][6], [함수][7], [집계 방식][8]을 시도해보면서 질문에 가장 적절한 답을 제시하는 방향으로 데이터를 표시합니다.
+대시보드에 몇몇 메트릭을 추가하한 후, 다양한 [위젯 유형][6], [쿼리][8] 및 [집계 접근 방식][9]으로 실험하여 질문에 대한 최상의 답을 제공할 수 있는 방법으로 데이터를 표시하세요.
 
-템플릿 변수를 특정하면 다양한 시나리오에서 원하는 정보를 보여주는 대시보드를 만들 수 있습니다. 예를 들면 사용자가 대시보드의 변수 드롭다운에서 선택한 데이터센터의 위치, 모든 정보를 정리하여 지연 시간 메트릭을 표시하는 시간 그래프를 만들 수 있습니다. 자세한 정보는 [템플릿 변수][9] 가이드를 참고하세요.
+템플릿 변수를 지정하여 여러 시나리오에 대한 답변을 단일 대시보드에서 확인할 수 있습니다. 예를 들어, 대시보드 변수 드롭다운에서 아용자가 선택한 특정 데이터 센터 지역 또는 모든 데이터 센터의 지연 메트릭을 표시하는 시간 그래프를 생성할 수 있습니다. 자세한 정보는 [템플릿 변수][10]를 참조하세요.
 
-Y축의 범위, 색상, 범례를 조정하거나 마커나 이벤트 오버레이를 이용하여 그래프를 쉽게 읽을 수 있도록 조정할 수 있습니다. [시계열][11]이나 [기타 위젯][5]을 커스텀하는 방법을 자세히 알아보려면 [대시보드 문서][10]를 참고하세요.
+Y축 범위, 색상 또는 레전드를 조정하여 그래프를 더 쉽게 읽을 수 있도록 만들 수 있습니다. 또는 마커나 이벤트 오버레이를 추가할 수도 있습니다. [시계열][12] 및 [기타 위젯][6]을 커스터마이즈하고 세분화할 수 있는 모든 방법은 [대시보드 설명서][11]를 참조하세요.
 
-이러한 기법을 자세히 알아보고 사례를 확인하고 싶다면 온라인 학습 코스 [더 나은 대시보드 구축하기][12]에 등록하세요.
+이러한 기법에 대한 자세한 설명과 예시는 온라인 학습 과정 [더 나은 대시보드 빌드][13]에 등록하세요.
 
 ## 기타 위젯 사용해보기
 
@@ -92,10 +91,10 @@ Y축의 범위, 색상, 범례를 조정하거나 마커나 이벤트 오버레�
  - **표**: 메트릭 목록을 태그 키별로 그룹화하여 표시합니다.
  - **상위 목록**: 예를 들어 가장 용량이 적은 호스트, 가장 많은 오류가 발생하는 서비스, 404를 가장 많이 반환하는 URL 등을 표시할 수 있습니다.
  - **호스트 맵**: 호스트 통합 또는 서비스 상태를 색상별로 나타내는 등, 인프라스트럭처의 호스트를 다이어그램으로 표시합니다.
- - **서비스 수준 목표(SLO)**: SLO 요약 위젯을 활용하여 목표치와 비교했을 때 팀이 거둔 실적을 표시하고, SLI 메트릭에 대한 자세한 내용을 표시하는 추가 위젯으로 그룹화합니다.
+ - **서비스 수준 목표(SLO)**: SLO 위젯을 통해 목표 대비 팀 성과를 표시하고 추가 위젯을 그룹화하여 SLI 메트릭에 대한 상세 정보를 표시할 수 있습니다.
  - **분포**: 컨테이너화된 환경에서 발생하는 다양한 이벤트 수와 각 서비스의 주요 오류 개수, 웹사이트 플로우(2페이지, 3페이지, 4페이지를 연 사용자 수), 레이턴시의 백분위 버킷 등을 히스토그램으로 보여줍니다.
 
-더 자세한 정보와 그래프 설정 방법의 예시는 [위젯][5] 사이트에서 확인할 수 있습니다.
+이러한 그래프를 설정하는 방법에 대한 자세한 정보와 예시는 [위젯][6]을 참조하세요.
 
 ## 정렬, 연결, 분석
 
@@ -111,19 +110,19 @@ Y축의 범위, 색상, 범례를 조정하거나 마커나 이벤트 오버레�
 
 ### Datadog 사이트 외부로 대시보드 공유하기
 
-대시보드 내보내기 메뉴에서 **Configure Public URL**을 클릭하여 큰 스크린이나 Datadog 계정이 없는 사람들과 공유할 수 있는 URL을 만들 수 있습니다. 자세한 내용은 [대시보드 공유][13]을 참고하세요.
+대시보드 내보내기 메뉴에서 **공용 URL 설정**을 클릭하여 큰 화면에 공유하려거나 Datadog 계정이 없는 사람들에게 공유할 URL을 생성하세요. 자세한 정보는 [대시보드 공유하기][14]를 참조하세요.
 
-[Slack 통합][14]을 사용해 대시보드, 모니터, 인시던트와 같은 기타 Datadog 기능을 Slack 채널로 불러와 팀 내에서 소통할 수 있습니다.
+[Slack 통합][15]을 사용해 팀과의 커뮤니케이션을 통합하여 대시보드와 기타 Datadog 기능을 가져오세요. 모니터와 인시던트 등을 Slack 채널로 가져올 수 있습니다.
 
 ### 여러 대시보드를 빠르게 만들기
 
 모든 대시보드는 JSON으로 표현됩니다. 따라서 설정 메뉴에서 복사하거나 내보낼 수 있습니다. 대시보드의 각 위젯도 JSON 정의를 사용하며, 위젯 편집기(연필 아이콘)를 열고 **Graph your data** 아래 JSON 탭을 클릭하여 확인하고 편집할 수 있습니다.
 
-모든 위젯과 대시보드는 JSON으로 표현되기 때문에 [대시보드 API][15]를 사용해 프로그래밍 방식으로 생성할 수 있습니다. 특히 팀이 새 프로젝트를 시작하거나 인시던트가 발생하거나 SLO를 공식화하려는 경우 대시보드를 생성할 때 유용합니다.
+모든 위젯과 대시보드가 JSON으로 표시되므로 프로그래밍 방식으로 [대시보드 API]를 사용해 생성할 수 있습니다. 그러므로 팀이 새로운 프로젝트를 시작하거나, 인시던트가 있을 때 또는 SLP를 규격화할 때 등 대시보드를 생성해야 할 때 유용합니다.
 
 ### Datadog 모바일 앱에서 대시보드 보기
 
-[Apple App Store][17] 및 [Google Play Store][18]에서 사용할 수 있는 [Datadog 모바일 앱][16]을 사용해 모바일 장치에서 대시보드를 볼 수 있습니다.
+[Apple 앱 스토어][18] 및 [Google Play 스토어][19]에서 이용 가능한 [Datadog 모바일 앱][17]을 사용해 모바일 장치에서 대시보드를 봅니다.
 
 모바일 앱을 사용하면 Datadog 조직에서 액세스할 수 있는 모든 대시보드를 확인하고 검색할 수 있습니다. 또 Datadog 웹 앱에서 사용하는 것과 동일한 템플릿 변수로 필터링할 수 있습니다.
 
@@ -134,20 +133,21 @@ Y축의 범위, 색상, 범례를 조정하거나 마커나 이벤트 오버레�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/
-[2]: /ko/metrics/introduction/
-[3]: /ko/metrics/explorer/
-[4]: /ko/integrations/amazon_s3/#data-collected
-[5]: /ko/dashboards/widgets/
-[6]: /ko/dashboards/querying/
-[7]: /ko/dashboards/functions/
-[8]: /ko/metrics/distributions/
-[9]: /ko/dashboards/template_variables/
-[10]: /ko/dashboards/
-[11]: /ko/dashboards/widgets/timeseries/
-[12]: https://learn.datadoghq.com/courses/building-better-dashboards/
-[13]: /ko/dashboards/sharing/
-[14]: /ko/integrations/slack/
-[15]: /ko/api/v1/dashboards/
-[16]: /ko/service_management/mobile/
-[17]: https://apps.apple.com/app/datadog/id1391380318
-[18]: https://play.google.com/store/apps/details?id=com.datadog.app
+[2]: https://app.datadoghq.com/dashboard/lists
+[3]: /ko/metrics/introduction/
+[4]: /ko/metrics/explorer/
+[5]: /ko/integrations/amazon_s3/#data-collected
+[6]: /ko/dashboards/widgets/
+[7]: /ko/dashboards/querying/
+[8]: /ko/dashboards/functions/
+[9]: /ko/metrics/distributions/
+[10]: /ko/dashboards/template_variables/
+[11]: /ko/dashboards/
+[12]: /ko/dashboards/widgets/timeseries/
+[13]: https://learn.datadoghq.com/courses/building-better-dashboards/
+[14]: /ko/dashboards/sharing/
+[15]: /ko/integrations/slack/
+[16]: /ko/api/v1/dashboards/
+[17]: /ko/service_management/mobile/
+[18]: https://apps.apple.com/app/datadog/id1391380318
+[19]: https://play.google.com/store/apps/details?id=com.datadog.app

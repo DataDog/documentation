@@ -10,7 +10,6 @@ further_reading:
 - link: /watchdog/
   tag: ドキュメント
   text: Watchdog - アルゴリズムによるアプリケーションとインフラストラクチャーの問題の検出
-kind: documentation
 title: Watchdog モニター
 ---
 

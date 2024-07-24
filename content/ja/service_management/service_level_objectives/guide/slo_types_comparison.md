@@ -12,7 +12,6 @@ further_reading:
 - link: /service_management/service_level_objectives/time_slice/
   tag: ドキュメント
   text: APM
-kind: ガイド
 title: SLO タイプの比較
 ---
 

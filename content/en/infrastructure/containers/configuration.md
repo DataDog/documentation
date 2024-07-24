@@ -1,6 +1,5 @@
 ---
 title: Configure Containers View
-kind: documentation
 aliases:
   - /infrastructure/livecontainers/configuration
 further_reading:

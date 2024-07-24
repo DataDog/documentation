@@ -1,6 +1,5 @@
 ---
 title: Alibaba インテグレーションの課金
-kind: documentation
 ---
 ## 概要
 

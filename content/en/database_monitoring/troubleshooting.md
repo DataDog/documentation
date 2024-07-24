@@ -1,12 +1,8 @@
 ---
 title: Troubleshooting Database Monitoring
-kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details database agnostic common issues with setting up and using Database Monitoring, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with agent version releases.
 
@@ -20,7 +16,7 @@ For specific database setup troubleshooting, use the corresponding troubleshooti
 ## Diagnosing common problems
 ### Query bind parameters cannot be viewed
 
-At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, settings to expose the un-obfuscated query bind parameters are planned.
+At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character.
 
 
 ### DBM host limit
