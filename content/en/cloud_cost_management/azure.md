@@ -193,8 +193,8 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `metercategory` | The top level service that this usage belongs to (such as `Networking`). |
 | `meterid` | The unique ID for the meter. |
 | `metername` | The usage details of the line item (such as `L8s v2` or `General Purpose Data Stored`). |
-| `meterregion` | The data center location for the services priced based on location (such as `West US 2`). Use `resourcelocation` to see location data without N/A. |
-| `metersubcategory` | The name of the meter subclassification category (such as `General Purpose - Storage`). Use `metername` or `metercategory` to see top-level classification without N/A. |
+| `meterregion` | The data center location for the services priced based on location (such as `West US 2`). Use `resourcelocation` to see location data without `N/A`. |
+| `metersubcategory` | The name of the meter subclassification category (such as `General Purpose - Storage`). Use `metername` or `metercategory` to see top-level classification without `N/A`. |
 | `offerid` | The name of the offer purchased. |
 | `partnumber` | The ID used to get specific meter pricing. |
 | `planname` | The marketplace plan name if purchased through marketplace. |
@@ -203,12 +203,12 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `pricingmodel` | The type of usage (such as `Reservation`). |
 | `ProductId` | The identifier for a specific Azure product. |
 | `productname` | The name of the Azure product at a granular level, such as VM or disk type and region. |
-| `productorderid` | The ID for the product order. Use `productname` to see top level product information without N/A. |
-| `productordername` | The name of the product order. Use `productname` to see top level product information without N/A. |
+| `productorderid` | The ID for the product order. Use `productname` to see top level product information without `N/A`. |
+| `productordername` | The name of the product order. Use `productname` to see top level product information without `N/A`. |
 | `publishername` | The publisher for marketplace services. |
 | `publishertype` | The type of publisher: `Microsoft` for Microsoft Customer Agreement accounts and `Azure` for Enterprise Agreement accounts. |
-| `reservationid` | The ID for the purchased reservation instance. If you see N/A values, these are `OnDemand` resources, which can be checked using the pricingmodel tag. |
-| `reservationname` | The name of the purchased reservation instance. If you see N/A values, these are `OnDemand` resources, which can be checked using the pricingmodel tag. |
+| `reservationid` | The ID for the purchased reservation instance. If you see `N/A` values, these are `OnDemand` resources, which can be checked using the pricingmodel tag. |
+| `reservationname` | The name of the purchased reservation instance. If you see `N/A` values, these are `OnDemand` resources, which can be checked using the pricingmodel tag. |
 | `resourcegroup` | The name of the resource group the resource is in. Not all charges come from resources deployed to resource groups. |
 | `resourceid` | The ID of the Azure resource. |
 | `resourcelocation` | The data center location where the resource is running (such as `westus2`). |
