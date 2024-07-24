@@ -2854,7 +2854,7 @@ menu:
     - name: Multisource Querying
       url: cloud_cost_management/multisource_querying
       parent: cloud_cost
-      identifier: cloud_cost_datadog_costs
+      identifier: cloud_cost_multisource_querying
       weight: 7
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
