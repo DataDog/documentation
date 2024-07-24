@@ -1,6 +1,5 @@
 ---
-null
-...
+title: Instrumentación de aplicaciones serverless de Ruby mediante el Datadog Forwarder
 ---
 
 ## Información general
