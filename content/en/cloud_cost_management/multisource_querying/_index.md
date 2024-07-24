@@ -59,7 +59,7 @@ Percent Change
 
 {{< img src="cloud_cost/multisource_querying/refine_results.png" alt="Additional options to refine your cost data on the Cloud Cost Analytics page" style="width:100%;" >}}
 
-## Use your cost data
+## Visualize your cost data
 
 With Multisource Querying, you can create visualizations using cost data across providers in your [dashboards][11].
 
