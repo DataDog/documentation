@@ -1,6 +1,5 @@
 ---
-null
-...
+title: Instrumentación de aplicaciones serverless de Go mediante el Datadog Forwarder
 ---
 ## Información general
 
@@ -87,11 +86,11 @@ Suscribe la función de Lambda del Datadog Forwarder a cada uno de los grupos de
 
 ### Etiquetar
 
-Aunque es opcional, Datadog recomienda etiquetar tus aplicaciones serverless con las etiquetas (tags) `env`, `service` y `version` para el [etiquetado de servicios unificado][5].
+Aunque es opcional, Datadog recomienda etiquetar las aplicaciones serverless con las etiquetas (tags) `env`, `service` y `version` para el [etiquetado de servicios unificado][5].
 
 ## Explorar
 
-Cuando tengas configurada tu función según los pasos anteriores, puedes consultar tus métricas, logs y trazas en la [página de inicio de Serverless][6].
+Una vez que tienes tu función configurada según los pasos anteriores, puedes consultar tus métricas, logs y trazas en la [página de inicio de Serverless][6].
 
 ## Monitorizar la lógica de negocio personalizada
 
