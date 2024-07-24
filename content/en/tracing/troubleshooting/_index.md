@@ -110,7 +110,13 @@ Including metric partitions or grouping variables in service names instead of ap
 
 ### Missing error message and stack trace
 
-Some traces that exhibit an error status, where the Errors tab of a trace will show a message reading 'Missing error message and stack trace' rather than an exception. A span is only expected to contain this information when an unhandled exception is traced. If an exception is handled in a try/catch block, `error.msg`, `error.type`, and `error.stack` span tags are not populated. If desired, these tags can be populated with [Custom Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/?tab=datadogapi) code. It's also possible for spans to be given an error status without encountering an unhandled exception based on HTTP status code (400-599), this is a case where the same message is expected.
+In some traces with an error status, the **Errors** tab shows `Missing error message and stack trace` rather than exception details. 
+
+A span can show this message for two possible reasons:
+- The span contains an unhandled exception.
+- An HTTP response within the span returned an HTTP status code between 400 and 599.
+
+When an exception is handled in a try/catch block, `error.msg`, `error.type`, and `error.stack` span tags are not populated. To populate the detailed error span tags, use [Custom Instrumentation][18] code.
 
 ## Troubleshooting data requested by Datadog Support
 
