@@ -27,7 +27,7 @@ With the new inferred entities experience, you can filter [Service Catalog][3] e
 
 To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For the full list of `peer.*` attributes, see [Inferred service dependencies nomenclature](#inferred-service-dependencies-nomemclature). Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
-If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities.
+If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby APM SDK you can customize the default names for inferred entities.
 
 **Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes. Read more about migration steps in the [opt-in instructions](#opt-in).
 
@@ -43,7 +43,7 @@ Use the dependency map to visualize service-to-service communication and gain in
 
 To opt in, Datadog recommends you adjust your:
 - [Datadog Agent](#datadog-agent-configuration) (or [OpenTelemetry collector](#opentelemetry-collector)) configuration
-- [APM tracing libraries](#apm-tracing-libary-configuration) configuration
+- [APM APM SDKs](#apm-tracing-libary-configuration) configuration
 
 ### Datadog Agent configuration
 
@@ -247,7 +247,7 @@ To opt in, add the following environment variables to your APM SDK settings or s
 
 When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported APM SDK languages and integrations.
 
-Previously, some tracing libraries included the name of the associated integration in service name tagging. For example, .NET tagged gRPC calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
+Previously, some APM SDKs included the name of the associated integration in service name tagging. For example, .NET tagged gRPC calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported APM SDKs tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
 
 _ | Before | After
 --|-------|--------

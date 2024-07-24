@@ -14,13 +14,13 @@ This page describes deprecated features with configuration information relevant 
 
 Navigate to the [ingestion control page][1] to see services with legacy configurations. These are flagged with a `Legacy Setup` status.
 
-To migrate to the new configuration options, remove all legacy App Analytics [configuration options](#app-analytics-setup) from the services flagged with `Legacy Setup`. Then, implement the Datadog Agent and tracing libraries' [sampling mechanisms][2] to send traces.
+To migrate to the new configuration options, remove all legacy App Analytics [configuration options](#app-analytics-setup) from the services flagged with `Legacy Setup`. Then, implement the Datadog Agent and APM SDKs' [sampling mechanisms][2] to send traces.
 
 ## App Analytics setup
 
-App Analytics configuration options are located in the Tracing Libraries and in the Datadog Agent. In the libraries, analytics spans from your services are generated either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
+App Analytics configuration options are located in the APM SDKs and in the Datadog Agent. In the libraries, analytics spans from your services are generated either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
 
-### In Tracing Libraries
+### In APM SDKs
 
 #### Automatic configuration
 

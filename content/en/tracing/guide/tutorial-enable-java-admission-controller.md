@@ -202,7 +202,7 @@ kubectl describe pod springfront{{< /code-block >}}
     Normal  Started    2s    kubelet            Started container springfront
     ```
 
-    As you can see, an init-container is added to your pod. This container includes the Datadog Java tracing libraries to a volume mount. Also `JAVA_TOOL_OPTIONS` is modified to include `javaagent`. And Datadog-specific environment variables are added to the container:
+    As you can see, an init-container is added to your pod. This container includes the Datadog Java APM SDKs to a volume mount. Also `JAVA_TOOL_OPTIONS` is modified to include `javaagent`. And Datadog-specific environment variables are added to the container:
 
     ```
     Environment:

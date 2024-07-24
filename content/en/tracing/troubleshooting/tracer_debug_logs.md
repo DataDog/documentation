@@ -16,7 +16,7 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 
 {{< programming-lang lang="java" >}}
 
-To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
+To enable debug mode for the Datadog Java APM SDK, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
 **Note**: Datadog Java APM SDK implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file:
 ```
@@ -87,7 +87,7 @@ log.setLevel(logging.DEBUG)
 
 {{< programming-lang lang="ruby" >}}
 
-To enable debug mode for the Datadog Ruby Tracer, set the environment variable `DD_TRACE_DEBUG=true`.
+To enable debug mode for the Datadog Ruby APM SDK, set the environment variable `DD_TRACE_DEBUG=true`.
 
 **Application Logs**
 
@@ -114,7 +114,7 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
-To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
+To enable debug mode for the Datadog Go APM SDK, set the environment variable `DD_TRACE_DEBUG=true`,
 or enable the debug mode during the `Start` config:
 
 ```go
@@ -153,7 +153,7 @@ func main() {
 
 {{< programming-lang lang="nodejs" >}}
 
-To enable debug mode for the Datadog Node.js Tracer, use the environment variable `DD_TRACE_DEBUG=true`.
+To enable debug mode for the Datadog Node.js APM SDK, use the environment variable `DD_TRACE_DEBUG=true`.
 
 **Note:** For versions below 2.X, debug mode could be enabled programmatically inside the APM SDK initialization but this is no longer supported.
 
@@ -197,7 +197,7 @@ For more APM SDK settings, check out the [API documentation][4].
 
 {{< programming-lang lang=".NET" >}}
 
-To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Alternatively, you can enable debug mode by calling `GlobalSettings.SetDebugEnabled(true)`:
+To enable debug mode for the Datadog .NET APM SDK, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Alternatively, you can enable debug mode by calling `GlobalSettings.SetDebugEnabled(true)`:
 
 ```csharp
 using Datadog.Trace;
@@ -220,7 +220,7 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the APM SDK to delete log files from the current logging directory on startup. The APM SDK deletes log files the same age and older than the given number of days, with a default value of `31`.
 
-For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
+For more details on how to configure the .NET APM SDK, see the [Configuration][2] section.
 
 There are two types of logs that are created in these paths:
 1. **Logs from native code:** In 1.26.0 and higher, these logs are saved as `dotnet-tracer-native-<processname>-<processid>.log`. From version 1.21.0 to 1.25.x, these logs were saved as `dotnet-tracer-native.log`. In 1.20.x and older versions, this was stored as `dotnet-profiler.log`.
@@ -233,7 +233,7 @@ There are two types of logs that are created in these paths:
 
 {{< programming-lang lang="php" >}}
 
-To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
+To enable debug mode for the Datadog PHP APM SDK, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
 There are two options to route debug APM SDK logs to a file.
 

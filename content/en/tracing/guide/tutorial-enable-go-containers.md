@@ -245,7 +245,7 @@ environment:
 
 For more information on available configuration options, see [Configuring the Go APM SDK][14].
 
-### Use automatic tracing libraries
+### Use automatic APM SDKs
 
 Datadog has several fully supported libraries for Go that allow for automatic tracing when implemented in the code. In the `cmd/notes/main.go` file, you can see the `go-chi`, `sql`, and `http` libraries being aliased to the corresponding Datadog libraries: `chitrace`, `sqltrace`, and `httptrace` respectively:
 

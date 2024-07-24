@@ -17,7 +17,7 @@ further_reading:
   text: "APM metrics sent by the Datadog Agent"
 ---
 
-If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes.
+If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog APM SDKs you use, as each release contains improvements and fixes.
 
 ## Troubleshooting pipeline
 
@@ -29,7 +29,7 @@ Traces (JSON data type) and [Tracing Application Metrics][2] are generated from 
 
 ## Confirm APM setup and Agent status
 
-During startup, Datadog tracing libraries emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible. Some languages require these startup logs to be enabled with the environment variable `DD_TRACE_STARTUP_LOGS=true`. For more information on startup logs, see the [dedicated page][3] for troubleshooting.
+During startup, Datadog APM SDKs emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible. Some languages require these startup logs to be enabled with the environment variable `DD_TRACE_STARTUP_LOGS=true`. For more information on startup logs, see the [dedicated page][3] for troubleshooting.
 
 ## Connection errors
 
@@ -37,7 +37,7 @@ A common source of trouble is the inability of the instrumented application to c
 
 ## APM SDK debug logs
 
-To capture full details on the Datadog tracer, enable debug mode on your APM SDK by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
+To capture full details on the Datadog APM SDK, enable debug mode on your APM SDK by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
 
 These logs can surface instrumentation errors or integration-specific errors. For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][5].
 
@@ -118,7 +118,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
 2. **[APM SDK startup logs](#confirm-apm-setup-and-agent-status)**
 
-    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the APM SDK to communicate with the Datadog Agent. By comparing the configuration that the APM SDK sees to the one set within the application or container, Support can identify areas where a setting is not being properly applied.
+    Startup logs are a great way to spot misconfiguration of the APM SDK, or the inability for the APM SDK to communicate with the Datadog Agent. By comparing the configuration that the APM SDK sees to the one set within the application or container, Support can identify areas where a setting is not being properly applied.
 
 3. **[APM SDK debug logs](#tracer-debug-logs)**
 
@@ -140,7 +140,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
     Knowing how your application is deployed helps the Support team identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, Support may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-6. **Custom code written using the tracing libraries, such as APM SDK configuration, [custom instrumentation][14], and adding span tags**
+6. **Custom code written using the APM SDK, such as APM SDK configuration, [custom instrumentation][14], and adding span tags**
 
     Custom instrumentation can be a powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so support may ask about this to rule it out as a suspect.
 

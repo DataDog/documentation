@@ -77,7 +77,7 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 [4]: /account_management/rbac/permissions/
 [5]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
 [6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1
-[7]: /tracing/trace_pipeline/ingestion_mechanisms#in-tracing-libraries-user-defined-rules
+[7]: /tracing/trace_pipeline/ingestion_mechanisms#in-apm-sdks-user-defined-rules
 [8]: /tracing/trace_pipeline/ingestion_mechanisms#in-the-agent
 [9]: /tracing/trace_explorer/#live-search-for-15-minutes
 [10]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0

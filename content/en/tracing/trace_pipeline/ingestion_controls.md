@@ -21,7 +21,7 @@ further_reading:
 
 Ingestion controls affect what traces are sent by your applications to Datadog. [APM metrics][1] are always calculated based on all traces, and are not impacted by ingestion controls.
 
-The Ingestion Control page provides visibility at the Agent and tracing libraries level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][2], you can:
+The Ingestion Control page provides visibility at the Agent and APM SDK level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][2], you can:
 - Gain visibility on your service-level ingestion configuration and adjust trace sampling rates for high throughput services.
 - Understand which ingestion mechanisms are responsible for sampling most of your traces.
 - Investigate and act on potential ingestion configuration issues, such as limited CPU or RAM resources for the Agent.
@@ -76,7 +76,7 @@ Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
 
 Ingestion Configuration
-: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured in the tracing libraries with [trace sampling rules][8], the service is marked as `Configured`. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
+: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured in the APM SDKs with [trace sampling rules][8], the service is marked as `Configured`. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
 
 Infrastructure
 : Hosts, containers, and functions on which the service is running.
@@ -154,7 +154,7 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
-[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-apm-sdks-user-defined-rules
 [9]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
 [10]: /tracing/trace_pipeline/metrics
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/

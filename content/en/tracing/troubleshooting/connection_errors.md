@@ -17,7 +17,7 @@ If you see these messages, it means your traces are not being submitted to the D
 {{< programming-lang lang="java" >}}
 #### Java diagnostic CLI
 
-Starting with 0.82.0+ of the Java tracer, you can use a diagnostic command where the Java APM SDK is installed to detect potential connection issues. From where `dd-java-agent.jar` is installed (inside the application container), run:
+Starting with 0.82.0+ of the Java APM SDK, you can use a diagnostic command where the Java APM SDK is installed to detect potential connection issues. From where `dd-java-agent.jar` is installed (inside the application container), run:
 
 ```bash
 java -jar /path/to/dd-java-agent.jar sampleTrace -c 1

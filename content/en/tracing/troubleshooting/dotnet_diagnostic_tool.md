@@ -2,7 +2,7 @@
 title: Using the .NET diagnostic tool for troubleshooting
 ---
 
-If your application does not produce traces as expected after installing the .NET tracer, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
+If your application does not produce traces as expected after installing the .NET APM SDK, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
 
 The diagnostic tool  `dd-dotnet` is bundled with the APM SDK starting with version 2.42.0. It is located in the APM SDK's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
 

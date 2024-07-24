@@ -261,9 +261,9 @@ class SomeClass {
 }
 ```
 
-### Extending tracers
+### Extending APM SDKs
 
-The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (for example, based on regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
+The APM SDKs are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (for example, based on regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
 
 ```java
 import java.util.List;

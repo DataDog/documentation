@@ -28,7 +28,7 @@ xray:GetTraceSummaries
 To get the most out of the AWS X-Ray integration:
 
 - Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
-- Install the tracing libraries in your Lambda functions.
+- Install the APM SDKs in your Lambda functions.
 
 #### [Recommended] Datadog Serverless Framework plugin
 

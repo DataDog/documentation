@@ -11,7 +11,7 @@ further_reading:
 
 Trace data tends to be repetitive. A problem in your application is rarely identified in only one trace and no others. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms repeatedly in multiple traces. Consequently, there's usually no need for you to collect every single trace for a service or endpoint, or every span within a trace. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
 
-Ingestion mechanisms are configurations within the Datadog Agent and Datadog tracing libraries. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
+Ingestion mechanisms are configurations within the Datadog Agent and Datadog APM SDKs. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
 
 This guide helps you understand when and how to use ingestion control configurations depending on the main use cases you might encounter. It covers:
 
@@ -156,7 +156,7 @@ The backend service `web-store` is calling a Mongo database multiple times per t
 [3]: https://app.datadoghq.com/apm/traces/ingestion-control
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[6]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/#in-apm-sdk-user-defined-rules
 [7]: /tracing/trace_pipeline/ingestion_controls/#service-ingestion-summary
 [8]: /tracing/trace_pipeline/generate_metrics/
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#error-and-rare-traces

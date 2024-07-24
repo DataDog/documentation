@@ -1,7 +1,7 @@
 ---
 title: Custom Instrumentation with the OpenTelemetry API
 type: multi-code-lang
-description: 'Sending spans from custom instrumentation through the OpenTelemetry API to the Datadog tracing libraries.'
+description: 'Sending spans from custom instrumentation through the OpenTelemetry API to the Datadog APM SDKs.'
 aliases:
 - /tracing/trace_collection/otel_instrumentation/
 - /opentelemetry/otel_tracing/

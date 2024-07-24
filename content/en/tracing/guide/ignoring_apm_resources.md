@@ -114,7 +114,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `http.useragent_details.device.family`  | The device family reported by the User-Agent.     |
 
 <div class="alert alert-warning"><strong>Note</strong>: Starting from October 1st 2022, Datadog backend applies a remapping in order to apply <a href="/tracing/trace_collection/tracing_naming_convention">Span Tags Semantics
-</a> across tracers on all ingested spans. If you want to drop spans based on tags at the Datadog Agent level, use tags in the <strong>Remap from</strong> column.</div>
+</a> across APM SDKs on all ingested spans. If you want to drop spans based on tags at the Datadog Agent level, use tags in the <strong>Remap from</strong> column.</div>
 
 #### Network communications
 
@@ -387,7 +387,7 @@ If you use Amazon ECS (such as on EC2), in your Datadog Agent container definiti
 
 ## APM SDK configuration options
 
-Some of the language-specific tracers have an option to modify spans before they are sent to the Datadog Agent. Use this option if you have application-specific requirements and are using a language listed below.
+Some of the language-specific APM SDKs have an option to modify spans before they are sent to the Datadog Agent. Use this option if you have application-specific requirements and are using a language listed below.
 
 <div class="alert alert-danger"><strong>Important</strong>: If the request is associated with a distributed trace, the resulting trace can have sampling inaccuracy if you drop portions of it due to these filtering rules.</div>
 
@@ -457,7 +457,7 @@ tracer.use('http', {
 
 {{< programming-lang lang="java" >}}
 
-The Java APM SDK has an option for a custom `TraceInterceptor` to filter out certain spans. See [Extending Tracers][1].
+The Java APM SDK has an option for a custom `TraceInterceptor` to filter out certain spans. See [Extending APM SDKs][1].
 
 For example, if your resource name is `GET /healthcheck`, write a trace interceptor that drops traces containing this resource name. Adjust the logic to meet your use case.
 
@@ -484,7 +484,7 @@ public class GreetingController {
 }
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
+[1]: /tracing/trace_collection/custom_instrumentation/java/#extending-apm-sdks
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

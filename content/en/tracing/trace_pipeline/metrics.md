@@ -45,7 +45,7 @@ The following metrics are associated with ingested spans usage:
 
 Control the usage with `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered as a volume, not as a number of spans or traces. This metric is tagged by `env` and `service` so you can spot which environments and services are contributing to the ingestion volume.
 
-This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the tracing libraries of the Datadog Agent. For more information about this dimension, see the [Ingestion Reasons dashboard][6].
+This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the APM SDKs of the Datadog Agent. For more information about this dimension, see the [Ingestion Reasons dashboard][6].
 
 The `datadog.estimated_usage.apm.ingested_traces` metric measures the number of requests sampled per second, and only counts traces sampled by [head-based sampling][7]. This metric is also tagged by `env` and `service` so you can spot which services are starting the most traces.
 

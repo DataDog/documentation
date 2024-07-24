@@ -330,9 +330,9 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 ### Specifying APM SDK versions
 
-<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the tracing libraries you specify.</div>
+<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the APM SDKs you specify.</div>
 
-Specify Datadog tracing libraries and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
+Specify Datadog APM SDKs and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
 
 1. [Specify at the service level](#specifying-at-the-service-level), or
 2. [Specify at the cluster level](#specifying-at-the-cluster-level).

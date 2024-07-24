@@ -16,15 +16,15 @@ further_reading:
 ---
 ## Overview
 
-Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the APM SDK to remediate sensitive data at collection before traces are sent to Datadog.
+Datadog APM SDKs collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the APM SDK to remediate sensitive data at collection before traces are sent to Datadog.
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
 ### Personal information in trace data
 
-Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
+Datadog's APM SDKs collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
 
-The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed.
+The table below describes the personal data categories collected by the automatic instrumentation provided by the APM SDKs, with some common examples listed.
 
 | Category            | Description                                                                                                            |
 |:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
@@ -215,7 +215,7 @@ The table below describes the default behavior of each language APM SDK with reg
 
 {{% /tabs %}}
 
-If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a security trace. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
+If you use Datadog Application Security Management (ASM), the APM SDKs collect HTTP request data to help you understand the nature of a security trace. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
 
 ## Agent
 
@@ -570,7 +570,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 
 ### HTTP
 
-Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
+Datadog is standardizing [span tag semantics][3] across APM SDKs. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
 
 #### Redact query strings
 
@@ -588,7 +588,7 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 
 ### Processing
 
-Some tracing libraries provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
+Some APM SDKs provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
 
 * Java: [TraceInterceptor interface][9]
 * Ruby: [Processing Pipeline][10]
@@ -596,7 +596,7 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 ## Telemetry collection
 
-Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
+Datadog may gather environmental and diagnostic information about your APM SDKs for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
 You can disable this telemetry collection using either of these settings:
 
@@ -654,7 +654,7 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [6]: /tracing/guide/ignoring_apm_resources/
 [7]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
 [8]: /tracing/guide/send_traces_to_agent_by_api/
-[9]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
+[9]: /tracing/trace_collection/custom_instrumentation/java/#extending-apm-sdks
 [10]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
 [12]: /sensitive_data_scanner/

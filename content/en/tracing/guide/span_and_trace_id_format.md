@@ -13,12 +13,12 @@ further_reading:
 
 This page details Datadog APM SDK support for trace and span IDs.
 
-- **Generated IDs**: By default, all tracing libraries generate 128-bit trace IDs and 64-bit span IDs.
+- **Generated IDs**: By default, all APM SDKs generate 128-bit trace IDs and 64-bit span IDs.
 - **Accepted IDs**: Datadog accepts 128-bit or 64-bit trace IDs, and 64-bit span IDs.
 
 ## 128-bit trace IDs
 
-128-bit trace IDs are generated and accepted by default in the latest versions of Datadog tracing libraries:
+128-bit trace IDs are generated and accepted by default in the latest versions of Datadog APM SDKs:
 
 - [Node.js][1]
 - [Java][2]
