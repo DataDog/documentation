@@ -45,6 +45,11 @@ Datadog SDKs do not support OpenTelemetry Metrics and Logs APIs. To use OpenTele
 <code>DD_TRACE_OTEL_ENABLED</code> is not required for the Datadog Go and Ruby SDKs.
 </div>
 
+
+## Configuration
+
+The following opentelemetry configuration options are supported by Datadog SDKs: [opentelemetry environment variable support][16]
+
 ## Language support
 
 | Language | Minimum version          |
@@ -84,23 +89,6 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 2. Copy the OpenTelemetry extension JAR containing the instrumentation to the same container as the application.
 3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the extension JAR path.
 
-## Configuration
-
-The following configuration options have system property and environment variable equivalents.
-If the same key type is set for both, the system property takes priority.
-Set system properties as JVM flags.
-
-`dd.trace.otel.enabled`
-: **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
-**Default**: `false`<br>
-Must be set to `true` to enable use of OpenTelemetry instrumentations.
-
-`otel.javaagent.extensions`
-: **Environment Variable**: `OTEL_JAVAAGENT_EXTENSIONS`<br>
-**Default**: `false`<br>
-A comma-separated list of paths to extension JAR files or folders containing extension JAR files.
-
-OpenTelemetry's [Agent Configuration][11] page describes additional properties that are also recognized by the Datadog SDK.
 
 ## Verified OpenTelemetry extensions
 
@@ -116,6 +104,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 [9]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/
 [10]: https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0
 [11]: https://opentelemetry.io/docs/zero-code/java/agent/configuration/
+[16]: /opentelemetry/interoperability/environment_variable_support
 
 {{% /tab %}}
 
@@ -131,39 +120,43 @@ OpenTelemetry provides an [example][14] for instrumenting a sample application.
 
 To use an OpenTelemetry instrumentation with the Datadog Python SDK:
 
-1. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
-2. Ensure a Datadog Agent is configured to accept traces from your [application][15].
-
-## Configuration
-
-**Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
-**Default**: `false`<br>
-Must be set to `true` to enable use of OpenTelemetry instrumentations.
+1. Follow the Datadog Python [Opentelemetry Api][15] docs to enable OpenTelemetry support.
+2. Ensure a Datadog Agent is configured to accept traces from your [application][16].
 
 
-[13]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/v1.16.0/instrumentation
+[13]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/0a231e57f9722e6101194c6b38695addf23ab950/instrumentation#readme
 [14]: https://opentelemetry.io/docs/zero-code/python/example/
-[15]: /getting_started/tracing/#set-up-datadog-apm
+[15]: https://ddtrace.readthedocs.io/en/stable/api.html?highlight=opentelemetry%20api#module-ddtrace.opentelemetry
 
 {{% /tab %}}
 
-<!-- {{% tab "Ruby" %}}
+{{% tab "Ruby" %}}
 
 ## Compatibility requirements
 
+The Datadog Ruby SDK supports library instrumentations using OpenTelemetry's [instrumentation API][18].
+
+OpenTelemetry provides an [example][19] for instrumenting a sample application.
+
 ## Setup
 
-## Configuration
+To use an OpenTelemetry instrumentation with the Datadog Ruby SDK:
 
-{{% /tab %}} -->
+1. Follow the Datadog Ruby [configuring Opentelemetry][20] docs to enable OpenTelemetry support.
+2. Ensure a Datadog Agent is configured to accept traces from your [application][16].
+
+[18]: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation#opentelemetry-instrumentation-libraries
+[19]: https://opentelemetry.io/docs/zero-code/python/example/
+[20]: /tracing/trace_collection/custom_instrumentation/ruby/otel/#configuring-opentelemetry-to-use-the-datadog-tracing-library
+
+
+{{% /tab %}}
 
 <!-- {{% tab "Go" %}}
 
 ## Compatibility requirements
 
 ## Setup
-
-## Configuration
 
 {{% /tab %}} -->
 
@@ -173,8 +166,6 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 
 ## Setup
 
-## Configuration
-
 {{% /tab %}} -->
 
 <!-- {{% tab "PHP" %}}
@@ -183,7 +174,6 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 
 ## Setup
 
-## Configuration
 
 {{% /tab %}} -->
 
@@ -192,8 +182,6 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 ## Compatibility requirements
 
 ## Setup
-
-## Configuration
 
 {{% /tab %}} -->
 
@@ -207,3 +195,4 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 [2]: /tracing/trace_collection/automatic_instrumentation/
 [3]: https://opentelemetry.io/docs/concepts/instrumentation/libraries/
 [12]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[16]: /getting_started/tracing/#set-up-datadog-apm
