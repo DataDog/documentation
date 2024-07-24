@@ -207,8 +207,8 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `productordername` | The name of the product order. Use `productname` to see top level product information without `N/A`. |
 | `publishername` | The publisher for marketplace services. |
 | `publishertype` | The type of publisher: `Microsoft` for Microsoft Customer Agreement accounts and `Azure` for Enterprise Agreement accounts. |
-| `reservationid` | The ID for the purchased reservation instance. If you see `N/A` values, these are `OnDemand` resources, which can be checked using the pricingmodel tag. |
-| `reservationname` | The name of the purchased reservation instance. If you see `N/A` values, these are `OnDemand` resources, which can be checked using the pricingmodel tag. |
+| `reservationid` | The ID for the purchased reservation instance. If you see `N/A` values, these are `OnDemand` resources, which can be checked using the `pricingmodel` tag. |
+| `reservationname` | The name of the purchased reservation instance. If you see `N/A` values, these are `OnDemand` resources, which can be checked using the `pricingmodel` tag. |
 | `resourcegroup` | The name of the resource group the resource is in. Not all charges come from resources deployed to resource groups. |
 | `resourceid` | The ID of the Azure resource. |
 | `resourcelocation` | The data center location where the resource is running (such as `westus2`). |
