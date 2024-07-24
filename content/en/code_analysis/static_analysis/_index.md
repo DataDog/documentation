@@ -45,9 +45,9 @@ Static Analysis supports scanning for poor coding practices and security vulnera
 
 {{< partial name="code_analysis/languages-getting-started.html" >}}
 
-Set up Datadog Static Analysis in-app [here][1], or follow [setup documentation here][9].
-
 </br> 
+
+To get started, you can set up Static Analysis on the [**Code Analysis** page][1] or see the [Setup documentation][9].
 
 ## Integrate Static Analysis into your software development lifecycle
 
