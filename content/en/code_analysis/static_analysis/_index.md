@@ -127,5 +127,5 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [5]: /code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case
-[8]: https://docs.datadoghq.com/code_analysis/static_analysis/setup/#add-a-static-analysis-yaml-file-to-your-project
+[8]: /code_analysis/static_analysis/setup/#add-a-static-analysis-yaml-file-to-your-project
 [9]: /code_analysis/static_analysis/setup
