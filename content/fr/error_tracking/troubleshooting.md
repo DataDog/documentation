@@ -1,6 +1,5 @@
 ---
-null
-...
+title: Dépannage d'Error Tracking
 ---
 
 Si Error Tracking présente un comportement inattendu, les étapes de dépannage ci-dessous peuvent vous aider à résoudre rapidement le problème. S'il persiste, contactez [l'assistance Datadog][1]. 
