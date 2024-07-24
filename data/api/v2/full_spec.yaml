@@ -970,11 +970,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/FullApplicationKey'
-        included:
-          description: Array of objects related to the application key.
-          items:
-            $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
-          type: array
       type: object
     ApplicationKeyResponseIncludedItem:
       description: An object related to an application key.
@@ -1030,7 +1025,6 @@ components:
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
       required:
-      - attributes
       - id
       - type
       type: object
@@ -8255,11 +8249,15 @@ components:
           $ref: '#/components/schemas/FullApplicationKeyAttributes'
         id:
           description: ID of the application key.
+          example: 00112233-4455-6677-8899-aabbccddeeff
           type: string
         relationships:
           $ref: '#/components/schemas/ApplicationKeyRelationships'
         type:
           $ref: '#/components/schemas/ApplicationKeysType'
+      required:
+      - id
+      - type
       type: object
     FullApplicationKeyAttributes:
       description: Attributes of a full application key.
@@ -8267,6 +8265,7 @@ components:
         created_at:
           description: Creation date of the application key.
           example: '2020-11-23T10:00:00.000Z'
+          format: date-time
           readOnly: true
           type: string
         key:
@@ -27102,6 +27101,8 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+    x-merge-override:
+      patch: true
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
