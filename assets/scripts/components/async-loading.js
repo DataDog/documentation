@@ -223,11 +223,11 @@ function loadPage(newUrl) {
                 // ensures correct path is used for language dropdown-item.
 
                 const commitRefLen = document.documentElement.dataset.commitRef.length; // adjust for preview env / branch name in path
-                const ddItemLangLen = ddItem.dataset.lang.length + 1;
+                const ddItemLangLen = ddItem.dataset.lang.length + 2;
                 const noLangPath = pathName.slice(commitRefLen + ddItemLangLen);
-                const cutIdx = ddItem.dataset.lang !== 'en' ? (commitRefLen + ddItemLangLen) : 0;
+                const cutIdx = ddItem.dataset.lang !== 'en' ? (commitRefLen + ddItemLangLen) : (commitRefLen + 1);
                 const newURL = ddItem.href.replace(ddItem.pathname.slice(cutIdx), noLangPath); 
-                
+
                 ddItem.setAttribute('href', newURL);
             })
 
