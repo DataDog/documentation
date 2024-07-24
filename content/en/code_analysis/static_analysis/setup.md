@@ -50,8 +50,8 @@ When installing a GitHub App, the following permissions are required to enable c
 - `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
 
 ### Other source code management providers
-If you are using another source code management provider, configure Static Analysis to run in your CI pipelines via the datadog-ci CLI tool and [upload the results][12] to Datadog.
-You **must** run an analysis of your repository on the default branch before results can begin appearing in the Code Analysis page.
+If you are using another source code management provider, configure Static Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Analysis** page.
 
 ## Customize your configuration
 By default, Datadog Static Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.
@@ -191,7 +191,7 @@ rulesets:
 ```
 
 #### Ignore for a file or directory
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see [Static Analysis Setup][5].
+Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see the [Customize your configuration section](#customize-your-configuration).
 
 ```
 rulesets:
@@ -279,4 +279,3 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [10]: /integrations/guide/source-code-integration
 [11]: /code_analysis/github_pull_requests/
-[12]: /setup#upload-third-party-static-analysis-results-to-datadog
