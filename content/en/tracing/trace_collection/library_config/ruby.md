@@ -1,5 +1,5 @@
 ---
-title: Configuring the Ruby Tracing Library
+title: Configuring the Ruby APM SDK
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
@@ -15,9 +15,9 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the APM SDK with your code and configure the Agent to collect APM data, optionally configure the APM SDK as desired, including setting up [Unified Service Tagging][1].
 
-For information about configuring the Ruby tracing library, see [Additional Ruby configuration][2].
+For information about configuring the Ruby APM SDK, see [Additional Ruby configuration][2].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

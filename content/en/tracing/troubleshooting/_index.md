@@ -8,10 +8,10 @@ further_reading:
   text: "Connection Errors"
 - link: "/tracing/troubleshooting/tracer_startup_logs/"
   tag: "Documentation"
-  text: "Datadog tracer startup logs"
+  text: "Datadog APM SDK startup logs"
 - link: "/tracing/troubleshooting/tracer_debug_logs/"
   tag: "Documentation"
-  text: "Datadog tracer debug logs"
+  text: "Datadog APM SDK debug logs"
 - link: "/tracing/troubleshooting/agent_apm_metrics/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
@@ -25,7 +25,7 @@ The following components are involved in sending APM data to Datadog:
 
 {{< img src="tracing/troubleshooting/troubleshooting_pipeline_info_1.png" alt="APM Troubleshooting Pipeline">}}
 
-Traces (JSON data type) and [Tracing Application Metrics][2] are generated from the application and sent to the Datadog Agent before traveling to the backend. Different troubleshooting information can be collected at each section of the pipeline. Importantly, the Tracer debug logs are written to your application's logs, which is a separate component from the Datadog Agent flare. More information about these items can be seen below in [Troubleshooting data requested by Datadog Support](#troubleshooting-data-requested-by-datadog-support).
+Traces (JSON data type) and [Tracing Application Metrics][2] are generated from the application and sent to the Datadog Agent before traveling to the backend. Different troubleshooting information can be collected at each section of the pipeline. Importantly, the APM SDK debug logs are written to your application's logs, which is a separate component from the Datadog Agent flare. More information about these items can be seen below in [Troubleshooting data requested by Datadog Support](#troubleshooting-data-requested-by-datadog-support).
 
 ## Confirm APM setup and Agent status
 
@@ -35,9 +35,9 @@ During startup, Datadog tracing libraries emit logs that reflect the configurati
 
 A common source of trouble is the inability of the instrumented application to communicate with the Datadog Agent. Read about how to find and fix these problems in [Connection Errors][4].
 
-## Tracer debug logs
+## APM SDK debug logs
 
-To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
+To capture full details on the Datadog tracer, enable debug mode on your APM SDK by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
 
 These logs can surface instrumentation errors or integration-specific errors. For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][5].
 
@@ -116,13 +116,13 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     This allows Support to confirm errors and attempt to reproduce your issues within Datadog's testing environments.
 
-2. **[Tracer startup logs](#confirm-apm-setup-and-agent-status)**
+2. **[APM SDK startup logs](#confirm-apm-setup-and-agent-status)**
 
-    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, Support can identify areas where a setting is not being properly applied.
+    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the APM SDK to communicate with the Datadog Agent. By comparing the configuration that the APM SDK sees to the one set within the application or container, Support can identify areas where a setting is not being properly applied.
 
-3. **[Tracer debug logs](#tracer-debug-logs)**
+3. **[APM SDK debug logs](#tracer-debug-logs)**
 
-    Tracer debug logs go one step deeper than startup logs, and help to identify if integrations are instrumenting properly in a manner that can't necessarily be checked until traffic flows through the application. Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
+    APM SDK debug logs go one step deeper than startup logs, and help to identify if integrations are instrumenting properly in a manner that can't necessarily be checked until traffic flows through the application. Debug logs can be extremely useful for viewing the contents of spans created by the APM SDK and can surface an error if there is a connection issue when attempting to send spans to the agent. APM SDK debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
 4. **A [Datadog Agent flare][12] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Datadog Agent while in [debug or trace mode][13] depending on what information you are looking for in these logs.**
 
@@ -140,18 +140,18 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
     Knowing how your application is deployed helps the Support team identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, Support may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][14], and adding span tags**
+6. **Custom code written using the tracing libraries, such as APM SDK configuration, [custom instrumentation][14], and adding span tags**
 
     Custom instrumentation can be a powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so support may ask about this to rule it out as a suspect.
 
-    Additionally, asking for your automatic instrumentation and configuration allows Datadog to confirm if this matches what it is seeing in both tracer startup and debug logs.
+    Additionally, asking for your automatic instrumentation and configuration allows Datadog to confirm if this matches what it is seeing in both APM SDK startup and debug logs.
 
 7. **Versions of the:**
    * **programming language, frameworks, and dependencies used to build the instrumented application**
    * **Datadog Tracer**
    * **Datadog Agent**
 
-    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][15] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
+    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][15] section, check for known issues, or to recommend a APM SDK or language version upgrade if it will address the problem.
 
 ## Further Reading
 

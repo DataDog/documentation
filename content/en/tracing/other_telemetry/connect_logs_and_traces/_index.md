@@ -13,7 +13,7 @@ algolia:
 
 The correlation between Datadog APM and Datadog Log Management is improved by the injection of trace IDs, span IDs, `env`, `service`, and `version` as attributes in your logs. With these fields you can find the exact logs associated with a specific service and version, or all logs correlated to an observed [trace][1].
 
-It is recommended to configure your application's tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience for adding `env`, `service`, and `version`. See the [unified service tagging][2] documentation for more details.
+It is recommended to configure your application's APM SDK with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience for adding `env`, `service`, and `version`. See the [unified service tagging][2] documentation for more details.
 
 Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][3]. Your language level logs _must_ be turned into Datadog attributes in order for traces and logs correlation to work.
 

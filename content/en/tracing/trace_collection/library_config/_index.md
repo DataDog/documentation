@@ -1,5 +1,5 @@
 ---
-title: Configure the Datadog Tracing Library
+title: Configure the Datadog APM SDK
 type: multi-code-lang
 ---
 

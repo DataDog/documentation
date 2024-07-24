@@ -20,7 +20,7 @@ further_reading:
 
 ## Automatic configuration
 
-To enable Go runtime metrics collection, start the tracer using the `WithRuntimeMetrics` option:
+To enable Go runtime metrics collection, start the APM SDK using the `WithRuntimeMetrics` option:
 
 ```go
 tracer.Start(tracer.WithRuntimeMetrics())
@@ -30,7 +30,7 @@ View runtime metrics in correlation with your Go services on the [Service Catalo
 
 By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] option (available starting in 1.18.0) or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`.
 
-If `WithDogstatsdAddress` is not used, the tracer attempts to determine the address of the statsd service according to the following rules:
+If `WithDogstatsdAddress` is not used, the APM SDK attempts to determine the address of the statsd service according to the following rules:
   1. Look for `/var/run/datadog/dsd.socket` and use it if present. IF NOT, continue to #2.
   2. The host is determined by `DD_AGENT_HOST`, and defaults to "localhost".
   3. The port is retrieved from the Agent. If not present, it is determined by `DD_DOGSTATSD_PORT`, and defaults to `8125`.

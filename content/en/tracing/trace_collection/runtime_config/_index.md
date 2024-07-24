@@ -43,7 +43,7 @@ You can tell when the configuration changes have been successfully applied by re
 
 ## Supported configuration options
 
-The following options are supported with configuration at runtime. The required tracer version is listed for each language:
+The following options are supported with configuration at runtime. The required APM SDK version is listed for each language:
 
 | Option                                                                                                                                 | Java      | Javascript              | Python   | .NET      | Ruby      | Go        | C++ |
 |----------------------------------------------------------------------------------------------------------------------------------------|-----------|-------------------------|----------|-----------|-----------|-----------|-|

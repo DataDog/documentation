@@ -7,7 +7,7 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
-description: 'Instrument your code with the Datadog Go APM tracer.'
+description: 'Instrument your code with the Datadog Go APM APM SDK.'
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -84,7 +84,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 ### Adding tags globally to all spans
 
-Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTag` option:
+Add [tags][1] to all [spans][2] by configuring the APM SDK with the `WithGlobalTag` option:
 
 ```go
 package main

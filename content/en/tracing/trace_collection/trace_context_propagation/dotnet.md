@@ -12,12 +12,12 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-
-The Datadog APM Tracer supports [B3][5] and [W3C Trace Context][6] headers extraction and injection for distributed tracing.
+<div class="alert alert-info">Text containing an <a href="https://google.com">HTML link.</a></div>
+The Datadog APM APM SDK supports [B3][5] and [W3C Trace Context][6] headers extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
-The .NET Tracer supports the following styles:
+The .NET APM SDK supports the following styles:
 
 - W3C Trace Context: `tracecontext` (`W3C` alias is deprecated)
 - Datadog: `datadog`
@@ -31,7 +31,7 @@ You can use the following environment variables to configure injection and extra
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in the order of configured styles, and uses the first successful extracted value.
 
-**Notes**: 
+**Notes**:
 
 - Starting from version [2.48.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.48.0), the default propagation style is `datadog, tracecontext`, so the Datadog headers are used, followed by the W3C Trace Context. Prior to version 2.48.0, the order was `tracecontext, Datadog` for both extraction and injection propagation.  Prior to version [2.22.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.22.0), only the `Datadog` injection style was enabled.
 - Starting from version [2.42.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.42.0), when multiple extractors are specified, the `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` configuration specifies whether context extraction should exit immediately upon detecting the first valid `tracecontext`. The default value is `false`.

@@ -21,7 +21,7 @@ further_reading:
 
 ## Requirements and limitations
 
-- Datadog Ruby tracing library `dd-trace-rb` version 1.9.0 or greater.
+- Datadog Ruby APM SDK `dd-trace-rb` version 1.9.0 or greater.
 - Gem version support 1.1.0 or greater.
 
 The following OpenTelemetry features implemented in the Datadog library as noted:
@@ -32,12 +32,12 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 | [Span processors][2]                  | Unsupported                                          |
 | [Span Exporters][3]                   | Unsupported                                            |
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through [custom logging][10]. |
-| Trace/span [ID generators][4]         | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].     |
+| Trace/span [ID generators][4]         | ID generation is performed by the APM SDK, with support for [128-bit trace IDs][12].     |
 
 
-## Configuring OpenTelemetry to use the Datadog tracing library
+## Configuring OpenTelemetry to use the Datadog APM SDK
 
-1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog APM SDK instead.
 
 1. Add the `datadog` gem to your Gemfile:
 

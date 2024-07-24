@@ -4,7 +4,7 @@ aliases:
   - /tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
 ---
 
-If the application with the APM SDK cannot reach the Datadog Agent, look for connection errors in the [tracer startup logs][1] or [tracer debug logs][2], which can be found with your application logs.
+If the application with the APM SDK cannot reach the Datadog Agent, look for connection errors in the [APM SDK startup logs][1] or [APM SDK debug logs][2], which can be found with your application logs.
 
 ## Errors that indicate an APM Connection problem
 
@@ -17,7 +17,7 @@ If you see these messages, it means your traces are not being submitted to the D
 {{< programming-lang lang="java" >}}
 #### Java diagnostic CLI
 
-Starting with 0.82.0+ of the Java tracer, you can use a diagnostic command where the Java tracer is installed to detect potential connection issues. From where `dd-java-agent.jar` is installed (inside the application container), run:
+Starting with 0.82.0+ of the Java tracer, you can use a diagnostic command where the Java APM SDK is installed to detect potential connection issues. From where `dd-java-agent.jar` is installed (inside the application container), run:
 
 ```bash
 java -jar /path/to/dd-java-agent.jar sampleTrace -c 1
@@ -31,13 +31,13 @@ Example output:
 ```
 
 
-#### Tracer startup logs
+#### APM SDK startup logs
 
 ```text
 [dd.trace 2021-08-17 17:59:29:234 +0000] [dd-trace-processor] WARN datadog.trace.agent.common.writer.ddagent.DDAgentApi - Error while sending 9 (size=5KB) traces to the DD agent. Total: 9, Received: 9, Sent: 0, Failed: 9. java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8126 (Will not log errors for 5 minutes)
 ```
 
-#### Tracer debug logs
+#### APM SDK debug logs
 
 ```text
 [dd.trace 2021-08-17 18:04:50:282 +0000] [dd-trace-processor] DEBUG datadog.communication.ddagent.DDAgentFeaturesDiscovery - Error querying info at http://localhost:8126/
@@ -49,13 +49,13 @@ java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8126
 
 {{< programming-lang lang="python" >}}
 
-#### Tracer startup logs
+#### APM SDK startup logs
 
 ```text
-2021-08-17 19:10:06,169 WARNING [ddtrace.tracer] [tracer.py:655] [dd.service= dd.env= dd.version= dd.trace_id=0 dd.span_id=0] - - DATADOG TRACER DIAGNOSTIC - Agent not reachable at http://localhost:8126. Exception raised: [Errno 99] Cannot assign requested address
+2021-08-17 19:10:06,169 WARNING [ddtrace.tracer] [tracer.py:655] [dd.service= dd.env= dd.version= dd.trace_id=0 dd.span_id=0] - - DATADOG APM SDK DIAGNOSTIC - Agent not reachable at http://localhost:8126. Exception raised: [Errno 99] Cannot assign requested address
 ```
 
-#### Tracer debug logs
+#### APM SDK debug logs
 
 ```text
 2021-08-17 14:04:12,982 ERROR [ddtrace.internal.writer] [writer.py:466] [dd.service= dd.env= dd.version= dd.trace_id=0 dd.span_id=0] - failed to send traces to Datadog Agent at http://localhost:8126
@@ -68,13 +68,13 @@ Traceback (most recent call last):
 
 {{< programming-lang lang="ruby" >}}
 
-#### Tracer startup logs
+#### APM SDK startup logs
 
 ```text
-W, [2021-08-17T18:37:51.542245 #24]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126)
+W, [2021-08-17T18:37:51.542245 #24]  WARN -- ddtrace: [ddtrace] DATADOG APM SDK DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126)
 ```
 
-#### Tracer debug logs
+#### APM SDK debug logs
 
 ```text
 D, [2021-08-17T18:51:28.962389 #24] DEBUG -- ddtrace: [ddtrace] (/usr/local/bundle/gems/ddtrace-0.48.0/lib/ddtrace/transport/http/client.rb:33:in `rescue in send_request') Internal error during HTTP transport request. Cause: Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126) Location: /usr/local/lib/ruby/2.5.0/net/http.rb:939:in `rescue in block in connect'
@@ -84,30 +84,30 @@ D, [2021-08-17T18:51:28.962389 #24] DEBUG -- ddtrace: [ddtrace] (/usr/local/bund
 
 {{< programming-lang lang="go" >}}
 
-#### Tracer startup logs
+#### APM SDK startup logs
 
 ```text
-2021/08/17 17:46:22 Datadog Tracer v1.32.0 WARN: DIAGNOSTICS Unable to reach agent intake: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused
+2021/08/17 17:46:22 Datadog APM SDK v1.32.0 WARN: DIAGNOSTICS Unable to reach agent intake: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused
 ```
 
-#### Tracer debug logs
+#### APM SDK debug logs
 
 ```text
-2021/08/17 17:47:42 Datadog Tracer v1.32.0 ERROR: lost 1 traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused (occurred: 17 Aug 21 17:46 UTC)
+2021/08/17 17:47:42 Datadog APM SDK v1.32.0 ERROR: lost 1 traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused (occurred: 17 Aug 21 17:46 UTC)
 ```
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
 
-#### Tracer startup logs
+#### APM SDK startup logs
 
 ```text
-DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
+DATADOG APM SDK DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
 Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
 ```
 
-#### Tracer debug logs
+#### APM SDK debug logs
 
 ```text
 Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
@@ -136,7 +136,7 @@ System.Net.Http.HttpRequestException: Connection refused
 
 {{< programming-lang lang="php" >}}
 
-#### Tracer startup logs
+#### APM SDK startup logs
 
 ```
 Failed to connect to localhost port 8126: Connection refused
@@ -222,7 +222,7 @@ See the table below for example setups. Some require setting up additional netwo
 | [Datadog Agent and Application Docker Containers][17] | Datadog Agent container |
 
 
-**Note about web servers**: If the `agent_url` section in the [tracer startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there's an additional setting to ensure that [Apache][18] or [Nginx][19] pick up the `DD_AGENT_HOST` environment variable correctly.
+**Note about web servers**: If the `agent_url` section in the [APM SDK startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there's an additional setting to ensure that [Apache][18] or [Nginx][19] pick up the `DD_AGENT_HOST` environment variable correctly.
 
 If your APM SDK is sending traces correctly based on your setup, then proceed to the next step.
 
@@ -257,7 +257,7 @@ If the configuration is correct, but you're still seeing connection errors, [con
 - Information about the environment in which you're deploying the application and Datadog Agent.
 - If you're using proxies, information about how they've been configured.
 - Any configuration files used to set up the application and the Datadog Agent.
-- Startup logs or tracer debug logs outlining the connection error.
+- Startup logs or APM SDK debug logs outlining the connection error.
 - A Datadog [Agent flare][5]. For dedicated containers, send the flare from the [dedicated Trace Agent container][20].
 
 

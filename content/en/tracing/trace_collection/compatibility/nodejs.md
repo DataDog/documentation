@@ -16,7 +16,7 @@ further_reading:
 
 ### Versioning
 
-Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
+Versioning of the Datadog Node.js APM SDK follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
 
 | Major          | Minor                                                          | Patch    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|

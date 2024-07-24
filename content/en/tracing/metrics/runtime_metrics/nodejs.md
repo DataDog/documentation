@@ -24,7 +24,7 @@ This feature is in public beta.
 
 ## Automatic configuration
 
-Runtime metrics collection can be enabled with one configuration parameter in the tracing client either through the tracer option: `tracer.init({ runtimeMetrics: true })` or through the environment variable: `DD_RUNTIME_METRICS_ENABLED=true`
+Runtime metrics collection can be enabled with one configuration parameter in the tracing client either through the APM SDK option: `tracer.init({ runtimeMetrics: true })` or through the environment variable: `DD_RUNTIME_METRICS_ENABLED=true`
 
 
    {{< tabs >}}

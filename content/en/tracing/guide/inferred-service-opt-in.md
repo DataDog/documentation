@@ -135,11 +135,11 @@ exporters:
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The minimum Java tracer version required is 1.16.0. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum Java APM SDK version required is 1.16.0. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-[Download the latest Java tracer version][1].
+[Download the latest Java APM SDK version][1].
 
-To opt in, add the following environment variables or system properties to your tracer settings:
+To opt in, add the following environment variables or system properties to your APM SDK settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -159,9 +159,9 @@ Remove the following settings from your configuration:
 
 {{% tab "Go" %}}
 
-The minimum Go tracer version required is [v1.52.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum Go APM SDK version required is [v1.52.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variables or system properties to your tracer settings:
+To opt in, add the following environment variables or system properties to your APM SDK settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -173,9 +173,9 @@ To opt in, add the following environment variables or system properties to your 
 
 {{% tab "NodeJS" %}}
 
-The minimum NodeJS tracer versions required are [2.44.0][1], [3.31.0][2], or [4.10.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum NodeJS APM SDK versions required are [2.44.0][1], [3.31.0][2], or [4.10.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variables or system properties to your tracer settings:
+To opt in, add the following environment variables or system properties to your APM SDK settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -188,9 +188,9 @@ To opt in, add the following environment variables or system properties to your 
 {{% /tab %}}
 
 {{% tab "PHP" %}}
-The minimum PHP tracer version required is [0.90.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum PHP APM SDK version required is [0.90.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variables or system properties to your tracer settings:
+To opt in, add the following environment variables or system properties to your APM SDK settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -201,9 +201,9 @@ To opt in, add the following environment variables or system properties to your 
 
 {{% tab ".NET" %}}
 
-The minimum .NET tracer version required is [v2.35.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum .NET APM SDK version required is [v2.35.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variable to your tracer settings or system properties:
+To opt in, add the following environment variable to your APM SDK settings or system properties:
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.35.0
@@ -212,23 +212,23 @@ To opt in, add the following environment variable to your tracer settings or sys
 
 {{% tab "Python" %}}
 
-The minimum Python tracer version required is [v1.16.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum Python APM SDK version required is [v1.16.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variables to your tracer settings or system properties:
+To opt in, add the following environment variables to your APM SDK settings or system properties:
 
-Add the following environment variables to your tracer settings or system properties:
+Add the following environment variables to your APM SDK settings or system properties:
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
-As of tracer version `v1.16.0` all libraries are supported except for Boto2.
+As of APM SDK version `v1.16.0` all libraries are supported except for Boto2.
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.16.0
 
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-The minimum Ruby tracer version required is [v1.13.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum Ruby APM SDK version required is [v1.13.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variables to your tracer settings or system properties:
+To opt in, add the following environment variables to your APM SDK settings or system properties:
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 [1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.13.0

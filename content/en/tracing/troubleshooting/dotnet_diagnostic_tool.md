@@ -8,9 +8,9 @@ The diagnostic tool  `dd-dotnet` is bundled with the APM SDK starting with versi
 
 ## Installing `dd-trace`
 
-**This section is for versions of the tracer older than 2.42.0.**
+**This section is for versions of the APM SDK older than 2.42.0.**
 
-Older versions of the tracer did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
+Older versions of the APM SDK did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
 
 You can install `dd-trace` in one of the following ways:
 

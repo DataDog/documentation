@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Datadog APM tracer supports [B3][11] and [W3C][1] headers extraction and injection for distributed tracing.
+Datadog APM APM SDK supports [B3][11] and [W3C][1] headers extraction and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The supported styles for C++ are:
 

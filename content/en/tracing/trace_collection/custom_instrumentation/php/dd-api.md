@@ -29,7 +29,7 @@ If you have not yet read the instructions for auto-instrumentation and setup, st
 
 ## Annotations
 
-If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to your code to instrument it. It is a lighter alternative to [custom instrumentation written in code](#writing-custom-instrumentation). For example, add the `#[DDTrace\Trace]` attribute to methods for Datadog to trace them.
+If you are using PHP 8, as of v0.84 of the APM SDK, you can add attributes to your code to instrument it. It is a lighter alternative to [custom instrumentation written in code](#writing-custom-instrumentation). For example, add the `#[DDTrace\Trace]` attribute to methods for Datadog to trace them.
 
 ```php
 <?php
@@ -424,7 +424,7 @@ function doRiskyThing() {
 
 ## Adding span links (Beta)
 
-<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>.</div>
+<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP APM SDK v0.87.2+</a>.</div>
 
 Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 
@@ -750,7 +750,7 @@ Done.
 
 ### Zend framework 1 manual instrumentation
 
-Zend framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+Zend framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the APM SDK manually.
 
 First, [download the latest source code from the releases page][6]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
 

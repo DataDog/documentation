@@ -1,5 +1,5 @@
 ---
-title: Tracer Debug Logs
+title: APM SDK Debug Logs
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -10,7 +10,7 @@ further_reading:
 
 Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
 
-Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
+Debug mode is disabled by default. To enable it, follow the corresponding language APM SDK instructions:
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 
@@ -18,7 +18,7 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 
 To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file:
+**Note**: Datadog Java APM SDK implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file:
 ```
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
 ```
@@ -29,7 +29,7 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 {{< programming-lang lang="python" >}}
 
-The steps for enabling debug mode in the Datadog Python Tracer depends on the version of the tracer your application is using. Choose the scenario that applies:
+The steps for enabling debug mode in the Datadog Python APM SDK depends on the version of the APM SDK your application is using. Choose the scenario that applies:
 
 ### Scenario 1: ddtrace version 2.x and higher
 
@@ -38,7 +38,7 @@ The steps for enabling debug mode in the Datadog Python Tracer depends on the ve
 2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` to the filename of that log file, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
    By default, the file size is 15728640 bytes (about 15MB), and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
 
-**Note:** If the application uses the root logger and changes log level to `DEBUG`, debug tracer logs are enabled. If you want to override this behavior, override the `ddtrace` logger as follows:
+**Note:** If the application uses the root logger and changes log level to `DEBUG`, debug APM SDK logs are enabled. If you want to override this behavior, override the `ddtrace` logger as follows:
 
 ```
 import logging
@@ -56,7 +56,7 @@ logging.getLogger("ddtrace").setLevel(logging.WARNING)
 
 1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
-2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` with a filename that tracer logs should be written to, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
+2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` with a filename that APM SDK logs should be written to, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
    By default, the file size is 15728640 bytes (about 15MB) and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
 
 3. To route logs to the console, for **Python 2** applications, configure `logging.basicConfig()` or similar. Logs are automatically sent to the console for **Python 3** applications.
@@ -76,7 +76,7 @@ logging.getLogger("ddtrace").setLevel(logging.WARNING)
 
 ### Scenario 5: Configuring debug logging in the application code with the standard logging library
 
-For any version of ddtrace, rather than setting the `DD_TRACE_DEBUG` tracer environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
+For any version of ddtrace, rather than setting the `DD_TRACE_DEBUG` APM SDK environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
 
 ```
 log = logging.getLogger("ddtrace.tracer")
@@ -130,7 +130,7 @@ func main() {
 
 #### Abandoned span logs
 
-The Datadog Go Tracer also supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10m`), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. Abandoned span logs appear at the Info level.
+The Datadog Go APM SDK also supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10m`), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. Abandoned span logs appear at the Info level.
 
 You can also enable debugging abandoned spans during the `Start` config:
 
@@ -155,11 +155,11 @@ func main() {
 
 To enable debug mode for the Datadog Node.js Tracer, use the environment variable `DD_TRACE_DEBUG=true`.
 
-**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the tracer initialization but this is no longer supported.
+**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the APM SDK initialization but this is no longer supported.
 
 **Application Logs**
 
-In debug mode the tracer will log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
+In debug mode the APM SDK will log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
 For example:
 
@@ -180,13 +180,13 @@ const tracer = require('dd-trace').init({
 
 Then check the Agent logs to see if there is more info about your issue:
 
-* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][1] for more information.
+* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the APM SDK is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][1] for more information.
 
 * If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][1].
 
-If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][2] and provide the relevant log entries with [a flare][3].
+If neither of these log entries is present, then no request was sent to the Agent, which means that the APM SDK is not instrumenting your application. In this case, [contact Datadog support][2] and provide the relevant log entries with [a flare][3].
 
-For more tracer settings, check out the [API documentation][4].
+For more APM SDK settings, check out the [API documentation][4].
 
 
 [1]: /agent/troubleshooting/
@@ -218,7 +218,7 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
-Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the APM SDK to delete log files from the current logging directory on startup. The APM SDK deletes log files the same age and older than the given number of days, with a default value of `31`.
 
 For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
 
@@ -235,11 +235,11 @@ There are two types of logs that are created in these paths:
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
-There are two options to route debug tracer logs to a file.
+There are two options to route debug APM SDK logs to a file.
 
 **Option 1:**
 
-With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug tracer logs:
+With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug APM SDK logs:
 
 - **Environment variable**: `DD_TRACE_LOG_FILE`
 
@@ -278,7 +278,7 @@ cmake --install .build
 
 ## Review debug logs
 
-When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
+When debug mode for your APM SDK is enabled, tracer-specific log messages report how the APM SDK was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
 
 If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
 
@@ -310,7 +310,7 @@ If there are errors that you don't understand, or if traces are reported as flus
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Logs generated by the Python Tracer have the logging handler name `ddtrace`.
+Logs generated by the Python APM SDK have the logging handler name `ddtrace`.
 
 **Traces were generated:**
 

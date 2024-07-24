@@ -77,7 +77,7 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 ### Install the APM SDK
 
-After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
+After you install and configure your Datadog Agent, the next step is to add the APM SDK directly in the application to instrument it. Read more about [compatibility information][1].
 
 You can install the Datadog .NET APM SDK machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
@@ -231,7 +231,7 @@ After enabling the .NET APM SDK for your service:
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+If needed, configure the APM SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
 
 ## Custom instrumentation
 

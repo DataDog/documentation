@@ -102,7 +102,7 @@ The breakdown is composed of the following parts:
     1. By default, the [Agent distributes an ingestion rate][4] to services depending on service traffic.
     2. When the service is manually [configured][8] to ingest a certain percentage of traces at the APM SDK level.
 
-- **Complete traces dropped by the tracer rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to manually configure this rate.
+- **Complete traces dropped by the APM SDK rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to manually configure this rate.
 
 - **Traces dropped due to the Agent CPU or RAM limit** (red): This mechanism may drop spans and create incomplete traces. To fix this, increase the CPU and memory allocation for the infrastructure that the Agent runs on.
 

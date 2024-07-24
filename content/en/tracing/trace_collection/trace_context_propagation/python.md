@@ -12,7 +12,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-The Datadog APM tracer supports extraction and injection of [B3][2] and [W3C Trace Context][3] headers for distributed tracing.
+The Datadog APM SDK supports extraction and injection of [B3][2] and [W3C Trace Context][3] headers for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection and extraction styles. Supported styles are:

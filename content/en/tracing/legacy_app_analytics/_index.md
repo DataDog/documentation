@@ -37,7 +37,7 @@ App Analytics is available starting in version 0.25.0 of the Java tracing client
 
 App Analytics is available starting in version 0.19.0 of the Python tracing client. Enable App Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
-* Tracer Configuration: `ddtrace.config.analytics_enabled = True`
+* APM SDK Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
@@ -153,12 +153,12 @@ Integration names can be found on the [integrations table][1].
 
 In addition to setting globally, you can enable or disable App Analytics for individual integrations using the following setting:
 
-* Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
+* APM SDK Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
 Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, set the following to enable all Boto Tracing in App Analytics:
 
-* Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
+* APM SDK Configuration: `ddtrace.config.boto.analytics_enabled = True`
 * Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
 
 **Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [App Analytics][1] for details.
@@ -279,7 +279,7 @@ Database tracing is not captured by App Analytics by default and you must enable
 
 Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
-* Tracer Configuration: `ddtrace.config.psycopg.analytics_enabled = True`
+* APM SDK Configuration: `ddtrace.config.psycopg.analytics_enabled = True`
 * Environment Variable: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}

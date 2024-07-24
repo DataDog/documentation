@@ -1,5 +1,5 @@
 ---
-title: Configuring the Node.js Tracing Library
+title: Configuring the Node.js APM SDK
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
@@ -24,9 +24,9 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the APM SDK with your code and configure the Agent to collect APM data, optionally configure the APM SDK as desired, including setting up [Unified Service Tagging][1].
 
-Tracer settings can be configured with the following environment variables:
+APM SDK settings can be configured with the following environment variables:
 
 ### Tagging
 
@@ -70,7 +70,7 @@ Whether to enable dd-trace. Setting this to `false` disables all features of the
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
 **Default**: `false`<br>
-Enable debug logging in the tracer.
+Enable debug logging in the APM SDK.
 
 `DD_TRACING_ENABLED`
 : **Configuration**: N/A<br>
@@ -80,22 +80,22 @@ Whether to enable tracing.
 `DD_TRACE_AGENT_URL`
 : **Configuration**: `url`<br>
 **Default**: `http://localhost:8126`<br>
-The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+The URL of the Trace Agent that the APM SDK submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
 
 `DD_TRACE_AGENT_HOSTNAME`
 : **Configuration**: `hostname`<br>
 **Default**: `localhost`<br>
-The address of the Agent that the tracer submits to.
+The address of the Agent that the APM SDK submits to.
 
 `DD_TRACE_AGENT_PORT`
 : **Configuration**: `port`<br>
 **Default**: `8126`<br>
-The port of the Trace Agent that the tracer submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+The port of the Trace Agent that the APM SDK submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_DOGSTATSD_PORT`
 : **Configuration**: `dogstatsd.port`<br>
 **Default**: `8125`<br>
-The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
+The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this APM SDK `DD_DOGSTATSD_PORT` must match it.
 
 `DD_LOGS_INJECTION`
 : **Configuration**: `logInjection`<br>
@@ -115,7 +115,7 @@ The maximum number of traces per second per service instance.<br>
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>
 **Default**: `[]`<br>
-Sampling rules to apply to priority sampling. A JSON array of objects. Each object must have a `sample_rate` value between 0.0 and 1.0 (inclusive). Each rule has optional `name` and `service` fields, which are regex strings to match against a trace's `service` and `name`. Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
+Sampling rules to apply to priority sampling. A JSON array of objects. Each object must have a `sample_rate` value between 0.0 and 1.0 (inclusive). Each rule has optional `name` and `service` fields, which are regex strings to match against a trace's `service` and `name`. Rules are applied in configured order to determine the trace's sample rate. If omitted, the APM SDK defers to the Agent to dynamically adjust sample rate across all traces.
 
 `DD_SPAN_SAMPLING_RULES`
 : **Configuration**: `spanSamplingRules`<br>
@@ -145,17 +145,17 @@ Provide service names for each plugin. Accepts comma separated `plugin:service-n
 : **Configuration**: N/A<br>
 **Default**: N/A<br>
 **Example**: `DD_TRACE_DISABLED_PLUGINS=express,dns`<br>
-A comma-separated string of integration names automatically disabled when the tracer is initialized.
+A comma-separated string of integration names automatically disabled when the APM SDK is initialized.
 
 `DD_TRACE_LOG_LEVEL`
 : **Configuration**: `logLevel`<br>
 **Default**: `debug`<br>
-A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
+A string for the minimum log level for the APM SDK to use when debug logging is enabled, for example, `error`, `debug`.
 
 Flush Interval
 : **Configuration**: `flushInterval`<br>
 **Default**: `2000`<br>
-Interval in milliseconds at which the tracer submits traces to the Agent.
+Interval in milliseconds at which the APM SDK submits traces to the Agent.
 
 `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`
 : **Configuration**: `flushMinSpans`<br>
@@ -205,7 +205,7 @@ Whether to enable automatic instrumentation of external libraries using the buil
 `DD_TRACE_STARTUP_LOGS`
 : **Configuration**: `startupLogs`<br>
 **Default**: `false`<br>
-Enable tracer startup configuration and diagnostic log.
+Enable APM SDK startup configuration and diagnostic log.
 
 `DD_DBM_PROPAGATION_MODE`
 : **Configuration**: `dbmPropagationMode`<br>

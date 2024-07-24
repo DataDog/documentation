@@ -22,9 +22,9 @@ further_reading:
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][5]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][5]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog APM SDK instead.
 
-2. Install the Datadog .NET tracing library and enable the APM SDK for your [.NET Framework service][10] or your [.NET Core (and .NET 5+) service][11]. **Beta**: You can optionally do this with [Single Step APM Instrumentation][13].
+2. Install the Datadog .NET APM SDK and enable the APM SDK for your [.NET Framework service][10] or your [.NET Core (and .NET 5+) service][11]. **Beta**: You can optionally do this with [Single Step APM Instrumentation][13].
 
 3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 

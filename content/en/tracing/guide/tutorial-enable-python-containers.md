@@ -244,7 +244,7 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
+    Now, the APM SDK automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
 
 4. Rebuild the containers by running:
    {{< code-block lang="sh" >}}

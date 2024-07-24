@@ -47,7 +47,7 @@ To search for these spans in trace search, the query is `resource_name:"SELECT ?
 
 ### In-code instrumentation
 
-If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the tracer documentation of your application's runtime][3] for information on how to create custom configuration for span names and resource names.
+If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the APM SDK documentation of your application's runtime][3] for information on how to create custom configuration for span names and resource names.
 
 ### Agent configuration
 

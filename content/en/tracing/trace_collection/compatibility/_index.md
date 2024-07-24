@@ -5,7 +5,7 @@ description:
 further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
-  text: "Add the tracing library to your application"
+  text: "Add the APM SDK to your application"
 aliases:
   - /tracing/compatibility
   - /tracing/compatibility_requirements

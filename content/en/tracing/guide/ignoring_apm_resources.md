@@ -7,7 +7,7 @@ A service can handle a variety of requests, some of which you might not want tra
 There are two ways to specify that such an endpoint should be untraced and excluded from trace metrics:
 
 - [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent), or
-- [Tracer configuration](#tracer-configuration-options).
+- [APM SDK configuration](#tracer-configuration-options).
 
 <div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
@@ -18,7 +18,7 @@ If you need assistance, contact [Datadog support][1].
 
 The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from coming through: ignoring span tags or ignoring resources. If traces are dropped due to these settings, the trace metrics exclude these requests.
 
-Configuring the Trace Agent to ignore certain spans or resources applies to all services that send traces to this particular Datadog Agent. If you have application-specific requirements, use the [Tracer configuration](#tracer-configuration) method instead.
+Configuring the Trace Agent to ignore certain spans or resources applies to all services that send traces to this particular Datadog Agent. If you have application-specific requirements, use the [APM SDK configuration](#tracer-configuration) method instead.
 
 ### Ignoring based on span tags
 
@@ -210,7 +210,7 @@ apm_config:
 
 Consider a trace that contains calls to `/api/healthcheck` that you don't want traces from:
 
-{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Flame graph of a resource you want the tracer to ignore" style="width:90%;">}}
+{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Flame graph of a resource you want the APM SDK to ignore" style="width:90%;">}}
 
 Take note of the resource name of the global root span.
 
@@ -385,7 +385,7 @@ If you use Amazon ECS (such as on EC2), in your Datadog Agent container definiti
 
 <div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
-## Tracer configuration options
+## APM SDK configuration options
 
 Some of the language-specific tracers have an option to modify spans before they are sent to the Datadog Agent. Use this option if you have application-specific requirements and are using a language listed below.
 
@@ -396,7 +396,7 @@ Some of the language-specific tracers have an option to modify spans before they
 
 {{< programming-lang lang="ruby" >}}
 
-The Ruby tracer has a post-processing pipeline that removes traces that meet certain criteria. More information and examples can be found in [Post-processing traces][1].
+The Ruby APM SDK has a post-processing pipeline that removes traces that meet certain criteria. More information and examples can be found in [Post-processing traces][1].
 
 For example, if the resource name is `Api::HealthchecksController#index`, use the `Datadog::Tracing::Pipeline::SpanFilter` class to remove traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
@@ -412,7 +412,7 @@ Datadog::Tracing.before_flush(
 
 {{< programming-lang lang="python" >}}
 
-The Python tracer has a `FilterRequestsOnUrl` filter you can configure to remove traces from certain endpoints. Alternatively, you can write a custom filter. See [Trace Filtering][1] for more information.
+The Python APM SDK has a `FilterRequestsOnUrl` filter you can configure to remove traces from certain endpoints. Alternatively, you can write a custom filter. See [Trace Filtering][1] for more information.
 
 Suppose the root span's `http.url` span tag has a value of `http://<domain>/healthcheck`. Use the following regex to match against any endpoint ending in `healthcheck`:
 
@@ -450,14 +450,14 @@ tracer.use('http', {
 //import http
 
 ```
-<div class="alert alert-info"><strong>Note</strong>: The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
+<div class="alert alert-info"><strong>Note</strong>: The APM SDK configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
 
-The Java tracer has an option for a custom `TraceInterceptor` to filter out certain spans. See [Extending Tracers][1].
+The Java APM SDK has an option for a custom `TraceInterceptor` to filter out certain spans. See [Extending Tracers][1].
 
 For example, if your resource name is `GET /healthcheck`, write a trace interceptor that drops traces containing this resource name. Adjust the logic to meet your use case.
 

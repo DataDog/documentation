@@ -192,7 +192,7 @@ At this stage you should be able to deploy your bundle, (which is your applicati
 
 If needed, configure the APM SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
 
-Read [tracer settings][3] for a list of initialization options.
+Read [APM SDK settings][3] for a list of initialization options.
 
 ## Further Reading
 

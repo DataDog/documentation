@@ -1,5 +1,5 @@
 ---
-title: Tracer Startup Logs
+title: APM SDK Startup Logs
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -7,13 +7,13 @@ further_reading:
 ---
 ## Startup logs
 
-Tracer startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, `DATADOG ERROR`, or `DATADOG CONFIGURATION` to simplify searching within your logs.
+APM SDK startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, `DATADOG ERROR`, or `DATADOG CONFIGURATION` to simplify searching within your logs.
 
 Some languages log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below. Some languages don't log diagnostics entries, also noted below.
 
 `CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an `agent_error` key, which indicates whether the Agent is reachable.
 
-`DIAGNOSTICS` or `ERROR` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` or `ERROR` log lines, confirm from the indicated log that settings and configurations are applied correctly.
+`DIAGNOSTICS` or `ERROR` log entries, in the languages that produce them, happen when the APM SDK encounters an error during application startup. If you see `DIAGNOSTICS` or `ERROR` log lines, confirm from the indicated log that settings and configurations are applied correctly.
 
 If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
@@ -28,7 +28,7 @@ If you do not see logs at all, ensure that your application logs are not silence
 
 **Diagnostics:**
 
-The Java tracer does not output Diagnostics logs. For this check, run the tracer in [debug mode][1].
+The Java APM SDK does not output Diagnostics logs. For this check, run the APM SDK in [debug mode][1].
 
 
 [1]: /tracing/troubleshooting/tracer_debug_logs/
@@ -48,7 +48,7 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 
 **Note:** On Linux, you must create the logs directory before you enable debug mode.
 
-Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the APM SDK to delete log files from the current logging directory on startup. The APM SDK deletes log files the same age and older than the given number of days, with a default value of `31`.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
@@ -70,7 +70,7 @@ Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` settin
 
 **Diagnostics:**
 
-The .NET tracer prints the following diagnostic lines:
+The .NET APM SDK prints the following diagnostic lines:
 
 ```text
 DATADOG TRACER DIAGNOSTICS - Profiler disabled in DD_TRACE_ENABLED
@@ -134,7 +134,7 @@ DATADOG TRACER CONFIGURATION - {"agent_error":"Couldn't connect to server","ddtr
 
 **Diagnostics:**
 
-Failed diagnostics for the PHP tracer print in the `error_log` if the tracer is in [DEBUG mode][1].
+Failed diagnostics for the PHP APM SDK print in the `error_log` if the tracer is in [DEBUG mode][1].
 
 ```text
 DATADOG TRACER DIAGNOSTICS - agent_error: Couldn't connect to server
@@ -161,7 +161,7 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 
 **Diagnostics:**
 
-The Go Tracer prints one of two possible diagnostic lines, one for when the Agent cannot be reached, and the other for trace sampling errors.
+The Go APM SDK prints one of two possible diagnostic lines, one for when the Agent cannot be reached, and the other for trace sampling errors.
 
 ```text
 2020/07/09 15:57:07 Datadog Tracer v1.26.0 WARN: DIAGNOSTICS Unable to reach agent: [Reason for error]
@@ -189,7 +189,7 @@ DATADOG TRACER CONFIGURATION - {"date":"2020-07-02T18:51:18.294Z","os_name":"Dar
 
 **Diagnostics:**
 
-The Node.js Tracer prints a diagnostic line when the Agent cannot be reached.
+The Node.js APM SDK prints a diagnostic line when the Agent cannot be reached.
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
@@ -200,13 +200,13 @@ DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent
 
 **Log location:**
 
-The Python tracer logs configuration information as INFO-level. It logs diagnostics information, if found, as ERROR.
+The Python APM SDK logs configuration information as INFO-level. It logs diagnostics information, if found, as ERROR.
 
 If there is no logging configuration, only Diagnostics will be output to `Stderr`.
 
-To see tracer startup logs, either add a logger, or set `DD_TRACE_DEBUG=true` in your configuration and run your application with `ddtrace-run`. This adds a logger, and exposes both debug and startup tracer logs.
+To see APM SDK startup logs, either add a logger, or set `DD_TRACE_DEBUG=true` in your configuration and run your application with `ddtrace-run`. This adds a logger, and exposes both debug and startup APM SDK logs.
 
-To see options for logging to a file with `DD_TRACE_LOG_FILE`, read [Tracer Debug Logs][1].
+To see options for logging to a file with `DD_TRACE_LOG_FILE`, read [APM SDK Debug Logs][1].
 
 **Configuration:**
 
@@ -216,7 +216,7 @@ To see options for logging to a file with `DD_TRACE_LOG_FILE`, read [Tracer Debu
 
 **Diagnostics:**
 
-The Python tracer prints a diagnostic line when the Agent cannot be reached.
+The Python APM SDK prints a diagnostic line when the Agent cannot be reached.
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Connection refused
@@ -249,7 +249,7 @@ export DD_TRACE_STARTUP_LOGS=true
 
 ### Output
 
-When startup logs are enabled, the tracer outputs configuration and diagnostic information.
+When startup logs are enabled, the APM SDK outputs configuration and diagnostic information.
 
 **Configuration:**
 
@@ -259,7 +259,7 @@ W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 
 **Diagnostics:**
 
-The Ruby tracer prints an error line when the Agent cannot be reached.
+The Ruby APM SDK prints an error line when the Agent cannot be reached.
 
 ```text
 W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR - TRACER - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
@@ -270,7 +270,7 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR -
 
 **Configuration:**
 
-The Ruby tracer prints a configuration line for each product (i.e. Profiling, Core, and Tracing).
+The Ruby APM SDK prints a configuration line for each product (i.e. Profiling, Core, and Tracing).
 
 ```text
 I, [2023-08-16T18:09:01.972265 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
@@ -282,22 +282,22 @@ I, [2023-08-16T18:09:27.223143 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGUR
 
 **Diagnostics:**
 
-For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
+For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the APM SDK logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ## Connection errors
 
-If your application or startup logs contain `DIAGNOSTICS` errors or messages that the Agent cannot be reached or connected to (varying depending on your language), it means the tracer is unable to send traces to the Datadog Agent.
+If your application or startup logs contain `DIAGNOSTICS` errors or messages that the Agent cannot be reached or connected to (varying depending on your language), it means the APM SDK is unable to send traces to the Datadog Agent.
 
-If you have these errors, check that your Agent is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your tracer and Agent configuration.
+If you have these errors, check that your Agent is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your APM SDK and Agent configuration.
 
 See [Connection Errors][6] for information about errors indicating that your instrumented application cannot communicate with the Datadog Agent.
 
 ## Configuration settings
 
-If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer. Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
+If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the APM SDK match the settings from your deployment and configuration of the Datadog Tracer. Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
 
 If an integration you are using is not supported, or you want a fresh pair of eyes on your configuration output to understand why traces are not appearing as expected in Datadog, [contact support][5] who can help you diagnose and create a Feature Request for a new integration.
 

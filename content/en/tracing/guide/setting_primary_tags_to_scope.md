@@ -29,18 +29,18 @@ Primary tags must follow a different set of rules from those of conventional [Da
 
 The default and mandatory primary tag is the environment your traces are collected from. Its tag key is `env`, and its default value for un-tagged data is `env:none`.
 
-#### Tracer environment
+#### APM SDK environment
 
-Datadog recommends having the tracer set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
+Datadog recommends having the APM SDK set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
 
-If `DD_ENV` is exposed to your service's process, the tracer will use it automatically. See [Unified Service Tagging][3] to learn about setting `DD_ENV` and other standard service environment variables.
+If `DD_ENV` is exposed to your service's process, the APM SDK will use it automatically. See [Unified Service Tagging][3] to learn about setting `DD_ENV` and other standard service environment variables.
 
-You may also manually set `env` as a global tag for the tracer in code. See [assigning tags in APM][4] for more information.
+You may also manually set `env` as a global tag for the APM SDK in code. See [assigning tags in APM][4] for more information.
 
 #### Agent environment
 
 The `env` tag can be set in your Agent configuration.
-**Do not set different `env` tags on the Tracer and Agent. This may cause duplicate tagging on [trace metrics][5].**
+**Do not set different `env` tags on the APM SDK and Agent. This may cause duplicate tagging on [trace metrics][5].**
 
 Options:
 
@@ -70,7 +70,7 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 ## Add a second primary tag in Datadog
 
 If you need to aggregate your trace metrics across additional dimensions, we recommend setting up a second primary tag in addition to the
-default and mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Service Catalog Performance** tab. 
+default and mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Service Catalog Performance** tab.
 
 Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
@@ -78,7 +78,7 @@ Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
-* The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
+* The APM SDK always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
 * The second primary tag supports up to 30 unique values. See [APM Data Volume Guidelines][9] for details.
 
 If you change a previously set primary tag, be aware of the following:
@@ -148,7 +148,7 @@ DD_APM_FEATURES=enable_cid_stats
 {{% /tab %}}
 {{< /tabs >}}
 
-Restart the Agent. Go to the [APM Settings][6] page and select the second primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
+Restart the Agent. Go to the [APM Settings][6] page and select the second primary tag you want to use. It can take up to two hours for changes to this setting to take effect.
 
 Now you can filter your services in the [Service Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
