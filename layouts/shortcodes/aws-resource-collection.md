@@ -1,6 +1,7 @@
 ### AWS resource collection IAM policy
 
 To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection">resource collection</a>, you must attach AWS's managed <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">SecurityAudit Policy</a> to your Datadog IAM role.
+
 For the most **complete** security coverage that Datadog can provide, Datadog recommends also attaching the following **read permissions** to the IAM role:
 
 ```json
