@@ -10,9 +10,15 @@ further_reading:
   text: "How Application Security Management Works in Datadog"
 ---
 
-{{% asm-libraries-capabilities %}}
+The following ASM capabilities are supported relative to each language's tracing library:
 
-{{< partial name="security-platform/appsec-languages.html" >}}
+| ASM capability                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
+|----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
+| Code Security                          | 1.15.0  | 2.42.0   | 4.18.0                                           | private beta  | not supported   | not supported | not supported |
+
+Select your application language for details about framework compatibility and feature support.
+
+{{< partial name="security-platform/appsec-languages-code-security.html" >}}
 
 <br>
 
