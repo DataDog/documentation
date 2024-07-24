@@ -13257,7 +13257,6 @@
          * and rerender the chooser and page content.
          */
         handlePrefSelectionChange(e) {
-          console.log("Handling pref selection change");
           const node = e.target;
           if (!(node instanceof Element)) {
             console.log("From handleValueChange: Node is not an Element");
@@ -13292,13 +13291,25 @@
             }
           }
         }
-        configure(p) {
+        initialize(p) {
           this.prefOptionsConfig = p.prefOptionsConfig;
           this.pagePrefsConfig = p.pagePrefsConfig;
           this.chooserElement = p.chooserElement;
           this.selectedValsByPrefId = p.selectedValsByPrefId || {};
           this.contentElement = p.contentElement;
           this.renderableTree = p.renderableTree;
+          const contentElement = document.getElementById("markdoc-content");
+          if (!contentElement) {
+            throw new Error('Cannot find content element with id "markdoc-content"');
+          } else {
+            this.contentElement = contentElement;
+          }
+          const chooserElement = document.getElementById("markdoc-chooser");
+          if (!chooserElement) {
+            throw new Error('Cannot find chooser element with id "markdoc-chooser"');
+          } else {
+            this.chooserElement = chooserElement;
+          }
           this.addChooserEventListeners();
         }
         rerender() {

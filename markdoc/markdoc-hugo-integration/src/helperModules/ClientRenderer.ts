@@ -7,7 +7,7 @@ import MarkdocStaticCompiler from 'markdoc-static-compiler';
 
 /**
  * A class containing functions for rendering on the client.
- * When a new page loads, it should call ClientRenderer.configure()
+ * When a new page loads, it should call ClientRenderer.initialize()
  * in order to set up the client renderer with the necessary data
  * for re-rendering in response to user selection changes.
  *
@@ -42,7 +42,6 @@ export class ClientRenderer {
    * and rerender the chooser and page content.
    */
   handlePrefSelectionChange(e: Event) {
-    console.log('Handling pref selection change');
     const node = e.target;
     if (!(node instanceof Element)) {
       console.log('From handleValueChange: Node is not an Element');
@@ -79,7 +78,7 @@ export class ClientRenderer {
     }
   }
 
-  configure(p: {
+  initialize(p: {
     prefOptionsConfig: PrefOptionsConfig;
     pagePrefsConfig: PagePrefsConfig;
     chooserElement: Element;
@@ -93,6 +92,20 @@ export class ClientRenderer {
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.contentElement = p.contentElement;
     this.renderableTree = p.renderableTree;
+
+    const contentElement = document.getElementById('markdoc-content');
+    if (!contentElement) {
+      throw new Error('Cannot find content element with id "markdoc-content"');
+    } else {
+      this.contentElement = contentElement;
+    }
+
+    const chooserElement = document.getElementById('markdoc-chooser');
+    if (!chooserElement) {
+      throw new Error('Cannot find chooser element with id "markdoc-chooser"');
+    } else {
+      this.chooserElement = chooserElement;
+    }
 
     this.addChooserEventListeners();
   }

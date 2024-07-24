@@ -1,5 +1,5 @@
-<div id="chooser"><%- chooser %></div>
-<div id="content"><%- content %></div>
+<div id="markdoc-chooser"><%- chooser %></div>
+<div id="markdoc-content"><%- content %></div>
 <script>
     let selectedValsByPrefId =
     <%- JSON.stringify(defaultValsByPrefId, null, 2) %>;
@@ -9,14 +9,9 @@
     <%- JSON.stringify(pagePrefsConfig, null, 2) %>;
     const prefOptionsConfig =
     <%- JSON.stringify(prefOptionsConfig, null, 2) %>;
-    const contentElement = document.getElementById('content');
-    const chooserElement = document.getElementById('chooser');
-    console.log("from page: configuring client renderer ...");
-    clientRenderer.configure({
+    clientRenderer.initialize({
         pagePrefsConfig,
         prefOptionsConfig,
-        chooserElement,
-        contentElement,
         selectedValsByPrefId,
         renderableTree
     });

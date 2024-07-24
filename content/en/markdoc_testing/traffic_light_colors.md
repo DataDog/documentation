@@ -1,7 +1,7 @@
 ---
 title: Traffic Light Colors
 ---
-<div id="chooser">
+<div id="markdoc-chooser">
   <div>
     <div class="markdoc-pref__container">
       <div class="markdoc-pref__label">Color</div>
@@ -49,7 +49,7 @@ title: Traffic Light Colors
     <hr />
   </div>
 </div>
-<div id="content">
+<div id="markdoc-content">
   <article>
     <p>
       This test page explores everyday items that are green, yellow, or red --
@@ -684,14 +684,9 @@ title: Traffic Light Colors
       },
     ],
   };
-  const contentElement = document.getElementById("content");
-  const chooserElement = document.getElementById("chooser");
-  console.log("from page: configuring client renderer ...");
-  clientRenderer.configure({
+  clientRenderer.initialize({
     pagePrefsConfig,
     prefOptionsConfig,
-    chooserElement,
-    contentElement,
     selectedValsByPrefId,
     renderableTree,
   });

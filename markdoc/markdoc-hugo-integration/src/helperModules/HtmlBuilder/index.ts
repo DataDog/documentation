@@ -6,14 +6,13 @@ import MarkdocStaticCompiler, {
   RenderableTreeNode
 } from 'markdoc-static-compiler';
 import prettier from 'prettier';
-import { ResolvedPagePrefs, ResolvedPagePref } from '../../schemas/resolvedPagePrefs';
-import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
-import { PagePrefsConfig } from '../../schemas/yaml/frontMatter';
+import { ResolvedPagePrefs } from '../../schemas/resolvedPagePrefs';
 import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
-import { Chooser, ChooserProps, rerenderChooser } from './components/chooser';
+import { Chooser } from './components/chooser';
 import { renderToString } from 'react-dom/server';
+import { SharedRenderer } from '../SharedRenderer';
 
 const pageTemplate = fs.readFileSync(
   path.resolve(__dirname, 'templates/page.html.ejs'),
@@ -28,8 +27,8 @@ const clientRendererScriptStr = fs.readFileSync(
 );
 
 export class HtmlBuilder {
-  static getChooserHtml(props: ChooserProps) {
-    return renderToString(Chooser(props));
+  static getChooserHtml(resolvedPagePrefs: ResolvedPagePrefs) {
+    return renderToString(Chooser(resolvedPagePrefs));
   }
 
   /**
@@ -58,15 +57,12 @@ export class HtmlBuilder {
     let chooser = '';
 
     if (frontmatter.page_preferences) {
-      const resolvedPrefs = this.resolvePagePrefs({
+      const resolvedPrefs = SharedRenderer.resolvePagePrefs({
         pagePrefsConfig: frontmatter.page_preferences,
         prefOptionsConfig: p.prefOptionsConfig,
         valsByPrefId: defaultValsByPrefId
       });
-      chooser = this.getChooserHtml({
-        resolvedPagePrefs: resolvedPrefs,
-        valsByPrefId: defaultValsByPrefId
-      });
+      chooser = this.getChooserHtml(resolvedPrefs);
     }
 
     // Build the page content HTML
@@ -208,55 +204,5 @@ export class HtmlBuilder {
     }
 
     return renderableTree;
-  }
-
-  /**
-   * Resolve the page preferences object that is used
-   * to populate the content filtering UI (AKA the chooser),
-   * replacing any placeholders with actual values.
-   */
-  static resolvePagePrefs(p: {
-    pagePrefsConfig: PagePrefsConfig;
-    prefOptionsConfig: PrefOptionsConfig;
-    valsByPrefId: Record<string, string>;
-  }): ResolvedPagePrefs {
-    const resolvedPagePrefs: ResolvedPagePrefs = {};
-
-    p.pagePrefsConfig.forEach((prefConfig) => {
-      // Make a copy, so the placeholders in the original pref config
-      // stay intact for future resolutions
-      const prefConfigDup = { ...prefConfig };
-      // Replace any placeholder in the options source with the default value
-      if (GLOBAL_PLACEHOLDER_REGEX.test(prefConfigDup.options_source)) {
-        prefConfigDup.options_source = prefConfigDup.options_source.replace(
-          GLOBAL_PLACEHOLDER_REGEX,
-          (_match: string, placeholder: string) => {
-            return p.valsByPrefId[placeholder.toLowerCase()];
-          }
-        );
-      }
-
-      const resolvedPref: ResolvedPagePref = {
-        identifier: prefConfigDup.identifier,
-        displayName: prefConfigDup.display_name,
-        defaultValue:
-          prefConfigDup.default_value ||
-          p.prefOptionsConfig[prefConfigDup.options_source].find(
-            (option) => option.default
-          )!.identifier,
-        options: p.prefOptionsConfig[prefConfigDup.options_source].map((option) => ({
-          id: option.identifier,
-          displayName: option.display_name
-        }))
-      };
-
-      resolvedPagePrefs[prefConfigDup.identifier] = resolvedPref;
-    });
-
-    return resolvedPagePrefs;
-  }
-
-  static rerenderChooser(p: { chooserProps: ChooserProps; elementToPatch: Element }) {
-    rerenderChooser(p);
   }
 }
