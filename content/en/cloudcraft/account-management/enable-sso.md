@@ -4,18 +4,18 @@ title: Enable SSO
 
 Enabling Single Sign-On (SSO) for your account allows you to simplify authentication and login access to Cloudcraft.
 
-Cloudcraft supports SSO through three methods:
+Cloudcraft supports SSO through these methods:
 
-- **Datadog SSO**: Datadog SSO does not require any additional setup for new accounts, select **Sign in with Datadog** on Cloudcraft's signup or login pages. [Contact the Cloudcraft support team][1] to enable this feature for existing
+- **Datadog SSO**: Datadog SSO does not require any additional setup for new accounts. Select **Sign in with Datadog** on Cloudcraft's signup or login pages. [Contact the Cloudcraft support team][1] to enable this feature for existing
   accounts.
-- **Google Workspace SSO**: Google SSO does not require any additional setup, select **Sign in with Google** on Cloudcraft's signup or login pages.
+- **Google Workspace SSO**: Google SSO does not require any additional setup. Select **Sign in with Google** on Cloudcraft's signup or login pages.
 - **SAML SSO**: Available for Cloudcraft Pro and Enterprise accounts, SAML SSO federates with your organization's existing identity provider, allowing your users to log in with their existing accounts and for your organization to centrally manage who has access to the application.
 
 This article is all about SAML SSO and how to set it up in your account.
 
 ## Setting up SAML/SSO
 
-<div class="alert alert-info">Only the account owner configures the SAML SSO feature. If the account owner is unable to configure SSO, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.</div>
+<div class="alert alert-info">Only the account owner can configure the SAML SSO feature. If the account owner is unable to configure SSO, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.</div>
 
 1. Go to **User** > **Security & SSO**.
 2. Register Cloudcraft as a new application with your SAML identity provider. For detailed instructions, see the following articles:
@@ -24,7 +24,7 @@ This article is all about SAML SSO and how to set it up in your account.
     - [Enable SSO With a Generic Identity Provider][4]
 3. Find the necessary details to create a new application with the identity provider in the same window.
 
-{{< img src="cloudcraft/account-management/enable-sso/service-provider-details.png" alt="Cloudcraft SAML service provider integration settings." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/account-management/enable-sso/service-provider-details.png" alt="Cloudcraft SAML service provider integration settings" responsive="true" style="width:100%;">}}
 
 4. After creating the application, return to Cloudcraft and upload the metadata file from the identity provider.
 5. Select the **SAML Single Sign-On is enabled** option.

@@ -13,7 +13,7 @@ For general information on using SSO with Cloudcraft, check out [Enable SSO in Y
 
 ## Setting Up SAML/SSO
 
-<div class="alert alert-info">Only the account owner configures the SAML SSO feature. If the account owner is unable to configure SSO, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.</div>
+<div class="alert alert-info">Only the account owner can configure the SAML SSO feature. If the account owner is unable to configure SSO, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.</div>
 
 1. In Cloudcraft, navigate to **User** > **Security & SSO**.
 2. The details you need to create a new application with Okta can be found in the **Cloudcraft service provider details** section.
