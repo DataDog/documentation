@@ -33,7 +33,8 @@ Code Analysis is in public beta.
 {{< /callout >}}
 
 ## Overview
-Set up Datadog Static Analysis in-app [here][1].
+
+To set up Datadog Software Composition Analysis, navigate to [**Software Delivery** > **Code Analysis**][6].
 
 ## Select where to run Software Composition Analysis scans
 ### Scan with Datadog-hosted scanning
