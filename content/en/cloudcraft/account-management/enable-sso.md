@@ -28,7 +28,7 @@ This article is all about SAML SSO and how to set it up in your account.
 
 4. After creating the application, return to Cloudcraft and upload the metadata file from the identity provider.
 5. Select the **SAML Single Sign-On is enabled** option.
-6. Enable the **Strict mode** option if restricting access to Cloudcraft to only SAML SSO users is required.
+6. Enable the **Strict mode** option if you need to restrict access to Cloudcraft to only SAML SSO users.
 
 ## Additional features
 
