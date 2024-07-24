@@ -10,31 +10,31 @@ further_reading:
   text: Más información sobre distribuciones
 - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
   tag: Documentación
-  text: Más información sobre trazas métricas
+  text: Más información sobre las métricas de traza
 title: Métricas basadas en DDSketch en APM
 ---
 
-Las trazas métricas se recopilan automáticamente para tus servicios y recursos y se conservan durante 15 meses. Los percentiles de latencia existen como series temporales individuales. Estos percentiles también están disponibles como una [métrica de distribución de Datadog][1]. En lugar de tener un métrica diferente para cada percentil y métricas separadas para servicios, recursos o segunda etiqueta primaria, Datadog ofrece una simple métrica:
+Las métricas de traza (trace) se recopilan automáticamente para tus servicios y recursos, y se conservan durante 15 meses. Los percentiles de latencia existen como series temporales individuales. Estos percentiles también están disponibles como una [métrica de distribución de Datadog][1]. En lugar de tener una métrica diferente para cada percentil y métricas separadas para los servicios, recursos o segunda etiqueta primaria, Datadog ofrece una métrica simple:
 
 - `trace.<SPAN_NAME>`:
-  - *Requisito:* Esta métrica existe para cualquier servicio APM.
-  - *Descripción:* Representa las distribuciones de latencia para todos los servicios, recursos y versiones a través de diferentes entornos y segunda etiqueta primaria.
-  - *tipo de métrica:* [DISTRIBUCIÓN][2]
-  - *etiquetas:* `env`, `service`, `version`, `resource` y [la segunda etiqueta primaria][3].
+  - *Requisito previo:* esta métrica existe para cualquier servicio de APM.
+  - *Descripción:* representa las distribuciones de latencia para todos los servicios, recursos y versiones a través de diferentes entornos y segundas etiquetas primarias.
+  - *Tipo de métrica:* [DISTRIBUTION][2]
+  - *Etiquetas:* `env`, `service`, `version`, `resource` y [la segunda etiqueta primaria][3].
 
-Las páginas de servicio APM y de recursos utilizan este tipo de métrica automáticamente. Puedes usar las métricas para alimentar tus dashboards y monitores.
+Las páginas Servicio de APM y Recursos utilizan este tipo de métricas automáticamente. Puedes usar las métricas para alimentar tus dashboards y monitores.
 
-**¿Cómo estoy viendo un historial completo de esta nueva métrica?**
-- Datadog une cualquier consulta existente en la nueva métrica a una consulta equivalente en las métricas basada en la latencia de larga duración para no tener que crear varias consultas.
+**¿Por qué estoy viendo un historial completo de esta nueva métrica?**
+- Datadog une cualquier consulta existente en la nueva métrica a una consulta equivalente según las métricas de latencia de larga duración, para no tener que crear varias consultas.
 
 **Estoy viendo un cambio en los valores de mi latencia, ¿qué está pasando?
-- Las métricas de distribución de Datadog se basan en [DDSketch][4]. Esto incluye un cambio de garantías de error de rango a garantías de error relativo. Como resultado, ahora se garantiza que todos los valores del percentil estimado se acercan más al valor del percentil real.
+- Las métricas de distribución de Datadog se basan en [DDSketch][4]. Esto incluye un cambio de garantías de error de rango a garantías de error relativo. Como resultado, ahora se asegura que todos los valores del percentil estimado se acercan más al valor del percentil real.
 - En concreto, cabe esperar una reducción de los valores de p99, donde esta diferencia es más notable. Los nuevos valores se centran más en el valor preciso de p99.
-- Una cosa a tener en cuenta es que los cálculos de métrica APM no son exactamente similares a una métrica personalizada de distribución de Datadog que se calcularía en el código. El cálculo se realiza en el backend, por lo que pueden producirse algunas diferencias.
+- Una cosa a tener en cuenta es que los cálculos de métrica de APM no son exactamente similares a una métrica personalizada de distribución de Datadog que se calcularía en el código. El cálculo se realiza en el backend, por lo que pueden producirse algunas diferencias.
 
 **Utilizo Terraform. ¿Qué significa este cambio para mí?**
 - Las métricas siguen existiendo, tus definiciones de Terraform siguen existiendo y siguen funcionando.
-- Para aprovechar la [mayor precisión][4] que ofrece el nuevo sistema de métricas basado en DDSketch cambia tus definiciones de Terraform como se muestra en los siguientes ejemplos.
+- Para aprovechar la [mayor precisión][4] que ofrece el nuevo sistema de métricas basado en DDSketch, cambia tus definiciones de Terraform como se muestra en los siguientes ejemplos.
 
 Percentiles antes:
 ```

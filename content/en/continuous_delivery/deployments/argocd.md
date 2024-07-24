@@ -35,7 +35,7 @@ For more information on how to set up Argo CD notifications using webhooks, see 
 The first step is to create the service containing the Datadog intake URL and the Datadog API Key:
 1. Add your [Datadog API Key][11] in the
 `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
-1. Add a service in the `argocd-notifications-cm` config map with the following format:
+1. Add a notification service in the `argocd-notifications-cm` config map with the following format:
 
 ```yaml
 apiVersion: v1
@@ -54,7 +54,7 @@ data:
       value: "application/json"
 ```
 
-`cd-visibility-webhook` is the name of the service, and `$dd-api-key` is a reference to the API Key stored in the `argocd-notifications-secret` secret.
+`cd-visibility-webhook` is the name of the notification service, and `$dd-api-key` is a reference to the API Key stored in the `argocd-notifications-secret` secret.
 
 The second step is to add the template in the same `argocd-notifications-cm` config map:
 
@@ -100,7 +100,7 @@ data:
 
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
-After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
+After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
 
 ```yaml

@@ -118,10 +118,11 @@ OpenTelemetry provides an [example][14] for instrumenting a sample application.
 
 ## Setup
 
-To use an OpenTelemetry instrumentation with the Datadog Python SDK:
+To use Opentelemetry integrations with the Datadog Python SDK, perform the following steps:
 
-1. Follow the Datadog Python [Opentelemetry Api][15] docs to enable OpenTelemetry support.
-2. Ensure a Datadog Agent is configured to accept traces from your [application][16].
+ 1. Follow the instructions in [Opentelemetry Api][15] section in Datadog Python library docs. 
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-python-contrib` library.
+ 3. Ensure a Datadog Agent is configured to accept traces from your [application][16].
 
 
 [13]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/0a231e57f9722e6101194c6b38695addf23ab950/instrumentation#readme
@@ -140,10 +141,11 @@ OpenTelemetry provides an [example][19] for instrumenting a sample application.
 
 ## Setup
 
-To use an OpenTelemetry instrumentation with the Datadog Ruby SDK:
+To use Opentelemetry integrations with the the Datadog Ruby SDK, perform the following steps:
 
-1. Follow the Datadog Ruby [configuring Opentelemetry][20] docs to enable OpenTelemetry support.
-2. Ensure a Datadog Agent is configured to accept traces from your [application][16].
+ 1. Follow the instructions in [configuring Opentelemetry][20] in the Datadog Ruby SDK documentation. 
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-ruby-contrib` library.
+ 3. Ensure a Datadog Agent is configured to accept traces from your [application][16].
 
 [18]: https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation#opentelemetry-instrumentation-libraries
 [19]: https://opentelemetry.io/docs/zero-code/python/example/
@@ -152,13 +154,63 @@ To use an OpenTelemetry instrumentation with the Datadog Ruby SDK:
 
 {{% /tab %}}
 
-<!-- {{% tab "Go" %}}
+{{% tab "Go" %}}
 
 ## Compatibility requirements
 
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][20], including the [`opentelemetry-go-contrib/instrumentation`][21] libraries, but it does not support integrations that rely on metrics or logs exporters.
+
 ## Setup
 
-{{% /tab %}} -->
+To use Opentelemetry integrations with the the Datadog Ruby SDK, perform the following steps:
+
+ 1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][22] page.
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
+
+The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
+
+```go
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/otel"
+)
+
+func main() {
+	// register tracer
+	provider := ddotel.NewTracerProvider(ddtracer.WithDebugMode(true))
+	defer provider.Shutdown()
+	otel.SetTracerProvider(provider)
+
+	// configure the server with otelhttp instrumentation as you normally would using opentelemetry: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp
+	var mux http.ServeMux
+	mux.Handle("/hello", http.HandlerFunc(hello))
+	http.HandleFunc("/hello", hello)
+	log.Fatal(http.ListenAndServe(":8080", otelhttp.NewHandler(&mux, "server")))
+}
+
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "hello\n")
+}
+```
+
+{{< img src="opentelemetry/interoperability/go-otel-dropin-support.png" alt="go-dd-otelhttp">}}
+
+## Configuration
+
+No additional configuration is required.
+
+[20]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
+[21]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
+[22]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
+
+{{% /tab %}}
 
 <!-- {{% tab "NodeJS" %}}
 
