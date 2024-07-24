@@ -92,7 +92,7 @@ The following table shows which sections appear on the Setup page for each featu
       </td>
     </tr>
     <tr>
-      <td>AWS CloudTrail Logs</td>
+      <td>AWS CloudTrail Logs<br><em>*Requires Cloud SIEM</em></td>
       <td>
         <ul style="font-size: 16px;">
           <li><a href="/security/cloud_security_management/setup/cloudtrail_logs">AWS CloudTrail Logs</a></li>
