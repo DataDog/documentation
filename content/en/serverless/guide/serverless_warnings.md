@@ -100,7 +100,7 @@ Attack attempts were detected targeting the serverless application.
 
 **Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
 
-### Provisioned Concurrency
+### Provisioned concurrency
 
  The function's provisioned concurrency utilization was below 60%. According to AWS, provisioned concurrency is best optimized for cost when utilization is consistently greater than 60%.
 
