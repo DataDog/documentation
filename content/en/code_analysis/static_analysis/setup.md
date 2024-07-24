@@ -42,7 +42,7 @@ Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8
 ## Select your source code management provider
 Datadog Static Analysis supports all source code management providers, with native support for GitHub.
 ### Set up the GitHub integration 
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see code snippets in-app and enable [pull request comments][11].
+If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see inline code snippets and enable [pull request comments][11].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
