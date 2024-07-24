@@ -12,7 +12,7 @@ algolia:
 
 ## Overview
 
-[Code Analysis][1] integrates directly with the integrated development environment (IDE) tools to provide real-time feedback on the quality and security of your first-party code as it's being written.
+[Code Analysis][1] integrates directly with integrated development environment (IDE) tools to provide real-time feedback on the quality and security of your first-party code as it's being written.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PhpStorm, and PyCharm{{< /nextlink >}}
