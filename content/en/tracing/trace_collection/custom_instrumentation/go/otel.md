@@ -132,6 +132,18 @@ sp.End()
 
 ```
 
+## Adding span events
+You can add span events onto your spans using the `AddEvent` API. You must pass in an event name, with optional input for event timestamp and event attributes.
+
+```go
+// Start a span.
+ctx, span := t.Start(context.Background(), "span_name")
+span.AddEvent("event1")
+span.AddEvent("event2", oteltrace.WithTimestamp(now))
+span.AddEvent("event3", oteltrace.WithAttributes(attribute.String("key1", "value"), attribute.Int("key2", 1234)))
+s.End()
+```
+
 ## Adding spans
 
 Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
