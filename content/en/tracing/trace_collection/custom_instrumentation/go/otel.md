@@ -133,7 +133,8 @@ sp.End()
 ```
 
 ## Adding span events
-You can add span events onto your spans using the `AddEvent` API. You must pass in an event name, with optional input for event timestamp and event attributes.
+
+Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event timestamp and event attributes.
 
 ```go
 // Start a span.
