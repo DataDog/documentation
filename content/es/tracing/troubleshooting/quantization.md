@@ -1,6 +1,15 @@
 ---
-null
-...
+further_reading:
+- link: /tracing/trace_collection/custom_instrumentation/
+  tag: Documentación
+  text: Instrumentación personalizada
+- link: /tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
+  tag: Documentación
+  text: Sustituir etiquetas en tramos
+- link: /tracing/trace_collection/library_config/
+  tag: Documentación
+  text: Configuración de la biblioteca de rastreo
+title: Cuantificación de datos de APM
 ---
 
 ## Información general
