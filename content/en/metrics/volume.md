@@ -23,28 +23,28 @@ Cloud-based applications generate massive amounts of data, which can be overwhel
 Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][3], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
 With the Metrics Volume Management page you can quickly answer the following questions in real-time: 
-- What is my overall account's realtime estimated Indexed Custom Metrics usage? (A
-- Out of my realtime estimated Indexed CM usage, how much of this volume comes from Metrics without Limits configured metric names vs not?
+- What is my overall account's realtime estimated Indexed Custom Metrics usage?
 - What is my overall account's realtime estimated Ingested Custom Metrics usage?
 - What are the Top 500 largest Metrics without Limits configured metric names by Ingested Custom Metrics volume?
 - What are the Top 500 largest metric names by Indexed Custom Metrics volume?
 - What are the Top 500 spiking cardinality metric names?
 - Which team owns these Top 500 metric names and is responsible for optimizing?
+- Which metrics are actually valuable (or not) to my organization?
 
 ## Real-time visibility and monitoring on your account's estimated Custom Metrics usage
 Datadog provides you real-time estimated usage metrics OOTB so you can understand and alert on your usage in real-time. You can quickly see a breakdown of: 
 - Your account's indexed custom metrics volume in real-time (and how much of that indexed volume hasn't been optimized with [Metrics without Limits™][3] yet) 
 - Your account's ingested custom metrics (emitted from metrics that have been configured with [Metrics without Limits™][3]) in real-time
 
-{{< img src="metrics/volume/compare_metric_cardinality.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics. On hover over the change in volume, displays the cardinality graph of the metric over the past day" style="width:100%;" >}}
+{{< img src="metrics/volume/volume_graphs.png" alt="Estimated real-time indexed and ingested Custom Metrics volume. Upon clicking export, you can easily create a monitor or export the graph to a notebook to share." style="width:100%;" >}}
   
 
 ## Search, filter, and sort
 
 Use the search, filter, and sort features to understand:
 - Which team owns what metric names?
-- Which metrics your team should focus its cost optimization efforts on?
-- Which metrics have the highest cardinality, and which metrics have the highest increase in volume?
+- Which metric names your team should focus on optimizing?
+- Which metrics have the highest cardinality, and which metric names are spiking(aka have the highest increase in volume)?
 
 The Metric and Tag search bars provide a set of actions to filter the list of metrics. Enter keywords to search metric names. Type in any tag key value pair in the *Filter by Tag Value* box to filter the list by a specific team, application, or service.
 
@@ -52,7 +52,7 @@ Facets can also filter your metrics by:
 - **Configuration**: Metrics with tag configurations
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled
-- **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
+- **Query Activity** (Beta): Metrics not actively queried in the app or by the API in the past 30 days
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 
@@ -62,27 +62,24 @@ The Volume page displays a list of your metrics reported to Datadog sorted by es
 |**Top 500 Metric Names by Estimated Real-time Cardinality** | Identify the top 500 metric names by cardinality/volume.| 
 |**Top 500 Metric Names by Change in Volume** |Discover the top 500 metric names that have the greatest variance in their cardinality. These metrics may have anomalously (potentially unintentionally) spiked in the timeframe of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, you can use this view to investigate the metric spike. |
 
-## Compare metric cardinality
+## Compare a metric's cardinality (volume) over time 
 
 {{< img src="metrics/volume/compare_metric_cardinality.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics. On hover over the change in volume, displays the cardinality graph of the metric over the past day" style="width:100%;" >}}
 
-Cardinality refers to the number of unique sets of tag values associated with a given key. Tags with large numbers of possible values have a "high cardinality". A custom metric is identified by a unique combination of a metric's name and tag values (including the host tag). 
+When identifying your top 500 metric names by change in volume, you can additionally click on the number to compare a metric name's # of indexed custom metrics (its cardinality) over time. As a reminder, a single metric name can emit multiple indexed custom metrics (quick refresher on how we meter and bill for custom metrics here[6]) 
 
-Compare metric cardinality to understand:
-  - Which metric names are causing your custom metrics bill to spike. 
-  - What the organization's largest custom metrics are.
-  - What metric names have spiked recently in the past day or month.
-
-To view your spiking metric's cardinality over time:
+To compare your spiking metric's cardinality over time:
 1. Select a time frame in the top right hand corner (the recommended time frame is **Past 1 Day** or **Past 4 Weeks**).
-2. Find the metric you want to compare and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
+2. Select the metric name which you want the view the cardinality over time and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
 3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change Alert Monitor][2] documentation.
 
 ## Identify unqueried metrics
 
 {{< img src="metrics/volume/id_unqueried_metrics.png" alt="Facet fields for Query Activity with the 'Not actively queried' facet selected" style="width:100%;" >}}
 
-To effectively reduce costs with Metrics without Limits, identify your highest volume or spiking metric names. To find the metrics not actively queried in the past 30 days, click on **Not Actively Queried** in the *Query Activity Facet* box. Datadog analyzes query patterns to determine valuable metrics. Selecting **Not Actively Queried** generates a list of unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
+To effectively reduce costs with Metrics without Limits, organizations often start with their largest metric names that aren't valuable to the organization; in other words, ones that aren't actively queried. 
+
+To find the metrics not actively queried in the past 30 days, click on **Not Actively Queried** in the *Query Activity Facet* box. Datadog analyzes query patterns to determine valuable metrics. Selecting **Not Actively Queried** generates a list of unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
 
 ## Reduce metric volume and cost
 
@@ -124,3 +121,4 @@ To view a metric's related assets:
 [3]: /metrics/metrics-without-limits
 [4]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
 [5]: #reduce-metric-volume-and-cost
+[6]: https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrategauge
