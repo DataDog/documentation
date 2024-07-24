@@ -27,8 +27,8 @@ jobs:
           result-encoding: string
           script: |
               const tags = await github.rest.repos.listTags({
-                owner: 'DataDog',
-                repo: 'synthetics-worker'
+                owner: 'hestonhoffman',
+                repo: 'changed-lines'
               })
               const regex = /^(?:(?:[0-9]*)[.](?:[0-9]*)[.](?:[0-9]*))$/;
               latestTag = tags.data.find(value => regex.test(value))
