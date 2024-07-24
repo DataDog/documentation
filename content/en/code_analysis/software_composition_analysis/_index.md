@@ -49,7 +49,7 @@ SCA supports scanning for libraries in the following languages and technologies:
 - Python
 - Ruby
 
-Set up Datadog Software Composition Analysis in-app [here][1], or follow [setup documentation here][3].
+To get started, set up Software Composition Analysis on the [**Code Analysis** page][2] or see the [Setup documentation][3].
 
 ### Lockfiles
 
