@@ -27,7 +27,7 @@ Code Analysis is in public beta.
 {{< /callout >}}
 
 ## Overview
-Set up Datadog Static Analysis in-app [here][1].
+To set up Datadog Static Analysis, navigate to [**Software Delivery** > **Code Analysis**][1].
 
 ## Select where to run Static Analysis scans
 ### Scan in CI pipelines
