@@ -28,15 +28,15 @@ products:
 
 ## Overview
 
-Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Notification rules can span across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
+Notification rules are predefined sets of conditions that automate the process of informing your team about security issues. By using notification rules, you no longer need to manually set up notifications for each individual detection rule. Notification rules can be configured to cover a wide range of scenarios by specifying parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
 {{< img src="security/notification-rules-overview.png" alt="Notification Rules overview page" style="width:100%;" >}}
 
 ## Create notification rules
 
-To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes. If the notification rule matches the specified conditions, the resulting notification includes details about the matched notification rule in the notification footer.
+To create a notification rule, you start by specifying the conditions under which the rule should be triggered. These conditions may include criteria such as severity, detection rule type, tags, and attributes. When an issue matches the defined criteria, the rule automatically sends notifications to the designated recipients.
 
-<div class="alert alert-info">As you configure the rule, a preview of issues matching the notification rule conditions appears on the <strong>Preview of Matching Results</strong> panel. This can be useful in determining if the notification rule is too specific or broad.</div>
+<div class="alert alert-info">As you configure the rule, a preview of issues matching the notification rule conditions appears on the <strong>Preview of Matching Results</strong> panel. This preview helps you determine if your notification rule is too specific or too broad, allowing you to adjust the criteria accordingly for optimal coverage.</div>
 
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
 1. Enter a **Name** for the notification rule.
@@ -46,7 +46,7 @@ To create a notification rule, you define the logic for when the notification ru
 1. Select one or more severity levels.
 1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
 1. Click **Add Recipient**.
-1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
+1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notification channels][2] for more information.
 1. Click **Save**.
 
 {{< img src="security/notification-rules-setup.png" alt="Setup page for creating a notification rule" style="width:100%;" >}}
