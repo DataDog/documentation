@@ -154,7 +154,7 @@ In this moment, not all the setups are supported. To be able to make the correla
 
 **Note**: does not make changes to the configuration repository with `git commit`, and as such is incompatible with this setup.
 
-If your setup is similar to the one described above, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][15] for additional details:
+If your setup is similar to the one described above, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][14] for additional details:
 
 ```yaml
 - job: JobToUpdateConfigurationRepository
@@ -173,7 +173,7 @@ If your setup is similar to the one described above, run the `datadog-ci deploym
 
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
 
-To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][14] and your Kubernetes resources should have the following labels:
+To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
 - `service` (required): specifies the Datadog service of this resource
 - `team` (optional): specifies the Datadog team of this resource
 
@@ -181,7 +181,7 @@ Only the Kubernetes resources with the following kinds are eligible: `Deployment
 
 Add the following annotations to your Argo CD application:
 - `dd_multiservice`: `true`. This annotation specifies whether Datadog automatically infers the services deployed in a sync based on the changed Kubernetes resources.
-- `dd_k8s_cluster`: set to the name of the Kubernetes cluster that the Argo CD application deploys to. The name must match the name reported in the [Datadog Kubernetes product][15].
+- `dd_k8s_cluster`: set to the name of the Kubernetes cluster that the Argo CD application deploys to. The name must match the name reported in the [Datadog Kubernetes product][16].
 
 For example:
 ```yaml
@@ -222,10 +222,6 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /tracing/service_catalog
-<<<<<<< HEAD
-[14]: https://argocd-image-updater.readthedocs.io/en/stable/
-[15]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
-=======
-[14]: /containers/kubernetes
-[15]: https://app.datadoghq.com/orchestration/explorer
->>>>>>> master
+[14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
+[15]: /containers/kubernetes
+[16]: https://app.datadoghq.com/orchestration/explorer
