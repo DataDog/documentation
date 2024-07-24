@@ -184,3 +184,4 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [15]: /tracing/compatibility_requirements/
 [16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
 [17]: /tracing/guide/setting_primary_tags_to_scope/
+[18]: /tracing/trace_collection/custom_instrumentation/?tab=datadogapi
