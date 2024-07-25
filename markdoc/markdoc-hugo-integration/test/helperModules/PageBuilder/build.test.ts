@@ -30,7 +30,7 @@ describe('PageBuilder.build', () => {
       prefOptionsConfig: prefOptionsConfigForPage,
       debug: true,
       includeAssetsInline: true,
-      outputMode: 'html'
+      outputFormat: 'html'
     });
 
     test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {

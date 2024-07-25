@@ -6,7 +6,7 @@ import {
 } from '../../../src/schemas/yaml/prefOptions';
 import { Frontmatter, FrontmatterSchema } from '../../../src/schemas/yaml/frontMatter';
 
-describe('ConfigProcessor.buildPrefOptionsConfigForPage', () => {
+describe('ConfigProcessor.getPrefOptionsForPage', () => {
   const prefOptions: PrefOptionsConfig = {
     color_options: [
       { identifier: 'blue', display_name: 'Blue', default: true },

@@ -1,4 +1,3 @@
-import { resolve } from 'path';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
 import { ResolvedPagePrefs, ResolvedPagePref } from '../schemas/resolvedPagePrefs';
 import { PagePrefsConfig, PagePrefConfig } from '../schemas/yaml/frontMatter';
