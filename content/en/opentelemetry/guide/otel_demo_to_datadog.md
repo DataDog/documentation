@@ -74,9 +74,9 @@ Complete the following steps to configure these three components.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-1. In an IDE or a text editor of your choice open the OpenTelemetry Demo repository and at the root folder create a file called `docker-compose.override.yml`.
+1. Open the OpenTelemetry Demo repository. Create a file called `docker-compose.override.yml` in the root folder 
 
-2. Open the created file, paste the following content and set the [Datadog site][7] and [Datadog API key][8] environment variables:
+2. Open the created file. Paste the following content and set the [Datadog site][7] and [Datadog API key][8] environment variables:
 
     ```shell
     services: 
