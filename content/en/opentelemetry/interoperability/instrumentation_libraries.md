@@ -228,7 +228,7 @@ To use Opentelemetry instrumentation libraries with the Datadog .NET SDK:
 
 | Library           | Versions | NuGet package                     | Integration Name     | Setup instructions            |
 | ----------------- | -------- | --------------------------------- | -------------------- | ----------------------------- |
-| Azure Service Bus | 7.14.0+ | [`Azure.Messaging.ServiceBus`][2]  | `AzureServiceBus`    | See `Azure SDK` section below |
+| Azure Service Bus | 7.14.0+ | [Azure.Messaging.ServiceBus][2]  | `AzureServiceBus`    | See `Azure SDK` section below |
 
 ### Azure SDK
 
