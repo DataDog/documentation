@@ -25,6 +25,9 @@ const CompilationConfigSchema = z.object({
 
 type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
 
+/**
+ * The external interface of the integration.
+ */
 export class MarkdocHugoIntegration {
   directories: {
     content: string;
@@ -58,43 +61,61 @@ export class MarkdocHugoIntegration {
     };
   }
 
+  /**
+   * Provide a string that includes the shared styles and scripts
+   * required to display and re-render any page.
+   * Any page-specific content or scripts are not included;
+   * those are inlined in the compiled files.
+   */
   buildAssetsPartial() {
     const styles = PageBuilder.getStylesStr(this.config.debug);
     const script = PageBuilder.getClientRendererScriptStr(this.config.debug);
     const partial = `
-      <style>${styles}</style>
-      <script>${script}</script>
+<style>${styles}</style>
+<script>${script}</script>
     `;
     return partial;
+  }
+
+  #parseMdocFile(markdocFilepath: string): ParsedFile | null {
+    const parsedFile = FileParser.parseMdocFile(
+      markdocFilepath,
+      this.directories.partials
+    );
+
+    // if the file has errors, log the errors for later output
+    // and continue to the next file
+    if (parsedFile.errorReports.length > 0) {
+      this.parsingErrorReportsByFilePath[markdocFilepath] = parsedFile.errorReports;
+      return null;
+    }
+
+    return parsedFile;
   }
 
   /**
    * Compile all Markdoc files detected in the content folder
    * to Markdown or HTML, depending on the configuration.
+   *
+   * If an array of filepaths is provided, only compile those files.
    */
-  compileAllMdocFiles() {
+  compileMdocFiles(filePaths?: string[]) {
     this.#resetErrors();
     this.compiledFiles = [];
 
     const prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
       this.directories.options
     );
-    const markdocFilepaths = FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
+    const markdocFilepaths =
+      filePaths || FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
 
     for (const markdocFilepath of markdocFilepaths) {
-      const parsedFile = FileParser.parseMdocFile(
-        markdocFilepath,
-        this.directories.partials
-      );
-
-      // if the file has errors, log the errors for later output
-      // and continue to the next file
-      if (parsedFile.errorReports.length > 0) {
-        this.parsingErrorReportsByFilePath[markdocFilepath] = parsedFile.errorReports;
+      const parsedFile = this.#parseMdocFile(markdocFilepath);
+      if (!parsedFile) {
         continue;
       }
 
-      const compiledFilepath = this.compileMdocFile({
+      const compiledFilepath = this.#compileMdocFile({
         markdocFilepath,
         pageBuildArgs: {
           parsedFile,
@@ -121,11 +142,39 @@ export class MarkdocHugoIntegration {
   }
 
   /**
+   * Pretty-print any errors to the console.
+   */
+  logErrorsToConsole() {
+    const errorReportsByFilePath = this.parsingErrorReportsByFilePath;
+    if (Object.keys(errorReportsByFilePath).length > 0) {
+      console.error(`Syntax errors found in Markdoc files:`);
+
+      for (const filePath in errorReportsByFilePath) {
+        console.error(`\nIn file ${filePath}:`);
+        errorReportsByFilePath[filePath].forEach((report) => {
+          console.error(
+            `  - ${report.error.message} at line(s) ${report.lines.join(', ')}`
+          );
+        });
+      }
+    }
+
+    if (Object.keys(this.validationErrorsByFilePath).length > 0) {
+      console.error(`Errors found in Markdoc files:`);
+
+      for (const filePath in this.validationErrorsByFilePath) {
+        console.error(`\nIn file ${filePath}:`);
+        console.error(`  - ${this.validationErrorsByFilePath[filePath]}`);
+      }
+    }
+  }
+
+  /**
    * Compile a single Markdoc file to Markdown or HTML,
    * depending on the configuration, and write the output to a file.
    * If the compilation succeeds, return the path to the compiled file.
    */
-  compileMdocFile(p: {
+  #compileMdocFile(p: {
     markdocFilepath: string;
     pageBuildArgs: PageBuildArgs;
   }): string | null {
@@ -194,34 +243,6 @@ export class MarkdocHugoIntegration {
       Object.keys(this.parsingErrorReportsByFilePath).length > 0 ||
       Object.keys(this.validationErrorsByFilePath).length > 0
     );
-  }
-
-  /**
-   * Print any errors to the console.
-   */
-  logErrorsToConsole() {
-    const errorReportsByFilePath = this.parsingErrorReportsByFilePath;
-    if (Object.keys(errorReportsByFilePath).length > 0) {
-      console.error(`Syntax errors found in Markdoc files:`);
-
-      for (const filePath in errorReportsByFilePath) {
-        console.error(`\nIn file ${filePath}:`);
-        errorReportsByFilePath[filePath].forEach((report) => {
-          console.error(
-            `  - ${report.error.message} at line(s) ${report.lines.join(', ')}`
-          );
-        });
-      }
-    }
-
-    if (Object.keys(this.validationErrorsByFilePath).length > 0) {
-      console.error(`Errors found in Markdoc files:`);
-
-      for (const filePath in this.validationErrorsByFilePath) {
-        console.error(`\nIn file ${filePath}:`);
-        console.error(`  - ${this.validationErrorsByFilePath[filePath]}`);
-      }
-    }
   }
 
   /**

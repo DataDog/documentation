@@ -19,7 +19,7 @@ describe('MarkdocHugoIntegration', () => {
 
   // compile the bad files
   const { hasErrors, parsingErrorReportsByFilePath, validationErrorsByFilePath } =
-    integration.compileAllMdocFiles();
+    integration.compileMdocFiles();
 
   // sanitize the file paths so snapshots are consistent across machines
   const errorReports = { ...parsingErrorReportsByFilePath };
