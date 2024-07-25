@@ -1,7 +1,8 @@
 {
   "data": {
     "attributes": {
-      "api_key": "update-secret"
+      "api_key": "update-secret",
+      "name": "test-name"
     },
     "type": "fastly-accounts"
   }
