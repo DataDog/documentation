@@ -5,7 +5,14 @@ disable_toc: false
 
 ## Overview
 
-Use the Log Enrichment Template to enrich and transform your logs with Observability Pipelines's processors before sending them to its destination.
+ As your organization grows, the logs from your services, systems, and applications grow in volume and complexity. Each log source also has it's own unique format. To manage these logs, you might need to standardize their format and add additional information to make it easier to search and analyze them. Use the Log Enrichment Template to enrich and transform your logs with Observability Pipelines's processors before sending them to its destination.
+
+These processors are available to enrich and transform your logs:
+
+- **Enrichment Table**: Enrich your logs with information from a reference table, which could be a local file or a GeoIP database.
+- **Grok Parser**: Parse your logs using grok parsing rules that are available for a set of sources.
+- **Add hostname**: Add the name of the host that sent the log so you can use it to pinpoint the root cause if there is an issue.
+- **Parse JSON**: Convert fields into JSON objects.
 
 {{% observability_pipelines/use_case_images/log_enrichment %}}
 
