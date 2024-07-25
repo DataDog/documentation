@@ -218,27 +218,20 @@ function loadPage(newUrl) {
 
             const pathName = new URL(newUrl).pathname;
             
-            // clean window pathname
-            const commitRefLen = document.documentElement.dataset.commitRef.length ? (document.documentElement.dataset.commitRef.length) + 1: 0
-            const noFtBranchPathName = pathName.slice(commitRefLen)
-            const nonEnPage = document.documentElement.lang !== 'en-US'
-            let noFtBranchNoLangPathName = noFtBranchPathName
-            if(nonEnPage){
-                noFtBranchNoLangPathName = noFtBranchPathName.slice(3)
-            }
+            // Get and clean window pathname in order to update language dropdown items href
+            const nonEnPage = document.documentElement.lang !== 'en-US' // check if page is not in english
+            const commitRef = document.documentElement.dataset.commitRef
+            const commitRefLen = commitRef.length ? (commitRef.length + 1) : 0
+            
+            const noCommitRefPathName = pathName.slice(commitRefLen) // adjust pathname to remove commit ref if in preview env
+            const noCommitRefNoLangPathName = nonEnPage ? noCommitRefPathName.slice(3) : noCommitRefPathName // adjust pathname to remove language if not in english e.g. /ja/agent -> /agent
             
             document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((ddItem) => {
-                const noFtBranchddItemPathName = ddItem.pathname.slice(commitRefLen)
-                let noFtBranchNoLangddItemPathName = noFtBranchddItemPathName
-                console.log('lang:', ddItem.dataset.lang)
-                if(ddItem.dataset.lang){
-                    noFtBranchNoLangddItemPathName = noFtBranchddItemPathName.slice(3)
-                }
-                console.log('REPLACER::',noFtBranchNoLangPathName)
-                console.log('REPLACE::', noFtBranchNoLangddItemPathName)
-                console.log('')
-                
-                const updatedURL = ddItem.href.replace(noFtBranchNoLangddItemPathName, noFtBranchNoLangPathName)
+                // Updates langauge dropdown item hrefs on asynchronous page loads
+                const noFtBranchddItemPathName = ddItem.pathname.slice(commitRefLen) // adjust dd item pathname to remove commit ref if in preview env
+                const noFtBranchNoLangddItemPathName = ddItem.dataset.lang ? noFtBranchddItemPathName.slice(3) : noFtBranchddItemPathName // adjust dd item pathname to remove language if not in english e.g. /ja/agent -> /agent
+
+                const updatedURL = ddItem.href.replace(noFtBranchNoLangddItemPathName, noCommitRefNoLangPathName)
                 ddItem.setAttribute('href', updatedURL)
             })
 
