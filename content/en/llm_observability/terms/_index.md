@@ -110,9 +110,7 @@ Retrieval spans typically do not have child spans, as they represent a standalon
 
 ## Traces
 
-A trace represents the work involved in processing a request in your LLM application, and consists of one or more nested spans. A *root span* is the first span in a trace, and marks the beginning and end of the trace.
-
-Datadog's LLM Observability product is designed to support observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can unlock the following features of LLM Observability:
+LLM Observability supports observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can access the following features of LLM Observability:
 
 ### LLM Inference Monitoring
 
@@ -122,9 +120,9 @@ LLM inference traces are composed of a single LLM span.
 
 Tracing individual LLM inferences unlocks basic LLM Observability features, allowing you to:
 
-1. Track inputs and outputs to your LLM calls
-2. Track token usage, error rates, and latencies for your LLM calls
-3. Break down important metrics by model and model provider
+1. Track inputs and outputs to your LLM calls.
+2. Track token usage, error rates, and latencies for your LLM calls.
+3. Break down important metrics by model and model provider.
 
 The SDK provides integrations to automatically capture LLM calls to specific providers. See [Auto-instrumentation][3] for more information. If you are using an LLM provider that is not supported, you must [manually instrument your application][4].
 
