@@ -1,15 +1,8 @@
-import MarkdocStaticCompiler, {
-  Node,
-  ValidationError,
-  RenderableTreeNodes,
-  RenderableTreeNode
-} from 'markdoc-static-compiler';
+import MarkdocStaticCompiler, { Node, ValidationError } from 'markdoc-static-compiler';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import { Frontmatter, FrontmatterSchema } from '../schemas/yaml/frontMatter';
-import { ConfigProcessor } from './ConfigProcessor';
-import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 
 /**
  * An object representing an error encountered

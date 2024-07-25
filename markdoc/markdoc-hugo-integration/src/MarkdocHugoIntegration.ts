@@ -4,7 +4,7 @@ import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import { FileParser, ParsingErrorReport, ParsedFile } from './helperModules/FileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { ConfigProcessor } from './helperModules/ConfigProcessor';
-import { PageBuilder } from './helperModules/PageBuilder';
+import { PageBuildArgs, PageBuilder } from './helperModules/PageBuilder';
 
 const CompilationConfigSchema = z.object({
   directories: z
@@ -69,9 +69,10 @@ export class MarkdocHugoIntegration {
   }
 
   /**
-   * Compile all detected Markdoc files to HTML.
+   * Compile all Markdoc files detected in the content folder
+   * to Markdown or HTML, depending on the configuration.
    */
-  compile() {
+  compileAllMdocFiles() {
     this.#resetErrors();
     this.compiledFiles = [];
 
@@ -93,51 +94,19 @@ export class MarkdocHugoIntegration {
         continue;
       }
 
-      let prefOptionsConfigForPage: PrefOptionsConfig;
-
-      // verify that all possible placeholder values
-      // yield an existing options set
-      try {
-        prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
-          parsedFile.frontmatter,
-          prefOptionsConfig
-        );
-      } catch (e) {
-        if (e instanceof Error) {
-          this.validationErrorsByFilePath[markdocFilepath] = e.message;
-        } else if (typeof e === 'string') {
-          this.validationErrorsByFilePath[markdocFilepath] = e;
-        } else {
-          this.validationErrorsByFilePath[markdocFilepath] = JSON.stringify(e);
-        }
-        continue;
-      }
-
-      // build the HTMl string and write it to file
-      try {
-        const fileContents = PageBuilder.build({
+      const compiledFilepath = this.compileMdocFile({
+        markdocFilepath,
+        pageBuildArgs: {
           parsedFile,
-          prefOptionsConfig: prefOptionsConfigForPage,
+          prefOptionsConfig,
           includeAssetsInline: this.config.includeAssetsInline,
           debug: this.config.debug,
-          outputMode: this.config.outputFormat
-        });
-
-        const compiledFilepath = this.#writeFile({
-          parsedFile,
-          markdocFilepath: markdocFilepath,
-          pageContents: fileContents
-        });
-
-        this.compiledFiles.push(compiledFilepath);
-      } catch (e) {
-        if (e instanceof Error) {
-          this.validationErrorsByFilePath[markdocFilepath] = e.message;
-        } else if (typeof e === 'string') {
-          this.validationErrorsByFilePath[markdocFilepath] = e;
-        } else {
-          this.validationErrorsByFilePath[markdocFilepath] = JSON.stringify(e);
+          outputFormat: this.config.outputFormat
         }
+      });
+
+      if (compiledFilepath) {
+        this.compiledFiles.push(compiledFilepath);
       }
     }
 
@@ -151,11 +120,75 @@ export class MarkdocHugoIntegration {
     };
   }
 
+  /**
+   * Compile a single Markdoc file to Markdown or HTML,
+   * depending on the configuration, and write the output to a file.
+   * If the compilation succeeds, return the path to the compiled file.
+   */
+  compileMdocFile(p: {
+    markdocFilepath: string;
+    pageBuildArgs: PageBuildArgs;
+  }): string | null {
+    let prefOptionsConfigForPage: PrefOptionsConfig;
+
+    // verify that all possible placeholder values
+    // yield an existing options set
+    try {
+      prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
+        p.pageBuildArgs.parsedFile.frontmatter,
+        p.pageBuildArgs.prefOptionsConfig
+      );
+    } catch (e) {
+      if (e instanceof Error) {
+        this.validationErrorsByFilePath[p.markdocFilepath] = e.message;
+      } else if (typeof e === 'string') {
+        this.validationErrorsByFilePath[p.markdocFilepath] = e;
+      } else {
+        this.validationErrorsByFilePath[p.markdocFilepath] = JSON.stringify(e);
+      }
+      return null;
+    }
+
+    // build the HTMl string and write it to file
+    try {
+      const fileContents = PageBuilder.build({
+        parsedFile: p.pageBuildArgs.parsedFile,
+        prefOptionsConfig: prefOptionsConfigForPage,
+        includeAssetsInline: p.pageBuildArgs.includeAssetsInline,
+        debug: p.pageBuildArgs.debug,
+        outputFormat: p.pageBuildArgs.outputFormat
+      });
+
+      const compiledFilepath = this.#writeFile({
+        parsedFile: p.pageBuildArgs.parsedFile,
+        markdocFilepath: p.markdocFilepath,
+        pageContents: fileContents
+      });
+
+      return compiledFilepath;
+    } catch (e) {
+      if (e instanceof Error) {
+        this.validationErrorsByFilePath[p.markdocFilepath] = e.message;
+      } else if (typeof e === 'string') {
+        this.validationErrorsByFilePath[p.markdocFilepath] = e;
+      } else {
+        this.validationErrorsByFilePath[p.markdocFilepath] = JSON.stringify(e);
+      }
+      return null;
+    }
+  }
+
+  /**
+   * Clear any stored errors.
+   */
   #resetErrors() {
     this.parsingErrorReportsByFilePath = {};
     this.validationErrorsByFilePath = {};
   }
 
+  /**
+   * Whether any errors have been detected during compilation.
+   */
   #hasErrors() {
     return (
       Object.keys(this.parsingErrorReportsByFilePath).length > 0 ||
@@ -163,6 +196,9 @@ export class MarkdocHugoIntegration {
     );
   }
 
+  /**
+   * Print any errors to the console.
+   */
   logErrorsToConsole() {
     const errorReportsByFilePath = this.parsingErrorReportsByFilePath;
     if (Object.keys(errorReportsByFilePath).length > 0) {
@@ -188,6 +224,9 @@ export class MarkdocHugoIntegration {
     }
   }
 
+  /**
+   * Write the compiled output file to disk.
+   */
   #writeFile(p: {
     parsedFile: ParsedFile;
     markdocFilepath: string;

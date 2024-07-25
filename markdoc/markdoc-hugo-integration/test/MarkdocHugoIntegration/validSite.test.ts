@@ -20,7 +20,7 @@ describe('MarkdocHugoIntegration (standalone HTML output)', () => {
   });
 
   test('each compiled file matches the snapshot', () => {
-    const { compiledFiles } = compiler.compile();
+    const { compiledFiles } = compiler.compileAllMdocFiles();
     for (const compiledFile of compiledFiles) {
       const compiledContent = fs.readFileSync(compiledFile, 'utf8');
       const sanitizedFilename = compiledFile.replace(`${siteDir}/content`, '');
@@ -41,7 +41,7 @@ describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
   });
 
   test('each compiled file matches the snapshot', () => {
-    const { compiledFiles } = compiler.compile();
+    const { compiledFiles } = compiler.compileAllMdocFiles();
     for (const compiledFile of compiledFiles) {
       const compiledContent = fs.readFileSync(compiledFile, 'utf8');
       const sanitizedFilename = compiledFile.replace(`${siteDir}/content`, '');

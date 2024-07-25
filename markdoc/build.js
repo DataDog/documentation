@@ -23,7 +23,7 @@ const assetsPartialContents = markdocIntegration.buildAssetsPartial();
 fs.writeFileSync(ASSETS_PARTIAL_PATH, assetsPartialContents);
 
 // Compile all .mdoc files found in the content directory
-const { compiledFiles } = markdocIntegration.compile();
+const { compiledFiles } = markdocIntegration.compileAllMdocFiles();
 
 // Build a .gitignore file for the compiled files,
 // to be written to the content directory

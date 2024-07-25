@@ -25,14 +25,28 @@ const minifiedClientRendererScriptStr = fs.readFileSync(
   'utf8'
 );
 
-interface PageBuildArgs {
+/**
+ * All of the data required to build an HTML or Markdown page
+ * from an .mdoc file.
+ */
+export interface PageBuildArgs {
   parsedFile: ParsedFile;
   prefOptionsConfig: PrefOptionsConfig;
   includeAssetsInline: boolean;
   debug: boolean;
-  outputMode: 'html' | 'markdown';
+  outputFormat: 'html' | 'markdown';
 }
 
+/**
+ * A class that functions as a module, providing methods
+ * for building HTML or Markdown strings from parsed .mdoc files.
+ *
+ * The PageBuilder uses the parsed Markdoc file to build
+ * a chooser component, the main HTML content, and a script
+ * that initializes the client-side renderer
+ * with the necessary data to re-render the page
+ * when the user changes a preference setting.
+ */
 export class PageBuilder {
   static getChooserHtml(p: {
     pageBuildArgs: PageBuildArgs;
@@ -99,7 +113,7 @@ ${rerenderScript}
       pageContents = prettier.format(pageContents, { parser: 'html' });
     }
 
-    if (args.outputMode === 'markdown') {
+    if (args.outputFormat === 'markdown') {
       pageContents = this.addFrontmatter({
         pageContents,
         frontmatter: args.parsedFile.frontmatter
@@ -109,10 +123,18 @@ ${rerenderScript}
     return pageContents;
   }
 
-  static compressString(str: string): string {
+  /**
+   * Remove the line breaks from a string.
+   */
+  static removeLineBreaks(str: string): string {
     return str.replace(/(\r\n|\n|\r)/gm, '');
   }
 
+  /**
+   * Provide the CSS styles for the rendered page.
+   * If debug mode is enabled, include additional styles
+   * to reveal hidden elements on the page.
+   */
   static getStylesStr(debug: boolean) {
     let result = stylesStr;
     if (debug) {
@@ -123,11 +145,14 @@ ${rerenderScript}
       }
       `;
     } else {
-      result = this.compressString(result);
+      result = this.removeLineBreaks(result);
     }
     return result;
   }
 
+  /**
+   * Provide the JavaScript code for the client-side renderer.
+   */
   static getClientRendererScriptStr(debug: boolean) {
     if (debug) {
       return minifiedClientRendererScriptStr;
@@ -232,10 +257,18 @@ ${rerenderScript}
     return renderableTree;
   }
 
+  /**
+   * Add a frontmatter string to a page contents string.
+   */
   static addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
     return `---\ntitle: ${p.frontmatter.title}\n---\n${p.pageContents}`;
   }
 
+  /**
+   * Build the snippet of JavaScript that is used to initialize the client-side renderer
+   * with all of the necessary data required to re-render the page when the user changes
+   * a preference setting.
+   */
   static getRerenderScript(p: {
     pageBuildArgs: PageBuildArgs;
     defaultValsByPrefId: Record<string, string>;
@@ -278,12 +311,18 @@ ${rerenderScript}
     if (p.pageBuildArgs.debug) {
       script = prettier.format(script, { parser: 'html' });
     } else {
-      script = this.compressString(script);
+      script = this.removeLineBreaks(script);
     }
 
     return script;
   }
 
+  /**
+   * If the page should act as a standalone HTML page,
+   * wrap the page contents in an HTML document
+   * that includes the CSS and JavaScript assets that would
+   * normally be included in the head of the layout template.
+   */
   static addInlineAssets(p: { pageContents: string; debug: boolean }) {
     return `
 <!DOCTYPE html>
