@@ -1,8 +1,12 @@
 const stringToTitleCase = (string) => {
   if(string.length <= 0) return string;
+
+  const allCapWords = ['CSM']
   return string.split(' ')
-    .map(word => (word === 'CSM' ? word : word[0].toUpperCase()) + word.substr(1).toLowerCase())
-    .join(' ');
+    .map(word => {
+      if(allCapWords.includes(word)) return word.toUpperCase();
+      return word[0].toUpperCase() + word.substr(1).toLowerCase()
+    }).join(' ');
 }
 
 const truncateString = (string, characterMax, addEllipsis) => {
