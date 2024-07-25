@@ -10,7 +10,7 @@ import {
   SNAPSHOTS_DIR
 } from '../../config/constants';
 
-describe('HtmlBuilder.build', () => {
+describe('PageBuilder.build', () => {
   const markdocFiles = FileNavigator.findInDir(VALID_CONTENT_DIR, /\.mdoc$/);
   const prefOptionsConfig =
     ConfigProcessor.loadPrefOptionsFromDir(VALID_PREF_OPTIONS_DIR);
@@ -29,12 +29,13 @@ describe('HtmlBuilder.build', () => {
       parsedFile,
       prefOptionsConfig: prefOptionsConfigForPage,
       debug: true,
-      includeAssetsInline: true
+      includeAssetsInline: true,
+      outputMode: 'html'
     });
 
     test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {
       expect(html).toMatchFileSnapshot(
-        `${SNAPSHOTS_DIR}/helperModules/HtmlBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
+        `${SNAPSHOTS_DIR}/helperModules/PageBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
       );
     });
   });
