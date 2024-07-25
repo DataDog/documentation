@@ -46,6 +46,8 @@ You can declare an incident directly from a graph by clicking the export button 
 ## From the Datadog Clipboard
 Use the [Datadog Clipboard][6] to gather multiple monitors and graphs and to generate an incident. To declare an incident from the Clipboard, copy a graph you want to investigate and open the Clipboard with the command `Cmd/Ctrl + Shift + K`. Click **Declare Incident** or the export icon to add to the incident as a signal.
 
+{{< img src="service_management/incidents/declare/declare_clipboard.png" alt="Declare an incident from the Datadog Clipboard" style="width:90%;" >}}
+
 ## From Slack
 
 If you have the [Datadog integration enabled on Slack][7], you can declare a new incident with the slash command `/datadog incident` from any Slack channel.
