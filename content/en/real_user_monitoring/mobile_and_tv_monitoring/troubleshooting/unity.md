@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting Unity SDK Issues
 description: Learn how to troubleshoot issues with Unity Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: unity
 type: multi-code-lang
 code_lang_weight: 30
