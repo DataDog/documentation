@@ -2974,6 +2974,7 @@ components:
       - events
       - ci_tests
       - ci_pipelines
+      - incident_analytics
       example: logs
       type: string
       x-enum-varnames:
@@ -2987,6 +2988,7 @@ components:
       - EVENTS
       - CI_TESTS
       - CI_PIPELINES
+      - INCIDENT_ANALYTICS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -19572,6 +19574,12 @@ components:
       description: Global hourly report of all data billed by Datadog for a given
         organization.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public id.
+          type: string
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours
             in the current date for the given org.
@@ -35134,6 +35142,15 @@ paths:
         name: include_org_details
         required: false
         schema:
+          type: boolean
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
           type: boolean
       responses:
         '200':

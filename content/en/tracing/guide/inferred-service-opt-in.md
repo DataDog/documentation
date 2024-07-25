@@ -242,6 +242,23 @@ To opt in, add the following environment variables to your tracer settings or sy
 
 ### List of newly introduced peer.* tags 
 
+`peer.*` dimensions | Remapped from ...
+--------------------|-------------------
+`peer.aws.dynamodb.table` | `tablename`
+`peer.aws.kinesis.stream` | `streamname`
+`peer.aws.s3.bucket` | `bucketname`, `aws.s3.bucket`
+`peer.aws.sqs.queue` | `queuename`
+`peer.cassandra.contact.points` | `db.cassandra.contact.points`
+`peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
+`peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
+`peer.db.system` | `db.system`
+`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`
+`peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
+`peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `amqp.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
+`peer.messaging.system` | `messaging.system`
+`peer.rpc.service` | `rpc.service`
+`peer.rpc.system` | `rpc.system`
+`peer.service` | `peer.service`
 
 ### Global default service naming migration
 
