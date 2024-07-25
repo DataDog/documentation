@@ -82,52 +82,139 @@ title: Traffic Light Colors
       </div>
     </div>
     <div class="markdoc__hidden">
+      <p>
+        Yellow is a bright and cheerful color that is often associated with
+        happiness, energy, and warmth.
+      </p>
       <div class="markdoc__hidden">
+        <h3>Banana</h3>
         <p>
           Bananas are a type of fruit. They're often eaten raw or used in
           baking.
         </p>
-      </div>
-      <div class="markdoc__hidden">
         <p>
-          Sunflowers are a type of flower. They're known for their large, yellow
-          petals.
+          Bananas are rich in essential nutrients such as potassium, vitamin C,
+          and dietary fiber, making them a healthy snack option. They are also
+          known for their convenient natural packaging, as their peel protects
+          the fruit and makes it easy to carry and eat on the go.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Sunflower</h3>
         <p>
-          Lemons are a type of citrus fruit. They're often used in drinks and
-          cooking.
+          Sunflowers are a striking type of flower recognized for their large,
+          bright yellow petals and tall stems.
+        </p>
+        <p>
+          They are often grown for their beauty and are a popular choice in
+          gardens and floral arrangements. Sunflowers are also cultivated for
+          their seeds, which are used to produce sunflower oil and as a
+          nutritious snack.
+        </p>
+        <p>
+          The flower's ability to turn its head to follow the sun, a phenomenon
+          known as heliotropism, adds to its charm and appeal.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Lemon</h3>
         <p>
-          School buses are a type of vehicle. They're often used to transport
-          students to and from school.
+          Lemons are a versatile citrus fruit known for their tart and tangy
+          flavor.
+        </p>
+        <p>
+          They are commonly used in cooking and baking to add a refreshing zest
+          to dishes, as well as in beverages like lemonade and tea. Lemons are
+          an excellent source of vitamin C, which is important for immune
+          function and skin health. In addition to their culinary uses, lemons
+          are also valued for their cleaning and deodorizing properties, making
+          them a staple in many households.
+        </p>
+      </div>
+      <div class="markdoc__hidden">
+        <h3>School Bus</h3>
+        <p>
+          School buses are a vital mode of transportation for students,
+          providing a safe and reliable way to travel to and from school.
+        </p>
+        <p>
+          These distinctive yellow vehicles are designed with safety features
+          such as flashing lights, stop signs, and reinforced sides to protect
+          passengers. School buses play a crucial role in the education system
+          by ensuring that students have access to education regardless of their
+          location. They also help reduce traffic congestion and environmental
+          impact by consolidating student transportation into fewer vehicles.
         </p>
       </div>
     </div>
     <div class="markdoc__hidden">
+      <p>
+        Red is a vibrant and intense color often associated with strong emotions
+        such as love, passion, and anger.
+      </p>
       <div class="markdoc__hidden">
+        <h3>Ruby</h3>
         <p>
-          Rubies are a type of gemstone. They're known for their deep red color.
+          Rubies are precious gemstones renowned for their deep red color, which
+          is caused by the presence of chromium. They are one of the four
+          precious stones, alongside sapphires, emeralds, and diamonds. Rubies
+          have been highly valued throughout history for their beauty and
+          rarity, often symbolizing wealth, power, and passion.
+        </p>
+        <p>
+          They are commonly used in fine jewelry, including rings, necklaces,
+          and earrings. The allure of rubies extends beyond their aesthetic
+          appeal, as they are also believed to possess protective and healing
+          properties in various cultures.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Apple</h3>
         <p>
-          Apples are a type of fruit. They're often eaten raw or used in baking.
+          Apples are a widely consumed fruit known for their crisp texture and
+          sweet to tart flavor. They come in various varieties, including Granny
+          Smith, Fuji, and Gala, each with its unique taste and color. Apples
+          are often eaten raw as a healthy snack, but they are also versatile in
+          cooking and baking, used in dishes such as pies, sauces, and salads.
+        </p>
+        <p>
+          Rich in dietary fiber, vitamins, and antioxidants, apples contribute
+          to a balanced diet and offer numerous health benefits. The saying
+          &quot;an apple a day keeps the doctor away&quot; highlights their
+          nutritional value.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Firetruck</h3>
         <p>
-          Firetrucks are a type of vehicle. They're often used to transport
-          firefighters and equipment to emergency situations.
+          Firetrucks are specialized vehicles designed to transport firefighters
+          and their equipment to emergency situations, such as fires, accidents,
+          and natural disasters. They are equipped with various tools, including
+          hoses, ladders, and water tanks, to help combat fires and perform
+          rescues.
+        </p>
+        <p>
+          Firetrucks are often painted in bright red to ensure high visibility
+          and are fitted with sirens and flashing lights to alert other drivers
+          on the road. These vehicles play a crucial role in public safety,
+          enabling quick and efficient responses to emergencies.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Stop Sign</h3>
         <p>
-          Stop signs are a type of traffic sign. They're used to indicate that
-          drivers should stop their vehicles.
+          Stop signs are essential traffic control devices used to manage
+          vehicle and pedestrian traffic at intersections and crossings.
+        </p>
+        <p>
+          Stop signs are typically octagonal in shape and feature a red
+          background with white lettering that reads &quot;STOP.&quot; The
+          purpose of a stop sign is to instruct drivers to come to a complete
+          stop, ensuring that the intersection is clear and safe to proceed.
+          Stop signs help prevent accidents and improve road safety by
+          regulating the flow of traffic and providing clear instructions to
+          drivers. Their standardized design makes them easily recognizable and
+          effective in promoting orderly driving behavior.
         </p>
       </div>
     </div>
@@ -166,11 +253,11 @@ title: Traffic Light Colors
       red_item_options: [
         {
           display_name: "Ruby",
+          default: true,
           identifier: "ruby",
         },
         {
           display_name: "Apple",
-          default: true,
           identifier: "apple",
         },
         {
@@ -421,6 +508,14 @@ title: Traffic Light Colors
           children: [
             {
               $$mdtype: "Tag",
+              name: "p",
+              attributes: {},
+              children: [
+                "Yellow is a bright and cheerful color that is often associated with happiness, energy, and warmth.",
+              ],
+            },
+            {
+              $$mdtype: "Tag",
               name: "div",
               if: {
                 $$mdtype: "Function",
@@ -441,10 +536,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Banana"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
                     "Bananas are a type of fruit. They're often eaten raw or used in baking.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Bananas are rich in essential nutrients such as potassium, vitamin C, and dietary fiber, making them a healthy snack option. They are also known for their convenient natural packaging, as their peel protects the fruit and makes it easy to carry and eat on the go.",
                   ],
                 },
               ],
@@ -471,10 +580,32 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Sunflower"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Sunflowers are a type of flower. They're known for their large, yellow petals.",
+                    "Sunflowers are a striking type of flower recognized for their large, bright yellow petals and tall stems.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "They are often grown for their beauty and are a popular choice in gardens and floral arrangements. Sunflowers are also cultivated for their seeds, which are used to produce sunflower oil and as a nutritious snack.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "The flower's ability to turn its head to follow the sun, a phenomenon known as heliotropism, adds to its charm and appeal.",
                   ],
                 },
               ],
@@ -501,10 +632,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Lemon"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Lemons are a type of citrus fruit. They're often used in drinks and cooking.",
+                    "Lemons are a versatile citrus fruit known for their tart and tangy flavor.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "They are commonly used in cooking and baking to add a refreshing zest to dishes, as well as in beverages like lemonade and tea. Lemons are an excellent source of vitamin C, which is important for immune function and skin health. In addition to their culinary uses, lemons are also valued for their cleaning and deodorizing properties, making them a staple in many households.",
                   ],
                 },
               ],
@@ -531,10 +676,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["School Bus"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "School buses are a type of vehicle. They're often used to transport students to and from school.",
+                    "School buses are a vital mode of transportation for students, providing a safe and reliable way to travel to and from school.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "These distinctive yellow vehicles are designed with safety features such as flashing lights, stop signs, and reinforced sides to protect passengers. School buses play a crucial role in the education system by ensuring that students have access to education regardless of their location. They also help reduce traffic congestion and environmental impact by consolidating student transportation into fewer vehicles.",
                   ],
                 },
               ],
@@ -563,6 +722,14 @@ title: Traffic Light Colors
           children: [
             {
               $$mdtype: "Tag",
+              name: "p",
+              attributes: {},
+              children: [
+                "Red is a vibrant and intense color often associated with strong emotions such as love, passion, and anger.",
+              ],
+            },
+            {
+              $$mdtype: "Tag",
               name: "div",
               if: {
                 $$mdtype: "Function",
@@ -583,10 +750,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Ruby"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Rubies are a type of gemstone. They're known for their deep red color.",
+                    "Rubies are precious gemstones renowned for their deep red color, which is caused by the presence of chromium. They are one of the four precious stones, alongside sapphires, emeralds, and diamonds. Rubies have been highly valued throughout history for their beauty and rarity, often symbolizing wealth, power, and passion.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "They are commonly used in fine jewelry, including rings, necklaces, and earrings. The allure of rubies extends beyond their aesthetic appeal, as they are also believed to possess protective and healing properties in various cultures.",
                   ],
                 },
               ],
@@ -613,10 +794,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Apple"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Apples are a type of fruit. They're often eaten raw or used in baking.",
+                    "Apples are a widely consumed fruit known for their crisp texture and sweet to tart flavor. They come in various varieties, including Granny Smith, Fuji, and Gala, each with its unique taste and color. Apples are often eaten raw as a healthy snack, but they are also versatile in cooking and baking, used in dishes such as pies, sauces, and salads.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    'Rich in dietary fiber, vitamins, and antioxidants, apples contribute to a balanced diet and offer numerous health benefits. The saying "an apple a day keeps the doctor away" highlights their nutritional value.',
                   ],
                 },
               ],
@@ -643,10 +838,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Firetruck"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Firetrucks are a type of vehicle. They're often used to transport firefighters and equipment to emergency situations.",
+                    "Firetrucks are specialized vehicles designed to transport firefighters and their equipment to emergency situations, such as fires, accidents, and natural disasters. They are equipped with various tools, including hoses, ladders, and water tanks, to help combat fires and perform rescues.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Firetrucks are often painted in bright red to ensure high visibility and are fitted with sirens and flashing lights to alert other drivers on the road. These vehicles play a crucial role in public safety, enabling quick and efficient responses to emergencies.",
                   ],
                 },
               ],
@@ -673,10 +882,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Stop Sign"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Stop signs are a type of traffic sign. They're used to indicate that drivers should stop their vehicles.",
+                    "Stop signs are essential traffic control devices used to manage vehicle and pedestrian traffic at intersections and crossings.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    'Stop signs are typically octagonal in shape and feature a red background with white lettering that reads "STOP." The purpose of a stop sign is to instruct drivers to come to a complete stop, ensuring that the intersection is clear and safe to proceed. Stop signs help prevent accidents and improve road safety by regulating the flow of traffic and providing clear instructions to drivers. Their standardized design makes them easily recognizable and effective in promoting orderly driving behavior.',
                   ],
                 },
               ],

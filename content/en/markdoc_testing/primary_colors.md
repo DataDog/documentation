@@ -26,17 +26,13 @@ title: Primary Colors
     <div class="markdoc-pref__container">
       <div class="markdoc-pref__label">Item</div>
       <div
-        class="markdoc-pref__pill"
+        class="markdoc-pref__pill selected"
         data-pref-id="item"
         data-option-id="ocean"
       >
         Ocean
       </div>
-      <div
-        class="markdoc-pref__pill selected"
-        data-pref-id="item"
-        data-option-id="sky"
-      >
+      <div class="markdoc-pref__pill" data-pref-id="item" data-option-id="sky">
         Sky
       </div>
       <div
@@ -65,80 +61,217 @@ title: Primary Colors
       seems contrived and odd, that's only because test pages are often both of
       those things.
     </p>
-    <h2>sky: Your blue item of choice</h2>
+    <p>Your selections:</p>
+    <ul>
+      <li>The value of the <code>color</code> pref is &quot;blue&quot;.</li>
+      <li>The value of the <code>item</code> pref is &quot;ocean&quot;.</li>
+    </ul>
     <div>
-      <div class="markdoc__hidden">
-        <p>
-          The ocean is a large body of saltwater. It covers about 70% of the
-          Earth's surface.
-        </p>
-      </div>
+      <h2>Blue</h2>
+      <p>
+        Blue is a calming and serene color that is often associated with
+        tranquility, stability, and trust.
+      </p>
       <div>
+        <h3>Ocean</h3>
         <p>
-          The sky is the atmosphere as seen from the Earth's surface. It appears
-          blue during the day.
+          The ocean is a vast and expansive body of saltwater that covers
+          approximately 70% of the Earth's surface. It plays a crucial role in
+          regulating the planet's climate and weather patterns, as well as
+          supporting a diverse array of marine life.
+        </p>
+        <p>
+          The ocean is a source of food, recreation, and transportation for
+          humans, and its depths remain largely unexplored, holding many
+          mysteries and wonders. The sight and sound of the ocean waves can
+          evoke a sense of calm and tranquility, making it a popular destination
+          for relaxation and reflection.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Sky</h3>
         <p>
-          Jeans are a type of clothing. They're often made from denim and are
-          known for their durability.
+          The sky is the expanse of atmosphere that we see when we look up from
+          the Earth's surface. During the day, it appears blue due to the
+          scattering of sunlight by the molecules in the air, a phenomenon known
+          as Rayleigh scattering.
+        </p>
+        <p>
+          The sky changes color at sunrise and sunset, displaying beautiful hues
+          of red, orange, and pink. It is home to various weather phenomena,
+          including clouds, rainbows, and storms, and serves as the backdrop for
+          celestial bodies like the sun, moon, and stars. The sky's vastness and
+          ever-changing nature inspire a sense of wonder and curiosity.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Jeans</h3>
         <p>
-          Blueberries are a type of fruit. They're often eaten raw or used in
-          baking.
+          Jeans are a type of durable clothing typically made from denim fabric.
+          They are known for their versatility and comfort, making them a staple
+          in wardrobes around the world.
+        </p>
+        <p>
+          Originally designed as workwear for miners and laborers in the 19th
+          century, jeans have evolved into a fashion icon, available in various
+          styles, cuts, and colors. They can be dressed up or down, suitable for
+          casual outings or more formal occasions. The durability and timeless
+          appeal of jeans have made them a beloved garment for people of all
+          ages.
+        </p>
+      </div>
+      <div class="markdoc__hidden">
+        <h3>Blueberry</h3>
+        <p>
+          Blueberries are small, round fruits that are known for their sweet and
+          slightly tart flavor. They are rich in antioxidants, vitamins, and
+          fiber, making them a nutritious addition to any diet. Blueberries can
+          be eaten fresh, added to cereals and yogurt, or used in baking to make
+          delicious treats like muffins and pies.
+        </p>
+        <p>
+          Blueberries are also popular in smoothies and jams. The vibrant blue
+          color of blueberries adds a visual appeal to dishes, and their health
+          benefits make them a favorite among health-conscious individuals.
         </p>
       </div>
     </div>
     <div class="markdoc__hidden">
+      <h2>Yellow</h2>
+      <p>
+        Yellow is a bright and cheerful color that is often associated with
+        happiness, energy, and warmth.
+      </p>
       <div class="markdoc__hidden">
+        <h3>Banana</h3>
         <p>
           Bananas are a type of fruit. They're often eaten raw or used in
           baking.
         </p>
-      </div>
-      <div class="markdoc__hidden">
         <p>
-          Sunflowers are a type of flower. They're known for their large, yellow
-          petals.
+          Bananas are rich in essential nutrients such as potassium, vitamin C,
+          and dietary fiber, making them a healthy snack option. They are also
+          known for their convenient natural packaging, as their peel protects
+          the fruit and makes it easy to carry and eat on the go.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Sunflower</h3>
         <p>
-          Lemons are a type of citrus fruit. They're often used in drinks and
-          cooking.
+          Sunflowers are a striking type of flower recognized for their large,
+          bright yellow petals and tall stems.
+        </p>
+        <p>
+          They are often grown for their beauty and are a popular choice in
+          gardens and floral arrangements. Sunflowers are also cultivated for
+          their seeds, which are used to produce sunflower oil and as a
+          nutritious snack.
+        </p>
+        <p>
+          The flower's ability to turn its head to follow the sun, a phenomenon
+          known as heliotropism, adds to its charm and appeal.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Lemon</h3>
         <p>
-          School buses are a type of vehicle. They're often used to transport
-          students to and from school.
+          Lemons are a versatile citrus fruit known for their tart and tangy
+          flavor.
+        </p>
+        <p>
+          They are commonly used in cooking and baking to add a refreshing zest
+          to dishes, as well as in beverages like lemonade and tea. Lemons are
+          an excellent source of vitamin C, which is important for immune
+          function and skin health. In addition to their culinary uses, lemons
+          are also valued for their cleaning and deodorizing properties, making
+          them a staple in many households.
+        </p>
+      </div>
+      <div class="markdoc__hidden">
+        <h3>School Bus</h3>
+        <p>
+          School buses are a vital mode of transportation for students,
+          providing a safe and reliable way to travel to and from school.
+        </p>
+        <p>
+          These distinctive yellow vehicles are designed with safety features
+          such as flashing lights, stop signs, and reinforced sides to protect
+          passengers. School buses play a crucial role in the education system
+          by ensuring that students have access to education regardless of their
+          location. They also help reduce traffic congestion and environmental
+          impact by consolidating student transportation into fewer vehicles.
         </p>
       </div>
     </div>
     <div class="markdoc__hidden">
+      <h2>Red</h2>
+      <p>
+        Red is a vibrant and intense color often associated with strong emotions
+        such as love, passion, and anger.
+      </p>
       <div class="markdoc__hidden">
+        <h3>Ruby</h3>
         <p>
-          Rubies are a type of gemstone. They're known for their deep red color.
+          Rubies are precious gemstones renowned for their deep red color, which
+          is caused by the presence of chromium. They are one of the four
+          precious stones, alongside sapphires, emeralds, and diamonds. Rubies
+          have been highly valued throughout history for their beauty and
+          rarity, often symbolizing wealth, power, and passion.
+        </p>
+        <p>
+          They are commonly used in fine jewelry, including rings, necklaces,
+          and earrings. The allure of rubies extends beyond their aesthetic
+          appeal, as they are also believed to possess protective and healing
+          properties in various cultures.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Apple</h3>
         <p>
-          Apples are a type of fruit. They're often eaten raw or used in baking.
+          Apples are a widely consumed fruit known for their crisp texture and
+          sweet to tart flavor. They come in various varieties, including Granny
+          Smith, Fuji, and Gala, each with its unique taste and color. Apples
+          are often eaten raw as a healthy snack, but they are also versatile in
+          cooking and baking, used in dishes such as pies, sauces, and salads.
+        </p>
+        <p>
+          Rich in dietary fiber, vitamins, and antioxidants, apples contribute
+          to a balanced diet and offer numerous health benefits. The saying
+          &quot;an apple a day keeps the doctor away&quot; highlights their
+          nutritional value.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Firetruck</h3>
         <p>
-          Firetrucks are a type of vehicle. They're often used to transport
-          firefighters and equipment to emergency situations.
+          Firetrucks are specialized vehicles designed to transport firefighters
+          and their equipment to emergency situations, such as fires, accidents,
+          and natural disasters. They are equipped with various tools, including
+          hoses, ladders, and water tanks, to help combat fires and perform
+          rescues.
+        </p>
+        <p>
+          Firetrucks are often painted in bright red to ensure high visibility
+          and are fitted with sirens and flashing lights to alert other drivers
+          on the road. These vehicles play a crucial role in public safety,
+          enabling quick and efficient responses to emergencies.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Stop Sign</h3>
         <p>
-          Stop signs are a type of traffic sign. They're used to indicate that
-          drivers should stop their vehicles.
+          Stop signs are essential traffic control devices used to manage
+          vehicle and pedestrian traffic at intersections and crossings.
+        </p>
+        <p>
+          Stop signs are typically octagonal in shape and feature a red
+          background with white lettering that reads &quot;STOP.&quot; The
+          purpose of a stop sign is to instruct drivers to come to a complete
+          stop, ensuring that the intersection is clear and safe to proceed.
+          Stop signs help prevent accidents and improve road safety by
+          regulating the flow of traffic and providing clear instructions to
+          drivers. Their standardized design makes them easily recognizable and
+          effective in promoting orderly driving behavior.
         </p>
       </div>
     </div>
@@ -177,11 +310,11 @@ title: Primary Colors
       red_item_options: [
         {
           display_name: "Ruby",
+          default: true,
           identifier: "ruby",
         },
         {
           display_name: "Apple",
-          default: true,
           identifier: "apple",
         },
         {
@@ -215,11 +348,11 @@ title: Primary Colors
       blue_item_options: [
         {
           display_name: "Ocean",
+          default: true,
           identifier: "ocean",
         },
         {
           display_name: "Sky",
-          default: true,
           identifier: "sky",
         },
         {
@@ -234,7 +367,7 @@ title: Primary Colors
     },
     selectedValsByPrefId: {
       color: "blue",
-      item: "sky",
+      item: "ocean",
     },
     renderableTree: {
       $$mdtype: "Tag",
@@ -251,21 +384,57 @@ title: Primary Colors
         },
         {
           $$mdtype: "Tag",
-          name: "h2",
+          name: "p",
+          attributes: {},
+          children: ["Your selections:"],
+        },
+        {
+          $$mdtype: "Tag",
+          name: "ul",
           attributes: {},
           children: [
             {
-              $$mdtype: "Variable",
-              path: ["item"],
-              value: "sky",
+              $$mdtype: "Tag",
+              name: "li",
+              attributes: {},
+              children: [
+                "The value of the ",
+                {
+                  $$mdtype: "Tag",
+                  name: "code",
+                  attributes: {},
+                  children: ["color"],
+                },
+                ' pref is "',
+                {
+                  $$mdtype: "Variable",
+                  path: ["color"],
+                  value: "blue",
+                },
+                '".',
+              ],
             },
-            ": Your ",
             {
-              $$mdtype: "Variable",
-              path: ["color"],
-              value: "blue",
+              $$mdtype: "Tag",
+              name: "li",
+              attributes: {},
+              children: [
+                "The value of the ",
+                {
+                  $$mdtype: "Tag",
+                  name: "code",
+                  attributes: {},
+                  children: ["item"],
+                },
+                ' pref is "',
+                {
+                  $$mdtype: "Variable",
+                  path: ["item"],
+                  value: "ocean",
+                },
+                '".',
+              ],
             },
-            " item of choice",
           ],
         },
         {
@@ -290,32 +459,16 @@ title: Primary Colors
           children: [
             {
               $$mdtype: "Tag",
-              name: "div",
-              if: {
-                $$mdtype: "Function",
-                name: "equals",
-                value: false,
-                parameters: {
-                  0: {
-                    $$mdtype: "Variable",
-                    path: ["item"],
-                    value: "sky",
-                  },
-                  1: "ocean",
-                },
-              },
-              attributes: {
-                display: "false",
-              },
+              name: "h2",
+              attributes: {},
+              children: ["Blue"],
+            },
+            {
+              $$mdtype: "Tag",
+              name: "p",
+              attributes: {},
               children: [
-                {
-                  $$mdtype: "Tag",
-                  name: "p",
-                  attributes: {},
-                  children: [
-                    "The ocean is a large body of saltwater. It covers about 70% of the Earth's surface.",
-                  ],
-                },
+                "Blue is a calming and serene color that is often associated with tranquility, stability, and trust.",
               ],
             },
             {
@@ -329,9 +482,9 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
-                  1: "sky",
+                  1: "ocean",
                 },
               },
               attributes: {
@@ -340,10 +493,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Ocean"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "The sky is the atmosphere as seen from the Earth's surface. It appears blue during the day.",
+                    "The ocean is a vast and expansive body of saltwater that covers approximately 70% of the Earth's surface. It plays a crucial role in regulating the planet's climate and weather patterns, as well as supporting a diverse array of marine life.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "The ocean is a source of food, recreation, and transportation for humans, and its depths remain largely unexplored, holding many mysteries and wonders. The sight and sound of the ocean waves can evoke a sense of calm and tranquility, making it a popular destination for relaxation and reflection.",
                   ],
                 },
               ],
@@ -359,7 +526,51 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
+                  },
+                  1: "sky",
+                },
+              },
+              attributes: {
+                display: "false",
+              },
+              children: [
+                {
+                  $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Sky"],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "The sky is the expanse of atmosphere that we see when we look up from the Earth's surface. During the day, it appears blue due to the scattering of sunlight by the molecules in the air, a phenomenon known as Rayleigh scattering.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "The sky changes color at sunrise and sunset, displaying beautiful hues of red, orange, and pink. It is home to various weather phenomena, including clouds, rainbows, and storms, and serves as the backdrop for celestial bodies like the sun, moon, and stars. The sky's vastness and ever-changing nature inspire a sense of wonder and curiosity.",
+                  ],
+                },
+              ],
+            },
+            {
+              $$mdtype: "Tag",
+              name: "div",
+              if: {
+                $$mdtype: "Function",
+                name: "equals",
+                value: false,
+                parameters: {
+                  0: {
+                    $$mdtype: "Variable",
+                    path: ["item"],
+                    value: "ocean",
                   },
                   1: "jeans",
                 },
@@ -370,10 +581,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Jeans"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Jeans are a type of clothing. They're often made from denim and are known for their durability.",
+                    "Jeans are a type of durable clothing typically made from denim fabric. They are known for their versatility and comfort, making them a staple in wardrobes around the world.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Originally designed as workwear for miners and laborers in the 19th century, jeans have evolved into a fashion icon, available in various styles, cuts, and colors. They can be dressed up or down, suitable for casual outings or more formal occasions. The durability and timeless appeal of jeans have made them a beloved garment for people of all ages.",
                   ],
                 },
               ],
@@ -389,7 +614,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "blueberry",
                 },
@@ -400,10 +625,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Blueberry"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Blueberries are a type of fruit. They're often eaten raw or used in baking.",
+                    "Blueberries are small, round fruits that are known for their sweet and slightly tart flavor. They are rich in antioxidants, vitamins, and fiber, making them a nutritious addition to any diet. Blueberries can be eaten fresh, added to cereals and yogurt, or used in baking to make delicious treats like muffins and pies.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Blueberries are also popular in smoothies and jams. The vibrant blue color of blueberries adds a visual appeal to dishes, and their health benefits make them a favorite among health-conscious individuals.",
                   ],
                 },
               ],
@@ -432,6 +671,20 @@ title: Primary Colors
           children: [
             {
               $$mdtype: "Tag",
+              name: "h2",
+              attributes: {},
+              children: ["Yellow"],
+            },
+            {
+              $$mdtype: "Tag",
+              name: "p",
+              attributes: {},
+              children: [
+                "Yellow is a bright and cheerful color that is often associated with happiness, energy, and warmth.",
+              ],
+            },
+            {
+              $$mdtype: "Tag",
               name: "div",
               if: {
                 $$mdtype: "Function",
@@ -441,7 +694,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "banana",
                 },
@@ -452,10 +705,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Banana"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
                     "Bananas are a type of fruit. They're often eaten raw or used in baking.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Bananas are rich in essential nutrients such as potassium, vitamin C, and dietary fiber, making them a healthy snack option. They are also known for their convenient natural packaging, as their peel protects the fruit and makes it easy to carry and eat on the go.",
                   ],
                 },
               ],
@@ -471,7 +738,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "sunflower",
                 },
@@ -482,10 +749,32 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Sunflower"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Sunflowers are a type of flower. They're known for their large, yellow petals.",
+                    "Sunflowers are a striking type of flower recognized for their large, bright yellow petals and tall stems.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "They are often grown for their beauty and are a popular choice in gardens and floral arrangements. Sunflowers are also cultivated for their seeds, which are used to produce sunflower oil and as a nutritious snack.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "The flower's ability to turn its head to follow the sun, a phenomenon known as heliotropism, adds to its charm and appeal.",
                   ],
                 },
               ],
@@ -501,7 +790,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "lemon",
                 },
@@ -512,10 +801,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Lemon"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Lemons are a type of citrus fruit. They're often used in drinks and cooking.",
+                    "Lemons are a versatile citrus fruit known for their tart and tangy flavor.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "They are commonly used in cooking and baking to add a refreshing zest to dishes, as well as in beverages like lemonade and tea. Lemons are an excellent source of vitamin C, which is important for immune function and skin health. In addition to their culinary uses, lemons are also valued for their cleaning and deodorizing properties, making them a staple in many households.",
                   ],
                 },
               ],
@@ -531,7 +834,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "school_bus",
                 },
@@ -542,10 +845,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["School Bus"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "School buses are a type of vehicle. They're often used to transport students to and from school.",
+                    "School buses are a vital mode of transportation for students, providing a safe and reliable way to travel to and from school.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "These distinctive yellow vehicles are designed with safety features such as flashing lights, stop signs, and reinforced sides to protect passengers. School buses play a crucial role in the education system by ensuring that students have access to education regardless of their location. They also help reduce traffic congestion and environmental impact by consolidating student transportation into fewer vehicles.",
                   ],
                 },
               ],
@@ -574,6 +891,20 @@ title: Primary Colors
           children: [
             {
               $$mdtype: "Tag",
+              name: "h2",
+              attributes: {},
+              children: ["Red"],
+            },
+            {
+              $$mdtype: "Tag",
+              name: "p",
+              attributes: {},
+              children: [
+                "Red is a vibrant and intense color often associated with strong emotions such as love, passion, and anger.",
+              ],
+            },
+            {
+              $$mdtype: "Tag",
               name: "div",
               if: {
                 $$mdtype: "Function",
@@ -583,7 +914,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "ruby",
                 },
@@ -594,10 +925,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Ruby"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Rubies are a type of gemstone. They're known for their deep red color.",
+                    "Rubies are precious gemstones renowned for their deep red color, which is caused by the presence of chromium. They are one of the four precious stones, alongside sapphires, emeralds, and diamonds. Rubies have been highly valued throughout history for their beauty and rarity, often symbolizing wealth, power, and passion.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "They are commonly used in fine jewelry, including rings, necklaces, and earrings. The allure of rubies extends beyond their aesthetic appeal, as they are also believed to possess protective and healing properties in various cultures.",
                   ],
                 },
               ],
@@ -613,7 +958,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "apple",
                 },
@@ -624,10 +969,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Apple"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Apples are a type of fruit. They're often eaten raw or used in baking.",
+                    "Apples are a widely consumed fruit known for their crisp texture and sweet to tart flavor. They come in various varieties, including Granny Smith, Fuji, and Gala, each with its unique taste and color. Apples are often eaten raw as a healthy snack, but they are also versatile in cooking and baking, used in dishes such as pies, sauces, and salads.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    'Rich in dietary fiber, vitamins, and antioxidants, apples contribute to a balanced diet and offer numerous health benefits. The saying "an apple a day keeps the doctor away" highlights their nutritional value.',
                   ],
                 },
               ],
@@ -643,7 +1002,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "firetruck",
                 },
@@ -654,10 +1013,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Firetruck"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Firetrucks are a type of vehicle. They're often used to transport firefighters and equipment to emergency situations.",
+                    "Firetrucks are specialized vehicles designed to transport firefighters and their equipment to emergency situations, such as fires, accidents, and natural disasters. They are equipped with various tools, including hoses, ladders, and water tanks, to help combat fires and perform rescues.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Firetrucks are often painted in bright red to ensure high visibility and are fitted with sirens and flashing lights to alert other drivers on the road. These vehicles play a crucial role in public safety, enabling quick and efficient responses to emergencies.",
                   ],
                 },
               ],
@@ -673,7 +1046,7 @@ title: Primary Colors
                   0: {
                     $$mdtype: "Variable",
                     path: ["item"],
-                    value: "sky",
+                    value: "ocean",
                   },
                   1: "stop_sign",
                 },
@@ -684,10 +1057,24 @@ title: Primary Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Stop Sign"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Stop signs are a type of traffic sign. They're used to indicate that drivers should stop their vehicles.",
+                    "Stop signs are essential traffic control devices used to manage vehicle and pedestrian traffic at intersections and crossings.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    'Stop signs are typically octagonal in shape and feature a red background with white lettering that reads "STOP." The purpose of a stop sign is to instruct drivers to come to a complete stop, ensuring that the intersection is clear and safe to proceed. Stop signs help prevent accidents and improve road safety by regulating the flow of traffic and providing clear instructions to drivers. Their standardized design makes them easily recognizable and effective in promoting orderly driving behavior.',
                   ],
                 },
               ],

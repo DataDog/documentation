@@ -1,9 +1,9 @@
 red_item_options:
   - display_name: Ruby
     identifier: ruby
+    default: true
   - display_name: Apple
     identifier: apple
-    default: true
   - display_name: Firetruck
     identifier: firetruck
   - display_name: Stop sign
