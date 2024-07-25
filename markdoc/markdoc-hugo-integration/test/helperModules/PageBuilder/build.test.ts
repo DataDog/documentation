@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { FileParser } from '../../../src/helperModules/FileParser';
-import { HtmlBuilder } from '../../../src/helperModules/HtmlBuilder';
+import { PageBuilder } from '../../../src/helperModules/PageBuilder';
 import { FileNavigator } from '../../../src/helperModules/FileNavigator';
 import { ConfigProcessor } from '../../../src/helperModules/ConfigProcessor';
 import {
@@ -20,14 +20,16 @@ describe('HtmlBuilder.build', () => {
 
     const parsedFile = FileParser.parseMdocFile(markdocFile, VALID_PARTIALS_DIR);
 
-    const prefOptionsConfigForPage = ConfigProcessor.buildPrefOptionsConfigForPage(
+    const prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
       parsedFile.frontmatter,
       prefOptionsConfig
     );
 
-    const html = HtmlBuilder.build({
+    const html = PageBuilder.build({
       parsedFile,
-      prefOptionsConfig: prefOptionsConfigForPage
+      prefOptionsConfig: prefOptionsConfigForPage,
+      debug: true,
+      includeAssetsInline: true
     });
 
     test(`builds an HTML string for ${sanitizedMarkdocFilename} that matches the snapshot`, () => {

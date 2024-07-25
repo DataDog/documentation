@@ -1,10 +1,10 @@
 import fs from 'fs';
 import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
-import { FileParser, ParsingErrorReport } from './helperModules/FileParser';
+import { FileParser, ParsingErrorReport, ParsedFile } from './helperModules/FileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { ConfigProcessor } from './helperModules/ConfigProcessor';
-import { HtmlBuilder } from './helperModules/HtmlBuilder';
+import { PageBuilder } from './helperModules/PageBuilder';
 
 const CompilationConfigSchema = z.object({
   directories: z
@@ -34,8 +34,8 @@ export class MarkdocHugoIntegration {
   config: {
     includeAssetsInline: boolean;
     debug: boolean;
+    outputFormat: 'html' | 'markdown';
   };
-  outputFormat: 'html' | 'markdown';
   // Errors from the AST parsing process,
   // which come with some extra information, like line numbers
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
@@ -53,14 +53,14 @@ export class MarkdocHugoIntegration {
     this.directories = args.directories;
     this.config = {
       includeAssetsInline: args.config?.includeAssetsInline || false,
-      debug: args.config?.debug || false
+      debug: args.config?.debug || false,
+      outputFormat: args.config?.outputFormat || 'markdown'
     };
-    this.outputFormat = args.config?.outputFormat || 'markdown';
   }
 
   buildAssetsPartial() {
-    const styles = HtmlBuilder.getStylesStr();
-    const script = HtmlBuilder.getClientRendererScriptStr();
+    const styles = PageBuilder.getStylesStr();
+    const script = PageBuilder.getClientRendererScriptStr();
     const partial = `
       <style>${styles}</style>
       <script>${script}</script>
@@ -78,15 +78,18 @@ export class MarkdocHugoIntegration {
     const prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
       this.directories.options
     );
-    const markdocFiles = FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
+    const markdocFilepaths = FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
 
-    for (const markdocFile of markdocFiles) {
-      const parsedFile = FileParser.parseMdocFile(markdocFile, this.directories.partials);
+    for (const markdocFilepath of markdocFilepaths) {
+      const parsedFile = FileParser.parseMdocFile(
+        markdocFilepath,
+        this.directories.partials
+      );
 
       // if the file has errors, log the errors for later output
       // and continue to the next file
       if (parsedFile.errorReports.length > 0) {
-        this.parsingErrorReportsByFilePath[markdocFile] = parsedFile.errorReports;
+        this.parsingErrorReportsByFilePath[markdocFilepath] = parsedFile.errorReports;
         continue;
       }
 
@@ -101,44 +104,39 @@ export class MarkdocHugoIntegration {
         );
       } catch (e) {
         if (e instanceof Error) {
-          this.validationErrorsByFilePath[markdocFile] = e.message;
+          this.validationErrorsByFilePath[markdocFilepath] = e.message;
         } else if (typeof e === 'string') {
-          this.validationErrorsByFilePath[markdocFile] = e;
+          this.validationErrorsByFilePath[markdocFilepath] = e;
         } else {
-          this.validationErrorsByFilePath[markdocFile] = JSON.stringify(e);
+          this.validationErrorsByFilePath[markdocFilepath] = JSON.stringify(e);
         }
         continue;
       }
 
       // build the HTMl string and write it to file
       try {
-        const html = HtmlBuilder.build({
+        const fileContents = PageBuilder.build({
           parsedFile,
           prefOptionsConfig: prefOptionsConfigForPage,
           includeAssetsInline: this.config.includeAssetsInline,
-          debug: this.config.debug
+          debug: this.config.debug,
+          outputMode: this.config.outputFormat
         });
 
-        let compiledFilename: string;
+        const compiledFilepath = this.#writeFile({
+          parsedFile,
+          markdocFilepath: markdocFilepath,
+          pageContents: fileContents
+        });
 
-        // if in standalone mode, build an HTML file
-        if (this.config.includeAssetsInline) {
-          compiledFilename = markdocFile.replace(/\.mdoc$/, '.html');
-          fs.writeFileSync(compiledFilename, html);
-          // otherwise, build a "Markdown" file (just HTML with frontmatter)
-        } else {
-          const markdown = `---\ntitle: ${parsedFile.frontmatter.title}\n---\n${html}`;
-          compiledFilename = markdocFile.replace(/\.mdoc$/, '.md');
-          fs.writeFileSync(compiledFilename, markdown);
-        }
-        this.compiledFiles.push(compiledFilename);
+        this.compiledFiles.push(compiledFilepath);
       } catch (e) {
         if (e instanceof Error) {
-          this.validationErrorsByFilePath[markdocFile] = e.message;
+          this.validationErrorsByFilePath[markdocFilepath] = e.message;
         } else if (typeof e === 'string') {
-          this.validationErrorsByFilePath[markdocFile] = e;
+          this.validationErrorsByFilePath[markdocFilepath] = e;
         } else {
-          this.validationErrorsByFilePath[markdocFile] = JSON.stringify(e);
+          this.validationErrorsByFilePath[markdocFilepath] = JSON.stringify(e);
         }
       }
     }
@@ -188,5 +186,25 @@ export class MarkdocHugoIntegration {
         console.error(`  - ${this.validationErrorsByFilePath[filePath]}`);
       }
     }
+  }
+
+  #writeFile(p: {
+    parsedFile: ParsedFile;
+    markdocFilepath: string;
+    pageContents: string;
+  }): string {
+    let writePath: string;
+    // HTML format
+    if (this.config.outputFormat === 'html') {
+      writePath = p.markdocFilepath.replace(/\.mdoc$/, '.html');
+      fs.writeFileSync(writePath, p.pageContents);
+      // Markdown format
+    } else if (this.config.outputFormat === 'markdown') {
+      writePath = p.markdocFilepath.replace(/\.mdoc$/, '.md');
+      fs.writeFileSync(writePath, p.pageContents);
+    } else {
+      throw new Error(`Invalid output format: ${this.config.outputFormat}`);
+    }
+    return writePath;
   }
 }

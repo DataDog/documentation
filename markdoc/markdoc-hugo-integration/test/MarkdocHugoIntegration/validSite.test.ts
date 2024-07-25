@@ -5,19 +5,23 @@ import fs from 'fs';
 
 const siteDir = VALID_SITE_DIR;
 
-describe('MarkdocHugoIntegration (standalone mode)', () => {
+describe('MarkdocHugoIntegration (standalone HTML output)', () => {
   const compiler = new MarkdocHugoIntegration({
-    prefOptionsConfigDir: siteDir + '/preferences_config/options',
-    // sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
-    contentDir: siteDir + '/content',
-    partialsDir: siteDir + '/partials',
-    standaloneMode: true
+    directories: {
+      content: siteDir + '/content',
+      options: siteDir + '/preferences_config/options',
+      partials: siteDir + '/partials'
+    },
+    config: {
+      includeAssetsInline: true,
+      debug: true,
+      outputFormat: 'html'
+    }
   });
 
   test('each compiled file matches the snapshot', () => {
-    compiler.compile();
-    for (const file of compiler.markdocFiles) {
-      const compiledFile = file.replace(/\.mdoc$/, '.html');
+    const { compiledFiles } = compiler.compile();
+    for (const compiledFile of compiledFiles) {
       const compiledContent = fs.readFileSync(compiledFile, 'utf8');
       const sanitizedFilename = compiledFile.replace(`${siteDir}/content`, '');
       expect(compiledContent).toMatchFileSnapshot(
@@ -27,18 +31,18 @@ describe('MarkdocHugoIntegration (standalone mode)', () => {
   });
 });
 
-describe('MarkdocHugoIntegration (regular mode)', () => {
+describe('MarkdocHugoIntegration (optimized Markdown output)', () => {
   const compiler = new MarkdocHugoIntegration({
-    prefOptionsConfigDir: siteDir + '/preferences_config/options',
-    // sitewidePrefsFilepath: siteDir + '/preferences_config/sitewide_preferences.yaml',
-    contentDir: siteDir + '/content',
-    partialsDir: siteDir + '/partials'
+    directories: {
+      content: siteDir + '/content',
+      options: siteDir + '/preferences_config/options',
+      partials: siteDir + '/partials'
+    }
   });
 
   test('each compiled file matches the snapshot', () => {
-    compiler.compile();
-    for (const file of compiler.markdocFiles) {
-      const compiledFile = file.replace(/\.mdoc$/, '.md');
+    const { compiledFiles } = compiler.compile();
+    for (const compiledFile of compiledFiles) {
       const compiledContent = fs.readFileSync(compiledFile, 'utf8');
       const sanitizedFilename = compiledFile.replace(`${siteDir}/content`, '');
       expect(compiledContent).toMatchFileSnapshot(

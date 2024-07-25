@@ -25,7 +25,7 @@ const clientRendererScriptStr = fs.readFileSync(
   'utf8'
 );
 
-export class HtmlBuilder {
+export class PageBuilder {
   static getChooserHtml(resolvedPagePrefs: ResolvedPagePrefs) {
     return renderToString(Chooser(resolvedPagePrefs));
   }
@@ -39,6 +39,7 @@ export class HtmlBuilder {
     prefOptionsConfig: PrefOptionsConfig;
     includeAssetsInline: boolean;
     debug: boolean;
+    outputMode: 'html' | 'markdown';
   }): string {
     const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
       p.parsedFile.frontmatter,
@@ -66,7 +67,7 @@ export class HtmlBuilder {
     }
 
     // Build the page content HTML
-    const documentHtml = `
+    let pageContents = `
       <div id="markdoc-chooser">${chooser}</div>
       <div id="markdoc-content">${MarkdocStaticCompiler.renderers.html(
         renderableTree
@@ -82,10 +83,11 @@ export class HtmlBuilder {
             selectedValsByPrefId: ${JSON.stringify(defaultValsByPrefId, null, 2)},
             renderableTree: ${JSON.stringify(renderableTree, null, 2)}
         });
-        </script>
+      </script>
     `;
 
-    const standaloneHtml = `
+    if (p.includeAssetsInline) {
+      pageContents = `
       <!DOCTYPE html>
       <html>
         <head>
@@ -97,18 +99,18 @@ export class HtmlBuilder {
           </style>
         </head>
         <body>
-          ${documentHtml}
+          ${pageContents}
         </body>
       </html>
     `;
-
-    let formattedHtml;
-    if (p.includeAssetsInline) {
-      formattedHtml = prettier.format(standaloneHtml, { parser: 'html' });
-    } else {
-      formattedHtml = prettier.format(documentHtml, { parser: 'html' });
     }
-    return formattedHtml;
+
+    pageContents = prettier.format(pageContents, { parser: 'html' });
+
+    if (p.outputMode === 'markdown') {
+      pageContents = `---\ntitle: ${p.parsedFile.frontmatter.title}\n---\n${pageContents}`;
+    }
+    return pageContents;
   }
 
   static getStylesStr() {

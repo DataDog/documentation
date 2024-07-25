@@ -1,5 +1,5 @@
 import { RenderableTreeNodes } from 'markdoc-static-compiler';
-import { rerenderChooser } from './HtmlBuilder/components/chooser';
+import { rerenderChooser } from './PageBuilder/components/chooser';
 import { SharedRenderer } from './SharedRenderer';
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { PagePrefsConfig } from '../schemas/yaml/frontMatter';

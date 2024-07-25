@@ -67,7 +67,7 @@ describe('ConfigProcessor.buildPrefOptionsConfigForPage', () => {
 
   test('processes valid frontmatter placeholders without errors', () => {
     expect(() =>
-      ConfigProcessor.buildPrefOptionsConfigForPage(frontmatter, prefOptions)
+      ConfigProcessor.getPrefOptionsForPage(frontmatter, prefOptions)
     ).not.toThrow();
   });
 
@@ -94,7 +94,7 @@ describe('ConfigProcessor.buildPrefOptionsConfigForPage', () => {
       ]
     };
     expect(() =>
-      ConfigProcessor.buildPrefOptionsConfigForPage(invalidFrontmatter, prefOptions)
+      ConfigProcessor.getPrefOptionsForPage(invalidFrontmatter, prefOptions)
     ).toThrowError(
       `Placeholder <COLOUR> does not refer to a valid page preference identifier. Make sure that 'colour' is spelled correctly, and that the 'colour' parameter is defined in the page_preferences list before it is referenced in <COLOUR>.`
     );
@@ -103,7 +103,7 @@ describe('ConfigProcessor.buildPrefOptionsConfigForPage', () => {
   test('throws an error when a placeholder-derived options set does not exist', () => {
     const { gloss_red_paint_options, ...invalidPrefOptions } = prefOptions;
     expect(() =>
-      ConfigProcessor.buildPrefOptionsConfigForPage(frontmatter, invalidPrefOptions)
+      ConfigProcessor.getPrefOptionsForPage(frontmatter, invalidPrefOptions)
     ).toThrowError(
       `Invalid options_source could be populated by the placeholders in <FINISH>_<COLOR>_paint_options: An options source with the ID 'gloss_red_paint_options' does not exist.`
     );
