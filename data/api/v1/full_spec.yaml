@@ -804,7 +804,7 @@ components:
           type: string
         client_secret:
           description: Your Azure web application secret key.
-          example: testingx./Sw*g/Y33t..R1cH+hScMDt
+          example: TestingRh2nx664kUy5dIApvM54T4AtO
           type: string
         container_app_filters:
           description: 'Limit the Azure container apps that are pulled into Datadog
@@ -26119,7 +26119,7 @@ paths:
             origin: request
             value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
               \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
-              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
