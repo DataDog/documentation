@@ -121,7 +121,7 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 
 ## Sampling impact on trace metrics
 
-In most cases, trace metrics are calculated based on all application traffic. However, with certain trace ingestion sampling configurations, the metrics will represent only a subset of all requests:
+In most cases, trace metrics are calculated based on all application traffic. However, with certain trace ingestion sampling configurations, the metrics represent only a subset of all requests.
 
 ### Application-side sampling 
 
