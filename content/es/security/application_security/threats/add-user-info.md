@@ -28,11 +28,11 @@ Las actividades personalizadas del usuario para las cuales se dispone de reglas 
 
 | Nombres de eventos integrados   | Metadatos necesarios                                    | Normas relacionadas                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Tasa de actividad limitada desde IP][4]<br>[Actividad no autorizada detectada][5] |
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Tasa de actividad limitada desde la IP][4]<br>[Actividad no autorizada detectada][5] |
 | `users.login.success`  | El ID de usuario es obligatorio, se pueden añadir metadatos opcionales  | [Ataque de relleno de credenciales][6]<br>[Ataque por la fuerza bruta][12]<br>[Relleno de credenciales distribuido][13]               |
 | `users.login.failure`  | El ID de usuario y `usr.exists` son obligatorios, se pueden añadir metadatos opcionales  | [Ataque de relleno de credenciales][6]<br>[Ataque por la fuerza bruta][12]<br>[Relleno de credenciales distribuido][13]  |
-| `users.signup`         | `{ "usr.id": "12345" }`                              | [Creación de cuentas excesivas desde una IP][7]                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                              | [Eliminación de cuentas excesivas desde una IP][8]                                                                                           |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excesivas creaciones de cuentas desde una IP][7]                                                                                                    |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excesiva eliminación de cuentas desde una IP][8]                                                                                           |
 | `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Intentos de restablecimiento de contraseña por la fuerza bruta][9]                                                                                                         |
 | `payment.failure`      | Ninguno                                                 | [Excesivos errores de pago desde una IP][10]                                                                                                        |
 
@@ -44,7 +44,7 @@ Puedes [añadir etiquetas personalizada a tu tramo (span) raíz][3] o utilizar l
 
 {{< programming-lang lang="java" >}}
 
-Utiliza la API del rastreador Java para añadir etiquetas personalizadas a un tramo raíz y añade la información del usuario para poder monitorizar solicitudes autenticadas en la aplicación.
+Utiliza la API del rastreador de Java para añadir etiquetas personalizadas a un tramo raíz y añade la información del usuario para poder monitorizar solicitudes autenticadas en la aplicación.
 
 Se aplican etiquetas de monitorización del usuario en el tramo raíz y comienzan con el prefijo `usr` seguido del nombre del campo. Por ejemplo, `usr.name` es una etiqueta de monitorización del usuario que rastrea el nombre del usuario.
 
@@ -84,7 +84,7 @@ Bloquear
 
 El paquete de rastreadores de .NET ofrece la función de `SetUser()`, que te permite monitorizar solicitudes autenticadas añadiendo la información del usuario a la traza.
 
-El siguiente ejemplo muestra cómo añadir las etiquetas de monitorización del usuario relevante y activar la capacidad de bloqueo del usuario:
+En el siguiente ejemplo se muestra cómo añadir las etiquetas de monitorización del usuario relevante y activar la capacidad de bloqueo del usuario:
 
 ```csharp
 
@@ -94,7 +94,7 @@ using Datadog.Trace;
 
     var userDetails = new UserDetails()
     {
-        // los sistemas del identificador interno para los usuarios
+        // el identificador interno de los sistemas para los usuarios
         Id = "d41452f2-483d-4082-8728-171a3570e930",
         // la dirección de correo electrónico del usuario
         Email = "test@adventure-works.com",
@@ -118,14 +118,14 @@ Para más información y opciones, lee [la documentación del rastreador de .NET
 
 El paquete de rastreadores de Go ofrece la función de `SetUser()`, que te permite monitorizar solicitudes autenticadas añadiendo la información del usuario a la traza. Para más opciones, consulta [la documentación del rastreador de Go][1].
 
-Este ejemplo muestra cómo recuperar el tramo del rastreador actual, utilizarlo para configurar las etiquetas de monitorización del usuario y habilitar la capacidad de bloqueo del usuario:
+En este ejemplo se muestra cómo recuperar el tramo del rastreador actual, utilizarlo para configurar las etiquetas de monitorización del usuario y habilitar la capacidad de bloqueo del usuario:
 
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // Se deberá bloquear al usuario mediante la anulación del controlador de solicitudes tan pronto como sea posible.
-    // La respuesta de bloqueo se controla en forma automática y se envía al middleware de appsec.
+    // El middleware de la appsec controla y envía en forma automática la respuesta de bloqueo.
     return 
   }
 }
@@ -136,7 +136,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{< programming-lang lang="ruby" >}}
 
-Utiliza una de las siguientes API para añadir la información del usuario a una traza de modo que pueda monitorizar las solicitudes autenticadas en la aplicación:
+Utiliza una de las siguientes API para añadir la información del usuario a una traza de modo que puedas monitorizar las solicitudes autenticadas en la aplicación:
 
 {{< tabs >}}
 
