@@ -218,17 +218,25 @@ function loadPage(newUrl) {
 
             const pathName = new URL(newUrl).pathname;
             
+            // clean window pathname
+            const commitRefLen = document.documentElement.dataset.commitRef.length ? (document.documentElement.dataset.commitRef.length) + 1: 0
+            const noFtBranchPathName = pathName.slice(commitRefLen)
+            const nonEnPage = document.documentElement.lang !== 'en-US'
+            let noFtBranchNoLangPathName = noFtBranchPathName
+            if(nonEnPage){
+                noFtBranchNoLangPathName = noFtBranchPathName.slice(3)
+            }
+            
             document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((ddItem) => {
-                // Replace language dropdown-item hrefs with newURL when loading pages asynchronously (selecting the left nav menu items)
-                // ensures correct path is used for language dropdown-item.
-
-                const commitRefLen = document.documentElement.dataset.commitRef.length; // adjust for preview env / branch name in path
-                const ddItemLangLen = ddItem.dataset.lang.length + 2;
-                const noLangPath = pathName.slice(commitRefLen + ddItemLangLen);
-                const cutIdx = ddItem.dataset.lang !== 'en' ? (commitRefLen + ddItemLangLen) : (commitRefLen + 1);
-                const newURL = ddItem.href.replace(ddItem.pathname.slice(cutIdx), noLangPath); 
-
-                ddItem.setAttribute('href', newURL);
+                const noFtBranchddItemPathName = ddItem.pathname.slice(commitRefLen)
+                let noFtBranchNoLangddItemPathName = noFtBranchddItemPathName
+                console.log('lang:', ddItem.dataset.lang)
+                if(ddItem.dataset.lang){
+                    noFtBranchNoLangddItemPathName = noFtBranchddItemPathName.slice(3)
+                }
+                console.log('REPLACER::',noLangPathName)
+                console.log('REPLACE::', noFtBranchNoLangddItemPathName)
+                console.log('')
             })
 
             // sets query params if code tabs are present
@@ -270,3 +278,5 @@ function loadPage(newUrl) {
 }
 
 export {loadPage};
+
+
