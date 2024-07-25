@@ -13,24 +13,26 @@ jobs:
       pull-requests: write # to create pull request      
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4 
+
       - name: Generate a token
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ vars.DOCS_GH_APP_ID }}
           private-key: ${{ secrets.DOCS_GH_APP_PRIVATE_KEY }}
-      - id: set-worker-version
-        name: Load latest worker version
-        uses: actions/github-script@v7
+
+      - uses: actions/setup-python@v5.1.0
         with:
-          github-token: ${{ steps.generate-token.outputs.token }}
-          result-encoding: string
-          script: |
-              const tags = await github.rest.repos.listTags({
-                owner: 'hestonhoffman',
-                repo: 'changed-lines'
-              })
-              const regex = /^(?:(?:[0-9]*)[.](?:[0-9]*)[.](?:[0-9]*))$/;
-              latestTag = tags.data.find(value => regex.test(value))
-              console.log(latestTag)
-              return latestTag
+          python-version: '3.11'
+
+      - name: Find latest synthetic-worker version
+        id: set-worker-version
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: |
+          python local/bin/py/synthetics_worker_version.py
+      
+      - name: echo worker version
+        run: echo ${{ steps.set-worker-version.outputs.worker_version }}
+  
