@@ -39,7 +39,7 @@ Por defecto, las funciones de AWS Lambda se etiquetan con `env:none` en Datadog.
 
 ### La etiqueta "service" (servicio)
 
-Añade `service` para agrupar funciones de Lambda relacionadas por servicio. 
+Añade la etiqueta `service` para agrupar funciones de Lambda relacionadas por servicio. 
 
 El comportamiento predeterminado para los nuevos clientes de Datadog es que todas las funciones de Lambda se agrupen en el servicio `aws.lambda` y se representen como un solo nodo en el mapa de servicios. Etiqueta tus funciones por servicio para sobrescribir esto.
 
