@@ -131,7 +131,7 @@ Very few tracing libraries support this setting, and using it is generally not r
 
 ### OpenTelemetry sampling
 
-The OpenTelemetry SDK’s native sampling mechanisms lower the number of spans sent to the Datadog collector, resulting in sampled and potentially inaccurate trace metrics.
+The OpenTelemetry SDK's native sampling mechanisms lower the number of spans sent to the Datadog collector, resulting in sampled and potentially inaccurate trace metrics.
 
 ### XRay sampling
 
