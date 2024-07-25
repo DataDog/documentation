@@ -13,7 +13,7 @@ jobs:
       pull-requests: write # to create pull request      
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 
+      - uses: actions/checkout@v4
 
       - name: Generate a token
         id: generate-token
@@ -25,12 +25,12 @@ jobs:
       - uses: actions/setup-python@v5.1.0
         with:
           python-version: '3.11'
-      - run: pip install requests    
+      - run: pip install requests
 
       - name: Find latest synthetic-worker version
         id: set-worker-version
         env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           python local/bin/py/synthetics_worker_version.py
       
