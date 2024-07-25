@@ -44,7 +44,7 @@ import DatadogRUM
 
 URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionClient.self))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to "Automatically track network requests" in the [Advanced Configuration][4] documentation.
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to [Advanced Configuration > Automatically track network requests][4].
 
 [1]: https://github.com/Alamofire/Alamofire
 [2]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/
