@@ -135,7 +135,7 @@ The OpenTelemetry SDK’s native sampling mechanisms lower the number of spans s
 
 ### XRay sampling
 
-XRay spans are sampled before they are sent to Datadog, which means trace metrics will not reflect all traffic.
+XRay spans are sampled before they are sent to Datadog, which means trace metrics might not reflect all traffic.
 
 
 ## Further Reading
