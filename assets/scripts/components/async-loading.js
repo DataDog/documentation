@@ -237,6 +237,9 @@ function loadPage(newUrl) {
                 console.log('REPLACER::',noFtBranchNoLangPathName)
                 console.log('REPLACE::', noFtBranchNoLangddItemPathName)
                 console.log('')
+                
+                const updatedURL = ddItem.href.replace(noFtBranchNoLangddItemPathName, noFtBranchNoLangPathName)
+                ddItem.setAttribute('href', updatedURL)
             })
 
             // sets query params if code tabs are present
