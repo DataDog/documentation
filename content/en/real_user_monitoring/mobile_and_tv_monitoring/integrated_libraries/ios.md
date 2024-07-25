@@ -27,7 +27,7 @@ Starting from version `2.5.0`, the RUM iOS SDK can automatically track [Alamofir
 import Alamofire
 import DatadogRUM
 
-URLSessionInstrumentation.enable(with: .init(delegateClass: SessionDelegate.self))
+URLSessionInstrumentation.enable(with: .init(delegateClass: Alamofire.SessionDelegate.self))
 ```
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to "Automatically track network requests" in the [Advanced Configuration][4] documentation.
 
@@ -42,7 +42,7 @@ Starting from version `2.5.0`, the RUM iOS SDK can automatically track [Apollo G
 import Apollo
 import DatadogRUM
 
-URLSessionInstrumentation.enable(with: .init(delegateClass: URLSessionClient.self))
+URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionClient.self))
 ```
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to "Automatically track network requests" in the [Advanced Configuration][4] documentation.
 
