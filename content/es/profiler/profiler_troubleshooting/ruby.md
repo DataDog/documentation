@@ -11,7 +11,7 @@ type: lenguaje de código múltiple
 
 ## Perfiles faltantes en la página de búsqueda de perfiles
 
-Si has configurado el generador de perfiles y no ves perfiles en la página de búsqueda de perfiles, activa el [modo de depuración][1] y [abre un ticket de asistencia][1]. En el ticket de asistencia, incluye los archivos de depuración junto con la siguiente información:
+Si has configurado el generador de perfiles y no ves perfiles en la página de búsqueda de perfiles, activa el [modo de depuración][1] y [abre un ticket de asistencia][2]. En el ticket de asistencia, incluye los archivos de depuración junto con la siguiente información:
 
 - Tipo y versión del sistema operativo (por ejemplo, Linux Ubuntu 22.04)
 - Tipo de tiempo de ejecución, versión y proveedor (por ejemplo, Ruby 2.7.3)
@@ -75,7 +75,7 @@ De este modo, Datadog podrá añadirlas a la lista de detección automática y t
 
 Una solución alternativa para este problema se aplica automáticamente desde la [versión 1.21.0 `dd-trace-rb`][3]. Para solucionar este problema, Datadog recomienda actualizar a esta versión o una posterior.
 
-Antes de la versión 1.21.0, en raras situaciones el generador de perfiles podía activar [Ruby VM Bug #19991][12] que se manifiesta como un "Fallo de segmentación" con una traza de stack tecnológico de fallos que incluye la función `gc_finalize_deferred`.
+Antes de la versión 1.21.0, en raras situaciones el generador de perfiles podía activar [Ruby VM Bug #19991][12] que se manifiesta como un "Fallo de segmentación" con una traza (trace) de stack tecnológico de fallos que incluye la función `gc_finalize_deferred`.
 
 Este error se ha corregido para Ruby v3.3 y posteriores. Para versiones anteriores de Ruby (y anteriores a dd-trace-rb v1.21.0), puedes utilizar la solución alternativa "sin señales" para resolver este problema.
 
