@@ -210,7 +210,7 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-El rastreador de PHP ofrece la función de `\DDTrace\set_user()`, que te permite monitor y bloquear solicitudes autenticadas.
+El rastreador de PHP ofrece la función de `\DDTrace\set_user()`, que te permite monitorizar y bloquear solicitudes autenticadas.
 
 `\DDTrace\set_user()` añade las etiquetas relevantes del usuario y los metadatos a la traza y realiza automáticamente el bloqueo de usuarios.
 
@@ -218,7 +218,7 @@ En el siguiente ejemplo se muestra cómo configurar las etiquetas de monitorizac
 
 ```php
 <?php
-// El bloqueo se realiza a través de la llamada de set_user call.
+// El bloqueo se realiza a través de la llamada a set_user call.
 \DDTrace\set_user(
     // Se necesita un identificador único del usuario.
     '123456789',
