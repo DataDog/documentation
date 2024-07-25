@@ -15,6 +15,29 @@ Set up the AWS integration using CloudFormation
 - The [Datadog AWS integration][1] is installed and configured for your AWS accounts
 - [Cloud SIEM][5] is enabled 
 
+Install approaches
+
+First time installing Cloud SIEM, logs not set up either > You'd be directed to the main onboarding workflow
+
+- Enable Cloud SIEM
+- AWS integration (if not already installed)
+- CloudTrail Logs forwarding
+
+Cloud SIEM is already installed. CloudTrail Logs forwarding is already enabled. You just need to enable CloudTrail Logs on the CSM features page(?)
+
+- Enable CloudTrail Logs feature on CSM Feature page
+
+Cloud SIEM is already installed, but CloudTrail Logs are not. You need to enable CloudTrail Logs forwarding (and possibly the AWS integration)
+
+- AWS integration (if not already installed)
+- CloudTrail Logs forwarding
+
+## Set up AWS integration
+
+## Enable Cloud SIEM
+
+
+
 ## Enable AWS CloudTrail logging
 
 Enable AWS CloudTrail logging so that logs are sent to a S3 bucket.
