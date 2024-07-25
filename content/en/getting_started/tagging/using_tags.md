@@ -251,7 +251,7 @@ To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>
 
 For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search Logs][10].
 
-Additionally, tags are used to filter a logs [Pipeline][14]. For example, if you only want logs from the coffee-house service to go through the pipelines, add the tag `service:coffee-house` to the filter field.
+Additionally, tags are used to filter a logs [Pipeline][14]. For example, if you only want logs from the coffee-house service to go through the pipeline, add the tag `service:coffee-house` to the filter field.
 
 ## RUM & Session Replay
 
