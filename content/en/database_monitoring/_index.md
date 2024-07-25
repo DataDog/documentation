@@ -26,7 +26,7 @@ cascade:
 
 
 {{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
-  Learn how with Database Monitoring, you can quickly pinpoint costly and slow queries and drill into precise execution details to address bottlenecks.
+  With Database Monitoring, learn how to quickly pinpoint costly and slow queries. Drill into precise execution details to address bottlenecks.
 {{< /learning-center-callout >}}
 
 Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.

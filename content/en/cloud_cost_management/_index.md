@@ -35,7 +35,7 @@ cascade:
 
 
 {{< learning-center-callout header="Join an enablement webinar session" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
-  Explore your cloud provider costs correlated with your real-time telemetry data to gain actionable insights and alerts on where your cloud costs are coming from, how they are changing, and where to find potential optimizations.
+  Explore your cloud provider costs and correlate them with real-time telemetry data. Gain actionable insights and alerts on where your cloud costs are coming from, how they are changing, and where to find potential optimizations.
 {{< /learning-center-callout >}}
 
 ## Overview
