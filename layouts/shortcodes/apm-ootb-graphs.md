@@ -28,7 +28,9 @@ The **Latency** graph displays the latency percentiles as a timeseries. Using th
 
 ### Avg Time per Request
 
-For services involving multiple downstream services, a fourth graph breaks down the average [execution time][101] spent per request. Using the dropdown menu, you can also view:
+For services involving multiple downstream services, a fourth graph breaks down the average [execution time][101] spent per request. This graph is built on sampled trace data, unlike the other top graphs which use unsampled data sources.
+
+Using the dropdown menu, you can also view:
 
 - **Total Time Spent**: The cumulative time spent in each downstream service over time.
 - **% of Time Spent**: The percentage of time spent in each downstream service relative to the total time.
