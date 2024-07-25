@@ -39,7 +39,7 @@ There are two types of alerting conditions you can configure your Error Tracking
 
 | Alerting&nbsp;condition     | Description    | 
 | ---  | ----------- |
-|High Impact| Alert on issues with a high number impact on your end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
+|High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
 |New Issue| Alert when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
 
 ### Define the search query
@@ -114,8 +114,8 @@ To display triggering tags in the notification title, click **Include triggering
 For more information about the **Configure notifications and automations** section, see [Notifications][5].
 
 
-### Muting Monitors
-Error Tracking monitors leverage [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues. 
+### Muting monitors
+Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues. 
 
 **Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
 
