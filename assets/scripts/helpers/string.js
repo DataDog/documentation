@@ -1,10 +1,18 @@
 const stringToTitleCase = (string) => {
   if(string.length <= 0) return string;
 
-  const allCapWords = ['CSM']
+  const allCapWords = ['CSM', 'SIEM']
+  let openParenthesis = false;
+
   return string.split(' ')
     .map(word => {
-      if(allCapWords.includes(word)) return word.toUpperCase();
+      if(word.startsWith('(')) openParens = true   
+      if(allCapWords.some(cap => word.toLowerCase().includes(cap.toLowerCase()))) return word.toUpperCase();
+      if(word.endsWith(')')){
+          openParens = false 
+          return word.toLowerCase() 
+      } 
+      if (openParens) return word.toLowerCase()
       return word[0].toUpperCase() + word.substr(1).toLowerCase()
     }).join(' ');
 }
