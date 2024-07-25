@@ -23,7 +23,7 @@ title: Guías de Serverless Monitoring
     {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Instrumentación de contenedores de Linux en Azure App Service con el sidecar de Azure{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Instalación mediante el Datadog Forwarder
+## Instalar mediante el Datadog Forwarder
 
 {{< whatsnext desc="Installation instructions for applications previously set up to be monitored using the Datadog Forwarder" >}}
     {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Instrumentación de aplicaciones serverless de Node.js mediante el Datadog Forwarder{{< /nextlink >}}
@@ -34,7 +34,7 @@ title: Guías de Serverless Monitoring
     {{< nextlink href="/serverless/guide/extension_motivation" >}}Decidir migrar a la Datadog Lambda Extension{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Solución de problemas de instalación
+## Solucionar problemas de instalación
 
 {{< whatsnext desc="Common installation issues and tips for troubleshooting" >}}
     {{< nextlink href="/serverless/troubleshooting" >}}Solucionar problemas de Serverless Monitoring{{< /nextlink >}}
