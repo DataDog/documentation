@@ -160,6 +160,6 @@ Datadog's LLM Observability associates evaluations with individual spans so you 
 
 [1]: https://react-lm.github.io/
 [2]: /llm_observability/setup/sdk/?tab=model#tracing-spans
-[3]: /llm_observability/setup/auto_instrumentation
+[3]: /llm_observability/auto_instrumentation
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
 [5]: /llm_observability/guide/submit_evaluations
