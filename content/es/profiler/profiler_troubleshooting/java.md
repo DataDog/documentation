@@ -120,7 +120,7 @@ jdk.OldObjectSample#enabled=false
 
 ## Excepciones que saturan el generador de perfiles
 
-En condiciones normales, el generador de perfiles de excepciones de Datadog ocupa poco espacio y tiene poca sobrecarga. Si se crean y lanzan muchas excepciones, se puede causar una sobrecarga significativa para el generador de perfiles. Esto puede ocurrir cuando se utilizan excepciones para el flujo de control. Si tienes una tasa de excepciones inusualmente alta, desactive temporalmente la generación de perfiles de excepciones hasta que soluciones la causa.
+En condiciones normales, el generador de perfiles de excepciones de Datadog ocupa poco espacio y tiene poca sobrecarga. Si se crean y lanzan muchas excepciones, se puede causar una sobrecarga significativa para el generador de perfiles. Esto puede ocurrir cuando se utilizan excepciones para el flujo (flow) de control. Si tienes una tasa de excepciones inusualmente alta, desactive temporalmente la generación de perfiles de excepciones hasta que soluciones la causa.
 
 Para deshabilitar la generación de perfiles de excepciones, inicia el rastreador con la configuración de máquina virtual Java `-Ddd.integration.throwables.enabled=false`.
 
