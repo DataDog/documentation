@@ -48,7 +48,7 @@ components:
       - errors
       type: object
     APISuccessResponseSchema:
-      description: A JSON containing the success message
+      description: A JSON object containing the success message
       properties:
         success:
           description: Message.
@@ -6961,7 +6961,7 @@ components:
       - logs
       - spans
       - database_queries
-      - network_performance_queries
+      - network
       example: rum
       type: string
       x-enum-varnames:
@@ -6973,7 +6973,7 @@ components:
       - LOGS
       - SPANS
       - DATABASE_QUERIES
-      - NETWORK_PERFORMANCE_QUERIES
+      - NETWORK
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
