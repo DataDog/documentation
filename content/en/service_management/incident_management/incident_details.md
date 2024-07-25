@@ -150,7 +150,7 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/#creating-an-incident
+[1]: /service_management/incident_management/declare
 [2]: /service_management/incident_management/#describing-the-incident
 [3]: /service_management/incident_management/#integrations
 [4]: /service_management/incident_management/incident_settings#integrations
