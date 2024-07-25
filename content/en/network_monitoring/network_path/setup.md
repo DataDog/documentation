@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to configure either static or dynamic paths depending on your needs. Dynamic paths are automatically generated when enabled, while static paths let you specify the endpoint to test.
+Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to configure either static or dynamic paths depending on your needs. Dynamic paths are automatically generated when enabled, while static paths let you specify the individual endpoint to test.
 
 ## Prerequisites
 
@@ -33,6 +33,8 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 {{< tabs >}}
 {{% tab "Dynamic paths" %}}
+
+Configure dynamic paths to allow the Agent to automatically discover and monitor network routes without requiring you to specify endpoints manually.
 
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
@@ -51,7 +53,7 @@ Setting up Network Path involves configuring your Linux environment to monitor a
         workers: 10 # default 4
     ```
  
-    For full configuration details, see the following:
+    For full configuration details, reference the [example config][1], or use the following:
 
     ```yaml
       network_path:
@@ -70,9 +72,12 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
+[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1645
 {{% /tab %}}
 
 {{% tab "Static paths" %}}
+
+Manually configure static paths by specifying the exact endpoint you want to test. This allows you to target specific network routes for monitoring.
 
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
@@ -105,7 +110,7 @@ Setting up Network Path involves configuring your Linux environment to monitor a
          - "tag_key2:tag_value2"
     ```
  
-   For full configuration details, see the following:
+   For full configuration details, reference the [example config][1], or use the following:
 
    ```yaml
    init_config:
@@ -140,10 +145,29 @@ Setting up Network Path involves configuring your Linux environment to monitor a
      ## @param min_collection_interval - int - optional - default:60
      ## Interval between each traceroute runs for each destination.
      # min_collection_interval: <interval_in_seconds>
+     ## @param source_service - string - optional
+     ## Source service name.
+     #
+     # source_service: <SOURCE_SERVICE>
+
+     ## @param destination_service - string - optional
+     ## Destination service name.
+     #
+     # destination_service: <DESTINATION_SERVICE>
+
+     ## @param tags - list of strings - optional
+     ## A list of tags to attach to every metric and service check emitted by this instance.
+     ##
+     ## Learn more about tagging at https://docs.datadoghq.com/tagging
+     #
+     # tags:
+     #   - <KEY_1>:<VALUE_1>
+     #   - <KEY_2>:<VALUE_2>
    ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
+[1]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
 {{% /tab %}}
 
 {{< /tabs >}}
