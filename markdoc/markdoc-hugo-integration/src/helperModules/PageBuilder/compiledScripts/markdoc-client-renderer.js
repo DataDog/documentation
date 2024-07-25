@@ -3598,9 +3598,9 @@
     }
   });
 
-  // dist/helperModules/HtmlBuilder/components/chooser.js
+  // dist/helperModules/PageBuilder/components/chooser.js
   var require_chooser = __commonJS({
-    "dist/helperModules/HtmlBuilder/components/chooser.js"(exports) {
+    "dist/helperModules/PageBuilder/components/chooser.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.rerenderChooser = exports.Chooser = void 0;
@@ -3627,20 +3627,15 @@
         Object.keys(resolvedPagePrefs).forEach((prefId) => {
           const resolvedPref = resolvedPagePrefs[prefId];
           const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
-          (0, incremental_dom_1.text)(" ");
           (0, incremental_dom_1.elementOpen)("div", null, ["class", "markdoc-pref__container"]);
           (0, incremental_dom_1.elementOpen)("div", null, ["class", "markdoc-pref__label"]);
           (0, incremental_dom_1.text)(resolvedPref.displayName);
           (0, incremental_dom_1.elementClose)("div");
           resolvedPref.options.forEach((option) => {
             const selected = option.id === currentValue ? "selected" : "";
-            (0, incremental_dom_1.text)(" ");
             (0, incremental_dom_1.elementOpen)("div", null, [], "key", `${prefId}-${option.id}`, "class", `markdoc-pref__pill ${selected}`, "data-pref-id", resolvedPref.identifier, "data-option-id", option.id);
-            (0, incremental_dom_1.text)(" ");
             (0, incremental_dom_1.text)(option.displayName);
-            (0, incremental_dom_1.text)(" ");
             (0, incremental_dom_1.elementClose)("div");
-            (0, incremental_dom_1.text)(" ");
           });
           (0, incremental_dom_1.elementClose)("div");
         });

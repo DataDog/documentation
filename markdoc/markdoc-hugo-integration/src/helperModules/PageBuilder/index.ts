@@ -6,119 +6,134 @@ import MarkdocStaticCompiler, {
   RenderableTreeNode
 } from 'markdoc-static-compiler';
 import prettier from 'prettier';
-import { ResolvedPagePrefs } from '../../schemas/resolvedPagePrefs';
 import fs from 'fs';
 import path from 'path';
 import { Chooser } from './components/chooser';
 import { renderToString } from 'react-dom/server';
 import { SharedRenderer } from '../SharedRenderer';
+import { Frontmatter } from '../../schemas/yaml/frontMatter';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
-const debugStyleOverrides = `
-.markdoc__hidden {
-  background-color: lightgray;
-}
-`;
 
 const clientRendererScriptStr = fs.readFileSync(
   path.resolve(__dirname, 'compiledScripts/markdoc-client-renderer.js'),
   'utf8'
 );
 
+const minifiedClientRendererScriptStr = fs.readFileSync(
+  path.resolve(__dirname, 'compiledScripts/markdoc-client-renderer.min.js'),
+  'utf8'
+);
+
+interface PageBuildArgs {
+  parsedFile: ParsedFile;
+  prefOptionsConfig: PrefOptionsConfig;
+  includeAssetsInline: boolean;
+  debug: boolean;
+  outputMode: 'html' | 'markdown';
+}
+
 export class PageBuilder {
-  static getChooserHtml(resolvedPagePrefs: ResolvedPagePrefs) {
-    return renderToString(Chooser(resolvedPagePrefs));
+  static getChooserHtml(p: {
+    pageBuildArgs: PageBuildArgs;
+    defaultValsByPrefId: Record<string, string>;
+  }): string {
+    const frontmatter = p.pageBuildArgs.parsedFile.frontmatter;
+
+    let chooser = '';
+
+    if (frontmatter.page_preferences) {
+      const resolvedPagePrefs = SharedRenderer.resolvePagePrefs({
+        pagePrefsConfig: frontmatter.page_preferences,
+        prefOptionsConfig: p.pageBuildArgs.prefOptionsConfig,
+        valsByPrefId: p.defaultValsByPrefId
+      });
+      chooser = renderToString(Chooser(resolvedPagePrefs));
+    }
+
+    return chooser;
   }
 
   /**
    * Build the HTML output for a given parsed .mdoc file.
    * This HTML output can be processed by Hugo to generate a static page.
    */
-  static build(p: {
-    parsedFile: ParsedFile;
-    prefOptionsConfig: PrefOptionsConfig;
-    includeAssetsInline: boolean;
-    debug: boolean;
-    outputMode: 'html' | 'markdown';
-  }): string {
+  static build(args: PageBuildArgs): string {
     const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
-      p.parsedFile.frontmatter,
-      p.prefOptionsConfig
+      args.parsedFile.frontmatter,
+      args.prefOptionsConfig
     );
 
     const renderableTree = this.buildRenderableTree({
-      parsedFile: p.parsedFile,
-      prefOptionsConfig: p.prefOptionsConfig,
+      parsedFile: args.parsedFile,
+      prefOptionsConfig: args.prefOptionsConfig,
       defaultValsByPrefId
     });
 
-    // Build the chooser HTML, if any
-    const frontmatter = p.parsedFile.frontmatter;
+    const chooserHtml = this.getChooserHtml({
+      pageBuildArgs: args,
+      defaultValsByPrefId
+    });
 
-    let chooser = '';
-
-    if (frontmatter.page_preferences) {
-      const resolvedPrefs = SharedRenderer.resolvePagePrefs({
-        pagePrefsConfig: frontmatter.page_preferences,
-        prefOptionsConfig: p.prefOptionsConfig,
-        valsByPrefId: defaultValsByPrefId
-      });
-      chooser = this.getChooserHtml(resolvedPrefs);
-    }
+    const rerenderScript = this.getRerenderScript({
+      pageBuildArgs: args,
+      defaultValsByPrefId,
+      renderableTree
+    });
 
     // Build the page content HTML
     let pageContents = `
-      <div id="markdoc-chooser">${chooser}</div>
-      <div id="markdoc-content">${MarkdocStaticCompiler.renderers.html(
-        renderableTree
-      )}</div>
-      <script>
-        clientRenderer.initialize({
-            pagePrefsConfig: ${JSON.stringify(
-              p.parsedFile.frontmatter.page_preferences,
-              null,
-              2
-            )},
-            prefOptionsConfig: ${JSON.stringify(p.prefOptionsConfig, null, 2)},
-            selectedValsByPrefId: ${JSON.stringify(defaultValsByPrefId, null, 2)},
-            renderableTree: ${JSON.stringify(renderableTree, null, 2)}
-        });
-      </script>
-    `;
+<div id="markdoc-chooser">${chooserHtml}</div>
+<div id="markdoc-content">${MarkdocStaticCompiler.renderers.html(renderableTree)}</div>
+${rerenderScript}
+`;
 
-    if (p.includeAssetsInline) {
-      pageContents = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <script>
-            ${this.getClientRendererScriptStr()}
-          </script>
-          <style>
-            ${this.getStylesStr()}
-          </style>
-        </head>
-        <body>
-          ${pageContents}
-        </body>
-      </html>
-    `;
+    if (args.includeAssetsInline) {
+      pageContents = this.addInlineAssets({
+        pageContents,
+        debug: args.debug
+      });
     }
 
-    pageContents = prettier.format(pageContents, { parser: 'html' });
-
-    if (p.outputMode === 'markdown') {
-      pageContents = `---\ntitle: ${p.parsedFile.frontmatter.title}\n---\n${pageContents}`;
+    if (args.debug) {
+      pageContents = prettier.format(pageContents, { parser: 'html' });
     }
+
+    if (args.outputMode === 'markdown') {
+      pageContents = this.addFrontmatter({
+        pageContents,
+        frontmatter: args.parsedFile.frontmatter
+      });
+    }
+
     return pageContents;
   }
 
-  static getStylesStr() {
-    return stylesStr;
+  static compressString(str: string): string {
+    return str.replace(/(\r\n|\n|\r)/gm, '');
   }
 
-  static getClientRendererScriptStr() {
-    return clientRendererScriptStr;
+  static getStylesStr(debug: boolean) {
+    let result = stylesStr;
+    if (debug) {
+      result = `
+      ${result}
+      .markdoc__hidden {
+        background-color: lightgray;
+      }
+      `;
+    } else {
+      result = this.compressString(result);
+    }
+    return result;
+  }
+
+  static getClientRendererScriptStr(debug: boolean) {
+    if (debug) {
+      return minifiedClientRendererScriptStr;
+    } else {
+      return clientRendererScriptStr;
+    }
   }
 
   /**
@@ -215,5 +230,76 @@ export class PageBuilder {
     }
 
     return renderableTree;
+  }
+
+  static addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
+    return `---\ntitle: ${p.frontmatter.title}\n---\n${p.pageContents}`;
+  }
+
+  static getRerenderScript(p: {
+    pageBuildArgs: PageBuildArgs;
+    defaultValsByPrefId: Record<string, string>;
+    renderableTree: RenderableTreeNode;
+  }): string {
+    let renderableTreeStr;
+    let prefOptionsConfigStr;
+    let defaultValsByPrefIdStr;
+    let pagePrefsConfigStr;
+
+    if (p.pageBuildArgs.debug) {
+      renderableTreeStr = JSON.stringify(p.renderableTree, null, 2);
+      prefOptionsConfigStr = JSON.stringify(p.pageBuildArgs.prefOptionsConfig, null, 2);
+      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
+      pagePrefsConfigStr = JSON.stringify(
+        p.pageBuildArgs.parsedFile.frontmatter.page_preferences,
+        null,
+        2
+      );
+    } else {
+      renderableTreeStr = JSON.stringify(p.renderableTree);
+      prefOptionsConfigStr = JSON.stringify(p.pageBuildArgs.prefOptionsConfig);
+      defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
+      pagePrefsConfigStr = JSON.stringify(
+        p.pageBuildArgs.parsedFile.frontmatter.page_preferences
+      );
+    }
+
+    let script = `
+  <script>
+    clientRenderer.initialize({
+        pagePrefsConfig: ${pagePrefsConfigStr},
+        prefOptionsConfig: ${prefOptionsConfigStr},
+        selectedValsByPrefId: ${defaultValsByPrefIdStr},
+        renderableTree: ${renderableTreeStr}
+    });
+  </script>
+  `;
+
+    if (p.pageBuildArgs.debug) {
+      script = prettier.format(script, { parser: 'html' });
+    } else {
+      script = this.compressString(script);
+    }
+
+    return script;
+  }
+
+  static addInlineAssets(p: { pageContents: string; debug: boolean }) {
+    return `
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      ${this.getClientRendererScriptStr(p.debug)}
+    </script>
+    <style>
+      ${this.getStylesStr(p.debug)}
+    </style>
+  </head>
+  <body>
+    ${p.pageContents}
+  </body>
+</html>
+`;
   }
 }

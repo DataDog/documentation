@@ -56,7 +56,6 @@ const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
   Object.keys(resolvedPagePrefs).forEach((prefId) => {
     const resolvedPref = resolvedPagePrefs[prefId];
     const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
-    text(' ');
     elementOpen('div', null, ['class', 'markdoc-pref__container']);
     // Render the label
     elementOpen('div', null, ['class', 'markdoc-pref__label']);
@@ -65,7 +64,6 @@ const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
     // Render each option pill
     resolvedPref.options.forEach((option) => {
       const selected = option.id === currentValue ? 'selected' : '';
-      text(' ');
       elementOpen(
         'div',
         null,
@@ -79,11 +77,8 @@ const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
         'data-option-id',
         option.id
       );
-      text(' ');
       text(option.displayName);
-      text(' ');
       elementClose('div');
-      text(' ');
     });
     elementClose('div');
   });

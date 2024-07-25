@@ -59,8 +59,8 @@ export class MarkdocHugoIntegration {
   }
 
   buildAssetsPartial() {
-    const styles = PageBuilder.getStylesStr();
-    const script = PageBuilder.getClientRendererScriptStr();
+    const styles = PageBuilder.getStylesStr(this.config.debug);
+    const script = PageBuilder.getClientRendererScriptStr(this.config.debug);
     const partial = `
       <style>${styles}</style>
       <script>${script}</script>
