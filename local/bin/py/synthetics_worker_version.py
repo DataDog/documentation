@@ -18,7 +18,6 @@ def get_data():
     }
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
-        print(response.status_code)
         print(response.text)
         raise Exception('Failed to get tags')
     return response.json()
