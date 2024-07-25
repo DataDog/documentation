@@ -2,13 +2,12 @@
 title: LLM Observability API Reference
 aliases:
     - /tracing/llm_observability/api
+    - /llm_observability/api
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-LLM Observability is not available in the US1-FED site.
-</div>
-{{% /site-region %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
 ## Overview
 
