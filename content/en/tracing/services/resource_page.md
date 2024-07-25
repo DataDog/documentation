@@ -52,7 +52,7 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 ## Dependency Map with Navigator
 
-You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map Navigator, you can see the flow of services, with spans that go through a specific resource ( endpoint, database query, etc.) end-to-end, along with their request counts.
+You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map Navigator, you can see the flow of services, with spans that go through a specific resource (endpoint, database query, etc.) end-to-end, along with their request counts.
 
 This map is based on a sample of ingested spans; the sample is drawn by a fixed sampling algorithm that considers the structure of traces. The sampling algorithm is not configurable and is not impacted by ingestion control.
 
