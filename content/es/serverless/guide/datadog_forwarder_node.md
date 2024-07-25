@@ -361,7 +361,7 @@ exports.handler = async (event) => {
   sendDistributionMetricWithDate(
     "coffee_house.order_value", // el nombre de la métrica
     12.45, // el valor de la métrica
-    new Date(Date.now()), // la fecha, debe estar dentro de los últimos 20 minitos
+    new Date(Date.now()), // la fecha, debe estar dentro de los últimos 20 minutos
     "product:latte", // una etiqueta
     "order:online", // otra etiqueta
   );
