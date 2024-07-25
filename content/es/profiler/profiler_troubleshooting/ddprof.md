@@ -51,7 +51,7 @@ El generador de perfiles necesita memoria fija para funcionar. Este tipo de memo
 
 ### "\<WARNING\> Could not finalize watcher"
 
-Puedes encontrar esta advertencia cuando el sistema es incapaz de asignar suficiente memoria bloqueada para el generador de perfiles. Esto ocurre con mayor frecuencia cuando hay demasiadas instancias de generador de perfiles activas en un determinado host, como cuando se instrumentan individualmente muchos contenedores servicios en el mismo host. Puedes resolverlo aumentando el límite de memoria de `mlock()` o reduciendo el número de aplicaciones instrumentadas.
+Puedes encontrar esta advertencia cuando el sistema es incapaz de asignar suficiente memoria bloqueada para el generador de perfiles. Esto ocurre con mayor frecuencia cuando hay demasiadas instancias del generador de perfiles activas en un determinado host, como cuando se instrumentan individualmente muchos contenedores servicios en el mismo host. Puedes resolverlo aumentando el límite de memoria de `mlock()` o reduciendo el número de aplicaciones instrumentadas.
 
 Otras herramientas de generación de perfiles pueden contribuir al mismo límite.
 
