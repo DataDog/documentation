@@ -33,7 +33,7 @@ Datadog provides a guided workflow for setting up [Cloud Security Management (CS
 
 {{< img src="security/csm/setup/features_selection_new_user2.png" alt="CSM Features page" width="100%">}} 
 
-After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Compliance Scanning**, only the **Cloud Accounts** and **Hosts and Containers** sections are displayed.
+After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Misconfigurations**, only the **Cloud Accounts** and **Hosts and Containers** sections are displayed.
 
 The following table shows which sections appear on the Setup page for each feature.
 
