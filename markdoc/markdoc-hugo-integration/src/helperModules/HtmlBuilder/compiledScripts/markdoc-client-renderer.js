@@ -3627,6 +3627,7 @@
         Object.keys(resolvedPagePrefs).forEach((prefId) => {
           const resolvedPref = resolvedPagePrefs[prefId];
           const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
+          (0, incremental_dom_1.text)(" ");
           (0, incremental_dom_1.elementOpen)("div", null, ["class", "markdoc-pref__container"]);
           (0, incremental_dom_1.elementOpen)("div", null, ["class", "markdoc-pref__label"]);
           (0, incremental_dom_1.text)(resolvedPref.displayName);
@@ -13298,6 +13299,7 @@
           this.selectedValsByPrefId = p.selectedValsByPrefId || {};
           this.contentElement = p.contentElement;
           this.renderableTree = p.renderableTree;
+          this.prefPills = [];
           const contentElement = document.getElementById("markdoc-content");
           if (!contentElement) {
             throw new Error('Cannot find content element with id "markdoc-content"');

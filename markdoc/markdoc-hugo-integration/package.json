@@ -4,15 +4,14 @@
     "description": "",
     "scripts": {
         "test": "npm run build; vitest run --coverage --reporter=verbose",
-        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-templates",
-        "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle --minify > ./src/helperModules/HtmlBuilder/assets/markdoc-client-renderer.min.js",
-        "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle > ./src/helperModules/HtmlBuilder/assets/markdoc-client-renderer.js",
-        "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer && npm run copy-assets",
-        "copy-templates": "cp -r ./src/helperModules/HtmlBuilder/templates ./dist/helperModules/HtmlBuilder/templates",
-        "copy-assets": "cp -r ./src/helperModules/HtmlBuilder/assets ./dist/helperModules/HtmlBuilder/assets"
+        "build-markdoc-integration": "rimraf ./dist && npx tsc; npm run copy-assets",
+        "build-prod-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle --minify > ./src/helperModules/HtmlBuilder/compiledScripts/markdoc-client-renderer.min.js",
+        "build-dev-renderer": "npx esbuild ./src/markdoc-client-renderer.js --bundle > ./src/helperModules/HtmlBuilder/compiledScripts/markdoc-client-renderer.js",
+        "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer && npm run copy-assets && npm run copy-compiled-scripts",
+        "copy-assets": "cp -r ./src/helperModules/HtmlBuilder/assets ./dist/helperModules/HtmlBuilder",
+        "copy-compiled-scripts": "cp -r ./src/helperModules/HtmlBuilder/compiledScripts ./dist/helperModules/HtmlBuilder"
     },
     "dependencies": {
-        "ejs": "^3.1.10",
         "incremental-dom": "^0.7.0",
         "js-yaml": "^4.1.0",
         "markdoc-static-compiler": "file:../markdoc-static-compiler",
@@ -22,7 +21,6 @@
         "zod": "^3.22.4"
     },
     "devDependencies": {
-        "@types/ejs": "^3.1.5",
         "@types/js-yaml": "^4.0.9",
         "@types/node": "^20.11.30",
         "@types/react": "^18.3.3",

@@ -9,20 +9,14 @@ import prettier from 'prettier';
 import { ResolvedPagePrefs } from '../../schemas/resolvedPagePrefs';
 import fs from 'fs';
 import path from 'path';
-import ejs from 'ejs';
 import { Chooser } from './components/chooser';
 import { renderToString } from 'react-dom/server';
 import { SharedRenderer } from '../SharedRenderer';
 
-const pageTemplate = fs.readFileSync(
-  path.resolve(__dirname, 'templates/page.html.ejs'),
-  'utf8'
-);
-
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
 const clientRendererScriptStr = fs.readFileSync(
-  path.resolve(__dirname, 'assets/markdoc-client-renderer.js'),
+  path.resolve(__dirname, 'compiledScripts/markdoc-client-renderer.js'),
   'utf8'
 );
 
@@ -66,15 +60,24 @@ export class HtmlBuilder {
     }
 
     // Build the page content HTML
-    const content = MarkdocStaticCompiler.renderers.html(renderableTree);
-    const html = ejs.render(pageTemplate, {
-      content,
-      chooser,
-      renderableTree,
-      defaultValsByPrefId,
-      prefOptionsConfig: p.prefOptionsConfig,
-      pagePrefsConfig: p.parsedFile.frontmatter.page_preferences || []
-    });
+    const documentHtml = `
+      <div id="markdoc-chooser">${chooser}</div>
+      <div id="markdoc-content">${MarkdocStaticCompiler.renderers.html(
+        renderableTree
+      )}</div>
+      <script>
+        clientRenderer.initialize({
+            pagePrefsConfig: ${JSON.stringify(
+              p.parsedFile.frontmatter.page_preferences,
+              null,
+              2
+            )},
+            prefOptionsConfig: ${JSON.stringify(p.prefOptionsConfig, null, 2)},
+            selectedValsByPrefId: ${JSON.stringify(defaultValsByPrefId, null, 2)},
+            renderableTree: ${JSON.stringify(renderableTree, null, 2)}
+        });
+        </script>
+    `;
 
     const standaloneHtml = `
       <!DOCTYPE html>
@@ -88,7 +91,7 @@ export class HtmlBuilder {
           </style>
         </head>
         <body>
-          ${html}
+          ${documentHtml}
         </body>
       </html>
     `;
@@ -97,7 +100,7 @@ export class HtmlBuilder {
     if (p.standaloneMode) {
       formattedHtml = prettier.format(standaloneHtml, { parser: 'html' });
     } else {
-      formattedHtml = prettier.format(html, { parser: 'html' });
+      formattedHtml = prettier.format(documentHtml, { parser: 'html' });
     }
     return formattedHtml;
   }

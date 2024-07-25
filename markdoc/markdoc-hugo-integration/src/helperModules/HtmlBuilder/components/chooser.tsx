@@ -56,6 +56,7 @@ const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
   Object.keys(resolvedPagePrefs).forEach((prefId) => {
     const resolvedPref = resolvedPagePrefs[prefId];
     const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
+    text(' ');
     elementOpen('div', null, ['class', 'markdoc-pref__container']);
     // Render the label
     elementOpen('div', null, ['class', 'markdoc-pref__label']);

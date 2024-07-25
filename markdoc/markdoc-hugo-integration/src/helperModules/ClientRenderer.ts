@@ -92,6 +92,7 @@ export class ClientRenderer {
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
     this.contentElement = p.contentElement;
     this.renderableTree = p.renderableTree;
+    this.prefPills = [];
 
     const contentElement = document.getElementById('markdoc-content');
     if (!contentElement) {
