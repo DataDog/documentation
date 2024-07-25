@@ -234,7 +234,7 @@ function loadPage(newUrl) {
                 if(ddItem.dataset.lang){
                     noFtBranchNoLangddItemPathName = noFtBranchddItemPathName.slice(3)
                 }
-                console.log('REPLACER::',noLangPathName)
+                console.log('REPLACER::',noFtBranchNoLangPathName)
                 console.log('REPLACE::', noFtBranchNoLangddItemPathName)
                 console.log('')
             })
