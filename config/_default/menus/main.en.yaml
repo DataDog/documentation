@@ -3684,33 +3684,33 @@ menu:
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_observability
-      identifier: tracing_llm_obs_terms
+      identifier: llm_obs_terms
       weight: 1
     - name: Setup
       url: llm_observability/setup/
       parent: llm_observability
-      identifier: tracing_llm_obs_setup
+      identifier: llm_obs_setup
       weight: 2
-    - name: Auto Instrumentation
-      url: llm_observability/setup/auto_instrumentation/
-      parent: llm_observability_setup
-      identifier: tracing_llm_obs_setup_auto_instrumentation
-      weight: 201
     - name: SDK
       url: llm_observability/setup/sdk/
-      parent: llm_observability_setup
-      identifier: tracing_llm_obs_setup_sdk
-      weight: 202
+      parent: llm_obs_setup
+      identifier: llm_obs_setup_sdk
+      weight: 201
     - name: API
       url: llm_observability/setup/api/
-      parent: llm_observability_setup
-      identifier: tracing_llm_obs_setup_api
-      weight: 203
+      parent: llm_obs_setup
+      identifier: llm_obs_setup_api
+      weight: 202
+    - name: Auto Instrumentation
+      url: llm_observability/auto_instrumentation/
+      parent: llm_observability
+      identifier: llm_obs_auto_instrumentation
+      weight: 3
     - name: Guides
       url: llm_observability/guide/
       parent: llm_observability
-      identifier: tracing_llm_obs_guide
-      weight: 3
+      identifier: llm_obs_guide
+      weight: 4
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

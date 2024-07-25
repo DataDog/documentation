@@ -205,9 +205,9 @@ By default, only users with the [Datadog Read role][16] can view LLM Observabili
 [9]: /llm_observability/setup/sdk/#tracing-spans
 [10]: https://app.datadoghq.com/dash/integration/llm_analytics
 [11]: /llm_observability/setup/sdk/#annotating-a-span
-[12]: /llm_observability/sdk/#annotating-a-span
-[13]: /llm_observability/sdk/#tracking-user-sessions
-[14]: /llm_observability/sdk/#tracing-multiple-applications
-[15]: /llm_observability/submit_evaluations
+[12]: /llm_observability/setup/sdk/#annotating-a-span
+[13]: /llm_observability/setup/sdk/#tracking-user-sessions
+[14]: /llm_observability/setup/sdk/#tracing-multiple-applications
+[15]: /llm_observability/guide/submit_evaluations
 [16]: /account_management/rbac/#datadog-default-roles
 [17]: /account_management/rbac/permissions/#llm-observability

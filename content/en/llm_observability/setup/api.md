@@ -356,6 +356,6 @@ Evaluations require a `span_id` and `trace_id`.
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. |
 
-[1]: /llm_observability/sdk/
-[2]: /llm_observability/span_kinds/
+[1]: /llm_observability/setup/sdk/
+[2]: /llm_observability/terms/
 [3]: /getting_started/tagging/
