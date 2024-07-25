@@ -37,7 +37,7 @@ Regla de detección
 : Consulta [Reglas de detección][10].
 
 Passlist (antiguo filtro de exclusión)
-: Mecanismo para descartar trazas (traces) de seguridad marcadas por la biblioteca ASM biblioteca y las reglas WAF en la aplicación. Passlist se aplica a medida que las solicitudes se ingieren en Datadog (admisión). Passlist ayuda a gestionar los falsos positivos y los costes de admisión.
+: Mecanismo para descartar trazas de seguridad marcadas por la biblioteca ASM biblioteca y las reglas WAF en la aplicación. Passlist se aplica a medida que las solicitudes se ingieren en Datadog (admisión). Passlist ayuda a gestionar los falsos positivos y los costes de admisión.
 : Consulta [Filtros de exclusión][11] en la aplicación.
 
 Reglas WAF en la aplicación (antiguas reglas de eventos)
@@ -78,7 +78,7 @@ Vulnerabilidad
 : Riesgo pasivo de una aplicación. De [OWASP][1]: "Una vulnerabilidad es un hueco o una debilidad en la aplicación. Puede ser un defecto de diseño o un error de implementación, que permite a un atacante causar daño a las partes interesadas de una aplicación. Las partes interesadas incluyen el propietario de la aplicación, los usuarios de la aplicación y otras entidades que dependen de la aplicación."
 
 Calificación del rastreo
-: Proceso mediante el cual Datadog ayuda a comprender el impacto de las trazas), etiquetándolas
+: Proceso mediante el cual Datadog ayuda a comprender el impacto de las trazas, etiquetándolas
 como `Harmful Safe or Unknown`.
 : Consulta [Calificación del rastreo][15].
 
