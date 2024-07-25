@@ -657,7 +657,7 @@ def server_process_request(request):
 [8]: /llm_observability/terms/
 [9]: /getting_started/tagging/
 [10]: https://github.com/DataDog/llm-observability
-[11]: tracing/trace_collection/compatibility/python/#integrations
-[12]: tracing/trace_collection/compatibility/python/#library-compatibility
+[11]: /tracing/trace_collection/compatibility/python/#integrations
+[12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/auto_instrumentation/
-[14]: serverless/aws_lambda/installation/python/?tab=custom#installation
+[14]: /serverless/aws_lambda/installation/python/?tab=custom#installation
