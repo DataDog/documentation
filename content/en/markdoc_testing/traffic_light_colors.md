@@ -57,31 +57,83 @@ title: Traffic Light Colors
       seems contrived and odd, that's only because test pages are often both of
       those things.
     </p>
-    <h2>grass: Your green item of choice</h2>
+    <p>Your selections:</p>
+    <ul>
+      <li>The value of the <code>color</code> pref is &quot;green&quot;.</li>
+      <li>The value of the <code>item</code> pref is &quot;grass&quot;.</li>
+    </ul>
     <div>
+      <h2>Green</h2>
+      <p>
+        Green is a color that is often associated with nature, growth, and
+        renewal.
+      </p>
       <div>
+        <h3>Grass</h3>
         <p>
-          Grass is a very common lawn plant. Alternatives to grass include
-          clover and moss.
+          Grass is a common plant found in many environments, from lawns and
+          gardens to fields and meadows. It plays a crucial role in ecosystems
+          by providing food and habitat for various animals, including insects,
+          birds, and mammals.
+        </p>
+        <p>
+          Grass is also important for soil health, as its roots help prevent
+          erosion and retain moisture. In human landscapes, grass is often used
+          for aesthetic and recreational purposes, creating green spaces for
+          relaxation and play. Its lush, green appearance is a symbol of
+          vitality and natural beauty.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Emerald</h3>
         <p>
-          Emeralds are a type of gemstone. They're not known for being very
-          durable.
+          Emeralds are a type of precious gemstone known for their rich green
+          color, which is caused by trace amounts of chromium and vanadium. They
+          have been prized for their beauty and rarity for thousands of years,
+          often associated with royalty and luxury.
+        </p>
+        <p>
+          Emeralds are typically found in countries like Colombia, Brazil, and
+          Zambia. Despite their stunning appearance, emeralds are not as durable
+          as some other gemstones, requiring careful handling and setting in
+          jewelry. They are believed to symbolize rebirth, love, and prosperity.
         </p>
       </div>
       <div class="markdoc__hidden">
+        <h3>Lime</h3>
         <p>
-          Limes are a type of citrus fruit. They're often used in drinks and
-          cooking.
+          Limes are small, green citrus fruits known for their tart and tangy
+          flavor. They are commonly used in cooking and beverages to add a
+          refreshing zest to dishes and drinks.
+        </p>
+        <p>
+          Limes are rich in vitamin C and other antioxidants, making them a
+          healthy addition to the diet. They are often used in marinades,
+          dressings, and desserts, as well as in cocktails like margaritas and
+          mojitos. The bright, acidic taste of limes can enhance the flavors of
+          both sweet and savory dishes.
         </p>
       </div>
       <div class="markdoc__hidden">
-        <p>Frogs are amphibians. They're known for their jumping abilities.</p>
+        <h3>Frog</h3>
+        <p>
+          Frogs are amphibians known for their distinctive jumping abilities and
+          croaking sounds. They are found in a variety of habitats, including
+          ponds, forests, and wetlands.
+        </p>
+        <p>
+          Frogs play an important role in the ecosystem by controlling insect
+          populations and serving as prey for larger animals. They undergo a
+          fascinating life cycle, starting as eggs, then developing into
+          tadpoles, and finally maturing into adult frogs. Frogs are also
+          indicators of environmental health, as they are sensitive to changes
+          in their surroundings. Their diverse colors and patterns make them
+          interesting subjects for study and observation.
+        </p>
       </div>
     </div>
     <div class="markdoc__hidden">
+      <h2>Yellow</h2>
       <p>
         Yellow is a bright and cheerful color that is often associated with
         happiness, energy, and warmth.
@@ -148,6 +200,7 @@ title: Traffic Light Colors
       </div>
     </div>
     <div class="markdoc__hidden">
+      <h2>Red</h2>
       <p>
         Red is a vibrant and intense color often associated with strong emotions
         such as love, passion, and anger.
@@ -327,21 +380,57 @@ title: Traffic Light Colors
         },
         {
           $$mdtype: "Tag",
-          name: "h2",
+          name: "p",
+          attributes: {},
+          children: ["Your selections:"],
+        },
+        {
+          $$mdtype: "Tag",
+          name: "ul",
           attributes: {},
           children: [
             {
-              $$mdtype: "Variable",
-              path: ["item"],
-              value: "grass",
+              $$mdtype: "Tag",
+              name: "li",
+              attributes: {},
+              children: [
+                "The value of the ",
+                {
+                  $$mdtype: "Tag",
+                  name: "code",
+                  attributes: {},
+                  children: ["color"],
+                },
+                ' pref is "',
+                {
+                  $$mdtype: "Variable",
+                  path: ["color"],
+                  value: "green",
+                },
+                '".',
+              ],
             },
-            ": Your ",
             {
-              $$mdtype: "Variable",
-              path: ["color"],
-              value: "green",
+              $$mdtype: "Tag",
+              name: "li",
+              attributes: {},
+              children: [
+                "The value of the ",
+                {
+                  $$mdtype: "Tag",
+                  name: "code",
+                  attributes: {},
+                  children: ["item"],
+                },
+                ' pref is "',
+                {
+                  $$mdtype: "Variable",
+                  path: ["item"],
+                  value: "grass",
+                },
+                '".',
+              ],
             },
-            " item of choice",
           ],
         },
         {
@@ -366,6 +455,20 @@ title: Traffic Light Colors
           children: [
             {
               $$mdtype: "Tag",
+              name: "h2",
+              attributes: {},
+              children: ["Green"],
+            },
+            {
+              $$mdtype: "Tag",
+              name: "p",
+              attributes: {},
+              children: [
+                "Green is a color that is often associated with nature, growth, and renewal.",
+              ],
+            },
+            {
+              $$mdtype: "Tag",
               name: "div",
               if: {
                 $$mdtype: "Function",
@@ -386,10 +489,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Grass"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Grass is a very common lawn plant. Alternatives to grass include clover and moss.",
+                    "Grass is a common plant found in many environments, from lawns and gardens to fields and meadows. It plays a crucial role in ecosystems by providing food and habitat for various animals, including insects, birds, and mammals.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Grass is also important for soil health, as its roots help prevent erosion and retain moisture. In human landscapes, grass is often used for aesthetic and recreational purposes, creating green spaces for relaxation and play. Its lush, green appearance is a symbol of vitality and natural beauty.",
                   ],
                 },
               ],
@@ -416,10 +533,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Emerald"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Emeralds are a type of gemstone. They're not known for being very durable.",
+                    "Emeralds are a type of precious gemstone known for their rich green color, which is caused by trace amounts of chromium and vanadium. They have been prized for their beauty and rarity for thousands of years, often associated with royalty and luxury.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Emeralds are typically found in countries like Colombia, Brazil, and Zambia. Despite their stunning appearance, emeralds are not as durable as some other gemstones, requiring careful handling and setting in jewelry. They are believed to symbolize rebirth, love, and prosperity.",
                   ],
                 },
               ],
@@ -446,10 +577,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Lime"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Limes are a type of citrus fruit. They're often used in drinks and cooking.",
+                    "Limes are small, green citrus fruits known for their tart and tangy flavor. They are commonly used in cooking and beverages to add a refreshing zest to dishes and drinks.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Limes are rich in vitamin C and other antioxidants, making them a healthy addition to the diet. They are often used in marinades, dressings, and desserts, as well as in cocktails like margaritas and mojitos. The bright, acidic taste of limes can enhance the flavors of both sweet and savory dishes.",
                   ],
                 },
               ],
@@ -476,10 +621,24 @@ title: Traffic Light Colors
               children: [
                 {
                   $$mdtype: "Tag",
+                  name: "h3",
+                  attributes: {},
+                  children: ["Frog"],
+                },
+                {
+                  $$mdtype: "Tag",
                   name: "p",
                   attributes: {},
                   children: [
-                    "Frogs are amphibians. They're known for their jumping abilities.",
+                    "Frogs are amphibians known for their distinctive jumping abilities and croaking sounds. They are found in a variety of habitats, including ponds, forests, and wetlands.",
+                  ],
+                },
+                {
+                  $$mdtype: "Tag",
+                  name: "p",
+                  attributes: {},
+                  children: [
+                    "Frogs play an important role in the ecosystem by controlling insect populations and serving as prey for larger animals. They undergo a fascinating life cycle, starting as eggs, then developing into tadpoles, and finally maturing into adult frogs. Frogs are also indicators of environmental health, as they are sensitive to changes in their surroundings. Their diverse colors and patterns make them interesting subjects for study and observation.",
                   ],
                 },
               ],
@@ -506,6 +665,12 @@ title: Traffic Light Colors
             display: "false",
           },
           children: [
+            {
+              $$mdtype: "Tag",
+              name: "h2",
+              attributes: {},
+              children: ["Yellow"],
+            },
             {
               $$mdtype: "Tag",
               name: "p",
@@ -720,6 +885,12 @@ title: Traffic Light Colors
             display: "false",
           },
           children: [
+            {
+              $$mdtype: "Tag",
+              name: "h2",
+              attributes: {},
+              children: ["Red"],
+            },
             {
               $$mdtype: "Tag",
               name: "p",

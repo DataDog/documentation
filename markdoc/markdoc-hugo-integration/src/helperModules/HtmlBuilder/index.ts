@@ -14,6 +14,11 @@ import { renderToString } from 'react-dom/server';
 import { SharedRenderer } from '../SharedRenderer';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
+const debugStyleOverrides = `
+.markdoc__hidden {
+  background-color: lightgray;
+}
+`;
 
 const clientRendererScriptStr = fs.readFileSync(
   path.resolve(__dirname, 'compiledScripts/markdoc-client-renderer.js'),
@@ -32,7 +37,8 @@ export class HtmlBuilder {
   static build(p: {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
-    standaloneMode: boolean;
+    includeAssetsInline: boolean;
+    debug: boolean;
   }): string {
     const defaultValsByPrefId = ConfigProcessor.getDefaultValuesByPrefId(
       p.parsedFile.frontmatter,
@@ -97,7 +103,7 @@ export class HtmlBuilder {
     `;
 
     let formattedHtml;
-    if (p.standaloneMode) {
+    if (p.includeAssetsInline) {
       formattedHtml = prettier.format(standaloneHtml, { parser: 'html' });
     } else {
       formattedHtml = prettier.format(documentHtml, { parser: 'html' });

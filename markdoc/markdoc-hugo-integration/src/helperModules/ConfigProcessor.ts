@@ -120,7 +120,7 @@ export class ConfigProcessor {
    * @param prefOptionsConfig A PrefOptionsConfig object, parsed
    * from the preference options YAML files.
    */
-  static buildPrefOptionsConfigForPage(
+  static getPrefOptionsForPage(
     frontmatter: Frontmatter,
     prefOptionsConfig: PrefOptionsConfig
   ): Readonly<PrefOptionsConfig> {

@@ -11,9 +11,11 @@ const PREFS_CONFIG_DIR = path.resolve(__dirname, '../config/_default/preferences
 
 // Initialize the Markdoc integration
 const markdocIntegration = new MarkdocHugoIntegration({
-    contentDir: CONTENT_DIR,
-    prefOptionsConfigDir: PREFS_CONFIG_DIR,
-    partialsDir: PARTIALS_DIR
+    directories: {
+        content: CONTENT_DIR,
+        options: PREFS_CONFIG_DIR,
+        partials: PARTIALS_DIR
+    }
 });
 
 // Build the assets partial, and write it to the target file path
@@ -25,12 +27,12 @@ const { compiledFiles } = markdocIntegration.compile();
 
 // Build a .gitignore file for the compiled files,
 // to be written to the content directory
-console.log('Writing .gitignore file to ' + CONTENT_DIR);
-let fileContents = '# Ignore .md files compiled from Markdoc\n';
+let gitignoreContents = `# GENERATED FILE: DO NOT EDIT
+# Ignore .md files compiled from Markdoc\n`;
 compiledFiles.forEach((file) => {
     const sanitizedFile = file.replace(CONTENT_DIR, '');
-    fileContents += sanitizedFile + '\n';
+    gitignoreContents += sanitizedFile + '\n';
 });
-fs.writeFileSync(CONTENT_DIR + '/.gitignore', fileContents);
+fs.writeFileSync(CONTENT_DIR + '/.gitignore', gitignoreContents);
 
 console.timeEnd('Markdoc compilation execution time');

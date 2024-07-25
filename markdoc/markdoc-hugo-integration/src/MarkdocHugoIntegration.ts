@@ -1,48 +1,61 @@
 import fs from 'fs';
+import { z } from 'zod';
 import { PrefOptionsConfig } from './schemas/yaml/prefOptions';
 import { FileParser, ParsingErrorReport } from './helperModules/FileParser';
 import { FileNavigator } from './helperModules/FileNavigator';
 import { ConfigProcessor } from './helperModules/ConfigProcessor';
 import { HtmlBuilder } from './helperModules/HtmlBuilder';
 
+const CompilationConfigSchema = z.object({
+  directories: z
+    .object({
+      content: z.string(),
+      partials: z.string(),
+      options: z.string()
+    })
+    .strict(),
+  config: z
+    .object({
+      outputFormat: z.enum(['html', 'markdown']).optional(),
+      includeAssetsInline: z.boolean().optional(),
+      debug: z.boolean().optional()
+    })
+    .optional()
+});
+
+type CompilationConfig = z.infer<typeof CompilationConfigSchema>;
+
 export class MarkdocHugoIntegration {
-  prefOptionsConfig: PrefOptionsConfig;
-  // sitewidePrefNames: string[] = [];
-  markdocFiles: string[] = [];
-  partialsDir: string;
+  directories: {
+    content: string;
+    partials: string;
+    options: string;
+  };
+  config: {
+    includeAssetsInline: boolean;
+    debug: boolean;
+  };
+  outputFormat: 'html' | 'markdown';
   // Errors from the AST parsing process,
   // which come with some extra information, like line numbers
   parsingErrorReportsByFilePath: Record<string, ParsingErrorReport[]> = {};
   // All other errors caught during compilation
   validationErrorsByFilePath: Record<string, string> = {};
   // Whether to create a self-contained HTML file (useful for testing)
-  standaloneMode: boolean;
   private compiledFiles: string[] = [];
-  contentDir: string;
 
   /**
    * Ingest the available configuration files
    * and scan the content directory for Markdoc files.
    */
-  constructor(p: {
-    // sitewidePrefsFilepath: string;
-    prefOptionsConfigDir: string;
-    contentDir: string;
-    partialsDir: string;
-    standaloneMode?: boolean;
-  }) {
-    this.contentDir = p.contentDir;
-    this.standaloneMode = p.standaloneMode || false;
-    this.prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
-      p.prefOptionsConfigDir
-    );
-    /*
-    this.sitewidePrefNames = ConfigProcessor.loadSitewidePrefsConfigFromFile(
-      p.sitewidePrefsFilepath
-    );
-    */
-    this.markdocFiles = FileNavigator.findInDir(p.contentDir, /\.mdoc$/);
-    this.partialsDir = p.partialsDir;
+  constructor(args: CompilationConfig) {
+    CompilationConfigSchema.parse(args);
+    this.directories = args.directories;
+    this.config = {
+      includeAssetsInline: args.config?.includeAssetsInline || false,
+      debug: args.config?.debug || false
+    };
+    this.outputFormat = args.config?.outputFormat || 'markdown';
   }
 
   buildAssetsPartial() {
@@ -59,9 +72,16 @@ export class MarkdocHugoIntegration {
    * Compile all detected Markdoc files to HTML.
    */
   compile() {
+    this.#resetErrors();
     this.compiledFiles = [];
-    for (const markdocFile of this.markdocFiles) {
-      const parsedFile = FileParser.parseMdocFile(markdocFile, this.partialsDir);
+
+    const prefOptionsConfig = ConfigProcessor.loadPrefOptionsFromDir(
+      this.directories.options
+    );
+    const markdocFiles = FileNavigator.findInDir(this.directories.content, /\.mdoc$/);
+
+    for (const markdocFile of markdocFiles) {
+      const parsedFile = FileParser.parseMdocFile(markdocFile, this.directories.partials);
 
       // if the file has errors, log the errors for later output
       // and continue to the next file
@@ -75,9 +95,9 @@ export class MarkdocHugoIntegration {
       // verify that all possible placeholder values
       // yield an existing options set
       try {
-        prefOptionsConfigForPage = ConfigProcessor.buildPrefOptionsConfigForPage(
+        prefOptionsConfigForPage = ConfigProcessor.getPrefOptionsForPage(
           parsedFile.frontmatter,
-          this.prefOptionsConfig
+          prefOptionsConfig
         );
       } catch (e) {
         if (e instanceof Error) {
@@ -95,13 +115,14 @@ export class MarkdocHugoIntegration {
         const html = HtmlBuilder.build({
           parsedFile,
           prefOptionsConfig: prefOptionsConfigForPage,
-          standaloneMode: this.standaloneMode
+          includeAssetsInline: this.config.includeAssetsInline,
+          debug: this.config.debug
         });
 
         let compiledFilename: string;
 
         // if in standalone mode, build an HTML file
-        if (this.standaloneMode) {
+        if (this.config.includeAssetsInline) {
           compiledFilename = markdocFile.replace(/\.mdoc$/, '.html');
           fs.writeFileSync(compiledFilename, html);
           // otherwise, build a "Markdown" file (just HTML with frontmatter)
@@ -122,15 +143,22 @@ export class MarkdocHugoIntegration {
       }
     }
 
+    this.compiledFiles.sort();
+
     return {
-      hasErrors: this.hasErrors(),
+      hasErrors: this.#hasErrors(),
       parsingErrorReportsByFilePath: this.parsingErrorReportsByFilePath,
       validationErrorsByFilePath: this.validationErrorsByFilePath,
       compiledFiles: this.compiledFiles
     };
   }
 
-  hasErrors() {
+  #resetErrors() {
+    this.parsingErrorReportsByFilePath = {};
+    this.validationErrorsByFilePath = {};
+  }
+
+  #hasErrors() {
     return (
       Object.keys(this.parsingErrorReportsByFilePath).length > 0 ||
       Object.keys(this.validationErrorsByFilePath).length > 0
