@@ -19,20 +19,20 @@ Trace Context propagation is the mechanism of passing tracing information like T
 
 By default, all of the Datadog tracing libraries read and write distributed tracing headers using both the **Datadog** format and the [**W3C Trace Context**][2] formats. When reading incoming headers, the language SDKs will give higher precedence to the Datadog format.
 
-## Configuration
+## Customization
 
 If you need to customize the trace context propagation configuration, there are several environment variables you can use to configure the formats that are used for reading and writing distributed tracing headers. To enable a specific propagator, make sure to use the corresponding configuration value for the tracing library, as outlined in the **Language support** section.
 
 <div class="alert alert-info">
 If multiple propagators are enabled, the extraction attempt is done in the specified order, and the first valid trace context is used to continue the distributed trace. If additional valid trace contexts are found, the tracing information will be recorded as individual span links.</div>
 
-### Recommended Datadog configuration
+### Services Instrumented with Datadog SDK
 
 `DD_TRACE_PROPAGATION_STYLE`
-: Specifies propagators (in a comma-separated list) to be used for trace context propagation. This may be overridden by the extract-specific or inject-specific configurations. <br>
+: Specifies propagators (in a comma-separated list) to be used for trace context propagation (extraction and injection). This may be overridden by the extract-specific or inject-specific configurations. <br>
 **Default:** `datadog,tracecontext`
 
-### Recommended OpenTelemetry configuration
+### Services Instrumented with OpenTelemetry SDK
 
 `OTEL_PROPAGATORS`
 : Specifies propagators (in a comma-separated list) to be used for trace context propagation. This configuration takes the lowest precedence and will be ignored if any other Datadog propagation environment variable is set.
