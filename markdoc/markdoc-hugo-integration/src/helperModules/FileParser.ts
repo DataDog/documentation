@@ -49,7 +49,7 @@ export class FileParser {
     FrontmatterSchema.parse(frontmatter);
 
     // Collect all partials and build their ASTs
-    const { partials, errorReports: partialErrors } = this.buildPartialASTs(
+    const { partials, errorReports: partialErrors } = this.#buildPartialASTs(
       ast,
       partialsDir
     );
@@ -59,7 +59,7 @@ export class FileParser {
       frontmatter,
       partials,
       errorReports: [
-        ...this.extractErrors({ node: ast, file: markdocFile }),
+        ...this.#extractErrors({ node: ast, file: markdocFile }),
         ...partialErrors
       ]
     };
@@ -72,13 +72,13 @@ export class FileParser {
    * @param partialsDir The directory containing any partials required by the AST.
    * @returns An object containing the partial ASTs by filepath, and any errors.
    */
-  private static buildPartialASTs(
+  static #buildPartialASTs(
     ast: Node,
     partialsDir: string
   ): { partials: Record<string, Node>; errorReports: ParsingErrorReport[] } {
     let partialAstsByFilename: Record<string, Node> = {};
     let errorReports: ParsingErrorReport[] = [];
-    const partialPaths = this.extractPartialPaths(ast);
+    const partialPaths = this.#extractPartialPaths(ast);
     partialPaths.forEach((partialPath) => {
       const partialFile = path.join(partialsDir, partialPath);
       const partialMarkupStr = fs.readFileSync(partialFile, 'utf8');
@@ -86,10 +86,10 @@ export class FileParser {
       partialAstsByFilename[partialPath] = partialAst;
       partialAstsByFilename = {
         ...partialAstsByFilename,
-        ...this.buildPartialASTs(partialAst, partialsDir).partials
+        ...this.#buildPartialASTs(partialAst, partialsDir).partials
       };
       errorReports = errorReports.concat(
-        this.extractErrors({ node: partialAst, file: partialFile })
+        this.#extractErrors({ node: partialAst, file: partialFile })
       );
     });
     return { partials: partialAstsByFilename, errorReports };
@@ -102,7 +102,7 @@ export class FileParser {
    * @param node An AST node.
    * @returns A list of partial file paths.
    */
-  private static extractPartialPaths(node: Node): string[] {
+  static #extractPartialPaths(node: Node): string[] {
     let partialPaths: string[] = [];
     if (node.tag === 'partial') {
       const filePathAnnotations = node.annotations.filter(
@@ -119,7 +119,7 @@ export class FileParser {
     }
     if (node.children.length) {
       for (const child of node.children) {
-        partialPaths = partialPaths.concat(this.extractPartialPaths(child));
+        partialPaths = partialPaths.concat(this.#extractPartialPaths(child));
       }
     }
     return partialPaths;
@@ -131,7 +131,7 @@ export class FileParser {
    * @param p An object containing the AST node and the file path.
    * @returns A list of parsing error reports.
    */
-  private static extractErrors(p: { node: Node; file: string }): ParsingErrorReport[] {
+  static #extractErrors(p: { node: Node; file: string }): ParsingErrorReport[] {
     let errors: ParsingErrorReport[] = [];
     if (p.node.errors.length) {
       errors = errors.concat(
@@ -140,7 +140,7 @@ export class FileParser {
     }
     if (p.node.children.length) {
       for (const child of p.node.children) {
-        errors = errors.concat(this.extractErrors({ node: child, file: p.file }));
+        errors = errors.concat(this.#extractErrors({ node: child, file: p.file }));
       }
     }
     return errors;

@@ -8,7 +8,7 @@ import MarkdocStaticCompiler, {
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { Chooser } from './components/chooser';
+import { Chooser } from './components/Chooser';
 import { renderToString } from 'react-dom/server';
 import { SharedRenderer } from '../SharedRenderer';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
@@ -48,26 +48,6 @@ export interface PageBuildArgs {
  * when the user changes a preference setting.
  */
 export class PageBuilder {
-  static getChooserHtml(p: {
-    pageBuildArgs: PageBuildArgs;
-    defaultValsByPrefId: Record<string, string>;
-  }): string {
-    const frontmatter = p.pageBuildArgs.parsedFile.frontmatter;
-
-    let chooser = '';
-
-    if (frontmatter.page_preferences) {
-      const resolvedPagePrefs = SharedRenderer.resolvePagePrefs({
-        pagePrefsConfig: frontmatter.page_preferences,
-        prefOptionsConfig: p.pageBuildArgs.prefOptionsConfig,
-        valsByPrefId: p.defaultValsByPrefId
-      });
-      chooser = renderToString(Chooser(resolvedPagePrefs));
-    }
-
-    return chooser;
-  }
-
   /**
    * Build the HTML output for a given parsed .mdoc file.
    * This HTML output can be processed by Hugo to generate a static page.
@@ -78,18 +58,19 @@ export class PageBuilder {
       args.prefOptionsConfig
     );
 
-    const renderableTree = this.buildRenderableTree({
+    const renderableTree = this.#buildRenderableTree({
       parsedFile: args.parsedFile,
       prefOptionsConfig: args.prefOptionsConfig,
       defaultValsByPrefId
     });
 
-    const chooserHtml = this.getChooserHtml({
-      pageBuildArgs: args,
+    const chooserHtml = this.#getChooserHtml({
+      frontmatter: args.parsedFile.frontmatter,
+      prefOptionsConfig: args.prefOptionsConfig,
       defaultValsByPrefId
     });
 
-    const rerenderScript = this.getRerenderScript({
+    const rerenderScript = this.#getRerenderScript({
       pageBuildArgs: args,
       defaultValsByPrefId,
       renderableTree
@@ -103,7 +84,7 @@ ${rerenderScript}
 `;
 
     if (args.includeAssetsInline) {
-      pageContents = this.addInlineAssets({
+      pageContents = this.#addInlineAssets({
         pageContents,
         debug: args.debug
       });
@@ -114,7 +95,7 @@ ${rerenderScript}
     }
 
     if (args.outputFormat === 'markdown') {
-      pageContents = this.addFrontmatter({
+      pageContents = this.#addFrontmatter({
         pageContents,
         frontmatter: args.parsedFile.frontmatter
       });
@@ -126,8 +107,27 @@ ${rerenderScript}
   /**
    * Remove the line breaks from a string.
    */
-  static removeLineBreaks(str: string): string {
+  static #removeLineBreaks(str: string): string {
     return str.replace(/(\r\n|\n|\r)/gm, '');
+  }
+
+  static #getChooserHtml(p: {
+    frontmatter: Frontmatter;
+    prefOptionsConfig: PrefOptionsConfig;
+    defaultValsByPrefId: Record<string, string>;
+  }): string {
+    let chooser = '';
+
+    if (p.frontmatter.page_preferences) {
+      const resolvedPagePrefs = SharedRenderer.resolvePagePrefs({
+        pagePrefsConfig: p.frontmatter.page_preferences,
+        prefOptionsConfig: p.prefOptionsConfig,
+        valsByPrefId: p.defaultValsByPrefId
+      });
+      chooser = renderToString(Chooser(resolvedPagePrefs));
+    }
+
+    return chooser;
   }
 
   /**
@@ -145,7 +145,7 @@ ${rerenderScript}
       }
       `;
     } else {
-      result = this.removeLineBreaks(result);
+      result = this.#removeLineBreaks(result);
     }
     return result;
   }
@@ -168,14 +168,14 @@ ${rerenderScript}
    * @param node A renderable tree.
    * @returns A list of variable identifiers found in the tree.
    */
-  static collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
+  static #collectVarIdsFromTree(node: RenderableTreeNodes): string[] {
     let variableIdentifiers: string[] = [];
 
     if (!node) return variableIdentifiers;
 
     if (Array.isArray(node)) {
       node.forEach((n) => {
-        const identifiers = this.collectVarIdsFromTree(n);
+        const identifiers = this.#collectVarIdsFromTree(n);
         variableIdentifiers = variableIdentifiers.concat(identifiers);
       });
     }
@@ -183,12 +183,12 @@ ${rerenderScript}
     if (typeof node !== 'object') return variableIdentifiers;
 
     if ('children' in node && node.children) {
-      const identifiers = this.collectVarIdsFromTree(node.children);
+      const identifiers = this.#collectVarIdsFromTree(node.children);
       variableIdentifiers = variableIdentifiers.concat(identifiers);
     }
 
     if ('parameters' in node && node.parameters) {
-      const identifiers = this.collectVarIdsFromTree(Object.values(node.parameters));
+      const identifiers = this.#collectVarIdsFromTree(Object.values(node.parameters));
       variableIdentifiers = variableIdentifiers.concat(identifiers);
     }
 
@@ -211,7 +211,7 @@ ${rerenderScript}
       node.$$mdtype === 'Tag' &&
       'if' in node
     ) {
-      const identifiers = this.collectVarIdsFromTree(
+      const identifiers = this.#collectVarIdsFromTree(
         // @ts-ignore
         node.if
       );
@@ -232,7 +232,7 @@ ${rerenderScript}
    * @param p A ParsedFile object and a PrefOptionsConfig object.
    * @returns A renderable tree.
    */
-  static buildRenderableTree(p: {
+  static #buildRenderableTree(p: {
     parsedFile: ParsedFile;
     prefOptionsConfig: PrefOptionsConfig;
     defaultValsByPrefId: Record<string, string>;
@@ -244,7 +244,7 @@ ${rerenderScript}
 
     // ensure that all variable ids appearing
     // in the renderable tree are valid page pref ids
-    const referencedVarIds = this.collectVarIdsFromTree(renderableTree);
+    const referencedVarIds = this.#collectVarIdsFromTree(renderableTree);
     const pagePrefIds = Object.keys(p.defaultValsByPrefId);
     const invalidVarIds = referencedVarIds.filter((id) => !pagePrefIds.includes(id));
 
@@ -260,7 +260,7 @@ ${rerenderScript}
   /**
    * Add a frontmatter string to a page contents string.
    */
-  static addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
+  static #addFrontmatter(p: { pageContents: string; frontmatter: Frontmatter }): string {
     return `---\ntitle: ${p.frontmatter.title}\n---\n${p.pageContents}`;
   }
 
@@ -269,7 +269,7 @@ ${rerenderScript}
    * with all of the necessary data required to re-render the page when the user changes
    * a preference setting.
    */
-  static getRerenderScript(p: {
+  static #getRerenderScript(p: {
     pageBuildArgs: PageBuildArgs;
     defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
@@ -311,7 +311,7 @@ ${rerenderScript}
     if (p.pageBuildArgs.debug) {
       script = prettier.format(script, { parser: 'html' });
     } else {
-      script = this.removeLineBreaks(script);
+      script = this.#removeLineBreaks(script);
     }
 
     return script;
@@ -323,7 +323,7 @@ ${rerenderScript}
    * that includes the CSS and JavaScript assets that would
    * normally be included in the head of the layout template.
    */
-  static addInlineAssets(p: { pageContents: string; debug: boolean }) {
+  static #addInlineAssets(p: { pageContents: string; debug: boolean }) {
     return `
 <!DOCTYPE html>
 <html>

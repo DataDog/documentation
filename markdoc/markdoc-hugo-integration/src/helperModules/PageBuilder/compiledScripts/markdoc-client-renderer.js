@@ -3598,9 +3598,9 @@
     }
   });
 
-  // dist/helperModules/PageBuilder/components/chooser.js
-  var require_chooser = __commonJS({
-    "dist/helperModules/PageBuilder/components/chooser.js"(exports) {
+  // dist/helperModules/PageBuilder/components/Chooser.js
+  var require_Chooser = __commonJS({
+    "dist/helperModules/PageBuilder/components/Chooser.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.rerenderChooser = exports.Chooser = void 0;
@@ -13233,7 +13233,7 @@
       var _ClientRenderer_instance;
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.ClientRenderer = void 0;
-      var chooser_1 = require_chooser();
+      var Chooser_1 = require_Chooser();
       var SharedRenderer_1 = require_SharedRenderer();
       var markdoc_static_compiler_1 = __importDefault(require_dist());
       var ClientRenderer2 = class {
@@ -13322,7 +13322,7 @@
             const resolvedPref = resolvedPagePrefs[resolvedPrefId];
             this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
           });
-          const newChooserNode = (0, chooser_1.rerenderChooser)({
+          const newChooserNode = (0, Chooser_1.rerenderChooser)({
             resolvedPagePrefs,
             elementToPatch: this.chooserElement
           });
