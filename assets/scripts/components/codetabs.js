@@ -80,6 +80,15 @@ const initCodeTabs = () => {
         updateUrl(activeLang)
     }
 
+    const scrollToAnchor = (tab, anchorname) => {
+        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
+        console.log('tab: ', tab);
+        console.log('scrolling to anchor: ', anchor);
+        if (anchor) {
+            anchor.scrollIntoView();
+        }
+    }
+
     const activateTabsOnLoad = () => {
         const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
@@ -87,6 +96,10 @@ const initCodeTabs = () => {
 
             if (selectedLanguageTab) {
                 activateCodeTab(selectedLanguageTab)
+
+                if (window.location.hash) {
+                    scrollToAnchor(tabQueryParameter, window.location.hash);
+                }
             }else{
                 activateCodeTab(firstTab)
             }
