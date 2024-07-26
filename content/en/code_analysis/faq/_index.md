@@ -1,6 +1,5 @@
 ---
 title: Code Analysis Frequently Asked Questions
-kind: documentation
 description: What are the frequently asked questions about Datadog Code Analysis
 further_reading:
 - link: "/code_analysis/"
