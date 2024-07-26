@@ -4325,6 +4325,7 @@ components:
       - rum_replay_sessions_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
+      - siem_analyzed_logs_add_on_usage
       - siem_ingested_bytes_usage
       - snmp_usage
       - universal_service_monitoring_usage
@@ -4396,6 +4397,7 @@ components:
       - RUM_REPLAY_SESSIONS_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -8090,6 +8092,8 @@ components:
       - rum_browser_mobile_sessions_percentage
       - ingested_spans_bytes_usage
       - ingested_spans_bytes_percentage
+      - siem_analyzed_logs_add_on_usage
+      - siem_analyzed_logs_add_on_percentage
       - siem_ingested_bytes_usage
       - siem_ingested_bytes_percentage
       - workflow_executions_usage
@@ -8227,6 +8231,8 @@ components:
       - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
       - INGESTED_SPANS_BYTES_USAGE
       - INGESTED_SPANS_BYTES_PERCENTAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_PERCENTAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SIEM_INGESTED_BYTES_PERCENTAGE
       - WORKFLOW_EXECUTIONS_USAGE
@@ -8754,6 +8760,15 @@ components:
           type: number
         serverless_apps_usage:
           description: The total Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_percentage:
+          description: The percentage of log events analyzed by Cloud SIEM usage by
+            tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_usage:
+          description: The log events analyzed by Cloud SIEM usage by tag(s).
           format: double
           type: number
         siem_ingested_bytes_percentage:
@@ -19519,6 +19534,11 @@ components:
             and Google Cloud for the given date and given org.
           format: int64
           type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for all organizations.
@@ -20220,6 +20240,11 @@ components:
         serverless_apps_total_count_avg:
           description: Shows the average of the number of Serverless Apps for Azure
             and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -20958,6 +20983,11 @@ components:
         serverless_apps_total_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure and
             Google Cloud in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_agg_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         start_date:
