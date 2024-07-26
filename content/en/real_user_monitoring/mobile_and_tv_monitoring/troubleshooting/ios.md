@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting iOS SDK issues
 description: Learn how to troubleshoot issues with iOS Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
