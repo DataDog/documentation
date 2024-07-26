@@ -74,19 +74,23 @@ Complete the following steps to configure these three components.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-1. Export your [Datadog site][7] to an environment variable:
+1. Open the demo repository. Create a file called `docker-compose.override.yml` in the root folder. 
 
-    ```shell
-    export DD_SITE_PARAMETER=<Your API Site>
+2. Open the created file. Paste the following content and set the [Datadog site][7] and [Datadog API key][8] environment variables:
+
+    ```yaml
+    services: 
+      otelcol:
+        command: 
+          - "--config=/etc/otelcol-config.yml"
+          - "--config=/etc/otelcol-config-extras.yml"
+          - "--feature-gates=exporter.datadogexporter.UseLogsAgentExporter"
+        environment:
+          - DD_SITE_PARAMETER=<Your API Site>
+          - DD_API_KEY=<Your API Key>
     ```
 
-2. Export your [Datadog API key][8] to an environment variable:
-
-    ```shell
-    export DD_API_KEY=<Your API Key>
-    ```
-
-3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` in an IDE or a text editor of your choice and add the following to the file:
+3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` and add the following to the file:
 
     ```yaml
     exporters:
@@ -114,14 +118,14 @@ Complete the following steps to configure these three components.
     service:
       pipelines:
         traces:
-          processors: [batch, resource]
+          processors: [resource, batch]
           exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
         metrics:
-          receivers: [httpcheck/frontendproxy, otlp, spanmetrics, datadog/connector]
-          processors: [batch, resource]
+          receivers: [docker_stats, httpcheck/frontendproxy, otlp, prometheus, redis, spanmetrics, datadog/connector]
+          processors: [resource, batch]
           exporters: [otlphttp/prometheus, debug, datadog]
         logs:
-          processors: [batch, resource]
+          processors: [resource, batch]
           exporters: [opensearch, debug, datadog]
     ```
 
@@ -188,14 +192,14 @@ Complete the following steps to configure these three components.
         service:
           pipelines:
             traces:
-              processors: [batch, resource]
+              processors: [resource, batch]
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
-              receivers: [otlp, spanmetrics, datadog/connector]
-              processors: [batch, resource]
+              receivers: [httpcheck/frontendproxy, otlp, redis, spanmetrics, datadog/connector]
+              processors: [resource, batch]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
-              processors: [batch, resource]
+              processors: [resource, batch]
               exporters: [opensearch, debug, datadog]
     ```
 
