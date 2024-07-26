@@ -4,9 +4,14 @@ title: Setting up AWS CloudTrail Logs for Cloud Security Management
 
 Set up AWS CloudTrail Logs to get the most out of [CSM Identity Risks][1]. AWS CloudTrail Logs provides additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions.
 
-To use AWS CloudTrail Logs with CSM Identity Risks, you must enable [Cloud SIEM][2] and the [AWS CloudTrail content pack][3]. If you have not enabled Cloud SIEM or the AWS CloudTrail content pack, navigate to the [CSM Features][7] page and click **Enable** on the AWS CloudTrail Logs card. 
+## Prerequisites
 
-To complete the setup, you must install the AWS integration and configure log ingestion for AWS CloudTrail.
+To use AWS CloudTrail Logs with CSM Identity Risks, ensure that [Cloud SIEM][2] and the [AWS CloudTrail content pack][3] are enabled. If they are not already enabled, follow these steps:
+
+1. Navigate to the [CSM Features][7] page.
+1. Locate the AWS CloudTrail Logs card and click **Enable** to activate Cloud SIEM and the AWS CloudTrail content pack.
+
+Complete the setup by installing the AWS integration and configuring log ingestion for AWS CloudTrail:
 
 ## Set up AWS integration
 
