@@ -47,10 +47,10 @@ Source maps are limited to **500** MB each.
 
 ## Collect errors manually
 
-For more information about collecting browser errors, check our documentation [here][2]
+You can monitor handled exceptions, handled promise rejections, and other errors that the Browser SDK does not automatically track. Learn more about [Collecting Browser Errors][2].
 
 
-Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the Browser SDK with the `addError()` API:
+To manually collect errors, use the `addError()` API:
 
 {{< code-block lang="javascript" >}}
 addError(
