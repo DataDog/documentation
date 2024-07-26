@@ -177,14 +177,13 @@ The [**Deployments**][6] and [**Executions**][7] pages populate with data after 
 
 ## Correlate deployments with CI pipelines
 
-If Argo CD deployments are triggered from a CI pipeline, you may correlate the deployment execution and the pipeline,
-allowing to, from the pipeline standpoint, to visualize all the deployments triggered, and, from the deployment standpoint, to see the pipeline that triggered it. See the section ["visualize correlated pipelines and deployments"][18] to see how the visualization looks in Datadog.
+If Argo CD deployments are triggered from a CI pipeline, you can correlate the deployment execution and the pipeline. This allows you to visualize all the deployments triggered from a pipeline, as well as which pipeline triggered a specific deployment. See the [Visualize correlated pipelines and deployments][18] section on the CD Visibility page for an example.
 
-By default, the git metadata reported in deployments will be related to the repository that Argo CD monitors. However, a common setup is to separate the source code repository from the repository Argo CD monitors (the configuration repository), as the [Argo CD best practices states][17]. Then, to update the configuration repository when changes in the source repository happen, it is common to use automated commits from a CI pipeline. The following diagram represents an example of this kind of setup:
+By default, the Git metadata reported in deployments is associated with the repository that Argo CD monitors. However, a common setup is to separate the source code repository from the repository Argo CD monitors (the configuration repository), as outlined in the [Argo CD Best Practices page][17]. Then, you can use automated commits from a CI pipeline to update the configuration repository when changes occur in the source repository. The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-To associate source code git information to the Argo CD deployments, it is required to run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][14] for additional details:
+To associate source code Git information with the Argo CD deployments, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][14] for additional details:
 
 ```yaml
 - job: JobToUpdateConfigurationRepository
