@@ -2,7 +2,7 @@ const stringToTitleCase = (string) => {
   if(string.length <= 0) return string;
 
   const allCapWords = ['CSM', 'SIEM']
-  let openParenthesis = false;
+  let openParens = false;
 
   return string.split(' ')
     .map(word => {
