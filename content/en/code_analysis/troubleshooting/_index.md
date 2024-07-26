@@ -44,6 +44,28 @@ For performance issues, include the following information:
 
 If you are experiencing issues unrelated to performance or if the Datadog Static Analyzer fails to exit, run the Datadog Static Analyzer with the `--debug true --performance-statistics` flag.
 
+### Issue `GLIBC_X.YY not found`
+
+If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
+
+```
+version `GLIBC_X.YY' not found
+```
+
+It means that you are either:
+
+- running your CI pipeline with a Linux distribution that contains an old version of the glibc. In this case, we
+  recommend you upgrade to the latest version. Our analyzer will always run with the latest of Ubuntu/Debian based-systems.
+- running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). We recommend
+  you run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
+
+### Results are not being surfaced in the Datadog UI
+
+If you are running on a non-GitHub repository, make sure you first commit on your default branch (e.g. branch name like
+`master` or `main`). Once you commit on your default branch, non-default branches will be analyzed.
+
+You can always configure your default branch in your repository configuration.
+
 ## Software Composition Analysis
 
 For issues with Datadog Software Composition Analysis, include the following information in a bug report to Support as well as your Customer Success Manager.
@@ -53,6 +75,13 @@ For issues with Datadog Software Composition Analysis, include the following inf
 - The URL of your repository (public or private)
 - The name of the branch you ran the analysis on
 - The list of dependency files in your repository (such as `package-lock.json`, `requirements.txt`, or `pom.xml`)
+
+### Results are not being surfaced in the Datadog UI
+
+If you are running on a non-GitHub repository, make sure you first commit on your default branch (e.g. branch name like
+`master` or `main`). Once you commit on your default branch, non-default branches will be analyzed.
+
+You can always configure your default branch in your repository configuration.
 
 ## Further reading
 
