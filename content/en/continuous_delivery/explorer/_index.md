@@ -22,7 +22,7 @@ CD Visibility is in private beta. To request access, complete the form.
 
 The [CD Visibility Explorer][4] allows you to [search and filter](#search-and-filter), [analyze](#analyze), [visualize](#visualize), and [export](#export) deployment executions at multiple levels using any tag.
 
-{{< img src="continuous_delivery/explorer/deployment_executions.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
+{{< img src="continuous_delivery/explorer/deployment_executions_2.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
 
 ## Search and filter
 

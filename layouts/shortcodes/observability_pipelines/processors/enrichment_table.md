@@ -8,6 +8,7 @@ To set up the enrichment table processor:
    - For the **File** type:
         1. Enter the file path.
         1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment file example](#enrichment-file-example).
+        <br>**Note**: If you are installing the Worker in Kubernetes, see [Referencing files in Kubernetes][10011] for information on how to reference the file.
    - For the **GeoIP** type, enter the GeoIP path.
 
 ##### Enrichment file example
@@ -36,4 +37,4 @@ merchant_info {
     "state":"Colorado"
 }
 ```
-
+[10011]: /observability_pipelines/advanced_configurations/#referencing-files-in-kubernetes

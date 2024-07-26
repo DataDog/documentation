@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentación
   text: Aprender a explorar tus logs
-kind: documentación
 title: Procesadores
 ---
 
