@@ -17,8 +17,8 @@ further_reading:
 
 ### What are Datadog-hosted scans?
 
-When using Datadog-hosted scan, Datadog scans your code within Datadog infrastructure. Datadog acts
-as a CI pipeline: it clones your code, runs the analyzer and uploads the results for you.
+When using a Datadog-hosted scan, Datadog scans your code within the Datadog infrastructure. Datadog acts
+as a CI pipeline: it clones your code, runs the analyzer, and uploads the results for you.
 
 With Datadog-hosted scans, you do not need to do the heavy lifting and configure any CI pipeline to run the analyzer.
 
