@@ -105,7 +105,7 @@ The event pattern above sets up the integration only for the `first-pipeline` an
 ### Correlate pipelines with tests
 
 If you are using [Test Visibility][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests
-with the related pipeline inside Datadog Pipeline Visibility. To do this [refer to the section below](#add-the-pipeline-execution-id-as-an-environment-variable)
+with the related pipeline inside Datadog Pipeline Visibility. For instructions, refer to [Add the pipeline execution ID](#add-the-pipeline-execution-id-as-an-environment-variable).
 
 ### Enable log correlation
 
@@ -119,7 +119,7 @@ The AWS CodePipeline integration supports correlating **CodeBuild** actions with
 
 ### Add the pipeline execution ID as an environment variable
 
-The pipeline execution ID is an identifier Datadog needs to uniquely identify a pipeline execution. This is needed for correlating pipelines with tests and custom commands:
+The pipeline execution ID is an identifier Datadog needs to uniquely identify a pipeline execution. Perform the following steps to assign a pipeline execution ID to correlate pipelines with tests and custom commands:
 
 1. In the AWS Console, go to your pipeline configuration and click **Edit**
 2. Go to the stage containing the AWS CodeBuild action, click **Edit Stage**, and then edit the relevant action.

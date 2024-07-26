@@ -20,12 +20,12 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in GitHub Actions [see section below](#trace-a-command-in-github-actions)
+- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in GitHub Actions, see [Trace a command](#trace-a-command-in-github-actions).
 - GitLab (SaaS or self-hosted >= 14.1) with datadog-ci CLI >= 2.40.
 - Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
 - Azure DevOps Pipelines with datadog-ci CLI >= 2.40.
-- AWS Codepipeline with datadog-ci CLI >= 2.40. Follow [these instructions][6] to set up custom commands in AWS Codepipeline.
+- AWS Codepipeline with datadog-ci CLI >= 2.40. Follow [Adding custom commands][6] to set up custom commands in AWS Codepipeline.
 - Buildkite with datadog-ci CLI >= 2.40.
 
 ## Install the Datadog CI CLI
