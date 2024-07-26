@@ -36,7 +36,7 @@ title: Bibliotecas e integraciones serverless
 {{< whatsnext desc="In addition to collecting telemetry directly from your Lambda functions, Datadog can also collect telemetry through the Datadog AWS integration for resources utilized by your serverless application." >}}
     {{< nextlink href="/integrations/amazon_lambda/" >}}Integración de AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_step_functions/" >}}Integración de AWS Step Functions{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_appsync/" >}}Integración de AWS AppSync{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_api_gateway/" >}}Integración de Amazon API Gateway{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_sqs/" >}}Integración de Amazon SQS{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_sns/" >}}Integración de Amazon SNS{{< /nextlink >}}
