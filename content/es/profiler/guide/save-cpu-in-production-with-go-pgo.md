@@ -20,7 +20,7 @@ La PGO permite optimizaciones adicionales en el código identificado como calien
 
 Los siguientes son algunos puntos clave sobre el funcionamiento de la PGO:
 
-- Cuando se crea un programa Go con la PGO habilitada, el compilador busca un perfil de CPU pprof llamado `default.pgo` y lo utiliza para producir un binario más optimizado.
+- Cuando se crea un programa de Go con la PGO habilitada, el compilador busca un perfil de CPU pprof llamado `default.pgo` y lo utiliza para producir un binario más optimizado.
 - Luego de la optimización, los programas típicos deberían experimentar una disminución del 2-14% del tiempo de CPU. La PGO sigue en desarrollo activo y las futuras versiones de Go aspiran a lograr un ahorro de CPU aún mayor. Datadog [apoya activamente esta iniciativa][3].
 - La PGO produce los mejores resultados cuando se utilizan perfiles representativos. Sin embargo, no se espera que el uso de perfiles no representativos o antiguos (de versiones anteriores del software) produzca binarios más lentos en comparación con la no utilización de la PGO.
 - No se espera que el uso de un perfil de una aplicación optimizada por la PGO genere ciclos de optimización/desoptimización. Esto se conoce como estabilidad iterativa.
@@ -42,11 +42,11 @@ Para habilitar la PGO utilizando la herramienta `datadog-pgo`:
    go run github.com/DataDog/datadog-pgo@latest "service:foo env:prod" ./cmd/foo/default.pgo
    ```
 
-La cadena de herramientas Go recoge automáticamente cualquier archivo `default.pgo` del archivo principal, por lo que no es necesario modificar el paso `go build`.
+La cadena de herramientas Go recoge automáticamente cualquier archivo `default.pgo` del paquete principal, por lo que no es necesario modificar el paso `go build`.
 
 Para obtener más detalles, consulta el [repositorio GitHub Datadog-pgo][6].
 
-## Comprobar si la PGO está habilitada
+## Para comprobar si la PGO está habilitada
 
 Para verificar dónde está habilitada la PGO, busca [perfiles de Go sin etiquetas (tags) PGO configuradas como verdaderas][7].
 
