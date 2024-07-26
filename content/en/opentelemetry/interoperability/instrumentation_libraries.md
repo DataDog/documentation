@@ -24,7 +24,7 @@ This provides observability for libraries not covered by Datadog SDKs without ch
 
 1. **Enable OpenTelemetry support**: Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`. This step isn't required for the Datadog Go and Ruby APM SDKs.
 
-1. **Run the Datadog Agent**: Datadog SDKs provide an implementation of the OpenTelemetry API and submit spans to a Datadog Agent. Ensure the Datadog Agent is [running][16] to use OpenTelemetry instrumentation with Datadog SDKs.
+1. **Run the Datadog Agent**: Datadog SDKs provide an implementation of the OpenTelemetry API and submit spans to a Datadog Agent. Ensure the Datadog Agent is [running][24] to use OpenTelemetry instrumentation with Datadog SDKs.
 
 1. **Disable duplicate instrumentation**: When replacing a Datadog instrumentation with its OpenTelemetry equivalent, disable the
 Datadog instrumentation to prevent duplicate spans from appearing in the trace.
@@ -92,8 +92,6 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 [9]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/
 [10]: https://search.maven.org/search?q=a:opentelemetry-javaagent-jaxws-2.0-cxf-3.0
 [11]: https://opentelemetry.io/docs/zero-code/java/agent/configuration/
-[12]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
-[16]: /opentelemetry/interoperability/environment_variable_support
 
 {{% /tab %}}
 
@@ -230,3 +228,6 @@ func hello(w http.ResponseWriter, req *http.Request) {
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/automatic_instrumentation/
 [3]: https://opentelemetry.io/docs/concepts/instrumentation/libraries/
+[12]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[16]: /opentelemetry/interoperability/environment_variable_support
+[24]: /getting_started/tracing/#set-up-datadog-apm

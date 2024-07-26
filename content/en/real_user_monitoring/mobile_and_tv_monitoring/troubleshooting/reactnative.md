@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting React Native SDK issues
 description: Learn how to troubleshoot issues with React Native Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: reactnative
 type: multi-code-lang
 code_lang_weight: 50
