@@ -88,9 +88,9 @@ At this time, we tested our CLI tools with the following tools:
 - [trivy][7]
 
 To ingest your SARIF file into Datadog:
-- Install the `datadog-ci` cli (requires nodejs to be installed)
-- Ensure that your `DD_SITE`, `DD_API_KEY` and `DD_APP_KEY` environment variables are set
-- Invoke the tool to upload the file to Datadog.
+1. Install the `datadog-ci` CLI (requires that Node.js is installed).
+2. Ensure that your `DD_SITE`, `DD_API_KEY` and `DD_APP_KEY` environment variables are set.
+3. Invoke the tool to upload the file to Datadog.
 
 Installing and invoking the tool can be done using these two commands:
 
