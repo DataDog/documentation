@@ -54,7 +54,7 @@ version `GLIBC_X.YY' not found
 
 It means that you are either:
 
-- running your CI pipeline with a Linux distribution that contains an old version of the glibc. In this case, we
+- running your CI pipeline with a Linux distribution that contains an old version of the glibc. In this case,
   recommend you upgrade to the latest version. Our analyzer will always run with the latest of Ubuntu/Debian based-systems.
 - running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). We recommend
   you run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
