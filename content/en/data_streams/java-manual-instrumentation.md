@@ -1,5 +1,5 @@
 ---
-title: Setup Data Streams Monitoring for Java through Manual Instrumentation
+title: Set up Data Streams Monitoring for Java through Manual Instrumentation
 private: true
 further_reading:
     - link: '/integrations/kafka/'
@@ -18,7 +18,7 @@ Data Streams Monitoring propagates context through message headers. If you use a
 
 1. Ensure you're using the [Datadog Agent v7.34.0 or later][1].
 
-2. Declare supported types, for example:
+2. On services sending or consuming messages, declare the supported types. For example:
 {{< code-block lang="text" >}}
 kinesis, kafka, rabbitmq, sqs, sns
 {{< /code-block >}}
@@ -30,13 +30,13 @@ import datadog.trace.api.experimental.*;
 ​​
 Carrier headersAdapter = new Carrier(headers);
 ​
-# before calling database PUT
+# Before calling database PUT
 DataStreamsCheckpointer.get().setProduceCheckpoint("<database-type>", "<topic-name>", headersAdapter);
 ​
-# after calling database GET
+# After calling database GET
 DataStreamsCheckpointer.get().setConsumeCheckpoint("<database-type>", "<topic-name>", headersAdapter);
 
-# replace Headers with whatever you're using to pass the context
+# Replace Headers with whatever you're using to pass the context
 private class Carrier implements DataStreamsContextCarrier {
 	private Headers headers;
 	
