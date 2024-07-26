@@ -73,8 +73,7 @@ the [static analyzer documentation][5]
 
 ### Is the analyzer open-source?
 
-The Datadog Static Analyzer is available under an open-source license and the code
-is [available on GitHub][4].
+The Datadog Static Analyzer is available under an open-source license and the code is [available on Github][4].
 
 ## Software Composition Analysis
 
