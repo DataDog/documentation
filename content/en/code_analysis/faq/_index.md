@@ -35,9 +35,9 @@ At this time, we tested our API with the following tools:
  - [eslint][3]
 
 To ingest your SARIF file into Datadog:
- - Install the `datadog-ci` cli (requires nodejs to be installed)
- - Ensure that your `DD_SITE`, `DD_API_KEY` and `DD_APP_KEY` environment variables are set
- - Invoke the tool to upload the file to Datadog.
+1. Install the `datadog-ci` CLI (requires that Node.js is installed).
+2. Ensure that your `DD_SITE`, `DD_API_KEY`, and `DD_APP_KEY` environment variables are set.
+3. Invoke the tool to upload the file to Datadog.
 
 Installing and invoking the tool can be done with the two following commands:
 
@@ -49,11 +49,11 @@ npm install -g @datadog/datadog-ci
 datadog-ci sarif upload --service "your-app" --env "ci" /path/to/sarif-file.json
 ```
 
-If you want to import from a tool not support at this time, please contact your Customer Success Manager.
+If you want to import using a tool that is not supported currently, contact your Customer Success Manager.
 
-### Can I write custom rules?
+### Can custom rules be used?
 
-Custom rules will be available to all beta customers at the end of Q3 2024.
+Custom rule availability is planned for all beta customers at the end of Q3 2024.
 
 ### Do you always scan all the files at every push or commit?
 
@@ -67,9 +67,7 @@ In order for diff-aware to scan, you need to be using the Datadog platform.
 
 ### What is Datadog Static Analyzer on the OWASP benchmark?
 
-Our Static Analyzer has been tested against the OWASP benchmark with a score of 44.
-We periodically update the results against the benchmark and publish the results in
-the [static analyzer documentation][5]
+Our Static Analyzer has been tested against the OWASP benchmark with a score of 44. We periodically update the results against the benchmark and publish the results in the [static analyzer documentation][5].
 
 ### Is the analyzer open-source?
 
