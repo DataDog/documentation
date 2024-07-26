@@ -55,6 +55,10 @@ To set up multiple indexes:
 
 Setting daily quotas on your indexes can help prevent billing overages when new log sources are added or if a developer unintentionally changes the logging levels to debug mode. See [Alert on indexes reaching their daily quota](#alert-on-indexes-reaching-their-daily-quota) on how to set up a monitor to alert when a percentage of the daily quota is reached within the past 24 hours.
 
+### Set up storage for long-term retention
+
+If you want to retain logs long-term with the ability to query them as needed, without the cost of standard indexes configure [Flex Logs][30]. This tier decouples storage from compute costs so you can cost-effectively retain logs that may not need to be queried as frequently as standard indexes.
+
 ### Set up multiple archives for long-term storage
 
 If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
@@ -226,3 +230,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
 [28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [29]: /observability_pipelines/
+[30]: /logs/log_configuration/flex_logs/
