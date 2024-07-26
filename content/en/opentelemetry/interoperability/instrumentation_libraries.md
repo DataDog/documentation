@@ -24,7 +24,6 @@ This provides observability for libraries not covered by Datadog SDKs without ch
 
 1. **Enable OpenTelemetry support**: Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`. This step isn't required for the Datadog Go and Ruby APM SDKs.
 
-
 1. **Run the Datadog Agent**: Datadog SDKs provide an implementation of the OpenTelemetry API and submit spans to a Datadog Agent. Ensure the Datadog Agent is [running][16] to use OpenTelemetry instrumentation with Datadog SDKs.
 
 1. **Disable duplicate instrumentation**: When replacing a Datadog instrumentation with its OpenTelemetry equivalent, disable the
@@ -146,13 +145,13 @@ To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the followi
 
 ## Compatibility requirements
 
-The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][20], including the [`opentelemetry-go-contrib/instrumentation`][21] libraries.
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][21], including the [`opentelemetry-go-contrib/instrumentation`][22] libraries.
 
 ## Setup
 
 To use OpenTelemetry integrations with the Datadog Go SDK, perform the following steps:
 
- 1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][22] page.
+ 1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][23] page.
  2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
 
 The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
@@ -191,9 +190,9 @@ func hello(w http.ResponseWriter, req *http.Request) {
 {{< img src="opentelemetry/interoperability/go-otel-dropin-support.png" alt="go-dd-otelhttp">}}
 
 
-[20]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
-[21]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
-[22]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
+[21]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
+[22]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
+[23]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
 
 {{% /tab %}}
 
@@ -231,5 +230,3 @@ func hello(w http.ResponseWriter, req *http.Request) {
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/automatic_instrumentation/
 [3]: https://opentelemetry.io/docs/concepts/instrumentation/libraries/
-[12]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
-[16]: /getting_started/tracing/#set-up-datadog-apm
