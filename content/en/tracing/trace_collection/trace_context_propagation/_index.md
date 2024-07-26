@@ -154,7 +154,8 @@ The Datadog Go SDK supports the following trace context formats:
 | [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `B3 single header`  |
-| [B3 Multi][4]          | `b3`                |
+| [B3 Multi][4]          | `b3multi`           |
+|                        | `b3` (deprecated)   |
 | [None][5]              | `none`              |
 
 [1]: #datadog-format
