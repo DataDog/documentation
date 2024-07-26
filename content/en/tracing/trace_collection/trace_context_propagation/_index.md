@@ -254,14 +254,101 @@ int main() {
 ```
 
 ### Additional use cases
-For use cases specific to the Datadog C++ SDK, see the [C++ Trace Context Propagation][6] page.
+{{% collapse-content title="Manually extract propagated context" level="h4" %}}
+
+Propagation context extraction can be accomplished by implementing a custom `DictReader` interface and calling `Tracer::extract_span` or `Tracer::extract_or_create_span`.
+
+Here is an implementation to extract propagation context from HTTP Headers:
+
+```cpp
+#include <datadog/dict_reader.h>
+#include <datadog/optional.h>
+#include <datadog/string_view.h>
+
+#include <unordered_map>
+
+namespace dd = datadog::tracing;
+
+class HTTPHeadersReader : public datadog::tracing::DictReader {
+  std::unordered_map<dd::StringView, dd::StringView> headers_;
+
+public:
+  HTTPHeadersReader(std::unordered_map<dd::StringView, dd::StringView> headers)
+    : headers_(std::move(headers)) {}
+
+  ~HTTPHeadersReader() override = default;
+
+  // Return the value at the specified `key`, or return `nullopt` if there
+  // is no value at `key`.
+  dd::Optional<dd::StringView> lookup(dd::StringView key) const override {
+    auto found = headers_.find(key);
+    if (found == headers_.cend()) return dd::nullopt;
+
+    return found->second;
+  }
+
+  // Invoke the specified `visitor` once for each key/value pair in this object.
+  void visit(
+      const std::function<void(dd::StringView key, dd::StringView value)>& visitor)
+      const override {
+      for (const auto& [key, value] : headers_) {
+        visitor(key, value);
+      }
+  };
+};
+
+// Usage example:
+void handle_http_request(const Request& request, datadog::tracing::Tracer& tracer) {
+  HTTPHeadersReader reader{request.headers};
+  auto maybe_span = tracer.extract_span(reader);
+  ..
+}
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Manually inject context for distributed tracing" level="h4" %}}
+
+Propagation context injection can be accomplished by implementing the `DictWriter` interface and calling `Span::inject` on a span instance.
+
+```cpp
+#include <datadog/dict_writer.h>
+#include <datadog/string_view.h>
+
+#include <string>
+#include <unordered_map>
+
+using namespace dd = datadog::tracing;
+
+class HTTPHeaderWriter : public dd::DictWriter {
+  std::unordered_map<std::string, std::string>& headers_;
+
+public:
+  explicit HTTPHeaderWriter(std::unordered_map<std::string, std::string>& headers) : headers_(headers) {}
+
+  ~HTTPHeaderWriter() override = default;
+
+  void set(dd::StringView key, dd::StringView value) override {
+    headers_.emplace(key, value);
+  }
+};
+
+// Usage example:
+void handle_http_request(const Request& request, dd::Tracer& tracer) {
+  auto span = tracer.create_span();
+
+  HTTPHeaderWriter writer(request.headers);
+  span.inject(writer);
+  // `request.headers` now populated with the headers needed to propagate the span.
+  ..
+}
+```
+{{% /collapse-content %}}
 
 [1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
-[6]: /tracing/trace_collection/trace_context_propagation/cpp
 
 {{% /tab %}}
 
