@@ -178,9 +178,6 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
-State Function
-: setIsChecked
-
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -237,9 +234,6 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
-State Function
-: setValue
-
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -282,9 +276,6 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
-State Function
-: setValue
-
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -322,7 +313,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
 State Function
-: setIsOpen
+: setIsOpen<br>
+**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
 
 For more information on events, see [Events][1].
 
@@ -381,7 +373,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
 State Function
-: setValue
+: setValue<br>
+**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
 
 For more information on events, see [Events][1].
 
@@ -446,7 +439,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
 State Function
-: setValue
+: setValue<br>
+**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
 
 For more information on events, see [Events][1].
 
@@ -493,7 +487,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
 State Function
-: setValue
+: setValue<br>
+**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
 
 For more information on events, see [Events][1].
 
@@ -565,7 +560,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
 State Function
-: setValue
+: setValue<br>
+**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
 
 For more information on events, see [Events][1].
 
@@ -684,7 +680,10 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
 State Functions
-: setSelectedRow, setPageIndex
+: setSelectedRow<br>
+**Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
+: setPageIndex<br>
+**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.
 
 For more information on events, see [Events][1].
 
@@ -774,7 +773,8 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
 State Function
-: setValue
+: setValue<br>
+**Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
 
 For more information on events, see [Events][1].
 

@@ -22,21 +22,21 @@ For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button
 
 App Builder provides functions for some types of app state changes on specific components.
 
-setIsChecked
-: Sets the value of a set of checkboxes to the array of boolean value that you provide.<br>
-**Example**: To make a button that sets the first of a set of checkboxes to checked and the second to unchecked, in the button element's **Events** section, use the following values: <ul><li>Event: click</li><li>Reaction: Set Component State</li><li>Component: the name of the checkbox element that you want this button to act on</li><li>State Function: `setIsChecked`</li><li>Value: `${[true, false]}`</li><ul>
-
 setValue
-: Sets the value of an element to the value that you provide to the function.
+: Sets the value of an element to the value that you provide to the function.<br>
+**Examples**: See the [Components][1] documentation page sections for the **number input**, **radio button**, **search**, **select**, and **text input** components.
 
 setIsOpen
-: Sets the stat us of a modal to open or closed based on the boolean value that you provide.
+: Sets the status of a modal to open or closed based on the boolean value that you provide.<br>
+**Example**: See the [Components][1] documentation page section for the **modal** component.
 
 setSelectedRow
-: Sets the `selectedRow` property of the table component to the row that you specify.
+: Sets the `selectedRow` property of the table component to the row that you specify.<br>
+**Example**: See the [Components][1] documentation page section for the **table** component.
 
 setPageIndex
-: Sets the `pageIndex` property of the table component to the page that you specify. Works with the server side pagination type.
+: Sets the `pageIndex` property of the table component to the page that you specify. Works with the server side pagination type.<br>
+**Example**: See the [Components][1] documentation page section for the **table** component.
 
 To see what state functions are available for a given component, see [Components][1].
 
