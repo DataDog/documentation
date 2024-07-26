@@ -29,7 +29,11 @@ Datadog の [Logging without Limits][1]\* を使用すると、インデック�
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="ログをメトリクスに生成" style="width:80%;">}}
 
-ログベースのメトリクスを新しく生成するには、Datadog アカウントの [Configuration ページ][5]で _[Generate Metrics][6]_ タブを選択し、**New Metric+** ボタンをクリックします。
+ログベースのメトリクスを新しく生成するための手順は下記となります:
+
+1. [Generate Metrics][6] ページへ移動します。
+1. **Generate Metrics** タブが選択されていることを確認してください。
+1. **+New Metric** をクリックします。
 
 Export メニューで "Generate new metric" を選択し、Analytics の検索からメトリクスを作成することも可能です。
 
