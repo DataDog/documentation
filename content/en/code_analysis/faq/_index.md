@@ -22,7 +22,7 @@ as a CI pipeline: it clones your code, runs the analyzer, and uploads the result
 
 With Datadog-hosted scans, you do not need to do the heavy lifting and configure any CI pipeline to run the analyzer.
 
-## Static Analysis
+## Static analysis
 
 ### May I import results from other analyzers into Datadog?
 
