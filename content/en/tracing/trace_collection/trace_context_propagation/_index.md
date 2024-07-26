@@ -53,6 +53,17 @@ In the majority of scenarios, you will want to both send and receive trace conte
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : Specifies trace context propagation formats (in a comma-separated list) to be used only for injection. This configuration takes the highest precedence over all other configurations for configuring the injection propagators.
 
+## Supported formats
+The Datadog SDK supports the following trace context formats:
+
+| Format                 | Configuration Value           |
+|------------------------|-------------------------------|
+| [Datadog][1]           | `datadog`                     |
+| [W3C Trace Context][2] | `tracecontext`                |
+| [B3 Single][3]         | _Language Dependent Value_    |
+| [B3 Multi][4]          | `b3multi`                     |
+| [None][5]              | `none`                        |
+
 ## Language support
 
 {{< tabs >}}
@@ -60,7 +71,7 @@ In the majority of scenarios, you will want to both send and receive trace conte
 {{% tab "Java" %}}
 
 ### Supported formats
-The Datadog Java SDK supports the following trace context formats:
+The Datadog Java SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -92,7 +103,7 @@ In addition to the environment variable configuration, you can also update the p
 {{% tab "Python" %}}
 
 ### Supported formats
-The Datadog Python SDK supports the following trace context formats:
+The Datadog Python SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -113,7 +124,7 @@ The Datadog Python SDK supports the following trace context formats:
 {{% tab "Ruby" %}}
 
 ### Supported formats
-The Datadog Ruby SDK supports the following trace context formats:
+The Datadog Ruby SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -147,7 +158,7 @@ end
 {{% tab "Go" %}}
 
 ### Supported formats
-The Datadog Go SDK supports the following trace context formats:
+The Datadog Go SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -169,7 +180,7 @@ The Datadog Go SDK supports the following trace context formats:
 {{% tab "NodeJS" %}}
 
 ### Supported formats
-The Datadog NodeJS SDK supports the following trace context formats:
+The Datadog NodeJS SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -191,7 +202,7 @@ The Datadog NodeJS SDK supports the following trace context formats:
 {{% tab "PHP" %}}
 
 ### Supported formats
-The Datadog PHP SDK supports the following trace context formats:
+The Datadog PHP SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -295,7 +306,7 @@ Creating this surrounding trace to your consuming-processing logic ensures obser
 {{% tab "C++" %}}
 
 ### Supported formats
-The Datadog C++ SDK supports the following trace context formats:
+The Datadog C++ SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
@@ -440,11 +451,11 @@ void handle_http_request(const Request& request, dd::Tracer& tracer) {
 {{% tab ".NET" %}}
 
 ### Supported formats
-The Datadog .NET SDK supports the following trace context formats:
+The Datadog .NET SDK supports the following trace context formats, including deprecated configuration values:
 
 | Format                 | Configuration Value           |
 |------------------------|-------------------------------|
-| [Datadog][1]           | `datadog`           |
+| [Datadog][1]           | `datadog`                     |
 | [W3C Trace Context][2] | `tracecontext`                |
 |                        | `W3C` (deprecated)            |
 | [B3 Single][3]         | `B3 single header`            |
