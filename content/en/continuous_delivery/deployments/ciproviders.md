@@ -125,7 +125,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 
 ## Correlate deployments with CI pipelines
 
-This is done by default so there is no action needed. See the section ["visualize correlated pipelines and deployments"][18] to see how the visualization looks in Datadog.
+By default, deployments are correlated with CI pipelines. See the [Visualize correlated pipelines and deployments][15] section on the CD Visibility page for an example.
 
 ## Further reading
 
