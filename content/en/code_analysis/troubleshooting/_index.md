@@ -56,7 +56,7 @@ It means that you are either:
 
 - running your CI pipeline with a Linux distribution that contains an old version of the glibc. In this case,
   recommend you upgrade to the latest version. The analyzer will always run with the latest of Ubuntu/Debian based-systems.
-- running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). We recommend
+- running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). Instead,
   you run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
 
 ### Results are not being surfaced in the Datadog UI
