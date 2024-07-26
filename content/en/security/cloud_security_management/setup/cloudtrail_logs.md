@@ -2,47 +2,21 @@
 title: Setting up AWS CloudTrail Logs for Cloud Security Management
 ---
 
-Use the following instructions to enable CloudTrail Logs forwarding for Identity Risks (CIEM). Enabling CloudTrail logs forwarding allows you to gain insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions.
+Set up AWS CloudTrail Logs to get the most out of [CSM Identity Risks][1]. AWS CloudTrail Logs provides additional insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions.
 
-Enable CloudTrail logs forwarding for Identity Risks (CIEM) to gain insights into the actual usage of cloud resources, helping you identify users and roles with significant gaps between provisioned and utilized permissions.
+To use AWS CloudTrail Logs with CSM Identity Risks, you must enable [Cloud SIEM][2] and the [AWS CloudTrail content pack][3]. If you have not enabled Cloud SIEM or the AWS CloudTrail content pack, navigate to the [CSM Features][7] page and click **Enable** on the AWS CloudTrail Logs card. 
 
-Set up the AWS integration using CloudFormation
-
-...
-
-## Prerequisites
-
-- The [Datadog AWS integration][1] is installed and configured for your AWS accounts
-- [Cloud SIEM][5] is enabled 
-
-Install approaches
-
-First time installing Cloud SIEM, logs not set up either > You'd be directed to the main onboarding workflow
-
-- Enable Cloud SIEM
-- AWS integration (if not already installed)
-- CloudTrail Logs forwarding
-
-Cloud SIEM is already installed. CloudTrail Logs forwarding is already enabled. You just need to enable CloudTrail Logs on the CSM features page(?)
-
-- Enable CloudTrail Logs feature on CSM Feature page
-
-Cloud SIEM is already installed, but CloudTrail Logs are not. You need to enable CloudTrail Logs forwarding (and possibly the AWS integration)
-
-- AWS integration (if not already installed)
-- CloudTrail Logs forwarding
+To complete the setup, you must install the AWS integration and configure log ingestion for AWS CloudTrail.
 
 ## Set up AWS integration
 
-## Enable Cloud SIEM
-
-
+If you haven't already, set up the AWS integration.
 
 ## Enable AWS CloudTrail logging
 
 Enable AWS CloudTrail logging so that logs are sent to a S3 bucket.
 
-1. Click **Create trail** on the [CloudTrail dashboard][2].
+1. Click **Create trail** on the [CloudTrail dashboard][4].
 2. Enter a name for your trail.
 3. Create an S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
 4. Create an AWS KMS key or use an existing AWS KMS key. Click **Next**.
@@ -54,16 +28,18 @@ Enable AWS CloudTrail logging so that logs are sent to a S3 bucket.
 
 Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail logs stored in the S3 bucket to Datadog for monitoring.
 
-1. Go to the [Datadog Forwarder Lambda][3] that was created during the AWS integration set up.
+1. Go to the [Datadog Forwarder Lambda][5] that was created during the AWS integration set up.
 2. Click **Add trigger**.
 3. Select **S3** for the trigger.
 4. Select the S3 bucket you are using to collect AWS CloudTrail logs. 
 5. For Event type, select **All object create events**.
 6. Click **Add**.
-7. See CloudTrail logs in Datadog's [Log Explorer][4].
+7. See CloudTrail logs in Datadog's [Log Explorer][6].
 
-[1]: /integrations/amazon_web_services/
-[2]: https://console.aws.amazon.com/cloudtrail/home
-[3]: https://console.aws.amazon.com/lambda/home
-[4]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
-[5]: /security/cloud_siem/
+[1]: /security/cloud_security_management/identity_risks
+[2]: /security/cloud_siem/
+[3]: /security/cloud_siem/content_packs#aws-cloudtrail
+[4]: https://console.aws.amazon.com/cloudtrail/home
+[5]: https://console.aws.amazon.com/lambda/home
+[6]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
+[7]: https://app.datadoghq.com/security/configuration/csm/features
