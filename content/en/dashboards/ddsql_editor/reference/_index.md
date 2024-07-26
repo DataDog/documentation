@@ -12,17 +12,6 @@ DDSQL is a query language for Datadog data. It implements several standard SQL f
 
 You can use DDSQL to query your infrastructure in the [DDSQL Editor][2] in Datadog.
 
-## Supported SQL syntax
-
-SQL is broken into five different categories of statements. The table below indicates which categories are supported by DDSQL.
-
-| Category   | Examples    | Support      |
-|------------|-------------|--------------|
-| DQL (Data Query Language)   | `SELECT` | Supported    |
-| DML (Data Modification Language)  | `INSERT`, `UPDATE`, `DELETE`   | Limited: Data is not persisted across sessions |
-| DDL (Data Description Language)  | `CREATE`   | Limited: Data is not persisted across sessions |
-| DCL (Data Control Language)        | `GRANT`, `REVOKE`   | Not supported       |
-| TCL (Transaction Control Language) | `BEGIN`, `END`, `ROLLBACK`  | Not supported     |
 
 [1]: /dashboards/ddsql_editor/reference/tags
 [2]: https://app.datadoghq.com/ddsql/editor

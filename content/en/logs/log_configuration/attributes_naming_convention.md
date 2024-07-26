@@ -159,7 +159,7 @@ See [Alias Facets][34] for additional information.
 [25]: /standard-attributes/?search=syslog&product=log+management
 [26]: /integrations/rsyslog/
 [27]: /integrations/nxlog/
-[28]: integrations/syslog_ng/
+[28]: /integrations/syslog_ng/
 [29]: /integrations/fluentd/
 [30]: /integrations/logstash/
 [31]: /standard-attributes/?search=dns&product=log+management
