@@ -29,7 +29,7 @@ import DatadogRUM
 
 URLSessionInstrumentation.enable(with: .init(delegateClass: Alamofire.SessionDelegate.self))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to "Automatically track network requests" in the [Advanced Configuration][4] documentation.
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to [Advanced Configuration > Automatically track network requests][4].
 
 ## Apollo GraphQL
 
