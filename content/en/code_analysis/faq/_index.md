@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about Software Composition Analysis"
 ---
 
-## Common Questions
+## Common questions
 
 ### What are Datadog-hosted scans?
 
