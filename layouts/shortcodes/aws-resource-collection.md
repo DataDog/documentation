@@ -35,4 +35,4 @@ For the most **complete** security coverage that Datadog can provide, Datadog re
 
 **Notes**:
    - Warning messages appear on the AWS integration tile in Datadog if you enable resource collection, but do not have the AWS Security Audit Policy attached to your Datadog IAM role.  
-   - As Datadog adds support for new features and services, the list of permissions used for resource collection may expand.
+   - As Datadog adds support for new features and services, the list of permissions used for resource collection might expand.
