@@ -198,7 +198,9 @@ To associate source code Git information with the Argo CD deployments, run the `
 
 Even if the same repository serves as the source code repository and configuration repository, running this command is still required since it also gathers the information required to perform the correlation between the pipeline and the deployment.
 
-Once this command runs in the CI, the deployment contains git metadata from the application repository instead of the configuration repository as well as enough information to show the associated pipeline. See the section ["visualize correlated pipelines and deployments"][18] to get more details about the visualization.
+### Validation
+
+After successfully running the command, deployments contain Git metadata from the application repository instead of the configuration repository, and also display the associated pipeline. See the [Visualize correlated pipelines and deployments][18] section on the CD Visibility page for more details.
 
 ## Troubleshooting
 

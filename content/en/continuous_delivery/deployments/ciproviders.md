@@ -123,7 +123,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         - run: datadog-ci deployment mark ...
     ```
 
-## Correlate deployments with CI pipelines
+## Visualize correlated pipelines and deployments
 
 By default, deployments are correlated with CI pipelines. See the [Visualize correlated pipelines and deployments][15] section on the CD Visibility page for an example.
 
