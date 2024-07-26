@@ -13,9 +13,9 @@ To use AWS CloudTrail Logs with CSM Identity Risks, ensure that [Cloud SIEM][2] 
 
 Complete the setup by installing the AWS integration and configuring log ingestion for AWS CloudTrail:
 
-## Set up AWS integration
+## Set up AWS integration using CloudFormation
 
-If you haven't already, set up the AWS integration.
+{{% cloud-siem-aws-setup-cloudformation %}}
 
 ## Enable AWS CloudTrail logging
 

@@ -37,19 +37,7 @@ This guide walks you through the following steps so that you can start detecting
 
 ## Set up AWS integration using CloudFormation
 
-1. Go to Datadog's [AWS integration tile][2] to install the integration.
-2. Click **Automatically Using CloudFormation**. If there is already an AWS account set up, click **Add Another Account** first.
-3. Select the AWS Region where the CloudFormation stack will be launched.
-4. Select or create the Datadog API Key used to send data from your AWS account to Datadog.
-5. Select **Yes** for *Send Logs to Datadog*. This sets up the Datadog Lambda Forwarder to be used later for sending AWS CloudTrail logs to Datadog.
-6. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack with the parameters filled in based on your selections in the prior Datadog form. 
-
-    **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account. 
-
-7. Check the required boxes from AWS and click **Create stack**.
-8. After the CloudFormation stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
-
-See [Getting Started with AWS][3] for more information about Datadog's AWS integration and CloudFormation template. See [AWS manual setup instructions][4] if you need to set up the AWS integration manually.
+{{% cloud-siem-aws-setup-cloudformation %}}
 
 ## Enable AWS CloudTrail logging 
 
@@ -75,9 +63,6 @@ Since Cloud SIEM applies detection rules to all processed logs, see the [in-app 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Log%20Detection%22
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/getting_started/integrations/aws/
-[4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#manual
 [9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
 [10]: /security/cloud_siem/investigate_security_signals
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
