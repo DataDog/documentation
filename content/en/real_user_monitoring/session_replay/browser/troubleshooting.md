@@ -26,7 +26,7 @@ If you experience unexpected behavior with Datadog Session Replay, use this page
 Session Replay does not support:
 
 - The following HTML elements: `iframe`, `video`, `audio`, or `canvas`
-  - To render iFrames in Session Replay, it's necessary to separately instrument the iFrame code. For iFrames that span across domains, enable `usePartitionedCrossSiteSessionCookie: true` to ensure they are associated with the correct session. For iFrames that span across sub-domains, use `trackSessionAcrossSubdomains: true`. After correct instrumentation, iFrames and their parent windows appear as distinct entities within the same session, embedding iFrame replays directly into their parent windows is not supported.
+  - To render iFrames in Session Replay, it's necessary to separately instrument the iFrame code. For iFrames that span across sub-domains, use `trackSessionAcrossSubdomains: true`. After correct instrumentation, iFrames and their parent windows appear as distinct entities within the same session, embedding iFrame replays directly into their parent windows is not supported.
 - The [Web Animations API][7]
 
 Session Replay requires you to use an HTTPS connection. If you aren't using a secure connection, the resources time out and you can't see images and some page elements.
