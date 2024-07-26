@@ -53,10 +53,10 @@ In the majority of scenarios, you will want to both send and receive trace conte
 
 {{% tab "Java" %}}
 
-### Supported propagators
-The Datadog Java SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog Java SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value |
+| Format                 | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -82,10 +82,10 @@ In addition to the environment variable configuration, you can also update the p
 
 {{% tab "Python" %}}
 
-### Supported propagators
-The Datadog Python SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog Python SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value |
+| Format                 | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -102,10 +102,10 @@ The Datadog Python SDK maintains several propagators for passing trace context i
 
 {{% tab "Ruby" %}}
 
-### Supported propagators
-The Datadog Ruby SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog Ruby SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value |
+| Format                 | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -135,10 +135,10 @@ end
 
 {{% tab "Go" %}}
 
-### Supported propagators
-The Datadog Go SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog Go SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value |
+| Format                 | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -155,10 +155,10 @@ The Datadog Go SDK maintains several propagators for passing trace context infor
 
 {{% tab "NodeJS" %}}
 
-### Supported propagators
-The Datadog NodeJS SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog NodeJS SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value |
+| Format                 | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -176,10 +176,10 @@ The Datadog NodeJS SDK maintains several propagators for passing trace context i
 
 {{% tab "PHP" %}}
 
-### Supported propagators
-The Datadog PHP SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog PHP SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value |
+| Format                 | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -200,10 +200,10 @@ For use cases specific to the Datadog PHP SDK, see the [PHP Trace Context Propag
 
 {{% tab "C++" %}}
 
-### Supported propagators
-The Datadog C++ SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog C++ SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value |
+| Format                 | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
@@ -256,10 +256,10 @@ For use cases specific to the Datadog C++ SDK, see the [C++ Trace Context Propag
 
 {{% tab ".NET" %}}
 
-### Supported propagators
-The Datadog .NET SDK maintains several propagators for passing trace context information in different formats:
+### Supported formats
+The Datadog .NET SDK supports the following trace context formats:
 
-| Propagator             | Configuration Value           |
+| Format                 | Configuration Value           |
 |------------------------|-------------------------------|
 | Datadog                | `datadog`                     |
 | [W3C Trace Context][2] | `tracecontext`                |
