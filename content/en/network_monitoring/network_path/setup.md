@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to configure either individual paths, or automatically discover network traffic paths depending on your needs.
+Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
 
 ## Prerequisites
 
@@ -31,9 +31,9 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 
 ## Setup
 
-### Network Traffic Paths
+### Network traffic paths
 
-Configure network traffic paths to allow the Agent to automatically discover and monitor network routes based on actual network traffic, without requiring you to specify endpoints manually.
+Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
