@@ -1,3 +1,5 @@
+{{/*  Overwritting Hugo youtube shortcode source code: https://gohugo.io/content-management/shortcodes/#youtube  */}}
+
 {{- /*
 Renders an embedded YouTube video.
 
@@ -37,6 +39,7 @@ Renders an embedded YouTube video.
     {{- $mute := 0 }}
     {{- $start := 0 }}
     {{- $title := "YouTube video" }}
+    {{- $rel := 0 }}
 
     {{- /* Get arguments. */}}
     {{- if in (slice "false" false 0) ($.Get "allowFullScreen") }}
@@ -95,6 +98,7 @@ Renders an embedded YouTube video.
       "mute" $mute
       "start" $start
       "loop" $loop
+      "rel" $rel
     }}
     {{- if $loop }}
       {{- $params = merge $params (dict "playlist" $id) }}
