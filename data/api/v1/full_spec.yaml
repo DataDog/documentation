@@ -32886,6 +32886,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
