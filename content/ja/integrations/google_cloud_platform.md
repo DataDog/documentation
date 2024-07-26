@@ -531,7 +531,7 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 
 また、Datadog は以下をタグとして収集します。
 
-- `<キー>:<値>` ラベルが付けられたホスト。
+- `<key>:<value>` ラベルが付けられたホスト。
 - Custom labels from Google Pub/Sub、GCE、Cloud SQL、Cloud Storage のカスタムラベル
 
 ## トラブルシューティング
