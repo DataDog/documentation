@@ -25,7 +25,7 @@ Los siguientes son algunos puntos clave sobre el funcionamiento de la PGO:
 - La PGO produce los mejores resultados cuando se utilizan perfiles representativos. Sin embargo, no se espera que el uso de perfiles no representativos o antiguos (de versiones anteriores del software) produzca binarios más lentos en comparación con la no utilización de la PGO.
 - No se espera que el uso de un perfil de una aplicación optimizada por la PGO genere ciclos de optimización/desoptimización. Esto se conoce como estabilidad iterativa.
 
-Para obtener más información, consulta la [documentación PGO de Go][4].
+Para obtener más información, consulta la [documentación de PGO Go][4].
 
 ## Habilitación de la PGO
 
