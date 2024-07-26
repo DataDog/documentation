@@ -24,7 +24,7 @@ With Datadog-hosted scans, you do not need to do the heavy lifting and configure
 
 ## Static analysis
 
-### May I import results from other analyzers into Datadog?
+### Can results be imported into Datadog from other analyzers?
 
 While we recommend to use the Datadog Static Analyzer tool[4], Datadog supports the ingestion of files that enforces the SARIF format.
 
