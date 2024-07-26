@@ -58,13 +58,14 @@ The Datadog Java SDK supports the following trace context formats:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
-| Datadog                | `datadog`           |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `b3 single header`  |
 |                        | `b3single`          |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `b3` (deprecated)   |
-| None                   | `none`              |
+| [AWS X-Ray][5]         | `xray`              |
+| [None][6]              | `none`              |
 
 ### Additional configuration
 In addition to the environment variable configuration, you can also update the propagators using System Property configuration:
@@ -73,10 +74,12 @@ In addition to the environment variable configuration, you can also update the p
 - `-Ddd.trace.propagation.style.inject=datadog,b3multi`
 - `-Ddd.trace.propagation.style.extract=datadog,b3multi`
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
+[6]: #none-format
 
 {{% /tab %}}
 
@@ -87,16 +90,17 @@ The Datadog Python SDK supports the following trace context formats:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
-| Datadog                | `datadog`           |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `b3`                |
 | [B3 Multi][4]          | `b3multi`           |
-| None                   | `none`              |
+| [None][5]              | `none`              |
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: #none-format
 
 {{% /tab %}}
 
@@ -107,11 +111,11 @@ The Datadog Ruby SDK supports the following trace context formats:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
-| Datadog                | `datadog`           |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `b3`                |
 | [B3 Multi][4]          | `b3multi`           |
-| None                   | `none`              |
+| [None][5]              | `none`              |
 
 ### Additional configuration
 In addition to the environment variable configuration, you can also update the propagators in code by using `Datadog.configure`:
@@ -126,10 +130,11 @@ Datadog.configure do |c|
 end
 ```
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: #none-format
 
 {{% /tab %}}
 
@@ -140,16 +145,17 @@ The Datadog Go SDK supports the following trace context formats:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
-| Datadog                | `datadog`           |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `B3 single header`  |
-| [B3 Multi][4]          | `b3`           |
-| None                   | `none`              |
+| [B3 Multi][4]          | `b3`                |
+| [None][5]              | `none`              |
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: #none-format
 
 {{% /tab %}}
 
@@ -160,17 +166,18 @@ The Datadog NodeJS SDK supports the following trace context formats:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
-| Datadog                | `datadog`           |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `B3` (deprecated)   |
-| None                   | `none`              |
+| [None][5]              | `none`              |
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: #none-format
 
 {{% /tab %}}
 
@@ -181,20 +188,22 @@ The Datadog PHP SDK supports the following trace context formats:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
-| Datadog                | `datadog`           |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Single][3]         | `B3 single header`  |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `B3` (deprecated)   |
-| None                   | `none`              |
+| [None][5]              | `none`              |
 
 ### Additional use cases
-For use cases specific to the Datadog PHP SDK, see the [PHP Trace Context Propagation][5] page.
+For use cases specific to the Datadog PHP SDK, see the [PHP Trace Context Propagation][6] page.
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: /tracing/trace_collection/trace_context_propagation/php
+[5]: #none-format
+[6]: /tracing/trace_collection/trace_context_propagation/php
 
 {{% /tab %}}
 
@@ -205,11 +214,11 @@ The Datadog C++ SDK supports the following trace context formats:
 
 | Format                 | Configuration Value |
 |------------------------|---------------------|
-| Datadog                | `datadog`           |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`      |
 | [B3 Multi][4]          | `b3`                |
 |                        | `b3multi`           |
-| None                   | `none`              |
+| [None][5]              | `none`              |
 
 ### Additional configuration
 In addition to the environment variable configuration, you can also update the propagators in code:
@@ -245,12 +254,14 @@ int main() {
 ```
 
 ### Additional use cases
-For use cases specific to the Datadog C++ SDK, see the [C++ Trace Context Propagation][5] page.
+For use cases specific to the Datadog C++ SDK, see the [C++ Trace Context Propagation][6] page.
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: /tracing/trace_collection/trace_context_propagation/cpp
+[5]: #none-format
+[6]: /tracing/trace_collection/trace_context_propagation/cpp
 
 {{% /tab %}}
 
@@ -261,26 +272,53 @@ The Datadog .NET SDK supports the following trace context formats:
 
 | Format                 | Configuration Value           |
 |------------------------|-------------------------------|
-| Datadog                | `datadog`                     |
+| [Datadog][1]           | `datadog`           |
 | [W3C Trace Context][2] | `tracecontext`                |
 |                        | `W3C` (deprecated)            |
 | [B3 Single][3]         | `B3 single header`            |
 |                        | `B3SingleHeader` (deprecated) |
 | [B3 Multi][4]          | `b3multi`                     |
 |                        | `B3` (deprecated)             |
-| None                   | `none`                        |
+| [None][5]              | `none`                        |
 
 ### Additional use cases
-For use cases specific to the Datadog .NET SDK, see the [.NET Trace Context Propagation][5] page.
+For use cases specific to the Datadog .NET SDK, see the [.NET Trace Context Propagation][6] page.
 
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: /tracing/trace_collection/trace_context_propagation/dotnet
+[5]: #none-format
+[6]: /tracing/trace_collection/trace_context_propagation/dotnet
 
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Custom header formats
+
+### Datadog format
+
+When the Datadog SDK is configured with the Datadog format for extraction or injection (possibly both), the Datadog SDK will interact with the following request headers:
+
+`x-datadog-trace-id`
+: Specifies the lower 64-bits of the 128-bit trace-id, in decimal format.
+
+`x-datadog-parent-id`
+: Specifies the 64-bits span-id of the current span, in decimal format.
+
+`x-datadog-origin`
+: Specifies the Datadog product that initiated the trace, such as [Real User Monitoring][3] or [Synthetics][4]. If this headers is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
+
+`x-datadog-sampling-priority`
+: Specifies the sampling decision made for the represented span as an integer, in decimal format.
+
+`x-datadog-tags`
+: Specifies supplemental Datadog trace state information, including but not limited to the higher 64-bits of the 128-bit trace-id (in hexadecimal format).
+
+### None format
+
+When the Datadog SDK is configured with the None format for extraction or injection (possibly both), the Datadog SDK will _not_ interact with request headers, meaning that the corresponding context propagation operation will do nothing.
 
 ## Further Reading
 
@@ -288,3 +326,5 @@ For use cases specific to the Datadog .NET SDK, see the [.NET Trace Context Prop
 
 [1]: /opentelemetry/otel_tracing/
 [2]: https://www.w3.org/TR/trace-context/
+[3]: /real_user_monitoring/platform/connect_rum_and_traces
+[4]: /synthetics/platform/apm
