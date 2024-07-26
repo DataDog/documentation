@@ -31,7 +31,7 @@ El recorrido guiado te ayuda a lo largo de diferentes pasos para que puedas:
 
 <div class="alert alert-warning">El recorrido guiado se encuentra en fase beta pública y está sujeto a cambios. En el transcurso del tiempo habrá nuevas compatibilidades para lenguajes e infraestructuras.</div>
 
-Para utilizar esta guía necesitas:
+Para utilizar este recorrido guiado necesitas:
 * Un servicio Go que se ejecute en Kubernetes.
 * El [Continuous Profiler habilitado][3].
 
@@ -41,7 +41,7 @@ Investigar una fuga de memoria utilizando el recorrido guiado:
 
 1. Ve a **APM > Service Page** (APM > Página de servicios) en el servicio que quieres investigar.
 2. Haga clic en la pestaña **Memory Leaks* (Fugas de memoria):
-{{< img src="profiler/guide-memory-leak/service-page-memory-leak-entrypoint.png" alt="Punto de entrada del recorrido guiado sobre fugas de memoria en la página de servicios" style="width:100%;" >}}
+{{< img src="profiler/guide-memory-leak/service-page-memory-leak-entrypoint.png" alt="Punto de entrada del recorrido guiado de las fugas de memoria en la página de servicios" style="width:100%;" >}}
 3. Sigue los pasos guiados para completar tu investigación.
 
 
