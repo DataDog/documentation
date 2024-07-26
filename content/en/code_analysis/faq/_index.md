@@ -77,7 +77,7 @@ The Datadog Static Analyzer is available under an open-source license and the co
 
 ## Software Composition Analysis
 
-### May I import any SBOM file in Datadog?
+### Can I import any SBOM file into Datadog?
 
 While we recommend to use Datadog SBOM generator tool[6], Datadog supports the ingestion of any SBOM files.
 Datadog only supports SBOM file with the Cyclone-DX 1.4 and Cyclone-DX 1.5 formats.
