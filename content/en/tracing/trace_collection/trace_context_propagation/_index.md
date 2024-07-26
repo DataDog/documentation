@@ -18,7 +18,7 @@ further_reading:
 Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables all traces (and additional telemetry) in a request to be correlated. When automatic instrumentation is enabled, trace context propagation is handled automatically by the tracing library.
 
 By default, the Datadog SDK will extract and inject distributed tracing headers using the following formats:
-- [**Datadog**][#datadog-format] (takes higher precedence when extracting headers)
+- [**Datadog**][1] (takes higher precedence when extracting headers)
 - [**W3C Trace Context**][2]
 
 This default behavior has been chosen to maximize compatibility with older versions of the Datadog SDK and other Datadog products, while still allowing for interoperability with other distributed tracing systems like OpenTelemetry.
@@ -27,21 +27,18 @@ This default behavior has been chosen to maximize compatibility with older versi
 
 You may want to customize the trace context propagation configuration if your applications communicate distributed tracing information in a different, supported format or if you want to prevent an application from either extracting or injecting distributed tracing headers.
 
-To customize the trace context propagation configuration of an instrumented application, you can use the following environment variables to configure the formats that are used for reading and writing distributed tracing headers. To enable a specific format, make sure to use the corresponding configuration value that the language SDK recognizes, as outlined in the **Language support** section.
+To customize the trace context propagation configuration of an instrumented application, you can use the following environment variables to configure the formats that are used for reading and writing distributed tracing headers. To enable a specific format, make sure to use the corresponding configuration value that the language SDK recognizes, as outlined in the **[Language support][6]** section.
 
 <div class="alert alert-info">
 If multiple trace context propagation formats are enabled, the extraction attempt is done in the specified order, and the first valid trace context is used to continue the distributed trace. If additional valid trace contexts are found, the tracing information will be recorded as individual span links.</div>
-
-### Services Instrumented with Datadog SDK
 
 `DD_TRACE_PROPAGATION_STYLE`
 : Specifies trace context propagation formats (in a comma-separated list) to be used for both extraction and injection. This may be overridden by the extract-specific or inject-specific configurations. <br>
 **Default:** `datadog,tracecontext`
 
-### Services Instrumented with OpenTelemetry SDK
-
 `OTEL_PROPAGATORS`
-: Specifies trace context propagation formats (in a comma-separated list) to be used for both extraction and injection. This configuration takes the lowest precedence and will be ignored if any other Datadog trace context propagation environment variable is set.
+: Specifies trace context propagation formats (in a comma-separated list) to be used for both extraction and injection. This configuration takes the lowest precedence and will be ignored if any other Datadog trace context propagation environment variable is set.<br>
+**Recommendation**: Only use this configuration when migrating an application from the OpenTelemetry SDK to the Datadog SDK. For more information on this configuration and other OpenTelemetry environment variables, see [Using OpenTelemetry Environment Variables with Datadog SDKs][9].
 
 ### Advanced configuration
 
@@ -585,7 +582,7 @@ When the Datadog SDK is configured with the Datadog format for extraction or inj
 : Specifies the 64-bits span-id of the current span, in decimal format.
 
 `x-datadog-origin`
-: Specifies the Datadog product that initiated the trace, such as [Real User Monitoring][3] or [Synthetics][4]. If this headers is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
+: Specifies the Datadog product that initiated the trace, such as [Real User Monitoring][7] or [Synthetics][8]. If this headers is present, the value is expected to be one of: `rum`, `synthetics`, `synthetics-browser`.
 
 `x-datadog-sampling-priority`
 : Specifies the sampling decision made for the represented span as an integer, in decimal format.
@@ -601,7 +598,12 @@ When the Datadog SDK is configured with the None format for extraction or inject
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/otel_tracing/
+[1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
-[3]: /real_user_monitoring/platform/connect_rum_and_traces
-[4]: /synthetics/platform/apm
+[3]: https://github.com/openzipkin/b3-propagation#single-header
+[4]: https://github.com/openzipkin/b3-propagation#multiple-headers
+[5]: #none-format
+[6]: #language-support
+[7]: /real_user_monitoring/platform/connect_rum_and_traces
+[8]: /synthetics/platform/apm
+[9]: /opentelemetry/interoperability/environment_variable_support
