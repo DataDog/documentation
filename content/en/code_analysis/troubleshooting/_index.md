@@ -78,7 +78,7 @@ For issues with Datadog Software Composition Analysis, include the following inf
 
 ### Results are not being surfaced in the Datadog UI
 
-If you are running on a non-GitHub repository, make sure you first commit on your default branch (e.g. branch name like
+If you are running on a non-Github repository, ensure you first commit on your default branch (for example, a branch name like
 `master` or `main`). Once you commit on your default branch, non-default branches will be analyzed.
 
 You can always configure your default branch in your repository configuration.
