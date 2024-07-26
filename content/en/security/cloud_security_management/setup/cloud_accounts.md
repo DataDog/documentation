@@ -31,3 +31,24 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Disable resource collection
+
+### AWS
+
+### Azure
+
+- **Azure**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
+
+
+CSM Setup page
+
+switch off the **Resource Scanning** toggle
+
+Integration tile
+
+Azure integration tile
+Select an App Registration
+On the **Resource Collection** tab, clear the **Enable Cloud Security Management** checkbox.
+
+### Google Cloud
