@@ -13,15 +13,15 @@ title: Solucionar problemas de fuga de memoria mediante la generación de perfil
 
 La generación de perfiles dispone de varios conjuntos de datos para ayuda resolver las fugas de memoria, como el tipo de perfil Live Heap, que está [disponible para varios lenguajes][1].
 
-Para ayudarte a empezar, Datadog te ofrece una guía completa de servicios Go:
+Para ayudarte a empezar, Datadog te ofrece un completo recorrido guiado de los servicios Go:
 
-{{< img src="profiler/guide-memory-leak/service-page-memory-leak-walkthrough.mp4" alt="Tutorial sobre las fugas de memoria" video=true >}}
+{{< img src="profiler/guide-memory-leak/service-page-memory-leak-walkthrough.mp4" alt="Recorrido guiado de las fugas de memoria" video=true >}}
 
 ## Qué esperar
 
-Este tutorial no requiere ningún conocimiento previo y es accesible para quienes investigan por primera vez.
+Este recorrido guiado no requiere ningún conocimiento previo y es accesible para quienes investigan por primera vez.
 
-El tutorial te guía a través de diferentes pasos para que puedas:
+El recorrido guiado te ayuda a lo largo de diferentes pasos para que puedas:
 1. Delimitar los datos pertinentes.
 2. Recomendar integraciones y actualizaciones de Datadog que ayuden en la investigación.
 3. Explicar cómo funciona la gestión de memoria en tu tiempo de ejecución.
@@ -29,7 +29,7 @@ El tutorial te guía a través de diferentes pasos para que puedas:
 
 ## Requisitos
 
-<div class="alert alert-warning">La guía se encuentra en fase beta pública y está sujeta a cambios. En el transcurso del tiempo habrá nuevas compatibilidades para lenguajes e infraestructuras.</div>
+<div class="alert alert-warning">El recorrido guiado se encuentra en fase beta pública y está sujeto a cambios. En el transcurso del tiempo habrá nuevas compatibilidades para lenguajes e infraestructuras.</div>
 
 Para utilizar esta guía necesitas:
 * Un servicio Go que se ejecute en Kubernetes.
