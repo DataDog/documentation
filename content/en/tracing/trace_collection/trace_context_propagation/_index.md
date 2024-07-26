@@ -369,14 +369,108 @@ The Datadog .NET SDK supports the following trace context formats:
 | [None][5]              | `none`                        |
 
 ### Additional use cases
-For use cases specific to the Datadog .NET SDK, see the [.NET Trace Context Propagation][6] page.
+
+{{% collapse-content title="Prior configuration defaults" level="h4" %}}
+
+- Starting from version [2.48.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.48.0), the default propagation style is `datadog, tracecontext`, so the Datadog headers are used, followed by the W3C Trace Context. Prior to version 2.48.0, the order was `tracecontext, Datadog` for both extraction and injection propagation.  Prior to version [2.22.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.22.0), only the `Datadog` injection style was enabled.
+- Starting from version [2.42.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.42.0), when multiple extractors are specified, the `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` configuration specifies whether context extraction should exit immediately upon detecting the first valid `tracecontext`. The default value is `false`.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Distributed tracing with message queues" level="h4" %}}
+
+In most cases, headers extraction and injection are transparent. There are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In that case, you can add a custom trace using the following code:
+
+```csharp
+var spanContextExtractor = new SpanContextExtractor();
+var parentContext = spanContextExtractor.Extract(headers, (headers, key) => GetHeaderValues(headers, key));
+var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext };
+using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
+```
+
+Provide the `GetHeaderValues` method. The way this method is implemented depends on the structure that carries `SpanContext`.
+
+Here are some examples:
+
+```csharp
+// Confluent.Kafka
+IEnumerable<string> GetHeaderValues(Headers headers, string name)
+{
+    if (headers.TryGetLastBytes(name, out var bytes))
+    {
+        try
+        {
+            return new[] { Encoding.UTF8.GetString(bytes) };
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+    }
+
+    return Enumerable.Empty<string>();
+}
+
+// RabbitMQ
+IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string name)
+{
+    if (headers.TryGetValue(name, out object value) && value is byte[] bytes)
+    {
+        return new[] { Encoding.UTF8.GetString(bytes) };
+    }
+
+    return Enumerable.Empty<string>();
+}
+
+// SQS
+public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAttributeValue> headers, string name)
+{
+    // For SQS, there are a maximum of 10 message attribute headers,
+    // so the Datadog headers are combined into one header with the following properties:
+    // - Key: "_datadog"
+    // - Value: MessageAttributeValue object
+    //   - DataType: "String"
+    //   - StringValue: <JSON map with key-value headers>
+    if (headers.TryGetValue("_datadog", out var messageAttributeValue)
+        && messageAttributeValue.StringValue is string jsonString)
+    {
+        var datadogDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
+        if (datadogDictionary.TryGetValue(name, out string value))
+        {
+            return new[] { value };
+        }
+    }
+    return Enumerable.Empty<string>();
+}
+```
+
+When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
+
+If you need to propagate trace context manually (for libraries that are not instrumented automatically, like the WCF client), you can use the `SpanContextInjection` API. Here is an example for WCF where `this` is the WCF client:
+
+```csharp
+
+using (OperationContextScope ocs = new OperationContextScope(this.InnerChannel))
+{
+  var spanContextInjector = new SpanContextInjector();
+  spanContextInjector.Inject(OperationContext.Current.OutgoingMessageHeaders, SetHeaderValues, Tracer.Instance.ActiveScope?.Span?.Context);
+}
+
+
+void SetHeaderValues(MessageHeaders headers, string name, string value)
+{
+    MessageHeader header = MessageHeader.CreateHeader(name, "datadog", value);
+    headers.Add(header);
+}
+```
+
+{{% /collapse-content %}}
 
 [1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
-[6]: /tracing/trace_collection/trace_context_propagation/dotnet
 
 {{% /tab %}}
 
