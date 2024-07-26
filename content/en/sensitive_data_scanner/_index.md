@@ -216,6 +216,32 @@ To add scanning rules, perform the following steps:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Excluded namespaces
+
+There are reserved keywords that the Datadog platform requires for functionality. If any of these words are in a log that is being scanned, the 30 characters after the matched word are ignored and not redacted. For example, what comes after the word `date` in a log is usually the event timestamp. If the timestamp is accidentally redacted, that would result in issues with processing the log and being able to query it later. Therefore, the behavior for excluded namespaces is to prevent unintentionally redacting important information for product functionality.
+
+The excluded namespaces are:
+
+- `host`
+- `hostname`
+- `syslog.hostname`
+- `service`
+- `status`
+- `env`
+- `dd.trace_id`
+- `dd.span_id`
+- `@timestamp`
+- `timestamp`
+- `_timestamp`
+- `Timestamp`
+- `date`
+- `published_date`
+- `syslog.timestamp`
+- `error.fingerprint`
+- `x-datadog-parent-id`
+- `trace id`
+- `span id`
+
 ### Edit scanning rules
 
 {{< tabs >}}
