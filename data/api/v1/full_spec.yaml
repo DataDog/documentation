@@ -4323,6 +4323,7 @@ components:
       - profiled_host_usage
       - rum_browser_mobile_sessions_usage
       - rum_replay_sessions_usage
+      - sca_fargate_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
       - siem_analyzed_logs_add_on_usage
@@ -4395,6 +4396,7 @@ components:
       - PROFILED_HOST_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_USAGE
+      - SCA_FARGATE_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
       - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
@@ -8098,6 +8100,8 @@ components:
       - siem_ingested_bytes_percentage
       - workflow_executions_usage
       - workflow_executions_percentage
+      - sca_fargate_usage
+      - sca_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -8237,6 +8241,8 @@ components:
       - SIEM_INGESTED_BYTES_PERCENTAGE
       - WORKFLOW_EXECUTIONS_USAGE
       - WORKFLOW_EXECUTIONS_PERCENTAGE
+      - SCA_FARGATE_USAGE
+      - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -8744,6 +8750,16 @@ components:
           type: number
         rum_replay_sessions_usage:
           description: The total RUM Session Replay usage by tag(s).
+          format: double
+          type: number
+        sca_fargate_percentage:
+          description: The percentage of Software Composition Analysis Fargate task
+            usage by tag(s).
+          format: double
+          type: number
+        sca_fargate_usage:
+          description: The total Software Composition Analysis Fargate task usage
+            by tag(s).
           format: double
           type: number
         sds_scanned_bytes_percentage:
@@ -19493,6 +19509,17 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner over
             all hours in the current date for all organizations.
@@ -20199,6 +20226,17 @@ components:
           description: Shows the sum of all browser and mobile RUM units over all
             hours in the current date for the given org (To be deprecated on October
             1st, 2024).
+          format: int64
+          type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -20942,6 +20980,16 @@ components:
           description: Shows the sum of all browser and mobile RUM units over all
             hours in the current month for all organizations (To be deprecated on
             October 1st, 2024).
+          format: int64
+          type: integer
+        sca_fargate_count_avg_sum:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm_sum:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current months for all organizations.
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
