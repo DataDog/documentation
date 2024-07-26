@@ -38601,6 +38601,8 @@ paths:
       x-menu-order: 13
       x-undo:
         type: idempotent
+    x-merge-override:
+      patch: true
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
