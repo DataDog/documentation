@@ -34025,22 +34025,32 @@ paths:
 
         - Service Level Objectives: `slo`
 
+        - Synthetics Global Variable: `synthetics-global-variable`
+
+        - Synthetics Test: `synthetics-test`
+
+        - Synthetics Private Location: `synthetics-private-location`
+
 
         #### Supported relations for resources
 
-        Resource Type            | Supported Relations
+        Resource Type               | Supported Relations
 
-        -------------------------|--------------------------
+        ----------------------------|--------------------------
 
-        Dashboards               | `viewer`, `editor`
+        Dashboards                  | `viewer`, `editor`
 
-        Notebooks                | `viewer`, `editor`
+        Notebooks                   | `viewer`, `editor`
 
-        Powerpacks               | `viewer`, `editor`
+        Powerpacks                  | `viewer`, `editor`
 
-        Security Rules           | `viewer`, `editor`
+        Security Rules              | `viewer`, `editor`
 
-        Service Level Objectives | `viewer`, `editor`'
+        Synthetics Global Variable  | `viewer`, `editor`
+
+        Synthetics Test             | `viewer`, `editor`
+
+        Synthetics Private Location | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
