@@ -25,7 +25,7 @@ Si experimentas un comportamiento inesperado al utilizar Datadog Application Sec
 
 ## Límites de frecuencias de ASM
 
-Las trazas ASM tienen un límite de frecuencia de 100 trazas por segundo. Las trazas enviadas más allá del límite no se informan. Si necesitas cambiar el límite, ponte en contacto con el [servicio de asistencia de Datadog][1].
+Las trazas (traces) ASM tienen un límite de frecuencia de 100 trazas por segundo. Las trazas enviadas más allá del límite no se informan. Si necesitas cambiar el límite, ponte en contacto con el [servicio de asistencia de Datadog][1].
 
 ## ASM no detecta ninguna traza de seguridad
 
@@ -36,7 +36,7 @@ Existe una serie de pasos que deben ejecutarse correctamente para que la informa
 Para comprobar si ASM se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
 
 1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
-2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando ASM. Si la métrica existe, los servicios se informan mediante las etiquetas de métricas `host` y `service`.
+2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando ASM. Si la métrica existe, los servicios se informan mediante las etiquetas (tags) de métricas `host` y `service`.
 3. Selecciona la métrica y busca `service` en la sección **Tags** (Etiquetas) para ver qué servicios están ejecutando ASM.
 
 Si no ves `datadog.apm.appsec_host`, comprueba las [instrucciones en la aplicación][3] para confirmar que se han completado todos los pasos de la configuración inicial.
