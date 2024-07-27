@@ -159,7 +159,7 @@ En lugar de suministrar argumentos, puedes crear un archivo de configuración en
 
 ## Solucionar problemas de instrumentación de Lambda
 
-Para solucionar los problemas relacionados con la monitorización de Datadog en tus funciones de Lambda, ejecuta el comando `datadog-ci lambda flare` en la raíz del directorio de tu proyecto. Este comando recopila datos importantes sobre una función de Lambda, como las variables de entorno y el archivo de configuración. Estos archivos se envían al equipo de asistencia de Datadog a través de un ticket que coincide con el ID del caso de Zendesk especificado.
+Para solucionar los problemas relacionados con la monitorización de Datadog en tus funciones de Lambda, ejecuta el comando `datadog-ci lambda flare` en la raíz del directorio de tu proyecto. Este comando recopila datos importantes sobre una función de Lambda, como las variables de entorno y el archivo de configuración. Estos archivos luego se envían al equipo de asistencia de Datadog a través de un ticket que coincide con el ID del caso de Zendesk especificado.
 
 **Nota**: Este comando funciona independientemente de si instrumentaste tus funciones de Lambda mediante `datadog-ci lambda instrument`.
 
