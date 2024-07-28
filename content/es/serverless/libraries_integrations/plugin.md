@@ -235,7 +235,7 @@ complementos:
 
 Si encuentras un error en este paquete, ¡háznoslo saber presentando una incidencia! Antes de abrir un nuevo problema, busca los problemas existentes para evitar duplicaciones.
 
-Cuando abras un problema, incluye tu versión de Serverless Framework, Python/Node.js y la traza (trace) del stack si está disponible. También, incluye los pasos para la reproducción cuando corresponda.
+Cuando abras un problema, incluye tu versión de Serverless Framework, Python/Node.js y la traza del stack si está disponible. También, incluye los pasos para la reproducción cuando corresponda.
 
 También puedes abrir un problema para solicitar una función.
 
