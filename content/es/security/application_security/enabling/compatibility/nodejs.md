@@ -70,7 +70,7 @@ Los siguientes sistemas operativos son oficialmente compatibles con `dd-trace`. 
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
-- Rastreo distribuido para visualizar flujos de ataques en tus aplicaciones
+- Rastreo distribuido para visualizar flujos (flows) de ataques en tus aplicaciones
 
 ##### Notas sobre la función de seguridad de las aplicaciones
 - **El Análisis de la composición del software** es compatible con todos los marcos.
