@@ -15,6 +15,8 @@ cascade:
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 
+{{< img src="service_management/oncall/oncall_overview.png" alt="Overview of how Pages are routed. From a monitor, incident, security signal, or API call, the Page is sent to a Team (e.g. 'payments-team'), then to processing rules (e.g. based on priority) then to an escalation policy. There, it can be sent to a schedule or directly to a user." style="width:100%;" >}}
+
 ## Concepts
 
 - **Pages** represent something to get alerted for, such as a monitor, incident, or security signal. A Page can have a status of `Triggered`, `Acknowledged`, or `Resolved`.
