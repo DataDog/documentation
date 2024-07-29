@@ -45,10 +45,10 @@ To create a Quality Gates rule in Datadog:
 
    In the **Define rule conditions** section, click **New** and select `code vulnerabilities violations` from the dropdown menu. Then, select the `error` status type, select `above or equal to`, and enter the value of `1`. 
 
-1. Select whether the rule should block the pipeline when it fails. Non-blocking rules are helpful when you roll out a new rule and want to verify its behavior before making it blocking.
-1. Select the time window over which the query is evaluated.
 1. Specify a rule name that describes the rule that you are creating.
-1. Integrate Quality Gates into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-quality-gates-in-your-cicd-pipeline). 
+1. Select whether the rule should block the pipeline when it fails. Non-blocking rules are helpful when you roll out a new rule and want to verify its behavior before making it blocking.
+1. Integrate the Quality Gate rule into your build configuration by including the [`datadog-ci gate evaluate` command](#integrate-quality-gates-in-your-cicd-pipeline).
+1. Enable a [GitHub status check](#enable-github-check-creation) for your Quality Gate rule by setting the appropriate permissions (such as `Checks: Write`) in your GitHub apps. To set this check as blocking in your pull requests, you must click the **Required** checkbox in your GitHub app's [Protected Branches settings][14].
 1. Click **Create Rule**.
 
 ### Integrate Quality Gates in your CI/CD pipeline
@@ -101,17 +101,7 @@ Check the command logs to see the overall gate evaluation status and information
 
 {{< img src="ci/datadog_ci_gate_evaluate_logs.png" alt="Datadog-ci gate evaluate logs" style="width:100%;">}}
 
-## Manage rules
-
-You can edit and delete Quality Gates rules by hovering over a rule on the [**Quality Gates Rules** page][2]. 
-
-{{< img src="quality_gates/setup/delete.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
-
-Alternatively, click on a rule from the list and click the **Edit**, **Clone**, or **Delete** icons.
-
-{{< img src="quality_gates/setup/edit_clone.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
-
-## Enable GitHub check creation
+### Enable GitHub check creation
 
 You can automatically create a [GitHub check][9] for each rule evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. When this feature is enabled, the evaluation results appear directly in GitHub.
 
@@ -123,6 +113,16 @@ To enable GitHub Checks:
 After the permission is granted, you can see the checks in GitHub.
 
 **Note**: Re-running a check does not re-run the corresponding Quality Gates rule.
+
+## Manage rules
+
+You can edit and delete Quality Gates rules by hovering over a rule on the [**Quality Gates Rules** page][2]. 
+
+{{< img src="quality_gates/setup/delete.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
+
+Alternatively, click on a rule from the list and click the **Edit**, **Clone**, or **Delete** icons.
+
+{{< img src="quality_gates/setup/edit_clone.png" alt="Edit, clone, or delete a Quality Gates rule" style="width:100%;">}}
 
 ## Permissions
 
@@ -147,3 +147,4 @@ For more information, see the [RBAC Permissions documentation][1].
 [11]: https://docs.datadoghq.com/integrations/github/
 [12]: /getting_started/site/
 [13]: /quality_gates/guide/understanding_rule_scopes
+[14]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches

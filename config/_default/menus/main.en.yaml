@@ -234,16 +234,21 @@ menu:
       url: getting_started/intelligent_test_runner/
       parent: getting_started
       weight: 27
+    - name: Code Analysis
+      identifier: getting_started_code_analysis
+      url: getting_started/code_analysis/
+      parent: getting_started
+      weight: 28
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
       parent: getting_started
-      weight: 28
+      weight: 29
     - name: Support
       identifier: getting_started_support
       url: getting_started/support/
       parent: getting_started
-      weight: 29
+      weight: 30
     - name: Glossary
       url: glossary/
       pre: features
@@ -709,16 +714,21 @@ menu:
       identifier: otel_instrumentation_libraries
       parent: otel_interoperability
       weight: 604
+    - name: Environment Variable Configuration
+      url: /opentelemetry/interoperability/environment_variable_support
+      identifier: otel_env_var_configuration
+      parent: otel_interoperability
+      weight: 605
     - name: Correlate RUM and Traces
       url: /real_user_monitoring/platform/connect_rum_and_traces/#opentelemetry-support
       identifier: otel_rum
       parent: otel_interoperability
-      weight: 605
+      weight: 606
     - name: Correlate Logs and Traces
       url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
       identifier: otel_logs
       parent: otel_interoperability
-      weight: 606
+      weight: 607
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -2296,26 +2306,31 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 401
+    - name: Events
+      url: service_management/app_builder/events/
+      parent: app_builder
+      identifier: app_builder_events
+      weight: 5
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 5
+      weight: 6
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
-      weight: 6
+      weight: 7
     - name: Private Actions
       url: service_management/app_builder/private_actions/
       parent: app_builder
       identifier: app_builder_private_actions
-      weight: 7
+      weight: 8
     - name: Private Action Credentials
       url: service_management/app_builder/private_actions/private_action_credentials/
       parent: app_builder_private_actions
       identifier: app_builder_private_actions_creds
-      weight: 701
+      weight: 801
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -2846,41 +2861,51 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
       weight: 6
+    - name: Multisource Querying
+      url: cloud_cost_management/multisource_querying
+      parent: cloud_cost
+      identifier: cloud_cost_multisource_querying
+      weight: 7
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
-      weight: 7
+      weight: 8
+    - name: Tag Explorer
+      url: cloud_cost_management/tag_explorer
+      parent: cloud_cost
+      identifier: cloud_cost_tag_explorer
+      weight: 9
     - name: Container Cost Allocation
       url: cloud_cost_management/container_cost_allocation
       parent: cloud_cost
       identifier: cloud_cost_container_cost_allocation
-      weight: 8
+      weight: 10
     - name: AWS
       url: cloud_cost_management/container_cost_allocation/?tab=aws
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
-      weight: 801
+      weight: 1001
     - name: Azure
       url: cloud_cost_management/container_cost_allocation/?tab=azure
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_azure
-      weight: 802
+      weight: 1002
     - name: Google Cloud
       url: cloud_cost_management/container_cost_allocation/?tab=google
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_google
-      weight: 803
+      weight: 1003
     - name: Cost Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 9
+      weight: 11
     - name: Cost Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 10
+      weight: 12
     - name: APM
       url: tracing/
       pre: apm
@@ -4611,46 +4636,51 @@ menu:
       url: logs/explorer/facets/
       parent: log_explorer
       weight: 505
+    - name: Calculated Fields
+      identifier: log_explorer_calculated_fields
+      url: logs/explorer/calculated_fields/
+      parent: log_explorer
+      weight: 506
     - name: Analytics
       identifier: log_explorer_analytics
       url: logs/explorer/analytics/
       parent: log_explorer
-      weight: 506
+      weight: 507
     - name: Patterns
       identifier: log_explorer_patterns
       url: logs/explorer/analytics/patterns/
       parent: log_explorer
-      weight: 507
+      weight: 508
     - name: Transactions
       identifier: log_explorer_transactions
       url: logs/explorer/analytics/transactions/
       parent: log_explorer
-      weight: 508
+      weight: 509
     - name: Visualize
       identifier: log_explorer_visualize
       url: logs/explorer/visualize/
       parent: log_explorer
-      weight: 509
+      weight: 510
     - name: Log Side Panel
       identifier: log_explorer_side_panel
       url: logs/explorer/side_panel/
       parent: log_explorer
-      weight: 510
+      weight: 511
     - name: Export
       identifier: log_explorer_export
       url: logs/explorer/export/
       parent: log_explorer
-      weight: 511
+      weight: 512
     - name: Watchdog Insights for Logs
       identifier: log_explorer_watchdog_insights
       url: logs/explorer/watchdog_insights/
       parent: log_explorer
-      weight: 512
+      weight: 513
     - name: Saved Views
       identifier: log_explorer_saved_views
       url: logs/explorer/saved_views/
       parent: log_explorer
-      weight: 513
+      weight: 514
     - name: Workspaces
       url: logs/workspaces/
       parent: log_management
