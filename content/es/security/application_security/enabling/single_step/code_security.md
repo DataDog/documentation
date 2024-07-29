@@ -274,7 +274,7 @@ Ejecuta los siguientes comandos y reinicia el servicio para dejar de inyectar la
 1. Establece la etiqueta `admission.datadoghq.com/enabled:` en `"false"` para la especificación del pod:
 
    ```yaml
-   espec:
+   spec:
      template:
        metadata:
          labels:
