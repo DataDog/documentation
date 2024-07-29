@@ -81,11 +81,13 @@ const initCodeTabs = () => {
     }
 
     const scrollToAnchor = (tab, anchorname) => {
-        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
+        const anchor = document.querySelector(`[data-lang='${tab}'] ${anchorname}`);
         console.log('tab: ', tab);
         console.log('scrolling to anchor: ', anchor);
         if (anchor) {
             anchor.scrollIntoView();
+        } else {
+            document.querySelector(anchorname).scrollIntoView();
         }
     }
 
@@ -96,9 +98,10 @@ const initCodeTabs = () => {
 
             if (selectedLanguageTab) {
                 activateCodeTab(selectedLanguageTab)
-
                 if (window.location.hash) {
-                    scrollToAnchor(tabQueryParameter, window.location.hash);
+                    setTimeout(function () {
+                        scrollToAnchor(tabQueryParameter, window.location.hash);
+                    }, 300);
                 }
             }else{
                 activateCodeTab(firstTab)
