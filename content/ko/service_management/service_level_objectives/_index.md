@@ -312,7 +312,7 @@ SLO 캘린더 보기는 [SLO 상태 페이지][2]에서 사용할 수 있습니�
 
 {{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="SLO CSV 내보내기 기능 시도">}}
 CSV 내보내기 기능은 비공개 베타 버전입니다. 양식을 작성하여 액세스를 요청하세요.
-{< /callout >}}
+{{< /callout >}}
 
 '주별' 또는 '월별' 캘린더 보기로 전환하면 [SLO 상태 페이지][2]에서 SLO CSV 내보내기 기능을 사용할 수 있습니다. 이러한 보기에서 새로운 'CSV로 내보내기' 옵션에 액세스하여 다음 정보가 포함된 과거 SLO 데이터의 CSV를 다운로드할 수 있습니다:
 
