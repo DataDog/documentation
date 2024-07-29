@@ -117,7 +117,7 @@ func CriticalPathFunction(ctx context.Context) {
 
 You can use the [Tracer library][4] in your application even if Orchestrion is in use. This can be used to instrument features that Orchestrion does not currently support.
 
-If Orchestrion get support of this feature at a later point, the manual call may result in duplicated spans being present in the traces, which cane asily be resolved by removing the manual calls that are no longer needed. Refer to Orchestrion [release notes][9] to know about new features.
+If Orchestrion gets support for this feature at a later point, the manual call may result in duplicated spans being present in the traces, which can easily be resolved by removing the manual calls that are no longer needed. Refer to Orchestrion [release notes][9] to learn about new features.
 
 ## Further Reading
 
