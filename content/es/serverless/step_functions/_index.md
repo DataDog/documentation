@@ -35,7 +35,7 @@ Cuando el [rastreo de Step Function está activado][1], puedes utilizar una repr
 
 
 ### Reduce el tiempo de depuración de Step Function con trazas de una ejecución detallada
-Puedes ver trazas  de principio a fin para una sola ejecución de Step Function y sus logs, errores y métricas asociados, lo cual te permite identificar problemas en tu lógica de Step Function. Los tramos (spans) de Step Function también contienen metadatos detallados para entradas y salidas de pasos, trazas Lambda asociadas y duración de pasos que te ayuda a reproducir errores y solucionar cuellos de botella.
+Puedes ver trazas de principio a fin para una sola ejecución de Step Function y sus logs, errores y métricas asociados, lo cual te permite identificar problemas en tu lógica de Step Function. Los tramos (spans) de Step Function también contienen metadatos detallados para entradas y salidas de pasos, trazas Lambda asociadas y una duración de los pasos que te ayuda a reproducir errores y solucionar cuellos de botella.
 
 Para empezar, sigue las [instrucciones de instalación][1].
 
