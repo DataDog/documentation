@@ -17,18 +17,20 @@ further_reading:
 
 ### What are Datadog-hosted scans?
 
-When using a Datadog-hosted scan, Datadog scans your code within the Datadog infrastructure. Datadog acts
-as a CI pipeline: it clones your code, runs the analyzer, and uploads the results for you.
+With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline.
+Datadog clones your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results for you.
 
-With Datadog-hosted scans, you do not need to do the heavy lifting and configure any CI pipeline to run the analyzer.
 
-## Static analysis
+The benefit of Datadog-hosted scans is that no configuration is needed in your CI pipeline(s) to use Code Analysis.
+
+
+## Static Analysis
 
 ### Can results be imported into Datadog from other analyzers?
 
-While the [Datadog Static Analyzer tool][4] is recommended, Datadog supports the ingestion of files that enforce the SARIF format.
+While the [Datadog Static Analyzer][4] is recommended, Datadog supports the ingestion of files that adhere to SARIF format.
 
-At this time, we tested our API with the following tools:
+Ingestion of SARIF files is verified for the following third-party tools:
 
  - [gitleaks][1]
  - [semgrep][2]
@@ -49,7 +51,7 @@ npm install -g @datadog/datadog-ci
 datadog-ci sarif upload --service "your-app" --env "ci" /path/to/sarif-file.json
 ```
 
-If you want to import using a tool that is not supported currently, contact your Customer Success Manager.
+If you want to import using a tool that is not supported, contact your Customer Success Manager.
 
 ### Can custom rules be used?
 
@@ -57,30 +59,29 @@ Custom rule availability is planned for all beta customers at the end of Q3 2024
 
 ### Do you always scan all the files at every push or commit?
 
-Scans on the default branches are always full scans.
-
-Scans on non-default branches use *diff-aware* scans. With diff-aware scans, the analyzer only
+By default, scans on non-default branches use *diff-aware*. With diff-aware scans, the analyzer only
 scans the files that changed between the current branch and the default branch. Diff-aware scans
-last seconds while full-scans may take a few minutes (depending on the codebase).
+last seconds, while full-scans may take a few minutes (depending on the codebase).
 
-In order for diff-aware to scan, you need to be using the Datadog platform.
+You must be using Datadog's analyzer to enable diff-aware scans.
 
-### What is Datadog Static Analyzer on the OWASP benchmark?
+### What is Datadog's OWASP benchmark score for Static Analysis?
 
-Our Static Analyzer has been tested against the OWASP benchmark with a score of 44. We periodically update the results against the benchmark and publish the results in the [static analyzer documentation][5].
+Datadog's Static Analyzer has been tested against the OWASP benchmark with a score of 44.
+The analyzer is periodically checked against the benchmark and updated results are published to the [static analyzer documentation][5].
 
-### Is the analyzer open-source?
+### Is the analyzer open source?
 
-The Datadog Static Analyzer is available under an open-source license and the code is [available on Github][4].
+The Datadog Static Analyzer is available under an open source license and the code is [available on GitHub][4].
 
 ## Software Composition Analysis
 
-### Can I import any SBOM file into Datadog?
+### What SBOM format Datadog supports?
 
-While the [Datadog SBOM generator tool][6] is recommended, Datadog supports the ingestion of any SBOM files.
+While the [Datadog SBOM generator][6] is recommended, Datadog supports the ingestion of any SBOM files.
 Datadog only supports SBOM files with the Cyclone-DX 1.4 and Cyclone-DX 1.5 formats.
 
-At this time, we tested our CLI tools with the following tools:
+Ingestion of SBOM files is verified for the following third-party tools:
 
 - [osv-scanner][6]
 - [trivy][7]
