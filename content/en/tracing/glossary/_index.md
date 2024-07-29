@@ -1,6 +1,5 @@
 ---
 title: APM Terms and Concepts
-kind: documentation
 aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
@@ -40,8 +39,10 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
+| [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
 
 ## Services
 
@@ -81,6 +82,12 @@ A trace is used to track the time spent by an application processing a request a
 
 {{< img src="tracing/visualization/trace_view.png" alt="trace view" >}}
 
+## Trace context propagation
+
+Trace context propagation is the method of passing trace identifiers between services in a distributed system. It enables Datadog to stitch together individual spans from different services into a single distributed trace. Trace context propagation works by injecting identifiers, such as the trace ID and parent span ID, into HTTP headers as the request flows through the system. The downstream service then extracts these identifiers and continues the trace. This allows the Datadog to reconstruct the full path of a request across multiple services.
+
+For more information, see the [propagating the trace context][27] for your application's language.
+
 ## Retention filters
 
 [Set tag-based filters][19] in the UI to index spans for 15 days for use with [Trace Search and Analytics][14].
@@ -88,6 +95,16 @@ A trace is used to track the time spent by an application processing a request a
 ## Ingestion controls
 
 [Send 100% of traces][20] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
+
+## Instrumentation
+
+Instrumentation is the process of adding code to your application to capture and report observability data to Datadog, such as traces, metrics, and logs. Datadog provides instrumentation libraries for various programming languages and frameworks.
+
+You can automatically instrument your application when you install the Datadog Agent with [Single Step Instrumentation][24] or when you [manually add Datadog tracing libraries][25] to your code.
+
+You can use custom instrumentation by embedding tracing code directly into your application code. This allows you to programmatically create, modify, or delete traces to send to Datadog.
+
+To learn more, read [Application Instrumentation][26].
 
 ## Further Reading
 
@@ -115,3 +132,7 @@ A trace is used to track the time spent by an application processing a request a
 [21]: /glossary/#span
 [22]: /glossary/
 [23]: /monitors/types/apm/
+[24]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+[25]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[26]: /tracing/trace_collection/
+[27]: /tracing/trace_collection/trace_context_propagation

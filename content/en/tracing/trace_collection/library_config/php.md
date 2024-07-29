@@ -1,6 +1,5 @@
 ---
 title: Configuring the PHP Tracing Library
-kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -9,7 +8,7 @@ further_reading:
   tag: "Blog"
   text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Source code"
 - link: "/tracing/trace_collection/trace_context_propagation/php/"
   tag: "Documentation"
@@ -20,6 +19,9 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Advanced Usage"
+- link: "/opentelemetry/interoperability/environment_variable_support"
+  tag: "Documentation"
+  text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -32,7 +34,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ### Apache
 
-For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -147,6 +149,12 @@ Enable the exception profile type. Added in version `0.92.0` and GA
 in version `0.96.0`.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
+`DD_PROFILING_EXCEPTION_MESSAGE_ENABLED`
+: **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
+**Default**: `0`<br>
+Enable the collection of exception messages with exception samples.<br><br>
+**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
+
 `DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
 : **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
 **Default**: `100`<br>
@@ -179,6 +187,11 @@ The default app name.
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
+`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
+: **INI**: `datadog.trace.128_bit_traceid_generation_enabled`<br>
+**Default**: `true`<br>
+When true, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
 **Default**: `0`<br>
@@ -191,20 +204,10 @@ When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal for
 **Default**: `false`<br>
 When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the tracer sends uncaught exception metrics upon segfaults.
 
-`DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
-: **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
-**Default**: `5000`<br>
-IPC-based configurable circuit breaker retry time (in milliseconds).
-
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **INI**: `datadog.trace.agent_connect_timeout`<br>
 **Default**: `100`<br>
 The Agent connection timeout (in milliseconds).
-
-`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES`
-: **INI**: `datadog.trace.agent_max_consecutive_failures`<br>
-**Default**: `3`<br>
-IPC-based configurable circuit breaker max consecutive failures.
 
 `DD_TRACE_AGENT_PORT`
 : **INI**: `datadog.trace.agent_port`<br>
@@ -363,6 +366,11 @@ The sampling rate for the traces, a number between `0.0` and `1.0`. The default 
 **Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
 
+`DD_TRACE_SAMPLING_RULES_FORMAT`
+: **INI**: `datadog.trace.sampling_rules_format`<br>
+**Default**: `glob`<br>
+Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
+
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
 **Default**: `0`<br>
@@ -465,14 +473,8 @@ A comma-separated list of WordPress action hooks to be instrumented. This featur
 
 `DD_TRACE_WORDPRESS_CALLBACKS`
 : **INI**: `datadog.trace.wordpress_callbacks`<br>
-**Default**: `false`<br>
+**Default**: `true` for PHP tracer >= v1.0<br>
 Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
-
-`DD_TRACE_WORDPRESS_ENHANCED_INTEGRAION`
-: **INI**: `datadog.trace.wordpress_enhanced_integration`<br>
-**Default**: `false`<br>
-Enables the enhanced WordPress integration. **This integration is in public beta**. Added in version `0.91.0`.
-
 
 `DD_DBM_PROPAGATION_MODE`
 : **INI**: `datadog.dbm_propagation_mode`<br>
@@ -486,6 +488,43 @@ The `'full'` option enables connection between database spans with database quer
 **Default**: `true`<br>
 Datadog may collect [environmental and diagnostic information about your system][16] to improve the product. When false, this telemetry data will not be collected.
 
+`DD_OPENAI_SERVICE`
+: **INI**: `datadog.openai.service`<br>
+**Default**: `DD_SERVICE`<br>
+The service name reported by default for OpenAI requests.
+
+`DD_OPENAI_LOGS_ENABLED` (beta)
+: **INI**: `datadog.openai.logs_enabled`<br>
+**Default**: `false`<br>
+Enable collection of prompts and completions as logs. You can adjust the rate of prompts and completions collected using the sample rate configuration described below.
+
+`DD_OPENAI_METRICS_ENABLED`
+: **INI**: `datadog.openai.metrics_enabled`<br>
+**Default**: `true`<br>
+Enable collection of OpenAI metrics.<br>
+If the Datadog Agent is configured to use a non-default StatsD hostname or port, use `DD_DOGSTATSD_URL` to configure the OpenAI metrics collection.
+
+`DD_OPENAI_SPAN_CHAR_LIMIT` (beta)
+: **INI**: `datadog.openai.span_char_limit`<br>
+**Default**: `128`<br>
+Configure the maximum number of characters for the following data within span tags:
+
+  - Prompt inputs and completions
+  - Message inputs and completions
+  - Embedding inputs
+
+Text exceeding the maximum number of characters is truncated to the character limit and has `...` appended to the end.
+
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+: **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
+**Default**: `1.0`<br>
+Configure the sample rate for the collection of prompts and completions as span tags.
+
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+: **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
+**Default**: `0.1`<br>
+Configure the sample rate for the collection of prompts and completions as logs.
+
 #### Integration names
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
@@ -493,7 +532,7 @@ The table below specifies the default service names for each integration. Change
 Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
 | Integration   | Service Name    |
-| ------------- | --------------- |
+|---------------| --------------- |
 | AMQP          | `amqp`          |
 | CakePHP       | `cakephp`       |
 | CodeIgniter   | `codeigniter`   |
@@ -511,6 +550,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | MongoDB       | `mongodb`       |
 | Mysqli        | `mysqli`        |
 | Nette         | `nette`         |
+| OpenAI        | `openai`        |
 | PCNTL         | `pcntl`         |
 | PDO           | `pdo`           |
 | PhpRedis      | `phpredis`      |
@@ -526,8 +566,6 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 #### Map resource names to normalized URI
 
 <div class="alert alert-warning">
-<strong>Deprecation notice:</strong> As of version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a> the legacy setting <code>DD_TRACE_RESOURCE_URI_MAPPING</code> is deprecated. It still works for the foreseeable future but it is strongly encouraged that you use the new settings outlined in this paragraph to avoid issues when legacy support is removed.
-
 Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
 </div>
 
@@ -597,7 +635,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[3]: /tracing/setup/nginx/#nginx-and-fastcgi
+[3]: /tracing/trace_collection/proxy_setup/?tab=nginx
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/
@@ -613,3 +651,4 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [17]: /tracing/other_telemetry/connect_logs_and_traces/php
 [18]: /tracing/trace_collection/otel_instrumentation/php/
 [19]: /tracing/trace_collection/compatibility/php/
+[20]: /opentelemetry/interoperability/environment_variable_support

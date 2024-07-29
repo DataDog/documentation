@@ -29,7 +29,7 @@ guid: 51386802-4502-4991-b592-27eff1ca111c
 integration_id: pgbouncer
 integration_title: PGBouncer
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: pgbouncer.

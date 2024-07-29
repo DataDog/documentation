@@ -41,7 +41,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-opentracing-cpp
   tag: ソースコード
   text: Datadog OpenTracing C++ クライアント
-kind: documentation
 title: プロキシのトレース
 ---
 

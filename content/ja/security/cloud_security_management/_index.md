@@ -44,7 +44,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloud-security-study-learnings/
   tag: ブログ
   text: State of Cloud Security 調査から得られたキーポイント
-kind: documentation
 title: Cloud Security Management
 ---
 

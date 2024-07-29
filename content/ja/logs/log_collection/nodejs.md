@@ -20,7 +20,6 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: documentation
 title: Node.js ログ収集
 ---
 

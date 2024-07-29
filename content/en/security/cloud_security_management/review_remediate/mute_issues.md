@@ -1,13 +1,21 @@
 ---
 title: Mute Issues in Cloud Security Management
-kind: documentation
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore out-of-the-box security detection rules"
 aliases:
   - /security/cloud_security_management/mute_issues
+products:
+  - name: CSM Misconfigurations
+    url: /security/cloud_security_management/misconfigurations/
+    icon: cloud-security-management
+  - name: CSM Identity Risks
+    url: /security/cloud_security_management/identity_risks/
+    icon: cloud-security-management
 ---
+
+{{< product-availability >}}
 
 There may be times when a misconfiguration, issue, or identity risk doesn't match the use case for your business, or you choose to accept it as a known risk. To ignore them, you can mute the underlying misconfiguration, issue, or identity risk for the impacted resources.
 

@@ -1,7 +1,6 @@
 ---
 code_lang: ruby
 code_lang_weight: 30
-kind: documentation
 title: Ruby 互換性要件
 type: multi-code-lang
 ---

@@ -1,6 +1,5 @@
 ---
 title: Send AWS Services Logs With The Datadog Lambda Function
-kind: documentation
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -47,7 +46,8 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [Verified Access][37]              | [Enable Verified Access logs][38]                                                                              | [Manual][39] log collection.                                                                                                 |
 | [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] log collection.                                                                                                 |
 | [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
-| [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] log collection.                                                                                                 |
+| [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                                                               |
+| [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] log collection.                                                                                                 |
 
 
 ## Set up triggers
@@ -310,3 +310,5 @@ You can also exclude or send only those logs that match a specific pattern by us
 [52]: /integrations/amazon_step_functions/
 [53]: /integrations/amazon_step_functions/#log-collection
 [54]: /integrations/amazon_step_functions/#send-logs-to-datadog
+[55]: /integrations/amazon_mwaa/
+[56]: /integrations/amazon_mwaa/#log-collection

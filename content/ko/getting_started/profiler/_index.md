@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/request-latency-profiling/
   tag: 블로그
   text: 프로파일링을 통한 요청 지연 시간 이해
-kind: 설명서
 title: 연속 프로파일러 시작하기
 ---
 

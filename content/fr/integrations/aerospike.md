@@ -5,16 +5,20 @@ assets:
   dashboards:
     Aerospike Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     metrics:
-      check: aerospike.uptime
+      check:
+      - aerospike.uptime
+      - aerospike.namespace.memory_free_pct
       metadata_path: metadata.csv
       prefix: aerospike.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10067
     source_type_name: Aerospike
   logs:
     source: aerospike
@@ -24,7 +28,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
@@ -33,9 +37,9 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 2.0.0
+integration_version: 2.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: aerospike
 public_title: Aerospike
@@ -47,7 +51,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   configuration: README.md#Setup
   description: Recueillez des statistiques sur les clusters et les espaces de nommage
@@ -58,6 +62,7 @@ tile:
   title: Aerospike
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
@@ -67,7 +72,7 @@ Recueillez des métriques de la base de données Aerospike en temps réel pour 
 - Visualiser et surveiller les états d'Aerospike
 - Être informé des failovers et des événements d'Aerospike
 
-## Implémentation
+## Formule et utilisation
 
 REMARQUE : l'intégration Aerospike actuelle est uniquement compatible avec le serveur Aerospike 4.9 ou ultérieur. Pour en savoir plus, consultez les [notes de version sur la bibliothèque client Python][1] (en anglais). Si vous utilisez une version antérieure du serveur Aerospike, il est tout de même possible de la surveiller avec l'Agent v7.29.0 ou une version antérieure.
 
@@ -75,12 +80,12 @@ REMARQUE : l'intégration Aerospike actuelle est uniquement compatible avec le 
 
 Le check Aerospike est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
-### Configuration
+### Dépannage de la solution Browser
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### SLO basés sur des métriques
 
 ##### Collecte de métriques
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
@@ -93,7 +98,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 **Remarque** : les versions 1.16.0+ de ce check utilisent [OpenMetrics][5] pour la collecte de métriques, ce qui nécessite Python 3. Pour les hosts ne pouvant pas utiliser Python 3, ou si vous souhaitez utiliser une ancienne version de ce check, consultez [cet exemple de configuration][6].
 
-##### Collecte de logs
+##### APM
 
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
@@ -137,7 +142,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                        |
 | `<CONFIG_INSTANCE>`  | `{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}` |
 
-##### Collecte de logs
+##### APM
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
@@ -156,18 +161,18 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [Lancez la sous-commande status de l'Agent][3] et cherchez `aerospike` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "aerospike" >}}
 
 
-### Checks de service
+### Aide
 
 **aerospike.can_connect**
 **aerospike.cluster_up**
 
-### Événements
+### Aide
 
 Aerospike n'inclut aucun événement.
 

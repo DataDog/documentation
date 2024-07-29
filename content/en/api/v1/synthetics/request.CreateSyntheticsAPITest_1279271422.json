@@ -34,13 +34,19 @@
         "request": {
           "method": "GET",
           "timeout": 10,
-          "url": "https://datadoghq.com"
+          "url": "https://datadoghq.com",
+          "httpVersion": "http2"
         },
         "retry": {
           "count": 5,
           "interval": 1000
         },
         "subtype": "http"
+      },
+      {
+        "name": "Wait",
+        "subtype": "wait",
+        "value": 1
       },
       {
         "name": "GRPC CALL",

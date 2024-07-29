@@ -1,6 +1,5 @@
 ---
 title: Further Configure the Datadog Agent on Kubernetes
-kind: documentation
 aliases:
     - /integrations/faq/gathering-kubernetes-events
     - /agent/kubernetes/event_collection
@@ -309,7 +308,7 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  clusterAgentToken: <DATADOG_CLUSTER_AGENT_TOKEN>
+    clusterAgentToken: <DATADOG_CLUSTER_AGENT_TOKEN>
 ```
 
 Alternatively, you can specify this token by referencing the name of an existing `Secret` and the data key containing this token:
@@ -324,9 +323,9 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  clusterAgentTokenSecret: 
-    secretName: <SECRET_NAME>
-    keyName: <KEY_NAME>
+    clusterAgentTokenSecret: 
+      secretName: <SECRET_NAME>
+      keyName: <KEY_NAME>
 ```
 
 **Note**: When set manually, this token must be 32 alphanumeric characters.
@@ -410,10 +409,10 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
 
-  clusterAgent:
+clusterAgent:
+  enabled: true
+  metricsProvider:
     enabled: true
-    metricsProvider:
-      enabled: true
 ```
 
 Then upgrade your Helm chart:

@@ -14,7 +14,7 @@ jobs:
     steps:
       - id: set-versions
         name: Load latest SDK versions
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
@@ -36,7 +36,7 @@ jobs:
             }))
             console.log(versions)
             return JSON.stringify(versions)
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Write version
         run: |-
           echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json
@@ -46,7 +46,7 @@ jobs:
           git add .
           git commit -m "Bump SDK"
           git push -f origin HEAD:refs/heads/sdk/versions
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         name: Propose change with latest versions
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}

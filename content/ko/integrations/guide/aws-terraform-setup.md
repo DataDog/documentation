@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: 블로그
   text: Terraform으로 Datadog 관리
-kind: 가이드
 title: Terraform과 AWS 통합
 ---
 

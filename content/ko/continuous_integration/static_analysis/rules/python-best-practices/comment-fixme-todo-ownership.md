@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: TODO 및 FIXME 코멘트에 소유권이 있도록 하기
 ---
 ## 메타데이터

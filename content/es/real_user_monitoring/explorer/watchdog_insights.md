@@ -14,7 +14,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: Documentación
   text: Descubre cómo buscar en el navegador RUM
-kind: documentación
 title: Watchdog Insights para RUM
 ---
 

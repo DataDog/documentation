@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: ドキュメント
   text: 計画と使用設定
-kind: ガイド
 title: Hourly および Monthly Usage Attribution API への移行
 ---
 

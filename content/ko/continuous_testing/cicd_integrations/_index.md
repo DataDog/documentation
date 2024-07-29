@@ -23,7 +23,6 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: 설명서
   text: 브라우저 테스트를 설정하는 방법 알아보기
-kind: 설명서
 title: 연속 테스트 및 CI/CD
 ---
 

@@ -16,7 +16,6 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: ドキュメント
   text: Datadog でインデックス化するログの量を制御する
-kind: documentation
 title: パース
 ---
 

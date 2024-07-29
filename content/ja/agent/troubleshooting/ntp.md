@@ -1,6 +1,5 @@
 ---
 title: Network Time Protocol (NTP) に関する問題
-kind: documentation
 aliases:
   - /ja/agent/faq/network-time-protocol-ntp-offset-issues
 ---

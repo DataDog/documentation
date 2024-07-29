@@ -11,7 +11,7 @@ SECRET_NAME=$2   # INPUT: Secret name of the DD_API_KEY
 
 # Install the agent
 DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
-DD_APM_INSTRUMENTATION_LANGUAGES=java DD_API_KEY=${DD_API_KEY} DD_INSTALL_ONLY=true DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl --retry 10 -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java DD_API_KEY=${DD_API_KEY} DD_INSTALL_ONLY=true DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl --retry 10 -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
 # Get instance data
 JOB_FLOW_ID=$(cat /mnt/var/lib/instance-controller/extraInstanceData.json | jq  -r ".jobFlowId")
@@ -44,12 +44,16 @@ EOF
 
 # Adding tags
 echo "tags:" | sudo tee --append /etc/datadog-agent/datadog.yaml
+echo "  - \"init_script_version:1\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"data_workload_monitoring_trial:true\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"cluster_name:${CLUSTER_NAME}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
+echo "  - \"cluster_id:${JOB_FLOW_ID}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"job_flow_id:${JOB_FLOW_ID}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"is_master_node:${IS_MASTER}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"instance_group_id:${INSTANCE_GROUP_ID}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 
+# Configure the agent to ensure metrics are attached with desired tags
+echo "expected_tags_duration: 10m" | sudo tee --append /etc/datadog-agent/datadog.yaml
 
 if [[ "$IS_MASTER" = true ]]; then
   HOST=$(hostname -f)

@@ -1,6 +1,6 @@
 ---
 title: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
-kind: guide
+
 further_reading:
   - link: /tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"

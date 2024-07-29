@@ -8,7 +8,6 @@ further_reading:
 - link: /security/notifications/
   tag: ドキュメント
   text: セキュリティ通知について
-kind: documentation
 title: 変数
 ---
 

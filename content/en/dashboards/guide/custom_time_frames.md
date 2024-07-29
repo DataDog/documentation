@@ -1,11 +1,10 @@
 ---
 title: Custom Time Frames
-kind: guide
 ---
 
 ## Overview
 
-<div class="alert alert-info">Queries are run in UTC time, but the query time frame is selected according to your <strong>browser's time zone</strong>. Toggle between displaying the default time zone or UTC from the dashboard configure action. For more information, see the <a href="/dashboards/#display-utc-time">Dashboard Settings documentation</a>.</div>
+<div class="alert alert-info">Queries are run in UTC time, but the query time frame is selected according to your <strong>browser's time zone</strong>. Toggle between displaying the default time zone or UTC from the dashboard configure action. For more information, see the <a href="/dashboards/configure/#configuration-actions">Dashboard configuration documentation</a>.</div>
 
 Many views in Datadog can be scoped to a specific time frame. Time controls include a list of common time frames and a calendar picker for quick selection.
 

@@ -17,7 +17,7 @@ integration_id: netlify
 integration_title: Netlify
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: netlify
 public_title: Datadog-Netlify インテグレーション

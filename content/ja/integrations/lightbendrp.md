@@ -11,7 +11,7 @@ integration_id: lightbendrp
 integration_title: Lightbend
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: lightbendrp
 public_title: Datadog-Lightbend インテグレーション
@@ -19,6 +19,7 @@ short_description: Akka ベースのアプリケーションのアクターお�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Lightbend Reactive Platform ダッシュボード" popup="true">}}
 
 ## 概要

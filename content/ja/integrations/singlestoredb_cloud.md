@@ -17,6 +17,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10373
     source_type_name: SinglestoreDB Cloud
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.singlestore.com
   name: Singlestore
@@ -33,7 +34,7 @@ integration_id: singlestoredb-cloud
 integration_title: SingleStoreDB Cloud
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: singlestoredb_cloud
 public_title: SingleStoreDB Cloud

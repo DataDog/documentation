@@ -1,6 +1,5 @@
 ---
 title: "EventBridge Bus Component"
-kind: documentation
 ---
 
 ## Overview

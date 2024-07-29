@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: Azure 통합 빌링
 ---
 

@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
-kind: ガイド
 title: 機密ログデータの管理
 ---
 

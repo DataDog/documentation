@@ -9,7 +9,6 @@ further_reading:
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: Documentation
   text: 複数組織アカウントの管理
-kind: documentation
 title: コスト詳細
 ---
 

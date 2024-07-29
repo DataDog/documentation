@@ -411,11 +411,8 @@ window.addEventListener(
     'popstate',
     function (event) {
         setMobileNav();
-        if (event.state) {
-            loadPage(window.location.href);
-            closeNav();
-            getPathElement();
-        }
-    },
-    false
+        loadPage(window.location.href);
+        closeNav();
+        getPathElement();
+    }
 );

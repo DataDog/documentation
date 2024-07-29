@@ -2,7 +2,6 @@
 aliases:
 - /ja/monitors/service_level_objectives/burn_rate/
 description: モニターを使用して SLO のバーンレートを警告する
-kind: documentation
 title: バーンレートアラート
 ---
 {{< jqmath-vanilla >}}

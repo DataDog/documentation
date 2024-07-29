@@ -1,7 +1,7 @@
 ---
 integration_title: HDFS
 is_public: true
-kind: integration
+custom_kind: integration
 short_description: Surveillez l'utilisation des disques du cluster, les échecs de
   volume, les DataNodes morts, etc. more.
 ---

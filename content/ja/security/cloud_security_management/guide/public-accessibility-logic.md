@@ -6,7 +6,6 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-security-management
   tag: ドキュメント
   text: すぐに使える検出ルール
-kind: ガイド
 title: Datadog がリソースの公開状況を判断する方法
 ---
 

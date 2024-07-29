@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self hosted MySQL
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted MySQL.
 further_reading:
 - link: "/integrations/mysql/"
@@ -8,10 +7,6 @@ further_reading:
   text: "Basic MySQL Integration"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
@@ -292,7 +287,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html

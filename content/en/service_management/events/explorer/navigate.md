@@ -1,6 +1,5 @@
 ---
 title: Navigate the Explorer
-kind: Documentation
 ---
 
 {{< img src="service_management/events/explorer/navigate.png" alt="How to navigate the Events Explorer" style="width:100%;" >}}

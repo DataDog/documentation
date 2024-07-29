@@ -24,9 +24,8 @@ further_reading:
   tag: FAQ
   text: 로그 수집 문제 해결 가이드
 - link: /glossary/#tail
-  tag: 설정
+  tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 설명서
 title: C# 로그 수집
 ---
 
@@ -126,14 +125,14 @@ PM> Install-Package NLog
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <!--
-  https://github.com/nlog/nlog/wiki/Configuration-file
-  에서 로깅 규칙 및 출력 사용자 지정에 대한 정보를 확인하세요.
+로깅 규칙 및 출력 사용자 정의에 대한 자세한 내용은 
+https://github.com/nlog/nlog/wiki/Configuration-file을 참조하세요.
    -->
   <targets async="true">
-    <!-- Write logs as Json into a file -->
+    <!-- 로그를 Json으로 파일에 쓰기 -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
+        <attribute name="date" layout="${date:universalTime=true:format=o}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -142,7 +141,7 @@ PM> Install-Package NLog
 
   </targets>
   <rules>
-    <!-- Log all events to the json-file target -->
+    <!-- 모든 이벤트를 json-file 대상에 기록 -->
     <logger name="*" writeTo="json-file" minlevel="Trace" />
   </rules>
 </nlog>
@@ -293,9 +292,9 @@ JSON 형식으로 로깅할 때의 장점에도 불구하고 원시 문자열 �
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-
-3. [에이전트를 재시작합니다][5].
-4. [에이전트 상태 하위 명령][6]을 실행해 `Checks` 섹션에서 `csharp`를 찾아 로그가 Datadog로 잘 전송되었는지 확인합니다.
+3. Agent 사용자에게 로그 파일에 대한 읽기 액세스 권한이 있는지 확인하세요.
+4. [에이전트를 재시작합니다][5].
+5. [에이전트 상태 하위 명령][6]을 실행해 `Checks` 섹션에서 `csharp`를 찾아 로그가 Datadog로 잘 전송되었는지 확인합니다.
 
 로그가 JSON 형식이면 Datadog에서 자동으로 [로그 메시지 구문 분석][7]을 실행해 로그 특성을 추출합니다. [로그 익스플로러][8]를 사용해 로그를 확인하고 문제를 해결할 수 있습니다.
 

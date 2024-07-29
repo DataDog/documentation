@@ -1,6 +1,5 @@
 ---
 title: Correlating OpenTelemetry Traces and Logs
-kind: documentation
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 code_lang: opentelemetry
 type: multi-code-lang
@@ -12,7 +11,7 @@ further_reading:
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -26,9 +25,7 @@ Connecting OpenTelemetry language SDK logs and traces within Datadog is similar 
 
 1. OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]). 
 
-2. OpenTelemetry Language SDKs lack the automatic trace-log correlation that Datadog SDKs offer, so it's necessary to manually patch your particular logging module or library with a processor that adds the aforementioned translated `TraceId` and `SpanId` as Log attributes marked `dd.trace_id` and `dd.span_id`, respectively. 
-
-3. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
+2. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
 
 See the following examples for language-specific information about how to correlate your OpenTelemetry traces and logs.
 

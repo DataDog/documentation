@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/monitors/faq/why-did-my-monitor-settings-change-not-take-effect
-kind: ガイド
 title: モニター設定の変更が反映されない
 ---
 

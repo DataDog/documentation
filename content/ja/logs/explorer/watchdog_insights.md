@@ -12,7 +12,6 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: Documentation
   text: ログエクスプローラーの詳細
-kind: documentation
 title: ログ用 Watchdog Insights
 ---
 

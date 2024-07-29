@@ -1,9 +1,9 @@
 ---
 title: Writing a Custom Agent Check
-kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
     - /agent/faq/agent-5-custom-agent-check/
+    - /developers/write_agent_check/
 further_reading:
 - link: "/developers/"
   tag: "Documentation"
@@ -33,6 +33,7 @@ instances:
   [{}]
 {{< /code-block >}}
 4. Create a check file in the `checks.d` directory. Name the file `custom_checkvalue.py`.
+   <div class="alert alert-info">The names of the configuration and check files must match. If your check is called `custom_checkvalue.py`, your configuration file *must* be named `custom_checkvalue.yaml`.</div> 
 5. Edit the file to include the following:
    {{< code-block lang="python" filename="checks.d/custom_checkvalue.py" >}}
 from checks import AgentCheck
@@ -42,7 +43,7 @@ class HelloCheck(AgentCheck):
 {{< /code-block >}}
 6. [Restart the Agent][3]. Within a minute, you should see a new metric show up in the [Metric Summary][4] called `hello.world`.
 
-**Note**: The names of the configuration and check files must match. If your check is called `custom_checkvalue.py`, your configuration file *must* be named `custom_checkvalue.yaml`.
+The python check file must be readable and executable by the Agent user.
 
 ### Results
 
@@ -99,7 +100,7 @@ out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, ra
 
 When you run the command-line program, the check captures the same output as running on the command line in the terminal. Do string processing on the output and call `int()` or `float()` on the result to return a numerical type.
 
-If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check appears to run without errors but doesn't report any data.
+If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check appears to run without errors but doesn't report any metrics or events. The check also fails to return metrics or events if the Agent user does not have the correct permissions on any files or directories referenced in the command, or the correct permissions to run the command passed as an argument to `get_subprocess_output()`. 
 
 Here is an example of a check that returns the results of a command-line program:
 

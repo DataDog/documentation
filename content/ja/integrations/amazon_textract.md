@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: Amazon Textract
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_textract
 public_title: Datadog-Amazon Textract インテグレーション

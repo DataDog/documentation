@@ -1,6 +1,5 @@
 ---
 title: Network Traffic
-kind: guide
 aliases:
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
@@ -38,6 +37,9 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[Container Images][13]
+: `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
@@ -46,8 +48,12 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[Network Path][14]
+: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Orchestrator][5]
-: `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+: `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
+`contlcycle-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Profiling][7]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
@@ -224,8 +230,6 @@ Ensure the Agent is only accessible by your applications or trusted network sour
 </div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 #### Outbound
 
@@ -237,6 +241,9 @@ Open the following ports to benefit from all the **Agent** functionalities:
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
+
+8443/tcp
+: Port for [Custom Agent Autoscaling][5].
 
 10516/tcp
 : Port for log collection over TCP.<br>
@@ -252,6 +259,7 @@ See [logs endpoints][3] for other connection types.
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
+[5]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
@@ -308,16 +316,16 @@ See [default NTP targets][2].
 Used for Agent services communicating with each other locally within the host only.
 
 5000/tcp
-: Port for the [go_expvar server][1].
+: Port for the [go_expvar server][15].
 
 5001/tcp
 : Port the IPC API listens to.
 
 5002/tcp
-: Port for the [Agent browser GUI][2].
+: Port for the [Agent browser GUI][16].
 
 5012/tcp
-: Port for the APM [go_expvar server][1].
+: Port for the APM [go_expvar server][15].
 
 6062/tcp
 : Port for the debug endpoints for the Process Agent.
@@ -329,48 +337,7 @@ Used for Agent services communicating with each other locally within the host on
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
 
 8126/tcp
-: Port for the [APM receiver][3]
-
-[1]: /integrations/go_expvar/
-[2]: /agent/basic_agent_usage/#gui
-[3]: /tracing/
-{{% /tab %}}
-{{% tab "Agent v5 & v4" %}}
-
-#### Outbound
-
-443/tcp
-: Port for most Agent data (Metrics, APM, Live Processes & Containers).
-
-123/udp
-: Port for NTP ([more details on the importance of NTP][1]).<br>
-See [default NTP targets][2].
-
-#### Inbound
-
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
-
-8125/udp
-: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
-
-8126/tcp
-: Port for the [APM Receiver][3].
-
-17123/tcp
-: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog.
-
-17124/tcp
-: Optional graphite adapter.
-
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /tracing/
-{{% /tab %}}
-{{< /tabs >}}
+: Port for the [APM receiver][17]
 
 ## Configure ports
 
@@ -455,3 +422,8 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [10]: /network_monitoring/devices
 [11]: /getting_started/site/
 [12]: /agent/troubleshooting/send_a_flare
+[13]: /infrastructure/containers/container_images
+[14]: /network_monitoring/network_path/
+[15]: /integrations/go_expvar/
+[16]: /agent/basic_agent_usage/#gui
+[17]: /tracing/

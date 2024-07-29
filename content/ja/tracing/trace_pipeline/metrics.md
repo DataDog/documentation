@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentation
   text: トレースの保持
-kind: documentation
 title: 使用量メトリクス
 ---
 

@@ -17,7 +17,7 @@ integration_id: amazon-kms
 integration_title: Amazon Key Management Service
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_kms
 public_title: Intégration Datadog/Amazon Key Management Service

@@ -2,7 +2,6 @@
 aliases:
 - /ja/graphing/widgets/log_stream/
 description: Datadog のダッシュボードにフィルター処理したログストリームを表示する
-kind: documentation
 title: ログストリームウィジェット
 widget_type: log_stream
 ---

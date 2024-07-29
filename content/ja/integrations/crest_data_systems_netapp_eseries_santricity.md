@@ -44,7 +44,7 @@ integration_id: crest-data-systems-netapp-eseries-santricity
 integration_title: NetApp ESeries SANtricity
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -121,12 +121,17 @@ tile:
 - サポートメール: datadog.integrations@crestdatasys.com
 - 営業メール: datadog-sales@crestdatasys.com
 - Web サイト: [crestdatasys.com][3]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][8]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.crestdatasys.com/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 [5]: https://www.crestdatasys.com/datadog-integrations-readme/NetApp_ESeries_SANtricity.pdf
+[6]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[8]: https://www.crestdatasys.com/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
+
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-eseries-santricity" target="_blank">こちらをクリック</a>してください。

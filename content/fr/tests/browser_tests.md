@@ -12,7 +12,6 @@ further_reading:
 - link: /real_user_monitoring/browser
   tag: Documentation
   text: En savoir plus sur la surveillance Browser RUM
-kind: documentation
 title: Instrumenter vos tests Browser avec RUM
 ---
 

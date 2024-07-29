@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: エクスプローラーでエラー追跡データを視覚化する
-kind: ガイド
 title: JavaScript ソースマップのアップロード
 ---
 

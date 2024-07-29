@@ -1,6 +1,5 @@
 ---
 title: Mitigating the Risk of Remote Code Execution Due to Log4Shell
-kind: faq
 further_reading:
 - link: "/integrations/guide/jmx_integrations/"
   tag: "Documentation"

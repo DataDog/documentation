@@ -32,9 +32,9 @@ draft: false
 git_integration_title: ibm_i
 integration_id: ibm-i
 integration_title: IBM i
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_i
 public_title: IBM i
@@ -66,6 +66,8 @@ tile:
 ## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+
+**注**: Unix 系 OS に特有の `fcntl()` システムコールを使用するため、このチェックは Windows では利用できません。
 
 ### インフラストラクチャーリスト
 

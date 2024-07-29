@@ -1,6 +1,5 @@
 ---
 title: Events Guides
-kind: documentation
 private: true
 disable_toc: true
 aliases:
@@ -31,7 +30,11 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Ensure your events are tagged:">}}
-{{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}Best Practices for Tagging Events{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}Best Practices for Tagging Events{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Learn more about Event Management use cases:">}}
+    {{< nextlink href="/service_management/events/guides/usage" >}}Use cases for events{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Other guides:">}}

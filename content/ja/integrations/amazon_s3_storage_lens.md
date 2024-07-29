@@ -18,7 +18,7 @@ integration_id: ''
 integration_title: Amazon S3 Storage Lens
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_s3_storage_lens
 public_title: Datadog-Amazon S3 Storage Lens インテグレーション

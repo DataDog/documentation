@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/online-archives-datadog/
   tag: 블로그
   text: Online Archive로 기록 로그 분석 및 조사
-kind: 설명서
 private: true
 title: Online Archives
 ---

@@ -6,7 +6,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: ラーニングセンター
   text: ダッシュボードをより効果的に活用する
-kind: documentation
 title: クエリ
 ---
 

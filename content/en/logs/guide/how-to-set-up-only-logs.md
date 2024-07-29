@@ -2,7 +2,6 @@
 title: Use the Datadog Agent for Log Collection Only
 aliases:
   - /logs/faq/how-to-set-up-only-logs
-kind: documentation
 ---
 
 To disable payloads, you must be running Agent v6.4+. This disables metric data submission so that hosts stop showing up in Datadog. Follow these steps:

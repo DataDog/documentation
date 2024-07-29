@@ -1,6 +1,7 @@
 ---
 title: OpenTelemetry in Datadog
-kind: Documentation
+aliases:
+- /tracing/setup_overview/open_standards/
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -32,6 +33,10 @@ cascade:
     algolia:
         rank: 70
 ---
+
+<div class="alert alert-danger">
+  <strong>Important:</strong> OpenTelemetry Collector Contrib v0.95.0 introduces a breaking change that disables Trace Metrics computation in the Datadog Exporter. Follow Datadog's <a href="/opentelemetry/guide/migration/">migration guide</a> when upgrading.
+</div>
 
 ## Overview
 

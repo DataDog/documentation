@@ -1,6 +1,5 @@
 ---
 title: Datadog Help
-kind: documentation
 disable_toc: true
 customclass: help
 ---

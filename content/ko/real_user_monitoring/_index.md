@@ -51,23 +51,22 @@ further_reading:
 - link: /real_user_monitoring/browser/data_collected/
   tag: 설명서
   text: 수집된 RUM 브라우저 데이터
-kind: 설명서
 title: RUM & 세션 재생
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
 
 ## 실제 사용자 모니터링이란?
 
 Datadog의 *RUM(실제 사용자 모니터링)*은 개별 사용자의 실시간 활동과 경험에 대한 엔드투엔드 가시성을 제공합니다. RUM은 웹 및 모바일 애플리케이션 모니터링을 위한 네 가지 유형의 사용 사례를 해결합니다:
 
-* **Performance**: 웹 페이지, 모바일 애플리케이션 화면, 사용자 작업, 네트워크 요청 및 프론트엔드 코드의 성능을 추적합니다.
+* **성능**: 웹 페이지, 모바일 애플리케이션 화면, 사용자 작업, 네트워크 요청 및 프론트엔드 코드의 성능을 추적합니다.
 * **Error Management**: 진행 중인 버그와 문제를 모니터링하고 시간과 버전별로 추적합니다.
 * **Analytics / Usage**: 누가 애플리케이션을 사용하는지 파악하고(국가, 디바이스, OS), 개별 사용자의 활동을 모니터링하며, 사용자가 애플리케이션과 상호작용하는 방식(가장 많이 방문한 페이지, 클릭, 상호작용, 기능 사용)을 분석합니다.
 
 * **Support**: 한 사용자 세션과 관련된 모든 정보를 검색하여 문제(세션 기간, 방문한 페이지, 상호 작용, 로드된 리소스 및 오류)를 해결합니다.
 
-사용자 세션은 최대 4시간 동안 지속되는 웹 또는 모바일 애플리케이션에서의 사용자 여정입니다. 세션에는 일반적으로 페이지 보기 및 관련 원격 측정이 포함됩니다. 사용자가 15분 동안 애플리케이션과 상호 작용하지 않으면 세션이 완료된 것으로 간주됩니다. 사용자가 다시 애플리케이션과 상호 작용하면 새 세션이 시작됩니다.
+사용자 세션은 최대 4시간 동안 지속되는 웹 또는 모바일 애플리케이션에서의 사용자 여정을 의미합니다. 세션에는 일반적으로 페이지뷰 및 관련 원격 분석이 포함됩니다. 사용자가 15분 동안 애플리케이션과 상호 작용하지 않으면 세션이 완료된 것으로 간주됩니다. 사용자가 애플리케이션과 다시 상호 작용하면 새 세션이 시작됩니다.
 
 ## 세션 재생이란?
 
@@ -102,15 +101,13 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 | 플랫폼별 바이탈 모니터링 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | 로그의 글로벌 컨텍스트/속성 추적  | {{< X >}} |  |  |  |  |  |  |
 | 클라이언트 쪽 추적 |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| 세션 재생 | {{< X >}} |  |  |  |  |  |  |
+| 세션 재생 | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay는 기본 모바일 앱용 공개 베타 버전입니다. |
 | 히트맵 | {{< X >}} |  |  |  |  |  |  |
 | 장애물 신호 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | 모든 **모바일** 및 **Roku** 기기에 대해 부분적으로만 지원됨 |
 
 ## SDK 도메인에 대해 지원되는 엔드포인트
 
 모든 Datadog SDK 트래픽은 SSL(기본값 443)을 통해 다음 도메인으로 전송됩니다:
-
-### 모바일
 
 | 사이트 | 사이트 URL                                      |
 |------|-----------------------------------------------|
@@ -121,44 +118,9 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 
-### 브라우저
-
-#### 로그
-
-| 사이트 | 사이트 URL                                        |
-|------|-------------------------------------------------|
-| US1  | `https://logs.browser-intake-datadoghq.com`     |
-| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
-| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
-
-#### 세션 재생
-
-| 사이트 | 사이트 URL                                                  |
-|------|-----------------------------------------------------------|
-| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
-| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
-| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
-
-#### RUM
-
-| 사이트 | 사이트 URL                                       |
-|------|------------------------------------------------|
-| US1  | `https://rum.browser-intake-datadoghq.com`     |
-| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
-| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
-
 ## Datadog RUM 탐색
 
-[**UX Monitoring > Real User Monitoring**][1]으로 이동하여 RUM에 액세스합니다.
+[**디지털 경험 > 성과 요약**][1]으로 이동하여 RUM에 액세스합니다.
 
 ### 기본 제공 대시보드
 
@@ -180,13 +142,13 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 
 ### 오류 추적 및 크래시 보고
 
-[오류 추적][6]을 통해 이상값과 오류 그룹, 시간 초과, 크래시에 대한 자동 알림을 받아 MTTR을 크게 줄일 수 있습니다.
+[오류 추적][6]을 통해 이상값과 오류 그룹, 시간 초과 및 충돌에 대한 자동 경고를 받아 MTTR을 크게 줄일 수 있습니다.
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM 오류 추적" video=true >}}
 
 ### 웹 및 모바일 바이탈
 
-[iOS 및 tvOS][8] 또는 [안드로이드 및 안드로이드 TV 애플리케이션][9]에 대한 코어 웹 바이탈 및 모바일 바이탈과 같은 [브라우저 애플리케이션][7]의 성능 점수 및 메트릭을 확인합니다.
+[iOS 및 tvOS][8]용 코어 웹 바이탈 및 모바일 바이탈 또는 [안드로이드 및 안드로이드 TV 애플리케이션[9]과 같은 [브라우저 애플리케이션][7]의 성능 점수 및 텔레메트리를 확인합니다.
 
 ### 웹 보기 추적
 
@@ -210,16 +172,16 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
-[2]: /ko/real_user_monitoring/dashboards/
+[2]: /ko/real_user_monitoring/platform/dashboards/
 [3]: /ko/real_user_monitoring/explorer/visualize/
 [4]: /ko/monitors/types/real_user_monitoring/
-[5]: /ko/real_user_monitoring/connect_rum_and_traces/
+[5]: /ko/real_user_monitoring/platform/connect_rum_and_traces/
 [6]: /ko/real_user_monitoring/error_tracking/
-[7]: /ko/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[7]: /ko/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /ko/real_user_monitoring/ios/mobile_vitals/
 [9]: /ko/real_user_monitoring/android/mobile_vitals/
 [10]: /ko/real_user_monitoring/ios/web_view_tracking/
 [11]: /ko/real_user_monitoring/android/web_view_tracking/
-[12]: /ko/real_user_monitoring/session_replay/
-[13]: /ko/real_user_monitoring/session_replay/privacy_options/
-[14]: /ko/real_user_monitoring/session_replay/developer_tools/
+[12]: /ko/real_user_monitoring/session_replay/browser/
+[13]: /ko/real_user_monitoring/session_replay/browser/privacy_options/
+[14]: /ko/real_user_monitoring/session_replay/browser/developer_tools/

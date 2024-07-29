@@ -1,15 +1,11 @@
 ---
 title: OAuth2 Authorization Endpoints Reference
-kind: documentation
 description: Learn how to use the OAuth2 authorization endpoints.
 further_reading:
 - link: "/developers/authorization/"
   tag: "Documentation"
   text: "Learn about OAuth2 Authorization"
 ---
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is currently in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
 
 ## Overview
 

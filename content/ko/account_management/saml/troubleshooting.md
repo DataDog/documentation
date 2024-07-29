@@ -4,7 +4,6 @@ further_reading:
 - link: https://www.samltool.com/online_tools.php
   tag: 개발 툴
   text: 개발자 SAML 툴로 어서션 식별하기
-kind: 설명서
 title: SAML 트러블슈팅
 ---
 
@@ -61,9 +60,9 @@ IdP 메타데이터 파일을 업데이트하는 데 문제가 있는 경우 업
 
 ## 역할 오류
 
-매핑이 활성화되면 SAML을 사용하여 Datadog 계정에 로그인하는 사용자는 현재 역할이 제거되고 IdP에서 전달된 SAML 어서션의 상세 정보를 기반으로 새 역할에 다시 할당됩니다.
+매핑이 활성화된 경우, SAML을 사용해 Datadog 계정에 로그인한 사용자의 현재 역할을 영구적으로 제거할 수 있습니다. Datadog에서 IdP에서 전달받은 SAML 어서션 상세 정보에 따라 새로운 역할을 할당합니다.
 
-SAML로 로그인하고 Datadog 역할에 매핑되는 값을 보유하지 않은 사용자는 모든 역할이 제거되고 로그인이 허용되지 않습니다.
+SAML을 통해 로그인한 사용자가 Datadog 역할에 매핑되는 값이 없는 경우, 모든 역할에서 영구적으로 제거됩니다. 해당 사용자는 더 이상 로그인할 수 없습니다.
 
 {{< img src="account_management/saml/unknown_user_error.png" alt="이 사용자의 AuthNMappings 없음" style="width:80%;">}}
 
@@ -102,14 +101,13 @@ SAML로 로그인하고 Datadog 역할에 매핑되는 값을 보유하지 않�
 
 ## IdP 오류
 
-Google, Active Directory, Azure, LastPass, Okta 등과 같은 IdP에서 오류가 발생하는 경우에는 다음을 따릅니다.
+Google, Active Directory, Azure, Okta 등 IdP에서 오류가 발생한 경우:
 
 - Google Admin Console에서 문제가 발생하면 [SAML 앱 오류 메시지][10]를 참조하세요.
 - Active Directory에서 문제가 발생하면 [Azure Active Directory의 애플리케이션에 대한 SAML 기반 싱글 사인온 디버그][11]를 참조하세요.
 - AuthO에서 문제가 발생하면 [SAML 설정 트러블슈팅][12]을 참조하세요.
 - Azure에서 문제가 발생하면 [사용자가 로그인한 후 앱 페이지에 오류 메시지가 표시됨][13]을 참조하세요.
 - Google에서 문제가 발생하면 [Datadog 클라우드 애플리케이션][14]을 참조하세요.
-- LastPass에서 문제가 발생하면 [Datadog 앱 통합][15]을 참조하세요.
 - Okta에서 문제가 발생하면 [애플리케이션 로그인 시도 시 404 오류 수신][16]을 참조하세요.
 - SafeNet에서 문제가 발생하면 [Datadog용 SafeNet Trusted Access][17]를 참조하세요.
 
@@ -155,7 +153,6 @@ Datadog 지원팀에 연락하기 전에 관리자에게 문의하세요. 로그
 [12]: https://auth0.com/docs/troubleshoot/troubleshoot-authentication/troubleshoot-saml-configurations
 [13]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/application-sign-in-problem-application-error
 [14]: https://support.google.com/a/answer/7553768
-[15]: https://support.logmeininc.com/lastpass/help/datadog-app-integration
 [16]: https://support.okta.com/help/s/article/Receiving-404-error-when-attempting-to-sign-into-application?language=en_US
 [17]: https://resources.safenetid.com/help/Datadog/Index.htm
 [18]: https://www.datadoghq.com/support/

@@ -7,7 +7,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/guide/azure-portal
   tag: Documentation
   text: Azure Native インテグレーションの管理
-kind: ガイド
 title: Azure Native インテグレーションプログラム管理ガイド
 ---
 

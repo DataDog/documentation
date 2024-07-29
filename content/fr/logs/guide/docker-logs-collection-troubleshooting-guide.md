@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Guide de dépannage pour la collecte de logs Docker
 ---
 
@@ -139,10 +138,17 @@ Si vos logs ne sont pas transmis à la plate-forme Datadog alors que le statut d
 
 L'Agent Datadog envoie ses logs à Datadog par TCP via le port 10516. Si cette connexion n'est pas disponible, les logs ne sont pas envoyés et une erreur est enregistrée dans le fichier `agent.log`.
 
-Testez manuellement votre connexion en exécutant une commande telnet ou openssl comme suit (le port 10514 fonctionne également, mais cette méthode est moins sécurisée) :
+Vous pouvez tester manuellement votre connexion avec OpenSSL, GnuTLS ou un autre client SSL/TLS. Pour OpenSSL, exécutez la commande suivante :
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
-* `telnet intake.logs.datadoghq.com 10514`
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+Pour GnuTLS, exécutez la commande suivante :
+
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
+```
 
 Envoyez ensuite un log comme suit :
 
@@ -150,7 +156,7 @@ Envoyez ensuite un log comme suit :
 <CLÉ_API> Ceci est un message test
 ```
 
-Si vous ne pouvez pas ouvrir le port 10514 ou 10516, vous pouvez configurer l'Agent Datadog de façon à envoyer les logs via HTTPS en définissant la variable d'environnement `DD_LOGS_CONFIG_USE_HTTP` sur `true` :
+Si vous ne pouvez pas ouvrir le port 10516, vous pouvez configurer l'Agent Datadog de façon à envoyer les logs via HTTPS en définissant la variable d'environnement `DD_LOGS_CONFIG_USE_HTTP` sur `true` :
 
 #### Vos conteneurs n'utilisent pas le pilote de logging JSON
 

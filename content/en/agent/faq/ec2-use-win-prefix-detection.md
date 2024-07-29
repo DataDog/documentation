@@ -1,13 +1,12 @@
 ---
 title: Windows EC2 hostnames starting with EC2AMAZ-
-kind: faq
 aliases:
   - /ec2-use-win-prefix-detection # short link for Agent logs (do not remove)
 ---
 
 ## Issue
 
-In the Datadog Agent v6 and v7, the default Agent in-app hostname for Unix platforms on EC2 is the `instance-id`. 
+In the Datadog Agent v6 and v7, the default Agent in-app hostname for UNIX platforms on EC2 is the `instance-id`. 
 For Windows hosts, the default Agent in-app hostname is the operating system hostname that starts with `EC2AMAZ-`.
 
 For v6.18.0+ and v7.18.0+, the Agent logs the following warning for Windows hosts on EC2 where the hostname starts with `EC2AMAZ-`:

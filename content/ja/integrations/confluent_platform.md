@@ -37,9 +37,9 @@ draft: false
 git_integration_title: confluent_platform
 integration_id: confluent-platform
 integration_title: Confluent Platform
-integration_version: 1.10.0
+integration_version: 1.10.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: confluent_platform
 public_title: Confluent Platform

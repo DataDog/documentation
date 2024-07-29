@@ -1,6 +1,5 @@
 ---
 title: Process Check Monitor
-kind: documentation
 description: "Check if a process is running on a host"
 aliases:
 - /monitors/monitor_types/process_check
@@ -78,7 +77,7 @@ See the [Monitor configuration][3] documentation for information on [No data][4]
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][7] page.
 
 ## Further Reading
 

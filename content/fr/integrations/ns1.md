@@ -23,7 +23,7 @@ integration_id: ns1
 integration_title: ns1
 integration_version: 0.0.6
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: zjohnson@ns1.com
 manifest_version: 1.0.0
 metric_prefix: ns1.

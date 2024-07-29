@@ -12,7 +12,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: GitHub
   text: Datadog での SNMP モニタリング
-kind: documentation
 title: ネットワークデバイスから SNMP メトリクスを収集
 ---
 

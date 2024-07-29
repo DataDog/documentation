@@ -36,7 +36,7 @@ integration_id: postgres
 integration_title: Postgres
 integration_version: 12.3.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: postgresql.

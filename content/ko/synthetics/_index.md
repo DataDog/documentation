@@ -22,6 +22,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
   tag: 블로그
   text: 정적 웹 애플리케이션 모니터링 모범 사례
+- link: https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/
+  tag: 블로그
+  text: Datadog 신서틱(Synthetic) 모니터링을 사용해 API 테스트 범위  개선
 - link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: 학습 센터
   text: Synthetic 테스트 소개
@@ -29,9 +32,8 @@ further_reading:
   tag: 설명서
   text: Synthetic 모니터링 가이드
 - link: https://dtdg.co/fe
-  tag: 기초 활성화
+  tag: \u0008기초 구축
   text: 대화형 세션에 참여하여 synthetic 테스트 역량을 강화하세요.
-kind: 설명서
 title: Synthetic Monitoring
 ---
 
@@ -85,7 +87,13 @@ API 테스트를 사용하면 [단일][4] 또는 [연쇄][5] 요청을 실행하
 
 Synthetic 테스트 실행 또는 CI/CD 파이프라인에서 실행되는 테스트 배치에 대한 [검색 쿼리 및 시각화][20]를 만듭니다.
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="연속 테스트 탐색기" style="width:100%;">}}
+
+## 테스트 커버리지 추적하기
+
+[애플리케이션의 가장 중요한 워크플로가 테스트되고 있는지 확인]하여 테스트 스위트를 최적화하세요[22]
+
+{{< img src="synthetics/test_coverage/test_coverage.png" alt="연속 테스트 탐색기" style="width:100%;">}}
 
 ## 시작할 준비가 되셨나요?
 
@@ -117,3 +125,4 @@ Synthetic 테스트 생성 및 웹 애플리케이션 모니터링에 대한 지
 [19]: /ko/getting_started/synthetics/private_location
 [20]: /ko/continuous_testing/explorer/
 [21]: /ko/mobile_testing
+[22]: /ko/synthetics/test_coverage

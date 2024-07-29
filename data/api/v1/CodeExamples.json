@@ -118,6 +118,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2563642929",
+      "description": "Create a new dashboard with a toplist widget sorted by group"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2308247857",
       "description": "Create a new dashboard with alert_graph widget"
     },
@@ -390,6 +395,11 @@
       "group": "dashboards",
       "suffix": "_1307120899",
       "description": "Create a new timeseries widget with ci_tests data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_985012506",
+      "description": "Create a new timeseries widget with incident_analytics data source"
     }
   ],
   "CreatePublicDashboard": [
@@ -743,18 +753,21 @@
       "description": "Create a global variable from test returns \"OK\" response"
     }
   ],
-  "CreatePrivateLocation": [
+  "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
-      "suffix": "",
-      "description": "Create a private location returns \"OK\" response"
-    }
-  ],
-  "CreateSyntheticsAPITest": [
+      "suffix": "_1717840259",
+      "description": "Create a multi-step api test with every type of basicAuth returns \"OK - Returns the created test details.\" response"
+    },
     {
       "group": "synthetics",
       "suffix": "_1402674167",
       "description": "Create an API GRPC test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1987645492",
+      "description": "Create an API HTTP test has bodyHash filled out"
     },
     {
       "group": "synthetics",
@@ -783,8 +796,20 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1241981394",
+      "description": "Create an API test with a file payload returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1279271422",
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
+    }
+  ],
+  "CreatePrivateLocation": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a private location returns \"OK\" response"
     }
   ],
   "UpdateAPITest": [

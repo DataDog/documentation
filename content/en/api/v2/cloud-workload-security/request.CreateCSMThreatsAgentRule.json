@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "description": "My Agent rule",
+      "enabled": true,
+      "expression": "exec.file.name == \"sh\"",
+      "name": "examplecloudworkloadsecurity"
+    },
+    "type": "agent_rule"
+  }
+}

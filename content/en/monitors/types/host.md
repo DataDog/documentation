@@ -1,11 +1,13 @@
 ---
 title: Host Monitor
-kind: documentation
 description: "Check if one or more hosts are reporting to Datadog"
 aliases:
     - /monitors/monitor_types/host
     - /monitors/create/types/host/
 further_reading:
+- link: "/infrastructure/"
+  tag: "Documentation"
+  text: "Infrastructure Monitoring"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -18,6 +20,8 @@ further_reading:
 ---
 
 ## Overview
+
+Infrastructure monitoring provides visibility into your entire IT environment, including cloud-hosted and on-prem servers, through many integrations. Use the Host monitor to stay informed on which hosts are or are not submitting data to ensure continuous visibility.
 
 Every Datadog Agent reports a service check called `datadog.agent.up` with the status `OK`. You can monitor this check across one or more hosts by using a host monitor.
 
@@ -74,7 +78,7 @@ For detailed instructions on the advanced alert options (auto resolve, new group
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
 ## Further Reading
 

@@ -4,7 +4,6 @@ further_reading:
 - link: getting_started/tagging/unified_service_tagging/
   tag: ドキュメント
   text: 統合サービスタグ付けと予約済みタグについて学ぶ
-kind: documentation
 title: サービス観測可能性
 ---
 
@@ -16,7 +15,7 @@ title: サービス観測可能性
 {{< img src="tracing/visualization/service_obs_catalog.png" alt="サービスカタログ" >}}
 
 {{< whatsnext desc="以下の視覚化およびツールを使用して、分散型サービスの監視、レポート、および問題解決を行います" >}}
-    {{< nextlink href="tracing/services/service_catalog/" >}}サービスカタログ{{< /nextlink >}}
+    {{< nextlink href="service_catalog/" >}}サービスカタログ{{< /nextlink >}}
     {{< nextlink href="tracing/services/service_page/" >}}サービスページ{{< /nextlink >}}
     {{< nextlink href="tracing/services/resource_page/" >}}リソースページ{{< /nextlink >}}
     {{< nextlink href="tracing/services/deployment_tracking/" >}}デプロイメントの追跡{{< /nextlink >}}

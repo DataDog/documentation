@@ -31,7 +31,7 @@ integration_id: mendix
 integration_title: Mendix
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: mendix
 public_title: Mendix

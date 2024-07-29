@@ -14,7 +14,6 @@ further_reading:
 - link: /observability_pipelines/configurations/
   tag: Documentation
   text: 観測可能性パイプラインの構成の詳細
-kind: ドキュメント
 title: Observability Pipelines（観測データの制御）
 ---
 

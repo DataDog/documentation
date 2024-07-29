@@ -41,7 +41,7 @@ integration_id: voltdb
 integration_title: VoltDB
 integration_version: 2.1.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: voltdb
 public_title: VoltDB

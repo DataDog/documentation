@@ -3,7 +3,6 @@ aliases:
 - /ko/serverless/serverless_integrations
 - /ko/serverless/datadog_lambda_library/
 - /ko/serverless/libraries_integrations/library/
-kind: 설명서
 title: 서버리스 라이브러리 및 통합
 ---
 
@@ -18,9 +17,9 @@ title: 서버리스 라이브러리 및 통합
 
 ## Datadog Lambda 확장 및 포워더(Forwarder)
 
-{{< whatsnext desc="Lambda 함수에서 텔레메트리를 전송하려면 Lambda 확장 프로그램 또는 포워더가 필요합니다. 또한 AWS API 게이트웨이와 같은 비 Lambda 서버리스 리소스에 대한 로그를 수집하려면 포워더가 필요할 수도 있습니다." >}}
-{{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda Extension{{< /nextlink >}}
-{{< nextlink href="https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring" >}}Datadog Forwarder Lambda Function{{< /nextlink >}}
+{{< whatsnext desc="Lambda 함수에서 텔레메트리를 보내려면 Lambda 확장 또는 포워더가 필요합니다. Amazon API Gateway와 같은 Lambda 이외의 서버리스 리소스에 대한 로그를 수집하려면 포워더가 필요할 수도 있습니다." >}}
+    {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda 확장{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring" >}}Datadog 포워더 Lambda 함수{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Lambda 라이브러리
@@ -34,11 +33,11 @@ title: 서버리스 라이브러리 및 통합
 
 ## Datadog AWS 통합
 
-{{< whatsnext desc="Datadog은 Lambda 함수에서 직접 텔레메트리를 수집하는 것 외에도 서버리스 애플리케이션에서 사용하는 리소스에 대한 Datadog AWS 통합을 통해 텔레메트리를 수집할 수도 있습니다." >}}
-{{< nextlink href="/integrations/amazon_lambda/" >}}AWS Lambda Integration{{< /nextlink >}}
-{{< nextlink href="/integrations/amazon_step_functions/" >}}AWS Step Functions Integration{{< /nextlink >}}
-{{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync Integration{{< /nextlink >}}
-{{< nextlink href="/integrations/amazon_api_gateway/" >}}AWS API Gateway Integration{{< /nextlink >}}
-{{< nextlink href="/integrations/amazon_sqs/" >}}AWS SQS Integration{{< /nextlink >}}
-{{< nextlink href="/integrations/amazon_sns/" >}}AWS SNS Integration{{< /nextlink >}}
+{{< whatsnext desc="Datadog은 Lambda 함수에서 직접 텔레메트리를 수집하는 것 외에도 Datadog AWS 통합을 통해 서버리스 애플리케이션에서 활용하는 리소스에 대한 텔레메트리를 수집할 수도 있습니다.." >}}
+    {{< nextlink href="/integrations/amazon_lambda/" >}}AWS Lambda 통합{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_step_functions/" >}}AWS Step Functions 통합{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync 통합{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_api_gateway/" >}}Amazon API Gateway 통합{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sqs/" >}}Amazon SQS 통합{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sns/" >}}Amazon SNS 통합{{< /nextlink >}}
 {{< /whatsnext >}}

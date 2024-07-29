@@ -1,6 +1,6 @@
 ---
 title: Trace Queries Source Data
-kind: guide
+
 further_reading:
     - link: "/tracing/trace_explorer/trace_queries/"
       tag: "Documentation"
@@ -46,13 +46,7 @@ To find spans that are sampled by the 1% flat sampling or the diversity sampling
 
 {{< img src="tracing/trace_queries/intelligent_retention_filter_change.png" style="width:90%; background:none; border:none; box-shadow:none;" alt="Event Overlay Intelligent Retention Filter" >}}
 
-Spans indexed by the Intelligent retention filter are excluded from APM queries in:
-
-- Dashboards
-- Notebooks
-- [Trace Analytics monitor][5] evaluations
-
-Therefore, they are **not impacted** by this change.
+Spans indexed by the Intelligent retention filter are excluded from APM queries in [Trace Analytics monitor][5] evaluations. Therefore, monitors are **not impacted** by this change.
 
 ## Further reading
 

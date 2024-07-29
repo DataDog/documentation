@@ -3,8 +3,9 @@ aliases:
 - /fr/security_monitoring/detection_rules/
 - /fr/cloud_siem/detection_rules/
 - /fr/security_platform/detection_rules/
+- /fr/security/security_monitoring/log_detection_rules/
 further_reading:
-- link: /cloud_siem/default_rules
+- link: /security/default_rules/#all
   tag: Documentation
   text: Explorer les règles de détection par défaut
 - link: /security/notifications/
@@ -17,49 +18,70 @@ further_reading:
   tag: Blog
   text: Détecter les activités de connexion suspectes grâce aux règles de détection
     de voyage impossible
-kind: documentation
+products:
+- icon: cloud-security-management
+  name: Cloud SIEM
+  url: /security/cloud_siem/
+- icon: cloud-security-management
+  name: Cloud Security Management
+  url: /security/cloud_security_management/
+- icon: app-sec
+  name: Application Security Management
+  url: /security/application_security/
 title: Règles de détection
 ---
 
-## Présentation
+{{< product-availability >}}
 
-Les règles de détection définissent la logique conditionnelle appliquée à l'ensemble des logs ingérés et des configurations du cloud. Lorsqu'un scénario d'une règle se réalise lors d'une période donnée, Datadog génère un signal de sécurité.
+Les règles de détection définissent la logique conditionnelle appliquée à l'ensemble des configurations cloud et des logs ingérés. Lorsque le scénario d'une règle se réalise sur une période donnée, un signal de sécurité est généré. Ces signaux sont accessibles depuis le [Signals Explorer][16].
 
-Chaque option de surveillance inclut des [règles de détection par défaut][1]. Il vous suffit de configurer une intégration pour pouvoir les utiliser.
+## Règles de détection prêtes à l'emploi
 
-- La solution [Cloud SIEM][2] tire profit de la détection des logs pour analyser en temps réel les logs ingérés. Vous pouvez également créer des [règles de détection personnalisées][3] pour répondre aux besoins de votre environnement.
+Datadog fournit des [règles de détection prêtes à l'emploi][1] afin de signaler les attaques et dʼéventuels problèmes de configuration. Lorsque de nouvelles règles de détection sont publiées, elles sont automatiquement importées dans votre compte, dans votre bibliothèque Application Security Management, ainsi que dans l'Agent, selon votre configuration.
 
-- La solution [Cloud Security Posture Misconfigurations][4] exploite des règles de détection de configuration cloud et d'infrastructure pour analyser l'intégrité de votre environnement cloud.
+Les règles de détection prêtes à l'emploi sont disponibles pour les solutions de sécurité suivantes :
 
-- Avec [Cloud Security Management Threats][5], l'Agent Datadog surveille activement l'activité système et procède à son évaluation sur la base d'un ensemble de règles de détection.
-
+- [Cloud SIEM][2] se sert de la détection des logs pour analyser les logs ingérés en temps réel.
+- Cloud Security Management (CSM) :
+    - La solution [CSM Misconfigurations][4] exploite des règles de détection de configuration cloud et d'infrastructure pour analyser l'intégrité de votre environnement cloud.
+    - La solution [CSM Threats][5] tire profit des règles de détection et de l'Agent Datadog pour surveiller et évaluer de façon active l'activité système.
+    - La solution [CSM Identity Risks][14] utilise les règles de détection pour identifier les risques IAM encourus par votre infrastructure cloud.
 - [Application Security Management][6] (ASM) tire profit de la solution [APM][7] Datadog, de l'[Agent Datadog][8] et des règles de détection afin d'identifier les menaces à l'encontre de l'environnement de votre application.
 
-## Créer et gérer des règles de détection
+## Règle de détection en version bêta
 
-La page [Detection Rules][9] vous permet d'effectuer des recherches parmi toutes les règles de détection en fonction d'un type de règle. Vous pouvez ainsi activer, désactiver, modifier, supprimer ou dupliquer en quelques secondes des règles. Pour créer une [règle de détection][3] personnalisée, cliquez sur le bouton **New Rule** en haut à droite de la page.
+L'équipe de sécurité de Datadog ajoute régulièrement de nouvelles règles de détection prêtes à l'emploi visant à garantir votre sécurité. Bien que chaque règle vise à détecter efficacement les problèmes liés à la publication de nouvelles intégrations et d'autres fonctionnalités, il est nécessaire d'observer les capacités de détection à grande échelle d'une règle avant de la rendre disponible pour tous. Ainsi, l'équipe de sécurité Datadog est à même d'optimiser ou de supprimer les mécanismes de détection qui ne répondent pas aux normes établies.
 
-### Trouver des règles de détection
+## Règles de détection personnalisées
 
-La recherche en texte libre filtre les règles de détection en fonction du texte figurant dans leur nom ou leur requête. Les résultats des requêtes se mettent à jour en temps réel lorsque vous modifiez une requête. Vous n'avez donc pas besoin de cliquer sur le moindre bouton pour lancer la recherche.
+Dans certaines situations, il peut être pertinent de personnaliser une règle en fonction de votre environnement ou workload. Par exemple, si vous utilisez la solution ASM, vous pouvez choisir de personnaliser une règle visant à détecter les utilisateurs qui effectuent des opérations sensibles dans une région où votre organisation n'est pas présente.
 
-#### Filtrer par facette
+Pour [créer des règles personnalisées](#creer-des-regles-de-detection), vous pouvez dupliquer des règles par défaut et modifier les doublons, ou créer de toutes pièces vos propres règles.
 
-Utilisez les facettes dans le volet de gauche pour restreindre une requête de recherche en fonction de sa valeur. Par exemple, si vous utilisez plusieurs types de règles, comme `log detection` ou `cloud configuration`, filtrez votre requête sur `only` pour afficher uniquement ces types de règles.
+## Rechercher et filtrer des règles de détection
 
-{{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtrage par type de règle, par exemple pour la détection de logs ou la configuration cloud, dans Datadog" style="width:80%;" >}}
+Pour consulter dans Datadog les règles de détection prêtes à l'emploi et personnalisées, accédez à la page [**Security Settings**][15]. Les règles de chaque solution (Application Security, Cloud Security Management et Cloud SIEM) sont répertoriées sur des pages distinctes.
 
-Pour simplifier les processus d'enquête et de triage liés aux problèmes en cours, vous pouvez également appliquer un filtre basé sur des facettes, comme `source` et `severity`. Si vous souhaitez inclure toutes les facette d'une catégorie dans votre recherche, passez votre curseur sur une valeur dans le volet, puis cliquez sur **all**.
+Pour rechercher et filtrer des règles, utilisez la zone de recherche et les facettes afin de créer une requête basée sur une valeur. Par exemple, pour afficher uniquement les règles d'un certain type, passez votre curseur sur le type de règle, puis sélectionnez `only`. Vous pouvez également appliquer un filtre basé sur des facettes, comme `source` et `severity`, pendant l'analyse et le tri de problèmes en cours.
 
-**Remarque** : par défaut, toutes les facettes sont sélectionnées.
+{{< img src="security/default_detection_rules.png" alt="La page Configuration, avec les règles de détection par défaut et personnalisées de Cloud SIEM" width="100%">}}
 
-### Tableau des règles
+## Créer des règles de détection
 
-Les règles sont affichées dans le tableau des règles de détection. Cliquez sur l'option **Sort by** en haut à droite du tableau pour le trier. Vous pouvez par exemple utiliser l'option de tri **Highest Severity** pour afficher les problèmes de configuration et les menaces les plus dangereux.
+Pour créer une règle de détection personnalisée, cliquez sur le bouton **New Rule** dans le coin supérieur droit de la page Detection Rules. Vous pouvez également [dupliquer une règle par défaut ou personnalisée](#dupliquer-une-regle) afin de l'utiliser comme modèle.
 
-#### Activer ou désactiver des règles
+Pour obtenir des instructions détaillées, consultez la documentation relative aux solutions suivantes :
 
-Pour activer ou désactiver une règle, cliquez sur le bouton en regard de la règle en question.
+- [Cloud SIEM][3]
+- [ASM][11]
+- [CSM Misconfigurations][12]
+- [CSM Threats][13]
+
+## Gérer les règles de détection
+
+### Activer ou désactiver des règles
+
+Pour activer ou désactiver une règle, cliquez sur le bouton en regard du nom de la règle.
 
 Vous pouvez également activer ou désactiver plusieurs règles à la fois :
 
@@ -68,60 +90,81 @@ Vous pouvez également activer ou désactiver plusieurs règles à la fois :
 1. Cliquez sur le menu déroulant **Edit Rules**.
 1. Sélectionnez **Enable Rules** pour activer les règles ou **Disable Rules** pour les désactiver.
 
-#### Options relatives aux règles et aux signaux générés
+### Modifier une règle
 
-Cliquez sur l'icône représentant trois points, en regard de l'option d'activation ou de désactivation d'une règle, puis sélectionnez l'une des options proposées : Edit, Clone, Delete ou View generated signals.
+Pour les règles de détection prête à l'emploi, il est uniquement possible d'ajouter ou de modifier une requête de suppression. Pour mettre à jour une requête, ajuster des déclencheurs ou gérer les notifications, vous pouvez [dupliquer la règle par défaut](#dupliquer-une-regle) et l'utiliser comme modèle pour créer une règle personnalisée. [Désactivez ensuite la règle par défaut](#activer-ou-desactiver-des-regles).
 
-- Cliquez sur **Edit** pour modifier des requêtes, ajuster des déclencheurs, gérer les notifications ou mettre à jour la configuration de la règle.
-  -  **Remarque** : pour modifier une règle prête à l'emploi, vous devez impérativement la dupliquer, puis modifier la règle dupliquée. Pour modifier une règle par défaut, cliquez sur **Edit** et faites défiler la page de configuration de la règle vers le bas. Cliquez sur **Clone**, puis modifiez la règle.
-- La duplication d'une règle vous permet notamment d'apporter de légères modifications à ses paramètres afin de modifier la détection. Par exemple, vous pouvez dupliquer une règle de détection de logs en remplaçant son paramètre **Threshold** par **Anomaly**, afin d'ajouter une nouvelle dimension à la détection des menaces tout en conservant les mêmes requêtes et déclencheurs.
-- L'option Delete est **uniquement** disponible pour les règles personnalisées. Il n'est pas possible de supprimer une règle prête à l'emploi, car elles sont intégrées nativement à la plateforme. Pour supprimer de façon définitive une règle personnalisée, cliquez sur **Delete**. Pour désactiver une règle prête à l'emploi, cliquez sur le bouton de désactivation.
-- Cliquez sur **View generated signals** pour accéder au [Signals Explorer][6] et définir une requête basée sur l'ID d'une règle. Celle fonctionnalité est particulièrement utile pour mettre en corrélation des signaux avec différentes sources en fonction d'une règle spécifique, ou encore pour procéder à l'audit de plusieurs règles.
+- Pour modifier une règle par défaut, cliquez sur l'icône des trois points verticaux de la règle, puis sélectionnez **Edit default rule**.
+- Pour modifier une règle personnalisée, cliquez sur l'icône des trois points verticaux de la règle, puis sélectionnez **Edit default rule**.
 
-#### Limite les modifications des règles
+### Dupliquer une règle
 
-Par défaut, tous les utilisateurs ont accès à l'ensemble des paramètres des règles de sécurité.
+Pour dupliquer une règle personnalisée, cliquez sur l'icône des trois points verticaux de la règle, puis sélectionnez **Clone rule**.
 
-Utilisez les contrôles d'accès granulaires pour limiter les [rôles][10] capables de modifier une règle :
-1. Cliquez sur les trois points en regard de la règle.
-1. Sélectionnez **Permissions**.
-1. Cliquez sur **Restrict Access**.
-1. La boîte de dialogue affiche alors les membres de votre organisation disposant de l'autorisation **Viewer** par défaut.
-1. Depuis la liste déroulante, sélectionnez les rôles, équipes (bêta) ou utilisateurs (bêta) autorisés à modifier la règle de sécurité.
+La duplication d'une règle vous permet notamment d'apporter de légères modifications à ses paramètres afin de modifier la détection. Par exemple, vous pouvez dupliquer une règle de détection de logs en remplaçant son paramètre **Threshold** par **Anomaly**, afin d'ajouter une nouvelle dimension à la détection des menaces tout en conservant les mêmes requêtes et déclencheurs.
+
+### Supprimer une règle
+
+Pour supprimer une règle personnalisée, cliquez sur l'icône des trois points verticaux de la règle, puis sélectionnez **Delete rule**.
+
+**Remarque** : seules les règles personnalisées peuvent être supprimées. Pour ne plus voir une règle par défaut, vous devez [la désactiver](#activer-ou-desactiver-des-regles).
+
+### Restreindre les autorisations de modification
+
+Par défaut, les utilisateurs disposent d'un accès complet aux règles de détection. Pour limiter les [rôles][10] pouvant modifier une règle spécifique, et ainsi bénéficier d'un contrôle plus granulaire, procédez comme suit :
+
+1. Cliquez sur l'icône des trois points verticaux de la règle, puis sélectionnez **Permissions**.
+1. Cliquez sur **Restrict Access**. La boîte de dialogue affiche alors les membres de votre organisation disposant de l'autorisation **Viewer** par défaut.
+1. Depuis le menu déroulant, sélectionnez les rôles, équipes ou utilisateurs autorisés à modifier la règle de sécurité.
 1. Cliquez sur **Add**.
-1. La boîte de dialogue indique alors que le rôle sélectionné possède l'autorisation **Editor**.
 1. Cliquez sur **Save**.
+
 **Remarque** : afin de toujours pouvoir modifier la règle, vous devez inclure au moins un de vos rôles avant d'enregistrer vos modifications.
 
-Pour rétablir les autorisations globales d'une règle restreinte, procédez comme suit :
-1. Cliquez sur les trois points à droite de la règle.
-1. Sélectionnez **Permissions**.
+Pour rétablir l'accès à une règle, procédez comme suit :
+
+1. Cliquez sur l'icône des trois points verticaux de la règle, puis sélectionnez **Permissions**.
 1. Cliquez sur **Restore Full Access**.
 1. Cliquez sur **Save**.
 
+### Visualiser les signaux générés
+
+Pour visualiser les signaux de sécurité d'une règle dans le [Signals Explorer][16], cliquez sur l'icône des trois points verticaux, puis sélectionnez **View generated signals**. Cette fonctionnalité est particulièrement utile pour corréler des signaux avec différentes sources en fonction d'une règle spécifique, ou encore pour procéder à l'audit de plusieurs règles.
+
+### Exporter une règle au format JSON
+
+Pour exporter la copie d'une règle au format JSON, cliquez sur l'icône des trois points verticaux de la règle, puis sélectionnez **Export as JSON**.
+
 ## Obsolescence des règles
 
-Toutes les règles de détection font régulièrement l'objet de contrôles, afin de garantir la pertinence de leurs signaux. Lorsqu'une règle est considérée comme obsolète, elle est remplacée par une nouvelle version.
+Des audits de toutes les règles de détection sont régulièrement effectués afin de maintenir un signal de haute fidélité. Les règles obsolètes sont remplacées par une règle améliorée.
 
 Le processus d'obsolescence des règles suit les étapes suivantes : 
 
 1. Un avertissement avec la date d'obsolescence est ajouté à la règle. Cet avertissement s'affiche à différents endroits de l'interface :
     - Dans la section **Rule Details > Playbook** du volet latéral des signaux
-    - Dans le volet latéral des findings (CSM Misconfigurations uniquement)
-    - Dans l'[éditeur de règle](#options-relatives-aux-regles-et-aux-signaux-generes) de la règle en question
-2. Une fois la règle obsolète, elle reste disponible pendant 15 mois avant d'être supprimée, car les signaux sont conservés pendant 15 mois. Durant cette période, vous pouvez réactiver la règle en [la dupliquant](#options-relatives-aux-regles-et-aux-signaux-generes) dans l'interface.
+    - Dans le volet latéral des problèmes de configuration (CSM Misconfigurations uniquement)
+    - Dans l'[éditeur de règle][15] de la règle en question
+2. Lorsqu'une règle devient obsolète, elle reste disponible pendant 15 mois avant d'être supprimée, car les signaux sont conservés pendant cette durée. Durant cette période, vous pouvez réactiver la règle en [la dupliquant](#dupliquer-une-regle) dans l'interface.
 3. Après que la règle a été supprimée, vous ne pouvez plus la dupliquer ni la réactiver.
 
 ## Pour aller plus loin
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/security/default_rules/
 [2]: /fr/security/cloud_siem/
 [3]: /fr/security/cloud_siem/log_detection_rules/
-[4]: /fr/security/cspm/
-[5]: /fr/security/cloud_workload_security/
+[4]: /fr/security/cloud_security_management/misconfigurations/
+[5]: /fr/security/threats/
 [6]: /fr/security/application_security/
 [7]: /fr/tracing/
 [8]: /fr/agent/
 [9]: https://app.datadoghq.com/security/configuration/rules
 [10]: /fr/account_management/rbac/
+[11]: /fr/security/application_security/threats/custom_rules/
+[12]: /fr/security/cloud_security_management/misconfigurations/custom_rules
+[13]: /fr/security/threats/workload_security_rules?tab=host#create-custom-rules
+[14]: /fr/security/cloud_security_management/identity_risks/
+[15]: https://app.datadoghq.com/security/configuration/
+[16]: https://app.datadoghq.com/security

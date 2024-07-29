@@ -13,7 +13,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentation
   text: ウィジェット
-kind: documentation
 title: JSON を使用したグラフ作成
 ---
 

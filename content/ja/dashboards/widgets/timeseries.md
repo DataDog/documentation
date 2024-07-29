@@ -14,7 +14,6 @@ further_reading:
 - link: /dashboards/guide/slo_data_source
   tag: ガイド
   text: ダッシュボードで SLO 履歴データをグラフ化する
-kind: documentation
 title: 時系列ウィジェット
 ---
 

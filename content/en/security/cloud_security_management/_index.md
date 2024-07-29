@@ -1,13 +1,12 @@
 ---
 title: Cloud Security Management
-kind: documentation
 aliases:
   - /security_platform/cloud_security_management/
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "See What's New in Datadog Security Compliance"
-  - link: "/security/misconfigurations/setup"
+  - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
@@ -40,16 +39,18 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Security study"
+  - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
+    tag: "Blog"
+    text: "Detect malware in your containers with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/security-posture-csm/"
+    tag: "Blog"
+    text: "Report on changes to your security posture with Cloud Security Management"
 algolia:
   tags: ['inbox']
 cascade:
     algolia:
         subcategory: Cloud Security Management
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
@@ -78,6 +79,10 @@ Use the [Explorers][7] to review and remediate your organization's security dete
 
 ## Investigate resources
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Resource Catalog is in beta.</div>
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
@@ -90,21 +95,21 @@ Receive a weekly summary of Cloud Security Management activity over the past wee
 
 ## Next steps
 
-To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
+To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threats/
-[2]: /security/misconfigurations/
-[3]: https://app.datadoghq.com/security/configuration
+[2]: /security/cloud_security_management/misconfigurations/
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/security/csm
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security/compliance
-[8]: /security/identity_risks/
-[9]: /security/vulnerabilities/
+[8]: /security/cloud_security_management/identity_risks/
+[9]: /security/cloud_security_management/vulnerabilities/
 [10]: /security/cloud_security_management/setup/
 [11]: https://app.datadoghq.com/security/configuration/reports
 [12]: https://app.datadoghq.com/infrastructure/catalog

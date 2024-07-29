@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Cambiar de una organización a otra
 ---
 

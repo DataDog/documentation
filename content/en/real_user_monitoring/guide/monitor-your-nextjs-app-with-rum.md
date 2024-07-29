@@ -1,6 +1,6 @@
 ---
 title: Monitor Your Next.js App With RUM
-kind: guide
+
 description: Guide for monitoring Next.js applications with RUM.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -18,7 +18,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 
 ### Create an application
 
-1. Navigate to **[UX Monitoring > Performance Monitoring][2]**.
+1. Navigate to **[Digital Experience > Performance Summary][2]**.
 2. Click the **New Application** button.
 3. Make sure JS is selected, then enter a name for your application and click **Create New RUM Application**. A `clientToken` and `applicationId` are automatically generated for your application.
 
@@ -237,8 +237,8 @@ To start backend monitoring of your Next.js applications:
 [1]: https://nextjs.org/
 [2]: https://app.datadoghq.com/rum/performance-monitoring?_gl=1*il22i*_gcl_aw*R0NMLjE2OTAzMDM5MzcuQ2owS0NRanc1ZjJsQmhDa0FSSXNBSGVUdmxqb3ZQX1YyMFRsV1o1UlJLVHNUNHNITll2ZEJ0bTZONnlxdVM1X3lzY2NOejE4QzVON1ktOGFBcHpYRUFMd193Y0I.*_gcl_au*MjMxOTI4ODMzLjE2OTAyMjI1NTA.*_ga*MTIwMTk2NTA5Ny4xNjY2NzEzMjY2*_ga_KN80RDFSQK*MTY5MTc5ODE4OS4xMzYuMS4xNjkxNzk4NTQyLjAuMC4w*_fplc*RnA3SEVTb1BoTG9ndDI0OFQ5TERxRWRtMjNwTWVrTWZ3VGNGeWRaYm9HRkpJSXBxVHdVdFNTcURCWW1rZENHUldmU2EyTzhtZ3NXVzRUR0JUTzRnSGdPeGRkVVpWYVA5V0x4JTJGeTFRNWo5djNqYmNwQnJpckdHUU93M08xU3clM0QlM0Q
 [3]: /real_user_monitoring/browser/data_collected/
-[4]: /real_user_monitoring/dashboards/
+[4]: /real_user_monitoring/platform/dashboards/
 [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
-[6]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#setup-rum
-[7]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
+[7]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
 [8]: https://vercel.com

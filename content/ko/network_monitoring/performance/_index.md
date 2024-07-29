@@ -2,7 +2,7 @@
 algolia:
   tags:
   - npm
-  - 네트워크 성능 모니터링
+  - network performance monitoring
 aliases:
 - /ko/monitors/network_flow_monitors/
 - /ko/graphing/infrastructure/network_performance_monitor/
@@ -27,7 +27,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: 블로그
   text: Datadog NPM는 Consul 네트워킹을 지원합니다.
-kind: 설명서
+- link: https://www.datadoghq.com/blog/npm-story-centric-ux/
+  tag: 블로그
+  text: NPM의 스토리 중심 UX를 통한 퀵스타트 네트워크 조사
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석에 대한 DNS 모니터링
 title: 네트워크 성능 모니터링
 ---
 
@@ -44,10 +49,10 @@ Datadog 네트워크 성능 모니터링(NPM)을 사용하면 서비스, 컨테�
 
 NPM은 Linux와 [Windows OS][3]는 물론 [Istio 서비스 메시로 계측되고][4] 오케스트레이션되는 컨테이너화된 환경을 기본적으로 지원하여 복잡한 네트워크를 간편하게 모니터링할 수 있습니다.
 
-{{< whatsnext desc="이 섹션에는 다음 주제가 포함되어 있습니다:">}}
-{{< nextlink href="network_monitoring/performance/setup" >}}<u>설정</u>: 네트워크 데이터를 수집하도록 에이전트 설정합니다.{{< /nextlink >}}
-{{< nextlink href="network_monitoring/performance/network_page" >}}<u>네트워크 페이지</u>: 사용 가능한 각 클라이언트와 서버 간의 네트워크 데이터를 그래프로 표시합니다.{{< /nextlink >}}
-{{< nextlink href="network_monitoring/performance/network_map" >}}<u>네트워크 맵</u>: 태그 간에 네트워크 데이터를 매핑합니다.{{< /nextlink >}}
+{{< whatsnext desc="이 섹션은 다음 주제를 포함합니다:">}}
+    {{< nextlink href="network_monitoring/performance/setup" >}}<u>설정</u>: 네트워크 데이터를 수집하도록 Agent를 설정합니다.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>네트워크 분석</u>: 사용 가능한 각 클라이언트와 서버 간의 네트워크 데이터를 그래프로 표시합니다.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_map" >}}<u>네트워크 맵</u>: 태그 간에 네트워크 데이터를 매핑합니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

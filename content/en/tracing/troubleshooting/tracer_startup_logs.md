@@ -1,6 +1,5 @@
 ---
 title: Tracer Startup Logs
-kind: Documentation
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -174,7 +173,7 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Startup logs are disabled by default starting in version 2.x of the tracer. They can enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
+Startup logs are disabled by default starting in version 2.x of the tracer. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
 
 **Configuration:**
 
@@ -226,6 +225,31 @@ DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Co
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
+
+### Enable startup logs
+
+You can enable startup logs using either code configuration or an environment variable:
+
+**Code**:
+
+To enable startup logs in your code:
+
+```ruby
+Datadog.configure do |c|
+     c.diagnostics.startup_logs.enabled = true
+end
+```
+**Environment variable**:
+
+To enable startup logs using an environment variable:
+
+```shell
+export DD_TRACE_STARTUP_LOGS=true
+```
+
+### Output
+
+When startup logs are enabled, the tracer outputs configuration and diagnostic information.
 
 **Configuration:**
 

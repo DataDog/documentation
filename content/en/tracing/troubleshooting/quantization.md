@@ -1,6 +1,5 @@
 ---
 title: Quantization of APM Data
-kind: Documentation
 further_reading:
   - link: /tracing/trace_collection/custom_instrumentation/
     tag: Documentation

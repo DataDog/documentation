@@ -1,5 +1,4 @@
 ---
-kind: guide
 title: Avis d'abandon des versions de TLS antérieures à la 1.2
 ---
 

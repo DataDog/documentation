@@ -3,6 +3,7 @@ app_id: containerd
 app_uuid: 206cf95f-1d2a-4ad5-b027-0de15431833b
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: containerd.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10082
     source_type_name: Containerd
 author:
   homepage: https://www.datadoghq.com
@@ -30,7 +32,7 @@ integration_id: containerd
 integration_title: Containerd
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: containerd
 public_title: Containerd
@@ -53,15 +55,16 @@ tile:
   title: Containerd
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
 
 Ce check surveille le runtime du conteneur Containerd.
 
-## Implémentation
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Containerd est un check de base de l'[Agent Datadog][1]. Vous devez configurer Containerd dans les fichiers `datadog.yaml` et `containerd.d/conf.yaml`.
 
@@ -140,7 +143,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Modifiez le fichier `containerd.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Containerd. Consultez le [fichier d'exemple containerd.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
@@ -150,23 +153,23 @@ spec:
 
 [Lancez la sous-commande `status` de l'Agent][4] et cherchez `containerd` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "containerd" >}}
 
 
 Cette intégration fonctionne sous Linux et Windows. Toutefois, certaines métriques sont uniquement disponibles pour un seul système d'exploitation. Consultez le fichier `metadata.csv` pour découvrir la liste des métriques qui varient selon le système d'exploitation.
 
-### Événements
+### Aide
 
 Le check Containerd peut recueillir des événements. Utilisez `filters` pour sélectionner les événements pertinents. Consultez le [fichier d'exemple containerd.d/conf.yaml][2] pour obtenir plus de détails.
 
-### Checks de service
+### Aide
 {{< get-service-checks-from-git "containerd" >}}
 
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

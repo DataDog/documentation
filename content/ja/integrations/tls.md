@@ -33,9 +33,9 @@ draft: false
 git_integration_title: tls
 integration_id: tls
 integration_title: TLS
-integration_version: 2.15.0
+integration_version: 2.16.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tls
 public_title: TLS

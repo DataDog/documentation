@@ -1,6 +1,5 @@
 ---
 title: AWS Lambda metrics
-kind: documentation
 aliases:
   - /serverless/custom_metrics
   - /serverless/enhanced_lambda_metrics
@@ -96,6 +95,8 @@ You can also generate metrics from all ingested spans, regardless of whether the
 ### Submit custom metrics directly from a Lambda function
 
 All custom metrics are submitted as [distributions](#understanding-distribution-metrics).
+
+**Note**: Distribution metrics must be submitted with a new name, do not re-use a name of a previously submitted metric.
 
 1. [Install Serverless Monitoring for AWS Lambda][1] and ensure that you have installed the Datadog Lambda extension.
 

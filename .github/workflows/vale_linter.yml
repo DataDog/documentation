@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Clone Datadog Vale
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: DataDog/datadog-vale
         path: datadog-vale
     
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5.1.0
       with:
         python-version: '3.11'
     - run: pip install vale
@@ -33,11 +33,15 @@ jobs:
         file_filter: '.md, .html'
       
     - name: Run vale on changed files
+      env: 
+        CHANGED_FILES: ${{ steps.changed_lines.outputs.changed_files }}
       run: |
-        vale ${{ steps.changed_lines.outputs.changed_files }} \
+        vale "${CHANGED_FILES}" \
           --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
     
     - name: Parse Vale output
+      env:
+        CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}
       run: |
         python local/bin/py/vale/vale_annotations.py \
-          --git_data='${{ steps.changed_lines.outputs.changed_lines }}'
+          --git_data="${CHANGED_LINES}"

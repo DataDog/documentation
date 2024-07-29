@@ -1,6 +1,5 @@
 ---
 description: Datadog로 데이터가 전송되기 시작하면 실행해야 할 단계
-kind: 설명서
 private: true
 title: 가치 제공하기
 ---

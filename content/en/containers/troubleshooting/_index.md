@@ -1,6 +1,5 @@
 ---
 title: Container Troubleshooting
-kind: documentation
 description: Troubleshooting containers-related issues
 further_reading:
 - link: "/containers/troubleshooting/duplicate_hosts"
@@ -85,7 +84,7 @@ Ensure that your IAM policy is updated.
 
   - [ECS][12]: Ensure that the log router is attached to the container from which you would like to collect logs.
 
-  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Kinesis Data Firehose][14]. Using Kinesis Data Firehose to collect logs requires the successful implementation of the Kinesis Data Firehose delivery stream, as well as some command line tools. 
+  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Amazon Data Firehose][14]. Using Amazon Data Firehose to collect logs requires the successful implementation of the Amazon Data Firehose delivery stream, as well as some command line tools. 
  
 
 ## Kubernetes

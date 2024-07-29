@@ -1,6 +1,5 @@
 ---
 title: Google Cloud Configuration Guide for Cloud SIEM
-kind: documentation
 further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
@@ -26,9 +25,9 @@ further_reading:
 Use [Google Cloud Dataflow][2] and the [Datadog template][3] to forward logs from your Google Cloud services to Datadog. This guide walks you through the following steps so that you can start detecting threats with your Google Cloud audit logs:
 
 1. [Enable Data Access audit logs](#enable-data-access-audit-logs)
-1. [Create a Google Cloud publish/subscription (pub/sub) topic and pull subscription](#create-a-google-cloud-publishsubscription-pubsub-system) to receive logs from a configured log sink
+1. [Create a Google Cloud publish/subscription (Pub/Sub) topic and pull subscription](#create-a-google-cloud-publishsubscription-pubsub-system) to receive logs from a configured log sink
 1. [Create a custom Dataflow worker service account](#create-a-custom-dataflow-worker-service-account)
-1. [Create a log sink to publish logs to the pub/sub](#create-a-log-sink-to-publish-logs-to-the-pubsub)
+1. [Create a log sink to publish logs to the Pub/Sub](#create-a-log-sink-to-publish-logs-to-the-pubsub)
 1. [Create and run the Dataflow job](#create-and-run-the-dataflow-job)
 1. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
 
@@ -59,7 +58,7 @@ To ensure that Data Access audit logs are captured for new Google Cloud services
 1. Enable **Admin Read**, **Data Read**, and **Data Write**.
 1. Click **Save**.
 
-## Create a Google Cloud publish/subscription (pub/sub) system
+## Create a Google Cloud publish/subscription (Pub/Sub) system
 
 1. Navigate to Pub/Sub > [Topics][5].
 1. Click **Create Topic**.
@@ -114,7 +113,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 7. Continue **Continue**.
 8. Click **Done**.
 
-##  Create a log sink to publish logs to the pub/sub
+##  Create a log sink to publish logs to the Pub/Sub
 
 1. Navigate to Google Cloud's [Logs Explorer][19].
 1. Select **Log Router** in the left side menu.
@@ -130,7 +129,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Optionally, enter an exclusion filter to exclude logs you do not want sent to Datadog.
 1. Click **Create Sink**.
 
-**Note**: It is possible to create several exports from Google Cloud Logging to the same pub/sub with different sinks.
+**Note**: You can create multiple exports from Google Cloud Logging to the same Pub/Sub topic with different sinks.
 
 ## Create and run the Dataflow job
 

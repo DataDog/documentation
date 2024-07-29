@@ -1,28 +1,39 @@
 {{ $dot := . }}
 <div class="dbm-databases">
-  <div class="container cards-dd">
-    <div class="row row-cols-2 row-cols-sm-3 g-2 g-xl-3 justify-content-sm-center">
-      <div class="col">
-        <a class="card h-100" href="/integrations/postgres/#data-collected">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/postgres.png" "class" "img-fluid" "alt" "Postgres" "width" "200") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/integrations/mysql/#data-collected">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/mysql.png" "class" "img-fluid" "alt" "MySQL" "width" "200") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/integrations/sqlserver/#data-collected">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/sqlserver.png" "class" "img-fluid" "alt" "SQL Server" "width" "200") }}
-          </div>
-        </a>
-      </div>
+    <div class="container cards-dd">
+        <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+            <div class="col">
+                <a class="card h-100" href="/integrations/postgres/#data-collected">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/postgres.png" "class" "img-fluid"
+                        "alt" "Postgres" "width" "150") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/integrations/mysql/#data-collected">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/mysql.png" "class" "img-fluid"
+                        "alt" "MySQL" "width" "150") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/integrations/sqlserver/#data-collected">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/sqlserver.png" "class"
+                        "img-fluid" "alt" "SQL Server" "width" "150") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="/integrations/oracle/#data-collected">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/oracle.png" "class" "img-fluid"
+                        "alt" "Oracle" "width" "150") }}
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

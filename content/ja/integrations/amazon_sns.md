@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon Simple Notification Service (SNS)
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Datadog-Amazon Simple Notification Service (SNS) インテグレーション
@@ -116,7 +116,7 @@ Amazon SNS インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-Datadog では、Datadog から GovCloud または 中国のトピックへの SNS 通知をサポートしていません。
+Datadog では、Datadog から中国のトピックへの SNS 通知をサポートしていません。
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

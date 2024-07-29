@@ -9,7 +9,6 @@ further_reading:
   tag: GitHub
   text: Envoyer des métriques et des traces depuis le Collector OpenTelemetry vers
     Datadog via l'exportateur Datadog
-kind: documentation
 title: Envoyer des métriques depuis OpenTelemetry vers Datadog
 ---
 

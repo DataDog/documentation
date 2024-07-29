@@ -22,7 +22,6 @@ further_reading:
 - link: /agent/guide/secrets-management/
   tag: ドキュメント
   text: 機密情報管理
-kind: documentation
 title: 基本の Agent オートディスカバリー
 ---
 

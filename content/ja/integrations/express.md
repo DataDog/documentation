@@ -1,28 +1,32 @@
 ---
 aliases:
-  - /ja/integrations/expressjs/
+- /ja/integrations/expressjs/
 categories:
-  - web
-ddtype: ライブラリ
+- languages
 dependencies: []
 description: 全体的な応答時間と応答コード別のリクエスト率を監視。
-doc_link: 'https://docs.datadoghq.com/integrations/express/'
+doc_link: https://docs.datadoghq.com/integrations/express/
 draft: false
 git_integration_title: express
 has_logo: true
 integration_id: express
 integration_title: ExpressJS
+integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: express
 public_title: Datadog-ExpressJS インテグレーション
 short_description: 全体的な応答時間と応答コード別のリクエスト率を監視。
 version: '1.0'
 ---
-{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS のグラフ" popup="true">}}
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS グラフ" popup="true">}}
 
 ## 概要
+
+<div class="alert alert-danger">Express インテグレーションは非推奨となり、Datadog APM に置き換わりました。Datadog APM は、Express インテグレーションと同じ<a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">メトリクス</a>を生成し、その他多くの機能とインテグレーションを備えています。Express インテグレーションは今後アップデートされないため、Datadog では <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a> へのアップグレードを強く推奨しています。</div>
 
 Datadog の [Connect-Datadog ミドルウェア][1]をアプリケーションに追加すると、以下のことができます。
 
@@ -33,7 +37,7 @@ Datadog の [Connect-Datadog ミドルウェア][1]をアプリケーション�
 
 Express インテグレーションは、収集したメトリクス Datadog に転送するのに Datadog Agent DogStatsD サーバーを必要とします。
 
-[ホストに Agent をインストールしたら][2]、[DogStatsD セットアップドキュメント][3]を参照して有効にしてください。
+ホストに [Agent をインストール][2]したら、[DogStatsD セットアップドキュメント][3]を参照して有効にしてください。
 
 ### コンフィギュレーション
 
@@ -53,7 +57,7 @@ Express インテグレーションは、収集したメトリクス Datadog に
 
     var connect_datadog = require('connect-datadog')(dd_options);
 
-    // Add your other middlewares
+    // Add your other middleware
     app.use(...);
 
     // Add the datadog-middleware before your router
@@ -80,7 +84,7 @@ Express インテグレーションには、サービスのチェック機能は
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://www.npmjs.com/package/connect-datadog
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=hostagent#setup
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/express/express_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

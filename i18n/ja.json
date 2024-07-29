@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "700"
+    "other": "750"
   },
 
   "beta_sentence": {
@@ -356,12 +356,21 @@
     "other": "個別デモのリクエスト"
   },
   "configuration_management" : {
-    "other": "Configuration management"
+    "other": "構成管理"
   },
   "cloud_and_container" : {
-    "other": "Cloud and container"
+    "other": "クラウドとコンテナ"
   },
   "source" : {
-    "other": "Source"
+    "other": "ソース"
+  },
+  "legacy": {
+      "other": "レガシー"
+  },
+  "try_this_rule" : {
+    "other": "このルールを試す"
+  },
+  "available_for": {
+    "other": "次で利用可能"
   }
 }

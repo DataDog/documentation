@@ -1,6 +1,5 @@
 ---
 title: Dual Shipping
-kind: guide
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
@@ -15,7 +14,7 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 ## Overview
 
-If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
+If you wish to send data to more than one destination, such as a second Datadog organization, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
 
 For a full list of network traffic destinations, see [Network Traffic][1].
 
@@ -170,7 +169,7 @@ agents:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.datadoghq.com":
-        - apikey2 
+        - apikey2
 
 clusterAgent:
 ...
@@ -178,7 +177,7 @@ clusterAgent:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.ddog-gov.com":
-        - apikey2 
+        - apikey2
 ```
 
 
@@ -324,6 +323,33 @@ network_devices:
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
 DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+```
+
+{{% agent-dual-shipping %}}
+
+## Network Path
+
+### YAML configuration
+
+Requires Agent >= 6.55 or 7.55.
+
+In `datadog.yaml`:
+```yaml
+network_path:
+  forwarder:
+    use_http: true
+    additional_endpoints:
+    - api_key: "apiKey2"
+      Host: "netpath-intake.datadoghq.com"
+      Port: 443
+      is_reliable: true
+```
+
+### Environment variable configuration
+
+```bash
+DD_NETWORK_PATH_FORWARDER_USE_HTTP=true
+DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"netpath-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}

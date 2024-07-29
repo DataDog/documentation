@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing
   tag: 料金
   text: Datadog の料金
-kind: documentation
 title: 料金
 ---
 

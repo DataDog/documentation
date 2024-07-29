@@ -12,12 +12,12 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Watchdog
   tag: リリースノート
   text: Datadog Watchdog の最新リリースをチェック！ (アプリログインが必要です)。
+- link: https://www.datadoghq.com/blog/datadog-bits-generative-ai/
+  tag: ブログ
+  text: 新しい DevOps のコパイロット、Bits AI のご紹介
 - link: /logs/
   tag: ドキュメント
   text: ログの収集
-- link: /infrastructure/process/
-  tag: ドキュメント
-  text: プロセスの収集
 - link: /tracing/
   tag: ドキュメント
   text: トレースの収集
@@ -27,71 +27,59 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-impact-analysis/
   tag: ブログ
   text: Watchdog Impact Analysis によるユーザーインパクト範囲の把握
-kind: ドキュメント
+- link: https://www.datadoghq.com/blog/watchdog-live-processes/
+  tag: ブログ
+  text: ライブプロセス用 Watchdog Insights によるワークロードのパフォーマンス異常に対するトラブルシューティング
 title: Datadog WatchdogTM
 ---
-
-{{< img src="watchdog/watchdog.png" alt="Watchdog Alerts ページには、エラーログの進行中のログ異常アラートが 1 つ、エラーログの解決済みログ異常アラートが 1 つ、根本原因分析によって解決されたエラーレートアラートが 1 つ表示されています" >}}
-
 ## 概要
 
-Watchdog は、アプリケーションやインフラストラクチャーの潜在的な問題を自動的に検出する APM パファーマンス、インフラストラクチャーメトリクス、およびログのアルゴリズム機能です。Watchdog は以下の傾向やパターンを監視します。異常検知やダッシュボードを起動するのと同様の季節アルゴリズムを活用します。Watchdog は以下の傾向やパターンを監視します。
+Watchdog は Datadog の AI エンジンで、Datadog プラットフォーム全体にわたる可観測性データを基にした自動化されたアラート、洞察、根本原因分析を提供します。Watchdog は、インフラストラクチャーを継続的に監視し、最も重要なシグナルに注意を促し、問題の検出、トラブルシューティング、解決を支援します。
 
-* APM メトリクス:
-  * ヒット数（リクエスト率）
-  * エラー率
-  * レイテンシー
+Watchdog 機能はすべて内蔵されており、セットアップの必要はありません。
 
-* ログ管理
-  * 新しいエラーログ
-  * 既存のエラーログの増加
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/781921620/rendition/1080p/file.mp4?loc=external&signature=8889419b739e3398d03a72edca4f96909144567e045d30deeb8f9345c43a682d" poster="/images/poster/watchdog.png" >}}
 
-* インテグレーションによるインフラストラクチャーメトリクス
-  * [システム][1]、ホストレベルのメモリ使用量（メモリリーク）、TCP 再送率。
-  * [Redis][2]
-  * [PostgreSQL][3]
-  * [NGINX][4]
-  * [Amazon Web Services][5]（[S3][6]、[ELB/ALB/NLB][7]、[CloudFront][8]、[DynamoDB][9] Amazon サービス）
-  * [アラート設定][10]
+<br/>
 
-Watchdog は、ヒット率が突然急上昇するなど、メトリクスに不規則性がないかを調べます。各不規則性に対して、[Watchdog ページ][11]は Watchdog アラートを表示します。各アラートには、検出されたメトリクスの不規則性のグラフが含まれ、関連する時間枠とエンドポイントまたはエンドポイントに関する詳細な情報を提供します。Watchdog は、Datadog Agent またはインテグレーションによって送信されたデータを自動的に監視します。
+### プロアクティブアラート
 
-メトリクス、ログ、その他のデータの新しいソースに対して、Watchdog は予想される動作のベースラインを確立するために 2 週間のデータを要求します。2 週間未満のデータに基づいて Watchdog が検出した異常には、不正確なものが含まれている可能性があります。
+Watchdog は、システム、アプリケーション、デプロイメントに対して予期される動作のベースラインをプロアクティブに計算します。このベースラインは、異常な動作を検出するために使用されます。
 
-## サービスカタログの Watchdog
+{{< whatsnext desc="">}}
+  {{< nextlink href="/watchdog/alerts">}}<u>Watchdog Alerts</u>: Watchdog Alerts の表示と解釈方法: 各アラートが提供する情報、アラートのカバー範囲、Datadog 全体での Watchdog アラートの検索場所。{{< /nextlink >}}
+  {{< nextlink href="/watchdog/faulty_deployment_detection">}}<u>Faulty Deployment Detection</u>: Watchdog が不具合のあるコードデプロイメントをどのように特定するか。{{< /nextlink >}}
+{{< /whatsnext >}}
 
-Watchdog が APM メトリクスに異常を検出すると、[APM サービスカタログ][12]の影響を受けるサービスの横にピンクの Watchdog 双眼鏡アイコンが表示されます。
+Watchdog アルゴリズムをカスタマイズするには
+  * [異常アルゴリズム][7]
+  * [予測アルゴリズム][8]
+  * [外れ値アルゴリズム][9]
 
-{{< img src="watchdog/service_list.png" alt="サービスカタログの画面、5 つのサービスが表示されています。Web ストアのサービス名の後にピンクの双眼鏡のアイコンがついています。" style="width:75%;" >}}
+### 調査支援
 
-[サービスページ][13]に移動して、メトリクス異常の詳細を見ることができます。ページの上部には、Watchdog Insights ボックスがあります。Watchdog Insights を使用すると、エラー率やレイテンシーの上昇など、異常な動作に関連するタグ値を発見することができます。
+Watchdog は調査を支援するため、すべてのエクスプローラーでコンテキストベースの洞察を表示し、根本原因を検索し、ユーザーへの影響を判断します。
 
-Watchdog のアイコンは、メトリクスグラフにも表示されます。
+{{< whatsnext desc="">}}
+  {{< nextlink href="/watchdog/insights">}}<u>Watchdog Insights</u>: Watchdog Insights は、問題の特定と解決を支援するレコメンデーションエンジンです。{{< /nextlink >}}
+  {{< nextlink href="/watchdog/rca">}}<u>Root Cause Analysis</u>: Watchdog Root Cause Analysis (RCA) が異常の根本原因を見つける方法と、提供された情報の使用方法。{{< /nextlink >}}
+  {{< nextlink href="/watchdog/impact_analysis">}}<u>Impact Analysis</u>: Watchdog がユーザーに悪影響を与える異常を特定する方法。{{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< img src="watchdog/latency_graph.png" alt="サービスのレイテンシー (秒) をY軸に、時間帯を X 軸にとったグラフ。グラフ全体がピンク色で表示され、上部に「May 2: 13:31 Ongoing」と表示されている" style="width:75%;" >}}
+## ヘルプ
 
-双眼鏡のアイコンをクリックすると、詳細が書かれた [Watchdog アラート][14]のカードが表示されます。
-
-## トラブルシューティング
-
-ご不明な点は [Datadog サポート][15]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/system/
-[2]: /ja/integrations/redisdb/
-[3]: /ja/integrations/postgres/
-[4]: /ja/integrations/nginx/
-[5]: /ja/integrations/amazon_web_services/
-[6]: /ja/integrations/amazon_s3/
-[7]: /ja/integrations/amazon_elb/
-[8]: /ja/integrations/amazon_cloudfront/
-[9]: /ja/integrations/amazon_dynamodb/
-[10]: /ja/monitors/
-[11]: https://app.datadoghq.com/watchdog
-[12]: /ja/tracing/service_catalog/
-[13]: /ja/tracing/services/service_page/#overview
-[14]: /ja/watchdog/alerts#alert-details
-[15]: /ja/help/
+[1]: /ja/help/
+[2]: /ja/watchdog/alerts
+[3]: /ja/watchdog/faulty_deployment_detection/
+[4]: /ja/watchdog/insights?tab=logmanagement
+[5]: /ja/watchdog/rca/
+[6]: /ja/watchdog/impact_analysis/
+[7]: /ja/monitors/types/anomaly/#anomaly-detection-algorithms
+[8]: /ja/monitors/types/forecasts/?tab=linear#algorithms
+[9]: /ja/monitors/types/outlier/?tab=dbscan#algorithms

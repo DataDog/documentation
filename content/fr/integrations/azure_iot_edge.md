@@ -28,7 +28,7 @@ guid: 9eafeab9-daf4-4f54-befc-fcc623ec9c1b
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: azure.iot_edge.

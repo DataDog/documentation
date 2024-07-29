@@ -22,7 +22,7 @@ integration_id: rum-flutter
 integration_title: Flutter
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_flutter
 public_title: Flutter

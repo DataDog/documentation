@@ -1,6 +1,5 @@
 ---
 title: Is it possible to have my login belong to multiple Datadog organizations?
-kind: faq
 ---
 
 Yes. The [multi-account feature][1] enables you to create new organizations. To enable this feature for your organization, contact [Datadog support][2].

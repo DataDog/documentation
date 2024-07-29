@@ -1,6 +1,5 @@
 ---
 title: Sending large volumes of metrics
-kind: documentation
 description: 'Optimizing DogStatsD for high throughput'
 further_reading:
     - link: 'developers/dogstatsd'

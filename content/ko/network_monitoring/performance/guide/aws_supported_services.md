@@ -6,7 +6,6 @@ further_reading:
 - link: /network_monitoring/devices
   tag: 설명서
   text: 네트워크 장치 모니터링
-kind: 가이드
 npm_provider: aws
 title: NPM AWS 지원 서비스
 ---

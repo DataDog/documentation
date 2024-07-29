@@ -1,12 +1,11 @@
 ---
 title: Configuration
-kind: documentation
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/management/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "OpenTelemetry Collector Management"
 - link: "https://opentelemetry.io/docs/collector/configuration/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "OpenTelemetry Collector Configuration"
 ---
 

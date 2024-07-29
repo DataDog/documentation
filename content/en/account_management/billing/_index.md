@@ -1,19 +1,18 @@
 ---
 title: Billing
-kind: documentation
 ---
 
 ## Overview
 
 The billing cycle begins the first of the month (UTC) regardless of when you sign up. Your first month is prorated based on your actual sign-up date.
 
-Datadog meters the count of hosts and custom metrics hourly. The billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill. The billable count of custom metrics is based on the average number of custom metric hours for the month. See your [Usage][1] in Datadog. Billing pages are only accessible to users with the Datadog Admin Role.
+Datadog meters the count of hosts and custom metrics hourly. The billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1 percent to reduce the impact of spikes in usage on your bill. The billable count of custom metrics is based on the average number of custom metric hours for the month. See your [Usage][1] in Datadog. Billing pages are only accessible to users with the Datadog Admin Role.
 
 ### Hosts
 
 A host is any physical or virtual OS instance that you monitor with Datadog. It could be a server, VM, node (in the case of Kubernetes), App Service Plan instance (in the case of Azure App Service), or Heroku dyno (in the case of the Heroku platform). Hosts can be instances with the Datadog Agent installed plus any Amazon EC2s, Google Cloud, Azure, or vSphere VMs monitored with Datadog integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
 
-Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
+Non-reporting hosts (status `INACTIVE` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
 
 ### Containers
 
@@ -29,15 +28,19 @@ For more information, see the [Serverless billing page][5] and the [Datadog Pric
 
 ### IoT
 
-Datadog meters the count of IoT devices hourly. The billable count of IoT devices is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours, excluding the top 1% to reduce the impact of spikes in usage on your bill.
+Datadog meters the count of IoT devices hourly. The billable count of IoT devices is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours, excluding the top 1 percent to reduce the impact of spikes in usage on your bill.
 
 For more information about IoT billing, see the [Datadog Pricing page][7].
 
 ## Plan details
 
+To manage your **Payment Method** and view **Subscription Details**, you must be a Datadog Admin user.
+
+Alternately, roles with Billing Read (`billing_read`) and Billing Edit (`billing_edit`) [permissions][8] can access this data.
+
 ### Managing your payment method
 
-The [**Payment Method**][8] section contains details on your payment options. 
+The [**Payment Method**][9] section contains details on your payment options. 
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:90%;" >}}
 
@@ -47,7 +50,7 @@ The [**Payment Method**][8] section contains details on your payment options.
 
 ### Managing your billing contact details
 
-You can view your billing contact details on the [**Billing Contact Details**][8] section. 
+You can view your billing contact details on the [**Billing Contact Details**][9] section. 
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:90%;" >}}
 
@@ -59,7 +62,7 @@ You can view your billing contact details on the [**Billing Contact Details**][8
 
 ### View your subscription details
 
-The [Subscription Details][8] section includes the quantity, contract price, and on-demand price for all committed products.
+The [Subscription Details][9] section includes the quantity, contract price, and on-demand price for all committed products.
 
 {{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage page highlighting Subscription Details section" style="width:90%;" >}}
 
@@ -73,13 +76,13 @@ There are two choices for payment method:
 
 ### Credit card
 
-If you pay by credit card, receipts are available to [Administrators][9] for previous months under [Billing History][10]. For copies of your invoice, email [Datadog billing][11].
+If you pay by credit card, receipts are available to [Administrators][10] for previous months under [Billing History][11]. For copies of your invoice, email [Datadog billing][13].
 
 See [Credit Card Billing][12] for more details.
 
 ### Invoicing
 
-If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][11]. Details on where to remit payment can be found on the invoice.
+If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][13]. Details on where to remit payment can be found on the invoice.
 
 ## Contact
 
@@ -112,6 +115,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 {{< /whatsnext >}}
 
 
+
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /infrastructure/
 [3]: /agent/
@@ -119,8 +123,9 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 [5]: /account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: https://app.datadoghq.com/billing/plan
-[9]: /account_management/rbac/#datadog-default-roles
-[10]: https://app.datadoghq.com/account/billing_history
-[11]: mailto:billing@datadoghq.com
+[8]: /account_management/rbac/permissions/#billing-and-usage
+[9]: https://app.datadoghq.com/billing/plan
+[10]: /account_management/rbac/#datadog-default-roles
+[11]: https://app.datadoghq.com/account/billing_history
 [12]: /account_management/billing/credit_card/
+[13]: mailto:billing@datadoghq.com

@@ -36,7 +36,7 @@ Both of these should return the same image.
 {{- $extension := .extension | default ".svg" -}}
 {{- $fallback := .fallback | default "none" -}}
 {{- $img_url := $ctx.Site.Params.integrations_img_url -}}
-{{- $imagesJSON := getJSON "https://s3.amazonaws.com/origin-static-assets/websites-integrations/images.json" -}}
+{{- $imagesJSON := site.Data.images -}}
 {{- $integrationLogosList := index $imagesJSON "integrationLogosList" | default slice -}}
 {{- $integrationAliasList := index $imagesJSON "aliases" | default dict -}}
 {{- if (eq (len $integrationLogosList) 0) -}}

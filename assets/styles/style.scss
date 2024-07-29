@@ -49,6 +49,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/global-modals';
 @import 'components/header';
 @import 'components/integration-labels';
+@import 'components/product-availability-labels';
 @import 'components/breadcrumbs';
 @import 'components/integrations';
 @import 'components/platforms';
@@ -63,11 +64,16 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/schema-table';
 @import 'components/tab-toggle';
 @import 'components/grouped-item-listings';
+@import 'components/try-rule-cta-and-banner';
+@import 'components/try-rule-modal';
+@import 'components/learning-center-callout';
 
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules
 @import 'components/dd-navbar'; // for body-noscroll
 @import 'components/demo-request-modal'; // imported from websites-modules
+
+@import 'components/collapsible-section'; // Collapsible section styles
 
 
 // for now just include ie fixes

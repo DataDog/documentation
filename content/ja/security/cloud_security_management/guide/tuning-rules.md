@@ -2,7 +2,6 @@
 aliases:
 - /ja/security_platform/cloud_workload_security/guide/tuning-rules/
 - /ja/security_platform/cloud_security_management/guide/tuning-rules/
-kind: ガイド
 title: CSM Threats セキュリティシグナルの微調整
 ---
 

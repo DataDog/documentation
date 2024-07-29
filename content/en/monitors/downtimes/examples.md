@@ -1,12 +1,8 @@
 ---
 title: Examples
-kind: Documentation
 aliases:
 - /monitors/guide/suppress-alert-with-downtimes
 further_reading:
-- link: "monitors/downtimes/"
-  tag: "Documentation"
-  text: "Downtimes"
 - link: "monitors/downtimes/"
   tag: "Documentation"
   text: "Downtimes"
@@ -339,7 +335,7 @@ Open the [Manage Downtime page][1] and add a new downtime. Select `recurring` an
 {{% /tab %}}
 {{< /tabs >}}
 
-### Further Reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Datadog Forwarder を使用した Java サーバーレスアプリケーションのインスツルメンテーション
 ---
 ## 概要
@@ -7,8 +6,6 @@ title: Datadog Forwarder を使用した Java サーバーレスアプリケー�
 <div class="alert alert-warning">
 Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/java">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
 </div>
-
-{{< img src="serverless/java-lambda-tracing.png" alt="Datadog で Java Lambda 関数を監視" style="width:100%;">}}
 
 <div class="alert alert-danger">
 <code>datadog-lambda-java</code> の一部の古いバージョンでは、推移的依存関係として <code>log4j <=2.14.0</code> をインポートします。<a href="#upgrading">アップグレードの手順</a>は以下の通りです。
@@ -20,9 +17,9 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用している必要があります。
 
-## コンフィギュレーション
+## ブラウザトラブルシューティング
 
-### Install
+### インストール
 
 以下のコードブロックのいずれかを `pom.xml` (Maven) または `build.gradle` (Gradle) に追加し、Datadog Lambda Library をローカルにインストールします。以下の `VERSION` を最新のリリースに置き換えてください (直前の `v` は省略): ![Maven Cental][4]
 {{< tabs >}}
@@ -53,21 +50,12 @@ dependencies {
 
 ### インスツルメントする
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
+
 1. 関数に Datadog Lambda レイヤーをインストールします。最新の `VERSION` は `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` です。
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
     ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. 関数に Datadog Lambda レイヤーをインストールします。最新の `VERSION` は `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` です。
-
-    ```yaml
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:<VERSION>
-    ```
-{{< /site-region >}}
 
 2. 関数に以下の環境変数を構成します。
 
@@ -207,17 +195,10 @@ dependencies {
 
 0.3.x から 1.4.x へのアップグレードで、`dd-trace-java` トレーサーを使用したい場合は、`dd-trace-java` Lambda レイヤーへの参照を見つけ、次のように変更してください。
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ```
-{{< /site-region >}}
 
-{{< site-region region="ap1" >}}
-```
-arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:4
-```
-{{< /site-region >}}
 
 [2]: /ja/serverless/forwarder/
 [3]: /ja/serverless/enhanced_lambda_metrics

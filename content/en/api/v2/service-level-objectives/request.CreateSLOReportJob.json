@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "from_ts": 1690901870,
+      "to_ts": 1706803070,
+      "query": "slo_type:metric \"SLO Reporting Test\"",
+      "interval": "monthly",
+      "timezone": "America/New_York"
+    }
+  }
+}

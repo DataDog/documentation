@@ -13,11 +13,10 @@ further_reading:
   text: Recopilar tus trazas
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentación
-  text: Obtén más información sobre la arquitectura del Agent
-- link: /agent/guide/network#configure-ports
+  text: Más información sobre la arquitectura del Agent
+- link: /agent/configuration/network#configure-ports
   tag: Documentación
   text: Configurar puertos de entrada
-kind: documentación
 os: osx
 platform: OS X
 title: Uso básico del Agent para macOS
@@ -38,7 +37,7 @@ Por defecto, el Agent se instala en un entorno de pruebas ubicado en `/opt/datad
 | macOS 10.13         | Agent v5, Agent v6 hasta la versión 6.38.2, Agent v7 hasta la versión 7.38.2            |
 | macOS 10.14 y posteriores        | Agent v5, Agent v6, Agent v7                                        |
 
-## Commandos
+## Comandos
 
 En las versiones 6 y 7 del Agent, el gestor de servicios `launchctl` proporcionado por el sistema operativo es responsable del ciclo de vida del Agent, mientras que para ejecutar otros comandos hay que hacerlo directamente a través del sistema binario del Agent. Otra posibilidad es gestionar los comandos del ciclo de vida a través de la aplicación systray, y ejecutar otros comandos con la GUI web.
 
@@ -101,6 +100,63 @@ Archivos de configuración para las [integraciones][1]:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Desinstalar el Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 y v7" %}}
+**Instalación por un solo usuario**
+
+Para eliminar el Agent y todos sus archivos de configuración:
+1. Detén y cierra el Datadog Agent con el icono en forma de hueso en la bandeja.
+2. Arrastra la aplicación de Datadog desde la carpeta de aplicaciones a la papelera.
+3. Ejecuta los siguientes comandos:
+    ```shell
+    sudo rm -rf /opt/datadog-agent
+    sudo rm -rf /usr/local/bin/datadog-agent
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+    launchctl remove com.datadoghq.agent
+    sudo rm -rf /var/log/datadog
+    ```
+4. Reinicia el equipo para que se apliquen los cambios.
+
+**Instalación de LaunchDaemon en todo el sistema**
+
+Para eliminar el Agent y todos sus archivos de configuración:
+1. Arrastra la aplicación de Datadog desde la carpeta de aplicaciones a la papelera.
+2. Para eliminar los archivos que queden, ejecuta lo siguiente:
+    ```shell
+    sudo rm -rf /opt/datadog-agent
+    sudo rm -rf /usr/local/bin/datadog-agent
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+    sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
+    sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+    sudo rm -rf /var/log/datadog
+    ```
+3. Reinicia el equipo para que se apliquen los cambios.
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+1. Detén y cierra el Datadog Agent con el icono en forma de hueso en la bandeja.
+2. Arrastra la aplicación de Datadog desde la carpeta de aplicaciones a la papelera.
+3. Ejecuta lo siguiente:
+
+```shell
+sudo rm -rf /opt/datadog-agent
+sudo rm -rf /usr/local/bin/datadog-agent
+sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+```
+
+Si has ejecutado los comandos de instalación opcionales para que el Agent se ejecute en el arranque, ejecuta lo siguiente para finalizar la desinstalación:
+
+```shell
+sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
+sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+```
+
+> Este método elimina el Agent, así como todos sus archivos de configuración.
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Solucionar problemas
 
 Consulta la [documentación sobre cómo solucionar problemas del Agent][2].
@@ -109,12 +165,12 @@ Consulta la [documentación sobre cómo solucionar problemas del Agent][2].
 
 El Agent tiene un entorno de Python integrado en `/opt/datadog-agent/embedded/`. Los archivos binarios comunes, como `python` y `pip`, se encuentran dentro de `/opt/datadog-agent/embedded/bin/`.
 
-Si deseas obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][3].
+Si quieres obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][3].
 
-
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/mac
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=macos
 [2]: /es/agent/troubleshooting/
 [3]: /es/developers/guide/custom-python-package/

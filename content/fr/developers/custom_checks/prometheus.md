@@ -1,6 +1,5 @@
 ---
 title: Check OpenMetrics personnalisé
-kind: documentation
 further_reading:
   - link: /agent/kubernetes/prometheus
     tag: Documentation

@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/visualize-google-cloud-activity-cloud-siem-investigator/
   tag: ブログ
   text: Datadog Cloud SIEM Investigator で Google Cloud 環境のアクティビティを視覚化する
-kind: documentation
 title: Cloud SIEM のための Google Cloud 構成ガイド
 ---
 

@@ -12,7 +12,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: ASM の仕組み
-kind: documentation
 title: Application Threat Management
 ---
 

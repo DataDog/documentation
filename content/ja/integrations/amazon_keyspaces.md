@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: Amazon Keyspaces (Apache Cassandra 用)
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_keyspaces
 public_title: Datadog-Amazon Keyspaces (Apache Cassandra 用) インテグレーション

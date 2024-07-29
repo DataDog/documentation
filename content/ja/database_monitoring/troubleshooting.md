@@ -1,17 +1,14 @@
 ---
 description: データベースモニタリングセットアップのトラブルシューティング
-kind: documentation
 title: データベースモニタリングのトラブルシューティング
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 このページでは、データベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
 
 特定のデータベースセットアップに関するトラブルシューティングは、対応するトラブルシューティングページをご利用ください。
 
 * [MySQL セットアップのトラブルシューティング][2]
+* [Oracle セットアップのトラブルシューティング][8]
 * [Postgres セットアップのトラブルシューティング][3]
 * [SQL Server セットアップのトラブルシューティング][4]
 
@@ -70,4 +67,5 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 [3]: /ja/database_monitoring/setup_postgres/troubleshooting/
 [4]: /ja/database_monitoring/setup_sql_server/troubleshooting/
 [5]: /ja/help/
-[7]: /ja/agent/proxy/?tab=linux
+[7]: /ja/agent/configuration/proxy/?tab=linux
+[8]: /ja/database_monitoring/setup_oracle/troubleshooting/

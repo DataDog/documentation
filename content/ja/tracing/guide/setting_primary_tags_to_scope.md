@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/glossary/
   tag: APM の UI を利用する
   text: サービス、リソース、トレースの詳細
-kind: documentation
 title: プライマリタグをスコープに設定
 ---
 
