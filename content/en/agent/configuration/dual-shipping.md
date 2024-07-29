@@ -441,7 +441,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
     ```bash
     kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
     ```
-2. Use the [Helm chart parameters][7] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
+2. Use the [Helm chart parameters][3] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
     ```yaml
     datadog:
       [...]
@@ -457,7 +457,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 {{% tab "Datadog Operator" %}}
 
-If you're using the [Datadog Agent operator][3], you can set the `[key].customConfigurations.[key].configData` [override][5] key to set these settings. The example below replaces the `datadog.yaml` configuration file of the node Agent to send metrics and logs to additional regions.
+If you're using the [Datadog Agent operator][4], you can set the `[key].customConfigurations.[key].configData` [override][5] key to set these settings. The example below replaces the `datadog.yaml` configuration file of the node Agent to send metrics and logs to additional regions.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -516,6 +516,6 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 [1]: /agent/configuration/network/
 [2]: https://github.com/DataDog/helm-charts
-[3]: https://github.com/DataDog/datadog-operator
-[6]: https://docs.datadoghq.com/agent/configuration/dual-shipping/#environment-variable-configuration
-[7]: https://github.com/DataDog/helm-charts/blob/e1ec85127de74c8b876eef6a81bb1579d17b49bf/charts/datadog/values.yaml#L563-L578
+[3]: https://github.com/DataDog/helm-charts/blob/e1ec85127de74c8b876eef6a81bb1579d17b49bf/charts/datadog/values.yaml#L563-L578
+[4]: https://github.com/DataDog/datadog-operator
+[5]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
