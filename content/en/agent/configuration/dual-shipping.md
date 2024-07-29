@@ -430,7 +430,7 @@ and add the relevant settings to `customAgentConfig`.
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "{{< region-param key=agent_http_endpoint >}}"
+        Host: "agent-http-intake.logs.datadoghq.com"
         Port: 443
         is_reliable: true
 ```
@@ -483,7 +483,7 @@ spec:
               use_http: true
               additional_endpoints:
               - api_key: "apiKey2"
-                Host: "{{< region-param key=agent_http_endpoint >}}"
+                Host: "agent-http-intake.logs.datadoghq.com"
                 Port: 443
                 is_reliable: true
 ```
@@ -494,7 +494,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
     ```bash
     kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
     ```
-2. Use the `[key].env` to reference this secret in your configuration:
+2. Use the `[key].env` parameter to reference this secret in your configuration:
     ```yaml
     apiVersion: datadoghq.com/v2alpha1
     kind: DatadogAgent
