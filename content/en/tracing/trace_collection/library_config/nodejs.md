@@ -65,7 +65,7 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 `DD_TRACE_ENABLED`
 : **Configuration**: N/A<br>
 **Default**: `true`<br>
-When true, OpenTelemetry-based tracing for custom instrumentation is enabled..
+Whether to enable dd-trace. Setting this to `false` disables all features of the library.
 
 `DD_TRACE_OTEL_ENABLED`
 : **Configuration**: N/A<br>
