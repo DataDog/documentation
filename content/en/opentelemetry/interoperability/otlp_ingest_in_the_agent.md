@@ -165,6 +165,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
     receiver:
       protocols:
         grpc:
+          endpoint: 0.0.0.0:4317
           enabled: true
    ```
 
@@ -174,6 +175,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
     receiver:
       protocols:
         http:
+          endpoint: 0.0.0.0:4318
           enabled: true
    ```
 
