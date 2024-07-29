@@ -17,9 +17,9 @@ title: Escribir reglas personalizadas con Rego
 
 Open Policy Agent (OPA) ofrece [Rego][1], un lenguaje de código abierto política con versátiles funciones de inspección de recursos para determinar la postura de seguridad de la nube. En Datadog, puedes escribir reglas personalizadas con Rego para controlar la seguridad de tu infraestructura. 
 
-## Plantilla de módulo
+## Módulo de plantilla
 
-La definición de una regla comienza con una [política][2] de Rego, definida dentro de un [módulo][3]. CSM Misconfigurations utiliza una plantilla de módulo como la siguiente para simplificar la escritura de reglas:
+La definición de una regla comienza con una [política][2] de Rego, definida dentro de un [módulo][3]. CSM Misconfigurations utiliza un módulo de plantilla como el siguiente para simplificar la escritura de reglas:
 
 ```python
 package datadog
@@ -108,7 +108,7 @@ Esta sección pasa por todos los recursos del tipo de recurso principal y los ev
 
 No es necesario modificar esta sección de la política. En su lugar, cuando selecciones tu tipo de recurso principal en el menú desplegable **Choose your main resource type** (Elige tu tipo de recurso principal) al clonar reglas, se insertará en esta sección de la política. También puedes acceder a la matriz de tus recursos a través de `input.resources.some_resource_type`, sustituyendo `some_resource_type` por el tipo de recurso principal que hayas elegido, por ejemplo, `gcp_iam_policy`.
 
-## Otras formas de escribir normas
+## Otras formas de escribir reglas
 
 La plantilla te ayuda a empezar a escribir reglas personalizadas. No es obligatorio que las sigas. En su lugar, puedes clonar una regla predeterminada existente o escribir tu propia regla desde cero. Sin embargo, para que el sistema de gestión de posturas interprete tus resultados, deben llamarse `results` en tu módulo Rego y tener el siguiente formato:
 
