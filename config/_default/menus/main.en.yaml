@@ -4444,6 +4444,26 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
       weight: 403
+    - name: Splunk HEC
+      url: observability_pipelines/sources/splunk_hec/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_splunk_hec
+      weight: 404
+    - name: Splunk TCP
+      url: observability_pipelines/sources/splunk_tcp/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_splunk_tcp
+      weight: 405
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/sources/sumo_logic/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_sumo_logic
+      weight: 406
+    - name: Syslog
+      url: observability_pipelines/sources/syslog/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_syslog
+      weight: 407
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines

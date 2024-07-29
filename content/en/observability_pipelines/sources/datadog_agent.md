@@ -9,7 +9,7 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
-Use Observability Pipelines's Datadog Agent source to receive logs from the Datadog Agent. To set up this source, follow the instructions in [Set up Pipelines][1].
+Use Observability Pipelines's Datadog Agent source to receive logs from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
 
 ### Prerequisites
 

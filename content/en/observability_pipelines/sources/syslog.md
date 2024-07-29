@@ -1,5 +1,5 @@
 ---
-title: HTTP Client Source
+title: Syslog Source
 disable_toc: false
 aliases:
 - /path-to-old-doc/
@@ -9,7 +9,7 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
-Use Observability Pipelines's HTTP/S Client source to pull logs from the your HTTP/S client. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines's Rsyslog or Syslog-ng to receive logs sent to Rsyslog or Syslog-ng. Select and set up this source when you [set up a pipeline][1].
 
 ### Prerequisites
 

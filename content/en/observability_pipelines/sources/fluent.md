@@ -9,7 +9,7 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
-Use Observability Pipelines's Fluentd or Fluent Bit source to receive logs from the your Fluentd or Fluent Bit agent. To set up this source, follow the instructions in [Set up Pipelines][1].
+Use Observability Pipelines's Fluentd or Fluent Bit source to receive logs from the your Fluentd or Fluent Bit agent. Select and set up this source when you [set up a pipeline][1].
 
 ### Prerequisites
 
@@ -17,7 +17,7 @@ Use Observability Pipelines's Fluentd or Fluent Bit source to receive logs from 
 
 ### Set up the source in the pipeline UI
 
-To set up this source, follow the instructions in [Set Up Pipelines][1]. The information below are source settings in the pipeline UI.
+Select and set up this source when you [set up a pipeline][1]. The information below are for the source settings in the pipeline UI.
 
 {{% observability_pipelines/source_settings/fluent %}}
 

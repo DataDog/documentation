@@ -1,5 +1,5 @@
 ---
-title: HTTP Client Source
+title: Splunk Heavy and Universal Forwarders (TCP) Source
 disable_toc: false
 aliases:
 - /path-to-old-doc/
@@ -9,7 +9,7 @@ further_reading:
   text: "Log processing pipelines"
 ---
 
-Use Observability Pipelines's HTTP/S Client source to pull logs from the your HTTP/S client. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines's Splunk Heavy and Universal Forwards (TCP) source to receive logs sent to you your Splunk forwarders. Select and set up this source when you [set up a pipeline][1].
 
 ### Prerequisites
 

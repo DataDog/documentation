@@ -2,12 +2,24 @@
 title: Set Up Pipelines
 disable_toc: false
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "observability_pipelines/"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Observability Pipelines"
+- link: "observability_pipelines/update_existing_pipelines/"
+  tag: "Documentation"
+  text: "Update an existing pipeline"
+- link: "observability_pipelines/advanced_configurations/"
+  tag: "Documentation"
+  text: "Advanced configurations for Observability Pipelines"
 ---
 
 ## Overview
+
+A pipeline in Observability Pipelines is a sequential path of a source, processors, and destinations, that your logs flow through. The Observability Pipeline [source][2] receives logs from your log source (for example, the Datadog Agent). The [processors][3] enrich and transform your data, and the [destination][4] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud provider storage and another specified destination.
+
+You set up a pipeline and its components in the [Observability Pipelines][1] UI after you select a template. All [sources][2] and [processors][3] are available for all templates. All [destinations][4] are available for all templates, except for the Amazon S3, Google Cloud Storage, and Azure Storage destinations which are only available for the Archive Logs template. After you have set up your pipeline, see [Update Exiting Pipelines][10] if you want to update it.
+
+## Set up a pipeline
 
 Set up your pipelines and its [sources][2], [processors][3], [destinations][4] in the Observability Pipelines UI. The general setup steps are:
 
@@ -26,19 +38,11 @@ Set up your pipelines and its [sources][2], [processors][3], [destinations][4] i
 
 See [Advanced Configurations][11] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
-All [sources][2] and [processors][3] are available for all templates. All [destinations][4] are available for all templates, except for the Amazon S3, Google Cloud Storage, and Azure Storage destinations which are only available for the Archive Logs template.
-
 After you have set up your pipeline, see [Update Exiting Pipelines][10] if you want to make any changes to it.
 
-### Templates
+## Further Reading
 
-The out-of-the-box templates walks you through the steps to set up a pipeline. The templates are based on the following use cases:
-
-- Log volume control: Cut down on your log volume before it leaves your infrastructure or network.
-- Dual ship logs: Send copies of your logs to multiple destinations.
-- Split logs: Send your logs to different destinations based on your use case. For example, you can send DevOps logs to Datadog and security logs to a security vendor.
-- Archive logs: Send logs to a log vendor and to an archive in Datadog rehydratable format.
-- Sensitive data redaction: Remove sensitive data from your logs before they are routed outside of your infrastructure.
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/sources/
@@ -49,5 +53,5 @@ The out-of-the-box templates walks you through the steps to set up a pipeline. T
 [7]: /observability_pipelines/split_logs/
 [8]: /observability_pipelines/archive_logs/
 [9]: /observability_pipelines/sensitive_data_redaction/
-[10]: /observability_pipelines/update_existing_pipelines/#update-source-or-destination-variables
+[10]: /observability_pipelines/update_existing_pipelines/
 [11]: /observability_pipelines/advanced_configurations/

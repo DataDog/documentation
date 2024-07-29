@@ -23,12 +23,12 @@ Select and set up your destinations when you build a pipeline in the UI. This is
 All [destinations][2] are available for all templates, except for the Amazon S3, Google Cloud Storage, and Azure Storage destinations which are only available for the Archive Logs template.
 
 {{< whatsnext desc="These are the available Observability Pipelines destinations:" >}}
-    {{< nextlink href="observability_pipelines/destinations/#datadog-agent" >}}Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/#datadog-log-management" >}}Datadog Log Management{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#splunk-hec" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/#sumo-logic/" >}}Sumo Logic{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Datadog Agent
+## Datadog Log Management
 
 ### Set up the destination in the pipelines UI
 
