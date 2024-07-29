@@ -38,7 +38,7 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 ### Automatic Compile-Time Instrumentation (Developer Preview)
 
-Instead of manually instrumentiing your apps with the [Integrations][1], you can use [orchestrion][6] to automatically add instrumentation to your application, including its dependencies and the Go standard library, at compile-time. This ensures maximum instrumentation coverage in your app, and moves instrumentation code out of the way, so you can focus on your application logic.
+Instead of manually instrumenting your apps with the [Integrations][1], you can use [orchestrion][6] to automatically add instrumentation to your application, including its dependencies and the Go standard library, at compilation time. This ensures maximum instrumentation coverage in your app (eg. across your dependencies), and moves instrumentation code out of the way, so you can focus on your application logic and keep your existing code as it is.
 
 Follow the instructions listed on the [orchestrion documentation][6]
 
