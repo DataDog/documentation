@@ -11,17 +11,17 @@ title: Instalar la monitorización serverless para AWS Step Functions
 
 ### Requisitos
 * La duración total de la ejecución de Step Function debe ser inferior a 90 minutos para las trazas (traces) completas.
-* Las trazas Lambda vinculadas son compatibles con los tiempos de ejecución de Node.js (capa v112+) y Python (capa v95+).
+* Las trazas de Lambda vinculadas son compatibles con los tiempos de ejecución de Node.js (capa v112+) y Python (capa v95+).
 
 ### Cómo funciona
-La monitorización de AWS Step Functions de Datadog recopila logs y métricas de integración de AWS y utiliza logs ingeridos de AWS Step Functions para generar métricas y trazas mejoradas para tus ejecuciones de Step Functions.
+La monitorización de AWS Step Functions de Datadog recopila logs y métricas de integración de AWS y utiliza logs ingeridos de AWS Step Functions para generar métricas y trazas mejoradas para tus ejecuciones de Step Function.
 
 ### Configuración
 
 {{< tabs >}}
 {{% tab "Marco serverless" %}}
 
-Para desarrolladores que utilicen el [marco serverless][4] para desplegar aplicaciones serverless, utiliza el complemento del marco serverless de Datadog.
+Para los desarrolladores que utilicen el [Marco serverless][4] para desplegar aplicaciones serverless, utiliza el complemento del marco serverless de Datadog.
 
 1. Si aún no lo has hecho, instala el [Complemento del marco serverless de Datadog][1] v5.40.0+:
 
