@@ -65,7 +65,12 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 `DD_TRACE_ENABLED`
 : **Configuration**: N/A<br>
 **Default**: `true`<br>
-Whether to enable dd-trace. Setting this to `false` disables all features of the library.
+When true, OpenTelemetry-based tracing for custom instrumentation is enabled..
+
+`DD_TRACE_OTEL_ENABLED`
+: **Configuration**: N/A<br>
+**Default**: `undefined`<br>
+When `true`, OpenTelemetry-based tracing for [custom][15] instrumentation is enabled.
 
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
@@ -274,3 +279,4 @@ For more examples of how to work with the library see [API documentation][2].
 [5]: /tracing/trace_collection/trace_context_propagation/nodejs
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
+[15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
