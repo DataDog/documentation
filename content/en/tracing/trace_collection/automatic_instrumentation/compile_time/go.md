@@ -1,10 +1,7 @@
 ---
 title: Automatic Compile-Time Instrumentation for Go
 kind: documentation
-is_beta: true
 code_lang: go
-# type: multi-code-lang
-# code_lang_weight: 20
 further_reading:
 - link: https://datadoghq.dev/orchestrion
   tag: Documentation
@@ -58,15 +55,12 @@ While the goal is to eventually support all integrations available in the [Go Da
    ```sh
    go install github.com/datadog/orchestrion@latest
    ```
-2. If necessary, also add `GOBIN` to your `PATH`:
-   ```sh
-   export PATH="${PATH}:$(go env GOBIN)"
-   ```
-3. Register Orchestrion in your project's `go.mod` to ensure reproductibe builds:
+   Make sure `$(go env GOBIN)` (or `$(go env GOPATH)/bin`) is present in your `$PATH`.
+2. Register Orchestrion in your project's `go.mod` to ensure reproductibe builds:
    ```sh
    orchestrion pin
    ```
-4. Commit changes to your version control system:
+3. Commit changes to your version control system:
    ```sh
    git commit -m "chore: enable orchestrion" go.mod go.sum orchestrion.tool.go
    ```
