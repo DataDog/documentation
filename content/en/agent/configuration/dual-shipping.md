@@ -405,7 +405,9 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 
 ## Dual shipping in Kubernetes
 
-If you're using the [Datadog Agent Helm chart][2], you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
+{{< tabs >}} {{% tab "Helm" %}}
+
+If you're using the [Datadog Agent Helm chart][2], you can configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
 and add the relevant settings to `customAgentConfig`.
 
 ```yaml
@@ -433,7 +435,80 @@ and add the relevant settings to `customAgentConfig`.
         is_reliable: true
 ```
 
-If you're using the [Datadog Agent operator][3], similarly, you can set the `agent.customConfig.configData` key. All configurable keys are documented in [v1][4] and [v2][5].
+To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can also use the environment variable configuration and reference a Kubernetes secret. Here is an example to send metrics to an additional region:
+
+1. Create a Kubernetes secret with your environment variable configuration value from this guide:
+    ```bash
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    ```
+2. Use the [Helm chart parameters][7] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
+    ```yaml
+    datadog:
+      [...]
+      env:
+      - name: DD_ADDITIONAL_ENDPOINTS
+        valueFrom:
+          secretKeyRef:
+            name: dual-shipping
+            key: metrics
+    ```
+
+{{% /tab %}}
+
+{{% tab "Datadog Operator" %}}
+
+If you're using the [Datadog Agent operator][3], you can set the `[key].customConfigurations.[key].configData` [override][5] key to set these settings. The example below replaces the `datadog.yaml` configuration file of the node Agent to send metrics and logs to additional regions.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      customConfigurations:
+        datadog.yaml:
+          configData: |-
+            additional_endpoints:
+              "https://app.datadoghq.com":
+              - apikey2
+              - apikey3
+              "https://app.datadoghq.eu":
+              - apikey4
+            logs_config:
+              use_http: true
+              additional_endpoints:
+              - api_key: "apiKey2"
+                Host: "{{< region-param key=agent_http_endpoint >}}"
+                Port: 443
+                is_reliable: true
+```
+
+To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can also use the environment variable configuration and reference a Kubernetes secret. Here is an example to send metrics to an additional region:
+
+1. Create a Kubernetes secret with your environment variable configuration value from this guide:
+    ```bash
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    ```
+2. Use the `[key].env` to reference this secret in your configuration:
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      override:
+        nodeAgent:
+          env:
+          - name: DD_ADDITIONAL_ENDPOINTS
+            valueFrom:
+              secretKeyRef:
+                name: dual-shipping
+                key: metrics
+    ```
+
+{{% /tab %}} {{< /tabs >}}
 
 ## Further reading
 
@@ -442,5 +517,5 @@ If you're using the [Datadog Agent operator][3], similarly, you can set the `age
 [1]: /agent/configuration/network/
 [2]: https://github.com/DataDog/helm-charts
 [3]: https://github.com/DataDog/datadog-operator
-[4]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
-[5]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[6]: https://docs.datadoghq.com/agent/configuration/dual-shipping/#environment-variable-configuration
+[7]: https://github.com/DataDog/helm-charts/blob/e1ec85127de74c8b876eef6a81bb1579d17b49bf/charts/datadog/values.yaml#L563-L578
