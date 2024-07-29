@@ -15,7 +15,7 @@ further_reading:
 - link: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/
   tag: Documentación
   text: Informes sobre errores de configuración
-title: Gestión de las normas de cumplimiento de CSM Misconfigurations
+title: Gestión de las reglas de cumplimiento de CSM Misconfigurations
 ---
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) [reglas de cumplimiento predefinidas][1] evalúa la configuración de tus recursos en la nube e identifica posibles errores de configuración a fin de que puedas tomar medidas inmediatas para remediarlos.
