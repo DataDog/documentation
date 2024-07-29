@@ -148,7 +148,7 @@ The protected settings include:
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [Virtual Machine Extension resource][10] in the Terraform registry for more information about the available arguments.  
+See the [Virtual Machine Extension resource][10] in the Terraform registry for more information about the available arguments.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
