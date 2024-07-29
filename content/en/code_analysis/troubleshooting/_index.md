@@ -54,15 +54,14 @@ version `GLIBC_X.YY' not found
 
 It means that you are either:
 
-- running your CI pipeline with a Linux distribution that contains an old version of the glibc. In this case,
-  recommend you upgrade to the latest version. The analyzer will always run with the latest of Ubuntu/Debian based-systems.
+- running your CI pipeline with a Linux distribution that contains an old version of the glibc. In this case, Datadog recommends upgrading to the latest version. The analyzer always runs with the latest of Ubuntu/Debian based-systems.
 - running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). Instead,
   you run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
 
 ### Results are not being surfaced in the Datadog UI
 
-If you are running on a non-Github repository, ensure you first commit on your default branch (for example, a branch name like
-`master` or `main`). Once you commit on your default branch, non-default branches will be analyzed.
+If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master` or `main`). After you commit on your default branch, non-default branches are analyzed.
 
 You can always configure your default branch in your repository configuration.
 
@@ -78,8 +77,8 @@ For issues with Datadog Software Composition Analysis, include the following inf
 
 ### Results are not being surfaced in the Datadog UI
 
-If you are running on a non-Github repository, ensure you first commit on your default branch (for example, a branch name like
-`master` or `main`). Once you commit on your default branch, non-default branches will be analyzed.
+If you are running Code Analysis on a non-GitHub repository, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master` or `main`). After you commit on your default branch, non-default branches are analyzed.
 
 You can always configure your default branch in your repository configuration.
 
