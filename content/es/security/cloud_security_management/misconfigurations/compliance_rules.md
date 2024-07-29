@@ -45,11 +45,11 @@ La personalización directa de una consulta de configuración en la nube no es c
 
 En la página [Reglas][13], selecciona una regla para abrir su página de detalles. En **Exclude benign activity with suppression queries** (Excluir actividades benignas con consultas de supresión), define la lógica de filtrado para la forma en que la regla analiza tu entorno.
 
-Por ejemplo, puedes excluir recursos etiquetados con `env:staging` utilizando la función **This rule will not generate a misconfiguration if there is a match with any of the following suppression queries** (Esta regla no generará una configuración incorrecta si hay una coincidencia con cualquiera de las siguientes consultas de supresión). También puedes limitar el contexto de una determinada regla a los recursos etiquetados con `compliance:pci`, utilizando la función **Only generate a misconfiguration if there is a match with any of the following queries** (Sólo generar una configuración incorrecta si hay una coincidencia con alguna de las siguientes consultas).
+Por ejemplo, puedes excluir recursos etiquetados con `env:staging` utilizando la función **This rule will not generate a misconfiguration if there is a match with any of the following suppression queries** (Esta regla no generará un error de configuración si hay una coincidencia con cualquiera de las siguientes consultas de supresión). También puedes limitar el contexto de una determinada regla a los recursos etiquetados con `compliance:pci`, utilizando la función **Only generate a misconfiguration if there is a match with any of the following queries** (Sólo generar un error de configuración si hay una coincidencia con alguna de las siguientes consultas).
 
 Después de personalizar una regla, haz clic en **Update Rule** (Actualizar regla) en la parte inferior de la página para aplicar los cambios.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-misconfiguration.png" alt="Personalizar la forma en que se analiza tu entorno, seleccionando etiquetas para incluir o excluir del contexto de una regla" >}}
+{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-misconfiguration.png" alt="Personalizar la forma en que se analiza tu entorno, seleccionando etiquetas (tags) para incluir o excluir del contexto de una regla" >}}
 
 ## Definir objetivos de notificación para las reglas de cumplimiento
 
@@ -65,9 +65,9 @@ Puedes enviar notificaciones en tiempo real cuando se detecte un nuevo error de 
 
 En la página [Reglas][13], selecciona una regla para abrir tu página de detalles. En la sección **Set severity and notifications** (Definir gravedad y notificaciones), configurar cero o más objetivos de notificación para cada caso de regla. No se puede editar la gravedad predefinida. Para obtener instrucciones detalladas sobre la configuración de notificaciones para reglas de cumplimiento, consulta [Notificaciones][7].
 
-También puedes crear [reglas de notificación][21] que abarquen varias reglas de cumplimiento basadas en parámetros como gravedad, tipos de reglas, etiquetas (tags) de reglas, atributos de señal y etiquetas de señal. Esto te permite evitar tener que editar manualmente las preferencias de notificación para reglas de cumplimiento individuales.
+También puedes crear [reglas de notificación][21] que abarquen varias reglas de cumplimiento basadas en parámetros como gravedad, tipos de reglas, etiquetas de reglas, atributos de señal y etiquetas de señal. Esto te permite evitar tener que editar manualmente las preferencias de notificación para reglas de cumplimiento individuales.
 
-**Nota**: Si se detecta una configuración errónea para una regla con notificaciones habilitadas, la configuración errónea fallida también aparecerá en el [Explorador de señales][22].
+**Nota**: Si se detecta un error de configuración para una regla con notificaciones habilitadas, el error de configuración fallido también aparecerá en el [Explorador de señales][22].
 
 {{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="Sección de gravedad y notificaciones de la página de detalles de la regla" >}}
 
@@ -83,7 +83,7 @@ El proceso de obsolescencia de las reglas es el siguiente:
 
 1. La regla incluye una advertencia con la fecha de caducidad. En la interfaz de usuario, la advertencia se muestra en la:
     - Sección **Detalles de la regla > Guía** del panel lateral de señales
-    - Panel lateral de configuraciones erróneas
+    - Panel lateral de errores de configuración
     - [Editor de reglas][23] para esa regla específica
 2. Una vez que la regla se vuelve obsoleta, transcurre un periodo de 15 meses antes de que se elimine la regla. Esto se debe al periodo de conservación de señales de 15 meses. Durante este tiempo, puede volver a habilitar la regla [clonando la regla][23] en la interfaz de usuario.
 3. Una vez eliminada la regla, ya no podrás clonarla ni volver a habilitarla.
