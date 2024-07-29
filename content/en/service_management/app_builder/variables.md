@@ -12,8 +12,6 @@ further_reading:
   text: "JavaScript Expressions"
 ---
 
-{{< jqmath-vanilla >}}
-
 If you want to encapsulate logic within your app, you can use state variables.
 
 ## Create a state variable
@@ -27,7 +25,7 @@ To add a state variable to your app, perform the following steps:
 
 ## Example app
 
-To create an example app that uses a button to change a callout value component's style and value, follow these instructions.
+To create an app that uses a button to change a callout value component's style and value, follow these instructions.
 
 ### Create the variables
 
