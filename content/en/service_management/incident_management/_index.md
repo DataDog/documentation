@@ -97,7 +97,7 @@ In the creation modal, you add a descriptive title, select whether customers wer
 
 If the user declaring the incident has connected their Slack to their Datadog account, then, by default, that user becomes the Incident Commander. If the person declaring an incident is not a member of a Datadog account and anonymous Slack declaration is enabled in incident settings, then the IC becomes unassigned. The Incident Commander (IC) can be changed on the [incidents page][1] later if necessary.
 
-Once you declare an incident from Slack, it generates an incident channel.
+After you declare an incident from Slack, it generates an incident channel.
 
 {{< img src="service_management/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
 
