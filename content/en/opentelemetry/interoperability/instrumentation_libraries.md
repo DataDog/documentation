@@ -14,28 +14,28 @@ algolia:
 ---
 
 [Instrumentation][1] is the process of adding code to your application to capture and report observability data.
-[Automatic instrumentation][2] is a way to instrument applications and libraries without directly modifying their source code.
-Both OpenTelemetry and Datadog provide automatic instrumentations as part of their SDKs.
+[Automatic instrumentation][2] is a way to instrument applications and libraries without modifying their source code.
+Both OpenTelemetry and Datadog provide automatic instrumentation in their SDKs.
 
-Datadog SDKs support adding [instrumentation libraries][3] from OpenTelemetry to their existing automatic instrumentations.
-This provides observability for libraries not originally covered by Datadog SDKs without needing to change SDKs.
+Datadog SDKs support adding [OpenTelemetry instrumentation libraries][3] to their existing automatic instrumentation.
+This provides observability for libraries not covered by Datadog SDKs without changing SDKs.
 
 ## Prerequisites
 
 Before adding OpenTelemetry instrumentation libraries, set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
 <div class="alert alert-warning">
-When replacing an existing Datadog instrumentation with its OpenTelemetry equivalent, remember to disable the
+When replacing a Datadog instrumentation with its OpenTelemetry equivalent, disable the
 Datadog instrumentation to avoid duplicate spans in the trace.
 </div>
 
 <div class="alert alert-info">
-DD_TRACE_OTEL_ENABLED is not required when using the Datadog SDK for Go.
+<code>DD_TRACE_OTEL_ENABLED</code> is not required for the Datadog Go SDK.
 </div>
 
 ## Language support
 
-| Language | Minimum version required |
+| Language | Minimum version          |
 |----------|--------------------------|
 | Java     | 1.35.0                   |
 | Python   | 2.10.0                   |
@@ -51,31 +51,32 @@ DD_TRACE_OTEL_ENABLED is not required when using the Datadog SDK for Go.
 
 ## Compatibility requirements
 
-The Datadog SDK for Java supports library instrumentations written using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
+The Datadog Java SDK supports library instrumentations using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
 
-Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own jar.
+Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own JAR.
 
-OpenTelemetry has an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
+OpenTelemetry provides an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
 
-The Datadog SDK for Java also accepts selected individual instrumentation jars produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
-build, for example the [CFX instrumentation jar][10].
+The Datadog SDK for Java also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9]
+build, for example the [CFX instrumentation JAR][10].
 
 <div class="alert alert-warning">
-Use of OpenTelemetry incubator APIs is not currently supported.
+OpenTelemetry incubator APIs are not supported.
 </div>
 
-## Getting started
+## Setup
 
-To use an OpenTelemetry instrumentation with the Datadog SDK for Java:
+To use an OpenTelemetry instrumentation with the Datadog Java SDK:
+
 1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
-2. Copy the OpenTelemetry extension jar containing the instrumentation to the same container as the application.
-3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the path to the extension jar.
+2. Copy the OpenTelemetry extension JAR containing the instrumentation to the same container as the application.
+3. Set the `otel.javaagent.extensions` system property or the `OTEL_JAVAAGENT_EXTENSIONS` environment variable to the extension JAR path.
 
 ## Configuration
 
-All configuration options below have system property and environment variable equivalents.
-If the same key type is set for both, the system property configuration takes priority.
-System properties should be set as JVM flags.
+The following configuration options have system property and environment variable equivalents.
+If the same key type is set for both, the system property takes priority.
+Set system properties as JVM flags.
 
 `dd.trace.otel.enabled`
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
@@ -85,7 +86,7 @@ Must be set to `true` to enable use of OpenTelemetry instrumentations.
 `otel.javaagent.extensions`
 : **Environment Variable**: `OTEL_JAVAAGENT_EXTENSIONS`<br>
 **Default**: `false`<br>
-A comma-separated list of paths to extension jar files or folders containing extension jar files.
+A comma-separated list of paths to extension JAR files or folders containing extension JAR files.
 
 OpenTelemetry's [Agent Configuration][11] page describes additional properties that are also recognized by the Datadog SDK.
 
@@ -110,7 +111,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -120,27 +121,75 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
 {{% /tab %}} -->
 
-<!-- {{% tab "Go" %}}
+{{% tab "Go" %}}
 
 ## Compatibility requirements
 
-## Getting started
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][1], including the [`opentelemetry-go-contrib/instrumentation`][2] libraries, but it does not support integrations that rely on metrics or logs exporters.
+
+## Setup
+
+To use Opentelemetry integrations with the Datadog tracing library, perform the following steps:
+
+ 1. Follow the instructions in the Imports and Setup sections of the [Go Custom Instrumentation using OpenTelemetry API][3] page.
+ 2. Follow the steps for instrumenting your service with your chosen `opentelemetry-go-contrib` library.
+
+The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
+
+```go
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/otel"
+)
+
+func main() {
+	// register tracer
+	provider := ddotel.NewTracerProvider(ddtracer.WithDebugMode(true))
+	defer provider.Shutdown()
+	otel.SetTracerProvider(provider)
+
+	// configure the server with otelhttp instrumentation as you normally would using opentelemetry: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp
+	var mux http.ServeMux
+	mux.Handle("/hello", http.HandlerFunc(hello))
+	http.HandleFunc("/hello", hello)
+	log.Fatal(http.ListenAndServe(":8080", otelhttp.NewHandler(&mux, "server")))
+}
+
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "hello\n")
+}
+```
+
+{{< img src="opentelemetry/interoperability/go-otel-dropin-support.png" alt="go-dd-otelhttp">}}
 
 ## Configuration
 
-{{% /tab %}} -->
+No additional configuration is required.
+
+[1]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
+[2]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
+[3]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
+
+{{% /tab %}}
 
 <!-- {{% tab "NodeJS" %}}
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -150,7 +199,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 
@@ -160,7 +209,7 @@ OpenTelemetry's [Agent Configuration][11] page describes additional properties t
 
 ## Compatibility requirements
 
-## Getting started
+## Setup
 
 ## Configuration
 

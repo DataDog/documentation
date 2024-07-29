@@ -176,5 +176,5 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/ruby
+[1]: /tests/setup/ruby
 [2]: https://edgeguides.rubyonrails.org/testing.html#parallel-testing

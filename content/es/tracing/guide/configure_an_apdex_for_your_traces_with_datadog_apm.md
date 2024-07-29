@@ -2,7 +2,6 @@
 aliases:
 - /es/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 - /es/tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
-kind: documentación
 title: Configuración de la puntuación del Apdex por servicio
 ---
 {{< jqmath-vanilla >}}

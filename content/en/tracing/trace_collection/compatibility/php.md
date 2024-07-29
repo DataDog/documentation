@@ -164,6 +164,7 @@ To request support for additional datastores, contact our awesome [support team]
 | Curl              | *(Any Supported PHP)*      | All supported PHP versions |
 | Guzzle            | 5.x, 6.x, 7.x              | All supported PHP versions |
 | Laravel Queue     | Laravel supported versions | All supported PHP versions |
+| [OpenAI][11]      | OpenAI supported versions  | All supported PHP versions |
 
 
 To request support for additional libraries, contact our awesome [support team][3].
@@ -196,3 +197,4 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
 [9]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
 [10]: https://github.com/php-amqplib/php-amqplib
+[11]: https://github.com/openai-php/client

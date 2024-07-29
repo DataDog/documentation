@@ -47,14 +47,6 @@ components:
       required:
       - errors
       type: object
-    APISuccessResponseSchema:
-      description: A JSON object containing the success message
-      properties:
-        success:
-          description: Message.
-          example: Embed 00000000000 successfully enabled.
-          type: string
-      type: object
     AWSAccount:
       description: Returns the AWS account associated with this integration.
       properties:
@@ -812,7 +804,7 @@ components:
           type: string
         client_secret:
           description: Your Azure web application secret key.
-          example: testingx./Sw*g/Y33t..R1cH+hScMDt
+          example: TestingRh2nx664kUy5dIApvM54T4AtO
           type: string
         container_app_filters:
           description: 'Limit the Azure container apps that are pulled into Datadog
@@ -2329,6 +2321,14 @@ components:
             $ref: '#/components/schemas/EmbeddableGraph'
           type: array
       type: object
+    EnableEmbeddableGraphResponseSchema:
+      description: A JSON object containing the success message
+      properties:
+        success:
+          description: Message.
+          example: Embed 00000000000 successfully enabled.
+          type: string
+      type: object
     Event:
       description: Object representing an event.
       properties:
@@ -2974,6 +2974,7 @@ components:
       - events
       - ci_tests
       - ci_pipelines
+      - incident_analytics
       example: logs
       type: string
       x-enum-varnames:
@@ -2987,6 +2988,7 @@ components:
       - EVENTS
       - CI_TESTS
       - CI_PIPELINES
+      - INCIDENT_ANALYTICS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -4321,8 +4323,10 @@ components:
       - profiled_host_usage
       - rum_browser_mobile_sessions_usage
       - rum_replay_sessions_usage
+      - sca_fargate_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
+      - siem_analyzed_logs_add_on_usage
       - siem_ingested_bytes_usage
       - snmp_usage
       - universal_service_monitoring_usage
@@ -4392,8 +4396,10 @@ components:
       - PROFILED_HOST_USAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_USAGE
+      - SCA_FARGATE_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -4880,6 +4886,7 @@ components:
       - logs_pattern_stream
       - logs_transaction_stream
       - event_stream
+      - rum_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4894,6 +4901,7 @@ components:
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
+      - RUM_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -8086,10 +8094,14 @@ components:
       - rum_browser_mobile_sessions_percentage
       - ingested_spans_bytes_usage
       - ingested_spans_bytes_percentage
+      - siem_analyzed_logs_add_on_usage
+      - siem_analyzed_logs_add_on_percentage
       - siem_ingested_bytes_usage
       - siem_ingested_bytes_percentage
       - workflow_executions_usage
       - workflow_executions_percentage
+      - sca_fargate_usage
+      - sca_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -8223,10 +8235,14 @@ components:
       - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
       - INGESTED_SPANS_BYTES_USAGE
       - INGESTED_SPANS_BYTES_PERCENTAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
+      - SIEM_ANALYZED_LOGS_ADD_ON_PERCENTAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SIEM_INGESTED_BYTES_PERCENTAGE
       - WORKFLOW_EXECUTIONS_USAGE
       - WORKFLOW_EXECUTIONS_PERCENTAGE
+      - SCA_FARGATE_USAGE
+      - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -8736,6 +8752,16 @@ components:
           description: The total RUM Session Replay usage by tag(s).
           format: double
           type: number
+        sca_fargate_percentage:
+          description: The percentage of Software Composition Analysis Fargate task
+            usage by tag(s).
+          format: double
+          type: number
+        sca_fargate_usage:
+          description: The total Software Composition Analysis Fargate task usage
+            by tag(s).
+          format: double
+          type: number
         sds_scanned_bytes_percentage:
           description: The percentage of Sensitive Data Scanner usage by tag(s).
           format: double
@@ -8750,6 +8776,15 @@ components:
           type: number
         serverless_apps_usage:
           description: The total Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_percentage:
+          description: The percentage of log events analyzed by Cloud SIEM usage by
+            tag(s).
+          format: double
+          type: number
+        siem_analyzed_logs_add_on_usage:
+          description: The log events analyzed by Cloud SIEM usage by tag(s).
           format: double
           type: number
         siem_ingested_bytes_percentage:
@@ -19474,6 +19509,17 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner over
             all hours in the current date for all organizations.
@@ -19513,6 +19559,11 @@ components:
         serverless_apps_total_count_avg:
           description: Shows the average of the number of Serverless Apps for Azure
             and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -19570,6 +19621,12 @@ components:
       description: Global hourly report of all data billed by Datadog for a given
         organization.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public id.
+          type: string
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours
             in the current date for the given org.
@@ -20171,6 +20228,17 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        sca_fargate_count_avg:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner over
             all hours in the current date for the given org.
@@ -20210,6 +20278,11 @@ components:
         serverless_apps_total_count_avg:
           description: Shows the average of the number of Serverless Apps for Azure
             and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -20909,6 +20982,16 @@ components:
             October 1st, 2024).
           format: int64
           type: integer
+        sca_fargate_count_avg_sum:
+          description: Shows the average of all Software Composition Analysis Fargate
+            tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        sca_fargate_count_hwm_sum:
+          description: Shows the sum of the high-water marks of all Software Composition
+            Analysis Fargate tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner in
             the current month for all organizations.
@@ -20948,6 +21031,11 @@ components:
         serverless_apps_total_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure and
             Google Cloud in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_analyzed_logs_add_on_count_agg_sum:
+          description: Shows the sum of all log events analyzed by Cloud SIEM over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         start_date:
@@ -24744,7 +24832,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APISuccessResponseSchema'
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -24782,7 +24870,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APISuccessResponseSchema'
+                $ref: '#/components/schemas/EnableEmbeddableGraphResponseSchema'
           description: OK
         '403':
           content:
@@ -26109,7 +26197,7 @@ paths:
             origin: request
             value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
               \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
-              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
@@ -32876,6 +32964,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -35132,6 +35226,15 @@ paths:
         name: include_org_details
         required: false
         schema:
+          type: boolean
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
           type: boolean
       responses:
         '200':

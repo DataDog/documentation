@@ -87,4 +87,4 @@ See [Advanced Configurations][8] for bootstrapping options and for details on se
 [5]: /observability_pipelines/archive_logs/
 [6]: /observability_pipelines/sensitive_data_redaction/
 [7]: /observability_pipelines/set_up_pipelines/
-[8]: /observability_pipelines/setup_opw/
+[8]: /observability_pipelines/advanced_configurations/
