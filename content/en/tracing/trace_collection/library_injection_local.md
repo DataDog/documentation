@@ -345,28 +345,15 @@ You can change these settings for all instrumented processes by setting the `con
 | --------- | ----------- |  
 |`BASIC`|Apply the configurations specified above. If no configuration source is specified, this is the default.|
 |`LOCAL:PATH`|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: `LOCAL:/opt/config/my_process_config.yaml`|
-|`BLOB:URL`| Apply the configuration at the specified path in an S3-compatible object store. The connection URL and the format of the configuration file are described below. Example: `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1` |
 
-The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+The words `BASIC` and `LOCAL` must be uppercase.
 
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources.
 
-```yaml
-DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
-```
-
-#### Blob storage support
-The supported blob storage solutions are:
-- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
-See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
-- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
-
-<a id="supplying-configuration-source-host"></a>
 
 ### Supplying configuration source
 
-The config file for `LOCAL` and `BLOB` can be formatted as JSON:
+The config file for `LOCAL` can be formatted as JSON:
 
 ```json
 {
@@ -538,19 +525,18 @@ config_sources: BASIC
 
 `config_sources`
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
   - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+The words `BASIC` and `LOCAL` must be uppercase.
 
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration:
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks the local file system first, and then uses the built-in default configuration:
 
 ```yaml
-config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+config_sources: LOCAL:/opt/config/my_process_config.yaml;BASIC
 ```
 
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
+For more information about configuring `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 `log_level`
 : Set to `debug` to log detailed information about what is happening, or `info`, `warn`, or `error` to log far less.<br>
@@ -568,7 +554,7 @@ Optional: `env`
 
 ### Supplying configuration source
 
-If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
+If you specify the `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
 ```json
 {
@@ -643,12 +629,6 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-#### Blob storage support
-The supported blob storage solutions are:
-- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
-See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
-- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 ### Basic configuration settings
 
@@ -726,20 +706,19 @@ config_sources: BASIC
 
 `config_sources`
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
   - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+The words `BASIC` and `LOCAL` must be uppercase.
 
 Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
 
 ```yaml
-config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+config_sources: LOCAL:/opt/config/my_process_config.yaml;BASIC
 ```
 
 
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
+For more information about configuring `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `log_level`
 : Set to `debug` to log detailed information about what is happening, or `info` to log far less.
@@ -756,7 +735,7 @@ Optional: `env`
 
 ### Supplying configuration source
 
-If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
+If you specify a `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
 ```json
 {
@@ -832,12 +811,6 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-#### Blob storage support
-The supported blob storage solutions are:
-- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
-See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
-- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 ### Basic configuration settings
 

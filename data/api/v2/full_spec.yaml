@@ -216,6 +216,13 @@ components:
       required: true
       schema:
         type: string
+    FileID:
+      description: File ID.
+      in: path
+      name: file_id
+      required: true
+      schema:
+        type: string
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -705,7 +712,7 @@ components:
         created_by:
           $ref: '#/components/schemas/RelationshipToUser'
         modified_by:
-          $ref: '#/components/schemas/RelationshipToUser'
+          $ref: '#/components/schemas/NullableRelationshipToUser'
       type: object
     APIKeyResponse:
       description: Response for retrieving an API key.
@@ -1405,6 +1412,15 @@ components:
         team:
           $ref: '#/components/schemas/RelationshipToTeam'
       type: object
+    AuthNMappingResourceType:
+      description: The type of resource being mapped to.
+      enum:
+      - role
+      - team
+      type: string
+      x-enum-varnames:
+      - ROLE
+      - TEAM
     AuthNMappingResponse:
       description: AuthN Mapping response from the API.
       properties:
@@ -5528,6 +5544,234 @@ components:
           nullable: true
           type: string
       type: object
+    CustomCostGetResponseMeta:
+      description: Meta for the response from the Get Custom Costs endpoints.
+      properties:
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostListResponseMeta:
+      description: Meta for the response from the List Custom Costs endpoints.
+      properties:
+        total_filtered_count:
+          description: Number of Custom Costs files returned by the List Custom Costs
+            endpoint
+          format: int64
+          type: integer
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostUploadResponseMeta:
+      description: Meta for the response from the Upload Custom Costs endpoints.
+      properties:
+        version:
+          description: Version of Custom Costs file
+          type: string
+      type: object
+    CustomCostsFileGetResponse:
+      description: Response for Get Custom Costs files.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomCostsFileMetadataWithContentHighLevel'
+        meta:
+          $ref: '#/components/schemas/CustomCostGetResponseMeta'
+      type: object
+    CustomCostsFileLineItem:
+      description: Line item details from a Custom Costs file.
+      properties:
+        BilledCost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        BillingCurrency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        ChargeDescription:
+          description: Description for the line item cost.
+          example: Monthly usage charge for my service
+          type: string
+        ChargePeriodEnd:
+          description: End date of the usage charge.
+          example: '2023-02-28'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        ChargePeriodStart:
+          description: Start date of the usage charge.
+          example: '2023-02-01'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        ProviderName:
+          description: Name of the provider for the line item.
+          type: string
+        Tags:
+          additionalProperties:
+            type: string
+          description: Additional tags for the line item.
+          type: object
+      type: object
+    CustomCostsFileListResponse:
+      description: Response for List Custom Costs files.
+      properties:
+        data:
+          description: List of Custom Costs files.
+          items:
+            $ref: '#/components/schemas/CustomCostsFileMetadataHighLevel'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CustomCostListResponseMeta'
+      type: object
+    CustomCostsFileMetadata:
+      description: Schema of a Custom Costs metadata.
+      properties:
+        billed_cost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        billing_currency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        charge_period:
+          $ref: '#/components/schemas/CustomCostsFileUsageChargePeriod'
+        name:
+          description: Name of the Custom Costs file.
+          example: my_file.json
+          type: string
+        provider_names:
+          description: Providers contained in the Custom Costs file.
+          items:
+            description: Name of the provider.
+            example: my_provider
+            type: string
+          type: array
+        status:
+          description: Status of the Custom Costs file.
+          example: active
+          type: string
+        uploaded_at:
+          description: Timestamp, in millisecond, of the upload time of the Custom
+            Costs file.
+          example: 1704067200000
+          format: double
+          type: number
+        uploaded_by:
+          $ref: '#/components/schemas/CustomCostsUser'
+      type: object
+    CustomCostsFileMetadataHighLevel:
+      description: JSON API format for a Custom Costs file.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomCostsFileMetadata'
+        id:
+          description: ID of the Custom Costs metadata.
+          type: string
+        type:
+          description: Type of the Custom Costs file metadata.
+          type: string
+      type: object
+    CustomCostsFileMetadataWithContent:
+      description: Schema of a cost file's metadata.
+      properties:
+        billed_cost:
+          description: Total cost in the cost file.
+          example: 100.5
+          format: double
+          type: number
+        billing_currency:
+          description: Currency used in the Custom Costs file.
+          example: USD
+          type: string
+        charge_period:
+          $ref: '#/components/schemas/CustomCostsFileUsageChargePeriod'
+        content:
+          description: Detail of the line items from the Custom Costs file.
+          items:
+            $ref: '#/components/schemas/CustomCostsFileLineItem'
+          type: array
+        name:
+          description: Name of the Custom Costs file.
+          example: my_file.json
+          type: string
+        provider_names:
+          description: Providers contained in the Custom Costs file.
+          items:
+            description: Name of a provider.
+            example: my_provider
+            type: string
+          type: array
+        status:
+          description: Status of the Custom Costs file.
+          example: active
+          type: string
+        uploaded_at:
+          description: Timestamp in millisecond of the upload time of the Custom Costs
+            file.
+          example: 1704067200000
+          format: double
+          type: number
+        uploaded_by:
+          $ref: '#/components/schemas/CustomCostsUser'
+      type: object
+    CustomCostsFileMetadataWithContentHighLevel:
+      description: JSON API format of for a Custom Costs file with content.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomCostsFileMetadataWithContent'
+        id:
+          description: ID of the Custom Costs metadata.
+          type: string
+        type:
+          description: Type of the Custom Costs file metadata.
+          type: string
+      type: object
+    CustomCostsFileUploadRequest:
+      description: Request for uploading a Custom Costs file.
+      items:
+        $ref: '#/components/schemas/CustomCostsFileLineItem'
+      type: array
+    CustomCostsFileUploadResponse:
+      description: Response for Uploaded Custom Costs files.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomCostsFileMetadataHighLevel'
+        meta:
+          $ref: '#/components/schemas/CustomCostUploadResponseMeta'
+      type: object
+    CustomCostsFileUsageChargePeriod:
+      description: Usage charge period of a Custom Costs file.
+      properties:
+        end:
+          description: End of the usage of the Custom Costs file.
+          example: 1706745600000
+          format: double
+          type: number
+        start:
+          description: Start of the usage of the Custom Costs file.
+          example: 1704067200000
+          format: double
+          type: number
+      type: object
+    CustomCostsUser:
+      description: Metadata of the user that has uploaded the Custom Costs file.
+      properties:
+        email:
+          description: The name of the Custom Costs file.
+          example: email.test@datadohq.com
+          type: string
+        icon:
+          description: The name of the Custom Costs file.
+          example: icon.png
+          type: string
+        name:
+          description: Name of the user.
+          example: Test User
+          type: string
+      type: object
     CustomDestinationAttributeTagsRestrictionListType:
       default: ALLOW_LIST
       description: 'How `forward_tags_restriction_list` parameter should be interpreted.
@@ -8766,6 +9010,12 @@ components:
       description: Attributes of hourly usage for a product family for an org for
         a time period.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         measurements:
           description: List of the measured usage values for the product family for
             the org for the time period.
@@ -15193,6 +15443,12 @@ components:
     ProjectedCostAttributes:
       description: Projected Cost attributes data.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         charges:
           description: List of charges data reported for the requested month.
           items:
@@ -17942,6 +18198,7 @@ components:
       - impossible_travel
       - hardcoded
       - third_party
+      - anomaly_threshold
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -17950,6 +18207,7 @@ components:
       - IMPOSSIBLE_TRAVEL
       - HARDCODED
       - THIRD_PARTY
+      - ANOMALY_THRESHOLD
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -22553,6 +22811,7 @@ components:
         url:
           description: The URL for the link
           example: https://example.com
+          format: url
           type: string
       required:
       - label
@@ -25029,6 +25288,11 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter by mapping resource type. Defaults to "role" if not specified.
+        in: query
+        name: resource_type
+        schema:
+          $ref: '#/components/schemas/AuthNMappingResourceType'
       responses:
         '200':
           content:
@@ -26482,6 +26746,7 @@ paths:
         type: idempotent
   /api/v2/cost/aws_related_accounts:
     get:
+      deprecated: true
       description: List the AWS accounts in an organization by calling 'organizations:ListAccounts'
         from the specified management account.
       operationId: ListAWSRelatedAccounts
@@ -26673,6 +26938,130 @@ paths:
       x-menu-order: 7
       x-undo:
         type: idempotent
+  /api/v2/cost/custom_costs:
+    get:
+      description: List the Custom Costs files.
+      operationId: ListCustomCostsFiles
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List Custom Costs files
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    put:
+      description: Upload a Custom Costs file.
+      operationId: UploadCustomCostsFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomCostsFileUploadRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileUploadResponse'
+          description: Accepted
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Upload Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 11
+      x-undo:
+        type: idempotent
+  /api/v2/cost/custom_costs/{file_id}:
+    delete:
+      description: Delete the specified Custom Costs file.
+      operationId: DeleteCustomCostsFile
+      parameters:
+      - $ref: '#/components/parameters/FileID'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetch the specified Custom Costs file.
+      operationId: GetCustomCostsFile
+      parameters:
+      - $ref: '#/components/parameters/FileID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomCostsFileGetResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get Custom Costs file
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/cost/enabled:
     get:
       description: Get the Cloud Cost Management activity.
@@ -29680,6 +30069,8 @@ paths:
       x-menu-order: 9
       x-undo:
         type: safe
+    x-merge-override:
+      patch: true
   /api/v2/integrations/okta/accounts:
     get:
       description: List Okta accounts.
@@ -35660,8 +36051,6 @@ paths:
       x-menu-order: 12
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This feature is in private beta. Reach out to support
-        to request access.'
   /api/v2/security_monitoring/rules/test:
     post:
       description: Test a rule.
@@ -35868,8 +36257,6 @@ paths:
       x-menu-order: 11
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This feature is in private beta. Reach out to support
-        to request access.'
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: Test an existing rule.
@@ -38214,6 +38601,8 @@ paths:
       x-menu-order: 13
       x-undo:
         type: idempotent
+    x-merge-override:
+      patch: true
   /api/v2/team/{team_id}/memberships:
     get:
       description: Get a paginated list of members for a team
@@ -38999,6 +39388,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -39085,6 +39483,15 @@ paths:
       - description: Include child org usage in the response. Defaults to false.
         in: query
         name: filter[include_descendants]
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to false.
+        in: query
+        name: filter[include_connected_accounts]
         required: false
         schema:
           default: false
@@ -39308,6 +39715,15 @@ paths:
         required: false
         schema:
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -39831,87 +40247,8 @@ paths:
       x-undo:
         type: safe
   x-merge-override:
-    /api/v2/apicatalog/api: true
-    /api/v2/apm/config/metrics: true
-    /api/v2/apm/config/metrics/{metric_id}: true
-    /api/v2/apm/config/retention-filters: true
-    /api/v2/apm/config/retention-filters-execution-order: true
-    /api/v2/apm/config/retention-filters/{filter_id}: true
-    /api/v2/audit/events: true
-    /api/v2/audit/events/search: true
-    /api/v2/cost/aws_related_accounts: true
-    /api/v2/cost_by_tag/active_billing_dimensions: true
-    /api/v2/cost_by_tag/monthly_cost_attribution: true
-    /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards: true
-    /api/v2/downtime: true
-    /api/v2/integration/gcp/sts_delegate: true
-    /api/v2/integrations/fastly/accounts/{account_id}/services: true
-    /api/v2/integrations/fastly/accounts/{account_id}/services/{service_id}: true
-    /api/v2/ip_allowlist: true
-    /api/v2/logs/analytics/aggregate: true
-    /api/v2/logs/config/archive-order: true
-    /api/v2/logs/config/archives: true
-    /api/v2/logs/config/archives/{archive_id}: true
-    /api/v2/logs/config/archives/{archive_id}/readers: true
-    /api/v2/logs/config/custom-destinations: true
-    /api/v2/logs/config/custom-destinations/{custom_destination_id}: true
-    /api/v2/logs/config/metrics/{metric_id}: true
-    /api/v2/logs/config/restriction_queries: true
-    /api/v2/logs/config/restriction_queries/role/{role_id}: true
-    /api/v2/logs/config/restriction_queries/user/{user_id}: true
-    /api/v2/logs/config/restriction_queries/{restriction_query_id}: true
-    /api/v2/logs/config/restriction_queries/{restriction_query_id}/roles: true
-    /api/v2/logs/events: true
-    /api/v2/logs/events/search: true
-    /api/v2/metrics: true
-    /api/v2/metrics/{metric_name}/active-configurations: true
-    /api/v2/metrics/{metric_name}/all-tags: true
-    /api/v2/metrics/{metric_name}/tags: true
-    /api/v2/metrics/{metric_name}/volumes: true
-    /api/v2/monitor/policy: true
-    /api/v2/monitor/policy/{policy_id}: true
-    /api/v2/monitor/{monitor_id}/downtime_matches: true
-    /api/v2/org_configs/{org_config_name}: true
-    /api/v2/query/scalar: true
-    /api/v2/query/timeseries: true
-    /api/v2/security/cloud_workload/policy/download: true
-    /api/v2/security_monitoring/cloud_workload_security/agent_rules: true
-    /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}: true
-    /api/v2/security_monitoring/configuration/security_filters: true
-    /api/v2/security_monitoring/configuration/security_filters/{security_filter_id}: true
-    /api/v2/security_monitoring/configuration/suppressions: true
-    /api/v2/security_monitoring/configuration/suppressions/{suppression_id}: true
-    /api/v2/security_monitoring/rules: true
-    /api/v2/security_monitoring/rules/test: true
-    /api/v2/security_monitoring/rules/validation: true
-    /api/v2/security_monitoring/rules/{rule_id}: true
-    /api/v2/security_monitoring/rules/{rule_id}/test: true
-    /api/v2/security_monitoring/signals: true
-    /api/v2/security_monitoring/signals/search: true
-    /api/v2/security_monitoring/signals/{signal_id}: true
-    /api/v2/security_monitoring/signals/{signal_id}/assignee: true
-    /api/v2/security_monitoring/signals/{signal_id}/incidents: true
-    /api/v2/security_monitoring/signals/{signal_id}/state: true
-    /api/v2/sensitive-data-scanner/config: true
-    /api/v2/sensitive-data-scanner/config/groups: true
-    /api/v2/sensitive-data-scanner/config/rules: true
-    /api/v2/sensitive-data-scanner/config/standard-patterns: true
-    /api/v2/service_accounts: true
-    /api/v2/services: true
-    /api/v2/services/definitions: true
-    /api/v2/services/{service_id}: true
-    /api/v2/team/{team_id}/permission-settings: true
-    /api/v2/team/{team_id}/permission-settings/{action}: true
-    /api/v2/teams: true
-    /api/v2/teams/{team_id}: true
-    /api/v2/usage/application_security: true
-    /api/v2/usage/cost_by_org: true
-    /api/v2/usage/estimated_cost: true
-    /api/v2/usage/historical_cost: true
-    /api/v2/usage/hourly_usage: true
-    /api/v2/usage/lambda_traced_invocations: true
-    /api/v2/usage/observability_pipelines: true
-    /api/v2/usage/projected_cost: true
+    /api/v2/team/{team_id}/links: true
+    /api/v2/team/{team_id}/links/{link_id}: true
 security:
 - apiKeyAuth: []
   appKeyAuth: []

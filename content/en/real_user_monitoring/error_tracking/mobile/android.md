@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the RUM Android SDK. 
+Error Tracking processes errors collected from the Android SDK. 
 
-Enable Android Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
+Enable Android Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
 
 - Aggregated Android crash dashboards and attributes
 - Deobfuscated Android crash reports
@@ -30,9 +30,9 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Android SDK yet, follow the [in-app setup instructions][2] or see the [Android RUM setup documentation][3].
+If you have not set up the Android SDK yet, follow the [in-app setup instructions][2] or see the [Android setup documentation][3].
 
-1. Add the latest version of the [RUM Android SDK][4] to your Gradle dependencies.
+1. Add the latest version of the [Android SDK][4] to your Gradle dependencies.
 2. Configure your application's `env` and `variant` when [initializing the SDK][5].
 3. Run the Gradle tasks to upload your Proguard/R8 mapping file and NDK symbol files to Datadog to access deobfuscated stack traces. 
 
@@ -50,7 +50,7 @@ Your Android application may be running native code (C/C++) for performance or c
         //(...)
     }
    ```
-2. Enable NDK crash collection after initializing the RUM SDK.
+2. Enable NDK crash collection after initializing the SDK.
 
     ``` kotlin
     NdkCrashReports.enable()
@@ -60,7 +60,7 @@ Your Android application may be running native code (C/C++) for performance or c
 
 An "Application Not Responding" ([ANR][6]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
 
-ANRs are only reported through the RUM SDK (not through Logs).
+ANRs are only reported through the SDK (not through Logs).
 
 #### Report fatal ANRs
 Fatal ANRs result in crashes. The application reports them when it's unresponsive, leading to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
@@ -79,7 +79,7 @@ Non-fatal ANRs may or may not have led to the application being terminated (cras
 - In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise
 - By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
 
-For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the RUM SDK.
+For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the SDK.
 
 ## Get deobfuscated stack traces
 
@@ -126,7 +126,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    ./gradlew uploadNdkSymbolFilesRelease
    ```
 
-**Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
+**Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
@@ -162,7 +162,7 @@ Depending on the [Android Gradle plugin][1] version, the matching of stack trace
    ./gradlew uploadNdkSymbolFilesRelease
    ```
 
-**Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
+**Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
@@ -244,7 +244,7 @@ datadog {
 
 ## Test your implementation
 
-To verify your Android Crash Reporting and Error Tracking configuration, you need to trigger a crash in your RUM application and confirm that the error appears in Datadog.
+To verify your Android Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 
