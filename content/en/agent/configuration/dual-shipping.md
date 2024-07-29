@@ -407,7 +407,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 
 {{< tabs >}} {{% tab "Helm" %}}
 
-If you're using the [Datadog Agent Helm chart][2], you can configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
+If you're using the [Datadog Agent Helm chart][1], you can configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
 and add the relevant settings to `customAgentConfig`.
 
 ```yaml
@@ -441,7 +441,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
     ```bash
     kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
     ```
-2. Use the [Helm chart parameters][3] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
+2. Use the [Helm chart parameters][2] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
     ```yaml
     datadog:
       [...]
@@ -453,11 +453,14 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
             key: metrics
     ```
 
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/e1ec85127de74c8b876eef6a81bb1579d17b49bf/charts/datadog/values.yaml#L563-L578
+
 {{% /tab %}}
 
 {{% tab "Datadog Operator" %}}
 
-If you're using the [Datadog Agent operator][4], you can set the `[key].customConfigurations.[key].configData` [override][5] key to set these settings. The example below replaces the `datadog.yaml` configuration file of the node Agent to send metrics and logs to additional regions.
+If you're using the [Datadog Agent operator][1], you can set the `[key].customConfigurations.[key].configData` [override][2] key to set these settings. The example below replaces the `datadog.yaml` configuration file of the node Agent to send metrics and logs to additional regions.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -508,6 +511,9 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
                 key: metrics
     ```
 
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+
 {{% /tab %}} {{< /tabs >}}
 
 ## Further reading
@@ -515,7 +521,3 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/network/
-[2]: https://github.com/DataDog/helm-charts
-[3]: https://github.com/DataDog/helm-charts/blob/e1ec85127de74c8b876eef6a81bb1579d17b49bf/charts/datadog/values.yaml#L563-L578
-[4]: https://github.com/DataDog/datadog-operator
-[5]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
