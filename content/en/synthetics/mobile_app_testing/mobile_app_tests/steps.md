@@ -190,6 +190,14 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 
 {{< img src="mobile_app_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
 
+## Edit a recording 
+
+To edit a mobile recording after it's saved, navigate to [Synthetics > Tests][7], click on a previously saved mobile test, click the gear icon on the top right hand corner and then click "edit recording".
+
+Select multiple or single steps for deletion or replay, then click "Save & Quit".
+
+{{< img src="mobile_app_testing/test_steps/edit-mobile-recording.png" alt="Editing a mobile recording, and using the multi-select feature" width="70%" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -200,3 +208,4 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 [4]: /mobile_app_testing/mobile_app_tests/advanced_options
 [5]: /mobile_app_testing/mobile_app_tests/advanced_options#subtests
 [6]: /synthetics/guide/reusing-browser-test-journeys/
+[7]: https://app.datadoghq.com/synthetics/tests

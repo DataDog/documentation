@@ -466,6 +466,15 @@ If a variable is assigned different values along your browser test steps (for ex
 
 Some variables only compute at runtime, such as a variable from an HTTP request or a JavaScript step. For example, assume you have a `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value. To record a step using one of these variables, record a step with the actual variable value, and replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` in the step's definition before saving your test. 
 
+## Edit a recording 
+
+To edit a browser recording after it's saved, navigate to [Synthetics > Tests][14], click on a previously saved browser test, click the gear icon on the top right hand corner and then click "edit recording".
+
+Select multiple or single steps for deletion or replay, then click "Save & Quit".
+
+{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="Editing a browser recording, and using the multi-select feature"="70%" >}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -483,3 +492,4 @@ Some variables only compute at runtime, such as a variable from an HTTP request 
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[14]: https://app.datadoghq.com/synthetics/tests
