@@ -29,7 +29,7 @@ Para los desarrolladores que utilicen el [Marco serverless][4] para desplegar ap
     serverless plugin install --name serverless-plugin-datadog
     ```
 
-2. Asegúrate de que hayas desplegado el [Datadog Lambda Forwarder][2], una función Lambda que envía logs de AWS a Datadog y que estés utilizando v3.74.0+. Puede que necesites [actualizar tu Forwarder][5].
+2. Asegúrate de que hayas desplegado el [Datadog Lambda Forwarder][2], una función Lambda que envía logs de AWS a Datadog y de que estés utilizando v3.74.0+. Puede que necesites [actualizar tu Forwarder][5].
 
    Toma nota del ARN de tu Forwarder.
 
