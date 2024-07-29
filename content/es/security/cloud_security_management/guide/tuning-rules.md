@@ -55,7 +55,7 @@ Supongamos que quieres suprimir completamente el ruido de todas las señales de 
 Refina la supresión relacionada con la actividad de tu archivo en función de atributos que reflejen información identificativa sobre tus cargas de trabajo, el archivo en cuestión y el proceso que está accediendo al archivo.
 
 Claves comunes:
-- Etiquetas de carga de trabajo:
+- Etiquetas (tags) de carga de trabajo:
   - `kube_container_name`
   - `kube_service`
   - `host`
