@@ -201,6 +201,13 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
+  "UploadCustomCostsFile": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_4125168396",
+      "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
   "CreateCloudflareAccount": [
     {
       "group": "cloudflare_integration",

@@ -119,6 +119,25 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
+## Sampling impact on trace metrics
+
+In most cases, trace metrics are calculated based on all application traffic. However, with certain trace ingestion sampling configurations, the metrics represent only a subset of all requests.
+
+### Application-side sampling 
+
+Some tracing libraries support application-side sampling, which reduces the number of spans before they are sent to the Datadog Agent. For example, the Ruby tracing library offers application-side sampling to lower performance overhead. However, this can affect trace metrics, as the Datadog Agent needs all spans to calculate accurate metrics. 
+
+Very few tracing libraries support this setting, and using it is generally not recommended.
+
+### OpenTelemetry sampling
+
+The OpenTelemetry SDK's native sampling mechanisms lower the number of spans sent to the Datadog collector, resulting in sampled and potentially inaccurate trace metrics.
+
+### XRay sampling
+
+XRay spans are sampled before they are sent to Datadog, which means trace metrics might not reflect all traffic.
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
