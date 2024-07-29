@@ -4835,6 +4835,54 @@ menu:
           - GetCloudCostActivity
         unstable: []
         order: 10
+    - name: Get Custom Costs file
+      url: '#get-custom-costs-file'
+      identifier: cloud-cost-management-get-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomCostsFile
+        unstable: []
+        order: 12
+    - name: Delete Custom Costs file
+      url: '#delete-custom-costs-file'
+      identifier: cloud-cost-management-delete-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomCostsFile
+        unstable: []
+        order: 13
+    - name: Upload Custom Costs file
+      url: '#upload-custom-costs-file'
+      identifier: cloud-cost-management-upload-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadCustomCostsFile
+        unstable: []
+        order: 11
+    - name: List Custom Costs files
+      url: '#list-custom-costs-files'
+      identifier: cloud-cost-management-list-custom-costs-files
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomCostsFiles
+        unstable: []
+        order: 10
     - name: Update Cloud Cost Management Azure config
       url: '#update-cloud-cost-management-azure-config'
       identifier: cloud-cost-management-update-cloud-cost-management-azure-config
