@@ -2,7 +2,7 @@
 title: Métricas mejoradas para AWS Step Functions
 ---
 
-Además de [ingerir métricas de integración de AWS][3], Datadog genera métricas mejoradas para AWS Step Functions, similares a las [métricas mejoradas para AWS Lambda][1]. Las métricas mejoradas de Step Functions se distinguen por estar en el espacio de nombres `aws.states.enhanced.*`. Para añadir métricas mejoradas, sigue las [instrucciones de instalación de monitorización de AWS Step Function][3] y asegúrate de que `DD_ENHANCED_METRICS` esté configurado como `true`. 
+Además de [ingerir métricas de integración de AWS][3], Datadog genera métricas mejoradas para AWS Step Functions, similares a las [métricas mejoradas para AWS Lambda][1]. Las métricas mejoradas de Step Functions se distinguen por estar en el espacio de nombres `aws.states.enhanced.*`. Para añadir métricas mejoradas, sigue las [instrucciones de instalación de la monitorización de AWS Step Function][3] y asegúrate de que `DD_ENHANCED_METRICS` esté configurado como `true`. 
 
 Están disponibles las siguientes métricas mejoradas de Step Functions.
 
