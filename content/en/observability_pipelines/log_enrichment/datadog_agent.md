@@ -18,19 +18,6 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/prerequisites/datadog_agent %}}
 
-{{< tabs >}}
-{{% tab "Splunk HEC" %}}
-
-{{% observability_pipelines/prerequisites/splunk_hec_destination_only %}}
-
-{{% /tab %}}
-{{% tab "Sumo Logic" %}}
-
-{{% observability_pipelines/prerequisites/sumo_logic_destination_only %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
