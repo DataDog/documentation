@@ -253,7 +253,6 @@ You can find working examples of out-of-the-box configuration for Datadog Export
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[2]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [3]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
 [4]: https://opentelemetry.io/docs/collector/configuration/
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
@@ -269,20 +268,10 @@ You can find working examples of out-of-the-box configuration for Datadog Export
 [15]: https://opentelemetry.io/docs/reference/specification/logs/data-model/
 [16]: https://opentelemetry.io/docs/collector/deployment/#agent
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
-[18]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
-[19]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
-[20]: https://opentelemetry.io/docs/collector/deployment/
-[21]: https://app.datadoghq.com/integrations/otel
-[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
 [25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
 [26]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=service#service-attribute
 [27]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
 [28]: /opentelemetry/schema_semantics/hostname/
 [29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
-
-
-
 [30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml
 [31]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/
