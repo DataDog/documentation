@@ -119,14 +119,14 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation     | To Enable 									                                                                                                              |
 |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| JAX-WS		          | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
-| Mulesoft		        | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
-| Grizzly             | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
-| Grizzly-HTTP        | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
-| Ning                | `-Ddd.integration.ning.enabled=true`                                                                                                      |
-| Spark Java          | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
-| Hazelcast           | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
-| TIBCO BusinessWorks | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
+| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
+| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
+| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
+| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                      |
+| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
+| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
 
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
@@ -228,7 +228,7 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation   | To Enable 									                             |
 |-------------------|-------------------------------------------------|
-| JDBC-Datasource		 | `-Ddd.integration.jdbc-datasource.enabled=true` |
+| JDBC-Datasource		 | - System Property: `-Ddd.integration.jdbc-datasource.enabled=true`<br /> - Environment Variable: `DD_INTEGRATION_JDBC_DATASOURCE_ENABLED=true` |
 
 Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
@@ -238,10 +238,11 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 | Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
 |-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
+| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                                    | `cxf`                                          |
 | Datanucleus JDO     | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
 | GraphQL             | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
-| Hazelcast           | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
+| Hazelcast (client)  | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
 | Hibernate           | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
 | Hystrix             | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
 | JSP Rendering       | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
@@ -372,10 +373,10 @@ Older native-image buildpack versions expose the following option: `USE_NATIVE_I
 When this option is `false`, exceptions like the following can occur:
 
 ```text
-Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
-com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
-No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
-as this class should be initialized at image runtime. To see how this object got 
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError:
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException:
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap
+as this class should be initialized at image runtime. To see how this object got
 instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
 ```
 
@@ -409,3 +410,4 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [5]: /tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
+[10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java

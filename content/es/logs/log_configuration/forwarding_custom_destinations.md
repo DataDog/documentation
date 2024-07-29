@@ -12,7 +12,6 @@ further_reading:
 - link: /observability_pipelines/
   tag: Documentación
   text: Reenviar logs directamente desde tu entorno con pipelines de observabilidad
-kind: documentación
 title: Reenvío de logs a destinos personalizados
 ---
 

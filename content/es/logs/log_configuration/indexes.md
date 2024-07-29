@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: Blog
   text: Logging without Limits*
-kind: documentación
 title: Índices
 ---
 

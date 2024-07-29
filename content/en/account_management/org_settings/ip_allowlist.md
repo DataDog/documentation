@@ -69,7 +69,7 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 ### Add IP addresses or CIDR ranges
 
-{{< img src="account_management/org_settings/add_ip.png" alt="Screenshot showing a dialog box titled Add IP to allowlist" >}}
+{{< img src="account_management/org_settings/add_ip_2.png" alt="Screenshot showing a dialog box titled Add IP to allowlist" >}}
 
 1. Click the **Add IP** button at the top right of the page. 
 1. Enter a valid IP address or CIDR range.

@@ -1,8 +1,6 @@
 ---
 title: Troubleshooting Flutter SDK issues
 description: Learn how to troubleshoot issues with Flutter Monitoring.
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30

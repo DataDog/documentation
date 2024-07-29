@@ -19,7 +19,7 @@ Use the different principals to control access patterns in your organization and
 | [Powerpacks][8]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][6]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Synthetic tests][7]                             |                   | {{< X >}}         |                                     |
+| [Synthetic tests][7]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
 ### Elevate access to individual resources
 

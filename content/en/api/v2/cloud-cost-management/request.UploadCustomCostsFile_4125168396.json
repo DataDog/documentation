@@ -1,0 +1,13 @@
+[
+  {
+    "ProviderName": "my_provider",
+    "ChargePeriodStart": "2023-05-06",
+    "ChargePeriodEnd": "2023-06-06",
+    "ChargeDescription": "my_description",
+    "BilledCost": 250,
+    "BillingCurrency": "USD",
+    "Tags": {
+      "key": "value"
+    }
+  }
+]
