@@ -140,8 +140,11 @@ In the below example, `oteltrace` is an alias for the go.opentelemetry.io/otel/t
 ```go
 // Start a span.
 ctx, span := t.Start(context.Background(), "span_name")
+// Add an event.
 span.AddEvent("event1")
+// Add an event with a timestamp.
 span.AddEvent("event2", oteltrace.WithTimestamp(time.Now()))
+// Add an event with span attributes.
 span.AddEvent("event3", oteltrace.WithAttributes(attribute.String("key1", "value"), attribute.Int("key2", 1234)))
 s.End()
 ```
