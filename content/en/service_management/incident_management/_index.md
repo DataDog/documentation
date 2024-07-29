@@ -95,7 +95,7 @@ Once you have the [Datadog integration enabled on Slack][7], from any Slack chan
 
 In the creation modal, you add a descriptive title, select whether customers were impacted (yes, no, or unknown) and select a severity level (1-5, unknown).
 
-If the user declaring the incident has connected their Slack to their Datadog account, then, by default, that user becomes the Incident Commander. If the person declaring an incident is not a member of a Datadog account, then the IC becomes unassigned. The Incident Commander (IC) can be changed on the [incidents page][1] later if necessary.
+If the user declaring the incident has connected their Slack to their Datadog account, then, by default, that user becomes the Incident Commander (IC). If the person declaring an incident is not a member of a Datadog account, then the IC becomes unassigned. The IC can be changed on the [incidents page][1] later if necessary.
 
 After you declare an incident from Slack, it generates an incident channel.
 
