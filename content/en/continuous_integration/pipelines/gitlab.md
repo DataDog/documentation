@@ -40,6 +40,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
 | [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 | [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
+| [Custom spans][26] | Custom spans | Configure custom spans for your pipelines. |
 
 The following GitLab versions are supported:
 
@@ -343,3 +344,4 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [23]: /glossary/#approval-wait-time
 [24]: /glossary/#pipeline-execution-time
 [25]: /glossary/#running-pipeline
+[26]: /glossary/#custom-span
