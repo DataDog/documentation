@@ -41,17 +41,19 @@ DatadogTrace
 {{% /tab %}}
 {{% tab "CocoaPods" %}}
 
-You can use [CocoaPods](https://cocoapods.org/) to install `dd-sdk-ios`:
+You can use [CocoaPods][1] to install `dd-sdk-ios`:
 
 ```
 pod 'DatadogCore'
 pod 'DatadogTrace'
 ```
 
+[1]: https://cocoapods.org/
+
 {{% /tab %}}
 {{% tab "Carthage" %}}
 
-You can use [Carthage](https://github.com/Carthage/Carthage) to install `dd-sdk-ios`:
+You can use [Carthage][1] to install `dd-sdk-ios`:
 
 ```
 github "DataDog/dd-sdk-ios"
@@ -64,6 +66,8 @@ DatadogInternal.xcframework
 DatadogCore.xcframework
 DatadogTrace.xcframework
 ```
+
+[1]: https://github.com/Carthage/Carthage
 
 {{% /tab %}}
 {{< /tabs >}}
