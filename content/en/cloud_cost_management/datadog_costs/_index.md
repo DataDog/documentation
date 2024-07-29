@@ -22,6 +22,9 @@ further_reading:
 - link: "/cloud_cost_management/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
+- link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
+  tag: "Blog"
+  text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
 {{< site-region region="gov" >}}
