@@ -311,6 +311,24 @@
     "request_description": "",
     "request_schema_description": "Azure config Patch Request."
   },
+  "ListCustomCostsFiles": {
+    "description": "List the Custom Costs files.",
+    "summary": "List Custom Costs files"
+  },
+  "UploadCustomCostsFile": {
+    "description": "Upload a Custom Costs file.",
+    "summary": "Upload Custom Costs file",
+    "request_description": "",
+    "request_schema_description": "Request for uploading a Custom Costs file."
+  },
+  "DeleteCustomCostsFile": {
+    "description": "Delete the specified Custom Costs file.",
+    "summary": "Delete Custom Costs file"
+  },
+  "GetCustomCostsFile": {
+    "description": "Fetch the specified Custom Costs file.",
+    "summary": "Get Custom Costs file"
+  },
   "GetCloudCostActivity": {
     "description": "Get the Cloud Cost Management activity.",
     "summary": "Cloud Cost Enabled"
@@ -961,6 +979,18 @@
     "description": "Get all active downtimes for the specified monitor.",
     "summary": "Get active downtimes for a monitor"
   },
+  "ListDevices": {
+    "description": "Get the list of devices.",
+    "summary": "Get the list of devices"
+  },
+  "GetDevice": {
+    "description": "Get the device details.",
+    "summary": "Get the device details"
+  },
+  "GetInterfaces": {
+    "description": "Get the list of interfaces of the device.",
+    "summary": "Get the list of interfaces of the device"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -1293,6 +1323,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
+    "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "summary": "Convert a rule from JSON to Terraform",
+    "request_description": "",
+    "request_schema_description": "Convert a rule from JSON to Terraform."
+  },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
     "summary": "Test a rule",
@@ -1318,6 +1354,10 @@
     "summary": "Update an existing rule",
     "request_description": "",
     "request_schema_description": "Update an existing rule."
+  },
+  "ConvertExistingSecurityMonitoringRule": {
+    "description": "Convert an existing rule from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "summary": "Convert an existing rule from JSON to Terraform"
   },
   "TestExistingSecurityMonitoringRule": {
     "description": "Test an existing rule.",
