@@ -95,17 +95,13 @@ Once you have the [Datadog integration enabled on Slack][7], from any Slack chan
 
 In the creation modal, you add a descriptive title, select whether customers were impacted (yes, no, or unknown) and select a severity level (1-5, unknown).
 
-If the user declaring the incident has connected their Slack to their Datadog account, then, by default, that user will become the Incident Commander. The Incident Commander (IC) can be changed later in-app if necessary. If the person declaring an incident is not a member of a Datadog account, then the IC is assigned to a generic `Slack app user` and can be assigned to another IC in-app.
-
-Read more about using the Datadog Slack App [here][8].
-
-{{< img src="service_management/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
-
-If the user declaring the incident is a part of your Datadog account, then that user becomes the Incident Commander (IC) by default. If the person declaring an incident is not part of your Datadog account, then the IC is assigned to a generic `Slack app user`. The IC can be changed on the [incidents page][1] in the Datadog app.
+If the user declaring the incident has connected their Slack to their Datadog account, then, by default, that user will become the Incident Commander. The Incident Commander (IC) can be changed later in-app if necessary. If the person declaring an incident is not a member of a Datadog account _and_ anonymous Slack declaration is enabled in incident settings, then the IC becomes unassigned and can be assigned to another IC in-app.
 
 Once you declare an incident from Slack, it generates an incident channel.
 
-For more information about the Datadog Slack integration, check out [the docs][7].
+{{< img src="service_management/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
+
+Read more about using the Datadog Slack App [here][8].
 
 {{< site-region region="eu" >}}
 For {{< region-param key="dd_site_name" >}} customers who use Slack, stay informed about the Slack app by filing a ticket at https://help.datadoghq.com/.
