@@ -229,7 +229,11 @@ The excluded namespaces are:
 - `status`
 - `env`
 - `dd.trace_id`
+- `trace_id`
+- `trace id`
 - `dd.span_id`
+- `span_id`
+- `span id`
 - `@timestamp`
 - `timestamp`
 - `_timestamp`
@@ -239,8 +243,6 @@ The excluded namespaces are:
 - `syslog.timestamp`
 - `error.fingerprint`
 - `x-datadog-parent-id`
-- `trace id`
-- `span id`
 
 ### Edit scanning rules
 
