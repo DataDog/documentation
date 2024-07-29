@@ -1,6 +1,5 @@
 ---
 title: Automatic Compile-Time Instrumentation for Go
-kind: documentation
 code_lang: go
 further_reading:
 - link: https://datadoghq.dev/orchestrion
