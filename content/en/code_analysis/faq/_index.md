@@ -77,7 +77,7 @@ Datadog's static analyzer is available under an open source license and the code
 ### Does the analyzer runs on Windows?
 
 Currently, the Datadog Static Analyzer only runs on UNIX-based systems. We have an open feature request
-to support Windows that is [trackable on GitHub](https://github.com/DataDog/datadog-static-analyzer/issues/476).
+to support Windows that can be [tracked on GitHub](https://github.com/DataDog/datadog-static-analyzer/issues/476).
 
 ## Software Composition Analysis
 
