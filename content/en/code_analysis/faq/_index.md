@@ -67,12 +67,12 @@ You must be using Datadog's analyzer to enable diff-aware scans.
 
 ### What is Datadog's OWASP benchmark score for Static Analysis?
 
-Datadog's Static Analyzer has been tested against the OWASP benchmark with a score of 44.
+Datadog's static analyzer has been tested against the OWASP benchmark with a score of 44.
 The analyzer is periodically checked against the benchmark and updated results are published to the [static analyzer documentation][5].
 
 ### Is the analyzer open source?
 
-The Datadog Static Analyzer is available under an open source license and the code is [available on GitHub][4].
+Datadog's static analyzer is available under an open source license and the code is [available on GitHub][4].
 
 ## Software Composition Analysis
 
