@@ -206,5 +206,9 @@
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."
+  },
+  "workflow-automation": {
+    "name": "Workflow Automation",
+    "description": "Automate your teams operational processes with Datadog Workflow Automation."
   }
 }
