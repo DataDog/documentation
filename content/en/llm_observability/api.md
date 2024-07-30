@@ -346,7 +346,7 @@ Evaluations require a `span_id` and `trace_id`.
 | ml_app [*required*] | string | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
 | metric_type [*required*]| string | The type of evaluation: `"categorical"` or `"score"`. |
 | label [*required*]      | string | The unique name or label for the provided evaluation . |
-| categorical_value [*required if the metric_type is "score"*]    | string | A string representing the category that the evaluation belongs to. |
+| categorical_value [*required if the metric_type is "categorical"*]    | string | A string representing the category that the evaluation belongs to. |
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
 
