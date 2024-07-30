@@ -6,6 +6,8 @@ further_reading:
   text: "Setting up Cloud Security Management"
 ---
 
+*Last updated on July 30, 2024.*
+
 ## Cloud Security Management
 
 Learn how to identify and remediate your top cloud security risks using Datadog's Cloud Security Management (CSM).
