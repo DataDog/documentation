@@ -30,6 +30,6 @@ Selecciona el lenguaje de la aplicación para obtener información sobre cómo h
 
 {{< partial name="security-platform/appsec-languages.html" >}}</br>
 
-## Leer más
+## Referencias adicionales
 
 {{< nombre parcial="whats-next/whats-next.html" >}}
