@@ -74,6 +74,11 @@ The analyzer is periodically checked against the benchmark and updated results a
 
 Datadog's static analyzer is available under an open source license and the code is [available on GitHub][4].
 
+### Does the analyzer runs on Windows?
+
+Currently, the Datadog Static Analyzer only runs on UNIX-based system. We have an open feature request
+to support Windows that is [trackable on GitHub](https://github.com/DataDog/datadog-static-analyzer/issues/476).
+
 ## Software Composition Analysis
 
 ### What SBOM format Datadog supports?
