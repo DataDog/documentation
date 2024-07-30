@@ -36,9 +36,26 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 Define the configuration of your browser test.
 
 1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
-2. Add **Advanced Options** (optional): Set specific options for your browser test.
 
-   {{< tabs >}}
+ <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+
+2. Add a **name**: The name of your browser test.
+3. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+4. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
+   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
+   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
+   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
+5. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
+
+   {{% managed-locations %}}
+
+   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
+
+6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
+
+### Advanced options
+
+{{< tabs >}}
 
    {{% tab "Request Options" %}}
 
@@ -91,20 +108,6 @@ Define the configuration of your browser test.
    {{% /tab %}}
 
    {{< /tabs >}}
-
-3. Add a **name**: The name of your browser test.
-4. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-5. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
-   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
-   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
-   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
-6. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
-
-   {{% managed-locations %}}
-
-   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
-
-7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
 {{% synthetics-variables %}}
 
