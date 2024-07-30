@@ -105,7 +105,7 @@ Actualiza tu archivo JSON de definición de tarea de ECS añadiendo esto en la s
 
 Si necesitas ayuda adicional, ponte en contacto con el [equipo de asistencia de Datadog][6].
 
-## Leer más
+## Referencias adicionales
 
 {{< nombre parcial="whats-next/whats-next.html" >}}
 
