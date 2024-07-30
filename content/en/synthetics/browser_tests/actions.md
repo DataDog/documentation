@@ -71,8 +71,7 @@ Some assertions validate the active page, the page the user last interacted with
 
 To create a step, select an assertion type:
 
-{{< tabs >}}
-{{% tab "Test An Element On The Active Page" %}}
+{{% collapse-content title="Test An Element On The Active Page" level="h4" %}}
 
 #### Test an element's content
 
@@ -94,11 +93,9 @@ Create this assertion step to have your browser test select a page element and v
 
 {{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
 
-**Note**: Datadog recommends using the two assertions listed above for better accuracy. For more information, see [Advanced Options][1].
+{{< /collapse-content >}}
 
-[1]: /synthetics/browser_tests/advanced_options#user-specified-locator
-{{% /tab %}}
-{{% tab "Test Active Page Content" %}}
+{{% collapse-content title="Test Active Page Content" level="h4" %}}
 
 #### Test that some text is not present on the active page
 
@@ -114,9 +111,9 @@ Create this assertion step to have your browser test verify that the URL of the 
 
 You can test for a value in the URL such as `string`, `number`, or `regex`.
 
-{{% /tab %}}
+{{< /collapse-content >}}
 
-{{% tab "Special Assertions" %}}
+{{% collapse-content title="Special Assertions" level="h4" %}}
 
 #### Test that an email was received
 
@@ -162,11 +159,15 @@ Create this assertion step to have your browser test verify the downloaded files
 
 For more information about how to test downloads, see [Test File Upload and Download][3].
 
-[1]: /synthetics/guide/email-validation
-[2]: /synthetics/browser_tests/actions#use-variables
-[3]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
-{{% /tab %}}
-{{< /tabs >}}
+#### Test number and target of requests
+
+Create this assertion step to have your browser test the number of HTTP requests that are made to a specific URL regex.
+
+{{< img src="synthetics/browser_tests/number_and_target.png" alt="Test number and target of requests option with the requests made dropdown shown" style="width:60%;" >}}
+
+{{< /collapse-content >}} 
+
+</br>
 
 ### Navigation
 
