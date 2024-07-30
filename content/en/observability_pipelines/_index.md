@@ -92,7 +92,7 @@ If you are migrating to Datadog Log Management, use the Archive Logs template to
 
 #### Split Logs
 
-When you have logs from different services and applications, you might need to send them to different downstream services for query, analysis, and alerting. For example, you want to send security logs to a SIEM and DevOps logs to Datadog. Use the Split Logs template to pre-process your logs and determine which logs should go to which destination.
+When you have logs from different services and applications, you might need to send them to different downstream services for query, analysis, and alerting. For example, you might want to send security logs to a SIEM solution and DevOps logs to Datadog. Use the Split Logs template to pre-process your logs separately for each destination before sending them downstream.
 
 #### Sensitive Data Redaction
 
