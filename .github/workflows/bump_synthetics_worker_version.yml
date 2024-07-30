@@ -12,6 +12,7 @@ jobs:
       contents: write # for git push
       pull-requests: write # to create pull request      
     runs-on: ubuntu-latest
+    name: Find latest synthetic-worker version
     steps:
       - uses: actions/checkout@v4
 
