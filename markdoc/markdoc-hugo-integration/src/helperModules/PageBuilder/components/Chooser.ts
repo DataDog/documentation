@@ -1,10 +1,11 @@
 import { ResolvedPagePrefs } from '../../../schemas/resolvedPagePrefs';
-import { elementOpen, elementClose, elementVoid, text, patch } from 'incremental-dom';
+// import { elementOpen, elementClose, elementVoid, text, patch } from 'incremental-dom';
 
 /**
  * The chooser component. Only used in initial compilation,
  * not re-rendering on the client side.
  */
+/*
 export const Chooser = (resolvedPagePrefs: ResolvedPagePrefs) => {
   return (
     <div>
@@ -34,10 +35,32 @@ export const Chooser = (resolvedPagePrefs: ResolvedPagePrefs) => {
     </div>
   );
 };
+*/
+
+export const getChooserHtml = (resolvedPagePrefs: ResolvedPagePrefs): string => {
+  let chooserHtml = '<div>';
+  Object.keys(resolvedPagePrefs).forEach((prefId) => {
+    const resolvedPref = resolvedPagePrefs[prefId];
+    const currentValue = resolvedPref.currentValue || resolvedPref.defaultValue;
+    chooserHtml += '<div class="markdoc-pref__container">';
+    // Render the label
+    chooserHtml += `<div class="markdoc-pref__label">${resolvedPref.displayName}</div>`;
+    // Render each option pill
+    resolvedPref.options.forEach((option) => {
+      const selected = option.id === currentValue ? 'selected' : '';
+      chooserHtml += `<div class="markdoc-pref__pill ${selected}" data-pref-id="${resolvedPref.identifier}" data-option-id="${option.id}">${option.displayName}</div>`;
+    });
+    chooserHtml += '</div>';
+  });
+  chooserHtml += '<hr />';
+  chooserHtml += '</div>';
+  return chooserHtml;
+};
 
 /**
  * Patch an existing element with the incrementally rendered chooser component.
  */
+/*
 export const rerenderChooser = (p: {
   resolvedPagePrefs: ResolvedPagePrefs;
   elementToPatch: Element;
@@ -51,6 +74,7 @@ export const rerenderChooser = (p: {
 /**
  * Render the chooser component incrementally.
  */
+/*
 const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
   elementOpen('div', null);
   Object.keys(resolvedPagePrefs).forEach((prefId) => {
@@ -85,3 +109,4 @@ const renderChooserIncrementally = (resolvedPagePrefs: ResolvedPagePrefs) => {
   elementVoid('hr');
   elementClose('div');
 };
+*/

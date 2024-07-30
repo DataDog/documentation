@@ -62,7 +62,6 @@
     },
     "homepage": "https://markdoc.dev",
     "dependencies": {
-        "incremental-dom": "^0.7.0",
         "zod": "^3.22.4"
     }
 }

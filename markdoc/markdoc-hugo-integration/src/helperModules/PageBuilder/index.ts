@@ -5,11 +5,10 @@ import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compil
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
-import { Chooser } from './components/Chooser';
-import { renderToString } from 'react-dom/server';
-import { SharedRenderer } from '../SharedRenderer';
+import { getChooserHtml } from './components/Chooser';
 import { Frontmatter } from '../../schemas/yaml/frontMatter';
 import { TreeManager } from '../TreeManager';
+import { resolvePagePrefs } from '../sharedRendering';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
@@ -117,12 +116,12 @@ ${rerenderScript}
     let chooser = '';
 
     if (p.frontmatter.page_preferences) {
-      const resolvedPagePrefs = SharedRenderer.resolvePagePrefs({
+      const resolvedPagePrefs = resolvePagePrefs({
         pagePrefsConfig: p.frontmatter.page_preferences,
         prefOptionsConfig: p.prefOptionsConfig,
         valsByPrefId: p.defaultValsByPrefId
       });
-      chooser = renderToString(Chooser(resolvedPagePrefs));
+      chooser = getChooserHtml(resolvedPagePrefs);
     }
 
     return chooser;
@@ -153,9 +152,9 @@ ${rerenderScript}
    */
   static getClientRendererScriptStr(debug: boolean) {
     if (debug) {
-      return minifiedClientRendererScriptStr;
-    } else {
       return clientRendererScriptStr;
+    } else {
+      return minifiedClientRendererScriptStr;
     }
   }
 

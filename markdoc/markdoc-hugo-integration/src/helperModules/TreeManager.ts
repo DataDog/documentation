@@ -34,6 +34,7 @@ export class TreeManager {
       } catch (e) {
         return clientFunctions;
       }
+      // @ts-ignore
       clientFunctions[clientFunction.ref] = clientFunction;
     }
 

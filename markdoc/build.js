@@ -15,6 +15,9 @@ const markdocIntegration = new MarkdocHugoIntegration({
         content: CONTENT_DIR,
         options: PREFS_CONFIG_DIR,
         partials: PARTIALS_DIR
+    },
+    config: {
+        debug: true
     }
 });
 

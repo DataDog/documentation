@@ -1,9 +1,8 @@
-import { RenderableTreeNodes } from 'markdoc-static-compiler';
-import { rerenderChooser } from './PageBuilder/components/Chooser';
-import { SharedRenderer } from './SharedRenderer';
+import { getChooserHtml } from './PageBuilder/components/Chooser';
 import { MinifiedPrefOptionsConfig } from '../schemas/yaml/prefOptions';
-import { MinifiedPagePrefsConfig, PagePrefsConfig } from '../schemas/yaml/frontMatter';
+import { MinifiedPagePrefsConfig } from '../schemas/yaml/frontMatter';
 import { reresolveFunctionNode, ClientFunction } from 'markdoc-static-compiler';
+import { resolveMinifiedPagePrefs } from './sharedRendering';
 
 /**
  * A class containing functions for rendering on the client.
@@ -99,13 +98,8 @@ export class ClientRenderer {
     }
   }
 
-  addChooserEventListeners(chooserNode?: HTMLElement) {
-    let prefPills;
-    if (!chooserNode) {
-      prefPills = document.getElementsByClassName('markdoc-pref__pill');
-    } else {
-      prefPills = chooserNode.getElementsByClassName('markdoc-pref__pill');
-    }
+  addChooserEventListeners() {
+    const prefPills = document.getElementsByClassName('markdoc-pref__pill');
     for (let i = 0; i < prefPills.length; i++) {
       if (this.prefPills.includes(prefPills[i])) {
         continue;
@@ -114,6 +108,16 @@ export class ClientRenderer {
         prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
       }
     }
+    /*
+    for (let i = 0; i < prefPills.length; i++) {
+      if (this.prefPills.includes(prefPills[i])) {
+        continue;
+      } else {
+        this.prefPills.push(prefPills[i]);
+        prefPills[i].addEventListener('click', (e) => this.handlePrefSelectionChange(e));
+      }
+    }
+    */
   }
 
   initialize(p: {
@@ -122,7 +126,6 @@ export class ClientRenderer {
     chooserElement: Element;
     contentElement: Element;
     selectedValsByPrefId?: Record<string, string>;
-    renderableTree: RenderableTreeNodes;
     ifFunctionsByRef: Record<string, ClientFunction>;
   }) {
     this.prefOptionsConfig = p.prefOptionsConfig;
@@ -154,7 +157,7 @@ export class ClientRenderer {
      * can have a cascading impact on the interpolated placeholder values,
      * and thus the valid options for each preference.
      */
-    const resolvedPagePrefs = SharedRenderer.resolveMinifiedPagePrefs({
+    const resolvedPagePrefs = resolveMinifiedPagePrefs({
       pagePrefsConfig: this.pagePrefsConfig,
       prefOptionsConfig: this.prefOptionsConfig!,
       valsByPrefId: this.selectedValsByPrefId
@@ -170,18 +173,8 @@ export class ClientRenderer {
       this.selectedValsByPrefId[resolvedPref.identifier] = resolvedPref.currentValue;
     });
 
-    const newChooserNode = rerenderChooser({
-      resolvedPagePrefs,
-      elementToPatch: this.chooserElement
-    });
-    this.addChooserEventListeners(newChooserNode as HTMLElement);
-
-    /*
-    MarkdocStaticCompiler.renderers.incremental(
-      this.renderableTree,
-      this.contentElement,
-      { variables: this.selectedValsByPrefId }
-    );
-    */
+    const newChooserHtml = getChooserHtml(resolvedPagePrefs);
+    this.chooserElement.innerHTML = newChooserHtml;
+    this.addChooserEventListeners();
   }
 }

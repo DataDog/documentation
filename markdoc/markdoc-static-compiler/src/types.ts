@@ -6,8 +6,6 @@ import { z } from 'zod';
 export interface Tag {
   $$mdtype: 'Tag';
   name: string;
-  // TODO: Add UUID key for more performant rendering
-  // in the incremental renderer
   if?: ClientFunction | ClientVariable;
   attributes: Record<string, any>;
   children: RenderableTreeNode[];
@@ -21,7 +19,13 @@ export const ClientFunctionSchema = z.object({
   ref: z.string()
 });
 
-export type ClientFunction = z.infer<typeof ClientFunctionSchema>;
+export interface ClientFunction {
+  $$mdtype: 'Function';
+  name: 'and' | 'or' | 'equals' | 'not' | 'default' | 'debug';
+  parameters: Record<string, any>;
+  value: any;
+  ref: string;
+}
 
 export interface ClientVariable {
   $$mdtype: 'Variable';
