@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: ベース例外を発生させない
 ---
 ## メタデータ

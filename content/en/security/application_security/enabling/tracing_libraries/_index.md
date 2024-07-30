@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM using Datadog Tracing Libraries
-kind: documentation
 disable_toc: true
 ---
 

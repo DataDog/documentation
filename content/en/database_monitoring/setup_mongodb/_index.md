@@ -1,6 +1,5 @@
 ---
 title: Setting up MongoDB
-kind: documentation
 description: Setting up Database Monitoring on a MongoDB cluster
 disable_sidebar: true
 ---

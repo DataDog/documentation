@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/
   tag: 설명서
   text: 애플리케이션에 추적 라이브러리 추가
-kind: 설명서
 title: 호환성 요구 사항
 type: multi-code-lang
 ---

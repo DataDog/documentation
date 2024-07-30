@@ -1,6 +1,5 @@
 ---
 title: Search and Manage Synthetic Tests
-kind: documentation
 description: Learn how to search and manage your Synthetic tests.
 aliases:
 - /synthetics/search/

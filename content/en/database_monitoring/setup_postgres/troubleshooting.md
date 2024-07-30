@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting DBM Setup for Postgres
-kind: documentation
 description: Troubleshoot Database Monitoring setup for Postgres
 ---
 

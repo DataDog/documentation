@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/live_tail/
   tag: Documentation
   text: Datadog Live Tail 機能
-kind: ガイド
 title: ログとメトリクスの相関
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Enabling Software Composition Analysis using Datadog tracing libraries
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/security/default_rules/?category=cat-application-security"

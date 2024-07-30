@@ -8,7 +8,6 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentación
   text: API oficiales y creadas por la comunidad, y bibliotecas cliente de DogStatsD
-kind: Documentación
 title: 'Envío de checks de servicios: DogStatsD'
 ---
 

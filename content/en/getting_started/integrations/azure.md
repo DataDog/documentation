@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Azure
-kind: documentation
 further_reading:
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'

@@ -1,6 +1,6 @@
 ---
 title: Tagging SQL Statements
-kind: guide
+
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].

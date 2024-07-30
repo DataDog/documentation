@@ -1,6 +1,5 @@
 ---
 description: SQL Server のデータベースモニタリングセットアップのトラブルシューティング
-kind: documentation
 title: SQL Server 用 DBM セットアップのトラブルシューティング
 ---
 

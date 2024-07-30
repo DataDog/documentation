@@ -1,6 +1,5 @@
 ---
 title: RUM Analytics
-kind: documentation
 description: ""
 aliases:
   - /real_user_monitoring/rum_analytics

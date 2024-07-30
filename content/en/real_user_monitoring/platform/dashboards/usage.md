@@ -1,6 +1,5 @@
 ---
 title: RUM Usage Dashboard
-kind: documentation
 aliases:
   - '/real_user_monitoring/dashboards/frustration_signals_dashboard'
   - '/real_user_monitoring/dashboards/user_sessions_dashboard'

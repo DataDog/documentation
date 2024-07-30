@@ -3,7 +3,6 @@ aliases:
 - /es/security_platform/cspm/custom_rules/schema
 - /es/security/cspm/custom_rules/schema
 - /es/security/misconfigurations/custom_rules/schema/
-kind: documentación
 list_section:
   AWS: Consulta información detallada sobre los tipos de recursos de AWS en las siguientes
     páginas.

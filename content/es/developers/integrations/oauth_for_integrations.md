@@ -2,7 +2,6 @@
 aliases:
 - /es/developers/integrations/oauth_for_data_integrations/
 description: Utiliza OAuth para autenticar integraciones.
-kind: Documentación
 title: OAuth para integraciones
 ---
 {{< callout btn_hidden="true" >}}

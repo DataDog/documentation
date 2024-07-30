@@ -4,7 +4,6 @@ algolia:
   - ブラウザログ
 aliases:
 - /ja/logs/log_collection/web_browser
-kind: documentation
 title: ブラウザログ収集
 ---
 

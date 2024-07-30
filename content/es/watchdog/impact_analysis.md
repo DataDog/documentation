@@ -12,7 +12,6 @@ further_reading:
 - link: real_user_monitoring/connect_rum_and_traces/
   tag: Documentación
   text: Conectar RUM y las trazas
-kind: documentación
 title: Análisis de impactos de Watchdog
 ---
 

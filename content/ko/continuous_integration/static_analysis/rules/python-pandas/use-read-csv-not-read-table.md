@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: read_table보다 read_csv 선호
 ---
 ## 메타데이터

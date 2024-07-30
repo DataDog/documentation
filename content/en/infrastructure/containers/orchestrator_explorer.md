@@ -1,6 +1,5 @@
 ---
 title: Orchestrator Explorer
-kind: documentation
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ex.png" alt="Orchestrator Explorer, showing Kubernetes Pods." style="width:80%;">}}

@@ -17,7 +17,6 @@ further_reading:
 - link: tracing/
   tag: Documentation
   text: Utilisation avancée
-kind: documentation
 title: Configurer la bibliothèque de tracing Python
 type: multi-code-lang
 ---

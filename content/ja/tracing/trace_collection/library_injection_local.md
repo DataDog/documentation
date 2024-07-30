@@ -3,7 +3,6 @@ aliases:
 - /ja/tracing/trace_collection/admission_controller/
 - /ja/tracing/trace_collection/library_injection/
 description: インスツルメンテーションライブラリのアプリケーションへの挿入
-kind: documentation
 title: ライブラリのローカル挿入
 ---
 

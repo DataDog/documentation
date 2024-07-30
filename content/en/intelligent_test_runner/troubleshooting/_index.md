@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner Troubleshooting
-kind: documentation
 further_reading:
 - link: "/intelligent_test_runner"
   tag: "Documentation"

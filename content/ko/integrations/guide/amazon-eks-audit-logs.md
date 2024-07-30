@@ -1,5 +1,4 @@
 ---
-kind: 가이드
 title: Amazon EKS 감사 로그용 로그 수집
 ---
 

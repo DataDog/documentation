@@ -8,7 +8,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: ブログ
   text: Datadog APM で Kubernetes アプリケーションのトレーシングを自動インスツルメンテーションするために、ライブラリインジェクションを使用します
-kind: documentation
 title: Datadog Admission Controller
 ---
 

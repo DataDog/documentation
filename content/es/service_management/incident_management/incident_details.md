@@ -6,7 +6,6 @@ further_reading:
 - link: dashboards/querying/#incident-management-analytics
   tag: Documentación
   text: Análisis de la gestión de incidencias
-kind: documentation
 title: Página de detalles de la incidencia
 ---
 

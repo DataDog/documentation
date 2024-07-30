@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: GitHub
   text: Datadog を Terraform で管理する
-kind: documentation
 title: Terraform の概要
 ---
 

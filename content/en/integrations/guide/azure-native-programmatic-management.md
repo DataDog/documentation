@@ -1,6 +1,6 @@
 ---
 title: Azure Native Integration Programmatic Management Guide
-kind: guide
+
 description: "Steps for programmatically managing the Azure Native integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"

@@ -1,6 +1,5 @@
 ---
 title: Test Visibility Explorer
-kind: documentation
 description: Learn how to search and filter your test runs in the Test Visibility Explorer.
 further_reading:
   - link: "/continuous_integration/tests/"

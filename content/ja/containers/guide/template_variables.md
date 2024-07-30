@@ -13,7 +13,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Agent オートディスカバリーに含めるコンテナの管理
-kind: ガイド
 title: オートディスカバリーテンプレート変数
 ---
 

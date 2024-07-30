@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for NodeJs
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50

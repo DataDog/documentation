@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentation
   text: Configurer des options avancées pour les étapes
-kind: documentation
 title: Enregistrer des étapes avec un user-agent personnalisé
 ---
 

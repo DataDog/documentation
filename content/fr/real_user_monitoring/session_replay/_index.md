@@ -22,7 +22,6 @@ further_reading:
 - link: /integrations/content_security_policy_logs
   tag: Documentation
   text: Détectez et agrégez les violations de CSP avec Datadog
-kind: documentation
 title: Session Replay
 ---
 

@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
   tag: Blog
   text: Configurar alertas de pipelines con monitores CI de Datadog
-kind: Documentación
 title: Monitor CI
 ---
 

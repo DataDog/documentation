@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
 title: Aurora マネージド MySQL のデータベースモニタリングの設定
 ---
 

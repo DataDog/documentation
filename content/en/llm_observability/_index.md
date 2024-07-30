@@ -1,12 +1,8 @@
 ---
 title: LLM Observability
-kind: documentation
 aliases:
     - /tracing/llm_observability/
 ---
-
-<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your Company's data with OpenAI Global, LLC for the purpose of providing and improving LLM Observability.
-</div>
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
@@ -59,6 +55,8 @@ Identify problematic clusters and monitor the quality of responses over time wit
 Automatically scan and redact any sensitive data in your AI applications and identify prompt injections.
 
 {{< img src="llm_observability/prompt-injection.png" alt="An example of a prompt-injection attempt" style="width:100%;" >}}
+
+By using LLM Observability, you acknowledge that Datadog is authorized to share your Company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.
 
 [1]: /llm_observability/spans/
 [2]: https://app.datadoghq.com/llm/traces

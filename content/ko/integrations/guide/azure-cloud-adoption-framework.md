@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/migrate-to-azure-with-the-microsoft-cloud-adoption-framework/
   tag: 블로그
   text: Microsoft Cloud Adoption Framework를 사용한 Azure 마이그레이션
-kind: 가이드
 title: Datadog를 사용하는 Azure Cloud Adoption Framework
 ---
 

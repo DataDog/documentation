@@ -1,6 +1,5 @@
 ---
 title: Browser Testing Steps
-kind: documentation
 description: Learn how to automatically record and manually set steps in a browser test recording.
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
@@ -19,7 +18,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3], available for Chrome and Edge browsers, automatically detects and records steps on your website.
+Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
 
 ### Click
 
@@ -66,7 +65,7 @@ Assertions allow you to validate that your browser test is in the state you expe
 
 To confirm your test ends in an expected state, you must end your browser tests with an **assertion**.
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
 
 Some assertions validate the active page, the page the user last interacted with, such as a **click** or an **assertion** on a page element.
 
@@ -89,7 +88,13 @@ Create this assertion step to have your browser test select a page element such 
 
 Set the user locator to ensure the browser test targets the correct element by selecting `CSS` or `XPath 1.0` from the dropdown menu and adding a selector. Click **Test**. 
 
-Datadog recommends using the two assertions listed above for better accuracy. For more information, see [Advanced Options][1].
+#### Test the state of a checkbox or radio button
+
+Create this assertion step to have your browser test select a page element and validate the state of the assertion (unchecked or checked).
+
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
+
+**Note**: Datadog recommends using the two assertions listed above for better accuracy. For more information, see [Advanced Options][1].
 
 [1]: /synthetics/browser_tests/advanced_options#user-specified-locator
 {{% /tab %}}
@@ -125,7 +130,7 @@ Create this assertion step to test a custom assertion on the active page using y
 
 The JavaScript assertion function contains the following parameters and requires a return statement.
 
-* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean.
+* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean. If a falsy value is returned, the test step fails.
 
 * `vars` (optional): A string containing your browser test's [variables][2]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 

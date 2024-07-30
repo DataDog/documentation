@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/connection-issues-with-the-sql-server-integration
-kind: guide
+
 title: Problèmes de connexion avec l'intégration SQL Server
 ---
 

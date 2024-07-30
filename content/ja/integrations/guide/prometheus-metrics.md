@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/kubernetes/prometheus/
   tag: Documentation
   text: Kubernetes Prometheus および OpenMetrics メトリクスの収集
-kind: ガイド
 title: Datadog メトリクスにおける Prometheus メトリクスのマッピング
 ---
 

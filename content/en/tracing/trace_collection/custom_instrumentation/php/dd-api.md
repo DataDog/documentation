@@ -1,6 +1,5 @@
 ---
 title: PHP Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/manual_instrumentation/php
     - /tracing/opentracing/php

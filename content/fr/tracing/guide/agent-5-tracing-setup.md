@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/tracing/faq/agent-5-tracing-setup
-kind: guide
+
 private: true
 title: APM et profileur en continu avec la version 5 de l'Agent
 ---

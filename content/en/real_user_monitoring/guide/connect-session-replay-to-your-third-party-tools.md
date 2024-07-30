@@ -1,6 +1,6 @@
 ---
 title: Connect Session Replay To Your Third-Party Tools
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/session_replay/browser/'
   tag: 'Documentation'

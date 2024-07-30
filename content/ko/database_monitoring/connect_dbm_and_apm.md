@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: 블로그
   text: DBM과 애플리케이션 성능 모니터링(APM) 텔레메트리를 원활하게 상호 연결하여 엔드 투 엔드 쿼리 성능을 알아봅니다.
-kind: 설명서
 title: 데이터베이스 모니터링과 트레이스 상호 연결
 ---
 

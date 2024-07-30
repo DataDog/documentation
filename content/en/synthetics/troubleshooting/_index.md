@@ -1,6 +1,5 @@
 ---
 title: Synthetic Monitoring Troubleshooting
-kind: documentation
 description: Troubleshoot common Synthetic Monitoring issues.
 further_reading:
 - link: "/synthetics/"

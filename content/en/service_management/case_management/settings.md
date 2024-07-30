@@ -1,6 +1,5 @@
 ---
 title: Settings
-kind: documentation
 further_reading:
 - link: "/service_management/case_management/troubleshooting"
   tag: "Documentation"

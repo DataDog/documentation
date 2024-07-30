@@ -39,7 +39,7 @@ integration_id: nomad
 integration_title: Nomad
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: nomad
 public_title: Nomad

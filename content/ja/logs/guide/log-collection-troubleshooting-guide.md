@@ -14,7 +14,6 @@ further_reading:
 - link: /logs/guide/logs-show-info-status-for-warnings-or-errors/
   tag: ガイド
   text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
-kind: ガイド
 title: ログ収集のトラブルシューティングガイド
 ---
 

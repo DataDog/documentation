@@ -1,6 +1,6 @@
 ---
 title: Connecting with Managed Authentication
-kind: guide
+
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].

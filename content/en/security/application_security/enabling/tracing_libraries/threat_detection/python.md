@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for Python
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 50

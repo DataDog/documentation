@@ -14,7 +14,7 @@ further_reading:
   tag: Blog
   text: Dépanner les problèmes de déploiement frontend avec le suivi des déploiements
     dans RUM
-kind: guide
+
 title: Débuter avec le suivi des déploiements RUM
 ---
 

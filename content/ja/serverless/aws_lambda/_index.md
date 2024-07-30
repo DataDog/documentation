@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/serverless-cold-start-traces/
   tag: ブログ
   text: コールドスタートトレーシングでサーバーレス関数のパフォーマンスを把握する
-kind: documentation
 title: AWS Lambda のためのサーバーレスモニタリング
 ---
 

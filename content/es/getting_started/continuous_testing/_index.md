@@ -19,7 +19,6 @@ further_reading:
   tag: Documentación
   text: Más información sobre los tests Synthetic en la canalización de integración
     continua (CI)
-kind: documentación
 title: Empezando con los tests continuos
 ---
 {{< jqmath-vanilla >}}

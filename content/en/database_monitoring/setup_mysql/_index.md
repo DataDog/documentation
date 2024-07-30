@@ -1,6 +1,5 @@
 ---
 title: Setting up MySQL
-kind: documentation
 description: Setting up Database Monitoring on a MySQL database
 disable_sidebar: true
 ---

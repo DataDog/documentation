@@ -1,6 +1,5 @@
 ---
 title: Kubernetes distributions
-kind: documentation
 aliases:
 - /agent/kubernetes/distributions
 further_reading:

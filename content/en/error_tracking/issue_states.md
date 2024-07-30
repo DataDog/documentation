@@ -1,6 +1,9 @@
 ---
 title: Issue States in Error Tracking
-kind: documentation
+further_reading:
+  - link: '/error_tracking/regression_detection/'
+    tag: 'Documentation'
+    text: 'Regression Detection'
 ---
 
 ## Overview
@@ -35,15 +38,7 @@ Error Tracking automatically marks issues as **RESOLVED** that appear to be inac
 
 ## Automatic re-opening through regression detection
 
-If a **RESOLVED** error recurs in a newer version of the code, or the error occurs again in code without versions, Error Tracking triggers a regression. The issue moves to the **FOR REVIEW** state, and is tagged with a **Regression** tag:
-
-{{< img src="error_tracking/regression-detection.png" alt="The details of regression in Error Tracking" style="width:90%;" >}}
-
-Regressions take into account the versions of your service where the error is known to occur, and only trigger on new versions after an issue is marked as **RESOLVED**. Configure your services with version tags (see instructions for [APM][1], [RUM][2], and [Logs][3]) to ensure that issues automatically resolve only if the same errors occur on newer versions of your services.
-
-If you don't have version tags set up, issues are tagged with **Regression** when an error occurs on an issue marked as **RESOLVED**.
-
-You can also set up [monitors][4] to alert you when regressions occur.
+See [Regression Detection][4].
 
 ## Updating the issue status
 
@@ -56,7 +51,11 @@ View a history of your issue activity with the **Activity Timeline**. On the det
 
 {{< img src="error_tracking/issue-status-history.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:80%;" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/services/deployment_tracking
 [2]: /real_user_monitoring/guide/setup-rum-deployment-tracking/?tab=npm
 [3]: /getting_started/tagging/unified_service_tagging/
-[4]: /monitors/types/error_tracking/
+[4]: /error_tracking/regression_detection/

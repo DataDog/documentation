@@ -1,5 +1,4 @@
 ---
-kind: Documentation
 title: Monitores para la monitorización de bases de datos
 ---
 

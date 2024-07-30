@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: DevSecOps 번들 사용하기
 ---
 

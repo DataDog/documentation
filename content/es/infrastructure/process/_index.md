@@ -24,7 +24,6 @@ further_reading:
   tag: Blog
   text: Solucionar problemas de anomalías en el rendimiento de la carga de trabajo
     con Watchdog Insights para Live Processes
-kind: documentation
 title: Live Processes
 ---
 

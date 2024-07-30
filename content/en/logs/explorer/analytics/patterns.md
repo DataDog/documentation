@@ -1,6 +1,5 @@
 ---
 title: Grouping Logs Into Patterns
-kind: documentation
 description: 'Group queried logs into patterns.'
 further_reading:
 - link: 'logs/explorer/'

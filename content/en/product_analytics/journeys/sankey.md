@@ -1,6 +1,5 @@
 ---
 title: Sankey Diagram
-kind: documentation
 aliases:
 - /real_user_monitoring/product_analytics/sankey
 further_reading:

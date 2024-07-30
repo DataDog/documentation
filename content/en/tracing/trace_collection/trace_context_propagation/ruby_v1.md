@@ -1,6 +1,5 @@
 ---
 title: (Legacy) Propagating Ruby Trace Context
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
       tag: 'Blog'

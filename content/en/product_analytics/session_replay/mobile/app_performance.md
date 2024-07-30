@@ -1,6 +1,5 @@
 ---
 title: How Mobile Session Replay Impacts App Performance
-kind: documentation
 description: Performance benchmarking for Mobile Session Replay.
 aliases:
 further_reading:
@@ -21,4 +20,4 @@ further_reading:
       text: Session Replay
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/mobile/app_performance.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/mobile/app_performance" >}}

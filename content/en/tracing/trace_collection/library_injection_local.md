@@ -1,6 +1,5 @@
 ---
 title: Injecting Libraries Locally
-kind: documentation
 description: "Inject instrumentation libraries into applications"
 aliases:
  - /tracing/trace_collection/admission_controller/
@@ -269,13 +268,13 @@ When both the Agent and your services are running on a host, real or virtual, Da
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Exit and open a new shell to use the injection library.
@@ -346,28 +345,15 @@ You can change these settings for all instrumented processes by setting the `con
 | --------- | ----------- |  
 |`BASIC`|Apply the configurations specified above. If no configuration source is specified, this is the default.|
 |`LOCAL:PATH`|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: `LOCAL:/opt/config/my_process_config.yaml`|
-|`BLOB:URL`| Apply the configuration at the specified path in an S3-compatible object store. The connection URL and the format of the configuration file are described below. Example: `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1` |
 
-The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+The words `BASIC` and `LOCAL` must be uppercase.
 
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources.
 
-```yaml
-DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
-```
-
-#### Blob storage support
-The supported blob storage solutions are:
-- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
-See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
-- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
-
-<a id="supplying-configuration-source-host"></a>
 
 ### Supplying configuration source
 
-The config file for `LOCAL` and `BLOB` can be formatted as JSON:
+The config file for `LOCAL` can be formatted as JSON:
 
 ```json
 {
@@ -516,13 +502,13 @@ Any newly started processes are intercepted and the specified instrumentation li
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Configure Docker injection {#configure-docker-injection-2}
@@ -539,19 +525,18 @@ config_sources: BASIC
 
 `config_sources`
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
   - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+The words `BASIC` and `LOCAL` must be uppercase.
 
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration:
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks the local file system first, and then uses the built-in default configuration:
 
 ```yaml
-config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+config_sources: LOCAL:/opt/config/my_process_config.yaml;BASIC
 ```
 
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
+For more information about configuring `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 `log_level`
 : Set to `debug` to log detailed information about what is happening, or `info`, `warn`, or `error` to log far less.<br>
@@ -569,7 +554,7 @@ Optional: `env`
 
 ### Supplying configuration source
 
-If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
+If you specify the `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
 ```json
 {
@@ -644,12 +629,6 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-#### Blob storage support
-The supported blob storage solutions are:
-- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
-See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
-- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 ### Basic configuration settings
 
@@ -704,13 +683,13 @@ Any newly started processes are intercepted and the specified instrumentation li
 Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
 ```shell
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
 ```
 
 This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LANGUAGES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
 ```
 
 ## Configure Docker injection
@@ -727,20 +706,19 @@ config_sources: BASIC
 
 `config_sources`
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
   - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+The words `BASIC` and `LOCAL` must be uppercase.
 
 Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
 
 ```yaml
-config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+config_sources: LOCAL:/opt/config/my_process_config.yaml;BASIC
 ```
 
 
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
+For more information about configuring `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `log_level`
 : Set to `debug` to log detailed information about what is happening, or `info` to log far less.
@@ -757,7 +735,7 @@ Optional: `env`
 
 ### Supplying configuration source
 
-If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
+If you specify a `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
 ```json
 {
@@ -833,12 +811,6 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-#### Blob storage support
-The supported blob storage solutions are:
-- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
-See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
-- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 ### Basic configuration settings
 

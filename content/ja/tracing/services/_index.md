@@ -4,7 +4,6 @@ further_reading:
 - link: getting_started/tagging/unified_service_tagging/
   tag: ドキュメント
   text: 統合サービスタグ付けと予約済みタグについて学ぶ
-kind: documentation
 title: サービス観測可能性
 ---
 

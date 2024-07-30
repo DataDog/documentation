@@ -1,6 +1,5 @@
 ---
 title: Enabling Code Security using Datadog Tracing Libraries
-kind: documentation
 type: multi-code-lang
 further_reading:
 - link: "/security/application_security/"

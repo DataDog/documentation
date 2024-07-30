@@ -1,6 +1,5 @@
 ---
 title: Nginx Compatibility Requirements
-kind: documentation
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 40

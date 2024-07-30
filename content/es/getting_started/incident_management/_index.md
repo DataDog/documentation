@@ -33,7 +33,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
   tag: Blog
   text: Cómo gestionamos las incidencias en Datadog
-kind: documentación
 title: Empezando con la gestión de incidencias
 ---
 

@@ -17,7 +17,7 @@ integration_id: chef
 integration_title: Chef
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: chef
 public_title: Datadog-Chef インテグレーション

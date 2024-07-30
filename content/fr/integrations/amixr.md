@@ -21,7 +21,7 @@
 "integration_title": "Amixr"
 "integration_version": ""
 "is_public": true
-"kind": "integration"
+"custom_kind": "integration"
 "maintainer": "ildar@amixr.io"
 "manifest_version": "1.0.0"
 "metric_prefix": "amixr."

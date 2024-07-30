@@ -1,5 +1,4 @@
 ---
-kind: Documentation
 title: Parcourir l'Events Explorer
 ---
 

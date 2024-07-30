@@ -11,7 +11,7 @@ further_reading:
 - link: /glossary/#tail
   tag: 용어
   text: '"tail" 관련 용어 항목'
-kind: guide
+
 title: 상위 읽기 권한으로 커스텀 로그 파일에서 로그 전송하기
 ---
 

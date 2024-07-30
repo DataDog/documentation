@@ -19,7 +19,6 @@ further_reading:
   text: Reducir el cambio de contexto y solucionar problemas con plugins de entorno
     de desarrollo integrado de Datadog
 is_beta: true
-kind: documentación
 title: Extensión de Datadog para Visual Studio
 ---
 

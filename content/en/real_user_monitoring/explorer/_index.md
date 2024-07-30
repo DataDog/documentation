@@ -1,6 +1,5 @@
 ---
 title: RUM Explorer
-kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:

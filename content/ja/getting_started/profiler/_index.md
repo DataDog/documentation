@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: GitHub
   text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
-kind: documentation
 title: Continuous Profiler の概要
 ---
 

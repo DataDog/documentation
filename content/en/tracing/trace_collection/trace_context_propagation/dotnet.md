@@ -1,6 +1,5 @@
 ---
 title: Propagating .NET Trace Context
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80

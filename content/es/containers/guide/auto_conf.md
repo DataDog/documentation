@@ -19,7 +19,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
   text: Autodiscovery Gestión
-kind: guía
 title: Configuración automática de Autodiscovery
 ---
 

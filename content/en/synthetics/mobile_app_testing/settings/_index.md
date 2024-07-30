@@ -1,6 +1,5 @@
 ---
 title: Mobile Application Testing Settings
-kind: documentation
 is_beta: true
 aliases:
 - /mobile_testing/settings

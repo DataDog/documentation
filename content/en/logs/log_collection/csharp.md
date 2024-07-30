@@ -1,6 +1,5 @@
 ---
 title: C# Log Collection
-kind: documentation
 aliases:
   - /logs/languages/csharp
 further_reading:
@@ -36,13 +35,16 @@ To send your C# logs to Datadog, use one of the following approaches:
 - [Enable Agentless logging](#agentless-logging-with-apm).
 - [Use the Serilog sink](#agentless-logging-with-serilog-sink).
 
-This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Microsoft.Extensions.Logging` logging libraries, for each of the above approaches.
-
 ## File-tail logging with the Datadog Agent
 
 The recommended approach for C# log collection is to output your logs to a file and then [tail][20] that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
+
+File-tail logging supports the following frameworks:
+- Serilog
+- NLog
+- log4net
 
 ### Configure your logger
 

@@ -1,6 +1,5 @@
 ---
 title: Session Replay Browser Troubleshooting
-kind: documentation
 description: Learn how to troubleshoot issues with Session Replay.
 further_reading:
 - link: 'https://github.com/DataDog/browser-sdk'
@@ -14,4 +13,4 @@ further_reading:
   text: 'Detect and aggregate CSP violations with Datadog'
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/browser/troubleshooting.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/browser/troubleshooting" >}}

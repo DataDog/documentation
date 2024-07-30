@@ -1,7 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the one-step command provided in the UI to install the Worker:
     ```shell
-    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker2.sh)"
+    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
     ```
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:

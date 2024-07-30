@@ -15,7 +15,6 @@ further_reading:
 - link: /real_user_monitoring/browser/troubleshooting/
   tag: 설명서
   text: 문제 해결
-kind: 설명서
 title: 세션 재생 시작하기
 ---
 

@@ -5,7 +5,6 @@ further_reading:
 - link: /synthetics/
   tag: 설명서
   text: 신서틱(Synthetic) 모니터링에 대해 알아보기
-kind: 가이드
 title: 신서틱 테스트 복제하기
 ---
 

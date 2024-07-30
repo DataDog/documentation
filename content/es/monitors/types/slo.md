@@ -8,7 +8,6 @@ further_reading:
 - link: /service_management/service_level_objectives/error_budget
   tag: Documentación
   text: Alertas del total de errores
-kind: Documentación
 title: Alertas de SLOs
 ---
 

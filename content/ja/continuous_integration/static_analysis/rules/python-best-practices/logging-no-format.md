@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: ロギング関数でフォーマット文字列を使用しない
 ---
 ## メタデータ

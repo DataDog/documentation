@@ -1,6 +1,6 @@
 ---
 title: Commonly Used Log Scrubbing Rules
-kind: faq
+
 further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"

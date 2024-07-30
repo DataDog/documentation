@@ -12,7 +12,6 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: documentation
   text: Integraciones personalizadas
-kind: documentation
 title: Detección automática de nombres de clústeres de Kubernetes
 ---
 

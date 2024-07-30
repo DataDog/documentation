@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Configuration de l'Agent sans serveur
 ---
 

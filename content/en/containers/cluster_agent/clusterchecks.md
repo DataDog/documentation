@@ -1,6 +1,5 @@
 ---
 title: Cluster Checks
-kind: documentation
 aliases:
     - /agent/autodiscovery/clusterchecks
     - /agent/faq/kubernetes-state-cluster-check

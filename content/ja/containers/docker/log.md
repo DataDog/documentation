@@ -23,7 +23,6 @@ further_reading:
 - link: /agent/docker/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: documentation
 title: Docker ログの収集
 ---
 

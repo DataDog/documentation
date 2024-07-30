@@ -1,6 +1,5 @@
 ---
 title: Configuring the Python Tracing Library
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 20
@@ -20,6 +19,9 @@ further_reading:
     - link: 'tracing/'
       tag: 'Documentation'
       text: 'Advanced Usage'
+    - link: "/opentelemetry/interoperability/environment_variable_support"
+      tag: "Documentation"
+      text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -130,3 +132,4 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [13]: /agent/configuration/network/#configure-ports
+[14]: /opentelemetry/interoperability/environment_variable_support

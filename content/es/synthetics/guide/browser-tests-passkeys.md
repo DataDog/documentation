@@ -11,7 +11,6 @@ further_reading:
 - link: synthetics/settings/?tab=specifyvalue#global-variables
   tag: Documentación
   text: Variables globales
-kind: guía
 title: Usar claves de paso (FIDO2) en tests de navegador
 ---
 

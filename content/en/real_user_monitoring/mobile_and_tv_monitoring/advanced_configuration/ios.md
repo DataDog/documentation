@@ -1,6 +1,5 @@
 ---
 title: RUM iOS Advanced Configuration
-kind: documentation
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -723,14 +722,6 @@ For example, if the current tracking consent is `.pending`:
 
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
-
-## Sending data when device is offline
-
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the RUM iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
-
-This means that even if users open your application while offline, no data is lost.
-
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
 
 ## Further Reading
 

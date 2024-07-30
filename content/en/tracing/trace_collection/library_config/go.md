@@ -1,6 +1,5 @@
 ---
 title: Configuring the Go Tracing Library
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
@@ -17,6 +16,9 @@ further_reading:
 - link: "/tracing/trace_collection/trace_context_propagation/go/"
   tag: "Documentation"
   text: "Propagating trace context"
+- link: "/opentelemetry/interoperability/environment_variable_support"
+  tag: "Documentation"
+  text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
@@ -72,7 +74,8 @@ Enable web framework and library instrumentation. When false, the application co
 Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
 
 `DD_TRACE_SAMPLE_RATE`
-: Enable ingestion rate control.
+: **Default**: `nil`<br>
+Enable ingestion rate control.
 
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.
@@ -111,6 +114,10 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request header `my-header`: `"DD_TRACE_HEADER_TAGS=my-header"`
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Default**: `datadog,tracecontext` <br>
+Configures trace header injection and extraction style. See [Propagating Go Trace Context][18] for more information.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `nil`<br>
@@ -154,10 +161,14 @@ A list of default tags to be added to every span and profile. Tags can be separa
 : **Default**: `true` <br>
 Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
+`DD_RUNTIME_METRICS_ENABLED`
+: **Default**: `false` <br>
+Enable [runtime metric][17] collection.
+Added in version 1.26.0.
+
 ## Configure APM environment name
 
 The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
-
 
 ## Further reading
 
@@ -176,3 +187,6 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [14]: https://github.com/w3c/trace-context
 [15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
+[17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
+[18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/go/
+[19]: /opentelemetry/interoperability/environment_variable_support

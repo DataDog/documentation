@@ -3,7 +3,6 @@ aliases:
 - /es/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
 - /es/dashboards/faq/how-do-i-track-cron-jobs
 description: Llama a comandos y genera eventos a partir de tus resultados con Dogwrap
-kind: guía
 title: Dogwrap
 ---
 

@@ -13,7 +13,7 @@ integration_id: redmine
 integration_title: Redmine
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: redmine
 public_title: Datadog-Redmine インテグレーション

@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: AWS Elemental MediaConnect
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mediaconnect
 public_title: Datadog-AWS Elemental MediaConnect インテグレーション

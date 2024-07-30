@@ -1,6 +1,5 @@
 ---
 title: CD Visibility Explorer Search Syntax
-kind: documentation
 description: Search all of your deployment executions.
 further_reading:
 - link: "/continuous_delivery/search"

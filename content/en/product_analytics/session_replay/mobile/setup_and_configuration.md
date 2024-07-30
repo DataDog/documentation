@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay Setup and Configuration
-kind: documentation
 description: Setting up and configuring Mobile Session Replay.
 aliases:
 further_reading:
@@ -21,4 +20,4 @@ further_reading:
       text: Session Replay
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/mobile/setup_and_configuration.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/mobile/setup_and_configuration" >}}

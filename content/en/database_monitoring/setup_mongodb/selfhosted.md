@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted MongoDB
-kind: documentation
 further_reading:
 - link: "/integrations/mongo/"
   tag: "Documentation"

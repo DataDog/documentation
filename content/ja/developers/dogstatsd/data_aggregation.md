@@ -1,6 +1,5 @@
 ---
 title: DogStatsD のデータ集計
-kind: documentation
 description: DogStatsD サーバーがデータを集計してから Datadog に送信することについて説明します
 aliases:
   - /ja/developers/faq/data-aggregation-with-dogstatsd-threadstats
