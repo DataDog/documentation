@@ -43,7 +43,10 @@ After choosing to create an `HTTP` test, define your test's request.
 ### Define request
 
 1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
-2. Enrich your HTTP request with **Advanced Options** (optional):
+
+2. Enrich your HTTP request with Advanced options (optional):
+
+{{< collapse-content title="Advanced Options" level="h5" >}}
 
    {{< tabs >}}
 
@@ -105,9 +108,17 @@ After choosing to create an `HTTP` test, define your test's request.
 [1]: /data_security/synthetics
    {{% /tab %}}
 
+   {{% tab "Javascript" %}}
+
+   Define variables for your HTTP API tests with Javascript:
+
+  {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
+
+   {{% /tab %}}
+
    {{< /tabs >}}
 
-<br/>
+   {{< /collapse-content >}} 
 
 3. **Name** your HTTP test.
 
