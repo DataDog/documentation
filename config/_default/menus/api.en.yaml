@@ -7324,3 +7324,55 @@ menu:
           - ListTeams
         unstable: []
         order: 1
+    - name: Workflow Automation
+      url: /api/latest/workflow-automation/
+      identifier: workflow-automation
+      generated: true
+    - name: Cancel a workflow instance
+      url: '#cancel-a-workflow-instance'
+      identifier: workflow-automation-cancel-a-workflow-instance
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelWorkflowInstance
+        unstable: []
+        order: 4
+    - name: Get a workflow instance
+      url: '#get-a-workflow-instance'
+      identifier: workflow-automation-get-a-workflow-instance
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWorkflowInstance
+        unstable: []
+        order: 3
+    - name: Execute a workflow
+      url: '#execute-a-workflow'
+      identifier: workflow-automation-execute-a-workflow
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowInstance
+        unstable: []
+        order: 2
+    - name: List workflow instances
+      url: '#list-workflow-instances'
+      identifier: workflow-automation-list-workflow-instances
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflowInstances
+        unstable: []
+        order: 1

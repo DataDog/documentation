@@ -126,9 +126,6 @@
   "api": {
     "other": "API"
   },
-  "docs": {
-    "other": "Docs"
-  },
   "home": {
     "other": "Home"
   },
@@ -149,10 +146,6 @@
   },
   "agent": {
     "other": "Agent"
-  },
-  "integrations": {
-    "one": "integration",
-    "other": "integrations"
   },
   "graphing": {
     "other": "グラフ"
