@@ -1,10 +1,7 @@
 import { PrefOptionsConfig } from '../../schemas/yaml/prefOptions';
 import { ParsedFile } from '../FileParser';
 import { ConfigProcessor } from '../ConfigProcessor';
-import MarkdocStaticCompiler, {
-  RenderableTreeNodes,
-  RenderableTreeNode
-} from 'markdoc-static-compiler';
+import MarkdocStaticCompiler, { RenderableTreeNode } from 'markdoc-static-compiler';
 import prettier from 'prettier';
 import fs from 'fs';
 import path from 'path';
@@ -179,7 +176,6 @@ ${rerenderScript}
     defaultValsByPrefId: Record<string, string>;
     renderableTree: RenderableTreeNode;
   }): string {
-    let renderableTreeStr;
     let prefOptionsConfigStr;
     let defaultValsByPrefIdStr;
     let pagePrefsConfigStr;
@@ -187,7 +183,6 @@ ${rerenderScript}
     let ifFunctionsByRefStr;
 
     if (p.pageBuildArgs.debug) {
-      renderableTreeStr = JSON.stringify(p.renderableTree, null, 2);
       prefOptionsConfigStr = JSON.stringify(p.pageBuildArgs.prefOptionsConfig, null, 2);
       defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId, null, 2);
       pagePrefsConfigStr = JSON.stringify(
@@ -197,7 +192,6 @@ ${rerenderScript}
       );
       ifFunctionsByRefStr = JSON.stringify(ifFunctionsByRef, null, 2);
     } else {
-      renderableTreeStr = JSON.stringify(p.renderableTree);
       prefOptionsConfigStr = JSON.stringify(p.pageBuildArgs.prefOptionsConfig);
       defaultValsByPrefIdStr = JSON.stringify(p.defaultValsByPrefId);
       pagePrefsConfigStr = JSON.stringify(
@@ -212,7 +206,6 @@ ${rerenderScript}
         pagePrefsConfig: ${pagePrefsConfigStr},
         prefOptionsConfig: ${prefOptionsConfigStr},
         selectedValsByPrefId: ${defaultValsByPrefIdStr},
-        renderableTree: ${renderableTreeStr},
         ifFunctionsByRef: ${ifFunctionsByRefStr}
     });
   </script>

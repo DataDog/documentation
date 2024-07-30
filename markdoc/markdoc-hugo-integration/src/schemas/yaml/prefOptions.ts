@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX } from '../regexes';
+import { SNAKE_CASE_REGEX, PREF_OPTIONS_ID_REGEX } from '../regexes';
 
 /**
  * An option for a preference,
@@ -18,11 +18,30 @@ const PrefOptionSchema = z
   })
   .strict();
 
+const MinifiedPrefOptionSchema = z
+  .object({
+    dn: z.string(), // display name
+    d: z.boolean().optional(), // default
+    i: z.string().regex(SNAKE_CASE_REGEX) // identifier
+  })
+  .strict();
+
+export const MinifiedPrefOptionsConfigSchema = z.record(
+  z.string().regex(PREF_OPTIONS_ID_REGEX),
+  z.array(MinifiedPrefOptionSchema)
+);
+
+/**
+ * A minified version of the PrefOptionsConfigSchema.
+ */
+export type MinifiedPrefOptionsConfig = z.infer<typeof MinifiedPrefOptionsConfigSchema>;
+
 /**
  * The validated preference options configuration
  * ingested from YAML files.
  */
 export const PrefOptionsConfigSchema = z.record(
+  z.string().regex(PREF_OPTIONS_ID_REGEX),
   z
     .array(PrefOptionSchema)
     // verify that one and only one option is marked as default

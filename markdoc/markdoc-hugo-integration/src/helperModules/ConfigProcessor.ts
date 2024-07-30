@@ -1,7 +1,18 @@
-import { PrefOptionsConfig, PrefOptionsConfigSchema } from '../schemas/yaml/prefOptions';
+import {
+  MinifiedPrefOptionsConfig,
+  MinifiedPrefOptionsConfigSchema,
+  PrefOptionsConfig,
+  PrefOptionsConfigSchema
+} from '../schemas/yaml/prefOptions';
 import { FileNavigator } from './FileNavigator';
 import { GLOBAL_PLACEHOLDER_REGEX } from '../schemas/regexes';
-import { Frontmatter } from '../schemas/yaml/frontMatter';
+import {
+  Frontmatter,
+  MinifiedPagePrefConfig,
+  MinifiedPagePrefsConfig,
+  MinifiedPagePrefsConfigSchema,
+  PagePrefsConfig
+} from '../schemas/yaml/frontMatter';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import {
@@ -271,5 +282,36 @@ export class ConfigProcessor {
       );
     }
     return final;
+  }
+
+  static minifyPrefOptionsConfig(
+    prefOptionsConfig: PrefOptionsConfig
+  ): MinifiedPrefOptionsConfig {
+    const minifiedPrefOptionsConfig: MinifiedPrefOptionsConfig = {};
+    for (const [optionsListId, optionsList] of Object.entries(prefOptionsConfig)) {
+      minifiedPrefOptionsConfig[optionsListId] = optionsList.map((option) => ({
+        dn: option.display_name,
+        d: option.default,
+        i: option.identifier
+      }));
+    }
+    MinifiedPrefOptionsConfigSchema.parse(minifiedPrefOptionsConfig);
+    return minifiedPrefOptionsConfig;
+  }
+
+  static minifyPagePrefsConfig(
+    pagePrefsConfig: PagePrefsConfig
+  ): MinifiedPagePrefsConfig {
+    const minifiedPagePrefsConfig: Array<MinifiedPagePrefConfig> = [];
+    pagePrefsConfig.forEach((pagePrefConfig) => {
+      minifiedPagePrefsConfig.push({
+        dn: pagePrefConfig.display_name,
+        i: pagePrefConfig.identifier,
+        o: pagePrefConfig.options_source,
+        d: pagePrefConfig.default_value
+      });
+    });
+    MinifiedPagePrefsConfigSchema.parse(minifiedPagePrefsConfig);
+    return minifiedPagePrefsConfig;
   }
 }

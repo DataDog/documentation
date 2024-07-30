@@ -14,6 +14,21 @@ export const PagePrefConfigSchema = z
   })
   .strict();
 
+export const MinifiedPagePrefConfigSchema = z
+  .object({
+    dn: z.string(), // display name
+    i: z.string().regex(SNAKE_CASE_REGEX), // identifier
+    o: z.string().regex(PREF_OPTIONS_ID_REGEX), // options source
+    d: z.string().regex(SNAKE_CASE_REGEX).optional() // default value
+  })
+  .strict();
+
+export type MinifiedPagePrefConfig = z.infer<typeof MinifiedPagePrefConfigSchema>;
+
+export const MinifiedPagePrefsConfigSchema = z.array(MinifiedPagePrefConfigSchema);
+
+export type MinifiedPagePrefsConfig = z.infer<typeof MinifiedPagePrefsConfigSchema>;
+
 /**
  * The configuration of an individual page preference,
  * as defined in the front matter of a document.

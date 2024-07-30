@@ -3,7 +3,6 @@ import { rerenderChooser } from './PageBuilder/components/Chooser';
 import { SharedRenderer } from './SharedRenderer';
 import { PrefOptionsConfig } from '../schemas/yaml/prefOptions';
 import { PagePrefsConfig } from '../schemas/yaml/frontMatter';
-import MarkdocStaticCompiler from 'markdoc-static-compiler';
 import { reresolveFunctionNode, ClientFunction } from 'markdoc-static-compiler';
 
 /**
@@ -19,11 +18,9 @@ import { reresolveFunctionNode, ClientFunction } from 'markdoc-static-compiler';
 export class ClientRenderer {
   static #instance: ClientRenderer;
 
-  private renderableTree?: RenderableTreeNodes;
   private prefOptionsConfig?: PrefOptionsConfig;
   private pagePrefsConfig?: PagePrefsConfig;
   private chooserElement?: Element;
-  private contentElement?: Element;
   private selectedValsByPrefId: Record<string, string> = {};
   private prefPills: Array<Element> = [];
   private ifFunctionsByRef: Record<string, ClientFunction> = {};
@@ -132,17 +129,8 @@ export class ClientRenderer {
     this.pagePrefsConfig = p.pagePrefsConfig;
     this.chooserElement = p.chooserElement;
     this.selectedValsByPrefId = p.selectedValsByPrefId || {};
-    this.contentElement = p.contentElement;
-    this.renderableTree = p.renderableTree;
     this.ifFunctionsByRef = p.ifFunctionsByRef;
     this.prefPills = [];
-
-    const contentElement = document.getElementById('markdoc-content');
-    if (!contentElement) {
-      throw new Error('Cannot find content element with id "markdoc-content"');
-    } else {
-      this.contentElement = contentElement;
-    }
 
     const chooserElement = document.getElementById('markdoc-chooser');
     if (!chooserElement) {

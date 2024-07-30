@@ -17165,16 +17165,8 @@
           this.pagePrefsConfig = p.pagePrefsConfig;
           this.chooserElement = p.chooserElement;
           this.selectedValsByPrefId = p.selectedValsByPrefId || {};
-          this.contentElement = p.contentElement;
-          this.renderableTree = p.renderableTree;
           this.ifFunctionsByRef = p.ifFunctionsByRef;
           this.prefPills = [];
-          const contentElement = document.getElementById("markdoc-content");
-          if (!contentElement) {
-            throw new Error('Cannot find content element with id "markdoc-content"');
-          } else {
-            this.contentElement = contentElement;
-          }
           const chooserElement = document.getElementById("markdoc-chooser");
           if (!chooserElement) {
             throw new Error('Cannot find chooser element with id "markdoc-chooser"');
