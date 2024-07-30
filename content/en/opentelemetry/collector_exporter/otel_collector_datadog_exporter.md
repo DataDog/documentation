@@ -38,7 +38,9 @@ Download the latest release of the OpenTelemetry Collector Contrib distribution,
 
 To use the Datadog Exporter, add it to your [OpenTelemetry Collector configuration][4]. Create a configuration file and name it `collector.yaml`. Use the example file which provides a basic configuration that is ready to use after you set your Datadog API key as the `DD_API_KEY` environment variable:
 
-{{< code-block lang="yaml" filename="collector.yaml" collapsible="true" >}}
+{{% otel-endpoint-note %}}
+
+```yaml
 receivers:
   otlp:
     protocols:
@@ -94,7 +96,7 @@ connectors:
 exporters:
   datadog/exporter:
     api:
-      site: <DD_SITE>
+      site: {{< region-param key="dd_site" >}}
       key: ${env:DD_API_KEY}
 
 service:
@@ -111,9 +113,7 @@ service:
       receivers: [otlp, filelog]
       processors: [batch]
       exporters: [datadog]
-{{< /code-block >}}
-
-Where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}.
+```
 
 The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
 
