@@ -5,15 +5,9 @@ aliases:
   - /security_platform/application_security/how-appsec-works/
   - /security/guide/how-appsec-works/
 further_reading:
-- link: "/security/application_security/enabling/compatibility"
-  tag: "Documentation"
-  text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
   tag: "Blog"
   text: "Introducing Datadog Application Security"
-- link: "/security/application_security/enabling/"
-  tag: "Documentation"
-  text: "Enable Application Security Management"
 ---
 
 {{< site-region region="gov" >}}
@@ -43,7 +37,7 @@ Services exposed to application attacks are highlighted directly in the security
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/enabling/">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ### Identify vulnerable service libraries
 
@@ -53,7 +47,7 @@ Datadog [Software Composition Analysis][5] uses various known vulnerability data
 
 For Datadog Application Security to be compatible with your Datadog configuration, you must have APM enabled and [sending traces to Datadog][6]. Application Security uses the same libraries used by APM, so you don't need to deploy and maintain another library. 
 
-Steps to enable Datadog Application Security are specific to each runtime language. Check to see if your language is supported in the [Application Security prerequisites][7].
+Steps to enable Datadog Application Security are specific to each runtime language. Check to see if your language is supported in the Application Security prerequisites for each product.
 
 ## Serverless monitoring
 
@@ -153,8 +147,7 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [4]: /tracing/trace_explorer/trace_view/?tab=security#more-information
 [5]: /security/application_security/software_composition_analysis/
 [6]: /tracing/trace_collection/
-[7]: /security/application_security/enabling/#prerequisites
-[8]: /security/application_security/enabling/serverless/
+[8]: /security/application_security/serverless/
 [9]: /tracing/trace_pipeline/trace_retention/
 [10]: /tracing/configure_data_security/?tab=http
 [11]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections

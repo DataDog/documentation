@@ -13,9 +13,6 @@ further_reading:
 - link: "/security/application_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
-- link: "/security/application_security/enabling/#compatibility"
-  tag: "Documentation"
-  text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Management"
@@ -68,7 +65,7 @@ If you're curious how Application Security Management is structured and how it u
 
 Powered by provided [out-of-the-box rules][4], ASM detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
 
-To start configuring your environment to detect and protect threats with ASM, follow the [Enabling documentation][5]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
+To start configuring your environment to detect and protect threats with ASM, follow the enabling documentation for each product. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
 
 ## Investigate and remediate security signals
 

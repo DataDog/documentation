@@ -50,5 +50,5 @@ Select your application language for details on how to enable Code Security for 
 
 
 
-[1]: /security/application_security/enabling/compatibility/
-[2]: /security/application_security/enabling/single_step/code_security/?tab=linuxhostorvm
+[1]: /security/application_security/code_security/setup/compatibility/
+[2]: /security/application_security/code_security/setup/

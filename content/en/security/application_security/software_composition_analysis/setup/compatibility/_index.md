@@ -18,7 +18,7 @@ The following ASM capabilities are supported relative to each language's tracing
 
 Select your application language for details about framework compatibility and feature support.
 
-{{< partial name="security-platform/appsec-languages.html" >}}
+{{< partial name="security-platform/appsec-languages-sca.html" >}}
 
 <br>
 
