@@ -250,6 +250,6 @@ window.addEventListener('load', () => {
             const hash = window.location.hash;
             window.location.hash = '';
             window.location.hash = hash;
-        }, 300);
+        }, 200);
     }
 });
