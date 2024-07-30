@@ -18212,7 +18212,8 @@ components:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
 
-        and evaluates in real time.'
+        and evaluates in real time. For third party rules, it should equal max signal
+        duration.'
       enum:
       - 0
       - 60
@@ -18256,7 +18257,8 @@ components:
       type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: "Once a signal is generated, the signal will remain \u201Copen\u201D
-        if a case is matched at least once within\nthis keep alive window."
+        if a case is matched at least once within\nthis keep alive window. For third
+        party rules, it should equal max signal duration."
       enum:
       - 0
       - 60
