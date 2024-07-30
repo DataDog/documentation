@@ -222,7 +222,7 @@ function loadPage(newUrl) {
             
             // Clean window pathname in order to update language dropdown items href
             const nonEnPage = document.documentElement.lang !== 'en-US' // check if page is not in english
-            s
+
             const noCommitRefPathName = pathName.slice(commitRefLen) // adjust pathname to remove commit ref if in preview env
             const noCommitRefNoLangPathName = nonEnPage ? noCommitRefPathName.slice(3) : noCommitRefPathName // adjust pathname to remove language if not in english e.g. /ja/agent -> /agent
             
